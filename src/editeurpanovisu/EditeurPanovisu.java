@@ -47,7 +47,6 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -76,6 +75,7 @@ public class EditeurPanovisu extends Application {
     private static final Panoramique[] panoramiquesProjet = new Panoramique[50];
     static private int nombrePanoramiques = 0;
     static private int panoActuel = 0;
+    static private File fichProjet;
 
     static private Pane pano;
     static private VBox paneChoixPanoramique;
@@ -132,6 +132,9 @@ public class EditeurPanovisu extends Application {
     private CheckBox chkAfficheInfo;
     @FXML
     private Button btnValidePano;
+    
+    @FXML
+    private MenuItem sauveSousProjet;
 
     /**
      *
@@ -176,7 +179,7 @@ public class EditeurPanovisu extends Application {
         panoramiquesProjet[panoActuel].setAfficheTitre(chkAfficheTitre.isSelected());
         if (radSphere.isSelected()) {
             panoramiquesProjet[panoActuel].setTypePanoramique(Panoramique.SPHERE);
-                   
+
         } else {
             panoramiquesProjet[panoActuel].setTypePanoramique(Panoramique.CUBE);
         }
@@ -200,7 +203,59 @@ public class EditeurPanovisu extends Application {
         if (!repertSauveChoisi) {
             repertoireProjet = currentDir;
         }
+        if (fichProjet == null) {
+            FileChooser repertChoix = new FileChooser();
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("fichier panoVisu (*.pvu)", "*.pvu");
+            repertChoix.getExtensionFilters().add(extFilter);
+            File repert = new File(repertoireProjet + File.separator);
+            repertChoix.setInitialDirectory(repert);
+            fichProjet = repertChoix.showSaveDialog(null);
+        }
+        if (fichProjet != null) {
+            System.out.println("RepertChoisi" + fichProjet.getAbsolutePath());
+            repertoireProjet = file.getParent();
+            repertSauveChoisi = true;
+            File fichierProjet = new File(fichProjet.getAbsolutePath());
+            if (!fichierProjet.exists()) {
+                fichierProjet.createNewFile();
+            }
+            dejaSauve = true;
+            String contenuFichier = "";
+            for (int i = 0; i < nombrePanoramiques; i++) {
+                contenuFichier += "[Panoramique=>"
+                        + "fichier:" + panoramiquesProjet[i].getNomFichier()
+                        + ";nb:" + panoramiquesProjet[i].getNombreHotspots()
+                        + ";titre:'" + panoramiquesProjet[i].getTitrePanoramique() + "'"
+                        + ";type:" + panoramiquesProjet[i].getTypePanoramique()
+                        + ";afficheInfo:" + panoramiquesProjet[i].isAfficheInfo()
+                        + ";afficheTitre:" + panoramiquesProjet[i].isAfficheTitre()
+                        + "]\n";
+                for (int j = 0; j < panoramiquesProjet[i].getNombreHotspots(); j++) {
+                    HotSpot HS = panoramiquesProjet[i].getHotspot(j);
+                    contenuFichier += "   [hotspot==>"
+                            + "longitude:" + HS.getLongitude()
+                            + ";latitude:" + HS.getLatitude()
+                            + ";image:" + HS.getFichierImage()
+                            + ";xml:" + HS.getFichierXML()
+                            + ";info:" + HS.getInfo()
+                            + ";anime:" + HS.isAnime()
+                            + "]\n";
+                }
+            }
+            System.out.println(contenuFichier);
+            fichProjet.setWritable(true);
+            FileWriter fw = new FileWriter(fichProjet);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(contenuFichier);
+            bw.close();
+        }
+    }
 
+    @FXML
+    private void projetSauveSous() throws IOException {
+        if (!repertSauveChoisi) {
+            repertoireProjet = currentDir;
+        }
         FileChooser repertChoix = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("fichier panoVisu (*.pvu)", "*.pvu");
         repertChoix.getExtensionFilters().add(extFilter);
@@ -221,8 +276,10 @@ public class EditeurPanovisu extends Application {
                 contenuFichier += "[Panoramique=>"
                         + "fichier:" + panoramiquesProjet[i].getNomFichier()
                         + ";nb:" + panoramiquesProjet[i].getNombreHotspots()
-                        + ";titre:" + panoramiquesProjet[i].getTitrePanoramique()
+                        + ";titre:'" + panoramiquesProjet[i].getTitrePanoramique() + "'"
                         + ";type:" + panoramiquesProjet[i].getTypePanoramique()
+                        + ";afficheInfo:" + panoramiquesProjet[i].isAfficheInfo()
+                        + ";afficheTitre:" + panoramiquesProjet[i].isAfficheTitre()
                         + "]\n";
                 for (int j = 0; j < panoramiquesProjet[i].getNombreHotspots(); j++) {
                     HotSpot HS = panoramiquesProjet[i].getHotspot(j);
@@ -230,9 +287,9 @@ public class EditeurPanovisu extends Application {
                             + "longitude:" + HS.getLongitude()
                             + ";latitude:" + HS.getLatitude()
                             + ";image:" + HS.getFichierImage()
-                            + ";xml:" + HS.getFichierImage()
-                            + ";info:" + HS.getFichierImage()
-                            + ";anime:" + HS.getFichierImage()
+                            + ";xml:" + HS.getFichierXML()
+                            + ";info:" + HS.getInfo()
+                            + ";anime:" + HS.isAnime()
                             + "]\n";
                 }
             }
