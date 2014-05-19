@@ -57,6 +57,11 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javax.swing.ToolTipManager;
+import org.controlsfx.control.action.Action;
+import org.controlsfx.dialog.Dialog;
+import org.controlsfx.dialog.Dialogs;
+import impl.org.controlsfx.i18n.Localization;
+import java.util.Locale;
 
 /**
  *
@@ -72,7 +77,7 @@ public class EditeurPanovisu extends Application {
     static private HBox coordonnees;
     static private String currentDir;
     static private int numPoints = 0;
-    private static final Panoramique[] panoramiquesProjet = new Panoramique[50];
+    private static Panoramique[] panoramiquesProjet = new Panoramique[50];
     static private int nombrePanoramiques = 0;
     static private int panoActuel = 0;
     static private File fichProjet;
@@ -91,7 +96,7 @@ public class EditeurPanovisu extends Application {
     static private String repertTemp;
     static private String repertPanos;
     static private String repertoireProjet;
-    static private ComboBox listeChoixPanoramique;
+    final static private ComboBox listeChoixPanoramique=new ComboBox();
     static private Label lblChoixPanoramique;
     static private boolean panoCharge = false;
     static private String panoAffiche = "";
@@ -132,7 +137,7 @@ public class EditeurPanovisu extends Application {
     private CheckBox chkAfficheInfo;
     @FXML
     private Button btnValidePano;
-    
+
     @FXML
     private MenuItem sauveSousProjet;
 
@@ -198,6 +203,19 @@ public class EditeurPanovisu extends Application {
     /**
      *
      */
+    @FXML
+    private void projetCharge() {
+        FileChooser repertChoix = new FileChooser();
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("fichier panoVisu (*.pvu)", "*.pvu");
+        repertChoix.getExtensionFilters().add(extFilter);
+        File repert = new File(repertoireProjet + File.separator);
+        repertChoix.setInitialDirectory(repert);
+        fichProjet = repertChoix.showOpenDialog(null);
+        if (fichProjet != null) {
+
+        }
+    }
+
     @FXML
     private void projetSauve() throws IOException {
         if (!repertSauveChoisi) {
@@ -308,16 +326,63 @@ public class EditeurPanovisu extends Application {
      */
     @FXML
     private void projetsNouveau() {
-        System.out.println("Ouvrir un nouveau Projet");
-        String repertPanovisu = repertTemp + File.separator + "panovisu";
-        File rptPanovisu = new File(repertPanovisu);
-        rptPanovisu.mkdirs();
-        copieDirectory(repertAppli + File.separator + "panovisu", repertPanovisu);
-        menuPanoramique.setDisable(false);
-        imgAjouterPano.setDisable(false);
-        imgAjouterPano.setOpacity(1.0);
-        imgSauveProjet.setDisable(false);
-        imgSauveProjet.setOpacity(1.0);
+        Action reponse = null;
+        Localization.setLocale(Locale.FRENCH);
+        if (!dejaSauve) {
+            reponse = Dialogs.create()
+                    .owner(null)
+                    .title("Nouveau Projet")
+                    .masthead("vous n'avez pas sauvegardé votre projet")
+                    .message("Voulez vous le sauver ?")
+                    .showConfirm();
+
+        }
+        if (reponse == Dialog.Actions.YES) {
+            try {
+                projetSauve();
+            } catch (IOException ex) {
+                Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            deleteDirectory(repertTemp);
+            System.out.println("Ouvrir un nouveau Projet");
+            String repertPanovisu = repertTemp + File.separator + "panovisu";
+            File rptPanovisu = new File(repertPanovisu);
+            rptPanovisu.mkdirs();
+            copieDirectory(repertAppli + File.separator + "panovisu", repertPanovisu);
+            menuPanoramique.setDisable(false);
+            imgAjouterPano.setDisable(false);
+            imgAjouterPano.setOpacity(1.0);
+            imgSauveProjet.setDisable(false);
+            imgSauveProjet.setOpacity(1.0);
+            fichProjet = null;
+            paneChoixPanoramique.setVisible(false);
+            panoramiquesProjet = new Panoramique[50];
+            nombrePanoramiques = 0;
+            numPoints = 0;
+            imagePanoramique.setImage(null);
+            listeChoixPanoramique.getItems().clear();
+        } else {
+            if ((reponse == Dialog.Actions.NO) || (reponse == null)) {
+                deleteDirectory(repertTemp);
+                System.out.println("Ouvrir un nouveau Projet");
+                String repertPanovisu = repertTemp + File.separator + "panovisu";
+                File rptPanovisu = new File(repertPanovisu);
+                rptPanovisu.mkdirs();
+                copieDirectory(repertAppli + File.separator + "panovisu", repertPanovisu);
+                menuPanoramique.setDisable(false);
+                imgAjouterPano.setDisable(false);
+                imgAjouterPano.setOpacity(1.0);
+                imgSauveProjet.setDisable(false);
+                imgSauveProjet.setOpacity(1.0);
+                fichProjet = null;
+                paneChoixPanoramique.setVisible(false);
+                panoramiquesProjet = new Panoramique[50];
+                numPoints = 0;
+                imagePanoramique.setImage(null);
+                nombrePanoramiques = 0;
+                listeChoixPanoramique.getItems().clear();
+            }
+        }
     }
 
     /**
@@ -505,8 +570,10 @@ public class EditeurPanovisu extends Application {
     /**
      *
      */
-    private void sauveFichiers() {
-        System.out.println("Je quitte alors je vérifie si je doit sauver les fichiers");
+    private void sauveFichiers() throws IOException {
+        if (!dejaSauve) {
+            projetSauve();
+        }
     }
 
     /**
@@ -816,7 +883,6 @@ public class EditeurPanovisu extends Application {
         paneChoixPanoramique = new VBox();
         paneChoixPanoramique.setId("choixPanoramique");
         lblChoixPanoramique = new Label("Choix du panoramique");
-        listeChoixPanoramique = new ComboBox();
         listeChoixPanoramique.setVisibleRowCount(10);
         paneChoixPanoramique.getChildren().addAll(lblChoixPanoramique, listeChoixPanoramique);
         outils.getChildren().addAll(paneChoixPanoramique);
@@ -931,7 +997,14 @@ public class EditeurPanovisu extends Application {
         installeEvenements();
         primaryStage.setOnCloseRequest((WindowEvent event) -> {
             System.out.println("Je quitte l'application");
-            sauveFichiers();
+            try {
+                sauveFichiers();
+            } catch (IOException ex) {
+                Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            deleteDirectory(repertTemp);
+            File ftemp = new File(repertTemp);
+            ftemp.delete();
         });
     }
 
