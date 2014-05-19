@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<BorderPane id="BorderPane" fx:id="panneauPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="editeurpanovisu1.EditeurPanovisu1">
+  <bottom>
+    <AnchorPane prefHeight="23.0" prefWidth="1200.0" />
+  </bottom>
+  <center>
+    <SplitPane dividerPositions="0.8003472222222222" focusTraversable="true" prefHeight="160.0" prefWidth="200.0">
+      <items>
+        <AnchorPane fx:id="vuePanoramique" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+      </items>
+    </SplitPane>
+  </center>
+  <left>
+    <AnchorPane prefHeight="744.0" prefWidth="23.0" />
+  </left>
+  <right>
+    <AnchorPane prefHeight="714.0" prefWidth="23.0" />
+  </right>
+  <top>
+    <AnchorPane prefHeight="33.0" prefWidth="1200.0" />
+  </top>
+</BorderPane>

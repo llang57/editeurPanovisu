@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.input.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="10000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="editeurpanovisu.EditeurPanovisu">
+  <children>
+    <MenuBar layoutX="0.0" layoutY="2.0" minHeight="21.0" prefHeight="29.0" prefWidth="10000.0">
+      <menus>
+        <Menu mnemonicParsing="false" text="Projets">
+          <items>
+            <MenuItem fx:id="nouveauProjet" mnemonicParsing="false" onAction="#projetsNouveau" text="Nouveau">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+            <MenuItem mnemonicParsing="false" text="Ouvrir">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+                  <MenuItem fx:id="sauveProjet" disable="true" mnemonicParsing="false" onAction="#projetSauve" text="Enregistrer">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+                  <MenuItem disable="true" mnemonicParsing="false" text="Enregistrer sous ...">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem disable="true" mnemonicParsing="false" text="Génère Visite">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="V" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem fx:id="fermerProjet" mnemonicParsing="false" onAction="#projetsFermer" text="Quitter l'application">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="Q" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+          </items>
+        </Menu>
+        <Menu fx:id="menuPanoramique" disable="true" mnemonicParsing="false" text="Panoramiques">
+          <items>
+            <MenuItem fx:id="ajouterPano" mnemonicParsing="false" onAction="#panoramiquesAjouter" text="Ajouter panoramique ...">
+              <accelerator>
+                <KeyCodeCombination alt="DOWN" code="A" control="UP" meta="UP" shift="UP" shortcut="UP" />
+              </accelerator>
+            </MenuItem>
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Aide">
+          <items>
+            <MenuItem fx:id="aPropos" mnemonicParsing="false" onAction="#aideAPropos" style="padding-left: 10px; padding-right: 10px;" text="A propos" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+      <HBox layoutX="14.0" layoutY="1.0" prefHeight="50.0" prefWidth="3000.0" style="-fx-background-color: #f7f7f7;" translateX="-10.0" translateY="30.0">
+         <children>
+            <ScrollPane hbarPolicy="NEVER" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: transparent;" vbarPolicy="NEVER" HBox.hgrow="NEVER">
+               <content>
+                  <ImageView fx:id="imgNouveauProjet" cacheHint="QUALITY" fitHeight="35.0" fitWidth="35.0" onMouseClicked="#projetsNouveau" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/nouveauProjet.png" />
+                     </image>
+                  </ImageView>
+               </content>
+               <HBox.margin>
+                  <Insets left="15.0" right="15.0" top="5.0" />
+               </HBox.margin>
+               <tooltip>
+                  <Tooltip text="crée nouveau projet" textOverrun="WORD_ELLIPSIS" />
+               </tooltip>
+            </ScrollPane>
+            <ScrollPane hbarPolicy="NEVER" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: transparent;" vbarPolicy="NEVER">
+               <content>
+                  <ImageView fx:id="imgChargeProjet" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/ouvrirProjet.png" />
+                     </image>
+                  </ImageView>
+               </content>
+               <HBox.margin>
+                  <Insets right="15.0" top="5.0" />
+               </HBox.margin>
+               <tooltip>
+                  <Tooltip text="charge un projet" />
+               </tooltip>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </ScrollPane>
+            <ScrollPane hbarPolicy="NEVER" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: transparent;" vbarPolicy="NEVER">
+               <content>
+                  <ImageView fx:id="imgSauveProjet" disable="true" fitHeight="35.0" fitWidth="35.0" onMouseClicked="#projetSauve" opacity="0.4" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/sauveProjet.png" />
+                     </image>
+                  </ImageView>
+               </content>
+               <HBox.margin>
+                  <Insets right="15.0" top="5.0" />
+               </HBox.margin>
+               <tooltip>
+                  <Tooltip text="sauve le projet courant" />
+               </tooltip>
+            </ScrollPane>
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
+            <ScrollPane hbarPolicy="NEVER" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: transparent;" vbarPolicy="NEVER">
+               <content>
+                  <ImageView fx:id="imgAjouterPano" disable="true" fitHeight="35.0" fitWidth="35.0" onMouseClicked="#panoramiquesAjouter" opacity="0.4" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/ajoutePanoramique.png" />
+                     </image>
+                  </ImageView>
+               </content>
+               <HBox.margin>
+                  <Insets left="15.0" right="15.0" top="5.0" />
+               </HBox.margin>
+               <tooltip>
+                  <Tooltip text="ajoute un nouveau panoramique" />
+               </tooltip>
+            </ScrollPane>
+         </children>
+      </HBox>
+  </children>
+</AnchorPane>

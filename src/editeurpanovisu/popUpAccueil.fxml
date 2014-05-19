@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="331.0" prefWidth="450.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="editeurpanovisu.popUpHandler">
+    <stylesheets>
+        <URL value="@popup.css" />
+    </stylesheets>
+   <children>
+      <Button fx:id="btnQuitte" layoutX="390.0" layoutY="292.0" mnemonicParsing="false" onAction="#handleQuitteAction" text="Ok" />
+      <Label layoutX="13.0" layoutY="22.0" text="PanoVisu" textFill="#dd2323">
+         <font>
+            <Font name="Verdana" size="22.0" />
+         </font>
+      </Label>
+      <Label layoutX="63.0" layoutY="58.0" />
+      <Label layoutX="113.0" layoutY="28.0" text=" - un visualiseur de visites Virtuelle  100% HTML5    100% Libres">
+         <font>
+            <Font size="11.0" />
+         </font></Label>
+      <ImageView fitHeight="149.0" fitWidth="200.0" layoutX="112.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/popUp.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="23.0" layoutY="260.0" text="développement :  Laurent LANG (2014)">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
+      <Group layoutX="212.0" layoutY="-207.0" />
+      <Hyperlink fx:id="leMondea360" layoutX="339.0" layoutY="52.0" onAction="#handleOuvreLien" text="le monde à 360°" />
+      <Label layoutX="263.0" layoutY="55.0" text="Une création :" />
+   </children>
+</AnchorPane>
