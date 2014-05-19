@@ -57,6 +57,8 @@
         </Menu>
         <Menu mnemonicParsing="false" text="Aide">
           <items>
+                  <MenuItem mnemonicParsing="false" text="Aide" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem fx:id="aPropos" mnemonicParsing="false" onAction="#aideAPropos" style="padding-left: 10px; padding-right: 10px;" text="A propos" />
           </items>
         </Menu>
