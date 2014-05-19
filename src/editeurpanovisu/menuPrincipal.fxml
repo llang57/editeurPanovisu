@@ -29,7 +29,7 @@
                         <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                   </MenuItem>
-                  <MenuItem disable="true" mnemonicParsing="false" text="Enregistrer sous ...">
+                  <MenuItem fx:id="sauveSousProjet" disable="true" mnemonicParsing="false" onAction="#projetSauveSous" text="Enregistrer sous ...">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
                      </accelerator>
