@@ -79,7 +79,7 @@ public class EditeurPanovisu extends Application {
     static private HBox coordonnees;
     static private String currentDir;
     static private int numPoints = 0;
-    private static Panoramique[] panoramiquesProjet = new Panoramique[50];
+    static private Panoramique[] panoramiquesProjet=new Panoramique[50];
     static private int nombrePanoramiques = 0;
     static private int panoActuel = 0;
     static private File fichProjet;
@@ -261,8 +261,6 @@ public class EditeurPanovisu extends Application {
                 imgSauveProjet.setDisable(false);
                 imgSauveProjet.setOpacity(1.0);
                 paneChoixPanoramique.setVisible(false);
-                panoramiquesProjet = new Panoramique[50];
-                nombrePanoramiques = -1;
                 numPoints = 0;
                 imagePanoramique.setImage(null);
                 listeChoixPanoramique.getItems().clear();
@@ -270,24 +268,28 @@ public class EditeurPanovisu extends Application {
                 try {
                     fr = new FileReader(fichProjet);
                     BufferedReader br = new BufferedReader(fr);
+                    String texte = "";
                     String ligneTexte;
                     while ((ligneTexte = br.readLine()) != null) {
-                        System.out.println(ligneTexte);
-                        analyseLigne(ligneTexte);
+                        texte += ligneTexte;
                     }
                     br.close();
+                    System.out.println(texte);
+                    analyseLigne(texte);
+                    
                     panoActuel = 0;
                     affichePanoChoisit(panoActuel);
                     panoCharge = true;
                     paneChoixPanoramique.setVisible(true);
                     listeChoixPanoramique.setValue(listeChoixPanoramique.getItems().get(0));
+                    for (int ii = 0; ii < nombrePanoramiques; ii++) {
+                        Panoramique pano1 = panoramiquesProjet[ii];
+                        System.out.println(nombrePanoramiques + " pano n°" + ii + " fichier : " + pano1.getNomFichier());
+
+                    }
 
                 } catch (FileNotFoundException ex) {
                     Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                nombrePanoramiques++;
-                for (int i=0;i<nombrePanoramiques-1;i++){
-                    
                 }
 
             }
@@ -527,18 +529,25 @@ public class EditeurPanovisu extends Application {
         }
     }
 
-    @SuppressWarnings("empty-statement")
-    private void analyseLigne(String ligne) {
-        
-        String[] elementsLigne = ligne.split(";", 10);
-        String[] typeElement = elementsLigne[0].split(">", 2);
-        typeElement[0] = typeElement[0].replace(" ", "").replace("=", "").replace("[", "");
-        elementsLigne[0] = typeElement[1];
-        System.out.println("type Element " + typeElement[0]);
-        switch (typeElement[0]) {
-            case "Panoramique":
-                nombrePanoramiques++;
-                Panoramique panoCree = new Panoramique();
+    private void analyseLigne(String ligneComplete) {
+        nombrePanoramiques = 0;
+        ligneComplete = ligneComplete.replace("[", "|");
+        System.out.println("ligne complete : " + ligneComplete);
+        String lignes[] = ligneComplete.split("\\|", 500);
+        String ligne;
+        String[] elementsLigne;
+        String[] typeElement;
+        int nbHS = 0;
+        for (int kk = 1; kk < lignes.length; kk++) {
+            ligne = lignes[kk];
+            System.out.println("ligne : " + ligne);
+            elementsLigne = ligne.split(";", 10);
+            typeElement = elementsLigne[0].split(">", 2);
+            typeElement[0] = typeElement[0].replace(" ", "").replace("=", "").replace("[", "");
+            elementsLigne[0] = typeElement[1];
+            System.out.println("type Element " + typeElement[0]);
+            if ("Panoramique".equals(typeElement[0])) {
+
                 for (int i = 0; i < elementsLigne.length; i++) {
                     elementsLigne[i] = elementsLigne[i].replace("]", "");
                     String[] valeur = elementsLigne[i].split(":", 2);
@@ -546,81 +555,89 @@ public class EditeurPanovisu extends Application {
 
                     switch (valeur[0]) {
                         case "fichier":
-                            System.out.println("Type " + valeur[0] + " : " + valeur[1]);
-                            panoCree.setNomFichier(valeur[1]);
-                            Image panoImage = new Image("file:" + valeur[1], 0, 0, true, true);
-                            panoCree.setImagePanoramique(panoImage);
+                            affichePano(valeur[1]);
                             break;
                         case "titre":
-                            panoCree.setTitrePanoramique(valeur[1]);
+                            panoramiquesProjet[panoActuel].setTitrePanoramique(valeur[1]);
                             break;
                         case "type":
-                            panoCree.setTypePanoramique(valeur[1]);
+                            panoramiquesProjet[panoActuel].setTypePanoramique(valeur[1]);
                             break;
                         case "afficheInfo":
                             if (valeur[1].equals("true")) {
-                                panoCree.setAfficheInfo(true);
+                                panoramiquesProjet[panoActuel].setAfficheInfo(true);
                             } else {
-                                panoCree.setAfficheInfo(false);
+                                panoramiquesProjet[panoActuel].setAfficheInfo(false);
                             }
                             break;
                         case "afficheTitre":
                             if (valeur[1].equals("true")) {
-                                panoCree.setAfficheTitre(true);
+                                panoramiquesProjet[panoActuel].setAfficheTitre(true);
                             } else {
-                                panoCree.setAfficheTitre(false);
+                                panoramiquesProjet[panoActuel].setAfficheTitre(false);
                             }
+                            break;
+                        case "nb":
+                            nbHS = Integer.parseInt(valeur[1]);
+                            break;
+                        default:
                             break;
                     }
                 }
-                panoramiquesProjet[nombrePanoramiques] = panoCree;
-                String fichierPano = panoramiquesProjet[nombrePanoramiques].getNomFichier();
-                System.out.println("Nomfichier" + fichierPano);
-                String nomPano = fichierPano.substring(fichierPano.lastIndexOf(File.separator) + 1, fichierPano.length());
-                listeChoixPanoramique.getItems().add(nomPano);
-                System.out.println("nb : " + nombrePanoramiques);
-                break;
+                for (int jj = 0; jj < nbHS; jj++) {
+                    kk++;
+                    ligne = lignes[kk];
+                    System.out.println("ligne : " + ligne);
+                    elementsLigne = ligne.split(";", 10);
+                    typeElement = elementsLigne[0].split(">", 2);
+                    typeElement[0] = typeElement[0].replace(" ", "").replace("=", "").replace("[", "");
+                    elementsLigne[0] = typeElement[1];
+                    System.out.println("type Element " + typeElement[0]);
 
-            case "hotspot":
-                HotSpot HS = new HotSpot();
-                for (int i = 0; i < elementsLigne.length; i++) {
-                    elementsLigne[i] = elementsLigne[i].replace("]", "");
-                    String[] valeur = elementsLigne[i].split(":", 2);
-                    System.out.println("Type " + valeur[0] + " : " + valeur[1]);
-                    switch (valeur[0]) {
-                        case "longitude":
-                            HS.setLongitude(Double.parseDouble(valeur[1]));
-                            break;
-                        case "latitude":
-                            HS.setLatitude(Double.parseDouble(valeur[1]));
-                            break;
-                        case "image":
-                            if ("null".equals(valeur[1])) {
-                                HS.setFichierImage(null);
-                            } else {
-                                HS.setFichierImage(valeur[1]);
-                            }
-                            break;
-                        case "xml":
-                            if ("null".equals(valeur[1])) {
-                                HS.setFichierXML(null);
-                            } else {
-                                HS.setFichierXML(valeur[1]);
-                            }
-                            break;
-                        case "anime":
-                            if (valeur[1].equals("true")) {
-                                HS.setAnime(true);
-                            } else {
-                                HS.setAnime(false);
-                            }
-                            break;
+                    HotSpot HS = new HotSpot();
+                    for (int i = 0; i < elementsLigne.length; i++) {
+                        elementsLigne[i] = elementsLigne[i].replace("]", "");
+                        String[] valeur = elementsLigne[i].split(":", 2);
+                        System.out.println("Type " + valeur[0] + " : " + valeur[1]);
+                        switch (valeur[0]) {
+                            case "longitude":
+                                HS.setLongitude(Double.parseDouble(valeur[1]));
+                                break;
+                            case "latitude":
+                                HS.setLatitude(Double.parseDouble(valeur[1]));
+                                break;
+                            case "image":
+                                if ("null".equals(valeur[1])) {
+                                    HS.setFichierImage(null);
+                                } else {
+                                    HS.setFichierImage(valeur[1]);
+                                }
+                                break;
+                            case "xml":
+                                if ("null".equals(valeur[1])) {
+                                    HS.setFichierXML(null);
+                                } else {
+                                    HS.setFichierXML(valeur[1]);
+                                }
+                                break;
+                            case "anime":
+                                if (valeur[1].equals("true")) {
+                                    HS.setAnime(true);
+                                } else {
+                                    HS.setAnime(false);
+                                }
+                                break;
+                        }
                     }
+                    panoramiquesProjet[panoActuel].addHotspot(HS);
                 }
-                panoramiquesProjet[nombrePanoramiques].addHotspot(HS);
-                break;
-        };
-        System.out.println("numPano = "+nombrePanoramiques);
+            }
+        }
+        
+        for (int ii = 0; ii < nombrePanoramiques; ii++) {
+            Panoramique pano1 = panoramiquesProjet[ii];
+            System.out.println(nombrePanoramiques + " pano n°" + ii + " fichier : " + pano1.getNomFichier());
+        }
     }
 
     /**
@@ -868,17 +885,19 @@ public class EditeurPanovisu extends Application {
         listeChoixPanoramique.valueProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue ov, String ancienneValeur, String nouvelleValeur) {
-                if (panoCharge) {
-                    panoCharge = false;
-                    panoAffiche = nouvelleValeur;
-                } else {
-                    if (!(nouvelleValeur.equals(panoAffiche))) {
-
+                System.out.println("nouvelle valeur" + nouvelleValeur);
+                if (nouvelleValeur != null) {
+                    if (panoCharge) {
+                        panoCharge = false;
                         panoAffiche = nouvelleValeur;
-                        int numPanoChoisit = listeChoixPanoramique.getSelectionModel().getSelectedIndex();
-                        System.out.println("nb : " + nombrePanoramiques + " =>Pano " + panoAffiche + "index : " + numPanoChoisit+" fichier :"+
-                                panoramiquesProjet[numPanoChoisit].getNomFichier());
-                        affichePanoChoisit(numPanoChoisit);
+                    } else {
+                        if (!(nouvelleValeur.equals(panoAffiche))) {
+                            panoAffiche = nouvelleValeur;
+                            int numPanoChoisit = listeChoixPanoramique.getSelectionModel().getSelectedIndex();
+                            System.out.println("nb : " + nombrePanoramiques + " =>Pano " + panoAffiche + "index : " + numPanoChoisit + " fichier :"
+                                    + panoramiquesProjet[numPanoChoisit].getNomFichier());
+                            affichePanoChoisit(numPanoChoisit);
+                        }
                     }
                 }
 
@@ -979,7 +998,6 @@ public class EditeurPanovisu extends Application {
         panoCharge = true;
         listeChoixPanoramique.getItems().add(nomPano);
         paneChoixPanoramique.setVisible(true);
-        listeChoixPanoramique.setValue(listeChoixPanoramique.getItems().get(nombrePanoramiques));
         estCharge = true;
         Panoramique panoCree = new Panoramique();
         panoCree.setNomFichier(fichierPano);
@@ -998,6 +1016,7 @@ public class EditeurPanovisu extends Application {
         ajouteAffichageLignes();
         panoramiquesProjet[nombrePanoramiques] = panoCree;
         panoActuel = nombrePanoramiques;
+        listeChoixPanoramique.setValue(listeChoixPanoramique.getItems().get(nombrePanoramiques));
         nombrePanoramiques++;
 
     }
