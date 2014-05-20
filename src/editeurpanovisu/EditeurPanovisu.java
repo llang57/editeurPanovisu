@@ -285,6 +285,10 @@ public class EditeurPanovisu extends Application {
                 } catch (FileNotFoundException ex) {
                     Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                nombrePanoramiques++;
+                for (int i=0;i<nombrePanoramiques-1;i++){
+                    
+                }
 
             }
         }
