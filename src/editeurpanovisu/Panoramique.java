@@ -19,27 +19,29 @@ public class Panoramique {
     public static final String SPHERE = "sphere";
     public static final String CUBE = "cube";
 
-    private HotSpot[] hotspots = new HotSpot[100];
-    private String titrePanoramique;
-    private String nomFichier;
-    private double lookAtX, lookAtY;
-    private Image imagePanoramique;
-    private int nombreHotspots = 0;
-    private String typePanoramique;
-    private boolean afficheTitre;
-    private boolean afficheInfo;
+    static private HotSpot[] hotspots = new HotSpot[100];
+    static private String titrePanoramique;
+    static private String nomFichier;
+    static private double lookAtX, lookAtY;
+    static private Image imagePanoramique;
+    static private int nombreHotspots = 0;
+    static private String typePanoramique;
+    static private boolean afficheTitre;
+    static private boolean afficheInfo;
 
-    /**
-     *
-     * @param fichier
-     */
-    public void Panoramique(String fichier) {
-        this.nomFichier = fichier;
-        this.typePanoramique=Panoramique.SPHERE;
-        this.afficheTitre=true;
-        this.afficheInfo=true;
+    Panoramique(String fichier) {
+        nomFichier = fichier;
+        typePanoramique=Panoramique.SPHERE;
+        afficheTitre=true;
+        afficheInfo=true;
     }
 
+    Panoramique() {
+        typePanoramique=Panoramique.SPHERE;
+        afficheTitre=true;
+        afficheInfo=true;
+    }
+    
     /**
      * @return the nomFichier
      */
@@ -48,10 +50,10 @@ public class Panoramique {
     }
 
     /**
-     * @param nomFichier the nomFichier to set
+     * @param nFichier the nomFichier to set
      */
-    public void setNomFichier(String nomFichier) {
-        this.nomFichier = nomFichier;
+    public void setNomFichier(String nFichier) {
+        nomFichier = nFichier;
     }
 
     /**
@@ -62,10 +64,10 @@ public class Panoramique {
     }
 
     /**
-     * @param lookAtX the lookAtX to set
+     * @param lkAtX the lookAtX to set
      */
-    public void setLookAtX(double lookAtX) {
-        this.lookAtX = lookAtX;
+    public void setLookAtX(double lkAtX) {
+        lookAtX = lkAtX;
     }
 
     /**
@@ -76,10 +78,10 @@ public class Panoramique {
     }
 
     /**
-     * @param lookAtY the lookAtY to set
+     * @param lkAtY the lookAtY to set
      */
-    public void setLookAtY(double lookAtY) {
-        this.lookAtY = lookAtY;
+    public void setLookAtY(double lkAtY) {
+        lookAtY = lkAtY;
     }
 
     /**
@@ -95,22 +97,22 @@ public class Panoramique {
      * @param i
      */
     public void setHotspot(HotSpot hotspot, int i) {
-        this.hotspots[i] = hotspot;
+        hotspots[i] = hotspot;
     }
 
     public void addHotspot(HotSpot hotspot) {
-        this.hotspots[this.getNombreHotspots()] = hotspot;
-        this.nombreHotspots++;
+        hotspots[this.getNombreHotspots()] = hotspot;
+        nombreHotspots++;
     }
 
     public void removeHotspot(int num) {
         System.out.println("Retire le point : " + num);
-        for (int i = num; i < this.nombreHotspots - 1; i++) {
-            this.hotspots[i] = this.hotspots[i + 1];
+        for (int i = num; i < nombreHotspots - 1; i++) {
+            hotspots[i] = hotspots[i + 1];
         }
-        this.nombreHotspots--;
+        nombreHotspots--;
         //int nombre
-        System.out.println("il reste  : " + this.nombreHotspots + " HotSpots");
+        System.out.println("il reste  : " + nombreHotspots + " HotSpots");
     }
 
     /**
@@ -121,10 +123,10 @@ public class Panoramique {
     }
 
     /**
-     * @param imagePanoramique the imagePanoramique to set
+     * @param imgPanoramique the imagePanoramique to set
      */
-    public void setImagePanoramique(Image imagePanoramique) {
-        this.imagePanoramique = imagePanoramique;
+    public void setImagePanoramique(Image imgPanoramique) {
+        imagePanoramique = imgPanoramique;
     }
 
     /**
@@ -135,10 +137,10 @@ public class Panoramique {
     }
 
     /**
-     * @param nombreHotspots the nombreHotspots to set
+     * @param nbHotspots the nombreHotspots to set
      */
-    public void setNombreHotspots(int nombreHotspots) {
-        this.nombreHotspots = nombreHotspots;
+    public void setNombreHotspots(int nbHotspots) {
+        nombreHotspots = nbHotspots;
     }
 
     /**
@@ -149,10 +151,10 @@ public class Panoramique {
     }
 
     /**
-     * @param typePanoramique the typePanoramique to set
+     * @param tPanoramique the typePanoramique to set
      */
-    public void setTypePanoramique(String typePanoramique) {
-        this.typePanoramique = typePanoramique;
+    public void setTypePanoramique(String tPanoramique) {
+        typePanoramique = tPanoramique;
     }
 
     /**
@@ -163,10 +165,10 @@ public class Panoramique {
     }
 
     /**
-     * @param afficheTitre the afficheTitre to set
+     * @param affTitre the afficheTitre to set
      */
-    public void setAfficheTitre(boolean afficheTitre) {
-        this.afficheTitre = afficheTitre;
+    public void setAfficheTitre(boolean affTitre) {
+        afficheTitre = affTitre;
     }
 
     /**
@@ -177,10 +179,10 @@ public class Panoramique {
     }
 
     /**
-     * @param afficheInfo the afficheInfo to set
+     * @param affInfo the afficheInfo to set
      */
-    public void setAfficheInfo(boolean afficheInfo) {
-        this.afficheInfo = afficheInfo;
+    public void setAfficheInfo(boolean affInfo) {
+        afficheInfo = affInfo;
     }
 
     public Pane getAffichageHS() {
@@ -211,10 +213,10 @@ public class Panoramique {
     }
 
     /**
-     * @param titrePanoramique the titrePanoramique to set
+     * @param tPanoramique the titrePanoramique to set
      */
-    public void setTitrePanoramique(String titrePanoramique) {
-        this.titrePanoramique = titrePanoramique;
+    public void setTitrePanoramique(String tPanoramique) {
+        titrePanoramique = tPanoramique;
     }
 
 }

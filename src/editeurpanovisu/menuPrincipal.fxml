@@ -20,7 +20,7 @@
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator></MenuItem>
-            <MenuItem mnemonicParsing="false" text="Ouvrir">
+            <MenuItem mnemonicParsing="false" onAction="#projetCharge" text="Ouvrir">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator></MenuItem>
@@ -83,7 +83,7 @@
             </ScrollPane>
             <ScrollPane hbarPolicy="NEVER" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: transparent;" vbarPolicy="NEVER">
                <content>
-                  <ImageView fx:id="imgChargeProjet" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imgChargeProjet" fitHeight="35.0" fitWidth="35.0" onMouseClicked="#projetCharge" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/ouvrirProjet.png" />
                      </image>
