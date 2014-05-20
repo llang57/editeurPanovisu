@@ -5,7 +5,15 @@
  */
 package editeurpanovisu;
 
+import java.util.Arrays;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Separator;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -35,11 +43,11 @@ public class Panoramique {
      */
     public void Panoramique(String fichier) {
         this.nomFichier = fichier;
-        this.typePanoramique=Panoramique.SPHERE;
-        this.afficheTitre=true;
-        this.afficheInfo=true;
+        this.typePanoramique = Panoramique.SPHERE;
+        this.afficheTitre = true;
+        this.afficheInfo = true;
     }
-    
+
     /**
      * @return the nomFichier
      */
@@ -183,25 +191,6 @@ public class Panoramique {
         this.afficheInfo = afficheInfo;
     }
 
-    public Pane getAffichageHS() {
-        Pane panneauHotSpots = new Pane();
-        VBox vb1=new VBox();
-        panneauHotSpots.getChildren().add(vb1);
-        for (int o = 0; o < this.getNombreHotspots(); o++) {
-            Pane pannneauHS = new Pane();
-            String chLong1, chLat1;
-            Label lbl;
-            chLong1 = "Long : " + String.format("%.1f", this.getHotspot(o).getLongitude());
-            chLat1 = "Lat : " + String.format("%.1f", this.getHotspot(o).getLatitude());
-            lbl = new Label("point n°" + o + "\n ==> " + chLong1 + "," + chLat1);
-            pannneauHS.setStyle("border : 1px solid #777;border-radius : 5px;padding : 5px;background-color : #bbb;");
-            pannneauHS.setPrefWidth(280);
-            pannneauHS.setTranslateX(10);
-            pannneauHS.getChildren().add(lbl);
-            vb1.getChildren().add(pannneauHS);
-        }
-        return panneauHotSpots;
-    }
 
     /**
      * @return the titrePanoramique

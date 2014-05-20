@@ -63,7 +63,13 @@ import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialog;
 import org.controlsfx.dialog.Dialogs;
 import impl.org.controlsfx.i18n.Localization;
+import java.util.Arrays;
 import java.util.Locale;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
+import javafx.scene.control.Separator;
 
 /**
  *
@@ -79,7 +85,7 @@ public class EditeurPanovisu extends Application {
     static private HBox coordonnees;
     static private String currentDir;
     static private int numPoints = 0;
-    static private Panoramique[] panoramiquesProjet=new Panoramique[50];
+    static private Panoramique[] panoramiquesProjet = new Panoramique[50];
     static private int nombrePanoramiques = 0;
     static private int panoActuel = 0;
     static private File fichProjet;
@@ -276,7 +282,7 @@ public class EditeurPanovisu extends Application {
                     br.close();
                     System.out.println(texte);
                     analyseLigne(texte);
-                    
+
                     panoActuel = 0;
                     affichePanoChoisit(panoActuel);
                     panoCharge = true;
@@ -314,7 +320,7 @@ public class EditeurPanovisu extends Application {
             fichProjet = repertChoix.showSaveDialog(null);
         }
         if (fichProjet != null) {
-            repertoireProjet = file.getParent();
+            repertoireProjet = fichProjet.getParent();
             repertSauveChoisi = true;
             File fichierProjet = new File(fichProjet.getAbsolutePath());
             if (!fichierProjet.exists()) {
@@ -365,9 +371,10 @@ public class EditeurPanovisu extends Application {
         repertChoix.getExtensionFilters().add(extFilter);
         File repert = new File(repertoireProjet + File.separator);
         repertChoix.setInitialDirectory(repert);
-        File fichProjet = repertChoix.showSaveDialog(null);
+        fichProjet = repertChoix.showSaveDialog(null);
         if (fichProjet != null) {
-            repertoireProjet = file.getParent();
+            
+            repertoireProjet = fichProjet.getParent();
             repertSauveChoisi = true;
             File fichierProjet = new File(fichProjet.getAbsolutePath());
             if (!fichierProjet.exists()) {
@@ -633,7 +640,7 @@ public class EditeurPanovisu extends Application {
                 }
             }
         }
-        
+
         for (int ii = 0; ii < nombrePanoramiques; ii++) {
             Panoramique pano1 = panoramiquesProjet[ii];
             System.out.println(nombrePanoramiques + " pano n°" + ii + " fichier : " + pano1.getNomFichier());
@@ -707,11 +714,105 @@ public class EditeurPanovisu extends Application {
         }
     }
 
+    private String listePano(int panCourant) {
+        String liste = "";
+        if (nombrePanoramiques == 0) {
+            return null;
+        } else {
+            for (int i = 0; i < nombrePanoramiques; i++) {
+                if (i != panCourant) {
+                    String fichierPano = panoramiquesProjet[i].getNomFichier();
+                    String nomPano = fichierPano.substring(fichierPano.lastIndexOf(File.separator) + 1, fichierPano.length());
+                    String[] nPano = nomPano.split("\\.");
+                    liste += nPano[0];
+                    if (i < nombrePanoramiques - 1) {
+                        liste += ";";
+                    }
+                }
+            }
+            System.out.println("liste des panos : " + liste);
+            return liste;
+        }
+    }
+
+    private void sauveHS(int NumPano, int numHS) {
+
+    }
+
+    public Pane affichageHS(String lstPano, int numPano) {
+
+        Pane panneauHotSpots = new Pane();
+        VBox vb1 = new VBox();
+        panneauHotSpots.getChildren().add(vb1);
+        Label lbl;
+        Label lblPoint;
+        Label sep = new Label(" ");
+        Label sep1 = new Label(" ");
+        for (int o = 0; o < panoramiquesProjet[numPano].getNombreHotspots(); o++) {
+            VBox vbPanneauHS = new VBox();
+            Pane pannneauHS = new Pane(vbPanneauHS);
+            panneauHotSpots.setId("HS" + o);
+            String chLong1, chLat1;
+
+            chLong1 = "Long : " + String.format("%.1f", panoramiquesProjet[numPano].getHotspot(o).getLongitude());
+            chLat1 = "Lat : " + String.format("%.1f", panoramiquesProjet[numPano].getHotspot(o).getLatitude());
+            lbl = new Label(chLong1 + "        " + chLat1);
+            lbl.setPadding(new Insets(5, 10, 5, 5));
+            lblPoint = new Label("Point n°" + o);
+            lblPoint.setPadding(new Insets(5, 10, 5, 5));
+            Separator sp = new Separator(Orientation.HORIZONTAL);
+            sp.setStyle("-fx-border-color : #777;");
+            sp.setPrefWidth(300);
+            pannneauHS.setStyle("-fx-border-color :#777;-fx-border-radius : 3px;-fx-background-color : #ccc;");
+
+            pannneauHS.setPrefWidth(300);
+            pannneauHS.setTranslateX(5);
+            vbPanneauHS.getChildren().addAll(lblPoint, sp, lbl);
+            if (lstPano != null) {
+                Label lblLien = new Label("Panoramique de destination");
+                ComboBox cbDestPano = new ComboBox();
+                String[] liste = lstPano.split(";");
+                cbDestPano.getItems().addAll(Arrays.asList(liste));
+                cbDestPano.setTranslateX(60);
+                cbDestPano.setId("cbpano" + o);
+                vbPanneauHS.getChildren().addAll(lblLien, cbDestPano, sep);
+            }
+            CheckBox cbAnime=new CheckBox("HostSpot Animé");
+            cbAnime.setId("anime"+o);
+            vbPanneauHS.getChildren().addAll(cbAnime,sep1);
+            vb1.getChildren().addAll(pannneauHS, sep);
+        }
+        Button btnValider = new Button("Valider");
+        btnValider.setTranslateX(235);
+        btnValider.setTranslateY(5);
+        btnValider.setPadding(new Insets(7));
+        btnValider.setOnAction((ActionEvent e) -> {
+            for (int i = 0; i < panoramiquesProjet[panoActuel].getNombreHotspots(); i++) {
+                ComboBox cbx = (ComboBox) scene.lookup("#cbpano" + i);
+                System.out.print("choix : HS n°" + i + " => " + cbx.getValue() + ".xml");
+                panoramiquesProjet[panoActuel].getHotspot(i).setFichierXML(cbx.getValue() + ".xml");
+                CheckBox cbAnime=(CheckBox) scene.lookup("#anime"+i);
+                if (cbAnime.isSelected())
+                {
+                    panoramiquesProjet[panoActuel].getHotspot(i).setAnime(true);
+                    System.out.println(" anime : true");
+                }
+                else
+                {
+                    panoramiquesProjet[panoActuel].getHotspot(i).setAnime(false);
+                    System.out.println(" anime : false");
+                }
+            }
+        });
+        vb1.getChildren().addAll(btnValider, sep1);
+        return panneauHotSpots;
+    }
+
     /**
      *
      */
     private void ajouteAffichageHotspots() {
-        Pane lbl = panoramiquesProjet[panoActuel].getAffichageHS();
+        Pane lbl = affichageHS(listePano(panoActuel), panoActuel);
         lbl.setId("labels");
         outils.getChildren().add(lbl);
         numPoints = panoramiquesProjet[panoActuel].getNombreHotspots();
@@ -810,7 +911,7 @@ public class EditeurPanovisu extends Application {
             if (!(me.isControlDown()) && estCharge) {
                 dejaSauve = false;
                 double mouseX = me.getSceneX();
-                double mouseY = me.getSceneY() - pano.getLayoutY() - 80;
+                double mouseY = me.getSceneY() - pano.getLayoutY() - 115;
                 double longitude, latitude;
                 double largeur = imagePanoramique.getFitWidth();
                 String chLong, chLat;
@@ -828,7 +929,7 @@ public class EditeurPanovisu extends Application {
                 HS.setLatitude(latitude);
                 panoramiquesProjet[panoActuel].addHotspot(HS);
                 retireAffichageHotSpots();
-                Pane affHS1 = panoramiquesProjet[panoActuel].getAffichageHS();
+                Pane affHS1 = affichageHS(listePano(panoActuel), panoActuel);
                 affHS1.setId("labels");
                 outils.getChildren().add(affHS1);
 
@@ -868,7 +969,7 @@ public class EditeurPanovisu extends Application {
         pano.setOnMouseMoved((MouseEvent me) -> {
             if (estCharge) {
                 double mouseX = me.getSceneX();
-                double mouseY = me.getSceneY() - pano.getLayoutY() - 80;
+                double mouseY = me.getSceneY() - pano.getLayoutY() - 115;
                 double longitude, latitude;
                 double largeur = imagePanoramique.getFitWidth() * pano.getScaleX();
                 longitude = 360.0f * mouseX / largeur - 180;
@@ -1057,13 +1158,14 @@ public class EditeurPanovisu extends Application {
          */
         Group root = new Group();
         TabPane tabPaneEnvironnement = new TabPane();
+        tabPaneEnvironnement.setTranslateZ(5);
         Tab tabVisite = new Tab();
         Tab tabInterface = new Tab();
         HBox hbEnvironnement = new HBox();
         Pane visualiseur = new Pane();
 
         tabPaneEnvironnement.getTabs().addAll(tabVisite, tabInterface);
-        tabPaneEnvironnement.setTranslateY(45);
+        tabPaneEnvironnement.setTranslateY(80);
         tabPaneEnvironnement.setSide(Side.TOP);
         tabVisite.setText("Gestion des panoramiques");
         tabVisite.setClosable(false);
