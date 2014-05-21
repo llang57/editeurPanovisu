@@ -109,13 +109,13 @@ and open the template in the editor.
 .barre{
     display: inline-block;
     position: absolute;
-    top: -35px;
+    top: -45px;
 }
 .barre button{
-    height: 30px;
-    width: 30px;
-    border: 1px solid #777;
-    background-color: #fff;
+    height: 40px;
+    width: 40px;
+    border: 1px solid rgba(255,255,255,0);
+    background-color: rgba(255,255,255,0);
     border-radius: 3px;
     opacity: 0.8;
     margin-right: 3px;

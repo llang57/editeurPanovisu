@@ -11,6 +11,12 @@
  * 
  * @returns {window|String}
  */
+version = "0.20";
+programmeur = "Laurent LANG";
+anneeProgramme="2014";
+site="http://lemondea360.fr";
+siteTexte="le monde à 360°";
+
 function estTactile() {
     return !!('ontouchstart' in window);
 }
@@ -52,7 +58,6 @@ function panovisu(num_pano) {
             longitude = 0,
             latitude = 0,
             fenPanoramique,
-            version = "0.15",
             texture_placeholder,
             isUserInteracting = false,
             onPointerDownPointerX = 0,
@@ -495,7 +500,7 @@ function panovisu(num_pano) {
         });
     });
 
-    $(document).on("click", ".infoPanovisu a", function() {
+    $(document).on("click", ".infoPanovisu a", function(event) {
         event.stopPropagation();
     });
 
@@ -550,15 +555,15 @@ function panovisu(num_pano) {
     function afficheBarre(larg1, haut1) {
         if (pano.width() < 400 || pano.height() < 200)
         {
-            $("#barre-" + num_pano + " button").css({height: "15px", width: "15px", borderRadius: "0px"});
-            $("#barre-" + num_pano + " button img").css({height: "10px", width: "10px", paddingBottom: "2px", marginLeft: "-2px"});
-            $("#barre-" + num_pano).css({height: "15px"});
+            $("#barre-" + num_pano + " button").css({height: "20px", width: "20px", borderRadius: "0px"});
+            $("#barre-" + num_pano + " button img").css({height: "18px", width: "18px", paddingBottom: "2px", marginLeft: "-2px"});
+            $("#barre-" + num_pano).css({height: "25px"});
         }
         else
         {
             $("#barre-" + num_pano + " button").css({height: "30px", width: "30px", borderRadius: "3px"});
-            $("#barre-" + num_pano + " button img").css({height: "20px", width: "20px", paddingBottom: "0px", marginLeft: "0px"});
-            $("#barre-" + num_pano).css({height: "30px"});
+            $("#barre-" + num_pano + " button img").css({height: "26px", width: "26px", paddingBottom: "0px", marginLeft: "0px"});
+            $("#barre-" + num_pano).css({height: "40px"});
         }
         setTimeout(function() {
             w1 = $("#barre-" + num_pano).width();
@@ -1033,8 +1038,10 @@ function panovisu(num_pano) {
                 version +
                 "</b><br><br>Un visualiseur 100% HTML5 - 100% libre<br>" +
                 "Utilise la bibliothèque <a href='http://threejs.org/' target='_blank' title='voir la page de three.js'>Three.js</a>" +
-                "<br><br>&copy; Laurent LANG (2014)<br><div id='panovisuCharge-" + num_pano + "'>&nbsp;</div>cliquez pour fermer la fenêtre";
-        $("#infoPanovisu-" + num_pano).css({width: "450px", height: "150px"});
+                "<br><br>&copy; "+programmeur+" ("+anneeProgramme+")<br>"+
+                "<br>une création : <a href='"+site+"' target='_blank'>"+siteTexte+"</a><br>"+
+                "<div id='panovisuCharge-" + num_pano + "'>&nbsp;</div>cliquez pour fermer la fenêtre";
+        $("#infoPanovisu-" + num_pano).css({width: "450px", height: "190px"});
         $("#infoPanovisu-" + num_pano).html(panoInfo);
     }
     /**
@@ -1073,7 +1080,7 @@ function panovisu(num_pano) {
         hotSpot[numHotspot].id = sprite.id;
         hotSpot[numHotspot].image = xml;
         hotSpot[numHotspot].texte = "";
-        radius = 10;
+        radius = 20;
         sprite.position.set(vect.x, vect.y, vect.z);
         sprite.position.normalize();
         sprite.position.multiplyScalar(radius);
@@ -1113,9 +1120,9 @@ function panovisu(num_pano) {
         $.get(xmlFile,
                 function(d) {
                     panoImage = "faces";
-                    couleur = "#ffffff";
+                    couleur = "none";
                     styleBoutons = "classique";
-                    bordure = "#777";
+                    bordure = "none";
                     panoTitre = "";
                     panoType = "cube";
                     affInfo = "oui";
