@@ -20,7 +20,7 @@
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator></MenuItem>
-            <MenuItem mnemonicParsing="false" onAction="#projetCharge" text="Ouvrir">
+            <MenuItem fx:id="chargeProjet" mnemonicParsing="false" onAction="#projetCharge" text="Ouvrir">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator></MenuItem>
@@ -35,7 +35,7 @@
                      </accelerator>
                   </MenuItem>
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem disable="true" mnemonicParsing="false" text="Génère Visite">
+                  <MenuItem fx:id="visiteGenere" disable="true" mnemonicParsing="false" onAction="#genereVisite" text="Génère Visite">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="V" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator></MenuItem>
@@ -128,6 +128,21 @@
                </HBox.margin>
                <tooltip>
                   <Tooltip text="ajoute un nouveau panoramique" />
+               </tooltip>
+            </ScrollPane>
+            <ScrollPane hbarPolicy="NEVER" maxHeight="35.0" prefHeight="35.0" prefWidth="70.0" style="-fx-background-color: transparent;" vbarPolicy="NEVER">
+               <HBox.margin>
+                  <Insets right="15.0" top="5.0" />
+               </HBox.margin>
+               <content>
+                  <ImageView fx:id="imgVisiteGenere" disable="true" fitHeight="32.0" fitWidth="64.0" onMouseClicked="#genereVisite" opacity="0.4" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/genereVisite.png" />
+                     </image>
+                  </ImageView>
+               </content>
+               <tooltip>
+                  <Tooltip text="Générer la visite" />
                </tooltip>
             </ScrollPane>
          </children>
