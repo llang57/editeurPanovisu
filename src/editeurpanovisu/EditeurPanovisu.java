@@ -170,27 +170,62 @@ public class EditeurPanovisu extends Application {
             File xmlFile;
 
             for (int i = 0; i < nombrePanoramiques; i++) {
-                contenuFichier += "[Panoramique=>"
-                        + "fichier:" + panoramiquesProjet[i].getNomFichier()
-                        + ";nb:" + panoramiquesProjet[i].getNombreHotspots()
-                        + ";titre:" + panoramiquesProjet[i].getTitrePanoramique() + ""
-                        + ";type:" + panoramiquesProjet[i].getTypePanoramique()
-                        + ";afficheInfo:" + panoramiquesProjet[i].isAfficheInfo()
-                        + ";afficheTitre:" + panoramiquesProjet[i].isAfficheTitre()
-                        + "]\n";
+                String fPano = "panos/" + panoramiquesProjet[i].getNomFichier().substring(panoramiquesProjet[i].getNomFichier().lastIndexOf(File.separator) + 1, panoramiquesProjet[i].getNomFichier().length()).split("\\.")[0];
+                String affInfo = (panoramiquesProjet[i].isAfficheInfo()) ? "oui" : "non";
+                String affTitre = (panoramiquesProjet[i].isAfficheTitre()) ? "oui" : "non";
+                contenuFichier = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+                        + "<!--\n"
+                        + "     Visite générée par l'éditeur panoVisu \n"
+                        + "\n"
+                        + "             Création L.LANG      le monde à 360°  : http://lemondea360.fr\n"
+                        + "-->\n"
+                        + "\n"
+                        + "\n"
+                        + "<scene>\n"
+                        + "   <pano \n"
+                        + "      image=\"" + fPano + "\"\n"
+                        + "      titre=\"" + panoramiquesProjet[i].getTitrePanoramique() + "\"\n"
+                        + "      type=\"" + panoramiquesProjet[i].getTypePanoramique() + "\"\n"
+                        + "      affinfo=\"" + affInfo + "\"\n"
+                        + "      afftitre=\"" + affTitre + "\"\n"
+                        + "   />\n"
+                        + "   <!--Définition de la Barre de navigation-->\n"
+                        + "   <boutons \n"
+                        + "      styleBoutons=\"retinavert\"\n"
+                        + "      couleur=\"rgba(255,255,255,0)\"\n"
+                        + "      bordure=\"rgba(255,255,255,0)\"\n"
+                        + "      deplacements=\"oui\" \n"
+                        + "      zoom=\"non\" \n"
+                        + "      outils=\"oui\"\n"
+                        + "      fs=\"oui\" \n"
+                        + "      souris=\"oui\" \n"
+                        + "      rotation=\"oui\" \n"
+                        + "      positionX=\"center\"\n"
+                        + "      positionY=\"bottom\" \n"
+                        + "      dX=\"0\" \n"
+                        + "      dY=\"10\"\n"
+                        + "      visible=\"oui\"\n"
+                        + "   />\n"
+                        + "    <!--Définition des hotspots-->  \n"
+                        + "   <hotspots>\n";
                 for (int j = 0; j < panoramiquesProjet[i].getNombreHotspots(); j++) {
                     HotSpot HS = panoramiquesProjet[i].getHotspot(j);
-                    contenuFichier += "   [hotspot==>"
-                            + "longitude:" + HS.getLongitude()
-                            + ";latitude:" + HS.getLatitude()
-                            + ";image:" + HS.getFichierImage()
-                            + ";xml:" + HS.getFichierXML()
-                            + ";info:" + HS.getInfo()
-                            + ";anime:" + HS.isAnime()
-                            + "]\n";
+                    double longit=HS.getLongitude()-180;
+                    String txtAnime = (HS.isAnime()) ? "true" : "false";
+                    contenuFichier
+                            += "      <point \n"
+                            + "           long=\"" + longit + "\"\n"
+                            + "           lat=\"" + HS.getLatitude() + "\"\n"
+                            + "           image=\"panovisu/images/hotspots/hotspotvert.png\"\n"
+                            + "           xml=\"xml/" + HS.getFichierXML() + "\"\n"
+                            + "           info=\"" + HS.getInfo() + "\"\n"
+                            + "           anime=\"" + txtAnime + "\"\n"
+                            + "      />\n";
                 }
+                contenuFichier += "   </hotspots>\n"
+                        + "</scene>\n";
                 String fichierPano = panoramiquesProjet[i].getNomFichier();
-                String nomXMLFile = fichierPano.substring(fichierPano.lastIndexOf(File.separator) + 1, fichierPano.length()).split("\\.")[0];
+                String nomXMLFile = fichierPano.substring(fichierPano.lastIndexOf(File.separator) + 1, fichierPano.length()).split("\\.")[0] + ".xml";
                 xmlFile = new File(xmlRepert + File.separator + nomXMLFile);
                 xmlFile.setWritable(true);
                 FileWriter fw = new FileWriter(xmlFile);
@@ -198,26 +233,67 @@ public class EditeurPanovisu extends Application {
                 bw.write(contenuFichier);
                 bw.close();
             }
-            File repertVisite=new File(repertoireProjet+File.separator+"visite");
-            if (!repertVisite.exists())
-            {
+            Dimension tailleEcran = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+            int hauteur = (int)tailleEcran.getHeight()-200;
+            String fichierHTML = "<!DOCTYPE html>\n"
+                    + "<html lang=\"fr\">\n"
+                    + "    <head>\n"
+                    + "        <title>Panovisu - visualiseur 100% html5 (three.js)</title>\n"
+                    + "        <meta charset=\"utf-8\">\n"
+                    + "        <meta name=\"viewport\" content=\"width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0\">\n"
+                    + "    </head>\n"
+                    + "    <body>\n"
+                    + "        <header>\n"
+                    + "\n"
+                    + "        </header>\n"
+                    + "        <article>\n"
+                    + "            <div id=\"pano\">\n"
+                    + "            </div>\n"
+                    + "        </article>\n"
+                    + "        <script src=\"panovisu/panovisuInit.js\"></script>\n"
+                    + "        <script src=\"panovisu/panovisu.js\"></script>\n"
+                    + "        <script>\n"
+                    + "            $(function() {\n"
+                    + "                ajoutePano({\n"
+                    + "                    panoramique: \"pano\",\n"
+                    + "                    fenX: \"100%\",\n"
+                    + "                    fenY: \""+hauteur+"px\",\n"
+                    + "                    xml: \"xml/PANO.xml\"\n"
+                    + "                });\n"
+                    + "            });\n"
+                    + "        </script>\n"
+                    + "        <footer>\n"
+                    + "            Page de test - Panovisu\n"
+                    + "        </footer>\n"
+                    + "    </body>\n"
+                    + "</html>\n";
+            fichierHTML=fichierHTML.replace("PANO",
+                    panoramiquesProjet[0].getNomFichier().substring(panoramiquesProjet[0].getNomFichier().lastIndexOf(File.separator) + 1, panoramiquesProjet[0].getNomFichier().length()).split("\\.")[0]);            
+           File fichIndexHTML = new File(repertTemp + File.separator + "index.html");
+            fichIndexHTML.setWritable(true);
+            FileWriter fw1 = new FileWriter(fichIndexHTML);
+            BufferedWriter bw1 = new BufferedWriter(fw1);
+            bw1.write(fichierHTML);
+            bw1.close();
+
+            File repertVisite = new File(repertoireProjet + File.separator + "visite");
+            if (!repertVisite.exists()) {
                 repertVisite.mkdirs();
             }
-            String nomRepertVisite=repertVisite.getAbsolutePath();
-            System.out.println("Repertoire de la visite :"+nomRepertVisite);
+
+            String nomRepertVisite = repertVisite.getAbsolutePath();
+            System.out.println("Repertoire de la visite :" + nomRepertVisite);
             copieDirectory(repertTemp, nomRepertVisite);
             Dialogs.create().title("Editeur PanoVisu")
                     .masthead("Génération de la visite")
-                    .message("Votre visite a bien été généré dans le répertoire : "+nomRepertVisite)
+                    .message("Votre visite a bien été généré dans le répertoire : " + nomRepertVisite)
                     .showInformation();
-        }
-        else
-        {
+        } else {
             Dialogs.create().title("Editeur PanoVisu")
                     .masthead("Génération de la visite")
                     .message("Votre n'a pu être générée, votre fichier n'étant pas sauvegardé")
                     .showError();
-            
+
         }
     }
 
@@ -317,6 +393,8 @@ public class EditeurPanovisu extends Application {
             fichProjet = null;
             fichProjet = repertChoix.showOpenDialog(stPrincipal);
             if (fichProjet != null) {
+                repertoireProjet = fichProjet.getParent();
+                repertSauveChoisi = true;
                 deleteDirectory(repertTemp);
                 String repertPanovisu = repertTemp + File.separator + "panovisu";
                 File rptPanovisu = new File(repertPanovisu);
