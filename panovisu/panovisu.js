@@ -72,6 +72,8 @@ function panovisu(num_pano) {
             deltaX = 0,
             deltaY = 0,
             $_GET = [],
+            maxFOV=125,
+            minFOV=25,
             target = new THREE.Vector3(),
             bPleinEcran = false,
             largeur,
@@ -536,11 +538,11 @@ function panovisu(num_pano) {
      * @returns {undefined}
      */
     function zoom() {
-        if (fov > 125) {
-            fov = 125;
+        if (fov > maxFOV) {
+            fov = maxFOV;
         }
-        if (fov < 15) {
-            fov = 15;
+        if (fov < minFOV) {
+            fov = minFOV;
         }
         camera.fov = fov;
         camera.updateProjectionMatrix();
@@ -651,6 +653,9 @@ function panovisu(num_pano) {
      */
     function chargeNouveauPano(nHotspot) {
         clearInterval(timers);
+        longitude=0;
+        latitude=0;
+        fov=75;
         $("#infoBulle-" + num_pano).hide();
         $("#infoBulle-" + num_pano).html("");
         isReloaded = true;
@@ -1277,10 +1282,14 @@ function panovisu(num_pano) {
             xml: 'xml/panovisu.xml',
             fenX: "75%",
             fenY: "80%",
-            panoramique: "panovisu"
+            panoramique: "panovisu",
+            minFOV : 25,
+            maxFOV : 120
         };
         contexte = $.extend(defaut, contexte);
         fenPanoramique = contexte.panoramique;
+        maxFOV=contexte.maxFOV;
+        minFOV=contexte.minFOV;
         var fenetre = fenPanoramique;
         $(fenetre).css({overflow: "hidden"});
         creeContexte(fenetre);

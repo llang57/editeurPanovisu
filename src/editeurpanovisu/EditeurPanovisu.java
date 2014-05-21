@@ -1121,7 +1121,7 @@ public class EditeurPanovisu extends Application {
             vuePanoramique.setPrefHeight((double) newSceneHeight - 70.0d);
             panneauOutils.setPrefHeight((double) newSceneHeight - 70.0d);
         });
-
+        
         /**
          *
          */
