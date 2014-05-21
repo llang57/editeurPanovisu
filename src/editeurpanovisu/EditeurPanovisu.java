@@ -210,7 +210,7 @@ public class EditeurPanovisu extends Application {
                         + "   <hotspots>\n";
                 for (int j = 0; j < panoramiquesProjet[i].getNombreHotspots(); j++) {
                     HotSpot HS = panoramiquesProjet[i].getHotspot(j);
-                    double longit=HS.getLongitude()-180;
+                    double longit = HS.getLongitude() - 180;
                     String txtAnime = (HS.isAnime()) ? "true" : "false";
                     contenuFichier
                             += "      <point \n"
@@ -234,7 +234,7 @@ public class EditeurPanovisu extends Application {
                 bw.close();
             }
             Dimension tailleEcran = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-            int hauteur = (int)tailleEcran.getHeight()-200;
+            int hauteur = (int) tailleEcran.getHeight() - 200;
             String fichierHTML = "<!DOCTYPE html>\n"
                     + "<html lang=\"fr\">\n"
                     + "    <head>\n"
@@ -249,15 +249,20 @@ public class EditeurPanovisu extends Application {
                     + "        <article>\n"
                     + "            <div id=\"pano\">\n"
                     + "            </div>\n"
-                    + "        </article>\n"
+                    + "        </article style=\"height : " + hauteur + "px;\">\n"
                     + "        <script src=\"panovisu/panovisuInit.js\"></script>\n"
                     + "        <script src=\"panovisu/panovisu.js\"></script>\n"
                     + "        <script>\n"
+                    + "                $(window).resize(function(){\n"
+                    + "                    $(\"article\").height($(window).height()-10);\n"
+                    + "                })\n"
+                    + "\n"
                     + "            $(function() {\n"
+                    + "                $(\"article\").height($(window).height()-10);\n"
                     + "                ajoutePano({\n"
                     + "                    panoramique: \"pano\",\n"
                     + "                    fenX: \"100%\",\n"
-                    + "                    fenY: \""+hauteur+"px\",\n"
+                    + "                    fenY: \"100%\",\n"
                     + "                    xml: \"xml/PANO.xml\"\n"
                     + "                });\n"
                     + "            });\n"
@@ -267,9 +272,9 @@ public class EditeurPanovisu extends Application {
                     + "        </footer>\n"
                     + "    </body>\n"
                     + "</html>\n";
-            fichierHTML=fichierHTML.replace("PANO",
-                    panoramiquesProjet[0].getNomFichier().substring(panoramiquesProjet[0].getNomFichier().lastIndexOf(File.separator) + 1, panoramiquesProjet[0].getNomFichier().length()).split("\\.")[0]);            
-           File fichIndexHTML = new File(repertTemp + File.separator + "index.html");
+            fichierHTML = fichierHTML.replace("PANO",
+                    panoramiquesProjet[0].getNomFichier().substring(panoramiquesProjet[0].getNomFichier().lastIndexOf(File.separator) + 1, panoramiquesProjet[0].getNomFichier().length()).split("\\.")[0]);
+            File fichIndexHTML = new File(repertTemp + File.separator + "index.html");
             fichIndexHTML.setWritable(true);
             FileWriter fw1 = new FileWriter(fichIndexHTML);
             BufferedWriter bw1 = new BufferedWriter(fw1);
@@ -365,7 +370,7 @@ public class EditeurPanovisu extends Application {
             repertoireProjet = currentDir;
         }
         Action reponse = null;
-        Localization.setLocale(Locale.FRENCH);
+        Localization.setLocale(new Locale("fr","FR"));
         if (!dejaSauve) {
             reponse = Dialogs.create()
                     .owner(null)
@@ -581,7 +586,7 @@ public class EditeurPanovisu extends Application {
     @FXML
     private void projetsFermer() {
         Action reponse = null;
-        Localization.setLocale(Locale.FRENCH);
+        Localization.setLocale(new Locale("fr","FR"));
         if (!dejaSauve) {
             reponse = Dialogs.create()
                     .owner(null)
@@ -612,7 +617,7 @@ public class EditeurPanovisu extends Application {
     @FXML
     private void projetsNouveau() {
         Action reponse = null;
-        Localization.setLocale(Locale.FRENCH);
+        Localization.setLocale(new Locale("fr","FR"));
         if (!dejaSauve) {
             reponse = Dialogs.create()
                     .owner(null)
@@ -1600,16 +1605,33 @@ public class EditeurPanovisu extends Application {
         currentDir = "c:";
         installeEvenements();
         primaryStage.setOnCloseRequest((WindowEvent event) -> {
-            try {
-                sauveFichiers();
-
-            } catch (IOException ex) {
-                Logger.getLogger(EditeurPanovisu.class
-                        .getName()).log(Level.SEVERE, null, ex);
+            Action reponse = null;
+        Localization.setLocale(new Locale("fr","FR"));
+            if (!dejaSauve) {
+                reponse = Dialogs.create()
+                        .owner(null)
+                        .title("Quitte l'éditeur")
+                        .masthead("ATTENTION !!! vous n'avez pas sauvegardé votre projet")
+                        .message("Voulez vous le sauver ?")
+                        .showConfirm();
             }
-            deleteDirectory(repertTemp);
-            File ftemp = new File(repertTemp);
-            ftemp.delete();
+            if (reponse == Dialog.Actions.YES) {
+                try {
+                    projetSauve();
+                } catch (IOException ex) {
+                    Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            System.out.println("Réponse" + reponse);
+            if ((reponse == Dialog.Actions.YES) || (reponse == Dialog.Actions.NO) || (reponse == null)) {
+                deleteDirectory(repertTemp);
+                File ftemp = new File(repertTemp);
+                ftemp.delete();
+            }
+            else
+            {
+               event.consume(); 
+            }
         });
     }
 
