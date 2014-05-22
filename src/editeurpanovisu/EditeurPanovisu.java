@@ -68,6 +68,7 @@ import java.util.Locale;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Separator;
 
 /**
@@ -109,7 +110,13 @@ public class EditeurPanovisu extends Application {
     static private String panoAffiche = "";
     static private boolean dejaSauve = true;
     static private Stage stPrincipal;
+    static private String[] histoFichiers;
+    static private File fichHistoFichiers;
+    static private String txtRepertConfig;
+    static private Button valideChargeLastfile;
 
+    @FXML
+    static private Menu derniersProjets;
     @FXML
     private Menu menuPanoramique;
 
@@ -369,7 +376,7 @@ public class EditeurPanovisu extends Application {
             repertoireProjet = currentDir;
         }
         Action reponse = null;
-        Localization.setLocale(new Locale("fr","FR"));
+        Localization.setLocale(new Locale("fr", "FR"));
         if (!dejaSauve) {
             reponse = Dialogs.create()
                     .owner(null)
@@ -585,7 +592,7 @@ public class EditeurPanovisu extends Application {
     @FXML
     private void projetsFermer() {
         Action reponse = null;
-        Localization.setLocale(new Locale("fr","FR"));
+        Localization.setLocale(new Locale("fr", "FR"));
         if (!dejaSauve) {
             reponse = Dialogs.create()
                     .owner(null)
@@ -616,7 +623,7 @@ public class EditeurPanovisu extends Application {
     @FXML
     private void projetsNouveau() {
         Action reponse = null;
-        Localization.setLocale(new Locale("fr","FR"));
+        Localization.setLocale(new Locale("fr", "FR"));
         if (!dejaSauve) {
             reponse = Dialogs.create()
                     .owner(null)
@@ -828,6 +835,16 @@ public class EditeurPanovisu extends Application {
             Panoramique pano1 = panoramiquesProjet[ii];
             System.out.println(nombrePanoramiques + " pano n°" + ii + " fichier : " + pano1.getNomFichier());
         }
+    }
+
+    /**
+     *
+     */
+    private void lisFichierConfig() {
+//        MenuItem menuItem=new MenuItem("test");
+//        menuItem.setOnAction(null);
+//        derniersProjets.getItems().addAll(menuItem);
+//        derniersProjets.setDisable(false);
     }
 
     /**
@@ -1121,7 +1138,7 @@ public class EditeurPanovisu extends Application {
             vuePanoramique.setPrefHeight((double) newSceneHeight - 70.0d);
             panneauOutils.setPrefHeight((double) newSceneHeight - 70.0d);
         });
-        
+
         /**
          *
          */
@@ -1388,6 +1405,13 @@ public class EditeurPanovisu extends Application {
     private void creeMenu(Stage primaryStage, Group racine, int taille) throws Exception {
         Pane myPane = (Pane) FXMLLoader.load(getClass().getResource("menuPrincipal.fxml"));
         racine.getChildren().add(myPane);
+        File repertConfig = new File(repertAppli + File.separator + "configPV");
+        txtRepertConfig = repertConfig.getAbsolutePath();
+        if (!repertConfig.exists()) {
+            repertConfig.mkdirs();
+        } else {
+            lisFichierConfig();
+        }
 
     }
 
@@ -1408,9 +1432,34 @@ public class EditeurPanovisu extends Application {
         tabPaneEnvironnement.setTranslateZ(5);
         tabPaneEnvironnement.setMinHeight(height - 140);
         tabPaneEnvironnement.setMaxHeight(height - 140);
-        Pane barreStatus=new Pane();
-        barreStatus.setPrefSize(width+20, 30);
-        barreStatus.setTranslateY(height-29);
+        ScrollPane lastFiles = new ScrollPane();
+        lastFiles.setPrefSize(310, 200);
+        VBox lstLastFiles = new VBox();
+        Label lblLastFiles = new Label("liste des derniers Projets");
+        ListView listLastFiles = new ListView();
+        listLastFiles.setPrefSize(300,140);
+        valideChargeLastfile=new Button("Charge");
+        valideChargeLastfile.setDisable(true);
+        valideChargeLastfile.setPadding(new Insets(7));
+        valideChargeLastfile.setTranslateX(200);
+        listLastFiles.getItems().add("Test");
+        listLastFiles.getItems().add("Test 2");
+        listLastFiles.getItems().add("Test 3");
+        listLastFiles.getSelectionModel().selectedItemProperty().addListener(
+                new ChangeListener<String>() {
+                    @Override
+                    public void changed(ObservableValue<? extends String> ov,
+                            String old_val, String new_val) {
+                        System.out.println(new_val);
+                    }
+                });
+
+        listLastFiles.setId("listlastfiles");
+        lstLastFiles.getChildren().addAll(lblLastFiles, listLastFiles,valideChargeLastfile);
+        lastFiles.setContent(lstLastFiles);
+        Pane barreStatus = new Pane();
+        barreStatus.setPrefSize(width + 20, 30);
+        barreStatus.setTranslateY(height - 29);
         barreStatus.setStyle("-fx-background-color:#ccc;-fx-border-color:#aaa");
         Tab tabVisite = new Tab();
         Tab tabInterface = new Tab();
@@ -1445,7 +1494,7 @@ public class EditeurPanovisu extends Application {
         lblChoixPanoramique = new Label("Choix du panoramique");
         listeChoixPanoramique.setVisibleRowCount(10);
         paneChoixPanoramique.getChildren().addAll(lblChoixPanoramique, listeChoixPanoramique);
-        outils.getChildren().addAll(paneChoixPanoramique);
+        outils.getChildren().addAll(lastFiles, paneChoixPanoramique);
 
         paneChoixPanoramique.setVisible(false);
         /*
@@ -1563,7 +1612,7 @@ public class EditeurPanovisu extends Application {
         coordonnees.getChildren().setAll(lblLong, lblLat);
         vuePanoramique.setContent(panneau2);
         hbEnvironnement.getChildren().setAll(vuePanoramique, panneauOutils);
-        root.getChildren().addAll(tabPaneEnvironnement,barreStatus);
+        root.getChildren().addAll(tabPaneEnvironnement, barreStatus);
         panneau2.getChildren().setAll(coordonnees, pano);
         creeMenu(primaryStage, root, width);
         primaryStage.show();
@@ -1606,11 +1655,11 @@ public class EditeurPanovisu extends Application {
         repertTemp = repertTemp + File.separator + "temp" + extTemp;
         repertTempFile = new File(repertTemp);
         repertTempFile.mkdirs();
-        currentDir = "c:";
+        currentDir = rep.getAbsolutePath();
         installeEvenements();
         primaryStage.setOnCloseRequest((WindowEvent event) -> {
             Action reponse = null;
-        Localization.setLocale(new Locale("fr","FR"));
+            Localization.setLocale(new Locale("fr", "FR"));
             if (!dejaSauve) {
                 reponse = Dialogs.create()
                         .owner(null)
@@ -1631,10 +1680,8 @@ public class EditeurPanovisu extends Application {
                 deleteDirectory(repertTemp);
                 File ftemp = new File(repertTemp);
                 ftemp.delete();
-            }
-            else
-            {
-               event.consume(); 
+            } else {
+                event.consume();
             }
         });
     }
