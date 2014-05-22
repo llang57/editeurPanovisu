@@ -113,7 +113,7 @@ public class EditeurPanovisu extends Application {
     static private String[] histoFichiers;
     static private File fichHistoFichiers;
     static private String txtRepertConfig;
-    static private Button valideChargeLastfile;
+    static private Button valideChargeDerniersFichiers;
 
     @FXML
     static private Menu derniersProjets;
@@ -1402,7 +1402,7 @@ public class EditeurPanovisu extends Application {
      * @param taille
      * @throws Exception
      */
-    private void creeMenu(Stage primaryStage, Group racine, int taille) throws Exception {
+    private void creeMenu(Stage primaryStage, VBox racine, int taille) throws Exception {
         Pane myPane = (Pane) FXMLLoader.load(getClass().getResource("menuPrincipal.fxml"));
         racine.getChildren().add(myPane);
         File repertConfig = new File(repertAppli + File.separator + "configPV");
@@ -1427,39 +1427,49 @@ public class EditeurPanovisu extends Application {
         /**
          * Création des éléments constitutifs de l'écran
          */
-        Group root = new Group();
+        VBox root = new VBox();
+        creeMenu(primaryStage, root, width);
         TabPane tabPaneEnvironnement = new TabPane();
         tabPaneEnvironnement.setTranslateZ(5);
         tabPaneEnvironnement.setMinHeight(height - 140);
         tabPaneEnvironnement.setMaxHeight(height - 140);
         ScrollPane lastFiles = new ScrollPane();
         lastFiles.setPrefSize(310, 200);
-        VBox lstLastFiles = new VBox();
-        Label lblLastFiles = new Label("liste des derniers Projets");
-        ListView listLastFiles = new ListView();
-        listLastFiles.setPrefSize(300,140);
-        valideChargeLastfile=new Button("Charge");
-        valideChargeLastfile.setDisable(true);
-        valideChargeLastfile.setPadding(new Insets(7));
-        valideChargeLastfile.setTranslateX(200);
-        listLastFiles.getItems().add("Test");
-        listLastFiles.getItems().add("Test 2");
-        listLastFiles.getItems().add("Test 3");
-        listLastFiles.getSelectionModel().selectedItemProperty().addListener(
+        VBox lstDerniersFichiers = new VBox();
+        Label lblDerniersFichiers = new Label("liste des derniers Projets");
+        ListView listDerniersFichiers = new ListView();
+        listDerniersFichiers.setPrefSize(300, 140);
+        listDerniersFichiers.setId("listderniersfichiers");
+        valideChargeDerniersFichiers = new Button("Charge");
+        valideChargeDerniersFichiers.setDisable(true);
+        valideChargeDerniersFichiers.setPadding(new Insets(7));
+        valideChargeDerniersFichiers.setTranslateX(200);
+        valideChargeDerniersFichiers.setId("validechargederniersfichiers");
+        valideChargeDerniersFichiers.setOnAction((ActionEvent e) -> {
+            ListView lv = (ListView) scene.lookup("#listderniersfichiers");
+            String nomFich;
+            nomFich = (String) lv.getSelectionModel().getSelectedItem();
+            System.out.println(nomFich);
+            //File fichProjet1=new File(nomFich);
+        });
+        listDerniersFichiers.getSelectionModel().selectedItemProperty().addListener(
                 new ChangeListener<String>() {
                     @Override
                     public void changed(ObservableValue<? extends String> ov,
                             String old_val, String new_val) {
-                        System.out.println(new_val);
+                        if (new_val != null) {
+                            Button valide = (Button) scene.lookup("#validechargederniersfichiers");
+                            valide.setDisable(false);
+                            System.out.println(new_val);
+                        }
                     }
                 });
 
-        listLastFiles.setId("listlastfiles");
-        lstLastFiles.getChildren().addAll(lblLastFiles, listLastFiles,valideChargeLastfile);
-        lastFiles.setContent(lstLastFiles);
+        lstDerniersFichiers.getChildren().addAll(lblDerniersFichiers, listDerniersFichiers, valideChargeDerniersFichiers);
+        lastFiles.setContent(lstDerniersFichiers);
         Pane barreStatus = new Pane();
         barreStatus.setPrefSize(width + 20, 30);
-        barreStatus.setTranslateY(height - 29);
+        barreStatus.setTranslateY(25);
         barreStatus.setStyle("-fx-background-color:#ccc;-fx-border-color:#aaa");
         Tab tabVisite = new Tab();
         Tab tabInterface = new Tab();
@@ -1473,7 +1483,7 @@ public class EditeurPanovisu extends Application {
         Button btnValidePano;
 
         tabPaneEnvironnement.getTabs().addAll(tabVisite, tabInterface);
-        tabPaneEnvironnement.setTranslateY(80);
+        //tabPaneEnvironnement.setTranslateY(80);
         tabPaneEnvironnement.setSide(Side.TOP);
         tabVisite.setText("Gestion des panoramiques");
         tabVisite.setClosable(false);
@@ -1494,7 +1504,12 @@ public class EditeurPanovisu extends Application {
         lblChoixPanoramique = new Label("Choix du panoramique");
         listeChoixPanoramique.setVisibleRowCount(10);
         paneChoixPanoramique.getChildren().addAll(lblChoixPanoramique, listeChoixPanoramique);
-        outils.getChildren().addAll(lastFiles, paneChoixPanoramique);
+        /*
+            à modifier pour afficher le panneau des derniers fichiers;        
+        */
+        //outils.getChildren().addAll(lastFiles, paneChoixPanoramique);
+        
+        outils.getChildren().addAll(paneChoixPanoramique);
 
         paneChoixPanoramique.setVisible(false);
         /*
@@ -1614,7 +1629,6 @@ public class EditeurPanovisu extends Application {
         hbEnvironnement.getChildren().setAll(vuePanoramique, panneauOutils);
         root.getChildren().addAll(tabPaneEnvironnement, barreStatus);
         panneau2.getChildren().setAll(coordonnees, pano);
-        creeMenu(primaryStage, root, width);
         primaryStage.show();
         popUp.affichePopup();
         ToolTipManager ttManager;
