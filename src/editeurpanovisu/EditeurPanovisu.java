@@ -31,7 +31,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Side;
 import javafx.scene.Cursor;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -172,7 +171,7 @@ public class EditeurPanovisu extends Application {
             if (!jsRepert.exists()) {
                 jsRepert.mkdirs();
             }
-            String contenuFichier = "";
+            String contenuFichier;
             File xmlFile;
 
             for (int i = 0; i < nombrePanoramiques; i++) {
@@ -235,9 +234,9 @@ public class EditeurPanovisu extends Application {
                 xmlFile = new File(xmlRepert + File.separator + nomXMLFile);
                 xmlFile.setWritable(true);
                 FileWriter fw = new FileWriter(xmlFile);
-                BufferedWriter bw = new BufferedWriter(fw);
-                bw.write(contenuFichier);
-                bw.close();
+                try (BufferedWriter bw = new BufferedWriter(fw)) {
+                    bw.write(contenuFichier);
+                }
             }
             Dimension tailleEcran = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
             int hauteur = (int) tailleEcran.getHeight() - 200;
@@ -283,9 +282,9 @@ public class EditeurPanovisu extends Application {
             File fichIndexHTML = new File(repertTemp + File.separator + "index.html");
             fichIndexHTML.setWritable(true);
             FileWriter fw1 = new FileWriter(fichIndexHTML);
-            BufferedWriter bw1 = new BufferedWriter(fw1);
-            bw1.write(fichierHTML);
-            bw1.close();
+            try (BufferedWriter bw1 = new BufferedWriter(fw1)) {
+                bw1.write(fichierHTML);
+            }
 
             File repertVisite = new File(repertoireProjet + File.separator + "visite");
             if (!repertVisite.exists()) {
@@ -430,13 +429,14 @@ public class EditeurPanovisu extends Application {
                 FileReader fr;
                 try {
                     fr = new FileReader(fichProjet);
-                    BufferedReader br = new BufferedReader(fr);
-                    String texte = "";
-                    String ligneTexte;
-                    while ((ligneTexte = br.readLine()) != null) {
-                        texte += ligneTexte;
+                    String texte;
+                    try (BufferedReader br = new BufferedReader(fr)) {
+                        texte = "";
+                        String ligneTexte;
+                        while ((ligneTexte = br.readLine()) != null) {
+                            texte += ligneTexte;
+                        }
                     }
-                    br.close();
                     System.out.println(texte);
                     analyseLigne(texte);
 
@@ -508,9 +508,9 @@ public class EditeurPanovisu extends Application {
             }
             fichProjet.setWritable(true);
             FileWriter fw = new FileWriter(fichProjet);
-            BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(contenuFichier);
-            bw.close();
+            try (BufferedWriter bw = new BufferedWriter(fw)) {
+                bw.write(contenuFichier);
+            }
             Dialogs.create().title("Editeur PanoVisu")
                     .masthead("Sauvegarde de fichier")
                     .message("Votre fichier à bien été sauvegardé")
@@ -567,9 +567,9 @@ public class EditeurPanovisu extends Application {
             System.out.println(contenuFichier);
             fichProjet.setWritable(true);
             FileWriter fw = new FileWriter(fichProjet);
-            BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(contenuFichier);
-            bw.close();
+            try (BufferedWriter bw = new BufferedWriter(fw)) {
+                bw.write(contenuFichier);
+            }
         }
 
     }
@@ -1220,30 +1220,7 @@ public class EditeurPanovisu extends Application {
         /*
         
          */
-        listeChoixPanoramique.valueProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue ov, String ancienneValeur, String nouvelleValeur) {
-                System.out.println("nouvelle valeur" + nouvelleValeur);
-                if (nouvelleValeur != null) {
-                    if (panoCharge) {
-                        panoCharge = false;
-                        panoAffiche = nouvelleValeur;
-                    } else {
-                        if (!(nouvelleValeur.equals(panoAffiche))) {
-                            clickBtnValidePano();
-                            valideHS();
-
-                            panoAffiche = nouvelleValeur;
-                            int numPanoChoisit = listeChoixPanoramique.getSelectionModel().getSelectedIndex();
-                            System.out.println("nb : " + nombrePanoramiques + " =>Pano " + panoAffiche + "index : " + numPanoChoisit + " fichier :"
-                                    + panoramiquesProjet[numPanoChoisit].getNomFichier());
-                            affichePanoChoisit(numPanoChoisit);
-                        }
-                    }
-                }
-
-            }
-        });
+        listeChoixPanoramique.valueProperty().addListener(new ChangeListenerImpl());
 
     }
 
@@ -1632,7 +1609,6 @@ public class EditeurPanovisu extends Application {
         primaryStage.show();
         popUp.affichePopup();
         ToolTipManager ttManager;
-        ttManager = null;
         ttManager = ToolTipManager.sharedInstance();
         ttManager.setInitialDelay(10);
         ttManager.setReshowDelay(10);
@@ -1705,5 +1681,34 @@ public class EditeurPanovisu extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+    }
+
+    private class ChangeListenerImpl implements ChangeListener<String> {
+
+        public ChangeListenerImpl() {
+        }
+
+        @Override
+        public void changed(ObservableValue ov, String ancienneValeur, String nouvelleValeur) {
+            System.out.println("nouvelle valeur" + nouvelleValeur);
+            if (nouvelleValeur != null) {
+                if (panoCharge) {
+                    panoCharge = false;
+                    panoAffiche = nouvelleValeur;
+                } else {
+                    if (!(nouvelleValeur.equals(panoAffiche))) {
+                        clickBtnValidePano();
+                        valideHS();
+                        
+                        panoAffiche = nouvelleValeur;
+                        int numPanoChoisit = listeChoixPanoramique.getSelectionModel().getSelectedIndex();
+                        System.out.println("nb : " + nombrePanoramiques + " =>Pano " + panoAffiche + "index : " + numPanoChoisit + " fichier :"
+                                + panoramiquesProjet[numPanoChoisit].getNomFichier());
+                        affichePanoChoisit(numPanoChoisit);
+                    }
+                }
+            }
+            
+        }
     }
 }
