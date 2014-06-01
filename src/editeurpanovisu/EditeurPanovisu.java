@@ -28,7 +28,6 @@ import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Side;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
@@ -68,7 +67,10 @@ import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuBar;
 import javafx.scene.control.Separator;
+import javafx.scene.control.SeparatorMenuItem;
+import javafx.scene.input.KeyCombination;
 
 /**
  *
@@ -114,42 +116,27 @@ public class EditeurPanovisu extends Application {
     static private String txtRepertConfig;
     static private Button valideChargeDerniersFichiers;
 
-    @FXML
     static private Menu derniersProjets;
-    @FXML
     private Menu menuPanoramique;
 
-    @FXML
     private MenuItem aPropos;
-    @FXML
+    private MenuItem aide;
     private ImageView imgNouveauProjet;
-    @FXML
     private ImageView imgSauveProjet;
-    @FXML
     private ImageView imgChargeProjet;
-    @FXML
     private ImageView imgVisiteGenere;
-    @FXML
     private ImageView imgAjouterPano;
 
-    @FXML
     private MenuItem nouveauProjet;
-    @FXML
     private MenuItem sauveProjet;
-    @FXML
     private MenuItem ajouterPano;
 
-    @FXML
     private MenuItem fermerProjet;
 
-    @FXML
     private MenuItem sauveSousProjet;
-    @FXML
     private MenuItem visiteGenere;
-    @FXML
     private MenuItem chargeProjet;
 
-    @FXML
     private void genereVisite() throws IOException {
         System.out.println("Génère la visite");
         if (!repertSauveChoisi) {
@@ -311,7 +298,6 @@ public class EditeurPanovisu extends Application {
      *
      * @param event
      */
-    @FXML
     private void panoramiquesAjouter() {
         FileChooser fileChooser = new FileChooser();
 
@@ -347,7 +333,6 @@ public class EditeurPanovisu extends Application {
     /**
      *
      */
-    @FXML
     private void clickBtnValidePano() {
         TextArea txtTitrePano = (TextArea) scene.lookup("#txttitrepano");
         CheckBox chkAfficheInfo = (CheckBox) scene.lookup("#chkafficheinfo");
@@ -369,7 +354,6 @@ public class EditeurPanovisu extends Application {
     /**
      *
      */
-    @FXML
     private void projetCharge() throws IOException {
         if (!repertSauveChoisi) {
             repertoireProjet = currentDir;
@@ -463,7 +447,6 @@ public class EditeurPanovisu extends Application {
      *
      * @throws IOException
      */
-    @FXML
     private void projetSauve() throws IOException {
         if (!repertSauveChoisi) {
             repertoireProjet = currentDir;
@@ -522,7 +505,6 @@ public class EditeurPanovisu extends Application {
      *
      * @throws IOException
      */
-    @FXML
     private void projetSauveSous() throws IOException {
         if (!repertSauveChoisi) {
             repertoireProjet = currentDir;
@@ -577,7 +559,6 @@ public class EditeurPanovisu extends Application {
     /**
      *
      */
-    @FXML
     private void aideAPropos() {
         try {
             popUp.affichePopup();
@@ -589,7 +570,6 @@ public class EditeurPanovisu extends Application {
     /**
      *
      */
-    @FXML
     private void projetsFermer() {
         Action reponse = null;
         Localization.setLocale(new Locale("fr", "FR"));
@@ -620,7 +600,6 @@ public class EditeurPanovisu extends Application {
     /**
      *
      */
-    @FXML
     private void projetsNouveau() {
         Action reponse = null;
         Localization.setLocale(new Locale("fr", "FR"));
@@ -1380,7 +1359,156 @@ public class EditeurPanovisu extends Application {
      * @throws Exception
      */
     private void creeMenu(Stage primaryStage, VBox racine, int taille) throws Exception {
-        Pane myPane = (Pane) FXMLLoader.load(getClass().getResource("menuPrincipal.fxml"));
+        //Pane myPane = (Pane) FXMLLoader.load(getClass().getResource("menuPrincipal.fxml"));
+        VBox myPane = new VBox();
+        myPane.setPrefHeight(80);
+        myPane.setPrefWidth(3000);
+        MenuBar menuPrincipal = new MenuBar();
+        menuPrincipal.setMinHeight(21);
+        menuPrincipal.setPrefHeight(29);
+        menuPrincipal.setPrefWidth(3000);
+        /*
+         Menu projets
+         */
+        Menu menuProjet = new Menu("Projets");
+        menuPrincipal.getMenus().add(menuProjet);
+        nouveauProjet = new MenuItem("Nouveau Projet");
+        nouveauProjet.setAccelerator(KeyCombination.keyCombination("Ctrl+N"));
+        menuProjet.getItems().add(nouveauProjet);
+        chargeProjet = new MenuItem("Ouvrir un Projet");
+        chargeProjet.setAccelerator(KeyCombination.keyCombination("Ctrl+O"));
+        menuProjet.getItems().add(chargeProjet);
+        sauveProjet = new MenuItem("Enregistrer le Projet");
+        sauveProjet.setDisable(true);
+        sauveProjet.setAccelerator(KeyCombination.keyCombination("Ctrl+S"));
+        menuProjet.getItems().add(sauveProjet);
+        sauveSousProjet = new MenuItem("Enregistrer le Projet Sous");
+        sauveSousProjet.setDisable(true);
+        sauveSousProjet.setAccelerator(KeyCombination.keyCombination("Shift+Ctrl+S"));
+        menuProjet.getItems().add(sauveSousProjet);
+        SeparatorMenuItem sep1 = new SeparatorMenuItem();
+        menuProjet.getItems().add(sep1);
+        visiteGenere = new MenuItem("Générer la visite");
+        visiteGenere.setDisable(true);
+        visiteGenere.setAccelerator(KeyCombination.keyCombination("Ctrl+V"));
+        menuProjet.getItems().add(visiteGenere);
+        SeparatorMenuItem sep2 = new SeparatorMenuItem();
+        menuProjet.getItems().add(sep2);
+        fermerProjet = new MenuItem("Quitter l'application");
+        fermerProjet.setAccelerator(KeyCombination.keyCombination("Ctrl+Q"));
+        menuProjet.getItems().add(fermerProjet);
+        /*
+         Menu panoramiques
+         */
+        menuPanoramique = new Menu("Panoramiques");
+        menuPanoramique.setDisable(true);
+        menuPrincipal.getMenus().add(menuPanoramique);
+        ajouterPano = new MenuItem("Ajouter un panoramique ...");
+        ajouterPano.setAccelerator(KeyCombination.keyCombination("Ctrl+A"));
+        menuPanoramique.getItems().add(ajouterPano);
+        /*
+         Menu Aide
+         */
+        Menu menuAide = new Menu("Aide");
+        menuPrincipal.getMenus().add(menuAide);
+        aide = new MenuItem("Aide");
+        aide.setAccelerator(KeyCombination.keyCombination("Ctrl+H"));
+        menuAide.getItems().add(aide);
+        SeparatorMenuItem sep3 = new SeparatorMenuItem();
+        menuAide.getItems().add(sep3);
+        aPropos = new MenuItem("A Propos ...");
+        menuAide.getItems().add(aPropos);
+        /*
+         barre de boutons 
+         */
+        String couleurBouton = "-fx-background-color:#f7f7f7;";
+        HBox barreBouton = new HBox();
+        barreBouton.setPrefHeight(50);
+        barreBouton.setPrefWidth(3000);
+        /*
+         Bouton nouveau Projet
+         */
+        ScrollPane SPBtnNouvprojet = new ScrollPane();
+        SPBtnNouvprojet.setStyle(couleurBouton);
+        SPBtnNouvprojet.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        SPBtnNouvprojet.setPrefHeight(35);
+        SPBtnNouvprojet.setPrefWidth(35);
+
+        HBox.setMargin(SPBtnNouvprojet, new Insets(5, 15, 0, 15));
+        imgNouveauProjet = new ImageView(new Image("file:" + repertAppli + File.separator + "images/nouveauProjet.png"));
+        SPBtnNouvprojet.setContent(imgNouveauProjet);
+        SPBtnNouvprojet.setTooltip(new Tooltip("Crée un nouveau projet"));
+        barreBouton.getChildren().add(SPBtnNouvprojet);
+        /*
+         Bouton ouvrir Projet
+         */
+        ScrollPane SPBtnOuvrirProjet = new ScrollPane();
+        SPBtnOuvrirProjet.setStyle(couleurBouton);
+        SPBtnOuvrirProjet.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        SPBtnOuvrirProjet.setPrefHeight(35);
+        SPBtnOuvrirProjet.setPrefWidth(35);
+
+        HBox.setMargin(SPBtnOuvrirProjet, new Insets(5, 15, 0, 0));
+        imgChargeProjet = new ImageView(new Image("file:" + repertAppli + File.separator + "images/ouvrirProjet.png"));
+        SPBtnOuvrirProjet.setContent(imgChargeProjet);
+        SPBtnOuvrirProjet.setTooltip(new Tooltip("Ouvrir un projet"));
+        barreBouton.getChildren().add(SPBtnOuvrirProjet);
+
+        /*
+         Bouton sauve Projet
+         */
+        ScrollPane SPBtnSauveProjet = new ScrollPane();
+        SPBtnSauveProjet.setStyle(couleurBouton);
+        SPBtnSauveProjet.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        SPBtnSauveProjet.setPrefHeight(35);
+        SPBtnSauveProjet.setPrefWidth(35);
+
+        HBox.setMargin(SPBtnSauveProjet, new Insets(5, 15, 0, 0));
+        imgSauveProjet = new ImageView(new Image("file:" + repertAppli + File.separator + "images/sauveProjet.png"));
+        SPBtnSauveProjet.setContent(imgSauveProjet);
+        SPBtnSauveProjet.setTooltip(new Tooltip("Sauve le projet"));
+        barreBouton.getChildren().add(SPBtnSauveProjet);
+        Separator sepImages = new Separator(Orientation.VERTICAL);
+        sepImages.prefHeight(200);
+        barreBouton.getChildren().add(sepImages);
+        imgSauveProjet.setDisable(true);
+        imgSauveProjet.setOpacity(0.3);
+        /*
+         Bouton Ajoute Panoramique
+         */
+        ScrollPane SPBtnAjoutePano = new ScrollPane();
+        SPBtnAjoutePano.setStyle(couleurBouton);
+        SPBtnAjoutePano.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        SPBtnAjoutePano.setPrefHeight(35);
+        SPBtnAjoutePano.setPrefWidth(35);
+
+        HBox.setMargin(SPBtnAjoutePano, new Insets(5, 15, 0, 0));
+        imgAjouterPano = new ImageView(new Image("file:" + repertAppli + File.separator + "images/ajoutePanoramique.png"));
+        SPBtnAjoutePano.setContent(imgAjouterPano);
+        SPBtnAjoutePano.setTooltip(new Tooltip("Ajout de panoramiques"));
+        barreBouton.getChildren().add(SPBtnAjoutePano);
+        imgAjouterPano.setDisable(true);
+        imgAjouterPano.setOpacity(0.3);
+
+
+        /*
+         Bouton Génère
+         */
+        ScrollPane SPBtnGenereVisite = new ScrollPane();
+        SPBtnGenereVisite.setStyle(couleurBouton);
+        SPBtnGenereVisite.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        SPBtnGenereVisite.setPrefHeight(35);
+        SPBtnGenereVisite.setPrefWidth(70);
+
+        HBox.setMargin(SPBtnGenereVisite, new Insets(5, 15, 0, 0));
+        imgVisiteGenere = new ImageView(new Image("file:" + repertAppli + File.separator + "images/genereVisite.png"));
+        SPBtnGenereVisite.setContent(imgVisiteGenere);
+        SPBtnGenereVisite.setTooltip(new Tooltip("Générer la visite"));
+        barreBouton.getChildren().add(SPBtnGenereVisite);
+        imgVisiteGenere.setDisable(true);
+        imgVisiteGenere.setOpacity(0.3);
+
+        myPane.getChildren().addAll(menuPrincipal, barreBouton);
         racine.getChildren().add(myPane);
         File repertConfig = new File(repertAppli + File.separator + "configPV");
         txtRepertConfig = repertConfig.getAbsolutePath();
@@ -1389,6 +1517,74 @@ public class EditeurPanovisu extends Application {
         } else {
             lisFichierConfig();
         }
+        nouveauProjet.setOnAction((ActionEvent e) -> {
+            projetsNouveau();
+        });
+        chargeProjet.setOnAction((ActionEvent e) -> {
+            try {
+                projetCharge();
+            } catch (IOException ex) {
+                Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        sauveProjet.setOnAction((ActionEvent e) -> {
+            try {
+                projetSauve();
+            } catch (IOException ex) {
+                Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        sauveSousProjet.setOnAction((ActionEvent e) -> {
+            try {
+                projetSauveSous();
+            } catch (IOException ex) {
+                Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        visiteGenere.setOnAction((ActionEvent e) -> {
+            try {
+                genereVisite();
+            } catch (IOException ex) {
+                Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        fermerProjet.setOnAction((ActionEvent e) -> {
+            projetsFermer();
+        });
+        ajouterPano.setOnAction((ActionEvent e) -> {
+            panoramiquesAjouter();
+        });
+        aPropos.setOnAction((ActionEvent e) -> {
+            aideAPropos();
+        });
+
+        imgNouveauProjet.setOnMouseClicked((MouseEvent t) -> {
+            projetsNouveau();
+        });
+        imgChargeProjet.setOnMouseClicked((MouseEvent t) -> {
+            try {
+                projetCharge();
+            } catch (IOException ex) {
+                Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        imgSauveProjet.setOnMouseClicked((MouseEvent t) -> {
+            try {
+                projetSauve();
+            } catch (IOException ex) {
+                Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        imgAjouterPano.setOnMouseClicked((MouseEvent t) -> {
+            panoramiquesAjouter();
+        });
+        imgVisiteGenere.setOnMouseClicked((MouseEvent t) -> {
+            try {
+                genereVisite();
+            } catch (IOException ex) {
+                Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
 
     }
 
@@ -1622,6 +1818,8 @@ public class EditeurPanovisu extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
+        File rep = new File("");
+        repertAppli = rep.getAbsolutePath();
         stPrincipal = primaryStage;
         setUserAgentStylesheet(STYLESHEET_MODENA);
         primaryStage.setMaximized(true);
@@ -1630,8 +1828,6 @@ public class EditeurPanovisu extends Application {
         int largeur = (int) tailleEcran.getWidth() - 20;
         largeurMax = tailleEcran.getWidth() - 320.0d;
         creeEnvironnement(primaryStage, largeur, hauteur);
-        File rep = new File("");
-        repertAppli = rep.getAbsolutePath();
 
         File repertTempFile = new File(repertAppli + File.separator + "temp");
         repertTemp = repertTempFile.getAbsolutePath();
