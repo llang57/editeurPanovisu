@@ -5,19 +5,23 @@
  */
 package editeurpanovisu;
 
+import impl.org.controlsfx.i18n.Localization;
 import java.awt.Dimension;
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
@@ -27,6 +31,9 @@ import static javafx.application.Application.setUserAgentStylesheet;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.geometry.Side;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
@@ -35,16 +42,21 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Separator;
+import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -59,17 +71,6 @@ import javax.swing.ToolTipManager;
 import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialog;
 import org.controlsfx.dialog.Dialogs;
-import impl.org.controlsfx.i18n.Localization;
-import java.util.Arrays;
-import java.util.Locale;
-import javafx.event.ActionEvent;
-import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
-import javafx.scene.control.ListView;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.Separator;
-import javafx.scene.control.SeparatorMenuItem;
-import javafx.scene.input.KeyCombination;
 
 /**
  *
@@ -306,27 +307,31 @@ public class EditeurPanovisu extends Application {
         fileChooser.setInitialDirectory(repert);
         fileChooser.getExtensionFilters().add(extFilter);
 
-        file = fileChooser.showOpenDialog(null);
-        if (file != null) {
-            dejaSauve = false;
-            sauveProjet.setDisable(false);
-            currentDir = file.getParent();
-            File imageRepert = new File(repertTemp + File.separator + "panos");
+        List<File> list = fileChooser.showOpenMultipleDialog(null);
+        if (list != null) {
+            for (File file : list) {
+                dejaSauve = false;
+                sauveProjet.setDisable(false);
+                currentDir = file.getParent();
+                File imageRepert = new File(repertTemp + File.separator + "panos");
 
-            if (!imageRepert.exists()) {
-                imageRepert.mkdirs();
+                if (!imageRepert.exists()) {
+                    imageRepert.mkdirs();
+                }
+                repertPanos = imageRepert.getAbsolutePath();
+                try {
+                    copieFichierRepertoire(file.getPath(), repertPanos);
+                } catch (IOException ex) {
+                    Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                affichePano(file.getPath());
             }
-            repertPanos = imageRepert.getAbsolutePath();
-            try {
-                copieFichierRepertoire(file.getPath(), repertPanos);
-            } catch (IOException ex) {
-                Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            affichePano(file.getPath());
             installeEvenements();
             imgVisiteGenere.setOpacity(1.0);
             imgVisiteGenere.setDisable(false);
+
         }
+
     }
 
     /**
@@ -866,7 +871,7 @@ public class EditeurPanovisu extends Application {
      */
     static private void copieFichierRepertoire(String fichier, String repertoire) throws FileNotFoundException, IOException {
         String fichier1 = fichier.substring(fichier.lastIndexOf(File.separator) + 1);
-        InputStream in = new FileInputStream(fichier);;
+        InputStream in = new FileInputStream(fichier);
         OutputStream out = new BufferedOutputStream(new FileOutputStream(repertoire + File.separator + fichier1));
         byte[] buf = new byte[256 * 1024];
         int n;
@@ -1201,6 +1206,34 @@ public class EditeurPanovisu extends Application {
         listeChoixPanoramique.valueProperty().addListener(new ChangeListenerImpl());
 
     }
+    private class ChangeListenerImpl implements ChangeListener<String> {
+
+        public ChangeListenerImpl() {
+        }
+
+        @Override
+        public void changed(ObservableValue ov, String ancienneValeur, String nouvelleValeur) {
+            System.out.println("nouvelle valeur" + nouvelleValeur);
+            if (nouvelleValeur != null) {
+                if (panoCharge) {
+                    panoCharge = false;
+                    panoAffiche = nouvelleValeur;
+                } else {
+                    if (!(nouvelleValeur.equals(panoAffiche))) {
+                        clickBtnValidePano();
+                        valideHS();
+
+                        panoAffiche = nouvelleValeur;
+                        int numPanoChoisit = listeChoixPanoramique.getSelectionModel().getSelectedIndex();
+                        System.out.println("nb : " + nombrePanoramiques + " =>Pano " + panoAffiche + "index : " + numPanoChoisit + " fichier :"
+                                + panoramiquesProjet[numPanoChoisit].getNomFichier());
+                        affichePanoChoisit(numPanoChoisit);
+                    }
+                }
+            }
+
+        }
+    }
 
     private void ajouteAffichageLignes() {
         double largeur = imagePanoramique.getFitWidth();
@@ -1229,7 +1262,7 @@ public class EditeurPanovisu extends Application {
             pano.getChildren().add(ligne);
         }
         for (int i = -90; i < 90; i += 10) {
-            y = (int) (hauteur / 2.0f + hauteur / 180.0f * (float) i);;
+            y = (int) (hauteur / 2.0f + hauteur / 180.0f * (float) i);
             ligne = new Line(0, y, largeur, y);
             ligne.setId("ligne" + nl);
             nl++;
@@ -1491,7 +1524,7 @@ public class EditeurPanovisu extends Application {
 
 
         /*
-         Bouton Génère la visite
+         Bouton Génère
          */
         ScrollPane SPBtnGenereVisite = new ScrollPane();
         SPBtnGenereVisite.setStyle(couleurBouton);
@@ -1506,9 +1539,7 @@ public class EditeurPanovisu extends Application {
         barreBouton.getChildren().add(SPBtnGenereVisite);
         imgVisiteGenere.setDisable(true);
         imgVisiteGenere.setOpacity(0.3);
-        /*
-         ajoute les barres menu + boutons
-         */
+
         myPane.getChildren().addAll(menuPrincipal, barreBouton);
         racine.getChildren().add(myPane);
         File repertConfig = new File(repertAppli + File.separator + "configPV");
@@ -1518,9 +1549,6 @@ public class EditeurPanovisu extends Application {
         } else {
             lisFichierConfig();
         }
-        /*
-                Gestion des évènement des menus + boutons images
-        */
         nouveauProjet.setOnAction((ActionEvent e) -> {
             projetsNouveau();
         });
@@ -1883,32 +1911,4 @@ public class EditeurPanovisu extends Application {
         launch(args);
     }
 
-    private class ChangeListenerImpl implements ChangeListener<String> {
-
-        public ChangeListenerImpl() {
-        }
-
-        @Override
-        public void changed(ObservableValue ov, String ancienneValeur, String nouvelleValeur) {
-            System.out.println("nouvelle valeur" + nouvelleValeur);
-            if (nouvelleValeur != null) {
-                if (panoCharge) {
-                    panoCharge = false;
-                    panoAffiche = nouvelleValeur;
-                } else {
-                    if (!(nouvelleValeur.equals(panoAffiche))) {
-                        clickBtnValidePano();
-                        valideHS();
-
-                        panoAffiche = nouvelleValeur;
-                        int numPanoChoisit = listeChoixPanoramique.getSelectionModel().getSelectedIndex();
-                        System.out.println("nb : " + nombrePanoramiques + " =>Pano " + panoAffiche + "index : " + numPanoChoisit + " fichier :"
-                                + panoramiquesProjet[numPanoChoisit].getNomFichier());
-                        affichePanoChoisit(numPanoChoisit);
-                    }
-                }
-            }
-
-        }
-    }
 }
