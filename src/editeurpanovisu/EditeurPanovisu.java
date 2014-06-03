@@ -27,7 +27,6 @@ import static javafx.application.Application.setUserAgentStylesheet;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.fxml.FXML;
 import javafx.geometry.Side;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
@@ -1492,7 +1491,7 @@ public class EditeurPanovisu extends Application {
 
 
         /*
-         Bouton Génère
+         Bouton Génère la visite
          */
         ScrollPane SPBtnGenereVisite = new ScrollPane();
         SPBtnGenereVisite.setStyle(couleurBouton);
@@ -1507,7 +1506,9 @@ public class EditeurPanovisu extends Application {
         barreBouton.getChildren().add(SPBtnGenereVisite);
         imgVisiteGenere.setDisable(true);
         imgVisiteGenere.setOpacity(0.3);
-
+        /*
+         ajoute les barres menu + boutons
+         */
         myPane.getChildren().addAll(menuPrincipal, barreBouton);
         racine.getChildren().add(myPane);
         File repertConfig = new File(repertAppli + File.separator + "configPV");
@@ -1517,6 +1518,9 @@ public class EditeurPanovisu extends Application {
         } else {
             lisFichierConfig();
         }
+        /*
+                Gestion des évènement des menus + boutons images
+        */
         nouveauProjet.setOnAction((ActionEvent e) -> {
             projetsNouveau();
         });
@@ -1678,10 +1682,10 @@ public class EditeurPanovisu extends Application {
         listeChoixPanoramique.setVisibleRowCount(10);
         paneChoixPanoramique.getChildren().addAll(lblChoixPanoramique, listeChoixPanoramique);
         /*
-            à modifier pour afficher le panneau des derniers fichiers;        
-        */
+         à modifier pour afficher le panneau des derniers fichiers;        
+         */
         //outils.getChildren().addAll(lastFiles, paneChoixPanoramique);
-        
+
         outils.getChildren().addAll(paneChoixPanoramique);
 
         paneChoixPanoramique.setVisible(false);
@@ -1895,7 +1899,7 @@ public class EditeurPanovisu extends Application {
                     if (!(nouvelleValeur.equals(panoAffiche))) {
                         clickBtnValidePano();
                         valideHS();
-                        
+
                         panoAffiche = nouvelleValeur;
                         int numPanoChoisit = listeChoixPanoramique.getSelectionModel().getSelectedIndex();
                         System.out.println("nb : " + nombrePanoramiques + " =>Pano " + panoAffiche + "index : " + numPanoChoisit + " fichier :"
@@ -1904,7 +1908,7 @@ public class EditeurPanovisu extends Application {
                     }
                 }
             }
-            
+
         }
     }
 }
