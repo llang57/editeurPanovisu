@@ -65,6 +65,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javax.swing.ToolTipManager;
@@ -118,6 +119,9 @@ public class EditeurPanovisu extends Application {
 
     static private Menu derniersProjets;
     private Menu menuPanoramique;
+    private Menu menuTransformation;
+    private MenuItem cube2EquiTransformation;
+    private MenuItem equi2CubeTransformation;
 
     private MenuItem aPropos;
     private MenuItem aide;
@@ -126,6 +130,8 @@ public class EditeurPanovisu extends Application {
     private ImageView imgChargeProjet;
     private ImageView imgVisiteGenere;
     private ImageView imgAjouterPano;
+    private ImageView imgCube2Equi;
+    private ImageView imgEqui2Cube;
 
     private MenuItem nouveauProjet;
     private MenuItem sauveProjet;
@@ -1206,6 +1212,7 @@ public class EditeurPanovisu extends Application {
         listeChoixPanoramique.valueProperty().addListener(new ChangeListenerImpl());
 
     }
+
     private class ChangeListenerImpl implements ChangeListener<String> {
 
         public ChangeListenerImpl() {
@@ -1375,6 +1382,29 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * 
+     */
+    private void transformationCube2Equi(){
+        Cube2EquiDialogController C2EController=new Cube2EquiDialogController();
+        try {
+            C2EController.afficheCube2Equi();
+        } catch (Exception ex) {
+            Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+    }
+    /**
+     * 
+     */
+    private void transformationEqui2Cube(){
+        Equi2CubeDialogController E2CController=new Equi2CubeDialogController();
+        try {
+            E2CController.afficheEqui2Cube();
+        } catch (Exception ex) {
+            Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    /**
      *
      * @param primaryStage
      * @throws Exception
@@ -1438,6 +1468,17 @@ public class EditeurPanovisu extends Application {
         ajouterPano = new MenuItem("Ajouter un panoramique ...");
         ajouterPano.setAccelerator(KeyCombination.keyCombination("Ctrl+A"));
         menuPanoramique.getItems().add(ajouterPano);
+        /*
+         Menu transformations 
+         */
+        menuTransformation = new Menu("Transformations");
+        menuPrincipal.getMenus().add(menuTransformation);
+
+        cube2EquiTransformation = new MenuItem("Faces de Cube -> Equi");
+        menuTransformation.getItems().add(cube2EquiTransformation);
+        equi2CubeTransformation = new MenuItem("Equi -> Faces de Cube");
+        menuTransformation.getItems().add(equi2CubeTransformation);
+
         /*
          Menu Aide
          */
@@ -1514,7 +1555,7 @@ public class EditeurPanovisu extends Application {
         SPBtnAjoutePano.setPrefHeight(35);
         SPBtnAjoutePano.setPrefWidth(35);
 
-        HBox.setMargin(SPBtnAjoutePano, new Insets(5, 15, 0, 0));
+        HBox.setMargin(SPBtnAjoutePano, new Insets(5, 15, 0, 15));
         imgAjouterPano = new ImageView(new Image("file:" + repertAppli + File.separator + "images/ajoutePanoramique.png"));
         SPBtnAjoutePano.setContent(imgAjouterPano);
         SPBtnAjoutePano.setTooltip(new Tooltip("Ajout de panoramiques"));
@@ -1539,6 +1580,38 @@ public class EditeurPanovisu extends Application {
         barreBouton.getChildren().add(SPBtnGenereVisite);
         imgVisiteGenere.setDisable(true);
         imgVisiteGenere.setOpacity(0.3);
+        Separator sepImages1 = new Separator(Orientation.VERTICAL);
+        sepImages1.prefHeight(200);
+        barreBouton.getChildren().add(sepImages1);
+
+        /*
+         Bouton faces de cube -> equi
+         */
+        ScrollPane SPBtnCube2Equi = new ScrollPane();
+        SPBtnCube2Equi.setStyle(couleurBouton);
+        SPBtnCube2Equi.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        SPBtnCube2Equi.setPrefHeight(35);
+        SPBtnCube2Equi.setPrefWidth(109);
+
+        HBox.setMargin(SPBtnCube2Equi, new Insets(5, 25, 0, 250));
+        imgCube2Equi = new ImageView(new Image("file:" + repertAppli + File.separator + "images/cube2equi.png"));
+        SPBtnCube2Equi.setContent(imgCube2Equi);
+        SPBtnCube2Equi.setTooltip(new Tooltip("Faces de cube ==> Equirectangulaire"));
+        barreBouton.getChildren().add(SPBtnCube2Equi);
+        /*
+         Bouton equi -> faces de  Cube
+         */
+        ScrollPane SPBtnEqui2Cube = new ScrollPane();
+        SPBtnEqui2Cube.setStyle(couleurBouton);
+        SPBtnEqui2Cube.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        SPBtnEqui2Cube.setPrefHeight(35);
+        SPBtnEqui2Cube.setPrefWidth(109);
+
+        HBox.setMargin(SPBtnEqui2Cube, new Insets(5, 15, 0, 0));
+        imgEqui2Cube = new ImageView(new Image("file:" + repertAppli + File.separator + "images/equi2cube.png"));
+        SPBtnEqui2Cube.setContent(imgEqui2Cube);
+        SPBtnEqui2Cube.setTooltip(new Tooltip("Equirectangulaire ==> Faces de cube"));
+        barreBouton.getChildren().add(SPBtnEqui2Cube);
 
         myPane.getChildren().addAll(menuPrincipal, barreBouton);
         racine.getChildren().add(myPane);
@@ -1590,6 +1663,14 @@ public class EditeurPanovisu extends Application {
             aideAPropos();
         });
 
+        equi2CubeTransformation.setOnAction((ActionEvent e) -> {
+            transformationEqui2Cube();
+        });
+
+       cube2EquiTransformation.setOnAction((ActionEvent e) -> {
+            transformationCube2Equi();
+        });
+
         imgNouveauProjet.setOnMouseClicked((MouseEvent t) -> {
             projetsNouveau();
         });
@@ -1616,6 +1697,12 @@ public class EditeurPanovisu extends Application {
             } catch (IOException ex) {
                 Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
             }
+        });
+        imgEqui2Cube.setOnMouseClicked((MouseEvent t) -> {
+            transformationEqui2Cube();
+        });
+        imgCube2Equi.setOnMouseClicked((MouseEvent t) -> {
+            transformationCube2Equi();
         });
 
     }
