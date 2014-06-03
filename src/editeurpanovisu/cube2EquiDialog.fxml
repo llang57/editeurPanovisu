@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="editeurpanovisu.Cube2EquiDialogController">
+   <children>
+      <VBox prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <Pane prefHeight="355.0" prefWidth="600.0">
+               <children>
+                  <HBox prefHeight="355.0" prefWidth="600.0">
+                     <children>
+                        <Pane prefHeight="355.0" prefWidth="423.0" style="-fx-background-color: #ccc; -fx-border-color: #bbb;">
+                           <children>
+                              <ListView editable="true" layoutX="14.0" layoutY="14.0" prefHeight="290.0" prefWidth="383.0" />
+                              <Button layoutX="279.0" layoutY="316.0" mnemonicParsing="false" text="Ajouter des fichiers" />
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ccc; -fx-border-color: #bbb;">
+                           <children>
+                              <Label layoutX="14.0" layoutY="14.0" text="Type des fichier de sortie" />
+                              <RadioButton layoutX="43.0" layoutY="71.0" mnemonicParsing="false" text="BMP (.bmp)" />
+                              <RadioButton layoutX="43.0" layoutY="43.0" mnemonicParsing="false" selected="true" text="JPEG (.jpg)" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+               </children>
+            </Pane>
+            <Pane prefHeight="45.0" prefWidth="600.0" style="-fx-background-color: #ccc;">
+               <children>
+                  <Button layoutX="533.0" layoutY="10.0" mnemonicParsing="false" text="Valider" />
+                  <Button fx:id="btnAnnuler" layoutX="466.0" layoutY="10.0" mnemonicParsing="false" onAction="#annulerC2E" text="Annuler" />
+               </children>
+            </Pane>
+         </children>
+      </VBox>
+   </children>
+    
+</AnchorPane>

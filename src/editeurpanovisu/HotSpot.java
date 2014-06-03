@@ -5,9 +5,6 @@
  */
 package editeurpanovisu;
 
-import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
-
 /**
  *
  * @author LANG Laurent
