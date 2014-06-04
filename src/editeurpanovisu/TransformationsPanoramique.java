@@ -380,7 +380,7 @@ public class TransformationsPanoramique {
         return cube;
     }
 
-    public static Image cube2rect(StackPane root, Image front, Image left, Image right, Image behind, Image top, Image bottom) {
+    public static Image cube2rect(Image front, Image left, Image right, Image behind, Image top, Image bottom) {
         PixelReader PRFront = front.getPixelReader();
         PixelReader PRLeft = left.getPixelReader();
         PixelReader PRRight = right.getPixelReader();
@@ -495,6 +495,7 @@ public class TransformationsPanoramique {
                                     dst = 0.001d;
                                 }
                                 coeff += 1.d / dst;
+//                                System.out.println("pixX "+pixX+" pixY "+pixY);
                                 Color col = PRBehind.getColor(pixX, pixY);
                                 red += col.getRed() / dst;
                                 green += col.getGreen() / dst;
