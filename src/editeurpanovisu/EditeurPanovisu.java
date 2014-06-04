@@ -116,6 +116,7 @@ public class EditeurPanovisu extends Application {
     static private File fichHistoFichiers;
     static private String txtRepertConfig;
     static private Button valideChargeDerniersFichiers;
+    static private GestionnaireInterfaceController gestionnaireInterface=new GestionnaireInterfaceController();
 
     static private Menu derniersProjets;
     private Menu menuPanoramique;
@@ -1769,8 +1770,7 @@ public class EditeurPanovisu extends Application {
         barreStatus.setTranslateY(25);
         barreStatus.setStyle("-fx-background-color:#c00;-fx-border-color:#aaa");
         Tab tabVisite = new Tab();
-        tabInterface = new Tab();
-        creeTabInterface();
+        tabInterface = gestionnaireInterface.creeInterface();
         HBox hbEnvironnement = new HBox();
         Pane visualiseur = new Pane();
         TextArea txtTitrePano;
