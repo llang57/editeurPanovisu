@@ -6,6 +6,7 @@
 package editeurpanovisu;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,6 +14,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
@@ -27,6 +29,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.controlsfx.control.action.Action;
+import org.controlsfx.dialog.Dialog;
 import org.controlsfx.dialog.Dialogs;
 
 /**
@@ -37,13 +41,17 @@ import org.controlsfx.dialog.Dialogs;
 public class EquiCubeDialogController {
 
     private static Stage STEqui2Cube;
+    private static AnchorPane myPane;
     private String typeTransformation;
     static private ListView listeFichier;
-
     static private Button btnAnnuler;
     static private Button btnValider;
     static private Button btnAjouteFichiers;
     static private Pane choixTypeFichier;
+    static private boolean traitementEffectue = false;
+    static private RadioButton RBJpeg;
+    static private RadioButton RBBmp;
+    static private CheckBox CBSharpen;
 
     final ToggleGroup grpTypeFichier = new ToggleGroup();
     public final static String EQUI2CUBE = "E2C";
@@ -51,44 +59,125 @@ public class EquiCubeDialogController {
     private File[] lstFichier;
     private static String repertFichier = EditeurPanovisu.repertoireProjet;
 
+    /**
+     *
+     */
     private void annulerE2C() {
         System.out.println("Annuler");
+        Action reponse = null;
 
-        STEqui2Cube.hide();
+        if ((listeFichier.getItems().size() != 0) && (!traitementEffectue)) {
+            reponse = Dialogs.create()
+                    .owner(null)
+                    .title("Transformation d'images")
+                    .masthead("vous n'avez pas traité vos images")
+                    .message("Êtes vous sûr de vouloir quitter?")
+                    .actions(Dialog.Actions.YES, Dialog.Actions.NO)
+                    .showConfirm();
+        }
+        if ((reponse == Dialog.Actions.YES) || (reponse == null)) {
+            STEqui2Cube.hide();
+        }
     }
 
-    private void traiteFichier(String nomFichier) {
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(EquiCubeDialogController.class.getName()).log(Level.SEVERE, null, ex);
+    /**
+     *
+     * @param nomFichier
+     * @param j
+     */
+    private void traiteFichier(String nomFichier, int j) {
+        listeFichier.getItems().remove(j);
+        listeFichier.getItems().add(j, "traité : " + nomFichier);
+        String nomFich1 = nomFichier.substring(0, nomFichier.length() - 4);
+        System.out.println("nomfich1 " + nomFich1);
+
+        if (typeTransformation.equals(EquiCubeDialogController.EQUI2CUBE)) {
+            Image equiImage = new Image("file:" + nomFichier);
+
+            Image[] facesCube = TransformationsPanoramique.equi2cube(equiImage);
+            for (int i = 0; i < 6; i++) {
+                String suffixe = "";
+                switch (i) {
+                    case 0:
+                        suffixe = "_f";
+                        break;
+                    case 1:
+                        suffixe = "_b";
+                        break;
+                    case 2:
+                        suffixe = "_r";
+                        break;
+                    case 3:
+                        suffixe = "_l";
+                        break;
+                    case 4:
+                        suffixe = "_u";
+                        break;
+                    case 5:
+                        suffixe = "_d";
+                        break;
+                }
+                try {
+                    //ReadWriteImage.writeJpeg(facesCube[i], "c:/panoramiques/test/" + txtImage + "_cube" + suffixe + ".jpg", jpegQuality);
+                    boolean sharpen = false;
+                    if (CBSharpen.isSelected()) {
+                        sharpen = true;
+                    }
+
+                    if (RBBmp.isSelected()) {
+                        ReadWriteImage.writeBMP(facesCube[i], nomFich1 + "_cube" + suffixe + ".bmp", sharpen);
+                    }
+                    if (RBJpeg.isSelected()) {
+                        float quality = 1.0f;
+                        ReadWriteImage.writeJpeg(facesCube[i], nomFich1 + "_cube" + suffixe + ".jpg", quality, sharpen);
+                    }
+                } catch (IOException ex) {
+                    Logger.getLogger(EquiCubeDialogController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+
         }
         System.out.println("Traite : " + nomFichier);
     }
 
+    /**
+     *
+     */
     private void validerE2C() {
         if (lstFichier == null) {
             Dialogs.create().title("Editeur PanoVisu")
-                    .masthead("trnsformation de fichiers")
+                    .masthead("transformation de fichiers")
                     .message("Vous n'avez pas choisi de fichiers")
                     .showError();
         } else {
-            final Label lblTermine = new Label("Tâche en cours");
+            Dialogs.create().title("Editeur PanoVisu")
+                    .masthead("transformation de fichiers")
+                    .message("Attention le traitemant que vous allez lancer peut durer plusieurs minutes \n"
+                            + "pendant lesquelle le programme semblera ne plus répondre. "
+                            + "Veuillez patienter jusqu'à la fin du traitement"
+                            + "\n\nMerci")
+                    .showWarning();
+            final Label lblTermine = new Label();
+            lblTermine.setText("Traitement en cours");
             lblTermine.setLayoutX(14);
             lblTermine.setLayoutY(140);
             choixTypeFichier.getChildren().add(lblTermine);
-            new Thread(() -> {
+            for (int i = 0; i < listeFichier.getItems().size(); i++) {
+                final int j = i;
+                final String nomFich = (String) listeFichier.getItems().get(j);
                 Platform.runLater(() -> {
-                    for (int i = 0; i < listeFichier.getItems().size(); i++) {
-                        String nomFich = (String) listeFichier.getItems().get(i);
-                        traiteFichier(nomFich);
-                    }
-                    lblTermine.setText("Tâche terminée");
+                    traiteFichier(nomFich, j);
                 });
-            }).start();
+            }
+            lblTermine.setText("Traitement terminé");
+            traitementEffectue = true;
         }
     }
 
+    /**
+     *
+     */
     public void Equi2CubeDialogController() {
     }
 
@@ -142,9 +231,14 @@ public class EquiCubeDialogController {
         return lstFich;
     }
 
+    /**
+     *
+     * @param typeTransf
+     * @throws Exception
+     */
     public void afficheFenetre(String typeTransf) throws Exception {
         STEqui2Cube = new Stage(StageStyle.UTILITY);
-        AnchorPane myPane = new AnchorPane();
+        myPane = new AnchorPane();
         VBox fenetre = new VBox();
         HBox PChoix = new HBox();
         Pane choixFichier = new Pane();
@@ -152,11 +246,12 @@ public class EquiCubeDialogController {
         btnAjouteFichiers = new Button("Ajouter des Fichiers");
         choixTypeFichier = new Pane();
         Label lblType = new Label("Type des Fichiers de sortie");
-        RadioButton RBJpeg = new RadioButton("JPEG (.jpg)");
-        RadioButton RBBmp = new RadioButton("BMP (.bmp)");
+        RBJpeg = new RadioButton("JPEG (.jpg)");
+        RBBmp = new RadioButton("BMP (.bmp)");
+        CBSharpen = new CheckBox("Masque de netteté");
         Pane Pboutons = new Pane();
         btnAnnuler = new Button("Fermer la fenêtre");
-        btnValider = new Button("Valider");
+        btnValider = new Button("Lancer le traitement");
 
         typeTransformation = typeTransf;
         Image imgTransf;
@@ -168,8 +263,8 @@ public class EquiCubeDialogController {
             imgTransf = new Image("file:" + EditeurPanovisu.repertAppli + File.separator + "images/cube2equi.png");
         }
         ImageView IMType = new ImageView(imgTransf);
-        IMType.setLayoutX(14);
-        IMType.setLayoutY(200);
+        IMType.setLayoutX(35);
+        IMType.setLayoutY(250);
         choixTypeFichier.getChildren().add(IMType);
         STEqui2Cube.initModality(Modality.APPLICATION_MODAL);
         STEqui2Cube.setResizable(false);
@@ -192,9 +287,9 @@ public class EquiCubeDialogController {
         Pboutons.setPrefHeight(45);
         Pboutons.setPrefWidth(600);
         Pboutons.setStyle("-fx-background-color: #d0d0d0;");
-        btnAnnuler.setLayoutX(386);
+        btnAnnuler.setLayoutX(326);
         btnAnnuler.setLayoutY(10);
-        btnValider.setLayoutX(533);
+        btnValider.setLayoutX(463);
         btnValider.setLayoutY(10);
         listeFichier.setPrefHeight(290);
         listeFichier.setPrefWidth(380);
@@ -213,7 +308,9 @@ public class EquiCubeDialogController {
         RBJpeg.setLayoutX(43);
         RBJpeg.setLayoutY(71);
         RBJpeg.setToggleGroup(grpTypeFichier);
-        choixTypeFichier.getChildren().addAll(lblType, RBBmp, RBJpeg);
+        CBSharpen.setLayoutX(43);
+        CBSharpen.setLayoutY(99);
+        choixTypeFichier.getChildren().addAll(lblType, RBBmp, RBJpeg, CBSharpen);
         Pboutons.getChildren().addAll(btnAnnuler, btnValider);
         fenetre.getChildren().addAll(PChoix, Pboutons);
         Scene scene2 = new Scene(myPane);
@@ -223,11 +320,17 @@ public class EquiCubeDialogController {
             annulerE2C();
         });
         btnValider.setOnAction((ActionEvent e) -> {
-            validerE2C();
+            if (!traitementEffectue) {
+                validerE2C();
+            }
         });
         btnAjouteFichiers.setOnAction((ActionEvent e) -> {
             lstFichier = choixFichiers();
             if (lstFichier != null) {
+                if (traitementEffectue) {
+                    listeFichier.getItems().remove(0, listeFichier.getItems().size());
+                    traitementEffectue = false;
+                }
                 System.out.println("nb fich : " + lstFichier.length);
                 for (File lstFichier1 : lstFichier) {
                     String nomFich = lstFichier1.getAbsolutePath();

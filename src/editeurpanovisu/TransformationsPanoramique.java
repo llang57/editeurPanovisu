@@ -22,11 +22,10 @@ public class TransformationsPanoramique {
 
     /**
      *
-     * @param root
      * @param equi
      * @return
      */
-    public static Image[] equi2cube(StackPane root, Image equi) {
+    public static Image[] equi2cube(Image equi) {
         PixelReader PREqui = equi.getPixelReader();
         WritableImage[] cube = new WritableImage[6];
         int tailleEqui = (int) equi.getWidth();
