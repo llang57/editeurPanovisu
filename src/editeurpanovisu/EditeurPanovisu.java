@@ -314,10 +314,10 @@ public class EditeurPanovisu extends Application {
 
         List<File> list = fileChooser.showOpenMultipleDialog(null);
         if (list != null) {
-            for (File file : list) {
+            for (File file1 : list) {
                 dejaSauve = false;
                 sauveProjet.setDisable(false);
-                currentDir = file.getParent();
+                currentDir = file1.getParent();
                 File imageRepert = new File(repertTemp + File.separator + "panos");
 
                 if (!imageRepert.exists()) {
@@ -325,11 +325,11 @@ public class EditeurPanovisu extends Application {
                 }
                 repertPanos = imageRepert.getAbsolutePath();
                 try {
-                    copieFichierRepertoire(file.getPath(), repertPanos);
+                    copieFichierRepertoire(file1.getPath(), repertPanos);
                 } catch (IOException ex) {
                     Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                affichePano(file.getPath());
+                affichePano(file1.getPath());
             }
             installeEvenements();
             imgVisiteGenere.setOpacity(1.0);
@@ -1721,7 +1721,7 @@ public class EditeurPanovisu extends Application {
         VBox root = new VBox();
         creeMenu(primaryStage, root, width);
         TabPane tabPaneEnvironnement = new TabPane();
-        tabPaneEnvironnement.setTranslateZ(5);
+//        tabPaneEnvironnement.setTranslateZ(5);
         tabPaneEnvironnement.setMinHeight(height - 140);
         tabPaneEnvironnement.setMaxHeight(height - 140);
         ScrollPane lastFiles = new ScrollPane();
@@ -1761,7 +1761,7 @@ public class EditeurPanovisu extends Application {
         Pane barreStatus = new Pane();
         barreStatus.setPrefSize(width + 20, 30);
         barreStatus.setTranslateY(25);
-        barreStatus.setStyle("-fx-background-color:#ccc;-fx-border-color:#aaa");
+        barreStatus.setStyle("-fx-background-color:#c00;-fx-border-color:#aaa");
         Tab tabVisite = new Tab();
         Tab tabInterface = new Tab();
         HBox hbEnvironnement = new HBox();
