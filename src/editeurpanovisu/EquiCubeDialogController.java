@@ -88,10 +88,10 @@ public class EquiCubeDialogController {
     private void traiteFichier(String nomFichier, int j) {
         listeFichier.getItems().remove(j);
         listeFichier.getItems().add(j, "traité : " + nomFichier);
-        String nomFich1 = nomFichier.substring(0, nomFichier.length() - 4);
-        System.out.println("nomfich1 " + nomFich1);
 
         if (typeTransformation.equals(EquiCubeDialogController.EQUI2CUBE)) {
+            String nomFich1 = nomFichier.substring(0, nomFichier.length() - 4);
+            System.out.println("nomfich1 " + nomFich1);
             Image equiImage = new Image("file:" + nomFichier);
 
             Image[] facesCube = TransformationsPanoramique.equi2cube(equiImage);
@@ -138,6 +138,55 @@ public class EquiCubeDialogController {
             }
 
         }
+        if (typeTransformation.equals(EquiCubeDialogController.CUBE2QUI)) {
+            String nom = nomFichier.substring(0, nomFichier.length() - 6);
+            String extension = nomFichier.substring(nomFichier.length() - 3, nomFichier.length());
+            Image top;
+            Image bottom;
+            Image left;
+            Image right;
+            Image front;
+            Image behind;
+
+            if (extension.equals("bmp")) {
+                System.out.println("nom : " + nom + " extension: bmp");
+                top = new Image("file:" + nom + "_u.bmp");
+                bottom = new Image("file:" + nom + "_d.bmp");
+                left = new Image("file:" + nom + "_l.bmp");
+                right = new Image("file:" + nom + "_r.bmp");
+                front = new Image("file:" + nom + "_f.bmp");
+                behind = new Image("file:" + nom + "_b.bmp");
+            } else {
+                System.out.println("nom : " + nom + " extension: jpg");
+                top = new Image("file:" + nom + "_u.jpg");
+                bottom = new Image("file:" + nom + "_d.jpg");
+                
+                left = new Image("file:" + nom + "_l.jpg");
+                right = new Image("file:" + nom + "_r.jpg");
+                front = new Image("file:" + nom + "_f.jpg");
+                behind = new Image("file:" + nom + "_b.jpg");
+            }
+            Image equiRectangulaire = TransformationsPanoramique.cube2rect(front, left, right, behind, top, bottom);
+            try {
+                //ReadWriteImage.writeJpeg(facesCube[i], "c:/panoramiques/test/" + txtImage + "_cube" + suffixe + ".jpg", jpegQuality);
+                boolean sharpen = false;
+                if (CBSharpen.isSelected()) {
+                    sharpen = true;
+                }
+
+                if (RBBmp.isSelected()) {
+                    ReadWriteImage.writeBMP(equiRectangulaire, nom + "_sphere.bmp", sharpen);
+                }
+                if (RBJpeg.isSelected()) {
+                    float quality = 1.0f;
+                    ReadWriteImage.writeJpeg(equiRectangulaire, nom + "_sphere.jpg", quality, sharpen);
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(EquiCubeDialogController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+
         System.out.println("Traite : " + nomFichier);
     }
 
@@ -186,7 +235,7 @@ public class EquiCubeDialogController {
         FileChooser repertChoix = new FileChooser();
         repertChoix.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("fichier JPEG (*.jpg)", "*.jpg"),
-                new FileChooser.ExtensionFilter("fichier BMP (*.bmp)", "*.b")
+                new FileChooser.ExtensionFilter("fichier BMP (*.bmp)", "*.bmp")
         );
         File repert = new File(repertFichier + File.separator);
         repertChoix.setInitialDirectory(repert);
@@ -209,8 +258,19 @@ public class EquiCubeDialogController {
                     }
                 } else {
                     if (img.getWidth() == img.getHeight()) {
-                        lstFich1[i] = file;
-                        i++;
+                        String nom = file.getAbsolutePath().substring(0, file.getAbsolutePath().length() - 6);
+                        boolean trouve = false;
+                        for (int j = 0; j < i; j++) {
+                            String nom1 = lstFich1[j].getAbsolutePath().substring(0, file.getAbsolutePath().length() - 6);
+                            if (nom.equals(nom1)) {
+                                trouve = true;
+                            }
+                            System.out.println(i + "=> nom1:" + nom1 + " nom:" + nom + " trouve:" + trouve);
+                        }
+                        if (!trouve) {
+                            lstFich1[i] = file;
+                            i++;
+                        }
                     } else {
                         attention = true;
                     }
