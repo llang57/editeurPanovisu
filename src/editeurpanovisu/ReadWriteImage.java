@@ -7,6 +7,8 @@ package editeurpanovisu;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.awt.image.ConvolveOp;
+import java.awt.image.Kernel;
 import java.io.File;
 import java.io.IOException;
 import javafx.embed.swing.SwingFXUtils;
@@ -23,6 +25,12 @@ import javax.imageio.stream.FileImageOutputStream;
  */
 public class ReadWriteImage {
 
+    private static final float[] sharpenMatrix = {
+        0.f, -1.f, 0.f,
+        -1.f, 5.0f, -1.f,
+        0.f, -1.f, 0.f
+    };
+
     public static void writeJpeg(Image img, String destFile, float quality)
             throws IOException {
         BufferedImage image = SwingFXUtils.fromFXImage(img, null); // Get buffered image.
@@ -30,6 +38,14 @@ public class ReadWriteImage {
 
         Graphics2D graphics = imageRGB.createGraphics();
         graphics.drawImage(image, 0, 0, null);
+
+        BufferedImage imageRGBSharpen = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_RGB);
+        Kernel kernel = new Kernel(3, 3, sharpenMatrix);
+        ConvolveOp cop = new ConvolveOp(kernel,
+                ConvolveOp.EDGE_NO_OP,
+                null);
+        cop.filter(imageRGB, imageRGBSharpen);
+
         ImageWriter writer = null;
         FileImageOutputStream output = null;
         try {
@@ -39,7 +55,7 @@ public class ReadWriteImage {
             param.setCompressionQuality(quality);
             output = new FileImageOutputStream(new File(destFile));
             writer.setOutput(output);
-            IIOImage iioImage = new IIOImage(imageRGB, null, null);
+            IIOImage iioImage = new IIOImage(imageRGBSharpen, null, null);
             writer.write(null, iioImage, param);
         } catch (IOException ex) {
             throw ex;
@@ -53,6 +69,7 @@ public class ReadWriteImage {
         }
         graphics.dispose();
     }
+
     public static void writeBMP(Image img, String destFile)
             throws IOException {
         BufferedImage image = SwingFXUtils.fromFXImage(img, null); // Get buffered image.
@@ -60,6 +77,14 @@ public class ReadWriteImage {
 
         Graphics2D graphics = imageRGB.createGraphics();
         graphics.drawImage(image, 0, 0, null);
+
+        BufferedImage imageRGBSharpen = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_RGB);
+        Kernel kernel = new Kernel(3, 3, sharpenMatrix);
+        ConvolveOp cop = new ConvolveOp(kernel,
+                ConvolveOp.EDGE_NO_OP,
+                null);
+        cop.filter(imageRGB, imageRGBSharpen);
+
         ImageWriter writer = null;
         FileImageOutputStream output = null;
         try {
@@ -67,7 +92,7 @@ public class ReadWriteImage {
             ImageWriteParam param = writer.getDefaultWriteParam();
             output = new FileImageOutputStream(new File(destFile));
             writer.setOutput(output);
-            IIOImage iioImage = new IIOImage(imageRGB, null, null);
+            IIOImage iioImage = new IIOImage(imageRGBSharpen, null, null);
             writer.write(null, iioImage, param);
         } catch (IOException ex) {
             throw ex;
@@ -81,6 +106,5 @@ public class ReadWriteImage {
         }
         graphics.dispose();
     }
-
 
 }

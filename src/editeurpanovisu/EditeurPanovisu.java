@@ -65,7 +65,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.FileChooser;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javax.swing.ToolTipManager;
@@ -102,10 +101,10 @@ public class EditeurPanovisu extends Application {
     static private double largeurMax;
     static private boolean estCharge = false;
     static private boolean repertSauveChoisi = false;
-    static private String repertAppli;
+    static public String repertAppli;
     static private String repertTemp;
     static private String repertPanos;
-    static private String repertoireProjet;
+    static public String repertoireProjet;
     final static private ComboBox listeChoixPanoramique = new ComboBox();
     static private Label lblChoixPanoramique;
     static private boolean panoCharge = false;
@@ -1385,9 +1384,9 @@ public class EditeurPanovisu extends Application {
      * 
      */
     private void transformationCube2Equi(){
-        Cube2EquiDialogController C2EController=new Cube2EquiDialogController();
+        EquiCubeDialogController C2EController=new EquiCubeDialogController();
         try {
-            C2EController.afficheCube2Equi();
+            C2EController.afficheFenetre(EquiCubeDialogController.CUBE2QUI);
         } catch (Exception ex) {
             Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
         }        
@@ -1396,9 +1395,9 @@ public class EditeurPanovisu extends Application {
      * 
      */
     private void transformationEqui2Cube(){
-        Equi2CubeDialogController E2CController=new Equi2CubeDialogController();
+        EquiCubeDialogController E2CController=new EquiCubeDialogController();
         try {
-            E2CController.afficheEqui2Cube();
+            E2CController.afficheFenetre(EquiCubeDialogController.EQUI2CUBE);
         } catch (Exception ex) {
             Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1939,6 +1938,7 @@ public class EditeurPanovisu extends Application {
     public void start(Stage primaryStage) throws Exception {
         File rep = new File("");
         repertAppli = rep.getAbsolutePath();
+        repertoireProjet=repertAppli;
         stPrincipal = primaryStage;
         setUserAgentStylesheet(STYLESHEET_MODENA);
         primaryStage.setMaximized(true);

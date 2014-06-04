@@ -19,13 +19,14 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  *
  * @author llang
  */
 public class popUpHandler {
-    public static final Stage popUp = new Stage();
+    public static Stage popUp;
 
     @FXML
     Button btnQuitte;
@@ -45,10 +46,11 @@ public class popUpHandler {
         }
     }
     public void popUpHandler(){
-        popUp.initModality(Modality.APPLICATION_MODAL);        
     }
     
     public void affichePopup() throws Exception {
+        popUp= new Stage(StageStyle.UTILITY);
+        popUp.initModality(Modality.APPLICATION_MODAL);        
         Pane myPane = (Pane) FXMLLoader.load(getClass().getResource("popUpAccueil.fxml"));        
         Scene scene2 = new Scene(myPane);
         popUp.setScene(scene2);
