@@ -94,6 +94,7 @@ public class EditeurPanovisu extends Application {
     static private Pane pano;
     static private VBox paneChoixPanoramique;
     static private VBox outils;
+    static  private Tab tabInterface;
     static private File file;
     static private Scene scene;
     static private ScrollPane vuePanoramique;
@@ -1381,28 +1382,29 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
-     * 
+     *
      */
-    private void transformationCube2Equi(){
-        EquiCubeDialogController C2EController=new EquiCubeDialogController();
+    private void transformationCube2Equi() {
+        EquiCubeDialogController C2EController = new EquiCubeDialogController();
         try {
             C2EController.afficheFenetre(EquiCubeDialogController.CUBE2QUI);
         } catch (Exception ex) {
             Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
-        }        
+        }
     }
+
     /**
-     * 
+     *
      */
-    private void transformationEqui2Cube(){
-        EquiCubeDialogController E2CController=new EquiCubeDialogController();
+    private void transformationEqui2Cube() {
+        EquiCubeDialogController E2CController = new EquiCubeDialogController();
         try {
             E2CController.afficheFenetre(EquiCubeDialogController.EQUI2CUBE);
         } catch (Exception ex) {
             Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     /**
      *
      * @param primaryStage
@@ -1666,7 +1668,7 @@ public class EditeurPanovisu extends Application {
             transformationEqui2Cube();
         });
 
-       cube2EquiTransformation.setOnAction((ActionEvent e) -> {
+        cube2EquiTransformation.setOnAction((ActionEvent e) -> {
             transformationCube2Equi();
         });
 
@@ -1704,6 +1706,10 @@ public class EditeurPanovisu extends Application {
             transformationCube2Equi();
         });
 
+    }
+
+    private void creeTabInterface() {
+        
     }
 
     /**
@@ -1763,7 +1769,8 @@ public class EditeurPanovisu extends Application {
         barreStatus.setTranslateY(25);
         barreStatus.setStyle("-fx-background-color:#c00;-fx-border-color:#aaa");
         Tab tabVisite = new Tab();
-        Tab tabInterface = new Tab();
+        tabInterface = new Tab();
+        creeTabInterface();
         HBox hbEnvironnement = new HBox();
         Pane visualiseur = new Pane();
         TextArea txtTitrePano;
@@ -1938,7 +1945,7 @@ public class EditeurPanovisu extends Application {
     public void start(Stage primaryStage) throws Exception {
         File rep = new File("");
         repertAppli = rep.getAbsolutePath();
-        repertoireProjet=repertAppli;
+        repertoireProjet = repertAppli;
         stPrincipal = primaryStage;
         setUserAgentStylesheet(STYLESHEET_MODENA);
         primaryStage.setMaximized(true);
