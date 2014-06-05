@@ -198,7 +198,7 @@ public class EditeurPanovisu extends Application {
                         + "      couleur=\"rgba(255,255,255,0)\"\n"
                         + "      bordure=\"rgba(255,255,255,0)\"\n"
                         + "      deplacements=\"oui\" \n"
-                        + "      zoom=\"non\" \n"
+                        + "      zoom=\"oui\" \n"
                         + "      outils=\"oui\"\n"
                         + "      fs=\"oui\" \n"
                         + "      souris=\"oui\" \n"
