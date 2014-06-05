@@ -2119,8 +2119,8 @@ public class EditeurPanovisu extends Application {
             if (!dejaSauve) {
                 reponse = Dialogs.create()
                         .owner(null)
-                        .title("Quitte l'éditeur")
-                        .masthead("ATTENTION !!! vous n'avez pas sauvegardé votre projet")
+                        .title("Quitter l'éditeur")
+                        .masthead("ATTENTION !!! vous n'avez pas sauvegardé votre Projet")
                         .message("Voulez vous le sauver ?")
                         .showConfirm();
             }
@@ -2150,5 +2150,4 @@ public class EditeurPanovisu extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
 }
