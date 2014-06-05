@@ -23,13 +23,19 @@ public class TransformationsPanoramique {
     /**
      *
      * @param equi
+     * @param taille
      * @return
      */
-    public static Image[] equi2cube(Image equi) {
+    public static Image[] equi2cube(Image equi, int taille) {
         PixelReader PREqui = equi.getPixelReader();
         WritableImage[] cube = new WritableImage[6];
         int tailleEqui = (int) equi.getWidth();
-        int tailleCube = (int) (tailleEqui * TransformationsPanoramique.RAPPORTCUBEEQUI);
+        int tailleCube;
+        if (taille == -1) {
+            tailleCube = (int) (tailleEqui * TransformationsPanoramique.RAPPORTCUBEEQUI);
+        } else {
+            tailleCube = taille;
+        }
         for (int i = 0; i < 6; i++) {
             cube[i] = new WritableImage(tailleCube, tailleCube);
         }
@@ -79,8 +85,8 @@ public class TransformationsPanoramique {
                         if (pixX > tailleEqui - 1) {
                             pixX = tailleEqui - 1;
                         }
-                        if (pixY > tailleEqui/2 - 1) {
-                            pixY = tailleEqui/2 - 1;
+                        if (pixY > tailleEqui / 2 - 1) {
+                            pixY = tailleEqui / 2 - 1;
                         }
                         double dst = Math.sqrt((pixX - pixelX) * (pixX - pixelX) + (pixY - pixelY) * (pixY - pixelY));
                         if (dst < 0.001d) {
@@ -133,8 +139,8 @@ public class TransformationsPanoramique {
                         if (pixX > tailleEqui - 1) {
                             pixX = tailleEqui - 1;
                         }
-                        if (pixY > tailleEqui/2 - 1) {
-                            pixY = tailleEqui/2 - 1;
+                        if (pixY > tailleEqui / 2 - 1) {
+                            pixY = tailleEqui / 2 - 1;
                         }
                         double dst = Math.sqrt((pixX - pixelX) * (pixX - pixelX) + (pixY - pixelY) * (pixY - pixelY));
                         if (dst < 0.001d) {
@@ -187,8 +193,8 @@ public class TransformationsPanoramique {
                         if (pixX > tailleEqui - 1) {
                             pixX = tailleEqui - 1;
                         }
-                        if (pixY > tailleEqui/2 - 1) {
-                            pixY = tailleEqui/2 - 1;
+                        if (pixY > tailleEqui / 2 - 1) {
+                            pixY = tailleEqui / 2 - 1;
                         }
                         double dst = Math.sqrt((pixX - pixelX) * (pixX - pixelX) + (pixY - pixelY) * (pixY - pixelY));
                         if (dst < 0.001d) {
@@ -241,8 +247,8 @@ public class TransformationsPanoramique {
                         if (pixX > tailleEqui - 1) {
                             pixX = tailleEqui - 1;
                         }
-                        if (pixY > tailleEqui/2 - 1) {
-                            pixY = tailleEqui/2 - 1;
+                        if (pixY > tailleEqui / 2 - 1) {
+                            pixY = tailleEqui / 2 - 1;
                         }
                         double dst = Math.sqrt((pixX - pixelX) * (pixX - pixelX) + (pixY - pixelY) * (pixY - pixelY));
                         if (dst < 0.001d) {
@@ -298,8 +304,8 @@ public class TransformationsPanoramique {
                         if (pixX > tailleEqui - 1) {
                             pixX = tailleEqui - 1;
                         }
-                        if (pixY > tailleEqui/2 - 1) {
-                            pixY = tailleEqui/2 - 1;
+                        if (pixY > tailleEqui / 2 - 1) {
+                            pixY = tailleEqui / 2 - 1;
                         }
                         double dst = Math.sqrt((pixX - pixelX) * (pixX - pixelX) + (pixY - pixelY) * (pixY - pixelY));
                         if (dst < 0.001d) {
@@ -355,8 +361,8 @@ public class TransformationsPanoramique {
                         if (pixX > tailleEqui - 1) {
                             pixX = tailleEqui - 1;
                         }
-                        if (pixY > tailleEqui/2 - 1) {
-                            pixY = tailleEqui/2 - 1;
+                        if (pixY > tailleEqui / 2 - 1) {
+                            pixY = tailleEqui / 2 - 1;
                         }
                         double dst = Math.sqrt((pixX - pixelX) * (pixX - pixelX) + (pixY - pixelY) * (pixY - pixelY));
                         if (dst < 0.001d) {
@@ -380,7 +386,18 @@ public class TransformationsPanoramique {
         return cube;
     }
 
-    public static Image cube2rect(Image front, Image left, Image right, Image behind, Image top, Image bottom) {
+    /**
+     *
+     * @param front
+     * @param left
+     * @param right
+     * @param behind
+     * @param top
+     * @param bottom
+     * @param taille
+     * @return
+     */
+    public static Image cube2rect(Image front, Image left, Image right, Image behind, Image top, Image bottom, int taille) {
         PixelReader PRFront = front.getPixelReader();
         PixelReader PRLeft = left.getPixelReader();
         PixelReader PRRight = right.getPixelReader();
@@ -390,7 +407,12 @@ public class TransformationsPanoramique {
         int tailleCube = (int) top.getHeight();
         double theta;
         double phi;
-        int tailleEqui = (int) (tailleCube / TransformationsPanoramique.RAPPORTCUBEEQUI);
+        int tailleEqui;
+        if (taille == -1) {
+            tailleEqui = (int) (tailleCube / TransformationsPanoramique.RAPPORTCUBEEQUI);
+        } else {
+            tailleEqui = taille;
+        }
         if (tailleEqui % 2 == 1) {
             tailleEqui += 1;
         }

@@ -94,7 +94,7 @@ public class EquiCubeDialogController {
             System.out.println("nomfich1 " + nomFich1);
             Image equiImage = new Image("file:" + nomFichier);
 
-            Image[] facesCube = TransformationsPanoramique.equi2cube(equiImage);
+            Image[] facesCube = TransformationsPanoramique.equi2cube(equiImage,-1);
             for (int i = 0; i < 6; i++) {
                 String suffixe = "";
                 switch (i) {
@@ -166,7 +166,7 @@ public class EquiCubeDialogController {
                 front = new Image("file:" + nom + "_f.jpg");
                 behind = new Image("file:" + nom + "_b.jpg");
             }
-            Image equiRectangulaire = TransformationsPanoramique.cube2rect(front, left, right, behind, top, bottom);
+            Image equiRectangulaire = TransformationsPanoramique.cube2rect(front, left, right, behind, top, bottom,-1);
             try {
                 //ReadWriteImage.writeJpeg(facesCube[i], "c:/panoramiques/test/" + txtImage + "_cube" + suffixe + ".jpg", jpegQuality);
                 boolean sharpen = false;
