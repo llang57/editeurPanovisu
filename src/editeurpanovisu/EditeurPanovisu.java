@@ -66,6 +66,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import javax.swing.ToolTipManager;
 import org.controlsfx.control.action.Action;
@@ -1601,7 +1602,7 @@ public class EditeurPanovisu extends Application {
         /*
          Menu transformations 
          */
-        menuTransformation = new Menu("Transformations");
+        menuTransformation = new Menu("Outils");
         menuPrincipal.getMenus().add(menuTransformation);
 
         cube2EquiTransformation = new MenuItem("Faces de Cube -> Equi");
@@ -2093,6 +2094,7 @@ public class EditeurPanovisu extends Application {
         stPrincipal = primaryStage;
         setUserAgentStylesheet(STYLESHEET_MODENA);
         primaryStage.setMaximized(true);
+        primaryStage.initStyle(StageStyle.UTILITY);
         Dimension tailleEcran = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         int hauteur = (int) tailleEcran.getHeight() - 20;
         int largeur = (int) tailleEcran.getWidth() - 20;
@@ -2147,6 +2149,7 @@ public class EditeurPanovisu extends Application {
     /**
      * @param args the command line arguments
      */
+
     public static void main(String[] args) {
         launch(args);
     }
