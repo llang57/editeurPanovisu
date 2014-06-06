@@ -32,6 +32,7 @@ import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Side;
@@ -56,8 +57,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -1219,6 +1223,31 @@ public class EditeurPanovisu extends Application {
         scene.heightProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldSceneHeight, Number newSceneHeight) -> {
             vuePanoramique.setPrefHeight((double) newSceneHeight - 70.0d);
             panneauOutils.setPrefHeight((double) newSceneHeight - 70.0d);
+        });
+        
+        scene.setOnDragOver((DragEvent event) -> {
+            Dragboard db = event.getDragboard();
+            if (db.hasFiles()) {
+                event.acceptTransferModes(TransferMode.COPY);
+            } else {
+                event.consume();
+            }
+        });
+        
+        // Dropping over surface
+        scene.setOnDragDropped((DragEvent event) -> {
+            Dragboard db = event.getDragboard();
+            boolean success = false;
+            if (db.hasFiles()) {
+                success = true;
+                String filePath = null;
+                for (File file1 : db.getFiles()) {
+                    filePath = file1.getAbsolutePath();
+                    System.out.println(filePath);
+                }
+            }
+            event.setDropCompleted(success);
+            event.consume();
         });
 
         /**
