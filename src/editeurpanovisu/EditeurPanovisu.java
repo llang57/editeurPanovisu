@@ -1233,7 +1233,7 @@ public class EditeurPanovisu extends Application {
                 event.consume();
             }
         });
-        
+         
         // Dropping over surface
         scene.setOnDragDropped((DragEvent event) -> {
             Dragboard db = event.getDragboard();
