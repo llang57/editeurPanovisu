@@ -321,11 +321,12 @@ public class EditeurPanovisu extends Application {
     private void panoramiquesAjouter() {
         FileChooser fileChooser = new FileChooser();
 
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("JPEG Files (*.jpg)", "*.jpg");
+        FileChooser.ExtensionFilter extFilterJpeg = new FileChooser.ExtensionFilter("Fichiers JPEG (*.jpg)", "*.jpg");
+        FileChooser.ExtensionFilter extFilterBmp = new FileChooser.ExtensionFilter("Fichiers BMP (*.bmp)", "*.bmp");
 
         File repert = new File(currentDir + File.separator);
         fileChooser.setInitialDirectory(repert);
-        fileChooser.getExtensionFilters().add(extFilter);
+        fileChooser.getExtensionFilters().addAll(extFilterJpeg,extFilterBmp);
 
         List<File> list = fileChooser.showOpenMultipleDialog(null);
         if (list != null) {
@@ -387,7 +388,7 @@ public class EditeurPanovisu extends Application {
                 } catch (IOException ex) {
                     Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                affichePano(file1.getPath(), typeFich1[ii]);
+                ajoutePanoramiqueProjet(file1.getPath(), typeFich1[ii]);
             }
 
             installeEvenements();
@@ -803,7 +804,7 @@ public class EditeurPanovisu extends Application {
                                         .getName()).log(Level.SEVERE, null, ex);
                             }
                             if (img.getWidth() == img.getHeight()) {
-                                affichePano(valeur[1], Panoramique.CUBE);
+                                ajoutePanoramiqueProjet(valeur[1], Panoramique.CUBE);
                                 try {
                                     String nom = imgPano.getAbsolutePath().substring(0, imgPano.getAbsolutePath().length() - 6);
                                     copieFichierRepertoire(nom + "_u.jpg", repertPanos);
@@ -818,7 +819,7 @@ public class EditeurPanovisu extends Application {
                                 }
 
                             } else {
-                                affichePano(valeur[1], Panoramique.SPHERE);
+                                ajoutePanoramiqueProjet(valeur[1], Panoramique.SPHERE);
                                 try {
                                     copieFichierRepertoire(imgPano.getPath(), repertPanos);
 
@@ -1228,7 +1229,7 @@ public class EditeurPanovisu extends Application {
         scene.setOnDragOver((DragEvent event) -> {
             Dragboard db = event.getDragboard();
             if (db.hasFiles()) {
-                event.acceptTransferModes(TransferMode.COPY);
+                event.acceptTransferModes(TransferMode.ANY);
             } else {
                 event.consume();
             }
@@ -1477,7 +1478,7 @@ public class EditeurPanovisu extends Application {
      * @param fichierPano
      */
     @SuppressWarnings("empty-statement")
-    private void affichePano(String fichierPano, String typePano) {
+    private void ajoutePanoramiqueProjet(String fichierPano, String typePano) {
         String nomPano = fichierPano.substring(fichierPano.lastIndexOf(File.separator) + 1, fichierPano.length());
         panoCharge = true;
         listeChoixPanoramique.getItems().add(nomPano);
@@ -1524,6 +1525,7 @@ public class EditeurPanovisu extends Application {
         panoCree.setAfficheInfo(true);
         panoCree.setAfficheTitre(true);
         imagePanoramique.setImage(panoCree.getImagePanoramique());
+        imagePanoramique.setSmooth(true);
         retireAffichageLigne();
         retireAffichageHotSpots();
         retireAffichagePointsHotSpots();

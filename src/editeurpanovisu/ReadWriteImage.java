@@ -25,14 +25,30 @@ import javax.imageio.stream.FileImageOutputStream;
  */
 public class ReadWriteImage {
 
-    private static final float[] sharpenMatrix = {
-        0.0f, -0.2f, 0.0f,
-        -0.2f, 1.8f, -0.2f,
-        0.0f, -0.2f, 0.0f
-    };
+    private static float[] sharpenMatrix = new float[9];
 
-    public static void writeJpeg(Image img, String destFile, float quality, boolean sharpen)
+    private static float[] calculeSharpenMatrix(float level) {
+        float[] normalMatrix = {
+            0.0f, 0.0f, 0.0f,
+            0.0f, 1.0f, 0.0f,
+            0.0f, 0.0f, 0.0f
+        };
+
+        float[] edgeMatrix = {
+            0.0f, -1.0f, 0.0f,
+            -1.0f, 4.0f, -1.0f,
+            0.0f, -1.0f, 0.0f
+        };
+        float[] sharpMatrix = new float[9];
+        for (int i = 0; i < 9; i++) {
+            sharpMatrix[i] = normalMatrix[i] + level * edgeMatrix[i];
+        }
+        return sharpMatrix;
+    }
+
+    public static void writeJpeg(Image img, String destFile, float quality, boolean sharpen, float sharpenLevel)
             throws IOException {
+        sharpenMatrix = ReadWriteImage.calculeSharpenMatrix(sharpenLevel);
         BufferedImage imageRGBSharpen = null;
         IIOImage iioImage = null;
         BufferedImage image = SwingFXUtils.fromFXImage(img, null); // Get buffered image.
@@ -76,8 +92,9 @@ public class ReadWriteImage {
         graphics.dispose();
     }
 
-    public static void writeBMP(Image img, String destFile, boolean sharpen)
+    public static void writeBMP(Image img, String destFile, boolean sharpen, float sharpenLevel)
             throws IOException {
+        sharpenMatrix = ReadWriteImage.calculeSharpenMatrix(sharpenLevel);
         BufferedImage imageRGBSharpen = null;
         IIOImage iioImage = null;
 

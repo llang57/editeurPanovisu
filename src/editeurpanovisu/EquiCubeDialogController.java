@@ -7,10 +7,13 @@ package editeurpanovisu;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -18,13 +21,19 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.Slider;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -52,6 +61,8 @@ public class EquiCubeDialogController {
     static private RadioButton RBJpeg;
     static private RadioButton RBBmp;
     static private CheckBox CBSharpen;
+    static private Slider SLSharpen;
+    static private Label LBLSharpen;
 
     final ToggleGroup grpTypeFichier = new ToggleGroup();
     public final static String EQUI2CUBE = "E2C";
@@ -94,7 +105,7 @@ public class EquiCubeDialogController {
             System.out.println("nomfich1 " + nomFich1);
             Image equiImage = new Image("file:" + nomFichier);
 
-            Image[] facesCube = TransformationsPanoramique.equi2cube(equiImage,-1);
+            Image[] facesCube = TransformationsPanoramique.equi2cube(equiImage, -1);
             for (int i = 0; i < 6; i++) {
                 String suffixe = "";
                 switch (i) {
@@ -125,11 +136,13 @@ public class EquiCubeDialogController {
                     }
 
                     if (RBBmp.isSelected()) {
-                        ReadWriteImage.writeBMP(facesCube[i], nomFich1 + "_cube" + suffixe + ".bmp", sharpen);
+                        ReadWriteImage.writeBMP(facesCube[i], nomFich1 + "_cube" + suffixe + ".bmp",
+                                sharpen, (float) Math.round(SLSharpen.getValue() * 20.f) / 20.f);
                     }
                     if (RBJpeg.isSelected()) {
-                        float quality = 1.0f;
-                        ReadWriteImage.writeJpeg(facesCube[i], nomFich1 + "_cube" + suffixe + ".jpg", quality, sharpen);
+                        float quality = 1.0f; //qualité jpeg à 100% : le moins de pertes possible
+                        ReadWriteImage.writeJpeg(facesCube[i], nomFich1 + "_cube" + suffixe + ".jpg", quality,
+                                sharpen, (float) Math.round(SLSharpen.getValue() * 20.f) / 20.f);
                     }
                 } catch (IOException ex) {
                     Logger.getLogger(EquiCubeDialogController.class.getName()).log(Level.SEVERE, null, ex);
@@ -160,13 +173,13 @@ public class EquiCubeDialogController {
                 System.out.println("nom : " + nom + " extension: jpg");
                 top = new Image("file:" + nom + "_u.jpg");
                 bottom = new Image("file:" + nom + "_d.jpg");
-                
+
                 left = new Image("file:" + nom + "_l.jpg");
                 right = new Image("file:" + nom + "_r.jpg");
                 front = new Image("file:" + nom + "_f.jpg");
                 behind = new Image("file:" + nom + "_b.jpg");
             }
-            Image equiRectangulaire = TransformationsPanoramique.cube2rect(front, left, right, behind, top, bottom,-1);
+            Image equiRectangulaire = TransformationsPanoramique.cube2rect(front, left, right, behind, top, bottom, -1);
             try {
                 //ReadWriteImage.writeJpeg(facesCube[i], "c:/panoramiques/test/" + txtImage + "_cube" + suffixe + ".jpg", jpegQuality);
                 boolean sharpen = false;
@@ -175,11 +188,11 @@ public class EquiCubeDialogController {
                 }
 
                 if (RBBmp.isSelected()) {
-                    ReadWriteImage.writeBMP(equiRectangulaire, nom + "_sphere.bmp", sharpen);
+                    ReadWriteImage.writeBMP(equiRectangulaire, nom + "_sphere.bmp", sharpen, (float) Math.round(SLSharpen.getValue() * 20.f) / 20.f);
                 }
                 if (RBJpeg.isSelected()) {
                     float quality = 1.0f;
-                    ReadWriteImage.writeJpeg(equiRectangulaire, nom + "_sphere.jpg", quality, sharpen);
+                    ReadWriteImage.writeJpeg(equiRectangulaire, nom + "_sphere.jpg", quality, sharpen, (float) Math.round(SLSharpen.getValue() * 20.f) / 20.f);
                 }
             } catch (IOException ex) {
                 Logger.getLogger(EquiCubeDialogController.class.getName()).log(Level.SEVERE, null, ex);
@@ -202,7 +215,7 @@ public class EquiCubeDialogController {
         } else {
             Dialogs.create().title("Editeur PanoVisu")
                     .masthead("transformation de fichiers")
-                    .message("Attention le traitemant que vous allez lancer peut durer plusieurs minutes \n"
+                    .message("Attention le traitement que vous allez lancer peut durer plusieurs minutes \n"
                             + "pendant lesquelle le programme semblera ne plus répondre. "
                             + "Veuillez patienter jusqu'à la fin du traitement"
                             + "\n\nMerci")
@@ -210,7 +223,7 @@ public class EquiCubeDialogController {
             final Label lblTermine = new Label();
             lblTermine.setText("Traitement en cours");
             lblTermine.setLayoutX(14);
-            lblTermine.setLayoutY(140);
+            lblTermine.setLayoutY(180);
             choixTypeFichier.getChildren().add(lblTermine);
             for (int i = 0; i < listeFichier.getItems().size(); i++) {
                 final int j = i;
@@ -309,6 +322,8 @@ public class EquiCubeDialogController {
         RBJpeg = new RadioButton("JPEG (.jpg)");
         RBBmp = new RadioButton("BMP (.bmp)");
         CBSharpen = new CheckBox("Masque de netteté");
+        SLSharpen = new Slider(0, 2, 0.2);
+        LBLSharpen = new Label("0.20");
         Pane Pboutons = new Pane();
         btnAnnuler = new Button("Fermer la fenêtre");
         btnValider = new Button("Lancer le traitement");
@@ -370,12 +385,54 @@ public class EquiCubeDialogController {
         RBJpeg.setToggleGroup(grpTypeFichier);
         CBSharpen.setLayoutX(43);
         CBSharpen.setLayoutY(99);
-        choixTypeFichier.getChildren().addAll(lblType, RBBmp, RBJpeg, CBSharpen);
+        CBSharpen.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+            if (new_val) {
+                SLSharpen.setDisable(false);
+                LBLSharpen.setDisable(false);
+            } else {
+                SLSharpen.setDisable(true);
+                LBLSharpen.setDisable(true);
+            }
+        });
+
+        SLSharpen.setShowTickMarks(true);
+        SLSharpen.setShowTickLabels(true);
+        SLSharpen.setMajorTickUnit(0.5f);
+        SLSharpen.setMinorTickCount(4);
+        SLSharpen.setBlockIncrement(0.05f);
+        SLSharpen.setSnapToTicks(true);
+        SLSharpen.setLayoutX(23);
+        SLSharpen.setLayoutY(120);
+        SLSharpen.setTooltip(new Tooltip("Choisissez le niveau d'accentuation de l'image"));
+        SLSharpen.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+            if (newValue == null) {
+                LBLSharpen.setText("");
+                return;
+            }
+            DecimalFormat df = new DecimalFormat();
+            df.setMaximumFractionDigits(2); //arrondi à 2 chiffres apres la virgules
+            df.setMinimumFractionDigits(2);
+            df.setDecimalSeparatorAlwaysShown(true);
+
+            LBLSharpen.setText(df.format(Math.round(newValue.floatValue() * 20.f) / 20.f) + "");
+        });
+
+        SLSharpen.setPrefWidth(120);
+        SLSharpen.setDisable(true);
+        LBLSharpen.setLayoutX(150);
+        LBLSharpen.setLayoutY(120);
+        LBLSharpen.setMinWidth(30);
+        LBLSharpen.setMaxWidth(30);
+        LBLSharpen.setTextAlignment(TextAlignment.RIGHT);
+        LBLSharpen.setDisable(true);
+
+        choixTypeFichier.getChildren().addAll(lblType, RBBmp, RBJpeg, CBSharpen, SLSharpen, LBLSharpen);
         Pboutons.getChildren().addAll(btnAnnuler, btnValider);
         fenetre.getChildren().addAll(PChoix, Pboutons);
         Scene scene2 = new Scene(myPane);
         STEqui2Cube.setScene(scene2);
         STEqui2Cube.show();
+
         btnAnnuler.setOnAction((ActionEvent e) -> {
             annulerE2C();
         });
@@ -398,6 +455,96 @@ public class EquiCubeDialogController {
                 }
             }
         });
+        myPane.setOnDragOver((DragEvent event) -> {
+            Dragboard db = event.getDragboard();
+            if (db.hasFiles()) {
+                event.acceptTransferModes(TransferMode.ANY);
+            } else {
+                event.consume();
+            }
+        });
+
+        // Dropping over surface
+        myPane.setOnDragDropped((DragEvent event) -> {
+            Dragboard db = event.getDragboard();
+            boolean success = false;
+            File[] lstFich;
+            lstFich = null;
+            if (db.hasFiles()) {
+                success = true;
+                String[] filePath = new String[200];
+                int i = 0;
+                for (File file1 : db.getFiles()) {
+                    filePath[i] = file1.getAbsolutePath();
+                    System.out.println(filePath[i]);
+                    i++;
+                }
+                int nb = i;
+                i = 0;
+                boolean attention = false;
+                File[] lstFich1 = new File[filePath.length];
+                for (int j = 0; j < nb; j++) {
+                    String nomfich = filePath[j];
+                    System.out.println("nom fich : " + nomfich);
+                    File file = new File(nomfich);
+                    String extension = nomfich.substring(nomfich.lastIndexOf(".") + 1, nomfich.length()).toLowerCase();
+                    System.out.println("extension : " + extension);
+                    if (extension.equals("bmp") || extension.equals("jpg")) {
+                        if (i == 0) {
+                            repertFichier = file.getParent();
+                        }
+                        Image img = new Image("file:" + file.getAbsolutePath());
+                        if (typeTransformation.equals(EquiCubeDialogController.EQUI2CUBE)) {
+                            if (img.getWidth() == 2 * img.getHeight()) {
+                                lstFich1[i] = file;
+                                i++;
+                            } else {
+                                attention = true;
+                            }
+                        } else {
+                            if (img.getWidth() == img.getHeight()) {
+                                String nom = file.getAbsolutePath().substring(0, file.getAbsolutePath().length() - 6);
+                                boolean trouve = false;
+                                for (int k = 0; k < i; k++) {
+                                    String nom1 = lstFich1[k].getAbsolutePath().substring(0, file.getAbsolutePath().length() - 6);
+                                    if (nom.equals(nom1)) {
+                                        trouve = true;
+                                    }
+                                    System.out.println(i + "=> nom1:" + nom1 + " nom:" + nom + " trouve:" + trouve);
+                                }
+                                if (!trouve) {
+                                    lstFich1[i] = file;
+                                    i++;
+                                }
+                            } else {
+                                attention = true;
+                            }
+
+                        }
+                    }
+                }
+                if (attention) {
+                    Dialogs.create().title("Editeur PanoVisu")
+                            .masthead("trnsformation de fichiers")
+                            .message("Attention au type des fichiers choisis")
+                            .showError();
+
+                }
+                lstFichier = new File[i];
+                System.arraycopy(lstFich1, 0, lstFichier, 0, i);
+            }
+            if (lstFichier != null) {
+                System.out.println("nb fich : " + lstFichier.length);
+                for (File lstFichier1 : lstFichier) {
+                    String nomFich = lstFichier1.getAbsolutePath();
+                    listeFichier.getItems().add(nomFich);
+                }
+            }
+            event.setDropCompleted(success);
+            event.consume();
+        }
+        );
+
     }
 
 }
