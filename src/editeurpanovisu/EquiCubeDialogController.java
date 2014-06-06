@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
@@ -49,6 +50,8 @@ import org.controlsfx.dialog.Dialogs;
  */
 public class EquiCubeDialogController {
 
+    private static final ResourceBundle rb = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", EditeurPanovisu.locale);
+
     private static Stage STEqui2Cube;
     private static AnchorPane myPane;
     private String typeTransformation;
@@ -74,7 +77,6 @@ public class EquiCubeDialogController {
      *
      */
     private void annulerE2C() {
-        System.out.println("Annuler");
         Action reponse = null;
 
         if ((listeFichier.getItems().size() != 0) && (!traitementEffectue)) {
@@ -102,7 +104,6 @@ public class EquiCubeDialogController {
 
         if (typeTransformation.equals(EquiCubeDialogController.EQUI2CUBE)) {
             String nomFich1 = nomFichier.substring(0, nomFichier.length() - 4);
-            System.out.println("nomfich1 " + nomFich1);
             Image equiImage = new Image("file:" + nomFichier);
 
             Image[] facesCube = TransformationsPanoramique.equi2cube(equiImage, -1);
@@ -162,7 +163,6 @@ public class EquiCubeDialogController {
             Image behind;
 
             if (extension.equals("bmp")) {
-                System.out.println("nom : " + nom + " extension: bmp");
                 top = new Image("file:" + nom + "_u.bmp");
                 bottom = new Image("file:" + nom + "_d.bmp");
                 left = new Image("file:" + nom + "_l.bmp");
@@ -170,7 +170,6 @@ public class EquiCubeDialogController {
                 front = new Image("file:" + nom + "_f.bmp");
                 behind = new Image("file:" + nom + "_b.bmp");
             } else {
-                System.out.println("nom : " + nom + " extension: jpg");
                 top = new Image("file:" + nom + "_u.jpg");
                 bottom = new Image("file:" + nom + "_d.jpg");
 
@@ -200,7 +199,6 @@ public class EquiCubeDialogController {
 
         }
 
-        System.out.println("Traite : " + nomFichier);
     }
 
     /**
@@ -278,7 +276,6 @@ public class EquiCubeDialogController {
                             if (nom.equals(nom1)) {
                                 trouve = true;
                             }
-                            System.out.println(i + "=> nom1:" + nom1 + " nom:" + nom + " trouve:" + trouve);
                         }
                         if (!trouve) {
                             lstFich1[i] = file;
@@ -311,6 +308,8 @@ public class EquiCubeDialogController {
      */
     public void afficheFenetre(String typeTransf) throws Exception {
         STEqui2Cube = new Stage(StageStyle.UTILITY);
+        STEqui2Cube.initModality(Modality.APPLICATION_MODAL);
+        STEqui2Cube.setResizable(false);
         myPane = new AnchorPane();
         VBox fenetre = new VBox();
         HBox PChoix = new HBox();
@@ -341,8 +340,6 @@ public class EquiCubeDialogController {
         IMType.setLayoutX(35);
         IMType.setLayoutY(250);
         choixTypeFichier.getChildren().add(IMType);
-        STEqui2Cube.initModality(Modality.APPLICATION_MODAL);
-        STEqui2Cube.setResizable(false);
         myPane.setPrefHeight(400);
         myPane.setPrefWidth(600);
 
@@ -448,7 +445,6 @@ public class EquiCubeDialogController {
                     listeFichier.getItems().remove(0, listeFichier.getItems().size());
                     traitementEffectue = false;
                 }
-                System.out.println("nb fich : " + lstFichier.length);
                 for (File lstFichier1 : lstFichier) {
                     String nomFich = lstFichier1.getAbsolutePath();
                     listeFichier.getItems().add(nomFich);
@@ -476,7 +472,6 @@ public class EquiCubeDialogController {
                 int i = 0;
                 for (File file1 : db.getFiles()) {
                     filePath[i] = file1.getAbsolutePath();
-                    System.out.println(filePath[i]);
                     i++;
                 }
                 int nb = i;
@@ -485,10 +480,8 @@ public class EquiCubeDialogController {
                 File[] lstFich1 = new File[filePath.length];
                 for (int j = 0; j < nb; j++) {
                     String nomfich = filePath[j];
-                    System.out.println("nom fich : " + nomfich);
                     File file = new File(nomfich);
                     String extension = nomfich.substring(nomfich.lastIndexOf(".") + 1, nomfich.length()).toLowerCase();
-                    System.out.println("extension : " + extension);
                     if (extension.equals("bmp") || extension.equals("jpg")) {
                         if (i == 0) {
                             repertFichier = file.getParent();
@@ -510,7 +503,6 @@ public class EquiCubeDialogController {
                                     if (nom.equals(nom1)) {
                                         trouve = true;
                                     }
-                                    System.out.println(i + "=> nom1:" + nom1 + " nom:" + nom + " trouve:" + trouve);
                                 }
                                 if (!trouve) {
                                     lstFich1[i] = file;
@@ -534,7 +526,6 @@ public class EquiCubeDialogController {
                 System.arraycopy(lstFich1, 0, lstFichier, 0, i);
             }
             if (lstFichier != null) {
-                System.out.println("nb fich : " + lstFichier.length);
                 for (File lstFichier1 : lstFichier) {
                     String nomFich = lstFichier1.getAbsolutePath();
                     listeFichier.getItems().add(nomFich);
