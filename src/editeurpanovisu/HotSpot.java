@@ -13,13 +13,18 @@ public class HotSpot {
 
     private double longitude, latitude;
     private String fichierImage;
-    private String fichierXML,info;
+    private String fichierXML, info;
     private boolean anime;
 
     public void HotSpot() {
 
     }
 
+    /**
+     *
+     * @param longit
+     * @param latit
+     */
     public void HotSpot(Number longit, Number latit) {
         this.setLongitude((double) longit);
         this.setLatitude((double) latit);

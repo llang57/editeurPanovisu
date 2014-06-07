@@ -95,11 +95,19 @@ public class Panoramique {
         this.hotspots[i] = hotspot;
     }
 
+    /**
+     *
+     * @param hotspot
+     */
     public void addHotspot(HotSpot hotspot) {
         this.hotspots[this.getNombreHotspots()] = hotspot;
         this.nombreHotspots++;
     }
 
+    /**
+     *
+     * @param num
+     */
     public void removeHotspot(int num) {
         System.out.println("Retire le point : " + num);
         for (int i = num; i < this.nombreHotspots - 1; i++) {
@@ -179,7 +187,6 @@ public class Panoramique {
     public void setAfficheInfo(boolean afficheInfo) {
         this.afficheInfo = afficheInfo;
     }
-
 
     /**
      * @return the titrePanoramique

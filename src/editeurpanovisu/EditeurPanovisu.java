@@ -262,10 +262,10 @@ public class EditeurPanovisu extends Application {
                     + "        <header>\n"
                     + "\n"
                     + "        </header>\n"
-                    + "        <article>\n"
+                    + "        <article style=\"height : " + hauteur + "px;\">\n"
                     + "            <div id=\"pano\">\n"
                     + "            </div>\n"
-                    + "        </article style=\"height : " + hauteur + "px;\">\n"
+                    + "        </article>\n"
                     + "        <script src=\"panovisu/panovisuInit.js\"></script>\n"
                     + "        <script src=\"panovisu/panovisu.js\"></script>\n"
                     + "        <script>\n"
@@ -432,7 +432,7 @@ public class EditeurPanovisu extends Application {
             repertoireProjet = currentDir;
         }
         Action reponse = null;
-        Localization.setLocale(new Locale("fr", "FR"));
+        Localization.setLocale(locale);
         if (!dejaSauve) {
             reponse = Dialogs.create()
                     .owner(null)
@@ -645,7 +645,7 @@ public class EditeurPanovisu extends Application {
      */
     private void projetsFermer() {
         Action reponse = null;
-        Localization.setLocale(new Locale("fr", "FR"));
+        Localization.setLocale(locale);
         if (!dejaSauve) {
             reponse = Dialogs.create()
                     .owner(null)
@@ -677,7 +677,7 @@ public class EditeurPanovisu extends Application {
      */
     private void projetsNouveau() {
         Action reponse = null;
-        Localization.setLocale(new Locale("fr", "FR"));
+        Localization.setLocale(locale);
         if (!dejaSauve) {
             reponse = Dialogs.create()
                     .owner(null)
@@ -2054,9 +2054,16 @@ public class EditeurPanovisu extends Application {
         barreStatus.setTranslateY(25);
         barreStatus.setStyle("-fx-background-color:#c00;-fx-border-color:#aaa");
         Tab tabVisite = new Tab();
-        tabInterface = gestionnaireInterface.creeInterface();
+        Pane visualiseur;
+        tabInterface=new Tab();
+        gestionnaireInterface.creeInterface(width,height-140);
+        visualiseur=gestionnaireInterface.tabInterface;
+        tabInterface.setContent(visualiseur);
+        
+        
+        
+        
         HBox hbEnvironnement = new HBox();
-        Pane visualiseur = new Pane();
         TextArea txtTitrePano;
         RadioButton radSphere;
         RadioButton radCube;
@@ -2069,11 +2076,9 @@ public class EditeurPanovisu extends Application {
         tabPaneEnvironnement.setSide(Side.TOP);
         tabVisite.setText("Gestion des panoramiques");
         tabVisite.setClosable(false);
-        tabInterface.setText("Création de l'nterface");
+        tabInterface.setText("Création de l'interface");
         tabInterface.setClosable(false);
         tabVisite.setContent(hbEnvironnement);
-        visualiseur.setPrefSize(500, 1000);
-        tabInterface.setContent(visualiseur);
         double largeur;
         String labelStyle = "-fx-color : white;-fx-background-color : #fff;-fx-padding : 5px;  -fx-border : 1px solid #777;-fx-width : 100px;-fx-margin : 5px; ";
 
@@ -2267,7 +2272,7 @@ public class EditeurPanovisu extends Application {
         projetsNouveau();
         primaryStage.setOnCloseRequest((WindowEvent event) -> {
             Action reponse = null;
-            Localization.setLocale(new Locale("fr", "FR"));
+            Localization.setLocale(locale);
             if (!dejaSauve) {
                 reponse = Dialogs.create()
                         .owner(null)

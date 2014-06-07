@@ -13,7 +13,6 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
@@ -237,10 +236,8 @@ public class EquiCubeDialogController {
 
     /**
      *
+     * @return
      */
-    public void Equi2CubeDialogController() {
-    }
-
     private File[] choixFichiers() {
         File[] lstFich = null;
         FileChooser repertChoix = new FileChooser();

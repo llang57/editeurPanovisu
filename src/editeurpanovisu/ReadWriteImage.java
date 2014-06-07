@@ -26,7 +26,11 @@ import javax.imageio.stream.FileImageOutputStream;
 public class ReadWriteImage {
 
     private static float[] sharpenMatrix = new float[9];
-
+/**
+ * 
+ * @param level
+ * @return 
+ */
     private static float[] calculeSharpenMatrix(float level) {
         float[] normalMatrix = {
             0.0f, 0.0f, 0.0f,
@@ -45,7 +49,15 @@ public class ReadWriteImage {
         }
         return sharpMatrix;
     }
-
+/**
+ * 
+ * @param img
+ * @param destFile
+ * @param quality
+ * @param sharpen
+ * @param sharpenLevel
+ * @throws IOException 
+ */
     public static void writeJpeg(Image img, String destFile, float quality, boolean sharpen, float sharpenLevel)
             throws IOException {
         sharpenMatrix = ReadWriteImage.calculeSharpenMatrix(sharpenLevel);
@@ -91,7 +103,14 @@ public class ReadWriteImage {
         }
         graphics.dispose();
     }
-
+/**
+ * 
+ * @param img
+ * @param destFile
+ * @param sharpen
+ * @param sharpenLevel
+ * @throws IOException 
+ */
     public static void writeBMP(Image img, String destFile, boolean sharpen, float sharpenLevel)
             throws IOException {
         sharpenMatrix = ReadWriteImage.calculeSharpenMatrix(sharpenLevel);

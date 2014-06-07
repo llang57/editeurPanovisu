@@ -39,12 +39,20 @@ public class ConfigDialogController {
     private static AnchorPane myPane;
     private static Button btnAnnuler;
     private static Button btnSauvegarder;
-    private static final String[] langues = {"fr_FR", "en_EN"};
+    private static final String[] codesLangues = {"fr_FR", "en_EN", "de_DE"};
+    private static final String[] langues = {"Francais", "English", "Deutsch"};
+
     private static ComboBox listeLangues;
     private static TextField txtRepert;
 
-    public void afficheFenetre() throws IOException{
-        String choixLangue = EditeurPanovisu.locale.getLanguage() + "_" + EditeurPanovisu.locale.getCountry();
+    public void afficheFenetre() throws IOException {
+        String chLangueConfig = EditeurPanovisu.locale.getLanguage() + "_" + EditeurPanovisu.locale.getCountry();
+        int codeL=0;
+        for (int i = 0; i < codesLangues.length; i++) {
+            if (codesLangues[i].equals(chLangueConfig)) {
+                codeL = i;
+            }
+        }
         STConfig = new Stage(StageStyle.UTILITY);
         STConfig.initModality(Modality.APPLICATION_MODAL);
         STConfig.setResizable(false);
@@ -63,19 +71,21 @@ public class ConfigDialogController {
         listeLangues = new ComboBox();
         listeLangues.setLayoutX(190);
         listeLangues.setLayoutY(25);
-        listeLangues.getItems().addAll(Arrays.asList(langues));
-        listeLangues.setValue(choixLangue);
+        for (int i = 0; i < codesLangues.length; i++) {
+            listeLangues.getItems().add(langues[i] + " : " + codesLangues[i]);
+        }
+        listeLangues.setValue(langues[codeL] + " : " + codesLangues[codeL]);
         Label lblRepert = new Label(rb.getString("config.choixRepert"));
-        lblRepert.setPrefWidth(120);
+        lblRepert.setPrefWidth(320);
         lblRepert.setLayoutX(45);
         lblRepert.setLayoutY(70);
         txtRepert = new TextField(EditeurPanovisu.repertoireProjet);
         txtRepert.setLayoutX(190);
-        txtRepert.setLayoutY(70);
+        txtRepert.setLayoutY(110);
         txtRepert.setPrefWidth(300);
         Button btnChoixRepert = new Button("...");
         btnChoixRepert.setLayoutX(490);
-        btnChoixRepert.setLayoutY(70);
+        btnChoixRepert.setLayoutY(110);
         VBConfig.getChildren().addAll(lblType, listeLangues, lblRepert, txtRepert, btnChoixRepert);
         btnChoixRepert.setOnAction((ActionEvent e) -> {
             DirectoryChooser repertChoix = new DirectoryChooser();
@@ -105,18 +115,18 @@ public class ConfigDialogController {
                     .masthead(rb.getString("config.masthead"))
                     .message(rb.getString("config.message"))
                     .showWarning();
-            String contenuFichier = "langue="+listeLangues.getValue().toString().split("_")[0]+"\n";
-            contenuFichier+="pays="+listeLangues.getValue().toString().split("_")[1]+"\n";
-            contenuFichier+="repert="+txtRepert.getText()+"\n";
+            String contenuFichier = "langue=" + listeLangues.getValue().toString().split("_")[0].split(" : ")[1] + "\n";
+            contenuFichier += "pays=" + listeLangues.getValue().toString().split("_")[1] + "\n";
+            contenuFichier += "repert=" + txtRepert.getText() + "\n";
             File fichConfig = new File(EditeurPanovisu.repertConfig.getAbsolutePath() + File.separator + "panovisu.cfg");
             fichConfig.setWritable(true);
-            FileWriter fw=null;
+            FileWriter fw = null;
             try {
                 fw = new FileWriter(fichConfig);
             } catch (IOException ex) {
                 Logger.getLogger(ConfigDialogController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            System.out.println(fichConfig.getAbsolutePath()+"\n"+contenuFichier);
+            System.out.println(fichConfig.getAbsolutePath() + "\n" + contenuFichier);
             BufferedWriter bw = new BufferedWriter(fw);
             try {
                 bw.write(contenuFichier);
