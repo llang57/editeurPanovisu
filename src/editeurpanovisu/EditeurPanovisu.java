@@ -182,6 +182,9 @@ public class EditeurPanovisu extends Application {
                 if (panoramiquesProjet[i].getTypePanoramique().equals(Panoramique.CUBE)) {
                     fPano = fPano.substring(0, fPano.length() - 2);
                 }
+                System.out.println(gestionnaireInterface.styleBarre + " positionX="+ gestionnaireInterface.positionBarre.split(":")[1]+ " positionY="+gestionnaireInterface.positionBarre.split(":")[0]
+                        + "  dX="+gestionnaireInterface.dXBarre
+                        + "  dY="+gestionnaireInterface.dYBarre);
                 String affInfo = (panoramiquesProjet[i].isAfficheInfo()) ? "oui" : "non";
                 String affTitre = (panoramiquesProjet[i].isAfficheTitre()) ? "oui" : "non";
                 contenuFichier = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
@@ -202,20 +205,20 @@ public class EditeurPanovisu extends Application {
                         + "   />\n"
                         + "   <!--Définition de la Barre de navigation-->\n"
                         + "   <boutons \n"
-                        + "      styleBoutons=\"retinavert\"\n"
+                        + "      styleBoutons=\""+gestionnaireInterface.styleBarre+"\"\n"
                         + "      couleur=\"rgba(255,255,255,0)\"\n"
                         + "      bordure=\"rgba(255,255,255,0)\"\n"
-                        + "      deplacements=\"oui\" \n"
-                        + "      zoom=\"oui\" \n"
-                        + "      outils=\"oui\"\n"
-                        + "      fs=\"oui\" \n"
-                        + "      souris=\"oui\" \n"
-                        + "      rotation=\"oui\" \n"
-                        + "      positionX=\"center\"\n"
-                        + "      positionY=\"bottom\" \n"
-                        + "      dX=\"0\" \n"
-                        + "      dY=\"10\"\n"
-                        + "      visible=\"oui\"\n"
+                        + "      deplacements=\""+gestionnaireInterface.toggleBarreDeplacements+"\" \n"
+                        + "      zoom=\""+gestionnaireInterface.toggleBarreZoom+"\" \n"
+                        + "      outils=\""+gestionnaireInterface.toggleBarreoutils+"\"\n"
+                        + "      fs=\""+gestionnaireInterface.toggleBoutonFS+"\" \n"
+                        + "      souris=\""+gestionnaireInterface.toggleBoutonSouris+"\" \n"
+                        + "      rotation=\""+gestionnaireInterface.toggleBoutonRotation+"\" \n"
+                        + "      positionX=\""+gestionnaireInterface.positionBarre.split(":")[1]+"\"\n"
+                        + "      positionY=\""+gestionnaireInterface.positionBarre.split(":")[0]+"\" \n"
+                        + "      dX=\""+gestionnaireInterface.dXBarre+"\" \n"
+                        + "      dY=\""+gestionnaireInterface.dYBarre+"\"\n"
+                        + "      visible=\""+gestionnaireInterface.toggleBarreVisibilite+"\"\n"
                         + "   />\n"
                         + "    <!--Définition des hotspots-->  \n"
                         + "   <hotspots>\n";
@@ -283,9 +286,6 @@ public class EditeurPanovisu extends Application {
                     + "                });\n"
                     + "            });\n"
                     + "        </script>\n"
-                    + "        <footer>\n"
-                    + "            Page de test - Panovisu\n"
-                    + "        </footer>\n"
                     + "    </body>\n"
                     + "</html>\n";
             fichierHTML = fichierHTML.replace("PANO",
@@ -2074,9 +2074,9 @@ public class EditeurPanovisu extends Application {
         tabPaneEnvironnement.getTabs().addAll(tabVisite, tabInterface);
         //tabPaneEnvironnement.setTranslateY(80);
         tabPaneEnvironnement.setSide(Side.TOP);
-        tabVisite.setText("Gestion des panoramiques");
+        tabVisite.setText(rb.getString("main.creationVisite"));
         tabVisite.setClosable(false);
-        tabInterface.setText("Création de l'interface");
+        tabInterface.setText(rb.getString("main.creationInterface"));
         tabInterface.setClosable(false);
         tabVisite.setContent(hbEnvironnement);
         double largeur;
