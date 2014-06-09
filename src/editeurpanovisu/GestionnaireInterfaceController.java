@@ -723,7 +723,7 @@ public class GestionnaireInterfaceController {
         AnchorPane APHS = new AnchorPane();
         AnchorPane APBarreModif = new AnchorPane();
 
-        Label lblBarreBouton = new Label(rb.getString("interface.choixHotspot"));
+        Label lblBarreBouton = new Label(rb.getString("interface.barreBoutons"));
         lblBarreBouton.setPrefWidth(VBOutils.getPrefWidth());
         lblBarreBouton.setStyle("-fx-background-color : #444");
         lblBarreBouton.setTextFill(Color.WHITE);
@@ -735,6 +735,21 @@ public class GestionnaireInterfaceController {
         IVBtnPlus.setLayoutY(13);
         double tailleInitiale = APBarreModif.getPrefHeight();
         lblBarreBouton.setOnMouseClicked((MouseEvent me) -> {
+            if (APBarreModif.isVisible()) {
+                APBarreModif.setPrefHeight(10);
+                APBarreModif.setMaxHeight(10);
+                APBarreModif.setMinHeight(10);
+                APBarreModif.setVisible(false);
+                IVBtnPlus.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
+            } else {
+                APBarreModif.setPrefHeight(tailleInitiale);
+                APBarreModif.setMaxHeight(tailleInitiale);
+                APBarreModif.setMinHeight(tailleInitiale);
+                APBarreModif.setVisible(true);
+                IVBtnPlus.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
+            }
+        });
+        IVBtnPlus.setOnMouseClicked((MouseEvent me) -> {
             if (APBarreModif.isVisible()) {
                 APBarreModif.setPrefHeight(10);
                 APBarreModif.setMaxHeight(10);
@@ -761,6 +776,21 @@ public class GestionnaireInterfaceController {
         lblChoixHS.setLayoutX(30);
         lblChoixHS.setLayoutY(10);
         lblChoixHS.setOnMouseClicked((MouseEvent me) -> {
+            if (APHotSpots.isVisible()) {
+                IVBtnPlusHS.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
+                APHotSpots.setPrefHeight(10);
+                APHotSpots.setMaxHeight(10);
+                APHotSpots.setMinHeight(10);
+                APHotSpots.setVisible(false);
+            } else {
+                IVBtnPlusHS.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
+                APHotSpots.setPrefHeight(tailleHS);
+                APHotSpots.setMaxHeight(tailleHS);
+                APHotSpots.setMinHeight(tailleHS);
+                APHotSpots.setVisible(true);
+            }
+        });
+        IVBtnPlusHS.setOnMouseClicked((MouseEvent me) -> {
             if (APHotSpots.isVisible()) {
                 IVBtnPlusHS.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
                 APHotSpots.setPrefHeight(10);

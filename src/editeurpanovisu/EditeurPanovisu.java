@@ -496,7 +496,7 @@ public class EditeurPanovisu extends Application {
                         texte = "";
                         String ligneTexte;
                         while ((ligneTexte = br.readLine()) != null) {
-                            texte += ligneTexte;
+                            texte += ligneTexte + "\n";
                         }
                     }
                     analyseLigne(texte);
@@ -519,6 +519,49 @@ public class EditeurPanovisu extends Application {
         }
     }
 
+    private void sauveFichierProjet() throws IOException {
+        repertoireProjet = fichProjet.getParent();
+        repertSauveChoisi = true;
+        File fichierProjet = new File(fichProjet.getAbsolutePath());
+        if (!fichierProjet.exists()) {
+            fichierProjet.createNewFile();
+        }
+        dejaSauve = true;
+        String contenuFichier = "";
+        for (int i = 0; i < nombrePanoramiques; i++) {
+            contenuFichier += "[Panoramique=>"
+                    + "fichier:" + panoramiquesProjet[i].getNomFichier()
+                    + ";nb:" + panoramiquesProjet[i].getNombreHotspots()
+                    + ";titre:" + panoramiquesProjet[i].getTitrePanoramique() + ""
+                    + ";type:" + panoramiquesProjet[i].getTypePanoramique()
+                    + ";afficheInfo:" + panoramiquesProjet[i].isAfficheInfo()
+                    + ";afficheTitre:" + panoramiquesProjet[i].isAfficheTitre()
+                    + "]\n";
+            for (int j = 0; j < panoramiquesProjet[i].getNombreHotspots(); j++) {
+                HotSpot HS = panoramiquesProjet[i].getHotspot(j);
+                contenuFichier += "   [hotspot==>"
+                        + "longitude:" + HS.getLongitude()
+                        + ";latitude:" + HS.getLatitude()
+                        + ";image:" + HS.getFichierImage()
+                        + ";xml:" + HS.getFichierXML()
+                        + ";info:" + HS.getInfo()
+                        + ";anime:" + HS.isAnime()
+                        + "]\n";
+            }
+        }
+        contenuFichier += "[Interface=>\n" + gestionnaireInterface.getTemplate() + "]\n";
+        fichProjet.setWritable(true);
+        FileWriter fw = new FileWriter(fichProjet);
+        try (BufferedWriter bw = new BufferedWriter(fw)) {
+            bw.write(contenuFichier);
+        }
+        Dialogs.create().title("Editeur PanoVisu")
+                .masthead("Sauvegarde de fichier")
+                .message("Votre fichier à bien été sauvegardé")
+                .showInformation();
+
+    }
+
     /**
      *
      * @throws IOException
@@ -536,44 +579,7 @@ public class EditeurPanovisu extends Application {
             fichProjet = repertChoix.showSaveDialog(null);
         }
         if (fichProjet != null) {
-            repertoireProjet = fichProjet.getParent();
-            repertSauveChoisi = true;
-            File fichierProjet = new File(fichProjet.getAbsolutePath());
-            if (!fichierProjet.exists()) {
-                fichierProjet.createNewFile();
-            }
-            dejaSauve = true;
-            String contenuFichier = "";
-            for (int i = 0; i < nombrePanoramiques; i++) {
-                contenuFichier += "[Panoramique=>"
-                        + "fichier:" + panoramiquesProjet[i].getNomFichier()
-                        + ";nb:" + panoramiquesProjet[i].getNombreHotspots()
-                        + ";titre:" + panoramiquesProjet[i].getTitrePanoramique() + ""
-                        + ";type:" + panoramiquesProjet[i].getTypePanoramique()
-                        + ";afficheInfo:" + panoramiquesProjet[i].isAfficheInfo()
-                        + ";afficheTitre:" + panoramiquesProjet[i].isAfficheTitre()
-                        + "]\n";
-                for (int j = 0; j < panoramiquesProjet[i].getNombreHotspots(); j++) {
-                    HotSpot HS = panoramiquesProjet[i].getHotspot(j);
-                    contenuFichier += "   [hotspot==>"
-                            + "longitude:" + HS.getLongitude()
-                            + ";latitude:" + HS.getLatitude()
-                            + ";image:" + HS.getFichierImage()
-                            + ";xml:" + HS.getFichierXML()
-                            + ";info:" + HS.getInfo()
-                            + ";anime:" + HS.isAnime()
-                            + "]\n";
-                }
-            }
-            fichProjet.setWritable(true);
-            FileWriter fw = new FileWriter(fichProjet);
-            try (BufferedWriter bw = new BufferedWriter(fw)) {
-                bw.write(contenuFichier);
-            }
-            Dialogs.create().title("Editeur PanoVisu")
-                    .masthead("Sauvegarde de fichier")
-                    .message("Votre fichier à bien été sauvegardé")
-                    .showInformation();
+            sauveFichierProjet();
         }
     }
 
@@ -592,41 +598,7 @@ public class EditeurPanovisu extends Application {
         repertChoix.setInitialDirectory(repert);
         fichProjet = repertChoix.showSaveDialog(null);
         if (fichProjet != null) {
-
-            repertoireProjet = fichProjet.getParent();
-            repertSauveChoisi = true;
-            File fichierProjet = new File(fichProjet.getAbsolutePath());
-            if (!fichierProjet.exists()) {
-                fichierProjet.createNewFile();
-            }
-            dejaSauve = true;
-            String contenuFichier = "";
-            for (int i = 0; i < nombrePanoramiques; i++) {
-                contenuFichier += "[Panoramique=>"
-                        + "fichier:" + panoramiquesProjet[i].getNomFichier()
-                        + ";nb:" + panoramiquesProjet[i].getNombreHotspots()
-                        + ";titre:" + panoramiquesProjet[i].getTitrePanoramique() + ""
-                        + ";type:" + panoramiquesProjet[i].getTypePanoramique()
-                        + ";afficheInfo:" + panoramiquesProjet[i].isAfficheInfo()
-                        + ";afficheTitre:" + panoramiquesProjet[i].isAfficheTitre()
-                        + "]\n";
-                for (int j = 0; j < panoramiquesProjet[i].getNombreHotspots(); j++) {
-                    HotSpot HS = panoramiquesProjet[i].getHotspot(j);
-                    contenuFichier += "   [hotspot==>"
-                            + "longitude:" + HS.getLongitude()
-                            + ";latitude:" + HS.getLatitude()
-                            + ";image:" + HS.getFichierImage()
-                            + ";xml:" + HS.getFichierXML()
-                            + ";info:" + HS.getInfo()
-                            + ";anime:" + HS.isAnime()
-                            + "]\n";
-                }
-            }
-            fichProjet.setWritable(true);
-            FileWriter fw = new FileWriter(fichProjet);
-            try (BufferedWriter bw = new BufferedWriter(fw)) {
-                bw.write(contenuFichier);
-            }
+            sauveFichierProjet();
         }
 
     }
@@ -880,6 +852,7 @@ public class EditeurPanovisu extends Application {
             typeElement = elementsLigne[0].split(">", 2);
             typeElement[0] = typeElement[0].replace(" ", "").replace("=", "").replace("[", "");
             elementsLigne[0] = typeElement[1];
+            System.out.println("typeElément : " + typeElement[0]);
             if ("Panoramique".equals(typeElement[0])) {
                 for (int i = 0; i < elementsLigne.length; i++) {
                     elementsLigne[i] = elementsLigne[i].replace("]", "");
@@ -1011,6 +984,19 @@ public class EditeurPanovisu extends Application {
                     panoramiquesProjet[panoActuel].addHotspot(HS);
                 }
             }
+            if ("Interface".equals(typeElement[0])) {
+                System.out.println("ligne" + elementsLigne[0]);
+                String[] elts = elementsLigne[0].replace("]", "").split("\n");
+                List<String> listeTemplate = new ArrayList<>();
+                for (String texte : elts) {
+                    System.out.println(texte);
+                    if (!texte.equals("")) {
+                        listeTemplate.add(texte);
+                    }
+                }
+                gestionnaireInterface.setTemplate(listeTemplate);
+            }
+
         }
 
         for (int ii = 0; ii < nombrePanoramiques; ii++) {
@@ -1696,7 +1682,7 @@ public class EditeurPanovisu extends Application {
         fichTemplate = repertChoix.showSaveDialog(null);
 
         if (fichTemplate != null) {
-            String contenuFichier=gestionnaireInterface.getTemplate();
+            String contenuFichier = gestionnaireInterface.getTemplate();
             fichTemplate.setWritable(true);
             FileWriter fw = new FileWriter(fichTemplate);
             try (BufferedWriter bw = new BufferedWriter(fw)) {
@@ -1707,10 +1693,6 @@ public class EditeurPanovisu extends Application {
                     .message("Votre modèle à bien été sauvegardé")
                     .showInformation();
         }
-            
-            
-        
-        
 
     }
 
@@ -1718,31 +1700,31 @@ public class EditeurPanovisu extends Application {
      *
      */
     private void modeleCharger() throws IOException {
-            FileChooser repertChoix = new FileChooser();
-            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("fichier panoVisu (*.tpl)", "*.tpl");
-            repertChoix.getExtensionFilters().add(extFilter);
-            File repert = new File(repertAppli + File.separator + "templates");
-            repertChoix.setInitialDirectory(repert);
-            File fichtemplate = repertChoix.showOpenDialog(stPrincipal);
-            if (fichtemplate != null) {
-                FileReader fr;
-                try {
-                    fr = new FileReader(fichtemplate);
-                    List<String> texte=new ArrayList<>();
-                    BufferedReader br = new BufferedReader(fr);
-                    
-                        String ligneTexte;
-                        while ((ligneTexte = br.readLine()) != null) {
-                            texte.add(ligneTexte);
-                        }
-                    gestionnaireInterface.setTemplate(texte);    
+        FileChooser repertChoix = new FileChooser();
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("fichier panoVisu (*.tpl)", "*.tpl");
+        repertChoix.getExtensionFilters().add(extFilter);
+        File repert = new File(repertAppli + File.separator + "templates");
+        repertChoix.setInitialDirectory(repert);
+        File fichtemplate = repertChoix.showOpenDialog(stPrincipal);
+        if (fichtemplate != null) {
+            FileReader fr;
+            try {
+                fr = new FileReader(fichtemplate);
+                List<String> texte = new ArrayList<>();
+                BufferedReader br = new BufferedReader(fr);
 
-                } catch (FileNotFoundException ex) {
-                    Logger.getLogger(EditeurPanovisu.class
-                            .getName()).log(Level.SEVERE, null, ex);
+                String ligneTexte;
+                while ((ligneTexte = br.readLine()) != null) {
+                    texte.add(ligneTexte);
                 }
+                gestionnaireInterface.setTemplate(texte);
 
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(EditeurPanovisu.class
+                        .getName()).log(Level.SEVERE, null, ex);
             }
+
+        }
 
     }
 

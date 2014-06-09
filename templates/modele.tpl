@@ -1,0 +1,12 @@
+styleBarre=retinarouge
+styleHotspots=pointXRouge.png
+position=bottom:center
+dX=0.0
+dY=15.0
+visible=oui
+deplacement=oui
+zoom=oui
+outils=oui
+rotation=non
+FS=oui
+souris=non

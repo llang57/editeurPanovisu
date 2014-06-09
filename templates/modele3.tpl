@@ -1,0 +1,12 @@
+styleBarre=retinavert
+styleHotspots=pointXVert.png
+position=bottom:center
+dX=0.0
+dY=15.0
+visible=oui
+deplacement=oui
+zoom=non
+outils=oui
+rotation=oui
+FS=oui
+souris=non
