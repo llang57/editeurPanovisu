@@ -21,6 +21,7 @@ public class Panoramique {
     private String nomFichier;
     private double lookAtX, lookAtY;
     private Image imagePanoramique;
+    private Image vignettePanoramique;
     private int nombreHotspots = 0;
     private String typePanoramique;
     private boolean afficheTitre;
@@ -200,6 +201,20 @@ public class Panoramique {
      */
     public void setTitrePanoramique(String titrePanoramique) {
         this.titrePanoramique = titrePanoramique;
+    }
+
+    /**
+     * @return the vignettePanoramique
+     */
+    public Image getVignettePanoramique() {
+        return vignettePanoramique;
+    }
+
+    /**
+     * @param vignettePanoramique the vignettePanoramique to set
+     */
+    public void setVignettePanoramique(Image vignettePanoramique) {
+        this.vignettePanoramique = vignettePanoramique;
     }
 
 }

@@ -7,8 +7,10 @@ package editeurpanovisu;
 
 import static editeurpanovisu.EditeurPanovisu.repertAppli;
 import java.io.File;
+import java.io.FilenameFilter;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -22,9 +24,11 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import jfxtras.labs.scene.control.BigDecimalField;
 
@@ -34,19 +38,25 @@ import jfxtras.labs.scene.control.BigDecimalField;
  */
 public class GestionnaireInterfaceController {
 
+    private static final ExtensionsFilter IMAGE_FILTER
+            = new ExtensionsFilter(new String[]{".png", ".jpg", ".bmp"});
+
     private static final ResourceBundle rb = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", EditeurPanovisu.locale);
 
     public static final String styleDefaut = "retinavert";
     public static final String styleHotSpotDefaut = "hotspotvert.png";
     public static String positionBarre = "bottom:center";
+    public static String styleHotSpots = styleHotSpotDefaut;
+
     public static String styleBarre = styleDefaut;
     public static double dXBarre = 0;
     public static double dYBarre = 10;
     public static double tailleBarre = 30;
+
     public static String toggleBarreVisibilite = "oui";
     public static String toggleBarreDeplacements = "oui";
     public static String toggleBarreZoom = "oui";
-    public static String toggleBarreoutils = "oui";
+    public static String toggleBarreOutils = "oui";
     public static String toggleBoutonInfo = "oui";
     public static String toggleBoutonAide = "oui";
     public static String toggleBoutonRotation = "oui";
@@ -55,7 +65,7 @@ public class GestionnaireInterfaceController {
     public Pane tabInterface;
     private static HBox HBInterface;
     private static AnchorPane APVisualisation;
-    private static AnchorPane VBOutils;
+    private static VBox VBOutils;
     private static RadioButton RBClair;
     private static RadioButton RBSombre;
     private static ImageView IMVisualisation;
@@ -104,8 +114,17 @@ public class GestionnaireInterfaceController {
     private static RadioButton RBBottomLeft;
     private static RadioButton RBBottomCenter;
     private static RadioButton RBBottomRight;
+    private static CheckBox CBVisible;
+    private static CheckBox CBDeplacements;
+    private static CheckBox CBZoom;
+    private static CheckBox CBOutils;
+    private static CheckBox CBFS;
+    private static CheckBox CBSouris;
+    private static CheckBox CBRotation;
+    private static BigDecimalField dXSpinner;
+    private static BigDecimalField dYSpinner;
 
-    private void afficheBouton(String position, double dX, double dY, double taille, String styleBoutons, String styleHS) {
+    public void afficheBouton(String position, double dX, double dY, double taille, String styleBoutons, String styleHS) {
         String repertBoutons = "file:" + repertBoutonsPrincipal + File.separator + styleBoutons;
         HBbarreBoutons = new HBox();
         HBbarreBoutons.setId("barreBoutons");
@@ -123,7 +142,7 @@ public class GestionnaireInterfaceController {
         if (toggleBarreZoom.equals("non")) {
             nombreBoutons -= 2;
         }
-        if (toggleBarreoutils.equals("non")) {
+        if (toggleBarreOutils.equals("non")) {
             nombreBoutons -= 5;
         } else {
             if (toggleBoutonFS.equals("non")) {
@@ -155,7 +174,7 @@ public class GestionnaireInterfaceController {
         if (toggleBarreZoom.equals("non")) {
             HBbarreBoutons.getChildren().remove(HBZoom);
         }
-        if (toggleBarreoutils.equals("non")) {
+        if (toggleBarreOutils.equals("non")) {
             HBbarreBoutons.getChildren().remove(HBOutils);
         }
         System.out.println("repertBoutons" + repertBoutons);
@@ -271,10 +290,172 @@ public class GestionnaireInterfaceController {
         return liste;
     }
 
+    private ArrayList<String> listerHotSpots(String repertoire) {
+        ArrayList<String> liste = new ArrayList<String>();
+        FilenameFilter FNFPng = new FilenameFilter() {
+
+            @Override
+            public boolean accept(File dir, String name) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        };
+        File[] Repertoires = new File(repertoire).listFiles(IMAGE_FILTER);
+        for (File repert : Repertoires) {
+            if (!repert.isDirectory()) {
+                String nomRepert = repert.getName();
+                System.out.println("repert " + nomRepert);
+                liste.add(nomRepert);
+            }
+        }
+        return liste;
+    }
+
+    public String getTemplate() {
+        String contenuFichier = "";
+        contenuFichier
+                += "styleBarre=" + styleBarre + "\n"
+                + "styleHotspots=" + styleHotSpots + "\n"
+                + "position=" + positionBarre + "\n"
+                + "dX=" + dXBarre + "\n"
+                + "dY=" + dYBarre + "\n"
+                + "visible=" + toggleBarreVisibilite + "\n"
+                + "deplacement=" + toggleBarreDeplacements + "\n"
+                + "zoom=" + toggleBarreZoom + "\n"
+                + "outils=" + toggleBarreOutils + "\n"
+                + "rotation=" + toggleBoutonRotation + "\n"
+                + "FS=" + toggleBoutonFS + "\n"
+                + "souris=" + toggleBoutonSouris + "\n";
+        return contenuFichier;
+    }
+
+    public void setTemplate(List<String> templ) {
+        for (String chaine : templ) {
+            String variable = chaine.split("=")[0];
+            String valeur = chaine.split("=")[1];
+            System.out.println(variable + "=" + valeur);
+            switch (variable) {
+                case "styleBarre":
+                    styleBarre = valeur;
+                    CBlisteStyle.setValue(valeur);
+                    break;
+                case "styleHotspots":
+                    styleHotSpots = valeur;
+                    break;
+                case "position":
+                    positionBarre = valeur;
+                    switch (valeur) {
+                        case "top:left":
+                            RBTopLeft.setSelected(true);
+                            break;
+                        case "top:center":
+                            RBTopCenter.setSelected(true);
+                            break;
+                        case "top:right":
+                            RBTopRight.setSelected(true);
+                            break;
+                        case "middle:left":
+                            RBMiddleLeft.setSelected(true);
+                            break;
+                        case "middle:center":
+                            RBMiddleCenter.setSelected(true);
+                            break;
+                        case "middle:right":
+                            RBMiddleRight.setSelected(true);
+                            break;
+                        case "bottom:left":
+                            RBBottomLeft.setSelected(true);
+                            break;
+                        case "bottom:center":
+                            RBBottomCenter.setSelected(true);
+                            break;
+                        case "bottom:right":
+                            RBBottomRight.setSelected(true);
+                            break;
+                    }
+
+                    break;
+                case "dX":
+                    dXBarre = Double.parseDouble(valeur);
+                    System.out.println("dx : " + dXBarre);
+                    dXSpinner.setNumber(new BigDecimal(dXBarre));
+                    break;
+                case "dY":
+                    dYBarre = Double.parseDouble(valeur);
+                    System.out.println("dy : " + dYBarre);
+                    dYSpinner.setNumber(new BigDecimal(dYBarre));
+                    break;
+                case "visible":
+                    toggleBarreVisibilite = valeur;
+                    if (valeur.equals("oui")) {
+                        CBVisible.setSelected(true);
+                    } else {
+                        CBVisible.setSelected(false);
+                    }
+                    break;
+                case "deplacement":
+                    toggleBarreDeplacements = valeur;
+                    if (valeur.equals("oui")) {
+                        CBDeplacements.setSelected(true);
+                    } else {
+                        CBDeplacements.setSelected(false);
+                    }
+                    break;
+                case "zoom":
+                    toggleBarreZoom = valeur;
+                    if (valeur.equals("oui")) {
+                        CBZoom.setSelected(true);
+                    } else {
+                        CBZoom.setSelected(false);
+                    }
+                    break;
+                case "outils":
+                    toggleBarreOutils = valeur;
+                    if (valeur.equals("oui")) {
+                        CBOutils.setSelected(true);
+                    } else {
+                        CBOutils.setSelected(false);
+                    }
+                    break;
+                case "rotation":
+                    toggleBoutonRotation = valeur;
+                    if (valeur.equals("oui")) {
+                        CBRotation.setSelected(true);
+                    } else {
+                        CBRotation.setSelected(false);
+                    }
+                    break;
+                case "FS":
+                    toggleBoutonFS = valeur;
+                    if (valeur.equals("oui")) {
+                        CBFS.setSelected(true);
+                    } else {
+                        CBFS.setSelected(false);
+                    }
+                    break;
+                case "souris":
+                    toggleBoutonSouris = valeur;
+                    if (valeur.equals("oui")) {
+                        CBSouris.setSelected(true);
+                    } else {
+                        CBSouris.setSelected(false);
+                    }
+                    break;
+
+            }
+        }
+        APVisualisation.getChildren().remove(HBbarreBoutons);
+        APVisualisation.getChildren().remove(IVHotSpot);
+        afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
+
+    }
+
     public void creeInterface(int width, int height) {
         repertBoutonsPrincipal = repertAppli + File.separator + "panovisu/images";
         repertHotSpots = repertAppli + File.separator + "panovisu/images/hotspots";
         ArrayList<String> listeStyles = listerStyle(repertBoutonsPrincipal);
+        ArrayList<String> listeHotSpots = listerHotSpots(repertHotSpots);
+        int nombreHotSpots = listeHotSpots.size();
+        ImageView[] IVHotspots = new ImageView[nombreHotSpots];
         imageClaire = new Image("file:" + repertAppli + File.separator + "images/claire.jpg");
         imageSombre = new Image("file:" + repertAppli + File.separator + "images/sombre.jpg");
         Label txtTitre = new Label("Titre du panoramique");
@@ -287,7 +468,7 @@ public class GestionnaireInterfaceController {
         APVisualisation = new AnchorPane();
         APVisualisation.setPrefWidth(width * 0.8);
         APVisualisation.setPrefHeight(height);
-        VBOutils = new AnchorPane();
+        VBOutils = new VBox();
         VBOutils.setPrefWidth(width * 0.2);
         VBOutils.setPrefHeight(height);
         VBOutils.setStyle("-fx-background-color : #ccc;");
@@ -323,22 +504,24 @@ public class GestionnaireInterfaceController {
         RBSombre.setUserData("sombre");
         APVisualisation.getChildren().add(IMVisualisation);
         APVisualisation.getChildren().add(txtTitre);
-        afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpotDefaut);
+        afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
+
         CBlisteStyle = new ComboBox();
         listeStyles.stream().forEach((nomStyle) -> {
             CBlisteStyle.getItems().add(nomStyle);
         });
         CBlisteStyle.setLayoutX(150);
-        CBlisteStyle.setLayoutY(60);
-        RBTopLeft = new RadioButton("");
-        RBTopCenter = new RadioButton("");
-        RBTopRight = new RadioButton("");
-        RBMiddleLeft = new RadioButton("");
-        RBMiddleCenter = new RadioButton("");
-        RBMiddleRight = new RadioButton("");
-        RBBottomLeft = new RadioButton("");
-        RBBottomCenter = new RadioButton("");
-        RBBottomRight = new RadioButton("");
+        CBlisteStyle.setLayoutY(90);
+
+        RBTopLeft = new RadioButton();
+        RBTopCenter = new RadioButton();
+        RBTopRight = new RadioButton();
+        RBMiddleLeft = new RadioButton();
+        RBMiddleCenter = new RadioButton();
+        RBMiddleRight = new RadioButton();
+        RBBottomLeft = new RadioButton();
+        RBBottomCenter = new RadioButton();
+        RBBottomRight = new RadioButton();
 
         RBTopLeft.setUserData("top:left");
         RBTopCenter.setUserData("top:center");
@@ -361,7 +544,7 @@ public class GestionnaireInterfaceController {
         RBBottomRight.setToggleGroup(grpPostBarre);
 
         int posX = 250;
-        int posY = 100;
+        int posY = 130;
 
         RBTopLeft.setLayoutX(posX);
         RBTopCenter.setLayoutX(posX + 20);
@@ -386,24 +569,24 @@ public class GestionnaireInterfaceController {
         RBBottomCenter.setSelected(true);
         Label lblStyle = new Label(rb.getString("interface.style"));
         lblStyle.setLayoutX(30);
-        lblStyle.setLayoutY(40);
+        lblStyle.setLayoutY(70);
         Label lblPosit = new Label(rb.getString("interface.position"));
         lblPosit.setLayoutX(30);
-        lblPosit.setLayoutY(100);
+        lblPosit.setLayoutY(130);
 
-        BigDecimalField dXSpinner = new BigDecimalField(new BigDecimal(dXBarre));
+        dXSpinner = new BigDecimalField(new BigDecimal(dXBarre));
         dXSpinner.setLayoutX(50);
-        dXSpinner.setLayoutY(180);
+        dXSpinner.setLayoutY(210);
         dXSpinner.setMaxValue(new BigDecimal(2000));
         dXSpinner.setMinValue(new BigDecimal(-2000));
         dXSpinner.setMaxWidth(100);
-        BigDecimalField dYSpinner = new BigDecimalField(new BigDecimal(dYBarre));
+        dYSpinner = new BigDecimalField(new BigDecimal(dYBarre));
         dYSpinner.setLayoutX(250);
-        dYSpinner.setLayoutY(180);
+        dYSpinner.setLayoutY(210);
         dYSpinner.setMaxValue(new BigDecimal(2000));
         dYSpinner.setMinValue(new BigDecimal(-2000));
         dYSpinner.setMaxWidth(100);
-        CheckBox CBVisible = new CheckBox(rb.getString("interface.barreVisible"));
+        CBVisible = new CheckBox(rb.getString("interface.barreVisible"));
         CBVisible.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val) {
                 toggleBarreVisibilite = "oui";
@@ -412,10 +595,10 @@ public class GestionnaireInterfaceController {
             }
             APVisualisation.getChildren().remove(HBbarreBoutons);
             APVisualisation.getChildren().remove(IVHotSpot);
-            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpotDefaut);
+            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
         });
 
-        CheckBox CBDeplacements = new CheckBox(rb.getString("interface.deplacementsVisible"));
+        CBDeplacements = new CheckBox(rb.getString("interface.deplacementsVisible"));
         CBDeplacements.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val) {
                 toggleBarreDeplacements = "oui";
@@ -424,9 +607,9 @@ public class GestionnaireInterfaceController {
             }
             APVisualisation.getChildren().remove(HBbarreBoutons);
             APVisualisation.getChildren().remove(IVHotSpot);
-            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpotDefaut);
+            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
         });
-        CheckBox CBZoom = new CheckBox(rb.getString("interface.zoomVisible"));
+        CBZoom = new CheckBox(rb.getString("interface.zoomVisible"));
         CBZoom.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val) {
                 toggleBarreZoom = "oui";
@@ -435,20 +618,20 @@ public class GestionnaireInterfaceController {
             }
             APVisualisation.getChildren().remove(HBbarreBoutons);
             APVisualisation.getChildren().remove(IVHotSpot);
-            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpotDefaut);
+            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
         });
-        CheckBox CBOutils = new CheckBox(rb.getString("interface.outilsVisible"));
+        CBOutils = new CheckBox(rb.getString("interface.outilsVisible"));
         CBOutils.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val) {
-                toggleBarreoutils = "oui";
+                toggleBarreOutils = "oui";
             } else {
-                toggleBarreoutils = "non";
+                toggleBarreOutils = "non";
             }
             APVisualisation.getChildren().remove(HBbarreBoutons);
             APVisualisation.getChildren().remove(IVHotSpot);
-            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpotDefaut);
+            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
         });
-        CheckBox CBSouris = new CheckBox(rb.getString("interface.outilsSouris"));
+        CBSouris = new CheckBox(rb.getString("interface.outilsSouris"));
         CBSouris.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val) {
                 toggleBoutonSouris = "oui";
@@ -457,9 +640,9 @@ public class GestionnaireInterfaceController {
             }
             APVisualisation.getChildren().remove(HBbarreBoutons);
             APVisualisation.getChildren().remove(IVHotSpot);
-            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpotDefaut);
+            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
         });
-        CheckBox CBRotation = new CheckBox(rb.getString("interface.outilsRotation"));
+        CBRotation = new CheckBox(rb.getString("interface.outilsRotation"));
         CBRotation.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val) {
                 toggleBoutonRotation = "oui";
@@ -468,9 +651,9 @@ public class GestionnaireInterfaceController {
             }
             APVisualisation.getChildren().remove(HBbarreBoutons);
             APVisualisation.getChildren().remove(IVHotSpot);
-            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpotDefaut);
+            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
         });
-        CheckBox CBFS = new CheckBox(rb.getString("interface.outilsFS"));
+        CBFS = new CheckBox(rb.getString("interface.outilsFS"));
         CBFS.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val) {
                 toggleBoutonFS = "oui";
@@ -479,41 +662,134 @@ public class GestionnaireInterfaceController {
             }
             APVisualisation.getChildren().remove(HBbarreBoutons);
             APVisualisation.getChildren().remove(IVHotSpot);
-            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpotDefaut);
+            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
         });
 
         CBVisible.setLayoutX(30);
-        CBVisible.setLayoutY(10);
+        CBVisible.setLayoutY(40);
         Label lblVisibilite = new Label(rb.getString("interface.visibilite"));
         lblVisibilite.setLayoutX(30);
-        lblVisibilite.setLayoutY(230);
+        lblVisibilite.setLayoutY(260);
         CBVisible.setSelected(true);
         CBDeplacements.setLayoutX(100);
-        CBDeplacements.setLayoutY(250);
+        CBDeplacements.setLayoutY(280);
         CBDeplacements.setSelected(true);
         CBZoom.setLayoutX(100);
-        CBZoom.setLayoutY(270);
+        CBZoom.setLayoutY(300);
         CBZoom.setSelected(true);
         CBOutils.setLayoutX(100);
-        CBOutils.setLayoutY(290);
+        CBOutils.setLayoutY(320);
         CBOutils.setSelected(true);
         CBFS.setLayoutX(150);
-        CBFS.setLayoutY(310);
+        CBFS.setLayoutY(340);
         CBFS.setSelected(true);
         CBRotation.setLayoutX(150);
-        CBRotation.setLayoutY(330);
+        CBRotation.setLayoutY(360);
         CBRotation.setSelected(true);
         CBSouris.setLayoutX(150);
-        CBSouris.setLayoutY(350);
+        CBSouris.setLayoutY(380);
         CBSouris.setSelected(true);
-        VBOutils.getChildren().addAll(CBVisible, lblStyle, CBlisteStyle, lblPosit,
+        AnchorPane APHotSpots = new AnchorPane();
+        double tailleHS = 35.d * (int) (nombreHotSpots / 8 + 1);
+        APHotSpots.setPrefHeight(tailleHS);
+        APHotSpots.setLayoutX(50);
+        APHotSpots.setLayoutY(40);
+        APHotSpots.setStyle("-fx-background-color : #fff");
+        APHotSpots.setPadding(new Insets(5));
+        int i = 0;
+        double xHS;
+        double yHS;
+        for (String nomImage : listeHotSpots) {
+            IVHotspots[i] = new ImageView(new Image("file:" + repertHotSpots + File.separator + nomImage, -1, 30, true, true, true));
+            int col = i % 8;
+            int row = i / 8;
+            xHS = col * 40 + 5;
+            yHS = row * 35 + 5;
+            IVHotspots[i].setLayoutX(xHS);
+            IVHotspots[i].setLayoutY(yHS);
+            IVHotspots[i].setStyle("-fx-background-color : #ccc");
+            IVHotspots[i].setOnMouseClicked((MouseEvent me) -> {
+                APVisualisation.getChildren().remove(HBbarreBoutons);
+                APVisualisation.getChildren().remove(IVHotSpot);
+                styleHotSpots = nomImage;
+                afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
+
+            });
+            APHotSpots.getChildren().add(IVHotspots[i]);
+            i++;
+
+        }
+        AnchorPane APBB = new AnchorPane();
+        AnchorPane APHS = new AnchorPane();
+        AnchorPane APBarreModif = new AnchorPane();
+
+        Label lblBarreBouton = new Label(rb.getString("interface.choixHotspot"));
+        lblBarreBouton.setPrefWidth(VBOutils.getPrefWidth());
+        lblBarreBouton.setStyle("-fx-background-color : #444");
+        lblBarreBouton.setTextFill(Color.WHITE);
+        lblBarreBouton.setPadding(new Insets(5));
+        lblBarreBouton.setLayoutX(30);
+        lblBarreBouton.setLayoutY(10);
+        ImageView IVBtnPlus = new ImageView(new Image("file:" + "images/moins.png", 20, 20, true, true));
+        IVBtnPlus.setLayoutX(VBOutils.getPrefWidth());
+        IVBtnPlus.setLayoutY(13);
+        double tailleInitiale = APBarreModif.getPrefHeight();
+        lblBarreBouton.setOnMouseClicked((MouseEvent me) -> {
+            if (APBarreModif.isVisible()) {
+                APBarreModif.setPrefHeight(10);
+                APBarreModif.setMaxHeight(10);
+                APBarreModif.setMinHeight(10);
+                APBarreModif.setVisible(false);
+                IVBtnPlus.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
+            } else {
+                APBarreModif.setPrefHeight(tailleInitiale);
+                APBarreModif.setMaxHeight(tailleInitiale);
+                APBarreModif.setMinHeight(tailleInitiale);
+                APBarreModif.setVisible(true);
+                IVBtnPlus.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
+            }
+        });
+
+        ImageView IVBtnPlusHS = new ImageView(new Image("file:" + "images/moins.png", 20, 20, true, true));
+        IVBtnPlusHS.setLayoutX(VBOutils.getPrefWidth());
+        IVBtnPlusHS.setLayoutY(13);
+        Label lblChoixHS = new Label(rb.getString("interface.choixHotspot"));
+        lblChoixHS.setPrefWidth(VBOutils.getPrefWidth());
+        lblChoixHS.setStyle("-fx-background-color : #444");
+        lblChoixHS.setTextFill(Color.WHITE);
+        lblChoixHS.setPadding(new Insets(5));
+        lblChoixHS.setLayoutX(30);
+        lblChoixHS.setLayoutY(10);
+        lblChoixHS.setOnMouseClicked((MouseEvent me) -> {
+            if (APHotSpots.isVisible()) {
+                IVBtnPlusHS.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
+                APHotSpots.setPrefHeight(10);
+                APHotSpots.setMaxHeight(10);
+                APHotSpots.setMinHeight(10);
+                APHotSpots.setVisible(false);
+            } else {
+                IVBtnPlusHS.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
+                APHotSpots.setPrefHeight(tailleHS);
+                APHotSpots.setMaxHeight(tailleHS);
+                APHotSpots.setMinHeight(tailleHS);
+                APHotSpots.setVisible(true);
+            }
+        });
+
+        APBarreModif.getChildren().addAll(
+                CBVisible, lblStyle, CBlisteStyle, lblPosit,
                 RBTopLeft, RBTopCenter, RBTopRight,
                 RBMiddleLeft, RBMiddleCenter, RBMiddleRight,
                 RBBottomLeft, RBBottomCenter, RBBottomRight,
                 dXSpinner, dYSpinner,
                 lblVisibilite, CBDeplacements, CBZoom, CBOutils,
-                CBFS,CBRotation,CBSouris
+                CBFS, CBRotation, CBSouris);
+        APBB.getChildren().addAll(APBarreModif, lblBarreBouton, IVBtnPlus);
+        APHS.getChildren().addAll(lblChoixHS, IVBtnPlusHS, APHotSpots);
+        VBOutils.getChildren().addAll(
+                APBB, APHS
         );
+
         CBlisteStyle.valueProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue ov, String t, String t1) {
@@ -521,7 +797,7 @@ public class GestionnaireInterfaceController {
                     APVisualisation.getChildren().remove(HBbarreBoutons);
                     APVisualisation.getChildren().remove(IVHotSpot);
                     styleBarre = t1;
-                    afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpotDefaut);
+                    afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
                 }
             }
         });
@@ -531,14 +807,14 @@ public class GestionnaireInterfaceController {
             APVisualisation.getChildren().remove(HBbarreBoutons);
             APVisualisation.getChildren().remove(IVHotSpot);
             dXBarre = new_value.doubleValue();
-            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpotDefaut);
+            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
         });
         dYSpinner.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
             System.out.println(new_value);
             APVisualisation.getChildren().remove(HBbarreBoutons);
             APVisualisation.getChildren().remove(IVHotSpot);
             dYBarre = new_value.doubleValue();
-            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpotDefaut);
+            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
         });
         grpImage.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) -> {
             if (grpImage.getSelectedToggle() != null) {
@@ -558,7 +834,7 @@ public class GestionnaireInterfaceController {
                 APVisualisation.getChildren().remove(IVHotSpot);
                 positionBarre = grpPostBarre.getSelectedToggle().getUserData().toString();
                 System.out.println(positionBarre);
-                afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpotDefaut);
+                afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
             }
         });
     }
