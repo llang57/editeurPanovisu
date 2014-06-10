@@ -1,0 +1,12 @@
+styleBarre=xoo1blanc
+styleHotspots=StarRouge.png
+position=bottom:left
+dX=30.0
+dY=10.0
+visible=oui
+deplacement=non
+zoom=oui
+outils=oui
+rotation=oui
+FS=oui
+souris=non

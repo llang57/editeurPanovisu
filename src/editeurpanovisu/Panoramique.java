@@ -13,7 +13,14 @@ import javafx.scene.image.Image;
  */
 public class Panoramique {
 
+    /**
+     * Constante de type de panoramique : Sphere
+     */
     public static final String SPHERE = "sphere";
+
+    /**
+     * Constante de type de panoramique : Sphere
+     */
     public static final String CUBE = "cube";
 
     private HotSpot[] hotspots = new HotSpot[100];

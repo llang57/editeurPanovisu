@@ -67,7 +67,13 @@ public class EquiCubeDialogController {
     static private Label LBLSharpen;
 
     final ToggleGroup grpTypeFichier = new ToggleGroup();
+    /**
+     * Constante de type de transfrormation Equi=>Cube
+     */
     public final static String EQUI2CUBE = "E2C";
+    /**
+     * Constante de type de transfrormation Cube=>Equi
+     */
     public final static String CUBE2QUI = "C2E";
     private File[] lstFichier;
     private static String repertFichier = EditeurPanovisu.repertoireProjet;

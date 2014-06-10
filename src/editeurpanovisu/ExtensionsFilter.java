@@ -3,11 +3,17 @@ package editeurpanovisu;
 
 import java.io.File;
 import java.io.FileFilter;
-
+/**
+ * 
+ * @author llang
+ */
 public class ExtensionsFilter implements FileFilter 
 {
     private char[][] extensions;
-
+/**
+ * 
+ * @param extensions 
+ */
     ExtensionsFilter(String[] extensions)
     {
         int length = extensions.length;
@@ -17,7 +23,11 @@ public class ExtensionsFilter implements FileFilter
             this.extensions[--length] = s.toCharArray();
         }
     }
-
+/**
+ * 
+ * @param file
+ * @return boolean
+ */
     @Override
     public boolean accept(File file)
     {

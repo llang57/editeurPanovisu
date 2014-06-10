@@ -44,7 +44,10 @@ public class ConfigDialogController {
 
     private static ComboBox listeLangues;
     private static TextField txtRepert;
-
+/**
+ * 
+ * @throws IOException 
+ */
     public void afficheFenetre() throws IOException {
         String chLangueConfig = EditeurPanovisu.locale.getLanguage() + "_" + EditeurPanovisu.locale.getCountry();
         int codeL=0;

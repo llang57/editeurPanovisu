@@ -17,6 +17,11 @@ import javafx.scene.paint.Color;
  */
 public class TransformationsPanoramique {
 
+    /**
+     * Constante rapport de taille d'image 
+     * transformation entre cube equi
+     * Taille face de cube = RAPPORTCUBEEQUI*TailleEqui X RAPPORTCUBEEQUI*TailleEqui
+     */
     public static final double RAPPORTCUBEEQUI = 0.3183;
 
     /**
@@ -387,14 +392,14 @@ public class TransformationsPanoramique {
 
     /**
      *
-     * @param front
-     * @param left
-     * @param right
-     * @param behind
-     * @param top
-     * @param bottom
-     * @param taille
-     * @return
+     * @param front face avant
+     * @param left face gauche
+     * @param right face droite
+     * @param behind face arrière
+     * @param top face supérieure
+     * @param bottom face inérieure
+     * @param taille si taille = -1 calcul de la taille optimale
+     * @return Image equirectangulaire
      */
     public static Image cube2rect(Image front, Image left, Image right, Image behind, Image top, Image bottom, int taille) {
         PixelReader PRFront = front.getPixelReader();

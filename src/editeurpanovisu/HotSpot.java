@@ -16,10 +16,7 @@ public class HotSpot {
     private String fichierXML, info;
     private boolean anime;
 
-    public void HotSpot() {
-
-    }
-
+    
     /**
      *
      * @param longit

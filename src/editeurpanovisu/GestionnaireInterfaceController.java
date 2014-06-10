@@ -42,26 +42,91 @@ public class GestionnaireInterfaceController {
             = new ExtensionsFilter(new String[]{".png", ".jpg", ".bmp"});
 
     private static final ResourceBundle rb = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", EditeurPanovisu.locale);
-
+/**
+ * 
+ */
     public static final String styleDefaut = "retinavert";
+/**
+ * 
+ */
     public static final String styleHotSpotDefaut = "hotspotvert.png";
+    /**
+     * 
+     */
     public static String positionBarre = "bottom:center";
+    /**
+     * 
+     */
     public static String styleHotSpots = styleHotSpotDefaut;
 
+    /**
+     *
+     */
     public static String styleBarre = styleDefaut;
+
+    /**
+     *
+     */
     public static double dXBarre = 0;
+
+    /**
+     *
+     */
     public static double dYBarre = 10;
+
+    /**
+     *
+     */
     public static double tailleBarre = 30;
 
+    /**
+     *
+     */
     public static String toggleBarreVisibilite = "oui";
+
+    /**
+     *
+     */
     public static String toggleBarreDeplacements = "oui";
+
+    /**
+     *
+     */
     public static String toggleBarreZoom = "oui";
+
+    /**
+     *
+     */
     public static String toggleBarreOutils = "oui";
+
+    /**
+     *
+     */
     public static String toggleBoutonInfo = "oui";
+
+    /**
+     *
+     */
     public static String toggleBoutonAide = "oui";
+
+    /**
+     *
+     */
     public static String toggleBoutonRotation = "oui";
+
+    /**
+     *
+     */
     public static String toggleBoutonFS = "oui";
+
+    /**
+     *
+     */
     public static String toggleBoutonSouris = "oui";
+
+    /**
+     *
+     */
     public Pane tabInterface;
     private static HBox HBInterface;
     private static AnchorPane APVisualisation;
@@ -123,7 +188,15 @@ public class GestionnaireInterfaceController {
     private static CheckBox CBRotation;
     private static BigDecimalField dXSpinner;
     private static BigDecimalField dYSpinner;
-
+/**
+ * 
+ * @param position
+ * @param dX
+ * @param dY
+ * @param taille
+ * @param styleBoutons
+ * @param styleHS 
+ */
     public void afficheBouton(String position, double dX, double dY, double taille, String styleBoutons, String styleHS) {
         String repertBoutons = "file:" + repertBoutonsPrincipal + File.separator + styleBoutons;
         HBbarreBoutons = new HBox();
@@ -274,7 +347,11 @@ public class GestionnaireInterfaceController {
         HBbarreBoutons.setLayoutX(LX);
         HBbarreBoutons.setLayoutY(LY);
     }
-
+/**
+ * 
+ * @param repertoire
+ * @return 
+ */
     private ArrayList<String> listerStyle(String repertoire) {
         ArrayList<String> liste = new ArrayList<String>();
         File[] Repertoires = new File(repertoire).listFiles();
@@ -289,7 +366,11 @@ public class GestionnaireInterfaceController {
         }
         return liste;
     }
-
+/**
+ * 
+ * @param repertoire
+ * @return 
+ */
     private ArrayList<String> listerHotSpots(String repertoire) {
         ArrayList<String> liste = new ArrayList<String>();
         FilenameFilter FNFPng = new FilenameFilter() {
@@ -309,7 +390,10 @@ public class GestionnaireInterfaceController {
         }
         return liste;
     }
-
+/**
+ * 
+ * @return 
+ */
     public String getTemplate() {
         String contenuFichier = "";
         contenuFichier
@@ -327,7 +411,10 @@ public class GestionnaireInterfaceController {
                 + "souris=" + toggleBoutonSouris + "\n";
         return contenuFichier;
     }
-
+/**
+ * 
+ * @param templ 
+ */
     public void setTemplate(List<String> templ) {
         for (String chaine : templ) {
             String variable = chaine.split("=")[0];
@@ -448,7 +535,11 @@ public class GestionnaireInterfaceController {
         afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
 
     }
-
+/**
+ * 
+ * @param width
+ * @param height 
+ */
     public void creeInterface(int width, int height) {
         repertBoutonsPrincipal = repertAppli + File.separator + "panovisu/images";
         repertHotSpots = repertAppli + File.separator + "panovisu/images/hotspots";

@@ -26,6 +26,10 @@ import javafx.stage.StageStyle;
  * @author llang
  */
 public class popUpHandler {
+
+    /**
+     *
+     */
     public static Stage popUp;
 
     @FXML
@@ -33,10 +37,18 @@ public class popUpHandler {
     @FXML
     Hyperlink leMondea360;
 
+    /**
+     *
+     */
     @FXML
     public void handleQuitteAction() {
         popUp.close();
     }
+
+    /**
+     *
+     * @throws URISyntaxException
+     */
     @FXML
     public void handleOuvreLien() throws URISyntaxException {
         try {
@@ -45,9 +57,17 @@ public class popUpHandler {
             Logger.getLogger(popUpHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    /**
+     *
+     */
     public void popUpHandler(){
     }
     
+    /**
+     *
+     * @throws Exception
+     */
     public void affichePopup() throws Exception {
         popUp= new Stage(StageStyle.UTILITY);
         popUp.initModality(Modality.APPLICATION_MODAL);        

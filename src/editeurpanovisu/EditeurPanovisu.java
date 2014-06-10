@@ -56,6 +56,8 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Tooltip;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
@@ -63,6 +65,7 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -71,7 +74,6 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import javax.swing.ToolTipManager;
 import org.controlsfx.control.action.Action;
@@ -84,6 +86,9 @@ import org.controlsfx.dialog.Dialogs;
  */
 public class EditeurPanovisu extends Application {
 
+    /**
+     * Définition de la langue locale par défaut fr_FR
+     */
     public static Locale locale = new Locale("fr", "FR");
     private static ResourceBundle rb;
     static private popUpHandler popUp;
@@ -98,7 +103,7 @@ public class EditeurPanovisu extends Application {
     static private int nombrePanoramiques = 0;
     static private int panoActuel = 0;
     static private File fichProjet;
-
+    static private String panoListeVignette;
     static private Pane pano;
     static private VBox paneChoixPanoramique;
     static private VBox outils;
@@ -110,13 +115,24 @@ public class EditeurPanovisu extends Application {
     static private double largeurMax;
     static private boolean estCharge = false;
     static private boolean repertSauveChoisi = false;
+    static private String panoEntree = "";
+    /**
+     * Répertoire de l'application
+     */
     static public String repertAppli;
     static private String repertTemp;
     static private String repertPanos;
+    /**
+     * Répertoire de sauvegarde du projet
+     */
     static public String repertoireProjet;
+    /**
+     * Répertoire du fichier de configuration
+     */
     static public File repertConfig;
 
     final static private ComboBox listeChoixPanoramique = new ComboBox();
+    final static private ComboBox listeChoixPanoramiqueEntree = new ComboBox();
     static private Label lblChoixPanoramique;
     static private boolean panoCharge = false;
     static private String panoAffiche = "";
@@ -292,8 +308,12 @@ public class EditeurPanovisu extends Application {
                     + "        </script>\n"
                     + "    </body>\n"
                     + "</html>\n";
-            fichierHTML = fichierHTML.replace("PANO",
-                    panoramiquesProjet[0].getNomFichier().substring(panoramiquesProjet[0].getNomFichier().lastIndexOf(File.separator) + 1, panoramiquesProjet[0].getNomFichier().length()).split("\\.")[0]);
+            if (panoEntree.equals("")) {
+                fichierHTML = fichierHTML.replace("PANO",
+                        panoramiquesProjet[0].getNomFichier().substring(panoramiquesProjet[0].getNomFichier().lastIndexOf(File.separator) + 1, panoramiquesProjet[0].getNomFichier().length()).split("\\.")[0]);
+            } else {
+                fichierHTML = fichierHTML.replace("PANO", panoEntree);
+            }
             File fichIndexHTML = new File(repertTemp + File.separator + "index.html");
             fichIndexHTML.setWritable(true);
             FileWriter fw1 = new FileWriter(fichIndexHTML);
@@ -330,7 +350,6 @@ public class EditeurPanovisu extends Application {
 
         FileChooser.ExtensionFilter extFilterJpeg = new FileChooser.ExtensionFilter("Fichiers JPEG (*.jpg)", "*.jpg");
         FileChooser.ExtensionFilter extFilterBmp = new FileChooser.ExtensionFilter("Fichiers BMP (*.bmp)", "*.bmp");
-
         File repert = new File(currentDir + File.separator);
         fileChooser.setInitialDirectory(repert);
         fileChooser.getExtensionFilters().addAll(extFilterJpeg, extFilterBmp);
@@ -488,6 +507,7 @@ public class EditeurPanovisu extends Application {
                 numPoints = 0;
                 imagePanoramique.setImage(null);
                 listeChoixPanoramique.getItems().clear();
+                listeChoixPanoramiqueEntree.getItems().clear();
                 FileReader fr;
                 try {
                     fr = new FileReader(fichProjet);
@@ -506,6 +526,7 @@ public class EditeurPanovisu extends Application {
                     panoCharge = true;
                     paneChoixPanoramique.setVisible(true);
                     listeChoixPanoramique.setValue(listeChoixPanoramique.getItems().get(0));
+                    //listeChoixPanoramiqueEntree.setValue(listeChoixPanoramiqueEntree.getItems().get(0));
                     for (int ii = 0; ii < nombrePanoramiques; ii++) {
                         Panoramique pano1 = panoramiquesProjet[ii];
                     }
@@ -528,6 +549,9 @@ public class EditeurPanovisu extends Application {
         }
         dejaSauve = true;
         String contenuFichier = "";
+        if (!panoEntree.equals("")) {
+            contenuFichier += "[PanoEntree=>" + panoEntree + "]\n";
+        }
         for (int i = 0; i < nombrePanoramiques; i++) {
             contenuFichier += "[Panoramique=>"
                     + "fichier:" + panoramiquesProjet[i].getNomFichier()
@@ -673,6 +697,7 @@ public class EditeurPanovisu extends Application {
             }
         }
         if ((reponse == Dialog.Actions.YES) || (reponse == Dialog.Actions.NO) || (reponse == null)) {
+            panoEntree = "";
             deleteDirectory(repertTemp);
             String repertPanovisu = repertTemp + File.separator + "panovisu";
             File rptPanovisu = new File(repertPanovisu);
@@ -697,6 +722,7 @@ public class EditeurPanovisu extends Application {
             numPoints = 0;
             imagePanoramique.setImage(null);
             listeChoixPanoramique.getItems().clear();
+            listeChoixPanoramiqueEntree.getItems().clear();
 
             scene.setOnDragOver((DragEvent event) -> {
                 Dragboard db = event.getDragboard();
@@ -823,7 +849,7 @@ public class EditeurPanovisu extends Application {
 
     /**
      *
-     * @param emplacement
+     * @param emplacement répertoire à effacer
      */
     static public void deleteDirectory(String emplacement) {
         File path = new File(emplacement);
@@ -839,6 +865,7 @@ public class EditeurPanovisu extends Application {
     }
 
     private void analyseLigne(String ligneComplete) {
+        panoEntree = "";
         nombrePanoramiques = 0;
         ligneComplete = ligneComplete.replace("[", "|");
         String lignes[] = ligneComplete.split("\\|", 500);
@@ -996,9 +1023,16 @@ public class EditeurPanovisu extends Application {
                 }
                 gestionnaireInterface.setTemplate(listeTemplate);
             }
+            if ("PanoEntree".equals(typeElement[0])) {
+                System.out.println("ligne" + elementsLigne[0]);
+                panoEntree = elementsLigne[0].split("]")[0];
+                System.out.println("ligne" + panoEntree);
+            }
 
         }
-
+        if (!panoEntree.equals("")) {
+            listeChoixPanoramiqueEntree.setValue(panoEntree + ".jpg");
+        }
         for (int ii = 0; ii < nombrePanoramiques; ii++) {
             Panoramique pano1 = panoramiquesProjet[ii];
         }
@@ -1045,6 +1079,7 @@ public class EditeurPanovisu extends Application {
                     }
                     locale = new Locale(langue, pays);
                     repertoireProjet = repert;
+                    currentDir = repert;
                     repertSauveChoisi = true;
                 }
 
@@ -1062,8 +1097,8 @@ public class EditeurPanovisu extends Application {
 
     /**
      *
-     * @param emplacement
-     * @param repertoire
+     * @param emplacement répertoire origine
+     * @param repertoire répertoire cible
      */
     static public void copieDirectory(String emplacement, String repertoire) {
         File repert2 = new File(repertoire);
@@ -1155,9 +1190,90 @@ public class EditeurPanovisu extends Application {
         }
     }
 
-    /**
-     *
-     */
+    private AnchorPane afficherListePanosVignettes(int numHS) {
+
+        pano.setOnMouseClicked(
+                (MouseEvent me) -> {
+                }
+        );
+        pano.setCursor(Cursor.DEFAULT);
+        AnchorPane APlistePano = new AnchorPane();
+        APlistePano.setOpacity(1);
+        Pane fond = new Pane();
+        fond.setStyle("-fx-backgroung-color : #bbb;");
+        fond.setPrefWidth(540);
+        fond.setPrefHeight(((nombrePanoramiques - 1) / 4 + 1) * 65 + 5);
+        fond.setMinWidth(540);
+        fond.setMinHeight(70);
+        APlistePano.getChildren().add(fond);
+        APlistePano.setStyle("-fx-backgroung-color : #bbb;");
+        int j = 0;
+        ImageView[] IVPano;
+        IVPano = new ImageView[nombrePanoramiques - 1];
+        double xPos;
+        double yPos;
+
+        for (int i = 0; i < nombrePanoramiques; i++) {
+            if (i != panoActuel) {
+                IVPano[j] = new ImageView(panoramiquesProjet[i].getVignettePanoramique());
+                String nomPano = panoramiquesProjet[i].getNomFichier();
+                int col = j % 4;
+                int row = j / 4;
+                xPos = col * 130 + 25;
+                yPos = row * 65 + 5;
+                IVPano[j].setLayoutX(xPos);
+                IVPano[j].setLayoutY(yPos);
+                IVPano[j].setCursor(Cursor.HAND);
+                IVPano[j].setStyle("-fx-background-color : #ccc;");
+                Tooltip.install(IVPano[j], new Tooltip(nomPano.substring(nomPano.lastIndexOf(File.separator) + 1, nomPano.lastIndexOf("."))));
+                IVPano[j].setOnMouseClicked((MouseEvent me) -> {
+                    pano.setCursor(Cursor.CROSSHAIR);
+                    pano.setOnMouseClicked(
+                            (MouseEvent me1) -> {
+                                if (!(me1.isControlDown()) && estCharge) {
+                                    panoMouseClic(me1.getSceneX(), me1.getSceneY());
+                                }
+                            }
+                    );
+                    panoListeVignette = nomPano;
+                    System.out.println("nomPano : " + nomPano);
+                    ComboBox cbx = (ComboBox) scene.lookup("#cbpano" + numHS);
+                    cbx.setValue(nomPano.substring(nomPano.lastIndexOf(File.separator) + 1, nomPano.lastIndexOf(".")));
+                    APlistePano.setVisible(false);
+                    me.consume();
+                });
+                APlistePano.getChildren().add(IVPano[j]);
+                j++;
+            }
+            APlistePano.setPrefWidth(540);
+            APlistePano.setPrefHeight((j / 4 + 1) * 65 + 5);
+            APlistePano.setMinWidth(540);
+            APlistePano.setMinHeight((j / 4 + 1) * 65 + 5);
+
+        }
+        ImageView IVClose = new ImageView(new Image("file:" + repertAppli + File.separator + "images/ferme.png", 20, 20, true, true));
+        IVClose.setLayoutX(0);
+        IVClose.setLayoutY(5);
+        IVClose.setCursor(Cursor.HAND);
+        APlistePano.getChildren().add(IVClose);
+        IVClose.setOnMouseClicked((MouseEvent me) -> {
+            pano.setCursor(Cursor.CROSSHAIR);
+            pano.setOnMouseClicked(
+                    (MouseEvent me1) -> {
+                        if (!(me1.isControlDown()) && estCharge) {
+                            panoMouseClic(me1.getSceneX(), me1.getSceneY());
+                        }
+                    }
+            );
+
+            panoListeVignette = "";
+            System.out.println("Ferme");
+            APlistePano.setVisible(false);
+            me.consume();
+        });
+        return APlistePano;
+    }
+
     /**
      *
      */
@@ -1177,6 +1293,12 @@ public class EditeurPanovisu extends Application {
 
     }
 
+    /**
+     *
+     * @param lstPano
+     * @param numPano
+     * @return
+     */
     public Pane affichageHS(String lstPano, int numPano) {
 
         Pane panneauHotSpots = new Pane();
@@ -1281,30 +1403,52 @@ public class EditeurPanovisu extends Application {
         Tooltip.install(point, new Tooltip("point n° " + i));
 
         point.setOnMouseClicked((MouseEvent me1) -> {
-            dejaSauve = false;
+            double mouseX = me1.getSceneX();
+            double mouseY = me1.getSceneY() - pano.getLayoutY() - 115;
             String chPoint = point.getId();
             chPoint = chPoint.substring(5, chPoint.length());
             int numeroPoint = Integer.parseInt(chPoint);
-            if (me1.isControlDown()) {
-                Node pt = (Node) pano.lookup("#point" + chPoint);
-                pano.getChildren().remove(pt);
-            }
-            for (int o = numeroPoint + 1; o < numPoints; o++) {
-                Node pt = (Node) pano.lookup("#point" + Integer.toString(o));
-                pt.setId("point" + Integer.toString(o - 1));
-            }
-            /**
-             * on retire les anciennes indication de HS
-             */
-            retireAffichageHotSpots();
-            numPoints--;
-            panoramiquesProjet[panoActuel].removeHotspot(numeroPoint);
-            ajouteAffichageHotspots();
-            /**
-             * On les crée les nouvelles
-             */
+            Node pt;
+            pt = (Node) pano.lookup("#point" + chPoint);
 
-            me1.consume();
+            if (me1.isControlDown()) {
+                System.out.println("click avec Ctrl");
+                valideHS();
+                dejaSauve = false;
+                pano.getChildren().remove(pt);
+
+                for (int o = numeroPoint + 1; o < numPoints; o++) {
+                    pt = (Node) pano.lookup("#point" + Integer.toString(o));
+                    pt.setId("point" + Integer.toString(o - 1));
+                }
+                /**
+                 * on retire les anciennes indication de HS
+                 */
+                retireAffichageHotSpots();
+                numPoints--;
+                panoramiquesProjet[panoActuel].removeHotspot(numeroPoint);
+                /**
+                 * On les crée les nouvelles
+                 */
+                ajouteAffichageHotspots();
+                me1.consume();
+            } else {
+                System.out.println("click sans Ctrl");
+                valideHS();
+                if (nombrePanoramiques > 1) {
+                    AnchorPane listePanoVig = afficherListePanosVignettes(numeroPoint);
+                    if (mouseX + (nombrePanoramiques - 1) * 130 > pano.getWidth()) {
+                        listePanoVig.setLayoutX(pano.getWidth() - (nombrePanoramiques - 1) * 130);
+                    } else {
+                        listePanoVig.setLayoutX(mouseX);
+                    }
+                    listePanoVig.setLayoutY(mouseY);
+                    pano.getChildren().add(listePanoVig);
+                }
+                me1.consume();
+
+            }
+
         });
     }
 
@@ -1327,6 +1471,96 @@ public class EditeurPanovisu extends Application {
         if (!dejaSauve) {
             projetSauve();
         }
+    }
+
+    private void panoMouseClic(double X, double Y) {
+
+        valideHS();
+        dejaSauve = false;
+        double mouseX = X;
+        double mouseY = Y - pano.getLayoutY() - 115;
+        double longitude, latitude;
+        double largeur = imagePanoramique.getFitWidth();
+        String chLong, chLat;
+        longitude = 360.0f * mouseX / largeur - 180;
+        latitude = 90.0d - 2.0f * mouseY / largeur * 180.0f;
+        Circle point = new Circle(mouseX, mouseY, 5);
+        point.setFill(Color.YELLOW);
+        point.setStroke(Color.RED);
+        point.setId("point" + numPoints);
+        point.setCursor(Cursor.DEFAULT);
+        pano.getChildren().add(point);
+        Tooltip.install(point, new Tooltip("point n°" + numPoints));
+        HotSpot HS = new HotSpot();
+        HS.setLongitude(longitude);
+        HS.setLatitude(latitude);
+        panoramiquesProjet[panoActuel].addHotspot(HS);
+        retireAffichageHotSpots();
+        Pane affHS1 = affichageHS(listePano(panoActuel), panoActuel);
+        affHS1.setId("labels");
+        outils.getChildren().add(affHS1);
+
+        numPoints++;
+        if (nombrePanoramiques > 1) {
+            AnchorPane listePanoVig = afficherListePanosVignettes(panoramiquesProjet[panoActuel].getNombreHotspots() - 1);
+            if (mouseX + (nombrePanoramiques - 1) * 130 > pano.getWidth()) {
+                listePanoVig.setLayoutX(mouseX);
+                listePanoVig.setLayoutX(pano.getWidth() - (nombrePanoramiques - 1) * 130);
+            } else {
+                listePanoVig.setLayoutX(mouseX);
+            }
+            listePanoVig.setLayoutY(mouseY);
+            pano.getChildren().add(listePanoVig);
+        }
+        point.setOnMouseClicked((MouseEvent me1) -> {
+            if (me1.isControlDown()) {
+                System.out.println("click avec Ctrl");
+                valideHS();
+                dejaSauve = false;
+                String chPoint = point.getId();
+                chPoint = chPoint.substring(5, chPoint.length());
+                int numeroPoint = Integer.parseInt(chPoint);
+                Node pt;
+                pt = (Node) pano.lookup("#point" + chPoint);
+                pano.getChildren().remove(pt);
+
+                for (int o = numeroPoint + 1; o < numPoints; o++) {
+                    pt = (Node) pano.lookup("#point" + Integer.toString(o));
+                    pt.setId("point" + Integer.toString(o - 1));
+                }
+                /**
+                 * on retire les anciennes indication de HS
+                 */
+                retireAffichageHotSpots();
+                numPoints--;
+                panoramiquesProjet[panoActuel].removeHotspot(numeroPoint);
+                /**
+                 * On les crée les nouvelles
+                 */
+                ajouteAffichageHotspots();
+                me1.consume();
+            } else {
+                System.out.println("click sans Ctrl");
+                valideHS();
+                String chPoint = point.getId();
+                chPoint = chPoint.substring(5, chPoint.length());
+                int numeroPoint = Integer.parseInt(chPoint);
+                if (nombrePanoramiques > 1) {
+                    AnchorPane listePanoVig = afficherListePanosVignettes(numeroPoint);
+                    if (mouseX + (nombrePanoramiques - 1) * 130 > pano.getWidth()) {
+                        listePanoVig.setLayoutX(mouseX);
+                        listePanoVig.setLayoutX(pano.getWidth() - (nombrePanoramiques - 1) * 130);
+                    } else {
+                        listePanoVig.setLayoutX(mouseX);
+                    }
+                    listePanoVig.setLayoutY(mouseY);
+                    pano.getChildren().add(listePanoVig);
+                }
+                me1.consume();
+
+            }
+        });
+
     }
 
     /**
@@ -1354,60 +1588,7 @@ public class EditeurPanovisu extends Application {
         pano.setOnMouseClicked(
                 (MouseEvent me) -> {
                     if (!(me.isControlDown()) && estCharge) {
-                        valideHS();
-                        dejaSauve = false;
-                        double mouseX = me.getSceneX();
-                        double mouseY = me.getSceneY() - pano.getLayoutY() - 115;
-                        double longitude, latitude;
-                        double largeur = imagePanoramique.getFitWidth();
-                        String chLong, chLat;
-                        longitude = 360.0f * mouseX / largeur - 180;
-                        latitude = 90.0d - 2.0f * mouseY / largeur * 180.0f;
-                        Circle point = new Circle(mouseX, mouseY, 5);
-                        point.setFill(Color.YELLOW);
-                        point.setStroke(Color.RED);
-                        point.setId("point" + numPoints);
-                        point.setCursor(Cursor.DEFAULT);
-                        pano.getChildren().add(point);
-                        Tooltip.install(point, new Tooltip("point n°" + numPoints));
-                        HotSpot HS = new HotSpot();
-                        HS.setLongitude(longitude);
-                        HS.setLatitude(latitude);
-                        panoramiquesProjet[panoActuel].addHotspot(HS);
-                        retireAffichageHotSpots();
-                        Pane affHS1 = affichageHS(listePano(panoActuel), panoActuel);
-                        affHS1.setId("labels");
-                        outils.getChildren().add(affHS1);
-
-                        numPoints++;
-                        point.setOnMouseClicked((MouseEvent me1) -> {
-                            if (me1.isControlDown()) {
-                                valideHS();
-                                dejaSauve = false;
-                                String chPoint = point.getId();
-                                chPoint = chPoint.substring(5, chPoint.length());
-                                int numeroPoint = Integer.parseInt(chPoint);
-                                Node pt;
-                                pt = (Node) pano.lookup("#point" + chPoint);
-                                pano.getChildren().remove(pt);
-
-                                for (int o = numeroPoint + 1; o < numPoints; o++) {
-                                    pt = (Node) pano.lookup("#point" + Integer.toString(o));
-                                    pt.setId("point" + Integer.toString(o - 1));
-                                }
-                                /**
-                                 * on retire les anciennes indication de HS
-                                 */
-                                retireAffichageHotSpots();
-                                numPoints--;
-                                panoramiquesProjet[panoActuel].removeHotspot(numeroPoint);
-                                ajouteAffichageHotspots();
-                                /**
-                                 * On les crée les nouvelles
-                                 */
-                            }
-                            me1.consume();
-                        });
+                        panoMouseClic(me.getSceneX(), me.getSceneY());
                     }
                 }
         );
@@ -1435,6 +1616,8 @@ public class EditeurPanovisu extends Application {
          */
         listeChoixPanoramique.valueProperty()
                 .addListener(new ChangeListenerImpl());
+        listeChoixPanoramiqueEntree.valueProperty()
+                .addListener(new ChangeListenerImplEntree());
 
     }
 
@@ -1459,6 +1642,22 @@ public class EditeurPanovisu extends Application {
                         affichePanoChoisit(numPanoChoisit);
                     }
                 }
+            }
+
+        }
+    }
+
+    private class ChangeListenerImplEntree implements ChangeListener<String> {
+
+        public ChangeListenerImplEntree() {
+        }
+
+        @Override
+        public void changed(ObservableValue ov, String ancienneValeur, String nouvelleValeur) {
+            if ((nouvelleValeur != null) && (nouvelleValeur != "")) {
+                System.out.println(nouvelleValeur + "last Index '.' =" + nouvelleValeur.indexOf("."));
+                panoEntree = nouvelleValeur.split("\\.")[0];
+                System.out.println("Panoramique d'entree :" + panoEntree);
             }
 
         }
@@ -1580,6 +1779,7 @@ public class EditeurPanovisu extends Application {
         String nomPano = fichierPano.substring(fichierPano.lastIndexOf(File.separator) + 1, fichierPano.length());
         panoCharge = true;
         listeChoixPanoramique.getItems().add(nomPano);
+        listeChoixPanoramiqueEntree.getItems().add(nomPano);
         paneChoixPanoramique.setVisible(true);
         estCharge = true;
         Panoramique panoCree = new Panoramique();
@@ -1634,6 +1834,7 @@ public class EditeurPanovisu extends Application {
         panoramiquesProjet[nombrePanoramiques] = panoCree;
         panoActuel = nombrePanoramiques;
         listeChoixPanoramique.setValue(listeChoixPanoramique.getItems().get(nombrePanoramiques));
+        //listeChoixPanoramiqueEntree.setValue(listeChoixPanoramiqueEntree.getItems().get(0));
         nombrePanoramiques++;
 
     }
@@ -2007,16 +2208,20 @@ public class EditeurPanovisu extends Application {
         chargerModele.setOnAction((ActionEvent e) -> {
             try {
                 modeleCharger();
+
             } catch (IOException ex) {
-                Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(EditeurPanovisu.class
+                        .getName()).log(Level.SEVERE, null, ex);
             }
         });
 
         sauverModele.setOnAction((ActionEvent e) -> {
             try {
                 modeleSauver();
+
             } catch (IOException ex) {
-                Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(EditeurPanovisu.class
+                        .getName()).log(Level.SEVERE, null, ex);
             }
         });
 
@@ -2027,8 +2232,10 @@ public class EditeurPanovisu extends Application {
             try {
                 ConfigDialogController cfg = new ConfigDialogController();
                 cfg.afficheFenetre();
+
             } catch (IOException ex) {
-                Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(EditeurPanovisu.class
+                        .getName()).log(Level.SEVERE, null, ex);
             }
         });
 
@@ -2165,9 +2372,10 @@ public class EditeurPanovisu extends Application {
         outils = new VBox();
         paneChoixPanoramique = new VBox();
         paneChoixPanoramique.setId("choixPanoramique");
+        Label lblchoixPanoramiqueEntree = new Label("Choix du panoramique d'entrée");
         lblChoixPanoramique = new Label("Choix du panoramique");
         listeChoixPanoramique.setVisibleRowCount(10);
-        paneChoixPanoramique.getChildren().addAll(lblChoixPanoramique, listeChoixPanoramique);
+        paneChoixPanoramique.getChildren().addAll(lblchoixPanoramiqueEntree, listeChoixPanoramiqueEntree, lblChoixPanoramique, listeChoixPanoramique);
         /*
          à modifier pour afficher le panneau des derniers fichiers;        
          */
@@ -2310,6 +2518,7 @@ public class EditeurPanovisu extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         File rep = new File("");
+        currentDir = rep.getAbsolutePath();
         repertAppli = rep.getAbsolutePath();
         repertConfig = new File(repertAppli + File.separator + "configPV");
         System.out.println("repertConfig : " + repertConfig.getAbsolutePath());
@@ -2343,7 +2552,6 @@ public class EditeurPanovisu extends Application {
         repertTemp = repertTemp + File.separator + "temp" + extTemp;
         repertTempFile = new File(repertTemp);
         repertTempFile.mkdirs();
-        currentDir = rep.getAbsolutePath();
         installeEvenements();
         projetsNouveau();
         primaryStage.setOnCloseRequest((WindowEvent event) -> {
