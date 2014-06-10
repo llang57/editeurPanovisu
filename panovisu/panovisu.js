@@ -11,7 +11,7 @@
  * 
  * @returns {window|String}
  */
-version = "0.20";
+version = "0.30";
 programmeur = "Laurent LANG";
 anneeProgramme="2014";
 site="http://lemondea360.fr";
