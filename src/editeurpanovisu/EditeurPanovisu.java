@@ -56,8 +56,6 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Tooltip;
-import javafx.scene.effect.ColorAdjust;
-import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
@@ -72,6 +70,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Polygon;
+import javafx.scene.shape.StrokeLineJoin;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -1473,6 +1473,44 @@ public class EditeurPanovisu extends Application {
         }
     }
 
+    private void panoChoixRegard(double X, double Y) {
+        Node ancPoV=(Node) pano.lookup("#PoV");
+        if (ancPoV!=null)
+            pano.getChildren().remove(ancPoV);
+        double mouseX = X;
+        double mouseY = Y - pano.getLayoutY() - 115;
+        double longitude, latitude;
+        double largeur = imagePanoramique.getFitWidth();
+        String chLong, chLat;
+        double regardX = 360.0f * mouseX / largeur - 180;
+        double regardY = 90.0d - 2.0f * mouseY / largeur * 180.0f;
+        panoramiquesProjet[panoActuel].setLookAtX(regardX);
+        panoramiquesProjet[panoActuel].setLookAtY(regardY);
+        Polygon polygon = new Polygon();
+        polygon.getPoints().addAll(new Double[]{
+            20.0, 2.0,
+            2.0, 2.0,
+            2.0, 20.0,
+            -2.0, 20.0,
+            -2.0, 2.0,
+            -20.0, 2.0,
+            -20.0, -2.0,
+            -2.0, -2.0,
+            -2.0, -20.0,
+            2.0, -20.0,
+            2.0, -2.0,
+            20.0, -2.0
+        });
+        polygon.setStrokeLineJoin(StrokeLineJoin.MITER);
+        polygon.setFill(Color.BLUEVIOLET);
+        polygon.setStroke(Color.YELLOW);
+        polygon.setId("PoV");
+        polygon.setLayoutX(mouseX);
+        polygon.setLayoutY(mouseY);
+        pano.getChildren().add(polygon);
+
+    }
+
     private void panoMouseClic(double X, double Y) {
 
         valideHS();
@@ -1587,7 +1625,10 @@ public class EditeurPanovisu extends Application {
          */
         pano.setOnMouseClicked(
                 (MouseEvent me) -> {
-                    if (!(me.isControlDown()) && estCharge) {
+                    if (me.isAltDown()) {
+                        panoChoixRegard(me.getSceneX(), me.getSceneY());
+                        me.consume();
+                    } else if (!(me.isControlDown()) && estCharge) {
                         panoMouseClic(me.getSceneX(), me.getSceneY());
                     }
                 }
@@ -2372,10 +2413,20 @@ public class EditeurPanovisu extends Application {
         outils = new VBox();
         paneChoixPanoramique = new VBox();
         paneChoixPanoramique.setId("choixPanoramique");
-        Label lblchoixPanoramiqueEntree = new Label("Choix du panoramique d'entrée");
-        lblChoixPanoramique = new Label("Choix du panoramique");
+        Label lblChoixPanoramiqueEntree = new Label("Choix du panoramique d'entrée de la visite");
+        lblChoixPanoramiqueEntree.setPadding(new Insets(5));
+        lblChoixPanoramiqueEntree.setStyle("-fx-background-color : #000;");
+        lblChoixPanoramiqueEntree.setTextFill(Color.WHITE);
+
+        lblChoixPanoramique = new Label("Affichage du panoramique");
+        lblChoixPanoramique.setPadding(new Insets(5));
+        lblChoixPanoramique.setStyle("-fx-background-color : #000;");
+        lblChoixPanoramique.setTextFill(Color.WHITE);
+        Separator sepPano = new Separator(Orientation.HORIZONTAL);
+        sepPano.setMinHeight(30);
         listeChoixPanoramique.setVisibleRowCount(10);
-        paneChoixPanoramique.getChildren().addAll(lblchoixPanoramiqueEntree, listeChoixPanoramiqueEntree, lblChoixPanoramique, listeChoixPanoramique);
+        paneChoixPanoramique.getChildren().addAll(lblChoixPanoramiqueEntree, listeChoixPanoramiqueEntree, sepPano, lblChoixPanoramique, listeChoixPanoramique);
+        paneChoixPanoramique.setSpacing(10);
         /*
          à modifier pour afficher le panneau des derniers fichiers;        
          */
