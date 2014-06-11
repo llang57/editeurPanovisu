@@ -91,7 +91,7 @@ public class EditeurPanovisu extends Application {
      */
     public static Locale locale = new Locale("fr", "FR");
     private static ResourceBundle rb;
-    static private popUpHandler popUp;
+    static private PopUpDialogController popUp;
     static private ImageView imagePanoramique;
     private Image image2;
     static private Label lblLong, lblLat;
@@ -182,6 +182,7 @@ public class EditeurPanovisu extends Application {
             projetSauve();
         }
         if (dejaSauve) {
+            System.out.println("Génère la visite");
             File xmlRepert = new File(repertTemp + File.separator + "xml");
             if (!xmlRepert.exists()) {
                 xmlRepert.mkdirs();
@@ -223,6 +224,12 @@ public class EditeurPanovisu extends Application {
                         + "   <pano \n"
                         + "      image=\"" + fPano + "\"\n"
                         + "      titre=\"" + panoramiquesProjet[i].getTitrePanoramique() + "\"\n"
+                        + "      titrePolice=\"" + gestionnaireInterface.titrePoliceNom + "\"\n"
+                        + "      titreTaillePolice=\"" + Math.round(Double.parseDouble(gestionnaireInterface.titrePoliceTaille)) + "pt\"\n"
+                        + "      titreTaille=\"" + Math.round(gestionnaireInterface.titreTaille) + "%\"\n"
+                        + "      titreFond=\"" + gestionnaireInterface.couleurFondTitre + "\"\n"
+                        + "      titreCouleur=\"" + gestionnaireInterface.couleurTitre + "\"\n"
+                        + "      titreOpacite=\"" + gestionnaireInterface.titreOpacite + "\"\n"                        
                         + "      type=\"" + panoramiquesProjet[i].getTypePanoramique() + "\"\n"
                         + "      regardX=\"" + regX + "\"\n"
                         + "      regardY=\"" + Math.round(panoramiquesProjet[i].getLookAtY() * 10) / 10 + "\"\n"
@@ -1204,7 +1211,7 @@ public class EditeurPanovisu extends Application {
         Pane fond = new Pane();
         fond.setStyle("-fx-background-color : #bbb;");
         fond.setPrefWidth(540);
-        fond.setPrefHeight(((nombrePanoramiques - 1) / 4 ) * 65 + 10);
+        fond.setPrefHeight(((nombrePanoramiques - 1) / 4) * 65 + 10);
         fond.setMinWidth(540);
         fond.setMinHeight(70);
         APlistePano.getChildren().add(fond);
@@ -1389,9 +1396,9 @@ public class EditeurPanovisu extends Application {
         outils.getChildren().add(lbl);
         numPoints = panoramiquesProjet[panoActuel].getNombreHotspots();
     }
-    
-    private AnchorPane afficheLegende(){
-        AnchorPane APLegende=new AnchorPane();
+
+    private AnchorPane afficheLegende() {
+        AnchorPane APLegende = new AnchorPane();
         APLegende.setStyle("-fx-background-color : #ccc;-fx-border-color : #777;");
         APLegende.setMinWidth(400);
         APLegende.setMinHeight(150);
@@ -1399,14 +1406,14 @@ public class EditeurPanovisu extends Application {
         APLegende.setPrefHeight(150);
         APLegende.setMaxWidth(400);
         APLegende.setMaxHeight(150);
-        APLegende.setLayoutY(imagePanoramique.getFitHeight()+20);
+        APLegende.setLayoutY(imagePanoramique.getFitHeight() + 20);
         APLegende.setLayoutX(50);
         Circle point = new Circle(30, 20, 5);
         point.setFill(Color.YELLOW);
         point.setStroke(Color.RED);
         point.setCursor(Cursor.DEFAULT);
         APLegende.getChildren().add(point);
-         Polygon polygon = new Polygon();
+        Polygon polygon = new Polygon();
         polygon.getPoints().addAll(new Double[]{
             15.0, 2.0,
             2.0, 2.0,
@@ -1428,8 +1435,8 @@ public class EditeurPanovisu extends Application {
         polygon.setLayoutX(30);
         polygon.setLayoutY(100);
         APLegende.getChildren().add(polygon);
-        Label lblHS=new Label(rb.getString("main.legendeHS"));
-        Label lblPoV=new Label(rb.getString("main.legendePoV"));
+        Label lblHS = new Label(rb.getString("main.legendeHS"));
+        Label lblPoV = new Label(rb.getString("main.legendePoV"));
         lblHS.setLayoutX(70);
         lblHS.setLayoutY(15);
         APLegende.getChildren().add(lblHS);
@@ -1715,10 +1722,10 @@ public class EditeurPanovisu extends Application {
         /*
         
          */
-        listeChoixPanoramique.valueProperty()
-                .addListener(new ChangeListenerImpl());
         listeChoixPanoramiqueEntree.valueProperty()
                 .addListener(new ChangeListenerImplEntree());
+        listeChoixPanoramique.valueProperty()
+                .addListener(new ChangeListenerImpl());
 
     }
 
@@ -1833,7 +1840,7 @@ public class EditeurPanovisu extends Application {
     @SuppressWarnings("empty-statement")
     private void affichePanoChoisit(int numPanochoisi) {
         imagePanoramique.setImage(panoramiquesProjet[numPanochoisi].getImagePanoramique());
-        Node legende=(Node) panneau2.lookup("#legende");
+        Node legende = (Node) panneau2.lookup("#legende");
         legende.setVisible(true);
         retireAffichagePointsHotSpots();
         retireAffichageHotSpots();
@@ -2395,7 +2402,7 @@ public class EditeurPanovisu extends Application {
      * @throws Exception
      */
     private void creeEnvironnement(Stage primaryStage, int width, int height) throws Exception {
-        popUp = new popUpHandler();
+        popUp = new PopUpDialogController();
         primaryStage.setMaximized(true);
 
         /**
@@ -2456,7 +2463,7 @@ public class EditeurPanovisu extends Application {
         CheckBox chkAfficheTitre;
         CheckBox chkAfficheInfo;
         Button btnValidePano;
-        
+
         tabPaneEnvironnement.getTabs().addAll(tabVisite, tabInterface);
         //tabPaneEnvironnement.setTranslateY(80);
         tabPaneEnvironnement.setSide(Side.TOP);
@@ -2612,7 +2619,7 @@ public class EditeurPanovisu extends Application {
         vuePanoramique.setContent(panneau2);
         hbEnvironnement.getChildren().setAll(vuePanoramique, panneauOutils);
         root.getChildren().addAll(tabPaneEnvironnement, barreStatus);
-        panneau2.getChildren().setAll(coordonnees, pano,afficheLegende());
+        panneau2.getChildren().setAll(coordonnees, pano, afficheLegende());
         primaryStage.show();
         popUp.affichePopup();
         ToolTipManager ttManager;

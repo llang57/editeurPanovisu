@@ -769,7 +769,7 @@ function panovisu(num_pano) {
             infoPosX = (largeur-10) * titreTailleFenetre ;
         }
         $("#info-" + num_pano).css({
-            fontFamily: titrePolice,
+            fontFamily: "'"+titrePolice+"',Verdana,Arial,sans-serif",
             fontSize: titreTaillePolice,
             color: titreCouleur,
             backgroundColor: titreFond,
@@ -781,7 +781,7 @@ function panovisu(num_pano) {
             infoPosX = largeur * titreTailleFenetre ;
         }
         infoPosX = (largeur - infoPosX) / 2;
-        alert("largeur : " + largeur + " titre taille : " + $("#info-" + num_pano).width() + " posX : " + infoPosX);
+//        alert("largeur : " + largeur + " titre taille : " + $("#info-" + num_pano).width() + " posX : " + infoPosX);
 
         $("#info-" + num_pano).css({
             marginLeft: infoPosX
