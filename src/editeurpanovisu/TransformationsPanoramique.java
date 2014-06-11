@@ -420,7 +420,6 @@ public class TransformationsPanoramique {
         if (tailleEqui % 2 == 1) {
             tailleEqui += 1;
         }
-        System.out.println("Taille Equi" + tailleEqui);
         WritableImage equi = new WritableImage(
                 (int) tailleEqui,
                 (int) (tailleEqui / 2.d));
@@ -521,7 +520,6 @@ public class TransformationsPanoramique {
                                     dst = 0.001d;
                                 }
                                 coeff += 1.d / dst;
-//                                System.out.println("pixX "+pixX+" pixY "+pixY);
                                 Color col = PRBehind.getColor(pixX, pixY);
                                 red += col.getRed() / dst;
                                 green += col.getGreen() / dst;

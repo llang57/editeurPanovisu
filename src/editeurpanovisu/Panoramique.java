@@ -26,7 +26,8 @@ public class Panoramique {
     private HotSpot[] hotspots = new HotSpot[100];
     private String titrePanoramique;
     private String nomFichier;
-    private double lookAtX, lookAtY;
+    private double lookAtX=0.d;
+    private double lookAtY=0.d;
     private Image imagePanoramique;
     private Image vignettePanoramique;
     private int nombreHotspots = 0;
@@ -117,13 +118,11 @@ public class Panoramique {
      * @param num
      */
     public void removeHotspot(int num) {
-        System.out.println("Retire le point : " + num);
         for (int i = num; i < this.nombreHotspots - 1; i++) {
             this.hotspots[i] = this.hotspots[i + 1];
         }
         this.nombreHotspots--;
         //int nombre
-        System.out.println("il reste  : " + this.nombreHotspots + " HotSpots");
     }
 
     /**

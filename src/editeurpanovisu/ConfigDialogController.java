@@ -129,7 +129,6 @@ public class ConfigDialogController {
             } catch (IOException ex) {
                 Logger.getLogger(ConfigDialogController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            System.out.println(fichConfig.getAbsolutePath() + "\n" + contenuFichier);
             BufferedWriter bw = new BufferedWriter(fw);
             try {
                 bw.write(contenuFichier);

@@ -13,9 +13,9 @@
  */
 version = "0.30";
 programmeur = "Laurent LANG";
-anneeProgramme="2014";
-site="http://lemondea360.fr";
-siteTexte="le monde à 360°";
+anneeProgramme = "2014";
+site = "http://lemondea360.fr";
+siteTexte = "le monde à 360°";
 
 function estTactile() {
     return !!('ontouchstart' in window);
@@ -72,8 +72,9 @@ function panovisu(num_pano) {
             deltaX = 0,
             deltaY = 0,
             $_GET = [],
-            maxFOV=125,
-            minFOV=25,
+
+            maxFOV = 125,
+            minFOV = 25,
             target = new THREE.Vector3(),
             bPleinEcran = false,
             largeur,
@@ -96,6 +97,14 @@ function panovisu(num_pano) {
             styleBoutons,
             bordure,
             panoTitre,
+            titrePolice,
+            titreTaille,
+            titreTailleUnite,
+            titreTailleFenetre,
+            titreTaillePolice,
+            titreCouleur,
+            titreFond,
+            titreOpacite,
             panoType,
             affInfo,
             bAfficheInfo,
@@ -653,9 +662,9 @@ function panovisu(num_pano) {
      */
     function chargeNouveauPano(nHotspot) {
         clearInterval(timers);
-        longitude=0;
-        latitude=0;
-        fov=75;
+        longitude = 0;
+        latitude = 0;
+        fov = 75;
         $("#infoBulle-" + num_pano).hide();
         $("#infoBulle-" + num_pano).html("");
         isReloaded = true;
@@ -739,6 +748,7 @@ function panovisu(num_pano) {
      */
     function init(fenetre) {
         $("#info-" + num_pano).html(panoTitre);
+
         (boutons === "oui") ? $("#boutons-" + num_pano).show() : $("#boutons-" + num_pano).hide();
         (deplacements === "oui") ? $("#deplacement-" + num_pano).css({display: "inline-block"}) : $("#deplacement-" + num_pano).hide();
         (zooms === "oui") ? $("#zoom-" + num_pano).css({display: "inline-block"}) : $("#zoom-" + num_pano).hide();
@@ -754,6 +764,29 @@ function panovisu(num_pano) {
         else {
             largeur = fenetreX;
         }
+        var infoPosX = titreTailleFenetre;
+        if (titreTailleUnite === "%") {
+            infoPosX = (largeur-10) * titreTailleFenetre ;
+        }
+        $("#info-" + num_pano).css({
+            fontFamily: titrePolice,
+            fontSize: titreTaillePolice,
+            color: titreCouleur,
+            backgroundColor: titreFond,
+            opacity: titreOpacite,
+            width: infoPosX+"px"
+        });
+        var infoPosX = titreTailleFenetre;
+        if (titreTailleUnite === "%") {
+            infoPosX = largeur * titreTailleFenetre ;
+        }
+        infoPosX = (largeur - infoPosX) / 2;
+        alert("largeur : " + largeur + " titre taille : " + $("#info-" + num_pano).width() + " posX : " + infoPosX);
+
+        $("#info-" + num_pano).css({
+            marginLeft: infoPosX
+        });
+
         if (fenetreUniteY === "%") {
             hauteur = Math.round(fenetreY * $("#" + fenPanoramique).parent().height());
         }
@@ -1043,8 +1076,8 @@ function panovisu(num_pano) {
                 version +
                 "</b><br><br>Un visualiseur 100% HTML5 - 100% libre<br>" +
                 "Utilise la bibliothèque <a href='http://threejs.org/' target='_blank' title='voir la page de three.js'>Three.js</a>" +
-                "<br><br>&copy; "+programmeur+" ("+anneeProgramme+")<br>"+
-                "<br>une création : <a href='"+site+"' target='_blank'>"+siteTexte+"</a><br>"+
+                "<br><br>&copy; " + programmeur + " (" + anneeProgramme + ")<br>" +
+                "<br>une création : <a href='" + site + "' target='_blank'>" + siteTexte + "</a><br>" +
                 "<div id='panovisuCharge-" + num_pano + "'>&nbsp;</div>cliquez pour fermer la fenêtre";
         $("#infoPanovisu-" + num_pano).css({width: "450px", height: "190px"});
         $("#infoPanovisu-" + num_pano).html(panoInfo);
@@ -1129,6 +1162,12 @@ function panovisu(num_pano) {
                     styleBoutons = "classique";
                     bordure = "none";
                     panoTitre = "";
+                    titrePolice = "Monospace";
+                    titreCouleur = "#fff";
+                    titreTaillePolice = "13px";
+                    titreTaille = "50%";
+                    titreFond = "#000";
+                    titreOpacite = "0.5";
                     panoType = "cube";
                     affInfo = "oui";
                     bAfficheInfo = true;
@@ -1152,10 +1191,16 @@ function panovisu(num_pano) {
                     var XMLPano = $(d).find('pano');
                     panoImage = XMLPano.attr('image') || panoImage;
                     panoTitre = XMLPano.attr('titre') || panoTitre;
+                    titrePolice = XMLPano.attr('titrePolice') || titrePolice;
+                    titreCouleur = XMLPano.attr('titreCouleur') || titreCouleur;
+                    titreTaille = XMLPano.attr('titreTaille') || titreTaille;
+                    titreTaillePolice = XMLPano.attr('titreTaillePolice') || titreTaillePolice;
+                    titreFond = XMLPano.attr('titreFond') || titreFond;
+                    titreOpacite = XMLPano.attr('titreOpacite') || titreOpacite;
                     panoType = XMLPano.attr('type') || panoType;
                     autoRotation = XMLPano.attr('rotation') || autoRotation;
-                    longitude = XMLPano.attr('regardX') || longitude;
-                    latitude = XMLPano.attr('regardY') || latitude;
+                    longitude = parseFloat(XMLPano.attr('regardX')) || longitude;
+                    latitude = parseFloat(XMLPano.attr('regardY')) || latitude;
                     fov = XMLPano.attr('champVision') || fov;
                     afficheTitre = XMLPano.attr('afficheTitre') || afficheTitre;
                     affInfo = XMLPano.attr('afficheInfo') || affInfo;
@@ -1204,6 +1249,17 @@ function panovisu(num_pano) {
                     /**
                      * Initialisation de l'interface
                      */
+                    if (titreTaille.match("[px]", "g"))
+                    {
+                        titreTailleUnite = "px";
+                        titreTailleFenetre = parseInt(titreTaille);
+                    }
+                    else
+                    {
+                        titreTailleUnite = "%";
+                        titreTailleFenetre = parseInt(titreTaille) / 100.0;
+                    }
+
                     init(fenPanoramique);
                     creeImagesboutons();
                     /**
@@ -1283,13 +1339,13 @@ function panovisu(num_pano) {
             fenX: "75%",
             fenY: "80%",
             panoramique: "panovisu",
-            minFOV : 25,
-            maxFOV : 120
+            minFOV: 25,
+            maxFOV: 120
         };
         contexte = $.extend(defaut, contexte);
         fenPanoramique = contexte.panoramique;
-        maxFOV=contexte.maxFOV;
-        minFOV=contexte.minFOV;
+        maxFOV = contexte.maxFOV;
+        minFOV = contexte.minFOV;
         var fenetre = fenPanoramique;
         $(fenetre).css({overflow: "hidden"});
         creeContexte(fenetre);
