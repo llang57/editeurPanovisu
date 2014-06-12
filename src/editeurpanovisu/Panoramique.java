@@ -34,6 +34,7 @@ public class Panoramique {
     private String typePanoramique;
     private boolean afficheTitre;
     private boolean afficheInfo;
+    private double zeroNord=0;
 
     /**
      *
@@ -221,6 +222,20 @@ public class Panoramique {
      */
     public void setVignettePanoramique(Image vignettePanoramique) {
         this.vignettePanoramique = vignettePanoramique;
+    }
+
+    /**
+     * @return the zeroNord
+     */
+    public double getZeroNord() {
+        return zeroNord;
+    }
+
+    /**
+     * @param zeroNord the zeroNord to set
+     */
+    public void setZeroNord(double zeroNord) {
+        this.zeroNord = zeroNord;
     }
 
 }
