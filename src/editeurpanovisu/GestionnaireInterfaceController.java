@@ -11,7 +11,6 @@ import java.io.FilenameFilter;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -20,12 +19,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
@@ -39,7 +38,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import jfxtras.labs.scene.control.BigDecimalField;
-import org.controlsfx.dialog.Dialogs;
 
 /**
  *
@@ -206,7 +204,12 @@ public class GestionnaireInterfaceController {
     private static CheckBox CBRotation;
     private static BigDecimalField dXSpinner;
     private static BigDecimalField dYSpinner;
-
+    private static ColorPicker CPCouleurFondTitre;
+    private static ColorPicker CPCouleurTitre;
+    private static ComboBox CBListePolices;
+    private static Slider SLTaillePolice;
+    private static Slider SLOpacite;
+    private static Slider SLTaille;
     /**
      *
      * @param position
@@ -572,7 +575,12 @@ public class GestionnaireInterfaceController {
         Font fonte1 = Font.font(titrePoliceNom, Double.parseDouble(titrePoliceTaille));
         txtTitre.setFont(fonte1);
         txtTitre.setPrefHeight(-1);
-
+        CPCouleurTitre.setValue(Color.valueOf(couleurTitre));
+        CPCouleurFondTitre.setValue(Color.valueOf(couleurFondTitre));
+        CBListePolices.setValue(titrePoliceNom);
+        SLOpacite.setValue(titreOpacite);
+        SLTaillePolice.setValue(Double.parseDouble(titrePoliceTaille));
+        SLTaille.setValue(titreTaille);
         APVisualisation.getChildren().remove(HBbarreBoutons);
         APVisualisation.getChildren().remove(IVHotSpot);
         afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
@@ -585,11 +593,17 @@ public class GestionnaireInterfaceController {
      * @param height
      */
     public void creeInterface(int width, int height) {
-//        List<String> lstPolices = Font.getFamilies();
-//        ObservableList<String> listePolices = FXCollections.observableList(lstPolices);
-//        for (String police : lstPolices) {
-//            System.out.println(police);
-//        }
+        List<String> lstPolices = new ArrayList<String>();
+        lstPolices.add("Arial");
+        lstPolices.add("Arial Black");
+        lstPolices.add("Comic Sans MS");
+        lstPolices.add("Couurier New");
+        lstPolices.add("Lucida Sans Typewriter");
+        lstPolices.add("Segoe Print");
+        lstPolices.add("Tahoma");
+        lstPolices.add("Times New Roman");
+        lstPolices.add("Verdana");
+        ObservableList<String> listePolices = FXCollections.observableList(lstPolices);
         System.out.println(EditeurPanovisu.locale);
         rb = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", EditeurPanovisu.locale);
         repertBoutonsPrincipal = repertAppli + File.separator + "panovisu/images";
@@ -614,10 +628,20 @@ public class GestionnaireInterfaceController {
         APVisualisation.setPrefWidth(width * 0.8);
         APVisualisation.setPrefHeight(height);
         VBOutils = new VBox();
+        ScrollPane SPOutils=new ScrollPane(VBOutils);
+        SPOutils.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        SPOutils.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        SPOutils.setMaxHeight(height-100);
+        SPOutils.setFitToWidth(true);
+        SPOutils.setFitToHeight(true);
+        SPOutils.setPrefWidth(width * 0.2+50);
+        SPOutils.setMaxWidth(width * 0.2+50);
+        SPOutils.setTranslateY(15);
         VBOutils.setPrefWidth(width * 0.2);
-        VBOutils.setPrefHeight(height);
+        VBOutils.setMaxWidth(width * 0.2);
+        //VBOutils.setMinHeight(height);
         VBOutils.setStyle("-fx-background-color : #ccc;");
-        HBInterface.getChildren().addAll(APVisualisation, VBOutils);
+        HBInterface.getChildren().addAll(APVisualisation, SPOutils);
         IMVisualisation = new ImageView(imageClaire);
         IMVisualisation.setFitWidth(1200);
         IMVisualisation.setFitHeight(800);
@@ -655,6 +679,7 @@ public class GestionnaireInterfaceController {
         });
         CBlisteStyle.setLayoutX(150);
         CBlisteStyle.setLayoutY(90);
+        CBlisteStyle.setValue(styleBarre);
 
         RBTopLeft = new RadioButton();
         RBTopCenter = new RadioButton();
@@ -711,12 +736,18 @@ public class GestionnaireInterfaceController {
         RBBottomRight.setLayoutY(posY + 40);
         RBBottomCenter.setSelected(true);
         Label lblStyle = new Label(rb.getString("interface.style"));
-        lblStyle.setLayoutX(30);
+        lblStyle.setLayoutX(10);
         lblStyle.setLayoutY(70);
         Label lblPosit = new Label(rb.getString("interface.position"));
-        lblPosit.setLayoutX(30);
+        lblPosit.setLayoutX(10);
         lblPosit.setLayoutY(130);
 
+        Label lblDXSpinner =new Label("dX :");
+        lblDXSpinner.setLayoutX(25);
+        lblDXSpinner.setLayoutY(215);
+        Label lblDYSpinner =new Label("dY :");
+        lblDYSpinner.setLayoutX(175);
+        lblDYSpinner.setLayoutY(215);
         dXSpinner = new BigDecimalField(new BigDecimal(dXBarre));
         dXSpinner.setLayoutX(50);
         dXSpinner.setLayoutY(210);
@@ -724,7 +755,7 @@ public class GestionnaireInterfaceController {
         dXSpinner.setMinValue(new BigDecimal(-2000));
         dXSpinner.setMaxWidth(100);
         dYSpinner = new BigDecimalField(new BigDecimal(dYBarre));
-        dYSpinner.setLayoutX(250);
+        dYSpinner.setLayoutX(200);
         dYSpinner.setLayoutY(210);
         dYSpinner.setMaxValue(new BigDecimal(2000));
         dYSpinner.setMinValue(new BigDecimal(-2000));
@@ -808,10 +839,10 @@ public class GestionnaireInterfaceController {
             afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
         });
 
-        CBVisible.setLayoutX(30);
+        CBVisible.setLayoutX(10);
         CBVisible.setLayoutY(40);
         Label lblVisibilite = new Label(rb.getString("interface.visibilite"));
-        lblVisibilite.setLayoutX(30);
+        lblVisibilite.setLayoutX(10);
         lblVisibilite.setLayoutY(260);
         CBVisible.setSelected(true);
         CBDeplacements.setLayoutX(100);
@@ -833,7 +864,7 @@ public class GestionnaireInterfaceController {
         CBSouris.setLayoutY(380);
         CBSouris.setSelected(true);
         AnchorPane APHotSpots = new AnchorPane();
-        double tailleHS = 35.d * (int) (nombreHotSpots / 8 + 1);
+        double tailleHS = 35.d * (int) (nombreHotSpots / 6 + 1);
         APHotSpots.setPrefHeight(tailleHS);
         APHotSpots.setLayoutX(50);
         APHotSpots.setLayoutY(40);
@@ -844,8 +875,8 @@ public class GestionnaireInterfaceController {
         double yHS;
         for (String nomImage : listeHotSpots) {
             IVHotspots[i] = new ImageView(new Image("file:" + repertHotSpots + File.separator + nomImage, -1, 30, true, true, true));
-            int col = i % 8;
-            int row = i / 8;
+            int col = i % 6;
+            int row = i / 6;
             xHS = col * 40 + 5;
             yHS = row * 35 + 5;
             IVHotspots[i].setLayoutX(xHS);
@@ -867,53 +898,69 @@ public class GestionnaireInterfaceController {
         AnchorPane APTIT = new AnchorPane();
         AnchorPane APTitre = new AnchorPane();
         APTitre.setLayoutY(40);
-        APTitre.setPrefHeight(170);
+        APTitre.setPrefHeight(180);
         Label lblPanelTitre = new Label(rb.getString("interface.styleTitre"));
         lblPanelTitre.setPrefWidth(VBOutils.getPrefWidth());
         lblPanelTitre.setStyle("-fx-background-color : #444");
         lblPanelTitre.setTextFill(Color.WHITE);
         lblPanelTitre.setPadding(new Insets(5));
-        lblPanelTitre.setLayoutX(30);
+        lblPanelTitre.setLayoutX(10);
         lblPanelTitre.setLayoutY(10);
         ImageView IVBtnPlusTitre = new ImageView(new Image("file:" + "images/moins.png", 20, 20, true, true));
-        IVBtnPlusTitre.setLayoutX(VBOutils.getPrefWidth());
+        IVBtnPlusTitre.setLayoutX(VBOutils.getPrefWidth()-20);
         IVBtnPlusTitre.setLayoutY(13);
-//        ComboBox CBListePolices = new ComboBox(listePolices);
-//        CBListePolices.setValue(titrePoliceNom);
-//        CBListePolices.setLayoutX(250);
-//        CBListePolices.setLayoutY(12);
-//        CBListePolices.valueProperty().addListener(
-//                new ChangeListener<String>() {
-//                    @Override
-//                    public void changed(ObservableValue<? extends String> ov,
-//                            String old_val, String new_val) {
-//                        if (new_val != null) {
-//                            titrePoliceNom=new_val;
-//                            Font fonte1 = Font.font(titrePoliceNom, Double.parseDouble(titrePoliceTaille));
-//                            txtTitre.setFont(fonte1);
-//                            txtTitre.setPrefHeight(-1);
-//                        }
-//                    }
-//                });
+        CBListePolices = new ComboBox(listePolices);
+        CBListePolices.setValue(titrePoliceNom);
+        CBListePolices.setLayoutX(180);
+        CBListePolices.setLayoutY(12);
+        CBListePolices.valueProperty().addListener(
+                new ChangeListener<String>() {
+                    @Override
+                    public void changed(ObservableValue<? extends String> ov,
+                            String old_val, String new_val) {
+                        if (new_val != null) {
+                            titrePoliceNom = new_val;
+                            Font fonte1 = Font.font(titrePoliceNom, Double.parseDouble(titrePoliceTaille));
+                            txtTitre.setFont(fonte1);
+                            txtTitre.setPrefHeight(-1);
+                        }
+                    }
+                });
 
-        Button choixPoliceTitre = new Button("  ...  ");
-        choixPoliceTitre.setLayoutX(250);
-        choixPoliceTitre.setLayoutY(12);
+//        Button choixPoliceTitre = new Button("  ...  ");
+//        choixPoliceTitre.setLayoutX(250);
+//        choixPoliceTitre.setLayoutY(12);
         Label lblChoixPoliceTitre = new Label(rb.getString("interface.choixPolice"));
-        lblChoixPoliceTitre.setLayoutX(30);
+        lblChoixPoliceTitre.setLayoutX(10);
         lblChoixPoliceTitre.setLayoutY(15);
+        Label lblChoixTailleTitre = new Label(rb.getString("interface.choixTaillePolice"));
+        lblChoixTailleTitre.setLayoutX(10);
+        lblChoixTailleTitre.setLayoutY(45);
+        SLTaillePolice = new Slider(8, 72, 12);
+        SLTaillePolice.setLayoutX(180);
+        SLTaillePolice.setLayoutY(45);
+        SLTaillePolice.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+            if (newValue != null) {
+                double taille = (double) newValue;
+                titrePoliceTaille = Integer.toString((int) Math.round(taille));
+                Font fonte1 = Font.font(titrePoliceNom, Double.parseDouble(titrePoliceTaille));
+                txtTitre.setFont(fonte1);
+                txtTitre.setPrefHeight(-1);
+            }
+        });
+
         Label lblChoixCouleurTitre = new Label(rb.getString("interface.choixCouleur"));
-        lblChoixCouleurTitre.setLayoutX(30);
-        lblChoixCouleurTitre.setLayoutY(45);
-        ColorPicker CPCouleurTitre = new ColorPicker(Color.valueOf(couleurTitre));
-        CPCouleurTitre.setLayoutX(250);
-        CPCouleurTitre.setLayoutY(43);
+        lblChoixCouleurTitre.setLayoutX(10);
+        lblChoixCouleurTitre.setLayoutY(75);
+        CPCouleurTitre = new ColorPicker(Color.valueOf(couleurTitre));
+        CPCouleurTitre.setLayoutX(180);
+        CPCouleurTitre.setLayoutY(73);
         Label lblChoixCouleurFondTitre = new Label(rb.getString("interface.choixCouleurFond"));
-        lblChoixCouleurFondTitre.setLayoutX(30);
-        lblChoixCouleurFondTitre.setLayoutY(75);
-        ColorPicker CPCouleurFondTitre = new ColorPicker(Color.valueOf(couleurFondTitre));
-        CPCouleurFondTitre.setLayoutX(250);
-        CPCouleurFondTitre.setLayoutY(73);
+        lblChoixCouleurFondTitre.setLayoutX(10);
+        lblChoixCouleurFondTitre.setLayoutY(105);
+        CPCouleurFondTitre = new ColorPicker(Color.valueOf(couleurFondTitre));
+        CPCouleurFondTitre.setLayoutX(180);
+        CPCouleurFondTitre.setLayoutY(103);
         CPCouleurTitre.setOnAction((ActionEvent e) -> {
             String coul = CPCouleurTitre.getValue().toString().substring(2, 8);
             couleurTitre = "#" + coul;
@@ -925,11 +972,11 @@ public class GestionnaireInterfaceController {
             txtTitre.setStyle("-fx-background-color : " + couleurFondTitre);
         });
         Label lblChoixOpacite = new Label(rb.getString("interface.choixOpaciteTitre"));
-        lblChoixOpacite.setLayoutX(30);
-        lblChoixOpacite.setLayoutY(105);
-        Slider SLOpacite = new Slider(0, 1, titreOpacite);
-        SLOpacite.setLayoutX(250);
-        SLOpacite.setLayoutY(105);
+        lblChoixOpacite.setLayoutX(10);
+        lblChoixOpacite.setLayoutY(135);
+        SLOpacite = new Slider(0, 1, titreOpacite);
+        SLOpacite.setLayoutX(180);
+        SLOpacite.setLayoutY(135);
         SLOpacite.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
             if (newValue != null) {
                 titreOpacite = (double) newValue;
@@ -939,11 +986,11 @@ public class GestionnaireInterfaceController {
         });
 
         Label lblChoixTaille = new Label(rb.getString("interface.choixTailleTitre"));
-        lblChoixTaille.setLayoutX(30);
-        lblChoixTaille.setLayoutY(135);
-        Slider SLTaille = new Slider(0, 100, titreTaille);
-        SLTaille.setLayoutX(250);
-        SLTaille.setLayoutY(135);
+        lblChoixTaille.setLayoutX(10);
+        lblChoixTaille.setLayoutY(165);
+        SLTaille = new Slider(0, 100, titreTaille);
+        SLTaille.setLayoutX(180);
+        SLTaille.setLayoutY(165);
         SLTaille.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
             if (newValue != null) {
                 titreTaille = (double) newValue;
@@ -953,39 +1000,40 @@ public class GestionnaireInterfaceController {
             }
         });
 
-        APTitre.getChildren().addAll(lblChoixPoliceTitre, choixPoliceTitre,
+        APTitre.getChildren().addAll(lblChoixPoliceTitre, CBListePolices,
+                lblChoixTailleTitre,SLTaillePolice,
                 lblChoixCouleurTitre, CPCouleurTitre,
                 lblChoixCouleurFondTitre, CPCouleurFondTitre,
                 lblChoixOpacite, SLOpacite,
                 lblChoixTaille, SLTaille);
-        choixPoliceTitre.setOnAction((ActionEvent e) -> {
-            Font fonte1 = txtTitre.getFont();
-            Optional response = Dialogs.create().showFontSelector(fonte1);
-            String rep1 = response.toString();
-            System.out.println("response : " + response + " rep1 : " + rep1);
-            String[] police = rep1.split("\\[")[2].replace("]", "").replace(", ", ",").split(",");
-            for (String element : police) {
-                String carac = element.split("=")[0];
-                String valeur = element.split("=")[1];
-                switch (carac) {
-                    case "family":
-                        titrePoliceNom = valeur;
-                        break;
-                    case "style":
-                        titrePoliceStyle = valeur;
-                        break;
-                    case "size":
-                        titrePoliceTaille = valeur;
-                        break;
-                }
-            }
-            //Font fonte=new Font(titrePoliceNom.replace(" ", ""),Double.parseDouble(titrePoliceTaille));
-            fonte1 = Font.font(titrePoliceNom, Double.parseDouble(titrePoliceTaille));
-            txtTitre.setFont(fonte1);
-            txtTitre.setPrefHeight(-1);
+//        choixPoliceTitre.setOnAction((ActionEvent e) -> {
+//            Font fonte1 = txtTitre.getFont();
+//            Optional response = Dialogs.create().showFontSelector(fonte1);
+//            String rep1 = response.toString();
+//            System.out.println("response : " + response + " rep1 : " + rep1);
+//            String[] police = rep1.split("\\[")[2].replace("]", "").replace(", ", ",").split(",");
+//            for (String element : police) {
+//                String carac = element.split("=")[0];
+//                String valeur = element.split("=")[1];
+//                switch (carac) {
+//                    case "family":
+//                        titrePoliceNom = valeur;
+//                        break;
+//                    case "style":
+//                        titrePoliceStyle = valeur;
+//                        break;
+//                    case "size":
+//                        titrePoliceTaille = valeur;
+//                        break;
+//                }
+//            }
+//            //Font fonte=new Font(titrePoliceNom.replace(" ", ""),Double.parseDouble(titrePoliceTaille));
+//            fonte1 = Font.font(titrePoliceNom, Double.parseDouble(titrePoliceTaille));
+//            txtTitre.setFont(fonte1);
+//            txtTitre.setPrefHeight(-1);
 //                System.out.println("font: " + response+" => "+rep1+" Police : "+titrePoliceNom+" : "+titrePoliceStyle+" : "+titrePoliceTaille);
-        }
-        );
+//        }
+//        );
 
         double tailleInitialeTitre = APTitre.getPrefHeight();
         lblPanelTitre.setOnMouseClicked((MouseEvent me) -> {
@@ -1026,10 +1074,10 @@ public class GestionnaireInterfaceController {
         lblBarreBouton.setStyle("-fx-background-color : #444");
         lblBarreBouton.setTextFill(Color.WHITE);
         lblBarreBouton.setPadding(new Insets(5));
-        lblBarreBouton.setLayoutX(30);
+        lblBarreBouton.setLayoutX(10);
         lblBarreBouton.setLayoutY(10);
         ImageView IVBtnPlus = new ImageView(new Image("file:" + "images/moins.png", 20, 20, true, true));
-        IVBtnPlus.setLayoutX(VBOutils.getPrefWidth());
+        IVBtnPlus.setLayoutX(VBOutils.getPrefWidth()-20);
         IVBtnPlus.setLayoutY(13);
         double tailleInitiale = APBarreModif.getPrefHeight();
 
@@ -1065,14 +1113,14 @@ public class GestionnaireInterfaceController {
         });
 
         ImageView IVBtnPlusHS = new ImageView(new Image("file:" + "images/moins.png", 20, 20, true, true));
-        IVBtnPlusHS.setLayoutX(VBOutils.getPrefWidth());
+        IVBtnPlusHS.setLayoutX(VBOutils.getPrefWidth()-20);
         IVBtnPlusHS.setLayoutY(13);
         Label lblChoixHS = new Label(rb.getString("interface.choixHotspot"));
         lblChoixHS.setPrefWidth(VBOutils.getPrefWidth());
         lblChoixHS.setStyle("-fx-background-color : #444");
         lblChoixHS.setTextFill(Color.WHITE);
         lblChoixHS.setPadding(new Insets(5));
-        lblChoixHS.setLayoutX(30);
+        lblChoixHS.setLayoutX(10);
         lblChoixHS.setLayoutY(10);
         lblChoixHS.setOnMouseClicked((MouseEvent me) -> {
             if (APHotSpots.isVisible()) {
@@ -1110,7 +1158,7 @@ public class GestionnaireInterfaceController {
                 RBTopLeft, RBTopCenter, RBTopRight,
                 RBMiddleLeft, RBMiddleCenter, RBMiddleRight,
                 RBBottomLeft, RBBottomCenter, RBBottomRight,
-                dXSpinner, dYSpinner,
+                lblDXSpinner,dXSpinner,lblDYSpinner, dYSpinner,
                 lblVisibilite, CBDeplacements, CBZoom, CBOutils,
                 CBFS, CBRotation, CBSouris);
         APTIT.getChildren().addAll(APTitre, lblPanelTitre, IVBtnPlusTitre);

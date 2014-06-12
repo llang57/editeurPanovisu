@@ -138,9 +138,13 @@ public class EditeurPanovisu extends Application {
     static private String panoAffiche = "";
     static private boolean dejaSauve = true;
     static private Stage stPrincipal;
-    static private String[] histoFichiers;
-    static private File fichHistoFichiers;
+    static private String[] histoFichiers = new String[10];
     static private String txtRepertConfig;
+    static private int nombreHistoFichiers = 0;
+    static private File fichHistoFichiers;
+    private String texteHisto;
+    private static String numVersion;
+
     static private Button valideChargeDerniersFichiers;
     static private GestionnaireInterfaceController gestionnaireInterface = new GestionnaireInterfaceController();
 
@@ -229,7 +233,7 @@ public class EditeurPanovisu extends Application {
                         + "      titreTaille=\"" + Math.round(gestionnaireInterface.titreTaille) + "%\"\n"
                         + "      titreFond=\"" + gestionnaireInterface.couleurFondTitre + "\"\n"
                         + "      titreCouleur=\"" + gestionnaireInterface.couleurTitre + "\"\n"
-                        + "      titreOpacite=\"" + gestionnaireInterface.titreOpacite + "\"\n"                        
+                        + "      titreOpacite=\"" + gestionnaireInterface.titreOpacite + "\"\n"
                         + "      type=\"" + panoramiquesProjet[i].getTypePanoramique() + "\"\n"
                         + "      regardX=\"" + regX + "\"\n"
                         + "      regardY=\"" + Math.round(panoramiquesProjet[i].getLookAtY() * 10) / 10 + "\"\n"
@@ -402,6 +406,7 @@ public class EditeurPanovisu extends Application {
             for (int ii = 0; ii < lstFich.length; ii++) {
                 File file1 = lstFich[ii];
                 dejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
                 sauveProjet.setDisable(false);
                 currentDir = file1.getParent();
                 File imageRepert = new File(repertTemp + File.separator + "panos");
@@ -487,7 +492,7 @@ public class EditeurPanovisu extends Application {
             }
         }
         if ((reponse == Dialog.Actions.YES) || (reponse == Dialog.Actions.NO) || (reponse == null)) {
-
+            dejaSauve = true;
             FileChooser repertChoix = new FileChooser();
             FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("fichier panoVisu (*.pvu)", "*.pvu");
             repertChoix.getExtensionFilters().add(extFilter);
@@ -495,8 +500,10 @@ public class EditeurPanovisu extends Application {
             repertChoix.setInitialDirectory(repert);
             fichProjet = null;
             fichProjet = repertChoix.showOpenDialog(stPrincipal);
+            stPrincipal.setTitle("Panovisu v" + numVersion + " : " + fichProjet.getAbsolutePath());
             if (fichProjet != null) {
                 repertoireProjet = fichProjet.getParent();
+                ajouteFichierHisto(fichProjet.getAbsolutePath());
                 repertSauveChoisi = true;
                 deleteDirectory(repertTemp);
                 String repertPanovisu = repertTemp + File.separator + "panovisu";
@@ -548,6 +555,137 @@ public class EditeurPanovisu extends Application {
         }
     }
 
+    private void ajouteFichierHisto(String nomFich) {
+        if (nombreHistoFichiers > 10) {
+            nombreHistoFichiers = 10;
+        }
+        int trouve = -1;
+        for (int i = 0; i < nombreHistoFichiers; i++) {
+            if (histoFichiers[i].equals(nomFich)) {
+                trouve = i;
+            }
+        }
+        if (trouve == -1) {
+            for (int i = nombreHistoFichiers; i >= 0; i--) {
+                if (i < 9) {
+                    histoFichiers[i + 1] = histoFichiers[i];
+                }
+            }
+            histoFichiers[0] = nomFich;
+            if (nombreHistoFichiers < 10) {
+                nombreHistoFichiers++;
+            }
+        } else {
+            for (int i = trouve - 1; i >= 0; i--) {
+                if (i < 9) {
+                    histoFichiers[i + 1] = histoFichiers[i];
+                }
+            }
+            histoFichiers[0] = nomFich;
+
+        }
+        derniersProjets.getItems().clear();
+        for (int i = 0; i < nombreHistoFichiers; i++) {
+            System.out.println("histo fichier (" + i + ") = " + histoFichiers[i]);
+            if (histoFichiers[i] != null) {
+                MenuItem menuDerniersFichiers = new MenuItem(histoFichiers[i]);
+                derniersProjets.getItems().add(menuDerniersFichiers);
+                menuDerniersFichiers.setOnAction((ActionEvent e) -> {
+                    MenuItem mnu = (MenuItem) e.getSource();
+
+                    try {
+                        projetChargeNom(mnu.getText());
+                    } catch (IOException ex) {
+                        Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                });
+            }
+        }
+
+    }
+
+    /**
+     *
+     */
+    private void projetChargeNom(String nomFich) throws IOException {
+        File fichProjet1 = new File(nomFich);
+        if (fichProjet1.exists()) {
+            Action reponse = null;
+            Localization.setLocale(locale);
+            if (!dejaSauve) {
+                reponse = Dialogs.create()
+                        .owner(null)
+                        .title("Charge un Projet")
+                        .masthead("vous n'avez pas sauvegardé votre projet")
+                        .message("Voulez vous le sauver ?")
+                        .showConfirm();
+
+            }
+            if (reponse == Dialog.Actions.YES) {
+                try {
+                    projetSauve();
+
+                } catch (IOException ex) {
+                    Logger.getLogger(EditeurPanovisu.class
+                            .getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if ((reponse == Dialog.Actions.YES) || (reponse == Dialog.Actions.NO) || (reponse == null)) {
+                dejaSauve = true;
+                fichProjet = fichProjet1;
+                ajouteFichierHisto(fichProjet.getAbsolutePath());
+                stPrincipal.setTitle("Panovisu  v" + numVersion + " : " + fichProjet.getAbsolutePath());
+                repertoireProjet = fichProjet.getParent();
+                repertSauveChoisi = true;
+                deleteDirectory(repertTemp);
+                String repertPanovisu = repertTemp + File.separator + "panovisu";
+                File rptPanovisu = new File(repertPanovisu);
+                rptPanovisu.mkdirs();
+                copieDirectory(repertAppli + File.separator + "panovisu", repertPanovisu);
+                menuPanoramique.setDisable(false);
+                imgAjouterPano.setDisable(false);
+                imgAjouterPano.setOpacity(1.0);
+                imgSauveProjet.setDisable(false);
+                imgSauveProjet.setOpacity(1.0);
+                imgVisiteGenere.setDisable(false);
+                imgVisiteGenere.setOpacity(1.0);
+
+                paneChoixPanoramique.setVisible(false);
+
+                sauveProjet.setDisable(false);
+                sauveSousProjet.setDisable(false);
+                visiteGenere.setDisable(false);
+                numPoints = 0;
+                imagePanoramique.setImage(null);
+                listeChoixPanoramique.getItems().clear();
+                listeChoixPanoramiqueEntree.getItems().clear();
+                FileReader fr;
+                try {
+                    fr = new FileReader(fichProjet);
+                    String texte;
+                    try (BufferedReader br = new BufferedReader(fr)) {
+                        texte = "";
+                        String ligneTexte;
+                        while ((ligneTexte = br.readLine()) != null) {
+                            texte += ligneTexte + "\n";
+                        }
+                    }
+                    analyseLigne(texte);
+
+                    panoActuel = 0;
+                    affichePanoChoisit(panoActuel);
+                    panoCharge = true;
+                    paneChoixPanoramique.setVisible(true);
+                    listeChoixPanoramique.setValue(listeChoixPanoramique.getItems().get(0));
+
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(EditeurPanovisu.class
+                            .getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
     private void sauveFichierProjet() throws IOException {
         repertoireProjet = fichProjet.getParent();
         repertSauveChoisi = true;
@@ -556,6 +694,8 @@ public class EditeurPanovisu extends Application {
             fichierProjet.createNewFile();
         }
         dejaSauve = true;
+        stPrincipal.setTitle("Panovisu v" + numVersion + " : " + fichProjet.getAbsolutePath());
+
         String contenuFichier = "";
         if (!panoEntree.equals("")) {
             contenuFichier += "[PanoEntree=>" + panoEntree + "]\n";
@@ -596,6 +736,36 @@ public class EditeurPanovisu extends Application {
 
     }
 
+    private void sauveHistoFichiers() throws IOException {
+        File fichConfig = new File(EditeurPanovisu.repertConfig.getAbsolutePath() + File.separator + "derniersprojets.cfg");
+        if (!fichConfig.exists()) {
+            fichConfig.createNewFile();
+        }
+        fichConfig.setWritable(true);
+        String contenuFichier = "";
+        for (int i = 0; i < nombreHistoFichiers; i++) {
+            contenuFichier += histoFichiers[i] + "\n";
+        }
+        FileWriter fw = null;
+        try {
+            fw = new FileWriter(fichConfig);
+        } catch (IOException ex) {
+            Logger.getLogger(ConfigDialogController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        BufferedWriter bw = new BufferedWriter(fw);
+        try {
+            bw.write(contenuFichier);
+        } catch (IOException ex) {
+            Logger.getLogger(ConfigDialogController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            bw.close();
+        } catch (IOException ex) {
+            Logger.getLogger(ConfigDialogController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
     /**
      *
      * @throws IOException
@@ -611,9 +781,11 @@ public class EditeurPanovisu extends Application {
             File repert = new File(repertoireProjet + File.separator);
             repertChoix.setInitialDirectory(repert);
             fichProjet = repertChoix.showSaveDialog(null);
+
         }
         if (fichProjet != null) {
             sauveFichierProjet();
+            ajouteFichierHisto(fichProjet.getAbsolutePath());
         }
     }
 
@@ -633,6 +805,8 @@ public class EditeurPanovisu extends Application {
         fichProjet = repertChoix.showSaveDialog(null);
         if (fichProjet != null) {
             sauveFichierProjet();
+            ajouteFichierHisto(fichProjet.getAbsolutePath());
+
         }
 
     }
@@ -653,7 +827,7 @@ public class EditeurPanovisu extends Application {
     /**
      *
      */
-    private void projetsFermer() {
+    private void projetsFermer() throws IOException {
         Action reponse = null;
         Localization.setLocale(locale);
         if (!dejaSauve) {
@@ -675,6 +849,7 @@ public class EditeurPanovisu extends Application {
             }
         }
         if ((reponse == Dialog.Actions.YES) || (reponse == Dialog.Actions.NO) || (reponse == null)) {
+            sauveHistoFichiers();
             deleteDirectory(repertTemp);
             File ftemp = new File(repertTemp);
             ftemp.delete();
@@ -798,6 +973,7 @@ public class EditeurPanovisu extends Application {
                         for (int ii = 0; ii < lstFich.length; ii++) {
                             File file1 = lstFich[ii];
                             dejaSauve = false;
+                            stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
                             sauveProjet.setDisable(false);
                             currentDir = file1.getParent();
                             File imageRepert = new File(repertTemp + File.separator + "panos");
@@ -1480,6 +1656,7 @@ public class EditeurPanovisu extends Application {
             if (me1.isControlDown()) {
                 valideHS();
                 dejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
                 pano.getChildren().remove(pt);
 
                 for (int o = numeroPoint + 1; o < numPoints; o++) {
@@ -1584,6 +1761,7 @@ public class EditeurPanovisu extends Application {
 
         valideHS();
         dejaSauve = false;
+        stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
         double mouseX = X;
         double mouseY = Y - pano.getLayoutY() - 115;
         double longitude, latitude;
@@ -1623,6 +1801,7 @@ public class EditeurPanovisu extends Application {
             if (me1.isControlDown()) {
                 valideHS();
                 dejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
                 String chPoint = point.getId();
                 chPoint = chPoint.substring(5, chPoint.length());
                 int numeroPoint = Integer.parseInt(chPoint);
@@ -2082,6 +2261,34 @@ public class EditeurPanovisu extends Application {
         sauveSousProjet.setDisable(true);
         sauveSousProjet.setAccelerator(KeyCombination.keyCombination("Shift+Ctrl+S"));
         menuProjet.getItems().add(sauveSousProjet);
+        derniersProjets = new Menu(rb.getString("derniersProjets"));
+//        derniersProjets.setDisable(true);
+        menuProjet.getItems().add(derniersProjets);
+        fichHistoFichiers = new File(repertConfig.getAbsolutePath() + File.separator + "derniersprojets.cfg");
+        nombreHistoFichiers = 0;
+        if (fichHistoFichiers.exists()) {
+            FileReader fr;
+            fr = new FileReader(fichHistoFichiers);
+            try (BufferedReader br = new BufferedReader(fr)) {
+                while ((texteHisto = br.readLine()) != null) {
+                    MenuItem menuDerniersFichiers = new MenuItem(texteHisto);
+                    derniersProjets.getItems().add(menuDerniersFichiers);
+                    histoFichiers[nombreHistoFichiers] = texteHisto;
+                    nombreHistoFichiers++;
+                    menuDerniersFichiers.setOnAction((ActionEvent e) -> {
+                        MenuItem mnu = (MenuItem) e.getSource();
+
+                        try {
+                            projetChargeNom(mnu.getText());
+                        } catch (IOException ex) {
+                            Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    });
+
+                }
+            }
+        }
+
         SeparatorMenuItem sep1 = new SeparatorMenuItem();
         menuProjet.getItems().add(sep1);
         visiteGenere = new MenuItem(rb.getString("genererVisite"));
@@ -2305,7 +2512,11 @@ public class EditeurPanovisu extends Application {
             }
         });
         fermerProjet.setOnAction((ActionEvent e) -> {
-            projetsFermer();
+            try {
+                projetsFermer();
+            } catch (IOException ex) {
+                Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
         ajouterPano.setOnAction((ActionEvent e) -> {
             panoramiquesAjouter();
@@ -2650,6 +2861,7 @@ public class EditeurPanovisu extends Application {
         }
         rb = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", locale);
         stPrincipal = primaryStage;
+        stPrincipal.setTitle("PanoVisu v" + numVersion);
         setUserAgentStylesheet(STYLESHEET_MODENA);
         primaryStage.setMaximized(true);
         Dimension tailleEcran = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
@@ -2693,6 +2905,12 @@ public class EditeurPanovisu extends Application {
                 }
             }
             if ((reponse == Dialog.Actions.YES) || (reponse == Dialog.Actions.NO) || (reponse == null)) {
+                try {
+                    sauveHistoFichiers();
+                } catch (IOException ex) {
+                    Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
                 deleteDirectory(repertTemp);
                 File ftemp = new File(repertTemp);
                 ftemp.delete();
@@ -2706,6 +2924,9 @@ public class EditeurPanovisu extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        Package pack = Package.getPackage("editeurpanovisu");
+        numVersion = pack.getImplementationVersion();
+        System.out.println(numVersion);
         for (int i = 0; i < args.length; i++) {
             System.out.println("Argument " + i + ":" + args[i]);
         }
