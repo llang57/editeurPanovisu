@@ -72,7 +72,6 @@ function panovisu(num_pano) {
             deltaX = 0,
             deltaY = 0,
             $_GET = [],
-
             maxFOV = 125,
             minFOV = 25,
             target = new THREE.Vector3(),
@@ -125,7 +124,18 @@ function panovisu(num_pano) {
             mesh,
             container,
             pano,
-            pano1;
+            pano1,
+            zeroNord,
+            boussole,
+            boussoleImage,
+            boussoleTaille,
+            boussolePositionX,
+            boussolePositionY,
+            boussoleDX,
+            boussoleDY,
+            boussoleAffiche,
+            boussoleOpacite,
+            boussoleAiguille;
 
     /**
      * Evènements souris / Touche sur écran
@@ -540,6 +550,16 @@ function panovisu(num_pano) {
         target.z = 500 * Math.sin(phi) * Math.sin(theta);
         camera.lookAt(target);
         renderer.render(scene, camera);
+        var bouss = -(longitude + zeroNord);
+        if (boussoleAiguille === "oui")
+        {
+            $("#bousAig-" + num_pano).css({transform: "rotate(" + (-bouss) + "deg)"});
+        }
+        else {
+            $("#bousImg-" + num_pano).css({transform: "rotate(" + bouss + "deg)"});
+
+        }
+
     }
 
     /**
@@ -672,6 +692,7 @@ function panovisu(num_pano) {
         hotSpot = new Array();
         pointsInteret = new Array();
         numHotspot = 0;
+        $("#boussole-" + num_pano).hide();
         chargeXML(xmlFile);
     }
 
@@ -747,6 +768,34 @@ function panovisu(num_pano) {
      * @returns {undefined}
      */
     function init(fenetre) {
+        if (boussole) {
+            console.log("test  : " + boussolePositionX + " : " + boussoleDX + "px");
+            $("#boussole-" + num_pano).css(boussolePositionX, boussoleDX + "px");
+            $("#boussole-" + num_pano).css(boussolePositionY, boussoleDY + "px");
+            $("#boussole-" + num_pano).css("opacity", boussoleOpacite);
+            $("#boussole-" + num_pano).css({
+                width: boussoleTaille + "px",
+                height: boussoleTaille + "px"
+            });
+            $("#bousImg-" + num_pano).attr("src", "panovisu/images/boussoles/" + boussoleImage);
+            var largBous = Math.round(parseInt(boussoleTaille) / 5);
+            var posX = Math.round((parseInt(boussoleTaille) - largBous) / 2);
+            $("#bousAig-" + num_pano).css({
+                position: "absolute",
+                top: "0px",
+                left: posX + "px",
+                width: largBous + "px",
+                height: boussoleTaille + "px"
+            });
+            $("#bousImg-" + num_pano).css({
+                width: boussoleTaille + "px",
+                height: boussoleTaille + "px",
+                top: "0px",
+                left: "0px"
+            });
+            $("#boussole-" + num_pano).show();
+        }
+
         $("#info-" + num_pano).html(panoTitre);
 
         (boutons === "oui") ? $("#boutons-" + num_pano).show() : $("#boutons-" + num_pano).hide();
@@ -764,29 +813,7 @@ function panovisu(num_pano) {
         else {
             largeur = fenetreX;
         }
-        var infoPosX = titreTailleFenetre;
-        if (titreTailleUnite === "%") {
-            infoPosX = (largeur-10) * titreTailleFenetre ;
-        }
-        $("#info-" + num_pano).css({
-            fontFamily: "'"+titrePolice+"',Verdana,Arial,sans-serif",
-            fontSize: titreTaillePolice,
-            color: titreCouleur,
-            backgroundColor: titreFond,
-            opacity: titreOpacite,
-            width: infoPosX+"px"
-        });
-        var infoPosX = titreTailleFenetre;
-        if (titreTailleUnite === "%") {
-            infoPosX = largeur * titreTailleFenetre ;
-        }
-        infoPosX = (largeur - infoPosX) / 2;
-//        alert("largeur : " + largeur + " titre taille : " + $("#info-" + num_pano).width() + " posX : " + infoPosX);
-
-        $("#info-" + num_pano).css({
-            marginLeft: infoPosX
-        });
-
+        afficheInfoTitre();
         if (fenetreUniteY === "%") {
             hauteur = Math.round(fenetreY * $("#" + fenPanoramique).parent().height());
         }
@@ -845,6 +872,7 @@ function panovisu(num_pano) {
             }, 50);
 
             affiche();
+            afficheInfoTitre();
             pano1.fadeIn(2000, function() {
                 afficheBarre(pano.width(), pano.height());
                 affiche();
@@ -872,6 +900,7 @@ function panovisu(num_pano) {
             {
                 $("#panovisuCharge-" + num_pano).html("&nbsp;");
                 afficheBarre(pano.width(), pano.height());
+                afficheInfoTitre();
             }
             affiche();
         };
@@ -941,7 +970,32 @@ function panovisu(num_pano) {
                 demarreAutoRotation();
         }, 1000);
     }
+    function afficheInfoTitre() {
+        var largeur = pano.width();
+        var infoPosX = titreTailleFenetre;
+        if (titreTailleUnite === "%") {
+            infoPosX = (largeur - 10) * titreTailleFenetre;
+        }
+        $("#info-" + num_pano).css({
+            fontFamily: "'" + titrePolice + "',Verdana,Arial,sans-serif",
+            fontSize: titreTaillePolice,
+            color: titreCouleur,
+            backgroundColor: titreFond,
+            opacity: titreOpacite,
+            width: infoPosX + "px"
+        });
+        var infoPosX = titreTailleFenetre;
+        if (titreTailleUnite === "%") {
+            infoPosX = largeur * titreTailleFenetre;
+        }
+        infoPosX = (largeur - infoPosX) / 2;
+//        alert("largeur : " + largeur + " titre taille : " + $("#info-" + num_pano).width() + " posX : " + infoPosX);
 
+        $("#info-" + num_pano).css({
+            marginLeft: infoPosX
+        });
+
+    }
     /**
      * 
      * @returns {undefined}
@@ -973,6 +1027,7 @@ function panovisu(num_pano) {
                 height: hauteur + "px"
             });
         }
+
         camera.aspect = pano.width() / pano.height();
         camera.updateProjectionMatrix();
         renderer.setSize(pano.width(), pano.height());
@@ -981,6 +1036,7 @@ function panovisu(num_pano) {
             afficheInfo();
             afficheAide();
             afficheBarre(pano.width(), pano.height());
+            afficheInfoTitre();
         }, 200);
     }
 
@@ -1185,6 +1241,17 @@ function panovisu(num_pano) {
                     positionY = "bottom";
                     dX = "0";
                     dY = "10";
+                    zeroNord = 0;
+                    boussole = false;
+                    boussoleImage = "rose2.png";
+                    boussoleTaille = "120";
+                    boussolePositionX = "right";
+                    boussolePositionY = "bottom";
+                    boussoleDX = "20";
+                    boussoleDY = "20";
+                    boussoleAffiche = "non";
+                    boussoleOpacite = 0.75;
+                    boussoleAiguille = "non";
                     /**
                      * Définition du panoramique à afficher 
                      */
@@ -1204,6 +1271,7 @@ function panovisu(num_pano) {
                     fov = XMLPano.attr('champVision') || fov;
                     afficheTitre = XMLPano.attr('afficheTitre') || afficheTitre;
                     affInfo = XMLPano.attr('afficheInfo') || affInfo;
+                    zeroNord = parseFloat(XMLPano.attr('zeroNord')) || zeroNord;
                     if (isReloaded) {
                         affInfo = false;
                     }
@@ -1212,6 +1280,22 @@ function panovisu(num_pano) {
                     } else {
                         bAfficheInfo = false;
                     }
+                    /*
+                     * 
+                     * 
+                     */
+                    var XMLBoussole = $(d).find('boussole');
+                    boussoleAffiche = XMLBoussole.attr('affiche') || boussoleAffiche;
+                    boussole = (boussoleAffiche === "oui");
+                    boussoleImage = XMLBoussole.attr('image') || boussoleImage;
+                    boussoleTaille = XMLBoussole.attr('taille') || boussoleTaille;
+                    boussolePositionX = XMLBoussole.attr('positionX') || boussolePositionX;
+                    boussolePositionY = XMLBoussole.attr('positionY') || boussolePositionY;
+                    boussoleDX = XMLBoussole.attr('dX') || boussoleDX;
+                    boussoleDY = XMLBoussole.attr('dY') || boussoleDY;
+                    boussoleOpacite = parseFloat(XMLBoussole.attr('opacite')) || boussoleOpacite;
+                    boussoleAiguille = XMLBoussole.attr('aiguille') || boussoleAiguille;
+                    //alert(boussoleImage);
                     /**
                      * Défintion pour la barre des boutons
                      */
@@ -1290,6 +1374,10 @@ function panovisu(num_pano) {
          */
         var fenetrePanoramique = "panovisu-" + num_pano;
         $("<div>", {id: fenetrePanoramique, class: "panovisu", style: "width : 100%;height : 100%;position: relative;"}).appendTo("#" + fenetre);
+        $("<div>", {id: "boussole-" + num_pano, class: "boussole"}).appendTo("#" + fenetrePanoramique);
+        $("<img>", {id: "bousImg-" + num_pano, class: "bousImg", src: ""}).appendTo("#boussole-" + num_pano);
+        $("<img>", {id: "bousAig-" + num_pano, class: "bousAig", src: "panovisu/images/boussoles/aiguille.png"}).appendTo("#boussole-" + num_pano);
+        $("#boussole-" + num_pano).hide();
         $("<div>", {id: "info-" + num_pano, class: "info"}).appendTo("#" + fenetrePanoramique);
         $("<div>", {id: "infoBulle-" + num_pano, class: "infoBulle", style: "display:none;position: absolute;"}).appendTo("#" + fenetrePanoramique);
         $("#infoBulle-" + num_pano).html("infoBulle");

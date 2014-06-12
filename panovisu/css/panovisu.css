@@ -180,4 +180,12 @@ and open the template in the editor.
     font-size: 0.6em;
     padding: 2px 7px;
 }
-
+.bousAig,.bousImg{
+    position: absolute;
+    z-index: 502;
+    transform-origin: 50% 50%;
+}
+.boussole{
+    position: absolute;
+    z-index: 501;
+}
