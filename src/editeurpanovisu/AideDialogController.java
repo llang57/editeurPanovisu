@@ -51,7 +51,7 @@ public class AideDialogController {
         
         WebView browser = new WebView();
         WebEngine webEngine = browser.getEngine();
-        webEngine.load("file:"+repertAppli + File.separator+"aide/aide.html");
+        webEngine.load("file:"+repertAppli + File.separator+"aide/aide.html"); 
         browser.setLayoutX(5);
         browser.setLayoutY(5);
         browser.setPrefWidth(largeur-110);
