@@ -550,13 +550,13 @@ function panovisu(num_pano) {
         target.z = 500 * Math.sin(phi) * Math.sin(theta);
         camera.lookAt(target);
         renderer.render(scene, camera);
-        var bouss = -(longitude + zeroNord);
+        var bouss = longitude - zeroNord;
         if (boussoleAiguille === "oui")
         {
-            $("#bousAig-" + num_pano).css({transform: "rotate(" + (-bouss) + "deg)"});
+            $("#bousAig-" + num_pano).css({transform: "rotate(" + bouss + "deg)"});
         }
         else {
-            $("#bousImg-" + num_pano).css({transform: "rotate(" + bouss + "deg)"});
+            $("#bousImg-" + num_pano).css({transform: "rotate(" + (-bouss) + "deg)"});
 
         }
 

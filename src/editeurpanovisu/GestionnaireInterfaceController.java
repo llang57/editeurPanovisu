@@ -7,7 +7,6 @@ package editeurpanovisu;
 
 import static editeurpanovisu.EditeurPanovisu.repertAppli;
 import java.io.File;
-import java.io.FilenameFilter;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,12 +43,12 @@ import jfxtras.labs.scene.control.BigDecimalField;
  * @author LANG Laurent
  */
 public class GestionnaireInterfaceController {
-
+    
     private static final ExtensionsFilter IMAGE_FILTER
             = new ExtensionsFilter(new String[]{".png", ".jpg", ".bmp"});
     private static final ExtensionsFilter PNG_FILTER
             = new ExtensionsFilter(new String[]{".png"});
-
+    
     private static ResourceBundle rb;
     /**
      *
@@ -147,16 +146,16 @@ public class GestionnaireInterfaceController {
     /**
      *
      */
-    public static boolean bAfficheBoussole=false;
-    public static String imageBoussole="rose3.png";
-    public static String positionBoussole="top:right";
-    public static double dXBoussole=20;
-    public static double dYBoussole=20;
-    public static double tailleBoussole=100;
-    public static double opaciteBoussole=0.8;
-    public static boolean bAiguilleMobileBoussole;
+    public static boolean bAfficheBoussole = false;
+    public static String imageBoussole = "rose3.png";
+    public static String positionBoussole = "top:right";
+    public static double dXBoussole = 20;
+    public static double dYBoussole = 20;
+    public static double tailleBoussole = 100;
+    public static double opaciteBoussole = 0.8;
+    public static boolean bAiguilleMobileBoussole = true;
     private static ImageView imgBoussole;
-    
+    private static ImageView imgAiguille;
     
     public Pane tabInterface;
     private static HBox HBInterface;
@@ -200,7 +199,7 @@ public class GestionnaireInterfaceController {
     private static ImageView IVHotSpot;
     private static Image ImgHotSpot;
     private static ComboBox CBlisteStyle;
-
+    
     private static String repertBoutonsPrincipal;
     private static String repertHotSpots;
     private static String repertBoussoles;
@@ -217,6 +216,10 @@ public class GestionnaireInterfaceController {
     private static RadioButton RBBoussTopRight;
     private static RadioButton RBBoussBottomLeft;
     private static RadioButton RBBoussBottomRight;
+    private static Slider SLTailleBoussole;
+    private static Slider SLOpaciteBoussole;
+    private static CheckBox CBAiguilleMobile;
+    private static CheckBox CBAfficheBoussole;
     private static CheckBox CBVisible;
     private static CheckBox CBDeplacements;
     private static CheckBox CBZoom;
@@ -234,38 +237,50 @@ public class GestionnaireInterfaceController {
     private static Slider SLTaillePolice;
     private static Slider SLOpacite;
     private static Slider SLTaille;
-
-    private void afficheBoussole(){
-        imgBoussole.setImage(new Image("file:" + repertBoussoles + File.separator + imageBoussole));       
+    
+    private void afficheBoussole() {
+        imgAiguille.setFitWidth(tailleBoussole / 5);
+        imgAiguille.setFitHeight(tailleBoussole);
+        imgAiguille.setOpacity(opaciteBoussole);
+        imgAiguille.setSmooth(true);
+        
+        imgBoussole.setImage(new Image("file:" + repertBoussoles + File.separator + imageBoussole));
         imgBoussole.setFitWidth(tailleBoussole);
         imgBoussole.setFitHeight(tailleBoussole);
         imgBoussole.setOpacity(opaciteBoussole);
-        String positXBoussole=positionBoussole.split(":")[1];
-        String positYBoussole=positionBoussole.split(":")[0];
-        double posX=0;
-        double posY=0;
-        switch (positXBoussole){
+        imgBoussole.setSmooth(true);
+        String positXBoussole = positionBoussole.split(":")[1];
+        String positYBoussole = positionBoussole.split(":")[0];
+        double posX = 0;
+        double posY = 0;
+        switch (positXBoussole) {
             case "left":
-                posX=IMVisualisation.getLayoutX()+dXBoussole;
+                posX = IMVisualisation.getLayoutX() + dXBoussole;
                 break;
             case "right":
-                posX=IMVisualisation.getLayoutX()+IMVisualisation.getFitWidth()-dXBoussole-imgBoussole.getFitWidth();
+                posX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - dXBoussole - imgBoussole.getFitWidth();
                 break;
         }
-        switch (positYBoussole){
+        switch (positYBoussole) {
             case "bottom":
-                posY=IMVisualisation.getLayoutY()+IMVisualisation.getFitHeight()-imgBoussole.getFitHeight()-dYBoussole;
+                posY = IMVisualisation.getLayoutY() + IMVisualisation.getFitHeight() - imgBoussole.getFitHeight() - dYBoussole;
                 break;
             case "top":
-                posY=IMVisualisation.getLayoutY()+dYBoussole;
+                posY = IMVisualisation.getLayoutY() + dYBoussole;
                 break;
         }
-        System.out.println(positionBoussole+" posX:"+posX+", posY:"+posY);
+        System.out.println(positionBoussole + " posX:" + posX + ", posY:" + posY);
         imgBoussole.setLayoutX(posX);
         imgBoussole.setLayoutY(posY);
+        imgAiguille.setLayoutX(posX + (imgBoussole.getFitWidth() - imgAiguille.getFitWidth()) / 2);
+        imgAiguille.setLayoutY(posY);
+        imgAiguille.setOpacity(opaciteBoussole);
+        imgAiguille.setVisible(bAfficheBoussole);
+        
         imgBoussole.setOpacity(opaciteBoussole);
         imgBoussole.setVisible(bAfficheBoussole);
     }
+
     /**
      *
      * @param position
@@ -316,7 +331,7 @@ public class GestionnaireInterfaceController {
         HBDeplacements = new HBox();
         HBZoom = new HBox();
         HBOutils = new HBox();
-
+        
         HBbarreBoutons.getChildren().addAll(HBDeplacements, HBZoom, HBOutils);
         if (toggleBarreDeplacements.equals("non")) {
             HBbarreBoutons.getChildren().remove(HBDeplacements);
@@ -386,7 +401,7 @@ public class GestionnaireInterfaceController {
         if (toggleBoutonRotation.equals("non")) {
             HBOutils.getChildren().remove(IVAutoRotation);
         }
-
+        
         double LX = 0;
         double LY = 0;
         switch (positVert) {
@@ -400,7 +415,7 @@ public class GestionnaireInterfaceController {
                 LY = IMVisualisation.getLayoutY() + (IMVisualisation.getFitHeight() - HBbarreBoutons.getPrefHeight()) / 2.d - dY;
                 break;
         }
-
+        
         switch (positHor) {
             case "right":
                 LX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - HBbarreBoutons.getPrefWidth() - dX;
@@ -451,7 +466,7 @@ public class GestionnaireInterfaceController {
         }
         return liste;
     }
-
+    
     private ArrayList<String> listerBoussoles(String repertoire) {
         ArrayList<String> liste = new ArrayList<>();
         File[] Repertoires = new File(repertoire).listFiles(PNG_FILTER);
@@ -476,8 +491,8 @@ public class GestionnaireInterfaceController {
                 += "styleBarre=" + styleBarre + "\n"
                 + "styleHotspots=" + styleHotSpots + "\n"
                 + "position=" + positionBarre + "\n"
-                + "dX=" + dXBarre + "\n"
-                + "dY=" + dYBarre + "\n"
+                + "dX=" + Math.round(dXBarre) + "\n"
+                + "dY=" + Math.round(dYBarre) + "\n"
                 + "visible=" + toggleBarreVisibilite + "\n"
                 + "deplacement=" + toggleBarreDeplacements + "\n"
                 + "zoom=" + toggleBarreZoom + "\n"
@@ -487,10 +502,18 @@ public class GestionnaireInterfaceController {
                 + "souris=" + toggleBoutonSouris + "\n"
                 + "titrePolice=" + titrePoliceNom + "\n"
                 + "titrePoliceTaille=" + titrePoliceTaille + "\n"
-                + "titreOpacite=" + titreOpacite + "\n"
+                + "titreOpacite=" + Math.round(titreOpacite * 100.d) / 100.d + "\n"
                 + "titreTaille=" + titreTaille + "\n"
                 + "titreCouleur=" + couleurTitre + "\n"
-                + "titreFondCouleur=" + couleurFondTitre + "\n";
+                + "titreFondCouleur=" + couleurFondTitre + "\n"
+                + "afficheBoussole=" + bAfficheBoussole + "\n"
+                + "imageBoussole=" + imageBoussole + "\n"
+                + "tailleBoussole=" + Math.round(tailleBoussole * 10.d) / 10.d + "\n"
+                + "positionBoussole=" + positionBoussole + "\n"
+                + "dXBoussole=" + Math.round(dXBoussole) + "\n"
+                + "dYBoussole=" + Math.round(dYBoussole) + "\n"
+                + "opaciteBoussole=" + Math.round(opaciteBoussole * 100.d) / 100.d + "\n"
+                + "aiguilleMobile=" + bAiguilleMobileBoussole + "\n";
         return contenuFichier;
     }
 
@@ -541,7 +564,7 @@ public class GestionnaireInterfaceController {
                             RBBottomRight.setSelected(true);
                             break;
                     }
-
+                    
                     break;
                 case "dX":
                     dXBarre = Double.parseDouble(valeur);
@@ -625,10 +648,34 @@ public class GestionnaireInterfaceController {
                 case "titreFondCouleur":
                     couleurFondTitre = valeur;
                     break;
-
+                case "afficheBoussole":
+                    bAfficheBoussole = (valeur.equals("true"));
+                    break;
+                case "imageBoussole":
+                    imageBoussole = valeur;
+                    break;
+                case "tailleBoussole":
+                    tailleBoussole = Double.parseDouble(valeur);
+                    break;
+                case "positionBoussole":
+                    positionBoussole = valeur;
+                    break;
+                case "dXBoussole":
+                    dXBoussole = Double.parseDouble(valeur);
+                    break;
+                case "dYBoussole":
+                    dYBoussole = Double.parseDouble(valeur);
+                    break;
+                case "opaciteBoussole":
+                    opaciteBoussole = Double.parseDouble(valeur);
+                    break;
+                case "aiguilleMobile":
+                    bAiguilleMobileBoussole = (valeur.equals("true"));
+                    break;
+                
             }
         }
-
+        
         txtTitre.setTextFill(Color.valueOf(couleurTitre));
         txtTitre.setStyle("-fx-background-color : " + couleurFondTitre);
         txtTitre.setOpacity(titreOpacite);
@@ -646,8 +693,19 @@ public class GestionnaireInterfaceController {
         SLTaille.setValue(titreTaille);
         APVisualisation.getChildren().remove(HBbarreBoutons);
         APVisualisation.getChildren().remove(IVHotSpot);
+        SLTailleBoussole.setValue(tailleBoussole);
+        SLOpaciteBoussole.setValue(opaciteBoussole);
+        boussDXSpinner.setNumber(new BigDecimal(dXBoussole));
+        boussDYSpinner.setNumber(new BigDecimal(dYBoussole));
+        CBAiguilleMobile.setSelected(bAiguilleMobileBoussole);
+        CBAfficheBoussole.setSelected(bAfficheBoussole);
+        RBBoussTopLeft.setSelected(positionBoussole.equals("top:left"));
+        RBBoussBottomLeft.setSelected(positionBoussole.equals("bottom:left"));
+        RBBoussTopRight.setSelected(positionBoussole.equals("top:right"));
+        RBBoussBottomRight.setSelected(positionBoussole.equals("bottom:right"));
         afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
-
+        afficheBoussole();
+        
     }
 
     /**
@@ -685,7 +743,7 @@ public class GestionnaireInterfaceController {
         txtTitre = new Label(rb.getString("interface.titre"));
         Font fonte = Font.font(titrePoliceNom, Double.parseDouble(titrePoliceTaille));
         txtTitre.setFont(fonte);
-
+        
         tabInterface = new Pane();
         HBInterface = new HBox();
         HBInterface.setPrefWidth(width);
@@ -709,9 +767,11 @@ public class GestionnaireInterfaceController {
         //VBOutils.setMinHeight(height);
         VBOutils.setStyle("-fx-background-color : #ccc;");
         HBInterface.getChildren().addAll(APVisualisation, SPOutils);
-        /*****************************************************************
-         *     Panneau de visualisation de l'interface
-         *****************************************************************/
+        /**
+         * ***************************************************************
+         * Panneau de visualisation de l'interface
+         * ***************************************************************
+         */
         IMVisualisation = new ImageView(imageClaire);
         IMVisualisation.setFitWidth(1200);
         IMVisualisation.setFitHeight(800);
@@ -739,16 +799,18 @@ public class GestionnaireInterfaceController {
         RBSombre.setLayoutY(830);
         RBClair.setUserData("claire");
         RBSombre.setUserData("sombre");
-        imgBoussole=new ImageView(new Image("file:" + repertBoussoles + File.separator + imageBoussole));
+        imgBoussole = new ImageView(new Image("file:" + repertBoussoles + File.separator + imageBoussole));
+        imgAiguille = new ImageView("file:" + repertBoussoles + File.separator + "aiguille.png");
         APVisualisation.getChildren().add(IMVisualisation);
-        APVisualisation.getChildren().addAll(txtTitre,imgBoussole);
+        APVisualisation.getChildren().addAll(txtTitre, imgBoussole, imgAiguille);
         afficheBoussole();
         
         afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
 
-        /*******************************************
-         *      Pannels d'outils
-         *******************************************/
+        /**
+         * *****************************************
+         * Pannels d'outils *****************************************
+         */
         AnchorPane APBB = new AnchorPane();
         AnchorPane APHS = new AnchorPane();
         AnchorPane APTIT = new AnchorPane();
@@ -756,12 +818,12 @@ public class GestionnaireInterfaceController {
 
         /**
          * *****************************************
-         *              Panel Titre 
-         ******************************************
+         * Panel Titre *****************************************
          */
         AnchorPane APTitre = new AnchorPane();
         APTitre.setLayoutY(40);
-        APTitre.setPrefHeight(180);
+        APTitre.setLayoutX(10);
+        APTitre.setPrefHeight(200);
         Label lblPanelTitre = new Label(rb.getString("interface.styleTitre"));
         lblPanelTitre.setPrefWidth(VBOutils.getPrefWidth());
         lblPanelTitre.setStyle("-fx-background-color : #444");
@@ -776,6 +838,7 @@ public class GestionnaireInterfaceController {
         CBListePolices.setValue(titrePoliceNom);
         CBListePolices.setLayoutX(180);
         CBListePolices.setLayoutY(12);
+        CBListePolices.setMaxWidth(135);
         CBListePolices.valueProperty().addListener(
                 new ChangeListener<String>() {
                     @Override
@@ -789,7 +852,7 @@ public class GestionnaireInterfaceController {
                         }
                     }
                 });
-
+        
         Label lblChoixPoliceTitre = new Label(rb.getString("interface.choixPolice"));
         lblChoixPoliceTitre.setLayoutX(10);
         lblChoixPoliceTitre.setLayoutY(15);
@@ -808,7 +871,7 @@ public class GestionnaireInterfaceController {
                 txtTitre.setPrefHeight(-1);
             }
         });
-
+        
         Label lblChoixCouleurTitre = new Label(rb.getString("interface.choixCouleur"));
         lblChoixCouleurTitre.setLayoutX(10);
         lblChoixCouleurTitre.setLayoutY(75);
@@ -844,7 +907,7 @@ public class GestionnaireInterfaceController {
                 txtTitre.setOpacity(titreOpacite);
             }
         });
-
+        
         Label lblChoixTaille = new Label(rb.getString("interface.choixTailleTitre"));
         lblChoixTaille.setLayoutX(10);
         lblChoixTaille.setLayoutY(165);
@@ -859,7 +922,7 @@ public class GestionnaireInterfaceController {
                 txtTitre.setLayoutX(IMVisualisation.getLayoutX() + (IMVisualisation.getFitWidth() - txtTitre.getMinWidth()) / 2);
             }
         });
-
+        
         APTitre.getChildren().addAll(lblChoixPoliceTitre, CBListePolices,
                 lblChoixTailleTitre, SLTaillePolice,
                 lblChoixCouleurTitre, CPCouleurTitre,
@@ -869,9 +932,9 @@ public class GestionnaireInterfaceController {
         double tailleInitialeTitre = APTitre.getPrefHeight();
         lblPanelTitre.setOnMouseClicked((MouseEvent me) -> {
             if (APTitre.isVisible()) {
-                APTitre.setPrefHeight(10);
-                APTitre.setMaxHeight(10);
-                APTitre.setMinHeight(10);
+                APTitre.setPrefHeight(0);
+                APTitre.setMaxHeight(0);
+                APTitre.setMinHeight(0);
                 APTitre.setVisible(false);
                 IVBtnPlusTitre.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
             } else {
@@ -884,9 +947,9 @@ public class GestionnaireInterfaceController {
         });
         IVBtnPlusTitre.setOnMouseClicked((MouseEvent me) -> {
             if (APTitre.isVisible()) {
-                APTitre.setPrefHeight(10);
-                APTitre.setMaxHeight(10);
-                APTitre.setMinHeight(10);
+                APTitre.setPrefHeight(0);
+                APTitre.setMaxHeight(0);
+                APTitre.setMinHeight(0);
                 APTitre.setVisible(false);
                 IVBtnPlusTitre.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
             } else {
@@ -899,8 +962,7 @@ public class GestionnaireInterfaceController {
         });
         /**
          **************************************************
-         *                  Panel HotSpots 
-         *************************************************
+         * Panel HotSpots ************************************************
          */
         AnchorPane APHotSpots = new AnchorPane();
         ImageView IVBtnPlusHS = new ImageView(new Image("file:" + "images/moins.png", 20, 20, true, true));
@@ -913,7 +975,7 @@ public class GestionnaireInterfaceController {
         lblChoixHS.setPadding(new Insets(5));
         lblChoixHS.setLayoutX(10);
         lblChoixHS.setLayoutY(10);
-
+        
         double tailleHS = 35.d * (int) (nombreHotSpots / 6 + 1);
         APHotSpots.setPrefHeight(tailleHS);
         APHotSpots.setLayoutX(50);
@@ -937,18 +999,18 @@ public class GestionnaireInterfaceController {
                 APVisualisation.getChildren().remove(IVHotSpot);
                 styleHotSpots = nomImage;
                 afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
-
+                
             });
             APHotSpots.getChildren().add(IVHotspots[i]);
             i++;
-
+            
         }
         lblChoixHS.setOnMouseClicked((MouseEvent me) -> {
             if (APHotSpots.isVisible()) {
                 IVBtnPlusHS.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
-                APHotSpots.setPrefHeight(10);
-                APHotSpots.setMaxHeight(10);
-                APHotSpots.setMinHeight(10);
+                APHotSpots.setPrefHeight(0);
+                APHotSpots.setMaxHeight(0);
+                APHotSpots.setMinHeight(0);
                 APHotSpots.setVisible(false);
             } else {
                 IVBtnPlusHS.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
@@ -961,9 +1023,9 @@ public class GestionnaireInterfaceController {
         IVBtnPlusHS.setOnMouseClicked((MouseEvent me) -> {
             if (APHotSpots.isVisible()) {
                 IVBtnPlusHS.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
-                APHotSpots.setPrefHeight(10);
-                APHotSpots.setMaxHeight(10);
-                APHotSpots.setMinHeight(10);
+                APHotSpots.setPrefHeight(0);
+                APHotSpots.setMaxHeight(0);
+                APHotSpots.setMinHeight(0);
                 APHotSpots.setVisible(false);
             } else {
                 IVBtnPlusHS.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
@@ -976,97 +1038,13 @@ public class GestionnaireInterfaceController {
 
         /**
          * ***************************************
-         *             Panel Barre Bouton 
-         ***************************************
+         * Panel Barre Bouton **************************************
          */
         AnchorPane APBarreModif = new AnchorPane();
-        CBlisteStyle = new ComboBox();
-        listeStyles.stream().forEach((nomStyle) -> {
-            CBlisteStyle.getItems().add(nomStyle);
-        });
-        CBlisteStyle.setLayoutX(150);
-        CBlisteStyle.setLayoutY(90);
-        CBlisteStyle.setValue(styleBarre);
-
-        RBTopLeft = new RadioButton();
-        RBTopCenter = new RadioButton();
-        RBTopRight = new RadioButton();
-        RBMiddleLeft = new RadioButton();
-        RBMiddleCenter = new RadioButton();
-        RBMiddleRight = new RadioButton();
-        RBBottomLeft = new RadioButton();
-        RBBottomCenter = new RadioButton();
-        RBBottomRight = new RadioButton();
-
-        RBTopLeft.setUserData("top:left");
-        RBTopCenter.setUserData("top:center");
-        RBTopRight.setUserData("top:right");
-        RBMiddleLeft.setUserData("middle:left");
-        RBMiddleCenter.setUserData("middle:center");
-        RBMiddleRight.setUserData("middle:right");
-        RBBottomLeft.setUserData("bottom:left");
-        RBBottomCenter.setUserData("bottom:center");
-        RBBottomRight.setUserData("bottom:right");
-
-        RBTopLeft.setToggleGroup(grpPostBarre);
-        RBTopCenter.setToggleGroup(grpPostBarre);
-        RBTopRight.setToggleGroup(grpPostBarre);
-        RBMiddleLeft.setToggleGroup(grpPostBarre);
-        RBMiddleCenter.setToggleGroup(grpPostBarre);
-        RBMiddleRight.setToggleGroup(grpPostBarre);
-        RBBottomLeft.setToggleGroup(grpPostBarre);
-        RBBottomCenter.setToggleGroup(grpPostBarre);
-        RBBottomRight.setToggleGroup(grpPostBarre);
-
-        int posX = 250;
-        int posY = 130;
-
-        RBTopLeft.setLayoutX(posX);
-        RBTopCenter.setLayoutX(posX + 20);
-        RBTopRight.setLayoutX(posX + 40);
-        RBTopLeft.setLayoutY(posY);
-        RBTopCenter.setLayoutY(posY);
-        RBTopRight.setLayoutY(posY);
-
-        RBMiddleLeft.setLayoutX(posX);
-        RBMiddleCenter.setLayoutX(posX + 20);
-        RBMiddleRight.setLayoutX(posX + 40);
-        RBMiddleLeft.setLayoutY(posY + 20);
-        RBMiddleCenter.setLayoutY(posY + 20);
-        RBMiddleRight.setLayoutY(posY + 20);
-
-        RBBottomLeft.setLayoutX(posX);
-        RBBottomCenter.setLayoutX(posX + 20);
-        RBBottomRight.setLayoutX(posX + 40);
-        RBBottomLeft.setLayoutY(posY + 40);
-        RBBottomCenter.setLayoutY(posY + 40);
-        RBBottomRight.setLayoutY(posY + 40);
-        RBBottomCenter.setSelected(true);
-        Label lblStyle = new Label(rb.getString("interface.style"));
-        lblStyle.setLayoutX(10);
-        lblStyle.setLayoutY(70);
-        Label lblPosit = new Label(rb.getString("interface.position"));
-        lblPosit.setLayoutX(10);
-        lblPosit.setLayoutY(130);
-
-        Label lblDXSpinner = new Label("dX :");
-        lblDXSpinner.setLayoutX(25);
-        lblDXSpinner.setLayoutY(215);
-        Label lblDYSpinner = new Label("dY :");
-        lblDYSpinner.setLayoutX(175);
-        lblDYSpinner.setLayoutY(215);
-        dXSpinner = new BigDecimalField(new BigDecimal(dXBarre));
-        dXSpinner.setLayoutX(50);
-        dXSpinner.setLayoutY(210);
-        dXSpinner.setMaxValue(new BigDecimal(2000));
-        dXSpinner.setMinValue(new BigDecimal(-2000));
-        dXSpinner.setMaxWidth(100);
-        dYSpinner = new BigDecimalField(new BigDecimal(dYBarre));
-        dYSpinner.setLayoutX(200);
-        dYSpinner.setLayoutY(210);
-        dYSpinner.setMaxValue(new BigDecimal(2000));
-        dYSpinner.setMinValue(new BigDecimal(-2000));
-        dYSpinner.setMaxWidth(100);
+        APBarreModif.setLayoutY(40);
+        APBarreModif.setPrefHeight(390);
+        APBarreModif.setMinWidth(VBOutils.getPrefWidth());
+        
         CBVisible = new CheckBox(rb.getString("interface.barreVisible"));
         CBVisible.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val) {
@@ -1078,7 +1056,98 @@ public class GestionnaireInterfaceController {
             APVisualisation.getChildren().remove(IVHotSpot);
             afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
         });
-
+        CBVisible.setLayoutX(10);
+        CBVisible.setLayoutY(20);
+        CBVisible.setSelected(true);
+        
+        CBlisteStyle = new ComboBox();
+        listeStyles.stream().forEach((nomStyle) -> {
+            CBlisteStyle.getItems().add(nomStyle);
+        });
+        CBlisteStyle.setLayoutX(150);
+        CBlisteStyle.setLayoutY(70);
+        CBlisteStyle.setValue(styleBarre);
+        
+        RBTopLeft = new RadioButton();
+        RBTopCenter = new RadioButton();
+        RBTopRight = new RadioButton();
+        RBMiddleLeft = new RadioButton();
+        RBMiddleCenter = new RadioButton();
+        RBMiddleRight = new RadioButton();
+        RBBottomLeft = new RadioButton();
+        RBBottomCenter = new RadioButton();
+        RBBottomRight = new RadioButton();
+        
+        RBTopLeft.setUserData("top:left");
+        RBTopCenter.setUserData("top:center");
+        RBTopRight.setUserData("top:right");
+        RBMiddleLeft.setUserData("middle:left");
+        RBMiddleCenter.setUserData("middle:center");
+        RBMiddleRight.setUserData("middle:right");
+        RBBottomLeft.setUserData("bottom:left");
+        RBBottomCenter.setUserData("bottom:center");
+        RBBottomRight.setUserData("bottom:right");
+        
+        RBTopLeft.setToggleGroup(grpPostBarre);
+        RBTopCenter.setToggleGroup(grpPostBarre);
+        RBTopRight.setToggleGroup(grpPostBarre);
+        RBMiddleLeft.setToggleGroup(grpPostBarre);
+        RBMiddleCenter.setToggleGroup(grpPostBarre);
+        RBMiddleRight.setToggleGroup(grpPostBarre);
+        RBBottomLeft.setToggleGroup(grpPostBarre);
+        RBBottomCenter.setToggleGroup(grpPostBarre);
+        RBBottomRight.setToggleGroup(grpPostBarre);
+        
+        int posX = 250;
+        int posY = 110;
+        
+        RBTopLeft.setLayoutX(posX);
+        RBTopCenter.setLayoutX(posX + 20);
+        RBTopRight.setLayoutX(posX + 40);
+        RBTopLeft.setLayoutY(posY);
+        RBTopCenter.setLayoutY(posY);
+        RBTopRight.setLayoutY(posY);
+        
+        RBMiddleLeft.setLayoutX(posX);
+        RBMiddleCenter.setLayoutX(posX + 20);
+        RBMiddleRight.setLayoutX(posX + 40);
+        RBMiddleLeft.setLayoutY(posY + 20);
+        RBMiddleCenter.setLayoutY(posY + 20);
+        RBMiddleRight.setLayoutY(posY + 20);
+        
+        RBBottomLeft.setLayoutX(posX);
+        RBBottomCenter.setLayoutX(posX + 20);
+        RBBottomRight.setLayoutX(posX + 40);
+        RBBottomLeft.setLayoutY(posY + 40);
+        RBBottomCenter.setLayoutY(posY + 40);
+        RBBottomRight.setLayoutY(posY + 40);
+        RBBottomCenter.setSelected(true);
+        Label lblStyle = new Label(rb.getString("interface.style"));
+        lblStyle.setLayoutX(10);
+        lblStyle.setLayoutY(50);
+        Label lblPosit = new Label(rb.getString("interface.position"));
+        lblPosit.setLayoutX(10);
+        lblPosit.setLayoutY(110);
+        
+        Label lblDXSpinner = new Label("dX :");
+        lblDXSpinner.setLayoutX(25);
+        lblDXSpinner.setLayoutY(195);
+        Label lblDYSpinner = new Label("dY :");
+        lblDYSpinner.setLayoutX(175);
+        lblDYSpinner.setLayoutY(195);
+        dXSpinner = new BigDecimalField(new BigDecimal(dXBarre));
+        dXSpinner.setLayoutX(50);
+        dXSpinner.setLayoutY(190);
+        dXSpinner.setMaxValue(new BigDecimal(2000));
+        dXSpinner.setMinValue(new BigDecimal(-2000));
+        dXSpinner.setMaxWidth(100);
+        dYSpinner = new BigDecimalField(new BigDecimal(dYBarre));
+        dYSpinner.setLayoutX(200);
+        dYSpinner.setLayoutY(190);
+        dYSpinner.setMaxValue(new BigDecimal(2000));
+        dYSpinner.setMinValue(new BigDecimal(-2000));
+        dYSpinner.setMaxWidth(100);
+        
         CBDeplacements = new CheckBox(rb.getString("interface.deplacementsVisible"));
         CBDeplacements.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val) {
@@ -1145,32 +1214,29 @@ public class GestionnaireInterfaceController {
             APVisualisation.getChildren().remove(IVHotSpot);
             afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
         });
-
-        CBVisible.setLayoutX(10);
-        CBVisible.setLayoutY(40);
         Label lblVisibilite = new Label(rb.getString("interface.visibilite"));
         lblVisibilite.setLayoutX(10);
-        lblVisibilite.setLayoutY(260);
-        CBVisible.setSelected(true);
+        lblVisibilite.setLayoutY(240);
+        
         CBDeplacements.setLayoutX(100);
-        CBDeplacements.setLayoutY(280);
+        CBDeplacements.setLayoutY(260);
         CBDeplacements.setSelected(true);
         CBZoom.setLayoutX(100);
-        CBZoom.setLayoutY(300);
+        CBZoom.setLayoutY(280);
         CBZoom.setSelected(true);
         CBOutils.setLayoutX(100);
-        CBOutils.setLayoutY(320);
+        CBOutils.setLayoutY(300);
         CBOutils.setSelected(true);
         CBFS.setLayoutX(150);
-        CBFS.setLayoutY(340);
+        CBFS.setLayoutY(320);
         CBFS.setSelected(true);
         CBRotation.setLayoutX(150);
-        CBRotation.setLayoutY(360);
+        CBRotation.setLayoutY(340);
         CBRotation.setSelected(true);
         CBSouris.setLayoutX(150);
-        CBSouris.setLayoutY(380);
+        CBSouris.setLayoutY(360);
         CBSouris.setSelected(true);
-
+        
         Label lblBarreBouton = new Label(rb.getString("interface.barreBoutons"));
         lblBarreBouton.setPrefWidth(VBOutils.getPrefWidth());
         lblBarreBouton.setStyle("-fx-background-color : #444");
@@ -1182,12 +1248,12 @@ public class GestionnaireInterfaceController {
         IVBtnPlus.setLayoutX(VBOutils.getPrefWidth() - 20);
         IVBtnPlus.setLayoutY(13);
         double tailleInitiale = APBarreModif.getPrefHeight();
-
+        
         lblBarreBouton.setOnMouseClicked((MouseEvent me) -> {
             if (APBarreModif.isVisible()) {
-                APBarreModif.setPrefHeight(10);
-                APBarreModif.setMaxHeight(10);
-                APBarreModif.setMinHeight(10);
+                APBarreModif.setPrefHeight(0);
+                APBarreModif.setMaxHeight(0);
+                APBarreModif.setMinHeight(0);
                 APBarreModif.setVisible(false);
                 IVBtnPlus.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
             } else {
@@ -1200,9 +1266,9 @@ public class GestionnaireInterfaceController {
         });
         IVBtnPlus.setOnMouseClicked((MouseEvent me) -> {
             if (APBarreModif.isVisible()) {
-                APBarreModif.setPrefHeight(10);
-                APBarreModif.setMaxHeight(10);
-                APBarreModif.setMinHeight(10);
+                APBarreModif.setPrefHeight(0);
+                APBarreModif.setMaxHeight(0);
+                APBarreModif.setMinHeight(0);
                 APBarreModif.setVisible(false);
                 IVBtnPlus.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
             } else {
@@ -1213,7 +1279,7 @@ public class GestionnaireInterfaceController {
                 IVBtnPlus.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
             }
         });
-
+        
         APBarreModif.getChildren().addAll(
                 CBVisible, lblStyle, CBlisteStyle, lblPosit,
                 RBTopLeft, RBTopCenter, RBTopRight,
@@ -1225,22 +1291,21 @@ public class GestionnaireInterfaceController {
 
         /**
          *********************************************
-         *                 Panel Boussole 
-         *********************************************
+         * Panel Boussole ********************************************
          */
         AnchorPane APBoussole = new AnchorPane();
-
+        
         APBoussole.setLayoutY(40);
-        APBoussole.setPrefHeight(320);
+        APBoussole.setPrefHeight(340);
         APBoussole.setMinWidth(VBOutils.getPrefWidth());
         Double tailleBouss = APBoussole.getPrefHeight();
-        CheckBox CBAfficheBoussole=new CheckBox(rb.getString("interface.affichageBoussole"));
+        CBAfficheBoussole = new CheckBox(rb.getString("interface.affichageBoussole"));
         CBAfficheBoussole.setLayoutX(10);
         CBAfficheBoussole.setLayoutY(10);
         APBoussole.getChildren().add(CBAfficheBoussole);
         CBAfficheBoussole.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
-            if (new_val!=null){
-                bAfficheBoussole=new_val;
+            if (new_val != null) {
+                bAfficheBoussole = new_val;
                 afficheBoussole();
             }
         });
@@ -1254,11 +1319,11 @@ public class GestionnaireInterfaceController {
         ImageView IVBtnPlusBouss = new ImageView(new Image("file:" + "images/moins.png", 20, 20, true, true));
         IVBtnPlusBouss.setLayoutX(VBOutils.getPrefWidth() - 20);
         IVBtnPlusBouss.setLayoutY(13);
-        Label lblChoixBoussole=new Label(rb.getString("interface.choixImgBoussole"));
+        Label lblChoixBoussole = new Label(rb.getString("interface.choixImgBoussole"));
         lblChoixBoussole.setLayoutX(10);
         lblChoixBoussole.setLayoutY(40);
         APBoussole.getChildren().add(lblChoixBoussole);
-
+        
         int nombreBoussoles = listeBoussoles.size();
         ImageView[] IVBoussoles = new ImageView[nombreBoussoles];
         i = 0;
@@ -1273,47 +1338,49 @@ public class GestionnaireInterfaceController {
             IVBoussoles[i].setUserData(nomImage);
             IVBoussoles[i].setStyle("-fx-background-color : #ccc");
             IVBoussoles[i].setOnMouseClicked((MouseEvent me) -> {
-                imageBoussole=(String) ((ImageView)me.getSource()).getUserData();
+                imageBoussole = (String) ((ImageView) me.getSource()).getUserData();
                 afficheBoussole();
             });
             APBoussole.getChildren().add(IVBoussoles[i]);
             i++;
-
+            
         }
-        Label lblPositBoussole=new Label(rb.getString("interface.choixPositBoussole"));
+        Label lblPositBoussole = new Label(rb.getString("interface.choixPositBoussole"));
         lblPositBoussole.setLayoutX(10);
         lblPositBoussole.setLayoutY(160);
         APBoussole.getChildren().add(lblPositBoussole);
-
+        
         RBBoussTopLeft = new RadioButton();
         RBBoussTopRight = new RadioButton();
         RBBoussBottomLeft = new RadioButton();
-        RBBoussBottomRight = new RadioButton();        
-
+        RBBoussBottomRight = new RadioButton();
+        
         RBBoussTopLeft.setUserData("top:left");
         RBBoussTopRight.setUserData("top:right");
         RBBoussBottomLeft.setUserData("bottom:left");
         RBBoussBottomRight.setUserData("bottom:right");
-
+        
         RBBoussTopLeft.setToggleGroup(grpPostBouss);
         RBBoussTopRight.setToggleGroup(grpPostBouss);
         RBBoussBottomLeft.setToggleGroup(grpPostBouss);
         RBBoussBottomRight.setToggleGroup(grpPostBouss);
-
+        
         posX = 200;
         posY = 160;
-
+        
         RBBoussTopLeft.setLayoutX(posX);
         RBBoussTopRight.setLayoutX(posX + 20);
         RBBoussTopLeft.setLayoutY(posY);
         RBBoussTopRight.setLayoutY(posY);
-
+        
         RBBoussBottomLeft.setLayoutX(posX);
         RBBoussBottomRight.setLayoutX(posX + 20);
         RBBoussBottomLeft.setLayoutY(posY + 20);
         RBBoussBottomRight.setLayoutY(posY + 20);
-        APBoussole.getChildren().addAll(RBBoussTopLeft, RBBoussTopRight,
-                RBBoussBottomLeft, RBBoussBottomRight);
+        APBoussole.getChildren().addAll(
+                RBBoussTopLeft, RBBoussTopRight,
+                RBBoussBottomLeft, RBBoussBottomRight
+        );
         Label lblBoussDXSpinner = new Label("dX :");
         lblBoussDXSpinner.setLayoutX(25);
         lblBoussDXSpinner.setLayoutY(208);
@@ -1334,41 +1401,44 @@ public class GestionnaireInterfaceController {
         boussDYSpinner.setMinValue(new BigDecimal(0));
         boussDYSpinner.setNumber(new BigDecimal(20));
         boussDYSpinner.setMaxWidth(100);
-        APBoussole.getChildren().addAll(lblBoussDXSpinner,boussDXSpinner,lblBoussDYSpinner,boussDYSpinner);
-        Label lblTailleBouss=new Label(rb.getString("interface.tailleBoussole"));
+        APBoussole.getChildren().addAll(
+                lblBoussDXSpinner, boussDXSpinner,
+                lblBoussDYSpinner, boussDYSpinner
+        );
+        Label lblTailleBouss = new Label(rb.getString("interface.tailleBoussole"));
         lblTailleBouss.setLayoutX(10);
         lblTailleBouss.setLayoutY(245);
-        Slider SLTailleBoussole=new Slider(50, 200, 100);
+        SLTailleBoussole = new Slider(50, 200, 100);
         SLTailleBoussole.setLayoutX(200);
         SLTailleBoussole.setLayoutY(245);
-        Label lblOpaciteBouss=new Label(rb.getString("interface.opaciteBoussole"));
+        Label lblOpaciteBouss = new Label(rb.getString("interface.opaciteBoussole"));
         lblOpaciteBouss.setLayoutX(10);
         lblOpaciteBouss.setLayoutY(275);
-        Slider SLOpaciteBoussole=new Slider(0, 1.0, 0.8);
+        SLOpaciteBoussole = new Slider(0, 1.0, 0.8);
         SLOpaciteBoussole.setLayoutX(200);
         SLOpaciteBoussole.setLayoutY(275);
-        CheckBox CBAiguilleMobile=new CheckBox(rb.getString("interface.aiguilleMobile"));
+        CBAiguilleMobile = new CheckBox(rb.getString("interface.aiguilleMobile"));
         CBAiguilleMobile.setLayoutX(10);
         CBAiguilleMobile.setLayoutY(305);
         CBAiguilleMobile.setSelected(true);
         CBAiguilleMobile.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
-            if (new_val!=null){
-                bAiguilleMobileBoussole=new_val;
+            if (new_val != null) {
+                bAiguilleMobileBoussole = new_val;
             }
         });
-
+        
         APBoussole.getChildren().addAll(
-                lblTailleBouss,SLTailleBoussole,
-                lblOpaciteBouss,SLOpaciteBoussole,
+                lblTailleBouss, SLTailleBoussole,
+                lblOpaciteBouss, SLOpaciteBoussole,
                 CBAiguilleMobile
         );
         
         lblPanelBoussole.setOnMouseClicked((MouseEvent me) -> {
             if (APBoussole.isVisible()) {
                 IVBtnPlusBouss.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
-                APBoussole.setPrefHeight(10);
-                APBoussole.setMaxHeight(10);
-                APBoussole.setMinHeight(10);
+                APBoussole.setPrefHeight(0);
+                APBoussole.setMaxHeight(0);
+                APBoussole.setMinHeight(0);
                 APBoussole.setVisible(false);
             } else {
                 IVBtnPlusBouss.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
@@ -1381,9 +1451,9 @@ public class GestionnaireInterfaceController {
         IVBtnPlusBouss.setOnMouseClicked((MouseEvent me) -> {
             if (APBoussole.isVisible()) {
                 IVBtnPlusBouss.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
-                APBoussole.setPrefHeight(10);
-                APBoussole.setMaxHeight(10);
-                APBoussole.setMinHeight(10);
+                APBoussole.setPrefHeight(0);
+                APBoussole.setMaxHeight(0);
+                APBoussole.setMinHeight(0);
                 APBoussole.setVisible(false);
             } else {
                 IVBtnPlusBouss.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
@@ -1397,7 +1467,7 @@ public class GestionnaireInterfaceController {
         /**
          * *****************************************************
          * Style des Pannels
-         ******************************************************
+         * *****************************************************
          */
         String styleAP = "-fx-background-color : #ccc;";
         APBoussole.setStyle(styleAP);
@@ -1408,7 +1478,7 @@ public class GestionnaireInterfaceController {
         /**
          * *******************************************************
          * Ajout des Elements dans les Pannels
-        ********************************************************
+         * *******************************************************
          */
         APTIT.getChildren().addAll(APTitre, lblPanelTitre, IVBtnPlusTitre);
         APBB.getChildren().addAll(APBarreModif, lblBarreBouton, IVBtnPlus);
@@ -1418,12 +1488,12 @@ public class GestionnaireInterfaceController {
         /**
          * ******************************************************
          * Ajouts des pannels dans la barre d'outils
-         *******************************************************
+         * ******************************************************
          */
         VBOutils.getChildren().addAll(
                 APTIT, APBB, APHS, APBOUSS
         );
-
+        
         CBlisteStyle.valueProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue ov, String t, String t1) {
@@ -1435,7 +1505,7 @@ public class GestionnaireInterfaceController {
                 }
             }
         });
-
+        
         dXSpinner.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
             APVisualisation.getChildren().remove(HBbarreBoutons);
             APVisualisation.getChildren().remove(IVHotSpot);
@@ -1485,18 +1555,18 @@ public class GestionnaireInterfaceController {
         SLTailleBoussole.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
             if (newValue != null) {
                 double taille = (double) newValue;
-                tailleBoussole=taille;
+                tailleBoussole = taille;
                 afficheBoussole();
             }
         });
         SLOpaciteBoussole.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
             if (newValue != null) {
                 double opac = (double) newValue;
-                opaciteBoussole=opac;
+                opaciteBoussole = opac;
                 afficheBoussole();
             }
         });
         
     }
-
+    
 }

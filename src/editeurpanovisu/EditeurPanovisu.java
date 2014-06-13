@@ -89,6 +89,8 @@ public class EditeurPanovisu extends Application {
     /**
      * Définition de la langue locale par défaut fr_FR
      */
+    public static final String[] codesLanguesTraduction={"fr_FR", "en_EN", "de_DE"};
+    public static final String[] languesTraduction={"Francais", "English", "Deutsch"};
     public static Locale locale = new Locale("fr", "FR");
     private static ResourceBundle rb;
     static private PopUpDialogController popUp;
@@ -210,10 +212,13 @@ public class EditeurPanovisu extends Application {
                 String affInfo = (panoramiquesProjet[i].isAfficheInfo()) ? "oui" : "non";
                 String affTitre = (panoramiquesProjet[i].isAfficheTitre()) ? "oui" : "non";
                 double regX;
+                double zN;
                 if (panoramiquesProjet[i].getTypePanoramique().equals(Panoramique.SPHERE)) {
                     regX = Math.round(((panoramiquesProjet[i].getLookAtX() - 180) % 360) * 10) / 10;
+                    zN = Math.round(((panoramiquesProjet[i].getZeroNord() - 180) % 360) * 10) / 10;
                 } else {
                     regX = Math.round(((panoramiquesProjet[i].getLookAtX() + 90) % 360) * 10) / 10;
+                    zN = Math.round(((panoramiquesProjet[i].getZeroNord() + 90) % 360) * 10) / 10;
                 }
 
                 contenuFichier = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
@@ -235,6 +240,7 @@ public class EditeurPanovisu extends Application {
                         + "      titreCouleur=\"" + gestionnaireInterface.couleurTitre + "\"\n"
                         + "      titreOpacite=\"" + gestionnaireInterface.titreOpacite + "\"\n"
                         + "      type=\"" + panoramiquesProjet[i].getTypePanoramique() + "\"\n"
+                        + "      zeroNord=\"" + zN + "\"\n"
                         + "      regardX=\"" + regX + "\"\n"
                         + "      regardY=\"" + Math.round(panoramiquesProjet[i].getLookAtY() * 10) / 10 + "\"\n"
                         + "      affinfo=\"" + affInfo + "\"\n"
@@ -256,8 +262,27 @@ public class EditeurPanovisu extends Application {
                         + "      dX=\"" + gestionnaireInterface.dXBarre + "\" \n"
                         + "      dY=\"" + gestionnaireInterface.dYBarre + "\"\n"
                         + "      visible=\"" + gestionnaireInterface.toggleBarreVisibilite + "\"\n"
-                        + "   />\n"
-                        + "    <!--Définition des hotspots-->  \n"
+                        + "   />\n";
+                if (gestionnaireInterface.bAfficheBoussole) {
+                    String SAiguille = "non";
+                    if (gestionnaireInterface.bAiguilleMobileBoussole) {
+                        SAiguille = "oui";
+                    }
+                    contenuFichier += "<!--  Boussole -->\n"
+                            + "    <boussole \n"
+                            + "        affiche=\"oui\"\n"
+                            + "        image=\"" + gestionnaireInterface.imageBoussole + "\"\n"
+                            + "        taille=\"" + gestionnaireInterface.tailleBoussole + "\"\n"
+                            + "        positionY=\"" + gestionnaireInterface.positionBoussole.split(":")[0] + "\"\n"
+                            + "        positionX=\"" + gestionnaireInterface.positionBoussole.split(":")[1] + "\"\n"
+                            + "        opacite=\"" + gestionnaireInterface.opaciteBoussole + "\"\n"
+                            + "        dX=\"" + gestionnaireInterface.dXBoussole + "\"\n"
+                            + "        dy=\"" + gestionnaireInterface.dYBoussole + "\"\n"
+                            + "        aiguille=\"" + SAiguille + "\"\n"
+                            + "    />\n";
+                }
+
+                contenuFichier += "    <!--Définition des hotspots-->  \n"
                         + "   <hotspots>\n";
                 for (int j = 0; j < panoramiquesProjet[i].getNombreHotspots(); j++) {
                     HotSpot HS = panoramiquesProjet[i].getHotspot(j);
@@ -710,6 +735,7 @@ public class EditeurPanovisu extends Application {
                     + ";afficheTitre:" + panoramiquesProjet[i].isAfficheTitre()
                     + ";regardX:" + panoramiquesProjet[i].getLookAtX()
                     + ";regardY:" + panoramiquesProjet[i].getLookAtY()
+                    + ";zeroNord:" + panoramiquesProjet[i].getZeroNord()
                     + "]\n";
             for (int j = 0; j < panoramiquesProjet[i].getNombreHotspots(); j++) {
                 HotSpot HS = panoramiquesProjet[i].getHotspot(j);
@@ -1146,6 +1172,9 @@ public class EditeurPanovisu extends Application {
                             break;
                         case "regardY":
                             panoramiquesProjet[panoActuel].setLookAtY(Double.parseDouble(valeur[1]));
+                            break;
+                        case "zeroNord":
+                            panoramiquesProjet[panoActuel].setZeroNord(Double.parseDouble(valeur[1]));
                             break;
                         default:
                             break;
@@ -1588,7 +1617,6 @@ public class EditeurPanovisu extends Application {
         point.setFill(Color.YELLOW);
         point.setStroke(Color.RED);
         point.setCursor(Cursor.DEFAULT);
-        APLegende.getChildren().add(point);
         Polygon polygon = new Polygon();
         polygon.getPoints().addAll(new Double[]{
             15.0, 2.0,
@@ -1609,16 +1637,20 @@ public class EditeurPanovisu extends Application {
         polygon.setStroke(Color.YELLOW);
         polygon.setId("PoV");
         polygon.setLayoutX(30);
-        polygon.setLayoutY(100);
-        APLegende.getChildren().add(polygon);
+        polygon.setLayoutY(65);
         Label lblHS = new Label(rb.getString("main.legendeHS"));
         Label lblPoV = new Label(rb.getString("main.legendePoV"));
-        lblHS.setLayoutX(70);
-        lblHS.setLayoutY(15);
-        APLegende.getChildren().add(lblHS);
-        lblPoV.setLayoutX(70);
-        lblPoV.setLayoutY(90);
-        APLegende.getChildren().add(lblPoV);
+        Label lblNord = new Label(rb.getString("main.legendeNord"));
+        Line ligneNord=new Line(30,90,30,110);
+        ligneNord.setStroke(Color.RED);
+        ligneNord.setStrokeWidth(3);
+        lblHS.setLayoutX(50);
+        lblHS.setLayoutY(10);
+        lblPoV.setLayoutX(50);
+        lblPoV.setLayoutY(55);
+        lblNord.setLayoutX(50);
+        lblNord.setLayoutY(92);
+        APLegende.getChildren().addAll(lblHS,point,lblPoV,polygon,lblNord,ligneNord);
         APLegende.setId("legende");
         APLegende.setVisible(false);
         APLegende.setTranslateY(10);
@@ -1723,6 +1755,28 @@ public class EditeurPanovisu extends Application {
         panoramiquesProjet[panoActuel].setLookAtX(regardX);
         panoramiquesProjet[panoActuel].setLookAtY(regardY);
         affichePoV(regardX, regardY);
+    }
+
+    private void panoChoixNord(double X) {
+        double mouseX = X;
+        double largeur = imagePanoramique.getFitWidth();
+        double regardX = 360.0f * mouseX / largeur - 180;
+        panoramiquesProjet[panoActuel].setZeroNord(regardX);
+        afficheNord(regardX);
+    }
+
+    private void afficheNord(double longitude) {
+        double largeur = imagePanoramique.getFitWidth();
+        double X = (longitude + 180.0d) * largeur / 360.0d;
+        Node ancPoV = (Node) pano.lookup("#Nord");
+        if (ancPoV != null) {
+            pano.getChildren().remove(ancPoV);
+        }
+        Line ligne = new Line(X, 0, X, imagePanoramique.getFitHeight());
+        ligne.setStroke(Color.RED);
+        ligne.setStrokeWidth(3);
+        ligne.setId("Nord");
+        pano.getChildren().add(ligne);
     }
 
     private void affichePoV(double longitude, double latitude) {
@@ -1873,6 +1927,9 @@ public class EditeurPanovisu extends Application {
                 (MouseEvent me) -> {
                     if (me.isAltDown()) {
                         panoChoixRegard(me.getSceneX(), me.getSceneY());
+                        me.consume();
+                    } else if (me.isShiftDown()) {
+                        panoChoixNord(me.getSceneX());
                         me.consume();
                     } else if (!(me.isControlDown()) && estCharge) {
                         panoMouseClic(me.getSceneX(), me.getSceneY());
@@ -2029,6 +2086,7 @@ public class EditeurPanovisu extends Application {
         panoActuel = numPanochoisi;
         ajouteAffichageHotspots();
         affichePoV(panoramiquesProjet[numPanochoisi].getLookAtX(), panoramiquesProjet[numPanochoisi].getLookAtY());
+        afficheNord(panoramiquesProjet[numPanochoisi].getZeroNord());
         ajouteAffichagePointsHotspots();
         ajouteAffichageLignes();
         afficheInfoPano();
@@ -2523,6 +2581,9 @@ public class EditeurPanovisu extends Application {
         });
         aPropos.setOnAction((ActionEvent e) -> {
             aideAPropos();
+        });
+        aide.setOnAction((ActionEvent e) -> {
+            AideDialogController.affiche();
         });
 
         chargerModele.setOnAction((ActionEvent e) -> {

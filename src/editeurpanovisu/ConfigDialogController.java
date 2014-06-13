@@ -38,8 +38,8 @@ public class ConfigDialogController {
     private static AnchorPane myPane;
     private static Button btnAnnuler;
     private static Button btnSauvegarder;
-    private static final String[] codesLangues = {"fr_FR", "en_EN", "de_DE"};
-    private static final String[] langues = {"Francais", "English", "Deutsch"};
+    private static final String[] codesLangues = EditeurPanovisu.codesLanguesTraduction;
+    private static final String[] langues = EditeurPanovisu.languesTraduction;
 
     private static ComboBox listeLangues;
     private static TextField txtRepert;
