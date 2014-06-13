@@ -4,19 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/GestionnaireInterfaceController.java</file>
-            <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/Panoramique.java</file>
-            <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/EquiCubeDialogController.java</file>
+            <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/i18n/PanoVisu.properties</file>
             <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/i18n/PanoVisu_en.properties</file>
-            <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/HotSpot.java</file>
+            <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/ConfigDialogController.java</file>
             <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/EditeurPanovisu.java</file>
             <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/i18n/PanoVisu_de.properties</file>
             <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/i18n/PanoVisu_fr.properties</file>
-            <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/popUpHandler.java</file>
-            <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/i18n/PanoVisu.properties</file>
-            <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/ReadWriteImage.java</file>
-            <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/ConfigDialogController.java</file>
-            <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/TransformationsPanoramique.java</file>
-            <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/ExtensionsFilter.java</file>
         </group>
     </open-files>
 </project-private>
