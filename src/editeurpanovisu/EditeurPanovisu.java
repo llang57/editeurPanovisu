@@ -89,8 +89,8 @@ public class EditeurPanovisu extends Application {
     /**
      * Définition de la langue locale par défaut fr_FR
      */
-    public static final String[] codesLanguesTraduction={"fr_FR", "en_EN", "de_DE"};
-    public static final String[] languesTraduction={"Francais", "English", "Deutsch"};
+    public static final String[] codesLanguesTraduction = {"fr_FR", "en_EN", "de_DE"};
+    public static final String[] languesTraduction = {"Francais", "English", "Deutsch"};
     public static Locale locale = new Locale("fr", "FR");
     private static ResourceBundle rb;
     static private PopUpDialogController popUp;
@@ -264,10 +264,7 @@ public class EditeurPanovisu extends Application {
                         + "      visible=\"" + gestionnaireInterface.toggleBarreVisibilite + "\"\n"
                         + "   />\n";
                 if (gestionnaireInterface.bAfficheBoussole) {
-                    String SAiguille = "non";
-                    if (gestionnaireInterface.bAiguilleMobileBoussole) {
-                        SAiguille = "oui";
-                    }
+                    String SAiguille = (gestionnaireInterface.bAiguilleMobileBoussole) ? "oui" : "non";
                     contenuFichier += "<!--  Boussole -->\n"
                             + "    <boussole \n"
                             + "        affiche=\"oui\"\n"
@@ -279,6 +276,28 @@ public class EditeurPanovisu extends Application {
                             + "        dX=\"" + gestionnaireInterface.dXBoussole + "\"\n"
                             + "        dy=\"" + gestionnaireInterface.dYBoussole + "\"\n"
                             + "        aiguille=\"" + SAiguille + "\"\n"
+                            + "    />\n";
+                }
+
+                if (gestionnaireInterface.bAfficheMasque) {
+                    String SNavigation = (gestionnaireInterface.bMasqueNavigation) ? "oui" : "non";
+                    String SBoussole = (gestionnaireInterface.bMasqueBoussole) ? "oui" : "non";
+                    String STitre = (gestionnaireInterface.bMasqueTitre) ? "oui" : "non";
+                    String SPlan = (gestionnaireInterface.bMasquePlan) ? "oui" : "non";
+                    contenuFichier += "<!--  Bouton de Masquage -->\n"
+                            + "    <marcheArret \n"
+                            + "        affiche=\"oui\"\n"
+                            + "        image=\"" + gestionnaireInterface.imageMasque + "\"\n"
+                            + "        taille=\"" + gestionnaireInterface.tailleMasque + "\"\n"
+                            + "        positionY=\"" + gestionnaireInterface.positionMasque.split(":")[0] + "\"\n"
+                            + "        positionX=\"" + gestionnaireInterface.positionMasque.split(":")[1] + "\"\n"
+                            + "        opacite=\"" + gestionnaireInterface.opaciteMasque + "\"\n"
+                            + "        dX=\"" + gestionnaireInterface.dXMasque + "\"\n"
+                            + "        dy=\"" + gestionnaireInterface.dYMasque + "\"\n"
+                            + "        navigation=\"" + SNavigation + "\"\n"
+                            + "        boussole=\"" + SBoussole + "\"\n"
+                            + "        titre=\"" + STitre + "\"\n"
+                            + "        plan=\"" + SPlan + "\"\n"
                             + "    />\n";
                 }
 
@@ -346,6 +365,26 @@ public class EditeurPanovisu extends Application {
                     + "                    fenY: \"100%\",\n"
                     + "                    xml: \"xml/PANO.xml\"\n"
                     + "                });\n"
+                    + "                $(\".reseauSocial-twitter\").on(\"click\", function() {\n"
+                    + "                    alert(document.location.href);\n"
+                    + "                    window.open(\n"
+                    + "                            \"https://twitter.com/share?url=\" + document.location.href\n"
+                    + "                            );\n"
+                    + "                    return false;\n"
+                    + "                });\n"
+                    + "                $(\".reseauSocial-fb\").on(\"click\", function() {\n"
+                    + "                    window.open(\n"
+                    + "                            \"http://www.facebook.com/share.php?u=\" + document.location.href\n"
+                    + "                            );\n"
+                    + "                    return false;\n"
+                    + "                });\n"
+                    + "                $(\".reseauSocial-google\").on(\"click\", function() {\n"
+                    + "                    window.open(\n"
+                    + "                            \"https://plus.google.com/share?url=\" + document.location.href + \"&amp;hl=fr\"\n"
+                    + "                            );\n"
+                    + "                    return false;\n"
+                    + "                });\n"
+                    + "                $(\".reseauSocial-email\").attr(\"href\",\"mailto:?body=\" + document.location.href + \"&amp;hl=fr\");\n" 
                     + "            });\n"
                     + "        </script>\n"
                     + "    </body>\n"
@@ -1416,7 +1455,7 @@ public class EditeurPanovisu extends Application {
         Pane fond = new Pane();
         fond.setStyle("-fx-background-color : #bbb;");
         fond.setPrefWidth(540);
-        fond.setPrefHeight(((nombrePanoramiques - 1) / 4) * 65 + 10);
+        fond.setPrefHeight(((nombrePanoramiques - 2) / 4 + 1) * 65 + 10);
         fond.setMinWidth(540);
         fond.setMinHeight(70);
         APlistePano.getChildren().add(fond);
@@ -1444,12 +1483,7 @@ public class EditeurPanovisu extends Application {
                     pano.setCursor(Cursor.CROSSHAIR);
                     pano.setOnMouseClicked(
                             (MouseEvent me1) -> {
-                                if (me1.isAltDown()) {
-                                    panoChoixRegard(me1.getSceneX(), me1.getSceneY());
-                                    me1.consume();
-                                } else if (!(me1.isControlDown()) && estCharge) {
-                                    panoMouseClic(me1.getSceneX(), me1.getSceneY());
-                                }
+                                gereSourisPanoramique(me1);
                             }
                     );
                     panoListeVignette = nomPano;
@@ -1461,12 +1495,14 @@ public class EditeurPanovisu extends Application {
                 APlistePano.getChildren().add(IVPano[j]);
                 j++;
             }
-            APlistePano.setPrefWidth(540);
-            APlistePano.setPrefHeight((j / 4 + 1) * 65 + 5);
-            APlistePano.setMinWidth(540);
-            APlistePano.setMinHeight((j / 4 + 1) * 65 + 5);
 
         }
+        int taille = ((j + 1) / 4 + 1) * 65 + 5;
+        APlistePano.setPrefWidth(540);
+        APlistePano.setPrefHeight(taille);
+        APlistePano.setMinWidth(540);
+        APlistePano.setMinHeight(taille);
+        System.out.println(j + "=>" + taille);
         ImageView IVClose = new ImageView(new Image("file:" + repertAppli + File.separator + "images/ferme.png", 20, 20, true, true));
         IVClose.setLayoutX(2);
         IVClose.setLayoutY(5);
@@ -1476,12 +1512,7 @@ public class EditeurPanovisu extends Application {
             pano.setCursor(Cursor.CROSSHAIR);
             pano.setOnMouseClicked(
                     (MouseEvent me1) -> {
-                        if (me1.isAltDown()) {
-                            panoChoixRegard(me1.getSceneX(), me1.getSceneY());
-                            me1.consume();
-                        } else if (!(me1.isControlDown()) && estCharge) {
-                            panoMouseClic(me1.getSceneX(), me1.getSceneY());
-                        }
+                        gereSourisPanoramique(me1);
                     }
             );
 
@@ -1641,7 +1672,7 @@ public class EditeurPanovisu extends Application {
         Label lblHS = new Label(rb.getString("main.legendeHS"));
         Label lblPoV = new Label(rb.getString("main.legendePoV"));
         Label lblNord = new Label(rb.getString("main.legendeNord"));
-        Line ligneNord=new Line(30,90,30,110);
+        Line ligneNord = new Line(30, 90, 30, 110);
         ligneNord.setStroke(Color.RED);
         ligneNord.setStrokeWidth(3);
         lblHS.setLayoutX(50);
@@ -1650,7 +1681,7 @@ public class EditeurPanovisu extends Application {
         lblPoV.setLayoutY(55);
         lblNord.setLayoutX(50);
         lblNord.setLayoutY(92);
-        APLegende.getChildren().addAll(lblHS,point,lblPoV,polygon,lblNord,ligneNord);
+        APLegende.getChildren().addAll(lblHS, point, lblPoV, polygon, lblNord, ligneNord);
         APLegende.setId("legende");
         APLegende.setVisible(false);
         APLegende.setTranslateY(10);
@@ -1901,6 +1932,19 @@ public class EditeurPanovisu extends Application {
 
     }
 
+    private void gereSourisPanoramique(MouseEvent me) {
+        if (me.isAltDown()) {
+            panoChoixRegard(me.getSceneX(), me.getSceneY());
+            me.consume();
+        } else if (me.isShiftDown()) {
+            panoChoixNord(me.getSceneX());
+            me.consume();
+        } else if (!(me.isControlDown()) && estCharge) {
+            panoMouseClic(me.getSceneX(), me.getSceneY());
+        }
+
+    }
+
     /**
      *
      */
@@ -1925,15 +1969,7 @@ public class EditeurPanovisu extends Application {
          */
         pano.setOnMouseClicked(
                 (MouseEvent me) -> {
-                    if (me.isAltDown()) {
-                        panoChoixRegard(me.getSceneX(), me.getSceneY());
-                        me.consume();
-                    } else if (me.isShiftDown()) {
-                        panoChoixNord(me.getSceneX());
-                        me.consume();
-                    } else if (!(me.isControlDown()) && estCharge) {
-                        panoMouseClic(me.getSceneX(), me.getSceneY());
-                    }
+                    gereSourisPanoramique(me);
                 }
         );
         /**

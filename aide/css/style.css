@@ -53,13 +53,57 @@ h2{
 #content{
     width: 100%;
     background-color: #eee;
+    position: relative;
+    z-index:1;
 }
-nav ul li{
-    border-bottom: 3px solid #eee;
-    display: inline-block;
-    padding: 5px 10px;
+header nav{
+    position: fixed;
+    top:30px;
+    right : 30px;
+    padding: 20px;
+    border : 1px solid red;
+    background-color: #fff;
+    z-index: 100;
 }
 
-nav ul li:hover{
-    border-bottom: 3px solid #777;
+nav>ul>li{
+    list-style: none;    
+    padding-bottom: 10px;
+}
+
+nav>ul>li>ul{
+    padding-top: 10px;
+}
+
+nav>ul>li>ul>li{
+    list-style: none;
+    padding-left: 30px;
+    padding-bottom: 10px;
+}
+
+nav>ul>li>ul>li:last-child{
+    padding-bottom: 0px;
+}
+
+nav>ul>li>a{
+    border-bottom: 3px solid white;
+    padding: 2px 10px;
+}
+
+nav>ul>li>a:hover{
+    border-bottom: 3px solid red;
+}
+nav>ul>li>ul>li>a{
+    border-bottom: 3px solid white;
+    padding: 2px 10px;
+}
+
+nav>ul>li>ul>li>a:hover{
+    border-bottom: 3px solid red;
+}
+
+.retourDebut{
+    position: fixed;
+    right:20px;    
+    bottom: 20px;
 }
