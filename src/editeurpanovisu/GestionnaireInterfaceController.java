@@ -182,6 +182,7 @@ public class GestionnaireInterfaceController {
     public static boolean bMasqueBoussole = true;
     public static boolean bMasqueTitre = true;
     public static boolean bMasquePlan = true;
+    public static boolean bMasqueReseaux = true;
     private static ImageView imgMasque;
     private static BigDecimalField masqueDXSpinner;
     private static BigDecimalField masqueDYSpinner;
@@ -192,10 +193,47 @@ public class GestionnaireInterfaceController {
     private static CheckBox CBMasqueBoussole;
     private static CheckBox CBMasqueTitre;
     private static CheckBox CBMasquePlan;
+    private static CheckBox CBMasqueReseaux;
     private static RadioButton RBMasqueTopLeft;
     private static RadioButton RBMasqueTopRight;
     private static RadioButton RBMasqueBottomLeft;
     private static RadioButton RBMasqueBottomRight;
+
+    /**
+     *
+     */
+    private static String repertReseauxSociaux;
+    public static boolean bAfficheReseauxSociaux = false;
+    public static String imageReseauxSociauxTwitter = "twitter.png";
+    public static String imageReseauxSociauxGoogle = "google.png";
+    public static String imageReseauxSociauxFacebook = "facebook.png";
+    public static String imageReseauxSociauxEmail = "email.png";
+    public static String positionReseauxSociaux = "top:right";
+    public static double dXReseauxSociaux = 20;
+    public static double dYReseauxSociaux = 20;
+    public static double tailleReseauxSociaux = 30;
+    public static double opaciteReseauxSociaux = 0.8;
+    public static boolean bReseauxSociauxTwitter = true;
+    public static boolean bReseauxSociauxGoogle = true;
+    public static boolean bReseauxSociauxFacebook = true;
+    public static boolean bReseauxSociauxEmail = true;
+    private static ImageView imgTwitter;
+    private static ImageView imgGoogle;
+    private static ImageView imgFacebook;
+    private static ImageView imgEmail;
+    private static BigDecimalField reseauxSociauxDXSpinner;
+    private static BigDecimalField reseauxSociauxDYSpinner;
+    private static Slider SLTailleReseauxSociaux;
+    private static Slider SLOpaciteReseauxSociaux;
+    private static CheckBox CBAfficheReseauxSociaux;
+    private static CheckBox CBReseauxSociauxTwitter;
+    private static CheckBox CBReseauxSociauxGoogle;
+    private static CheckBox CBReseauxSociauxFacebook;
+    private static CheckBox CBReseauxSociauxEmail;
+    private static RadioButton RBReseauxSociauxTopLeft;
+    private static RadioButton RBReseauxSociauxTopRight;
+    private static RadioButton RBReseauxSociauxBottomLeft;
+    private static RadioButton RBReseauxSociauxBottomRight;
 
     public Pane tabInterface;
     private static HBox HBInterface;
@@ -208,6 +246,7 @@ public class GestionnaireInterfaceController {
     final ToggleGroup grpPostBarre = new ToggleGroup();
     final ToggleGroup grpPostBouss = new ToggleGroup();
     final ToggleGroup grpPostMasque = new ToggleGroup();
+    final ToggleGroup grpPostReseauxSociaux = new ToggleGroup();
     private static Image imageClaire;
     private static Image imageSombre;
     private static HBox HBbarreBoutons;
@@ -346,6 +385,108 @@ public class GestionnaireInterfaceController {
 
         imgMasque.setOpacity(opaciteMasque);
         imgMasque.setVisible(bAfficheMasque);
+    }
+
+    private void afficheReseauxSociaux() {
+        System.out.println(repertReseauxSociaux + imageReseauxSociauxTwitter);
+        imgTwitter.setFitWidth(tailleReseauxSociaux);
+        imgTwitter.setFitHeight(tailleReseauxSociaux);
+        imgTwitter.setOpacity(opaciteReseauxSociaux);
+        imgTwitter.setSmooth(true);
+        imgTwitter.setVisible(false);
+        imgGoogle.setFitWidth(tailleReseauxSociaux);
+        imgGoogle.setFitHeight(tailleReseauxSociaux);
+        imgGoogle.setOpacity(opaciteReseauxSociaux);
+        imgGoogle.setSmooth(true);
+        imgGoogle.setVisible(false);
+        imgFacebook.setFitWidth(tailleReseauxSociaux);
+        imgFacebook.setFitHeight(tailleReseauxSociaux);
+        imgFacebook.setOpacity(opaciteReseauxSociaux);
+        imgFacebook.setSmooth(true);
+        imgFacebook.setVisible(false);
+        imgEmail.setFitWidth(tailleReseauxSociaux);
+        imgEmail.setFitHeight(tailleReseauxSociaux);
+        imgEmail.setOpacity(opaciteReseauxSociaux);
+        imgEmail.setSmooth(true);
+        imgEmail.setVisible(false);
+        String positXReseauxSociaux = positionReseauxSociaux.split(":")[1];
+        String positYReseauxSociaux = positionReseauxSociaux.split(":")[0];
+        double posX = 0;
+        double posY = 0;
+        double dX;
+        switch (positXReseauxSociaux) {
+            case "left":
+                posX = IMVisualisation.getLayoutX() + dXReseauxSociaux;
+                dX = imgEmail.getFitWidth() + 5;
+                if (bReseauxSociauxTwitter && bAfficheReseauxSociaux) {
+                    System.out.println("posX " + posX + positXReseauxSociaux);
+                    imgTwitter.setLayoutX(posX);
+                    imgTwitter.setVisible(true);
+                    posX += dX;
+
+                }
+                if (bReseauxSociauxGoogle && bAfficheReseauxSociaux) {
+                    System.out.println("posX " + posX + positXReseauxSociaux);
+                    imgGoogle.setLayoutX(posX);
+                    imgGoogle.setVisible(true);
+                    posX += dX;
+                }
+                if (bReseauxSociauxFacebook && bAfficheReseauxSociaux) {
+                    System.out.println("posX " + posX + positXReseauxSociaux);
+                    imgFacebook.setLayoutX(posX);
+                    imgFacebook.setVisible(true);
+                    posX += dX;
+                }
+                if (bReseauxSociauxEmail && bAfficheReseauxSociaux) {
+                    System.out.println("posX " + posX + positXReseauxSociaux);
+                    imgEmail.setLayoutX(posX);
+                    imgEmail.setVisible(true);
+                    posX += dX;
+                }
+
+                break;
+            case "right":
+                posX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - dXReseauxSociaux - imgEmail.getFitWidth();
+                dX = -(imgEmail.getFitWidth() + 5);
+                if (bReseauxSociauxEmail && bAfficheReseauxSociaux) {
+                    System.out.println("posX " + posX + positXReseauxSociaux);
+                    imgEmail.setLayoutX(posX);
+                    imgEmail.setVisible(true);
+                    posX += dX;
+                }
+                if (bReseauxSociauxFacebook && bAfficheReseauxSociaux) {
+                    System.out.println("posX " + posX + positXReseauxSociaux);
+                    imgFacebook.setLayoutX(posX);
+                    imgFacebook.setVisible(true);
+                    posX += dX;
+                }
+                if (bReseauxSociauxGoogle && bAfficheReseauxSociaux) {
+                    System.out.println("posX " + posX + positXReseauxSociaux);
+                    imgGoogle.setLayoutX(posX);
+                    imgGoogle.setVisible(true);
+                    posX += dX;
+                }
+                if (bReseauxSociauxTwitter && bAfficheReseauxSociaux) {
+                    System.out.println("posX " + posX + positXReseauxSociaux);
+                    imgTwitter.setLayoutX(posX);
+                    imgTwitter.setVisible(true);
+                    posX += dX;
+                }
+                break;
+        }
+        switch (positYReseauxSociaux) {
+            case "bottom":
+                posY = IMVisualisation.getLayoutY() + IMVisualisation.getFitHeight() - imgEmail.getFitHeight() - dYReseauxSociaux;
+                break;
+            case "top":
+                posY = IMVisualisation.getLayoutY() + dYReseauxSociaux;
+                break;
+        }
+        System.out.println(positionReseauxSociaux + " posX:" + posX + ", posY:" + posY);
+        imgTwitter.setLayoutY(posY);
+        imgGoogle.setLayoutY(posY);
+        imgFacebook.setLayoutY(posY);
+        imgEmail.setLayoutY(posY);
     }
 
     /**
@@ -603,7 +744,18 @@ public class GestionnaireInterfaceController {
                 + "masqueNavigation=" + bMasqueNavigation + "\n"
                 + "masqueBoussole=" + bMasqueBoussole + "\n"
                 + "masqueTitre=" + bMasqueTitre + "\n"
-                + "masquePlan=" + bMasquePlan + "\n";
+                + "masquePlan=" + bMasquePlan + "\n"
+                + "masqueReseaux=" + bMasqueReseaux + "\n"
+                + "afficheReseauxSociaux=" + bAfficheReseauxSociaux + "\n"
+                + "tailleReseauxSociaux=" + Math.round(tailleReseauxSociaux * 10.d) / 10.d + "\n"
+                + "positionReseauxSociaux=" + positionReseauxSociaux + "\n"
+                + "dXReseauxSociaux=" + Math.round(dXReseauxSociaux) + "\n"
+                + "dYReseauxSociaux=" + Math.round(dYReseauxSociaux) + "\n"
+                + "opaciteReseauxSociaux=" + Math.round(opaciteReseauxSociaux * 100.d) / 100.d + "\n"
+                + "masqueTwitter=" + bReseauxSociauxTwitter + "\n"
+                + "masqueGoogle=" + bReseauxSociauxGoogle + "\n"
+                + "masqueFacebook=" + bReseauxSociauxFacebook + "\n"
+                + "masqueEmail=" + bReseauxSociauxEmail + "\n";
         return contenuFichier;
     }
 
@@ -769,7 +921,7 @@ public class GestionnaireInterfaceController {
                     imageMasque = valeur;
                     break;
                 case "tailleMasque":
-                   tailleMasque =Double.parseDouble(valeur);
+                    tailleMasque = Double.parseDouble(valeur);
                     break;
                 case "positionMasque":
                     positionMasque = valeur;
@@ -794,6 +946,39 @@ public class GestionnaireInterfaceController {
                     break;
                 case "masquePlan":
                     bMasquePlan = (valeur.equals("true"));
+                    break;
+                case "masqueReseaux":
+                    bMasqueReseaux = (valeur.equals("true"));
+                    break;
+                case "afficheReseauxSociaux":
+                    bAfficheReseauxSociaux = (valeur.equals("true"));
+                    break;
+                case "tailleReseauxSociaux":
+                    tailleReseauxSociaux = Double.parseDouble(valeur);
+                    break;
+                case "positionReseauxSociaux":
+                    positionReseauxSociaux = valeur;
+                    break;
+                case "dXReseauxSociaux":
+                    dXReseauxSociaux = Double.parseDouble(valeur);
+                    break;
+                case "dYReseauxSociaux":
+                    dYReseauxSociaux = Double.parseDouble(valeur);
+                    break;
+                case "opaciteReseauxSociaux":
+                    opaciteReseauxSociaux = Double.parseDouble(valeur);
+                    break;
+                case "masqueTwitter":
+                    bReseauxSociauxTwitter = (valeur.equals("true"));
+                    break;
+                case "masqueGoogle":
+                    bReseauxSociauxGoogle = (valeur.equals("true"));
+                    break;
+                case "masqueFacebook":
+                    bReseauxSociauxFacebook = (valeur.equals("true"));
+                    break;
+                case "masqueEmail":
+                    bReseauxSociauxEmail = (valeur.equals("true"));
                     break;
 
             }
@@ -834,13 +1019,29 @@ public class GestionnaireInterfaceController {
         CBMasqueBoussole.setSelected(bMasqueBoussole);
         CBMasqueTitre.setSelected(bMasqueTitre);
         CBMasquePlan.setSelected(bMasquePlan);
+        CBMasqueReseaux.setSelected(bMasqueReseaux);
         CBAfficheMasque.setSelected(bAfficheMasque);
         RBMasqueTopLeft.setSelected(positionMasque.equals("top:left"));
         RBMasqueBottomLeft.setSelected(positionMasque.equals("bottom:left"));
         RBMasqueTopRight.setSelected(positionMasque.equals("top:right"));
         RBMasqueBottomRight.setSelected(positionMasque.equals("bottom:right"));
+        SLTailleReseauxSociaux.setValue(tailleReseauxSociaux);
+        SLOpaciteReseauxSociaux.setValue(opaciteReseauxSociaux);
+        reseauxSociauxDXSpinner.setNumber(new BigDecimal(dXReseauxSociaux));
+        reseauxSociauxDYSpinner.setNumber(new BigDecimal(dYReseauxSociaux));
+        CBReseauxSociauxTwitter.setSelected(bReseauxSociauxTwitter);
+        CBReseauxSociauxGoogle.setSelected(bReseauxSociauxGoogle);
+        CBReseauxSociauxFacebook.setSelected(bReseauxSociauxFacebook);
+        CBReseauxSociauxEmail.setSelected(bReseauxSociauxEmail);
+        CBAfficheReseauxSociaux.setSelected(bAfficheReseauxSociaux);
+        RBReseauxSociauxTopLeft.setSelected(positionReseauxSociaux.equals("top:left"));
+        RBReseauxSociauxBottomLeft.setSelected(positionReseauxSociaux.equals("bottom:left"));
+        RBReseauxSociauxTopRight.setSelected(positionReseauxSociaux.equals("top:right"));
+        RBReseauxSociauxBottomRight.setSelected(positionReseauxSociaux.equals("bottom:right"));
         afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
         afficheBoussole();
+        afficheMasque();
+        afficheReseauxSociaux();
 
     }
 
@@ -867,6 +1068,7 @@ public class GestionnaireInterfaceController {
         repertHotSpots = repertAppli + File.separator + "panovisu/images/hotspots";
         repertBoussoles = repertAppli + File.separator + "panovisu/images/boussoles";
         repertMasques = repertAppli + File.separator + "panovisu/images/hotspots/MA";
+        repertReseauxSociaux = repertAppli + File.separator + "panovisu/images/hotspots/reseaux";
         ArrayList<String> listeStyles = listerStyle(repertBoutonsPrincipal);
         ArrayList<String> listeHotSpots = listerHotSpots(repertHotSpots);
         ArrayList<String> listeBoussoles = listerBoussoles(repertBoussoles);
@@ -941,9 +1143,14 @@ public class GestionnaireInterfaceController {
         imgMasque = new ImageView(new Image("file:" + repertMasques + File.separator + imageMasque));
         imgAiguille = new ImageView("file:" + repertBoussoles + File.separator + "aiguille.png");
         APVisualisation.getChildren().add(IMVisualisation);
-        APVisualisation.getChildren().addAll(txtTitre, imgBoussole, imgAiguille, imgMasque);
+        imgTwitter = new ImageView(new Image("file:" + repertReseauxSociaux + File.separator + imageReseauxSociauxTwitter));
+        imgGoogle = new ImageView(new Image("file:" + repertReseauxSociaux + File.separator + imageReseauxSociauxGoogle));
+        imgFacebook = new ImageView(new Image("file:" + repertReseauxSociaux + File.separator + imageReseauxSociauxFacebook));
+        imgEmail = new ImageView(new Image("file:" + repertReseauxSociaux + File.separator + imageReseauxSociauxEmail));
+        APVisualisation.getChildren().addAll(txtTitre, imgBoussole, imgAiguille, imgMasque, imgTwitter, imgGoogle, imgFacebook, imgEmail);
         afficheBoussole();
         afficheMasque();
+        afficheReseauxSociaux();
 
         afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
 
@@ -956,6 +1163,7 @@ public class GestionnaireInterfaceController {
         AnchorPane APTIT = new AnchorPane();
         AnchorPane APBOUSS = new AnchorPane();
         AnchorPane APMASQ = new AnchorPane();
+        AnchorPane APRS = new AnchorPane();
 
         /**
          * *****************************************
@@ -972,7 +1180,7 @@ public class GestionnaireInterfaceController {
         lblPanelTitre.setPadding(new Insets(5));
         lblPanelTitre.setLayoutX(10);
         lblPanelTitre.setLayoutY(10);
-        ImageView IVBtnPlusTitre = new ImageView(new Image("file:" + "images/moins.png", 20, 20, true, true));
+        ImageView IVBtnPlusTitre = new ImageView(new Image("file:" + "images/plus.png", 20, 20, true, true));
         IVBtnPlusTitre.setLayoutX(VBOutils.getPrefWidth() - 20);
         IVBtnPlusTitre.setLayoutY(13);
         CBListePolices = new ComboBox(listePolices);
@@ -1071,6 +1279,11 @@ public class GestionnaireInterfaceController {
                 lblChoixOpacite, SLOpacite,
                 lblChoixTaille, SLTaille);
         double tailleInitialeTitre = APTitre.getPrefHeight();
+                APTitre.setPrefHeight(0);
+                APTitre.setMaxHeight(0);
+                APTitre.setMinHeight(0);
+                APTitre.setVisible(false);
+
         lblPanelTitre.setOnMouseClicked((MouseEvent me) -> {
             if (APTitre.isVisible()) {
                 APTitre.setPrefHeight(0);
@@ -1106,7 +1319,7 @@ public class GestionnaireInterfaceController {
          * Panel HotSpots ************************************************
          */
         AnchorPane APHotSpots = new AnchorPane();
-        ImageView IVBtnPlusHS = new ImageView(new Image("file:" + "images/moins.png", 20, 20, true, true));
+        ImageView IVBtnPlusHS = new ImageView(new Image("file:" + "images/plus.png", 20, 20, true, true));
         IVBtnPlusHS.setLayoutX(VBOutils.getPrefWidth() - 20);
         IVBtnPlusHS.setLayoutY(13);
         Label lblChoixHS = new Label(rb.getString("interface.choixHotspot"));
@@ -1146,6 +1359,11 @@ public class GestionnaireInterfaceController {
             i++;
 
         }
+                APHotSpots.setPrefHeight(0);
+                APHotSpots.setMaxHeight(0);
+                APHotSpots.setMinHeight(0);
+                APHotSpots.setVisible(false);
+
         lblChoixHS.setOnMouseClicked((MouseEvent me) -> {
             if (APHotSpots.isVisible()) {
                 IVBtnPlusHS.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
@@ -1184,7 +1402,7 @@ public class GestionnaireInterfaceController {
         AnchorPane APBarreModif = new AnchorPane();
         APBarreModif.setLayoutY(40);
         APBarreModif.setPrefHeight(390);
-        APBarreModif.setMinWidth(VBOutils.getPrefWidth());
+        APBarreModif.setMinWidth(VBOutils.getPrefWidth()-20);
 
         CBVisible = new CheckBox(rb.getString("interface.barreVisible"));
         CBVisible.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
@@ -1385,10 +1603,14 @@ public class GestionnaireInterfaceController {
         lblBarreBouton.setPadding(new Insets(5));
         lblBarreBouton.setLayoutX(10);
         lblBarreBouton.setLayoutY(10);
-        ImageView IVBtnPlus = new ImageView(new Image("file:" + "images/moins.png", 20, 20, true, true));
+        ImageView IVBtnPlus = new ImageView(new Image("file:" + "images/plus.png", 20, 20, true, true));
         IVBtnPlus.setLayoutX(VBOutils.getPrefWidth() - 20);
         IVBtnPlus.setLayoutY(13);
         double tailleInitiale = APBarreModif.getPrefHeight();
+                APBarreModif.setPrefHeight(0);
+                APBarreModif.setMaxHeight(0);
+                APBarreModif.setMinHeight(0);
+                APBarreModif.setVisible(false);
 
         lblBarreBouton.setOnMouseClicked((MouseEvent me) -> {
             if (APBarreModif.isVisible()) {
@@ -1438,7 +1660,7 @@ public class GestionnaireInterfaceController {
 
         APBoussole.setLayoutY(40);
         APBoussole.setPrefHeight(340);
-        APBoussole.setMinWidth(VBOutils.getPrefWidth());
+        APBoussole.setMinWidth(VBOutils.getPrefWidth()-20);
         Double tailleBouss = APBoussole.getPrefHeight();
         CBAfficheBoussole = new CheckBox(rb.getString("interface.affichageBoussole"));
         CBAfficheBoussole.setLayoutX(10);
@@ -1457,7 +1679,7 @@ public class GestionnaireInterfaceController {
         lblPanelBoussole.setPadding(new Insets(5));
         lblPanelBoussole.setLayoutX(10);
         lblPanelBoussole.setLayoutY(10);
-        ImageView IVBtnPlusBouss = new ImageView(new Image("file:" + "images/moins.png", 20, 20, true, true));
+        ImageView IVBtnPlusBouss = new ImageView(new Image("file:" + "images/plus.png", 20, 20, true, true));
         IVBtnPlusBouss.setLayoutX(VBOutils.getPrefWidth() - 20);
         IVBtnPlusBouss.setLayoutY(13);
         Label lblChoixBoussole = new Label(rb.getString("interface.choixImgBoussole"));
@@ -1524,10 +1746,10 @@ public class GestionnaireInterfaceController {
         );
         Label lblBoussDXSpinner = new Label("dX :");
         lblBoussDXSpinner.setLayoutX(25);
-        lblBoussDXSpinner.setLayoutY(208);
+        lblBoussDXSpinner.setLayoutY(210);
         Label lblBoussDYSpinner = new Label("dY :");
         lblBoussDYSpinner.setLayoutX(175);
-        lblBoussDYSpinner.setLayoutY(208);
+        lblBoussDYSpinner.setLayoutY(210);
         boussDXSpinner = new BigDecimalField(new BigDecimal(dXBarre));
         boussDXSpinner.setLayoutX(50);
         boussDXSpinner.setLayoutY(205);
@@ -1573,6 +1795,10 @@ public class GestionnaireInterfaceController {
                 lblOpaciteBouss, SLOpaciteBoussole,
                 CBAiguilleMobile
         );
+                APBoussole.setPrefHeight(0);
+                APBoussole.setMaxHeight(0);
+                APBoussole.setMinHeight(0);
+                APBoussole.setVisible(false);
 
         lblPanelBoussole.setOnMouseClicked((MouseEvent me) -> {
             if (APBoussole.isVisible()) {
@@ -1612,8 +1838,8 @@ public class GestionnaireInterfaceController {
         AnchorPane APMasque = new AnchorPane();
 
         APMasque.setLayoutY(40);
-        APMasque.setPrefHeight(380);
-        APMasque.setMinWidth(VBOutils.getPrefWidth());
+        APMasque.setPrefHeight(400);
+        APMasque.setMinWidth(VBOutils.getPrefWidth()-20);
         Double taillePanelMasque = APMasque.getPrefHeight();
         CBAfficheMasque = new CheckBox(rb.getString("interface.affichageMasque"));
         CBAfficheMasque.setLayoutX(10);
@@ -1632,7 +1858,7 @@ public class GestionnaireInterfaceController {
         lblPanelMasque.setPadding(new Insets(5));
         lblPanelMasque.setLayoutX(10);
         lblPanelMasque.setLayoutY(10);
-        ImageView IVBtnPlusMasque = new ImageView(new Image("file:" + "images/moins.png", 20, 20, true, true));
+        ImageView IVBtnPlusMasque = new ImageView(new Image("file:" + "images/plus.png", 20, 20, true, true));
         IVBtnPlusMasque.setLayoutX(VBOutils.getPrefWidth() - 20);
         IVBtnPlusMasque.setLayoutY(13);
         Label lblChoixMasque = new Label(rb.getString("interface.choixImgMasque"));
@@ -1700,10 +1926,10 @@ public class GestionnaireInterfaceController {
         );
         Label lblMasqueDXSpinner = new Label("dX :");
         lblMasqueDXSpinner.setLayoutX(25);
-        lblMasqueDXSpinner.setLayoutY(120 + basImages);
+        lblMasqueDXSpinner.setLayoutY(128 + basImages);
         Label lblMasqueDYSpinner = new Label("dY :");
         lblMasqueDYSpinner.setLayoutX(175);
-        lblMasqueDYSpinner.setLayoutY(120 + basImages);
+        lblMasqueDYSpinner.setLayoutY(128 + basImages);
         masqueDXSpinner = new BigDecimalField(new BigDecimal(dXBarre));
         masqueDXSpinner.setLayoutX(50);
         masqueDXSpinner.setLayoutY(123 + basImages);
@@ -1770,12 +1996,25 @@ public class GestionnaireInterfaceController {
                 bMasquePlan = new_val;
             }
         });
+        CBMasqueReseaux = new CheckBox(rb.getString("interface.masqueReseaux"));
+        CBMasqueReseaux.setLayoutX(60);
+        CBMasqueReseaux.setLayoutY(340 + basImages);
+        CBMasqueReseaux.setSelected(true);
+        CBMasqueReseaux.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+            if (new_val != null) {
+                bMasqueReseaux = new_val;
+            }
+        });
 
         APMasque.getChildren().addAll(
                 lblTailleMasque, SLTailleMasque,
                 lblOpaciteMasque, SLOpaciteMasque,
-                CBMasqueNavigation, CBMasqueBoussole, CBMasqueTitre, CBMasquePlan
+                CBMasqueNavigation, CBMasqueBoussole, CBMasqueTitre, CBMasquePlan, CBMasqueReseaux
         );
+        APMasque.setPrefHeight(0);
+        APMasque.setMaxHeight(0);
+        APMasque.setMinHeight(0);
+        APMasque.setVisible(false);
 
         lblPanelMasque.setOnMouseClicked((MouseEvent me) -> {
             if (APMasque.isVisible()) {
@@ -1809,6 +2048,192 @@ public class GestionnaireInterfaceController {
         });
 
         /**
+         *********************************************
+         * Panel ReseauxSociaux ********************************************
+         */
+        AnchorPane APReseauxSociaux = new AnchorPane();
+
+        APReseauxSociaux.setLayoutY(40);
+        APReseauxSociaux.setPrefHeight(380);
+        APReseauxSociaux.setMinWidth(VBOutils.getPrefWidth()-20);
+        Double taillePanelReseauxSociaux = APReseauxSociaux.getPrefHeight();
+        CBAfficheReseauxSociaux = new CheckBox(rb.getString("interface.affichageReseauxSociaux"));
+        CBAfficheReseauxSociaux.setLayoutX(10);
+        CBAfficheReseauxSociaux.setLayoutY(10);
+        APReseauxSociaux.getChildren().add(CBAfficheReseauxSociaux);
+        CBAfficheReseauxSociaux.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+            if (new_val != null) {
+                bAfficheReseauxSociaux = new_val;
+                afficheReseauxSociaux();
+            }
+        });
+        Label lblPanelReseauxSociaux = new Label(rb.getString("interface.reseauxSociaux"));
+        lblPanelReseauxSociaux.setPrefWidth(VBOutils.getPrefWidth());
+        lblPanelReseauxSociaux.setStyle("-fx-background-color : #444");
+        lblPanelReseauxSociaux.setTextFill(Color.WHITE);
+        lblPanelReseauxSociaux.setPadding(new Insets(5));
+        lblPanelReseauxSociaux.setLayoutX(10);
+        lblPanelReseauxSociaux.setLayoutY(10);
+        ImageView IVBtnPlusReseauxSociaux = new ImageView(new Image("file:" + "images/plus.png", 20, 20, true, true));
+        IVBtnPlusReseauxSociaux.setLayoutX(VBOutils.getPrefWidth() - 20);
+        IVBtnPlusReseauxSociaux.setLayoutY(13);
+        Label lblPositReseauxSociaux = new Label(rb.getString("interface.choixPositReseauxSociaux"));
+        lblPositReseauxSociaux.setLayoutX(10);
+        basImages = -30;
+        lblPositReseauxSociaux.setLayoutY(70 + basImages);
+        APReseauxSociaux.getChildren().add(lblPositReseauxSociaux);
+
+        RBReseauxSociauxTopLeft = new RadioButton();
+        RBReseauxSociauxTopRight = new RadioButton();
+        RBReseauxSociauxBottomLeft = new RadioButton();
+        RBReseauxSociauxBottomRight = new RadioButton();
+
+        RBReseauxSociauxTopLeft.setUserData("top:left");
+        RBReseauxSociauxTopRight.setUserData("top:right");
+        RBReseauxSociauxBottomLeft.setUserData("bottom:left");
+        RBReseauxSociauxBottomRight.setUserData("bottom:right");
+
+        RBReseauxSociauxTopLeft.setToggleGroup(grpPostReseauxSociaux);
+        RBReseauxSociauxTopRight.setToggleGroup(grpPostReseauxSociaux);
+        RBReseauxSociauxBottomLeft.setToggleGroup(grpPostReseauxSociaux);
+        RBReseauxSociauxBottomRight.setToggleGroup(grpPostReseauxSociaux);
+
+        posX = 200;
+        posY = 70 + basImages;
+
+        RBReseauxSociauxTopLeft.setLayoutX(posX);
+        RBReseauxSociauxTopRight.setLayoutX(posX + 20);
+        RBReseauxSociauxTopLeft.setLayoutY(posY);
+        RBReseauxSociauxTopRight.setLayoutY(posY);
+
+        RBReseauxSociauxBottomLeft.setLayoutX(posX);
+        RBReseauxSociauxBottomRight.setLayoutX(posX + 20);
+        RBReseauxSociauxBottomLeft.setLayoutY(posY + 20);
+        RBReseauxSociauxBottomRight.setLayoutY(posY + 20);
+        APReseauxSociaux.getChildren().addAll(
+                RBReseauxSociauxTopLeft, RBReseauxSociauxTopRight,
+                RBReseauxSociauxBottomLeft, RBReseauxSociauxBottomRight
+        );
+        Label lblReseauxSociauxDXSpinner = new Label("dX :");
+        lblReseauxSociauxDXSpinner.setLayoutX(25);
+        lblReseauxSociauxDXSpinner.setLayoutY(128 + basImages);
+        Label lblReseauxSociauxDYSpinner = new Label("dY :");
+        lblReseauxSociauxDYSpinner.setLayoutX(175);
+        lblReseauxSociauxDYSpinner.setLayoutY(128 + basImages);
+        reseauxSociauxDXSpinner = new BigDecimalField(new BigDecimal(dXBarre));
+        reseauxSociauxDXSpinner.setLayoutX(50);
+        reseauxSociauxDXSpinner.setLayoutY(123 + basImages);
+        reseauxSociauxDXSpinner.setMaxValue(new BigDecimal(2000));
+        reseauxSociauxDXSpinner.setMinValue(new BigDecimal(0));
+        reseauxSociauxDXSpinner.setNumber(new BigDecimal(20));
+        reseauxSociauxDXSpinner.setMaxWidth(100);
+        reseauxSociauxDYSpinner = new BigDecimalField(new BigDecimal(dYBarre));
+        reseauxSociauxDYSpinner.setLayoutX(200);
+        reseauxSociauxDYSpinner.setLayoutY(123 + basImages);
+        reseauxSociauxDYSpinner.setMaxValue(new BigDecimal(2000));
+        reseauxSociauxDYSpinner.setMinValue(new BigDecimal(0));
+        reseauxSociauxDYSpinner.setNumber(new BigDecimal(20));
+        reseauxSociauxDYSpinner.setMaxWidth(100);
+        APReseauxSociaux.getChildren().addAll(
+                lblReseauxSociauxDXSpinner, reseauxSociauxDXSpinner,
+                lblReseauxSociauxDYSpinner, reseauxSociauxDYSpinner
+        );
+        Label lblTailleReseauxSociaux = new Label(rb.getString("interface.tailleReseauxSociaux"));
+        lblTailleReseauxSociaux.setLayoutX(10);
+        lblTailleReseauxSociaux.setLayoutY(160 + basImages);
+        SLTailleReseauxSociaux = new Slider(15, 60, 30);
+        SLTailleReseauxSociaux.setLayoutX(200);
+        SLTailleReseauxSociaux.setLayoutY(160 + basImages);
+        Label lblOpaciteReseauxSociaux = new Label(rb.getString("interface.opaciteReseauxSociaux"));
+        lblOpaciteReseauxSociaux.setLayoutX(10);
+        lblOpaciteReseauxSociaux.setLayoutY(190 + basImages);
+        SLOpaciteReseauxSociaux = new Slider(0, 1.0, 0.8);
+        SLOpaciteReseauxSociaux.setLayoutX(200);
+        SLOpaciteReseauxSociaux.setLayoutY(190 + basImages);
+        CBReseauxSociauxTwitter = new CheckBox("Twitter");
+        CBReseauxSociauxTwitter.setLayoutX(60);
+        CBReseauxSociauxTwitter.setLayoutY(220 + basImages);
+        CBReseauxSociauxTwitter.setSelected(true);
+        CBReseauxSociauxTwitter.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+            if (new_val != null) {
+                bReseauxSociauxTwitter = new_val;
+                afficheReseauxSociaux();
+            }
+        });
+        CBReseauxSociauxGoogle = new CheckBox("Google+");
+        CBReseauxSociauxGoogle.setLayoutX(60);
+        CBReseauxSociauxGoogle.setLayoutY(250 + basImages);
+        CBReseauxSociauxGoogle.setSelected(true);
+        CBReseauxSociauxGoogle.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+            if (new_val != null) {
+                bReseauxSociauxGoogle = new_val;
+                afficheReseauxSociaux();
+            }
+        });
+        CBReseauxSociauxFacebook = new CheckBox("Facebook");
+        CBReseauxSociauxFacebook.setLayoutX(60);
+        CBReseauxSociauxFacebook.setLayoutY(280 + basImages);
+        CBReseauxSociauxFacebook.setSelected(true);
+        CBReseauxSociauxFacebook.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+            if (new_val != null) {
+                bReseauxSociauxFacebook = new_val;
+                afficheReseauxSociaux();
+            }
+        });
+        CBReseauxSociauxEmail = new CheckBox("Email");
+        CBReseauxSociauxEmail.setLayoutX(60);
+        CBReseauxSociauxEmail.setLayoutY(310 + basImages);
+        CBReseauxSociauxEmail.setSelected(true);
+        CBReseauxSociauxEmail.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+            if (new_val != null) {
+                bReseauxSociauxEmail = new_val;
+                afficheReseauxSociaux();
+            }
+        });
+
+        APReseauxSociaux.getChildren().addAll(
+                lblTailleReseauxSociaux, SLTailleReseauxSociaux,
+                lblOpaciteReseauxSociaux, SLOpaciteReseauxSociaux,
+                CBReseauxSociauxTwitter, CBReseauxSociauxGoogle, CBReseauxSociauxFacebook, CBReseauxSociauxEmail
+        );
+                APReseauxSociaux.setPrefHeight(0);
+                APReseauxSociaux.setMaxHeight(0);
+                APReseauxSociaux.setMinHeight(0);
+                APReseauxSociaux.setVisible(false);
+
+        
+        lblPanelReseauxSociaux.setOnMouseClicked((MouseEvent me) -> {
+            if (APReseauxSociaux.isVisible()) {
+                IVBtnPlusReseauxSociaux.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
+                APReseauxSociaux.setPrefHeight(0);
+                APReseauxSociaux.setMaxHeight(0);
+                APReseauxSociaux.setMinHeight(0);
+                APReseauxSociaux.setVisible(false);
+            } else {
+                IVBtnPlusReseauxSociaux.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
+                APReseauxSociaux.setPrefHeight(taillePanelReseauxSociaux);
+                APReseauxSociaux.setMaxHeight(taillePanelReseauxSociaux);
+                APReseauxSociaux.setMinHeight(taillePanelReseauxSociaux);
+                APReseauxSociaux.setVisible(true);
+            }
+        });
+        IVBtnPlusReseauxSociaux.setOnMouseClicked((MouseEvent me) -> {
+            if (APReseauxSociaux.isVisible()) {
+                IVBtnPlusReseauxSociaux.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
+                APReseauxSociaux.setPrefHeight(0);
+                APReseauxSociaux.setMaxHeight(0);
+                APReseauxSociaux.setMinHeight(0);
+                APReseauxSociaux.setVisible(false);
+            } else {
+                IVBtnPlusReseauxSociaux.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
+                APReseauxSociaux.setPrefHeight(taillePanelReseauxSociaux);
+                APReseauxSociaux.setMaxHeight(taillePanelReseauxSociaux);
+                APReseauxSociaux.setMinHeight(taillePanelReseauxSociaux);
+                APReseauxSociaux.setVisible(true);
+            }
+        });
+
+        /**
          * *****************************************************
          * Style des Pannels
          * *****************************************************
@@ -1819,7 +2244,13 @@ public class GestionnaireInterfaceController {
         APTitre.setStyle(styleAP);
         APHotSpots.setStyle(styleAP);
         APMasque.setStyle(styleAP);
-
+        APReseauxSociaux.setStyle(styleAP);
+        APBoussole.setLayoutX(20);
+        APBarreModif.setLayoutX(20);
+        APTitre.setLayoutX(20);
+        APHotSpots.setLayoutX(20);
+        APMasque.setLayoutX(20);
+        APReseauxSociaux.setLayoutX(20);
         /**
          * *******************************************************
          * Ajout des Elements dans les Pannels
@@ -1830,6 +2261,7 @@ public class GestionnaireInterfaceController {
         APHS.getChildren().addAll(lblChoixHS, IVBtnPlusHS, APHotSpots);
         APBOUSS.getChildren().addAll(APBoussole, lblPanelBoussole, IVBtnPlusBouss);
         APMASQ.getChildren().addAll(APMasque, lblPanelMasque, IVBtnPlusMasque);
+        APRS.getChildren().addAll(APReseauxSociaux, lblPanelReseauxSociaux, IVBtnPlusReseauxSociaux);
 
         /**
          * ******************************************************
@@ -1837,7 +2269,7 @@ public class GestionnaireInterfaceController {
          * ******************************************************
          */
         VBOutils.getChildren().addAll(
-                APTIT, APBB, APHS, APBOUSS, APMASQ
+                APTIT, APBB, APHS, APBOUSS, APMASQ, APRS
         );
 
         CBlisteStyle.valueProperty().addListener(new ChangeListener<String>() {
@@ -1939,6 +2371,34 @@ public class GestionnaireInterfaceController {
                 double opac = (double) newValue;
                 opaciteMasque = opac;
                 afficheMasque();
+            }
+        });
+        grpPostReseauxSociaux.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) -> {
+            if (grpPostReseauxSociaux.getSelectedToggle() != null) {
+                positionReseauxSociaux = grpPostReseauxSociaux.getSelectedToggle().getUserData().toString();
+                afficheReseauxSociaux();
+            }
+        });
+        reseauxSociauxDXSpinner.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
+            dXReseauxSociaux = new_value.doubleValue();
+            afficheReseauxSociaux();
+        });
+        reseauxSociauxDYSpinner.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
+            dYReseauxSociaux = new_value.doubleValue();
+            afficheReseauxSociaux();
+        });
+        SLTailleReseauxSociaux.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+            if (newValue != null) {
+                double taille = (double) newValue;
+                tailleReseauxSociaux = taille;
+                afficheReseauxSociaux();
+            }
+        });
+        SLOpaciteReseauxSociaux.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+            if (newValue != null) {
+                double opac = (double) newValue;
+                opaciteReseauxSociaux = opac;
+                afficheReseauxSociaux();
             }
         });
 

@@ -284,6 +284,7 @@ public class EditeurPanovisu extends Application {
                     String SBoussole = (gestionnaireInterface.bMasqueBoussole) ? "oui" : "non";
                     String STitre = (gestionnaireInterface.bMasqueTitre) ? "oui" : "non";
                     String SPlan = (gestionnaireInterface.bMasquePlan) ? "oui" : "non";
+                    String SReseaux = (gestionnaireInterface.bMasqueReseaux) ? "oui" : "non";
                     contenuFichier += "<!--  Bouton de Masquage -->\n"
                             + "    <marcheArret \n"
                             + "        affiche=\"oui\"\n"
@@ -298,9 +299,31 @@ public class EditeurPanovisu extends Application {
                             + "        boussole=\"" + SBoussole + "\"\n"
                             + "        titre=\"" + STitre + "\"\n"
                             + "        plan=\"" + SPlan + "\"\n"
+                            + "        reseaux=\"" + SReseaux + "\"\n"
                             + "    />\n";
                 }
 
+                if (gestionnaireInterface.bAfficheReseauxSociaux) {
+                    String STwitter = (gestionnaireInterface.bReseauxSociauxTwitter) ? "oui" : "non";
+                    String SGoogle = (gestionnaireInterface.bReseauxSociauxGoogle) ? "oui" : "non";
+                    String SFacebook = (gestionnaireInterface.bReseauxSociauxFacebook) ? "oui" : "non";
+                    String SEmail = (gestionnaireInterface.bReseauxSociauxEmail) ? "oui" : "non";
+                    contenuFichier += "<!--  Bouton de Masquage -->\n"
+                            + "    <reseauxSociaux \n"
+                            + "        affiche=\"oui\"\n"
+                            + "        taille=\"" + gestionnaireInterface.tailleReseauxSociaux + "\"\n"
+                            + "        positionY=\"" + gestionnaireInterface.positionReseauxSociaux.split(":")[0] + "\"\n"
+                            + "        positionX=\"" + gestionnaireInterface.positionReseauxSociaux.split(":")[1] + "\"\n"
+                            + "        opacite=\"" + gestionnaireInterface.opaciteReseauxSociaux + "\"\n"
+                            + "        dX=\"" + gestionnaireInterface.dXReseauxSociaux + "\"\n"
+                            + "        dy=\"" + gestionnaireInterface.dYReseauxSociaux + "\"\n"
+                            + "        twitter=\"" + STwitter + "\"\n"
+                            + "        google=\"" + SGoogle + "\"\n"
+                            + "        facebook=\"" + SFacebook + "\"\n"
+                            + "        email=\"" + SEmail + "\"\n"
+                            + "    />\n";
+                }
+                
                 contenuFichier += "    <!--Définition des hotspots-->  \n"
                         + "   <hotspots>\n";
                 for (int j = 0; j < panoramiquesProjet[i].getNombreHotspots(); j++) {
@@ -1469,6 +1492,9 @@ public class EditeurPanovisu extends Application {
         for (int i = 0; i < nombrePanoramiques; i++) {
             if (i != panoActuel) {
                 IVPano[j] = new ImageView(panoramiquesProjet[i].getVignettePanoramique());
+                IVPano[j].setFitWidth(120);
+                IVPano[j].setFitHeight(60);
+                IVPano[j].setSmooth(true);
                 String nomPano = panoramiquesProjet[i].getNomFichier();
                 int col = j % 4;
                 int row = j / 4;
@@ -2168,7 +2194,7 @@ public class EditeurPanovisu extends Application {
         panoCree.setNomFichier(fichierPano);
         if (typePano.equals(Panoramique.SPHERE)) {
             image2 = new Image("file:" + fichierPano, 1200, 600, true, true, true);
-            Image image3 = new Image("file:" + fichierPano, 120, 60, true, true, true);
+            Image image3 = new Image("file:" + fichierPano, 300, 150, true, true, true);
             panoCree.setVignettePanoramique(image3);
             panoCree.setImagePanoramique(image2);
             panoCree.setTypePanoramique(Panoramique.SPHERE);
@@ -2197,7 +2223,7 @@ public class EditeurPanovisu extends Application {
                 behind = new Image("file:" + nom + "_b.jpg");
             }
             Image equiRectangulaire = TransformationsPanoramique.cube2rect(front, left, right, behind, top, bottom, 1200);
-            Image vignetteEquiRectangulaire = TransformationsPanoramique.cube2rect(front, left, right, behind, top, bottom, 120);
+            Image vignetteEquiRectangulaire = TransformationsPanoramique.cube2rect(front, left, right, behind, top, bottom, 300);
             panoCree.setImagePanoramique(equiRectangulaire);
             panoCree.setVignettePanoramique(vignetteEquiRectangulaire);
             panoCree.setTypePanoramique(Panoramique.CUBE);
