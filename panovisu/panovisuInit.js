@@ -49,6 +49,7 @@ function ajoutePano(parametres) {
     pano.initialisePano(parametres);
 }
 
+include("panovisu/libs/screenfull.js");
 include("panovisu/libs/jquery/jquery.min.js");
 include("panovisu/libs/jquery/jquery.mousewheel.min.js");
 include("panovisu/libs/hammer/hammer.min.js");

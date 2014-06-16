@@ -70,10 +70,12 @@ and open the template in the editor.
     width: 100%;
     height : 100%;
     display: none;
+    overflow: hidden;
 }
 
 .container{
     margin-right: 0px;
+    overflow: hidden;
 }
 
 
@@ -133,7 +135,7 @@ and open the template in the editor.
     opacity: 0.5;
     width: 50%;
     margin-left: 25%;
-    z-index: 500;
+    z-index: 350;
     display: none;
 }
 
@@ -206,3 +208,36 @@ and open the template in the editor.
 .marcheArret:hover{
     opacity: 1.0;
 }
+.vignettes{
+    z-index : 400;
+    position: absolute;
+    transition: 0.5s;
+}
+.imgVignette{
+    margin-top: -2px;
+    transition: 0.5s;
+    margin-right:  10px;
+    opacity: 1.0;
+    border : 2px solid #fff;
+    filter: url(filtres.svg#gris);
+    /*filter: url("data:image/svg+xml;utf8,&lt;svg xmlns=\'http://www.w3.org/2000/svg\'&gt;&lt;filter id=\'saturation\'&gt;&lt;feColorMatrix type=\'matrix\' values=\'0.2\'/&gt;&lt;/filter&gt;&lt;/svg&gt;#grayscale");  Firefox 10+, Firefox on Android */
+
+    filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale="1",duration=2);
+    -webkit-filter: grayscale(0.9);
+    transition: 0.5s;
+}
+.imgVignette:hover{
+    border : 2px solid yellow;
+    filter: none;
+    -webkit-filter: none;
+}
+.positionVignettes{
+    position: absolute;
+    z-index: 410;
+    opacity: 0.5;
+}
+
+.positionVignettes:hover{
+    opacity: 0.8;
+}
+

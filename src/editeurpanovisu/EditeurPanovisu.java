@@ -101,8 +101,8 @@ public class EditeurPanovisu extends Application {
     static private HBox coordonnees;
     static private String currentDir;
     static private int numPoints = 0;
-    static private Panoramique[] panoramiquesProjet = new Panoramique[50];
-    static private int nombrePanoramiques = 0;
+    static public Panoramique[] panoramiquesProjet = new Panoramique[50];
+    static public int nombrePanoramiques = 0;
     static private int panoActuel = 0;
     static private File fichProjet;
     static private String panoListeVignette;
@@ -323,7 +323,35 @@ public class EditeurPanovisu extends Application {
                             + "        email=\"" + SEmail + "\"\n"
                             + "    />\n";
                 }
-                
+                if (gestionnaireInterface.bAfficheVignettes) {
+                    String SAfficheVignettes = (gestionnaireInterface.bAfficheVignettes) ? "oui" : "non";
+                    contenuFichier += "<!-- Barre des vignettes -->"
+                            + "    <vignettes \n"
+                            + "        affiche=\"" + SAfficheVignettes + "\"\n"
+                            + "        tailleImage=\"" + gestionnaireInterface.tailleImageVignettes + "\"\n"
+                            + "        fondCouleur=\"" + gestionnaireInterface.couleurFondVignettes + "\"\n"
+                            + "        opacite=\"" + gestionnaireInterface.opaciteVignettes + "\"\n"
+                            + "        position=\"" + gestionnaireInterface.positionVignettes + "\"\n"
+                            + "    >\n";
+                    for (int j = 0; j < nombrePanoramiques; j++) {
+                        String nomPano=panoramiquesProjet[j].getNomFichier();
+                        String nFichier = nomPano.substring(nomPano.lastIndexOf(File.separator) + 1, nomPano.lastIndexOf("."))+ "Vignette.jpg";
+                        String nXML = nomPano.substring(nomPano.lastIndexOf(File.separator) + 1, nomPano.lastIndexOf("."))+".xml";
+                        ReadWriteImage.writeJpeg(panoramiquesProjet[j].getVignettePanoramique(), 
+                                repertTemp + "/panos/"+nFichier, 1.0f, false, 0.0f);
+                        System.out.println(nFichier+" : "+nXML);
+                        contenuFichier
+                                += "        <imageVignette \n"
+                                + "            image=\"panos/" + nFichier +"\"\n"
+                                + "            xml=\"xml/" + nXML + "\"\n"
+                                + "        />\n";
+                    }
+                    contenuFichier
+                            += "    </vignettes>       \n"
+                            + "";
+
+                }
+
                 contenuFichier += "    <!--Définition des hotspots-->  \n"
                         + "   <hotspots>\n";
                 for (int j = 0; j < panoramiquesProjet[i].getNombreHotspots(); j++) {
@@ -407,7 +435,7 @@ public class EditeurPanovisu extends Application {
                     + "                            );\n"
                     + "                    return false;\n"
                     + "                });\n"
-                    + "                $(\".reseauSocial-email\").attr(\"href\",\"mailto:?body=\" + document.location.href + \"&amp;hl=fr\");\n" 
+                    + "                $(\".reseauSocial-email\").attr(\"href\",\"mailto:?body=\" + document.location.href + \"&amp;hl=fr\");\n"
                     + "            });\n"
                     + "        </script>\n"
                     + "    </body>\n"
