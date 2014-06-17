@@ -1102,7 +1102,7 @@ function panovisu(num_pano) {
             });
             $("#marcheArret-" + num_pano).css("opacity", marcheArretOpacite);
 
-            $("#MAImg-" + num_pano).attr("src", "panovisu/images/hotspots/MA/" + marcheArretImage);
+            $("#MAImg-" + num_pano).attr("src", "panovisu/images/MA/" + marcheArretImage);
             $("#MAImg-" + num_pano).css({
                 width: marcheArretTaille + "px",
                 height: marcheArretTaille + "px",
@@ -1123,10 +1123,10 @@ function panovisu(num_pano) {
             });
             $("#reseauxSociaux-" + num_pano).css("opacity", reseauxSociauxOpacite);
 
-            $("#RSTW-" + num_pano).attr("src", "panovisu/images/hotspots/reseaux/twitter.png");
-            $("#RSGO-" + num_pano).attr("src", "panovisu/images/hotspots/reseaux/google.png");
-            $("#RSFB-" + num_pano).attr("src", "panovisu/images/hotspots/reseaux/facebook.png");
-            $("#RSEM-" + num_pano).attr("src", "panovisu/images/hotspots/reseaux/email.png");
+            $("#RSTW-" + num_pano).attr("src", "panovisu/images/reseaux/twitter.png");
+            $("#RSGO-" + num_pano).attr("src", "panovisu/images/reseaux/google.png");
+            $("#RSFB-" + num_pano).attr("src", "panovisu/images/reseaux/facebook.png");
+            $("#RSEM-" + num_pano).attr("src", "panovisu/images/reseaux/email.png");
             $("#RSTW-" + num_pano + ", #RSGO-" + num_pano + ", #RSFB-" + num_pano + ", #RSEM-" + num_pano).css({
                 width: reseauxSociauxTaille + "px",
                 height: reseauxSociauxTaille + "px",
@@ -1175,7 +1175,9 @@ function panovisu(num_pano) {
         pano.width(largeur);
         pano.height(hauteur);
         afficheBarre(pano.width(), pano.height());
+        
         afficheInfo();
+        afficheInfoTitre();
         afficheAide();
         if (vignettes) {
             if (vignettesPosition === "bottom") {
@@ -1712,10 +1714,10 @@ function panovisu(num_pano) {
                     vignettesPano = new Array();
                     pointsInteret = new Array();
                     $("#divVignettes-" + num_pano).html("");
-                    $("<img>", {id: "gaucheVignettes-" + num_pano, class: "positionVignettes", src: "panovisu/images/hotspots/interface/gauche.jpg"}).appendTo("#divVignettes-" + num_pano);
-                    $("<img>", {id: "droiteVignettes-" + num_pano, class: "positionVignettes", src: "panovisu/images/hotspots/interface/droite.jpg"}).appendTo("#divVignettes-" + num_pano);
-                    $("<img>", {id: "hautVignettes-" + num_pano, class: "positionVignettes", src: "panovisu/images/hotspots/interface/haut.jpg"}).appendTo("#divVignettes-" + num_pano);
-                    $("<img>", {id: "basVignettes-" + num_pano, class: "positionVignettes", src: "panovisu/images/hotspots/interface/bas.jpg"}).appendTo("#divVignettes-" + num_pano);
+                    $("<img>", {id: "gaucheVignettes-" + num_pano, class: "positionVignettes", src: "panovisu/images/interface/gauche.jpg"}).appendTo("#divVignettes-" + num_pano);
+                    $("<img>", {id: "droiteVignettes-" + num_pano, class: "positionVignettes", src: "panovisu/images/interface/droite.jpg"}).appendTo("#divVignettes-" + num_pano);
+                    $("<img>", {id: "hautVignettes-" + num_pano, class: "positionVignettes", src: "panovisu/images/interface/haut.jpg"}).appendTo("#divVignettes-" + num_pano);
+                    $("<img>", {id: "basVignettes-" + num_pano, class: "positionVignettes", src: "panovisu/images/interface/bas.jpg"}).appendTo("#divVignettes-" + num_pano);
                     $("#divVignettes-" + num_pano).hide();
                     $("#reseauxSociaux-" + num_pano).hide();
                     /**

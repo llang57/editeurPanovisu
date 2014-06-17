@@ -189,6 +189,51 @@ public class EditeurPanovisu extends Application {
         }
         if (dejaSauve) {
             System.out.println("Génère la visite");
+            deleteDirectory(repertTemp + "/panovisu/images");
+            File imagesRepert = new File(repertTemp + "/panovisu/images");
+            if (!imagesRepert.exists()) {
+                imagesRepert.mkdirs();
+            }
+            File boutonRepert = new File(repertTemp + "/panovisu/images/navigation");
+            if (!boutonRepert.exists()) {
+                boutonRepert.mkdirs();
+            }
+            File boussoleRepert = new File(repertTemp + "/panovisu/images/boussoles");
+            if (!boussoleRepert.exists()) {
+                boussoleRepert.mkdirs();
+            }
+            copieDirectory(repertAppli + File.separator + "panovisu/images/boussoles", boussoleRepert.getAbsolutePath());
+            File reseauRepert = new File(repertTemp + "/panovisu/images/reseaux");
+            if (!reseauRepert.exists()) {
+                reseauRepert.mkdirs();
+            }
+            copieDirectory(repertAppli + File.separator + "panovisu/images/reseaux", reseauRepert.getAbsolutePath());
+            File interfaceRepert = new File(repertTemp + "/panovisu/images/interface");
+            if (!interfaceRepert.exists()) {
+                interfaceRepert.mkdirs();
+            }
+            copieDirectory(repertAppli + File.separator + "panovisu/images/interface", interfaceRepert.getAbsolutePath());
+            File MARepert = new File(repertTemp + "/panovisu/images/MA");
+            if (!MARepert.exists()) {
+                MARepert.mkdirs();
+            }
+            File hotspotsRepert = new File(repertTemp + "/panovisu/images/hotspots");
+            if (!hotspotsRepert.exists()) {
+                hotspotsRepert.mkdirs();
+            }
+
+            for (int i = 0; i < gestionnaireInterface.nombreImagesBouton; i++) {
+                ReadWriteImage.writePng(gestionnaireInterface.nouveauxBoutons[i],
+                        boutonRepert.getAbsolutePath() + File.separator + gestionnaireInterface.nomImagesBoutons[i],
+                        false, 0.f);
+            }
+            ReadWriteImage.writePng(gestionnaireInterface.nouveauxBoutons[gestionnaireInterface.nombreImagesBouton],
+                    hotspotsRepert.getAbsolutePath() + File.separator + "hotspot.png",
+                    false, 0.f);
+            ReadWriteImage.writePng(gestionnaireInterface.nouveauxMasque,
+                    MARepert.getAbsolutePath() + File.separator + "MA.png",
+                    false, 0.f);
+
             File xmlRepert = new File(repertTemp + File.separator + "xml");
             if (!xmlRepert.exists()) {
                 xmlRepert.mkdirs();
@@ -248,7 +293,7 @@ public class EditeurPanovisu extends Application {
                         + "   />\n"
                         + "   <!--Définition de la Barre de navigation-->\n"
                         + "   <boutons \n"
-                        + "      styleBoutons=\"" + gestionnaireInterface.styleBarre + "\"\n"
+                        + "      styleBoutons=\"navigation\"\n"
                         + "      couleur=\"rgba(255,255,255,0)\"\n"
                         + "      bordure=\"rgba(255,255,255,0)\"\n"
                         + "      deplacements=\"" + gestionnaireInterface.toggleBarreDeplacements + "\" \n"
@@ -288,7 +333,7 @@ public class EditeurPanovisu extends Application {
                     contenuFichier += "<!--  Bouton de Masquage -->\n"
                             + "    <marcheArret \n"
                             + "        affiche=\"oui\"\n"
-                            + "        image=\"" + gestionnaireInterface.imageMasque + "\"\n"
+                            + "        image=\"MA.png\"\n"
                             + "        taille=\"" + gestionnaireInterface.tailleMasque + "\"\n"
                             + "        positionY=\"" + gestionnaireInterface.positionMasque.split(":")[0] + "\"\n"
                             + "        positionX=\"" + gestionnaireInterface.positionMasque.split(":")[1] + "\"\n"
@@ -334,15 +379,15 @@ public class EditeurPanovisu extends Application {
                             + "        position=\"" + gestionnaireInterface.positionVignettes + "\"\n"
                             + "    >\n";
                     for (int j = 0; j < nombrePanoramiques; j++) {
-                        String nomPano=panoramiquesProjet[j].getNomFichier();
-                        String nFichier = nomPano.substring(nomPano.lastIndexOf(File.separator) + 1, nomPano.lastIndexOf("."))+ "Vignette.jpg";
-                        String nXML = nomPano.substring(nomPano.lastIndexOf(File.separator) + 1, nomPano.lastIndexOf("."))+".xml";
-                        ReadWriteImage.writeJpeg(panoramiquesProjet[j].getVignettePanoramique(), 
-                                repertTemp + "/panos/"+nFichier, 1.0f, false, 0.0f);
-                        System.out.println(nFichier+" : "+nXML);
+                        String nomPano = panoramiquesProjet[j].getNomFichier();
+                        String nFichier = nomPano.substring(nomPano.lastIndexOf(File.separator) + 1, nomPano.lastIndexOf(".")) + "Vignette.jpg";
+                        String nXML = nomPano.substring(nomPano.lastIndexOf(File.separator) + 1, nomPano.lastIndexOf(".")) + ".xml";
+                        ReadWriteImage.writeJpeg(panoramiquesProjet[j].getVignettePanoramique(),
+                                repertTemp + "/panos/" + nFichier, 1.0f, false, 0.0f);
+                        System.out.println(nFichier + " : " + nXML);
                         contenuFichier
                                 += "        <imageVignette \n"
-                                + "            image=\"panos/" + nFichier +"\"\n"
+                                + "            image=\"panos/" + nFichier + "\"\n"
                                 + "            xml=\"xml/" + nXML + "\"\n"
                                 + "        />\n";
                     }
@@ -367,7 +412,7 @@ public class EditeurPanovisu extends Application {
                             += "      <point \n"
                             + "           long=\"" + longit + "\"\n"
                             + "           lat=\"" + HS.getLatitude() + "\"\n"
-                            + "           image=\"panovisu/images/hotspots/" + gestionnaireInterface.styleHotSpots + "\"\n"
+                            + "           image=\"panovisu/images/hotspots/hotspot.png\"\n"
                             + "           xml=\"xml/" + HS.getFichierXML() + "\"\n"
                             + "           info=\"" + HS.getInfo() + "\"\n"
                             + "           anime=\"" + txtAnime + "\"\n"
@@ -1416,7 +1461,6 @@ public class EditeurPanovisu extends Application {
                 try {
                     if (file1.isDirectory()) {
                         String rep1 = file1.getAbsolutePath().substring(file1.getAbsolutePath().lastIndexOf(File.separator) + 1);
-
                         rep1 = repertoire + File.separator + rep1;
                         copieDirectory(file1.getAbsolutePath(), rep1);
                     } else {
@@ -1431,6 +1475,38 @@ public class EditeurPanovisu extends Application {
         }
     }
 
+//    /**
+//     *
+//     * @param emplacement répertoire origine
+//     * @param repertoire répertoire cible
+//     */
+//    static public void copieDirectorysaufImage(String emplacement, String repertoire) {
+//        File repert2 = new File(repertoire);
+//        if (!repert2.exists()) {
+//            repert2.mkdirs();
+//        }
+//        File path = new File(emplacement);
+//        if (path.exists()) {
+//            File[] files = path.listFiles();
+//            for (File file1 : files) {
+//                try {
+//                    if (file1.isDirectory()) {
+//                        if (!file1.getName().equals("images")) {
+//                            String rep1 = file1.getAbsolutePath().substring(file1.getAbsolutePath().lastIndexOf(File.separator) + 1);
+//                            rep1 = repertoire + File.separator + rep1;
+//                            copieDirectorysaufImage(file1.getAbsolutePath(), rep1);
+//                        }
+//                    } else {
+//                        copieFichierRepertoire(file1.getAbsolutePath(), repertoire);
+//
+//                    }
+//                } catch (IOException ex) {
+//                    Logger.getLogger(EditeurPanovisu.class
+//                            .getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//        }
+//    }
     /**
      *
      * @param fichier
@@ -1442,7 +1518,7 @@ public class EditeurPanovisu extends Application {
         String fichier1 = fichier.substring(fichier.lastIndexOf(File.separator) + 1);
         InputStream in = new FileInputStream(fichier);
         OutputStream out = new BufferedOutputStream(new FileOutputStream(repertoire + File.separator + fichier1));
-        byte[] buf = new byte[256 * 1024];
+        byte[] buf = new byte[2048 * 1024];
         int n;
         while ((n = in.read(buf, 0, buf.length)) > 0) {
             out.write(buf, 0, n);

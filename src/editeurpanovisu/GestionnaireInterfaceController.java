@@ -31,12 +31,16 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.PixelReader;
+import javafx.scene.image.PixelWriter;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Polygon;
 import javafx.scene.text.Font;
 import jfxtras.labs.scene.control.BigDecimalField;
 
@@ -55,11 +59,11 @@ public class GestionnaireInterfaceController {
     /**
      *
      */
-    public static final String styleDefaut = "retinavert";
+    public static final String styleDefautBarreNavigation = "retina";
     /**
      *
      */
-    public static final String styleHotSpotDefaut = "hotspotvert.png";
+    public static final String styleHotSpotDefaut = "hotspot.png";
     /**
      *
      */
@@ -72,7 +76,7 @@ public class GestionnaireInterfaceController {
     /**
      *
      */
-    public static String styleBarre = styleDefaut;
+    public static String styleBarre = styleDefautBarreNavigation;
 
     /**
      *
@@ -174,7 +178,7 @@ public class GestionnaireInterfaceController {
      */
     private static String repertMasques;
     public static boolean bAfficheMasque = false;
-    public static String imageMasque = "MAVert.png";
+    public static String imageMasque = "MA.png";
     public static String positionMasque = "top:right";
     public static double dXMasque = 20;
     public static double dYMasque = 20;
@@ -185,7 +189,7 @@ public class GestionnaireInterfaceController {
     public static boolean bMasqueTitre = true;
     public static boolean bMasquePlan = true;
     public static boolean bMasqueReseaux = true;
-    private static ImageView imgMasque;
+    private static ImageView IVMasque;
     private static BigDecimalField masqueDXSpinner;
     private static BigDecimalField masqueDYSpinner;
     private static Slider SLTailleMasque;
@@ -273,31 +277,19 @@ public class GestionnaireInterfaceController {
     private static HBox HBOutils;
     private static Label txtTitre;
     private static ImageView IVInfo;
-    private static Image ImgInfo;
     private static ImageView IVAide;
-    private static Image ImgAide;
     private static ImageView IVAutoRotation;
-    private static Image ImgAutoRotation;
     private static ImageView IVModeSouris;
-    private static Image ImgModeSouris;
     private static ImageView IVPleinEcran;
-    private static Image ImgPleinEcran;
     private static HBox HBZoom;
     private static ImageView IVZoomPlus;
-    private static Image ImgZoomPlus;
     private static ImageView IVZoomMoins;
-    private static Image ImgZoomMoins;
     private static HBox HBDeplacements;
     private static ImageView IVHaut;
-    private static Image ImgHaut;
     private static ImageView IVBas;
-    private static Image ImgBas;
     private static ImageView IVGauche;
-    private static Image ImgGauche;
     private static ImageView IVDroite;
-    private static Image ImgDroite;
     private static ImageView IVHotSpot;
-    private static Image ImgHotSpot;
     private static ComboBox CBlisteStyle;
 
     private static String repertBoutonsPrincipal;
@@ -327,6 +319,172 @@ public class GestionnaireInterfaceController {
     private static Slider SLTaillePolice;
     private static Slider SLOpacite;
     private static Slider SLTaille;
+    private static ColorPicker CPCouleurTheme;
+    private static ColorPicker CPCouleurHotspots;
+    private static ColorPicker CPCouleurBoutons;
+    private static ColorPicker CPCouleurMasques;
+    private static Color couleurHotspots = Color.hsb(120, 1.0, 1.0);
+    private static Color couleurBoutons = Color.hsb(120, 1.0, 1.0);
+    private static Color couleurMasque = Color.hsb(120, 1.0, 1.0);
+    private static Color couleurTheme = Color.hsb(120, 1.0, 1.0);
+    public static Image[] imageBoutons = new Image[25];
+    public static String[] nomImagesBoutons = new String[25];
+    public static PixelReader[] lisBoutons = new PixelReader[25];
+    public static WritableImage[] nouveauxBoutons = new WritableImage[25];
+    public static PixelWriter[] PWnouveauxBoutons = new PixelWriter[25];
+    public static int nombreImagesBouton = 0;
+    public static Image imgMasque;
+    public static PixelReader lisMasque;
+    public static WritableImage nouveauxMasque;
+    public static PixelWriter PWnouveauxMasque;
+
+    private void chargeBarre(String styleBarre, String strHotSpot, String strMA) {
+        System.out.println("Masque " + strMA + " => HS " + strHotSpot);
+
+        File repertBarre = new File(repertBoutonsPrincipal + File.separator + styleBarre);
+        File[] Repertoires = repertBarre.listFiles(IMAGE_FILTER);
+        int i = 0;
+        for (File repert : Repertoires) {
+            if (!repert.isDirectory()) {
+                String nomFich = repert.getName();
+                String nomFichComplet = repert.getAbsolutePath();
+                System.out.println("nom Fichier " + nomFichComplet + " =>" + nomFich);
+                imageBoutons[i] = new Image("file:" + nomFichComplet);
+                lisBoutons[i] = imageBoutons[i].getPixelReader();
+                int width = (int) imageBoutons[i].getWidth();
+                int height = (int) imageBoutons[i].getHeight();
+                nouveauxBoutons[i] = new WritableImage(width, height);
+                PWnouveauxBoutons[i] = nouveauxBoutons[i].getPixelWriter();
+                switch (nomFich) {
+                    case "aide.png":
+                        IVAide = new ImageView(nouveauxBoutons[i]);
+                        break;
+                    case "info.png":
+                        IVInfo = new ImageView(nouveauxBoutons[i]);
+                        break;
+                    case "haut.png":
+                        IVHaut = new ImageView(nouveauxBoutons[i]);
+                        break;
+                    case "bas.png":
+                        IVBas = new ImageView(nouveauxBoutons[i]);
+                        break;
+                    case "droite.png":
+                        IVDroite = new ImageView(nouveauxBoutons[i]);
+                        break;
+                    case "gauche.png":
+                        IVGauche = new ImageView(nouveauxBoutons[i]);
+                        break;
+                    case "fs.png":
+                        IVPleinEcran = new ImageView(nouveauxBoutons[i]);
+                        break;
+                    case "rotation.png":
+                        IVAutoRotation = new ImageView(nouveauxBoutons[i]);
+                        break;
+                    case "souris.png":
+                        IVModeSouris = new ImageView(nouveauxBoutons[i]);
+                        break;
+                    case "zoomin.png":
+                        IVZoomPlus = new ImageView(nouveauxBoutons[i]);
+                        break;
+                    case "zoomout.png":
+                        IVZoomMoins = new ImageView(nouveauxBoutons[i]);
+                        break;
+                }
+                nomImagesBoutons[i] = nomFich;
+                i++;
+            }
+        }
+        nombreImagesBouton = i;
+        imageBoutons[nombreImagesBouton] = new Image("file:" + repertHotSpots + File.separator + strHotSpot);
+        lisBoutons[nombreImagesBouton] = imageBoutons[nombreImagesBouton].getPixelReader();
+        int width = (int) imageBoutons[nombreImagesBouton].getWidth();
+        int height = (int) imageBoutons[nombreImagesBouton].getHeight();
+        nouveauxBoutons[nombreImagesBouton] = new WritableImage(width, height);
+        PWnouveauxBoutons[nombreImagesBouton] = nouveauxBoutons[nombreImagesBouton].getPixelWriter();
+        IVHotSpot = new ImageView(nouveauxBoutons[nombreImagesBouton]);
+        System.out.println("file:" + repertMasques + File.separator + strMA + " nombreImagesBouton= " + nombreImagesBouton);
+        imgMasque = new Image("file:" + repertMasques + File.separator + strMA);
+//        imageBoutons[nombreImagesBouton+1] = new Image("file:D:\\github\\editeurPanovisu\\theme\\MA\\MA.png");
+
+        lisMasque = imgMasque.getPixelReader();
+        width = (int) imgMasque.getWidth();
+        height = (int) imgMasque.getHeight();
+        nouveauxMasque = new WritableImage(width, height);
+        PWnouveauxMasque = nouveauxMasque.getPixelWriter();
+        IVMasque = new ImageView(nouveauxMasque);
+
+        changeCouleurBarre(couleurTheme.getHue(), couleurTheme.getSaturation(), couleurTheme.getBrightness());
+        changeCouleurHS(couleurTheme.getHue());
+        changeCouleurMasque(couleurTheme.getHue());
+
+    }
+
+    private void sauveBarre() {
+
+    }
+
+    private void changeCouleurBarre(double couleurFinale, double sat, double bright) {
+        for (int i = 0; i < nombreImagesBouton; i++) {
+
+            for (int y = 0; y < imageBoutons[i].getHeight(); y++) {
+                for (int x = 0; x < imageBoutons[i].getWidth(); x++) {
+                    Color color = lisBoutons[i].getColor(x, y);
+                    double brightness = color.getBrightness();
+                    //double hue = color.getHue() / 360.0;  //getHue() return 0.0-360.0
+                    double saturation = color.getSaturation();
+                    double opacity = color.getOpacity();
+                    Color couleur;
+                    if (i < nombreImagesBouton) {
+                        couleur = Color.hsb(couleurFinale, saturation * 0.5 + sat * 0.5, brightness * 0.5 + bright * 0.5, opacity);
+                    } else {
+                        couleur = Color.hsb(couleurFinale, saturation, brightness, opacity);
+                    }
+                    PWnouveauxBoutons[i].setColor(x, y, couleur);
+                }
+            }
+        }
+
+    }
+
+    private void changeCouleurMasque(double couleurFinale) {
+//        System.out.println(" haut : "+imageBouttons[nombreImagesBouton + 1].getHeight()+"  long : "+imageBouttons[nombreImagesBouton + 1].getWidth());
+        for (int y = 0; y < imgMasque.getHeight(); y++) {
+            for (int x = 0; x < imgMasque.getWidth(); x++) {
+                Color color = lisMasque.getColor(x, y);
+                double brightness = color.getBrightness();
+                //double hue = color.getHue() / 360.0;  //getHue() return 0.0-360.0
+                double saturation = color.getSaturation();
+                double opacity = color.getOpacity();
+                Color couleur = Color.hsb(couleurFinale, saturation, brightness, opacity);
+                PWnouveauxMasque.setColor(x, y, couleur);
+            }
+        }
+    }
+
+    private void changeCouleurHS(double couleurFinale) {
+        for (int y = 0; y < imageBoutons[nombreImagesBouton].getHeight(); y++) {
+            for (int x = 0; x < imageBoutons[nombreImagesBouton].getWidth(); x++) {
+                Color color = lisBoutons[nombreImagesBouton].getColor(x, y);
+                double brightness = color.getBrightness();
+                //double hue = color.getHue() / 360.0;  //getHue() return 0.0-360.0
+                double saturation = color.getSaturation();
+                double opacity = color.getOpacity();
+                Color couleur;
+                couleur = Color.hsb(couleurFinale, saturation, brightness, opacity);
+                PWnouveauxBoutons[nombreImagesBouton].setColor(x, y, couleur);
+            }
+        }
+    }
+
+    private void changeCouleurTitre(String coul) {
+        couleurFondTitre = "#" + coul;
+        txtTitre.setStyle("-fx-background-color : " + couleurFondTitre);
+    }
+
+    private void changeCouleurVignettes(String coul) {
+        couleurFondVignettes = "#" + coul;
+        afficheVignettes();
+    }
 
     /**
      *
@@ -381,13 +539,15 @@ public class GestionnaireInterfaceController {
      *
      */
     private void afficheMasque() {
-        System.out.println("file:" + repertMasques + File.separator + imageMasque);
-        imgMasque.setVisible(bAfficheMasque);
-        imgMasque.setImage(new Image("file:" + repertMasques + File.separator + imageMasque));
-        imgMasque.setFitWidth(tailleMasque);
-        imgMasque.setFitHeight(tailleMasque);
-        imgMasque.setOpacity(opaciteMasque);
-        imgMasque.setSmooth(true);
+        APVisualisation.getChildren().remove(IVMasque);
+        APVisualisation.getChildren().add(IVMasque);
+        IVMasque.setVisible(bAfficheMasque);
+        IVMasque.setFitWidth(tailleMasque);
+        IVMasque.setFitHeight(tailleMasque);
+        IVMasque.setOpacity(opaciteMasque);
+//        System.out.println("file:" + repertMasques + File.separator + imageMasque+"taille Masque :"+IVMasque.getFitWidth());
+//        System.out.println("file:" + repertMasques + File.separator + imageMasque+"taille Masque :"+IVMasque.getFitWidth()+bAfficheMasque);
+//        IVMasque.setSmooth(true);
         String positXMasque = positionMasque.split(":")[1];
         String positYMasque = positionMasque.split(":")[0];
         double posX = 0;
@@ -397,23 +557,21 @@ public class GestionnaireInterfaceController {
                 posX = IMVisualisation.getLayoutX() + dXMasque;
                 break;
             case "right":
-                posX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - dXMasque - imgMasque.getFitWidth();
+                posX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - dXMasque - IVMasque.getFitWidth();
                 break;
         }
         switch (positYMasque) {
             case "bottom":
-                posY = IMVisualisation.getLayoutY() + IMVisualisation.getFitHeight() - imgMasque.getFitHeight() - dYMasque;
+                posY = IMVisualisation.getLayoutY() + IMVisualisation.getFitHeight() - IVMasque.getFitHeight() - dYMasque;
                 break;
             case "top":
                 posY = IMVisualisation.getLayoutY() + dYMasque;
                 break;
         }
         System.out.println(positionMasque + " posX:" + posX + ", posY:" + posY);
-        imgMasque.setLayoutX(posX);
-        imgMasque.setLayoutY(posY);
-
-        imgMasque.setOpacity(opaciteMasque);
-        imgMasque.setVisible(bAfficheMasque);
+        IVMasque.setLayoutX(posX);
+        IVMasque.setLayoutY(posY);
+//
     }
 
     /**
@@ -596,11 +754,12 @@ public class GestionnaireInterfaceController {
      */
     public void afficheBouton(String position, double dX, double dY, double taille, String styleBoutons, String styleHS) {
         String repertBoutons = "file:" + repertBoutonsPrincipal + File.separator + styleBoutons;
+        APVisualisation.getChildren().clear();
+        APVisualisation.getChildren().addAll(RBClair, RBSombre, IMVisualisation, txtTitre, imgBoussole, imgAiguille, imgTwitter, imgGoogle, imgFacebook, imgEmail, APVisuVignettes);
+        chargeBarre(styleBoutons, styleHS, imageMasque);
         HBbarreBoutons = new HBox();
         HBbarreBoutons.setId("barreBoutons");
         HBbarreBoutons.setVisible(toggleBarreVisibilite.equals("oui"));
-        ImgHotSpot = new Image("file:" + repertHotSpots + File.separator + styleHS);
-        IVHotSpot = new ImageView(ImgHotSpot);
         IVHotSpot.setFitWidth(30);
         IVHotSpot.setPreserveRatio(true);
         IVHotSpot.setLayoutX(510);
@@ -647,48 +806,48 @@ public class GestionnaireInterfaceController {
             HBbarreBoutons.getChildren().remove(HBOutils);
         }
         APVisualisation.getChildren().addAll(HBbarreBoutons, IVHotSpot);
-        ImgHaut = new Image(repertBoutons + File.separator + "haut.png");
-        ImgBas = new Image(repertBoutons + File.separator + "bas.png");
-        ImgGauche = new Image(repertBoutons + File.separator + "gauche.png");
-        ImgDroite = new Image(repertBoutons + File.separator + "droite.png");
-        ImgZoomPlus = new Image(repertBoutons + File.separator + "zoomin.png");
-        ImgZoomMoins = new Image(repertBoutons + File.separator + "zoomout.png");
-        ImgInfo = new Image(repertBoutons + File.separator + "info.png");
-        ImgAide = new Image(repertBoutons + File.separator + "aide.png");
-        ImgModeSouris = new Image(repertBoutons + File.separator + "souris.png");
-        ImgPleinEcran = new Image(repertBoutons + File.separator + "fs.png");
-        ImgAutoRotation = new Image(repertBoutons + File.separator + "rotation.png");
-        IVHaut = new ImageView(ImgHaut);
+//        ImgHaut = new Image(repertBoutons + File.separator + "haut.png");
+//        ImgBas = new Image(repertBoutons + File.separator + "bas.png");
+//        ImgGauche = new Image(repertBoutons + File.separator + "gauche.png");
+//        ImgDroite = new Image(repertBoutons + File.separator + "droite.png");
+//        ImgZoomPlus = new Image(repertBoutons + File.separator + "zoomin.png");
+//        ImgZoomMoins = new Image(repertBoutons + File.separator + "zoomout.png");
+//        ImgInfo = new Image(repertBoutons + File.separator + "info.png");
+//        ImgAide = new Image(repertBoutons + File.separator + "aide.png");
+//        ImgModeSouris = new Image(repertBoutons + File.separator + "souris.png");
+//        ImgPleinEcran = new Image(repertBoutons + File.separator + "fs.png");
+//        ImgAutoRotation = new Image(repertBoutons + File.separator + "rotation.png");
+//        IVHaut = new ImageView(ImgHaut);
         IVHaut.setFitWidth(taille);
         IVHaut.setFitHeight(taille);
-        IVBas = new ImageView(ImgBas);
+//        IVBas = new ImageView(ImgBas);
         IVBas.setFitWidth(taille);
         IVBas.setFitHeight(taille);
-        IVGauche = new ImageView(ImgGauche);
+//        IVGauche = new ImageView(ImgGauche);
         IVGauche.setFitWidth(taille);
         IVGauche.setFitHeight(taille);
-        IVDroite = new ImageView(ImgDroite);
+//        IVDroite = new ImageView(ImgDroite);
         IVDroite.setFitWidth(taille);
         IVDroite.setFitHeight(taille);
-        IVZoomPlus = new ImageView(ImgZoomPlus);
+//        IVZoomPlus = new ImageView(ImgZoomPlus);
         IVZoomPlus.setFitWidth(taille);
         IVZoomPlus.setFitHeight(taille);
-        IVZoomMoins = new ImageView(ImgZoomMoins);
+//        IVZoomMoins = new ImageView(ImgZoomMoins);
         IVZoomMoins.setFitWidth(taille);
         IVZoomMoins.setFitHeight(taille);
-        IVInfo = new ImageView(ImgInfo);
+//        IVInfo = new ImageView(ImgInfo);
         IVInfo.setFitWidth(taille);
         IVInfo.setFitHeight(taille);
-        IVPleinEcran = new ImageView(ImgPleinEcran);
+//        IVPleinEcran = new ImageView(ImgPleinEcran);
         IVPleinEcran.setFitWidth(taille);
         IVPleinEcran.setFitHeight(taille);
-        IVModeSouris = new ImageView(ImgModeSouris);
+//        IVModeSouris = new ImageView(ImgModeSouris);
         IVModeSouris.setFitWidth(taille);
         IVModeSouris.setFitHeight(taille);
-        IVAide = new ImageView(ImgAide);
+//        IVAide = new ImageView(ImgAide);
         IVAide.setFitWidth(taille);
         IVAide.setFitHeight(taille);
-        IVAutoRotation = new ImageView(ImgAutoRotation);
+//        IVAutoRotation = new ImageView(ImgAutoRotation);
         IVAutoRotation.setFitWidth(taille);
         IVAutoRotation.setFitHeight(taille);
         String positVert = position.split(":")[0];
@@ -805,6 +964,10 @@ public class GestionnaireInterfaceController {
         String contenuFichier = "";
         contenuFichier
                 += "styleBarre=" + styleBarre + "\n"
+                + "couleurTheme=" + couleurTheme.toString().substring(2, 8) + "\n"
+                + "couleurBoutons=" + couleurBoutons.toString().substring(2, 8) + "\n"
+                + "couleurHotspots=" + couleurHotspots.toString().substring(2, 8) + "\n"
+                + "couleurMasque=" + couleurMasque.toString().substring(2, 8) + "\n"
                 + "styleHotspots=" + styleHotSpots + "\n"
                 + "position=" + positionBarre + "\n"
                 + "dX=" + Math.round(dXBarre) + "\n"
@@ -869,11 +1032,26 @@ public class GestionnaireInterfaceController {
         bAfficheMasque = false;
         bAfficheVignettes = false;
         bAfficheReseauxSociaux = false;
+        APVisualisation.getChildren().clear();
+        APVisualisation.getChildren().addAll(RBClair, RBSombre, IMVisualisation, txtTitre, imgBoussole, imgAiguille, imgTwitter, imgGoogle, imgFacebook, imgEmail, APVisuVignettes);
 
         for (String chaine : templ) {
             String variable = chaine.split("=")[0];
             String valeur = chaine.split("=")[1];
             switch (variable) {
+                case "couleurTheme":
+                    couleurTheme= Color.web(valeur);
+                    break;
+                case "couleurBoutons":
+                    couleurBoutons= Color.web(valeur);
+                    break;
+                case "couleurHotspots":
+                    couleurHotspots= Color.web(valeur);
+                    break;
+                case "couleurMasque":
+                    couleurMasque= Color.web(valeur);
+                    break;
+
                 case "styleBarre":
                     styleBarre = valeur;
                     CBlisteStyle.setValue(valeur);
@@ -1116,6 +1294,10 @@ public class GestionnaireInterfaceController {
         txtTitre.setPrefHeight(-1);
         CPCouleurTitre.setValue(Color.valueOf(couleurTitre));
         CPCouleurFondTitre.setValue(Color.valueOf(couleurFondTitre));
+        CPCouleurBoutons.setValue(couleurBoutons);
+        CPCouleurTheme.setValue(couleurTheme);
+        CPCouleurMasques.setValue(couleurMasque);
+        CPCouleurHotspots.setValue(couleurHotspots);
         CBListePolices.setValue(titrePoliceNom);
         SLOpacite.setValue(titreOpacite);
         SLTaillePolice.setValue(Double.parseDouble(titrePoliceTaille));
@@ -1166,12 +1348,15 @@ public class GestionnaireInterfaceController {
         RBVignettesRight.setSelected(positionReseauxSociaux.equals("right"));
         RBVignettesBottom.setSelected(positionReseauxSociaux.equals("bottom"));
         CPCouleurFondVignettes.setValue(Color.valueOf(couleurFondVignettes));
+        //chargeBarre(styleBarre, styleHotSpots, imageMasque);
         afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
         afficheBoussole();
         afficheMasque();
         afficheReseauxSociaux();
         afficheVignettes();
-
+        changeCouleurBarre(couleurBoutons.getHue(), couleurBoutons.getSaturation(), couleurBoutons.getBrightness());
+        changeCouleurMasque(couleurMasque.getHue());
+        changeCouleurHS(couleurHotspots.getHue());
     }
 
     /**
@@ -1193,11 +1378,12 @@ public class GestionnaireInterfaceController {
         ObservableList<String> listePolices = FXCollections.observableList(lstPolices);
         System.out.println(EditeurPanovisu.locale);
         rb = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", EditeurPanovisu.locale);
-        repertBoutonsPrincipal = repertAppli + File.separator + "panovisu/images";
-        repertHotSpots = repertAppli + File.separator + "panovisu/images/hotspots";
-        repertBoussoles = repertAppli + File.separator + "panovisu/images/boussoles";
-        repertMasques = repertAppli + File.separator + "panovisu/images/hotspots/MA";
-        repertReseauxSociaux = repertAppli + File.separator + "panovisu/images/hotspots/reseaux";
+        repertBoutonsPrincipal = repertAppli + File.separator + "theme/barreNavigation";
+        repertHotSpots = repertAppli + File.separator + "theme/hotspots";
+        repertBoussoles = repertAppli + File.separator + "theme/boussoles";
+        repertMasques = repertAppli + File.separator + "theme/MA";
+        repertReseauxSociaux = repertAppli + File.separator + "theme/reseaux";
+        chargeBarre(styleBarre, styleHotSpots, imageMasque);
         ArrayList<String> listeStyles = listerStyle(repertBoutonsPrincipal);
         ArrayList<String> listeHotSpots = listerHotSpots(repertHotSpots);
         ArrayList<String> listeBoussoles = listerBoussoles(repertBoussoles);
@@ -1269,7 +1455,6 @@ public class GestionnaireInterfaceController {
         RBClair.setUserData("claire");
         RBSombre.setUserData("sombre");
         imgBoussole = new ImageView(new Image("file:" + repertBoussoles + File.separator + imageBoussole));
-        imgMasque = new ImageView(new Image("file:" + repertMasques + File.separator + imageMasque));
         imgAiguille = new ImageView("file:" + repertBoussoles + File.separator + "aiguille.png");
         APVisualisation.getChildren().add(IMVisualisation);
         imgTwitter = new ImageView(new Image("file:" + repertReseauxSociaux + File.separator + imageReseauxSociauxTwitter));
@@ -1277,7 +1462,7 @@ public class GestionnaireInterfaceController {
         imgFacebook = new ImageView(new Image("file:" + repertReseauxSociaux + File.separator + imageReseauxSociauxFacebook));
         imgEmail = new ImageView(new Image("file:" + repertReseauxSociaux + File.separator + imageReseauxSociauxEmail));
         APVisuVignettes = new AnchorPane();
-        APVisualisation.getChildren().addAll(txtTitre, imgBoussole, imgAiguille, imgMasque, imgTwitter, imgGoogle, imgFacebook, imgEmail, APVisuVignettes);
+        APVisualisation.getChildren().addAll(txtTitre, imgBoussole, imgAiguille, IVMasque, imgTwitter, imgGoogle, imgFacebook, imgEmail, APVisuVignettes);
 
         afficheBoussole();
         afficheMasque();
@@ -1290,6 +1475,39 @@ public class GestionnaireInterfaceController {
          *     Pannels d'outils 
          * *****************************************
          */
+        AnchorPane APCoulTheme = new AnchorPane();
+        CPCouleurTheme = new ColorPicker(couleurTheme);
+        String coul2 = CPCouleurTheme.getValue().toString().substring(2, 8);
+        changeCouleurTitre(coul2);
+        changeCouleurVignettes(coul2);
+        Label lblCouleurTheme = new Label(rb.getString("interface.couleurTheme"));
+        lblCouleurTheme.setLayoutX(20);
+        lblCouleurTheme.setLayoutY(20);
+        CPCouleurTheme.setLayoutX(150);
+        CPCouleurTheme.setLayoutY(20);
+        APCoulTheme.setPrefHeight(40);
+        APCoulTheme.setMinHeight(40);
+        APCoulTheme.getChildren().addAll(lblCouleurTheme, CPCouleurTheme);
+        CPCouleurTheme.setOnAction((ActionEvent e) -> {
+            couleurTheme = CPCouleurTheme.getValue();
+            String coul1 = CPCouleurTheme.getValue().toString().substring(2, 8);
+            couleurHotspots = couleurTheme;
+            couleurBoutons = couleurTheme;
+            couleurMasque=couleurTheme;
+            changeCouleurTitre(coul1);
+            changeCouleurVignettes(coul1);
+            //changeCouleur(hue);
+            CPCouleurFondTitre.setValue(couleurTheme);
+            CPCouleurHotspots.setValue(couleurTheme);
+            CPCouleurBoutons.setValue(couleurTheme);
+            CPCouleurMasques.setValue(couleurTheme);
+            CPCouleurFondVignettes.setValue(Color.hsb(couleurTheme.getHue(), couleurTheme.getSaturation(), couleurTheme.getBrightness()));
+            changeCouleurBarre(couleurTheme.getHue(), couleurTheme.getSaturation(), couleurTheme.getBrightness());
+            changeCouleurHS(couleurTheme.getHue());
+            changeCouleurMasque(couleurTheme.getHue());
+
+        });
+
         AnchorPane APBB = new AnchorPane();
         AnchorPane APHS = new AnchorPane();
         AnchorPane APTIT = new AnchorPane();
@@ -1465,7 +1683,7 @@ public class GestionnaireInterfaceController {
         lblChoixHS.setLayoutX(10);
         lblChoixHS.setLayoutY(10);
 
-        double tailleHS = 35.d * (int) (nombreHotSpots / 6 + 1);
+        double tailleHS = 35.d * (int) (nombreHotSpots / 6 + 1) + 40;
         APHotSpots.setPrefHeight(tailleHS);
         APHotSpots.setLayoutX(50);
         APHotSpots.setLayoutY(40);
@@ -1494,6 +1712,17 @@ public class GestionnaireInterfaceController {
             i++;
 
         }
+        CPCouleurHotspots = new ColorPicker(couleurHotspots);
+        CPCouleurHotspots.setOnAction((ActionEvent e) -> {
+            couleurHotspots = CPCouleurHotspots.getValue();
+            changeCouleurHS(couleurHotspots.getHue());
+        });
+        Label lblCouleurHotspot = new Label(rb.getString("interface.couleurHS"));
+        lblCouleurHotspot.setLayoutX(20);
+        lblCouleurHotspot.setLayoutY(tailleHS - 20);
+        CPCouleurHotspots.setLayoutX(200);
+        CPCouleurHotspots.setLayoutY(tailleHS - 20);
+        APHotSpots.getChildren().addAll(lblCouleurHotspot, CPCouleurHotspots);
         APHotSpots.setPrefHeight(0);
         APHotSpots.setMaxHeight(0);
         APHotSpots.setMinHeight(0);
@@ -1562,6 +1791,16 @@ public class GestionnaireInterfaceController {
         CBlisteStyle.setLayoutX(150);
         CBlisteStyle.setLayoutY(70);
         CBlisteStyle.setValue(styleBarre);
+        CPCouleurBoutons = new ColorPicker(couleurBoutons);
+        CPCouleurBoutons.setOnAction((ActionEvent e) -> {
+            couleurBoutons = CPCouleurBoutons.getValue();
+            changeCouleurBarre(couleurBoutons.getHue(), couleurBoutons.getSaturation(), couleurBoutons.getBrightness());
+        });
+        Label lblCouleurBouton = new Label(rb.getString("interface.couleurBarre"));
+        lblCouleurBouton.setLayoutX(20);
+        lblCouleurBouton.setLayoutY(110);
+        CPCouleurBoutons.setLayoutX(150);
+        CPCouleurBoutons.setLayoutY(105);
 
         RBTopLeft = new RadioButton();
         RBTopCenter = new RadioButton();
@@ -1594,7 +1833,7 @@ public class GestionnaireInterfaceController {
         RBBottomRight.setToggleGroup(grpPostBarre);
 
         int posX = 250;
-        int posY = 110;
+        int posY = 140;
 
         RBTopLeft.setLayoutX(posX);
         RBTopCenter.setLayoutX(posX + 20);
@@ -1622,23 +1861,23 @@ public class GestionnaireInterfaceController {
         lblStyle.setLayoutY(50);
         Label lblPosit = new Label(rb.getString("interface.position"));
         lblPosit.setLayoutX(10);
-        lblPosit.setLayoutY(110);
+        lblPosit.setLayoutY(140);
 
         Label lblDXSpinner = new Label("dX :");
         lblDXSpinner.setLayoutX(25);
-        lblDXSpinner.setLayoutY(195);
+        lblDXSpinner.setLayoutY(205);
         Label lblDYSpinner = new Label("dY :");
         lblDYSpinner.setLayoutX(175);
-        lblDYSpinner.setLayoutY(195);
+        lblDYSpinner.setLayoutY(205);
         dXSpinner = new BigDecimalField(new BigDecimal(dXBarre));
         dXSpinner.setLayoutX(50);
-        dXSpinner.setLayoutY(190);
+        dXSpinner.setLayoutY(200);
         dXSpinner.setMaxValue(new BigDecimal(2000));
         dXSpinner.setMinValue(new BigDecimal(-2000));
         dXSpinner.setMaxWidth(100);
         dYSpinner = new BigDecimalField(new BigDecimal(dYBarre));
         dYSpinner.setLayoutX(200);
-        dYSpinner.setLayoutY(190);
+        dYSpinner.setLayoutY(200);
         dYSpinner.setMaxValue(new BigDecimal(2000));
         dYSpinner.setMinValue(new BigDecimal(-2000));
         dYSpinner.setMaxWidth(100);
@@ -1780,7 +2019,9 @@ public class GestionnaireInterfaceController {
         });
 
         APBarreModif.getChildren().addAll(
-                CBVisible, lblStyle, CBlisteStyle, lblPosit,
+                CBVisible, lblStyle, CBlisteStyle,
+                lblCouleurBouton, CPCouleurBoutons,
+                lblPosit,
                 RBTopLeft, RBTopCenter, RBTopRight,
                 RBMiddleLeft, RBMiddleCenter, RBMiddleRight,
                 RBBottomLeft, RBBottomCenter, RBBottomRight,
@@ -1986,6 +2227,7 @@ public class GestionnaireInterfaceController {
         CBAfficheMasque.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val != null) {
                 bAfficheMasque = new_val;
+                changeCouleurMasque(couleurTheme.getHue());
                 afficheMasque();
             }
         });
@@ -2009,9 +2251,9 @@ public class GestionnaireInterfaceController {
         i = 0;
         for (String nomImage : listeMasques) {
             IVMasques[i] = new ImageView(new Image("file:" + repertMasques + File.separator + nomImage, -1, 30, true, true, true));
-            int col = i % 8;
-            int row = i / 8;
-            xHS = col * 35 + 75;
+            int col = i % 4;
+            int row = i / 4;
+            xHS = col * 35 + 15;
             yHS = row * 35 + 60;
             IVMasques[i].setLayoutX(xHS);
             IVMasques[i].setLayoutY(yHS);
@@ -2019,15 +2261,29 @@ public class GestionnaireInterfaceController {
             IVMasques[i].setStyle("-fx-background-color : #ccc");
             IVMasques[i].setOnMouseClicked((MouseEvent me) -> {
                 imageMasque = (String) ((ImageView) me.getSource()).getUserData();
+                APVisualisation.getChildren().remove(IVMasque);
+                chargeBarre(styleBarre, styleHotSpots, imageMasque);
                 afficheMasque();
             });
             APMasque.getChildren().add(IVMasques[i]);
             i++;
 
         }
+        CPCouleurMasques = new ColorPicker(couleurMasque);
+        CPCouleurMasques.setOnAction((ActionEvent e) -> {
+            couleurMasque = CPCouleurMasques.getValue();
+            changeCouleurMasque(couleurMasque.getHue());
+        });
+        Label lblCouleurMasque = new Label(rb.getString("interface.couleurBarre"));
+        lblCouleurMasque.setLayoutX(150);
+        lblCouleurMasque.setLayoutY(40);
+        CPCouleurMasques.setLayoutX(170);
+        CPCouleurMasques.setLayoutY(60);
+        APMasque.getChildren().addAll(lblCouleurMasque, CPCouleurMasques);
+
         Label lblPositMasque = new Label(rb.getString("interface.choixPositMasque"));
         lblPositMasque.setLayoutX(10);
-        int basImages = ((i - 1) / 8 + 1) * 35;
+        int basImages = ((i - 1) / 4 + 1) * 35;
         lblPositMasque.setLayoutY(70 + basImages);
         APMasque.getChildren().add(lblPositMasque);
 
@@ -2537,7 +2793,7 @@ public class GestionnaireInterfaceController {
          * ******************************************************
          */
         VBOutils.getChildren().addAll(
-                APTIT, APBB, APHS, APBOUSS, APMASQ, APRS, APVIG
+                APCoulTheme, APTIT, APBB, APHS, APBOUSS, APMASQ, APRS, APVIG
         );
 
         /*

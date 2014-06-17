@@ -60,7 +60,7 @@ public class ReadWriteImage {
  */
     public static void writeJpeg(Image img, String destFile, float quality, boolean sharpen, float sharpenLevel)
             throws IOException {
-        sharpenMatrix = ReadWriteImage.calculeSharpenMatrix(sharpenLevel);
+        sharpenMatrix = calculeSharpenMatrix(sharpenLevel);
         BufferedImage imageRGBSharpen = null;
         IIOImage iioImage = null;
         BufferedImage image = SwingFXUtils.fromFXImage(img, null); // Get buffered image.
@@ -113,7 +113,7 @@ public class ReadWriteImage {
  */
     public static void writeBMP(Image img, String destFile, boolean sharpen, float sharpenLevel)
             throws IOException {
-        sharpenMatrix = ReadWriteImage.calculeSharpenMatrix(sharpenLevel);
+        sharpenMatrix = calculeSharpenMatrix(sharpenLevel);
         BufferedImage imageRGBSharpen = null;
         IIOImage iioImage = null;
 
@@ -135,6 +135,56 @@ public class ReadWriteImage {
         FileImageOutputStream output = null;
         try {
             writer = ImageIO.getImageWritersByFormatName("bmp").next();
+            ImageWriteParam param = writer.getDefaultWriteParam();
+            output = new FileImageOutputStream(new File(destFile));
+            writer.setOutput(output);
+            if (sharpen) {
+                iioImage = new IIOImage(imageRGBSharpen, null, null);
+            } else {
+                iioImage = new IIOImage(imageRGB, null, null);
+            }
+            writer.write(null, iioImage, param);
+        } catch (IOException ex) {
+            throw ex;
+        } finally {
+            if (writer != null) {
+                writer.dispose();
+            }
+            if (output != null) {
+                output.close();
+            }
+        }
+        graphics.dispose();
+    }
+/**
+ * 
+ * @param img
+ * @param destFile
+ * @param sharpen
+ * @param sharpenLevel
+ * @throws IOException 
+ */
+    public static void writePng(Image img, String destFile, boolean sharpen, float sharpenLevel)
+            throws IOException {
+        sharpenMatrix = calculeSharpenMatrix(sharpenLevel);
+        BufferedImage imageRGBSharpen = null;
+        IIOImage iioImage = null;
+        BufferedImage image = SwingFXUtils.fromFXImage(img, null); // Get buffered image.
+        BufferedImage imageRGB = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.BITMASK);
+        Graphics2D graphics = imageRGB.createGraphics();
+        graphics.drawImage(image, 0, 0, null);
+        if (sharpen) {
+            imageRGBSharpen = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_RGB);
+            Kernel kernel = new Kernel(3, 3, sharpenMatrix);
+            ConvolveOp cop = new ConvolveOp(kernel,
+                    ConvolveOp.EDGE_NO_OP,
+                    null);
+            cop.filter(imageRGB, imageRGBSharpen);
+        }
+        ImageWriter writer = null;
+        FileImageOutputStream output = null;
+        try {
+            writer = ImageIO.getImageWritersByFormatName("png").next();
             ImageWriteParam param = writer.getDefaultWriteParam();
             output = new FileImageOutputStream(new File(destFile));
             writer.setOutput(output);
