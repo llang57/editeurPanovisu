@@ -319,7 +319,7 @@ public class EditeurPanovisu extends Application {
                             + "        positionX=\"" + gestionnaireInterface.positionBoussole.split(":")[1] + "\"\n"
                             + "        opacite=\"" + gestionnaireInterface.opaciteBoussole + "\"\n"
                             + "        dX=\"" + gestionnaireInterface.dXBoussole + "\"\n"
-                            + "        dy=\"" + gestionnaireInterface.dYBoussole + "\"\n"
+                            + "        dY=\"" + gestionnaireInterface.dYBoussole + "\"\n"
                             + "        aiguille=\"" + SAiguille + "\"\n"
                             + "    />\n";
                 }
@@ -462,7 +462,6 @@ public class EditeurPanovisu extends Application {
                     + "                    xml: \"xml/PANO.xml\"\n"
                     + "                });\n"
                     + "                $(\".reseauSocial-twitter\").on(\"click\", function() {\n"
-                    + "                    alert(document.location.href);\n"
                     + "                    window.open(\n"
                     + "                            \"https://twitter.com/share?url=\" + document.location.href\n"
                     + "                            );\n"
@@ -3152,6 +3151,7 @@ public class EditeurPanovisu extends Application {
      */
     public static void main(String[] args) {
         Package pack = Package.getPackage("editeurpanovisu");
+        System.setProperty( "file.encoding", "UTF-8" );
         numVersion = pack.getImplementationVersion();
         System.out.println(numVersion);
         for (int i = 0; i < args.length; i++) {
