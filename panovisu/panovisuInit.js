@@ -9,7 +9,22 @@ var numeroPano = 0;
 function include(fileName) {
     document.write("<script type='text/javascript' src='" + fileName + "'></script>");
 }
+/**
+ * 
+ * @param {type} images
+ * @returns {undefined}
+ */
+function prechargeImages(images) {
+    var i = 0;
+    // Créer l'objet
+    imageObj = new Image();
 
+    // Démarrer le préchargement
+    for (i = 0; i <= images.length; i++)
+    {
+        imageObj.src = images[i];
+    }
+}
 
 
 /**

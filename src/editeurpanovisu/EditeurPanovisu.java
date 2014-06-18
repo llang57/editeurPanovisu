@@ -248,11 +248,20 @@ public class EditeurPanovisu extends Application {
             }
             String contenuFichier;
             File xmlFile;
+            String chargeImages = "";
 
             for (int i = 0; i < nombrePanoramiques; i++) {
                 String fPano = "panos/" + panoramiquesProjet[i].getNomFichier().substring(panoramiquesProjet[i].getNomFichier().lastIndexOf(File.separator) + 1, panoramiquesProjet[i].getNomFichier().length()).split("\\.")[0];
                 if (panoramiquesProjet[i].getTypePanoramique().equals(Panoramique.CUBE)) {
                     fPano = fPano.substring(0, fPano.length() - 2);
+                    chargeImages += "                images[" + i + "]=\"" + fPano + "_f.jpg\"\n";
+                    chargeImages += "                images[" + i + "]=\"" + fPano + "_b.jpg\"\n";
+                    chargeImages += "                images[" + i + "]=\"" + fPano + "_u.jpg\"\n";
+                    chargeImages += "                images[" + i + "]=\"" + fPano + "_d.jpg\"\n";
+                    chargeImages += "                images[" + i + "]=\"" + fPano + "_r.jpg\"\n";
+                    chargeImages += "                images[" + i + "]=\"" + fPano + "_l.jpg\"\n";
+                } else {
+                    chargeImages += "                images[" + i + "]=\"" + fPano + ".jpg\"\n";
                 }
                 String affInfo = (panoramiquesProjet[i].isAfficheInfo()) ? "oui" : "non";
                 String affTitre = (panoramiquesProjet[i].isAfficheTitre()) ? "oui" : "non";
@@ -480,6 +489,9 @@ public class EditeurPanovisu extends Application {
                     + "                    return false;\n"
                     + "                });\n"
                     + "                $(\".reseauSocial-email\").attr(\"href\",\"mailto:?body=\" + document.location.href + \"&amp;hl=fr\");\n"
+                    + "                images=new Array();\n"
+                    + chargeImages
+                    + "                prechargeImages(images); \n \n"
                     + "            });\n"
                     + "        </script>\n"
                     + "    </body>\n"
@@ -3151,7 +3163,7 @@ public class EditeurPanovisu extends Application {
      */
     public static void main(String[] args) {
         Package pack = Package.getPackage("editeurpanovisu");
-        System.setProperty( "file.encoding", "UTF-8" );
+        System.setProperty("file.encoding", "UTF-8");
         numVersion = pack.getImplementationVersion();
         System.out.println(numVersion);
         for (int i = 0; i < args.length; i++) {
