@@ -40,7 +40,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Polygon;
 import javafx.scene.text.Font;
 import jfxtras.labs.scene.control.BigDecimalField;
 
@@ -1398,6 +1397,7 @@ public class GestionnaireInterfaceController {
         txtTitre = new Label(rb.getString("interface.titre"));
         Font fonte = Font.font(titrePoliceNom, Double.parseDouble(titrePoliceTaille));
         txtTitre.setFont(fonte);
+        double largeurOutils=380;
 
         tabInterface = new Pane();
         HBInterface = new HBox();
@@ -1405,7 +1405,7 @@ public class GestionnaireInterfaceController {
         HBInterface.setPrefHeight(height);
         tabInterface.getChildren().add(HBInterface);
         APVisualisation = new AnchorPane();
-        APVisualisation.setPrefWidth(width * 0.8);
+        APVisualisation.setPrefWidth(width -largeurOutils);
         APVisualisation.setPrefHeight(height);
         VBOutils = new VBox();
         ScrollPane SPOutils = new ScrollPane(VBOutils);
@@ -1414,11 +1414,11 @@ public class GestionnaireInterfaceController {
         SPOutils.setMaxHeight(height - 100);
         SPOutils.setFitToWidth(true);
         SPOutils.setFitToHeight(true);
-        SPOutils.setPrefWidth(width * 0.2 + 50);
-        SPOutils.setMaxWidth(width * 0.2 + 50);
+        SPOutils.setPrefWidth(largeurOutils);
+        SPOutils.setMaxWidth(largeurOutils);
         SPOutils.setTranslateY(15);
-        VBOutils.setPrefWidth(width * 0.2);
-        VBOutils.setMaxWidth(width * 0.2);
+        VBOutils.setPrefWidth(largeurOutils-20);
+        VBOutils.setMaxWidth(largeurOutils-20);
         //VBOutils.setMinHeight(height);
         VBOutils.setStyle("-fx-background-color : #ccc;");
         HBInterface.getChildren().addAll(APVisualisation, SPOutils);
@@ -1427,11 +1427,15 @@ public class GestionnaireInterfaceController {
          *     Panneau de visualisation de l'interface
          * ***************************************************************
          */
+        double tailleMax = APVisualisation.getPrefWidth();
+        if (tailleMax>1200){
+            tailleMax=1200;
+        }
         IMVisualisation = new ImageView(imageClaire);
-        IMVisualisation.setFitWidth(1200);
-        IMVisualisation.setFitHeight(800);
+        IMVisualisation.setFitWidth(tailleMax);
+        IMVisualisation.setFitHeight(tailleMax*2.d/3.d);
         IMVisualisation.setSmooth(true);
-        double LX = (width * 0.8 - IMVisualisation.getFitWidth()) / 2;
+        double LX = (APVisualisation.getPrefWidth() - IMVisualisation.getFitWidth()) / 2;
         IMVisualisation.setLayoutX(LX);
         IMVisualisation.setLayoutY(20);
         txtTitre.setMinSize(500, 30);
