@@ -61,6 +61,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.KeyCombination;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
@@ -101,7 +102,7 @@ public class EditeurPanovisu extends Application {
     static private HBox coordonnees;
     static private String currentDir;
     static private int numPoints = 0;
-    static public Panoramique[] panoramiquesProjet = new Panoramique[50];
+    static public Panoramique[] panoramiquesProjet = new Panoramique[100];
     static public int nombrePanoramiques = 0;
     static private int panoActuel = 0;
     static private File fichProjet;
@@ -2074,16 +2075,22 @@ public class EditeurPanovisu extends Application {
     }
 
     private void gereSourisPanoramique(MouseEvent me) {
-        if (me.isAltDown()) {
-            panoChoixRegard(me.getSceneX(), me.getSceneY());
-            me.consume();
-        } else if (me.isShiftDown()) {
-            panoChoixNord(me.getSceneX());
-            me.consume();
-        } else if (!(me.isControlDown()) && estCharge) {
-            panoMouseClic(me.getSceneX(), me.getSceneY());
+        if (me.getButton() == MouseButton.SECONDARY) {
+            if (me.isShiftDown()) {
+            } else if (me.isControlDown()) {
+            } else {
+                panoChoixRegard(me.getSceneX(), me.getSceneY());
+                me.consume();
+            }
         }
-
+        if (me.getButton() == MouseButton.PRIMARY) {
+            if (me.isShiftDown()) {
+                panoChoixNord(me.getSceneX());
+                me.consume();
+            } else if (!(me.isControlDown()) && estCharge) {
+                panoMouseClic(me.getSceneX(), me.getSceneY());
+            }
+        }
     }
 
     /**

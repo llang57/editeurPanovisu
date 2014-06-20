@@ -412,9 +412,9 @@ public class GestionnaireInterfaceController {
         PWnouveauxMasque = nouveauxMasque.getPixelWriter();
         IVMasque = new ImageView(nouveauxMasque);
 
-        changeCouleurBarre(couleurTheme.getHue(), couleurTheme.getSaturation(), couleurTheme.getBrightness());
-        changeCouleurHS(couleurTheme.getHue());
-        changeCouleurMasque(couleurTheme.getHue());
+        changeCouleurBarre(couleurBoutons.getHue(), couleurBoutons.getSaturation(), couleurBoutons.getBrightness());
+        changeCouleurHS(couleurHotspots.getHue(), couleurHotspots.getSaturation(), couleurHotspots.getBrightness());
+        changeCouleurMasque(couleurMasque.getHue(), couleurMasque.getSaturation(), couleurMasque.getBrightness());
 
     }
 
@@ -434,7 +434,11 @@ public class GestionnaireInterfaceController {
                     double opacity = color.getOpacity();
                     Color couleur;
                     if (i < nombreImagesBouton) {
-                        couleur = Color.hsb(couleurFinale, saturation * 0.5 + sat * 0.5, brightness * 0.5 + bright * 0.5, opacity);
+                        if (sat < 0.05) {
+                            couleur = Color.hsb(couleurFinale, sat, bright, opacity);
+                        } else {
+                            couleur = Color.hsb(couleurFinale, saturation * 0.5 + sat * 0.5, brightness * 0.5 + bright * 0.5, opacity);
+                        }
                     } else {
                         couleur = Color.hsb(couleurFinale, saturation, brightness, opacity);
                     }
@@ -445,7 +449,7 @@ public class GestionnaireInterfaceController {
 
     }
 
-    private void changeCouleurMasque(double couleurFinale) {
+    private void changeCouleurMasque(double couleurFinale, double sat, double bright) {
 //        System.out.println(" haut : "+imageBouttons[nombreImagesBouton + 1].getHeight()+"  long : "+imageBouttons[nombreImagesBouton + 1].getWidth());
         for (int y = 0; y < imgMasque.getHeight(); y++) {
             for (int x = 0; x < imgMasque.getWidth(); x++) {
@@ -454,13 +458,22 @@ public class GestionnaireInterfaceController {
                 //double hue = color.getHue() / 360.0;  //getHue() return 0.0-360.0
                 double saturation = color.getSaturation();
                 double opacity = color.getOpacity();
-                Color couleur = Color.hsb(couleurFinale, saturation, brightness, opacity);
+                Color couleur;
+                if ((sat < 0.02) && (saturation > 0.05)) {
+                    couleur = Color.hsb(couleurFinale, sat, brightness * 0.5 + bright * 0.5, opacity);
+                } else {
+                    if (saturation > 0.05) {
+                        couleur = Color.hsb(couleurFinale, saturation * 0.5 + sat * 0.5, brightness * 0.5 + bright * 0.5, opacity);
+                    } else {
+                        couleur = Color.hsb(couleurFinale, saturation, brightness, opacity);
+                    }
+                }
                 PWnouveauxMasque.setColor(x, y, couleur);
             }
         }
     }
 
-    private void changeCouleurHS(double couleurFinale) {
+    private void changeCouleurHS(double couleurFinale, double sat, double bright) {
         for (int y = 0; y < imageBoutons[nombreImagesBouton].getHeight(); y++) {
             for (int x = 0; x < imageBoutons[nombreImagesBouton].getWidth(); x++) {
                 Color color = lisBoutons[nombreImagesBouton].getColor(x, y);
@@ -469,7 +482,15 @@ public class GestionnaireInterfaceController {
                 double saturation = color.getSaturation();
                 double opacity = color.getOpacity();
                 Color couleur;
-                couleur = Color.hsb(couleurFinale, saturation, brightness, opacity);
+                if ((sat < 0.02) && (saturation > 0.05)) {
+                    couleur = Color.hsb(couleurFinale, sat, brightness * 0.5 + bright * 0.5, opacity);
+                } else {
+                    if (saturation > 0.05) {
+                        couleur = Color.hsb(couleurFinale, saturation * 0.5 + sat * 0.5, brightness * 0.5 + bright * 0.5, opacity);
+                    } else {
+                        couleur = Color.hsb(couleurFinale, saturation, brightness, opacity);
+                    }
+                }
                 PWnouveauxBoutons[nombreImagesBouton].setColor(x, y, couleur);
             }
         }
@@ -1039,16 +1060,16 @@ public class GestionnaireInterfaceController {
             String valeur = chaine.split("=")[1];
             switch (variable) {
                 case "couleurTheme":
-                    couleurTheme= Color.web(valeur);
+                    couleurTheme = Color.web(valeur);
                     break;
                 case "couleurBoutons":
-                    couleurBoutons= Color.web(valeur);
+                    couleurBoutons = Color.web(valeur);
                     break;
                 case "couleurHotspots":
-                    couleurHotspots= Color.web(valeur);
+                    couleurHotspots = Color.web(valeur);
                     break;
                 case "couleurMasque":
-                    couleurMasque= Color.web(valeur);
+                    couleurMasque = Color.web(valeur);
                     break;
 
                 case "styleBarre":
@@ -1354,8 +1375,8 @@ public class GestionnaireInterfaceController {
         afficheReseauxSociaux();
         afficheVignettes();
         changeCouleurBarre(couleurBoutons.getHue(), couleurBoutons.getSaturation(), couleurBoutons.getBrightness());
-        changeCouleurMasque(couleurMasque.getHue());
-        changeCouleurHS(couleurHotspots.getHue());
+        changeCouleurMasque(couleurMasque.getHue(), couleurMasque.getSaturation(), couleurMasque.getBrightness());
+        changeCouleurHS(couleurHotspots.getHue(), couleurHotspots.getSaturation(), couleurHotspots.getBrightness());
     }
 
     /**
@@ -1397,7 +1418,7 @@ public class GestionnaireInterfaceController {
         txtTitre = new Label(rb.getString("interface.titre"));
         Font fonte = Font.font(titrePoliceNom, Double.parseDouble(titrePoliceTaille));
         txtTitre.setFont(fonte);
-        double largeurOutils=380;
+        double largeurOutils = 380;
 
         tabInterface = new Pane();
         HBInterface = new HBox();
@@ -1405,7 +1426,7 @@ public class GestionnaireInterfaceController {
         HBInterface.setPrefHeight(height);
         tabInterface.getChildren().add(HBInterface);
         APVisualisation = new AnchorPane();
-        APVisualisation.setPrefWidth(width -largeurOutils);
+        APVisualisation.setPrefWidth(width - largeurOutils);
         APVisualisation.setPrefHeight(height);
         VBOutils = new VBox();
         ScrollPane SPOutils = new ScrollPane(VBOutils);
@@ -1417,8 +1438,8 @@ public class GestionnaireInterfaceController {
         SPOutils.setPrefWidth(largeurOutils);
         SPOutils.setMaxWidth(largeurOutils);
         SPOutils.setTranslateY(15);
-        VBOutils.setPrefWidth(largeurOutils-20);
-        VBOutils.setMaxWidth(largeurOutils-20);
+        VBOutils.setPrefWidth(largeurOutils - 20);
+        VBOutils.setMaxWidth(largeurOutils - 20);
         //VBOutils.setMinHeight(height);
         VBOutils.setStyle("-fx-background-color : #ccc;");
         HBInterface.getChildren().addAll(APVisualisation, SPOutils);
@@ -1428,12 +1449,12 @@ public class GestionnaireInterfaceController {
          * ***************************************************************
          */
         double tailleMax = APVisualisation.getPrefWidth();
-        if (tailleMax>1200){
-            tailleMax=1200;
+        if (tailleMax > 1200) {
+            tailleMax = 1200;
         }
         IMVisualisation = new ImageView(imageClaire);
         IMVisualisation.setFitWidth(tailleMax);
-        IMVisualisation.setFitHeight(tailleMax*2.d/3.d);
+        IMVisualisation.setFitHeight(tailleMax * 2.d / 3.d);
         IMVisualisation.setSmooth(true);
         double LX = (APVisualisation.getPrefWidth() - IMVisualisation.getFitWidth()) / 2;
         IMVisualisation.setLayoutX(LX);
@@ -1497,7 +1518,7 @@ public class GestionnaireInterfaceController {
             String coul1 = CPCouleurTheme.getValue().toString().substring(2, 8);
             couleurHotspots = couleurTheme;
             couleurBoutons = couleurTheme;
-            couleurMasque=couleurTheme;
+            couleurMasque = couleurTheme;
             changeCouleurTitre(coul1);
             changeCouleurVignettes(coul1);
             //changeCouleur(hue);
@@ -1507,8 +1528,8 @@ public class GestionnaireInterfaceController {
             CPCouleurMasques.setValue(couleurTheme);
             CPCouleurFondVignettes.setValue(Color.hsb(couleurTheme.getHue(), couleurTheme.getSaturation(), couleurTheme.getBrightness()));
             changeCouleurBarre(couleurTheme.getHue(), couleurTheme.getSaturation(), couleurTheme.getBrightness());
-            changeCouleurHS(couleurTheme.getHue());
-            changeCouleurMasque(couleurTheme.getHue());
+            changeCouleurHS(couleurTheme.getHue(), couleurTheme.getSaturation(), couleurTheme.getBrightness());
+            changeCouleurMasque(couleurTheme.getHue(), couleurTheme.getSaturation(), couleurTheme.getBrightness());
 
         });
 
@@ -1719,7 +1740,7 @@ public class GestionnaireInterfaceController {
         CPCouleurHotspots = new ColorPicker(couleurHotspots);
         CPCouleurHotspots.setOnAction((ActionEvent e) -> {
             couleurHotspots = CPCouleurHotspots.getValue();
-            changeCouleurHS(couleurHotspots.getHue());
+            changeCouleurHS(couleurHotspots.getHue(), couleurHotspots.getSaturation(), couleurHotspots.getBrightness());
         });
         Label lblCouleurHotspot = new Label(rb.getString("interface.couleurHS"));
         lblCouleurHotspot.setLayoutX(20);
@@ -2231,7 +2252,7 @@ public class GestionnaireInterfaceController {
         CBAfficheMasque.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val != null) {
                 bAfficheMasque = new_val;
-                changeCouleurMasque(couleurTheme.getHue());
+                changeCouleurMasque(couleurHotspots.getHue(), couleurHotspots.getSaturation(), couleurHotspots.getBrightness());
                 afficheMasque();
             }
         });
@@ -2276,7 +2297,7 @@ public class GestionnaireInterfaceController {
         CPCouleurMasques = new ColorPicker(couleurMasque);
         CPCouleurMasques.setOnAction((ActionEvent e) -> {
             couleurMasque = CPCouleurMasques.getValue();
-            changeCouleurMasque(couleurMasque.getHue());
+            changeCouleurMasque(couleurMasque.getHue(), couleurMasque.getSaturation(), couleurMasque.getBrightness());
         });
         Label lblCouleurMasque = new Label(rb.getString("interface.couleurBarre"));
         lblCouleurMasque.setLayoutX(150);
