@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -119,6 +120,7 @@ public class EditeurPanovisu extends Application {
     static private boolean estCharge = false;
     static private boolean repertSauveChoisi = false;
     static private String panoEntree = "";
+    static public String systemeExploitation;
     /**
      * Répertoire de l'application
      */
@@ -340,6 +342,7 @@ public class EditeurPanovisu extends Application {
                     String STitre = (gestionnaireInterface.bMasqueTitre) ? "oui" : "non";
                     String SPlan = (gestionnaireInterface.bMasquePlan) ? "oui" : "non";
                     String SReseaux = (gestionnaireInterface.bMasqueReseaux) ? "oui" : "non";
+                    String SVignettes = (gestionnaireInterface.bMasqueVignettes) ? "oui" : "non";
                     contenuFichier += "<!--  Bouton de Masquage -->\n"
                             + "    <marcheArret \n"
                             + "        affiche=\"oui\"\n"
@@ -355,6 +358,7 @@ public class EditeurPanovisu extends Application {
                             + "        titre=\"" + STitre + "\"\n"
                             + "        plan=\"" + SPlan + "\"\n"
                             + "        reseaux=\"" + SReseaux + "\"\n"
+                            + "        vignettes=\"" + SVignettes + "\"\n"
                             + "    />\n";
                 }
 
@@ -2932,6 +2936,11 @@ public class EditeurPanovisu extends Application {
         String labelStyle = "-fx-color : white;-fx-background-color : #fff;-fx-padding : 5px;  -fx-border : 1px solid #777;-fx-width : 100px;-fx-margin : 5px; ";
 
         scene = new Scene(root, width, height, Color.rgb(221, 221, 221));
+//        if (systemeExploitation.indexOf("inux") != -1) {
+//            root.setStyle("-fx-font-size : 7pt;-fx-font-family: sans-serif;");
+//        } else {
+            root.setStyle("-fx-font-size : 8pt;-fx-font-family: Arial;");
+//        }
         panneauOutils = new ScrollPane();
         panneauOutils.setStyle("-fx-background-color : #ccc;");
         outils = new VBox();
@@ -3108,6 +3117,7 @@ public class EditeurPanovisu extends Application {
         stPrincipal = primaryStage;
         stPrincipal.setTitle("PanoVisu v" + numVersion);
         setUserAgentStylesheet(STYLESHEET_MODENA);
+        //setUserAgentStylesheet(repertAppli + File.separator + "test.css");
         primaryStage.setMaximized(true);
         Dimension tailleEcran = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         int hauteur = (int) tailleEcran.getHeight() - 20;
@@ -3172,6 +3182,10 @@ public class EditeurPanovisu extends Application {
         Package pack = Package.getPackage("editeurpanovisu");
         System.setProperty("file.encoding", "UTF-8");
         numVersion = pack.getImplementationVersion();
+        systemeExploitation = System.getProperty("os.name");
+        System.out.println("Systeme : " + systemeExploitation);
+        Properties properties = System.getProperties();
+        properties.list(System.out);
         System.out.println(numVersion);
         for (int i = 0; i < args.length; i++) {
             System.out.println("Argument " + i + ":" + args[i]);
