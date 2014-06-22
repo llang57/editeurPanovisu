@@ -188,6 +188,7 @@ public class GestionnaireInterfaceController {
     public static boolean bMasqueTitre = true;
     public static boolean bMasquePlan = true;
     public static boolean bMasqueReseaux = true;
+    public static boolean bMasqueVignettes=true;
     private static ImageView IVMasque;
     private static BigDecimalField masqueDXSpinner;
     private static BigDecimalField masqueDYSpinner;
@@ -199,6 +200,7 @@ public class GestionnaireInterfaceController {
     private static CheckBox CBMasqueTitre;
     private static CheckBox CBMasquePlan;
     private static CheckBox CBMasqueReseaux;
+    private static CheckBox CBMasqueVignettes;
     private static RadioButton RBMasqueTopLeft;
     private static RadioButton RBMasqueTopRight;
     private static RadioButton RBMasqueBottomLeft;
@@ -1025,6 +1027,7 @@ public class GestionnaireInterfaceController {
                 + "masqueTitre=" + bMasqueTitre + "\n"
                 + "masquePlan=" + bMasquePlan + "\n"
                 + "masqueReseaux=" + bMasqueReseaux + "\n"
+                + "masqueVignettes=" + bMasqueVignettes + "\n"
                 + "afficheReseauxSociaux=" + bAfficheReseauxSociaux + "\n"
                 + "tailleReseauxSociaux=" + Math.round(tailleReseauxSociaux * 10.d) / 10.d + "\n"
                 + "positionReseauxSociaux=" + positionReseauxSociaux + "\n"
@@ -1254,6 +1257,9 @@ public class GestionnaireInterfaceController {
                 case "masqueReseaux":
                     bMasqueReseaux = (valeur.equals("true"));
                     break;
+                case "masqueVignettes":
+                    bMasqueVignettes = (valeur.equals("true"));
+                    break;
                 case "afficheReseauxSociaux":
                     bAfficheReseauxSociaux = (valeur.equals("true"));
                     break;
@@ -1343,6 +1349,7 @@ public class GestionnaireInterfaceController {
         CBMasqueTitre.setSelected(bMasqueTitre);
         CBMasquePlan.setSelected(bMasquePlan);
         CBMasqueReseaux.setSelected(bMasqueReseaux);
+        CBMasqueVignettes.setSelected(bMasqueVignettes);
         CBAfficheMasque.setSelected(bAfficheMasque);
         RBMasqueTopLeft.setSelected(positionMasque.equals("top:left"));
         RBMasqueBottomLeft.setSelected(positionMasque.equals("bottom:left"));
@@ -1469,14 +1476,15 @@ public class GestionnaireInterfaceController {
         txtTitre.setLayoutX(IMVisualisation.getLayoutX() + (IMVisualisation.getFitWidth() - txtTitre.getMinWidth()) / 2);
         RBClair = new RadioButton("Image claire");
         RBSombre = new RadioButton("Image Sombre");
+        double positRB=IMVisualisation.getFitHeight()+30;
         RBClair.setToggleGroup(grpImage);
         RBSombre.setToggleGroup(grpImage);
         APVisualisation.getChildren().addAll(RBClair, RBSombre);
         RBClair.setLayoutX(LX + 40);
-        RBClair.setLayoutY(830);
+        RBClair.setLayoutY(positRB);
         RBClair.setSelected(true);
         RBSombre.setLayoutX(LX + 180);
-        RBSombre.setLayoutY(830);
+        RBSombre.setLayoutY(positRB);
         RBClair.setUserData("claire");
         RBSombre.setUserData("sombre");
         imgBoussole = new ImageView(new Image("file:" + repertBoussoles + File.separator + imageBoussole));
@@ -2242,7 +2250,7 @@ public class GestionnaireInterfaceController {
         AnchorPane APMasque = new AnchorPane();
 
         APMasque.setLayoutY(40);
-        APMasque.setPrefHeight(400);
+        APMasque.setPrefHeight(430);
         APMasque.setMinWidth(VBOutils.getPrefWidth() - 20);
         Double taillePanelMasque = APMasque.getPrefHeight();
         CBAfficheMasque = new CheckBox(rb.getString("interface.affichageMasque"));
@@ -2424,11 +2432,20 @@ public class GestionnaireInterfaceController {
                 bMasqueReseaux = new_val;
             }
         });
+        CBMasqueVignettes = new CheckBox(rb.getString("interface.masqueVignettes"));
+        CBMasqueVignettes.setLayoutX(60);
+        CBMasqueVignettes.setLayoutY(370 + basImages);
+        CBMasqueVignettes.setSelected(true);
+        CBMasqueVignettes.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+            if (new_val != null) {
+                bMasqueVignettes = new_val;
+            }
+        });
 
         APMasque.getChildren().addAll(
                 lblTailleMasque, SLTailleMasque,
                 lblOpaciteMasque, SLOpaciteMasque,
-                CBMasqueNavigation, CBMasqueBoussole, CBMasqueTitre, CBMasquePlan, CBMasqueReseaux
+                CBMasqueNavigation, CBMasqueBoussole, CBMasqueTitre, CBMasquePlan, CBMasqueReseaux,CBMasqueVignettes
         );
         APMasque.setPrefHeight(0);
         APMasque.setMaxHeight(0);
