@@ -35,6 +35,7 @@ public class Panoramique {
     private boolean afficheTitre;
     private boolean afficheInfo;
     private double zeroNord=0;
+    private double nombreNiveaux=0;
 
     /**
      *
@@ -236,6 +237,20 @@ public class Panoramique {
      */
     public void setZeroNord(double zeroNord) {
         this.zeroNord = zeroNord;
+    }
+
+    /**
+     * @return the nombreNiveaux
+     */
+    public double getNombreNiveaux() {
+        return nombreNiveaux;
+    }
+
+    /**
+     * @param nombreNiveaux the nombreNiveaux to set
+     */
+    public void setNombreNiveaux(double nombreNiveaux) {
+        this.nombreNiveaux = nombreNiveaux;
     }
 
 }

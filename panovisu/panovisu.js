@@ -105,11 +105,13 @@ function panovisu(num_pano) {
      * @type String|@exp;_L1@pro;panoImage|@exp;XMLPano@call;attr
      */
     var panoImage,
+            loader,
             couleur,
             styleBoutons,
             bordure,
             panoTitre,
             multiReso,
+            nombreNiveaux,
             titrePolice,
             titreTaille,
             titreTailleUnite,
@@ -1110,6 +1112,9 @@ function panovisu(num_pano) {
         $("#infoBulle-" + num_pano).hide();
         $("#infoBulle-" + num_pano).html("");
         isReloaded = true;
+//        loader.load(function() {
+//
+//        });
         xmlFile = pointsInteret[nHotspot].contenu;
         hotSpot = new Array();
         pointsInteret = new Array();
@@ -1317,6 +1322,49 @@ function panovisu(num_pano) {
         }
 
     }
+    function afficheNiveauSphere(image, niveau) {
+        if (niveau < nombreNiveaux) {
+            loader = new THREE.TextureLoader();
+            var nomimage = panoImage.split("/")[0] + "/niveau" + niveau + "/" + panoImage.split("/")[1];
+            loader.load(nomimage + ".jpg", function(texture) {
+//                alert(nomimage);
+                var img = nomimage.split("/")[2];
+                var img2 = panoImage.split("/")[1];
+                console.log(img + " ==>" + img2);
+                //alert(texture);
+                if (img === img2) {
+                    var geometry = new THREE.SphereGeometry(405 - niveau, 50, 50);
+                    var material = new THREE.MeshBasicMaterial({map: texture, overdraw: true});
+                    var mesh1 = new THREE.Mesh(geometry, material);
+                    mesh1.scale.x = -1;
+                    scene.add(mesh1);
+                    niveau += 1;
+                    afficheNiveauSphere(image, niveau);
+                    affiche();
+                }
+            });
+        }
+        else {
+            loader = new THREE.TextureLoader();
+            var nomimage = panoImage;
+            loader.load(nomimage + ".jpg", function(texture) {
+//                alert(nomimage);
+                var img = nomimage.split("/")[1];
+                var img2 = panoImage.split("/")[1];
+                console.log(img + " ==>" + img2);
+                if (img === img2)
+                {
+                    var geometry = new THREE.SphereGeometry(405 - niveau, 50, 50);
+                    var material = new THREE.MeshBasicMaterial({map: texture, overdraw: true});
+                    var meshF = new THREE.Mesh(geometry, material);
+                    meshF.scale.x = -1;
+                    scene.add(meshF);
+                    affiche();
+                }
+            });
+
+        }
+    }
     /**
      * Initialisation du panoramique / équilatéral
      * 
@@ -1325,66 +1373,157 @@ function panovisu(num_pano) {
     function initPanoSphere() {
         camera = new THREE.PerspectiveCamera(fov, pano.width() / pano.height(), 1, 1100);
         scene = new THREE.Scene();
-        var loader = new THREE.TextureLoader();
-        loader.load(panoImage + ".jpg", function(texture) {
-            var geometry = new THREE.SphereGeometry(200, 50, 50);
-            var material = new THREE.MeshBasicMaterial({map: texture, overdraw: true});
-            mesh = new THREE.Mesh(geometry, material);
-            mesh.scale.x = -1;
-            scene.add(mesh);
-            if (!isReloaded)
-            {
-                if (supportWebgl())
+        if (multiReso === "oui") {
+            loader = new THREE.TextureLoader();
+            var nomimage = panoImage.split("/")[0] + "/niveau0/" + panoImage.split("/")[1];
+            loader.load(nomimage + ".jpg", function(texture) {
+//                alert(nomimage);
+                var geometry = new THREE.SphereGeometry(405, 50, 50);
+                var material = new THREE.MeshBasicMaterial({map: texture, overdraw: true});
+                mesh = new THREE.Mesh(geometry, material);
+                mesh.scale.x = -1;
+                scene.add(mesh);
+                if (!isReloaded)
                 {
-                    renderer = new THREE.WebGLRenderer();
-                }
-                else {
-                    if (supportCanvas()) {
-                        renderer = new THREE.CanvasRenderer();
+                    if (supportWebgl())
+                    {
+                        renderer = new THREE.WebGLRenderer();
                     }
                     else {
-                        afficheErreur();
+                        if (supportCanvas()) {
+                            renderer = new THREE.CanvasRenderer();
+                        }
+                        else {
+                            afficheErreur();
+                        }
                     }
                 }
-            }
-            renderer.setSize(pano.width(), pano.height());
-            container.append(renderer.domElement);
-            for (var i = 0; i < pointsInteret.length; i++)
-            {
-                var pi = pointsInteret[i];
-                creeHotspot(pi.long, pi.lat, pi.contenu, pi.image);
-            }
-            timers = setInterval(function() {
-                rafraichitHS();
-            }, 50);
+                afficheNiveauSphere(panoImage, 1);
+                renderer.setSize(pano.width(), pano.height());
+                container.append(renderer.domElement);
+                for (var i = 0; i < pointsInteret.length; i++)
+                {
+                    var pi = pointsInteret[i];
+                    creeHotspot(pi.long, pi.lat, pi.contenu, pi.image);
+                }
+                timers = setInterval(function() {
+                    rafraichitHS();
+                }, 50);
 
-            affiche();
-            afficheInfoTitre();
-            pano1.fadeIn(2000, function() {
-                afficheBarre(pano.width(), pano.height());
                 affiche();
+                afficheInfoTitre();
+                pano1.fadeIn(2000, function() {
+                    afficheBarre(pano.width(), pano.height());
+                    affiche();
+                });
+                if (autoRotation === "oui")
+                    demarreAutoRotation();
             });
-            if (autoRotation === "oui")
-                demarreAutoRotation();
-        });
+
+        }
+        else {
+            loader = new THREE.TextureLoader();
+            loader.load(panoImage + ".jpg", function(texture) {
+                var geometry = new THREE.SphereGeometry(405, 50, 50);
+                var material = new THREE.MeshBasicMaterial({map: texture, overdraw: true});
+                mesh = new THREE.Mesh(geometry, material);
+                mesh.scale.x = -1;
+                scene.add(mesh);
+                if (!isReloaded)
+                {
+                    if (supportWebgl())
+                    {
+                        renderer = new THREE.WebGLRenderer();
+                    }
+                    else {
+                        if (supportCanvas()) {
+                            renderer = new THREE.CanvasRenderer();
+                        }
+                        else {
+                            afficheErreur();
+                        }
+                    }
+                }
+                renderer.setSize(pano.width(), pano.height());
+                container.append(renderer.domElement);
+                for (var i = 0; i < pointsInteret.length; i++)
+                {
+                    var pi = pointsInteret[i];
+                    creeHotspot(pi.long, pi.lat, pi.contenu, pi.image);
+                }
+                timers = setInterval(function() {
+                    rafraichitHS();
+                }, 50);
+
+                affiche();
+                afficheInfoTitre();
+                pano1.fadeIn(2000, function() {
+                    afficheBarre(pano.width(), pano.height());
+                    affiche();
+                });
+                if (autoRotation === "oui")
+                    demarreAutoRotation();
+            });
+        }
     }
-    function loadTexture2(path) {
+
+    function loadTexture1(path, niveau) {
         var texture = new THREE.Texture(texture_placeholder);
         var material = new THREE.MeshBasicMaterial({map: texture, overdraw: true});
         var image = new Image();
         image.onload = function() {
-            texture.image = this;
-            texture.needsUpdate = true;
-            nbPanoCharges += 1;
-            if (nbPanoCharges < 6)
-                $("#panovisuCharge-" + num_pano).html(nbPanoCharges + "/6");
-            else
-            {
-                $("#panovisuCharge-" + num_pano).html("&nbsp;");
-                afficheBarre(pano.width(), pano.height());
-                afficheInfoTitre();
+            var img = path.split("/")[2].split("_")[0];
+            var img2 = panoImage.split("/")[1];
+            console.log(img + " ==>" + img2);
+            if (img === img2) {
+                texture.image = this;
+                texture.needsUpdate = true;
+                nbPanoCharges += 1;
+                if (nbPanoCharges < 6)
+                    $("#panovisuCharge-" + num_pano).html(nbPanoCharges + "/6");
+                else
+                {
+                    $("#panovisuCharge-" + num_pano).html("&nbsp;");
+                    afficheBarre(pano.width(), pano.height());
+                    afficheInfoTitre();
+                    if (multiReso === "oui" && niveau < nombreNiveaux - 1)
+                    {
+                        niveau += 1;
+                        var nomimage = panoImage.split("/")[0] + "/niveau" + niveau + "/" + panoImage.split("/")[1];
+                        //alert(nomimage);
+                        var materials1 = [
+                            loadTexture1(nomimage + '_r.jpg', niveau), // droite   x+
+                            loadTexture1(nomimage + '_l.jpg', niveau), // gauche   x-
+                            loadTexture1(nomimage + '_u.jpg', niveau), // dessus   y+
+                            loadTexture1(nomimage + '_d.jpg', niveau), // dessous  y-
+                            loadTexture1(nomimage + '_f.jpg', niveau), // devant   z+
+                            loadTexture1(nomimage + '_b.jpg', niveau)  // derriere z-
+                        ];
+                        nbPanoCharges = 0;
+                        var mesh1 = new THREE.Mesh(new THREE.CubeGeometry(405 - niveau, 405 - niveau, 405 - niveau, 10, 10, 10), new THREE.MeshFaceMaterial(materials1));
+                        mesh1.scale.x = -1;
+                        scene.add(mesh1);
+                        affiche();
+                    }
+                    else {
+                        //alert(panoImage);
+                        var materials = [
+                            loadTexture(panoImage + '_r.jpg'), // droite   x+
+                            loadTexture(panoImage + '_l.jpg'), // gauche   x-
+                            loadTexture(panoImage + '_u.jpg'), // dessus   y+
+                            loadTexture(panoImage + '_d.jpg'), // dessous  y-
+                            loadTexture(panoImage + '_f.jpg'), // devant   z+
+                            loadTexture(panoImage + '_b.jpg')  // derriere z-
+                        ];
+                        var meshF = new THREE.Mesh(new THREE.CubeGeometry(395, 395, 395, 10, 10, 10), new THREE.MeshFaceMaterial(materials));
+                        meshF.scale.x = -1;
+                        scene.add(meshF);
+                        affiche();
+                    }
+
+                }
             }
-            affiche();
+
         };
         image.src = path;
         return material;
@@ -1411,21 +1550,6 @@ function panovisu(num_pano) {
                 $("#panovisuCharge-" + num_pano).html("&nbsp;");
                 afficheBarre(pano.width(), pano.height());
                 afficheInfoTitre();
-                if (multiReso === "oui")
-                {
-                    var materials1 = [
-                        loadTexture2(panoImage + 'niv1_r.jpg'), // droite   x+
-                        loadTexture2(panoImage + 'niv1_l.jpg'), // gauche   x-
-                        loadTexture2(panoImage + 'niv1_u.jpg'), // dessus   y+
-                        loadTexture2(panoImage + 'niv1_d.jpg'), // dessous  y-
-                        loadTexture2(panoImage + 'niv1_f.jpg'), // devant   z+
-                        loadTexture2(panoImage + 'niv1_b.jpg')  // derriere z-
-                    ];
-                    var mesh1 = new THREE.Mesh(new THREE.CubeGeometry(399, 399, 399, 10, 10, 10), new THREE.MeshFaceMaterial(materials1));
-                    mesh1.scale.x = -1;
-                    scene.add(mesh1);
-                }
-
             }
             affiche();
         };
@@ -1464,15 +1588,29 @@ function panovisu(num_pano) {
                 }
             }
         }
-        var materials = [
-            loadTexture(panoImage + '_r.jpg'), // droite   x+
-            loadTexture(panoImage + '_l.jpg'), // gauche   x-
-            loadTexture(panoImage + '_u.jpg'), // dessus   y+
-            loadTexture(panoImage + '_d.jpg'), // dessous  y-
-            loadTexture(panoImage + '_f.jpg'), // devant   z+
-            loadTexture(panoImage + '_b.jpg')  // derriere z-
-        ];
-        mesh = new THREE.Mesh(new THREE.CubeGeometry(400, 400, 400, 10, 10, 10), new THREE.MeshFaceMaterial(materials));
+        if (multiReso === "oui") {
+            var nomimage = panoImage.split("/")[0] + "/niveau0/" + panoImage.split("/")[1];
+            //alert(nomimage);
+            var materials = [
+                loadTexture1(nomimage + '_r.jpg', 0), // droite   x+
+                loadTexture1(nomimage + '_l.jpg', 0), // gauche   x-
+                loadTexture1(nomimage + '_u.jpg', 0), // dessus   y+
+                loadTexture1(nomimage + '_d.jpg', 0), // dessous  y-
+                loadTexture1(nomimage + '_f.jpg', 0), // devant   z+
+                loadTexture1(nomimage + '_b.jpg', 0)  // derriere z-
+            ];
+        }
+        else {
+            var materials = [
+                loadTexture(panoImage + '_r.jpg'), // droite   x+
+                loadTexture(panoImage + '_l.jpg'), // gauche   x-
+                loadTexture(panoImage + '_u.jpg'), // dessus   y+
+                loadTexture(panoImage + '_d.jpg'), // dessous  y-
+                loadTexture(panoImage + '_f.jpg'), // devant   z+
+                loadTexture(panoImage + '_b.jpg')  // derriere z-
+            ];
+        }
+        mesh = new THREE.Mesh(new THREE.CubeGeometry(405, 405, 405, 10, 10, 10), new THREE.MeshFaceMaterial(materials));
         mesh.scale.x = -1;
         scene.add(mesh);
         renderer.setSize(pano.width(), pano.height());
@@ -1874,6 +2012,7 @@ function panovisu(num_pano) {
                     vignettesAffiche = "non";
                     vignettes = false;
                     multiReso = "non";
+                    nombreNiveaux = 0;
                     vignettesOpacite = 0.8;
                     vignettesPosition = "bottom";
                     vignettesFondCouleur = "green";
@@ -1901,6 +2040,7 @@ function panovisu(num_pano) {
                     titreOpacite = XMLPano.attr('titreOpacite') || titreOpacite;
                     panoType = XMLPano.attr('type') || panoType;
                     multiReso = XMLPano.attr('multiReso') || multiReso;
+                    nombreNiveaux = parseInt(XMLPano.attr('nombreNiveaux')) || nombreNiveaux;
                     autoRotation = XMLPano.attr('rotation') || autoRotation;
                     longitude = parseFloat(XMLPano.attr('regardX')) || longitude;
                     latitude = parseFloat(XMLPano.attr('regardY')) || latitude;
