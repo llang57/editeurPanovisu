@@ -188,7 +188,7 @@ public class GestionnaireInterfaceController {
     public static boolean bMasqueTitre = true;
     public static boolean bMasquePlan = true;
     public static boolean bMasqueReseaux = true;
-    public static boolean bMasqueVignettes=true;
+    public static boolean bMasqueVignettes = true;
     private static ImageView IVMasque;
     private static BigDecimalField masqueDXSpinner;
     private static BigDecimalField masqueDYSpinner;
@@ -312,6 +312,8 @@ public class GestionnaireInterfaceController {
     private static CheckBox CBFS;
     private static CheckBox CBSouris;
     private static CheckBox CBRotation;
+    private static CheckBox CBSuivantPrécédent;
+    public static boolean bSuivantPrecedent;
     private static BigDecimalField dXSpinner;
     private static BigDecimalField dYSpinner;
     private static ColorPicker CPCouleurFondTitre;
@@ -1476,7 +1478,7 @@ public class GestionnaireInterfaceController {
         txtTitre.setLayoutX(IMVisualisation.getLayoutX() + (IMVisualisation.getFitWidth() - txtTitre.getMinWidth()) / 2);
         RBClair = new RadioButton("Image claire");
         RBSombre = new RadioButton("Image Sombre");
-        double positRB=IMVisualisation.getFitHeight()+30;
+        double positRB = IMVisualisation.getFitHeight() + 30;
         RBClair.setToggleGroup(grpImage);
         RBSombre.setToggleGroup(grpImage);
         APVisualisation.getChildren().addAll(RBClair, RBSombre);
@@ -2445,7 +2447,7 @@ public class GestionnaireInterfaceController {
         APMasque.getChildren().addAll(
                 lblTailleMasque, SLTailleMasque,
                 lblOpaciteMasque, SLOpaciteMasque,
-                CBMasqueNavigation, CBMasqueBoussole, CBMasqueTitre, CBMasquePlan, CBMasqueReseaux,CBMasqueVignettes
+                CBMasqueNavigation, CBMasqueBoussole, CBMasqueTitre, CBMasquePlan, CBMasqueReseaux, CBMasqueVignettes
         );
         APMasque.setPrefHeight(0);
         APMasque.setMaxHeight(0);

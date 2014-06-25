@@ -529,7 +529,7 @@ public class EditeurPanovisu extends Application {
         } else {
             Dialogs.create().title("Editeur PanoVisu")
                     .masthead("Génération de la visite")
-                    .message("Votre n'a pu être générée, votre fichier n'étant pas sauvegardé")
+                    .message("Votre visite n'a pu être générée, votre fichier n'étant pas sauvegardé")
                     .showError();
 
         }
@@ -1686,6 +1686,7 @@ public class EditeurPanovisu extends Application {
 
         for (int i = 0; i < nombrePanoramiques; i++) {
             if (i != panoActuel) {
+                int numeroPano=i;
                 IVPano[j] = new ImageView(panoramiquesProjet[i].getVignettePanoramique());
                 IVPano[j].setFitWidth(120);
                 IVPano[j].setFitHeight(60);
@@ -1708,6 +1709,11 @@ public class EditeurPanovisu extends Application {
                             }
                     );
                     panoListeVignette = nomPano;
+                    if (panoramiquesProjet[numeroPano].getTitrePanoramique()!=null){
+                        String texteHS=panoramiquesProjet[numeroPano].getTitrePanoramique();
+                        TextArea txtHS = (TextArea) scene.lookup("#txtHS" + numHS);
+                        txtHS.setText(texteHS);
+                    }
                     ComboBox cbx = (ComboBox) scene.lookup("#cbpano" + numHS);
                     cbx.setValue(nomPano.substring(nomPano.lastIndexOf(File.separator) + 1, nomPano.lastIndexOf(".")));
                     APlistePano.setVisible(false);
@@ -1750,7 +1756,7 @@ public class EditeurPanovisu extends Application {
     private void valideHS() {
         for (int i = 0; i < panoramiquesProjet[panoActuel].getNombreHotspots(); i++) {
             ComboBox cbx = (ComboBox) scene.lookup("#cbpano" + i);
-            TextArea txtTexteHS = (TextArea) scene.lookup("#txttextehs" + i);
+            TextArea txtTexteHS = (TextArea) scene.lookup("#txtHS" + i);
             panoramiquesProjet[panoActuel].getHotspot(i).setInfo(txtTexteHS.getText());
             panoramiquesProjet[panoActuel].getHotspot(i).setFichierXML(cbx.getValue() + ".xml");
             CheckBox cbAnime = (CheckBox) scene.lookup("#anime" + i);
@@ -1819,7 +1825,7 @@ public class EditeurPanovisu extends Application {
             if (panoramiquesProjet[numPano].getHotspot(o).getInfo() != null) {
                 txtTexteHS.setText(panoramiquesProjet[numPano].getHotspot(o).getInfo());
             }
-            txtTexteHS.setId("txttextehs" + o);
+            txtTexteHS.setId("txtHS" + o);
             txtTexteHS.setPrefSize(200, 25);
             txtTexteHS.setMaxSize(200, 20);
             txtTexteHS.setTranslateX(60);
