@@ -223,7 +223,14 @@ public class EditeurPanovisu extends Application {
             if (!hotspotsRepert.exists()) {
                 hotspotsRepert.mkdirs();
             }
-
+            copieFichierRepertoire(repertAppli + File.separator + "panovisu"+File.separator+"images"+File.separator+"aide_souris.png",
+                    repertTemp + "/panovisu/images");
+            copieFichierRepertoire(repertAppli + File.separator + "panovisu"+File.separator+"images"+File.separator+"fermer.png",
+                    repertTemp + "/panovisu/images");
+            copieFichierRepertoire(repertAppli + File.separator + "panovisu"+File.separator+"images"+File.separator+"precedent.png",
+                    repertTemp + "/panovisu/images");
+            copieFichierRepertoire(repertAppli + File.separator + "panovisu"+File.separator+"images"+File.separator+"suivant.png",
+                    repertTemp + "/panovisu/images");
             for (int i = 0; i < gestionnaireInterface.nombreImagesBouton; i++) {
                 ReadWriteImage.writePng(gestionnaireInterface.nouveauxBoutons[i],
                         boutonRepert.getAbsolutePath() + File.separator + gestionnaireInterface.nomImagesBoutons[i],

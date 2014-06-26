@@ -146,7 +146,7 @@ public class GestionnaireInterfaceController {
     public static String couleurTitre = "#ffffff";
     public static String couleurFondTitre = "#000000";
     public static Double titreOpacite = 0.8;
-    public static Double titreTaille = 50.0;
+    public static Double titreTaille = 100.0;
 
     /**
      *
@@ -312,7 +312,11 @@ public class GestionnaireInterfaceController {
     private static CheckBox CBFS;
     private static CheckBox CBSouris;
     private static CheckBox CBRotation;
-    private static CheckBox CBSuivantPrécédent;
+    private static CheckBox CBSuivantPrecedent;
+    private static ImageView imgSuivant;
+    private static ImageView imgPrecedent;
+    private static VBox fondSuivant;
+    private static VBox fondPrecedent;
     public static boolean bSuivantPrecedent;
     private static BigDecimalField dXSpinner;
     private static BigDecimalField dYSpinner;
@@ -428,7 +432,6 @@ public class GestionnaireInterfaceController {
 
     private void changeCouleurBarre(double couleurFinale, double sat, double bright) {
         for (int i = 0; i < nombreImagesBouton; i++) {
-
             for (int y = 0; y < imageBoutons[i].getHeight(); y++) {
                 for (int x = 0; x < imageBoutons[i].getWidth(); x++) {
                     Color color = lisBoutons[i].getColor(x, y);
@@ -437,14 +440,10 @@ public class GestionnaireInterfaceController {
                     double saturation = color.getSaturation();
                     double opacity = color.getOpacity();
                     Color couleur;
-                    if (i < nombreImagesBouton) {
-                        if (sat < 0.05) {
-                            couleur = Color.hsb(couleurFinale, sat, bright, opacity);
-                        } else {
-                            couleur = Color.hsb(couleurFinale, saturation * 0.5 + sat * 0.5, brightness * 0.5 + bright * 0.5, opacity);
-                        }
-                    } else {
+                    if (saturation < 0.2) {
                         couleur = Color.hsb(couleurFinale, saturation, brightness, opacity);
+                    } else {
+                        couleur = Color.hsb(couleurFinale, saturation * 0.4 + sat * 0.6, brightness * 0.4 + bright * 0.6, opacity);
                     }
                     PWnouveauxBoutons[i].setColor(x, y, couleur);
                 }
@@ -711,6 +710,8 @@ public class GestionnaireInterfaceController {
      *
      */
     private void afficheVignettes() {
+            fondPrecedent.setLayoutX(IMVisualisation.getLayoutX());
+            fondSuivant.setLayoutX(IMVisualisation.getLayoutX() + (IMVisualisation.getFitWidth() - fondPrecedent.getPrefWidth()));
         APVisuVignettes.setVisible(bAfficheVignettes);
         if (bAfficheVignettes) {
             ImageView[] imgVignettes = new ImageView[nombrePanoramiques];
@@ -733,6 +734,7 @@ public class GestionnaireInterfaceController {
                     APVisuVignettes.setMinWidth(tailleImageVignettes + 10);
                     APVisuVignettes.setLayoutX(IMVisualisation.getLayoutX());
                     APVisuVignettes.setLayoutY(IMVisualisation.getLayoutY() + txtTitre.getHeight());
+                    fondPrecedent.setLayoutX(IMVisualisation.getLayoutX() + APVisuVignettes.getPrefWidth());
                     break;
                 case "right":
                     APVisuVignettes.setPrefHeight(IMVisualisation.getFitHeight() - txtTitre.getHeight());
@@ -741,9 +743,12 @@ public class GestionnaireInterfaceController {
                     APVisuVignettes.setMinWidth(tailleImageVignettes + 10);
                     APVisuVignettes.setLayoutX(IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - APVisuVignettes.getPrefWidth());
                     APVisuVignettes.setLayoutY(IMVisualisation.getLayoutY() + txtTitre.getHeight());
+                    fondSuivant.setLayoutX(IMVisualisation.getLayoutX() + (IMVisualisation.getFitWidth() - fondPrecedent.getPrefWidth()) - APVisuVignettes.getPrefWidth());
                     break;
             }
-            for (int i = 0; i < nombrePanoramiques; i++) {
+            int maxVignettes = 5;
+            int nombre = (nombrePanoramiques > maxVignettes) ? maxVignettes : nombrePanoramiques;
+            for (int i = 0; i < nombre; i++) {
                 imgVignettes[i] = new ImageView(panoramiquesProjet[i].getVignettePanoramique());
                 imgVignettes[i].setFitWidth(tailleImageVignettes);
                 imgVignettes[i].setFitHeight(tailleImageVignettes / 2);
@@ -779,7 +784,7 @@ public class GestionnaireInterfaceController {
     public void afficheBouton(String position, double dX, double dY, double taille, String styleBoutons, String styleHS) {
         String repertBoutons = "file:" + repertBoutonsPrincipal + File.separator + styleBoutons;
         APVisualisation.getChildren().clear();
-        APVisualisation.getChildren().addAll(RBClair, RBSombre, IMVisualisation, txtTitre, imgBoussole, imgAiguille, imgTwitter, imgGoogle, imgFacebook, imgEmail, APVisuVignettes);
+        APVisualisation.getChildren().addAll(RBClair, RBSombre, IMVisualisation, txtTitre, imgBoussole, imgAiguille, imgTwitter, imgGoogle, imgFacebook, imgEmail, APVisuVignettes, fondSuivant, fondPrecedent);
         chargeBarre(styleBoutons, styleHS, imageMasque);
         HBbarreBoutons = new HBox();
         HBbarreBoutons.setId("barreBoutons");
@@ -1424,6 +1429,15 @@ public class GestionnaireInterfaceController {
         ImageView[] IVHotspots = new ImageView[nombreHotSpots];
         imageClaire = new Image("file:" + repertAppli + File.separator + "images/claire.jpg");
         imageSombre = new Image("file:" + repertAppli + File.separator + "images/sombre.jpg");
+        imgSuivant = new ImageView(new Image("file:" + repertAppli + File.separator + "panovisu/images/suivant.png"));
+        imgPrecedent = new ImageView(new Image("file:" + repertAppli + File.separator + "panovisu/images/precedent.png"));
+        fondSuivant = new VBox(imgSuivant);
+        fondPrecedent = new VBox(imgPrecedent);
+        fondSuivant.setStyle("-fx-background-color : black;");
+        fondSuivant.setOpacity(0.5);
+        fondPrecedent.setStyle("-fx-background-color : black;");
+        fondPrecedent.setOpacity(0.5);
+
         txtTitre = new Label(rb.getString("interface.titre"));
         Font fonte = Font.font(titrePoliceNom, Double.parseDouble(titrePoliceTaille));
         txtTitre.setFont(fonte);
@@ -1497,7 +1511,21 @@ public class GestionnaireInterfaceController {
         imgFacebook = new ImageView(new Image("file:" + repertReseauxSociaux + File.separator + imageReseauxSociauxFacebook));
         imgEmail = new ImageView(new Image("file:" + repertReseauxSociaux + File.separator + imageReseauxSociauxEmail));
         APVisuVignettes = new AnchorPane();
-        APVisualisation.getChildren().addAll(txtTitre, imgBoussole, imgAiguille, IVMasque, imgTwitter, imgGoogle, imgFacebook, imgEmail, APVisuVignettes);
+        APVisualisation.getChildren().addAll(txtTitre, imgBoussole, imgAiguille, IVMasque, imgTwitter, imgGoogle, imgFacebook, imgEmail, APVisuVignettes, fondSuivant, fondPrecedent);
+        fondPrecedent.setPrefWidth(64);
+        fondPrecedent.setPrefHeight(64);
+        fondSuivant.setPrefWidth(64);
+        fondSuivant.setPrefHeight(64);
+        fondPrecedent.setMaxWidth(64);
+        fondPrecedent.setMaxHeight(64);
+        fondSuivant.setMaxWidth(64);
+        fondSuivant.setMaxHeight(64);
+        fondPrecedent.setLayoutX(IMVisualisation.getLayoutX());
+        fondPrecedent.setLayoutY(IMVisualisation.getLayoutY() + (IMVisualisation.getFitHeight() - fondPrecedent.getPrefHeight()) / 2);
+        fondSuivant.setLayoutX(IMVisualisation.getLayoutX() + (IMVisualisation.getFitWidth() - fondPrecedent.getPrefWidth()));
+        fondSuivant.setLayoutY(IMVisualisation.getLayoutY() + (IMVisualisation.getFitHeight() - fondSuivant.getPrefHeight()) / 2);
+        fondSuivant.setVisible(bSuivantPrecedent);
+        fondPrecedent.setVisible(bSuivantPrecedent);
 
         afficheBoussole();
         afficheMasque();
@@ -1585,6 +1613,7 @@ public class GestionnaireInterfaceController {
                             Font fonte1 = Font.font(titrePoliceNom, Double.parseDouble(titrePoliceTaille));
                             txtTitre.setFont(fonte1);
                             txtTitre.setPrefHeight(-1);
+                            afficheVignettes();
                         }
                     }
                 });
@@ -1605,6 +1634,7 @@ public class GestionnaireInterfaceController {
                 Font fonte1 = Font.font(titrePoliceNom, Double.parseDouble(titrePoliceTaille));
                 txtTitre.setFont(fonte1);
                 txtTitre.setPrefHeight(-1);
+                afficheVignettes();
             }
         });
 
@@ -1816,8 +1846,19 @@ public class GestionnaireInterfaceController {
             afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
         });
         CBVisible.setLayoutX(10);
-        CBVisible.setLayoutY(20);
+        CBVisible.setLayoutY(5);
         CBVisible.setSelected(true);
+        CBSuivantPrecedent = new CheckBox(rb.getString("interface.SuivantPrecedent"));
+        CBSuivantPrecedent.setLayoutX(10);
+        CBSuivantPrecedent.setLayoutY(30);
+        CBSuivantPrecedent.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+            bSuivantPrecedent = new_val;
+            fondSuivant.setVisible(bSuivantPrecedent);
+            fondPrecedent.setVisible(bSuivantPrecedent);
+        });
+        Label lblStyle = new Label(rb.getString("interface.style"));
+        lblStyle.setLayoutX(10);
+        lblStyle.setLayoutY(60);
 
         CBlisteStyle = new ComboBox();
         listeStyles.stream().forEach((nomStyle) -> {
@@ -1891,9 +1932,6 @@ public class GestionnaireInterfaceController {
         RBBottomCenter.setLayoutY(posY + 40);
         RBBottomRight.setLayoutY(posY + 40);
         RBBottomCenter.setSelected(true);
-        Label lblStyle = new Label(rb.getString("interface.style"));
-        lblStyle.setLayoutX(10);
-        lblStyle.setLayoutY(50);
         Label lblPosit = new Label(rb.getString("interface.position"));
         lblPosit.setLayoutX(10);
         lblPosit.setLayoutY(140);
@@ -2054,7 +2092,7 @@ public class GestionnaireInterfaceController {
         });
 
         APBarreModif.getChildren().addAll(
-                CBVisible, lblStyle, CBlisteStyle,
+                CBVisible, CBSuivantPrecedent, lblStyle, CBlisteStyle,
                 lblCouleurBouton, CPCouleurBoutons,
                 lblPosit,
                 RBTopLeft, RBTopCenter, RBTopRight,
