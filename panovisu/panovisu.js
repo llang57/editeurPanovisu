@@ -107,6 +107,9 @@ function panovisu(num_pano) {
     var panoImage,
             loader,
             couleur,
+            bSuivantPrecedent,
+            XMLsuivant,
+            XMLprecedent,
             styleBoutons,
             bordure,
             panoTitre,
@@ -684,7 +687,16 @@ function panovisu(num_pano) {
             if (marcheArretReseaux === "oui")
                 $("#reseauxSociaux-" + num_pano).fadeOut(500);
             if (marcheArretVignettes === "oui")
+            {
                 $("#divVignettes-" + num_pano).fadeOut(500);
+                console.log("position vignettes :"+vignettesPosition);
+                if (vignettesPosition==="left"){
+                    $("#divPrecedent-"+num_pano).css({left:0});
+                }
+                if (vignettesPosition==="right"){
+                    $("#divSuivant-"+num_pano).css({right:0});
+                }
+            }
             elementsVisibles = false;
         }
         else {
@@ -699,11 +711,57 @@ function panovisu(num_pano) {
             if (marcheArretReseaux === "oui")
                 $("#reseauxSociaux-" + num_pano).fadeIn(500);
             if (marcheArretVignettes === "oui")
+            {
                 $("#divVignettes-" + num_pano).fadeIn(500);
+                console.log("position vignettes :"+vignettesPosition);
+                var largeur=$("#divVignettes-" + num_pano).width()+6;
+                if (vignettesPosition==="left"){
+                    $("#divPrecedent-"+num_pano).css({left:largeur});
+                }
+                if (vignettesPosition==="right"){
+                    $("#divSuivant-"+num_pano).css({right:largeur});
+                }
+                
+            }
             elementsVisibles = true;
         }
     });
 
+$(document).on("click","#divSuivant-"+num_pano,function(){
+            clearInterval(timers);
+        longitude = 0;
+        latitude = 0;
+        fov = 75;
+        $("#infoBulle-" + num_pano).hide();
+        $("#infoBulle-" + num_pano).html("");
+        isReloaded = true;
+        xmlFile = XMLsuivant;
+        hotSpot = new Array();
+        pointsInteret = new Array();
+        numHotspot = 0;
+        $("#boussole-" + num_pano).hide();
+        $("#marcheArret-" + num_pano).hide();
+        chargeXML(xmlFile);
+
+})
+
+    $(document).on("click","#divPrecedent-"+num_pano,function(){
+            clearInterval(timers);
+        longitude = 0;
+        latitude = 0;
+        fov = 75;
+        $("#infoBulle-" + num_pano).hide();
+        $("#infoBulle-" + num_pano).html("");
+        isReloaded = true;
+        xmlFile = XMLprecedent;
+        hotSpot = new Array();
+        pointsInteret = new Array();
+        numHotspot = 0;
+        $("#boussole-" + num_pano).hide();
+        $("#marcheArret-" + num_pano).hide();
+        chargeXML(xmlFile);
+
+})
 
     /**
      * 
@@ -846,6 +904,12 @@ function panovisu(num_pano) {
             });
         }
         $("#divVignettes-" + num_pano).show();
+        if (vignettesPosition === "right") {
+            $("#divSuivant-" + num_pano).css("right", largeurFenetre + 6);
+        }
+        if (vignettesPosition === "left") {
+            $("#divPrecedent-" + num_pano).css("left", largeurFenetre + 6);
+        }
     }
 
 
@@ -1223,6 +1287,15 @@ function panovisu(num_pano) {
             });
             $("#boussole-" + num_pano).show();
         }
+        $("#divSuivant-" + num_pano).hide();
+        $("#divPrecedent-" + num_pano).hide();
+        console.log("suivant : " + XMLsuivant + " precedent : " + XMLprecedent);
+        if (XMLsuivant !== "") {
+            $("#divSuivant-" + num_pano).show();
+        }
+        if (XMLprecedent !== "") {
+            $("#divPrecedent-" + num_pano).show();
+        }
         if (marcheArret) {
             console.log("test  : " + marcheArretPositionX + " : " + marcheArretDX + "px");
             $("#marcheArret-" + num_pano).css(marcheArretPositionX, marcheArretDX + "px");
@@ -1306,6 +1379,9 @@ function panovisu(num_pano) {
         pano.width(largeur);
         pano.height(hauteur);
         afficheBarre(pano.width(), pano.height());
+        var posit = (hauteur - $("#divSuivant-" + num_pano).height()) / 2;
+        $("#divSuivant-" + num_pano).css("top", posit);
+        $("#divPrecedent-" + num_pano).css("top", posit);
 
         afficheInfo();
         afficheInfoTitre();
@@ -1764,6 +1840,9 @@ function panovisu(num_pano) {
                     $("#basVignettes-" + num_pano).hide();
                 }
             }
+            var posit = (hauteur - $("#divSuivant-" + num_pano).height()) / 2;
+            $("#divSuivant-" + num_pano).css("top", posit);
+            $("#divPrecedent-" + num_pano).css("top", posit);
 
         }, 300);
 
@@ -2013,6 +2092,7 @@ function panovisu(num_pano) {
                     vignettes = false;
                     multiReso = "non";
                     nombreNiveaux = 0;
+                    bSuivantPrecedent = false;
                     vignettesOpacite = 0.8;
                     vignettesPosition = "bottom";
                     vignettesFondCouleur = "green";
@@ -2056,6 +2136,11 @@ function panovisu(num_pano) {
                     } else {
                         bAfficheInfo = false;
                     }
+                    var XMLSuivantPrecedent = $(d).find('suivantPrecedent');
+                    XMLsuivant = XMLSuivantPrecedent.attr('suivant') || "";
+                    XMLprecedent = XMLSuivantPrecedent.attr('precedent') || "";
+                    bSuivantPrecedent = (XMLsuivant !== "") || (XMLprecedent !== "");
+                    console.log("Suivant - Précédent : " + bSuivantPrecedent + " => " + XMLsuivant + "," + XMLprecedent);
                     /*
                      * 
                      * 
@@ -2262,6 +2347,12 @@ function panovisu(num_pano) {
         $("#divImage-" + num_pano).hide();
         $("<div>", {id: "divHTML-" + num_pano, class: "vignettes"}).appendTo("#pano1-" + num_pano);
         $("#divHTML-" + num_pano).hide();
+
+
+        $("<div>", {id: "divPrecedent-" + num_pano, class: "precedent",title : "Panoramique précédent"}).appendTo("#pano1-" + num_pano);
+        $("<div>", {id: "divSuivant-" + num_pano, class: "suivant",title : "Panoramique suivant"}).appendTo("#pano1-" + num_pano);
+        $("#divPrecedent-" + num_pano).hide();
+        $("#divSuivant-" + num_pano).hide();
 
         /**
          * Création de la barre de boutons

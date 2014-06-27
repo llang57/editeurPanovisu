@@ -440,10 +440,14 @@ public class GestionnaireInterfaceController {
                     double saturation = color.getSaturation();
                     double opacity = color.getOpacity();
                     Color couleur;
-                    if (saturation < 0.2) {
-                        couleur = Color.hsb(couleurFinale, saturation, brightness, opacity);
+                    if (sat < 0.1) {
+                        couleur = Color.hsb(couleurFinale, sat, bright, opacity);
                     } else {
-                        couleur = Color.hsb(couleurFinale, saturation * 0.4 + sat * 0.6, brightness * 0.4 + bright * 0.6, opacity);
+                        if (saturation < 0.2) {
+                            couleur = Color.hsb(couleurFinale, saturation, brightness, opacity);
+                        } else {
+                            couleur = Color.hsb(couleurFinale, saturation * 0.4 + sat * 0.6, brightness * 0.4 + bright * 0.6, opacity);
+                        }
                     }
                     PWnouveauxBoutons[i].setColor(x, y, couleur);
                 }
@@ -710,8 +714,58 @@ public class GestionnaireInterfaceController {
      *
      */
     private void afficheVignettes() {
-            fondPrecedent.setLayoutX(IMVisualisation.getLayoutX());
-            fondSuivant.setLayoutX(IMVisualisation.getLayoutX() + (IMVisualisation.getFitWidth() - fondPrecedent.getPrefWidth()));
+        fondPrecedent.setLayoutX(IMVisualisation.getLayoutX());
+        fondSuivant.setLayoutX(IMVisualisation.getLayoutX() + (IMVisualisation.getFitWidth() - fondPrecedent.getPrefWidth()));
+        String positVert = positionBarre.split(":")[0];
+        String positHor = positionBarre.split(":")[1];
+        double LX = 0;
+        double LY = 0;
+        switch (positVert) {
+            case "top":
+                LY = IMVisualisation.getLayoutY() + dYBarre;
+                break;
+            case "bottom":
+                LY = IMVisualisation.getLayoutY() + IMVisualisation.getFitHeight() - HBbarreBoutons.getPrefHeight() - dYBarre;
+                break;
+            case "middle":
+                LY = IMVisualisation.getLayoutY() + (IMVisualisation.getFitHeight() - HBbarreBoutons.getPrefHeight()) / 2.d - dYBarre;
+                break;
+        }
+
+        switch (positHor) {
+            case "right":
+                LX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - HBbarreBoutons.getPrefWidth() - dXBarre;
+                break;
+            case "left":
+                LX = IMVisualisation.getLayoutX() + dXBarre;
+                break;
+            case "center":
+                LX = IMVisualisation.getLayoutX() + (IMVisualisation.getFitWidth() - HBbarreBoutons.getPrefWidth()) / 2 + dXBarre;
+                break;
+        }
+
+        String positXBoussole = positionBoussole.split(":")[1];
+        String positYBoussole = positionBoussole.split(":")[0];
+        double posX = 0;
+        double posY = 0;
+        switch (positXBoussole) {
+            case "left":
+                posX = IMVisualisation.getLayoutX() + dXBoussole;
+                break;
+            case "right":
+                posX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - dXBoussole - imgBoussole.getFitWidth();
+                break;
+        }
+        switch (positYBoussole) {
+            case "bottom":
+                posY = IMVisualisation.getLayoutY() + IMVisualisation.getFitHeight() - imgBoussole.getFitHeight() - dYBoussole;
+                break;
+            case "top":
+                posY = IMVisualisation.getLayoutY() + dYBoussole;
+                break;
+        }
+//        System.out.println(positionBoussole + " posX:" + posX + ", posY:" + posY);
+
         APVisuVignettes.setVisible(bAfficheVignettes);
         if (bAfficheVignettes) {
             ImageView[] imgVignettes = new ImageView[nombrePanoramiques];
@@ -726,6 +780,12 @@ public class GestionnaireInterfaceController {
                     APVisuVignettes.setMinWidth(IMVisualisation.getFitWidth());
                     APVisuVignettes.setLayoutX(IMVisualisation.getLayoutX());
                     APVisuVignettes.setLayoutY(IMVisualisation.getLayoutY() + IMVisualisation.getFitHeight() - APVisuVignettes.getPrefHeight());
+                    if (positVert.equals("bottom")) {
+                        LY = IMVisualisation.getLayoutY() + IMVisualisation.getFitHeight() - HBbarreBoutons.getPrefHeight() - dYBarre - APVisuVignettes.getPrefHeight();
+                    }
+                    if (positYBoussole.equals("bottom")) {
+                        posY = IMVisualisation.getLayoutY() + IMVisualisation.getFitHeight() - imgBoussole.getFitHeight() - dYBoussole - APVisuVignettes.getPrefHeight();
+                    }
                     break;
                 case "left":
                     APVisuVignettes.setPrefHeight(IMVisualisation.getFitHeight() - txtTitre.getHeight());
@@ -735,6 +795,12 @@ public class GestionnaireInterfaceController {
                     APVisuVignettes.setLayoutX(IMVisualisation.getLayoutX());
                     APVisuVignettes.setLayoutY(IMVisualisation.getLayoutY() + txtTitre.getHeight());
                     fondPrecedent.setLayoutX(IMVisualisation.getLayoutX() + APVisuVignettes.getPrefWidth());
+                    if (positHor.equals("left")) {
+                        LX = IMVisualisation.getLayoutX() + dXBarre + APVisuVignettes.getPrefWidth();
+                    }
+                    if (positXBoussole.equals("left")) {
+                        posX = IMVisualisation.getLayoutX() + dXBoussole + APVisuVignettes.getPrefWidth();
+                    }
                     break;
                 case "right":
                     APVisuVignettes.setPrefHeight(IMVisualisation.getFitHeight() - txtTitre.getHeight());
@@ -744,6 +810,12 @@ public class GestionnaireInterfaceController {
                     APVisuVignettes.setLayoutX(IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - APVisuVignettes.getPrefWidth());
                     APVisuVignettes.setLayoutY(IMVisualisation.getLayoutY() + txtTitre.getHeight());
                     fondSuivant.setLayoutX(IMVisualisation.getLayoutX() + (IMVisualisation.getFitWidth() - fondPrecedent.getPrefWidth()) - APVisuVignettes.getPrefWidth());
+                    if (positHor.equals("right")) {
+                        LX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - HBbarreBoutons.getPrefWidth() - dXBarre - APVisuVignettes.getPrefWidth();
+                    }
+                    if (positXBoussole.equals("right")) {
+                        posX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - dXBoussole - imgBoussole.getFitWidth() - APVisuVignettes.getPrefWidth();
+                    }
                     break;
             }
             int maxVignettes = 5;
@@ -769,6 +841,12 @@ public class GestionnaireInterfaceController {
                 APVisuVignettes.getChildren().add(imgVignettes[i]);
             }
         }
+        HBbarreBoutons.setLayoutX(LX);
+        HBbarreBoutons.setLayoutY(LY);
+        imgBoussole.setLayoutX(posX);
+        imgBoussole.setLayoutY(posY);
+        imgAiguille.setLayoutX(posX + (imgBoussole.getFitWidth() - imgAiguille.getFitWidth()) / 2);
+        imgAiguille.setLayoutY(posY);
 
     }
 
@@ -879,8 +957,6 @@ public class GestionnaireInterfaceController {
 //        IVAutoRotation = new ImageView(ImgAutoRotation);
         IVAutoRotation.setFitWidth(taille);
         IVAutoRotation.setFitHeight(taille);
-        String positVert = position.split(":")[0];
-        String positHor = position.split(":")[1];
         HBDeplacements.getChildren().addAll(IVGauche, IVHaut, IVBas, IVDroite);
         HBZoom.getChildren().addAll(IVZoomPlus, IVZoomMoins);
         HBOutils.getChildren().addAll(IVPleinEcran, IVModeSouris, IVAutoRotation, IVInfo, IVAide);
@@ -893,7 +969,8 @@ public class GestionnaireInterfaceController {
         if (toggleBoutonRotation.equals("non")) {
             HBOutils.getChildren().remove(IVAutoRotation);
         }
-
+        String positVert = position.split(":")[0];
+        String positHor = position.split(":")[1];
         double LX = 0;
         double LY = 0;
         switch (positVert) {
@@ -1002,6 +1079,7 @@ public class GestionnaireInterfaceController {
                 + "dX=" + Math.round(dXBarre) + "\n"
                 + "dY=" + Math.round(dYBarre) + "\n"
                 + "visible=" + toggleBarreVisibilite + "\n"
+                + "suivantPrecedent=" + bSuivantPrecedent + "\n"
                 + "deplacement=" + toggleBarreDeplacements + "\n"
                 + "zoom=" + toggleBarreZoom + "\n"
                 + "outils=" + toggleBarreOutils + "\n"
@@ -1086,6 +1164,10 @@ public class GestionnaireInterfaceController {
                     styleBarre = valeur;
                     CBlisteStyle.setValue(valeur);
                     break;
+                case "suivantPrecedent":
+                    bSuivantPrecedent = (valeur.equals("true"));
+                    break;
+
                 case "styleHotspots":
                     styleHotSpots = valeur;
                     break;
@@ -1333,6 +1415,9 @@ public class GestionnaireInterfaceController {
         CPCouleurHotspots.setValue(couleurHotspots);
         CBListePolices.setValue(titrePoliceNom);
         SLOpacite.setValue(titreOpacite);
+        CBSuivantPrecedent.setSelected(bSuivantPrecedent);
+        fondSuivant.setVisible(bSuivantPrecedent);
+        fondPrecedent.setVisible(bSuivantPrecedent);
         SLTaillePolice.setValue(Double.parseDouble(titrePoliceTaille));
         SLTaille.setValue(titreTaille);
         APVisualisation.getChildren().remove(HBbarreBoutons);
