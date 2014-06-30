@@ -346,8 +346,6 @@ public class GestionnaireInterfaceController {
     public static PixelWriter PWnouveauxMasque;
 
     private void chargeBarre(String styleBarre, String strHotSpot, String strMA) {
-//        System.out.println("Masque " + strMA + " => HS " + strHotSpot);
-
         File repertBarre = new File(repertBoutonsPrincipal + File.separator + styleBarre);
         File[] Repertoires = repertBarre.listFiles(IMAGE_FILTER);
         int i = 0;
@@ -355,7 +353,6 @@ public class GestionnaireInterfaceController {
             if (!repert.isDirectory()) {
                 String nomFich = repert.getName();
                 String nomFichComplet = repert.getAbsolutePath();
-//                System.out.println("nom Fichier " + nomFichComplet + " =>" + nomFich);
                 imageBoutons[i] = new Image("file:" + nomFichComplet);
                 lisBoutons[i] = imageBoutons[i].getPixelReader();
                 int width = (int) imageBoutons[i].getWidth();
@@ -409,9 +406,7 @@ public class GestionnaireInterfaceController {
         nouveauxBoutons[nombreImagesBouton] = new WritableImage(width, height);
         PWnouveauxBoutons[nombreImagesBouton] = nouveauxBoutons[nombreImagesBouton].getPixelWriter();
         IVHotSpot = new ImageView(nouveauxBoutons[nombreImagesBouton]);
-//        System.out.println("file:" + repertMasques + File.separator + strMA + " nombreImagesBouton= " + nombreImagesBouton);
         imgMasque = new Image("file:" + repertMasques + File.separator + strMA);
-//        imageBoutons[nombreImagesBouton+1] = new Image("file:D:\\github\\editeurPanovisu\\theme\\MA\\MA.png");
 
         lisMasque = imgMasque.getPixelReader();
         width = (int) imgMasque.getWidth();
@@ -457,7 +452,6 @@ public class GestionnaireInterfaceController {
     }
 
     private void changeCouleurMasque(double couleurFinale, double sat, double bright) {
-//        System.out.println(" haut : "+imageBouttons[nombreImagesBouton + 1].getHeight()+"  long : "+imageBouttons[nombreImagesBouton + 1].getWidth());
         for (int y = 0; y < imgMasque.getHeight(); y++) {
             for (int x = 0; x < imgMasque.getWidth(); x++) {
                 Color color = lisMasque.getColor(x, y);
@@ -550,7 +544,23 @@ public class GestionnaireInterfaceController {
                 posY = IMVisualisation.getLayoutY() + dYBoussole;
                 break;
         }
-//        System.out.println(positionBoussole + " posX:" + posX + ", posY:" + posY);
+        switch (positionVignettes) {
+            case "bottom":
+                if (positYBoussole.equals("bottom")) {
+                    posY = IMVisualisation.getLayoutY() + IMVisualisation.getFitHeight() - imgBoussole.getFitHeight() - dYBoussole - APVisuVignettes.getPrefHeight();
+                }
+                break;
+            case "left":
+                if (positXBoussole.equals("left")) {
+                    posX = IMVisualisation.getLayoutX() + dXBoussole + APVisuVignettes.getPrefWidth();
+                }
+                break;
+            case "right":
+                if (positXBoussole.equals("right")) {
+                    posX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - dXBoussole - imgBoussole.getFitWidth() - APVisuVignettes.getPrefWidth();
+                }
+                break;
+        }
         imgBoussole.setLayoutX(posX);
         imgBoussole.setLayoutY(posY);
         imgAiguille.setLayoutX(posX + (imgBoussole.getFitWidth() - imgAiguille.getFitWidth()) / 2);
@@ -572,8 +582,6 @@ public class GestionnaireInterfaceController {
         IVMasque.setFitWidth(tailleMasque);
         IVMasque.setFitHeight(tailleMasque);
         IVMasque.setOpacity(opaciteMasque);
-//        System.out.println("file:" + repertMasques + File.separator + imageMasque+"taille Masque :"+IVMasque.getFitWidth());
-//        System.out.println("file:" + repertMasques + File.separator + imageMasque+"taille Masque :"+IVMasque.getFitWidth()+bAfficheMasque);
 //        IVMasque.setSmooth(true);
         String positXMasque = positionMasque.split(":")[1];
         String positYMasque = positionMasque.split(":")[0];
@@ -595,7 +603,6 @@ public class GestionnaireInterfaceController {
                 posY = IMVisualisation.getLayoutY() + dYMasque;
                 break;
         }
-//        System.out.println(positionMasque + " posX:" + posX + ", posY:" + posY);
         IVMasque.setLayoutX(posX);
         IVMasque.setLayoutY(posY);
 //
@@ -609,7 +616,6 @@ public class GestionnaireInterfaceController {
         imgGoogle.setVisible(bAfficheReseauxSociaux);
         imgFacebook.setVisible(bAfficheReseauxSociaux);
         imgEmail.setVisible(bAfficheReseauxSociaux);
-//        System.out.println(repertReseauxSociaux + imageReseauxSociauxTwitter);
         imgTwitter.setFitWidth(tailleReseauxSociaux);
         imgTwitter.setFitHeight(tailleReseauxSociaux);
         imgTwitter.setOpacity(opaciteReseauxSociaux);
@@ -640,26 +646,22 @@ public class GestionnaireInterfaceController {
                 posX = IMVisualisation.getLayoutX() + dXReseauxSociaux;
                 dX = imgEmail.getFitWidth() + 5;
                 if (bReseauxSociauxTwitter && bAfficheReseauxSociaux) {
-//                    System.out.println("posX " + posX + positXReseauxSociaux);
                     imgTwitter.setLayoutX(posX);
                     imgTwitter.setVisible(true);
                     posX += dX;
 
                 }
                 if (bReseauxSociauxGoogle && bAfficheReseauxSociaux) {
-//                    System.out.println("posX " + posX + positXReseauxSociaux);
                     imgGoogle.setLayoutX(posX);
                     imgGoogle.setVisible(true);
                     posX += dX;
                 }
                 if (bReseauxSociauxFacebook && bAfficheReseauxSociaux) {
-//                    System.out.println("posX " + posX + positXReseauxSociaux);
                     imgFacebook.setLayoutX(posX);
                     imgFacebook.setVisible(true);
                     posX += dX;
                 }
                 if (bReseauxSociauxEmail && bAfficheReseauxSociaux) {
-//                    System.out.println("posX " + posX + positXReseauxSociaux);
                     imgEmail.setLayoutX(posX);
                     imgEmail.setVisible(true);
                     posX += dX;
@@ -670,25 +672,21 @@ public class GestionnaireInterfaceController {
                 posX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - dXReseauxSociaux - imgEmail.getFitWidth();
                 dX = -(imgEmail.getFitWidth() + 5);
                 if (bReseauxSociauxEmail && bAfficheReseauxSociaux) {
-//                    System.out.println("posX " + posX + positXReseauxSociaux);
                     imgEmail.setLayoutX(posX);
                     imgEmail.setVisible(true);
                     posX += dX;
                 }
                 if (bReseauxSociauxFacebook && bAfficheReseauxSociaux) {
-//                    System.out.println("posX " + posX + positXReseauxSociaux);
                     imgFacebook.setLayoutX(posX);
                     imgFacebook.setVisible(true);
                     posX += dX;
                 }
                 if (bReseauxSociauxGoogle && bAfficheReseauxSociaux) {
-//                    System.out.println("posX " + posX + positXReseauxSociaux);
                     imgGoogle.setLayoutX(posX);
                     imgGoogle.setVisible(true);
                     posX += dX;
                 }
                 if (bReseauxSociauxTwitter && bAfficheReseauxSociaux) {
-//                    System.out.println("posX " + posX + positXReseauxSociaux);
                     imgTwitter.setLayoutX(posX);
                     imgTwitter.setVisible(true);
                     posX += dX;
@@ -703,7 +701,6 @@ public class GestionnaireInterfaceController {
                 posY = IMVisualisation.getLayoutY() + dYReseauxSociaux;
                 break;
         }
-//        System.out.println(positionReseauxSociaux + " posX:" + posX + ", posY:" + posY);
         imgTwitter.setLayoutY(posY);
         imgGoogle.setLayoutY(posY);
         imgFacebook.setLayoutY(posY);
@@ -764,7 +761,6 @@ public class GestionnaireInterfaceController {
                 posY = IMVisualisation.getLayoutY() + dYBoussole;
                 break;
         }
-//        System.out.println(positionBoussole + " posX:" + posX + ", posY:" + posY);
 
         APVisuVignettes.setVisible(bAfficheVignettes);
         if (bAfficheVignettes) {
@@ -996,6 +992,24 @@ public class GestionnaireInterfaceController {
                 LX = IMVisualisation.getLayoutX() + (IMVisualisation.getFitWidth() - HBbarreBoutons.getPrefWidth()) / 2 + dX;
                 break;
         }
+        switch (positionVignettes) {
+            case "bottom":
+                if (positVert.equals("bottom")) {
+                    LY = IMVisualisation.getLayoutY() + IMVisualisation.getFitHeight() - HBbarreBoutons.getPrefHeight() - dYBarre - APVisuVignettes.getPrefHeight();
+                }
+                break;
+            case "left":
+                if (positHor.equals("left")) {
+                    LX = IMVisualisation.getLayoutX() + dXBarre + APVisuVignettes.getPrefWidth();
+                }
+                break;
+            case "right":
+                if (positHor.equals("right")) {
+                    LX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - HBbarreBoutons.getPrefWidth() - dXBarre - APVisuVignettes.getPrefWidth();
+                }
+                break;
+        }
+
         HBbarreBoutons.setLayoutX(LX);
         HBbarreBoutons.setLayoutY(LY);
     }
@@ -1495,7 +1509,6 @@ public class GestionnaireInterfaceController {
         lstPolices.add("Times New Roman");
         lstPolices.add("Verdana");
         ObservableList<String> listePolices = FXCollections.observableList(lstPolices);
-//        System.out.println(EditeurPanovisu.locale);
         rb = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", EditeurPanovisu.locale);
         repertBoutonsPrincipal = repertAppli + File.separator + "theme/barreNavigation";
         repertHotSpots = repertAppli + File.separator + "theme/hotspots";
@@ -1507,9 +1520,6 @@ public class GestionnaireInterfaceController {
         ArrayList<String> listeHotSpots = listerHotSpots(repertHotSpots);
         ArrayList<String> listeBoussoles = listerBoussoles(repertBoussoles);
         ArrayList<String> listeMasques = listerMasques(repertMasques);
-//        listeBoussoles.stream().forEach((bous) -> {
-//            System.out.println(bous);
-//        });
         int nombreHotSpots = listeHotSpots.size();
         ImageView[] IVHotspots = new ImageView[nombreHotSpots];
         imageClaire = new Image("file:" + repertAppli + File.separator + "images/claire.jpg");
@@ -1754,7 +1764,6 @@ public class GestionnaireInterfaceController {
         SLOpacite.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
             if (newValue != null) {
                 titreOpacite = (double) newValue;
-//                System.out.println("valeur " + titreOpacite);
                 txtTitre.setOpacity(titreOpacite);
             }
         });

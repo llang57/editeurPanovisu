@@ -351,7 +351,6 @@ public class EditeurPanovisu extends Application {
                     String strPanoSuivant = "xml/" + nomPano.substring(nomPano.lastIndexOf(File.separator) + 1, nomPano.lastIndexOf(".")) + ".xml";
                     nomPano = panoramiquesProjet[panoPrecedent].getNomFichier();
                     String strPanoPrecedent = "xml/" + nomPano.substring(nomPano.lastIndexOf(File.separator) + 1, nomPano.lastIndexOf(".")) + ".xml";
-                    System.out.println(strPanoSuivant + " : " + strPanoPrecedent);
                     contenuFichier += "<!--  Bouton Suivant Precedent -->\n"
                             + "    <suivantPrecedent\n"
                             + "        suivant=\"" + strPanoSuivant + "\"            \n"
@@ -421,7 +420,6 @@ public class EditeurPanovisu extends Application {
                         String nXML = nomPano.substring(nomPano.lastIndexOf(File.separator) + 1, nomPano.lastIndexOf(".")) + ".xml";
                         ReadWriteImage.writeJpeg(panoramiquesProjet[j].getVignettePanoramique(),
                                 repertTemp + "/panos/" + nFichier, 1.0f, false, 0.0f);
-                        //System.out.println(nFichier + " : " + nXML);
                         contenuFichier
                                 += "        <imageVignette \n"
                                 + "            image=\"panos/" + nFichier + "\"\n"
@@ -568,7 +566,6 @@ public class EditeurPanovisu extends Application {
         }
         String nomPano = fichierImage.substring(fichierImage.lastIndexOf(File.separator) + 1, fichierImage.length());
         String ficImage = repertoire + File.separator + nomPano;
-        System.out.println("image : " + ficImage);
         try {
             ReadWriteImage.writeJpeg(img, ficImage, 0.9f, true, 0.2f);
         } catch (IOException ex) {
@@ -576,7 +573,6 @@ public class EditeurPanovisu extends Application {
         }
         double tailleImage = img.getWidth();
         int nombreNiveaux = (int) (Math.log(tailleImage / tailleNiv0) / Math.log(2.d)) + 1;
-        System.out.println("Taille de l'image : " + tailleImage + " Nombre de niveaux" + nombreNiveaux);
         for (int i = 0; i < nombreNiveaux; i++) {
             try {
                 double tailleNiveau = tailleImage * Math.pow(2.d, i) / Math.pow(2.d, nombreNiveaux);
@@ -588,7 +584,6 @@ public class EditeurPanovisu extends Application {
                 }
                 nomPano = fichierImage.substring(fichierImage.lastIndexOf(File.separator) + 1, fichierImage.length());
                 ficImage = repNiveau + File.separator + nomPano;
-                System.out.println("fichier " + ficImage);
                 ReadWriteImage.writeJpeg(img, ficImage, 0.9f, true, 0.2f);
             } catch (IOException ex) {
                 Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
@@ -605,7 +600,6 @@ public class EditeurPanovisu extends Application {
         }
         String nomPano = fichierImage.substring(fichierImage.lastIndexOf(File.separator) + 1, fichierImage.length());
         String ficImage = repertoire + File.separator + nomPano;
-        System.out.println("image : " + ficImage);
         try {
             ReadWriteImage.writeJpeg(img, ficImage, 0.9f, true, 0.2f);
         } catch (IOException ex) {
@@ -613,7 +607,6 @@ public class EditeurPanovisu extends Application {
         }
         double tailleImage = img.getWidth();
         int nombreNiveaux = (int) (Math.log(tailleImage / tailleNiv0) / Math.log(2.d)) + 1;
-        System.out.println("Taille de l'image : " + tailleImage + " Nombre de niveaux" + nombreNiveaux);
         for (int i = 0; i < nombreNiveaux; i++) {
             try {
                 double tailleNiveau = tailleImage * Math.pow(2.d, i) / Math.pow(2.d, nombreNiveaux);
@@ -625,7 +618,6 @@ public class EditeurPanovisu extends Application {
                 }
                 nomPano = fichierImage.substring(fichierImage.lastIndexOf(File.separator) + 1, fichierImage.length());
                 ficImage = repNiveau + File.separator + nomPano;
-                System.out.println("fichier " + ficImage);
                 ReadWriteImage.writeJpeg(img, ficImage, 0.9f, true, 0.2f);
             } catch (IOException ex) {
                 Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
@@ -862,7 +854,6 @@ public class EditeurPanovisu extends Application {
         }
         derniersProjets.getItems().clear();
         for (int i = 0; i < nombreHistoFichiers; i++) {
-            //System.out.println("histo fichier (" + i + ") = " + histoFichiers[i]);
             if (histoFichiers[i] != null) {
                 MenuItem menuDerniersFichiers = new MenuItem(histoFichiers[i]);
                 derniersProjets.getItems().add(menuDerniersFichiers);
@@ -1753,7 +1744,6 @@ public class EditeurPanovisu extends Application {
         APlistePano.setPrefHeight(taille);
         APlistePano.setMinWidth(540);
         APlistePano.setMinHeight(taille);
-        //System.out.println(j + "=>" + taille);
         ImageView IVClose = new ImageView(new Image("file:" + repertAppli + File.separator + "images/ferme.png", 20, 20, true, true));
         IVClose.setLayoutX(2);
         IVClose.setLayoutY(5);
@@ -3247,6 +3237,7 @@ public class EditeurPanovisu extends Application {
         rb = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", locale);
         stPrincipal = primaryStage;
         stPrincipal.setTitle("PanoVisu v" + numVersion);
+        //AquaFx.style();
         setUserAgentStylesheet(STYLESHEET_MODENA);
         //setUserAgentStylesheet(repertAppli + File.separator + "test.css");
         primaryStage.setMaximized(true);
@@ -3314,10 +3305,8 @@ public class EditeurPanovisu extends Application {
         System.setProperty("file.encoding", "UTF-8");
         numVersion = pack.getImplementationVersion();
         systemeExploitation = System.getProperty("os.name");
-        //System.out.println("Systeme : " + systemeExploitation);
         Properties properties = System.getProperties();
-        properties.list(System.out);
-        //System.out.println(numVersion);
+        //properties.list(System.out);
         launch(args);
     }
 }
