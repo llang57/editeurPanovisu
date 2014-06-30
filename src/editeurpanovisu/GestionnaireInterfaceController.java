@@ -1577,7 +1577,7 @@ public class GestionnaireInterfaceController {
         double LX = (APVisualisation.getPrefWidth() - IMVisualisation.getFitWidth()) / 2;
         IMVisualisation.setLayoutX(LX);
         IMVisualisation.setLayoutY(20);
-        txtTitre.setMinSize(500, 30);
+        txtTitre.setMinSize(tailleMax, 30);
         txtTitre.setPadding(new Insets(5));
         txtTitre.setStyle("-fx-background-color : #000;-fx-border-radius: 5px;");
         txtTitre.setAlignment(Pos.CENTER);
@@ -2441,10 +2441,10 @@ public class GestionnaireInterfaceController {
             couleurMasque = CPCouleurMasques.getValue();
             changeCouleurMasque(couleurMasque.getHue(), couleurMasque.getSaturation(), couleurMasque.getBrightness());
         });
-        Label lblCouleurMasque = new Label(rb.getString("interface.couleurBarre"));
-        lblCouleurMasque.setLayoutX(150);
+        Label lblCouleurMasque = new Label(rb.getString("interface.couleurMasque"));
+        lblCouleurMasque.setLayoutX(170);
         lblCouleurMasque.setLayoutY(40);
-        CPCouleurMasques.setLayoutX(170);
+        CPCouleurMasques.setLayoutX(180);
         CPCouleurMasques.setLayoutY(60);
         APMasque.getChildren().addAll(lblCouleurMasque, CPCouleurMasques);
 
