@@ -18,9 +18,32 @@
             <feColorMatrix type="saturate" values = "0.5"/>
             <!--<feColorMatrix type="matrix" values="0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0"/>-->
         </filter>
-        
+        <filter id='gris10'>
+            <feColorMatrix in='SourceGraphic' type='saturate' values='0.1' />
+        </filter>
+        <filter id='gris20'>
+            <feColorMatrix in='SourceGraphic' type='saturate' values='0.2' />
+        </filter>
+        <filter id='gris30'>
+            <feColorMatrix in='SourceGraphic' type='saturate' values='0.3' />
+        </filter>
+        <filter id='gris40'>
+            <feColorMatrix in='SourceGraphic' type='saturate' values='0.4' />
+        </filter>        
         <filter id='gris50'>
             <feColorMatrix in='SourceGraphic' type='saturate' values='0.5' />
+        </filter>
+        <filter id='gris60'>
+            <feColorMatrix in='SourceGraphic' type='saturate' values='0.6' />
+        </filter>
+        <filter id='gris70'>
+            <feColorMatrix in='SourceGraphic' type='saturate' values='0.7' />
+        </filter>
+        <filter id='gris80'>
+            <feColorMatrix in='SourceGraphic' type='saturate' values='0.8' />
+        </filter>
+        <filter id='gris90'>
+            <feColorMatrix in='SourceGraphic' type='saturate' values='0.9' />
         </filter>
         
         <filter id="gamma+"

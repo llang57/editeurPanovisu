@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
-import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -45,7 +44,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -129,6 +127,7 @@ public class EditeurPanovisu extends Application {
     static public String repertAppli;
     static private String repertTemp;
     static private String repertPanos;
+    static private String repertHSImages = "";
     /**
      * Répertoire de sauvegarde du projet
      */
@@ -233,13 +232,16 @@ public class EditeurPanovisu extends Application {
                     repertTemp + "/panovisu/images");
             copieFichierRepertoire(repertAppli + File.separator + "panovisu" + File.separator + "images" + File.separator + "suivant.png",
                     repertTemp + "/panovisu/images");
-            for (int i = 0; i < gestionnaireInterface.nombreImagesBouton; i++) {
+            for (int i = 0; i < gestionnaireInterface.nombreImagesBouton-1; i++) {
                 ReadWriteImage.writePng(gestionnaireInterface.nouveauxBoutons[i],
                         boutonRepert.getAbsolutePath() + File.separator + gestionnaireInterface.nomImagesBoutons[i],
                         false, 0.f);
             }
-            ReadWriteImage.writePng(gestionnaireInterface.nouveauxBoutons[gestionnaireInterface.nombreImagesBouton],
+            ReadWriteImage.writePng(gestionnaireInterface.nouveauxBoutons[gestionnaireInterface.nombreImagesBouton-1],
                     hotspotsRepert.getAbsolutePath() + File.separator + "hotspot.png",
+                    false, 0.f);
+            ReadWriteImage.writePng(gestionnaireInterface.nouveauxBoutons[gestionnaireInterface.nombreImagesBouton],
+                    hotspotsRepert.getAbsolutePath() + File.separator + "hotspotImage.png",
                     false, 0.f);
             ReadWriteImage.writePng(gestionnaireInterface.nouveauxMasque,
                     MARepert.getAbsolutePath() + File.separator + "MA.png",
@@ -447,10 +449,31 @@ public class EditeurPanovisu extends Application {
                     String txtAnime = (HS.isAnime()) ? "true" : "false";
                     contenuFichier
                             += "      <point \n"
+                            + "           type=\"panoramique\"\n"
                             + "           long=\"" + longit + "\"\n"
                             + "           lat=\"" + HS.getLatitude() + "\"\n"
                             + "           image=\"panovisu/images/hotspots/hotspot.png\"\n"
                             + "           xml=\"xml/" + HS.getFichierXML() + "\"\n"
+                            + "           info=\"" + HS.getInfo() + "\"\n"
+                            + "           anime=\"" + txtAnime + "\"\n"
+                            + "      />\n";
+                }
+                for (int j = 0; j < panoramiquesProjet[i].getNombreHotspotImage(); j++) {
+                    HotspotImage HS = panoramiquesProjet[i].getHotspotImage(j);
+                    double longit;
+                    if (panoramiquesProjet[i].getTypePanoramique().equals(Panoramique.SPHERE)) {
+                        longit = HS.getLongitude() - 180;
+                    } else {
+                        longit = HS.getLongitude() + 90;
+                    }
+                    String txtAnime = (HS.isAnime()) ? "true" : "false";
+                    contenuFichier
+                            += "      <point \n"
+                            + "           type=\"image\"\n"
+                            + "           long=\"" + longit + "\"\n"
+                            + "           lat=\"" + HS.getLatitude() + "\"\n"
+                            + "           image=\"panovisu/images/hotspots/hotspotImage.png\"\n"
+                            + "           img=\"images/" + HS.getLienImg()+ "\"\n"
                             + "           info=\"" + HS.getInfo() + "\"\n"
                             + "           anime=\"" + txtAnime + "\"\n"
                             + "      />\n";
@@ -489,7 +512,7 @@ public class EditeurPanovisu extends Application {
                     + "\n"
                     + "            $(function() {\n"
                     + "                $(window).resize(function(){\n"
-                    + "                    $(\"#article\").height($(window).height()-10);\n"
+                    + "                    $(\"article\").height($(window).height()-10);\n"
                     + "                    $(\"#pano\").height($(window).height()-10);\n"
                     + "                })\n"
                     + "                $(\"article\").height($(window).height()-10);\n"
@@ -978,6 +1001,7 @@ public class EditeurPanovisu extends Application {
             contenuFichier += "[Panoramique=>"
                     + "fichier:" + panoramiquesProjet[i].getNomFichier()
                     + ";nb:" + panoramiquesProjet[i].getNombreHotspots()
+                    + ";nbImg:" + panoramiquesProjet[i].getNombreHotspotImage()
                     + ";titre:" + panoramiquesProjet[i].getTitrePanoramique() + ""
                     + ";type:" + panoramiquesProjet[i].getTypePanoramique()
                     + ";afficheInfo:" + panoramiquesProjet[i].isAfficheInfo()
@@ -993,6 +1017,18 @@ public class EditeurPanovisu extends Application {
                         + ";latitude:" + HS.getLatitude()
                         + ";image:" + HS.getFichierImage()
                         + ";xml:" + HS.getFichierXML()
+                        + ";info:" + HS.getInfo()
+                        + ";anime:" + HS.isAnime()
+                        + "]\n";
+            }
+            for (int j = 0; j < panoramiquesProjet[i].getNombreHotspotImage(); j++) {
+                HotspotImage HS = panoramiquesProjet[i].getHotspotImage(j);
+                contenuFichier += "   [hotspotImage==>"
+                        + "longitude:" + HS.getLongitude()
+                        + ";latitude:" + HS.getLatitude()
+                        + ";image:" + HS.getFichierImage()
+                        + ";img:" + HS.getLienImg()
+                        + ";urlImg:" + HS.getUrlImage()
                         + ";info:" + HS.getInfo()
                         + ";anime:" + HS.isAnime()
                         + "]\n";
@@ -1336,6 +1372,7 @@ public class EditeurPanovisu extends Application {
         String[] elementsLigne;
         String[] typeElement;
         int nbHS = 0;
+        int nbImg = 0;
         for (int kk = 1; kk < lignes.length; kk++) {
             ligne = lignes[kk];
             elementsLigne = ligne.split(";", 10);
@@ -1417,6 +1454,9 @@ public class EditeurPanovisu extends Application {
                         case "nb":
                             nbHS = Integer.parseInt(valeur[1]);
                             break;
+                        case "nbImg":
+                            nbImg = Integer.parseInt(valeur[1]);
+                            break;
                         case "regardX":
                             panoramiquesProjet[panoActuel].setLookAtX(Double.parseDouble(valeur[1]));
                             break;
@@ -1480,6 +1520,80 @@ public class EditeurPanovisu extends Application {
                     }
                     panoramiquesProjet[panoActuel].addHotspot(HS);
                 }
+
+                for (int jj = 0; jj < nbImg; jj++) {
+                    kk++;
+                    ligne = lignes[kk];
+                    elementsLigne = ligne.split(";", 10);
+                    typeElement = elementsLigne[0].split(">", 2);
+                    typeElement[0] = typeElement[0].replace(" ", "").replace("=", "").replace("[", "");
+                    elementsLigne[0] = typeElement[1];
+                    HotspotImage HS = new HotspotImage();
+                    for (int i = 0; i < elementsLigne.length; i++) {
+                        elementsLigne[i] = elementsLigne[i].replace("]", "");
+                        String[] valeur = elementsLigne[i].split(":", 2);
+                        switch (valeur[0]) {
+                            case "longitude":
+                                HS.setLongitude(Double.parseDouble(valeur[1]));
+                                break;
+                            case "latitude":
+                                HS.setLatitude(Double.parseDouble(valeur[1]));
+                                break;
+                            case "image":
+                                if ("null".equals(valeur[1])) {
+                                    HS.setFichierImage(null);
+                                } else {
+                                    HS.setFichierImage(valeur[1]);
+                                }
+                                break;
+                            case "info":
+                                if ("null".equals(valeur[1])) {
+                                    HS.setInfo(null);
+                                } else {
+                                    HS.setInfo(valeur[1]);
+                                }
+                                break;
+                            case "img":
+                                if ("null".equals(valeur[1])) {
+                                    HS.setLienImg(null);
+                                } else {
+                                    HS.setLienImg(valeur[1]);
+                                }
+                                break;
+                            case "urlImg":
+                                if ("null".equals(valeur[1])) {
+                                    HS.setUrlImage(null);
+                                } else {
+                                    HS.setUrlImage(valeur[1]);
+                                }
+                                String nmFich = valeur[1];
+                                File imgPano = new File(nmFich);
+                                File imageRepert = new File(repertTemp + File.separator + "images");
+
+                                if (!imageRepert.exists()) {
+                                    imageRepert.mkdirs();
+                                }
+                                repertPanos = imageRepert.getAbsolutePath();
+                                try {
+                                    copieFichierRepertoire(imgPano.getPath(), repertPanos);
+                                } catch (IOException ex) {
+                                    Logger.getLogger(EditeurPanovisu.class
+                                            .getName()).log(Level.SEVERE, null, ex);
+                                }
+
+                                break;
+                            case "anime":
+                                if (valeur[1].equals("true")) {
+                                    HS.setAnime(true);
+                                } else {
+                                    HS.setAnime(false);
+                                }
+                                break;
+                        }
+                    }
+                    panoramiquesProjet[panoActuel].addHotspotImage(HS);
+                }
+
             }
             if ("Interface".equals(typeElement[0])) {
                 String[] elts = elementsLigne[0].replace("]", "").split("\n");
@@ -1658,6 +1772,10 @@ public class EditeurPanovisu extends Application {
             Node pt = (Node) pano.lookup("#point" + i);
             pano.getChildren().remove(pt);
         }
+        for (int i = 0; i < numImages; i++) {
+            Node pt = (Node) pano.lookup("#img" + i);
+            pano.getChildren().remove(pt);
+        }
     }
 
     /**
@@ -1789,6 +1907,16 @@ public class EditeurPanovisu extends Application {
                 panoramiquesProjet[panoActuel].getHotspot(i).setAnime(false);
             }
         }
+        for (int i = 0; i < panoramiquesProjet[panoActuel].getNombreHotspotImage(); i++) {
+            TextArea txtTexteHS = (TextArea) scene.lookup("#txtHSImage" + i);
+            panoramiquesProjet[panoActuel].getHotspotImage(i).setInfo(txtTexteHS.getText());
+            CheckBox cbAnime = (CheckBox) scene.lookup("#animeImage" + i);
+            if (cbAnime.isSelected()) {
+                panoramiquesProjet[panoActuel].getHotspotImage(i).setAnime(true);
+            } else {
+                panoramiquesProjet[panoActuel].getHotspotImage(i).setAnime(false);
+            }
+        }
 
     }
 
@@ -1818,7 +1946,7 @@ public class EditeurPanovisu extends Application {
             chLat1 = "Lat : " + String.format("%.1f", panoramiquesProjet[numPano].getHotspot(o).getLatitude());
             lbl = new Label(chLong1 + "        " + chLat1);
             lbl.setPadding(new Insets(5, 10, 5, 5));
-            lblPoint = new Label("Point n°" + o);
+            lblPoint = new Label("Point n°" + (o + 1));
             lblPoint.setPadding(new Insets(5, 10, 5, 5));
             lblPoint.setStyle("-fx-background-color : #333;");
             lblPoint.setTextFill(Color.WHITE);
@@ -1862,6 +1990,53 @@ public class EditeurPanovisu extends Application {
             vbPanneauHS.getChildren().addAll(lblTexteHS, txtTexteHS, cbAnime, sep1);
             vb1.getChildren().addAll(pannneauHS, sep);
         }
+        for (int o = 0; o < panoramiquesProjet[numPano].getNombreHotspotImage(); o++) {
+            VBox vbPanneauHS = new VBox();
+            Pane pannneauHS = new Pane(vbPanneauHS);
+            panneauHotSpots.setId("HSImg" + o);
+            String chLong1, chLat1;
+
+            chLong1 = "Long : " + String.format("%.1f", panoramiquesProjet[numPano].getHotspotImage(o).getLongitude());
+            chLat1 = "Lat : " + String.format("%.1f", panoramiquesProjet[numPano].getHotspotImage(o).getLatitude());
+            lbl = new Label(chLong1 + "        " + chLat1);
+            lbl.setPadding(new Insets(5, 10, 5, 5));
+            lblPoint = new Label("Image n°" + (o + 1));
+            lblPoint.setPadding(new Insets(5, 10, 5, 5));
+            lblPoint.setStyle("-fx-background-color : #666;");
+            lblPoint.setTextFill(Color.WHITE);
+            Separator sp = new Separator(Orientation.HORIZONTAL);
+            sp.setStyle("-fx-border-color : #777;");
+            sp.setPrefWidth(300);
+            pannneauHS.setStyle("-fx-border-color :#777;-fx-border-radius : 3px;-fx-background-color : #ccc;");
+
+            pannneauHS.setPrefWidth(300);
+            pannneauHS.setTranslateX(5);
+            vbPanneauHS.getChildren().addAll(lblPoint, sp, lbl);
+            Label lblLien = new Label("Image choisie :");
+            String f1XML = panoramiquesProjet[numPano].getHotspotImage(o).getLienImg();
+            ImageView IMChoisie = new ImageView(new Image("file:" + repertTemp + File.separator + "images" + File.separator + f1XML, 100, -1, true, true));
+            IMChoisie.setTranslateX(100);
+            vbPanneauHS.getChildren().addAll(lblLien, IMChoisie, sep);
+            Label lblTexteHS = new Label("Texte du Hotspot");
+            TextArea txtTexteHS = new TextArea();
+            if (panoramiquesProjet[numPano].getHotspotImage(o).getInfo() != null) {
+                txtTexteHS.setText(panoramiquesProjet[numPano].getHotspotImage(o).getInfo());
+            }
+            txtTexteHS.setId("txtHSImage" + o);
+            txtTexteHS.setPrefSize(200, 25);
+            txtTexteHS.setMaxSize(200, 20);
+            txtTexteHS.setTranslateX(60);
+            CheckBox cbAnime = new CheckBox("HostSpot Animé");
+            cbAnime.setId("animeImage" + o);
+            if (panoramiquesProjet[numPano].getHotspotImage(o).isAnime()) {
+                cbAnime.setSelected(true);
+            }
+            cbAnime.setPadding(new Insets(5));
+            cbAnime.setTranslateX(60);
+            vbPanneauHS.getChildren().addAll(lblTexteHS, txtTexteHS, cbAnime, sep1);
+            vb1.getChildren().addAll(pannneauHS, sep);
+        }
+
         Button btnValider = new Button("Valide HotSpots");
         btnValider.setTranslateX(200);
         btnValider.setTranslateY(5);
@@ -1881,8 +2056,8 @@ public class EditeurPanovisu extends Application {
         lbl.setId("labels");
         outils.getChildren().add(lbl);
         numPoints = panoramiquesProjet[panoActuel].getNombreHotspots();
-        numImages = panoramiquesProjet[panoActuel].getNombreHSImage();
-        numHTML = panoramiquesProjet[panoActuel].getNombreHSHTML();
+        numImages = panoramiquesProjet[panoActuel].getNombreHotspotImage();
+        numHTML = panoramiquesProjet[panoActuel].getNombreHotspotHTML();
     }
 
     private AnchorPane afficheLegende() {
@@ -1971,7 +2146,7 @@ public class EditeurPanovisu extends Application {
         point.setId("point" + i);
         point.setCursor(Cursor.DEFAULT);
         pano.getChildren().add(point);
-        Tooltip.install(point, new Tooltip("point n° " + i));
+        Tooltip.install(point, new Tooltip("point n° " + (i + 1)));
 
         point.setOnMouseClicked((MouseEvent me1) -> {
             double mouseX = me1.getSceneX();
@@ -2024,12 +2199,77 @@ public class EditeurPanovisu extends Application {
 
     /**
      *
+     * @param i
+     * @param longitude
+     * @param latitude
+     */
+    private void afficheHSImage(int i, double longitude, double latitude) {
+        double largeur = imagePanoramique.getFitWidth();
+        double X = (longitude + 180.0d) * largeur / 360.0d;
+        double Y = (90.0d - latitude) * largeur / 360.0d;
+        Circle point = new Circle(X, Y, 5);
+        point.setFill(Color.BLUE);
+        point.setStroke(Color.YELLOW);
+        point.setId("img" + i);
+        point.setCursor(Cursor.DEFAULT);
+        pano.getChildren().add(point);
+        Tooltip.install(point, new Tooltip("image n° " + (i + 1)));
+
+        point.setOnMouseClicked((MouseEvent me1) -> {
+            String chPoint = point.getId();
+            chPoint = chPoint.substring(3, chPoint.length());
+            int numeroPoint = Integer.parseInt(chPoint);
+            Node pt;
+            pt = (Node) pano.lookup("#img" + chPoint);
+
+            if (me1.isControlDown()) {
+                valideHS();
+                dejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+                pano.getChildren().remove(pt);
+
+                for (int o = numeroPoint + 1; o < numImages; o++) {
+                    pt = (Node) pano.lookup("#img" + Integer.toString(o));
+                    pt.setId("img" + Integer.toString(o - 1));
+                }
+                /**
+                 * on retire les anciennes indication de HS
+                 */
+                retireAffichageHotSpots();
+                numImages--;
+                panoramiquesProjet[panoActuel].removeHotspotImage(numeroPoint);
+                /**
+                 * On les crée les nouvelles
+                 */
+                ajouteAffichageHotspots();
+                me1.consume();
+            } else {
+                me1.consume();
+            }
+
+        });
+    }
+
+    /**
+     *
      */
     private void ajouteAffichagePointsHotspots() {
         for (int i = 0; i < panoramiquesProjet[panoActuel].getNombreHotspots(); i++) {
             double longitude = panoramiquesProjet[panoActuel].getHotspot(i).getLongitude();
             double latitude = panoramiquesProjet[panoActuel].getHotspot(i).getLatitude();
             afficheHS(i, longitude, latitude);
+        }
+
+    }
+
+    /**
+     *
+     */
+    private void ajouteAffichagePointsHotspotsImage() {
+        for (int i = 0; i < panoramiquesProjet[panoActuel].getNombreHotspotImage(); i++) {
+            double longitude = panoramiquesProjet[panoActuel].getHotspotImage(i).getLongitude();
+            double latitude = panoramiquesProjet[panoActuel].getHotspotImage(i).getLatitude();
+            afficheHSImage(i, longitude, latitude);
         }
 
     }
@@ -2126,7 +2366,7 @@ public class EditeurPanovisu extends Application {
         point.setId("point" + numPoints);
         point.setCursor(Cursor.DEFAULT);
         pano.getChildren().add(point);
-        Tooltip.install(point, new Tooltip("point n°" + numPoints));
+        Tooltip.install(point, new Tooltip("point n°" + (numPoints + 1)));
         HotSpot HS = new HotSpot();
         HS.setLongitude(longitude);
         HS.setLatitude(latitude);
@@ -2216,18 +2456,53 @@ public class EditeurPanovisu extends Application {
         point.setId("img" + numImages);
         point.setCursor(Cursor.DEFAULT);
         pano.getChildren().add(point);
-        Tooltip.install(point, new Tooltip("Image n°" + numImages));
+        Tooltip.install(point, new Tooltip("Image n°" + (numImages + 1)));
 
-        HSImage HS = new HSImage();
-        HS.setLongitude(longitude);
-        HS.setLatitude(latitude);
-        panoramiquesProjet[panoActuel].addHSImage(HS);
-        retireAffichageHotSpots();
-        Pane affHS1 = affichageHS(listePano(panoActuel), panoActuel);
-        affHS1.setId("labels");
-        outils.getChildren().add(affHS1);
 //
-        numImages++;
+        File repert;
+        if (repertHSImages.equals("")) {
+            repert = new File(currentDir + File.separator);
+        } else {
+            repert = new File(repertHSImages);
+        }
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extFilterImages = new FileChooser.ExtensionFilter("Fichiers Images (jpg, bmp, png)", "*.jpg", "*.bmp", "*.png");
+
+        fileChooser.setInitialDirectory(repert);
+        fileChooser.getExtensionFilters().addAll(extFilterImages);
+
+        File fichierImage = fileChooser.showOpenDialog(null);
+        if (fichierImage != null) {
+            repertHSImages = fichierImage.getParent();
+            numImages++;
+            HotspotImage HS = new HotspotImage();
+            HS.setLongitude(longitude);
+            HS.setLatitude(latitude);
+            HS.setUrlImage(fichierImage.getAbsolutePath());
+            HS.setLienImg(fichierImage.getName());
+            HS.setInfo(fichierImage.getName().split("\\.")[0]);
+            File repertImage = new File(repertTemp + File.separator + "images");
+            if (!repertImage.exists()) {
+                repertImage.mkdirs();
+            }
+            try {
+                copieFichierRepertoire(fichierImage.getAbsolutePath(), repertImage.getAbsolutePath());
+            } catch (IOException ex) {
+                Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            panoramiquesProjet[panoActuel].addHotspotImage(HS);
+            retireAffichageHotSpots();
+            Pane affHS1 = affichageHS(listePano(panoActuel), panoActuel);
+            affHS1.setId("labels");
+            outils.getChildren().add(affHS1);
+
+        } else {
+            String chPoint = point.getId();
+            chPoint = chPoint.substring(3, chPoint.length());
+            Node pt = (Node) pano.lookup("#img" + chPoint);
+            pano.getChildren().remove(pt);
+        }
+
 //        if (nombrePanoramiques > 1) {
 //            AnchorPane listePanoVig = afficherListePanosVignettes(panoramiquesProjet[panoActuel].getNombreHotspots() - 1);
 //            if (mouseX + (nombrePanoramiques - 1) * 130 > pano.getWidth()) {
@@ -2260,13 +2535,13 @@ public class EditeurPanovisu extends Application {
                  */
                 retireAffichageHotSpots();
                 numImages--;
-                panoramiquesProjet[panoActuel].removeHSImage(numeroPoint);
+                panoramiquesProjet[panoActuel].removeHotspotImage(numeroPoint);
                 /**
                  * On les crée les nouvelles
                  */
                 ajouteAffichageHotspots();
                 me1.consume();
-//            } else {
+            } else {
 //                valideHS();
 //                String chPoint = point.getId();
 //                chPoint = chPoint.substring(5, chPoint.length());
@@ -2282,7 +2557,7 @@ public class EditeurPanovisu extends Application {
 //                    listePanoVig.setLayoutY(mouseY);
 //                    pano.getChildren().add(listePanoVig);
 //                }
-//                me1.consume();
+                me1.consume();
 //
             }
         });
@@ -2492,6 +2767,8 @@ public class EditeurPanovisu extends Application {
         affichePoV(panoramiquesProjet[numPanochoisi].getLookAtX(), panoramiquesProjet[numPanochoisi].getLookAtY());
         afficheNord(panoramiquesProjet[numPanochoisi].getZeroNord());
         ajouteAffichagePointsHotspots();
+        ajouteAffichagePointsHotspotsImage();
+
         ajouteAffichageLignes();
         afficheInfoPano();
     }

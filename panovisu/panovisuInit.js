@@ -9,6 +9,7 @@ var numeroPano = 0;
 function include(fileName) {
     document.write("<script type='text/javascript' src='" + fileName + "'></script>");
 }
+
 /**
  * 
  * @param {type} images
@@ -62,6 +63,7 @@ function ajoutePano(parametres) {
     numeroPano += 1;
     var pano = new panovisu(numeroPano);
     pano.initialisePano(parametres);
+    return pano;
 }
 
 include("panovisu/libs/screenfull.js");

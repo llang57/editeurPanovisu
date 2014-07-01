@@ -29,6 +29,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
@@ -66,11 +67,19 @@ public class GestionnaireInterfaceController {
     /**
      *
      */
+    public static final String styleHotSpotImageDefaut = "photo2.png";
+    /**
+     *
+     */
     public static String positionBarre = "bottom:center";
     /**
      *
      */
     public static String styleHotSpots = styleHotSpotDefaut;
+    /**
+     *
+     */
+    public static String styleHotSpotImages = styleHotSpotImageDefaut;
 
     /**
      *
@@ -291,10 +300,12 @@ public class GestionnaireInterfaceController {
     private static ImageView IVGauche;
     private static ImageView IVDroite;
     private static ImageView IVHotSpot;
+    private static ImageView IVHotSpotImage;
     private static ComboBox CBlisteStyle;
 
     private static String repertBoutonsPrincipal;
     private static String repertHotSpots;
+    private static String repertHotSpotsPhoto;
     private static String repertBoussoles;
     private static RadioButton RBTopLeft;
     private static RadioButton RBTopCenter;
@@ -406,6 +417,15 @@ public class GestionnaireInterfaceController {
         nouveauxBoutons[nombreImagesBouton] = new WritableImage(width, height);
         PWnouveauxBoutons[nombreImagesBouton] = nouveauxBoutons[nombreImagesBouton].getPixelWriter();
         IVHotSpot = new ImageView(nouveauxBoutons[nombreImagesBouton]);
+        nombreImagesBouton = i + 1;
+        imageBoutons[nombreImagesBouton] = new Image("file:" + repertHotSpotsPhoto + File.separator + styleHotSpotImages);
+        lisBoutons[nombreImagesBouton] = imageBoutons[nombreImagesBouton].getPixelReader();
+        width = (int) imageBoutons[nombreImagesBouton].getWidth();
+        height = (int) imageBoutons[nombreImagesBouton].getHeight();
+        nouveauxBoutons[nombreImagesBouton] = new WritableImage(width, height);
+        PWnouveauxBoutons[nombreImagesBouton] = nouveauxBoutons[nombreImagesBouton].getPixelWriter();
+        IVHotSpotImage = new ImageView(nouveauxBoutons[nombreImagesBouton]);
+
         imgMasque = new Image("file:" + repertMasques + File.separator + strMA);
 
         lisMasque = imgMasque.getPixelReader();
@@ -417,6 +437,7 @@ public class GestionnaireInterfaceController {
 
         changeCouleurBarre(couleurBoutons.getHue(), couleurBoutons.getSaturation(), couleurBoutons.getBrightness());
         changeCouleurHS(couleurHotspots.getHue(), couleurHotspots.getSaturation(), couleurHotspots.getBrightness());
+        changeCouleurHSPhoto(couleurHotspots.getHue(), couleurHotspots.getSaturation(), couleurHotspots.getBrightness());
         changeCouleurMasque(couleurMasque.getHue(), couleurMasque.getSaturation(), couleurMasque.getBrightness());
 
     }
@@ -475,6 +496,29 @@ public class GestionnaireInterfaceController {
     }
 
     private void changeCouleurHS(double couleurFinale, double sat, double bright) {
+        for (int y = 0; y < imageBoutons[nombreImagesBouton - 1].getHeight(); y++) {
+            for (int x = 0; x < imageBoutons[nombreImagesBouton - 1].getWidth(); x++) {
+                Color color = lisBoutons[nombreImagesBouton - 1].getColor(x, y);
+                double brightness = color.getBrightness();
+                //double hue = color.getHue() / 360.0;  //getHue() return 0.0-360.0
+                double saturation = color.getSaturation();
+                double opacity = color.getOpacity();
+                Color couleur;
+                if ((sat < 0.02) && (saturation > 0.05)) {
+                    couleur = Color.hsb(couleurFinale, sat, brightness * 0.5 + bright * 0.5, opacity);
+                } else {
+                    if (saturation > 0.05) {
+                        couleur = Color.hsb(couleurFinale, saturation * 0.5 + sat * 0.5, brightness * 0.5 + bright * 0.5, opacity);
+                    } else {
+                        couleur = Color.hsb(couleurFinale, saturation, brightness, opacity);
+                    }
+                }
+                PWnouveauxBoutons[nombreImagesBouton - 1].setColor(x, y, couleur);
+            }
+        }
+    }
+
+    private void changeCouleurHSPhoto(double couleurFinale, double sat, double bright) {
         for (int y = 0; y < imageBoutons[nombreImagesBouton].getHeight(); y++) {
             for (int x = 0; x < imageBoutons[nombreImagesBouton].getWidth(); x++) {
                 Color color = lisBoutons[nombreImagesBouton].getColor(x, y);
@@ -867,6 +911,12 @@ public class GestionnaireInterfaceController {
         IVHotSpot.setPreserveRatio(true);
         IVHotSpot.setLayoutX(510);
         IVHotSpot.setLayoutY(310);
+        Tooltip.install(IVHotSpot, new Tooltip("Hotspot panoramique"));
+        IVHotSpotImage.setFitWidth(30);
+        IVHotSpotImage.setPreserveRatio(true);
+        IVHotSpotImage.setLayoutX(410);
+        IVHotSpotImage.setLayoutY(310);
+        Tooltip.install(IVHotSpotImage, new Tooltip("Hotspot Photo"));
         int nombreBoutons = 11;
         if (toggleBarreDeplacements.equals("non")) {
             nombreBoutons -= 4;
@@ -908,7 +958,7 @@ public class GestionnaireInterfaceController {
         if (toggleBarreOutils.equals("non")) {
             HBbarreBoutons.getChildren().remove(HBOutils);
         }
-        APVisualisation.getChildren().addAll(HBbarreBoutons, IVHotSpot);
+        APVisualisation.getChildren().addAll(HBbarreBoutons, IVHotSpot, IVHotSpotImage);
 //        ImgHaut = new Image(repertBoutons + File.separator + "haut.png");
 //        ImgBas = new Image(repertBoutons + File.separator + "bas.png");
 //        ImgGauche = new Image(repertBoutons + File.separator + "gauche.png");
@@ -1089,6 +1139,7 @@ public class GestionnaireInterfaceController {
                 + "couleurHotspots=" + couleurHotspots.toString().substring(2, 8) + "\n"
                 + "couleurMasque=" + couleurMasque.toString().substring(2, 8) + "\n"
                 + "styleHotspots=" + styleHotSpots + "\n"
+                + "styleHotspotImages=" + styleHotSpotImages + "\n"
                 + "position=" + positionBarre + "\n"
                 + "dX=" + Math.round(dXBarre) + "\n"
                 + "dY=" + Math.round(dYBarre) + "\n"
@@ -1184,6 +1235,9 @@ public class GestionnaireInterfaceController {
 
                 case "styleHotspots":
                     styleHotSpots = valeur;
+                    break;
+                case "styleHotspotImages":
+                    styleHotSpotImages = valeur;
                     break;
                 case "position":
                     positionBarre = valeur;
@@ -1436,6 +1490,7 @@ public class GestionnaireInterfaceController {
         SLTaille.setValue(titreTaille);
         APVisualisation.getChildren().remove(HBbarreBoutons);
         APVisualisation.getChildren().remove(IVHotSpot);
+        APVisualisation.getChildren().remove(IVHotSpotImage);
         SLTailleBoussole.setValue(tailleBoussole);
         SLOpaciteBoussole.setValue(opaciteBoussole);
         boussDXSpinner.setNumber(new BigDecimal(dXBoussole));
@@ -1490,6 +1545,7 @@ public class GestionnaireInterfaceController {
         changeCouleurBarre(couleurBoutons.getHue(), couleurBoutons.getSaturation(), couleurBoutons.getBrightness());
         changeCouleurMasque(couleurMasque.getHue(), couleurMasque.getSaturation(), couleurMasque.getBrightness());
         changeCouleurHS(couleurHotspots.getHue(), couleurHotspots.getSaturation(), couleurHotspots.getBrightness());
+        changeCouleurHSPhoto(couleurHotspots.getHue(), couleurHotspots.getSaturation(), couleurHotspots.getBrightness());
     }
 
     /**
@@ -1512,16 +1568,20 @@ public class GestionnaireInterfaceController {
         rb = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", EditeurPanovisu.locale);
         repertBoutonsPrincipal = repertAppli + File.separator + "theme/barreNavigation";
         repertHotSpots = repertAppli + File.separator + "theme/hotspots";
+        repertHotSpotsPhoto = repertAppli + File.separator + "theme/photos";
         repertBoussoles = repertAppli + File.separator + "theme/boussoles";
         repertMasques = repertAppli + File.separator + "theme/MA";
         repertReseauxSociaux = repertAppli + File.separator + "theme/reseaux";
         chargeBarre(styleBarre, styleHotSpots, imageMasque);
         ArrayList<String> listeStyles = listerStyle(repertBoutonsPrincipal);
         ArrayList<String> listeHotSpots = listerHotSpots(repertHotSpots);
+        ArrayList<String> listeHotSpotsPhoto = listerHotSpots(repertHotSpotsPhoto);
         ArrayList<String> listeBoussoles = listerBoussoles(repertBoussoles);
         ArrayList<String> listeMasques = listerMasques(repertMasques);
         int nombreHotSpots = listeHotSpots.size();
         ImageView[] IVHotspots = new ImageView[nombreHotSpots];
+        int nombreHotSpotsPhoto = listeHotSpotsPhoto.size();
+        ImageView[] IVHotspotsPhoto = new ImageView[nombreHotSpotsPhoto];
         imageClaire = new Image("file:" + repertAppli + File.separator + "images/claire.jpg");
         imageSombre = new Image("file:" + repertAppli + File.separator + "images/sombre.jpg");
         imgSuivant = new ImageView(new Image("file:" + repertAppli + File.separator + "panovisu/images/suivant.png"));
@@ -1662,6 +1722,7 @@ public class GestionnaireInterfaceController {
             CPCouleurFondVignettes.setValue(Color.hsb(couleurTheme.getHue(), couleurTheme.getSaturation(), couleurTheme.getBrightness()));
             changeCouleurBarre(couleurTheme.getHue(), couleurTheme.getSaturation(), couleurTheme.getBrightness());
             changeCouleurHS(couleurTheme.getHue(), couleurTheme.getSaturation(), couleurTheme.getBrightness());
+            changeCouleurHSPhoto(couleurTheme.getHue(), couleurTheme.getSaturation(), couleurTheme.getBrightness());
             changeCouleurMasque(couleurTheme.getHue(), couleurTheme.getSaturation(), couleurTheme.getBrightness());
 
         });
@@ -1842,7 +1903,7 @@ public class GestionnaireInterfaceController {
         lblChoixHS.setLayoutX(10);
         lblChoixHS.setLayoutY(10);
 
-        double tailleHS = 35.d * (int) (nombreHotSpots / 6 + 1) + 40;
+        double tailleHS = 35.d * ((int) (nombreHotSpots / 6 + 1) + (int) (nombreHotSpotsPhoto / 6 + 1)) + 100;
         APHotSpots.setPrefHeight(tailleHS);
         APHotSpots.setLayoutX(50);
         APHotSpots.setLayoutY(40);
@@ -1851,18 +1912,26 @@ public class GestionnaireInterfaceController {
         int i = 0;
         double xHS;
         double yHS;
+        Label lblHSPanoramique=new Label(rb.getString("interface.HSPanoramique"));
+        lblHSPanoramique.setLayoutY(5);
+        lblHSPanoramique.setLayoutX(20);
+        Label lblHSPhoto=new Label(rb.getString("interface.HSPhoto"));
+        lblHSPhoto.setLayoutY((int) (nombreHotSpots / 6 + 1) * 35 + 45);
+        lblHSPhoto.setLayoutX(20);
+        APHotSpots.getChildren().addAll(lblHSPanoramique,lblHSPhoto);
         for (String nomImage : listeHotSpots) {
             IVHotspots[i] = new ImageView(new Image("file:" + repertHotSpots + File.separator + nomImage, -1, 30, true, true, true));
             int col = i % 6;
             int row = i / 6;
             xHS = col * 40 + 5;
-            yHS = row * 35 + 5;
+            yHS = row * 35 + 25;
             IVHotspots[i].setLayoutX(xHS);
             IVHotspots[i].setLayoutY(yHS);
             IVHotspots[i].setStyle("-fx-background-color : #ccc");
             IVHotspots[i].setOnMouseClicked((MouseEvent me) -> {
                 APVisualisation.getChildren().remove(HBbarreBoutons);
                 APVisualisation.getChildren().remove(IVHotSpot);
+                APVisualisation.getChildren().remove(IVHotSpotImage);
                 styleHotSpots = nomImage;
                 afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
 
@@ -1871,10 +1940,33 @@ public class GestionnaireInterfaceController {
             i++;
 
         }
+        i = 0;
+        for (String nomImage : listeHotSpotsPhoto) {
+            IVHotspotsPhoto[i] = new ImageView(new Image("file:" + repertHotSpotsPhoto + File.separator + nomImage, -1, 30, true, true, true));
+            int col = i % 6;
+            int row = i / 6;
+            xHS = col * 40 + 5;
+            yHS = (row + (int) (nombreHotSpots / 6 + 1)) * 35 + 65;
+            IVHotspotsPhoto[i].setLayoutX(xHS);
+            IVHotspotsPhoto[i].setLayoutY(yHS);
+            IVHotspotsPhoto[i].setStyle("-fx-background-color : #ccc");
+            IVHotspotsPhoto[i].setOnMouseClicked((MouseEvent me) -> {
+                APVisualisation.getChildren().remove(HBbarreBoutons);
+                APVisualisation.getChildren().remove(IVHotSpot);
+                APVisualisation.getChildren().remove(IVHotSpotImage);
+                styleHotSpotImages = nomImage;
+                afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
+
+            });
+            APHotSpots.getChildren().add(IVHotspotsPhoto[i]);
+            i++;
+
+        }
         CPCouleurHotspots = new ColorPicker(couleurHotspots);
         CPCouleurHotspots.setOnAction((ActionEvent e) -> {
             couleurHotspots = CPCouleurHotspots.getValue();
             changeCouleurHS(couleurHotspots.getHue(), couleurHotspots.getSaturation(), couleurHotspots.getBrightness());
+            changeCouleurHSPhoto(couleurHotspots.getHue(), couleurHotspots.getSaturation(), couleurHotspots.getBrightness());
         });
         Label lblCouleurHotspot = new Label(rb.getString("interface.couleurHS"));
         lblCouleurHotspot.setLayoutX(20);
@@ -1937,6 +2029,7 @@ public class GestionnaireInterfaceController {
             }
             APVisualisation.getChildren().remove(HBbarreBoutons);
             APVisualisation.getChildren().remove(IVHotSpot);
+            APVisualisation.getChildren().remove(IVHotSpotImage);
             afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
         });
         CBVisible.setLayoutX(10);
@@ -2058,6 +2151,7 @@ public class GestionnaireInterfaceController {
             }
             APVisualisation.getChildren().remove(HBbarreBoutons);
             APVisualisation.getChildren().remove(IVHotSpot);
+            APVisualisation.getChildren().remove(IVHotSpotImage);
             afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
         });
         CBZoom = new CheckBox(rb.getString("interface.zoomVisible"));
@@ -2091,6 +2185,7 @@ public class GestionnaireInterfaceController {
             }
             APVisualisation.getChildren().remove(HBbarreBoutons);
             APVisualisation.getChildren().remove(IVHotSpot);
+            APVisualisation.getChildren().remove(IVHotSpotImage);
             afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
         });
         CBRotation = new CheckBox(rb.getString("interface.outilsRotation"));
@@ -2113,6 +2208,7 @@ public class GestionnaireInterfaceController {
             }
             APVisualisation.getChildren().remove(HBbarreBoutons);
             APVisualisation.getChildren().remove(IVHotSpot);
+            APVisualisation.getChildren().remove(IVHotSpotImage);
             afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
         });
         Label lblVisibilite = new Label(rb.getString("interface.visibilite"));
@@ -2983,6 +3079,7 @@ public class GestionnaireInterfaceController {
                 if (t1 != null) {
                     APVisualisation.getChildren().remove(HBbarreBoutons);
                     APVisualisation.getChildren().remove(IVHotSpot);
+                    APVisualisation.getChildren().remove(IVHotSpotImage);
                     styleBarre = t1;
                     afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
                 }
@@ -2992,6 +3089,7 @@ public class GestionnaireInterfaceController {
         dXSpinner.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
             APVisualisation.getChildren().remove(HBbarreBoutons);
             APVisualisation.getChildren().remove(IVHotSpot);
+            APVisualisation.getChildren().remove(IVHotSpotImage);
             dXBarre = new_value.doubleValue();
             afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
         });
@@ -3020,6 +3118,7 @@ public class GestionnaireInterfaceController {
             if (grpPostBarre.getSelectedToggle() != null) {
                 APVisualisation.getChildren().remove(HBbarreBoutons);
                 APVisualisation.getChildren().remove(IVHotSpot);
+                APVisualisation.getChildren().remove(IVHotSpotImage);
                 positionBarre = grpPostBarre.getSelectedToggle().getUserData().toString();
                 afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
             }

@@ -195,9 +195,19 @@ and open the template in the editor.
     position: absolute;
     z-index: 502;
 }
+
 .RS{
     padding-right: 5px;
     cursor: pointer;
+    filter: url(filtres.svg#gris30);
+    filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale="0.3",duration=2);
+   -webkit-filter: grayscale(0.3);
+    transition: 0.5s;    
+}
+
+.RS:hover{
+    filter: none;
+    -webkit-filter: none;
 }
 
 .marcheArret{
@@ -219,11 +229,9 @@ and open the template in the editor.
     margin-right:  10px;
     opacity: 1.0;
     border : 2px solid #fff;
-    //filter: url(filtres.svg#sepia);
-    /*filter: url("data:image/svg+xml;utf8,&lt;svg xmlns=\'http://www.w3.org/2000/svg\'&gt;&lt;filter id=\'saturation\'&gt;&lt;feColorMatrix type=\'matrix\' values=\'0.2\'/&gt;&lt;/filter&gt;&lt;/svg&gt;#grayscale");  Firefox 10+, Firefox on Android */
-
-    //filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale="1",duration=2);
-    //-webkit-filter: grayscale(0.9);
+    filter: url(filtres.svg#gris30);
+    filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale="0.3",duration=2);
+   -webkit-filter: grayscale(0.3);
     transition: 0.5s;
 }
 .imgVignette:hover{

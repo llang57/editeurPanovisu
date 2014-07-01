@@ -24,8 +24,8 @@ public class Panoramique {
     public static final String CUBE = "cube";
 
     private HotSpot[] hotspots = new HotSpot[100];
-    private HSImage[] imagesHS = new HSImage[100];
-    private HSHTML[] HTMLHS = new HSHTML[100];
+    private HotspotImage[] imageHotspot = new HotspotImage[100];
+    private HotspotHTML[] HTMLHotspot = new HotspotHTML[100];
     private String titrePanoramique;
     private String nomFichier;
     private double lookAtX = 0.d;
@@ -33,8 +33,8 @@ public class Panoramique {
     private Image imagePanoramique;
     private Image vignettePanoramique;
     private int nombreHotspots = 0;
-    private int nombreHSImage = 0;
-    private int nombreHSHTML = 0;
+    private int nombreHotspotImage = 0;
+    private int nombreHotspotHTML = 0;
     private String typePanoramique;
     private boolean afficheTitre;
     private boolean afficheInfo;
@@ -135,36 +135,36 @@ public class Panoramique {
      * @param i
      * @return le hotspot numero i
      */
-    public HSImage getHSImage(int i) {
-        return imagesHS[i];
+    public HotspotImage getHotspotImage(int i) {
+        return imageHotspot[i];
     }
 
     /**
      * @param hotspot the hotspots to set
      * @param i
      */
-    public void setHotspot(HSImage hotspot, int i) {
-        this.imagesHS[i] = hotspot;
+    public void setHotspotImage(HotspotImage hotspot, int i) {
+        this.imageHotspot[i] = hotspot;
     }
 
     /**
      *
      * @param hotspot
      */
-    public void addHSImage(HSImage hotspot) {
-        this.imagesHS[this.getNombreHSImage()] = hotspot;
-        this.nombreHSImage++;
+    public void addHotspotImage(HotspotImage hotspot) {
+        this.imageHotspot[this.getNombreHotspotImage()] = hotspot;
+        this.nombreHotspotImage++;
     }
 
     /**
      *
      * @param num
      */
-    public void removeHSImage(int num) {
-        for (int i = num; i < this.nombreHSImage - 1; i++) {
-            this.imagesHS[i] = this.imagesHS[i + 1];
+    public void removeHotspotImage(int num) {
+        for (int i = num; i < this.nombreHotspotImage - 1; i++) {
+            this.imageHotspot[i] = this.imageHotspot[i + 1];
         }
-        this.nombreHSImage--;
+        this.nombreHotspotImage--;
         //int nombre
     }
     
@@ -172,36 +172,36 @@ public class Panoramique {
      * @param i
      * @return le hotspot numero i
      */
-    public HSHTML getHSHTML(int i) {
-        return HTMLHS[i];
+    public HotspotHTML getHotspotHTML(int i) {
+        return HTMLHotspot[i];
     }
 
     /**
      * @param hotspot the hotspots to set
      * @param i
      */
-    public void setHSHTML(HSHTML hotspot, int i) {
-        this.HTMLHS[i] = hotspot;
+    public void setHotspotHTML(HotspotHTML hotspot, int i) {
+        this.HTMLHotspot[i] = hotspot;
     }
 
     /**
      *
      * @param hotspot
      */
-    public void addHSHTML(HSHTML hotspot) {
-        this.HTMLHS[this.getNombreHSHTML()] = hotspot;
-        this.nombreHSHTML++;
+    public void addHotspotHTML(HotspotHTML hotspot) {
+        this.HTMLHotspot[this.getNombreHotspotHTML()] = hotspot;
+        this.nombreHotspotHTML++;
     }
 
     /**
      *
      * @param num
      */
-    public void removeHSHTML(int num) {
-        for (int i = num; i < this.nombreHSHTML - 1; i++) {
-            this.HTMLHS[i] = this.HTMLHS[i + 1];
+    public void removeHotspotHTML(int num) {
+        for (int i = num; i < this.nombreHotspotHTML - 1; i++) {
+            this.HTMLHotspot[i] = this.HTMLHotspot[i + 1];
         }
-        this.nombreHSHTML--;
+        this.nombreHotspotHTML--;
         //int nombre
     }
         
@@ -332,31 +332,31 @@ public class Panoramique {
     }
 
     /**
-     * @return the nombreHSImage
+     * @return the nombreHotspotImage
      */
-    public int getNombreHSImage() {
-        return nombreHSImage;
+    public int getNombreHotspotImage() {
+        return nombreHotspotImage;
     }
 
     /**
-     * @param nombreHSImage the nombreHSImage to set
+     * @param nombreHotspotImage the nombreHotspotImage to set
      */
-    public void setNombreHSImage(int nombreHSImage) {
-        this.nombreHSImage = nombreHSImage;
+    public void setNombreHotspotImage(int nombreHotspotImage) {
+        this.nombreHotspotImage = nombreHotspotImage;
     }
 
     /**
-     * @return the nombreHSHTML
+     * @return the nombreHotspotHTML
      */
-    public int getNombreHSHTML() {
-        return nombreHSHTML;
+    public int getNombreHotspotHTML() {
+        return nombreHotspotHTML;
     }
 
     /**
-     * @param nombreHSHTML the nombreHSHTML to set
+     * @param nombreHotspotHTML the nombreHotspotHTML to set
      */
-    public void setNombreHSHTML(int nombreHSHTML) {
-        this.nombreHSHTML = nombreHSHTML;
+    public void setNombreHotspotHTML(int nombreHotspotHTML) {
+        this.nombreHotspotHTML = nombreHotspotHTML;
     }
 
 }
