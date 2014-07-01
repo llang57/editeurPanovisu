@@ -5,14 +5,16 @@
         <group>
             <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/GestionnaireInterfaceController.java</file>
             <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/Panoramique.java</file>
-            <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/HSHTML.java</file>
+            <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/HotspotHTML.java</file>
+            <file>file:/D:/github/editeurPanovisu/panovisu/panovisu.js</file>
             <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/i18n/PanoVisu.properties</file>
+            <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/HotspotImage.java</file>
             <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/i18n/PanoVisu_en.properties</file>
             <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/HotSpot.java</file>
             <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/EditeurPanovisu.java</file>
-            <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/HSImage.java</file>
             <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/i18n/PanoVisu_de.properties</file>
             <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/i18n/PanoVisu_fr.properties</file>
+            <file>file:/D:/github/editeurPanovisu/panovisu/css/panovisu.css</file>
         </group>
     </open-files>
 </project-private>
