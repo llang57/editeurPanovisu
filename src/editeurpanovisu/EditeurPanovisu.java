@@ -75,7 +75,6 @@ import javafx.scene.shape.StrokeLineJoin;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import javax.swing.ToolTipManager;
 import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialog;
 import org.controlsfx.dialog.Dialogs;
@@ -112,7 +111,6 @@ public class EditeurPanovisu extends Application {
     static private VBox paneChoixPanoramique;
     static private VBox outils;
     static private Tab tabInterface;
-    static private File file;
     static private Scene scene;
     static private ScrollPane vuePanoramique;
     static private ScrollPane panneauOutils;
@@ -121,6 +119,13 @@ public class EditeurPanovisu extends Application {
     static private boolean repertSauveChoisi = false;
     static private String panoEntree = "";
     static public String systemeExploitation;
+    public static final String tooltipStyle = "";
+//    public static final String tooltipStyle
+//            = "-fx-background-color : linear-gradient(greenyellow   , limegreen ) ; "
+//            + "-fx-opacity : 0.7;"            
+//            + "-fx-font-size : 7pt; "
+//            + "-fx-background-radius  : 1 1 1 1;"
+//            + "-fx-text-fill : black;";
     /**
      * Répertoire de l'application
      */
@@ -145,13 +150,11 @@ public class EditeurPanovisu extends Application {
     static private boolean dejaSauve = true;
     static private Stage stPrincipal;
     static private String[] histoFichiers = new String[10];
-    static private String txtRepertConfig;
     static private int nombreHistoFichiers = 0;
     static private File fichHistoFichiers;
     private String texteHisto;
     private static String numVersion;
 
-    static private Button valideChargeDerniersFichiers;
     static private GestionnaireInterfaceController gestionnaireInterface = new GestionnaireInterfaceController();
 
     static private Menu derniersProjets;
@@ -232,12 +235,12 @@ public class EditeurPanovisu extends Application {
                     repertTemp + "/panovisu/images");
             copieFichierRepertoire(repertAppli + File.separator + "panovisu" + File.separator + "images" + File.separator + "suivant.png",
                     repertTemp + "/panovisu/images");
-            for (int i = 0; i < gestionnaireInterface.nombreImagesBouton-1; i++) {
+            for (int i = 0; i < gestionnaireInterface.nombreImagesBouton - 1; i++) {
                 ReadWriteImage.writePng(gestionnaireInterface.nouveauxBoutons[i],
                         boutonRepert.getAbsolutePath() + File.separator + gestionnaireInterface.nomImagesBoutons[i],
                         false, 0.f);
             }
-            ReadWriteImage.writePng(gestionnaireInterface.nouveauxBoutons[gestionnaireInterface.nombreImagesBouton-1],
+            ReadWriteImage.writePng(gestionnaireInterface.nouveauxBoutons[gestionnaireInterface.nombreImagesBouton - 1],
                     hotspotsRepert.getAbsolutePath() + File.separator + "hotspot.png",
                     false, 0.f);
             ReadWriteImage.writePng(gestionnaireInterface.nouveauxBoutons[gestionnaireInterface.nombreImagesBouton],
@@ -473,7 +476,7 @@ public class EditeurPanovisu extends Application {
                             + "           long=\"" + longit + "\"\n"
                             + "           lat=\"" + HS.getLatitude() + "\"\n"
                             + "           image=\"panovisu/images/hotspots/hotspotImage.png\"\n"
-                            + "           img=\"images/" + HS.getLienImg()+ "\"\n"
+                            + "           img=\"images/" + HS.getLienImg() + "\"\n"
                             + "           info=\"" + HS.getInfo() + "\"\n"
                             + "           anime=\"" + txtAnime + "\"\n"
                             + "      />\n";
@@ -1842,7 +1845,9 @@ public class EditeurPanovisu extends Application {
                 IVPano[j].setLayoutY(yPos);
                 IVPano[j].setCursor(Cursor.HAND);
                 IVPano[j].setStyle("-fx-background-color : #ccc;");
-                Tooltip.install(IVPano[j], new Tooltip(nomPano.substring(nomPano.lastIndexOf(File.separator) + 1, nomPano.lastIndexOf("."))));
+                Tooltip t = new Tooltip(nomPano.substring(nomPano.lastIndexOf(File.separator) + 1, nomPano.lastIndexOf(".")));
+                t.setStyle(tooltipStyle);
+                Tooltip.install(IVPano[j], t);
                 IVPano[j].setOnMouseClicked((MouseEvent me) -> {
                     pano.setCursor(Cursor.CROSSHAIR);
                     pano.setOnMouseClicked(
@@ -2146,7 +2151,10 @@ public class EditeurPanovisu extends Application {
         point.setId("point" + i);
         point.setCursor(Cursor.DEFAULT);
         pano.getChildren().add(point);
-        Tooltip.install(point, new Tooltip("point n° " + (i + 1)));
+
+        Tooltip t = new Tooltip("point n° " + (i + 1));
+        t.setStyle(tooltipStyle);
+        Tooltip.install(point, t);
 
         point.setOnMouseClicked((MouseEvent me1) -> {
             double mouseX = me1.getSceneX();
@@ -2213,7 +2221,9 @@ public class EditeurPanovisu extends Application {
         point.setId("img" + i);
         point.setCursor(Cursor.DEFAULT);
         pano.getChildren().add(point);
-        Tooltip.install(point, new Tooltip("image n° " + (i + 1)));
+        Tooltip t = new Tooltip("image n° " + (i + 1));
+        t.setStyle(tooltipStyle);
+        Tooltip.install(point, t);
 
         point.setOnMouseClicked((MouseEvent me1) -> {
             String chPoint = point.getId();
@@ -2366,7 +2376,9 @@ public class EditeurPanovisu extends Application {
         point.setId("point" + numPoints);
         point.setCursor(Cursor.DEFAULT);
         pano.getChildren().add(point);
-        Tooltip.install(point, new Tooltip("point n°" + (numPoints + 1)));
+        Tooltip t = new Tooltip("point n°" + (numPoints + 1));
+        t.setStyle(tooltipStyle);
+        Tooltip.install(point, t);
         HotSpot HS = new HotSpot();
         HS.setLongitude(longitude);
         HS.setLatitude(latitude);
@@ -2456,7 +2468,9 @@ public class EditeurPanovisu extends Application {
         point.setId("img" + numImages);
         point.setCursor(Cursor.DEFAULT);
         pano.getChildren().add(point);
-        Tooltip.install(point, new Tooltip("Image n°" + (numImages + 1)));
+        Tooltip t = new Tooltip("image n° " + (numImages + 1));
+        t.setStyle(tooltipStyle);
+        Tooltip.install(point, t);
 
 //
         File repert;
@@ -3007,7 +3021,7 @@ public class EditeurPanovisu extends Application {
         menuPrincipal.setMinHeight(21);
         menuPrincipal.setPrefHeight(29);
         menuPrincipal.setPrefWidth(3000);
-        /*
+        /* 
          Menu projets
          */
         Menu menuProjet = new Menu(rb.getString("projets"));
@@ -3116,15 +3130,16 @@ public class EditeurPanovisu extends Application {
         /*
          barre de boutons 
          */
-        String couleurBouton = "-fx-background-color:#f7f7f7;";
         HBox barreBouton = new HBox();
+        barreBouton.getStyleClass().add("menuBarreOutils1");
+        
         barreBouton.setPrefHeight(50);
         barreBouton.setPrefWidth(3000);
         /*
          Bouton nouveau Projet
          */
         ScrollPane SPBtnNouvprojet = new ScrollPane();
-        SPBtnNouvprojet.setStyle(couleurBouton);
+        SPBtnNouvprojet.getStyleClass().add("menuBarreOutils");
         SPBtnNouvprojet.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         SPBtnNouvprojet.setPrefHeight(35);
         SPBtnNouvprojet.setPrefWidth(35);
@@ -3132,13 +3147,15 @@ public class EditeurPanovisu extends Application {
         HBox.setMargin(SPBtnNouvprojet, new Insets(5, 15, 0, 15));
         imgNouveauProjet = new ImageView(new Image("file:" + repertAppli + File.separator + "images/nouveauProjet.png"));
         SPBtnNouvprojet.setContent(imgNouveauProjet);
-        SPBtnNouvprojet.setTooltip(new Tooltip(rb.getString("nouveauProjet")));
+        Tooltip t0 = new Tooltip(rb.getString("nouveauProjet"));
+        t0.setStyle(tooltipStyle);
+        SPBtnNouvprojet.setTooltip(t0);
         barreBouton.getChildren().add(SPBtnNouvprojet);
         /*
          Bouton ouvrir Projet
          */
         ScrollPane SPBtnOuvrirProjet = new ScrollPane();
-        SPBtnOuvrirProjet.setStyle(couleurBouton);
+        SPBtnOuvrirProjet.getStyleClass().add("menuBarreOutils");
         SPBtnOuvrirProjet.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         SPBtnOuvrirProjet.setPrefHeight(35);
         SPBtnOuvrirProjet.setPrefWidth(35);
@@ -3146,14 +3163,16 @@ public class EditeurPanovisu extends Application {
         HBox.setMargin(SPBtnOuvrirProjet, new Insets(5, 15, 0, 0));
         imgChargeProjet = new ImageView(new Image("file:" + repertAppli + File.separator + "images/ouvrirProjet.png"));
         SPBtnOuvrirProjet.setContent(imgChargeProjet);
-        SPBtnOuvrirProjet.setTooltip(new Tooltip(rb.getString("ouvrirProjet")));
+        Tooltip t1 = new Tooltip(rb.getString("ouvrirProjet"));
+        t1.setStyle(tooltipStyle);
+        SPBtnOuvrirProjet.setTooltip(t1);
         barreBouton.getChildren().add(SPBtnOuvrirProjet);
 
         /*
          Bouton sauve Projet
          */
         ScrollPane SPBtnSauveProjet = new ScrollPane();
-        SPBtnSauveProjet.setStyle(couleurBouton);
+        SPBtnSauveProjet.getStyleClass().add("menuBarreOutils");
         SPBtnSauveProjet.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         SPBtnSauveProjet.setPrefHeight(35);
         SPBtnSauveProjet.setPrefWidth(35);
@@ -3161,7 +3180,9 @@ public class EditeurPanovisu extends Application {
         HBox.setMargin(SPBtnSauveProjet, new Insets(5, 15, 0, 0));
         imgSauveProjet = new ImageView(new Image("file:" + repertAppli + File.separator + "images/sauveProjet.png"));
         SPBtnSauveProjet.setContent(imgSauveProjet);
-        SPBtnSauveProjet.setTooltip(new Tooltip(rb.getString("sauverProjet")));
+        Tooltip t2 = new Tooltip(rb.getString("sauverProjet"));
+        t2.setStyle(tooltipStyle);
+        SPBtnSauveProjet.setTooltip(t2);
         barreBouton.getChildren().add(SPBtnSauveProjet);
         Separator sepImages = new Separator(Orientation.VERTICAL);
         sepImages.prefHeight(200);
@@ -3172,7 +3193,7 @@ public class EditeurPanovisu extends Application {
          Bouton Ajoute Panoramique
          */
         ScrollPane SPBtnAjoutePano = new ScrollPane();
-        SPBtnAjoutePano.setStyle(couleurBouton);
+        SPBtnAjoutePano.getStyleClass().add("menuBarreOutils");
         SPBtnAjoutePano.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         SPBtnAjoutePano.setPrefHeight(35);
         SPBtnAjoutePano.setPrefWidth(35);
@@ -3180,7 +3201,9 @@ public class EditeurPanovisu extends Application {
         HBox.setMargin(SPBtnAjoutePano, new Insets(5, 15, 0, 15));
         imgAjouterPano = new ImageView(new Image("file:" + repertAppli + File.separator + "images/ajoutePanoramique.png"));
         SPBtnAjoutePano.setContent(imgAjouterPano);
-        SPBtnAjoutePano.setTooltip(new Tooltip(rb.getString("ajouterPanoramiques")));
+        Tooltip t3 = new Tooltip(rb.getString("ajouterPanoramiques"));
+        t3.setStyle(tooltipStyle);
+        SPBtnAjoutePano.setTooltip(t3);
         barreBouton.getChildren().add(SPBtnAjoutePano);
         imgAjouterPano.setDisable(true);
         imgAjouterPano.setOpacity(0.3);
@@ -3190,7 +3213,7 @@ public class EditeurPanovisu extends Application {
          Bouton Génère
          */
         ScrollPane SPBtnGenereVisite = new ScrollPane();
-        SPBtnGenereVisite.setStyle(couleurBouton);
+        SPBtnGenereVisite.getStyleClass().add("menuBarreOutils");
         SPBtnGenereVisite.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         SPBtnGenereVisite.setPrefHeight(35);
         SPBtnGenereVisite.setPrefWidth(70);
@@ -3198,7 +3221,9 @@ public class EditeurPanovisu extends Application {
         HBox.setMargin(SPBtnGenereVisite, new Insets(5, 15, 0, 0));
         imgVisiteGenere = new ImageView(new Image("file:" + repertAppli + File.separator + "images/genereVisite.png"));
         SPBtnGenereVisite.setContent(imgVisiteGenere);
-        SPBtnGenereVisite.setTooltip(new Tooltip(rb.getString("genererVisite")));
+        Tooltip t4 = new Tooltip(rb.getString("genererVisite"));
+        t4.setStyle(tooltipStyle);
+        SPBtnGenereVisite.setTooltip(t4);
         barreBouton.getChildren().add(SPBtnGenereVisite);
         imgVisiteGenere.setDisable(true);
         imgVisiteGenere.setOpacity(0.3);
@@ -3210,7 +3235,7 @@ public class EditeurPanovisu extends Application {
          Bouton faces de cube -> equi
          */
         ScrollPane SPBtnCube2Equi = new ScrollPane();
-        SPBtnCube2Equi.setStyle(couleurBouton);
+        SPBtnCube2Equi.getStyleClass().add("menuBarreOutils");
         SPBtnCube2Equi.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         SPBtnCube2Equi.setPrefHeight(35);
         SPBtnCube2Equi.setPrefWidth(109);
@@ -3218,13 +3243,15 @@ public class EditeurPanovisu extends Application {
         HBox.setMargin(SPBtnCube2Equi, new Insets(5, 25, 0, 250));
         imgCube2Equi = new ImageView(new Image("file:" + repertAppli + File.separator + "images/cube2equi.png"));
         SPBtnCube2Equi.setContent(imgCube2Equi);
-        SPBtnCube2Equi.setTooltip(new Tooltip(rb.getString("outilsCube2Equi")));
+        Tooltip t5 = new Tooltip(rb.getString("outilsCube2Equi"));
+        t5.setStyle(tooltipStyle);
+        SPBtnCube2Equi.setTooltip(t5);
         barreBouton.getChildren().add(SPBtnCube2Equi);
         /*
          Bouton equi -> faces de  Cube
          */
         ScrollPane SPBtnEqui2Cube = new ScrollPane();
-        SPBtnEqui2Cube.setStyle(couleurBouton);
+        SPBtnEqui2Cube.getStyleClass().add("menuBarreOutils");
         SPBtnEqui2Cube.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         SPBtnEqui2Cube.setPrefHeight(35);
         SPBtnEqui2Cube.setPrefWidth(109);
@@ -3232,7 +3259,9 @@ public class EditeurPanovisu extends Application {
         HBox.setMargin(SPBtnEqui2Cube, new Insets(5, 15, 0, 0));
         imgEqui2Cube = new ImageView(new Image("file:" + repertAppli + File.separator + "images/equi2cube.png"));
         SPBtnEqui2Cube.setContent(imgEqui2Cube);
-        SPBtnEqui2Cube.setTooltip(new Tooltip(rb.getString("outilsEqui2Cube")));
+        Tooltip t6 = new Tooltip(rb.getString("outilsEqui2Cube"));
+        t6.setStyle(tooltipStyle);
+        SPBtnEqui2Cube.setTooltip(t6);
         barreBouton.getChildren().add(SPBtnEqui2Cube);
 
         myPane.getChildren().addAll(menuPrincipal, barreBouton);
@@ -3430,7 +3459,8 @@ public class EditeurPanovisu extends Application {
         root.setStyle("-fx-font-size : 9pt;-fx-font-family: Arial;");
 //        }
         panneauOutils = new ScrollPane();
-        panneauOutils.setStyle("-fx-background-color : #ccc;");
+        panneauOutils.setId("panOutils");
+//        panneauOutils.setStyle("-fx-background-color : #ccc;");
         outils = new VBox();
         paneChoixPanoramique = new VBox();
         paneChoixPanoramique.setId("choixPanoramique");
@@ -3522,7 +3552,7 @@ public class EditeurPanovisu extends Application {
         imagePanoramique = new ImageView();
 
         primaryStage.setScene(scene);
-
+        //scene.getStylesheets().add("file:css/test.css");
         /**
          *
          */
@@ -3541,20 +3571,20 @@ public class EditeurPanovisu extends Application {
         panneauOutils.setPrefSize(320, height - 130);
         panneauOutils.setMaxSize(320, height - 130);
         panneauOutils.setTranslateY(5);
-        panneauOutils.setStyle("-fx-background-color : #ccc;");
+//        panneauOutils.setStyle("-fx-background-color : #ccc;");
         /**
          *
          */
         pano.setCursor(Cursor.CROSSHAIR);
         outils.setPrefWidth(310);
-        outils.setStyle("-fx-background-color : #ccc;");
+//        outils.setStyle("-fx-background-color : #ccc;");
         outils.minHeight(height - 130);
-        lblLong.setStyle(labelStyle);
-        lblLat.setStyle(labelStyle);
+//        lblLong.setStyle(labelStyle);
+//        lblLat.setStyle(labelStyle);
         lblLong.setPrefSize(100, 15);
         lblLat.setPrefSize(100, 15);
         lblLat.setTranslateX(50);
-        panneau2.setStyle("-fx-background-color : #ddd;");
+//        panneau2.setStyle("-fx-background-color : #ddd;");
         panneau2.setPrefSize(width - 330, height - 140);
 
         imagePanoramique.setCache(true);
@@ -3575,11 +3605,6 @@ public class EditeurPanovisu extends Application {
         panneau2.getChildren().setAll(coordonnees, pano, afficheLegende());
         primaryStage.show();
         popUp.affichePopup();
-        ToolTipManager ttManager;
-        ttManager = ToolTipManager.sharedInstance();
-        ttManager.setInitialDelay(10);
-        ttManager.setReshowDelay(10);
-        ttManager.setDismissDelay(10);
     }
 
     /**
@@ -3593,7 +3618,6 @@ public class EditeurPanovisu extends Application {
         currentDir = rep.getAbsolutePath();
         repertAppli = rep.getAbsolutePath();
         repertConfig = new File(repertAppli + File.separator + "configPV");
-        txtRepertConfig = repertConfig.getAbsolutePath();
         if (!repertConfig.exists()) {
             repertConfig.mkdirs();
             locale = new Locale("fr", "FR");
@@ -3605,8 +3629,8 @@ public class EditeurPanovisu extends Application {
         stPrincipal = primaryStage;
         stPrincipal.setTitle("PanoVisu v" + numVersion);
         //AquaFx.style();
-        setUserAgentStylesheet(STYLESHEET_MODENA);
-        //setUserAgentStylesheet(repertAppli + File.separator + "test.css");
+//        setUserAgentStylesheet(STYLESHEET_MODENA);
+        setUserAgentStylesheet("file:css/test.css");
         primaryStage.setMaximized(true);
         Dimension tailleEcran = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         int hauteur = (int) tailleEcran.getHeight() - 20;

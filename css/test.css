@@ -93,7 +93,7 @@ is being used to size a border should also be in pixels.
     /* A light grey that is the base color for objects.  Instead of using
      * -fx-base directly, the sections in this file will typically use -fx-color.
      */
-    -fx-base: #ececec;
+    -fx-base: #f8f8FF;
 
     /* A very light grey used for the background of windows.  See also
      * -fx-text-background-color, which should be used as the -fx-text-fill
@@ -126,7 +126,7 @@ is being used to size a border should also be in pixels.
 
     /* A bright blue for highlighting/accenting objects.  For example: selected
      * text; selected items in menus, lists, trees, and tables; progress bars */
-    -fx-accent: #0096C9;
+    -fx-accent: #0099CC;
     
     /* Default buttons color, this is similar to accent but more subtle */
     -fx-default-button: #4fb6d6;
@@ -148,7 +148,7 @@ is being used to size a border should also be in pixels.
 
     /* The opacity level to use for the "disabled" pseudoclass.
      */
-    -fx-disabled-opacity: 0.4;
+    -fx-disabled-opacity: 0.2;
     
     /* Chart Color Palette */
     CHART_COLOR_1: #f3622d;
@@ -208,7 +208,7 @@ is being used to size a border should also be in pixels.
      */
     -fx-text-box-border: ladder(
         -fx-background,
-        black 10%,
+        black 30%,
         derive(-fx-background, -15%) 30%
     );
      
@@ -693,7 +693,7 @@ is being used to size a border should also be in pixels.
     -fx-padding: 0.166667em; /* 2 */
     -fx-cursor: hand;
     -fx-content-display: LEFT;
-    -fx-text-fill: -fx-text-background-color;
+    -fx-text-fill: darkred;
     -fx-border-color: transparent;
     -fx-border-width: 1px;
 }
@@ -701,12 +701,12 @@ is being used to size a border should also be in pixels.
     -fx-text-fill: -fx-accent;
 }
 .hyperlink:focused {
-    -fx-border-color: -fx-focus-color;
+/*    -fx-border-color: -fx-focus-color;
     -fx-border-style: segments(0.166667em, 0.166667em);
-    -fx-border-width: 1px;
+    -fx-border-width: 1px;*/
 }
 .hyperlink:hover {
-    -fx-underline: true;
+    -fx-text-fill: red;
 }
 .hyperlink:show-mnemonics > .mnemonic-underline {
     -fx-stroke: -fx-text-fill;
@@ -1247,10 +1247,13 @@ is being used to size a border should also be in pixels.
 .menu-bar {
     -fx-padding: 0.0em 0.666667em 0.0em 0.666667em; /* 0 8 0 8 */
     -fx-spacing: 0.166667em; /* 2 */
-    -fx-base: derive(#d0d0d0,-70%);
-    -fx-background-color: linear-gradient(to bottom, derive(-fx-color,50%), derive(-fx-color,-30%)), -fx-body-color;
+    -fx-background : #eeeeee;
+    -fx-text-fill : white;
+/*    -fx-base: derive(#d0d0d0,-70%);
+    -fx-background-color: linear-gradient(to bottom, derive(-fx-color,50%), derive(-fx-color,-30%)), -fx-body-color;*/
     -fx-background-insets: 0, 1 0 1 0;
     -fx-background-radius: 0, 0 ;
+    -fx-font-size : 1.2em;
 }
 /* Show nothing for background of normal menu button in a menu bar */
 .menu-bar > .container > .menu-button {
@@ -1265,12 +1268,12 @@ is being used to size a border should also be in pixels.
 .menu-bar > .container > .menu-button:hover, .menu-bar > .container > .menu-button:focused, .menu-bar > .container > .menu-button:showing {
     -fx-background: -fx-accent;
     -fx-background-color: -fx-selection-bar;
-    -fx-text-fill: -fx-selection-bar-text;
+    -fx-text-fill: white;
 }
 .menu-bar > .container > .menu-button:hover {
     -fx-background: -fx-accent;
     -fx-background-color: -fx-selection-bar;
-    -fx-text-fill: -fx-selection-bar-text;
+    -fx-text-fill: white;
 }
 .menu-bar:show-mnemonics > .mnemonic-underline {
     -fx-stroke: -fx-text-fill;
@@ -1397,9 +1400,9 @@ is being used to size a border should also be in pixels.
     -fx-background-insets: 0 1 1 0, 1 2 0 1, 2 3 0 2;
 }
 .tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
-    -fx-border-style: segments(0.166667em, 0.166667em);
+/*    -fx-border-style: segments(0.166667em, 0.166667em);
     -fx-border-width: 1;
-    -fx-border-color: -fx-focus-color;
+    -fx-border-color: -fx-focus-color;*/
 }
 .tab-pane > .tab-header-area > .headers-region > .tab:disabled:hover {
     -fx-color: -fx-base;
@@ -2567,14 +2570,14 @@ is being used to size a border should also be in pixels.
  ******************************************************************************/
 
 .tooltip {
-    -fx-background: rgba(30,30,30);
-    -fx-text-fill: white;
-    -fx-background-color: rgba(30,30,30,0.8);
-    -fx-background-radius: 6px;
+    -fx-background: rgba(240,240,255,0.8);
+    -fx-text-fill: black;
+    -fx-background-color: rgba(240,240,255,0.8);
+    -fx-background-radius: 2px;
     -fx-background-insets: 0;
     -fx-padding: 0.833333em; /* 10px */
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.5) , 10, 0.0 , 0 , 0 );
-    -fx-font-size: 0.85em;
+    -fx-font-size: 1em;
 }
 
 /*******************************************************************************
@@ -2975,3 +2978,19 @@ is being used to size a border should also be in pixels.
 .axis-minor-tick-mark { doh: true; }
 .chart-horizontal-zero-line { doh: true; }
 .stacked-bar-chart:horizontal .chart-bar { doh: true; }
+
+#panOutils,#spOutils{
+   -fx-background: derive(-fx-base,-5%); 
+}
+.menuBarreOutils1{
+    -fx-background-color: derive(-fx-base,-2%);     
+}
+.menuBarreOutils{
+    -fx-background-color: derive(-fx-base,-2%);     
+}
+
+
+
+
+
+

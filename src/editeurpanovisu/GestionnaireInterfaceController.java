@@ -8,6 +8,7 @@ package editeurpanovisu;
 import static editeurpanovisu.EditeurPanovisu.nombrePanoramiques;
 import static editeurpanovisu.EditeurPanovisu.panoramiquesProjet;
 import static editeurpanovisu.EditeurPanovisu.repertAppli;
+import static editeurpanovisu.EditeurPanovisu.tooltipStyle;
 import java.io.File;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -911,12 +912,16 @@ public class GestionnaireInterfaceController {
         IVHotSpot.setPreserveRatio(true);
         IVHotSpot.setLayoutX(510);
         IVHotSpot.setLayoutY(310);
-        Tooltip.install(IVHotSpot, new Tooltip("Hotspot panoramique"));
+        Tooltip t = new Tooltip("Hotspot panoramique");
+        t.setStyle(tooltipStyle);
+        Tooltip.install(IVHotSpot, t);
         IVHotSpotImage.setFitWidth(30);
         IVHotSpotImage.setPreserveRatio(true);
         IVHotSpotImage.setLayoutX(410);
         IVHotSpotImage.setLayoutY(310);
-        Tooltip.install(IVHotSpotImage, new Tooltip("Hotspot Photo"));
+        Tooltip t1 = new Tooltip("Hotspot Photo");
+        t1.setStyle(tooltipStyle);
+        Tooltip.install(IVHotSpotImage, t1);
         int nombreBoutons = 11;
         if (toggleBarreDeplacements.equals("non")) {
             nombreBoutons -= 4;
@@ -1608,6 +1613,7 @@ public class GestionnaireInterfaceController {
         APVisualisation.setPrefHeight(height);
         VBOutils = new VBox();
         ScrollPane SPOutils = new ScrollPane(VBOutils);
+        SPOutils.setId("spOutils");
         SPOutils.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         SPOutils.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         SPOutils.setMaxHeight(height - 100);
@@ -1619,7 +1625,7 @@ public class GestionnaireInterfaceController {
         VBOutils.setPrefWidth(largeurOutils - 20);
         VBOutils.setMaxWidth(largeurOutils - 20);
         //VBOutils.setMinHeight(height);
-        VBOutils.setStyle("-fx-background-color : #ccc;");
+//        VBOutils.setStyle("-fx-background-color : #ccc;");
         HBInterface.getChildren().addAll(APVisualisation, SPOutils);
         /*
          * ***************************************************************
@@ -1912,13 +1918,13 @@ public class GestionnaireInterfaceController {
         int i = 0;
         double xHS;
         double yHS;
-        Label lblHSPanoramique=new Label(rb.getString("interface.HSPanoramique"));
+        Label lblHSPanoramique = new Label(rb.getString("interface.HSPanoramique"));
         lblHSPanoramique.setLayoutY(5);
         lblHSPanoramique.setLayoutX(20);
-        Label lblHSPhoto=new Label(rb.getString("interface.HSPhoto"));
+        Label lblHSPhoto = new Label(rb.getString("interface.HSPhoto"));
         lblHSPhoto.setLayoutY((int) (nombreHotSpots / 6 + 1) * 35 + 45);
         lblHSPhoto.setLayoutX(20);
-        APHotSpots.getChildren().addAll(lblHSPanoramique,lblHSPhoto);
+        APHotSpots.getChildren().addAll(lblHSPanoramique, lblHSPhoto);
         for (String nomImage : listeHotSpots) {
             IVHotspots[i] = new ImageView(new Image("file:" + repertHotSpots + File.separator + nomImage, -1, 30, true, true, true));
             int col = i % 6;
@@ -3033,7 +3039,8 @@ public class GestionnaireInterfaceController {
          * Style des Pannels
          * *****************************************************
          */
-        String styleAP = "-fx-background-color : #ccc;";
+//        String styleAP = "-fx-background-color : #ccc;";
+        String styleAP = "";
         APBoussole.setStyle(styleAP);
         APBarreModif.setStyle(styleAP);
         APTitre.setStyle(styleAP);
