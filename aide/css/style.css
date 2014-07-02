@@ -61,7 +61,7 @@ header nav{
     top:30px;
     right : 30px;
     padding: 20px;
-    border : 1px solid red;
+    border : none;
     background-color: #fff;
     z-index: 100;
 }

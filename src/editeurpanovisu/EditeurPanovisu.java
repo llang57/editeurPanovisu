@@ -6,6 +6,7 @@
 package editeurpanovisu;
 
 import impl.org.controlsfx.i18n.Localization;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -19,6 +20,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -575,6 +578,13 @@ public class EditeurPanovisu extends Application {
                     .masthead("Génération de la visite")
                     .message("Votre visite a bien été généré dans le répertoire : " + nomRepertVisite)
                     .showInformation();
+            if (Desktop.isDesktopSupported()) {
+                if (Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                    Desktop dt = Desktop.getDesktop();
+                    File fIndex = new File(repertoireProjet + File.separator + "visite" + File.separator + "index.html");
+                    dt.browse(fIndex.toURI());
+                }
+            }
         } else {
             Dialogs.create().title("Editeur PanoVisu")
                     .masthead("Génération de la visite")
@@ -3131,7 +3141,7 @@ public class EditeurPanovisu extends Application {
          */
         HBox barreBouton = new HBox();
         barreBouton.getStyleClass().add("menuBarreOutils1");
-        
+
         barreBouton.setPrefHeight(50);
         barreBouton.setPrefWidth(3000);
         /*
