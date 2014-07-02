@@ -27,7 +27,6 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
-import static javafx.application.Application.STYLESHEET_MODENA;
 import static javafx.application.Application.launch;
 import static javafx.application.Application.setUserAgentStylesheet;
 import javafx.application.Platform;
