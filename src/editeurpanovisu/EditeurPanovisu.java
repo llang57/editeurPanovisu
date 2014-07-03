@@ -20,8 +20,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -90,6 +88,8 @@ public class EditeurPanovisu extends Application {
     /**
      * Définition de la langue locale par défaut fr_FR
      */
+    public static String styleCSS = "clair";
+
     public static final String[] codesLanguesTraduction = {"fr_FR", "en_EN", "de_DE"};
     public static final String[] languesTraduction = {"Francais", "English", "Deutsch"};
     public static Locale locale = new Locale("fr", "FR");
@@ -1663,6 +1663,9 @@ public class EditeurPanovisu extends Application {
                             case "repert":
                                 repert = valeur;
                                 break;
+                            case "style":
+                                styleCSS = valeur;
+                                break;
 
                         }
 
@@ -1671,6 +1674,7 @@ public class EditeurPanovisu extends Application {
                     repertoireProjet = repert;
                     currentDir = repert;
                     repertSauveChoisi = true;
+                    setUserAgentStylesheet("file:css/" + styleCSS + ".css");
                 }
 
             } catch (FileNotFoundException ex) {
@@ -1946,32 +1950,29 @@ public class EditeurPanovisu extends Application {
         panneauHotSpots.setTranslateY(10);
         VBox vb1 = new VBox(5);
         panneauHotSpots.getChildren().add(vb1);
-        Label lbl;
         Label lblPoint;
         Label sep = new Label(" ");
         Label sep1 = new Label(" ");
         for (int o = 0; o < panoramiquesProjet[numPano].getNombreHotspots(); o++) {
             VBox vbPanneauHS = new VBox();
-            Pane pannneauHS = new Pane(vbPanneauHS);
-            panneauHotSpots.setId("HS" + o);
-            String chLong1, chLat1;
+            double deplacement=20;
+            vbPanneauHS.setLayoutX(deplacement);
 
-            chLong1 = "Long : " + String.format("%.1f", panoramiquesProjet[numPano].getHotspot(o).getLongitude());
-            chLat1 = "Lat : " + String.format("%.1f", panoramiquesProjet[numPano].getHotspot(o).getLatitude());
-            lbl = new Label(chLong1 + "        " + chLat1);
-            lbl.setPadding(new Insets(5, 10, 5, 5));
+            Pane pannneauHS = new Pane(vbPanneauHS);
+            pannneauHS.setStyle("-fx-border-color : #777777;-fx-border-width : 1px;-fx-border-radius : 3;");
+            panneauHotSpots.setId("HS" + o);
             lblPoint = new Label("Point n°" + (o + 1));
             lblPoint.setPadding(new Insets(5, 10, 5, 5));
+            lblPoint.setTranslateX(-deplacement);
             lblPoint.setStyle("-fx-background-color : #333;");
             lblPoint.setTextFill(Color.WHITE);
             Separator sp = new Separator(Orientation.HORIZONTAL);
-            sp.setStyle("-fx-border-color : #777;");
+            sp.setTranslateX(-deplacement);
             sp.setPrefWidth(300);
-            pannneauHS.setStyle("-fx-border-color :#777;-fx-border-radius : 3px;-fx-background-color : #ccc;");
 
             pannneauHS.setPrefWidth(300);
             pannneauHS.setTranslateX(5);
-            vbPanneauHS.getChildren().addAll(lblPoint, sp, lbl);
+            vbPanneauHS.getChildren().addAll(lblPoint, sp);
             if (lstPano != null) {
                 Label lblLien = new Label("Panoramique de destination");
                 ComboBox cbDestPano = new ComboBox();
@@ -2007,25 +2008,18 @@ public class EditeurPanovisu extends Application {
         for (int o = 0; o < panoramiquesProjet[numPano].getNombreHotspotImage(); o++) {
             VBox vbPanneauHS = new VBox();
             Pane pannneauHS = new Pane(vbPanneauHS);
+            pannneauHS.setStyle("-fx-border-color : #777777;-fx-border-width : 1px;-fx-border-radius : 3;");
             panneauHotSpots.setId("HSImg" + o);
-            String chLong1, chLat1;
-
-            chLong1 = "Long : " + String.format("%.1f", panoramiquesProjet[numPano].getHotspotImage(o).getLongitude());
-            chLat1 = "Lat : " + String.format("%.1f", panoramiquesProjet[numPano].getHotspotImage(o).getLatitude());
-            lbl = new Label(chLong1 + "        " + chLat1);
-            lbl.setPadding(new Insets(5, 10, 5, 5));
             lblPoint = new Label("Image n°" + (o + 1));
             lblPoint.setPadding(new Insets(5, 10, 5, 5));
             lblPoint.setStyle("-fx-background-color : #666;");
             lblPoint.setTextFill(Color.WHITE);
             Separator sp = new Separator(Orientation.HORIZONTAL);
-            sp.setStyle("-fx-border-color : #777;");
             sp.setPrefWidth(300);
-            pannneauHS.setStyle("-fx-border-color :#777;-fx-border-radius : 3px;-fx-background-color : #ccc;");
 
             pannneauHS.setPrefWidth(300);
             pannneauHS.setTranslateX(5);
-            vbPanneauHS.getChildren().addAll(lblPoint, sp, lbl);
+            vbPanneauHS.getChildren().addAll(lblPoint, sp);
             Label lblLien = new Label("Image choisie :");
             String f1XML = panoramiquesProjet[numPano].getHotspotImage(o).getLienImg();
             ImageView IMChoisie = new ImageView(new Image("file:" + repertTemp + File.separator + "images" + File.separator + f1XML, 100, -1, true, true));
@@ -2076,7 +2070,7 @@ public class EditeurPanovisu extends Application {
 
     private AnchorPane afficheLegende() {
         AnchorPane APLegende = new AnchorPane();
-        APLegende.setStyle("-fx-background-color : #ccc;-fx-border-color : #777;");
+        APLegende.getStyleClass().add("legendePane");
         APLegende.setMinWidth(1000);
         APLegende.setMinHeight(150);
         APLegende.setPrefWidth(1000);
@@ -3630,6 +3624,7 @@ public class EditeurPanovisu extends Application {
         if (!repertConfig.exists()) {
             repertConfig.mkdirs();
             locale = new Locale("fr", "FR");
+            setUserAgentStylesheet("file:css/clair.css");
             repertoireProjet = repertAppli;
         } else {
             lisFichierConfig();
@@ -3639,7 +3634,6 @@ public class EditeurPanovisu extends Application {
         stPrincipal.setTitle("PanoVisu v" + numVersion);
         //AquaFx.style();
 //        setUserAgentStylesheet(STYLESHEET_MODENA);
-        setUserAgentStylesheet("file:css/test.css");
         primaryStage.setMaximized(true);
         Dimension tailleEcran = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         int hauteur = (int) tailleEcran.getHeight() - 20;

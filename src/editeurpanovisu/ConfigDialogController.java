@@ -5,6 +5,7 @@
  */
 package editeurpanovisu;
 
+import static editeurpanovisu.EditeurPanovisu.styleCSS;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -12,12 +13,17 @@ import java.io.IOException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static javafx.application.Application.setUserAgentStylesheet;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -25,6 +31,7 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.controlsfx.dialog.DialogStyle;
 import org.controlsfx.dialog.Dialogs;
 
 /**
@@ -40,16 +47,21 @@ public class ConfigDialogController {
     private static Button btnSauvegarder;
     private static final String[] codesLangues = EditeurPanovisu.codesLanguesTraduction;
     private static final String[] langues = EditeurPanovisu.languesTraduction;
+    final ToggleGroup grpStyle = new ToggleGroup();
+    private static Label lblChoixStyle;
+    private static RadioButton RBClair;
+    private static RadioButton RBFonce;
 
     private static ComboBox listeLangues;
     private static TextField txtRepert;
-/**
- * 
- * @throws IOException 
- */
+
+    /**
+     *
+     * @throws IOException
+     */
     public void afficheFenetre() throws IOException {
         String chLangueConfig = EditeurPanovisu.locale.getLanguage() + "_" + EditeurPanovisu.locale.getCountry();
-        int codeL=0;
+        int codeL = 0;
         for (int i = 0; i < codesLangues.length; i++) {
             if (codesLangues[i].equals(chLangueConfig)) {
                 codeL = i;
@@ -88,7 +100,36 @@ public class ConfigDialogController {
         Button btnChoixRepert = new Button("...");
         btnChoixRepert.setLayoutX(490);
         btnChoixRepert.setLayoutY(110);
-        VBConfig.getChildren().addAll(lblType, listeLangues, lblRepert, txtRepert, btnChoixRepert);
+        lblChoixStyle = new Label(rb.getString("config.choixStyle"));
+        lblChoixStyle.setLayoutX(45);
+        lblChoixStyle.setLayoutY(150);
+        RBClair = new RadioButton(rb.getString("config.styleClair"));
+        RBFonce = new RadioButton(rb.getString("config.styleFonce"));
+        RBClair.setLayoutX(190);
+        RBClair.setLayoutY(180);
+        RBFonce.setLayoutX(190);
+        RBFonce.setLayoutY(200);
+        RBClair.setToggleGroup(grpStyle);
+        RBClair.setUserData("clair");
+        RBFonce.setUserData("fonce");
+        RBFonce.setToggleGroup(grpStyle);
+        if (styleCSS.equals("clair")) {
+            RBClair.setSelected(true);
+        } else {
+            RBFonce.setSelected(true);
+        }
+        grpStyle.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) -> {
+            if (grpStyle.getSelectedToggle() != null) {
+                setUserAgentStylesheet("file:css/" + grpStyle.getSelectedToggle().getUserData().toString() + ".css");
+
+            }
+        });
+
+        VBConfig.getChildren().addAll(
+                lblType, listeLangues,
+                lblRepert, txtRepert, btnChoixRepert,
+                lblChoixStyle, RBClair, RBFonce
+        );
         btnChoixRepert.setOnAction((ActionEvent e) -> {
             DirectoryChooser repertChoix = new DirectoryChooser();
             File repert = new File(EditeurPanovisu.repertoireProjet);
@@ -109,9 +150,12 @@ public class ConfigDialogController {
         fenetre.getChildren().add(Pboutons);
         btnAnnuler.setOnAction((ActionEvent e) -> {
             STConfig.hide();
+            setUserAgentStylesheet("file:css/" + styleCSS + ".css");
         });
         btnSauvegarder.setOnAction((ActionEvent e) -> {
+            styleCSS = grpStyle.getSelectedToggle().getUserData().toString();
             Dialogs.create()
+                    .style(DialogStyle.CROSS_PLATFORM_DARK)
                     .owner(null)
                     .title(rb.getString("config.titreDialogue"))
                     .masthead(rb.getString("config.masthead"))
@@ -120,6 +164,7 @@ public class ConfigDialogController {
             String contenuFichier = "langue=" + listeLangues.getValue().toString().split("_")[0].split(" : ")[1] + "\n";
             contenuFichier += "pays=" + listeLangues.getValue().toString().split("_")[1] + "\n";
             contenuFichier += "repert=" + txtRepert.getText() + "\n";
+            contenuFichier += "style=" + grpStyle.getSelectedToggle().getUserData().toString() + "\n";
             File fichConfig = new File(EditeurPanovisu.repertConfig.getAbsolutePath() + File.separator + "panovisu.cfg");
             fichConfig.setWritable(true);
             FileWriter fw = null;

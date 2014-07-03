@@ -440,7 +440,6 @@ public class GestionnaireInterfaceController {
         changeCouleurHS(couleurHotspots.getHue(), couleurHotspots.getSaturation(), couleurHotspots.getBrightness());
         changeCouleurHSPhoto(couleurHotspots.getHue(), couleurHotspots.getSaturation(), couleurHotspots.getBrightness());
         changeCouleurMasque(couleurMasque.getHue(), couleurMasque.getSaturation(), couleurMasque.getBrightness());
-
     }
 
     private void sauveBarre() {
@@ -905,6 +904,7 @@ public class GestionnaireInterfaceController {
         APVisualisation.getChildren().clear();
         APVisualisation.getChildren().addAll(RBClair, RBSombre, IMVisualisation, txtTitre, imgBoussole, imgAiguille, imgTwitter, imgGoogle, imgFacebook, imgEmail, APVisuVignettes, fondSuivant, fondPrecedent);
         chargeBarre(styleBoutons, styleHS, imageMasque);
+        afficheMasque();
         HBbarreBoutons = new HBox();
         HBbarreBoutons.setId("barreBoutons");
         HBbarreBoutons.setVisible(toggleBarreVisibilite.equals("oui"));
@@ -1211,7 +1211,7 @@ public class GestionnaireInterfaceController {
         bAfficheVignettes = false;
         bAfficheReseauxSociaux = false;
         APVisualisation.getChildren().clear();
-        APVisualisation.getChildren().addAll(RBClair, RBSombre, IMVisualisation, txtTitre, imgBoussole, imgAiguille, imgTwitter, imgGoogle, imgFacebook, imgEmail, APVisuVignettes);
+        APVisualisation.getChildren().addAll(RBClair, RBSombre, IMVisualisation, txtTitre, imgBoussole, imgAiguille, imgTwitter, imgGoogle, imgFacebook, imgEmail, APVisuVignettes,IVMasque);
 
         for (String chaine : templ) {
             String variable = chaine.split("=")[0];
@@ -1672,6 +1672,7 @@ public class GestionnaireInterfaceController {
         imgFacebook = new ImageView(new Image("file:" + repertReseauxSociaux + File.separator + imageReseauxSociauxFacebook));
         imgEmail = new ImageView(new Image("file:" + repertReseauxSociaux + File.separator + imageReseauxSociauxEmail));
         APVisuVignettes = new AnchorPane();
+        APVisualisation.getChildren().clear();
         APVisualisation.getChildren().addAll(txtTitre, imgBoussole, imgAiguille, IVMasque, imgTwitter, imgGoogle, imgFacebook, imgEmail, APVisuVignettes, fondSuivant, fondPrecedent);
         fondPrecedent.setPrefWidth(64);
         fondPrecedent.setPrefHeight(64);
@@ -3168,6 +3169,7 @@ public class GestionnaireInterfaceController {
         grpPostMasque.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) -> {
             if (grpPostMasque.getSelectedToggle() != null) {
                 positionMasque = grpPostMasque.getSelectedToggle().getUserData().toString();
+                APVisualisation.getChildren().remove(IVMasque);
                 afficheMasque();
             }
         });
