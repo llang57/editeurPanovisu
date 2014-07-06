@@ -20,6 +20,8 @@ header{
 }
 article{
     padding: 10px 25px;
+    max-width: 1300px;
+    text-align: justify;
 }
 article img{
     margin: 10px;
@@ -106,4 +108,26 @@ nav>ul>li>ul>li>a:hover{
     position: fixed;
     right:20px;    
     bottom: 20px;
+}
+ol{
+    padding-left: 45px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+ol>li{
+    margin-bottom: 15px;
+}
+ol>li>img,ol>li>ul>li>img{
+    margin-left: 50px;
+}
+ol>li>ul>li{
+    margin-top: 10px;
+    margin-left: 25px;
+}
+.rouge{
+    color: red;
+}
+p{
+    margin-top: 10px;
+    margin-bottom: 20px;
 }

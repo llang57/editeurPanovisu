@@ -54,6 +54,7 @@ import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -72,6 +73,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.StrokeLineJoin;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -496,10 +498,15 @@ public class EditeurPanovisu extends Application {
             }
             Dimension tailleEcran = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
             int hauteur = (int) tailleEcran.getHeight() - 200;
+            String titreVis = "Panovisu - visualiseur 100% html5 (three.js)";
+            TextField tfVisite = (TextField) paneChoixPanoramique.lookup("#titreVisite");
+            if (!tfVisite.getText().equals("")) {
+                titreVis = tfVisite.getText() + " - " + titreVis;
+            }
             String fichierHTML = "<!DOCTYPE html>\n"
                     + "<html lang=\"fr\">\n"
                     + "    <head>\n"
-                    + "        <title>Panovisu - visualiseur 100% html5 (three.js)</title>\n"
+                    + "        <title>" + titreVis + "</title>\n"
                     + "        <meta charset=\"utf-8\">\n"
                     + "        <meta name=\"viewport\" content=\"width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0\">\n"
                     + "    </head>\n"
@@ -598,8 +605,8 @@ public class EditeurPanovisu extends Application {
 
         double tailleNiv0 = 2048.d;
         Image img = new Image("file:" + fichierImage);
-        if (img.getWidth() > 10000) {
-            img = new Image("file:" + fichierImage, 10000, 5000, true, true);
+        if (img.getWidth() > 8000) {
+            img = new Image("file:" + fichierImage, 8000, 4000, true, true);
         }
         String nomPano = fichierImage.substring(fichierImage.lastIndexOf(File.separator) + 1, fichierImage.length());
         String ficImage = repertoire + File.separator + nomPano;
@@ -1006,6 +1013,10 @@ public class EditeurPanovisu extends Application {
         stPrincipal.setTitle("Panovisu v" + numVersion + " : " + fichProjet.getAbsolutePath());
 
         String contenuFichier = "";
+        TextField tfVisite = (TextField) paneChoixPanoramique.lookup("#titreVisite");
+        if (!tfVisite.getText().equals("")) {
+            contenuFichier += "[titreVisite=>" + tfVisite.getText() + "]\n";
+        }
         if (!panoEntree.equals("")) {
             contenuFichier += "[PanoEntree=>" + panoEntree + "]\n";
         }
@@ -1620,6 +1631,10 @@ public class EditeurPanovisu extends Application {
             if ("PanoEntree".equals(typeElement[0])) {
                 panoEntree = elementsLigne[0].split("]")[0];
             }
+            if ("titreVisite".equals(typeElement[0])) {
+                TextField tfVisite = (TextField) paneChoixPanoramique.lookup("#titreVisite");
+                tfVisite.setText(elementsLigne[0].split("]")[0]);
+            }
 
         }
         if (!panoEntree.equals("")) {
@@ -1955,7 +1970,7 @@ public class EditeurPanovisu extends Application {
         Label sep1 = new Label(" ");
         for (int o = 0; o < panoramiquesProjet[numPano].getNombreHotspots(); o++) {
             VBox vbPanneauHS = new VBox();
-            double deplacement=20;
+            double deplacement = 20;
             vbPanneauHS.setLayoutX(deplacement);
 
             Pane pannneauHS = new Pane(vbPanneauHS);
@@ -3438,6 +3453,7 @@ public class EditeurPanovisu extends Application {
 
         HBox hbEnvironnement = new HBox();
         TextArea txtTitrePano;
+        TextField tfTitreVisite;
         RadioButton radSphere;
         RadioButton radCube;
         CheckBox chkAfficheTitre;
@@ -3467,7 +3483,18 @@ public class EditeurPanovisu extends Application {
         outils = new VBox();
         paneChoixPanoramique = new VBox();
         paneChoixPanoramique.setId("choixPanoramique");
-        Label lblChoixPanoramiqueEntree = new Label("Choix du panoramique d'entrée de la visite");
+        Label lblTitreVisite = new Label(rb.getString("main.titreVisite"));
+        lblTitreVisite.setPadding(new Insets(15, 5, 5, 5));
+        tfTitreVisite = new TextField();
+        tfTitreVisite.setId("titreVisite");
+        tfTitreVisite.setPrefSize(300, 25);
+        tfTitreVisite.setMaxSize(300, 25);
+        tfTitreVisite.setMinSize(300, 25);
+
+        Separator sepTitre = new Separator(Orientation.HORIZONTAL);
+        sepTitre.setMinHeight(30);
+
+        Label lblChoixPanoramiqueEntree = new Label(rb.getString("main.panoEntree"));
         lblChoixPanoramiqueEntree.setPadding(new Insets(5));
         lblChoixPanoramiqueEntree.setStyle("-fx-background-color : #000;");
         lblChoixPanoramiqueEntree.setTextFill(Color.WHITE);
@@ -3479,7 +3506,11 @@ public class EditeurPanovisu extends Application {
         Separator sepPano = new Separator(Orientation.HORIZONTAL);
         sepPano.setMinHeight(30);
         listeChoixPanoramique.setVisibleRowCount(10);
-        paneChoixPanoramique.getChildren().addAll(lblChoixPanoramiqueEntree, listeChoixPanoramiqueEntree, sepPano, lblChoixPanoramique, listeChoixPanoramique);
+        paneChoixPanoramique.getChildren().addAll(
+                lblTitreVisite, tfTitreVisite, sepTitre,
+                lblChoixPanoramiqueEntree, listeChoixPanoramiqueEntree, sepPano,
+                lblChoixPanoramique, listeChoixPanoramique
+        );
         paneChoixPanoramique.setSpacing(10);
         /*
          à modifier pour afficher le panneau des derniers fichiers;        
@@ -3541,7 +3572,16 @@ public class EditeurPanovisu extends Application {
             clickBtnValidePano();
         });
 
-        vbInfoPano.getChildren().addAll(sepInfo, lblTitrePano, txtTitrePano, sepInfo1, lblTypePano, hbTypePano, chkAfficheTitre, chkAfficheInfo, sepInfo2, btnValidePano);
+        vbInfoPano.getChildren().addAll(
+                sepInfo,
+                lblTitrePano, txtTitrePano,
+                sepInfo1,
+                lblTypePano, hbTypePano,
+                chkAfficheTitre,
+                chkAfficheInfo,
+                sepInfo2,
+                btnValidePano
+        );
 
         paneChoixPanoramique.getChildren().add(myAnchorPane);
 

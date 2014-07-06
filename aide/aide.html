@@ -10,8 +10,8 @@
         <div id="content">
 
             <header id="debut">
-<!--                <img src="images/panoVisu.png" width="100"/>
-                <div id="titre">PanoVisu</div> <div id="sousTitre">Un visualiseur de panoramiques 100% HTML5 - 100% Libre</div>-->
+                <!--                <img src="images/panoVisu.png" width="100"/>
+                                <div id="titre">PanoVisu</div> <div id="sousTitre">Un visualiseur de panoramiques 100% HTML5 - 100% Libre</div>-->
                 <nav>
                     <ul>
                         <li>
@@ -57,7 +57,108 @@
             </header>
             <article>
                 <h1 id="premiersPas">Premiers pas ou comment réaliser un visite en 5 minutes</h1>
-                <p>A écrire</p>
+                <p class="rouge">Noubliez pas de sauvegarder votre projet régulièrement</p>
+                <h2>Dans l'onglet visite</h2>
+                <ol>
+                    <li>
+                        Charger les panoramiques (menu Visite => Ajouter panoramiques ou <b>Ctrl+A</b>(PC) ou <b>Cmd+A</b>(Mac))<br>
+                        <img src="images/menuPanoramiques.jpg" />
+                    </li>
+                    <li>
+                        Choisir le panoramique d'entrée<br>
+                        <img src='images/editeurVisiteEntree.jpg'/>
+                    </li>
+                    <li>
+                        Choisir le titre de chacun des panoramiques<br>
+                        <img src='images/editeurVisiteChoixPano.jpg'/>
+                    </li>
+                    <li>
+                        Créer les liaisons entre les panoramiques :
+                        <ul>
+                            <li> 
+                                <b>clic bouton gauche</b> sur la vue panoramiques pour choisir l'emplacement du Hotspot<br>
+                                <img src="images/editeurVisite.jpg" width="1200"/><br>
+                            </li>
+                            <li>
+                                choisissez le panoramique lié par le hotspot en <b>clic bouton gauche</b> sur son image (vous pourrez l'éditer en recliquant sur le point ou en choisissant 
+                                le panoramique lié par l'intermédiaire de la boite de choix).<br> 
+                                <img src="images/editeurVisiteChoixVue.jpg"/><br>
+                                Le texte du lien créé sera le titre du panoramique selectionné par défaut (vous pouvez l'éditer)<br>
+                                <img src="images/editeurVisiteHS.jpg" />
+                            </li>
+                            <li>
+                                Si vous vous êtes trompé vous pouvez supprimer le point en utilisant la combinaison (<b>ctrl+clic gauche</b>(PC) ou <b>cmd+clic gauche</b>(Mac) sur le point) 
+                            </li>
+                            <li>
+                                Vous pouvez de la même manière créer un lien vers une image en utilisant la combinaison <b>shift+clic gauche</b>
+                            </li>
+                        </ul>
+                        <br>
+                        dans l'interface la ligne rouge représente la direction du nord, la croix violette le point de vue d'entrée du panoramique 
+                        les points jaune/rouge les hotspots vers les autres panoramiques.<br>
+                        <img src="images/editeurVisitechoix.jpg" width="1200"/>
+                        
+                    </li>
+                    <li>
+                        Pour chacun des panoramiques vous pouvez également choisir le point de vue d'entrée (<b>clic droit</b>)
+                        (la direction dans laquelle se porte le regard lorsque le panoramique est chargé. Le centre de l'image est choisi par défaut.
+                    </li>
+                    <li>
+                        De même si vous comptez utiliser la boussole choisissez la position du nord (<b>shift + clic droit</b>)
+                    </li>
+                </ol>
+                <h2>
+                    Dans l'onglet Modèle d'interface
+                </h2>
+                <img src="images/editeurInterface.jpg" width="1200"/>
+                <br>
+                <ol>
+                    <li>
+                        Choisissez la couleur générale de l'interface. La couleur de chacun des éléments pourra ensuite être choisie individuellement.<br>
+                        <img src="images/couleurTheme.jpg" />
+                    </li>
+                    <li>
+                        paramétrez le titre (choix de la police, de sa taille, couleurs, etc...)<br>
+                        <img src="images/titre.jpg" />
+                    </li>
+                    <li>
+                        paramétrez la barre de navigation (forme des boutons, couleur, position, etc...)<br>
+                        <img src="images/interfaceNavigation.jpg" />
+                    </li>
+                    <li>
+                        paramétrez les hotspots (forme et couleur)<br>
+                        <img src="images/hotspots.jpg" />
+                    </li>
+                    <li>
+                        paramétrez la boussole (affichage, forme, position, etc...)<br>
+                        <img src="images/boussole.jpg" />
+                    </li>
+                    <li>
+                        paramétrez le bouton de masquage (affichage, position, couleur, ainsi que les éléments à masquer par le bouton)<br>
+                        <img src="images/masquage.jpg" />
+                    </li>
+                    <li>
+                        paramétrez les réseaux sociaux (affichage, choix des réseaux à afficher)<br>
+                        <img src="images/reseauxSociaux.jpg" />
+                    </li>
+                    <li>
+                        paramétrez l'affichage des vignettes des pnoramiques (position, couleur de fond, taille des vignettes)<br>
+                        <img src="images/vignettes.jpg" />
+                    </li>
+                </ol>
+                <p>
+                    Vous pouvez sauvegarder le modèle que vous venez de créer pour une utilisation ultérieure en utilisant le menu modèles.
+                </p>
+                <img src="images/menuModeles.jpg"/>
+                <h2>Génération de la visite</h2>
+                <p>
+                    Si vous n'avez pas encore sauvé votre visite faîtes le, puis générez votre visite en utilisant le menu visite (ou la combinaison de touche <b>Ctrl+V</b>(PC)
+                    ou <b>Cmd+V</b>(Mac)). La visite sera générée dans le repertoire de sauvegarde dans un sous-répertoire visite. </p>
+                <img src="images/menuPanoramiques.jpg" />
+                <p>
+                    Une fois la génération effectuée, la visite sera ouverte dans votre navigateur préféré.
+                </p>
+                <img src="images/visiteNavigateur.jpg" width="1200" />
                 <h1 id="menu">Les Menus</h1>
                 <img src="images/menu.jpg"/>
                 <h2 id="menuProjets">Menu Projets</h2>
