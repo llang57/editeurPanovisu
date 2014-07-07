@@ -210,6 +210,7 @@ and open the template in the editor.
     -webkit-filter: none;
 }
 
+
 .marcheArret{
     position: absolute;
     z-index: 501;
@@ -280,4 +281,17 @@ and open the template in the editor.
 }
 .suivant:hover,.precedent:hover{
     opacity: 0.9;
+}
+.plan,.planTitre,.planPoint{
+    position: absolute;
+    transition:ease-in-out 1s;
+}
+.planTitre,.planPoint{
+    cursor: pointer;
+}
+.actif{
+    cursor: auto;
+}
+.planAig{
+    position: absolute;
 }

@@ -1,7 +1,7 @@
 /**
  * @name panoVisu
  * 
- * @version 0.50
+ * @version 0.90
  * @author LANG Laurent
  */
 
@@ -11,7 +11,7 @@
  * 
  * @returns {window|String}
  */
-version = "0.80";
+version = "0.90";
 programmeur = "Laurent LANG";
 anneeProgramme = "2014";
 site = "http://lemondea360.fr";
@@ -50,9 +50,15 @@ function panovisu(num_pano) {
         this.txt = "";
     }
 
+    function pointPlan() {
+        this.positX = 0;
+        this.positY = 0;
+        this.xml = "";
+        this.texte = "";
+    }
+
 
     var timer,
-            webGL = true,
             timers,
             i,
             affHS = 0,
@@ -64,6 +70,8 @@ function panovisu(num_pano) {
             hotSpot = new Array(),
             pointsInteret = new Array(),
             vignettesPano = new Array(),
+            pointsPlan = new Array(),
+            planRentre,
             mode = 1,
             longitude = 0,
             latitude = 0,
@@ -190,7 +198,14 @@ function panovisu(num_pano) {
             vignettesPosition,
             vignettesFondCouleur,
             vignettesTaille,
-            vignettesTailleImage;
+            vignettesTailleImage,
+            planAffiche,
+            planLargeur,
+            planImage,
+            planPosition,
+            planCouleurFond,
+            planCouleurTexte,
+            planNord;
 
 
     /**
@@ -206,7 +221,7 @@ function panovisu(num_pano) {
 
     $(document).on("click", "#container-" + num_pano, function(evenement) {
         /*
-         * Evite de dÃ©clencher un hotspot si on arrÃªte la souris dessus
+         * Evite de déclencher un hotspot si on arrête la souris dessus
          */
         if (mouseMove === false) {
             var mouse = new THREE.Vector2();
@@ -363,7 +378,7 @@ function panovisu(num_pano) {
                 zoom();
             });
     /**
-     * Changement de la taille de l'Ã©cran
+     * Changement de la taille de l'écran
      * 
      */
     $(window).resize(function() {
@@ -437,7 +452,7 @@ function panovisu(num_pano) {
 
     }
     /**
-     * Gestion du click prolongÃ©
+     * Gestion du click prolongé
      * 
      */
     $(document).on("mousedown", "#xmoins-" + num_pano + ",#xplus-" + num_pano + ",#ymoins-" + num_pano + ",#yplus-" + num_pano,
@@ -612,6 +627,8 @@ function panovisu(num_pano) {
             $("#marcheArret-" + num_pano).hide();
             $("#divVignettes-" + num_pano).html("");
             $("#divVignettes-" + num_pano).hide();
+            $("#plan-" + num_pano).hide();
+            $("#planTitre-" + num_pano).hide();
             chargeXML(xmlFile);
         }
 
@@ -676,8 +693,10 @@ function panovisu(num_pano) {
                 $("#boussole-" + num_pano).fadeOut(500);
             if (marcheArretTitre === "oui")
                 $("#info-" + num_pano).fadeOut(500);
-            if (marcheArretPlan === "oui")
+            if (marcheArretPlan === "oui") {
                 $("#plan-" + num_pano).fadeOut(500);
+                $("#planTitre-" + num_pano).fadeOut(500);
+            }
             if (marcheArretReseaux === "oui")
                 $("#reseauxSociaux-" + num_pano).fadeOut(500);
             if (marcheArretVignettes === "oui")
@@ -699,8 +718,10 @@ function panovisu(num_pano) {
                 $("#boussole-" + num_pano).fadeIn(500);
             if (marcheArretTitre === "oui")
                 $("#info-" + num_pano).fadeIn(500);
-            if (marcheArretPlan === "oui")
+            if (marcheArretPlan === "oui") {
                 $("#plan-" + num_pano).fadeIn(500);
+                $("#planTitre-" + num_pano).fadeIn(500);
+            }
             if (marcheArretReseaux === "oui")
                 $("#reseauxSociaux-" + num_pano).fadeIn(500);
             if (marcheArretVignettes === "oui")
@@ -735,7 +756,7 @@ function panovisu(num_pano) {
         $("#marcheArret-" + num_pano).hide();
         chargeXML(xmlFile);
 
-    })
+    });
 
     $(document).on("click", "#divPrecedent-" + num_pano, function() {
         clearInterval(timers);
@@ -753,7 +774,77 @@ function panovisu(num_pano) {
         $("#marcheArret-" + num_pano).hide();
         chargeXML(xmlFile);
 
-    })
+    });
+
+    $(document).on("click", "#planTitre-" + num_pano, function() {
+        if (planPosition === "left") {
+            if (!planRentre) {
+                $("#planTitre-" + num_pano).css({
+                    transform: "translateX(-" + parseInt($("#planImg-" + num_pano).width() + 20) + "px) rotate(90deg)"
+                });
+                $("#plan-" + num_pano).css({
+                    transform: "translateX(-" + parseInt($("#planImg-" + num_pano).width() + 20) + "px)"
+                });
+                planRentre = true;
+            } else {
+                $("#planTitre-" + num_pano).css({
+                    transform: "translateX(0px)  rotate(90deg)"
+                });
+                $("#plan-" + num_pano).css({
+                    transform: "translateX(0px)"
+                });
+                planRentre = false;
+
+            }
+        }
+        else {
+            if (!planRentre) {
+                $("#planTitre-" + num_pano).css({
+                    transform: "translateX(" + parseInt($("#planImg-" + num_pano).width() + 20) + "px)  rotate(90deg)"
+                });
+                $("#plan-" + num_pano).css({
+                    transform: "translateX(" + parseInt($("#planImg-" + num_pano).width() + 20) + "px)"
+                });
+                planRentre = true;
+            } else {
+                $("#planTitre-" + num_pano).css({
+                    transform: "translateX(0px)  rotate(90deg)"
+                });
+                $("#plan-" + num_pano).css({
+                    transform: "translateX(0px)"
+                });
+                planRentre = false;
+
+            }
+        }
+    });
+
+    $(document).on("click", ".planPoint", function() {
+        if (pointsPlan.length !== 0) {
+            var numPlanPoint = parseInt($(this).attr("id").split("-")[1]);
+            xmlFile = pointsPlan[numPlanPoint].xml;
+            if (xmlFile !== "actif") {
+                clearInterval(timers);
+                longitude = 0;
+                latitude = 0;
+                fov = 75;
+                $("#infoBulle-" + num_pano).hide();
+                $("#infoBulle-" + num_pano).html("");
+                isReloaded = true;
+                hotSpot = new Array();
+                pointsInteret = new Array();
+                vignettesPano = new Array();
+                numHotspot = 0;
+                $("#boussole-" + num_pano).hide();
+                $("#marcheArret-" + num_pano).hide();
+                $("#divVignettes-" + num_pano).html("");
+                $("#divVignettes-" + num_pano).hide();
+                $("#plan-" + num_pano).hide();
+                $("#planTitre-" + num_pano).hide();
+                chargeXML(xmlFile);
+            }
+        }
+    });
 
     /**
      * 
@@ -1199,15 +1290,16 @@ function panovisu(num_pano) {
         $("#infoBulle-" + num_pano).hide();
         $("#infoBulle-" + num_pano).html("");
         isReloaded = true;
-//        loader.load(function() {
-//
-//        });
         xmlFile = pointsInteret[nHotspot].contenu;
         hotSpot = new Array();
         pointsInteret = new Array();
         numHotspot = 0;
         $("#boussole-" + num_pano).hide();
         $("#marcheArret-" + num_pano).hide();
+        $("#divVignettes-" + num_pano).html("");
+        $("#divVignettes-" + num_pano).hide();
+        $("#plan-" + num_pano).hide();
+        $("#planTitre-" + num_pano).hide();
         chargeXML(xmlFile);
     }
 
@@ -1416,6 +1508,54 @@ function panovisu(num_pano) {
 
             }
         }
+        if (planAffiche) {
+            $("#plan-" + num_pano).html("");
+            $("#plan-" + num_pano).css(planPosition, "0px");
+            $("#plan-" + num_pano).css({backgroundColor: planCouleurFond, padding: "10px", top: "0px"});
+            $("<img>", {id: "planAig-" + num_pano, class: "planAig", src: "panovisu/images/plan/aiguillePlan.png"}).appendTo("#plan-" + num_pano);
+            $("#planAig-" + num_pano).css({
+                right: "30px",
+                top: "10px",
+                transform: "rotate(" + planNord + "deg)"
+            });
+            $("<img>", {id: "planImg-" + num_pano, class: "planImg", src: planImage, width: planLargeur}).appendTo("#plan-" + num_pano);
+            var positPlan = $("#info-" + num_pano).height() + 10;
+            console.log($("#plan-" + num_pano).height());
+            $("#plan-" + num_pano).css("top", positPlan);
+            $("#plan-" + num_pano).show();
+            $("<div>", {id: "planTitre-" + num_pano, class: "planTitre"}).appendTo("#pano1-" + num_pano);
+            $("#planTitre-" + num_pano).css({
+                width: "44px",
+                height: "30px",
+                paddingLeft: "6px",
+                transformOrigin: "0 0",
+                transform: "rotate(90deg)",
+                backgroundColor: planCouleurFond,
+                color: planCouleurTexte,
+                top: positPlan
+            });
+            $("#planTitre-" + num_pano).html("plan");
+            if (planPosition === "left") {
+                $("#planTitre-" + num_pano).css(planPosition, $("#planImg-" + num_pano).width() + 20 + $("#planTitre-" + num_pano).height() + "px");
+            } else {
+                $("#planTitre-" + num_pano).css(planPosition, $("#planImg-" + num_pano).width() + 20 - $("#planTitre-" + num_pano).width()
+                        - parseInt($("#planTitre-" + num_pano).css("paddingLeft")) + "px");
+            }
+            console.log("nombre de points : " + pointsPlan.length);
+            for (var i = 0; i < pointsPlan.length; i++) {
+                console.log(i + " ==> " + pointsPlan[i].xml);
+                if (pointsPlan[i].xml === "actif") {
+                    $("<img>", {id: "planPt-" + i + "-" + num_pano, class: "planPoint actif", src: "panovisu/images/plan/pointActif.png", width: "15"}).appendTo("#plan-" + num_pano);
+                }
+                else {
+                    $("<img>", {id: "planPt-" + i + "-" + num_pano, class: "planPoint", title: pointsPlan[i].texte, src: "panovisu/images/plan/point.png", width: "15"}).appendTo("#plan-" + num_pano);
+                }
+                $("#planPt-" + i + "-" + num_pano).css({
+                    top: pointsPlan[i].positY - $("#planPt-" + i + "-" + num_pano).width() / 2,
+                    left: pointsPlan[i].positX - $("#planPt-" + i + "-" + num_pano).width() / 2
+                });
+            }
+        }
 
     }
     function afficheNiveauSphere(image, niveau) {
@@ -1428,12 +1568,7 @@ function panovisu(num_pano) {
                 var img2 = panoImage.split("/")[1];
                 //alert(texture);
                 if (img === img2) {
-                    if (webGL) {
-                        var geometry = new THREE.SphereGeometry(405 - niveau, 200, 200);
-                    }
-                    else {
-                        var geometry = new THREE.SphereGeometry(405 - niveau, 40, 40);
-                    }
+                    var geometry = new THREE.SphereGeometry(405 - niveau, 50, 50);
                     var material = new THREE.MeshBasicMaterial({map: texture, overdraw: true});
                     var mesh1 = new THREE.Mesh(geometry, material);
                     mesh1.scale.x = -1;
@@ -1453,12 +1588,7 @@ function panovisu(num_pano) {
                 var img2 = panoImage.split("/")[1];
                 if (img === img2)
                 {
-                    if (webGL) {
-                        var geometry = new THREE.SphereGeometry(390, 200, 200);
-                    }
-                    else {
-                        var geometry = new THREE.SphereGeometry(390, 40, 40);
-                    }
+                    var geometry = new THREE.SphereGeometry(405 - niveau, 50, 50);
                     var material = new THREE.MeshBasicMaterial({map: texture, overdraw: true});
                     var meshF = new THREE.Mesh(geometry, material);
                     meshF.scale.x = -1;
@@ -1470,7 +1600,7 @@ function panovisu(num_pano) {
         }
     }
     /**
-     * Initialisation du panoramique / équirectangulaire
+     * Initialisation du panoramique / équilatéral
      * 
      * @returns {undefined}
      */
@@ -1482,6 +1612,11 @@ function panovisu(num_pano) {
             var nomimage = panoImage.split("/")[0] + "/niveau0/" + panoImage.split("/")[1];
             loader.load(nomimage + ".jpg", function(texture) {
 //                alert(nomimage);
+                var geometry = new THREE.SphereGeometry(405, 50, 50);
+                var material = new THREE.MeshBasicMaterial({map: texture, overdraw: true});
+                mesh = new THREE.Mesh(geometry, material);
+                mesh.scale.x = -1;
+                scene.add(mesh);
                 if (!isReloaded)
                 {
                     if (supportWebgl())
@@ -1491,23 +1626,12 @@ function panovisu(num_pano) {
                     else {
                         if (supportCanvas()) {
                             renderer = new THREE.CanvasRenderer();
-                            webGL = false;
                         }
                         else {
                             afficheErreur();
                         }
                     }
                 }
-                if (webGL) {
-                    var geometry = new THREE.SphereGeometry(405, 200, 200);
-                }
-                else {
-                    var geometry = new THREE.SphereGeometry(405, 40, 40);
-                }
-                var material = new THREE.MeshBasicMaterial({map: texture, overdraw: true});
-                mesh = new THREE.Mesh(geometry, material);
-                mesh.scale.x = -1;
-                scene.add(mesh);
                 afficheNiveauSphere(panoImage, 1);
                 renderer.setSize(pano.width(), pano.height());
                 container.append(renderer.domElement);
@@ -1536,6 +1660,11 @@ function panovisu(num_pano) {
         else {
             loader = new THREE.TextureLoader();
             loader.load(panoImage + ".jpg", function(texture) {
+                var geometry = new THREE.SphereGeometry(405, 50, 50);
+                var material = new THREE.MeshBasicMaterial({map: texture, overdraw: true});
+                mesh = new THREE.Mesh(geometry, material);
+                mesh.scale.x = -1;
+                scene.add(mesh);
                 if (!isReloaded)
                 {
                     if (supportWebgl())
@@ -1545,23 +1674,12 @@ function panovisu(num_pano) {
                     else {
                         if (supportCanvas()) {
                             renderer = new THREE.CanvasRenderer();
-                            webGL = false;
                         }
                         else {
                             afficheErreur();
                         }
                     }
                 }
-                if (webGL) {
-                    var geometry = new THREE.SphereGeometry(405, 200, 200);
-                }
-                else {
-                    var geometry = new THREE.SphereGeometry(405, 40, 40);
-                }
-                var material = new THREE.MeshBasicMaterial({map: texture, overdraw: true});
-                mesh = new THREE.Mesh(geometry, material);
-                mesh.scale.x = -1;
-                scene.add(mesh);
                 renderer.setSize(pano.width(), pano.height());
                 container.append(renderer.domElement);
                 for (var i = 0; i < pointsInteret.length; i++)
@@ -1983,6 +2101,7 @@ function panovisu(num_pano) {
      */
     function creeInfo(fenetrePanoramique) {
         $("<div>", {id: "infoPanovisu-" + num_pano, class: "infoPanovisu"}).appendTo("#" + fenetrePanoramique);
+        $("#infoPanovisu-" + num_pano).hide();
         panoInfo = "<b>Panovisu version " +
                 version +
                 "</b><br><br>Un visualiseur 100% HTML5 - 100% libre<br>" +
@@ -2000,6 +2119,7 @@ function panovisu(num_pano) {
      */
     function creeAide(fenetrePanoramique) {
         $("<div>", {id: "aidePanovisu-" + num_pano, class: "aidePanovisu"}).appendTo("#" + fenetrePanoramique);
+        $("#aidePanovisu-" + num_pano).hide();
         panoInfo = "<span style='font-weight:bolder;font-size:1.2em;font-variant: small-caps;'>Aide à la Navigation</span><br><br><div style='width:100px;height:90px;padding-left:5px;display:inline-block;'><img style='width:90px' src='panovisu/images/aide_souris.png'/></div>" +
                 "<div style='width : 270px;display:inline-block;vertical-align:top; text-align: justify;'>Pour vous déplacer dans la vue cliquez avec le bouton gauche de la souris " +
                 "sur le panoramique puis déplacez la souris en maintenant le bouton de la souris enfoncé<br><br>Vous pouvez également utiliser le menu pour vous déplacer</div>" +
@@ -2146,12 +2266,23 @@ function panovisu(num_pano) {
                     vignettesTailleImage = 120;
                     vignettesPano = new Array();
                     pointsInteret = new Array();
+                    pointsPlan = new Array();
+                    planAffiche = false;
+                    planRentre = false;
+                    planImage = "";
+                    planLargeur = 0;
+                    planNord = 0;
+                    planPosition = "left";
+                    planCouleurFond = "rgba(0,0,0,0.5)";
+                    planCouleurTexte = "white";
                     $("#divVignettes-" + num_pano).html("");
                     $("<img>", {id: "gaucheVignettes-" + num_pano, class: "positionVignettes", src: "panovisu/images/interface/gauche.jpg"}).appendTo("#divVignettes-" + num_pano);
                     $("<img>", {id: "droiteVignettes-" + num_pano, class: "positionVignettes", src: "panovisu/images/interface/droite.jpg"}).appendTo("#divVignettes-" + num_pano);
                     $("<img>", {id: "hautVignettes-" + num_pano, class: "positionVignettes", src: "panovisu/images/interface/haut.jpg"}).appendTo("#divVignettes-" + num_pano);
                     $("<img>", {id: "basVignettes-" + num_pano, class: "positionVignettes", src: "panovisu/images/interface/bas.jpg"}).appendTo("#divVignettes-" + num_pano);
                     $("#divVignettes-" + num_pano).hide();
+                    $("#plan-" + num_pano).hide();
+                    $("#planTitre-" + num_pano).hide();
                     $("#reseauxSociaux-" + num_pano).hide();
                     /**
                      * Définition du panoramique à afficher 
@@ -2316,6 +2447,32 @@ function panovisu(num_pano) {
                         i++;
                     });
 
+                    var XMLPlan = $(d).find('plan');
+                    planAff = XMLPlan.attr('affiche') || "non";
+                    planAffiche = (planAff === "oui");
+                    planImage = XMLPlan.attr('image') || planImage;
+                    planPosition = XMLPlan.attr('position') || planPosition;
+                    planCouleurFond = XMLPlan.attr("couleurFond") || planCouleurFond;
+                    planCouleurTexte = XMLPlan.attr("couleurTexte") || planCouleurTexte;
+                    planLargeur = parseFloat(XMLPlan.attr('largeur')) || planLargeur;
+                    planNord = parseFloat(XMLPlan.attr('nord')) || planNord;
+
+
+                    /*
+                     *   vignettes des panoramiques
+                     */
+                    i = 0;
+                    $(d).find('pointPlan').each(function() {
+                        pointsPlan[i] = new pointPlan();
+                        pointsPlan[i].xml = $(this).attr('xml');
+                        pointsPlan[i].texte = $(this).attr('texte') || "";
+                        pointsPlan[i].positX = parseInt($(this).attr('positX')) || 0;
+                        pointsPlan[i].positY = parseInt($(this).attr('positY')) || 0;
+                        console.log("i : " + i + "  " + pointsPlan[i].xml + " ==> " + pointsPlan[i].positX + "," + pointsPlan[i].positY);
+                        i++;
+                    });
+
+
                     /**
                      * Initialisation de l'interface
                      */
@@ -2409,6 +2566,8 @@ function panovisu(num_pano) {
         $("<div>", {id: "deplacement-" + num_pano, class: "deplacement"}).appendTo("#barre-" + num_pano);
         $("<div>", {id: "zoom-" + num_pano, class: "zoom"}).appendTo("#barre-" + num_pano);
         $("<div>", {id: "outils-" + num_pano, class: "outils"}).appendTo("#barre-" + num_pano);
+        $("<div>", {id: "plan-" + num_pano, class: "plan"}).appendTo("#pano1-" + num_pano);
+        $("#plan-" + num_pano).hide();
         /**
          * On rajoute enfin les boutons & les fenêtre d'information.
          */

@@ -213,6 +213,11 @@ public class EditeurPanovisu extends Application {
                 boussoleRepert.mkdirs();
             }
             copieDirectory(repertAppli + File.separator + "panovisu/images/boussoles", boussoleRepert.getAbsolutePath());
+            File planRepert = new File(repertTemp + "/panovisu/images/plan");
+            if (!planRepert.exists()) {
+                planRepert.mkdirs();
+            }
+            copieDirectory(repertAppli + File.separator + "panovisu/images/plan", planRepert.getAbsolutePath());
             File reseauRepert = new File(repertTemp + "/panovisu/images/reseaux");
             if (!reseauRepert.exists()) {
                 reseauRepert.mkdirs();
