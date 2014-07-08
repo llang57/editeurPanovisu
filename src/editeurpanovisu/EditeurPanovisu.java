@@ -115,6 +115,7 @@ public class EditeurPanovisu extends Application {
     static private VBox paneChoixPanoramique;
     static private VBox outils;
     static private Tab tabInterface;
+    static public Tab tabPlan;
     static private Scene scene;
     static private ScrollPane vuePanoramique;
     static private ScrollPane panneauOutils;
@@ -536,6 +537,8 @@ public class EditeurPanovisu extends Application {
                     + "                $(\"#pano\").height($(window).height()-10);\n"
                     + "                ajoutePano({\n"
                     + "                    panoramique: \"pano\",\n"
+                    + "                    minFOV: 35,\n"
+                    + "                    maxFOV: 120,\n"
                     + "                    fenX: \"100%\",\n"
                     + "                    fenY: \"100%\",\n"
                     + "                    xml: \"xml/PANO.xml\"\n"
@@ -3452,6 +3455,7 @@ public class EditeurPanovisu extends Application {
         Tab tabVisite = new Tab();
         Pane visualiseur;
         tabInterface = new Tab();
+        tabPlan = new Tab();
         gestionnaireInterface.creeInterface(width, height - 140);
         visualiseur = gestionnaireInterface.tabInterface;
         tabInterface.setContent(visualiseur);
@@ -3465,13 +3469,16 @@ public class EditeurPanovisu extends Application {
         CheckBox chkAfficheInfo;
         Button btnValidePano;
 
-        tabPaneEnvironnement.getTabs().addAll(tabVisite, tabInterface);
+        tabPaneEnvironnement.getTabs().addAll(tabVisite, tabInterface,tabPlan);
         //tabPaneEnvironnement.setTranslateY(80);
         tabPaneEnvironnement.setSide(Side.TOP);
         tabVisite.setText(rb.getString("main.creationVisite"));
         tabVisite.setClosable(false);
         tabInterface.setText(rb.getString("main.creationInterface"));
         tabInterface.setClosable(false);
+        tabPlan.setText(rb.getString("main.tabPlan"));
+        tabPlan.setClosable(false);
+        tabPlan.setDisable(true);
         tabVisite.setContent(hbEnvironnement);
         double largeur;
         String labelStyle = "-fx-color : white;-fx-background-color : #fff;-fx-padding : 5px;  -fx-border : 1px solid #777;-fx-width : 100px;-fx-margin : 5px; ";
