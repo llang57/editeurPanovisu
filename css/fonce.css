@@ -148,7 +148,7 @@ is being used to size a border should also be in pixels.
 
     /* The opacity level to use for the "disabled" pseudoclass.
      */
-    -fx-disabled-opacity: 0.2;
+    -fx-disabled-opacity: 0.5;
 
     /* Chart Color Palette */
     CHART_COLOR_1: #f3622d;
@@ -916,13 +916,13 @@ is being used to size a border should also be in pixels.
     -fx-background-insets: 0 1 1 0;
 }
 /* new styleclass for edge to edge scrollpanes that don't want to draw a border */
-.scroll-pane.edge-to-edge,
+.scroll-pane,
 .tab-pane > * > .scroll-pane {
     -fx-background-color: -fx-background;
     -fx-background-insets: 0;
     -fx-padding: 0;
 }
-.scroll-pane.edge-to-edge > .scroll-bar,
+.scroll-pane > .scroll-bar,
 .tab-pane > * > .scroll-pane > .scroll-bar {
     -fx-background-insets: 0;
     -fx-padding: 0;

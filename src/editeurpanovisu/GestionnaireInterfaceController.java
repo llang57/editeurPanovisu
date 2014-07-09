@@ -5,6 +5,8 @@
  */
 package editeurpanovisu;
 
+import static editeurpanovisu.EditeurPanovisu.ajouterPlan;
+import static editeurpanovisu.EditeurPanovisu.imgAjouterPlan;
 import static editeurpanovisu.EditeurPanovisu.nombrePanoramiques;
 import static editeurpanovisu.EditeurPanovisu.panoramiquesProjet;
 import static editeurpanovisu.EditeurPanovisu.repertAppli;
@@ -21,7 +23,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ColorPicker;
@@ -29,7 +30,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Separator;
 import javafx.scene.control.Slider;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
@@ -282,28 +282,16 @@ public class GestionnaireInterfaceController {
     public static String couleurFondPlan = "#000000";
     public static double opacitePlan = 0.8;
     public static String couleurTextePlan = "#ffffff";
-    public static double positionNordPlan = 0;
-    public static String positionBoussolePlan = "top:right";
-    public static double positXBoussolePlan = 0;
-    public static double positYBoussolePlan = 0;
     /*
      Eléments de l'onglet plan
      */
     private static CheckBox CBAffichePlan;
     private static Slider SLOpacitePlan;
-    private static Slider SLTaillePlan;
     private static RadioButton RBPlanLeft;
     private static RadioButton RBPlanRight;
-    private static RadioButton RBBoussolePlanTopLeft;
-    private static RadioButton RBBoussolePlanTopRight;
-    private static RadioButton RBBoussolePlanBottomLeft;
-    private static RadioButton RBBoussolePlanBottomRight;
     private static ColorPicker CPCouleurFondPlan;
     private static ColorPicker CPCouleurTextePlan;
     private static Slider SLLargeurPlan;
-    private static Slider SLnordPlan;
-    private static BigDecimalField BDFPositXBoussole;
-    private static BigDecimalField BDFPositYBoussole;
 
     public Pane tabInterface;
     private static HBox HBInterface;
@@ -319,7 +307,6 @@ public class GestionnaireInterfaceController {
     final ToggleGroup grpPosReseauxSociaux = new ToggleGroup();
     final ToggleGroup grpPosVignettes = new ToggleGroup();
     final ToggleGroup grpPosPlan = new ToggleGroup();
-    final ToggleGroup grpPosBoussolePlan = new ToggleGroup();
     private static Image imageClaire;
     private static Image imageSombre;
     private static HBox HBbarreBoutons;
@@ -1239,7 +1226,18 @@ public class GestionnaireInterfaceController {
                 + "positionVignettes=" + positionVignettes + "\n"
                 + "opaciteVignettes=" + Math.round(opaciteVignettes * 100.d) / 100.d + "\n"
                 + "tailleImageVignettes=" + Math.round(tailleImageVignettes) + "\n"
-                + "couleurFondVignettes=" + couleurFondVignettes + "\n";
+                + "couleurFondVignettes=" + couleurFondVignettes + "\n"
+                + "affichePlan=" + bAffichePlan + "\n"
+                + "positionPlan=" + positionPlan + "\n"
+                + "opacitePlan=" + Math.round(opacitePlan * 100.d) / 100.d + "\n"
+                + "largeurPlan=" + Math.round(largeurPlan) + "\n"
+                + "couleurFondPlan=" + couleurFondPlan + "\n"
+                + "couleurTextePlan=" + couleurTextePlan + "\n"
+//                + "positionNordPlan=" + Math.round(positionNordPlan) + "\n"
+//                + "positionBoussolePlan=" + positionBoussolePlan + "\n"
+//                + "positXBoussolePlan=" + Math.round(positXBoussolePlan) + "\n"
+//                + "positYBoussolePlan=" + Math.round(positYBoussolePlan) + "\n"
+                ;
         return contenuFichier;
     }
 
@@ -1509,6 +1507,36 @@ public class GestionnaireInterfaceController {
                 case "couleurFondVignettes":
                     couleurFondVignettes = valeur;
                     break;
+                case "affichePlan":
+                    bAffichePlan = valeur.equals("true");
+                    break;
+                case "positionPlan":
+                    positionPlan = valeur;
+                    break;
+                case "opacitePlan":
+                    opacitePlan = Double.parseDouble(valeur);
+                    break;
+                case "largeurPlan":
+                    largeurPlan = Double.parseDouble(valeur);
+                    break;
+                case "couleurFondPlan":
+                    couleurFondPlan = valeur;
+                    break;
+                case "couleurTextePlan":
+                    couleurTextePlan = valeur;
+                    break;
+//                case "positionNordPlan":
+//                    positionNordPlan = Double.parseDouble(valeur);
+//                    break;
+//                case "positionBoussolePlan":
+//                    positionBoussolePlan = valeur;
+//                    break;
+//                case "positXBoussolePlan":
+//                    positXBoussolePlan = Double.parseDouble(valeur);
+//                    break;
+//                case "positYBoussolePlan":
+//                    positYBoussolePlan = Double.parseDouble(valeur);
+//                    break;
 
             }
         }
@@ -1579,16 +1607,31 @@ public class GestionnaireInterfaceController {
         CBAfficheVignettes.setSelected(bAfficheVignettes);
         SLOpaciteVignettes.setValue(opaciteVignettes);
         SLTailleVignettes.setValue(tailleImageVignettes);
-        RBVignettesLeft.setSelected(positionReseauxSociaux.equals("left"));
-        RBVignettesRight.setSelected(positionReseauxSociaux.equals("right"));
-        RBVignettesBottom.setSelected(positionReseauxSociaux.equals("bottom"));
+        RBVignettesLeft.setSelected(positionVignettes.equals("left"));
+        RBVignettesRight.setSelected(positionVignettes.equals("right"));
+        RBVignettesBottom.setSelected(positionVignettes.equals("bottom"));
         CPCouleurFondVignettes.setValue(Color.valueOf(couleurFondVignettes));
+        CBAffichePlan.setSelected(bAffichePlan);
+        SLOpacitePlan.setValue(opacitePlan);
+        SLLargeurPlan.setValue(largeurPlan);
+        RBPlanLeft.setSelected(positionPlan.equals("left"));
+        RBPlanRight.setSelected(positionPlan.equals("right"));
+        CPCouleurFondPlan.setValue(Color.valueOf(couleurFondPlan));
+        CPCouleurTextePlan.setValue(Color.valueOf(couleurTextePlan));
+//        SLnordPlan.setValue(positionNordPlan);
+//        RBBoussolePlanTopLeft.setSelected(positionPlan.equals("top:left"));
+//        RBBoussolePlanTopRight.setSelected(positionPlan.equals("top:right"));
+//        RBBoussolePlanBottomLeft.setSelected(positionPlan.equals("bottom:left"));
+//        RBBoussolePlanBottomRight.setSelected(positionPlan.equals("bottom:right"));
+//        BDFPositXBoussole.setNumber(new BigDecimal(positXBoussolePlan));
+//        BDFPositYBoussole.setNumber(new BigDecimal(positYBoussolePlan));
         //chargeBarre(styleBarre, styleHotSpots, imageMasque);
         afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
         afficheBoussole();
         afficheMasque();
         afficheReseauxSociaux();
         afficheVignettes();
+        affichePlan();
         changeCouleurBarre(couleurBoutons.getHue(), couleurBoutons.getSaturation(), couleurBoutons.getBrightness());
         changeCouleurMasque(couleurMasque.getHue(), couleurMasque.getSaturation(), couleurMasque.getBrightness());
         changeCouleurHS(couleurHotspots.getHue(), couleurHotspots.getSaturation(), couleurHotspots.getBrightness());
@@ -2853,7 +2896,7 @@ public class GestionnaireInterfaceController {
         APPlan = new AnchorPane();
 
         APPlan.setLayoutY(40);
-        APPlan.setPrefHeight(330);
+        APPlan.setPrefHeight(190);
         APPlan.setMinWidth(VBOutils.getPrefWidth() - 20);
         Double taillePanelPlan = APPlan.getPrefHeight();
         CBAffichePlan = new CheckBox(rb.getString("interface.affichagePlan"));
@@ -2864,6 +2907,14 @@ public class GestionnaireInterfaceController {
             if (new_val != null) {
                 bAffichePlan = new_val;
                 tabPlan.setDisable(!new_val);
+                imgAjouterPlan.setDisable(!new_val);
+                ajouterPlan.setDisable(!new_val);
+                if (new_val){
+                    imgAjouterPlan.setOpacity(1.0);
+                }
+                else{
+                    imgAjouterPlan.setOpacity(0.3);
+                }
                 affichePlan();
             }
         });
@@ -2914,68 +2965,13 @@ public class GestionnaireInterfaceController {
         SLOpacitePlan = new Slider(0, 1.0, 0.8);
         SLOpacitePlan.setLayoutX(200);
         SLOpacitePlan.setLayoutY(160);
-        Label lblNordPlan = new Label(rb.getString("interface.positionNordPlan"));
-        lblNordPlan.setLayoutX(10);
-        lblNordPlan.setLayoutY(190);
-        SLnordPlan = new Slider(0, 360.0, 0);
-        SLnordPlan.setLayoutX(200);
-        SLnordPlan.setLayoutY(190);
-        Separator sepPlan = new Separator(Orientation.HORIZONTAL);
-        sepPlan.setPrefHeight(10);
-        sepPlan.setPrefWidth(350);
-        sepPlan.setLayoutY(220);
-        Label lblPositBoussolePlan = new Label(rb.getString("interface.positionBoussolePlan"));
-        lblPositBoussolePlan.setLayoutX(10);
-        lblPositBoussolePlan.setLayoutY(230);
-        RBBoussolePlanTopLeft = new RadioButton("");
-        RBBoussolePlanTopLeft.setLayoutX(200);
-        RBBoussolePlanTopLeft.setLayoutY(230);
-        RBBoussolePlanTopLeft.setUserData("top:left");
-        RBBoussolePlanTopLeft.setToggleGroup(grpPosBoussolePlan);
-        RBBoussolePlanTopRight = new RadioButton("");
-        RBBoussolePlanTopRight.setLayoutX(230);
-        RBBoussolePlanTopRight.setLayoutY(230);
-        RBBoussolePlanTopRight.setUserData("top:right");
-        RBBoussolePlanTopRight.setToggleGroup(grpPosBoussolePlan);
-        RBBoussolePlanBottomLeft = new RadioButton("");
-        RBBoussolePlanBottomLeft.setLayoutX(200);
-        RBBoussolePlanBottomLeft.setLayoutY(260);
-        RBBoussolePlanBottomLeft.setUserData("bottom:left");
-        RBBoussolePlanBottomLeft.setToggleGroup(grpPosBoussolePlan);
-        RBBoussolePlanBottomRight = new RadioButton("");
-        RBBoussolePlanBottomRight.setLayoutX(230);
-        RBBoussolePlanBottomRight.setLayoutY(260);
-        RBBoussolePlanBottomRight.setUserData("bottom:right");
-        RBBoussolePlanBottomRight.setToggleGroup(grpPosBoussolePlan);
-        Label lblBoussoleDXSpinner = new Label("dX :");
-        lblBoussoleDXSpinner.setLayoutX(25);
-        lblBoussoleDXSpinner.setLayoutY(290);
-        Label lblBoussoleDYSpinner = new Label("dY :");
-        lblBoussoleDYSpinner.setLayoutX(175);
-        lblBoussoleDYSpinner.setLayoutY(290);
-        BDFPositXBoussole = new BigDecimalField(new BigDecimal(positXBoussolePlan));
-        BDFPositXBoussole.setLayoutX(50);
-        BDFPositXBoussole.setLayoutY(285);
-        BDFPositXBoussole.setMaxValue(new BigDecimal(200));
-        BDFPositXBoussole.setMinValue(new BigDecimal(0));
-        BDFPositXBoussole.setMaxWidth(100);
-        BDFPositYBoussole = new BigDecimalField(new BigDecimal(positYBoussolePlan));
-        BDFPositYBoussole.setLayoutX(200);
-        BDFPositYBoussole.setLayoutY(285);
-        BDFPositYBoussole.setMaxValue(new BigDecimal(200));
-        BDFPositYBoussole.setMinValue(new BigDecimal(0));
-        BDFPositYBoussole.setMaxWidth(100);
 
         APPlan.getChildren().addAll(
                 lblLargeurPlan, SLLargeurPlan,
                 lblPositPlan, RBPlanLeft, RBPlanRight,
                 lblCouleurFondPlan, CPCouleurFondPlan,
                 lblCouleurTextePlan, CPCouleurTextePlan,
-                lblOpacitePlan, SLOpacitePlan,
-                lblNordPlan, SLnordPlan, sepPlan,
-                lblPositBoussolePlan, RBBoussolePlanTopLeft, RBBoussolePlanTopRight,
-                RBBoussolePlanBottomLeft, RBBoussolePlanBottomRight,
-                lblBoussoleDXSpinner, BDFPositXBoussole, lblBoussoleDYSpinner, BDFPositYBoussole
+                lblOpacitePlan, SLOpacitePlan
         );
 
         APPlan.setPrefHeight(0);
@@ -3501,12 +3497,6 @@ public class GestionnaireInterfaceController {
                 affichePlan();
             }
         });
-        grpPosBoussolePlan.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) -> {
-            if (grpPosBoussolePlan.getSelectedToggle() != null) {
-                positionBoussolePlan = grpPosBoussolePlan.getSelectedToggle().getUserData().toString();
-                affichePlan();
-            }
-        });
         SLLargeurPlan.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
             if (newValue != null) {
                 double taille = (double) newValue;
@@ -3522,14 +3512,6 @@ public class GestionnaireInterfaceController {
             }
         });
 
-        BDFPositXBoussole.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
-            positXBoussolePlan = new_value.doubleValue();
-            affichePlan();
-        });
-        BDFPositYBoussole.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
-            positYBoussolePlan = new_value.doubleValue();
-            affichePlan();
-        });
         CPCouleurFondPlan.setOnAction((ActionEvent e) -> {
             String coul = CPCouleurFondPlan.getValue().toString().substring(2, 8);
             couleurFondPlan = "#" + coul;

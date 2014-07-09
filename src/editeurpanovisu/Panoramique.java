@@ -40,6 +40,7 @@ public class Panoramique {
     private boolean afficheInfo;
     private double zeroNord = 0;
     private double nombreNiveaux = 0;
+    private int numeroPlan=-1;
 
     /**
      *
@@ -357,6 +358,20 @@ public class Panoramique {
      */
     public void setNombreHotspotHTML(int nombreHotspotHTML) {
         this.nombreHotspotHTML = nombreHotspotHTML;
+    }
+
+    /**
+     * @return the numeroPlan
+     */
+    public int getNumeroPlan() {
+        return numeroPlan;
+    }
+
+    /**
+     * @param numeroPlan the numeroPlan to set
+     */
+    public void setNumeroPlan(int numeroPlan) {
+        this.numeroPlan = numeroPlan;
     }
 
 }

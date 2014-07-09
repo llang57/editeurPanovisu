@@ -60,6 +60,7 @@ function panovisu(num_pano) {
 
     var timer,
             webGL = true,
+            maxTextureSize,
             timers,
             i,
             affHS = 0,
@@ -225,7 +226,7 @@ function panovisu(num_pano) {
 
     $(document).on("click", "#container-" + num_pano, function(evenement) {
         /*
-         * Evite de déclencher un hotspot si on arrête la souris dessus
+         * Evite de dÃ©clencher un hotspot si on arrÃªte la souris dessus
          */
         if (mouseMove === false) {
             var mouse = new THREE.Vector2();
@@ -382,7 +383,7 @@ function panovisu(num_pano) {
                 zoom();
             });
     /**
-     * Changement de la taille de l'écran
+     * Changement de la taille de l'Ã©cran
      * 
      */
     $(window).resize(function() {
@@ -1571,23 +1572,25 @@ function panovisu(num_pano) {
             var nomimage = panoImage.split("/")[0] + "/niveau" + niveau + "/" + panoImage.split("/")[1];
             loader.load(nomimage + ".jpg", function(texture) {
 //                alert(nomimage);
-                var img = nomimage.split("/")[2];
-                var img2 = panoImage.split("/")[1];
-                //alert(texture);
-                if (img === img2) {
-                    if (webGL) {
-                        var geometry = new THREE.SphereGeometry(405 - niveau, 200, 200);
+                if (texture.image.width <= maxTextureSize) {
+                    var img = nomimage.split("/")[2];
+                    var img2 = panoImage.split("/")[1];
+                    //alert(texture);
+                    if (img === img2) {
+                        if (webGL) {
+                            var geometry = new THREE.SphereGeometry(405 - niveau, 200, 200);
+                        }
+                        else {
+                            var geometry = new THREE.SphereGeometry(405 - niveau, 40, 40);
+                        }
+                        var material = new THREE.MeshBasicMaterial({map: texture, overdraw: true});
+                        var mesh1 = new THREE.Mesh(geometry, material);
+                        mesh1.scale.x = -1;
+                        scene.add(mesh1);
+                        niveau += 1;
+                        afficheNiveauSphere(image, niveau);
+                        affiche();
                     }
-                    else {
-                        var geometry = new THREE.SphereGeometry(405 - niveau, 40, 40);
-                    }
-                    var material = new THREE.MeshBasicMaterial({map: texture, overdraw: true});
-                    var mesh1 = new THREE.Mesh(geometry, material);
-                    mesh1.scale.x = -1;
-                    scene.add(mesh1);
-                    niveau += 1;
-                    afficheNiveauSphere(image, niveau);
-                    affiche();
                 }
             });
         }
@@ -1596,21 +1599,23 @@ function panovisu(num_pano) {
             var nomimage = panoImage;
             loader.load(nomimage + ".jpg", function(texture) {
 //                alert(nomimage);
-                var img = nomimage.split("/")[1];
-                var img2 = panoImage.split("/")[1];
-                if (img === img2)
-                {
-                    if (webGL) {
-                        var geometry = new THREE.SphereGeometry(390, 200, 200);
+                if (texture.image.width <= maxTextureSize) {
+                    var img = nomimage.split("/")[1];
+                    var img2 = panoImage.split("/")[1];
+                    if (img === img2)
+                    {
+                        if (webGL) {
+                            var geometry = new THREE.SphereGeometry(390, 200, 200);
+                        }
+                        else {
+                            var geometry = new THREE.SphereGeometry(390, 40, 40);
+                        }
+                        var material = new THREE.MeshBasicMaterial({map: texture, overdraw: true});
+                        var meshF = new THREE.Mesh(geometry, material);
+                        meshF.scale.x = -1;
+                        scene.add(meshF);
+                        affiche();
                     }
-                    else {
-                        var geometry = new THREE.SphereGeometry(390, 40, 40);
-                    }
-                    var material = new THREE.MeshBasicMaterial({map: texture, overdraw: true});
-                    var meshF = new THREE.Mesh(geometry, material);
-                    meshF.scale.x = -1;
-                    scene.add(meshF);
-                    affiche();
                 }
             });
 
@@ -1704,7 +1709,12 @@ function panovisu(num_pano) {
                 }
                 else {
                     var geometry = new THREE.SphereGeometry(405, 40, 40);
+
                 }
+                var webgl = renderer.context;
+                //console.log(webgl.getParameter(webgl.MAX_TEXTURE_SIZE));
+                maxTextureSize = webgl.getParameter(webgl.MAX_TEXTURE_SIZE);
+
                 var material = new THREE.MeshBasicMaterial({map: texture, overdraw: true});
                 mesh = new THREE.Mesh(geometry, material);
                 mesh.scale.x = -1;
@@ -1853,6 +1863,9 @@ function panovisu(num_pano) {
                 }
             }
         }
+        var webgl = renderer.context;
+        //console.log(webgl.getParameter(webgl.MAX_TEXTURE_SIZE));
+        maxTextureSize = webgl.getParameter(webgl.MAX_TEXTURE_SIZE);
         if (multiReso === "oui") {
             var nomimage = panoImage.split("/")[0] + "/niveau0/" + panoImage.split("/")[1];
             //alert(nomimage);
@@ -2614,7 +2627,6 @@ function panovisu(num_pano) {
         pano = $("#" + fenetrePanoramique);
         pano1 = $("#pano1-" + num_pano);
     }
-
 
 
     /**
