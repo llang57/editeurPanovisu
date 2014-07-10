@@ -426,6 +426,11 @@ is being used to size a border should also be in pixels.
     -fx-background-insets: -2, -0.3, 1, 2;
     -fx-background-radius: 7, 6, 4, 3;
 }
+.pane{
+    -fx-border-color : #777;
+    -fx-border-width : 1px;
+    -fx-border-style :solid;
+}
 
 /* ====   DISABLED THINGS   ================================================= */
 

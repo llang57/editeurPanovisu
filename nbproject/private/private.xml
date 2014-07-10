@@ -4,12 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/GestionnaireInterfaceController.java</file>
-            <file>file:/D:/github/editeurPanovisu/configPV/panovisu.cfg</file>
-            <file>file:/D:/github/editeurPanovisu/panovisu/panovisu.js</file>
             <file>file:/D:/github/editeurPanovisu/css/clair.css</file>
             <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/i18n/PanoVisu.properties</file>
             <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/i18n/PanoVisu_en.properties</file>
-            <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/ConfigDialogController.java</file>
+            <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/GestionnairePlanController.java</file>
+            <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/Plan.java</file>
             <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/EditeurPanovisu.java</file>
             <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/i18n/PanoVisu_de.properties</file>
             <file>file:/D:/github/editeurPanovisu/css/fonce.css</file>

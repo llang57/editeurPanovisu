@@ -137,7 +137,7 @@ public class EditeurPanovisu extends Application {
      * Répertoire de l'application
      */
     static public String repertAppli;
-    static private String repertTemp;
+    static public String repertTemp;
     static private String repertPanos;
     static private String repertHSImages = "";
     /**
@@ -154,8 +154,8 @@ public class EditeurPanovisu extends Application {
     static private Label lblChoixPanoramique;
     static private boolean panoCharge = false;
     static private String panoAffiche = "";
-    static private boolean dejaSauve = true;
-    static private Stage stPrincipal;
+    static public boolean dejaSauve = true;
+    static public Stage stPrincipal;
     static private String[] histoFichiers = new String[10];
     static private int nombreHistoFichiers = 0;
     static private File fichHistoFichiers;
@@ -783,7 +783,16 @@ public class EditeurPanovisu extends Application {
         File fichierPlan = fileChooser.showOpenDialog(null);
         if (fichierPlan != null) {
             plans[nombrePlans]=new Plan();
-            plans[nombrePlans].setImagePlan(fichierPlan.getAbsolutePath());
+            plans[nombrePlans].setImagePlan(fichierPlan.getName());
+            File repertoirePlan=new File(repertTemp+File.separator+"images");
+            if (!repertoirePlan.exists()){
+                repertoirePlan.mkdirs();
+            }
+            try {
+                copieFichierRepertoire(fichierPlan.getAbsolutePath(), repertoirePlan.getAbsolutePath());
+            } catch (IOException ex) {
+                Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
+            }
             gestionnairePlan.ajouterPlan(nombrePlans);
             nombrePlans++;
         }

@@ -17,10 +17,10 @@ public class Plan {
     private int nombreHotspots = 0;
     private String[] panoramiques = new String[50];
     private int nombrePanoramiques = 0;
-    private double directionNord=0;
+    private double directionNord=180;
     private String position="top:right";
-    private double positionX=10;
-    private double positionY=10;
+    private double positionX=20;
+    private double positionY=20;
 
     /**
      * @param i

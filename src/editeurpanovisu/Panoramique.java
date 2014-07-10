@@ -38,9 +38,10 @@ public class Panoramique {
     private String typePanoramique;
     private boolean afficheTitre;
     private boolean afficheInfo;
+    private boolean affichePlan;
+    private int numeroPlan = -1;
     private double zeroNord = 0;
     private double nombreNiveaux = 0;
-    private int numeroPlan=-1;
 
     /**
      *
@@ -51,6 +52,20 @@ public class Panoramique {
         this.typePanoramique = Panoramique.SPHERE;
         this.afficheTitre = true;
         this.afficheInfo = true;
+    }
+
+    /**
+     * @return the affichePlan
+     */
+    public  boolean isAffichePlan() {
+        return affichePlan;
+    }
+
+    /**
+     * @param bAffichePlan the affichePlan to set
+     */
+    public  void setAffichePlan(boolean bAffichePlan) {
+        affichePlan = bAffichePlan;
     }
 
     /**
@@ -168,7 +183,7 @@ public class Panoramique {
         this.nombreHotspotImage--;
         //int nombre
     }
-    
+
     /**
      * @param i
      * @return le hotspot numero i
@@ -205,7 +220,7 @@ public class Panoramique {
         this.nombreHotspotHTML--;
         //int nombre
     }
-        
+
     /**
      * @return the imagePanoramique
      */
