@@ -14,6 +14,7 @@ public class Plan {
     private HotSpot[] hotspots = new HotSpot[100];
     private String titrePlan="";
     private String imagePlan="";
+    private String lienPlan;
     private int nombreHotspots = 0;
     private String[] panoramiques = new String[50];
     private int nombrePanoramiques = 0;
@@ -205,6 +206,20 @@ public class Plan {
      */
     public void setImagePlan(String imagePlan) {
         this.imagePlan = imagePlan;
+    }
+
+    /**
+     * @return the lienPlan
+     */
+    public String getLienPlan() {
+        return lienPlan;
+    }
+
+    /**
+     * @param lienPlan the lienPlan to set
+     */
+    public void setLienPlan(String lienPlan) {
+        this.lienPlan = lienPlan;
     }
 
 }

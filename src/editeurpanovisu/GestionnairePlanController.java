@@ -89,6 +89,7 @@ public class GestionnairePlanController {
     private static Image imgBoussole;
     private static int numPoints = 0;
     static private ScrollPane SPOutils;
+    static public int nombrePlans=0;
 
     private void retireAffichagePointsHotSpots() {
         for (int i = 0; i < numPoints; i++) {
@@ -110,6 +111,37 @@ public class GestionnairePlanController {
                 plans[planActuel].getHotspot(i).setAnime(false);
             }
         }
+    }
+    public String getTemplate(){
+        String contenuFichier="";
+//        for (int i = 0; i < nombrePlans; i++) {
+//            contenuFichier += "[Plan=>"
+//                    + "fichier:" + panoramiquesProjet[i].getNomFichier()
+//                    + ";nb:" + panoramiquesProjet[i].getNombreHotspots()
+//                    + ";nbImg:" + panoramiquesProjet[i].getNombreHotspotImage()
+//                    + ";titre:" + panoramiquesProjet[i].getTitrePanoramique() + ""
+//                    + ";type:" + panoramiquesProjet[i].getTypePanoramique()
+//                    + ";afficheInfo:" + panoramiquesProjet[i].isAfficheInfo()
+//                    + ";afficheTitre:" + panoramiquesProjet[i].isAfficheTitre()
+//                    + ";regardX:" + panoramiquesProjet[i].getLookAtX()
+//                    + ";regardY:" + panoramiquesProjet[i].getLookAtY()
+//                    + ";zeroNord:" + panoramiquesProjet[i].getZeroNord()
+//                    + ";affichePlan:" + panoramiquesProjet[i].isAffichePlan()
+//                    + ";numeroPlan:" + panoramiquesProjet[i].getNumeroPlan()
+//                    + "]\n";
+//            for (int j = 0; j < panoramiquesProjet[i].getNombreHotspots(); j++) {
+//                HotSpot HS = panoramiquesProjet[i].getHotspot(j);
+//                contenuFichier += "   [hotspot==>"
+//                        + "longitude:" + HS.getLongitude()
+//                        + ";latitude:" + HS.getLatitude()
+//                        + ";image:" + HS.getFichierImage()
+//                        + ";xml:" + HS.getFichierXML()
+//                        + ";info:" + HS.getInfo()
+//                        + ";anime:" + HS.isAnime()
+//                        + "]\n";
+//            }
+//        }
+        return contenuFichier;
     }
 
     /**
@@ -295,11 +327,10 @@ public class GestionnairePlanController {
         VBOutils.getChildren().remove(lbl);
     }
 
-    public void ajouterPlan(int numeroPlan) {
-
-        CBChoixPlan.getItems().add(numeroPlan, plans[numeroPlan].getImagePlan());
-
-        afficherPlan(numeroPlan);
+    public void ajouterPlan() {        
+        CBChoixPlan.getItems().add(nombrePlans, plans[nombrePlans].getImagePlan());
+        afficherPlan(nombrePlans);
+        nombrePlans++;
     }
 
     public void afficherPlan(int numeroPlan) {

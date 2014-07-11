@@ -784,6 +784,7 @@ public class EditeurPanovisu extends Application {
         if (fichierPlan != null) {
             plans[nombrePlans]=new Plan();
             plans[nombrePlans].setImagePlan(fichierPlan.getName());
+            plans[nombrePlans].setLienPlan(fichierPlan.getAbsolutePath());
             File repertoirePlan=new File(repertTemp+File.separator+"images");
             if (!repertoirePlan.exists()){
                 repertoirePlan.mkdirs();
@@ -1063,7 +1064,7 @@ public class EditeurPanovisu extends Application {
         }
         if (!panoEntree.equals("")) {
             contenuFichier += "[PanoEntree=>" + panoEntree + "]\n";
-        }
+        }        
         for (int i = 0; i < nombrePanoramiques; i++) {
             contenuFichier += "[Panoramique=>"
                     + "fichier:" + panoramiquesProjet[i].getNomFichier()
@@ -1076,6 +1077,7 @@ public class EditeurPanovisu extends Application {
                     + ";regardX:" + panoramiquesProjet[i].getLookAtX()
                     + ";regardY:" + panoramiquesProjet[i].getLookAtY()
                     + ";zeroNord:" + panoramiquesProjet[i].getZeroNord()
+                    + ";affichePlan:" + panoramiquesProjet[i].isAffichePlan()
                     + ";numeroPlan:" + panoramiquesProjet[i].getNumeroPlan()
                     + "]\n";
             for (int j = 0; j < panoramiquesProjet[i].getNombreHotspots(); j++) {
@@ -1103,6 +1105,7 @@ public class EditeurPanovisu extends Application {
             }
         }
         contenuFichier += "[Interface=>\n" + gestionnaireInterface.getTemplate() + "]\n";
+        contenuFichier +=gestionnairePlan.getTemplate();
         fichProjet.setWritable(true);
         FileWriter fw = new FileWriter(fichProjet);
         try (BufferedWriter bw = new BufferedWriter(fw)) {
@@ -1518,6 +1521,13 @@ public class EditeurPanovisu extends Application {
                             break;
                         case "numeroPlan":
                             panoramiquesProjet[panoActuel].setNumeroPlan(Integer.parseInt(valeur[1]));
+                            break;
+                        case "affichePlan":
+                            if (valeur[1].equals("true")) {
+                                panoramiquesProjet[panoActuel].setAffichePlan(true);
+                            } else {
+                                panoramiquesProjet[panoActuel].setAffichePlan(false);
+                            }
                             break;
                         default:
                             break;
