@@ -15,6 +15,7 @@ public class HotSpot {
     private String fichierImage;
     private String fichierXML, info;
     private boolean anime;
+    private int numeroPano=-1;
 
     
     /**
@@ -112,6 +113,20 @@ public class HotSpot {
      */
     public void setAnime(boolean anime) {
         this.anime = anime;
+    }
+
+    /**
+     * @return the numeroPano
+     */
+    public int getNumeroPano() {
+        return numeroPano;
+    }
+
+    /**
+     * @param numeroPano the numeroPano to set
+     */
+    public void setNumeroPano(int numeroPano) {
+        this.numeroPano = numeroPano;
     }
 
 }

@@ -207,6 +207,7 @@ function panovisu(num_pano) {
             planPosition,
             planCouleurFond,
             planCouleurTexte,
+            opacitePlan,
             planNord,
             planBoussolePosition,
             planBoussoleX,
@@ -1516,7 +1517,11 @@ function panovisu(num_pano) {
         if (planAffiche) {
             $("#plan-" + num_pano).html("");
             $("#plan-" + num_pano).css(planPosition, "0px");
-            $("#plan-" + num_pano).css({backgroundColor: planCouleurFond, padding: "10px", top: "0px"});
+            $("#plan-" + num_pano).css({
+                backgroundColor: planCouleurFond, 
+                padding: "10px", 
+                top: "0px",
+            });
             $("<img>", {id: "planAig-" + num_pano, class: "planAig", src: "panovisu/images/plan/aiguillePlan.png"}).appendTo("#plan-" + num_pano);
             bousX = planBoussolePosition.split(":")[1];
             bousY = planBoussolePosition.split(":")[0];
@@ -1544,6 +1549,7 @@ function panovisu(num_pano) {
                 color: planCouleurTexte,
                 top: positPlan
             });
+            $("#planTitre-" + num_pano).show();
             $("#planTitre-" + num_pano).html("plan");
             if (planPosition === "left") {
                 $("#planTitre-" + num_pano).css(planPosition, $("#planImg-" + num_pano).width() + 20 + $("#planTitre-" + num_pano).height() + "px");
@@ -1559,8 +1565,8 @@ function panovisu(num_pano) {
                     $("<img>", {id: "planPt-" + i + "-" + num_pano, class: "planPoint", title: pointsPlan[i].texte, src: "panovisu/images/plan/point.png", width: "15"}).appendTo("#plan-" + num_pano);
                 }
                 $("#planPt-" + i + "-" + num_pano).css({
-                    top: pointsPlan[i].positY - $("#planPt-" + i + "-" + num_pano).width() / 2,
-                    left: pointsPlan[i].positX - $("#planPt-" + i + "-" + num_pano).width() / 2
+                    top: pointsPlan[i].positY - $("#planPt-" + i + "-" + num_pano).width() / 2 + 10,
+                    left: pointsPlan[i].positX - $("#planPt-" + i + "-" + num_pano).width() / 2 + 10
                 });
             }
         }
@@ -1656,6 +1662,9 @@ function panovisu(num_pano) {
                 else {
                     var geometry = new THREE.SphereGeometry(405, 40, 40);
                 }
+                var webgl = renderer.context;
+                maxTextureSize = webgl.getParameter(webgl.MAX_TEXTURE_SIZE);
+
                 var material = new THREE.MeshBasicMaterial({map: texture, overdraw: true});
                 mesh = new THREE.Mesh(geometry, material);
                 mesh.scale.x = -1;
@@ -1712,7 +1721,6 @@ function panovisu(num_pano) {
 
                 }
                 var webgl = renderer.context;
-                //console.log(webgl.getParameter(webgl.MAX_TEXTURE_SIZE));
                 maxTextureSize = webgl.getParameter(webgl.MAX_TEXTURE_SIZE);
 
                 var material = new THREE.MeshBasicMaterial({map: texture, overdraw: true});
@@ -1864,7 +1872,6 @@ function panovisu(num_pano) {
             }
         }
         var webgl = renderer.context;
-        //console.log(webgl.getParameter(webgl.MAX_TEXTURE_SIZE));
         maxTextureSize = webgl.getParameter(webgl.MAX_TEXTURE_SIZE);
         if (multiReso === "oui") {
             var nomimage = panoImage.split("/")[0] + "/niveau0/" + panoImage.split("/")[1];
@@ -2316,6 +2323,7 @@ function panovisu(num_pano) {
                     planNord = 0;
                     planPosition = "left";
                     planCouleurFond = "rgba(0,0,0,0.5)";
+                    opacitePlan=0.8;
                     planCouleurTexte = "white";
                     planBoussolePosition = "top:right";
                     planBoussoleX = 0;
@@ -2499,6 +2507,7 @@ function panovisu(num_pano) {
                     planPosition = XMLPlan.attr('position') || planPosition;
                     planCouleurFond = XMLPlan.attr("couleurFond") || planCouleurFond;
                     planCouleurTexte = XMLPlan.attr("couleurTexte") || planCouleurTexte;
+                    opacitePlan = parseFloat(XMLPlan.attr("opacitePlan")) || opacitePlan;
                     planLargeur = parseFloat(XMLPlan.attr('largeur')) || planLargeur;
                     planNord = parseFloat(XMLPlan.attr('nord')) || planNord;
                     planBoussolePosition = XMLPlan.attr('boussolePosition') || planBoussolePosition;

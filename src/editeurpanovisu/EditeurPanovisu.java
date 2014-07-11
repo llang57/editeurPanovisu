@@ -162,8 +162,8 @@ public class EditeurPanovisu extends Application {
     private String texteHisto;
     private static String numVersion;
 
-    static private GestionnaireInterfaceController gestionnaireInterface = new GestionnaireInterfaceController();
-    static private GestionnairePlanController gestionnairePlan = new GestionnairePlanController();
+    static public GestionnaireInterfaceController gestionnaireInterface = new GestionnaireInterfaceController();
+    static public GestionnairePlanController gestionnairePlan = new GestionnairePlanController();
 
     static private Menu derniersProjets;
     private Menu menuPanoramique;
@@ -496,8 +496,53 @@ public class EditeurPanovisu extends Application {
                             + "           anime=\"" + txtAnime + "\"\n"
                             + "      />\n";
                 }
-                contenuFichier += "   </hotspots>\n"
-                        + "</scene>\n";
+                contenuFichier += "   </hotspots>\n";
+                if (gestionnaireInterface.bAffichePlan && panoramiquesProjet[i].isAffichePlan()) {
+                    int numPlan = panoramiquesProjet[i].getNumeroPlan();
+                    Plan planPano = plans[numPlan];
+                    int rouge=(int) (gestionnaireInterface.couleurFondPlan.getRed()*255.d);
+                    int bleu=(int) (gestionnaireInterface.couleurFondPlan.getBlue()*255.d);
+                    int vert=(int) (gestionnaireInterface.couleurFondPlan.getGreen()*255.d);
+                    String coulFond="rgba("+rouge+","+vert+","+bleu+","+gestionnaireInterface.opacitePlan+")";
+                    contenuFichier
+                            += "    <plan\n"
+                            + "        affiche=\"oui\" \n"
+                            + "        image=\"images/" + planPano.getImagePlan() + "\"\n"
+                            + "        largeur=\"" + gestionnaireInterface.largeurPlan + "\"\n"
+                            + "        position=\"" + gestionnaireInterface.positionPlan + "\"\n"
+                            + "        couleurFond=\"" + coulFond + "\"\n"
+                            + "        couleurTexte=\"#" + gestionnaireInterface.txtCouleurTextePlan + "\"\n"
+                            + "        nord=\"" + planPano.getDirectionNord() + "\"\n"
+                            + "        boussolePosition=\"" + planPano.getPosition() + "\"\n"
+                            + "        boussoleX=\"" + planPano.getPositionX() + "\"\n"
+                            + "        boussoleY=\"" + planPano.getPositionX() + "\"\n"
+                            + "    >\n";
+                    for (int iPoint = 0; iPoint < planPano.getNombreHotspots(); iPoint++) {
+                        double posX = planPano.getHotspot(iPoint).getLongitude() * planPano.getLargeurPlan();
+                        double posY = planPano.getHotspot(iPoint).getLatitude() * planPano.getHauteurPlan();
+                        if (planPano.getHotspot(iPoint).getNumeroPano() == i) {
+                            contenuFichier
+                                    += "        <pointPlan\n"
+                                    + "            positX=\"" + posX + "\"\n"
+                                    + "            positY=\"" + posY + "\"\n"
+                                    + "            xml=\"actif\"\n"
+                                    + "            />  \n";
+
+                        } else {
+                            contenuFichier
+                                    += "        <pointPlan\n"
+                                    + "            positX=\"" + posX + "\"\n"
+                                    + "            positY=\"" + posY + "\"\n"
+                                    + "            xml=\"xml/" + planPano.getHotspot(iPoint).getFichierXML() + "\"\n"
+                                    + "            texte=\"" + planPano.getHotspot(iPoint).getInfo() + "\"\n"
+                                    + "            />  \n";
+                        }
+                    }
+                    contenuFichier
+                            += "    </plan>\n";
+                }
+
+                contenuFichier += "</scene>\n";
                 String fichierPano = panoramiquesProjet[i].getNomFichier();
                 String nomXMLFile = fichierPano.substring(fichierPano.lastIndexOf(File.separator) + 1, fichierPano.length()).split("\\.")[0] + ".xml";
                 xmlFile = new File(xmlRepert + File.separator + nomXMLFile);
@@ -782,11 +827,11 @@ public class EditeurPanovisu extends Application {
 
         File fichierPlan = fileChooser.showOpenDialog(null);
         if (fichierPlan != null) {
-            plans[nombrePlans]=new Plan();
+            plans[nombrePlans] = new Plan();
             plans[nombrePlans].setImagePlan(fichierPlan.getName());
             plans[nombrePlans].setLienPlan(fichierPlan.getAbsolutePath());
-            File repertoirePlan=new File(repertTemp+File.separator+"images");
-            if (!repertoirePlan.exists()){
+            File repertoirePlan = new File(repertTemp + File.separator + "images");
+            if (!repertoirePlan.exists()) {
                 repertoirePlan.mkdirs();
             }
             try {
@@ -794,14 +839,12 @@ public class EditeurPanovisu extends Application {
             } catch (IOException ex) {
                 Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
             }
-            gestionnairePlan.ajouterPlan(nombrePlans);
+            gestionnairePlan.ajouterPlan();
             nombrePlans++;
         }
 
     }
-    
-    
-    
+
     /**
      *
      */
@@ -1064,7 +1107,7 @@ public class EditeurPanovisu extends Application {
         }
         if (!panoEntree.equals("")) {
             contenuFichier += "[PanoEntree=>" + panoEntree + "]\n";
-        }        
+        }
         for (int i = 0; i < nombrePanoramiques; i++) {
             contenuFichier += "[Panoramique=>"
                     + "fichier:" + panoramiquesProjet[i].getNomFichier()
@@ -1105,7 +1148,7 @@ public class EditeurPanovisu extends Application {
             }
         }
         contenuFichier += "[Interface=>\n" + gestionnaireInterface.getTemplate() + "]\n";
-        contenuFichier +=gestionnairePlan.getTemplate();
+        contenuFichier += gestionnairePlan.getTemplate();
         fichProjet.setWritable(true);
         FileWriter fw = new FileWriter(fichProjet);
         try (BufferedWriter bw = new BufferedWriter(fw)) {
@@ -1444,15 +1487,17 @@ public class EditeurPanovisu extends Application {
         String[] typeElement;
         int nbHS = 0;
         int nbImg = 0;
+        int nbHSPlan = 0;
+        nombrePlans = -1;
         for (int kk = 1; kk < lignes.length; kk++) {
             ligne = lignes[kk];
-            elementsLigne = ligne.split(";", 10);
+            elementsLigne = ligne.split(";", 25);
             typeElement = elementsLigne[0].split(">", 2);
             typeElement[0] = typeElement[0].replace(" ", "").replace("=", "").replace("[", "");
             elementsLigne[0] = typeElement[1];
             if ("Panoramique".equals(typeElement[0])) {
                 for (int i = 0; i < elementsLigne.length; i++) {
-                    elementsLigne[i] = elementsLigne[i].replace("]", "");
+                    elementsLigne[i] = elementsLigne[i].replace("]", "").replace("\n", "");
                     String[] valeur = elementsLigne[i].split(":", 2);
                     switch (valeur[0]) {
                         case "fichier":
@@ -1520,7 +1565,7 @@ public class EditeurPanovisu extends Application {
                             panoramiquesProjet[panoActuel].setZeroNord(Double.parseDouble(valeur[1]));
                             break;
                         case "numeroPlan":
-                            panoramiquesProjet[panoActuel].setNumeroPlan(Integer.parseInt(valeur[1]));
+                            panoramiquesProjet[panoActuel].setNumeroPlan(Integer.parseInt(valeur[1].replace(" ", "")));
                             break;
                         case "affichePlan":
                             if (valeur[1].equals("true")) {
@@ -1544,6 +1589,7 @@ public class EditeurPanovisu extends Application {
                     for (int i = 0; i < elementsLigne.length; i++) {
                         elementsLigne[i] = elementsLigne[i].replace("]", "");
                         String[] valeur = elementsLigne[i].split(":", 2);
+
                         switch (valeur[0]) {
                             case "longitude":
                                 HS.setLongitude(Double.parseDouble(valeur[1]));
@@ -1658,6 +1704,112 @@ public class EditeurPanovisu extends Application {
                 }
 
             }
+
+            if ("Plan".equals(typeElement[0])) {
+                for (int i = 0; i < elementsLigne.length; i++) {
+                    elementsLigne[i] = elementsLigne[i].replace("]", "");
+                    String[] valeur = elementsLigne[i].split(":", 2);
+
+                    switch (valeur[0]) {
+                        case "lienImage":
+                            nombrePlans++;
+                            plans[nombrePlans] = new Plan();
+                            plans[nombrePlans].setLienPlan(valeur[1]);
+                            File repertoirePlan = new File(repertTemp + File.separator + "images");
+                            if (!repertoirePlan.exists()) {
+                                repertoirePlan.mkdirs();
+                            }
+                            try {
+                                copieFichierRepertoire(plans[nombrePlans].getLienPlan(), repertoirePlan.getAbsolutePath());
+                            } catch (IOException ex) {
+                                Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+
+                            break;
+                        case "image":
+                            plans[nombrePlans].setImagePlan(valeur[1]);
+                            break;
+                        case "titre":
+                            if (!valeur[1].equals("'null'")) {
+                                plans[nombrePlans].setTitrePlan(valeur[1]);
+                            } else {
+                                plans[nombrePlans].setTitrePlan("");
+                            }
+                            break;
+                        case "nb":
+                            nbHSPlan = Integer.parseInt(valeur[1]);
+                            break;
+                        case "position":
+                            plans[nombrePlans].setPosition(valeur[1]);
+                            break;
+                        case "positionX":
+                            plans[nombrePlans].setPositionX(Double.parseDouble(valeur[1]));
+                            break;
+                        case "positionY":
+                            plans[nombrePlans].setPositionY(Double.parseDouble(valeur[1]));
+                            break;
+                        case "directionNord":
+                            plans[nombrePlans].setDirectionNord(Double.parseDouble(valeur[1]));
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                for (int jj = 0; jj < nbHSPlan; jj++) {
+                    kk++;
+                    ligne = lignes[kk];
+                    elementsLigne = ligne.split(";", 15);
+                    typeElement = elementsLigne[0].split(">", 2);
+                    typeElement[0] = typeElement[0].replace(" ", "").replace("=", "").replace("[", "");
+                    elementsLigne[0] = typeElement[1];
+                    HotSpot HS = new HotSpot();
+                    for (int i = 0; i < elementsLigne.length; i++) {
+                        elementsLigne[i] = elementsLigne[i].replace("]", "");
+                        String[] valeur = elementsLigne[i].split(":", 2);
+                        switch (valeur[0]) {
+                            case "longitude":
+                                HS.setLongitude(Double.parseDouble(valeur[1]));
+                                break;
+                            case "latitude":
+                                HS.setLatitude(Double.parseDouble(valeur[1]));
+                                break;
+                            case "image":
+                                if ("null".equals(valeur[1])) {
+                                    HS.setFichierImage(null);
+                                } else {
+                                    HS.setFichierImage(valeur[1]);
+                                }
+                                break;
+                            case "info":
+                                if ("null".equals(valeur[1])) {
+                                    HS.setInfo(null);
+                                } else {
+                                    HS.setInfo(valeur[1]);
+                                }
+                                break;
+                            case "xml":
+                                if ("null".equals(valeur[1])) {
+                                    HS.setFichierXML(null);
+                                } else {
+                                    HS.setFichierXML(valeur[1]);
+                                }
+                                break;
+                            case "numeroPano":
+                                HS.setNumeroPano(Integer.parseInt(valeur[1].replace("\n", "").replace(" ", "")));
+                                break;
+                            case "anime":
+                                if (valeur[1].equals("true")) {
+                                    HS.setAnime(true);
+                                } else {
+                                    HS.setAnime(false);
+                                }
+                                break;
+                        }
+                    }
+                    plans[nombrePlans].addHotspot(HS);
+                }
+                gestionnairePlan.ajouterPlan();
+            }
             if ("Interface".equals(typeElement[0])) {
                 String[] elts = elementsLigne[0].replace("]", "").split("\n");
                 List<String> listeTemplate = new ArrayList<>();
@@ -1685,6 +1837,7 @@ public class EditeurPanovisu extends Application {
         for (int ii = 0; ii < nombrePanoramiques; ii++) {
             Panoramique pano1 = panoramiquesProjet[ii];
         }
+        nombrePlans++;
     }
 
     /**
@@ -3291,8 +3444,6 @@ public class EditeurPanovisu extends Application {
         imgAjouterPlan.setDisable(true);
         imgAjouterPlan.setOpacity(0.3);
 
-        
-
         /*
          Bouton Génère
          */
@@ -3537,7 +3688,7 @@ public class EditeurPanovisu extends Application {
         CheckBox chkAfficheInfo;
         Button btnValidePano;
 
-        tabPaneEnvironnement.getTabs().addAll(tabVisite, tabInterface,tabPlan);
+        tabPaneEnvironnement.getTabs().addAll(tabVisite, tabInterface, tabPlan);
         //tabPaneEnvironnement.setTranslateY(80);
         tabPaneEnvironnement.setSide(Side.TOP);
         tabVisite.setText(rb.getString("main.creationVisite"));
@@ -3679,13 +3830,13 @@ public class EditeurPanovisu extends Application {
         /**
          *
          */
-        double largeurOutils=380;
-        vuePanoramique.setPrefSize(width - largeurOutils-20, height - 130);
-        vuePanoramique.setMaxSize(width - largeurOutils-20, height - 130);
+        double largeurOutils = 380;
+        vuePanoramique.setPrefSize(width - largeurOutils - 20, height - 130);
+        vuePanoramique.setMaxSize(width - largeurOutils - 20, height - 130);
         vuePanoramique.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         vuePanoramique.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         vuePanoramique.setTranslateY(5);
-        
+
         //vuePanoramique.setStyle("-fx-background-color : #c00;");
         /**
          *
@@ -3695,7 +3846,7 @@ public class EditeurPanovisu extends Application {
         panneauOutils.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         panneauOutils.setPrefSize(largeurOutils, height - 240);
         panneauOutils.setMaxWidth(largeurOutils);
-        panneauOutils.setMaxHeight(height-240);
+        panneauOutils.setMaxHeight(height - 240);
         panneauOutils.setTranslateY(15);
         panneauOutils.setTranslateX(20);
 //        panneauOutils.setStyle("-fx-background-color : #ccc;");
@@ -3703,7 +3854,7 @@ public class EditeurPanovisu extends Application {
          *
          */
         pano.setCursor(Cursor.CROSSHAIR);
-        outils.setPrefWidth(largeurOutils-20);
+        outils.setPrefWidth(largeurOutils - 20);
 //        outils.setStyle("-fx-background-color : #ccc;");
         outils.minHeight(height - 130);
 //        lblLong.setStyle(labelStyle);
@@ -3712,7 +3863,7 @@ public class EditeurPanovisu extends Application {
         lblLat.setPrefSize(100, 15);
         lblLat.setTranslateX(50);
 //        panneau2.setStyle("-fx-background-color : #ddd;");
-        panneau2.setPrefSize(width - largeurOutils-20, height - 140);
+        panneau2.setPrefSize(width - largeurOutils - 20, height - 140);
 
         imagePanoramique.setCache(true);
         if (largeurMax < 1200) {

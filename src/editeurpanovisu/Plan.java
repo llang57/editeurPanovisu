@@ -22,6 +22,8 @@ public class Plan {
     private String position="top:right";
     private double positionX=20;
     private double positionY=20;
+    private double largeurPlan;
+    private double hauteurPlan;
 
     /**
      * @param i
@@ -220,6 +222,34 @@ public class Plan {
      */
     public void setLienPlan(String lienPlan) {
         this.lienPlan = lienPlan;
+    }
+
+    /**
+     * @return the largeurPlan
+     */
+    public double getLargeurPlan() {
+        return largeurPlan;
+    }
+
+    /**
+     * @param largeurPlan the largeurPlan to set
+     */
+    public void setLargeurPlan(double largeurPlan) {
+        this.largeurPlan = largeurPlan;
+    }
+
+    /**
+     * @return the hauteurPlan
+     */
+    public double getHauteurPlan() {
+        return hauteurPlan;
+    }
+
+    /**
+     * @param hauteurPlan the hauteurPlan to set
+     */
+    public void setHauteurPlan(double hauteurPlan) {
+        this.hauteurPlan = hauteurPlan;
     }
 
 }

@@ -6,10 +6,14 @@
 package editeurpanovisu;
 
 import static editeurpanovisu.EditeurPanovisu.ajouterPlan;
+import static editeurpanovisu.EditeurPanovisu.gestionnairePlan;
 import static editeurpanovisu.EditeurPanovisu.imgAjouterPlan;
 import static editeurpanovisu.EditeurPanovisu.nombrePanoramiques;
+import static editeurpanovisu.EditeurPanovisu.nombrePlans;
 import static editeurpanovisu.EditeurPanovisu.panoramiquesProjet;
+import static editeurpanovisu.EditeurPanovisu.plans;
 import static editeurpanovisu.EditeurPanovisu.repertAppli;
+import static editeurpanovisu.EditeurPanovisu.repertTemp;
 import static editeurpanovisu.EditeurPanovisu.tabPlan;
 import static editeurpanovisu.EditeurPanovisu.tooltipStyle;
 import java.io.File;
@@ -276,12 +280,15 @@ public class GestionnaireInterfaceController {
      Variable du plan
      */
     private static AnchorPane APPlan;
+    private static AnchorPane APVisuplan;
     public static boolean bAffichePlan = false;
     public static String positionPlan = "left";
     public static double largeurPlan = 200;
-    public static String couleurFondPlan = "#000000";
+    public static Color couleurFondPlan = Color.hsb(120, 1.0, 1.0);
+    public static String txtCouleurFondPlan = couleurFondPlan.toString().substring(2, 8);
     public static double opacitePlan = 0.8;
-    public static String couleurTextePlan = "#ffffff";
+    public static Color couleurTextePlan = Color.rgb(255, 255, 255);
+    public static String txtCouleurTextePlan = couleurTextePlan.toString().substring(2, 8);
     /*
      Eléments de l'onglet plan
      */
@@ -776,8 +783,46 @@ public class GestionnaireInterfaceController {
         imgEmail.setLayoutY(posY);
     }
 
-    private void affichePlan() {
+    public void affichePlan() {
 
+        APVisuplan.setVisible(bAffichePlan);
+        if (bAffichePlan) {
+            double marge = 10.d;
+            APVisuplan.getChildren().clear();
+            Image imgPlan ;
+            if (nombrePlans > 0) {
+                String fichier=repertTemp+"/images/" + plans[gestionnairePlan.planActuel].getImagePlan();
+                imgPlan = new Image(
+                        "file:" + fichier,
+                        largeurPlan, -1, true, true
+                );
+            } else {
+                imgPlan = new Image(
+                        "file:" + repertAppli + "/theme/plan/planDefaut.jpg",
+                        largeurPlan, -1, true, true
+                );
+
+            }
+            ImageView IVimgPlan = new ImageView(imgPlan);
+            APVisuplan.setPrefSize(imgPlan.getWidth() + marge * 2, imgPlan.getHeight() + marge * 2);
+            APVisuplan.setStyle("-fx-background-color : #" + txtCouleurFondPlan);
+            IVimgPlan.setLayoutX(marge);
+            IVimgPlan.setLayoutY(marge);
+            APVisuplan.getChildren().add(IVimgPlan);
+            APVisuplan.setOpacity(opacitePlan);
+            double positionX = 0;
+            double positionY = IMVisualisation.getLayoutY() + txtTitre.getHeight();
+            switch (positionPlan) {
+                case "left":
+                    positionX = IMVisualisation.getLayoutX();
+                    break;
+                case "right":
+                    positionX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - APVisuplan.getPrefWidth();
+                    break;
+            }
+            APVisuplan.setLayoutX(positionX);
+            APVisuplan.setLayoutY(positionY);
+        }
     }
 
     /**
@@ -931,7 +976,7 @@ public class GestionnaireInterfaceController {
     public void afficheBouton(String position, double dX, double dY, double taille, String styleBoutons, String styleHS) {
         String repertBoutons = "file:" + repertBoutonsPrincipal + File.separator + styleBoutons;
         APVisualisation.getChildren().clear();
-        APVisualisation.getChildren().addAll(RBClair, RBSombre, IMVisualisation, txtTitre, imgBoussole, imgAiguille, imgTwitter, imgGoogle, imgFacebook, imgEmail, APVisuVignettes, fondSuivant, fondPrecedent);
+        APVisualisation.getChildren().addAll(RBClair, RBSombre, IMVisualisation, txtTitre, imgBoussole, imgAiguille, imgTwitter, imgGoogle, imgFacebook, imgEmail, APVisuVignettes, APVisuplan, fondSuivant, fondPrecedent);
         chargeBarre(styleBoutons, styleHS, imageMasque);
         afficheMasque();
         HBbarreBoutons = new HBox();
@@ -1231,12 +1276,11 @@ public class GestionnaireInterfaceController {
                 + "positionPlan=" + positionPlan + "\n"
                 + "opacitePlan=" + Math.round(opacitePlan * 100.d) / 100.d + "\n"
                 + "largeurPlan=" + Math.round(largeurPlan) + "\n"
-                + "couleurFondPlan=" + couleurFondPlan + "\n"
-                + "couleurTextePlan=" + couleurTextePlan + "\n"
-//                + "positionNordPlan=" + Math.round(positionNordPlan) + "\n"
-//                + "positionBoussolePlan=" + positionBoussolePlan + "\n"
-//                + "positXBoussolePlan=" + Math.round(positXBoussolePlan) + "\n"
-//                + "positYBoussolePlan=" + Math.round(positYBoussolePlan) + "\n"
+                + "couleurFondPlan=" + txtCouleurFondPlan + "\n"
+                + "couleurTextePlan=" + txtCouleurTextePlan + "\n" //                + "positionNordPlan=" + Math.round(positionNordPlan) + "\n"
+                //                + "positionBoussolePlan=" + positionBoussolePlan + "\n"
+                //                + "positXBoussolePlan=" + Math.round(positXBoussolePlan) + "\n"
+                //                + "positYBoussolePlan=" + Math.round(positYBoussolePlan) + "\n"
                 ;
         return contenuFichier;
     }
@@ -1251,7 +1295,7 @@ public class GestionnaireInterfaceController {
         bAfficheVignettes = false;
         bAfficheReseauxSociaux = false;
         APVisualisation.getChildren().clear();
-        APVisualisation.getChildren().addAll(RBClair, RBSombre, IMVisualisation, txtTitre, imgBoussole, imgAiguille, imgTwitter, imgGoogle, imgFacebook, imgEmail, APVisuVignettes, IVMasque);
+        APVisualisation.getChildren().addAll(RBClair, RBSombre, IMVisualisation, txtTitre, imgBoussole, imgAiguille, imgTwitter, imgGoogle, imgFacebook, imgEmail, APVisuVignettes, APVisuplan, IVMasque);
 
         for (String chaine : templ) {
             String variable = chaine.split("=")[0];
@@ -1520,10 +1564,12 @@ public class GestionnaireInterfaceController {
                     largeurPlan = Double.parseDouble(valeur);
                     break;
                 case "couleurFondPlan":
-                    couleurFondPlan = valeur;
+                    txtCouleurFondPlan = valeur;
+                    couleurFondPlan = Color.valueOf(txtCouleurFondPlan);
                     break;
                 case "couleurTextePlan":
-                    couleurTextePlan = valeur;
+                    txtCouleurTextePlan = valeur;
+                    couleurTextePlan = Color.valueOf(txtCouleurTextePlan);
                     break;
 //                case "positionNordPlan":
 //                    positionNordPlan = Double.parseDouble(valeur);
@@ -1616,8 +1662,19 @@ public class GestionnaireInterfaceController {
         SLLargeurPlan.setValue(largeurPlan);
         RBPlanLeft.setSelected(positionPlan.equals("left"));
         RBPlanRight.setSelected(positionPlan.equals("right"));
-        CPCouleurFondPlan.setValue(Color.valueOf(couleurFondPlan));
-        CPCouleurTextePlan.setValue(Color.valueOf(couleurTextePlan));
+        CPCouleurFondPlan.setValue(couleurFondPlan);
+        CPCouleurTextePlan.setValue(couleurTextePlan);
+        if (bAffichePlan) {
+            tabPlan.setDisable(!bAffichePlan);
+            imgAjouterPlan.setDisable(!bAffichePlan);
+            ajouterPlan.setDisable(!bAffichePlan);
+            if (bAffichePlan) {
+                imgAjouterPlan.setOpacity(1.0);
+            } else {
+                imgAjouterPlan.setOpacity(0.3);
+            }
+
+        }
 //        SLnordPlan.setValue(positionNordPlan);
 //        RBBoussolePlanTopLeft.setSelected(positionPlan.equals("top:left"));
 //        RBBoussolePlanTopRight.setSelected(positionPlan.equals("top:right"));
@@ -1630,12 +1687,12 @@ public class GestionnaireInterfaceController {
         afficheBoussole();
         afficheMasque();
         afficheReseauxSociaux();
-        afficheVignettes();
-        affichePlan();
         changeCouleurBarre(couleurBoutons.getHue(), couleurBoutons.getSaturation(), couleurBoutons.getBrightness());
         changeCouleurMasque(couleurMasque.getHue(), couleurMasque.getSaturation(), couleurMasque.getBrightness());
         changeCouleurHS(couleurHotspots.getHue(), couleurHotspots.getSaturation(), couleurHotspots.getBrightness());
         changeCouleurHSPhoto(couleurHotspots.getHue(), couleurHotspots.getSaturation(), couleurHotspots.getBrightness());
+        afficheVignettes();
+        affichePlan();
     }
 
     /**
@@ -1757,6 +1814,7 @@ public class GestionnaireInterfaceController {
         imgFacebook = new ImageView(new Image("file:" + repertReseauxSociaux + File.separator + imageReseauxSociauxFacebook));
         imgEmail = new ImageView(new Image("file:" + repertReseauxSociaux + File.separator + imageReseauxSociauxEmail));
         APVisuVignettes = new AnchorPane();
+        APVisuplan = new AnchorPane();
         APVisualisation.getChildren().clear();
         APVisualisation.getChildren().addAll(txtTitre, imgBoussole, imgAiguille, IVMasque, imgTwitter, imgGoogle, imgFacebook, imgEmail, APVisuVignettes, fondSuivant, fondPrecedent);
         fondPrecedent.setPrefWidth(64);
@@ -1856,16 +1914,6 @@ public class GestionnaireInterfaceController {
         CPCouleurFondTitre.setLayoutX(180);
         CPCouleurFondTitre.setLayoutY(103);
 
-        CPCouleurTitre.setOnAction((ActionEvent e) -> {
-            String coul = CPCouleurTitre.getValue().toString().substring(2, 8);
-            couleurTitre = "#" + coul;
-            txtTitre.setTextFill(Color.valueOf(couleurTitre));
-        });
-        CPCouleurFondTitre.setOnAction((ActionEvent e) -> {
-            String coul = CPCouleurFondTitre.getValue().toString().substring(2, 8);
-            couleurFondTitre = "#" + coul;
-            txtTitre.setStyle("-fx-background-color : " + couleurFondTitre);
-        });
         Label lblChoixOpacite = new Label(rb.getString("interface.choixOpaciteTitre"));
         lblChoixOpacite.setLayoutX(10);
         lblChoixOpacite.setLayoutY(135);
@@ -2906,13 +2954,12 @@ public class GestionnaireInterfaceController {
         CBAffichePlan.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val != null) {
                 bAffichePlan = new_val;
-                tabPlan.setDisable(!new_val);
-                imgAjouterPlan.setDisable(!new_val);
-                ajouterPlan.setDisable(!new_val);
-                if (new_val){
+                tabPlan.setDisable(!bAffichePlan);
+                imgAjouterPlan.setDisable(!bAffichePlan);
+                ajouterPlan.setDisable(!bAffichePlan);
+                if (new_val) {
                     imgAjouterPlan.setOpacity(1.0);
-                }
-                else{
+                } else {
                     imgAjouterPlan.setOpacity(0.3);
                 }
                 affichePlan();
@@ -2950,13 +2997,13 @@ public class GestionnaireInterfaceController {
         Label lblCouleurFondPlan = new Label(rb.getString("interface.couleurFondPlan"));
         lblCouleurFondPlan.setLayoutX(10);
         lblCouleurFondPlan.setLayoutY(100);
-        CPCouleurFondPlan = new ColorPicker(Color.valueOf(couleurFondPlan));
+        CPCouleurFondPlan = new ColorPicker(couleurFondPlan);
         CPCouleurFondPlan.setLayoutX(200);
         CPCouleurFondPlan.setLayoutY(95);
         Label lblCouleurTextePlan = new Label(rb.getString("interface.couleurTextePlan"));
         lblCouleurTextePlan.setLayoutX(10);
         lblCouleurTextePlan.setLayoutY(130);
-        CPCouleurTextePlan = new ColorPicker(Color.valueOf(couleurTextePlan));
+        CPCouleurTextePlan = new ColorPicker(couleurTextePlan);
         CPCouleurTextePlan.setLayoutX(200);
         CPCouleurTextePlan.setLayoutY(125);
         Label lblOpacitePlan = new Label(rb.getString("interface.opacitePlan"));
@@ -3082,10 +3129,14 @@ public class GestionnaireInterfaceController {
             couleurHotspots = couleurTheme;
             couleurBoutons = couleurTheme;
             couleurMasque = couleurTheme;
+            couleurFondPlan = couleurTheme;
+            txtCouleurFondPlan = couleurFondPlan.toString().substring(2, 8);
+            affichePlan();
             changeCouleurTitre(coul1);
             changeCouleurVignettes(coul1);
             //changeCouleur(hue);
             CPCouleurFondTitre.setValue(couleurTheme);
+            CPCouleurFondPlan.setValue(couleurTheme);
             CPCouleurHotspots.setValue(couleurTheme);
             CPCouleurBoutons.setValue(couleurTheme);
             CPCouleurMasques.setValue(couleurTheme);
@@ -3120,6 +3171,7 @@ public class GestionnaireInterfaceController {
                             txtTitre.setFont(fonte1);
                             txtTitre.setPrefHeight(-1);
                             afficheVignettes();
+                            affichePlan();
                         }
                     }
                 });
@@ -3132,6 +3184,7 @@ public class GestionnaireInterfaceController {
                 txtTitre.setFont(fonte1);
                 txtTitre.setPrefHeight(-1);
                 afficheVignettes();
+                affichePlan();
             }
         });
         SLOpacite.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
@@ -3147,6 +3200,16 @@ public class GestionnaireInterfaceController {
                 txtTitre.setMinWidth(taille);
                 txtTitre.setLayoutX(IMVisualisation.getLayoutX() + (IMVisualisation.getFitWidth() - txtTitre.getMinWidth()) / 2);
             }
+        });
+        CPCouleurTitre.setOnAction((ActionEvent e) -> {
+            String coul = CPCouleurTitre.getValue().toString().substring(2, 8);
+            couleurTitre = "#" + coul;
+            txtTitre.setTextFill(Color.valueOf(couleurTitre));
+        });
+        CPCouleurFondTitre.setOnAction((ActionEvent e) -> {
+            String coul = CPCouleurFondTitre.getValue().toString().substring(2, 8);
+            couleurFondTitre = "#" + coul;
+            txtTitre.setStyle("-fx-background-color : " + couleurFondTitre);
         });
 
         /*
@@ -3514,12 +3577,14 @@ public class GestionnaireInterfaceController {
 
         CPCouleurFondPlan.setOnAction((ActionEvent e) -> {
             String coul = CPCouleurFondPlan.getValue().toString().substring(2, 8);
-            couleurFondPlan = "#" + coul;
+            couleurFondPlan = CPCouleurFondPlan.getValue();
+            txtCouleurFondPlan = coul;
             affichePlan();
         });
         CPCouleurTextePlan.setOnAction((ActionEvent e) -> {
             String coul = CPCouleurTextePlan.getValue().toString().substring(2, 8);
-            couleurTextePlan = "#" + coul;
+            couleurTextePlan = CPCouleurTextePlan.getValue();
+            txtCouleurTextePlan = coul;
             affichePlan();
         });
 
