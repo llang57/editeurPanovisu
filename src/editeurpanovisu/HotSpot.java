@@ -13,7 +13,8 @@ public class HotSpot {
 
     private double longitude, latitude;
     private String fichierImage;
-    private String fichierXML, info;
+    private String fichierXML;
+    private String info;
     private boolean anime;
     private int numeroPano=-1;
 

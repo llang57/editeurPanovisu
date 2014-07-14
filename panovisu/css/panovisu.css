@@ -286,6 +286,9 @@ and open the template in the editor.
     position: absolute;
     transition:ease-in-out 1s;
 }
+.plan{
+    overflow: hidden;
+}
 .planTitre,.planPoint{
     cursor: pointer;
 }
@@ -293,5 +296,9 @@ and open the template in the editor.
     cursor: auto;
 }
 .planAig{
+    position: absolute;
+}
+
+.radar{
     position: absolute;
 }

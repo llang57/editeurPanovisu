@@ -54,12 +54,12 @@ import jfxtras.labs.scene.control.BigDecimalField;
  * @author llang
  */
 public class GestionnairePlanController {
-    
+
     private static final ExtensionsFilter IMAGE_FILTER
             = new ExtensionsFilter(new String[]{".png", ".jpg", ".bmp"});
     private static final ExtensionsFilter PNG_FILTER
             = new ExtensionsFilter(new String[]{".png"});
-    
+
     private static ResourceBundle rb;
     public Pane tabInterface;
     private static HBox HBInterface;
@@ -91,18 +91,18 @@ public class GestionnairePlanController {
     private static Image imgBoussole;
     private static int numPoints = 0;
     static private ScrollPane SPOutils;
-    
+
     private void retireAffichagePointsHotSpots() {
         for (int i = 0; i < numPoints; i++) {
             Node pt = (Node) panePlan.lookup("#point" + i);
             panePlan.getChildren().remove(pt);
         }
     }
-    
+
     private void valideHSPlan() {
         for (int i = 0; i < plans[planActuel].getNombreHotspots(); i++) {
             ComboBox cbx = (ComboBox) VBOutils.lookup("#cbplan" + i);
-            TextArea txtTexteHS = (TextArea) VBOutils.lookup("#txtHS" + i);
+            TextArea txtTexteHS = (TextArea) VBOutils.lookup("#txtHSPlan" + i);
             plans[planActuel].getHotspot(i).setInfo(txtTexteHS.getText());
             plans[planActuel].getHotspot(i).setFichierXML(cbx.getValue() + ".xml");
             CheckBox cbAnime = (CheckBox) VBOutils.lookup("#anime" + i);
@@ -113,7 +113,7 @@ public class GestionnairePlanController {
             }
         }
     }
-    
+
     public String getTemplate() {
         String contenuFichier = "";
         for (int i = 0; i < nombrePlans; i++) {
@@ -160,11 +160,11 @@ public class GestionnairePlanController {
         point.setId("point" + i);
         point.setCursor(Cursor.DEFAULT);
         panePlan.getChildren().add(point);
-        
+
         Tooltip t = new Tooltip("point n° " + (i + 1));
         t.setStyle(tooltipStyle);
         Tooltip.install(point, t);
-        
+
         point.setOnMouseClicked((MouseEvent me1) -> {
             double mouseX = me1.getSceneX();
             double mouseY = me1.getSceneY() - panePlan.getLayoutY() - 115;
@@ -173,13 +173,13 @@ public class GestionnairePlanController {
             int numeroPoint = Integer.parseInt(chPoint);
             Node pt;
             pt = (Node) panePlan.lookup("#point" + chPoint);
-            
+
             if (me1.isControlDown()) {
                 valideHSPlan();
                 dejaSauve = false;
                 stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
                 panePlan.getChildren().remove(pt);
-                
+
                 for (int o = numeroPoint + 1; o < numPoints; o++) {
                     pt = (Node) panePlan.lookup("#point" + Integer.toString(o));
                     pt.setId("point" + Integer.toString(o - 1));
@@ -198,9 +198,13 @@ public class GestionnairePlanController {
             } else {
                 valideHSPlan();
                 if (nombrePanoramiques > 1) {
+                    int largeurVignettes = 4;
+                    if (nombrePanoramiques < 4) {
+                        largeurVignettes = nombrePanoramiques;
+                    }
                     AnchorPane listePanoVig = afficherListePanosVignettes(numeroPoint);
-                    if (mouseX + (nombrePanoramiques - 1) * 130 > panePlan.getWidth()) {
-                        listePanoVig.setLayoutX(panePlan.getWidth() - (nombrePanoramiques - 1) * 130);
+                    if (mouseX + largeurVignettes * 130 > panePlan.getWidth()) {
+                        listePanoVig.setLayoutX(panePlan.getWidth() - largeurVignettes * 130);
                     } else {
                         listePanoVig.setLayoutX(mouseX);
                     }
@@ -208,9 +212,9 @@ public class GestionnairePlanController {
                     panePlan.getChildren().add(listePanoVig);
                 }
                 me1.consume();
-                
+
             }
-            
+
         });
     }
 
@@ -223,7 +227,7 @@ public class GestionnairePlanController {
             double latitude = plans[planActuel].getHotspot(i).getLatitude();
             afficheHS(i, longitude, latitude);
         }
-        
+
     }
 
     /**
@@ -233,7 +237,7 @@ public class GestionnairePlanController {
      * @return
      */
     public Pane affichageHS(String lstPano, int numPano) {
-        
+
         Pane panneauHotSpots = new Pane();
         VBox vb1 = new VBox();
         panneauHotSpots.getChildren().add(vb1);
@@ -242,7 +246,7 @@ public class GestionnairePlanController {
         Label sep1 = new Label(" ");
         for (int o = 0; o < plans[numPano].getNombreHotspots(); o++) {
             AnchorPane vbPanneauHS = new AnchorPane();
-            
+
             vbPanneauHS.setId("HS" + o);
             lblPoint = new Label("Point n°" + (o + 1));
             lblPoint.setPadding(new Insets(5, 10, 5, 5));
@@ -274,14 +278,14 @@ public class GestionnairePlanController {
             Label lblTexteHS = new Label("Texte du Hotspot");
             lblTexteHS.setLayoutX(20);
             lblTexteHS.setLayoutY(120);
-            
+
             TextArea txtTexteHS = new TextArea();
             txtTexteHS.setLayoutX(60);
             txtTexteHS.setLayoutY(150);
             if (plans[numPano].getHotspot(o).getInfo() != null) {
                 txtTexteHS.setText(plans[numPano].getHotspot(o).getInfo());
             }
-            txtTexteHS.setId("txtHS" + o);
+            txtTexteHS.setId("txtHSPlan" + o);
             txtTexteHS.setPrefSize(200, 25);
             txtTexteHS.setMaxSize(200, 20);
             CheckBox cbAnime = new CheckBox("HostSpot Animé");
@@ -295,7 +299,7 @@ public class GestionnairePlanController {
             vbPanneauHS.getChildren().addAll(lblTexteHS, txtTexteHS, cbAnime, sep1);
             vb1.getChildren().addAll(vbPanneauHS, sep);
         }
-        
+
         Button btnValider = new Button("Valide HotSpots");
         btnValider.setTranslateX(200);
         btnValider.setTranslateY(5);
@@ -324,13 +328,13 @@ public class GestionnairePlanController {
         Pane lbl = (Pane) VBOutils.lookup("#labelConfigPlan");
         VBOutils.getChildren().remove(lbl);
     }
-    
-    public void ajouterPlan() {        
+
+    public void ajouterPlan() {
         CBChoixPlan.getItems().add(nombrePlans, plans[nombrePlans].getImagePlan());
         afficherPlan(nombrePlans);
-        CBChoixPlan.getSelectionModel().select(nombrePlans);        
+        CBChoixPlan.getSelectionModel().select(nombrePlans);
     }
-    
+
     public void afficherPlan(int numeroPlan) {
         planActuel = numeroPlan;
         String txtImage = repertTemp + "/images/" + plans[numeroPlan].getImagePlan();
@@ -353,7 +357,7 @@ public class GestionnairePlanController {
         ajouteAffichageHotspots();
         ajouteAffichagePointsHotspots();
     }
-    
+
     private void afficheBoussole() {
         if (!imagePlan.isError()) {
             String posX = plans[planActuel].getPosition().split(":")[1];
@@ -381,9 +385,9 @@ public class GestionnairePlanController {
             IVNord.setRotate(plans[planActuel].getDirectionNord());
         }
     }
-    
+
     private AnchorPane afficherListePanosVignettes(int numHS) {
-        
+
         AnchorPane APlistePano = new AnchorPane();
         APlistePano.setOpacity(1);
         Pane fond = new Pane();
@@ -422,7 +426,7 @@ public class GestionnairePlanController {
                 planListeVignette = nomPano;
                 if (panoramiquesProjet[numeroPano].getTitrePanoramique() != null) {
                     String texteHS = panoramiquesProjet[numeroPano].getTitrePanoramique();
-                    TextArea txtHS = (TextArea) VBOutils.lookup("#txtHS" + numHS);
+                    TextArea txtHS = (TextArea) VBOutils.lookup("#txtHSPlan" + numHS);
                     txtHS.setText(texteHS);
                 }
                 plans[planActuel].getHotspot(numHS).setNumeroPano(numeroPano);
@@ -433,7 +437,7 @@ public class GestionnairePlanController {
             });
             APlistePano.getChildren().add(IVPano[j]);
             j++;
-            
+
         }
         int taille = (row + 1) * 65 + 5;
         APlistePano.setPrefWidth(540);
@@ -450,9 +454,10 @@ public class GestionnairePlanController {
             APlistePano.setVisible(false);
             me.consume();
         });
+        APlistePano.setTranslateZ(2);
         return APlistePano;
     }
-    
+
     private void afficheConfigPlan() {
         Label lblNordPlan = new Label(rb.getString("plan.positionNordPlan"));
         lblNordPlan.setLayoutX(10);
@@ -487,7 +492,7 @@ public class GestionnairePlanController {
         RBBoussolePlanBottomRight.setLayoutY(80);
         RBBoussolePlanBottomRight.setUserData("bottom:right");
         RBBoussolePlanBottomRight.setToggleGroup(grpPosBoussolePlan);
-        
+
         Label lblBoussoleDXSpinner = new Label("dX :");
         lblBoussoleDXSpinner.setLayoutX(25);
         lblBoussoleDXSpinner.setLayoutY(110);
@@ -506,7 +511,7 @@ public class GestionnairePlanController {
         BDFPositYBoussole.setMaxValue(new BigDecimal(200));
         BDFPositYBoussole.setMinValue(new BigDecimal(0));
         BDFPositYBoussole.setMaxWidth(100);
-        
+
         BDFPositXBoussole.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
             plans[planActuel].setPositionX(new_value.doubleValue());
             afficheBoussole();
@@ -536,7 +541,7 @@ public class GestionnairePlanController {
         BDFPositXBoussole.setNumber(new BigDecimal(plans[planActuel].getPositionX()));
         BDFPositYBoussole.setNumber(new BigDecimal(plans[planActuel].getPositionY()));
         VBOutils.getChildren().remove(APConfigPlan);
-        
+
         APConfigPlan = new AnchorPane();
         APConfigPlan.getChildren().addAll(
                 lblNordPlan, SLnordPlan,
@@ -580,7 +585,7 @@ public class GestionnairePlanController {
         APConfigPlan.getChildren().add(sepConfig2);
         VBOutils.getChildren().add(APConfigPlan);
     }
-    
+
     private String listePano() {
         String liste = "";
         if (nombrePanoramiques == 0) {
@@ -598,9 +603,9 @@ public class GestionnairePlanController {
             return liste;
         }
     }
-    
+
     private void planMouseClic(double X, double Y) {
-        
+
         valideHSPlan();
         dejaSauve = false;
         stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
@@ -633,9 +638,12 @@ public class GestionnairePlanController {
         //numPoints++;
         if (nombrePanoramiques > 0) {
             AnchorPane listePanoVig = afficherListePanosVignettes(plans[planActuel].getNombreHotspots() - 1);
-            if (mouseX + (nombrePanoramiques - 1) * 130 > panePlan.getWidth()) {
-                listePanoVig.setLayoutX(mouseX);
-                listePanoVig.setLayoutX(panePlan.getWidth() - (nombrePanoramiques - 1) * 130);
+            int largeurVignettes = 4;
+            if (nombrePanoramiques < 4) {
+                largeurVignettes = nombrePanoramiques;
+            }
+            if (mouseX + largeurVignettes * 130 > panePlan.getWidth()) {
+                listePanoVig.setLayoutX(panePlan.getWidth() - largeurVignettes * 130);
             } else {
                 listePanoVig.setLayoutX(mouseX);
             }
@@ -653,7 +661,7 @@ public class GestionnairePlanController {
                 Node pt;
                 pt = (Node) panePlan.lookup("#point" + chPoint);
                 panePlan.getChildren().remove(pt);
-                
+
                 for (int o = numeroPoint + 1; o < numPoints; o++) {
                     pt = (Node) panePlan.lookup("#point" + Integer.toString(o));
                     pt.setId("point" + Integer.toString(o - 1));
@@ -676,9 +684,12 @@ public class GestionnairePlanController {
                 int numeroPoint = Integer.parseInt(chPoint);
                 if (nombrePanoramiques > 1) {
                     AnchorPane listePanoVig = afficherListePanosVignettes(numeroPoint);
-                    if (mouseX + (nombrePanoramiques - 1) * 130 > panePlan.getWidth()) {
-                        listePanoVig.setLayoutX(mouseX);
-                        listePanoVig.setLayoutX(panePlan.getWidth() - (nombrePanoramiques - 1) * 130);
+                    int largeurVignettes = 4;
+                    if (nombrePanoramiques < 4) {
+                        largeurVignettes = nombrePanoramiques;
+                    }
+                    if (mouseX + largeurVignettes * 130 > panePlan.getWidth()) {
+                        listePanoVig.setLayoutX(panePlan.getWidth() - largeurVignettes * 130);
                     } else {
                         listePanoVig.setLayoutX(mouseX);
                     }
@@ -686,12 +697,12 @@ public class GestionnairePlanController {
                     panePlan.getChildren().add(listePanoVig);
                 }
                 me1.consume();
-                
+
             }
         });
-        
+
     }
-    
+
     private void gereSourisPlan(MouseEvent me) {
         if (me.getButton() == MouseButton.PRIMARY) {
             if (!(me.isControlDown()) && planActuel != -1) {
@@ -714,7 +725,7 @@ public class GestionnairePlanController {
         HBInterface.setPrefWidth(width);
         HBInterface.setPrefHeight(height);
         AnchorPane APChoixPlan = new AnchorPane();
-        
+
         double largeurOutils = 380;
         APPlan = new AnchorPane();
         APPlan.setPrefWidth(width - largeurOutils);
@@ -727,7 +738,7 @@ public class GestionnairePlanController {
         panePlan.getChildren().addAll(IVPlan, IVNord);
         APPlan.setMaxWidth(width - largeurOutils - 20);
         APPlan.getChildren().add(panePlan);
-        
+
         SPOutils = new ScrollPane();
         SPOutils.setContent(VBOutils);
         SPOutils.setId("spOutils");
@@ -739,13 +750,13 @@ public class GestionnairePlanController {
         SPOutils.setMaxHeight(height - 100);
         SPOutils.setTranslateY(15);
         SPOutils.setTranslateX(20);
-        
+
         VBOutils.setPrefWidth(largeurOutils - 20);
         VBOutils.setMaxWidth(largeurOutils - 20);
         //VBOutils.setMinHeight(height);
 //        VBOutils.setStyle("-fx-background-color : #ccc;");
         HBInterface.getChildren().addAll(APPlan, SPOutils);
-        
+
         tabInterface.getChildren().add(HBInterface);
         Label lblChoixPlan = new Label(rb.getString("plan.choixPlan"));
         lblChoixPlan.setLayoutX(20);
@@ -775,10 +786,5 @@ public class GestionnairePlanController {
                     gereSourisPlan(me);
                 }
         );
-
-//        VBOutils.getChildren().addAll(
-//                APCoulTheme, APTIT, APBB, APPL, APHS, APBOUSS, APMASQ, APRS, APVIG
-//        );
     }
-    
 }

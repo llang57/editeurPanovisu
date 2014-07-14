@@ -100,7 +100,7 @@ public class EditeurPanovisu extends Application {
     static private ImageView imagePanoramique;
     private Image image2;
     static private Label lblLong, lblLat;
-    static private VBox panneau2;
+    static private AnchorPane panneau2;
     static private HBox coordonnees;
     static private String currentDir;
     static private int numPoints = 0;
@@ -500,10 +500,10 @@ public class EditeurPanovisu extends Application {
                 if (gestionnaireInterface.bAffichePlan && panoramiquesProjet[i].isAffichePlan()) {
                     int numPlan = panoramiquesProjet[i].getNumeroPlan();
                     Plan planPano = plans[numPlan];
-                    int rouge=(int) (gestionnaireInterface.couleurFondPlan.getRed()*255.d);
-                    int bleu=(int) (gestionnaireInterface.couleurFondPlan.getBlue()*255.d);
-                    int vert=(int) (gestionnaireInterface.couleurFondPlan.getGreen()*255.d);
-                    String coulFond="rgba("+rouge+","+vert+","+bleu+","+gestionnaireInterface.opacitePlan+")";
+                    int rouge = (int) (gestionnaireInterface.couleurFondPlan.getRed() * 255.d);
+                    int bleu = (int) (gestionnaireInterface.couleurFondPlan.getBlue() * 255.d);
+                    int vert = (int) (gestionnaireInterface.couleurFondPlan.getGreen() * 255.d);
+                    String coulFond = "rgba(" + rouge + "," + vert + "," + bleu + "," + gestionnaireInterface.opacitePlan + ")";
                     contenuFichier
                             += "    <plan\n"
                             + "        affiche=\"oui\" \n"
@@ -518,8 +518,9 @@ public class EditeurPanovisu extends Application {
                             + "        boussoleY=\"" + planPano.getPositionX() + "\"\n"
                             + "    >\n";
                     for (int iPoint = 0; iPoint < planPano.getNombreHotspots(); iPoint++) {
-                        double posX = planPano.getHotspot(iPoint).getLongitude() * planPano.getLargeurPlan();
-                        double posY = planPano.getHotspot(iPoint).getLatitude() * planPano.getHauteurPlan();
+                        double posX = planPano.getHotspot(iPoint).getLongitude() * GestionnaireInterfaceController.largeurPlan;
+                        double posY = planPano.getHotspot(iPoint).getLatitude()
+                                * planPano.getHauteurPlan() * GestionnaireInterfaceController.largeurPlan / planPano.getLargeurPlan();
                         if (planPano.getHotspot(iPoint).getNumeroPano() == i) {
                             contenuFichier
                                     += "        <pointPlan\n"
@@ -2031,11 +2032,6 @@ public class EditeurPanovisu extends Application {
 
     private AnchorPane afficherListePanosVignettes(int numHS) {
 
-        pano.setOnMouseClicked(
-                (MouseEvent me) -> {
-                }
-        );
-        pano.setCursor(Cursor.DEFAULT);
         AnchorPane APlistePano = new AnchorPane();
         APlistePano.setOpacity(1);
         Pane fond = new Pane();
@@ -2048,53 +2044,52 @@ public class EditeurPanovisu extends Application {
         APlistePano.setStyle("-fx-backgroung-color : #bbb;");
         int j = 0;
         ImageView[] IVPano;
-        IVPano = new ImageView[nombrePanoramiques - 1];
+        IVPano = new ImageView[nombrePanoramiques];
         double xPos;
         double yPos;
-
+        int row = 0;
         for (int i = 0; i < nombrePanoramiques; i++) {
-            if (i != panoActuel) {
-                int numeroPano = i;
-                IVPano[j] = new ImageView(panoramiquesProjet[i].getVignettePanoramique());
-                IVPano[j].setFitWidth(120);
-                IVPano[j].setFitHeight(60);
-                IVPano[j].setSmooth(true);
-                String nomPano = panoramiquesProjet[i].getNomFichier();
-                int col = j % 4;
-                int row = j / 4;
-                xPos = col * 130 + 25;
-                yPos = row * 65 + 5;
-                IVPano[j].setLayoutX(xPos);
-                IVPano[j].setLayoutY(yPos);
-                IVPano[j].setCursor(Cursor.HAND);
-                IVPano[j].setStyle("-fx-background-color : #ccc;");
-                Tooltip t = new Tooltip(nomPano.substring(nomPano.lastIndexOf(File.separator) + 1, nomPano.lastIndexOf(".")));
-                t.setStyle(tooltipStyle);
-                Tooltip.install(IVPano[j], t);
-                IVPano[j].setOnMouseClicked((MouseEvent me) -> {
-                    pano.setCursor(Cursor.CROSSHAIR);
-                    pano.setOnMouseClicked(
-                            (MouseEvent me1) -> {
-                                gereSourisPanoramique(me1);
-                            }
-                    );
-                    panoListeVignette = nomPano;
-                    if (panoramiquesProjet[numeroPano].getTitrePanoramique() != null) {
-                        String texteHS = panoramiquesProjet[numeroPano].getTitrePanoramique();
-                        TextArea txtHS = (TextArea) scene.lookup("#txtHS" + numHS);
-                        txtHS.setText(texteHS);
-                    }
-                    ComboBox cbx = (ComboBox) scene.lookup("#cbpano" + numHS);
-                    cbx.setValue(nomPano.substring(nomPano.lastIndexOf(File.separator) + 1, nomPano.lastIndexOf(".")));
-                    APlistePano.setVisible(false);
-                    me.consume();
-                });
-                APlistePano.getChildren().add(IVPano[j]);
-                j++;
-            }
+            int numeroPano = i;
+            IVPano[j] = new ImageView(panoramiquesProjet[i].getVignettePanoramique());
+            IVPano[j].setFitWidth(120);
+            IVPano[j].setFitHeight(60);
+            IVPano[j].setSmooth(true);
+            String nomPano = panoramiquesProjet[i].getNomFichier();
+            int col = j % 4;
+            row = j / 4;
+            xPos = col * 130 + 25;
+            yPos = row * 65 + 5;
+            IVPano[j].setLayoutX(xPos);
+            IVPano[j].setLayoutY(yPos);
+            IVPano[j].setCursor(Cursor.HAND);
+            IVPano[j].setStyle("-fx-background-color : #ccc;");
+            Tooltip t = new Tooltip(nomPano.substring(nomPano.lastIndexOf(File.separator) + 1, nomPano.lastIndexOf(".")));
+            t.setStyle(tooltipStyle);
+            Tooltip.install(IVPano[j], t);
+            IVPano[j].setOnMouseClicked((MouseEvent me) -> {
+                pano.setCursor(Cursor.CROSSHAIR);
+                pano.setOnMouseClicked(
+                        (MouseEvent me1) -> {
+                            gereSourisPanoramique(me1);
+                        }
+                );
+                panoListeVignette = nomPano;
+                if (panoramiquesProjet[numeroPano].getTitrePanoramique() != null) {
+                    String texteHS = panoramiquesProjet[numeroPano].getTitrePanoramique();
+                    TextArea txtHS = (TextArea) outils.lookup("#txtHS" + numHS);
+                    txtHS.setText(texteHS);
+                }
+                panoramiquesProjet[panoActuel].getHotspot(numHS).setNumeroPano(numeroPano);
+                ComboBox cbx = (ComboBox) outils.lookup("#cbpano" + numHS);
+                cbx.setValue(nomPano.substring(nomPano.lastIndexOf(File.separator) + 1, nomPano.lastIndexOf(".")));
+                APlistePano.setVisible(false);
+                me.consume();
+            });
+            APlistePano.getChildren().add(IVPano[j]);
+            j++;
 
         }
-        int taille = ((j + 1) / 4 + 1) * 65 + 5;
+        int taille = (row + 1) * 65 + 5;
         APlistePano.setPrefWidth(540);
         APlistePano.setPrefHeight(taille);
         APlistePano.setMinWidth(540);
@@ -2116,6 +2111,7 @@ public class EditeurPanovisu extends Application {
             APlistePano.setVisible(false);
             me.consume();
         });
+        APlistePano.setTranslateZ(2);
         return APlistePano;
     }
 
@@ -2124,11 +2120,11 @@ public class EditeurPanovisu extends Application {
      */
     private void valideHS() {
         for (int i = 0; i < panoramiquesProjet[panoActuel].getNombreHotspots(); i++) {
-            ComboBox cbx = (ComboBox) scene.lookup("#cbpano" + i);
-            TextArea txtTexteHS = (TextArea) scene.lookup("#txtHS" + i);
+            ComboBox cbx = (ComboBox) outils.lookup("#cbpano" + i);
+            TextArea txtTexteHS = (TextArea) outils.lookup("#txtHS" + i);
             panoramiquesProjet[panoActuel].getHotspot(i).setInfo(txtTexteHS.getText());
             panoramiquesProjet[panoActuel].getHotspot(i).setFichierXML(cbx.getValue() + ".xml");
-            CheckBox cbAnime = (CheckBox) scene.lookup("#anime" + i);
+            CheckBox cbAnime = (CheckBox) outils.lookup("#anime" + i);
             if (cbAnime.isSelected()) {
                 panoramiquesProjet[panoActuel].getHotspot(i).setAnime(true);
             } else {
@@ -2136,9 +2132,9 @@ public class EditeurPanovisu extends Application {
             }
         }
         for (int i = 0; i < panoramiquesProjet[panoActuel].getNombreHotspotImage(); i++) {
-            TextArea txtTexteHS = (TextArea) scene.lookup("#txtHSImage" + i);
+            TextArea txtTexteHS = (TextArea) outils.lookup("#txtHSImage" + i);
             panoramiquesProjet[panoActuel].getHotspotImage(i).setInfo(txtTexteHS.getText());
-            CheckBox cbAnime = (CheckBox) scene.lookup("#animeImage" + i);
+            CheckBox cbAnime = (CheckBox) outils.lookup("#animeImage" + i);
             if (cbAnime.isSelected()) {
                 panoramiquesProjet[panoActuel].getHotspotImage(i).setAnime(true);
             } else {
@@ -2194,6 +2190,8 @@ public class EditeurPanovisu extends Application {
                 if (f1XML != null) {
                     cbDestPano.setValue(f1XML.split("\\.")[0]);
                 }
+                int num = cbDestPano.getSelectionModel().getSelectedIndex();
+                System.out.println("num : " + num);
                 vbPanneauHS.getChildren().addAll(lblLien, cbDestPano, sep);
             }
             Label lblTexteHS = new Label("Texte du Hotspot");
@@ -2287,8 +2285,8 @@ public class EditeurPanovisu extends Application {
         APLegende.setPrefHeight(150);
         APLegende.setMaxWidth(1000);
         APLegende.setMaxHeight(150);
-        APLegende.setLayoutY(imagePanoramique.getFitHeight() + 20);
-        APLegende.setLayoutX(50);
+        double positionY = (pano.getLayoutY() + pano.getPrefHeight() + 10);
+        System.out.println("position : " + positionY);
         Circle point = new Circle(30, 20, 5);
         point.setFill(Color.YELLOW);
         point.setStroke(Color.RED);
@@ -2324,7 +2322,7 @@ public class EditeurPanovisu extends Application {
         polygon.setLayoutY(20);
         Label lblHS = new Label(rb.getString("main.legendeHS"));
         Label lblHSImage = new Label(rb.getString("main.legendeHSImage"));
-        Label lblHSHTML = new Label(rb.getString("main.legendeHSHTML"));
+        //Label lblHSHTML = new Label(rb.getString("main.legendeHSHTML"));
         Label lblPoV = new Label(rb.getString("main.legendePoV"));
         Label lblNord = new Label(rb.getString("main.legendeNord"));
         Line ligneNord = new Line(500, 45, 500, 65);
@@ -2334,17 +2332,19 @@ public class EditeurPanovisu extends Application {
         lblHS.setLayoutY(10);
         lblHSImage.setLayoutX(50);
         lblHSImage.setLayoutY(50);
-        lblHSHTML.setLayoutX(50);
-        lblHSHTML.setLayoutY(90);
+        //lblHSHTML.setLayoutX(50);
+        //lblHSHTML.setLayoutY(90);
         lblPoV.setLayoutX(520);
         lblPoV.setLayoutY(10);
         lblNord.setLayoutX(520);
         lblNord.setLayoutY(50);
-        APLegende.getChildren().addAll(lblHS, point, lblHSImage, point2, lblHSHTML, point3, lblPoV, polygon, lblNord, ligneNord);
+//        APLegende.getChildren().addAll(lblHS, point, lblHSImage, point2, lblHSHTML, point3, lblPoV, polygon, lblNord, ligneNord);
+        APLegende.getChildren().addAll(lblHS, point, lblHSImage, point2, lblPoV, polygon, lblNord, ligneNord);
         APLegende.setId("legende");
-        APLegende.setVisible(false);
-        APLegende.setTranslateY(10);
-        APLegende.setTranslateX(30);
+        APLegende.setVisible(true);
+        APLegende.setLayoutX(50);
+        APLegende.setLayoutY(positionY);
+        System.out.println("position legende : " + APLegende.getLayoutX() + "," + APLegende.getLayoutY());
         return APLegende;
     }
 
@@ -2403,8 +2403,12 @@ public class EditeurPanovisu extends Application {
                 valideHS();
                 if (nombrePanoramiques > 1) {
                     AnchorPane listePanoVig = afficherListePanosVignettes(numeroPoint);
-                    if (mouseX + (nombrePanoramiques - 1) * 130 > pano.getWidth()) {
-                        listePanoVig.setLayoutX(pano.getWidth() - (nombrePanoramiques - 1) * 130);
+                    int largeurVignettes = 4;
+                    if (nombrePanoramiques < 4) {
+                        largeurVignettes = nombrePanoramiques;
+                    }
+                    if (mouseX + largeurVignettes * 130 > pano.getWidth()) {
+                        listePanoVig.setLayoutX(pano.getWidth() - largeurVignettes * 130);
                     } else {
                         listePanoVig.setLayoutX(mouseX);
                     }
@@ -2604,9 +2608,12 @@ public class EditeurPanovisu extends Application {
         numPoints++;
         if (nombrePanoramiques > 1) {
             AnchorPane listePanoVig = afficherListePanosVignettes(panoramiquesProjet[panoActuel].getNombreHotspots() - 1);
-            if (mouseX + (nombrePanoramiques - 1) * 130 > pano.getWidth()) {
-                listePanoVig.setLayoutX(mouseX);
-                listePanoVig.setLayoutX(pano.getWidth() - (nombrePanoramiques - 1) * 130);
+            int largeurVignettes = 4;
+            if (nombrePanoramiques < 4) {
+                largeurVignettes = nombrePanoramiques;
+            }
+            if (mouseX + largeurVignettes * 130 > pano.getWidth()) {
+                listePanoVig.setLayoutX(pano.getWidth() - largeurVignettes * 130);
             } else {
                 listePanoVig.setLayoutX(mouseX);
             }
@@ -2647,9 +2654,12 @@ public class EditeurPanovisu extends Application {
                 int numeroPoint = Integer.parseInt(chPoint);
                 if (nombrePanoramiques > 1) {
                     AnchorPane listePanoVig = afficherListePanosVignettes(numeroPoint);
-                    if (mouseX + (nombrePanoramiques - 1) * 130 > pano.getWidth()) {
-                        listePanoVig.setLayoutX(mouseX);
-                        listePanoVig.setLayoutX(pano.getWidth() - (nombrePanoramiques - 1) * 130);
+                    int largeurVignettes = 4;
+                    if (nombrePanoramiques < 4) {
+                        largeurVignettes = nombrePanoramiques;
+                    }
+                    if (mouseX + largeurVignettes * 130 > pano.getWidth()) {
+                        listePanoVig.setLayoutX(pano.getWidth() - largeurVignettes * 130);
                     } else {
                         listePanoVig.setLayoutX(mouseX);
                     }
@@ -2730,17 +2740,6 @@ public class EditeurPanovisu extends Application {
             pano.getChildren().remove(pt);
         }
 
-//        if (nombrePanoramiques > 1) {
-//            AnchorPane listePanoVig = afficherListePanosVignettes(panoramiquesProjet[panoActuel].getNombreHotspots() - 1);
-//            if (mouseX + (nombrePanoramiques - 1) * 130 > pano.getWidth()) {
-//                listePanoVig.setLayoutX(mouseX);
-//                listePanoVig.setLayoutX(pano.getWidth() - (nombrePanoramiques - 1) * 130);
-//            } else {
-//                listePanoVig.setLayoutX(mouseX);
-//            }
-//            listePanoVig.setLayoutY(mouseY);
-//            pano.getChildren().add(listePanoVig);
-//        }
         point.setOnMouseClicked((MouseEvent me1) -> {
             if (me1.isControlDown()) {
                 valideHS();
@@ -2767,26 +2766,8 @@ public class EditeurPanovisu extends Application {
                  * On les crée les nouvelles
                  */
                 ajouteAffichageHotspots();
-                me1.consume();
-            } else {
-//                valideHS();
-//                String chPoint = point.getId();
-//                chPoint = chPoint.substring(5, chPoint.length());
-//                int numeroPoint = Integer.parseInt(chPoint);
-//                if (nombrePanoramiques > 1) {
-//                    AnchorPane listePanoVig = afficherListePanosVignettes(numeroPoint);
-//                    if (mouseX + (nombrePanoramiques - 1) * 130 > pano.getWidth()) {
-//                        listePanoVig.setLayoutX(mouseX);
-//                        listePanoVig.setLayoutX(pano.getWidth() - (nombrePanoramiques - 1) * 130);
-//                    } else {
-//                        listePanoVig.setLayoutX(mouseX);
-//                    }
-//                    listePanoVig.setLayoutY(mouseY);
-//                    pano.getChildren().add(listePanoVig);
-//                }
-                me1.consume();
-//
             }
+            me1.consume();
         });
 
     }
@@ -3820,7 +3801,7 @@ public class EditeurPanovisu extends Application {
 
         coordonnees = new HBox();
         pano = new Pane();
-        panneau2 = new VBox();
+        panneau2 = new AnchorPane();
         lblLong = new Label("");
         lblLat = new Label("");
         imagePanoramique = new ImageView();
@@ -3876,11 +3857,12 @@ public class EditeurPanovisu extends Application {
         pano.getChildren().add(imagePanoramique);
         pano.setPrefSize(imagePanoramique.getFitWidth(), imagePanoramique.getFitHeight());
         pano.setMaxSize(imagePanoramique.getFitWidth(), imagePanoramique.getFitHeight());
+        pano.setLayoutY(20);
         coordonnees.getChildren().setAll(lblLong, lblLat);
         vuePanoramique.setContent(panneau2);
         hbEnvironnement.getChildren().setAll(vuePanoramique, panneauOutils);
         root.getChildren().addAll(tabPaneEnvironnement, barreStatus);
-        panneau2.getChildren().setAll(coordonnees, pano, afficheLegende());
+        panneau2.getChildren().setAll(afficheLegende(), coordonnees, pano);
         primaryStage.show();
         popUp.affichePopup();
     }

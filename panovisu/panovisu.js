@@ -11,7 +11,7 @@
  * 
  * @returns {window|String}
  */
-version = "0.90";
+version = "1.0.0";
 programmeur = "Laurent LANG";
 anneeProgramme = "2014";
 site = "http://lemondea360.fr";
@@ -617,25 +617,27 @@ function panovisu(num_pano) {
         if (vignettesPano.length !== 0) {
             var element = $(this).attr("id");
             var numelement = parseInt(element.substring(6).split("-")[0]);
-            clearInterval(timers);
-            longitude = 0;
-            latitude = 0;
-            fov = 75;
-            $("#infoBulle-" + num_pano).hide();
-            $("#infoBulle-" + num_pano).html("");
-            isReloaded = true;
-            xmlFile = vignettesPano[numelement].xml;
-            hotSpot = new Array();
-            pointsInteret = new Array();
-            vignettesPano = new Array();
-            numHotspot = 0;
-            $("#boussole-" + num_pano).hide();
-            $("#marcheArret-" + num_pano).hide();
-            $("#divVignettes-" + num_pano).html("");
-            $("#divVignettes-" + num_pano).hide();
-            $("#plan-" + num_pano).hide();
-            $("#planTitre-" + num_pano).hide();
-            chargeXML(xmlFile);
+            pano1.fadeOut(1000, function() {
+                clearInterval(timers);
+                longitude = 0;
+                latitude = 0;
+                fov = 75;
+                $("#infoBulle-" + num_pano).hide();
+                $("#infoBulle-" + num_pano).html("");
+                isReloaded = true;
+                xmlFile = vignettesPano[numelement].xml;
+                hotSpot = new Array();
+                pointsInteret = new Array();
+                vignettesPano = new Array();
+                numHotspot = 0;
+                $("#boussole-" + num_pano).hide();
+                $("#marcheArret-" + num_pano).hide();
+                $("#divVignettes-" + num_pano).html("");
+                $("#divVignettes-" + num_pano).hide();
+                $("#plan-" + num_pano).hide();
+                $("#planTitre-" + num_pano).hide();
+                chargeXML(xmlFile);
+            });
         }
 
     });
@@ -747,39 +749,41 @@ function panovisu(num_pano) {
     });
 
     $(document).on("click", "#divSuivant-" + num_pano, function() {
-        clearInterval(timers);
-        longitude = 0;
-        latitude = 0;
-        fov = 75;
-        $("#infoBulle-" + num_pano).hide();
-        $("#infoBulle-" + num_pano).html("");
-        isReloaded = true;
-        xmlFile = XMLsuivant;
-        hotSpot = new Array();
-        pointsInteret = new Array();
-        numHotspot = 0;
-        $("#boussole-" + num_pano).hide();
-        $("#marcheArret-" + num_pano).hide();
-        chargeXML(xmlFile);
-
+        pano1.fadeOut(1000, function() {
+            clearInterval(timers);
+            longitude = 0;
+            latitude = 0;
+            fov = 75;
+            $("#infoBulle-" + num_pano).hide();
+            $("#infoBulle-" + num_pano).html("");
+            isReloaded = true;
+            xmlFile = XMLsuivant;
+            hotSpot = new Array();
+            pointsInteret = new Array();
+            numHotspot = 0;
+            $("#boussole-" + num_pano).hide();
+            $("#marcheArret-" + num_pano).hide();
+            chargeXML(xmlFile);
+        });
     });
 
     $(document).on("click", "#divPrecedent-" + num_pano, function() {
-        clearInterval(timers);
-        longitude = 0;
-        latitude = 0;
-        fov = 75;
-        $("#infoBulle-" + num_pano).hide();
-        $("#infoBulle-" + num_pano).html("");
-        isReloaded = true;
-        xmlFile = XMLprecedent;
-        hotSpot = new Array();
-        pointsInteret = new Array();
-        numHotspot = 0;
-        $("#boussole-" + num_pano).hide();
-        $("#marcheArret-" + num_pano).hide();
-        chargeXML(xmlFile);
-
+        pano1.fadeOut(1000, function() {
+            clearInterval(timers);
+            longitude = 0;
+            latitude = 0;
+            fov = 75;
+            $("#infoBulle-" + num_pano).hide();
+            $("#infoBulle-" + num_pano).html("");
+            isReloaded = true;
+            xmlFile = XMLprecedent;
+            hotSpot = new Array();
+            pointsInteret = new Array();
+            numHotspot = 0;
+            $("#boussole-" + num_pano).hide();
+            $("#marcheArret-" + num_pano).hide();
+            chargeXML(xmlFile);
+        });
     });
 
     $(document).on("click", "#planTitre-" + num_pano, function() {
@@ -830,24 +834,26 @@ function panovisu(num_pano) {
             var numPlanPoint = parseInt($(this).attr("id").split("-")[1]);
             xmlFile = pointsPlan[numPlanPoint].xml;
             if (xmlFile !== "actif") {
-                clearInterval(timers);
-                longitude = 0;
-                latitude = 0;
-                fov = 75;
-                $("#infoBulle-" + num_pano).hide();
-                $("#infoBulle-" + num_pano).html("");
-                isReloaded = true;
-                hotSpot = new Array();
-                pointsInteret = new Array();
-                vignettesPano = new Array();
-                numHotspot = 0;
-                $("#boussole-" + num_pano).hide();
-                $("#marcheArret-" + num_pano).hide();
-                $("#divVignettes-" + num_pano).html("");
-                $("#divVignettes-" + num_pano).hide();
-                $("#plan-" + num_pano).hide();
-                $("#planTitre-" + num_pano).hide();
-                chargeXML(xmlFile);
+                pano1.fadeOut(1000, function() {
+                    clearInterval(timers);
+                    longitude = 0;
+                    latitude = 0;
+                    fov = 75;
+                    $("#infoBulle-" + num_pano).hide();
+                    $("#infoBulle-" + num_pano).html("");
+                    isReloaded = true;
+                    hotSpot = new Array();
+                    pointsInteret = new Array();
+                    vignettesPano = new Array();
+                    numHotspot = 0;
+                    $("#boussole-" + num_pano).hide();
+                    $("#marcheArret-" + num_pano).hide();
+                    $("#divVignettes-" + num_pano).html("");
+                    $("#divVignettes-" + num_pano).hide();
+                    $("#plan-" + num_pano).hide();
+                    $("#planTitre-" + num_pano).hide();
+                    chargeXML(xmlFile);
+                });
             }
         }
     });
@@ -1518,8 +1524,8 @@ function panovisu(num_pano) {
             $("#plan-" + num_pano).html("");
             $("#plan-" + num_pano).css(planPosition, "0px");
             $("#plan-" + num_pano).css({
-                backgroundColor: planCouleurFond, 
-                padding: "10px", 
+                backgroundColor: planCouleurFond,
+                padding: "10px",
                 top: "0px",
             });
             $("<img>", {id: "planAig-" + num_pano, class: "planAig", src: "panovisu/images/plan/aiguillePlan.png"}).appendTo("#plan-" + num_pano);
@@ -1537,14 +1543,14 @@ function panovisu(num_pano) {
             $("<img>", {id: "planImg-" + num_pano, class: "planImg", src: planImage, width: planLargeur}).appendTo("#plan-" + num_pano);
             var positPlan = $("#info-" + num_pano).height() + 10;
             $("#plan-" + num_pano).css("top", positPlan);
-            $("#plan-" + num_pano).show();
-            $("<div>", {id: "planTitre-" + num_pano, class: "planTitre"}).appendTo("#pano1-" + num_pano);
+
+            transformTitre = $("#planTitre-" + num_pano).css("transform");
             $("#planTitre-" + num_pano).css({
                 width: "44px",
                 height: "30px",
                 paddingLeft: "6px",
                 transformOrigin: "0 0",
-                transform: "rotate(90deg)",
+                transform: transformTitre,
                 backgroundColor: planCouleurFond,
                 color: planCouleurTexte,
                 top: positPlan
@@ -1569,6 +1575,8 @@ function panovisu(num_pano) {
                     left: pointsPlan[i].positX - $("#planPt-" + i + "-" + num_pano).width() / 2 + 10
                 });
             }
+            $("#plan-" + num_pano).show();
+            $("#planTitre-" + num_pano).show();
         }
 
     }
@@ -2317,13 +2325,12 @@ function panovisu(num_pano) {
                     pointsInteret = new Array();
                     pointsPlan = new Array();
                     planAffiche = false;
-                    planRentre = false;
                     planImage = "";
                     planLargeur = 0;
                     planNord = 0;
                     planPosition = "left";
                     planCouleurFond = "rgba(0,0,0,0.5)";
-                    opacitePlan=0.8;
+                    opacitePlan = 0.8;
                     planCouleurTexte = "white";
                     planBoussolePosition = "top:right";
                     planBoussoleX = 0;
@@ -2608,6 +2615,8 @@ function panovisu(num_pano) {
         $("<div>", {id: "divSuivant-" + num_pano, class: "suivant", title: "Panoramique suivant"}).appendTo("#pano1-" + num_pano);
         $("#divPrecedent-" + num_pano).hide();
         $("#divSuivant-" + num_pano).hide();
+        planRentre = false;
+
 
         /**
          * Création de la barre de boutons
@@ -2622,7 +2631,10 @@ function panovisu(num_pano) {
         $("<div>", {id: "zoom-" + num_pano, class: "zoom"}).appendTo("#barre-" + num_pano);
         $("<div>", {id: "outils-" + num_pano, class: "outils"}).appendTo("#barre-" + num_pano);
         $("<div>", {id: "plan-" + num_pano, class: "plan"}).appendTo("#pano1-" + num_pano);
+        $("<div>", {id: "planTitre-" + num_pano, class: "planTitre"}).appendTo("#pano1-" + num_pano);
+        $("#planTitre-" + num_pano).css("transform", "rotate(90deg)");
         $("#plan-" + num_pano).hide();
+        $("#planTitre-" + num_pano).hide();
         /**
          * On rajoute enfin les boutons & les fenêtre d'information.
          */
@@ -2656,6 +2668,7 @@ function panovisu(num_pano) {
         };
         contexte = $.extend(defaut, contexte);
         fenPanoramique = contexte.panoramique;
+        $("#" + fenPanoramique).css("overflow", "hidden");
         maxFOV = contexte.maxFOV;
         minFOV = contexte.minFOV;
         var fenetre = fenPanoramique;
