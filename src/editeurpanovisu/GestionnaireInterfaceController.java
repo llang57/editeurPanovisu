@@ -49,6 +49,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Arc;
+import javafx.scene.shape.ArcType;
 import javafx.scene.text.Font;
 import jfxtras.labs.scene.control.BigDecimalField;
 
@@ -289,6 +291,14 @@ public class GestionnaireInterfaceController {
     public static double opacitePlan = 0.8;
     public static Color couleurTextePlan = Color.rgb(255, 255, 255);
     public static String txtCouleurTextePlan = couleurTextePlan.toString().substring(2, 8);
+    public static boolean bAfficheRadar = false;
+    public static Color couleurLigneRadar = Color.rgb(255, 255, 0);
+    public static String txtCouleurLigneRadar = couleurLigneRadar.toString().substring(2, 8);
+    public static Color couleurFondRadar = Color.rgb(200, 0, 0);
+    public static String txtCouleurFondRadar = couleurFondRadar.toString().substring(2, 8);
+    public static double tailleRadar = 40;
+    public static double opaciteRadar = 0.8;
+
     /*
      Eléments de l'onglet plan
      */
@@ -299,6 +309,11 @@ public class GestionnaireInterfaceController {
     private static ColorPicker CPCouleurFondPlan;
     private static ColorPicker CPCouleurTextePlan;
     private static Slider SLLargeurPlan;
+    private static CheckBox CBAfficheRadar;
+    private static ColorPicker CPCouleurFondRadar;
+    private static ColorPicker CPCouleurLigneRadar;
+    private static Slider SLTailleRadar;
+    private static Slider SLOpaciteRadar;
 
     public Pane tabInterface;
     private static HBox HBInterface;
@@ -789,9 +804,11 @@ public class GestionnaireInterfaceController {
         if (bAffichePlan) {
             double marge = 10.d;
             APVisuplan.getChildren().clear();
-            Image imgPlan ;
+            ImageView IVHSPlanActif = new ImageView(new Image("file:" + repertAppli + "/theme/plan/pointActif.png", 12, 12, true, true));
+            ImageView IVHSPlan = new ImageView(new Image("file:" + repertAppli + "/theme/plan/point.png", 12, 12, true, true));
+            Image imgPlan;
             if (nombrePlans > 0) {
-                String fichier=repertTemp+"/images/" + plans[gestionnairePlan.planActuel].getImagePlan();
+                String fichier = repertTemp + "/images/" + plans[gestionnairePlan.planActuel].getImagePlan();
                 imgPlan = new Image(
                         "file:" + fichier,
                         largeurPlan, -1, true, true
@@ -808,7 +825,8 @@ public class GestionnaireInterfaceController {
             APVisuplan.setStyle("-fx-background-color : #" + txtCouleurFondPlan);
             IVimgPlan.setLayoutX(marge);
             IVimgPlan.setLayoutY(marge);
-            APVisuplan.getChildren().add(IVimgPlan);
+            APVisuplan.getChildren().addAll(IVimgPlan, IVHSPlan);
+
             APVisuplan.setOpacity(opacitePlan);
             double positionX = 0;
             double positionY = IMVisualisation.getLayoutY() + txtTitre.getHeight();
@@ -819,6 +837,20 @@ public class GestionnaireInterfaceController {
                 case "right":
                     positionX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - APVisuplan.getPrefWidth();
                     break;
+            }
+            IVHSPlan.setLayoutX(80);
+            IVHSPlan.setLayoutY(40);
+            IVHSPlanActif.setLayoutX(30);
+            IVHSPlanActif.setLayoutY(90);
+            if (bAfficheRadar) {
+                Arc arcRadar = new Arc(36, 96, tailleRadar, tailleRadar, -55, 70);
+                arcRadar.setType(ArcType.ROUND);
+                arcRadar.setFill(couleurFondRadar);
+                arcRadar.setStroke(couleurLigneRadar);
+                arcRadar.setOpacity(opaciteRadar);
+                APVisuplan.getChildren().addAll(arcRadar, IVHSPlanActif);
+            } else {
+                APVisuplan.getChildren().add(IVHSPlanActif);
             }
             APVisuplan.setLayoutX(positionX);
             APVisuplan.setLayoutY(positionY);
@@ -991,7 +1023,7 @@ public class GestionnaireInterfaceController {
         Tooltip.install(IVHotSpot, t);
         IVHotSpotImage.setFitWidth(30);
         IVHotSpotImage.setPreserveRatio(true);
-        IVHotSpotImage.setLayoutX(410);
+        IVHotSpotImage.setLayoutX(560);
         IVHotSpotImage.setLayoutY(310);
         Tooltip t1 = new Tooltip("Hotspot Photo");
         t1.setStyle(tooltipStyle);
@@ -1277,11 +1309,12 @@ public class GestionnaireInterfaceController {
                 + "opacitePlan=" + Math.round(opacitePlan * 100.d) / 100.d + "\n"
                 + "largeurPlan=" + Math.round(largeurPlan) + "\n"
                 + "couleurFondPlan=" + txtCouleurFondPlan + "\n"
-                + "couleurTextePlan=" + txtCouleurTextePlan + "\n" //                + "positionNordPlan=" + Math.round(positionNordPlan) + "\n"
-                //                + "positionBoussolePlan=" + positionBoussolePlan + "\n"
-                //                + "positXBoussolePlan=" + Math.round(positXBoussolePlan) + "\n"
-                //                + "positYBoussolePlan=" + Math.round(positYBoussolePlan) + "\n"
-                ;
+                + "couleurTextePlan=" + txtCouleurTextePlan + "\n"
+                + "afficheRadar=" + bAfficheRadar + "\n"
+                + "opaciteRadar=" + Math.round(opaciteRadar * 100.d) / 100.d + "\n"
+                + "tailleRadar=" + Math.round(tailleRadar) + "\n"
+                + "couleurFondRadar=" + txtCouleurFondRadar + "\n"
+                + "couleurLigneRadar=" + txtCouleurLigneRadar + "\n";
         return contenuFichier;
     }
 
@@ -1571,18 +1604,23 @@ public class GestionnaireInterfaceController {
                     txtCouleurTextePlan = valeur;
                     couleurTextePlan = Color.valueOf(txtCouleurTextePlan);
                     break;
-//                case "positionNordPlan":
-//                    positionNordPlan = Double.parseDouble(valeur);
-//                    break;
-//                case "positionBoussolePlan":
-//                    positionBoussolePlan = valeur;
-//                    break;
-//                case "positXBoussolePlan":
-//                    positXBoussolePlan = Double.parseDouble(valeur);
-//                    break;
-//                case "positYBoussolePlan":
-//                    positYBoussolePlan = Double.parseDouble(valeur);
-//                    break;
+                case "afficheRadar":
+                    bAfficheRadar = valeur.equals("true");
+                    break;
+                case "opaciteRadar":
+                    opaciteRadar=Double.parseDouble(valeur);
+                    break;
+                case "tailleRadar":
+                    tailleRadar=Double.parseDouble(valeur);
+                    break;
+                case "couleurFondRadar":
+                    txtCouleurFondRadar = valeur;
+                    couleurFondRadar = Color.valueOf(txtCouleurFondRadar);
+                    break;
+                case "couleurLigneRadar":
+                    txtCouleurLigneRadar = valeur;
+                    couleurLigneRadar = Color.valueOf(txtCouleurLigneRadar);
+                    break;
 
             }
         }
@@ -1675,14 +1713,11 @@ public class GestionnaireInterfaceController {
             }
 
         }
-//        SLnordPlan.setValue(positionNordPlan);
-//        RBBoussolePlanTopLeft.setSelected(positionPlan.equals("top:left"));
-//        RBBoussolePlanTopRight.setSelected(positionPlan.equals("top:right"));
-//        RBBoussolePlanBottomLeft.setSelected(positionPlan.equals("bottom:left"));
-//        RBBoussolePlanBottomRight.setSelected(positionPlan.equals("bottom:right"));
-//        BDFPositXBoussole.setNumber(new BigDecimal(positXBoussolePlan));
-//        BDFPositYBoussole.setNumber(new BigDecimal(positYBoussolePlan));
-        //chargeBarre(styleBarre, styleHotSpots, imageMasque);
+        CBAfficheRadar.setSelected(bAfficheRadar);
+        SLOpaciteRadar.setValue(opaciteRadar);
+        SLTailleRadar.setValue(tailleRadar);
+        CPCouleurFondRadar.setValue(couleurFondRadar);
+        CPCouleurLigneRadar.setValue(couleurLigneRadar);
         afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
         afficheBoussole();
         afficheMasque();
@@ -1877,14 +1912,14 @@ public class GestionnaireInterfaceController {
         APTitre.setPrefHeight(200);
         Label lblPanelTitre = new Label(rb.getString("interface.styleTitre"));
         lblPanelTitre.setPrefWidth(VBOutils.getPrefWidth());
-        lblPanelTitre.setStyle("-fx-background-color : #444");
+        lblPanelTitre.setStyle("-fx-background-color : #666");
         lblPanelTitre.setTextFill(Color.WHITE);
         lblPanelTitre.setPadding(new Insets(5));
         lblPanelTitre.setLayoutX(10);
         lblPanelTitre.setLayoutY(10);
         ImageView IVBtnPlusTitre = new ImageView(new Image("file:" + "images/plus.png", 20, 20, true, true));
         IVBtnPlusTitre.setLayoutX(VBOutils.getPrefWidth() - 20);
-        IVBtnPlusTitre.setLayoutY(13);
+        IVBtnPlusTitre.setLayoutY(11);
         CBListePolices = new ComboBox(listePolices);
         CBListePolices.setValue(titrePoliceNom);
         CBListePolices.setLayoutX(180);
@@ -1977,10 +2012,10 @@ public class GestionnaireInterfaceController {
         AnchorPane APHotSpots = new AnchorPane();
         ImageView IVBtnPlusHS = new ImageView(new Image("file:" + "images/plus.png", 20, 20, true, true));
         IVBtnPlusHS.setLayoutX(VBOutils.getPrefWidth() - 20);
-        IVBtnPlusHS.setLayoutY(13);
+        IVBtnPlusHS.setLayoutY(11);
         Label lblChoixHS = new Label(rb.getString("interface.choixHotspot"));
         lblChoixHS.setPrefWidth(VBOutils.getPrefWidth());
-        lblChoixHS.setStyle("-fx-background-color : #444");
+        lblChoixHS.setStyle("-fx-background-color : #666");
         lblChoixHS.setTextFill(Color.WHITE);
         lblChoixHS.setPadding(new Insets(5));
         lblChoixHS.setLayoutX(10);
@@ -2231,14 +2266,14 @@ public class GestionnaireInterfaceController {
 
         Label lblBarreBouton = new Label(rb.getString("interface.barreBoutons"));
         lblBarreBouton.setPrefWidth(VBOutils.getPrefWidth());
-        lblBarreBouton.setStyle("-fx-background-color : #444");
+        lblBarreBouton.setStyle("-fx-background-color : #666");
         lblBarreBouton.setTextFill(Color.WHITE);
         lblBarreBouton.setPadding(new Insets(5));
         lblBarreBouton.setLayoutX(10);
         lblBarreBouton.setLayoutY(10);
         ImageView IVBtnPlus = new ImageView(new Image("file:" + "images/plus.png", 20, 20, true, true));
         IVBtnPlus.setLayoutX(VBOutils.getPrefWidth() - 20);
-        IVBtnPlus.setLayoutY(13);
+        IVBtnPlus.setLayoutY(11);
         double tailleInitiale = APBarreModif.getPrefHeight();
         APBarreModif.setPrefHeight(0);
         APBarreModif.setMaxHeight(0);
@@ -2304,14 +2339,14 @@ public class GestionnaireInterfaceController {
         APBoussole.getChildren().add(CBAfficheBoussole);
         Label lblPanelBoussole = new Label(rb.getString("interface.boussole"));
         lblPanelBoussole.setPrefWidth(VBOutils.getPrefWidth());
-        lblPanelBoussole.setStyle("-fx-background-color : #444");
+        lblPanelBoussole.setStyle("-fx-background-color : #666");
         lblPanelBoussole.setTextFill(Color.WHITE);
         lblPanelBoussole.setPadding(new Insets(5));
         lblPanelBoussole.setLayoutX(10);
         lblPanelBoussole.setLayoutY(10);
         ImageView IVBtnPlusBouss = new ImageView(new Image("file:" + "images/plus.png", 20, 20, true, true));
         IVBtnPlusBouss.setLayoutX(VBOutils.getPrefWidth() - 20);
-        IVBtnPlusBouss.setLayoutY(13);
+        IVBtnPlusBouss.setLayoutY(11);
         Label lblChoixBoussole = new Label(rb.getString("interface.choixImgBoussole"));
         lblChoixBoussole.setLayoutX(10);
         lblChoixBoussole.setLayoutY(40);
@@ -2473,14 +2508,14 @@ public class GestionnaireInterfaceController {
         APMasque.getChildren().add(CBAfficheMasque);
         Label lblPanelMasque = new Label(rb.getString("interface.masque"));
         lblPanelMasque.setPrefWidth(VBOutils.getPrefWidth());
-        lblPanelMasque.setStyle("-fx-background-color : #444");
+        lblPanelMasque.setStyle("-fx-background-color : #666");
         lblPanelMasque.setTextFill(Color.WHITE);
         lblPanelMasque.setPadding(new Insets(5));
         lblPanelMasque.setLayoutX(10);
         lblPanelMasque.setLayoutY(10);
         ImageView IVBtnPlusMasque = new ImageView(new Image("file:" + "images/plus.png", 20, 20, true, true));
         IVBtnPlusMasque.setLayoutX(VBOutils.getPrefWidth() - 20);
-        IVBtnPlusMasque.setLayoutY(13);
+        IVBtnPlusMasque.setLayoutY(11);
         Label lblChoixMasque = new Label(rb.getString("interface.choixImgMasque"));
         lblChoixMasque.setLayoutX(10);
         lblChoixMasque.setLayoutY(40);
@@ -2669,7 +2704,7 @@ public class GestionnaireInterfaceController {
         AnchorPane APReseauxSociaux = new AnchorPane();
 
         APReseauxSociaux.setLayoutY(40);
-        APReseauxSociaux.setPrefHeight(380);
+        APReseauxSociaux.setPrefHeight(310);
         APReseauxSociaux.setMinWidth(VBOutils.getPrefWidth() - 20);
         Double taillePanelReseauxSociaux = APReseauxSociaux.getPrefHeight();
         CBAfficheReseauxSociaux = new CheckBox(rb.getString("interface.affichageReseauxSociaux"));
@@ -2678,14 +2713,14 @@ public class GestionnaireInterfaceController {
         APReseauxSociaux.getChildren().add(CBAfficheReseauxSociaux);
         Label lblPanelReseauxSociaux = new Label(rb.getString("interface.reseauxSociaux"));
         lblPanelReseauxSociaux.setPrefWidth(VBOutils.getPrefWidth());
-        lblPanelReseauxSociaux.setStyle("-fx-background-color : #444");
+        lblPanelReseauxSociaux.setStyle("-fx-background-color : #666");
         lblPanelReseauxSociaux.setTextFill(Color.WHITE);
         lblPanelReseauxSociaux.setPadding(new Insets(5));
         lblPanelReseauxSociaux.setLayoutX(10);
         lblPanelReseauxSociaux.setLayoutY(10);
         ImageView IVBtnPlusReseauxSociaux = new ImageView(new Image("file:" + "images/plus.png", 20, 20, true, true));
         IVBtnPlusReseauxSociaux.setLayoutX(VBOutils.getPrefWidth() - 20);
-        IVBtnPlusReseauxSociaux.setLayoutY(13);
+        IVBtnPlusReseauxSociaux.setLayoutY(11);
         Label lblPositReseauxSociaux = new Label(rb.getString("interface.choixPositReseauxSociaux"));
         lblPositReseauxSociaux.setLayoutX(10);
         basImages = -30;
@@ -2835,14 +2870,14 @@ public class GestionnaireInterfaceController {
         APVignettes.getChildren().add(CBAfficheVignettes);
         Label lblPanelVignettes = new Label(rb.getString("interface.vignettes"));
         lblPanelVignettes.setPrefWidth(VBOutils.getPrefWidth());
-        lblPanelVignettes.setStyle("-fx-background-color : #444");
+        lblPanelVignettes.setStyle("-fx-background-color : #666");
         lblPanelVignettes.setTextFill(Color.WHITE);
         lblPanelVignettes.setPadding(new Insets(5));
         lblPanelVignettes.setLayoutX(10);
         lblPanelVignettes.setLayoutY(10);
         ImageView IVBtnPlusVignettes = new ImageView(new Image("file:" + "images/plus.png", 20, 20, true, true));
         IVBtnPlusVignettes.setLayoutX(VBOutils.getPrefWidth() - 20);
-        IVBtnPlusVignettes.setLayoutY(13);
+        IVBtnPlusVignettes.setLayoutY(11);
 
         Label lblChoixCouleurFondVignettes = new Label(rb.getString("interface.choixCouleurFondVignettes"));
         lblChoixCouleurFondVignettes.setLayoutX(10);
@@ -2944,37 +2979,23 @@ public class GestionnaireInterfaceController {
         APPlan = new AnchorPane();
 
         APPlan.setLayoutY(40);
-        APPlan.setPrefHeight(190);
+        APPlan.setPrefHeight(340);
         APPlan.setMinWidth(VBOutils.getPrefWidth() - 20);
         Double taillePanelPlan = APPlan.getPrefHeight();
         CBAffichePlan = new CheckBox(rb.getString("interface.affichagePlan"));
         CBAffichePlan.setLayoutX(10);
         CBAffichePlan.setLayoutY(10);
         APPlan.getChildren().add(CBAffichePlan);
-        CBAffichePlan.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
-            if (new_val != null) {
-                bAffichePlan = new_val;
-                tabPlan.setDisable(!bAffichePlan);
-                imgAjouterPlan.setDisable(!bAffichePlan);
-                ajouterPlan.setDisable(!bAffichePlan);
-                if (new_val) {
-                    imgAjouterPlan.setOpacity(1.0);
-                } else {
-                    imgAjouterPlan.setOpacity(0.3);
-                }
-                affichePlan();
-            }
-        });
         Label lblPanelPlan = new Label(rb.getString("interface.plan"));
         lblPanelPlan.setPrefWidth(VBOutils.getPrefWidth());
-        lblPanelPlan.setStyle("-fx-background-color : #444");
+        lblPanelPlan.setStyle("-fx-background-color : #666");
         lblPanelPlan.setTextFill(Color.WHITE);
         lblPanelPlan.setPadding(new Insets(5));
         lblPanelPlan.setLayoutX(10);
         lblPanelPlan.setLayoutY(10);
         ImageView IVBtnPlusPlan = new ImageView(new Image("file:" + "images/plus.png", 20, 20, true, true));
         IVBtnPlusPlan.setLayoutX(VBOutils.getPrefWidth() - 20);
-        IVBtnPlusPlan.setLayoutY(13);
+        IVBtnPlusPlan.setLayoutY(11);
         Label lblLargeurPlan = new Label(rb.getString("interface.largeurPlan"));
         lblLargeurPlan.setLayoutX(10);
         lblLargeurPlan.setLayoutY(40);
@@ -3012,13 +3033,45 @@ public class GestionnaireInterfaceController {
         SLOpacitePlan = new Slider(0, 1.0, 0.8);
         SLOpacitePlan.setLayoutX(200);
         SLOpacitePlan.setLayoutY(160);
+        CBAfficheRadar = new CheckBox(rb.getString("interface.afficheRadar"));
+        CBAfficheRadar.setLayoutX(10);
+        CBAfficheRadar.setLayoutY(190);
 
+        Label lblTailleRadar = new Label(rb.getString("interface.tailleRadar"));
+        lblTailleRadar.setLayoutX(10);
+        lblTailleRadar.setLayoutY(220);
+        SLTailleRadar = new Slider(0, 80, tailleRadar);
+        SLTailleRadar.setLayoutX(200);
+        SLTailleRadar.setLayoutY(220);
+        Label lblOpaciteRadar = new Label(rb.getString("interface.opaciteRadar"));
+        lblOpaciteRadar.setLayoutX(10);
+        lblOpaciteRadar.setLayoutY(250);
+        SLOpaciteRadar = new Slider(0, 1, 0.8);
+        SLOpaciteRadar.setLayoutX(200);
+        SLOpaciteRadar.setLayoutY(250);
+        Label lblCouleurFondRadar = new Label(rb.getString("interface.couleurFondRadar"));
+        lblCouleurFondRadar.setLayoutX(10);
+        lblCouleurFondRadar.setLayoutY(280);
+        CPCouleurFondRadar = new ColorPicker(couleurFondRadar);
+        CPCouleurFondRadar.setLayoutX(200);
+        CPCouleurFondRadar.setLayoutY(280);
+        Label lblCouleurLigneRadar = new Label(rb.getString("interface.couleurLigneRadar"));
+        lblCouleurLigneRadar.setLayoutX(10);
+        lblCouleurLigneRadar.setLayoutY(310);
+        CPCouleurLigneRadar = new ColorPicker(couleurLigneRadar);
+        CPCouleurLigneRadar.setLayoutX(200);
+        CPCouleurLigneRadar.setLayoutY(310);
         APPlan.getChildren().addAll(
                 lblLargeurPlan, SLLargeurPlan,
                 lblPositPlan, RBPlanLeft, RBPlanRight,
                 lblCouleurFondPlan, CPCouleurFondPlan,
                 lblCouleurTextePlan, CPCouleurTextePlan,
-                lblOpacitePlan, SLOpacitePlan
+                lblOpacitePlan, SLOpacitePlan,
+                CBAfficheRadar,
+                lblTailleRadar, SLTailleRadar,
+                lblOpaciteRadar, SLOpaciteRadar,
+                lblCouleurFondRadar, CPCouleurFondRadar,
+                lblCouleurLigneRadar, CPCouleurLigneRadar
         );
 
         APPlan.setPrefHeight(0);
@@ -3554,6 +3607,27 @@ public class GestionnaireInterfaceController {
         /*
          Listeners Plan
          */
+        CBAffichePlan.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+            if (new_val != null) {
+                bAffichePlan = new_val;
+                tabPlan.setDisable(!bAffichePlan);
+                imgAjouterPlan.setDisable(!bAffichePlan);
+                ajouterPlan.setDisable(!bAffichePlan);
+                if (new_val) {
+                    imgAjouterPlan.setOpacity(1.0);
+                } else {
+                    imgAjouterPlan.setOpacity(0.3);
+                }
+                affichePlan();
+            }
+        });
+        CBAfficheRadar.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+            if (new_val != null) {
+                bAfficheRadar = new_val;
+                affichePlan();
+            }
+        });
+
         grpPosPlan.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) -> {
             if (grpPosPlan.getSelectedToggle() != null) {
                 positionPlan = grpPosPlan.getSelectedToggle().getUserData().toString();
@@ -3585,6 +3659,32 @@ public class GestionnaireInterfaceController {
             String coul = CPCouleurTextePlan.getValue().toString().substring(2, 8);
             couleurTextePlan = CPCouleurTextePlan.getValue();
             txtCouleurTextePlan = coul;
+            affichePlan();
+        });
+        SLTailleRadar.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+            if (newValue != null) {
+                double taille = (double) newValue;
+                tailleRadar = taille;
+                affichePlan();
+            }
+        });
+        SLOpaciteRadar.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+            if (newValue != null) {
+                double opacite = (double) newValue;
+                opaciteRadar = opacite;
+                affichePlan();
+            }
+        });
+        CPCouleurFondRadar.setOnAction((ActionEvent e) -> {
+            String coul = CPCouleurFondRadar.getValue().toString().substring(2, 8);
+            couleurFondRadar = CPCouleurFondRadar.getValue();
+            txtCouleurFondRadar = coul;
+            affichePlan();
+        });
+        CPCouleurLigneRadar.setOnAction((ActionEvent e) -> {
+            String coul = CPCouleurLigneRadar.getValue().toString().substring(2, 8);
+            couleurLigneRadar = CPCouleurLigneRadar.getValue();
+            txtCouleurLigneRadar = coul;
             affichePlan();
         });
 

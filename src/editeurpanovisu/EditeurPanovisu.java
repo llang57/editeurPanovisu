@@ -73,7 +73,6 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.StrokeLineJoin;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -503,6 +502,7 @@ public class EditeurPanovisu extends Application {
                     int rouge = (int) (gestionnaireInterface.couleurFondPlan.getRed() * 255.d);
                     int bleu = (int) (gestionnaireInterface.couleurFondPlan.getBlue() * 255.d);
                     int vert = (int) (gestionnaireInterface.couleurFondPlan.getGreen() * 255.d);
+                    String SAfficheRadar = (gestionnaireInterface.bAfficheRadar) ? "oui" : "non";
                     String coulFond = "rgba(" + rouge + "," + vert + "," + bleu + "," + gestionnaireInterface.opacitePlan + ")";
                     contenuFichier
                             += "    <plan\n"
@@ -516,6 +516,11 @@ public class EditeurPanovisu extends Application {
                             + "        boussolePosition=\"" + planPano.getPosition() + "\"\n"
                             + "        boussoleX=\"" + planPano.getPositionX() + "\"\n"
                             + "        boussoleY=\"" + planPano.getPositionX() + "\"\n"
+                            + "        radarAffiche=\""+SAfficheRadar+"\"\n"
+                            + "        radarTaille=\""+Math.round(gestionnaireInterface.tailleRadar)+"\"\n"
+                            + "        radarCouleurFond=\"#"+gestionnaireInterface.txtCouleurFondRadar+"\"\n"
+                            + "        radarCouleurLigne=\"#"+gestionnaireInterface.txtCouleurLigneRadar+"\"\n"
+                            + "        radarOpacite=\""+Math.round(gestionnaireInterface.opaciteRadar * 100.d) / 100.d+"\"\n"
                             + "    >\n";
                     for (int iPoint = 0; iPoint < planPano.getNombreHotspots(); iPoint++) {
                         double posX = planPano.getHotspot(iPoint).getLongitude() * GestionnaireInterfaceController.largeurPlan;
