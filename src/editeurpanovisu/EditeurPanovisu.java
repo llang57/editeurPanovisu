@@ -432,6 +432,7 @@ public class EditeurPanovisu extends Application {
                             + "        affiche=\"" + SAfficheVignettes + "\"\n"
                             + "        tailleImage=\"" + gestionnaireInterface.tailleImageVignettes + "\"\n"
                             + "        fondCouleur=\"" + gestionnaireInterface.couleurFondVignettes + "\"\n"
+                            + "        texteCouleur=\"" + gestionnaireInterface.couleurTexteVignettes + "\"\n"
                             + "        opacite=\"" + gestionnaireInterface.opaciteVignettes + "\"\n"
                             + "        position=\"" + gestionnaireInterface.positionVignettes + "\"\n"
                             + "    >\n";

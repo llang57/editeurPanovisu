@@ -112,6 +112,7 @@ and open the template in the editor.
     display: inline-block;
     position: absolute;
     top: -45px;
+    transition: 0.5s;    
 }
 .barre button{
     height: 40px;
@@ -164,7 +165,7 @@ and open the template in the editor.
     color: #fff;
     text-align: center;
     display: none;
-    
+
 }
 
 .infoPanovisu a{
@@ -190,6 +191,7 @@ and open the template in the editor.
 .boussole{
     position: absolute;
     z-index: 501;
+    transition: 0.5s;    
 }
 .reseauxSociaux {
     position: absolute;
@@ -201,7 +203,7 @@ and open the template in the editor.
     cursor: pointer;
     filter: url(filtres.svg#gris30);
     filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale="0.3",duration=2);
-   -webkit-filter: grayscale(0.3);
+    -webkit-filter: grayscale(0.3);
     transition: 0.5s;    
 }
 
@@ -224,6 +226,14 @@ and open the template in the editor.
     position: absolute;
     transition: 0.5s;
 }
+.titreVignettes{
+    z-index : 400;
+    position: absolute;
+    transition: 0.5s;
+    font-size:0.8em;
+    cursor : pointer;
+}
+
 .imgVignette{
     margin-top: -2px;
     transition: 0.5s;
@@ -232,7 +242,7 @@ and open the template in the editor.
     border : 2px solid #fff;
     filter: url(filtres.svg#gris30);
     filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale="0.3",duration=2);
-   -webkit-filter: grayscale(0.3);
+    -webkit-filter: grayscale(0.3);
     transition: 0.5s;
 }
 .imgVignette:hover{
@@ -265,6 +275,8 @@ and open the template in the editor.
     border-radius: 10px 0px 0px 10px; 
     opacity : 0.2;
     z-index: 500;
+    transition: 0.5s;
+
 }
 .precedent{
     width: 50px;
@@ -276,8 +288,9 @@ and open the template in the editor.
     background-color: rgba(0,0,0,0.3);
     opacity : 0.2;
     border-radius: 0 10px 10px 0; 
-
     z-index: 500;
+    transition: 0.5s;
+
 }
 .suivant:hover,.precedent:hover{
     opacity: 0.9;

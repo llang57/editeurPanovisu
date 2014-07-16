@@ -3,14 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/github/editeurPanovisu/src/editeurpanovisu/Panoramique.java</file>
-            <file>file:/E:/github/editeurPanovisu/src/editeurpanovisu/GestionnairePlanController.java</file>
-            <file>file:/E:/github/editeurPanovisu/aide/aide.html</file>
-            <file>file:/E:/github/editeurPanovisu/src/editeurpanovisu/EditeurPanovisu.java</file>
-            <file>file:/E:/github/editeurPanovisu/aide/css/style.css</file>
-            <file>file:/E:/github/editeurPanovisu/src/editeurpanovisu/HotSpot.java</file>
-            <file>file:/E:/github/editeurPanovisu/src/editeurpanovisu/Plan.java</file>
-            <file>file:/E:/github/editeurPanovisu/panovisu/panovisu.js</file>
+            <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/GestionnaireInterfaceController.java</file>
+            <file>file:/D:/github/editeurPanovisu/panovisu/panovisu.js</file>
+            <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/EditeurPanovisu.java</file>
+            <file>file:/D:/github/editeurPanovisu/templates/modeleBleuVert.tpl</file>
         </group>
     </open-files>
 </project-private>

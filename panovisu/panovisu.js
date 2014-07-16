@@ -76,6 +76,7 @@ function panovisu(num_pano) {
             vignettesPano = new Array(),
             pointsPlan = new Array(),
             planRentre,
+            vigRentre,
             mode = 1,
             longitude = 0,
             latitude = 0,
@@ -201,6 +202,7 @@ function panovisu(num_pano) {
             vignettesOpacite,
             vignettesPosition,
             vignettesFondCouleur,
+            vignettesTexteCouleur,
             vignettesTaille,
             vignettesTailleImage,
             planAffiche,
@@ -642,6 +644,7 @@ function panovisu(num_pano) {
                 $("#marcheArret-" + num_pano).hide();
                 $("#divVignettes-" + num_pano).html("");
                 $("#divVignettes-" + num_pano).hide();
+                $("#titreVignettes-" + num_pano).hide();
                 $("#plan-" + num_pano).hide();
                 $("#planTitre-" + num_pano).hide();
                 chargeXML(xmlFile);
@@ -717,6 +720,7 @@ function panovisu(num_pano) {
                 $("#reseauxSociaux-" + num_pano).fadeOut(500);
             if (marcheArretVignettes === "oui")
             {
+                $("#titreVignettes-" + num_pano).fadeOut(500);
                 $("#divVignettes-" + num_pano).fadeOut(500);
                 if (vignettesPosition === "left") {
                     $("#divPrecedent-" + num_pano).css({left: 0});
@@ -742,6 +746,7 @@ function panovisu(num_pano) {
                 $("#reseauxSociaux-" + num_pano).fadeIn(500);
             if (marcheArretVignettes === "oui")
             {
+                $("#titreVignettes-" + num_pano).fadeIn(500);
                 $("#divVignettes-" + num_pano).fadeIn(500);
                 var largeur = $("#divVignettes-" + num_pano).width() + 6;
                 if (vignettesPosition === "left") {
@@ -771,6 +776,11 @@ function panovisu(num_pano) {
             numHotspot = 0;
             $("#boussole-" + num_pano).hide();
             $("#marcheArret-" + num_pano).hide();
+            $("#plan-" + num_pano).hide();
+            $("#planTitre-" + num_pano).hide();
+            $("#divVignettes-" + num_pano).html("");
+            $("#divVignettes-" + num_pano).hide();
+            $("#titreVignettes-" + num_pano).hide();
             chargeXML(xmlFile);
         });
     });
@@ -790,52 +800,243 @@ function panovisu(num_pano) {
             numHotspot = 0;
             $("#boussole-" + num_pano).hide();
             $("#marcheArret-" + num_pano).hide();
+            $("#plan-" + num_pano).hide();
+            $("#planTitre-" + num_pano).hide();
+            $("#divVignettes-" + num_pano).html("");
+            $("#divVignettes-" + num_pano).hide();
+            $("#titreVignettes-" + num_pano).hide();
+
             chargeXML(xmlFile);
         });
     });
 
+    function planRentreGauche() {
+        if (planRentre) {
+            $("#planTitre-" + num_pano).css({
+                transform: "translateX(-" + parseInt($("#planImg-" + num_pano).width() + 20) + "px) rotate(90deg)"
+            });
+            $("#plan-" + num_pano).css({
+                transform: "translateX(-" + parseInt($("#planImg-" + num_pano).width() + 20) + "px)"
+            });
+        } else {
+            $("#planTitre-" + num_pano).css({
+                transform: "translateX(0px)  rotate(90deg)"
+            });
+            $("#plan-" + num_pano).css({
+                transform: "translateX(0px)"
+            });
+
+        }
+    }
+    function planRentreDroite() {
+        if (planRentre) {
+            $("#planTitre-" + num_pano).css({
+                transform: "translateX(" + parseInt($("#planImg-" + num_pano).width() + 20) + "px)  rotate(90deg)"
+            });
+            $("#plan-" + num_pano).css({
+                transform: "translateX(" + parseInt($("#planImg-" + num_pano).width() + 20) + "px)"
+            });
+        } else {
+            $("#planTitre-" + num_pano).css({
+                transform: "translateX(0px)  rotate(90deg)"
+            });
+            $("#plan-" + num_pano).css({
+                transform: "translateX(0px)"
+            });
+        }
+    }
+
+
+
     $(document).on("click", "#planTitre-" + num_pano, function() {
         if (planPosition === "left") {
+
             if (!planRentre) {
-                $("#planTitre-" + num_pano).css({
-                    transform: "translateX(-" + parseInt($("#planImg-" + num_pano).width() + 20) + "px) rotate(90deg)"
-                });
-                $("#plan-" + num_pano).css({
-                    transform: "translateX(-" + parseInt($("#planImg-" + num_pano).width() + 20) + "px)"
-                });
                 planRentre = true;
             } else {
-                $("#planTitre-" + num_pano).css({
-                    transform: "translateX(0px)  rotate(90deg)"
-                });
-                $("#plan-" + num_pano).css({
-                    transform: "translateX(0px)"
-                });
                 planRentre = false;
-
             }
+            planRentreGauche();
         }
         else {
             if (!planRentre) {
-                $("#planTitre-" + num_pano).css({
-                    transform: "translateX(" + parseInt($("#planImg-" + num_pano).width() + 20) + "px)  rotate(90deg)"
-                });
-                $("#plan-" + num_pano).css({
-                    transform: "translateX(" + parseInt($("#planImg-" + num_pano).width() + 20) + "px)"
-                });
                 planRentre = true;
             } else {
-                $("#planTitre-" + num_pano).css({
-                    transform: "translateX(0px)  rotate(90deg)"
-                });
-                $("#plan-" + num_pano).css({
-                    transform: "translateX(0px)"
-                });
                 planRentre = false;
-
             }
+            planRentreDroite();
         }
     });
+    function vignettesRentre() {
+        console.log("vignette rentre " + vigRentre + "largeur : " + $("#divVignettes-" + num_pano).width());
+        var largeurFenetre = vignettesTailleImage + 5;
+        if (vigRentre) {
+            switch (vignettesPosition) {
+                case "left":
+                    $("#divVignettes-" + num_pano).css({transform: "translateX(-" + ($("#divVignettes-" + num_pano).width() + 5) + "px)"});
+                    $("#titreVignettes-" + num_pano).css({transform: "translateX(-" + ($("#divVignettes-" + num_pano).width() + 5) + "px) rotate(90deg)"});
+                    dX1 = parseInt(dX);
+                    $("#divPrecedent-" + num_pano).css("left", "0");
+                    if (positionX === "left") {
+                        if (positionY === "top") {
+                            $("#barre-" + num_pano).css({left: dX1 + $("#titreVignettes-" + num_pano).height() + 4 + "px"});
+                        }
+                        else {
+                            $("#barre-" + num_pano).css({left: dX1 + "px"});
+                        }
+                    }
+                    if (boussole && (boussolePositionX === "left")) {
+                        if (boussolePositionY === "top") {
+                            $("#boussole-" + num_pano).css(boussolePositionX, (parseInt(boussoleDX) + $("#titreVignettes-" + num_pano).height() + 4) + "px");
+                        }
+                        else {
+                            $("#boussole-" + num_pano).css(boussolePositionX, (parseInt(boussoleDX)) + "px");
+                        }
+                    }
+
+                    break;
+                case "right":
+                    $("#divVignettes-" + num_pano).css({transform: "translateX(" + ($("#divVignettes-" + num_pano).width() + 5) + "px)"});
+                    $("#titreVignettes-" + num_pano).css({transform: "translateX(" + ($("#divVignettes-" + num_pano).width() + 5) + "px) rotate(90deg)"});
+                    dX1 = parseInt(dX);
+                    $("#divSuivant-" + num_pano).css("right", "0");
+                    if (positionX === "right") {
+                        if (positionY === "top") {
+                            $("#barre-" + num_pano).css({right: dX1 + $("#titreVignettes-" + num_pano).height() + 4 + "px"});
+                        }
+                        else {
+                            $("#barre-" + num_pano).css({right: dX1 + "px"});
+                        }
+                    }
+
+                    if (boussole && (boussolePositionX === "right")) {
+                        if (boussolePositionY === "top") {
+                            $("#boussole-" + num_pano).css(boussolePositionX, (parseInt(boussoleDX) + $("#titreVignettes-" + num_pano).height() + 4) + "px");
+                        }
+                        else {
+                            $("#boussole-" + num_pano).css(boussolePositionX, (parseInt(boussoleDX)) + "px");
+                        }
+                    }
+
+                    if (positionX === "right")
+                        $("#barre-" + num_pano).css({right: dX1 + "px"});
+                    if (boussole && (boussolePositionX === "right"))
+                        $("#boussole-" + num_pano).css(boussolePositionX, (parseInt(boussoleDX)) + "px");
+                    break;
+                case "bottom":
+                    $("#divVignettes-" + num_pano).css({transform: "translateY(" + ($("#divVignettes-" + num_pano).height() + 5) + "px)"});
+                    $("#titreVignettes-" + num_pano).css({transform: "translateY(" + ($("#divVignettes-" + num_pano).height() + 5) + "px)"});
+                    dY1 = parseInt(dY);
+                    if (positionY === "bottom") {
+                        if (positionX === "right") {
+                            $("#barre-" + num_pano).css({top: -(35 + dY1 + $("#titreVignettes-" + num_pano).height()) + "px"});
+
+                        }
+                        else {
+                            $("#barre-" + num_pano).css({top: -(35 + dY1) + "px"});
+                        }
+                    }
+
+                    if (boussole && (boussolePositionY === "bottom"))
+                        if (boussolePositionX === "right") {
+                            $("#boussole-" + num_pano).css(boussolePositionY, (parseInt(boussoleDY) + 10 + $("#titreVignettes-" + num_pano).height()) + "px");
+                        }
+                        else {
+                            $("#boussole-" + num_pano).css(boussolePositionY, (parseInt(boussoleDY) + 10) + "px");
+                        }
+
+                    break;
+            }
+        }
+        else {
+            switch (vignettesPosition) {
+                case "left":
+                    $("#divVignettes-" + num_pano).css({transform: "translateX(0px)"});
+                    $("#titreVignettes-" + num_pano).css({transform: "rotate(90deg)"});
+                    dX1 = parseInt(dX) + largeurFenetre;
+                    $("#divPrecedent-" + num_pano).css("left", largeurFenetre + 6);
+                    $("#divPrecedent-" + num_pano).css("left", largeurFenetre + 6);
+                    dX1 = parseInt(dX) + parseInt(vignettesTailleImage) + 5;
+                    if (positionX === "left") {
+                        if (positionY === "top") {
+                            $("#barre-" + num_pano).css({left: dX1 + $("#titreVignettes-" + num_pano).height() + 4 + "px"});
+                        }
+                        else {
+                            $("#barre-" + num_pano).css({left: dX1 + "px"});
+                        }
+                    }
+                    if (boussole && (boussolePositionX === "left")) {
+                        if (boussolePositionY === "top") {
+                            $("#boussole-" + num_pano).css(boussolePositionX, (parseInt(boussoleDX) + parseInt(vignettesTailleImage) + 5 + $("#titreVignettes-" + num_pano).height() + 4) + "px");
+                        }
+                        else {
+                            $("#boussole-" + num_pano).css(boussolePositionX, (parseInt(boussoleDX) + parseInt(vignettesTailleImage) + 5) + "px");
+                        }
+                    }
+
+                    break;
+                case "right":
+                    $("#divVignettes-" + num_pano).css({transform: "translateX(0px)"});
+                    $("#titreVignettes-" + num_pano).css({transform: "rotate(90deg)"});
+                    dX1 = parseInt(dX) + largeurFenetre;
+                    $("#divSuivant-" + num_pano).css("right", largeurFenetre + 6);
+                    if (positionX === "right") {
+                        if (positionY === "top") {
+                            $("#barre-" + num_pano).css({right: dX1 + $("#titreVignettes-" + num_pano).height() + 4 + "px"});
+                        }
+                        else {
+                            $("#barre-" + num_pano).css({right: dX1 + "px"});
+                        }
+                    }
+
+                    if (boussole && (boussolePositionX === "right")) {
+                        if (boussolePositionY === "top") {
+                            $("#boussole-" + num_pano).css(boussolePositionX, (parseInt(boussoleDX) + parseInt(vignettesTailleImage) + 5 + $("#titreVignettes-" + num_pano).height() + 4) + "px");
+                        }
+                        else {
+                            $("#boussole-" + num_pano).css(boussolePositionX, (parseInt(boussoleDX) + parseInt(vignettesTailleImage) + 5) + "px");
+                        }
+                    }
+
+                    break;
+                case "bottom":
+                    $("#divVignettes-" + num_pano).css({transform: "translateY(0px)"});
+                    $("#titreVignettes-" + num_pano).css({transform: "translateY(0px)"});
+                    dY1 = parseInt(dY) + $("#divVignettes-" + num_pano).height() + 5;
+                    if (positionY === "bottom") {
+                        if (positionX === "right") {
+                            $("#barre-" + num_pano).css({top: -(35 + dY1 + $("#titreVignettes-" + num_pano).height()) + +"px"});
+
+                        }
+                        else {
+                            $("#barre-" + num_pano).css({top: -(35 + dY1) + "px"});
+                        }
+                    }
+
+                    if (vignettesPosition === "bottom") {
+                        if (boussole && (boussolePositionY === "bottom"))
+                            if (boussolePositionX === "right") {
+                                $("#boussole-" + num_pano).css(boussolePositionY, (parseInt(boussoleDY) + parseInt(vignettesTailleImage) / 2.0 + 5 + $("#titreVignettes-" + num_pano).height() + 10) + "px");
+                            }
+                            else {
+                                $("#boussole-" + num_pano).css(boussolePositionY, (parseInt(boussoleDY) + parseInt(vignettesTailleImage) / 2.0 + 15) + "px");
+                            }
+                    }
+
+                    break;
+            }
+
+        }
+    }
+    $(document).on("click", ".titreVignettes", function() {
+        if (!vigRentre) {
+            vigRentre = true;
+        } else {
+            vigRentre = false;
+        }
+        vignettesRentre();
+    });
+
 
     $(document).on("click", ".planPoint", function() {
         if (pointsPlan.length !== 0) {
@@ -856,10 +1057,11 @@ function panovisu(num_pano) {
                     numHotspot = 0;
                     $("#boussole-" + num_pano).hide();
                     $("#marcheArret-" + num_pano).hide();
-                    $("#divVignettes-" + num_pano).html("");
-                    $("#divVignettes-" + num_pano).hide();
                     $("#plan-" + num_pano).hide();
                     $("#planTitre-" + num_pano).hide();
+                    $("#divVignettes-" + num_pano).html("");
+                    $("#divVignettes-" + num_pano).hide();
+                    $("#titreVignettes-" + num_pano).hide();
                     chargeXML(xmlFile);
                 });
             }
@@ -913,7 +1115,19 @@ function panovisu(num_pano) {
             opacity: vignettesOpacite,
             overflow: "hidden"
         });
+        paddingTitre = 2;
 
+        $("#titreVignettes-" + num_pano).css({
+            width: "80px",
+            height: "30px",
+            bottom: hauteur + 5,
+            right: 0,
+            padding: paddingTitre + "px",
+            backgroundColor: vignettesFondCouleur,
+            color: vignettesTexteCouleur,
+            opacity: vignettesOpacite,
+            textAlign: "center"
+        });
         $("#vignettes-" + num_pano).css({
             height: hauteur,
             width: 3000
@@ -936,16 +1150,18 @@ function panovisu(num_pano) {
                 height: vignettesTailleImage / 2
             }).appendTo("#vignettes-" + num_pano);
         }
-        dY1 = parseInt(dY + $("#divVignettes-" + num_pano).height());
-        if (positionY === "bottom")
-            $("#barre-" + num_pano).css({bottom: dY1 + +"px"});
 
-
-        $("#divVignettes-" + num_pano).show();
         if (vignettesPosition === "bottom") {
             if (boussole && (boussolePositionY === "bottom"))
-                $("#boussole-" + num_pano).css(boussolePositionY, (parseInt(boussoleDY) + parseInt(vignettesTailleImage) / 2.0 + 5) + "px");
+                if (boussolePositionX === "right") {
+                    $("#boussole-" + num_pano).css(boussolePositionY, (parseInt(boussoleDY) + parseInt(vignettesTailleImage) / 2.0 + 5 + $("#titreVignettes-" + num_pano).height() + 2 * paddingTitre) + "px");
+                }
+                else {
+                    $("#boussole-" + num_pano).css(boussolePositionY, (parseInt(boussoleDY) + parseInt(vignettesTailleImage) / 2.0 + 15) + "px");
+                }
         }
+        $("#divVignettes-" + num_pano).show();
+        $("#titreVignettes-" + num_pano).show();
 
     }
 
@@ -986,6 +1202,25 @@ function panovisu(num_pano) {
             overflow: "hidden",
             top: ($("#info-" + num_pano).height() + 10) + "px"
         });
+        paddingTitre = 2;
+        $("#titreVignettes-" + num_pano).css({
+            width: "80px",
+            height: "30px",
+            top: ($("#info-" + num_pano).height() + 10) + "px",
+            padding: paddingTitre + "px",
+            backgroundColor: vignettesFondCouleur,
+            color: vignettesTexteCouleur,
+            opacity: vignettesOpacite,
+            transformOrigin: "0% 0%",
+            transform: "rotate(90deg)",
+            textAlign: "center"
+        });
+        if (vignettesPosition === "left") {
+            $("#titreVignettes-" + num_pano).css(vignettesPosition, (largeurFenetre + 5 + 2 * paddingTitre + $("#titreVignettes-" + num_pano).height()) + "px");
+        }
+        else {
+            $("#titreVignettes-" + num_pano).css(vignettesPosition, (largeurFenetre + 5 - 2 * paddingTitre - $("#titreVignettes-" + num_pano).width()) + "px");
+        }
 
         $("#vignettes-" + num_pano).css({
             height: 3000,
@@ -1015,21 +1250,47 @@ function panovisu(num_pano) {
             });
         }
         $("#divVignettes-" + num_pano).show();
+        $("#titreVignettes-" + num_pano).show();
         if (vignettesPosition === "right") {
             $("#divSuivant-" + num_pano).css("right", largeurFenetre + 6);
             dX1 = parseInt(dX) + parseInt(vignettesTailleImage) + 5;
-            if (positionX === "right")
-                $("#barre-" + num_pano).css({right: dX1 + "px"});
-            if (boussole && (boussolePositionX === "right"))
-                $("#boussole-" + num_pano).css(boussolePositionX, (parseInt(boussoleDX) + parseInt(vignettesTailleImage) + 5) + "px");
+            if (positionX === "right") {
+                if (positionY === "top") {
+                    $("#barre-" + num_pano).css({right: dX1 + $("#titreVignettes-" + num_pano).height() + 2 * paddingTitre + "px"});
+                }
+                else {
+                    $("#barre-" + num_pano).css({right: dX1 + "px"});
+                }
+            }
+
+            if (boussole && (boussolePositionX === "right")) {
+                if (boussolePositionY === "top") {
+                    $("#boussole-" + num_pano).css(boussolePositionX, (parseInt(boussoleDX) + parseInt(vignettesTailleImage) + 5 + $("#titreVignettes-" + num_pano).height() + 2 * paddingTitre) + "px");
+                }
+                else {
+                    $("#boussole-" + num_pano).css(boussolePositionX, (parseInt(boussoleDX) + parseInt(vignettesTailleImage) + 5) + "px");
+                }
+            }
         }
         if (vignettesPosition === "left") {
             $("#divPrecedent-" + num_pano).css("left", largeurFenetre + 6);
             dX1 = parseInt(dX) + parseInt(vignettesTailleImage) + 5;
-            if (positionX === "left")
-                $("#barre-" + num_pano).css({left: dX1 + "px"});
-            if (boussole && (boussolePositionX === "left"))
-                $("#boussole-" + num_pano).css(boussolePositionX, (parseInt(boussoleDX) + parseInt(vignettesTailleImage) + 5) + "px");
+            if (positionX === "left") {
+                if (positionY === "top") {
+                    $("#barre-" + num_pano).css({left: dX1 + $("#titreVignettes-" + num_pano).height() + 2 * paddingTitre + "px"});
+                }
+                else {
+                    $("#barre-" + num_pano).css({left: dX1 + "px"});
+                }
+            }
+            if (boussole && (boussolePositionX === "left")) {
+                if (boussolePositionY === "top") {
+                    $("#boussole-" + num_pano).css(boussolePositionX, (parseInt(boussoleDX) + parseInt(vignettesTailleImage) + 5 + $("#titreVignettes-" + num_pano).height() + 2 * paddingTitre) + "px");
+                }
+                else {
+                    $("#boussole-" + num_pano).css(boussolePositionX, (parseInt(boussoleDX) + parseInt(vignettesTailleImage) + 5) + "px");
+                }
+            }
         }
 
     }
@@ -1050,7 +1311,7 @@ function panovisu(num_pano) {
         target.y = 500 * Math.cos(phi);
         target.z = 500 * Math.sin(phi) * Math.sin(theta);
         camera.lookAt(target);
-//        camera.position.copy(target).negate();
+        //        camera.position.copy(target).negate();
         renderer.render(scene, camera);
         var bouss = longitude - zeroNord;
         if (boussoleAiguille === "oui")
@@ -1092,7 +1353,7 @@ function panovisu(num_pano) {
 //            $("#divImage-" + num_pano).hide();
 //        });
 //
-//    });
+    //    });
 
     function afficheImage(image) {
         var lrg = $("#pano1-" + num_pano).width();
@@ -1107,7 +1368,7 @@ function panovisu(num_pano) {
             ratio = largImg / hautImg;
             var larg1 = lrg - 2 * posX;
             var haut1 = larg1 / ratio;
-//            alert(hautImg + ", " + largImg+"ratio : "+ratio);
+            //            alert(hautImg + ", " + largImg+"ratio : "+ratio);
             if (haut1 > haut - 2 * posY) {
                 hautImg = haut - 2 * posY;
                 largImg = Math.round(hautImg * ratio);
@@ -1119,7 +1380,7 @@ function panovisu(num_pano) {
             }
             mrgX = Math.round((lrg - 2 * posX - largImg) / 2);
             mrgY = Math.round((haut - 2 * posY - hautImg) / 2);
-//            alert(hautImg + ", " + largImg+"ratio : "+ratio);
+            //            alert(hautImg + ", " + largImg+"ratio : "+ratio);
             $("#divImage-" + num_pano).html("");
             $("#divImage-" + num_pano).css({
                 width: Math.round(lrg - 2 * posX) + "px",
@@ -1165,7 +1426,7 @@ function panovisu(num_pano) {
         var haut = $("#pano1-" + num_pano).height();
         posX = Math.round(lrg * 0.02);
         posY = Math.round(haut * 0.02);
-//            alert(hautImg + ", " + largImg+"ratio : "+ratio);
+        //            alert(hautImg + ", " + largImg+"ratio : "+ratio);
         $("#divHTML-" + num_pano).html("");
         $("#divHTML-" + num_pano).css({
             width: Math.round(lrg - 2 * posX) + "px",
@@ -1341,10 +1602,11 @@ function panovisu(num_pano) {
         numHotspot = 0;
         $("#boussole-" + num_pano).hide();
         $("#marcheArret-" + num_pano).hide();
-        $("#divVignettes-" + num_pano).html("");
-        $("#divVignettes-" + num_pano).hide();
         $("#plan-" + num_pano).hide();
         $("#planTitre-" + num_pano).hide();
+        $("#divVignettes-" + num_pano).html("");
+        $("#divVignettes-" + num_pano).hide();
+        $("#titreVignettes-" + num_pano).hide();
         chargeXML(xmlFile);
     }
 
@@ -1364,7 +1626,7 @@ function panovisu(num_pano) {
 //        }
 //        else {
 //            passeEnPleinEcran(element);
-//        }
+        //        }
         setTimeout(function() {
             changeTaille();
         }, 300);
@@ -1406,7 +1668,7 @@ function panovisu(num_pano) {
                 "</b><br><span style='color : red; font-weight : bold;'>Désolé votre navigateur ne supporte pas Webgl & Canvas</span><br>\n\
                 Veuillez opter pour un navigateur plus récent<br>\n\
                 Internet Explorer 10+ / Firefox / Chrome / Opéra / Safari<br><br>\n\
-                &copy; Laurent LANG (2014)";
+        &copy; Laurent LANG (2014)";
         $("#infoPanovisu-" + num_pano).css({width: "450px", height: "150px"});
         posGauche = (pano.width() - $("#infoPanovisu-" + num_pano).width()) / 2;
         posHaut = (pano.height() - $("#infoPanovisu-" + num_pano).height()) / 2;
@@ -1420,6 +1682,7 @@ function panovisu(num_pano) {
      * @returns {undefined}
      */
     function init(fenetre) {
+
         if (boussole) {
             $("#boussole-" + num_pano).css(boussolePositionX, boussoleDX + "px");
             $("#boussole-" + num_pano).css(boussolePositionY, boussoleDY + "px");
@@ -1552,6 +1815,7 @@ function panovisu(num_pano) {
                 afficheVignettesVerticales();
 
             }
+            vignettesRentre();
         }
         if (planAffiche) {
             $("#plan-" + num_pano).html("");
@@ -1579,12 +1843,13 @@ function panovisu(num_pano) {
             $("<canvas>", {id: "radar-" + num_pano, class: "radar"}).appendTo("#plan-" + num_pano);
 
             transformTitre = $("#planTitre-" + num_pano).css("transform");
+            console.log("transformation : " + $("#planTitre-" + num_pano).css("transform"));
             $("#planTitre-" + num_pano).css({
                 width: "44px",
                 height: "30px",
                 paddingLeft: "6px",
                 transformOrigin: "0 0",
-                transform: transformTitre,
+                transform: "rotate(90deg)",
                 backgroundColor: planCouleurFond,
                 color: planCouleurTexte,
                 top: positPlan
@@ -1593,9 +1858,11 @@ function panovisu(num_pano) {
             $("#planTitre-" + num_pano).html("plan");
             if (planPosition === "left") {
                 $("#planTitre-" + num_pano).css(planPosition, $("#planImg-" + num_pano).width() + 20 + $("#planTitre-" + num_pano).height() + "px");
+                planRentreGauche();
             } else {
                 $("#planTitre-" + num_pano).css(planPosition, $("#planImg-" + num_pano).width() + 20 - $("#planTitre-" + num_pano).width()
                         - parseInt($("#planTitre-" + num_pano).css("paddingLeft")) + "px");
+                planRentreDroite();
             }
             $("#radar-" + num_pano).attr("width", 2 * radarTaille);
             $("#radar-" + num_pano).attr("height", 2 * radarTaille);
@@ -1652,7 +1919,7 @@ function panovisu(num_pano) {
             loader = new THREE.TextureLoader();
             var nomimage = panoImage.split("/")[0] + "/niveau" + niveau + "/" + panoImage.split("/")[1];
             loader.load(nomimage + ".jpg", function(texture) {
-//                alert(nomimage);
+                //                alert(nomimage);
                 if (texture.image.width <= maxTextureSize) {
                     var img = nomimage.split("/")[2];
                     var img2 = panoImage.split("/")[1];
@@ -1684,7 +1951,7 @@ function panovisu(num_pano) {
             loader = new THREE.TextureLoader();
             var nomimage = panoImage;
             loader.load(nomimage + ".jpg", function(texture) {
-//                alert(nomimage);
+                //                alert(nomimage);
                 if (texture.image.width <= maxTextureSize) {
                     var img = nomimage.split("/")[1];
                     var img2 = panoImage.split("/")[1];
@@ -1727,7 +1994,7 @@ function panovisu(num_pano) {
             loader = new THREE.TextureLoader();
             var nomimage = panoImage.split("/")[0] + "/niveau0/" + panoImage.split("/")[1];
             loader.load(nomimage + ".jpg", function(texture) {
-//                alert(nomimage);
+                //                alert(nomimage);
                 if (!isReloaded)
                 {
                     if (supportWebgl())
@@ -2059,7 +2326,7 @@ function panovisu(num_pano) {
             infoPosX = largeur * titreTailleFenetre;
         }
         infoPosX = (largeur - infoPosX) / 2;
-//        alert("largeur : " + largeur + " titre taille : " + $("#info-" + num_pano).width() + " posX : " + infoPosX);
+        //        alert("largeur : " + largeur + " titre taille : " + $("#info-" + num_pano).width() + " posX : " + infoPosX);
 
         $("#info-" + num_pano).css({
             marginLeft: infoPosX
@@ -2433,6 +2700,7 @@ function panovisu(num_pano) {
                     vignettesOpacite = 0.8;
                     vignettesPosition = "bottom";
                     vignettesFondCouleur = "green";
+                    vignettesTexteCouleur = "yellow";
                     vignettesTailleImage = 120;
                     vignettesPano = new Array();
                     pointsInteret = new Array();
@@ -2609,6 +2877,7 @@ function panovisu(num_pano) {
                     vignettesOpacite = parseFloat(XMLVignettes.attr('opacite')) || vignettesOpacite;
                     vignettesPosition = XMLVignettes.attr('position') || vignettesPosition;
                     vignettesFondCouleur = XMLVignettes.attr("fondCouleur") || vignettesFondCouleur;
+                    vignettesTexteCouleur = XMLVignettes.attr("texteCouleur") || vignettesTexteCouleur;
                     vignettesTaille = parseFloat(XMLVignettes.attr('taille')) || vignettesTaille;
                     vignettesTailleImage = parseFloat(XMLVignettes.attr('tailleImage')) || vignettesTailleImage;
 
@@ -2727,8 +2996,10 @@ function panovisu(num_pano) {
         $("<div>", {id: "pano1-" + num_pano, class: "pano1"}).appendTo("#" + fenetrePanoramique);
         $("<div>", {id: "container-" + num_pano, class: "container"}).appendTo("#pano1-" + num_pano);
         $("<div>", {id: "divVignettes-" + num_pano, class: "vignettes"}).appendTo("#pano1-" + num_pano);
-
+        $("<div>", {id: "titreVignettes-" + num_pano, class: "titreVignettes"}).appendTo("#pano1-" + num_pano);
+        $("#titreVignettes-" + num_pano).html("Vignettes");
         $("#divVignettes-" + num_pano).hide();
+        $("#titreVignettes-" + num_pano).hide();
         $("<div>", {id: "divImage-" + num_pano, class: "vignettes"}).appendTo("#pano1-" + num_pano);
         $("#divImage-" + num_pano).hide();
         $("<div>", {id: "divHTML-" + num_pano, class: "vignettes"}).appendTo("#pano1-" + num_pano);
@@ -2740,6 +3011,7 @@ function panovisu(num_pano) {
         $("#divPrecedent-" + num_pano).hide();
         $("#divSuivant-" + num_pano).hide();
         planRentre = false;
+        vigRentre = false;
 
 
         /**
@@ -2756,7 +3028,6 @@ function panovisu(num_pano) {
         $("<div>", {id: "outils-" + num_pano, class: "outils"}).appendTo("#barre-" + num_pano);
         $("<div>", {id: "plan-" + num_pano, class: "plan"}).appendTo("#pano1-" + num_pano);
         $("<div>", {id: "planTitre-" + num_pano, class: "planTitre"}).appendTo("#pano1-" + num_pano);
-        $("#planTitre-" + num_pano).css("transform", "rotate(90deg)");
         $("#plan-" + num_pano).hide();
         $("#planTitre-" + num_pano).hide();
         /**
@@ -2771,6 +3042,7 @@ function panovisu(num_pano) {
         container = $("#container-" + num_pano);
         pano = $("#" + fenetrePanoramique);
         pano1 = $("#pano1-" + num_pano);
+        $("#planTitre-" + num_pano).css("transform", "rotate(90deg)");
     }
 
 

@@ -267,6 +267,7 @@ public class GestionnaireInterfaceController {
     private static AnchorPane APVisuVignettes;
     public static boolean bAfficheVignettes = false;
     public static String couleurFondVignettes = "#ffffff";
+    public static String couleurTexteVignettes = "#000000";
     public static String positionVignettes = "bottom";
     public static double tailleImageVignettes = 120;
     public static double opaciteVignettes = 0.8;
@@ -277,6 +278,7 @@ public class GestionnaireInterfaceController {
     private static RadioButton RBVignettesRight;
     private static RadioButton RBVignettesBottom;
     private static ColorPicker CPCouleurFondVignettes;
+    private static ColorPicker CPCouleurTexteVignettes;
 
     /*
      Variable du plan
@@ -1304,6 +1306,7 @@ public class GestionnaireInterfaceController {
                 + "opaciteVignettes=" + Math.round(opaciteVignettes * 100.d) / 100.d + "\n"
                 + "tailleImageVignettes=" + Math.round(tailleImageVignettes) + "\n"
                 + "couleurFondVignettes=" + couleurFondVignettes + "\n"
+                + "couleurTexteVignettes=" + couleurTexteVignettes + "\n"
                 + "affichePlan=" + bAffichePlan + "\n"
                 + "positionPlan=" + positionPlan + "\n"
                 + "opacitePlan=" + Math.round(opacitePlan * 100.d) / 100.d + "\n"
@@ -1584,6 +1587,9 @@ public class GestionnaireInterfaceController {
                 case "couleurFondVignettes":
                     couleurFondVignettes = valeur;
                     break;
+                case "couleurTexteVignettes":
+                    couleurTexteVignettes = valeur;
+                    break;
                 case "affichePlan":
                     bAffichePlan = valeur.equals("true");
                     break;
@@ -1695,6 +1701,7 @@ public class GestionnaireInterfaceController {
         RBVignettesRight.setSelected(positionVignettes.equals("right"));
         RBVignettesBottom.setSelected(positionVignettes.equals("bottom"));
         CPCouleurFondVignettes.setValue(Color.valueOf(couleurFondVignettes));
+        CPCouleurTexteVignettes.setValue(Color.valueOf(couleurTexteVignettes));
         CBAffichePlan.setSelected(bAffichePlan);
         SLOpacitePlan.setValue(opacitePlan);
         SLLargeurPlan.setValue(largeurPlan);
@@ -2861,7 +2868,7 @@ public class GestionnaireInterfaceController {
         APVignettes = new AnchorPane();
 
         APVignettes.setLayoutY(40);
-        APVignettes.setPrefHeight(380);
+        APVignettes.setPrefHeight(410);
         APVignettes.setMinWidth(VBOutils.getPrefWidth() - 20);
         Double taillePanelVignettes = APVignettes.getPrefHeight();
         CBAfficheVignettes = new CheckBox(rb.getString("interface.affichageVignettes"));
@@ -2882,10 +2889,17 @@ public class GestionnaireInterfaceController {
         Label lblChoixCouleurFondVignettes = new Label(rb.getString("interface.choixCouleurFondVignettes"));
         lblChoixCouleurFondVignettes.setLayoutX(10);
         lblChoixCouleurFondVignettes.setLayoutY(85);
-        CPCouleurFondVignettes = new ColorPicker(Color.valueOf(couleurFondTitre));
+        CPCouleurFondVignettes = new ColorPicker(Color.valueOf(couleurFondVignettes));
         CPCouleurFondVignettes.setLayoutX(200);
         CPCouleurFondVignettes.setLayoutY(83);
         APVignettes.getChildren().addAll(lblChoixCouleurFondVignettes, CPCouleurFondVignettes);
+        Label lblChoixCouleurTexteVignettes = new Label(rb.getString("interface.choixCouleurTexteVignettes"));
+        lblChoixCouleurTexteVignettes.setLayoutX(10);
+        lblChoixCouleurTexteVignettes.setLayoutY(115);
+        CPCouleurTexteVignettes = new ColorPicker(Color.valueOf(couleurTexteVignettes));
+        CPCouleurTexteVignettes.setLayoutX(200);
+        CPCouleurTexteVignettes.setLayoutY(113);
+        APVignettes.getChildren().addAll(lblChoixCouleurTexteVignettes, CPCouleurTexteVignettes);
         Label lblPositVignettes = new Label(rb.getString("interface.choixPositVignettes"));
         lblPositVignettes.setLayoutX(10);
         basImages = -30;
@@ -2920,16 +2934,16 @@ public class GestionnaireInterfaceController {
         );
         Label lblTailleVignettes = new Label(rb.getString("interface.tailleVignettes"));
         lblTailleVignettes.setLayoutX(10);
-        lblTailleVignettes.setLayoutY(160 + basImages);
+        lblTailleVignettes.setLayoutY(175 + basImages);
         SLTailleVignettes = new Slider(50, 300, 120);
         SLTailleVignettes.setLayoutX(200);
-        SLTailleVignettes.setLayoutY(160 + basImages);
+        SLTailleVignettes.setLayoutY(175 + basImages);
         Label lblOpaciteVignettes = new Label(rb.getString("interface.opaciteVignettes"));
         lblOpaciteVignettes.setLayoutX(10);
-        lblOpaciteVignettes.setLayoutY(190 + basImages);
+        lblOpaciteVignettes.setLayoutY(205 + basImages);
         SLOpaciteVignettes = new Slider(0, 1.0, 0.8);
         SLOpaciteVignettes.setLayoutX(200);
-        SLOpaciteVignettes.setLayoutY(190 + basImages);
+        SLOpaciteVignettes.setLayoutY(205 + basImages);
 
         APVignettes.getChildren().addAll(
                 lblTailleVignettes, SLTailleVignettes,
@@ -3601,6 +3615,11 @@ public class GestionnaireInterfaceController {
         CPCouleurFondVignettes.setOnAction((ActionEvent e) -> {
             String coul = CPCouleurFondVignettes.getValue().toString().substring(2, 8);
             couleurFondVignettes = "#" + coul;
+            afficheVignettes();
+        });
+        CPCouleurTexteVignettes.setOnAction((ActionEvent e) -> {
+            String coul = CPCouleurTexteVignettes.getValue().toString().substring(2, 8);
+            couleurTexteVignettes = "#" + coul;
             afficheVignettes();
         });
 
