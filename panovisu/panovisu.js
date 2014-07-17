@@ -23,6 +23,16 @@ function estTactile() {
 
 
 function panovisu(num_pano) {
+
+    var tmp = window.location.search.substring(1).split("&");
+    var GET = [];
+    for (var i in tmp)
+        if (tmp[i].indexOf("=") !== -1)
+            GET[decodeURI(tmp[i].substring(0, tmp[i].indexOf("=")))] = decodeURI(tmp[i].substring(tmp[i].indexOf("=") + 1));
+        else
+            GET[decodeURI(tmp[i])] = '';
+
+
     var camera, scene, renderer;
 
     function spot() {
@@ -3070,7 +3080,7 @@ function panovisu(num_pano) {
         var fenetre = fenPanoramique;
         $(fenetre).css({overflow: "hidden"});
         creeContexte(fenetre);
-        xmlFile = contexte.xml;
+        xmlFile = GET["xml"] || contexte.xml;
         if (contexte.fenX.match("[px]", "g"))
         {
             fenetreUniteX = "px";
