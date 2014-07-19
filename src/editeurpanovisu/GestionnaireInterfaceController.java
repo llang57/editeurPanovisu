@@ -159,6 +159,7 @@ public class GestionnaireInterfaceController {
     /**
      *
      */
+    public static boolean bAfficheTitre=true;
     public static String titrePoliceNom = "Verdana";
     public static String titrePoliceStyle = "Regular";
     public static String titrePoliceTaille = "12.0";
@@ -381,6 +382,7 @@ public class GestionnaireInterfaceController {
     public static boolean bSuivantPrecedent;
     private static BigDecimalField dXSpinner;
     private static BigDecimalField dYSpinner;
+    private static CheckBox CBAfficheTitre;
     private static ColorPicker CPCouleurFondTitre;
     private static ColorPicker CPCouleurTitre;
     private static ComboBox CBListePolices;
@@ -1011,6 +1013,7 @@ public class GestionnaireInterfaceController {
         String repertBoutons = "file:" + repertBoutonsPrincipal + File.separator + styleBoutons;
         APVisualisation.getChildren().clear();
         APVisualisation.getChildren().addAll(RBClair, RBSombre, IMVisualisation, txtTitre, imgBoussole, imgAiguille, imgTwitter, imgGoogle, imgFacebook, imgEmail, APVisuVignettes, APVisuplan, fondSuivant, fondPrecedent);
+        txtTitre.setVisible(bAfficheTitre);
         chargeBarre(styleBoutons, styleHS, imageMasque);
         afficheMasque();
         HBbarreBoutons = new HBox();
@@ -1264,6 +1267,7 @@ public class GestionnaireInterfaceController {
                 + "rotation=" + toggleBoutonRotation + "\n"
                 + "FS=" + toggleBoutonFS + "\n"
                 + "souris=" + toggleBoutonSouris + "\n"
+                + "afficheTitre=" + bAfficheTitre + "\n"                
                 + "titrePolice=" + titrePoliceNom + "\n"
                 + "titrePoliceTaille=" + titrePoliceTaille + "\n"
                 + "titreOpacite=" + Math.round(titreOpacite * 100.d) / 100.d + "\n"
@@ -1461,9 +1465,12 @@ public class GestionnaireInterfaceController {
                         CBSouris.setSelected(false);
                     }
                     break;
+                case "afficheTitre":
+                    bAfficheTitre=valeur.equals("true");
+                    break;
                 case "titrePolice":
                     titrePoliceNom = valeur;
-                    break;
+                    break;                    
                 case "titrePoliceTaille":
                     titrePoliceTaille = valeur;
                     break;
@@ -1640,6 +1647,7 @@ public class GestionnaireInterfaceController {
         Font fonte1 = Font.font(titrePoliceNom, Double.parseDouble(titrePoliceTaille));
         txtTitre.setFont(fonte1);
         txtTitre.setPrefHeight(-1);
+        txtTitre.setVisible(bAfficheTitre);
         CPCouleurTitre.setValue(Color.valueOf(couleurTitre));
         CPCouleurFondTitre.setValue(Color.valueOf(couleurFondTitre));
         CPCouleurBoutons.setValue(couleurBoutons);
@@ -1916,7 +1924,7 @@ public class GestionnaireInterfaceController {
         AnchorPane APTitre = new AnchorPane();
         APTitre.setLayoutY(40);
         APTitre.setLayoutX(10);
-        APTitre.setPrefHeight(200);
+        APTitre.setPrefHeight(230);
         Label lblPanelTitre = new Label(rb.getString("interface.styleTitre"));
         lblPanelTitre.setPrefWidth(VBOutils.getPrefWidth());
         lblPanelTitre.setStyle("-fx-background-color : #666");
@@ -1927,49 +1935,56 @@ public class GestionnaireInterfaceController {
         ImageView IVBtnPlusTitre = new ImageView(new Image("file:" + "images/plus.png", 20, 20, true, true));
         IVBtnPlusTitre.setLayoutX(VBOutils.getPrefWidth() - 20);
         IVBtnPlusTitre.setLayoutY(11);
+        CBAfficheTitre=new CheckBox(rb.getString("interface.afficheTitre"));
+        CBAfficheTitre.setSelected(bAfficheTitre);
+        CBAfficheTitre.setLayoutX(10);
+        CBAfficheTitre.setLayoutY(15);
+        
         CBListePolices = new ComboBox(listePolices);
         CBListePolices.setValue(titrePoliceNom);
         CBListePolices.setLayoutX(180);
-        CBListePolices.setLayoutY(12);
+        CBListePolices.setLayoutY(42);
         CBListePolices.setMaxWidth(135);
 
         Label lblChoixPoliceTitre = new Label(rb.getString("interface.choixPolice"));
         lblChoixPoliceTitre.setLayoutX(10);
-        lblChoixPoliceTitre.setLayoutY(15);
+        lblChoixPoliceTitre.setLayoutY(45);
         Label lblChoixTailleTitre = new Label(rb.getString("interface.choixTaillePolice"));
         lblChoixTailleTitre.setLayoutX(10);
-        lblChoixTailleTitre.setLayoutY(45);
+        lblChoixTailleTitre.setLayoutY(75);
         SLTaillePolice = new Slider(8, 72, 12);
         SLTaillePolice.setLayoutX(180);
-        SLTaillePolice.setLayoutY(45);
+        SLTaillePolice.setLayoutY(75);
 
         Label lblChoixCouleurTitre = new Label(rb.getString("interface.choixCouleur"));
         lblChoixCouleurTitre.setLayoutX(10);
-        lblChoixCouleurTitre.setLayoutY(75);
+        lblChoixCouleurTitre.setLayoutY(105);
         CPCouleurTitre = new ColorPicker(Color.valueOf(couleurTitre));
         CPCouleurTitre.setLayoutX(180);
-        CPCouleurTitre.setLayoutY(73);
+        CPCouleurTitre.setLayoutY(103);
         Label lblChoixCouleurFondTitre = new Label(rb.getString("interface.choixCouleurFond"));
         lblChoixCouleurFondTitre.setLayoutX(10);
-        lblChoixCouleurFondTitre.setLayoutY(105);
+        lblChoixCouleurFondTitre.setLayoutY(135);
         CPCouleurFondTitre = new ColorPicker(Color.valueOf(couleurFondTitre));
         CPCouleurFondTitre.setLayoutX(180);
-        CPCouleurFondTitre.setLayoutY(103);
+        CPCouleurFondTitre.setLayoutY(133);
 
         Label lblChoixOpacite = new Label(rb.getString("interface.choixOpaciteTitre"));
         lblChoixOpacite.setLayoutX(10);
-        lblChoixOpacite.setLayoutY(135);
+        lblChoixOpacite.setLayoutY(165);
         SLOpacite = new Slider(0, 1, titreOpacite);
         SLOpacite.setLayoutX(180);
-        SLOpacite.setLayoutY(135);
+        SLOpacite.setLayoutY(165);
         Label lblChoixTaille = new Label(rb.getString("interface.choixTailleTitre"));
         lblChoixTaille.setLayoutX(10);
-        lblChoixTaille.setLayoutY(165);
+        lblChoixTaille.setLayoutY(195);
         SLTaille = new Slider(0, 100, titreTaille);
         SLTaille.setLayoutX(180);
-        SLTaille.setLayoutY(165);
+        SLTaille.setLayoutY(195);
 
-        APTitre.getChildren().addAll(lblChoixPoliceTitre, CBListePolices,
+        APTitre.getChildren().addAll(
+                CBAfficheTitre,
+                lblChoixPoliceTitre, CBListePolices,
                 lblChoixTailleTitre, SLTaillePolice,
                 lblChoixCouleurTitre, CPCouleurTitre,
                 lblChoixCouleurFondTitre, CPCouleurFondTitre,
@@ -3242,6 +3257,13 @@ public class GestionnaireInterfaceController {
                         }
                     }
                 });
+        CBAfficheTitre.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+            bAfficheTitre=new_val;
+            APVisualisation.getChildren().remove(HBbarreBoutons);
+            APVisualisation.getChildren().remove(IVHotSpot);
+            APVisualisation.getChildren().remove(IVHotSpotImage);
+            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
+        });
 
         SLTaillePolice.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
             if (newValue != null) {

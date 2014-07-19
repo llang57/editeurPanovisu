@@ -746,7 +746,7 @@ function panovisu(num_pano) {
                 $("#barre-" + num_pano).fadeIn(500);
             if (marcheArretBoussole === "oui")
                 $("#boussole-" + num_pano).fadeIn(500);
-            if (marcheArretTitre === "oui")
+            if ((marcheArretTitre === "oui") && (afficheTitre === "oui"))
                 $("#info-" + num_pano).fadeIn(500);
             if (marcheArretPlan === "oui") {
                 $("#plan-" + num_pano).fadeIn(500);
@@ -1787,8 +1787,15 @@ function panovisu(num_pano) {
         (fs === "oui") ? $("#pleinEcran-" + num_pano).show() : $("#pleinEcran-" + num_pano).hide();
         (autoR === "oui") ? $("#auto-" + num_pano).show() : $("#auto-" + num_pano).hide;
         (souris === "oui") ? $("#souris-" + num_pano).show() : $("#souris-" + num_pano).hide();
-        if (afficheTitre === "oui")
+        if (afficheTitre === "oui") {
             $("#info-" + num_pano).fadeIn(2500);
+        }
+        else {
+            $("#info-" + num_pano).css({
+                display: "none",
+                height: "0px"
+            })
+        }
         if (fenetreUniteX === "%") {
             largeur = Math.round(fenetreX * $("#" + fenPanoramique).parent().width());
         }
@@ -2318,30 +2325,31 @@ function panovisu(num_pano) {
         }, 1000);
     }
     function afficheInfoTitre() {
-        var largeur = pano.width();
-        var infoPosX = titreTailleFenetre;
-        if (titreTailleUnite === "%") {
-            infoPosX = (largeur - 10) * titreTailleFenetre;
-        }
-        $("#info-" + num_pano).css({
-            fontFamily: "'" + titrePolice + "',Verdana,Arial,sans-serif",
-            fontSize: titreTaillePolice,
-            color: titreCouleur,
-            backgroundColor: titreFond,
-            opacity: titreOpacite,
-            width: infoPosX + "px"
-        });
-        var infoPosX = titreTailleFenetre;
-        if (titreTailleUnite === "%") {
-            infoPosX = largeur * titreTailleFenetre;
-        }
-        infoPosX = (largeur - infoPosX) / 2;
-        //        alert("largeur : " + largeur + " titre taille : " + $("#info-" + num_pano).width() + " posX : " + infoPosX);
+        if (afficheTitre === "oui") {
+            var largeur = pano.width();
+            var infoPosX = titreTailleFenetre;
+            if (titreTailleUnite === "%") {
+                infoPosX = (largeur - 10) * titreTailleFenetre;
+            }
+            $("#info-" + num_pano).css({
+                fontFamily: "'" + titrePolice + "',Verdana,Arial,sans-serif",
+                fontSize: titreTaillePolice,
+                color: titreCouleur,
+                backgroundColor: titreFond,
+                opacity: titreOpacite,
+                width: infoPosX + "px"
+            });
+            var infoPosX = titreTailleFenetre;
+            if (titreTailleUnite === "%") {
+                infoPosX = largeur * titreTailleFenetre;
+            }
+            infoPosX = (largeur - infoPosX) / 2;
+            //        alert("largeur : " + largeur + " titre taille : " + $("#info-" + num_pano).width() + " posX : " + infoPosX);
 
-        $("#info-" + num_pano).css({
-            marginLeft: infoPosX
-        });
-
+            $("#info-" + num_pano).css({
+                marginLeft: infoPosX
+            });
+        }
     }
     /**
      * 
@@ -2759,8 +2767,8 @@ function panovisu(num_pano) {
                     longitude = parseFloat(XMLPano.attr('regardX')) || longitude;
                     latitude = parseFloat(XMLPano.attr('regardY')) || latitude;
                     fov = XMLPano.attr('champVision') || fov;
-                    afficheTitre = XMLPano.attr('afficheTitre') || afficheTitre;
-                    affInfo = XMLPano.attr('afficheInfo') || affInfo;
+                    afficheTitre = XMLPano.attr('afftitre') || afficheTitre;
+                    affInfo = XMLPano.attr('affinfo') || affInfo;
                     zeroNord = parseFloat(XMLPano.attr('zeroNord')) || zeroNord;
                     if (isReloaded) {
                         affInfo = false;

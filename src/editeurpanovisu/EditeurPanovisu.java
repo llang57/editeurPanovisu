@@ -294,7 +294,7 @@ public class EditeurPanovisu extends Application {
                     chargeImages += "                images[" + i + "]=\"" + fPano + ".jpg\"\n";
                 }
                 String affInfo = (panoramiquesProjet[i].isAfficheInfo()) ? "oui" : "non";
-                String affTitre = (panoramiquesProjet[i].isAfficheTitre()) ? "oui" : "non";
+                String affTitre = (gestionnaireInterface.bAfficheTitre) ? "oui" : "non";
                 double regX;
                 double zN;
                 if (panoramiquesProjet[i].getTypePanoramique().equals(Panoramique.SPHERE)) {
@@ -517,11 +517,11 @@ public class EditeurPanovisu extends Application {
                             + "        boussolePosition=\"" + planPano.getPosition() + "\"\n"
                             + "        boussoleX=\"" + planPano.getPositionX() + "\"\n"
                             + "        boussoleY=\"" + planPano.getPositionX() + "\"\n"
-                            + "        radarAffiche=\""+SAfficheRadar+"\"\n"
-                            + "        radarTaille=\""+Math.round(gestionnaireInterface.tailleRadar)+"\"\n"
-                            + "        radarCouleurFond=\"#"+gestionnaireInterface.txtCouleurFondRadar+"\"\n"
-                            + "        radarCouleurLigne=\"#"+gestionnaireInterface.txtCouleurLigneRadar+"\"\n"
-                            + "        radarOpacite=\""+Math.round(gestionnaireInterface.opaciteRadar * 100.d) / 100.d+"\"\n"
+                            + "        radarAffiche=\"" + SAfficheRadar + "\"\n"
+                            + "        radarTaille=\"" + Math.round(gestionnaireInterface.tailleRadar) + "\"\n"
+                            + "        radarCouleurFond=\"#" + gestionnaireInterface.txtCouleurFondRadar + "\"\n"
+                            + "        radarCouleurLigne=\"#" + gestionnaireInterface.txtCouleurLigneRadar + "\"\n"
+                            + "        radarOpacite=\"" + Math.round(gestionnaireInterface.opaciteRadar * 100.d) / 100.d + "\"\n"
                             + "    >\n";
                     for (int iPoint = 0; iPoint < planPano.getNombreHotspots(); iPoint++) {
                         double posX = planPano.getHotspot(iPoint).getLongitude() * GestionnaireInterfaceController.largeurPlan;
@@ -857,18 +857,18 @@ public class EditeurPanovisu extends Application {
      */
     private void clickBtnValidePano() {
         TextArea txtTitrePano = (TextArea) scene.lookup("#txttitrepano");
-        CheckBox chkAfficheInfo = (CheckBox) scene.lookup("#chkafficheinfo");
-        CheckBox chkAfficheTitre = (CheckBox) scene.lookup("#chkaffichetitre");
-        RadioButton radSphere = (RadioButton) scene.lookup("#radsphere");
+//        CheckBox chkAfficheInfo = (CheckBox) scene.lookup("#chkafficheinfo");
+//        CheckBox chkAfficheTitre = (CheckBox) scene.lookup("#chkaffichetitre");
+//        RadioButton radSphere = (RadioButton) scene.lookup("#radsphere");
         panoramiquesProjet[panoActuel].setTitrePanoramique(txtTitrePano.getText());
-        panoramiquesProjet[panoActuel].setAfficheInfo(chkAfficheInfo.isSelected());
-        panoramiquesProjet[panoActuel].setAfficheTitre(chkAfficheTitre.isSelected());
-        if (radSphere.isSelected()) {
-            panoramiquesProjet[panoActuel].setTypePanoramique(Panoramique.SPHERE);
-
-        } else {
-            panoramiquesProjet[panoActuel].setTypePanoramique(Panoramique.CUBE);
-        }
+//        panoramiquesProjet[panoActuel].setAfficheInfo(chkAfficheInfo.isSelected());
+//        panoramiquesProjet[panoActuel].setAfficheTitre(chkAfficheTitre.isSelected());
+//        if (radSphere.isSelected()) {
+//            panoramiquesProjet[panoActuel].setTypePanoramique(Panoramique.SPHERE);
+//
+//        } else {
+//            panoramiquesProjet[panoActuel].setTypePanoramique(Panoramique.CUBE);
+//        }
     }
 
     /**
@@ -1888,9 +1888,15 @@ public class EditeurPanovisu extends Application {
 
                     }
                     locale = new Locale(langue, pays);
-                    repertoireProjet = repert;
-                    currentDir = repert;
-                    repertSauveChoisi = true;
+                    File repert1 = new File(repert);
+                    if (repert1.exists()) {
+                        repertoireProjet = repert;
+                        currentDir = repert;
+                        repertSauveChoisi = true;
+                    } else {
+                        repertoireProjet = repertAppli;
+                        currentDir = repertAppli;
+                    }
                     setUserAgentStylesheet("file:css/" + styleCSS + ".css");
                 }
 
@@ -2582,101 +2588,101 @@ public class EditeurPanovisu extends Application {
     }
 
     private void panoMouseClic(double X, double Y) {
-
-        valideHS();
-        dejaSauve = false;
-        stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
-        double mouseX = X;
-        double mouseY = Y - pano.getLayoutY() - 115;
-        double longitude, latitude;
-        double largeur = imagePanoramique.getFitWidth();
-        String chLong, chLat;
-        longitude = 360.0f * mouseX / largeur - 180;
-        latitude = 90.0d - 2.0f * mouseY / largeur * 180.0f;
-        Circle point = new Circle(mouseX, mouseY, 5);
-        point.setFill(Color.YELLOW);
-        point.setStroke(Color.RED);
-        point.setId("point" + numPoints);
-        point.setCursor(Cursor.DEFAULT);
-        pano.getChildren().add(point);
-        Tooltip t = new Tooltip("point n°" + (numPoints + 1));
-        t.setStyle(tooltipStyle);
-        Tooltip.install(point, t);
-        HotSpot HS = new HotSpot();
-        HS.setLongitude(longitude);
-        HS.setLatitude(latitude);
-        panoramiquesProjet[panoActuel].addHotspot(HS);
-        retireAffichageHotSpots();
-        Pane affHS1 = affichageHS(listePano(panoActuel), panoActuel);
-        affHS1.setId("labels");
-        outils.getChildren().add(affHS1);
-
-        numPoints++;
         if (nombrePanoramiques > 1) {
-            AnchorPane listePanoVig = afficherListePanosVignettes(panoramiquesProjet[panoActuel].getNombreHotspots() - 1);
-            int largeurVignettes = 4;
-            if (nombrePanoramiques < 4) {
-                largeurVignettes = nombrePanoramiques;
+            valideHS();
+            dejaSauve = false;
+            stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            double mouseX = X;
+            double mouseY = Y - pano.getLayoutY() - 115;
+            double longitude, latitude;
+            double largeur = imagePanoramique.getFitWidth();
+            String chLong, chLat;
+            longitude = 360.0f * mouseX / largeur - 180;
+            latitude = 90.0d - 2.0f * mouseY / largeur * 180.0f;
+            Circle point = new Circle(mouseX, mouseY, 5);
+            point.setFill(Color.YELLOW);
+            point.setStroke(Color.RED);
+            point.setId("point" + numPoints);
+            point.setCursor(Cursor.DEFAULT);
+            pano.getChildren().add(point);
+            Tooltip t = new Tooltip("point n°" + (numPoints + 1));
+            t.setStyle(tooltipStyle);
+            Tooltip.install(point, t);
+            HotSpot HS = new HotSpot();
+            HS.setLongitude(longitude);
+            HS.setLatitude(latitude);
+            panoramiquesProjet[panoActuel].addHotspot(HS);
+            retireAffichageHotSpots();
+            Pane affHS1 = affichageHS(listePano(panoActuel), panoActuel);
+            affHS1.setId("labels");
+            outils.getChildren().add(affHS1);
+
+            numPoints++;
+            if (nombrePanoramiques > 1) {
+                AnchorPane listePanoVig = afficherListePanosVignettes(panoramiquesProjet[panoActuel].getNombreHotspots() - 1);
+                int largeurVignettes = 4;
+                if (nombrePanoramiques < 4) {
+                    largeurVignettes = nombrePanoramiques;
+                }
+                if (mouseX + largeurVignettes * 130 > pano.getWidth()) {
+                    listePanoVig.setLayoutX(pano.getWidth() - largeurVignettes * 130);
+                } else {
+                    listePanoVig.setLayoutX(mouseX);
+                }
+                listePanoVig.setLayoutY(mouseY);
+                pano.getChildren().add(listePanoVig);
             }
-            if (mouseX + largeurVignettes * 130 > pano.getWidth()) {
-                listePanoVig.setLayoutX(pano.getWidth() - largeurVignettes * 130);
-            } else {
-                listePanoVig.setLayoutX(mouseX);
-            }
-            listePanoVig.setLayoutY(mouseY);
-            pano.getChildren().add(listePanoVig);
+            point.setOnMouseClicked((MouseEvent me1) -> {
+                if (me1.isControlDown()) {
+                    valideHS();
+                    dejaSauve = false;
+                    stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+                    String chPoint = point.getId();
+                    chPoint = chPoint.substring(5, chPoint.length());
+                    int numeroPoint = Integer.parseInt(chPoint);
+                    Node pt;
+                    pt = (Node) pano.lookup("#point" + chPoint);
+                    pano.getChildren().remove(pt);
+
+                    for (int o = numeroPoint + 1; o < numPoints; o++) {
+                        pt = (Node) pano.lookup("#point" + Integer.toString(o));
+                        pt.setId("point" + Integer.toString(o - 1));
+                    }
+                    /**
+                     * on retire les anciennes indication de HS
+                     */
+                    retireAffichageHotSpots();
+                    numPoints--;
+                    panoramiquesProjet[panoActuel].removeHotspot(numeroPoint);
+                    /**
+                     * On les crée les nouvelles
+                     */
+                    ajouteAffichageHotspots();
+                    me1.consume();
+                } else {
+                    valideHS();
+                    String chPoint = point.getId();
+                    chPoint = chPoint.substring(5, chPoint.length());
+                    int numeroPoint = Integer.parseInt(chPoint);
+                    if (nombrePanoramiques > 1) {
+                        AnchorPane listePanoVig = afficherListePanosVignettes(numeroPoint);
+                        int largeurVignettes = 4;
+                        if (nombrePanoramiques < 4) {
+                            largeurVignettes = nombrePanoramiques;
+                        }
+                        if (mouseX + largeurVignettes * 130 > pano.getWidth()) {
+                            listePanoVig.setLayoutX(pano.getWidth() - largeurVignettes * 130);
+                        } else {
+                            listePanoVig.setLayoutX(mouseX);
+                        }
+                        listePanoVig.setLayoutY(mouseY);
+                        pano.getChildren().add(listePanoVig);
+                    }
+                    me1.consume();
+
+                }
+            });
         }
-        point.setOnMouseClicked((MouseEvent me1) -> {
-            if (me1.isControlDown()) {
-                valideHS();
-                dejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
-                String chPoint = point.getId();
-                chPoint = chPoint.substring(5, chPoint.length());
-                int numeroPoint = Integer.parseInt(chPoint);
-                Node pt;
-                pt = (Node) pano.lookup("#point" + chPoint);
-                pano.getChildren().remove(pt);
-
-                for (int o = numeroPoint + 1; o < numPoints; o++) {
-                    pt = (Node) pano.lookup("#point" + Integer.toString(o));
-                    pt.setId("point" + Integer.toString(o - 1));
-                }
-                /**
-                 * on retire les anciennes indication de HS
-                 */
-                retireAffichageHotSpots();
-                numPoints--;
-                panoramiquesProjet[panoActuel].removeHotspot(numeroPoint);
-                /**
-                 * On les crée les nouvelles
-                 */
-                ajouteAffichageHotspots();
-                me1.consume();
-            } else {
-                valideHS();
-                String chPoint = point.getId();
-                chPoint = chPoint.substring(5, chPoint.length());
-                int numeroPoint = Integer.parseInt(chPoint);
-                if (nombrePanoramiques > 1) {
-                    AnchorPane listePanoVig = afficherListePanosVignettes(numeroPoint);
-                    int largeurVignettes = 4;
-                    if (nombrePanoramiques < 4) {
-                        largeurVignettes = nombrePanoramiques;
-                    }
-                    if (mouseX + largeurVignettes * 130 > pano.getWidth()) {
-                        listePanoVig.setLayoutX(pano.getWidth() - largeurVignettes * 130);
-                    } else {
-                        listePanoVig.setLayoutX(mouseX);
-                    }
-                    listePanoVig.setLayoutY(mouseY);
-                    pano.getChildren().add(listePanoVig);
-                }
-                me1.consume();
-
-            }
-        });
-
     }
 
     private void panoAjouteImage(double X, double Y) {
@@ -2989,25 +2995,25 @@ public class EditeurPanovisu extends Application {
 
     private void afficheInfoPano() {
         TextArea txtTitrePano = (TextArea) scene.lookup("#txttitrepano");
-        CheckBox chkAfficheInfo = (CheckBox) scene.lookup("#chkafficheinfo");
-        CheckBox chkAfficheTitre = (CheckBox) scene.lookup("#chkaffichetitre");
-        RadioButton radSphere = (RadioButton) scene.lookup("#radsphere");
-        RadioButton radCube = (RadioButton) scene.lookup("#radcube");
+//        CheckBox chkAfficheInfo = (CheckBox) scene.lookup("#chkafficheinfo");
+//        CheckBox chkAfficheTitre = (CheckBox) scene.lookup("#chkaffichetitre");
+//        RadioButton radSphere = (RadioButton) scene.lookup("#radsphere");
+//        RadioButton radCube = (RadioButton) scene.lookup("#radcube");
 
         if (panoramiquesProjet[panoActuel].getTitrePanoramique() != null) {
             txtTitrePano.setText(panoramiquesProjet[panoActuel].getTitrePanoramique());
         } else {
             txtTitrePano.setText("");
         }
-        chkAfficheInfo.setSelected(panoramiquesProjet[panoActuel].isAfficheInfo());
-        chkAfficheTitre.setSelected(panoramiquesProjet[panoActuel].isAfficheTitre());
-        if (panoramiquesProjet[panoActuel].getTypePanoramique().equals(Panoramique.SPHERE)) {
-            radSphere.setSelected(true);
-            radCube.setSelected(false);
-        } else {
-            radCube.setSelected(true);
-            radSphere.setSelected(false);
-        }
+//        chkAfficheInfo.setSelected(panoramiquesProjet[panoActuel].isAfficheInfo());
+//        chkAfficheTitre.setSelected(panoramiquesProjet[panoActuel].isAfficheTitre());
+//        if (panoramiquesProjet[panoActuel].getTypePanoramique().equals(Panoramique.SPHERE)) {
+//            radSphere.setSelected(true);
+//            radCube.setSelected(false);
+//        } else {
+//            radCube.setSelected(true);
+//            radSphere.setSelected(false);
+//        }
 
     }
 
@@ -3077,10 +3083,10 @@ public class EditeurPanovisu extends Application {
         panoCree.setAfficheInfo(true);
         panoCree.setAfficheTitre(true);
         imagePanoramique.setImage(panoCree.getImagePanoramique());
-        CheckBox chkAfficheInfo = (CheckBox) scene.lookup("#chkafficheinfo");
-        CheckBox chkAfficheTitre = (CheckBox) scene.lookup("#chkaffichetitre");
-        RadioButton radSphere = (RadioButton) scene.lookup("#radsphere");
-        RadioButton radCube = (RadioButton) scene.lookup("#radcube");
+//        CheckBox chkAfficheInfo = (CheckBox) scene.lookup("#chkafficheinfo");
+//        CheckBox chkAfficheTitre = (CheckBox) scene.lookup("#chkaffichetitre");
+//        RadioButton radSphere = (RadioButton) scene.lookup("#radsphere");
+//        RadioButton radCube = (RadioButton) scene.lookup("#radcube");
 
         imagePanoramique.setSmooth(true);
         retireAffichageLigne();
@@ -3090,15 +3096,15 @@ public class EditeurPanovisu extends Application {
         ajouteAffichageLignes();
         panoramiquesProjet[nombrePanoramiques] = panoCree;
         panoActuel = nombrePanoramiques;
-        chkAfficheInfo.setSelected(panoramiquesProjet[panoActuel].isAfficheInfo());
-        chkAfficheTitre.setSelected(panoramiquesProjet[panoActuel].isAfficheTitre());
-        if (panoramiquesProjet[panoActuel].getTypePanoramique().equals(Panoramique.SPHERE)) {
-            radSphere.setSelected(true);
-            radCube.setSelected(false);
-        } else {
-            radCube.setSelected(true);
-            radSphere.setSelected(false);
-        }
+//        chkAfficheInfo.setSelected(panoramiquesProjet[panoActuel].isAfficheInfo());
+//        chkAfficheTitre.setSelected(panoramiquesProjet[panoActuel].isAfficheTitre());
+//        if (panoramiquesProjet[panoActuel].getTypePanoramique().equals(Panoramique.SPHERE)) {
+//            radSphere.setSelected(true);
+//            radCube.setSelected(false);
+//        } else {
+//            radCube.setSelected(true);
+//            radSphere.setSelected(false);
+//        }
 
         listeChoixPanoramique.setValue(listeChoixPanoramique.getItems().get(nombrePanoramiques));
         //listeChoixPanoramiqueEntree.setValue(listeChoixPanoramiqueEntree.getItems().get(0));
@@ -3742,45 +3748,14 @@ public class EditeurPanovisu extends Application {
          Création du panneau d'info du panoramique
          */
         VBox vbInfoPano = new VBox(5);
-        vbInfoPano.setPrefSize(310, 270);
+        vbInfoPano.setPrefSize(310, 150);
         Pane myAnchorPane = new Pane(vbInfoPano);
         Separator sepInfo = new Separator(Orientation.HORIZONTAL);
-        sepInfo.setTranslateY(5);
-        Separator sepInfo1 = new Separator(Orientation.HORIZONTAL);
-        sepInfo1.setTranslateY(10);
-        Separator sepInfo2 = new Separator(Orientation.HORIZONTAL);
-        sepInfo2.setTranslateY(20);
         Label lblTitrePano = new Label("Titre du panoramique");
         lblTitrePano.setPadding(new Insets(30, 5, 5, 5));
         txtTitrePano = new TextArea();
         txtTitrePano.setId("txttitrepano");
         txtTitrePano.setPrefSize(200, 25);
-        Label lblTypePano = new Label("Type de panoramique");
-        lblTypePano.setPadding(new Insets(10, 5, 5, 5));
-        radSphere = new RadioButton(Panoramique.SPHERE);
-        radSphere.setSelected(true);
-        radSphere.setId("radsphere");
-        radCube = new RadioButton(Panoramique.CUBE);
-        radCube.setSelected(false);
-        radCube.setId("radcube");
-        radCube.setOnMouseClicked((MouseEvent me) -> {
-            RadioButton radSphere1 = (RadioButton) scene.lookup("#radsphere");
-            radSphere1.setSelected(false);
-        });
-        radSphere.setOnMouseClicked((MouseEvent me) -> {
-            RadioButton radCube1 = (RadioButton) scene.lookup("#radcube");
-            radCube1.setSelected(false);
-        });
-        HBox hbTypePano = new HBox(radSphere, radCube);
-        hbTypePano.setTranslateX(60);
-        chkAfficheTitre = new CheckBox("Affiche Titre");
-        chkAfficheTitre.setId("chkaffichetitre");
-        chkAfficheInfo = new CheckBox("Affiche écran d'information");
-        chkAfficheInfo.setId("chkafficheinfo");
-        chkAfficheInfo.setTranslateX(60);
-        chkAfficheTitre.setTranslateX(60);
-        chkAfficheTitre.setTranslateY(10);
-        chkAfficheInfo.setTranslateY(15);
 
         btnValidePano = new Button("Valide Infos");
         btnValidePano.setTranslateY(25);
@@ -3793,11 +3768,11 @@ public class EditeurPanovisu extends Application {
         vbInfoPano.getChildren().addAll(
                 sepInfo,
                 lblTitrePano, txtTitrePano,
-                sepInfo1,
-                lblTypePano, hbTypePano,
-                chkAfficheTitre,
-                chkAfficheInfo,
-                sepInfo2,
+                //                sepInfo1,
+                //                lblTypePano, hbTypePano,
+                //                chkAfficheTitre,
+                //                chkAfficheInfo,
+                //                sepInfo2,
                 btnValidePano
         );
 
