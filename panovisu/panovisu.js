@@ -121,7 +121,14 @@ function panovisu(num_pano) {
             marginPanoLeft,
             nbPanoCharges = 0,
             positionVignettesX = 0,
-            positionVignettesY = 0
+            positionVignettesY = 0,
+            memMaxFOV,
+            memFOV,
+            littleDisabled = false,
+            normalDisbled = true,
+            littlePlanetView = false,
+            suivant = false,
+            precedent = false
             ;
     /**
      * Variables par défaut pour l'affichage du panoramique
@@ -240,6 +247,11 @@ function panovisu(num_pano) {
      */
 
 
+
+    $('.context-menu-one').on('click', function(e) {
+        console.log('clicked', this);
+    })
+
     $(document).on("webkitfullscreenchange mozfullscreenchange fullscreenchange MSFullscreenChange", function() {
         bPleinEcran = !bPleinEcran;
         changeTaille();
@@ -294,35 +306,35 @@ function panovisu(num_pano) {
     });
 
     $(document).on("mousedown", "#container-" + num_pano, function(evenement) {
-
         evenement.preventDefault();
-        if (bAfficheInfo)
-        {
-            $("#infoPanovisu-" + num_pano).fadeOut(2000, function() {
-                $(this).css({display: "none"});
-                bAfficheInfo = false;
-            });
+        if (evenement.which === 1) {
+            if (bAfficheInfo)
+            {
+                $("#infoPanovisu-" + num_pano).fadeOut(2000, function() {
+                    $(this).css({display: "none"});
+                    bAfficheInfo = false;
+                });
+
+            }
+            onPointerDownPointerX = evenement.clientX;
+            onPointerDownPointerY = evenement.clientY;
+            isUserInteracting = true;
+            if (mode === 1) {
+                deltaX = 0;
+                deltaY = 0;
+                clearInterval(timer);
+                timer = setInterval(function() {
+                    deplaceMode2();
+                }, 10);
+            }
+            else
+            {
+                onPointerDownLon = longitude;
+                onPointerDownLat = latitude;
+                pano.addClass('curseurCroix');
+            }
 
         }
-        onPointerDownPointerX = evenement.clientX;
-        onPointerDownPointerY = evenement.clientY;
-        isUserInteracting = true;
-        if (mode === 1) {
-            deltaX = 0;
-            deltaY = 0;
-            clearInterval(timer);
-            timer = setInterval(function() {
-                deplaceMode2();
-            }, 10);
-        }
-        else
-        {
-            onPointerDownLon = longitude;
-            onPointerDownLat = latitude;
-            pano.addClass('curseurCroix');
-        }
-
-
 
     });
     $(document).on("mousemove", "#container-" + num_pano, function(evenement) {
@@ -1321,7 +1333,9 @@ function panovisu(num_pano) {
         target.y = 500 * Math.cos(phi);
         target.z = 500 * Math.sin(phi) * Math.sin(theta);
         camera.lookAt(target);
-        //        camera.position.copy(target).negate();
+        if (littlePlanetView) {
+            camera.position.copy(target).negate();
+        }
         renderer.render(scene, camera);
         var bouss = longitude - zeroNord;
         if (boussoleAiguille === "oui")
@@ -1509,13 +1523,13 @@ function panovisu(num_pano) {
             dY1 = parseInt(dY);
             if (vignettes)
             {
-                if ((vignettesPosition === "right") && (positionX === "right")) {
+                if ((vignettesPosition === "right") && (positionX === "right") && (!vigRentre)) {
                     dX1 = parseInt(dX) + parseInt(vignettesTailleImage) + 5;
                 }
-                if ((vignettesPosition === "left") && (positionX === "left")) {
+                if ((vignettesPosition === "left") && (positionX === "left") && (!vigRentre)) {
                     dX1 = parseInt(dX) + parseInt(vignettesTailleImage) + 5;
                 }
-                if ((vignettesPosition === "bottom") && (positionY === "bottom")) {
+                if ((vignettesPosition === "bottom") && (positionY === "bottom") && (!vigRentre)) {
                     dY1 = parseInt(dY) + parseInt(vignettesTailleImage) / 2 + 5;
                 }
             }
@@ -1686,6 +1700,53 @@ function panovisu(num_pano) {
         $("#infoPanovisu-" + num_pano).html(panoInfo);
     }
 
+    function reaffiche(lat, sensLat, FOV, sensFOV) {
+        console.log(latitude, " => ", fov);
+        latitude += sensLat;
+        fov += sensFOV;
+        if (sensLat === 1 && latitude > lat) {
+            latitude = lat;
+        }
+        if (sensLat === -1 && latitude < lat) {
+            latitude = lat;
+        }
+        if (sensFOV === 1 && fov > FOV) {
+            fov = FOV;
+        }
+        if (sensFOV === -1 && fov < FOV) {
+            fov = FOV;
+        }
+        if (latitude !== lat || fov !== FOV) {
+            camera = new THREE.PerspectiveCamera(fov, pano.width() / pano.height(), 1, 1100);
+            camera.fov = fov;
+            camera.updateProjectionMatrix();
+            affiche();
+            setTimeout(function() {
+                reaffiche(lat, sensLat, FOV, sensFOV);
+                isUserInteracting = false;
+            }, 5);
+        }
+    }
+
+    function gotoAffiche(lat, champVisuel) {
+        if (lat > latitude) {
+            sensLat = 1;
+        }
+        else {
+            sensLat = -1;
+        }
+        if (champVisuel > fov) {
+            sensVisuel = 1;
+        }
+        else {
+            sensVisuel = -1;
+        }
+        console.log("réaffiche lat:" + sensLat + " fov:" + sensVisuel);
+        setTimeout(function() {
+            console.log("setTimeOut");
+            reaffiche(lat, sensLat, champVisuel, sensVisuel);
+        }, 5);
+    }
     /**
      * 
      * @param {type} fenetre
@@ -1721,12 +1782,17 @@ function panovisu(num_pano) {
         }
         $("#divSuivant-" + num_pano).hide();
         $("#divPrecedent-" + num_pano).hide();
+        suivant = true;
+        precedent = true;
         if (XMLsuivant !== "") {
             $("#divSuivant-" + num_pano).show();
+            suivant = false;
         }
         if (XMLprecedent !== "") {
             $("#divPrecedent-" + num_pano).show();
+            precedent = false;
         }
+        console.log(suivant + "," + precedent);
         if (marcheArret) {
             $("#marcheArret-" + num_pano).css(marcheArretPositionX, marcheArretDX + "px");
             $("#marcheArret-" + num_pano).css(marcheArretPositionY, marcheArretDY + "px");
@@ -2067,6 +2133,7 @@ function panovisu(num_pano) {
                 pano1.fadeIn(2000, function() {
                     afficheBarre(pano.width(), pano.height());
                     affiche();
+                    ajouteContexteMenu();
 
                 });
                 if (autoRotation === "oui")
@@ -2132,6 +2199,7 @@ function panovisu(num_pano) {
                 pano1.fadeIn(2000, function() {
                     afficheBarre(pano.width(), pano.height());
                     affiche();
+                    ajouteContexteMenu();
                 });
                 if (autoRotation === "oui")
                     demarreAutoRotation();
@@ -2238,7 +2306,137 @@ function panovisu(num_pano) {
         image.src = path;
         return material;
     }
+    function ajouteContexteMenu() {
+        $.contextMenu('destroy');
+        $.contextMenu({
+            selector: "#panovisu-" + num_pano,
+            appendTo: "#container-" + num_pano,
+            position: function(opt, x, y)
+            {
+                opt.$menu.css({
+                    top: y - $("#container-" + num_pano).offset().top,
+                    left: x - $("#container-" + num_pano).offset().left
+                });
+            },
+            callback: function(key, options) {
+                switch (key) {
+                    case "lm360":
+                        window.open("http://lemondea360.fr");
+                        break;
+                    case "suiv":
+                        pano1.fadeOut(1000, function() {
+                            clearInterval(timers);
+                            longitude = 0;
+                            latitude = 0;
+                            fov = 75;
+                            $("#infoBulle-" + num_pano).hide();
+                            $("#infoBulle-" + num_pano).html("");
+                            isReloaded = true;
+                            xmlFile = XMLsuivant;
+                            hotSpot = new Array();
+                            pointsInteret = new Array();
+                            numHotspot = 0;
+                            $("#boussole-" + num_pano).hide();
+                            $("#marcheArret-" + num_pano).hide();
+                            $("#plan-" + num_pano).hide();
+                            $("#planTitre-" + num_pano).hide();
+                            $("#divVignettes-" + num_pano).html("");
+                            $("#divVignettes-" + num_pano).hide();
+                            $("#titreVignettes-" + num_pano).hide();
+                            chargeXML(xmlFile);
+                        });
 
+                        break;
+                    case "prec":
+                        pano1.fadeOut(1000, function() {
+                            clearInterval(timers);
+                            longitude = 0;
+                            latitude = 0;
+                            fov = 75;
+                            $("#infoBulle-" + num_pano).hide();
+                            $("#infoBulle-" + num_pano).html("");
+                            isReloaded = true;
+                            xmlFile = XMLprecedent;
+                            hotSpot = new Array();
+                            pointsInteret = new Array();
+                            numHotspot = 0;
+                            $("#boussole-" + num_pano).hide();
+                            $("#marcheArret-" + num_pano).hide();
+                            $("#plan-" + num_pano).hide();
+                            $("#planTitre-" + num_pano).hide();
+                            $("#divVignettes-" + num_pano).html("");
+                            $("#divVignettes-" + num_pano).hide();
+                            $("#titreVignettes-" + num_pano).hide();
+                            chargeXML(xmlFile);
+                        });
+                        break;
+                    case "apropos":
+                        if (bAfficheInfo)
+                        {
+                            $("#infoPanovisu-" + num_pano).fadeOut(1000, function() {
+                                $("#infoPanovisu-" + num_pano).css({display: "none"});
+                                bAfficheInfo = false;
+                            });
+
+                        }
+                        else {
+                            if (bAfficheAide) {
+                                $("#aidePanovisu-" + num_pano).fadeOut(1000, function() {
+                                    bAfficheAide = false;
+                                });
+                                $("#infoPanovisu-" + num_pano).fadeIn(1000, function() {
+                                    bAfficheInfo = true;
+                                });
+                            } else {
+                                $("#infoPanovisu-" + num_pano).fadeIn(1000, function() {
+                                    bAfficheInfo = true;
+                                });
+
+                            }
+
+                        }
+                        break;
+                    case "little":
+                        littleDisabled = true;
+                        normalDisbled = false;
+                        memFOV = fov;
+                        memMaxFOV = maxFOV;
+                        maxFOV = 170;
+                        littlePlanetView = true;
+                        gotoAffiche(-90, 145);
+                        //affiche();
+                        break;
+                    case "normal":
+                        littleDisabled = false;
+                        normalDisbled = true;
+                        maxFOV = memMaxFOV;
+                        littlePlanetView = false;
+                        gotoAffiche(0, memFOV);
+                        break;
+
+                }
+                isUserInteracting = false;
+            },
+            items: {
+                "suiv": {name: "Panoramique suivant", disabled: function(key, opt) {
+                        return suivant;
+                    }},
+                "prec": {name: "Panoramique précédent", disabled: function(key, opt) {
+                        return precedent;
+                    }},
+                "little": {name: "Vue Petite planète", disabled: function(key, opt) {
+                        return littleDisabled;
+                    }},
+                "normal": {name: "Vue normale", disabled: function(key, opt) {
+                        return normalDisbled;
+                    }},
+                "sep1": "---------",
+                "lm360": {name: "Le Monde à 360°"},
+                "apropos": {name: "A propos de panoVisu"}
+            }
+        });
+
+    }
     /**
      * Initialisation du panoramique / faces de cube
      * 
@@ -2322,6 +2520,7 @@ function panovisu(num_pano) {
             });
             if (autoRotation === "oui")
                 demarreAutoRotation();
+            ajouteContexteMenu();
         }, 1000);
     }
     function afficheInfoTitre() {
@@ -2643,6 +2842,10 @@ function panovisu(num_pano) {
     function chargeXML(xmlFile) {
         $.get(xmlFile,
                 function(d) {
+                    littleDisabled = false;
+                    normalDisbled = true;
+                    littlePlanetView = false;
+
                     var typeHSDefaut = "panoramique";
                     panoImage = "faces";
                     couleur = "none";
@@ -3120,6 +3323,9 @@ function panovisu(num_pano) {
          */
         chargeXML(xmlFile);
     };
+
+
+
 }
 
 /*

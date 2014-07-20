@@ -572,6 +572,7 @@ public class EditeurPanovisu extends Application {
                     + "        <title>" + titreVis + "</title>\n"
                     + "        <meta charset=\"utf-8\">\n"
                     + "        <meta name=\"viewport\" content=\"width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0\">\n"
+                    + "        <link rel=\"stylesheet\" media=\"screen\" href=\"panovisu/libs/jqueryMenu/jquery.contextMenu.css\" type=\"text/css\"/>\n" 
                     + "    </head>\n"
                     + "    <body>\n"
                     + "        <header>\n"
