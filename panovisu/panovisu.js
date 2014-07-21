@@ -22,7 +22,9 @@ function estTactile() {
 }
 
 
+
 function panovisu(num_pano) {
+
 
     var tmp = window.location.search.substring(1).split("&");
     var GET = [];
@@ -127,8 +129,9 @@ function panovisu(num_pano) {
             littleDisabled = false,
             normalDisbled = true,
             littlePlanetView = false,
-            suivant = false,
-            precedent = false
+            suivant,
+            precedent,
+            langage = "fr_FR"
             ;
     /**
      * Variables par défaut pour l'affichage du panoramique
@@ -1994,9 +1997,145 @@ function panovisu(num_pano) {
             }
             $("#plan-" + num_pano).show();
             $("#planTitre-" + num_pano).show();
+
         }
 
     }
+
+    function afficheMenuContextuel() {
+        console.log(langage + " => " + chainesTraduction[langage].panoSuivant);
+        $.contextMenu('destroy');
+        $.contextMenu({
+            selector: "#panovisu-" + num_pano,
+            appendTo: "#container-" + num_pano,
+            position: function(opt, x, y)
+            {
+                opt.$menu.css({
+                    top: y - $("#container-" + num_pano).offset().top,
+                    left: x - $("#container-" + num_pano).offset().left
+                });
+            },
+            callback: function(key, options) {
+                switch (key) {
+                    case "lm360":
+                        window.open("http://lemondea360.fr");
+                        break;
+                    case "suiv":
+                        pano1.fadeOut(1000, function() {
+                            clearInterval(timers);
+                            longitude = 0;
+                            latitude = 0;
+                            fov = 75;
+                            $("#infoBulle-" + num_pano).hide();
+                            $("#infoBulle-" + num_pano).html("");
+                            isReloaded = true;
+                            xmlFile = XMLsuivant;
+                            hotSpot = new Array();
+                            pointsInteret = new Array();
+                            numHotspot = 0;
+                            $("#boussole-" + num_pano).hide();
+                            $("#marcheArret-" + num_pano).hide();
+                            $("#plan-" + num_pano).hide();
+                            $("#planTitre-" + num_pano).hide();
+                            $("#divVignettes-" + num_pano).html("");
+                            $("#divVignettes-" + num_pano).hide();
+                            $("#titreVignettes-" + num_pano).hide();
+                            chargeXML(xmlFile);
+                        });
+
+                        break;
+                    case "prec":
+                        pano1.fadeOut(1000, function() {
+                            clearInterval(timers);
+                            longitude = 0;
+                            latitude = 0;
+                            fov = 75;
+                            $("#infoBulle-" + num_pano).hide();
+                            $("#infoBulle-" + num_pano).html("");
+                            isReloaded = true;
+                            xmlFile = XMLprecedent;
+                            hotSpot = new Array();
+                            pointsInteret = new Array();
+                            numHotspot = 0;
+                            $("#boussole-" + num_pano).hide();
+                            $("#marcheArret-" + num_pano).hide();
+                            $("#plan-" + num_pano).hide();
+                            $("#planTitre-" + num_pano).hide();
+                            $("#divVignettes-" + num_pano).html("");
+                            $("#divVignettes-" + num_pano).hide();
+                            $("#titreVignettes-" + num_pano).hide();
+                            chargeXML(xmlFile);
+                        });
+                        break;
+                    case "apropos":
+                        if (bAfficheInfo)
+                        {
+                            $("#infoPanovisu-" + num_pano).fadeOut(1000, function() {
+                                $("#infoPanovisu-" + num_pano).css({display: "none"});
+                                bAfficheInfo = false;
+                            });
+
+                        }
+                        else {
+                            if (bAfficheAide) {
+                                $("#aidePanovisu-" + num_pano).fadeOut(1000, function() {
+                                    bAfficheAide = false;
+                                });
+                                $("#infoPanovisu-" + num_pano).fadeIn(1000, function() {
+                                    bAfficheInfo = true;
+                                });
+                            } else {
+                                $("#infoPanovisu-" + num_pano).fadeIn(1000, function() {
+                                    bAfficheInfo = true;
+                                });
+
+                            }
+
+                        }
+                        break;
+                    case "little":
+                        littleDisabled = true;
+                        normalDisbled = false;
+                        memFOV = fov;
+                        memMaxFOV = maxFOV;
+                        maxFOV = 170;
+                        littlePlanetView = true;
+                        gotoAffiche(-90, 145);
+                        //affiche();
+                        break;
+                    case "normal":
+                        littleDisabled = false;
+                        normalDisbled = true;
+                        maxFOV = memMaxFOV;
+                        littlePlanetView = false;
+                        gotoAffiche(0, memFOV);
+                        break;
+
+                }
+                isUserInteracting = false;
+            },
+            items: {
+                "suiv": {name: chainesTraduction[langage].panoSuivant, disabled: function(key, opt) {
+                        return suivant;
+                    }},
+                "prec": {name: chainesTraduction[langage].panoPrecedent, disabled: function(key, opt) {
+                        return precedent;
+                    }},
+                "little": {name: chainesTraduction[langage].petitePlanete, disabled: function(key, opt) {
+                        return littleDisabled;
+                    }},
+                "normal": {name: chainesTraduction[langage].vueNoramale, disabled: function(key, opt) {
+                        return normalDisbled;
+                    }},
+                "sep1": "---------",
+                "lm360": {name: "Le Monde à 360°"},
+                "apropos": {name: chainesTraduction[langage].aPropos}
+            }
+        });
+
+    }
+
+
     function afficheNiveauSphere(image, niveau) {
         if (niveau < nombreNiveaux) {
             loader = new THREE.TextureLoader();
@@ -2133,7 +2272,8 @@ function panovisu(num_pano) {
                 pano1.fadeIn(2000, function() {
                     afficheBarre(pano.width(), pano.height());
                     affiche();
-                    ajouteContexteMenu();
+                    afficheMenuContextuel();
+
 
                 });
                 if (autoRotation === "oui")
@@ -2199,7 +2339,7 @@ function panovisu(num_pano) {
                 pano1.fadeIn(2000, function() {
                     afficheBarre(pano.width(), pano.height());
                     affiche();
-                    ajouteContexteMenu();
+                    afficheMenuContextuel();
                 });
                 if (autoRotation === "oui")
                     demarreAutoRotation();
@@ -2306,137 +2446,7 @@ function panovisu(num_pano) {
         image.src = path;
         return material;
     }
-    function ajouteContexteMenu() {
-        $.contextMenu('destroy');
-        $.contextMenu({
-            selector: "#panovisu-" + num_pano,
-            appendTo: "#container-" + num_pano,
-            position: function(opt, x, y)
-            {
-                opt.$menu.css({
-                    top: y - $("#container-" + num_pano).offset().top,
-                    left: x - $("#container-" + num_pano).offset().left
-                });
-            },
-            callback: function(key, options) {
-                switch (key) {
-                    case "lm360":
-                        window.open("http://lemondea360.fr");
-                        break;
-                    case "suiv":
-                        pano1.fadeOut(1000, function() {
-                            clearInterval(timers);
-                            longitude = 0;
-                            latitude = 0;
-                            fov = 75;
-                            $("#infoBulle-" + num_pano).hide();
-                            $("#infoBulle-" + num_pano).html("");
-                            isReloaded = true;
-                            xmlFile = XMLsuivant;
-                            hotSpot = new Array();
-                            pointsInteret = new Array();
-                            numHotspot = 0;
-                            $("#boussole-" + num_pano).hide();
-                            $("#marcheArret-" + num_pano).hide();
-                            $("#plan-" + num_pano).hide();
-                            $("#planTitre-" + num_pano).hide();
-                            $("#divVignettes-" + num_pano).html("");
-                            $("#divVignettes-" + num_pano).hide();
-                            $("#titreVignettes-" + num_pano).hide();
-                            chargeXML(xmlFile);
-                        });
 
-                        break;
-                    case "prec":
-                        pano1.fadeOut(1000, function() {
-                            clearInterval(timers);
-                            longitude = 0;
-                            latitude = 0;
-                            fov = 75;
-                            $("#infoBulle-" + num_pano).hide();
-                            $("#infoBulle-" + num_pano).html("");
-                            isReloaded = true;
-                            xmlFile = XMLprecedent;
-                            hotSpot = new Array();
-                            pointsInteret = new Array();
-                            numHotspot = 0;
-                            $("#boussole-" + num_pano).hide();
-                            $("#marcheArret-" + num_pano).hide();
-                            $("#plan-" + num_pano).hide();
-                            $("#planTitre-" + num_pano).hide();
-                            $("#divVignettes-" + num_pano).html("");
-                            $("#divVignettes-" + num_pano).hide();
-                            $("#titreVignettes-" + num_pano).hide();
-                            chargeXML(xmlFile);
-                        });
-                        break;
-                    case "apropos":
-                        if (bAfficheInfo)
-                        {
-                            $("#infoPanovisu-" + num_pano).fadeOut(1000, function() {
-                                $("#infoPanovisu-" + num_pano).css({display: "none"});
-                                bAfficheInfo = false;
-                            });
-
-                        }
-                        else {
-                            if (bAfficheAide) {
-                                $("#aidePanovisu-" + num_pano).fadeOut(1000, function() {
-                                    bAfficheAide = false;
-                                });
-                                $("#infoPanovisu-" + num_pano).fadeIn(1000, function() {
-                                    bAfficheInfo = true;
-                                });
-                            } else {
-                                $("#infoPanovisu-" + num_pano).fadeIn(1000, function() {
-                                    bAfficheInfo = true;
-                                });
-
-                            }
-
-                        }
-                        break;
-                    case "little":
-                        littleDisabled = true;
-                        normalDisbled = false;
-                        memFOV = fov;
-                        memMaxFOV = maxFOV;
-                        maxFOV = 170;
-                        littlePlanetView = true;
-                        gotoAffiche(-90, 145);
-                        //affiche();
-                        break;
-                    case "normal":
-                        littleDisabled = false;
-                        normalDisbled = true;
-                        maxFOV = memMaxFOV;
-                        littlePlanetView = false;
-                        gotoAffiche(0, memFOV);
-                        break;
-
-                }
-                isUserInteracting = false;
-            },
-            items: {
-                "suiv": {name: "Panoramique suivant", disabled: function(key, opt) {
-                        return suivant;
-                    }},
-                "prec": {name: "Panoramique précédent", disabled: function(key, opt) {
-                        return precedent;
-                    }},
-                "little": {name: "Vue Petite planète", disabled: function(key, opt) {
-                        return littleDisabled;
-                    }},
-                "normal": {name: "Vue normale", disabled: function(key, opt) {
-                        return normalDisbled;
-                    }},
-                "sep1": "---------",
-                "lm360": {name: "Le Monde à 360°"},
-                "apropos": {name: "A propos de panoVisu"}
-            }
-        });
-
-    }
     /**
      * Initialisation du panoramique / faces de cube
      * 
@@ -2509,6 +2519,7 @@ function panovisu(num_pano) {
                 var pi = pointsInteret[i];
                 creeHotspot(pi.long, pi.lat, pi.contenu, pi.image);
             }
+            afficheMenuContextuel();
             affiche();
             timers = setInterval(function() {
                 rafraichitHS();
@@ -2520,7 +2531,6 @@ function panovisu(num_pano) {
             });
             if (autoRotation === "oui")
                 demarreAutoRotation();
-            ajouteContexteMenu();
         }, 1000);
     }
     function afficheInfoTitre() {
@@ -2696,27 +2706,27 @@ function panovisu(num_pano) {
      * @returns {undefined}
      */
     function creeBarreNavigation() {
-        $("<button>", {type: "button", id: "xmoins-" + num_pano, class: "xmoins", title: "déplacement à gauche",
+        $("<button>", {type: "button", id: "xmoins-" + num_pano, class: "xmoins", title: chainesTraduction[langage].gauche,
             style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#deplacement-" + num_pano);
-        $("<button>", {type: "button", id: "ymoins-" + num_pano, class: "ymoins", title: "déplacement vers le haut",
+        $("<button>", {type: "button", id: "ymoins-" + num_pano, class: "ymoins", title: chainesTraduction[langage].haut,
             style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#deplacement-" + num_pano);
-        $("<button>", {type: "button", id: "yplus-" + num_pano, class: "yplus", title: "déplacement vers le bas",
+        $("<button>", {type: "button", id: "yplus-" + num_pano, class: "yplus", title: chainesTraduction[langage].bas,
             style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#deplacement-" + num_pano);
-        $("<button>", {type: "button", id: "xplus-" + num_pano, class: "xplus", title: "déplacement à droite",
+        $("<button>", {type: "button", id: "xplus-" + num_pano, class: "xplus", title: chainesTraduction[langage].droite,
             style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#deplacement-" + num_pano);
-        $("<button>", {type: "button", id: "zoomPlus-" + num_pano, class: "zoomPlus", title: "zoom +",
+        $("<button>", {type: "button", id: "zoomPlus-" + num_pano, class: "zoomPlus", title: chainesTraduction[langage].zoomPlus,
             style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#zoom-" + num_pano);
-        $("<button>", {type: "button", id: "zoomMoins-" + num_pano, class: "zoomMoins", title: "zoom -",
+        $("<button>", {type: "button", id: "zoomMoins-" + num_pano, class: "zoomMoins", title: chainesTraduction[langage].zoomMoins,
             style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#zoom-" + num_pano);
-        $("<button>", {type: "button", id: "pleinEcran-" + num_pano, class: "pleinEcran", title: "plein ecran",
+        $("<button>", {type: "button", id: "pleinEcran-" + num_pano, class: "pleinEcran", title: chainesTraduction[langage].pleinEcran,
             style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#outils-" + num_pano);
-        $("<button>", {type: "button", id: "souris-" + num_pano, class: "souris", title: "change le mode de déplacement de la souris",
+        $("<button>", {type: "button", id: "souris-" + num_pano, class: "souris", title: chainesTraduction[langage].souris,
             style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#outils-" + num_pano);
-        $("<button>", {type: "button", id: "auto-" + num_pano, class: "auto", title: "autorotation (M/A)",
+        $("<button>", {type: "button", id: "auto-" + num_pano, class: "auto", title: chainesTraduction[langage].autoratation,
             style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#outils-" + num_pano);
-        $("<button>", {type: "button", id: "binfo-" + num_pano, class: "binfo", title: "A propos ...",
+        $("<button>", {type: "button", id: "binfo-" + num_pano, class: "binfo", title: chainesTraduction[langage].aPropos,
             style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#outils-" + num_pano);
-        $("<button>", {type: "button", id: "aide-" + num_pano, class: "aide", title: "Aide",
+        $("<button>", {type: "button", id: "aide-" + num_pano, class: "aide", title: chainesTraduction[langage].aide,
             style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#outils-" + num_pano);
     }
     /**
@@ -3199,7 +3209,7 @@ function panovisu(num_pano) {
         $("<img>", {id: "bousAig-" + num_pano, class: "bousAig", src: "panovisu/images/boussoles/aiguille.png"}).appendTo("#boussole-" + num_pano);
         $("#boussole-" + num_pano).hide();
         $("<div>", {id: "marcheArret-" + num_pano, class: "marcheArret"}).appendTo("#" + fenetrePanoramique);
-        $("<img>", {id: "MAImg-" + num_pano, class: "MAImg", src: "", title: "Affiche/Masque les éléments"}).appendTo("#marcheArret-" + num_pano);
+        $("<img>", {id: "MAImg-" + num_pano, class: "MAImg", src: "", title: chainesTraduction[langage].afficheMasque}).appendTo("#marcheArret-" + num_pano);
         $("#marcheArret-" + num_pano).hide();
         $("<div>", {id: "reseauxSociaux-" + num_pano, class: "reseauxSociaux"}).appendTo("#" + fenetrePanoramique);
         $("<img>", {id: "RSTW-" + num_pano, class: "RS reseauSocial-twitter", src: "", title: "twitter"}).appendTo("#reseauxSociaux-" + num_pano);
@@ -3218,7 +3228,7 @@ function panovisu(num_pano) {
         $("<div>", {id: "container-" + num_pano, class: "container"}).appendTo("#pano1-" + num_pano);
         $("<div>", {id: "divVignettes-" + num_pano, class: "vignettes"}).appendTo("#pano1-" + num_pano);
         $("<div>", {id: "titreVignettes-" + num_pano, class: "titreVignettes"}).appendTo("#pano1-" + num_pano);
-        $("#titreVignettes-" + num_pano).html("Vignettes");
+        $("#titreVignettes-" + num_pano).html(chainesTraduction[langage].vignettes);
         $("#divVignettes-" + num_pano).hide();
         $("#titreVignettes-" + num_pano).hide();
         $("<div>", {id: "divImage-" + num_pano, class: "vignettes"}).appendTo("#pano1-" + num_pano);
@@ -3227,8 +3237,8 @@ function panovisu(num_pano) {
         $("#divHTML-" + num_pano).hide();
 
 
-        $("<div>", {id: "divPrecedent-" + num_pano, class: "precedent", title: "Panoramique précédent"}).appendTo("#pano1-" + num_pano);
-        $("<div>", {id: "divSuivant-" + num_pano, class: "suivant", title: "Panoramique suivant"}).appendTo("#pano1-" + num_pano);
+        $("<div>", {id: "divPrecedent-" + num_pano, class: "precedent", title: chainesTraduction[langage].panoPrecedent}).appendTo("#pano1-" + num_pano);
+        $("<div>", {id: "divSuivant-" + num_pano, class: "suivant", title: chainesTraduction[langage].panoSuivant}).appendTo("#pano1-" + num_pano);
         $("#divPrecedent-" + num_pano).hide();
         $("#divSuivant-" + num_pano).hide();
         planRentre = false;
@@ -3276,6 +3286,7 @@ function panovisu(num_pano) {
     this.initialisePano = function(contexte)
     {
         var defaut = {
+            langue: "fr_FR",
             xml: 'xml/panovisu.xml',
             fenX: "75%",
             fenY: "80%",
@@ -3285,6 +3296,7 @@ function panovisu(num_pano) {
         };
         contexte = $.extend(defaut, contexte);
         fenPanoramique = contexte.panoramique;
+        langage = contexte.langue;
         $("#" + fenPanoramique).css("overflow", "hidden");
         maxFOV = contexte.maxFOV;
         minFOV = contexte.minFOV;

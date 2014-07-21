@@ -594,6 +594,7 @@ public class EditeurPanovisu extends Application {
                     + "                $(\"article\").height($(window).height()-10);\n"
                     + "                $(\"#pano\").height($(window).height()-10);\n"
                     + "                ajoutePano({\n"
+                    + "                    langue : \""+locale.toString()+"\",\n"
                     + "                    panoramique: \"pano\",\n"
                     + "                    minFOV: 35,\n"
                     + "                    maxFOV: 120,\n"

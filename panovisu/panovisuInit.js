@@ -1,4 +1,25 @@
 var numeroPano = 0;
+    function traduction() {
+        this.panoPrecedent = "panoramique précedent";
+        this.panoSuivant = "panoramique suivant";
+        this.petitePlanete = "Vue petite planète";
+        this.vueNoramale = "Vue Normale";
+        this.aPropos = "A Propos de panoVisu ...";
+        this.afficheMasque="Affiche/masque les éléments";
+        this.vignettes="Vignettes";
+        this.gauche="Déplacement à gauche";
+        this.haut="Déplacement vers le haut";
+        this.bas="Déplacement vers le bas";
+        this.droite="Déplacement à droite";
+        this.zoomPlus="Zoom +";
+        this.zoomMoins="Zoom -";
+        this.aide="Aide";
+        this.pleinEcran="Plein écran (Marche/Arrêt)";
+        this.autorotation="Autorotation (Marche/Arrêt)";
+        this.souris="change le mode de déplacement de la souris";
+}
+
+    var chainesTraduction = new Array();
 
 /**
  * inclusion de fichier javascript
@@ -16,15 +37,15 @@ function include(fileName) {
  * @returns {undefined}
  */
 function prechargeImages(images) {
-    var i = 0;
-    // Créer l'objet
-    imageObj = new Image();
-
-    // Démarrer le préchargement
-    for (i = 0; i <= images.length; i++)
-    {
-        imageObj.src = images[i];
-    }
+//    var i = 0;
+//    // Créer l'objet
+//    imageObj = new Image();
+//
+//    // Démarrer le préchargement
+//    for (i = 0; i <= images.length; i++)
+//    {
+//        imageObj.src = images[i];
+//    }
 }
 
 
@@ -65,6 +86,11 @@ function ajoutePano(parametres) {
     pano.initialisePano(parametres);
     return pano;
 }
+
+include("panovisu/i18n/defaut.js");
+include("panovisu/i18n/fr_FR.js");
+include("panovisu/i18n/en_EN.js");
+include("panovisu/i18n/de_DE.js");
 
 include("panovisu/libs/screenfull.js");
 include("panovisu/libs/jquery/jquery.min.js");
