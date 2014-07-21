@@ -13,6 +13,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
@@ -248,8 +249,7 @@ public class EquiCubeDialogController {
         File[] lstFich = null;
         FileChooser repertChoix = new FileChooser();
         repertChoix.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("fichier JPEG (*.jpg)", "*.jpg"),
-                new FileChooser.ExtensionFilter("fichier BMP (*.bmp)", "*.bmp")
+                new FileChooser.ExtensionFilter("fichier Image (*.jpg/*.bmp)", "*.jpg", "*.bmp")
         );
         File repert = new File(repertFichier + File.separator);
         repertChoix.setInitialDirectory(repert);
@@ -312,8 +312,9 @@ public class EquiCubeDialogController {
     public void afficheFenetre(String typeTransf) throws Exception {
         STEqui2Cube = new Stage(StageStyle.UTILITY);
         STEqui2Cube.initModality(Modality.APPLICATION_MODAL);
-        STEqui2Cube.setResizable(false);
+        STEqui2Cube.setResizable(true);
         myPane = new AnchorPane();
+        myPane.setStyle("-fx-background-color : #ff0000;");
         VBox fenetre = new VBox();
         HBox PChoix = new HBox();
         Pane choixFichier = new Pane();
@@ -346,22 +347,23 @@ public class EquiCubeDialogController {
         myPane.setPrefHeight(400);
         myPane.setPrefWidth(600);
 
-        choixFichier.setPrefHeight(355);
-        choixFichier.setPrefWidth(420);
+        choixFichier.setPrefHeight(350);
+        choixFichier.setPrefWidth(410);
         choixFichier.setStyle("-fx-background-color: #d0d0d0; -fx-border-color: #bbb;");
-        choixTypeFichier.setPrefHeight(355);
+        choixTypeFichier.setPrefHeight(350);
         choixTypeFichier.setPrefWidth(180);
         choixTypeFichier.setStyle("-fx-background-color: #d0d0d0; -fx-border-color: #bbb;");
         PChoix.getChildren().addAll(choixFichier, choixTypeFichier);
         fenetre.setPrefHeight(400);
         fenetre.setPrefWidth(600);
         myPane.getChildren().add(fenetre);
-        PChoix.setPrefHeight(355);
+        PChoix.setPrefHeight(350);
         PChoix.setPrefWidth(600);
         PChoix.setStyle("-fx-background-color: #d0d0d0;");
-        Pboutons.setPrefHeight(45);
+        Pboutons.setPrefHeight(50);
         Pboutons.setPrefWidth(600);
         Pboutons.setStyle("-fx-background-color: #d0d0d0;");
+        fenetre.setStyle("-fx-background-color: #d0d0d0;");
         btnAnnuler.setLayoutX(326);
         btnAnnuler.setLayoutY(10);
         btnValider.setLayoutX(463);
@@ -461,6 +463,24 @@ public class EquiCubeDialogController {
             } else {
                 event.consume();
             }
+        });
+        STEqui2Cube.widthProperty().addListener((ObservableValue<? extends Number> arg0, Number arg1, Number arg2) -> {
+            myPane.setPrefWidth(STEqui2Cube.getWidth());
+            fenetre.setPrefWidth(STEqui2Cube.getWidth());
+            btnAnnuler.setLayoutX(STEqui2Cube.getWidth() - 314);
+            btnValider.setLayoutX(STEqui2Cube.getWidth() - 157);
+            choixFichier.setPrefWidth(STEqui2Cube.getWidth() - 200);
+            listeFichier.setPrefWidth(STEqui2Cube.getWidth() - 240);
+            btnAjouteFichiers.setLayoutX(STEqui2Cube.getWidth() - 341);
+        });
+
+        STEqui2Cube.heightProperty().addListener((ObservableValue<? extends Number> arg0, Number arg1, Number arg2) -> {
+            myPane.setPrefHeight(STEqui2Cube.getHeight());
+            fenetre.setPrefHeight(STEqui2Cube.getHeight());
+            choixFichier.setPrefHeight(STEqui2Cube.getHeight() - 80);
+            PChoix.setPrefHeight(STEqui2Cube.getHeight() - 80);
+            listeFichier.setPrefHeight(STEqui2Cube.getHeight() - 140);
+            btnAjouteFichiers.setLayoutY(STEqui2Cube.getHeight() - 121);
         });
 
         // Dropping over surface

@@ -1,25 +1,45 @@
 var numeroPano = 0;
-    function traduction() {
-        this.panoPrecedent = "panoramique précedent";
-        this.panoSuivant = "panoramique suivant";
-        this.petitePlanete = "Vue petite planète";
-        this.vueNoramale = "Vue Normale";
-        this.aPropos = "A Propos de panoVisu ...";
-        this.afficheMasque="Affiche/masque les éléments";
-        this.vignettes="Vignettes";
-        this.gauche="Déplacement à gauche";
-        this.haut="Déplacement vers le haut";
-        this.bas="Déplacement vers le bas";
-        this.droite="Déplacement à droite";
-        this.zoomPlus="Zoom +";
-        this.zoomMoins="Zoom -";
-        this.aide="Aide";
-        this.pleinEcran="Plein écran (Marche/Arrêt)";
-        this.autorotation="Autorotation (Marche/Arrêt)";
-        this.souris="change le mode de déplacement de la souris";
+var
+        version = "1.0.0",
+        programmeur = "Laurent LANG",
+        anneeProgramme = "2014",
+        site = "http://lemondea360.fr",
+        siteTexte = "le monde à 360°";
+
+function traduction() {
+    this.panoPrecedent = "panoramique précedent";
+    this.panoSuivant = "panoramique suivant";
+    this.petitePlanete = "Vue petite planète";
+    this.vueNoramale = "Vue Normale";
+    this.aPropos = "A Propos de panoVisu ...";
+    this.afficheMasque = "Affiche/masque les éléments";
+    this.vignettes = "Vignettes";
+    this.gauche = "Déplacement à gauche";
+    this.haut = "Déplacement vers le haut";
+    this.bas = "Déplacement vers le bas";
+    this.droite = "Déplacement à droite";
+    this.zoomPlus = "Zoom +";
+    this.zoomMoins = "Zoom -";
+    this.aide = "Aide";
+    this.pleinEcran = "Plein écran (Marche/Arrêt)";
+    this.autorotation = "Autorotation (Marche/Arrêt)";
+    this.souris = "change le mode de déplacement de la souris";
+    this.plan = "Plan de la Visite"
+    this.fenetreInfo = "<b>Panovisu version " +
+            version +
+            "</b><br><br>Un visualiseur de Visites Virtuelles 100% HTML5 - 100% libre<br>" +
+            "Utilise la bibliothèque <a href='http://threejs.org/' target='_blank' title='voir la page de three.js'>Three.js</a>" +
+            "<br><br>&copy; " + programmeur + " (" + anneeProgramme + ")<br>" +
+            "<br>une création : <a href='" + site + "' target='_blank'>" + siteTexte + "</a><br>" +
+            "<div class='panovisuCharge'>&nbsp;</div>cliquez pour fermer la fenêtre";
+    this.fenetreAide = "<span style='font-weight:bolder;font-size:1.2em;font-variant: small-caps;'>Aide à la Navigation</span><br><br><div style='width:100px;height:90px;padding-left:5px;display:inline-block;'><img style='width:90px' src='panovisu/images/aide_souris.png'/></div>" +
+            "<div style='width : 270px;display:inline-block;vertical-align:top; text-align: justify;'>Pour vous déplacer dans la vue cliquez avec le bouton gauche de la souris " +
+            "sur le panoramique puis déplacez la souris en maintenant le bouton de la souris enfoncé<br><br>Vous pouvez également utiliser le menu pour vous déplacer</div>" +
+            "<div><br><br>cliquez pour fermer la fenêtre</div>";
 }
 
-    var chainesTraduction = new Array();
+
+var chainesTraduction = new Array();
 
 /**
  * inclusion de fichier javascript

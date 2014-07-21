@@ -159,7 +159,7 @@ public class GestionnaireInterfaceController {
     /**
      *
      */
-    public static boolean bAfficheTitre=true;
+    public static boolean bAfficheTitre = true;
     public static String titrePoliceNom = "Verdana";
     public static String titrePoliceStyle = "Regular";
     public static String titrePoliceTaille = "12.0";
@@ -833,7 +833,12 @@ public class GestionnaireInterfaceController {
 
             APVisuplan.setOpacity(opacitePlan);
             double positionX = 0;
-            double positionY = IMVisualisation.getLayoutY() + txtTitre.getHeight();
+            double positionY = 0;
+            if (bAfficheTitre) {
+                positionY = IMVisualisation.getLayoutY() + txtTitre.getHeight();
+            } else {
+                positionY = IMVisualisation.getLayoutY();
+            }
             switch (positionPlan) {
                 case "left":
                     positionX = IMVisualisation.getLayoutX();
@@ -938,12 +943,21 @@ public class GestionnaireInterfaceController {
                     }
                     break;
                 case "left":
-                    APVisuVignettes.setPrefHeight(IMVisualisation.getFitHeight() - txtTitre.getHeight());
+                    if (bAfficheTitre) {
+                        APVisuVignettes.setPrefHeight(IMVisualisation.getFitHeight() - txtTitre.getHeight());
+                        APVisuVignettes.setMinHeight(IMVisualisation.getFitHeight() - txtTitre.getHeight());
+                    } else {
+                        APVisuVignettes.setPrefHeight(IMVisualisation.getFitHeight());
+                        APVisuVignettes.setMinHeight(IMVisualisation.getFitHeight());
+                    }
                     APVisuVignettes.setPrefWidth(tailleImageVignettes + 10);
-                    APVisuVignettes.setMinHeight(IMVisualisation.getFitHeight() - txtTitre.getHeight());
                     APVisuVignettes.setMinWidth(tailleImageVignettes + 10);
                     APVisuVignettes.setLayoutX(IMVisualisation.getLayoutX());
-                    APVisuVignettes.setLayoutY(IMVisualisation.getLayoutY() + txtTitre.getHeight());
+                    if (bAfficheTitre) {
+                        APVisuVignettes.setLayoutY(IMVisualisation.getLayoutY() + txtTitre.getHeight());
+                    } else {
+                        APVisuVignettes.setLayoutY(IMVisualisation.getLayoutY());
+                    }
                     fondPrecedent.setLayoutX(IMVisualisation.getLayoutX() + APVisuVignettes.getPrefWidth());
                     if (positHor.equals("left")) {
                         LX = IMVisualisation.getLayoutX() + dXBarre + APVisuVignettes.getPrefWidth();
@@ -953,12 +967,21 @@ public class GestionnaireInterfaceController {
                     }
                     break;
                 case "right":
-                    APVisuVignettes.setPrefHeight(IMVisualisation.getFitHeight() - txtTitre.getHeight());
+                    if (bAfficheTitre) {
+                        APVisuVignettes.setPrefHeight(IMVisualisation.getFitHeight() - txtTitre.getHeight());
+                        APVisuVignettes.setMinHeight(IMVisualisation.getFitHeight() - txtTitre.getHeight());
+                    } else {
+                        APVisuVignettes.setPrefHeight(IMVisualisation.getFitHeight());
+                        APVisuVignettes.setMinHeight(IMVisualisation.getFitHeight());
+                    }
                     APVisuVignettes.setPrefWidth(tailleImageVignettes + 10);
-                    APVisuVignettes.setMinHeight(IMVisualisation.getFitHeight() - txtTitre.getHeight());
                     APVisuVignettes.setMinWidth(tailleImageVignettes + 10);
                     APVisuVignettes.setLayoutX(IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - APVisuVignettes.getPrefWidth());
-                    APVisuVignettes.setLayoutY(IMVisualisation.getLayoutY() + txtTitre.getHeight());
+                    if (bAfficheTitre) {
+                        APVisuVignettes.setLayoutY(IMVisualisation.getLayoutY() + txtTitre.getHeight());
+                    } else {
+                        APVisuVignettes.setLayoutY(IMVisualisation.getLayoutY());
+                    }
                     fondSuivant.setLayoutX(IMVisualisation.getLayoutX() + (IMVisualisation.getFitWidth() - fondPrecedent.getPrefWidth()) - APVisuVignettes.getPrefWidth());
                     if (positHor.equals("right")) {
                         LX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - HBbarreBoutons.getPrefWidth() - dXBarre - APVisuVignettes.getPrefWidth();
@@ -1267,7 +1290,7 @@ public class GestionnaireInterfaceController {
                 + "rotation=" + toggleBoutonRotation + "\n"
                 + "FS=" + toggleBoutonFS + "\n"
                 + "souris=" + toggleBoutonSouris + "\n"
-                + "afficheTitre=" + bAfficheTitre + "\n"                
+                + "afficheTitre=" + bAfficheTitre + "\n"
                 + "titrePolice=" + titrePoliceNom + "\n"
                 + "titrePoliceTaille=" + titrePoliceTaille + "\n"
                 + "titreOpacite=" + Math.round(titreOpacite * 100.d) / 100.d + "\n"
@@ -1466,11 +1489,11 @@ public class GestionnaireInterfaceController {
                     }
                     break;
                 case "afficheTitre":
-                    bAfficheTitre=valeur.equals("true");
+                    bAfficheTitre = valeur.equals("true");
                     break;
                 case "titrePolice":
                     titrePoliceNom = valeur;
-                    break;                    
+                    break;
                 case "titrePoliceTaille":
                     titrePoliceTaille = valeur;
                     break;
@@ -1621,10 +1644,10 @@ public class GestionnaireInterfaceController {
                     bAfficheRadar = valeur.equals("true");
                     break;
                 case "opaciteRadar":
-                    opaciteRadar=Double.parseDouble(valeur);
+                    opaciteRadar = Double.parseDouble(valeur);
                     break;
                 case "tailleRadar":
-                    tailleRadar=Double.parseDouble(valeur);
+                    tailleRadar = Double.parseDouble(valeur);
                     break;
                 case "couleurFondRadar":
                     txtCouleurFondRadar = valeur;
@@ -1648,6 +1671,7 @@ public class GestionnaireInterfaceController {
         txtTitre.setFont(fonte1);
         txtTitre.setPrefHeight(-1);
         txtTitre.setVisible(bAfficheTitre);
+        CBAfficheTitre.setSelected(bAfficheTitre);
         CPCouleurTitre.setValue(Color.valueOf(couleurTitre));
         CPCouleurFondTitre.setValue(Color.valueOf(couleurFondTitre));
         CPCouleurBoutons.setValue(couleurBoutons);
@@ -1935,11 +1959,11 @@ public class GestionnaireInterfaceController {
         ImageView IVBtnPlusTitre = new ImageView(new Image("file:" + "images/plus.png", 20, 20, true, true));
         IVBtnPlusTitre.setLayoutX(VBOutils.getPrefWidth() - 20);
         IVBtnPlusTitre.setLayoutY(11);
-        CBAfficheTitre=new CheckBox(rb.getString("interface.afficheTitre"));
+        CBAfficheTitre = new CheckBox(rb.getString("interface.afficheTitre"));
         CBAfficheTitre.setSelected(bAfficheTitre);
         CBAfficheTitre.setLayoutX(10);
         CBAfficheTitre.setLayoutY(15);
-        
+
         CBListePolices = new ComboBox(listePolices);
         CBListePolices.setValue(titrePoliceNom);
         CBListePolices.setLayoutX(180);
@@ -3258,11 +3282,13 @@ public class GestionnaireInterfaceController {
                     }
                 });
         CBAfficheTitre.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
-            bAfficheTitre=new_val;
+            bAfficheTitre = new_val;
             APVisualisation.getChildren().remove(HBbarreBoutons);
             APVisualisation.getChildren().remove(IVHotSpot);
             APVisualisation.getChildren().remove(IVHotSpotImage);
             afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
+            afficheVignettes();
+            affichePlan();
         });
 
         SLTaillePolice.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {

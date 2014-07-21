@@ -16,4 +16,5 @@ chainesTraduction['de_DE'].zoomMoins = "Zoom minus";
 chainesTraduction['de_DE'].aide = "Hilfe";
 chainesTraduction['de_DE'].pleinEcran = "ganzen Bildschirm (Ein/Aus)";
 chainesTraduction['de_DE'].autorotation = "Autorotationen (Ein/Aus)";
-
+chainesTraduction['de_DE'].souris = "change le mode de déplacement de la souris";
+chainesTraduction['de_DE'].plan = "Besuch Plan";

@@ -73,6 +73,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.StrokeLineJoin;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -640,11 +641,12 @@ public class EditeurPanovisu extends Application {
             try (BufferedWriter bw1 = new BufferedWriter(fw1)) {
                 bw1.write(fichierHTML);
             }
+            DirectoryChooser repertChoix = new DirectoryChooser();
+            repertChoix.setTitle("Choix du repertoire de sauvegarde de la visite");
+            File repert = new File(EditeurPanovisu.repertoireProjet);
+            repertChoix.setInitialDirectory(repert);
+            File repertVisite = repertChoix.showDialog(null);
 
-            File repertVisite = new File(repertoireProjet + File.separator + "visite");
-            if (!repertVisite.exists()) {
-                repertVisite.mkdirs();
-            }
 
             String nomRepertVisite = repertVisite.getAbsolutePath();
             copieDirectory(repertTemp, nomRepertVisite);
@@ -655,7 +657,7 @@ public class EditeurPanovisu extends Application {
             if (Desktop.isDesktopSupported()) {
                 if (Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                     Desktop dt = Desktop.getDesktop();
-                    File fIndex = new File(repertoireProjet + File.separator + "visite" + File.separator + "index.html");
+                    File fIndex = new File(nomRepertVisite + File.separator + "index.html");
                     dt.browse(fIndex.toURI());
                 }
             }
@@ -3421,7 +3423,7 @@ public class EditeurPanovisu extends Application {
         imgAjouterPano.setOpacity(0.3);
 
         /*
-         Bouton Ajoute Planramique
+         Bouton Ajoute Panoramique
          */
         ScrollPane SPBtnAjoutePlan = new ScrollPane();
         SPBtnAjoutePlan.getStyleClass().add("menuBarreOutils");
@@ -3460,6 +3462,22 @@ public class EditeurPanovisu extends Application {
         Separator sepImages1 = new Separator(Orientation.VERTICAL);
         sepImages1.prefHeight(200);
         barreBouton.getChildren().add(sepImages1);
+        /*
+         Bouton equi -> faces de  Cube
+         */
+        ScrollPane SPBtnEqui2Cube = new ScrollPane();
+        SPBtnEqui2Cube.getStyleClass().add("menuBarreOutils");
+        SPBtnEqui2Cube.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        SPBtnEqui2Cube.setPrefHeight(35);
+        SPBtnEqui2Cube.setPrefWidth(109);
+
+        HBox.setMargin(SPBtnEqui2Cube, new Insets(5, 15, 0, 250));
+        imgEqui2Cube = new ImageView(new Image("file:" + repertAppli + File.separator + "images/equi2cube.png"));
+        SPBtnEqui2Cube.setContent(imgEqui2Cube);
+        Tooltip t6 = new Tooltip(rb.getString("outilsEqui2Cube"));
+        t6.setStyle(tooltipStyle);
+        SPBtnEqui2Cube.setTooltip(t6);
+        barreBouton.getChildren().add(SPBtnEqui2Cube);
 
         /*
          Bouton faces de cube -> equi
@@ -3470,29 +3488,13 @@ public class EditeurPanovisu extends Application {
         SPBtnCube2Equi.setPrefHeight(35);
         SPBtnCube2Equi.setPrefWidth(109);
 
-        HBox.setMargin(SPBtnCube2Equi, new Insets(5, 25, 0, 250));
+        HBox.setMargin(SPBtnCube2Equi, new Insets(5, 25, 0, 0));
         imgCube2Equi = new ImageView(new Image("file:" + repertAppli + File.separator + "images/cube2equi.png"));
         SPBtnCube2Equi.setContent(imgCube2Equi);
         Tooltip t5 = new Tooltip(rb.getString("outilsCube2Equi"));
         t5.setStyle(tooltipStyle);
         SPBtnCube2Equi.setTooltip(t5);
         barreBouton.getChildren().add(SPBtnCube2Equi);
-        /*
-         Bouton equi -> faces de  Cube
-         */
-        ScrollPane SPBtnEqui2Cube = new ScrollPane();
-        SPBtnEqui2Cube.getStyleClass().add("menuBarreOutils");
-        SPBtnEqui2Cube.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        SPBtnEqui2Cube.setPrefHeight(35);
-        SPBtnEqui2Cube.setPrefWidth(109);
-
-        HBox.setMargin(SPBtnEqui2Cube, new Insets(5, 15, 0, 0));
-        imgEqui2Cube = new ImageView(new Image("file:" + repertAppli + File.separator + "images/equi2cube.png"));
-        SPBtnEqui2Cube.setContent(imgEqui2Cube);
-        Tooltip t6 = new Tooltip(rb.getString("outilsEqui2Cube"));
-        t6.setStyle(tooltipStyle);
-        SPBtnEqui2Cube.setTooltip(t6);
-        barreBouton.getChildren().add(SPBtnEqui2Cube);
 
         myPane.getChildren().addAll(menuPrincipal, barreBouton);
         racine.getChildren().add(myPane);

@@ -11,11 +11,6 @@
  * 
  * @returns {window|String}
  */
-version = "1.0.0";
-programmeur = "Laurent LANG";
-anneeProgramme = "2014";
-site = "http://lemondea360.fr";
-siteTexte = "le monde à 360°";
 
 function estTactile() {
     return !!('ontouchstart' in window);
@@ -1931,8 +1926,9 @@ function panovisu(num_pano) {
             transformTitre = $("#planTitre-" + num_pano).css("transform");
             console.log("transformation : " + $("#planTitre-" + num_pano).css("transform"));
             $("#planTitre-" + num_pano).css({
-                width: "44px",
+                width: "160px",
                 height: "30px",
+                textAlign : "center",
                 paddingLeft: "6px",
                 transformOrigin: "0 0",
                 transform: "rotate(90deg)",
@@ -1941,7 +1937,7 @@ function panovisu(num_pano) {
                 top: positPlan
             });
             $("#planTitre-" + num_pano).show();
-            $("#planTitre-" + num_pano).html("plan");
+            $("#planTitre-" + num_pano).html(chainesTraduction[langage].plan);
             if (planPosition === "left") {
                 $("#planTitre-" + num_pano).css(planPosition, $("#planImg-" + num_pano).width() + 20 + $("#planTitre-" + num_pano).height() + "px");
                 planRentreGauche();
@@ -2359,10 +2355,10 @@ function panovisu(num_pano) {
                 texture.needsUpdate = true;
                 nbPanoCharges += 1;
                 if (nbPanoCharges < 6)
-                    $("#panovisuCharge-" + num_pano).html(nbPanoCharges + "/6");
+                    $(".panovisuCharge").html(nbPanoCharges + "/6");
                 else
                 {
-                    $("#panovisuCharge-" + num_pano).html("&nbsp;");
+                    $(".panovisuCharge").html("&nbsp;");
                     afficheBarre(pano.width(), pano.height());
                     afficheInfoTitre();
                     if (multiReso === "oui" && niveau < nombreNiveaux - 1)
@@ -2434,10 +2430,10 @@ function panovisu(num_pano) {
             texture.needsUpdate = true;
             nbPanoCharges += 1;
             if (nbPanoCharges < 6)
-                $("#panovisuCharge-" + num_pano).html(nbPanoCharges + "/6");
+                $(".panovisuCharge").html(nbPanoCharges + "/6");
             else
             {
-                $("#panovisuCharge-" + num_pano).html("&nbsp;");
+                $(".panovisuCharge").html("&nbsp;");
                 afficheBarre(pano.width(), pano.height());
                 afficheInfoTitre();
             }
@@ -2454,7 +2450,7 @@ function panovisu(num_pano) {
      */
     function initPanoCube() {
 
-        $("#panovisuCharge-" + num_pano).html("0/6");
+        $(".panovisuCharge" ).html("0/6");
         camera = new THREE.PerspectiveCamera(fov, pano.width() / pano.height(), 1, 1100);
         scene = new THREE.Scene();
         if (!isReloaded)
@@ -2766,13 +2762,7 @@ function panovisu(num_pano) {
     function creeInfo(fenetrePanoramique) {
         $("<div>", {id: "infoPanovisu-" + num_pano, class: "infoPanovisu"}).appendTo("#" + fenetrePanoramique);
         $("#infoPanovisu-" + num_pano).hide();
-        panoInfo = "<b>Panovisu version " +
-                version +
-                "</b><br><br>Un visualiseur 100% HTML5 - 100% libre<br>" +
-                "Utilise la bibliothèque <a href='http://threejs.org/' target='_blank' title='voir la page de three.js'>Three.js</a>" +
-                "<br><br>&copy; " + programmeur + " (" + anneeProgramme + ")<br>" +
-                "<br>une création : <a href='" + site + "' target='_blank'>" + siteTexte + "</a><br>" +
-                "<div id='panovisuCharge-" + num_pano + "'>&nbsp;</div>cliquez pour fermer la fenêtre";
+        panoInfo = chainesTraduction[langage].fenetreInfo;
         $("#infoPanovisu-" + num_pano).css({width: "450px", height: "190px"});
         $("#infoPanovisu-" + num_pano).html(panoInfo);
     }
@@ -2784,10 +2774,7 @@ function panovisu(num_pano) {
     function creeAide(fenetrePanoramique) {
         $("<div>", {id: "aidePanovisu-" + num_pano, class: "aidePanovisu"}).appendTo("#" + fenetrePanoramique);
         $("#aidePanovisu-" + num_pano).hide();
-        panoInfo = "<span style='font-weight:bolder;font-size:1.2em;font-variant: small-caps;'>Aide à la Navigation</span><br><br><div style='width:100px;height:90px;padding-left:5px;display:inline-block;'><img style='width:90px' src='panovisu/images/aide_souris.png'/></div>" +
-                "<div style='width : 270px;display:inline-block;vertical-align:top; text-align: justify;'>Pour vous déplacer dans la vue cliquez avec le bouton gauche de la souris " +
-                "sur le panoramique puis déplacez la souris en maintenant le bouton de la souris enfoncé<br><br>Vous pouvez également utiliser le menu pour vous déplacer</div>" +
-                "<div><br><br>cliquez pour fermer la fenêtre</div>";
+        panoInfo = chainesTraduction[langage].fenetreAide;
         $("#aidePanovisu-" + num_pano).css({width: "400px", height: "220px"});
         $("#aidePanovisu-" + num_pano).html(panoInfo);
     }

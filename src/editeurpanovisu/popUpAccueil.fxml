@@ -37,7 +37,6 @@
          </font>
       </Label>
       <Group layoutX="212.0" layoutY="-207.0" />
-      <Hyperlink fx:id="leMondea360" layoutX="339.0" layoutY="52.0" onAction="#handleOuvreLien" text="le monde à 360°" />
-      <Label layoutX="263.0" layoutY="55.0" text="Une création :" />
+      <Hyperlink fx:id="leMondea360" layoutX="260.0" layoutY="52.0" onAction="#handleOuvreLien" text="Une création : le monde à 360°" />
    </children>
 </AnchorPane>

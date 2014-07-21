@@ -1,7 +1,7 @@
 
 chainesTraduction['en_EN'] = new traduction();
 chainesTraduction['en_EN'].panoPrecedent = "Next panorama";
-chainesTraduction['en_EN'].panoSuivant = "Prev. panorama";
+chainesTraduction['en_EN'].panoSuivant = "Previous panorama";
 chainesTraduction['en_EN'].petitePlanete = "Little planet view";
 chainesTraduction['en_EN'].vueNoramale = "Normal view";
 chainesTraduction['en_EN'].aPropos = "About panoVisu ...";
@@ -16,3 +16,5 @@ chainesTraduction['en_EN'].zoomMoins = "zoom out";
 chainesTraduction['en_EN'].aide = "Help";
 chainesTraduction['en_EN'].pleinEcran = "Full screen (on/off)";
 chainesTraduction['en_EN'].autorotation = "Autorotation (on/off)";
+chainesTraduction['en_EN'].souris = "change mouse mode";
+chainesTraduction['en_EN'].plan = "tour plan";
