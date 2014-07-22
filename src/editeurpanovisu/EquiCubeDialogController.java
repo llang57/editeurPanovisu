@@ -13,14 +13,15 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
 import javafx.scene.control.ToggleGroup;
@@ -66,6 +67,8 @@ public class EquiCubeDialogController {
     static private CheckBox CBSharpen;
     static private Slider SLSharpen;
     static private Label LBLSharpen;
+    static private ProgressBar bar;
+    static private Label lblTermine;
 
     final ToggleGroup grpTypeFichier = new ToggleGroup();
     /**
@@ -105,8 +108,7 @@ public class EquiCubeDialogController {
      * @param j
      */
     private void traiteFichier(String nomFichier, int j) {
-        listeFichier.getItems().remove(j);
-        listeFichier.getItems().add(j, "traité : " + nomFichier);
+        //System.out.println("Traitement Lancé " + nomFichier + " => " + j);
 
         if (typeTransformation.equals(EquiCubeDialogController.EQUI2CUBE)) {
             String nomFich1 = nomFichier.substring(0, nomFichier.length() - 4);
@@ -224,21 +226,53 @@ public class EquiCubeDialogController {
                             + "Veuillez patienter jusqu'à la fin du traitement"
                             + "\n\nMerci")
                     .showWarning();
-            final Label lblTermine = new Label();
+            lblTermine = new Label();
             lblTermine.setText("Traitement en cours");
-            lblTermine.setLayoutX(14);
-            lblTermine.setLayoutY(180);
+            lblTermine.setLayoutX(24);
+            lblTermine.setLayoutY(200);
             choixTypeFichier.getChildren().add(lblTermine);
-            for (int i = 0; i < listeFichier.getItems().size(); i++) {
-                final int j = i;
-                final String nomFich = (String) listeFichier.getItems().get(j);
-                Platform.runLater(() -> {
-                    traiteFichier(nomFich, j);
-                });
-            }
-            lblTermine.setText("Traitement terminé");
-            traitementEffectue = true;
+            bar.setId("bar");
+            lblTermine.setId("lblTermine");
+            bar.setVisible(true);
+            Task traitementTask;
+            traitementTask = traitement();
+            bar.progressProperty().unbind();
+            bar.progressProperty().bind(traitementTask.progressProperty());
+            lblTermine.textProperty().unbind();
+            lblTermine.textProperty().bind(traitementTask.messageProperty());
+            new Thread(traitementTask).start();
         }
+    }
+
+    public Task traitement() {
+        return new Task() {
+            @Override
+            protected Object call() throws Exception {
+                //System.out.println(listeFichier.getItems().size() + " Lancement ");
+                for (int i1 = 0; i1 < listeFichier.getItems().size(); i1++) {
+                    String nomFich = (String) listeFichier.getItems().get(i1);
+                    traiteFichier(nomFich, i1);
+                    updateProgress(i1 + 1, listeFichier.getItems().size());
+                    updateMessage("Traitement en cours " + (i1 + 1) + "/" + listeFichier.getItems().size());
+                    Thread.sleep(100);
+                }
+                return true;
+            }
+
+            @Override
+            protected void succeeded() {
+                super.succeeded();
+                bar.setVisible(false);
+                updateMessage("Traitement Terminé");
+                traitementEffectue = true;
+                listeFichier.getItems().clear();
+                for (File lstFichier1 : lstFichier) {
+                    String nomFich = lstFichier1.getAbsolutePath();
+                    listeFichier.getItems().add("Traité => " + nomFich);
+                }
+            }
+
+        };
     }
 
     /**
@@ -429,6 +463,12 @@ public class EquiCubeDialogController {
         LBLSharpen.setDisable(true);
 
         choixTypeFichier.getChildren().addAll(lblType, RBBmp, RBJpeg, CBSharpen, SLSharpen, LBLSharpen);
+        bar = new ProgressBar();
+        bar.setLayoutX(40);
+        bar.setLayoutY(160);
+        bar.setVisible(false);
+        choixTypeFichier.getChildren().add(bar);
+
         Pboutons.getChildren().addAll(btnAnnuler, btnValider);
         fenetre.getChildren().addAll(PChoix, Pboutons);
         Scene scene2 = new Scene(myPane);
@@ -447,7 +487,7 @@ public class EquiCubeDialogController {
             lstFichier = choixFichiers();
             if (lstFichier != null) {
                 if (traitementEffectue) {
-                    listeFichier.getItems().remove(0, listeFichier.getItems().size());
+                    listeFichier.getItems().clear();
                     traitementEffectue = false;
                 }
                 for (File lstFichier1 : lstFichier) {

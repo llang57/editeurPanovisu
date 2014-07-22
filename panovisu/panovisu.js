@@ -510,10 +510,72 @@ function panovisu(num_pano) {
                 }, 100);
                 evenement.preventDefault();
             });
+            
     $(document).on("mouseup mouseleave", "#xmoins-" + num_pano + ",#xplus-" + num_pano + ",#ymoins-" + num_pano + ",#yplus-" + num_pano, function(evenement) {
         clearInterval(timer);
         evenement.preventDefault();
     });
+    
+    $(document).on("mousedown", "#zoomPlus-" + num_pano,
+            function(evenement) {
+                if (bAfficheInfo)
+                {
+                    $("#infoPanovisu-" + num_pano).fadeOut(2000, function() {
+                        $(this).css({display: "none"});
+                        bAfficheInfo = false;
+                    });
+
+                }
+                clearInterval(timer);
+                timer = setInterval(function() {
+                    fov -= 1;
+                    zoom();
+                }, 100);
+                evenement.preventDefault();
+            });
+    $(document).on("mouseup mouseleave", "#zoomPlus-" + num_pano, function(evenement) {
+        clearInterval(timer);
+        evenement.preventDefault();
+    });
+
+
+    $(document).on("click", "#zoomMoins-" + num_pano, function(evenement) {
+        if (bAfficheInfo)
+        {
+            $("#infoPanovisu-" + num_pano).fadeOut(2000, function() {
+                $(this).css({display: "none"});
+                bAfficheInfo = false;
+            });
+
+        }
+        fov += 1;
+        zoom();
+        evenement.preventDefault();
+    });
+
+    $(document).on("mousedown", "#zoomMoins-" + num_pano,
+            function(evenement) {
+                if (bAfficheInfo)
+                {
+                    $("#infoPanovisu-" + num_pano).fadeOut(2000, function() {
+                        $(this).css({display: "none"});
+                        bAfficheInfo = false;
+                    });
+
+                }
+                clearInterval(timer);
+                timer = setInterval(function() {
+                    fov += 1;
+                    zoom();
+                }, 100);
+                evenement.preventDefault();
+            });
+    $(document).on("mouseup mouseleave", "#zoomMoins-" + num_pano, function(evenement) {
+        clearInterval(timer);
+        evenement.preventDefault();
+    });
+
+
     /**
      * Gestion des clicks souris
      * 
@@ -532,9 +594,8 @@ function panovisu(num_pano) {
                 longitude += dx;
                 latitude += dy;
                 affiche();
-                evenement.preventDefault();
             });
-    $(document).on("click", "#zoomPlus-" + num_pano, function() {
+    $(document).on("click", "#zoomPlus-" + num_pano, function(evenement) {
         if (bAfficheInfo)
         {
             $("#infoPanovisu-" + num_pano).fadeOut(2000, function() {
@@ -545,19 +606,11 @@ function panovisu(num_pano) {
         }
         fov -= 1;
         zoom();
+        evenement.preventDefault();
     });
-    $(document).on("click", "#zoomMoins-" + num_pano, function() {
-        if (bAfficheInfo)
-        {
-            $("#infoPanovisu-" + num_pano).fadeOut(2000, function() {
-                $(this).css({display: "none"});
-                bAfficheInfo = false;
-            });
 
-        }
-        fov += 1;
-        zoom();
-    });
+
+
     $(document).on("click", "#souris-" + num_pano, function() {
         mode = 1 - mode;
     });
@@ -1928,7 +1981,7 @@ function panovisu(num_pano) {
             $("#planTitre-" + num_pano).css({
                 width: "160px",
                 height: "30px",
-                textAlign : "center",
+                textAlign: "center",
                 paddingLeft: "6px",
                 transformOrigin: "0 0",
                 transform: "rotate(90deg)",
@@ -2450,7 +2503,7 @@ function panovisu(num_pano) {
      */
     function initPanoCube() {
 
-        $(".panovisuCharge" ).html("0/6");
+        $(".panovisuCharge").html("0/6");
         camera = new THREE.PerspectiveCamera(fov, pano.width() / pano.height(), 1, 1100);
         scene = new THREE.Scene();
         if (!isReloaded)

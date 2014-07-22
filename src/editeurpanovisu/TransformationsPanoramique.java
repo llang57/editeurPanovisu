@@ -58,7 +58,6 @@ public class TransformationsPanoramique {
         double blue;
         double pixelX;
         double pixelY;
-
         for (int pX = 0; pX < tailleCube; pX++) {
             for (int pY = 0; pY < tailleCube; pY++) {
                 double X = (2.d * (double) pX - tailleCube) / tailleCube;
@@ -109,6 +108,7 @@ public class TransformationsPanoramique {
                 PWFront.setColor(pX, pY, new Color(red, green, blue, 1));
 
             }
+
         }
         for (int pX = 0; pX < tailleCube; pX++) {
             for (int pY = 0; pY < tailleCube; pY++) {
