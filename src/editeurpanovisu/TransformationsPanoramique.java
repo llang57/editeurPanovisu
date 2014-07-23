@@ -5,6 +5,8 @@
  */
 package editeurpanovisu;
 
+import static editeurpanovisu.EquiCubeDialogController.barreImage;
+import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.PixelWriter;
@@ -18,9 +20,8 @@ import javafx.scene.paint.Color;
 public class TransformationsPanoramique {
 
     /**
-     * Constante rapport de taille d'image 
-     * transformation entre cube equi
-     * Taille face de cube = RAPPORTCUBEEQUI*TailleEqui X RAPPORTCUBEEQUI*TailleEqui
+     * Constante rapport de taille d'image transformation entre cube equi Taille
+     * face de cube = RAPPORTCUBEEQUI*TailleEqui X RAPPORTCUBEEQUI*TailleEqui
      */
     public static final double RAPPORTCUBEEQUI = 0.3183;
 
@@ -30,7 +31,7 @@ public class TransformationsPanoramique {
      * @param taille
      * @return
      */
-    public static Image[] equi2cube(Image equi, int taille) {
+    public static Image[] equi2cube(Image equi, int taille) throws InterruptedException {
         PixelReader PREqui = equi.getPixelReader();
         WritableImage[] cube = new WritableImage[6];
         int tailleEqui = (int) equi.getWidth();
@@ -58,6 +59,11 @@ public class TransformationsPanoramique {
         double blue;
         double pixelX;
         double pixelY;
+        System.out.println("Face 1");
+        Platform.runLater(() -> {
+            barreImage.setProgress(0.0f);
+        });
+        Thread.sleep(50);
         for (int pX = 0; pX < tailleCube; pX++) {
             for (int pY = 0; pY < tailleCube; pY++) {
                 double X = (2.d * (double) pX - tailleCube) / tailleCube;
@@ -110,6 +116,12 @@ public class TransformationsPanoramique {
             }
 
         }
+        Platform.runLater(() -> {
+            barreImage.setProgress(1.0f / 6.0f);
+        });
+        Thread.sleep(50);
+
+        System.out.println("Face 2");
         for (int pX = 0; pX < tailleCube; pX++) {
             for (int pY = 0; pY < tailleCube; pY++) {
 
@@ -164,6 +176,11 @@ public class TransformationsPanoramique {
 //                PWBehind.setColor(tailleCube - pX - 1, tailleCube - pY - 1, PREqui.getColor(pixelX, pixelY));
             }
         }
+        System.out.println("Face 3");
+        Platform.runLater(() -> {
+            barreImage.setProgress(2.0f / 6.0f);
+        });
+        Thread.sleep(50);
         for (int pY = 0; pY < tailleCube; pY++) {
             for (int pZ = 0; pZ < tailleCube; pZ++) {
 
@@ -218,6 +235,12 @@ public class TransformationsPanoramique {
 //                PWLeft.setColor(pY, tailleCube - pZ - 1, PREqui.getColor(pixelX, pixelY));
             }
         }
+        System.out.println("Face 4");
+        Platform.runLater(() -> {
+            barreImage.setProgress(3.0f / 6.0f);
+        });
+        Thread.sleep(50);
+
         for (int pY = 0; pY < tailleCube; pY++) {
             for (int pZ = 0; pZ < tailleCube; pZ++) {
 
@@ -272,6 +295,12 @@ public class TransformationsPanoramique {
 //                PWRight.setColor(pY, tailleCube - pZ - 1, PREqui.getColor(pixelX, pixelY));
             }
         }
+        System.out.println("Face 5");
+        Platform.runLater(() -> {
+            barreImage.setProgress(4.0f / 6.0f);
+        });
+        Thread.sleep(50);
+
         for (int pX = 0; pX < tailleCube; pX++) {
             for (int pZ = 0; pZ < tailleCube; pZ++) {
 
@@ -329,6 +358,12 @@ public class TransformationsPanoramique {
 //                PWTop.setColor(tailleCube - pZ - 1, tailleCube - pX - 1, PREqui.getColor(pixelX, pixelY));
             }
         }
+        System.out.println("Face 6");
+        Platform.runLater(() -> {
+            barreImage.setProgress(5.0f / 6.0f);
+        });
+        Thread.sleep(50);
+
         for (int pX = 0; pX < tailleCube; pX++) {
             for (int pZ = 0; pZ < tailleCube; pZ++) {
 
@@ -386,6 +421,10 @@ public class TransformationsPanoramique {
 //                PWBottom.setColor(tailleCube - pZ - 1, pX, PREqui.getColor(pixelX, pixelY));
             }
         }
+        Platform.runLater(() -> {
+            barreImage.setProgress(1.0f);
+        });
+        Thread.sleep(50);
 
         return cube;
     }
@@ -401,7 +440,7 @@ public class TransformationsPanoramique {
      * @param taille si taille = -1 calcul de la taille optimale
      * @return Image equirectangulaire
      */
-    public static Image cube2rect(Image front, Image left, Image right, Image behind, Image top, Image bottom, int taille) {
+    public static Image cube2rect(Image front, Image left, Image right, Image behind, Image top, Image bottom, int taille) throws InterruptedException {
         PixelReader PRFront = front.getPixelReader();
         PixelReader PRLeft = left.getPixelReader();
         PixelReader PRRight = right.getPixelReader();
@@ -429,6 +468,11 @@ public class TransformationsPanoramique {
         double green;
         double blue;
         for (int X = 0; X < tailleEqui; X++) {
+            final int XX=X;
+            final float tailleEqui1=(float)tailleEqui;
+            Platform.runLater(() -> {
+                barreImage.setProgress(XX/tailleEqui1);
+            });
             for (int Y = 0; Y < tailleEqui / 2; Y++) {
                 theta = ((double) X) * rapport - Math.PI;
                 phi = ((double) Y) * rapport;

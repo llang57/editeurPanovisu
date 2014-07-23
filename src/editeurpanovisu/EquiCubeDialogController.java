@@ -16,6 +16,7 @@ import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -53,10 +54,11 @@ public class EquiCubeDialogController {
 
     private static final ResourceBundle rb = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", EditeurPanovisu.locale);
 
-    private static Stage STEqui2Cube;
-    private static AnchorPane myPane;
+    private static final Stage STEqui2Cube = new Stage(StageStyle.UTILITY);
+    private static final AnchorPane myPane = new AnchorPane();
     private String typeTransformation;
-    static private ListView listeFichier;
+    static private final ListView listeFichier = new ListView();
+    public static final ProgressBar barreImage=new ProgressBar();
     static private Button btnAnnuler;
     static private Button btnValider;
     static private Button btnAjouteFichiers;
@@ -107,8 +109,8 @@ public class EquiCubeDialogController {
      * @param nomFichier
      * @param j
      */
-    private void traiteFichier(String nomFichier, int j) {
-        //System.out.println("Traitement Lancé " + nomFichier + " => " + j);
+    private void traiteFichier(String nomFichier, int j) throws InterruptedException {
+        System.out.println("Traitement Lancé \"" + nomFichier + "\" => " + j);
 
         if (typeTransformation.equals(EquiCubeDialogController.EQUI2CUBE)) {
             String nomFich1 = nomFichier.substring(0, nomFichier.length() - 4);
@@ -229,18 +231,23 @@ public class EquiCubeDialogController {
             lblTermine = new Label();
             lblTermine.setText("Traitement en cours");
             lblTermine.setLayoutX(24);
-            lblTermine.setLayoutY(200);
+            lblTermine.setLayoutY(220);
             choixTypeFichier.getChildren().add(lblTermine);
             bar.setId("bar");
             lblTermine.setId("lblTermine");
             bar.setVisible(true);
+            barreImage.setVisible(true);
+            bar.setProgress(0.001);
+            barreImage.setProgress(0.001);
             Task traitementTask;
             traitementTask = traitement();
             bar.progressProperty().unbind();
             bar.progressProperty().bind(traitementTask.progressProperty());
             lblTermine.textProperty().unbind();
             lblTermine.textProperty().bind(traitementTask.messageProperty());
-            new Thread(traitementTask).start();
+            Thread th1 = new Thread(traitementTask);
+            th1.setDaemon(true);
+            th1.start();
         }
     }
 
@@ -248,14 +255,35 @@ public class EquiCubeDialogController {
         return new Task() {
             @Override
             protected Object call() throws Exception {
+                myPane.setCursor(Cursor.WAIT);
+                Platform.runLater(() -> {
+                    for (int j = 0; j < listeFichier.getItems().size(); j++) {
+                        String nomFich1 = (String) listeFichier.getItems().get(j);
+                        listeFichier.getItems().set(j, "A Traiter => " + nomFich1);
+                    }
+                });
+                Thread.sleep(200);
+
                 //System.out.println(listeFichier.getItems().size() + " Lancement ");
+                updateProgress(0.0001f, listeFichier.getItems().size());
                 for (int i1 = 0; i1 < listeFichier.getItems().size(); i1++) {
-                    String nomFich = (String) listeFichier.getItems().get(i1);
+                    updateMessage("Traitement en cours " + (i1 + 1) + "/" + listeFichier.getItems().size());
+                    String nomFich = ((String) listeFichier.getItems().get(i1)).split("> ")[1];
+                    final int ii = i1;
+                    Platform.runLater(() -> {
+                        listeFichier.getItems().set(ii, "Traitement en cours => " + nomFich);
+                    });
+                    Thread.sleep(100);
+                    System.out.println("Début");
                     traiteFichier(nomFich, i1);
                     updateProgress(i1 + 1, listeFichier.getItems().size());
-                    updateMessage("Traitement en cours " + (i1 + 1) + "/" + listeFichier.getItems().size());
+                    System.out.println("Fin");
+                    Platform.runLater(() -> {
+                        listeFichier.getItems().set(ii, "Traité => " + nomFich);
+                    });
                     Thread.sleep(100);
                 }
+                myPane.setCursor(Cursor.DEFAULT);
                 return true;
             }
 
@@ -263,13 +291,9 @@ public class EquiCubeDialogController {
             protected void succeeded() {
                 super.succeeded();
                 bar.setVisible(false);
+                barreImage.setVisible(false);
                 updateMessage("Traitement Terminé");
                 traitementEffectue = true;
-                listeFichier.getItems().clear();
-                for (File lstFichier1 : lstFichier) {
-                    String nomFich = lstFichier1.getAbsolutePath();
-                    listeFichier.getItems().add("Traité => " + nomFich);
-                }
             }
 
         };
@@ -344,15 +368,13 @@ public class EquiCubeDialogController {
      * @throws Exception
      */
     public void afficheFenetre(String typeTransf) throws Exception {
-        STEqui2Cube = new Stage(StageStyle.UTILITY);
         STEqui2Cube.initModality(Modality.APPLICATION_MODAL);
         STEqui2Cube.setResizable(true);
-        myPane = new AnchorPane();
         myPane.setStyle("-fx-background-color : #ff0000;");
+
         VBox fenetre = new VBox();
         HBox PChoix = new HBox();
         Pane choixFichier = new Pane();
-        listeFichier = new ListView();
         btnAjouteFichiers = new Button("Ajouter des Fichiers");
         choixTypeFichier = new Pane();
         Label lblType = new Label("Type des Fichiers de sortie");
@@ -463,11 +485,17 @@ public class EquiCubeDialogController {
         LBLSharpen.setDisable(true);
 
         choixTypeFichier.getChildren().addAll(lblType, RBBmp, RBJpeg, CBSharpen, SLSharpen, LBLSharpen);
+        barreImage.setLayoutX(40);
+        barreImage.setLayoutY(160);
+        barreImage.setStyle("-fx-accent : #0000bb");
+        barreImage.setVisible(false);
+        choixTypeFichier.getChildren().add(barreImage);
         bar = new ProgressBar();
         bar.setLayoutX(40);
-        bar.setLayoutY(160);
-        bar.setVisible(false);
+        bar.setLayoutY(190);
+        barreImage.setStyle("-fx-accent : #00bb00");
         choixTypeFichier.getChildren().add(bar);
+        bar.setVisible(false);
 
         Pboutons.getChildren().addAll(btnAnnuler, btnValider);
         fenetre.getChildren().addAll(PChoix, Pboutons);

@@ -473,16 +473,16 @@ function panovisu(num_pano) {
         switch (id)
         {
             case "xmoins" :
-                dx -= 1;
+                dx -= 0.5;
                 break;
             case "xplus" :
-                dx += 1;
+                dx += 0.5;
                 break;
             case "ymoins" :
-                dy -= 1;
+                dy += 0.5;
                 break;
             case "yplus" :
-                dy += 1;
+                dy -= 0.5;
                 break;
         }
 
@@ -507,15 +507,15 @@ function panovisu(num_pano) {
                     longitude += dx;
                     latitude += dy;
                     affiche();
-                }, 100);
+                }, 50);
                 evenement.preventDefault();
             });
-            
+
     $(document).on("mouseup mouseleave", "#xmoins-" + num_pano + ",#xplus-" + num_pano + ",#ymoins-" + num_pano + ",#yplus-" + num_pano, function(evenement) {
         clearInterval(timer);
         evenement.preventDefault();
     });
-    
+
     $(document).on("mousedown", "#zoomPlus-" + num_pano,
             function(evenement) {
                 if (bAfficheInfo)
@@ -591,8 +591,8 @@ function panovisu(num_pano) {
 
                 }
                 dXdY($(this).attr('class'));
-                longitude += dx;
-                latitude += dy;
+                longitude += 2*dx;
+                latitude += 2*dy;
                 affiche();
             });
     $(document).on("click", "#zoomPlus-" + num_pano, function(evenement) {
@@ -1468,7 +1468,7 @@ function panovisu(num_pano) {
                 backgroundColor: "rgba(0,0,0,0.7)"
             });
 
-            $("<img>", {id: "hsImg-" + num_pano, class: "hsImg", src: image, title: "Cliquz sur l'image pour quitter"}).appendTo("#divImage-" + num_pano);
+            $("<img>", {id: "hsImg-" + num_pano, class: "hsImg", src: image, title: "Cliquez sur l'image pour quitter"}).appendTo("#divImage-" + num_pano);
 
 
             $("#hsImg-" + num_pano).css({
@@ -1477,12 +1477,13 @@ function panovisu(num_pano) {
                 marginTop: mrgY + "px",
                 marginLeft: mrgX + "px"
             });
-
+            topCroix = haut - hautImg - posY - mrgY - 15;
+            rightCroix = lrg - largImg - posX - mrgX - 15;
             $("<img>", {
                 id: "imgFerme-" + num_pano,
                 class: "imgFerme",
                 src: "panovisu/images/fermer.png",
-                style: "height :30px;width : 30px;position : absolute;top:10px;right : " + posY + "px;"
+                style: "height :30px;width : 30px;position : absolute;top:" + topCroix + "px;right : " + rightCroix + "px;"
             }).appendTo("#divImage-" + num_pano);
 
             $("#divImage-" + num_pano).show();
@@ -1520,7 +1521,6 @@ function panovisu(num_pano) {
             height: Math.round(haut - 2 * posY) + "px",
             width: Math.round(lrg - 2 * posX) + "px"
         }).appendTo("#divHTML-" + num_pano);
-
         $("<img>", {
             id: "imgFerme-" + num_pano,
             class: "imgFerme",
