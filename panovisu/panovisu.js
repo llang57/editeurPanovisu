@@ -126,7 +126,8 @@ function panovisu(num_pano) {
             littlePlanetView = false,
             suivant,
             precedent,
-            langage = "fr_FR"
+            langage = "fr_FR",
+            clavierActif = false
             ;
     /**
      * Variables par défaut pour l'affichage du panoramique
@@ -236,6 +237,7 @@ function panovisu(num_pano) {
             radarOpacite,
             radarCouleurFond,
             radarCouleurLigne
+
             ;
 
 
@@ -243,8 +245,6 @@ function panovisu(num_pano) {
      * Evènements souris / Touche sur écran
      * 
      */
-
-
 
     $('.context-menu-one').on('click', function(e) {
         console.log('clicked', this);
@@ -303,8 +303,9 @@ function panovisu(num_pano) {
         }
     });
 
+
+
     $(document).on("mousedown", "#container-" + num_pano, function(evenement) {
-        evenement.preventDefault();
         if (evenement.which === 1) {
             if (bAfficheInfo)
             {
@@ -333,8 +334,9 @@ function panovisu(num_pano) {
             }
 
         }
-
+        evenement.preventDefault();
     });
+
     $(document).on("mousemove", "#container-" + num_pano, function(evenement) {
 
         if (isUserInteracting === true) {
@@ -388,13 +390,25 @@ function panovisu(num_pano) {
             }
 
         }
-
+        evenement.preventDefault();
     });
-    $(document).on("mouseup mouseleave", "#container-" + num_pano, function(evenement) {
+
+
+
+    $(document).on("mouseup mouseleave touchend", "#container-" + num_pano, function(evenement) {
         clearInterval(timer);
         pano.removeClass('curseurCroix');
         isUserInteracting = false;
     });
+
+    $(document).on("mouseover", "#panovisu-" + num_pano, function(evenement) {
+        clavierActif = true;
+    });
+
+    $(document).on("mouseleave", "#panovisu-" + num_pano, function(evenement) {
+        clavierActif = false;
+    });
+
     /**
      * Gestion de la molette de la souris
      * 
@@ -425,7 +439,7 @@ function panovisu(num_pano) {
      */
     $(document).keydown(
             function(evenement) {
-                if (bPleinEcran) {
+                if (clavierActif) {
                     if (bAfficheInfo)
                     {
                         $("#infoPanovisu-" + num_pano).fadeOut(2000, function() {
@@ -439,16 +453,16 @@ function panovisu(num_pano) {
                     switch (touche)
                     {
                         case 37:
-                            longitude -= 0.5;
+                            longitude -= 1;
                             break;
                         case 38:
-                            latitude += 0.5;
+                            latitude += 1;
                             break;
                         case 39:
-                            longitude += 0.5;
+                            longitude += 1;
                             break;
                         case 40:
-                            latitude -= 0.5;
+                            latitude -= 1;
                             break;
                         case 16:
                             fov += 1;
@@ -591,8 +605,8 @@ function panovisu(num_pano) {
 
                 }
                 dXdY($(this).attr('class'));
-                longitude += 2*dx;
-                latitude += 2*dy;
+                longitude += 2 * dx;
+                latitude += 2 * dy;
                 affiche();
             });
     $(document).on("click", "#zoomPlus-" + num_pano, function(evenement) {
@@ -2895,7 +2909,6 @@ function panovisu(num_pano) {
                     littleDisabled = false;
                     normalDisbled = true;
                     littlePlanetView = false;
-
                     var typeHSDefaut = "panoramique";
                     panoImage = "faces";
                     couleur = "none";
@@ -3314,6 +3327,103 @@ function panovisu(num_pano) {
         pano = $("#" + fenetrePanoramique);
         pano1 = $("#pano1-" + num_pano);
         $("#planTitre-" + num_pano).css("transform", "rotate(90deg)");
+
+
+        var conteneur = document.getElementById("container-" + num_pano);
+
+        conteneur.addEventListener('touchstart', function(evenement) {
+            evenement.preventDefault();
+            if (bAfficheInfo)
+            {
+                $("#infoPanovisu-" + num_pano).fadeOut(2000, function() {
+                    $(this).css({display: "none"});
+                    bAfficheInfo = false;
+                });
+
+            }
+            onPointerDownPointerX = evenement.touches[0].clientX;
+            onPointerDownPointerY = evenement.touches[0].clientY;
+            isUserInteracting = true;
+            if (mode === 1) {
+                deltaX = 0;
+                deltaY = 0;
+                clearInterval(timer);
+                timer = setInterval(function() {
+                    deplaceMode2();
+                }, 10);
+            }
+            else
+            {
+                onPointerDownLon = longitude;
+                onPointerDownLat = latitude;
+                pano.addClass('curseurCroix');
+            }
+
+
+        });
+        conteneur.addEventListener('touchmove', function(evenement) {
+            evenement.preventDefault();
+
+            if (isUserInteracting === true) {
+
+                mouseMove = true;
+                if (mode === 1) {
+                    deltaX = -(onPointerDownPointerX - evenement.touches[0].clientX) * 0.01;
+                    deltaY = (onPointerDownPointerY - evenement.touches[0].clientY) * 0.01;
+                }
+                else {
+                    longitude = (onPointerDownPointerX - evenement.touches[0].clientX) * 0.1 + onPointerDownLon;
+                    latitude = (evenement.touches[0].clientY - onPointerDownPointerY) * 0.1 + onPointerDownLat;
+                    affiche();
+                }
+            }
+            else {
+                $("#infoBulle-" + num_pano).hide();
+                var mouse = new THREE.Vector2();
+                var projector = new THREE.Projector();
+                var raycaster = new THREE.Raycaster();
+                var position = $(this).offset();
+                var X = evenement.touches[0].pageX - parseInt(position.left);
+                var Y = evenement.touches[0].pageY - parseInt(position.top);
+                mouse.x = (X / $(this).width()) * 2 - 1;
+                mouse.y = -(Y / $(this).height()) * 2 + 1;
+                var vector = new THREE.Vector3(mouse.x, mouse.y, 1);
+                projector.unprojectVector(vector, camera);
+                raycaster.set(camera.position, vector.sub(camera.position).normalize());
+                var intersects = raycaster.intersectObjects(scene.children);
+                if (intersects.length > 0) {
+                    pano.css({cursor: "pointer"});
+                    var intersect = intersects[ 0 ];
+                    var object = intersect.object;
+                    var positions = object.geometry.attributes.position.array;
+                    for (var i = 0; i < hotSpot.length; i++)
+                    {
+                        if (object.id === hotSpot[i].id) {
+                            haut = Y - 5;
+                            gauche = X + 20;
+                            (pointsInteret[i].info !== "") ? $("#infoBulle-" + num_pano).html(pointsInteret[i].info) : $("#infoBulle-" + num_pano).html(pointsInteret[i].contenu);
+                            $("#infoBulle-" + num_pano).css({top: haut + "px", left: gauche + "px"});
+                            $("#infoBulle-" + num_pano).show();
+                        }
+
+                    }
+
+                }
+                else {
+                    pano.css({cursor: "auto"});
+//                $("#infoBulle-" + num_pano).hide();
+                }
+
+            }
+
+        });
+
+        conteneur.addEventListener('touchend', function(evenement) {
+            clearInterval(timer);
+            pano.removeClass('curseurCroix');
+            isUserInteracting = false;
+        });
+
     }
 
 
@@ -3375,9 +3485,6 @@ function panovisu(num_pano) {
          */
         chargeXML(xmlFile);
     };
-
-
-
 }
 
 /*
