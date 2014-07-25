@@ -54,7 +54,7 @@ public class EquiCubeDialogController {
 
     private static final ResourceBundle rb = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", EditeurPanovisu.locale);
 
-    private static final Stage STEqui2Cube = new Stage(StageStyle.UTILITY);
+    private static final Stage stEqui2Cube = new Stage(StageStyle.UTILITY);
     private static final AnchorPane myPane = new AnchorPane();
     private String typeTransformation;
     static private final ListView listeFichier = new ListView();
@@ -64,11 +64,11 @@ public class EquiCubeDialogController {
     static private Button btnAjouteFichiers;
     static private Pane choixTypeFichier;
     static private boolean traitementEffectue = false;
-    static private RadioButton RBJpeg;
-    static private RadioButton RBBmp;
-    static private CheckBox CBSharpen;
-    static private Slider SLSharpen;
-    static private Label LBLSharpen;
+    static private RadioButton rbJpeg;
+    static private RadioButton rbBmp;
+    static private CheckBox cbSharpen;
+    static private Slider slSharpen;
+    static private Label lblSharpen;
     static private ProgressBar bar;
     static private Label lblTermine;
 
@@ -100,7 +100,7 @@ public class EquiCubeDialogController {
                     .showConfirm();
         }
         if ((reponse == Dialog.Actions.YES) || (reponse == null)) {
-            STEqui2Cube.hide();
+            stEqui2Cube.hide();
         }
     }
 
@@ -142,18 +142,18 @@ public class EquiCubeDialogController {
                 try {
                     //ReadWriteImage.writeJpeg(facesCube[i], "c:/panoramiques/test/" + txtImage + "_cube" + suffixe + ".jpg", jpegQuality);
                     boolean sharpen = false;
-                    if (CBSharpen.isSelected()) {
+                    if (cbSharpen.isSelected()) {
                         sharpen = true;
                     }
 
-                    if (RBBmp.isSelected()) {
+                    if (rbBmp.isSelected()) {
                         ReadWriteImage.writeBMP(facesCube[i], nomFich1 + "_cube" + suffixe + ".bmp",
-                                sharpen, (float) Math.round(SLSharpen.getValue() * 20.f) / 20.f);
+                                sharpen, (float) Math.round(slSharpen.getValue() * 20.f) / 20.f);
                     }
-                    if (RBJpeg.isSelected()) {
+                    if (rbJpeg.isSelected()) {
                         float quality = 1.0f; //qualité jpeg à 100% : le moins de pertes possible
                         ReadWriteImage.writeJpeg(facesCube[i], nomFich1 + "_cube" + suffixe + ".jpg", quality,
-                                sharpen, (float) Math.round(SLSharpen.getValue() * 20.f) / 20.f);
+                                sharpen, (float) Math.round(slSharpen.getValue() * 20.f) / 20.f);
                     }
                 } catch (IOException ex) {
                     Logger.getLogger(EquiCubeDialogController.class.getName()).log(Level.SEVERE, null, ex);
@@ -192,16 +192,16 @@ public class EquiCubeDialogController {
             try {
                 //ReadWriteImage.writeJpeg(facesCube[i], "c:/panoramiques/test/" + txtImage + "_cube" + suffixe + ".jpg", jpegQuality);
                 boolean sharpen = false;
-                if (CBSharpen.isSelected()) {
+                if (cbSharpen.isSelected()) {
                     sharpen = true;
                 }
 
-                if (RBBmp.isSelected()) {
-                    ReadWriteImage.writeBMP(equiRectangulaire, nom + "_sphere.bmp", sharpen, (float) Math.round(SLSharpen.getValue() * 20.f) / 20.f);
+                if (rbBmp.isSelected()) {
+                    ReadWriteImage.writeBMP(equiRectangulaire, nom + "_sphere.bmp", sharpen, (float) Math.round(slSharpen.getValue() * 20.f) / 20.f);
                 }
-                if (RBJpeg.isSelected()) {
+                if (rbJpeg.isSelected()) {
                     float quality = 1.0f;
-                    ReadWriteImage.writeJpeg(equiRectangulaire, nom + "_sphere.jpg", quality, sharpen, (float) Math.round(SLSharpen.getValue() * 20.f) / 20.f);
+                    ReadWriteImage.writeJpeg(equiRectangulaire, nom + "_sphere.jpg", quality, sharpen, (float) Math.round(slSharpen.getValue() * 20.f) / 20.f);
                 }
             } catch (IOException ex) {
                 Logger.getLogger(EquiCubeDialogController.class.getName()).log(Level.SEVERE, null, ex);
@@ -311,7 +311,7 @@ public class EquiCubeDialogController {
         );
         File repert = new File(repertFichier + File.separator);
         repertChoix.setInitialDirectory(repert);
-        List<File> list = repertChoix.showOpenMultipleDialog(STEqui2Cube);
+        List<File> list = repertChoix.showOpenMultipleDialog(stEqui2Cube);
         int i = 0;
         boolean attention = false;
         if (list != null) {
@@ -368,8 +368,8 @@ public class EquiCubeDialogController {
      * @throws Exception
      */
     public void afficheFenetre(String typeTransf) throws Exception {
-        STEqui2Cube.initModality(Modality.APPLICATION_MODAL);
-        STEqui2Cube.setResizable(true);
+        stEqui2Cube.initModality(Modality.APPLICATION_MODAL);
+        stEqui2Cube.setResizable(true);
         myPane.setStyle("-fx-background-color : #ff0000;");
 
         VBox fenetre = new VBox();
@@ -378,11 +378,11 @@ public class EquiCubeDialogController {
         btnAjouteFichiers = new Button("Ajouter des Fichiers");
         choixTypeFichier = new Pane();
         Label lblType = new Label("Type des Fichiers de sortie");
-        RBJpeg = new RadioButton("JPEG (.jpg)");
-        RBBmp = new RadioButton("BMP (.bmp)");
-        CBSharpen = new CheckBox("Masque de netteté");
-        SLSharpen = new Slider(0, 2, 0.2);
-        LBLSharpen = new Label("0.20");
+        rbJpeg = new RadioButton("JPEG (.jpg)");
+        rbBmp = new RadioButton("BMP (.bmp)");
+        cbSharpen = new CheckBox("Masque de netteté");
+        slSharpen = new Slider(0, 2, 0.2);
+        lblSharpen = new Label("0.20");
         Pane Pboutons = new Pane();
         btnAnnuler = new Button("Fermer la fenêtre");
         btnValider = new Button("Lancer le traitement");
@@ -390,10 +390,10 @@ public class EquiCubeDialogController {
         typeTransformation = typeTransf;
         Image imgTransf;
         if (typeTransf.equals(EquiCubeDialogController.EQUI2CUBE)) {
-            STEqui2Cube.setTitle("Transformation d'équirectangulaire en faces de cube");
+            stEqui2Cube.setTitle("Transformation d'équirectangulaire en faces de cube");
             imgTransf = new Image("file:" + EditeurPanovisu.repertAppli + File.separator + "images/equi2cube.png");
         } else {
-            STEqui2Cube.setTitle("Transformation de faces de cube en équirectangulaire");
+            stEqui2Cube.setTitle("Transformation de faces de cube en équirectangulaire");
             imgTransf = new Image("file:" + EditeurPanovisu.repertAppli + File.separator + "images/cube2equi.png");
         }
         ImageView IMType = new ImageView(imgTransf);
@@ -434,37 +434,37 @@ public class EquiCubeDialogController {
         choixFichier.getChildren().addAll(listeFichier, btnAjouteFichiers);
         lblType.setLayoutX(14);
         lblType.setLayoutY(14);
-        RBBmp.setLayoutX(43);
-        RBBmp.setLayoutY(43);
-        RBBmp.setSelected(true);
-        RBBmp.setToggleGroup(grpTypeFichier);
-        RBJpeg.setLayoutX(43);
-        RBJpeg.setLayoutY(71);
-        RBJpeg.setToggleGroup(grpTypeFichier);
-        CBSharpen.setLayoutX(43);
-        CBSharpen.setLayoutY(99);
-        CBSharpen.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        rbBmp.setLayoutX(43);
+        rbBmp.setLayoutY(43);
+        rbBmp.setSelected(true);
+        rbBmp.setToggleGroup(grpTypeFichier);
+        rbJpeg.setLayoutX(43);
+        rbJpeg.setLayoutY(71);
+        rbJpeg.setToggleGroup(grpTypeFichier);
+        cbSharpen.setLayoutX(43);
+        cbSharpen.setLayoutY(99);
+        cbSharpen.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val) {
-                SLSharpen.setDisable(false);
-                LBLSharpen.setDisable(false);
+                slSharpen.setDisable(false);
+                lblSharpen.setDisable(false);
             } else {
-                SLSharpen.setDisable(true);
-                LBLSharpen.setDisable(true);
+                slSharpen.setDisable(true);
+                lblSharpen.setDisable(true);
             }
         });
 
-        SLSharpen.setShowTickMarks(true);
-        SLSharpen.setShowTickLabels(true);
-        SLSharpen.setMajorTickUnit(0.5f);
-        SLSharpen.setMinorTickCount(4);
-        SLSharpen.setBlockIncrement(0.05f);
-        SLSharpen.setSnapToTicks(true);
-        SLSharpen.setLayoutX(23);
-        SLSharpen.setLayoutY(120);
-        SLSharpen.setTooltip(new Tooltip("Choisissez le niveau d'accentuation de l'image"));
-        SLSharpen.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+        slSharpen.setShowTickMarks(true);
+        slSharpen.setShowTickLabels(true);
+        slSharpen.setMajorTickUnit(0.5f);
+        slSharpen.setMinorTickCount(4);
+        slSharpen.setBlockIncrement(0.05f);
+        slSharpen.setSnapToTicks(true);
+        slSharpen.setLayoutX(23);
+        slSharpen.setLayoutY(120);
+        slSharpen.setTooltip(new Tooltip("Choisissez le niveau d'accentuation de l'image"));
+        slSharpen.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
             if (newValue == null) {
-                LBLSharpen.setText("");
+                lblSharpen.setText("");
                 return;
             }
             DecimalFormat df = new DecimalFormat();
@@ -472,19 +472,19 @@ public class EquiCubeDialogController {
             df.setMinimumFractionDigits(2);
             df.setDecimalSeparatorAlwaysShown(true);
 
-            LBLSharpen.setText(df.format(Math.round(newValue.floatValue() * 20.f) / 20.f) + "");
+            lblSharpen.setText(df.format(Math.round(newValue.floatValue() * 20.f) / 20.f) + "");
         });
 
-        SLSharpen.setPrefWidth(120);
-        SLSharpen.setDisable(true);
-        LBLSharpen.setLayoutX(150);
-        LBLSharpen.setLayoutY(120);
-        LBLSharpen.setMinWidth(30);
-        LBLSharpen.setMaxWidth(30);
-        LBLSharpen.setTextAlignment(TextAlignment.RIGHT);
-        LBLSharpen.setDisable(true);
+        slSharpen.setPrefWidth(120);
+        slSharpen.setDisable(true);
+        lblSharpen.setLayoutX(150);
+        lblSharpen.setLayoutY(120);
+        lblSharpen.setMinWidth(30);
+        lblSharpen.setMaxWidth(30);
+        lblSharpen.setTextAlignment(TextAlignment.RIGHT);
+        lblSharpen.setDisable(true);
 
-        choixTypeFichier.getChildren().addAll(lblType, RBBmp, RBJpeg, CBSharpen, SLSharpen, LBLSharpen);
+        choixTypeFichier.getChildren().addAll(lblType, rbBmp, rbJpeg, cbSharpen, slSharpen, lblSharpen);
         barreImage.setLayoutX(40);
         barreImage.setLayoutY(160);
         barreImage.setStyle("-fx-accent : #0000bb");
@@ -500,8 +500,8 @@ public class EquiCubeDialogController {
         Pboutons.getChildren().addAll(btnAnnuler, btnValider);
         fenetre.getChildren().addAll(PChoix, Pboutons);
         Scene scene2 = new Scene(myPane);
-        STEqui2Cube.setScene(scene2);
-        STEqui2Cube.show();
+        stEqui2Cube.setScene(scene2);
+        stEqui2Cube.show();
 
         btnAnnuler.setOnAction((ActionEvent e) -> {
             annulerE2C();
@@ -532,23 +532,23 @@ public class EquiCubeDialogController {
                 event.consume();
             }
         });
-        STEqui2Cube.widthProperty().addListener((ObservableValue<? extends Number> arg0, Number arg1, Number arg2) -> {
-            myPane.setPrefWidth(STEqui2Cube.getWidth());
-            fenetre.setPrefWidth(STEqui2Cube.getWidth());
-            btnAnnuler.setLayoutX(STEqui2Cube.getWidth() - 314);
-            btnValider.setLayoutX(STEqui2Cube.getWidth() - 157);
-            choixFichier.setPrefWidth(STEqui2Cube.getWidth() - 200);
-            listeFichier.setPrefWidth(STEqui2Cube.getWidth() - 240);
-            btnAjouteFichiers.setLayoutX(STEqui2Cube.getWidth() - 341);
+        stEqui2Cube.widthProperty().addListener((ObservableValue<? extends Number> arg0, Number arg1, Number arg2) -> {
+            myPane.setPrefWidth(stEqui2Cube.getWidth());
+            fenetre.setPrefWidth(stEqui2Cube.getWidth());
+            btnAnnuler.setLayoutX(stEqui2Cube.getWidth() - 314);
+            btnValider.setLayoutX(stEqui2Cube.getWidth() - 157);
+            choixFichier.setPrefWidth(stEqui2Cube.getWidth() - 200);
+            listeFichier.setPrefWidth(stEqui2Cube.getWidth() - 240);
+            btnAjouteFichiers.setLayoutX(stEqui2Cube.getWidth() - 341);
         });
 
-        STEqui2Cube.heightProperty().addListener((ObservableValue<? extends Number> arg0, Number arg1, Number arg2) -> {
-            myPane.setPrefHeight(STEqui2Cube.getHeight());
-            fenetre.setPrefHeight(STEqui2Cube.getHeight());
-            choixFichier.setPrefHeight(STEqui2Cube.getHeight() - 80);
-            PChoix.setPrefHeight(STEqui2Cube.getHeight() - 80);
-            listeFichier.setPrefHeight(STEqui2Cube.getHeight() - 140);
-            btnAjouteFichiers.setLayoutY(STEqui2Cube.getHeight() - 121);
+        stEqui2Cube.heightProperty().addListener((ObservableValue<? extends Number> arg0, Number arg1, Number arg2) -> {
+            myPane.setPrefHeight(stEqui2Cube.getHeight());
+            fenetre.setPrefHeight(stEqui2Cube.getHeight());
+            choixFichier.setPrefHeight(stEqui2Cube.getHeight() - 80);
+            PChoix.setPrefHeight(stEqui2Cube.getHeight() - 80);
+            listeFichier.setPrefHeight(stEqui2Cube.getHeight() - 140);
+            btnAjouteFichiers.setLayoutY(stEqui2Cube.getHeight() - 121);
         });
 
         // Dropping over surface

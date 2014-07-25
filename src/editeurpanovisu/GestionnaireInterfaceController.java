@@ -60,271 +60,279 @@ import jfxtras.labs.scene.control.BigDecimalField;
  */
 public class GestionnaireInterfaceController {
 
-    private static final ExtensionsFilter IMAGE_FILTER
+    private final ExtensionsFilter IMAGE_FILTER
             = new ExtensionsFilter(new String[]{".png", ".jpg", ".bmp"});
-    private static final ExtensionsFilter PNG_FILTER
+    private final ExtensionsFilter PNG_FILTER
             = new ExtensionsFilter(new String[]{".png"});
 
-    private static ResourceBundle rb;
+    private ResourceBundle rb;
     /**
      *
      */
-    public static final String styleDefautBarreNavigation = "retina";
+    public final String styleDefautBarreNavigation = "retina";
     /**
      *
      */
-    public static final String styleHotSpotDefaut = "hotspot.png";
+    public final String styleHotSpotDefaut = "hotspot.png";
     /**
      *
      */
-    public static final String styleHotSpotImageDefaut = "photo2.png";
+    public final String styleHotSpotImageDefaut = "photo2.png";
     /**
      *
      */
-    public static String positionBarre = "bottom:center";
+    public String positionBarre = "bottom:center";
     /**
      *
      */
-    public static String styleHotSpots = styleHotSpotDefaut;
+    public String styleHotSpots = styleHotSpotDefaut;
     /**
      *
      */
-    public static String styleHotSpotImages = styleHotSpotImageDefaut;
+    public String styleHotSpotImages = styleHotSpotImageDefaut;
 
     /**
      *
      */
-    public static String styleBarre = styleDefautBarreNavigation;
+    public String styleBarre = styleDefautBarreNavigation;
 
     /**
      *
      */
-    public static double dXBarre = 0;
+    public double dXBarre = 0;
 
     /**
      *
      */
-    public static double dYBarre = 10;
+    public double dYBarre = 10;
 
     /**
      *
      */
-    public static double tailleBarre = 30;
+    public double tailleBarre = 30;
 
     /**
      *
      */
-    public static String toggleBarreVisibilite = "oui";
+    public String toggleBarreVisibilite = "oui";
 
     /**
      *
      */
-    public static String toggleBarreDeplacements = "oui";
+    public String toggleBarreDeplacements = "oui";
 
     /**
      *
      */
-    public static String toggleBarreZoom = "oui";
+    public String toggleBarreZoom = "oui";
 
     /**
      *
      */
-    public static String toggleBarreOutils = "oui";
+    public String toggleBarreOutils = "oui";
 
     /**
      *
      */
-    public static String toggleBoutonInfo = "oui";
+    public String toggleBoutonInfo = "oui";
 
     /**
      *
      */
-    public static String toggleBoutonAide = "oui";
+    public String toggleBoutonAide = "oui";
 
     /**
      *
      */
-    public static String toggleBoutonRotation = "oui";
+    public String toggleBoutonRotation = "oui";
 
     /**
      *
      */
-    public static String toggleBoutonFS = "oui";
+    public String toggleBoutonFS = "oui";
 
     /**
      *
      */
-    public static String toggleBoutonSouris = "oui";
+    public String toggleBoutonSouris = "oui";
 
     /**
      *
      */
-    public static boolean bAfficheTitre = true;
-    public static String titrePoliceNom = "Verdana";
-    public static String titrePoliceStyle = "Regular";
-    public static String titrePoliceTaille = "12.0";
-    public static String couleurTitre = "#ffffff";
-    public static String couleurFondTitre = "#000000";
-    public static Double titreOpacite = 0.8;
-    public static Double titreTaille = 100.0;
+    public boolean bAfficheTitre = true;
+    public String titrePoliceNom = "Verdana";
+    public String titrePoliceStyle = "Regular";
+    public String titrePoliceTaille = "12.0";
+    public String couleurTitre = "#ffffff";
+    public String couleurFondTitre = "#000000";
+    public Double titreOpacite = 0.8;
+    public Double titreTaille = 100.0;
+
+    public String couleurDiaporama = "#000000";
+    public Double diaporamaOpacite = 0.8;
+    private ColorPicker cpCouleurDiaporama;
+    private Slider slOpaciteDiaporama;
+    private boolean visualiseDiaporama = false;
+    private AnchorPane apAfficheDiapo;
+    private ImageView ivDiapo;
 
     /**
      *
      */
-    public static boolean bAfficheBoussole = false;
-    public static String imageBoussole = "rose3.png";
-    public static String positionBoussole = "top:right";
-    public static double dXBoussole = 20;
-    public static double dYBoussole = 20;
-    public static double tailleBoussole = 100;
-    public static double opaciteBoussole = 0.8;
-    public static boolean bAiguilleMobileBoussole = true;
-    private static ImageView imgBoussole;
-    private static ImageView imgAiguille;
-    private static BigDecimalField boussDXSpinner;
-    private static BigDecimalField boussDYSpinner;
-    private static Slider SLTailleBoussole;
-    private static Slider SLOpaciteBoussole;
-    private static CheckBox CBAiguilleMobile;
-    private static CheckBox CBAfficheBoussole;
-    private static RadioButton RBBoussTopLeft;
-    private static RadioButton RBBoussTopRight;
-    private static RadioButton RBBoussBottomLeft;
-    private static RadioButton RBBoussBottomRight;
+    public boolean bAfficheBoussole = false;
+    public String imageBoussole = "rose3.png";
+    public String positionBoussole = "top:right";
+    public double dXBoussole = 20;
+    public double dYBoussole = 20;
+    public double tailleBoussole = 100;
+    public double opaciteBoussole = 0.8;
+    public boolean bAiguilleMobileBoussole = true;
+    private ImageView imgBoussole;
+    private ImageView imgAiguille;
+    private BigDecimalField boussDXSpinner;
+    private BigDecimalField boussDYSpinner;
+    private Slider slTailleBoussole;
+    private Slider slOpaciteBoussole;
+    private CheckBox cbAiguilleMobile;
+    private CheckBox cbAfficheBoussole;
+    private RadioButton rbBoussTopLeft;
+    private RadioButton rbBoussTopRight;
+    private RadioButton rbBoussBottomLeft;
+    private RadioButton rbBoussBottomRight;
 
     /**
      *
      */
-    private static String repertMasques;
-    public static boolean bAfficheMasque = false;
-    public static String imageMasque = "MA.png";
-    public static String positionMasque = "top:right";
-    public static double dXMasque = 20;
-    public static double dYMasque = 20;
-    public static double tailleMasque = 30;
-    public static double opaciteMasque = 0.8;
-    public static boolean bMasqueNavigation = true;
-    public static boolean bMasqueBoussole = true;
-    public static boolean bMasqueTitre = true;
-    public static boolean bMasquePlan = true;
-    public static boolean bMasqueReseaux = true;
-    public static boolean bMasqueVignettes = true;
-    private static ImageView IVMasque;
-    private static BigDecimalField masqueDXSpinner;
-    private static BigDecimalField masqueDYSpinner;
-    private static Slider SLTailleMasque;
-    private static Slider SLOpaciteMasque;
-    private static CheckBox CBAfficheMasque;
-    private static CheckBox CBMasqueNavigation;
-    private static CheckBox CBMasqueBoussole;
-    private static CheckBox CBMasqueTitre;
-    private static CheckBox CBMasquePlan;
-    private static CheckBox CBMasqueReseaux;
-    private static CheckBox CBMasqueVignettes;
-    private static RadioButton RBMasqueTopLeft;
-    private static RadioButton RBMasqueTopRight;
-    private static RadioButton RBMasqueBottomLeft;
-    private static RadioButton RBMasqueBottomRight;
+    private String repertMasques;
+    public boolean bAfficheMasque = false;
+    public String imageMasque = "MA.png";
+    public String positionMasque = "top:right";
+    public double dXMasque = 20;
+    public double dYMasque = 20;
+    public double tailleMasque = 30;
+    public double opaciteMasque = 0.8;
+    public boolean bMasqueNavigation = true;
+    public boolean bMasqueBoussole = true;
+    public boolean bMasqueTitre = true;
+    public boolean bMasquePlan = true;
+    public boolean bMasqueReseaux = true;
+    public boolean bMasqueVignettes = true;
+    private ImageView ivMasque;
+    private BigDecimalField masqueDXSpinner;
+    private BigDecimalField masqueDYSpinner;
+    private Slider slTailleMasque;
+    private Slider slOpaciteMasque;
+    private CheckBox cbAfficheMasque;
+    private CheckBox cbMasqueNavigation;
+    private CheckBox cbMasqueBoussole;
+    private CheckBox cbMasqueTitre;
+    private CheckBox cbMasquePlan;
+    private CheckBox cbMasqueReseaux;
+    private CheckBox cbMasqueVignettes;
+    private RadioButton rbMasqueTopLeft;
+    private RadioButton rbMasqueTopRight;
+    private RadioButton rbMasqueBottomLeft;
+    private RadioButton rbMasqueBottomRight;
 
     /**
      *
      */
-    private static String repertReseauxSociaux;
-    public static boolean bAfficheReseauxSociaux = false;
-    public static String imageReseauxSociauxTwitter = "twitter.png";
-    public static String imageReseauxSociauxGoogle = "google.png";
-    public static String imageReseauxSociauxFacebook = "facebook.png";
-    public static String imageReseauxSociauxEmail = "email.png";
-    public static String positionReseauxSociaux = "top:right";
-    public static double dXReseauxSociaux = 20;
-    public static double dYReseauxSociaux = 20;
-    public static double tailleReseauxSociaux = 30;
-    public static double opaciteReseauxSociaux = 0.8;
-    public static boolean bReseauxSociauxTwitter = true;
-    public static boolean bReseauxSociauxGoogle = true;
-    public static boolean bReseauxSociauxFacebook = true;
-    public static boolean bReseauxSociauxEmail = true;
-    private static ImageView imgTwitter;
-    private static ImageView imgGoogle;
-    private static ImageView imgFacebook;
-    private static ImageView imgEmail;
-    private static BigDecimalField reseauxSociauxDXSpinner;
-    private static BigDecimalField reseauxSociauxDYSpinner;
-    private static Slider SLTailleReseauxSociaux;
-    private static Slider SLOpaciteReseauxSociaux;
-    private static CheckBox CBAfficheReseauxSociaux;
-    private static CheckBox CBReseauxSociauxTwitter;
-    private static CheckBox CBReseauxSociauxGoogle;
-    private static CheckBox CBReseauxSociauxFacebook;
-    private static CheckBox CBReseauxSociauxEmail;
-    private static RadioButton RBReseauxSociauxTopLeft;
-    private static RadioButton RBReseauxSociauxTopRight;
-    private static RadioButton RBReseauxSociauxBottomLeft;
-    private static RadioButton RBReseauxSociauxBottomRight;
+    private String repertReseauxSociaux;
+    public boolean bAfficheReseauxSociaux = false;
+    public String imageReseauxSociauxTwitter = "twitter.png";
+    public String imageReseauxSociauxGoogle = "google.png";
+    public String imageReseauxSociauxFacebook = "facebook.png";
+    public String imageReseauxSociauxEmail = "email.png";
+    public String positionReseauxSociaux = "top:right";
+    public double dXReseauxSociaux = 20;
+    public double dYReseauxSociaux = 20;
+    public double tailleReseauxSociaux = 30;
+    public double opaciteReseauxSociaux = 0.8;
+    public boolean bReseauxSociauxTwitter = true;
+    public boolean bReseauxSociauxGoogle = true;
+    public boolean bReseauxSociauxFacebook = true;
+    public boolean bReseauxSociauxEmail = true;
+    private ImageView imgTwitter;
+    private ImageView imgGoogle;
+    private ImageView imgFacebook;
+    private ImageView imgEmail;
+    private BigDecimalField reseauxSociauxDXSpinner;
+    private BigDecimalField reseauxSociauxDYSpinner;
+    private Slider slTailleReseauxSociaux;
+    private Slider slOpaciteReseauxSociaux;
+    private CheckBox cbAfficheReseauxSociaux;
+    private CheckBox cbReseauxSociauxTwitter;
+    private CheckBox cbReseauxSociauxGoogle;
+    private CheckBox cbReseauxSociauxFacebook;
+    private CheckBox cbReseauxSociauxEmail;
+    private RadioButton rbReseauxSociauxTopLeft;
+    private RadioButton rbReseauxSociauxTopRight;
+    private RadioButton rbReseauxSociauxBottomLeft;
+    private RadioButton rbReseauxSociauxBottomRight;
     /*
      *
      */
-    private static AnchorPane APVignettes;
-    private static AnchorPane APVisuVignettes;
-    public static boolean bAfficheVignettes = false;
-    public static String couleurFondVignettes = "#ffffff";
-    public static String couleurTexteVignettes = "#000000";
-    public static String positionVignettes = "bottom";
-    public static double tailleImageVignettes = 120;
-    public static double opaciteVignettes = 0.8;
-    private static Slider SLOpaciteVignettes;
-    private static Slider SLTailleVignettes;
-    private static CheckBox CBAfficheVignettes;
-    private static RadioButton RBVignettesLeft;
-    private static RadioButton RBVignettesRight;
-    private static RadioButton RBVignettesBottom;
-    private static ColorPicker CPCouleurFondVignettes;
-    private static ColorPicker CPCouleurTexteVignettes;
+    private AnchorPane apVignettes;
+    private AnchorPane apVisuVignettes;
+    public boolean bAfficheVignettes = false;
+    public String couleurFondVignettes = "#ffffff";
+    public String couleurTexteVignettes = "#000000";
+    public String positionVignettes = "bottom";
+    public double tailleImageVignettes = 120;
+    public double opaciteVignettes = 0.8;
+    private Slider slOpaciteVignettes;
+    private Slider slTailleVignettes;
+    private CheckBox cbAfficheVignettes;
+    private RadioButton rbVignettesLeft;
+    private RadioButton rbVignettesRight;
+    private RadioButton rbVignettesBottom;
+    private ColorPicker cpCouleurFondVignettes;
+    private ColorPicker cpCouleurTexteVignettes;
 
     /*
      Variable du plan
      */
-    private static AnchorPane APPlan;
-    private static AnchorPane APVisuplan;
-    public static boolean bAffichePlan = false;
-    public static String positionPlan = "left";
-    public static double largeurPlan = 200;
-    public static Color couleurFondPlan = Color.hsb(120, 1.0, 1.0);
-    public static String txtCouleurFondPlan = couleurFondPlan.toString().substring(2, 8);
-    public static double opacitePlan = 0.8;
-    public static Color couleurTextePlan = Color.rgb(255, 255, 255);
-    public static String txtCouleurTextePlan = couleurTextePlan.toString().substring(2, 8);
-    public static boolean bAfficheRadar = false;
-    public static Color couleurLigneRadar = Color.rgb(255, 255, 0);
-    public static String txtCouleurLigneRadar = couleurLigneRadar.toString().substring(2, 8);
-    public static Color couleurFondRadar = Color.rgb(200, 0, 0);
-    public static String txtCouleurFondRadar = couleurFondRadar.toString().substring(2, 8);
-    public static double tailleRadar = 40;
-    public static double opaciteRadar = 0.8;
+    private AnchorPane apPlan;
+    private AnchorPane apVisuplan;
+    public boolean bAffichePlan = false;
+    public String positionPlan = "left";
+    public double largeurPlan = 200;
+    public Color couleurFondPlan = Color.hsb(120, 1.0, 1.0);
+    public String txtCouleurFondPlan = couleurFondPlan.toString().substring(2, 8);
+    public double opacitePlan = 0.8;
+    public Color couleurTextePlan = Color.rgb(255, 255, 255);
+    public String txtCouleurTextePlan = couleurTextePlan.toString().substring(2, 8);
+    public boolean bAfficheRadar = false;
+    public Color couleurLigneRadar = Color.rgb(255, 255, 0);
+    public String txtCouleurLigneRadar = couleurLigneRadar.toString().substring(2, 8);
+    public Color couleurFondRadar = Color.rgb(200, 0, 0);
+    public String txtCouleurFondRadar = couleurFondRadar.toString().substring(2, 8);
+    public double tailleRadar = 40;
+    public double opaciteRadar = 0.8;
 
     /*
      Eléments de l'onglet plan
      */
-    private static CheckBox CBAffichePlan;
-    private static Slider SLOpacitePlan;
-    private static RadioButton RBPlanLeft;
-    private static RadioButton RBPlanRight;
-    private static ColorPicker CPCouleurFondPlan;
-    private static ColorPicker CPCouleurTextePlan;
-    private static Slider SLLargeurPlan;
-    private static CheckBox CBAfficheRadar;
-    private static ColorPicker CPCouleurFondRadar;
-    private static ColorPicker CPCouleurLigneRadar;
-    private static Slider SLTailleRadar;
-    private static Slider SLOpaciteRadar;
+    private CheckBox cbAffichePlan;
+    private Slider slOpacitePlan;
+    private RadioButton rbPlanLeft;
+    private RadioButton rbPlanRight;
+    private ColorPicker cpCouleurFondPlan;
+    private ColorPicker cpCouleurTextePlan;
+    private Slider slLargeurPlan;
+    private CheckBox cbAfficheRadar;
+    private ColorPicker cpCouleurFondRadar;
+    private ColorPicker cpCouleurLigneRadar;
+    private Slider slTailleRadar;
+    private Slider slOpaciteRadar;
 
     public Pane tabInterface;
-    private static HBox HBInterface;
-    private static AnchorPane APVisualisation;
-    private static VBox VBOutils;
-    private static RadioButton RBClair;
-    private static RadioButton RBSombre;
-    private static ImageView IMVisualisation;
+    private HBox hbInterface;
+    private AnchorPane apVisualisation;
+    private VBox vbOutils;
+    private RadioButton rbClair;
+    private RadioButton rbSombre;
+    private ImageView IMVisualisation;
     final ToggleGroup grpImage = new ToggleGroup();
     final ToggleGroup grpPosBarre = new ToggleGroup();
     final ToggleGroup grpPosBouss = new ToggleGroup();
@@ -332,81 +340,81 @@ public class GestionnaireInterfaceController {
     final ToggleGroup grpPosReseauxSociaux = new ToggleGroup();
     final ToggleGroup grpPosVignettes = new ToggleGroup();
     final ToggleGroup grpPosPlan = new ToggleGroup();
-    private static Image imageClaire;
-    private static Image imageSombre;
-    private static HBox HBbarreBoutons;
-    private static HBox HBOutils;
-    private static Label txtTitre;
-    private static ImageView IVInfo;
-    private static ImageView IVAide;
-    private static ImageView IVAutoRotation;
-    private static ImageView IVModeSouris;
-    private static ImageView IVPleinEcran;
-    private static HBox HBZoom;
-    private static ImageView IVZoomPlus;
-    private static ImageView IVZoomMoins;
-    private static HBox HBDeplacements;
-    private static ImageView IVHaut;
-    private static ImageView IVBas;
-    private static ImageView IVGauche;
-    private static ImageView IVDroite;
-    private static ImageView IVHotSpot;
-    private static ImageView IVHotSpotImage;
-    private static ComboBox CBlisteStyle;
+    private Image imageClaire;
+    private Image imageSombre;
+    private HBox hbbarreBoutons;
+    private HBox hbOutils;
+    private Label txtTitre;
+    private ImageView ivInfo;
+    private ImageView ivAide;
+    private ImageView ivAutoRotation;
+    private ImageView ivModeSouris;
+    private ImageView ivPleinEcran;
+    private HBox hbZoom;
+    private ImageView ivZoomPlus;
+    private ImageView ivZoomMoins;
+    private HBox hbDeplacements;
+    private ImageView ivHaut;
+    private ImageView ivBas;
+    private ImageView ivGauche;
+    private ImageView ivDroite;
+    private ImageView ivHotSpot;
+    private ImageView ivHotSpotImage;
+    private ComboBox cblisteStyle;
 
-    private static String repertBoutonsPrincipal;
-    private static String repertHotSpots;
-    private static String repertHotSpotsPhoto;
-    private static String repertBoussoles;
-    private static RadioButton RBTopLeft;
-    private static RadioButton RBTopCenter;
-    private static RadioButton RBTopRight;
-    private static RadioButton RBMiddleLeft;
-    private static RadioButton RBMiddleCenter;
-    private static RadioButton RBMiddleRight;
-    private static RadioButton RBBottomLeft;
-    private static RadioButton RBBottomCenter;
-    private static RadioButton RBBottomRight;
-    private static CheckBox CBVisible;
-    private static CheckBox CBDeplacements;
-    private static CheckBox CBZoom;
-    private static CheckBox CBOutils;
-    private static CheckBox CBFS;
-    private static CheckBox CBSouris;
-    private static CheckBox CBRotation;
-    private static CheckBox CBSuivantPrecedent;
-    private static ImageView imgSuivant;
-    private static ImageView imgPrecedent;
-    private static VBox fondSuivant;
-    private static VBox fondPrecedent;
-    public static boolean bSuivantPrecedent;
-    private static BigDecimalField dXSpinner;
-    private static BigDecimalField dYSpinner;
-    private static CheckBox CBAfficheTitre;
-    private static ColorPicker CPCouleurFondTitre;
-    private static ColorPicker CPCouleurTitre;
-    private static ComboBox CBListePolices;
-    private static Slider SLTaillePolice;
-    private static Slider SLOpacite;
-    private static Slider SLTaille;
-    private static ColorPicker CPCouleurTheme;
-    private static ColorPicker CPCouleurHotspots;
-    private static ColorPicker CPCouleurBoutons;
-    private static ColorPicker CPCouleurMasques;
-    private static Color couleurHotspots = Color.hsb(120, 1.0, 1.0);
-    private static Color couleurBoutons = Color.hsb(120, 1.0, 1.0);
-    private static Color couleurMasque = Color.hsb(120, 1.0, 1.0);
-    private static Color couleurTheme = Color.hsb(120, 1.0, 1.0);
-    public static Image[] imageBoutons = new Image[25];
-    public static String[] nomImagesBoutons = new String[25];
-    public static PixelReader[] lisBoutons = new PixelReader[25];
-    public static WritableImage[] nouveauxBoutons = new WritableImage[25];
-    public static PixelWriter[] PWnouveauxBoutons = new PixelWriter[25];
-    public static int nombreImagesBouton = 0;
-    public static Image imgMasque;
-    public static PixelReader lisMasque;
-    public static WritableImage nouveauxMasque;
-    public static PixelWriter PWnouveauxMasque;
+    private String repertBoutonsPrincipal;
+    private String repertHotSpots;
+    private String repertHotSpotsPhoto;
+    private String repertBoussoles;
+    private RadioButton rbTopLeft;
+    private RadioButton rbTopCenter;
+    private RadioButton rbTopRight;
+    private RadioButton rbMiddleLeft;
+    private RadioButton rbMiddleCenter;
+    private RadioButton rbMiddleRight;
+    private RadioButton rbBottomLeft;
+    private RadioButton rbBottomCenter;
+    private RadioButton rbBottomRight;
+    private CheckBox cbVisible;
+    private CheckBox cbDeplacements;
+    private CheckBox cbZoom;
+    private CheckBox cbOutils;
+    private CheckBox cbFS;
+    private CheckBox cbSouris;
+    private CheckBox cbRotation;
+    private CheckBox cbSuivantPrecedent;
+    private ImageView imgSuivant;
+    private ImageView imgPrecedent;
+    private VBox fondSuivant;
+    private VBox fondPrecedent;
+    public boolean bSuivantPrecedent;
+    private BigDecimalField dXSpinner;
+    private BigDecimalField dYSpinner;
+    private CheckBox cbAfficheTitre;
+    private ColorPicker cpCouleurFondTitre;
+    private ColorPicker cpCouleurTitre;
+    private ComboBox cbListePolices;
+    private Slider slTaillePolice;
+    private Slider slOpacite;
+    private Slider slTaille;
+    private ColorPicker cpCouleurTheme;
+    private ColorPicker cpCouleurHotspots;
+    private ColorPicker cpCouleurBoutons;
+    private ColorPicker cpCouleurMasques;
+    private Color couleurHotspots = Color.hsb(120, 1.0, 1.0);
+    private Color couleurBoutons = Color.hsb(120, 1.0, 1.0);
+    private Color couleurMasque = Color.hsb(120, 1.0, 1.0);
+    private Color couleurTheme = Color.hsb(120, 1.0, 1.0);
+    public Image[] imageBoutons = new Image[25];
+    public String[] nomImagesBoutons = new String[25];
+    public PixelReader[] lisBoutons = new PixelReader[25];
+    public WritableImage[] nouveauxBoutons = new WritableImage[25];
+    public PixelWriter[] pwNouveauxBoutons = new PixelWriter[25];
+    public int nombreImagesBouton = 0;
+    public Image imgMasque;
+    public PixelReader lisMasque;
+    public WritableImage nouveauxMasque;
+    public PixelWriter pwNouveauxMasque;
 
     private void chargeBarre(String styleBarre, String strHotSpot, String strMA) {
         File repertBarre = new File(repertBoutonsPrincipal + File.separator + styleBarre);
@@ -421,40 +429,40 @@ public class GestionnaireInterfaceController {
                 int width = (int) imageBoutons[i].getWidth();
                 int height = (int) imageBoutons[i].getHeight();
                 nouveauxBoutons[i] = new WritableImage(width, height);
-                PWnouveauxBoutons[i] = nouveauxBoutons[i].getPixelWriter();
+                pwNouveauxBoutons[i] = nouveauxBoutons[i].getPixelWriter();
                 switch (nomFich) {
                     case "aide.png":
-                        IVAide = new ImageView(nouveauxBoutons[i]);
+                        ivAide = new ImageView(nouveauxBoutons[i]);
                         break;
                     case "info.png":
-                        IVInfo = new ImageView(nouveauxBoutons[i]);
+                        ivInfo = new ImageView(nouveauxBoutons[i]);
                         break;
                     case "haut.png":
-                        IVHaut = new ImageView(nouveauxBoutons[i]);
+                        ivHaut = new ImageView(nouveauxBoutons[i]);
                         break;
                     case "bas.png":
-                        IVBas = new ImageView(nouveauxBoutons[i]);
+                        ivBas = new ImageView(nouveauxBoutons[i]);
                         break;
                     case "droite.png":
-                        IVDroite = new ImageView(nouveauxBoutons[i]);
+                        ivDroite = new ImageView(nouveauxBoutons[i]);
                         break;
                     case "gauche.png":
-                        IVGauche = new ImageView(nouveauxBoutons[i]);
+                        ivGauche = new ImageView(nouveauxBoutons[i]);
                         break;
                     case "fs.png":
-                        IVPleinEcran = new ImageView(nouveauxBoutons[i]);
+                        ivPleinEcran = new ImageView(nouveauxBoutons[i]);
                         break;
                     case "rotation.png":
-                        IVAutoRotation = new ImageView(nouveauxBoutons[i]);
+                        ivAutoRotation = new ImageView(nouveauxBoutons[i]);
                         break;
                     case "souris.png":
-                        IVModeSouris = new ImageView(nouveauxBoutons[i]);
+                        ivModeSouris = new ImageView(nouveauxBoutons[i]);
                         break;
                     case "zoomin.png":
-                        IVZoomPlus = new ImageView(nouveauxBoutons[i]);
+                        ivZoomPlus = new ImageView(nouveauxBoutons[i]);
                         break;
                     case "zoomout.png":
-                        IVZoomMoins = new ImageView(nouveauxBoutons[i]);
+                        ivZoomMoins = new ImageView(nouveauxBoutons[i]);
                         break;
                 }
                 nomImagesBoutons[i] = nomFich;
@@ -467,16 +475,16 @@ public class GestionnaireInterfaceController {
         int width = (int) imageBoutons[nombreImagesBouton].getWidth();
         int height = (int) imageBoutons[nombreImagesBouton].getHeight();
         nouveauxBoutons[nombreImagesBouton] = new WritableImage(width, height);
-        PWnouveauxBoutons[nombreImagesBouton] = nouveauxBoutons[nombreImagesBouton].getPixelWriter();
-        IVHotSpot = new ImageView(nouveauxBoutons[nombreImagesBouton]);
+        pwNouveauxBoutons[nombreImagesBouton] = nouveauxBoutons[nombreImagesBouton].getPixelWriter();
+        ivHotSpot = new ImageView(nouveauxBoutons[nombreImagesBouton]);
         nombreImagesBouton = i + 1;
         imageBoutons[nombreImagesBouton] = new Image("file:" + repertHotSpotsPhoto + File.separator + styleHotSpotImages);
         lisBoutons[nombreImagesBouton] = imageBoutons[nombreImagesBouton].getPixelReader();
         width = (int) imageBoutons[nombreImagesBouton].getWidth();
         height = (int) imageBoutons[nombreImagesBouton].getHeight();
         nouveauxBoutons[nombreImagesBouton] = new WritableImage(width, height);
-        PWnouveauxBoutons[nombreImagesBouton] = nouveauxBoutons[nombreImagesBouton].getPixelWriter();
-        IVHotSpotImage = new ImageView(nouveauxBoutons[nombreImagesBouton]);
+        pwNouveauxBoutons[nombreImagesBouton] = nouveauxBoutons[nombreImagesBouton].getPixelWriter();
+        ivHotSpotImage = new ImageView(nouveauxBoutons[nombreImagesBouton]);
 
         imgMasque = new Image("file:" + repertMasques + File.separator + strMA);
 
@@ -484,8 +492,8 @@ public class GestionnaireInterfaceController {
         width = (int) imgMasque.getWidth();
         height = (int) imgMasque.getHeight();
         nouveauxMasque = new WritableImage(width, height);
-        PWnouveauxMasque = nouveauxMasque.getPixelWriter();
-        IVMasque = new ImageView(nouveauxMasque);
+        pwNouveauxMasque = nouveauxMasque.getPixelWriter();
+        ivMasque = new ImageView(nouveauxMasque);
 
         changeCouleurBarre(couleurBoutons.getHue(), couleurBoutons.getSaturation(), couleurBoutons.getBrightness());
         changeCouleurHS(couleurHotspots.getHue(), couleurHotspots.getSaturation(), couleurHotspots.getBrightness());
@@ -516,7 +524,7 @@ public class GestionnaireInterfaceController {
                             couleur = Color.hsb(couleurFinale, saturation * 0.4 + sat * 0.6, brightness * 0.4 + bright * 0.6, opacity);
                         }
                     }
-                    PWnouveauxBoutons[i].setColor(x, y, couleur);
+                    pwNouveauxBoutons[i].setColor(x, y, couleur);
                 }
             }
         }
@@ -541,7 +549,7 @@ public class GestionnaireInterfaceController {
                         couleur = Color.hsb(couleurFinale, saturation, brightness, opacity);
                     }
                 }
-                PWnouveauxMasque.setColor(x, y, couleur);
+                pwNouveauxMasque.setColor(x, y, couleur);
             }
         }
     }
@@ -564,7 +572,7 @@ public class GestionnaireInterfaceController {
                         couleur = Color.hsb(couleurFinale, saturation, brightness, opacity);
                     }
                 }
-                PWnouveauxBoutons[nombreImagesBouton - 1].setColor(x, y, couleur);
+                pwNouveauxBoutons[nombreImagesBouton - 1].setColor(x, y, couleur);
             }
         }
     }
@@ -587,7 +595,7 @@ public class GestionnaireInterfaceController {
                         couleur = Color.hsb(couleurFinale, saturation, brightness, opacity);
                     }
                 }
-                PWnouveauxBoutons[nombreImagesBouton].setColor(x, y, couleur);
+                pwNouveauxBoutons[nombreImagesBouton].setColor(x, y, couleur);
             }
         }
     }
@@ -642,17 +650,17 @@ public class GestionnaireInterfaceController {
         switch (positionVignettes) {
             case "bottom":
                 if (positYBoussole.equals("bottom")) {
-                    posY = IMVisualisation.getLayoutY() + IMVisualisation.getFitHeight() - imgBoussole.getFitHeight() - dYBoussole - APVisuVignettes.getPrefHeight();
+                    posY = IMVisualisation.getLayoutY() + IMVisualisation.getFitHeight() - imgBoussole.getFitHeight() - dYBoussole - apVisuVignettes.getPrefHeight();
                 }
                 break;
             case "left":
                 if (positXBoussole.equals("left")) {
-                    posX = IMVisualisation.getLayoutX() + dXBoussole + APVisuVignettes.getPrefWidth();
+                    posX = IMVisualisation.getLayoutX() + dXBoussole + apVisuVignettes.getPrefWidth();
                 }
                 break;
             case "right":
                 if (positXBoussole.equals("right")) {
-                    posX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - dXBoussole - imgBoussole.getFitWidth() - APVisuVignettes.getPrefWidth();
+                    posX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - dXBoussole - imgBoussole.getFitWidth() - apVisuVignettes.getPrefWidth();
                 }
                 break;
         }
@@ -671,13 +679,13 @@ public class GestionnaireInterfaceController {
      *
      */
     private void afficheMasque() {
-        APVisualisation.getChildren().remove(IVMasque);
-        APVisualisation.getChildren().add(IVMasque);
-        IVMasque.setVisible(bAfficheMasque);
-        IVMasque.setFitWidth(tailleMasque);
-        IVMasque.setFitHeight(tailleMasque);
-        IVMasque.setOpacity(opaciteMasque);
-//        IVMasque.setSmooth(true);
+        apVisualisation.getChildren().remove(ivMasque);
+        apVisualisation.getChildren().add(ivMasque);
+        ivMasque.setVisible(bAfficheMasque);
+        ivMasque.setFitWidth(tailleMasque);
+        ivMasque.setFitHeight(tailleMasque);
+        ivMasque.setOpacity(opaciteMasque);
+//        ivMasque.setSmooth(true);
         String positXMasque = positionMasque.split(":")[1];
         String positYMasque = positionMasque.split(":")[0];
         double posX = 0;
@@ -687,19 +695,19 @@ public class GestionnaireInterfaceController {
                 posX = IMVisualisation.getLayoutX() + dXMasque;
                 break;
             case "right":
-                posX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - dXMasque - IVMasque.getFitWidth();
+                posX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - dXMasque - ivMasque.getFitWidth();
                 break;
         }
         switch (positYMasque) {
             case "bottom":
-                posY = IMVisualisation.getLayoutY() + IMVisualisation.getFitHeight() - IVMasque.getFitHeight() - dYMasque;
+                posY = IMVisualisation.getLayoutY() + IMVisualisation.getFitHeight() - ivMasque.getFitHeight() - dYMasque;
                 break;
             case "top":
                 posY = IMVisualisation.getLayoutY() + dYMasque;
                 break;
         }
-        IVMasque.setLayoutX(posX);
-        IVMasque.setLayoutY(posY);
+        ivMasque.setLayoutX(posX);
+        ivMasque.setLayoutY(posY);
 //
     }
 
@@ -802,14 +810,22 @@ public class GestionnaireInterfaceController {
         imgEmail.setLayoutY(posY);
     }
 
+    public void afficheDiaporama() {
+        apAfficheDiapo.getChildren().clear();
+        apAfficheDiapo.setOpacity(diaporamaOpacite);
+        apAfficheDiapo.setStyle("-fx-background-color : " + couleurDiaporama);
+        apAfficheDiapo.setVisible(visualiseDiaporama);
+        ivDiapo.setVisible(visualiseDiaporama);
+    }
+
     public void affichePlan() {
 
-        APVisuplan.setVisible(bAffichePlan);
+        apVisuplan.setVisible(bAffichePlan);
         if (bAffichePlan) {
             double marge = 10.d;
-            APVisuplan.getChildren().clear();
-            ImageView IVHSPlanActif = new ImageView(new Image("file:" + repertAppli + "/theme/plan/pointActif.png", 12, 12, true, true));
-            ImageView IVHSPlan = new ImageView(new Image("file:" + repertAppli + "/theme/plan/point.png", 12, 12, true, true));
+            apVisuplan.getChildren().clear();
+            ImageView ivHSPlanActif = new ImageView(new Image("file:" + repertAppli + "/theme/plan/pointActif.png", 12, 12, true, true));
+            ImageView ivHSPlan = new ImageView(new Image("file:" + repertAppli + "/theme/plan/point.png", 12, 12, true, true));
             Image imgPlan;
             if (nombrePlans > 0) {
                 String fichier = repertTemp + "/images/" + plans[gestionnairePlan.planActuel].getImagePlan();
@@ -824,14 +840,14 @@ public class GestionnaireInterfaceController {
                 );
 
             }
-            ImageView IVimgPlan = new ImageView(imgPlan);
-            APVisuplan.setPrefSize(imgPlan.getWidth() + marge * 2, imgPlan.getHeight() + marge * 2);
-            APVisuplan.setStyle("-fx-background-color : #" + txtCouleurFondPlan);
-            IVimgPlan.setLayoutX(marge);
-            IVimgPlan.setLayoutY(marge);
-            APVisuplan.getChildren().addAll(IVimgPlan, IVHSPlan);
+            ImageView ivimgPlan = new ImageView(imgPlan);
+            apVisuplan.setPrefSize(imgPlan.getWidth() + marge * 2, imgPlan.getHeight() + marge * 2);
+            apVisuplan.setStyle("-fx-background-color : #" + txtCouleurFondPlan);
+            ivimgPlan.setLayoutX(marge);
+            ivimgPlan.setLayoutY(marge);
+            apVisuplan.getChildren().addAll(ivimgPlan, ivHSPlan);
 
-            APVisuplan.setOpacity(opacitePlan);
+            apVisuplan.setOpacity(opacitePlan);
             double positionX = 0;
             double positionY = 0;
             if (bAfficheTitre) {
@@ -844,25 +860,25 @@ public class GestionnaireInterfaceController {
                     positionX = IMVisualisation.getLayoutX();
                     break;
                 case "right":
-                    positionX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - APVisuplan.getPrefWidth();
+                    positionX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - apVisuplan.getPrefWidth();
                     break;
             }
-            IVHSPlan.setLayoutX(80);
-            IVHSPlan.setLayoutY(40);
-            IVHSPlanActif.setLayoutX(30);
-            IVHSPlanActif.setLayoutY(90);
+            ivHSPlan.setLayoutX(80);
+            ivHSPlan.setLayoutY(40);
+            ivHSPlanActif.setLayoutX(30);
+            ivHSPlanActif.setLayoutY(90);
             if (bAfficheRadar) {
                 Arc arcRadar = new Arc(36, 96, tailleRadar, tailleRadar, -55, 70);
                 arcRadar.setType(ArcType.ROUND);
                 arcRadar.setFill(couleurFondRadar);
                 arcRadar.setStroke(couleurLigneRadar);
                 arcRadar.setOpacity(opaciteRadar);
-                APVisuplan.getChildren().addAll(arcRadar, IVHSPlanActif);
+                apVisuplan.getChildren().addAll(arcRadar, ivHSPlanActif);
             } else {
-                APVisuplan.getChildren().add(IVHSPlanActif);
+                apVisuplan.getChildren().add(ivHSPlanActif);
             }
-            APVisuplan.setLayoutX(positionX);
-            APVisuplan.setLayoutY(positionY);
+            apVisuplan.setLayoutX(positionX);
+            apVisuplan.setLayoutY(positionY);
         }
     }
 
@@ -881,22 +897,22 @@ public class GestionnaireInterfaceController {
                 LY = IMVisualisation.getLayoutY() + dYBarre;
                 break;
             case "bottom":
-                LY = IMVisualisation.getLayoutY() + IMVisualisation.getFitHeight() - HBbarreBoutons.getPrefHeight() - dYBarre;
+                LY = IMVisualisation.getLayoutY() + IMVisualisation.getFitHeight() - hbbarreBoutons.getPrefHeight() - dYBarre;
                 break;
             case "middle":
-                LY = IMVisualisation.getLayoutY() + (IMVisualisation.getFitHeight() - HBbarreBoutons.getPrefHeight()) / 2.d - dYBarre;
+                LY = IMVisualisation.getLayoutY() + (IMVisualisation.getFitHeight() - hbbarreBoutons.getPrefHeight()) / 2.d - dYBarre;
                 break;
         }
 
         switch (positHor) {
             case "right":
-                LX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - HBbarreBoutons.getPrefWidth() - dXBarre;
+                LX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - hbbarreBoutons.getPrefWidth() - dXBarre;
                 break;
             case "left":
                 LX = IMVisualisation.getLayoutX() + dXBarre;
                 break;
             case "center":
-                LX = IMVisualisation.getLayoutX() + (IMVisualisation.getFitWidth() - HBbarreBoutons.getPrefWidth()) / 2 + dXBarre;
+                LX = IMVisualisation.getLayoutX() + (IMVisualisation.getFitWidth() - hbbarreBoutons.getPrefWidth()) / 2 + dXBarre;
                 break;
         }
 
@@ -921,73 +937,73 @@ public class GestionnaireInterfaceController {
                 break;
         }
 
-        APVisuVignettes.setVisible(bAfficheVignettes);
+        apVisuVignettes.setVisible(bAfficheVignettes);
         if (bAfficheVignettes) {
             ImageView[] imgVignettes = new ImageView[nombrePanoramiques];
-            APVisuVignettes.getChildren().clear();
-            APVisuVignettes.setOpacity(opaciteVignettes);
-            APVisuVignettes.setStyle("-fx-background-color : " + couleurFondVignettes);
+            apVisuVignettes.getChildren().clear();
+            apVisuVignettes.setOpacity(opaciteVignettes);
+            apVisuVignettes.setStyle("-fx-background-color : " + couleurFondVignettes);
             switch (positionVignettes) {
                 case "bottom":
-                    APVisuVignettes.setPrefHeight(tailleImageVignettes / 2 + 10);
-                    APVisuVignettes.setPrefWidth(IMVisualisation.getFitWidth());
-                    APVisuVignettes.setMinHeight(tailleImageVignettes / 2 + 10);
-                    APVisuVignettes.setMinWidth(IMVisualisation.getFitWidth());
-                    APVisuVignettes.setLayoutX(IMVisualisation.getLayoutX());
-                    APVisuVignettes.setLayoutY(IMVisualisation.getLayoutY() + IMVisualisation.getFitHeight() - APVisuVignettes.getPrefHeight());
+                    apVisuVignettes.setPrefHeight(tailleImageVignettes / 2 + 10);
+                    apVisuVignettes.setPrefWidth(IMVisualisation.getFitWidth());
+                    apVisuVignettes.setMinHeight(tailleImageVignettes / 2 + 10);
+                    apVisuVignettes.setMinWidth(IMVisualisation.getFitWidth());
+                    apVisuVignettes.setLayoutX(IMVisualisation.getLayoutX());
+                    apVisuVignettes.setLayoutY(IMVisualisation.getLayoutY() + IMVisualisation.getFitHeight() - apVisuVignettes.getPrefHeight());
                     if (positVert.equals("bottom")) {
-                        LY = IMVisualisation.getLayoutY() + IMVisualisation.getFitHeight() - HBbarreBoutons.getPrefHeight() - dYBarre - APVisuVignettes.getPrefHeight();
+                        LY = IMVisualisation.getLayoutY() + IMVisualisation.getFitHeight() - hbbarreBoutons.getPrefHeight() - dYBarre - apVisuVignettes.getPrefHeight();
                     }
                     if (positYBoussole.equals("bottom")) {
-                        posY = IMVisualisation.getLayoutY() + IMVisualisation.getFitHeight() - imgBoussole.getFitHeight() - dYBoussole - APVisuVignettes.getPrefHeight();
+                        posY = IMVisualisation.getLayoutY() + IMVisualisation.getFitHeight() - imgBoussole.getFitHeight() - dYBoussole - apVisuVignettes.getPrefHeight();
                     }
                     break;
                 case "left":
                     if (bAfficheTitre) {
-                        APVisuVignettes.setPrefHeight(IMVisualisation.getFitHeight() - txtTitre.getHeight());
-                        APVisuVignettes.setMinHeight(IMVisualisation.getFitHeight() - txtTitre.getHeight());
+                        apVisuVignettes.setPrefHeight(IMVisualisation.getFitHeight() - txtTitre.getHeight());
+                        apVisuVignettes.setMinHeight(IMVisualisation.getFitHeight() - txtTitre.getHeight());
                     } else {
-                        APVisuVignettes.setPrefHeight(IMVisualisation.getFitHeight());
-                        APVisuVignettes.setMinHeight(IMVisualisation.getFitHeight());
+                        apVisuVignettes.setPrefHeight(IMVisualisation.getFitHeight());
+                        apVisuVignettes.setMinHeight(IMVisualisation.getFitHeight());
                     }
-                    APVisuVignettes.setPrefWidth(tailleImageVignettes + 10);
-                    APVisuVignettes.setMinWidth(tailleImageVignettes + 10);
-                    APVisuVignettes.setLayoutX(IMVisualisation.getLayoutX());
+                    apVisuVignettes.setPrefWidth(tailleImageVignettes + 10);
+                    apVisuVignettes.setMinWidth(tailleImageVignettes + 10);
+                    apVisuVignettes.setLayoutX(IMVisualisation.getLayoutX());
                     if (bAfficheTitre) {
-                        APVisuVignettes.setLayoutY(IMVisualisation.getLayoutY() + txtTitre.getHeight());
+                        apVisuVignettes.setLayoutY(IMVisualisation.getLayoutY() + txtTitre.getHeight());
                     } else {
-                        APVisuVignettes.setLayoutY(IMVisualisation.getLayoutY());
+                        apVisuVignettes.setLayoutY(IMVisualisation.getLayoutY());
                     }
-                    fondPrecedent.setLayoutX(IMVisualisation.getLayoutX() + APVisuVignettes.getPrefWidth());
+                    fondPrecedent.setLayoutX(IMVisualisation.getLayoutX() + apVisuVignettes.getPrefWidth());
                     if (positHor.equals("left")) {
-                        LX = IMVisualisation.getLayoutX() + dXBarre + APVisuVignettes.getPrefWidth();
+                        LX = IMVisualisation.getLayoutX() + dXBarre + apVisuVignettes.getPrefWidth();
                     }
                     if (positXBoussole.equals("left")) {
-                        posX = IMVisualisation.getLayoutX() + dXBoussole + APVisuVignettes.getPrefWidth();
+                        posX = IMVisualisation.getLayoutX() + dXBoussole + apVisuVignettes.getPrefWidth();
                     }
                     break;
                 case "right":
                     if (bAfficheTitre) {
-                        APVisuVignettes.setPrefHeight(IMVisualisation.getFitHeight() - txtTitre.getHeight());
-                        APVisuVignettes.setMinHeight(IMVisualisation.getFitHeight() - txtTitre.getHeight());
+                        apVisuVignettes.setPrefHeight(IMVisualisation.getFitHeight() - txtTitre.getHeight());
+                        apVisuVignettes.setMinHeight(IMVisualisation.getFitHeight() - txtTitre.getHeight());
                     } else {
-                        APVisuVignettes.setPrefHeight(IMVisualisation.getFitHeight());
-                        APVisuVignettes.setMinHeight(IMVisualisation.getFitHeight());
+                        apVisuVignettes.setPrefHeight(IMVisualisation.getFitHeight());
+                        apVisuVignettes.setMinHeight(IMVisualisation.getFitHeight());
                     }
-                    APVisuVignettes.setPrefWidth(tailleImageVignettes + 10);
-                    APVisuVignettes.setMinWidth(tailleImageVignettes + 10);
-                    APVisuVignettes.setLayoutX(IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - APVisuVignettes.getPrefWidth());
+                    apVisuVignettes.setPrefWidth(tailleImageVignettes + 10);
+                    apVisuVignettes.setMinWidth(tailleImageVignettes + 10);
+                    apVisuVignettes.setLayoutX(IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - apVisuVignettes.getPrefWidth());
                     if (bAfficheTitre) {
-                        APVisuVignettes.setLayoutY(IMVisualisation.getLayoutY() + txtTitre.getHeight());
+                        apVisuVignettes.setLayoutY(IMVisualisation.getLayoutY() + txtTitre.getHeight());
                     } else {
-                        APVisuVignettes.setLayoutY(IMVisualisation.getLayoutY());
+                        apVisuVignettes.setLayoutY(IMVisualisation.getLayoutY());
                     }
-                    fondSuivant.setLayoutX(IMVisualisation.getLayoutX() + (IMVisualisation.getFitWidth() - fondPrecedent.getPrefWidth()) - APVisuVignettes.getPrefWidth());
+                    fondSuivant.setLayoutX(IMVisualisation.getLayoutX() + (IMVisualisation.getFitWidth() - fondPrecedent.getPrefWidth()) - apVisuVignettes.getPrefWidth());
                     if (positHor.equals("right")) {
-                        LX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - HBbarreBoutons.getPrefWidth() - dXBarre - APVisuVignettes.getPrefWidth();
+                        LX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - hbbarreBoutons.getPrefWidth() - dXBarre - apVisuVignettes.getPrefWidth();
                     }
                     if (positXBoussole.equals("right")) {
-                        posX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - dXBoussole - imgBoussole.getFitWidth() - APVisuVignettes.getPrefWidth();
+                        posX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - dXBoussole - imgBoussole.getFitWidth() - apVisuVignettes.getPrefWidth();
                     }
                     break;
             }
@@ -1011,11 +1027,11 @@ public class GestionnaireInterfaceController {
                         imgVignettes[i].setLayoutX(5);
                         break;
                 }
-                APVisuVignettes.getChildren().add(imgVignettes[i]);
+                apVisuVignettes.getChildren().add(imgVignettes[i]);
             }
         }
-        HBbarreBoutons.setLayoutX(LX);
-        HBbarreBoutons.setLayoutY(LY);
+        hbbarreBoutons.setLayoutX(LX);
+        hbbarreBoutons.setLayoutY(LY);
         imgBoussole.setLayoutX(posX);
         imgBoussole.setLayoutY(posY);
         imgAiguille.setLayoutX(posX + (imgBoussole.getFitWidth() - imgAiguille.getFitWidth()) / 2);
@@ -1034,28 +1050,31 @@ public class GestionnaireInterfaceController {
      */
     public void afficheBouton(String position, double dX, double dY, double taille, String styleBoutons, String styleHS) {
         String repertBoutons = "file:" + repertBoutonsPrincipal + File.separator + styleBoutons;
-        APVisualisation.getChildren().clear();
-        APVisualisation.getChildren().addAll(RBClair, RBSombre, IMVisualisation, txtTitre, imgBoussole, imgAiguille, imgTwitter, imgGoogle, imgFacebook, imgEmail, APVisuVignettes, APVisuplan, fondSuivant, fondPrecedent);
+        apVisualisation.getChildren().clear();
+        apVisualisation.getChildren().addAll(rbClair, rbSombre, IMVisualisation, txtTitre, imgBoussole, imgAiguille, imgTwitter, imgGoogle, imgFacebook, imgEmail, apVisuVignettes, apVisuplan, fondSuivant, fondPrecedent);
         txtTitre.setVisible(bAfficheTitre);
         chargeBarre(styleBoutons, styleHS, imageMasque);
         afficheMasque();
-        HBbarreBoutons = new HBox();
-        HBbarreBoutons.setId("barreBoutons");
-        HBbarreBoutons.setVisible(toggleBarreVisibilite.equals("oui"));
-        IVHotSpot.setFitWidth(30);
-        IVHotSpot.setPreserveRatio(true);
-        IVHotSpot.setLayoutX(510);
-        IVHotSpot.setLayoutY(310);
+        hbbarreBoutons = new HBox();
+        hbbarreBoutons.setId("barreBoutons");
+        hbbarreBoutons.setVisible(toggleBarreVisibilite.equals("oui"));
+        hbbarreBoutons.setTranslateZ(1);
+        ivHotSpot.setFitWidth(30);
+        ivHotSpot.setPreserveRatio(true);
+        ivHotSpot.setLayoutX(510);
+        ivHotSpot.setLayoutY(310);
+        ivHotSpot.setTranslateZ(1);
         Tooltip t = new Tooltip("Hotspot panoramique");
         t.setStyle(tooltipStyle);
-        Tooltip.install(IVHotSpot, t);
-        IVHotSpotImage.setFitWidth(30);
-        IVHotSpotImage.setPreserveRatio(true);
-        IVHotSpotImage.setLayoutX(560);
-        IVHotSpotImage.setLayoutY(310);
+        Tooltip.install(ivHotSpot, t);
+        ivHotSpotImage.setFitWidth(30);
+        ivHotSpotImage.setPreserveRatio(true);
+        ivHotSpotImage.setLayoutX(560);
+        ivHotSpotImage.setLayoutY(310);
+        ivHotSpotImage.setTranslateZ(1);
         Tooltip t1 = new Tooltip("Hotspot Photo");
         t1.setStyle(tooltipStyle);
-        Tooltip.install(IVHotSpotImage, t1);
+        Tooltip.install(ivHotSpotImage, t1);
         int nombreBoutons = 11;
         if (toggleBarreDeplacements.equals("non")) {
             nombreBoutons -= 4;
@@ -1077,27 +1096,27 @@ public class GestionnaireInterfaceController {
             }
         }
         double tailleBarre = (double) nombreBoutons * (double) taille;
-        HBbarreBoutons.setPrefWidth(tailleBarre);
-        HBbarreBoutons.setPrefHeight((double) taille);
-        HBbarreBoutons.setMinWidth(tailleBarre);
-        HBbarreBoutons.setMinHeight((double) taille);
-        HBbarreBoutons.setMaxWidth(tailleBarre);
-        HBbarreBoutons.setMaxHeight((double) taille);
-        HBDeplacements = new HBox();
-        HBZoom = new HBox();
-        HBOutils = new HBox();
+        hbbarreBoutons.setPrefWidth(tailleBarre);
+        hbbarreBoutons.setPrefHeight((double) taille);
+        hbbarreBoutons.setMinWidth(tailleBarre);
+        hbbarreBoutons.setMinHeight((double) taille);
+        hbbarreBoutons.setMaxWidth(tailleBarre);
+        hbbarreBoutons.setMaxHeight((double) taille);
+        hbDeplacements = new HBox();
+        hbZoom = new HBox();
+        hbOutils = new HBox();
 
-        HBbarreBoutons.getChildren().addAll(HBDeplacements, HBZoom, HBOutils);
+        hbbarreBoutons.getChildren().addAll(hbDeplacements, hbZoom, hbOutils);
         if (toggleBarreDeplacements.equals("non")) {
-            HBbarreBoutons.getChildren().remove(HBDeplacements);
+            hbbarreBoutons.getChildren().remove(hbDeplacements);
         }
         if (toggleBarreZoom.equals("non")) {
-            HBbarreBoutons.getChildren().remove(HBZoom);
+            hbbarreBoutons.getChildren().remove(hbZoom);
         }
         if (toggleBarreOutils.equals("non")) {
-            HBbarreBoutons.getChildren().remove(HBOutils);
+            hbbarreBoutons.getChildren().remove(hbOutils);
         }
-        APVisualisation.getChildren().addAll(HBbarreBoutons, IVHotSpot, IVHotSpotImage);
+        apVisualisation.getChildren().addAll(hbbarreBoutons, ivHotSpot, ivHotSpotImage, apAfficheDiapo, ivDiapo);
 //        ImgHaut = new Image(repertBoutons + File.separator + "haut.png");
 //        ImgBas = new Image(repertBoutons + File.separator + "bas.png");
 //        ImgGauche = new Image(repertBoutons + File.separator + "gauche.png");
@@ -1109,50 +1128,50 @@ public class GestionnaireInterfaceController {
 //        ImgModeSouris = new Image(repertBoutons + File.separator + "souris.png");
 //        ImgPleinEcran = new Image(repertBoutons + File.separator + "fs.png");
 //        ImgAutoRotation = new Image(repertBoutons + File.separator + "rotation.png");
-//        IVHaut = new ImageView(ImgHaut);
-        IVHaut.setFitWidth(taille);
-        IVHaut.setFitHeight(taille);
-//        IVBas = new ImageView(ImgBas);
-        IVBas.setFitWidth(taille);
-        IVBas.setFitHeight(taille);
-//        IVGauche = new ImageView(ImgGauche);
-        IVGauche.setFitWidth(taille);
-        IVGauche.setFitHeight(taille);
-//        IVDroite = new ImageView(ImgDroite);
-        IVDroite.setFitWidth(taille);
-        IVDroite.setFitHeight(taille);
-//        IVZoomPlus = new ImageView(ImgZoomPlus);
-        IVZoomPlus.setFitWidth(taille);
-        IVZoomPlus.setFitHeight(taille);
-//        IVZoomMoins = new ImageView(ImgZoomMoins);
-        IVZoomMoins.setFitWidth(taille);
-        IVZoomMoins.setFitHeight(taille);
-//        IVInfo = new ImageView(ImgInfo);
-        IVInfo.setFitWidth(taille);
-        IVInfo.setFitHeight(taille);
-//        IVPleinEcran = new ImageView(ImgPleinEcran);
-        IVPleinEcran.setFitWidth(taille);
-        IVPleinEcran.setFitHeight(taille);
-//        IVModeSouris = new ImageView(ImgModeSouris);
-        IVModeSouris.setFitWidth(taille);
-        IVModeSouris.setFitHeight(taille);
-//        IVAide = new ImageView(ImgAide);
-        IVAide.setFitWidth(taille);
-        IVAide.setFitHeight(taille);
-//        IVAutoRotation = new ImageView(ImgAutoRotation);
-        IVAutoRotation.setFitWidth(taille);
-        IVAutoRotation.setFitHeight(taille);
-        HBDeplacements.getChildren().addAll(IVGauche, IVHaut, IVBas, IVDroite);
-        HBZoom.getChildren().addAll(IVZoomPlus, IVZoomMoins);
-        HBOutils.getChildren().addAll(IVPleinEcran, IVModeSouris, IVAutoRotation, IVInfo, IVAide);
+//        ivHaut = new ImageView(ImgHaut);
+        ivHaut.setFitWidth(taille);
+        ivHaut.setFitHeight(taille);
+//        ivBas = new ImageView(ImgBas);
+        ivBas.setFitWidth(taille);
+        ivBas.setFitHeight(taille);
+//        ivGauche = new ImageView(ImgGauche);
+        ivGauche.setFitWidth(taille);
+        ivGauche.setFitHeight(taille);
+//        ivDroite = new ImageView(ImgDroite);
+        ivDroite.setFitWidth(taille);
+        ivDroite.setFitHeight(taille);
+//        ivZoomPlus = new ImageView(ImgZoomPlus);
+        ivZoomPlus.setFitWidth(taille);
+        ivZoomPlus.setFitHeight(taille);
+//        ivZoomMoins = new ImageView(ImgZoomMoins);
+        ivZoomMoins.setFitWidth(taille);
+        ivZoomMoins.setFitHeight(taille);
+//        ivInfo = new ImageView(ImgInfo);
+        ivInfo.setFitWidth(taille);
+        ivInfo.setFitHeight(taille);
+//        ivPleinEcran = new ImageView(ImgPleinEcran);
+        ivPleinEcran.setFitWidth(taille);
+        ivPleinEcran.setFitHeight(taille);
+//        ivModeSouris = new ImageView(ImgModeSouris);
+        ivModeSouris.setFitWidth(taille);
+        ivModeSouris.setFitHeight(taille);
+//        ivAide = new ImageView(ImgAide);
+        ivAide.setFitWidth(taille);
+        ivAide.setFitHeight(taille);
+//        ivAutoRotation = new ImageView(ImgAutoRotation);
+        ivAutoRotation.setFitWidth(taille);
+        ivAutoRotation.setFitHeight(taille);
+        hbDeplacements.getChildren().addAll(ivGauche, ivHaut, ivBas, ivDroite);
+        hbZoom.getChildren().addAll(ivZoomPlus, ivZoomMoins);
+        hbOutils.getChildren().addAll(ivPleinEcran, ivModeSouris, ivAutoRotation, ivInfo, ivAide);
         if (toggleBoutonFS.equals("non")) {
-            HBOutils.getChildren().remove(IVPleinEcran);
+            hbOutils.getChildren().remove(ivPleinEcran);
         }
         if (toggleBoutonSouris.equals("non")) {
-            HBOutils.getChildren().remove(IVModeSouris);
+            hbOutils.getChildren().remove(ivModeSouris);
         }
         if (toggleBoutonRotation.equals("non")) {
-            HBOutils.getChildren().remove(IVAutoRotation);
+            hbOutils.getChildren().remove(ivAutoRotation);
         }
         String positVert = position.split(":")[0];
         String positHor = position.split(":")[1];
@@ -1163,44 +1182,44 @@ public class GestionnaireInterfaceController {
                 LY = IMVisualisation.getLayoutY() + dY;
                 break;
             case "bottom":
-                LY = IMVisualisation.getLayoutY() + IMVisualisation.getFitHeight() - HBbarreBoutons.getPrefHeight() - dY;
+                LY = IMVisualisation.getLayoutY() + IMVisualisation.getFitHeight() - hbbarreBoutons.getPrefHeight() - dY;
                 break;
             case "middle":
-                LY = IMVisualisation.getLayoutY() + (IMVisualisation.getFitHeight() - HBbarreBoutons.getPrefHeight()) / 2.d - dY;
+                LY = IMVisualisation.getLayoutY() + (IMVisualisation.getFitHeight() - hbbarreBoutons.getPrefHeight()) / 2.d - dY;
                 break;
         }
 
         switch (positHor) {
             case "right":
-                LX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - HBbarreBoutons.getPrefWidth() - dX;
+                LX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - hbbarreBoutons.getPrefWidth() - dX;
                 break;
             case "left":
                 LX = IMVisualisation.getLayoutX() + dX;
                 break;
             case "center":
-                LX = IMVisualisation.getLayoutX() + (IMVisualisation.getFitWidth() - HBbarreBoutons.getPrefWidth()) / 2 + dX;
+                LX = IMVisualisation.getLayoutX() + (IMVisualisation.getFitWidth() - hbbarreBoutons.getPrefWidth()) / 2 + dX;
                 break;
         }
         switch (positionVignettes) {
             case "bottom":
                 if (positVert.equals("bottom")) {
-                    LY = IMVisualisation.getLayoutY() + IMVisualisation.getFitHeight() - HBbarreBoutons.getPrefHeight() - dYBarre - APVisuVignettes.getPrefHeight();
+                    LY = IMVisualisation.getLayoutY() + IMVisualisation.getFitHeight() - hbbarreBoutons.getPrefHeight() - dYBarre - apVisuVignettes.getPrefHeight();
                 }
                 break;
             case "left":
                 if (positHor.equals("left")) {
-                    LX = IMVisualisation.getLayoutX() + dXBarre + APVisuVignettes.getPrefWidth();
+                    LX = IMVisualisation.getLayoutX() + dXBarre + apVisuVignettes.getPrefWidth();
                 }
                 break;
             case "right":
                 if (positHor.equals("right")) {
-                    LX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - HBbarreBoutons.getPrefWidth() - dXBarre - APVisuVignettes.getPrefWidth();
+                    LX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - hbbarreBoutons.getPrefWidth() - dXBarre - apVisuVignettes.getPrefWidth();
                 }
                 break;
         }
 
-        HBbarreBoutons.setLayoutX(LX);
-        HBbarreBoutons.setLayoutY(LY);
+        hbbarreBoutons.setLayoutX(LX);
+        hbbarreBoutons.setLayoutY(LY);
     }
 
     /**
@@ -1297,6 +1316,8 @@ public class GestionnaireInterfaceController {
                 + "titreTaille=" + titreTaille + "\n"
                 + "titreCouleur=" + couleurTitre + "\n"
                 + "titreFondCouleur=" + couleurFondTitre + "\n"
+                + "diaporamaOpacite=" + Math.round(diaporamaOpacite * 100.d) / 100.d + "\n"
+                + "diaporamaCouleur=" + couleurDiaporama + "\n"
                 + "afficheBoussole=" + bAfficheBoussole + "\n"
                 + "imageBoussole=" + imageBoussole + "\n"
                 + "tailleBoussole=" + Math.round(tailleBoussole * 10.d) / 10.d + "\n"
@@ -1357,8 +1378,8 @@ public class GestionnaireInterfaceController {
         bAfficheMasque = false;
         bAfficheVignettes = false;
         bAfficheReseauxSociaux = false;
-        APVisualisation.getChildren().clear();
-        APVisualisation.getChildren().addAll(RBClair, RBSombre, IMVisualisation, txtTitre, imgBoussole, imgAiguille, imgTwitter, imgGoogle, imgFacebook, imgEmail, APVisuVignettes, APVisuplan, IVMasque);
+        apVisualisation.getChildren().clear();
+        apVisualisation.getChildren().addAll(rbClair, rbSombre, IMVisualisation, txtTitre, imgBoussole, imgAiguille, imgTwitter, imgGoogle, imgFacebook, imgEmail, apVisuVignettes, apVisuplan, ivMasque, apAfficheDiapo, ivDiapo);
 
         for (String chaine : templ) {
             String variable = chaine.split("=")[0];
@@ -1379,7 +1400,7 @@ public class GestionnaireInterfaceController {
 
                 case "styleBarre":
                     styleBarre = valeur;
-                    CBlisteStyle.setValue(valeur);
+                    cblisteStyle.setValue(valeur);
                     break;
                 case "suivantPrecedent":
                     bSuivantPrecedent = (valeur.equals("true"));
@@ -1395,31 +1416,31 @@ public class GestionnaireInterfaceController {
                     positionBarre = valeur;
                     switch (valeur) {
                         case "top:left":
-                            RBTopLeft.setSelected(true);
+                            rbTopLeft.setSelected(true);
                             break;
                         case "top:center":
-                            RBTopCenter.setSelected(true);
+                            rbTopCenter.setSelected(true);
                             break;
                         case "top:right":
-                            RBTopRight.setSelected(true);
+                            rbTopRight.setSelected(true);
                             break;
                         case "middle:left":
-                            RBMiddleLeft.setSelected(true);
+                            rbMiddleLeft.setSelected(true);
                             break;
                         case "middle:center":
-                            RBMiddleCenter.setSelected(true);
+                            rbMiddleCenter.setSelected(true);
                             break;
                         case "middle:right":
-                            RBMiddleRight.setSelected(true);
+                            rbMiddleRight.setSelected(true);
                             break;
                         case "bottom:left":
-                            RBBottomLeft.setSelected(true);
+                            rbBottomLeft.setSelected(true);
                             break;
                         case "bottom:center":
-                            RBBottomCenter.setSelected(true);
+                            rbBottomCenter.setSelected(true);
                             break;
                         case "bottom:right":
-                            RBBottomRight.setSelected(true);
+                            rbBottomRight.setSelected(true);
                             break;
                     }
 
@@ -1435,57 +1456,57 @@ public class GestionnaireInterfaceController {
                 case "visible":
                     toggleBarreVisibilite = valeur;
                     if (valeur.equals("oui")) {
-                        CBVisible.setSelected(true);
+                        cbVisible.setSelected(true);
                     } else {
-                        CBVisible.setSelected(false);
+                        cbVisible.setSelected(false);
                     }
                     break;
                 case "deplacement":
                     toggleBarreDeplacements = valeur;
                     if (valeur.equals("oui")) {
-                        CBDeplacements.setSelected(true);
+                        cbDeplacements.setSelected(true);
                     } else {
-                        CBDeplacements.setSelected(false);
+                        cbDeplacements.setSelected(false);
                     }
                     break;
                 case "zoom":
                     toggleBarreZoom = valeur;
                     if (valeur.equals("oui")) {
-                        CBZoom.setSelected(true);
+                        cbZoom.setSelected(true);
                     } else {
-                        CBZoom.setSelected(false);
+                        cbZoom.setSelected(false);
                     }
                     break;
                 case "outils":
                     toggleBarreOutils = valeur;
                     if (valeur.equals("oui")) {
-                        CBOutils.setSelected(true);
+                        cbOutils.setSelected(true);
                     } else {
-                        CBOutils.setSelected(false);
+                        cbOutils.setSelected(false);
                     }
                     break;
                 case "rotation":
                     toggleBoutonRotation = valeur;
                     if (valeur.equals("oui")) {
-                        CBRotation.setSelected(true);
+                        cbRotation.setSelected(true);
                     } else {
-                        CBRotation.setSelected(false);
+                        cbRotation.setSelected(false);
                     }
                     break;
                 case "FS":
                     toggleBoutonFS = valeur;
                     if (valeur.equals("oui")) {
-                        CBFS.setSelected(true);
+                        cbFS.setSelected(true);
                     } else {
-                        CBFS.setSelected(false);
+                        cbFS.setSelected(false);
                     }
                     break;
                 case "souris":
                     toggleBoutonSouris = valeur;
                     if (valeur.equals("oui")) {
-                        CBSouris.setSelected(true);
+                        cbSouris.setSelected(true);
                     } else {
-                        CBSouris.setSelected(false);
+                        cbSouris.setSelected(false);
                     }
                     break;
                 case "afficheTitre":
@@ -1508,6 +1529,12 @@ public class GestionnaireInterfaceController {
                     break;
                 case "titreFondCouleur":
                     couleurFondTitre = valeur;
+                    break;
+                case "diaporamaOpacite":
+                    diaporamaOpacite = Double.parseDouble(valeur);
+                    break;
+                case "diaporamaCouleur":
+                    couleurDiaporama = valeur;
                     break;
                 case "afficheBoussole":
                     bAfficheBoussole = (valeur.equals("true"));
@@ -1671,76 +1698,78 @@ public class GestionnaireInterfaceController {
         txtTitre.setFont(fonte1);
         txtTitre.setPrefHeight(-1);
         txtTitre.setVisible(bAfficheTitre);
-        CBAfficheTitre.setSelected(bAfficheTitre);
-        CPCouleurTitre.setValue(Color.valueOf(couleurTitre));
-        CPCouleurFondTitre.setValue(Color.valueOf(couleurFondTitre));
-        CPCouleurBoutons.setValue(couleurBoutons);
-        CPCouleurTheme.setValue(couleurTheme);
-        CPCouleurMasques.setValue(couleurMasque);
-        CPCouleurHotspots.setValue(couleurHotspots);
-        CBListePolices.setValue(titrePoliceNom);
-        SLOpacite.setValue(titreOpacite);
-        CBSuivantPrecedent.setSelected(bSuivantPrecedent);
+        cbAfficheTitre.setSelected(bAfficheTitre);
+        cpCouleurTitre.setValue(Color.valueOf(couleurTitre));
+        cpCouleurFondTitre.setValue(Color.valueOf(couleurFondTitre));
+        cpCouleurBoutons.setValue(couleurBoutons);
+        cpCouleurTheme.setValue(couleurTheme);
+        cpCouleurMasques.setValue(couleurMasque);
+        cpCouleurHotspots.setValue(couleurHotspots);
+        cbListePolices.setValue(titrePoliceNom);
+        slOpacite.setValue(titreOpacite);
+        cbSuivantPrecedent.setSelected(bSuivantPrecedent);
         fondSuivant.setVisible(bSuivantPrecedent);
         fondPrecedent.setVisible(bSuivantPrecedent);
-        SLTaillePolice.setValue(Double.parseDouble(titrePoliceTaille));
-        SLTaille.setValue(titreTaille);
-        APVisualisation.getChildren().remove(HBbarreBoutons);
-        APVisualisation.getChildren().remove(IVHotSpot);
-        APVisualisation.getChildren().remove(IVHotSpotImage);
-        SLTailleBoussole.setValue(tailleBoussole);
-        SLOpaciteBoussole.setValue(opaciteBoussole);
+        slTaillePolice.setValue(Double.parseDouble(titrePoliceTaille));
+        slTaille.setValue(titreTaille);
+        apVisualisation.getChildren().remove(hbbarreBoutons);
+        apVisualisation.getChildren().remove(ivHotSpot);
+        apVisualisation.getChildren().remove(ivHotSpotImage);
+        slTailleBoussole.setValue(tailleBoussole);
+        slOpaciteBoussole.setValue(opaciteBoussole);
         boussDXSpinner.setNumber(new BigDecimal(dXBoussole));
         boussDYSpinner.setNumber(new BigDecimal(dYBoussole));
-        CBAiguilleMobile.setSelected(bAiguilleMobileBoussole);
-        CBAfficheBoussole.setSelected(bAfficheBoussole);
-        RBBoussTopLeft.setSelected(positionBoussole.equals("top:left"));
-        RBBoussBottomLeft.setSelected(positionBoussole.equals("bottom:left"));
-        RBBoussTopRight.setSelected(positionBoussole.equals("top:right"));
-        RBBoussBottomRight.setSelected(positionBoussole.equals("bottom:right"));
-        SLTailleMasque.setValue(tailleMasque);
-        SLOpaciteMasque.setValue(opaciteMasque);
+        cbAiguilleMobile.setSelected(bAiguilleMobileBoussole);
+        cbAfficheBoussole.setSelected(bAfficheBoussole);
+        rbBoussTopLeft.setSelected(positionBoussole.equals("top:left"));
+        rbBoussBottomLeft.setSelected(positionBoussole.equals("bottom:left"));
+        rbBoussTopRight.setSelected(positionBoussole.equals("top:right"));
+        rbBoussBottomRight.setSelected(positionBoussole.equals("bottom:right"));
+        slTailleMasque.setValue(tailleMasque);
+        slOpaciteMasque.setValue(opaciteMasque);
         masqueDXSpinner.setNumber(new BigDecimal(dXMasque));
         masqueDYSpinner.setNumber(new BigDecimal(dYMasque));
-        CBMasqueNavigation.setSelected(bMasqueNavigation);
-        CBMasqueBoussole.setSelected(bMasqueBoussole);
-        CBMasqueTitre.setSelected(bMasqueTitre);
-        CBMasquePlan.setSelected(bMasquePlan);
-        CBMasqueReseaux.setSelected(bMasqueReseaux);
-        CBMasqueVignettes.setSelected(bMasqueVignettes);
-        CBAfficheMasque.setSelected(bAfficheMasque);
-        RBMasqueTopLeft.setSelected(positionMasque.equals("top:left"));
-        RBMasqueBottomLeft.setSelected(positionMasque.equals("bottom:left"));
-        RBMasqueTopRight.setSelected(positionMasque.equals("top:right"));
-        RBMasqueBottomRight.setSelected(positionMasque.equals("bottom:right"));
-        SLTailleReseauxSociaux.setValue(tailleReseauxSociaux);
-        SLOpaciteReseauxSociaux.setValue(opaciteReseauxSociaux);
+        cbMasqueNavigation.setSelected(bMasqueNavigation);
+        cbMasqueBoussole.setSelected(bMasqueBoussole);
+        cbMasqueTitre.setSelected(bMasqueTitre);
+        cbMasquePlan.setSelected(bMasquePlan);
+        cbMasqueReseaux.setSelected(bMasqueReseaux);
+        cbMasqueVignettes.setSelected(bMasqueVignettes);
+        cbAfficheMasque.setSelected(bAfficheMasque);
+        rbMasqueTopLeft.setSelected(positionMasque.equals("top:left"));
+        rbMasqueBottomLeft.setSelected(positionMasque.equals("bottom:left"));
+        rbMasqueTopRight.setSelected(positionMasque.equals("top:right"));
+        rbMasqueBottomRight.setSelected(positionMasque.equals("bottom:right"));
+        slTailleReseauxSociaux.setValue(tailleReseauxSociaux);
+        slOpaciteReseauxSociaux.setValue(opaciteReseauxSociaux);
         reseauxSociauxDXSpinner.setNumber(new BigDecimal(dXReseauxSociaux));
         reseauxSociauxDYSpinner.setNumber(new BigDecimal(dYReseauxSociaux));
-        CBReseauxSociauxTwitter.setSelected(bReseauxSociauxTwitter);
-        CBReseauxSociauxGoogle.setSelected(bReseauxSociauxGoogle);
-        CBReseauxSociauxFacebook.setSelected(bReseauxSociauxFacebook);
-        CBReseauxSociauxEmail.setSelected(bReseauxSociauxEmail);
-        CBAfficheReseauxSociaux.setSelected(bAfficheReseauxSociaux);
-        RBReseauxSociauxTopLeft.setSelected(positionReseauxSociaux.equals("top:left"));
-        RBReseauxSociauxBottomLeft.setSelected(positionReseauxSociaux.equals("bottom:left"));
-        RBReseauxSociauxTopRight.setSelected(positionReseauxSociaux.equals("top:right"));
-        RBReseauxSociauxBottomRight.setSelected(positionReseauxSociaux.equals("bottom:right"));
-        CBAfficheVignettes.setSelected(bAfficheVignettes);
-        SLOpaciteVignettes.setValue(opaciteVignettes);
-        SLTailleVignettes.setValue(tailleImageVignettes);
-        RBVignettesLeft.setSelected(positionVignettes.equals("left"));
-        RBVignettesRight.setSelected(positionVignettes.equals("right"));
-        RBVignettesBottom.setSelected(positionVignettes.equals("bottom"));
-        CPCouleurFondVignettes.setValue(Color.valueOf(couleurFondVignettes));
-        CPCouleurTexteVignettes.setValue(Color.valueOf(couleurTexteVignettes));
-        CBAffichePlan.setSelected(bAffichePlan);
-        SLOpacitePlan.setValue(opacitePlan);
-        SLLargeurPlan.setValue(largeurPlan);
-        RBPlanLeft.setSelected(positionPlan.equals("left"));
-        RBPlanRight.setSelected(positionPlan.equals("right"));
-        CPCouleurFondPlan.setValue(couleurFondPlan);
-        CPCouleurTextePlan.setValue(couleurTextePlan);
+        cbReseauxSociauxTwitter.setSelected(bReseauxSociauxTwitter);
+        cbReseauxSociauxGoogle.setSelected(bReseauxSociauxGoogle);
+        cbReseauxSociauxFacebook.setSelected(bReseauxSociauxFacebook);
+        cbReseauxSociauxEmail.setSelected(bReseauxSociauxEmail);
+        cbAfficheReseauxSociaux.setSelected(bAfficheReseauxSociaux);
+        rbReseauxSociauxTopLeft.setSelected(positionReseauxSociaux.equals("top:left"));
+        rbReseauxSociauxBottomLeft.setSelected(positionReseauxSociaux.equals("bottom:left"));
+        rbReseauxSociauxTopRight.setSelected(positionReseauxSociaux.equals("top:right"));
+        rbReseauxSociauxBottomRight.setSelected(positionReseauxSociaux.equals("bottom:right"));
+        cbAfficheVignettes.setSelected(bAfficheVignettes);
+        slOpaciteVignettes.setValue(opaciteVignettes);
+        slTailleVignettes.setValue(tailleImageVignettes);
+        rbVignettesLeft.setSelected(positionVignettes.equals("left"));
+        rbVignettesRight.setSelected(positionVignettes.equals("right"));
+        rbVignettesBottom.setSelected(positionVignettes.equals("bottom"));
+        cpCouleurFondVignettes.setValue(Color.valueOf(couleurFondVignettes));
+        cpCouleurTexteVignettes.setValue(Color.valueOf(couleurTexteVignettes));
+        cbAffichePlan.setSelected(bAffichePlan);
+        slOpacitePlan.setValue(opacitePlan);
+        slLargeurPlan.setValue(largeurPlan);
+        rbPlanLeft.setSelected(positionPlan.equals("left"));
+        rbPlanRight.setSelected(positionPlan.equals("right"));
+        cpCouleurFondPlan.setValue(couleurFondPlan);
+        cpCouleurTextePlan.setValue(couleurTextePlan);
+        cpCouleurDiaporama.setValue(Color.valueOf(couleurDiaporama));
+        slOpaciteDiaporama.setValue(diaporamaOpacite);
         if (bAffichePlan) {
             tabPlan.setDisable(!bAffichePlan);
             imgAjouterPlan.setDisable(!bAffichePlan);
@@ -1752,11 +1781,11 @@ public class GestionnaireInterfaceController {
             }
 
         }
-        CBAfficheRadar.setSelected(bAfficheRadar);
-        SLOpaciteRadar.setValue(opaciteRadar);
-        SLTailleRadar.setValue(tailleRadar);
-        CPCouleurFondRadar.setValue(couleurFondRadar);
-        CPCouleurLigneRadar.setValue(couleurLigneRadar);
+        cbAfficheRadar.setSelected(bAfficheRadar);
+        slOpaciteRadar.setValue(opaciteRadar);
+        slTailleRadar.setValue(tailleRadar);
+        cpCouleurFondRadar.setValue(couleurFondRadar);
+        cpCouleurLigneRadar.setValue(couleurLigneRadar);
         afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
         afficheBoussole();
         afficheMasque();
@@ -1767,6 +1796,7 @@ public class GestionnaireInterfaceController {
         changeCouleurHSPhoto(couleurHotspots.getHue(), couleurHotspots.getSaturation(), couleurHotspots.getBrightness());
         afficheVignettes();
         affichePlan();
+        afficheDiaporama();
     }
 
     /**
@@ -1800,9 +1830,9 @@ public class GestionnaireInterfaceController {
         ArrayList<String> listeBoussoles = listerBoussoles(repertBoussoles);
         ArrayList<String> listeMasques = listerMasques(repertMasques);
         int nombreHotSpots = listeHotSpots.size();
-        ImageView[] IVHotspots = new ImageView[nombreHotSpots];
+        ImageView[] ivHotspots = new ImageView[nombreHotSpots];
         int nombreHotSpotsPhoto = listeHotSpotsPhoto.size();
-        ImageView[] IVHotspotsPhoto = new ImageView[nombreHotSpotsPhoto];
+        ImageView[] ivHotspotsPhoto = new ImageView[nombreHotSpotsPhoto];
         imageClaire = new Image("file:" + repertAppli + File.separator + "images/claire.jpg");
         imageSombre = new Image("file:" + repertAppli + File.separator + "images/sombre.jpg");
         imgSuivant = new ImageView(new Image("file:" + repertAppli + File.separator + "panovisu/images/suivant.png"));
@@ -1820,15 +1850,15 @@ public class GestionnaireInterfaceController {
         double largeurOutils = 380;
 
         tabInterface = new Pane();
-        HBInterface = new HBox();
-        HBInterface.setPrefWidth(width);
-        HBInterface.setPrefHeight(height);
-        tabInterface.getChildren().add(HBInterface);
-        APVisualisation = new AnchorPane();
-        APVisualisation.setPrefWidth(width - largeurOutils);
-        APVisualisation.setPrefHeight(height);
-        VBOutils = new VBox();
-        ScrollPane SPOutils = new ScrollPane(VBOutils);
+        hbInterface = new HBox();
+        hbInterface.setPrefWidth(width);
+        hbInterface.setPrefHeight(height);
+        tabInterface.getChildren().add(hbInterface);
+        apVisualisation = new AnchorPane();
+        apVisualisation.setPrefWidth(width - largeurOutils);
+        apVisualisation.setPrefHeight(height);
+        vbOutils = new VBox();
+        ScrollPane SPOutils = new ScrollPane(vbOutils);
         SPOutils.setId("spOutils");
         SPOutils.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         SPOutils.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -1838,17 +1868,17 @@ public class GestionnaireInterfaceController {
         SPOutils.setPrefWidth(largeurOutils);
         SPOutils.setMaxWidth(largeurOutils);
         SPOutils.setTranslateY(15);
-        VBOutils.setPrefWidth(largeurOutils - 20);
-        VBOutils.setMaxWidth(largeurOutils - 20);
-        //VBOutils.setMinHeight(height);
-//        VBOutils.setStyle("-fx-background-color : #ccc;");
-        HBInterface.getChildren().addAll(APVisualisation, SPOutils);
+        vbOutils.setPrefWidth(largeurOutils - 20);
+        vbOutils.setMaxWidth(largeurOutils - 20);
+        //vbOutils.setMinHeight(height);
+//        vbOutils.setStyle("-fx-background-color : #ccc;");
+        hbInterface.getChildren().addAll(apVisualisation, SPOutils);
         /*
          * ***************************************************************
          *     Panneau de visualisation de l'interface
          * ***************************************************************
          */
-        double tailleMax = APVisualisation.getPrefWidth();
+        double tailleMax = apVisualisation.getPrefWidth();
         if (tailleMax > 1200) {
             tailleMax = 1200;
         }
@@ -1856,7 +1886,7 @@ public class GestionnaireInterfaceController {
         IMVisualisation.setFitWidth(tailleMax);
         IMVisualisation.setFitHeight(tailleMax * 2.d / 3.d);
         IMVisualisation.setSmooth(true);
-        double LX = (APVisualisation.getPrefWidth() - IMVisualisation.getFitWidth()) / 2;
+        double LX = (apVisualisation.getPrefWidth() - IMVisualisation.getFitWidth()) / 2;
         IMVisualisation.setLayoutX(LX);
         IMVisualisation.setLayoutY(20);
         txtTitre.setMinSize(tailleMax, 30);
@@ -1867,30 +1897,30 @@ public class GestionnaireInterfaceController {
         txtTitre.setTextFill(Color.WHITE);
         txtTitre.setLayoutY(20);
         txtTitre.setLayoutX(IMVisualisation.getLayoutX() + (IMVisualisation.getFitWidth() - txtTitre.getMinWidth()) / 2);
-        RBClair = new RadioButton("Image claire");
-        RBSombre = new RadioButton("Image Sombre");
-        double positRB = IMVisualisation.getFitHeight() + 30;
-        RBClair.setToggleGroup(grpImage);
-        RBSombre.setToggleGroup(grpImage);
-        APVisualisation.getChildren().addAll(RBClair, RBSombre);
-        RBClair.setLayoutX(LX + 40);
-        RBClair.setLayoutY(positRB);
-        RBClair.setSelected(true);
-        RBSombre.setLayoutX(LX + 180);
-        RBSombre.setLayoutY(positRB);
-        RBClair.setUserData("claire");
-        RBSombre.setUserData("sombre");
+        rbClair = new RadioButton("Image claire");
+        rbSombre = new RadioButton("Image Sombre");
+        double positrb = IMVisualisation.getFitHeight() + 30;
+        rbClair.setToggleGroup(grpImage);
+        rbSombre.setToggleGroup(grpImage);
+        apVisualisation.getChildren().addAll(rbClair, rbSombre);
+        rbClair.setLayoutX(LX + 40);
+        rbClair.setLayoutY(positrb);
+        rbClair.setSelected(true);
+        rbSombre.setLayoutX(LX + 180);
+        rbSombre.setLayoutY(positrb);
+        rbClair.setUserData("claire");
+        rbSombre.setUserData("sombre");
         imgBoussole = new ImageView(new Image("file:" + repertBoussoles + File.separator + imageBoussole));
         imgAiguille = new ImageView("file:" + repertBoussoles + File.separator + "aiguille.png");
-        APVisualisation.getChildren().add(IMVisualisation);
+        apVisualisation.getChildren().add(IMVisualisation);
         imgTwitter = new ImageView(new Image("file:" + repertReseauxSociaux + File.separator + imageReseauxSociauxTwitter));
         imgGoogle = new ImageView(new Image("file:" + repertReseauxSociaux + File.separator + imageReseauxSociauxGoogle));
         imgFacebook = new ImageView(new Image("file:" + repertReseauxSociaux + File.separator + imageReseauxSociauxFacebook));
         imgEmail = new ImageView(new Image("file:" + repertReseauxSociaux + File.separator + imageReseauxSociauxEmail));
-        APVisuVignettes = new AnchorPane();
-        APVisuplan = new AnchorPane();
-        APVisualisation.getChildren().clear();
-        APVisualisation.getChildren().addAll(txtTitre, imgBoussole, imgAiguille, IVMasque, imgTwitter, imgGoogle, imgFacebook, imgEmail, APVisuVignettes, fondSuivant, fondPrecedent);
+        apVisuVignettes = new AnchorPane();
+        apVisuplan = new AnchorPane();
+        apVisualisation.getChildren().clear();
+        apVisualisation.getChildren().addAll(txtTitre, imgBoussole, imgAiguille, ivMasque, imgTwitter, imgGoogle, imgFacebook, imgEmail, apVisuVignettes, fondSuivant, fondPrecedent);
         fondPrecedent.setPrefWidth(64);
         fondPrecedent.setPrefHeight(64);
         fondSuivant.setPrefWidth(64);
@@ -1905,7 +1935,21 @@ public class GestionnaireInterfaceController {
         fondSuivant.setLayoutY(IMVisualisation.getLayoutY() + (IMVisualisation.getFitHeight() - fondSuivant.getPrefHeight()) / 2);
         fondSuivant.setVisible(bSuivantPrecedent);
         fondPrecedent.setVisible(bSuivantPrecedent);
-
+        apAfficheDiapo = new AnchorPane();
+        apAfficheDiapo.setPrefWidth(IMVisualisation.getFitWidth());
+        apAfficheDiapo.setPrefHeight(IMVisualisation.getFitHeight());
+        apAfficheDiapo.setLayoutX(LX);
+        apAfficheDiapo.setLayoutY(20);
+        apAfficheDiapo.setTranslateZ(10);
+        apAfficheDiapo.setVisible(false);
+        ivDiapo = new ImageView(new Image("file:" + repertAppli + File.separator + "images/testImage.png"));
+        ivDiapo.setPreserveRatio(false);
+        ivDiapo.setFitHeight(IMVisualisation.getFitHeight() * 0.8);
+        ivDiapo.setFitWidth(IMVisualisation.getFitWidth() * 0.8);
+        ivDiapo.setLayoutX((IMVisualisation.getFitWidth() - ivDiapo.getFitWidth()) / 2 + LX);
+        ivDiapo.setLayoutY((IMVisualisation.getFitHeight() - ivDiapo.getFitHeight()) / 2 + 20);
+        ivDiapo.setVisible(false);
+        apVisualisation.getChildren().addAll(apAfficheDiapo, ivDiapo);
         afficheBoussole();
         afficheMasque();
         afficheReseauxSociaux();
@@ -1917,58 +1961,59 @@ public class GestionnaireInterfaceController {
          *     Pannels d'outils 
          * *****************************************
          */
-        AnchorPane APCoulTheme = new AnchorPane();
-        CPCouleurTheme = new ColorPicker(couleurTheme);
-        String coul2 = CPCouleurTheme.getValue().toString().substring(2, 8);
+        AnchorPane apCoulTheme = new AnchorPane();
+        cpCouleurTheme = new ColorPicker(couleurTheme);
+        String coul2 = cpCouleurTheme.getValue().toString().substring(2, 8);
         changeCouleurTitre(coul2);
         changeCouleurVignettes(coul2);
         Label lblCouleurTheme = new Label(rb.getString("interface.couleurTheme"));
         lblCouleurTheme.setLayoutX(20);
         lblCouleurTheme.setLayoutY(20);
-        CPCouleurTheme.setLayoutX(150);
-        CPCouleurTheme.setLayoutY(20);
-        APCoulTheme.setPrefHeight(40);
-        APCoulTheme.setMinHeight(40);
-        APCoulTheme.getChildren().addAll(lblCouleurTheme, CPCouleurTheme);
+        cpCouleurTheme.setLayoutX(150);
+        cpCouleurTheme.setLayoutY(20);
+        apCoulTheme.setPrefHeight(40);
+        apCoulTheme.setMinHeight(40);
+        apCoulTheme.getChildren().addAll(lblCouleurTheme, cpCouleurTheme);
 
-        AnchorPane APBB = new AnchorPane();
-        AnchorPane APHS = new AnchorPane();
-        AnchorPane APTIT = new AnchorPane();
-        AnchorPane APBOUSS = new AnchorPane();
-        AnchorPane APMASQ = new AnchorPane();
-        AnchorPane APRS = new AnchorPane();
-        AnchorPane APVIG = new AnchorPane();
-        AnchorPane APPL = new AnchorPane();
+        AnchorPane apBB = new AnchorPane();
+        AnchorPane apHS = new AnchorPane();
+        AnchorPane apTIT = new AnchorPane();
+        AnchorPane apDIA = new AnchorPane();
+        AnchorPane apBOUSS = new AnchorPane();
+        AnchorPane apMASQ = new AnchorPane();
+        AnchorPane apRS = new AnchorPane();
+        AnchorPane apVIG = new AnchorPane();
+        AnchorPane apPL = new AnchorPane();
 
         /*
          * *****************************************
          *     Panel Titre 
          * ****************************************
          */
-        AnchorPane APTitre = new AnchorPane();
-        APTitre.setLayoutY(40);
-        APTitre.setLayoutX(10);
-        APTitre.setPrefHeight(230);
+        AnchorPane apTitre = new AnchorPane();
+        apTitre.setLayoutY(40);
+        apTitre.setLayoutX(10);
+        apTitre.setPrefHeight(230);
         Label lblPanelTitre = new Label(rb.getString("interface.styleTitre"));
-        lblPanelTitre.setPrefWidth(VBOutils.getPrefWidth());
+        lblPanelTitre.setPrefWidth(vbOutils.getPrefWidth());
         lblPanelTitre.setStyle("-fx-background-color : #666");
         lblPanelTitre.setTextFill(Color.WHITE);
         lblPanelTitre.setPadding(new Insets(5));
         lblPanelTitre.setLayoutX(10);
         lblPanelTitre.setLayoutY(10);
-        ImageView IVBtnPlusTitre = new ImageView(new Image("file:" + "images/plus.png", 20, 20, true, true));
-        IVBtnPlusTitre.setLayoutX(VBOutils.getPrefWidth() - 20);
-        IVBtnPlusTitre.setLayoutY(11);
-        CBAfficheTitre = new CheckBox(rb.getString("interface.afficheTitre"));
-        CBAfficheTitre.setSelected(bAfficheTitre);
-        CBAfficheTitre.setLayoutX(10);
-        CBAfficheTitre.setLayoutY(15);
+        ImageView ivBtnPlusTitre = new ImageView(new Image("file:" + "images/plus.png", 20, 20, true, true));
+        ivBtnPlusTitre.setLayoutX(vbOutils.getPrefWidth() - 20);
+        ivBtnPlusTitre.setLayoutY(11);
+        cbAfficheTitre = new CheckBox(rb.getString("interface.afficheTitre"));
+        cbAfficheTitre.setSelected(bAfficheTitre);
+        cbAfficheTitre.setLayoutX(10);
+        cbAfficheTitre.setLayoutY(15);
 
-        CBListePolices = new ComboBox(listePolices);
-        CBListePolices.setValue(titrePoliceNom);
-        CBListePolices.setLayoutX(180);
-        CBListePolices.setLayoutY(42);
-        CBListePolices.setMaxWidth(135);
+        cbListePolices = new ComboBox(listePolices);
+        cbListePolices.setValue(titrePoliceNom);
+        cbListePolices.setLayoutX(180);
+        cbListePolices.setLayoutY(42);
+        cbListePolices.setMaxWidth(135);
 
         Label lblChoixPoliceTitre = new Label(rb.getString("interface.choixPolice"));
         lblChoixPoliceTitre.setLayoutX(10);
@@ -1976,91 +2021,170 @@ public class GestionnaireInterfaceController {
         Label lblChoixTailleTitre = new Label(rb.getString("interface.choixTaillePolice"));
         lblChoixTailleTitre.setLayoutX(10);
         lblChoixTailleTitre.setLayoutY(75);
-        SLTaillePolice = new Slider(8, 72, 12);
-        SLTaillePolice.setLayoutX(180);
-        SLTaillePolice.setLayoutY(75);
+        slTaillePolice = new Slider(8, 72, 12);
+        slTaillePolice.setLayoutX(180);
+        slTaillePolice.setLayoutY(75);
 
         Label lblChoixCouleurTitre = new Label(rb.getString("interface.choixCouleur"));
         lblChoixCouleurTitre.setLayoutX(10);
         lblChoixCouleurTitre.setLayoutY(105);
-        CPCouleurTitre = new ColorPicker(Color.valueOf(couleurTitre));
-        CPCouleurTitre.setLayoutX(180);
-        CPCouleurTitre.setLayoutY(103);
+        cpCouleurTitre = new ColorPicker(Color.valueOf(couleurTitre));
+        cpCouleurTitre.setLayoutX(180);
+        cpCouleurTitre.setLayoutY(103);
         Label lblChoixCouleurFondTitre = new Label(rb.getString("interface.choixCouleurFond"));
         lblChoixCouleurFondTitre.setLayoutX(10);
         lblChoixCouleurFondTitre.setLayoutY(135);
-        CPCouleurFondTitre = new ColorPicker(Color.valueOf(couleurFondTitre));
-        CPCouleurFondTitre.setLayoutX(180);
-        CPCouleurFondTitre.setLayoutY(133);
+        cpCouleurFondTitre = new ColorPicker(Color.valueOf(couleurFondTitre));
+        cpCouleurFondTitre.setLayoutX(180);
+        cpCouleurFondTitre.setLayoutY(133);
 
         Label lblChoixOpacite = new Label(rb.getString("interface.choixOpaciteTitre"));
         lblChoixOpacite.setLayoutX(10);
         lblChoixOpacite.setLayoutY(165);
-        SLOpacite = new Slider(0, 1, titreOpacite);
-        SLOpacite.setLayoutX(180);
-        SLOpacite.setLayoutY(165);
+        slOpacite = new Slider(0, 1, titreOpacite);
+        slOpacite.setLayoutX(180);
+        slOpacite.setLayoutY(165);
         Label lblChoixTaille = new Label(rb.getString("interface.choixTailleTitre"));
         lblChoixTaille.setLayoutX(10);
         lblChoixTaille.setLayoutY(195);
-        SLTaille = new Slider(0, 100, titreTaille);
-        SLTaille.setLayoutX(180);
-        SLTaille.setLayoutY(195);
+        slTaille = new Slider(0, 100, titreTaille);
+        slTaille.setLayoutX(180);
+        slTaille.setLayoutY(195);
 
-        APTitre.getChildren().addAll(
-                CBAfficheTitre,
-                lblChoixPoliceTitre, CBListePolices,
-                lblChoixTailleTitre, SLTaillePolice,
-                lblChoixCouleurTitre, CPCouleurTitre,
-                lblChoixCouleurFondTitre, CPCouleurFondTitre,
-                lblChoixOpacite, SLOpacite,
-                lblChoixTaille, SLTaille);
-        double tailleInitialeTitre = APTitre.getPrefHeight();
-        APTitre.setPrefHeight(0);
-        APTitre.setMaxHeight(0);
-        APTitre.setMinHeight(0);
-        APTitre.setVisible(false);
+        apTitre.getChildren().addAll(
+                cbAfficheTitre,
+                lblChoixPoliceTitre, cbListePolices,
+                lblChoixTailleTitre, slTaillePolice,
+                lblChoixCouleurTitre, cpCouleurTitre,
+                lblChoixCouleurFondTitre, cpCouleurFondTitre,
+                lblChoixOpacite, slOpacite,
+                lblChoixTaille, slTaille);
+        double tailleInitialeTitre = apTitre.getPrefHeight();
+        apTitre.setPrefHeight(0);
+        apTitre.setMaxHeight(0);
+        apTitre.setMinHeight(0);
+        apTitre.setVisible(false);
 
         lblPanelTitre.setOnMouseClicked((MouseEvent me) -> {
-            if (APTitre.isVisible()) {
-                APTitre.setPrefHeight(0);
-                APTitre.setMaxHeight(0);
-                APTitre.setMinHeight(0);
-                APTitre.setVisible(false);
-                IVBtnPlusTitre.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
+            if (apTitre.isVisible()) {
+                apTitre.setPrefHeight(0);
+                apTitre.setMaxHeight(0);
+                apTitre.setMinHeight(0);
+                apTitre.setVisible(false);
+                ivBtnPlusTitre.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
             } else {
-                APTitre.setPrefHeight(tailleInitialeTitre);
-                APTitre.setMaxHeight(tailleInitialeTitre);
-                APTitre.setMinHeight(tailleInitialeTitre);
-                APTitre.setVisible(true);
-                IVBtnPlusTitre.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
+                apTitre.setPrefHeight(tailleInitialeTitre);
+                apTitre.setMaxHeight(tailleInitialeTitre);
+                apTitre.setMinHeight(tailleInitialeTitre);
+                apTitre.setVisible(true);
+                ivBtnPlusTitre.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
             }
         });
-        IVBtnPlusTitre.setOnMouseClicked((MouseEvent me) -> {
-            if (APTitre.isVisible()) {
-                APTitre.setPrefHeight(0);
-                APTitre.setMaxHeight(0);
-                APTitre.setMinHeight(0);
-                APTitre.setVisible(false);
-                IVBtnPlusTitre.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
+        ivBtnPlusTitre.setOnMouseClicked((MouseEvent me) -> {
+            if (apTitre.isVisible()) {
+                apTitre.setPrefHeight(0);
+                apTitre.setMaxHeight(0);
+                apTitre.setMinHeight(0);
+                apTitre.setVisible(false);
+                ivBtnPlusTitre.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
             } else {
-                APTitre.setPrefHeight(tailleInitialeTitre);
-                APTitre.setMaxHeight(tailleInitialeTitre);
-                APTitre.setMinHeight(tailleInitialeTitre);
-                APTitre.setVisible(true);
-                IVBtnPlusTitre.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
+                apTitre.setPrefHeight(tailleInitialeTitre);
+                apTitre.setMaxHeight(tailleInitialeTitre);
+                apTitre.setMinHeight(tailleInitialeTitre);
+                apTitre.setVisible(true);
+                ivBtnPlusTitre.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
             }
         });
+        /*
+         * *****************************************
+         *     Panel Diaporama
+         * ****************************************
+         */
+        AnchorPane apDiapo = new AnchorPane();
+        apDiapo.setLayoutY(40);
+        apDiapo.setLayoutX(10);
+        apDiapo.setPrefHeight(100);
+        Label lblDiaporama = new Label(rb.getString("interface.diaporama"));
+        lblDiaporama.setPrefWidth(vbOutils.getPrefWidth());
+        lblDiaporama.setStyle("-fx-background-color : #666");
+        lblDiaporama.setTextFill(Color.WHITE);
+        lblDiaporama.setPadding(new Insets(5));
+        lblDiaporama.setLayoutX(10);
+        lblDiaporama.setLayoutY(10);
+        ImageView ivBtnDiaporama = new ImageView(new Image("file:" + "images/plus.png", 20, 20, true, true));
+        ivBtnDiaporama.setLayoutX(vbOutils.getPrefWidth() - 20);
+        ivBtnDiaporama.setLayoutY(11);
+        CheckBox cbVisualiseDiapo = new CheckBox(rb.getString("interface.visualiseDiaporama"));
+        cbVisualiseDiapo.setLayoutX(10);
+        cbVisualiseDiapo.setLayoutY(10);
+        cbVisualiseDiapo.setSelected(false);
+        Label lblChoixCouleurDiaporama = new Label(rb.getString("interface.choixCouleurDiaporama"));
+        lblChoixCouleurDiaporama.setLayoutX(10);
+        lblChoixCouleurDiaporama.setLayoutY(40);
+        cpCouleurDiaporama = new ColorPicker(Color.valueOf(couleurDiaporama));
+        cpCouleurDiaporama.setLayoutX(180);
+        cpCouleurDiaporama.setLayoutY(38);
+
+        Label lblChoixOpaciteDiaporama = new Label(rb.getString("interface.choixOpaciteDiaporama"));
+        lblChoixOpaciteDiaporama.setLayoutX(10);
+        lblChoixOpaciteDiaporama.setLayoutY(70);
+        slOpaciteDiaporama = new Slider(0, 1, diaporamaOpacite);
+        slOpaciteDiaporama.setLayoutX(180);
+        slOpaciteDiaporama.setLayoutY(70);
+
+        apDiapo.getChildren().addAll(
+                cbVisualiseDiapo,
+                lblChoixCouleurDiaporama, cpCouleurDiaporama,
+                lblChoixOpaciteDiaporama, slOpaciteDiaporama
+        );
+        double tailleInitialeDiaporama = apDiapo.getPrefHeight();
+        apDiapo.setPrefHeight(0);
+        apDiapo.setMaxHeight(0);
+        apDiapo.setMinHeight(0);
+        apDiapo.setVisible(false);
+
+        lblDiaporama.setOnMouseClicked((MouseEvent me) -> {
+            if (apDiapo.isVisible()) {
+                apDiapo.setPrefHeight(0);
+                apDiapo.setMaxHeight(0);
+                apDiapo.setMinHeight(0);
+                apDiapo.setVisible(false);
+                ivBtnDiaporama.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
+            } else {
+                apDiapo.setPrefHeight(tailleInitialeDiaporama);
+                apDiapo.setMaxHeight(tailleInitialeDiaporama);
+                apDiapo.setMinHeight(tailleInitialeDiaporama);
+                apDiapo.setVisible(true);
+                ivBtnDiaporama.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
+            }
+        });
+        ivBtnDiaporama.setOnMouseClicked((MouseEvent me) -> {
+            if (apDiapo.isVisible()) {
+                apDiapo.setPrefHeight(0);
+                apDiapo.setMaxHeight(0);
+                apDiapo.setMinHeight(0);
+                apDiapo.setVisible(false);
+                ivBtnDiaporama.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
+            } else {
+                apDiapo.setPrefHeight(tailleInitialeDiaporama);
+                apDiapo.setMaxHeight(tailleInitialeDiaporama);
+                apDiapo.setMinHeight(tailleInitialeDiaporama);
+                apDiapo.setVisible(true);
+                ivBtnDiaporama.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
+            }
+        });
+
         /*
          * *************************************************
          *     Panel HotSpots 
          * *************************************************
          */
-        AnchorPane APHotSpots = new AnchorPane();
-        ImageView IVBtnPlusHS = new ImageView(new Image("file:" + "images/plus.png", 20, 20, true, true));
-        IVBtnPlusHS.setLayoutX(VBOutils.getPrefWidth() - 20);
-        IVBtnPlusHS.setLayoutY(11);
+        AnchorPane apHotSpots = new AnchorPane();
+        ImageView ivBtnPlusHS = new ImageView(new Image("file:" + "images/plus.png", 20, 20, true, true));
+        ivBtnPlusHS.setLayoutX(vbOutils.getPrefWidth() - 20);
+        ivBtnPlusHS.setLayoutY(11);
         Label lblChoixHS = new Label(rb.getString("interface.choixHotspot"));
-        lblChoixHS.setPrefWidth(VBOutils.getPrefWidth());
+        lblChoixHS.setPrefWidth(vbOutils.getPrefWidth());
         lblChoixHS.setStyle("-fx-background-color : #666");
         lblChoixHS.setTextFill(Color.WHITE);
         lblChoixHS.setPadding(new Insets(5));
@@ -2068,11 +2192,11 @@ public class GestionnaireInterfaceController {
         lblChoixHS.setLayoutY(10);
 
         double tailleHS = 35.d * ((int) (nombreHotSpots / 6 + 1) + (int) (nombreHotSpotsPhoto / 6 + 1)) + 100;
-        APHotSpots.setPrefHeight(tailleHS);
-        APHotSpots.setLayoutX(50);
-        APHotSpots.setLayoutY(40);
-        APHotSpots.setStyle("-fx-background-color : #fff");
-        APHotSpots.setPadding(new Insets(5));
+        apHotSpots.setPrefHeight(tailleHS);
+        apHotSpots.setLayoutX(50);
+        apHotSpots.setLayoutY(40);
+        apHotSpots.setStyle("-fx-background-color : #fff");
+        apHotSpots.setPadding(new Insets(5));
         int i = 0;
         double xHS;
         double yHS;
@@ -2082,90 +2206,90 @@ public class GestionnaireInterfaceController {
         Label lblHSPhoto = new Label(rb.getString("interface.HSPhoto"));
         lblHSPhoto.setLayoutY((int) (nombreHotSpots / 6 + 1) * 35 + 45);
         lblHSPhoto.setLayoutX(20);
-        APHotSpots.getChildren().addAll(lblHSPanoramique, lblHSPhoto);
+        apHotSpots.getChildren().addAll(lblHSPanoramique, lblHSPhoto);
         for (String nomImage : listeHotSpots) {
-            IVHotspots[i] = new ImageView(new Image("file:" + repertHotSpots + File.separator + nomImage, -1, 30, true, true, true));
+            ivHotspots[i] = new ImageView(new Image("file:" + repertHotSpots + File.separator + nomImage, -1, 30, true, true, true));
             int col = i % 6;
             int row = i / 6;
             xHS = col * 40 + 5;
             yHS = row * 35 + 25;
-            IVHotspots[i].setLayoutX(xHS);
-            IVHotspots[i].setLayoutY(yHS);
-            IVHotspots[i].setStyle("-fx-background-color : #ccc");
-            IVHotspots[i].setOnMouseClicked((MouseEvent me) -> {
-                APVisualisation.getChildren().remove(HBbarreBoutons);
-                APVisualisation.getChildren().remove(IVHotSpot);
-                APVisualisation.getChildren().remove(IVHotSpotImage);
+            ivHotspots[i].setLayoutX(xHS);
+            ivHotspots[i].setLayoutY(yHS);
+            ivHotspots[i].setStyle("-fx-background-color : #ccc");
+            ivHotspots[i].setOnMouseClicked((MouseEvent me) -> {
+                apVisualisation.getChildren().remove(hbbarreBoutons);
+                apVisualisation.getChildren().remove(ivHotSpot);
+                apVisualisation.getChildren().remove(ivHotSpotImage);
                 styleHotSpots = nomImage;
                 afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
 
             });
-            APHotSpots.getChildren().add(IVHotspots[i]);
+            apHotSpots.getChildren().add(ivHotspots[i]);
             i++;
 
         }
         i = 0;
         for (String nomImage : listeHotSpotsPhoto) {
-            IVHotspotsPhoto[i] = new ImageView(new Image("file:" + repertHotSpotsPhoto + File.separator + nomImage, -1, 30, true, true, true));
+            ivHotspotsPhoto[i] = new ImageView(new Image("file:" + repertHotSpotsPhoto + File.separator + nomImage, -1, 30, true, true, true));
             int col = i % 6;
             int row = i / 6;
             xHS = col * 40 + 5;
             yHS = (row + (int) (nombreHotSpots / 6 + 1)) * 35 + 65;
-            IVHotspotsPhoto[i].setLayoutX(xHS);
-            IVHotspotsPhoto[i].setLayoutY(yHS);
-            IVHotspotsPhoto[i].setStyle("-fx-background-color : #ccc");
-            IVHotspotsPhoto[i].setOnMouseClicked((MouseEvent me) -> {
-                APVisualisation.getChildren().remove(HBbarreBoutons);
-                APVisualisation.getChildren().remove(IVHotSpot);
-                APVisualisation.getChildren().remove(IVHotSpotImage);
+            ivHotspotsPhoto[i].setLayoutX(xHS);
+            ivHotspotsPhoto[i].setLayoutY(yHS);
+            ivHotspotsPhoto[i].setStyle("-fx-background-color : #ccc");
+            ivHotspotsPhoto[i].setOnMouseClicked((MouseEvent me) -> {
+                apVisualisation.getChildren().remove(hbbarreBoutons);
+                apVisualisation.getChildren().remove(ivHotSpot);
+                apVisualisation.getChildren().remove(ivHotSpotImage);
                 styleHotSpotImages = nomImage;
                 afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
 
             });
-            APHotSpots.getChildren().add(IVHotspotsPhoto[i]);
+            apHotSpots.getChildren().add(ivHotspotsPhoto[i]);
             i++;
 
         }
-        CPCouleurHotspots = new ColorPicker(couleurHotspots);
+        cpCouleurHotspots = new ColorPicker(couleurHotspots);
         Label lblCouleurHotspot = new Label(rb.getString("interface.couleurHS"));
         lblCouleurHotspot.setLayoutX(20);
         lblCouleurHotspot.setLayoutY(tailleHS - 20);
-        CPCouleurHotspots.setLayoutX(200);
-        CPCouleurHotspots.setLayoutY(tailleHS - 20);
-        APHotSpots.getChildren().addAll(lblCouleurHotspot, CPCouleurHotspots);
-        APHotSpots.setPrefHeight(0);
-        APHotSpots.setMaxHeight(0);
-        APHotSpots.setMinHeight(0);
-        APHotSpots.setVisible(false);
+        cpCouleurHotspots.setLayoutX(200);
+        cpCouleurHotspots.setLayoutY(tailleHS - 20);
+        apHotSpots.getChildren().addAll(lblCouleurHotspot, cpCouleurHotspots);
+        apHotSpots.setPrefHeight(0);
+        apHotSpots.setMaxHeight(0);
+        apHotSpots.setMinHeight(0);
+        apHotSpots.setVisible(false);
 
         lblChoixHS.setOnMouseClicked((MouseEvent me) -> {
-            if (APHotSpots.isVisible()) {
-                IVBtnPlusHS.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
-                APHotSpots.setPrefHeight(0);
-                APHotSpots.setMaxHeight(0);
-                APHotSpots.setMinHeight(0);
-                APHotSpots.setVisible(false);
+            if (apHotSpots.isVisible()) {
+                ivBtnPlusHS.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
+                apHotSpots.setPrefHeight(0);
+                apHotSpots.setMaxHeight(0);
+                apHotSpots.setMinHeight(0);
+                apHotSpots.setVisible(false);
             } else {
-                IVBtnPlusHS.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
-                APHotSpots.setPrefHeight(tailleHS);
-                APHotSpots.setMaxHeight(tailleHS);
-                APHotSpots.setMinHeight(tailleHS);
-                APHotSpots.setVisible(true);
+                ivBtnPlusHS.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
+                apHotSpots.setPrefHeight(tailleHS);
+                apHotSpots.setMaxHeight(tailleHS);
+                apHotSpots.setMinHeight(tailleHS);
+                apHotSpots.setVisible(true);
             }
         });
-        IVBtnPlusHS.setOnMouseClicked((MouseEvent me) -> {
-            if (APHotSpots.isVisible()) {
-                IVBtnPlusHS.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
-                APHotSpots.setPrefHeight(0);
-                APHotSpots.setMaxHeight(0);
-                APHotSpots.setMinHeight(0);
-                APHotSpots.setVisible(false);
+        ivBtnPlusHS.setOnMouseClicked((MouseEvent me) -> {
+            if (apHotSpots.isVisible()) {
+                ivBtnPlusHS.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
+                apHotSpots.setPrefHeight(0);
+                apHotSpots.setMaxHeight(0);
+                apHotSpots.setMinHeight(0);
+                apHotSpots.setVisible(false);
             } else {
-                IVBtnPlusHS.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
-                APHotSpots.setPrefHeight(tailleHS);
-                APHotSpots.setMaxHeight(tailleHS);
-                APHotSpots.setMinHeight(tailleHS);
-                APHotSpots.setVisible(true);
+                ivBtnPlusHS.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
+                apHotSpots.setPrefHeight(tailleHS);
+                apHotSpots.setMaxHeight(tailleHS);
+                apHotSpots.setMinHeight(tailleHS);
+                apHotSpots.setVisible(true);
             }
         });
 
@@ -2174,90 +2298,90 @@ public class GestionnaireInterfaceController {
          *     Panel Barre Bouton 
          * ***************************************
          */
-        AnchorPane APBarreModif = new AnchorPane();
-        APBarreModif.setLayoutY(40);
-        APBarreModif.setPrefHeight(390);
-        APBarreModif.setMinWidth(VBOutils.getPrefWidth() - 20);
+        AnchorPane apBarreModif = new AnchorPane();
+        apBarreModif.setLayoutY(40);
+        apBarreModif.setPrefHeight(390);
+        apBarreModif.setMinWidth(vbOutils.getPrefWidth() - 20);
 
-        CBVisible = new CheckBox(rb.getString("interface.barreVisible"));
-        CBVisible.setLayoutX(10);
-        CBVisible.setLayoutY(5);
-        CBVisible.setSelected(true);
-        CBSuivantPrecedent = new CheckBox(rb.getString("interface.SuivantPrecedent"));
-        CBSuivantPrecedent.setLayoutX(10);
-        CBSuivantPrecedent.setLayoutY(30);
+        cbVisible = new CheckBox(rb.getString("interface.barreVisible"));
+        cbVisible.setLayoutX(10);
+        cbVisible.setLayoutY(5);
+        cbVisible.setSelected(true);
+        cbSuivantPrecedent = new CheckBox(rb.getString("interface.SuivantPrecedent"));
+        cbSuivantPrecedent.setLayoutX(10);
+        cbSuivantPrecedent.setLayoutY(30);
         Label lblStyle = new Label(rb.getString("interface.style"));
         lblStyle.setLayoutX(10);
         lblStyle.setLayoutY(60);
 
-        CBlisteStyle = new ComboBox();
+        cblisteStyle = new ComboBox();
         listeStyles.stream().forEach((nomStyle) -> {
-            CBlisteStyle.getItems().add(nomStyle);
+            cblisteStyle.getItems().add(nomStyle);
         });
-        CBlisteStyle.setLayoutX(150);
-        CBlisteStyle.setLayoutY(70);
-        CBlisteStyle.setValue(styleBarre);
-        CPCouleurBoutons = new ColorPicker(couleurBoutons);
+        cblisteStyle.setLayoutX(150);
+        cblisteStyle.setLayoutY(70);
+        cblisteStyle.setValue(styleBarre);
+        cpCouleurBoutons = new ColorPicker(couleurBoutons);
         Label lblCouleurBouton = new Label(rb.getString("interface.couleurBarre"));
         lblCouleurBouton.setLayoutX(20);
         lblCouleurBouton.setLayoutY(110);
-        CPCouleurBoutons.setLayoutX(150);
-        CPCouleurBoutons.setLayoutY(105);
+        cpCouleurBoutons.setLayoutX(150);
+        cpCouleurBoutons.setLayoutY(105);
 
-        RBTopLeft = new RadioButton();
-        RBTopCenter = new RadioButton();
-        RBTopRight = new RadioButton();
-        RBMiddleLeft = new RadioButton();
-        RBMiddleCenter = new RadioButton();
-        RBMiddleRight = new RadioButton();
-        RBBottomLeft = new RadioButton();
-        RBBottomCenter = new RadioButton();
-        RBBottomRight = new RadioButton();
+        rbTopLeft = new RadioButton();
+        rbTopCenter = new RadioButton();
+        rbTopRight = new RadioButton();
+        rbMiddleLeft = new RadioButton();
+        rbMiddleCenter = new RadioButton();
+        rbMiddleRight = new RadioButton();
+        rbBottomLeft = new RadioButton();
+        rbBottomCenter = new RadioButton();
+        rbBottomRight = new RadioButton();
 
-        RBTopLeft.setUserData("top:left");
-        RBTopCenter.setUserData("top:center");
-        RBTopRight.setUserData("top:right");
-        RBMiddleLeft.setUserData("middle:left");
-        RBMiddleCenter.setUserData("middle:center");
-        RBMiddleRight.setUserData("middle:right");
-        RBBottomLeft.setUserData("bottom:left");
-        RBBottomCenter.setUserData("bottom:center");
-        RBBottomRight.setUserData("bottom:right");
+        rbTopLeft.setUserData("top:left");
+        rbTopCenter.setUserData("top:center");
+        rbTopRight.setUserData("top:right");
+        rbMiddleLeft.setUserData("middle:left");
+        rbMiddleCenter.setUserData("middle:center");
+        rbMiddleRight.setUserData("middle:right");
+        rbBottomLeft.setUserData("bottom:left");
+        rbBottomCenter.setUserData("bottom:center");
+        rbBottomRight.setUserData("bottom:right");
 
-        RBTopLeft.setToggleGroup(grpPosBarre);
-        RBTopCenter.setToggleGroup(grpPosBarre);
-        RBTopRight.setToggleGroup(grpPosBarre);
-        RBMiddleLeft.setToggleGroup(grpPosBarre);
-        RBMiddleCenter.setToggleGroup(grpPosBarre);
-        RBMiddleRight.setToggleGroup(grpPosBarre);
-        RBBottomLeft.setToggleGroup(grpPosBarre);
-        RBBottomCenter.setToggleGroup(grpPosBarre);
-        RBBottomRight.setToggleGroup(grpPosBarre);
+        rbTopLeft.setToggleGroup(grpPosBarre);
+        rbTopCenter.setToggleGroup(grpPosBarre);
+        rbTopRight.setToggleGroup(grpPosBarre);
+        rbMiddleLeft.setToggleGroup(grpPosBarre);
+        rbMiddleCenter.setToggleGroup(grpPosBarre);
+        rbMiddleRight.setToggleGroup(grpPosBarre);
+        rbBottomLeft.setToggleGroup(grpPosBarre);
+        rbBottomCenter.setToggleGroup(grpPosBarre);
+        rbBottomRight.setToggleGroup(grpPosBarre);
 
         int posX = 250;
         int posY = 140;
 
-        RBTopLeft.setLayoutX(posX);
-        RBTopCenter.setLayoutX(posX + 20);
-        RBTopRight.setLayoutX(posX + 40);
-        RBTopLeft.setLayoutY(posY);
-        RBTopCenter.setLayoutY(posY);
-        RBTopRight.setLayoutY(posY);
+        rbTopLeft.setLayoutX(posX);
+        rbTopCenter.setLayoutX(posX + 20);
+        rbTopRight.setLayoutX(posX + 40);
+        rbTopLeft.setLayoutY(posY);
+        rbTopCenter.setLayoutY(posY);
+        rbTopRight.setLayoutY(posY);
 
-        RBMiddleLeft.setLayoutX(posX);
-        RBMiddleCenter.setLayoutX(posX + 20);
-        RBMiddleRight.setLayoutX(posX + 40);
-        RBMiddleLeft.setLayoutY(posY + 20);
-        RBMiddleCenter.setLayoutY(posY + 20);
-        RBMiddleRight.setLayoutY(posY + 20);
+        rbMiddleLeft.setLayoutX(posX);
+        rbMiddleCenter.setLayoutX(posX + 20);
+        rbMiddleRight.setLayoutX(posX + 40);
+        rbMiddleLeft.setLayoutY(posY + 20);
+        rbMiddleCenter.setLayoutY(posY + 20);
+        rbMiddleRight.setLayoutY(posY + 20);
 
-        RBBottomLeft.setLayoutX(posX);
-        RBBottomCenter.setLayoutX(posX + 20);
-        RBBottomRight.setLayoutX(posX + 40);
-        RBBottomLeft.setLayoutY(posY + 40);
-        RBBottomCenter.setLayoutY(posY + 40);
-        RBBottomRight.setLayoutY(posY + 40);
-        RBBottomCenter.setSelected(true);
+        rbBottomLeft.setLayoutX(posX);
+        rbBottomCenter.setLayoutX(posX + 20);
+        rbBottomRight.setLayoutX(posX + 40);
+        rbBottomLeft.setLayoutY(posY + 40);
+        rbBottomCenter.setLayoutY(posY + 40);
+        rbBottomRight.setLayoutY(posY + 40);
+        rbBottomCenter.setSelected(true);
         Label lblPosit = new Label(rb.getString("interface.position"));
         lblPosit.setLayoutX(10);
         lblPosit.setLayoutY(140);
@@ -2281,179 +2405,179 @@ public class GestionnaireInterfaceController {
         dYSpinner.setMinValue(new BigDecimal(-2000));
         dYSpinner.setMaxWidth(100);
 
-        CBDeplacements = new CheckBox(rb.getString("interface.deplacementsVisible"));
-        CBZoom = new CheckBox(rb.getString("interface.zoomVisible"));
-        CBOutils = new CheckBox(rb.getString("interface.outilsVisible"));
-        CBSouris = new CheckBox(rb.getString("interface.outilsSouris"));
-        CBRotation = new CheckBox(rb.getString("interface.outilsRotation"));
-        CBFS = new CheckBox(rb.getString("interface.outilsFS"));
+        cbDeplacements = new CheckBox(rb.getString("interface.deplacementsVisible"));
+        cbZoom = new CheckBox(rb.getString("interface.zoomVisible"));
+        cbOutils = new CheckBox(rb.getString("interface.outilsVisible"));
+        cbSouris = new CheckBox(rb.getString("interface.outilsSouris"));
+        cbRotation = new CheckBox(rb.getString("interface.outilsRotation"));
+        cbFS = new CheckBox(rb.getString("interface.outilsFS"));
         Label lblVisibilite = new Label(rb.getString("interface.visibilite"));
         lblVisibilite.setLayoutX(10);
         lblVisibilite.setLayoutY(240);
 
-        CBDeplacements.setLayoutX(100);
-        CBDeplacements.setLayoutY(260);
-        CBDeplacements.setSelected(true);
-        CBZoom.setLayoutX(100);
-        CBZoom.setLayoutY(280);
-        CBZoom.setSelected(true);
-        CBOutils.setLayoutX(100);
-        CBOutils.setLayoutY(300);
-        CBOutils.setSelected(true);
-        CBFS.setLayoutX(150);
-        CBFS.setLayoutY(320);
-        CBFS.setSelected(true);
-        CBRotation.setLayoutX(150);
-        CBRotation.setLayoutY(340);
-        CBRotation.setSelected(true);
-        CBSouris.setLayoutX(150);
-        CBSouris.setLayoutY(360);
-        CBSouris.setSelected(true);
+        cbDeplacements.setLayoutX(100);
+        cbDeplacements.setLayoutY(260);
+        cbDeplacements.setSelected(true);
+        cbZoom.setLayoutX(100);
+        cbZoom.setLayoutY(280);
+        cbZoom.setSelected(true);
+        cbOutils.setLayoutX(100);
+        cbOutils.setLayoutY(300);
+        cbOutils.setSelected(true);
+        cbFS.setLayoutX(150);
+        cbFS.setLayoutY(320);
+        cbFS.setSelected(true);
+        cbRotation.setLayoutX(150);
+        cbRotation.setLayoutY(340);
+        cbRotation.setSelected(true);
+        cbSouris.setLayoutX(150);
+        cbSouris.setLayoutY(360);
+        cbSouris.setSelected(true);
 
         Label lblBarreBouton = new Label(rb.getString("interface.barreBoutons"));
-        lblBarreBouton.setPrefWidth(VBOutils.getPrefWidth());
+        lblBarreBouton.setPrefWidth(vbOutils.getPrefWidth());
         lblBarreBouton.setStyle("-fx-background-color : #666");
         lblBarreBouton.setTextFill(Color.WHITE);
         lblBarreBouton.setPadding(new Insets(5));
         lblBarreBouton.setLayoutX(10);
         lblBarreBouton.setLayoutY(10);
-        ImageView IVBtnPlus = new ImageView(new Image("file:" + "images/plus.png", 20, 20, true, true));
-        IVBtnPlus.setLayoutX(VBOutils.getPrefWidth() - 20);
-        IVBtnPlus.setLayoutY(11);
-        double tailleInitiale = APBarreModif.getPrefHeight();
-        APBarreModif.setPrefHeight(0);
-        APBarreModif.setMaxHeight(0);
-        APBarreModif.setMinHeight(0);
-        APBarreModif.setVisible(false);
+        ImageView ivBtnPlus = new ImageView(new Image("file:" + "images/plus.png", 20, 20, true, true));
+        ivBtnPlus.setLayoutX(vbOutils.getPrefWidth() - 20);
+        ivBtnPlus.setLayoutY(11);
+        double tailleInitiale = apBarreModif.getPrefHeight();
+        apBarreModif.setPrefHeight(0);
+        apBarreModif.setMaxHeight(0);
+        apBarreModif.setMinHeight(0);
+        apBarreModif.setVisible(false);
 
         lblBarreBouton.setOnMouseClicked((MouseEvent me) -> {
-            if (APBarreModif.isVisible()) {
-                APBarreModif.setPrefHeight(0);
-                APBarreModif.setMaxHeight(0);
-                APBarreModif.setMinHeight(0);
-                APBarreModif.setVisible(false);
-                IVBtnPlus.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
+            if (apBarreModif.isVisible()) {
+                apBarreModif.setPrefHeight(0);
+                apBarreModif.setMaxHeight(0);
+                apBarreModif.setMinHeight(0);
+                apBarreModif.setVisible(false);
+                ivBtnPlus.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
             } else {
-                APBarreModif.setPrefHeight(tailleInitiale);
-                APBarreModif.setMaxHeight(tailleInitiale);
-                APBarreModif.setMinHeight(tailleInitiale);
-                APBarreModif.setVisible(true);
-                IVBtnPlus.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
+                apBarreModif.setPrefHeight(tailleInitiale);
+                apBarreModif.setMaxHeight(tailleInitiale);
+                apBarreModif.setMinHeight(tailleInitiale);
+                apBarreModif.setVisible(true);
+                ivBtnPlus.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
             }
         });
-        IVBtnPlus.setOnMouseClicked((MouseEvent me) -> {
-            if (APBarreModif.isVisible()) {
-                APBarreModif.setPrefHeight(0);
-                APBarreModif.setMaxHeight(0);
-                APBarreModif.setMinHeight(0);
-                APBarreModif.setVisible(false);
-                IVBtnPlus.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
+        ivBtnPlus.setOnMouseClicked((MouseEvent me) -> {
+            if (apBarreModif.isVisible()) {
+                apBarreModif.setPrefHeight(0);
+                apBarreModif.setMaxHeight(0);
+                apBarreModif.setMinHeight(0);
+                apBarreModif.setVisible(false);
+                ivBtnPlus.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
             } else {
-                APBarreModif.setPrefHeight(tailleInitiale);
-                APBarreModif.setMaxHeight(tailleInitiale);
-                APBarreModif.setMinHeight(tailleInitiale);
-                APBarreModif.setVisible(true);
-                IVBtnPlus.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
+                apBarreModif.setPrefHeight(tailleInitiale);
+                apBarreModif.setMaxHeight(tailleInitiale);
+                apBarreModif.setMinHeight(tailleInitiale);
+                apBarreModif.setVisible(true);
+                ivBtnPlus.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
             }
         });
 
-        APBarreModif.getChildren().addAll(
-                CBVisible, CBSuivantPrecedent, lblStyle, CBlisteStyle,
-                lblCouleurBouton, CPCouleurBoutons,
+        apBarreModif.getChildren().addAll(
+                cbVisible, cbSuivantPrecedent, lblStyle, cblisteStyle,
+                lblCouleurBouton, cpCouleurBoutons,
                 lblPosit,
-                RBTopLeft, RBTopCenter, RBTopRight,
-                RBMiddleLeft, RBMiddleCenter, RBMiddleRight,
-                RBBottomLeft, RBBottomCenter, RBBottomRight,
+                rbTopLeft, rbTopCenter, rbTopRight,
+                rbMiddleLeft, rbMiddleCenter, rbMiddleRight,
+                rbBottomLeft, rbBottomCenter, rbBottomRight,
                 lblDXSpinner, dXSpinner, lblDYSpinner, dYSpinner,
-                lblVisibilite, CBDeplacements, CBZoom, CBOutils,
-                CBFS, CBRotation, CBSouris);
+                lblVisibilite, cbDeplacements, cbZoom, cbOutils,
+                cbFS, cbRotation, cbSouris);
 
         /*
          * ********************************************
          *      Panel Boussole 
          * ********************************************
          */
-        AnchorPane APBoussole = new AnchorPane();
+        AnchorPane apBoussole = new AnchorPane();
 
-        APBoussole.setLayoutY(40);
-        APBoussole.setPrefHeight(340);
-        APBoussole.setMinWidth(VBOutils.getPrefWidth() - 20);
-        Double tailleBouss = APBoussole.getPrefHeight();
-        CBAfficheBoussole = new CheckBox(rb.getString("interface.affichageBoussole"));
-        CBAfficheBoussole.setLayoutX(10);
-        CBAfficheBoussole.setLayoutY(10);
-        APBoussole.getChildren().add(CBAfficheBoussole);
+        apBoussole.setLayoutY(40);
+        apBoussole.setPrefHeight(340);
+        apBoussole.setMinWidth(vbOutils.getPrefWidth() - 20);
+        Double tailleBouss = apBoussole.getPrefHeight();
+        cbAfficheBoussole = new CheckBox(rb.getString("interface.affichageBoussole"));
+        cbAfficheBoussole.setLayoutX(10);
+        cbAfficheBoussole.setLayoutY(10);
+        apBoussole.getChildren().add(cbAfficheBoussole);
         Label lblPanelBoussole = new Label(rb.getString("interface.boussole"));
-        lblPanelBoussole.setPrefWidth(VBOutils.getPrefWidth());
+        lblPanelBoussole.setPrefWidth(vbOutils.getPrefWidth());
         lblPanelBoussole.setStyle("-fx-background-color : #666");
         lblPanelBoussole.setTextFill(Color.WHITE);
         lblPanelBoussole.setPadding(new Insets(5));
         lblPanelBoussole.setLayoutX(10);
         lblPanelBoussole.setLayoutY(10);
-        ImageView IVBtnPlusBouss = new ImageView(new Image("file:" + "images/plus.png", 20, 20, true, true));
-        IVBtnPlusBouss.setLayoutX(VBOutils.getPrefWidth() - 20);
-        IVBtnPlusBouss.setLayoutY(11);
+        ImageView ivBtnPlusBouss = new ImageView(new Image("file:" + "images/plus.png", 20, 20, true, true));
+        ivBtnPlusBouss.setLayoutX(vbOutils.getPrefWidth() - 20);
+        ivBtnPlusBouss.setLayoutY(11);
         Label lblChoixBoussole = new Label(rb.getString("interface.choixImgBoussole"));
         lblChoixBoussole.setLayoutX(10);
         lblChoixBoussole.setLayoutY(40);
-        APBoussole.getChildren().add(lblChoixBoussole);
+        apBoussole.getChildren().add(lblChoixBoussole);
 
         int nombreBoussoles = listeBoussoles.size();
-        ImageView[] IVBoussoles = new ImageView[nombreBoussoles];
+        ImageView[] ivBoussoles = new ImageView[nombreBoussoles];
         i = 0;
         for (String nomImage : listeBoussoles) {
-            IVBoussoles[i] = new ImageView(new Image("file:" + repertBoussoles + File.separator + nomImage, -1, 60, true, true, true));
+            ivBoussoles[i] = new ImageView(new Image("file:" + repertBoussoles + File.separator + nomImage, -1, 60, true, true, true));
             int col = i % 3;
             int row = i / 3;
             xHS = col * 70 + 95;
             yHS = row * 70 + 60;
-            IVBoussoles[i].setLayoutX(xHS);
-            IVBoussoles[i].setLayoutY(yHS);
-            IVBoussoles[i].setUserData(nomImage);
-            IVBoussoles[i].setStyle("-fx-background-color : #ccc");
-            IVBoussoles[i].setOnMouseClicked((MouseEvent me) -> {
+            ivBoussoles[i].setLayoutX(xHS);
+            ivBoussoles[i].setLayoutY(yHS);
+            ivBoussoles[i].setUserData(nomImage);
+            ivBoussoles[i].setStyle("-fx-background-color : #ccc");
+            ivBoussoles[i].setOnMouseClicked((MouseEvent me) -> {
                 imageBoussole = (String) ((ImageView) me.getSource()).getUserData();
                 afficheBoussole();
             });
-            APBoussole.getChildren().add(IVBoussoles[i]);
+            apBoussole.getChildren().add(ivBoussoles[i]);
             i++;
 
         }
         Label lblPositBoussole = new Label(rb.getString("interface.choixPositBoussole"));
         lblPositBoussole.setLayoutX(10);
         lblPositBoussole.setLayoutY(160);
-        APBoussole.getChildren().add(lblPositBoussole);
+        apBoussole.getChildren().add(lblPositBoussole);
 
-        RBBoussTopLeft = new RadioButton();
-        RBBoussTopRight = new RadioButton();
-        RBBoussBottomLeft = new RadioButton();
-        RBBoussBottomRight = new RadioButton();
+        rbBoussTopLeft = new RadioButton();
+        rbBoussTopRight = new RadioButton();
+        rbBoussBottomLeft = new RadioButton();
+        rbBoussBottomRight = new RadioButton();
 
-        RBBoussTopLeft.setUserData("top:left");
-        RBBoussTopRight.setUserData("top:right");
-        RBBoussBottomLeft.setUserData("bottom:left");
-        RBBoussBottomRight.setUserData("bottom:right");
+        rbBoussTopLeft.setUserData("top:left");
+        rbBoussTopRight.setUserData("top:right");
+        rbBoussBottomLeft.setUserData("bottom:left");
+        rbBoussBottomRight.setUserData("bottom:right");
 
-        RBBoussTopLeft.setToggleGroup(grpPosBouss);
-        RBBoussTopRight.setToggleGroup(grpPosBouss);
-        RBBoussBottomLeft.setToggleGroup(grpPosBouss);
-        RBBoussBottomRight.setToggleGroup(grpPosBouss);
+        rbBoussTopLeft.setToggleGroup(grpPosBouss);
+        rbBoussTopRight.setToggleGroup(grpPosBouss);
+        rbBoussBottomLeft.setToggleGroup(grpPosBouss);
+        rbBoussBottomRight.setToggleGroup(grpPosBouss);
 
         posX = 200;
         posY = 160;
 
-        RBBoussTopLeft.setLayoutX(posX);
-        RBBoussTopRight.setLayoutX(posX + 20);
-        RBBoussTopLeft.setLayoutY(posY);
-        RBBoussTopRight.setLayoutY(posY);
+        rbBoussTopLeft.setLayoutX(posX);
+        rbBoussTopRight.setLayoutX(posX + 20);
+        rbBoussTopLeft.setLayoutY(posY);
+        rbBoussTopRight.setLayoutY(posY);
 
-        RBBoussBottomLeft.setLayoutX(posX);
-        RBBoussBottomRight.setLayoutX(posX + 20);
-        RBBoussBottomLeft.setLayoutY(posY + 20);
-        RBBoussBottomRight.setLayoutY(posY + 20);
-        APBoussole.getChildren().addAll(
-                RBBoussTopLeft, RBBoussTopRight,
-                RBBoussBottomLeft, RBBoussBottomRight
+        rbBoussBottomLeft.setLayoutX(posX);
+        rbBoussBottomRight.setLayoutX(posX + 20);
+        rbBoussBottomLeft.setLayoutY(posY + 20);
+        rbBoussBottomRight.setLayoutY(posY + 20);
+        apBoussole.getChildren().addAll(
+                rbBoussTopLeft, rbBoussTopRight,
+                rbBoussBottomLeft, rbBoussBottomRight
         );
         Label lblBoussDXSpinner = new Label("dX :");
         lblBoussDXSpinner.setLayoutX(25);
@@ -2475,65 +2599,65 @@ public class GestionnaireInterfaceController {
         boussDYSpinner.setMinValue(new BigDecimal(0));
         boussDYSpinner.setNumber(new BigDecimal(20));
         boussDYSpinner.setMaxWidth(100);
-        APBoussole.getChildren().addAll(
+        apBoussole.getChildren().addAll(
                 lblBoussDXSpinner, boussDXSpinner,
                 lblBoussDYSpinner, boussDYSpinner
         );
         Label lblTailleBouss = new Label(rb.getString("interface.tailleBoussole"));
         lblTailleBouss.setLayoutX(10);
         lblTailleBouss.setLayoutY(245);
-        SLTailleBoussole = new Slider(50, 200, 100);
-        SLTailleBoussole.setLayoutX(200);
-        SLTailleBoussole.setLayoutY(245);
+        slTailleBoussole = new Slider(50, 200, 100);
+        slTailleBoussole.setLayoutX(200);
+        slTailleBoussole.setLayoutY(245);
         Label lblOpaciteBouss = new Label(rb.getString("interface.opaciteBoussole"));
         lblOpaciteBouss.setLayoutX(10);
         lblOpaciteBouss.setLayoutY(275);
-        SLOpaciteBoussole = new Slider(0, 1.0, 0.8);
-        SLOpaciteBoussole.setLayoutX(200);
-        SLOpaciteBoussole.setLayoutY(275);
-        CBAiguilleMobile = new CheckBox(rb.getString("interface.aiguilleMobile"));
-        CBAiguilleMobile.setLayoutX(10);
-        CBAiguilleMobile.setLayoutY(305);
-        CBAiguilleMobile.setSelected(true);
+        slOpaciteBoussole = new Slider(0, 1.0, 0.8);
+        slOpaciteBoussole.setLayoutX(200);
+        slOpaciteBoussole.setLayoutY(275);
+        cbAiguilleMobile = new CheckBox(rb.getString("interface.aiguilleMobile"));
+        cbAiguilleMobile.setLayoutX(10);
+        cbAiguilleMobile.setLayoutY(305);
+        cbAiguilleMobile.setSelected(true);
 
-        APBoussole.getChildren().addAll(
-                lblTailleBouss, SLTailleBoussole,
-                lblOpaciteBouss, SLOpaciteBoussole,
-                CBAiguilleMobile
+        apBoussole.getChildren().addAll(
+                lblTailleBouss, slTailleBoussole,
+                lblOpaciteBouss, slOpaciteBoussole,
+                cbAiguilleMobile
         );
-        APBoussole.setPrefHeight(0);
-        APBoussole.setMaxHeight(0);
-        APBoussole.setMinHeight(0);
-        APBoussole.setVisible(false);
+        apBoussole.setPrefHeight(0);
+        apBoussole.setMaxHeight(0);
+        apBoussole.setMinHeight(0);
+        apBoussole.setVisible(false);
 
         lblPanelBoussole.setOnMouseClicked((MouseEvent me) -> {
-            if (APBoussole.isVisible()) {
-                IVBtnPlusBouss.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
-                APBoussole.setPrefHeight(0);
-                APBoussole.setMaxHeight(0);
-                APBoussole.setMinHeight(0);
-                APBoussole.setVisible(false);
+            if (apBoussole.isVisible()) {
+                ivBtnPlusBouss.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
+                apBoussole.setPrefHeight(0);
+                apBoussole.setMaxHeight(0);
+                apBoussole.setMinHeight(0);
+                apBoussole.setVisible(false);
             } else {
-                IVBtnPlusBouss.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
-                APBoussole.setPrefHeight(tailleBouss);
-                APBoussole.setMaxHeight(tailleBouss);
-                APBoussole.setMinHeight(tailleBouss);
-                APBoussole.setVisible(true);
+                ivBtnPlusBouss.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
+                apBoussole.setPrefHeight(tailleBouss);
+                apBoussole.setMaxHeight(tailleBouss);
+                apBoussole.setMinHeight(tailleBouss);
+                apBoussole.setVisible(true);
             }
         });
-        IVBtnPlusBouss.setOnMouseClicked((MouseEvent me) -> {
-            if (APBoussole.isVisible()) {
-                IVBtnPlusBouss.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
-                APBoussole.setPrefHeight(0);
-                APBoussole.setMaxHeight(0);
-                APBoussole.setMinHeight(0);
-                APBoussole.setVisible(false);
+        ivBtnPlusBouss.setOnMouseClicked((MouseEvent me) -> {
+            if (apBoussole.isVisible()) {
+                ivBtnPlusBouss.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
+                apBoussole.setPrefHeight(0);
+                apBoussole.setMaxHeight(0);
+                apBoussole.setMinHeight(0);
+                apBoussole.setVisible(false);
             } else {
-                IVBtnPlusBouss.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
-                APBoussole.setPrefHeight(tailleBouss);
-                APBoussole.setMaxHeight(tailleBouss);
-                APBoussole.setMinHeight(tailleBouss);
-                APBoussole.setVisible(true);
+                ivBtnPlusBouss.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
+                apBoussole.setPrefHeight(tailleBouss);
+                apBoussole.setMaxHeight(tailleBouss);
+                apBoussole.setMinHeight(tailleBouss);
+                apBoussole.setVisible(true);
             }
         });
 
@@ -2542,98 +2666,98 @@ public class GestionnaireInterfaceController {
          *     Panel Masque 
          * ********************************************
          */
-        AnchorPane APMasque = new AnchorPane();
+        AnchorPane apMasque = new AnchorPane();
 
-        APMasque.setLayoutY(40);
-        APMasque.setPrefHeight(430);
-        APMasque.setMinWidth(VBOutils.getPrefWidth() - 20);
-        Double taillePanelMasque = APMasque.getPrefHeight();
-        CBAfficheMasque = new CheckBox(rb.getString("interface.affichageMasque"));
-        CBAfficheMasque.setLayoutX(10);
-        CBAfficheMasque.setLayoutY(10);
-        APMasque.getChildren().add(CBAfficheMasque);
+        apMasque.setLayoutY(40);
+        apMasque.setPrefHeight(430);
+        apMasque.setMinWidth(vbOutils.getPrefWidth() - 20);
+        Double taillePanelMasque = apMasque.getPrefHeight();
+        cbAfficheMasque = new CheckBox(rb.getString("interface.affichageMasque"));
+        cbAfficheMasque.setLayoutX(10);
+        cbAfficheMasque.setLayoutY(10);
+        apMasque.getChildren().add(cbAfficheMasque);
         Label lblPanelMasque = new Label(rb.getString("interface.masque"));
-        lblPanelMasque.setPrefWidth(VBOutils.getPrefWidth());
+        lblPanelMasque.setPrefWidth(vbOutils.getPrefWidth());
         lblPanelMasque.setStyle("-fx-background-color : #666");
         lblPanelMasque.setTextFill(Color.WHITE);
         lblPanelMasque.setPadding(new Insets(5));
         lblPanelMasque.setLayoutX(10);
         lblPanelMasque.setLayoutY(10);
-        ImageView IVBtnPlusMasque = new ImageView(new Image("file:" + "images/plus.png", 20, 20, true, true));
-        IVBtnPlusMasque.setLayoutX(VBOutils.getPrefWidth() - 20);
-        IVBtnPlusMasque.setLayoutY(11);
+        ImageView ivBtnPlusMasque = new ImageView(new Image("file:" + "images/plus.png", 20, 20, true, true));
+        ivBtnPlusMasque.setLayoutX(vbOutils.getPrefWidth() - 20);
+        ivBtnPlusMasque.setLayoutY(11);
         Label lblChoixMasque = new Label(rb.getString("interface.choixImgMasque"));
         lblChoixMasque.setLayoutX(10);
         lblChoixMasque.setLayoutY(40);
-        APMasque.getChildren().add(lblChoixMasque);
+        apMasque.getChildren().add(lblChoixMasque);
 
         int nombreMasques = listeMasques.size();
-        ImageView[] IVMasques = new ImageView[nombreMasques];
+        ImageView[] ivMasques = new ImageView[nombreMasques];
         i = 0;
         for (String nomImage : listeMasques) {
-            IVMasques[i] = new ImageView(new Image("file:" + repertMasques + File.separator + nomImage, -1, 30, true, true, true));
+            ivMasques[i] = new ImageView(new Image("file:" + repertMasques + File.separator + nomImage, -1, 30, true, true, true));
             int col = i % 4;
             int row = i / 4;
             xHS = col * 35 + 15;
             yHS = row * 35 + 60;
-            IVMasques[i].setLayoutX(xHS);
-            IVMasques[i].setLayoutY(yHS);
-            IVMasques[i].setUserData(nomImage);
-            IVMasques[i].setStyle("-fx-background-color : #ccc");
-            IVMasques[i].setOnMouseClicked((MouseEvent me) -> {
+            ivMasques[i].setLayoutX(xHS);
+            ivMasques[i].setLayoutY(yHS);
+            ivMasques[i].setUserData(nomImage);
+            ivMasques[i].setStyle("-fx-background-color : #ccc");
+            ivMasques[i].setOnMouseClicked((MouseEvent me) -> {
                 imageMasque = (String) ((ImageView) me.getSource()).getUserData();
-                APVisualisation.getChildren().remove(IVMasque);
+                apVisualisation.getChildren().remove(ivMasque);
                 chargeBarre(styleBarre, styleHotSpots, imageMasque);
                 afficheMasque();
             });
-            APMasque.getChildren().add(IVMasques[i]);
+            apMasque.getChildren().add(ivMasques[i]);
             i++;
 
         }
-        CPCouleurMasques = new ColorPicker(couleurMasque);
+        cpCouleurMasques = new ColorPicker(couleurMasque);
         Label lblCouleurMasque = new Label(rb.getString("interface.couleurMasque"));
         lblCouleurMasque.setLayoutX(170);
         lblCouleurMasque.setLayoutY(40);
-        CPCouleurMasques.setLayoutX(180);
-        CPCouleurMasques.setLayoutY(60);
-        APMasque.getChildren().addAll(lblCouleurMasque, CPCouleurMasques);
+        cpCouleurMasques.setLayoutX(180);
+        cpCouleurMasques.setLayoutY(60);
+        apMasque.getChildren().addAll(lblCouleurMasque, cpCouleurMasques);
 
         Label lblPositMasque = new Label(rb.getString("interface.choixPositMasque"));
         lblPositMasque.setLayoutX(10);
         int basImages = ((i - 1) / 4 + 1) * 35;
         lblPositMasque.setLayoutY(70 + basImages);
-        APMasque.getChildren().add(lblPositMasque);
+        apMasque.getChildren().add(lblPositMasque);
 
-        RBMasqueTopLeft = new RadioButton();
-        RBMasqueTopRight = new RadioButton();
-        RBMasqueBottomLeft = new RadioButton();
-        RBMasqueBottomRight = new RadioButton();
+        rbMasqueTopLeft = new RadioButton();
+        rbMasqueTopRight = new RadioButton();
+        rbMasqueBottomLeft = new RadioButton();
+        rbMasqueBottomRight = new RadioButton();
 
-        RBMasqueTopLeft.setUserData("top:left");
-        RBMasqueTopRight.setUserData("top:right");
-        RBMasqueBottomLeft.setUserData("bottom:left");
-        RBMasqueBottomRight.setUserData("bottom:right");
+        rbMasqueTopLeft.setUserData("top:left");
+        rbMasqueTopRight.setUserData("top:right");
+        rbMasqueBottomLeft.setUserData("bottom:left");
+        rbMasqueBottomRight.setUserData("bottom:right");
 
-        RBMasqueTopLeft.setToggleGroup(grpPosMasque);
-        RBMasqueTopRight.setToggleGroup(grpPosMasque);
-        RBMasqueBottomLeft.setToggleGroup(grpPosMasque);
-        RBMasqueBottomRight.setToggleGroup(grpPosMasque);
+        rbMasqueTopLeft.setToggleGroup(grpPosMasque);
+        rbMasqueTopRight.setToggleGroup(grpPosMasque);
+        rbMasqueBottomLeft.setToggleGroup(grpPosMasque);
+        rbMasqueBottomRight.setToggleGroup(grpPosMasque);
 
         posX = 200;
         posY = 70 + basImages;
 
-        RBMasqueTopLeft.setLayoutX(posX);
-        RBMasqueTopRight.setLayoutX(posX + 20);
-        RBMasqueTopLeft.setLayoutY(posY);
-        RBMasqueTopRight.setLayoutY(posY);
+        rbMasqueTopLeft.setLayoutX(posX);
+        rbMasqueTopRight.setLayoutX(posX + 20);
+        rbMasqueTopLeft.setLayoutY(posY);
+        rbMasqueTopRight.setLayoutY(posY);
 
-        RBMasqueBottomLeft.setLayoutX(posX);
-        RBMasqueBottomRight.setLayoutX(posX + 20);
-        RBMasqueBottomLeft.setLayoutY(posY + 20);
-        RBMasqueBottomRight.setLayoutY(posY + 20);
-        APMasque.getChildren().addAll(
-                RBMasqueTopLeft, RBMasqueTopRight,
-                RBMasqueBottomLeft, RBMasqueBottomRight
+        rbMasqueBottomLeft.setLayoutX(posX);
+        rbMasqueBottomRight.setLayoutX(posX + 20);
+        rbMasqueBottomLeft.setLayoutY(posY + 20);
+        rbMasqueBottomRight.setLayoutY(posY + 20);
+        apMasque.getChildren().addAll(
+                rbMasqueTopLeft, rbMasqueTopRight,
+                rbMasqueBottomLeft, rbMasqueBottomRight
         );
         Label lblMasqueDXSpinner = new Label("dX :");
         lblMasqueDXSpinner.setLayoutX(25);
@@ -2655,90 +2779,90 @@ public class GestionnaireInterfaceController {
         masqueDYSpinner.setMinValue(new BigDecimal(0));
         masqueDYSpinner.setNumber(new BigDecimal(20));
         masqueDYSpinner.setMaxWidth(100);
-        APMasque.getChildren().addAll(
+        apMasque.getChildren().addAll(
                 lblMasqueDXSpinner, masqueDXSpinner,
                 lblMasqueDYSpinner, masqueDYSpinner
         );
         Label lblTailleMasque = new Label(rb.getString("interface.tailleMasque"));
         lblTailleMasque.setLayoutX(10);
         lblTailleMasque.setLayoutY(160 + basImages);
-        SLTailleMasque = new Slider(15, 60, 30);
-        SLTailleMasque.setLayoutX(200);
-        SLTailleMasque.setLayoutY(160 + basImages);
+        slTailleMasque = new Slider(15, 60, 30);
+        slTailleMasque.setLayoutX(200);
+        slTailleMasque.setLayoutY(160 + basImages);
         Label lblOpaciteMasque = new Label(rb.getString("interface.opaciteMasque"));
         lblOpaciteMasque.setLayoutX(10);
         lblOpaciteMasque.setLayoutY(190 + basImages);
-        SLOpaciteMasque = new Slider(0, 1.0, 0.8);
-        SLOpaciteMasque.setLayoutX(200);
-        SLOpaciteMasque.setLayoutY(190 + basImages);
-        CBMasqueNavigation = new CheckBox(rb.getString("interface.masqueNavigation"));
-        CBMasqueNavigation.setLayoutX(60);
-        CBMasqueNavigation.setLayoutY(220 + basImages);
-        CBMasqueNavigation.setSelected(true);
-        CBMasqueBoussole = new CheckBox(rb.getString("interface.masqueBoussole"));
-        CBMasqueBoussole.setLayoutX(60);
-        CBMasqueBoussole.setLayoutY(250 + basImages);
-        CBMasqueBoussole.setSelected(true);
-        CBMasqueTitre = new CheckBox(rb.getString("interface.masqueTitre"));
-        CBMasqueTitre.setLayoutX(60);
-        CBMasqueTitre.setLayoutY(280 + basImages);
-        CBMasqueTitre.setSelected(true);
-        CBMasquePlan = new CheckBox(rb.getString("interface.masquePlan"));
-        CBMasquePlan.setLayoutX(60);
-        CBMasquePlan.setLayoutY(310 + basImages);
-        CBMasquePlan.setSelected(true);
-        CBMasqueReseaux = new CheckBox(rb.getString("interface.masqueReseaux"));
-        CBMasqueReseaux.setLayoutX(60);
-        CBMasqueReseaux.setLayoutY(340 + basImages);
-        CBMasqueReseaux.setSelected(true);
-        CBMasqueReseaux.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        slOpaciteMasque = new Slider(0, 1.0, 0.8);
+        slOpaciteMasque.setLayoutX(200);
+        slOpaciteMasque.setLayoutY(190 + basImages);
+        cbMasqueNavigation = new CheckBox(rb.getString("interface.masqueNavigation"));
+        cbMasqueNavigation.setLayoutX(60);
+        cbMasqueNavigation.setLayoutY(220 + basImages);
+        cbMasqueNavigation.setSelected(true);
+        cbMasqueBoussole = new CheckBox(rb.getString("interface.masqueBoussole"));
+        cbMasqueBoussole.setLayoutX(60);
+        cbMasqueBoussole.setLayoutY(250 + basImages);
+        cbMasqueBoussole.setSelected(true);
+        cbMasqueTitre = new CheckBox(rb.getString("interface.masqueTitre"));
+        cbMasqueTitre.setLayoutX(60);
+        cbMasqueTitre.setLayoutY(280 + basImages);
+        cbMasqueTitre.setSelected(true);
+        cbMasquePlan = new CheckBox(rb.getString("interface.masquePlan"));
+        cbMasquePlan.setLayoutX(60);
+        cbMasquePlan.setLayoutY(310 + basImages);
+        cbMasquePlan.setSelected(true);
+        cbMasqueReseaux = new CheckBox(rb.getString("interface.masqueReseaux"));
+        cbMasqueReseaux.setLayoutX(60);
+        cbMasqueReseaux.setLayoutY(340 + basImages);
+        cbMasqueReseaux.setSelected(true);
+        cbMasqueReseaux.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val != null) {
                 bMasqueReseaux = new_val;
             }
         });
-        CBMasqueVignettes = new CheckBox(rb.getString("interface.masqueVignettes"));
-        CBMasqueVignettes.setLayoutX(60);
-        CBMasqueVignettes.setLayoutY(370 + basImages);
-        CBMasqueVignettes.setSelected(true);
+        cbMasqueVignettes = new CheckBox(rb.getString("interface.masqueVignettes"));
+        cbMasqueVignettes.setLayoutX(60);
+        cbMasqueVignettes.setLayoutY(370 + basImages);
+        cbMasqueVignettes.setSelected(true);
 
-        APMasque.getChildren().addAll(
-                lblTailleMasque, SLTailleMasque,
-                lblOpaciteMasque, SLOpaciteMasque,
-                CBMasqueNavigation, CBMasqueBoussole, CBMasqueTitre, CBMasquePlan, CBMasqueReseaux, CBMasqueVignettes
+        apMasque.getChildren().addAll(
+                lblTailleMasque, slTailleMasque,
+                lblOpaciteMasque, slOpaciteMasque,
+                cbMasqueNavigation, cbMasqueBoussole, cbMasqueTitre, cbMasquePlan, cbMasqueReseaux, cbMasqueVignettes
         );
-        APMasque.setPrefHeight(0);
-        APMasque.setMaxHeight(0);
-        APMasque.setMinHeight(0);
-        APMasque.setVisible(false);
+        apMasque.setPrefHeight(0);
+        apMasque.setMaxHeight(0);
+        apMasque.setMinHeight(0);
+        apMasque.setVisible(false);
 
         lblPanelMasque.setOnMouseClicked((MouseEvent me) -> {
-            if (APMasque.isVisible()) {
-                IVBtnPlusMasque.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
-                APMasque.setPrefHeight(0);
-                APMasque.setMaxHeight(0);
-                APMasque.setMinHeight(0);
-                APMasque.setVisible(false);
+            if (apMasque.isVisible()) {
+                ivBtnPlusMasque.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
+                apMasque.setPrefHeight(0);
+                apMasque.setMaxHeight(0);
+                apMasque.setMinHeight(0);
+                apMasque.setVisible(false);
             } else {
-                IVBtnPlusMasque.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
-                APMasque.setPrefHeight(taillePanelMasque);
-                APMasque.setMaxHeight(taillePanelMasque);
-                APMasque.setMinHeight(taillePanelMasque);
-                APMasque.setVisible(true);
+                ivBtnPlusMasque.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
+                apMasque.setPrefHeight(taillePanelMasque);
+                apMasque.setMaxHeight(taillePanelMasque);
+                apMasque.setMinHeight(taillePanelMasque);
+                apMasque.setVisible(true);
             }
         });
-        IVBtnPlusMasque.setOnMouseClicked((MouseEvent me) -> {
-            if (APMasque.isVisible()) {
-                IVBtnPlusMasque.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
-                APMasque.setPrefHeight(0);
-                APMasque.setMaxHeight(0);
-                APMasque.setMinHeight(0);
-                APMasque.setVisible(false);
+        ivBtnPlusMasque.setOnMouseClicked((MouseEvent me) -> {
+            if (apMasque.isVisible()) {
+                ivBtnPlusMasque.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
+                apMasque.setPrefHeight(0);
+                apMasque.setMaxHeight(0);
+                apMasque.setMinHeight(0);
+                apMasque.setVisible(false);
             } else {
-                IVBtnPlusMasque.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
-                APMasque.setPrefHeight(taillePanelMasque);
-                APMasque.setMaxHeight(taillePanelMasque);
-                APMasque.setMinHeight(taillePanelMasque);
-                APMasque.setVisible(true);
+                ivBtnPlusMasque.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
+                apMasque.setPrefHeight(taillePanelMasque);
+                apMasque.setMaxHeight(taillePanelMasque);
+                apMasque.setMinHeight(taillePanelMasque);
+                apMasque.setVisible(true);
             }
         });
 
@@ -2747,62 +2871,62 @@ public class GestionnaireInterfaceController {
          *     Panel ReseauxSociaux 
          * ********************************************
          */
-        AnchorPane APReseauxSociaux = new AnchorPane();
+        AnchorPane apReseauxSociaux = new AnchorPane();
 
-        APReseauxSociaux.setLayoutY(40);
-        APReseauxSociaux.setPrefHeight(310);
-        APReseauxSociaux.setMinWidth(VBOutils.getPrefWidth() - 20);
-        Double taillePanelReseauxSociaux = APReseauxSociaux.getPrefHeight();
-        CBAfficheReseauxSociaux = new CheckBox(rb.getString("interface.affichageReseauxSociaux"));
-        CBAfficheReseauxSociaux.setLayoutX(10);
-        CBAfficheReseauxSociaux.setLayoutY(10);
-        APReseauxSociaux.getChildren().add(CBAfficheReseauxSociaux);
+        apReseauxSociaux.setLayoutY(40);
+        apReseauxSociaux.setPrefHeight(310);
+        apReseauxSociaux.setMinWidth(vbOutils.getPrefWidth() - 20);
+        Double taillePanelReseauxSociaux = apReseauxSociaux.getPrefHeight();
+        cbAfficheReseauxSociaux = new CheckBox(rb.getString("interface.affichageReseauxSociaux"));
+        cbAfficheReseauxSociaux.setLayoutX(10);
+        cbAfficheReseauxSociaux.setLayoutY(10);
+        apReseauxSociaux.getChildren().add(cbAfficheReseauxSociaux);
         Label lblPanelReseauxSociaux = new Label(rb.getString("interface.reseauxSociaux"));
-        lblPanelReseauxSociaux.setPrefWidth(VBOutils.getPrefWidth());
+        lblPanelReseauxSociaux.setPrefWidth(vbOutils.getPrefWidth());
         lblPanelReseauxSociaux.setStyle("-fx-background-color : #666");
         lblPanelReseauxSociaux.setTextFill(Color.WHITE);
         lblPanelReseauxSociaux.setPadding(new Insets(5));
         lblPanelReseauxSociaux.setLayoutX(10);
         lblPanelReseauxSociaux.setLayoutY(10);
-        ImageView IVBtnPlusReseauxSociaux = new ImageView(new Image("file:" + "images/plus.png", 20, 20, true, true));
-        IVBtnPlusReseauxSociaux.setLayoutX(VBOutils.getPrefWidth() - 20);
-        IVBtnPlusReseauxSociaux.setLayoutY(11);
+        ImageView ivBtnPlusReseauxSociaux = new ImageView(new Image("file:" + "images/plus.png", 20, 20, true, true));
+        ivBtnPlusReseauxSociaux.setLayoutX(vbOutils.getPrefWidth() - 20);
+        ivBtnPlusReseauxSociaux.setLayoutY(11);
         Label lblPositReseauxSociaux = new Label(rb.getString("interface.choixPositReseauxSociaux"));
         lblPositReseauxSociaux.setLayoutX(10);
         basImages = -30;
         lblPositReseauxSociaux.setLayoutY(70 + basImages);
-        APReseauxSociaux.getChildren().add(lblPositReseauxSociaux);
+        apReseauxSociaux.getChildren().add(lblPositReseauxSociaux);
 
-        RBReseauxSociauxTopLeft = new RadioButton();
-        RBReseauxSociauxTopRight = new RadioButton();
-        RBReseauxSociauxBottomLeft = new RadioButton();
-        RBReseauxSociauxBottomRight = new RadioButton();
+        rbReseauxSociauxTopLeft = new RadioButton();
+        rbReseauxSociauxTopRight = new RadioButton();
+        rbReseauxSociauxBottomLeft = new RadioButton();
+        rbReseauxSociauxBottomRight = new RadioButton();
 
-        RBReseauxSociauxTopLeft.setUserData("top:left");
-        RBReseauxSociauxTopRight.setUserData("top:right");
-        RBReseauxSociauxBottomLeft.setUserData("bottom:left");
-        RBReseauxSociauxBottomRight.setUserData("bottom:right");
+        rbReseauxSociauxTopLeft.setUserData("top:left");
+        rbReseauxSociauxTopRight.setUserData("top:right");
+        rbReseauxSociauxBottomLeft.setUserData("bottom:left");
+        rbReseauxSociauxBottomRight.setUserData("bottom:right");
 
-        RBReseauxSociauxTopLeft.setToggleGroup(grpPosReseauxSociaux);
-        RBReseauxSociauxTopRight.setToggleGroup(grpPosReseauxSociaux);
-        RBReseauxSociauxBottomLeft.setToggleGroup(grpPosReseauxSociaux);
-        RBReseauxSociauxBottomRight.setToggleGroup(grpPosReseauxSociaux);
+        rbReseauxSociauxTopLeft.setToggleGroup(grpPosReseauxSociaux);
+        rbReseauxSociauxTopRight.setToggleGroup(grpPosReseauxSociaux);
+        rbReseauxSociauxBottomLeft.setToggleGroup(grpPosReseauxSociaux);
+        rbReseauxSociauxBottomRight.setToggleGroup(grpPosReseauxSociaux);
 
         posX = 200;
         posY = 70 + basImages;
 
-        RBReseauxSociauxTopLeft.setLayoutX(posX);
-        RBReseauxSociauxTopRight.setLayoutX(posX + 20);
-        RBReseauxSociauxTopLeft.setLayoutY(posY);
-        RBReseauxSociauxTopRight.setLayoutY(posY);
+        rbReseauxSociauxTopLeft.setLayoutX(posX);
+        rbReseauxSociauxTopRight.setLayoutX(posX + 20);
+        rbReseauxSociauxTopLeft.setLayoutY(posY);
+        rbReseauxSociauxTopRight.setLayoutY(posY);
 
-        RBReseauxSociauxBottomLeft.setLayoutX(posX);
-        RBReseauxSociauxBottomRight.setLayoutX(posX + 20);
-        RBReseauxSociauxBottomLeft.setLayoutY(posY + 20);
-        RBReseauxSociauxBottomRight.setLayoutY(posY + 20);
-        APReseauxSociaux.getChildren().addAll(
-                RBReseauxSociauxTopLeft, RBReseauxSociauxTopRight,
-                RBReseauxSociauxBottomLeft, RBReseauxSociauxBottomRight
+        rbReseauxSociauxBottomLeft.setLayoutX(posX);
+        rbReseauxSociauxBottomRight.setLayoutX(posX + 20);
+        rbReseauxSociauxBottomLeft.setLayoutY(posY + 20);
+        rbReseauxSociauxBottomRight.setLayoutY(posY + 20);
+        apReseauxSociaux.getChildren().addAll(
+                rbReseauxSociauxTopLeft, rbReseauxSociauxTopRight,
+                rbReseauxSociauxBottomLeft, rbReseauxSociauxBottomRight
         );
         Label lblReseauxSociauxDXSpinner = new Label("dX :");
         lblReseauxSociauxDXSpinner.setLayoutX(25);
@@ -2824,78 +2948,78 @@ public class GestionnaireInterfaceController {
         reseauxSociauxDYSpinner.setMinValue(new BigDecimal(0));
         reseauxSociauxDYSpinner.setNumber(new BigDecimal(20));
         reseauxSociauxDYSpinner.setMaxWidth(100);
-        APReseauxSociaux.getChildren().addAll(
+        apReseauxSociaux.getChildren().addAll(
                 lblReseauxSociauxDXSpinner, reseauxSociauxDXSpinner,
                 lblReseauxSociauxDYSpinner, reseauxSociauxDYSpinner
         );
         Label lblTailleReseauxSociaux = new Label(rb.getString("interface.tailleReseauxSociaux"));
         lblTailleReseauxSociaux.setLayoutX(10);
         lblTailleReseauxSociaux.setLayoutY(160 + basImages);
-        SLTailleReseauxSociaux = new Slider(15, 60, 30);
-        SLTailleReseauxSociaux.setLayoutX(200);
-        SLTailleReseauxSociaux.setLayoutY(160 + basImages);
+        slTailleReseauxSociaux = new Slider(15, 60, 30);
+        slTailleReseauxSociaux.setLayoutX(200);
+        slTailleReseauxSociaux.setLayoutY(160 + basImages);
         Label lblOpaciteReseauxSociaux = new Label(rb.getString("interface.opaciteReseauxSociaux"));
         lblOpaciteReseauxSociaux.setLayoutX(10);
         lblOpaciteReseauxSociaux.setLayoutY(190 + basImages);
-        SLOpaciteReseauxSociaux = new Slider(0, 1.0, 0.8);
-        SLOpaciteReseauxSociaux.setLayoutX(200);
-        SLOpaciteReseauxSociaux.setLayoutY(190 + basImages);
-        CBReseauxSociauxTwitter = new CheckBox("Twitter");
-        CBReseauxSociauxTwitter.setLayoutX(60);
-        CBReseauxSociauxTwitter.setLayoutY(220 + basImages);
-        CBReseauxSociauxTwitter.setSelected(true);
-        CBReseauxSociauxGoogle = new CheckBox("Google+");
-        CBReseauxSociauxGoogle.setLayoutX(60);
-        CBReseauxSociauxGoogle.setLayoutY(250 + basImages);
-        CBReseauxSociauxGoogle.setSelected(true);
-        CBReseauxSociauxFacebook = new CheckBox("Facebook");
-        CBReseauxSociauxFacebook.setLayoutX(60);
-        CBReseauxSociauxFacebook.setLayoutY(280 + basImages);
-        CBReseauxSociauxFacebook.setSelected(true);
+        slOpaciteReseauxSociaux = new Slider(0, 1.0, 0.8);
+        slOpaciteReseauxSociaux.setLayoutX(200);
+        slOpaciteReseauxSociaux.setLayoutY(190 + basImages);
+        cbReseauxSociauxTwitter = new CheckBox("Twitter");
+        cbReseauxSociauxTwitter.setLayoutX(60);
+        cbReseauxSociauxTwitter.setLayoutY(220 + basImages);
+        cbReseauxSociauxTwitter.setSelected(true);
+        cbReseauxSociauxGoogle = new CheckBox("Google+");
+        cbReseauxSociauxGoogle.setLayoutX(60);
+        cbReseauxSociauxGoogle.setLayoutY(250 + basImages);
+        cbReseauxSociauxGoogle.setSelected(true);
+        cbReseauxSociauxFacebook = new CheckBox("Facebook");
+        cbReseauxSociauxFacebook.setLayoutX(60);
+        cbReseauxSociauxFacebook.setLayoutY(280 + basImages);
+        cbReseauxSociauxFacebook.setSelected(true);
 
-        CBReseauxSociauxEmail = new CheckBox("Email");
-        CBReseauxSociauxEmail.setLayoutX(60);
-        CBReseauxSociauxEmail.setLayoutY(310 + basImages);
-        CBReseauxSociauxEmail.setSelected(true);
+        cbReseauxSociauxEmail = new CheckBox("Email");
+        cbReseauxSociauxEmail.setLayoutX(60);
+        cbReseauxSociauxEmail.setLayoutY(310 + basImages);
+        cbReseauxSociauxEmail.setSelected(true);
 
-        APReseauxSociaux.getChildren().addAll(
-                lblTailleReseauxSociaux, SLTailleReseauxSociaux,
-                lblOpaciteReseauxSociaux, SLOpaciteReseauxSociaux,
-                CBReseauxSociauxTwitter, CBReseauxSociauxGoogle, CBReseauxSociauxFacebook, CBReseauxSociauxEmail
+        apReseauxSociaux.getChildren().addAll(
+                lblTailleReseauxSociaux, slTailleReseauxSociaux,
+                lblOpaciteReseauxSociaux, slOpaciteReseauxSociaux,
+                cbReseauxSociauxTwitter, cbReseauxSociauxGoogle, cbReseauxSociauxFacebook, cbReseauxSociauxEmail
         );
-        APReseauxSociaux.setPrefHeight(0);
-        APReseauxSociaux.setMaxHeight(0);
-        APReseauxSociaux.setMinHeight(0);
-        APReseauxSociaux.setVisible(false);
+        apReseauxSociaux.setPrefHeight(0);
+        apReseauxSociaux.setMaxHeight(0);
+        apReseauxSociaux.setMinHeight(0);
+        apReseauxSociaux.setVisible(false);
 
         lblPanelReseauxSociaux.setOnMouseClicked((MouseEvent me) -> {
-            if (APReseauxSociaux.isVisible()) {
-                IVBtnPlusReseauxSociaux.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
-                APReseauxSociaux.setPrefHeight(0);
-                APReseauxSociaux.setMaxHeight(0);
-                APReseauxSociaux.setMinHeight(0);
-                APReseauxSociaux.setVisible(false);
+            if (apReseauxSociaux.isVisible()) {
+                ivBtnPlusReseauxSociaux.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
+                apReseauxSociaux.setPrefHeight(0);
+                apReseauxSociaux.setMaxHeight(0);
+                apReseauxSociaux.setMinHeight(0);
+                apReseauxSociaux.setVisible(false);
             } else {
-                IVBtnPlusReseauxSociaux.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
-                APReseauxSociaux.setPrefHeight(taillePanelReseauxSociaux);
-                APReseauxSociaux.setMaxHeight(taillePanelReseauxSociaux);
-                APReseauxSociaux.setMinHeight(taillePanelReseauxSociaux);
-                APReseauxSociaux.setVisible(true);
+                ivBtnPlusReseauxSociaux.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
+                apReseauxSociaux.setPrefHeight(taillePanelReseauxSociaux);
+                apReseauxSociaux.setMaxHeight(taillePanelReseauxSociaux);
+                apReseauxSociaux.setMinHeight(taillePanelReseauxSociaux);
+                apReseauxSociaux.setVisible(true);
             }
         });
-        IVBtnPlusReseauxSociaux.setOnMouseClicked((MouseEvent me) -> {
-            if (APReseauxSociaux.isVisible()) {
-                IVBtnPlusReseauxSociaux.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
-                APReseauxSociaux.setPrefHeight(0);
-                APReseauxSociaux.setMaxHeight(0);
-                APReseauxSociaux.setMinHeight(0);
-                APReseauxSociaux.setVisible(false);
+        ivBtnPlusReseauxSociaux.setOnMouseClicked((MouseEvent me) -> {
+            if (apReseauxSociaux.isVisible()) {
+                ivBtnPlusReseauxSociaux.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
+                apReseauxSociaux.setPrefHeight(0);
+                apReseauxSociaux.setMaxHeight(0);
+                apReseauxSociaux.setMinHeight(0);
+                apReseauxSociaux.setVisible(false);
             } else {
-                IVBtnPlusReseauxSociaux.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
-                APReseauxSociaux.setPrefHeight(taillePanelReseauxSociaux);
-                APReseauxSociaux.setMaxHeight(taillePanelReseauxSociaux);
-                APReseauxSociaux.setMinHeight(taillePanelReseauxSociaux);
-                APReseauxSociaux.setVisible(true);
+                ivBtnPlusReseauxSociaux.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
+                apReseauxSociaux.setPrefHeight(taillePanelReseauxSociaux);
+                apReseauxSociaux.setMaxHeight(taillePanelReseauxSociaux);
+                apReseauxSociaux.setMinHeight(taillePanelReseauxSociaux);
+                apReseauxSociaux.setVisible(true);
             }
         });
 
@@ -2904,123 +3028,123 @@ public class GestionnaireInterfaceController {
          *     Panel Vignettes 
          * ********************************************
          */
-        APVignettes = new AnchorPane();
+        apVignettes = new AnchorPane();
 
-        APVignettes.setLayoutY(40);
-        APVignettes.setPrefHeight(410);
-        APVignettes.setMinWidth(VBOutils.getPrefWidth() - 20);
-        Double taillePanelVignettes = APVignettes.getPrefHeight();
-        CBAfficheVignettes = new CheckBox(rb.getString("interface.affichageVignettes"));
-        CBAfficheVignettes.setLayoutX(10);
-        CBAfficheVignettes.setLayoutY(10);
-        APVignettes.getChildren().add(CBAfficheVignettes);
+        apVignettes.setLayoutY(40);
+        apVignettes.setPrefHeight(410);
+        apVignettes.setMinWidth(vbOutils.getPrefWidth() - 20);
+        Double taillePanelVignettes = apVignettes.getPrefHeight();
+        cbAfficheVignettes = new CheckBox(rb.getString("interface.affichageVignettes"));
+        cbAfficheVignettes.setLayoutX(10);
+        cbAfficheVignettes.setLayoutY(10);
+        apVignettes.getChildren().add(cbAfficheVignettes);
         Label lblPanelVignettes = new Label(rb.getString("interface.vignettes"));
-        lblPanelVignettes.setPrefWidth(VBOutils.getPrefWidth());
+        lblPanelVignettes.setPrefWidth(vbOutils.getPrefWidth());
         lblPanelVignettes.setStyle("-fx-background-color : #666");
         lblPanelVignettes.setTextFill(Color.WHITE);
         lblPanelVignettes.setPadding(new Insets(5));
         lblPanelVignettes.setLayoutX(10);
         lblPanelVignettes.setLayoutY(10);
-        ImageView IVBtnPlusVignettes = new ImageView(new Image("file:" + "images/plus.png", 20, 20, true, true));
-        IVBtnPlusVignettes.setLayoutX(VBOutils.getPrefWidth() - 20);
-        IVBtnPlusVignettes.setLayoutY(11);
+        ImageView ivBtnPlusVignettes = new ImageView(new Image("file:" + "images/plus.png", 20, 20, true, true));
+        ivBtnPlusVignettes.setLayoutX(vbOutils.getPrefWidth() - 20);
+        ivBtnPlusVignettes.setLayoutY(11);
 
         Label lblChoixCouleurFondVignettes = new Label(rb.getString("interface.choixCouleurFondVignettes"));
         lblChoixCouleurFondVignettes.setLayoutX(10);
         lblChoixCouleurFondVignettes.setLayoutY(85);
-        CPCouleurFondVignettes = new ColorPicker(Color.valueOf(couleurFondVignettes));
-        CPCouleurFondVignettes.setLayoutX(200);
-        CPCouleurFondVignettes.setLayoutY(83);
-        APVignettes.getChildren().addAll(lblChoixCouleurFondVignettes, CPCouleurFondVignettes);
+        cpCouleurFondVignettes = new ColorPicker(Color.valueOf(couleurFondVignettes));
+        cpCouleurFondVignettes.setLayoutX(200);
+        cpCouleurFondVignettes.setLayoutY(83);
+        apVignettes.getChildren().addAll(lblChoixCouleurFondVignettes, cpCouleurFondVignettes);
         Label lblChoixCouleurTexteVignettes = new Label(rb.getString("interface.choixCouleurTexteVignettes"));
         lblChoixCouleurTexteVignettes.setLayoutX(10);
         lblChoixCouleurTexteVignettes.setLayoutY(115);
-        CPCouleurTexteVignettes = new ColorPicker(Color.valueOf(couleurTexteVignettes));
-        CPCouleurTexteVignettes.setLayoutX(200);
-        CPCouleurTexteVignettes.setLayoutY(113);
-        APVignettes.getChildren().addAll(lblChoixCouleurTexteVignettes, CPCouleurTexteVignettes);
+        cpCouleurTexteVignettes = new ColorPicker(Color.valueOf(couleurTexteVignettes));
+        cpCouleurTexteVignettes.setLayoutX(200);
+        cpCouleurTexteVignettes.setLayoutY(113);
+        apVignettes.getChildren().addAll(lblChoixCouleurTexteVignettes, cpCouleurTexteVignettes);
         Label lblPositVignettes = new Label(rb.getString("interface.choixPositVignettes"));
         lblPositVignettes.setLayoutX(10);
         basImages = -30;
         lblPositVignettes.setLayoutY(70 + basImages);
-        APVignettes.getChildren().add(lblPositVignettes);
+        apVignettes.getChildren().add(lblPositVignettes);
 
-        RBVignettesLeft = new RadioButton();
-        RBVignettesRight = new RadioButton();
-        RBVignettesBottom = new RadioButton();
+        rbVignettesLeft = new RadioButton();
+        rbVignettesRight = new RadioButton();
+        rbVignettesBottom = new RadioButton();
 
-        RBVignettesLeft.setUserData("left");
-        RBVignettesRight.setUserData("right");
-        RBVignettesBottom.setUserData("bottom");
+        rbVignettesLeft.setUserData("left");
+        rbVignettesRight.setUserData("right");
+        rbVignettesBottom.setUserData("bottom");
 
-        RBVignettesLeft.setToggleGroup(grpPosVignettes);
-        RBVignettesRight.setToggleGroup(grpPosVignettes);
-        RBVignettesBottom.setToggleGroup(grpPosVignettes);
+        rbVignettesLeft.setToggleGroup(grpPosVignettes);
+        rbVignettesRight.setToggleGroup(grpPosVignettes);
+        rbVignettesBottom.setToggleGroup(grpPosVignettes);
 
         posX = 200;
         posY = 70 + basImages;
 
-        RBVignettesLeft.setLayoutX(posX);
-        RBVignettesRight.setLayoutX(posX + 40);
-        RBVignettesLeft.setLayoutY(posY);
-        RBVignettesRight.setLayoutY(posY);
+        rbVignettesLeft.setLayoutX(posX);
+        rbVignettesRight.setLayoutX(posX + 40);
+        rbVignettesLeft.setLayoutY(posY);
+        rbVignettesRight.setLayoutY(posY);
 
-        RBVignettesBottom.setLayoutX(posX + 20);
-        RBVignettesBottom.setLayoutY(posY + 20);
-        APVignettes.getChildren().addAll(
-                RBVignettesLeft, RBVignettesRight,
-                RBVignettesBottom
+        rbVignettesBottom.setLayoutX(posX + 20);
+        rbVignettesBottom.setLayoutY(posY + 20);
+        apVignettes.getChildren().addAll(
+                rbVignettesLeft, rbVignettesRight,
+                rbVignettesBottom
         );
         Label lblTailleVignettes = new Label(rb.getString("interface.tailleVignettes"));
         lblTailleVignettes.setLayoutX(10);
         lblTailleVignettes.setLayoutY(175 + basImages);
-        SLTailleVignettes = new Slider(50, 300, 120);
-        SLTailleVignettes.setLayoutX(200);
-        SLTailleVignettes.setLayoutY(175 + basImages);
+        slTailleVignettes = new Slider(50, 300, 120);
+        slTailleVignettes.setLayoutX(200);
+        slTailleVignettes.setLayoutY(175 + basImages);
         Label lblOpaciteVignettes = new Label(rb.getString("interface.opaciteVignettes"));
         lblOpaciteVignettes.setLayoutX(10);
         lblOpaciteVignettes.setLayoutY(205 + basImages);
-        SLOpaciteVignettes = new Slider(0, 1.0, 0.8);
-        SLOpaciteVignettes.setLayoutX(200);
-        SLOpaciteVignettes.setLayoutY(205 + basImages);
+        slOpaciteVignettes = new Slider(0, 1.0, 0.8);
+        slOpaciteVignettes.setLayoutX(200);
+        slOpaciteVignettes.setLayoutY(205 + basImages);
 
-        APVignettes.getChildren().addAll(
-                lblTailleVignettes, SLTailleVignettes,
-                lblOpaciteVignettes, SLOpaciteVignettes
+        apVignettes.getChildren().addAll(
+                lblTailleVignettes, slTailleVignettes,
+                lblOpaciteVignettes, slOpaciteVignettes
         );
-        APVignettes.setPrefHeight(0);
-        APVignettes.setMaxHeight(0);
-        APVignettes.setMinHeight(0);
-        APVignettes.setVisible(false);
+        apVignettes.setPrefHeight(0);
+        apVignettes.setMaxHeight(0);
+        apVignettes.setMinHeight(0);
+        apVignettes.setVisible(false);
 
         lblPanelVignettes.setOnMouseClicked((MouseEvent me) -> {
-            if (APVignettes.isVisible()) {
-                IVBtnPlusVignettes.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
-                APVignettes.setPrefHeight(0);
-                APVignettes.setMaxHeight(0);
-                APVignettes.setMinHeight(0);
-                APVignettes.setVisible(false);
+            if (apVignettes.isVisible()) {
+                ivBtnPlusVignettes.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
+                apVignettes.setPrefHeight(0);
+                apVignettes.setMaxHeight(0);
+                apVignettes.setMinHeight(0);
+                apVignettes.setVisible(false);
             } else {
-                IVBtnPlusVignettes.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
-                APVignettes.setPrefHeight(taillePanelVignettes);
-                APVignettes.setMaxHeight(taillePanelVignettes);
-                APVignettes.setMinHeight(taillePanelVignettes);
-                APVignettes.setVisible(true);
+                ivBtnPlusVignettes.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
+                apVignettes.setPrefHeight(taillePanelVignettes);
+                apVignettes.setMaxHeight(taillePanelVignettes);
+                apVignettes.setMinHeight(taillePanelVignettes);
+                apVignettes.setVisible(true);
             }
         });
-        IVBtnPlusVignettes.setOnMouseClicked((MouseEvent me) -> {
-            if (APVignettes.isVisible()) {
-                IVBtnPlusVignettes.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
-                APVignettes.setPrefHeight(0);
-                APVignettes.setMaxHeight(0);
-                APVignettes.setMinHeight(0);
-                APVignettes.setVisible(false);
+        ivBtnPlusVignettes.setOnMouseClicked((MouseEvent me) -> {
+            if (apVignettes.isVisible()) {
+                ivBtnPlusVignettes.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
+                apVignettes.setPrefHeight(0);
+                apVignettes.setMaxHeight(0);
+                apVignettes.setMinHeight(0);
+                apVignettes.setVisible(false);
             } else {
-                IVBtnPlusVignettes.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
-                APVignettes.setPrefHeight(taillePanelVignettes);
-                APVignettes.setMaxHeight(taillePanelVignettes);
-                APVignettes.setMinHeight(taillePanelVignettes);
-                APVignettes.setVisible(true);
+                ivBtnPlusVignettes.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
+                apVignettes.setPrefHeight(taillePanelVignettes);
+                apVignettes.setMaxHeight(taillePanelVignettes);
+                apVignettes.setMinHeight(taillePanelVignettes);
+                apVignettes.setVisible(true);
             }
         });
 
@@ -3029,136 +3153,136 @@ public class GestionnaireInterfaceController {
          *     Panel Plan
          * ********************************************
          */
-        APPlan = new AnchorPane();
+        apPlan = new AnchorPane();
 
-        APPlan.setLayoutY(40);
-        APPlan.setPrefHeight(340);
-        APPlan.setMinWidth(VBOutils.getPrefWidth() - 20);
-        Double taillePanelPlan = APPlan.getPrefHeight();
-        CBAffichePlan = new CheckBox(rb.getString("interface.affichagePlan"));
-        CBAffichePlan.setLayoutX(10);
-        CBAffichePlan.setLayoutY(10);
-        APPlan.getChildren().add(CBAffichePlan);
+        apPlan.setLayoutY(40);
+        apPlan.setPrefHeight(340);
+        apPlan.setMinWidth(vbOutils.getPrefWidth() - 20);
+        Double taillePanelPlan = apPlan.getPrefHeight();
+        cbAffichePlan = new CheckBox(rb.getString("interface.affichagePlan"));
+        cbAffichePlan.setLayoutX(10);
+        cbAffichePlan.setLayoutY(10);
+        apPlan.getChildren().add(cbAffichePlan);
         Label lblPanelPlan = new Label(rb.getString("interface.plan"));
-        lblPanelPlan.setPrefWidth(VBOutils.getPrefWidth());
+        lblPanelPlan.setPrefWidth(vbOutils.getPrefWidth());
         lblPanelPlan.setStyle("-fx-background-color : #666");
         lblPanelPlan.setTextFill(Color.WHITE);
         lblPanelPlan.setPadding(new Insets(5));
         lblPanelPlan.setLayoutX(10);
         lblPanelPlan.setLayoutY(10);
-        ImageView IVBtnPlusPlan = new ImageView(new Image("file:" + "images/plus.png", 20, 20, true, true));
-        IVBtnPlusPlan.setLayoutX(VBOutils.getPrefWidth() - 20);
-        IVBtnPlusPlan.setLayoutY(11);
+        ImageView ivBtnPlusPlan = new ImageView(new Image("file:" + "images/plus.png", 20, 20, true, true));
+        ivBtnPlusPlan.setLayoutX(vbOutils.getPrefWidth() - 20);
+        ivBtnPlusPlan.setLayoutY(11);
         Label lblLargeurPlan = new Label(rb.getString("interface.largeurPlan"));
         lblLargeurPlan.setLayoutX(10);
         lblLargeurPlan.setLayoutY(40);
-        SLLargeurPlan = new Slider(0, 500, 200);
-        SLLargeurPlan.setLayoutX(200);
-        SLLargeurPlan.setLayoutY(40);
+        slLargeurPlan = new Slider(0, 500, 200);
+        slLargeurPlan.setLayoutX(200);
+        slLargeurPlan.setLayoutY(40);
         Label lblPositPlan = new Label(rb.getString("interface.positionPlan"));
         lblPositPlan.setLayoutX(10);
         lblPositPlan.setLayoutY(70);
-        RBPlanLeft = new RadioButton("");
-        RBPlanLeft.setLayoutX(200);
-        RBPlanLeft.setLayoutY(70);
-        RBPlanLeft.setUserData("left");
-        RBPlanLeft.setToggleGroup(grpPosPlan);
-        RBPlanRight = new RadioButton("");
-        RBPlanRight.setLayoutX(230);
-        RBPlanRight.setLayoutY(70);
-        RBPlanRight.setUserData("right");
-        RBPlanRight.setToggleGroup(grpPosPlan);
+        rbPlanLeft = new RadioButton("");
+        rbPlanLeft.setLayoutX(200);
+        rbPlanLeft.setLayoutY(70);
+        rbPlanLeft.setUserData("left");
+        rbPlanLeft.setToggleGroup(grpPosPlan);
+        rbPlanRight = new RadioButton("");
+        rbPlanRight.setLayoutX(230);
+        rbPlanRight.setLayoutY(70);
+        rbPlanRight.setUserData("right");
+        rbPlanRight.setToggleGroup(grpPosPlan);
         Label lblCouleurFondPlan = new Label(rb.getString("interface.couleurFondPlan"));
         lblCouleurFondPlan.setLayoutX(10);
         lblCouleurFondPlan.setLayoutY(100);
-        CPCouleurFondPlan = new ColorPicker(couleurFondPlan);
-        CPCouleurFondPlan.setLayoutX(200);
-        CPCouleurFondPlan.setLayoutY(95);
+        cpCouleurFondPlan = new ColorPicker(couleurFondPlan);
+        cpCouleurFondPlan.setLayoutX(200);
+        cpCouleurFondPlan.setLayoutY(95);
         Label lblCouleurTextePlan = new Label(rb.getString("interface.couleurTextePlan"));
         lblCouleurTextePlan.setLayoutX(10);
         lblCouleurTextePlan.setLayoutY(130);
-        CPCouleurTextePlan = new ColorPicker(couleurTextePlan);
-        CPCouleurTextePlan.setLayoutX(200);
-        CPCouleurTextePlan.setLayoutY(125);
+        cpCouleurTextePlan = new ColorPicker(couleurTextePlan);
+        cpCouleurTextePlan.setLayoutX(200);
+        cpCouleurTextePlan.setLayoutY(125);
         Label lblOpacitePlan = new Label(rb.getString("interface.opacitePlan"));
         lblOpacitePlan.setLayoutX(10);
         lblOpacitePlan.setLayoutY(160);
-        SLOpacitePlan = new Slider(0, 1.0, 0.8);
-        SLOpacitePlan.setLayoutX(200);
-        SLOpacitePlan.setLayoutY(160);
-        CBAfficheRadar = new CheckBox(rb.getString("interface.afficheRadar"));
-        CBAfficheRadar.setLayoutX(10);
-        CBAfficheRadar.setLayoutY(190);
+        slOpacitePlan = new Slider(0, 1.0, 0.8);
+        slOpacitePlan.setLayoutX(200);
+        slOpacitePlan.setLayoutY(160);
+        cbAfficheRadar = new CheckBox(rb.getString("interface.afficheRadar"));
+        cbAfficheRadar.setLayoutX(10);
+        cbAfficheRadar.setLayoutY(190);
 
         Label lblTailleRadar = new Label(rb.getString("interface.tailleRadar"));
         lblTailleRadar.setLayoutX(10);
         lblTailleRadar.setLayoutY(220);
-        SLTailleRadar = new Slider(0, 80, tailleRadar);
-        SLTailleRadar.setLayoutX(200);
-        SLTailleRadar.setLayoutY(220);
+        slTailleRadar = new Slider(0, 80, tailleRadar);
+        slTailleRadar.setLayoutX(200);
+        slTailleRadar.setLayoutY(220);
         Label lblOpaciteRadar = new Label(rb.getString("interface.opaciteRadar"));
         lblOpaciteRadar.setLayoutX(10);
         lblOpaciteRadar.setLayoutY(250);
-        SLOpaciteRadar = new Slider(0, 1, 0.8);
-        SLOpaciteRadar.setLayoutX(200);
-        SLOpaciteRadar.setLayoutY(250);
+        slOpaciteRadar = new Slider(0, 1, 0.8);
+        slOpaciteRadar.setLayoutX(200);
+        slOpaciteRadar.setLayoutY(250);
         Label lblCouleurFondRadar = new Label(rb.getString("interface.couleurFondRadar"));
         lblCouleurFondRadar.setLayoutX(10);
         lblCouleurFondRadar.setLayoutY(280);
-        CPCouleurFondRadar = new ColorPicker(couleurFondRadar);
-        CPCouleurFondRadar.setLayoutX(200);
-        CPCouleurFondRadar.setLayoutY(280);
+        cpCouleurFondRadar = new ColorPicker(couleurFondRadar);
+        cpCouleurFondRadar.setLayoutX(200);
+        cpCouleurFondRadar.setLayoutY(280);
         Label lblCouleurLigneRadar = new Label(rb.getString("interface.couleurLigneRadar"));
         lblCouleurLigneRadar.setLayoutX(10);
         lblCouleurLigneRadar.setLayoutY(310);
-        CPCouleurLigneRadar = new ColorPicker(couleurLigneRadar);
-        CPCouleurLigneRadar.setLayoutX(200);
-        CPCouleurLigneRadar.setLayoutY(310);
-        APPlan.getChildren().addAll(
-                lblLargeurPlan, SLLargeurPlan,
-                lblPositPlan, RBPlanLeft, RBPlanRight,
-                lblCouleurFondPlan, CPCouleurFondPlan,
-                lblCouleurTextePlan, CPCouleurTextePlan,
-                lblOpacitePlan, SLOpacitePlan,
-                CBAfficheRadar,
-                lblTailleRadar, SLTailleRadar,
-                lblOpaciteRadar, SLOpaciteRadar,
-                lblCouleurFondRadar, CPCouleurFondRadar,
-                lblCouleurLigneRadar, CPCouleurLigneRadar
+        cpCouleurLigneRadar = new ColorPicker(couleurLigneRadar);
+        cpCouleurLigneRadar.setLayoutX(200);
+        cpCouleurLigneRadar.setLayoutY(310);
+        apPlan.getChildren().addAll(
+                lblLargeurPlan, slLargeurPlan,
+                lblPositPlan, rbPlanLeft, rbPlanRight,
+                lblCouleurFondPlan, cpCouleurFondPlan,
+                lblCouleurTextePlan, cpCouleurTextePlan,
+                lblOpacitePlan, slOpacitePlan,
+                cbAfficheRadar,
+                lblTailleRadar, slTailleRadar,
+                lblOpaciteRadar, slOpaciteRadar,
+                lblCouleurFondRadar, cpCouleurFondRadar,
+                lblCouleurLigneRadar, cpCouleurLigneRadar
         );
 
-        APPlan.setPrefHeight(0);
-        APPlan.setMaxHeight(0);
-        APPlan.setMinHeight(0);
-        APPlan.setVisible(false);
+        apPlan.setPrefHeight(0);
+        apPlan.setMaxHeight(0);
+        apPlan.setMinHeight(0);
+        apPlan.setVisible(false);
         lblPanelPlan.setOnMouseClicked((MouseEvent me) -> {
-            if (APPlan.isVisible()) {
-                IVBtnPlusPlan.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
-                APPlan.setPrefHeight(0);
-                APPlan.setMaxHeight(0);
-                APPlan.setMinHeight(0);
-                APPlan.setVisible(false);
+            if (apPlan.isVisible()) {
+                ivBtnPlusPlan.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
+                apPlan.setPrefHeight(0);
+                apPlan.setMaxHeight(0);
+                apPlan.setMinHeight(0);
+                apPlan.setVisible(false);
             } else {
-                IVBtnPlusPlan.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
-                APPlan.setPrefHeight(taillePanelPlan);
-                APPlan.setMaxHeight(taillePanelPlan);
-                APPlan.setMinHeight(taillePanelPlan);
-                APPlan.setVisible(true);
+                ivBtnPlusPlan.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
+                apPlan.setPrefHeight(taillePanelPlan);
+                apPlan.setMaxHeight(taillePanelPlan);
+                apPlan.setMinHeight(taillePanelPlan);
+                apPlan.setVisible(true);
             }
         });
-        IVBtnPlusPlan.setOnMouseClicked((MouseEvent me) -> {
-            if (APPlan.isVisible()) {
-                IVBtnPlusPlan.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
-                APPlan.setPrefHeight(0);
-                APPlan.setMaxHeight(0);
-                APPlan.setMinHeight(0);
-                APPlan.setVisible(false);
+        ivBtnPlusPlan.setOnMouseClicked((MouseEvent me) -> {
+            if (apPlan.isVisible()) {
+                ivBtnPlusPlan.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
+                apPlan.setPrefHeight(0);
+                apPlan.setMaxHeight(0);
+                apPlan.setMinHeight(0);
+                apPlan.setVisible(false);
             } else {
-                IVBtnPlusPlan.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
-                APPlan.setPrefHeight(taillePanelPlan);
-                APPlan.setMaxHeight(taillePanelPlan);
-                APPlan.setMinHeight(taillePanelPlan);
-                APPlan.setVisible(true);
+                ivBtnPlusPlan.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
+                apPlan.setPrefHeight(taillePanelPlan);
+                apPlan.setMaxHeight(taillePanelPlan);
+                apPlan.setMinHeight(taillePanelPlan);
+                apPlan.setVisible(true);
             }
         });
 
@@ -3167,45 +3291,48 @@ public class GestionnaireInterfaceController {
          * Style des Pannels
          * *****************************************************
          */
-//        String styleAP = "-fx-background-color : #ccc;";
-        String styleAP = "";
-        APBoussole.setStyle(styleAP);
-        APBarreModif.setStyle(styleAP);
-        APTitre.setStyle(styleAP);
-        APHotSpots.setStyle(styleAP);
-        APMasque.setStyle(styleAP);
-        APReseauxSociaux.setStyle(styleAP);
-        APVignettes.setStyle(styleAP);
-        APPlan.setStyle(styleAP);
-        APBoussole.setLayoutX(20);
-        APBarreModif.setLayoutX(20);
-        APTitre.setLayoutX(20);
-        APHotSpots.setLayoutX(20);
-        APMasque.setLayoutX(20);
-        APReseauxSociaux.setLayoutX(20);
-        APVignettes.setLayoutX(20);
-        APPlan.setLayoutX(20);
+//        String styleap = "-fx-background-color : #ccc;";
+        String styleap = "";
+        apBoussole.setStyle(styleap);
+        apBarreModif.setStyle(styleap);
+        apTitre.setStyle(styleap);
+        apDiapo.setStyle(styleap);
+        apHotSpots.setStyle(styleap);
+        apMasque.setStyle(styleap);
+        apReseauxSociaux.setStyle(styleap);
+        apVignettes.setStyle(styleap);
+        apPlan.setStyle(styleap);
+        apBoussole.setLayoutX(20);
+        apBarreModif.setLayoutX(20);
+        apTitre.setLayoutX(20);
+        apDiapo.setLayoutX(20);
+        apHotSpots.setLayoutX(20);
+        apMasque.setLayoutX(20);
+        apReseauxSociaux.setLayoutX(20);
+        apVignettes.setLayoutX(20);
+        apPlan.setLayoutX(20);
         /*
          * *******************************************************
          *     Ajout des Elements dans les Pannels
          * *******************************************************
          */
-        APTIT.getChildren().addAll(APTitre, lblPanelTitre, IVBtnPlusTitre);
-        APBB.getChildren().addAll(APBarreModif, lblBarreBouton, IVBtnPlus);
-        APHS.getChildren().addAll(lblChoixHS, IVBtnPlusHS, APHotSpots);
-        APBOUSS.getChildren().addAll(APBoussole, lblPanelBoussole, IVBtnPlusBouss);
-        APMASQ.getChildren().addAll(APMasque, lblPanelMasque, IVBtnPlusMasque);
-        APRS.getChildren().addAll(APReseauxSociaux, lblPanelReseauxSociaux, IVBtnPlusReseauxSociaux);
-        APVIG.getChildren().addAll(APVignettes, lblPanelVignettes, IVBtnPlusVignettes);
-        APPL.getChildren().addAll(APPlan, lblPanelPlan, IVBtnPlusPlan);
+        apTIT.getChildren().addAll(apTitre, lblPanelTitre, ivBtnPlusTitre);
+        apDIA.getChildren().addAll(apDiapo, lblDiaporama, ivBtnDiaporama);
+        apBB.getChildren().addAll(apBarreModif, lblBarreBouton, ivBtnPlus);
+        apHS.getChildren().addAll(lblChoixHS, ivBtnPlusHS, apHotSpots);
+        apBOUSS.getChildren().addAll(apBoussole, lblPanelBoussole, ivBtnPlusBouss);
+        apMASQ.getChildren().addAll(apMasque, lblPanelMasque, ivBtnPlusMasque);
+        apRS.getChildren().addAll(apReseauxSociaux, lblPanelReseauxSociaux, ivBtnPlusReseauxSociaux);
+        apVIG.getChildren().addAll(apVignettes, lblPanelVignettes, ivBtnPlusVignettes);
+        apPL.getChildren().addAll(apPlan, lblPanelPlan, ivBtnPlusPlan);
 
         /*
          * ******************************************************
          *     Ajouts des pannels dans la barre d'outils
          * ******************************************************
          */
-        VBOutils.getChildren().addAll(
-                APCoulTheme, APTIT, APBB, APPL, APHS, APBOUSS, APMASQ, APRS, APVIG
+        vbOutils.getChildren().addAll(
+                apCoulTheme, apTIT, apDIA, apBB, apPL, apHS, apBOUSS, apMASQ, apRS, apVIG
         );
 
         /*
@@ -3229,9 +3356,9 @@ public class GestionnaireInterfaceController {
         /*
          Listeners Couleur Thème
          */
-        CPCouleurTheme.setOnAction((ActionEvent e) -> {
-            couleurTheme = CPCouleurTheme.getValue();
-            String coul1 = CPCouleurTheme.getValue().toString().substring(2, 8);
+        cpCouleurTheme.setOnAction((ActionEvent e) -> {
+            couleurTheme = cpCouleurTheme.getValue();
+            String coul1 = cpCouleurTheme.getValue().toString().substring(2, 8);
             couleurHotspots = couleurTheme;
             couleurBoutons = couleurTheme;
             couleurMasque = couleurTheme;
@@ -3241,12 +3368,12 @@ public class GestionnaireInterfaceController {
             changeCouleurTitre(coul1);
             changeCouleurVignettes(coul1);
             //changeCouleur(hue);
-            CPCouleurFondTitre.setValue(couleurTheme);
-            CPCouleurFondPlan.setValue(couleurTheme);
-            CPCouleurHotspots.setValue(couleurTheme);
-            CPCouleurBoutons.setValue(couleurTheme);
-            CPCouleurMasques.setValue(couleurTheme);
-            CPCouleurFondVignettes.setValue(Color.hsb(couleurTheme.getHue(), couleurTheme.getSaturation(), couleurTheme.getBrightness()));
+            cpCouleurFondTitre.setValue(couleurTheme);
+            cpCouleurFondPlan.setValue(couleurTheme);
+            cpCouleurHotspots.setValue(couleurTheme);
+            cpCouleurBoutons.setValue(couleurTheme);
+            cpCouleurMasques.setValue(couleurTheme);
+            cpCouleurFondVignettes.setValue(Color.hsb(couleurTheme.getHue(), couleurTheme.getSaturation(), couleurTheme.getBrightness()));
             changeCouleurBarre(couleurTheme.getHue(), couleurTheme.getSaturation(), couleurTheme.getBrightness());
             changeCouleurHS(couleurTheme.getHue(), couleurTheme.getSaturation(), couleurTheme.getBrightness());
             changeCouleurHSPhoto(couleurTheme.getHue(), couleurTheme.getSaturation(), couleurTheme.getBrightness());
@@ -3257,8 +3384,8 @@ public class GestionnaireInterfaceController {
         /*
          Listeners HotSpots
          */
-        CPCouleurHotspots.setOnAction((ActionEvent e) -> {
-            couleurHotspots = CPCouleurHotspots.getValue();
+        cpCouleurHotspots.setOnAction((ActionEvent e) -> {
+            couleurHotspots = cpCouleurHotspots.getValue();
             changeCouleurHS(couleurHotspots.getHue(), couleurHotspots.getSaturation(), couleurHotspots.getBrightness());
             changeCouleurHSPhoto(couleurHotspots.getHue(), couleurHotspots.getSaturation(), couleurHotspots.getBrightness());
         });
@@ -3266,7 +3393,7 @@ public class GestionnaireInterfaceController {
         /*
          Listeners Titre
          */
-        CBListePolices.valueProperty().addListener(
+        cbListePolices.valueProperty().addListener(
                 new ChangeListener<String>() {
                     @Override
                     public void changed(ObservableValue<? extends String> ov,
@@ -3281,17 +3408,17 @@ public class GestionnaireInterfaceController {
                         }
                     }
                 });
-        CBAfficheTitre.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbAfficheTitre.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             bAfficheTitre = new_val;
-            APVisualisation.getChildren().remove(HBbarreBoutons);
-            APVisualisation.getChildren().remove(IVHotSpot);
-            APVisualisation.getChildren().remove(IVHotSpotImage);
+            apVisualisation.getChildren().remove(hbbarreBoutons);
+            apVisualisation.getChildren().remove(ivHotSpot);
+            apVisualisation.getChildren().remove(ivHotSpotImage);
             afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
             afficheVignettes();
             affichePlan();
         });
 
-        SLTaillePolice.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+        slTaillePolice.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
             if (newValue != null) {
                 double taille = (double) newValue;
                 titrePoliceTaille = Integer.toString((int) Math.round(taille));
@@ -3302,13 +3429,13 @@ public class GestionnaireInterfaceController {
                 affichePlan();
             }
         });
-        SLOpacite.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+        slOpacite.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
             if (newValue != null) {
                 titreOpacite = (double) newValue;
                 txtTitre.setOpacity(titreOpacite);
             }
         });
-        SLTaille.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+        slTaille.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
             if (newValue != null) {
                 titreTaille = (double) newValue;
                 double taille = (double) titreTaille / 100.d * IMVisualisation.getFitWidth();
@@ -3316,27 +3443,48 @@ public class GestionnaireInterfaceController {
                 txtTitre.setLayoutX(IMVisualisation.getLayoutX() + (IMVisualisation.getFitWidth() - txtTitre.getMinWidth()) / 2);
             }
         });
-        CPCouleurTitre.setOnAction((ActionEvent e) -> {
-            String coul = CPCouleurTitre.getValue().toString().substring(2, 8);
+        cpCouleurTitre.setOnAction((ActionEvent e) -> {
+            String coul = cpCouleurTitre.getValue().toString().substring(2, 8);
             couleurTitre = "#" + coul;
             txtTitre.setTextFill(Color.valueOf(couleurTitre));
         });
-        CPCouleurFondTitre.setOnAction((ActionEvent e) -> {
-            String coul = CPCouleurFondTitre.getValue().toString().substring(2, 8);
+        cpCouleurFondTitre.setOnAction((ActionEvent e) -> {
+            String coul = cpCouleurFondTitre.getValue().toString().substring(2, 8);
             couleurFondTitre = "#" + coul;
             txtTitre.setStyle("-fx-background-color : " + couleurFondTitre);
         });
 
         /*
+         Listeners Diaporama
+         */
+        slOpaciteDiaporama.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+            if (newValue != null) {
+                diaporamaOpacite = (double) newValue;
+                afficheDiaporama();
+            }
+        });
+
+        cpCouleurDiaporama.setOnAction((ActionEvent e) -> {
+            String coul = cpCouleurDiaporama.getValue().toString().substring(2, 8);
+            couleurDiaporama = "#" + coul;
+            System.out.println("Couleur Diaporama : " + coul);
+            afficheDiaporama();
+        });
+
+        cbVisualiseDiapo.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+            visualiseDiaporama = new_val;
+            afficheDiaporama();
+        });
+        /*
          Listeners Barre de boutons
          */
-        CBlisteStyle.valueProperty().addListener(new ChangeListener<String>() {
+        cblisteStyle.valueProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue ov, String t, String t1) {
                 if (t1 != null) {
-                    APVisualisation.getChildren().remove(HBbarreBoutons);
-                    APVisualisation.getChildren().remove(IVHotSpot);
-                    APVisualisation.getChildren().remove(IVHotSpotImage);
+                    apVisualisation.getChildren().remove(hbbarreBoutons);
+                    apVisualisation.getChildren().remove(ivHotSpot);
+                    apVisualisation.getChildren().remove(ivHotSpotImage);
                     styleBarre = t1;
                     afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
                 }
@@ -3344,109 +3492,109 @@ public class GestionnaireInterfaceController {
         });
 
         dXSpinner.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
-            APVisualisation.getChildren().remove(HBbarreBoutons);
-            APVisualisation.getChildren().remove(IVHotSpot);
-            APVisualisation.getChildren().remove(IVHotSpotImage);
+            apVisualisation.getChildren().remove(hbbarreBoutons);
+            apVisualisation.getChildren().remove(ivHotSpot);
+            apVisualisation.getChildren().remove(ivHotSpotImage);
             dXBarre = new_value.doubleValue();
             afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
         });
         dYSpinner.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
-            APVisualisation.getChildren().remove(HBbarreBoutons);
-            APVisualisation.getChildren().remove(IVHotSpot);
+            apVisualisation.getChildren().remove(hbbarreBoutons);
+            apVisualisation.getChildren().remove(ivHotSpot);
             dYBarre = new_value.doubleValue();
             afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
         });
 
         grpPosBarre.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) -> {
             if (grpPosBarre.getSelectedToggle() != null) {
-                APVisualisation.getChildren().remove(HBbarreBoutons);
-                APVisualisation.getChildren().remove(IVHotSpot);
-                APVisualisation.getChildren().remove(IVHotSpotImage);
+                apVisualisation.getChildren().remove(hbbarreBoutons);
+                apVisualisation.getChildren().remove(ivHotSpot);
+                apVisualisation.getChildren().remove(ivHotSpotImage);
                 positionBarre = grpPosBarre.getSelectedToggle().getUserData().toString();
                 afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
             }
         });
-        CBVisible.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbVisible.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val) {
                 toggleBarreVisibilite = "oui";
             } else {
                 toggleBarreVisibilite = "non";
             }
-            APVisualisation.getChildren().remove(HBbarreBoutons);
-            APVisualisation.getChildren().remove(IVHotSpot);
-            APVisualisation.getChildren().remove(IVHotSpotImage);
+            apVisualisation.getChildren().remove(hbbarreBoutons);
+            apVisualisation.getChildren().remove(ivHotSpot);
+            apVisualisation.getChildren().remove(ivHotSpotImage);
             afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
         });
-        CBSuivantPrecedent.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbSuivantPrecedent.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             bSuivantPrecedent = new_val;
             fondSuivant.setVisible(bSuivantPrecedent);
             fondPrecedent.setVisible(bSuivantPrecedent);
         });
-        CPCouleurBoutons.setOnAction((ActionEvent e) -> {
-            couleurBoutons = CPCouleurBoutons.getValue();
+        cpCouleurBoutons.setOnAction((ActionEvent e) -> {
+            couleurBoutons = cpCouleurBoutons.getValue();
             changeCouleurBarre(couleurBoutons.getHue(), couleurBoutons.getSaturation(), couleurBoutons.getBrightness());
         });
-        CBDeplacements.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbDeplacements.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val) {
                 toggleBarreDeplacements = "oui";
             } else {
                 toggleBarreDeplacements = "non";
             }
-            APVisualisation.getChildren().remove(HBbarreBoutons);
-            APVisualisation.getChildren().remove(IVHotSpot);
-            APVisualisation.getChildren().remove(IVHotSpotImage);
+            apVisualisation.getChildren().remove(hbbarreBoutons);
+            apVisualisation.getChildren().remove(ivHotSpot);
+            apVisualisation.getChildren().remove(ivHotSpotImage);
             afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
         });
-        CBZoom.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbZoom.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val) {
                 toggleBarreZoom = "oui";
             } else {
                 toggleBarreZoom = "non";
             }
-            APVisualisation.getChildren().remove(HBbarreBoutons);
-            APVisualisation.getChildren().remove(IVHotSpot);
+            apVisualisation.getChildren().remove(hbbarreBoutons);
+            apVisualisation.getChildren().remove(ivHotSpot);
             afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
         });
-        CBOutils.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbOutils.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val) {
                 toggleBarreOutils = "oui";
             } else {
                 toggleBarreOutils = "non";
             }
-            APVisualisation.getChildren().remove(HBbarreBoutons);
-            APVisualisation.getChildren().remove(IVHotSpot);
+            apVisualisation.getChildren().remove(hbbarreBoutons);
+            apVisualisation.getChildren().remove(ivHotSpot);
             afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
         });
-        CBSouris.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbSouris.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val) {
                 toggleBoutonSouris = "oui";
             } else {
                 toggleBoutonSouris = "non";
             }
-            APVisualisation.getChildren().remove(HBbarreBoutons);
-            APVisualisation.getChildren().remove(IVHotSpot);
-            APVisualisation.getChildren().remove(IVHotSpotImage);
+            apVisualisation.getChildren().remove(hbbarreBoutons);
+            apVisualisation.getChildren().remove(ivHotSpot);
+            apVisualisation.getChildren().remove(ivHotSpotImage);
             afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
         });
-        CBRotation.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbRotation.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val) {
                 toggleBoutonRotation = "oui";
             } else {
                 toggleBoutonRotation = "non";
             }
-            APVisualisation.getChildren().remove(HBbarreBoutons);
-            APVisualisation.getChildren().remove(IVHotSpot);
+            apVisualisation.getChildren().remove(hbbarreBoutons);
+            apVisualisation.getChildren().remove(ivHotSpot);
             afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
         });
-        CBFS.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbFS.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val) {
                 toggleBoutonFS = "oui";
             } else {
                 toggleBoutonFS = "non";
             }
-            APVisualisation.getChildren().remove(HBbarreBoutons);
-            APVisualisation.getChildren().remove(IVHotSpot);
-            APVisualisation.getChildren().remove(IVHotSpotImage);
+            apVisualisation.getChildren().remove(hbbarreBoutons);
+            apVisualisation.getChildren().remove(ivHotSpot);
+            apVisualisation.getChildren().remove(ivHotSpotImage);
             afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
         });
 
@@ -3467,20 +3615,20 @@ public class GestionnaireInterfaceController {
             dYBoussole = new_value.doubleValue();
             afficheBoussole();
         });
-        SLTailleBoussole.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+        slTailleBoussole.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
             if (newValue != null) {
                 double taille = (double) newValue;
                 tailleBoussole = taille;
                 afficheBoussole();
             }
         });
-        CBAfficheBoussole.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbAfficheBoussole.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val != null) {
                 bAfficheBoussole = new_val;
                 afficheBoussole();
             }
         });
-        CBAiguilleMobile.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbAiguilleMobile.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val != null) {
                 bAiguilleMobileBoussole = new_val;
             }
@@ -3489,7 +3637,7 @@ public class GestionnaireInterfaceController {
         /*
          Listeners Bouton de Masquage
          */
-        SLOpaciteBoussole.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+        slOpaciteBoussole.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
             if (newValue != null) {
                 double opac = (double) newValue;
                 opaciteBoussole = opac;
@@ -3500,7 +3648,7 @@ public class GestionnaireInterfaceController {
         grpPosMasque.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) -> {
             if (grpPosMasque.getSelectedToggle() != null) {
                 positionMasque = grpPosMasque.getSelectedToggle().getUserData().toString();
-                APVisualisation.getChildren().remove(IVMasque);
+                apVisualisation.getChildren().remove(ivMasque);
                 afficheMasque();
             }
         });
@@ -3512,52 +3660,52 @@ public class GestionnaireInterfaceController {
             dYMasque = new_value.doubleValue();
             afficheMasque();
         });
-        SLTailleMasque.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+        slTailleMasque.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
             if (newValue != null) {
                 double taille = (double) newValue;
                 tailleMasque = taille;
                 afficheMasque();
             }
         });
-        SLOpaciteMasque.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+        slOpaciteMasque.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
             if (newValue != null) {
                 double opac = (double) newValue;
                 opaciteMasque = opac;
                 afficheMasque();
             }
         });
-        CBMasqueNavigation.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbMasqueNavigation.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val != null) {
                 bMasqueNavigation = new_val;
             }
         });
-        CPCouleurMasques.setOnAction((ActionEvent e) -> {
-            couleurMasque = CPCouleurMasques.getValue();
+        cpCouleurMasques.setOnAction((ActionEvent e) -> {
+            couleurMasque = cpCouleurMasques.getValue();
             changeCouleurMasque(couleurMasque.getHue(), couleurMasque.getSaturation(), couleurMasque.getBrightness());
         });
-        CBAfficheMasque.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbAfficheMasque.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val != null) {
                 bAfficheMasque = new_val;
                 changeCouleurMasque(couleurHotspots.getHue(), couleurHotspots.getSaturation(), couleurHotspots.getBrightness());
                 afficheMasque();
             }
         });
-        CBMasqueBoussole.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbMasqueBoussole.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val != null) {
                 bMasqueBoussole = new_val;
             }
         });
-        CBMasqueTitre.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbMasqueTitre.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val != null) {
                 bMasqueTitre = new_val;
             }
         });
-        CBMasquePlan.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbMasquePlan.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val != null) {
                 bMasquePlan = new_val;
             }
         });
-        CBMasqueVignettes.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbMasqueVignettes.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val != null) {
                 bMasqueVignettes = new_val;
             }
@@ -3582,45 +3730,45 @@ public class GestionnaireInterfaceController {
                 afficheReseauxSociaux();
             }
         });
-        SLTailleReseauxSociaux.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+        slTailleReseauxSociaux.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
             if (newValue != null) {
                 double taille = (double) newValue;
                 tailleReseauxSociaux = taille;
                 afficheReseauxSociaux();
             }
         });
-        SLOpaciteReseauxSociaux.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+        slOpaciteReseauxSociaux.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
             if (newValue != null) {
                 double opac = (double) newValue;
                 opaciteReseauxSociaux = opac;
                 afficheReseauxSociaux();
             }
         });
-        CBAfficheReseauxSociaux.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbAfficheReseauxSociaux.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val != null) {
                 bAfficheReseauxSociaux = new_val;
                 afficheReseauxSociaux();
             }
         });
-        CBReseauxSociauxTwitter.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbReseauxSociauxTwitter.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val != null) {
                 bReseauxSociauxTwitter = new_val;
                 afficheReseauxSociaux();
             }
         });
-        CBReseauxSociauxGoogle.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbReseauxSociauxGoogle.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val != null) {
                 bReseauxSociauxGoogle = new_val;
                 afficheReseauxSociaux();
             }
         });
-        CBReseauxSociauxFacebook.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbReseauxSociauxFacebook.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val != null) {
                 bReseauxSociauxFacebook = new_val;
                 afficheReseauxSociaux();
             }
         });
-        CBReseauxSociauxEmail.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbReseauxSociauxEmail.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val != null) {
                 bReseauxSociauxEmail = new_val;
                 afficheReseauxSociaux();
@@ -3637,7 +3785,7 @@ public class GestionnaireInterfaceController {
             }
         });
 
-        SLTailleVignettes.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+        slTailleVignettes.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
             if (newValue != null) {
                 double taille = (double) newValue;
                 tailleImageVignettes = taille;
@@ -3645,7 +3793,7 @@ public class GestionnaireInterfaceController {
             }
         });
 
-        SLOpaciteVignettes.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+        slOpaciteVignettes.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
             if (newValue != null) {
                 double opac = (double) newValue;
                 opaciteVignettes = opac;
@@ -3653,20 +3801,20 @@ public class GestionnaireInterfaceController {
             }
         });
 
-        CBAfficheVignettes.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbAfficheVignettes.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val != null) {
                 bAfficheVignettes = new_val;
                 afficheVignettes();
             }
         });
 
-        CPCouleurFondVignettes.setOnAction((ActionEvent e) -> {
-            String coul = CPCouleurFondVignettes.getValue().toString().substring(2, 8);
+        cpCouleurFondVignettes.setOnAction((ActionEvent e) -> {
+            String coul = cpCouleurFondVignettes.getValue().toString().substring(2, 8);
             couleurFondVignettes = "#" + coul;
             afficheVignettes();
         });
-        CPCouleurTexteVignettes.setOnAction((ActionEvent e) -> {
-            String coul = CPCouleurTexteVignettes.getValue().toString().substring(2, 8);
+        cpCouleurTexteVignettes.setOnAction((ActionEvent e) -> {
+            String coul = cpCouleurTexteVignettes.getValue().toString().substring(2, 8);
             couleurTexteVignettes = "#" + coul;
             afficheVignettes();
         });
@@ -3674,7 +3822,7 @@ public class GestionnaireInterfaceController {
         /*
          Listeners Plan
          */
-        CBAffichePlan.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbAffichePlan.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val != null) {
                 bAffichePlan = new_val;
                 tabPlan.setDisable(!bAffichePlan);
@@ -3688,7 +3836,7 @@ public class GestionnaireInterfaceController {
                 affichePlan();
             }
         });
-        CBAfficheRadar.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbAfficheRadar.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val != null) {
                 bAfficheRadar = new_val;
                 affichePlan();
@@ -3701,14 +3849,14 @@ public class GestionnaireInterfaceController {
                 affichePlan();
             }
         });
-        SLLargeurPlan.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+        slLargeurPlan.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
             if (newValue != null) {
                 double taille = (double) newValue;
                 largeurPlan = taille;
                 affichePlan();
             }
         });
-        SLOpacitePlan.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+        slOpacitePlan.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
             if (newValue != null) {
                 double opac = (double) newValue;
                 opacitePlan = opac;
@@ -3716,41 +3864,41 @@ public class GestionnaireInterfaceController {
             }
         });
 
-        CPCouleurFondPlan.setOnAction((ActionEvent e) -> {
-            String coul = CPCouleurFondPlan.getValue().toString().substring(2, 8);
-            couleurFondPlan = CPCouleurFondPlan.getValue();
+        cpCouleurFondPlan.setOnAction((ActionEvent e) -> {
+            String coul = cpCouleurFondPlan.getValue().toString().substring(2, 8);
+            couleurFondPlan = cpCouleurFondPlan.getValue();
             txtCouleurFondPlan = coul;
             affichePlan();
         });
-        CPCouleurTextePlan.setOnAction((ActionEvent e) -> {
-            String coul = CPCouleurTextePlan.getValue().toString().substring(2, 8);
-            couleurTextePlan = CPCouleurTextePlan.getValue();
+        cpCouleurTextePlan.setOnAction((ActionEvent e) -> {
+            String coul = cpCouleurTextePlan.getValue().toString().substring(2, 8);
+            couleurTextePlan = cpCouleurTextePlan.getValue();
             txtCouleurTextePlan = coul;
             affichePlan();
         });
-        SLTailleRadar.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+        slTailleRadar.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
             if (newValue != null) {
                 double taille = (double) newValue;
                 tailleRadar = taille;
                 affichePlan();
             }
         });
-        SLOpaciteRadar.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+        slOpaciteRadar.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
             if (newValue != null) {
                 double opacite = (double) newValue;
                 opaciteRadar = opacite;
                 affichePlan();
             }
         });
-        CPCouleurFondRadar.setOnAction((ActionEvent e) -> {
-            String coul = CPCouleurFondRadar.getValue().toString().substring(2, 8);
-            couleurFondRadar = CPCouleurFondRadar.getValue();
+        cpCouleurFondRadar.setOnAction((ActionEvent e) -> {
+            String coul = cpCouleurFondRadar.getValue().toString().substring(2, 8);
+            couleurFondRadar = cpCouleurFondRadar.getValue();
             txtCouleurFondRadar = coul;
             affichePlan();
         });
-        CPCouleurLigneRadar.setOnAction((ActionEvent e) -> {
-            String coul = CPCouleurLigneRadar.getValue().toString().substring(2, 8);
-            couleurLigneRadar = CPCouleurLigneRadar.getValue();
+        cpCouleurLigneRadar.setOnAction((ActionEvent e) -> {
+            String coul = cpCouleurLigneRadar.getValue().toString().substring(2, 8);
+            couleurLigneRadar = cpCouleurLigneRadar.getValue();
             txtCouleurLigneRadar = coul;
             affichePlan();
         });

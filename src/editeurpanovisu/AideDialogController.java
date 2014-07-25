@@ -27,7 +27,7 @@ import javafx.stage.StageStyle;
 public class AideDialogController {
 
     private static final ResourceBundle rb = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", EditeurPanovisu.locale);
-    private static Stage STAide;
+    private static Stage stAide;
     private static AnchorPane myPane;
     private static Button btnAnnuler;
     private static Scene scene2;
@@ -36,9 +36,9 @@ public class AideDialogController {
         Dimension tailleEcran = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         int hauteur = (int) tailleEcran.getHeight() - 20;
         int largeur = (int) tailleEcran.getWidth() - 20;
-        STAide = new Stage(StageStyle.UTILITY);
-        STAide.initModality(Modality.APPLICATION_MODAL);
-        STAide.setResizable(false);
+        stAide = new Stage(StageStyle.UTILITY);
+        stAide.initModality(Modality.APPLICATION_MODAL);
+        stAide.setResizable(false);
         myPane = new AnchorPane();
         myPane.setPrefWidth(largeur-100);
         myPane.setPrefHeight(hauteur-100);
@@ -51,14 +51,14 @@ public class AideDialogController {
         browser.setPrefWidth(largeur-110);
         browser.setPrefHeight(hauteur-200);
         scene2 = new Scene(myPane, largeur-100, hauteur-100, Color.web("#666970"));
-        STAide.setScene(scene2);
-        STAide.show();
+        stAide.setScene(scene2);
+        stAide.show();
         btnAnnuler = new Button(rb.getString("aide.fermer"));
         btnAnnuler.setLayoutX(largeur-250);
         btnAnnuler.setLayoutY(hauteur-150);
         myPane.getChildren().addAll(browser,btnAnnuler);
         btnAnnuler.setOnAction((ActionEvent e) -> {
-            STAide.hide();
+            stAide.hide();
         });
     }
 

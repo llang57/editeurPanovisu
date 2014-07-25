@@ -305,6 +305,10 @@ public class EditeurPanovisu extends Application {
                     regX = Math.round(((panoramiquesProjet[i].getLookAtX() + 90) % 360) * 10) / 10;
                     zN = Math.round(((panoramiquesProjet[i].getZeroNord() + 90) % 360) * 10) / 10;
                 }
+                    int rouge = (int) (Color.valueOf(gestionnaireInterface.couleurDiaporama).getRed() * 255.d);
+                    int bleu = (int) (Color.valueOf(gestionnaireInterface.couleurDiaporama).getBlue() * 255.d);
+                    int vert = (int) (Color.valueOf(gestionnaireInterface.couleurDiaporama).getGreen() * 255.d);
+                    String coulDiapo = "rgba(" + rouge + "," + vert + "," + bleu + "," + gestionnaireInterface.diaporamaOpacite + ")";
 
                 contenuFichier = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                         + "<!--\n"
@@ -324,6 +328,7 @@ public class EditeurPanovisu extends Application {
                         + "      titreFond=\"" + gestionnaireInterface.couleurFondTitre + "\"\n"
                         + "      titreCouleur=\"" + gestionnaireInterface.couleurTitre + "\"\n"
                         + "      titreOpacite=\"" + gestionnaireInterface.titreOpacite + "\"\n"
+                        + "      diaporamaCouleur=\"" + coulDiapo + "\"\n"
                         + "      type=\"" + panoramiquesProjet[i].getTypePanoramique() + "\"\n"
                         + "      multiReso=\"oui\"\n"
                         + "      nombreNiveaux=\"" + panoramiquesProjet[i].getNombreNiveaux() + "\"\n"
@@ -501,9 +506,9 @@ public class EditeurPanovisu extends Application {
                 if (gestionnaireInterface.bAffichePlan && panoramiquesProjet[i].isAffichePlan()) {
                     int numPlan = panoramiquesProjet[i].getNumeroPlan();
                     Plan planPano = plans[numPlan];
-                    int rouge = (int) (gestionnaireInterface.couleurFondPlan.getRed() * 255.d);
-                    int bleu = (int) (gestionnaireInterface.couleurFondPlan.getBlue() * 255.d);
-                    int vert = (int) (gestionnaireInterface.couleurFondPlan.getGreen() * 255.d);
+                    rouge = (int) (gestionnaireInterface.couleurFondPlan.getRed() * 255.d);
+                    bleu = (int) (gestionnaireInterface.couleurFondPlan.getBlue() * 255.d);
+                    vert = (int) (gestionnaireInterface.couleurFondPlan.getGreen() * 255.d);
                     String SAfficheRadar = (gestionnaireInterface.bAfficheRadar) ? "oui" : "non";
                     String coulFond = "rgba(" + rouge + "," + vert + "," + bleu + "," + gestionnaireInterface.opacitePlan + ")";
                     contenuFichier
@@ -525,9 +530,9 @@ public class EditeurPanovisu extends Application {
                             + "        radarOpacite=\"" + Math.round(gestionnaireInterface.opaciteRadar * 100.d) / 100.d + "\"\n"
                             + "    >\n";
                     for (int iPoint = 0; iPoint < planPano.getNombreHotspots(); iPoint++) {
-                        double posX = planPano.getHotspot(iPoint).getLongitude() * GestionnaireInterfaceController.largeurPlan;
+                        double posX = planPano.getHotspot(iPoint).getLongitude() * gestionnaireInterface.largeurPlan;
                         double posY = planPano.getHotspot(iPoint).getLatitude()
-                                * planPano.getHauteurPlan() * GestionnaireInterfaceController.largeurPlan / planPano.getLargeurPlan();
+                                * planPano.getHauteurPlan() * gestionnaireInterface.largeurPlan / planPano.getLargeurPlan();
                         if (planPano.getHotspot(iPoint).getNumeroPano() == i) {
                             contenuFichier
                                     += "        <pointPlan\n"
@@ -622,9 +627,9 @@ public class EditeurPanovisu extends Application {
                     + "                    return false;\n"
                     + "                });\n"
                     + "                $(\".reseauSocial-email\").attr(\"href\",\"mailto:?body=\" + document.location.href + \"&amp;hl=fr\");\n"
-                    + "                images=new Array();\n"
-                    + chargeImages
-                    + "                prechargeImages(images); \n \n"
+//                    + "                images=new Array();\n"
+//                    + chargeImages
+//                    + "                prechargeImages(images); \n \n"
                     + "            });\n"
                     + "        </script>\n"
                     + "    </body>\n"

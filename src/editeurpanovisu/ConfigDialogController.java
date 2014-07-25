@@ -41,7 +41,7 @@ import org.controlsfx.dialog.Dialogs;
 public class ConfigDialogController {
 
     private static final ResourceBundle rb = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", EditeurPanovisu.locale);
-    private static Stage STConfig;
+    private static Stage stConfig;
     private static AnchorPane myPane;
     private static Button btnAnnuler;
     private static Button btnSauvegarder;
@@ -49,8 +49,8 @@ public class ConfigDialogController {
     private static final String[] langues = EditeurPanovisu.languesTraduction;
     final ToggleGroup grpStyle = new ToggleGroup();
     private static Label lblChoixStyle;
-    private static RadioButton RBClair;
-    private static RadioButton RBFonce;
+    private static RadioButton rbClair;
+    private static RadioButton rbFonce;
 
     private static ComboBox listeLangues;
     private static TextField txtRepert;
@@ -67,15 +67,15 @@ public class ConfigDialogController {
                 codeL = i;
             }
         }
-        STConfig = new Stage(StageStyle.UTILITY);
-        STConfig.initModality(Modality.APPLICATION_MODAL);
-        STConfig.setResizable(false);
+        stConfig = new Stage(StageStyle.UTILITY);
+        stConfig.initModality(Modality.APPLICATION_MODAL);
+        stConfig.setResizable(false);
         myPane = new AnchorPane();
         myPane.setPrefWidth(600);
         myPane.setPrefHeight(400);
         Scene scene2 = new Scene(myPane);
-        STConfig.setScene(scene2);
-        STConfig.show();
+        stConfig.setScene(scene2);
+        stConfig.show();
         VBox fenetre = new VBox();
         Pane VBConfig = new Pane();
         VBConfig.setPrefSize(600, 360);
@@ -103,20 +103,20 @@ public class ConfigDialogController {
         lblChoixStyle = new Label(rb.getString("config.choixStyle"));
         lblChoixStyle.setLayoutX(45);
         lblChoixStyle.setLayoutY(150);
-        RBClair = new RadioButton(rb.getString("config.styleClair"));
-        RBFonce = new RadioButton(rb.getString("config.styleFonce"));
-        RBClair.setLayoutX(190);
-        RBClair.setLayoutY(180);
-        RBFonce.setLayoutX(190);
-        RBFonce.setLayoutY(200);
-        RBClair.setToggleGroup(grpStyle);
-        RBClair.setUserData("clair");
-        RBFonce.setUserData("fonce");
-        RBFonce.setToggleGroup(grpStyle);
+        rbClair = new RadioButton(rb.getString("config.styleClair"));
+        rbFonce = new RadioButton(rb.getString("config.styleFonce"));
+        rbClair.setLayoutX(190);
+        rbClair.setLayoutY(180);
+        rbFonce.setLayoutX(190);
+        rbFonce.setLayoutY(200);
+        rbClair.setToggleGroup(grpStyle);
+        rbClair.setUserData("clair");
+        rbFonce.setUserData("fonce");
+        rbFonce.setToggleGroup(grpStyle);
         if (styleCSS.equals("clair")) {
-            RBClair.setSelected(true);
+            rbClair.setSelected(true);
         } else {
-            RBFonce.setSelected(true);
+            rbFonce.setSelected(true);
         }
         grpStyle.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) -> {
             if (grpStyle.getSelectedToggle() != null) {
@@ -128,7 +128,7 @@ public class ConfigDialogController {
         VBConfig.getChildren().addAll(
                 lblType, listeLangues,
                 lblRepert, txtRepert, btnChoixRepert,
-                lblChoixStyle, RBClair, RBFonce
+                lblChoixStyle, rbClair, rbFonce
         );
         btnChoixRepert.setOnAction((ActionEvent e) -> {
             DirectoryChooser repertChoix = new DirectoryChooser();
@@ -149,7 +149,7 @@ public class ConfigDialogController {
         Pboutons.getChildren().addAll(btnAnnuler, btnSauvegarder);
         fenetre.getChildren().add(Pboutons);
         btnAnnuler.setOnAction((ActionEvent e) -> {
-            STConfig.hide();
+            stConfig.hide();
             setUserAgentStylesheet("file:css/" + styleCSS + ".css");
         });
         btnSauvegarder.setOnAction((ActionEvent e) -> {
@@ -184,7 +184,7 @@ public class ConfigDialogController {
             } catch (IOException ex) {
                 Logger.getLogger(ConfigDialogController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            STConfig.hide();
+            stConfig.hide();
         });
     }
 
