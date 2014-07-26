@@ -46,6 +46,7 @@ import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialog;
+import org.controlsfx.dialog.DialogStyle;
 import org.controlsfx.dialog.Dialogs;
 
 /**
@@ -97,9 +98,9 @@ public class EquiCubeDialogController {
             reponse = Dialogs.create()
                     .owner(null)
                     .title("Transformation d'images")
-                    .masthead("vous n'avez pas traité vos images")
-                    .message("Êtes vous sûr de vouloir quitter?")
-                    .actions(Dialog.Actions.YES, Dialog.Actions.NO)
+                    .masthead("Vous n'avez pas traité vos images.")
+                    .message("Êtes-vous sûr de vouloir quitter?")
+                    .actions(Dialog.Actions.YES, Dialog.Actions.NO).style(DialogStyle.CROSS_PLATFORM_DARK)
                     .showConfirm();
         }
         if ((reponse == Dialog.Actions.YES) || (reponse == null)) {
@@ -219,17 +220,15 @@ public class EquiCubeDialogController {
      */
     private void validerE2C() {
         if (lstFichier == null) {
-            Dialogs.create().title("Editeur PanoVisu")
-                    .masthead("transformation de fichiers")
-                    .message("Vous n'avez pas choisi de fichiers")
+            Dialogs.create().title("Transformation de fichiers")
+                    .message("Vous n'avez pas choisi de fichiers.").style(DialogStyle.CROSS_PLATFORM_DARK)
                     .showError();
         } else {
-            Dialogs.create().title("Editeur PanoVisu")
-                    .masthead("transformation de fichiers")
-                    .message("Attention le traitement que vous allez lancer peut durer plusieurs minutes \n"
+            Dialogs.create().title("Transformation de fichiers")
+                    .message("Attention le traitement que vous allez lancer peut durer plusieurs minutes"
                             + "pendant lesquelle le programme semblera ne plus répondre. "
-                            + "Veuillez patienter jusqu'à la fin du traitement"
-                            + "\n\nMerci")
+                            + "Veuillez patienter jusqu'à la fin du traitement."
+                            + "\n\nMerci").style(DialogStyle.CROSS_PLATFORM_DARK)
                     .showWarning();
             lblTermine = new Label();
             lblTermine.setText("Traitement en cours");
@@ -353,9 +352,8 @@ public class EquiCubeDialogController {
                 }
             }
             if (attention) {
-                Dialogs.create().title("Editeur PanoVisu")
-                        .masthead("trnsformation de fichiers")
-                        .message("Attention au type des fichiers choisis")
+                Dialogs.create().title("Transformation de fichiers")                       
+                        .message("Attention au type des fichiers choisis.").style(DialogStyle.CROSS_PLATFORM_DARK)
                         .showError();
 
             }
@@ -653,9 +651,8 @@ public class EquiCubeDialogController {
                     }
                 }
                 if (attention) {
-                    Dialogs.create().title("Editeur PanoVisu")
-                            .masthead("trnsformation de fichiers")
-                            .message("Attention au type des fichiers choisis")
+                    Dialogs.create().title("Transformation de fichiers")
+                            .message("Attention au type des fichiers choisis.").style(DialogStyle.CROSS_PLATFORM_DARK)
                             .showError();
 
                 }
