@@ -399,9 +399,11 @@ public class GestionnaireInterfaceController {
     private Slider slTaille;
     private ColorPicker cpCouleurTheme;
     private ColorPicker cpCouleurHotspots;
+    private ColorPicker cpCouleurHotspotsPhoto;
     private ColorPicker cpCouleurBoutons;
     private ColorPicker cpCouleurMasques;
     private Color couleurHotspots = Color.hsb(120, 1.0, 1.0);
+    private Color couleurHotspotsPhoto = Color.hsb(120, 1.0, 1.0);
     private Color couleurBoutons = Color.hsb(120, 1.0, 1.0);
     private Color couleurMasque = Color.hsb(120, 1.0, 1.0);
     private Color couleurTheme = Color.hsb(120, 1.0, 1.0);
@@ -497,7 +499,7 @@ public class GestionnaireInterfaceController {
 
         changeCouleurBarre(couleurBoutons.getHue(), couleurBoutons.getSaturation(), couleurBoutons.getBrightness());
         changeCouleurHS(couleurHotspots.getHue(), couleurHotspots.getSaturation(), couleurHotspots.getBrightness());
-        changeCouleurHSPhoto(couleurHotspots.getHue(), couleurHotspots.getSaturation(), couleurHotspots.getBrightness());
+        changeCouleurHSPhoto(couleurHotspotsPhoto.getHue(), couleurHotspotsPhoto.getSaturation(), couleurHotspotsPhoto.getBrightness());
         changeCouleurMasque(couleurMasque.getHue(), couleurMasque.getSaturation(), couleurMasque.getBrightness());
     }
 
@@ -1295,6 +1297,7 @@ public class GestionnaireInterfaceController {
                 + "couleurTheme=" + couleurTheme.toString().substring(2, 8) + "\n"
                 + "couleurBoutons=" + couleurBoutons.toString().substring(2, 8) + "\n"
                 + "couleurHotspots=" + couleurHotspots.toString().substring(2, 8) + "\n"
+                + "couleurHotspotsPhoto=" + couleurHotspotsPhoto.toString().substring(2, 8) + "\n"
                 + "couleurMasque=" + couleurMasque.toString().substring(2, 8) + "\n"
                 + "styleHotspots=" + styleHotSpots + "\n"
                 + "styleHotspotImages=" + styleHotSpotImages + "\n"
@@ -1393,6 +1396,9 @@ public class GestionnaireInterfaceController {
                     break;
                 case "couleurHotspots":
                     couleurHotspots = Color.web(valeur);
+                    break;
+                case "couleurHotspotsPhoto":
+                    couleurHotspotsPhoto = Color.web(valeur);
                     break;
                 case "couleurMasque":
                     couleurMasque = Color.web(valeur);
@@ -1705,6 +1711,7 @@ public class GestionnaireInterfaceController {
         cpCouleurTheme.setValue(couleurTheme);
         cpCouleurMasques.setValue(couleurMasque);
         cpCouleurHotspots.setValue(couleurHotspots);
+        cpCouleurHotspotsPhoto.setValue(couleurHotspotsPhoto);
         cbListePolices.setValue(titrePoliceNom);
         slOpacite.setValue(titreOpacite);
         cbSuivantPrecedent.setSelected(bSuivantPrecedent);
@@ -2198,8 +2205,8 @@ public class GestionnaireInterfaceController {
         apHotSpots.setStyle("-fx-background-color : #fff");
         apHotSpots.setPadding(new Insets(5));
         int i = 0;
-        double xHS;
-        double yHS;
+        double xHS=0;
+        double yHS=25;
         Label lblHSPanoramique = new Label(rb.getString("interface.HSPanoramique"));
         lblHSPanoramique.setLayoutY(5);
         lblHSPanoramique.setLayoutX(20);
@@ -2208,15 +2215,16 @@ public class GestionnaireInterfaceController {
         lblHSPhoto.setLayoutX(20);
         apHotSpots.getChildren().addAll(lblHSPanoramique, lblHSPhoto);
         for (String nomImage : listeHotSpots) {
+            Pane fond=new Pane();
             ivHotspots[i] = new ImageView(new Image("file:" + repertHotSpots + File.separator + nomImage, -1, 30, true, true, true));
             int col = i % 6;
             int row = i / 6;
             xHS = col * 40 + 5;
             yHS = row * 35 + 25;
-            ivHotspots[i].setLayoutX(xHS);
-            ivHotspots[i].setLayoutY(yHS);
-            ivHotspots[i].setStyle("-fx-background-color : #ccc");
-            ivHotspots[i].setOnMouseClicked((MouseEvent me) -> {
+            fond.setLayoutX(xHS);
+            fond.setLayoutY(yHS);
+            fond.setStyle("-fx-background-color : #ccc");
+            fond.setOnMouseClicked((MouseEvent me) -> {
                 apVisualisation.getChildren().remove(hbbarreBoutons);
                 apVisualisation.getChildren().remove(ivHotSpot);
                 apVisualisation.getChildren().remove(ivHotSpotImage);
@@ -2224,39 +2232,48 @@ public class GestionnaireInterfaceController {
                 afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
 
             });
-            apHotSpots.getChildren().add(ivHotspots[i]);
-            i++;
-
-        }
-        i = 0;
-        for (String nomImage : listeHotSpotsPhoto) {
-            ivHotspotsPhoto[i] = new ImageView(new Image("file:" + repertHotSpotsPhoto + File.separator + nomImage, -1, 30, true, true, true));
-            int col = i % 6;
-            int row = i / 6;
-            xHS = col * 40 + 5;
-            yHS = (row + (int) (nombreHotSpots / 6 + 1)) * 35 + 65;
-            ivHotspotsPhoto[i].setLayoutX(xHS);
-            ivHotspotsPhoto[i].setLayoutY(yHS);
-            ivHotspotsPhoto[i].setStyle("-fx-background-color : #ccc");
-            ivHotspotsPhoto[i].setOnMouseClicked((MouseEvent me) -> {
-                apVisualisation.getChildren().remove(hbbarreBoutons);
-                apVisualisation.getChildren().remove(ivHotSpot);
-                apVisualisation.getChildren().remove(ivHotSpotImage);
-                styleHotSpotImages = nomImage;
-                afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
-
-            });
-            apHotSpots.getChildren().add(ivHotspotsPhoto[i]);
+            fond.getChildren().add(ivHotspots[i]);
+            apHotSpots.getChildren().add(fond);
             i++;
 
         }
         cpCouleurHotspots = new ColorPicker(couleurHotspots);
         Label lblCouleurHotspot = new Label(rb.getString("interface.couleurHS"));
         lblCouleurHotspot.setLayoutX(20);
-        lblCouleurHotspot.setLayoutY(tailleHS - 20);
+        lblCouleurHotspot.setLayoutY(yHS + 50);
         cpCouleurHotspots.setLayoutX(200);
-        cpCouleurHotspots.setLayoutY(tailleHS - 20);
+        cpCouleurHotspots.setLayoutY(yHS + 50);
         apHotSpots.getChildren().addAll(lblCouleurHotspot, cpCouleurHotspots);
+        i = 0;
+        for (String nomImage : listeHotSpotsPhoto) {
+            Pane fond=new Pane();
+            ivHotspotsPhoto[i] = new ImageView(new Image("file:" + repertHotSpotsPhoto + File.separator + nomImage, -1, 30, true, true, true));
+            int col = i % 6;
+            int row = i / 6;
+            xHS = col * 40 + 5;
+            yHS = (row + (int) (nombreHotSpots / 6 + 1)) * 35 + 65;            
+            fond.setLayoutX(xHS);
+            fond.setLayoutY(yHS);
+            fond.setStyle("-fx-background-color : #ccc");
+            fond.setOnMouseClicked((MouseEvent me) -> {
+                apVisualisation.getChildren().remove(hbbarreBoutons);
+                apVisualisation.getChildren().remove(ivHotSpot);
+                apVisualisation.getChildren().remove(ivHotSpotImage);
+                styleHotSpotImages = nomImage;
+                afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
+            });
+            fond.getChildren().add(ivHotspotsPhoto[i]);
+            apHotSpots.getChildren().add(fond);
+            i++;
+
+        }
+        cpCouleurHotspotsPhoto = new ColorPicker(couleurHotspotsPhoto);
+        Label lblCouleurHotspotPhoto = new Label(rb.getString("interface.couleurHSPhoto"));
+        lblCouleurHotspotPhoto.setLayoutX(20);
+        lblCouleurHotspotPhoto.setLayoutY(tailleHS - 20);
+        cpCouleurHotspotsPhoto.setLayoutX(200);
+        cpCouleurHotspotsPhoto.setLayoutY(tailleHS - 20);
+        apHotSpots.getChildren().addAll(lblCouleurHotspotPhoto, cpCouleurHotspotsPhoto);
         apHotSpots.setPrefHeight(0);
         apHotSpots.setMaxHeight(0);
         apHotSpots.setMinHeight(0);
@@ -2526,20 +2543,26 @@ public class GestionnaireInterfaceController {
         ImageView[] ivBoussoles = new ImageView[nombreBoussoles];
         i = 0;
         for (String nomImage : listeBoussoles) {
+            Pane fond=new Pane();
             ivBoussoles[i] = new ImageView(new Image("file:" + repertBoussoles + File.separator + nomImage, -1, 60, true, true, true));
             int col = i % 3;
             int row = i / 3;
             xHS = col * 70 + 95;
             yHS = row * 70 + 60;
-            ivBoussoles[i].setLayoutX(xHS);
-            ivBoussoles[i].setLayoutY(yHS);
-            ivBoussoles[i].setUserData(nomImage);
-            ivBoussoles[i].setStyle("-fx-background-color : #ccc");
-            ivBoussoles[i].setOnMouseClicked((MouseEvent me) -> {
-                imageBoussole = (String) ((ImageView) me.getSource()).getUserData();
+            fond.setLayoutX(xHS);
+            fond.setLayoutY(yHS);
+            fond.setPrefHeight(60);
+            fond.setPrefWidth(60);
+            fond.setOpacity(1);
+            fond.setUserData(nomImage);
+            fond.setStyle("-fx-background-color : rgba(255,255,255,0)");
+            fond.setOnMouseClicked((MouseEvent me) -> {
+                imageBoussole = (String) ((Pane) me.getSource()).getUserData();
                 afficheBoussole();
             });
-            apBoussole.getChildren().add(ivBoussoles[i]);
+            fond.getChildren().add(ivBoussoles[i]);
+                    
+            apBoussole.getChildren().add(fond);
             i++;
 
         }
@@ -3387,7 +3410,10 @@ public class GestionnaireInterfaceController {
         cpCouleurHotspots.setOnAction((ActionEvent e) -> {
             couleurHotspots = cpCouleurHotspots.getValue();
             changeCouleurHS(couleurHotspots.getHue(), couleurHotspots.getSaturation(), couleurHotspots.getBrightness());
-            changeCouleurHSPhoto(couleurHotspots.getHue(), couleurHotspots.getSaturation(), couleurHotspots.getBrightness());
+        });
+        cpCouleurHotspotsPhoto.setOnAction((ActionEvent e) -> {
+            couleurHotspotsPhoto = cpCouleurHotspotsPhoto.getValue();
+            changeCouleurHSPhoto(couleurHotspotsPhoto.getHue(), couleurHotspotsPhoto.getSaturation(), couleurHotspotsPhoto.getBrightness());
         });
 
         /*

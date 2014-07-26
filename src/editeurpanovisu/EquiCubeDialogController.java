@@ -54,11 +54,11 @@ public class EquiCubeDialogController {
 
     private static final ResourceBundle rb = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", EditeurPanovisu.locale);
 
-    private static final Stage stEqui2Cube = new Stage(StageStyle.UTILITY);
-    private static final AnchorPane myPane = new AnchorPane();
+    private static Stage stEqui2Cube;
+    private static AnchorPane myPane;
     private String typeTransformation;
     static private final ListView listeFichier = new ListView();
-    public static final ProgressBar barreImage=new ProgressBar();
+    public static final ProgressBar barreImage = new ProgressBar();
     static private Button btnAnnuler;
     static private Button btnValider;
     static private Button btnAjouteFichiers;
@@ -368,6 +368,8 @@ public class EquiCubeDialogController {
      * @throws Exception
      */
     public void afficheFenetre(String typeTransf) throws Exception {
+        stEqui2Cube = new Stage(StageStyle.UTILITY);
+        myPane = new AnchorPane();
         stEqui2Cube.initModality(Modality.APPLICATION_MODAL);
         stEqui2Cube.setResizable(true);
         myPane.setStyle("-fx-background-color : #ff0000;");

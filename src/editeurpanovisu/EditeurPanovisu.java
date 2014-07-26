@@ -94,6 +94,8 @@ public class EditeurPanovisu extends Application {
 
     public static final String[] codesLanguesTraduction = {"fr_FR", "en_EN", "de_DE"};
     public static final String[] languesTraduction = {"Francais", "English", "Deutsch"};
+    private static Button btnValider = new Button("Valide HotSpots");
+
     public static Locale locale = new Locale("fr", "FR");
     private static ResourceBundle rb;
     static private PopUpDialogController popUp;
@@ -305,10 +307,10 @@ public class EditeurPanovisu extends Application {
                     regX = Math.round(((panoramiquesProjet[i].getLookAtX() + 90) % 360) * 10) / 10;
                     zN = Math.round(((panoramiquesProjet[i].getZeroNord() + 90) % 360) * 10) / 10;
                 }
-                    int rouge = (int) (Color.valueOf(gestionnaireInterface.couleurDiaporama).getRed() * 255.d);
-                    int bleu = (int) (Color.valueOf(gestionnaireInterface.couleurDiaporama).getBlue() * 255.d);
-                    int vert = (int) (Color.valueOf(gestionnaireInterface.couleurDiaporama).getGreen() * 255.d);
-                    String coulDiapo = "rgba(" + rouge + "," + vert + "," + bleu + "," + gestionnaireInterface.diaporamaOpacite + ")";
+                int rouge = (int) (Color.valueOf(gestionnaireInterface.couleurDiaporama).getRed() * 255.d);
+                int bleu = (int) (Color.valueOf(gestionnaireInterface.couleurDiaporama).getBlue() * 255.d);
+                int vert = (int) (Color.valueOf(gestionnaireInterface.couleurDiaporama).getGreen() * 255.d);
+                String coulDiapo = "rgba(" + rouge + "," + vert + "," + bleu + "," + gestionnaireInterface.diaporamaOpacite + ")";
 
                 contenuFichier = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                         + "<!--\n"
@@ -627,9 +629,9 @@ public class EditeurPanovisu extends Application {
                     + "                    return false;\n"
                     + "                });\n"
                     + "                $(\".reseauSocial-email\").attr(\"href\",\"mailto:?body=\" + document.location.href + \"&amp;hl=fr\");\n"
-//                    + "                images=new Array();\n"
-//                    + chargeImages
-//                    + "                prechargeImages(images); \n \n"
+                    //                    + "                images=new Array();\n"
+                    //                    + chargeImages
+                    //                    + "                prechargeImages(images); \n \n"
                     + "            });\n"
                     + "        </script>\n"
                     + "    </body>\n"
@@ -2101,6 +2103,7 @@ public class EditeurPanovisu extends Application {
                             gereSourisPanoramique(me1);
                         }
                 );
+                btnValider.setStyle("-fx-text-fill : #AA0000");
                 panoListeVignette = nomPano;
                 if (panoramiquesProjet[numeroPano].getTitrePanoramique() != null) {
                     String texteHS = panoramiquesProjet[numeroPano].getTitrePanoramique();
@@ -2147,6 +2150,7 @@ public class EditeurPanovisu extends Application {
      *
      */
     private void valideHS() {
+        btnValider.setStyle("-fx-text-fill : #00AA00");
         for (int i = 0; i < panoramiquesProjet[panoActuel].getNombreHotspots(); i++) {
             ComboBox cbx = (ComboBox) outils.lookup("#cbpano" + i);
             TextArea txtTexteHS = (TextArea) outils.lookup("#txtHS" + i);
@@ -2182,12 +2186,14 @@ public class EditeurPanovisu extends Application {
 
         Pane panneauHotSpots = new Pane();
         panneauHotSpots.setTranslateY(10);
+        panneauHotSpots.setTranslateX(30);
         VBox vb1 = new VBox(5);
         panneauHotSpots.getChildren().add(vb1);
         Label lblPoint;
         Label sep = new Label(" ");
         Label sep1 = new Label(" ");
-        for (int o = 0; o < panoramiquesProjet[numPano].getNombreHotspots(); o++) {
+        int o;
+        for (o = 0; o < panoramiquesProjet[numPano].getNombreHotspots(); o++) {
             VBox vbPanneauHS = new VBox();
             double deplacement = 20;
             vbPanneauHS.setLayoutX(deplacement);
@@ -2212,8 +2218,15 @@ public class EditeurPanovisu extends Application {
                 ComboBox cbDestPano = new ComboBox();
                 String[] liste = lstPano.split(";");
                 cbDestPano.getItems().addAll(Arrays.asList(liste));
+                cbDestPano.valueProperty().addListener(new ChangeListener<String>() {
+                    @Override
+                    public void changed(ObservableValue ov, String t, String t1) {
+                        btnValider.setStyle("-fx-text-fill : #AA0000");
+                    }
+                });
                 cbDestPano.setTranslateX(60);
                 cbDestPano.setId("cbpano" + o);
+
                 String f1XML = panoramiquesProjet[numPano].getHotspot(o).getFichierXML();
                 if (f1XML != null) {
                     cbDestPano.setValue(f1XML.split("\\.")[0]);
@@ -2227,12 +2240,19 @@ public class EditeurPanovisu extends Application {
             if (panoramiquesProjet[numPano].getHotspot(o).getInfo() != null) {
                 txtTexteHS.setText(panoramiquesProjet[numPano].getHotspot(o).getInfo());
             }
+            txtTexteHS.textProperty().addListener((final ObservableValue<? extends String> observable, final String oldValue, final String newValue) -> {
+                btnValider.setStyle("-fx-text-fill : #AA0000");
+            });
+
             txtTexteHS.setId("txtHS" + o);
             txtTexteHS.setPrefSize(200, 25);
             txtTexteHS.setMaxSize(200, 20);
             txtTexteHS.setTranslateX(60);
             CheckBox cbAnime = new CheckBox("HostSpot Animé");
             cbAnime.setId("anime" + o);
+            cbAnime.selectedProperty().addListener((final ObservableValue<? extends Boolean> observable, final Boolean oldValue, final Boolean newValue) -> {
+                btnValider.setStyle("-fx-text-fill : #AA0000");
+            });
             if (panoramiquesProjet[numPano].getHotspot(o).isAnime()) {
                 cbAnime.setSelected(true);
             }
@@ -2241,7 +2261,8 @@ public class EditeurPanovisu extends Application {
             vbPanneauHS.getChildren().addAll(lblTexteHS, txtTexteHS, cbAnime, sep1);
             vb1.getChildren().addAll(pannneauHS, sep);
         }
-        for (int o = 0; o < panoramiquesProjet[numPano].getNombreHotspotImage(); o++) {
+        int nbHS = o;
+        for (o = 0; o < panoramiquesProjet[numPano].getNombreHotspotImage(); o++) {
             VBox vbPanneauHS = new VBox();
             Pane pannneauHS = new Pane(vbPanneauHS);
             pannneauHS.setStyle("-fx-border-color : #777777;-fx-border-width : 1px;-fx-border-radius : 3;");
@@ -2266,12 +2287,19 @@ public class EditeurPanovisu extends Application {
             if (panoramiquesProjet[numPano].getHotspotImage(o).getInfo() != null) {
                 txtTexteHS.setText(panoramiquesProjet[numPano].getHotspotImage(o).getInfo());
             }
+            txtTexteHS.textProperty().addListener((final ObservableValue<? extends String> observable, final String oldValue, final String newValue) -> {
+                btnValider.setStyle("-fx-text-fill : #AA0000");
+            });
+
             txtTexteHS.setId("txtHSImage" + o);
             txtTexteHS.setPrefSize(200, 25);
             txtTexteHS.setMaxSize(200, 20);
             txtTexteHS.setTranslateX(60);
             CheckBox cbAnime = new CheckBox("HostSpot Animé");
             cbAnime.setId("animeImage" + o);
+            cbAnime.selectedProperty().addListener((final ObservableValue<? extends Boolean> observable, final Boolean oldValue, final Boolean newValue) -> {
+                btnValider.setStyle("-fx-text-fill : #AA0000");
+            });
             if (panoramiquesProjet[numPano].getHotspotImage(o).isAnime()) {
                 cbAnime.setSelected(true);
             }
@@ -2280,12 +2308,18 @@ public class EditeurPanovisu extends Application {
             vbPanneauHS.getChildren().addAll(lblTexteHS, txtTexteHS, cbAnime, sep1);
             vb1.getChildren().addAll(pannneauHS, sep);
         }
-
-        Button btnValider = new Button("Valide HotSpots");
-        btnValider.setTranslateX(200);
+        nbHS += o;
+        if (nbHS == 0) {
+            btnValider.setVisible(false);
+        } else {
+            btnValider.setVisible(true);
+        }
+        btnValider.setTranslateX(220);
         btnValider.setTranslateY(5);
         btnValider.setPadding(new Insets(7));
+        btnValider.setStyle("-fx-text-fill : #00aa00");
         btnValider.setOnAction((ActionEvent e) -> {
+            btnValider.setStyle("-fx-text-fill : #00aa00");
             valideHS();
         });
         vb1.getChildren().addAll(btnValider, sep1);
@@ -2398,6 +2432,7 @@ public class EditeurPanovisu extends Application {
         Tooltip.install(point, t);
 
         point.setOnMouseClicked((MouseEvent me1) -> {
+            btnValider.setStyle("-fx-text-fill : #AA0000");
             double mouseX = me1.getSceneX();
             double mouseY = me1.getSceneY() - pano.getLayoutY() - 115;
             String chPoint = point.getId();
@@ -3743,6 +3778,7 @@ public class EditeurPanovisu extends Application {
 //        panneauOutils.setStyle("-fx-background-color : #ccc;");
         outils = new VBox();
         paneChoixPanoramique = new VBox();
+        paneChoixPanoramique.setTranslateX(10);
         paneChoixPanoramique.setId("choixPanoramique");
         Label lblTitreVisite = new Label(rb.getString("main.titreVisite"));
         lblTitreVisite.setPadding(new Insets(15, 5, 5, 5));
@@ -3797,8 +3833,13 @@ public class EditeurPanovisu extends Application {
         btnValidePano = new Button("Valide Infos");
         btnValidePano.setTranslateY(25);
         btnValidePano.setTranslateX(200);
+        btnValidePano.setStyle("-fx-text-fill : #00AA00");
         btnValidePano.setPadding(new Insets(7));
+        txtTitrePano.textProperty().addListener((final ObservableValue<? extends String> observable, final String oldValue, final String newValue) -> {
+            btnValidePano.setStyle("-fx-text-fill : #AA0000");
+        });
         btnValidePano.setOnAction((ActionEvent e) -> {
+            btnValidePano.setStyle("-fx-text-fill : #00AA00");
             clickBtnValidePano();
         });
 
@@ -3856,6 +3897,7 @@ public class EditeurPanovisu extends Application {
         outils.setPrefWidth(largeurOutils - 20);
 //        outils.setStyle("-fx-background-color : #ccc;");
         outils.minHeight(height - 130);
+        outils.setLayoutX(10);
 //        lblLong.setStyle(labelStyle);
 //        lblLat.setStyle(labelStyle);
         lblLong.setPrefSize(100, 15);

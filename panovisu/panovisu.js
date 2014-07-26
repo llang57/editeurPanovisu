@@ -854,12 +854,22 @@ function panovisu(num_pano) {
             {
                 $("#titreVignettes-" + num_pano).fadeIn(500);
                 $("#divVignettes-" + num_pano).fadeIn(500);
-                var largeur = $("#divVignettes-" + num_pano).width() + 6;
-                if (vignettesPosition === "left") {
-                    $("#divPrecedent-" + num_pano).css({left: largeur});
+                if (!vigRentre) {
+                    var largeur = $("#divVignettes-" + num_pano).width() + 6;
+                    if (vignettesPosition === "left") {
+                        $("#divPrecedent-" + num_pano).css({left: largeur});
+                    }
+                    if (vignettesPosition === "right") {
+                        $("#divSuivant-" + num_pano).css({right: largeur});
+                    }
                 }
-                if (vignettesPosition === "right") {
-                    $("#divSuivant-" + num_pano).css({right: largeur});
+                else{
+                    if (vignettesPosition === "left") {
+                        $("#divPrecedent-" + num_pano).css({left: 0});
+                    }
+                    if (vignettesPosition === "right") {
+                        $("#divSuivant-" + num_pano).css({right: 0});
+                    }                    
                 }
 
             }
