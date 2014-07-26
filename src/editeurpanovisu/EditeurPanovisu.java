@@ -2644,7 +2644,7 @@ public class EditeurPanovisu extends Application {
             dejaSauve = false;
             stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
             double mouseX = X;
-            double mouseY = Y - pano.getLayoutY() - 115;
+            double mouseY = Y - pano.getLayoutY() - 95;
             double longitude, latitude;
             double largeur = imagePanoramique.getFitWidth();
             String chLong, chLat;
@@ -2893,7 +2893,7 @@ public class EditeurPanovisu extends Application {
                 (MouseEvent me) -> {
                     if (estCharge) {
                         double mouseX = me.getSceneX();
-                        double mouseY = me.getSceneY() - pano.getLayoutY() - 115;
+                        double mouseY = me.getSceneY() - pano.getLayoutY() - 95;
                         double longitude, latitude;
                         double largeur = imagePanoramique.getFitWidth() * pano.getScaleX();
                         longitude = 360.0f * mouseX / largeur - 180;
@@ -3726,8 +3726,8 @@ public class EditeurPanovisu extends Application {
         creeMenu(primaryStage, root, width);
         TabPane tabPaneEnvironnement = new TabPane();
 //        tabPaneEnvironnement.setTranslateZ(5);
-        tabPaneEnvironnement.setMinHeight(height - 140);
-        tabPaneEnvironnement.setMaxHeight(height - 140);
+        tabPaneEnvironnement.setMinHeight(height-60);
+        tabPaneEnvironnement.setMaxHeight(height-60);
         Pane barreStatus = new Pane();
         barreStatus.setPrefSize(width + 20, 30);
         barreStatus.setTranslateY(25);
@@ -3737,9 +3737,9 @@ public class EditeurPanovisu extends Application {
         Pane panneauPlan;
         tabInterface = new Tab();
         tabPlan = new Tab();
-        gestionnaireInterface.creeInterface(width, height - 140);
+        gestionnaireInterface.creeInterface(width, height - 60);
         visualiseur = gestionnaireInterface.tabInterface;
-        gestionnairePlan.creeInterface(width, height - 140);
+        gestionnairePlan.creeInterface(width, height - 60);
         panneauPlan = gestionnairePlan.tabInterface;
         tabInterface.setContent(visualiseur);
         tabPlan.setContent(panneauPlan);
@@ -3907,6 +3907,7 @@ public class EditeurPanovisu extends Application {
         panneau2.setPrefSize(width - largeurOutils - 20, height - 140);
 
         imagePanoramique.setCache(true);
+        System.out.println("Largeur Max : " + largeurMax);
         if (largeurMax < 1200) {
             largeur = largeurMax;
         } else {
@@ -3921,7 +3922,7 @@ public class EditeurPanovisu extends Application {
         coordonnees.getChildren().setAll(lblLong, lblLat);
         vuePanoramique.setContent(panneau2);
         hbEnvironnement.getChildren().setAll(vuePanoramique, panneauOutils);
-        root.getChildren().addAll(tabPaneEnvironnement, barreStatus);
+        root.getChildren().addAll(tabPaneEnvironnement);
         panneau2.getChildren().setAll(afficheLegende(), coordonnees, pano);
         primaryStage.show();
         popUp.affichePopup();
@@ -3955,7 +3956,7 @@ public class EditeurPanovisu extends Application {
         Dimension tailleEcran = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         int hauteur = (int) tailleEcran.getHeight() - 20;
         int largeur = (int) tailleEcran.getWidth() - 20;
-        largeurMax = tailleEcran.getWidth() - 320.0d;
+        largeurMax = tailleEcran.getWidth() - 450.0d;
         creeEnvironnement(primaryStage, largeur, hauteur);
 
         File repertTempFile = new File(repertAppli + File.separator + "temp");

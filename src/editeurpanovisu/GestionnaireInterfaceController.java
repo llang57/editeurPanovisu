@@ -1885,13 +1885,17 @@ public class GestionnaireInterfaceController {
          *     Panneau de visualisation de l'interface
          * ***************************************************************
          */
-        double tailleMax = apVisualisation.getPrefWidth();
+        double tailleMax = apVisualisation.getPrefWidth()-40;
         if (tailleMax > 1200) {
             tailleMax = 1200;
         }
         IMVisualisation = new ImageView(imageClaire);
         IMVisualisation.setFitWidth(tailleMax);
-        IMVisualisation.setFitHeight(tailleMax * 2.d / 3.d);
+        if (tailleMax * 2.d / 3.d > height - 100) {
+            IMVisualisation.setFitHeight(height - 100);
+        } else {
+            IMVisualisation.setFitHeight(tailleMax * 2.d / 3.d);
+        }
         IMVisualisation.setSmooth(true);
         double LX = (apVisualisation.getPrefWidth() - IMVisualisation.getFitWidth()) / 2;
         IMVisualisation.setLayoutX(LX);
@@ -2205,8 +2209,8 @@ public class GestionnaireInterfaceController {
         apHotSpots.setStyle("-fx-background-color : #fff");
         apHotSpots.setPadding(new Insets(5));
         int i = 0;
-        double xHS=0;
-        double yHS=25;
+        double xHS = 0;
+        double yHS = 25;
         Label lblHSPanoramique = new Label(rb.getString("interface.HSPanoramique"));
         lblHSPanoramique.setLayoutY(5);
         lblHSPanoramique.setLayoutX(20);
@@ -2215,7 +2219,7 @@ public class GestionnaireInterfaceController {
         lblHSPhoto.setLayoutX(20);
         apHotSpots.getChildren().addAll(lblHSPanoramique, lblHSPhoto);
         for (String nomImage : listeHotSpots) {
-            Pane fond=new Pane();
+            Pane fond = new Pane();
             ivHotspots[i] = new ImageView(new Image("file:" + repertHotSpots + File.separator + nomImage, -1, 30, true, true, true));
             int col = i % 6;
             int row = i / 6;
@@ -2246,12 +2250,12 @@ public class GestionnaireInterfaceController {
         apHotSpots.getChildren().addAll(lblCouleurHotspot, cpCouleurHotspots);
         i = 0;
         for (String nomImage : listeHotSpotsPhoto) {
-            Pane fond=new Pane();
+            Pane fond = new Pane();
             ivHotspotsPhoto[i] = new ImageView(new Image("file:" + repertHotSpotsPhoto + File.separator + nomImage, -1, 30, true, true, true));
             int col = i % 6;
             int row = i / 6;
             xHS = col * 40 + 5;
-            yHS = (row + (int) (nombreHotSpots / 6 + 1)) * 35 + 65;            
+            yHS = (row + (int) (nombreHotSpots / 6 + 1)) * 35 + 65;
             fond.setLayoutX(xHS);
             fond.setLayoutY(yHS);
             fond.setStyle("-fx-background-color : #ccc");
@@ -2543,7 +2547,7 @@ public class GestionnaireInterfaceController {
         ImageView[] ivBoussoles = new ImageView[nombreBoussoles];
         i = 0;
         for (String nomImage : listeBoussoles) {
-            Pane fond=new Pane();
+            Pane fond = new Pane();
             ivBoussoles[i] = new ImageView(new Image("file:" + repertBoussoles + File.separator + nomImage, -1, 60, true, true, true));
             int col = i % 3;
             int row = i / 3;
@@ -2561,7 +2565,7 @@ public class GestionnaireInterfaceController {
                 afficheBoussole();
             });
             fond.getChildren().add(ivBoussoles[i]);
-                    
+
             apBoussole.getChildren().add(fond);
             i++;
 

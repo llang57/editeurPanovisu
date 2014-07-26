@@ -21,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.RadioButton;
@@ -36,11 +37,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Callback;
 import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialog;
 import org.controlsfx.dialog.Dialogs;
@@ -257,6 +260,7 @@ public class EquiCubeDialogController {
             protected Object call() throws Exception {
                 myPane.setCursor(Cursor.WAIT);
                 Platform.runLater(() -> {
+                    System.out.println(listeFichier.getCellFactory());
                     for (int j = 0; j < listeFichier.getItems().size(); j++) {
                         String nomFich1 = (String) listeFichier.getItems().get(j);
                         listeFichier.getItems().set(j, "A Traiter => " + nomFich1);
@@ -362,12 +366,46 @@ public class EquiCubeDialogController {
         return lstFich;
     }
 
+    static class ColorRectCell extends ListCell<String> {
+
+        @Override
+        public void updateItem(String item, boolean empty) {
+            super.updateItem(item, empty);
+            if (item != null) {
+                int longueur = item.split(" => ").length;
+                System.out.println("Longueur : "+longueur);
+                setTextFill(Color.BLACK);
+                String pre="";
+                String texte=item;
+                if (longueur > 1) {
+                    String[] txt = item.split(" => ");
+                    switch (txt[0]) {
+                        case "A Traiter":
+                            setTextFill(Color.RED);
+                            break;
+                        case "Traitement en cours":
+                            setTextFill(Color.BLUE);
+                            break;
+                        case "Traité":
+                            setTextFill(Color.GREEN);
+                            break;
+                    }
+                    pre=txt[0]+" => ";
+                    texte=txt[1];
+                }
+                texte=texte.substring(texte.lastIndexOf(File.separator) + 1, texte.length());
+                setText(pre+texte);
+            }
+        }
+    }
+
     /**
      *
      * @param typeTransf
      * @throws Exception
      */
     public void afficheFenetre(String typeTransf) throws Exception {
+        listeFichier.getItems().clear();
         stEqui2Cube = new Stage(StageStyle.UTILITY);
         myPane = new AnchorPane();
         stEqui2Cube.initModality(Modality.APPLICATION_MODAL);
@@ -524,6 +562,12 @@ public class EquiCubeDialogController {
                     String nomFich = lstFichier1.getAbsolutePath();
                     listeFichier.getItems().add(nomFich);
                 }
+            }
+        });
+        listeFichier.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+            @Override
+            public ListCell<String> call(ListView<String> list) {
+                return new ColorRectCell();
             }
         });
         myPane.setOnDragOver((DragEvent event) -> {
