@@ -65,6 +65,7 @@ public class ReadWriteImage {
         BufferedImage imageRGBSharpen = null;
         IIOImage iioImage = null;
         BufferedImage image = SwingFXUtils.fromFXImage(img, null); // Get buffered image.
+        
         BufferedImage imageRGB = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.OPAQUE); // Remove alpha-channel from buffered image.
 
         Graphics2D graphics = imageRGB.createGraphics();

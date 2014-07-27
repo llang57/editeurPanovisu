@@ -674,10 +674,12 @@ public class EditeurPanovisu extends Application {
 
         double tailleNiv0 = 2048.d;
         Image img = new Image("file:" + fichierImage);
+        System.out.println("taille : " + img.getWidth());
         if (img.getWidth() > 8000) {
             img = new Image("file:" + fichierImage, 8000, 4000, true, true);
         }
-        String nomPano = fichierImage.substring(fichierImage.lastIndexOf(File.separator) + 1, fichierImage.length());
+        String nomPano = fichierImage.substring(fichierImage.lastIndexOf(File.separator) + 1, fichierImage.length()).split("\\.")[0] + ".jpg";
+        System.out.println("Nom Pano" + nomPano);
         String ficImage = repertoire + File.separator + nomPano;
         try {
             ReadWriteImage.writeJpeg(img, ficImage, 0.9f, true, 0.2f);
@@ -685,10 +687,12 @@ public class EditeurPanovisu extends Application {
             Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
         }
         double tailleImage = img.getWidth();
+        fichierImage = ficImage;
         int nombreNiveaux = (int) (Math.log(tailleImage / tailleNiv0) / Math.log(2.d)) + 1;
         for (int i = 0; i < nombreNiveaux; i++) {
             try {
                 double tailleNiveau = tailleImage * Math.pow(2.d, i) / Math.pow(2.d, nombreNiveaux);
+                System.out.println("Taille Niveau " + Math.round(tailleNiveau * 2.d));
                 img = new Image("file:" + fichierImage, Math.round(tailleNiveau * 2.d) / 2.d, Math.round(tailleNiveau / 2.d), true, true);
                 String repNiveau = repertoire + File.separator + "niveau" + i;
                 File fRepert = new File(repNiveau);
@@ -697,6 +701,7 @@ public class EditeurPanovisu extends Application {
                 }
                 nomPano = fichierImage.substring(fichierImage.lastIndexOf(File.separator) + 1, fichierImage.length());
                 ficImage = repNiveau + File.separator + nomPano;
+                System.out.println("fichierImage" + fichierImage + " Taille : " + img.getWidth() + "x" + img.getHeight() + "==>" + ficImage);
                 ReadWriteImage.writeJpeg(img, ficImage, 0.9f, true, 0.2f);
             } catch (IOException ex) {
                 Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
@@ -745,12 +750,13 @@ public class EditeurPanovisu extends Application {
      */
     private void panoramiquesAjouter() throws InterruptedException {
         FileChooser fileChooser = new FileChooser();
-
+ //       FileChooser.ExtensionFilter extFilterImage = new FileChooser.ExtensionFilter("Fichiers Image (JPG,BMP)", "*.jpg", "*.jpeg", "*.bmp");
         FileChooser.ExtensionFilter extFilterJpeg = new FileChooser.ExtensionFilter("Fichiers JPEG (*.jpg)", "*.jpg");
-        FileChooser.ExtensionFilter extFilterBmp = new FileChooser.ExtensionFilter("Fichiers BMP (*.bmp)", "*.bmp");
+//        FileChooser.ExtensionFilter extFilterBmp = new FileChooser.ExtensionFilter("Fichiers BMP (*.bmp)", "*.bmp");
         File repert = new File(currentDir + File.separator);
         fileChooser.setInitialDirectory(repert);
-        fileChooser.getExtensionFilters().addAll(extFilterJpeg, extFilterBmp);
+//        fileChooser.getExtensionFilters().addAll(extFilterImage, extFilterJpeg, extFilterBmp);
+        fileChooser.getExtensionFilters().addAll(extFilterJpeg);
 
         List<File> list = fileChooser.showOpenMultipleDialog(null);
         if (list != null) {
@@ -3111,9 +3117,10 @@ public class EditeurPanovisu extends Application {
         paneChoixPanoramique.setVisible(true);
         estCharge = true;
         Panoramique panoCree = new Panoramique();
-        panoCree.setNomFichier(fichierPano);
         if (typePano.equals(Panoramique.SPHERE)) {
+            panoCree.setNomFichier(fichierPano);
             int nombreNiveaux = creeNiveauxImageEqui(fichierPano, repertPanos);
+            panoCree.setNomFichier(fichierPano);
             image2 = new Image("file:" + fichierPano, 1200, 600, true, true, true);
             Image image3 = new Image("file:" + fichierPano, 300, 150, true, true, true);
             panoCree.setNombreNiveaux(nombreNiveaux);
@@ -3121,6 +3128,8 @@ public class EditeurPanovisu extends Application {
             panoCree.setImagePanoramique(image2);
             panoCree.setTypePanoramique(Panoramique.SPHERE);
         } else {
+            panoCree.setNomFichier(fichierPano);
+            panoCree.setNomFichier(fichierPano);
             String nom = fichierPano.substring(0, fichierPano.length() - 6);
             String extension = fichierPano.substring(fichierPano.length() - 3, fichierPano.length());
             Image top;
@@ -3192,6 +3201,7 @@ public class EditeurPanovisu extends Application {
         nombrePanoramiques++;
         affichePoV(panoramiquesProjet[panoActuel].getLookAtX(), panoramiquesProjet[panoActuel].getLookAtY());
         afficheNord(panoramiquesProjet[panoActuel].getZeroNord());
+        gestionnairePlan.afficheConfigPlan();
     }
 
     /**

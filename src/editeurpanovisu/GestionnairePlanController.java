@@ -334,18 +334,20 @@ public class GestionnairePlanController {
         Pane lbl = (Pane) VBOutils.lookup("#labelConfigPlan");
         VBOutils.getChildren().remove(lbl);
     }
-/**
- * 
- */
+
+    /**
+     *
+     */
     public void ajouterPlan() {
         CBChoixPlan.getItems().add(nombrePlans, plans[nombrePlans].getImagePlan());
         afficherPlan(nombrePlans);
         CBChoixPlan.getSelectionModel().select(nombrePlans);
     }
-/**
- * 
- * @param numeroPlan 
- */
+
+    /**
+     *
+     * @param numeroPlan
+     */
     public void afficherPlan(int numeroPlan) {
         planActuel = numeroPlan;
         String txtImage = repertTemp + "/images/" + plans[numeroPlan].getImagePlan();
@@ -368,9 +370,10 @@ public class GestionnairePlanController {
         ajouteAffichageHotspots();
         ajouteAffichagePointsHotspots();
     }
-/**
- * 
- */
+
+    /**
+     *
+     */
     private void afficheBoussole() {
         if (!imagePlan.isError()) {
             String posX = plans[planActuel].getPosition().split(":")[1];
@@ -481,132 +484,134 @@ public class GestionnairePlanController {
     /**
      *
      */
-    private void afficheConfigPlan() {
-        Label lblNordPlan = new Label(rb.getString("plan.positionNordPlan"));
-        lblNordPlan.setLayoutX(10);
-        lblNordPlan.setLayoutY(10);
-        SLnordPlan = new Slider(0, 360.0, 0);
-        SLnordPlan.setLayoutX(200);
-        SLnordPlan.setLayoutY(10);
-        Separator sepPlan = new Separator(Orientation.HORIZONTAL);
-        sepPlan.setPrefHeight(10);
-        sepPlan.setPrefWidth(350);
-        sepPlan.setLayoutY(30);
-        Label lblPositBoussolePlan = new Label(rb.getString("plan.positionBoussolePlan"));
-        lblPositBoussolePlan.setLayoutX(10);
-        lblPositBoussolePlan.setLayoutY(50);
-        RBBoussolePlanTopLeft = new RadioButton("");
-        RBBoussolePlanTopLeft.setLayoutX(200);
-        RBBoussolePlanTopLeft.setLayoutY(50);
-        RBBoussolePlanTopLeft.setUserData("top:left");
-        RBBoussolePlanTopLeft.setToggleGroup(grpPosBoussolePlan);
-        RBBoussolePlanTopRight = new RadioButton("");
-        RBBoussolePlanTopRight.setLayoutX(230);
-        RBBoussolePlanTopRight.setLayoutY(50);
-        RBBoussolePlanTopRight.setUserData("top:right");
-        RBBoussolePlanTopRight.setToggleGroup(grpPosBoussolePlan);
-        RBBoussolePlanBottomLeft = new RadioButton("");
-        RBBoussolePlanBottomLeft.setLayoutX(200);
-        RBBoussolePlanBottomLeft.setLayoutY(80);
-        RBBoussolePlanBottomLeft.setUserData("bottom:left");
-        RBBoussolePlanBottomLeft.setToggleGroup(grpPosBoussolePlan);
-        RBBoussolePlanBottomRight = new RadioButton("");
-        RBBoussolePlanBottomRight.setLayoutX(230);
-        RBBoussolePlanBottomRight.setLayoutY(80);
-        RBBoussolePlanBottomRight.setUserData("bottom:right");
-        RBBoussolePlanBottomRight.setToggleGroup(grpPosBoussolePlan);
+    public void afficheConfigPlan() {
+        if (planActuel != -1) {
+            Label lblNordPlan = new Label(rb.getString("plan.positionNordPlan"));
+            lblNordPlan.setLayoutX(10);
+            lblNordPlan.setLayoutY(10);
+            SLnordPlan = new Slider(0, 360.0, 0);
+            SLnordPlan.setLayoutX(200);
+            SLnordPlan.setLayoutY(10);
+            Separator sepPlan = new Separator(Orientation.HORIZONTAL);
+            sepPlan.setPrefHeight(10);
+            sepPlan.setPrefWidth(350);
+            sepPlan.setLayoutY(30);
+            Label lblPositBoussolePlan = new Label(rb.getString("plan.positionBoussolePlan"));
+            lblPositBoussolePlan.setLayoutX(10);
+            lblPositBoussolePlan.setLayoutY(50);
+            RBBoussolePlanTopLeft = new RadioButton("");
+            RBBoussolePlanTopLeft.setLayoutX(200);
+            RBBoussolePlanTopLeft.setLayoutY(50);
+            RBBoussolePlanTopLeft.setUserData("top:left");
+            RBBoussolePlanTopLeft.setToggleGroup(grpPosBoussolePlan);
+            RBBoussolePlanTopRight = new RadioButton("");
+            RBBoussolePlanTopRight.setLayoutX(230);
+            RBBoussolePlanTopRight.setLayoutY(50);
+            RBBoussolePlanTopRight.setUserData("top:right");
+            RBBoussolePlanTopRight.setToggleGroup(grpPosBoussolePlan);
+            RBBoussolePlanBottomLeft = new RadioButton("");
+            RBBoussolePlanBottomLeft.setLayoutX(200);
+            RBBoussolePlanBottomLeft.setLayoutY(80);
+            RBBoussolePlanBottomLeft.setUserData("bottom:left");
+            RBBoussolePlanBottomLeft.setToggleGroup(grpPosBoussolePlan);
+            RBBoussolePlanBottomRight = new RadioButton("");
+            RBBoussolePlanBottomRight.setLayoutX(230);
+            RBBoussolePlanBottomRight.setLayoutY(80);
+            RBBoussolePlanBottomRight.setUserData("bottom:right");
+            RBBoussolePlanBottomRight.setToggleGroup(grpPosBoussolePlan);
 
-        Label lblBoussoleDXSpinner = new Label("dX :");
-        lblBoussoleDXSpinner.setLayoutX(25);
-        lblBoussoleDXSpinner.setLayoutY(110);
-        Label lblBoussoleDYSpinner = new Label("dY :");
-        lblBoussoleDYSpinner.setLayoutX(175);
-        lblBoussoleDYSpinner.setLayoutY(110);
-        BDFPositXBoussole = new BigDecimalField();
-        BDFPositXBoussole.setLayoutX(50);
-        BDFPositXBoussole.setLayoutY(105);
-        BDFPositXBoussole.setMaxValue(new BigDecimal(200));
-        BDFPositXBoussole.setMinValue(new BigDecimal(0));
-        BDFPositXBoussole.setMaxWidth(100);
-        BDFPositYBoussole = new BigDecimalField();
-        BDFPositYBoussole.setLayoutX(200);
-        BDFPositYBoussole.setLayoutY(105);
-        BDFPositYBoussole.setMaxValue(new BigDecimal(200));
-        BDFPositYBoussole.setMinValue(new BigDecimal(0));
-        BDFPositYBoussole.setMaxWidth(100);
+            Label lblBoussoleDXSpinner = new Label("dX :");
+            lblBoussoleDXSpinner.setLayoutX(25);
+            lblBoussoleDXSpinner.setLayoutY(110);
+            Label lblBoussoleDYSpinner = new Label("dY :");
+            lblBoussoleDYSpinner.setLayoutX(175);
+            lblBoussoleDYSpinner.setLayoutY(110);
+            BDFPositXBoussole = new BigDecimalField();
+            BDFPositXBoussole.setLayoutX(50);
+            BDFPositXBoussole.setLayoutY(105);
+            BDFPositXBoussole.setMaxValue(new BigDecimal(200));
+            BDFPositXBoussole.setMinValue(new BigDecimal(0));
+            BDFPositXBoussole.setMaxWidth(100);
+            BDFPositYBoussole = new BigDecimalField();
+            BDFPositYBoussole.setLayoutX(200);
+            BDFPositYBoussole.setLayoutY(105);
+            BDFPositYBoussole.setMaxValue(new BigDecimal(200));
+            BDFPositYBoussole.setMinValue(new BigDecimal(0));
+            BDFPositYBoussole.setMaxWidth(100);
 
-        BDFPositXBoussole.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
-            plans[planActuel].setPositionX(new_value.doubleValue());
-            afficheBoussole();
-        });
-        BDFPositYBoussole.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
-            plans[planActuel].setPositionY(new_value.doubleValue());
-            afficheBoussole();
-        });
-        grpPosBoussolePlan.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) -> {
-            if (grpPosBoussolePlan.getSelectedToggle() != null) {
-                plans[planActuel].setPosition(grpPosBoussolePlan.getSelectedToggle().getUserData().toString());
+            BDFPositXBoussole.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
+                plans[planActuel].setPositionX(new_value.doubleValue());
                 afficheBoussole();
-            }
-        });
-        SLnordPlan.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
-            if (newValue != null) {
-                double direction = (double) newValue;
-                plans[planActuel].setDirectionNord(direction);
+            });
+            BDFPositYBoussole.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
+                plans[planActuel].setPositionY(new_value.doubleValue());
                 afficheBoussole();
-            }
-        });
-        SLnordPlan.setValue(plans[planActuel].getDirectionNord());
-        RBBoussolePlanTopLeft.setSelected(plans[planActuel].getPosition().equals("top:left"));
-        RBBoussolePlanTopRight.setSelected(plans[planActuel].getPosition().equals("top:right"));
-        RBBoussolePlanBottomLeft.setSelected(plans[planActuel].getPosition().equals("bottom:left"));
-        RBBoussolePlanBottomRight.setSelected(plans[planActuel].getPosition().equals("bottom:right"));
-        BDFPositXBoussole.setNumber(new BigDecimal(plans[planActuel].getPositionX()));
-        BDFPositYBoussole.setNumber(new BigDecimal(plans[planActuel].getPositionY()));
-        VBOutils.getChildren().remove(APConfigPlan);
+            });
+            grpPosBoussolePlan.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) -> {
+                if (grpPosBoussolePlan.getSelectedToggle() != null) {
+                    plans[planActuel].setPosition(grpPosBoussolePlan.getSelectedToggle().getUserData().toString());
+                    afficheBoussole();
+                }
+            });
+            SLnordPlan.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+                if (newValue != null) {
+                    double direction = (double) newValue;
+                    plans[planActuel].setDirectionNord(direction);
+                    afficheBoussole();
+                }
+            });
+            SLnordPlan.setValue(plans[planActuel].getDirectionNord());
+            RBBoussolePlanTopLeft.setSelected(plans[planActuel].getPosition().equals("top:left"));
+            RBBoussolePlanTopRight.setSelected(plans[planActuel].getPosition().equals("top:right"));
+            RBBoussolePlanBottomLeft.setSelected(plans[planActuel].getPosition().equals("bottom:left"));
+            RBBoussolePlanBottomRight.setSelected(plans[planActuel].getPosition().equals("bottom:right"));
+            BDFPositXBoussole.setNumber(new BigDecimal(plans[planActuel].getPositionX()));
+            BDFPositYBoussole.setNumber(new BigDecimal(plans[planActuel].getPositionY()));
+            VBOutils.getChildren().remove(APConfigPlan);
 
-        APConfigPlan = new AnchorPane();
-        APConfigPlan.getChildren().addAll(
-                lblNordPlan, SLnordPlan,
-                lblPositBoussolePlan, RBBoussolePlanTopLeft, RBBoussolePlanTopRight,
-                RBBoussolePlanBottomLeft, RBBoussolePlanBottomRight,
-                lblBoussoleDXSpinner, BDFPositXBoussole, lblBoussoleDYSpinner, BDFPositYBoussole
-        );
-        if (nombrePanoramiques != 0) {
-            Separator sepConfig1 = new Separator(Orientation.HORIZONTAL);
-            sepConfig1.setPrefSize(380, 20);
-            sepConfig1.setLayoutY(125);
-            APConfigPlan.getChildren().add(sepConfig1);
-            Label lblPanoAffichePlan = new Label(rb.getString("plan.panoAffichePlan"));
-            lblPanoAffichePlan.setLayoutX(20);
-            lblPanoAffichePlan.setLayoutY(160);
-            APConfigPlan.getChildren().add(lblPanoAffichePlan);
-            CheckBox[] CBPanoramiques = new CheckBox[nombrePanoramiques];
-            for (int i = 0; i < nombrePanoramiques; i++) {
-                final int num = i;
-                CBPanoramiques[i] = new CheckBox();
-                CBPanoramiques[i].setUserData(i);
-                CBPanoramiques[i].setLayoutX(30);
-                CBPanoramiques[i].setLayoutY(190 + i * 30);
-                CBPanoramiques[i].setText(panoramiquesProjet[i].getNomFichier());
-                if (panoramiquesProjet[i].isAffichePlan() && panoramiquesProjet[i].getNumeroPlan() == planActuel) {
-                    CBPanoramiques[i].setSelected(true);
+            APConfigPlan = new AnchorPane();
+            APConfigPlan.getChildren().addAll(
+                    lblNordPlan, SLnordPlan,
+                    lblPositBoussolePlan, RBBoussolePlanTopLeft, RBBoussolePlanTopRight,
+                    RBBoussolePlanBottomLeft, RBBoussolePlanBottomRight,
+                    lblBoussoleDXSpinner, BDFPositXBoussole, lblBoussoleDYSpinner, BDFPositYBoussole
+            );
+            if (nombrePanoramiques != 0) {
+                Separator sepConfig1 = new Separator(Orientation.HORIZONTAL);
+                sepConfig1.setPrefSize(380, 20);
+                sepConfig1.setLayoutY(125);
+                APConfigPlan.getChildren().add(sepConfig1);
+                Label lblPanoAffichePlan = new Label(rb.getString("plan.panoAffichePlan"));
+                lblPanoAffichePlan.setLayoutX(20);
+                lblPanoAffichePlan.setLayoutY(160);
+                APConfigPlan.getChildren().add(lblPanoAffichePlan);
+                CheckBox[] CBPanoramiques = new CheckBox[nombrePanoramiques];
+                for (int i = 0; i < nombrePanoramiques; i++) {
+                    final int num = i;
+                    CBPanoramiques[i] = new CheckBox();
+                    CBPanoramiques[i].setUserData(i);
+                    CBPanoramiques[i].setLayoutX(30);
+                    CBPanoramiques[i].setLayoutY(190 + i * 30);
+                    CBPanoramiques[i].setText(panoramiquesProjet[i].getNomFichier().substring(panoramiquesProjet[i].getNomFichier().lastIndexOf(File.separator) + 1, panoramiquesProjet[i].getNomFichier().length()));
+                    if (panoramiquesProjet[i].isAffichePlan() && panoramiquesProjet[i].getNumeroPlan() == planActuel) {
+                        CBPanoramiques[i].setSelected(true);
+                    }
+                    if (panoramiquesProjet[i].isAffichePlan() && panoramiquesProjet[i].getNumeroPlan() != planActuel) {
+                        CBPanoramiques[i].setDisable(true);
+                    }
+                    APConfigPlan.getChildren().add(CBPanoramiques[i]);
+                    CBPanoramiques[i].selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+                        panoramiquesProjet[num].setAffichePlan(new_val);
+                        panoramiquesProjet[num].setNumeroPlan(planActuel);
+                    });
                 }
-                if (panoramiquesProjet[i].isAffichePlan() && panoramiquesProjet[i].getNumeroPlan() != planActuel) {
-                    CBPanoramiques[i].setDisable(true);
-                }
-                APConfigPlan.getChildren().add(CBPanoramiques[i]);
-                CBPanoramiques[i].selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
-                    panoramiquesProjet[num].setAffichePlan(new_val);
-                    panoramiquesProjet[num].setNumeroPlan(planActuel);
-                });
             }
+            Separator sepConfig2 = new Separator(Orientation.HORIZONTAL);
+            sepConfig2.setPrefSize(380, 20);
+            sepConfig2.setLayoutY(210 + nombrePanoramiques * 30);
+            APConfigPlan.getChildren().add(sepConfig2);
+            VBOutils.getChildren().add(APConfigPlan);
         }
-        Separator sepConfig2 = new Separator(Orientation.HORIZONTAL);
-        sepConfig2.setPrefSize(380, 20);
-        sepConfig2.setLayoutY(210 + nombrePanoramiques * 30);
-        APConfigPlan.getChildren().add(sepConfig2);
-        VBOutils.getChildren().add(APConfigPlan);
     }
 
     /**
@@ -669,18 +674,18 @@ public class GestionnairePlanController {
 //        VBOutils.getChildren().add(affHS1);
 //
             //numPoints++;
-                AnchorPane listePanoVig = afficherListePanosVignettes(plans[planActuel].getNombreHotspots() - 1);
-                int largeurVignettes = 4;
-                if (nombrePanoramiques < 4) {
-                    largeurVignettes = nombrePanoramiques;
-                }
-                if (mouseX + largeurVignettes * 130 > panePlan.getWidth()) {
-                    listePanoVig.setLayoutX(panePlan.getWidth() - largeurVignettes * 130);
-                } else {
-                    listePanoVig.setLayoutX(mouseX);
-                }
-                listePanoVig.setLayoutY(mouseY);
-                panePlan.getChildren().add(listePanoVig);
+            AnchorPane listePanoVig = afficherListePanosVignettes(plans[planActuel].getNombreHotspots() - 1);
+            int largeurVignettes = 4;
+            if (nombrePanoramiques < 4) {
+                largeurVignettes = nombrePanoramiques;
+            }
+            if (mouseX + largeurVignettes * 130 > panePlan.getWidth()) {
+                listePanoVig.setLayoutX(panePlan.getWidth() - largeurVignettes * 130);
+            } else {
+                listePanoVig.setLayoutX(mouseX);
+            }
+            listePanoVig.setLayoutY(mouseY);
+            panePlan.getChildren().add(listePanoVig);
             point.setOnMouseClicked((MouseEvent me1) -> {
                 if (me1.isControlDown()) {
                     valideHSPlan();
