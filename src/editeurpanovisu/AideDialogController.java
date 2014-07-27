@@ -21,7 +21,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 /**
- *
+ * Affichage de l'aide contenue dans le fichier aide/aide.html
+ * 
  * @author llang
  */
 public class AideDialogController {

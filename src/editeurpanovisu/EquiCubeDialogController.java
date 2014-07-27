@@ -50,7 +50,7 @@ import org.controlsfx.dialog.DialogStyle;
 import org.controlsfx.dialog.Dialogs;
 
 /**
- * FXML Controller class
+ * Controleur pour l'affichage des transformations cube /  Equi 
  *
  * @author LANG Laurent
  */
@@ -78,11 +78,11 @@ public class EquiCubeDialogController {
 
     final ToggleGroup grpTypeFichier = new ToggleGroup();
     /**
-     * Constante de type de transfrormation Equi=>Cube
+     * Constante de type de transfrormation Equi / Cube
      */
     public final static String EQUI2CUBE = "E2C";
     /**
-     * Constante de type de transfrormation Cube=>Equi
+     * Constante de type de transfrormation Cube / Equi
      */
     public final static String CUBE2QUI = "C2E";
     private File[] lstFichier;
@@ -107,12 +107,12 @@ public class EquiCubeDialogController {
             stEqui2Cube.hide();
         }
     }
-
-    /**
-     *
-     * @param nomFichier
-     * @param j
-     */
+/**
+ * 
+ * @param nomFichier
+ * @param j
+ * @throws InterruptedException 
+ */
     private void traiteFichier(String nomFichier, int j) throws InterruptedException {
         System.out.println("Traitement Lancé \"" + nomFichier + "\" => " + j);
 
@@ -225,8 +225,8 @@ public class EquiCubeDialogController {
                     .showError();
         } else {
             Dialogs.create().title("Transformation de fichiers")
-                    .message("Attention le traitement que vous allez lancer peut durer plusieurs minutes"
-                            + "pendant lesquelle le programme semblera ne plus répondre. "
+                    .message("Attention le traitement que vous allez lancer peut durer plusieurs minutes "
+                            + "pendant lesquelles le programme semblera ne plus répondre.\n "
                             + "Veuillez patienter jusqu'à la fin du traitement."
                             + "\n\nMerci").style(DialogStyle.CROSS_PLATFORM_DARK)
                     .showWarning();
@@ -304,7 +304,7 @@ public class EquiCubeDialogController {
 
     /**
      *
-     * @return
+     * @return liste des fichiers
      */
     private File[] choixFichiers() {
         File[] lstFich = null;
@@ -363,8 +363,12 @@ public class EquiCubeDialogController {
 
         return lstFich;
     }
-
-    static class ColorRectCell extends ListCell<String> {
+/**
+ * Colorisation de la ListView des images à transformer
+ * 
+ * @author LANG Laurent
+ */
+    static class ListeTransformationCouleur extends ListCell<String> {
 
         @Override
         public void updateItem(String item, boolean empty) {
@@ -565,7 +569,7 @@ public class EquiCubeDialogController {
         listeFichier.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
             @Override
             public ListCell<String> call(ListView<String> list) {
-                return new ColorRectCell();
+                return new ListeTransformationCouleur();
             }
         });
         myPane.setOnDragOver((DragEvent event) -> {

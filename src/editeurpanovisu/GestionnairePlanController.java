@@ -55,42 +55,43 @@ import jfxtras.labs.scene.control.BigDecimalField;
  */
 public class GestionnairePlanController {
 
-    private static final ExtensionsFilter IMAGE_FILTER
+    private final ExtensionsFilter IMAGE_FILTER
             = new ExtensionsFilter(new String[]{".png", ".jpg", ".bmp"});
-    private static final ExtensionsFilter PNG_FILTER
+    private final ExtensionsFilter PNG_FILTER
             = new ExtensionsFilter(new String[]{".png"});
 
-    private static ResourceBundle rb;
+    private ResourceBundle rb;
     public Pane tabInterface;
-    private static HBox HBInterface;
-    private static AnchorPane APPlan;
-    private static VBox VBOutils;
-    private static Slider SLnordPlan;
-    private static BigDecimalField BDFPositXBoussole;
-    private static BigDecimalField BDFPositYBoussole;
-    private static RadioButton RBBoussolePlanTopLeft;
-    private static RadioButton RBBoussolePlanTopRight;
-    private static RadioButton RBBoussolePlanBottomLeft;
-    private static RadioButton RBBoussolePlanBottomRight;
+    private HBox HBInterface;
+    private AnchorPane APPlan;
+    private VBox VBOutils;
+    private Slider SLnordPlan;
+    private BigDecimalField BDFPositXBoussole;
+    private BigDecimalField BDFPositYBoussole;
+    private RadioButton RBBoussolePlanTopLeft;
+    private RadioButton RBBoussolePlanTopRight;
+    private RadioButton RBBoussolePlanBottomLeft;
+    private RadioButton RBBoussolePlanBottomRight;
     final ToggleGroup grpPosBoussolePlan = new ToggleGroup();
     final ToggleGroup grpCBPano = new ToggleGroup();
-    public static double positionNordPlan = 0;
-    public static String positionBoussolePlan = "top:right";
-    public static double positXBoussolePlan = 0;
-    public static double positYBoussolePlan = 0;
-    static public String planListeVignette;
-    private static ImageView IVPlan;
-    private static Image imagePlan;
-    public static int planActuel = -1;
-    private static String tooltipStyle = "";
-    private static Pane panePlan;
-    private static ComboBox<String> CBChoixPlan;
-    private static AnchorPane APConfigPlan;
-    public static String repertImagePlan;
-    private static ImageView IVNord;
-    private static Image imgBoussole;
-    private static int numPoints = 0;
-    static private ScrollPane SPOutils;
+    public double positionNordPlan = 0;
+    public String positionBoussolePlan = "top:right";
+    public double positXBoussolePlan = 0;
+    public double positYBoussolePlan = 0;
+    public String planListeVignette;
+    private ImageView IVPlan;
+    private Image imagePlan;
+    public int planActuel = -1;
+    private String tooltipStyle = "";
+    private Pane panePlan;
+    private ComboBox<String> CBChoixPlan;
+    private AnchorPane APConfigPlan;
+    public String repertImagePlan;
+    private ImageView IVNord;
+    private Image imgBoussole;
+    private int numPoints = 0;
+    private ScrollPane SPOutils;
+    private Button btnValider;
 
     private void retireAffichagePointsHotSpots() {
         for (int i = 0; i < numPoints; i++) {
@@ -100,17 +101,14 @@ public class GestionnairePlanController {
     }
 
     private void valideHSPlan() {
+        btnValider.setStyle("-fx-text-fill : #00AA00");
+        btnValider.setText("Hotspots Validés");
+
         for (int i = 0; i < plans[planActuel].getNombreHotspots(); i++) {
             ComboBox cbx = (ComboBox) VBOutils.lookup("#cbplan" + i);
             TextArea txtTexteHS = (TextArea) VBOutils.lookup("#txtHSPlan" + i);
             plans[planActuel].getHotspot(i).setInfo(txtTexteHS.getText());
             plans[planActuel].getHotspot(i).setFichierXML(cbx.getValue() + ".xml");
-            CheckBox cbAnime = (CheckBox) VBOutils.lookup("#anime" + i);
-            if (cbAnime.isSelected()) {
-                plans[planActuel].getHotspot(i).setAnime(true);
-            } else {
-                plans[planActuel].getHotspot(i).setAnime(false);
-            }
         }
     }
 
@@ -146,8 +144,8 @@ public class GestionnairePlanController {
     /**
      *
      * @param i
-     * @param longitude
-     * @param latitude
+     * @param posX
+     * @param posY
      */
     private void afficheHS(int i, double posX, double posY) {
         double largeur = imagePlan.getWidth();
@@ -166,6 +164,8 @@ public class GestionnairePlanController {
         Tooltip.install(point, t);
 
         point.setOnMouseClicked((MouseEvent me1) -> {
+            btnValider.setStyle("-fx-text-fill : #DD0000");
+            btnValider.setText("Valider les Hotspots");
             double mouseX = me1.getSceneX();
             double mouseY = me1.getSceneY() - panePlan.getLayoutY() - 115;
             String chPoint = point.getId();
@@ -266,6 +266,14 @@ public class GestionnairePlanController {
                 ComboBox cbDestPano = new ComboBox();
                 String[] liste = lstPano.split(";");
                 cbDestPano.getItems().addAll(Arrays.asList(liste));
+                cbDestPano.valueProperty().addListener(new ChangeListener<String>() {
+                    @Override
+                    public void changed(ObservableValue ov, String t, String t1) {
+                        btnValider.setStyle("-fx-text-fill : #DD0000");
+                        btnValider.setText("Valider les Hotspots");
+                    }
+                });
+
                 cbDestPano.setId("cbplan" + o);
                 cbDestPano.setLayoutX(60);
                 cbDestPano.setLayoutY(90);
@@ -282,25 +290,23 @@ public class GestionnairePlanController {
             TextArea txtTexteHS = new TextArea();
             txtTexteHS.setLayoutX(60);
             txtTexteHS.setLayoutY(150);
+            txtTexteHS.textProperty().addListener((final ObservableValue<? extends String> observable, final String oldValue, final String newValue) -> {
+                btnValider.setStyle("-fx-text-fill : #DD0000");
+                btnValider.setText("Valider les Hotspots");
+            });
+
             if (plans[numPano].getHotspot(o).getInfo() != null) {
                 txtTexteHS.setText(plans[numPano].getHotspot(o).getInfo());
             }
             txtTexteHS.setId("txtHSPlan" + o);
             txtTexteHS.setPrefSize(200, 25);
             txtTexteHS.setMaxSize(200, 20);
-            CheckBox cbAnime = new CheckBox("HostSpot Animé");
-            cbAnime.setLayoutX(60);
-            cbAnime.setLayoutY(180);
-            cbAnime.setId("anime" + o);
-            if (plans[numPano].getHotspot(o).isAnime()) {
-                cbAnime.setSelected(true);
-            }
-            cbAnime.setPadding(new Insets(5));
-            vbPanneauHS.getChildren().addAll(lblTexteHS, txtTexteHS, cbAnime, sep1);
+            vbPanneauHS.getChildren().addAll(lblTexteHS, txtTexteHS, sep1);
             vb1.getChildren().addAll(vbPanneauHS, sep);
         }
 
-        Button btnValider = new Button("Valide HotSpots");
+        btnValider = new Button("HotSpots Validés");
+        btnValider.setStyle("-fx-text-fill : #00AA00");
         btnValider.setTranslateX(200);
         btnValider.setTranslateY(5);
         btnValider.setPadding(new Insets(7));
@@ -328,13 +334,18 @@ public class GestionnairePlanController {
         Pane lbl = (Pane) VBOutils.lookup("#labelConfigPlan");
         VBOutils.getChildren().remove(lbl);
     }
-
+/**
+ * 
+ */
     public void ajouterPlan() {
         CBChoixPlan.getItems().add(nombrePlans, plans[nombrePlans].getImagePlan());
         afficherPlan(nombrePlans);
         CBChoixPlan.getSelectionModel().select(nombrePlans);
     }
-
+/**
+ * 
+ * @param numeroPlan 
+ */
     public void afficherPlan(int numeroPlan) {
         planActuel = numeroPlan;
         String txtImage = repertTemp + "/images/" + plans[numeroPlan].getImagePlan();
@@ -357,7 +368,9 @@ public class GestionnairePlanController {
         ajouteAffichageHotspots();
         ajouteAffichagePointsHotspots();
     }
-
+/**
+ * 
+ */
     private void afficheBoussole() {
         if (!imagePlan.isError()) {
             String posX = plans[planActuel].getPosition().split(":")[1];
@@ -386,6 +399,11 @@ public class GestionnairePlanController {
         }
     }
 
+    /**
+     *
+     * @param numHS
+     * @return
+     */
     private AnchorPane afficherListePanosVignettes(int numHS) {
 
         AnchorPane APlistePano = new AnchorPane();
@@ -429,6 +447,8 @@ public class GestionnairePlanController {
                     TextArea txtHS = (TextArea) VBOutils.lookup("#txtHSPlan" + numHS);
                     txtHS.setText(texteHS);
                 }
+                btnValider.setStyle("-fx-text-fill : #DD0000");
+                btnValider.setText("Valider les Hotspots");
                 plans[planActuel].getHotspot(numHS).setNumeroPano(numeroPano);
                 ComboBox cbx = (ComboBox) VBOutils.lookup("#cbplan" + numHS);
                 cbx.setValue(nomPano.substring(nomPano.lastIndexOf(File.separator) + 1, nomPano.lastIndexOf(".")));
@@ -458,6 +478,9 @@ public class GestionnairePlanController {
         return APlistePano;
     }
 
+    /**
+     *
+     */
     private void afficheConfigPlan() {
         Label lblNordPlan = new Label(rb.getString("plan.positionNordPlan"));
         lblNordPlan.setLayoutX(10);
@@ -586,6 +609,10 @@ public class GestionnairePlanController {
         VBOutils.getChildren().add(APConfigPlan);
     }
 
+    /**
+     *
+     * @return
+     */
     private String listePano() {
         String liste = "";
         if (nombrePanoramiques == 0) {
@@ -604,103 +631,110 @@ public class GestionnairePlanController {
         }
     }
 
+    /**
+     *
+     * @param X
+     * @param Y
+     */
     private void planMouseClic(double X, double Y) {
+        if (nombrePanoramiques > 0) {
 
-        valideHSPlan();
-        dejaSauve = false;
-        stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
-        double mouseX = X - panePlan.getLayoutX();
-        double mouseY = Y - panePlan.getLayoutY() - 110;
-        double posX, posY;
-        double largeur = imagePlan.getWidth();
-        double hauteur = imagePlan.getHeight();
-        posX = mouseX;
-        posY = mouseY;
-        Circle point = new Circle(mouseX, mouseY, 5);
-        point.setFill(Color.YELLOW);
-        point.setStroke(Color.RED);
-        point.setId("point" + numPoints);
-        point.setCursor(Cursor.DEFAULT);
-        panePlan.getChildren().add(point);
-        Tooltip t = new Tooltip("point n°" + (numPoints + 1));
-        t.setStyle(tooltipStyle);
-        Tooltip.install(point, t);
-        HotSpot HS = new HotSpot();
-        HS.setLongitude(posX / largeur);
-        HS.setLatitude(posY / hauteur);
-        plans[planActuel].addHotspot(HS);
-        retireAffichageHotSpots();
-        ajouteAffichageHotspots();
+            valideHSPlan();
+            dejaSauve = false;
+            stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            double mouseX = X - panePlan.getLayoutX();
+            double mouseY = Y - panePlan.getLayoutY() - 110;
+            double posX, posY;
+            double largeur = imagePlan.getWidth();
+            double hauteur = imagePlan.getHeight();
+            posX = mouseX;
+            posY = mouseY;
+            Circle point = new Circle(mouseX, mouseY, 5);
+            point.setFill(Color.YELLOW);
+            point.setStroke(Color.RED);
+            point.setId("point" + numPoints);
+            point.setCursor(Cursor.DEFAULT);
+            panePlan.getChildren().add(point);
+            Tooltip t = new Tooltip("point n°" + (numPoints + 1));
+            t.setStyle(tooltipStyle);
+            Tooltip.install(point, t);
+            HotSpot HS = new HotSpot();
+            HS.setLongitude(posX / largeur);
+            HS.setLatitude(posY / hauteur);
+            plans[planActuel].addHotspot(HS);
+            retireAffichageHotSpots();
+            ajouteAffichageHotspots();
 //        Pane affHS1 = affichageHS(listePano(), planActuel);
 //        affHS1.setId("labelConfigPlan");
 //        VBOutils.getChildren().add(affHS1);
 //
-        //numPoints++;
-        if (nombrePanoramiques > 0) {
-            AnchorPane listePanoVig = afficherListePanosVignettes(plans[planActuel].getNombreHotspots() - 1);
-            int largeurVignettes = 4;
-            if (nombrePanoramiques < 4) {
-                largeurVignettes = nombrePanoramiques;
-            }
-            if (mouseX + largeurVignettes * 130 > panePlan.getWidth()) {
-                listePanoVig.setLayoutX(panePlan.getWidth() - largeurVignettes * 130);
-            } else {
-                listePanoVig.setLayoutX(mouseX);
-            }
-            listePanoVig.setLayoutY(mouseY);
-            panePlan.getChildren().add(listePanoVig);
+            //numPoints++;
+                AnchorPane listePanoVig = afficherListePanosVignettes(plans[planActuel].getNombreHotspots() - 1);
+                int largeurVignettes = 4;
+                if (nombrePanoramiques < 4) {
+                    largeurVignettes = nombrePanoramiques;
+                }
+                if (mouseX + largeurVignettes * 130 > panePlan.getWidth()) {
+                    listePanoVig.setLayoutX(panePlan.getWidth() - largeurVignettes * 130);
+                } else {
+                    listePanoVig.setLayoutX(mouseX);
+                }
+                listePanoVig.setLayoutY(mouseY);
+                panePlan.getChildren().add(listePanoVig);
+            point.setOnMouseClicked((MouseEvent me1) -> {
+                if (me1.isControlDown()) {
+                    valideHSPlan();
+                    dejaSauve = false;
+                    stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+                    String chPoint = point.getId();
+                    chPoint = chPoint.substring(5, chPoint.length());
+                    int numeroPoint = Integer.parseInt(chPoint);
+                    Node pt;
+                    pt = (Node) panePlan.lookup("#point" + chPoint);
+                    panePlan.getChildren().remove(pt);
+
+                    for (int o = numeroPoint + 1; o < numPoints; o++) {
+                        pt = (Node) panePlan.lookup("#point" + Integer.toString(o));
+                        pt.setId("point" + Integer.toString(o - 1));
+                    }
+                    /**
+                     * on retire les anciennes indication de HS
+                     */
+                    btnValider.setStyle("-fx-text-fill : #DD0000");
+                    btnValider.setText("Valider les Hotspots");
+
+                    retireAffichageHotSpots();
+                    numPoints--;
+                    plans[planActuel].removeHotspot(numeroPoint);
+                    /**
+                     * On les crée les nouvelles
+                     */
+                    ajouteAffichageHotspots();
+                    me1.consume();
+                } else {
+                    valideHSPlan();
+                    String chPoint = point.getId();
+                    chPoint = chPoint.substring(5, chPoint.length());
+                    int numeroPoint = Integer.parseInt(chPoint);
+                    if (nombrePanoramiques > 1) {
+                        AnchorPane listePanoVig1 = afficherListePanosVignettes(numeroPoint);
+                        int largeurVignettes1 = 4;
+                        if (nombrePanoramiques < 4) {
+                            largeurVignettes1 = nombrePanoramiques;
+                        }
+                        if (mouseX + largeurVignettes1 * 130 > panePlan.getWidth()) {
+                            listePanoVig1.setLayoutX(panePlan.getWidth() - largeurVignettes1 * 130);
+                        } else {
+                            listePanoVig1.setLayoutX(mouseX);
+                        }
+                        listePanoVig1.setLayoutY(mouseY);
+                        panePlan.getChildren().add(listePanoVig1);
+                    }
+                    me1.consume();
+
+                }
+            });
         }
-        point.setOnMouseClicked((MouseEvent me1) -> {
-            if (me1.isControlDown()) {
-                valideHSPlan();
-                dejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
-                String chPoint = point.getId();
-                chPoint = chPoint.substring(5, chPoint.length());
-                int numeroPoint = Integer.parseInt(chPoint);
-                Node pt;
-                pt = (Node) panePlan.lookup("#point" + chPoint);
-                panePlan.getChildren().remove(pt);
-
-                for (int o = numeroPoint + 1; o < numPoints; o++) {
-                    pt = (Node) panePlan.lookup("#point" + Integer.toString(o));
-                    pt.setId("point" + Integer.toString(o - 1));
-                }
-                /**
-                 * on retire les anciennes indication de HS
-                 */
-                retireAffichageHotSpots();
-                numPoints--;
-                plans[planActuel].removeHotspot(numeroPoint);
-                /**
-                 * On les crée les nouvelles
-                 */
-                ajouteAffichageHotspots();
-                me1.consume();
-            } else {
-                valideHSPlan();
-                String chPoint = point.getId();
-                chPoint = chPoint.substring(5, chPoint.length());
-                int numeroPoint = Integer.parseInt(chPoint);
-                if (nombrePanoramiques > 1) {
-                    AnchorPane listePanoVig = afficherListePanosVignettes(numeroPoint);
-                    int largeurVignettes = 4;
-                    if (nombrePanoramiques < 4) {
-                        largeurVignettes = nombrePanoramiques;
-                    }
-                    if (mouseX + largeurVignettes * 130 > panePlan.getWidth()) {
-                        listePanoVig.setLayoutX(panePlan.getWidth() - largeurVignettes * 130);
-                    } else {
-                        listePanoVig.setLayoutX(mouseX);
-                    }
-                    listePanoVig.setLayoutY(mouseY);
-                    panePlan.getChildren().add(listePanoVig);
-                }
-                me1.consume();
-
-            }
-        });
-
     }
 
     private void gereSourisPlan(MouseEvent me) {

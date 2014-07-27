@@ -8,7 +8,8 @@ package editeurpanovisu;
 import javafx.scene.image.Image;
 
 /**
- *
+ * Défintions des vues Panoramiques
+ * 
  * @author LANG Laurent
  */
 public class Panoramique {

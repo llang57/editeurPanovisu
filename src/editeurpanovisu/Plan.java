@@ -68,10 +68,10 @@ public class Plan {
     public String getTitrePlan() {
         return titrePlan;
     }
-
-    /**
-     * @param titrePLan the titrePLan to set
-     */
+/**
+ * 
+ * @param titrePlan 
+ */
     public void setTitrePlan(String titrePlan) {
         this.titrePlan = titrePlan;
     }
@@ -98,7 +98,7 @@ public class Plan {
     }
 
     /**
-     * @param panoramiques the panoramiques to set
+     * @param panoramique the panoramiques to set
      */
     public void addPanoramique(String panoramique) {
         this.panoramiques[nombrePanoramiques] = panoramique;
@@ -106,7 +106,7 @@ public class Plan {
     }
 
     /**
-     * @param panoramiques the panoramiques to set
+     * @param panoramique the panoramiques to set
      */
     public void removePanoramique(String panoramique) {
         boolean trouve = false;

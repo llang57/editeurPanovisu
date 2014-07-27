@@ -20,7 +20,8 @@ import javax.imageio.ImageWriter;
 import javax.imageio.stream.FileImageOutputStream;
 
 /**
- *
+ * fonctions de sauvegarde des images
+ * 
  * @author llang
  */
 public class ReadWriteImage {

@@ -14,7 +14,8 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 
 /**
- *
+ * fonctions de transformation des images panoramiques (Cube / Equirectangulaire)
+ * 
  * @author llang
  */
 public class TransformationsPanoramique {
@@ -59,7 +60,6 @@ public class TransformationsPanoramique {
         double blue;
         double pixelX;
         double pixelY;
-        System.out.println("Face 1");
         Platform.runLater(() -> {
             barreImage.setProgress(0.0f);
         });
@@ -121,7 +121,6 @@ public class TransformationsPanoramique {
         });
         Thread.sleep(50);
 
-        System.out.println("Face 2");
         for (int pX = 0; pX < tailleCube; pX++) {
             for (int pY = 0; pY < tailleCube; pY++) {
 
@@ -176,7 +175,6 @@ public class TransformationsPanoramique {
 //                PWBehind.setColor(tailleCube - pX - 1, tailleCube - pY - 1, PREqui.getColor(pixelX, pixelY));
             }
         }
-        System.out.println("Face 3");
         Platform.runLater(() -> {
             barreImage.setProgress(2.0f / 6.0f);
         });
@@ -235,7 +233,6 @@ public class TransformationsPanoramique {
 //                PWLeft.setColor(pY, tailleCube - pZ - 1, PREqui.getColor(pixelX, pixelY));
             }
         }
-        System.out.println("Face 4");
         Platform.runLater(() -> {
             barreImage.setProgress(3.0f / 6.0f);
         });
@@ -295,7 +292,6 @@ public class TransformationsPanoramique {
 //                PWRight.setColor(pY, tailleCube - pZ - 1, PREqui.getColor(pixelX, pixelY));
             }
         }
-        System.out.println("Face 5");
         Platform.runLater(() -> {
             barreImage.setProgress(4.0f / 6.0f);
         });
@@ -358,7 +354,6 @@ public class TransformationsPanoramique {
 //                PWTop.setColor(tailleCube - pZ - 1, tailleCube - pX - 1, PREqui.getColor(pixelX, pixelY));
             }
         }
-        System.out.println("Face 6");
         Platform.runLater(() -> {
             barreImage.setProgress(5.0f / 6.0f);
         });

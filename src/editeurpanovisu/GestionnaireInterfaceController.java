@@ -55,7 +55,8 @@ import javafx.scene.text.Font;
 import jfxtras.labs.scene.control.BigDecimalField;
 
 /**
- *
+ * Gestion de l'interface de visualition de la visite virtuelle
+ * 
  * @author LANG Laurent
  */
 public class GestionnaireInterfaceController {
@@ -3497,7 +3498,6 @@ public class GestionnaireInterfaceController {
         cpCouleurDiaporama.setOnAction((ActionEvent e) -> {
             String coul = cpCouleurDiaporama.getValue().toString().substring(2, 8);
             couleurDiaporama = "#" + coul;
-            System.out.println("Couleur Diaporama : " + coul);
             afficheDiaporama();
         });
 

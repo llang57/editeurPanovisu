@@ -4,6 +4,7 @@ package editeurpanovisu;
 import java.io.File;
 import java.io.FileFilter;
 /**
+ * Génération de listes FileFilter
  * 
  * @author llang
  */

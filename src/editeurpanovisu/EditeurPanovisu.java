@@ -82,6 +82,7 @@ import org.controlsfx.dialog.Dialog;
 import org.controlsfx.dialog.Dialogs;
 
 /**
+ * Editeur de visites virtuelles
  *
  * @author LANG Laurent
  */
@@ -94,7 +95,7 @@ public class EditeurPanovisu extends Application {
 
     public static final String[] codesLanguesTraduction = {"fr_FR", "en_EN", "de_DE"};
     public static final String[] languesTraduction = {"Francais", "English", "Deutsch"};
-    private static Button btnValider = new Button("Valide HotSpots");
+    private static Button btnValider = new Button("HotSpots Validés");
 
     public static Locale locale = new Locale("fr", "FR");
     private static ResourceBundle rb;
@@ -129,12 +130,7 @@ public class EditeurPanovisu extends Application {
     static private String panoEntree = "";
     static public String systemeExploitation;
     public static final String tooltipStyle = "";
-//    public static final String tooltipStyle
-//            = "-fx-background-color : linear-gradient(greenyellow   , limegreen ) ; "
-//            + "-fx-opacity : 0.7;"            
-//            + "-fx-font-size : 7pt; "
-//            + "-fx-background-radius  : 1 1 1 1;"
-//            + "-fx-text-fill : black;";
+
     /**
      * Répertoire de l'application
      */
@@ -656,8 +652,7 @@ public class EditeurPanovisu extends Application {
 
             String nomRepertVisite = repertVisite.getAbsolutePath();
             copieDirectory(repertTemp, nomRepertVisite);
-            Dialogs.create().title("Editeur PanoVisu")
-                    .masthead("Génération de la visite")
+            Dialogs.create().title("Génération de la visite")
                     .message("Votre visite a bien été généré dans le répertoire : " + nomRepertVisite)
                     .showInformation();
             if (Desktop.isDesktopSupported()) {
@@ -668,8 +663,7 @@ public class EditeurPanovisu extends Application {
                 }
             }
         } else {
-            Dialogs.create().title("Editeur PanoVisu")
-                    .masthead("Génération de la visite")
+            Dialogs.create().title("Génération de la visite")
                     .message("Votre visite n'a pu être générée, votre fichier n'étant pas sauvegardé")
                     .showError();
 
@@ -747,7 +741,7 @@ public class EditeurPanovisu extends Application {
 
     /**
      *
-     * @param event
+     * @throws InterruptedException
      */
     private void panoramiquesAjouter() throws InterruptedException {
         FileChooser fileChooser = new FileChooser();
@@ -883,6 +877,8 @@ public class EditeurPanovisu extends Application {
 
     /**
      *
+     * @throws IOException
+     * @throws InterruptedException
      */
     private void projetCharge() throws IOException, InterruptedException {
         if (!repertSauveChoisi) {
@@ -894,7 +890,7 @@ public class EditeurPanovisu extends Application {
             reponse = Dialogs.create()
                     .owner(null)
                     .title("Charge un Projet")
-                    .masthead("vous n'avez pas sauvegardé votre projet")
+                    .masthead("Vous n'avez pas sauvegardé votre projet")
                     .message("Voulez vous le sauver ?")
                     .showConfirm();
 
@@ -1028,6 +1024,9 @@ public class EditeurPanovisu extends Application {
 
     /**
      *
+     * @param nomFich
+     * @throws IOException
+     * @throws InterruptedException
      */
     private void projetChargeNom(String nomFich) throws IOException, InterruptedException {
         File fichProjet1 = new File(nomFich);
@@ -1038,7 +1037,7 @@ public class EditeurPanovisu extends Application {
                 reponse = Dialogs.create()
                         .owner(null)
                         .title("Charge un Projet")
-                        .masthead("vous n'avez pas sauvegardé votre projet")
+                        .masthead("Vous n'avez pas sauvegardé votre projet")
                         .message("Voulez vous le sauver ?")
                         .showConfirm();
 
@@ -1175,8 +1174,7 @@ public class EditeurPanovisu extends Application {
         try (BufferedWriter bw = new BufferedWriter(fw)) {
             bw.write(contenuFichier);
         }
-        Dialogs.create().title("Editeur PanoVisu")
-                .masthead("Sauvegarde de fichier")
+        Dialogs.create().title("Sauvegarde de fichier")
                 .message("Votre fichier à bien été sauvegardé")
                 .showInformation();
 
@@ -1280,7 +1278,7 @@ public class EditeurPanovisu extends Application {
             reponse = Dialogs.create()
                     .owner(null)
                     .title("Quitter l'application")
-                    .masthead("vous n'avez pas sauvegardé votre projet")
+                    .masthead("Vous n'avez pas sauvegardé votre projet")
                     .message("Voulez vous le sauver ?")
                     .showConfirm();
 
@@ -1312,8 +1310,8 @@ public class EditeurPanovisu extends Application {
         if (!dejaSauve) {
             reponse = Dialogs.create()
                     .owner(null)
-                    .title("Nouveau Projet")
-                    .masthead("vous n'avez pas sauvegardé votre projet")
+                    .title("Nouveau projet")
+                    .masthead("Vous n'avez pas sauvegardé votre projet")
                     .message("Voulez vous le sauver ?")
                     .showConfirm();
 
@@ -1925,7 +1923,31 @@ public class EditeurPanovisu extends Application {
         } else {
             fichConfig.createNewFile();
             locale = new Locale("fr", "FR");
+            setUserAgentStylesheet("file:css/clair.css");
             repertoireProjet = repertAppli;
+            String contenuFichier = "langue=" + locale.toString().split("_")[0] + "\n";
+            contenuFichier += "pays=" + locale.toString().split("_")[1] + "\n";
+            contenuFichier += "repert=" + repertoireProjet + "\n";
+            contenuFichier += "style=clair\n";
+            fichConfig.setWritable(true);
+            FileWriter fw = null;
+            try {
+                fw = new FileWriter(fichConfig);
+            } catch (IOException ex) {
+                Logger.getLogger(ConfigDialogController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            BufferedWriter bw = new BufferedWriter(fw);
+            try {
+                bw.write(contenuFichier);
+            } catch (IOException ex) {
+                Logger.getLogger(ConfigDialogController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                bw.close();
+            } catch (IOException ex) {
+                Logger.getLogger(ConfigDialogController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         }
 
     }
@@ -2103,7 +2125,8 @@ public class EditeurPanovisu extends Application {
                             gereSourisPanoramique(me1);
                         }
                 );
-                btnValider.setStyle("-fx-text-fill : #AA0000");
+                btnValider.setStyle("-fx-text-fill : #DD0000");
+                btnValider.setText("Valider les Hotspots");
                 panoListeVignette = nomPano;
                 if (panoramiquesProjet[numeroPano].getTitrePanoramique() != null) {
                     String texteHS = panoramiquesProjet[numeroPano].getTitrePanoramique();
@@ -2151,6 +2174,8 @@ public class EditeurPanovisu extends Application {
      */
     private void valideHS() {
         btnValider.setStyle("-fx-text-fill : #00AA00");
+        btnValider.setText("Hotspots Validés");
+
         for (int i = 0; i < panoramiquesProjet[panoActuel].getNombreHotspots(); i++) {
             ComboBox cbx = (ComboBox) outils.lookup("#cbpano" + i);
             TextArea txtTexteHS = (TextArea) outils.lookup("#txtHS" + i);
@@ -2221,7 +2246,8 @@ public class EditeurPanovisu extends Application {
                 cbDestPano.valueProperty().addListener(new ChangeListener<String>() {
                     @Override
                     public void changed(ObservableValue ov, String t, String t1) {
-                        btnValider.setStyle("-fx-text-fill : #AA0000");
+                        btnValider.setStyle("-fx-text-fill : #DD0000");
+                        btnValider.setText("Valider les Hotspots");
                     }
                 });
                 cbDestPano.setTranslateX(60);
@@ -2232,7 +2258,6 @@ public class EditeurPanovisu extends Application {
                     cbDestPano.setValue(f1XML.split("\\.")[0]);
                 }
                 int num = cbDestPano.getSelectionModel().getSelectedIndex();
-                System.out.println("num : " + num);
                 vbPanneauHS.getChildren().addAll(lblLien, cbDestPano, sep);
             }
             Label lblTexteHS = new Label("Texte du Hotspot");
@@ -2241,7 +2266,8 @@ public class EditeurPanovisu extends Application {
                 txtTexteHS.setText(panoramiquesProjet[numPano].getHotspot(o).getInfo());
             }
             txtTexteHS.textProperty().addListener((final ObservableValue<? extends String> observable, final String oldValue, final String newValue) -> {
-                btnValider.setStyle("-fx-text-fill : #AA0000");
+                btnValider.setStyle("-fx-text-fill : #DD0000");
+                btnValider.setText("Valider les Hotspots");
             });
 
             txtTexteHS.setId("txtHS" + o);
@@ -2251,7 +2277,8 @@ public class EditeurPanovisu extends Application {
             CheckBox cbAnime = new CheckBox("HostSpot Animé");
             cbAnime.setId("anime" + o);
             cbAnime.selectedProperty().addListener((final ObservableValue<? extends Boolean> observable, final Boolean oldValue, final Boolean newValue) -> {
-                btnValider.setStyle("-fx-text-fill : #AA0000");
+                btnValider.setStyle("-fx-text-fill : #DD0000");
+                btnValider.setText("Valider les Hotspots");
             });
             if (panoramiquesProjet[numPano].getHotspot(o).isAnime()) {
                 cbAnime.setSelected(true);
@@ -2288,7 +2315,8 @@ public class EditeurPanovisu extends Application {
                 txtTexteHS.setText(panoramiquesProjet[numPano].getHotspotImage(o).getInfo());
             }
             txtTexteHS.textProperty().addListener((final ObservableValue<? extends String> observable, final String oldValue, final String newValue) -> {
-                btnValider.setStyle("-fx-text-fill : #AA0000");
+                btnValider.setStyle("-fx-text-fill : #DD0000");
+                btnValider.setText("Valider les Hotspots");
             });
 
             txtTexteHS.setId("txtHSImage" + o);
@@ -2298,7 +2326,8 @@ public class EditeurPanovisu extends Application {
             CheckBox cbAnime = new CheckBox("HostSpot Animé");
             cbAnime.setId("animeImage" + o);
             cbAnime.selectedProperty().addListener((final ObservableValue<? extends Boolean> observable, final Boolean oldValue, final Boolean newValue) -> {
-                btnValider.setStyle("-fx-text-fill : #AA0000");
+                btnValider.setStyle("-fx-text-fill : #DD0000");
+                btnValider.setText("Valider les Hotspots");
             });
             if (panoramiquesProjet[numPano].getHotspotImage(o).isAnime()) {
                 cbAnime.setSelected(true);
@@ -2318,8 +2347,10 @@ public class EditeurPanovisu extends Application {
         btnValider.setTranslateY(5);
         btnValider.setPadding(new Insets(7));
         btnValider.setStyle("-fx-text-fill : #00aa00");
+
         btnValider.setOnAction((ActionEvent e) -> {
             btnValider.setStyle("-fx-text-fill : #00aa00");
+            btnValider.setText("Hotspots Validés");
             valideHS();
         });
         vb1.getChildren().addAll(btnValider, sep1);
@@ -2348,7 +2379,6 @@ public class EditeurPanovisu extends Application {
         APLegende.setMaxWidth(1000);
         APLegende.setMaxHeight(150);
         double positionY = (pano.getLayoutY() + pano.getPrefHeight() + 10);
-        System.out.println("position : " + positionY);
         Circle point = new Circle(30, 20, 5);
         point.setFill(Color.YELLOW);
         point.setStroke(Color.RED);
@@ -2406,7 +2436,6 @@ public class EditeurPanovisu extends Application {
         APLegende.setVisible(true);
         APLegende.setLayoutX(50);
         APLegende.setLayoutY(positionY);
-        System.out.println("position legende : " + APLegende.getLayoutX() + "," + APLegende.getLayoutY());
         return APLegende;
     }
 
@@ -2432,7 +2461,8 @@ public class EditeurPanovisu extends Application {
         Tooltip.install(point, t);
 
         point.setOnMouseClicked((MouseEvent me1) -> {
-            btnValider.setStyle("-fx-text-fill : #AA0000");
+            btnValider.setStyle("-fx-text-fill : #DD0000");
+            btnValider.setText("Valider les Hotspots");
             double mouseX = me1.getSceneX();
             double mouseY = me1.getSceneY() - pano.getLayoutY() - 115;
             String chPoint = point.getId();
@@ -2644,7 +2674,7 @@ public class EditeurPanovisu extends Application {
             dejaSauve = false;
             stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
             double mouseX = X;
-            double mouseY = Y - pano.getLayoutY() - 95;
+            double mouseY = Y - pano.getLayoutY() - 109;
             double longitude, latitude;
             double largeur = imagePanoramique.getFitWidth();
             String chLong, chLat;
@@ -2893,7 +2923,7 @@ public class EditeurPanovisu extends Application {
                 (MouseEvent me) -> {
                     if (estCharge) {
                         double mouseX = me.getSceneX();
-                        double mouseY = me.getSceneY() - pano.getLayoutY() - 95;
+                        double mouseY = me.getSceneY() - pano.getLayoutY() - 109;
                         double longitude, latitude;
                         double largeur = imagePanoramique.getFitWidth() * pano.getScaleX();
                         longitude = 360.0f * mouseX / largeur - 180;
@@ -3214,8 +3244,7 @@ public class EditeurPanovisu extends Application {
             try (BufferedWriter bw = new BufferedWriter(fw)) {
                 bw.write(contenuFichier);
             }
-            Dialogs.create().title("Editeur PanoVisu")
-                    .masthead("Sauvegarde du fichier de Modèle")
+            Dialogs.create().title("Sauvegarde du fichier de Modèle")
                     .message("Votre modèle à bien été sauvegardé")
                     .showInformation();
         }
@@ -3276,7 +3305,7 @@ public class EditeurPanovisu extends Application {
         myPane.setPrefHeight(80);
         myPane.setPrefWidth(3000);
         MenuBar menuPrincipal = new MenuBar();
-        menuPrincipal.setMinHeight(21);
+        menuPrincipal.setMinHeight(25);
         menuPrincipal.setPrefHeight(29);
         menuPrincipal.setPrefWidth(3000);
         /* 
@@ -3400,6 +3429,7 @@ public class EditeurPanovisu extends Application {
         barreBouton.getStyleClass().add("menuBarreOutils1");
 
         barreBouton.setPrefHeight(50);
+        barreBouton.setMinHeight(50);
         barreBouton.setPrefWidth(3000);
         /*
          Bouton nouveau Projet
@@ -3704,10 +3734,6 @@ public class EditeurPanovisu extends Application {
 
     }
 
-    private void creeTabInterface() {
-
-    }
-
     /**
      *
      * @param primaryStage
@@ -3726,8 +3752,8 @@ public class EditeurPanovisu extends Application {
         creeMenu(primaryStage, root, width);
         TabPane tabPaneEnvironnement = new TabPane();
 //        tabPaneEnvironnement.setTranslateZ(5);
-        tabPaneEnvironnement.setMinHeight(height-60);
-        tabPaneEnvironnement.setMaxHeight(height-60);
+        tabPaneEnvironnement.setMinHeight(height - 60);
+        tabPaneEnvironnement.setMaxHeight(height - 60);
         Pane barreStatus = new Pane();
         barreStatus.setPrefSize(width + 20, 30);
         barreStatus.setTranslateY(25);
@@ -3830,16 +3856,18 @@ public class EditeurPanovisu extends Application {
         txtTitrePano.setId("txttitrepano");
         txtTitrePano.setPrefSize(200, 25);
 
-        btnValidePano = new Button("Valide Infos");
+        btnValidePano = new Button("Infos Validées");
         btnValidePano.setTranslateY(25);
         btnValidePano.setTranslateX(200);
         btnValidePano.setStyle("-fx-text-fill : #00AA00");
         btnValidePano.setPadding(new Insets(7));
         txtTitrePano.textProperty().addListener((final ObservableValue<? extends String> observable, final String oldValue, final String newValue) -> {
-            btnValidePano.setStyle("-fx-text-fill : #AA0000");
+            btnValidePano.setStyle("-fx-text-fill : #DD0000");
+            btnValidePano.setText("Valider les Infos");
         });
         btnValidePano.setOnAction((ActionEvent e) -> {
             btnValidePano.setStyle("-fx-text-fill : #00AA00");
+            btnValidePano.setText("Infos Validées");
             clickBtnValidePano();
         });
 
@@ -3907,7 +3935,6 @@ public class EditeurPanovisu extends Application {
         panneau2.setPrefSize(width - largeurOutils - 20, height - 140);
 
         imagePanoramique.setCache(true);
-        System.out.println("Largeur Max : " + largeurMax);
         if (largeurMax < 1200) {
             largeur = largeurMax;
         } else {
@@ -3980,9 +4007,10 @@ public class EditeurPanovisu extends Application {
                 reponse = Dialogs.create()
                         .owner(null)
                         .title("Quitter l'éditeur")
-                        .masthead("ATTENTION !!! vous n'avez pas sauvegardé votre Projet")
+                        .masthead("ATTENTION ! Vous n'avez pas sauvegardé votre projet")
                         .message("Voulez vous le sauver ?")
-                        .showConfirm();
+                        .actions(Dialog.Actions.YES, Dialog.Actions.NO, Dialog.Actions.CANCEL)
+                        .showWarning();
             }
             if (reponse == Dialog.Actions.YES) {
                 try {

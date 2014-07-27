@@ -6,7 +6,8 @@
 package editeurpanovisu;
 
 /**
- *
+ * Définition des hotspots panoramiques
+ * 
  * @author LANG Laurent
  */
 public class HotSpot {

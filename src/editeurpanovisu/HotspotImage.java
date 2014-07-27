@@ -6,7 +6,8 @@
 package editeurpanovisu;
 
 /**
- *
+ * Définition des hotspots Image
+ * 
  * @author LANG Laurent
  */
 public class HotspotImage {

@@ -22,7 +22,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 /**
- *
+ * Controleur de la Popup d'info
+ * 
  * @author llang
  */
 public class PopUpDialogController {
