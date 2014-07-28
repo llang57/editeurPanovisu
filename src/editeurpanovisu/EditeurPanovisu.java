@@ -750,7 +750,7 @@ public class EditeurPanovisu extends Application {
      */
     private void panoramiquesAjouter() throws InterruptedException {
         FileChooser fileChooser = new FileChooser();
- //       FileChooser.ExtensionFilter extFilterImage = new FileChooser.ExtensionFilter("Fichiers Image (JPG,BMP)", "*.jpg", "*.jpeg", "*.bmp");
+        //       FileChooser.ExtensionFilter extFilterImage = new FileChooser.ExtensionFilter("Fichiers Image (JPG,BMP)", "*.jpg", "*.jpeg", "*.bmp");
         FileChooser.ExtensionFilter extFilterJpeg = new FileChooser.ExtensionFilter("Fichiers JPEG (*.jpg)", "*.jpg");
 //        FileChooser.ExtensionFilter extFilterBmp = new FileChooser.ExtensionFilter("Fichiers BMP (*.bmp)", "*.bmp");
         File repert = new File(currentDir + File.separator);
@@ -1405,7 +1405,10 @@ public class EditeurPanovisu extends Application {
                                     String nom = file.getAbsolutePath().substring(0, file.getAbsolutePath().length() - 6);
                                     boolean trouve = false;
                                     for (int j = 0; j < i; j++) {
-                                        String nom1 = lstFich1[j].getAbsolutePath().substring(0, file.getAbsolutePath().length() - 6);
+                                        String nom1 = "";
+                                        if (lstFich1[j].getAbsolutePath().length() == file.getAbsolutePath().length()) {
+                                            nom1 = lstFich1[j].getAbsolutePath().substring(0, file.getAbsolutePath().length() - 6);
+                                        }
                                         if (nom.equals(nom1)) {
                                             trouve = true;
                                         }

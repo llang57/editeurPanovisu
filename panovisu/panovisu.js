@@ -1,7 +1,7 @@
 /**
  * @name panoVisu
  * 
- * @version 0.90
+ * @version 1.0.15
  * @author LANG Laurent
  */
 
@@ -1918,7 +1918,7 @@ function panovisu(num_pano) {
             $("#reseauxSociaux-" + num_pano).css(reseauxSociauxPositionX, reseauxSociauxDX + "px");
             $("#reseauxSociaux-" + num_pano).css(reseauxSociauxPositionY, reseauxSociauxDY + "px");
             $("#reseauxSociaux-" + num_pano).css({
-                width: (reseauxSociauxTaille + 5) * 4 + "px",
+                width: (reseauxSociauxTaille + 30) * 4 + "px",
                 height: reseauxSociauxTaille + "px"
             });
             $("#reseauxSociaux-" + num_pano).css("opacity", reseauxSociauxOpacite);
