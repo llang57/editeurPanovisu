@@ -56,7 +56,7 @@ import jfxtras.labs.scene.control.BigDecimalField;
 
 /**
  * Gestion de l'interface de visualition de la visite virtuelle
- * 
+ *
  * @author LANG Laurent
  */
 public class GestionnaireInterfaceController {
@@ -882,6 +882,38 @@ public class GestionnaireInterfaceController {
             }
             apVisuplan.setLayoutX(positionX);
             apVisuplan.setLayoutY(positionY);
+            if (nombrePlans > 0) {
+
+                String repertImagePlan = repertAppli + File.separator + "theme/plan";
+                String imageBoussole = "file:" + repertImagePlan + "/aiguillePlan.png";
+                Image imgBoussole1 = new Image(imageBoussole);
+                ImageView ivNord = new ImageView(imgBoussole1);
+
+                String positX = plans[gestionnairePlan.planActuel].getPosition().split(":")[1];
+                String positY = plans[gestionnairePlan.planActuel].getPosition().split(":")[0];
+                positionX = 0;
+                positionY = 0;
+                switch (positX) {
+                    case "left":
+                        positionX = ivimgPlan.getLayoutX() + plans[gestionnairePlan.planActuel].getPositionX();
+                        break;
+                    case "right":
+                        positionX = ivimgPlan.getLayoutX() + imgPlan.getWidth() - imgBoussole1.getWidth() - plans[gestionnairePlan.planActuel].getPositionX();
+                        break;
+                }
+                switch (positY) {
+                    case "top":
+                        positionY = ivimgPlan.getLayoutY() + plans[gestionnairePlan.planActuel].getPositionY();
+                        break;
+                    case "bottom":
+                        positionY = ivimgPlan.getLayoutY() + imgPlan.getHeight() - imgBoussole1.getHeight() - plans[gestionnairePlan.planActuel].getPositionY();
+                        break;
+                }
+                ivNord.setLayoutX(positionX);
+                ivNord.setLayoutY(positionY);
+                ivNord.setRotate(plans[gestionnairePlan.planActuel].getDirectionNord());
+                apVisuplan.getChildren().add(ivNord);
+            }
         }
     }
 
@@ -1807,6 +1839,15 @@ public class GestionnaireInterfaceController {
         afficheDiaporama();
     }
 
+    public void rafraichit(){
+        afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);        
+        afficheBoussole();
+        afficheMasque();
+        afficheReseauxSociaux();
+        affichePlan();
+        afficheVignettes();
+    }
+    
     /**
      *
      * @param width
@@ -1886,7 +1927,7 @@ public class GestionnaireInterfaceController {
          *     Panneau de visualisation de l'interface
          * ***************************************************************
          */
-        double tailleMax = apVisualisation.getPrefWidth()-40;
+        double tailleMax = apVisualisation.getPrefWidth() - 40;
         if (tailleMax > 1200) {
             tailleMax = 1200;
         }
@@ -3204,7 +3245,7 @@ public class GestionnaireInterfaceController {
         Label lblLargeurPlan = new Label(rb.getString("interface.largeurPlan"));
         lblLargeurPlan.setLayoutX(10);
         lblLargeurPlan.setLayoutY(40);
-        slLargeurPlan = new Slider(0, 500, 200);
+        slLargeurPlan = new Slider(200, 800, 300);
         slLargeurPlan.setLayoutX(200);
         slLargeurPlan.setLayoutY(40);
         Label lblPositPlan = new Label(rb.getString("interface.positionPlan"));
@@ -3883,6 +3924,7 @@ public class GestionnaireInterfaceController {
             if (newValue != null) {
                 double taille = (double) newValue;
                 largeurPlan = taille;
+                lblLargeurPlan.setText(rb.getString("interface.largeurPlan")+" ("+Math.round(taille)+"px )");
                 affichePlan();
             }
         });

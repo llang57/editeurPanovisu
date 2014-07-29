@@ -3005,8 +3005,8 @@ function panovisu(num_pano) {
                     reseauxSociauxOpacite = 0.8;
                     reseauxSociauxPositionX = "left";
                     reseauxSociauxPositionY = "bottom";
-                    reseauxSociauxDX = 10;
-                    reseauxSociauxDY = 10;
+                    reseauxSociauxDX = 0;
+                    reseauxSociauxDY = 0;
                     reseauxSociauxTaille = 30;
                     reseauxSociauxTwitter = "non";
                     reseauxSociauxFacebook = "non";

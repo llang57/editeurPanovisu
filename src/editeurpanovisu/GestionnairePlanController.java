@@ -5,27 +5,31 @@
  */
 package editeurpanovisu;
 
+import static editeurpanovisu.EditeurPanovisu.copieFichierRepertoire;
+import static editeurpanovisu.EditeurPanovisu.dejaSauve;
 import static editeurpanovisu.EditeurPanovisu.nombrePanoramiques;
 import static editeurpanovisu.EditeurPanovisu.panoramiquesProjet;
-import static editeurpanovisu.EditeurPanovisu.plans;
 import static editeurpanovisu.EditeurPanovisu.repertAppli;
+import static editeurpanovisu.EditeurPanovisu.gestionnaireInterface;
+import static editeurpanovisu.EditeurPanovisu.gestionnairePlan;
+import static editeurpanovisu.EditeurPanovisu.nombrePlans;
+import static editeurpanovisu.EditeurPanovisu.plans;
 import static editeurpanovisu.EditeurPanovisu.repertTemp;
 import static editeurpanovisu.EditeurPanovisu.stPrincipal;
-import static editeurpanovisu.EditeurPanovisu.dejaSauve;
-import static editeurpanovisu.EditeurPanovisu.gestionnaireInterface;
-import static editeurpanovisu.EditeurPanovisu.nombrePlans;
 import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -37,17 +41,20 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
-import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.TextAlignment;
 import jfxtras.labs.scene.control.BigDecimalField;
 
 /**
@@ -62,11 +69,12 @@ public class GestionnairePlanController {
             = new ExtensionsFilter(new String[]{".png"});
 
     private ResourceBundle rb;
+    public Label lblDragDropPlan;
     public Pane tabInterface;
     private HBox hbInterface;
     private AnchorPane apPlan;
     private VBox vbOutils;
-    private Slider slnordPlan;
+    private Slider slNordPlan;
     private BigDecimalField bdfPositXBoussole;
     private BigDecimalField bdfPositYBoussole;
     private RadioButton rbBoussolePlanTopLeft;
@@ -92,7 +100,7 @@ public class GestionnairePlanController {
     private Image imgBoussole;
     private int numPoints = 0;
     private ScrollPane spOutils;
-    private Button btnValider;
+//    private Button btnValider;
 
     private void retireAffichagePointsHotSpots() {
         for (int i = 0; i < numPoints; i++) {
@@ -102,14 +110,15 @@ public class GestionnairePlanController {
     }
 
     private void valideHsplan() {
-        btnValider.setStyle("-fx-text-fill : #00AA00");
-        btnValider.setText("Hotspots Validés");
-
         for (int i = 0; i < plans[planActuel].getNombreHotspots(); i++) {
             ComboBox cbx = (ComboBox) vbOutils.lookup("#cbplan" + i);
             TextArea txtTexteHS = (TextArea) vbOutils.lookup("#txtHsplan" + i);
-            plans[planActuel].getHotspot(i).setInfo(txtTexteHS.getText());
-            plans[planActuel].getHotspot(i).setFichierXML(cbx.getValue() + ".xml");
+            if (txtTexteHS != null) {
+                plans[planActuel].getHotspot(i).setInfo(txtTexteHS.getText());
+            }
+            if (cbx != null) {
+                plans[planActuel].getHotspot(i).setFichierXML(cbx.getValue() + ".xml");
+            }
         }
     }
 
@@ -165,8 +174,6 @@ public class GestionnairePlanController {
         Tooltip.install(point, t);
 
         point.setOnMouseClicked((MouseEvent me1) -> {
-            btnValider.setStyle("-fx-text-fill : #DD0000");
-            btnValider.setText("Valider les Hotspots");
             double mouseX = me1.getSceneX();
             double mouseY = me1.getSceneY() - panePlan.getLayoutY() - 115;
             String chPoint = point.getId();
@@ -195,6 +202,7 @@ public class GestionnairePlanController {
                  * On les crée les nouvelles
                  */
                 ajouteAffichageHotspots();
+                valideHsplan();
                 me1.consume();
             } else {
                 valideHsplan();
@@ -212,8 +220,8 @@ public class GestionnairePlanController {
                     listePanoVig.setLayoutY(mouseY);
                     panePlan.getChildren().add(listePanoVig);
                 }
+                valideHsplan();
                 me1.consume();
-
             }
 
         });
@@ -270,8 +278,7 @@ public class GestionnairePlanController {
                 cbDestPano.valueProperty().addListener(new ChangeListener<String>() {
                     @Override
                     public void changed(ObservableValue ov, String t, String t1) {
-                        btnValider.setStyle("-fx-text-fill : #DD0000");
-                        btnValider.setText("Valider les Hotspots");
+                        valideHsplan();
                     }
                 });
 
@@ -292,8 +299,7 @@ public class GestionnairePlanController {
             txtTexteHS.setLayoutX(60);
             txtTexteHS.setLayoutY(150);
             txtTexteHS.textProperty().addListener((final ObservableValue<? extends String> observable, final String oldValue, final String newValue) -> {
-                btnValider.setStyle("-fx-text-fill : #DD0000");
-                btnValider.setText("Valider les Hotspots");
+                valideHsplan();
             });
 
             if (plans[numPano].getHotspot(o).getInfo() != null) {
@@ -306,14 +312,6 @@ public class GestionnairePlanController {
             vb1.getChildren().addAll(vbPanneauHS, sep);
         }
 
-        btnValider.setStyle("-fx-text-fill : #00AA00");
-        btnValider.setTranslateX(200);
-        btnValider.setTranslateY(5);
-        btnValider.setPadding(new Insets(7));
-        btnValider.setOnAction((ActionEvent e) -> {
-            valideHsplan();
-        });
-        vb1.getChildren().addAll(btnValider, sep1);
         return panneauHotSpots;
     }
 
@@ -342,6 +340,7 @@ public class GestionnairePlanController {
         cbChoixPlan.getItems().add(nombrePlans, plans[nombrePlans].getImagePlan());
         afficherPlan(nombrePlans);
         cbChoixPlan.getSelectionModel().select(nombrePlans);
+        lblDragDropPlan.setVisible(false);
     }
 
     /**
@@ -456,12 +455,11 @@ public class GestionnairePlanController {
                     TextArea txtHS = (TextArea) vbOutils.lookup("#txtHsplan" + numHS);
                     txtHS.setText(texteHS);
                 }
-                btnValider.setStyle("-fx-text-fill : #DD0000");
-                btnValider.setText("Valider les Hotspots");
                 plans[planActuel].getHotspot(numHS).setNumeroPano(numeroPano);
                 ComboBox cbx = (ComboBox) vbOutils.lookup("#cbplan" + numHS);
                 cbx.setValue(nomPano.substring(nomPano.lastIndexOf(File.separator) + 1, nomPano.lastIndexOf(".")));
                 aplistePano.setVisible(false);
+                valideHsplan();
                 me.consume();
             });
             aplistePano.getChildren().add(ivPano[j]);
@@ -495,9 +493,9 @@ public class GestionnairePlanController {
             Label lblNordPlan = new Label(rb.getString("plan.positionNordPlan"));
             lblNordPlan.setLayoutX(10);
             lblNordPlan.setLayoutY(10);
-            slnordPlan = new Slider(0, 360.0, 0);
-            slnordPlan.setLayoutX(200);
-            slnordPlan.setLayoutY(10);
+            slNordPlan = new Slider(0, 360.0, 0);
+            slNordPlan.setLayoutX(200);
+            slNordPlan.setLayoutY(10);
             Separator sepPlan = new Separator(Orientation.HORIZONTAL);
             sepPlan.setPrefHeight(10);
             sepPlan.setPrefWidth(350);
@@ -559,14 +557,14 @@ public class GestionnairePlanController {
                     afficheBoussole();
                 }
             });
-            slnordPlan.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+            slNordPlan.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
                 if (newValue != null) {
                     double direction = (double) newValue;
                     plans[planActuel].setDirectionNord(direction);
                     afficheBoussole();
                 }
             });
-            slnordPlan.setValue(plans[planActuel].getDirectionNord());
+            slNordPlan.setValue(plans[planActuel].getDirectionNord());
             rbBoussolePlanTopLeft.setSelected(plans[planActuel].getPosition().equals("top:left"));
             rbBoussolePlanTopRight.setSelected(plans[planActuel].getPosition().equals("top:right"));
             rbBoussolePlanBottomLeft.setSelected(plans[planActuel].getPosition().equals("bottom:left"));
@@ -577,12 +575,13 @@ public class GestionnairePlanController {
 
             apConfigPlan = new AnchorPane();
             apConfigPlan.getChildren().addAll(
-                    lblNordPlan, slnordPlan,
+                    lblNordPlan, slNordPlan,
                     lblPositBoussolePlan, rbBoussolePlanTopLeft, rbBoussolePlanTopRight,
                     rbBoussolePlanBottomLeft, rbBoussolePlanBottomRight,
                     lblBoussoleDXSpinner, bdfPositXBoussole, lblBoussoleDYSpinner, bdfPositYBoussole
             );
             if (nombrePanoramiques != 0) {
+                CheckBox cbValide = new CheckBox(rb.getString("plan.valideCB"));
                 Separator sepConfig1 = new Separator(Orientation.HORIZONTAL);
                 sepConfig1.setPrefSize(380, 20);
                 sepConfig1.setLayoutY(125);
@@ -595,6 +594,7 @@ public class GestionnairePlanController {
                 for (int i = 0; i < nombrePanoramiques; i++) {
                     final int num = i;
                     cbPanoramiques[i] = new CheckBox();
+                    final CheckBox cbF = cbPanoramiques[i];
                     cbPanoramiques[i].setId("cbPano" + i);
                     cbPanoramiques[i].setUserData(i);
                     cbPanoramiques[i].setLayoutX(30);
@@ -604,24 +604,43 @@ public class GestionnairePlanController {
                         cbPanoramiques[i].setSelected(true);
                     }
                     if (panoramiquesProjet[i].isAffichePlan() && panoramiquesProjet[i].getNumeroPlan() != planActuel) {
+                        System.out.println("numero plan : " + panoramiquesProjet[i].getNumeroPlan() + " nb : " + nombrePlans);
                         cbPanoramiques[i].setDisable(true);
+                        if (panoramiquesProjet[i].getNumeroPlan() < nombrePlans) {
+                            String nomPlan = plans[panoramiquesProjet[i].getNumeroPlan()].getImagePlan();
+                            cbPanoramiques[i].setText(cbPanoramiques[i].getText() + " -> (" + nomPlan + ")");
+                            Tooltip tTip = new Tooltip(nomPlan);
+                            cbPanoramiques[i].setTooltip(tTip);
+                        }
                     }
                     apConfigPlan.getChildren().add(cbPanoramiques[i]);
-                    cbPanoramiques[i].selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+                    cbPanoramiques[i].setOnMouseClicked((MouseEvent event) -> {
+                        boolean new_val = cbF.selectedProperty().get();
                         panoramiquesProjet[num].setAffichePlan(new_val);
-                        panoramiquesProjet[num].setNumeroPlan(planActuel);
+                        if (new_val) {
+                            panoramiquesProjet[num].setNumeroPlan(planActuel);
+                        } else {
+                            panoramiquesProjet[num].setNumeroPlan(-1);
+                        }
+                        cbValide.setSelected(false);
                     });
                 }
-                CheckBox cbValide = new CheckBox(rb.getString("plan.valideCB"));
                 cbValide.setLayoutX(30);
                 cbValide.setLayoutY(190);
                 cbValide.setTextFill(Color.BLUE);
                 apConfigPlan.getChildren().add(cbValide);
-                cbValide.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+                cbValide.setOnMouseClicked((MouseEvent event) -> {
+                    boolean new_val = cbValide.selectedProperty().get();
                     for (int i = 0; i < nombrePanoramiques; i++) {
                         CheckBox cbI = (CheckBox) apConfigPlan.lookup("#cbPano" + i);
                         if (cbI.isDisabled() != true) {
                             cbI.setSelected(new_val);
+                            panoramiquesProjet[i].setAffichePlan(new_val);
+                            if (new_val) {
+                                panoramiquesProjet[i].setNumeroPlan(planActuel);
+                            } else {
+                                panoramiquesProjet[i].setNumeroPlan(-1);
+                            }
                         }
                     }
                 });
@@ -725,8 +744,6 @@ public class GestionnairePlanController {
                     /**
                      * on retire les anciennes indication de HS
                      */
-                    btnValider.setStyle("-fx-text-fill : #DD0000");
-                    btnValider.setText("Valider les Hotspots");
 
                     retireAffichageHotSpots();
                     numPoints--;
@@ -735,6 +752,7 @@ public class GestionnairePlanController {
                      * On les crée les nouvelles
                      */
                     ajouteAffichageHotspots();
+                    valideHsplan();
                     me1.consume();
                 } else {
                     valideHsplan();
@@ -776,8 +794,7 @@ public class GestionnairePlanController {
      * @param height
      */
     public void creeInterface(int width, int height) {
-        btnValider = new Button("HotSpots Validés");
-        repertImagePlan = repertAppli + File.separator + "theme/plan";;
+        repertImagePlan = repertAppli + File.separator + "theme/plan";
         rb = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", EditeurPanovisu.locale);
         tabInterface = new Pane();
         hbInterface = new HBox();
@@ -798,6 +815,18 @@ public class GestionnairePlanController {
         panePlan.getChildren().addAll(ivPlan, ivNord);
         apPlan.setMaxWidth(width - largeurOutils - 20);
         apPlan.getChildren().add(panePlan);
+        lblDragDropPlan = new Label(rb.getString("plan.dragDrop"));
+        lblDragDropPlan.setMinHeight(apPlan.getPrefHeight());
+        lblDragDropPlan.setMaxHeight(apPlan.getPrefHeight());
+        lblDragDropPlan.setMinWidth(apPlan.getPrefWidth());
+        lblDragDropPlan.setMaxWidth(apPlan.getPrefWidth());
+        lblDragDropPlan.setAlignment(Pos.CENTER);
+        lblDragDropPlan.setTextFill(Color.web("#c9c7c7"));
+        lblDragDropPlan.setTextAlignment(TextAlignment.CENTER);
+        lblDragDropPlan.setWrapText(true);
+        lblDragDropPlan.setStyle("-fx-font-size:72px");
+        lblDragDropPlan.setTranslateY(-100);
+        apPlan.getChildren().add(lblDragDropPlan);
 
         spOutils = new ScrollPane();
         spOutils.setContent(vbOutils);
@@ -846,5 +875,60 @@ public class GestionnairePlanController {
                     gereSourisPlan(me);
                 }
         );
+        apPlan.setOnDragOver((DragEvent event) -> {
+            Dragboard db = event.getDragboard();
+            if (gestionnaireInterface.bAffichePlan) {
+                if (db.hasFiles()) {
+                    event.acceptTransferModes(TransferMode.ANY);
+                } else {
+                    event.consume();
+                }
+            }
+        });
+
+        // Dropping over surface
+        apPlan.setOnDragDropped((DragEvent event) -> {
+            Dragboard db = event.getDragboard();
+            boolean success = false;
+            if (gestionnaireInterface.bAffichePlan) {
+                if (db.hasFiles()) {
+                    success = true;
+                    String filePath = null;
+                    File[] list = new File[100];
+                    int i = 0;
+                    for (File file1 : db.getFiles()) {
+                        filePath = file1.getAbsolutePath();
+                        list[i] = file1;
+                        i++;
+                    }
+                    int nb = i;
+                    for (int jj = 0; jj < nb; jj++) {
+                        File fichierPlan = list[jj];
+                        String extension = fichierPlan.getName().split("\\.")[1].toLowerCase();
+//                            if (extension.equals("bmp") || extension.equals("jpg")) {
+                        if (extension.equals("jpg") || extension.equals("bmp") || extension.equals("png")) {
+
+                            plans[nombrePlans] = new Plan();
+                            plans[nombrePlans].setImagePlan(fichierPlan.getName());
+                            plans[nombrePlans].setLienPlan(fichierPlan.getAbsolutePath());
+                            File repertoirePlan = new File(repertTemp + File.separator + "images");
+                            if (!repertoirePlan.exists()) {
+                                repertoirePlan.mkdirs();
+                            }
+                            try {
+                                copieFichierRepertoire(fichierPlan.getAbsolutePath(), repertoirePlan.getAbsolutePath());
+                            } catch (IOException ex) {
+                                Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            gestionnairePlan.ajouterPlan();
+                            nombrePlans++;
+                        }
+                    }
+                }
+            }
+            event.setDropCompleted(success);
+            event.consume();
+        });
+
     }
 }
