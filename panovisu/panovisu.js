@@ -1,7 +1,7 @@
 /**
  * @name panoVisu
  * 
- * @version 1.0.15
+ * @version 1.0.21
  * @author LANG Laurent
  */
 
