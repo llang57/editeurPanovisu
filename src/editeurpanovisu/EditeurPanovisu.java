@@ -791,7 +791,7 @@ public class EditeurPanovisu extends Application {
             }
             File[] lstFich = new File[i];
             System.arraycopy(lstFich1, 0, lstFich, 0, i);
-
+            lblDragDrop.setVisible(false);
             for (int ii = 0; ii < lstFich.length; ii++) {
                 File file1 = lstFich[ii];
                 dejaSauve = false;
@@ -1367,12 +1367,20 @@ public class EditeurPanovisu extends Application {
             listeChoixPanoramique.getItems().clear();
             listeChoixPanoramiqueEntree.getItems().clear();
             lblDragDrop.setVisible(true);
+            Node ancNord = (Node) pano.lookup("#Nord");
+            if (ancNord != null) {
+                pano.getChildren().remove(ancNord);
+            }
+            Node ancPoV = (Node) pano.lookup("#PoV");
+            if (ancPoV != null) {
+                pano.getChildren().remove(ancPoV);
+            }
 
             gestionnairePlan.lblDragDropPlan.setVisible(true);
             nombrePlans = 0;
             plans = new Plan[100];
             gestionnairePlan.creeInterface(largeurInterface, hauteurInterface - 60);
-            Pane panneauPlan = gestionnairePlan.tabInterface;            
+            Pane panneauPlan = gestionnairePlan.tabInterface;
             tabPlan.setDisable(!gestionnaireInterface.bAffichePlan);
             tabPlan.setContent(panneauPlan);
             vuePanoramique.setOnDragOver((DragEvent event) -> {
@@ -3703,10 +3711,10 @@ public class EditeurPanovisu extends Application {
             }
         });
 
-        imgNouveauProjet.setOnMouseClicked((MouseEvent t) -> {
+        SPBtnNouvprojet.setOnMouseClicked((MouseEvent t) -> {
             projetsNouveau();
         });
-        imgChargeProjet.setOnMouseClicked((MouseEvent t) -> {
+        SPBtnOuvrirProjet.setOnMouseClicked((MouseEvent t) -> {
             try {
                 try {
                     projetCharge();
@@ -3719,7 +3727,7 @@ public class EditeurPanovisu extends Application {
                         .getName()).log(Level.SEVERE, null, ex);
             }
         });
-        imgSauveProjet.setOnMouseClicked((MouseEvent t) -> {
+        SPBtnSauveProjet.setOnMouseClicked((MouseEvent t) -> {
             try {
                 projetSauve();
 
@@ -3728,17 +3736,17 @@ public class EditeurPanovisu extends Application {
                         .getName()).log(Level.SEVERE, null, ex);
             }
         });
-        imgAjouterPano.setOnMouseClicked((MouseEvent t) -> {
+        SPBtnAjoutePano.setOnMouseClicked((MouseEvent t) -> {
             try {
                 panoramiquesAjouter();
             } catch (InterruptedException ex) {
                 Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-        imgAjouterPlan.setOnMouseClicked((MouseEvent t) -> {
+        SPBtnAjoutePlan.setOnMouseClicked((MouseEvent t) -> {
             planAjouter();
         });
-        imgVisiteGenere.setOnMouseClicked((MouseEvent t) -> {
+        SPBtnGenereVisite.setOnMouseClicked((MouseEvent t) -> {
             try {
                 genereVisite();
 
@@ -3747,10 +3755,10 @@ public class EditeurPanovisu extends Application {
                         .getName()).log(Level.SEVERE, null, ex);
             }
         });
-        imgEqui2Cube.setOnMouseClicked((MouseEvent t) -> {
+        SPBtnEqui2Cube.setOnMouseClicked((MouseEvent t) -> {
             transformationEqui2Cube();
         });
-        imgCube2Equi.setOnMouseClicked((MouseEvent t) -> {
+        SPBtnCube2Equi.setOnMouseClicked((MouseEvent t) -> {
             transformationCube2Equi();
         });
 
