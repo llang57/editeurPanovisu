@@ -481,7 +481,12 @@ public class EquiCubeDialogController {
         btnAjouteFichiers.setLayoutX(259);
         btnAjouteFichiers.setLayoutY(319);
         choixFichier.getChildren().addAll(listeFichier, btnAjouteFichiers);
-        lblDragDropE2C = new Label(rb.getString("transformation.dragDrop"));
+        if (typeTransf.equals(EquiCubeDialogController.EQUI2CUBE)) {
+            lblDragDropE2C = new Label(rb.getString("transformation.dragDropE2C"));
+        }
+        else{
+            lblDragDropE2C = new Label(rb.getString("transformation.dragDropC2E"));            
+        }
         lblDragDropE2C.setMinHeight(listeFichier.getPrefHeight());
         lblDragDropE2C.setMaxHeight(listeFichier.getPrefHeight());
         lblDragDropE2C.setMinWidth(listeFichier.getPrefWidth());

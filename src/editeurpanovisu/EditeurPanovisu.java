@@ -118,6 +118,8 @@ public class EditeurPanovisu extends Application {
     static private Pane pano;
     static private VBox paneChoixPanoramique;
     static private VBox outils;
+    static private TabPane tabPaneEnvironnement;
+    static private Tab tabVisite;
     static private Tab tabInterface;
     static public Tab tabPlan;
     static private Scene scene;
@@ -195,6 +197,10 @@ public class EditeurPanovisu extends Application {
     private MenuItem sauveSousProjet;
     private MenuItem visiteGenere;
     private MenuItem chargeProjet;
+
+    private MenuItem affichageVisite;
+    private MenuItem affichageInterface;
+    public static MenuItem affichagePlan;
 
     private void genereVisite() throws IOException {
         if (!repertSauveChoisi) {
@@ -923,8 +929,8 @@ public class EditeurPanovisu extends Application {
             repertChoix.setInitialDirectory(repert);
             fichProjet = null;
             fichProjet = repertChoix.showOpenDialog(stPrincipal);
-            stPrincipal.setTitle("Panovisu v" + numVersion + " : " + fichProjet.getAbsolutePath());
             if (fichProjet != null) {
+                stPrincipal.setTitle("Panovisu v" + numVersion + " : " + fichProjet.getAbsolutePath());
                 lblDragDrop.setVisible(false);
                 repertoireProjet = fichProjet.getParent();
                 ajouteFichierHisto(fichProjet.getAbsolutePath());
@@ -1381,7 +1387,8 @@ public class EditeurPanovisu extends Application {
             plans = new Plan[100];
             gestionnairePlan.creeInterface(largeurInterface, hauteurInterface - 60);
             Pane panneauPlan = gestionnairePlan.tabInterface;
-            tabPlan.setDisable(!gestionnaireInterface.bAffichePlan);
+            affichagePlan.setDisable(true);
+            tabPlan.setDisable(true);
             tabPlan.setContent(panneauPlan);
             vuePanoramique.setOnDragOver((DragEvent event) -> {
                 Dragboard db = event.getDragboard();
@@ -3395,6 +3402,26 @@ public class EditeurPanovisu extends Application {
         fermerProjet.setAccelerator(KeyCombination.keyCombination("Ctrl+Q"));
         menuProjet.getItems().add(fermerProjet);
         /*
+         Menu affichage
+         */
+        Menu menuAffichage = new Menu(rb.getString("affichage"));
+        menuPrincipal.getMenus().add(menuAffichage);
+        affichageVisite = new MenuItem(rb.getString("main.creationVisite"));
+        affichageVisite.setAccelerator(KeyCombination.keyCombination("Ctrl+1"));
+        menuAffichage.getItems().add(affichageVisite);
+        affichageInterface = new MenuItem(rb.getString("main.creationInterface"));
+        affichageInterface.setAccelerator(KeyCombination.keyCombination("Ctrl+2"));
+        menuAffichage.getItems().add(affichageInterface);
+        affichagePlan = new MenuItem(rb.getString("main.tabPlan"));
+        affichagePlan.setAccelerator(KeyCombination.keyCombination("Ctrl+3"));
+        affichagePlan.setDisable(true);
+        menuAffichage.getItems().add(affichagePlan);
+        SeparatorMenuItem sep3 = new SeparatorMenuItem();
+        menuAffichage.getItems().add(sep3);
+        configTransformation = new MenuItem(rb.getString("affichageConfiguration"));
+        menuAffichage.getItems().add(configTransformation);
+
+        /*
          Menu panoramiques
          */
         menuPanoramique = new Menu(rb.getString("panoramiques"));
@@ -3430,15 +3457,10 @@ public class EditeurPanovisu extends Application {
          */
         menuTransformation = new Menu(rb.getString("outils"));
         menuPrincipal.getMenus().add(menuTransformation);
-
-        cube2EquiTransformation = new MenuItem(rb.getString("outilsCube2Equi"));
-        menuTransformation.getItems().add(cube2EquiTransformation);
         equi2CubeTransformation = new MenuItem(rb.getString("outilsEqui2Cube"));
         menuTransformation.getItems().add(equi2CubeTransformation);
-        SeparatorMenuItem sep3 = new SeparatorMenuItem();
-        menuTransformation.getItems().add(sep3);
-        configTransformation = new MenuItem(rb.getString("outilsConfiguration"));
-        menuTransformation.getItems().add(configTransformation);
+        cube2EquiTransformation = new MenuItem(rb.getString("outilsCube2Equi"));
+        menuTransformation.getItems().add(cube2EquiTransformation);
 
         /*
          Menu Aide
@@ -3468,6 +3490,8 @@ public class EditeurPanovisu extends Application {
         SPBtnNouvprojet.getStyleClass().add("menuBarreOutils");
         SPBtnNouvprojet.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         SPBtnNouvprojet.setPrefHeight(35);
+        SPBtnNouvprojet.setMaxHeight(35);
+        SPBtnNouvprojet.setPadding(new Insets(2));
         SPBtnNouvprojet.setPrefWidth(35);
 
         HBox.setMargin(SPBtnNouvprojet, new Insets(5, 15, 0, 15));
@@ -3484,6 +3508,8 @@ public class EditeurPanovisu extends Application {
         SPBtnOuvrirProjet.getStyleClass().add("menuBarreOutils");
         SPBtnOuvrirProjet.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         SPBtnOuvrirProjet.setPrefHeight(35);
+        SPBtnOuvrirProjet.setMaxHeight(35);
+        SPBtnOuvrirProjet.setPadding(new Insets(2));
         SPBtnOuvrirProjet.setPrefWidth(35);
 
         HBox.setMargin(SPBtnOuvrirProjet, new Insets(5, 15, 0, 0));
@@ -3501,6 +3527,8 @@ public class EditeurPanovisu extends Application {
         SPBtnSauveProjet.getStyleClass().add("menuBarreOutils");
         SPBtnSauveProjet.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         SPBtnSauveProjet.setPrefHeight(35);
+        SPBtnSauveProjet.setMaxHeight(35);
+        SPBtnSauveProjet.setPadding(new Insets(2));
         SPBtnSauveProjet.setPrefWidth(35);
 
         HBox.setMargin(SPBtnSauveProjet, new Insets(5, 15, 0, 0));
@@ -3522,7 +3550,9 @@ public class EditeurPanovisu extends Application {
         SPBtnAjoutePano.getStyleClass().add("menuBarreOutils");
         SPBtnAjoutePano.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         SPBtnAjoutePano.setPrefHeight(35);
-        SPBtnAjoutePano.setPrefWidth(35);
+        SPBtnAjoutePano.setMaxHeight(35);
+        SPBtnAjoutePano.setPadding(new Insets(2));
+       SPBtnAjoutePano.setPrefWidth(35);
 
         HBox.setMargin(SPBtnAjoutePano, new Insets(5, 15, 0, 15));
         imgAjouterPano = new ImageView(new Image("file:" + repertAppli + File.separator + "images/ajoutePanoramique.png"));
@@ -3541,6 +3571,8 @@ public class EditeurPanovisu extends Application {
         SPBtnAjoutePlan.getStyleClass().add("menuBarreOutils");
         SPBtnAjoutePlan.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         SPBtnAjoutePlan.setPrefHeight(35);
+        SPBtnAjoutePlan.setMaxHeight(35);
+        SPBtnAjoutePlan.setPadding(new Insets(2));
         SPBtnAjoutePlan.setPrefWidth(35);
 
         HBox.setMargin(SPBtnAjoutePlan, new Insets(5, 15, 0, 15));
@@ -3560,6 +3592,8 @@ public class EditeurPanovisu extends Application {
         SPBtnGenereVisite.getStyleClass().add("menuBarreOutils");
         SPBtnGenereVisite.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         SPBtnGenereVisite.setPrefHeight(35);
+        SPBtnGenereVisite.setMaxHeight(35);
+        SPBtnGenereVisite.setPadding(new Insets(2));
         SPBtnGenereVisite.setPrefWidth(70);
 
         HBox.setMargin(SPBtnGenereVisite, new Insets(5, 15, 0, 0));
@@ -3581,6 +3615,8 @@ public class EditeurPanovisu extends Application {
         SPBtnEqui2Cube.getStyleClass().add("menuBarreOutils");
         SPBtnEqui2Cube.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         SPBtnEqui2Cube.setPrefHeight(35);
+        SPBtnEqui2Cube.setMaxHeight(35);
+        SPBtnEqui2Cube.setPadding(new Insets(2));
         SPBtnEqui2Cube.setPrefWidth(109);
 
         HBox.setMargin(SPBtnEqui2Cube, new Insets(5, 15, 0, 250));
@@ -3598,6 +3634,8 @@ public class EditeurPanovisu extends Application {
         SPBtnCube2Equi.getStyleClass().add("menuBarreOutils");
         SPBtnCube2Equi.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         SPBtnCube2Equi.setPrefHeight(35);
+        SPBtnCube2Equi.setMaxHeight(35);
+        SPBtnCube2Equi.setPadding(new Insets(2));
         SPBtnCube2Equi.setPrefWidth(109);
 
         HBox.setMargin(SPBtnCube2Equi, new Insets(5, 25, 0, 0));
@@ -3700,6 +3738,22 @@ public class EditeurPanovisu extends Application {
         cube2EquiTransformation.setOnAction((ActionEvent e) -> {
             transformationCube2Equi();
         });
+
+        equi2CubeTransformation.setOnAction((ActionEvent e) -> {
+            transformationEqui2Cube();
+        });
+        affichageVisite.setOnAction((ActionEvent e) -> {
+            tabPaneEnvironnement.getSelectionModel().select(0);
+        });
+        affichageInterface.setOnAction((ActionEvent e) -> {
+            tabPaneEnvironnement.getSelectionModel().select(1);
+        });
+        affichagePlan.setOnAction((ActionEvent e) -> {
+            if (!tabPlan.isDisabled()) {
+                tabPaneEnvironnement.getSelectionModel().select(2);
+            }
+        });
+
         configTransformation.setOnAction((ActionEvent e) -> {
             try {
                 ConfigDialogController cfg = new ConfigDialogController();
@@ -3781,7 +3835,7 @@ public class EditeurPanovisu extends Application {
          */
         VBox root = new VBox();
         creeMenu(primaryStage, root, width);
-        TabPane tabPaneEnvironnement = new TabPane();
+        tabPaneEnvironnement = new TabPane();
 //        tabPaneEnvironnement.setTranslateZ(5);
         tabPaneEnvironnement.setMinHeight(height - 60);
         tabPaneEnvironnement.setMaxHeight(height - 60);
@@ -3789,7 +3843,7 @@ public class EditeurPanovisu extends Application {
         barreStatus.setPrefSize(width + 20, 30);
         barreStatus.setTranslateY(25);
         barreStatus.setStyle("-fx-background-color:#c00;-fx-border-color:#aaa");
-        Tab tabVisite = new Tab();
+        tabVisite = new Tab();
         Pane visualiseur;
         Pane panneauPlan;
         tabInterface = new Tab();

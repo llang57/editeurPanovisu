@@ -1,6 +1,6 @@
 var numeroPano = 0;
 var
-        version = "1.0.15",
+        version = "1.0.25",
         programmeur = "Laurent LANG",
         anneeProgramme = "2014",
         site = "http://lemondea360.fr",

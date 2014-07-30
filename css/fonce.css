@@ -535,8 +535,8 @@ is being used to size a border should also be in pixels.
 .list-view:focused,
 .tree-view:focused,
 .tree-table-view:focused {
-    -fx-background-color: -fx-faint-focus-color, -fx-focus-color, -fx-control-inner-background; 
-    -fx-background-insets: -2, -0.3, 1;
+/*    -fx-background-color: -fx-faint-focus-color, -fx-focus-color, -fx-control-inner-background; 
+    -fx-background-insets: -2, -0.3, 1;*/
 }
 /* ones with grey -fx-background not lighter -fx-control-inner-background */
 .scroll-pane,
@@ -545,7 +545,8 @@ is being used to size a border should also be in pixels.
 }
 .scroll-pane:focused,
 .split-pane:focused {
-    -fx-background-color: -fx-faint-focus-color, -fx-focus-color, -fx-background; 
+    -fx-background-color:derive(-fx-base,5%); 
+    /*-fx-background-color: -fx-faint-focus-color, -fx-focus-color, -fx-background;*/ 
 }
 
 /*******************************************************************************

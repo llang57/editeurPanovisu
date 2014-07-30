@@ -5,6 +5,7 @@
  */
 package editeurpanovisu;
 
+import static editeurpanovisu.EditeurPanovisu.affichagePlan;
 import static editeurpanovisu.EditeurPanovisu.ajouterPlan;
 import static editeurpanovisu.EditeurPanovisu.gestionnairePlan;
 import static editeurpanovisu.EditeurPanovisu.imgAjouterPlan;
@@ -1812,6 +1813,7 @@ public class GestionnaireInterfaceController {
         slOpaciteDiaporama.setValue(diaporamaOpacite);
         if (bAffichePlan) {
             tabPlan.setDisable(!bAffichePlan);
+            affichagePlan.setDisable(!bAffichePlan);
             imgAjouterPlan.setDisable(!bAffichePlan);
             ajouterPlan.setDisable(!bAffichePlan);
             if (bAffichePlan) {
@@ -3897,6 +3899,7 @@ public class GestionnaireInterfaceController {
             if (new_val != null) {
                 bAffichePlan = new_val;
                 tabPlan.setDisable(!bAffichePlan);
+                affichagePlan.setDisable(!bAffichePlan);
                 imgAjouterPlan.setDisable(!bAffichePlan);
                 ajouterPlan.setDisable(!bAffichePlan);
                 if (new_val) {
