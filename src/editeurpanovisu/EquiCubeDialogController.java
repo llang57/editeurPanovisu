@@ -16,6 +16,7 @@ import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -34,6 +35,7 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -50,7 +52,7 @@ import org.controlsfx.dialog.DialogStyle;
 import org.controlsfx.dialog.Dialogs;
 
 /**
- * Controleur pour l'affichage des transformations cube /  Equi 
+ * Controleur pour l'affichage des transformations cube / Equi
  *
  * @author LANG Laurent
  */
@@ -75,6 +77,7 @@ public class EquiCubeDialogController {
     static private Label lblSharpen;
     static private ProgressBar bar;
     static private Label lblTermine;
+    private Label lblDragDropE2C;
 
     final ToggleGroup grpTypeFichier = new ToggleGroup();
     /**
@@ -107,12 +110,13 @@ public class EquiCubeDialogController {
             stEqui2Cube.hide();
         }
     }
-/**
- * 
- * @param nomFichier
- * @param j
- * @throws InterruptedException 
- */
+
+    /**
+     *
+     * @param nomFichier
+     * @param j
+     * @throws InterruptedException
+     */
     private void traiteFichier(String nomFichier, int j) throws InterruptedException {
         System.out.println("Traitement Lancé \"" + nomFichier + "\" => " + j);
 
@@ -297,6 +301,7 @@ public class EquiCubeDialogController {
                 barreImage.setVisible(false);
                 updateMessage("Traitement Terminé");
                 traitementEffectue = true;
+                lblDragDropE2C.setVisible(true);
             }
 
         };
@@ -352,22 +357,24 @@ public class EquiCubeDialogController {
                 }
             }
             if (attention) {
-                Dialogs.create().title("Transformation de fichiers")                       
+                Dialogs.create().title("Transformation de fichiers")
                         .message("Attention au type des fichiers choisis.").style(DialogStyle.CROSS_PLATFORM_DARK)
                         .showError();
 
             }
             lstFich = new File[i];
             System.arraycopy(lstFich1, 0, lstFich, 0, i);
+            lblDragDropE2C.setVisible(false);
         }
 
         return lstFich;
     }
-/**
- * Colorisation de la ListView des images à transformer
- * 
- * @author LANG Laurent
- */
+
+    /**
+     * Colorisation de la ListView des images à transformer
+     *
+     * @author LANG Laurent
+     */
     static class ListeTransformationCouleur extends ListCell<String> {
 
         @Override
@@ -375,10 +382,10 @@ public class EquiCubeDialogController {
             super.updateItem(item, empty);
             if (item != null) {
                 int longueur = item.split(" => ").length;
-                System.out.println("Longueur : "+longueur);
+                System.out.println("Longueur : " + longueur);
                 setTextFill(Color.BLACK);
-                String pre="";
-                String texte=item;
+                String pre = "";
+                String texte = item;
                 if (longueur > 1) {
                     String[] txt = item.split(" => ");
                     switch (txt[0]) {
@@ -392,11 +399,11 @@ public class EquiCubeDialogController {
                             setTextFill(Color.GREEN);
                             break;
                     }
-                    pre=txt[0]+" => ";
-                    texte=txt[1];
+                    pre = txt[0] + " => ";
+                    texte = txt[1];
                 }
-                texte=texte.substring(texte.lastIndexOf(File.separator) + 1, texte.length());
-                setText(pre+texte);
+                texte = texte.substring(texte.lastIndexOf(File.separator) + 1, texte.length());
+                setText(pre + texte);
             }
         }
     }
@@ -474,6 +481,21 @@ public class EquiCubeDialogController {
         btnAjouteFichiers.setLayoutX(279);
         btnAjouteFichiers.setLayoutY(319);
         choixFichier.getChildren().addAll(listeFichier, btnAjouteFichiers);
+        lblDragDropE2C = new Label(rb.getString("transformation.dragDrop"));
+        lblDragDropE2C.setMinHeight(listeFichier.getPrefHeight());
+        lblDragDropE2C.setMaxHeight(listeFichier.getPrefHeight());
+        lblDragDropE2C.setMinWidth(listeFichier.getPrefWidth());
+        lblDragDropE2C.setMaxWidth(listeFichier.getPrefWidth());
+        lblDragDropE2C.setLayoutX(14);
+        lblDragDropE2C.setLayoutY(14);
+        lblDragDropE2C.setAlignment(Pos.CENTER);
+        lblDragDropE2C.setTextFill(Color.web("#c9c7c7"));
+        lblDragDropE2C.setTextAlignment(TextAlignment.CENTER);
+        lblDragDropE2C.setWrapText(true);
+        lblDragDropE2C.setStyle("-fx-font-size : 24px");
+        lblDragDropE2C.setStyle("-fx-background-color : rgba(128,128,128,0.1)");
+        choixFichier.getChildren().add(lblDragDropE2C);
+
         lblType.setLayoutX(14);
         lblType.setLayoutY(14);
         rbBmp.setLayoutX(43);
@@ -669,6 +691,7 @@ public class EquiCubeDialogController {
                     listeFichier.getItems().add(nomFich);
                 }
             }
+            lblDragDropE2C.setVisible(false);
             event.setDropCompleted(success);
             event.consume();
         }
