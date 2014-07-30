@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import static javafx.application.Application.setUserAgentStylesheet;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -27,6 +28,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -54,11 +56,11 @@ public class ConfigDialogController {
 
     private static ComboBox listeLangues;
     private static TextField txtRepert;
-    
-/**
- * 
- * @throws IOException 
- */
+
+    /**
+     *
+     * @throws IOException
+     */
     public void afficheFenetre() throws IOException {
         String chLangueConfig = EditeurPanovisu.locale.getLanguage() + "_" + EditeurPanovisu.locale.getCountry();
         int codeL = 0;
@@ -75,7 +77,6 @@ public class ConfigDialogController {
         myPane.setPrefHeight(400);
         Scene scene2 = new Scene(myPane);
         stConfig.setScene(scene2);
-        stConfig.show();
         VBox fenetre = new VBox();
         Pane VBConfig = new Pane();
         VBConfig.setPrefSize(600, 360);
@@ -142,11 +143,18 @@ public class ConfigDialogController {
         fenetre.getChildren().add(VBConfig);
         btnAnnuler = new Button(rb.getString("config.annuler"));
         btnSauvegarder = new Button(rb.getString("config.sauvegarder"));
-        btnAnnuler.setLayoutX(326);
         btnAnnuler.setLayoutY(10);
-        btnSauvegarder.setLayoutX(423);
         btnSauvegarder.setLayoutY(10);
+        btnSauvegarder.setPrefWidth(200);
+        btnAnnuler.setPrefWidth(100);
         Pboutons.getChildren().addAll(btnAnnuler, btnSauvegarder);
+        stConfig.show();
+//        btnSauvegarder.setAlignment(Pos.CENTER);
+//        btnAnnuler.setAlignment(Pos.CENTER);
+        
+        btnSauvegarder.setLayoutX(VBConfig.getPrefWidth() - btnSauvegarder.getPrefWidth() - 20);
+        btnAnnuler.setLayoutX(VBConfig.getPrefWidth() - btnSauvegarder.getPrefWidth() - btnAnnuler.getPrefWidth() - 40);
+
         fenetre.getChildren().add(Pboutons);
         btnAnnuler.setOnAction((ActionEvent e) -> {
             stConfig.hide();

@@ -158,6 +158,8 @@ public class EditeurPanovisu extends Application {
     static private File fichHistoFichiers;
     private String texteHisto;
     private static String numVersion;
+    private static int hauteurInterface;
+    private static int largeurInterface;
 
     static public GestionnaireInterfaceController gestionnaireInterface = new GestionnaireInterfaceController();
     static public GestionnairePlanController gestionnairePlan = new GestionnairePlanController();
@@ -569,6 +571,8 @@ public class EditeurPanovisu extends Application {
             if (!tfVisite.getText().equals("")) {
                 titreVis = tfVisite.getText() + " - " + titreVis;
             }
+            String fPano1 = "panos/niveau0/" + panoramiquesProjet[0].getNomFichier().substring(panoramiquesProjet[0].getNomFichier().lastIndexOf(File.separator) + 1, panoramiquesProjet[0].getNomFichier().length());
+
             String fichierHTML = "<!DOCTYPE html>\n"
                     + "<html lang=\"fr\">\n"
                     + "    <head>\n"
@@ -576,6 +580,9 @@ public class EditeurPanovisu extends Application {
                     + "        <meta charset=\"utf-8\">\n"
                     + "        <meta name=\"viewport\" content=\"width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0\">\n"
                     + "        <link rel=\"stylesheet\" media=\"screen\" href=\"panovisu/libs/jqueryMenu/jquery.contextMenu.css\" type=\"text/css\"/>\n"
+                    + "        <meta property=\"og:title\" content=\"" + titreVis + "\" />\n"
+                    + "        <meta property=\"og:description\" content=\"Une page créée avec panoVisu Editeur : 100% Libre 100% HTML5\" />\n"
+                    + "        <meta property=\"og:image\" content=\"" + fPano1 + "\" />"
                     + "    </head>\n"
                     + "    <body>\n"
                     + "        <header>\n"
@@ -918,6 +925,7 @@ public class EditeurPanovisu extends Application {
             fichProjet = repertChoix.showOpenDialog(stPrincipal);
             stPrincipal.setTitle("Panovisu v" + numVersion + " : " + fichProjet.getAbsolutePath());
             if (fichProjet != null) {
+                lblDragDrop.setVisible(false);
                 repertoireProjet = fichProjet.getParent();
                 ajouteFichierHisto(fichProjet.getAbsolutePath());
                 repertSauveChoisi = true;
@@ -1055,6 +1063,7 @@ public class EditeurPanovisu extends Application {
                 }
             }
             if ((reponse == Dialog.Actions.YES) || (reponse == Dialog.Actions.NO) || (reponse == null)) {
+                lblDragDrop.setVisible(false);
                 dejaSauve = true;
                 fichProjet = fichProjet1;
                 ajouteFichierHisto(fichProjet.getAbsolutePath());
@@ -1358,7 +1367,14 @@ public class EditeurPanovisu extends Application {
             listeChoixPanoramique.getItems().clear();
             listeChoixPanoramiqueEntree.getItems().clear();
             lblDragDrop.setVisible(true);
+
             gestionnairePlan.lblDragDropPlan.setVisible(true);
+            nombrePlans = 0;
+            plans = new Plan[100];
+            gestionnairePlan.creeInterface(largeurInterface, hauteurInterface - 60);
+            Pane panneauPlan = gestionnairePlan.tabInterface;            
+            tabPlan.setDisable(!gestionnaireInterface.bAffichePlan);
+            tabPlan.setContent(panneauPlan);
             vuePanoramique.setOnDragOver((DragEvent event) -> {
                 Dragboard db = event.getDragboard();
                 if (db.hasFiles()) {
@@ -3750,7 +3766,8 @@ public class EditeurPanovisu extends Application {
     private void creeEnvironnement(Stage primaryStage, int width, int height) throws Exception {
         popUp = new PopUpDialogController();
         primaryStage.setMaximized(true);
-
+        hauteurInterface = height;
+        largeurInterface = width;
         /**
          * Création des éléments constitutifs de l'écran
          */
@@ -3945,7 +3962,7 @@ public class EditeurPanovisu extends Application {
         panneau2.getChildren().setAll(afficheLegende(), coordonnees, pano);
         primaryStage.show();
         popUp.affichePopup();
-        lblDragDrop=new Label(rb.getString("main.dragDrop"));
+        lblDragDrop = new Label(rb.getString("main.dragDrop"));
         lblDragDrop.setMinHeight(vuePanoramique.getPrefHeight());
         lblDragDrop.setMaxHeight(vuePanoramique.getPrefHeight());
         lblDragDrop.setMinWidth(vuePanoramique.getPrefWidth());

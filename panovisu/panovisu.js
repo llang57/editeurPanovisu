@@ -377,9 +377,11 @@ function panovisu(num_pano) {
                     if (object.id === hotSpot[i].id) {
                         haut = Y - 5;
                         gauche = X + 20;
-                        (pointsInteret[i].info !== "") ? $("#infoBulle-" + num_pano).html(pointsInteret[i].info) : $("#infoBulle-" + num_pano).html(pointsInteret[i].contenu);
-                        $("#infoBulle-" + num_pano).css({top: haut + "px", left: gauche + "px"});
-                        $("#infoBulle-" + num_pano).show();
+                        if (pointsInteret[i].info !== "") {
+                            $("#infoBulle-" + num_pano).html(pointsInteret[i].info);
+                            $("#infoBulle-" + num_pano).css({top: haut + "px", left: gauche + "px"});
+                            $("#infoBulle-" + num_pano).show();
+                        }
                     }
 
                 }
@@ -863,13 +865,13 @@ function panovisu(num_pano) {
                         $("#divSuivant-" + num_pano).css({right: largeur});
                     }
                 }
-                else{
+                else {
                     if (vignettesPosition === "left") {
                         $("#divPrecedent-" + num_pano).css({left: 0});
                     }
                     if (vignettesPosition === "right") {
                         $("#divSuivant-" + num_pano).css({right: 0});
-                    }                    
+                    }
                 }
 
             }

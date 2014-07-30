@@ -22,7 +22,7 @@
          </font>
       </Label>
       <Label layoutX="63.0" layoutY="58.0" />
-      <Label layoutX="113.0" layoutY="28.0" text=" - un visualiseur de visites Virtuelle  100% HTML5    100% Libres">
+      <Label layoutX="129.0" layoutY="28.0" text=" - un visualiseur de visites virtuelles  100% HTML5    100% Libre">
          <font>
             <Font size="11.0" />
          </font></Label>
@@ -31,7 +31,7 @@
             <Image url="@images/popUp.png" />
          </image>
       </ImageView>
-      <Label layoutX="23.0" layoutY="260.0" text="développement :  Laurent LANG (2014)">
+      <Label layoutX="23.0" layoutY="260.0" text="Développement :  Laurent LANG (2014)">
          <font>
             <Font size="9.0" />
          </font>
