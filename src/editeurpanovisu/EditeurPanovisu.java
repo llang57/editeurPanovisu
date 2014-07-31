@@ -46,6 +46,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
@@ -53,7 +54,6 @@ import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -120,6 +120,8 @@ public class EditeurPanovisu extends Application {
     static private VBox outils;
     static private TabPane tabPaneEnvironnement;
     static private Tab tabVisite;
+    public AnchorPane paneAttends;
+    static private Label lblCharge;
     static private Tab tabInterface;
     static public Tab tabPlan;
     static private Scene scene;
@@ -394,7 +396,7 @@ public class EditeurPanovisu extends Application {
                     String SNavigation = (gestionnaireInterface.bMasqueNavigation) ? "oui" : "non";
                     String SBoussole = (gestionnaireInterface.bMasqueBoussole) ? "oui" : "non";
                     String STitre = (gestionnaireInterface.bMasqueTitre) ? "oui" : "non";
-                    String SPlan = (gestionnaireInterface.bMasquePlan) ? "oui" : "non";
+                    String splan = (gestionnaireInterface.bMasquePlan) ? "oui" : "non";
                     String SReseaux = (gestionnaireInterface.bMasqueReseaux) ? "oui" : "non";
                     String SVignettes = (gestionnaireInterface.bMasqueVignettes) ? "oui" : "non";
                     contenuFichier += "<!--  Bouton de Masquage -->\n"
@@ -410,7 +412,7 @@ public class EditeurPanovisu extends Application {
                             + "        navigation=\"" + SNavigation + "\"\n"
                             + "        boussole=\"" + SBoussole + "\"\n"
                             + "        titre=\"" + STitre + "\"\n"
-                            + "        plan=\"" + SPlan + "\"\n"
+                            + "        plan=\"" + splan + "\"\n"
                             + "        reseaux=\"" + SReseaux + "\"\n"
                             + "        vignettes=\"" + SVignettes + "\"\n"
                             + "    />\n";
@@ -573,7 +575,7 @@ public class EditeurPanovisu extends Application {
             Dimension tailleEcran = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
             int hauteur = (int) tailleEcran.getHeight() - 200;
             String titreVis = "Panovisu - visualiseur 100% html5 (three.js)";
-            TextField tfVisite = (TextField) paneChoixPanoramique.lookup("#titreVisite");
+            TextArea tfVisite = (TextArea) paneChoixPanoramique.lookup("#titreVisite");
             if (!tfVisite.getText().equals("")) {
                 titreVis = tfVisite.getText() + " - " + titreVis;
             }
@@ -897,6 +899,10 @@ public class EditeurPanovisu extends Application {
      * @throws InterruptedException
      */
     private void projetCharge() throws IOException, InterruptedException {
+        paneAttends.setVisible(true);
+        while (!paneAttends.isVisible()) {
+
+        }
         if (!repertSauveChoisi) {
             repertoireProjet = currentDir;
         }
@@ -921,6 +927,7 @@ public class EditeurPanovisu extends Application {
             }
         }
         if ((reponse == Dialog.Actions.YES) || (reponse == Dialog.Actions.NO) || (reponse == null)) {
+            Thread.sleep(100);
             dejaSauve = true;
             FileChooser repertChoix = new FileChooser();
             FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("fichier panoVisu (*.pvu)", "*.pvu");
@@ -985,6 +992,7 @@ public class EditeurPanovisu extends Application {
 
             }
         }
+        paneAttends.setVisible(false);
     }
 
     private void ajouteFichierHisto(String nomFich) {
@@ -1139,7 +1147,7 @@ public class EditeurPanovisu extends Application {
         stPrincipal.setTitle("Panovisu v" + numVersion + " : " + fichProjet.getAbsolutePath());
 
         String contenuFichier = "";
-        TextField tfVisite = (TextField) paneChoixPanoramique.lookup("#titreVisite");
+        TextArea tfVisite = (TextArea) paneChoixPanoramique.lookup("#titreVisite");
         if (!tfVisite.getText().equals("")) {
             contenuFichier += "[titreVisite=>" + tfVisite.getText() + "]\n";
         }
@@ -1276,7 +1284,7 @@ public class EditeurPanovisu extends Application {
     /**
      *
      */
-    private void aideAPropos() {
+    private void aideapropos() {
         try {
             popUp.affichePopup();
 
@@ -1401,6 +1409,9 @@ public class EditeurPanovisu extends Application {
 
             // Dropping over surface
             vuePanoramique.setOnDragDropped((DragEvent event) -> {
+                Platform.runLater(() -> {
+                    paneAttends.setVisible(true);
+                });
                 Dragboard db = event.getDragboard();
                 boolean success = false;
                 if (db.hasFiles()) {
@@ -1502,6 +1513,9 @@ public class EditeurPanovisu extends Application {
                     }
 
                 }
+                Platform.runLater(() -> {
+                    paneAttends.setVisible(false);
+                });
                 event.setDropCompleted(success);
                 event.consume();
             });
@@ -1552,7 +1566,7 @@ public class EditeurPanovisu extends Application {
         String[] typeElement;
         int nbHS = 0;
         int nbImg = 0;
-        int nbHSPlan = 0;
+        int nbHsplan = 0;
         nombrePlans = -1;
         for (int kk = 1; kk < lignes.length; kk++) {
             ligne = lignes[kk];
@@ -1567,6 +1581,9 @@ public class EditeurPanovisu extends Application {
                     switch (valeur[0]) {
                         case "fichier":
                             String nmFich = valeur[1];
+                            Platform.runLater(() -> {
+                                lblCharge.setText(nmFich);
+                            });
                             File imgPano = new File(nmFich);
                             File imageRepert = new File(repertTemp + File.separator + "panos");
 
@@ -1802,7 +1819,7 @@ public class EditeurPanovisu extends Application {
                             }
                             break;
                         case "nb":
-                            nbHSPlan = Integer.parseInt(valeur[1]);
+                            nbHsplan = Integer.parseInt(valeur[1]);
                             break;
                         case "position":
                             plans[nombrePlans].setPosition(valeur[1]);
@@ -1820,7 +1837,7 @@ public class EditeurPanovisu extends Application {
                             break;
                     }
                 }
-                for (int jj = 0; jj < nbHSPlan; jj++) {
+                for (int jj = 0; jj < nbHsplan; jj++) {
                     kk++;
                     ligne = lignes[kk];
                     elementsLigne = ligne.split(";", 15);
@@ -1884,6 +1901,7 @@ public class EditeurPanovisu extends Application {
                     }
                 }
                 gestionnaireInterface.setTemplate(listeTemplate);
+                gestionnaireInterface.afficheTemplate();
             }
             if ("Plan".equals(typeElement[0])) {
             }
@@ -1891,7 +1909,7 @@ public class EditeurPanovisu extends Application {
                 panoEntree = elementsLigne[0].split("]")[0];
             }
             if ("titreVisite".equals(typeElement[0])) {
-                TextField tfVisite = (TextField) paneChoixPanoramique.lookup("#titreVisite");
+                TextArea tfVisite = (TextArea) paneChoixPanoramique.lookup("#titreVisite");
                 tfVisite.setText(elementsLigne[0].split("]")[0]);
             }
 
@@ -2127,16 +2145,16 @@ public class EditeurPanovisu extends Application {
 
     private AnchorPane afficherListePanosVignettes(int numHS) {
 
-        AnchorPane APlistePano = new AnchorPane();
-        APlistePano.setOpacity(1);
+        AnchorPane aplistePano = new AnchorPane();
+        aplistePano.setOpacity(1);
         Pane fond = new Pane();
         fond.setStyle("-fx-background-color : #bbb;");
         fond.setPrefWidth(540);
         fond.setPrefHeight(((nombrePanoramiques - 2) / 4 + 1) * 65 + 10);
         fond.setMinWidth(540);
         fond.setMinHeight(70);
-        APlistePano.getChildren().add(fond);
-        APlistePano.setStyle("-fx-backgroung-color : #bbb;");
+        aplistePano.getChildren().add(fond);
+        aplistePano.setStyle("-fx-backgroung-color : #bbb;");
         int j = 0;
         ImageView[] IVPano;
         IVPano = new ImageView[nombrePanoramiques];
@@ -2177,23 +2195,23 @@ public class EditeurPanovisu extends Application {
                 panoramiquesProjet[panoActuel].getHotspot(numHS).setNumeroPano(numeroPano);
                 ComboBox cbx = (ComboBox) outils.lookup("#cbpano" + numHS);
                 cbx.setValue(nomPano.substring(nomPano.lastIndexOf(File.separator) + 1, nomPano.lastIndexOf(".")));
-                APlistePano.setVisible(false);
+                aplistePano.setVisible(false);
                 me.consume();
             });
-            APlistePano.getChildren().add(IVPano[j]);
+            aplistePano.getChildren().add(IVPano[j]);
             j++;
 
         }
         int taille = (row + 1) * 65 + 5;
-        APlistePano.setPrefWidth(540);
-        APlistePano.setPrefHeight(taille);
-        APlistePano.setMinWidth(540);
-        APlistePano.setMinHeight(taille);
+        aplistePano.setPrefWidth(540);
+        aplistePano.setPrefHeight(taille);
+        aplistePano.setMinWidth(540);
+        aplistePano.setMinHeight(taille);
         ImageView IVClose = new ImageView(new Image("file:" + repertAppli + File.separator + "images/ferme.png", 20, 20, true, true));
         IVClose.setLayoutX(2);
         IVClose.setLayoutY(5);
         IVClose.setCursor(Cursor.HAND);
-        APlistePano.getChildren().add(IVClose);
+        aplistePano.getChildren().add(IVClose);
         IVClose.setOnMouseClicked((MouseEvent me) -> {
             pano.setCursor(Cursor.CROSSHAIR);
             pano.setOnMouseClicked(
@@ -2203,11 +2221,11 @@ public class EditeurPanovisu extends Application {
             );
 
             panoListeVignette = "";
-            APlistePano.setVisible(false);
+            aplistePano.setVisible(false);
             me.consume();
         });
-        APlistePano.setTranslateZ(2);
-        return APlistePano;
+        aplistePano.setTranslateZ(2);
+        return aplistePano;
     }
 
     /**
@@ -2401,16 +2419,21 @@ public class EditeurPanovisu extends Application {
         numHTML = panoramiquesProjet[panoActuel].getNombreHotspotHTML();
     }
 
-    private AnchorPane afficheLegende() {
-        AnchorPane APLegende = new AnchorPane();
-        APLegende.getStyleClass().add("legendePane");
-        APLegende.setMinWidth(1000);
-        APLegende.setMinHeight(150);
-        APLegende.setPrefWidth(1000);
-        APLegende.setPrefHeight(150);
-        APLegende.setMaxWidth(1000);
-        APLegende.setMaxHeight(150);
-        double positionY = (pano.getLayoutY() + pano.getPrefHeight() + 10);
+    private ScrollPane afficheLegende() {
+        double positionX = 0;
+        double positionY = 0;
+        AnchorPane apLegende = new AnchorPane();
+        ScrollPane spLegende = new ScrollPane(apLegende);
+        spLegende.getStyleClass().add("legendePane");
+
+        apLegende.setMinWidth(1000);
+        apLegende.setMinHeight(150);
+        apLegende.setPrefWidth(1000);
+        apLegende.setPrefHeight(150);
+        apLegende.setMaxWidth(1000);
+        apLegende.setMaxHeight(150);
+        positionY = (pano.getLayoutY() + pano.getPrefHeight() + 10);
+
         Circle point = new Circle(30, 20, 5);
         point.setFill(Color.YELLOW);
         point.setStroke(Color.RED);
@@ -2462,13 +2485,25 @@ public class EditeurPanovisu extends Application {
         lblPoV.setLayoutY(10);
         lblNord.setLayoutX(520);
         lblNord.setLayoutY(50);
-//        APLegende.getChildren().addAll(lblHS, point, lblHSImage, point2, lblHSHTML, point3, lblPoV, polygon, lblNord, ligneNord);
-        APLegende.getChildren().addAll(lblHS, point, lblHSImage, point2, lblPoV, polygon, lblNord, ligneNord);
-        APLegende.setId("legende");
-        APLegende.setVisible(true);
-        APLegende.setLayoutX(50);
-        APLegende.setLayoutY(positionY);
-        return APLegende;
+//        apLegende.getChildren().addAll(lblHS, point, lblHSImage, point2, lblHSHTML, point3, lblPoV, polygon, lblNord, ligneNord);
+        apLegende.getChildren().addAll(lblHS, point, lblHSImage, point2, lblPoV, polygon, lblNord, ligneNord);
+        apLegende.setId("legende");
+        apLegende.setVisible(true);
+        if (largeurMax - 50 < 1004) {
+            spLegende.setPrefWidth(largeurMax - 50);
+            spLegende.setMaxWidth(largeurMax - 50);
+            positionX = 25;
+        } else {
+            spLegende.setPrefWidth(1004);
+            spLegende.setMaxWidth(1004);
+            positionX = (largeurMax - 1004) / 2.d;
+        }
+        spLegende.setLayoutX(positionX);
+        spLegende.setLayoutY(positionY);
+        spLegende.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        spLegende.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+
+        return spLegende;
     }
 
     /**
@@ -3310,6 +3345,7 @@ public class EditeurPanovisu extends Application {
                     texte.add(ligneTexte);
                 }
                 gestionnaireInterface.setTemplate(texte);
+                gestionnaireInterface.afficheTemplate();
 
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(EditeurPanovisu.class
@@ -3336,7 +3372,7 @@ public class EditeurPanovisu extends Application {
      * @param taille
      * @throws Exception
      */
-    private void creeMenu(Stage primaryStage, VBox racine, int taille) throws Exception {
+    private void creeMenu(VBox racine, int taille) throws Exception {
         //Pane myPane = (Pane) FXMLLoader.load(getClass().getResource("menuPrincipal.fxml"));
         VBox myPane = new VBox();
         myPane.setPrefHeight(80);
@@ -3380,7 +3416,6 @@ public class EditeurPanovisu extends Application {
                     nombreHistoFichiers++;
                     menuDerniersFichiers.setOnAction((ActionEvent e) -> {
                         MenuItem mnu = (MenuItem) e.getSource();
-
                         try {
                             try {
                                 projetChargeNom(mnu.getText());
@@ -3486,58 +3521,58 @@ public class EditeurPanovisu extends Application {
         /*
          Bouton nouveau Projet
          */
-        ScrollPane SPBtnNouvprojet = new ScrollPane();
-        SPBtnNouvprojet.getStyleClass().add("menuBarreOutils");
-        SPBtnNouvprojet.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        SPBtnNouvprojet.setPrefHeight(35);
-        SPBtnNouvprojet.setMaxHeight(35);
-        SPBtnNouvprojet.setPadding(new Insets(2));
-        SPBtnNouvprojet.setPrefWidth(35);
+        ScrollPane spBtnNouvprojet = new ScrollPane();
+        spBtnNouvprojet.getStyleClass().add("menuBarreOutils");
+        spBtnNouvprojet.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        spBtnNouvprojet.setPrefHeight(35);
+        spBtnNouvprojet.setMaxHeight(35);
+        spBtnNouvprojet.setPadding(new Insets(2));
+        spBtnNouvprojet.setPrefWidth(35);
 
-        HBox.setMargin(SPBtnNouvprojet, new Insets(5, 15, 0, 15));
+        HBox.setMargin(spBtnNouvprojet, new Insets(5, 15, 0, 15));
         imgNouveauProjet = new ImageView(new Image("file:" + repertAppli + File.separator + "images/nouveauProjet.png"));
-        SPBtnNouvprojet.setContent(imgNouveauProjet);
+        spBtnNouvprojet.setContent(imgNouveauProjet);
         Tooltip t0 = new Tooltip(rb.getString("nouveauProjet"));
         t0.setStyle(tooltipStyle);
-        SPBtnNouvprojet.setTooltip(t0);
-        barreBouton.getChildren().add(SPBtnNouvprojet);
+        spBtnNouvprojet.setTooltip(t0);
+        barreBouton.getChildren().add(spBtnNouvprojet);
         /*
          Bouton ouvrir Projet
          */
-        ScrollPane SPBtnOuvrirProjet = new ScrollPane();
-        SPBtnOuvrirProjet.getStyleClass().add("menuBarreOutils");
-        SPBtnOuvrirProjet.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        SPBtnOuvrirProjet.setPrefHeight(35);
-        SPBtnOuvrirProjet.setMaxHeight(35);
-        SPBtnOuvrirProjet.setPadding(new Insets(2));
-        SPBtnOuvrirProjet.setPrefWidth(35);
+        ScrollPane spBtnOuvrirProjet = new ScrollPane();
+        spBtnOuvrirProjet.getStyleClass().add("menuBarreOutils");
+        spBtnOuvrirProjet.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        spBtnOuvrirProjet.setPrefHeight(35);
+        spBtnOuvrirProjet.setMaxHeight(35);
+        spBtnOuvrirProjet.setPadding(new Insets(2));
+        spBtnOuvrirProjet.setPrefWidth(35);
 
-        HBox.setMargin(SPBtnOuvrirProjet, new Insets(5, 15, 0, 0));
+        HBox.setMargin(spBtnOuvrirProjet, new Insets(5, 15, 0, 0));
         imgChargeProjet = new ImageView(new Image("file:" + repertAppli + File.separator + "images/ouvrirProjet.png"));
-        SPBtnOuvrirProjet.setContent(imgChargeProjet);
+        spBtnOuvrirProjet.setContent(imgChargeProjet);
         Tooltip t1 = new Tooltip(rb.getString("ouvrirProjet"));
         t1.setStyle(tooltipStyle);
-        SPBtnOuvrirProjet.setTooltip(t1);
-        barreBouton.getChildren().add(SPBtnOuvrirProjet);
+        spBtnOuvrirProjet.setTooltip(t1);
+        barreBouton.getChildren().add(spBtnOuvrirProjet);
 
         /*
          Bouton sauve Projet
          */
-        ScrollPane SPBtnSauveProjet = new ScrollPane();
-        SPBtnSauveProjet.getStyleClass().add("menuBarreOutils");
-        SPBtnSauveProjet.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        SPBtnSauveProjet.setPrefHeight(35);
-        SPBtnSauveProjet.setMaxHeight(35);
-        SPBtnSauveProjet.setPadding(new Insets(2));
-        SPBtnSauveProjet.setPrefWidth(35);
+        ScrollPane spBtnSauveProjet = new ScrollPane();
+        spBtnSauveProjet.getStyleClass().add("menuBarreOutils");
+        spBtnSauveProjet.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        spBtnSauveProjet.setPrefHeight(35);
+        spBtnSauveProjet.setMaxHeight(35);
+        spBtnSauveProjet.setPadding(new Insets(2));
+        spBtnSauveProjet.setPrefWidth(35);
 
-        HBox.setMargin(SPBtnSauveProjet, new Insets(5, 15, 0, 0));
+        HBox.setMargin(spBtnSauveProjet, new Insets(5, 15, 0, 0));
         imgSauveProjet = new ImageView(new Image("file:" + repertAppli + File.separator + "images/sauveProjet.png"));
-        SPBtnSauveProjet.setContent(imgSauveProjet);
+        spBtnSauveProjet.setContent(imgSauveProjet);
         Tooltip t2 = new Tooltip(rb.getString("sauverProjet"));
         t2.setStyle(tooltipStyle);
-        SPBtnSauveProjet.setTooltip(t2);
-        barreBouton.getChildren().add(SPBtnSauveProjet);
+        spBtnSauveProjet.setTooltip(t2);
+        barreBouton.getChildren().add(spBtnSauveProjet);
         Separator sepImages = new Separator(Orientation.VERTICAL);
         sepImages.prefHeight(200);
         barreBouton.getChildren().add(sepImages);
@@ -3546,63 +3581,63 @@ public class EditeurPanovisu extends Application {
         /*
          Bouton Ajoute Panoramique
          */
-        ScrollPane SPBtnAjoutePano = new ScrollPane();
-        SPBtnAjoutePano.getStyleClass().add("menuBarreOutils");
-        SPBtnAjoutePano.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        SPBtnAjoutePano.setPrefHeight(35);
-        SPBtnAjoutePano.setMaxHeight(35);
-        SPBtnAjoutePano.setPadding(new Insets(2));
-       SPBtnAjoutePano.setPrefWidth(35);
+        ScrollPane spBtnAjoutePano = new ScrollPane();
+        spBtnAjoutePano.getStyleClass().add("menuBarreOutils");
+        spBtnAjoutePano.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        spBtnAjoutePano.setPrefHeight(35);
+        spBtnAjoutePano.setMaxHeight(35);
+        spBtnAjoutePano.setPadding(new Insets(2));
+        spBtnAjoutePano.setPrefWidth(35);
 
-        HBox.setMargin(SPBtnAjoutePano, new Insets(5, 15, 0, 15));
+        HBox.setMargin(spBtnAjoutePano, new Insets(5, 15, 0, 15));
         imgAjouterPano = new ImageView(new Image("file:" + repertAppli + File.separator + "images/ajoutePanoramique.png"));
-        SPBtnAjoutePano.setContent(imgAjouterPano);
+        spBtnAjoutePano.setContent(imgAjouterPano);
         Tooltip t3 = new Tooltip(rb.getString("ajouterPanoramiques"));
         t3.setStyle(tooltipStyle);
-        SPBtnAjoutePano.setTooltip(t3);
-        barreBouton.getChildren().add(SPBtnAjoutePano);
+        spBtnAjoutePano.setTooltip(t3);
+        barreBouton.getChildren().add(spBtnAjoutePano);
         imgAjouterPano.setDisable(true);
         imgAjouterPano.setOpacity(0.3);
 
         /*
          Bouton Ajoute Panoramique
          */
-        ScrollPane SPBtnAjoutePlan = new ScrollPane();
-        SPBtnAjoutePlan.getStyleClass().add("menuBarreOutils");
-        SPBtnAjoutePlan.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        SPBtnAjoutePlan.setPrefHeight(35);
-        SPBtnAjoutePlan.setMaxHeight(35);
-        SPBtnAjoutePlan.setPadding(new Insets(2));
-        SPBtnAjoutePlan.setPrefWidth(35);
+        ScrollPane spBtnAjoutePlan = new ScrollPane();
+        spBtnAjoutePlan.getStyleClass().add("menuBarreOutils");
+        spBtnAjoutePlan.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        spBtnAjoutePlan.setPrefHeight(35);
+        spBtnAjoutePlan.setMaxHeight(35);
+        spBtnAjoutePlan.setPadding(new Insets(2));
+        spBtnAjoutePlan.setPrefWidth(35);
 
-        HBox.setMargin(SPBtnAjoutePlan, new Insets(5, 15, 0, 15));
+        HBox.setMargin(spBtnAjoutePlan, new Insets(5, 15, 0, 15));
         imgAjouterPlan = new ImageView(new Image("file:" + repertAppli + File.separator + "images/ajoutePlan.png"));
-        SPBtnAjoutePlan.setContent(imgAjouterPlan);
+        spBtnAjoutePlan.setContent(imgAjouterPlan);
         Tooltip t31 = new Tooltip(rb.getString("ajouterPlan"));
         t31.setStyle(tooltipStyle);
-        SPBtnAjoutePlan.setTooltip(t31);
-        barreBouton.getChildren().add(SPBtnAjoutePlan);
+        spBtnAjoutePlan.setTooltip(t31);
+        barreBouton.getChildren().add(spBtnAjoutePlan);
         imgAjouterPlan.setDisable(true);
         imgAjouterPlan.setOpacity(0.3);
 
         /*
          Bouton Génère
          */
-        ScrollPane SPBtnGenereVisite = new ScrollPane();
-        SPBtnGenereVisite.getStyleClass().add("menuBarreOutils");
-        SPBtnGenereVisite.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        SPBtnGenereVisite.setPrefHeight(35);
-        SPBtnGenereVisite.setMaxHeight(35);
-        SPBtnGenereVisite.setPadding(new Insets(2));
-        SPBtnGenereVisite.setPrefWidth(70);
+        ScrollPane spBtnGenereVisite = new ScrollPane();
+        spBtnGenereVisite.getStyleClass().add("menuBarreOutils");
+        spBtnGenereVisite.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        spBtnGenereVisite.setPrefHeight(35);
+        spBtnGenereVisite.setMaxHeight(35);
+        spBtnGenereVisite.setPadding(new Insets(2));
+        spBtnGenereVisite.setPrefWidth(70);
 
-        HBox.setMargin(SPBtnGenereVisite, new Insets(5, 15, 0, 0));
+        HBox.setMargin(spBtnGenereVisite, new Insets(5, 15, 0, 0));
         imgVisiteGenere = new ImageView(new Image("file:" + repertAppli + File.separator + "images/genereVisite.png"));
-        SPBtnGenereVisite.setContent(imgVisiteGenere);
+        spBtnGenereVisite.setContent(imgVisiteGenere);
         Tooltip t4 = new Tooltip(rb.getString("genererVisite"));
         t4.setStyle(tooltipStyle);
-        SPBtnGenereVisite.setTooltip(t4);
-        barreBouton.getChildren().add(SPBtnGenereVisite);
+        spBtnGenereVisite.setTooltip(t4);
+        barreBouton.getChildren().add(spBtnGenereVisite);
         imgVisiteGenere.setDisable(true);
         imgVisiteGenere.setOpacity(0.3);
         Separator sepImages1 = new Separator(Orientation.VERTICAL);
@@ -3611,40 +3646,40 @@ public class EditeurPanovisu extends Application {
         /*
          Bouton equi -> faces de  Cube
          */
-        ScrollPane SPBtnEqui2Cube = new ScrollPane();
-        SPBtnEqui2Cube.getStyleClass().add("menuBarreOutils");
-        SPBtnEqui2Cube.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        SPBtnEqui2Cube.setPrefHeight(35);
-        SPBtnEqui2Cube.setMaxHeight(35);
-        SPBtnEqui2Cube.setPadding(new Insets(2));
-        SPBtnEqui2Cube.setPrefWidth(109);
+        ScrollPane spBtnEqui2Cube = new ScrollPane();
+        spBtnEqui2Cube.getStyleClass().add("menuBarreOutils");
+        spBtnEqui2Cube.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        spBtnEqui2Cube.setPrefHeight(35);
+        spBtnEqui2Cube.setMaxHeight(35);
+        spBtnEqui2Cube.setPadding(new Insets(2));
+        spBtnEqui2Cube.setPrefWidth(109);
 
-        HBox.setMargin(SPBtnEqui2Cube, new Insets(5, 15, 0, 250));
+        HBox.setMargin(spBtnEqui2Cube, new Insets(5, 15, 0, 250));
         imgEqui2Cube = new ImageView(new Image("file:" + repertAppli + File.separator + "images/equi2cube.png"));
-        SPBtnEqui2Cube.setContent(imgEqui2Cube);
+        spBtnEqui2Cube.setContent(imgEqui2Cube);
         Tooltip t6 = new Tooltip(rb.getString("outilsEqui2Cube"));
         t6.setStyle(tooltipStyle);
-        SPBtnEqui2Cube.setTooltip(t6);
-        barreBouton.getChildren().add(SPBtnEqui2Cube);
+        spBtnEqui2Cube.setTooltip(t6);
+        barreBouton.getChildren().add(spBtnEqui2Cube);
 
         /*
          Bouton faces de cube -> equi
          */
-        ScrollPane SPBtnCube2Equi = new ScrollPane();
-        SPBtnCube2Equi.getStyleClass().add("menuBarreOutils");
-        SPBtnCube2Equi.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        SPBtnCube2Equi.setPrefHeight(35);
-        SPBtnCube2Equi.setMaxHeight(35);
-        SPBtnCube2Equi.setPadding(new Insets(2));
-        SPBtnCube2Equi.setPrefWidth(109);
+        ScrollPane spBtnCube2Equi = new ScrollPane();
+        spBtnCube2Equi.getStyleClass().add("menuBarreOutils");
+        spBtnCube2Equi.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        spBtnCube2Equi.setPrefHeight(35);
+        spBtnCube2Equi.setMaxHeight(35);
+        spBtnCube2Equi.setPadding(new Insets(2));
+        spBtnCube2Equi.setPrefWidth(109);
 
-        HBox.setMargin(SPBtnCube2Equi, new Insets(5, 25, 0, 0));
+        HBox.setMargin(spBtnCube2Equi, new Insets(5, 25, 0, 0));
         imgCube2Equi = new ImageView(new Image("file:" + repertAppli + File.separator + "images/cube2equi.png"));
-        SPBtnCube2Equi.setContent(imgCube2Equi);
+        spBtnCube2Equi.setContent(imgCube2Equi);
         Tooltip t5 = new Tooltip(rb.getString("outilsCube2Equi"));
         t5.setStyle(tooltipStyle);
-        SPBtnCube2Equi.setTooltip(t5);
-        barreBouton.getChildren().add(SPBtnCube2Equi);
+        spBtnCube2Equi.setTooltip(t5);
+        barreBouton.getChildren().add(spBtnCube2Equi);
 
         myPane.getChildren().addAll(menuPrincipal, barreBouton);
         racine.getChildren().add(myPane);
@@ -3709,7 +3744,7 @@ public class EditeurPanovisu extends Application {
             planAjouter();
         });
         aPropos.setOnAction((ActionEvent e) -> {
-            aideAPropos();
+            aideapropos();
         });
         aide.setOnAction((ActionEvent e) -> {
             AideDialogController.affiche();
@@ -3765,10 +3800,10 @@ public class EditeurPanovisu extends Application {
             }
         });
 
-        SPBtnNouvprojet.setOnMouseClicked((MouseEvent t) -> {
+        spBtnNouvprojet.setOnMouseClicked((MouseEvent t) -> {
             projetsNouveau();
         });
-        SPBtnOuvrirProjet.setOnMouseClicked((MouseEvent t) -> {
+        spBtnOuvrirProjet.setOnMouseClicked((MouseEvent t) -> {
             try {
                 try {
                     projetCharge();
@@ -3781,7 +3816,7 @@ public class EditeurPanovisu extends Application {
                         .getName()).log(Level.SEVERE, null, ex);
             }
         });
-        SPBtnSauveProjet.setOnMouseClicked((MouseEvent t) -> {
+        spBtnSauveProjet.setOnMouseClicked((MouseEvent t) -> {
             try {
                 projetSauve();
 
@@ -3790,17 +3825,17 @@ public class EditeurPanovisu extends Application {
                         .getName()).log(Level.SEVERE, null, ex);
             }
         });
-        SPBtnAjoutePano.setOnMouseClicked((MouseEvent t) -> {
+        spBtnAjoutePano.setOnMouseClicked((MouseEvent t) -> {
             try {
                 panoramiquesAjouter();
             } catch (InterruptedException ex) {
                 Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-        SPBtnAjoutePlan.setOnMouseClicked((MouseEvent t) -> {
+        spBtnAjoutePlan.setOnMouseClicked((MouseEvent t) -> {
             planAjouter();
         });
-        SPBtnGenereVisite.setOnMouseClicked((MouseEvent t) -> {
+        spBtnGenereVisite.setOnMouseClicked((MouseEvent t) -> {
             try {
                 genereVisite();
 
@@ -3809,10 +3844,10 @@ public class EditeurPanovisu extends Application {
                         .getName()).log(Level.SEVERE, null, ex);
             }
         });
-        SPBtnEqui2Cube.setOnMouseClicked((MouseEvent t) -> {
+        spBtnEqui2Cube.setOnMouseClicked((MouseEvent t) -> {
             transformationEqui2Cube();
         });
-        SPBtnCube2Equi.setOnMouseClicked((MouseEvent t) -> {
+        spBtnCube2Equi.setOnMouseClicked((MouseEvent t) -> {
             transformationCube2Equi();
         });
 
@@ -3828,13 +3863,15 @@ public class EditeurPanovisu extends Application {
     private void creeEnvironnement(Stage primaryStage, int width, int height) throws Exception {
         popUp = new PopUpDialogController();
         primaryStage.setMaximized(true);
+        double largeurOutils = 380;
+
         hauteurInterface = height;
         largeurInterface = width;
         /**
          * Création des éléments constitutifs de l'écran
          */
         VBox root = new VBox();
-        creeMenu(primaryStage, root, width);
+        creeMenu(root, width);
         tabPaneEnvironnement = new TabPane();
 //        tabPaneEnvironnement.setTranslateZ(5);
         tabPaneEnvironnement.setMinHeight(height - 60);
@@ -3857,7 +3894,7 @@ public class EditeurPanovisu extends Application {
 
         HBox hbEnvironnement = new HBox();
         TextArea txtTitrePano;
-        TextField tfTitreVisite;
+        TextArea tfTitreVisite;
         RadioButton radSphere;
         RadioButton radCube;
         CheckBox chkAfficheTitre;
@@ -3895,32 +3932,55 @@ public class EditeurPanovisu extends Application {
         paneChoixPanoramique.setTranslateX(10);
         paneChoixPanoramique.setId("choixPanoramique");
         Label lblTitreVisite = new Label(rb.getString("main.titreVisite"));
-        lblTitreVisite.setPadding(new Insets(15, 5, 5, 5));
-        tfTitreVisite = new TextField();
+        lblTitreVisite.setStyle("-fx-font-size : 10pt;-fx-font-weight : bold;");
+        lblTitreVisite.setPadding(new Insets(15, 5, 5, 0));
+        lblTitreVisite.setMinWidth(largeurOutils - 20);
+        lblTitreVisite.setAlignment(Pos.CENTER);
+
+        tfTitreVisite = new TextArea();
         tfTitreVisite.setId("titreVisite");
-        tfTitreVisite.setPrefSize(300, 25);
-        tfTitreVisite.setMaxSize(300, 25);
-        tfTitreVisite.setMinSize(300, 25);
+        tfTitreVisite.setPrefSize(200, 25);
+        tfTitreVisite.setMaxSize(340, 25);
 
         Separator sepTitre = new Separator(Orientation.HORIZONTAL);
-        sepTitre.setMinHeight(30);
+        sepTitre.setMinHeight(10);
 
         Label lblChoixPanoramiqueEntree = new Label(rb.getString("main.panoEntree"));
-        lblChoixPanoramiqueEntree.setPadding(new Insets(5));
-        lblChoixPanoramiqueEntree.setStyle("-fx-background-color : #000;");
-        lblChoixPanoramiqueEntree.setTextFill(Color.WHITE);
+        lblChoixPanoramiqueEntree.setStyle("-fx-font-size : 10pt;-fx-font-weight : bold;");
+        lblChoixPanoramiqueEntree.setPadding(new Insets(15,5,5,0));
+        lblChoixPanoramiqueEntree.setMinWidth(largeurOutils - 20);
+        lblChoixPanoramiqueEntree.setAlignment(Pos.CENTER);
 
-        lblChoixPanoramique = new Label("Affichage du panoramique");
-        lblChoixPanoramique.setPadding(new Insets(5));
-        lblChoixPanoramique.setStyle("-fx-background-color : #000;");
-        lblChoixPanoramique.setTextFill(Color.WHITE);
+        lblChoixPanoramique = new Label(rb.getString("main.panoAffiche"));
+        lblChoixPanoramique.setStyle("-fx-font-size : 10pt;-fx-font-weight : bold;");
+        lblChoixPanoramique.setPadding(new Insets(10, 5, 5, 0));
+        lblChoixPanoramique.setMinWidth(largeurOutils - 20);
+        lblChoixPanoramique.setAlignment(Pos.CENTER);
+
         Separator sepPano = new Separator(Orientation.HORIZONTAL);
-        sepPano.setMinHeight(30);
+        sepPano.setMinHeight(10);
         listeChoixPanoramique.setVisibleRowCount(10);
+        listeChoixPanoramique.setTranslateX(60);
+        listeChoixPanoramiqueEntree.setTranslateX(60);
+        Separator sepInfo = new Separator(Orientation.HORIZONTAL);
+        Label lblTitrePano = new Label(rb.getString("main.titrePano"));
+        lblTitrePano.setStyle("-fx-font-size : 10pt;-fx-font-weight : bold;");
+        lblTitrePano.setPadding(new Insets(5, 5, 5, 0));
+        lblTitrePano.setMinWidth(largeurOutils - 20);
+        lblTitrePano.setAlignment(Pos.CENTER);
+        txtTitrePano = new TextArea();
+        txtTitrePano.setId("txttitrepano");
+        txtTitrePano.setPrefSize(200, 25);
+        txtTitrePano.setMaxSize(340, 25);
+        txtTitrePano.textProperty().addListener((final ObservableValue<? extends String> observable, final String oldValue, final String newValue) -> {
+            clickBtnValidePano();
+        });
+
         paneChoixPanoramique.getChildren().addAll(
-                lblTitreVisite, tfTitreVisite, sepTitre,
+                lblTitreVisite, tfTitreVisite,
                 lblChoixPanoramiqueEntree, listeChoixPanoramiqueEntree, sepPano,
-                lblChoixPanoramique, listeChoixPanoramique
+                lblChoixPanoramique, listeChoixPanoramique,
+                lblTitrePano, txtTitrePano, sepInfo
         );
         paneChoixPanoramique.setSpacing(10);
         /*
@@ -3934,26 +3994,6 @@ public class EditeurPanovisu extends Application {
         /*
          Création du panneau d'info du panoramique
          */
-        VBox vbInfoPano = new VBox(5);
-        vbInfoPano.setPrefSize(310, 150);
-        Pane myAnchorPane = new Pane(vbInfoPano);
-        Separator sepInfo = new Separator(Orientation.HORIZONTAL);
-        Label lblTitrePano = new Label("Titre du panoramique");
-        lblTitrePano.setPadding(new Insets(30, 5, 5, 5));
-        txtTitrePano = new TextArea();
-        txtTitrePano.setId("txttitrepano");
-        txtTitrePano.setPrefSize(200, 25);
-
-        txtTitrePano.textProperty().addListener((final ObservableValue<? extends String> observable, final String oldValue, final String newValue) -> {
-            clickBtnValidePano();
-        });
-
-        vbInfoPano.getChildren().addAll(
-                sepInfo,
-                lblTitrePano, txtTitrePano
-        );
-
-        paneChoixPanoramique.getChildren().add(myAnchorPane);
 
         vuePanoramique = new ScrollPane();
 
@@ -3969,11 +4009,10 @@ public class EditeurPanovisu extends Application {
         /**
          *
          */
-        double largeurOutils = 380;
         vuePanoramique.setPrefSize(width - largeurOutils - 20, height - 130);
         vuePanoramique.setMaxSize(width - largeurOutils - 20, height - 130);
         vuePanoramique.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        vuePanoramique.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        vuePanoramique.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         vuePanoramique.setTranslateY(5);
 
         //vuePanoramique.setStyle("-fx-background-color : #c00;");
@@ -4020,8 +4059,33 @@ public class EditeurPanovisu extends Application {
         coordonnees.getChildren().setAll(lblLong, lblLat);
         vuePanoramique.setContent(panneau2);
         hbEnvironnement.getChildren().setAll(vuePanoramique, panneauOutils);
-        root.getChildren().addAll(tabPaneEnvironnement);
-        panneau2.getChildren().setAll(afficheLegende(), coordonnees, pano);
+        AnchorPane paneEnv = new AnchorPane();
+        paneAttends = new AnchorPane();
+        paneAttends.setPrefHeight(250);
+        paneAttends.setPrefWidth(400);
+        paneAttends.setStyle("-fx-background-color : #ccc;"
+                + "-fx-border-color: #666;"
+                + "-fx-border-radius: 5px;"
+                + "-fx-border-width: 1px;");
+        paneAttends.setLayoutX((width - 400) / 2.d);
+        paneAttends.setLayoutY((height - 250) / 2.d - 55);
+        ProgressIndicator p1 = new ProgressIndicator();
+        p1.setPrefSize(100, 100);
+        p1.setLayoutX(150);
+        p1.setLayoutY(50);
+        Label lblAttends = new Label(rb.getString("main.attendsChargement"));
+        lblAttends.setMinWidth(400);
+        lblAttends.setAlignment(Pos.CENTER);
+        lblAttends.setLayoutY(20);
+        lblCharge = new Label();
+        lblCharge.setMinWidth(400);
+        lblCharge.setLayoutY(200);
+        paneAttends.getChildren().addAll(lblAttends, p1, lblCharge);
+        paneAttends.setVisible(false);
+        paneEnv.getChildren().addAll(tabPaneEnvironnement, paneAttends);
+//        paneEnv.getChildren().addAll(tabPaneEnvironnement);
+        root.getChildren().addAll(paneEnv);
+        panneau2.getChildren().setAll(coordonnees, pano);
         primaryStage.show();
         popUp.affichePopup();
         lblDragDrop = new Label(rb.getString("main.dragDrop"));
@@ -4035,7 +4099,7 @@ public class EditeurPanovisu extends Application {
         lblDragDrop.setWrapText(true);
         lblDragDrop.setStyle("-fx-font-size:72px");
         lblDragDrop.setTranslateY(-100);
-        panneau2.getChildren().add(lblDragDrop);
+        panneau2.getChildren().addAll(lblDragDrop, afficheLegende());
     }
 
     /**
@@ -4059,6 +4123,7 @@ public class EditeurPanovisu extends Application {
         }
         rb = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", locale);
         stPrincipal = primaryStage;
+        stPrincipal.setResizable(false);
         stPrincipal.setTitle("PanoVisu v" + numVersion);
         //AquaFx.style();
 //        setUserAgentStylesheet(STYLESHEET_MODENA);

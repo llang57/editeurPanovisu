@@ -1415,8 +1415,6 @@ public class GestionnaireInterfaceController {
         bAfficheMasque = false;
         bAfficheVignettes = false;
         bAfficheReseauxSociaux = false;
-        apVisualisation.getChildren().clear();
-        apVisualisation.getChildren().addAll(rbClair, rbSombre, IMVisualisation, txtTitre, imgBoussole, imgAiguille, imgTwitter, imgGoogle, imgFacebook, imgEmail, apVisuVignettes, apVisuplan, ivMasque, apAfficheDiapo, ivDiapo);
 
         for (String chaine : templ) {
             String variable = chaine.split("=")[0];
@@ -1727,7 +1725,11 @@ public class GestionnaireInterfaceController {
 
             }
         }
-
+    }
+  public void afficheTemplate(){
+        apVisualisation.getChildren().clear();
+        apVisualisation.getChildren().addAll(rbClair, rbSombre, IMVisualisation, txtTitre, imgBoussole, imgAiguille, imgTwitter, imgGoogle, imgFacebook, imgEmail, apVisuVignettes, apVisuplan, ivMasque, apAfficheDiapo, ivDiapo);
+        
         txtTitre.setTextFill(Color.valueOf(couleurTitre));
         txtTitre.setStyle("-fx-background-color : " + couleurFondTitre);
         txtTitre.setOpacity(titreOpacite);
