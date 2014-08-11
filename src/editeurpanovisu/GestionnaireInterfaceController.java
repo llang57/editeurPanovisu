@@ -18,10 +18,13 @@ import static editeurpanovisu.EditeurPanovisu.repertTemp;
 import static editeurpanovisu.EditeurPanovisu.tabPlan;
 import static editeurpanovisu.EditeurPanovisu.tooltipStyle;
 import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -29,6 +32,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
@@ -36,6 +40,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
@@ -54,6 +59,7 @@ import javafx.scene.shape.Arc;
 import javafx.scene.shape.ArcType;
 import javafx.scene.text.Font;
 import jfxtras.labs.scene.control.BigDecimalField;
+import org.apache.commons.imaging.ImageReadException;
 
 /**
  * Gestion de l'interface de visualition de la visite virtuelle
@@ -328,13 +334,43 @@ public class GestionnaireInterfaceController {
     private Slider slTailleRadar;
     private Slider slOpaciteRadar;
 
+    /*
+     Variable du MenuContextuel
+     */
+    private AnchorPane apMenuContextuel;
+    private AnchorPane apVisuMenuContextuel;
+    public boolean bAfficheMenuContextuel = false;
+    public boolean bAffichePrecSuivMC = true;
+    public boolean bAffichePlanetNormalMC = true;
+    public boolean bAffichePersMC1 = false;
+    public String stPersLib1 = "";
+    public String stPersURL1 = "";
+    public boolean bAffichePersMC2 = false;
+    public String stPersLib2 = "";
+    public String stPersURL2 = "";
+
+    /*
+     Eléments de l'onglet MenuContextuel
+     */
+    private CheckBox cbAfficheMenuContextuel;
+    private CheckBox cbAffichePrecSuivMC;
+    private CheckBox cbAffichePlanetNormalMC;
+    private CheckBox cbAffichePersMC1;
+    private CheckBox cbAffichePersMC2;
+    private TextArea txtPersLib1;
+    private TextArea txtPersURL1;
+    private TextArea txtPersLib2;
+    private TextArea txtPersURL2;
+
     public Pane tabInterface;
     private HBox hbInterface;
     private AnchorPane apVisualisation;
     private VBox vbOutils;
     private RadioButton rbClair;
     private RadioButton rbSombre;
-    private ImageView IMVisualisation;
+    private RadioButton rbPerso;
+    private ComboBox cbImage;
+    private ImageView ivVisualisation;
     final ToggleGroup grpImage = new ToggleGroup();
     final ToggleGroup grpPosBarre = new ToggleGroup();
     final ToggleGroup grpPosBouss = new ToggleGroup();
@@ -637,34 +673,34 @@ public class GestionnaireInterfaceController {
         double posY = 0;
         switch (positXBoussole) {
             case "left":
-                posX = IMVisualisation.getLayoutX() + dXBoussole;
+                posX = ivVisualisation.getLayoutX() + dXBoussole;
                 break;
             case "right":
-                posX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - dXBoussole - imgBoussole.getFitWidth();
+                posX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - dXBoussole - imgBoussole.getFitWidth();
                 break;
         }
         switch (positYBoussole) {
             case "bottom":
-                posY = IMVisualisation.getLayoutY() + IMVisualisation.getFitHeight() - imgBoussole.getFitHeight() - dYBoussole;
+                posY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - imgBoussole.getFitHeight() - dYBoussole;
                 break;
             case "top":
-                posY = IMVisualisation.getLayoutY() + dYBoussole;
+                posY = ivVisualisation.getLayoutY() + dYBoussole;
                 break;
         }
         switch (positionVignettes) {
             case "bottom":
                 if (positYBoussole.equals("bottom")) {
-                    posY = IMVisualisation.getLayoutY() + IMVisualisation.getFitHeight() - imgBoussole.getFitHeight() - dYBoussole - apVisuVignettes.getPrefHeight();
+                    posY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - imgBoussole.getFitHeight() - dYBoussole - apVisuVignettes.getPrefHeight();
                 }
                 break;
             case "left":
                 if (positXBoussole.equals("left")) {
-                    posX = IMVisualisation.getLayoutX() + dXBoussole + apVisuVignettes.getPrefWidth();
+                    posX = ivVisualisation.getLayoutX() + dXBoussole + apVisuVignettes.getPrefWidth();
                 }
                 break;
             case "right":
                 if (positXBoussole.equals("right")) {
-                    posX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - dXBoussole - imgBoussole.getFitWidth() - apVisuVignettes.getPrefWidth();
+                    posX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - dXBoussole - imgBoussole.getFitWidth() - apVisuVignettes.getPrefWidth();
                 }
                 break;
         }
@@ -677,6 +713,13 @@ public class GestionnaireInterfaceController {
 
         imgBoussole.setOpacity(opaciteBoussole);
         imgBoussole.setVisible(bAfficheBoussole);
+    }
+
+    private void afficheImage(int index) {
+        Image imgAffiche = panoramiquesProjet[index].getImagePanoramique();
+        Rectangle2D viewportRect = new Rectangle2D(200, 0, 800, 600);
+        ivVisualisation.setViewport(viewportRect);
+        ivVisualisation.setImage(imgAffiche);
     }
 
     /**
@@ -696,18 +739,18 @@ public class GestionnaireInterfaceController {
         double posY = 0;
         switch (positXMasque) {
             case "left":
-                posX = IMVisualisation.getLayoutX() + dXMasque;
+                posX = ivVisualisation.getLayoutX() + dXMasque;
                 break;
             case "right":
-                posX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - dXMasque - ivMasque.getFitWidth();
+                posX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - dXMasque - ivMasque.getFitWidth();
                 break;
         }
         switch (positYMasque) {
             case "bottom":
-                posY = IMVisualisation.getLayoutY() + IMVisualisation.getFitHeight() - ivMasque.getFitHeight() - dYMasque;
+                posY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - ivMasque.getFitHeight() - dYMasque;
                 break;
             case "top":
-                posY = IMVisualisation.getLayoutY() + dYMasque;
+                posY = ivVisualisation.getLayoutY() + dYMasque;
                 break;
         }
         ivMasque.setLayoutX(posX);
@@ -750,7 +793,7 @@ public class GestionnaireInterfaceController {
         double dX;
         switch (positXReseauxSociaux) {
             case "left":
-                posX = IMVisualisation.getLayoutX() + dXReseauxSociaux;
+                posX = ivVisualisation.getLayoutX() + dXReseauxSociaux;
                 dX = imgEmail.getFitWidth() + 5;
                 if (bReseauxSociauxTwitter && bAfficheReseauxSociaux) {
                     imgTwitter.setLayoutX(posX);
@@ -776,7 +819,7 @@ public class GestionnaireInterfaceController {
 
                 break;
             case "right":
-                posX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - dXReseauxSociaux - imgEmail.getFitWidth();
+                posX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - dXReseauxSociaux - imgEmail.getFitWidth();
                 dX = -(imgEmail.getFitWidth() + 5);
                 if (bReseauxSociauxEmail && bAfficheReseauxSociaux) {
                     imgEmail.setLayoutX(posX);
@@ -802,10 +845,10 @@ public class GestionnaireInterfaceController {
         }
         switch (positYReseauxSociaux) {
             case "bottom":
-                posY = IMVisualisation.getLayoutY() + IMVisualisation.getFitHeight() - imgEmail.getFitHeight() - dYReseauxSociaux;
+                posY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - imgEmail.getFitHeight() - dYReseauxSociaux;
                 break;
             case "top":
-                posY = IMVisualisation.getLayoutY() + dYReseauxSociaux;
+                posY = ivVisualisation.getLayoutY() + dYReseauxSociaux;
                 break;
         }
         imgTwitter.setLayoutY(posY);
@@ -855,16 +898,16 @@ public class GestionnaireInterfaceController {
             double positionX = 0;
             double positionY = 0;
             if (bAfficheTitre) {
-                positionY = IMVisualisation.getLayoutY() + txtTitre.getHeight();
+                positionY = ivVisualisation.getLayoutY() + txtTitre.getHeight();
             } else {
-                positionY = IMVisualisation.getLayoutY();
+                positionY = ivVisualisation.getLayoutY();
             }
             switch (positionPlan) {
                 case "left":
-                    positionX = IMVisualisation.getLayoutX();
+                    positionX = ivVisualisation.getLayoutX();
                     break;
                 case "right":
-                    positionX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - apVisuplan.getPrefWidth();
+                    positionX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - apVisuplan.getPrefWidth();
                     break;
             }
             ivHSPlan.setLayoutX(80);
@@ -922,33 +965,33 @@ public class GestionnaireInterfaceController {
      *
      */
     private void afficheVignettes() {
-        fondPrecedent.setLayoutX(IMVisualisation.getLayoutX());
-        fondSuivant.setLayoutX(IMVisualisation.getLayoutX() + (IMVisualisation.getFitWidth() - fondPrecedent.getPrefWidth()));
+        fondPrecedent.setLayoutX(ivVisualisation.getLayoutX());
+        fondSuivant.setLayoutX(ivVisualisation.getLayoutX() + (ivVisualisation.getFitWidth() - fondPrecedent.getPrefWidth()));
         String positVert = positionBarre.split(":")[0];
         String positHor = positionBarre.split(":")[1];
         double LX = 0;
         double LY = 0;
         switch (positVert) {
             case "top":
-                LY = IMVisualisation.getLayoutY() + dYBarre;
+                LY = ivVisualisation.getLayoutY() + dYBarre;
                 break;
             case "bottom":
-                LY = IMVisualisation.getLayoutY() + IMVisualisation.getFitHeight() - hbbarreBoutons.getPrefHeight() - dYBarre;
+                LY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - hbbarreBoutons.getPrefHeight() - dYBarre;
                 break;
             case "middle":
-                LY = IMVisualisation.getLayoutY() + (IMVisualisation.getFitHeight() - hbbarreBoutons.getPrefHeight()) / 2.d - dYBarre;
+                LY = ivVisualisation.getLayoutY() + (ivVisualisation.getFitHeight() - hbbarreBoutons.getPrefHeight()) / 2.d - dYBarre;
                 break;
         }
 
         switch (positHor) {
             case "right":
-                LX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - hbbarreBoutons.getPrefWidth() - dXBarre;
+                LX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - hbbarreBoutons.getPrefWidth() - dXBarre;
                 break;
             case "left":
-                LX = IMVisualisation.getLayoutX() + dXBarre;
+                LX = ivVisualisation.getLayoutX() + dXBarre;
                 break;
             case "center":
-                LX = IMVisualisation.getLayoutX() + (IMVisualisation.getFitWidth() - hbbarreBoutons.getPrefWidth()) / 2 + dXBarre;
+                LX = ivVisualisation.getLayoutX() + (ivVisualisation.getFitWidth() - hbbarreBoutons.getPrefWidth()) / 2 + dXBarre;
                 break;
         }
 
@@ -958,18 +1001,18 @@ public class GestionnaireInterfaceController {
         double posY = 0;
         switch (positXBoussole) {
             case "left":
-                posX = IMVisualisation.getLayoutX() + dXBoussole;
+                posX = ivVisualisation.getLayoutX() + dXBoussole;
                 break;
             case "right":
-                posX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - dXBoussole - imgBoussole.getFitWidth();
+                posX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - dXBoussole - imgBoussole.getFitWidth();
                 break;
         }
         switch (positYBoussole) {
             case "bottom":
-                posY = IMVisualisation.getLayoutY() + IMVisualisation.getFitHeight() - imgBoussole.getFitHeight() - dYBoussole;
+                posY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - imgBoussole.getFitHeight() - dYBoussole;
                 break;
             case "top":
-                posY = IMVisualisation.getLayoutY() + dYBoussole;
+                posY = ivVisualisation.getLayoutY() + dYBoussole;
                 break;
         }
 
@@ -982,64 +1025,64 @@ public class GestionnaireInterfaceController {
             switch (positionVignettes) {
                 case "bottom":
                     apVisuVignettes.setPrefHeight(tailleImageVignettes / 2 + 10);
-                    apVisuVignettes.setPrefWidth(IMVisualisation.getFitWidth());
+                    apVisuVignettes.setPrefWidth(ivVisualisation.getFitWidth());
                     apVisuVignettes.setMinHeight(tailleImageVignettes / 2 + 10);
-                    apVisuVignettes.setMinWidth(IMVisualisation.getFitWidth());
-                    apVisuVignettes.setLayoutX(IMVisualisation.getLayoutX());
-                    apVisuVignettes.setLayoutY(IMVisualisation.getLayoutY() + IMVisualisation.getFitHeight() - apVisuVignettes.getPrefHeight());
+                    apVisuVignettes.setMinWidth(ivVisualisation.getFitWidth());
+                    apVisuVignettes.setLayoutX(ivVisualisation.getLayoutX());
+                    apVisuVignettes.setLayoutY(ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - apVisuVignettes.getPrefHeight());
                     if (positVert.equals("bottom")) {
-                        LY = IMVisualisation.getLayoutY() + IMVisualisation.getFitHeight() - hbbarreBoutons.getPrefHeight() - dYBarre - apVisuVignettes.getPrefHeight();
+                        LY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - hbbarreBoutons.getPrefHeight() - dYBarre - apVisuVignettes.getPrefHeight();
                     }
                     if (positYBoussole.equals("bottom")) {
-                        posY = IMVisualisation.getLayoutY() + IMVisualisation.getFitHeight() - imgBoussole.getFitHeight() - dYBoussole - apVisuVignettes.getPrefHeight();
+                        posY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - imgBoussole.getFitHeight() - dYBoussole - apVisuVignettes.getPrefHeight();
                     }
                     break;
                 case "left":
                     if (bAfficheTitre) {
-                        apVisuVignettes.setPrefHeight(IMVisualisation.getFitHeight() - txtTitre.getHeight());
-                        apVisuVignettes.setMinHeight(IMVisualisation.getFitHeight() - txtTitre.getHeight());
+                        apVisuVignettes.setPrefHeight(ivVisualisation.getFitHeight() - txtTitre.getHeight());
+                        apVisuVignettes.setMinHeight(ivVisualisation.getFitHeight() - txtTitre.getHeight());
                     } else {
-                        apVisuVignettes.setPrefHeight(IMVisualisation.getFitHeight());
-                        apVisuVignettes.setMinHeight(IMVisualisation.getFitHeight());
+                        apVisuVignettes.setPrefHeight(ivVisualisation.getFitHeight());
+                        apVisuVignettes.setMinHeight(ivVisualisation.getFitHeight());
                     }
                     apVisuVignettes.setPrefWidth(tailleImageVignettes + 10);
                     apVisuVignettes.setMinWidth(tailleImageVignettes + 10);
-                    apVisuVignettes.setLayoutX(IMVisualisation.getLayoutX());
+                    apVisuVignettes.setLayoutX(ivVisualisation.getLayoutX());
                     if (bAfficheTitre) {
-                        apVisuVignettes.setLayoutY(IMVisualisation.getLayoutY() + txtTitre.getHeight());
+                        apVisuVignettes.setLayoutY(ivVisualisation.getLayoutY() + txtTitre.getHeight());
                     } else {
-                        apVisuVignettes.setLayoutY(IMVisualisation.getLayoutY());
+                        apVisuVignettes.setLayoutY(ivVisualisation.getLayoutY());
                     }
-                    fondPrecedent.setLayoutX(IMVisualisation.getLayoutX() + apVisuVignettes.getPrefWidth());
+                    fondPrecedent.setLayoutX(ivVisualisation.getLayoutX() + apVisuVignettes.getPrefWidth());
                     if (positHor.equals("left")) {
-                        LX = IMVisualisation.getLayoutX() + dXBarre + apVisuVignettes.getPrefWidth();
+                        LX = ivVisualisation.getLayoutX() + dXBarre + apVisuVignettes.getPrefWidth();
                     }
                     if (positXBoussole.equals("left")) {
-                        posX = IMVisualisation.getLayoutX() + dXBoussole + apVisuVignettes.getPrefWidth();
+                        posX = ivVisualisation.getLayoutX() + dXBoussole + apVisuVignettes.getPrefWidth();
                     }
                     break;
                 case "right":
                     if (bAfficheTitre) {
-                        apVisuVignettes.setPrefHeight(IMVisualisation.getFitHeight() - txtTitre.getHeight());
-                        apVisuVignettes.setMinHeight(IMVisualisation.getFitHeight() - txtTitre.getHeight());
+                        apVisuVignettes.setPrefHeight(ivVisualisation.getFitHeight() - txtTitre.getHeight());
+                        apVisuVignettes.setMinHeight(ivVisualisation.getFitHeight() - txtTitre.getHeight());
                     } else {
-                        apVisuVignettes.setPrefHeight(IMVisualisation.getFitHeight());
-                        apVisuVignettes.setMinHeight(IMVisualisation.getFitHeight());
+                        apVisuVignettes.setPrefHeight(ivVisualisation.getFitHeight());
+                        apVisuVignettes.setMinHeight(ivVisualisation.getFitHeight());
                     }
                     apVisuVignettes.setPrefWidth(tailleImageVignettes + 10);
                     apVisuVignettes.setMinWidth(tailleImageVignettes + 10);
-                    apVisuVignettes.setLayoutX(IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - apVisuVignettes.getPrefWidth());
+                    apVisuVignettes.setLayoutX(ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - apVisuVignettes.getPrefWidth());
                     if (bAfficheTitre) {
-                        apVisuVignettes.setLayoutY(IMVisualisation.getLayoutY() + txtTitre.getHeight());
+                        apVisuVignettes.setLayoutY(ivVisualisation.getLayoutY() + txtTitre.getHeight());
                     } else {
-                        apVisuVignettes.setLayoutY(IMVisualisation.getLayoutY());
+                        apVisuVignettes.setLayoutY(ivVisualisation.getLayoutY());
                     }
-                    fondSuivant.setLayoutX(IMVisualisation.getLayoutX() + (IMVisualisation.getFitWidth() - fondPrecedent.getPrefWidth()) - apVisuVignettes.getPrefWidth());
+                    fondSuivant.setLayoutX(ivVisualisation.getLayoutX() + (ivVisualisation.getFitWidth() - fondPrecedent.getPrefWidth()) - apVisuVignettes.getPrefWidth());
                     if (positHor.equals("right")) {
-                        LX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - hbbarreBoutons.getPrefWidth() - dXBarre - apVisuVignettes.getPrefWidth();
+                        LX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - hbbarreBoutons.getPrefWidth() - dXBarre - apVisuVignettes.getPrefWidth();
                     }
                     if (positXBoussole.equals("right")) {
-                        posX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - dXBoussole - imgBoussole.getFitWidth() - apVisuVignettes.getPrefWidth();
+                        posX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - dXBoussole - imgBoussole.getFitWidth() - apVisuVignettes.getPrefWidth();
                     }
                     break;
             }
@@ -1087,7 +1130,7 @@ public class GestionnaireInterfaceController {
     public void afficheBouton(String position, double dX, double dY, double taille, String styleBoutons, String styleHS) {
         String repertBoutons = "file:" + repertBoutonsPrincipal + File.separator + styleBoutons;
         apVisualisation.getChildren().clear();
-        apVisualisation.getChildren().addAll(rbClair, rbSombre, IMVisualisation, txtTitre, imgBoussole, imgAiguille, imgTwitter, imgGoogle, imgFacebook, imgEmail, apVisuVignettes, apVisuplan, fondSuivant, fondPrecedent);
+        apVisualisation.getChildren().addAll(rbClair, rbSombre, rbPerso, cbImage, ivVisualisation, txtTitre, imgBoussole, imgAiguille, imgTwitter, imgGoogle, imgFacebook, imgEmail, apVisuVignettes, apVisuplan, fondSuivant, fondPrecedent);
         txtTitre.setVisible(bAfficheTitre);
         chargeBarre(styleBoutons, styleHS, imageMasque);
         afficheMasque();
@@ -1215,41 +1258,41 @@ public class GestionnaireInterfaceController {
         double LY = 0;
         switch (positVert) {
             case "top":
-                LY = IMVisualisation.getLayoutY() + dY;
+                LY = ivVisualisation.getLayoutY() + dY;
                 break;
             case "bottom":
-                LY = IMVisualisation.getLayoutY() + IMVisualisation.getFitHeight() - hbbarreBoutons.getPrefHeight() - dY;
+                LY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - hbbarreBoutons.getPrefHeight() - dY;
                 break;
             case "middle":
-                LY = IMVisualisation.getLayoutY() + (IMVisualisation.getFitHeight() - hbbarreBoutons.getPrefHeight()) / 2.d - dY;
+                LY = ivVisualisation.getLayoutY() + (ivVisualisation.getFitHeight() - hbbarreBoutons.getPrefHeight()) / 2.d - dY;
                 break;
         }
 
         switch (positHor) {
             case "right":
-                LX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - hbbarreBoutons.getPrefWidth() - dX;
+                LX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - hbbarreBoutons.getPrefWidth() - dX;
                 break;
             case "left":
-                LX = IMVisualisation.getLayoutX() + dX;
+                LX = ivVisualisation.getLayoutX() + dX;
                 break;
             case "center":
-                LX = IMVisualisation.getLayoutX() + (IMVisualisation.getFitWidth() - hbbarreBoutons.getPrefWidth()) / 2 + dX;
+                LX = ivVisualisation.getLayoutX() + (ivVisualisation.getFitWidth() - hbbarreBoutons.getPrefWidth()) / 2 + dX;
                 break;
         }
         switch (positionVignettes) {
             case "bottom":
                 if (positVert.equals("bottom")) {
-                    LY = IMVisualisation.getLayoutY() + IMVisualisation.getFitHeight() - hbbarreBoutons.getPrefHeight() - dYBarre - apVisuVignettes.getPrefHeight();
+                    LY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - hbbarreBoutons.getPrefHeight() - dYBarre - apVisuVignettes.getPrefHeight();
                 }
                 break;
             case "left":
                 if (positHor.equals("left")) {
-                    LX = IMVisualisation.getLayoutX() + dXBarre + apVisuVignettes.getPrefWidth();
+                    LX = ivVisualisation.getLayoutX() + dXBarre + apVisuVignettes.getPrefWidth();
                 }
                 break;
             case "right":
                 if (positHor.equals("right")) {
-                    LX = IMVisualisation.getLayoutX() + IMVisualisation.getFitWidth() - hbbarreBoutons.getPrefWidth() - dXBarre - apVisuVignettes.getPrefWidth();
+                    LX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - hbbarreBoutons.getPrefWidth() - dXBarre - apVisuVignettes.getPrefWidth();
                 }
                 break;
         }
@@ -1402,7 +1445,16 @@ public class GestionnaireInterfaceController {
                 + "opaciteRadar=" + Math.round(opaciteRadar * 100.d) / 100.d + "\n"
                 + "tailleRadar=" + Math.round(tailleRadar) + "\n"
                 + "couleurFondRadar=" + txtCouleurFondRadar + "\n"
-                + "couleurLigneRadar=" + txtCouleurLigneRadar + "\n";
+                + "couleurLigneRadar=" + txtCouleurLigneRadar + "\n"
+                + "afficheMenuContextuel=" + bAfficheMenuContextuel + "\n"
+                + "affichePrecSuivMC=" + bAffichePrecSuivMC + "\n"
+                + "affichePlaneteNormalMC=" + bAffichePlanetNormalMC + "\n"
+                + "affichePersMC1=" + bAffichePersMC1 + "\n"
+                + "affichePersMC2=" + bAffichePersMC2 + "\n"
+                + "txtPersLib1=" + stPersLib1 + "\n"
+                + "txtPersLib2=" + stPersLib2 + "\n"
+                + "txtPersURL1=" + stPersURL1 + "\n"
+                + "txtPersURL2=" + stPersURL2 + "\n";
         return contenuFichier;
     }
 
@@ -1418,7 +1470,11 @@ public class GestionnaireInterfaceController {
 
         for (String chaine : templ) {
             String variable = chaine.split("=")[0];
-            String valeur = chaine.split("=")[1];
+            String valeur = "";
+            if (chaine.split("=").length > 1) {
+                valeur = chaine.split("=")[1];
+            }
+            System.out.println(variable + "=" + valeur);
             switch (variable) {
                 case "couleurTheme":
                     couleurTheme = Color.web(valeur);
@@ -1722,20 +1778,48 @@ public class GestionnaireInterfaceController {
                     txtCouleurLigneRadar = valeur;
                     couleurLigneRadar = Color.valueOf(txtCouleurLigneRadar);
                     break;
+                case "afficheMenuContextuel":
+                    bAfficheMenuContextuel = valeur.equals("true");
+                    break;
+                case "affichePrecSuivMC":
+                    bAffichePrecSuivMC = valeur.equals("true");
+                    break;
+                case "affichePlaneteNormalMC":
+                    bAffichePlanetNormalMC = valeur.equals("true");
+                    break;
+                case "affichePersMC1":
+                    bAffichePersMC1 = valeur.equals("true");
+                    break;
+                case "affichePersMC2":
+                    bAffichePersMC2 = valeur.equals("true");
+                    break;
+                case "txtPersLib1":
+                    stPersLib1 = valeur;
+                    break;
+                case "txtPersLib2":
+                    stPersLib2 = valeur;
+                    break;
+                case "txtPersURL1":
+                    stPersURL1 = valeur;
+                    break;
+                case "txtPersURL2":
+                    stPersURL2 = valeur;
+                    break;
 
             }
         }
     }
-  public void afficheTemplate(){
+
+    public void afficheTemplate() {
         apVisualisation.getChildren().clear();
-        apVisualisation.getChildren().addAll(rbClair, rbSombre, IMVisualisation, txtTitre, imgBoussole, imgAiguille, imgTwitter, imgGoogle, imgFacebook, imgEmail, apVisuVignettes, apVisuplan, ivMasque, apAfficheDiapo, ivDiapo);
-        
+        apVisualisation.getChildren().addAll(rbClair, rbSombre, rbPerso, cbImage, ivVisualisation, txtTitre, imgBoussole, imgAiguille, imgTwitter, imgGoogle, imgFacebook, imgEmail, apVisuVignettes, apVisuplan, ivMasque, apAfficheDiapo, ivDiapo);
+
         txtTitre.setTextFill(Color.valueOf(couleurTitre));
         txtTitre.setStyle("-fx-background-color : " + couleurFondTitre);
         txtTitre.setOpacity(titreOpacite);
-        double taille = (double) titreTaille / 100.d * IMVisualisation.getFitWidth();
+        double taille = (double) titreTaille / 100.d * ivVisualisation.getFitWidth();
         txtTitre.setMinWidth(taille);
-        txtTitre.setLayoutX(IMVisualisation.getLayoutX() + (IMVisualisation.getFitWidth() - txtTitre.getMinWidth()) / 2);
+        txtTitre.setLayoutX(ivVisualisation.getLayoutX() + (ivVisualisation.getFitWidth() - txtTitre.getMinWidth()) / 2);
         Font fonte1 = Font.font(titrePoliceNom, Double.parseDouble(titrePoliceTaille));
         txtTitre.setFont(fonte1);
         txtTitre.setPrefHeight(-1);
@@ -1830,6 +1914,15 @@ public class GestionnaireInterfaceController {
         slTailleRadar.setValue(tailleRadar);
         cpCouleurFondRadar.setValue(couleurFondRadar);
         cpCouleurLigneRadar.setValue(couleurLigneRadar);
+        cbAfficheMenuContextuel.setSelected(bAfficheMenuContextuel);
+        cbAffichePrecSuivMC.setSelected(bAffichePrecSuivMC);
+        cbAffichePlanetNormalMC.setSelected(bAffichePlanetNormalMC);
+        cbAffichePersMC1.setSelected(bAffichePersMC1);
+        cbAffichePersMC2.setSelected(bAffichePersMC2);
+        txtPersLib1.setText(stPersLib1);
+        txtPersLib2.setText(stPersLib2);
+        txtPersURL1.setText(stPersURL1);
+        txtPersURL2.setText(stPersURL2);
         afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
         afficheBoussole();
         afficheMasque();
@@ -1843,15 +1936,33 @@ public class GestionnaireInterfaceController {
         afficheDiaporama();
     }
 
-    public void rafraichit(){
-        afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);        
+    public void rafraichit() {
+
+        cbImage.getItems().clear();
+        if (nombrePanoramiques > 0) {
+            rbPerso.setDisable(false);
+            String imgAffiche = "";
+            if (cbImage.getSelectionModel().getSelectedItem() != null) {
+                imgAffiche = cbImage.getSelectionModel().getSelectedItem().toString();
+            }
+            for (int i = 0; i < nombrePanoramiques; i++) {
+                String nomImage = panoramiquesProjet[i].getNomFichier().substring(
+                        panoramiquesProjet[i].getNomFichier().lastIndexOf(File.separator) + 1,
+                        panoramiquesProjet[i].getNomFichier().length()
+                );
+                cbImage.getItems().add(i, nomImage);
+            }
+            cbImage.setValue(imgAffiche);
+        }
+
+        afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
         afficheBoussole();
         afficheMasque();
         afficheReseauxSociaux();
         affichePlan();
         afficheVignettes();
     }
-    
+
     /**
      *
      * @param width
@@ -1935,17 +2046,17 @@ public class GestionnaireInterfaceController {
         if (tailleMax > 1200) {
             tailleMax = 1200;
         }
-        IMVisualisation = new ImageView(imageClaire);
-        IMVisualisation.setFitWidth(tailleMax);
+        ivVisualisation = new ImageView(imageClaire);
+        ivVisualisation.setFitWidth(tailleMax);
         if (tailleMax * 2.d / 3.d > height - 100) {
-            IMVisualisation.setFitHeight(height - 100);
+            ivVisualisation.setFitHeight(height - 100);
         } else {
-            IMVisualisation.setFitHeight(tailleMax * 2.d / 3.d);
+            ivVisualisation.setFitHeight(tailleMax * 2.d / 3.d);
         }
-        IMVisualisation.setSmooth(true);
-        double LX = (apVisualisation.getPrefWidth() - IMVisualisation.getFitWidth()) / 2;
-        IMVisualisation.setLayoutX(LX);
-        IMVisualisation.setLayoutY(20);
+        ivVisualisation.setSmooth(true);
+        double LX = (apVisualisation.getPrefWidth() - ivVisualisation.getFitWidth()) / 2;
+        ivVisualisation.setLayoutX(LX);
+        ivVisualisation.setLayoutY(20);
         txtTitre.setMinSize(tailleMax, 30);
         txtTitre.setPadding(new Insets(5));
         txtTitre.setStyle("-fx-background-color : #000;-fx-border-radius: 5px;");
@@ -1953,23 +2064,33 @@ public class GestionnaireInterfaceController {
         txtTitre.setOpacity(titreOpacite);
         txtTitre.setTextFill(Color.WHITE);
         txtTitre.setLayoutY(20);
-        txtTitre.setLayoutX(IMVisualisation.getLayoutX() + (IMVisualisation.getFitWidth() - txtTitre.getMinWidth()) / 2);
+        txtTitre.setLayoutX(ivVisualisation.getLayoutX() + (ivVisualisation.getFitWidth() - txtTitre.getMinWidth()) / 2);
         rbClair = new RadioButton("Image claire");
         rbSombre = new RadioButton("Image Sombre");
-        double positrb = IMVisualisation.getFitHeight() + 30;
+        rbPerso = new RadioButton("");
+        cbImage = new ComboBox();
+        cbImage.setDisable(true);
+        double positrb = ivVisualisation.getFitHeight() + 30;
         rbClair.setToggleGroup(grpImage);
         rbSombre.setToggleGroup(grpImage);
+        rbPerso.setToggleGroup(grpImage);
         apVisualisation.getChildren().addAll(rbClair, rbSombre);
         rbClair.setLayoutX(LX + 40);
         rbClair.setLayoutY(positrb);
         rbClair.setSelected(true);
         rbSombre.setLayoutX(LX + 180);
         rbSombre.setLayoutY(positrb);
+        rbPerso.setLayoutX(LX + 320);
+        rbPerso.setLayoutY(positrb);
+        cbImage.setLayoutX(LX + 350);
+        cbImage.setLayoutY(positrb - 3);
+        rbPerso.setDisable(true);
         rbClair.setUserData("claire");
         rbSombre.setUserData("sombre");
+        rbPerso.setUserData("perso");
         imgBoussole = new ImageView(new Image("file:" + repertBoussoles + File.separator + imageBoussole));
         imgAiguille = new ImageView("file:" + repertBoussoles + File.separator + "aiguille.png");
-        apVisualisation.getChildren().add(IMVisualisation);
+        apVisualisation.getChildren().add(ivVisualisation);
         imgTwitter = new ImageView(new Image("file:" + repertReseauxSociaux + File.separator + imageReseauxSociauxTwitter));
         imgGoogle = new ImageView(new Image("file:" + repertReseauxSociaux + File.separator + imageReseauxSociauxGoogle));
         imgFacebook = new ImageView(new Image("file:" + repertReseauxSociaux + File.separator + imageReseauxSociauxFacebook));
@@ -1986,25 +2107,25 @@ public class GestionnaireInterfaceController {
         fondPrecedent.setMaxHeight(64);
         fondSuivant.setMaxWidth(64);
         fondSuivant.setMaxHeight(64);
-        fondPrecedent.setLayoutX(IMVisualisation.getLayoutX());
-        fondPrecedent.setLayoutY(IMVisualisation.getLayoutY() + (IMVisualisation.getFitHeight() - fondPrecedent.getPrefHeight()) / 2);
-        fondSuivant.setLayoutX(IMVisualisation.getLayoutX() + (IMVisualisation.getFitWidth() - fondPrecedent.getPrefWidth()));
-        fondSuivant.setLayoutY(IMVisualisation.getLayoutY() + (IMVisualisation.getFitHeight() - fondSuivant.getPrefHeight()) / 2);
+        fondPrecedent.setLayoutX(ivVisualisation.getLayoutX());
+        fondPrecedent.setLayoutY(ivVisualisation.getLayoutY() + (ivVisualisation.getFitHeight() - fondPrecedent.getPrefHeight()) / 2);
+        fondSuivant.setLayoutX(ivVisualisation.getLayoutX() + (ivVisualisation.getFitWidth() - fondPrecedent.getPrefWidth()));
+        fondSuivant.setLayoutY(ivVisualisation.getLayoutY() + (ivVisualisation.getFitHeight() - fondSuivant.getPrefHeight()) / 2);
         fondSuivant.setVisible(bSuivantPrecedent);
         fondPrecedent.setVisible(bSuivantPrecedent);
         apAfficheDiapo = new AnchorPane();
-        apAfficheDiapo.setPrefWidth(IMVisualisation.getFitWidth());
-        apAfficheDiapo.setPrefHeight(IMVisualisation.getFitHeight());
+        apAfficheDiapo.setPrefWidth(ivVisualisation.getFitWidth());
+        apAfficheDiapo.setPrefHeight(ivVisualisation.getFitHeight());
         apAfficheDiapo.setLayoutX(LX);
         apAfficheDiapo.setLayoutY(20);
         apAfficheDiapo.setTranslateZ(10);
         apAfficheDiapo.setVisible(false);
         ivDiapo = new ImageView(new Image("file:" + repertAppli + File.separator + "images/testImage.png"));
         ivDiapo.setPreserveRatio(false);
-        ivDiapo.setFitHeight(IMVisualisation.getFitHeight() * 0.8);
-        ivDiapo.setFitWidth(IMVisualisation.getFitWidth() * 0.8);
-        ivDiapo.setLayoutX((IMVisualisation.getFitWidth() - ivDiapo.getFitWidth()) / 2 + LX);
-        ivDiapo.setLayoutY((IMVisualisation.getFitHeight() - ivDiapo.getFitHeight()) / 2 + 20);
+        ivDiapo.setFitHeight(ivVisualisation.getFitHeight() * 0.8);
+        ivDiapo.setFitWidth(ivVisualisation.getFitWidth() * 0.8);
+        ivDiapo.setLayoutX((ivVisualisation.getFitWidth() - ivDiapo.getFitWidth()) / 2 + LX);
+        ivDiapo.setLayoutY((ivVisualisation.getFitHeight() - ivDiapo.getFitHeight()) / 2 + 20);
         ivDiapo.setVisible(false);
         apVisualisation.getChildren().addAll(apAfficheDiapo, ivDiapo);
         afficheBoussole();
@@ -2041,6 +2162,7 @@ public class GestionnaireInterfaceController {
         AnchorPane apRS = new AnchorPane();
         AnchorPane apVIG = new AnchorPane();
         AnchorPane apPL = new AnchorPane();
+        AnchorPane apMC = new AnchorPane();
 
         /*
          * *****************************************
@@ -3104,9 +3226,7 @@ public class GestionnaireInterfaceController {
         apVignettes = new AnchorPane();
 
         apVignettes.setLayoutY(40);
-        apVignettes.setPrefHeight(410);
         apVignettes.setMinWidth(vbOutils.getPrefWidth() - 20);
-        Double taillePanelVignettes = apVignettes.getPrefHeight();
         cbAfficheVignettes = new CheckBox(rb.getString("interface.affichageVignettes"));
         cbAfficheVignettes.setLayoutX(10);
         cbAfficheVignettes.setLayoutY(10);
@@ -3185,6 +3305,8 @@ public class GestionnaireInterfaceController {
                 lblTailleVignettes, slTailleVignettes,
                 lblOpaciteVignettes, slOpaciteVignettes
         );
+        apVignettes.setPrefHeight(235 + basImages);
+        Double taillePanelVignettes = apVignettes.getPrefHeight();
         apVignettes.setPrefHeight(0);
         apVignettes.setMaxHeight(0);
         apVignettes.setMinHeight(0);
@@ -3360,6 +3482,130 @@ public class GestionnaireInterfaceController {
         });
 
         /*
+         * ********************************************
+         *     Panel Menu contextuel
+         * ********************************************
+         */
+        apMenuContextuel = new AnchorPane();
+
+        apMenuContextuel.setLayoutY(40);
+        apMenuContextuel.setPrefHeight(280);
+        apMenuContextuel.setMinWidth(vbOutils.getPrefWidth() - 20);
+        Double taillePanelMenuContextuel = apMenuContextuel.getPrefHeight();
+        Label lblPanelMenuContextuel = new Label(rb.getString("interface.menuContextuel"));
+        lblPanelMenuContextuel.setPrefWidth(vbOutils.getPrefWidth());
+        lblPanelMenuContextuel.setStyle("-fx-background-color : #666");
+        lblPanelMenuContextuel.setTextFill(Color.WHITE);
+        lblPanelMenuContextuel.setPadding(new Insets(5));
+        lblPanelMenuContextuel.setLayoutX(10);
+        lblPanelMenuContextuel.setLayoutY(10);
+        ImageView ivBtnPlusMenuContextuel = new ImageView(new Image("file:" + "images/plus.png", 20, 20, true, true));
+        ivBtnPlusMenuContextuel.setLayoutX(vbOutils.getPrefWidth() - 20);
+        ivBtnPlusMenuContextuel.setLayoutY(11);
+        cbAfficheMenuContextuel = new CheckBox(rb.getString("interface.affichageMenuContextuel"));
+        cbAfficheMenuContextuel.setLayoutX(10);
+        cbAfficheMenuContextuel.setLayoutY(10);
+        cbAfficheMenuContextuel.setSelected(bAfficheMenuContextuel);
+        cbAffichePrecSuivMC = new CheckBox(rb.getString("interface.menuContextuelSuivPrec"));
+        cbAffichePrecSuivMC.setLayoutX(10);
+        cbAffichePrecSuivMC.setLayoutY(40);
+        cbAffichePrecSuivMC.setSelected(bAffichePrecSuivMC);
+        cbAffichePlanetNormalMC = new CheckBox(rb.getString("interface.menuContextuelPlaneteNormal"));
+        cbAffichePlanetNormalMC.setLayoutX(10);
+        cbAffichePlanetNormalMC.setLayoutY(70);
+        cbAffichePlanetNormalMC.setSelected(bAffichePlanetNormalMC);
+        cbAffichePersMC1 = new CheckBox(rb.getString("interface.menuContextuelPers1"));
+        cbAffichePersMC1.setLayoutX(10);
+        cbAffichePersMC1.setLayoutY(100);
+        cbAffichePersMC1.setSelected(bAffichePersMC1);
+        Label lblPersLib1 = new Label(rb.getString("interface.menuContextuelLib"));
+        lblPersLib1.setLayoutX(10);
+        lblPersLib1.setLayoutY(130);
+        lblPersLib1.setDisable(true);
+        txtPersLib1 = new TextArea();
+        txtPersLib1.setLayoutX(120);
+        txtPersLib1.setLayoutY(130);
+        txtPersLib1.setPrefSize(220, 20);
+        txtPersLib1.setDisable(true);
+        Label lblPersUrl1 = new Label(rb.getString("interface.menuContextuelURL"));
+        lblPersUrl1.setLayoutX(10);
+        lblPersUrl1.setLayoutY(160);
+        lblPersUrl1.setDisable(true);
+        txtPersURL1 = new TextArea();
+        txtPersURL1.setLayoutX(120);
+        txtPersURL1.setLayoutY(160);
+        txtPersURL1.setPrefSize(220, 20);
+        txtPersURL1.setDisable(true);
+        cbAffichePersMC2 = new CheckBox(rb.getString("interface.menuContextuelPers2"));
+        cbAffichePersMC2.setLayoutX(10);
+        cbAffichePersMC2.setLayoutY(190);
+        cbAffichePersMC2.setDisable(true);
+        Label lblPersLib2 = new Label(rb.getString("interface.menuContextuelLib"));
+        lblPersLib2.setLayoutX(10);
+        lblPersLib2.setLayoutY(220);
+        lblPersLib2.setDisable(true);
+        txtPersLib2 = new TextArea();
+        txtPersLib2.setLayoutX(120);
+        txtPersLib2.setLayoutY(220);
+        txtPersLib2.setPrefSize(220, 20);
+        txtPersLib2.setDisable(true);
+        Label lblPersUrl2 = new Label(rb.getString("interface.menuContextuelURL"));
+        lblPersUrl2.setLayoutX(10);
+        lblPersUrl2.setLayoutY(250);
+        lblPersUrl2.setDisable(true);
+        txtPersURL2 = new TextArea();
+        txtPersURL2.setLayoutX(120);
+        txtPersURL2.setLayoutY(250);
+        txtPersURL2.setPrefSize(220, 20);
+        txtPersURL2.setDisable(true);
+        apMenuContextuel.getChildren().addAll(
+                cbAfficheMenuContextuel,
+                cbAffichePrecSuivMC,
+                cbAffichePlanetNormalMC,
+                cbAffichePersMC1,
+                lblPersLib1, txtPersLib1,
+                lblPersUrl1, txtPersURL1,
+                cbAffichePersMC2,
+                lblPersLib2, txtPersLib2,
+                lblPersUrl2, txtPersURL2
+        );
+
+        apMenuContextuel.setPrefHeight(0);
+        apMenuContextuel.setMaxHeight(0);
+        apMenuContextuel.setMinHeight(0);
+        apMenuContextuel.setVisible(false);
+        lblPanelMenuContextuel.setOnMouseClicked((MouseEvent me) -> {
+            if (apMenuContextuel.isVisible()) {
+                ivBtnPlusMenuContextuel.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
+                apMenuContextuel.setPrefHeight(0);
+                apMenuContextuel.setMaxHeight(0);
+                apMenuContextuel.setMinHeight(0);
+                apMenuContextuel.setVisible(false);
+            } else {
+                ivBtnPlusMenuContextuel.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
+                apMenuContextuel.setPrefHeight(taillePanelMenuContextuel);
+                apMenuContextuel.setMaxHeight(taillePanelMenuContextuel);
+                apMenuContextuel.setMinHeight(taillePanelMenuContextuel);
+                apMenuContextuel.setVisible(true);
+            }
+        });
+        ivBtnPlusMenuContextuel.setOnMouseClicked((MouseEvent me) -> {
+            if (apMenuContextuel.isVisible()) {
+                ivBtnPlusMenuContextuel.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
+                apMenuContextuel.setPrefHeight(0);
+                apMenuContextuel.setMaxHeight(0);
+                apMenuContextuel.setMinHeight(0);
+                apMenuContextuel.setVisible(false);
+            } else {
+                ivBtnPlusMenuContextuel.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
+                apMenuContextuel.setPrefHeight(taillePanelMenuContextuel);
+                apMenuContextuel.setMaxHeight(taillePanelMenuContextuel);
+                apMenuContextuel.setMinHeight(taillePanelMenuContextuel);
+                apMenuContextuel.setVisible(true);
+            }
+        });
+
+        /*
          * *****************************************************
          * Style des Pannels
          * *****************************************************
@@ -3375,6 +3621,7 @@ public class GestionnaireInterfaceController {
         apReseauxSociaux.setStyle(styleap);
         apVignettes.setStyle(styleap);
         apPlan.setStyle(styleap);
+        apMenuContextuel.setStyle(styleap);
         apBoussole.setLayoutX(20);
         apBarreModif.setLayoutX(20);
         apTitre.setLayoutX(20);
@@ -3384,6 +3631,7 @@ public class GestionnaireInterfaceController {
         apReseauxSociaux.setLayoutX(20);
         apVignettes.setLayoutX(20);
         apPlan.setLayoutX(20);
+        apMenuContextuel.setLayoutX(20);
         /*
          * *******************************************************
          *     Ajout des Elements dans les Pannels
@@ -3398,6 +3646,7 @@ public class GestionnaireInterfaceController {
         apRS.getChildren().addAll(apReseauxSociaux, lblPanelReseauxSociaux, ivBtnPlusReseauxSociaux);
         apVIG.getChildren().addAll(apVignettes, lblPanelVignettes, ivBtnPlusVignettes);
         apPL.getChildren().addAll(apPlan, lblPanelPlan, ivBtnPlusPlan);
+        apMC.getChildren().addAll(apMenuContextuel, lblPanelMenuContextuel, ivBtnPlusMenuContextuel);
 
         /*
          * ******************************************************
@@ -3405,7 +3654,7 @@ public class GestionnaireInterfaceController {
          * ******************************************************
          */
         vbOutils.getChildren().addAll(
-                apCoulTheme, apTIT, apDIA, apBB, apPL, apHS, apBOUSS, apMASQ, apRS, apVIG
+                apCoulTheme, apTIT, apDIA, apBB, apPL, apHS, apBOUSS, apMASQ, apRS, apVIG, apMC
         );
 
         /*
@@ -3415,13 +3664,36 @@ public class GestionnaireInterfaceController {
          */
         grpImage.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) -> {
             if (grpImage.getSelectedToggle() != null) {
+                cbImage.setDisable(true);
+                Rectangle2D viewportRect;
                 switch (grpImage.getSelectedToggle().getUserData().toString()) {
                     case "claire":
-                        IMVisualisation.setImage(imageClaire);
+                        viewportRect = new Rectangle2D(0, 0, imageClaire.getWidth(), imageClaire.getHeight());
+                        ivVisualisation.setViewport(viewportRect);
+                        ivVisualisation.setImage(imageClaire);
                         break;
                     case "sombre":
-                        IMVisualisation.setImage(imageSombre);
+                        viewportRect = new Rectangle2D(0, 0, imageSombre.getWidth(), imageSombre.getHeight());
+                        ivVisualisation.setViewport(viewportRect);
+                        ivVisualisation.setImage(imageSombre);
                         break;
+                    case "perso":
+                        cbImage.setDisable(false);
+                        int index = cbImage.getSelectionModel().getSelectedIndex();
+                        if (index != -1) {
+                            afficheImage(index);
+                        }
+                        break;
+                }
+            }
+        });
+
+        cbImage.valueProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue ov, String t, String t1) {
+                int index = cbImage.getSelectionModel().getSelectedIndex();
+                if (index != -1) {
+                    afficheImage(index);
                 }
             }
         });
@@ -3514,9 +3786,9 @@ public class GestionnaireInterfaceController {
         slTaille.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
             if (newValue != null) {
                 titreTaille = (double) newValue;
-                double taille = (double) titreTaille / 100.d * IMVisualisation.getFitWidth();
+                double taille = (double) titreTaille / 100.d * ivVisualisation.getFitWidth();
                 txtTitre.setMinWidth(taille);
-                txtTitre.setLayoutX(IMVisualisation.getLayoutX() + (IMVisualisation.getFitWidth() - txtTitre.getMinWidth()) / 2);
+                txtTitre.setLayoutX(ivVisualisation.getLayoutX() + (ivVisualisation.getFitWidth() - txtTitre.getMinWidth()) / 2);
             }
         });
         cpCouleurTitre.setOnAction((ActionEvent e) -> {
@@ -3929,7 +4201,7 @@ public class GestionnaireInterfaceController {
             if (newValue != null) {
                 double taille = (double) newValue;
                 largeurPlan = taille;
-                lblLargeurPlan.setText(rb.getString("interface.largeurPlan")+" ("+Math.round(taille)+"px )");
+                lblLargeurPlan.setText(rb.getString("interface.largeurPlan") + " (" + Math.round(taille) + "px )");
                 affichePlan();
             }
         });
@@ -3978,6 +4250,54 @@ public class GestionnaireInterfaceController {
             couleurLigneRadar = cpCouleurLigneRadar.getValue();
             txtCouleurLigneRadar = coul;
             affichePlan();
+        });
+
+        /*
+         Listeners Menu Contextuel
+         */
+        cbAfficheMenuContextuel.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+            bAfficheMenuContextuel = new_val;
+        });
+        cbAffichePrecSuivMC.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+            bAffichePrecSuivMC = new_val;
+        });
+        cbAffichePlanetNormalMC.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+            bAffichePlanetNormalMC = new_val;
+        });
+        cbAffichePersMC1.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+            bAffichePersMC1 = new_val;
+            if (bAffichePersMC1) {
+                txtPersLib1.setDisable(false);
+                txtPersURL1.setDisable(false);
+                cbAffichePersMC2.setDisable(false);
+            } else {
+                txtPersLib1.setDisable(true);
+                txtPersURL1.setDisable(true);
+                cbAffichePersMC2.setSelected(false);
+                cbAffichePersMC2.setDisable(true);
+            }
+        });
+        cbAffichePersMC2.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+            bAffichePersMC2 = new_val;
+            if (bAffichePersMC2) {
+                txtPersLib2.setDisable(false);
+                txtPersURL2.setDisable(false);
+            } else {
+                txtPersLib2.setDisable(true);
+                txtPersURL2.setDisable(true);
+            }
+        });
+        txtPersLib1.textProperty().addListener((final ObservableValue<? extends String> observable, final String oldValue, final String newValue) -> {
+            stPersLib1 = txtPersLib1.getText();
+        });
+        txtPersLib2.textProperty().addListener((final ObservableValue<? extends String> observable, final String oldValue, final String newValue) -> {
+            stPersLib2 = txtPersLib2.getText();
+        });
+        txtPersURL1.textProperty().addListener((final ObservableValue<? extends String> observable, final String oldValue, final String newValue) -> {
+            stPersURL1 = txtPersURL1.getText();
+        });
+        txtPersURL2.textProperty().addListener((final ObservableValue<? extends String> observable, final String oldValue, final String newValue) -> {
+            stPersURL2 = txtPersURL2.getText();
         });
 
     }

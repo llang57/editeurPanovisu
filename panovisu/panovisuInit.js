@@ -1,6 +1,5 @@
-var numeroPano = 0;
-var
-        version = "1.0.25",
+var numeroPano = 0,
+        version = "1.0.27",
         programmeur = "Laurent LANG",
         anneeProgramme = "2014",
         site = "http://lemondea360.fr",

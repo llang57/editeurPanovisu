@@ -42,7 +42,9 @@
 }
 
 .context-menu-item {
-    padding: 2px 2px 2px 24px;
+    padding: 2px 4px 4px 24px;
+    margin-left: 25px;
+    border-left: 1px solid #aaa;
     background-color: #EEE;
     position: relative;
     -webkit-user-select: none;

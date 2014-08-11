@@ -237,8 +237,16 @@ function panovisu(num_pano) {
             radarTaille,
             radarOpacite,
             radarCouleurFond,
-            radarCouleurLigne
-
+            radarCouleurLigne,
+            afficheMC,
+            precSuivMC,
+            planetMC,
+            persMC1,
+            persMC2,
+            libMC1,
+            libMC2,
+            urlMC1,
+            urlMC2
             ;
 
 
@@ -2104,9 +2112,52 @@ function panovisu(num_pano) {
 
     function afficheMenuContextuel() {
         console.log(langage + " => " + chainesTraduction[langage].panoSuivant);
+        var item = new Array();
+        for (i = 0; i < 5; i++) {
+            item[i] = {};
+        }
+        if (afficheMC) {
+            if (precSuivMC) {
+                item[0] = {
+                    "suiv": {name: chainesTraduction[langage].panoSuivant, disabled: function(key, opt) {
+                            return suivant;
+                        }},
+                    "prec": {name: chainesTraduction[langage].panoPrecedent, disabled: function(key, opt) {
+                            return precedent;
+                        }}
+                };
+            }
+            if (planetMC) {
+                item[1] = {
+                    "little": {name: chainesTraduction[langage].petitePlanete, disabled: function(key, opt) {
+                            return littleDisabled;
+                        }},
+                    "normal": {name: chainesTraduction[langage].vueNoramale, disabled: function(key, opt) {
+                            return normalDisbled;
+                        }}
+                };
+            }
+            if (persMC1) {
+                item[2] = {"sep1": "---------",
+                    "pers1": {name: libMC1}
+                };
+                if (persMC2) {
+                    item[3] = {
+                        "pers2": {name: libMC2}
+                    };
+                }
+            }
+        }
+        item[4] = {
+            "sep2": "---------",
+            "lm360": {name: "Le Monde à  360°"},
+            "apropos": {name: chainesTraduction[langage].aPropos}
+        };
+        items = $.extend(item[0], item[1], item[2], item[3], item[4]);
         $.contextMenu('destroy');
         $.contextMenu({
             selector: "#panovisu-" + num_pano,
+            className: 'data-title',
             appendTo: "#container-" + num_pano,
             position: function(opt, x, y)
             {
@@ -2119,6 +2170,12 @@ function panovisu(num_pano) {
                 switch (key) {
                     case "lm360":
                         window.open("http://lemondea360.fr");
+                        break;
+                    case "pers1":
+                        window.open(urlMC1);
+                        break;
+                    case "pers2":
+                        window.open(urlMC2);
                         break;
                     case "suiv":
                         pano1.fadeOut(1000, function() {
@@ -2214,24 +2271,9 @@ function panovisu(num_pano) {
                 }
                 isUserInteracting = false;
             },
-            items: {
-                "suiv": {name: chainesTraduction[langage].panoSuivant, disabled: function(key, opt) {
-                        return suivant;
-                    }},
-                "prec": {name: chainesTraduction[langage].panoPrecedent, disabled: function(key, opt) {
-                        return precedent;
-                    }},
-                "little": {name: chainesTraduction[langage].petitePlanete, disabled: function(key, opt) {
-                        return littleDisabled;
-                    }},
-                "normal": {name: chainesTraduction[langage].vueNoramale, disabled: function(key, opt) {
-                        return normalDisbled;
-                    }},
-                "sep1": "---------",
-                "lm360": {name: "Le Monde à 360°"},
-                "apropos": {name: chainesTraduction[langage].aPropos}
-            }
+            items: items
         });
+        $('.data-title').attr('data-menutitle', "PanoVisu " + version);
 
     }
 
@@ -2453,13 +2495,18 @@ function panovisu(num_pano) {
         var image = new Image();
         image.onload = function() {
             var img = path.split("/")[2].split("_")[0];
-            var img2 = panoImage.split("/")[1];
+            var img2 = panoImage.split("/")[1].split("_")[0];
+            console.log("niveau : " + niveau + "  " + img + "==>" + img2);
             if (img === img2) {
                 texture.image = this;
                 texture.needsUpdate = true;
+
                 nbPanoCharges += 1;
+                console.log("nbPano charges : " + nbPanoCharges);
                 if (nbPanoCharges < 6)
+                {
                     $(".panovisuCharge").html(nbPanoCharges + "/6");
+                }
                 else
                 {
                     $(".panovisuCharge").html("&nbsp;");
@@ -2469,7 +2516,7 @@ function panovisu(num_pano) {
                     {
                         niveau += 1;
                         var nomimage = panoImage.split("/")[0] + "/niveau" + niveau + "/" + panoImage.split("/")[1];
-                        //alert(nomimage);
+                        console.log(niveau + "==>" + nomimage);
                         var materials1 = [
                             loadTexture1(nomimage + '_r.jpg', niveau), // droite   x+
                             loadTexture1(nomimage + '_l.jpg', niveau), // gauche   x-
@@ -2582,7 +2629,7 @@ function panovisu(num_pano) {
         maxTextureSize = webgl.getParameter(webgl.MAX_TEXTURE_SIZE);
         if (multiReso === "oui") {
             var nomimage = panoImage.split("/")[0] + "/niveau0/" + panoImage.split("/")[1];
-            //alert(nomimage);
+            console.log(nomimage);
             var materials = [
                 loadTexture1(nomimage + '_r.jpg', 0), // droite   x+
                 loadTexture1(nomimage + '_l.jpg', 0), // gauche   x-
@@ -3043,6 +3090,15 @@ function panovisu(num_pano) {
                     radarCouleurFond = "rgb(128,128,128)";
                     radarCouleurLigne = "rgb(200,200,0)";
                     radarAffiche = false;
+                    afficheMC = true;
+                    precSuivMC = true;
+                    planetMC = true;
+                    persMC1 = false;
+                    persMC2 = false;
+                    libMC1 = "";
+                    libMC2 = "";
+                    urlMC1 = "";
+                    urlMC2 = "";
                     $("#divVignettes-" + num_pano).html("");
                     $("<img>", {id: "gaucheVignettes-" + num_pano, class: "positionVignettes", src: "panovisu/images/interface/gauche.jpg"}).appendTo("#divVignettes-" + num_pano);
                     $("<img>", {id: "droiteVignettes-" + num_pano, class: "positionVignettes", src: "panovisu/images/interface/droite.jpg"}).appendTo("#divVignettes-" + num_pano);
@@ -3102,6 +3158,25 @@ function panovisu(num_pano) {
                     boussoleDY = XMLBoussole.attr('dY') || boussoleDY;
                     boussoleOpacite = parseFloat(XMLBoussole.attr('opacite')) || boussoleOpacite;
                     boussoleAiguille = XMLBoussole.attr('aiguille') || boussoleAiguille;
+                    /*
+                     * 
+                     * 
+                     */
+                    var XMLMenuContextuel = $(d).find('menuContextuel');
+                    bMCAffiche = XMLMenuContextuel.attr('affiche') || "oui";
+                    afficheMC = (bMCAffiche === "oui");
+                    bPrecSuivMC = XMLMenuContextuel.attr('precSuiv') || "oui";
+                    precSuivMC = (bPrecSuivMC === "oui");
+                    bPlaneteMC = XMLMenuContextuel.attr('planete') || "oui";
+                    planetMC = (bPlaneteMC === "oui");
+                    bPersMC1 = XMLMenuContextuel.attr('pers1') || "non";
+                    persMC1 = (bPersMC1 === "oui");
+                    bPersMC2 = XMLMenuContextuel.attr('pers2') || "non";
+                    persMC2 = (bPersMC2 === "oui");
+                    libMC1 = XMLMenuContextuel.attr('lib1') || libMC1;
+                    libMC2 = XMLMenuContextuel.attr('lib2') || libMC2;
+                    urlMC1 = XMLMenuContextuel.attr('url1') || urlMC1;
+                    urlMC2 = XMLMenuContextuel.attr('url2') || urlMC2;
                     /*
                      * Reseaux Sociaux
                      * 
