@@ -1,7 +1,7 @@
 /**
  * @name panoVisu
  * 
- * @version 1.0.21
+ * @version 1.0.29
  * @author LANG Laurent
  */
 
@@ -67,7 +67,7 @@ function panovisu(num_pano) {
     function imageFond() {
         this.fichier = "";
         this.url = "";
-        this.infobulle="";
+        this.infobulle = "";
         this.posX = "";
         this.posY = "";
         this.offsetX = 0;
@@ -2058,6 +2058,7 @@ function panovisu(num_pano) {
         afficheInfoTitre();
         afficheAide();
         if (vignettes) {
+            vigRentre = false;
             if (vignettesPosition === "bottom") {
                 afficheVignettesHorizontales();
             }
@@ -2331,7 +2332,7 @@ function panovisu(num_pano) {
             },
             items: items
         });
-        $('.data-title').attr('data-menutitle', "PanoVisu " + version+" - "+programmeur+"("+anneeProgramme+")");
+        $('.data-title').attr('data-menutitle', "PanoVisu " + version + " - " + programmeur + "(" + anneeProgramme + ")");
 
     }
 
@@ -2439,9 +2440,13 @@ function panovisu(num_pano) {
                 else {
                     var geometry = new THREE.SphereGeometry(405, 40, 40);
                 }
-                var webgl = renderer.context;
-                maxTextureSize = webgl.getParameter(webgl.MAX_TEXTURE_SIZE);
-
+                if (webGL) {
+                    var webgl = renderer.context;
+                    maxTextureSize = webgl.getParameter(webgl.MAX_TEXTURE_SIZE);
+                }
+                else {
+                    maxTextureSize = 4096;
+                }
                 var material = new THREE.MeshBasicMaterial({map: texture, overdraw: true});
                 mesh = new THREE.Mesh(geometry, material);
                 mesh.scale.x = -1;
@@ -2507,8 +2512,13 @@ function panovisu(num_pano) {
                     var geometry = new THREE.SphereGeometry(405, 40, 40);
 
                 }
-                var webgl = renderer.context;
-                maxTextureSize = webgl.getParameter(webgl.MAX_TEXTURE_SIZE);
+                if (webGL) {
+                    var webgl = renderer.context;
+                    maxTextureSize = webgl.getParameter(webgl.MAX_TEXTURE_SIZE);
+                }
+                else {
+                    maxTextureSize = 4096;
+                }
 
                 var material = new THREE.MeshBasicMaterial({map: texture, overdraw: true});
                 mesh = new THREE.Mesh(geometry, material);
@@ -2661,6 +2671,7 @@ function panovisu(num_pano) {
         $(".panovisuCharge").html("0/6");
         camera = new THREE.PerspectiveCamera(fov, pano.width() / pano.height(), 1, 1100);
         scene = new THREE.Scene();
+        webGL=false;
         if (!isReloaded)
         {
             texture_placeholder = document.createElement('canvas');
@@ -2672,6 +2683,7 @@ function panovisu(num_pano) {
             if (supportWebgl())
             {
                 renderer = new THREE.WebGLRenderer();
+                webGL=true;
             }
             else {
                 if (supportCanvas()) {
@@ -2682,8 +2694,13 @@ function panovisu(num_pano) {
                 }
             }
         }
-        var webgl = renderer.context;
-        maxTextureSize = webgl.getParameter(webgl.MAX_TEXTURE_SIZE);
+        if (webGL) {
+            var webgl = renderer.context;
+            maxTextureSize = webgl.getParameter(webgl.MAX_TEXTURE_SIZE);
+        }
+        else {
+            maxTextureSize = 4096;
+        }
         if (multiReso === "oui") {
             var nomimage = panoImage.split("/")[0] + "/niveau0/" + panoImage.split("/")[1];
             console.log(nomimage);
@@ -3558,7 +3575,7 @@ function panovisu(num_pano) {
         $("#divPrecedent-" + num_pano).hide();
         $("#divSuivant-" + num_pano).hide();
         planRentre = false;
-        vigRentre = false;
+        vigRentre = true;
 
 
         /**
