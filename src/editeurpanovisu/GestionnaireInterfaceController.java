@@ -7,6 +7,9 @@ package editeurpanovisu;
 
 import static editeurpanovisu.EditeurPanovisu.affichagePlan;
 import static editeurpanovisu.EditeurPanovisu.ajouterPlan;
+import static editeurpanovisu.EditeurPanovisu.copieFichierRepertoire;
+import static editeurpanovisu.EditeurPanovisu.currentDir;
+import static editeurpanovisu.EditeurPanovisu.gestionnaireInterface;
 import static editeurpanovisu.EditeurPanovisu.gestionnairePlan;
 import static editeurpanovisu.EditeurPanovisu.imgAjouterPlan;
 import static editeurpanovisu.EditeurPanovisu.nombrePanoramiques;
@@ -33,6 +36,8 @@ import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Cursor;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
@@ -58,8 +63,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.ArcType;
 import javafx.scene.text.Font;
+import javafx.stage.FileChooser;
 import jfxtras.labs.scene.control.BigDecimalField;
-import org.apache.commons.imaging.ImageReadException;
 
 /**
  * Gestion de l'interface de visualition de la visite virtuelle
@@ -72,6 +77,9 @@ public class GestionnaireInterfaceController {
             = new ExtensionsFilter(new String[]{".png", ".jpg", ".bmp"});
     private final ExtensionsFilter PNG_FILTER
             = new ExtensionsFilter(new String[]{".png"});
+
+    public ImageFond[] imagesFond = new ImageFond[50];
+    public int nombreImagesFond = 0;
 
     private ResourceBundle rb;
     /**
@@ -117,7 +125,12 @@ public class GestionnaireInterfaceController {
     /**
      *
      */
-    public double tailleBarre = 30;
+    public double tailleBarre = 26;
+
+    /**
+     *
+     */
+    public double espacementBoutons = 4;
 
     /**
      *
@@ -207,6 +220,7 @@ public class GestionnaireInterfaceController {
     private RadioButton rbBoussTopRight;
     private RadioButton rbBoussBottomLeft;
     private RadioButton rbBoussBottomRight;
+    private String repertImagesFond = "";
 
     /**
      *
@@ -333,6 +347,12 @@ public class GestionnaireInterfaceController {
     private ColorPicker cpCouleurLigneRadar;
     private Slider slTailleRadar;
     private Slider slOpaciteRadar;
+    /*
+     Variables Images Fond
+     */
+
+    private AnchorPane apImageFond;
+    private Double taillePanelImageFond;
 
     /*
      Variable du MenuContextuel
@@ -420,6 +440,7 @@ public class GestionnaireInterfaceController {
     private CheckBox cbFS;
     private CheckBox cbSouris;
     private CheckBox cbRotation;
+    private Slider slEspacementBoutons;
     private CheckBox cbSuivantPrecedent;
     private ImageView imgSuivant;
     private ImageView imgPrecedent;
@@ -1127,14 +1148,68 @@ public class GestionnaireInterfaceController {
      * @param styleBoutons
      * @param styleHS
      */
-    public void afficheBouton(String position, double dX, double dY, double taille, String styleBoutons, String styleHS) {
+    public void afficheBouton(String position, double dX, double dY, double taille, String styleBoutons, String styleHS, double espacement) {
         String repertBoutons = "file:" + repertBoutonsPrincipal + File.separator + styleBoutons;
         apVisualisation.getChildren().clear();
-        apVisualisation.getChildren().addAll(rbClair, rbSombre, rbPerso, cbImage, ivVisualisation, txtTitre, imgBoussole, imgAiguille, imgTwitter, imgGoogle, imgFacebook, imgEmail, apVisuVignettes, apVisuplan, fondSuivant, fondPrecedent);
+        apVisualisation.getChildren().addAll(rbClair, rbSombre, rbPerso, cbImage, ivVisualisation);
+        if (nombreImagesFond > 0) {
+            for (int i = 0; i < nombreImagesFond; i++) {
+                ImageView ivImageFond = new ImageView(imagesFond[i].getImgFond());
+                ivImageFond.setFitWidth(imagesFond[i].getTailleX());
+                ivImageFond.setFitHeight(imagesFond[i].getTailleY());
+                double posX = 0, posY = 0;
+                switch (imagesFond[i].getPosX()) {
+                    case "left":
+                        posX = imagesFond[i].getOffsetX() + ivVisualisation.getLayoutX();
+                        break;
+                    case "center":
+                        posX = ivVisualisation.getLayoutX() + (ivVisualisation.getFitWidth() - imagesFond[i].getTailleX()) / 2 + imagesFond[i].getOffsetX();
+                        break;
+                    case "right":
+                        posX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - imagesFond[i].getOffsetX() - imagesFond[i].getTailleX();
+                        break;
+                }
+                switch (imagesFond[i].getPosY()) {
+                    case "top":
+                        posY = imagesFond[i].getOffsetY() + ivVisualisation.getLayoutY();
+                        break;
+                    case "middle":
+                        posY = ivVisualisation.getLayoutY() + (ivVisualisation.getFitHeight() - imagesFond[i].getTailleY()) / 2 + imagesFond[i].getOffsetY();
+                        break;
+                    case "bottom":
+                        posY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - imagesFond[i].getOffsetY() - imagesFond[i].getTailleY();
+                        break;
+                }
+                if (bAfficheVignettes) {
+                    switch (positionVignettes) {
+                        case "bottom":
+                            if (imagesFond[i].getPosY().equals("bottom")) {
+                                posY -= (tailleImageVignettes / 2 + 6);
+                            }
+                            break;
+                        case "left":
+                            if (imagesFond[i].getPosX().equals("left")) {
+                                posX += tailleImageVignettes + 10;
+                            }
+                            break;
+                        case "right":
+                            if (imagesFond[i].getPosX().equals("right")) {
+                                posX -= (tailleImageVignettes + 10);
+                            }
+                            break;
+                    }
+                }
+                ivImageFond.setLayoutX(posX);
+                ivImageFond.setLayoutY(posY);
+                ivImageFond.setOpacity(imagesFond[i].getOpacite());
+                apVisualisation.getChildren().add(ivImageFond);
+            }
+        }
+        apVisualisation.getChildren().addAll(txtTitre, imgBoussole, imgAiguille, imgTwitter, imgGoogle, imgFacebook, imgEmail, apVisuVignettes, apVisuplan, fondSuivant, fondPrecedent);
         txtTitre.setVisible(bAfficheTitre);
         chargeBarre(styleBoutons, styleHS, imageMasque);
         afficheMasque();
-        hbbarreBoutons = new HBox();
+        hbbarreBoutons = new HBox(espacement);
         hbbarreBoutons.setId("barreBoutons");
         hbbarreBoutons.setVisible(toggleBarreVisibilite.equals("oui"));
         hbbarreBoutons.setTranslateZ(1);
@@ -1174,17 +1249,16 @@ public class GestionnaireInterfaceController {
                 nombreBoutons -= 1;
             }
         }
-        double tailleBarre = (double) nombreBoutons * (double) taille;
+        double tailleBarre = (double) nombreBoutons * ((double) taille + espacement);
         hbbarreBoutons.setPrefWidth(tailleBarre);
         hbbarreBoutons.setPrefHeight((double) taille);
         hbbarreBoutons.setMinWidth(tailleBarre);
         hbbarreBoutons.setMinHeight((double) taille);
         hbbarreBoutons.setMaxWidth(tailleBarre);
         hbbarreBoutons.setMaxHeight((double) taille);
-        hbDeplacements = new HBox();
-        hbZoom = new HBox();
-        hbOutils = new HBox();
-
+        hbDeplacements = new HBox(espacement);
+        hbZoom = new HBox(espacement);
+        hbOutils = new HBox(espacement);
         hbbarreBoutons.getChildren().addAll(hbDeplacements, hbZoom, hbOutils);
         if (toggleBarreDeplacements.equals("non")) {
             hbbarreBoutons.getChildren().remove(hbDeplacements);
@@ -1279,24 +1353,25 @@ public class GestionnaireInterfaceController {
                 LX = ivVisualisation.getLayoutX() + (ivVisualisation.getFitWidth() - hbbarreBoutons.getPrefWidth()) / 2 + dX;
                 break;
         }
-        switch (positionVignettes) {
-            case "bottom":
-                if (positVert.equals("bottom")) {
-                    LY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - hbbarreBoutons.getPrefHeight() - dYBarre - apVisuVignettes.getPrefHeight();
-                }
-                break;
-            case "left":
-                if (positHor.equals("left")) {
-                    LX = ivVisualisation.getLayoutX() + dXBarre + apVisuVignettes.getPrefWidth();
-                }
-                break;
-            case "right":
-                if (positHor.equals("right")) {
-                    LX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - hbbarreBoutons.getPrefWidth() - dXBarre - apVisuVignettes.getPrefWidth();
-                }
-                break;
+        if (bAfficheVignettes) {
+            switch (positionVignettes) {
+                case "bottom":
+                    if (positVert.equals("bottom")) {
+                        LY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - hbbarreBoutons.getPrefHeight() - dYBarre - apVisuVignettes.getPrefHeight();
+                    }
+                    break;
+                case "left":
+                    if (positHor.equals("left")) {
+                        LX = ivVisualisation.getLayoutX() + dXBarre + apVisuVignettes.getPrefWidth();
+                    }
+                    break;
+                case "right":
+                    if (positHor.equals("right")) {
+                        LX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - hbbarreBoutons.getPrefWidth() - dXBarre - apVisuVignettes.getPrefWidth();
+                    }
+                    break;
+            }
         }
-
         hbbarreBoutons.setLayoutX(LX);
         hbbarreBoutons.setLayoutY(LY);
     }
@@ -1389,6 +1464,7 @@ public class GestionnaireInterfaceController {
                 + "rotation=" + toggleBoutonRotation + "\n"
                 + "FS=" + toggleBoutonFS + "\n"
                 + "souris=" + toggleBoutonSouris + "\n"
+                + "espacementBoutons=" + espacementBoutons + "\n"
                 + "afficheTitre=" + bAfficheTitre + "\n"
                 + "titrePolice=" + titrePoliceNom + "\n"
                 + "titrePoliceTaille=" + titrePoliceTaille + "\n"
@@ -1454,7 +1530,24 @@ public class GestionnaireInterfaceController {
                 + "txtPersLib1=" + stPersLib1 + "\n"
                 + "txtPersLib2=" + stPersLib2 + "\n"
                 + "txtPersURL1=" + stPersURL1 + "\n"
-                + "txtPersURL2=" + stPersURL2 + "\n";
+                + "txtPersURL2=" + stPersURL2 + "\n"
+                + "nombreImagesFond=" + nombreImagesFond + "\n";
+        for (int i = 0; i < nombreImagesFond; i++) {
+            contenuFichier += "<";
+            contenuFichier += "image=" + imagesFond[i].getFichierImage() + "#";
+            contenuFichier += "posX=" + imagesFond[i].getPosX() + "#";
+            contenuFichier += "posY=" + imagesFond[i].getPosY() + "#";
+            contenuFichier += "offsetX=" + imagesFond[i].getOffsetX() + "#";
+            contenuFichier += "offsetY=" + imagesFond[i].getOffsetY() + "#";
+            contenuFichier += "tailleX=" + imagesFond[i].getTailleX() + "#";
+            contenuFichier += "tailleY=" + imagesFond[i].getTailleY() + "#";
+            contenuFichier += "opacite=" + imagesFond[i].getOpacite() + "#";
+            contenuFichier += "masquable=" + imagesFond[i].isMasquable() + "#";
+            contenuFichier += "url=" + imagesFond[i].getUrl() + "#";
+            contenuFichier += "infobulle=" + imagesFond[i].getInfobulle()+ "#";
+            contenuFichier += ">\n";
+        }
+
         return contenuFichier;
     }
 
@@ -1467,345 +1560,413 @@ public class GestionnaireInterfaceController {
         bAfficheMasque = false;
         bAfficheVignettes = false;
         bAfficheReseauxSociaux = false;
+        nombreImagesFond = 0;
 
         for (String chaine : templ) {
-            String variable = chaine.split("=")[0];
-            String valeur = "";
-            if (chaine.split("=").length > 1) {
-                valeur = chaine.split("=")[1];
-            }
-            System.out.println(variable + "=" + valeur);
-            switch (variable) {
-                case "couleurTheme":
-                    couleurTheme = Color.web(valeur);
-                    break;
-                case "couleurBoutons":
-                    couleurBoutons = Color.web(valeur);
-                    break;
-                case "couleurHotspots":
-                    couleurHotspots = Color.web(valeur);
-                    break;
-                case "couleurHotspotsPhoto":
-                    couleurHotspotsPhoto = Color.web(valeur);
-                    break;
-                case "couleurMasque":
-                    couleurMasque = Color.web(valeur);
-                    break;
+            if (chaine.split("image=").length > 1) {
+                imagesFond[nombreImagesFond] = new ImageFond();
 
-                case "styleBarre":
-                    styleBarre = valeur;
-                    cblisteStyle.setValue(valeur);
-                    break;
-                case "suivantPrecedent":
-                    bSuivantPrecedent = (valeur.equals("true"));
-                    break;
-
-                case "styleHotspots":
-                    styleHotSpots = valeur;
-                    break;
-                case "styleHotspotImages":
-                    styleHotSpotImages = valeur;
-                    break;
-                case "position":
-                    positionBarre = valeur;
-                    switch (valeur) {
-                        case "top:left":
-                            rbTopLeft.setSelected(true);
+                chaine = chaine.replace("<", "");
+                chaine = chaine.replace(">", "");
+                System.out.println("chaine : " + chaine);
+                String[] elements = chaine.split("#");
+                for (String ch1 : elements) {
+                    String variable = ch1.split("=")[0];
+                    String valeur = "";
+                    if (ch1.split("=").length > 1) {
+                        valeur = ch1.split("=")[1];
+                    }
+                    System.out.println(variable + "=" + valeur);
+                    switch (variable) {
+                        case "image":
+                            imagesFond[nombreImagesFond].setFichierImage(valeur);
+                            imagesFond[nombreImagesFond].setImgFond(new Image("file:" + valeur));
+                            File repertoirePlan = new File(repertTemp + File.separator + "images");
+                            if (!repertoirePlan.exists()) {
+                                repertoirePlan.mkdirs();
+                            }
+                            try {
+                                copieFichierRepertoire(imagesFond[nombreImagesFond].getFichierImage(), repertoirePlan.getAbsolutePath());
+                            } catch (IOException ex) {
+                                Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                             break;
-                        case "top:center":
-                            rbTopCenter.setSelected(true);
+                        case "posX":
+                            imagesFond[nombreImagesFond].setPosX(valeur);
                             break;
-                        case "top:right":
-                            rbTopRight.setSelected(true);
+                        case "posY":
+                            imagesFond[nombreImagesFond].setPosY(valeur);
                             break;
-                        case "middle:left":
-                            rbMiddleLeft.setSelected(true);
+                        case "url":
+                            imagesFond[nombreImagesFond].setUrl(valeur);
                             break;
-                        case "middle:center":
-                            rbMiddleCenter.setSelected(true);
+                        case "infobulle":
+                            imagesFond[nombreImagesFond].setInfobulle(valeur);
                             break;
-                        case "middle:right":
-                            rbMiddleRight.setSelected(true);
+                        case "offsetX":
+                            imagesFond[nombreImagesFond].setOffsetX(Double.parseDouble(valeur));
                             break;
-                        case "bottom:left":
-                            rbBottomLeft.setSelected(true);
+                        case "offsetY":
+                            imagesFond[nombreImagesFond].setOffsetY(Double.parseDouble(valeur));
                             break;
-                        case "bottom:center":
-                            rbBottomCenter.setSelected(true);
+                        case "opacite":
+                            imagesFond[nombreImagesFond].setOpacite(Double.parseDouble(valeur));
                             break;
-                        case "bottom:right":
-                            rbBottomRight.setSelected(true);
+                        case "masquable":
+                            imagesFond[nombreImagesFond].setMasquable(valeur.equals("true"));
+                            break;
+                        case "tailleX":
+                            imagesFond[nombreImagesFond].setTailleX(Integer.parseInt(valeur));
+                            break;
+                        case "tailleY":
+                            imagesFond[nombreImagesFond].setTailleY(Integer.parseInt(valeur));
                             break;
                     }
 
-                    break;
-                case "dX":
-                    dXBarre = Double.parseDouble(valeur);
-                    dXSpinner.setNumber(new BigDecimal(dXBarre));
-                    break;
-                case "dY":
-                    dYBarre = Double.parseDouble(valeur);
-                    dYSpinner.setNumber(new BigDecimal(dYBarre));
-                    break;
-                case "visible":
-                    toggleBarreVisibilite = valeur;
-                    if (valeur.equals("oui")) {
-                        cbVisible.setSelected(true);
-                    } else {
-                        cbVisible.setSelected(false);
-                    }
-                    break;
-                case "deplacement":
-                    toggleBarreDeplacements = valeur;
-                    if (valeur.equals("oui")) {
-                        cbDeplacements.setSelected(true);
-                    } else {
-                        cbDeplacements.setSelected(false);
-                    }
-                    break;
-                case "zoom":
-                    toggleBarreZoom = valeur;
-                    if (valeur.equals("oui")) {
-                        cbZoom.setSelected(true);
-                    } else {
-                        cbZoom.setSelected(false);
-                    }
-                    break;
-                case "outils":
-                    toggleBarreOutils = valeur;
-                    if (valeur.equals("oui")) {
-                        cbOutils.setSelected(true);
-                    } else {
-                        cbOutils.setSelected(false);
-                    }
-                    break;
-                case "rotation":
-                    toggleBoutonRotation = valeur;
-                    if (valeur.equals("oui")) {
-                        cbRotation.setSelected(true);
-                    } else {
-                        cbRotation.setSelected(false);
-                    }
-                    break;
-                case "FS":
-                    toggleBoutonFS = valeur;
-                    if (valeur.equals("oui")) {
-                        cbFS.setSelected(true);
-                    } else {
-                        cbFS.setSelected(false);
-                    }
-                    break;
-                case "souris":
-                    toggleBoutonSouris = valeur;
-                    if (valeur.equals("oui")) {
-                        cbSouris.setSelected(true);
-                    } else {
-                        cbSouris.setSelected(false);
-                    }
-                    break;
-                case "afficheTitre":
-                    bAfficheTitre = valeur.equals("true");
-                    break;
-                case "titrePolice":
-                    titrePoliceNom = valeur;
-                    break;
-                case "titrePoliceTaille":
-                    titrePoliceTaille = valeur;
-                    break;
-                case "titreOpacite":
-                    titreOpacite = Double.parseDouble(valeur);
-                    break;
-                case "titreTaille":
-                    titreTaille = Double.parseDouble(valeur);
-                    break;
-                case "titreCouleur":
-                    couleurTitre = valeur;
-                    break;
-                case "titreFondCouleur":
-                    couleurFondTitre = valeur;
-                    break;
-                case "diaporamaOpacite":
-                    diaporamaOpacite = Double.parseDouble(valeur);
-                    break;
-                case "diaporamaCouleur":
-                    couleurDiaporama = valeur;
-                    break;
-                case "afficheBoussole":
-                    bAfficheBoussole = (valeur.equals("true"));
-                    break;
-                case "imageBoussole":
-                    imageBoussole = valeur;
-                    break;
-                case "tailleBoussole":
-                    tailleBoussole = Double.parseDouble(valeur);
-                    break;
-                case "positionBoussole":
-                    positionBoussole = valeur;
-                    break;
-                case "dXBoussole":
-                    dXBoussole = Double.parseDouble(valeur);
-                    break;
-                case "dYBoussole":
-                    dYBoussole = Double.parseDouble(valeur);
-                    break;
-                case "opaciteBoussole":
-                    opaciteBoussole = Double.parseDouble(valeur);
-                    break;
-                case "aiguilleMobile":
-                    bAiguilleMobileBoussole = (valeur.equals("true"));
-                    break;
-                case "afficheMasque":
-                    bAfficheMasque = (valeur.equals("true"));
-                    break;
-                case "imageMasque":
-                    imageMasque = valeur;
-                    break;
-                case "tailleMasque":
-                    tailleMasque = Double.parseDouble(valeur);
-                    break;
-                case "positionMasque":
-                    positionMasque = valeur;
-                    break;
-                case "dXMasque":
-                    dXMasque = Double.parseDouble(valeur);
-                    break;
-                case "dYMasque":
-                    dYMasque = Double.parseDouble(valeur);
-                    break;
-                case "opaciteMasque":
-                    opaciteMasque = Double.parseDouble(valeur);
-                    break;
-                case "masqueNavigation":
-                    bMasqueNavigation = (valeur.equals("true"));
-                    break;
-                case "masqueBoussole":
-                    bMasqueBoussole = (valeur.equals("true"));
-                    break;
-                case "masqueTitre":
-                    bMasqueTitre = (valeur.equals("true"));
-                    break;
-                case "masquePlan":
-                    bMasquePlan = (valeur.equals("true"));
-                    break;
-                case "masqueReseaux":
-                    bMasqueReseaux = (valeur.equals("true"));
-                    break;
-                case "masqueVignettes":
-                    bMasqueVignettes = (valeur.equals("true"));
-                    break;
-                case "afficheReseauxSociaux":
-                    bAfficheReseauxSociaux = (valeur.equals("true"));
-                    break;
-                case "tailleReseauxSociaux":
-                    tailleReseauxSociaux = Double.parseDouble(valeur);
-                    break;
-                case "positionReseauxSociaux":
-                    positionReseauxSociaux = valeur;
-                    break;
-                case "dXReseauxSociaux":
-                    dXReseauxSociaux = Double.parseDouble(valeur);
-                    break;
-                case "dYReseauxSociaux":
-                    dYReseauxSociaux = Double.parseDouble(valeur);
-                    break;
-                case "opaciteReseauxSociaux":
-                    opaciteReseauxSociaux = Double.parseDouble(valeur);
-                    break;
-                case "masqueTwitter":
-                    bReseauxSociauxTwitter = (valeur.equals("true"));
-                    break;
-                case "masqueGoogle":
-                    bReseauxSociauxGoogle = (valeur.equals("true"));
-                    break;
-                case "masqueFacebook":
-                    bReseauxSociauxFacebook = (valeur.equals("true"));
-                    break;
-                case "masqueEmail":
-                    bReseauxSociauxEmail = (valeur.equals("true"));
-                    break;
-                case "afficheVignettes":
-                    bAfficheVignettes = (valeur.equals("true"));
-                    break;
-                case "positionVignettes":
-                    positionVignettes = valeur;
-                    break;
-                case "opaciteVignettes":
-                    opaciteVignettes = Double.parseDouble(valeur);
-                    break;
-                case "tailleImageVignettes":
-                    tailleImageVignettes = Double.parseDouble(valeur);
-                    break;
-                case "couleurFondVignettes":
-                    couleurFondVignettes = valeur;
-                    break;
-                case "couleurTexteVignettes":
-                    couleurTexteVignettes = valeur;
-                    break;
-                case "affichePlan":
-                    bAffichePlan = valeur.equals("true");
-                    break;
-                case "positionPlan":
-                    positionPlan = valeur;
-                    break;
-                case "opacitePlan":
-                    opacitePlan = Double.parseDouble(valeur);
-                    break;
-                case "largeurPlan":
-                    largeurPlan = Double.parseDouble(valeur);
-                    break;
-                case "couleurFondPlan":
-                    txtCouleurFondPlan = valeur;
-                    couleurFondPlan = Color.valueOf(txtCouleurFondPlan);
-                    break;
-                case "couleurTextePlan":
-                    txtCouleurTextePlan = valeur;
-                    couleurTextePlan = Color.valueOf(txtCouleurTextePlan);
-                    break;
-                case "afficheRadar":
-                    bAfficheRadar = valeur.equals("true");
-                    break;
-                case "opaciteRadar":
-                    opaciteRadar = Double.parseDouble(valeur);
-                    break;
-                case "tailleRadar":
-                    tailleRadar = Double.parseDouble(valeur);
-                    break;
-                case "couleurFondRadar":
-                    txtCouleurFondRadar = valeur;
-                    couleurFondRadar = Color.valueOf(txtCouleurFondRadar);
-                    break;
-                case "couleurLigneRadar":
-                    txtCouleurLigneRadar = valeur;
-                    couleurLigneRadar = Color.valueOf(txtCouleurLigneRadar);
-                    break;
-                case "afficheMenuContextuel":
-                    bAfficheMenuContextuel = valeur.equals("true");
-                    break;
-                case "affichePrecSuivMC":
-                    bAffichePrecSuivMC = valeur.equals("true");
-                    break;
-                case "affichePlaneteNormalMC":
-                    bAffichePlanetNormalMC = valeur.equals("true");
-                    break;
-                case "affichePersMC1":
-                    bAffichePersMC1 = valeur.equals("true");
-                    break;
-                case "affichePersMC2":
-                    bAffichePersMC2 = valeur.equals("true");
-                    break;
-                case "txtPersLib1":
-                    stPersLib1 = valeur;
-                    break;
-                case "txtPersLib2":
-                    stPersLib2 = valeur;
-                    break;
-                case "txtPersURL1":
-                    stPersURL1 = valeur;
-                    break;
-                case "txtPersURL2":
-                    stPersURL2 = valeur;
-                    break;
+                }
+                nombreImagesFond++;
+            } else {
+                String variable = chaine.split("=")[0];
+                String valeur = "";
+                if (chaine.split("=").length > 1) {
+                    valeur = chaine.split("=")[1];
+                }
+                System.out.println(variable + "=" + valeur);
+                switch (variable) {
+                    case "couleurTheme":
+                        couleurTheme = Color.web(valeur);
+                        break;
+                    case "couleurBoutons":
+                        couleurBoutons = Color.web(valeur);
+                        break;
+                    case "couleurHotspots":
+                        couleurHotspots = Color.web(valeur);
+                        break;
+                    case "couleurHotspotsPhoto":
+                        couleurHotspotsPhoto = Color.web(valeur);
+                        break;
+                    case "couleurMasque":
+                        couleurMasque = Color.web(valeur);
+                        break;
 
+                    case "styleBarre":
+                        styleBarre = valeur;
+                        cblisteStyle.setValue(valeur);
+                        break;
+                    case "suivantPrecedent":
+                        bSuivantPrecedent = (valeur.equals("true"));
+                        break;
+
+                    case "styleHotspots":
+                        styleHotSpots = valeur;
+                        break;
+                    case "styleHotspotImages":
+                        styleHotSpotImages = valeur;
+                        break;
+                    case "position":
+                        positionBarre = valeur;
+                        switch (valeur) {
+                            case "top:left":
+                                rbTopLeft.setSelected(true);
+                                break;
+                            case "top:center":
+                                rbTopCenter.setSelected(true);
+                                break;
+                            case "top:right":
+                                rbTopRight.setSelected(true);
+                                break;
+                            case "middle:left":
+                                rbMiddleLeft.setSelected(true);
+                                break;
+                            case "middle:center":
+                                rbMiddleCenter.setSelected(true);
+                                break;
+                            case "middle:right":
+                                rbMiddleRight.setSelected(true);
+                                break;
+                            case "bottom:left":
+                                rbBottomLeft.setSelected(true);
+                                break;
+                            case "bottom:center":
+                                rbBottomCenter.setSelected(true);
+                                break;
+                            case "bottom:right":
+                                rbBottomRight.setSelected(true);
+                                break;
+                        }
+
+                        break;
+                    case "dX":
+                        dXBarre = Double.parseDouble(valeur);
+                        dXSpinner.setNumber(new BigDecimal(dXBarre));
+                        break;
+                    case "dY":
+                        dYBarre = Double.parseDouble(valeur);
+                        dYSpinner.setNumber(new BigDecimal(dYBarre));
+                        break;
+                    case "visible":
+                        toggleBarreVisibilite = valeur;
+                        if (valeur.equals("oui")) {
+                            cbVisible.setSelected(true);
+                        } else {
+                            cbVisible.setSelected(false);
+                        }
+                        break;
+                    case "deplacement":
+                        toggleBarreDeplacements = valeur;
+                        if (valeur.equals("oui")) {
+                            cbDeplacements.setSelected(true);
+                        } else {
+                            cbDeplacements.setSelected(false);
+                        }
+                        break;
+                    case "zoom":
+                        toggleBarreZoom = valeur;
+                        if (valeur.equals("oui")) {
+                            cbZoom.setSelected(true);
+                        } else {
+                            cbZoom.setSelected(false);
+                        }
+                        break;
+                    case "outils":
+                        toggleBarreOutils = valeur;
+                        if (valeur.equals("oui")) {
+                            cbOutils.setSelected(true);
+                        } else {
+                            cbOutils.setSelected(false);
+                        }
+                        break;
+                    case "rotation":
+                        toggleBoutonRotation = valeur;
+                        if (valeur.equals("oui")) {
+                            cbRotation.setSelected(true);
+                        } else {
+                            cbRotation.setSelected(false);
+                        }
+                        break;
+                    case "FS":
+                        toggleBoutonFS = valeur;
+                        if (valeur.equals("oui")) {
+                            cbFS.setSelected(true);
+                        } else {
+                            cbFS.setSelected(false);
+                        }
+                        break;
+                    case "souris":
+                        toggleBoutonSouris = valeur;
+                        if (valeur.equals("oui")) {
+                            cbSouris.setSelected(true);
+                        } else {
+                            cbSouris.setSelected(false);
+                        }
+                        break;
+                    case "espacementBoutons":
+                        espacementBoutons = Double.parseDouble(valeur);
+                        break;
+                    case "afficheTitre":
+                        bAfficheTitre = valeur.equals("true");
+                        break;
+                    case "titrePolice":
+                        titrePoliceNom = valeur;
+                        break;
+                    case "titrePoliceTaille":
+                        titrePoliceTaille = valeur;
+                        break;
+                    case "titreOpacite":
+                        titreOpacite = Double.parseDouble(valeur);
+                        break;
+                    case "titreTaille":
+                        titreTaille = Double.parseDouble(valeur);
+                        break;
+                    case "titreCouleur":
+                        couleurTitre = valeur;
+                        break;
+                    case "titreFondCouleur":
+                        couleurFondTitre = valeur;
+                        break;
+                    case "diaporamaOpacite":
+                        diaporamaOpacite = Double.parseDouble(valeur);
+                        break;
+                    case "diaporamaCouleur":
+                        couleurDiaporama = valeur;
+                        break;
+                    case "afficheBoussole":
+                        bAfficheBoussole = (valeur.equals("true"));
+                        break;
+                    case "imageBoussole":
+                        imageBoussole = valeur;
+                        break;
+                    case "tailleBoussole":
+                        tailleBoussole = Double.parseDouble(valeur);
+                        break;
+                    case "positionBoussole":
+                        positionBoussole = valeur;
+                        break;
+                    case "dXBoussole":
+                        dXBoussole = Double.parseDouble(valeur);
+                        break;
+                    case "dYBoussole":
+                        dYBoussole = Double.parseDouble(valeur);
+                        break;
+                    case "opaciteBoussole":
+                        opaciteBoussole = Double.parseDouble(valeur);
+                        break;
+                    case "aiguilleMobile":
+                        bAiguilleMobileBoussole = (valeur.equals("true"));
+                        break;
+                    case "afficheMasque":
+                        bAfficheMasque = (valeur.equals("true"));
+                        break;
+                    case "imageMasque":
+                        imageMasque = valeur;
+                        break;
+                    case "tailleMasque":
+                        tailleMasque = Double.parseDouble(valeur);
+                        break;
+                    case "positionMasque":
+                        positionMasque = valeur;
+                        break;
+                    case "dXMasque":
+                        dXMasque = Double.parseDouble(valeur);
+                        break;
+                    case "dYMasque":
+                        dYMasque = Double.parseDouble(valeur);
+                        break;
+                    case "opaciteMasque":
+                        opaciteMasque = Double.parseDouble(valeur);
+                        break;
+                    case "masqueNavigation":
+                        bMasqueNavigation = (valeur.equals("true"));
+                        break;
+                    case "masqueBoussole":
+                        bMasqueBoussole = (valeur.equals("true"));
+                        break;
+                    case "masqueTitre":
+                        bMasqueTitre = (valeur.equals("true"));
+                        break;
+                    case "masquePlan":
+                        bMasquePlan = (valeur.equals("true"));
+                        break;
+                    case "masqueReseaux":
+                        bMasqueReseaux = (valeur.equals("true"));
+                        break;
+                    case "masqueVignettes":
+                        bMasqueVignettes = (valeur.equals("true"));
+                        break;
+                    case "afficheReseauxSociaux":
+                        bAfficheReseauxSociaux = (valeur.equals("true"));
+                        break;
+                    case "tailleReseauxSociaux":
+                        tailleReseauxSociaux = Double.parseDouble(valeur);
+                        break;
+                    case "positionReseauxSociaux":
+                        positionReseauxSociaux = valeur;
+                        break;
+                    case "dXReseauxSociaux":
+                        dXReseauxSociaux = Double.parseDouble(valeur);
+                        break;
+                    case "dYReseauxSociaux":
+                        dYReseauxSociaux = Double.parseDouble(valeur);
+                        break;
+                    case "opaciteReseauxSociaux":
+                        opaciteReseauxSociaux = Double.parseDouble(valeur);
+                        break;
+                    case "masqueTwitter":
+                        bReseauxSociauxTwitter = (valeur.equals("true"));
+                        break;
+                    case "masqueGoogle":
+                        bReseauxSociauxGoogle = (valeur.equals("true"));
+                        break;
+                    case "masqueFacebook":
+                        bReseauxSociauxFacebook = (valeur.equals("true"));
+                        break;
+                    case "masqueEmail":
+                        bReseauxSociauxEmail = (valeur.equals("true"));
+                        break;
+                    case "afficheVignettes":
+                        bAfficheVignettes = (valeur.equals("true"));
+                        break;
+                    case "positionVignettes":
+                        positionVignettes = valeur;
+                        break;
+                    case "opaciteVignettes":
+                        opaciteVignettes = Double.parseDouble(valeur);
+                        break;
+                    case "tailleImageVignettes":
+                        tailleImageVignettes = Double.parseDouble(valeur);
+                        break;
+                    case "couleurFondVignettes":
+                        couleurFondVignettes = valeur;
+                        break;
+                    case "couleurTexteVignettes":
+                        couleurTexteVignettes = valeur;
+                        break;
+                    case "affichePlan":
+                        bAffichePlan = valeur.equals("true");
+                        break;
+                    case "positionPlan":
+                        positionPlan = valeur;
+                        break;
+                    case "opacitePlan":
+                        opacitePlan = Double.parseDouble(valeur);
+                        break;
+                    case "largeurPlan":
+                        largeurPlan = Double.parseDouble(valeur);
+                        break;
+                    case "couleurFondPlan":
+                        txtCouleurFondPlan = valeur;
+                        couleurFondPlan = Color.valueOf(txtCouleurFondPlan);
+                        break;
+                    case "couleurTextePlan":
+                        txtCouleurTextePlan = valeur;
+                        couleurTextePlan = Color.valueOf(txtCouleurTextePlan);
+                        break;
+                    case "afficheRadar":
+                        bAfficheRadar = valeur.equals("true");
+                        break;
+                    case "opaciteRadar":
+                        opaciteRadar = Double.parseDouble(valeur);
+                        break;
+                    case "tailleRadar":
+                        tailleRadar = Double.parseDouble(valeur);
+                        break;
+                    case "couleurFondRadar":
+                        txtCouleurFondRadar = valeur;
+                        couleurFondRadar = Color.valueOf(txtCouleurFondRadar);
+                        break;
+                    case "couleurLigneRadar":
+                        txtCouleurLigneRadar = valeur;
+                        couleurLigneRadar = Color.valueOf(txtCouleurLigneRadar);
+                        break;
+                    case "afficheMenuContextuel":
+                        bAfficheMenuContextuel = valeur.equals("true");
+                        break;
+                    case "affichePrecSuivMC":
+                        bAffichePrecSuivMC = valeur.equals("true");
+                        break;
+                    case "affichePlaneteNormalMC":
+                        bAffichePlanetNormalMC = valeur.equals("true");
+                        break;
+                    case "affichePersMC1":
+                        bAffichePersMC1 = valeur.equals("true");
+                        break;
+                    case "affichePersMC2":
+                        bAffichePersMC2 = valeur.equals("true");
+                        break;
+                    case "txtPersLib1":
+                        stPersLib1 = valeur;
+                        break;
+                    case "txtPersLib2":
+                        stPersLib2 = valeur;
+                        break;
+                    case "txtPersURL1":
+                        stPersURL1 = valeur;
+                        break;
+                    case "txtPersURL2":
+                        stPersURL2 = valeur;
+                        break;
+
+                }
             }
         }
     }
@@ -1815,8 +1976,12 @@ public class GestionnaireInterfaceController {
         apVisualisation.getChildren().addAll(rbClair, rbSombre, rbPerso, cbImage, ivVisualisation, txtTitre, imgBoussole, imgAiguille, imgTwitter, imgGoogle, imgFacebook, imgEmail, apVisuVignettes, apVisuplan, ivMasque, apAfficheDiapo, ivDiapo);
 
         txtTitre.setTextFill(Color.valueOf(couleurTitre));
-        txtTitre.setStyle("-fx-background-color : " + couleurFondTitre);
-        txtTitre.setOpacity(titreOpacite);
+        Color couleur = Color.valueOf(couleurFondTitre);
+        int rouge = (int) (couleur.getRed() * 255.d);
+        int bleu = (int) (couleur.getBlue() * 255.d);
+        int vert = (int) (couleur.getGreen() * 255.d);
+        String coulFond = "rgba(" + rouge + "," + vert + "," + bleu + "," + titreOpacite + ")";
+        txtTitre.setStyle("-fx-background-color : " + coulFond);
         double taille = (double) titreTaille / 100.d * ivVisualisation.getFitWidth();
         txtTitre.setMinWidth(taille);
         txtTitre.setLayoutX(ivVisualisation.getLayoutX() + (ivVisualisation.getFitWidth() - txtTitre.getMinWidth()) / 2);
@@ -1838,6 +2003,7 @@ public class GestionnaireInterfaceController {
         fondSuivant.setVisible(bSuivantPrecedent);
         fondPrecedent.setVisible(bSuivantPrecedent);
         slTaillePolice.setValue(Double.parseDouble(titrePoliceTaille));
+        slEspacementBoutons.setValue(espacementBoutons);
         slTaille.setValue(titreTaille);
         apVisualisation.getChildren().remove(hbbarreBoutons);
         apVisualisation.getChildren().remove(ivHotSpot);
@@ -1923,7 +2089,8 @@ public class GestionnaireInterfaceController {
         txtPersLib2.setText(stPersLib2);
         txtPersURL1.setText(stPersURL1);
         txtPersURL2.setText(stPersURL2);
-        afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
+        afficheImagesFondInterface();
+        afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots, espacementBoutons);
         afficheBoussole();
         afficheMasque();
         afficheReseauxSociaux();
@@ -1955,12 +2122,317 @@ public class GestionnaireInterfaceController {
             cbImage.setValue(imgAffiche);
         }
 
-        afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
+        afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots, espacementBoutons);
         afficheBoussole();
         afficheMasque();
         afficheReseauxSociaux();
         affichePlan();
         afficheVignettes();
+    }
+
+    private void retireImageFond(int numImage) {
+        for (int i = numImage; i < nombreImagesFond - 1; i++) {
+            imagesFond[i] = imagesFond[i + 1];
+        }
+        nombreImagesFond--;
+        afficheImagesFondInterface();
+        System.out.println("Retire l'image " + numImage + " Nombre Images : " + nombreImagesFond);
+    }
+
+    private void afficheImagesFondInterface() {
+
+        apImageFond.getChildren().clear();
+        Image imgAjoute = new Image("file:" + repertAppli + File.separator + "images/ajoute.png", 30, 30, true, true);
+        Button btnAjouteImage = new Button(rb.getString("interface.imageFondAjoute"), new ImageView(imgAjoute));
+        btnAjouteImage.setLayoutX(10);
+        btnAjouteImage.setLayoutY(10);
+        apImageFond.getChildren().addAll(btnAjouteImage);
+        btnAjouteImage.setOnMouseClicked(
+                (MouseEvent me) -> {
+                    ajoutImageFond();
+                }
+        );
+
+        double hauteurPanel = 280;
+        taillePanelImageFond = (nombreImagesFond) * (hauteurPanel + 10) + 60;
+        apImageFond.setPrefHeight(taillePanelImageFond);
+        for (int i = 0; i < nombreImagesFond; i++) {
+            int j = i;
+            AnchorPane apImagesFond = new AnchorPane();
+            apImagesFond.setPrefWidth(vbOutils.getPrefWidth() - 20);
+            apImagesFond.setMinWidth(vbOutils.getPrefWidth() - 20);
+            apImagesFond.setMaxWidth(vbOutils.getPrefWidth() - 20);
+            apImagesFond.setPrefHeight(hauteurPanel);
+            apImagesFond.setStyle("-fx-border-color : #666666; -fx-border-width : 1px; -fx-border-style :solid;");
+            apImagesFond.setLayoutY(i * (hauteurPanel + 10) + 60);
+            Pane fond1 = new Pane();
+            fond1.setCursor(Cursor.HAND);
+            ImageView ivAjouteImageFond1 = new ImageView(new Image("file:" + repertAppli + File.separator + "images/suppr.png", 30, 30, true, true));
+            fond1.setLayoutX(vbOutils.getPrefWidth() - 50);
+            fond1.setLayoutY(0);
+            Tooltip t1 = new Tooltip(rb.getString("interface.imageFondRetire"));
+            t1.setStyle(tooltipStyle);
+            Tooltip.install(fond1, t1);
+            fond1.getChildren().add(ivAjouteImageFond1);
+            fond1.setOnMouseClicked(
+                    (MouseEvent me) -> {
+                        retireImageFond(j);
+                    }
+            );
+            ImageView ivImageFond = new ImageView(imagesFond[i].getImgFond());
+            ivImageFond.setPreserveRatio(true);
+            if (imagesFond[i].getImgFond().getWidth() > imagesFond[i].getImgFond().getHeight()) {
+                ivImageFond.setFitWidth(100);
+            } else {
+                ivImageFond.setFitHeight(100);
+            }
+            ivImageFond.setLayoutX(10);
+            ivImageFond.setLayoutY(10);
+            ToggleGroup tgPosition = new ToggleGroup();
+            RadioButton rbImageFondTopLeft = new RadioButton();
+            RadioButton rbImageFondTopCenter = new RadioButton();
+            RadioButton rbImageFondTopRight = new RadioButton();
+            RadioButton rbImageFondMiddleLeft = new RadioButton();
+            RadioButton rbImageFondMiddleCenter = new RadioButton();
+            RadioButton rbImageFondMiddleRight = new RadioButton();
+            RadioButton rbImageFondBottomLeft = new RadioButton();
+            RadioButton rbImageFondBottomCenter = new RadioButton();
+            RadioButton rbImageFondBottomRight = new RadioButton();
+
+            rbImageFondTopLeft.setUserData("top:left");
+            rbImageFondTopCenter.setUserData("top:center");
+            rbImageFondTopRight.setUserData("top:right");
+            rbImageFondMiddleLeft.setUserData("middle:left");
+            rbImageFondMiddleCenter.setUserData("middle:center");
+            rbImageFondMiddleRight.setUserData("middle:right");
+            rbImageFondBottomLeft.setUserData("bottom:left");
+            rbImageFondBottomCenter.setUserData("bottom:center");
+            rbImageFondBottomRight.setUserData("bottom:right");
+
+            rbImageFondTopLeft.setToggleGroup(tgPosition);
+            rbImageFondTopCenter.setToggleGroup(tgPosition);
+            rbImageFondTopRight.setToggleGroup(tgPosition);
+            rbImageFondMiddleLeft.setToggleGroup(tgPosition);
+            rbImageFondMiddleCenter.setToggleGroup(tgPosition);
+            rbImageFondMiddleRight.setToggleGroup(tgPosition);
+            rbImageFondBottomLeft.setToggleGroup(tgPosition);
+            rbImageFondBottomCenter.setToggleGroup(tgPosition);
+            rbImageFondBottomRight.setToggleGroup(tgPosition);
+            String posit = imagesFond[i].getPosY() + ":" + imagesFond[i].getPosX();
+            switch (posit) {
+                case "top:left":
+                    rbImageFondTopLeft.setSelected(true);
+                    break;
+                case "top:center":
+                    rbImageFondTopCenter.setSelected(true);
+                    break;
+                case "top:right":
+                    rbImageFondTopRight.setSelected(true);
+                    break;
+                case "middle:left":
+                    rbImageFondMiddleLeft.setSelected(true);
+                    break;
+                case "middle:center":
+                    rbImageFondMiddleCenter.setSelected(true);
+                    break;
+                case "middle:right":
+                    rbImageFondMiddleRight.setSelected(true);
+                    break;
+                case "bottom:left":
+                    rbImageFondBottomLeft.setSelected(true);
+                    break;
+                case "bottom:center":
+                    rbImageFondBottomCenter.setSelected(true);
+                    break;
+                case "bottom:right":
+                    rbImageFondBottomRight.setSelected(true);
+                    break;
+            }
+
+            int posX = 175;
+            int posY = 30;
+
+            rbImageFondTopLeft.setLayoutX(posX);
+            rbImageFondTopCenter.setLayoutX(posX + 20);
+            rbImageFondTopRight.setLayoutX(posX + 40);
+            rbImageFondTopLeft.setLayoutY(posY);
+            rbImageFondTopCenter.setLayoutY(posY);
+            rbImageFondTopRight.setLayoutY(posY);
+
+            rbImageFondMiddleLeft.setLayoutX(posX);
+            rbImageFondMiddleCenter.setLayoutX(posX + 20);
+            rbImageFondMiddleRight.setLayoutX(posX + 40);
+            rbImageFondMiddleLeft.setLayoutY(posY + 20);
+            rbImageFondMiddleCenter.setLayoutY(posY + 20);
+            rbImageFondMiddleRight.setLayoutY(posY + 20);
+
+            rbImageFondBottomLeft.setLayoutX(posX);
+            rbImageFondBottomCenter.setLayoutX(posX + 20);
+            rbImageFondBottomRight.setLayoutX(posX + 40);
+            rbImageFondBottomLeft.setLayoutY(posY + 40);
+            rbImageFondBottomCenter.setLayoutY(posY + 40);
+            rbImageFondBottomRight.setLayoutY(posY + 40);
+            Label lblPosit = new Label(rb.getString("interface.positionImageFond"));
+            lblPosit.setLayoutX(150);
+            lblPosit.setLayoutY(10);
+            Label lblDXSpinner = new Label("dX ");
+            lblDXSpinner.setLayoutX(25);
+            lblDXSpinner.setLayoutY(125);
+            Label lblDYSpinner = new Label("dY ");
+            lblDYSpinner.setLayoutX(175);
+            lblDYSpinner.setLayoutY(125);
+            BigDecimalField dXSpinnerImageFond = new BigDecimalField(new BigDecimal(imagesFond[i].getOffsetX()));
+            dXSpinnerImageFond.setLayoutX(50);
+            dXSpinnerImageFond.setLayoutY(120);
+            dXSpinnerImageFond.setMaxValue(new BigDecimal(2000));
+            dXSpinnerImageFond.setMinValue(new BigDecimal(-2000));
+            dXSpinnerImageFond.setMaxWidth(100);
+            BigDecimalField dYSpinnerImageFond = new BigDecimalField(new BigDecimal(imagesFond[i].getOffsetY()));
+            dYSpinnerImageFond.setLayoutX(200);
+            dYSpinnerImageFond.setLayoutY(120);
+            dYSpinnerImageFond.setMaxValue(new BigDecimal(2000));
+            dYSpinnerImageFond.setMinValue(new BigDecimal(-2000));
+            dYSpinnerImageFond.setMaxWidth(100);
+            CheckBox cbMasquableImageFond = new CheckBox(rb.getString("interface.masquableImageFond"));
+            cbMasquableImageFond.setLayoutX(150);
+            cbMasquableImageFond.setLayoutY(90);
+            cbMasquableImageFond.setSelected(imagesFond[i].isMasquable());
+
+            Label lblOpaciteImageFond = new Label(rb.getString("interface.opaciteVignettes"));
+            lblOpaciteImageFond.setLayoutX(10);
+            lblOpaciteImageFond.setLayoutY(160);
+            Slider slOpaciteImageFond = new Slider(0, 1.0, imagesFond[i].getOpacite());
+            slOpaciteImageFond.setLayoutX(120);
+            slOpaciteImageFond.setLayoutY(160);
+            Label lblTailleImageFond = new Label(rb.getString("interface.tailleVignettes"));
+            lblTailleImageFond.setLayoutX(10);
+            lblTailleImageFond.setLayoutY(190);
+            double echelle = imagesFond[i].getTailleX() / imagesFond[i].getImgFond().getWidth();
+            Slider slTailleImageFond = new Slider(0.1, 2.0, echelle);
+            slTailleImageFond.setLayoutX(120);
+            slTailleImageFond.setLayoutY(190);
+            Label lblUrlImageFond = new Label("url");
+            lblUrlImageFond.setLayoutX(10);
+            lblUrlImageFond.setLayoutY(222);
+            TextArea txtUrlImageFond = new TextArea(imagesFond[i].getUrl());
+            txtUrlImageFond.setPrefHeight(20);
+            txtUrlImageFond.setPrefWidth(200);
+            txtUrlImageFond.setLayoutX(120);
+            txtUrlImageFond.setLayoutY(220);
+            Label lblInfobulleImageFond = new Label(rb.getString("interface.infobulle"));
+            lblInfobulleImageFond.setLayoutX(10);
+            lblInfobulleImageFond.setLayoutY(252);
+            TextArea txtInfobulleImageFond = new TextArea(imagesFond[i].getInfobulle());
+            txtInfobulleImageFond.setPrefHeight(20);
+            txtInfobulleImageFond.setPrefWidth(200);
+            txtInfobulleImageFond.setLayoutX(120);
+            txtInfobulleImageFond.setLayoutY(250);
+            
+            apImagesFond.getChildren().addAll(ivImageFond, fond1,
+                    lblPosit,
+                    rbImageFondTopLeft, rbImageFondTopCenter, rbImageFondTopRight,
+                    rbImageFondMiddleLeft, rbImageFondMiddleCenter, rbImageFondMiddleRight,
+                    rbImageFondBottomLeft, rbImageFondBottomCenter, rbImageFondBottomRight,
+                    cbMasquableImageFond,
+                    lblDXSpinner, dXSpinnerImageFond, lblDYSpinner, dYSpinnerImageFond,
+                    lblOpaciteImageFond, slOpaciteImageFond,
+                    lblTailleImageFond, slTailleImageFond,
+                    lblUrlImageFond, txtUrlImageFond,
+                    lblInfobulleImageFond, txtInfobulleImageFond
+            );
+            
+            tgPosition.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) -> {
+                if (tgPosition.getSelectedToggle() != null) {
+                    String positImageFond = tgPosition.getSelectedToggle().getUserData().toString();
+                    imagesFond[j].setPosX(positImageFond.split(":")[1]);
+                    imagesFond[j].setPosY(positImageFond.split(":")[0]);
+                    System.out.println("Image n° " + j + " position : " + positImageFond);
+                    afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots, espacementBoutons
+                    );
+                }
+            });
+            dXSpinnerImageFond.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
+                imagesFond[j].setOffsetX(new_value.doubleValue());
+                afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots, espacementBoutons);
+            });
+            dYSpinnerImageFond.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
+                imagesFond[j].setOffsetY(new_value.doubleValue());
+                afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots, espacementBoutons);
+            });
+            slOpaciteImageFond.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+                if (newValue != null) {
+                    double opac = (double) newValue;
+                    imagesFond[j].setOpacite(opac);
+                    afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots, espacementBoutons);
+                }
+            });
+            slTailleImageFond.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+                if (newValue != null) {
+                    double taille = (double) newValue;
+                    imagesFond[j].setTailleX((int) (imagesFond[j].getImgFond().getWidth() * taille));
+                    imagesFond[j].setTailleY((int) (imagesFond[j].getImgFond().getHeight() * taille));
+                    afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots, espacementBoutons);
+                }
+            });
+            txtUrlImageFond.textProperty().addListener((final ObservableValue<? extends String> observable, final String oldValue, final String newValue) -> {
+                String txt = newValue;
+                imagesFond[j].setUrl(txt);
+            });
+            txtInfobulleImageFond.textProperty().addListener((final ObservableValue<? extends String> observable, final String oldValue, final String newValue) -> {
+                String txt = newValue;
+                imagesFond[j].setInfobulle(txt);
+            });
+            cbMasquableImageFond.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+                if (new_val != null) {
+                    imagesFond[j].setMasquable(new_val);
+                }
+            });
+
+            apImageFond.getChildren().add(apImagesFond);
+        }
+        afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots, espacementBoutons);
+    }
+
+    private void ajoutImageFond() {
+        if (nombreImagesFond < 20) {
+            File repert;
+            if (repertImagesFond.equals("")) {
+                repert = new File(currentDir + File.separator);
+            } else {
+                repert = new File(repertImagesFond);
+            }
+
+            FileChooser fileChooser = new FileChooser();
+            FileChooser.ExtensionFilter extFilterImages = new FileChooser.ExtensionFilter("Fichiers Images (jpg, bmp, png, gif)", "*.jpg", "*.bmp", "*.png", "*.gif");
+
+            fileChooser.setInitialDirectory(repert);
+            fileChooser.getExtensionFilters().addAll(extFilterImages);
+
+            File fichierImage = fileChooser.showOpenDialog(null);
+            if (fichierImage != null) {
+                repertImagesFond = fichierImage.getParent();
+                File repertImage = new File(repertTemp + File.separator + "images");
+                if (!repertImage.exists()) {
+                    repertImage.mkdirs();
+                }
+                try {
+                    copieFichierRepertoire(fichierImage.getAbsolutePath(), repertImage.getAbsolutePath());
+                } catch (IOException ex) {
+                    Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                imagesFond[nombreImagesFond] = new ImageFond();
+                imagesFond[nombreImagesFond].setFichierImage(fichierImage.getAbsolutePath());
+                Image imgFond = new Image("file:" + fichierImage.getAbsolutePath());
+                imagesFond[nombreImagesFond].setImgFond(imgFond);
+                imagesFond[nombreImagesFond].setTailleX((int) imgFond.getWidth());
+                imagesFond[nombreImagesFond].setTailleY((int) imgFond.getHeight());
+                System.out.println("Ajoute ImageFond Taille " + imagesFond[nombreImagesFond].getTailleX()
+                        + "x" + imagesFond[nombreImagesFond].getTailleY());
+                nombreImagesFond++;
+                afficheImagesFondInterface();
+            }
+        }
     }
 
     /**
@@ -2020,6 +2492,8 @@ public class GestionnaireInterfaceController {
         tabInterface.getChildren().add(hbInterface);
         apVisualisation = new AnchorPane();
         apVisualisation.setPrefWidth(width - largeurOutils);
+        apVisualisation.setMaxWidth(width - largeurOutils);
+        apVisualisation.setMinWidth(width - largeurOutils);
         apVisualisation.setPrefHeight(height);
         vbOutils = new VBox();
         ScrollPane SPOutils = new ScrollPane(vbOutils);
@@ -2132,7 +2606,7 @@ public class GestionnaireInterfaceController {
         afficheMasque();
         afficheReseauxSociaux();
 
-        afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
+        afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots, espacementBoutons);
 
         /*
          * *****************************************
@@ -2162,6 +2636,7 @@ public class GestionnaireInterfaceController {
         AnchorPane apRS = new AnchorPane();
         AnchorPane apVIG = new AnchorPane();
         AnchorPane apPL = new AnchorPane();
+        AnchorPane apIF = new AnchorPane();
         AnchorPane apMC = new AnchorPane();
 
         /*
@@ -2401,7 +2876,7 @@ public class GestionnaireInterfaceController {
                 apVisualisation.getChildren().remove(ivHotSpot);
                 apVisualisation.getChildren().remove(ivHotSpotImage);
                 styleHotSpots = nomImage;
-                afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
+                afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots, espacementBoutons);
 
             });
             fond.getChildren().add(ivHotspots[i]);
@@ -2432,7 +2907,7 @@ public class GestionnaireInterfaceController {
                 apVisualisation.getChildren().remove(ivHotSpot);
                 apVisualisation.getChildren().remove(ivHotSpotImage);
                 styleHotSpotImages = nomImage;
-                afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
+                afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots, espacementBoutons);
             });
             fond.getChildren().add(ivHotspotsPhoto[i]);
             apHotSpots.getChildren().add(fond);
@@ -2489,7 +2964,7 @@ public class GestionnaireInterfaceController {
          */
         AnchorPane apBarreModif = new AnchorPane();
         apBarreModif.setLayoutY(40);
-        apBarreModif.setPrefHeight(390);
+        apBarreModif.setPrefHeight(420);
         apBarreModif.setMinWidth(vbOutils.getPrefWidth() - 20);
 
         cbVisible = new CheckBox(rb.getString("interface.barreVisible"));
@@ -2594,6 +3069,13 @@ public class GestionnaireInterfaceController {
         dYSpinner.setMinValue(new BigDecimal(-2000));
         dYSpinner.setMaxWidth(100);
 
+        Label lblEspacement = new Label(rb.getString("interface.espacementBoutons"));
+        lblEspacement.setLayoutX(10);
+        lblEspacement.setLayoutY(240);
+        slEspacementBoutons = new Slider(4, 25, 4);
+        slEspacementBoutons.setLayoutX(170);
+        slEspacementBoutons.setLayoutY(240);
+
         cbDeplacements = new CheckBox(rb.getString("interface.deplacementsVisible"));
         cbZoom = new CheckBox(rb.getString("interface.zoomVisible"));
         cbOutils = new CheckBox(rb.getString("interface.outilsVisible"));
@@ -2602,25 +3084,25 @@ public class GestionnaireInterfaceController {
         cbFS = new CheckBox(rb.getString("interface.outilsFS"));
         Label lblVisibilite = new Label(rb.getString("interface.visibilite"));
         lblVisibilite.setLayoutX(10);
-        lblVisibilite.setLayoutY(240);
+        lblVisibilite.setLayoutY(270);
 
         cbDeplacements.setLayoutX(100);
-        cbDeplacements.setLayoutY(260);
+        cbDeplacements.setLayoutY(290);
         cbDeplacements.setSelected(true);
         cbZoom.setLayoutX(100);
-        cbZoom.setLayoutY(280);
+        cbZoom.setLayoutY(310);
         cbZoom.setSelected(true);
         cbOutils.setLayoutX(100);
-        cbOutils.setLayoutY(300);
+        cbOutils.setLayoutY(330);
         cbOutils.setSelected(true);
         cbFS.setLayoutX(150);
-        cbFS.setLayoutY(320);
+        cbFS.setLayoutY(350);
         cbFS.setSelected(true);
         cbRotation.setLayoutX(150);
-        cbRotation.setLayoutY(340);
+        cbRotation.setLayoutY(370);
         cbRotation.setSelected(true);
         cbSouris.setLayoutX(150);
-        cbSouris.setLayoutY(360);
+        cbSouris.setLayoutY(390);
         cbSouris.setSelected(true);
 
         Label lblBarreBouton = new Label(rb.getString("interface.barreBoutons"));
@@ -2678,6 +3160,7 @@ public class GestionnaireInterfaceController {
                 rbMiddleLeft, rbMiddleCenter, rbMiddleRight,
                 rbBottomLeft, rbBottomCenter, rbBottomRight,
                 lblDXSpinner, dXSpinner, lblDYSpinner, dYSpinner,
+                lblEspacement, slEspacementBoutons,
                 lblVisibilite, cbDeplacements, cbZoom, cbOutils,
                 cbFS, cbRotation, cbSouris);
 
@@ -3483,6 +3966,73 @@ public class GestionnaireInterfaceController {
 
         /*
          * ********************************************
+         *     Panel Image Fond
+         * ********************************************
+         */
+        apImageFond = new AnchorPane();
+
+        apImageFond.setLayoutY(40);
+        apImageFond.setPrefHeight(60);
+        apImageFond.setMinWidth(vbOutils.getPrefWidth() - 20);
+        taillePanelImageFond = apImageFond.getPrefHeight();
+        Label lblPanelImageFond = new Label(rb.getString("interface.imageFond"));
+        lblPanelImageFond.setPrefWidth(vbOutils.getPrefWidth());
+        lblPanelImageFond.setStyle("-fx-background-color : #666");
+        lblPanelImageFond.setTextFill(Color.WHITE);
+        lblPanelImageFond.setPadding(new Insets(5));
+        lblPanelImageFond.setLayoutX(10);
+        lblPanelImageFond.setLayoutY(10);
+        ImageView ivBtnPlusImageFond = new ImageView(new Image("file:" + "images/plus.png", 20, 20, true, true));
+        ivBtnPlusImageFond.setLayoutX(vbOutils.getPrefWidth() - 20);
+        ivBtnPlusImageFond.setLayoutY(11);
+        apImageFond.getChildren().addAll();
+        Image imgAjoute = new Image("file:" + repertAppli + File.separator + "images/ajoute.png", 30, 30, true, true);
+        Button btnAjouteImage = new Button(rb.getString("interface.imageFondAjoute"), new ImageView(imgAjoute));
+        btnAjouteImage.setLayoutX(10);
+        btnAjouteImage.setLayoutY(10);
+        apImageFond.getChildren().addAll(btnAjouteImage);
+        btnAjouteImage.setOnMouseClicked(
+                (MouseEvent me) -> {
+                    ajoutImageFond();
+                }
+        );
+        apImageFond.setPrefHeight(0);
+        apImageFond.setMaxHeight(0);
+        apImageFond.setMinHeight(0);
+        apImageFond.setVisible(false);
+        lblPanelImageFond.setOnMouseClicked((MouseEvent me) -> {
+            if (apImageFond.isVisible()) {
+                ivBtnPlusImageFond.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
+                apImageFond.setPrefHeight(0);
+                apImageFond.setMaxHeight(0);
+                apImageFond.setMinHeight(0);
+                apImageFond.setVisible(false);
+            } else {
+                ivBtnPlusImageFond.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
+                apImageFond.setPrefHeight(taillePanelImageFond);
+                apImageFond.setMaxHeight(taillePanelImageFond);
+                apImageFond.setMinHeight(taillePanelImageFond);
+                apImageFond.setVisible(true);
+            }
+        });
+        ivBtnPlusImageFond.setOnMouseClicked((MouseEvent me) -> {
+            if (apImageFond.isVisible()) {
+                ivBtnPlusImageFond.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
+                apImageFond.setPrefHeight(0);
+                apImageFond.setMaxHeight(0);
+                apImageFond.setMinHeight(0);
+                apImageFond.setVisible(false);
+            } else {
+                ivBtnPlusImageFond.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
+                apImageFond.setPrefHeight(taillePanelImageFond);
+                apImageFond.setMaxHeight(taillePanelImageFond);
+                apImageFond.setMinHeight(taillePanelImageFond);
+                apImageFond.setVisible(true);
+            }
+        });
+
+        /*
+         * ********************************************
          *     Panel Menu contextuel
          * ********************************************
          */
@@ -3622,6 +4172,7 @@ public class GestionnaireInterfaceController {
         apVignettes.setStyle(styleap);
         apPlan.setStyle(styleap);
         apMenuContextuel.setStyle(styleap);
+        apImageFond.setStyle(styleap);
         apBoussole.setLayoutX(20);
         apBarreModif.setLayoutX(20);
         apTitre.setLayoutX(20);
@@ -3632,6 +4183,7 @@ public class GestionnaireInterfaceController {
         apVignettes.setLayoutX(20);
         apPlan.setLayoutX(20);
         apMenuContextuel.setLayoutX(20);
+        apImageFond.setLayoutX(20);
         /*
          * *******************************************************
          *     Ajout des Elements dans les Pannels
@@ -3646,6 +4198,7 @@ public class GestionnaireInterfaceController {
         apRS.getChildren().addAll(apReseauxSociaux, lblPanelReseauxSociaux, ivBtnPlusReseauxSociaux);
         apVIG.getChildren().addAll(apVignettes, lblPanelVignettes, ivBtnPlusVignettes);
         apPL.getChildren().addAll(apPlan, lblPanelPlan, ivBtnPlusPlan);
+        apIF.getChildren().addAll(apImageFond, lblPanelImageFond, ivBtnPlusImageFond);
         apMC.getChildren().addAll(apMenuContextuel, lblPanelMenuContextuel, ivBtnPlusMenuContextuel);
 
         /*
@@ -3654,7 +4207,7 @@ public class GestionnaireInterfaceController {
          * ******************************************************
          */
         vbOutils.getChildren().addAll(
-                apCoulTheme, apTIT, apDIA, apBB, apPL, apHS, apBOUSS, apMASQ, apRS, apVIG, apMC
+                apCoulTheme, apTIT, apDIA, apBB, apPL, apHS, apBOUSS, apMASQ, apRS, apVIG, apMC, apIF
         );
 
         /*
@@ -3761,7 +4314,7 @@ public class GestionnaireInterfaceController {
             apVisualisation.getChildren().remove(hbbarreBoutons);
             apVisualisation.getChildren().remove(ivHotSpot);
             apVisualisation.getChildren().remove(ivHotSpotImage);
-            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
+            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots, espacementBoutons);
             afficheVignettes();
             affichePlan();
         });
@@ -3780,7 +4333,13 @@ public class GestionnaireInterfaceController {
         slOpacite.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
             if (newValue != null) {
                 titreOpacite = (double) newValue;
-                txtTitre.setOpacity(titreOpacite);
+                String coul = cpCouleurFondTitre.getValue().toString().substring(2, 8);
+                Color couleur = cpCouleurFondTitre.getValue();
+                int rouge = (int) (couleur.getRed() * 255.d);
+                int bleu = (int) (couleur.getBlue() * 255.d);
+                int vert = (int) (couleur.getGreen() * 255.d);
+                String coulFond = "rgba(" + rouge + "," + vert + "," + bleu + "," + titreOpacite + ")";
+                txtTitre.setStyle("-fx-background-color : " + coulFond);
             }
         });
         slTaille.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
@@ -3798,8 +4357,14 @@ public class GestionnaireInterfaceController {
         });
         cpCouleurFondTitre.setOnAction((ActionEvent e) -> {
             String coul = cpCouleurFondTitre.getValue().toString().substring(2, 8);
+            Color couleur = cpCouleurFondTitre.getValue();
             couleurFondTitre = "#" + coul;
-            txtTitre.setStyle("-fx-background-color : " + couleurFondTitre);
+            int rouge = (int) (couleur.getRed() * 255.d);
+            int bleu = (int) (couleur.getBlue() * 255.d);
+            int vert = (int) (couleur.getGreen() * 255.d);
+            String coulFond = "rgba(" + rouge + "," + vert + "," + bleu + "," + titreOpacite + ")";
+
+            txtTitre.setStyle("-fx-background-color : " + coulFond);
         });
 
         /*
@@ -3825,40 +4390,34 @@ public class GestionnaireInterfaceController {
         /*
          Listeners Barre de boutons
          */
+        slEspacementBoutons.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+            espacementBoutons = (double) newValue;
+            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots, espacementBoutons);
+        });
+
         cblisteStyle.valueProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue ov, String t, String t1) {
                 if (t1 != null) {
-                    apVisualisation.getChildren().remove(hbbarreBoutons);
-                    apVisualisation.getChildren().remove(ivHotSpot);
-                    apVisualisation.getChildren().remove(ivHotSpotImage);
                     styleBarre = t1;
-                    afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
+                    afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots, espacementBoutons);
                 }
             }
         });
 
         dXSpinner.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
-            apVisualisation.getChildren().remove(hbbarreBoutons);
-            apVisualisation.getChildren().remove(ivHotSpot);
-            apVisualisation.getChildren().remove(ivHotSpotImage);
             dXBarre = new_value.doubleValue();
-            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
+            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots, espacementBoutons);
         });
         dYSpinner.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
-            apVisualisation.getChildren().remove(hbbarreBoutons);
-            apVisualisation.getChildren().remove(ivHotSpot);
             dYBarre = new_value.doubleValue();
-            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
+            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots, espacementBoutons);
         });
 
         grpPosBarre.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) -> {
             if (grpPosBarre.getSelectedToggle() != null) {
-                apVisualisation.getChildren().remove(hbbarreBoutons);
-                apVisualisation.getChildren().remove(ivHotSpot);
-                apVisualisation.getChildren().remove(ivHotSpotImage);
                 positionBarre = grpPosBarre.getSelectedToggle().getUserData().toString();
-                afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
+                afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots, espacementBoutons);
             }
         });
         cbVisible.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
@@ -3867,10 +4426,7 @@ public class GestionnaireInterfaceController {
             } else {
                 toggleBarreVisibilite = "non";
             }
-            apVisualisation.getChildren().remove(hbbarreBoutons);
-            apVisualisation.getChildren().remove(ivHotSpot);
-            apVisualisation.getChildren().remove(ivHotSpotImage);
-            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
+            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots, espacementBoutons);
         });
         cbSuivantPrecedent.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             bSuivantPrecedent = new_val;
@@ -3887,10 +4443,7 @@ public class GestionnaireInterfaceController {
             } else {
                 toggleBarreDeplacements = "non";
             }
-            apVisualisation.getChildren().remove(hbbarreBoutons);
-            apVisualisation.getChildren().remove(ivHotSpot);
-            apVisualisation.getChildren().remove(ivHotSpotImage);
-            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
+            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots, espacementBoutons);
         });
         cbZoom.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val) {
@@ -3898,9 +4451,7 @@ public class GestionnaireInterfaceController {
             } else {
                 toggleBarreZoom = "non";
             }
-            apVisualisation.getChildren().remove(hbbarreBoutons);
-            apVisualisation.getChildren().remove(ivHotSpot);
-            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
+            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots, espacementBoutons);
         });
         cbOutils.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val) {
@@ -3908,9 +4459,7 @@ public class GestionnaireInterfaceController {
             } else {
                 toggleBarreOutils = "non";
             }
-            apVisualisation.getChildren().remove(hbbarreBoutons);
-            apVisualisation.getChildren().remove(ivHotSpot);
-            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
+            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots, espacementBoutons);
         });
         cbSouris.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val) {
@@ -3918,10 +4467,7 @@ public class GestionnaireInterfaceController {
             } else {
                 toggleBoutonSouris = "non";
             }
-            apVisualisation.getChildren().remove(hbbarreBoutons);
-            apVisualisation.getChildren().remove(ivHotSpot);
-            apVisualisation.getChildren().remove(ivHotSpotImage);
-            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
+            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots, espacementBoutons);
         });
         cbRotation.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val) {
@@ -3929,9 +4475,7 @@ public class GestionnaireInterfaceController {
             } else {
                 toggleBoutonRotation = "non";
             }
-            apVisualisation.getChildren().remove(hbbarreBoutons);
-            apVisualisation.getChildren().remove(ivHotSpot);
-            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
+            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots, espacementBoutons);
         });
         cbFS.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val) {
@@ -3939,10 +4483,7 @@ public class GestionnaireInterfaceController {
             } else {
                 toggleBoutonFS = "non";
             }
-            apVisualisation.getChildren().remove(hbbarreBoutons);
-            apVisualisation.getChildren().remove(ivHotSpot);
-            apVisualisation.getChildren().remove(ivHotSpotImage);
-            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots);
+            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots, espacementBoutons);
         });
 
         /*
@@ -4128,6 +4669,7 @@ public class GestionnaireInterfaceController {
         grpPosVignettes.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) -> {
             if (grpPosVignettes.getSelectedToggle() != null) {
                 positionVignettes = grpPosVignettes.getSelectedToggle().getUserData().toString();
+                afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots, espacementBoutons);
                 afficheVignettes();
             }
         });
@@ -4136,6 +4678,7 @@ public class GestionnaireInterfaceController {
             if (newValue != null) {
                 double taille = (double) newValue;
                 tailleImageVignettes = taille;
+                afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots, espacementBoutons);
                 afficheVignettes();
             }
         });
@@ -4144,6 +4687,7 @@ public class GestionnaireInterfaceController {
             if (newValue != null) {
                 double opac = (double) newValue;
                 opaciteVignettes = opac;
+                afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots, espacementBoutons);
                 afficheVignettes();
             }
         });
@@ -4151,6 +4695,7 @@ public class GestionnaireInterfaceController {
         cbAfficheVignettes.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             if (new_val != null) {
                 bAfficheVignettes = new_val;
+                afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots, espacementBoutons);
                 afficheVignettes();
             }
         });
@@ -4158,11 +4703,13 @@ public class GestionnaireInterfaceController {
         cpCouleurFondVignettes.setOnAction((ActionEvent e) -> {
             String coul = cpCouleurFondVignettes.getValue().toString().substring(2, 8);
             couleurFondVignettes = "#" + coul;
+            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots, espacementBoutons);
             afficheVignettes();
         });
         cpCouleurTexteVignettes.setOnAction((ActionEvent e) -> {
             String coul = cpCouleurTexteVignettes.getValue().toString().substring(2, 8);
             couleurTexteVignettes = "#" + coul;
+            afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots, espacementBoutons);
             afficheVignettes();
         });
 

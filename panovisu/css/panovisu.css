@@ -119,9 +119,9 @@ and open the template in the editor.
     width: 40px;
     border: 1px solid rgba(255,255,255,0);
     background-color: rgba(255,255,255,0);
-    border-radius: 3px;
+    border-radius: 0px;
     opacity: 0.8;
-    margin-right: 3px;
+    margin-right: 0px;
 }
 
 .info {
@@ -338,4 +338,7 @@ and open the template in the editor.
 .data-title :first-child {
     margin-top: 20px;
 }
-    
+.imgFond{
+    position: absolute;
+    transition: 0.5s;
+}    

@@ -64,6 +64,20 @@ function panovisu(num_pano) {
         this.texte = "";
     }
 
+    function imageFond() {
+        this.fichier = "";
+        this.url = "";
+        this.infobulle="";
+        this.posX = "";
+        this.posY = "";
+        this.offsetX = 0;
+        this.offsetY = 0;
+        this.opacite = 1.0;
+        this.tailleX = "";
+        this.tailleY = "";
+        this.masquable = true;
+    }
+
 
     var timer,
             webGL = true,
@@ -82,6 +96,8 @@ function panovisu(num_pano) {
             pointsInteret = new Array(),
             vignettesPano = new Array(),
             pointsPlan = new Array(),
+            imagesFond = new Array(),
+            nombreImageFond = 0,
             planRentre,
             vigRentre,
             mode = 1,
@@ -165,6 +181,7 @@ function panovisu(num_pano) {
             fs,
             autoR,
             souris,
+            espacementBoutons,
             boutons,
             autoRotation,
             positionX,
@@ -845,6 +862,11 @@ function panovisu(num_pano) {
                     $("#divSuivant-" + num_pano).css({right: 0});
                 }
             }
+            for (i = 0; i < nombreImageFond; i++) {
+                if (imagesFond[i].masquable) {
+                    $("#imageFond-" + i + "-" + num_pano).fadeOut(500);
+                }
+            }
             elementsVisibles = false;
         }
         else {
@@ -883,6 +905,12 @@ function panovisu(num_pano) {
                 }
 
             }
+            for (i = 0; i < nombreImageFond; i++) {
+                if (imagesFond[i].masquable) {
+                    $("#imageFond-" + i + "-" + num_pano).fadeIn(500);
+                }
+            }
+
             elementsVisibles = true;
         }
 
@@ -1061,11 +1089,11 @@ function panovisu(num_pano) {
                     dY1 = parseInt(dY);
                     if (positionY === "bottom") {
                         if (positionX === "right") {
-                            $("#barre-" + num_pano).css({top: -(35 + dY1 + $("#titreVignettes-" + num_pano).height()) + "px"});
+                            $("#barre-" + num_pano).css({top: -(35 + dY1 - 2 + $("#titreVignettes-" + num_pano).height()) + "px"});
 
                         }
                         else {
-                            $("#barre-" + num_pano).css({top: -(35 + dY1) + "px"});
+                            $("#barre-" + num_pano).css({top: -(35 + dY1 - 2) + "px"});
                         }
                     }
 
@@ -1137,11 +1165,11 @@ function panovisu(num_pano) {
                     dY1 = parseInt(dY) + $("#divVignettes-" + num_pano).height() + 5;
                     if (positionY === "bottom") {
                         if (positionX === "right") {
-                            $("#barre-" + num_pano).css({top: -(35 + dY1 + $("#titreVignettes-" + num_pano).height()) + +"px"});
+                            $("#barre-" + num_pano).css({top: -(35 + dY1 - 2 + $("#titreVignettes-" + num_pano).height()) + +"px"});
 
                         }
                         else {
-                            $("#barre-" + num_pano).css({top: -(35 + dY1) + "px"});
+                            $("#barre-" + num_pano).css({top: -(35 + dY1 - 2) + "px"});
                         }
                     }
 
@@ -1159,6 +1187,11 @@ function panovisu(num_pano) {
             }
 
         }
+        if (nombreImageFond > 0) {
+            positionImagesFond();
+        }
+
+
     }
     $(document).on("click", ".titreVignettes", function() {
         if (!vigRentre) {
@@ -1614,23 +1647,23 @@ function panovisu(num_pano) {
      * @returns {undefined}
      */
     function afficheBarre(larg1, haut1) {
-        if (pano.width() < 400 || pano.height() < 200)
-        {
-            $("#barre-" + num_pano + " button").css({height: "20px", width: "20px", borderRadius: "0px"});
-            $("#barre-" + num_pano + " button img").css({height: "18px", width: "18px", paddingBottom: "2px", marginLeft: "-2px"});
-            $("#barre-" + num_pano).css({height: "25px"});
-        }
-        else
-        {
-            $("#barre-" + num_pano + " button").css({height: "30px", width: "30px", borderRadius: "3px"});
-            $("#barre-" + num_pano + " button img").css({height: "26px", width: "26px", paddingBottom: "0px", marginLeft: "0px"});
-            $("#barre-" + num_pano).css({height: "40px"});
-        }
+//        if (pano.width() < 400 || pano.height() < 200)
+//        {
+//            $("#barre-" + num_pano + " button").css({height: "20px", width: "20px", borderRadius: "0px"});
+//            $("#barre-" + num_pano + " button img").css({height: "18px", width: "18px", paddingBottom: "2px", marginLeft: "-2px"});
+//            $("#barre-" + num_pano).css({height: "25px"});
+//        }
+//        else
+//        {
+        $("#barre-" + num_pano + " button").css({height: "30px", width: "30px", borderRadius: "3px"});
+        $("#barre-" + num_pano + " button img").css({height: "26px", width: "26px", paddingBottom: "0px", marginLeft: "0px"});
+        $("#barre-" + num_pano).css({height: "40px"});
+//        }
         setTimeout(function() {
             w1 = $("#barre-" + num_pano).width();
             h1 = $("#barre-" + num_pano).height();
             dX1 = parseInt(dX);
-            dY1 = parseInt(dY);
+            dY1 = parseInt(dY) - 2;
             if (vignettes)
             {
                 if ((vignettesPosition === "right") && (positionX === "right") && (!vigRentre)) {
@@ -1640,7 +1673,7 @@ function panovisu(num_pano) {
                     dX1 = parseInt(dX) + parseInt(vignettesTailleImage) + 5;
                 }
                 if ((vignettesPosition === "bottom") && (positionY === "bottom") && (!vigRentre)) {
-                    dY1 = parseInt(dY) + parseInt(vignettesTailleImage) / 2 + 5;
+                    dY1 = parseInt(dY) - 2 + parseInt(vignettesTailleImage) / 2 + 5;
                 }
             }
 
@@ -1863,7 +1896,32 @@ function panovisu(num_pano) {
      * @returns {undefined}
      */
     function init(fenetre) {
-
+        if (nombreImageFond > 0) {
+            for (i = 0; i < nombreImageFond; i++) {
+                $("<div>", {id: "imageFond-" + i + "-" + num_pano, class: "imgFond"}).appendTo("#panovisu-" + num_pano);
+                if (imagesFond[i].tailleX !== "") {
+                    $("<img>", {id: "imgFond-" + i + "-" + num_pano, width: imagesFond[i].tailleX, height: imagesFond[i].tailleY, src: imagesFond[i].fichier, title: imagesFond[i].infobulle}).appendTo("#imageFond-" + i + "-" + num_pano);
+                }
+                else {
+                    $("<img>", {id: "imgFond-" + i + "-" + num_pano, src: imagesFond[i].fichier, title: imagesFond[i].infobulle}).appendTo("#imageFond-" + i + "-" + num_pano);
+                }
+                $("#imgFond-" + i + "-" + num_pano).css({
+                    opacity: imagesFond[i].opacite
+                });
+                if (imagesFond[i].url !== "") {
+                    var url1 = imagesFond[i].url;
+                    $("#imgFond-" + i + "-" + num_pano).css({
+                        cursor: "pointer",
+                        opacity: imagesFond[i].opacite
+                    });
+                    $("#imgFond-" + i + "-" + num_pano).on("click", function() {
+                        window.open(url1);
+                    });
+                }
+            }
+            positionImagesFond();
+        }
+        $(".barre button").css("margin-right", espacementBoutons);
         if (boussole) {
             $("#boussole-" + num_pano).css(boussolePositionX, boussoleDX + "px");
             $("#boussole-" + num_pano).css(boussolePositionY, boussoleDY + "px");
@@ -2116,6 +2174,7 @@ function panovisu(num_pano) {
         for (i = 0; i < 5; i++) {
             item[i] = {};
         }
+        $.contextMenu('destroy');
         if (afficheMC) {
             if (precSuivMC) {
                 item[0] = {
@@ -2154,7 +2213,6 @@ function panovisu(num_pano) {
             "apropos": {name: chainesTraduction[langage].aPropos}
         };
         items = $.extend(item[0], item[1], item[2], item[3], item[4]);
-        $.contextMenu('destroy');
         $.contextMenu({
             selector: "#panovisu-" + num_pano,
             className: 'data-title',
@@ -2273,7 +2331,7 @@ function panovisu(num_pano) {
             },
             items: items
         });
-        $('.data-title').attr('data-menutitle', "PanoVisu " + version);
+        $('.data-title').attr('data-menutitle', "PanoVisu " + version+" - "+programmeur+"("+anneeProgramme+")");
 
     }
 
@@ -2512,6 +2570,7 @@ function panovisu(num_pano) {
                     $(".panovisuCharge").html("&nbsp;");
                     afficheBarre(pano.width(), pano.height());
                     afficheInfoTitre();
+                    affiche();
                     if (multiReso === "oui" && niveau < nombreNiveaux - 1)
                     {
                         niveau += 1;
@@ -2534,7 +2593,6 @@ function panovisu(num_pano) {
                             vertex.normalize();
                             vertex.multiplyScalar(550 - niveau);
                         }
-                        affiche();
                     }
                     else {
                         //alert(panoImage);
@@ -2554,11 +2612,10 @@ function panovisu(num_pano) {
                             vertex.normalize();
                             vertex.multiplyScalar(550 - niveau);
                         }
-
-                        affiche();
                     }
 
                 }
+                affiche();
             }
 
         };
@@ -2692,7 +2749,6 @@ function panovisu(num_pano) {
                 fontSize: titreTaillePolice,
                 color: titreCouleur,
                 backgroundColor: titreFond,
-                opacity: titreOpacite,
                 width: infoPosX + "px"
             });
             var infoPosX = titreTailleFenetre;
@@ -2705,6 +2761,67 @@ function panovisu(num_pano) {
             $("#info-" + num_pano).css({
                 marginLeft: infoPosX
             });
+        }
+    }
+    function positionImagesFond() {
+        for (i = 0; i < nombreImageFond; i++) {
+            switch (imagesFond[i].posX) {
+                case "left" :
+                    if (!(vigRentre) && vignettesAffiche && vignettesPosition === "left") {
+                        var posit = parseInt(imagesFond[i].offsetX) + Math.round(vignettesTailleImage) + 10;
+                        console.log("posit" + posit + " offset : " + parseInt(imagesFond[i].offsetX) + "taille vignette : " + Math.round(vignettesTailleImage));
+
+                        $("#imageFond-" + i + "-" + num_pano).css(
+                                imagesFond[i].posX, posit + "px"
+                                );
+                    }
+                    else {
+                        $("#imageFond-" + i + "-" + num_pano).css(
+                                imagesFond[i].posX, parseInt(imagesFond[i].offsetX) + "px"
+                                );
+                    }
+                    break;
+                case "right" :
+                    if (!(vigRentre) && vignettesAffiche && vignettesPosition === "right") {
+                        var posit = parseInt(imagesFond[i].offsetX) + Math.round(vignettesTailleImage) + 10;
+                        console.log("posit" + posit + " offset : " + parseInt(imagesFond[i].offsetX) + "taille vignette : " + Math.round(vignettesTailleImage));
+
+                        $("#imageFond-" + i + "-" + num_pano).css(
+                                imagesFond[i].posX, posit + "px"
+                                );
+                    }
+                    else {
+                        $("#imageFond-" + i + "-" + num_pano).css(
+                                imagesFond[i].posX, imagesFond[i].offsetX + "px"
+                                );
+                    }
+                    break;
+                case "center" :
+                    var positX = ($("#panovisu-" + num_pano).width() - $("#imgFond-" + i + "-" + num_pano).width()) / 2 + parseInt(imagesFond[i].offsetX);
+                    $("#imageFond-" + i + "-" + num_pano).css("left", positX + "px");
+                    break
+            }
+            if (imagesFond[i].posY !== "middle") {
+                if (!(vigRentre) && vignettesAffiche && vignettesPosition === "bottom" && imagesFond[i].posY === "bottom") {
+                    var posit = parseInt(imagesFond[i].offsetY) + Math.round(vignettesTailleImage / 2) + 10;
+                    console.log("posit" + posit + " offset : " + parseInt(imagesFond[i].offsetY) + "taille vignette : " + Math.round(vignettesTailleImage));
+
+                    $("#imageFond-" + i + "-" + num_pano).css(
+                            imagesFond[i].posY, posit + "px"
+                            );
+
+                }
+                else {
+                    $("#imageFond-" + i + "-" + num_pano).css(
+                            imagesFond[i].posY, imagesFond[i].offsetY + "px"
+                            );
+                }
+            }
+            else {
+                var positY = ($("#panovisu-" + num_pano).height() - $("#imgFond-" + i + "-" + num_pano).height()) / 2 + parseInt(imagesFond[i].offsetY);
+                $("#imageFond-" + i + "-" + num_pano).css("top", positY + "px");
+
+            }
         }
     }
     /**
@@ -2819,6 +2936,11 @@ function panovisu(num_pano) {
             var posit = (hauteur - $("#divSuivant-" + num_pano).height()) / 2;
             $("#divSuivant-" + num_pano).css("top", posit);
             $("#divPrecedent-" + num_pano).css("top", posit);
+
+            if (nombreImageFond > 0) {
+                positionImagesFond();
+            }
+
 
         }, 300);
 
@@ -3066,6 +3188,7 @@ function panovisu(num_pano) {
                     multiReso = "non";
                     nombreNiveaux = 0;
                     bSuivantPrecedent = false;
+                    nombreImageFond = 0;
                     vignettesOpacite = 0.8;
                     vignettesPosition = "bottom";
                     vignettesFondCouleur = "green";
@@ -3225,6 +3348,7 @@ function panovisu(num_pano) {
                     styleBoutons = XMLBoutons.attr('styleBoutons') || styleBoutons;
                     zooms = XMLBoutons.attr('zoom') || zooms;
                     outils = XMLBoutons.attr('outils') || outils;
+                    espacementBoutons = parseInt(XMLBoutons.attr('espacement')) - 4 || 0;
                     fs = XMLBoutons.attr('fs') || fs;
                     autoR = XMLBoutons.attr('rotation') || autoR;
                     souris = XMLBoutons.attr('souris') || souris;
@@ -3284,12 +3408,37 @@ function panovisu(num_pano) {
                      *   vignettes des panoramiques
                      */
                     i = 0;
+
                     $(d).find('imageVignette').each(function() {
                         vignettesPano[i] = new vignettePano();
                         vignettesPano[i].xml = $(this).attr('xml');
                         vignettesPano[i].image = $(this).attr('image');
                         vignettesPano[i].txt = $(this).attr('texte') || "";
                         i++;
+                    });
+
+                    /*
+                     * Images de fond
+                     */
+
+                    nombreImageFond = 0;
+                    imagesFond = new Array();
+                    $(".imgFond").remove();
+
+                    $(d).find('imageFond').each(function() {
+                        imagesFond[nombreImageFond] = new imageFond();
+                        imagesFond[nombreImageFond].fichier = $(this).attr('fichier') || "";
+                        imagesFond[nombreImageFond].url = $(this).attr('url') || "";
+                        imagesFond[nombreImageFond].infobulle = $(this).attr('infobulle') || "";
+                        imagesFond[nombreImageFond].tailleX = $(this).attr('tailleX') || "";
+                        imagesFond[nombreImageFond].tailleY = $(this).attr('tailleY') || "";
+                        imagesFond[nombreImageFond].posX = $(this).attr('posX') || "right";
+                        imagesFond[nombreImageFond].posY = $(this).attr('posY') || "bottom";
+                        imagesFond[nombreImageFond].offsetX = $(this).attr('offsetX') || 0;
+                        imagesFond[nombreImageFond].offsetY = $(this).attr('offsetY') || 0;
+                        imagesFond[nombreImageFond].opacite = $(this).attr('opacite') || 0;
+                        imagesFond[nombreImageFond].masquable = (($(this).attr('masquable') || "oui") === "oui");
+                        nombreImageFond++;
                     });
 
                     var XMLPlan = $(d).find('plan');

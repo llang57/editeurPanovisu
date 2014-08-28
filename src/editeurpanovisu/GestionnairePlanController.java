@@ -14,8 +14,10 @@ import static editeurpanovisu.EditeurPanovisu.gestionnaireInterface;
 import static editeurpanovisu.EditeurPanovisu.gestionnairePlan;
 import static editeurpanovisu.EditeurPanovisu.nombrePlans;
 import static editeurpanovisu.EditeurPanovisu.plans;
+import static editeurpanovisu.EditeurPanovisu.repertAppli;
 import static editeurpanovisu.EditeurPanovisu.repertTemp;
 import static editeurpanovisu.EditeurPanovisu.stPrincipal;
+import static editeurpanovisu.EditeurPanovisu.tooltipStyle;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -56,6 +58,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.TextAlignment;
 import jfxtras.labs.scene.control.BigDecimalField;
+import org.controlsfx.control.action.Action;
+import org.controlsfx.dialog.Dialog;
+import org.controlsfx.dialog.Dialogs;
 
 /**
  *
@@ -100,6 +105,7 @@ public class GestionnairePlanController {
     private Image imgBoussole;
     private int numPoints = 0;
     private ScrollPane spOutils;
+    private boolean dragDropPlan = false;
 //    private Button btnValider;
 
     private void retireAffichagePointsHotSpots() {
@@ -172,6 +178,40 @@ public class GestionnairePlanController {
         Tooltip t = new Tooltip("point n° " + (i + 1));
         t.setStyle(tooltipStyle);
         Tooltip.install(point, t);
+        point.setOnDragDetected((MouseEvent me1) -> {
+            point.setFill(Color.RED);
+            point.setStroke(Color.YELLOW);
+            dragDropPlan = true;
+            System.out.println("d&d plan : " + dragDropPlan);
+            me1.consume();
+
+        });
+        point.setOnMouseDragged((MouseEvent me1) -> {
+            double X1 = me1.getSceneX();
+            double Y1 = me1.getSceneY();
+
+            double mouseXX = X1 - panePlan.getLayoutX();
+            double mouseYY = Y1 - panePlan.getLayoutY() - 110;
+            point.setCenterX(mouseXX);
+            point.setCenterY(mouseYY);
+            me1.consume();
+
+        });
+        point.setOnMouseReleased((MouseEvent me1) -> {
+            String chPoint = point.getId();
+            chPoint = chPoint.substring(5, chPoint.length());
+            int numeroPoint = Integer.parseInt(chPoint);
+            double X1 = me1.getSceneX();
+            double Y1 = me1.getSceneY();
+
+            double mouseXX = X1 - panePlan.getLayoutX();
+            double mouseYY = Y1 - panePlan.getLayoutY() - 110;
+            plans[planActuel].getHotspot(numeroPoint).setLongitude(mouseXX / largeur);
+            plans[planActuel].getHotspot(numeroPoint).setLatitude(mouseYY / hauteur);
+            point.setFill(Color.YELLOW);
+            point.setStroke(Color.RED);
+            me1.consume();
+        });
 
         point.setOnMouseClicked((MouseEvent me1) -> {
             double mouseX = me1.getSceneX();
@@ -205,23 +245,26 @@ public class GestionnairePlanController {
                 valideHsplan();
                 me1.consume();
             } else {
-                valideHsplan();
-                if (nombrePanoramiques > 1) {
-                    int largeurVignettes = 4;
-                    if (nombrePanoramiques < 4) {
-                        largeurVignettes = nombrePanoramiques;
+                System.out.println("d&d plan : " + dragDropPlan);
+                if (!dragDropPlan) {
+                    valideHsplan();
+                    if (nombrePanoramiques > 1) {
+                        int largeurVignettes = 4;
+                        if (nombrePanoramiques < 4) {
+                            largeurVignettes = nombrePanoramiques;
+                        }
+                        AnchorPane listePanoVig = afficherListePanosVignettes(numeroPoint);
+                        if (mouseX + largeurVignettes * 130 > panePlan.getWidth()) {
+                            listePanoVig.setLayoutX(panePlan.getWidth() - largeurVignettes * 130);
+                        } else {
+                            listePanoVig.setLayoutX(mouseX);
+                        }
+                        listePanoVig.setLayoutY(mouseY);
+                        panePlan.getChildren().add(listePanoVig);
                     }
-                    AnchorPane listePanoVig = afficherListePanosVignettes(numeroPoint);
-                    if (mouseX + largeurVignettes * 130 > panePlan.getWidth()) {
-                        listePanoVig.setLayoutX(panePlan.getWidth() - largeurVignettes * 130);
-                    } else {
-                        listePanoVig.setLayoutX(mouseX);
-                    }
-                    listePanoVig.setLayoutY(mouseY);
-                    panePlan.getChildren().add(listePanoVig);
+                    valideHsplan();
+                    me1.consume();
                 }
-                valideHsplan();
-                me1.consume();
             }
 
         });
@@ -603,7 +646,7 @@ public class GestionnairePlanController {
                     if (panoramiquesProjet[i].isAffichePlan() && panoramiquesProjet[i].getNumeroPlan() == planActuel) {
                         cbPanoramiques[i].setSelected(true);
                     }
-                    if (panoramiquesProjet[i].isAffichePlan() && panoramiquesProjet[i].getNumeroPlan() != planActuel) {
+                    if (panoramiquesProjet[i].isAffichePlan() && panoramiquesProjet[i].getNumeroPlan() != planActuel && panoramiquesProjet[i].getNumeroPlan() != -1) {
                         System.out.println("numero plan : " + panoramiquesProjet[i].getNumeroPlan() + " nb : " + nombrePlans);
                         cbPanoramiques[i].setDisable(true);
                         if (panoramiquesProjet[i].getNumeroPlan() < nombrePlans) {
@@ -681,7 +724,7 @@ public class GestionnairePlanController {
      * @param Y
      */
     private void planMouseClic(double X, double Y) {
-        if (nombrePanoramiques > 0) {
+        if (nombrePanoramiques > 0 && !dragDropPlan) {
 
             valideHsplan();
             dejaSauve = false;
@@ -725,6 +768,43 @@ public class GestionnairePlanController {
             }
             listePanoVig.setLayoutY(mouseY);
             panePlan.getChildren().add(listePanoVig);
+
+            point.setOnDragDetected((MouseEvent me1) -> {
+                point.setFill(Color.RED);
+                point.setStroke(Color.YELLOW);
+                dragDropPlan = true;
+                System.out.println("d&d plan : " + dragDropPlan);
+
+                me1.consume();
+
+            });
+            point.setOnMouseDragged((MouseEvent me1) -> {
+                double X1 = me1.getSceneX();
+                double Y1 = me1.getSceneY();
+
+                double mouseXX = X1 - panePlan.getLayoutX();
+                double mouseYY = Y1 - panePlan.getLayoutY() - 110;
+                point.setCenterX(mouseXX);
+                point.setCenterY(mouseYY);
+                me1.consume();
+
+            });
+            point.setOnMouseReleased((MouseEvent me1) -> {
+                String chPoint = point.getId();
+                chPoint = chPoint.substring(5, chPoint.length());
+                int numeroPoint = Integer.parseInt(chPoint);
+                double X1 = me1.getSceneX();
+                double Y1 = me1.getSceneY();
+
+                double mouseXX = X1 - panePlan.getLayoutX();
+                double mouseYY = Y1 - panePlan.getLayoutY() - 110;
+                plans[planActuel].getHotspot(numeroPoint).setLongitude(mouseXX / largeur);
+                plans[planActuel].getHotspot(numeroPoint).setLatitude(mouseYY / hauteur);
+                point.setFill(Color.YELLOW);
+                point.setStroke(Color.RED);
+                me1.consume();
+            });
+
             point.setOnMouseClicked((MouseEvent me1) -> {
                 if (me1.isControlDown()) {
                     valideHsplan();
@@ -755,28 +835,74 @@ public class GestionnairePlanController {
                     valideHsplan();
                     me1.consume();
                 } else {
-                    valideHsplan();
-                    String chPoint = point.getId();
-                    chPoint = chPoint.substring(5, chPoint.length());
-                    int numeroPoint = Integer.parseInt(chPoint);
-                    if (nombrePanoramiques > 1) {
-                        AnchorPane listePanoVig1 = afficherListePanosVignettes(numeroPoint);
-                        int largeurVignettes1 = 4;
-                        if (nombrePanoramiques < 4) {
-                            largeurVignettes1 = nombrePanoramiques;
+                    System.out.println("d&d plan : " + dragDropPlan);
+                    if (!dragDropPlan) {
+                        valideHsplan();
+                        String chPoint = point.getId();
+                        chPoint = chPoint.substring(5, chPoint.length());
+                        int numeroPoint = Integer.parseInt(chPoint);
+                        if (nombrePanoramiques > 1) {
+                            AnchorPane listePanoVig1 = afficherListePanosVignettes(numeroPoint);
+                            int largeurVignettes1 = 4;
+                            if (nombrePanoramiques < 4) {
+                                largeurVignettes1 = nombrePanoramiques;
+                            }
+                            if (mouseX + largeurVignettes1 * 130 > panePlan.getWidth()) {
+                                listePanoVig1.setLayoutX(panePlan.getWidth() - largeurVignettes1 * 130);
+                            } else {
+                                listePanoVig1.setLayoutX(mouseX);
+                            }
+                            listePanoVig1.setLayoutY(mouseY);
+                            panePlan.getChildren().add(listePanoVig1);
                         }
-                        if (mouseX + largeurVignettes1 * 130 > panePlan.getWidth()) {
-                            listePanoVig1.setLayoutX(panePlan.getWidth() - largeurVignettes1 * 130);
-                        } else {
-                            listePanoVig1.setLayoutX(mouseX);
-                        }
-                        listePanoVig1.setLayoutY(mouseY);
-                        panePlan.getChildren().add(listePanoVig1);
-                    }
-                    me1.consume();
+                        me1.consume();
 
+                    }
                 }
             });
+        }
+        else{
+            dragDropPlan=false;
+        }
+    }
+
+    private void retirePlanCourant() {
+
+        Action reponse = null;
+        reponse = Dialogs.create()
+                .owner(null)
+                .title(rb.getString("plan.supprimerPlan"))
+                .message(rb.getString("plan.etesVousSur"))
+                .actions(Dialog.Actions.YES, Dialog.Actions.NO)
+                .showWarning();
+
+        if (reponse == Dialog.Actions.YES) {
+
+            int planCour = cbChoixPlan.getSelectionModel().getSelectedIndex();
+            System.out.println("Plan Courant : " + planCour);
+            for (int i = planCour; i < nombrePlans - 1; i++) {
+                plans[i] = plans[i + 1];
+            }
+            nombrePlans--;
+            cbChoixPlan.getItems().clear();
+            for (int i = 0; i < nombrePlans; i++) {
+                cbChoixPlan.getItems().add(plans[i].getImagePlan());
+            }
+            cbChoixPlan.setValue(cbChoixPlan.getItems().get(0));
+            for (int i = 0; i < nombrePanoramiques; i++) {
+                if (panoramiquesProjet[i].getNumeroPlan() == planCour) {
+                    panoramiquesProjet[i].setNumeroPlan(-1);
+                    panoramiquesProjet[i].setAffichePlan(false);
+                }
+                if (panoramiquesProjet[i].getNumeroPlan() > planCour) {
+                    panoramiquesProjet[i].setNumeroPlan(panoramiquesProjet[i].getNumeroPlan() - 1);
+                }
+            }
+            if (nombrePlans > 0) {
+                afficherPlan(0);
+            } else {
+                planActuel = -1;
+            }
         }
     }
 
@@ -851,16 +977,32 @@ public class GestionnairePlanController {
         lblChoixPlan.setLayoutX(20);
         lblChoixPlan.setLayoutY(10);
         cbChoixPlan = new ComboBox();
-        cbChoixPlan.setLayoutX(110);
+        cbChoixPlan.setLayoutX(70);
         cbChoixPlan.setLayoutY(40);
         cbChoixPlan.valueProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue ov, String t, String t1) {
-                afficherPlan(cbChoixPlan.getSelectionModel().getSelectedIndex());
-                gestionnaireInterface.affichePlan();
+                if (cbChoixPlan.getSelectionModel().getSelectedIndex() != -1) {
+                    afficherPlan(cbChoixPlan.getSelectionModel().getSelectedIndex());
+                    gestionnaireInterface.affichePlan();
+                }
             }
         });
-        apChoixPlan.getChildren().addAll(lblChoixPlan, cbChoixPlan);
+        Pane fond = new Pane();
+        fond.setCursor(Cursor.HAND);
+        ImageView ivSupprPanoramique = new ImageView(new Image("file:" + repertAppli + File.separator + "images/suppr.png", 30, 30, true, true));
+        fond.setLayoutX(300);
+        fond.setLayoutY(40);
+        Tooltip t = new Tooltip(rb.getString("plan.supprimePlan"));
+        t.setStyle(tooltipStyle);
+        Tooltip.install(fond, t);
+        fond.getChildren().add(ivSupprPanoramique);
+        fond.setOnMouseClicked(
+                (MouseEvent me) -> {
+                    retirePlanCourant();
+                }
+        );
+        apChoixPlan.getChildren().addAll(lblChoixPlan, cbChoixPlan, fond);
         Separator sepChoix = new Separator(Orientation.HORIZONTAL);
         sepChoix.setPrefSize(largeurOutils + 50, 20);
         apConfigPlan = new AnchorPane();
