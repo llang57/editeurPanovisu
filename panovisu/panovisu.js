@@ -1545,8 +1545,8 @@ function panovisu(num_pano) {
                 hautImg = Math.round(largImg / ratio);
 
             }
-            mrgX = Math.round((lrg - 2 * posX - largImg) / 2);
-            mrgY = Math.round((haut - 2 * posY - hautImg) / 2);
+            mrgX = Math.round((lrg - 2 * posX - largImg) / 2) - 20;
+            mrgY = Math.round((haut - 2 * posY - hautImg) / 2) - 20;
             //            alert(hautImg + ", " + largImg+"ratio : "+ratio);
             $("#divImage-" + num_pano).html("");
             $("#divImage-" + num_pano).css({
@@ -1560,7 +1560,8 @@ function panovisu(num_pano) {
                 backgroundColor: diaporamaCouleur
             });
 
-            $("<img>", {id: "hsImg-" + num_pano, class: "hsImg", src: image, title: "Cliquez sur l'image pour quitter"}).appendTo("#divImage-" + num_pano);
+            $("<img>", {id: "hsImg-" + num_pano, class: "hsImg", src: image, title: "Cliquez sur l'image pour quitter",
+                style: "background-color : #fff;padding : 20px;box-shadow: 10px 10px 20px 0px #656565;"}).appendTo("#divImage-" + num_pano);
 
 
             $("#hsImg-" + num_pano).css({
@@ -1569,8 +1570,8 @@ function panovisu(num_pano) {
                 marginTop: mrgY + "px",
                 marginLeft: mrgX + "px"
             });
-            topCroix = haut - hautImg - posY - mrgY - 15;
-            rightCroix = lrg - largImg - posX - mrgX - 15;
+            topCroix = haut - hautImg - posY - mrgY - 15 - 40;
+            rightCroix = lrg - largImg - posX - mrgX - 15 - 40;
             $("<img>", {
                 id: "imgFerme-" + num_pano,
                 class: "imgFerme",
@@ -1658,6 +1659,7 @@ function panovisu(num_pano) {
         $("#barre-" + num_pano + " button").css({height: "30px", width: "30px", borderRadius: "3px"});
         $("#barre-" + num_pano + " button img").css({height: "26px", width: "26px", paddingBottom: "0px", marginLeft: "0px"});
         $("#barre-" + num_pano).css({height: "40px"});
+        $("#button-"+num_pano).show();
 //        }
         setTimeout(function() {
             w1 = $("#barre-" + num_pano).width();
@@ -2469,18 +2471,15 @@ function panovisu(num_pano) {
                 }
                 timers = setInterval(function() {
                     rafraichitHS();
-                }, 50);
+                }, 100);
 
-                affiche();
-                afficheInfoTitre();
                 changeTaille();
-                pano1.fadeIn(2000, function() {
-                    afficheBarre(pano.width(), pano.height());
-                    affiche();
-                    afficheMenuContextuel();
+                affiche();
+                afficheBarre(pano.width(), pano.height());
+                afficheInfoTitre();
+                afficheMenuContextuel();
 
-
-                });
+                pano1.fadeIn(500);
                 if (autoRotation === "oui")
                     demarreAutoRotation();
             });
@@ -2507,16 +2506,11 @@ function panovisu(num_pano) {
                 }
                 if (webGL) {
                     var geometry = new THREE.SphereGeometry(405, 200, 200);
-                }
-                else {
-                    var geometry = new THREE.SphereGeometry(405, 40, 40);
-
-                }
-                if (webGL) {
                     var webgl = renderer.context;
                     maxTextureSize = webgl.getParameter(webgl.MAX_TEXTURE_SIZE);
                 }
                 else {
+                    var geometry = new THREE.SphereGeometry(405, 40, 40);
                     maxTextureSize = 4096;
                 }
 
@@ -2543,14 +2537,12 @@ function panovisu(num_pano) {
                     rafraichitHS();
                 }, 50);
 
-                affiche();
-                afficheInfoTitre();
                 changeTaille();
-                pano1.fadeIn(2000, function() {
-                    afficheBarre(pano.width(), pano.height());
-                    affiche();
+                affiche();
+                afficheBarre(pano.width(), pano.height());
+                afficheInfoTitre();
                     afficheMenuContextuel();
-                });
+                pano1.fadeIn(500);
                 if (autoRotation === "oui")
                     demarreAutoRotation();
             });
@@ -2625,7 +2617,10 @@ function panovisu(num_pano) {
                     }
 
                 }
+                changeTaille();
                 affiche();
+                afficheBarre(pano.width(), pano.height());
+                afficheInfoTitre();
             }
 
         };
@@ -2655,7 +2650,10 @@ function panovisu(num_pano) {
                 afficheBarre(pano.width(), pano.height());
                 afficheInfoTitre();
             }
+            changeTaille();
             affiche();
+            afficheBarre(pano.width(), pano.height());
+            afficheInfoTitre();
         };
         image.src = path;
         return material;
@@ -2671,7 +2669,7 @@ function panovisu(num_pano) {
         $(".panovisuCharge").html("0/6");
         camera = new THREE.PerspectiveCamera(fov, pano.width() / pano.height(), 1, 1100);
         scene = new THREE.Scene();
-        webGL=false;
+        webGL = false;
         if (!isReloaded)
         {
             texture_placeholder = document.createElement('canvas');
@@ -2683,7 +2681,7 @@ function panovisu(num_pano) {
             if (supportWebgl())
             {
                 renderer = new THREE.WebGLRenderer();
-                webGL=true;
+                webGL = true;
             }
             else {
                 if (supportCanvas()) {
@@ -2740,20 +2738,21 @@ function panovisu(num_pano) {
                 var pi = pointsInteret[i];
                 creeHotspot(pi.long, pi.lat, pi.contenu, pi.image);
             }
-            afficheMenuContextuel();
+            changeTaille();
             affiche();
+            afficheBarre(pano.width(), pano.height());
+            afficheInfoTitre();
+            afficheMenuContextuel();
             timers = setInterval(function() {
                 rafraichitHS();
             }, 50);
-            //$("#info-" + num_pano).fadeIn(2000);
-            pano1.fadeIn(2000, function() {
-                affiche();
-                changeTaille();
-            });
+            pano1.fadeIn(500);
             if (autoRotation === "oui")
                 demarreAutoRotation();
         }, 1000);
     }
+
+
     function afficheInfoTitre() {
         if (afficheTitre === "oui") {
             var largeur = pano.width();
@@ -2766,7 +2765,8 @@ function panovisu(num_pano) {
                 fontSize: titreTaillePolice,
                 color: titreCouleur,
                 backgroundColor: titreFond,
-                width: infoPosX + "px"
+                width: infoPosX + "px",
+                display : "block"
             });
             var infoPosX = titreTailleFenetre;
             if (titreTailleUnite === "%") {

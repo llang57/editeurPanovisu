@@ -100,7 +100,7 @@ and open the template in the editor.
     margin: auto;
     text-align: center;
     height: 0;
-    position: relative;
+    position: absolute;
     /*bottom: 40px;*/
 }
 
@@ -113,6 +113,7 @@ and open the template in the editor.
     position: absolute;
     top: -45px;
     transition: 0.5s;    
+    padding : 1px;
 }
 .barre button{
     height: 40px;
@@ -122,6 +123,7 @@ and open the template in the editor.
     border-radius: 0px;
     opacity: 0.8;
     margin-right: 0px;
+    padding : 1px;
 }
 
 .info {
