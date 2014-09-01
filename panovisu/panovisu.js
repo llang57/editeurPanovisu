@@ -1466,8 +1466,10 @@ function panovisu(num_pano) {
      * @returns {undefined}
      */
     function affiche() {
-        $("#boutons-"+num_pano).show();
-        $("#info-"+num_pano).show();
+        $("#boutons-" + num_pano).show();
+        if (afficheTitre === "oui") {
+            $("#info-" + num_pano).show();
+        }
         if (latitude > 89.99)
             latitude = 89.99;
         if (latitude < -90)
@@ -1661,7 +1663,7 @@ function panovisu(num_pano) {
         $("#barre-" + num_pano + " button").css({height: "30px", width: "30px", borderRadius: "3px"});
         $("#barre-" + num_pano + " button img").css({height: "26px", width: "26px", paddingBottom: "0px", marginLeft: "0px"});
         $("#barre-" + num_pano).css({height: "40px"});
-        $("#button-"+num_pano).show();
+        $("#button-" + num_pano).show();
 //        }
         setTimeout(function() {
             w1 = $("#barre-" + num_pano).width();
@@ -2543,7 +2545,7 @@ function panovisu(num_pano) {
                 affiche();
                 afficheBarre(pano.width(), pano.height());
                 afficheInfoTitre();
-                    afficheMenuContextuel();
+                afficheMenuContextuel();
                 pano1.fadeIn(500);
                 if (autoRotation === "oui")
                     demarreAutoRotation();
@@ -2768,7 +2770,7 @@ function panovisu(num_pano) {
                 color: titreCouleur,
                 backgroundColor: titreFond,
                 width: infoPosX + "px",
-                display : "block"
+                display: "block"
             });
             var infoPosX = titreTailleFenetre;
             if (titreTailleUnite === "%") {
