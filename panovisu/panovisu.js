@@ -1466,6 +1466,8 @@ function panovisu(num_pano) {
      * @returns {undefined}
      */
     function affiche() {
+        $("#boutons-"+num_pano).show();
+        $("#info-"+num_pano).show();
         if (latitude > 89.99)
             latitude = 89.99;
         if (latitude < -90)
