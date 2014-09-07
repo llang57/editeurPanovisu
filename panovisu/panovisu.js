@@ -1433,8 +1433,12 @@ function panovisu(num_pano) {
      * @returns {undefined}
      */
     function affiche() {
-        $("#boutons-" + num_pano).show();
-        $("#info-" + num_pano).show();
+        if (boutons === "oui") {
+            $("#boutons-" + num_pano).show();
+        }
+        if (afficheTitre === "oui") {
+            $("#info-" + num_pano).show();
+        }
         if (latitude > 89.99)
             latitude = 89.99;
         if (latitude < -90)
@@ -2441,7 +2445,6 @@ function panovisu(num_pano) {
                 container.append(renderer.domElement);
                 for (var i = 0; i < pointsInteret.length; i++)
                 {
-                    var pi = pointsInteret[i];
                     creeHotspot(i);
                 }
                 timers = setInterval(function() {
@@ -2505,7 +2508,6 @@ function panovisu(num_pano) {
                 container.append(renderer.domElement);
                 for (var i = 0; i < pointsInteret.length; i++)
                 {
-                    var pi = pointsInteret[i];
                     creeHotspot(i);
                 }
                 timers = setInterval(function() {
@@ -2706,7 +2708,6 @@ function panovisu(num_pano) {
         setTimeout(function() {
             for (var i = 0; i < pointsInteret.length; i++)
             {
-                var pi = pointsInteret[i];
                 creeHotspot(i);
             }
             changeTaille();
@@ -2970,56 +2971,60 @@ function panovisu(num_pano) {
      * @returns {undefined}
      */
     function creeBarreNavigation() {
-        $("<button>", {type: "button", id: "xmoins-" + num_pano, class: "xmoins", title: chainesTraduction[langage].gauche,
-            style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#deplacement-" + num_pano);
-        $("<button>", {type: "button", id: "ymoins-" + num_pano, class: "ymoins", title: chainesTraduction[langage].haut,
-            style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#deplacement-" + num_pano);
-        $("<button>", {type: "button", id: "yplus-" + num_pano, class: "yplus", title: chainesTraduction[langage].bas,
-            style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#deplacement-" + num_pano);
-        $("<button>", {type: "button", id: "xplus-" + num_pano, class: "xplus", title: chainesTraduction[langage].droite,
-            style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#deplacement-" + num_pano);
-        $("<button>", {type: "button", id: "zoomPlus-" + num_pano, class: "zoomPlus", title: chainesTraduction[langage].zoomPlus,
-            style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#zoom-" + num_pano);
-        $("<button>", {type: "button", id: "zoomMoins-" + num_pano, class: "zoomMoins", title: chainesTraduction[langage].zoomMoins,
-            style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#zoom-" + num_pano);
-        $("<button>", {type: "button", id: "pleinEcran-" + num_pano, class: "pleinEcran", title: chainesTraduction[langage].pleinEcran,
-            style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#outils-" + num_pano);
-        $("<button>", {type: "button", id: "souris-" + num_pano, class: "souris", title: chainesTraduction[langage].souris,
-            style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#outils-" + num_pano);
-        $("<button>", {type: "button", id: "auto-" + num_pano, class: "auto", title: chainesTraduction[langage].autoratation,
-            style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#outils-" + num_pano);
-        $("<button>", {type: "button", id: "binfo-" + num_pano, class: "binfo", title: chainesTraduction[langage].aPropos,
-            style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#outils-" + num_pano);
-        $("<button>", {type: "button", id: "aide-" + num_pano, class: "aide", title: chainesTraduction[langage].aide,
-            style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#outils-" + num_pano);
+        if (boutons === "oui") {
+            $("<button>", {type: "button", id: "xmoins-" + num_pano, class: "xmoins", title: chainesTraduction[langage].gauche,
+                style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#deplacement-" + num_pano);
+            $("<button>", {type: "button", id: "ymoins-" + num_pano, class: "ymoins", title: chainesTraduction[langage].haut,
+                style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#deplacement-" + num_pano);
+            $("<button>", {type: "button", id: "yplus-" + num_pano, class: "yplus", title: chainesTraduction[langage].bas,
+                style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#deplacement-" + num_pano);
+            $("<button>", {type: "button", id: "xplus-" + num_pano, class: "xplus", title: chainesTraduction[langage].droite,
+                style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#deplacement-" + num_pano);
+            $("<button>", {type: "button", id: "zoomPlus-" + num_pano, class: "zoomPlus", title: chainesTraduction[langage].zoomPlus,
+                style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#zoom-" + num_pano);
+            $("<button>", {type: "button", id: "zoomMoins-" + num_pano, class: "zoomMoins", title: chainesTraduction[langage].zoomMoins,
+                style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#zoom-" + num_pano);
+            $("<button>", {type: "button", id: "pleinEcran-" + num_pano, class: "pleinEcran", title: chainesTraduction[langage].pleinEcran,
+                style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#outils-" + num_pano);
+            $("<button>", {type: "button", id: "souris-" + num_pano, class: "souris", title: chainesTraduction[langage].souris,
+                style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#outils-" + num_pano);
+            $("<button>", {type: "button", id: "auto-" + num_pano, class: "auto", title: chainesTraduction[langage].autoratation,
+                style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#outils-" + num_pano);
+            $("<button>", {type: "button", id: "binfo-" + num_pano, class: "binfo", title: chainesTraduction[langage].aPropos,
+                style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#outils-" + num_pano);
+            $("<button>", {type: "button", id: "aide-" + num_pano, class: "aide", title: chainesTraduction[langage].aide,
+                style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#outils-" + num_pano);
+        }
     }
     /**
      * 
      * @returns {undefined}
      */
     function creeImagesboutons() {
-        $("#xmoins-" + num_pano).html("");
-        $("<img>", {src: "panovisu/images/" + styleBoutons + "/gauche.png", alt: ""}).appendTo("#xmoins-" + num_pano);
-        $("#ymoins-" + num_pano).html("");
-        $("<img>", {src: "panovisu/images/" + styleBoutons + "/haut.png", alt: ""}).appendTo("#ymoins-" + num_pano);
-        $("#yplus-" + num_pano).html("");
-        $("<img>", {src: "panovisu/images/" + styleBoutons + "/bas.png", alt: ""}).appendTo("#yplus-" + num_pano);
-        $("#xplus-" + num_pano).html("");
-        $("<img>", {src: "panovisu/images/" + styleBoutons + "/droite.png", alt: ""}).appendTo("#xplus-" + num_pano);
-        $("#zoomPlus-" + num_pano).html("");
-        $("<img>", {src: "panovisu/images/" + styleBoutons + "/zoomin.png", alt: ""}).appendTo("#zoomPlus-" + num_pano);
-        $("#zoomMoins-" + num_pano).html("");
-        $("<img>", {src: "panovisu/images/" + styleBoutons + "/zoomout.png", alt: ""}).appendTo("#zoomMoins-" + num_pano);
-        $("#pleinEcran-" + num_pano).html("");
-        $("<img>", {src: "panovisu/images/" + styleBoutons + "/fs.png", alt: ""}).appendTo("#pleinEcran-" + num_pano);
-        $("#souris-" + num_pano).html("");
-        $("<img>", {src: "panovisu/images/" + styleBoutons + "/souris.png", alt: ""}).appendTo("#souris-" + num_pano);
-        $("#auto-" + num_pano).html("");
-        $("<img>", {src: "panovisu/images/" + styleBoutons + "/rotation.png", alt: ""}).appendTo("#auto-" + num_pano);
-        $("#binfo-" + num_pano).html("");
-        $("<img>", {src: "panovisu/images/" + styleBoutons + "/info.png", alt: ""}).appendTo("#binfo-" + num_pano);
-        $("#aide-" + num_pano).html("");
-        $("<img>", {src: "panovisu/images/" + styleBoutons + "/aide.png", alt: ""}).appendTo("#aide-" + num_pano);
+        if (boutons === "oui") {
+            $("#xmoins-" + num_pano).html("");
+            $("<img>", {src: "panovisu/images/" + styleBoutons + "/gauche.png", alt: ""}).appendTo("#xmoins-" + num_pano);
+            $("#ymoins-" + num_pano).html("");
+            $("<img>", {src: "panovisu/images/" + styleBoutons + "/haut.png", alt: ""}).appendTo("#ymoins-" + num_pano);
+            $("#yplus-" + num_pano).html("");
+            $("<img>", {src: "panovisu/images/" + styleBoutons + "/bas.png", alt: ""}).appendTo("#yplus-" + num_pano);
+            $("#xplus-" + num_pano).html("");
+            $("<img>", {src: "panovisu/images/" + styleBoutons + "/droite.png", alt: ""}).appendTo("#xplus-" + num_pano);
+            $("#zoomPlus-" + num_pano).html("");
+            $("<img>", {src: "panovisu/images/" + styleBoutons + "/zoomin.png", alt: ""}).appendTo("#zoomPlus-" + num_pano);
+            $("#zoomMoins-" + num_pano).html("");
+            $("<img>", {src: "panovisu/images/" + styleBoutons + "/zoomout.png", alt: ""}).appendTo("#zoomMoins-" + num_pano);
+            $("#pleinEcran-" + num_pano).html("");
+            $("<img>", {src: "panovisu/images/" + styleBoutons + "/fs.png", alt: ""}).appendTo("#pleinEcran-" + num_pano);
+            $("#souris-" + num_pano).html("");
+            $("<img>", {src: "panovisu/images/" + styleBoutons + "/souris.png", alt: ""}).appendTo("#souris-" + num_pano);
+            $("#auto-" + num_pano).html("");
+            $("<img>", {src: "panovisu/images/" + styleBoutons + "/rotation.png", alt: ""}).appendTo("#auto-" + num_pano);
+            $("#binfo-" + num_pano).html("");
+            $("<img>", {src: "panovisu/images/" + styleBoutons + "/info.png", alt: ""}).appendTo("#binfo-" + num_pano);
+            $("#aide-" + num_pano).html("");
+            $("<img>", {src: "panovisu/images/" + styleBoutons + "/aide.png", alt: ""}).appendTo("#aide-" + num_pano);
+        }
     }
 
     /**
