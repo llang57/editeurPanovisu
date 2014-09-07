@@ -300,6 +300,7 @@ and open the template in the editor.
 .plan,.planTitre,.planPoint{
     position: absolute;
     transition:ease-in-out 1s;
+    z-index: 500;
 }
 .plan{
     overflow: hidden;
@@ -320,6 +321,7 @@ and open the template in the editor.
 .data-title{
     margin: 10px;
     border-left: 1px solid #999;
+    font-size: 0.8em;
 }
 
 .data-title:before {
@@ -332,9 +334,9 @@ and open the template in the editor.
     background-color: #444;
     color : #fff;
     padding: 2px;
-
+    text-align: center;
     font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 11px;
+    font-size: 0.6em;;
     font-weight: bold;
 }
 .data-title :first-child {
@@ -343,4 +345,10 @@ and open the template in the editor.
 .imgFond{
     position: absolute;
     transition: 0.5s;
+    z-index: 200;
 }    
+.hotSpots{
+    position: absolute;
+    z-index: 100;
+    cursor: pointer;
+}

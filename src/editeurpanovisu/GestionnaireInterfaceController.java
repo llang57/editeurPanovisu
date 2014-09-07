@@ -407,7 +407,9 @@ public class GestionnaireInterfaceController {
     private ImageView ivAide;
     private ImageView ivAutoRotation;
     private ImageView ivModeSouris;
+    private ImageView ivModeSouris2;
     private ImageView ivPleinEcran;
+    private ImageView ivPleinEcran2;
     private HBox hbZoom;
     private ImageView ivZoomPlus;
     private ImageView ivZoomMoins;
@@ -513,11 +515,17 @@ public class GestionnaireInterfaceController {
                     case "fs.png":
                         ivPleinEcran = new ImageView(nouveauxBoutons[i]);
                         break;
+                    case "fs2.png":
+                        ivPleinEcran2 = new ImageView(nouveauxBoutons[i]);
+                        break;
                     case "rotation.png":
                         ivAutoRotation = new ImageView(nouveauxBoutons[i]);
                         break;
                     case "souris.png":
                         ivModeSouris = new ImageView(nouveauxBoutons[i]);
+                        break;
+                    case "souris2.png":
+                        ivModeSouris2 = new ImageView(nouveauxBoutons[i]);
                         break;
                     case "zoomin.png":
                         ivZoomPlus = new ImageView(nouveauxBoutons[i]);
@@ -2845,7 +2853,7 @@ public class GestionnaireInterfaceController {
         lblChoixHS.setLayoutX(10);
         lblChoixHS.setLayoutY(10);
 
-        double tailleHS = 35.d * ((int) (nombreHotSpots / 6 + 1) + (int) (nombreHotSpotsPhoto / 6 + 1)) + 100;
+        double tailleHS = 35.d * ((int) (nombreHotSpots / 9 + 1) + (int) (nombreHotSpotsPhoto / 6 + 1)) + 100;
         apHotSpots.setPrefHeight(tailleHS);
         apHotSpots.setLayoutX(50);
         apHotSpots.setLayoutY(40);
@@ -2864,8 +2872,8 @@ public class GestionnaireInterfaceController {
         for (String nomImage : listeHotSpots) {
             Pane fond = new Pane();
             ivHotspots[i] = new ImageView(new Image("file:" + repertHotSpots + File.separator + nomImage, -1, 30, true, true, true));
-            int col = i % 6;
-            int row = i / 6;
+            int col = i % 9;
+            int row = i / 9;
             xHS = col * 40 + 5;
             yHS = row * 35 + 25;
             fond.setLayoutX(xHS);
@@ -2895,10 +2903,10 @@ public class GestionnaireInterfaceController {
         for (String nomImage : listeHotSpotsPhoto) {
             Pane fond = new Pane();
             ivHotspotsPhoto[i] = new ImageView(new Image("file:" + repertHotSpotsPhoto + File.separator + nomImage, -1, 30, true, true, true));
-            int col = i % 6;
-            int row = i / 6;
+            int col = i % 9;
+            int row = i / 9;
             xHS = col * 40 + 5;
-            yHS = (row + (int) (nombreHotSpots / 6 + 1)) * 35 + 65;
+            yHS = (row + (int) (nombreHotSpots / 9 + 1)) * 35 + 65;
             fond.setLayoutX(xHS);
             fond.setLayoutY(yHS);
             fond.setStyle("-fx-background-color : #ccc");
