@@ -1433,10 +1433,10 @@ function panovisu(num_pano) {
      * @returns {undefined}
      */
     function affiche() {
-        if (boutons === "oui") {
+        if (boutons === "oui" && ((marcheArretNavigation !== "oui") || (marcheArretNavigation === "oui" && elementsVisibles))) {
             $("#boutons-" + num_pano).show();
         }
-        if (afficheTitre === "oui") {
+        if (afficheTitre === "oui" && ((marcheArretTitre !== "oui") || (marcheArretTitre === "oui" && elementsVisibles))) {
             $("#info-" + num_pano).show();
         }
         if (latitude > 89.99)
@@ -2330,10 +2330,10 @@ function panovisu(num_pano) {
                     //alert(texture);
                     if (img === img2) {
                         if (webGL) {
-                            var geometry = new THREE.SphereGeometry(405 - niveau, 200, 200);
+                            var geometry = new THREE.SphereGeometry(405 - niveau, 100, 50);
                         }
                         else {
-                            var geometry = new THREE.SphereGeometry(405 - niveau, 40, 40);
+                            var geometry = new THREE.SphereGeometry(405 - niveau, 50, 25);
                         }
                         var material = new THREE.MeshBasicMaterial({map: texture, overdraw: true});
                         var mesh1 = new THREE.Mesh(geometry, material);
@@ -2362,10 +2362,10 @@ function panovisu(num_pano) {
                     if (img === img2)
                     {
                         if (webGL) {
-                            var geometry = new THREE.SphereGeometry(390, 200, 200);
+                            var geometry = new THREE.SphereGeometry(390, 100, 50);
                         }
                         else {
-                            var geometry = new THREE.SphereGeometry(390, 40, 40);
+                            var geometry = new THREE.SphereGeometry(390, 50, 25);
                         }
                         var material = new THREE.MeshBasicMaterial({map: texture, overdraw: true});
                         var meshF = new THREE.Mesh(geometry, material);
@@ -2416,10 +2416,10 @@ function panovisu(num_pano) {
                     }
                 }
                 if (webGL) {
-                    var geometry = new THREE.SphereGeometry(405, 200, 200);
+                    var geometry = new THREE.SphereGeometry(405, 100, 50);
                 }
                 else {
-                    var geometry = new THREE.SphereGeometry(405, 40, 40);
+                    var geometry = new THREE.SphereGeometry(405, 50, 25);
                 }
                 if (webGL) {
                     var webgl = renderer.context;
@@ -2483,12 +2483,12 @@ function panovisu(num_pano) {
                     }
                 }
                 if (webGL) {
-                    var geometry = new THREE.SphereGeometry(405, 200, 200);
+                    var geometry = new THREE.SphereGeometry(405, 100, 50);
                     var webgl = renderer.context;
                     maxTextureSize = webgl.getParameter(webgl.MAX_TEXTURE_SIZE);
                 }
                 else {
-                    var geometry = new THREE.SphereGeometry(405, 40, 40);
+                    var geometry = new THREE.SphereGeometry(405, 50, 25);
                     maxTextureSize = 4096;
                 }
 
@@ -2580,7 +2580,7 @@ function panovisu(num_pano) {
                             loadTexture(panoImage + '_f.jpg'), // devant   z+
                             loadTexture(panoImage + '_b.jpg')  // derriere z-
                         ];
-                        var meshF = new THREE.Mesh(new THREE.CubeGeometry(395, 395, 395, 10, 10, 10), new THREE.MeshFaceMaterial(materials));
+                        var meshF = new THREE.Mesh(new THREE.CubeGeometry(395, 395, 395, 40, 40, 40), new THREE.MeshFaceMaterial(materials));
                         meshF.scale.x = -1;
                         scene.add(meshF);
                         for (var i = 0, l = meshF.geometry.vertices.length; i < l; i++) {
@@ -2683,6 +2683,7 @@ function panovisu(num_pano) {
                 loadTexture1(nomimage + '_f.jpg', 0), // devant   z+
                 loadTexture1(nomimage + '_b.jpg', 0)  // derriere z-
             ];
+            mesh = new THREE.Mesh(new THREE.CubeGeometry(405, 405, 405, 10, 10, 10), new THREE.MeshFaceMaterial(materials));
         }
         else {
             var materials = [
@@ -2693,8 +2694,8 @@ function panovisu(num_pano) {
                 loadTexture(panoImage + '_f.jpg'), // devant   z+
                 loadTexture(panoImage + '_b.jpg')  // derriere z-
             ];
+            mesh = new THREE.Mesh(new THREE.CubeGeometry(405, 405, 405, 40, 40, 40), new THREE.MeshFaceMaterial(materials));
         }
-        mesh = new THREE.Mesh(new THREE.CubeGeometry(405, 405, 405, 10, 10, 10), new THREE.MeshFaceMaterial(materials));
         mesh.scale.x = -1;
         scene.add(mesh);
         for (var i = 0, l = mesh.geometry.vertices.length; i < l; i++) {
@@ -2726,7 +2727,7 @@ function panovisu(num_pano) {
 
 
     function afficheInfoTitre() {
-        if (afficheTitre === "oui") {
+        if (afficheTitre === "oui" && ((marcheArretTitre !== "oui") || (marcheArretTitre === "oui" && elementsVisibles))) {
             var largeur = pano.width();
             var infoPosX = titreTailleFenetre;
             if (titreTailleUnite === "%") {
@@ -2971,30 +2972,28 @@ function panovisu(num_pano) {
      * @returns {undefined}
      */
     function creeBarreNavigation() {
-        if (boutons === "oui") {
-            $("<button>", {type: "button", id: "xmoins-" + num_pano, class: "xmoins", title: chainesTraduction[langage].gauche,
-                style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#deplacement-" + num_pano);
-            $("<button>", {type: "button", id: "ymoins-" + num_pano, class: "ymoins", title: chainesTraduction[langage].haut,
-                style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#deplacement-" + num_pano);
-            $("<button>", {type: "button", id: "yplus-" + num_pano, class: "yplus", title: chainesTraduction[langage].bas,
-                style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#deplacement-" + num_pano);
-            $("<button>", {type: "button", id: "xplus-" + num_pano, class: "xplus", title: chainesTraduction[langage].droite,
-                style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#deplacement-" + num_pano);
-            $("<button>", {type: "button", id: "zoomPlus-" + num_pano, class: "zoomPlus", title: chainesTraduction[langage].zoomPlus,
-                style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#zoom-" + num_pano);
-            $("<button>", {type: "button", id: "zoomMoins-" + num_pano, class: "zoomMoins", title: chainesTraduction[langage].zoomMoins,
-                style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#zoom-" + num_pano);
-            $("<button>", {type: "button", id: "pleinEcran-" + num_pano, class: "pleinEcran", title: chainesTraduction[langage].pleinEcran,
-                style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#outils-" + num_pano);
-            $("<button>", {type: "button", id: "souris-" + num_pano, class: "souris", title: chainesTraduction[langage].souris,
-                style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#outils-" + num_pano);
-            $("<button>", {type: "button", id: "auto-" + num_pano, class: "auto", title: chainesTraduction[langage].autoratation,
-                style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#outils-" + num_pano);
-            $("<button>", {type: "button", id: "binfo-" + num_pano, class: "binfo", title: chainesTraduction[langage].aPropos,
-                style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#outils-" + num_pano);
-            $("<button>", {type: "button", id: "aide-" + num_pano, class: "aide", title: chainesTraduction[langage].aide,
-                style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#outils-" + num_pano);
-        }
+        $("<button>", {type: "button", id: "xmoins-" + num_pano, class: "xmoins", title: chainesTraduction[langage].gauche,
+            style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#deplacement-" + num_pano);
+        $("<button>", {type: "button", id: "ymoins-" + num_pano, class: "ymoins", title: chainesTraduction[langage].haut,
+            style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#deplacement-" + num_pano);
+        $("<button>", {type: "button", id: "yplus-" + num_pano, class: "yplus", title: chainesTraduction[langage].bas,
+            style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#deplacement-" + num_pano);
+        $("<button>", {type: "button", id: "xplus-" + num_pano, class: "xplus", title: chainesTraduction[langage].droite,
+            style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#deplacement-" + num_pano);
+        $("<button>", {type: "button", id: "zoomPlus-" + num_pano, class: "zoomPlus", title: chainesTraduction[langage].zoomPlus,
+            style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#zoom-" + num_pano);
+        $("<button>", {type: "button", id: "zoomMoins-" + num_pano, class: "zoomMoins", title: chainesTraduction[langage].zoomMoins,
+            style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#zoom-" + num_pano);
+        $("<button>", {type: "button", id: "pleinEcran-" + num_pano, class: "pleinEcran", title: chainesTraduction[langage].pleinEcran,
+            style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#outils-" + num_pano);
+        $("<button>", {type: "button", id: "souris-" + num_pano, class: "souris", title: chainesTraduction[langage].souris,
+            style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#outils-" + num_pano);
+        $("<button>", {type: "button", id: "auto-" + num_pano, class: "auto", title: chainesTraduction[langage].autoratation,
+            style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#outils-" + num_pano);
+        $("<button>", {type: "button", id: "binfo-" + num_pano, class: "binfo", title: chainesTraduction[langage].aPropos,
+            style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#outils-" + num_pano);
+        $("<button>", {type: "button", id: "aide-" + num_pano, class: "aide", title: chainesTraduction[langage].aide,
+            style: "background-color : " + couleur + ";border : 1px solid " + bordure + ";"}).appendTo("#outils-" + num_pano);
     }
     /**
      * 

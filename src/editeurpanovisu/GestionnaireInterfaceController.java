@@ -1552,7 +1552,7 @@ public class GestionnaireInterfaceController {
             contenuFichier += "opacite=" + imagesFond[i].getOpacite() + "#";
             contenuFichier += "masquable=" + imagesFond[i].isMasquable() + "#";
             contenuFichier += "url=" + imagesFond[i].getUrl() + "#";
-            contenuFichier += "infobulle=" + imagesFond[i].getInfobulle()+ "#";
+            contenuFichier += "infobulle=" + imagesFond[i].getInfobulle() + "#";
             contenuFichier += ">\n";
         }
 
@@ -1659,7 +1659,6 @@ public class GestionnaireInterfaceController {
 
                     case "styleBarre":
                         styleBarre = valeur;
-                        cblisteStyle.setValue(valeur);
                         break;
                     case "suivantPrecedent":
                         bSuivantPrecedent = (valeur.equals("true"));
@@ -1706,67 +1705,30 @@ public class GestionnaireInterfaceController {
                         break;
                     case "dX":
                         dXBarre = Double.parseDouble(valeur);
-                        dXSpinner.setNumber(new BigDecimal(dXBarre));
                         break;
                     case "dY":
                         dYBarre = Double.parseDouble(valeur);
-                        dYSpinner.setNumber(new BigDecimal(dYBarre));
                         break;
                     case "visible":
                         toggleBarreVisibilite = valeur;
-                        if (valeur.equals("oui")) {
-                            cbVisible.setSelected(true);
-                        } else {
-                            cbVisible.setSelected(false);
-                        }
                         break;
                     case "deplacement":
                         toggleBarreDeplacements = valeur;
-                        if (valeur.equals("oui")) {
-                            cbDeplacements.setSelected(true);
-                        } else {
-                            cbDeplacements.setSelected(false);
-                        }
                         break;
                     case "zoom":
                         toggleBarreZoom = valeur;
-                        if (valeur.equals("oui")) {
-                            cbZoom.setSelected(true);
-                        } else {
-                            cbZoom.setSelected(false);
-                        }
                         break;
                     case "outils":
                         toggleBarreOutils = valeur;
-                        if (valeur.equals("oui")) {
-                            cbOutils.setSelected(true);
-                        } else {
-                            cbOutils.setSelected(false);
-                        }
                         break;
                     case "rotation":
                         toggleBoutonRotation = valeur;
-                        if (valeur.equals("oui")) {
-                            cbRotation.setSelected(true);
-                        } else {
-                            cbRotation.setSelected(false);
-                        }
                         break;
                     case "FS":
                         toggleBoutonFS = valeur;
-                        if (valeur.equals("oui")) {
-                            cbFS.setSelected(true);
-                        } else {
-                            cbFS.setSelected(false);
-                        }
                         break;
                     case "souris":
                         toggleBoutonSouris = valeur;
-                        if (valeur.equals("oui")) {
-                            cbSouris.setSelected(true);
-                        } else {
-                            cbSouris.setSelected(false);
-                        }
                         break;
                     case "espacementBoutons":
                         espacementBoutons = Double.parseDouble(valeur);
@@ -2007,6 +1969,45 @@ public class GestionnaireInterfaceController {
         cpCouleurHotspotsPhoto.setValue(couleurHotspotsPhoto);
         cbListePolices.setValue(titrePoliceNom);
         slOpacite.setValue(titreOpacite);
+        cblisteStyle.setValue(styleBarre);
+        dXSpinner.setNumber(new BigDecimal(dXBarre));
+        dYSpinner.setNumber(new BigDecimal(dYBarre));
+        if (toggleBarreVisibilite.equals("oui")) {
+            cbVisible.setSelected(true);
+        } else {
+            cbVisible.setSelected(false);
+        }
+        if (toggleBarreDeplacements.equals("oui")) {
+            cbDeplacements.setSelected(true);
+        } else {
+            cbDeplacements.setSelected(false);
+        }
+        if (toggleBarreZoom.equals("oui")) {
+            cbZoom.setSelected(true);
+        } else {
+            cbZoom.setSelected(false);
+        }
+        if (toggleBarreOutils.equals("oui")) {
+            cbOutils.setSelected(true);
+        } else {
+            cbOutils.setSelected(false);
+        }
+
+        if (toggleBoutonRotation.equals("oui")) {
+            cbRotation.setSelected(true);
+        } else {
+            cbRotation.setSelected(false);
+        }
+        if (toggleBoutonFS.equals("oui")) {
+            cbFS.setSelected(true);
+        } else {
+            cbFS.setSelected(false);
+        }
+        if (toggleBoutonSouris.equals("oui")) {
+            cbSouris.setSelected(true);
+        } else {
+            cbSouris.setSelected(false);
+        }
         cbSuivantPrecedent.setSelected(bSuivantPrecedent);
         fondSuivant.setVisible(bSuivantPrecedent);
         fondPrecedent.setVisible(bSuivantPrecedent);
@@ -2335,7 +2336,7 @@ public class GestionnaireInterfaceController {
             txtInfobulleImageFond.setPrefWidth(200);
             txtInfobulleImageFond.setLayoutX(120);
             txtInfobulleImageFond.setLayoutY(250);
-            
+
             apImagesFond.getChildren().addAll(ivImageFond, fond1,
                     lblPosit,
                     rbImageFondTopLeft, rbImageFondTopCenter, rbImageFondTopRight,
@@ -2348,7 +2349,7 @@ public class GestionnaireInterfaceController {
                     lblUrlImageFond, txtUrlImageFond,
                     lblInfobulleImageFond, txtInfobulleImageFond
             );
-            
+
             tgPosition.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) -> {
                 if (tgPosition.getSelectedToggle() != null) {
                     String positImageFond = tgPosition.getSelectedToggle().getUserData().toString();
