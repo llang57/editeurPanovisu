@@ -16,10 +16,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -396,8 +396,8 @@ public class EditeurPanovisu extends Application {
                 }
                 if (gestionnaireInterface.bFenetreInfoPersonnalise) {
                     String strImgInfoURL = "images/" + gestionnaireInterface.strFenetreInfoImage.substring(
-                                gestionnaireInterface.strFenetreInfoImage.lastIndexOf(File.separator) + 1,
-                                gestionnaireInterface.strFenetreInfoImage.length());
+                            gestionnaireInterface.strFenetreInfoImage.lastIndexOf(File.separator) + 1,
+                            gestionnaireInterface.strFenetreInfoImage.length());
                     contenuFichier += "<!--  Fenêtre info personnalisée -->\n"
                             + "    <fenetreInfo \n"
                             + "        affiche=\"oui\"\n"
@@ -416,8 +416,8 @@ public class EditeurPanovisu extends Application {
                 }
                 if (gestionnaireInterface.bFenetreAidePersonnalise) {
                     String strImgAideURL = "images/" + gestionnaireInterface.strFenetreAideImage.substring(
-                                gestionnaireInterface.strFenetreAideImage.lastIndexOf(File.separator) + 1,
-                                gestionnaireInterface.strFenetreAideImage.length());
+                            gestionnaireInterface.strFenetreAideImage.lastIndexOf(File.separator) + 1,
+                            gestionnaireInterface.strFenetreAideImage.length());
                     contenuFichier += "<!--  Fenêtre Aide personnalisée -->\n"
                             + "    <fenetreAide \n"
                             + "        affiche=\"oui\"\n"
@@ -663,7 +663,7 @@ public class EditeurPanovisu extends Application {
                 String nomXMLFile = fichierPano.substring(fichierPano.lastIndexOf(File.separator) + 1, fichierPano.length()).split("\\.")[0] + ".xml";
                 xmlFile = new File(xmlRepert + File.separator + nomXMLFile);
                 xmlFile.setWritable(true);
-                FileWriter fw = new FileWriter(xmlFile);
+                OutputStreamWriter fw = new OutputStreamWriter(new FileOutputStream(xmlFile), "UTF-8");
                 try (BufferedWriter bw = new BufferedWriter(fw)) {
                     bw.write(contenuFichier);
                 }
@@ -750,7 +750,7 @@ public class EditeurPanovisu extends Application {
             }
             File fichIndexHTML = new File(repertTemp + File.separator + "index.html");
             fichIndexHTML.setWritable(true);
-            FileWriter fw1 = new FileWriter(fichIndexHTML);
+            OutputStreamWriter fw1 = new OutputStreamWriter(new FileOutputStream(fichIndexHTML), "UTF-8");
             try (BufferedWriter bw1 = new BufferedWriter(fw1)) {
                 bw1.write(fichierHTML);
             }
@@ -1469,7 +1469,7 @@ public class EditeurPanovisu extends Application {
         contenuFichier += "[Interface=>\n" + gestionnaireInterface.getTemplate() + "]\n";
         contenuFichier += gestionnairePlan.getTemplate();
         fichProjet.setWritable(true);
-        FileWriter fw = new FileWriter(fichProjet);
+        OutputStreamWriter fw = new OutputStreamWriter(new FileOutputStream(fichProjet), "UTF-8");
         try (BufferedWriter bw = new BufferedWriter(fw)) {
             bw.write(contenuFichier);
         }
@@ -1489,9 +1489,9 @@ public class EditeurPanovisu extends Application {
         for (int i = 0; i < nombreHistoFichiers; i++) {
             contenuFichier += histoFichiers[i] + "\n";
         }
-        FileWriter fw = null;
+        OutputStreamWriter fw = null;
         try {
-            fw = new FileWriter(fichConfig);
+            fw = new OutputStreamWriter(new FileOutputStream(fichConfig), "UTF-8");
         } catch (IOException ex) {
             Logger.getLogger(ConfigDialogController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -2301,9 +2301,9 @@ public class EditeurPanovisu extends Application {
             contenuFichier += "repert=" + repertoireProjet + "\n";
             contenuFichier += "style=clair\n";
             fichConfig.setWritable(true);
-            FileWriter fw = null;
+            OutputStreamWriter fw = null;
             try {
-                fw = new FileWriter(fichConfig);
+                fw = new OutputStreamWriter(new FileOutputStream(fichConfig), "UTF-8");
             } catch (IOException ex) {
                 Logger.getLogger(ConfigDialogController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -4016,7 +4016,7 @@ public class EditeurPanovisu extends Application {
         if (fichTemplate != null) {
             String contenuFichier = gestionnaireInterface.getTemplate();
             fichTemplate.setWritable(true);
-            FileWriter fw = new FileWriter(fichTemplate);
+            OutputStreamWriter fw = new OutputStreamWriter(new FileOutputStream(fichTemplate), "UTF-8");
             try (BufferedWriter bw = new BufferedWriter(fw)) {
                 bw.write(contenuFichier);
             }

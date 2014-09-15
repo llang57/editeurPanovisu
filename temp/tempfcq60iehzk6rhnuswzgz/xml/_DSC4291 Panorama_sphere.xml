@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Visite générée par l'éditeur panoVisu 
+
+             Création L.LANG      le monde à 360°  : http://lemondea360.fr
+-->
+
+
+<scene>
+   <pano 
+      image="panos/_DSC4291 Panorama_sphere"
+      titre=""
+      titrePolice="Verdana"
+      titreTaillePolice="12px"
+      titreTaille="100%"
+      titreFond="rgba(0,255,0,0.8)"
+      titreCouleur="#ffffff"
+      diaporamaCouleur="rgba(0,0,0,0.8)"
+      type="sphere"
+      multiReso="oui"
+      nombreNiveaux="4.0"
+      zeroNord="-180.0"
+      regardX="-180.0"
+      regardY="0"
+      affinfo="oui"
+      afftitre="oui"
+   />
+   <!--Définition de la Barre de navigation-->
+   <boutons 
+      styleBoutons="navigation"
+      couleur="rgba(255,255,255,0)"
+      bordure="rgba(255,255,255,0)"
+      deplacements="oui" 
+      zoom="oui" 
+      outils="oui"
+      fs="oui" 
+      souris="oui" 
+      rotation="oui" 
+      positionX="center"
+      positionY="bottom" 
+      dX="0.0" 
+      dY="10.0"
+      espacement="4"
+      visible="oui"
+   />
+<!--  Fenêtre info personnalisée -->
+    <fenetreInfo 
+        affiche="oui"
+        image="images/planDefaut.jpg"
+        taille="86.11111111111111"
+        opacite="1.0"
+        dX="0"
+        dY="0"
+        URL="http://lemondea360.fr"
+        texteURL="Le monde à 360°"
+        couleurURL="#4d001a"
+        TailleURL="12"
+        URLdX="53"
+        URLdY="183"
+    />
+<!--  Fenêtre Aide personnalisée -->
+    <fenetreAide 
+        affiche="oui"
+        image="images/FSLogo.png"
+        taille="154.76190476190476"
+        opacite="1.0"
+        dX="0.0"
+        dY="0.0"
+    />
+    <!--Définition des hotspots-->  
+   <hotspots>
+   </hotspots>
+
+<!-- Définition des images de fond -->
+
+</scene>
