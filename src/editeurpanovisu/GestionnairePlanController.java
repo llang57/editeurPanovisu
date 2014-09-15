@@ -39,7 +39,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.control.Slider;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
@@ -118,7 +118,7 @@ public class GestionnairePlanController {
     private void valideHsplan() {
         for (int i = 0; i < plans[planActuel].getNombreHotspots(); i++) {
             ComboBox cbx = (ComboBox) vbOutils.lookup("#cbplan" + i);
-            TextArea txtTexteHS = (TextArea) vbOutils.lookup("#txtHsplan" + i);
+            TextField txtTexteHS = (TextField) vbOutils.lookup("#txtHsplan" + i);
             if (txtTexteHS != null) {
                 plans[planActuel].getHotspot(i).setInfo(txtTexteHS.getText());
             }
@@ -182,7 +182,7 @@ public class GestionnairePlanController {
             point.setFill(Color.RED);
             point.setStroke(Color.YELLOW);
             dragDropPlan = true;
-            System.out.println("d&d plan : " + dragDropPlan);
+            //System.out.println("d&d plan : " + dragDropPlan);
             me1.consume();
 
         });
@@ -245,7 +245,7 @@ public class GestionnairePlanController {
                 valideHsplan();
                 me1.consume();
             } else {
-                System.out.println("d&d plan : " + dragDropPlan);
+                //System.out.println("d&d plan : " + dragDropPlan);
                 if (!dragDropPlan) {
                     valideHsplan();
                     if (nombrePanoramiques > 1) {
@@ -338,7 +338,7 @@ public class GestionnairePlanController {
             lblTexteHS.setLayoutX(20);
             lblTexteHS.setLayoutY(120);
 
-            TextArea txtTexteHS = new TextArea();
+            TextField txtTexteHS = new TextField();
             txtTexteHS.setLayoutX(60);
             txtTexteHS.setLayoutY(150);
             txtTexteHS.textProperty().addListener((final ObservableValue<? extends String> observable, final String oldValue, final String newValue) -> {
@@ -495,7 +495,7 @@ public class GestionnairePlanController {
                 planListeVignette = nomPano;
                 if (panoramiquesProjet[numeroPano].getTitrePanoramique() != null) {
                     String texteHS = panoramiquesProjet[numeroPano].getTitrePanoramique();
-                    TextArea txtHS = (TextArea) vbOutils.lookup("#txtHsplan" + numHS);
+                    TextField txtHS = (TextField) vbOutils.lookup("#txtHsplan" + numHS);
                     txtHS.setText(texteHS);
                 }
                 plans[planActuel].getHotspot(numHS).setNumeroPano(numeroPano);
@@ -647,7 +647,7 @@ public class GestionnairePlanController {
                         cbPanoramiques[i].setSelected(true);
                     }
                     if (panoramiquesProjet[i].isAffichePlan() && panoramiquesProjet[i].getNumeroPlan() != planActuel && panoramiquesProjet[i].getNumeroPlan() != -1) {
-                        System.out.println("numero plan : " + panoramiquesProjet[i].getNumeroPlan() + " nb : " + nombrePlans);
+                        //System.out.println("numero plan : " + panoramiquesProjet[i].getNumeroPlan() + " nb : " + nombrePlans);
                         cbPanoramiques[i].setDisable(true);
                         if (panoramiquesProjet[i].getNumeroPlan() < nombrePlans) {
                             String nomPlan = plans[panoramiquesProjet[i].getNumeroPlan()].getImagePlan();
@@ -773,7 +773,7 @@ public class GestionnairePlanController {
                 point.setFill(Color.RED);
                 point.setStroke(Color.YELLOW);
                 dragDropPlan = true;
-                System.out.println("d&d plan : " + dragDropPlan);
+                //System.out.println("d&d plan : " + dragDropPlan);
 
                 me1.consume();
 
@@ -835,7 +835,7 @@ public class GestionnairePlanController {
                     valideHsplan();
                     me1.consume();
                 } else {
-                    System.out.println("d&d plan : " + dragDropPlan);
+                    //System.out.println("d&d plan : " + dragDropPlan);
                     if (!dragDropPlan) {
                         valideHsplan();
                         String chPoint = point.getId();
@@ -879,7 +879,7 @@ public class GestionnairePlanController {
         if (reponse == Dialog.Actions.YES) {
 
             int planCour = cbChoixPlan.getSelectionModel().getSelectedIndex();
-            System.out.println("Plan Courant : " + planCour);
+            //System.out.println("Plan Courant : " + planCour);
             for (int i = planCour; i < nombrePlans - 1; i++) {
                 plans[i] = plans[i + 1];
             }

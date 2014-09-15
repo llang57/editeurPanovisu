@@ -9,7 +9,6 @@ import static editeurpanovisu.EditeurPanovisu.affichagePlan;
 import static editeurpanovisu.EditeurPanovisu.ajouterPlan;
 import static editeurpanovisu.EditeurPanovisu.copieFichierRepertoire;
 import static editeurpanovisu.EditeurPanovisu.currentDir;
-import static editeurpanovisu.EditeurPanovisu.gestionnaireInterface;
 import static editeurpanovisu.EditeurPanovisu.gestionnairePlan;
 import static editeurpanovisu.EditeurPanovisu.imgAjouterPlan;
 import static editeurpanovisu.EditeurPanovisu.nombrePanoramiques;
@@ -25,6 +24,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,6 +33,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventType;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
@@ -45,7 +46,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
@@ -62,7 +63,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.ArcType;
+import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
 import jfxtras.labs.scene.control.BigDecimalField;
 
@@ -223,6 +226,60 @@ public class GestionnaireInterfaceController {
     private String repertImagesFond = "";
 
     /**
+     * Variables Fenetre Info/Aide
+     */
+    private boolean bAfficheFenetreInfo = false;
+    private boolean bAfficheFenetreAide = false;
+    public boolean bFenetreInfoPersonnalise = false;
+    public boolean bFenetreAidePersonnalise = false;
+    public String strFenetreInfoImage = "";
+    public String strFenetreAideImage = "";
+    public double fenetreInfoTaille = 100.d;
+    public double fenetreAideTaille = 100.d;
+    public double fenetreInfoPosX = 0.d;
+    public double fenetreInfoPosY = 0.d;
+    public double fenetreAidePosX = 0.d;
+    public double fenetreAidePosY = 0.d;
+    public double fenetreInfoposX = 0.d;
+    public double fenetreInfoOpacite = 1.d;
+    public double fenetreAideOpacite = 1.d;
+    public String strFenetreURL = "";
+    public String strFenetreTexteURL = "";
+    public String strFenetreURLInfobulle = "";
+    public String strFenetreURLCouleur = "#FFFF00";
+    public String strFenetrePolice = "Verdana";
+    public double fenetrePoliceTaille = 10.d;
+    public double fenetreURLPosX = 0.d;
+    public double fenetreURLPosY = 0.d;
+    public String strFenetreCouleurFond = "#ffffff";
+    public double fenetreOpaciteFond = 0.d;
+
+    private CheckBox cbFenetreInfoPersonnalise;
+    private CheckBox cbFenetreAidePersonnalise;
+    private TextField txtFenetreInfoImage;
+    private TextField txtFenetreAideImage;
+    private Slider slFenetreInfoTaille;
+    private Slider slFenetreAideTaille;
+    private BigDecimalField bdfFenetreInfoPosX;
+    private BigDecimalField bdfFenetreInfoPosY;
+    private BigDecimalField bdfFenetreAidePosX;
+    private BigDecimalField bdfFenetreAidePosY;
+    private Slider slFenetreInfoOpacite;
+    private Slider slFenetreAideOpacite;
+    private TextField txtFenetreTexteURL;
+    private TextField txtFenetreURL;
+    private TextField txtFenetreURLInfobulle;
+    private ComboBox cbFenetrePolice;
+    private Slider slFenetrePoliceTaille;
+    private BigDecimalField bdfFenetreURLPosX;
+    private BigDecimalField bdfFenetreURLPosY;
+    private ColorPicker cpFenetreCouleurFond;
+    private ColorPicker cpFenetreURLCouleur;
+    private Slider slFenetreOpaciteFond;
+
+    private AnchorPane apFenetreAfficheInfo = new AnchorPane();
+    private Label lblFenetreURL = new Label();
+    /**
      *
      */
     private String repertMasques;
@@ -377,10 +434,10 @@ public class GestionnaireInterfaceController {
     private CheckBox cbAffichePlanetNormalMC;
     private CheckBox cbAffichePersMC1;
     private CheckBox cbAffichePersMC2;
-    private TextArea txtPersLib1;
-    private TextArea txtPersURL1;
-    private TextArea txtPersLib2;
-    private TextArea txtPersURL2;
+    private TextField txtPersLib1;
+    private TextField txtPersURL1;
+    private TextField txtPersLib2;
+    private TextField txtPersURL2;
 
     public Pane tabInterface;
     private HBox hbInterface;
@@ -408,8 +465,8 @@ public class GestionnaireInterfaceController {
     private ImageView ivAutoRotation;
     private ImageView ivModeSouris;
     private ImageView ivModeSouris2;
-    private ImageView ivPleinEcran;
-    private ImageView ivPleinEcran2;
+    private ImageView ivPleinFenetre;
+    private ImageView ivPleinFenetre2;
     private HBox hbZoom;
     private ImageView ivZoomPlus;
     private ImageView ivZoomMoins;
@@ -513,10 +570,10 @@ public class GestionnaireInterfaceController {
                         ivGauche = new ImageView(nouveauxBoutons[i]);
                         break;
                     case "fs.png":
-                        ivPleinEcran = new ImageView(nouveauxBoutons[i]);
+                        ivPleinFenetre = new ImageView(nouveauxBoutons[i]);
                         break;
                     case "fs2.png":
-                        ivPleinEcran2 = new ImageView(nouveauxBoutons[i]);
+                        ivPleinFenetre2 = new ImageView(nouveauxBoutons[i]);
                         break;
                     case "rotation.png":
                         ivAutoRotation = new ImageView(nouveauxBoutons[i]);
@@ -892,6 +949,87 @@ public class GestionnaireInterfaceController {
         apAfficheDiapo.setStyle("-fx-background-color : " + couleurDiaporama);
         apAfficheDiapo.setVisible(visualiseDiaporama);
         ivDiapo.setVisible(visualiseDiaporama);
+    }
+
+    /**
+     *
+     */
+    public void afficheFenetreInfo() {
+        if (bAfficheFenetreInfo) {
+            apFenetreAfficheInfo.setVisible(true);
+            lblFenetreURL.setVisible(true);
+            apFenetreAfficheInfo.getChildren().clear();
+            if (bFenetreInfoPersonnalise) {
+                Image imgFenetreInfo = new Image("file:" + strFenetreInfoImage);
+                double largeurInfo = imgFenetreInfo.getWidth();
+                double hauteurInfo = imgFenetreInfo.getHeight();
+                ImageView ivFenetreInfo = new ImageView(imgFenetreInfo);
+                ivFenetreInfo.setFitWidth(largeurInfo * fenetreInfoTaille / 100);
+                ivFenetreInfo.setFitHeight(hauteurInfo * fenetreInfoTaille / 100);
+                ivFenetreInfo.setPreserveRatio(true);
+                ivFenetreInfo.setOpacity(fenetreInfoOpacite);
+                apFenetreAfficheInfo.setLayoutX((ivVisualisation.getFitWidth() - ivFenetreInfo.getFitWidth()) / 2 + fenetreInfoPosX + ivVisualisation.getLayoutX());
+                apFenetreAfficheInfo.setLayoutY((ivVisualisation.getFitHeight() - ivFenetreInfo.getFitHeight()) / 2 + fenetreInfoPosY + ivVisualisation.getLayoutY());
+                lblFenetreURL.setText(strFenetreTexteURL);
+                lblFenetreURL.impl_processCSS(true);
+                lblFenetreURL.setStyle("-fx-font-size:" + Math.round(fenetrePoliceTaille * 10) / 10 + "px");
+
+                lblFenetreURL.setTextFill(Color.valueOf(strFenetreURLCouleur));
+                apFenetreAfficheInfo.getChildren().addAll(ivFenetreInfo);
+                double URLPosX = (ivVisualisation.getFitWidth() - lblFenetreURL.prefWidth(-1)) / 2 + fenetreURLPosX + ivVisualisation.getLayoutX();
+                double URLPosY = (ivVisualisation.getFitHeight() - lblFenetreURL.prefHeight(-1)) / 2 + fenetreURLPosY + ivVisualisation.getLayoutY();
+                lblFenetreURL.relocate(URLPosX, URLPosY);
+                System.out.println(lblFenetreURL.prefWidth(-1) + "/" + lblFenetreURL.prefHeight(-1) + " Taille ==> " + fenetrePoliceTaille);
+            } else {
+                Image imgFenetreInfo = new Image("file:" + repertAppli + File.separator + "images" + File.separator + "infoDefaut.jpg");
+                ImageView ivFenetreInfo = new ImageView(imgFenetreInfo);
+                ivFenetreInfo.setOpacity(0.8);
+                apFenetreAfficheInfo.getChildren().add(ivFenetreInfo);
+                double largeurInfo = imgFenetreInfo.getWidth();
+                double hauteurInfo = imgFenetreInfo.getHeight();
+                apFenetreAfficheInfo.setLayoutX((ivVisualisation.getFitWidth() - largeurInfo) / 2 + ivVisualisation.getLayoutX());
+                apFenetreAfficheInfo.setLayoutY((ivVisualisation.getFitHeight() - hauteurInfo) / 2 + ivVisualisation.getLayoutY());
+            }
+        } else {
+            apFenetreAfficheInfo.setVisible(false);
+            lblFenetreURL.setVisible(false);
+        }
+    }
+
+    /**
+     *
+     */
+    public void afficheFenetreAide() {
+        if (bAfficheFenetreAide) {
+            apFenetreAfficheInfo.setVisible(true);
+            apFenetreAfficheInfo.getChildren().clear();
+            if (bFenetreAidePersonnalise) {
+                Image imgFenetreAide = new Image("file:" + strFenetreAideImage);
+                double largeurAide = imgFenetreAide.getWidth();
+                double hauteurAide = imgFenetreAide.getHeight();
+                ImageView ivFenetreAide = new ImageView(imgFenetreAide);
+                ivFenetreAide.setFitWidth(largeurAide * fenetreAideTaille / 100);
+                ivFenetreAide.setFitHeight(hauteurAide * fenetreAideTaille / 100);
+                ivFenetreAide.setPreserveRatio(true);
+                ivFenetreAide.setOpacity(fenetreAideOpacite);
+                apFenetreAfficheInfo.getChildren().add(ivFenetreAide);
+                apFenetreAfficheInfo.setLayoutX((ivVisualisation.getFitWidth() - ivFenetreAide.getFitWidth()) / 2 + fenetreAidePosX + ivVisualisation.getLayoutX());
+                apFenetreAfficheInfo.setLayoutY((ivVisualisation.getFitHeight() - ivFenetreAide.getFitHeight()) / 2 + fenetreAidePosY + ivVisualisation.getLayoutY());
+
+            } else {
+                Image imgFenetreInfo = new Image("file:" + repertAppli + File.separator + "images/aideDefaut.jpg");
+                ImageView ivFenetreInfo = new ImageView(imgFenetreInfo);
+                ivFenetreInfo.setOpacity(0.8);
+                apFenetreAfficheInfo.getChildren().add(ivFenetreInfo);
+                double largeurInfo = imgFenetreInfo.getWidth();
+                double hauteurInfo = imgFenetreInfo.getHeight();
+                apFenetreAfficheInfo.setLayoutX((ivVisualisation.getFitWidth() - largeurInfo) / 2 + ivVisualisation.getLayoutX());
+                apFenetreAfficheInfo.setLayoutY((ivVisualisation.getFitHeight() - hauteurInfo) / 2 + ivVisualisation.getLayoutY());
+            }
+        } else {
+            apFenetreAfficheInfo.setVisible(false);
+        }
+
     }
 
     public void affichePlan() {
@@ -1277,7 +1415,7 @@ public class GestionnaireInterfaceController {
         if (toggleBarreOutils.equals("non")) {
             hbbarreBoutons.getChildren().remove(hbOutils);
         }
-        apVisualisation.getChildren().addAll(hbbarreBoutons, ivHotSpot, ivHotSpotImage, apAfficheDiapo, ivDiapo);
+        apVisualisation.getChildren().addAll(hbbarreBoutons, ivHotSpot, ivHotSpotImage, apAfficheDiapo, apFenetreAfficheInfo, lblFenetreURL, ivDiapo);
 //        ImgHaut = new Image(repertBoutons + File.separator + "haut.png");
 //        ImgBas = new Image(repertBoutons + File.separator + "bas.png");
 //        ImgGauche = new Image(repertBoutons + File.separator + "gauche.png");
@@ -1287,7 +1425,7 @@ public class GestionnaireInterfaceController {
 //        ImgInfo = new Image(repertBoutons + File.separator + "info.png");
 //        ImgAide = new Image(repertBoutons + File.separator + "aide.png");
 //        ImgModeSouris = new Image(repertBoutons + File.separator + "souris.png");
-//        ImgPleinEcran = new Image(repertBoutons + File.separator + "fs.png");
+//        ImgPleinFenetre = new Image(repertBoutons + File.separator + "fs.png");
 //        ImgAutoRotation = new Image(repertBoutons + File.separator + "rotation.png");
 //        ivHaut = new ImageView(ImgHaut);
         ivHaut.setFitWidth(taille);
@@ -1310,9 +1448,9 @@ public class GestionnaireInterfaceController {
 //        ivInfo = new ImageView(ImgInfo);
         ivInfo.setFitWidth(taille);
         ivInfo.setFitHeight(taille);
-//        ivPleinEcran = new ImageView(ImgPleinEcran);
-        ivPleinEcran.setFitWidth(taille);
-        ivPleinEcran.setFitHeight(taille);
+//        ivPleinFenetre = new ImageView(ImgPleinFenetre);
+        ivPleinFenetre.setFitWidth(taille);
+        ivPleinFenetre.setFitHeight(taille);
 //        ivModeSouris = new ImageView(ImgModeSouris);
         ivModeSouris.setFitWidth(taille);
         ivModeSouris.setFitHeight(taille);
@@ -1324,9 +1462,9 @@ public class GestionnaireInterfaceController {
         ivAutoRotation.setFitHeight(taille);
         hbDeplacements.getChildren().addAll(ivGauche, ivHaut, ivBas, ivDroite);
         hbZoom.getChildren().addAll(ivZoomPlus, ivZoomMoins);
-        hbOutils.getChildren().addAll(ivPleinEcran, ivModeSouris, ivAutoRotation, ivInfo, ivAide);
+        hbOutils.getChildren().addAll(ivPleinFenetre, ivModeSouris, ivAutoRotation, ivInfo, ivAide);
         if (toggleBoutonFS.equals("non")) {
-            hbOutils.getChildren().remove(ivPleinEcran);
+            hbOutils.getChildren().remove(ivPleinFenetre);
         }
         if (toggleBoutonSouris.equals("non")) {
             hbOutils.getChildren().remove(ivModeSouris);
@@ -1480,6 +1618,28 @@ public class GestionnaireInterfaceController {
                 + "titreTaille=" + titreTaille + "\n"
                 + "titreCouleur=" + couleurTitre + "\n"
                 + "titreFondCouleur=" + couleurFondTitre + "\n"
+                + "bFenetreInfoPersonnalise=" + bFenetreInfoPersonnalise + "\n"
+                + "bFenetreAidePersonnalise=" + bFenetreAidePersonnalise + "\n"
+                + "strFenetreInfoImage =" + strFenetreInfoImage + "\n"
+                + "strFenetreAideImage=" + strFenetreAideImage + "\n"
+                + "fenetreInfoTaille=" + fenetreInfoTaille + "\n"
+                + "fenetreAideTaille=" + fenetreAideTaille + "\n"
+                + "fenetreInfoPosX=" + fenetreInfoPosX + "\n"
+                + "fenetreInfoPosY=" + fenetreInfoPosY + "\n"
+                + "fenetreAidePosX=" + fenetreAidePosX + "\n"
+                + "fenetreAidePosY=" + fenetreAidePosY + "\n"
+                + "fenetreInfoOpacite=" + fenetreInfoOpacite + "\n"
+                + "fenetreAideOpacite=" + fenetreAideOpacite + "\n"
+                + "strFenetreURL=" + strFenetreURL + "\n"
+                + "strFenetreTexteURL=" + strFenetreTexteURL + "\n"
+                + "strFenetreURLInfobulle=" + strFenetreURLInfobulle + "\n"
+                + "strFenetreURLCouleur=" + strFenetreURLCouleur + "\n"
+                + "strFenetrePolice=" + strFenetrePolice + "\n"
+                + "fenetrePoliceTaille=" + fenetrePoliceTaille + "\n"
+                + "fenetreURLPosX=" + fenetreURLPosX + "\n"
+                + "fenetreURLPosY=" + fenetreURLPosY + "\n"
+                + "strFenetreCouleurFond=" + strFenetreCouleurFond + "\n"
+                + "fenetreOpaciteFond=" + fenetreOpaciteFond + "\n"
                 + "diaporamaOpacite=" + Math.round(diaporamaOpacite * 100.d) / 100.d + "\n"
                 + "diaporamaCouleur=" + couleurDiaporama + "\n"
                 + "afficheBoussole=" + bAfficheBoussole + "\n"
@@ -1569,6 +1729,7 @@ public class GestionnaireInterfaceController {
         bAfficheVignettes = false;
         bAfficheReseauxSociaux = false;
         nombreImagesFond = 0;
+        File repertoirePlan;
 
         for (String chaine : templ) {
             if (chaine.split("image=").length > 1) {
@@ -1576,7 +1737,7 @@ public class GestionnaireInterfaceController {
 
                 chaine = chaine.replace("<", "");
                 chaine = chaine.replace(">", "");
-                System.out.println("chaine : " + chaine);
+                //System.out.println("chaine : " + chaine);
                 String[] elements = chaine.split("#");
                 for (String ch1 : elements) {
                     String variable = ch1.split("=")[0];
@@ -1584,12 +1745,12 @@ public class GestionnaireInterfaceController {
                     if (ch1.split("=").length > 1) {
                         valeur = ch1.split("=")[1];
                     }
-                    System.out.println(variable + "=" + valeur);
+                    //System.out.println(variable + "=" + valeur);
                     switch (variable) {
                         case "image":
                             imagesFond[nombreImagesFond].setFichierImage(valeur);
                             imagesFond[nombreImagesFond].setImgFond(new Image("file:" + valeur));
-                            File repertoirePlan = new File(repertTemp + File.separator + "images");
+                            repertoirePlan = new File(repertTemp + File.separator + "images");
                             if (!repertoirePlan.exists()) {
                                 repertoirePlan.mkdirs();
                             }
@@ -1639,7 +1800,7 @@ public class GestionnaireInterfaceController {
                 if (chaine.split("=").length > 1) {
                     valeur = chaine.split("=")[1];
                 }
-                System.out.println(variable + "=" + valeur);
+                //System.out.println(variable + "=" + valeur);
                 switch (variable) {
                     case "couleurTheme":
                         couleurTheme = Color.web(valeur);
@@ -1672,35 +1833,6 @@ public class GestionnaireInterfaceController {
                         break;
                     case "position":
                         positionBarre = valeur;
-                        switch (valeur) {
-                            case "top:left":
-                                rbTopLeft.setSelected(true);
-                                break;
-                            case "top:center":
-                                rbTopCenter.setSelected(true);
-                                break;
-                            case "top:right":
-                                rbTopRight.setSelected(true);
-                                break;
-                            case "middle:left":
-                                rbMiddleLeft.setSelected(true);
-                                break;
-                            case "middle:center":
-                                rbMiddleCenter.setSelected(true);
-                                break;
-                            case "middle:right":
-                                rbMiddleRight.setSelected(true);
-                                break;
-                            case "bottom:left":
-                                rbBottomLeft.setSelected(true);
-                                break;
-                            case "bottom:center":
-                                rbBottomCenter.setSelected(true);
-                                break;
-                            case "bottom:right":
-                                rbBottomRight.setSelected(true);
-                                break;
-                        }
 
                         break;
                     case "dX":
@@ -1753,6 +1885,95 @@ public class GestionnaireInterfaceController {
                         break;
                     case "titreFondCouleur":
                         couleurFondTitre = valeur;
+                        break;
+                    case "bFenetreInfoPersonnalise":
+                        bFenetreInfoPersonnalise = valeur.equals("true");
+                        break;
+                    case "bFenetreAidePersonnalise":
+                        bFenetreAidePersonnalise = valeur.equals("true");
+                        break;
+                    case "strFenetreInfoImage ":
+                        strFenetreInfoImage = valeur;
+                        if (!strFenetreInfoImage.equals("")) {
+                            repertoirePlan = new File(repertTemp + File.separator + "images");
+                            if (!repertoirePlan.exists()) {
+                                repertoirePlan.mkdirs();
+                            }
+                            try {
+                                copieFichierRepertoire(strFenetreInfoImage, repertoirePlan.getAbsolutePath());
+                            } catch (IOException ex) {
+                                Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                        break;
+
+                    case "strFenetreAideImage":
+                        strFenetreAideImage = valeur;
+                        if (!strFenetreAideImage.equals("")) {
+                            repertoirePlan = new File(repertTemp + File.separator + "images");
+                            if (!repertoirePlan.exists()) {
+                                repertoirePlan.mkdirs();
+                            }
+                            try {
+                                copieFichierRepertoire(strFenetreAideImage, repertoirePlan.getAbsolutePath());
+                            } catch (IOException ex) {
+                                Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                        break;
+                    case "fenetreInfoTaille":
+                        fenetreInfoTaille = Double.parseDouble(valeur);
+                        break;
+                    case "fenetreAideTaille":
+                        fenetreAideTaille = Double.parseDouble(valeur);
+                        break;
+                    case "fenetreInfoPosX":
+                        fenetreInfoPosX = Double.parseDouble(valeur);
+                        break;
+                    case "fenetreInfoPosY":
+                        fenetreInfoPosY = Double.parseDouble(valeur);
+                        break;
+                    case "fenetreAidePosX":
+                        fenetreAidePosX = Double.parseDouble(valeur);
+                        break;
+                    case "fenetreAidePosY":
+                        fenetreAidePosY = Double.parseDouble(valeur);
+                        break;
+                    case "fenetreInfoOpacite":
+                        fenetreInfoOpacite = Double.parseDouble(valeur);
+                        break;
+                    case "fenetreAideOpacite":
+                        fenetreAideOpacite = Double.parseDouble(valeur);
+                        break;
+                    case "strFenetreURL":
+                        strFenetreURL = valeur;
+                        break;
+                    case "strFenetreTexteURL":
+                        strFenetreTexteURL = valeur;
+                        break;
+                    case "strFenetreURLInfobulle":
+                        strFenetreURLInfobulle = valeur;
+                        break;
+                    case "strFenetreURLCouleur":
+                        strFenetreURLCouleur = valeur;
+                        break;
+                    case "strFenetrePolice":
+                        strFenetrePolice = valeur;
+                        break;
+                    case "fenetrePoliceTaille":
+                        fenetrePoliceTaille = Double.parseDouble(valeur);
+                        break;
+                    case "fenetreURLPosX":
+                        fenetreURLPosX = Double.parseDouble(valeur);
+                        break;
+                    case "fenetreURLPosY":
+                        fenetreURLPosY = Double.parseDouble(valeur);
+                        break;
+                    case "strFenetreCouleurFond":
+                        strFenetreCouleurFond = valeur;
+                        break;
+                    case "fenetreOpaciteFond":
+                        fenetreOpaciteFond = Double.parseDouble(valeur);
                         break;
                     case "diaporamaOpacite":
                         diaporamaOpacite = Double.parseDouble(valeur);
@@ -1943,7 +2164,7 @@ public class GestionnaireInterfaceController {
 
     public void afficheTemplate() {
         apVisualisation.getChildren().clear();
-        apVisualisation.getChildren().addAll(rbClair, rbSombre, rbPerso, cbImage, ivVisualisation, txtTitre, imgBoussole, imgAiguille, imgTwitter, imgGoogle, imgFacebook, imgEmail, apVisuVignettes, apVisuplan, ivMasque, apAfficheDiapo, ivDiapo);
+        apVisualisation.getChildren().addAll(rbClair, rbSombre, rbPerso, cbImage, ivVisualisation, txtTitre, imgBoussole, imgAiguille, imgTwitter, imgGoogle, imgFacebook, imgEmail, apVisuVignettes, apVisuplan, ivMasque, apAfficheDiapo, apFenetreAfficheInfo, lblFenetreURL, ivDiapo);
 
         txtTitre.setTextFill(Color.valueOf(couleurTitre));
         Color couleur = Color.valueOf(couleurFondTitre);
@@ -1992,6 +2213,35 @@ public class GestionnaireInterfaceController {
         } else {
             cbOutils.setSelected(false);
         }
+        switch (positionBarre) {
+            case "top:left":
+                rbTopLeft.setSelected(true);
+                break;
+            case "top:center":
+                rbTopCenter.setSelected(true);
+                break;
+            case "top:right":
+                rbTopRight.setSelected(true);
+                break;
+            case "middle:left":
+                rbMiddleLeft.setSelected(true);
+                break;
+            case "middle:center":
+                rbMiddleCenter.setSelected(true);
+                break;
+            case "middle:right":
+                rbMiddleRight.setSelected(true);
+                break;
+            case "bottom:left":
+                rbBottomLeft.setSelected(true);
+                break;
+            case "bottom:center":
+                rbBottomCenter.setSelected(true);
+                break;
+            case "bottom:right":
+                rbBottomRight.setSelected(true);
+                break;
+        }
 
         if (toggleBoutonRotation.equals("oui")) {
             cbRotation.setSelected(true);
@@ -2008,6 +2258,26 @@ public class GestionnaireInterfaceController {
         } else {
             cbSouris.setSelected(false);
         }
+        cbFenetreInfoPersonnalise.setSelected(bFenetreInfoPersonnalise);
+        cbFenetreAidePersonnalise.setSelected(bFenetreAidePersonnalise);
+        txtFenetreInfoImage.setText(strFenetreInfoImage);
+        txtFenetreAideImage.setText(strFenetreAideImage);
+        slFenetreInfoTaille.setValue(fenetreInfoTaille);
+        slFenetreAideTaille.setValue(fenetreAideTaille);
+        bdfFenetreInfoPosX.setNumber(new BigDecimal(fenetreInfoPosX));
+        bdfFenetreInfoPosY.setNumber(new BigDecimal(fenetreInfoPosY));
+        bdfFenetreAidePosX.setNumber(new BigDecimal(fenetreAidePosX));
+        bdfFenetreAidePosY.setNumber(new BigDecimal(fenetreAidePosY));
+        slFenetreInfoOpacite.setValue(fenetreInfoOpacite);
+        slFenetreAideOpacite.setValue(fenetreAideOpacite);
+        txtFenetreTexteURL.setText(strFenetreTexteURL);
+        txtFenetreURL.setText(strFenetreURL);
+        slFenetrePoliceTaille.setValue(fenetrePoliceTaille);
+        bdfFenetreURLPosX.setNumber(new BigDecimal(fenetreURLPosX));
+        bdfFenetreURLPosY.setNumber(new BigDecimal(fenetreURLPosY));
+        bdfFenetreURLPosX.setNumber(new BigDecimal(fenetreURLPosX));
+        bdfFenetreURLPosY.setNumber(new BigDecimal(fenetreURLPosY));
+        cpFenetreURLCouleur.setValue(Color.valueOf(strFenetreURLCouleur));
         cbSuivantPrecedent.setSelected(bSuivantPrecedent);
         fondSuivant.setVisible(bSuivantPrecedent);
         fondPrecedent.setVisible(bSuivantPrecedent);
@@ -2110,6 +2380,8 @@ public class GestionnaireInterfaceController {
         afficheVignettes();
         affichePlan();
         afficheDiaporama();
+        afficheFenetreAide();
+        afficheFenetreInfo();
     }
 
     public void rafraichit() {
@@ -2145,7 +2417,7 @@ public class GestionnaireInterfaceController {
         }
         nombreImagesFond--;
         afficheImagesFondInterface();
-        System.out.println("Retire l'image " + numImage + " Nombre Images : " + nombreImagesFond);
+        //System.out.println("Retire l'image " + numImage + " Nombre Images : " + nombreImagesFond);
     }
 
     private void afficheImagesFondInterface() {
@@ -2323,7 +2595,7 @@ public class GestionnaireInterfaceController {
             Label lblUrlImageFond = new Label("url");
             lblUrlImageFond.setLayoutX(10);
             lblUrlImageFond.setLayoutY(222);
-            TextArea txtUrlImageFond = new TextArea(imagesFond[i].getUrl());
+            TextField txtUrlImageFond = new TextField(imagesFond[i].getUrl());
             txtUrlImageFond.setPrefHeight(20);
             txtUrlImageFond.setPrefWidth(200);
             txtUrlImageFond.setLayoutX(120);
@@ -2331,7 +2603,7 @@ public class GestionnaireInterfaceController {
             Label lblInfobulleImageFond = new Label(rb.getString("interface.infobulle"));
             lblInfobulleImageFond.setLayoutX(10);
             lblInfobulleImageFond.setLayoutY(252);
-            TextArea txtInfobulleImageFond = new TextArea(imagesFond[i].getInfobulle());
+            TextField txtInfobulleImageFond = new TextField(imagesFond[i].getInfobulle());
             txtInfobulleImageFond.setPrefHeight(20);
             txtInfobulleImageFond.setPrefWidth(200);
             txtInfobulleImageFond.setLayoutX(120);
@@ -2355,7 +2627,7 @@ public class GestionnaireInterfaceController {
                     String positImageFond = tgPosition.getSelectedToggle().getUserData().toString();
                     imagesFond[j].setPosX(positImageFond.split(":")[1]);
                     imagesFond[j].setPosY(positImageFond.split(":")[0]);
-                    System.out.println("Image n° " + j + " position : " + positImageFond);
+                    //System.out.println("Image n° " + j + " position : " + positImageFond);
                     afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots, espacementBoutons
                     );
                 }
@@ -2402,6 +2674,39 @@ public class GestionnaireInterfaceController {
         afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots, espacementBoutons);
     }
 
+    private String ajoutFenetreImage() {
+        File repert;
+        if (repertImagesFond.equals("")) {
+            repert = new File(currentDir + File.separator);
+        } else {
+            repert = new File(repertImagesFond);
+        }
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extFilterImages = new FileChooser.ExtensionFilter("Fichiers Images (jpg, bmp, png, gif)", "*.jpg", "*.bmp", "*.png", "*.gif");
+
+        fileChooser.setInitialDirectory(repert);
+        fileChooser.getExtensionFilters().addAll(extFilterImages);
+
+        File fichierImage = fileChooser.showOpenDialog(null);
+        if (fichierImage != null) {
+            repertImagesFond = fichierImage.getParent();
+            File repertImage = new File(repertTemp + File.separator + "images");
+            if (!repertImage.exists()) {
+                repertImage.mkdirs();
+            }
+            try {
+                copieFichierRepertoire(fichierImage.getAbsolutePath(), repertImage.getAbsolutePath());
+            } catch (IOException ex) {
+                Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            return fichierImage.getAbsolutePath();
+        } else {
+            return "";
+        }
+
+    }
+
     private void ajoutImageFond() {
         if (nombreImagesFond < 20) {
             File repert;
@@ -2436,8 +2741,8 @@ public class GestionnaireInterfaceController {
                 imagesFond[nombreImagesFond].setImgFond(imgFond);
                 imagesFond[nombreImagesFond].setTailleX((int) imgFond.getWidth());
                 imagesFond[nombreImagesFond].setTailleY((int) imgFond.getHeight());
-                System.out.println("Ajoute ImageFond Taille " + imagesFond[nombreImagesFond].getTailleX()
-                        + "x" + imagesFond[nombreImagesFond].getTailleY());
+                //System.out.println("Ajoute ImageFond Taille " + imagesFond[nombreImagesFond].getTailleX()
+                // + "x" + imagesFond[nombreImagesFond].getTailleY());
                 nombreImagesFond++;
                 afficheImagesFondInterface();
             }
@@ -2639,6 +2944,7 @@ public class GestionnaireInterfaceController {
         AnchorPane apBB = new AnchorPane();
         AnchorPane apHS = new AnchorPane();
         AnchorPane apTIT = new AnchorPane();
+        AnchorPane apECR = new AnchorPane();
         AnchorPane apDIA = new AnchorPane();
         AnchorPane apBOUSS = new AnchorPane();
         AnchorPane apMASQ = new AnchorPane();
@@ -2760,6 +3066,256 @@ public class GestionnaireInterfaceController {
         });
         /*
          * *****************************************
+         *     Panel Fenetre 
+         * ****************************************
+         */
+        apFenetreAfficheInfo.setVisible(false);
+        lblFenetreURL.setVisible(false);
+        //apVisualisation.getChildren().add(apFenetreAfficheInfo);
+        AnchorPane apFenetre = new AnchorPane();
+        apFenetre.setLayoutY(40);
+        apFenetre.setLayoutX(10);
+        apFenetre.setPrefHeight(660);
+        Label lblPanelFenetre = new Label(rb.getString("interface.styleFenetre"));
+        lblPanelFenetre.setPrefWidth(vbOutils.getPrefWidth());
+        lblPanelFenetre.setStyle("-fx-background-color : #666");
+        lblPanelFenetre.setTextFill(Color.WHITE);
+        lblPanelFenetre.setPadding(new Insets(5));
+        lblPanelFenetre.setLayoutX(10);
+        lblPanelFenetre.setLayoutY(10);
+        ImageView ivBtnPlusFenetre = new ImageView(new Image("file:" + "images/plus.png", 20, 20, true, true));
+        ivBtnPlusFenetre.setLayoutX(vbOutils.getPrefWidth() - 20);
+        ivBtnPlusFenetre.setLayoutY(11);
+        CheckBox cbAfficheFenetreInfo = new CheckBox(rb.getString("interface.afficheFenetreInfo"));
+        cbAfficheFenetreInfo.setSelected(bAfficheFenetreInfo);
+        cbAfficheFenetreInfo.setLayoutX(10);
+        cbAfficheFenetreInfo.setLayoutY(15);
+        cbFenetreInfoPersonnalise = new CheckBox(rb.getString("interface.fenetreInfoPersonnalise"));
+        cbFenetreInfoPersonnalise.setSelected(bFenetreInfoPersonnalise);
+        cbFenetreInfoPersonnalise.setLayoutX(10);
+        cbFenetreInfoPersonnalise.setLayoutY(45);
+        AnchorPane apFenetreInfoPers = new AnchorPane();
+        apFenetreInfoPers.setLayoutY(75);
+        apFenetreInfoPers.setDisable(!bFenetreInfoPersonnalise);
+        Line ligne1 = new Line(0, 0, vbOutils.getPrefWidth(), 0);
+        ligne1.setStrokeWidth(0.2);
+
+        Label lblFenetreInfoImage = new Label(rb.getString("interface.fenetreImage"));
+        lblFenetreInfoImage.setLayoutX(20);
+        lblFenetreInfoImage.setLayoutY(5);
+        txtFenetreInfoImage = new TextField();
+        txtFenetreInfoImage.setLayoutX(40);
+        txtFenetreInfoImage.setLayoutY(25);
+        txtFenetreInfoImage.setPrefWidth(250);
+        Button btnFenetreInfo = new Button("...");
+        btnFenetreInfo.setLayoutX(300);
+        btnFenetreInfo.setLayoutY(25);
+        Label lblFenetreInfoTaille = new Label(rb.getString("interface.fenetreTaille"));
+        lblFenetreInfoTaille.setLayoutX(20);
+        lblFenetreInfoTaille.setLayoutY(55);
+        slFenetreInfoTaille = new Slider(25, 200, fenetreInfoTaille);
+        slFenetreInfoTaille.setLayoutX(140);
+        slFenetreInfoTaille.setLayoutY(55);
+        Label lblFenetreInfoOpacite = new Label(rb.getString("interface.fenetreOpacite"));
+        lblFenetreInfoOpacite.setLayoutX(20);
+        lblFenetreInfoOpacite.setLayoutY(85);
+        slFenetreInfoOpacite = new Slider(0, 1, fenetreInfoOpacite);
+        slFenetreInfoOpacite.setLayoutX(140);
+        slFenetreInfoOpacite.setLayoutY(85);
+        Label lblFenetreInfoPosX = new Label(rb.getString("interface.fenetrePosX"));
+        lblFenetreInfoPosX.setLayoutX(20);
+        lblFenetreInfoPosX.setLayoutY(120);
+        bdfFenetreInfoPosX = new BigDecimalField(BigDecimal.valueOf(fenetreInfoPosX));
+        bdfFenetreInfoPosX.setLayoutX(100);
+        bdfFenetreInfoPosX.setLayoutY(115);
+        bdfFenetreInfoPosX.setPrefWidth(60);
+        Label lblFenetreInfoPosY = new Label(rb.getString("interface.fenetrePosY"));
+        lblFenetreInfoPosY.setLayoutX(180);
+        lblFenetreInfoPosY.setLayoutY(120);
+        bdfFenetreInfoPosY = new BigDecimalField(BigDecimal.valueOf(fenetreInfoPosY));
+        bdfFenetreInfoPosY.setLayoutX(260);
+        bdfFenetreInfoPosY.setLayoutY(115);
+        bdfFenetreInfoPosY.setPrefWidth(60);
+        Label lblFenetreInfoURL = new Label("URL");
+        lblFenetreInfoURL.setLayoutX(20);
+        lblFenetreInfoURL.setLayoutY(170);
+        txtFenetreURL = new TextField();
+        txtFenetreURL.setLayoutX(120);
+        txtFenetreURL.setLayoutY(165);
+        txtFenetreURL.setPrefWidth(210);
+        Label lblFenetreInfoTexteURL = new Label(rb.getString("interface.fenetreLibelleURL"));
+        lblFenetreInfoTexteURL.setLayoutX(20);
+        lblFenetreInfoTexteURL.setLayoutY(200);
+        txtFenetreTexteURL = new TextField();
+        txtFenetreTexteURL.setLayoutX(120);
+        txtFenetreTexteURL.setLayoutY(195);
+        txtFenetreTexteURL.setPrefWidth(210);
+
+        Label lblFenetrePoliceTaille = new Label(rb.getString("interface.fenetrePoliceTaille"));
+        lblFenetrePoliceTaille.setLayoutX(20);
+        lblFenetrePoliceTaille.setLayoutY(230);
+        slFenetrePoliceTaille = new Slider(7, 48, fenetrePoliceTaille);
+        slFenetrePoliceTaille.setLayoutX(140);
+        slFenetrePoliceTaille.setLayoutY(230);
+
+        Label lblFenetreURLCouleur = new Label(rb.getString("interface.fenetreURLChoixCouleur"));
+        lblFenetreURLCouleur.setLayoutX(20);
+        lblFenetreURLCouleur.setLayoutY(260);
+        cpFenetreURLCouleur = new ColorPicker(Color.valueOf(strFenetreURLCouleur));
+        cpFenetreURLCouleur.setLayoutX(200);
+        cpFenetreURLCouleur.setLayoutY(256);
+
+        Label lblFenetreURLPosX = new Label(rb.getString("interface.fenetrePosX") + " URL");
+        lblFenetreURLPosX.setLayoutX(20);
+        lblFenetreURLPosX.setLayoutY(295);
+
+        bdfFenetreURLPosX = new BigDecimalField(BigDecimal.valueOf(fenetreInfoPosX));
+        bdfFenetreURLPosX.setLayoutX(110);
+        bdfFenetreURLPosX.setLayoutY(290);
+        bdfFenetreURLPosX.setPrefWidth(60);
+        Label lblFenetreURLPosY = new Label(rb.getString("interface.fenetrePosY") + " URL");
+        lblFenetreURLPosY.setLayoutX(185);
+        lblFenetreURLPosY.setLayoutY(295);
+        bdfFenetreURLPosY = new BigDecimalField(BigDecimal.valueOf(fenetreInfoPosY));
+        bdfFenetreURLPosY.setLayoutX(275);
+        bdfFenetreURLPosY.setLayoutY(290);
+        bdfFenetreURLPosY.setPrefWidth(60);
+
+        Line ligne2 = new Line(0, 320, vbOutils.getPrefWidth(), 320);
+        ligne2.setStrokeWidth(0.2);
+
+        apFenetreInfoPers.getChildren().addAll(
+                ligne1,
+                lblFenetreInfoImage, txtFenetreInfoImage, btnFenetreInfo,
+                lblFenetreInfoTaille, slFenetreInfoTaille,
+                lblFenetreInfoOpacite, slFenetreInfoOpacite,
+                lblFenetreInfoPosX, bdfFenetreInfoPosX,
+                lblFenetreInfoPosY, bdfFenetreInfoPosY,
+                lblFenetreInfoURL, txtFenetreURL,
+                lblFenetreInfoTexteURL, txtFenetreTexteURL,
+                lblFenetrePoliceTaille, slFenetrePoliceTaille,
+                lblFenetreURLCouleur, cpFenetreURLCouleur,
+                lblFenetreURLPosX, bdfFenetreURLPosX,
+                lblFenetreURLPosY, bdfFenetreURLPosY,
+                ligne2
+        );
+
+        CheckBox cbAfficheFenetreAide = new CheckBox(rb.getString("interface.afficheFenetreAide"));
+        cbAfficheFenetreAide.setSelected(bAfficheFenetreAide);
+        cbAfficheFenetreAide.setLayoutX(10);
+        cbAfficheFenetreAide.setLayoutY(400);
+
+        cbFenetreAidePersonnalise = new CheckBox(rb.getString("interface.fenetreAidePersonnalise"));
+        cbFenetreAidePersonnalise.setSelected(bFenetreAidePersonnalise);
+        cbFenetreAidePersonnalise.setLayoutX(10);
+        cbFenetreAidePersonnalise.setLayoutY(430);
+        AnchorPane apFenetreAidePers = new AnchorPane();
+        apFenetreAidePers.setLayoutY(460);
+        apFenetreAidePers.setDisable(!bFenetreAidePersonnalise);
+        Line ligne3 = new Line(0, 0, vbOutils.getPrefWidth(), 0);
+        ligne3.setStrokeWidth(0.2);
+
+        Label lblFenetreAideImage = new Label(rb.getString("interface.fenetreImage"));
+        lblFenetreAideImage.setLayoutX(20);
+        lblFenetreAideImage.setLayoutY(5);
+        txtFenetreAideImage = new TextField();
+        txtFenetreAideImage.setLayoutX(40);
+        txtFenetreAideImage.setLayoutY(25);
+        txtFenetreAideImage.setPrefWidth(250);
+        Button btnFenetreAide = new Button("...");
+        btnFenetreAide.setLayoutX(300);
+        btnFenetreAide.setLayoutY(25);
+        Label lblFenetreAideTaille = new Label(rb.getString("interface.fenetreTaille"));
+        lblFenetreAideTaille.setLayoutX(20);
+        lblFenetreAideTaille.setLayoutY(55);
+        slFenetreAideTaille = new Slider(50, 200, fenetreAideTaille);
+        slFenetreAideTaille.setLayoutX(140);
+        slFenetreAideTaille.setLayoutY(55);
+        Label lblFenetreAideOpacite = new Label(rb.getString("interface.fenetreOpacite"));
+        lblFenetreAideOpacite.setLayoutX(20);
+        lblFenetreAideOpacite.setLayoutY(85);
+        slFenetreAideOpacite = new Slider(0, 1, fenetreAideOpacite);
+        slFenetreAideOpacite.setLayoutX(140);
+        slFenetreAideOpacite.setLayoutY(85);
+        Label lblFenetreAidePosX = new Label(rb.getString("interface.fenetrePosX"));
+        lblFenetreAidePosX.setLayoutX(20);
+        lblFenetreAidePosX.setLayoutY(120);
+        bdfFenetreAidePosX = new BigDecimalField(BigDecimal.valueOf(fenetreAidePosX));
+        bdfFenetreAidePosX.setLayoutX(100);
+        bdfFenetreAidePosX.setLayoutY(115);
+        bdfFenetreAidePosX.setPrefWidth(60);
+        Label lblFenetreAidePosY = new Label(rb.getString("interface.fenetrePosY"));
+        lblFenetreAidePosY.setLayoutX(180);
+        lblFenetreAidePosY.setLayoutY(120);
+        bdfFenetreAidePosY = new BigDecimalField(BigDecimal.valueOf(fenetreAidePosY));
+        bdfFenetreAidePosY.setLayoutX(260);
+        bdfFenetreAidePosY.setLayoutY(115);
+        bdfFenetreAidePosY.setPrefWidth(60);
+
+        Line ligne4 = new Line(0, 150, vbOutils.getPrefWidth(), 150);
+        ligne4.setStrokeWidth(0.2);
+
+        apFenetreAidePers.getChildren().addAll(
+                ligne3,
+                lblFenetreAideImage, txtFenetreAideImage, btnFenetreAide,
+                lblFenetreAideTaille, slFenetreAideTaille,
+                lblFenetreAideOpacite, slFenetreAideOpacite,
+                lblFenetreAidePosX, bdfFenetreAidePosX,
+                lblFenetreAidePosY, bdfFenetreAidePosY,
+                ligne4
+        );
+
+        apFenetre.getChildren().addAll(
+                cbAfficheFenetreInfo,
+                cbFenetreInfoPersonnalise,
+                apFenetreInfoPers,
+                cbAfficheFenetreAide,
+                cbFenetreAidePersonnalise,
+                apFenetreAidePers
+        );
+        double tailleInitialeFenetre = apFenetre.getPrefHeight();
+        apFenetre.setPrefHeight(0);
+        apFenetre.setMaxHeight(0);
+        apFenetre.setMinHeight(0);
+        apFenetre.setVisible(false);
+
+        lblPanelFenetre.setOnMouseClicked((MouseEvent me) -> {
+            if (apFenetre.isVisible()) {
+                apFenetre.setPrefHeight(0);
+                apFenetre.setMaxHeight(0);
+                apFenetre.setMinHeight(0);
+                apFenetre.setVisible(false);
+                ivBtnPlusFenetre.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
+                cbAfficheFenetreInfo.setSelected(false);
+            } else {
+                apFenetre.setPrefHeight(tailleInitialeFenetre);
+                apFenetre.setMaxHeight(tailleInitialeFenetre);
+                apFenetre.setMinHeight(tailleInitialeFenetre);
+                apFenetre.setVisible(true);
+                ivBtnPlusFenetre.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
+                cbAfficheFenetreInfo.setSelected(true);
+            }
+        });
+        ivBtnPlusFenetre.setOnMouseClicked((MouseEvent me) -> {
+            if (apFenetre.isVisible()) {
+                apFenetre.setPrefHeight(0);
+                apFenetre.setMaxHeight(0);
+                apFenetre.setMinHeight(0);
+                apFenetre.setVisible(false);
+                ivBtnPlusFenetre.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
+                cbAfficheFenetreInfo.setSelected(false);
+            } else {
+                apFenetre.setPrefHeight(tailleInitialeFenetre);
+                apFenetre.setMaxHeight(tailleInitialeFenetre);
+                apFenetre.setMinHeight(tailleInitialeFenetre);
+                apFenetre.setVisible(true);
+                ivBtnPlusFenetre.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
+                cbAfficheFenetreInfo.setSelected(true);
+            }
+        });
+
+        /*
+         * *****************************************
          *     Panel Diaporama
          * ****************************************
          */
@@ -2813,12 +3369,14 @@ public class GestionnaireInterfaceController {
                 apDiapo.setMinHeight(0);
                 apDiapo.setVisible(false);
                 ivBtnDiaporama.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
+                cbVisualiseDiapo.setSelected(false);
             } else {
                 apDiapo.setPrefHeight(tailleInitialeDiaporama);
                 apDiapo.setMaxHeight(tailleInitialeDiaporama);
                 apDiapo.setMinHeight(tailleInitialeDiaporama);
                 apDiapo.setVisible(true);
                 ivBtnDiaporama.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
+                cbVisualiseDiapo.setSelected(true);
             }
         });
         ivBtnDiaporama.setOnMouseClicked((MouseEvent me) -> {
@@ -2828,12 +3386,15 @@ public class GestionnaireInterfaceController {
                 apDiapo.setMinHeight(0);
                 apDiapo.setVisible(false);
                 ivBtnDiaporama.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
+                cbVisualiseDiapo.setSelected(false);
+
             } else {
                 apDiapo.setPrefHeight(tailleInitialeDiaporama);
                 apDiapo.setMaxHeight(tailleInitialeDiaporama);
                 apDiapo.setMinHeight(tailleInitialeDiaporama);
                 apDiapo.setVisible(true);
                 ivBtnDiaporama.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
+                cbVisualiseDiapo.setSelected(true);
             }
         });
 
@@ -4081,7 +4642,7 @@ public class GestionnaireInterfaceController {
         lblPersLib1.setLayoutX(10);
         lblPersLib1.setLayoutY(130);
         lblPersLib1.setDisable(true);
-        txtPersLib1 = new TextArea();
+        txtPersLib1 = new TextField();
         txtPersLib1.setLayoutX(120);
         txtPersLib1.setLayoutY(130);
         txtPersLib1.setPrefSize(220, 20);
@@ -4090,7 +4651,7 @@ public class GestionnaireInterfaceController {
         lblPersUrl1.setLayoutX(10);
         lblPersUrl1.setLayoutY(160);
         lblPersUrl1.setDisable(true);
-        txtPersURL1 = new TextArea();
+        txtPersURL1 = new TextField();
         txtPersURL1.setLayoutX(120);
         txtPersURL1.setLayoutY(160);
         txtPersURL1.setPrefSize(220, 20);
@@ -4103,7 +4664,7 @@ public class GestionnaireInterfaceController {
         lblPersLib2.setLayoutX(10);
         lblPersLib2.setLayoutY(220);
         lblPersLib2.setDisable(true);
-        txtPersLib2 = new TextArea();
+        txtPersLib2 = new TextField();
         txtPersLib2.setLayoutX(120);
         txtPersLib2.setLayoutY(220);
         txtPersLib2.setPrefSize(220, 20);
@@ -4112,7 +4673,7 @@ public class GestionnaireInterfaceController {
         lblPersUrl2.setLayoutX(10);
         lblPersUrl2.setLayoutY(250);
         lblPersUrl2.setDisable(true);
-        txtPersURL2 = new TextArea();
+        txtPersURL2 = new TextField();
         txtPersURL2.setLayoutX(120);
         txtPersURL2.setLayoutY(250);
         txtPersURL2.setPrefSize(220, 20);
@@ -4199,6 +4760,7 @@ public class GestionnaireInterfaceController {
          * *******************************************************
          */
         apTIT.getChildren().addAll(apTitre, lblPanelTitre, ivBtnPlusTitre);
+        apECR.getChildren().addAll(apFenetre, lblPanelFenetre, ivBtnPlusFenetre);
         apDIA.getChildren().addAll(apDiapo, lblDiaporama, ivBtnDiaporama);
         apBB.getChildren().addAll(apBarreModif, lblBarreBouton, ivBtnPlus);
         apHS.getChildren().addAll(lblChoixHS, ivBtnPlusHS, apHotSpots);
@@ -4216,7 +4778,7 @@ public class GestionnaireInterfaceController {
          * ******************************************************
          */
         vbOutils.getChildren().addAll(
-                apCoulTheme, apTIT, apDIA, apBB, apPL, apHS, apBOUSS, apMASQ, apRS, apVIG, apMC, apIF
+                apCoulTheme, apTIT, apECR, apDIA, apBB, apPL, apHS, apBOUSS, apMASQ, apRS, apVIG, apMC, apIF
         );
 
         /*
@@ -4375,6 +4937,136 @@ public class GestionnaireInterfaceController {
 
             txtTitre.setStyle("-fx-background-color : " + coulFond);
         });
+        /*
+         Listeners Fenêtres
+         */
+        cbFenetreInfoPersonnalise.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+            bFenetreInfoPersonnalise = new_val;
+            apFenetreInfoPers.setDisable(!bFenetreInfoPersonnalise);
+            afficheFenetreInfo();
+        });
+
+        cbFenetreAidePersonnalise.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+            bFenetreAidePersonnalise = new_val;
+            apFenetreAidePers.setDisable(!bFenetreAidePersonnalise);
+            afficheFenetreAide();
+        });
+
+        cbAfficheFenetreInfo.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+            bAfficheFenetreInfo = new_val;
+            if (new_val == true) {
+                cbAfficheFenetreAide.setSelected(false);
+                cbVisualiseDiapo.setSelected(false);
+            }
+            afficheFenetreInfo();
+        });
+
+        cbAfficheFenetreAide.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+            bAfficheFenetreAide = new_val;
+            if (new_val == true) {
+                cbAfficheFenetreInfo.setSelected(false);
+                cbVisualiseDiapo.setSelected(false);
+            }
+            afficheFenetreAide();
+        });
+
+        btnFenetreInfo.setOnMouseClicked(
+                (MouseEvent me) -> {
+                    strFenetreInfoImage = ajoutFenetreImage();
+                    if (!strFenetreInfoImage.equals("")) {
+                        txtFenetreInfoImage.setText(strFenetreInfoImage);
+                    }
+                    afficheFenetreInfo();
+                }
+        );
+
+        btnFenetreAide.setOnMouseClicked(
+                (MouseEvent me) -> {
+                    strFenetreAideImage = ajoutFenetreImage();
+                    if (!strFenetreAideImage.equals("")) {
+                        txtFenetreAideImage.setText(strFenetreAideImage);
+                    }
+                    afficheFenetreAide();
+                }
+        );
+        slFenetreInfoTaille.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+            if (newValue != null) {
+                double taille = (double) newValue;
+                fenetreInfoTaille = taille;
+                afficheFenetreInfo();
+            }
+        });
+        slFenetreInfoOpacite.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+            if (newValue != null) {
+                double opac = (double) newValue;
+                fenetreInfoOpacite = opac;
+                afficheFenetreInfo();
+            }
+        });
+        bdfFenetreInfoPosX.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
+            fenetreInfoPosX = new_value.doubleValue();
+            afficheFenetreInfo();
+        });
+        bdfFenetreInfoPosY.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
+            fenetreInfoPosY = new_value.doubleValue();
+            afficheFenetreInfo();
+        });
+
+        txtFenetreURL.textProperty().addListener((final ObservableValue<? extends String> observable, final String oldValue, final String newValue) -> {
+            strFenetreURL = newValue;
+        });
+
+        txtFenetreTexteURL.textProperty().addListener((final ObservableValue<? extends String> observable, final String oldValue, final String newValue) -> {
+            strFenetreTexteURL = newValue;
+            afficheFenetreInfo();
+        });
+
+        slFenetrePoliceTaille.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+            if (newValue != null) {
+                double taille = Math.round((double) newValue * 10.d) / 10.d;
+                fenetrePoliceTaille = taille;
+                afficheFenetreInfo();
+            }
+        });
+
+        cpFenetreURLCouleur.setOnAction((ActionEvent e) -> {
+            strFenetreURLCouleur = "#" + cpFenetreURLCouleur.getValue().toString().substring(2, 8);
+            afficheFenetreInfo();
+        });
+
+        bdfFenetreURLPosX.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
+            fenetreURLPosX = new_value.doubleValue();
+            afficheFenetreInfo();
+        });
+
+        bdfFenetreURLPosY.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
+            fenetreURLPosY = new_value.doubleValue();
+            afficheFenetreInfo();
+        });
+        slFenetreAideTaille.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+            if (newValue != null) {
+                double taille = (double) newValue;
+                fenetreAideTaille = taille;
+                afficheFenetreAide();
+            }
+        });
+        slFenetreAideOpacite.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+            if (newValue != null) {
+                double opac = (double) newValue;
+                fenetreAideOpacite = opac;
+                afficheFenetreAide();
+            }
+        });
+
+        bdfFenetreAidePosX.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
+            fenetreAidePosX = new_value.doubleValue();
+            afficheFenetreAide();
+        });
+        bdfFenetreAidePosY.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
+            fenetreAidePosY = new_value.doubleValue();
+            afficheFenetreAide();
+        });
+
 
         /*
          Listeners Diaporama
@@ -4395,6 +5087,10 @@ public class GestionnaireInterfaceController {
         cbVisualiseDiapo.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
             visualiseDiaporama = new_val;
             afficheDiaporama();
+            if (new_val == true) {
+                cbAfficheFenetreInfo.setSelected(false);
+                cbAfficheFenetreAide.setSelected(false);
+            }
         });
         /*
          Listeners Barre de boutons

@@ -26,6 +26,7 @@ function traduction() {
     this.autorotation = "Autorotation (Marche/Arrêt)";
     this.souris = "change le mode de déplacement de la souris";
     this.plan = "Plan de la Visite";
+    this.clicFenetre="cliquez pour fermer la fenêtre";
     this.fenetreInfo = "<b>Panovisu version " +
             version +
             "</b><br>Un visualiseur de Visites Virtuelles 100% HTML5 - 100% libre<br>" +

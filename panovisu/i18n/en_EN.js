@@ -18,3 +18,5 @@ chainesTraduction['en_EN'].pleinEcran = "Full screen (on/off)";
 chainesTraduction['en_EN'].autorotation = "Autorotation (on/off)";
 chainesTraduction['en_EN'].souris = "change mouse mode";
 chainesTraduction['en_EN'].plan = "tour plan";
+chainesTraduction['en_EN'].clicFenetre = "click to close the window";
+
