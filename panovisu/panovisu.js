@@ -1,7 +1,7 @@
 /**
  * @name panoVisu
  * 
- * @version 1.0.29
+ * @version 1.1.0
  * @author LANG Laurent
  */
 
@@ -684,6 +684,43 @@ function panovisu(num_pano) {
 
         }
         else {
+            if (bFenetreInfoPersonnalise) {
+                img = new Image();
+                img.src = fenetreInfoImage;
+                img.onload = function() {
+                    $("#infoPanovisu-" + num_pano).html("");
+                    larg = Math.round(this.width * fenetreInfoTaille / 100);
+                    haut = Math.round(this.height * fenetreInfoTaille / 100);
+                    $("<img>", {id: "infoImg-" + num_pano, src: this.src, alt: "", height: haut, width: larg}).appendTo("#infoPanovisu-" + num_pano);
+                    $("<a>", {id: "infoUrl-" + num_pano, text: fenetreInfoTexteURL, href: fenetreInfoURL, target: "_blank"}).appendTo("#infoPanovisu-" + num_pano);
+                    $("#infoPanovisu-" + num_pano).css({width: larg, height: haut});
+                    $("#infoPanovisu-" + num_pano).attr("title", chainesTraduction[langage].clicFenetre);
+                    posGauche = (pano.width() - $("#infoPanovisu-" + num_pano).width()) / 2 + fenetreInfoDX;
+                    posHaut = (pano.height() - $("#infoPanovisu-" + num_pano).height()) / 2 + fenetreInfoDX;
+                    $("#infoPanovisu-" + num_pano).css({
+                        top: posHaut + "px",
+                        left: posGauche + "px",
+                        border: "none",
+                        backgroundColor: "rgba(255,255,255,0)"
+                    });
+                    topUrl = ($("#infoPanovisu-" + num_pano).height() - $("#infoUrl-" + num_pano).height()) / 2 + fenetreInfoDYURL;
+                    leftUrl = ($("#infoPanovisu-" + num_pano).width() - $("#infoUrl-" + num_pano).width()) / 2 + fenetreInfoDXURL;
+                    $("#infoUrl-" + num_pano).css({color: fenetreInfoCouleurURL,
+                        fontSize: fenetreInfoTailleURL + "px",
+                        position: "absolute",
+                        top: topUrl + "px",
+                        left: leftUrl + "px"
+                    });
+                };
+            }
+            else {
+                panoInfo = chainesTraduction[langage].fenetreInfo;
+                $("#infoPanovisu-" + num_pano).css({width: "450px", height: "190px"});
+                $("#infoPanovisu-" + num_pano).html(panoInfo);
+                posGauche = (pano.width() - $("#infoPanovisu-" + num_pano).width()) / 2;
+                posHaut = (pano.height() - $("#infoPanovisu-" + num_pano).height()) / 2;
+                $("#infoPanovisu-" + num_pano).css({top: posHaut + "px", left: posGauche + "px"});
+            }
             if (bAfficheAide) {
                 $("#aidePanovisu-" + num_pano).fadeOut(1000, function() {
                     bAfficheAide = false;
@@ -1812,17 +1849,17 @@ function panovisu(num_pano) {
                 $("<img>", {id: "infoImg-" + num_pano, src: this.src, alt: "", height: haut, width: larg}).appendTo("#infoPanovisu-" + num_pano);
                 $("<a>", {id: "infoUrl-" + num_pano, text: fenetreInfoTexteURL, href: fenetreInfoURL, target: "_blank"}).appendTo("#infoPanovisu-" + num_pano);
                 $("#infoPanovisu-" + num_pano).css({width: larg, height: haut});
-                $("#infoPanovisu-" + num_pano).attr("title",chainesTraduction[langage].clicFenetre);
+                $("#infoPanovisu-" + num_pano).attr("title", chainesTraduction[langage].clicFenetre);
                 posGauche = (pano.width() - $("#infoPanovisu-" + num_pano).width()) / 2 + fenetreInfoDX;
                 posHaut = (pano.height() - $("#infoPanovisu-" + num_pano).height()) / 2 + fenetreInfoDX;
                 $("#infoPanovisu-" + num_pano).css({
-                    top: posHaut + "px", 
+                    top: posHaut + "px",
                     left: posGauche + "px",
-                    border : "none",
-                    backgroundColor : "rgba(255,255,255,0)"
+                    border: "none",
+                    backgroundColor: "rgba(255,255,255,0)"
                 });
-                topUrl = ($("#infoPanovisu-" + num_pano).height() - $("#infoUrl-" + num_pano).height()) / 2+fenetreInfoDYURL;
-                leftUrl = ($("#infoPanovisu-" + num_pano).width() - $("#infoUrl-" + num_pano).width()) / 2+fenetreInfoDXURL;
+                topUrl = ($("#infoPanovisu-" + num_pano).height() - $("#infoUrl-" + num_pano).height()) / 2 + fenetreInfoDYURL;
+                leftUrl = ($("#infoPanovisu-" + num_pano).width() - $("#infoUrl-" + num_pano).width()) / 2 + fenetreInfoDXURL;
                 $("#infoUrl-" + num_pano).css({color: fenetreInfoCouleurURL,
                     fontSize: fenetreInfoTailleURL + "px",
                     position: "absolute",
@@ -1863,14 +1900,14 @@ function panovisu(num_pano) {
                 haut = Math.round(this.height * fenetreAideTaille / 100);
                 $("<img>", {id: "infoImg-" + num_pano, src: this.src, alt: "", height: haut, width: larg}).appendTo("#aidePanovisu-" + num_pano);
                 $("#aidePanovisu-" + num_pano).css({width: larg, height: haut});
-                $("#aidePanovisu-" + num_pano).attr("title",chainesTraduction[langage].clicFenetre);
+                $("#aidePanovisu-" + num_pano).attr("title", chainesTraduction[langage].clicFenetre);
                 posGauche = (pano.width() - $("#aidePanovisu-" + num_pano).width()) / 2 + fenetreAideDX;
                 posHaut = (pano.height() - $("#aidePanovisu-" + num_pano).height()) / 2 + fenetreAideDX;
                 $("#aidePanovisu-" + num_pano).css({
-                    top: posHaut + "px", 
+                    top: posHaut + "px",
                     left: posGauche + "px",
-                    border : "none",
-                    backgroundColor : "rgba(255,255,255,0)"
+                    border: "none",
+                    backgroundColor: "rgba(255,255,255,0)"
                 });
                 if (bAfficheAide)
                 {
@@ -2361,6 +2398,18 @@ function panovisu(num_pano) {
 
                         }
                         else {
+                            panoInfo = chainesTraduction[langage].fenetreInfo;
+                            $("#infoPanovisu-" + num_pano).css({width: "450px", height: "190px"});
+                            $("#infoPanovisu-" + num_pano).html(panoInfo);
+                            posGauche = (pano.width() - $("#infoPanovisu-" + num_pano).width()) / 2;
+                            posHaut = (pano.height() - $("#infoPanovisu-" + num_pano).height()) / 2;
+                            $("#infoPanovisu-" + num_pano).css({top: posHaut + "px", left: posGauche + "px"});
+                            $("#infoPanovisu-" + num_pano).css({
+                                backgroundColor: "#000",
+                                border: "1px solid white",
+                                opacity: "0.8"
+                            });
+
                             if (bAfficheAide) {
                                 $("#aidePanovisu-" + num_pano).fadeOut(1000, function() {
                                     bAfficheAide = false;
