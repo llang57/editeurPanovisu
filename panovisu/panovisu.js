@@ -300,7 +300,7 @@ function panovisu(num_pano) {
     $(document).on("click", ".hotSpots", function() {
         idHS = $(this).attr("id");
         numHS = parseInt(idHS.split("-")[1]);
-        console.log(idHS + " num " + numHS);
+        //console.log(idHS + " num " + numHS);
         switch (pointsInteret[numHS].type) {
             case "panoramique" :
                 $("#info-" + num_pano).fadeOut(1000);
@@ -416,7 +416,7 @@ function panovisu(num_pano) {
                 zoom();
             });
     /**
-     * Changement de la taille de l'Ã©cran
+     * Changement de la taille de l'ÃƒÂ©cran
      * 
      */
     $(window).resize(function() {
@@ -511,7 +511,7 @@ function panovisu(num_pano) {
 
     }
     /**
-     * Gestion du click prolongÃ©
+     * Gestion du click prolongÃƒÂ©
      * 
      */
     $(document).on("mousedown", "#xmoins-" + num_pano + ",#xplus-" + num_pano + ",#ymoins-" + num_pano + ",#yplus-" + num_pano,
@@ -692,8 +692,14 @@ function panovisu(num_pano) {
                     larg = Math.round(this.width * fenetreInfoTaille / 100);
                     haut = Math.round(this.height * fenetreInfoTaille / 100);
                     $("<img>", {id: "infoImg-" + num_pano, src: this.src, alt: "", height: haut, width: larg}).appendTo("#infoPanovisu-" + num_pano);
-                    $("<a>", {id: "infoUrl-" + num_pano, text: fenetreInfoTexteURL, href: fenetreInfoURL, target: "_blank"}).appendTo("#infoPanovisu-" + num_pano);
-                    $("#infoPanovisu-" + num_pano).css({width: larg, height: haut});
+                    $("<a>", {id: "infoUrl-" + num_pano, 
+                        text: fenetreInfoTexteURL, 
+                        href: fenetreInfoURL, 
+                        target: "_blank"}).appendTo("#infoPanovisu-" + num_pano);
+                    $("#infoPanovisu-" + num_pano).css({
+                        width: larg, 
+                        height: haut
+                    });
                     $("#infoPanovisu-" + num_pano).attr("title", chainesTraduction[langage].clicFenetre);
                     posGauche = (pano.width() - $("#infoPanovisu-" + num_pano).width()) / 2 + fenetreInfoDX;
                     posHaut = (pano.height() - $("#infoPanovisu-" + num_pano).height()) / 2 + fenetreInfoDX;
@@ -701,7 +707,8 @@ function panovisu(num_pano) {
                         top: posHaut + "px",
                         left: posGauche + "px",
                         border: "none",
-                        backgroundColor: "rgba(255,255,255,0)"
+                        backgroundColor: "rgba(255,255,255,0)",
+                        opacity : "1.0"                        
                     });
                     topUrl = ($("#infoPanovisu-" + num_pano).height() - $("#infoUrl-" + num_pano).height()) / 2 + fenetreInfoDYURL;
                     leftUrl = ($("#infoPanovisu-" + num_pano).width() - $("#infoUrl-" + num_pano).width()) / 2 + fenetreInfoDXURL;
@@ -935,6 +942,84 @@ function panovisu(num_pano) {
         }
 
     }
+
+    function afficheMasqueElements() {
+        if (!elementsVisibles) {
+            if (marcheArretNavigation === "oui")
+                $("#barre-" + num_pano).hide();
+            if (marcheArretBoussole === "oui")
+                $("#boussole-" + num_pano).hide();
+            if (marcheArretTitre === "oui")
+                $("#info-" + num_pano).hide();
+            if (marcheArretPlan === "oui") {
+                $("#plan-" + num_pano).hide();
+                $("#planTitre-" + num_pano).hide();
+            }
+            if (marcheArretReseaux === "oui")
+                $("#reseauxSociaux-" + num_pano).hide();
+            if (marcheArretVignettes === "oui")
+            {
+                $("#titreVignettes-" + num_pano).hide();
+                $("#divVignettes-" + num_pano).hide();
+                if (vignettesPosition === "left") {
+                    $("#divPrecedent-" + num_pano).css({left: 0});
+                }
+                if (vignettesPosition === "right") {
+                    $("#divSuivant-" + num_pano).css({right: 0});
+                }
+            }
+            for (i = 0; i < nombreImageFond; i++) {
+                if (imagesFond[i].masquable) {
+                    $("#imageFond-" + i + "-" + num_pano).hide();
+                }
+            }
+        }
+        else {
+            if (marcheArretNavigation === "oui")
+                $("#barre-" + num_pano).show();
+            if (marcheArretBoussole === "oui")
+                $("#boussole-" + num_pano).show();
+            if ((marcheArretTitre === "oui") && (afficheTitre === "oui"))
+                $("#info-" + num_pano).show();
+            if (marcheArretPlan === "oui") {
+                $("#plan-" + num_pano).show();
+                $("#planTitre-" + num_pano).show();
+            }
+            if (marcheArretReseaux === "oui")
+                $("#reseauxSociaux-" + num_pano).show();
+            if (marcheArretVignettes === "oui")
+            {
+                $("#titreVignettes-" + num_pano).show();
+                $("#divVignettes-" + num_pano).show();
+                if (!vigRentre) {
+                    var largeur = $("#divVignettes-" + num_pano).width() + 6;
+                    if (vignettesPosition === "left") {
+                        $("#divPrecedent-" + num_pano).css({left: largeur});
+                    }
+                    if (vignettesPosition === "right") {
+                        $("#divSuivant-" + num_pano).css({right: largeur});
+                    }
+                }
+                else {
+                    if (vignettesPosition === "left") {
+                        $("#divPrecedent-" + num_pano).css({left: 0});
+                    }
+                    if (vignettesPosition === "right") {
+                        $("#divSuivant-" + num_pano).css({right: 0});
+                    }
+                }
+
+            }
+            for (i = 0; i < nombreImageFond; i++) {
+                if (imagesFond[i].masquable) {
+                    $("#imageFond-" + i + "-" + num_pano).show();
+                }
+            }
+        }
+
+    }
+
+
 
     $(document).on("click", ".marcheArret", function(evenement) {
         evenement.stopPropagation();
@@ -1856,7 +1941,8 @@ function panovisu(num_pano) {
                     top: posHaut + "px",
                     left: posGauche + "px",
                     border: "none",
-                    backgroundColor: "rgba(255,255,255,0)"
+                    backgroundColor: "rgba(255,255,255,0)",
+                    opacity : "1.0"
                 });
                 topUrl = ($("#infoPanovisu-" + num_pano).height() - $("#infoUrl-" + num_pano).height()) / 2 + fenetreInfoDYURL;
                 leftUrl = ($("#infoPanovisu-" + num_pano).width() - $("#infoUrl-" + num_pano).width()) / 2 + fenetreInfoDXURL;
@@ -2077,9 +2163,6 @@ function panovisu(num_pano) {
                 left: "0px"
             });
             $("#marcheArret-" + num_pano).show();
-            elementsVisibles = true;
-
-
         }
         if (reseauxSociaux) {
             $("#reseauxSociaux-" + num_pano).css(reseauxSociauxPositionX, reseauxSociauxDX + "px");
@@ -2108,7 +2191,6 @@ function panovisu(num_pano) {
             if (reseauxSociauxEmail === "non")
                 $("#RSEM-" + num_pano).hide(0);
             $("#reseauxSociaux-" + num_pano).show();
-            elementsVisibles = true;
         }
 
         $("#info-" + num_pano).html(panoTitre);
@@ -2268,7 +2350,7 @@ function panovisu(num_pano) {
             $("#planTitre-" + num_pano).show();
 
         }
-
+        afficheMasqueElements();
     }
 
     function afficheMenuContextuel() {
@@ -3755,13 +3837,13 @@ function panovisu(num_pano) {
         $("#plan-" + num_pano).hide();
         $("#planTitre-" + num_pano).hide();
         /**
-         * On rajoute enfin les boutons & les fenêtre d'information.
+         * On rajoute enfin les boutons & les fenêtres d'Information/Aide.
          */
         creeBarreNavigation();
         creeInfo(fenetrePanoramique);
         creeAide(fenetrePanoramique);
         /**
-         * Création des racourcis vers les différentes fenêtres
+         * Création des racourcis vers les différentes fenÃªtres
          */
         container = $("#container-" + num_pano);
         pano = $("#" + fenetrePanoramique);
@@ -3884,6 +3966,7 @@ function panovisu(num_pano) {
             minFOV: 35,
             maxFOV: 120
         };
+        elementsVisibles=true;
         contexte = $.extend(defaut, contexte);
         fenPanoramique = contexte.panoramique;
         langage = contexte.langue;

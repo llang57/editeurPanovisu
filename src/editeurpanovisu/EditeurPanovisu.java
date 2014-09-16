@@ -8,18 +8,16 @@ package editeurpanovisu;
 import impl.org.controlsfx.i18n.Localization;
 import java.awt.Desktop;
 import java.awt.Dimension;
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -2394,16 +2392,9 @@ public class EditeurPanovisu extends Application {
      * @throws IOException
      */
     static public void copieFichierRepertoire(String fichier, String repertoire) throws FileNotFoundException, IOException {
-        String fichier1 = fichier.substring(fichier.lastIndexOf(File.separator) + 1);
-        InputStream in = new FileInputStream(fichier);
-        OutputStream out = new BufferedOutputStream(new FileOutputStream(repertoire + File.separator + fichier1));
-        byte[] buf = new byte[2048 * 1024];
-        int n;
-        while ((n = in.read(buf, 0, buf.length)) > 0) {
-            out.write(buf, 0, n);
-        }
-        out.close();
-        in.close();
+        File from = new File(fichier);
+        File to = new File(repertoire + File.separator + fichier.substring(fichier.lastIndexOf(File.separator) + 1));
+        Files.copy( from.toPath(), to.toPath(),StandardCopyOption.REPLACE_EXISTING);
     }
 
     /**

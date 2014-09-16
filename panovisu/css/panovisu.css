@@ -167,6 +167,7 @@ and open the template in the editor.
     color: #fff;
     text-align: center;
     display: none;
+    overflow: hidden;
 
 }
 

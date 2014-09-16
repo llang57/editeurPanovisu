@@ -968,12 +968,12 @@ public class GestionnaireInterfaceController {
                 ivFenetreInfo.setFitHeight(hauteurInfo * fenetreInfoTaille / 100);
                 ivFenetreInfo.setPreserveRatio(true);
                 ivFenetreInfo.setOpacity(fenetreInfoOpacite);
+                Font fonte1=new Font("Arial", 12);
                 apFenetreAfficheInfo.setLayoutX((ivVisualisation.getFitWidth() - ivFenetreInfo.getFitWidth()) / 2 + fenetreInfoPosX + ivVisualisation.getLayoutX());
                 apFenetreAfficheInfo.setLayoutY((ivVisualisation.getFitHeight() - ivFenetreInfo.getFitHeight()) / 2 + fenetreInfoPosY + ivVisualisation.getLayoutY());
                 lblFenetreURL.setText(strFenetreTexteURL);
                 lblFenetreURL.impl_processCSS(true);
-                lblFenetreURL.setStyle("-fx-font-size:" + Math.round(fenetrePoliceTaille * 10) / 10 + "px");
-
+                lblFenetreURL.setStyle("-fx-font-size:" + Math.round(fenetrePoliceTaille * 10) / 10 + "px;-fx-font-family: \"Arial\";");
                 lblFenetreURL.setTextFill(Color.valueOf(strFenetreURLCouleur));
                 apFenetreAfficheInfo.getChildren().addAll(ivFenetreInfo);
                 double URLPosX = (ivVisualisation.getFitWidth() - lblFenetreURL.prefWidth(-1)) / 2 + fenetreURLPosX + ivVisualisation.getLayoutX();
