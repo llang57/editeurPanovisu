@@ -274,8 +274,8 @@ public class GestionnaireInterfaceController {
     private ColorPicker cpFenetreURLCouleur;
     private Slider slFenetreOpaciteFond;
 
-    private AnchorPane apFenetreAfficheInfo = new AnchorPane();
-    private Label lblFenetreURL = new Label();
+    private final AnchorPane apFenetreAfficheInfo = new AnchorPane();
+    private final Label lblFenetreURL = new Label();
     /**
      *
      */
@@ -871,7 +871,7 @@ public class GestionnaireInterfaceController {
         imgEmail.setVisible(false);
         String positXReseauxSociaux = positionReseauxSociaux.split(":")[1];
         String positYReseauxSociaux = positionReseauxSociaux.split(":")[0];
-        double posX = 0;
+        double posX;
         double posY = 0;
         double dX;
         switch (positXReseauxSociaux) {
@@ -965,7 +965,7 @@ public class GestionnaireInterfaceController {
                 ivFenetreInfo.setFitHeight(hauteurInfo * fenetreInfoTaille / 100);
                 ivFenetreInfo.setPreserveRatio(true);
                 ivFenetreInfo.setOpacity(fenetreInfoOpacite);
-                Font fonte1=new Font("Arial", 12);
+                Font fonte1 = new Font("Arial", 12);
                 apFenetreAfficheInfo.setLayoutX((ivVisualisation.getFitWidth() - ivFenetreInfo.getFitWidth()) / 2 + fenetreInfoPosX + ivVisualisation.getLayoutX());
                 apFenetreAfficheInfo.setLayoutY((ivVisualisation.getFitHeight() - ivFenetreInfo.getFitHeight()) / 2 + fenetreInfoPosY + ivVisualisation.getLayoutY());
                 lblFenetreURL.setText(strFenetreTexteURL);
@@ -1060,7 +1060,7 @@ public class GestionnaireInterfaceController {
 
             apVisuplan.setOpacity(opacitePlan);
             double positionX = 0;
-            double positionY = 0;
+            double positionY;
             if (bAfficheTitre) {
                 positionY = ivVisualisation.getLayoutY() + txtTitre.getHeight();
             } else {
@@ -1093,8 +1093,8 @@ public class GestionnaireInterfaceController {
             if (nombrePlans > 0) {
 
                 String repertImagePlan = repertAppli + File.separator + "theme/plan";
-                String imageBoussole = "file:" + repertImagePlan + "/aiguillePlan.png";
-                Image imgBoussole1 = new Image(imageBoussole);
+                String imageBoussole1 = "file:" + repertImagePlan + "/aiguillePlan.png";
+                Image imgBoussole1 = new Image(imageBoussole1);
                 ImageView ivNord = new ImageView(imgBoussole1);
 
                 String positX = plans[gestionnairePlan.planActuel].getPosition().split(":")[1];
@@ -1290,6 +1290,7 @@ public class GestionnaireInterfaceController {
      * @param taille
      * @param styleBoutons
      * @param styleHS
+     * @param espacement
      */
     public void afficheBouton(String position, double dX, double dY, double taille, String styleBoutons, String styleHS, double espacement) {
         String repertBoutons = "file:" + repertBoutonsPrincipal + File.separator + styleBoutons;
@@ -1392,12 +1393,12 @@ public class GestionnaireInterfaceController {
                 nombreBoutons -= 1;
             }
         }
-        double tailleBarre = (double) nombreBoutons * ((double) taille + espacement);
-        hbbarreBoutons.setPrefWidth(tailleBarre);
+        double tailleBarre1 = (double) nombreBoutons * ((double) taille + espacement);
+        hbbarreBoutons.setPrefWidth(tailleBarre1);
         hbbarreBoutons.setPrefHeight((double) taille);
-        hbbarreBoutons.setMinWidth(tailleBarre);
+        hbbarreBoutons.setMinWidth(tailleBarre1);
         hbbarreBoutons.setMinHeight((double) taille);
-        hbbarreBoutons.setMaxWidth(tailleBarre);
+        hbbarreBoutons.setMaxWidth(tailleBarre1);
         hbbarreBoutons.setMaxHeight((double) taille);
         hbDeplacements = new HBox(espacement);
         hbZoom = new HBox(espacement);
@@ -1525,7 +1526,7 @@ public class GestionnaireInterfaceController {
      * @return
      */
     private ArrayList<String> listerStyle(String repertoire) {
-        ArrayList<String> liste = new ArrayList<String>();
+        ArrayList<String> liste = new ArrayList<>();
         File[] Repertoires = new File(repertoire).listFiles();
         for (File repert : Repertoires) {
             if (repert.isDirectory()) {
@@ -2752,7 +2753,7 @@ public class GestionnaireInterfaceController {
      * @param height
      */
     public void creeInterface(int width, int height) {
-        List<String> lstPolices = new ArrayList<String>();
+        List<String> lstPolices = new ArrayList<>();
         lstPolices.add("Arial");
         lstPolices.add("Arial Black");
         lstPolices.add("Comic Sans MS");
@@ -3419,7 +3420,7 @@ public class GestionnaireInterfaceController {
         apHotSpots.setStyle("-fx-background-color : #fff");
         apHotSpots.setPadding(new Insets(5));
         int i = 0;
-        double xHS = 0;
+        double xHS;
         double yHS = 25;
         Label lblHSPanoramique = new Label(rb.getString("interface.HSPanoramique"));
         lblHSPanoramique.setLayoutY(5);
