@@ -11,10 +11,11 @@ import java.awt.Dimension;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
@@ -1225,11 +1226,10 @@ public class EditeurPanovisu extends Application {
                 imagePanoramique.setImage(null);
                 listeChoixPanoramique.getItems().clear();
                 listeChoixPanoramiqueEntree.getItems().clear();
-                FileReader fr;
                 try {
-                    fr = new FileReader(fichProjet);
                     String texte;
-                    try (BufferedReader br = new BufferedReader(fr)) {
+                    try (BufferedReader br = new BufferedReader(new InputStreamReader(
+                            new FileInputStream(fichProjet), "UTF-8"))) {
                         texte = "";
                         String ligneTexte;
                         nombrePanoramiquesFichier = 0;
@@ -1377,11 +1377,10 @@ public class EditeurPanovisu extends Application {
                 imagePanoramique.setImage(null);
                 listeChoixPanoramique.getItems().clear();
                 listeChoixPanoramiqueEntree.getItems().clear();
-                FileReader fr;
                 try {
-                    fr = new FileReader(fichProjet);
                     String texte;
-                    try (BufferedReader br = new BufferedReader(fr)) {
+                    try (BufferedReader br = new BufferedReader(new InputStreamReader(
+                            new FileInputStream(fichProjet), "UTF-8"))) {
                         texte = "";
                         String ligneTexte;
                         nombrePanoramiquesFichier = 0;
@@ -2242,11 +2241,10 @@ public class EditeurPanovisu extends Application {
 //        derniersProjets.setDisable(false);
         File fichConfig = new File(repertConfig.getAbsolutePath() + File.separator + "panovisu.cfg");
         if (fichConfig.exists()) {
-            FileReader fr;
             try {
-                fr = new FileReader(fichConfig);
                 String texte;
-                try (BufferedReader br = new BufferedReader(fr)) {
+                try (BufferedReader br = new BufferedReader(new InputStreamReader(
+                        new FileInputStream(fichConfig), "UTF-8"))) {
                     texte = "";
                     String ligneTexte;
                     String langue = "fr";
@@ -2394,7 +2392,7 @@ public class EditeurPanovisu extends Application {
     static public void copieFichierRepertoire(String fichier, String repertoire) throws FileNotFoundException, IOException {
         File from = new File(fichier);
         File to = new File(repertoire + File.separator + fichier.substring(fichier.lastIndexOf(File.separator) + 1));
-        Files.copy( from.toPath(), to.toPath(),StandardCopyOption.REPLACE_EXISTING);
+        Files.copy(from.toPath(), to.toPath(), StandardCopyOption.REPLACE_EXISTING);
     }
 
     /**
@@ -4029,11 +4027,10 @@ public class EditeurPanovisu extends Application {
         repertChoix.setInitialDirectory(repert);
         File fichtemplate = repertChoix.showOpenDialog(stPrincipal);
         if (fichtemplate != null) {
-            FileReader fr;
             try {
-                fr = new FileReader(fichtemplate);
                 List<String> texte = new ArrayList<>();
-                BufferedReader br = new BufferedReader(fr);
+                BufferedReader br = new BufferedReader(new InputStreamReader(
+                        new FileInputStream(fichtemplate), "UTF-8"));
 
                 String ligneTexte;
                 while ((ligneTexte = br.readLine()) != null) {
@@ -4102,9 +4099,8 @@ public class EditeurPanovisu extends Application {
         fichHistoFichiers = new File(repertConfig.getAbsolutePath() + File.separator + "derniersprojets.cfg");
         nombreHistoFichiers = 0;
         if (fichHistoFichiers.exists()) {
-            FileReader fr;
-            fr = new FileReader(fichHistoFichiers);
-            try (BufferedReader br = new BufferedReader(fr)) {
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(
+                    new FileInputStream(fichHistoFichiers), "UTF-8"))) {
                 while ((texteHisto = br.readLine()) != null) {
                     MenuItem menuDerniersFichiers = new MenuItem(texteHisto);
                     derniersProjets.getItems().add(menuDerniersFichiers);
