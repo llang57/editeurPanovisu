@@ -534,6 +534,46 @@ public class EditeurPanovisu extends Application {
                             + "";
 
                 }
+                if (gestionnaireInterface.bAfficheComboMenu) {
+                    String SAfficheComboMenu = (gestionnaireInterface.bAfficheComboMenu) ? "oui" : "non";
+                    TextField titreV = (TextField) paneChoixPanoramique.lookup("#titreVisite");
+                    String titreVis = titreV.getText();
+                    contenuFichier += "<!-- Barre des comboMenu -->"
+                            + "    <comboMenu \n"
+                            + "        affiche=\"" + SAfficheComboMenu + "\"\n"
+                            + "        positionX=\"" + gestionnaireInterface.positionXComboMenu + "\"\n"
+                            + "        positionY=\"" + gestionnaireInterface.positionYComboMenu + "\"\n"
+                            + "        dX=\"" + gestionnaireInterface.offsetXComboMenu + "\"\n"
+                            + "        dY=\"" + gestionnaireInterface.offsetYComboMenu + "\"\n"
+                            + "    >\n";
+                    for (int j = 0; j < nombrePanoramiques; j++) {
+                        String nomPano = panoramiquesProjet[j].getNomFichier();
+                        String nFichier = nomPano.substring(nomPano.lastIndexOf(File.separator) + 1, nomPano.lastIndexOf(".")) + "Vignette.jpg";
+                        String nXML = nomPano.substring(nomPano.lastIndexOf(File.separator) + 1, nomPano.lastIndexOf(".")) + ".xml";
+                        ReadWriteImage.writeJpeg(panoramiquesProjet[j].getVignettePanoramique(),
+                                repertTemp + "/panos/" + nFichier, 1.0f, false, 0.0f);
+
+                        contenuFichier
+                                += "        <imageComboMenu \n";
+                        if (gestionnaireInterface.bAfficheComboMenuImages) {
+                            contenuFichier
+                                    += "            image=\"panos/" + nFichier + "\"\n";
+                        }
+                        if (i==j){
+                            contenuFichier
+                                += "            selectionne=\"selected\"\n";
+                        }
+                        contenuFichier
+                                += "            xml=\"xml/" + nXML + "\"\n"
+                                + "            titre=\"" + panoramiquesProjet[j].getTitrePanoramique() + "\"\n"
+                                + "            sousTitre=\"" + titreVis + "\"\n"
+                                + "        />\n";
+                    }
+                    contenuFichier
+                            += "    </comboMenu>       \n"
+                            + "";
+
+                }
 
                 contenuFichier += "    <!--Définition des hotspots-->  \n"
                         + "   <hotspots>\n";
@@ -683,6 +723,7 @@ public class EditeurPanovisu extends Application {
                     + "        <meta charset=\"utf-8\">\n"
                     + "        <meta name=\"viewport\" content=\"width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0\">\n"
                     + "        <link rel=\"stylesheet\" media=\"screen\" href=\"panovisu/libs/jqueryMenu/jquery.contextMenu.css\" type=\"text/css\"/>\n"
+                    + "        <link rel=\"stylesheet\" type=\"text/css\" href=\"panovisu/css/msdropdown/dd.css\" />\n"
                     + "        <meta property=\"og:title\" content=\"" + titreVis + "\" />\n"
                     + "        <meta property=\"og:description\" content=\"Une page créée avec panoVisu Editeur : 100% Libre 100% HTML5\" />\n"
                     + "        <meta property=\"og:image\" content=\"" + fPano1 + "\" />"
@@ -2616,7 +2657,7 @@ public class EditeurPanovisu extends Application {
                 cbDestPano.valueProperty().addListener(new ChangeListener<String>() {
                     @Override
                     public void changed(ObservableValue ov, String t, String t1) {
-                    valideHS();
+                        valideHS();
                     }
                 });
                 cbDestPano.setTranslateX(60);

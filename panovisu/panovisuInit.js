@@ -1,11 +1,42 @@
 var numeroPano = 0,
-        version = "1.1.0",
+        version = "1.2.0",
         programmeur = "Laurent LANG",
         anneeProgramme = "2014",
         site = "http://lemondea360.fr",
         siteTexte = "le monde à 360°";
-        sitePanovisu = "http://panovisu.fr",
+sitePanovisu = "http://panovisu.fr",
         siteTextePanovisu = "panovisu.fr";
+
+
+window.requestAnimFrame = (function() {
+    return window.requestAnimationFrame ||
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame ||
+            window.oRequestAnimationFrame ||
+            window.msRequestAnimationFrame ||
+            function(/* function */ callback, /* DOMElement */ element) {
+                window.setTimeout(callback, 1000 / 60);
+            };
+})();
+
+window.requestTimeout = function(fn, delay) {
+    if (!window.requestAnimationFrame &&
+            !window.webkitRequestAnimationFrame &&
+            !(window.mozRequestAnimationFrame && window.mozCancelRequestAnimationFrame) && // Firefox 5 ships without cancel support
+            !window.oRequestAnimationFrame &&
+            !window.msRequestAnimationFrame)
+        return window.setTimeout(fn, delay);
+    var start = new Date().getTime(),
+            handle = new Object();
+    function loop() {
+        var current = new Date().getTime(),
+                delta = current - start;
+        delta >= delay ? fn.call() : handle.value = requestAnimFrame(loop);
+    }
+    handle.value = requestAnimFrame(loop);
+    return handle;
+};
+
 
 function traduction() {
     this.panoPrecedent = "panoramique précedent";
@@ -22,11 +53,12 @@ function traduction() {
     this.zoomPlus = "Zoom +";
     this.zoomMoins = "Zoom -";
     this.aide = "Aide";
+    this.info = "Ecran d'accueil";
     this.pleinEcran = "Plein écran (Marche/Arrêt)";
     this.autorotation = "Autorotation (Marche/Arrêt)";
     this.souris = "change le mode de déplacement de la souris";
     this.plan = "Plan de la Visite";
-    this.clicFenetre="cliquez pour fermer la fenêtre";
+    this.clicFenetre = "cliquez pour fermer la fenêtre";
     this.fenetreInfo = "<b>Panovisu version " +
             version +
             "</b><br>Un visualiseur de Visites Virtuelles 100% HTML5 - 100% libre<br>" +
@@ -123,6 +155,7 @@ include("panovisu/libs/three.js/types.js");  //redéfnit le type float32Array() 
 include("panovisu/libs/three.js/three.min.js");
 include("panovisu/libs/jqueryMenu/jquery.contextMenu.js");
 include("panovisu/libs/jqueryMenu/jquery.ui.position.js");
+include("panovisu/libs/msdropdown/jquery.dd.min.js");
 
 
 

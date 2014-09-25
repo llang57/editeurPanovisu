@@ -346,7 +346,7 @@ public class GestionnaireInterfaceController {
     private RadioButton rbReseauxSociauxBottomLeft;
     private RadioButton rbReseauxSociauxBottomRight;
     /*
-     *
+     *   variables Vignettes
      */
     private AnchorPane apVignettes;
     private AnchorPane apVisuVignettes;
@@ -364,12 +364,33 @@ public class GestionnaireInterfaceController {
     private RadioButton rbVignettesBottom;
     private ColorPicker cpCouleurFondVignettes;
     private ColorPicker cpCouleurTexteVignettes;
+    /*
+     *   variables ComboMenu
+     */
+    private AnchorPane apComboMenu;
+    private AnchorPane apVisuComboMenu;
+    public boolean bAfficheComboMenu = false;
+    public boolean bAfficheComboMenuImages = true;
+    public String positionXComboMenu = "left";
+    public String positionYComboMenu = "top";
+    public double offsetXComboMenu = 10,
+            offsetYComboMenu = 10;
+    private CheckBox cbAfficheComboMenu;
+    private CheckBox cbAfficheComboMenuImages;
+    private BigDecimalField bdfOffsetXComboMenu;
+    private BigDecimalField bdfOffsetYComboMenu;
+    private RadioButton rbComboMenuTopLeft;
+    private RadioButton rbComboMenuTopCenter;
+    private RadioButton rbComboMenuTopRight;
+    private RadioButton rbComboMenuBottomLeft;
+    private RadioButton rbComboMenuBottomCenter;
+    private RadioButton rbComboMenuBottomRight;
 
     /*
      Variable du plan
      */
     private AnchorPane apPlan;
-    private AnchorPane apVisuplan;
+    private AnchorPane apVisuPlan;
     public boolean bAffichePlan = false;
     public String positionPlan = "left";
     public double largeurPlan = 200;
@@ -451,6 +472,7 @@ public class GestionnaireInterfaceController {
     final ToggleGroup grpPosMasque = new ToggleGroup();
     final ToggleGroup grpPosReseauxSociaux = new ToggleGroup();
     final ToggleGroup grpPosVignettes = new ToggleGroup();
+    final ToggleGroup grpPosComboMenu = new ToggleGroup();
     final ToggleGroup grpPosPlan = new ToggleGroup();
     private Image imageClaire;
     private Image imageSombre;
@@ -1031,10 +1053,10 @@ public class GestionnaireInterfaceController {
 
     public void affichePlan() {
 
-        apVisuplan.setVisible(bAffichePlan);
+        apVisuPlan.setVisible(bAffichePlan);
         if (bAffichePlan) {
             double marge = 10.d;
-            apVisuplan.getChildren().clear();
+            apVisuPlan.getChildren().clear();
             ImageView ivHSPlanActif = new ImageView(new Image("file:" + repertAppli + "/theme/plan/pointActif.png", 12, 12, true, true));
             ImageView ivHSPlan = new ImageView(new Image("file:" + repertAppli + "/theme/plan/point.png", 12, 12, true, true));
             Image imgPlan;
@@ -1052,13 +1074,13 @@ public class GestionnaireInterfaceController {
 
             }
             ImageView ivimgPlan = new ImageView(imgPlan);
-            apVisuplan.setPrefSize(imgPlan.getWidth() + marge * 2, imgPlan.getHeight() + marge * 2);
-            apVisuplan.setStyle("-fx-background-color : #" + txtCouleurFondPlan);
+            apVisuPlan.setPrefSize(imgPlan.getWidth() + marge * 2, imgPlan.getHeight() + marge * 2);
+            apVisuPlan.setStyle("-fx-background-color : #" + txtCouleurFondPlan);
             ivimgPlan.setLayoutX(marge);
             ivimgPlan.setLayoutY(marge);
-            apVisuplan.getChildren().addAll(ivimgPlan, ivHSPlan);
+            apVisuPlan.getChildren().addAll(ivimgPlan, ivHSPlan);
 
-            apVisuplan.setOpacity(opacitePlan);
+            apVisuPlan.setOpacity(opacitePlan);
             double positionX = 0;
             double positionY;
             if (bAfficheTitre) {
@@ -1071,7 +1093,7 @@ public class GestionnaireInterfaceController {
                     positionX = ivVisualisation.getLayoutX();
                     break;
                 case "right":
-                    positionX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - apVisuplan.getPrefWidth();
+                    positionX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - apVisuPlan.getPrefWidth();
                     break;
             }
             ivHSPlan.setLayoutX(80);
@@ -1084,12 +1106,12 @@ public class GestionnaireInterfaceController {
                 arcRadar.setFill(couleurFondRadar);
                 arcRadar.setStroke(couleurLigneRadar);
                 arcRadar.setOpacity(opaciteRadar);
-                apVisuplan.getChildren().addAll(arcRadar, ivHSPlanActif);
+                apVisuPlan.getChildren().addAll(arcRadar, ivHSPlanActif);
             } else {
-                apVisuplan.getChildren().add(ivHSPlanActif);
+                apVisuPlan.getChildren().add(ivHSPlanActif);
             }
-            apVisuplan.setLayoutX(positionX);
-            apVisuplan.setLayoutY(positionY);
+            apVisuPlan.setLayoutX(positionX);
+            apVisuPlan.setLayoutY(positionY);
             if (nombrePlans > 0) {
 
                 String repertImagePlan = repertAppli + File.separator + "theme/plan";
@@ -1120,8 +1142,46 @@ public class GestionnaireInterfaceController {
                 ivNord.setLayoutX(positionX);
                 ivNord.setLayoutY(positionY);
                 ivNord.setRotate(plans[gestionnairePlan.planActuel].getDirectionNord());
-                apVisuplan.getChildren().add(ivNord);
+                apVisuPlan.getChildren().add(ivNord);
             }
+        }
+    }
+
+    private void afficheComboMenu() {
+        apVisuComboMenu.getChildren().clear();
+        if (bAfficheComboMenu) {
+            apVisuComboMenu.setPrefWidth(302);
+            apVisuComboMenu.setPrefHeight(50);
+            ImageView ivImageMenu;
+            if (bAfficheComboMenuImages) {
+                ivImageMenu = new ImageView(new Image("file:" + repertAppli + "/images/menuAvecImage.jpg"));
+            } else {
+                ivImageMenu = new ImageView(new Image("file:" + repertAppli + "/images/menuSansImage.jpg"));
+            }
+            apVisuComboMenu.getChildren().add(ivImageMenu);
+            double posX = 0, posY = 0;
+            switch (positionXComboMenu) {
+                case "left":
+                    posX = ivVisualisation.getLayoutX() + offsetXComboMenu;
+                    break;
+                case "center":
+                    posX = ivVisualisation.getLayoutX() + (ivVisualisation.getFitWidth() - apVisuComboMenu.getPrefWidth()) / 2 + offsetXComboMenu;
+                    break;
+                case "right":
+                    posX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - apVisuComboMenu.getPrefWidth() - offsetXComboMenu;
+                    break;
+            }
+            switch (positionYComboMenu) {
+                case "top":
+                    posY = ivVisualisation.getLayoutY() + offsetYComboMenu;
+                    break;
+                case "bottom":
+                    posY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - apVisuComboMenu.getPrefHeight() - offsetYComboMenu;
+                    break;
+            }
+            System.out.println(ivVisualisation.getFitWidth() + "x" + ivVisualisation.getFitHeight() + " ==> " + posX + "," + posY + " " + positionXComboMenu + " : " + positionYComboMenu);
+            apVisuComboMenu.setLayoutX(posX);
+            apVisuComboMenu.setLayoutY(posY);
         }
     }
 
@@ -1349,7 +1409,7 @@ public class GestionnaireInterfaceController {
                 apVisualisation.getChildren().add(ivImageFond);
             }
         }
-        apVisualisation.getChildren().addAll(txtTitre, imgBoussole, imgAiguille, imgTwitter, imgGoogle, imgFacebook, imgEmail, apVisuVignettes, apVisuplan, fondSuivant, fondPrecedent);
+        apVisualisation.getChildren().addAll(txtTitre, imgBoussole, imgAiguille, imgTwitter, imgGoogle, imgFacebook, imgEmail, apVisuVignettes, apVisuComboMenu, apVisuPlan, fondSuivant, fondPrecedent);
         txtTitre.setVisible(bAfficheTitre);
         chargeBarre(styleBoutons, styleHS, imageMasque);
         afficheMasque();
@@ -1677,6 +1737,12 @@ public class GestionnaireInterfaceController {
                 + "tailleImageVignettes=" + Math.round(tailleImageVignettes) + "\n"
                 + "couleurFondVignettes=" + couleurFondVignettes + "\n"
                 + "couleurTexteVignettes=" + couleurTexteVignettes + "\n"
+                + "bAfficheComboMenu=" + bAfficheComboMenu + "\n"
+                + "bAfficheComboMenuImages=" + bAfficheComboMenuImages + "\n"
+                + "positionXComboMenu=" + positionXComboMenu + "\n"
+                + "positionYComboMenu=" + positionYComboMenu + "\n"
+                + "offsetXComboMenu=" + offsetXComboMenu + "\n"
+                + "offsetYComboMenu=" + offsetYComboMenu + "\n"
                 + "affichePlan=" + bAffichePlan + "\n"
                 + "positionPlan=" + positionPlan + "\n"
                 + "opacitePlan=" + Math.round(opacitePlan * 100.d) / 100.d + "\n"
@@ -2090,6 +2156,24 @@ public class GestionnaireInterfaceController {
                     case "couleurTexteVignettes":
                         couleurTexteVignettes = valeur;
                         break;
+                    case "bAfficheComboMenu":
+                        bAfficheComboMenu = valeur.equals("true");
+                        break;
+                    case "bAfficheComboMenuImages":
+                        bAfficheComboMenuImages = valeur.equals("true");
+                        break;
+                    case "positionXComboMenu":
+                        positionXComboMenu = valeur;
+                        break;
+                    case "positionYComboMenu":
+                        positionYComboMenu = valeur;
+                        break;
+                    case "offsetXComboMenu":
+                        offsetXComboMenu = Double.parseDouble(valeur);
+                        break;
+                    case "offsetYComboMenu":
+                        offsetYComboMenu = Double.parseDouble(valeur);
+                        break;
                     case "affichePlan":
                         bAffichePlan = valeur.equals("true");
                         break;
@@ -2162,7 +2246,7 @@ public class GestionnaireInterfaceController {
 
     public void afficheTemplate() {
         apVisualisation.getChildren().clear();
-        apVisualisation.getChildren().addAll(rbClair, rbSombre, rbPerso, cbImage, ivVisualisation, txtTitre, imgBoussole, imgAiguille, imgTwitter, imgGoogle, imgFacebook, imgEmail, apVisuVignettes, apVisuplan, ivMasque, apAfficheDiapo, apFenetreAfficheInfo, lblFenetreURL, ivDiapo);
+        apVisualisation.getChildren().addAll(rbClair, rbSombre, rbPerso, cbImage, ivVisualisation, txtTitre, imgBoussole, imgAiguille, imgTwitter, imgGoogle, imgFacebook, imgEmail, apVisuVignettes, apVisuComboMenu, apVisuPlan, ivMasque, apAfficheDiapo, apFenetreAfficheInfo, lblFenetreURL, ivDiapo);
 
         txtTitre.setTextFill(Color.valueOf(couleurTitre));
         Color couleur = Color.valueOf(couleurFondTitre);
@@ -2331,6 +2415,31 @@ public class GestionnaireInterfaceController {
         rbVignettesBottom.setSelected(positionVignettes.equals("bottom"));
         cpCouleurFondVignettes.setValue(Color.valueOf(couleurFondVignettes));
         cpCouleurTexteVignettes.setValue(Color.valueOf(couleurTexteVignettes));
+        cbAfficheComboMenu.setSelected(bAfficheComboMenu);
+        cbAfficheComboMenuImages.setSelected(bAfficheComboMenuImages);
+        String posit=positionYComboMenu+":"+positionXComboMenu;
+        switch(posit){
+            case "top:left":
+                rbComboMenuTopLeft.setSelected(true);
+                break;
+            case "top:center":
+                rbComboMenuTopCenter.setSelected(true);
+                break;
+            case "top:right":
+                rbComboMenuTopRight.setSelected(true);
+                break;
+            case "bottom:left":
+                rbComboMenuBottomLeft.setSelected(true);
+                break;
+            case "bottom:center":
+                rbComboMenuBottomCenter.setSelected(true);
+                break;
+            case "bottom:right":
+                rbComboMenuBottomRight.setSelected(true);
+                break;
+        }
+        bdfOffsetXComboMenu.setNumber(new BigDecimal(offsetXComboMenu));
+        bdfOffsetYComboMenu.setNumber(new BigDecimal(offsetYComboMenu));
         cbAffichePlan.setSelected(bAffichePlan);
         slOpacitePlan.setValue(opacitePlan);
         slLargeurPlan.setValue(largeurPlan);
@@ -2882,9 +2991,10 @@ public class GestionnaireInterfaceController {
         imgFacebook = new ImageView(new Image("file:" + repertReseauxSociaux + File.separator + imageReseauxSociauxFacebook));
         imgEmail = new ImageView(new Image("file:" + repertReseauxSociaux + File.separator + imageReseauxSociauxEmail));
         apVisuVignettes = new AnchorPane();
-        apVisuplan = new AnchorPane();
+        apVisuPlan = new AnchorPane();
+        apVisuComboMenu = new AnchorPane();
         apVisualisation.getChildren().clear();
-        apVisualisation.getChildren().addAll(txtTitre, imgBoussole, imgAiguille, ivMasque, imgTwitter, imgGoogle, imgFacebook, imgEmail, apVisuVignettes, fondSuivant, fondPrecedent);
+        apVisualisation.getChildren().addAll(txtTitre, imgBoussole, imgAiguille, ivMasque, imgTwitter, imgGoogle, imgFacebook, imgEmail, apVisuVignettes, apVisuComboMenu, fondSuivant, fondPrecedent);
         fondPrecedent.setPrefWidth(64);
         fondPrecedent.setPrefHeight(64);
         fondSuivant.setPrefWidth(64);
@@ -2948,6 +3058,7 @@ public class GestionnaireInterfaceController {
         AnchorPane apMASQ = new AnchorPane();
         AnchorPane apRS = new AnchorPane();
         AnchorPane apVIG = new AnchorPane();
+        AnchorPane apCBM = new AnchorPane();
         AnchorPane apPL = new AnchorPane();
         AnchorPane apIF = new AnchorPane();
         AnchorPane apMC = new AnchorPane();
@@ -4396,6 +4507,142 @@ public class GestionnaireInterfaceController {
 
         /*
          * ********************************************
+         *     Panel ComboMenu 
+         * ********************************************
+         */
+        apComboMenu = new AnchorPane();
+        apComboMenu.setLayoutY(40);
+        apComboMenu.setMinWidth(vbOutils.getPrefWidth() - 20);
+        cbAfficheComboMenu = new CheckBox(rb.getString("interface.affichageComboMenu"));
+        cbAfficheComboMenu.setLayoutX(10);
+        cbAfficheComboMenu.setLayoutY(10);
+        apComboMenu.getChildren().add(cbAfficheComboMenu);
+        cbAfficheComboMenuImages = new CheckBox(rb.getString("interface.affichageComboMenuImages"));
+        cbAfficheComboMenuImages.setLayoutX(10);
+        cbAfficheComboMenuImages.setLayoutY(40);
+        cbAfficheComboMenuImages.setSelected(bAfficheComboMenuImages);
+        apComboMenu.getChildren().add(cbAfficheComboMenuImages);
+        Label lblPanelComboMenu = new Label(rb.getString("interface.comboMenu"));
+        lblPanelComboMenu.setPrefWidth(vbOutils.getPrefWidth());
+        lblPanelComboMenu.setStyle("-fx-background-color : #666");
+        lblPanelComboMenu.setTextFill(Color.WHITE);
+        lblPanelComboMenu.setPadding(new Insets(5));
+        lblPanelComboMenu.setLayoutX(10);
+        lblPanelComboMenu.setLayoutY(10);
+        ImageView ivBtnPlusComboMenu = new ImageView(new Image("file:" + "images/plus.png", 20, 20, true, true));
+        ivBtnPlusComboMenu.setLayoutX(vbOutils.getPrefWidth() - 20);
+        ivBtnPlusComboMenu.setLayoutY(11);
+
+        Label lblPositComboMenu = new Label(rb.getString("interface.choixPositComboMenu"));
+        lblPositComboMenu.setLayoutX(10);
+        lblPositComboMenu.setLayoutY(90);
+        apComboMenu.getChildren().add(lblPositComboMenu);
+
+        rbComboMenuTopLeft = new RadioButton();
+        rbComboMenuTopCenter = new RadioButton();
+        rbComboMenuTopRight = new RadioButton();
+        rbComboMenuBottomLeft = new RadioButton();
+        rbComboMenuBottomCenter = new RadioButton();
+        rbComboMenuBottomRight = new RadioButton();
+
+        rbComboMenuTopLeft.setUserData("top:left");
+        rbComboMenuTopCenter.setUserData("top:center");
+        rbComboMenuTopRight.setUserData("top:right");
+        rbComboMenuBottomLeft.setUserData("bottom:left");
+        rbComboMenuBottomCenter.setUserData("bottom:center");
+        rbComboMenuBottomRight.setUserData("bottom:right");
+
+        rbComboMenuTopLeft.setToggleGroup(grpPosComboMenu);
+        rbComboMenuTopCenter.setToggleGroup(grpPosComboMenu);
+        rbComboMenuTopRight.setToggleGroup(grpPosComboMenu);
+        rbComboMenuBottomLeft.setToggleGroup(grpPosComboMenu);
+        rbComboMenuBottomCenter.setToggleGroup(grpPosComboMenu);
+        rbComboMenuBottomRight.setToggleGroup(grpPosComboMenu);
+
+        posX = 200;
+        posY = 70;
+
+        rbComboMenuTopLeft.setLayoutX(posX);
+        rbComboMenuTopCenter.setLayoutX(posX + 20);
+        rbComboMenuTopRight.setLayoutX(posX + 40);
+        rbComboMenuTopLeft.setLayoutY(posY);
+        rbComboMenuTopCenter.setLayoutY(posY);
+        rbComboMenuTopRight.setLayoutY(posY);
+
+        rbComboMenuBottomLeft.setLayoutX(posX);
+        rbComboMenuBottomCenter.setLayoutX(posX + 20);
+        rbComboMenuBottomRight.setLayoutX(posX + 40);
+        rbComboMenuBottomLeft.setLayoutY(posY + 40);
+        rbComboMenuBottomCenter.setLayoutY(posY + 40);
+        rbComboMenuBottomRight.setLayoutY(posY + 40);
+        apComboMenu.getChildren().addAll(
+                rbComboMenuTopLeft, rbComboMenuTopCenter, rbComboMenuTopRight,
+                rbComboMenuBottomLeft, rbComboMenuBottomCenter, rbComboMenuBottomRight
+        );
+
+        Label lblOffsetXComboMenu = new Label("dX :");
+        lblOffsetXComboMenu.setLayoutX(25);
+        lblOffsetXComboMenu.setLayoutY(148);
+        Label lblOffsetYComboMenu = new Label("dY :");
+        lblOffsetYComboMenu.setLayoutX(175);
+        lblOffsetYComboMenu.setLayoutY(148);
+        bdfOffsetXComboMenu = new BigDecimalField(new BigDecimal(offsetXComboMenu));
+        bdfOffsetXComboMenu.setLayoutX(50);
+        bdfOffsetXComboMenu.setLayoutY(143);
+        bdfOffsetXComboMenu.setMaxValue(new BigDecimal(2000));
+        bdfOffsetXComboMenu.setMinValue(new BigDecimal(0));
+        bdfOffsetXComboMenu.setMaxWidth(100);
+        bdfOffsetYComboMenu = new BigDecimalField(new BigDecimal(offsetYComboMenu));
+        bdfOffsetYComboMenu.setLayoutX(200);
+        bdfOffsetYComboMenu.setLayoutY(143);
+        bdfOffsetYComboMenu.setMaxValue(new BigDecimal(2000));
+        bdfOffsetYComboMenu.setMinValue(new BigDecimal(0));
+        bdfOffsetYComboMenu.setMaxWidth(100);
+        apComboMenu.getChildren().addAll(
+                lblOffsetXComboMenu, bdfOffsetXComboMenu,
+                lblOffsetYComboMenu, bdfOffsetYComboMenu
+        );
+
+        apComboMenu.setPrefHeight(235);
+        Double taillePanelComboMenu = apComboMenu.getPrefHeight();
+        apComboMenu.setPrefHeight(0);
+        apComboMenu.setMaxHeight(0);
+        apComboMenu.setMinHeight(0);
+        apComboMenu.setVisible(false);
+
+        lblPanelComboMenu.setOnMouseClicked((MouseEvent me) -> {
+            if (apComboMenu.isVisible()) {
+                ivBtnPlusComboMenu.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
+                apComboMenu.setPrefHeight(0);
+                apComboMenu.setMaxHeight(0);
+                apComboMenu.setMinHeight(0);
+                apComboMenu.setVisible(false);
+            } else {
+                ivBtnPlusComboMenu.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
+                apComboMenu.setPrefHeight(taillePanelComboMenu);
+                apComboMenu.setMaxHeight(taillePanelComboMenu);
+                apComboMenu.setMinHeight(taillePanelComboMenu);
+                apComboMenu.setVisible(true);
+            }
+        });
+        ivBtnPlusComboMenu.setOnMouseClicked((MouseEvent me) -> {
+            if (apComboMenu.isVisible()) {
+                ivBtnPlusComboMenu.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
+                apComboMenu.setPrefHeight(0);
+                apComboMenu.setMaxHeight(0);
+                apComboMenu.setMinHeight(0);
+                apComboMenu.setVisible(false);
+            } else {
+                ivBtnPlusComboMenu.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
+                apComboMenu.setPrefHeight(taillePanelComboMenu);
+                apComboMenu.setMaxHeight(taillePanelComboMenu);
+                apComboMenu.setMinHeight(taillePanelComboMenu);
+                apComboMenu.setVisible(true);
+            }
+        });
+
+        /*
+         * ********************************************
          *     Panel Plan
          * ********************************************
          */
@@ -4738,6 +4985,7 @@ public class GestionnaireInterfaceController {
         apMasque.setStyle(styleap);
         apReseauxSociaux.setStyle(styleap);
         apVignettes.setStyle(styleap);
+        apComboMenu.setStyle(styleap);
         apPlan.setStyle(styleap);
         apMenuContextuel.setStyle(styleap);
         apImageFond.setStyle(styleap);
@@ -4749,6 +4997,7 @@ public class GestionnaireInterfaceController {
         apMasque.setLayoutX(20);
         apReseauxSociaux.setLayoutX(20);
         apVignettes.setLayoutX(20);
+        apComboMenu.setLayoutX(20);
         apPlan.setLayoutX(20);
         apMenuContextuel.setLayoutX(20);
         apImageFond.setLayoutX(20);
@@ -4766,6 +5015,7 @@ public class GestionnaireInterfaceController {
         apMASQ.getChildren().addAll(apMasque, lblPanelMasque, ivBtnPlusMasque);
         apRS.getChildren().addAll(apReseauxSociaux, lblPanelReseauxSociaux, ivBtnPlusReseauxSociaux);
         apVIG.getChildren().addAll(apVignettes, lblPanelVignettes, ivBtnPlusVignettes);
+        apCBM.getChildren().addAll(apComboMenu, lblPanelComboMenu, ivBtnPlusComboMenu);
         apPL.getChildren().addAll(apPlan, lblPanelPlan, ivBtnPlusPlan);
         apIF.getChildren().addAll(apImageFond, lblPanelImageFond, ivBtnPlusImageFond);
         apMC.getChildren().addAll(apMenuContextuel, lblPanelMenuContextuel, ivBtnPlusMenuContextuel);
@@ -4776,7 +5026,7 @@ public class GestionnaireInterfaceController {
          * ******************************************************
          */
         vbOutils.getChildren().addAll(
-                apCoulTheme, apTIT, apECR, apDIA, apBB, apPL, apHS, apBOUSS, apMASQ, apRS, apVIG, apMC, apIF
+                apCoulTheme, apTIT, apECR, apDIA, apBB, apPL, apHS, apBOUSS, apMASQ, apRS, apVIG, apCBM, apMC, apIF
         );
 
         /*
@@ -5415,6 +5665,41 @@ public class GestionnaireInterfaceController {
             afficheBouton(positionBarre, dXBarre, dYBarre, tailleBarre, styleBarre, styleHotSpots, espacementBoutons);
             afficheVignettes();
         });
+
+        /*
+         Listeners ComboMenu
+         */
+        grpPosComboMenu.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) -> {
+            if (grpPosComboMenu.getSelectedToggle() != null) {
+                positionXComboMenu = grpPosComboMenu.getSelectedToggle().getUserData().toString().split(":")[1];
+                positionYComboMenu = grpPosComboMenu.getSelectedToggle().getUserData().toString().split(":")[0];
+                afficheComboMenu();
+            }
+        });
+
+        cbAfficheComboMenu.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+            if (new_val != null) {
+                bAfficheComboMenu = new_val;
+                afficheComboMenu();
+            }
+        });
+        cbAfficheComboMenuImages.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+            if (new_val != null) {
+                bAfficheComboMenuImages = new_val;
+                afficheComboMenu();
+            }
+        });
+
+        bdfOffsetXComboMenu.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
+            offsetXComboMenu = new_value.doubleValue();
+            afficheComboMenu();
+        });
+
+        bdfOffsetYComboMenu.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
+            offsetYComboMenu = new_value.doubleValue();
+            afficheComboMenu();
+        });
+
 
         /*
          Listeners Plan
