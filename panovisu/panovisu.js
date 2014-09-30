@@ -3108,7 +3108,7 @@ function panovisu(num_pano) {
         for (i = 0; i < nombreImageFond; i++) {
             switch (imagesFond[i].posX) {
                 case "left" :
-                    if (!(vigRentre) && vignettesAffiche && vignettesPosition === "left") {
+                    if (!(vigRentre) && vignettesAffiche === "oui" && vignettesPosition === "left") {
                         var posit = parseInt(imagesFond[i].offsetX) + Math.round(vignettesTailleImage) + 10;
                         $("#imageFond-" + i + "-" + num_pano).css(
                                 imagesFond[i].posX, posit + "px"
@@ -3121,7 +3121,7 @@ function panovisu(num_pano) {
                     }
                     break;
                 case "right" :
-                    if (!(vigRentre) && vignettesAffiche && vignettesPosition === "right") {
+                    if (!(vigRentre) && vignettesAffiche === "oui" && vignettesPosition === "right") {
                         var posit = parseInt(imagesFond[i].offsetX) + Math.round(vignettesTailleImage) + 10;
                         $("#imageFond-" + i + "-" + num_pano).css(
                                 imagesFond[i].posX, posit + "px"
@@ -3139,7 +3139,7 @@ function panovisu(num_pano) {
                     break
             }
             if (imagesFond[i].posY !== "middle") {
-                if (!(vigRentre) && vignettesAffiche && vignettesPosition === "bottom" && imagesFond[i].posY === "bottom") {
+                if (!(vigRentre) && vignettesAffiche === "oui" && vignettesPosition === "bottom" && imagesFond[i].posY === "bottom") {
                     var posit = parseInt(imagesFond[i].offsetY) + Math.round(vignettesTailleImage / 2) + 10;
                     $("#imageFond-" + i + "-" + num_pano).css(
                             imagesFond[i].posY, posit + "px"
@@ -3228,6 +3228,15 @@ function panovisu(num_pano) {
             afficheInfo();
             afficheAide();
             afficheBarre(pano.width(), pano.height());
+            if (bTelecommande) {
+                if (telecommandePositionX !== "center") {
+                    $("#telec-" + num_pano).css(telecommandePositionX, telecommandeDX + "px");
+                }
+                else {
+                    $("#telec-" + num_pano).css("left", (pano.width() - $("#telec-" + num_pano).width()) / 2.0 + telecommandeDX + "px");
+                }
+                $("#telec-" + num_pano).css(telecommandePositionY, telecommandeDY + "px");
+            }
             afficheInfoTitre();
             if ((vignettesPano.length > 0) && (typeVignettes === "horizontales")) {
                 var largeurFenetre;
@@ -3568,7 +3577,7 @@ function panovisu(num_pano) {
                     vignettesPosition = "bottom";
                     vignettesFondCouleur = "green";
                     vignettesTexteCouleur = "yellow";
-                    vignettesTailleImage = 120;
+                    vignettesTailleImage = 0;
                     vignettesPano = new Array();
                     pointsInteret = new Array();
                     comboMenuPano = new Array();
@@ -3613,8 +3622,8 @@ function panovisu(num_pano) {
                     telecommandeAide = "oui";
                     telecommandePositionX = "bottom";
                     telecommandePositionY = "right";
-                    telecommandeDX = 10;
-                    telecommandeDY = 10;
+                    telecommandeDX = 0;
+                    telecommandeDY = 0;
                     telecommandeTaille = 25.0;
                     telecommandeTailleBouton = 40.0;
                     $("#divVignettes-" + num_pano).html("");
@@ -4392,9 +4401,15 @@ function panovisu(num_pano) {
                     transform: "scale(" + telecommandeTaille / 100.0 + "," + telecommandeTaille / 100.0 + ")"
                 });
 
-                $("#telec-" + num_pano).css(telecommandePositionX, telecommandeDX + "px");
+                if (telecommandePositionX !== "center") {
+                    $("#telec-" + num_pano).css(telecommandePositionX, telecommandeDX + "px");
+                }
+                else {
+                    $("#telec-" + num_pano).css("left", (pano.width() - $("#telec-" + num_pano).width()) / 2.0 + telecommandeDX + "px");
+                }
                 $("#telec-" + num_pano).css(telecommandePositionY, telecommandeDY + "px");
-                $(document).on("click", ".clicTelec,.imgTelecFS,.imgTelecInfo", function() {
+                $(document).on("click", ".clicTelec,.imgTelecFS,.imgTelecInfo", function(evenement) {
+                    telecEnCours = true;
                     if (bAfficheInfo)
                     {
                         $("#infoPanovisu-" + num_pano).fadeOut(2000, function() {
@@ -4449,11 +4464,11 @@ function panovisu(num_pano) {
                         latitude += 2 * dy;
                         affiche();
                     }
-
+                    evenement.stopPropagation();
+                    evenement.preventDefault();
                 });
 
                 $(document).on("mousedown", ".clicTelec", function(evenement) {
-
                     telecEnCours = true;
                     isDeplacement = false;
                     if (bAfficheInfo)
@@ -4493,8 +4508,8 @@ function panovisu(num_pano) {
                         ddy = dy / 5;
                         timer = requestAnimFrame(accelere);
                     }
+                    evenement.stopPropagation();
                     evenement.preventDefault();
-
                 });
 
 
@@ -4526,11 +4541,11 @@ function panovisu(num_pano) {
                 style: "left : 0px;width : 300px;"
             }).appendTo("#comboMenu-" + num_pano);
             comboMenuPano.forEach(function(element) {
-                if (element.select==="selected"){
-                    attrib="selected";
+                if (element.select === "selected") {
+                    attrib = "selected";
                 }
-                else{
-                    attrib="not-selected";
+                else {
+                    attrib = "not-selected";
                 }
                 if (element.image !== "") {
                     $("#cbMenu-" + num_pano).append($("<option>", {
