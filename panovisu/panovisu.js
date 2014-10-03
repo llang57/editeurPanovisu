@@ -230,8 +230,9 @@ function panovisu(num_pano) {
             dX,
             dY,
             mesh,
-            container,
-            pano,
+            container;
+    
+    var pano,
             pano1,
             zeroNord,
             boussole,
@@ -318,6 +319,8 @@ function panovisu(num_pano) {
             telecommandeDY,
             telecommandeTaille,
             telecommandeTailleBouton,
+            strLien1BarrePersonnalisee,
+            strLien2BarrePersonnalisee,
             comboMenu,
             bComboMenuAffiche,
             comboMenuPositionX,
@@ -750,8 +753,8 @@ function panovisu(num_pano) {
         {
             autoRotation = "oui";
             bAutorotation = true;
-            dx = 1;
-            ddx = 0;
+            dxAutorotation = 1;
+            ddxAutorotation = 0;
             demarreAutoRotation();
         }
     }
@@ -1729,7 +1732,8 @@ function panovisu(num_pano) {
         if (littlePlanetView) {
             camera.position.copy(target).negate();
         }
-        renderer.render(scene, camera);
+        if (renderer)
+            renderer.render(scene, camera);
         var bouss = longitude - zeroNord;
         if (boussoleAiguille === "oui")
         {
@@ -2266,6 +2270,7 @@ function panovisu(num_pano) {
                 height: boussoleTaille + "px"
             });
             $("#bousImg-" + num_pano).attr("src", "panovisu/images/boussoles/" + boussoleImage);
+            $("#bousAig-" + num_pano).attr("src", "panovisu/images/boussoles/aiguille.png");
             var largBous = Math.round(parseInt(boussoleTaille) / 5);
             var posX = Math.round((parseInt(boussoleTaille) - largBous) / 2);
             $("#bousAig-" + num_pano).css({
@@ -2282,6 +2287,10 @@ function panovisu(num_pano) {
                 left: "0px"
             });
             $("#boussole-" + num_pano).show();
+        }
+        else {
+            $("#bousAig-" + num_pano).hide();
+            $("#bousImg-" + num_pano).hide();
         }
         $("#divSuivant-" + num_pano).hide();
         $("#divPrecedent-" + num_pano).hide();
@@ -3222,7 +3231,8 @@ function panovisu(num_pano) {
         }
         camera.aspect = pano.width() / pano.height();
         camera.updateProjectionMatrix();
-        renderer.setSize(pano.width(), pano.height());
+        if (renderer)
+            renderer.setSize(pano.width(), pano.height());
         affiche();
         requestTimeout(function() {
             afficheInfo();
@@ -3315,10 +3325,10 @@ function panovisu(num_pano) {
      * @returns {undefined}
      */
     function demarreAutoRotation() {
-        if (Math.abs(ddx) < Math.abs(dx))
-            ddx += dx / 20;
+        if (Math.abs(ddxAutorotation) < Math.abs(dxAutorotation))
+            ddxAutorotation += dxAutorotation / 20;
         if (!isUserInteracting) {
-            longitude += ddx;
+            longitude += ddxAutorotation;
         }
         latitude = Math.max(-85, Math.min(85, latitude));
         affiche();
@@ -3329,11 +3339,11 @@ function panovisu(num_pano) {
     function arreteAutorotation() {
         if (!isUserInteracting) {
             finX = false;
-            if (Math.round(Math.abs(ddx) * 10) / 10 > 0)
-                ddx -= dx / 20;
+            if (Math.round(Math.abs(ddxAutorotation) * 10) / 10 > 0)
+                ddxAutorotation -= dxAutorotation / 20;
             else
                 finX = true;
-            longitude += ddx;
+            longitude += ddxAutorotation;
             affiche();
             if (!finX) {
                 requestAnimFrame(arreteAutorotation);
@@ -3626,6 +3636,8 @@ function panovisu(num_pano) {
                     telecommandeDY = 0;
                     telecommandeTaille = 25.0;
                     telecommandeTailleBouton = 40.0;
+                    strLien1BarrePersonnalisee = "";
+                    strLien2BarrePersonnalisee = "";
                     $("#divVignettes-" + num_pano).html("");
                     $("<img>", {id: "gaucheVignettes-" + num_pano, class: "positionVignettes", src: "panovisu/images/interface/gauche.jpg"}).appendTo("#divVignettes-" + num_pano);
                     $("<img>", {id: "droiteVignettes-" + num_pano, class: "positionVignettes", src: "panovisu/images/interface/droite.jpg"}).appendTo("#divVignettes-" + num_pano);
@@ -3816,6 +3828,8 @@ function panovisu(num_pano) {
                     telecommandeDY = parseFloat(XMLTelecommande.attr('dY')) || telecommandeDY;
                     telecommandeTaille = parseFloat(XMLTelecommande.attr('taille')) || telecommandeTaille;
                     telecommandeTailleBouton = parseFloat(XMLTelecommande.attr('tailleBouton')) || telecommandeTailleBouton;
+                    strLien1BarrePersonnalisee = XMLTelecommande.attr('lien1') || strLien1BarrePersonnalisee;
+                    strLien2BarrePersonnalisee = XMLTelecommande.attr('lien2') || strLien2BarrePersonnalisee;
                     i = 0;
                     j = 0;
                     $(d).find('zoneNavPerso').each(function() {
@@ -4046,7 +4060,7 @@ function panovisu(num_pano) {
         $("<div>", {id: fenetrePanoramique, class: "panovisu", style: "width : 100%;height : 100%;position: relative;"}).appendTo("#" + fenetre);
         $("<div>", {id: "boussole-" + num_pano, class: "boussole"}).appendTo("#" + fenetrePanoramique);
         $("<img>", {id: "bousImg-" + num_pano, class: "bousImg", src: ""}).appendTo("#boussole-" + num_pano);
-        $("<img>", {id: "bousAig-" + num_pano, class: "bousAig", src: "panovisu/images/boussoles/aiguille.png"}).appendTo("#boussole-" + num_pano);
+        $("<img>", {id: "bousAig-" + num_pano, class: "bousAig", src: ""}).appendTo("#boussole-" + num_pano);
         $("#boussole-" + num_pano).hide();
         $("<div>", {id: "marcheArret-" + num_pano, class: "marcheArret"}).appendTo("#" + fenetrePanoramique);
         $("<img>", {id: "MAImg-" + num_pano, class: "MAImg", src: "", title: chainesTraduction[langage].afficheMasque}).appendTo("#marcheArret-" + num_pano);
@@ -4233,95 +4247,107 @@ function panovisu(num_pano) {
                 var decalage = 0;
                 var zoneActive = 1;
                 if (telecommandeInfo === "oui") {
-                    xm1 = zonesTelecommande[zoneActive].centerX - tailleBtnTelec / 2 - decalage;
-                    ym1 = zonesTelecommande[zoneActive].centerY - tailleBtnTelec / 2 - decalage;
-                    $("<div>", {
-                        id: "telInfo-" + num_pano,
-                        class: "imgTelecInfo",
-                        style: "left : " + xm1 + "px;top : " + ym1 + "px;"
-                    }).appendTo("#telec-" + num_pano);
+                    if (zonesTelecommande[zoneActive]) {
+                        xm1 = zonesTelecommande[zoneActive].centerX - tailleBtnTelec / 2 - decalage;
+                        ym1 = zonesTelecommande[zoneActive].centerY - tailleBtnTelec / 2 - decalage;
+                        $("<div>", {
+                            id: "telInfo-" + num_pano,
+                            class: "imgTelecInfo",
+                            style: "left : " + xm1 + "px;top : " + ym1 + "px;"
+                        }).appendTo("#telec-" + num_pano);
 
-                    $("<img>", {
-                        src: "panovisu/images/telecommande/info.png",
-                        border: "0",
-                        width: tailleBtnTelec,
-                        alt: "",
-                        title: chainesTraduction[langage].info
-                    }).appendTo("#telInfo-" + num_pano);
+                        $("<img>", {
+                            src: "panovisu/images/telecommande/info.png",
+                            border: "0",
+                            width: tailleBtnTelec,
+                            alt: "",
+                            title: chainesTraduction[langage].info
+                        }).appendTo("#telInfo-" + num_pano);
+                    }
                     zoneActive += 1;
                 }
                 if (telecommandeAide === "oui") {
-                    xm1 = zonesTelecommande[zoneActive].centerX - tailleBtnTelec / 2 - decalage;
-                    ym1 = zonesTelecommande[zoneActive].centerY - tailleBtnTelec / 2 - decalage;
-                    $("<div>", {
-                        id: "telAide-" + num_pano,
-                        class: "imgTelecInfo",
-                        style: "left : " + xm1 + "px;top : " + ym1 + "px;"
-                    }).appendTo("#telec-" + num_pano);
+                    if (zonesTelecommande[zoneActive]) {
+                        xm1 = zonesTelecommande[zoneActive].centerX - tailleBtnTelec / 2 - decalage;
+                        ym1 = zonesTelecommande[zoneActive].centerY - tailleBtnTelec / 2 - decalage;
+                        $("<div>", {
+                            id: "telAide-" + num_pano,
+                            class: "imgTelecInfo",
+                            style: "left : " + xm1 + "px;top : " + ym1 + "px;"
+                        }).appendTo("#telec-" + num_pano);
 
-                    $("<img>", {
-                        src: "panovisu/images/telecommande/aide.png",
-                        border: "0",
-                        width: tailleBtnTelec,
-                        alt: "",
-                        title: chainesTraduction[langage].aide
-                    }).appendTo("#telAide-" + num_pano);
+                        $("<img>", {
+                            src: "panovisu/images/telecommande/aide.png",
+                            border: "0",
+                            width: tailleBtnTelec,
+                            alt: "",
+                            title: chainesTraduction[langage].aide
+                        }).appendTo("#telAide-" + num_pano);
+                    }
                     zoneActive += 1;
                 }
 
 
                 if (telecommandeFS === "oui") {
-                    xm1 = zonesTelecommande[zoneActive].centerX - tailleBtnTelec / 2 - decalage;
-                    ym1 = zonesTelecommande[zoneActive].centerY - tailleBtnTelec / 2 - decalage;
-                    $("<div>", {
-                        id: "telFS-" + num_pano,
-                        class: "imgTelecFS",
-                        style: "left : " + xm1 + "px;top : " + ym1 + "px;"
-                    }).appendTo("#telec-" + num_pano);
-                    $("<img>", {
-                        src: "panovisu/images/telecommande/fs.png",
-                        border: "0",
-                        width: tailleBtnTelec,
-                        alt: "",
-                        title: chainesTraduction[langage].pleinEcran
-                    }).appendTo("#telFS-" + num_pano);
+                    if (zonesTelecommande[zoneActive]) {
+                        xm1 = zonesTelecommande[zoneActive].centerX - tailleBtnTelec / 2 - decalage;
+                        ym1 = zonesTelecommande[zoneActive].centerY - tailleBtnTelec / 2 - decalage;
+                        $("<div>", {
+                            id: "telFS-" + num_pano,
+                            class: "imgTelecFS",
+                            style: "left : " + xm1 + "px;top : " + ym1 + "px;"
+                        }).appendTo("#telec-" + num_pano);
+                        $("<img>", {
+                            src: "panovisu/images/telecommande/fs.png",
+                            border: "0",
+                            width: tailleBtnTelec,
+                            alt: "",
+                            title: chainesTraduction[langage].pleinEcran
+                        }).appendTo("#telFS-" + num_pano);
+                    }
                     zoneActive += 1;
                 }
 
 
                 if (telecommandeAutorotation === "oui") {
-                    xm1 = zonesTelecommande[zoneActive].centerX - tailleBtnTelec / 2 - decalage;
-                    ym1 = zonesTelecommande[zoneActive].centerY - tailleBtnTelec / 2 - decalage;
-                    $("<div>", {
-                        id: "telRotation-" + num_pano,
-                        class: "imgTelecFS",
-                        style: "left : " + xm1 + "px;top : " + ym1 + "px;"
-                    }).appendTo("#telec-" + num_pano);
-                    $("<img>", {
-                        src: "panovisu/images/telecommande/rotation.png",
-                        border: "0",
-                        width: tailleBtnTelec,
-                        alt: "",
-                        title: chainesTraduction[langage].autorotation
-                    }).appendTo("#telRotation-" + num_pano);
+                    if (zonesTelecommande[zoneActive]) {
+
+                        xm1 = zonesTelecommande[zoneActive].centerX - tailleBtnTelec / 2 - decalage;
+                        ym1 = zonesTelecommande[zoneActive].centerY - tailleBtnTelec / 2 - decalage;
+                        $("<div>", {
+                            id: "telRotation-" + num_pano,
+                            class: "imgTelecFS",
+                            style: "left : " + xm1 + "px;top : " + ym1 + "px;"
+                        }).appendTo("#telec-" + num_pano);
+                        $("<img>", {
+                            src: "panovisu/images/telecommande/rotation.png",
+                            border: "0",
+                            width: tailleBtnTelec,
+                            alt: "",
+                            title: chainesTraduction[langage].autorotation
+                        }).appendTo("#telRotation-" + num_pano);
+                    }
+
                     zoneActive += 1;
                 }
 
                 if (telecommandeSouris === "oui") {
-                    xm1 = zonesTelecommande[zoneActive].centerX - tailleBtnTelec / 2 - decalage;
-                    ym1 = zonesTelecommande[zoneActive].centerY - tailleBtnTelec / 2 - decalage;
-                    $("<div>", {
-                        id: "telSouris-" + num_pano,
-                        class: "imgTelecFS",
-                        style: "left : " + xm1 + "px;top : " + ym1 + "px;"
-                    }).appendTo("#telec-" + num_pano);
-                    $("<img>", {
-                        src: "panovisu/images/telecommande/souris.png",
-                        border: "0",
-                        width: tailleBtnTelec,
-                        alt: "",
-                        title: chainesTraduction[langage].souris
-                    }).appendTo("#telSouris-" + num_pano);
+                    if (zonesTelecommande[zoneActive]) {
+                        xm1 = zonesTelecommande[zoneActive].centerX - tailleBtnTelec / 2 - decalage;
+                        ym1 = zonesTelecommande[zoneActive].centerY - tailleBtnTelec / 2 - decalage;
+                        $("<div>", {
+                            id: "telSouris-" + num_pano,
+                            class: "imgTelecFS",
+                            style: "left : " + xm1 + "px;top : " + ym1 + "px;"
+                        }).appendTo("#telec-" + num_pano);
+                        $("<img>", {
+                            src: "panovisu/images/telecommande/souris.png",
+                            border: "0",
+                            width: tailleBtnTelec,
+                            alt: "",
+                            title: chainesTraduction[langage].souris
+                        }).appendTo("#telSouris-" + num_pano);
+                    }
                     zoneActive += 1;
                 }
 
@@ -4365,6 +4391,12 @@ function panovisu(num_pano) {
                             break;
                         case "telSouris":
                             boutonsTelecommande[i].title = chainesTraduction[langage].souris;
+                            break;
+                        case "telLien-1":
+                            boutonsTelecommande[i].title = strLien1BarrePersonnalisee;
+                            break;
+                        case "telLien-2":
+                            boutonsTelecommande[i].title = strLien2BarrePersonnalisee;
                             break;
                     }
                     $("<area>", {
@@ -4456,6 +4488,12 @@ function panovisu(num_pano) {
                             break;
                         case "telRotation-" + num_pano:
                             toggleAutorotation();
+                            break;
+                        case "telLien-1-" + num_pano:
+                            window.open(strLien1BarrePersonnalisee);
+                            break;
+                        case "telLien-2-" + num_pano:
+                            window.open(strLien2BarrePersonnalisee);
                             break;
                     }
                     if (sens !== "") {

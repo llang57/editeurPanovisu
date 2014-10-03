@@ -5,7 +5,7 @@
  */
 package editeurpanovisu;
 
-import static editeurpanovisu.EditeurPanovisu.styleCSS;
+import static editeurpanovisu.EditeurPanovisu.strStyleCSS;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -47,8 +47,8 @@ public class ConfigDialogController {
     private static AnchorPane myPane;
     private static Button btnAnnuler;
     private static Button btnSauvegarder;
-    private static final String[] codesLangues = EditeurPanovisu.codesLanguesTraduction;
-    private static final String[] langues = EditeurPanovisu.languesTraduction;
+    private static final String[] codesLangues = EditeurPanovisu.strCodesLanguesTraduction;
+    private static final String[] langues = EditeurPanovisu.strLanguesTraduction;
     final ToggleGroup grpStyle = new ToggleGroup();
     private static Label lblChoixStyle;
     private static RadioButton rbClair;
@@ -94,7 +94,7 @@ public class ConfigDialogController {
         lblRepert.setPrefWidth(320);
         lblRepert.setLayoutX(45);
         lblRepert.setLayoutY(70);
-        txtRepert = new TextField(EditeurPanovisu.repertoireProjet);
+        txtRepert = new TextField(EditeurPanovisu.strRepertoireProjet);
         txtRepert.setLayoutX(190);
         txtRepert.setLayoutY(110);
         txtRepert.setPrefWidth(300);
@@ -114,7 +114,7 @@ public class ConfigDialogController {
         rbClair.setUserData("clair");
         rbFonce.setUserData("fonce");
         rbFonce.setToggleGroup(grpStyle);
-        if (styleCSS.equals("clair")) {
+        if (strStyleCSS.equals("clair")) {
             rbClair.setSelected(true);
         } else {
             rbFonce.setSelected(true);
@@ -133,7 +133,7 @@ public class ConfigDialogController {
         );
         btnChoixRepert.setOnAction((ActionEvent e) -> {
             DirectoryChooser repertChoix = new DirectoryChooser();
-            File repert = new File(EditeurPanovisu.repertoireProjet);
+            File repert = new File(EditeurPanovisu.strRepertoireProjet);
             repertChoix.setInitialDirectory(repert);
             File repertInitial = repertChoix.showDialog(null);
             txtRepert.setText(repertInitial.getAbsolutePath());
@@ -158,10 +158,10 @@ public class ConfigDialogController {
         fenetre.getChildren().add(Pboutons);
         btnAnnuler.setOnAction((ActionEvent e) -> {
             stConfig.hide();
-            setUserAgentStylesheet("file:css/" + styleCSS + ".css");
+            setUserAgentStylesheet("file:css/" + strStyleCSS + ".css");
         });
         btnSauvegarder.setOnAction((ActionEvent e) -> {
-            styleCSS = grpStyle.getSelectedToggle().getUserData().toString();
+            strStyleCSS = grpStyle.getSelectedToggle().getUserData().toString();
             Dialogs.create()
                     .style(DialogStyle.CROSS_PLATFORM_DARK)
                     .owner(null)
@@ -173,7 +173,7 @@ public class ConfigDialogController {
             contenuFichier += "pays=" + listeLangues.getValue().toString().split("_")[1] + "\n";
             contenuFichier += "repert=" + txtRepert.getText() + "\n";
             contenuFichier += "style=" + grpStyle.getSelectedToggle().getUserData().toString() + "\n";
-            File fichConfig = new File(EditeurPanovisu.repertConfig.getAbsolutePath() + File.separator + "panovisu.cfg");
+            File fichConfig = new File(EditeurPanovisu.fileRepertConfig.getAbsolutePath() + File.separator + "panovisu.cfg");
             fichConfig.setWritable(true);
             FileWriter fw = null;
             try {

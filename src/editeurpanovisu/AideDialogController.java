@@ -5,7 +5,7 @@
  */
 package editeurpanovisu;
 
-import static editeurpanovisu.EditeurPanovisu.repertAppli;
+import static editeurpanovisu.EditeurPanovisu.strRepertAppli;
 import java.awt.Dimension;
 import java.io.File;
 import java.util.ResourceBundle;
@@ -46,7 +46,7 @@ public class AideDialogController {
         
         WebView browser = new WebView();
         WebEngine webEngine = browser.getEngine();
-        webEngine.load("file:"+repertAppli + File.separator+"aide/aide.html"); 
+        webEngine.load("file:"+strRepertAppli + File.separator+"aide/aide.html"); 
         browser.setLayoutX(5);
         browser.setLayoutY(5);
         browser.setPrefWidth(largeur-110);

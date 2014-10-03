@@ -91,7 +91,7 @@ public class EquiCubeDialogController {
      */
     public final static String CUBE2QUI = "C2E";
     private File[] lstFichier;
-    private static String repertFichier = EditeurPanovisu.repertoireProjet;
+    private static String repertFichier = EditeurPanovisu.strRepertoireProjet;
 
     /**
      *
@@ -505,10 +505,10 @@ public class EquiCubeDialogController {
         Image imgTransf;
         if (typeTransf.equals(EquiCubeDialogController.EQUI2CUBE)) {
             stEqui2Cube.setTitle("Transformation d'équirectangulaire en faces de cube");
-            imgTransf = new Image("file:" + EditeurPanovisu.repertAppli + File.separator + "images/equi2cube.png");
+            imgTransf = new Image("file:" + EditeurPanovisu.strRepertAppli + File.separator + "images/equi2cube.png");
         } else {
             stEqui2Cube.setTitle("Transformation de faces de cube en équirectangulaire");
-            imgTransf = new Image("file:" + EditeurPanovisu.repertAppli + File.separator + "images/cube2equi.png");
+            imgTransf = new Image("file:" + EditeurPanovisu.strRepertAppli + File.separator + "images/cube2equi.png");
         }
         ImageView IMType = new ImageView(imgTransf);
         IMType.setLayoutX(35);

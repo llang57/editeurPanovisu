@@ -6,18 +6,18 @@
 package editeurpanovisu;
 
 import static editeurpanovisu.EditeurPanovisu.copieFichierRepertoire;
-import static editeurpanovisu.EditeurPanovisu.dejaSauve;
-import static editeurpanovisu.EditeurPanovisu.nombrePanoramiques;
+import static editeurpanovisu.EditeurPanovisu.bDejaSauve;
+import static editeurpanovisu.EditeurPanovisu.iNombrePanoramiques;
 import static editeurpanovisu.EditeurPanovisu.panoramiquesProjet;
-import static editeurpanovisu.EditeurPanovisu.repertAppli;
+import static editeurpanovisu.EditeurPanovisu.strRepertAppli;
 import static editeurpanovisu.EditeurPanovisu.gestionnaireInterface;
 import static editeurpanovisu.EditeurPanovisu.gestionnairePlan;
-import static editeurpanovisu.EditeurPanovisu.nombrePlans;
+import static editeurpanovisu.EditeurPanovisu.iNombrePlans;
 import static editeurpanovisu.EditeurPanovisu.plans;
-import static editeurpanovisu.EditeurPanovisu.repertAppli;
-import static editeurpanovisu.EditeurPanovisu.repertTemp;
+import static editeurpanovisu.EditeurPanovisu.strRepertAppli;
+import static editeurpanovisu.EditeurPanovisu.strRepertTemp;
 import static editeurpanovisu.EditeurPanovisu.stPrincipal;
-import static editeurpanovisu.EditeurPanovisu.tooltipStyle;
+import static editeurpanovisu.EditeurPanovisu.strTooltipStyle;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -73,9 +73,9 @@ public class GestionnairePlanController {
     private final ExtensionsFilter PNG_FILTER
             = new ExtensionsFilter(new String[]{".png"});
 
-    private ResourceBundle rb;
+    private ResourceBundle rbLocalisation;
     public Label lblDragDropPlan;
-    public Pane tabInterface;
+    public Pane paneInterface;
     private HBox hbInterface;
     private AnchorPane apPlan;
     private VBox vbOutils;
@@ -87,25 +87,25 @@ public class GestionnairePlanController {
     private RadioButton rbBoussolePlanBottomLeft;
     private RadioButton rbBoussolePlanBottomRight;
     final ToggleGroup grpPosBoussolePlan = new ToggleGroup();
-    final ToggleGroup grpcbPano = new ToggleGroup();
+    final ToggleGroup grpCBPano = new ToggleGroup();
     public double positionNordPlan = 0;
-    public String positionBoussolePlan = "top:right";
+    public String strPositionBoussolePlan = "top:right";
     public double positXBoussolePlan = 0;
     public double positYBoussolePlan = 0;
-    public String planListeVignette;
+    public String strPlanListeVignette;
     private ImageView ivPlan;
     private Image imagePlan;
     public int planActuel = -1;
-    private String tooltipStyle = "";
+    private String strTooltipStyle = "";
     private Pane panePlan;
     private ComboBox<String> cbChoixPlan;
     private AnchorPane apConfigPlan;
-    public String repertImagePlan;
+    public String strRepertImagePlan;
     private ImageView ivNord;
     private Image imgBoussole;
     private int numPoints = 0;
     private ScrollPane spOutils;
-    private boolean dragDropPlan = false;
+    private boolean bDragDropPlan = false;
 //    private Button btnValider;
 
     private void retireAffichagePointsHotSpots() {
@@ -130,7 +130,7 @@ public class GestionnairePlanController {
 
     public String getTemplate() {
         String contenuFichier = "";
-        for (int i = 0; i < nombrePlans; i++) {
+        for (int i = 0; i < iNombrePlans; i++) {
             contenuFichier += "[Plan=>"
                     + "lienImage:" + plans[i].getLienPlan()
                     + ";image:" + plans[i].getImagePlan()
@@ -176,12 +176,12 @@ public class GestionnairePlanController {
         panePlan.getChildren().add(point);
 
         Tooltip t = new Tooltip("point n° " + (i + 1));
-        t.setStyle(tooltipStyle);
+        t.setStyle(strTooltipStyle);
         Tooltip.install(point, t);
         point.setOnDragDetected((MouseEvent me1) -> {
             point.setFill(Color.RED);
             point.setStroke(Color.YELLOW);
-            dragDropPlan = true;
+            bDragDropPlan = true;
             //System.out.println("d&d plan : " + dragDropPlan);
             me1.consume();
 
@@ -198,12 +198,11 @@ public class GestionnairePlanController {
 
         });
         point.setOnMouseReleased((MouseEvent me1) -> {
-            String chPoint = point.getId();
-            chPoint = chPoint.substring(5, chPoint.length());
-            int numeroPoint = Integer.parseInt(chPoint);
+            String strPoint = point.getId();
+            strPoint = strPoint.substring(5, strPoint.length());
+            int numeroPoint = Integer.parseInt(strPoint);
             double X1 = me1.getSceneX();
             double Y1 = me1.getSceneY();
-
             double mouseXX = X1 - panePlan.getLayoutX();
             double mouseYY = Y1 - panePlan.getLayoutY() - 110;
             plans[planActuel].getHotspot(numeroPoint).setLongitude(mouseXX / largeur);
@@ -216,15 +215,15 @@ public class GestionnairePlanController {
         point.setOnMouseClicked((MouseEvent me1) -> {
             double mouseX = me1.getSceneX();
             double mouseY = me1.getSceneY() - panePlan.getLayoutY() - 115;
-            String chPoint = point.getId();
-            chPoint = chPoint.substring(5, chPoint.length());
-            int numeroPoint = Integer.parseInt(chPoint);
+            String strPoint = point.getId();
+            strPoint = strPoint.substring(5, strPoint.length());
+            int numeroPoint = Integer.parseInt(strPoint);
             Node pt;
-            pt = (Node) panePlan.lookup("#point" + chPoint);
+            pt = (Node) panePlan.lookup("#point" + strPoint);
 
             if (me1.isControlDown()) {
                 valideHsplan();
-                dejaSauve = false;
+                bDejaSauve = false;
                 stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
                 panePlan.getChildren().remove(pt);
 
@@ -246,12 +245,12 @@ public class GestionnairePlanController {
                 me1.consume();
             } else {
                 //System.out.println("d&d plan : " + dragDropPlan);
-                if (!dragDropPlan) {
+                if (!bDragDropPlan) {
                     valideHsplan();
-                    if (nombrePanoramiques > 1) {
+                    if (iNombrePanoramiques > 1) {
                         int largeurVignettes = 4;
-                        if (nombrePanoramiques < 4) {
-                            largeurVignettes = nombrePanoramiques;
+                        if (iNombrePanoramiques < 4) {
+                            largeurVignettes = iNombrePanoramiques;
                         }
                         AnchorPane listePanoVig = afficherListePanosVignettes(numeroPoint);
                         if (mouseX + largeurVignettes * 130 > panePlan.getWidth()) {
@@ -380,9 +379,9 @@ public class GestionnairePlanController {
      *
      */
     public void ajouterPlan() {
-        cbChoixPlan.getItems().add(nombrePlans, plans[nombrePlans].getImagePlan());
-        afficherPlan(nombrePlans);
-        cbChoixPlan.getSelectionModel().select(nombrePlans);
+        cbChoixPlan.getItems().add(iNombrePlans, plans[iNombrePlans].getImagePlan());
+        afficherPlan(iNombrePlans);
+        cbChoixPlan.getSelectionModel().select(iNombrePlans);
         lblDragDropPlan.setVisible(false);
     }
 
@@ -392,7 +391,7 @@ public class GestionnairePlanController {
      */
     public void afficherPlan(int numeroPlan) {
         planActuel = numeroPlan;
-        String txtImage = repertTemp + "/images/" + plans[numeroPlan].getImagePlan();
+        String txtImage = strRepertTemp + "/images/" + plans[numeroPlan].getImagePlan();
         imagePlan = new Image("file:" + txtImage);
         if (imagePlan.getWidth() > 1000) {
             imagePlan = new Image("file:" + txtImage, 1000, -1, true, true);
@@ -462,18 +461,18 @@ public class GestionnairePlanController {
         Pane fond = new Pane();
         fond.setStyle("-fx-background-color : #bbb;");
         fond.setPrefWidth(540);
-        fond.setPrefHeight(((nombrePanoramiques - 2) / 4 + 1) * 65 + 10);
+        fond.setPrefHeight(((iNombrePanoramiques - 2) / 4 + 1) * 65 + 10);
         fond.setMinWidth(540);
         fond.setMinHeight(70);
         aplistePano.getChildren().add(fond);
         aplistePano.setStyle("-fx-backgroung-color : #bbb;");
         int j = 0;
         ImageView[] ivPano;
-        ivPano = new ImageView[nombrePanoramiques];
+        ivPano = new ImageView[iNombrePanoramiques];
         double xPos;
         double yPos;
         int row = 0;
-        for (int i = 0; i < nombrePanoramiques; i++) {
+        for (int i = 0; i < iNombrePanoramiques; i++) {
             int numeroPano = i;
             ivPano[j] = new ImageView(panoramiquesProjet[i].getVignettePanoramique());
             ivPano[j].setFitWidth(120);
@@ -489,10 +488,10 @@ public class GestionnairePlanController {
             ivPano[j].setCursor(Cursor.HAND);
             ivPano[j].setStyle("-fx-background-color : #ccc;");
             Tooltip t = new Tooltip(nomPano.substring(nomPano.lastIndexOf(File.separator) + 1, nomPano.lastIndexOf(".")));
-            t.setStyle(tooltipStyle);
+            t.setStyle(strTooltipStyle);
             Tooltip.install(ivPano[j], t);
             ivPano[j].setOnMouseClicked((MouseEvent me) -> {
-                planListeVignette = nomPano;
+                strPlanListeVignette = nomPano;
                 if (panoramiquesProjet[numeroPano].getTitrePanoramique() != null) {
                     String texteHS = panoramiquesProjet[numeroPano].getTitrePanoramique();
                     TextField txtHS = (TextField) vbOutils.lookup("#txtHsplan" + numHS);
@@ -514,13 +513,13 @@ public class GestionnairePlanController {
         aplistePano.setPrefHeight(taille);
         aplistePano.setMinWidth(540);
         aplistePano.setMinHeight(taille);
-        ImageView ivClose = new ImageView(new Image("file:" + repertAppli + File.separator + "images/ferme.png", 20, 20, true, true));
+        ImageView ivClose = new ImageView(new Image("file:" + strRepertAppli + File.separator + "images/ferme.png", 20, 20, true, true));
         ivClose.setLayoutX(2);
         ivClose.setLayoutY(5);
         ivClose.setCursor(Cursor.HAND);
         aplistePano.getChildren().add(ivClose);
         ivClose.setOnMouseClicked((MouseEvent me) -> {
-            planListeVignette = "";
+            strPlanListeVignette = "";
             aplistePano.setVisible(false);
             me.consume();
         });
@@ -533,7 +532,7 @@ public class GestionnairePlanController {
      */
     public void afficheConfigPlan() {
         if (planActuel != -1) {
-            Label lblNordPlan = new Label(rb.getString("plan.positionNordPlan"));
+            Label lblNordPlan = new Label(rbLocalisation.getString("plan.positionNordPlan"));
             lblNordPlan.setLayoutX(10);
             lblNordPlan.setLayoutY(10);
             slNordPlan = new Slider(0, 360.0, 0);
@@ -543,7 +542,7 @@ public class GestionnairePlanController {
             sepPlan.setPrefHeight(10);
             sepPlan.setPrefWidth(350);
             sepPlan.setLayoutY(30);
-            Label lblPositBoussolePlan = new Label(rb.getString("plan.positionBoussolePlan"));
+            Label lblPositBoussolePlan = new Label(rbLocalisation.getString("plan.positionBoussolePlan"));
             lblPositBoussolePlan.setLayoutX(10);
             lblPositBoussolePlan.setLayoutY(50);
             rbBoussolePlanTopLeft = new RadioButton("");
@@ -623,18 +622,18 @@ public class GestionnairePlanController {
                     rbBoussolePlanBottomLeft, rbBoussolePlanBottomRight,
                     lblBoussoleDXSpinner, bdfPositXBoussole, lblBoussoleDYSpinner, bdfPositYBoussole
             );
-            if (nombrePanoramiques != 0) {
-                CheckBox cbValide = new CheckBox(rb.getString("plan.valideCB"));
+            if (iNombrePanoramiques != 0) {
+                CheckBox cbValide = new CheckBox(rbLocalisation.getString("plan.valideCB"));
                 Separator sepConfig1 = new Separator(Orientation.HORIZONTAL);
                 sepConfig1.setPrefSize(380, 20);
                 sepConfig1.setLayoutY(125);
                 apConfigPlan.getChildren().add(sepConfig1);
-                Label lblPanoAffichePlan = new Label(rb.getString("plan.panoAffichePlan"));
+                Label lblPanoAffichePlan = new Label(rbLocalisation.getString("plan.panoAffichePlan"));
                 lblPanoAffichePlan.setLayoutX(20);
                 lblPanoAffichePlan.setLayoutY(160);
                 apConfigPlan.getChildren().add(lblPanoAffichePlan);
-                CheckBox[] cbPanoramiques = new CheckBox[nombrePanoramiques];
-                for (int i = 0; i < nombrePanoramiques; i++) {
+                CheckBox[] cbPanoramiques = new CheckBox[iNombrePanoramiques];
+                for (int i = 0; i < iNombrePanoramiques; i++) {
                     final int num = i;
                     cbPanoramiques[i] = new CheckBox();
                     final CheckBox cbF = cbPanoramiques[i];
@@ -649,7 +648,7 @@ public class GestionnairePlanController {
                     if (panoramiquesProjet[i].isAffichePlan() && panoramiquesProjet[i].getNumeroPlan() != planActuel && panoramiquesProjet[i].getNumeroPlan() != -1) {
                         //System.out.println("numero plan : " + panoramiquesProjet[i].getNumeroPlan() + " nb : " + nombrePlans);
                         cbPanoramiques[i].setDisable(true);
-                        if (panoramiquesProjet[i].getNumeroPlan() < nombrePlans) {
+                        if (panoramiquesProjet[i].getNumeroPlan() < iNombrePlans) {
                             String nomPlan = plans[panoramiquesProjet[i].getNumeroPlan()].getImagePlan();
                             cbPanoramiques[i].setText(cbPanoramiques[i].getText() + " -> (" + nomPlan + ")");
                             Tooltip tTip = new Tooltip(nomPlan);
@@ -674,7 +673,7 @@ public class GestionnairePlanController {
                 apConfigPlan.getChildren().add(cbValide);
                 cbValide.setOnMouseClicked((MouseEvent event) -> {
                     boolean new_val = cbValide.selectedProperty().get();
-                    for (int i = 0; i < nombrePanoramiques; i++) {
+                    for (int i = 0; i < iNombrePanoramiques; i++) {
                         CheckBox cbI = (CheckBox) apConfigPlan.lookup("#cbPano" + i);
                         if (cbI.isDisabled() != true) {
                             cbI.setSelected(new_val);
@@ -690,7 +689,7 @@ public class GestionnairePlanController {
             }
             Separator sepConfig2 = new Separator(Orientation.HORIZONTAL);
             sepConfig2.setPrefSize(380, 20);
-            sepConfig2.setLayoutY(210 + nombrePanoramiques * 30);
+            sepConfig2.setLayoutY(210 + iNombrePanoramiques * 30);
             apConfigPlan.getChildren().add(sepConfig2);
             vbOutils.getChildren().add(apConfigPlan);
         }
@@ -702,15 +701,15 @@ public class GestionnairePlanController {
      */
     private String listePano() {
         String liste = "";
-        if (nombrePanoramiques == 0) {
+        if (iNombrePanoramiques == 0) {
             return null;
         } else {
-            for (int i = 0; i < nombrePanoramiques; i++) {
+            for (int i = 0; i < iNombrePanoramiques; i++) {
                 String fichierPano = panoramiquesProjet[i].getNomFichier();
                 String nomPano = fichierPano.substring(fichierPano.lastIndexOf(File.separator) + 1, fichierPano.length());
                 String[] nPano = nomPano.split("\\.");
                 liste += nPano[0];
-                if (i < nombrePanoramiques - 1) {
+                if (i < iNombrePanoramiques - 1) {
                     liste += ";";
                 }
             }
@@ -724,10 +723,10 @@ public class GestionnairePlanController {
      * @param Y
      */
     private void planMouseClic(double X, double Y) {
-        if (nombrePanoramiques > 0 && !dragDropPlan) {
+        if (iNombrePanoramiques > 0 && !bDragDropPlan) {
 
             valideHsplan();
-            dejaSauve = false;
+            bDejaSauve = false;
             stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
             double mouseX = X - panePlan.getLayoutX();
             double mouseY = Y - panePlan.getLayoutY() - 110;
@@ -743,7 +742,7 @@ public class GestionnairePlanController {
             point.setCursor(Cursor.DEFAULT);
             panePlan.getChildren().add(point);
             Tooltip t = new Tooltip("point n°" + (numPoints + 1));
-            t.setStyle(tooltipStyle);
+            t.setStyle(strTooltipStyle);
             Tooltip.install(point, t);
             HotSpot HS = new HotSpot();
             HS.setLongitude(posX / largeur);
@@ -758,8 +757,8 @@ public class GestionnairePlanController {
             //numPoints++;
             AnchorPane listePanoVig = afficherListePanosVignettes(plans[planActuel].getNombreHotspots() - 1);
             int largeurVignettes = 4;
-            if (nombrePanoramiques < 4) {
-                largeurVignettes = nombrePanoramiques;
+            if (iNombrePanoramiques < 4) {
+                largeurVignettes = iNombrePanoramiques;
             }
             if (mouseX + largeurVignettes * 130 > panePlan.getWidth()) {
                 listePanoVig.setLayoutX(panePlan.getWidth() - largeurVignettes * 130);
@@ -772,7 +771,7 @@ public class GestionnairePlanController {
             point.setOnDragDetected((MouseEvent me1) -> {
                 point.setFill(Color.RED);
                 point.setStroke(Color.YELLOW);
-                dragDropPlan = true;
+                bDragDropPlan = true;
                 //System.out.println("d&d plan : " + dragDropPlan);
 
                 me1.consume();
@@ -808,7 +807,7 @@ public class GestionnairePlanController {
             point.setOnMouseClicked((MouseEvent me1) -> {
                 if (me1.isControlDown()) {
                     valideHsplan();
-                    dejaSauve = false;
+                    bDejaSauve = false;
                     stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
                     String chPoint = point.getId();
                     chPoint = chPoint.substring(5, chPoint.length());
@@ -836,16 +835,16 @@ public class GestionnairePlanController {
                     me1.consume();
                 } else {
                     //System.out.println("d&d plan : " + dragDropPlan);
-                    if (!dragDropPlan) {
+                    if (!bDragDropPlan) {
                         valideHsplan();
                         String chPoint = point.getId();
                         chPoint = chPoint.substring(5, chPoint.length());
                         int numeroPoint = Integer.parseInt(chPoint);
-                        if (nombrePanoramiques > 1) {
+                        if (iNombrePanoramiques > 1) {
                             AnchorPane listePanoVig1 = afficherListePanosVignettes(numeroPoint);
                             int largeurVignettes1 = 4;
-                            if (nombrePanoramiques < 4) {
-                                largeurVignettes1 = nombrePanoramiques;
+                            if (iNombrePanoramiques < 4) {
+                                largeurVignettes1 = iNombrePanoramiques;
                             }
                             if (mouseX + largeurVignettes1 * 130 > panePlan.getWidth()) {
                                 listePanoVig1.setLayoutX(panePlan.getWidth() - largeurVignettes1 * 130);
@@ -862,7 +861,7 @@ public class GestionnairePlanController {
             });
         }
         else{
-            dragDropPlan=false;
+            bDragDropPlan=false;
         }
     }
 
@@ -871,8 +870,8 @@ public class GestionnairePlanController {
         Action reponse = null;
         reponse = Dialogs.create()
                 .owner(null)
-                .title(rb.getString("plan.supprimerPlan"))
-                .message(rb.getString("plan.etesVousSur"))
+                .title(rbLocalisation.getString("plan.supprimerPlan"))
+                .message(rbLocalisation.getString("plan.etesVousSur"))
                 .actions(Dialog.Actions.YES, Dialog.Actions.NO)
                 .showWarning();
 
@@ -880,16 +879,16 @@ public class GestionnairePlanController {
 
             int planCour = cbChoixPlan.getSelectionModel().getSelectedIndex();
             //System.out.println("Plan Courant : " + planCour);
-            for (int i = planCour; i < nombrePlans - 1; i++) {
+            for (int i = planCour; i < iNombrePlans - 1; i++) {
                 plans[i] = plans[i + 1];
             }
-            nombrePlans--;
+            iNombrePlans--;
             cbChoixPlan.getItems().clear();
-            for (int i = 0; i < nombrePlans; i++) {
+            for (int i = 0; i < iNombrePlans; i++) {
                 cbChoixPlan.getItems().add(plans[i].getImagePlan());
             }
             cbChoixPlan.setValue(cbChoixPlan.getItems().get(0));
-            for (int i = 0; i < nombrePanoramiques; i++) {
+            for (int i = 0; i < iNombrePanoramiques; i++) {
                 if (panoramiquesProjet[i].getNumeroPlan() == planCour) {
                     panoramiquesProjet[i].setNumeroPlan(-1);
                     panoramiquesProjet[i].setAffichePlan(false);
@@ -898,7 +897,7 @@ public class GestionnairePlanController {
                     panoramiquesProjet[i].setNumeroPlan(panoramiquesProjet[i].getNumeroPlan() - 1);
                 }
             }
-            if (nombrePlans > 0) {
+            if (iNombrePlans > 0) {
                 afficherPlan(0);
             } else {
                 planActuel = -1;
@@ -920,9 +919,9 @@ public class GestionnairePlanController {
      * @param height
      */
     public void creeInterface(int width, int height) {
-        repertImagePlan = repertAppli + File.separator + "theme/plan";
-        rb = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", EditeurPanovisu.locale);
-        tabInterface = new Pane();
+        strRepertImagePlan = strRepertAppli + File.separator + "theme/plan";
+        rbLocalisation = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", EditeurPanovisu.locale);
+        paneInterface = new Pane();
         hbInterface = new HBox();
         vbOutils = new VBox();
         hbInterface.setPrefWidth(width);
@@ -934,14 +933,14 @@ public class GestionnairePlanController {
         apPlan.setPrefWidth(width - largeurOutils);
         apPlan.setPrefHeight(height);
         ivPlan = new ImageView();
-        String imageBoussole = "file:" + repertImagePlan + "/aiguillePlan.png";
+        String imageBoussole = "file:" + strRepertImagePlan + "/aiguillePlan.png";
         imgBoussole = new Image(imageBoussole);
         ivNord = new ImageView(imgBoussole);
         panePlan = new Pane();
         panePlan.getChildren().addAll(ivPlan, ivNord);
         apPlan.setMaxWidth(width - largeurOutils - 20);
         apPlan.getChildren().add(panePlan);
-        lblDragDropPlan = new Label(rb.getString("plan.dragDrop"));
+        lblDragDropPlan = new Label(rbLocalisation.getString("plan.dragDrop"));
         lblDragDropPlan.setMinHeight(apPlan.getPrefHeight());
         lblDragDropPlan.setMaxHeight(apPlan.getPrefHeight());
         lblDragDropPlan.setMinWidth(apPlan.getPrefWidth());
@@ -972,8 +971,8 @@ public class GestionnairePlanController {
 //        vbOutils.setStyle("-fx-background-color : #ccc;");
         hbInterface.getChildren().addAll(apPlan, spOutils);
 
-        tabInterface.getChildren().add(hbInterface);
-        Label lblChoixPlan = new Label(rb.getString("plan.choixPlan"));
+        paneInterface.getChildren().add(hbInterface);
+        Label lblChoixPlan = new Label(rbLocalisation.getString("plan.choixPlan"));
         lblChoixPlan.setLayoutX(20);
         lblChoixPlan.setLayoutY(10);
         cbChoixPlan = new ComboBox();
@@ -990,11 +989,11 @@ public class GestionnairePlanController {
         });
         Pane fond = new Pane();
         fond.setCursor(Cursor.HAND);
-        ImageView ivSupprPanoramique = new ImageView(new Image("file:" + repertAppli + File.separator + "images/suppr.png", 30, 30, true, true));
+        ImageView ivSupprPanoramique = new ImageView(new Image("file:" + strRepertAppli + File.separator + "images/suppr.png", 30, 30, true, true));
         fond.setLayoutX(300);
         fond.setLayoutY(40);
-        Tooltip t = new Tooltip(rb.getString("plan.supprimePlan"));
-        t.setStyle(tooltipStyle);
+        Tooltip t = new Tooltip(rbLocalisation.getString("plan.supprimePlan"));
+        t.setStyle(strTooltipStyle);
         Tooltip.install(fond, t);
         fond.getChildren().add(ivSupprPanoramique);
         fond.setOnMouseClicked(
@@ -1050,10 +1049,10 @@ public class GestionnairePlanController {
 //                            if (extension.equals("bmp") || extension.equals("jpg")) {
                         if (extension.equals("jpg") || extension.equals("bmp") || extension.equals("png")) {
 
-                            plans[nombrePlans] = new Plan();
-                            plans[nombrePlans].setImagePlan(fichierPlan.getName());
-                            plans[nombrePlans].setLienPlan(fichierPlan.getAbsolutePath());
-                            File repertoirePlan = new File(repertTemp + File.separator + "images");
+                            plans[iNombrePlans] = new Plan();
+                            plans[iNombrePlans].setImagePlan(fichierPlan.getName());
+                            plans[iNombrePlans].setLienPlan(fichierPlan.getAbsolutePath());
+                            File repertoirePlan = new File(strRepertTemp + File.separator + "images");
                             if (!repertoirePlan.exists()) {
                                 repertoirePlan.mkdirs();
                             }
@@ -1063,7 +1062,7 @@ public class GestionnairePlanController {
                                 Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
                             }
                             gestionnairePlan.ajouterPlan();
-                            nombrePlans++;
+                            iNombrePlans++;
                         }
                     }
                 }
