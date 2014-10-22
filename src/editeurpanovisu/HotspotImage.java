@@ -13,10 +13,10 @@ package editeurpanovisu;
 public class HotspotImage {
 
     private double longitude, latitude;
-    private String nomImg;
-    private String urlImage;
-    private String fichierImage, info;
-    private boolean anime;
+    private String strNomImg;
+    private String strUrlImage;
+    private String strFichierImage, strInfo;
+    private boolean bAnime;
 
     
     /**
@@ -28,8 +28,8 @@ public class HotspotImage {
         this.setLongitude((double) longit);
         this.setLatitude((double) latit);
         this.setAnime(false);
-        this.setLienImg("");
-        this.setInfo("");
+        this.setStrLienImg("");
+        this.setStrInfo("");
     }
 
     /**
@@ -63,71 +63,71 @@ public class HotspotImage {
     /**
      * @return the fichierImage
      */
-    public String getFichierImage() {
-        return fichierImage;
+    public String getStrFichierImage() {
+        return strFichierImage;
     }
 
     /**
-     * @param fichierImage the fichierImage to set
+     * @param strFichierImage the fichierImage to set
      */
-    public void setFichierImage(String fichierImage) {
-        this.fichierImage = fichierImage;
+    public void setStrFichierImage(String strFichierImage) {
+        this.strFichierImage = strFichierImage;
     }
 
     /**
      * @return the fichierXML
      */
-    public String getLienImg() {
-        return nomImg;
+    public String getStrLienImg() {
+        return strNomImg;
     }
 
     /**
-     * @param lienImg
+     * @param strLienImg
      */
-    public void setLienImg(String lienImg) {
-        this.nomImg = lienImg;
+    public void setStrLienImg(String strLienImg) {
+        this.strNomImg = strLienImg;
     }
 
     /**
      * @return the info
      */
-    public String getInfo() {
-        return info;
+    public String getStrInfo() {
+        return strInfo;
     }
 
     /**
-     * @param info the info to set
+     * @param strInfo the info to set
      */
-    public void setInfo(String info) {
-        this.info = info;
+    public void setStrInfo(String strInfo) {
+        this.strInfo = strInfo;
     }
 
     /**
      * @return the anime
      */
     public boolean isAnime() {
-        return anime;
+        return bAnime;
     }
 
     /**
      * @param anime the anime to set
      */
     public void setAnime(boolean anime) {
-        this.anime = anime;
+        this.bAnime = anime;
     }
 
     /**
      * @return the urlImage
      */
-    public String getUrlImage() {
-        return urlImage;
+    public String getStrUrlImage() {
+        return strUrlImage;
     }
 
     /**
-     * @param urlImage the urlImage to set
+     * @param strUrlImage the urlImage to set
      */
-    public void setUrlImage(String urlImage) {
-        this.urlImage = urlImage;
+    public void setStrUrlImage(String strUrlImage) {
+        this.strUrlImage = strUrlImage;
     }
 
 }

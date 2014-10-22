@@ -1988,6 +1988,7 @@ is being used to size a border should also be in pixels.
  *                                                                             *
  ******************************************************************************/
 
+ 
 .list-view > .virtual-flow > .scroll-bar:vertical{
     -fx-background-insets: 0, 0 0 0 1;
     -fx-padding: -1 -1 -1 0;
@@ -2060,6 +2061,22 @@ is being used to size a border should also be in pixels.
 .list-view:horizontal > .virtual-flow > .clipped-container > .sheet > .list-cell:filled:selected:hover {
     -fx-background-color: -fx-selection-bar;
 }
+
+ .list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-background-color: #ff0000;
+    -fx-text-fill: white;
+}
+
+.list-view,.list-cell:even,.list-cell:odd { 
+    -fx-background-color: -fx-background;
+    -fx-text-fill: -fx-dark-text-color;
+}
+
+.list-cell:filled:hover {
+    -fx-background-color: #ff0000;
+    -fx-text-fill: white;
+}
+
 
 /*******************************************************************************
  *                                                                             *

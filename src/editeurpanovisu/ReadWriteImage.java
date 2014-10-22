@@ -58,12 +58,11 @@ public class ReadWriteImage {
             0.0f, 1.0f, 0.0f,
             0.0f, 0.0f, 0.0f
         };
-
         float[] edgeMatrix = {
-            0.0f, -1.0f, 0.0f,
-            -1.0f, 4.0f, -1.0f,
-            0.0f, -1.0f, 0.0f
-        };
+             0.0f, -1.0f,  0.0f,
+            -1.0f,  4.0f, -1.0f,
+             0.0f, -1.0f,  0.0f
+        };        
         float[] sharpMatrix = new float[9];
         for (int i = 0; i < 9; i++) {
             sharpMatrix[i] = normalMatrix[i] + level * edgeMatrix[i];
@@ -75,13 +74,13 @@ public class ReadWriteImage {
             IBufferedImageFactory {
 
         @Override
-        public BufferedImage getColorBufferedImage(final int width, final int height,
-                final boolean hasAlpha) {
+        public BufferedImage getColorBufferedImage(final int iLargeur, final int iHauteur,
+                final boolean bAasAlpha) {
             final GraphicsEnvironment ge = GraphicsEnvironment
                     .getLocalGraphicsEnvironment();
             final GraphicsDevice gd = ge.getDefaultScreenDevice();
             final GraphicsConfiguration gc = gd.getDefaultConfiguration();
-            return gc.createCompatibleImage(width, height,
+            return gc.createCompatibleImage(iLargeur, iHauteur,
                     Transparency.TRANSLUCENT);
         }
 
@@ -92,9 +91,9 @@ public class ReadWriteImage {
         }
     }
 
-    public static Image readTiff(String nomFich)
+    public static Image readTiff(String strNomFich)
             throws ImageReadException, IOException {
-        File file = new File(nomFich);
+        File file = new File(strNomFich);
         final Map<String, Object> params = new HashMap<>();
 
         // set optional parameters if you like
@@ -110,15 +109,15 @@ public class ReadWriteImage {
         return image;
     }
 
-    public static void writeTiff(Image image, String nomFich, boolean sharpen, float sharpenLevel)
+    public static void writeTiff(Image imgImage, String strNomFich, boolean bSharpen, float sharpenLevel)
             throws ImageReadException, IOException {
-        File file = new File(nomFich);
+        File file = new File(strNomFich);
         BufferedImage imageRGBSharpen = null;
-        BufferedImage imageRGB = SwingFXUtils.fromFXImage(image, null);
+        BufferedImage imageRGB = SwingFXUtils.fromFXImage(imgImage, null);
 
         Graphics2D graphics = imageRGB.createGraphics();
         graphics.drawImage(imageRGB, 0, 0, null);
-        if (sharpen) {
+        if (bSharpen) {
             imageRGBSharpen = new BufferedImage(imageRGB.getWidth(), imageRGB.getHeight(), BufferedImage.TYPE_INT_RGB);
             Kernel kernel = new Kernel(3, 3, sharpenMatrix);
             ConvolveOp cop = new ConvolveOp(kernel,
@@ -133,7 +132,7 @@ public class ReadWriteImage {
         // set optional parameters if you like
         params.put(ImagingConstants.PARAM_KEY_COMPRESSION, new Integer(
                 TiffConstants.TIFF_COMPRESSION_UNCOMPRESSED));
-        if (sharpen) {
+        if (bSharpen) {
             try {
                 Imaging.writeImage(imageRGBSharpen, file, format, params);
             } catch (ImageWriteException ex) {

@@ -5,7 +5,7 @@
  */
 package editeurpanovisu;
 
-import static editeurpanovisu.EquiCubeDialogController.barreImage;
+import static editeurpanovisu.EquiCubeDialogController.pbBarreImage;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
@@ -61,7 +61,7 @@ public class TransformationsPanoramique {
         double pixelX;
         double pixelY;
         Platform.runLater(() -> {
-            barreImage.setProgress(0.0f);
+            pbBarreImage.setProgress(0.0f);
         });
         Thread.sleep(50);
         for (int pX = 0; pX < tailleCube; pX++) {
@@ -117,7 +117,7 @@ public class TransformationsPanoramique {
 
         }
         Platform.runLater(() -> {
-            barreImage.setProgress(1.0f / 6.0f);
+            pbBarreImage.setProgress(1.0f / 6.0f);
         });
         Thread.sleep(50);
 
@@ -176,7 +176,7 @@ public class TransformationsPanoramique {
             }
         }
         Platform.runLater(() -> {
-            barreImage.setProgress(2.0f / 6.0f);
+            pbBarreImage.setProgress(2.0f / 6.0f);
         });
         Thread.sleep(50);
         for (int pY = 0; pY < tailleCube; pY++) {
@@ -234,7 +234,7 @@ public class TransformationsPanoramique {
             }
         }
         Platform.runLater(() -> {
-            barreImage.setProgress(3.0f / 6.0f);
+            pbBarreImage.setProgress(3.0f / 6.0f);
         });
         Thread.sleep(50);
 
@@ -293,7 +293,7 @@ public class TransformationsPanoramique {
             }
         }
         Platform.runLater(() -> {
-            barreImage.setProgress(4.0f / 6.0f);
+            pbBarreImage.setProgress(4.0f / 6.0f);
         });
         Thread.sleep(50);
 
@@ -355,7 +355,7 @@ public class TransformationsPanoramique {
             }
         }
         Platform.runLater(() -> {
-            barreImage.setProgress(5.0f / 6.0f);
+            pbBarreImage.setProgress(5.0f / 6.0f);
         });
         Thread.sleep(50);
 
@@ -417,7 +417,7 @@ public class TransformationsPanoramique {
             }
         }
         Platform.runLater(() -> {
-            barreImage.setProgress(1.0f);
+            pbBarreImage.setProgress(1.0f);
         });
         Thread.sleep(50);
 
@@ -466,7 +466,7 @@ public class TransformationsPanoramique {
             final int XX=X;
             final float tailleEqui1=(float)tailleEqui;
             Platform.runLater(() -> {
-                barreImage.setProgress(XX/tailleEqui1);
+                pbBarreImage.setProgress(XX/tailleEqui1);
             });
             for (int Y = 0; Y < tailleEqui / 2; Y++) {
                 theta = ((double) X) * rapport - Math.PI;

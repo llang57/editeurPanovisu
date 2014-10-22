@@ -17,7 +17,7 @@ public class ZoneTelecommande {
     private String strTypeZone;
     private String strCoordonneesZone;
     private Point2D centre = new Point2D(0, 0);
-    private int nombrePoints = 0;
+    private int iNombrePoints = 0;
 
     /**
      * @return the strNomZone

@@ -13,11 +13,11 @@ package editeurpanovisu;
 public class HotSpot {
 
     private double longitude, latitude;
-    private String fichierImage;
-    private String fichierXML;
-    private String info;
-    private boolean anime;
-    private int numeroPano=-1;
+    private String strFichierImage;
+    private String strFichierXML;
+    private String strInfo;
+    private boolean bAnime;
+    private int iNumeroPano=-1;
 
     
     /**
@@ -29,8 +29,8 @@ public class HotSpot {
         this.setLongitude((double) longit);
         this.setLatitude((double) latit);
         this.setAnime(false);
-        this.setFichierXML("");
-        this.setInfo("");
+        this.setStrFichierXML("");
+        this.setStrInfo("");
     }
 
     /**
@@ -64,71 +64,71 @@ public class HotSpot {
     /**
      * @return the fichierImage
      */
-    public String getFichierImage() {
-        return fichierImage;
+    public String getStrFichierImage() {
+        return strFichierImage;
     }
 
     /**
-     * @param fichierImage the fichierImage to set
+     * @param strFichierImage the fichierImage to set
      */
-    public void setFichierImage(String fichierImage) {
-        this.fichierImage = fichierImage;
+    public void setStrFichierImage(String strFichierImage) {
+        this.strFichierImage = strFichierImage;
     }
 
     /**
      * @return the fichierXML
      */
-    public String getFichierXML() {
-        return fichierXML;
+    public String getStrFichierXML() {
+        return strFichierXML;
     }
 
     /**
-     * @param fichierXML the fichierXML to set
+     * @param strFichierXML the fichierXML to set
      */
-    public void setFichierXML(String fichierXML) {
-        this.fichierXML = fichierXML;
+    public void setStrFichierXML(String strFichierXML) {
+        this.strFichierXML = strFichierXML;
     }
 
     /**
      * @return the info
      */
-    public String getInfo() {
-        return info;
+    public String getStrInfo() {
+        return strInfo;
     }
 
     /**
-     * @param info the info to set
+     * @param strInfo the info to set
      */
-    public void setInfo(String info) {
-        this.info = info;
+    public void setStrInfo(String strInfo) {
+        this.strInfo = strInfo;
     }
 
     /**
      * @return the anime
      */
     public boolean isAnime() {
-        return anime;
+        return bAnime;
     }
 
     /**
-     * @param anime the anime to set
+     * @param bAnime the anime to set
      */
-    public void setAnime(boolean anime) {
-        this.anime = anime;
+    public void setAnime(boolean bAnime) {
+        this.bAnime = bAnime;
     }
 
     /**
      * @return the numeroPano
      */
     public int getNumeroPano() {
-        return numeroPano;
+        return iNumeroPano;
     }
 
     /**
-     * @param numeroPano the numeroPano to set
+     * @param iNumeroPano the numeroPano to set
      */
-    public void setNumeroPano(int numeroPano) {
-        this.numeroPano = numeroPano;
+    public void setNumeroPano(int iNumeroPano) {
+        this.iNumeroPano = iNumeroPano;
     }
 
 }

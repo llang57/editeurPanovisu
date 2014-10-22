@@ -12,11 +12,15 @@ package editeurpanovisu;
 public class HotspotHTML {
 
     private double longitude, latitude;
-    private String fichierImage;
-    private String url, info;
-    private boolean anime;
+    private String strUrl, strInfo;
+    private boolean bAnime;
+    private boolean bHTMLInterne = false;
+    private String strTexteHTML;
+    private double tailleHTML;
+    private String strPositionHTML;
+    private String strCouleurHTML;
+    private String[] strFichierImage;
 
-    
     /**
      *
      * @param longit
@@ -26,8 +30,8 @@ public class HotspotHTML {
         this.setLongitude((double) longit);
         this.setLatitude((double) latit);
         this.setAnime(false);
-        this.setUrl("");
-        this.setInfo("");
+        this.setStrUrl("");
+        this.setStrInfo("");
     }
 
     /**
@@ -59,59 +63,148 @@ public class HotspotHTML {
     }
 
     /**
-     * @return the fichierImage
+     *
+     * @return
      */
-    public String getFichierImage() {
-        return fichierImage;
+    public String getStrUrl() {
+        return strUrl;
     }
 
     /**
-     * @param fichierImage the fichierImage to set
+     * @param strUrl
      */
-    public void setFichierImage(String fichierImage) {
-        this.fichierImage = fichierImage;
-    }
-
-    /**
-     * @return the fichierXML
-     */
-    public String getUrl() {
-        return url;
-    }
-
-    /**
-     * @param url
-     */
-    public void setUrl(String url) {
-        this.url = url;
+    public void setStrUrl(String strUrl) {
+        this.strUrl = strUrl;
     }
 
     /**
      * @return the info
      */
-    public String getInfo() {
-        return info;
+    public String getStrInfo() {
+        return strInfo;
     }
 
     /**
-     * @param info the info to set
+     * @param strInfo the info to set
      */
-    public void setInfo(String info) {
-        this.info = info;
+    public void setStrInfo(String strInfo) {
+        this.strInfo = strInfo;
     }
 
     /**
      * @return the anime
      */
     public boolean isAnime() {
-        return anime;
+        return bAnime;
     }
 
     /**
      * @param anime the anime to set
      */
     public void setAnime(boolean anime) {
-        this.anime = anime;
+        this.bAnime = anime;
+    }
+
+    /**
+     * @return the strTexteHTML
+     */
+    public String getStrTexteHTML() {
+        return strTexteHTML;
+    }
+
+    /**
+     * @param strTexteHTML the strTexteHTML to set
+     */
+    public void setStrTexteHTML(String strTexteHTML) {
+        this.strTexteHTML = strTexteHTML;
+    }
+
+    /**
+     * @return the tailleHTML
+     */
+    public double getTailleHTML() {
+        return tailleHTML;
+    }
+
+    /**
+     * @param tailleHTML the tailleHTML to set
+     */
+    public void setTailleHTML(double tailleHTML) {
+        this.tailleHTML = tailleHTML;
+    }
+
+    /**
+     * @return the strPositionHTML
+     */
+    public String getStrPositionHTML() {
+        return strPositionHTML;
+    }
+
+    /**
+     * @param strPositionHTML the strPositionHTML to set
+     */
+    public void setStrPositionHTML(String strPositionHTML) {
+        this.strPositionHTML = strPositionHTML;
+    }
+
+    /**
+     * @return the strCouleurHTML
+     */
+    public String getStrCouleurHTML() {
+        return strCouleurHTML;
+    }
+
+    /**
+     * @param strCouleurHTML the strCouleurHTML to set
+     */
+    public void setStrCouleurHTML(String strCouleurHTML) {
+        this.strCouleurHTML = strCouleurHTML;
+    }
+
+    /**
+     * @return the strFichierImage
+     */
+    public String[] getStrFichierImage() {
+        return strFichierImage;
+    }
+
+    /**
+     * @param strFichierImage the strFichierImage to set
+     */
+    public void setStrFichierImage(String[] strFichierImage) {
+        this.strFichierImage = strFichierImage;
+    }
+
+    /**
+     *
+     * @param strFichierImage
+     * @param i
+     */
+    public void setStrFichierImageI(String strFichierImage, int i) {
+        this.strFichierImage[i] = strFichierImage;
+    }
+
+    /**
+     *
+     * @param i
+     * @return
+     */
+    public String getStrFichierImageI(int i) {
+        return this.strFichierImage[i];
+    }
+
+    /**
+     * @return the bHTMLInterne
+     */
+    public boolean isbHTMLInterne() {
+        return bHTMLInterne;
+    }
+
+    /**
+     * @param bHTMLInterne the bHTMLInterne to set
+     */
+    public void setbHTMLInterne(boolean bHTMLInterne) {
+        this.bHTMLInterne = bHTMLInterne;
     }
 
 }

@@ -31,19 +31,19 @@ public class PopUpDialogController {
     /**
      *
      */
-    public static Stage popUp;
+    public static Stage stPopUp;
 
     @FXML
     Button btnQuitte;
     @FXML
-    Hyperlink leMondea360;
+    Hyperlink hlLeMondea360;
 
     /**
      *
      */
     @FXML
     public void handleQuitteAction() {
-        popUp.hide();
+        stPopUp.hide();
     }
 
     /**
@@ -70,12 +70,12 @@ public class PopUpDialogController {
      * @throws Exception
      */
     public void affichePopup() throws Exception {
-        popUp= new Stage(StageStyle.UTILITY);
-        popUp.initModality(Modality.APPLICATION_MODAL);        
-        Pane myPane = (Pane) FXMLLoader.load(getClass().getResource("popUpAccueil.fxml"));        
-        Scene scene2 = new Scene(myPane);
-        popUp.setScene(scene2);
-        popUp.show();
+        stPopUp= new Stage(StageStyle.UTILITY);
+        stPopUp.initModality(Modality.APPLICATION_MODAL);        
+        Pane panePopup = (Pane) FXMLLoader.load(getClass().getResource("popUpAccueil.fxml"));        
+        Scene scnPopup = new Scene(panePopup);
+        stPopUp.setScene(scnPopup);
+        stPopUp.show();
     }
 
     

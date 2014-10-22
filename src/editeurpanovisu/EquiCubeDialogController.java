@@ -59,29 +59,29 @@ import org.controlsfx.dialog.Dialogs;
  */
 public class EquiCubeDialogController {
 
-    private static final ResourceBundle rb = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", EditeurPanovisu.locale);
+    private static final ResourceBundle rbLocalisation = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", EditeurPanovisu.locale);
 
-    private static Stage stEqui2Cube;
-    private static AnchorPane myPane;
-    private String typeTransformation;
-    static private final ListView listeFichier = new ListView();
-    public static final ProgressBar barreImage = new ProgressBar();
+    private static Stage stTransformations;
+    private static AnchorPane apTransformations;
+    private String strTypeTransformation;
+    static private final ListView lvListeFichier = new ListView();
+    public static final ProgressBar pbBarreImage = new ProgressBar();
     static private Button btnAnnuler;
     static private Button btnValider;
     static private Button btnAjouteFichiers;
-    static private Pane choixTypeFichier;
-    static private boolean traitementEffectue = false;
+    static private Pane paneChoixTypeFichier;
+    static private boolean bTraitementEffectue = false;
     static private RadioButton rbJpeg;
     static private RadioButton rbBmp;
     static private RadioButton rbTiff;
     static private CheckBox cbSharpen;
     static private Slider slSharpen;
     static private Label lblSharpen;
-    static private ProgressBar bar;
+    static private ProgressBar pbBarreAvancement;
     static private Label lblTermine = new Label();
     private Label lblDragDropE2C;
 
-    final ToggleGroup grpTypeFichier = new ToggleGroup();
+    final ToggleGroup tgTypeFichier = new ToggleGroup();
     /**
      * Constante de type de transfrormation Equi / Cube
      */
@@ -90,26 +90,26 @@ public class EquiCubeDialogController {
      * Constante de type de transfrormation Cube / Equi
      */
     public final static String CUBE2QUI = "C2E";
-    private File[] lstFichier;
-    private static String repertFichier = EditeurPanovisu.strRepertoireProjet;
+    private File[] fileLstFichier;
+    private static String strRepertFichier = EditeurPanovisu.strRepertoireProjet;
 
     /**
      *
      */
     private void annulerE2C() {
-        Action reponse = null;
+        Action actReponse = null;
 
-        if ((listeFichier.getItems().size() != 0) && (!traitementEffectue)) {
-            reponse = Dialogs.create()
+        if ((lvListeFichier.getItems().size() != 0) && (!bTraitementEffectue)) {
+            actReponse = Dialogs.create()
                     .owner(null)
-                    .title("Transformation d'images")
-                    .masthead("Vous n'avez pas traité vos images.")
-                    .message("Êtes-vous sûr de vouloir quitter?")
-                    .actions(Dialog.Actions.YES, Dialog.Actions.NO).style(DialogStyle.CROSS_PLATFORM_DARK)
+                    .title(rbLocalisation.getString("transformation.traiteImages"))
+                    .message(rbLocalisation.getString("transformation.traiteImagesQuitte"))
+                    .actions(Dialog.Actions.YES, Dialog.Actions.NO)
+                    .style(DialogStyle.CROSS_PLATFORM_DARK)
                     .showConfirm();
         }
-        if ((reponse == Dialog.Actions.YES) || (reponse == null)) {
-            stEqui2Cube.hide();
+        if ((actReponse == Dialog.Actions.YES) || (actReponse == null)) {
+            stTransformations.hide();
         }
     }
 
@@ -120,74 +120,67 @@ public class EquiCubeDialogController {
      * @throws InterruptedException
      */
     private void traiteFichier(String nomFichier, int j) throws InterruptedException {
-        System.out.println("Traitement Lancé \"" + nomFichier + "\" => " + j);
-
-        if (typeTransformation.equals(EquiCubeDialogController.EQUI2CUBE)) {
-            String nomFich1 = nomFichier.substring(0, nomFichier.length() - 4);
-            String extension = nomFichier.substring(nomFichier.lastIndexOf(".") + 1, nomFichier.length()).toLowerCase();
-            System.out.println("nom fichier : " + nomFichier + " extension :" + extension);
-
-            Image equiImage = null;
-            if (!"tif".equals(extension)) {
-                System.out.println("pas tiff");
-                equiImage = new Image("file:" + nomFichier);
+        if (strTypeTransformation.equals(EquiCubeDialogController.EQUI2CUBE)) {
+            String strNomFich1 = nomFichier.substring(0, nomFichier.length() - 4);
+            String strExtension = nomFichier.substring(nomFichier.lastIndexOf(".") + 1, nomFichier.length()).toLowerCase();
+            Image imgEquiImage = null;
+            if (!"tif".equals(strExtension)) {
+                imgEquiImage = new Image("file:" + nomFichier);
             } else {
-                System.out.println("tiff");
                 try {
-                    equiImage = ReadWriteImage.readTiff(nomFichier);
+                    imgEquiImage = ReadWriteImage.readTiff(nomFichier);
                 } catch (ImageReadException ex) {
                     Logger.getLogger(EquiCubeDialogController.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IOException ex) {
                     Logger.getLogger(EquiCubeDialogController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            System.out.println("taille : " + equiImage.getWidth());
-            Image[] facesCube = TransformationsPanoramique.equi2cube(equiImage, -1);
+            Image[] imgFacesCube = TransformationsPanoramique.equi2cube(imgEquiImage, -1);
             for (int i = 0; i < 6; i++) {
-                String suffixe = "";
+                String strSuffixe = "";
                 switch (i) {
                     case 0:
-                        suffixe = "_f";
+                        strSuffixe = "_f";
                         break;
                     case 1:
-                        suffixe = "_b";
+                        strSuffixe = "_b";
                         break;
                     case 2:
-                        suffixe = "_r";
+                        strSuffixe = "_r";
                         break;
                     case 3:
-                        suffixe = "_l";
+                        strSuffixe = "_l";
                         break;
                     case 4:
-                        suffixe = "_u";
+                        strSuffixe = "_u";
                         break;
                     case 5:
-                        suffixe = "_d";
+                        strSuffixe = "_d";
                         break;
                 }
                 try {
                     //ReadWriteImage.writeJpeg(facesCube[i], "c:/panoramiques/test/" + txtImage + "_cube" + suffixe + ".jpg", jpegQuality);
-                    boolean sharpen = false;
+                    boolean bSharpen = false;
                     if (cbSharpen.isSelected()) {
-                        sharpen = true;
+                        bSharpen = true;
                     }
 
                     if (rbBmp.isSelected()) {
-                        ReadWriteImage.writeBMP(facesCube[i], nomFich1 + "_cube" + suffixe + ".bmp",
-                                sharpen, (float) Math.round(slSharpen.getValue() * 20.f) / 20.f);
+                        ReadWriteImage.writeBMP(imgFacesCube[i], strNomFich1 + "_cube" + strSuffixe + ".bmp",
+                                bSharpen, (float) Math.round(slSharpen.getValue() * 20.f) / 20.f);
                     }
                     if (rbTiff.isSelected()) {
                         try {
-                            ReadWriteImage.writeTiff(facesCube[i], nomFich1 + "_cube" + suffixe + ".tif",
-                                    sharpen, (float) Math.round(slSharpen.getValue() * 20.f) / 20.f);
+                            ReadWriteImage.writeTiff(imgFacesCube[i], strNomFich1 + "_cube" + strSuffixe + ".tif",
+                                    bSharpen, (float) Math.round(slSharpen.getValue() * 20.f) / 20.f);
                         } catch (ImageReadException ex) {
                             Logger.getLogger(EquiCubeDialogController.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
                     if (rbJpeg.isSelected()) {
                         float quality = 1.0f; //qualité jpeg à 100% : le moins de pertes possible
-                        ReadWriteImage.writeJpeg(facesCube[i], nomFich1 + "_cube" + suffixe + ".jpg", quality,
-                                sharpen, (float) Math.round(slSharpen.getValue() * 20.f) / 20.f);
+                        ReadWriteImage.writeJpeg(imgFacesCube[i], strNomFich1 + "_cube" + strSuffixe + ".jpg", quality,
+                                bSharpen, (float) Math.round(slSharpen.getValue() * 20.f) / 20.f);
                     }
                 } catch (IOException ex) {
                     Logger.getLogger(EquiCubeDialogController.class.getName()).log(Level.SEVERE, null, ex);
@@ -196,40 +189,40 @@ public class EquiCubeDialogController {
             }
 
         }
-        if (typeTransformation.equals(EquiCubeDialogController.CUBE2QUI)) {
-            String nom = nomFichier.substring(0, nomFichier.length() - 6);
-            String extension = nomFichier.substring(nomFichier.length() - 3, nomFichier.length());
-            Image top = null;
-            Image bottom = null;
-            Image left = null;
-            Image right = null;
-            Image front = null;
-            Image behind = null;
+        if (strTypeTransformation.equals(EquiCubeDialogController.CUBE2QUI)) {
+            String strNom = nomFichier.substring(0, nomFichier.length() - 6);
+            String strExtension = nomFichier.substring(nomFichier.length() - 3, nomFichier.length());
+            Image imgTop = null;
+            Image imgBottom = null;
+            Image imgLeft = null;
+            Image imgRight = null;
+            Image imgFront = null;
+            Image imgBehind = null;
 
-            if (extension.equals("bmp")) {
-                top = new Image("file:" + nom + "_u.bmp");
-                bottom = new Image("file:" + nom + "_d.bmp");
-                left = new Image("file:" + nom + "_l.bmp");
-                right = new Image("file:" + nom + "_r.bmp");
-                front = new Image("file:" + nom + "_f.bmp");
-                behind = new Image("file:" + nom + "_b.bmp");
+            if (strExtension.equals("bmp")) {
+                imgTop = new Image("file:" + strNom + "_u.bmp");
+                imgBottom = new Image("file:" + strNom + "_d.bmp");
+                imgLeft = new Image("file:" + strNom + "_l.bmp");
+                imgRight = new Image("file:" + strNom + "_r.bmp");
+                imgFront = new Image("file:" + strNom + "_f.bmp");
+                imgBehind = new Image("file:" + strNom + "_b.bmp");
             }
-            if (extension.equals("jpg")) {
-                top = new Image("file:" + nom + "_u.jpg");
-                bottom = new Image("file:" + nom + "_d.jpg");
-                left = new Image("file:" + nom + "_l.jpg");
-                right = new Image("file:" + nom + "_r.jpg");
-                front = new Image("file:" + nom + "_f.jpg");
-                behind = new Image("file:" + nom + "_b.jpg");
+            if (strExtension.equals("jpg")) {
+                imgTop = new Image("file:" + strNom + "_u.jpg");
+                imgBottom = new Image("file:" + strNom + "_d.jpg");
+                imgLeft = new Image("file:" + strNom + "_l.jpg");
+                imgRight = new Image("file:" + strNom + "_r.jpg");
+                imgFront = new Image("file:" + strNom + "_f.jpg");
+                imgBehind = new Image("file:" + strNom + "_b.jpg");
             }
-            if (extension.equals("tif")) {
+            if (strExtension.equals("tif")) {
                 try {
-                    top = ReadWriteImage.readTiff(nom + "_u.tif");
-                    bottom = ReadWriteImage.readTiff(nom + "_d.tif");
-                    left = ReadWriteImage.readTiff(nom + "_l.tif");
-                    right = ReadWriteImage.readTiff(nom + "_r.tif");
-                    front = ReadWriteImage.readTiff(nom + "_f.tif");
-                    behind = ReadWriteImage.readTiff(nom + "_b.tif");
+                    imgTop = ReadWriteImage.readTiff(strNom + "_u.tif");
+                    imgBottom = ReadWriteImage.readTiff(strNom + "_d.tif");
+                    imgLeft = ReadWriteImage.readTiff(strNom + "_l.tif");
+                    imgRight = ReadWriteImage.readTiff(strNom + "_r.tif");
+                    imgFront = ReadWriteImage.readTiff(strNom + "_f.tif");
+                    imgBehind = ReadWriteImage.readTiff(strNom + "_b.tif");
                 } catch (ImageReadException ex) {
                     Logger.getLogger(EquiCubeDialogController.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IOException ex) {
@@ -237,27 +230,27 @@ public class EquiCubeDialogController {
                 }
             }
 
-            Image equiRectangulaire = TransformationsPanoramique.cube2rect(front, left, right, behind, top, bottom, -1);
+            Image imgEquiRectangulaire = TransformationsPanoramique.cube2rect(imgFront, imgLeft, imgRight, imgBehind, imgTop, imgBottom, -1);
             try {
                 //ReadWriteImage.writeJpeg(facesCube[i], "c:/panoramiques/test/" + txtImage + "_cube" + suffixe + ".jpg", jpegQuality);
-                boolean sharpen = false;
+                boolean bSharpen = false;
                 if (cbSharpen.isSelected()) {
-                    sharpen = true;
+                    bSharpen = true;
                 }
 
                 if (rbBmp.isSelected()) {
-                    ReadWriteImage.writeBMP(equiRectangulaire, nom + "_sphere.bmp", sharpen, (float) Math.round(slSharpen.getValue() * 20.f) / 20.f);
+                    ReadWriteImage.writeBMP(imgEquiRectangulaire, strNom + "_sphere.bmp", bSharpen, (float) Math.round(slSharpen.getValue() * 20.f) / 20.f);
                 }
                 if (rbTiff.isSelected()) {
                     try {
-                        ReadWriteImage.writeTiff(equiRectangulaire, nom + "_sphere.tif", sharpen, (float) Math.round(slSharpen.getValue() * 20.f) / 20.f);
+                        ReadWriteImage.writeTiff(imgEquiRectangulaire, strNom + "_sphere.tif", bSharpen, (float) Math.round(slSharpen.getValue() * 20.f) / 20.f);
                     } catch (ImageReadException ex) {
                         Logger.getLogger(EquiCubeDialogController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
                 if (rbJpeg.isSelected()) {
                     float quality = 1.0f;
-                    ReadWriteImage.writeJpeg(equiRectangulaire, nom + "_sphere.jpg", quality, sharpen, (float) Math.round(slSharpen.getValue() * 20.f) / 20.f);
+                    ReadWriteImage.writeJpeg(imgEquiRectangulaire, strNom + "_sphere.jpg", quality, bSharpen, (float) Math.round(slSharpen.getValue() * 20.f) / 20.f);
                 }
             } catch (IOException ex) {
                 Logger.getLogger(EquiCubeDialogController.class.getName()).log(Level.SEVERE, null, ex);
@@ -271,87 +264,85 @@ public class EquiCubeDialogController {
      *
      */
     private void validerE2C() {
-        if (lstFichier == null) {
-            Dialogs.create().title("Transformation de fichiers")
-                    .message("Vous n'avez pas choisi de fichiers.").style(DialogStyle.CROSS_PLATFORM_DARK)
+        if (fileLstFichier == null) {
+            Dialogs.create().title(rbLocalisation.getString("transformation.traiteImages"))
+                    .message(rbLocalisation.getString("transformation.traiteImagesPasFichiers"))
+                    .style(DialogStyle.CROSS_PLATFORM_DARK)
                     .showError();
         } else {
-            Dialogs.create().title("Transformation de fichiers")
-                    .message("Attention le traitement que vous allez lancer peut durer plusieurs minutes "
-                            + "pendant lesquelles le programme semblera ne plus répondre.\n "
-                            + "Veuillez patienter jusqu'à la fin du traitement."
-                            + "\n\nMerci").style(DialogStyle.CROSS_PLATFORM_DARK)
+            Dialogs.create().title(rbLocalisation.getString("transformation.traiteImages"))
+                    .message(rbLocalisation.getString("transformation.traiteImagesMessage"))
+                    .style(DialogStyle.CROSS_PLATFORM_DARK)
                     .showWarning();
             lblTermine = new Label();
             lblTermine.setText("Traitement en cours");
             lblTermine.setLayoutX(24);
             lblTermine.setLayoutY(250);
-            choixTypeFichier.getChildren().add(lblTermine);
-            bar.setId("bar");
+            paneChoixTypeFichier.getChildren().add(lblTermine);
+            pbBarreAvancement.setId("bar");
             lblTermine.setId("lblTermine");
-            bar.setVisible(true);
-            barreImage.setVisible(true);
-            Task traitementTask;
-            traitementTask = traitement();
-            bar.progressProperty().unbind();
-            barreImage.setProgress(0.001);
-            bar.setProgress(0.001);
-            bar.progressProperty().bind(traitementTask.progressProperty());
+            pbBarreAvancement.setVisible(true);
+            pbBarreImage.setVisible(true);
+            Task taskTraitement;
+            taskTraitement = tskTraitement();
+            pbBarreAvancement.progressProperty().unbind();
+            pbBarreImage.setProgress(0.001);
+            pbBarreAvancement.setProgress(0.001);
+            pbBarreAvancement.progressProperty().bind(taskTraitement.progressProperty());
             lblTermine.textProperty().unbind();
-            lblTermine.textProperty().bind(traitementTask.messageProperty());
-            Thread th1 = new Thread(traitementTask);
-            th1.setDaemon(true);
-            th1.start();
+            lblTermine.textProperty().bind(taskTraitement.messageProperty());
+            Thread thrTraitement = new Thread(taskTraitement);
+            thrTraitement.setDaemon(true);
+            thrTraitement.start();
         }
     }
 
-    public Task traitement() {
+    public Task tskTraitement() {
         return new Task() {
             @Override
             protected Object call() throws Exception {
-                myPane.setCursor(Cursor.WAIT);
+                apTransformations.setCursor(Cursor.WAIT);
                 Platform.runLater(() -> {
-                    System.out.println(listeFichier.getCellFactory());
-                    for (int j = 0; j < listeFichier.getItems().size(); j++) {
-                        String nomFich1 = (String) listeFichier.getItems().get(j);
-                        listeFichier.getItems().set(j, "A Traiter => " + nomFich1);
+                    for (int ij = 0; ij < lvListeFichier.getItems().size(); ij++) {
+                        String strNomFich1 = (String) lvListeFichier.getItems().get(ij);
+                        lvListeFichier.getItems().set(ij, "A Traiter => " + strNomFich1);
                     }
                 });
-                Thread.sleep(200);
-
-                //System.out.println(listeFichier.getItems().size() + " Lancement ");
-                updateProgress(0.0001f, listeFichier.getItems().size());
-                for (int i1 = 0; i1 < listeFichier.getItems().size(); i1++) {
-                    updateMessage("Traitement en cours " + (i1 + 1) + "/" + listeFichier.getItems().size());
-                    String nomFich = ((String) listeFichier.getItems().get(i1)).split("> ")[1];
+                updateProgress(0.0001f, lvListeFichier.getItems().size());
+                for (int i1 = 0; i1 < lvListeFichier.getItems().size(); i1++) {
+                    Thread.sleep(200);
+                    updateMessage("Traitement en cours " + (i1 + 1) + "/" + lvListeFichier.getItems().size());
+                    System.out.println("ici");
+                    String strNomFich = ((String) lvListeFichier.getItems().get(i1)).split("> ")[1];
+                    System.out.println(i1 + " =>" + strNomFich);
                     final int ii = i1;
+                    System.out.println("là");
                     Platform.runLater(() -> {
-                        listeFichier.getItems().set(ii, "Traitement en cours => " + nomFich);
+                        lvListeFichier.getItems().set(ii, "Traitement en cours => " + strNomFich);
                     });
+                    traiteFichier(strNomFich, i1);
                     Thread.sleep(100);
-                    System.out.println("Début");
-                    traiteFichier(nomFich, i1);
-                    updateProgress(i1 + 1, listeFichier.getItems().size());
-                    System.out.println("Fin");
+
+                    updateProgress(i1 + 1, lvListeFichier.getItems().size());
                     Platform.runLater(() -> {
-                        listeFichier.getItems().set(ii, "Traité => " + nomFich);
+                        lvListeFichier.getItems().set(ii, "Traité => " + strNomFich);
                     });
                     Thread.sleep(100);
                 }
-                myPane.setCursor(Cursor.DEFAULT);
+                apTransformations.setCursor(Cursor.DEFAULT);
                 return true;
             }
 
             @Override
             protected void succeeded() {
                 super.succeeded();
-                bar.progressProperty().unbind();
+                pbBarreAvancement.progressProperty().unbind();
                 lblTermine.textProperty().unbind();
                 lblTermine.setText("Traitement Terminé");
-                bar.setProgress(0.001d);
-                bar.setVisible(false);
-                barreImage.setVisible(false);
-                traitementEffectue = true;
+                pbBarreAvancement.setProgress(0.001d);
+                pbBarreAvancement.setVisible(false);
+                pbBarreImage.setVisible(false);
+                bTraitementEffectue = true;
                 lblDragDropE2C.setVisible(true);
             }
 
@@ -363,75 +354,75 @@ public class EquiCubeDialogController {
      * @return liste des fichiers
      */
     private File[] choixFichiers() {
-        File[] lstFich = null;
-        FileChooser repertChoix = new FileChooser();
-        repertChoix.getExtensionFilters().addAll(
+        File[] fileLstFich = null;
+        FileChooser fcRepertChoix = new FileChooser();
+        fcRepertChoix.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("fichier Image (*.jpg|*.bmp|*.tif)", "*.jpg", "*.bmp", "*.tif")
         );
-        File repert = new File(repertFichier + File.separator);
-        repertChoix.setInitialDirectory(repert);
-        List<File> list = repertChoix.showOpenMultipleDialog(stEqui2Cube);
+        File fileRepert = new File(strRepertFichier + File.separator);
+        fcRepertChoix.setInitialDirectory(fileRepert);
+        List<File> fileListe = fcRepertChoix.showOpenMultipleDialog(stTransformations);
         int i = 0;
-        boolean attention = false;
-        if (list != null) {
-            File[] lstFich1 = new File[list.size()];
-            for (File file : list) {
+        boolean bAttention = false;
+        if (fileListe != null) {
+            File[] fileLstFich1 = new File[fileListe.size()];
+            for (File fileLst : fileListe) {
                 if (i == 0) {
-                    repertFichier = file.getParent();
+                    strRepertFichier = fileLst.getParent();
                 }
-                String nomFich = file.getAbsolutePath();
-                String extension = nomFich.substring(nomFich.lastIndexOf(".") + 1, nomFich.length()).toLowerCase();
+                String strNomFich = fileLst.getAbsolutePath();
+                String strExtension;
+                strExtension = strNomFich.substring(strNomFich.lastIndexOf(".") + 1, strNomFich.length()).toLowerCase();
                 Image img = null;
-                if (extension != "tif") {
-                    img = new Image("file:" + nomFich);
+                if (!strExtension.equals("tif")) {
+                    img = new Image("file:" + strNomFich);
                 } else {
                     try {
-                        img = ReadWriteImage.readTiff(nomFich);
-                    } catch (ImageReadException ex) {
-                        Logger.getLogger(EquiCubeDialogController.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (IOException ex) {
+                        img = ReadWriteImage.readTiff(strNomFich);
+                    } catch (ImageReadException | IOException ex) {
                         Logger.getLogger(EquiCubeDialogController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-                if (typeTransformation.equals(EquiCubeDialogController.EQUI2CUBE)) {
+                if (strTypeTransformation.equals(EquiCubeDialogController.EQUI2CUBE)) {
                     if (img.getWidth() == 2 * img.getHeight()) {
-                        lstFich1[i] = file;
+                        fileLstFich1[i] = fileLst;
                         i++;
                     } else {
-                        attention = true;
+                        bAttention = true;
                     }
                 } else {
                     if (img.getWidth() == img.getHeight()) {
-                        String nom = file.getAbsolutePath().substring(0, file.getAbsolutePath().length() - 6);
-                        boolean trouve = false;
+                        String strNom = fileLst.getAbsolutePath().substring(0, fileLst.getAbsolutePath().length() - 6);
+                        boolean bTrouve = false;
                         for (int j = 0; j < i; j++) {
-                            String nom1 = lstFich1[j].getAbsolutePath().substring(0, file.getAbsolutePath().length() - 6);
-                            if (nom.equals(nom1)) {
-                                trouve = true;
+                            String strNom1 = fileLstFich1[j].getAbsolutePath().substring(0, fileLst.getAbsolutePath().length() - 6);
+                            if (strNom.equals(strNom1)) {
+                                bTrouve = true;
                             }
                         }
-                        if (!trouve) {
-                            lstFich1[i] = file;
+                        if (!bTrouve) {
+                            fileLstFich1[i] = fileLst;
                             i++;
                         }
                     } else {
-                        attention = true;
+                        bAttention = true;
                     }
 
                 }
             }
-            if (attention) {
-                Dialogs.create().title("Transformation de fichiers")
-                        .message("Attention au type des fichiers choisis.").style(DialogStyle.CROSS_PLATFORM_DARK)
+            if (bAttention) {
+                Dialogs.create().title(rbLocalisation.getString("transformation.traiteImages"))
+                        .message(rbLocalisation.getString("transformation.traiteImagesType"))
+                        .style(DialogStyle.CROSS_PLATFORM_DARK)
                         .showError();
 
             }
-            lstFich = new File[i];
-            System.arraycopy(lstFich1, 0, lstFich, 0, i);
+            fileLstFich = new File[i];
+            System.arraycopy(fileLstFich1, 0, fileLstFich, 0, i);
             lblDragDropE2C.setVisible(false);
         }
 
-        return lstFich;
+        return fileLstFich;
     }
 
     /**
@@ -442,17 +433,16 @@ public class EquiCubeDialogController {
     static class ListeTransformationCouleur extends ListCell<String> {
 
         @Override
-        public void updateItem(String item, boolean empty) {
-            super.updateItem(item, empty);
-            if (item != null) {
-                int longueur = item.split(" => ").length;
-                System.out.println("Longueur : " + longueur);
+        public void updateItem(String strItem, boolean bEmpty) {
+            super.updateItem(strItem, bEmpty);
+            if (strItem != null) {
+                int iLongueur = strItem.split(" => ").length;
                 setTextFill(Color.BLACK);
-                String pre = "";
-                String texte = item;
-                if (longueur > 1) {
-                    String[] txt = item.split(" => ");
-                    switch (txt[0]) {
+                String strPre = "";
+                String strTexte = strItem;
+                if (iLongueur > 1) {
+                    String[] strTxt = strItem.split(" => ");
+                    switch (strTxt[0]) {
                         case "A Traiter":
                             setTextFill(Color.RED);
                             break;
@@ -463,11 +453,11 @@ public class EquiCubeDialogController {
                             setTextFill(Color.GREEN);
                             break;
                     }
-                    pre = txt[0] + " => ";
-                    texte = txt[1];
+                    strPre = strTxt[0] + " => ";
+                    strTexte = strTxt[1];
                 }
-                texte = texte.substring(texte.lastIndexOf(File.separator) + 1, texte.length());
-                setText(pre + texte);
+                strTexte = strTexte.substring(strTexte.lastIndexOf(File.separator) + 1, strTexte.length());
+                setText(strPre + strTexte);
             }
         }
     }
@@ -477,19 +467,19 @@ public class EquiCubeDialogController {
      * @param typeTransf
      * @throws Exception
      */
-    public void afficheFenetre(String typeTransf) throws Exception {
-        listeFichier.getItems().clear();
-        stEqui2Cube = new Stage(StageStyle.UTILITY);
-        myPane = new AnchorPane();
-        stEqui2Cube.initModality(Modality.APPLICATION_MODAL);
-        stEqui2Cube.setResizable(true);
-        myPane.setStyle("-fx-background-color : #ff0000;");
+    public void afficheFenetre(String strTypeTransf) throws Exception {
+        lvListeFichier.getItems().clear();
+        stTransformations = new Stage(StageStyle.UTILITY);
+        apTransformations = new AnchorPane();
+        stTransformations.initModality(Modality.APPLICATION_MODAL);
+        stTransformations.setResizable(true);
+        apTransformations.setStyle("-fx-background-color : #ff0000;");
 
-        VBox fenetre = new VBox();
-        HBox PChoix = new HBox();
-        Pane choixFichier = new Pane();
+        VBox vbFenetre = new VBox();
+        HBox hbChoix = new HBox();
+        Pane paneChoixFichier = new Pane();
         btnAjouteFichiers = new Button("Ajouter des Fichiers");
-        choixTypeFichier = new Pane();
+        paneChoixTypeFichier = new Pane();
         Label lblType = new Label("Type des Fichiers de sortie");
         rbJpeg = new RadioButton("JPEG (.jpg)");
         rbBmp = new RadioButton("BMP (.bmp)");
@@ -497,64 +487,64 @@ public class EquiCubeDialogController {
         cbSharpen = new CheckBox("Masque de netteté");
         slSharpen = new Slider(0, 2, 0.2);
         lblSharpen = new Label("0.20");
-        Pane Pboutons = new Pane();
+        Pane paneboutons = new Pane();
         btnAnnuler = new Button("Fermer la fenêtre");
         btnValider = new Button("Lancer le traitement");
 
-        typeTransformation = typeTransf;
+        strTypeTransformation = strTypeTransf;
         Image imgTransf;
-        if (typeTransf.equals(EquiCubeDialogController.EQUI2CUBE)) {
-            stEqui2Cube.setTitle("Transformation d'équirectangulaire en faces de cube");
+        if (strTypeTransf.equals(EquiCubeDialogController.EQUI2CUBE)) {
+            stTransformations.setTitle("Transformation d'équirectangulaire en faces de cube");
             imgTransf = new Image("file:" + EditeurPanovisu.strRepertAppli + File.separator + "images/equi2cube.png");
         } else {
-            stEqui2Cube.setTitle("Transformation de faces de cube en équirectangulaire");
+            stTransformations.setTitle("Transformation de faces de cube en équirectangulaire");
             imgTransf = new Image("file:" + EditeurPanovisu.strRepertAppli + File.separator + "images/cube2equi.png");
         }
-        ImageView IMType = new ImageView(imgTransf);
-        IMType.setLayoutX(35);
-        IMType.setLayoutY(280);
-        choixTypeFichier.getChildren().add(IMType);
-        myPane.setPrefHeight(400);
-        myPane.setPrefWidth(600);
+        ImageView ivTypeTransfert = new ImageView(imgTransf);
+        ivTypeTransfert.setLayoutX(35);
+        ivTypeTransfert.setLayoutY(280);
+        paneChoixTypeFichier.getChildren().add(ivTypeTransfert);
+        apTransformations.setPrefHeight(400);
+        apTransformations.setPrefWidth(600);
 
-        choixFichier.setPrefHeight(350);
-        choixFichier.setPrefWidth(410);
-        choixFichier.setStyle("-fx-background-color: #d0d0d0; -fx-border-color: #bbb;");
-        choixTypeFichier.setPrefHeight(350);
-        choixTypeFichier.setPrefWidth(180);
-        choixTypeFichier.setStyle("-fx-background-color: #d0d0d0; -fx-border-color: #bbb;");
-        PChoix.getChildren().addAll(choixFichier, choixTypeFichier);
-        fenetre.setPrefHeight(400);
-        fenetre.setPrefWidth(600);
-        myPane.getChildren().add(fenetre);
-        PChoix.setPrefHeight(350);
-        PChoix.setPrefWidth(600);
-        PChoix.setStyle("-fx-background-color: #d0d0d0;");
-        Pboutons.setPrefHeight(50);
-        Pboutons.setPrefWidth(600);
-        Pboutons.setStyle("-fx-background-color: #d0d0d0;");
-        fenetre.setStyle("-fx-background-color: #d0d0d0;");
+        paneChoixFichier.setPrefHeight(350);
+        paneChoixFichier.setPrefWidth(410);
+        paneChoixFichier.setStyle("-fx-background-color: #d0d0d0; -fx-border-color: #bbb;");
+        paneChoixTypeFichier.setPrefHeight(350);
+        paneChoixTypeFichier.setPrefWidth(180);
+        paneChoixTypeFichier.setStyle("-fx-background-color: #d0d0d0; -fx-border-color: #bbb;");
+        hbChoix.getChildren().addAll(paneChoixFichier, paneChoixTypeFichier);
+        vbFenetre.setPrefHeight(400);
+        vbFenetre.setPrefWidth(600);
+        apTransformations.getChildren().add(vbFenetre);
+        hbChoix.setPrefHeight(350);
+        hbChoix.setPrefWidth(600);
+        hbChoix.setStyle("-fx-background-color: #d0d0d0;");
+        paneboutons.setPrefHeight(50);
+        paneboutons.setPrefWidth(600);
+        paneboutons.setStyle("-fx-background-color: #d0d0d0;");
+        vbFenetre.setStyle("-fx-background-color: #d0d0d0;");
         btnAnnuler.setLayoutX(296);
         btnAnnuler.setLayoutY(10);
         btnValider.setLayoutX(433);
         btnValider.setLayoutY(10);
-        listeFichier.setPrefHeight(290);
-        listeFichier.setPrefWidth(380);
-        listeFichier.setEditable(true);
-        listeFichier.setLayoutX(14);
-        listeFichier.setLayoutY(14);
+        lvListeFichier.setPrefHeight(290);
+        lvListeFichier.setPrefWidth(380);
+        lvListeFichier.setEditable(true);
+        lvListeFichier.setLayoutX(14);
+        lvListeFichier.setLayoutY(14);
         btnAjouteFichiers.setLayoutX(259);
         btnAjouteFichiers.setLayoutY(319);
-        choixFichier.getChildren().addAll(listeFichier, btnAjouteFichiers);
-        if (typeTransf.equals(EquiCubeDialogController.EQUI2CUBE)) {
-            lblDragDropE2C = new Label(rb.getString("transformation.dragDropE2C"));
+        paneChoixFichier.getChildren().addAll(lvListeFichier, btnAjouteFichiers);
+        if (strTypeTransf.equals(EquiCubeDialogController.EQUI2CUBE)) {
+            lblDragDropE2C = new Label(rbLocalisation.getString("transformation.dragDropE2C"));
         } else {
-            lblDragDropE2C = new Label(rb.getString("transformation.dragDropC2E"));
+            lblDragDropE2C = new Label(rbLocalisation.getString("transformation.dragDropC2E"));
         }
-        lblDragDropE2C.setMinHeight(listeFichier.getPrefHeight());
-        lblDragDropE2C.setMaxHeight(listeFichier.getPrefHeight());
-        lblDragDropE2C.setMinWidth(listeFichier.getPrefWidth());
-        lblDragDropE2C.setMaxWidth(listeFichier.getPrefWidth());
+        lblDragDropE2C.setMinHeight(lvListeFichier.getPrefHeight());
+        lblDragDropE2C.setMaxHeight(lvListeFichier.getPrefHeight());
+        lblDragDropE2C.setMinWidth(lvListeFichier.getPrefWidth());
+        lblDragDropE2C.setMaxWidth(lvListeFichier.getPrefWidth());
         lblDragDropE2C.setLayoutX(14);
         lblDragDropE2C.setLayoutY(14);
         lblDragDropE2C.setAlignment(Pos.CENTER);
@@ -563,23 +553,23 @@ public class EquiCubeDialogController {
         lblDragDropE2C.setWrapText(true);
         lblDragDropE2C.setStyle("-fx-font-size : 24px");
         lblDragDropE2C.setStyle("-fx-background-color : rgba(128,128,128,0.1)");
-        choixFichier.getChildren().add(lblDragDropE2C);
+        paneChoixFichier.getChildren().add(lblDragDropE2C);
 
         lblType.setLayoutX(14);
         lblType.setLayoutY(14);
         rbBmp.setLayoutX(43);
         rbBmp.setLayoutY(43);
         rbBmp.setSelected(true);
-        rbBmp.setToggleGroup(grpTypeFichier);
+        rbBmp.setToggleGroup(tgTypeFichier);
         rbJpeg.setLayoutX(43);
         rbJpeg.setLayoutY(71);
-        rbJpeg.setToggleGroup(grpTypeFichier);
+        rbJpeg.setToggleGroup(tgTypeFichier);
         rbTiff.setLayoutX(43);
         rbTiff.setLayoutY(99);
-        rbTiff.setToggleGroup(grpTypeFichier);
+        rbTiff.setToggleGroup(tgTypeFichier);
         cbSharpen.setLayoutX(43);
         cbSharpen.setLayoutY(127);
-        cbSharpen.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbSharpen.selectedProperty().addListener((ov, old_val, new_val) -> {
             if (new_val) {
                 slSharpen.setDisable(false);
                 lblSharpen.setDisable(false);
@@ -598,17 +588,17 @@ public class EquiCubeDialogController {
         slSharpen.setLayoutX(23);
         slSharpen.setLayoutY(157);
         slSharpen.setTooltip(new Tooltip("Choisissez le niveau d'accentuation de l'image"));
-        slSharpen.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+        slSharpen.valueProperty().addListener((observableValue, oldValue, newValue) -> {
             if (newValue == null) {
                 lblSharpen.setText("");
                 return;
             }
-            DecimalFormat df = new DecimalFormat();
-            df.setMaximumFractionDigits(2); //arrondi à 2 chiffres apres la virgules
-            df.setMinimumFractionDigits(2);
-            df.setDecimalSeparatorAlwaysShown(true);
+            DecimalFormat dfArrondi = new DecimalFormat();
+            dfArrondi.setMaximumFractionDigits(2); //arrondi à 2 chiffres apres la virgules
+            dfArrondi.setMinimumFractionDigits(2);
+            dfArrondi.setDecimalSeparatorAlwaysShown(true);
 
-            lblSharpen.setText(df.format(Math.round(newValue.floatValue() * 20.f) / 20.f) + "");
+            lblSharpen.setText(dfArrondi.format(Math.round(newValue.floatValue() * 20.f) / 20.f) + "");
         });
 
         slSharpen.setPrefWidth(120);
@@ -620,169 +610,170 @@ public class EquiCubeDialogController {
         lblSharpen.setTextAlignment(TextAlignment.RIGHT);
         lblSharpen.setDisable(true);
 
-        choixTypeFichier.getChildren().addAll(lblType, rbBmp, rbJpeg, rbTiff, cbSharpen, slSharpen, lblSharpen);
-        barreImage.setLayoutX(40);
-        barreImage.setLayoutY(190);
-        barreImage.setStyle("-fx-accent : #0000bb");
-        barreImage.setVisible(false);
-        choixTypeFichier.getChildren().add(barreImage);
-        bar = new ProgressBar();
-        bar.setLayoutX(40);
-        bar.setLayoutY(220);
-        barreImage.setStyle("-fx-accent : #00bb00");
-        choixTypeFichier.getChildren().add(bar);
-        bar.setVisible(false);
+        paneChoixTypeFichier.getChildren().addAll(lblType, rbBmp, rbJpeg, rbTiff, cbSharpen, slSharpen, lblSharpen);
+        pbBarreImage.setLayoutX(40);
+        pbBarreImage.setLayoutY(190);
+        pbBarreImage.setStyle("-fx-accent : #0000bb");
+        pbBarreImage.setVisible(false);
+        paneChoixTypeFichier.getChildren().add(pbBarreImage);
+        pbBarreAvancement = new ProgressBar();
+        pbBarreAvancement.setLayoutX(40);
+        pbBarreAvancement.setLayoutY(220);
+        pbBarreImage.setStyle("-fx-accent : #00bb00");
+        paneChoixTypeFichier.getChildren().add(pbBarreAvancement);
+        pbBarreAvancement.setVisible(false);
 
-        Pboutons.getChildren().addAll(btnAnnuler, btnValider);
-        fenetre.getChildren().addAll(PChoix, Pboutons);
-        Scene scene2 = new Scene(myPane);
-        stEqui2Cube.setScene(scene2);
-        stEqui2Cube.show();
+        paneboutons.getChildren().addAll(btnAnnuler, btnValider);
+        vbFenetre.getChildren().addAll(hbChoix, paneboutons);
+        Scene scnTransformations = new Scene(apTransformations);
+        stTransformations.setScene(scnTransformations);
+        stTransformations.show();
 
-        btnAnnuler.setOnAction((ActionEvent e) -> {
+        btnAnnuler.setOnAction((e) -> {
             annulerE2C();
         });
-        btnValider.setOnAction((ActionEvent e) -> {
-            if (!traitementEffectue) {
+        btnValider.setOnAction((e) -> {
+            if (!bTraitementEffectue) {
                 validerE2C();
             }
         });
-        btnAjouteFichiers.setOnAction((ActionEvent e) -> {
+        btnAjouteFichiers.setOnAction((e) -> {
             lblTermine.setText("");
-            lstFichier = choixFichiers();
-            if (lstFichier != null) {
-                if (traitementEffectue) {
-                    listeFichier.getItems().clear();
-                    traitementEffectue = false;
+            fileLstFichier = choixFichiers();
+            if (fileLstFichier != null) {
+                if (bTraitementEffectue) {
+                    lvListeFichier.getItems().clear();
+                    bTraitementEffectue = false;
                 }
-                for (File lstFichier1 : lstFichier) {
-                    String nomFich = lstFichier1.getAbsolutePath();
-                    listeFichier.getItems().add(nomFich);
+                for (File fileLstFichier1 : fileLstFichier) {
+                    String strNomFich = fileLstFichier1.getAbsolutePath();
+                    lvListeFichier.getItems().add(strNomFich);
                 }
             }
         });
-        listeFichier.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+        lvListeFichier.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
             @Override
             public ListCell<String> call(ListView<String> list) {
                 return new ListeTransformationCouleur();
             }
         });
-        myPane.setOnDragOver((DragEvent event) -> {
-            Dragboard db = event.getDragboard();
-            if (db.hasFiles()) {
+        apTransformations.setOnDragOver((event) -> {
+            Dragboard dbFichiersTransformation = event.getDragboard();
+            if (dbFichiersTransformation.hasFiles()) {
                 event.acceptTransferModes(TransferMode.ANY);
             } else {
                 event.consume();
             }
         });
-        stEqui2Cube.widthProperty().addListener((ObservableValue<? extends Number> arg0, Number arg1, Number arg2) -> {
-            myPane.setPrefWidth(stEqui2Cube.getWidth());
-            fenetre.setPrefWidth(stEqui2Cube.getWidth());
-            btnAnnuler.setLayoutX(stEqui2Cube.getWidth() - 314);
-            btnValider.setLayoutX(stEqui2Cube.getWidth() - 157);
-            choixFichier.setPrefWidth(stEqui2Cube.getWidth() - 200);
-            listeFichier.setPrefWidth(stEqui2Cube.getWidth() - 240);
-            lblDragDropE2C.setMinWidth(listeFichier.getPrefWidth());
-            lblDragDropE2C.setMaxWidth(listeFichier.getPrefWidth());
+        stTransformations.widthProperty().addListener((arg0, arg1, arg2) -> {
+            apTransformations.setPrefWidth(stTransformations.getWidth());
+            vbFenetre.setPrefWidth(stTransformations.getWidth());
+            btnAnnuler.setLayoutX(stTransformations.getWidth() - 314);
+            btnValider.setLayoutX(stTransformations.getWidth() - 157);
+            paneChoixFichier.setPrefWidth(stTransformations.getWidth() - 200);
+            lvListeFichier.setPrefWidth(stTransformations.getWidth() - 240);
+            lblDragDropE2C.setMinWidth(lvListeFichier.getPrefWidth());
+            lblDragDropE2C.setMaxWidth(lvListeFichier.getPrefWidth());
 
-            btnAjouteFichiers.setLayoutX(stEqui2Cube.getWidth() - 341);
+            btnAjouteFichiers.setLayoutX(stTransformations.getWidth() - 341);
         });
 
-        stEqui2Cube.heightProperty().addListener((ObservableValue<? extends Number> arg0, Number arg1, Number arg2) -> {
-            myPane.setPrefHeight(stEqui2Cube.getHeight());
-            fenetre.setPrefHeight(stEqui2Cube.getHeight());
-            choixFichier.setPrefHeight(stEqui2Cube.getHeight() - 80);
-            PChoix.setPrefHeight(stEqui2Cube.getHeight() - 80);
-            listeFichier.setPrefHeight(stEqui2Cube.getHeight() - 140);
-            lblDragDropE2C.setMinHeight(listeFichier.getPrefHeight());
-            lblDragDropE2C.setMaxHeight(listeFichier.getPrefHeight());
-            btnAjouteFichiers.setLayoutY(stEqui2Cube.getHeight() - 121);
+        stTransformations.heightProperty().addListener((arg0, arg1, arg2) -> {
+            apTransformations.setPrefHeight(stTransformations.getHeight());
+            vbFenetre.setPrefHeight(stTransformations.getHeight());
+            paneChoixFichier.setPrefHeight(stTransformations.getHeight() - 80);
+            hbChoix.setPrefHeight(stTransformations.getHeight() - 80);
+            lvListeFichier.setPrefHeight(stTransformations.getHeight() - 140);
+            lblDragDropE2C.setMinHeight(lvListeFichier.getPrefHeight());
+            lblDragDropE2C.setMaxHeight(lvListeFichier.getPrefHeight());
+            btnAjouteFichiers.setLayoutY(stTransformations.getHeight() - 121);
         });
 
         // Dropping over surface
-        myPane.setOnDragDropped((DragEvent event) -> {
-            Dragboard db = event.getDragboard();
-            boolean success = false;
-            File[] lstFich;
-            lstFich = null;
-            if (db.hasFiles()) {
+        apTransformations.setOnDragDropped((event) -> {
+            Dragboard dbFichiersTransformation = event.getDragboard();
+            boolean bSucces = false;
+            File[] fileLstFich;
+            fileLstFich = null;
+            if (dbFichiersTransformation.hasFiles()) {
                 lblTermine.setText("");
-                success = true;
-                String[] filePath = new String[200];
+                bSucces = true;
+                String[] stringFichiersPath = new String[200];
                 int i = 0;
-                for (File file1 : db.getFiles()) {
-                    filePath[i] = file1.getAbsolutePath();
+                for (File file1 : dbFichiersTransformation.getFiles()) {
+                    stringFichiersPath[i] = file1.getAbsolutePath();
                     i++;
                 }
-                int nb = i;
+                int iNb = i;
                 i = 0;
-                boolean attention = false;
-                File[] lstFich1 = new File[filePath.length];
-                for (int j = 0; j < nb; j++) {
-                    String nomfich = filePath[j];
-                    File file = new File(nomfich);
-                    String extension = nomfich.substring(nomfich.lastIndexOf(".") + 1, nomfich.length()).toLowerCase();
-                    if (extension.equals("bmp") || extension.equals("jpg") || extension.equals("tif")) {
+                boolean bAttention = false;
+                File[] fileLstFich1 = new File[stringFichiersPath.length];
+                for (int j = 0; j < iNb; j++) {
+                    String strNomfich = stringFichiersPath[j];
+                    File fileTransf = new File(strNomfich);
+                    String strExtension = strNomfich.substring(strNomfich.lastIndexOf(".") + 1, strNomfich.length()).toLowerCase();
+                    if (strExtension.equals("bmp") || strExtension.equals("jpg") || strExtension.equals("tif")) {
                         if (i == 0) {
-                            repertFichier = file.getParent();
+                            strRepertFichier = fileTransf.getParent();
                         }
                         Image img = null;
-                        if (extension != "tif") {
-                            img = new Image("file:" + file.getAbsolutePath());
+                        if (strExtension != "tif") {
+                            img = new Image("file:" + fileTransf.getAbsolutePath());
                         } else {
                             try {
-                                img = ReadWriteImage.readTiff(nomfich);
+                                img = ReadWriteImage.readTiff(strNomfich);
                             } catch (ImageReadException ex) {
                                 Logger.getLogger(EquiCubeDialogController.class.getName()).log(Level.SEVERE, null, ex);
                             } catch (IOException ex) {
                                 Logger.getLogger(EquiCubeDialogController.class.getName()).log(Level.SEVERE, null, ex);
                             }
                         }
-                        if (typeTransformation.equals(EquiCubeDialogController.EQUI2CUBE)) {
+                        if (strTypeTransformation.equals(EquiCubeDialogController.EQUI2CUBE)) {
                             if (img.getWidth() == 2 * img.getHeight()) {
-                                lstFich1[i] = file;
+                                fileLstFich1[i] = fileTransf;
                                 i++;
                             } else {
-                                attention = true;
+                                bAttention = true;
                             }
                         } else {
                             if (img.getWidth() == img.getHeight()) {
-                                String nom = file.getAbsolutePath().substring(0, file.getAbsolutePath().length() - 6);
-                                boolean trouve = false;
-                                for (int k = 0; k < i; k++) {
-                                    String nom1 = lstFich1[k].getAbsolutePath().substring(0, file.getAbsolutePath().length() - 6);
-                                    if (nom.equals(nom1)) {
-                                        trouve = true;
+                                String strNom = fileTransf.getAbsolutePath().substring(0, fileTransf.getAbsolutePath().length() - 6);
+                                boolean bTrouve = false;
+                                for (int ik = 0; ik < i; ik++) {
+                                    String strNom1 = fileLstFich1[ik].getAbsolutePath().substring(0, fileTransf.getAbsolutePath().length() - 6);
+                                    if (strNom.equals(strNom1)) {
+                                        bTrouve = true;
                                     }
                                 }
-                                if (!trouve) {
-                                    lstFich1[i] = file;
+                                if (!bTrouve) {
+                                    fileLstFich1[i] = fileTransf;
                                     i++;
                                 }
                             } else {
-                                attention = true;
+                                bAttention = true;
                             }
 
                         }
                     }
                 }
-                if (attention) {
-                    Dialogs.create().title("Transformation de fichiers")
-                            .message("Attention au type des fichiers choisis.").style(DialogStyle.CROSS_PLATFORM_DARK)
+                if (bAttention) {
+                    Dialogs.create().title(rbLocalisation.getString("transformation.traiteImages"))
+                            .message(rbLocalisation.getString("transformation.traiteImagesType"))
+                            .style(DialogStyle.CROSS_PLATFORM_DARK)
                             .showError();
 
                 }
-                lstFichier = new File[i];
-                System.arraycopy(lstFich1, 0, lstFichier, 0, i);
+                fileLstFichier = new File[i];
+                System.arraycopy(fileLstFich1, 0, fileLstFichier, 0, i);
             }
-            if (lstFichier != null) {
-                for (File lstFichier1 : lstFichier) {
+            if (fileLstFichier != null) {
+                for (File lstFichier1 : fileLstFichier) {
                     String nomFich = lstFichier1.getAbsolutePath();
-                    listeFichier.getItems().add(nomFich);
+                    lvListeFichier.getItems().add(nomFich);
                 }
             }
             lblDragDropE2C.setVisible(false);
-            event.setDropCompleted(success);
+            event.setDropCompleted(bSucces);
             event.consume();
         }
         );

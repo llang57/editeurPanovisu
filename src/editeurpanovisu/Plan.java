@@ -11,15 +11,15 @@ package editeurpanovisu;
  */
 public class Plan {
 
-    private HotSpot[] hotspots = new HotSpot[100];
-    private String titrePlan="";
-    private String imagePlan="";
-    private String lienPlan;
-    private int nombreHotspots = 0;
-    private String[] panoramiques = new String[50];
-    private int nombrePanoramiques = 0;
+    private final HotSpot[] hotspots = new HotSpot[100];
+    private String strTitrePlan="";
+    private String strImagePlan="";
+    private String strLienPlan;
+    private int iNombreHotspots = 0;
+    private final String[] strPanoramiques = new String[50];
+    private int iNombrePanoramiques = 0;
     private double directionNord=0;
-    private String position="top:right";
+    private String strPosition="top:right";
     private double positionX=20;
     private double positionY=20;
     private double largeurPlan;
@@ -52,10 +52,10 @@ public class Plan {
 
     /**
      *
-     * @param num
+     * @param iNum
      */
-    public void removeHotspot(int num) {
-        for (int i = num; i < this.getNombreHotspots() - 1; i++) {
+    public void removeHotspot(int iNum) {
+        for (int i = iNum; i < this.getNombreHotspots() - 1; i++) {
             this.hotspots[i] = this.hotspots[i + 1];
         }
         this.setNombreHotspots(this.getNombreHotspots() - 1);
@@ -66,63 +66,63 @@ public class Plan {
      * @return the titrePLan
      */
     public String getTitrePlan() {
-        return titrePlan;
+        return strTitrePlan;
     }
 /**
  * 
- * @param titrePlan 
+ * @param strTitrePlan 
  */
-    public void setTitrePlan(String titrePlan) {
-        this.titrePlan = titrePlan;
+    public void setTitrePlan(String strTitrePlan) {
+        this.strTitrePlan = strTitrePlan;
     }
 
     /**
      * @return the nombreHotspots
      */
     public int getNombreHotspots() {
-        return nombreHotspots;
+        return iNombreHotspots;
     }
 
     /**
-     * @param nombreHotspots the nombreHotspots to set
+     * @param iNombreHotspots the nombreHotspots to set
      */
-    public void setNombreHotspots(int nombreHotspots) {
-        this.nombreHotspots = nombreHotspots;
+    public void setNombreHotspots(int iNombreHotspots) {
+        this.iNombreHotspots = iNombreHotspots;
     }
 
     /**
      * @return the panoramiques
      */
-    public String[] getPanoramiques() {
-        return panoramiques;
+    public String[] getStrPanoramiques() {
+        return strPanoramiques;
     }
 
     /**
-     * @param panoramique the panoramiques to set
+     * @param strPanoramique the panoramiques to set
      */
-    public void addPanoramique(String panoramique) {
-        this.panoramiques[nombrePanoramiques] = panoramique;
-        this.nombrePanoramiques++;
+    public void addStrPanoramique(String strPanoramique) {
+        this.strPanoramiques[iNombrePanoramiques] = strPanoramique;
+        this.iNombrePanoramiques++;
     }
 
     /**
-     * @param panoramique the panoramiques to set
+     * @param strPanoramique the panoramiques to set
      */
-    public void removePanoramique(String panoramique) {
+    public void removeStrPanoramique(String strPanoramique) {
         boolean trouve = false;
         int numero = -1;
-        for (int i = 0; i < nombrePanoramiques; i++) {
-            if (this.panoramiques[nombrePanoramiques].equals(panoramique)) {
+        for (int i = 0; i < iNombrePanoramiques; i++) {
+            if (this.strPanoramiques[iNombrePanoramiques].equals(strPanoramique)) {
                 trouve = true;
                 numero = i;
             }
 
         }
         if (trouve) {
-            for (int i = numero; i < nombrePanoramiques-1; i++) {
-                this.panoramiques[i]=this.panoramiques[i+1];
+            for (int i = numero; i < iNombrePanoramiques-1; i++) {
+                this.strPanoramiques[i]=this.strPanoramiques[i+1];
             }
-            this.nombrePanoramiques--;
+            this.iNombrePanoramiques--;
         }
     }
 
@@ -130,14 +130,14 @@ public class Plan {
      * @return the nombrePanoramiques
      */
     public int getNombrePanoramiques() {
-        return nombrePanoramiques;
+        return iNombrePanoramiques;
     }
 
     /**
-     * @param nombrePanoramiques the nombrePanoramiques to set
+     * @param iNombrePanoramiques the nombrePanoramiques to set
      */
-    public void setNombrePanoramiques(int nombrePanoramiques) {
-        this.nombrePanoramiques = nombrePanoramiques;
+    public void setNombrePanoramiques(int iNombrePanoramiques) {
+        this.iNombrePanoramiques = iNombrePanoramiques;
     }
 
     /**
@@ -157,15 +157,15 @@ public class Plan {
     /**
      * @return the position
      */
-    public String getPosition() {
-        return position;
+    public String getStrPosition() {
+        return strPosition;
     }
 
     /**
-     * @param position the position to set
+     * @param strPosition the position to set
      */
-    public void setPosition(String position) {
-        this.position = position;
+    public void setStrPosition(String strPosition) {
+        this.strPosition = strPosition;
     }
 
     /**
@@ -199,29 +199,29 @@ public class Plan {
     /**
      * @return the imagePlan
      */
-    public String getImagePlan() {
-        return imagePlan;
+    public String getStrImagePlan() {
+        return strImagePlan;
     }
 
     /**
-     * @param imagePlan the imagePlan to set
+     * @param strImagePlan the imagePlan to set
      */
-    public void setImagePlan(String imagePlan) {
-        this.imagePlan = imagePlan;
+    public void setStrImagePlan(String strImagePlan) {
+        this.strImagePlan = strImagePlan;
     }
 
     /**
      * @return the lienPlan
      */
-    public String getLienPlan() {
-        return lienPlan;
+    public String getStrLienPlan() {
+        return strLienPlan;
     }
 
     /**
-     * @param lienPlan the lienPlan to set
+     * @param strLienPlan the lienPlan to set
      */
-    public void setLienPlan(String lienPlan) {
-        this.lienPlan = lienPlan;
+    public void setStrLienPlan(String strLienPlan) {
+        this.strLienPlan = strLienPlan;
     }
 
     /**

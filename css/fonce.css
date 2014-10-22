@@ -2061,6 +2061,18 @@ is being used to size a border should also be in pixels.
     -fx-background-color: -fx-selection-bar;
 }
 
+
+.list-view,.list-cell:even,.list-cell:odd { 
+    -fx-background-color: -fx-background;
+    -fx-text-fill: -fx-light-text-color;
+}
+
+.list-cell:filled:hover {
+    -fx-background-color: #ff0000;
+    -fx-text-fill: white;
+}
+
+
 /*******************************************************************************
  *                                                                             *
  * TreeView and TreeCell                                                       *

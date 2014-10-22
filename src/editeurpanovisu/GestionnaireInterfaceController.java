@@ -12,10 +12,12 @@ import static editeurpanovisu.EditeurPanovisu.strCurrentDir;
 import static editeurpanovisu.EditeurPanovisu.gestionnairePlan;
 import static editeurpanovisu.EditeurPanovisu.ivAjouterPlan;
 import static editeurpanovisu.EditeurPanovisu.iNombrePanoramiques;
+import static editeurpanovisu.EditeurPanovisu.bDejaSauve;
 import static editeurpanovisu.EditeurPanovisu.iNombrePanoramiquesFichier;
 import static editeurpanovisu.EditeurPanovisu.iNombrePlans;
 import static editeurpanovisu.EditeurPanovisu.panoramiquesProjet;
 import static editeurpanovisu.EditeurPanovisu.plans;
+import static editeurpanovisu.EditeurPanovisu.stPrincipal;
 import static editeurpanovisu.EditeurPanovisu.strRepertAppli;
 import static editeurpanovisu.EditeurPanovisu.strRepertTemp;
 import static editeurpanovisu.EditeurPanovisu.tabPlan;
@@ -37,7 +39,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
@@ -51,7 +52,6 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
@@ -59,7 +59,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
@@ -86,29 +85,29 @@ public class GestionnaireInterfaceController {
     private final ExtensionsFilter PNG_FILTER
             = new ExtensionsFilter(new String[]{".png"});
 
-    public ImageFond[] imagesFond = new ImageFond[50];
-    public int iNombreImagesFond = 0;
+    private ImageFond[] imagesFond = new ImageFond[50];
+    private int iNombreImagesFond = 0;
 
+    private String strStyleHotSpots = "hotspot.png";
+    private String strStyleHotSpotImages = "photo2.png";
     private ResourceBundle rbLocalisation;
-    public String strStyleHotSpots = "hotspot.png";
-    public String strStyleHotSpotImages = "photo2.png";
     /*
      Variables barre de navigation classique 
      */
-    public double offsetXBarreClassique = 0;
-    public double offsetYBarreClassique = 10;
-    public double tailleBarreClassique = 26;
-    public double espacementBarreClassique = 4;
-    public final String styleDefautBarreClassique = "retina";
-    public String strPositionBarreClassique = "bottom:center";
-    public String styleBarreClassique = styleDefautBarreClassique;
-    public String strDeplacementsBarreClassique = "oui";
-    public String strZoomBarreClassique = "oui";
-    public String strOutilsBarreClassique = "oui";
-    public String strRotationBarreClassique = "oui";
-    public String strPleinEcranBarreClassique = "oui";
-    public String strSourisBarreClassique = "oui";
-    public String strVisibiliteBarreClassique = "oui";
+    private double offsetXBarreClassique = 0;
+    private double offsetYBarreClassique = 10;
+    private double tailleBarreClassique = 26;
+    private double espacementBarreClassique = 4;
+    private final String strStyleDefautBarreClassique = "retina";
+    private String strPositionBarreClassique = "bottom:center";
+    private String styleBarreClassique = strStyleDefautBarreClassique;
+    private String strDeplacementsBarreClassique = "oui";
+    private String strZoomBarreClassique = "oui";
+    private String strOutilsBarreClassique = "oui";
+    private String strRotationBarreClassique = "oui";
+    private String strPleinEcranBarreClassique = "oui";
+    private String strSourisBarreClassique = "oui";
+    private String strVisibiliteBarreClassique = "oui";
     private ComboBox cblisteStyleBarreClassique;
     private RadioButton rbTopLeftBarreClassique;
     private RadioButton rbTopCenterBarreClassique;
@@ -134,25 +133,25 @@ public class GestionnaireInterfaceController {
     /*
      Variables barre de navigation classique 
      */
-    public boolean bCouleurOrigineBarrePersonnalisee = true;
-    public int iNombreZonesBarrePersonnalisee = 0;
-    public double offsetXBarrePersonnalisee = 0;
-    public double offsetYBarrePersonnalisee = 0;
-    public double tailleBarrePersonnalisee = 100;
-    public double tailleIconesBarrePersonnalisee = 40;
-    public String strPositionBarrePersonnalisee = "bottom:right";
-    public String strDeplacementsBarrePersonnalisee = "oui";
-    public String strZoomBarrePersonnalisee = "oui";
-    public String strInfoBarrePersonnalisee = "oui";
-    public String strAideBarrePersonnalisee = "oui";
-    public String strRotationBarrePersonnalisee = "oui";
-    public String strPleinEcranBarrePersonnalisee = "oui";
-    public String strSourisBarrePersonnalisee = "oui";
-    public String strVisibiliteBarrePersonnalisee = "non";
-    public String strLienImageBarrePersonnalisee = "";
-    public String strLien1BarrePersonnalisee = "";
-    public String strLien2BarrePersonnalisee = "";
-    public ZoneTelecommande[] zonesBarrePersonnalisee = new ZoneTelecommande[50];
+    private boolean bCouleurOrigineBarrePersonnalisee = true;
+    private int iNombreZonesBarrePersonnalisee = 0;
+    private double offsetXBarrePersonnalisee = 0;
+    private double offsetYBarrePersonnalisee = 0;
+    private double tailleBarrePersonnalisee = 100;
+    private double tailleIconesBarrePersonnalisee = 40;
+    private String strPositionBarrePersonnalisee = "bottom:right";
+    private String strDeplacementsBarrePersonnalisee = "oui";
+    private String strZoomBarrePersonnalisee = "oui";
+    private String strInfoBarrePersonnalisee = "oui";
+    private String strAideBarrePersonnalisee = "oui";
+    private String strRotationBarrePersonnalisee = "oui";
+    private String strPleinEcranBarrePersonnalisee = "oui";
+    private String strSourisBarrePersonnalisee = "oui";
+    private String strVisibiliteBarrePersonnalisee = "non";
+    private String strLienImageBarrePersonnalisee = "";
+    private String strLien1BarrePersonnalisee = "";
+    private String strLien2BarrePersonnalisee = "";
+    private ZoneTelecommande[] zonesBarrePersonnalisee = new ZoneTelecommande[50];
     private RadioButton rbTopLeftBarrePersonnalisee;
     private RadioButton rbTopCenterBarrePersonnalisee;
     private RadioButton rbTopRightBarrePersonnalisee;
@@ -165,7 +164,7 @@ public class GestionnaireInterfaceController {
     private RadioButton rbCouleurPersBarrePersonnalisee;
     private ImageView ivBarrePersonnalisee;
     private Image imgPngBarrePersonnalisee;
-    public WritableImage wiBarrePersonnaliseeCouleur;
+    private WritableImage wiBarrePersonnaliseeCouleur;
     private AnchorPane apAfficheBarrePersonnalisee;
     private CheckBox cbBarrePersonnaliseeVisible;
     private CheckBox cbDeplacementsBarrePersonnalisee;
@@ -186,17 +185,17 @@ public class GestionnaireInterfaceController {
     final ToggleGroup grpCouleurBarrePersonnalisee = new ToggleGroup();
     private Button btnEditerBarre;
 
-    public boolean bAfficheTitre = true;
-    public String strTitrePoliceNom = "Verdana";
-    public String strTitrePoliceStyle = "Regular";
-    public String strTitrePoliceTaille = "12.0";
-    public String strCouleurTitre = "#ffffff";
-    public String strCouleurFondTitre = "#000000";
-    public Double titreOpacite = 0.8;
-    public Double titreTaille = 100.0;
+    private boolean bAfficheTitre = true;
+    private String strTitrePoliceNom = "Verdana";
+    private String strTitrePoliceStyle = "Regular";
+    private String strTitrePoliceTaille = "12.0";
+    private String strCouleurTitre = "#ffffff";
+    private String strCouleurFondTitre = "#000000";
+    private double titreOpacite = 0.8;
+    private double titreTaille = 100.0;
 
-    public String strCouleurDiaporama = "#000000";
-    public Double diaporamaOpacite = 0.8;
+    private String strCouleurDiaporama = "#000000";
+    private double diaporamaOpacite = 0.8;
     private ColorPicker cpCouleurDiaporama;
     private Slider slOpaciteDiaporama;
     private boolean bVisualiseDiaporama = false;
@@ -206,16 +205,16 @@ public class GestionnaireInterfaceController {
     /**
      *
      */
-    public boolean bAfficheBoussole = false;
-    public String strImageBoussole = "rose3.png";
-    public String strPositionBoussole = "top:right";
+    private boolean bAfficheBoussole = false;
+    private String strImageBoussole = "rose3.png";
+    private String strPositionBoussole = "top:right";
+    private double offsetXBoussole = 20;
+    private double offsetYBoussole = 20;
+    private double tailleBoussole = 100;
+    private double opaciteBoussole = 0.8;
+    private boolean bAiguilleMobileBoussole = true;
     private String strRepertImagesFond = "";
     private String strRepertBarrePersonnalisee;
-    public double offsetXBoussole = 20;
-    public double offsetYBoussole = 20;
-    public double tailleBoussole = 100;
-    public double opaciteBoussole = 0.8;
-    public boolean bAiguilleMobileBoussole = true;
     private ImageView imgBoussole;
     private ImageView imgAiguille;
     private BigDecimalField bdfOffsetXBoussole;
@@ -234,34 +233,34 @@ public class GestionnaireInterfaceController {
      */
     private boolean bAfficheFenetreInfo = false;
     private boolean bAfficheFenetreAide = false;
-    public boolean bFenetreInfoPersonnalise = false;
-    public boolean bFenetreAidePersonnalise = false;
-    public double fenetreInfoTaille = 100.d;
-    public double fenetreAideTaille = 100.d;
-    public double fenetreInfoPosX = 0.d;
-    public double fenetreInfoPosY = 0.d;
-    public double fenetreAidePosX = 0.d;
-    public double fenetreAidePosY = 0.d;
-    public double fenetreInfoposX = 0.d;
-    public double fenetreInfoOpacite = 1.d;
-    public double fenetreAideOpacite = 1.d;
-    public double fenetrePoliceTaille = 10.d;
-    public double fenetreURLPosX = 0.d;
-    public double fenetreURLPosY = 0.d;
-    public double fenetreOpaciteFond = 0.d;
-    public String strFenetreInfoImage = "";
-    public String strFenetreAideImage = "";
-    public String strFenetreURL = "";
-    public String strFenetreTexteURL = "";
-    public String strFenetreURLInfobulle = "";
-    public String strFenetreURLCouleur = "#FFFF00";
-    public String strFenetrePolice = "Verdana";
-    public String strFenetreCouleurFond = "#ffffff";
+    private boolean bFenetreInfoPersonnalise = false;
+    private boolean bFenetreAidePersonnalise = false;
+    private double fenetreInfoTaille = 100.d;
+    private double fenetreAideTaille = 100.d;
+    private double fenetreInfoPosX = 0.d;
+    private double fenetreInfoPosY = 0.d;
+    private double fenetreAidePosX = 0.d;
+    private double fenetreAidePosY = 0.d;
+    private double fenetreInfoposX = 0.d;
+    private double fenetreInfoOpacite = 1.d;
+    private double fenetreAideOpacite = 1.d;
+    private double fenetrePoliceTaille = 10.d;
+    private double fenetreURLPosX = 0.d;
+    private double fenetreURLPosY = 0.d;
+    private double fenetreOpaciteFond = 0.d;
+    private String strFenetreInfoImage = "";
+    private String strFenetreAideImage = "";
+    private String strFenetreURL = "";
+    private String strFenetreTexteURL = "";
+    private String strFenetreURLInfobulle = "";
+    private String strFenetreURLCouleur = "#FFFF00";
+    private String strFenetrePolice = "Verdana";
+    private String strFenetreCouleurFond = "#ffffff";
 
     private CheckBox cbFenetreInfoPersonnalise;
     private CheckBox cbFenetreAidePersonnalise;
-    private TextField txtFenetreInfoImage;
-    private TextField txtFenetreAideImage;
+    private TextField tfFenetreInfoImage;
+    private TextField tfFenetreAideImage;
     private Slider slFenetreInfoTaille;
     private Slider slFenetreAideTaille;
     private BigDecimalField bdfFenetreInfoPosX;
@@ -270,10 +269,10 @@ public class GestionnaireInterfaceController {
     private BigDecimalField bdfFenetreAidePosY;
     private Slider slFenetreInfoOpacite;
     private Slider slFenetreAideOpacite;
-    private TextField txtFenetreTexteURL;
-    private TextField txtFenetreURL;
-    private TextField txtFenetreURLInfobulle;
-    private ComboBox cbFenetrePolice;
+    private TextField tfFenetreTexteURL;
+    private TextField tfFenetreURL;
+    private TextField tfFenetreURLInfobulle;
+    private ComboBox tfFenetrePolice;
     private Slider slFenetrePoliceTaille;
     private BigDecimalField bdfFenetreURLPosX;
     private BigDecimalField bdfFenetreURLPosY;
@@ -286,23 +285,26 @@ public class GestionnaireInterfaceController {
     /**
      *
      */
-    private String repertMasques;
-    public boolean bAfficheMasque = false;
-    public String imageMasque = "MA.png";
-    public String positionMasque = "top:right";
-    public double dXMasque = 20;
-    public double dYMasque = 20;
-    public double tailleMasque = 30;
-    public double opaciteMasque = 0.8;
-    public boolean bMasqueNavigation = true;
-    public boolean bMasqueBoussole = true;
-    public boolean bMasqueTitre = true;
-    public boolean bMasquePlan = true;
-    public boolean bMasqueReseaux = true;
-    public boolean bMasqueVignettes = true;
+    private String strRepertMasques;
+    private boolean bAfficheMasque = false;
+    private String strImageMasque = "MA.png";
+    private String strPositionMasque = "top:right";
+    private double dXMasque = 20;
+    private double dYMasque = 20;
+    private double tailleMasque = 30;
+    private double opaciteMasque = 0.8;
+    private boolean bMasqueNavigation = true;
+    private boolean bMasqueBoussole = true;
+    private boolean bMasqueTitre = true;
+    private boolean bMasquePlan = true;
+    private boolean bMasqueReseaux = true;
+    private boolean bMasqueVignettes = true;
+    private boolean bMasqueCombo = true;
+    private boolean bMasqueSuivPrec = true;
+    private boolean bMasqueHotspots = true;
     private ImageView ivMasque;
-    private BigDecimalField masqueDXSpinner;
-    private BigDecimalField masqueDYSpinner;
+    private BigDecimalField bdfOffsetXMasque;
+    private BigDecimalField bdfOffsetYMasque;
     private Slider slTailleMasque;
     private Slider slOpaciteMasque;
     private CheckBox cbAfficheMasque;
@@ -312,6 +314,9 @@ public class GestionnaireInterfaceController {
     private CheckBox cbMasquePlan;
     private CheckBox cbMasqueReseaux;
     private CheckBox cbMasqueVignettes;
+    private CheckBox cbMasqueCombo;
+    private CheckBox cbMasqueSuivPrec;
+    private CheckBox cbMasqueHotspots;
     private RadioButton rbMasqueTopLeft;
     private RadioButton rbMasqueTopRight;
     private RadioButton rbMasqueBottomLeft;
@@ -320,27 +325,27 @@ public class GestionnaireInterfaceController {
     /**
      *
      */
-    private String repertReseauxSociaux;
-    public boolean bAfficheReseauxSociaux = false;
-    public String imageReseauxSociauxTwitter = "twitter.png";
-    public String imageReseauxSociauxGoogle = "google.png";
-    public String imageReseauxSociauxFacebook = "facebook.png";
-    public String imageReseauxSociauxEmail = "email.png";
-    public String positionReseauxSociaux = "top:right";
-    public double dXReseauxSociaux = 20;
-    public double dYReseauxSociaux = 20;
-    public double tailleReseauxSociaux = 30;
-    public double opaciteReseauxSociaux = 0.8;
-    public boolean bReseauxSociauxTwitter = true;
-    public boolean bReseauxSociauxGoogle = true;
-    public boolean bReseauxSociauxFacebook = true;
-    public boolean bReseauxSociauxEmail = true;
-    private ImageView imgTwitter;
-    private ImageView imgGoogle;
-    private ImageView imgFacebook;
-    private ImageView imgEmail;
-    private BigDecimalField reseauxSociauxDXSpinner;
-    private BigDecimalField reseauxSociauxDYSpinner;
+    private String strRepertReseauxSociaux;
+    private boolean bAfficheReseauxSociaux = false;
+    private String strImageReseauxSociauxTwitter = "twitter.png";
+    private String strImageReseauxSociauxGoogle = "google.png";
+    private String strImageReseauxSociauxFacebook = "facebook.png";
+    private String strImageReseauxSociauxEmail = "email.png";
+    private String strPositionReseauxSociaux = "top:right";
+    private double dXReseauxSociaux = 20;
+    private double dYReseauxSociaux = 20;
+    private double tailleReseauxSociaux = 30;
+    private double opaciteReseauxSociaux = 0.8;
+    private boolean bReseauxSociauxTwitter = true;
+    private boolean bReseauxSociauxGoogle = true;
+    private boolean bReseauxSociauxFacebook = true;
+    private boolean bReseauxSociauxEmail = true;
+    private ImageView ivTwitter;
+    private ImageView ivGoogle;
+    private ImageView ivFacebook;
+    private ImageView ivEmail;
+    private BigDecimalField bdfOffsetXReseauxSociaux;
+    private BigDecimalField bdfOffsetYreseauxSociaux;
     private Slider slTailleReseauxSociaux;
     private Slider slOpaciteReseauxSociaux;
     private CheckBox cbAfficheReseauxSociaux;
@@ -357,12 +362,12 @@ public class GestionnaireInterfaceController {
      */
     private AnchorPane apVignettes;
     private AnchorPane apVisuVignettes;
-    public boolean bAfficheVignettes = false;
-    public String couleurFondVignettes = "#ffffff";
-    public String couleurTexteVignettes = "#000000";
-    public String positionVignettes = "bottom";
-    public double tailleImageVignettes = 120;
-    public double opaciteVignettes = 0.8;
+    private boolean bAfficheVignettes = false;
+    private String strCouleurFondVignettes = "#ffffff";
+    private String strCouleurTexteVignettes = "#000000";
+    private String strPositionVignettes = "bottom";
+    private double tailleImageVignettes = 120;
+    private double opaciteVignettes = 0.8;
     private Slider slOpaciteVignettes;
     private Slider slTailleVignettes;
     private CheckBox cbAfficheVignettes;
@@ -376,12 +381,12 @@ public class GestionnaireInterfaceController {
      */
     private AnchorPane apComboMenu;
     private AnchorPane apVisuComboMenu;
-    public boolean bAfficheComboMenu = false;
-    public boolean bAfficheComboMenuImages = true;
-    public String positionXComboMenu = "left";
-    public String positionYComboMenu = "top";
-    public double offsetXComboMenu = 10,
-            offsetYComboMenu = 10;
+    private boolean bAfficheComboMenu = false;
+    private boolean bAfficheComboMenuImages = true;
+    private String strPositionXComboMenu = "left";
+    private String strPositionYComboMenu = "top";
+    private double offsetXComboMenu = 10;
+    private double offsetYComboMenu = 10;
     private CheckBox cbAfficheComboMenu;
     private CheckBox cbAfficheComboMenuImages;
     private BigDecimalField bdfOffsetXComboMenu;
@@ -398,21 +403,21 @@ public class GestionnaireInterfaceController {
      */
     private AnchorPane apPlan;
     private AnchorPane apVisuPlan;
-    public boolean bAffichePlan = false;
-    public String positionPlan = "left";
-    public double largeurPlan = 200;
-    public Color couleurFondPlan = Color.hsb(180, 0.39, 0.5);
-    public String txtCouleurFondPlan = couleurFondPlan.toString().substring(2, 8);
-    public double opacitePlan = 0.8;
-    public Color couleurTextePlan = Color.rgb(255, 255, 255);
-    public String txtCouleurTextePlan = couleurTextePlan.toString().substring(2, 8);
-    public boolean bAfficheRadar = false;
-    public Color couleurLigneRadar = Color.rgb(255, 255, 0);
-    public String txtCouleurLigneRadar = couleurLigneRadar.toString().substring(2, 8);
-    public Color couleurFondRadar = Color.rgb(200, 0, 0);
-    public String txtCouleurFondRadar = couleurFondRadar.toString().substring(2, 8);
-    public double tailleRadar = 40;
-    public double opaciteRadar = 0.8;
+    private boolean bAffichePlan = false;
+    private String strPositionPlan = "left";
+    private double largeurPlan = 200;
+    private Color couleurFondPlan = Color.hsb(180, 0.39, 0.5);
+    private String strCouleurFondPlan = couleurFondPlan.toString().substring(2, 8);
+    private double opacitePlan = 0.8;
+    private Color couleurTextePlan = Color.rgb(255, 255, 255);
+    private String strCouleurTextePlan = couleurTextePlan.toString().substring(2, 8);
+    private boolean bAfficheRadar = false;
+    private Color couleurLigneRadar = Color.rgb(255, 255, 0);
+    private String strCouleurLigneRadar = couleurLigneRadar.toString().substring(2, 8);
+    private Color couleurFondRadar = Color.rgb(200, 0, 0);
+    private String strCouleurFondRadar = couleurFondRadar.toString().substring(2, 8);
+    private double tailleRadar = 40;
+    private double opaciteRadar = 0.8;
 
     /*
      Eléments de l'onglet plan
@@ -434,22 +439,22 @@ public class GestionnaireInterfaceController {
      */
 
     private AnchorPane apImageFond;
-    private Double taillePanelImageFond;
+    private double taillePanelImageFond;
 
     /*
      Variable du MenuContextuel
      */
     private AnchorPane apMenuContextuel;
     private AnchorPane apVisuMenuContextuel;
-    public boolean bAfficheMenuContextuel = false;
-    public boolean bAffichePrecSuivMC = true;
-    public boolean bAffichePlanetNormalMC = true;
-    public boolean bAffichePersMC1 = false;
-    public String strPersLib1 = "";
-    public String strPersURL1 = "";
-    public boolean bAffichePersMC2 = false;
-    public String strPersLib2 = "";
-    public String strPersURL2 = "";
+    private boolean bAfficheMenuContextuel = false;
+    private boolean bAffichePrecSuivMC = true;
+    private boolean bAffichePlanetNormalMC = true;
+    private boolean bAffichePersMC1 = false;
+    private String strPersLib1 = "";
+    private String strPersURL1 = "";
+    private boolean bAffichePersMC2 = false;
+    private String strPersLib2 = "";
+    private String strPersURL2 = "";
 
     /*
      Eléments de l'onglet MenuContextuel
@@ -464,7 +469,7 @@ public class GestionnaireInterfaceController {
     private TextField tfPersLib2;
     private TextField tfPersURL2;
 
-    public Pane tabInterface;
+    public Pane paneTabInterface;
     private HBox hbInterface;
     private AnchorPane apVisualisation;
     private VBox vbOutils;
@@ -473,26 +478,26 @@ public class GestionnaireInterfaceController {
     private RadioButton rbPerso;
     private ComboBox cbImage;
     private ImageView ivVisualisation;
-    final ToggleGroup grpImage = new ToggleGroup();
-    final ToggleGroup grpPositionBarreClassique = new ToggleGroup();
-    final ToggleGroup grpPosBouss = new ToggleGroup();
-    final ToggleGroup grpPosMasque = new ToggleGroup();
-    final ToggleGroup grpPosReseauxSociaux = new ToggleGroup();
-    final ToggleGroup grpPosVignettes = new ToggleGroup();
-    final ToggleGroup grpPosComboMenu = new ToggleGroup();
-    final ToggleGroup grpPosPlan = new ToggleGroup();
-    private Image imageClaire;
-    private Image imageSombre;
+    final ToggleGroup tgImage = new ToggleGroup();
+    final ToggleGroup tgPositionBarreClassique = new ToggleGroup();
+    final ToggleGroup tgPosBouss = new ToggleGroup();
+    final ToggleGroup tgPosMasque = new ToggleGroup();
+    final ToggleGroup tgPosReseauxSociaux = new ToggleGroup();
+    final ToggleGroup tgPosVignettes = new ToggleGroup();
+    final ToggleGroup tgPosComboMenu = new ToggleGroup();
+    final ToggleGroup tgPosPlan = new ToggleGroup();
+    private Image imgClaire;
+    private Image imgSombre;
     private HBox hbbarreBoutons;
     private HBox hbOutils;
-    private Label txtTitre;
+    private Label lblTxtTitre;
     private ImageView ivInfo;
     private ImageView ivAide;
     private ImageView ivAutoRotation;
     private ImageView ivModeSouris;
     private ImageView ivModeSouris2;
-    private ImageView ivPleinFenetre;
-    private ImageView ivPleinFenetre2;
+    private ImageView ivPleinEcran;
+    private ImageView ivPleinEcran2;
     private HBox hbZoom;
     private ImageView ivZoomPlus;
     private ImageView ivZoomMoins;
@@ -504,16 +509,16 @@ public class GestionnaireInterfaceController {
     private ImageView ivHotSpot;
     private ImageView ivHotSpotImage;
 
-    private String repertBoutonsPrincipal;
-    private String repertHotSpots;
-    private String repertHotSpotsPhoto;
-    private String repertBoussoles;
+    private String strRepertBoutonsPrincipal;
+    private String strRepertHotSpots;
+    private String strRepertHotSpotsPhoto;
+    private String strRepertBoussoles;
     private CheckBox cbSuivantPrecedent;
     private ImageView imgSuivant;
     private ImageView imgPrecedent;
-    private VBox fondSuivant;
-    private VBox fondPrecedent;
-    public boolean bSuivantPrecedent;
+    private VBox vbFondSuivant;
+    private VBox vbFondPrecedent;
+    private boolean bSuivantPrecedent;
     private CheckBox cbAfficheTitre;
     private ColorPicker cpCouleurFondTitre;
     private ColorPicker cpCouleurTitre;
@@ -529,101 +534,101 @@ public class GestionnaireInterfaceController {
     private Color couleurHotspotsPhoto = Color.hsb(180, 0.39, 0.5);
     private Color couleurMasque = Color.hsb(180, 0.39, 0.5);
     private Color couleurTheme = Color.hsb(180, 0.39, 0.5);
-    public Image[] imageBoutons = new Image[25];
-    public String[] nomImagesBoutons = new String[25];
-    public PixelReader[] prLisBoutons = new PixelReader[25];
-    public WritableImage[] wiNouveauxBoutons = new WritableImage[25];
-    public PixelWriter[] pwNouveauxBoutons = new PixelWriter[25];
-    public int iNombreImagesBouton = 0;
-    public Image imgMasque;
-    public PixelReader prLisMasque;
-    public WritableImage wiNouveauxMasque;
-    public PixelWriter pwNouveauxMasque;
+    private Image[] imgBoutons = new Image[25];
+    private String[] strNomImagesBoutons = new String[25];
+    private PixelReader[] prLisBoutons = new PixelReader[25];
+    private WritableImage[] wiNouveauxBoutons = new WritableImage[25];
+    private PixelWriter[] pwNouveauxBoutons = new PixelWriter[25];
+    private int iNombreImagesBouton = 0;
+    private Image imgMasque;
+    private PixelReader prLisMasque;
+    private WritableImage wiNouveauxMasque;
+    private PixelWriter pwNouveauxMasque;
 
-    private void chargeBarre(String styleBarre, String strHotSpot, String strMA) {
-        File repertBarre = new File(repertBoutonsPrincipal + File.separator + styleBarre);
-        File[] Repertoires = repertBarre.listFiles(IMAGE_FILTER);
+    private void chargeBarre(String strStyleBarre, String strHotSpot, String strMA) {
+        File fileRepertBarre = new File(strRepertBoutonsPrincipal + File.separator + strStyleBarre);
+        File[] fileRepertoires = fileRepertBarre.listFiles(IMAGE_FILTER);
         int i = 0;
-        for (File repert : Repertoires) {
-            if (!repert.isDirectory()) {
-                String nomFich = repert.getName();
-                String nomFichComplet = repert.getAbsolutePath();
-                imageBoutons[i] = new Image("file:" + nomFichComplet);
-                prLisBoutons[i] = imageBoutons[i].getPixelReader();
-                int width = (int) imageBoutons[i].getWidth();
-                int height = (int) imageBoutons[i].getHeight();
-                wiNouveauxBoutons[i] = new WritableImage(width, height);
-                pwNouveauxBoutons[i] = wiNouveauxBoutons[i].getPixelWriter();
-                switch (nomFich) {
+        for (File fileRepert : fileRepertoires) {
+            if (!fileRepert.isDirectory()) {
+                String strNomFich = fileRepert.getName();
+                String strNomFichComplet = fileRepert.getAbsolutePath();
+                getImgBoutons()[i] = new Image("file:" + strNomFichComplet);
+                getPrLisBoutons()[i] = getImgBoutons()[i].getPixelReader();
+                int iLargeur = (int) getImgBoutons()[i].getWidth();
+                int iHauteur = (int) getImgBoutons()[i].getHeight();
+                getWiNouveauxBoutons()[i] = new WritableImage(iLargeur, iHauteur);
+                getPwNouveauxBoutons()[i] = getWiNouveauxBoutons()[i].getPixelWriter();
+                switch (strNomFich) {
                     case "aide.png":
-                        ivAide = new ImageView(wiNouveauxBoutons[i]);
+                        ivAide = new ImageView(getWiNouveauxBoutons()[i]);
                         break;
                     case "info.png":
-                        ivInfo = new ImageView(wiNouveauxBoutons[i]);
+                        ivInfo = new ImageView(getWiNouveauxBoutons()[i]);
                         break;
                     case "haut.png":
-                        ivHaut = new ImageView(wiNouveauxBoutons[i]);
+                        ivHaut = new ImageView(getWiNouveauxBoutons()[i]);
                         break;
                     case "bas.png":
-                        ivBas = new ImageView(wiNouveauxBoutons[i]);
+                        ivBas = new ImageView(getWiNouveauxBoutons()[i]);
                         break;
                     case "droite.png":
-                        ivDroite = new ImageView(wiNouveauxBoutons[i]);
+                        ivDroite = new ImageView(getWiNouveauxBoutons()[i]);
                         break;
                     case "gauche.png":
-                        ivGauche = new ImageView(wiNouveauxBoutons[i]);
+                        ivGauche = new ImageView(getWiNouveauxBoutons()[i]);
                         break;
                     case "fs.png":
-                        ivPleinFenetre = new ImageView(wiNouveauxBoutons[i]);
+                        ivPleinEcran = new ImageView(getWiNouveauxBoutons()[i]);
                         break;
                     case "fs2.png":
-                        ivPleinFenetre2 = new ImageView(wiNouveauxBoutons[i]);
+                        ivPleinEcran2 = new ImageView(getWiNouveauxBoutons()[i]);
                         break;
                     case "rotation.png":
-                        ivAutoRotation = new ImageView(wiNouveauxBoutons[i]);
+                        ivAutoRotation = new ImageView(getWiNouveauxBoutons()[i]);
                         break;
                     case "souris.png":
-                        ivModeSouris = new ImageView(wiNouveauxBoutons[i]);
+                        ivModeSouris = new ImageView(getWiNouveauxBoutons()[i]);
                         break;
                     case "souris2.png":
-                        ivModeSouris2 = new ImageView(wiNouveauxBoutons[i]);
+                        ivModeSouris2 = new ImageView(getWiNouveauxBoutons()[i]);
                         break;
                     case "zoomin.png":
-                        ivZoomPlus = new ImageView(wiNouveauxBoutons[i]);
+                        ivZoomPlus = new ImageView(getWiNouveauxBoutons()[i]);
                         break;
                     case "zoomout.png":
-                        ivZoomMoins = new ImageView(wiNouveauxBoutons[i]);
+                        ivZoomMoins = new ImageView(getWiNouveauxBoutons()[i]);
                         break;
                 }
-                nomImagesBoutons[i] = nomFich;
+                getStrNomImagesBoutons()[i] = strNomFich;
                 i++;
             }
         }
-        iNombreImagesBouton = i;
-        imageBoutons[iNombreImagesBouton] = new Image("file:" + repertHotSpots + File.separator + strHotSpot);
-        prLisBoutons[iNombreImagesBouton] = imageBoutons[iNombreImagesBouton].getPixelReader();
-        int width = (int) imageBoutons[iNombreImagesBouton].getWidth();
-        int height = (int) imageBoutons[iNombreImagesBouton].getHeight();
-        wiNouveauxBoutons[iNombreImagesBouton] = new WritableImage(width, height);
-        pwNouveauxBoutons[iNombreImagesBouton] = wiNouveauxBoutons[iNombreImagesBouton].getPixelWriter();
-        ivHotSpot = new ImageView(wiNouveauxBoutons[iNombreImagesBouton]);
-        iNombreImagesBouton = i + 1;
-        imageBoutons[iNombreImagesBouton] = new Image("file:" + repertHotSpotsPhoto + File.separator + strStyleHotSpotImages);
-        prLisBoutons[iNombreImagesBouton] = imageBoutons[iNombreImagesBouton].getPixelReader();
-        width = (int) imageBoutons[iNombreImagesBouton].getWidth();
-        height = (int) imageBoutons[iNombreImagesBouton].getHeight();
-        wiNouveauxBoutons[iNombreImagesBouton] = new WritableImage(width, height);
-        pwNouveauxBoutons[iNombreImagesBouton] = wiNouveauxBoutons[iNombreImagesBouton].getPixelWriter();
-        ivHotSpotImage = new ImageView(wiNouveauxBoutons[iNombreImagesBouton]);
+        setiNombreImagesBouton(i);
+        getImgBoutons()[getiNombreImagesBouton()] = new Image("file:" + strRepertHotSpots + File.separator + strHotSpot);
+        getPrLisBoutons()[getiNombreImagesBouton()] = getImgBoutons()[getiNombreImagesBouton()].getPixelReader();
+        int iLargeur = (int) getImgBoutons()[getiNombreImagesBouton()].getWidth();
+        int iHauteur = (int) getImgBoutons()[getiNombreImagesBouton()].getHeight();
+        getWiNouveauxBoutons()[getiNombreImagesBouton()] = new WritableImage(iLargeur, iHauteur);
+        getPwNouveauxBoutons()[getiNombreImagesBouton()] = getWiNouveauxBoutons()[getiNombreImagesBouton()].getPixelWriter();
+        ivHotSpot = new ImageView(getWiNouveauxBoutons()[getiNombreImagesBouton()]);
+        setiNombreImagesBouton(i + 1);
+        getImgBoutons()[getiNombreImagesBouton()] = new Image("file:" + strRepertHotSpotsPhoto + File.separator + getStrStyleHotSpotImages());
+        getPrLisBoutons()[getiNombreImagesBouton()] = getImgBoutons()[getiNombreImagesBouton()].getPixelReader();
+        iLargeur = (int) getImgBoutons()[getiNombreImagesBouton()].getWidth();
+        iHauteur = (int) getImgBoutons()[getiNombreImagesBouton()].getHeight();
+        getWiNouveauxBoutons()[getiNombreImagesBouton()] = new WritableImage(iLargeur, iHauteur);
+        getPwNouveauxBoutons()[getiNombreImagesBouton()] = getWiNouveauxBoutons()[getiNombreImagesBouton()].getPixelWriter();
+        ivHotSpotImage = new ImageView(getWiNouveauxBoutons()[getiNombreImagesBouton()]);
 
-        imgMasque = new Image("file:" + repertMasques + File.separator + strMA);
+        setImgMasque(new Image("file:" + strRepertMasques + File.separator + strMA));
 
-        prLisMasque = imgMasque.getPixelReader();
-        width = (int) imgMasque.getWidth();
-        height = (int) imgMasque.getHeight();
-        wiNouveauxMasque = new WritableImage(width, height);
-        pwNouveauxMasque = wiNouveauxMasque.getPixelWriter();
-        ivMasque = new ImageView(wiNouveauxMasque);
+        setPrLisMasque(getImgMasque().getPixelReader());
+        iLargeur = (int) getImgMasque().getWidth();
+        iHauteur = (int) getImgMasque().getHeight();
+        setWiNouveauxMasque(new WritableImage(iLargeur, iHauteur));
+        setPwNouveauxMasque(getWiNouveauxMasque().getPixelWriter());
+        ivMasque = new ImageView(getWiNouveauxMasque());
 
         changeCouleurBarreClassique(couleurBarreClassique.getHue(), couleurBarreClassique.getSaturation(), couleurBarreClassique.getBrightness());
         changeCouleurHS(couleurHotspots.getHue(), couleurHotspots.getSaturation(), couleurHotspots.getBrightness());
@@ -631,16 +636,12 @@ public class GestionnaireInterfaceController {
         changeCouleurMasque(couleurMasque.getHue(), couleurMasque.getSaturation(), couleurMasque.getBrightness());
     }
 
-    private void sauveBarre() {
-
-    }
-
     private void changeCouleurBarrePersonnalisee(double couleurFinale, double sat, double bright) {
         PixelReader prBarrePersonnalisee;
         prBarrePersonnalisee = imgPngBarrePersonnalisee.getPixelReader();
-        wiBarrePersonnaliseeCouleur = new WritableImage((int) imgPngBarrePersonnalisee.getWidth(), (int) imgPngBarrePersonnalisee.getHeight());
-        PixelWriter pwBarrePersonnaliseeCouleur = wiBarrePersonnaliseeCouleur.getPixelWriter();
-        if (bCouleurOrigineBarrePersonnalisee) {
+        setWiBarrePersonnaliseeCouleur(new WritableImage((int) imgPngBarrePersonnalisee.getWidth(), (int) imgPngBarrePersonnalisee.getHeight()));
+        PixelWriter pwBarrePersonnaliseeCouleur = getWiBarrePersonnaliseeCouleur().getPixelWriter();
+        if (isbCouleurOrigineBarrePersonnalisee()) {
             for (int y = 0; y < imgPngBarrePersonnalisee.getHeight(); y++) {
                 for (int x = 0; x < imgPngBarrePersonnalisee.getWidth(); x++) {
                     Color color = prBarrePersonnalisee.getColor(x, y);
@@ -689,10 +690,10 @@ public class GestionnaireInterfaceController {
     }
 
     private void changeCouleurBarreClassique(double couleurFinale, double sat, double bright) {
-        for (int i = 0; i < iNombreImagesBouton - 1; i++) {
-            for (int y = 0; y < imageBoutons[i].getHeight(); y++) {
-                for (int x = 0; x < imageBoutons[i].getWidth(); x++) {
-                    Color color = prLisBoutons[i].getColor(x, y);
+        for (int i = 0; i < getiNombreImagesBouton() - 1; i++) {
+            for (int y = 0; y < getImgBoutons()[i].getHeight(); y++) {
+                for (int x = 0; x < getImgBoutons()[i].getWidth(); x++) {
+                    Color color = getPrLisBoutons()[i].getColor(x, y);
                     double brightness = color.getBrightness();
                     //double hue = color.getHue() / 360.0;  //getHue() return 0.0-360.0
                     double saturation = color.getSaturation();
@@ -707,7 +708,7 @@ public class GestionnaireInterfaceController {
                             couleur = Color.hsb(couleurFinale, saturation * 0.4 + sat * 0.6, brightness * 0.4 + bright * 0.6, opacity);
                         }
                     }
-                    pwNouveauxBoutons[i].setColor(x, y, couleur);
+                    getPwNouveauxBoutons()[i].setColor(x, y, couleur);
                 }
             }
         }
@@ -715,32 +716,50 @@ public class GestionnaireInterfaceController {
     }
 
     private void changeCouleurMasque(double couleurFinale, double sat, double bright) {
-        for (int y = 0; y < imgMasque.getHeight(); y++) {
-            for (int x = 0; x < imgMasque.getWidth(); x++) {
-                Color color = prLisMasque.getColor(x, y);
+        for (int y = 0; y < getImgMasque().getHeight(); y++) {
+            for (int x = 0; x < getImgMasque().getWidth(); x++) {
+                Color color = getPrLisMasque().getColor(x, y);
                 double brightness = color.getBrightness();
                 //double hue = color.getHue() / 360.0;  //getHue() return 0.0-360.0
                 double saturation = color.getSaturation();
                 double opacity = color.getOpacity();
                 Color couleur;
                 if ((sat < 0.02) && (saturation > 0.05)) {
-                    couleur = Color.hsb(couleurFinale, sat, brightness * 0.5 + bright * 0.5, opacity);
-                } else {
-                    if (saturation > 0.05) {
-                        couleur = Color.hsb(couleurFinale, saturation * 0.5 + sat * 0.5, brightness * 0.5 + bright * 0.5, opacity);
+                    double bright1;
+                    if (brightness > 0.1 && brightness < 0.9) {
+                        bright1 = brightness * 0.5 + bright * 0.5;
                     } else {
-                        couleur = Color.hsb(couleurFinale, saturation, brightness, opacity);
+                        bright1 = brightness;
                     }
+                    couleur = Color.hsb(couleurFinale, sat, bright1, opacity);
+                } else {
+                    double sat1;
+                    double bright1;
+                    if (saturation < 0.3 || (brightness < 0.2 || brightness > 0.8)) {
+                        sat1 = saturation;
+                        bright1 = brightness;
+                    } else {
+                        sat1 = saturation * (1 - saturation + sat);
+                        double exp = Math.exp(-4 * Math.pow(2 * brightness - 1, 2));
+                        bright1 = bright * exp + brightness * (1 - exp);
+                    }
+//                            if (brightness > 0.1 && brightness < 0.9) {
+//                        bright1 = brightness * 0.5 + bright * 0.5;
+//                    } else {
+//                        bright1 = brightness;
+//                    }
+                    couleur = Color.hsb(couleurFinale, sat1, bright1, opacity);
+
                 }
-                pwNouveauxMasque.setColor(x, y, couleur);
+                getPwNouveauxMasque().setColor(x, y, couleur);
             }
         }
     }
 
     private void changeCouleurHS(double couleurFinale, double sat, double bright) {
-        for (int y = 0; y < imageBoutons[iNombreImagesBouton - 1].getHeight(); y++) {
-            for (int x = 0; x < imageBoutons[iNombreImagesBouton - 1].getWidth(); x++) {
-                Color color = prLisBoutons[iNombreImagesBouton - 1].getColor(x, y);
+        for (int y = 0; y < getImgBoutons()[getiNombreImagesBouton() - 1].getHeight(); y++) {
+            for (int x = 0; x < getImgBoutons()[getiNombreImagesBouton() - 1].getWidth(); x++) {
+                Color color = getPrLisBoutons()[getiNombreImagesBouton() - 1].getColor(x, y);
                 double brightness = color.getBrightness();
                 //double hue = color.getHue() / 360.0;  //getHue() return 0.0-360.0
                 double saturation = color.getSaturation();
@@ -755,15 +774,15 @@ public class GestionnaireInterfaceController {
                         couleur = Color.hsb(couleurFinale, saturation, brightness, opacity);
                     }
                 }
-                pwNouveauxBoutons[iNombreImagesBouton - 1].setColor(x, y, couleur);
+                getPwNouveauxBoutons()[getiNombreImagesBouton() - 1].setColor(x, y, couleur);
             }
         }
     }
 
     private void changeCouleurHSPhoto(double couleurFinale, double sat, double bright) {
-        for (int y = 0; y < imageBoutons[iNombreImagesBouton].getHeight(); y++) {
-            for (int x = 0; x < imageBoutons[iNombreImagesBouton].getWidth(); x++) {
-                Color color = prLisBoutons[iNombreImagesBouton].getColor(x, y);
+        for (int y = 0; y < getImgBoutons()[getiNombreImagesBouton()].getHeight(); y++) {
+            for (int x = 0; x < getImgBoutons()[getiNombreImagesBouton()].getWidth(); x++) {
+                Color color = getPrLisBoutons()[getiNombreImagesBouton()].getColor(x, y);
                 double brightness = color.getBrightness();
                 //double hue = color.getHue() / 360.0;  //getHue() return 0.0-360.0
                 double saturation = color.getSaturation();
@@ -778,18 +797,18 @@ public class GestionnaireInterfaceController {
                         couleur = Color.hsb(couleurFinale, saturation, brightness, opacity);
                     }
                 }
-                pwNouveauxBoutons[iNombreImagesBouton].setColor(x, y, couleur);
+                getPwNouveauxBoutons()[getiNombreImagesBouton()].setColor(x, y, couleur);
             }
         }
     }
 
     private void changeCouleurTitre(String coul) {
-        strCouleurFondTitre = "#" + coul;
-        txtTitre.setStyle("-fx-background-color : " + strCouleurFondTitre);
+        setStrCouleurFondTitre("#" + coul);
+        lblTxtTitre.setStyle("-fx-background-color : " + getStrCouleurFondTitre());
     }
 
     private void changeCouleurVignettes(String coul) {
-        couleurFondVignettes = "#" + coul;
+        setStrCouleurFondVignettes("#" + coul);
         afficheVignettes();
     }
 
@@ -797,53 +816,53 @@ public class GestionnaireInterfaceController {
      *
      */
     private void afficheBoussole() {
-        imgAiguille.setVisible(bAfficheBoussole);
-        imgBoussole.setVisible(bAfficheBoussole);
+        imgAiguille.setVisible(isbAfficheBoussole());
+        imgBoussole.setVisible(isbAfficheBoussole());
 
-        imgAiguille.setFitWidth(tailleBoussole / 5);
-        imgAiguille.setFitHeight(tailleBoussole);
-        imgAiguille.setOpacity(opaciteBoussole);
+        imgAiguille.setFitWidth(getTailleBoussole() / 5);
+        imgAiguille.setFitHeight(getTailleBoussole());
+        imgAiguille.setOpacity(getOpaciteBoussole());
         imgAiguille.setSmooth(true);
 
-        imgBoussole.setImage(new Image("file:" + repertBoussoles + File.separator + strImageBoussole));
-        imgBoussole.setFitWidth(tailleBoussole);
-        imgBoussole.setFitHeight(tailleBoussole);
-        imgBoussole.setOpacity(opaciteBoussole);
+        imgBoussole.setImage(new Image("file:" + strRepertBoussoles + File.separator + getStrImageBoussole()));
+        imgBoussole.setFitWidth(getTailleBoussole());
+        imgBoussole.setFitHeight(getTailleBoussole());
+        imgBoussole.setOpacity(getOpaciteBoussole());
         imgBoussole.setSmooth(true);
-        String positXBoussole = strPositionBoussole.split(":")[1];
-        String positYBoussole = strPositionBoussole.split(":")[0];
+        String strPositXBoussole = getStrPositionBoussole().split(":")[1];
+        String strPositYBoussole = getStrPositionBoussole().split(":")[0];
         double posX = 0;
         double posY = 0;
-        switch (positXBoussole) {
+        switch (strPositXBoussole) {
             case "left":
-                posX = ivVisualisation.getLayoutX() + offsetXBoussole;
+                posX = ivVisualisation.getLayoutX() + getOffsetXBoussole();
                 break;
             case "right":
-                posX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - offsetXBoussole - imgBoussole.getFitWidth();
+                posX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - getOffsetXBoussole() - imgBoussole.getFitWidth();
                 break;
         }
-        switch (positYBoussole) {
+        switch (strPositYBoussole) {
             case "bottom":
-                posY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - imgBoussole.getFitHeight() - offsetYBoussole;
+                posY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - imgBoussole.getFitHeight() - getOffsetYBoussole();
                 break;
             case "top":
-                posY = ivVisualisation.getLayoutY() + offsetYBoussole;
+                posY = ivVisualisation.getLayoutY() + getOffsetYBoussole();
                 break;
         }
-        switch (positionVignettes) {
+        switch (getStrPositionVignettes()) {
             case "bottom":
-                if (positYBoussole.equals("bottom")) {
-                    posY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - imgBoussole.getFitHeight() - offsetYBoussole - apVisuVignettes.getPrefHeight();
+                if (strPositYBoussole.equals("bottom")) {
+                    posY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - imgBoussole.getFitHeight() - getOffsetYBoussole() - apVisuVignettes.getPrefHeight();
                 }
                 break;
             case "left":
-                if (positXBoussole.equals("left")) {
-                    posX = ivVisualisation.getLayoutX() + offsetXBoussole + apVisuVignettes.getPrefWidth();
+                if (strPositXBoussole.equals("left")) {
+                    posX = ivVisualisation.getLayoutX() + getOffsetXBoussole() + apVisuVignettes.getPrefWidth();
                 }
                 break;
             case "right":
-                if (positXBoussole.equals("right")) {
-                    posX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - offsetXBoussole - imgBoussole.getFitWidth() - apVisuVignettes.getPrefWidth();
+                if (strPositXBoussole.equals("right")) {
+                    posX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - getOffsetXBoussole() - imgBoussole.getFitWidth() - apVisuVignettes.getPrefWidth();
                 }
                 break;
         }
@@ -851,17 +870,17 @@ public class GestionnaireInterfaceController {
         imgBoussole.setLayoutY(posY);
         imgAiguille.setLayoutX(posX + (imgBoussole.getFitWidth() - imgAiguille.getFitWidth()) / 2);
         imgAiguille.setLayoutY(posY);
-        imgAiguille.setOpacity(opaciteBoussole);
-        imgAiguille.setVisible(bAfficheBoussole);
+        imgAiguille.setOpacity(getOpaciteBoussole());
+        imgAiguille.setVisible(isbAfficheBoussole());
 
-        imgBoussole.setOpacity(opaciteBoussole);
-        imgBoussole.setVisible(bAfficheBoussole);
+        imgBoussole.setOpacity(getOpaciteBoussole());
+        imgBoussole.setVisible(isbAfficheBoussole());
     }
 
     private void afficheImage(int index) {
-        Image imgAffiche = panoramiquesProjet[index].getImagePanoramique();
-        Rectangle2D viewportRect = new Rectangle2D(200, 0, 800, 600);
-        ivVisualisation.setViewport(viewportRect);
+        Image imgAffiche = panoramiquesProjet[index].getImgPanoramique();
+        Rectangle2D r2dVue = new Rectangle2D(200, 0, 800, 600);
+        ivVisualisation.setViewport(r2dVue);
         ivVisualisation.setImage(imgAffiche);
     }
 
@@ -871,29 +890,29 @@ public class GestionnaireInterfaceController {
     private void afficheMasque() {
         apVisualisation.getChildren().remove(ivMasque);
         apVisualisation.getChildren().add(ivMasque);
-        ivMasque.setVisible(bAfficheMasque);
-        ivMasque.setFitWidth(tailleMasque);
-        ivMasque.setFitHeight(tailleMasque);
-        ivMasque.setOpacity(opaciteMasque);
+        ivMasque.setVisible(isbAfficheMasque());
+        ivMasque.setFitWidth(getTailleMasque());
+        ivMasque.setFitHeight(getTailleMasque());
+        ivMasque.setOpacity(getOpaciteMasque());
 //        ivMasque.setSmooth(true);
-        String positXMasque = positionMasque.split(":")[1];
-        String positYMasque = positionMasque.split(":")[0];
+        String strPositXMasque = getStrPositionMasque().split(":")[1];
+        String strPositYMasque = getStrPositionMasque().split(":")[0];
         double posX = 0;
         double posY = 0;
-        switch (positXMasque) {
+        switch (strPositXMasque) {
             case "left":
-                posX = ivVisualisation.getLayoutX() + dXMasque;
+                posX = ivVisualisation.getLayoutX() + getdXMasque();
                 break;
             case "right":
-                posX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - dXMasque - ivMasque.getFitWidth();
+                posX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - getdXMasque() - ivMasque.getFitWidth();
                 break;
         }
-        switch (positYMasque) {
+        switch (strPositYMasque) {
             case "bottom":
-                posY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - ivMasque.getFitHeight() - dYMasque;
+                posY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - ivMasque.getFitHeight() - getdYMasque();
                 break;
             case "top":
-                posY = ivVisualisation.getLayoutY() + dYMasque;
+                posY = ivVisualisation.getLayoutY() + getdYMasque();
                 break;
         }
         ivMasque.setLayoutX(posX);
@@ -905,105 +924,105 @@ public class GestionnaireInterfaceController {
      *
      */
     private void afficheReseauxSociaux() {
-        imgTwitter.setVisible(bAfficheReseauxSociaux);
-        imgGoogle.setVisible(bAfficheReseauxSociaux);
-        imgFacebook.setVisible(bAfficheReseauxSociaux);
-        imgEmail.setVisible(bAfficheReseauxSociaux);
-        imgTwitter.setFitWidth(tailleReseauxSociaux);
-        imgTwitter.setFitHeight(tailleReseauxSociaux);
-        imgTwitter.setOpacity(opaciteReseauxSociaux);
-        imgTwitter.setSmooth(true);
-        imgTwitter.setVisible(false);
-        imgGoogle.setFitWidth(tailleReseauxSociaux);
-        imgGoogle.setFitHeight(tailleReseauxSociaux);
-        imgGoogle.setOpacity(opaciteReseauxSociaux);
-        imgGoogle.setSmooth(true);
-        imgGoogle.setVisible(false);
-        imgFacebook.setFitWidth(tailleReseauxSociaux);
-        imgFacebook.setFitHeight(tailleReseauxSociaux);
-        imgFacebook.setOpacity(opaciteReseauxSociaux);
-        imgFacebook.setSmooth(true);
-        imgFacebook.setVisible(false);
-        imgEmail.setFitWidth(tailleReseauxSociaux);
-        imgEmail.setFitHeight(tailleReseauxSociaux);
-        imgEmail.setOpacity(opaciteReseauxSociaux);
-        imgEmail.setSmooth(true);
-        imgEmail.setVisible(false);
-        String positXReseauxSociaux = positionReseauxSociaux.split(":")[1];
-        String positYReseauxSociaux = positionReseauxSociaux.split(":")[0];
+        ivTwitter.setVisible(isbAfficheReseauxSociaux());
+        ivGoogle.setVisible(isbAfficheReseauxSociaux());
+        ivFacebook.setVisible(isbAfficheReseauxSociaux());
+        ivEmail.setVisible(isbAfficheReseauxSociaux());
+        ivTwitter.setFitWidth(getTailleReseauxSociaux());
+        ivTwitter.setFitHeight(getTailleReseauxSociaux());
+        ivTwitter.setOpacity(getOpaciteReseauxSociaux());
+        ivTwitter.setSmooth(true);
+        ivTwitter.setVisible(false);
+        ivGoogle.setFitWidth(getTailleReseauxSociaux());
+        ivGoogle.setFitHeight(getTailleReseauxSociaux());
+        ivGoogle.setOpacity(getOpaciteReseauxSociaux());
+        ivGoogle.setSmooth(true);
+        ivGoogle.setVisible(false);
+        ivFacebook.setFitWidth(getTailleReseauxSociaux());
+        ivFacebook.setFitHeight(getTailleReseauxSociaux());
+        ivFacebook.setOpacity(getOpaciteReseauxSociaux());
+        ivFacebook.setSmooth(true);
+        ivFacebook.setVisible(false);
+        ivEmail.setFitWidth(getTailleReseauxSociaux());
+        ivEmail.setFitHeight(getTailleReseauxSociaux());
+        ivEmail.setOpacity(getOpaciteReseauxSociaux());
+        ivEmail.setSmooth(true);
+        ivEmail.setVisible(false);
+        String strPositXReseauxSociaux = getStrPositionReseauxSociaux().split(":")[1];
+        String strPositYReseauxSociaux = getStrPositionReseauxSociaux().split(":")[0];
         double posX;
         double posY = 0;
         double dX;
-        switch (positXReseauxSociaux) {
+        switch (strPositXReseauxSociaux) {
             case "left":
-                posX = ivVisualisation.getLayoutX() + dXReseauxSociaux;
-                dX = imgEmail.getFitWidth() + 5;
-                if (bReseauxSociauxTwitter && bAfficheReseauxSociaux) {
-                    imgTwitter.setLayoutX(posX);
-                    imgTwitter.setVisible(true);
+                posX = ivVisualisation.getLayoutX() + getdXReseauxSociaux();
+                dX = ivEmail.getFitWidth() + 5;
+                if (isbReseauxSociauxTwitter() && isbAfficheReseauxSociaux()) {
+                    ivTwitter.setLayoutX(posX);
+                    ivTwitter.setVisible(true);
                     posX += dX;
 
                 }
-                if (bReseauxSociauxGoogle && bAfficheReseauxSociaux) {
-                    imgGoogle.setLayoutX(posX);
-                    imgGoogle.setVisible(true);
+                if (isbReseauxSociauxGoogle() && isbAfficheReseauxSociaux()) {
+                    ivGoogle.setLayoutX(posX);
+                    ivGoogle.setVisible(true);
                     posX += dX;
                 }
-                if (bReseauxSociauxFacebook && bAfficheReseauxSociaux) {
-                    imgFacebook.setLayoutX(posX);
-                    imgFacebook.setVisible(true);
+                if (isbReseauxSociauxFacebook() && isbAfficheReseauxSociaux()) {
+                    ivFacebook.setLayoutX(posX);
+                    ivFacebook.setVisible(true);
                     posX += dX;
                 }
-                if (bReseauxSociauxEmail && bAfficheReseauxSociaux) {
-                    imgEmail.setLayoutX(posX);
-                    imgEmail.setVisible(true);
+                if (isbReseauxSociauxEmail() && isbAfficheReseauxSociaux()) {
+                    ivEmail.setLayoutX(posX);
+                    ivEmail.setVisible(true);
                     posX += dX;
                 }
 
                 break;
             case "right":
-                posX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - dXReseauxSociaux - imgEmail.getFitWidth();
-                dX = -(imgEmail.getFitWidth() + 5);
-                if (bReseauxSociauxEmail && bAfficheReseauxSociaux) {
-                    imgEmail.setLayoutX(posX);
-                    imgEmail.setVisible(true);
+                posX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - getdXReseauxSociaux() - ivEmail.getFitWidth();
+                dX = -(ivEmail.getFitWidth() + 5);
+                if (isbReseauxSociauxEmail() && isbAfficheReseauxSociaux()) {
+                    ivEmail.setLayoutX(posX);
+                    ivEmail.setVisible(true);
                     posX += dX;
                 }
-                if (bReseauxSociauxFacebook && bAfficheReseauxSociaux) {
-                    imgFacebook.setLayoutX(posX);
-                    imgFacebook.setVisible(true);
+                if (isbReseauxSociauxFacebook() && isbAfficheReseauxSociaux()) {
+                    ivFacebook.setLayoutX(posX);
+                    ivFacebook.setVisible(true);
                     posX += dX;
                 }
-                if (bReseauxSociauxGoogle && bAfficheReseauxSociaux) {
-                    imgGoogle.setLayoutX(posX);
-                    imgGoogle.setVisible(true);
+                if (isbReseauxSociauxGoogle() && isbAfficheReseauxSociaux()) {
+                    ivGoogle.setLayoutX(posX);
+                    ivGoogle.setVisible(true);
                     posX += dX;
                 }
-                if (bReseauxSociauxTwitter && bAfficheReseauxSociaux) {
-                    imgTwitter.setLayoutX(posX);
-                    imgTwitter.setVisible(true);
+                if (isbReseauxSociauxTwitter() && isbAfficheReseauxSociaux()) {
+                    ivTwitter.setLayoutX(posX);
+                    ivTwitter.setVisible(true);
                     posX += dX;
                 }
                 break;
         }
-        switch (positYReseauxSociaux) {
+        switch (strPositYReseauxSociaux) {
             case "bottom":
-                posY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - imgEmail.getFitHeight() - dYReseauxSociaux;
+                posY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - ivEmail.getFitHeight() - getdYReseauxSociaux();
                 break;
             case "top":
-                posY = ivVisualisation.getLayoutY() + dYReseauxSociaux;
+                posY = ivVisualisation.getLayoutY() + getdYReseauxSociaux();
                 break;
         }
-        imgTwitter.setLayoutY(posY);
-        imgGoogle.setLayoutY(posY);
-        imgFacebook.setLayoutY(posY);
-        imgEmail.setLayoutY(posY);
+        ivTwitter.setLayoutY(posY);
+        ivGoogle.setLayoutY(posY);
+        ivFacebook.setLayoutY(posY);
+        ivEmail.setLayoutY(posY);
     }
 
     public void afficheDiaporama() {
         apAfficheDiapo.getChildren().clear();
-        apAfficheDiapo.setOpacity(diaporamaOpacite);
-        apAfficheDiapo.setStyle("-fx-background-color : " + strCouleurDiaporama);
+        apAfficheDiapo.setOpacity(getDiaporamaOpacite());
+        apAfficheDiapo.setStyle("-fx-background-color : " + getStrCouleurDiaporama());
         apAfficheDiapo.setVisible(bVisualiseDiaporama);
         ivDiapo.setVisible(bVisualiseDiaporama);
     }
@@ -1016,25 +1035,25 @@ public class GestionnaireInterfaceController {
             apFenetreAfficheInfo.setVisible(true);
             lblFenetreURL.setVisible(true);
             apFenetreAfficheInfo.getChildren().clear();
-            if (bFenetreInfoPersonnalise) {
-                Image imgFenetreInfo = new Image("file:" + strFenetreInfoImage);
+            if (isbFenetreInfoPersonnalise()) {
+                Image imgFenetreInfo = new Image("file:" + getStrFenetreInfoImage());
                 double largeurInfo = imgFenetreInfo.getWidth();
                 double hauteurInfo = imgFenetreInfo.getHeight();
                 ImageView ivFenetreInfo = new ImageView(imgFenetreInfo);
-                ivFenetreInfo.setFitWidth(largeurInfo * fenetreInfoTaille / 100);
-                ivFenetreInfo.setFitHeight(hauteurInfo * fenetreInfoTaille / 100);
+                ivFenetreInfo.setFitWidth(largeurInfo * getFenetreInfoTaille() / 100);
+                ivFenetreInfo.setFitHeight(hauteurInfo * getFenetreInfoTaille() / 100);
                 ivFenetreInfo.setPreserveRatio(true);
-                ivFenetreInfo.setOpacity(fenetreInfoOpacite);
+                ivFenetreInfo.setOpacity(getFenetreInfoOpacite());
                 Font fonte1 = new Font("Arial", 12);
-                apFenetreAfficheInfo.setLayoutX((ivVisualisation.getFitWidth() - ivFenetreInfo.getFitWidth()) / 2 + fenetreInfoPosX + ivVisualisation.getLayoutX());
-                apFenetreAfficheInfo.setLayoutY((ivVisualisation.getFitHeight() - ivFenetreInfo.getFitHeight()) / 2 + fenetreInfoPosY + ivVisualisation.getLayoutY());
-                lblFenetreURL.setText(strFenetreTexteURL);
+                apFenetreAfficheInfo.setLayoutX((ivVisualisation.getFitWidth() - ivFenetreInfo.getFitWidth()) / 2 + getFenetreInfoPosX() + ivVisualisation.getLayoutX());
+                apFenetreAfficheInfo.setLayoutY((ivVisualisation.getFitHeight() - ivFenetreInfo.getFitHeight()) / 2 + getFenetreInfoPosY() + ivVisualisation.getLayoutY());
+                lblFenetreURL.setText(getStrFenetreTexteURL());
                 lblFenetreURL.impl_processCSS(true);
-                lblFenetreURL.setStyle("-fx-font-size:" + Math.round(fenetrePoliceTaille * 10) / 10 + "px;-fx-font-family: \"Arial\";");
-                lblFenetreURL.setTextFill(Color.valueOf(strFenetreURLCouleur));
+                lblFenetreURL.setStyle("-fx-font-size:" + Math.round(getFenetrePoliceTaille() * 10) / 10 + "px;-fx-font-family: \"Arial\";");
+                lblFenetreURL.setTextFill(Color.valueOf(getStrFenetreURLCouleur()));
                 apFenetreAfficheInfo.getChildren().addAll(ivFenetreInfo);
-                double URLPosX = (ivVisualisation.getFitWidth() - lblFenetreURL.prefWidth(-1)) / 2 + fenetreURLPosX + ivVisualisation.getLayoutX();
-                double URLPosY = (ivVisualisation.getFitHeight() - lblFenetreURL.prefHeight(-1)) / 2 + fenetreURLPosY + ivVisualisation.getLayoutY();
+                double URLPosX = (ivVisualisation.getFitWidth() - lblFenetreURL.prefWidth(-1)) / 2 + getFenetreURLPosX() + ivVisualisation.getLayoutX();
+                double URLPosY = (ivVisualisation.getFitHeight() - lblFenetreURL.prefHeight(-1)) / 2 + getFenetreURLPosY() + ivVisualisation.getLayoutY();
                 lblFenetreURL.relocate(URLPosX, URLPosY);
             } else {
                 Image imgFenetreInfo = new Image("file:" + strRepertAppli + File.separator + "images" + File.separator + "infoDefaut.jpg");
@@ -1059,18 +1078,18 @@ public class GestionnaireInterfaceController {
         if (bAfficheFenetreAide) {
             apFenetreAfficheInfo.setVisible(true);
             apFenetreAfficheInfo.getChildren().clear();
-            if (bFenetreAidePersonnalise) {
-                Image imgFenetreAide = new Image("file:" + strFenetreAideImage);
+            if (isbFenetreAidePersonnalise()) {
+                Image imgFenetreAide = new Image("file:" + getStrFenetreAideImage());
                 double largeurAide = imgFenetreAide.getWidth();
                 double hauteurAide = imgFenetreAide.getHeight();
                 ImageView ivFenetreAide = new ImageView(imgFenetreAide);
-                ivFenetreAide.setFitWidth(largeurAide * fenetreAideTaille / 100);
-                ivFenetreAide.setFitHeight(hauteurAide * fenetreAideTaille / 100);
+                ivFenetreAide.setFitWidth(largeurAide * getFenetreAideTaille() / 100);
+                ivFenetreAide.setFitHeight(hauteurAide * getFenetreAideTaille() / 100);
                 ivFenetreAide.setPreserveRatio(true);
-                ivFenetreAide.setOpacity(fenetreAideOpacite);
+                ivFenetreAide.setOpacity(getFenetreAideOpacite());
                 apFenetreAfficheInfo.getChildren().add(ivFenetreAide);
-                apFenetreAfficheInfo.setLayoutX((ivVisualisation.getFitWidth() - ivFenetreAide.getFitWidth()) / 2 + fenetreAidePosX + ivVisualisation.getLayoutX());
-                apFenetreAfficheInfo.setLayoutY((ivVisualisation.getFitHeight() - ivFenetreAide.getFitHeight()) / 2 + fenetreAidePosY + ivVisualisation.getLayoutY());
+                apFenetreAfficheInfo.setLayoutX((ivVisualisation.getFitWidth() - ivFenetreAide.getFitWidth()) / 2 + getFenetreAidePosX() + ivVisualisation.getLayoutX());
+                apFenetreAfficheInfo.setLayoutY((ivVisualisation.getFitHeight() - ivFenetreAide.getFitHeight()) / 2 + getFenetreAidePosY() + ivVisualisation.getLayoutY());
 
             } else {
                 Image imgFenetreInfo = new Image("file:" + strRepertAppli + File.separator + "images/aideDefaut.jpg");
@@ -1090,42 +1109,40 @@ public class GestionnaireInterfaceController {
 
     public void affichePlan() {
 
-        apVisuPlan.setVisible(bAffichePlan);
-        if (bAffichePlan) {
+        apVisuPlan.setVisible(isbAffichePlan());
+        if (isbAffichePlan()) {
             double marge = 10.d;
             apVisuPlan.getChildren().clear();
             ImageView ivHSPlanActif = new ImageView(new Image("file:" + strRepertAppli + "/theme/plan/pointActif.png", 12, 12, true, true));
             ImageView ivHSPlan = new ImageView(new Image("file:" + strRepertAppli + "/theme/plan/point.png", 12, 12, true, true));
             Image imgPlan;
             if (iNombrePlans > 0) {
-                String fichier = strRepertTemp + "/images/" + plans[gestionnairePlan.planActuel].getImagePlan();
+                String strFichier = strRepertTemp + "/images/" + plans[gestionnairePlan.getiPlanActuel()].getStrImagePlan();
                 imgPlan = new Image(
-                        "file:" + fichier,
-                        largeurPlan, -1, true, true
+                        "file:" + strFichier, getLargeurPlan(), -1, true, true
                 );
             } else {
                 imgPlan = new Image(
-                        "file:" + strRepertAppli + "/theme/plan/planDefaut.jpg",
-                        largeurPlan, -1, true, true
+                        "file:" + strRepertAppli + "/theme/plan/planDefaut.jpg", getLargeurPlan(), -1, true, true
                 );
 
             }
-            ImageView ivimgPlan = new ImageView(imgPlan);
+            ImageView ivImgPlan = new ImageView(imgPlan);
             apVisuPlan.setPrefSize(imgPlan.getWidth() + marge * 2, imgPlan.getHeight() + marge * 2);
-            apVisuPlan.setStyle("-fx-background-color : #" + txtCouleurFondPlan);
-            ivimgPlan.setLayoutX(marge);
-            ivimgPlan.setLayoutY(marge);
-            apVisuPlan.getChildren().addAll(ivimgPlan, ivHSPlan);
+            apVisuPlan.setStyle("-fx-background-color : #" + getStrCouleurFondPlan());
+            ivImgPlan.setLayoutX(marge);
+            ivImgPlan.setLayoutY(marge);
+            apVisuPlan.getChildren().addAll(ivImgPlan, ivHSPlan);
 
-            apVisuPlan.setOpacity(opacitePlan);
+            apVisuPlan.setOpacity(getOpacitePlan());
             double positionX = 0;
             double positionY;
-            if (bAfficheTitre) {
-                positionY = ivVisualisation.getLayoutY() + txtTitre.getHeight();
+            if (isbAfficheTitre()) {
+                positionY = ivVisualisation.getLayoutY() + lblTxtTitre.getHeight();
             } else {
                 positionY = ivVisualisation.getLayoutY();
             }
-            switch (positionPlan) {
+            switch (getStrPositionPlan()) {
                 case "left":
                     positionX = ivVisualisation.getLayoutX();
                     break;
@@ -1137,12 +1154,12 @@ public class GestionnaireInterfaceController {
             ivHSPlan.setLayoutY(40);
             ivHSPlanActif.setLayoutX(30);
             ivHSPlanActif.setLayoutY(90);
-            if (bAfficheRadar) {
-                Arc arcRadar = new Arc(36, 96, tailleRadar, tailleRadar, -55, 70);
+            if (isbAfficheRadar()) {
+                Arc arcRadar = new Arc(36, 96, getTailleRadar(), getTailleRadar(), -55, 70);
                 arcRadar.setType(ArcType.ROUND);
-                arcRadar.setFill(couleurFondRadar);
-                arcRadar.setStroke(couleurLigneRadar);
-                arcRadar.setOpacity(opaciteRadar);
+                arcRadar.setFill(getCouleurFondRadar());
+                arcRadar.setStroke(getCouleurLigneRadar());
+                arcRadar.setOpacity(getOpaciteRadar());
                 apVisuPlan.getChildren().addAll(arcRadar, ivHSPlanActif);
             } else {
                 apVisuPlan.getChildren().add(ivHSPlanActif);
@@ -1151,34 +1168,34 @@ public class GestionnaireInterfaceController {
             apVisuPlan.setLayoutY(positionY);
             if (iNombrePlans > 0) {
 
-                String repertImagePlan = strRepertAppli + File.separator + "theme/plan";
-                String imageBoussole1 = "file:" + repertImagePlan + "/aiguillePlan.png";
-                Image imgBoussole1 = new Image(imageBoussole1);
+                String strRepertImagePlan = strRepertAppli + File.separator + "theme/plan";
+                String strImageBoussole1 = "file:" + strRepertImagePlan + "/aiguillePlan.png";
+                Image imgBoussole1 = new Image(strImageBoussole1);
                 ImageView ivNord = new ImageView(imgBoussole1);
 
-                String positX = plans[gestionnairePlan.planActuel].getPosition().split(":")[1];
-                String positY = plans[gestionnairePlan.planActuel].getPosition().split(":")[0];
+                String strPositX = plans[gestionnairePlan.getiPlanActuel()].getStrPosition().split(":")[1];
+                String strPositY = plans[gestionnairePlan.getiPlanActuel()].getStrPosition().split(":")[0];
                 positionX = 0;
                 positionY = 0;
-                switch (positX) {
+                switch (strPositX) {
                     case "left":
-                        positionX = ivimgPlan.getLayoutX() + plans[gestionnairePlan.planActuel].getPositionX();
+                        positionX = ivImgPlan.getLayoutX() + plans[gestionnairePlan.getiPlanActuel()].getPositionX();
                         break;
                     case "right":
-                        positionX = ivimgPlan.getLayoutX() + imgPlan.getWidth() - imgBoussole1.getWidth() - plans[gestionnairePlan.planActuel].getPositionX();
+                        positionX = ivImgPlan.getLayoutX() + imgPlan.getWidth() - imgBoussole1.getWidth() - plans[gestionnairePlan.getiPlanActuel()].getPositionX();
                         break;
                 }
-                switch (positY) {
+                switch (strPositY) {
                     case "top":
-                        positionY = ivimgPlan.getLayoutY() + plans[gestionnairePlan.planActuel].getPositionY();
+                        positionY = ivImgPlan.getLayoutY() + plans[gestionnairePlan.getiPlanActuel()].getPositionY();
                         break;
                     case "bottom":
-                        positionY = ivimgPlan.getLayoutY() + imgPlan.getHeight() - imgBoussole1.getHeight() - plans[gestionnairePlan.planActuel].getPositionY();
+                        positionY = ivImgPlan.getLayoutY() + imgPlan.getHeight() - imgBoussole1.getHeight() - plans[gestionnairePlan.getiPlanActuel()].getPositionY();
                         break;
                 }
                 ivNord.setLayoutX(positionX);
                 ivNord.setLayoutY(positionY);
-                ivNord.setRotate(plans[gestionnairePlan.planActuel].getDirectionNord());
+                ivNord.setRotate(plans[gestionnairePlan.getiPlanActuel()].getDirectionNord());
                 apVisuPlan.getChildren().add(ivNord);
             }
         }
@@ -1186,34 +1203,34 @@ public class GestionnaireInterfaceController {
 
     private void afficheComboMenu() {
         apVisuComboMenu.getChildren().clear();
-        if (bAfficheComboMenu) {
+        if (isbAfficheComboMenu()) {
             apVisuComboMenu.setPrefWidth(302);
             apVisuComboMenu.setPrefHeight(50);
             ImageView ivImageMenu;
-            if (bAfficheComboMenuImages) {
+            if (isbAfficheComboMenuImages()) {
                 ivImageMenu = new ImageView(new Image("file:" + strRepertAppli + "/images/menuAvecImage.jpg"));
             } else {
                 ivImageMenu = new ImageView(new Image("file:" + strRepertAppli + "/images/menuSansImage.jpg"));
             }
             apVisuComboMenu.getChildren().add(ivImageMenu);
             double posX = 0, posY = 0;
-            switch (positionXComboMenu) {
+            switch (getStrPositionXComboMenu()) {
                 case "left":
-                    posX = ivVisualisation.getLayoutX() + offsetXComboMenu;
+                    posX = ivVisualisation.getLayoutX() + getOffsetXComboMenu();
                     break;
                 case "center":
-                    posX = ivVisualisation.getLayoutX() + (ivVisualisation.getFitWidth() - apVisuComboMenu.getPrefWidth()) / 2 + offsetXComboMenu;
+                    posX = ivVisualisation.getLayoutX() + (ivVisualisation.getFitWidth() - apVisuComboMenu.getPrefWidth()) / 2 + getOffsetXComboMenu();
                     break;
                 case "right":
-                    posX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - apVisuComboMenu.getPrefWidth() - offsetXComboMenu;
+                    posX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - apVisuComboMenu.getPrefWidth() - getOffsetXComboMenu();
                     break;
             }
-            switch (positionYComboMenu) {
+            switch (getStrPositionYComboMenu()) {
                 case "top":
-                    posY = ivVisualisation.getLayoutY() + offsetYComboMenu;
+                    posY = ivVisualisation.getLayoutY() + getOffsetYComboMenu();
                     break;
                 case "bottom":
-                    posY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - apVisuComboMenu.getPrefHeight() - offsetYComboMenu;
+                    posY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - apVisuComboMenu.getPrefHeight() - getOffsetYComboMenu();
                     break;
             }
             apVisuComboMenu.setLayoutX(posX);
@@ -1225,148 +1242,148 @@ public class GestionnaireInterfaceController {
      *
      */
     private void afficheVignettes() {
-        fondPrecedent.setLayoutX(ivVisualisation.getLayoutX());
-        fondSuivant.setLayoutX(ivVisualisation.getLayoutX() + (ivVisualisation.getFitWidth() - fondPrecedent.getPrefWidth()));
-        String positVert = strPositionBarreClassique.split(":")[0];
-        String positHor = strPositionBarreClassique.split(":")[1];
+        vbFondPrecedent.setLayoutX(ivVisualisation.getLayoutX());
+        vbFondSuivant.setLayoutX(ivVisualisation.getLayoutX() + (ivVisualisation.getFitWidth() - vbFondPrecedent.getPrefWidth()));
+        String strPositVert = getStrPositionBarreClassique().split(":")[0];
+        String strPositHor = getStrPositionBarreClassique().split(":")[1];
         double LX = 0;
         double LY = 0;
-        switch (positVert) {
+        switch (strPositVert) {
             case "top":
-                LY = ivVisualisation.getLayoutY() + offsetYBarreClassique;
+                LY = ivVisualisation.getLayoutY() + getOffsetYBarreClassique();
                 break;
             case "bottom":
-                LY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - hbbarreBoutons.getPrefHeight() - offsetYBarreClassique;
+                LY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - hbbarreBoutons.getPrefHeight() - getOffsetYBarreClassique();
                 break;
             case "middle":
-                LY = ivVisualisation.getLayoutY() + (ivVisualisation.getFitHeight() - hbbarreBoutons.getPrefHeight()) / 2.d - offsetYBarreClassique;
+                LY = ivVisualisation.getLayoutY() + (ivVisualisation.getFitHeight() - hbbarreBoutons.getPrefHeight()) / 2.d - getOffsetYBarreClassique();
                 break;
         }
 
-        switch (positHor) {
+        switch (strPositHor) {
             case "right":
-                LX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - hbbarreBoutons.getPrefWidth() - offsetXBarreClassique;
+                LX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - hbbarreBoutons.getPrefWidth() - getOffsetXBarreClassique();
                 break;
             case "left":
-                LX = ivVisualisation.getLayoutX() + offsetXBarreClassique;
+                LX = ivVisualisation.getLayoutX() + getOffsetXBarreClassique();
                 break;
             case "center":
-                LX = ivVisualisation.getLayoutX() + (ivVisualisation.getFitWidth() - hbbarreBoutons.getPrefWidth()) / 2 + offsetXBarreClassique;
+                LX = ivVisualisation.getLayoutX() + (ivVisualisation.getFitWidth() - hbbarreBoutons.getPrefWidth()) / 2 + getOffsetXBarreClassique();
                 break;
         }
 
-        String positXBoussole = strPositionBoussole.split(":")[1];
-        String positYBoussole = strPositionBoussole.split(":")[0];
+        String strPositXBoussole = getStrPositionBoussole().split(":")[1];
+        String strPositYBoussole = getStrPositionBoussole().split(":")[0];
         double posX = 0;
         double posY = 0;
-        switch (positXBoussole) {
+        switch (strPositXBoussole) {
             case "left":
-                posX = ivVisualisation.getLayoutX() + offsetXBoussole;
+                posX = ivVisualisation.getLayoutX() + getOffsetXBoussole();
                 break;
             case "right":
-                posX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - offsetXBoussole - imgBoussole.getFitWidth();
+                posX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - getOffsetXBoussole() - imgBoussole.getFitWidth();
                 break;
         }
-        switch (positYBoussole) {
+        switch (strPositYBoussole) {
             case "bottom":
-                posY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - imgBoussole.getFitHeight() - offsetYBoussole;
+                posY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - imgBoussole.getFitHeight() - getOffsetYBoussole();
                 break;
             case "top":
-                posY = ivVisualisation.getLayoutY() + offsetYBoussole;
+                posY = ivVisualisation.getLayoutY() + getOffsetYBoussole();
                 break;
         }
 
-        apVisuVignettes.setVisible(bAfficheVignettes);
-        if (bAfficheVignettes) {
-            ImageView[] imgVignettes = new ImageView[iNombrePanoramiques];
+        apVisuVignettes.setVisible(isbAfficheVignettes());
+        if (isbAfficheVignettes()) {
+            ImageView[] ivVignettes = new ImageView[iNombrePanoramiques];
             apVisuVignettes.getChildren().clear();
-            apVisuVignettes.setOpacity(opaciteVignettes);
-            apVisuVignettes.setStyle("-fx-background-color : " + couleurFondVignettes);
-            switch (positionVignettes) {
+            apVisuVignettes.setOpacity(getOpaciteVignettes());
+            apVisuVignettes.setStyle("-fx-background-color : " + getStrCouleurFondVignettes());
+            switch (getStrPositionVignettes()) {
                 case "bottom":
-                    apVisuVignettes.setPrefHeight(tailleImageVignettes / 2 + 10);
+                    apVisuVignettes.setPrefHeight(getTailleImageVignettes() / 2 + 10);
                     apVisuVignettes.setPrefWidth(ivVisualisation.getFitWidth());
-                    apVisuVignettes.setMinHeight(tailleImageVignettes / 2 + 10);
+                    apVisuVignettes.setMinHeight(getTailleImageVignettes() / 2 + 10);
                     apVisuVignettes.setMinWidth(ivVisualisation.getFitWidth());
                     apVisuVignettes.setLayoutX(ivVisualisation.getLayoutX());
                     apVisuVignettes.setLayoutY(ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - apVisuVignettes.getPrefHeight());
-                    if (positVert.equals("bottom")) {
-                        LY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - hbbarreBoutons.getPrefHeight() - offsetYBarreClassique - apVisuVignettes.getPrefHeight();
+                    if (strPositVert.equals("bottom")) {
+                        LY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - hbbarreBoutons.getPrefHeight() - getOffsetYBarreClassique() - apVisuVignettes.getPrefHeight();
                     }
-                    if (positYBoussole.equals("bottom")) {
-                        posY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - imgBoussole.getFitHeight() - offsetYBoussole - apVisuVignettes.getPrefHeight();
+                    if (strPositYBoussole.equals("bottom")) {
+                        posY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - imgBoussole.getFitHeight() - getOffsetYBoussole() - apVisuVignettes.getPrefHeight();
                     }
                     break;
                 case "left":
-                    if (bAfficheTitre) {
-                        apVisuVignettes.setPrefHeight(ivVisualisation.getFitHeight() - txtTitre.getHeight());
-                        apVisuVignettes.setMinHeight(ivVisualisation.getFitHeight() - txtTitre.getHeight());
+                    if (isbAfficheTitre()) {
+                        apVisuVignettes.setPrefHeight(ivVisualisation.getFitHeight() - lblTxtTitre.getHeight());
+                        apVisuVignettes.setMinHeight(ivVisualisation.getFitHeight() - lblTxtTitre.getHeight());
                     } else {
                         apVisuVignettes.setPrefHeight(ivVisualisation.getFitHeight());
                         apVisuVignettes.setMinHeight(ivVisualisation.getFitHeight());
                     }
-                    apVisuVignettes.setPrefWidth(tailleImageVignettes + 10);
-                    apVisuVignettes.setMinWidth(tailleImageVignettes + 10);
+                    apVisuVignettes.setPrefWidth(getTailleImageVignettes() + 10);
+                    apVisuVignettes.setMinWidth(getTailleImageVignettes() + 10);
                     apVisuVignettes.setLayoutX(ivVisualisation.getLayoutX());
-                    if (bAfficheTitre) {
-                        apVisuVignettes.setLayoutY(ivVisualisation.getLayoutY() + txtTitre.getHeight());
+                    if (isbAfficheTitre()) {
+                        apVisuVignettes.setLayoutY(ivVisualisation.getLayoutY() + lblTxtTitre.getHeight());
                     } else {
                         apVisuVignettes.setLayoutY(ivVisualisation.getLayoutY());
                     }
-                    fondPrecedent.setLayoutX(ivVisualisation.getLayoutX() + apVisuVignettes.getPrefWidth());
-                    if (positHor.equals("left")) {
-                        LX = ivVisualisation.getLayoutX() + offsetXBarreClassique + apVisuVignettes.getPrefWidth();
+                    vbFondPrecedent.setLayoutX(ivVisualisation.getLayoutX() + apVisuVignettes.getPrefWidth());
+                    if (strPositHor.equals("left")) {
+                        LX = ivVisualisation.getLayoutX() + getOffsetXBarreClassique() + apVisuVignettes.getPrefWidth();
                     }
-                    if (positXBoussole.equals("left")) {
-                        posX = ivVisualisation.getLayoutX() + offsetXBoussole + apVisuVignettes.getPrefWidth();
+                    if (strPositXBoussole.equals("left")) {
+                        posX = ivVisualisation.getLayoutX() + getOffsetXBoussole() + apVisuVignettes.getPrefWidth();
                     }
                     break;
                 case "right":
-                    if (bAfficheTitre) {
-                        apVisuVignettes.setPrefHeight(ivVisualisation.getFitHeight() - txtTitre.getHeight());
-                        apVisuVignettes.setMinHeight(ivVisualisation.getFitHeight() - txtTitre.getHeight());
+                    if (isbAfficheTitre()) {
+                        apVisuVignettes.setPrefHeight(ivVisualisation.getFitHeight() - lblTxtTitre.getHeight());
+                        apVisuVignettes.setMinHeight(ivVisualisation.getFitHeight() - lblTxtTitre.getHeight());
                     } else {
                         apVisuVignettes.setPrefHeight(ivVisualisation.getFitHeight());
                         apVisuVignettes.setMinHeight(ivVisualisation.getFitHeight());
                     }
-                    apVisuVignettes.setPrefWidth(tailleImageVignettes + 10);
-                    apVisuVignettes.setMinWidth(tailleImageVignettes + 10);
+                    apVisuVignettes.setPrefWidth(getTailleImageVignettes() + 10);
+                    apVisuVignettes.setMinWidth(getTailleImageVignettes() + 10);
                     apVisuVignettes.setLayoutX(ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - apVisuVignettes.getPrefWidth());
-                    if (bAfficheTitre) {
-                        apVisuVignettes.setLayoutY(ivVisualisation.getLayoutY() + txtTitre.getHeight());
+                    if (isbAfficheTitre()) {
+                        apVisuVignettes.setLayoutY(ivVisualisation.getLayoutY() + lblTxtTitre.getHeight());
                     } else {
                         apVisuVignettes.setLayoutY(ivVisualisation.getLayoutY());
                     }
-                    fondSuivant.setLayoutX(ivVisualisation.getLayoutX() + (ivVisualisation.getFitWidth() - fondPrecedent.getPrefWidth()) - apVisuVignettes.getPrefWidth());
-                    if (positHor.equals("right")) {
-                        LX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - hbbarreBoutons.getPrefWidth() - offsetXBarreClassique - apVisuVignettes.getPrefWidth();
+                    vbFondSuivant.setLayoutX(ivVisualisation.getLayoutX() + (ivVisualisation.getFitWidth() - vbFondPrecedent.getPrefWidth()) - apVisuVignettes.getPrefWidth());
+                    if (strPositHor.equals("right")) {
+                        LX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - hbbarreBoutons.getPrefWidth() - getOffsetXBarreClassique() - apVisuVignettes.getPrefWidth();
                     }
-                    if (positXBoussole.equals("right")) {
-                        posX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - offsetXBoussole - imgBoussole.getFitWidth() - apVisuVignettes.getPrefWidth();
+                    if (strPositXBoussole.equals("right")) {
+                        posX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - getOffsetXBoussole() - imgBoussole.getFitWidth() - apVisuVignettes.getPrefWidth();
                     }
                     break;
             }
-            int maxVignettes = 5;
-            int nombre = (iNombrePanoramiques > maxVignettes) ? maxVignettes : iNombrePanoramiques;
-            for (int i = 0; i < nombre; i++) {
-                imgVignettes[i] = new ImageView(panoramiquesProjet[i].getVignettePanoramique());
-                imgVignettes[i].setFitWidth(tailleImageVignettes);
-                imgVignettes[i].setFitHeight(tailleImageVignettes / 2);
-                switch (positionVignettes) {
+            int iMaxVignettes = 5;
+            int iNombre = (iNombrePanoramiques > iMaxVignettes) ? iMaxVignettes : iNombrePanoramiques;
+            for (int i = 0; i < iNombre; i++) {
+                ivVignettes[i] = new ImageView(panoramiquesProjet[i].getImgVignettePanoramique());
+                ivVignettes[i].setFitWidth(getTailleImageVignettes());
+                ivVignettes[i].setFitHeight(getTailleImageVignettes() / 2);
+                switch (getStrPositionVignettes()) {
                     case "bottom":
-                        imgVignettes[i].setLayoutX((tailleImageVignettes + 10) * i + 5);
-                        imgVignettes[i].setLayoutY(5);
+                        ivVignettes[i].setLayoutX((getTailleImageVignettes() + 10) * i + 5);
+                        ivVignettes[i].setLayoutY(5);
                         break;
                     case "left":
-                        imgVignettes[i].setLayoutY((tailleImageVignettes / 2 + 10) * i + 5);
-                        imgVignettes[i].setLayoutX(5);
+                        ivVignettes[i].setLayoutY((getTailleImageVignettes() / 2 + 10) * i + 5);
+                        ivVignettes[i].setLayoutX(5);
                         break;
                     case "right":
-                        imgVignettes[i].setLayoutY((tailleImageVignettes / 2 + 10) * i + 5);
-                        imgVignettes[i].setLayoutX(5);
+                        ivVignettes[i].setLayoutY((getTailleImageVignettes() / 2 + 10) * i + 5);
+                        ivVignettes[i].setLayoutX(5);
                         break;
                 }
-                apVisuVignettes.getChildren().add(imgVignettes[i]);
+                apVisuVignettes.getChildren().add(ivVignettes[i]);
             }
         }
         hbbarreBoutons.setLayoutX(LX);
@@ -1379,84 +1396,84 @@ public class GestionnaireInterfaceController {
     }
 
     private int chercheZone(int nb) {
-        int numero = -1;
+        int iNumero = -1;
         String strZone = "area-" + nb;
-        for (int i = 0; i < iNombreZonesBarrePersonnalisee; i++) {
-            System.out.println(i + "==>" + iNombreZonesBarrePersonnalisee);
-            if (zonesBarrePersonnalisee[i].getStrIdZone().equals(strZone)) {
-                numero = i;
+        for (int i = 0; i < getiNombreZonesBarrePersonnalisee(); i++) {
+            //System.out.println(i + "==>" + getiNombreZonesBarrePersonnalisee());
+            if (getZonesBarrePersonnalisee()[i].getStrIdZone().equals(strZone)) {
+                iNumero = i;
             }
         }
-        return numero;
+        return iNumero;
     }
 
     public void afficheBarrePersonnalisee() {
         apAfficheBarrePersonnalisee.getChildren().clear();
         if (!tfLienImageBarrePersonnalisee.getText().equals("")) {
-            if (strVisibiliteBarrePersonnalisee.equals("oui")) {
+            if (getStrVisibiliteBarrePersonnalisee().equals("oui")) {
                 changeCouleurBarrePersonnalisee(couleurBarrePersonnalisee.getHue(), couleurBarrePersonnalisee.getSaturation(), couleurBarrePersonnalisee.getBrightness());
-                ivBarrePersonnalisee.setImage(wiBarrePersonnaliseeCouleur);
+                ivBarrePersonnalisee.setImage(getWiBarrePersonnaliseeCouleur());
                 ivBarrePersonnalisee.setPreserveRatio(true);
                 ivBarrePersonnalisee.setSmooth(true);
-                double hauteur = wiBarrePersonnaliseeCouleur.getHeight();
-                double largeur = wiBarrePersonnaliseeCouleur.getWidth();
+                double hauteur = getWiBarrePersonnaliseeCouleur().getHeight();
+                double largeur = getWiBarrePersonnaliseeCouleur().getWidth();
                 if (largeur > hauteur) {
                     ivBarrePersonnalisee.setFitWidth(150);
                 } else {
                     ivBarrePersonnalisee.setFitHeight(150);
                 }
-                ImageView ivAfficheBarrePersonnalisee = new ImageView(wiBarrePersonnaliseeCouleur);
+                ImageView ivAfficheBarrePersonnalisee = new ImageView(getWiBarrePersonnaliseeCouleur());
                 ivAfficheBarrePersonnalisee.setSmooth(true);
 
                 apAfficheBarrePersonnalisee.getChildren().add(ivAfficheBarrePersonnalisee);
                 apAfficheBarrePersonnalisee.setPrefHeight(hauteur);
                 apAfficheBarrePersonnalisee.setPrefWidth(largeur);
-                apAfficheBarrePersonnalisee.setScaleX(tailleBarrePersonnalisee / 100.d);
-                apAfficheBarrePersonnalisee.setScaleY(tailleBarrePersonnalisee / 100.d);
-                String positVert = strPositionBarrePersonnalisee.split(":")[0];
-                String positHor = strPositionBarrePersonnalisee.split(":")[1];
-                double ajoutX = (largeur / 2.d) * tailleBarrePersonnalisee / 100.d;
-                double ajoutY = (hauteur / 2.d) * tailleBarrePersonnalisee / 100.d;
+                apAfficheBarrePersonnalisee.setScaleX(getTailleBarrePersonnalisee() / 100.d);
+                apAfficheBarrePersonnalisee.setScaleY(getTailleBarrePersonnalisee() / 100.d);
+                String strPositVert = getStrPositionBarrePersonnalisee().split(":")[0];
+                String strPositHor = getStrPositionBarrePersonnalisee().split(":")[1];
+                double ajoutX = (largeur / 2.d) * getTailleBarrePersonnalisee() / 100.d;
+                double ajoutY = (hauteur / 2.d) * getTailleBarrePersonnalisee() / 100.d;
                 double LX = 0;
                 double LY = 0;
-                switch (positVert) {
+                switch (strPositVert) {
                     case "top":
-                        LY = ivVisualisation.getLayoutY() + offsetYBarrePersonnalisee + ajoutY - hauteur / 2.d;
+                        LY = ivVisualisation.getLayoutY() + getOffsetYBarrePersonnalisee() + ajoutY - hauteur / 2.d;
                         break;
                     case "bottom":
-                        LY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - apAfficheBarrePersonnalisee.getPrefHeight() - offsetYBarrePersonnalisee - ajoutY + hauteur / 2.d;
+                        LY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - apAfficheBarrePersonnalisee.getPrefHeight() - getOffsetYBarrePersonnalisee() - ajoutY + hauteur / 2.d;
                         break;
                     case "middle":
-                        LY = ivVisualisation.getLayoutY() + (ivVisualisation.getFitHeight() - apAfficheBarrePersonnalisee.getPrefHeight()) / 2.d - offsetYBarrePersonnalisee;
+                        LY = ivVisualisation.getLayoutY() + (ivVisualisation.getFitHeight() - apAfficheBarrePersonnalisee.getPrefHeight()) / 2.d - getOffsetYBarrePersonnalisee();
                         break;
                 }
 
-                switch (positHor) {
+                switch (strPositHor) {
                     case "right":
-                        LX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - apAfficheBarrePersonnalisee.getPrefWidth() - offsetXBarrePersonnalisee - ajoutX + largeur / 2.d;
+                        LX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - apAfficheBarrePersonnalisee.getPrefWidth() - getOffsetXBarrePersonnalisee() - ajoutX + largeur / 2.d;
                         break;
                     case "left":
-                        LX = ivVisualisation.getLayoutX() + offsetXBarrePersonnalisee + ajoutX - largeur / 2.d;
+                        LX = ivVisualisation.getLayoutX() + getOffsetXBarrePersonnalisee() + ajoutX - largeur / 2.d;
                         break;
                     case "center":
-                        LX = ivVisualisation.getLayoutX() + (ivVisualisation.getFitWidth() - apAfficheBarrePersonnalisee.getPrefWidth()) / 2 + offsetXBarrePersonnalisee;
+                        LX = ivVisualisation.getLayoutX() + (ivVisualisation.getFitWidth() - apAfficheBarrePersonnalisee.getPrefWidth()) / 2 + getOffsetXBarrePersonnalisee();
                         break;
                 }
-                if (bAfficheVignettes) {
-                    switch (positionVignettes) {
+                if (isbAfficheVignettes()) {
+                    switch (getStrPositionVignettes()) {
                         case "bottom":
-                            if (positVert.equals("bottom")) {
-                                LY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - apAfficheBarrePersonnalisee.getPrefHeight() - offsetYBarreClassique - apVisuVignettes.getPrefHeight() + ajoutY - hauteur / 2.d;
+                            if (strPositVert.equals("bottom")) {
+                                LY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - apAfficheBarrePersonnalisee.getPrefHeight() - getOffsetYBarreClassique() - apVisuVignettes.getPrefHeight() + ajoutY - hauteur / 2.d;
                             }
                             break;
                         case "left":
-                            if (positHor.equals("left")) {
-                                LX = ivVisualisation.getLayoutX() + offsetXBarreClassique + apVisuVignettes.getPrefWidth() + ajoutX - largeur / 2.d;
+                            if (strPositHor.equals("left")) {
+                                LX = ivVisualisation.getLayoutX() + getOffsetXBarreClassique() + apVisuVignettes.getPrefWidth() + ajoutX - largeur / 2.d;
                             }
                             break;
                         case "right":
-                            if (positHor.equals("right")) {
-                                LX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - apAfficheBarrePersonnalisee.getPrefWidth() - offsetXBarreClassique - apVisuVignettes.getPrefWidth() - ajoutX + largeur / 2.d;
+                            if (strPositHor.equals("right")) {
+                                LX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - apAfficheBarrePersonnalisee.getPrefWidth() - getOffsetXBarreClassique() - apVisuVignettes.getPrefWidth() - ajoutX + largeur / 2.d;
                             }
                             break;
                     }
@@ -1465,62 +1482,62 @@ public class GestionnaireInterfaceController {
                 apAfficheBarrePersonnalisee.setLayoutY(LY);
                 Circle[] cercles = new Circle[50];
                 int zone = 1;
-                if (strInfoBarrePersonnalisee.equals("oui")) {
-                    int num = chercheZone(zone);
-                    if (num != -1) {
+                if (getStrInfoBarrePersonnalisee().equals("oui")) {
+                    int iNum = chercheZone(zone);
+                    if (iNum != -1) {
                         ImageView ivInfoBarrePersonnalisee = new ImageView(new Image("file:" + strRepertAppli + "/theme/telecommandes/info.png"));
-                        ivInfoBarrePersonnalisee.setFitWidth(tailleIconesBarrePersonnalisee);
-                        ivInfoBarrePersonnalisee.setFitHeight(tailleIconesBarrePersonnalisee);
-                        ivInfoBarrePersonnalisee.setLayoutX(zonesBarrePersonnalisee[num].getCentre().getX() - tailleIconesBarrePersonnalisee / 2);
-                        ivInfoBarrePersonnalisee.setLayoutY(zonesBarrePersonnalisee[num].getCentre().getY() - tailleIconesBarrePersonnalisee / 2);
+                        ivInfoBarrePersonnalisee.setFitWidth(getTailleIconesBarrePersonnalisee());
+                        ivInfoBarrePersonnalisee.setFitHeight(getTailleIconesBarrePersonnalisee());
+                        ivInfoBarrePersonnalisee.setLayoutX(getZonesBarrePersonnalisee()[iNum].getCentre().getX() - getTailleIconesBarrePersonnalisee() / 2);
+                        ivInfoBarrePersonnalisee.setLayoutY(getZonesBarrePersonnalisee()[iNum].getCentre().getY() - getTailleIconesBarrePersonnalisee() / 2);
                         apAfficheBarrePersonnalisee.getChildren().add(ivInfoBarrePersonnalisee);
                     }
                     zone++;
                 }
-                if (strAideBarrePersonnalisee.equals("oui")) {
-                    int num = chercheZone(zone);
-                    if (num != -1) {
+                if (getStrAideBarrePersonnalisee().equals("oui")) {
+                    int iNum = chercheZone(zone);
+                    if (iNum != -1) {
                         ImageView ivAideBarrePersonnalisee = new ImageView(new Image("file:" + strRepertAppli + "/theme/telecommandes/aide.png"));
-                        ivAideBarrePersonnalisee.setFitWidth(tailleIconesBarrePersonnalisee);
-                        ivAideBarrePersonnalisee.setFitHeight(tailleIconesBarrePersonnalisee);
-                        ivAideBarrePersonnalisee.setLayoutX(zonesBarrePersonnalisee[num].getCentre().getX() - tailleIconesBarrePersonnalisee / 2);
-                        ivAideBarrePersonnalisee.setLayoutY(zonesBarrePersonnalisee[num].getCentre().getY() - tailleIconesBarrePersonnalisee / 2);
+                        ivAideBarrePersonnalisee.setFitWidth(getTailleIconesBarrePersonnalisee());
+                        ivAideBarrePersonnalisee.setFitHeight(getTailleIconesBarrePersonnalisee());
+                        ivAideBarrePersonnalisee.setLayoutX(getZonesBarrePersonnalisee()[iNum].getCentre().getX() - getTailleIconesBarrePersonnalisee() / 2);
+                        ivAideBarrePersonnalisee.setLayoutY(getZonesBarrePersonnalisee()[iNum].getCentre().getY() - getTailleIconesBarrePersonnalisee() / 2);
                         apAfficheBarrePersonnalisee.getChildren().add(ivAideBarrePersonnalisee);
                     }
                     zone++;
                 }
-                if (strRotationBarrePersonnalisee.equals("oui")) {
-                    int num = chercheZone(zone);
-                    if (num != -1) {
+                if (getStrRotationBarrePersonnalisee().equals("oui")) {
+                    int iNum = chercheZone(zone);
+                    if (iNum != -1) {
                         ImageView ivRotationBarrePersonnalisee = new ImageView(new Image("file:" + strRepertAppli + "/theme/telecommandes/rotation.png"));
-                        ivRotationBarrePersonnalisee.setFitWidth(tailleIconesBarrePersonnalisee);
-                        ivRotationBarrePersonnalisee.setFitHeight(tailleIconesBarrePersonnalisee);
-                        ivRotationBarrePersonnalisee.setLayoutX(zonesBarrePersonnalisee[num].getCentre().getX() - tailleIconesBarrePersonnalisee / 2);
-                        ivRotationBarrePersonnalisee.setLayoutY(zonesBarrePersonnalisee[num].getCentre().getY() - tailleIconesBarrePersonnalisee / 2);
+                        ivRotationBarrePersonnalisee.setFitWidth(getTailleIconesBarrePersonnalisee());
+                        ivRotationBarrePersonnalisee.setFitHeight(getTailleIconesBarrePersonnalisee());
+                        ivRotationBarrePersonnalisee.setLayoutX(getZonesBarrePersonnalisee()[iNum].getCentre().getX() - getTailleIconesBarrePersonnalisee() / 2);
+                        ivRotationBarrePersonnalisee.setLayoutY(getZonesBarrePersonnalisee()[iNum].getCentre().getY() - getTailleIconesBarrePersonnalisee() / 2);
                         apAfficheBarrePersonnalisee.getChildren().add(ivRotationBarrePersonnalisee);
                     }
                     zone++;
                 }
-                if (strSourisBarrePersonnalisee.equals("oui")) {
-                    int num = chercheZone(zone);
-                    if (num != -1) {
+                if (getStrSourisBarrePersonnalisee().equals("oui")) {
+                    int iNum = chercheZone(zone);
+                    if (iNum != -1) {
                         ImageView ivSourisBarrePersonnalisee = new ImageView(new Image("file:" + strRepertAppli + "/theme/telecommandes/souris.png"));
-                        ivSourisBarrePersonnalisee.setFitWidth(tailleIconesBarrePersonnalisee);
-                        ivSourisBarrePersonnalisee.setFitHeight(tailleIconesBarrePersonnalisee);
-                        ivSourisBarrePersonnalisee.setLayoutX(zonesBarrePersonnalisee[num].getCentre().getX() - tailleIconesBarrePersonnalisee / 2);
-                        ivSourisBarrePersonnalisee.setLayoutY(zonesBarrePersonnalisee[num].getCentre().getY() - tailleIconesBarrePersonnalisee / 2);
+                        ivSourisBarrePersonnalisee.setFitWidth(getTailleIconesBarrePersonnalisee());
+                        ivSourisBarrePersonnalisee.setFitHeight(getTailleIconesBarrePersonnalisee());
+                        ivSourisBarrePersonnalisee.setLayoutX(getZonesBarrePersonnalisee()[iNum].getCentre().getX() - getTailleIconesBarrePersonnalisee() / 2);
+                        ivSourisBarrePersonnalisee.setLayoutY(getZonesBarrePersonnalisee()[iNum].getCentre().getY() - getTailleIconesBarrePersonnalisee() / 2);
                         apAfficheBarrePersonnalisee.getChildren().add(ivSourisBarrePersonnalisee);
                     }
                     zone++;
                 }
-                if (strPleinEcranBarrePersonnalisee.equals("oui")) {
-                    int num = chercheZone(zone);
-                    if (num != -1) {
+                if (getStrPleinEcranBarrePersonnalisee().equals("oui")) {
+                    int iNum = chercheZone(zone);
+                    if (iNum != -1) {
                         ImageView ivFSBarrePersonnalisee = new ImageView(new Image("file:" + strRepertAppli + "/theme/telecommandes/fs.png"));
-                        ivFSBarrePersonnalisee.setFitWidth(tailleIconesBarrePersonnalisee);
-                        ivFSBarrePersonnalisee.setFitHeight(tailleIconesBarrePersonnalisee);
-                        ivFSBarrePersonnalisee.setLayoutX(zonesBarrePersonnalisee[num].getCentre().getX() - tailleIconesBarrePersonnalisee / 2);
-                        ivFSBarrePersonnalisee.setLayoutY(zonesBarrePersonnalisee[num].getCentre().getY() - tailleIconesBarrePersonnalisee / 2);
+                        ivFSBarrePersonnalisee.setFitWidth(getTailleIconesBarrePersonnalisee());
+                        ivFSBarrePersonnalisee.setFitHeight(getTailleIconesBarrePersonnalisee());
+                        ivFSBarrePersonnalisee.setLayoutX(getZonesBarrePersonnalisee()[iNum].getCentre().getX() - getTailleIconesBarrePersonnalisee() / 2);
+                        ivFSBarrePersonnalisee.setLayoutY(getZonesBarrePersonnalisee()[iNum].getCentre().getY() - getTailleIconesBarrePersonnalisee() / 2);
                         apAfficheBarrePersonnalisee.getChildren().add(ivFSBarrePersonnalisee);
                     }
                     zone++;
@@ -1533,7 +1550,7 @@ public class GestionnaireInterfaceController {
         try {
             File fileFichier = new File(strNomFichier);
             if (fileFichier.exists()) {
-                int nombreZonesBarre;
+                int iNombreZonesBarre;
                 String strTexte;
                 try (BufferedReader brLisFichier = new BufferedReader(new InputStreamReader(
                         new FileInputStream(strNomFichier), "UTF-8"))) {
@@ -1550,21 +1567,21 @@ public class GestionnaireInterfaceController {
                     brLisFichier.close();
                     cbDeplacementsBarrePersonnalisee.setSelected(true);
                     cbDeplacementsBarrePersonnalisee.setDisable(false);
-                    strDeplacementsBarrePersonnalisee = "oui";
+                    setStrDeplacementsBarrePersonnalisee("oui");
                     cbZoomBarrePersonnalisee.setSelected(true);
                     cbZoomBarrePersonnalisee.setDisable(false);
-                    strZoomBarrePersonnalisee = "oui";
+                    setStrZoomBarrePersonnalisee("oui");
                     cbRotationBarrePersonnalisee.setSelected(true);
                     cbRotationBarrePersonnalisee.setDisable(false);
-                    strRotationBarrePersonnalisee = "oui";
+                    setStrRotationBarrePersonnalisee("oui");
                     cbSourisBarrePersonnalisee.setSelected(true);
                     cbSourisBarrePersonnalisee.setDisable(false);
-                    strSourisBarrePersonnalisee = "oui";
+                    setStrSourisBarrePersonnalisee("oui");
                     cbFSBarrePersonnalisee.setSelected(true);
                     cbFSBarrePersonnalisee.setDisable(false);
-                    strPleinEcranBarrePersonnalisee = "oui";
-                    strInfoBarrePersonnalisee = "oui";
-                    strAideBarrePersonnalisee = "oui";
+                    setStrPleinEcranBarrePersonnalisee("oui");
+                    setStrInfoBarrePersonnalisee("oui");
+                    setStrAideBarrePersonnalisee("oui");
                     tfLien1BarrePersonnalisee.setDisable(true);
                     tfLien2BarrePersonnalisee.setDisable(true);
                     String strLigneComplete = strTexte.replace("[", "|");
@@ -1572,77 +1589,74 @@ public class GestionnaireInterfaceController {
                     String strLigne;
                     String[] strElementsLigne;
                     String[] strTypeElement;
-                    int nbHS = 0;
-                    int nbImg = 0;
-                    int nbHsplan = 0;
-                    nombreZonesBarre = 0;
-                    for (int kk = 1; kk < strLignes.length; kk++) {
-                        strLigne = strLignes[kk];
+                    iNombreZonesBarre = 0;
+                    for (int ikk = 1; ikk < strLignes.length; ikk++) {
+                        strLigne = strLignes[ikk];
                         strElementsLigne = strLigne.split(";", 25);
                         strTypeElement = strElementsLigne[0].split(">", 2);
                         strTypeElement[0] = strTypeElement[0].replace(" ", "").replace("=", "").replace("[", "");
                         strElementsLigne[0] = strTypeElement[1];
                         if ("area".equals(strTypeElement[0])) {
-                            zonesBarre[nombreZonesBarre] = new ZoneTelecommande();
+                            zonesBarre[iNombreZonesBarre] = new ZoneTelecommande();
                             for (int i = 0; i < strElementsLigne.length; i++) {
                                 strElementsLigne[i] = strElementsLigne[i].replace("]", "").replace("\n", "");
-                                String[] valeur = strElementsLigne[i].split(":", 2);
+                                String[] strValeur = strElementsLigne[i].split(":", 2);
                                 //System.out.println(valeur[0] + "=" + valeur[1]);
 
-                                switch (valeur[0]) {
+                                switch (strValeur[0]) {
                                     case "id":
-                                        zonesBarre[nombreZonesBarre].setStrIdZone(valeur[1]);
+                                        zonesBarre[iNombreZonesBarre].setStrIdZone(strValeur[1]);
                                         break;
                                     case "shape":
-                                        zonesBarre[nombreZonesBarre].setStrTypeZone(valeur[1]);
+                                        zonesBarre[iNombreZonesBarre].setStrTypeZone(strValeur[1]);
                                         break;
                                     case "coords":
-                                        zonesBarre[nombreZonesBarre].setStrCoordonneesZone(valeur[1]);
+                                        zonesBarre[iNombreZonesBarre].setStrCoordonneesZone(strValeur[1]);
                                         break;
                                 }
                             }
-                            zonesBarre[nombreZonesBarre].calculeCentre();
+                            zonesBarre[iNombreZonesBarre].calculeCentre();
                             //System.out.println("id : " + zonesBarre[nombreZonesBarre].getStrIdZone()
                             // + ", shape : " + zonesBarre[nombreZonesBarre].getStrTypeZone()
                             // + ", coord : " + zonesBarre[nombreZonesBarre].getStrCoordonneesZone()
                             // + ", centre : " + zonesBarre[nombreZonesBarre].getCentre().getX()
                             // + ";" + zonesBarre[nombreZonesBarre].getCentre().getY()
                             //);
-                            switch (zonesBarre[nombreZonesBarre].getStrIdZone()) {
+                            switch (zonesBarre[iNombreZonesBarre].getStrIdZone()) {
                                 case "telUp":
                                 case "telDown":
                                 case "telRight":
                                 case "telLeft":
                                     cbDeplacementsBarrePersonnalisee.setSelected(false);
                                     cbDeplacementsBarrePersonnalisee.setDisable(true);
-                                    strDeplacementsBarrePersonnalisee = "non";
+                                    setStrDeplacementsBarrePersonnalisee("non");
                                     break;
                                 case "telZoomMoins":
                                 case "telZoomPlus":
                                     cbZoomBarrePersonnalisee.setSelected(false);
                                     cbZoomBarrePersonnalisee.setDisable(true);
-                                    strZoomBarrePersonnalisee = "non";
+                                    setStrZoomBarrePersonnalisee("non");
                                     break;
                                 case "telInfo":
-                                    strInfoBarrePersonnalisee = "non";
+                                    setStrInfoBarrePersonnalisee("non");
                                     break;
                                 case "telAide":
-                                    strAideBarrePersonnalisee = "non";
+                                    setStrAideBarrePersonnalisee("non");
                                     break;
                                 case "telFS":
                                     cbFSBarrePersonnalisee.setSelected(false);
                                     cbFSBarrePersonnalisee.setDisable(true);
-                                    strPleinEcranBarrePersonnalisee = "non";
+                                    setStrPleinEcranBarrePersonnalisee("non");
                                     break;
                                 case "telSouris":
                                     cbSourisBarrePersonnalisee.setSelected(false);
                                     cbSourisBarrePersonnalisee.setDisable(true);
-                                    strSourisBarrePersonnalisee = "non";
+                                    setStrSourisBarrePersonnalisee("non");
                                     break;
                                 case "telRotation":
                                     cbRotationBarrePersonnalisee.setSelected(false);
                                     cbRotationBarrePersonnalisee.setDisable(true);
-                                    strRotationBarrePersonnalisee = "non";
+                                    setStrRotationBarrePersonnalisee("non");
                                     break;
                                 case "telLien-1":
                                     tfLien1BarrePersonnalisee.setDisable(false);
@@ -1651,12 +1665,12 @@ public class GestionnaireInterfaceController {
                                     tfLien2BarrePersonnalisee.setDisable(false);
                                     break;
                             }
-                            nombreZonesBarre++;
+                            iNombreZonesBarre++;
                         }
 
                     }
                 }
-                return nombreZonesBarre;
+                return iNombreZonesBarre;
             } else {
                 return -1;
             }
@@ -1678,41 +1692,41 @@ public class GestionnaireInterfaceController {
         fileChooser.setInitialDirectory(fileRepert);
         fileChooser.getExtensionFilters().addAll(efShpFilter);
 
-        File fichierImage = fileChooser.showOpenDialog(null);
-        if (fichierImage != null) {
-            String nomFichier = fichierImage.getAbsolutePath();
-            nomFichier = nomFichier.substring(0, nomFichier.length() - 4);
-            String nomFichierShp = nomFichier + ".shp";
-            String nomFichierPng = nomFichier + ".png";
-            File fichShp = new File(nomFichierShp);
-            File fichPng = new File(nomFichierPng);
-            if (fichShp.exists() && fichPng.exists()) {
-                iNombreZonesBarrePersonnalisee = lisFichierShp(nomFichierShp, zonesBarrePersonnalisee);
-                if (iNombreZonesBarrePersonnalisee != -1) {
+        File fileFichierImage = fileChooser.showOpenDialog(null);
+        if (fileFichierImage != null) {
+            String strNomFichier = fileFichierImage.getAbsolutePath();
+            strNomFichier = strNomFichier.substring(0, strNomFichier.length() - 4);
+            String strNomFichierShp = strNomFichier + ".shp";
+            String strNomFichierPng = strNomFichier + ".png";
+            File fileFichShp = new File(strNomFichierShp);
+            File fileFichPng = new File(strNomFichierPng);
+            if (fileFichShp.exists() && fileFichPng.exists()) {
+                setiNombreZonesBarrePersonnalisee(lisFichierShp(strNomFichierShp, getZonesBarrePersonnalisee()));
+                if (getiNombreZonesBarrePersonnalisee() != -1) {
                     btnEditerBarre.setDisable(false);
-                    strLienImageBarrePersonnalisee = nomFichierPng;
-                    tfLienImageBarrePersonnalisee.setText(nomFichierPng);
-                    imgPngBarrePersonnalisee = new Image("file:" + nomFichierPng);
+                    setStrLienImageBarrePersonnalisee(strNomFichierPng);
+                    tfLienImageBarrePersonnalisee.setText(strNomFichierPng);
+                    imgPngBarrePersonnalisee = new Image("file:" + strNomFichierPng);
                     afficheBarrePersonnalisee();
                 }
             }
         }
     }
 
-    public void chargeBarrePersonnalisee(String nomFichier) throws IOException {
-        if (nomFichier.length() > 4) {
-            nomFichier = nomFichier.substring(0, nomFichier.length() - 4);
-            String nomFichierShp = nomFichier + ".shp";
-            String nomFichierPng = nomFichier + ".png";
+    public void chargeBarrePersonnalisee(String strNomFichier) throws IOException {
+        if (strNomFichier.length() > 4) {
+            strNomFichier = strNomFichier.substring(0, strNomFichier.length() - 4);
+            String strNomFichierShp = strNomFichier + ".shp";
+            String strNomFichierPng = strNomFichier + ".png";
             //System.out.println("Image : " + nomFichierPng);
-            File fichShp = new File(nomFichierShp);
-            File fichPng = new File(nomFichierPng);
-            if (fichShp.exists() && fichPng.exists()) {
-                iNombreZonesBarrePersonnalisee = lisFichierShp(nomFichierShp, zonesBarrePersonnalisee);
-                if (iNombreZonesBarrePersonnalisee != -1) {
+            File fileFichShp = new File(strNomFichierShp);
+            File fileFichPng = new File(strNomFichierPng);
+            if (fileFichShp.exists() && fileFichPng.exists()) {
+                setiNombreZonesBarrePersonnalisee(lisFichierShp(strNomFichierShp, getZonesBarrePersonnalisee()));
+                if (getiNombreZonesBarrePersonnalisee() != -1) {
                     btnEditerBarre.setDisable(false);
-                    tfLienImageBarrePersonnalisee.setText(nomFichierPng);
-                    imgPngBarrePersonnalisee = new Image("file:" + nomFichierPng);
+                    tfLienImageBarrePersonnalisee.setText(strNomFichierPng);
+                    imgPngBarrePersonnalisee = new Image("file:" + strNomFichierPng);
                     afficheBarrePersonnalisee();
                 }
             }
@@ -1721,116 +1735,116 @@ public class GestionnaireInterfaceController {
 
     /**
      *
-     * @param position
+     * @param strPosition
      * @param dX
      * @param dY
      * @param taille
-     * @param styleBoutons
-     * @param styleHS
+     * @param strStyleBoutons
+     * @param strStyleHS
      * @param espacement
      */
-    public void afficheBarreClassique(String position, double dX, double dY, double taille, String styleBoutons, String styleHS, double espacement) {
-        String repertBoutons = "file:" + repertBoutonsPrincipal + File.separator + styleBoutons;
+    public void afficheBarreClassique(String strPosition, double dX, double dY, double taille, String strStyleBoutons, String strStyleHS, double espacement) {
+        String strRepertBoutons = "file:" + strRepertBoutonsPrincipal + File.separator + strStyleBoutons;
         apVisualisation.getChildren().clear();
         apVisualisation.getChildren().addAll(rbClair, rbSombre, rbPerso, cbImage, ivVisualisation);
-        if (iNombreImagesFond > 0) {
-            for (int i = 0; i < iNombreImagesFond; i++) {
-                ImageView ivImageFond = new ImageView(imagesFond[i].getImgFond());
-                ivImageFond.setFitWidth(imagesFond[i].getTailleX());
-                ivImageFond.setFitHeight(imagesFond[i].getTailleY());
+        if (getiNombreImagesFond() > 0) {
+            for (int i = 0; i < getiNombreImagesFond(); i++) {
+                ImageView ivImageFond = new ImageView(getImagesFond()[i].getImgFond());
+                ivImageFond.setFitWidth(getImagesFond()[i].getTailleX());
+                ivImageFond.setFitHeight(getImagesFond()[i].getTailleY());
                 double posX = 0, posY = 0;
-                switch (imagesFond[i].getPosX()) {
+                switch (getImagesFond()[i].getStrPosX()) {
                     case "left":
-                        posX = imagesFond[i].getOffsetX() + ivVisualisation.getLayoutX();
+                        posX = getImagesFond()[i].getOffsetX() + ivVisualisation.getLayoutX();
                         break;
                     case "center":
-                        posX = ivVisualisation.getLayoutX() + (ivVisualisation.getFitWidth() - imagesFond[i].getTailleX()) / 2 + imagesFond[i].getOffsetX();
+                        posX = ivVisualisation.getLayoutX() + (ivVisualisation.getFitWidth() - getImagesFond()[i].getTailleX()) / 2 + getImagesFond()[i].getOffsetX();
                         break;
                     case "right":
-                        posX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - imagesFond[i].getOffsetX() - imagesFond[i].getTailleX();
+                        posX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - getImagesFond()[i].getOffsetX() - getImagesFond()[i].getTailleX();
                         break;
                 }
-                switch (imagesFond[i].getPosY()) {
+                switch (getImagesFond()[i].getStrPosY()) {
                     case "top":
-                        posY = imagesFond[i].getOffsetY() + ivVisualisation.getLayoutY();
+                        posY = getImagesFond()[i].getOffsetY() + ivVisualisation.getLayoutY();
                         break;
                     case "middle":
-                        posY = ivVisualisation.getLayoutY() + (ivVisualisation.getFitHeight() - imagesFond[i].getTailleY()) / 2 + imagesFond[i].getOffsetY();
+                        posY = ivVisualisation.getLayoutY() + (ivVisualisation.getFitHeight() - getImagesFond()[i].getTailleY()) / 2 + getImagesFond()[i].getOffsetY();
                         break;
                     case "bottom":
-                        posY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - imagesFond[i].getOffsetY() - imagesFond[i].getTailleY();
+                        posY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - getImagesFond()[i].getOffsetY() - getImagesFond()[i].getTailleY();
                         break;
                 }
-                if (bAfficheVignettes) {
-                    switch (positionVignettes) {
+                if (isbAfficheVignettes()) {
+                    switch (getStrPositionVignettes()) {
                         case "bottom":
-                            if (imagesFond[i].getPosY().equals("bottom")) {
-                                posY -= (tailleImageVignettes / 2 + 6);
+                            if (getImagesFond()[i].getStrPosY().equals("bottom")) {
+                                posY -= (getTailleImageVignettes() / 2 + 6);
                             }
                             break;
                         case "left":
-                            if (imagesFond[i].getPosX().equals("left")) {
-                                posX += tailleImageVignettes + 10;
+                            if (getImagesFond()[i].getStrPosX().equals("left")) {
+                                posX += getTailleImageVignettes() + 10;
                             }
                             break;
                         case "right":
-                            if (imagesFond[i].getPosX().equals("right")) {
-                                posX -= (tailleImageVignettes + 10);
+                            if (getImagesFond()[i].getStrPosX().equals("right")) {
+                                posX -= (getTailleImageVignettes() + 10);
                             }
                             break;
                     }
                 }
                 ivImageFond.setLayoutX(posX);
                 ivImageFond.setLayoutY(posY);
-                ivImageFond.setOpacity(imagesFond[i].getOpacite());
+                ivImageFond.setOpacity(getImagesFond()[i].getOpacite());
                 apVisualisation.getChildren().add(ivImageFond);
             }
         }
-        apVisualisation.getChildren().addAll(txtTitre, imgBoussole, imgAiguille, imgTwitter, imgGoogle, imgFacebook, imgEmail, apVisuVignettes, apVisuComboMenu, apVisuPlan, fondSuivant, fondPrecedent);
-        txtTitre.setVisible(bAfficheTitre);
-        chargeBarre(styleBoutons, styleHS, imageMasque);
+        apVisualisation.getChildren().addAll(lblTxtTitre, imgBoussole, imgAiguille, ivTwitter, ivGoogle, ivFacebook, ivEmail, apVisuVignettes, apVisuComboMenu, apVisuPlan, vbFondSuivant, vbFondPrecedent);
+        lblTxtTitre.setVisible(isbAfficheTitre());
+        chargeBarre(strStyleBoutons, strStyleHS, getStrImageMasque());
         afficheMasque();
         hbbarreBoutons = new HBox(espacement);
         hbbarreBoutons.setId("barreBoutons");
-        hbbarreBoutons.setVisible(strVisibiliteBarreClassique.equals("oui"));
+        hbbarreBoutons.setVisible(getStrVisibiliteBarreClassique().equals("oui"));
         hbbarreBoutons.setTranslateZ(1);
         ivHotSpot.setFitWidth(30);
         ivHotSpot.setPreserveRatio(true);
         ivHotSpot.setLayoutX(510);
         ivHotSpot.setLayoutY(310);
         ivHotSpot.setTranslateZ(1);
-        Tooltip t = new Tooltip("Hotspot panoramique");
-        t.setStyle(strTooltipStyle);
-        Tooltip.install(ivHotSpot, t);
+        Tooltip tltpHSPano = new Tooltip("Hotspot panoramique");
+        tltpHSPano.setStyle(strTooltipStyle);
+        Tooltip.install(ivHotSpot, tltpHSPano);
         ivHotSpotImage.setFitWidth(30);
         ivHotSpotImage.setPreserveRatio(true);
         ivHotSpotImage.setLayoutX(560);
         ivHotSpotImage.setLayoutY(310);
         ivHotSpotImage.setTranslateZ(1);
-        Tooltip t1 = new Tooltip("Hotspot Photo");
-        t1.setStyle(strTooltipStyle);
-        Tooltip.install(ivHotSpotImage, t1);
-        int nombreBoutons = 11;
-        if (strDeplacementsBarreClassique.equals("non")) {
-            nombreBoutons -= 4;
+        Tooltip tltpHSImage = new Tooltip("Hotspot Photo");
+        tltpHSImage.setStyle(strTooltipStyle);
+        Tooltip.install(ivHotSpotImage, tltpHSImage);
+        int iNombreBoutons = 11;
+        if (getStrDeplacementsBarreClassique().equals("non")) {
+            iNombreBoutons -= 4;
         }
-        if (strZoomBarreClassique.equals("non")) {
-            nombreBoutons -= 2;
+        if (getStrZoomBarreClassique().equals("non")) {
+            iNombreBoutons -= 2;
         }
-        if (strOutilsBarreClassique.equals("non")) {
-            nombreBoutons -= 5;
+        if (getStrOutilsBarreClassique().equals("non")) {
+            iNombreBoutons -= 5;
         } else {
-            if (strPleinEcranBarreClassique.equals("non")) {
-                nombreBoutons -= 1;
+            if (getStrPleinEcranBarreClassique().equals("non")) {
+                iNombreBoutons -= 1;
             }
-            if (strRotationBarreClassique.equals("non")) {
-                nombreBoutons -= 1;
+            if (getStrRotationBarreClassique().equals("non")) {
+                iNombreBoutons -= 1;
             }
-            if (strSourisBarreClassique.equals("non")) {
-                nombreBoutons -= 1;
+            if (getStrSourisBarreClassique().equals("non")) {
+                iNombreBoutons -= 1;
             }
         }
-        double tailleBarre1 = (double) nombreBoutons * ((double) taille + espacement);
+        double tailleBarre1 = (double) iNombreBoutons * ((double) taille + espacement);
         hbbarreBoutons.setPrefWidth(tailleBarre1);
         hbbarreBoutons.setPrefHeight((double) taille);
         hbbarreBoutons.setMinWidth(tailleBarre1);
@@ -1841,13 +1855,13 @@ public class GestionnaireInterfaceController {
         hbZoom = new HBox(espacement);
         hbOutils = new HBox(espacement);
         hbbarreBoutons.getChildren().addAll(hbDeplacements, hbZoom, hbOutils);
-        if (strDeplacementsBarreClassique.equals("non")) {
+        if (getStrDeplacementsBarreClassique().equals("non")) {
             hbbarreBoutons.getChildren().remove(hbDeplacements);
         }
-        if (strZoomBarreClassique.equals("non")) {
+        if (getStrZoomBarreClassique().equals("non")) {
             hbbarreBoutons.getChildren().remove(hbZoom);
         }
-        if (strOutilsBarreClassique.equals("non")) {
+        if (getStrOutilsBarreClassique().equals("non")) {
             hbbarreBoutons.getChildren().remove(hbOutils);
         }
         apVisualisation.getChildren().addAll(hbbarreBoutons, ivHotSpot, ivHotSpotImage, apAfficheDiapo, apFenetreAfficheInfo, lblFenetreURL, ivDiapo, apAfficheBarrePersonnalisee);
@@ -1865,8 +1879,8 @@ public class GestionnaireInterfaceController {
         ivZoomMoins.setFitHeight(taille);
         ivInfo.setFitWidth(taille);
         ivInfo.setFitHeight(taille);
-        ivPleinFenetre.setFitWidth(taille);
-        ivPleinFenetre.setFitHeight(taille);
+        ivPleinEcran.setFitWidth(taille);
+        ivPleinEcran.setFitHeight(taille);
         ivModeSouris.setFitWidth(taille);
         ivModeSouris.setFitHeight(taille);
         ivAide.setFitWidth(taille);
@@ -1875,21 +1889,21 @@ public class GestionnaireInterfaceController {
         ivAutoRotation.setFitHeight(taille);
         hbDeplacements.getChildren().addAll(ivGauche, ivHaut, ivBas, ivDroite);
         hbZoom.getChildren().addAll(ivZoomPlus, ivZoomMoins);
-        hbOutils.getChildren().addAll(ivPleinFenetre, ivModeSouris, ivAutoRotation, ivInfo, ivAide);
-        if (strPleinEcranBarreClassique.equals("non")) {
-            hbOutils.getChildren().remove(ivPleinFenetre);
+        hbOutils.getChildren().addAll(ivPleinEcran, ivModeSouris, ivAutoRotation, ivInfo, ivAide);
+        if (getStrPleinEcranBarreClassique().equals("non")) {
+            hbOutils.getChildren().remove(ivPleinEcran);
         }
-        if (strSourisBarreClassique.equals("non")) {
+        if (getStrSourisBarreClassique().equals("non")) {
             hbOutils.getChildren().remove(ivModeSouris);
         }
-        if (strRotationBarreClassique.equals("non")) {
+        if (getStrRotationBarreClassique().equals("non")) {
             hbOutils.getChildren().remove(ivAutoRotation);
         }
-        String positVert = position.split(":")[0];
-        String positHor = position.split(":")[1];
+        String strPositVert = strPosition.split(":")[0];
+        String strPositHor = strPosition.split(":")[1];
         double LX = 0;
         double LY = 0;
-        switch (positVert) {
+        switch (strPositVert) {
             case "top":
                 LY = ivVisualisation.getLayoutY() + dY;
                 break;
@@ -1901,7 +1915,7 @@ public class GestionnaireInterfaceController {
                 break;
         }
 
-        switch (positHor) {
+        switch (strPositHor) {
             case "right":
                 LX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - hbbarreBoutons.getPrefWidth() - dX;
                 break;
@@ -1912,21 +1926,21 @@ public class GestionnaireInterfaceController {
                 LX = ivVisualisation.getLayoutX() + (ivVisualisation.getFitWidth() - hbbarreBoutons.getPrefWidth()) / 2 + dX;
                 break;
         }
-        if (bAfficheVignettes) {
-            switch (positionVignettes) {
+        if (isbAfficheVignettes()) {
+            switch (getStrPositionVignettes()) {
                 case "bottom":
-                    if (positVert.equals("bottom")) {
-                        LY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - hbbarreBoutons.getPrefHeight() - offsetYBarreClassique - apVisuVignettes.getPrefHeight();
+                    if (strPositVert.equals("bottom")) {
+                        LY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - hbbarreBoutons.getPrefHeight() - getOffsetYBarreClassique() - apVisuVignettes.getPrefHeight();
                     }
                     break;
                 case "left":
-                    if (positHor.equals("left")) {
-                        LX = ivVisualisation.getLayoutX() + offsetXBarreClassique + apVisuVignettes.getPrefWidth();
+                    if (strPositHor.equals("left")) {
+                        LX = ivVisualisation.getLayoutX() + getOffsetXBarreClassique() + apVisuVignettes.getPrefWidth();
                     }
                     break;
                 case "right":
-                    if (positHor.equals("right")) {
-                        LX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - hbbarreBoutons.getPrefWidth() - offsetXBarreClassique - apVisuVignettes.getPrefWidth();
+                    if (strPositHor.equals("right")) {
+                        LX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - hbbarreBoutons.getPrefWidth() - getOffsetXBarreClassique() - apVisuVignettes.getPrefWidth();
                     }
                     break;
             }
@@ -1940,461 +1954,464 @@ public class GestionnaireInterfaceController {
      * @param repertoire
      * @return
      */
-    private ArrayList<String> listerStyle(String repertoire) {
-        ArrayList<String> liste = new ArrayList<>();
-        File[] Repertoires = new File(repertoire).listFiles();
-        for (File repert : Repertoires) {
-            if (repert.isDirectory()) {
-                String nomRepert = repert.getName();
-                if (!nomRepert.equals("hotspots")) {
-                    liste.add(nomRepert);
+    private ArrayList<String> strListerStyle(String strRepertoire) {
+        ArrayList<String> strListe = new ArrayList<>();
+        File[] fileRepertoires = new File(strRepertoire).listFiles();
+        for (File fileRepert : fileRepertoires) {
+            if (fileRepert.isDirectory()) {
+                String strNomRepert = fileRepert.getName();
+                if (!strNomRepert.equals("hotspots")) {
+                    strListe.add(strNomRepert);
                 }
             }
         }
-        return liste;
+        return strListe;
     }
 
     /**
      *
-     * @param repertoire
+     * @param strRepertoire
      * @return
      */
-    private ArrayList<String> listerHotSpots(String repertoire) {
-        ArrayList<String> liste = new ArrayList<>();
-        File[] Repertoires = new File(repertoire).listFiles(IMAGE_FILTER);
-        for (File repert : Repertoires) {
-            if (!repert.isDirectory()) {
-                String nomRepert = repert.getName();
-                liste.add(nomRepert);
+    private ArrayList<String> strListerHotSpots(String strRepertoire) {
+        ArrayList<String> strListe = new ArrayList<>();
+        File[] fileRepertoires = new File(strRepertoire).listFiles(IMAGE_FILTER);
+        for (File fileRepert : fileRepertoires) {
+            if (!fileRepert.isDirectory()) {
+                String strNomRepert = fileRepert.getName();
+                strListe.add(strNomRepert);
             }
         }
-        return liste;
+        return strListe;
     }
 
-    private ArrayList<String> listerBoussoles(String repertoire) {
-        ArrayList<String> liste = new ArrayList<>();
-        File[] Repertoires = new File(repertoire).listFiles(PNG_FILTER);
-        for (File repert : Repertoires) {
-            if (!repert.isDirectory()) {
-                String nomRepert = repert.getName();
-                if (nomRepert.contains("rose")) {
-                    liste.add(nomRepert);
+    private ArrayList<String> strListerBoussoles(String strRepertoire) {
+        ArrayList<String> strListe = new ArrayList<>();
+        File[] fileRepertoires = new File(strRepertoire).listFiles(PNG_FILTER);
+        for (File fileRepert : fileRepertoires) {
+            if (!fileRepert.isDirectory()) {
+                String strNomRepert = fileRepert.getName();
+                if (strNomRepert.contains("rose")) {
+                    strListe.add(strNomRepert);
                 }
             }
         }
-        return liste;
+        return strListe;
     }
 
-    private ArrayList<String> listerMasques(String repertoire) {
-        ArrayList<String> liste = new ArrayList<>();
-        File[] Repertoires = new File(repertoire).listFiles(PNG_FILTER);
-        for (File repert : Repertoires) {
-            if (!repert.isDirectory()) {
-                String nomRepert = repert.getName();
-                liste.add(nomRepert);
+    private ArrayList<String> strListerMasques(String strRepertoire) {
+        ArrayList<String> strListe = new ArrayList<>();
+        File[] fileRepertoires = new File(strRepertoire).listFiles(PNG_FILTER);
+        for (File fileRepert : fileRepertoires) {
+            if (!fileRepert.isDirectory()) {
+                String strNomRepert = fileRepert.getName();
+                strListe.add(strNomRepert);
             }
         }
-        return liste;
+        return strListe;
     }
 
     /**
      *
      * @return
      */
-    public String getTemplate() {
-        String contenuFichier = "";
-        contenuFichier
-                += "styleBarre=" + styleBarreClassique + "\n"
+    public String strGetTemplate() {
+        String strContenuFichier = "";
+        strContenuFichier
+                += "styleBarre=" + getStyleBarreClassique() + "\n"
                 + "couleurTheme=" + couleurTheme.toString().substring(2, 8) + "\n"
                 + "couleurBoutons=" + couleurBarreClassique.toString().substring(2, 8) + "\n"
                 + "couleurHotspots=" + couleurHotspots.toString().substring(2, 8) + "\n"
                 + "couleurHotspotsPhoto=" + couleurHotspotsPhoto.toString().substring(2, 8) + "\n"
                 + "couleurMasque=" + couleurMasque.toString().substring(2, 8) + "\n"
-                + "styleHotspots=" + strStyleHotSpots + "\n"
-                + "styleHotspotImages=" + strStyleHotSpotImages + "\n"
-                + "position=" + strPositionBarreClassique + "\n"
-                + "dX=" + Math.round(offsetXBarreClassique) + "\n"
-                + "dY=" + Math.round(offsetYBarreClassique) + "\n"
-                + "visible=" + strVisibiliteBarreClassique + "\n"
-                + "suivantPrecedent=" + bSuivantPrecedent + "\n"
-                + "deplacement=" + strDeplacementsBarreClassique + "\n"
-                + "zoom=" + strZoomBarreClassique + "\n"
-                + "outils=" + strOutilsBarreClassique + "\n"
-                + "rotation=" + strRotationBarreClassique + "\n"
-                + "FS=" + strPleinEcranBarreClassique + "\n"
-                + "souris=" + strSourisBarreClassique + "\n"
-                + "espacementBoutons=" + espacementBarreClassique + "\n"
-                + "bCouleurOrigineBarrePersonnalisee=" + bCouleurOrigineBarrePersonnalisee + "\n"
-                + "nombreZonesBarrePersonnalisee=" + iNombreZonesBarrePersonnalisee + "\n"
-                + "offsetXBarrePersonnalisee=" + offsetXBarrePersonnalisee + "\n"
-                + "offsetYBarrePersonnalisee=" + offsetYBarrePersonnalisee + "\n"
-                + "tailleBarrePersonnalisee=" + tailleBarrePersonnalisee + "\n"
-                + "tailleIconesBarrePersonnalisee=" + tailleIconesBarrePersonnalisee + "\n"
-                + "strPositionBarrePersonnalisee=" + strPositionBarrePersonnalisee + "\n"
-                + "strDeplacementsBarrePersonnalisee=" + strDeplacementsBarrePersonnalisee + "\n"
-                + "strZoomBarrePersonnalisee=" + strZoomBarrePersonnalisee + "\n"
-                + "strInfoBarrePersonnalisee=" + strInfoBarrePersonnalisee + "\n"
-                + "strAideBarrePersonnalisee=" + strAideBarrePersonnalisee + "\n"
-                + "strRotationBarrePersonnalisee=" + strRotationBarrePersonnalisee + "\n"
-                + "strPleinEcranBarrePersonnalisee=" + strPleinEcranBarrePersonnalisee + "\n"
-                + "strSourisBarrePersonnalisee=" + strSourisBarrePersonnalisee + "\n"
-                + "strVisibiliteBarrePersonnalisee=" + strVisibiliteBarrePersonnalisee + "\n"
-                + "strLienImageBarrePersonnalisee=" + strLienImageBarrePersonnalisee + "\n"
-                + "strLien1BarrePersonnalisee=" + strLien1BarrePersonnalisee + "\n"
-                + "strLien2BarrePersonnalisee=" + strLien1BarrePersonnalisee + "\n"
+                + "styleHotspots=" + getStrStyleHotSpots() + "\n"
+                + "styleHotspotImages=" + getStrStyleHotSpotImages() + "\n"
+                + "position=" + getStrPositionBarreClassique() + "\n"
+                + "dX=" + Math.round(getOffsetXBarreClassique()) + "\n"
+                + "dY=" + Math.round(getOffsetYBarreClassique()) + "\n"
+                + "visible=" + getStrVisibiliteBarreClassique() + "\n"
+                + "suivantPrecedent=" + isbSuivantPrecedent() + "\n"
+                + "deplacement=" + getStrDeplacementsBarreClassique() + "\n"
+                + "zoom=" + getStrZoomBarreClassique() + "\n"
+                + "outils=" + getStrOutilsBarreClassique() + "\n"
+                + "rotation=" + getStrRotationBarreClassique() + "\n"
+                + "FS=" + getStrPleinEcranBarreClassique() + "\n"
+                + "souris=" + getStrSourisBarreClassique() + "\n"
+                + "espacementBoutons=" + getEspacementBarreClassique() + "\n"
+                + "bCouleurOrigineBarrePersonnalisee=" + isbCouleurOrigineBarrePersonnalisee() + "\n"
+                + "nombreZonesBarrePersonnalisee=" + getiNombreZonesBarrePersonnalisee() + "\n"
+                + "offsetXBarrePersonnalisee=" + getOffsetXBarrePersonnalisee() + "\n"
+                + "offsetYBarrePersonnalisee=" + getOffsetYBarrePersonnalisee() + "\n"
+                + "tailleBarrePersonnalisee=" + getTailleBarrePersonnalisee() + "\n"
+                + "tailleIconesBarrePersonnalisee=" + getTailleIconesBarrePersonnalisee() + "\n"
+                + "strPositionBarrePersonnalisee=" + getStrPositionBarrePersonnalisee() + "\n"
+                + "strDeplacementsBarrePersonnalisee=" + getStrDeplacementsBarrePersonnalisee() + "\n"
+                + "strZoomBarrePersonnalisee=" + getStrZoomBarrePersonnalisee() + "\n"
+                + "strInfoBarrePersonnalisee=" + getStrInfoBarrePersonnalisee() + "\n"
+                + "strAideBarrePersonnalisee=" + getStrAideBarrePersonnalisee() + "\n"
+                + "strRotationBarrePersonnalisee=" + getStrRotationBarrePersonnalisee() + "\n"
+                + "strPleinEcranBarrePersonnalisee=" + getStrPleinEcranBarrePersonnalisee() + "\n"
+                + "strSourisBarrePersonnalisee=" + getStrSourisBarrePersonnalisee() + "\n"
+                + "strVisibiliteBarrePersonnalisee=" + getStrVisibiliteBarrePersonnalisee() + "\n"
+                + "strLienImageBarrePersonnalisee=" + getStrLienImageBarrePersonnalisee() + "\n"
+                + "strLien1BarrePersonnalisee=" + getStrLien1BarrePersonnalisee() + "\n"
+                + "strLien2BarrePersonnalisee=" + getStrLien1BarrePersonnalisee() + "\n"
                 + "couleurBarrePersonnalisee=" + couleurBarrePersonnalisee + "\n"
-                + "afficheTitre=" + bAfficheTitre + "\n"
-                + "titrePolice=" + strTitrePoliceNom + "\n"
-                + "titrePoliceTaille=" + strTitrePoliceTaille + "\n"
-                + "titreOpacite=" + Math.round(titreOpacite * 100.d) / 100.d + "\n"
-                + "titreTaille=" + titreTaille + "\n"
-                + "titreCouleur=" + strCouleurTitre + "\n"
-                + "titreFondCouleur=" + strCouleurFondTitre + "\n"
-                + "bFenetreInfoPersonnalise=" + bFenetreInfoPersonnalise + "\n"
-                + "bFenetreAidePersonnalise=" + bFenetreAidePersonnalise + "\n"
-                + "strFenetreInfoImage =" + strFenetreInfoImage + "\n"
-                + "strFenetreAideImage=" + strFenetreAideImage + "\n"
-                + "fenetreInfoTaille=" + fenetreInfoTaille + "\n"
-                + "fenetreAideTaille=" + fenetreAideTaille + "\n"
-                + "fenetreInfoPosX=" + fenetreInfoPosX + "\n"
-                + "fenetreInfoPosY=" + fenetreInfoPosY + "\n"
-                + "fenetreAidePosX=" + fenetreAidePosX + "\n"
-                + "fenetreAidePosY=" + fenetreAidePosY + "\n"
-                + "fenetreInfoOpacite=" + fenetreInfoOpacite + "\n"
-                + "fenetreAideOpacite=" + fenetreAideOpacite + "\n"
-                + "strFenetreURL=" + strFenetreURL + "\n"
-                + "strFenetreTexteURL=" + strFenetreTexteURL + "\n"
-                + "strFenetreURLInfobulle=" + strFenetreURLInfobulle + "\n"
-                + "strFenetreURLCouleur=" + strFenetreURLCouleur + "\n"
-                + "strFenetrePolice=" + strFenetrePolice + "\n"
-                + "fenetrePoliceTaille=" + fenetrePoliceTaille + "\n"
-                + "fenetreURLPosX=" + fenetreURLPosX + "\n"
-                + "fenetreURLPosY=" + fenetreURLPosY + "\n"
-                + "strFenetreCouleurFond=" + strFenetreCouleurFond + "\n"
-                + "fenetreOpaciteFond=" + fenetreOpaciteFond + "\n"
-                + "diaporamaOpacite=" + Math.round(diaporamaOpacite * 100.d) / 100.d + "\n"
-                + "diaporamaCouleur=" + strCouleurDiaporama + "\n"
-                + "afficheBoussole=" + bAfficheBoussole + "\n"
-                + "imageBoussole=" + strImageBoussole + "\n"
-                + "tailleBoussole=" + Math.round(tailleBoussole * 10.d) / 10.d + "\n"
-                + "positionBoussole=" + strPositionBoussole + "\n"
-                + "dXBoussole=" + Math.round(offsetXBoussole) + "\n"
-                + "dYBoussole=" + Math.round(offsetYBoussole) + "\n"
-                + "opaciteBoussole=" + Math.round(opaciteBoussole * 100.d) / 100.d + "\n"
-                + "aiguilleMobile=" + bAiguilleMobileBoussole + "\n"
-                + "afficheMasque=" + bAfficheMasque + "\n"
-                + "imageMasque=" + imageMasque + "\n"
-                + "tailleMasque=" + Math.round(tailleMasque * 10.d) / 10.d + "\n"
-                + "positionMasque=" + positionMasque + "\n"
-                + "dXMasque=" + Math.round(dXMasque) + "\n"
-                + "dYMasque=" + Math.round(dYMasque) + "\n"
-                + "opaciteMasque=" + Math.round(opaciteMasque * 100.d) / 100.d + "\n"
-                + "masqueNavigation=" + bMasqueNavigation + "\n"
-                + "masqueBoussole=" + bMasqueBoussole + "\n"
-                + "masqueTitre=" + bMasqueTitre + "\n"
-                + "masquePlan=" + bMasquePlan + "\n"
-                + "masqueReseaux=" + bMasqueReseaux + "\n"
-                + "masqueVignettes=" + bMasqueVignettes + "\n"
-                + "afficheReseauxSociaux=" + bAfficheReseauxSociaux + "\n"
-                + "tailleReseauxSociaux=" + Math.round(tailleReseauxSociaux * 10.d) / 10.d + "\n"
-                + "positionReseauxSociaux=" + positionReseauxSociaux + "\n"
-                + "dXReseauxSociaux=" + Math.round(dXReseauxSociaux) + "\n"
-                + "dYReseauxSociaux=" + Math.round(dYReseauxSociaux) + "\n"
-                + "opaciteReseauxSociaux=" + Math.round(opaciteReseauxSociaux * 100.d) / 100.d + "\n"
-                + "masqueTwitter=" + bReseauxSociauxTwitter + "\n"
-                + "masqueGoogle=" + bReseauxSociauxGoogle + "\n"
-                + "masqueFacebook=" + bReseauxSociauxFacebook + "\n"
-                + "masqueEmail=" + bReseauxSociauxEmail + "\n"
-                + "afficheVignettes=" + bAfficheVignettes + "\n"
-                + "positionVignettes=" + positionVignettes + "\n"
-                + "opaciteVignettes=" + Math.round(opaciteVignettes * 100.d) / 100.d + "\n"
-                + "tailleImageVignettes=" + Math.round(tailleImageVignettes) + "\n"
-                + "couleurFondVignettes=" + couleurFondVignettes + "\n"
-                + "couleurTexteVignettes=" + couleurTexteVignettes + "\n"
-                + "bAfficheComboMenu=" + bAfficheComboMenu + "\n"
-                + "bAfficheComboMenuImages=" + bAfficheComboMenuImages + "\n"
-                + "positionXComboMenu=" + positionXComboMenu + "\n"
-                + "positionYComboMenu=" + positionYComboMenu + "\n"
-                + "offsetXComboMenu=" + offsetXComboMenu + "\n"
-                + "offsetYComboMenu=" + offsetYComboMenu + "\n"
-                + "affichePlan=" + bAffichePlan + "\n"
-                + "positionPlan=" + positionPlan + "\n"
-                + "opacitePlan=" + Math.round(opacitePlan * 100.d) / 100.d + "\n"
-                + "largeurPlan=" + Math.round(largeurPlan) + "\n"
-                + "couleurFondPlan=" + txtCouleurFondPlan + "\n"
-                + "couleurTextePlan=" + txtCouleurTextePlan + "\n"
-                + "afficheRadar=" + bAfficheRadar + "\n"
-                + "opaciteRadar=" + Math.round(opaciteRadar * 100.d) / 100.d + "\n"
-                + "tailleRadar=" + Math.round(tailleRadar) + "\n"
-                + "couleurFondRadar=" + txtCouleurFondRadar + "\n"
-                + "couleurLigneRadar=" + txtCouleurLigneRadar + "\n"
-                + "afficheMenuContextuel=" + bAfficheMenuContextuel + "\n"
-                + "affichePrecSuivMC=" + bAffichePrecSuivMC + "\n"
-                + "affichePlaneteNormalMC=" + bAffichePlanetNormalMC + "\n"
-                + "affichePersMC1=" + bAffichePersMC1 + "\n"
-                + "affichePersMC2=" + bAffichePersMC2 + "\n"
-                + "txtPersLib1=" + strPersLib1 + "\n"
-                + "txtPersLib2=" + strPersLib2 + "\n"
-                + "txtPersURL1=" + strPersURL1 + "\n"
-                + "txtPersURL2=" + strPersURL2 + "\n"
-                + "nombreImagesFond=" + iNombreImagesFond + "\n";
-        for (int i = 0; i < iNombreImagesFond; i++) {
-            contenuFichier += "<";
-            contenuFichier += "image=" + imagesFond[i].getFichierImage() + "#";
-            contenuFichier += "posX=" + imagesFond[i].getPosX() + "#";
-            contenuFichier += "posY=" + imagesFond[i].getPosY() + "#";
-            contenuFichier += "offsetX=" + imagesFond[i].getOffsetX() + "#";
-            contenuFichier += "offsetY=" + imagesFond[i].getOffsetY() + "#";
-            contenuFichier += "tailleX=" + imagesFond[i].getTailleX() + "#";
-            contenuFichier += "tailleY=" + imagesFond[i].getTailleY() + "#";
-            contenuFichier += "opacite=" + imagesFond[i].getOpacite() + "#";
-            contenuFichier += "masquable=" + imagesFond[i].isMasquable() + "#";
-            contenuFichier += "url=" + imagesFond[i].getUrl() + "#";
-            contenuFichier += "infobulle=" + imagesFond[i].getInfobulle() + "#";
-            contenuFichier += ">\n";
+                + "afficheTitre=" + isbAfficheTitre() + "\n"
+                + "titrePolice=" + getStrTitrePoliceNom() + "\n"
+                + "titrePoliceTaille=" + getStrTitrePoliceTaille() + "\n"
+                + "titreOpacite=" + Math.round(getTitreOpacite() * 100.d) / 100.d + "\n"
+                + "titreTaille=" + getTitreTaille() + "\n"
+                + "titreCouleur=" + getStrCouleurTitre() + "\n"
+                + "titreFondCouleur=" + getStrCouleurFondTitre() + "\n"
+                + "bFenetreInfoPersonnalise=" + isbFenetreInfoPersonnalise() + "\n"
+                + "bFenetreAidePersonnalise=" + isbFenetreAidePersonnalise() + "\n"
+                + "strFenetreInfoImage =" + getStrFenetreInfoImage() + "\n"
+                + "strFenetreAideImage=" + getStrFenetreAideImage() + "\n"
+                + "fenetreInfoTaille=" + getFenetreInfoTaille() + "\n"
+                + "fenetreAideTaille=" + getFenetreAideTaille() + "\n"
+                + "fenetreInfoPosX=" + getFenetreInfoPosX() + "\n"
+                + "fenetreInfoPosY=" + getFenetreInfoPosY() + "\n"
+                + "fenetreAidePosX=" + getFenetreAidePosX() + "\n"
+                + "fenetreAidePosY=" + getFenetreAidePosY() + "\n"
+                + "fenetreInfoOpacite=" + getFenetreInfoOpacite() + "\n"
+                + "fenetreAideOpacite=" + getFenetreAideOpacite() + "\n"
+                + "strFenetreURL=" + getStrFenetreURL() + "\n"
+                + "strFenetreTexteURL=" + getStrFenetreTexteURL() + "\n"
+                + "strFenetreURLInfobulle=" + getStrFenetreURLInfobulle() + "\n"
+                + "strFenetreURLCouleur=" + getStrFenetreURLCouleur() + "\n"
+                + "strFenetrePolice=" + getStrFenetrePolice() + "\n"
+                + "fenetrePoliceTaille=" + getFenetrePoliceTaille() + "\n"
+                + "fenetreURLPosX=" + getFenetreURLPosX() + "\n"
+                + "fenetreURLPosY=" + getFenetreURLPosY() + "\n"
+                + "strFenetreCouleurFond=" + getStrFenetreCouleurFond() + "\n"
+                + "fenetreOpaciteFond=" + getFenetreOpaciteFond() + "\n"
+                + "diaporamaOpacite=" + Math.round(getDiaporamaOpacite() * 100.d) / 100.d + "\n"
+                + "diaporamaCouleur=" + getStrCouleurDiaporama() + "\n"
+                + "afficheBoussole=" + isbAfficheBoussole() + "\n"
+                + "imageBoussole=" + getStrImageBoussole() + "\n"
+                + "tailleBoussole=" + Math.round(getTailleBoussole() * 10.d) / 10.d + "\n"
+                + "positionBoussole=" + getStrPositionBoussole() + "\n"
+                + "dXBoussole=" + Math.round(getOffsetXBoussole()) + "\n"
+                + "dYBoussole=" + Math.round(getOffsetYBoussole()) + "\n"
+                + "opaciteBoussole=" + Math.round(getOpaciteBoussole() * 100.d) / 100.d + "\n"
+                + "aiguilleMobile=" + isbAiguilleMobileBoussole() + "\n"
+                + "afficheMasque=" + isbAfficheMasque() + "\n"
+                + "imageMasque=" + getStrImageMasque() + "\n"
+                + "tailleMasque=" + Math.round(getTailleMasque() * 10.d) / 10.d + "\n"
+                + "positionMasque=" + getStrPositionMasque() + "\n"
+                + "dXMasque=" + Math.round(getdXMasque()) + "\n"
+                + "dYMasque=" + Math.round(getdYMasque()) + "\n"
+                + "opaciteMasque=" + Math.round(getOpaciteMasque() * 100.d) / 100.d + "\n"
+                + "masqueNavigation=" + isbMasqueNavigation() + "\n"
+                + "masqueBoussole=" + isbMasqueBoussole() + "\n"
+                + "masqueTitre=" + isbMasqueTitre() + "\n"
+                + "masquePlan=" + isbMasquePlan() + "\n"
+                + "masqueReseaux=" + isbMasqueReseaux() + "\n"
+                + "masqueVignettes=" + isbMasqueVignettes() + "\n"
+                + "masqueCombo=" + isbMasqueCombo() + "\n"
+                + "masqueSuivPrec=" + isbMasqueSuivPrec() + "\n"
+                + "masqueHotspots=" + isbMasqueHotspots() + "\n"
+                + "afficheReseauxSociaux=" + isbAfficheReseauxSociaux() + "\n"
+                + "tailleReseauxSociaux=" + Math.round(getTailleReseauxSociaux() * 10.d) / 10.d + "\n"
+                + "positionReseauxSociaux=" + getStrPositionReseauxSociaux() + "\n"
+                + "dXReseauxSociaux=" + Math.round(getdXReseauxSociaux()) + "\n"
+                + "dYReseauxSociaux=" + Math.round(getdYReseauxSociaux()) + "\n"
+                + "opaciteReseauxSociaux=" + Math.round(getOpaciteReseauxSociaux() * 100.d) / 100.d + "\n"
+                + "masqueTwitter=" + isbReseauxSociauxTwitter() + "\n"
+                + "masqueGoogle=" + isbReseauxSociauxGoogle() + "\n"
+                + "masqueFacebook=" + isbReseauxSociauxFacebook() + "\n"
+                + "masqueEmail=" + isbReseauxSociauxEmail() + "\n"
+                + "afficheVignettes=" + isbAfficheVignettes() + "\n"
+                + "positionVignettes=" + getStrPositionVignettes() + "\n"
+                + "opaciteVignettes=" + Math.round(getOpaciteVignettes() * 100.d) / 100.d + "\n"
+                + "tailleImageVignettes=" + Math.round(getTailleImageVignettes()) + "\n"
+                + "couleurFondVignettes=" + getStrCouleurFondVignettes() + "\n"
+                + "couleurTexteVignettes=" + getStrCouleurTexteVignettes() + "\n"
+                + "bAfficheComboMenu=" + isbAfficheComboMenu() + "\n"
+                + "bAfficheComboMenuImages=" + isbAfficheComboMenuImages() + "\n"
+                + "positionXComboMenu=" + getStrPositionXComboMenu() + "\n"
+                + "positionYComboMenu=" + getStrPositionYComboMenu() + "\n"
+                + "offsetXComboMenu=" + getOffsetXComboMenu() + "\n"
+                + "offsetYComboMenu=" + getOffsetYComboMenu() + "\n"
+                + "affichePlan=" + isbAffichePlan() + "\n"
+                + "positionPlan=" + getStrPositionPlan() + "\n"
+                + "opacitePlan=" + Math.round(getOpacitePlan() * 100.d) / 100.d + "\n"
+                + "largeurPlan=" + Math.round(getLargeurPlan()) + "\n"
+                + "couleurFondPlan=" + getStrCouleurFondPlan() + "\n"
+                + "couleurTextePlan=" + getStrCouleurTextePlan() + "\n"
+                + "afficheRadar=" + isbAfficheRadar() + "\n"
+                + "opaciteRadar=" + Math.round(getOpaciteRadar() * 100.d) / 100.d + "\n"
+                + "tailleRadar=" + Math.round(getTailleRadar()) + "\n"
+                + "couleurFondRadar=" + getStrCouleurFondRadar() + "\n"
+                + "couleurLigneRadar=" + getStrCouleurLigneRadar() + "\n"
+                + "afficheMenuContextuel=" + isbAfficheMenuContextuel() + "\n"
+                + "affichePrecSuivMC=" + isbAffichePrecSuivMC() + "\n"
+                + "affichePlaneteNormalMC=" + isbAffichePlanetNormalMC() + "\n"
+                + "affichePersMC1=" + isbAffichePersMC1() + "\n"
+                + "affichePersMC2=" + isbAffichePersMC2() + "\n"
+                + "txtPersLib1=" + getStrPersLib1() + "\n"
+                + "txtPersLib2=" + getStrPersLib2() + "\n"
+                + "txtPersURL1=" + getStrPersURL1() + "\n"
+                + "txtPersURL2=" + getStrPersURL2() + "\n"
+                + "nombreImagesFond=" + getiNombreImagesFond() + "\n";
+        for (int i = 0; i < getiNombreImagesFond(); i++) {
+            strContenuFichier += "<";
+            strContenuFichier += "image=" + getImagesFond()[i].getStrFichierImage() + "#";
+            strContenuFichier += "posX=" + getImagesFond()[i].getStrPosX() + "#";
+            strContenuFichier += "posY=" + getImagesFond()[i].getStrPosY() + "#";
+            strContenuFichier += "offsetX=" + getImagesFond()[i].getOffsetX() + "#";
+            strContenuFichier += "offsetY=" + getImagesFond()[i].getOffsetY() + "#";
+            strContenuFichier += "tailleX=" + getImagesFond()[i].getTailleX() + "#";
+            strContenuFichier += "tailleY=" + getImagesFond()[i].getTailleY() + "#";
+            strContenuFichier += "opacite=" + getImagesFond()[i].getOpacite() + "#";
+            strContenuFichier += "masquable=" + getImagesFond()[i].isMasquable() + "#";
+            strContenuFichier += "url=" + getImagesFond()[i].getStrUrl() + "#";
+            strContenuFichier += "infobulle=" + getImagesFond()[i].getStrInfobulle() + "#";
+            strContenuFichier += ">\n";
         }
 
-        return contenuFichier;
+        return strContenuFichier;
     }
 
     /**
      *
-     * @param templ
+     * @param strTemplate
      */
-    public void setTemplate(List<String> templ) {
-        bAfficheBoussole = false;
-        bAfficheMasque = false;
-        bAfficheVignettes = false;
-        bAfficheReseauxSociaux = false;
-        iNombreImagesFond = 0;
-        File repertoirePlan;
+    public void setTemplate(List<String> strTemplate) {
+        setbAfficheBoussole(false);
+        setbAfficheMasque(false);
+        setbAfficheVignettes(false);
+        setbAfficheReseauxSociaux(false);
+        setiNombreImagesFond(0);
+        File fileRepertoirePlan;
 
-        for (String chaine : templ) {
-            if (chaine.split("image=").length > 1) {
-                imagesFond[iNombreImagesFond] = new ImageFond();
+        for (String strChaine : strTemplate) {
+            if (strChaine.split("image=").length > 1) {
+                getImagesFond()[getiNombreImagesFond()] = new ImageFond();
 
-                chaine = chaine.replace("<", "");
-                chaine = chaine.replace(">", "");
+                strChaine = strChaine.replace("<", "");
+                strChaine = strChaine.replace(">", "");
                 //System.out.println("chaine : " + chaine);
-                String[] elements = chaine.split("#");
-                for (String ch1 : elements) {
-                    String variable = ch1.split("=")[0];
-                    String valeur = "";
-                    if (ch1.split("=").length > 1) {
-                        valeur = ch1.split("=")[1];
+                String[] strElements = strChaine.split("#");
+                for (String strTexte1 : strElements) {
+                    String strVariable = strTexte1.split("=")[0];
+                    String strValeur = "";
+                    if (strTexte1.split("=").length > 1) {
+                        strValeur = strTexte1.split("=")[1];
                     }
                     //System.out.println(variable + "=" + valeur);
-                    switch (variable) {
+                    switch (strVariable) {
                         case "image":
-                            imagesFond[iNombreImagesFond].setFichierImage(valeur);
-                            imagesFond[iNombreImagesFond].setImgFond(new Image("file:" + valeur));
-                            repertoirePlan = new File(strRepertTemp + File.separator + "images");
-                            if (!repertoirePlan.exists()) {
-                                repertoirePlan.mkdirs();
+                            getImagesFond()[getiNombreImagesFond()].setStrFichierImage(strValeur);
+                            getImagesFond()[getiNombreImagesFond()].setImgFond(new Image("file:" + strValeur));
+                            fileRepertoirePlan = new File(strRepertTemp + File.separator + "images");
+                            if (!fileRepertoirePlan.exists()) {
+                                fileRepertoirePlan.mkdirs();
                             }
                             try {
-                                copieFichierRepertoire(imagesFond[iNombreImagesFond].getFichierImage(), repertoirePlan.getAbsolutePath());
+                                copieFichierRepertoire(getImagesFond()[getiNombreImagesFond()].getStrFichierImage(), fileRepertoirePlan.getAbsolutePath());
                             } catch (IOException ex) {
                                 Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
                             }
                             break;
                         case "posX":
-                            imagesFond[iNombreImagesFond].setPosX(valeur);
+                            getImagesFond()[getiNombreImagesFond()].setStrPosX(strValeur);
                             break;
                         case "posY":
-                            imagesFond[iNombreImagesFond].setPosY(valeur);
+                            getImagesFond()[getiNombreImagesFond()].setStrPosY(strValeur);
                             break;
                         case "url":
-                            imagesFond[iNombreImagesFond].setUrl(valeur);
+                            getImagesFond()[getiNombreImagesFond()].setStrUrl(strValeur);
                             break;
                         case "infobulle":
-                            imagesFond[iNombreImagesFond].setInfobulle(valeur);
+                            getImagesFond()[getiNombreImagesFond()].setStrInfobulle(strValeur);
                             break;
                         case "offsetX":
-                            imagesFond[iNombreImagesFond].setOffsetX(Double.parseDouble(valeur));
+                            getImagesFond()[getiNombreImagesFond()].setOffsetX(Double.parseDouble(strValeur));
                             break;
                         case "offsetY":
-                            imagesFond[iNombreImagesFond].setOffsetY(Double.parseDouble(valeur));
+                            getImagesFond()[getiNombreImagesFond()].setOffsetY(Double.parseDouble(strValeur));
                             break;
                         case "opacite":
-                            imagesFond[iNombreImagesFond].setOpacite(Double.parseDouble(valeur));
+                            getImagesFond()[getiNombreImagesFond()].setOpacite(Double.parseDouble(strValeur));
                             break;
                         case "masquable":
-                            imagesFond[iNombreImagesFond].setMasquable(valeur.equals("true"));
+                            getImagesFond()[getiNombreImagesFond()].setMasquable(strValeur.equals("true"));
                             break;
                         case "tailleX":
-                            imagesFond[iNombreImagesFond].setTailleX(Integer.parseInt(valeur));
+                            getImagesFond()[getiNombreImagesFond()].setTailleX(Integer.parseInt(strValeur));
                             break;
                         case "tailleY":
-                            imagesFond[iNombreImagesFond].setTailleY(Integer.parseInt(valeur));
+                            getImagesFond()[getiNombreImagesFond()].setTailleY(Integer.parseInt(strValeur));
                             break;
                     }
 
                 }
-                iNombreImagesFond++;
+                setiNombreImagesFond(getiNombreImagesFond() + 1);
             } else {
-                String variable = chaine.split("=")[0];
-                String valeur = "";
-                if (chaine.split("=").length > 1) {
-                    valeur = chaine.split("=")[1];
+                String strVariable = strChaine.split("=")[0];
+                String strValeur = "";
+                if (strChaine.split("=").length > 1) {
+                    strValeur = strChaine.split("=")[1];
                 }
                 //System.out.println(variable + "=" + valeur);
-                switch (variable) {
+                switch (strVariable) {
                     case "couleurTheme":
-                        couleurTheme = Color.web(valeur);
+                        couleurTheme = Color.web(strValeur);
                         break;
                     case "couleurBoutons":
-                        couleurBarreClassique = Color.web(valeur);
+                        couleurBarreClassique = Color.web(strValeur);
                         break;
                     case "couleurHotspots":
-                        couleurHotspots = Color.web(valeur);
+                        couleurHotspots = Color.web(strValeur);
                         break;
                     case "couleurHotspotsPhoto":
-                        couleurHotspotsPhoto = Color.web(valeur);
+                        couleurHotspotsPhoto = Color.web(strValeur);
                         break;
                     case "couleurMasque":
-                        couleurMasque = Color.web(valeur);
+                        couleurMasque = Color.web(strValeur);
                         break;
 
                     case "styleBarre":
-                        styleBarreClassique = valeur;
+                        setStyleBarreClassique(strValeur);
                         break;
                     case "suivantPrecedent":
-                        bSuivantPrecedent = (valeur.equals("true"));
+                        setbSuivantPrecedent(strValeur.equals("true"));
                         break;
 
                     case "styleHotspots":
-                        strStyleHotSpots = valeur;
+                        setStrStyleHotSpots(strValeur);
                         break;
                     case "styleHotspotImages":
-                        strStyleHotSpotImages = valeur;
+                        setStrStyleHotSpotImages(strValeur);
                         break;
                     case "position":
-                        strPositionBarreClassique = valeur;
+                        setStrPositionBarreClassique(strValeur);
 
                         break;
                     case "dX":
-                        offsetXBarreClassique = Double.parseDouble(valeur);
+                        setOffsetXBarreClassique(Double.parseDouble(strValeur));
                         break;
                     case "dY":
-                        offsetYBarreClassique = Double.parseDouble(valeur);
+                        setOffsetYBarreClassique(Double.parseDouble(strValeur));
                         break;
                     case "visible":
-                        strVisibiliteBarreClassique = valeur;
+                        setStrVisibiliteBarreClassique(strValeur);
                         break;
                     case "deplacement":
-                        strDeplacementsBarreClassique = valeur;
+                        setStrDeplacementsBarreClassique(strValeur);
                         break;
                     case "zoom":
-                        strZoomBarreClassique = valeur;
+                        setStrZoomBarreClassique(strValeur);
                         break;
                     case "outils":
-                        strOutilsBarreClassique = valeur;
+                        setStrOutilsBarreClassique(strValeur);
                         break;
                     case "rotation":
-                        strRotationBarreClassique = valeur;
+                        setStrRotationBarreClassique(strValeur);
                         break;
                     case "FS":
-                        strPleinEcranBarreClassique = valeur;
+                        setStrPleinEcranBarreClassique(strValeur);
                         break;
                     case "souris":
-                        strSourisBarreClassique = valeur;
+                        setStrSourisBarreClassique(strValeur);
                         break;
                     case "espacementBoutons":
-                        espacementBarreClassique = Double.parseDouble(valeur);
+                        setEspacementBarreClassique(Double.parseDouble(strValeur));
                         break;
                     case "bCouleurOrigineBarrePersonnalisee":
-                        bCouleurOrigineBarrePersonnalisee = valeur.equals("true");
+                        setbCouleurOrigineBarrePersonnalisee(strValeur.equals("true"));
                         break;
                     case "nombreZonesBarrePersonnalisee":
-                        iNombreZonesBarrePersonnalisee = Integer.parseInt(valeur);
+                        setiNombreZonesBarrePersonnalisee(Integer.parseInt(strValeur));
                         break;
                     case "offsetXBarrePersonnalisee":
-                        offsetXBarrePersonnalisee = Double.parseDouble(valeur);
+                        setOffsetXBarrePersonnalisee(Double.parseDouble(strValeur));
                         break;
                     case "offsetYBarrePersonnalisee":
-                        offsetYBarrePersonnalisee = Double.parseDouble(valeur);
+                        setOffsetYBarrePersonnalisee(Double.parseDouble(strValeur));
                         break;
                     case "tailleBarrePersonnalisee":
-                        tailleBarrePersonnalisee = Double.parseDouble(valeur);
+                        setTailleBarrePersonnalisee(Double.parseDouble(strValeur));
                         break;
                     case "tailleIconesBarrePersonnalisee":
-                        tailleIconesBarrePersonnalisee = Double.parseDouble(valeur);
+                        setTailleIconesBarrePersonnalisee(Double.parseDouble(strValeur));
                         break;
                     case "strPositionBarrePersonnalisee":
-                        strPositionBarrePersonnalisee = valeur;
+                        setStrPositionBarrePersonnalisee(strValeur);
                         break;
                     case "strDeplacementsBarrePersonnalisee":
-                        strDeplacementsBarrePersonnalisee = valeur;
+                        setStrDeplacementsBarrePersonnalisee(strValeur);
                         break;
                     case "strZoomBarrePersonnalisee":
-                        strZoomBarrePersonnalisee = valeur;
+                        setStrZoomBarrePersonnalisee(strValeur);
                         break;
                     case "strInfoBarrePersonnalisee":
-                        strInfoBarrePersonnalisee = valeur;
+                        setStrInfoBarrePersonnalisee(strValeur);
                         break;
                     case "strAideBarrePersonnalisee":
-                        strAideBarrePersonnalisee = valeur;
+                        setStrAideBarrePersonnalisee(strValeur);
                         break;
                     case "strRotationBarrePersonnalisee":
-                        strRotationBarrePersonnalisee = valeur;
+                        setStrRotationBarrePersonnalisee(strValeur);
                         break;
                     case "strPleinEcranBarrePersonnalisee":
-                        strPleinEcranBarrePersonnalisee = valeur;
+                        setStrPleinEcranBarrePersonnalisee(strValeur);
                         break;
                     case "strSourisBarrePersonnalisee":
-                        strSourisBarrePersonnalisee = valeur;
+                        setStrSourisBarrePersonnalisee(strValeur);
                         break;
                     case "strVisibiliteBarrePersonnalisee":
-                        strVisibiliteBarrePersonnalisee = valeur;
+                        setStrVisibiliteBarrePersonnalisee(strValeur);
                         break;
                     case "strLienImageBarrePersonnalisee":
-                        strLienImageBarrePersonnalisee = valeur;
+                        setStrLienImageBarrePersonnalisee(strValeur);
                         break;
                     case "strLien1BarrePersonnalisee":
-                        strLien1BarrePersonnalisee = valeur;
+                        setStrLien1BarrePersonnalisee(strValeur);
                         break;
                     case "strLien2BarrePersonnalisee":
-                        strLien2BarrePersonnalisee = valeur;
+                        setStrLien2BarrePersonnalisee(strValeur);
                         break;
                     case "couleurBarrePersonnalisee":
-                        couleurBarrePersonnalisee = Color.web(valeur);
+                        couleurBarrePersonnalisee = Color.web(strValeur);
                     case "afficheTitre":
-                        bAfficheTitre = valeur.equals("true");
+                        setbAfficheTitre(strValeur.equals("true"));
                         break;
                     case "titrePolice":
-                        strTitrePoliceNom = valeur;
+                        setStrTitrePoliceNom(strValeur);
                         break;
                     case "titrePoliceTaille":
-                        strTitrePoliceTaille = valeur;
+                        setStrTitrePoliceTaille(strValeur);
                         break;
                     case "titreOpacite":
-                        titreOpacite = Double.parseDouble(valeur);
+                        setTitreOpacite(Double.parseDouble(strValeur));
                         break;
                     case "titreTaille":
-                        titreTaille = Double.parseDouble(valeur);
+                        setTitreTaille(Double.parseDouble(strValeur));
                         break;
                     case "titreCouleur":
-                        strCouleurTitre = valeur;
+                        setStrCouleurTitre(strValeur);
                         break;
                     case "titreFondCouleur":
-                        strCouleurFondTitre = valeur;
+                        setStrCouleurFondTitre(strValeur);
                         break;
                     case "bFenetreInfoPersonnalise":
-                        bFenetreInfoPersonnalise = valeur.equals("true");
+                        setbFenetreInfoPersonnalise(strValeur.equals("true"));
                         break;
                     case "bFenetreAidePersonnalise":
-                        bFenetreAidePersonnalise = valeur.equals("true");
+                        setbFenetreAidePersonnalise(strValeur.equals("true"));
                         break;
                     case "strFenetreInfoImage ":
-                        strFenetreInfoImage = valeur;
+                        setStrFenetreInfoImage(strValeur);
                         if (!strFenetreInfoImage.equals("")) {
-                            repertoirePlan = new File(strRepertTemp + File.separator + "images");
-                            if (!repertoirePlan.exists()) {
-                                repertoirePlan.mkdirs();
+                            fileRepertoirePlan = new File(strRepertTemp + File.separator + "images");
+                            if (!fileRepertoirePlan.exists()) {
+                                fileRepertoirePlan.mkdirs();
                             }
                             try {
-                                copieFichierRepertoire(strFenetreInfoImage, repertoirePlan.getAbsolutePath());
+                                copieFichierRepertoire(getStrFenetreInfoImage(), fileRepertoirePlan.getAbsolutePath());
                             } catch (IOException ex) {
                                 Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
                             }
@@ -2402,271 +2419,280 @@ public class GestionnaireInterfaceController {
                         break;
 
                     case "strFenetreAideImage":
-                        strFenetreAideImage = valeur;
+                        setStrFenetreAideImage(strValeur);
                         if (!strFenetreAideImage.equals("")) {
-                            repertoirePlan = new File(strRepertTemp + File.separator + "images");
-                            if (!repertoirePlan.exists()) {
-                                repertoirePlan.mkdirs();
+                            fileRepertoirePlan = new File(strRepertTemp + File.separator + "images");
+                            if (!fileRepertoirePlan.exists()) {
+                                fileRepertoirePlan.mkdirs();
                             }
                             try {
-                                copieFichierRepertoire(strFenetreAideImage, repertoirePlan.getAbsolutePath());
+                                copieFichierRepertoire(getStrFenetreAideImage(), fileRepertoirePlan.getAbsolutePath());
                             } catch (IOException ex) {
                                 Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
                             }
                         }
                         break;
                     case "fenetreInfoTaille":
-                        fenetreInfoTaille = Double.parseDouble(valeur);
+                        setFenetreInfoTaille(Double.parseDouble(strValeur));
                         break;
                     case "fenetreAideTaille":
-                        fenetreAideTaille = Double.parseDouble(valeur);
+                        setFenetreAideTaille(Double.parseDouble(strValeur));
                         break;
                     case "fenetreInfoPosX":
-                        fenetreInfoPosX = Double.parseDouble(valeur);
+                        setFenetreInfoPosX(Double.parseDouble(strValeur));
                         break;
                     case "fenetreInfoPosY":
-                        fenetreInfoPosY = Double.parseDouble(valeur);
+                        setFenetreInfoPosY(Double.parseDouble(strValeur));
                         break;
                     case "fenetreAidePosX":
-                        fenetreAidePosX = Double.parseDouble(valeur);
+                        setFenetreAidePosX(Double.parseDouble(strValeur));
                         break;
                     case "fenetreAidePosY":
-                        fenetreAidePosY = Double.parseDouble(valeur);
+                        setFenetreAidePosY(Double.parseDouble(strValeur));
                         break;
                     case "fenetreInfoOpacite":
-                        fenetreInfoOpacite = Double.parseDouble(valeur);
+                        setFenetreInfoOpacite(Double.parseDouble(strValeur));
                         break;
                     case "fenetreAideOpacite":
-                        fenetreAideOpacite = Double.parseDouble(valeur);
+                        setFenetreAideOpacite(Double.parseDouble(strValeur));
                         break;
                     case "strFenetreURL":
-                        strFenetreURL = valeur;
+                        setStrFenetreURL(strValeur);
                         break;
                     case "strFenetreTexteURL":
-                        strFenetreTexteURL = valeur;
+                        setStrFenetreTexteURL(strValeur);
                         break;
                     case "strFenetreURLInfobulle":
-                        strFenetreURLInfobulle = valeur;
+                        setStrFenetreURLInfobulle(strValeur);
                         break;
                     case "strFenetreURLCouleur":
-                        strFenetreURLCouleur = valeur;
+                        setStrFenetreURLCouleur(strValeur);
                         break;
                     case "strFenetrePolice":
-                        strFenetrePolice = valeur;
+                        setStrFenetrePolice(strValeur);
                         break;
                     case "fenetrePoliceTaille":
-                        fenetrePoliceTaille = Double.parseDouble(valeur);
+                        setFenetrePoliceTaille(Double.parseDouble(strValeur));
                         break;
                     case "fenetreURLPosX":
-                        fenetreURLPosX = Double.parseDouble(valeur);
+                        setFenetreURLPosX(Double.parseDouble(strValeur));
                         break;
                     case "fenetreURLPosY":
-                        fenetreURLPosY = Double.parseDouble(valeur);
+                        setFenetreURLPosY(Double.parseDouble(strValeur));
                         break;
                     case "strFenetreCouleurFond":
-                        strFenetreCouleurFond = valeur;
+                        setStrFenetreCouleurFond(strValeur);
                         break;
                     case "fenetreOpaciteFond":
-                        fenetreOpaciteFond = Double.parseDouble(valeur);
+                        setFenetreOpaciteFond(Double.parseDouble(strValeur));
                         break;
                     case "diaporamaOpacite":
-                        diaporamaOpacite = Double.parseDouble(valeur);
+                        setDiaporamaOpacite(Double.parseDouble(strValeur));
                         break;
                     case "diaporamaCouleur":
-                        strCouleurDiaporama = valeur;
+                        setStrCouleurDiaporama(strValeur);
                         break;
                     case "afficheBoussole":
-                        bAfficheBoussole = (valeur.equals("true"));
+                        setbAfficheBoussole(strValeur.equals("true"));
                         break;
                     case "imageBoussole":
-                        strImageBoussole = valeur;
+                        setStrImageBoussole(strValeur);
                         break;
                     case "tailleBoussole":
-                        tailleBoussole = Double.parseDouble(valeur);
+                        setTailleBoussole(Double.parseDouble(strValeur));
                         break;
                     case "positionBoussole":
-                        strPositionBoussole = valeur;
+                        setStrPositionBoussole(strValeur);
                         break;
                     case "dXBoussole":
-                        offsetXBoussole = Double.parseDouble(valeur);
+                        setOffsetXBoussole(Double.parseDouble(strValeur));
                         break;
                     case "dYBoussole":
-                        offsetYBoussole = Double.parseDouble(valeur);
+                        setOffsetYBoussole(Double.parseDouble(strValeur));
                         break;
                     case "opaciteBoussole":
-                        opaciteBoussole = Double.parseDouble(valeur);
+                        setOpaciteBoussole(Double.parseDouble(strValeur));
                         break;
                     case "aiguilleMobile":
-                        bAiguilleMobileBoussole = (valeur.equals("true"));
+                        setbAiguilleMobileBoussole(strValeur.equals("true"));
                         break;
                     case "afficheMasque":
-                        bAfficheMasque = (valeur.equals("true"));
+                        setbAfficheMasque(strValeur.equals("true"));
                         break;
                     case "imageMasque":
-                        imageMasque = valeur;
+                        setStrImageMasque(strValeur);
                         break;
                     case "tailleMasque":
-                        tailleMasque = Double.parseDouble(valeur);
+                        setTailleMasque(Double.parseDouble(strValeur));
                         break;
                     case "positionMasque":
-                        positionMasque = valeur;
+                        setStrPositionMasque(strValeur);
                         break;
                     case "dXMasque":
-                        dXMasque = Double.parseDouble(valeur);
+                        setdXMasque(Double.parseDouble(strValeur));
                         break;
                     case "dYMasque":
-                        dYMasque = Double.parseDouble(valeur);
+                        setdYMasque(Double.parseDouble(strValeur));
                         break;
                     case "opaciteMasque":
-                        opaciteMasque = Double.parseDouble(valeur);
+                        setOpaciteMasque(Double.parseDouble(strValeur));
                         break;
                     case "masqueNavigation":
-                        bMasqueNavigation = (valeur.equals("true"));
+                        setbMasqueNavigation(strValeur.equals("true"));
                         break;
                     case "masqueBoussole":
-                        bMasqueBoussole = (valeur.equals("true"));
+                        setbMasqueBoussole(strValeur.equals("true"));
                         break;
                     case "masqueTitre":
-                        bMasqueTitre = (valeur.equals("true"));
+                        setbMasqueTitre(strValeur.equals("true"));
                         break;
                     case "masquePlan":
-                        bMasquePlan = (valeur.equals("true"));
+                        setbMasquePlan(strValeur.equals("true"));
                         break;
                     case "masqueReseaux":
-                        bMasqueReseaux = (valeur.equals("true"));
+                        setbMasqueReseaux(strValeur.equals("true"));
                         break;
                     case "masqueVignettes":
-                        bMasqueVignettes = (valeur.equals("true"));
+                        setbMasqueVignettes(strValeur.equals("true"));
+                        break;
+                    case "masqueCombo":
+                        setbMasqueCombo(strValeur.equals("true"));
+                        break;
+                    case "masqueSuivPrec":
+                        setbMasqueSuivPrec(strValeur.equals("true"));
+                        break;
+                    case "masqueHotspots":
+                        setbMasqueHotspots(strValeur.equals("true"));
                         break;
                     case "afficheReseauxSociaux":
-                        bAfficheReseauxSociaux = (valeur.equals("true"));
+                        setbAfficheReseauxSociaux(strValeur.equals("true"));
                         break;
                     case "tailleReseauxSociaux":
-                        tailleReseauxSociaux = Double.parseDouble(valeur);
+                        setTailleReseauxSociaux(Double.parseDouble(strValeur));
                         break;
                     case "positionReseauxSociaux":
-                        positionReseauxSociaux = valeur;
+                        setStrPositionReseauxSociaux(strValeur);
                         break;
                     case "dXReseauxSociaux":
-                        dXReseauxSociaux = Double.parseDouble(valeur);
+                        setdXReseauxSociaux(Double.parseDouble(strValeur));
                         break;
                     case "dYReseauxSociaux":
-                        dYReseauxSociaux = Double.parseDouble(valeur);
+                        setdYReseauxSociaux(Double.parseDouble(strValeur));
                         break;
                     case "opaciteReseauxSociaux":
-                        opaciteReseauxSociaux = Double.parseDouble(valeur);
+                        setOpaciteReseauxSociaux(Double.parseDouble(strValeur));
                         break;
                     case "masqueTwitter":
-                        bReseauxSociauxTwitter = (valeur.equals("true"));
+                        setbReseauxSociauxTwitter(strValeur.equals("true"));
                         break;
                     case "masqueGoogle":
-                        bReseauxSociauxGoogle = (valeur.equals("true"));
+                        setbReseauxSociauxGoogle(strValeur.equals("true"));
                         break;
                     case "masqueFacebook":
-                        bReseauxSociauxFacebook = (valeur.equals("true"));
+                        setbReseauxSociauxFacebook(strValeur.equals("true"));
                         break;
                     case "masqueEmail":
-                        bReseauxSociauxEmail = (valeur.equals("true"));
+                        setbReseauxSociauxEmail(strValeur.equals("true"));
                         break;
                     case "afficheVignettes":
-                        bAfficheVignettes = (valeur.equals("true"));
+                        setbAfficheVignettes(strValeur.equals("true"));
                         break;
                     case "positionVignettes":
-                        positionVignettes = valeur;
+                        setStrPositionVignettes(strValeur);
                         break;
                     case "opaciteVignettes":
-                        opaciteVignettes = Double.parseDouble(valeur);
+                        setOpaciteVignettes(Double.parseDouble(strValeur));
                         break;
                     case "tailleImageVignettes":
-                        tailleImageVignettes = Double.parseDouble(valeur);
+                        setTailleImageVignettes(Double.parseDouble(strValeur));
                         break;
                     case "couleurFondVignettes":
-                        couleurFondVignettes = valeur;
+                        setStrCouleurFondVignettes(strValeur);
                         break;
                     case "couleurTexteVignettes":
-                        couleurTexteVignettes = valeur;
+                        setStrCouleurTexteVignettes(strValeur);
                         break;
                     case "bAfficheComboMenu":
-                        bAfficheComboMenu = valeur.equals("true");
+                        setbAfficheComboMenu(strValeur.equals("true"));
                         break;
                     case "bAfficheComboMenuImages":
-                        bAfficheComboMenuImages = valeur.equals("true");
+                        setbAfficheComboMenuImages(strValeur.equals("true"));
                         break;
                     case "positionXComboMenu":
-                        positionXComboMenu = valeur;
+                        setStrPositionXComboMenu(strValeur);
                         break;
                     case "positionYComboMenu":
-                        positionYComboMenu = valeur;
+                        setStrPositionYComboMenu(strValeur);
                         break;
                     case "offsetXComboMenu":
-                        offsetXComboMenu = Double.parseDouble(valeur);
+                        setOffsetXComboMenu(Double.parseDouble(strValeur));
                         break;
                     case "offsetYComboMenu":
-                        offsetYComboMenu = Double.parseDouble(valeur);
+                        setOffsetYComboMenu(Double.parseDouble(strValeur));
                         break;
                     case "affichePlan":
-                        bAffichePlan = valeur.equals("true");
+                        setbAffichePlan(strValeur.equals("true"));
                         break;
                     case "positionPlan":
-                        positionPlan = valeur;
+                        setStrPositionPlan(strValeur);
                         break;
                     case "opacitePlan":
-                        opacitePlan = Double.parseDouble(valeur);
+                        setOpacitePlan(Double.parseDouble(strValeur));
                         break;
                     case "largeurPlan":
-                        largeurPlan = Double.parseDouble(valeur);
+                        setLargeurPlan(Double.parseDouble(strValeur));
                         break;
                     case "couleurFondPlan":
-                        txtCouleurFondPlan = valeur;
-                        couleurFondPlan = Color.valueOf(txtCouleurFondPlan);
+                        setStrCouleurFondPlan(strValeur);
+                        setCouleurFondPlan(Color.valueOf(getStrCouleurFondPlan()));
                         break;
                     case "couleurTextePlan":
-                        txtCouleurTextePlan = valeur;
-                        couleurTextePlan = Color.valueOf(txtCouleurTextePlan);
+                        setStrCouleurTextePlan(strValeur);
+                        setCouleurTextePlan(Color.valueOf(getStrCouleurTextePlan()));
                         break;
                     case "afficheRadar":
-                        bAfficheRadar = valeur.equals("true");
+                        setbAfficheRadar(strValeur.equals("true"));
                         break;
                     case "opaciteRadar":
-                        opaciteRadar = Double.parseDouble(valeur);
+                        setOpaciteRadar(Double.parseDouble(strValeur));
                         break;
                     case "tailleRadar":
-                        tailleRadar = Double.parseDouble(valeur);
+                        setTailleRadar(Double.parseDouble(strValeur));
                         break;
                     case "couleurFondRadar":
-                        txtCouleurFondRadar = valeur;
-                        couleurFondRadar = Color.valueOf(txtCouleurFondRadar);
+                        setStrCouleurFondRadar(strValeur);
+                        setCouleurFondRadar(Color.valueOf(getStrCouleurFondRadar()));
                         break;
                     case "couleurLigneRadar":
-                        txtCouleurLigneRadar = valeur;
-                        couleurLigneRadar = Color.valueOf(txtCouleurLigneRadar);
+                        setStrCouleurLigneRadar(strValeur);
+                        setCouleurLigneRadar(Color.valueOf(getStrCouleurLigneRadar()));
                         break;
                     case "afficheMenuContextuel":
-                        bAfficheMenuContextuel = valeur.equals("true");
+                        setbAfficheMenuContextuel(strValeur.equals("true"));
                         break;
                     case "affichePrecSuivMC":
-                        bAffichePrecSuivMC = valeur.equals("true");
+                        setbAffichePrecSuivMC(strValeur.equals("true"));
                         break;
                     case "affichePlaneteNormalMC":
-                        bAffichePlanetNormalMC = valeur.equals("true");
+                        setbAffichePlanetNormalMC(strValeur.equals("true"));
                         break;
                     case "affichePersMC1":
-                        bAffichePersMC1 = valeur.equals("true");
+                        setbAffichePersMC1(strValeur.equals("true"));
                         break;
                     case "affichePersMC2":
-                        bAffichePersMC2 = valeur.equals("true");
+                        setbAffichePersMC2(strValeur.equals("true"));
                         break;
                     case "txtPersLib1":
-                        strPersLib1 = valeur;
+                        setStrPersLib1(strValeur);
                         break;
                     case "txtPersLib2":
-                        strPersLib2 = valeur;
+                        setStrPersLib2(strValeur);
                         break;
                     case "txtPersURL1":
-                        strPersURL1 = valeur;
+                        setStrPersURL1(strValeur);
                         break;
                     case "txtPersURL2":
-                        strPersURL2 = valeur;
+                        setStrPersURL2(strValeur);
                         break;
 
                 }
@@ -2676,56 +2702,56 @@ public class GestionnaireInterfaceController {
 
     public void afficheTemplate() throws IOException {
         apVisualisation.getChildren().clear();
-        apVisualisation.getChildren().addAll(rbClair, rbSombre, rbPerso, cbImage, ivVisualisation, txtTitre, imgBoussole, imgAiguille, imgTwitter, imgGoogle, imgFacebook, imgEmail, apVisuVignettes, apVisuComboMenu, apVisuPlan, ivMasque, apAfficheDiapo, apFenetreAfficheInfo, lblFenetreURL, ivDiapo, apAfficheBarrePersonnalisee);
+        apVisualisation.getChildren().addAll(rbClair, rbSombre, rbPerso, cbImage, ivVisualisation, lblTxtTitre, imgBoussole, imgAiguille, ivTwitter, ivGoogle, ivFacebook, ivEmail, apVisuVignettes, apVisuComboMenu, apVisuPlan, ivMasque, apAfficheDiapo, apFenetreAfficheInfo, lblFenetreURL, ivDiapo, apAfficheBarrePersonnalisee);
 
-        txtTitre.setTextFill(Color.valueOf(strCouleurTitre));
-        Color couleur = Color.valueOf(strCouleurFondTitre);
-        int rouge = (int) (couleur.getRed() * 255.d);
-        int bleu = (int) (couleur.getBlue() * 255.d);
-        int vert = (int) (couleur.getGreen() * 255.d);
-        String coulFond = "rgba(" + rouge + "," + vert + "," + bleu + "," + titreOpacite + ")";
-        txtTitre.setStyle("-fx-background-color : " + coulFond);
-        double taille = (double) titreTaille / 100.d * ivVisualisation.getFitWidth();
-        txtTitre.setMinWidth(taille);
-        txtTitre.setLayoutX(ivVisualisation.getLayoutX() + (ivVisualisation.getFitWidth() - txtTitre.getMinWidth()) / 2);
-        Font fonte1 = Font.font(strTitrePoliceNom, Double.parseDouble(strTitrePoliceTaille));
-        txtTitre.setFont(fonte1);
-        txtTitre.setPrefHeight(-1);
-        txtTitre.setVisible(bAfficheTitre);
-        cbAfficheTitre.setSelected(bAfficheTitre);
-        cpCouleurTitre.setValue(Color.valueOf(strCouleurTitre));
-        cpCouleurFondTitre.setValue(Color.valueOf(strCouleurFondTitre));
+        lblTxtTitre.setTextFill(Color.valueOf(getStrCouleurTitre()));
+        Color couleur = Color.valueOf(getStrCouleurFondTitre());
+        int iRouge = (int) (couleur.getRed() * 255.d);
+        int iBleu = (int) (couleur.getBlue() * 255.d);
+        int iVert = (int) (couleur.getGreen() * 255.d);
+        String strCoulFond = "rgba(" + iRouge + "," + iVert + "," + iBleu + "," + getTitreOpacite() + ")";
+        lblTxtTitre.setStyle("-fx-background-color : " + strCoulFond);
+        double taille = (double) getTitreTaille() / 100.d * ivVisualisation.getFitWidth();
+        lblTxtTitre.setMinWidth(taille);
+        lblTxtTitre.setLayoutX(ivVisualisation.getLayoutX() + (ivVisualisation.getFitWidth() - lblTxtTitre.getMinWidth()) / 2);
+        Font fonte1 = Font.font(getStrTitrePoliceNom(), Double.parseDouble(getStrTitrePoliceTaille()));
+        lblTxtTitre.setFont(fonte1);
+        lblTxtTitre.setPrefHeight(-1);
+        lblTxtTitre.setVisible(isbAfficheTitre());
+        cbAfficheTitre.setSelected(isbAfficheTitre());
+        cpCouleurTitre.setValue(Color.valueOf(getStrCouleurTitre()));
+        cpCouleurFondTitre.setValue(Color.valueOf(getStrCouleurFondTitre()));
         cpCouleurBarreClassique.setValue(couleurBarreClassique);
         cpCouleurTheme.setValue(couleurTheme);
         cpCouleurMasques.setValue(couleurMasque);
         cpCouleurHotspots.setValue(couleurHotspots);
         cpCouleurHotspotsPhoto.setValue(couleurHotspotsPhoto);
-        cbListePolices.setValue(strTitrePoliceNom);
-        slOpacite.setValue(titreOpacite);
-        cblisteStyleBarreClassique.setValue(styleBarreClassique);
-        bdfOffsetXBarreClassique.setNumber(new BigDecimal(offsetXBarreClassique));
-        bdfOffsetYBarreClassique.setNumber(new BigDecimal(offsetYBarreClassique));
-        if (strVisibiliteBarreClassique.equals("oui")) {
+        cbListePolices.setValue(getStrTitrePoliceNom());
+        slOpacite.setValue(getTitreOpacite());
+        cblisteStyleBarreClassique.setValue(getStyleBarreClassique());
+        bdfOffsetXBarreClassique.setNumber(new BigDecimal(getOffsetXBarreClassique()));
+        bdfOffsetYBarreClassique.setNumber(new BigDecimal(getOffsetYBarreClassique()));
+        if (getStrVisibiliteBarreClassique().equals("oui")) {
             cbBarreClassiqueVisible.setSelected(true);
         } else {
             cbBarreClassiqueVisible.setSelected(false);
         }
-        if (strDeplacementsBarreClassique.equals("oui")) {
+        if (getStrDeplacementsBarreClassique().equals("oui")) {
             cbDeplacementsBarreClassique.setSelected(true);
         } else {
             cbDeplacementsBarreClassique.setSelected(false);
         }
-        if (strZoomBarreClassique.equals("oui")) {
+        if (getStrZoomBarreClassique().equals("oui")) {
             cbZoomBarreClassique.setSelected(true);
         } else {
             cbZoomBarreClassique.setSelected(false);
         }
-        if (strOutilsBarreClassique.equals("oui")) {
+        if (getStrOutilsBarreClassique().equals("oui")) {
             cbOutilsBarreClassique.setSelected(true);
         } else {
             cbOutilsBarreClassique.setSelected(false);
         }
-        switch (strPositionBarreClassique) {
+        switch (getStrPositionBarreClassique()) {
             case "top:left":
                 rbTopLeftBarreClassique.setSelected(true);
                 break;
@@ -2752,32 +2778,32 @@ public class GestionnaireInterfaceController {
                 break;
         }
 
-        if (strRotationBarreClassique.equals("oui")) {
+        if (getStrRotationBarreClassique().equals("oui")) {
             cbRotationBarreClassique.setSelected(true);
         } else {
             cbRotationBarreClassique.setSelected(false);
         }
-        if (strPleinEcranBarreClassique.equals("oui")) {
+        if (getStrPleinEcranBarreClassique().equals("oui")) {
             cbFSBarreClassique.setSelected(true);
         } else {
             cbFSBarreClassique.setSelected(false);
         }
-        if (strSourisBarreClassique.equals("oui")) {
+        if (getStrSourisBarreClassique().equals("oui")) {
             cbSourisBarreClassique.setSelected(true);
         } else {
             cbSourisBarreClassique.setSelected(false);
         }
-        if (strVisibiliteBarrePersonnalisee.equals("oui")) {
-            chargeBarrePersonnalisee(strLienImageBarrePersonnalisee);
+        if (getStrVisibiliteBarrePersonnalisee().equals("oui")) {
+            chargeBarrePersonnalisee(getStrLienImageBarrePersonnalisee());
 
-            rbCouleurOrigineBarrePersonnalisee.setSelected(bCouleurOrigineBarrePersonnalisee);
-            rbCouleurPersBarrePersonnalisee.setSelected(!bCouleurOrigineBarrePersonnalisee);
+            rbCouleurOrigineBarrePersonnalisee.setSelected(isbCouleurOrigineBarrePersonnalisee());
+            rbCouleurPersBarrePersonnalisee.setSelected(!isbCouleurOrigineBarrePersonnalisee());
 
-            bdfOffsetXBarrePersonnalisee.setNumber(new BigDecimal(offsetXBarrePersonnalisee));
-            bdfOffsetYBarrePersonnalisee.setNumber(new BigDecimal(offsetYBarrePersonnalisee));
-            sltailleBarrePersonnalisee.setValue(tailleBarrePersonnalisee);
-            sltailleIconesBarrePersonnalisee.setValue(tailleIconesBarrePersonnalisee);
-            switch (strPositionBarrePersonnalisee) {
+            bdfOffsetXBarrePersonnalisee.setNumber(new BigDecimal(getOffsetXBarrePersonnalisee()));
+            bdfOffsetYBarrePersonnalisee.setNumber(new BigDecimal(getOffsetYBarrePersonnalisee()));
+            sltailleBarrePersonnalisee.setValue(getTailleBarrePersonnalisee());
+            sltailleIconesBarrePersonnalisee.setValue(getTailleIconesBarrePersonnalisee());
+            switch (getStrPositionBarrePersonnalisee()) {
                 case "top:left":
                     rbTopLeftBarrePersonnalisee.setSelected(true);
                     break;
@@ -2804,96 +2830,99 @@ public class GestionnaireInterfaceController {
                     break;
 
             }
-            cbDeplacementsBarrePersonnalisee.setSelected(strDeplacementsBarrePersonnalisee.equals("oui"));
-            cbZoomBarrePersonnalisee.setSelected(strZoomBarrePersonnalisee.equals("oui"));
-            cbRotationBarrePersonnalisee.setSelected(strRotationBarrePersonnalisee.equals("oui"));
-            cbFSBarrePersonnalisee.setSelected(strPleinEcranBarrePersonnalisee.equals("oui"));
-            cbSourisBarrePersonnalisee.setSelected(strSourisBarrePersonnalisee.equals("oui"));
-            cbBarrePersonnaliseeVisible.setSelected(strVisibiliteBarrePersonnalisee.equals("oui"));
+            cbDeplacementsBarrePersonnalisee.setSelected(getStrDeplacementsBarrePersonnalisee().equals("oui"));
+            cbZoomBarrePersonnalisee.setSelected(getStrZoomBarrePersonnalisee().equals("oui"));
+            cbRotationBarrePersonnalisee.setSelected(getStrRotationBarrePersonnalisee().equals("oui"));
+            cbFSBarrePersonnalisee.setSelected(getStrPleinEcranBarrePersonnalisee().equals("oui"));
+            cbSourisBarrePersonnalisee.setSelected(getStrSourisBarrePersonnalisee().equals("oui"));
+            cbBarrePersonnaliseeVisible.setSelected(getStrVisibiliteBarrePersonnalisee().equals("oui"));
             cpCouleurBarrePersonnalisee.setValue(couleurBarrePersonnalisee);
-            tfLienImageBarrePersonnalisee.setText(strLienImageBarrePersonnalisee);
-            tfLien1BarrePersonnalisee.setText(strLien1BarrePersonnalisee);
-            tfLien2BarrePersonnalisee.setText(strLien2BarrePersonnalisee);
+            tfLienImageBarrePersonnalisee.setText(getStrLienImageBarrePersonnalisee());
+            tfLien1BarrePersonnalisee.setText(getStrLien1BarrePersonnalisee());
+            tfLien2BarrePersonnalisee.setText(getStrLien2BarrePersonnalisee());
         }
-        cbFenetreInfoPersonnalise.setSelected(bFenetreInfoPersonnalise);
-        cbFenetreAidePersonnalise.setSelected(bFenetreAidePersonnalise);
-        txtFenetreInfoImage.setText(strFenetreInfoImage);
-        txtFenetreAideImage.setText(strFenetreAideImage);
-        slFenetreInfoTaille.setValue(fenetreInfoTaille);
-        slFenetreAideTaille.setValue(fenetreAideTaille);
-        bdfFenetreInfoPosX.setNumber(new BigDecimal(fenetreInfoPosX));
-        bdfFenetreInfoPosY.setNumber(new BigDecimal(fenetreInfoPosY));
-        bdfFenetreAidePosX.setNumber(new BigDecimal(fenetreAidePosX));
-        bdfFenetreAidePosY.setNumber(new BigDecimal(fenetreAidePosY));
-        slFenetreInfoOpacite.setValue(fenetreInfoOpacite);
-        slFenetreAideOpacite.setValue(fenetreAideOpacite);
-        txtFenetreTexteURL.setText(strFenetreTexteURL);
-        txtFenetreURL.setText(strFenetreURL);
-        slFenetrePoliceTaille.setValue(fenetrePoliceTaille);
-        bdfFenetreURLPosX.setNumber(new BigDecimal(fenetreURLPosX));
-        bdfFenetreURLPosY.setNumber(new BigDecimal(fenetreURLPosY));
-        bdfFenetreURLPosX.setNumber(new BigDecimal(fenetreURLPosX));
-        bdfFenetreURLPosY.setNumber(new BigDecimal(fenetreURLPosY));
-        cpFenetreURLCouleur.setValue(Color.valueOf(strFenetreURLCouleur));
-        cbSuivantPrecedent.setSelected(bSuivantPrecedent);
-        fondSuivant.setVisible(bSuivantPrecedent);
-        fondPrecedent.setVisible(bSuivantPrecedent);
-        slTaillePolice.setValue(Double.parseDouble(strTitrePoliceTaille));
-        slEspacementBarreClassique.setValue(espacementBarreClassique);
-        slTaille.setValue(titreTaille);
+        cbFenetreInfoPersonnalise.setSelected(isbFenetreInfoPersonnalise());
+        cbFenetreAidePersonnalise.setSelected(isbFenetreAidePersonnalise());
+        tfFenetreInfoImage.setText(getStrFenetreInfoImage());
+        tfFenetreAideImage.setText(getStrFenetreAideImage());
+        slFenetreInfoTaille.setValue(getFenetreInfoTaille());
+        slFenetreAideTaille.setValue(getFenetreAideTaille());
+        bdfFenetreInfoPosX.setNumber(new BigDecimal(getFenetreInfoPosX()));
+        bdfFenetreInfoPosY.setNumber(new BigDecimal(getFenetreInfoPosY()));
+        bdfFenetreAidePosX.setNumber(new BigDecimal(getFenetreAidePosX()));
+        bdfFenetreAidePosY.setNumber(new BigDecimal(getFenetreAidePosY()));
+        slFenetreInfoOpacite.setValue(getFenetreInfoOpacite());
+        slFenetreAideOpacite.setValue(getFenetreAideOpacite());
+        tfFenetreTexteURL.setText(getStrFenetreTexteURL());
+        tfFenetreURL.setText(getStrFenetreURL());
+        slFenetrePoliceTaille.setValue(getFenetrePoliceTaille());
+        bdfFenetreURLPosX.setNumber(new BigDecimal(getFenetreURLPosX()));
+        bdfFenetreURLPosY.setNumber(new BigDecimal(getFenetreURLPosY()));
+        bdfFenetreURLPosX.setNumber(new BigDecimal(getFenetreURLPosX()));
+        bdfFenetreURLPosY.setNumber(new BigDecimal(getFenetreURLPosY()));
+        cpFenetreURLCouleur.setValue(Color.valueOf(getStrFenetreURLCouleur()));
+        cbSuivantPrecedent.setSelected(isbSuivantPrecedent());
+        vbFondSuivant.setVisible(isbSuivantPrecedent());
+        vbFondPrecedent.setVisible(isbSuivantPrecedent());
+        slTaillePolice.setValue(Double.parseDouble(getStrTitrePoliceTaille()));
+        slEspacementBarreClassique.setValue(getEspacementBarreClassique());
+        slTaille.setValue(getTitreTaille());
         apVisualisation.getChildren().remove(hbbarreBoutons);
         apVisualisation.getChildren().remove(ivHotSpot);
         apVisualisation.getChildren().remove(ivHotSpotImage);
-        slTailleBoussole.setValue(tailleBoussole);
-        slOpaciteBoussole.setValue(opaciteBoussole);
-        bdfOffsetXBoussole.setNumber(new BigDecimal(offsetXBoussole));
-        bdfOffsetYBoussole.setNumber(new BigDecimal(offsetYBoussole));
-        cbAiguilleMobile.setSelected(bAiguilleMobileBoussole);
-        cbAfficheBoussole.setSelected(bAfficheBoussole);
-        rbBoussTopLeft.setSelected(strPositionBoussole.equals("top:left"));
-        rbBoussBottomLeft.setSelected(strPositionBoussole.equals("bottom:left"));
-        rbBoussTopRight.setSelected(strPositionBoussole.equals("top:right"));
-        rbBoussBottomRight.setSelected(strPositionBoussole.equals("bottom:right"));
-        slTailleMasque.setValue(tailleMasque);
-        slOpaciteMasque.setValue(opaciteMasque);
-        masqueDXSpinner.setNumber(new BigDecimal(dXMasque));
-        masqueDYSpinner.setNumber(new BigDecimal(dYMasque));
-        cbMasqueNavigation.setSelected(bMasqueNavigation);
-        cbMasqueBoussole.setSelected(bMasqueBoussole);
-        cbMasqueTitre.setSelected(bMasqueTitre);
-        cbMasquePlan.setSelected(bMasquePlan);
-        cbMasqueReseaux.setSelected(bMasqueReseaux);
-        cbMasqueVignettes.setSelected(bMasqueVignettes);
-        cbAfficheMasque.setSelected(bAfficheMasque);
-        rbMasqueTopLeft.setSelected(positionMasque.equals("top:left"));
-        rbMasqueBottomLeft.setSelected(positionMasque.equals("bottom:left"));
-        rbMasqueTopRight.setSelected(positionMasque.equals("top:right"));
-        rbMasqueBottomRight.setSelected(positionMasque.equals("bottom:right"));
-        slTailleReseauxSociaux.setValue(tailleReseauxSociaux);
-        slOpaciteReseauxSociaux.setValue(opaciteReseauxSociaux);
-        reseauxSociauxDXSpinner.setNumber(new BigDecimal(dXReseauxSociaux));
-        reseauxSociauxDYSpinner.setNumber(new BigDecimal(dYReseauxSociaux));
-        cbReseauxSociauxTwitter.setSelected(bReseauxSociauxTwitter);
-        cbReseauxSociauxGoogle.setSelected(bReseauxSociauxGoogle);
-        cbReseauxSociauxFacebook.setSelected(bReseauxSociauxFacebook);
-        cbReseauxSociauxEmail.setSelected(bReseauxSociauxEmail);
-        cbAfficheReseauxSociaux.setSelected(bAfficheReseauxSociaux);
-        rbReseauxSociauxTopLeft.setSelected(positionReseauxSociaux.equals("top:left"));
-        rbReseauxSociauxBottomLeft.setSelected(positionReseauxSociaux.equals("bottom:left"));
-        rbReseauxSociauxTopRight.setSelected(positionReseauxSociaux.equals("top:right"));
-        rbReseauxSociauxBottomRight.setSelected(positionReseauxSociaux.equals("bottom:right"));
-        cbAfficheVignettes.setSelected(bAfficheVignettes);
-        slOpaciteVignettes.setValue(opaciteVignettes);
-        slTailleVignettes.setValue(tailleImageVignettes);
-        rbVignettesLeft.setSelected(positionVignettes.equals("left"));
-        rbVignettesRight.setSelected(positionVignettes.equals("right"));
-        rbVignettesBottom.setSelected(positionVignettes.equals("bottom"));
-        cpCouleurFondVignettes.setValue(Color.valueOf(couleurFondVignettes));
-        cpCouleurTexteVignettes.setValue(Color.valueOf(couleurTexteVignettes));
-        cbAfficheComboMenu.setSelected(bAfficheComboMenu);
-        cbAfficheComboMenuImages.setSelected(bAfficheComboMenuImages);
-        String posit = positionYComboMenu + ":" + positionXComboMenu;
-        switch (posit) {
+        slTailleBoussole.setValue(getTailleBoussole());
+        slOpaciteBoussole.setValue(getOpaciteBoussole());
+        bdfOffsetXBoussole.setNumber(new BigDecimal(getOffsetXBoussole()));
+        bdfOffsetYBoussole.setNumber(new BigDecimal(getOffsetYBoussole()));
+        cbAiguilleMobile.setSelected(isbAiguilleMobileBoussole());
+        cbAfficheBoussole.setSelected(isbAfficheBoussole());
+        rbBoussTopLeft.setSelected(getStrPositionBoussole().equals("top:left"));
+        rbBoussBottomLeft.setSelected(getStrPositionBoussole().equals("bottom:left"));
+        rbBoussTopRight.setSelected(getStrPositionBoussole().equals("top:right"));
+        rbBoussBottomRight.setSelected(getStrPositionBoussole().equals("bottom:right"));
+        slTailleMasque.setValue(getTailleMasque());
+        slOpaciteMasque.setValue(getOpaciteMasque());
+        bdfOffsetXMasque.setNumber(new BigDecimal(getdXMasque()));
+        bdfOffsetYMasque.setNumber(new BigDecimal(getdYMasque()));
+        cbMasqueNavigation.setSelected(isbMasqueNavigation());
+        cbMasqueBoussole.setSelected(isbMasqueBoussole());
+        cbMasqueTitre.setSelected(isbMasqueTitre());
+        cbMasquePlan.setSelected(isbMasquePlan());
+        cbMasqueReseaux.setSelected(isbMasqueReseaux());
+        cbMasqueVignettes.setSelected(isbMasqueVignettes());
+        cbMasqueCombo.setSelected(isbMasqueCombo());
+        cbMasqueSuivPrec.setSelected(isbMasqueSuivPrec());
+        cbMasqueHotspots.setSelected(isbMasqueHotspots());
+        cbAfficheMasque.setSelected(isbAfficheMasque());
+        rbMasqueTopLeft.setSelected(getStrPositionMasque().equals("top:left"));
+        rbMasqueBottomLeft.setSelected(getStrPositionMasque().equals("bottom:left"));
+        rbMasqueTopRight.setSelected(getStrPositionMasque().equals("top:right"));
+        rbMasqueBottomRight.setSelected(getStrPositionMasque().equals("bottom:right"));
+        slTailleReseauxSociaux.setValue(getTailleReseauxSociaux());
+        slOpaciteReseauxSociaux.setValue(getOpaciteReseauxSociaux());
+        bdfOffsetXReseauxSociaux.setNumber(new BigDecimal(getdXReseauxSociaux()));
+        bdfOffsetYreseauxSociaux.setNumber(new BigDecimal(getdYReseauxSociaux()));
+        cbReseauxSociauxTwitter.setSelected(isbReseauxSociauxTwitter());
+        cbReseauxSociauxGoogle.setSelected(isbReseauxSociauxGoogle());
+        cbReseauxSociauxFacebook.setSelected(isbReseauxSociauxFacebook());
+        cbReseauxSociauxEmail.setSelected(isbReseauxSociauxEmail());
+        cbAfficheReseauxSociaux.setSelected(isbAfficheReseauxSociaux());
+        rbReseauxSociauxTopLeft.setSelected(getStrPositionReseauxSociaux().equals("top:left"));
+        rbReseauxSociauxBottomLeft.setSelected(getStrPositionReseauxSociaux().equals("bottom:left"));
+        rbReseauxSociauxTopRight.setSelected(getStrPositionReseauxSociaux().equals("top:right"));
+        rbReseauxSociauxBottomRight.setSelected(getStrPositionReseauxSociaux().equals("bottom:right"));
+        cbAfficheVignettes.setSelected(isbAfficheVignettes());
+        slOpaciteVignettes.setValue(getOpaciteVignettes());
+        slTailleVignettes.setValue(getTailleImageVignettes());
+        rbVignettesLeft.setSelected(getStrPositionVignettes().equals("left"));
+        rbVignettesRight.setSelected(getStrPositionVignettes().equals("right"));
+        rbVignettesBottom.setSelected(getStrPositionVignettes().equals("bottom"));
+        cpCouleurFondVignettes.setValue(Color.valueOf(getStrCouleurFondVignettes()));
+        cpCouleurTexteVignettes.setValue(Color.valueOf(getStrCouleurTexteVignettes()));
+        cbAfficheComboMenu.setSelected(isbAfficheComboMenu());
+        cbAfficheComboMenuImages.setSelected(isbAfficheComboMenuImages());
+        String strPosit = getStrPositionYComboMenu() + ":" + getStrPositionXComboMenu();
+        switch (strPosit) {
             case "top:left":
                 rbComboMenuTopLeft.setSelected(true);
                 break;
@@ -2913,45 +2942,45 @@ public class GestionnaireInterfaceController {
                 rbComboMenuBottomRight.setSelected(true);
                 break;
         }
-        bdfOffsetXComboMenu.setNumber(new BigDecimal(offsetXComboMenu));
-        bdfOffsetYComboMenu.setNumber(new BigDecimal(offsetYComboMenu));
-        cbAffichePlan.setSelected(bAffichePlan);
-        slOpacitePlan.setValue(opacitePlan);
-        slLargeurPlan.setValue(largeurPlan);
-        rbPlanLeft.setSelected(positionPlan.equals("left"));
-        rbPlanRight.setSelected(positionPlan.equals("right"));
-        cpCouleurFondPlan.setValue(couleurFondPlan);
-        cpCouleurTextePlan.setValue(couleurTextePlan);
-        cpCouleurDiaporama.setValue(Color.valueOf(strCouleurDiaporama));
-        slOpaciteDiaporama.setValue(diaporamaOpacite);
-        if (bAffichePlan) {
-            tabPlan.setDisable(!bAffichePlan);
-            mniAffichagePlan.setDisable(!bAffichePlan);
-            ivAjouterPlan.setDisable(!bAffichePlan);
-            mniAjouterPlan.setDisable(!bAffichePlan);
-            if (bAffichePlan) {
+        bdfOffsetXComboMenu.setNumber(new BigDecimal(getOffsetXComboMenu()));
+        bdfOffsetYComboMenu.setNumber(new BigDecimal(getOffsetYComboMenu()));
+        cbAffichePlan.setSelected(isbAffichePlan());
+        slOpacitePlan.setValue(getOpacitePlan());
+        slLargeurPlan.setValue(getLargeurPlan());
+        rbPlanLeft.setSelected(getStrPositionPlan().equals("left"));
+        rbPlanRight.setSelected(getStrPositionPlan().equals("right"));
+        cpCouleurFondPlan.setValue(getCouleurFondPlan());
+        cpCouleurTextePlan.setValue(getCouleurTextePlan());
+        cpCouleurDiaporama.setValue(Color.valueOf(getStrCouleurDiaporama()));
+        slOpaciteDiaporama.setValue(getDiaporamaOpacite());
+        if (isbAffichePlan()) {
+            tabPlan.setDisable(!isbAffichePlan());
+            mniAffichagePlan.setDisable(!isbAffichePlan());
+            ivAjouterPlan.setDisable(!isbAffichePlan());
+            mniAjouterPlan.setDisable(!isbAffichePlan());
+            if (isbAffichePlan()) {
                 ivAjouterPlan.setOpacity(1.0);
             } else {
                 ivAjouterPlan.setOpacity(0.3);
             }
 
         }
-        cbAfficheRadar.setSelected(bAfficheRadar);
-        slOpaciteRadar.setValue(opaciteRadar);
-        slTailleRadar.setValue(tailleRadar);
-        cpCouleurFondRadar.setValue(couleurFondRadar);
-        cpCouleurLigneRadar.setValue(couleurLigneRadar);
-        cbAfficheMenuContextuel.setSelected(bAfficheMenuContextuel);
-        cbAffichePrecSuivMC.setSelected(bAffichePrecSuivMC);
-        cbAffichePlanetNormalMC.setSelected(bAffichePlanetNormalMC);
-        cbAffichePersMC1.setSelected(bAffichePersMC1);
-        cbAffichePersMC2.setSelected(bAffichePersMC2);
-        tfPersLib1.setText(strPersLib1);
-        tfPersLib2.setText(strPersLib2);
-        tfPersURL1.setText(strPersURL1);
-        tfPersURL2.setText(strPersURL2);
+        cbAfficheRadar.setSelected(isbAfficheRadar());
+        slOpaciteRadar.setValue(getOpaciteRadar());
+        slTailleRadar.setValue(getTailleRadar());
+        cpCouleurFondRadar.setValue(getCouleurFondRadar());
+        cpCouleurLigneRadar.setValue(getCouleurLigneRadar());
+        cbAfficheMenuContextuel.setSelected(isbAfficheMenuContextuel());
+        cbAffichePrecSuivMC.setSelected(isbAffichePrecSuivMC());
+        cbAffichePlanetNormalMC.setSelected(isbAffichePlanetNormalMC());
+        cbAffichePersMC1.setSelected(isbAffichePersMC1());
+        cbAffichePersMC2.setSelected(isbAffichePersMC2());
+        tfPersLib1.setText(getStrPersLib1());
+        tfPersLib2.setText(getStrPersLib2());
+        tfPersURL1.setText(getStrPersURL1());
+        tfPersURL2.setText(getStrPersURL2());
         afficheImagesFondInterface();
-        afficheBarreClassique(strPositionBarreClassique, offsetXBarreClassique, offsetYBarreClassique, tailleBarreClassique, styleBarreClassique, strStyleHotSpots, espacementBarreClassique);
+        afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
         afficheBoussole();
         afficheMasque();
         afficheReseauxSociaux();
@@ -2971,21 +3000,21 @@ public class GestionnaireInterfaceController {
         cbImage.getItems().clear();
         if (iNombrePanoramiques > 0) {
             rbPerso.setDisable(false);
-            String imgAffiche = "";
+            String strImgAffiche = "";
             if (cbImage.getSelectionModel().getSelectedItem() != null) {
-                imgAffiche = cbImage.getSelectionModel().getSelectedItem().toString();
+                strImgAffiche = cbImage.getSelectionModel().getSelectedItem().toString();
             }
             for (int i = 0; i < iNombrePanoramiques; i++) {
-                String nomImage = panoramiquesProjet[i].getNomFichier().substring(
-                        panoramiquesProjet[i].getNomFichier().lastIndexOf(File.separator) + 1,
-                        panoramiquesProjet[i].getNomFichier().length()
+                String strNomImage = panoramiquesProjet[i].getStrNomFichier().substring(
+                        panoramiquesProjet[i].getStrNomFichier().lastIndexOf(File.separator) + 1,
+                        panoramiquesProjet[i].getStrNomFichier().length()
                 );
-                cbImage.getItems().add(i, nomImage);
+                cbImage.getItems().add(i, strNomImage);
             }
-            cbImage.setValue(imgAffiche);
+            cbImage.setValue(strImgAffiche);
         }
 
-        afficheBarreClassique(strPositionBarreClassique, offsetXBarreClassique, offsetYBarreClassique, tailleBarreClassique, styleBarreClassique, strStyleHotSpots, espacementBarreClassique);
+        afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
         afficheBoussole();
         afficheMasque();
         afficheReseauxSociaux();
@@ -2993,11 +3022,11 @@ public class GestionnaireInterfaceController {
         afficheVignettes();
     }
 
-    private void retireImageFond(int numImage) {
-        for (int i = numImage; i < iNombreImagesFond - 1; i++) {
-            imagesFond[i] = imagesFond[i + 1];
+    private void retireImageFond(int iNumImage) {
+        for (int i = iNumImage; i < getiNombreImagesFond() - 1; i++) {
+            getImagesFond()[i] = getImagesFond()[i + 1];
         }
-        iNombreImagesFond--;
+        setiNombreImagesFond(getiNombreImagesFond() - 1);
         afficheImagesFondInterface();
         //System.out.println("Retire l'image " + numImage + " Nombre Images : " + nombreImagesFond);
     }
@@ -3011,16 +3040,16 @@ public class GestionnaireInterfaceController {
         btnAjouteImage.setLayoutY(10);
         apImageFond.getChildren().addAll(btnAjouteImage);
         btnAjouteImage.setOnMouseClicked(
-                (MouseEvent me) -> {
+                (me) -> {
                     ajoutImageFond();
                 }
         );
 
         double hauteurPanel = 280;
-        taillePanelImageFond = (iNombreImagesFond) * (hauteurPanel + 10) + 60;
+        taillePanelImageFond = (getiNombreImagesFond()) * (hauteurPanel + 10) + 60;
         apImageFond.setPrefHeight(taillePanelImageFond);
-        for (int i = 0; i < iNombreImagesFond; i++) {
-            int j = i;
+        for (int i = 0; i < getiNombreImagesFond(); i++) {
+            int ij = i;
             AnchorPane apImagesFond = new AnchorPane();
             apImagesFond.setPrefWidth(vbOutils.getPrefWidth() - 20);
             apImagesFond.setMinWidth(vbOutils.getPrefWidth() - 20);
@@ -3028,23 +3057,23 @@ public class GestionnaireInterfaceController {
             apImagesFond.setPrefHeight(hauteurPanel);
             apImagesFond.setStyle("-fx-border-color : #666666; -fx-border-width : 1px; -fx-border-style :solid;");
             apImagesFond.setLayoutY(i * (hauteurPanel + 10) + 60);
-            Pane fond1 = new Pane();
-            fond1.setCursor(Cursor.HAND);
+            Pane paneFond1 = new Pane();
+            paneFond1.setCursor(Cursor.HAND);
             ImageView ivAjouteImageFond1 = new ImageView(new Image("file:" + strRepertAppli + File.separator + "images/suppr.png", 30, 30, true, true));
-            fond1.setLayoutX(vbOutils.getPrefWidth() - 50);
-            fond1.setLayoutY(0);
-            Tooltip t1 = new Tooltip(rbLocalisation.getString("interface.imageFondRetire"));
-            t1.setStyle(strTooltipStyle);
-            Tooltip.install(fond1, t1);
-            fond1.getChildren().add(ivAjouteImageFond1);
-            fond1.setOnMouseClicked(
-                    (MouseEvent me) -> {
-                        retireImageFond(j);
+            paneFond1.setLayoutX(vbOutils.getPrefWidth() - 50);
+            paneFond1.setLayoutY(0);
+            Tooltip tltpRetireImageFond = new Tooltip(rbLocalisation.getString("interface.imageFondRetire"));
+            tltpRetireImageFond.setStyle(strTooltipStyle);
+            Tooltip.install(paneFond1, tltpRetireImageFond);
+            paneFond1.getChildren().add(ivAjouteImageFond1);
+            paneFond1.setOnMouseClicked(
+                    (me) -> {
+                        retireImageFond(ij);
                     }
             );
-            ImageView ivImageFond = new ImageView(imagesFond[i].getImgFond());
+            ImageView ivImageFond = new ImageView(getImagesFond()[i].getImgFond());
             ivImageFond.setPreserveRatio(true);
-            if (imagesFond[i].getImgFond().getWidth() > imagesFond[i].getImgFond().getHeight()) {
+            if (getImagesFond()[i].getImgFond().getWidth() > getImagesFond()[i].getImgFond().getHeight()) {
                 ivImageFond.setFitWidth(100);
             } else {
                 ivImageFond.setFitHeight(100);
@@ -3081,8 +3110,8 @@ public class GestionnaireInterfaceController {
             rbImageFondBottomLeft.setToggleGroup(tgPosition);
             rbImageFondBottomCenter.setToggleGroup(tgPosition);
             rbImageFondBottomRight.setToggleGroup(tgPosition);
-            String posit = imagesFond[i].getPosY() + ":" + imagesFond[i].getPosX();
-            switch (posit) {
+            String strPosit = getImagesFond()[i].getStrPosY() + ":" + getImagesFond()[i].getStrPosX();
+            switch (strPosit) {
                 case "top:left":
                     rbImageFondTopLeft.setSelected(true);
                     break;
@@ -3112,172 +3141,171 @@ public class GestionnaireInterfaceController {
                     break;
             }
 
-            int posX = 175;
-            int posY = 30;
+            int iPosX = 175;
+            int iPosY = 30;
 
-            rbImageFondTopLeft.setLayoutX(posX);
-            rbImageFondTopCenter.setLayoutX(posX + 20);
-            rbImageFondTopRight.setLayoutX(posX + 40);
-            rbImageFondTopLeft.setLayoutY(posY);
-            rbImageFondTopCenter.setLayoutY(posY);
-            rbImageFondTopRight.setLayoutY(posY);
+            rbImageFondTopLeft.setLayoutX(iPosX);
+            rbImageFondTopCenter.setLayoutX(iPosX + 20);
+            rbImageFondTopRight.setLayoutX(iPosX + 40);
+            rbImageFondTopLeft.setLayoutY(iPosY);
+            rbImageFondTopCenter.setLayoutY(iPosY);
+            rbImageFondTopRight.setLayoutY(iPosY);
 
-            rbImageFondMiddleLeft.setLayoutX(posX);
-            rbImageFondMiddleCenter.setLayoutX(posX + 20);
-            rbImageFondMiddleRight.setLayoutX(posX + 40);
-            rbImageFondMiddleLeft.setLayoutY(posY + 20);
-            rbImageFondMiddleCenter.setLayoutY(posY + 20);
-            rbImageFondMiddleRight.setLayoutY(posY + 20);
+            rbImageFondMiddleLeft.setLayoutX(iPosX);
+            rbImageFondMiddleCenter.setLayoutX(iPosX + 20);
+            rbImageFondMiddleRight.setLayoutX(iPosX + 40);
+            rbImageFondMiddleLeft.setLayoutY(iPosY + 20);
+            rbImageFondMiddleCenter.setLayoutY(iPosY + 20);
+            rbImageFondMiddleRight.setLayoutY(iPosY + 20);
 
-            rbImageFondBottomLeft.setLayoutX(posX);
-            rbImageFondBottomCenter.setLayoutX(posX + 20);
-            rbImageFondBottomRight.setLayoutX(posX + 40);
-            rbImageFondBottomLeft.setLayoutY(posY + 40);
-            rbImageFondBottomCenter.setLayoutY(posY + 40);
-            rbImageFondBottomRight.setLayoutY(posY + 40);
+            rbImageFondBottomLeft.setLayoutX(iPosX);
+            rbImageFondBottomCenter.setLayoutX(iPosX + 20);
+            rbImageFondBottomRight.setLayoutX(iPosX + 40);
+            rbImageFondBottomLeft.setLayoutY(iPosY + 40);
+            rbImageFondBottomCenter.setLayoutY(iPosY + 40);
+            rbImageFondBottomRight.setLayoutY(iPosY + 40);
             Label lblPosit = new Label(rbLocalisation.getString("interface.positionImageFond"));
             lblPosit.setLayoutX(150);
             lblPosit.setLayoutY(10);
-            Label lblDXSpinner = new Label("dX ");
-            lblDXSpinner.setLayoutX(25);
-            lblDXSpinner.setLayoutY(125);
-            Label lblDYSpinner = new Label("dY ");
-            lblDYSpinner.setLayoutX(175);
-            lblDYSpinner.setLayoutY(125);
-            BigDecimalField dXSpinnerImageFond = new BigDecimalField(new BigDecimal(imagesFond[i].getOffsetX()));
-            dXSpinnerImageFond.setLayoutX(50);
-            dXSpinnerImageFond.setLayoutY(120);
-            dXSpinnerImageFond.setMaxValue(new BigDecimal(2000));
-            dXSpinnerImageFond.setMinValue(new BigDecimal(-2000));
-            dXSpinnerImageFond.setMaxWidth(100);
-            BigDecimalField dYSpinnerImageFond = new BigDecimalField(new BigDecimal(imagesFond[i].getOffsetY()));
-            dYSpinnerImageFond.setLayoutX(200);
-            dYSpinnerImageFond.setLayoutY(120);
-            dYSpinnerImageFond.setMaxValue(new BigDecimal(2000));
-            dYSpinnerImageFond.setMinValue(new BigDecimal(-2000));
-            dYSpinnerImageFond.setMaxWidth(100);
+            Label lblOffsetXImageFond = new Label("dX ");
+            lblOffsetXImageFond.setLayoutX(25);
+            lblOffsetXImageFond.setLayoutY(125);
+            Label lblOffsetYImageFond = new Label("dY ");
+            lblOffsetYImageFond.setLayoutX(175);
+            lblOffsetYImageFond.setLayoutY(125);
+            BigDecimalField bdfOffsetXImageFond = new BigDecimalField(new BigDecimal(getImagesFond()[i].getOffsetX()));
+            bdfOffsetXImageFond.setLayoutX(50);
+            bdfOffsetXImageFond.setLayoutY(120);
+            bdfOffsetXImageFond.setMaxValue(new BigDecimal(2000));
+            bdfOffsetXImageFond.setMinValue(new BigDecimal(-2000));
+            bdfOffsetXImageFond.setMaxWidth(100);
+            BigDecimalField bdfOffsetYImageFond = new BigDecimalField(new BigDecimal(getImagesFond()[i].getOffsetY()));
+            bdfOffsetYImageFond.setLayoutX(200);
+            bdfOffsetYImageFond.setLayoutY(120);
+            bdfOffsetYImageFond.setMaxValue(new BigDecimal(2000));
+            bdfOffsetYImageFond.setMinValue(new BigDecimal(-2000));
+            bdfOffsetYImageFond.setMaxWidth(100);
             CheckBox cbMasquableImageFond = new CheckBox(rbLocalisation.getString("interface.masquableImageFond"));
             cbMasquableImageFond.setLayoutX(150);
             cbMasquableImageFond.setLayoutY(90);
-            cbMasquableImageFond.setSelected(imagesFond[i].isMasquable());
+            cbMasquableImageFond.setSelected(getImagesFond()[i].isMasquable());
 
             Label lblOpaciteImageFond = new Label(rbLocalisation.getString("interface.opaciteVignettes"));
             lblOpaciteImageFond.setLayoutX(10);
             lblOpaciteImageFond.setLayoutY(160);
-            Slider slOpaciteImageFond = new Slider(0, 1.0, imagesFond[i].getOpacite());
+            Slider slOpaciteImageFond = new Slider(0, 1.0, getImagesFond()[i].getOpacite());
             slOpaciteImageFond.setLayoutX(120);
             slOpaciteImageFond.setLayoutY(160);
             Label lblTailleImageFond = new Label(rbLocalisation.getString("interface.tailleVignettes"));
             lblTailleImageFond.setLayoutX(10);
             lblTailleImageFond.setLayoutY(190);
-            double echelle = imagesFond[i].getTailleX() / imagesFond[i].getImgFond().getWidth();
+            double echelle = getImagesFond()[i].getTailleX() / getImagesFond()[i].getImgFond().getWidth();
             Slider slTailleImageFond = new Slider(0.1, 2.0, echelle);
             slTailleImageFond.setLayoutX(120);
             slTailleImageFond.setLayoutY(190);
             Label lblUrlImageFond = new Label("url");
             lblUrlImageFond.setLayoutX(10);
             lblUrlImageFond.setLayoutY(222);
-            TextField txtUrlImageFond = new TextField(imagesFond[i].getUrl());
-            txtUrlImageFond.setPrefHeight(20);
-            txtUrlImageFond.setPrefWidth(200);
-            txtUrlImageFond.setLayoutX(120);
-            txtUrlImageFond.setLayoutY(220);
+            TextField tfUrlImageFond = new TextField(getImagesFond()[i].getStrUrl());
+            tfUrlImageFond.setPrefHeight(20);
+            tfUrlImageFond.setPrefWidth(200);
+            tfUrlImageFond.setLayoutX(120);
+            tfUrlImageFond.setLayoutY(220);
             Label lblInfobulleImageFond = new Label(rbLocalisation.getString("interface.infobulle"));
             lblInfobulleImageFond.setLayoutX(10);
             lblInfobulleImageFond.setLayoutY(252);
-            TextField txtInfobulleImageFond = new TextField(imagesFond[i].getInfobulle());
-            txtInfobulleImageFond.setPrefHeight(20);
-            txtInfobulleImageFond.setPrefWidth(200);
-            txtInfobulleImageFond.setLayoutX(120);
-            txtInfobulleImageFond.setLayoutY(250);
+            TextField tfInfobulleImageFond = new TextField(getImagesFond()[i].getStrInfobulle());
+            tfInfobulleImageFond.setPrefHeight(20);
+            tfInfobulleImageFond.setPrefWidth(200);
+            tfInfobulleImageFond.setLayoutX(120);
+            tfInfobulleImageFond.setLayoutY(250);
 
-            apImagesFond.getChildren().addAll(ivImageFond, fond1,
+            apImagesFond.getChildren().addAll(ivImageFond, paneFond1,
                     lblPosit,
                     rbImageFondTopLeft, rbImageFondTopCenter, rbImageFondTopRight,
                     rbImageFondMiddleLeft, rbImageFondMiddleCenter, rbImageFondMiddleRight,
                     rbImageFondBottomLeft, rbImageFondBottomCenter, rbImageFondBottomRight,
                     cbMasquableImageFond,
-                    lblDXSpinner, dXSpinnerImageFond, lblDYSpinner, dYSpinnerImageFond,
+                    lblOffsetXImageFond, bdfOffsetXImageFond, lblOffsetYImageFond, bdfOffsetYImageFond,
                     lblOpaciteImageFond, slOpaciteImageFond,
                     lblTailleImageFond, slTailleImageFond,
-                    lblUrlImageFond, txtUrlImageFond,
-                    lblInfobulleImageFond, txtInfobulleImageFond
+                    lblUrlImageFond, tfUrlImageFond,
+                    lblInfobulleImageFond, tfInfobulleImageFond
             );
 
-            tgPosition.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) -> {
+            tgPosition.selectedToggleProperty().addListener((ov, old_toggle, new_toggle) -> {
                 if (tgPosition.getSelectedToggle() != null) {
                     String positImageFond = tgPosition.getSelectedToggle().getUserData().toString();
-                    imagesFond[j].setPosX(positImageFond.split(":")[1]);
-                    imagesFond[j].setPosY(positImageFond.split(":")[0]);
+                    getImagesFond()[ij].setStrPosX(positImageFond.split(":")[1]);
+                    getImagesFond()[ij].setStrPosY(positImageFond.split(":")[0]);
                     //System.out.println("Image n° " + j + " position : " + positImageFond);
-                    afficheBarreClassique(strPositionBarreClassique, offsetXBarreClassique, offsetYBarreClassique, tailleBarreClassique, styleBarreClassique, strStyleHotSpots, espacementBarreClassique
-                    );
+                    afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
                 }
             });
-            dXSpinnerImageFond.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
-                imagesFond[j].setOffsetX(new_value.doubleValue());
-                afficheBarreClassique(strPositionBarreClassique, offsetXBarreClassique, offsetYBarreClassique, tailleBarreClassique, styleBarreClassique, strStyleHotSpots, espacementBarreClassique);
+            bdfOffsetXImageFond.numberProperty().addListener((ov, old_value, new_value) -> {
+                getImagesFond()[ij].setOffsetX(new_value.doubleValue());
+                afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
             });
-            dYSpinnerImageFond.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
-                imagesFond[j].setOffsetY(new_value.doubleValue());
-                afficheBarreClassique(strPositionBarreClassique, offsetXBarreClassique, offsetYBarreClassique, tailleBarreClassique, styleBarreClassique, strStyleHotSpots, espacementBarreClassique);
+            bdfOffsetYImageFond.numberProperty().addListener((ov, old_value, new_value) -> {
+                getImagesFond()[ij].setOffsetY(new_value.doubleValue());
+                afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
             });
-            slOpaciteImageFond.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+            slOpaciteImageFond.valueProperty().addListener((ov, oldValue, newValue) -> {
                 if (newValue != null) {
                     double opac = (double) newValue;
-                    imagesFond[j].setOpacite(opac);
-                    afficheBarreClassique(strPositionBarreClassique, offsetXBarreClassique, offsetYBarreClassique, tailleBarreClassique, styleBarreClassique, strStyleHotSpots, espacementBarreClassique);
+                    getImagesFond()[ij].setOpacite(opac);
+                    afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
                 }
             });
-            slTailleImageFond.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+            slTailleImageFond.valueProperty().addListener((ov, oldValue, newValue) -> {
                 if (newValue != null) {
                     double taille = (double) newValue;
-                    imagesFond[j].setTailleX((int) (imagesFond[j].getImgFond().getWidth() * taille));
-                    imagesFond[j].setTailleY((int) (imagesFond[j].getImgFond().getHeight() * taille));
-                    afficheBarreClassique(strPositionBarreClassique, offsetXBarreClassique, offsetYBarreClassique, tailleBarreClassique, styleBarreClassique, strStyleHotSpots, espacementBarreClassique);
+                    getImagesFond()[ij].setTailleX((int) (getImagesFond()[ij].getImgFond().getWidth() * taille));
+                    getImagesFond()[ij].setTailleY((int) (getImagesFond()[ij].getImgFond().getHeight() * taille));
+                    afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
                 }
             });
-            txtUrlImageFond.textProperty().addListener((final ObservableValue<? extends String> observable, final String oldValue, final String newValue) -> {
+            tfUrlImageFond.textProperty().addListener((ov, oldValue, newValue) -> {
                 String txt = newValue;
-                imagesFond[j].setUrl(txt);
+                getImagesFond()[ij].setStrUrl(txt);
             });
-            txtInfobulleImageFond.textProperty().addListener((final ObservableValue<? extends String> observable, final String oldValue, final String newValue) -> {
+            tfInfobulleImageFond.textProperty().addListener((ov, oldValue, newValue) -> {
                 String txt = newValue;
-                imagesFond[j].setInfobulle(txt);
+                getImagesFond()[ij].setStrInfobulle(txt);
             });
-            cbMasquableImageFond.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+            cbMasquableImageFond.selectedProperty().addListener((ov, old_val, new_val) -> {
                 if (new_val != null) {
-                    imagesFond[j].setMasquable(new_val);
+                    getImagesFond()[ij].setMasquable(new_val);
                 }
             });
 
             apImageFond.getChildren().add(apImagesFond);
         }
-        afficheBarreClassique(strPositionBarreClassique, offsetXBarreClassique, offsetYBarreClassique, tailleBarreClassique, styleBarreClassique, strStyleHotSpots, espacementBarreClassique);
+        afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
     }
 
     private String ajoutFenetreImage() {
-        File repert;
+        File fileRepert;
         if (strRepertImagesFond.equals("")) {
-            repert = new File(strCurrentDir + File.separator);
+            fileRepert = new File(strCurrentDir + File.separator);
         } else {
-            repert = new File(strRepertImagesFond);
+            fileRepert = new File(strRepertImagesFond);
         }
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilterImages = new FileChooser.ExtensionFilter("Fichiers Images (jpg, bmp, png, gif)", "*.jpg", "*.bmp", "*.png", "*.gif");
 
-        fileChooser.setInitialDirectory(repert);
+        fileChooser.setInitialDirectory(fileRepert);
         fileChooser.getExtensionFilters().addAll(extFilterImages);
 
         File fichierImage = fileChooser.showOpenDialog(null);
         if (fichierImage != null) {
             strRepertImagesFond = fichierImage.getParent();
-            File repertImage = new File(strRepertTemp + File.separator + "images");
-            if (!repertImage.exists()) {
-                repertImage.mkdirs();
+            File fileRepertImage = new File(strRepertTemp + File.separator + "images");
+            if (!fileRepertImage.exists()) {
+                fileRepertImage.mkdirs();
             }
             try {
-                copieFichierRepertoire(fichierImage.getAbsolutePath(), repertImage.getAbsolutePath());
+                copieFichierRepertoire(fichierImage.getAbsolutePath(), fileRepertImage.getAbsolutePath());
             } catch (IOException ex) {
                 Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -3290,42 +3318,42 @@ public class GestionnaireInterfaceController {
     }
 
     private void ajoutImageFond() {
-        if (iNombreImagesFond < 20) {
-            File repert;
+        if (getiNombreImagesFond() < 20) {
+            File fileRepert;
             if (strRepertImagesFond.equals("")) {
-                repert = new File(strCurrentDir + File.separator);
+                fileRepert = new File(strCurrentDir + File.separator);
             } else {
-                repert = new File(strRepertImagesFond);
+                fileRepert = new File(strRepertImagesFond);
             }
 
             FileChooser fileChooser = new FileChooser();
             FileChooser.ExtensionFilter extFilterImages = new FileChooser.ExtensionFilter("Fichiers Images (jpg, bmp, png, gif)", "*.jpg", "*.bmp", "*.png", "*.gif");
 
-            fileChooser.setInitialDirectory(repert);
+            fileChooser.setInitialDirectory(fileRepert);
             fileChooser.getExtensionFilters().addAll(extFilterImages);
 
-            File fichierImage = fileChooser.showOpenDialog(null);
-            if (fichierImage != null) {
-                strRepertImagesFond = fichierImage.getParent();
-                File repertImage = new File(strRepertTemp + File.separator + "images");
-                if (!repertImage.exists()) {
-                    repertImage.mkdirs();
+            File fileFichierImage = fileChooser.showOpenDialog(null);
+            if (fileFichierImage != null) {
+                strRepertImagesFond = fileFichierImage.getParent();
+                File fileRepertImage = new File(strRepertTemp + File.separator + "images");
+                if (!fileRepertImage.exists()) {
+                    fileRepertImage.mkdirs();
                 }
                 try {
-                    copieFichierRepertoire(fichierImage.getAbsolutePath(), repertImage.getAbsolutePath());
+                    copieFichierRepertoire(fileFichierImage.getAbsolutePath(), fileRepertImage.getAbsolutePath());
                 } catch (IOException ex) {
                     Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-                imagesFond[iNombreImagesFond] = new ImageFond();
-                imagesFond[iNombreImagesFond].setFichierImage(fichierImage.getAbsolutePath());
-                Image imgFond = new Image("file:" + fichierImage.getAbsolutePath());
-                imagesFond[iNombreImagesFond].setImgFond(imgFond);
-                imagesFond[iNombreImagesFond].setTailleX((int) imgFond.getWidth());
-                imagesFond[iNombreImagesFond].setTailleY((int) imgFond.getHeight());
+                getImagesFond()[getiNombreImagesFond()] = new ImageFond();
+                getImagesFond()[getiNombreImagesFond()].setStrFichierImage(fileFichierImage.getAbsolutePath());
+                Image imgFond = new Image("file:" + fileFichierImage.getAbsolutePath());
+                getImagesFond()[getiNombreImagesFond()].setImgFond(imgFond);
+                getImagesFond()[getiNombreImagesFond()].setTailleX((int) imgFond.getWidth());
+                getImagesFond()[getiNombreImagesFond()].setTailleY((int) imgFond.getHeight());
                 //System.out.println("Ajoute ImageFond Taille " + imagesFond[nombreImagesFond].getTailleX()
                 // + "x" + imagesFond[nombreImagesFond].getTailleY());
-                iNombreImagesFond++;
+                setiNombreImagesFond(getiNombreImagesFond() + 1);
                 afficheImagesFondInterface();
             }
         }
@@ -3333,80 +3361,80 @@ public class GestionnaireInterfaceController {
 
     /**
      *
-     * @param width
-     * @param height
+     * @param iLargeur
+     * @param iHauteur
      */
-    public void creeInterface(int width, int height) {
-        List<String> lstPolices = new ArrayList<>();
-        lstPolices.add("Arial");
-        lstPolices.add("Arial Black");
-        lstPolices.add("Comic Sans MS");
-        lstPolices.add("Couurier New");
-        lstPolices.add("Lucida Sans Typewriter");
-        lstPolices.add("Segoe Print");
-        lstPolices.add("Tahoma");
-        lstPolices.add("Times New Roman");
-        lstPolices.add("Verdana");
-        ObservableList<String> listePolices = FXCollections.observableList(lstPolices);
+    public void creeInterface(int iLargeur, int iHauteur) {
+        List<String> strLstPolices = new ArrayList<>();
+        strLstPolices.add("Arial");
+        strLstPolices.add("Arial Black");
+        strLstPolices.add("Comic Sans MS");
+        strLstPolices.add("Couurier New");
+        strLstPolices.add("Lucida Sans Typewriter");
+        strLstPolices.add("Segoe Print");
+        strLstPolices.add("Tahoma");
+        strLstPolices.add("Times New Roman");
+        strLstPolices.add("Verdana");
+        ObservableList<String> strListePolices = FXCollections.observableList(strLstPolices);
         rbLocalisation = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", EditeurPanovisu.locale);
-        repertBoutonsPrincipal = strRepertAppli + File.separator + "theme/barreNavigation";
-        repertHotSpots = strRepertAppli + File.separator + "theme/hotspots";
-        repertHotSpotsPhoto = strRepertAppli + File.separator + "theme/photos";
-        repertBoussoles = strRepertAppli + File.separator + "theme/boussoles";
-        repertMasques = strRepertAppli + File.separator + "theme/MA";
-        repertReseauxSociaux = strRepertAppli + File.separator + "theme/reseaux";
-        chargeBarre(styleBarreClassique, strStyleHotSpots, imageMasque);
-        ArrayList<String> listeStyles = listerStyle(repertBoutonsPrincipal);
-        ArrayList<String> listeHotSpots = listerHotSpots(repertHotSpots);
-        ArrayList<String> listeHotSpotsPhoto = listerHotSpots(repertHotSpotsPhoto);
-        ArrayList<String> listeBoussoles = listerBoussoles(repertBoussoles);
-        ArrayList<String> listeMasques = listerMasques(repertMasques);
-        int nombreHotSpots = listeHotSpots.size();
-        ImageView[] ivHotspots = new ImageView[nombreHotSpots];
-        int nombreHotSpotsPhoto = listeHotSpotsPhoto.size();
-        ImageView[] ivHotspotsPhoto = new ImageView[nombreHotSpotsPhoto];
-        imageClaire = new Image("file:" + strRepertAppli + File.separator + "images/claire.jpg");
-        imageSombre = new Image("file:" + strRepertAppli + File.separator + "images/sombre.jpg");
+        strRepertBoutonsPrincipal = strRepertAppli + File.separator + "theme/barreNavigation";
+        strRepertHotSpots = strRepertAppli + File.separator + "theme/hotspots";
+        strRepertHotSpotsPhoto = strRepertAppli + File.separator + "theme/photos";
+        strRepertBoussoles = strRepertAppli + File.separator + "theme/boussoles";
+        strRepertMasques = strRepertAppli + File.separator + "theme/MA";
+        strRepertReseauxSociaux = strRepertAppli + File.separator + "theme/reseaux";
+        chargeBarre(getStyleBarreClassique(), getStrStyleHotSpots(), getStrImageMasque());
+        ArrayList<String> strListeStyles = strListerStyle(strRepertBoutonsPrincipal);
+        ArrayList<String> strListeHotSpots = strListerHotSpots(strRepertHotSpots);
+        ArrayList<String> strListeHotSpotsPhoto = strListerHotSpots(strRepertHotSpotsPhoto);
+        ArrayList<String> strListeBoussoles = strListerBoussoles(strRepertBoussoles);
+        ArrayList<String> strListeMasques = strListerMasques(strRepertMasques);
+        int iNombreHotSpots = strListeHotSpots.size();
+        ImageView[] ivHotspots = new ImageView[iNombreHotSpots];
+        int iNombreHotSpotsPhoto = strListeHotSpotsPhoto.size();
+        ImageView[] ivHotspotsPhoto = new ImageView[iNombreHotSpotsPhoto];
+        imgClaire = new Image("file:" + strRepertAppli + File.separator + "images/claire.jpg");
+        imgSombre = new Image("file:" + strRepertAppli + File.separator + "images/sombre.jpg");
         imgSuivant = new ImageView(new Image("file:" + strRepertAppli + File.separator + "panovisu/images/suivant.png"));
         imgPrecedent = new ImageView(new Image("file:" + strRepertAppli + File.separator + "panovisu/images/precedent.png"));
-        fondSuivant = new VBox(imgSuivant);
-        fondPrecedent = new VBox(imgPrecedent);
-        fondSuivant.setStyle("-fx-background-color : black;");
-        fondSuivant.setOpacity(0.5);
-        fondPrecedent.setStyle("-fx-background-color : black;");
-        fondPrecedent.setOpacity(0.5);
+        vbFondSuivant = new VBox(imgSuivant);
+        vbFondPrecedent = new VBox(imgPrecedent);
+        vbFondSuivant.setStyle("-fx-background-color : black;");
+        vbFondSuivant.setOpacity(0.5);
+        vbFondPrecedent.setStyle("-fx-background-color : black;");
+        vbFondPrecedent.setOpacity(0.5);
 
-        txtTitre = new Label(rbLocalisation.getString("interface.titre"));
-        Font fonte = Font.font(strTitrePoliceNom, Double.parseDouble(strTitrePoliceTaille));
-        txtTitre.setFont(fonte);
+        lblTxtTitre = new Label(rbLocalisation.getString("interface.titre"));
+        Font fonte = Font.font(getStrTitrePoliceNom(), Double.parseDouble(getStrTitrePoliceTaille()));
+        lblTxtTitre.setFont(fonte);
         double largeurOutils = 380;
 
-        tabInterface = new Pane();
+        paneTabInterface = new Pane();
         hbInterface = new HBox();
-        hbInterface.setPrefWidth(width);
-        hbInterface.setPrefHeight(height);
-        tabInterface.getChildren().add(hbInterface);
+        hbInterface.setPrefWidth(iLargeur);
+        hbInterface.setPrefHeight(iHauteur);
+        paneTabInterface.getChildren().add(hbInterface);
         apVisualisation = new AnchorPane();
-        apVisualisation.setPrefWidth(width - largeurOutils);
-        apVisualisation.setMaxWidth(width - largeurOutils);
-        apVisualisation.setMinWidth(width - largeurOutils);
-        apVisualisation.setPrefHeight(height);
+        apVisualisation.setPrefWidth(iLargeur - largeurOutils);
+        apVisualisation.setMaxWidth(iLargeur - largeurOutils);
+        apVisualisation.setMinWidth(iLargeur - largeurOutils);
+        apVisualisation.setPrefHeight(iHauteur);
         vbOutils = new VBox();
-        ScrollPane SPOutils = new ScrollPane(vbOutils);
-        SPOutils.setId("spOutils");
-        SPOutils.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-        SPOutils.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        SPOutils.setMaxHeight(height - 100);
-        SPOutils.setFitToWidth(true);
-        SPOutils.setFitToHeight(true);
-        SPOutils.setPrefWidth(largeurOutils);
-        SPOutils.setMaxWidth(largeurOutils);
-        SPOutils.setTranslateY(15);
+        ScrollPane spOutils = new ScrollPane(vbOutils);
+        spOutils.setId("spOutils");
+        spOutils.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        spOutils.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        spOutils.setMaxHeight(iHauteur - 100);
+        spOutils.setFitToWidth(true);
+        spOutils.setFitToHeight(true);
+        spOutils.setPrefWidth(largeurOutils);
+        spOutils.setMaxWidth(largeurOutils);
+        spOutils.setTranslateY(15);
         vbOutils.setPrefWidth(largeurOutils - 20);
         vbOutils.setMaxWidth(largeurOutils - 20);
         //vbOutils.setMinHeight(height);
 //        vbOutils.setStyle("-fx-background-color : #ccc;");
-        hbInterface.getChildren().addAll(apVisualisation, SPOutils);
+        hbInterface.getChildren().addAll(apVisualisation, spOutils);
         /*
          * ***************************************************************
          *     Panneau de visualisation de l'interface
@@ -3416,10 +3444,10 @@ public class GestionnaireInterfaceController {
         if (tailleMax > 1200) {
             tailleMax = 1200;
         }
-        ivVisualisation = new ImageView(imageClaire);
+        ivVisualisation = new ImageView(imgClaire);
         ivVisualisation.setFitWidth(tailleMax);
-        if (tailleMax * 2.d / 3.d > height - 100) {
-            ivVisualisation.setFitHeight(height - 100);
+        if (tailleMax * 2.d / 3.d > iHauteur - 100) {
+            ivVisualisation.setFitHeight(iHauteur - 100);
         } else {
             ivVisualisation.setFitHeight(tailleMax * 2.d / 3.d);
         }
@@ -3427,67 +3455,67 @@ public class GestionnaireInterfaceController {
         double LX = (apVisualisation.getPrefWidth() - ivVisualisation.getFitWidth()) / 2;
         ivVisualisation.setLayoutX(LX);
         ivVisualisation.setLayoutY(20);
-        txtTitre.setMinSize(tailleMax, 30);
-        txtTitre.setPadding(new Insets(5));
-        txtTitre.setStyle("-fx-background-color : #000;-fx-border-radius: 5px;");
-        txtTitre.setAlignment(Pos.CENTER);
-        txtTitre.setOpacity(titreOpacite);
-        txtTitre.setTextFill(Color.WHITE);
-        txtTitre.setLayoutY(20);
-        txtTitre.setLayoutX(ivVisualisation.getLayoutX() + (ivVisualisation.getFitWidth() - txtTitre.getMinWidth()) / 2);
+        lblTxtTitre.setMinSize(tailleMax, 30);
+        lblTxtTitre.setPadding(new Insets(5));
+        lblTxtTitre.setStyle("-fx-background-color : #000;-fx-border-radius: 5px;");
+        lblTxtTitre.setAlignment(Pos.CENTER);
+        lblTxtTitre.setOpacity(getTitreOpacite());
+        lblTxtTitre.setTextFill(Color.WHITE);
+        lblTxtTitre.setLayoutY(20);
+        lblTxtTitre.setLayoutX(ivVisualisation.getLayoutX() + (ivVisualisation.getFitWidth() - lblTxtTitre.getMinWidth()) / 2);
         rbClair = new RadioButton("Image claire");
         rbSombre = new RadioButton("Image Sombre");
         rbPerso = new RadioButton("");
         cbImage = new ComboBox();
         cbImage.setDisable(true);
-        double positrb = ivVisualisation.getFitHeight() + 30;
-        rbClair.setToggleGroup(grpImage);
-        rbSombre.setToggleGroup(grpImage);
-        rbPerso.setToggleGroup(grpImage);
+        double positRB = ivVisualisation.getFitHeight() + 30;
+        rbClair.setToggleGroup(tgImage);
+        rbSombre.setToggleGroup(tgImage);
+        rbPerso.setToggleGroup(tgImage);
         apVisualisation.getChildren().addAll(rbClair, rbSombre);
         rbClair.setLayoutX(LX + 40);
-        rbClair.setLayoutY(positrb);
+        rbClair.setLayoutY(positRB);
         rbClair.setSelected(true);
         rbSombre.setLayoutX(LX + 180);
-        rbSombre.setLayoutY(positrb);
+        rbSombre.setLayoutY(positRB);
         rbPerso.setLayoutX(LX + 320);
-        rbPerso.setLayoutY(positrb);
+        rbPerso.setLayoutY(positRB);
         cbImage.setLayoutX(LX + 350);
-        cbImage.setLayoutY(positrb - 3);
+        cbImage.setLayoutY(positRB - 3);
         rbPerso.setDisable(true);
         rbClair.setUserData("claire");
         rbSombre.setUserData("sombre");
         rbPerso.setUserData("perso");
-        imgBoussole = new ImageView(new Image("file:" + repertBoussoles + File.separator + strImageBoussole));
-        imgAiguille = new ImageView("file:" + repertBoussoles + File.separator + "aiguille.png");
+        imgBoussole = new ImageView(new Image("file:" + strRepertBoussoles + File.separator + getStrImageBoussole()));
+        imgAiguille = new ImageView("file:" + strRepertBoussoles + File.separator + "aiguille.png");
         apAfficheBarrePersonnalisee = new AnchorPane();
         apAfficheBarrePersonnalisee.setBackground(Background.EMPTY);
         apAfficheBarrePersonnalisee.setLayoutX(ivVisualisation.getLayoutX());
         apAfficheBarrePersonnalisee.setLayoutY(ivVisualisation.getLayoutY());
-        imgTwitter = new ImageView(new Image("file:" + repertReseauxSociaux + File.separator + imageReseauxSociauxTwitter));
-        imgGoogle = new ImageView(new Image("file:" + repertReseauxSociaux + File.separator + imageReseauxSociauxGoogle));
-        imgFacebook = new ImageView(new Image("file:" + repertReseauxSociaux + File.separator + imageReseauxSociauxFacebook));
-        imgEmail = new ImageView(new Image("file:" + repertReseauxSociaux + File.separator + imageReseauxSociauxEmail));
+        ivTwitter = new ImageView(new Image("file:" + strRepertReseauxSociaux + File.separator + getStrImageReseauxSociauxTwitter()));
+        ivGoogle = new ImageView(new Image("file:" + strRepertReseauxSociaux + File.separator + getStrImageReseauxSociauxGoogle()));
+        ivFacebook = new ImageView(new Image("file:" + strRepertReseauxSociaux + File.separator + getStrImageReseauxSociauxFacebook()));
+        ivEmail = new ImageView(new Image("file:" + strRepertReseauxSociaux + File.separator + getStrImageReseauxSociauxEmail()));
         apVisuVignettes = new AnchorPane();
         apVisuPlan = new AnchorPane();
         apVisuComboMenu = new AnchorPane();
         apVisualisation.getChildren().clear();
         apVisualisation.getChildren().add(ivVisualisation);
-        apVisualisation.getChildren().addAll(txtTitre, imgBoussole, imgAiguille, ivMasque, imgTwitter, imgGoogle, imgFacebook, imgEmail, apVisuVignettes, apVisuComboMenu, fondSuivant, fondPrecedent, apAfficheBarrePersonnalisee);
-        fondPrecedent.setPrefWidth(64);
-        fondPrecedent.setPrefHeight(64);
-        fondSuivant.setPrefWidth(64);
-        fondSuivant.setPrefHeight(64);
-        fondPrecedent.setMaxWidth(64);
-        fondPrecedent.setMaxHeight(64);
-        fondSuivant.setMaxWidth(64);
-        fondSuivant.setMaxHeight(64);
-        fondPrecedent.setLayoutX(ivVisualisation.getLayoutX());
-        fondPrecedent.setLayoutY(ivVisualisation.getLayoutY() + (ivVisualisation.getFitHeight() - fondPrecedent.getPrefHeight()) / 2);
-        fondSuivant.setLayoutX(ivVisualisation.getLayoutX() + (ivVisualisation.getFitWidth() - fondPrecedent.getPrefWidth()));
-        fondSuivant.setLayoutY(ivVisualisation.getLayoutY() + (ivVisualisation.getFitHeight() - fondSuivant.getPrefHeight()) / 2);
-        fondSuivant.setVisible(bSuivantPrecedent);
-        fondPrecedent.setVisible(bSuivantPrecedent);
+        apVisualisation.getChildren().addAll(lblTxtTitre, imgBoussole, imgAiguille, ivMasque, ivTwitter, ivGoogle, ivFacebook, ivEmail, apVisuVignettes, apVisuComboMenu, vbFondSuivant, vbFondPrecedent, apAfficheBarrePersonnalisee);
+        vbFondPrecedent.setPrefWidth(64);
+        vbFondPrecedent.setPrefHeight(64);
+        vbFondSuivant.setPrefWidth(64);
+        vbFondSuivant.setPrefHeight(64);
+        vbFondPrecedent.setMaxWidth(64);
+        vbFondPrecedent.setMaxHeight(64);
+        vbFondSuivant.setMaxWidth(64);
+        vbFondSuivant.setMaxHeight(64);
+        vbFondPrecedent.setLayoutX(ivVisualisation.getLayoutX());
+        vbFondPrecedent.setLayoutY(ivVisualisation.getLayoutY() + (ivVisualisation.getFitHeight() - vbFondPrecedent.getPrefHeight()) / 2);
+        vbFondSuivant.setLayoutX(ivVisualisation.getLayoutX() + (ivVisualisation.getFitWidth() - vbFondPrecedent.getPrefWidth()));
+        vbFondSuivant.setLayoutY(ivVisualisation.getLayoutY() + (ivVisualisation.getFitHeight() - vbFondSuivant.getPrefHeight()) / 2);
+        vbFondSuivant.setVisible(isbSuivantPrecedent());
+        vbFondPrecedent.setVisible(isbSuivantPrecedent());
         apAfficheDiapo = new AnchorPane();
         apAfficheDiapo.setPrefWidth(ivVisualisation.getFitWidth());
         apAfficheDiapo.setPrefHeight(ivVisualisation.getFitHeight());
@@ -3507,7 +3535,7 @@ public class GestionnaireInterfaceController {
         afficheMasque();
         afficheReseauxSociaux();
 
-        afficheBarreClassique(strPositionBarreClassique, offsetXBarreClassique, offsetYBarreClassique, tailleBarreClassique, styleBarreClassique, strStyleHotSpots, espacementBarreClassique);
+        afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
 
         /*
          * *****************************************
@@ -3516,9 +3544,9 @@ public class GestionnaireInterfaceController {
          */
         AnchorPane apCoulTheme = new AnchorPane();
         cpCouleurTheme = new ColorPicker(couleurTheme);
-        String coul2 = cpCouleurTheme.getValue().toString().substring(2, 8);
-        changeCouleurTitre(coul2);
-        changeCouleurVignettes(coul2);
+        String strCoul2 = cpCouleurTheme.getValue().toString().substring(2, 8);
+        changeCouleurTitre(strCoul2);
+        changeCouleurVignettes(strCoul2);
         Label lblCouleurTheme = new Label(rbLocalisation.getString("interface.couleurTheme"));
         lblCouleurTheme.setLayoutX(20);
         lblCouleurTheme.setLayoutY(20);
@@ -3563,12 +3591,12 @@ public class GestionnaireInterfaceController {
         ivBtnPlusTitre.setLayoutX(vbOutils.getPrefWidth() - 20);
         ivBtnPlusTitre.setLayoutY(11);
         cbAfficheTitre = new CheckBox(rbLocalisation.getString("interface.afficheTitre"));
-        cbAfficheTitre.setSelected(bAfficheTitre);
+        cbAfficheTitre.setSelected(isbAfficheTitre());
         cbAfficheTitre.setLayoutX(10);
         cbAfficheTitre.setLayoutY(15);
 
-        cbListePolices = new ComboBox(listePolices);
-        cbListePolices.setValue(strTitrePoliceNom);
+        cbListePolices = new ComboBox(strListePolices);
+        cbListePolices.setValue(getStrTitrePoliceNom());
         cbListePolices.setLayoutX(180);
         cbListePolices.setLayoutY(42);
         cbListePolices.setMaxWidth(135);
@@ -3586,26 +3614,26 @@ public class GestionnaireInterfaceController {
         Label lblChoixCouleurTitre = new Label(rbLocalisation.getString("interface.choixCouleur"));
         lblChoixCouleurTitre.setLayoutX(10);
         lblChoixCouleurTitre.setLayoutY(105);
-        cpCouleurTitre = new ColorPicker(Color.valueOf(strCouleurTitre));
+        cpCouleurTitre = new ColorPicker(Color.valueOf(getStrCouleurTitre()));
         cpCouleurTitre.setLayoutX(180);
         cpCouleurTitre.setLayoutY(103);
         Label lblChoixCouleurFondTitre = new Label(rbLocalisation.getString("interface.choixCouleurFond"));
         lblChoixCouleurFondTitre.setLayoutX(10);
         lblChoixCouleurFondTitre.setLayoutY(135);
-        cpCouleurFondTitre = new ColorPicker(Color.valueOf(strCouleurFondTitre));
+        cpCouleurFondTitre = new ColorPicker(Color.valueOf(getStrCouleurFondTitre()));
         cpCouleurFondTitre.setLayoutX(180);
         cpCouleurFondTitre.setLayoutY(133);
 
         Label lblChoixOpacite = new Label(rbLocalisation.getString("interface.choixOpaciteTitre"));
         lblChoixOpacite.setLayoutX(10);
         lblChoixOpacite.setLayoutY(165);
-        slOpacite = new Slider(0, 1, titreOpacite);
+        slOpacite = new Slider(0, 1, getTitreOpacite());
         slOpacite.setLayoutX(180);
         slOpacite.setLayoutY(165);
         Label lblChoixTaille = new Label(rbLocalisation.getString("interface.choixTailleTitre"));
         lblChoixTaille.setLayoutX(10);
         lblChoixTaille.setLayoutY(195);
-        slTaille = new Slider(0, 100, titreTaille);
+        slTaille = new Slider(0, 100, getTitreTaille());
         slTaille.setLayoutX(180);
         slTaille.setLayoutY(195);
 
@@ -3623,7 +3651,7 @@ public class GestionnaireInterfaceController {
         apTitre.setMinHeight(0);
         apTitre.setVisible(false);
 
-        lblPanelTitre.setOnMouseClicked((MouseEvent me) -> {
+        lblPanelTitre.setOnMouseClicked((me) -> {
             if (apTitre.isVisible()) {
                 apTitre.setPrefHeight(0);
                 apTitre.setMaxHeight(0);
@@ -3638,7 +3666,7 @@ public class GestionnaireInterfaceController {
                 ivBtnPlusTitre.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
             }
         });
-        ivBtnPlusTitre.setOnMouseClicked((MouseEvent me) -> {
+        ivBtnPlusTitre.setOnMouseClicked((me) -> {
             if (apTitre.isVisible()) {
                 apTitre.setPrefHeight(0);
                 apTitre.setMaxHeight(0);
@@ -3680,77 +3708,77 @@ public class GestionnaireInterfaceController {
         cbAfficheFenetreInfo.setLayoutX(10);
         cbAfficheFenetreInfo.setLayoutY(15);
         cbFenetreInfoPersonnalise = new CheckBox(rbLocalisation.getString("interface.fenetreInfoPersonnalise"));
-        cbFenetreInfoPersonnalise.setSelected(bFenetreInfoPersonnalise);
+        cbFenetreInfoPersonnalise.setSelected(isbFenetreInfoPersonnalise());
         cbFenetreInfoPersonnalise.setLayoutX(10);
         cbFenetreInfoPersonnalise.setLayoutY(45);
         AnchorPane apFenetreInfoPers = new AnchorPane();
         apFenetreInfoPers.setLayoutY(75);
-        apFenetreInfoPers.setDisable(!bFenetreInfoPersonnalise);
+        apFenetreInfoPers.setDisable(!isbFenetreInfoPersonnalise());
         Line ligne1 = new Line(0, 0, vbOutils.getPrefWidth(), 0);
         ligne1.setStrokeWidth(0.2);
 
         Label lblFenetreInfoImage = new Label(rbLocalisation.getString("interface.fenetreImage"));
         lblFenetreInfoImage.setLayoutX(20);
         lblFenetreInfoImage.setLayoutY(5);
-        txtFenetreInfoImage = new TextField();
-        txtFenetreInfoImage.setLayoutX(40);
-        txtFenetreInfoImage.setLayoutY(25);
-        txtFenetreInfoImage.setPrefWidth(250);
+        tfFenetreInfoImage = new TextField();
+        tfFenetreInfoImage.setLayoutX(40);
+        tfFenetreInfoImage.setLayoutY(25);
+        tfFenetreInfoImage.setPrefWidth(250);
         Button btnFenetreInfo = new Button("...");
         btnFenetreInfo.setLayoutX(300);
         btnFenetreInfo.setLayoutY(25);
         Label lblFenetreInfoTaille = new Label(rbLocalisation.getString("interface.fenetreTaille"));
         lblFenetreInfoTaille.setLayoutX(20);
         lblFenetreInfoTaille.setLayoutY(55);
-        slFenetreInfoTaille = new Slider(25, 200, fenetreInfoTaille);
+        slFenetreInfoTaille = new Slider(25, 200, getFenetreInfoTaille());
         slFenetreInfoTaille.setLayoutX(140);
         slFenetreInfoTaille.setLayoutY(55);
         Label lblFenetreInfoOpacite = new Label(rbLocalisation.getString("interface.fenetreOpacite"));
         lblFenetreInfoOpacite.setLayoutX(20);
         lblFenetreInfoOpacite.setLayoutY(85);
-        slFenetreInfoOpacite = new Slider(0, 1, fenetreInfoOpacite);
+        slFenetreInfoOpacite = new Slider(0, 1, getFenetreInfoOpacite());
         slFenetreInfoOpacite.setLayoutX(140);
         slFenetreInfoOpacite.setLayoutY(85);
         Label lblFenetreInfoPosX = new Label(rbLocalisation.getString("interface.fenetrePosX"));
         lblFenetreInfoPosX.setLayoutX(20);
         lblFenetreInfoPosX.setLayoutY(120);
-        bdfFenetreInfoPosX = new BigDecimalField(BigDecimal.valueOf(fenetreInfoPosX));
+        bdfFenetreInfoPosX = new BigDecimalField(BigDecimal.valueOf(getFenetreInfoPosX()));
         bdfFenetreInfoPosX.setLayoutX(100);
         bdfFenetreInfoPosX.setLayoutY(115);
         bdfFenetreInfoPosX.setPrefWidth(60);
         Label lblFenetreInfoPosY = new Label(rbLocalisation.getString("interface.fenetrePosY"));
         lblFenetreInfoPosY.setLayoutX(180);
         lblFenetreInfoPosY.setLayoutY(120);
-        bdfFenetreInfoPosY = new BigDecimalField(BigDecimal.valueOf(fenetreInfoPosY));
+        bdfFenetreInfoPosY = new BigDecimalField(BigDecimal.valueOf(getFenetreInfoPosY()));
         bdfFenetreInfoPosY.setLayoutX(260);
         bdfFenetreInfoPosY.setLayoutY(115);
         bdfFenetreInfoPosY.setPrefWidth(60);
         Label lblFenetreInfoURL = new Label("URL");
         lblFenetreInfoURL.setLayoutX(20);
         lblFenetreInfoURL.setLayoutY(170);
-        txtFenetreURL = new TextField();
-        txtFenetreURL.setLayoutX(120);
-        txtFenetreURL.setLayoutY(165);
-        txtFenetreURL.setPrefWidth(210);
+        tfFenetreURL = new TextField();
+        tfFenetreURL.setLayoutX(120);
+        tfFenetreURL.setLayoutY(165);
+        tfFenetreURL.setPrefWidth(210);
         Label lblFenetreInfoTexteURL = new Label(rbLocalisation.getString("interface.fenetreLibelleURL"));
         lblFenetreInfoTexteURL.setLayoutX(20);
         lblFenetreInfoTexteURL.setLayoutY(200);
-        txtFenetreTexteURL = new TextField();
-        txtFenetreTexteURL.setLayoutX(120);
-        txtFenetreTexteURL.setLayoutY(195);
-        txtFenetreTexteURL.setPrefWidth(210);
+        tfFenetreTexteURL = new TextField();
+        tfFenetreTexteURL.setLayoutX(120);
+        tfFenetreTexteURL.setLayoutY(195);
+        tfFenetreTexteURL.setPrefWidth(210);
 
         Label lblFenetrePoliceTaille = new Label(rbLocalisation.getString("interface.fenetrePoliceTaille"));
         lblFenetrePoliceTaille.setLayoutX(20);
         lblFenetrePoliceTaille.setLayoutY(230);
-        slFenetrePoliceTaille = new Slider(7, 48, fenetrePoliceTaille);
+        slFenetrePoliceTaille = new Slider(7, 48, getFenetrePoliceTaille());
         slFenetrePoliceTaille.setLayoutX(140);
         slFenetrePoliceTaille.setLayoutY(230);
 
         Label lblFenetreURLCouleur = new Label(rbLocalisation.getString("interface.fenetreURLChoixCouleur"));
         lblFenetreURLCouleur.setLayoutX(20);
         lblFenetreURLCouleur.setLayoutY(260);
-        cpFenetreURLCouleur = new ColorPicker(Color.valueOf(strFenetreURLCouleur));
+        cpFenetreURLCouleur = new ColorPicker(Color.valueOf(getStrFenetreURLCouleur()));
         cpFenetreURLCouleur.setLayoutX(200);
         cpFenetreURLCouleur.setLayoutY(256);
 
@@ -3758,14 +3786,14 @@ public class GestionnaireInterfaceController {
         lblFenetreURLPosX.setLayoutX(20);
         lblFenetreURLPosX.setLayoutY(295);
 
-        bdfFenetreURLPosX = new BigDecimalField(BigDecimal.valueOf(fenetreInfoPosX));
+        bdfFenetreURLPosX = new BigDecimalField(BigDecimal.valueOf(getFenetreInfoPosX()));
         bdfFenetreURLPosX.setLayoutX(110);
         bdfFenetreURLPosX.setLayoutY(290);
         bdfFenetreURLPosX.setPrefWidth(60);
         Label lblFenetreURLPosY = new Label(rbLocalisation.getString("interface.fenetrePosY") + " URL");
         lblFenetreURLPosY.setLayoutX(185);
         lblFenetreURLPosY.setLayoutY(295);
-        bdfFenetreURLPosY = new BigDecimalField(BigDecimal.valueOf(fenetreInfoPosY));
+        bdfFenetreURLPosY = new BigDecimalField(BigDecimal.valueOf(getFenetreInfoPosY()));
         bdfFenetreURLPosY.setLayoutX(275);
         bdfFenetreURLPosY.setLayoutY(290);
         bdfFenetreURLPosY.setPrefWidth(60);
@@ -3775,13 +3803,13 @@ public class GestionnaireInterfaceController {
 
         apFenetreInfoPers.getChildren().addAll(
                 ligne1,
-                lblFenetreInfoImage, txtFenetreInfoImage, btnFenetreInfo,
+                lblFenetreInfoImage, tfFenetreInfoImage, btnFenetreInfo,
                 lblFenetreInfoTaille, slFenetreInfoTaille,
                 lblFenetreInfoOpacite, slFenetreInfoOpacite,
                 lblFenetreInfoPosX, bdfFenetreInfoPosX,
                 lblFenetreInfoPosY, bdfFenetreInfoPosY,
-                lblFenetreInfoURL, txtFenetreURL,
-                lblFenetreInfoTexteURL, txtFenetreTexteURL,
+                lblFenetreInfoURL, tfFenetreURL,
+                lblFenetreInfoTexteURL, tfFenetreTexteURL,
                 lblFenetrePoliceTaille, slFenetrePoliceTaille,
                 lblFenetreURLCouleur, cpFenetreURLCouleur,
                 lblFenetreURLPosX, bdfFenetreURLPosX,
@@ -3795,48 +3823,48 @@ public class GestionnaireInterfaceController {
         cbAfficheFenetreAide.setLayoutY(400);
 
         cbFenetreAidePersonnalise = new CheckBox(rbLocalisation.getString("interface.fenetreAidePersonnalise"));
-        cbFenetreAidePersonnalise.setSelected(bFenetreAidePersonnalise);
+        cbFenetreAidePersonnalise.setSelected(isbFenetreAidePersonnalise());
         cbFenetreAidePersonnalise.setLayoutX(10);
         cbFenetreAidePersonnalise.setLayoutY(430);
         AnchorPane apFenetreAidePers = new AnchorPane();
         apFenetreAidePers.setLayoutY(460);
-        apFenetreAidePers.setDisable(!bFenetreAidePersonnalise);
+        apFenetreAidePers.setDisable(!isbFenetreAidePersonnalise());
         Line ligne3 = new Line(0, 0, vbOutils.getPrefWidth(), 0);
         ligne3.setStrokeWidth(0.2);
 
         Label lblFenetreAideImage = new Label(rbLocalisation.getString("interface.fenetreImage"));
         lblFenetreAideImage.setLayoutX(20);
         lblFenetreAideImage.setLayoutY(5);
-        txtFenetreAideImage = new TextField();
-        txtFenetreAideImage.setLayoutX(40);
-        txtFenetreAideImage.setLayoutY(25);
-        txtFenetreAideImage.setPrefWidth(250);
+        tfFenetreAideImage = new TextField();
+        tfFenetreAideImage.setLayoutX(40);
+        tfFenetreAideImage.setLayoutY(25);
+        tfFenetreAideImage.setPrefWidth(250);
         Button btnFenetreAide = new Button("...");
         btnFenetreAide.setLayoutX(300);
         btnFenetreAide.setLayoutY(25);
         Label lblFenetreAideTaille = new Label(rbLocalisation.getString("interface.fenetreTaille"));
         lblFenetreAideTaille.setLayoutX(20);
         lblFenetreAideTaille.setLayoutY(55);
-        slFenetreAideTaille = new Slider(50, 200, fenetreAideTaille);
+        slFenetreAideTaille = new Slider(50, 200, getFenetreAideTaille());
         slFenetreAideTaille.setLayoutX(140);
         slFenetreAideTaille.setLayoutY(55);
         Label lblFenetreAideOpacite = new Label(rbLocalisation.getString("interface.fenetreOpacite"));
         lblFenetreAideOpacite.setLayoutX(20);
         lblFenetreAideOpacite.setLayoutY(85);
-        slFenetreAideOpacite = new Slider(0, 1, fenetreAideOpacite);
+        slFenetreAideOpacite = new Slider(0, 1, getFenetreAideOpacite());
         slFenetreAideOpacite.setLayoutX(140);
         slFenetreAideOpacite.setLayoutY(85);
         Label lblFenetreAidePosX = new Label(rbLocalisation.getString("interface.fenetrePosX"));
         lblFenetreAidePosX.setLayoutX(20);
         lblFenetreAidePosX.setLayoutY(120);
-        bdfFenetreAidePosX = new BigDecimalField(BigDecimal.valueOf(fenetreAidePosX));
+        bdfFenetreAidePosX = new BigDecimalField(BigDecimal.valueOf(getFenetreAidePosX()));
         bdfFenetreAidePosX.setLayoutX(100);
         bdfFenetreAidePosX.setLayoutY(115);
         bdfFenetreAidePosX.setPrefWidth(60);
         Label lblFenetreAidePosY = new Label(rbLocalisation.getString("interface.fenetrePosY"));
         lblFenetreAidePosY.setLayoutX(180);
         lblFenetreAidePosY.setLayoutY(120);
-        bdfFenetreAidePosY = new BigDecimalField(BigDecimal.valueOf(fenetreAidePosY));
+        bdfFenetreAidePosY = new BigDecimalField(BigDecimal.valueOf(getFenetreAidePosY()));
         bdfFenetreAidePosY.setLayoutX(260);
         bdfFenetreAidePosY.setLayoutY(115);
         bdfFenetreAidePosY.setPrefWidth(60);
@@ -3846,7 +3874,7 @@ public class GestionnaireInterfaceController {
 
         apFenetreAidePers.getChildren().addAll(
                 ligne3,
-                lblFenetreAideImage, txtFenetreAideImage, btnFenetreAide,
+                lblFenetreAideImage, tfFenetreAideImage, btnFenetreAide,
                 lblFenetreAideTaille, slFenetreAideTaille,
                 lblFenetreAideOpacite, slFenetreAideOpacite,
                 lblFenetreAidePosX, bdfFenetreAidePosX,
@@ -3868,7 +3896,7 @@ public class GestionnaireInterfaceController {
         apFenetre.setMinHeight(0);
         apFenetre.setVisible(false);
 
-        lblPanelFenetre.setOnMouseClicked((MouseEvent me) -> {
+        lblPanelFenetre.setOnMouseClicked((me) -> {
             if (apFenetre.isVisible()) {
                 apFenetre.setPrefHeight(0);
                 apFenetre.setMaxHeight(0);
@@ -3885,7 +3913,7 @@ public class GestionnaireInterfaceController {
                 cbAfficheFenetreInfo.setSelected(true);
             }
         });
-        ivBtnPlusFenetre.setOnMouseClicked((MouseEvent me) -> {
+        ivBtnPlusFenetre.setOnMouseClicked((me) -> {
             if (apFenetre.isVisible()) {
                 apFenetre.setPrefHeight(0);
                 apFenetre.setMaxHeight(0);
@@ -3929,14 +3957,14 @@ public class GestionnaireInterfaceController {
         Label lblChoixCouleurDiaporama = new Label(rbLocalisation.getString("interface.choixCouleurDiaporama"));
         lblChoixCouleurDiaporama.setLayoutX(10);
         lblChoixCouleurDiaporama.setLayoutY(40);
-        cpCouleurDiaporama = new ColorPicker(Color.valueOf(strCouleurDiaporama));
+        cpCouleurDiaporama = new ColorPicker(Color.valueOf(getStrCouleurDiaporama()));
         cpCouleurDiaporama.setLayoutX(180);
         cpCouleurDiaporama.setLayoutY(38);
 
         Label lblChoixOpaciteDiaporama = new Label(rbLocalisation.getString("interface.choixOpaciteDiaporama"));
         lblChoixOpaciteDiaporama.setLayoutX(10);
         lblChoixOpaciteDiaporama.setLayoutY(70);
-        slOpaciteDiaporama = new Slider(0, 1, diaporamaOpacite);
+        slOpaciteDiaporama = new Slider(0, 1, getDiaporamaOpacite());
         slOpaciteDiaporama.setLayoutX(180);
         slOpaciteDiaporama.setLayoutY(70);
 
@@ -3951,7 +3979,7 @@ public class GestionnaireInterfaceController {
         apDiapo.setMinHeight(0);
         apDiapo.setVisible(false);
 
-        lblDiaporama.setOnMouseClicked((MouseEvent me) -> {
+        lblDiaporama.setOnMouseClicked((me) -> {
             if (apDiapo.isVisible()) {
                 apDiapo.setPrefHeight(0);
                 apDiapo.setMaxHeight(0);
@@ -3968,7 +3996,7 @@ public class GestionnaireInterfaceController {
                 cbVisualiseDiapo.setSelected(true);
             }
         });
-        ivBtnDiaporama.setOnMouseClicked((MouseEvent me) -> {
+        ivBtnDiaporama.setOnMouseClicked((me) -> {
             if (apDiapo.isVisible()) {
                 apDiapo.setPrefHeight(0);
                 apDiapo.setMaxHeight(0);
@@ -4004,7 +4032,7 @@ public class GestionnaireInterfaceController {
         lblChoixHS.setLayoutX(10);
         lblChoixHS.setLayoutY(10);
 
-        double tailleHS = 35.d * ((int) (nombreHotSpots / 9 + 1) + (int) (nombreHotSpotsPhoto / 6 + 1)) + 100;
+        double tailleHS = 35.d * ((int) (iNombreHotSpots / 9 + 1) + (int) (iNombreHotSpotsPhoto / 6 + 1)) + 100;
         apHotSpots.setPrefHeight(tailleHS);
         apHotSpots.setLayoutX(50);
         apHotSpots.setLayoutY(40);
@@ -4017,29 +4045,29 @@ public class GestionnaireInterfaceController {
         lblHSPanoramique.setLayoutY(5);
         lblHSPanoramique.setLayoutX(20);
         Label lblHSPhoto = new Label(rbLocalisation.getString("interface.HSPhoto"));
-        lblHSPhoto.setLayoutY((int) (nombreHotSpots / 6 + 1) * 35 + 45);
+        lblHSPhoto.setLayoutY((int) (iNombreHotSpots / 6 + 1) * 35 + 45);
         lblHSPhoto.setLayoutX(20);
         apHotSpots.getChildren().addAll(lblHSPanoramique, lblHSPhoto);
-        for (String nomImage : listeHotSpots) {
-            Pane fond = new Pane();
-            ivHotspots[i] = new ImageView(new Image("file:" + repertHotSpots + File.separator + nomImage, -1, 30, true, true, true));
-            int col = i % 9;
-            int row = i / 9;
-            xHS = col * 40 + 5;
-            yHS = row * 35 + 25;
-            fond.setLayoutX(xHS);
-            fond.setLayoutY(yHS);
-            fond.setStyle("-fx-background-color : #ccc");
-            fond.setOnMouseClicked((MouseEvent me) -> {
+        for (String strNomImage : strListeHotSpots) {
+            Pane paneFond = new Pane();
+            ivHotspots[i] = new ImageView(new Image("file:" + strRepertHotSpots + File.separator + strNomImage, -1, 30, true, true, true));
+            int iCol = i % 9;
+            int iRow = i / 9;
+            xHS = iCol * 40 + 5;
+            yHS = iRow * 35 + 25;
+            paneFond.setLayoutX(xHS);
+            paneFond.setLayoutY(yHS);
+            paneFond.setStyle("-fx-background-color : #ccc");
+            paneFond.setOnMouseClicked((me) -> {
                 apVisualisation.getChildren().remove(hbbarreBoutons);
                 apVisualisation.getChildren().remove(ivHotSpot);
                 apVisualisation.getChildren().remove(ivHotSpotImage);
-                strStyleHotSpots = nomImage;
-                afficheBarreClassique(strPositionBarreClassique, offsetXBarreClassique, offsetYBarreClassique, tailleBarreClassique, styleBarreClassique, strStyleHotSpots, espacementBarreClassique);
+                setStrStyleHotSpots(strNomImage);
+                afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
 
             });
-            fond.getChildren().add(ivHotspots[i]);
-            apHotSpots.getChildren().add(fond);
+            paneFond.getChildren().add(ivHotspots[i]);
+            apHotSpots.getChildren().add(paneFond);
             i++;
 
         }
@@ -4051,25 +4079,25 @@ public class GestionnaireInterfaceController {
         cpCouleurHotspots.setLayoutY(yHS + 50);
         apHotSpots.getChildren().addAll(lblCouleurHotspot, cpCouleurHotspots);
         i = 0;
-        for (String nomImage : listeHotSpotsPhoto) {
-            Pane fond = new Pane();
-            ivHotspotsPhoto[i] = new ImageView(new Image("file:" + repertHotSpotsPhoto + File.separator + nomImage, -1, 30, true, true, true));
-            int col = i % 9;
-            int row = i / 9;
-            xHS = col * 40 + 5;
-            yHS = (row + (int) (nombreHotSpots / 9 + 1)) * 35 + 65;
-            fond.setLayoutX(xHS);
-            fond.setLayoutY(yHS);
-            fond.setStyle("-fx-background-color : #ccc");
-            fond.setOnMouseClicked((MouseEvent me) -> {
+        for (String strNomImage : strListeHotSpotsPhoto) {
+            Pane paneFond = new Pane();
+            ivHotspotsPhoto[i] = new ImageView(new Image("file:" + strRepertHotSpotsPhoto + File.separator + strNomImage, -1, 30, true, true, true));
+            int iCol = i % 9;
+            int iRow = i / 9;
+            xHS = iCol * 40 + 5;
+            yHS = (iRow + (int) (iNombreHotSpots / 9 + 1)) * 35 + 65;
+            paneFond.setLayoutX(xHS);
+            paneFond.setLayoutY(yHS);
+            paneFond.setStyle("-fx-background-color : #ccc");
+            paneFond.setOnMouseClicked((me) -> {
                 apVisualisation.getChildren().remove(hbbarreBoutons);
                 apVisualisation.getChildren().remove(ivHotSpot);
                 apVisualisation.getChildren().remove(ivHotSpotImage);
-                strStyleHotSpotImages = nomImage;
-                afficheBarreClassique(strPositionBarreClassique, offsetXBarreClassique, offsetYBarreClassique, tailleBarreClassique, styleBarreClassique, strStyleHotSpots, espacementBarreClassique);
+                setStrStyleHotSpotImages(strNomImage);
+                afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
             });
-            fond.getChildren().add(ivHotspotsPhoto[i]);
-            apHotSpots.getChildren().add(fond);
+            paneFond.getChildren().add(ivHotspotsPhoto[i]);
+            apHotSpots.getChildren().add(paneFond);
             i++;
 
         }
@@ -4085,7 +4113,7 @@ public class GestionnaireInterfaceController {
         apHotSpots.setMinHeight(0);
         apHotSpots.setVisible(false);
 
-        lblChoixHS.setOnMouseClicked((MouseEvent me) -> {
+        lblChoixHS.setOnMouseClicked((me) -> {
             if (apHotSpots.isVisible()) {
                 ivBtnPlusHS.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
                 apHotSpots.setPrefHeight(0);
@@ -4100,7 +4128,7 @@ public class GestionnaireInterfaceController {
                 apHotSpots.setVisible(true);
             }
         });
-        ivBtnPlusHS.setOnMouseClicked((MouseEvent me) -> {
+        ivBtnPlusHS.setOnMouseClicked((me) -> {
             if (apHotSpots.isVisible()) {
                 ivBtnPlusHS.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
                 apHotSpots.setPrefHeight(0);
@@ -4138,12 +4166,12 @@ public class GestionnaireInterfaceController {
         lblStyleBarreClassique.setLayoutY(60);
 
         cblisteStyleBarreClassique = new ComboBox();
-        listeStyles.stream().forEach((nomStyle) -> {
+        strListeStyles.stream().forEach((nomStyle) -> {
             cblisteStyleBarreClassique.getItems().add(nomStyle);
         });
         cblisteStyleBarreClassique.setLayoutX(150);
         cblisteStyleBarreClassique.setLayoutY(70);
-        cblisteStyleBarreClassique.setValue(styleBarreClassique);
+        cblisteStyleBarreClassique.setValue(getStyleBarreClassique());
         cpCouleurBarreClassique = new ColorPicker(couleurBarreClassique);
         Label lblCouleurBarreClassique = new Label(rbLocalisation.getString("interface.couleurBarre"));
         lblCouleurBarreClassique.setLayoutX(20);
@@ -4169,36 +4197,36 @@ public class GestionnaireInterfaceController {
         rbBottomCenterBarreClassique.setUserData("bottom:center");
         rbBottomRightBarreClassique.setUserData("bottom:right");
 
-        rbTopLeftBarreClassique.setToggleGroup(grpPositionBarreClassique);
-        rbTopCenterBarreClassique.setToggleGroup(grpPositionBarreClassique);
-        rbTopRightBarreClassique.setToggleGroup(grpPositionBarreClassique);
-        rbMiddleLeftBarreClassique.setToggleGroup(grpPositionBarreClassique);
-        rbMiddleRightBarreClassique.setToggleGroup(grpPositionBarreClassique);
-        rbBottomLeftBarreClassique.setToggleGroup(grpPositionBarreClassique);
-        rbBottomCenterBarreClassique.setToggleGroup(grpPositionBarreClassique);
-        rbBottomRightBarreClassique.setToggleGroup(grpPositionBarreClassique);
+        rbTopLeftBarreClassique.setToggleGroup(tgPositionBarreClassique);
+        rbTopCenterBarreClassique.setToggleGroup(tgPositionBarreClassique);
+        rbTopRightBarreClassique.setToggleGroup(tgPositionBarreClassique);
+        rbMiddleLeftBarreClassique.setToggleGroup(tgPositionBarreClassique);
+        rbMiddleRightBarreClassique.setToggleGroup(tgPositionBarreClassique);
+        rbBottomLeftBarreClassique.setToggleGroup(tgPositionBarreClassique);
+        rbBottomCenterBarreClassique.setToggleGroup(tgPositionBarreClassique);
+        rbBottomRightBarreClassique.setToggleGroup(tgPositionBarreClassique);
 
-        int posX = 250;
-        int posY = 140;
+        int iPosX = 250;
+        int iPosY = 140;
 
-        rbTopLeftBarreClassique.setLayoutX(posX);
-        rbTopCenterBarreClassique.setLayoutX(posX + 20);
-        rbTopRightBarreClassique.setLayoutX(posX + 40);
-        rbTopLeftBarreClassique.setLayoutY(posY);
-        rbTopCenterBarreClassique.setLayoutY(posY);
-        rbTopRightBarreClassique.setLayoutY(posY);
+        rbTopLeftBarreClassique.setLayoutX(iPosX);
+        rbTopCenterBarreClassique.setLayoutX(iPosX + 20);
+        rbTopRightBarreClassique.setLayoutX(iPosX + 40);
+        rbTopLeftBarreClassique.setLayoutY(iPosY);
+        rbTopCenterBarreClassique.setLayoutY(iPosY);
+        rbTopRightBarreClassique.setLayoutY(iPosY);
 
-        rbMiddleLeftBarreClassique.setLayoutX(posX);
-        rbMiddleRightBarreClassique.setLayoutX(posX + 40);
-        rbMiddleLeftBarreClassique.setLayoutY(posY + 20);
-        rbMiddleRightBarreClassique.setLayoutY(posY + 20);
+        rbMiddleLeftBarreClassique.setLayoutX(iPosX);
+        rbMiddleRightBarreClassique.setLayoutX(iPosX + 40);
+        rbMiddleLeftBarreClassique.setLayoutY(iPosY + 20);
+        rbMiddleRightBarreClassique.setLayoutY(iPosY + 20);
 
-        rbBottomLeftBarreClassique.setLayoutX(posX);
-        rbBottomCenterBarreClassique.setLayoutX(posX + 20);
-        rbBottomRightBarreClassique.setLayoutX(posX + 40);
-        rbBottomLeftBarreClassique.setLayoutY(posY + 40);
-        rbBottomCenterBarreClassique.setLayoutY(posY + 40);
-        rbBottomRightBarreClassique.setLayoutY(posY + 40);
+        rbBottomLeftBarreClassique.setLayoutX(iPosX);
+        rbBottomCenterBarreClassique.setLayoutX(iPosX + 20);
+        rbBottomRightBarreClassique.setLayoutX(iPosX + 40);
+        rbBottomLeftBarreClassique.setLayoutY(iPosY + 40);
+        rbBottomCenterBarreClassique.setLayoutY(iPosY + 40);
+        rbBottomRightBarreClassique.setLayoutY(iPosY + 40);
         rbBottomCenterBarreClassique.setSelected(true);
         Label lblPositionBarreClassique = new Label(rbLocalisation.getString("interface.position"));
         lblPositionBarreClassique.setLayoutX(10);
@@ -4210,13 +4238,13 @@ public class GestionnaireInterfaceController {
         Label lblOffsetYBarreClassique = new Label("dY :");
         lblOffsetYBarreClassique.setLayoutX(175);
         lblOffsetYBarreClassique.setLayoutY(205);
-        bdfOffsetXBarreClassique = new BigDecimalField(new BigDecimal(offsetXBarreClassique));
+        bdfOffsetXBarreClassique = new BigDecimalField(new BigDecimal(getOffsetXBarreClassique()));
         bdfOffsetXBarreClassique.setLayoutX(50);
         bdfOffsetXBarreClassique.setLayoutY(200);
         bdfOffsetXBarreClassique.setMaxValue(new BigDecimal(2000));
         bdfOffsetXBarreClassique.setMinValue(new BigDecimal(-2000));
         bdfOffsetXBarreClassique.setMaxWidth(100);
-        bdfOffsetYBarreClassique = new BigDecimalField(new BigDecimal(offsetYBarreClassique));
+        bdfOffsetYBarreClassique = new BigDecimalField(new BigDecimal(getOffsetYBarreClassique()));
         bdfOffsetYBarreClassique.setLayoutX(200);
         bdfOffsetYBarreClassique.setLayoutY(200);
         bdfOffsetYBarreClassique.setMaxValue(new BigDecimal(2000));
@@ -4287,7 +4315,7 @@ public class GestionnaireInterfaceController {
         apBarreClassique.setMinHeight(0);
         apBarreClassique.setVisible(false);
 
-        lblBarreClassique.setOnMouseClicked((MouseEvent me) -> {
+        lblBarreClassique.setOnMouseClicked((me) -> {
             if (apBarreClassique.isVisible()) {
                 apBarreClassique.setPrefHeight(0);
                 apBarreClassique.setMaxHeight(0);
@@ -4302,7 +4330,7 @@ public class GestionnaireInterfaceController {
                 ivBtnPlusBarreClassique.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
             }
         });
-        ivBtnPlusBarreClassique.setOnMouseClicked((MouseEvent me) -> {
+        ivBtnPlusBarreClassique.setOnMouseClicked((me) -> {
             if (apBarreClassique.isVisible()) {
                 apBarreClassique.setPrefHeight(0);
                 apBarreClassique.setMaxHeight(0);
@@ -4348,11 +4376,11 @@ public class GestionnaireInterfaceController {
         btnLienBarrePersonnalisee.setLayoutY(40);
 
         ivBarrePersonnalisee = new ImageView();
-        Pane pImageBarrePersonnalisee = new Pane(ivBarrePersonnalisee);
-        pImageBarrePersonnalisee.setLayoutX(110);
-        pImageBarrePersonnalisee.setLayoutY(70);
-        pImageBarrePersonnalisee.setPrefHeight(150);
-        pImageBarrePersonnalisee.setPrefWidth(150);
+        Pane paneImageBarrePersonnalisee = new Pane(ivBarrePersonnalisee);
+        paneImageBarrePersonnalisee.setLayoutX(110);
+        paneImageBarrePersonnalisee.setLayoutY(70);
+        paneImageBarrePersonnalisee.setPrefHeight(150);
+        paneImageBarrePersonnalisee.setPrefWidth(150);
         rbTopLeftBarrePersonnalisee = new RadioButton();
         rbTopCenterBarrePersonnalisee = new RadioButton();
         rbTopRightBarrePersonnalisee = new RadioButton();
@@ -4380,27 +4408,27 @@ public class GestionnaireInterfaceController {
         rbBottomCenterBarrePersonnalisee.setToggleGroup(grpPositionBarrePersonnalisee);
         rbBottomRightBarrePersonnalisee.setToggleGroup(grpPositionBarrePersonnalisee);
 
-        int pos1X = 250;
-        int pos1Y = 240;
+        int iPos1X = 250;
+        int iPos1Y = 240;
 
-        rbTopLeftBarrePersonnalisee.setLayoutX(pos1X);
-        rbTopCenterBarrePersonnalisee.setLayoutX(pos1X + 20);
-        rbTopRightBarrePersonnalisee.setLayoutX(pos1X + 40);
-        rbTopLeftBarrePersonnalisee.setLayoutY(pos1Y);
-        rbTopCenterBarrePersonnalisee.setLayoutY(pos1Y);
-        rbTopRightBarrePersonnalisee.setLayoutY(pos1Y);
+        rbTopLeftBarrePersonnalisee.setLayoutX(iPos1X);
+        rbTopCenterBarrePersonnalisee.setLayoutX(iPos1X + 20);
+        rbTopRightBarrePersonnalisee.setLayoutX(iPos1X + 40);
+        rbTopLeftBarrePersonnalisee.setLayoutY(iPos1Y);
+        rbTopCenterBarrePersonnalisee.setLayoutY(iPos1Y);
+        rbTopRightBarrePersonnalisee.setLayoutY(iPos1Y);
 
-        rbMiddleLeftBarrePersonnalisee.setLayoutX(pos1X);
-        rbMiddleRightBarrePersonnalisee.setLayoutX(pos1X + 40);
-        rbMiddleLeftBarrePersonnalisee.setLayoutY(pos1Y + 20);
-        rbMiddleRightBarrePersonnalisee.setLayoutY(pos1Y + 20);
+        rbMiddleLeftBarrePersonnalisee.setLayoutX(iPos1X);
+        rbMiddleRightBarrePersonnalisee.setLayoutX(iPos1X + 40);
+        rbMiddleLeftBarrePersonnalisee.setLayoutY(iPos1Y + 20);
+        rbMiddleRightBarrePersonnalisee.setLayoutY(iPos1Y + 20);
 
-        rbBottomLeftBarrePersonnalisee.setLayoutX(pos1X);
-        rbBottomCenterBarrePersonnalisee.setLayoutX(pos1X + 20);
-        rbBottomRightBarrePersonnalisee.setLayoutX(pos1X + 40);
-        rbBottomLeftBarrePersonnalisee.setLayoutY(pos1Y + 40);
-        rbBottomCenterBarrePersonnalisee.setLayoutY(pos1Y + 40);
-        rbBottomRightBarrePersonnalisee.setLayoutY(pos1Y + 40);
+        rbBottomLeftBarrePersonnalisee.setLayoutX(iPos1X);
+        rbBottomCenterBarrePersonnalisee.setLayoutX(iPos1X + 20);
+        rbBottomRightBarrePersonnalisee.setLayoutX(iPos1X + 40);
+        rbBottomLeftBarrePersonnalisee.setLayoutY(iPos1Y + 40);
+        rbBottomCenterBarrePersonnalisee.setLayoutY(iPos1Y + 40);
+        rbBottomRightBarrePersonnalisee.setLayoutY(iPos1Y + 40);
         rbBottomRightBarrePersonnalisee.setSelected(true);
         Label lblPositionBarrePersonnalisee = new Label(rbLocalisation.getString("interface.position"));
         lblPositionBarrePersonnalisee.setLayoutX(20);
@@ -4412,13 +4440,13 @@ public class GestionnaireInterfaceController {
         Label lblOffsetYBarrePersonnalisee = new Label("dY :");
         lblOffsetYBarrePersonnalisee.setLayoutX(175);
         lblOffsetYBarrePersonnalisee.setLayoutY(315);
-        bdfOffsetXBarrePersonnalisee = new BigDecimalField(new BigDecimal(offsetXBarrePersonnalisee));
+        bdfOffsetXBarrePersonnalisee = new BigDecimalField(new BigDecimal(getOffsetXBarrePersonnalisee()));
         bdfOffsetXBarrePersonnalisee.setLayoutX(50);
         bdfOffsetXBarrePersonnalisee.setLayoutY(310);
         bdfOffsetXBarrePersonnalisee.setMaxValue(new BigDecimal(2000));
         bdfOffsetXBarrePersonnalisee.setMinValue(new BigDecimal(-2000));
         bdfOffsetXBarrePersonnalisee.setMaxWidth(100);
-        bdfOffsetYBarrePersonnalisee = new BigDecimalField(new BigDecimal(offsetYBarrePersonnalisee));
+        bdfOffsetYBarrePersonnalisee = new BigDecimalField(new BigDecimal(getOffsetYBarrePersonnalisee()));
         bdfOffsetYBarrePersonnalisee.setLayoutX(200);
         bdfOffsetYBarrePersonnalisee.setLayoutY(310);
         bdfOffsetYBarrePersonnalisee.setMaxValue(new BigDecimal(2000));
@@ -4427,14 +4455,14 @@ public class GestionnaireInterfaceController {
         Label lblTailleBarrePersonnalisee = new Label(rbLocalisation.getString("interface.barrePersonnaliseeTaille"));
         lblTailleBarrePersonnalisee.setLayoutX(20);
         lblTailleBarrePersonnalisee.setLayoutY(350);
-        sltailleBarrePersonnalisee = new Slider(10, 200, tailleBarrePersonnalisee);
+        sltailleBarrePersonnalisee = new Slider(10, 200, getTailleBarrePersonnalisee());
         sltailleBarrePersonnalisee.setLayoutX(150);
         sltailleBarrePersonnalisee.setLayoutY(350);
 
         Label lblTailleBarrePersonnaliseeIcones = new Label(rbLocalisation.getString("interface.barrePersonnaliseeTailleIcones"));
         lblTailleBarrePersonnaliseeIcones.setLayoutX(20);
         lblTailleBarrePersonnaliseeIcones.setLayoutY(380);
-        sltailleIconesBarrePersonnalisee = new Slider(10, 60, tailleIconesBarrePersonnalisee);
+        sltailleIconesBarrePersonnalisee = new Slider(10, 60, getTailleIconesBarrePersonnalisee());
         sltailleIconesBarrePersonnalisee.setLayoutX(150);
         sltailleIconesBarrePersonnalisee.setLayoutY(380);
 
@@ -4508,7 +4536,7 @@ public class GestionnaireInterfaceController {
         apBarrePersonnalisee.getChildren().addAll(
                 cbBarrePersonnaliseeVisible, btnEditerBarre,
                 lblLienBarrePersonnalisee, tfLienImageBarrePersonnalisee, btnLienBarrePersonnalisee,
-                pImageBarrePersonnalisee,
+                paneImageBarrePersonnalisee,
                 lblPositionBarrePersonnalisee,
                 rbTopLeftBarrePersonnalisee, rbTopCenterBarrePersonnalisee, rbTopRightBarrePersonnalisee,
                 rbMiddleLeftBarrePersonnalisee, rbMiddleRightBarrePersonnalisee,
@@ -4530,7 +4558,7 @@ public class GestionnaireInterfaceController {
         apBarrePersonnalisee.setMinHeight(0);
         apBarrePersonnalisee.setVisible(false);
 
-        lblBarrePersonnalisee.setOnMouseClicked((MouseEvent me) -> {
+        lblBarrePersonnalisee.setOnMouseClicked((me) -> {
             if (apBarrePersonnalisee.isVisible()) {
                 apBarrePersonnalisee.setPrefHeight(0);
                 apBarrePersonnalisee.setMaxHeight(0);
@@ -4545,7 +4573,7 @@ public class GestionnaireInterfaceController {
                 ivBtnPlusBarrePersonnalisee.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
             }
         });
-        ivBtnPlusBarrePersonnalisee.setOnMouseClicked((MouseEvent me) -> {
+        ivBtnPlusBarrePersonnalisee.setOnMouseClicked((me) -> {
             if (apBarrePersonnalisee.isVisible()) {
                 apBarrePersonnalisee.setPrefHeight(0);
                 apBarrePersonnalisee.setMaxHeight(0);
@@ -4571,7 +4599,7 @@ public class GestionnaireInterfaceController {
         apBoussole.setLayoutY(40);
         apBoussole.setPrefHeight(340);
         apBoussole.setMinWidth(vbOutils.getPrefWidth() - 20);
-        Double tailleBouss = apBoussole.getPrefHeight();
+        double tailleBouss = apBoussole.getPrefHeight();
         cbAfficheBoussole = new CheckBox(rbLocalisation.getString("interface.affichageBoussole"));
         cbAfficheBoussole.setLayoutX(10);
         cbAfficheBoussole.setLayoutY(10);
@@ -4591,30 +4619,30 @@ public class GestionnaireInterfaceController {
         lblChoixBoussole.setLayoutY(40);
         apBoussole.getChildren().add(lblChoixBoussole);
 
-        int nombreBoussoles = listeBoussoles.size();
-        ImageView[] ivBoussoles = new ImageView[nombreBoussoles];
+        int iNombreBoussoles = strListeBoussoles.size();
+        ImageView[] ivBoussoles = new ImageView[iNombreBoussoles];
         i = 0;
-        for (String nomImage : listeBoussoles) {
-            Pane fond = new Pane();
-            ivBoussoles[i] = new ImageView(new Image("file:" + repertBoussoles + File.separator + nomImage, -1, 60, true, true, true));
-            int col = i % 3;
-            int row = i / 3;
-            xHS = col * 70 + 95;
-            yHS = row * 70 + 60;
-            fond.setLayoutX(xHS);
-            fond.setLayoutY(yHS);
-            fond.setPrefHeight(60);
-            fond.setPrefWidth(60);
-            fond.setOpacity(1);
-            fond.setUserData(nomImage);
-            fond.setStyle("-fx-background-color : rgba(255,255,255,0)");
-            fond.setOnMouseClicked((MouseEvent me) -> {
-                strImageBoussole = (String) ((Pane) me.getSource()).getUserData();
+        for (String strNomImage : strListeBoussoles) {
+            Pane paneFond = new Pane();
+            ivBoussoles[i] = new ImageView(new Image("file:" + strRepertBoussoles + File.separator + strNomImage, -1, 60, true, true, true));
+            int iCol = i % 3;
+            int iRow = i / 3;
+            xHS = iCol * 70 + 95;
+            yHS = iRow * 70 + 60;
+            paneFond.setLayoutX(xHS);
+            paneFond.setLayoutY(yHS);
+            paneFond.setPrefHeight(60);
+            paneFond.setPrefWidth(60);
+            paneFond.setOpacity(1);
+            paneFond.setUserData(strNomImage);
+            paneFond.setStyle("-fx-background-color : rgba(255,255,255,0)");
+            paneFond.setOnMouseClicked((me) -> {
+                setStrImageBoussole((String) ((Pane) me.getSource()).getUserData());
                 afficheBoussole();
             });
-            fond.getChildren().add(ivBoussoles[i]);
+            paneFond.getChildren().add(ivBoussoles[i]);
 
-            apBoussole.getChildren().add(fond);
+            apBoussole.getChildren().add(paneFond);
             i++;
 
         }
@@ -4633,23 +4661,23 @@ public class GestionnaireInterfaceController {
         rbBoussBottomLeft.setUserData("bottom:left");
         rbBoussBottomRight.setUserData("bottom:right");
 
-        rbBoussTopLeft.setToggleGroup(grpPosBouss);
-        rbBoussTopRight.setToggleGroup(grpPosBouss);
-        rbBoussBottomLeft.setToggleGroup(grpPosBouss);
-        rbBoussBottomRight.setToggleGroup(grpPosBouss);
+        rbBoussTopLeft.setToggleGroup(tgPosBouss);
+        rbBoussTopRight.setToggleGroup(tgPosBouss);
+        rbBoussBottomLeft.setToggleGroup(tgPosBouss);
+        rbBoussBottomRight.setToggleGroup(tgPosBouss);
 
-        posX = 200;
-        posY = 160;
+        iPosX = 200;
+        iPosY = 160;
 
-        rbBoussTopLeft.setLayoutX(posX);
-        rbBoussTopRight.setLayoutX(posX + 20);
-        rbBoussTopLeft.setLayoutY(posY);
-        rbBoussTopRight.setLayoutY(posY);
+        rbBoussTopLeft.setLayoutX(iPosX);
+        rbBoussTopRight.setLayoutX(iPosX + 20);
+        rbBoussTopLeft.setLayoutY(iPosY);
+        rbBoussTopRight.setLayoutY(iPosY);
 
-        rbBoussBottomLeft.setLayoutX(posX);
-        rbBoussBottomRight.setLayoutX(posX + 20);
-        rbBoussBottomLeft.setLayoutY(posY + 20);
-        rbBoussBottomRight.setLayoutY(posY + 20);
+        rbBoussBottomLeft.setLayoutX(iPosX);
+        rbBoussBottomRight.setLayoutX(iPosX + 20);
+        rbBoussBottomLeft.setLayoutY(iPosY + 20);
+        rbBoussBottomRight.setLayoutY(iPosY + 20);
         apBoussole.getChildren().addAll(
                 rbBoussTopLeft, rbBoussTopRight,
                 rbBoussBottomLeft, rbBoussBottomRight
@@ -4660,14 +4688,14 @@ public class GestionnaireInterfaceController {
         Label lblBoussDYSpinner = new Label("dY :");
         lblBoussDYSpinner.setLayoutX(175);
         lblBoussDYSpinner.setLayoutY(210);
-        bdfOffsetXBoussole = new BigDecimalField(new BigDecimal(offsetXBarreClassique));
+        bdfOffsetXBoussole = new BigDecimalField(new BigDecimal(getOffsetXBarreClassique()));
         bdfOffsetXBoussole.setLayoutX(50);
         bdfOffsetXBoussole.setLayoutY(205);
         bdfOffsetXBoussole.setMaxValue(new BigDecimal(2000));
         bdfOffsetXBoussole.setMinValue(new BigDecimal(0));
         bdfOffsetXBoussole.setNumber(new BigDecimal(20));
         bdfOffsetXBoussole.setMaxWidth(100);
-        bdfOffsetYBoussole = new BigDecimalField(new BigDecimal(offsetYBarreClassique));
+        bdfOffsetYBoussole = new BigDecimalField(new BigDecimal(getOffsetYBarreClassique()));
         bdfOffsetYBoussole.setLayoutX(200);
         bdfOffsetYBoussole.setLayoutY(205);
         bdfOffsetYBoussole.setMaxValue(new BigDecimal(2000));
@@ -4704,7 +4732,7 @@ public class GestionnaireInterfaceController {
         apBoussole.setMinHeight(0);
         apBoussole.setVisible(false);
 
-        lblPanelBoussole.setOnMouseClicked((MouseEvent me) -> {
+        lblPanelBoussole.setOnMouseClicked((me) -> {
             if (apBoussole.isVisible()) {
                 ivBtnPlusBouss.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
                 apBoussole.setPrefHeight(0);
@@ -4719,7 +4747,7 @@ public class GestionnaireInterfaceController {
                 apBoussole.setVisible(true);
             }
         });
-        ivBtnPlusBouss.setOnMouseClicked((MouseEvent me) -> {
+        ivBtnPlusBouss.setOnMouseClicked((me) -> {
             if (apBoussole.isVisible()) {
                 ivBtnPlusBouss.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
                 apBoussole.setPrefHeight(0);
@@ -4743,9 +4771,9 @@ public class GestionnaireInterfaceController {
         AnchorPane apMasque = new AnchorPane();
 
         apMasque.setLayoutY(40);
-        apMasque.setPrefHeight(430);
+        apMasque.setPrefHeight(590);
         apMasque.setMinWidth(vbOutils.getPrefWidth() - 20);
-        Double taillePanelMasque = apMasque.getPrefHeight();
+        double taillePanelMasque = apMasque.getPrefHeight();
         cbAfficheMasque = new CheckBox(rbLocalisation.getString("interface.affichageMasque"));
         cbAfficheMasque.setLayoutX(10);
         cbAfficheMasque.setLayoutY(10);
@@ -4765,26 +4793,31 @@ public class GestionnaireInterfaceController {
         lblChoixMasque.setLayoutY(40);
         apMasque.getChildren().add(lblChoixMasque);
 
-        int nombreMasques = listeMasques.size();
-        ImageView[] ivMasques = new ImageView[nombreMasques];
+        int iNombreMasques = strListeMasques.size();
+        ImageView[] ivMasques = new ImageView[iNombreMasques];
         i = 0;
-        for (String nomImage : listeMasques) {
-            ivMasques[i] = new ImageView(new Image("file:" + repertMasques + File.separator + nomImage, -1, 30, true, true, true));
-            int col = i % 4;
-            int row = i / 4;
-            xHS = col * 35 + 15;
-            yHS = row * 35 + 60;
-            ivMasques[i].setLayoutX(xHS);
-            ivMasques[i].setLayoutY(yHS);
-            ivMasques[i].setUserData(nomImage);
-            ivMasques[i].setStyle("-fx-background-color : #ccc");
-            ivMasques[i].setOnMouseClicked((MouseEvent me) -> {
-                imageMasque = (String) ((ImageView) me.getSource()).getUserData();
+        for (String strNomImage : strListeMasques) {
+            Pane paneFond = new Pane();
+            ivMasques[i] = new ImageView(new Image("file:" + strRepertMasques + File.separator + strNomImage, -1, 30, true, true, true));
+            int iCol = i % 4;
+            int iRow = i / 4;
+            xHS = iCol * 35 + 15;
+            yHS = iRow * 35 + 60;
+            paneFond.setLayoutX(xHS);
+            paneFond.setLayoutY(yHS);
+            paneFond.setPrefHeight(30);
+            paneFond.setPrefWidth(30);
+            paneFond.setOpacity(1);
+            paneFond.setUserData(strNomImage);
+            paneFond.setStyle("-fx-background-color : rgba(255,255,255,0)");
+            paneFond.setOnMouseClicked((me) -> {
+                setStrImageMasque((String) ((Pane) me.getSource()).getUserData());
                 apVisualisation.getChildren().remove(ivMasque);
-                chargeBarre(styleBarreClassique, strStyleHotSpots, imageMasque);
+                chargeBarre(getStyleBarreClassique(), getStrStyleHotSpots(), getStrImageMasque());
                 afficheMasque();
             });
-            apMasque.getChildren().add(ivMasques[i]);
+            paneFond.getChildren().add(ivMasques[i]);
+            apMasque.getChildren().add(paneFond);
             i++;
 
         }
@@ -4798,8 +4831,8 @@ public class GestionnaireInterfaceController {
 
         Label lblPositMasque = new Label(rbLocalisation.getString("interface.choixPositMasque"));
         lblPositMasque.setLayoutX(10);
-        int basImages = ((i - 1) / 4 + 1) * 35;
-        lblPositMasque.setLayoutY(70 + basImages);
+        int iBasImages = ((i - 1) / 4 + 1) * 35;
+        lblPositMasque.setLayoutY(70 + iBasImages);
         apMasque.getChildren().add(lblPositMasque);
 
         rbMasqueTopLeft = new RadioButton();
@@ -4812,104 +4845,125 @@ public class GestionnaireInterfaceController {
         rbMasqueBottomLeft.setUserData("bottom:left");
         rbMasqueBottomRight.setUserData("bottom:right");
 
-        rbMasqueTopLeft.setToggleGroup(grpPosMasque);
-        rbMasqueTopRight.setToggleGroup(grpPosMasque);
-        rbMasqueBottomLeft.setToggleGroup(grpPosMasque);
-        rbMasqueBottomRight.setToggleGroup(grpPosMasque);
+        rbMasqueTopLeft.setToggleGroup(tgPosMasque);
+        rbMasqueTopRight.setToggleGroup(tgPosMasque);
+        rbMasqueBottomLeft.setToggleGroup(tgPosMasque);
+        rbMasqueBottomRight.setToggleGroup(tgPosMasque);
 
-        posX = 200;
-        posY = 70 + basImages;
+        iPosX = 200;
+        iPosY = 70 + iBasImages;
 
-        rbMasqueTopLeft.setLayoutX(posX);
-        rbMasqueTopRight.setLayoutX(posX + 20);
-        rbMasqueTopLeft.setLayoutY(posY);
-        rbMasqueTopRight.setLayoutY(posY);
+        rbMasqueTopLeft.setLayoutX(iPosX);
+        rbMasqueTopRight.setLayoutX(iPosX + 20);
+        rbMasqueTopLeft.setLayoutY(iPosY);
+        rbMasqueTopRight.setLayoutY(iPosY);
 
-        rbMasqueBottomLeft.setLayoutX(posX);
-        rbMasqueBottomRight.setLayoutX(posX + 20);
-        rbMasqueBottomLeft.setLayoutY(posY + 20);
-        rbMasqueBottomRight.setLayoutY(posY + 20);
+        rbMasqueBottomLeft.setLayoutX(iPosX);
+        rbMasqueBottomRight.setLayoutX(iPosX + 20);
+        rbMasqueBottomLeft.setLayoutY(iPosY + 20);
+        rbMasqueBottomRight.setLayoutY(iPosY + 20);
         apMasque.getChildren().addAll(
                 rbMasqueTopLeft, rbMasqueTopRight,
                 rbMasqueBottomLeft, rbMasqueBottomRight
         );
         Label lblMasqueDXSpinner = new Label("dX :");
         lblMasqueDXSpinner.setLayoutX(25);
-        lblMasqueDXSpinner.setLayoutY(128 + basImages);
+        lblMasqueDXSpinner.setLayoutY(128 + iBasImages);
         Label lblMasqueDYSpinner = new Label("dY :");
         lblMasqueDYSpinner.setLayoutX(175);
-        lblMasqueDYSpinner.setLayoutY(128 + basImages);
-        masqueDXSpinner = new BigDecimalField(new BigDecimal(offsetXBarreClassique));
-        masqueDXSpinner.setLayoutX(50);
-        masqueDXSpinner.setLayoutY(123 + basImages);
-        masqueDXSpinner.setMaxValue(new BigDecimal(2000));
-        masqueDXSpinner.setMinValue(new BigDecimal(0));
-        masqueDXSpinner.setNumber(new BigDecimal(20));
-        masqueDXSpinner.setMaxWidth(100);
-        masqueDYSpinner = new BigDecimalField(new BigDecimal(offsetYBarreClassique));
-        masqueDYSpinner.setLayoutX(200);
-        masqueDYSpinner.setLayoutY(123 + basImages);
-        masqueDYSpinner.setMaxValue(new BigDecimal(2000));
-        masqueDYSpinner.setMinValue(new BigDecimal(0));
-        masqueDYSpinner.setNumber(new BigDecimal(20));
-        masqueDYSpinner.setMaxWidth(100);
+        lblMasqueDYSpinner.setLayoutY(128 + iBasImages);
+        bdfOffsetXMasque = new BigDecimalField(new BigDecimal(getOffsetXBarreClassique()));
+        bdfOffsetXMasque.setLayoutX(50);
+        bdfOffsetXMasque.setLayoutY(123 + iBasImages);
+        bdfOffsetXMasque.setMaxValue(new BigDecimal(2000));
+        bdfOffsetXMasque.setMinValue(new BigDecimal(0));
+        bdfOffsetXMasque.setNumber(new BigDecimal(20));
+        bdfOffsetXMasque.setMaxWidth(100);
+        bdfOffsetYMasque = new BigDecimalField(new BigDecimal(getOffsetYBarreClassique()));
+        bdfOffsetYMasque.setLayoutX(200);
+        bdfOffsetYMasque.setLayoutY(123 + iBasImages);
+        bdfOffsetYMasque.setMaxValue(new BigDecimal(2000));
+        bdfOffsetYMasque.setMinValue(new BigDecimal(0));
+        bdfOffsetYMasque.setNumber(new BigDecimal(20));
+        bdfOffsetYMasque.setMaxWidth(100);
         apMasque.getChildren().addAll(
-                lblMasqueDXSpinner, masqueDXSpinner,
-                lblMasqueDYSpinner, masqueDYSpinner
+                lblMasqueDXSpinner, bdfOffsetXMasque,
+                lblMasqueDYSpinner, bdfOffsetYMasque
         );
         Label lblTailleMasque = new Label(rbLocalisation.getString("interface.tailleMasque"));
         lblTailleMasque.setLayoutX(10);
-        lblTailleMasque.setLayoutY(160 + basImages);
+        lblTailleMasque.setLayoutY(160 + iBasImages);
         slTailleMasque = new Slider(15, 60, 30);
         slTailleMasque.setLayoutX(200);
-        slTailleMasque.setLayoutY(160 + basImages);
+        slTailleMasque.setLayoutY(160 + iBasImages);
         Label lblOpaciteMasque = new Label(rbLocalisation.getString("interface.opaciteMasque"));
         lblOpaciteMasque.setLayoutX(10);
-        lblOpaciteMasque.setLayoutY(190 + basImages);
+        lblOpaciteMasque.setLayoutY(190 + iBasImages);
         slOpaciteMasque = new Slider(0, 1.0, 0.8);
         slOpaciteMasque.setLayoutX(200);
-        slOpaciteMasque.setLayoutY(190 + basImages);
+        slOpaciteMasque.setLayoutY(190 + iBasImages);
         cbMasqueNavigation = new CheckBox(rbLocalisation.getString("interface.masqueNavigation"));
         cbMasqueNavigation.setLayoutX(60);
-        cbMasqueNavigation.setLayoutY(220 + basImages);
+        cbMasqueNavigation.setLayoutY(220 + iBasImages);
         cbMasqueNavigation.setSelected(true);
         cbMasqueBoussole = new CheckBox(rbLocalisation.getString("interface.masqueBoussole"));
         cbMasqueBoussole.setLayoutX(60);
-        cbMasqueBoussole.setLayoutY(250 + basImages);
+        cbMasqueBoussole.setLayoutY(250 + iBasImages);
         cbMasqueBoussole.setSelected(true);
         cbMasqueTitre = new CheckBox(rbLocalisation.getString("interface.masqueTitre"));
         cbMasqueTitre.setLayoutX(60);
-        cbMasqueTitre.setLayoutY(280 + basImages);
+        cbMasqueTitre.setLayoutY(280 + iBasImages);
         cbMasqueTitre.setSelected(true);
         cbMasquePlan = new CheckBox(rbLocalisation.getString("interface.masquePlan"));
         cbMasquePlan.setLayoutX(60);
-        cbMasquePlan.setLayoutY(310 + basImages);
+        cbMasquePlan.setLayoutY(310 + iBasImages);
         cbMasquePlan.setSelected(true);
         cbMasqueReseaux = new CheckBox(rbLocalisation.getString("interface.masqueReseaux"));
         cbMasqueReseaux.setLayoutX(60);
-        cbMasqueReseaux.setLayoutY(340 + basImages);
+        cbMasqueReseaux.setLayoutY(340 + iBasImages);
         cbMasqueReseaux.setSelected(true);
-        cbMasqueReseaux.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbMasqueReseaux.selectedProperty().addListener((ov, old_val, new_val) -> {
             if (new_val != null) {
-                bMasqueReseaux = new_val;
+                setbMasqueReseaux((boolean) new_val);
             }
         });
         cbMasqueVignettes = new CheckBox(rbLocalisation.getString("interface.masqueVignettes"));
         cbMasqueVignettes.setLayoutX(60);
-        cbMasqueVignettes.setLayoutY(370 + basImages);
+        cbMasqueVignettes.setLayoutY(370 + iBasImages);
         cbMasqueVignettes.setSelected(true);
+        cbMasqueCombo = new CheckBox(rbLocalisation.getString("interface.masqueCombo"));
+        cbMasqueCombo.setLayoutX(60);
+        cbMasqueCombo.setLayoutY(400 + iBasImages);
+        cbMasqueCombo.setSelected(true);
+
+        cbMasqueSuivPrec = new CheckBox(rbLocalisation.getString("interface.masqueSuivPrec"));
+        cbMasqueSuivPrec.setLayoutX(60);
+        cbMasqueSuivPrec.setLayoutY(430 + iBasImages);
+        cbMasqueSuivPrec.setSelected(true);
+        cbMasqueHotspots = new CheckBox(rbLocalisation.getString("interface.masqueHotspots"));
+        cbMasqueHotspots.setLayoutX(60);
+        cbMasqueHotspots.setLayoutY(460 + iBasImages);
+        cbMasqueHotspots.setSelected(true);
 
         apMasque.getChildren().addAll(
                 lblTailleMasque, slTailleMasque,
                 lblOpaciteMasque, slOpaciteMasque,
-                cbMasqueNavigation, cbMasqueBoussole, cbMasqueTitre, cbMasquePlan, cbMasqueReseaux, cbMasqueVignettes
+                cbMasqueNavigation,
+                cbMasqueBoussole,
+                cbMasqueTitre,
+                cbMasquePlan,
+                cbMasqueReseaux,
+                cbMasqueVignettes,
+                cbMasqueCombo,
+                cbMasqueSuivPrec,
+                cbMasqueHotspots
         );
         apMasque.setPrefHeight(0);
         apMasque.setMaxHeight(0);
         apMasque.setMinHeight(0);
         apMasque.setVisible(false);
 
-        lblPanelMasque.setOnMouseClicked((MouseEvent me) -> {
+        lblPanelMasque.setOnMouseClicked((me) -> {
             if (apMasque.isVisible()) {
                 ivBtnPlusMasque.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
                 apMasque.setPrefHeight(0);
@@ -4924,7 +4978,7 @@ public class GestionnaireInterfaceController {
                 apMasque.setVisible(true);
             }
         });
-        ivBtnPlusMasque.setOnMouseClicked((MouseEvent me) -> {
+        ivBtnPlusMasque.setOnMouseClicked((me) -> {
             if (apMasque.isVisible()) {
                 ivBtnPlusMasque.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
                 apMasque.setPrefHeight(0);
@@ -4950,7 +5004,7 @@ public class GestionnaireInterfaceController {
         apReseauxSociaux.setLayoutY(40);
         apReseauxSociaux.setPrefHeight(310);
         apReseauxSociaux.setMinWidth(vbOutils.getPrefWidth() - 20);
-        Double taillePanelReseauxSociaux = apReseauxSociaux.getPrefHeight();
+        double taillePanelReseauxSociaux = apReseauxSociaux.getPrefHeight();
         cbAfficheReseauxSociaux = new CheckBox(rbLocalisation.getString("interface.affichageReseauxSociaux"));
         cbAfficheReseauxSociaux.setLayoutX(10);
         cbAfficheReseauxSociaux.setLayoutY(10);
@@ -4967,8 +5021,8 @@ public class GestionnaireInterfaceController {
         ivBtnPlusReseauxSociaux.setLayoutY(11);
         Label lblPositReseauxSociaux = new Label(rbLocalisation.getString("interface.choixPositReseauxSociaux"));
         lblPositReseauxSociaux.setLayoutX(10);
-        basImages = -30;
-        lblPositReseauxSociaux.setLayoutY(70 + basImages);
+        iBasImages = -30;
+        lblPositReseauxSociaux.setLayoutY(70 + iBasImages);
         apReseauxSociaux.getChildren().add(lblPositReseauxSociaux);
 
         rbReseauxSociauxTopLeft = new RadioButton();
@@ -4981,79 +5035,79 @@ public class GestionnaireInterfaceController {
         rbReseauxSociauxBottomLeft.setUserData("bottom:left");
         rbReseauxSociauxBottomRight.setUserData("bottom:right");
 
-        rbReseauxSociauxTopLeft.setToggleGroup(grpPosReseauxSociaux);
-        rbReseauxSociauxTopRight.setToggleGroup(grpPosReseauxSociaux);
-        rbReseauxSociauxBottomLeft.setToggleGroup(grpPosReseauxSociaux);
-        rbReseauxSociauxBottomRight.setToggleGroup(grpPosReseauxSociaux);
+        rbReseauxSociauxTopLeft.setToggleGroup(tgPosReseauxSociaux);
+        rbReseauxSociauxTopRight.setToggleGroup(tgPosReseauxSociaux);
+        rbReseauxSociauxBottomLeft.setToggleGroup(tgPosReseauxSociaux);
+        rbReseauxSociauxBottomRight.setToggleGroup(tgPosReseauxSociaux);
 
-        posX = 200;
-        posY = 70 + basImages;
+        iPosX = 200;
+        iPosY = 70 + iBasImages;
 
-        rbReseauxSociauxTopLeft.setLayoutX(posX);
-        rbReseauxSociauxTopRight.setLayoutX(posX + 20);
-        rbReseauxSociauxTopLeft.setLayoutY(posY);
-        rbReseauxSociauxTopRight.setLayoutY(posY);
+        rbReseauxSociauxTopLeft.setLayoutX(iPosX);
+        rbReseauxSociauxTopRight.setLayoutX(iPosX + 20);
+        rbReseauxSociauxTopLeft.setLayoutY(iPosY);
+        rbReseauxSociauxTopRight.setLayoutY(iPosY);
 
-        rbReseauxSociauxBottomLeft.setLayoutX(posX);
-        rbReseauxSociauxBottomRight.setLayoutX(posX + 20);
-        rbReseauxSociauxBottomLeft.setLayoutY(posY + 20);
-        rbReseauxSociauxBottomRight.setLayoutY(posY + 20);
+        rbReseauxSociauxBottomLeft.setLayoutX(iPosX);
+        rbReseauxSociauxBottomRight.setLayoutX(iPosX + 20);
+        rbReseauxSociauxBottomLeft.setLayoutY(iPosY + 20);
+        rbReseauxSociauxBottomRight.setLayoutY(iPosY + 20);
         apReseauxSociaux.getChildren().addAll(
                 rbReseauxSociauxTopLeft, rbReseauxSociauxTopRight,
                 rbReseauxSociauxBottomLeft, rbReseauxSociauxBottomRight
         );
         Label lblReseauxSociauxDXSpinner = new Label("dX :");
         lblReseauxSociauxDXSpinner.setLayoutX(25);
-        lblReseauxSociauxDXSpinner.setLayoutY(128 + basImages);
+        lblReseauxSociauxDXSpinner.setLayoutY(128 + iBasImages);
         Label lblReseauxSociauxDYSpinner = new Label("dY :");
         lblReseauxSociauxDYSpinner.setLayoutX(175);
-        lblReseauxSociauxDYSpinner.setLayoutY(128 + basImages);
-        reseauxSociauxDXSpinner = new BigDecimalField(new BigDecimal(offsetXBarreClassique));
-        reseauxSociauxDXSpinner.setLayoutX(50);
-        reseauxSociauxDXSpinner.setLayoutY(123 + basImages);
-        reseauxSociauxDXSpinner.setMaxValue(new BigDecimal(2000));
-        reseauxSociauxDXSpinner.setMinValue(new BigDecimal(0));
-        reseauxSociauxDXSpinner.setNumber(new BigDecimal(20));
-        reseauxSociauxDXSpinner.setMaxWidth(100);
-        reseauxSociauxDYSpinner = new BigDecimalField(new BigDecimal(offsetYBarreClassique));
-        reseauxSociauxDYSpinner.setLayoutX(200);
-        reseauxSociauxDYSpinner.setLayoutY(123 + basImages);
-        reseauxSociauxDYSpinner.setMaxValue(new BigDecimal(2000));
-        reseauxSociauxDYSpinner.setMinValue(new BigDecimal(0));
-        reseauxSociauxDYSpinner.setNumber(new BigDecimal(20));
-        reseauxSociauxDYSpinner.setMaxWidth(100);
+        lblReseauxSociauxDYSpinner.setLayoutY(128 + iBasImages);
+        bdfOffsetXReseauxSociaux = new BigDecimalField(new BigDecimal(getOffsetXBarreClassique()));
+        bdfOffsetXReseauxSociaux.setLayoutX(50);
+        bdfOffsetXReseauxSociaux.setLayoutY(123 + iBasImages);
+        bdfOffsetXReseauxSociaux.setMaxValue(new BigDecimal(2000));
+        bdfOffsetXReseauxSociaux.setMinValue(new BigDecimal(0));
+        bdfOffsetXReseauxSociaux.setNumber(new BigDecimal(20));
+        bdfOffsetXReseauxSociaux.setMaxWidth(100);
+        bdfOffsetYreseauxSociaux = new BigDecimalField(new BigDecimal(getOffsetYBarreClassique()));
+        bdfOffsetYreseauxSociaux.setLayoutX(200);
+        bdfOffsetYreseauxSociaux.setLayoutY(123 + iBasImages);
+        bdfOffsetYreseauxSociaux.setMaxValue(new BigDecimal(2000));
+        bdfOffsetYreseauxSociaux.setMinValue(new BigDecimal(0));
+        bdfOffsetYreseauxSociaux.setNumber(new BigDecimal(20));
+        bdfOffsetYreseauxSociaux.setMaxWidth(100);
         apReseauxSociaux.getChildren().addAll(
-                lblReseauxSociauxDXSpinner, reseauxSociauxDXSpinner,
-                lblReseauxSociauxDYSpinner, reseauxSociauxDYSpinner
+                lblReseauxSociauxDXSpinner, bdfOffsetXReseauxSociaux,
+                lblReseauxSociauxDYSpinner, bdfOffsetYreseauxSociaux
         );
         Label lblTailleReseauxSociaux = new Label(rbLocalisation.getString("interface.tailleReseauxSociaux"));
         lblTailleReseauxSociaux.setLayoutX(10);
-        lblTailleReseauxSociaux.setLayoutY(160 + basImages);
+        lblTailleReseauxSociaux.setLayoutY(160 + iBasImages);
         slTailleReseauxSociaux = new Slider(15, 60, 30);
         slTailleReseauxSociaux.setLayoutX(200);
-        slTailleReseauxSociaux.setLayoutY(160 + basImages);
+        slTailleReseauxSociaux.setLayoutY(160 + iBasImages);
         Label lblOpaciteReseauxSociaux = new Label(rbLocalisation.getString("interface.opaciteReseauxSociaux"));
         lblOpaciteReseauxSociaux.setLayoutX(10);
-        lblOpaciteReseauxSociaux.setLayoutY(190 + basImages);
+        lblOpaciteReseauxSociaux.setLayoutY(190 + iBasImages);
         slOpaciteReseauxSociaux = new Slider(0, 1.0, 0.8);
         slOpaciteReseauxSociaux.setLayoutX(200);
-        slOpaciteReseauxSociaux.setLayoutY(190 + basImages);
+        slOpaciteReseauxSociaux.setLayoutY(190 + iBasImages);
         cbReseauxSociauxTwitter = new CheckBox("Twitter");
         cbReseauxSociauxTwitter.setLayoutX(60);
-        cbReseauxSociauxTwitter.setLayoutY(220 + basImages);
+        cbReseauxSociauxTwitter.setLayoutY(220 + iBasImages);
         cbReseauxSociauxTwitter.setSelected(true);
         cbReseauxSociauxGoogle = new CheckBox("Google+");
         cbReseauxSociauxGoogle.setLayoutX(60);
-        cbReseauxSociauxGoogle.setLayoutY(250 + basImages);
+        cbReseauxSociauxGoogle.setLayoutY(250 + iBasImages);
         cbReseauxSociauxGoogle.setSelected(true);
         cbReseauxSociauxFacebook = new CheckBox("Facebook");
         cbReseauxSociauxFacebook.setLayoutX(60);
-        cbReseauxSociauxFacebook.setLayoutY(280 + basImages);
+        cbReseauxSociauxFacebook.setLayoutY(280 + iBasImages);
         cbReseauxSociauxFacebook.setSelected(true);
 
         cbReseauxSociauxEmail = new CheckBox("Email");
         cbReseauxSociauxEmail.setLayoutX(60);
-        cbReseauxSociauxEmail.setLayoutY(310 + basImages);
+        cbReseauxSociauxEmail.setLayoutY(310 + iBasImages);
         cbReseauxSociauxEmail.setSelected(true);
 
         apReseauxSociaux.getChildren().addAll(
@@ -5066,7 +5120,7 @@ public class GestionnaireInterfaceController {
         apReseauxSociaux.setMinHeight(0);
         apReseauxSociaux.setVisible(false);
 
-        lblPanelReseauxSociaux.setOnMouseClicked((MouseEvent me) -> {
+        lblPanelReseauxSociaux.setOnMouseClicked((me) -> {
             if (apReseauxSociaux.isVisible()) {
                 ivBtnPlusReseauxSociaux.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
                 apReseauxSociaux.setPrefHeight(0);
@@ -5081,7 +5135,7 @@ public class GestionnaireInterfaceController {
                 apReseauxSociaux.setVisible(true);
             }
         });
-        ivBtnPlusReseauxSociaux.setOnMouseClicked((MouseEvent me) -> {
+        ivBtnPlusReseauxSociaux.setOnMouseClicked((me) -> {
             if (apReseauxSociaux.isVisible()) {
                 ivBtnPlusReseauxSociaux.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
                 apReseauxSociaux.setPrefHeight(0);
@@ -5124,21 +5178,21 @@ public class GestionnaireInterfaceController {
         Label lblChoixCouleurFondVignettes = new Label(rbLocalisation.getString("interface.choixCouleurFondVignettes"));
         lblChoixCouleurFondVignettes.setLayoutX(10);
         lblChoixCouleurFondVignettes.setLayoutY(85);
-        cpCouleurFondVignettes = new ColorPicker(Color.valueOf(couleurFondVignettes));
+        cpCouleurFondVignettes = new ColorPicker(Color.valueOf(getStrCouleurFondVignettes()));
         cpCouleurFondVignettes.setLayoutX(200);
         cpCouleurFondVignettes.setLayoutY(83);
         apVignettes.getChildren().addAll(lblChoixCouleurFondVignettes, cpCouleurFondVignettes);
         Label lblChoixCouleurTexteVignettes = new Label(rbLocalisation.getString("interface.choixCouleurTexteVignettes"));
         lblChoixCouleurTexteVignettes.setLayoutX(10);
         lblChoixCouleurTexteVignettes.setLayoutY(115);
-        cpCouleurTexteVignettes = new ColorPicker(Color.valueOf(couleurTexteVignettes));
+        cpCouleurTexteVignettes = new ColorPicker(Color.valueOf(getStrCouleurTexteVignettes()));
         cpCouleurTexteVignettes.setLayoutX(200);
         cpCouleurTexteVignettes.setLayoutY(113);
         apVignettes.getChildren().addAll(lblChoixCouleurTexteVignettes, cpCouleurTexteVignettes);
         Label lblPositVignettes = new Label(rbLocalisation.getString("interface.choixPositVignettes"));
         lblPositVignettes.setLayoutX(10);
-        basImages = -30;
-        lblPositVignettes.setLayoutY(70 + basImages);
+        iBasImages = -30;
+        lblPositVignettes.setLayoutY(70 + iBasImages);
         apVignettes.getChildren().add(lblPositVignettes);
 
         rbVignettesLeft = new RadioButton();
@@ -5149,49 +5203,49 @@ public class GestionnaireInterfaceController {
         rbVignettesRight.setUserData("right");
         rbVignettesBottom.setUserData("bottom");
 
-        rbVignettesLeft.setToggleGroup(grpPosVignettes);
-        rbVignettesRight.setToggleGroup(grpPosVignettes);
-        rbVignettesBottom.setToggleGroup(grpPosVignettes);
+        rbVignettesLeft.setToggleGroup(tgPosVignettes);
+        rbVignettesRight.setToggleGroup(tgPosVignettes);
+        rbVignettesBottom.setToggleGroup(tgPosVignettes);
 
-        posX = 200;
-        posY = 70 + basImages;
+        iPosX = 200;
+        iPosY = 70 + iBasImages;
 
-        rbVignettesLeft.setLayoutX(posX);
-        rbVignettesRight.setLayoutX(posX + 40);
-        rbVignettesLeft.setLayoutY(posY);
-        rbVignettesRight.setLayoutY(posY);
+        rbVignettesLeft.setLayoutX(iPosX);
+        rbVignettesRight.setLayoutX(iPosX + 40);
+        rbVignettesLeft.setLayoutY(iPosY);
+        rbVignettesRight.setLayoutY(iPosY);
 
-        rbVignettesBottom.setLayoutX(posX + 20);
-        rbVignettesBottom.setLayoutY(posY + 20);
+        rbVignettesBottom.setLayoutX(iPosX + 20);
+        rbVignettesBottom.setLayoutY(iPosY + 20);
         apVignettes.getChildren().addAll(
                 rbVignettesLeft, rbVignettesRight,
                 rbVignettesBottom
         );
         Label lblTailleVignettes = new Label(rbLocalisation.getString("interface.tailleVignettes"));
         lblTailleVignettes.setLayoutX(10);
-        lblTailleVignettes.setLayoutY(175 + basImages);
+        lblTailleVignettes.setLayoutY(175 + iBasImages);
         slTailleVignettes = new Slider(50, 300, 120);
         slTailleVignettes.setLayoutX(200);
-        slTailleVignettes.setLayoutY(175 + basImages);
+        slTailleVignettes.setLayoutY(175 + iBasImages);
         Label lblOpaciteVignettes = new Label(rbLocalisation.getString("interface.opaciteVignettes"));
         lblOpaciteVignettes.setLayoutX(10);
-        lblOpaciteVignettes.setLayoutY(205 + basImages);
+        lblOpaciteVignettes.setLayoutY(205 + iBasImages);
         slOpaciteVignettes = new Slider(0, 1.0, 0.8);
         slOpaciteVignettes.setLayoutX(200);
-        slOpaciteVignettes.setLayoutY(205 + basImages);
+        slOpaciteVignettes.setLayoutY(205 + iBasImages);
 
         apVignettes.getChildren().addAll(
                 lblTailleVignettes, slTailleVignettes,
                 lblOpaciteVignettes, slOpaciteVignettes
         );
-        apVignettes.setPrefHeight(235 + basImages);
-        Double taillePanelVignettes = apVignettes.getPrefHeight();
+        apVignettes.setPrefHeight(235 + iBasImages);
+        double taillePanelVignettes = apVignettes.getPrefHeight();
         apVignettes.setPrefHeight(0);
         apVignettes.setMaxHeight(0);
         apVignettes.setMinHeight(0);
         apVignettes.setVisible(false);
 
-        lblPanelVignettes.setOnMouseClicked((MouseEvent me) -> {
+        lblPanelVignettes.setOnMouseClicked((me) -> {
             if (apVignettes.isVisible()) {
                 ivBtnPlusVignettes.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
                 apVignettes.setPrefHeight(0);
@@ -5206,7 +5260,7 @@ public class GestionnaireInterfaceController {
                 apVignettes.setVisible(true);
             }
         });
-        ivBtnPlusVignettes.setOnMouseClicked((MouseEvent me) -> {
+        ivBtnPlusVignettes.setOnMouseClicked((me) -> {
             if (apVignettes.isVisible()) {
                 ivBtnPlusVignettes.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
                 apVignettes.setPrefHeight(0);
@@ -5237,7 +5291,7 @@ public class GestionnaireInterfaceController {
         cbAfficheComboMenuImages = new CheckBox(rbLocalisation.getString("interface.affichageComboMenuImages"));
         cbAfficheComboMenuImages.setLayoutX(10);
         cbAfficheComboMenuImages.setLayoutY(40);
-        cbAfficheComboMenuImages.setSelected(bAfficheComboMenuImages);
+        cbAfficheComboMenuImages.setSelected(isbAfficheComboMenuImages());
         apComboMenu.getChildren().add(cbAfficheComboMenuImages);
         Label lblPanelComboMenu = new Label(rbLocalisation.getString("interface.comboMenu"));
         lblPanelComboMenu.setPrefWidth(vbOutils.getPrefWidth());
@@ -5269,29 +5323,29 @@ public class GestionnaireInterfaceController {
         rbComboMenuBottomCenter.setUserData("bottom:center");
         rbComboMenuBottomRight.setUserData("bottom:right");
 
-        rbComboMenuTopLeft.setToggleGroup(grpPosComboMenu);
-        rbComboMenuTopCenter.setToggleGroup(grpPosComboMenu);
-        rbComboMenuTopRight.setToggleGroup(grpPosComboMenu);
-        rbComboMenuBottomLeft.setToggleGroup(grpPosComboMenu);
-        rbComboMenuBottomCenter.setToggleGroup(grpPosComboMenu);
-        rbComboMenuBottomRight.setToggleGroup(grpPosComboMenu);
+        rbComboMenuTopLeft.setToggleGroup(tgPosComboMenu);
+        rbComboMenuTopCenter.setToggleGroup(tgPosComboMenu);
+        rbComboMenuTopRight.setToggleGroup(tgPosComboMenu);
+        rbComboMenuBottomLeft.setToggleGroup(tgPosComboMenu);
+        rbComboMenuBottomCenter.setToggleGroup(tgPosComboMenu);
+        rbComboMenuBottomRight.setToggleGroup(tgPosComboMenu);
 
-        posX = 200;
-        posY = 70;
+        iPosX = 200;
+        iPosY = 70;
 
-        rbComboMenuTopLeft.setLayoutX(posX);
-        rbComboMenuTopCenter.setLayoutX(posX + 20);
-        rbComboMenuTopRight.setLayoutX(posX + 40);
-        rbComboMenuTopLeft.setLayoutY(posY);
-        rbComboMenuTopCenter.setLayoutY(posY);
-        rbComboMenuTopRight.setLayoutY(posY);
+        rbComboMenuTopLeft.setLayoutX(iPosX);
+        rbComboMenuTopCenter.setLayoutX(iPosX + 20);
+        rbComboMenuTopRight.setLayoutX(iPosX + 40);
+        rbComboMenuTopLeft.setLayoutY(iPosY);
+        rbComboMenuTopCenter.setLayoutY(iPosY);
+        rbComboMenuTopRight.setLayoutY(iPosY);
 
-        rbComboMenuBottomLeft.setLayoutX(posX);
-        rbComboMenuBottomCenter.setLayoutX(posX + 20);
-        rbComboMenuBottomRight.setLayoutX(posX + 40);
-        rbComboMenuBottomLeft.setLayoutY(posY + 40);
-        rbComboMenuBottomCenter.setLayoutY(posY + 40);
-        rbComboMenuBottomRight.setLayoutY(posY + 40);
+        rbComboMenuBottomLeft.setLayoutX(iPosX);
+        rbComboMenuBottomCenter.setLayoutX(iPosX + 20);
+        rbComboMenuBottomRight.setLayoutX(iPosX + 40);
+        rbComboMenuBottomLeft.setLayoutY(iPosY + 40);
+        rbComboMenuBottomCenter.setLayoutY(iPosY + 40);
+        rbComboMenuBottomRight.setLayoutY(iPosY + 40);
         apComboMenu.getChildren().addAll(
                 rbComboMenuTopLeft, rbComboMenuTopCenter, rbComboMenuTopRight,
                 rbComboMenuBottomLeft, rbComboMenuBottomCenter, rbComboMenuBottomRight
@@ -5303,13 +5357,13 @@ public class GestionnaireInterfaceController {
         Label lblOffsetYComboMenu = new Label("dY :");
         lblOffsetYComboMenu.setLayoutX(175);
         lblOffsetYComboMenu.setLayoutY(148);
-        bdfOffsetXComboMenu = new BigDecimalField(new BigDecimal(offsetXComboMenu));
+        bdfOffsetXComboMenu = new BigDecimalField(new BigDecimal(getOffsetXComboMenu()));
         bdfOffsetXComboMenu.setLayoutX(50);
         bdfOffsetXComboMenu.setLayoutY(143);
         bdfOffsetXComboMenu.setMaxValue(new BigDecimal(2000));
         bdfOffsetXComboMenu.setMinValue(new BigDecimal(0));
         bdfOffsetXComboMenu.setMaxWidth(100);
-        bdfOffsetYComboMenu = new BigDecimalField(new BigDecimal(offsetYComboMenu));
+        bdfOffsetYComboMenu = new BigDecimalField(new BigDecimal(getOffsetYComboMenu()));
         bdfOffsetYComboMenu.setLayoutX(200);
         bdfOffsetYComboMenu.setLayoutY(143);
         bdfOffsetYComboMenu.setMaxValue(new BigDecimal(2000));
@@ -5321,13 +5375,13 @@ public class GestionnaireInterfaceController {
         );
 
         apComboMenu.setPrefHeight(235);
-        Double taillePanelComboMenu = apComboMenu.getPrefHeight();
+        double taillePanelComboMenu = apComboMenu.getPrefHeight();
         apComboMenu.setPrefHeight(0);
         apComboMenu.setMaxHeight(0);
         apComboMenu.setMinHeight(0);
         apComboMenu.setVisible(false);
 
-        lblPanelComboMenu.setOnMouseClicked((MouseEvent me) -> {
+        lblPanelComboMenu.setOnMouseClicked((me) -> {
             if (apComboMenu.isVisible()) {
                 ivBtnPlusComboMenu.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
                 apComboMenu.setPrefHeight(0);
@@ -5342,7 +5396,7 @@ public class GestionnaireInterfaceController {
                 apComboMenu.setVisible(true);
             }
         });
-        ivBtnPlusComboMenu.setOnMouseClicked((MouseEvent me) -> {
+        ivBtnPlusComboMenu.setOnMouseClicked((me) -> {
             if (apComboMenu.isVisible()) {
                 ivBtnPlusComboMenu.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
                 apComboMenu.setPrefHeight(0);
@@ -5368,7 +5422,7 @@ public class GestionnaireInterfaceController {
         apPlan.setLayoutY(40);
         apPlan.setPrefHeight(340);
         apPlan.setMinWidth(vbOutils.getPrefWidth() - 20);
-        Double taillePanelPlan = apPlan.getPrefHeight();
+        double taillePanelPlan = apPlan.getPrefHeight();
         cbAffichePlan = new CheckBox(rbLocalisation.getString("interface.affichagePlan"));
         cbAffichePlan.setLayoutX(10);
         cbAffichePlan.setLayoutY(10);
@@ -5396,22 +5450,22 @@ public class GestionnaireInterfaceController {
         rbPlanLeft.setLayoutX(200);
         rbPlanLeft.setLayoutY(70);
         rbPlanLeft.setUserData("left");
-        rbPlanLeft.setToggleGroup(grpPosPlan);
+        rbPlanLeft.setToggleGroup(tgPosPlan);
         rbPlanRight = new RadioButton("");
         rbPlanRight.setLayoutX(230);
         rbPlanRight.setLayoutY(70);
         rbPlanRight.setUserData("right");
-        rbPlanRight.setToggleGroup(grpPosPlan);
+        rbPlanRight.setToggleGroup(tgPosPlan);
         Label lblCouleurFondPlan = new Label(rbLocalisation.getString("interface.couleurFondPlan"));
         lblCouleurFondPlan.setLayoutX(10);
         lblCouleurFondPlan.setLayoutY(100);
-        cpCouleurFondPlan = new ColorPicker(couleurFondPlan);
+        cpCouleurFondPlan = new ColorPicker(getCouleurFondPlan());
         cpCouleurFondPlan.setLayoutX(200);
         cpCouleurFondPlan.setLayoutY(95);
         Label lblCouleurTextePlan = new Label(rbLocalisation.getString("interface.couleurTextePlan"));
         lblCouleurTextePlan.setLayoutX(10);
         lblCouleurTextePlan.setLayoutY(130);
-        cpCouleurTextePlan = new ColorPicker(couleurTextePlan);
+        cpCouleurTextePlan = new ColorPicker(getCouleurTextePlan());
         cpCouleurTextePlan.setLayoutX(200);
         cpCouleurTextePlan.setLayoutY(125);
         Label lblOpacitePlan = new Label(rbLocalisation.getString("interface.opacitePlan"));
@@ -5427,7 +5481,7 @@ public class GestionnaireInterfaceController {
         Label lblTailleRadar = new Label(rbLocalisation.getString("interface.tailleRadar"));
         lblTailleRadar.setLayoutX(10);
         lblTailleRadar.setLayoutY(220);
-        slTailleRadar = new Slider(0, 80, tailleRadar);
+        slTailleRadar = new Slider(0, 80, getTailleRadar());
         slTailleRadar.setLayoutX(200);
         slTailleRadar.setLayoutY(220);
         Label lblOpaciteRadar = new Label(rbLocalisation.getString("interface.opaciteRadar"));
@@ -5439,13 +5493,13 @@ public class GestionnaireInterfaceController {
         Label lblCouleurFondRadar = new Label(rbLocalisation.getString("interface.couleurFondRadar"));
         lblCouleurFondRadar.setLayoutX(10);
         lblCouleurFondRadar.setLayoutY(280);
-        cpCouleurFondRadar = new ColorPicker(couleurFondRadar);
+        cpCouleurFondRadar = new ColorPicker(getCouleurFondRadar());
         cpCouleurFondRadar.setLayoutX(200);
         cpCouleurFondRadar.setLayoutY(280);
         Label lblCouleurLigneRadar = new Label(rbLocalisation.getString("interface.couleurLigneRadar"));
         lblCouleurLigneRadar.setLayoutX(10);
         lblCouleurLigneRadar.setLayoutY(310);
-        cpCouleurLigneRadar = new ColorPicker(couleurLigneRadar);
+        cpCouleurLigneRadar = new ColorPicker(getCouleurLigneRadar());
         cpCouleurLigneRadar.setLayoutX(200);
         cpCouleurLigneRadar.setLayoutY(310);
         apPlan.getChildren().addAll(
@@ -5465,7 +5519,7 @@ public class GestionnaireInterfaceController {
         apPlan.setMaxHeight(0);
         apPlan.setMinHeight(0);
         apPlan.setVisible(false);
-        lblPanelPlan.setOnMouseClicked((MouseEvent me) -> {
+        lblPanelPlan.setOnMouseClicked((me) -> {
             if (apPlan.isVisible()) {
                 ivBtnPlusPlan.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
                 apPlan.setPrefHeight(0);
@@ -5480,7 +5534,7 @@ public class GestionnaireInterfaceController {
                 apPlan.setVisible(true);
             }
         });
-        ivBtnPlusPlan.setOnMouseClicked((MouseEvent me) -> {
+        ivBtnPlusPlan.setOnMouseClicked((me) -> {
             if (apPlan.isVisible()) {
                 ivBtnPlusPlan.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
                 apPlan.setPrefHeight(0);
@@ -5524,7 +5578,7 @@ public class GestionnaireInterfaceController {
         btnAjouteImage.setLayoutY(10);
         apImageFond.getChildren().addAll(btnAjouteImage);
         btnAjouteImage.setOnMouseClicked(
-                (MouseEvent me) -> {
+                (me) -> {
                     ajoutImageFond();
                 }
         );
@@ -5532,7 +5586,7 @@ public class GestionnaireInterfaceController {
         apImageFond.setMaxHeight(0);
         apImageFond.setMinHeight(0);
         apImageFond.setVisible(false);
-        lblPanelImageFond.setOnMouseClicked((MouseEvent me) -> {
+        lblPanelImageFond.setOnMouseClicked((me) -> {
             if (apImageFond.isVisible()) {
                 ivBtnPlusImageFond.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
                 apImageFond.setPrefHeight(0);
@@ -5547,7 +5601,7 @@ public class GestionnaireInterfaceController {
                 apImageFond.setVisible(true);
             }
         });
-        ivBtnPlusImageFond.setOnMouseClicked((MouseEvent me) -> {
+        ivBtnPlusImageFond.setOnMouseClicked((me) -> {
             if (apImageFond.isVisible()) {
                 ivBtnPlusImageFond.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
                 apImageFond.setPrefHeight(0);
@@ -5573,7 +5627,7 @@ public class GestionnaireInterfaceController {
         apMenuContextuel.setLayoutY(40);
         apMenuContextuel.setPrefHeight(280);
         apMenuContextuel.setMinWidth(vbOutils.getPrefWidth() - 20);
-        Double taillePanelMenuContextuel = apMenuContextuel.getPrefHeight();
+        double taillePanelMenuContextuel = apMenuContextuel.getPrefHeight();
         Label lblPanelMenuContextuel = new Label(rbLocalisation.getString("interface.menuContextuel"));
         lblPanelMenuContextuel.setPrefWidth(vbOutils.getPrefWidth());
         lblPanelMenuContextuel.setStyle("-fx-background-color : #666");
@@ -5587,19 +5641,19 @@ public class GestionnaireInterfaceController {
         cbAfficheMenuContextuel = new CheckBox(rbLocalisation.getString("interface.affichageMenuContextuel"));
         cbAfficheMenuContextuel.setLayoutX(10);
         cbAfficheMenuContextuel.setLayoutY(10);
-        cbAfficheMenuContextuel.setSelected(bAfficheMenuContextuel);
+        cbAfficheMenuContextuel.setSelected(isbAfficheMenuContextuel());
         cbAffichePrecSuivMC = new CheckBox(rbLocalisation.getString("interface.menuContextuelSuivPrec"));
         cbAffichePrecSuivMC.setLayoutX(10);
         cbAffichePrecSuivMC.setLayoutY(40);
-        cbAffichePrecSuivMC.setSelected(bAffichePrecSuivMC);
+        cbAffichePrecSuivMC.setSelected(isbAffichePrecSuivMC());
         cbAffichePlanetNormalMC = new CheckBox(rbLocalisation.getString("interface.menuContextuelPlaneteNormal"));
         cbAffichePlanetNormalMC.setLayoutX(10);
         cbAffichePlanetNormalMC.setLayoutY(70);
-        cbAffichePlanetNormalMC.setSelected(bAffichePlanetNormalMC);
+        cbAffichePlanetNormalMC.setSelected(isbAffichePlanetNormalMC());
         cbAffichePersMC1 = new CheckBox(rbLocalisation.getString("interface.menuContextuelPers1"));
         cbAffichePersMC1.setLayoutX(10);
         cbAffichePersMC1.setLayoutY(100);
-        cbAffichePersMC1.setSelected(bAffichePersMC1);
+        cbAffichePersMC1.setSelected(isbAffichePersMC1());
         Label lblPersLib1 = new Label(rbLocalisation.getString("interface.menuContextuelLib"));
         lblPersLib1.setLayoutX(10);
         lblPersLib1.setLayoutY(130);
@@ -5656,7 +5710,7 @@ public class GestionnaireInterfaceController {
         apMenuContextuel.setMaxHeight(0);
         apMenuContextuel.setMinHeight(0);
         apMenuContextuel.setVisible(false);
-        lblPanelMenuContextuel.setOnMouseClicked((MouseEvent me) -> {
+        lblPanelMenuContextuel.setOnMouseClicked((me) -> {
             if (apMenuContextuel.isVisible()) {
                 ivBtnPlusMenuContextuel.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
                 apMenuContextuel.setPrefHeight(0);
@@ -5671,7 +5725,7 @@ public class GestionnaireInterfaceController {
                 apMenuContextuel.setVisible(true);
             }
         });
-        ivBtnPlusMenuContextuel.setOnMouseClicked((MouseEvent me) -> {
+        ivBtnPlusMenuContextuel.setOnMouseClicked((me) -> {
             if (apMenuContextuel.isVisible()) {
                 ivBtnPlusMenuContextuel.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
                 apMenuContextuel.setPrefHeight(0);
@@ -5693,19 +5747,19 @@ public class GestionnaireInterfaceController {
          * *****************************************************
          */
 //        String styleap = "-fx-background-color : #ccc;";
-        String styleap = "";
-        apBoussole.setStyle(styleap);
-        apBarreClassique.setStyle(styleap);
-        apTitre.setStyle(styleap);
-        apDiapo.setStyle(styleap);
-        apHotSpots.setStyle(styleap);
-        apMasque.setStyle(styleap);
-        apReseauxSociaux.setStyle(styleap);
-        apVignettes.setStyle(styleap);
-        apComboMenu.setStyle(styleap);
-        apPlan.setStyle(styleap);
-        apMenuContextuel.setStyle(styleap);
-        apImageFond.setStyle(styleap);
+        String strStyleAp = "";
+        apBoussole.setStyle(strStyleAp);
+        apBarreClassique.setStyle(strStyleAp);
+        apTitre.setStyle(strStyleAp);
+        apDiapo.setStyle(strStyleAp);
+        apHotSpots.setStyle(strStyleAp);
+        apMasque.setStyle(strStyleAp);
+        apReseauxSociaux.setStyle(strStyleAp);
+        apVignettes.setStyle(strStyleAp);
+        apComboMenu.setStyle(strStyleAp);
+        apPlan.setStyle(strStyleAp);
+        apMenuContextuel.setStyle(strStyleAp);
+        apImageFond.setStyle(strStyleAp);
         apBoussole.setLayoutX(20);
         apBarreClassique.setLayoutX(20);
         apTitre.setLayoutX(20);
@@ -5766,20 +5820,20 @@ public class GestionnaireInterfaceController {
          *     Ajout des ecouteurs sur les différents éléments
          * ******************************************************
          */
-        grpImage.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) -> {
-            if (grpImage.getSelectedToggle() != null) {
+        tgImage.selectedToggleProperty().addListener((ov, old_toggle, new_toggle) -> {
+            if (tgImage.getSelectedToggle() != null) {
                 cbImage.setDisable(true);
                 Rectangle2D viewportRect;
-                switch (grpImage.getSelectedToggle().getUserData().toString()) {
+                switch (tgImage.getSelectedToggle().getUserData().toString()) {
                     case "claire":
-                        viewportRect = new Rectangle2D(0, 0, imageClaire.getWidth(), imageClaire.getHeight());
+                        viewportRect = new Rectangle2D(0, 0, imgClaire.getWidth(), imgClaire.getHeight());
                         ivVisualisation.setViewport(viewportRect);
-                        ivVisualisation.setImage(imageClaire);
+                        ivVisualisation.setImage(imgClaire);
                         break;
                     case "sombre":
-                        viewportRect = new Rectangle2D(0, 0, imageSombre.getWidth(), imageSombre.getHeight());
+                        viewportRect = new Rectangle2D(0, 0, imgSombre.getWidth(), imgSombre.getHeight());
                         ivVisualisation.setViewport(viewportRect);
-                        ivVisualisation.setImage(imageSombre);
+                        ivVisualisation.setImage(imgSombre);
                         break;
                     case "perso":
                         cbImage.setDisable(false);
@@ -5792,31 +5846,32 @@ public class GestionnaireInterfaceController {
             }
         });
 
-        cbImage.valueProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue ov, String t, String t1) {
-                int index = cbImage.getSelectionModel().getSelectedIndex();
-                if (index != -1) {
-                    afficheImage(index);
-                }
+        cbImage.valueProperty().addListener((ov, t, t1) -> {
+            int index = cbImage.getSelectionModel().getSelectedIndex();
+            if (index != -1) {
+                afficheImage(index);
             }
         });
 
         /*
          Listeners Couleur Thème
          */
-        cpCouleurTheme.setOnAction((ActionEvent e) -> {
+        cpCouleurTheme.setOnAction((e) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             couleurTheme = cpCouleurTheme.getValue();
-            String coul1 = cpCouleurTheme.getValue().toString().substring(2, 8);
+            String strCoul1 = cpCouleurTheme.getValue().toString().substring(2, 8);
             couleurHotspots = couleurTheme;
             couleurBarreClassique = couleurTheme;
             couleurMasque = couleurTheme;
-            couleurFondPlan = couleurTheme;
+            setCouleurFondPlan(couleurTheme);
             couleurBarrePersonnalisee = couleurTheme;
-            txtCouleurFondPlan = couleurFondPlan.toString().substring(2, 8);
+            setStrCouleurFondPlan(getCouleurFondPlan().toString().substring(2, 8));
             affichePlan();
-            changeCouleurTitre(coul1);
-            changeCouleurVignettes(coul1);
+            changeCouleurTitre(strCoul1);
+            changeCouleurVignettes(strCoul1);
             //changeCouleur(hue);
             cpCouleurFondTitre.setValue(couleurTheme);
             cpCouleurFondPlan.setValue(couleurTheme);
@@ -5835,11 +5890,20 @@ public class GestionnaireInterfaceController {
         /*
          Listeners HotSpots
          */
-        cpCouleurHotspots.setOnAction((ActionEvent e) -> {
+        cpCouleurHotspots.setOnAction((e) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+
             couleurHotspots = cpCouleurHotspots.getValue();
             changeCouleurHS(couleurHotspots.getHue(), couleurHotspots.getSaturation(), couleurHotspots.getBrightness());
         });
-        cpCouleurHotspotsPhoto.setOnAction((ActionEvent e) -> {
+        cpCouleurHotspotsPhoto.setOnAction((e) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             couleurHotspotsPhoto = cpCouleurHotspotsPhoto.getValue();
             changeCouleurHSPhoto(couleurHotspotsPhoto.getHue(), couleurHotspotsPhoto.getSaturation(), couleurHotspotsPhoto.getBrightness());
         });
@@ -5847,93 +5911,129 @@ public class GestionnaireInterfaceController {
         /*
          Listeners Titre
          */
-        cbListePolices.valueProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> ov,
-                    String old_val, String new_val) {
-                if (new_val != null) {
-                    strTitrePoliceNom = new_val;
-                    Font fonte1 = Font.font(strTitrePoliceNom, Double.parseDouble(strTitrePoliceTaille));
-                    txtTitre.setFont(fonte1);
-                    txtTitre.setPrefHeight(-1);
-                    afficheVignettes();
-                    affichePlan();
+        cbListePolices.valueProperty().addListener((ov, old_val, new_val) -> {
+            if (new_val != null) {
+                if (iNombrePanoramiques != 0) {
+                    bDejaSauve = false;
+                    stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
                 }
-            }
-        });
-        cbAfficheTitre.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
-            bAfficheTitre = new_val;
-            apVisualisation.getChildren().remove(hbbarreBoutons);
-            apVisualisation.getChildren().remove(ivHotSpot);
-            apVisualisation.getChildren().remove(ivHotSpotImage);
-            afficheBarreClassique(strPositionBarreClassique, offsetXBarreClassique, offsetYBarreClassique, tailleBarreClassique, styleBarreClassique, strStyleHotSpots, espacementBarreClassique);
-            afficheVignettes();
-            affichePlan();
-        });
-
-        slTaillePolice.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
-            if (newValue != null) {
-                double taille = (double) newValue;
-                strTitrePoliceTaille = Integer.toString((int) Math.round(taille));
-                Font fonte1 = Font.font(strTitrePoliceNom, Double.parseDouble(strTitrePoliceTaille));
-                txtTitre.setFont(fonte1);
-                txtTitre.setPrefHeight(-1);
+                setStrTitrePoliceNom(new_val.toString());
+                Font fonte1 = Font.font(getStrTitrePoliceNom(), Double.parseDouble(getStrTitrePoliceTaille()));
+                lblTxtTitre.setFont(fonte1);
+                lblTxtTitre.setPrefHeight(-1);
                 afficheVignettes();
                 affichePlan();
             }
         });
-        slOpacite.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
-            if (newValue != null) {
-                titreOpacite = (double) newValue;
-                String coul = cpCouleurFondTitre.getValue().toString().substring(2, 8);
-                Color couleur = cpCouleurFondTitre.getValue();
-                int rouge = (int) (couleur.getRed() * 255.d);
-                int bleu = (int) (couleur.getBlue() * 255.d);
-                int vert = (int) (couleur.getGreen() * 255.d);
-                String coulFond = "rgba(" + rouge + "," + vert + "," + bleu + "," + titreOpacite + ")";
-                txtTitre.setStyle("-fx-background-color : " + coulFond);
+        cbAfficheTitre.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
             }
+            setbAfficheTitre((boolean) new_val);
+            apVisualisation.getChildren().remove(hbbarreBoutons);
+            apVisualisation.getChildren().remove(ivHotSpot);
+            apVisualisation.getChildren().remove(ivHotSpotImage);
+            afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
+            afficheVignettes();
+            affichePlan();
         });
-        slTaille.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
-            if (newValue != null) {
-                titreTaille = (double) newValue;
-                double taille = (double) titreTaille / 100.d * ivVisualisation.getFitWidth();
-                txtTitre.setMinWidth(taille);
-                txtTitre.setLayoutX(ivVisualisation.getLayoutX() + (ivVisualisation.getFitWidth() - txtTitre.getMinWidth()) / 2);
-            }
-        });
-        cpCouleurTitre.setOnAction((ActionEvent e) -> {
-            String coul = cpCouleurTitre.getValue().toString().substring(2, 8);
-            strCouleurTitre = "#" + coul;
-            txtTitre.setTextFill(Color.valueOf(strCouleurTitre));
-        });
-        cpCouleurFondTitre.setOnAction((ActionEvent e) -> {
-            String coul = cpCouleurFondTitre.getValue().toString().substring(2, 8);
-            Color couleur = cpCouleurFondTitre.getValue();
-            strCouleurFondTitre = "#" + coul;
-            int rouge = (int) (couleur.getRed() * 255.d);
-            int bleu = (int) (couleur.getBlue() * 255.d);
-            int vert = (int) (couleur.getGreen() * 255.d);
-            String coulFond = "rgba(" + rouge + "," + vert + "," + bleu + "," + titreOpacite + ")";
 
-            txtTitre.setStyle("-fx-background-color : " + coulFond);
+        slTaillePolice.valueProperty().addListener((ov, oldValue, newValue) -> {
+            if (newValue != null) {
+                if (iNombrePanoramiques != 0) {
+                    bDejaSauve = false;
+                    stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+                }
+                double taille = (double) newValue;
+                setStrTitrePoliceTaille(Integer.toString((int) Math.round(taille)));
+                Font fonte1 = Font.font(getStrTitrePoliceNom(), Double.parseDouble(getStrTitrePoliceTaille()));
+                lblTxtTitre.setFont(fonte1);
+                lblTxtTitre.setPrefHeight(-1);
+                afficheVignettes();
+                affichePlan();
+            }
+        });
+        slOpacite.valueProperty().addListener((ov, oldValue, newValue) -> {
+            if (newValue != null) {
+                if (iNombrePanoramiques != 0) {
+                    bDejaSauve = false;
+                    stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+                }
+                setTitreOpacite((double) newValue);
+                String strCoul = cpCouleurFondTitre.getValue().toString().substring(2, 8);
+                Color couleur = cpCouleurFondTitre.getValue();
+                int iRouge = (int) (couleur.getRed() * 255.d);
+                int iBleu = (int) (couleur.getBlue() * 255.d);
+                int iVert = (int) (couleur.getGreen() * 255.d);
+                String strCoulFond = "rgba(" + iRouge + "," + iVert + "," + iBleu + "," + getTitreOpacite() + ")";
+                lblTxtTitre.setStyle("-fx-background-color : " + strCoulFond);
+            }
+        });
+        slTaille.valueProperty().addListener((ov, oldValue, newValue) -> {
+            if (newValue != null) {
+                if (iNombrePanoramiques != 0) {
+                    bDejaSauve = false;
+                    stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+                }
+                setTitreTaille((double) newValue);
+                double taille = (double) getTitreTaille() / 100.d * ivVisualisation.getFitWidth();
+                lblTxtTitre.setMinWidth(taille);
+                lblTxtTitre.setLayoutX(ivVisualisation.getLayoutX() + (ivVisualisation.getFitWidth() - lblTxtTitre.getMinWidth()) / 2);
+            }
+        });
+        cpCouleurTitre.setOnAction((e) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            String strCoul = cpCouleurTitre.getValue().toString().substring(2, 8);
+            setStrCouleurTitre("#" + strCoul);
+            lblTxtTitre.setTextFill(Color.valueOf(getStrCouleurTitre()));
+        });
+        cpCouleurFondTitre.setOnAction((e) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            String strCouleur = cpCouleurFondTitre.getValue().toString().substring(2, 8);
+            Color couleur = cpCouleurFondTitre.getValue();
+            setStrCouleurFondTitre("#" + strCouleur);
+            int iRouge = (int) (couleur.getRed() * 255.d);
+            int iBleu = (int) (couleur.getBlue() * 255.d);
+            int iVert = (int) (couleur.getGreen() * 255.d);
+            String strCoulFond = "rgba(" + iRouge + "," + iVert + "," + iBleu + "," + getTitreOpacite() + ")";
+
+            lblTxtTitre.setStyle("-fx-background-color : " + strCoulFond);
         });
         /*
          Listeners Fenêtres
          */
-        cbFenetreInfoPersonnalise.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
-            bFenetreInfoPersonnalise = new_val;
-            apFenetreInfoPers.setDisable(!bFenetreInfoPersonnalise);
+        cbFenetreInfoPersonnalise.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            setbFenetreInfoPersonnalise((boolean) new_val);
+            apFenetreInfoPers.setDisable(!isbFenetreInfoPersonnalise());
             afficheFenetreInfo();
         });
 
-        cbFenetreAidePersonnalise.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
-            bFenetreAidePersonnalise = new_val;
-            apFenetreAidePers.setDisable(!bFenetreAidePersonnalise);
+        cbFenetreAidePersonnalise.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            setbFenetreAidePersonnalise((boolean) new_val);
+            apFenetreAidePers.setDisable(!isbFenetreAidePersonnalise());
             afficheFenetreAide();
         });
 
-        cbAfficheFenetreInfo.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbAfficheFenetreInfo.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             bAfficheFenetreInfo = new_val;
             if (new_val == true) {
                 cbAfficheFenetreAide.setSelected(false);
@@ -5942,7 +6042,11 @@ public class GestionnaireInterfaceController {
             afficheFenetreInfo();
         });
 
-        cbAfficheFenetreAide.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbAfficheFenetreAide.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             bAfficheFenetreAide = new_val;
             if (new_val == true) {
                 cbAfficheFenetreInfo.setSelected(false);
@@ -5951,100 +6055,162 @@ public class GestionnaireInterfaceController {
             afficheFenetreAide();
         });
 
-        btnFenetreInfo.setOnMouseClicked(
-                (MouseEvent me) -> {
-                    strFenetreInfoImage = ajoutFenetreImage();
-                    if (!strFenetreInfoImage.equals("")) {
-                        txtFenetreInfoImage.setText(strFenetreInfoImage);
-                    }
-                    afficheFenetreInfo();
-                }
+        btnFenetreInfo.setOnMouseClicked((me) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            setStrFenetreInfoImage(ajoutFenetreImage());
+            if (!strFenetreInfoImage.equals("")) {
+                tfFenetreInfoImage.setText(getStrFenetreInfoImage());
+            }
+            afficheFenetreInfo();
+        }
         );
 
-        btnFenetreAide.setOnMouseClicked(
-                (MouseEvent me) -> {
-                    strFenetreAideImage = ajoutFenetreImage();
-                    if (!strFenetreAideImage.equals("")) {
-                        txtFenetreAideImage.setText(strFenetreAideImage);
-                    }
-                    afficheFenetreAide();
-                }
+        btnFenetreAide.setOnMouseClicked((me) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            setStrFenetreAideImage(ajoutFenetreImage());
+            if (!strFenetreAideImage.equals("")) {
+                tfFenetreAideImage.setText(getStrFenetreAideImage());
+            }
+            afficheFenetreAide();
+        }
         );
-        slFenetreInfoTaille.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+        slFenetreInfoTaille.valueProperty().addListener((ov, oldValue, newValue) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (newValue != null) {
                 double taille = (double) newValue;
-                fenetreInfoTaille = taille;
+                setFenetreInfoTaille(taille);
                 afficheFenetreInfo();
             }
         });
-        slFenetreInfoOpacite.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+        slFenetreInfoOpacite.valueProperty().addListener((ov, oldValue, newValue) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (newValue != null) {
                 double opac = (double) newValue;
-                fenetreInfoOpacite = opac;
+                setFenetreInfoOpacite(opac);
                 afficheFenetreInfo();
             }
         });
-        bdfFenetreInfoPosX.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
-            fenetreInfoPosX = new_value.doubleValue();
+        bdfFenetreInfoPosX.numberProperty().addListener((ov, old_value, new_value) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            setFenetreInfoPosX(new_value.doubleValue());
             afficheFenetreInfo();
         });
-        bdfFenetreInfoPosY.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
-            fenetreInfoPosY = new_value.doubleValue();
+        bdfFenetreInfoPosY.numberProperty().addListener((ov, old_value, new_value) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            setFenetreInfoPosY(new_value.doubleValue());
             afficheFenetreInfo();
         });
 
-        txtFenetreURL.textProperty().addListener((final ObservableValue<? extends String> observable, final String oldValue, final String newValue) -> {
-            strFenetreURL = newValue;
+        tfFenetreURL.textProperty().addListener((ov, oldValue, newValue) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            setStrFenetreURL(newValue);
         });
 
-        txtFenetreTexteURL.textProperty().addListener((final ObservableValue<? extends String> observable, final String oldValue, final String newValue) -> {
-            strFenetreTexteURL = newValue;
+        tfFenetreTexteURL.textProperty().addListener((ov, oldValue, newValue) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            setStrFenetreTexteURL(newValue);
             afficheFenetreInfo();
         });
 
-        slFenetrePoliceTaille.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+        slFenetrePoliceTaille.valueProperty().addListener((ov, oldValue, newValue) -> {
             if (newValue != null) {
+                if (iNombrePanoramiques != 0) {
+                    bDejaSauve = false;
+                    stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+                }
                 double taille = Math.round((double) newValue * 10.d) / 10.d;
-                fenetrePoliceTaille = taille;
+                setFenetrePoliceTaille(taille);
                 afficheFenetreInfo();
             }
         });
 
-        cpFenetreURLCouleur.setOnAction((ActionEvent e) -> {
-            strFenetreURLCouleur = "#" + cpFenetreURLCouleur.getValue().toString().substring(2, 8);
+        cpFenetreURLCouleur.setOnAction((e) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            setStrFenetreURLCouleur("#" + cpFenetreURLCouleur.getValue().toString().substring(2, 8));
             afficheFenetreInfo();
         });
 
-        bdfFenetreURLPosX.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
-            fenetreURLPosX = new_value.doubleValue();
+        bdfFenetreURLPosX.numberProperty().addListener((ov, old_value, new_value) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            setFenetreURLPosX(new_value.doubleValue());
             afficheFenetreInfo();
         });
 
-        bdfFenetreURLPosY.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
-            fenetreURLPosY = new_value.doubleValue();
+        bdfFenetreURLPosY.numberProperty().addListener((ov, old_value, new_value) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            setFenetreURLPosY(new_value.doubleValue());
             afficheFenetreInfo();
         });
-        slFenetreAideTaille.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+        slFenetreAideTaille.valueProperty().addListener((ov, oldValue, newValue) -> {
             if (newValue != null) {
+                if (iNombrePanoramiques != 0) {
+                    bDejaSauve = false;
+                    stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+                }
                 double taille = (double) newValue;
-                fenetreAideTaille = taille;
+                setFenetreAideTaille(taille);
                 afficheFenetreAide();
             }
         });
-        slFenetreAideOpacite.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+        slFenetreAideOpacite.valueProperty().addListener((ov, oldValue, newValue) -> {
             if (newValue != null) {
+                if (iNombrePanoramiques != 0) {
+                    bDejaSauve = false;
+                    stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+                }
                 double opac = (double) newValue;
-                fenetreAideOpacite = opac;
+                setFenetreAideOpacite(opac);
                 afficheFenetreAide();
             }
         });
 
-        bdfFenetreAidePosX.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
-            fenetreAidePosX = new_value.doubleValue();
+        bdfFenetreAidePosX.numberProperty().addListener((ov, old_value, new_value) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            setFenetreAidePosX(new_value.doubleValue());
             afficheFenetreAide();
         });
-        bdfFenetreAidePosY.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
-            fenetreAidePosY = new_value.doubleValue();
+        bdfFenetreAidePosY.numberProperty().addListener((ov, old_value, new_value) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            setFenetreAidePosY(new_value.doubleValue());
             afficheFenetreAide();
         });
 
@@ -6052,20 +6218,32 @@ public class GestionnaireInterfaceController {
         /*
          Listeners Diaporama
          */
-        slOpaciteDiaporama.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+        slOpaciteDiaporama.valueProperty().addListener((ov, oldValue, newValue) -> {
             if (newValue != null) {
-                diaporamaOpacite = (double) newValue;
+                if (iNombrePanoramiques != 0) {
+                    bDejaSauve = false;
+                    stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+                }
+                setDiaporamaOpacite((double) newValue);
                 afficheDiaporama();
             }
         });
 
-        cpCouleurDiaporama.setOnAction((ActionEvent e) -> {
-            String coul = cpCouleurDiaporama.getValue().toString().substring(2, 8);
-            strCouleurDiaporama = "#" + coul;
+        cpCouleurDiaporama.setOnAction((e) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            String strCoul = cpCouleurDiaporama.getValue().toString().substring(2, 8);
+            setStrCouleurDiaporama("#" + strCoul);
             afficheDiaporama();
         });
 
-        cbVisualiseDiapo.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbVisualiseDiapo.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             bVisualiseDiaporama = new_val;
             afficheDiaporama();
             if (new_val == true) {
@@ -6076,203 +6254,317 @@ public class GestionnaireInterfaceController {
         /*
          Listeners Barre de navigation Classique
          */
-        slEspacementBarreClassique.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
-            espacementBarreClassique = (double) newValue;
-            afficheBarreClassique(strPositionBarreClassique, offsetXBarreClassique, offsetYBarreClassique, tailleBarreClassique, styleBarreClassique, strStyleHotSpots, espacementBarreClassique);
+        slEspacementBarreClassique.valueProperty().addListener((ov, oldValue, newValue) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            setEspacementBarreClassique((double) newValue);
+            afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
         });
 
-        cblisteStyleBarreClassique.valueProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue ov, String t, String t1) {
-                if (t1 != null) {
-                    styleBarreClassique = t1;
-                    afficheBarreClassique(strPositionBarreClassique, offsetXBarreClassique, offsetYBarreClassique, tailleBarreClassique, styleBarreClassique, strStyleHotSpots, espacementBarreClassique);
+        cblisteStyleBarreClassique.valueProperty().addListener((ov, t, t1) -> {
+            if (t1 != null) {
+                if (iNombrePanoramiques != 0) {
+                    bDejaSauve = false;
+                    stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
                 }
+                setStyleBarreClassique(t1.toString());
+                afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
             }
         });
 
-        bdfOffsetXBarreClassique.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
-            offsetXBarreClassique = new_value.doubleValue();
-            afficheBarreClassique(strPositionBarreClassique, offsetXBarreClassique, offsetYBarreClassique, tailleBarreClassique, styleBarreClassique, strStyleHotSpots, espacementBarreClassique);
+        bdfOffsetXBarreClassique.numberProperty().addListener((ov, old_value, new_value) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+
+            setOffsetXBarreClassique(new_value.doubleValue());
+            afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
         });
-        bdfOffsetYBarreClassique.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
-            offsetYBarreClassique = new_value.doubleValue();
-            afficheBarreClassique(strPositionBarreClassique, offsetXBarreClassique, offsetYBarreClassique, tailleBarreClassique, styleBarreClassique, strStyleHotSpots, espacementBarreClassique);
+        bdfOffsetYBarreClassique.numberProperty().addListener((ov, old_value, new_value) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            setOffsetYBarreClassique(new_value.doubleValue());
+            afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
         });
 
-        grpPositionBarreClassique.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) -> {
-            if (grpPositionBarreClassique.getSelectedToggle() != null) {
-                strPositionBarreClassique = grpPositionBarreClassique.getSelectedToggle().getUserData().toString();
-                afficheBarreClassique(strPositionBarreClassique, offsetXBarreClassique, offsetYBarreClassique, tailleBarreClassique, styleBarreClassique, strStyleHotSpots, espacementBarreClassique);
+        tgPositionBarreClassique.selectedToggleProperty().addListener((ov, old_toggle, new_toggle) -> {
+            if (tgPositionBarreClassique.getSelectedToggle() != null) {
+                if (iNombrePanoramiques != 0) {
+                    bDejaSauve = false;
+                    stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+                }
+                setStrPositionBarreClassique(tgPositionBarreClassique.getSelectedToggle().getUserData().toString());
+                afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
             }
         });
-        cbBarreClassiqueVisible.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbBarreClassiqueVisible.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (new_val) {
-                strVisibiliteBarreClassique = "oui";
+                setStrVisibiliteBarreClassique("oui");
                 cbBarrePersonnaliseeVisible.setSelected(false);
             } else {
-                strVisibiliteBarreClassique = "non";
+                setStrVisibiliteBarreClassique("non");
             }
-            afficheBarreClassique(strPositionBarreClassique, offsetXBarreClassique, offsetYBarreClassique, tailleBarreClassique, styleBarreClassique, strStyleHotSpots, espacementBarreClassique);
+            afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
         });
-        cbSuivantPrecedent.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
-            bSuivantPrecedent = new_val;
-            fondSuivant.setVisible(bSuivantPrecedent);
-            fondPrecedent.setVisible(bSuivantPrecedent);
+        cbSuivantPrecedent.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            setbSuivantPrecedent((boolean) new_val);
+            vbFondSuivant.setVisible(isbSuivantPrecedent());
+            vbFondPrecedent.setVisible(isbSuivantPrecedent());
         });
-        cpCouleurBarreClassique.setOnAction((ActionEvent e) -> {
+        cpCouleurBarreClassique.setOnAction((e) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             couleurBarreClassique = cpCouleurBarreClassique.getValue();
             changeCouleurBarreClassique(couleurBarreClassique.getHue(), couleurBarreClassique.getSaturation(), couleurBarreClassique.getBrightness());
         });
-        cbDeplacementsBarreClassique.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
-            if (new_val) {
-                strDeplacementsBarreClassique = "oui";
-            } else {
-                strDeplacementsBarreClassique = "non";
+        cbDeplacementsBarreClassique.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
             }
-            afficheBarreClassique(strPositionBarreClassique, offsetXBarreClassique, offsetYBarreClassique, tailleBarreClassique, styleBarreClassique, strStyleHotSpots, espacementBarreClassique);
+            if (new_val) {
+                setStrDeplacementsBarreClassique("oui");
+            } else {
+                setStrDeplacementsBarreClassique("non");
+            }
+            afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
         });
-        cbZoomBarreClassique.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
-            if (new_val) {
-                strZoomBarreClassique = "oui";
-            } else {
-                strZoomBarreClassique = "non";
+        cbZoomBarreClassique.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
             }
-            afficheBarreClassique(strPositionBarreClassique, offsetXBarreClassique, offsetYBarreClassique, tailleBarreClassique, styleBarreClassique, strStyleHotSpots, espacementBarreClassique);
+            if (new_val) {
+                setStrZoomBarreClassique("oui");
+            } else {
+                setStrZoomBarreClassique("non");
+            }
+            afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
         });
-        cbOutilsBarreClassique.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
-            if (new_val) {
-                strOutilsBarreClassique = "oui";
-            } else {
-                strOutilsBarreClassique = "non";
+        cbOutilsBarreClassique.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
             }
-            afficheBarreClassique(strPositionBarreClassique, offsetXBarreClassique, offsetYBarreClassique, tailleBarreClassique, styleBarreClassique, strStyleHotSpots, espacementBarreClassique);
+            if (new_val) {
+                setStrOutilsBarreClassique("oui");
+            } else {
+                setStrOutilsBarreClassique("non");
+            }
+            afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
         });
-        cbSourisBarreClassique.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
-            if (new_val) {
-                strSourisBarreClassique = "oui";
-            } else {
-                strSourisBarreClassique = "non";
+        cbSourisBarreClassique.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
             }
-            afficheBarreClassique(strPositionBarreClassique, offsetXBarreClassique, offsetYBarreClassique, tailleBarreClassique, styleBarreClassique, strStyleHotSpots, espacementBarreClassique);
+            if (new_val) {
+                setStrSourisBarreClassique("oui");
+            } else {
+                setStrSourisBarreClassique("non");
+            }
+            afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
         });
-        cbRotationBarreClassique.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
-            if (new_val) {
-                strRotationBarreClassique = "oui";
-            } else {
-                strRotationBarreClassique = "non";
+        cbRotationBarreClassique.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
             }
-            afficheBarreClassique(strPositionBarreClassique, offsetXBarreClassique, offsetYBarreClassique, tailleBarreClassique, styleBarreClassique, strStyleHotSpots, espacementBarreClassique);
+            if (new_val) {
+                setStrRotationBarreClassique("oui");
+            } else {
+                setStrRotationBarreClassique("non");
+            }
+            afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
         });
-        cbFSBarreClassique.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
-            if (new_val) {
-                strPleinEcranBarreClassique = "oui";
-            } else {
-                strPleinEcranBarreClassique = "non";
+        cbFSBarreClassique.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
             }
-            afficheBarreClassique(strPositionBarreClassique, offsetXBarreClassique, offsetYBarreClassique, tailleBarreClassique, styleBarreClassique, strStyleHotSpots, espacementBarreClassique);
+            if (new_val) {
+                setStrPleinEcranBarreClassique("oui");
+            } else {
+                setStrPleinEcranBarreClassique("non");
+            }
+            afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
         });
         /*
          Listeners Barre de navigation Personnalisee
          */
 
-        bdfOffsetXBarrePersonnalisee.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
-            offsetXBarrePersonnalisee = new_value.doubleValue();
+        bdfOffsetXBarrePersonnalisee.numberProperty().addListener((ov, old_value, new_value) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            setOffsetXBarrePersonnalisee(new_value.doubleValue());
             afficheBarrePersonnalisee();
         });
-        bdfOffsetYBarrePersonnalisee.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
-            offsetYBarrePersonnalisee = new_value.doubleValue();
+        bdfOffsetYBarrePersonnalisee.numberProperty().addListener((ov, old_value, new_value) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            setOffsetYBarrePersonnalisee(new_value.doubleValue());
             afficheBarrePersonnalisee();
         });
 
-        grpCouleurBarrePersonnalisee.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) -> {
+        grpCouleurBarrePersonnalisee.selectedToggleProperty().addListener((ov, old_toggle, new_toggle) -> {
             if (grpCouleurBarrePersonnalisee.getSelectedToggle() != null) {
-                bCouleurOrigineBarrePersonnalisee = (boolean) grpCouleurBarrePersonnalisee.getSelectedToggle().getUserData();
-                cpCouleurBarrePersonnalisee.setDisable(bCouleurOrigineBarrePersonnalisee);
+                if (iNombrePanoramiques != 0) {
+                    bDejaSauve = false;
+                    stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+                }
+                setbCouleurOrigineBarrePersonnalisee((boolean) grpCouleurBarrePersonnalisee.getSelectedToggle().getUserData());
+                cpCouleurBarrePersonnalisee.setDisable(isbCouleurOrigineBarrePersonnalisee());
                 afficheBarrePersonnalisee();
             }
         });
 
-        grpPositionBarrePersonnalisee.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) -> {
+        grpPositionBarrePersonnalisee.selectedToggleProperty().addListener((ov, old_toggle, new_toggle) -> {
             if (grpPositionBarrePersonnalisee.getSelectedToggle() != null) {
-                strPositionBarrePersonnalisee = grpPositionBarrePersonnalisee.getSelectedToggle().getUserData().toString();
+                if (iNombrePanoramiques != 0) {
+                    bDejaSauve = false;
+                    stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+                }
+                setStrPositionBarrePersonnalisee(grpPositionBarrePersonnalisee.getSelectedToggle().getUserData().toString());
                 afficheBarrePersonnalisee();
             }
         });
-        cbBarrePersonnaliseeVisible.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbBarrePersonnaliseeVisible.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (new_val) {
-                strVisibiliteBarrePersonnalisee = "oui";
+                setStrVisibiliteBarrePersonnalisee("oui");
                 cbBarreClassiqueVisible.setSelected(false);
             } else {
-                strVisibiliteBarrePersonnalisee = "non";
+                setStrVisibiliteBarrePersonnalisee("non");
             }
             afficheBarrePersonnalisee();
         });
-        cbSuivantPrecedent.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
-            bSuivantPrecedent = new_val;
-            fondSuivant.setVisible(bSuivantPrecedent);
-            fondPrecedent.setVisible(bSuivantPrecedent);
+        cbSuivantPrecedent.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            setbSuivantPrecedent((boolean) new_val);
+            vbFondSuivant.setVisible(isbSuivantPrecedent());
+            vbFondPrecedent.setVisible(isbSuivantPrecedent());
         });
-        cpCouleurBarrePersonnalisee.setOnAction((ActionEvent e) -> {
+        cpCouleurBarrePersonnalisee.setOnAction((e) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             couleurBarrePersonnalisee = cpCouleurBarrePersonnalisee.getValue();
             afficheBarrePersonnalisee();
         });
-        cbDeplacementsBarrePersonnalisee.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbDeplacementsBarrePersonnalisee.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (new_val) {
-                strDeplacementsBarrePersonnalisee = "oui";
+                setStrDeplacementsBarrePersonnalisee("oui");
             } else {
-                strDeplacementsBarrePersonnalisee = "non";
+                setStrDeplacementsBarrePersonnalisee("non");
             }
             afficheBarrePersonnalisee();
         });
-        cbZoomBarrePersonnalisee.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbZoomBarrePersonnalisee.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (new_val) {
-                strZoomBarrePersonnalisee = "oui";
+                setStrZoomBarrePersonnalisee("oui");
             } else {
-                strZoomBarrePersonnalisee = "non";
+                setStrZoomBarrePersonnalisee("non");
             }
             afficheBarrePersonnalisee();
         });
-        cbSourisBarrePersonnalisee.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbSourisBarrePersonnalisee.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (new_val) {
-                strSourisBarrePersonnalisee = "oui";
+                setStrSourisBarrePersonnalisee("oui");
             } else {
-                strSourisBarrePersonnalisee = "non";
+                setStrSourisBarrePersonnalisee("non");
             }
             afficheBarrePersonnalisee();
         });
-        cbRotationBarrePersonnalisee.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbRotationBarrePersonnalisee.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (new_val) {
-                strRotationBarrePersonnalisee = "oui";
+                setStrRotationBarrePersonnalisee("oui");
             } else {
-                strRotationBarrePersonnalisee = "non";
+                setStrRotationBarrePersonnalisee("non");
             }
             afficheBarrePersonnalisee();
         });
-        cbFSBarrePersonnalisee.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbFSBarrePersonnalisee.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (new_val) {
-                strPleinEcranBarrePersonnalisee = "oui";
+                setStrPleinEcranBarrePersonnalisee("oui");
             } else {
-                strPleinEcranBarrePersonnalisee = "non";
+                setStrPleinEcranBarrePersonnalisee("non");
             }
             afficheBarrePersonnalisee();
         });
-        sltailleBarrePersonnalisee.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+        sltailleBarrePersonnalisee.valueProperty().addListener((ov, oldValue, newValue) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (newValue != null) {
                 double taille = (double) newValue;
-                tailleBarrePersonnalisee = taille;
+                setTailleBarrePersonnalisee(taille);
                 afficheBarrePersonnalisee();
             }
         });
-        sltailleIconesBarrePersonnalisee.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+        sltailleIconesBarrePersonnalisee.valueProperty().addListener((ov, oldValue, newValue) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (newValue != null) {
                 double taille = (double) newValue;
-                tailleIconesBarrePersonnalisee = taille;
+                setTailleIconesBarrePersonnalisee(taille);
                 afficheBarrePersonnalisee();
             }
         });
         btnLienBarrePersonnalisee.setOnMouseClicked(
-                (MouseEvent me) -> {
+                (me) -> {
+                    if (iNombrePanoramiques != 0) {
+                        bDejaSauve = false;
+                        stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+                    }
                     try {
                         choixBarrePersonnalisee();
                     } catch (IOException ex) {
@@ -6281,191 +6573,346 @@ public class GestionnaireInterfaceController {
                 }
         );
         btnEditerBarre.setOnMouseClicked(
-                (MouseEvent me) -> {
+                (me) -> {
+                    if (iNombrePanoramiques != 0) {
+                        bDejaSauve = false;
+                        stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+                    }
                     EditeurPanovisu.creerEditerBarre(tfLienImageBarrePersonnalisee.getText());
                 }
         );
-        tfLien1BarrePersonnalisee.textProperty().addListener((final ObservableValue<? extends String> observable, final String oldValue, final String newValue) -> {
-            strLien1BarrePersonnalisee = tfLien1BarrePersonnalisee.getText();
+        tfLien1BarrePersonnalisee.textProperty().addListener((ov, oldValue, newValue) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            setStrLien1BarrePersonnalisee(tfLien1BarrePersonnalisee.getText());
         });
-        tfLien2BarrePersonnalisee.textProperty().addListener((final ObservableValue<? extends String> observable, final String oldValue, final String newValue) -> {
-            strLien2BarrePersonnalisee = tfLien2BarrePersonnalisee.getText();
+        tfLien2BarrePersonnalisee.textProperty().addListener((ov, oldValue, newValue) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            setStrLien2BarrePersonnalisee(tfLien2BarrePersonnalisee.getText());
         });
 
 
         /*
          Listeners Boussole
          */
-        grpPosBouss.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) -> {
-            if (grpPosBouss.getSelectedToggle() != null) {
-                strPositionBoussole = grpPosBouss.getSelectedToggle().getUserData().toString();
+        tgPosBouss.selectedToggleProperty().addListener((ov, old_toggle, new_toggle) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            if (tgPosBouss.getSelectedToggle() != null) {
+                setStrPositionBoussole(tgPosBouss.getSelectedToggle().getUserData().toString());
                 afficheBoussole();
             }
         });
-        bdfOffsetXBoussole.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
-            offsetXBoussole = new_value.doubleValue();
+        bdfOffsetXBoussole.numberProperty().addListener((ov, old_value, new_value) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            setOffsetXBoussole(new_value.doubleValue());
             afficheBoussole();
         });
-        bdfOffsetYBoussole.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
-            offsetYBoussole = new_value.doubleValue();
+        bdfOffsetYBoussole.numberProperty().addListener((ov, old_value, new_value) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            setOffsetYBoussole(new_value.doubleValue());
             afficheBoussole();
         });
-        slTailleBoussole.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+        slTailleBoussole.valueProperty().addListener((ov, oldValue, newValue) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (newValue != null) {
                 double taille = (double) newValue;
-                tailleBoussole = taille;
+                setTailleBoussole(taille);
                 afficheBoussole();
             }
         });
-        cbAfficheBoussole.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbAfficheBoussole.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (new_val != null) {
-                bAfficheBoussole = new_val;
+                setbAfficheBoussole((boolean) new_val);
                 afficheBoussole();
             }
         });
-        cbAiguilleMobile.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbAiguilleMobile.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (new_val != null) {
-                bAiguilleMobileBoussole = new_val;
+                setbAiguilleMobileBoussole((boolean) new_val);
             }
         });
 
         /*
          Listeners Bouton de Masquage
          */
-        slOpaciteBoussole.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+        slOpaciteBoussole.valueProperty().addListener((ov, oldValue, newValue) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (newValue != null) {
                 double opac = (double) newValue;
-                opaciteBoussole = opac;
+                setOpaciteBoussole(opac);
                 afficheBoussole();
             }
         });
 
-        grpPosMasque.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) -> {
-            if (grpPosMasque.getSelectedToggle() != null) {
-                positionMasque = grpPosMasque.getSelectedToggle().getUserData().toString();
+        tgPosMasque.selectedToggleProperty().addListener((ov, old_toggle, new_toggle) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            if (tgPosMasque.getSelectedToggle() != null) {
+                setStrPositionMasque(tgPosMasque.getSelectedToggle().getUserData().toString());
                 apVisualisation.getChildren().remove(ivMasque);
                 afficheMasque();
             }
         });
-        masqueDXSpinner.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
-            dXMasque = new_value.doubleValue();
+        bdfOffsetXMasque.numberProperty().addListener((ov, old_value, new_value) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            setdXMasque(new_value.doubleValue());
             afficheMasque();
         });
-        masqueDYSpinner.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
-            dYMasque = new_value.doubleValue();
+        bdfOffsetYMasque.numberProperty().addListener((ov, old_value, new_value) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            setdYMasque(new_value.doubleValue());
             afficheMasque();
         });
-        slTailleMasque.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+        slTailleMasque.valueProperty().addListener((ov, oldValue, newValue) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (newValue != null) {
                 double taille = (double) newValue;
-                tailleMasque = taille;
+                setTailleMasque(taille);
                 afficheMasque();
             }
         });
-        slOpaciteMasque.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+        slOpaciteMasque.valueProperty().addListener((ov, oldValue, newValue) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (newValue != null) {
                 double opac = (double) newValue;
-                opaciteMasque = opac;
+                setOpaciteMasque(opac);
                 afficheMasque();
             }
         });
-        cbMasqueNavigation.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbMasqueNavigation.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (new_val != null) {
-                bMasqueNavigation = new_val;
+                setbMasqueNavigation((boolean) new_val);
             }
         });
-        cpCouleurMasques.setOnAction((ActionEvent e) -> {
+        cpCouleurMasques.setOnAction((e) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             couleurMasque = cpCouleurMasques.getValue();
             changeCouleurMasque(couleurMasque.getHue(), couleurMasque.getSaturation(), couleurMasque.getBrightness());
         });
-        cbAfficheMasque.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbAfficheMasque.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (new_val != null) {
-                bAfficheMasque = new_val;
+                setbAfficheMasque((boolean) new_val);
                 changeCouleurMasque(couleurHotspots.getHue(), couleurHotspots.getSaturation(), couleurHotspots.getBrightness());
                 afficheMasque();
             }
         });
-        cbMasqueBoussole.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbMasqueBoussole.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (new_val != null) {
-                bMasqueBoussole = new_val;
+                setbMasqueBoussole((boolean) new_val);
             }
         });
-        cbMasqueTitre.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbMasqueTitre.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (new_val != null) {
-                bMasqueTitre = new_val;
+                setbMasqueTitre((boolean) new_val);
             }
         });
-        cbMasquePlan.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbMasquePlan.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (new_val != null) {
-                bMasquePlan = new_val;
+                setbMasquePlan((boolean) new_val);
             }
         });
-        cbMasqueVignettes.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbMasqueVignettes.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (new_val != null) {
-                bMasqueVignettes = new_val;
+                setbMasqueVignettes((boolean) new_val);
+            }
+        });
+        cbMasqueCombo.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            if (new_val != null) {
+                setbMasqueCombo((boolean) new_val);
+            }
+        });
+        cbMasqueSuivPrec.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            if (new_val != null) {
+                setbMasqueSuivPrec((boolean) new_val);
+            }
+        });
+        cbMasqueHotspots.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            if (new_val != null) {
+                setbMasqueHotspots((boolean) new_val);
             }
         });
 
         /*
          Listeners Reseaux Sociaux
          */
-        reseauxSociauxDXSpinner.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
-            dXReseauxSociaux = new_value.doubleValue();
+        bdfOffsetXReseauxSociaux.numberProperty().addListener((ov, old_value, new_value) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            setdXReseauxSociaux(new_value.doubleValue());
             afficheReseauxSociaux();
         });
 
-        reseauxSociauxDYSpinner.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
-            dYReseauxSociaux = new_value.doubleValue();
+        bdfOffsetYreseauxSociaux.numberProperty().addListener((ov, old_value, new_value) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            setdYReseauxSociaux(new_value.doubleValue());
             afficheReseauxSociaux();
         });
 
-        grpPosReseauxSociaux.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) -> {
-            if (grpPosReseauxSociaux.getSelectedToggle() != null) {
-                positionReseauxSociaux = grpPosReseauxSociaux.getSelectedToggle().getUserData().toString();
+        tgPosReseauxSociaux.selectedToggleProperty().addListener((ov, old_toggle, new_toggle) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            if (tgPosReseauxSociaux.getSelectedToggle() != null) {
+                setStrPositionReseauxSociaux(tgPosReseauxSociaux.getSelectedToggle().getUserData().toString());
                 afficheReseauxSociaux();
             }
         });
-        slTailleReseauxSociaux.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+        slTailleReseauxSociaux.valueProperty().addListener((ov, oldValue, newValue) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (newValue != null) {
                 double taille = (double) newValue;
-                tailleReseauxSociaux = taille;
+                setTailleReseauxSociaux(taille);
                 afficheReseauxSociaux();
             }
         });
-        slOpaciteReseauxSociaux.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+        slOpaciteReseauxSociaux.valueProperty().addListener((ov, oldValue, newValue) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (newValue != null) {
                 double opac = (double) newValue;
-                opaciteReseauxSociaux = opac;
+                setOpaciteReseauxSociaux(opac);
                 afficheReseauxSociaux();
             }
         });
-        cbAfficheReseauxSociaux.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbAfficheReseauxSociaux.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (new_val != null) {
-                bAfficheReseauxSociaux = new_val;
+                setbAfficheReseauxSociaux((boolean) new_val);
                 afficheReseauxSociaux();
             }
         });
-        cbReseauxSociauxTwitter.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbReseauxSociauxTwitter.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (new_val != null) {
-                bReseauxSociauxTwitter = new_val;
+                setbReseauxSociauxTwitter((boolean) new_val);
                 afficheReseauxSociaux();
             }
         });
-        cbReseauxSociauxGoogle.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbReseauxSociauxGoogle.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (new_val != null) {
-                bReseauxSociauxGoogle = new_val;
+                setbReseauxSociauxGoogle((boolean) new_val);
                 afficheReseauxSociaux();
             }
         });
-        cbReseauxSociauxFacebook.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbReseauxSociauxFacebook.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (new_val != null) {
-                bReseauxSociauxFacebook = new_val;
+                setbReseauxSociauxFacebook((boolean) new_val);
                 afficheReseauxSociaux();
             }
         });
-        cbReseauxSociauxEmail.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbReseauxSociauxEmail.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (new_val != null) {
-                bReseauxSociauxEmail = new_val;
+                setbReseauxSociauxEmail((boolean) new_val);
                 afficheReseauxSociaux();
             }
         });
@@ -6473,84 +6920,128 @@ public class GestionnaireInterfaceController {
         /*
          Listeners Vignettes
          */
-        grpPosVignettes.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) -> {
-            if (grpPosVignettes.getSelectedToggle() != null) {
-                positionVignettes = grpPosVignettes.getSelectedToggle().getUserData().toString();
-                afficheBarreClassique(strPositionBarreClassique, offsetXBarreClassique, offsetYBarreClassique, tailleBarreClassique, styleBarreClassique, strStyleHotSpots, espacementBarreClassique);
+        tgPosVignettes.selectedToggleProperty().addListener((ov, old_toggle, new_toggle) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            if (tgPosVignettes.getSelectedToggle() != null) {
+                setStrPositionVignettes(tgPosVignettes.getSelectedToggle().getUserData().toString());
+                afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
                 afficheVignettes();
             }
         });
 
-        slTailleVignettes.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+        slTailleVignettes.valueProperty().addListener((ov, oldValue, newValue) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (newValue != null) {
                 double taille = (double) newValue;
-                tailleImageVignettes = taille;
-                afficheBarreClassique(strPositionBarreClassique, offsetXBarreClassique, offsetYBarreClassique, tailleBarreClassique, styleBarreClassique, strStyleHotSpots, espacementBarreClassique);
+                setTailleImageVignettes(taille);
+                afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
                 afficheVignettes();
             }
         });
 
-        slOpaciteVignettes.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+        slOpaciteVignettes.valueProperty().addListener((ov, oldValue, newValue) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (newValue != null) {
                 double opac = (double) newValue;
-                opaciteVignettes = opac;
-                afficheBarreClassique(strPositionBarreClassique, offsetXBarreClassique, offsetYBarreClassique, tailleBarreClassique, styleBarreClassique, strStyleHotSpots, espacementBarreClassique);
+                setOpaciteVignettes(opac);
+                afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
                 afficheVignettes();
             }
         });
 
-        cbAfficheVignettes.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbAfficheVignettes.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (new_val != null) {
-                bAfficheVignettes = new_val;
-                afficheBarreClassique(strPositionBarreClassique, offsetXBarreClassique, offsetYBarreClassique, tailleBarreClassique, styleBarreClassique, strStyleHotSpots, espacementBarreClassique);
+                setbAfficheVignettes((boolean) new_val);
+                afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
                 afficheVignettes();
             }
         });
 
-        cpCouleurFondVignettes.setOnAction((ActionEvent e) -> {
+        cpCouleurFondVignettes.setOnAction((e) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             String coul = cpCouleurFondVignettes.getValue().toString().substring(2, 8);
-            couleurFondVignettes = "#" + coul;
-            afficheBarreClassique(strPositionBarreClassique, offsetXBarreClassique, offsetYBarreClassique, tailleBarreClassique, styleBarreClassique, strStyleHotSpots, espacementBarreClassique);
+            setStrCouleurFondVignettes("#" + coul);
+            afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
             afficheVignettes();
         });
-        cpCouleurTexteVignettes.setOnAction((ActionEvent e) -> {
+        cpCouleurTexteVignettes.setOnAction((e) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             String coul = cpCouleurTexteVignettes.getValue().toString().substring(2, 8);
-            couleurTexteVignettes = "#" + coul;
-            afficheBarreClassique(strPositionBarreClassique, offsetXBarreClassique, offsetYBarreClassique, tailleBarreClassique, styleBarreClassique, strStyleHotSpots, espacementBarreClassique);
+            setStrCouleurTexteVignettes("#" + coul);
+            afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
             afficheVignettes();
         });
 
         /*
          Listeners ComboMenu
          */
-        grpPosComboMenu.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) -> {
-            if (grpPosComboMenu.getSelectedToggle() != null) {
-                positionXComboMenu = grpPosComboMenu.getSelectedToggle().getUserData().toString().split(":")[1];
-                positionYComboMenu = grpPosComboMenu.getSelectedToggle().getUserData().toString().split(":")[0];
+        tgPosComboMenu.selectedToggleProperty().addListener((ov, old_toggle, new_toggle) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            if (tgPosComboMenu.getSelectedToggle() != null) {
+                setStrPositionXComboMenu(tgPosComboMenu.getSelectedToggle().getUserData().toString().split(":")[1]);
+                setStrPositionYComboMenu(tgPosComboMenu.getSelectedToggle().getUserData().toString().split(":")[0]);
                 afficheComboMenu();
             }
         });
 
-        cbAfficheComboMenu.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbAfficheComboMenu.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (new_val != null) {
-                bAfficheComboMenu = new_val;
+                setbAfficheComboMenu((boolean) new_val);
                 afficheComboMenu();
             }
         });
-        cbAfficheComboMenuImages.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbAfficheComboMenuImages.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (new_val != null) {
-                bAfficheComboMenuImages = new_val;
+                setbAfficheComboMenuImages((boolean) new_val);
                 afficheComboMenu();
             }
         });
 
-        bdfOffsetXComboMenu.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
-            offsetXComboMenu = new_value.doubleValue();
+        bdfOffsetXComboMenu.numberProperty().addListener((ov, old_value, new_value) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            setOffsetXComboMenu(new_value.doubleValue());
             afficheComboMenu();
         });
 
-        bdfOffsetYComboMenu.numberProperty().addListener((ObservableValue<? extends BigDecimal> ov, BigDecimal old_value, BigDecimal new_value) -> {
-            offsetYComboMenu = new_value.doubleValue();
+        bdfOffsetYComboMenu.numberProperty().addListener((ov, old_value, new_value) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            setOffsetYComboMenu(new_value.doubleValue());
             afficheComboMenu();
         });
 
@@ -6558,13 +7049,17 @@ public class GestionnaireInterfaceController {
         /*
          Listeners Plan
          */
-        cbAffichePlan.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbAffichePlan.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (new_val != null) {
-                bAffichePlan = new_val;
-                tabPlan.setDisable(!bAffichePlan);
-                mniAffichagePlan.setDisable(!bAffichePlan);
-                ivAjouterPlan.setDisable(!bAffichePlan);
-                mniAjouterPlan.setDisable(!bAffichePlan);
+                setbAffichePlan((boolean) new_val);
+                tabPlan.setDisable(!isbAffichePlan());
+                mniAffichagePlan.setDisable(!isbAffichePlan());
+                ivAjouterPlan.setDisable(!isbAffichePlan());
+                mniAjouterPlan.setDisable(!isbAffichePlan());
                 if (new_val) {
                     ivAjouterPlan.setOpacity(1.0);
                 } else {
@@ -6573,89 +7068,145 @@ public class GestionnaireInterfaceController {
                 affichePlan();
             }
         });
-        cbAfficheRadar.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+        cbAfficheRadar.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (new_val != null) {
-                bAfficheRadar = new_val;
+                setbAfficheRadar((boolean) new_val);
                 affichePlan();
             }
         });
 
-        grpPosPlan.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) -> {
-            if (grpPosPlan.getSelectedToggle() != null) {
-                positionPlan = grpPosPlan.getSelectedToggle().getUserData().toString();
+        tgPosPlan.selectedToggleProperty().addListener((ov, old_toggle, new_toggle) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            if (tgPosPlan.getSelectedToggle() != null) {
+                setStrPositionPlan(tgPosPlan.getSelectedToggle().getUserData().toString());
                 affichePlan();
             }
         });
-        slLargeurPlan.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+        slLargeurPlan.valueProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (newValue != null) {
                 double taille = (double) newValue;
-                largeurPlan = taille;
+                setLargeurPlan(taille);
                 lblLargeurPlan.setText(rbLocalisation.getString("interface.largeurPlan") + " (" + Math.round(taille) + "px )");
                 affichePlan();
             }
         });
-        slOpacitePlan.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+        slOpacitePlan.valueProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (newValue != null) {
                 double opac = (double) newValue;
-                opacitePlan = opac;
+                setOpacitePlan(opac);
                 affichePlan();
             }
         });
 
-        cpCouleurFondPlan.setOnAction((ActionEvent e) -> {
-            String coul = cpCouleurFondPlan.getValue().toString().substring(2, 8);
-            couleurFondPlan = cpCouleurFondPlan.getValue();
-            txtCouleurFondPlan = coul;
+        cpCouleurFondPlan.setOnAction((e) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            String strCoul = cpCouleurFondPlan.getValue().toString().substring(2, 8);
+            setCouleurFondPlan(cpCouleurFondPlan.getValue());
+            setStrCouleurFondPlan(strCoul);
             affichePlan();
         });
-        cpCouleurTextePlan.setOnAction((ActionEvent e) -> {
-            String coul = cpCouleurTextePlan.getValue().toString().substring(2, 8);
-            couleurTextePlan = cpCouleurTextePlan.getValue();
-            txtCouleurTextePlan = coul;
+        cpCouleurTextePlan.setOnAction((e) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            String strCoul = cpCouleurTextePlan.getValue().toString().substring(2, 8);
+            setCouleurTextePlan(cpCouleurTextePlan.getValue());
+            setStrCouleurTextePlan(strCoul);
             affichePlan();
         });
-        slTailleRadar.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+        slTailleRadar.valueProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (newValue != null) {
                 double taille = (double) newValue;
-                tailleRadar = taille;
+                setTailleRadar(taille);
                 affichePlan();
             }
         });
-        slOpaciteRadar.valueProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) -> {
+        slOpaciteRadar.valueProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
             if (newValue != null) {
                 double opacite = (double) newValue;
-                opaciteRadar = opacite;
+                setOpaciteRadar(opacite);
                 affichePlan();
             }
         });
-        cpCouleurFondRadar.setOnAction((ActionEvent e) -> {
-            String coul = cpCouleurFondRadar.getValue().toString().substring(2, 8);
-            couleurFondRadar = cpCouleurFondRadar.getValue();
-            txtCouleurFondRadar = coul;
+        cpCouleurFondRadar.setOnAction((e) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            String strCoul = cpCouleurFondRadar.getValue().toString().substring(2, 8);
+            setCouleurFondRadar(cpCouleurFondRadar.getValue());
+            setStrCouleurFondRadar(strCoul);
             affichePlan();
         });
-        cpCouleurLigneRadar.setOnAction((ActionEvent e) -> {
-            String coul = cpCouleurLigneRadar.getValue().toString().substring(2, 8);
-            couleurLigneRadar = cpCouleurLigneRadar.getValue();
-            txtCouleurLigneRadar = coul;
+        cpCouleurLigneRadar.setOnAction((e) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            String strCoul = cpCouleurLigneRadar.getValue().toString().substring(2, 8);
+            setCouleurLigneRadar(cpCouleurLigneRadar.getValue());
+            setStrCouleurLigneRadar(strCoul);
             affichePlan();
         });
 
         /*
          Listeners Menu Contextuel
          */
-        cbAfficheMenuContextuel.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
-            bAfficheMenuContextuel = new_val;
+        cbAfficheMenuContextuel.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            setbAfficheMenuContextuel((boolean) new_val);
         });
-        cbAffichePrecSuivMC.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
-            bAffichePrecSuivMC = new_val;
+        cbAffichePrecSuivMC.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            setbAffichePrecSuivMC((boolean) new_val);
         });
-        cbAffichePlanetNormalMC.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
-            bAffichePlanetNormalMC = new_val;
+        cbAffichePlanetNormalMC.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            setbAffichePlanetNormalMC((boolean) new_val);
         });
-        cbAffichePersMC1.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
-            bAffichePersMC1 = new_val;
-            if (bAffichePersMC1) {
+        cbAffichePersMC1.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            setbAffichePersMC1((boolean) new_val);
+            if (isbAffichePersMC1()) {
                 tfPersLib1.setDisable(false);
                 tfPersURL1.setDisable(false);
                 cbAffichePersMC2.setDisable(false);
@@ -6666,9 +7217,13 @@ public class GestionnaireInterfaceController {
                 cbAffichePersMC2.setDisable(true);
             }
         });
-        cbAffichePersMC2.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
-            bAffichePersMC2 = new_val;
-            if (bAffichePersMC2) {
+        cbAffichePersMC2.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            setbAffichePersMC2((boolean) new_val);
+            if (isbAffichePersMC2()) {
                 tfPersLib2.setDisable(false);
                 tfPersURL2.setDisable(false);
             } else {
@@ -6676,19 +7231,2225 @@ public class GestionnaireInterfaceController {
                 tfPersURL2.setDisable(true);
             }
         });
-        tfPersLib1.textProperty().addListener((final ObservableValue<? extends String> observable, final String oldValue, final String newValue) -> {
-            strPersLib1 = tfPersLib1.getText();
+        tfPersLib1.textProperty().addListener((ov, oldValue, newValue) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            setStrPersLib1(tfPersLib1.getText());
         });
-        tfPersLib2.textProperty().addListener((final ObservableValue<? extends String> observable, final String oldValue, final String newValue) -> {
-            strPersLib2 = tfPersLib2.getText();
+        tfPersLib2.textProperty().addListener((ov, oldValue, newValue) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            setStrPersLib2(tfPersLib2.getText());
         });
-        tfPersURL1.textProperty().addListener((final ObservableValue<? extends String> observable, final String oldValue, final String newValue) -> {
-            strPersURL1 = tfPersURL1.getText();
+        tfPersURL1.textProperty().addListener((ov, oldValue, newValue) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            setStrPersURL1(tfPersURL1.getText());
         });
-        tfPersURL2.textProperty().addListener((final ObservableValue<? extends String> observable, final String oldValue, final String newValue) -> {
-            strPersURL2 = tfPersURL2.getText();
+        tfPersURL2.textProperty().addListener((ov, oldValue, newValue) -> {
+            if (iNombrePanoramiques != 0) {
+                bDejaSauve = false;
+                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            }
+            setStrPersURL2(tfPersURL2.getText());
         });
 
+    }
+
+    /**
+     * @return the offsetXBarreClassique
+     */
+    public double getOffsetXBarreClassique() {
+        return offsetXBarreClassique;
+    }
+
+    /**
+     * @param offsetXBarreClassique the offsetXBarreClassique to set
+     */
+    public void setOffsetXBarreClassique(double offsetXBarreClassique) {
+        this.offsetXBarreClassique = offsetXBarreClassique;
+    }
+
+    /**
+     * @return the offsetYBarreClassique
+     */
+    public double getOffsetYBarreClassique() {
+        return offsetYBarreClassique;
+    }
+
+    /**
+     * @param offsetYBarreClassique the offsetYBarreClassique to set
+     */
+    public void setOffsetYBarreClassique(double offsetYBarreClassique) {
+        this.offsetYBarreClassique = offsetYBarreClassique;
+    }
+
+    /**
+     * @return the tailleBarreClassique
+     */
+    public double getTailleBarreClassique() {
+        return tailleBarreClassique;
+    }
+
+    /**
+     * @param tailleBarreClassique the tailleBarreClassique to set
+     */
+    public void setTailleBarreClassique(double tailleBarreClassique) {
+        this.tailleBarreClassique = tailleBarreClassique;
+    }
+
+    /**
+     * @return the espacementBarreClassique
+     */
+    public double getEspacementBarreClassique() {
+        return espacementBarreClassique;
+    }
+
+    /**
+     * @param espacementBarreClassique the espacementBarreClassique to set
+     */
+    public void setEspacementBarreClassique(double espacementBarreClassique) {
+        this.espacementBarreClassique = espacementBarreClassique;
+    }
+
+    /**
+     * @return the strStyleDefautBarreClassique
+     */
+    public String getStrStyleDefautBarreClassique() {
+        return strStyleDefautBarreClassique;
+    }
+
+    /**
+     * @return the strPositionBarreClassique
+     */
+    public String getStrPositionBarreClassique() {
+        return strPositionBarreClassique;
+    }
+
+    /**
+     * @param strPositionBarreClassique the strPositionBarreClassique to set
+     */
+    public void setStrPositionBarreClassique(String strPositionBarreClassique) {
+        this.strPositionBarreClassique = strPositionBarreClassique;
+    }
+
+    /**
+     * @return the styleBarreClassique
+     */
+    public String getStyleBarreClassique() {
+        return styleBarreClassique;
+    }
+
+    /**
+     * @param styleBarreClassique the styleBarreClassique to set
+     */
+    public void setStyleBarreClassique(String styleBarreClassique) {
+        this.styleBarreClassique = styleBarreClassique;
+    }
+
+    /**
+     * @return the strDeplacementsBarreClassique
+     */
+    public String getStrDeplacementsBarreClassique() {
+        return strDeplacementsBarreClassique;
+    }
+
+    /**
+     * @param strDeplacementsBarreClassique the strDeplacementsBarreClassique to
+     * set
+     */
+    public void setStrDeplacementsBarreClassique(String strDeplacementsBarreClassique) {
+        this.strDeplacementsBarreClassique = strDeplacementsBarreClassique;
+    }
+
+    /**
+     * @return the strZoomBarreClassique
+     */
+    public String getStrZoomBarreClassique() {
+        return strZoomBarreClassique;
+    }
+
+    /**
+     * @param strZoomBarreClassique the strZoomBarreClassique to set
+     */
+    public void setStrZoomBarreClassique(String strZoomBarreClassique) {
+        this.strZoomBarreClassique = strZoomBarreClassique;
+    }
+
+    /**
+     * @return the strOutilsBarreClassique
+     */
+    public String getStrOutilsBarreClassique() {
+        return strOutilsBarreClassique;
+    }
+
+    /**
+     * @param strOutilsBarreClassique the strOutilsBarreClassique to set
+     */
+    public void setStrOutilsBarreClassique(String strOutilsBarreClassique) {
+        this.strOutilsBarreClassique = strOutilsBarreClassique;
+    }
+
+    /**
+     * @return the strRotationBarreClassique
+     */
+    public String getStrRotationBarreClassique() {
+        return strRotationBarreClassique;
+    }
+
+    /**
+     * @param strRotationBarreClassique the strRotationBarreClassique to set
+     */
+    public void setStrRotationBarreClassique(String strRotationBarreClassique) {
+        this.strRotationBarreClassique = strRotationBarreClassique;
+    }
+
+    /**
+     * @return the strPleinEcranBarreClassique
+     */
+    public String getStrPleinEcranBarreClassique() {
+        return strPleinEcranBarreClassique;
+    }
+
+    /**
+     * @param strPleinEcranBarreClassique the strPleinEcranBarreClassique to set
+     */
+    public void setStrPleinEcranBarreClassique(String strPleinEcranBarreClassique) {
+        this.strPleinEcranBarreClassique = strPleinEcranBarreClassique;
+    }
+
+    /**
+     * @return the strSourisBarreClassique
+     */
+    public String getStrSourisBarreClassique() {
+        return strSourisBarreClassique;
+    }
+
+    /**
+     * @param strSourisBarreClassique the strSourisBarreClassique to set
+     */
+    public void setStrSourisBarreClassique(String strSourisBarreClassique) {
+        this.strSourisBarreClassique = strSourisBarreClassique;
+    }
+
+    /**
+     * @return the strVisibiliteBarreClassique
+     */
+    public String getStrVisibiliteBarreClassique() {
+        return strVisibiliteBarreClassique;
+    }
+
+    /**
+     * @param strVisibiliteBarreClassique the strVisibiliteBarreClassique to set
+     */
+    public void setStrVisibiliteBarreClassique(String strVisibiliteBarreClassique) {
+        this.strVisibiliteBarreClassique = strVisibiliteBarreClassique;
+    }
+
+    /**
+     * @return the bCouleurOrigineBarrePersonnalisee
+     */
+    public boolean isbCouleurOrigineBarrePersonnalisee() {
+        return bCouleurOrigineBarrePersonnalisee;
+    }
+
+    /**
+     * @param bCouleurOrigineBarrePersonnalisee the
+     * bCouleurOrigineBarrePersonnalisee to set
+     */
+    public void setbCouleurOrigineBarrePersonnalisee(boolean bCouleurOrigineBarrePersonnalisee) {
+        this.bCouleurOrigineBarrePersonnalisee = bCouleurOrigineBarrePersonnalisee;
+    }
+
+    /**
+     * @return the iNombreZonesBarrePersonnalisee
+     */
+    public int getiNombreZonesBarrePersonnalisee() {
+        return iNombreZonesBarrePersonnalisee;
+    }
+
+    /**
+     * @param iNombreZonesBarrePersonnalisee the iNombreZonesBarrePersonnalisee
+     * to set
+     */
+    public void setiNombreZonesBarrePersonnalisee(int iNombreZonesBarrePersonnalisee) {
+        this.iNombreZonesBarrePersonnalisee = iNombreZonesBarrePersonnalisee;
+    }
+
+    /**
+     * @return the offsetXBarrePersonnalisee
+     */
+    public double getOffsetXBarrePersonnalisee() {
+        return offsetXBarrePersonnalisee;
+    }
+
+    /**
+     * @param offsetXBarrePersonnalisee the offsetXBarrePersonnalisee to set
+     */
+    public void setOffsetXBarrePersonnalisee(double offsetXBarrePersonnalisee) {
+        this.offsetXBarrePersonnalisee = offsetXBarrePersonnalisee;
+    }
+
+    /**
+     * @return the offsetYBarrePersonnalisee
+     */
+    public double getOffsetYBarrePersonnalisee() {
+        return offsetYBarrePersonnalisee;
+    }
+
+    /**
+     * @param offsetYBarrePersonnalisee the offsetYBarrePersonnalisee to set
+     */
+    public void setOffsetYBarrePersonnalisee(double offsetYBarrePersonnalisee) {
+        this.offsetYBarrePersonnalisee = offsetYBarrePersonnalisee;
+    }
+
+    /**
+     * @return the tailleBarrePersonnalisee
+     */
+    public double getTailleBarrePersonnalisee() {
+        return tailleBarrePersonnalisee;
+    }
+
+    /**
+     * @param tailleBarrePersonnalisee the tailleBarrePersonnalisee to set
+     */
+    public void setTailleBarrePersonnalisee(double tailleBarrePersonnalisee) {
+        this.tailleBarrePersonnalisee = tailleBarrePersonnalisee;
+    }
+
+    /**
+     * @return the tailleIconesBarrePersonnalisee
+     */
+    public double getTailleIconesBarrePersonnalisee() {
+        return tailleIconesBarrePersonnalisee;
+    }
+
+    /**
+     * @param tailleIconesBarrePersonnalisee the tailleIconesBarrePersonnalisee
+     * to set
+     */
+    public void setTailleIconesBarrePersonnalisee(double tailleIconesBarrePersonnalisee) {
+        this.tailleIconesBarrePersonnalisee = tailleIconesBarrePersonnalisee;
+    }
+
+    /**
+     * @return the strPositionBarrePersonnalisee
+     */
+    public String getStrPositionBarrePersonnalisee() {
+        return strPositionBarrePersonnalisee;
+    }
+
+    /**
+     * @param strPositionBarrePersonnalisee the strPositionBarrePersonnalisee to
+     * set
+     */
+    public void setStrPositionBarrePersonnalisee(String strPositionBarrePersonnalisee) {
+        this.strPositionBarrePersonnalisee = strPositionBarrePersonnalisee;
+    }
+
+    /**
+     * @return the strDeplacementsBarrePersonnalisee
+     */
+    public String getStrDeplacementsBarrePersonnalisee() {
+        return strDeplacementsBarrePersonnalisee;
+    }
+
+    /**
+     * @param strDeplacementsBarrePersonnalisee the
+     * strDeplacementsBarrePersonnalisee to set
+     */
+    public void setStrDeplacementsBarrePersonnalisee(String strDeplacementsBarrePersonnalisee) {
+        this.strDeplacementsBarrePersonnalisee = strDeplacementsBarrePersonnalisee;
+    }
+
+    /**
+     * @return the strZoomBarrePersonnalisee
+     */
+    public String getStrZoomBarrePersonnalisee() {
+        return strZoomBarrePersonnalisee;
+    }
+
+    /**
+     * @param strZoomBarrePersonnalisee the strZoomBarrePersonnalisee to set
+     */
+    public void setStrZoomBarrePersonnalisee(String strZoomBarrePersonnalisee) {
+        this.strZoomBarrePersonnalisee = strZoomBarrePersonnalisee;
+    }
+
+    /**
+     * @return the strInfoBarrePersonnalisee
+     */
+    public String getStrInfoBarrePersonnalisee() {
+        return strInfoBarrePersonnalisee;
+    }
+
+    /**
+     * @param strInfoBarrePersonnalisee the strInfoBarrePersonnalisee to set
+     */
+    public void setStrInfoBarrePersonnalisee(String strInfoBarrePersonnalisee) {
+        this.strInfoBarrePersonnalisee = strInfoBarrePersonnalisee;
+    }
+
+    /**
+     * @return the strAideBarrePersonnalisee
+     */
+    public String getStrAideBarrePersonnalisee() {
+        return strAideBarrePersonnalisee;
+    }
+
+    /**
+     * @param strAideBarrePersonnalisee the strAideBarrePersonnalisee to set
+     */
+    public void setStrAideBarrePersonnalisee(String strAideBarrePersonnalisee) {
+        this.strAideBarrePersonnalisee = strAideBarrePersonnalisee;
+    }
+
+    /**
+     * @return the strRotationBarrePersonnalisee
+     */
+    public String getStrRotationBarrePersonnalisee() {
+        return strRotationBarrePersonnalisee;
+    }
+
+    /**
+     * @param strRotationBarrePersonnalisee the strRotationBarrePersonnalisee to
+     * set
+     */
+    public void setStrRotationBarrePersonnalisee(String strRotationBarrePersonnalisee) {
+        this.strRotationBarrePersonnalisee = strRotationBarrePersonnalisee;
+    }
+
+    /**
+     * @return the strPleinEcranBarrePersonnalisee
+     */
+    public String getStrPleinEcranBarrePersonnalisee() {
+        return strPleinEcranBarrePersonnalisee;
+    }
+
+    /**
+     * @param strPleinEcranBarrePersonnalisee the
+     * strPleinEcranBarrePersonnalisee to set
+     */
+    public void setStrPleinEcranBarrePersonnalisee(String strPleinEcranBarrePersonnalisee) {
+        this.strPleinEcranBarrePersonnalisee = strPleinEcranBarrePersonnalisee;
+    }
+
+    /**
+     * @return the strSourisBarrePersonnalisee
+     */
+    public String getStrSourisBarrePersonnalisee() {
+        return strSourisBarrePersonnalisee;
+    }
+
+    /**
+     * @param strSourisBarrePersonnalisee the strSourisBarrePersonnalisee to set
+     */
+    public void setStrSourisBarrePersonnalisee(String strSourisBarrePersonnalisee) {
+        this.strSourisBarrePersonnalisee = strSourisBarrePersonnalisee;
+    }
+
+    /**
+     * @return the strVisibiliteBarrePersonnalisee
+     */
+    public String getStrVisibiliteBarrePersonnalisee() {
+        return strVisibiliteBarrePersonnalisee;
+    }
+
+    /**
+     * @param strVisibiliteBarrePersonnalisee the
+     * strVisibiliteBarrePersonnalisee to set
+     */
+    public void setStrVisibiliteBarrePersonnalisee(String strVisibiliteBarrePersonnalisee) {
+        this.strVisibiliteBarrePersonnalisee = strVisibiliteBarrePersonnalisee;
+    }
+
+    /**
+     * @return the strLienImageBarrePersonnalisee
+     */
+    public String getStrLienImageBarrePersonnalisee() {
+        return strLienImageBarrePersonnalisee;
+    }
+
+    /**
+     * @param strLienImageBarrePersonnalisee the strLienImageBarrePersonnalisee
+     * to set
+     */
+    public void setStrLienImageBarrePersonnalisee(String strLienImageBarrePersonnalisee) {
+        this.strLienImageBarrePersonnalisee = strLienImageBarrePersonnalisee;
+    }
+
+    /**
+     * @return the strLien1BarrePersonnalisee
+     */
+    public String getStrLien1BarrePersonnalisee() {
+        return strLien1BarrePersonnalisee;
+    }
+
+    /**
+     * @param strLien1BarrePersonnalisee the strLien1BarrePersonnalisee to set
+     */
+    public void setStrLien1BarrePersonnalisee(String strLien1BarrePersonnalisee) {
+        this.strLien1BarrePersonnalisee = strLien1BarrePersonnalisee;
+    }
+
+    /**
+     * @return the strLien2BarrePersonnalisee
+     */
+    public String getStrLien2BarrePersonnalisee() {
+        return strLien2BarrePersonnalisee;
+    }
+
+    /**
+     * @param strLien2BarrePersonnalisee the strLien2BarrePersonnalisee to set
+     */
+    public void setStrLien2BarrePersonnalisee(String strLien2BarrePersonnalisee) {
+        this.strLien2BarrePersonnalisee = strLien2BarrePersonnalisee;
+    }
+
+    /**
+     * @return the wiBarrePersonnaliseeCouleur
+     */
+    public WritableImage getWiBarrePersonnaliseeCouleur() {
+        return wiBarrePersonnaliseeCouleur;
+    }
+
+    /**
+     * @param wiBarrePersonnaliseeCouleur the wiBarrePersonnaliseeCouleur to set
+     */
+    public void setWiBarrePersonnaliseeCouleur(WritableImage wiBarrePersonnaliseeCouleur) {
+        this.wiBarrePersonnaliseeCouleur = wiBarrePersonnaliseeCouleur;
+    }
+
+    /**
+     * @return the bAfficheTitre
+     */
+    public boolean isbAfficheTitre() {
+        return bAfficheTitre;
+    }
+
+    /**
+     * @param bAfficheTitre the bAfficheTitre to set
+     */
+    public void setbAfficheTitre(boolean bAfficheTitre) {
+        this.bAfficheTitre = bAfficheTitre;
+    }
+
+    /**
+     * @return the strTitrePoliceNom
+     */
+    public String getStrTitrePoliceNom() {
+        return strTitrePoliceNom;
+    }
+
+    /**
+     * @param strTitrePoliceNom the strTitrePoliceNom to set
+     */
+    public void setStrTitrePoliceNom(String strTitrePoliceNom) {
+        this.strTitrePoliceNom = strTitrePoliceNom;
+    }
+
+    /**
+     * @return the strTitrePoliceStyle
+     */
+    public String getStrTitrePoliceStyle() {
+        return strTitrePoliceStyle;
+    }
+
+    /**
+     * @param strTitrePoliceStyle the strTitrePoliceStyle to set
+     */
+    public void setStrTitrePoliceStyle(String strTitrePoliceStyle) {
+        this.strTitrePoliceStyle = strTitrePoliceStyle;
+    }
+
+    /**
+     * @return the strTitrePoliceTaille
+     */
+    public String getStrTitrePoliceTaille() {
+        return strTitrePoliceTaille;
+    }
+
+    /**
+     * @param strTitrePoliceTaille the strTitrePoliceTaille to set
+     */
+    public void setStrTitrePoliceTaille(String strTitrePoliceTaille) {
+        this.strTitrePoliceTaille = strTitrePoliceTaille;
+    }
+
+    /**
+     * @return the strCouleurTitre
+     */
+    public String getStrCouleurTitre() {
+        return strCouleurTitre;
+    }
+
+    /**
+     * @param strCouleurTitre the strCouleurTitre to set
+     */
+    public void setStrCouleurTitre(String strCouleurTitre) {
+        this.strCouleurTitre = strCouleurTitre;
+    }
+
+    /**
+     * @return the strCouleurFondTitre
+     */
+    public String getStrCouleurFondTitre() {
+        return strCouleurFondTitre;
+    }
+
+    /**
+     * @param strCouleurFondTitre the strCouleurFondTitre to set
+     */
+    public void setStrCouleurFondTitre(String strCouleurFondTitre) {
+        this.strCouleurFondTitre = strCouleurFondTitre;
+    }
+
+    /**
+     * @return the titreOpacite
+     */
+    public double getTitreOpacite() {
+        return titreOpacite;
+    }
+
+    /**
+     * @param titreOpacite the titreOpacite to set
+     */
+    public void setTitreOpacite(double titreOpacite) {
+        this.titreOpacite = titreOpacite;
+    }
+
+    /**
+     * @return the titreTaille
+     */
+    public double getTitreTaille() {
+        return titreTaille;
+    }
+
+    /**
+     * @param titreTaille the titreTaille to set
+     */
+    public void setTitreTaille(double titreTaille) {
+        this.titreTaille = titreTaille;
+    }
+
+    /**
+     * @return the strCouleurDiaporama
+     */
+    public String getStrCouleurDiaporama() {
+        return strCouleurDiaporama;
+    }
+
+    /**
+     * @param strCouleurDiaporama the strCouleurDiaporama to set
+     */
+    public void setStrCouleurDiaporama(String strCouleurDiaporama) {
+        this.strCouleurDiaporama = strCouleurDiaporama;
+    }
+
+    /**
+     * @return the diaporamaOpacite
+     */
+    public double getDiaporamaOpacite() {
+        return diaporamaOpacite;
+    }
+
+    /**
+     * @param diaporamaOpacite the diaporamaOpacite to set
+     */
+    public void setDiaporamaOpacite(double diaporamaOpacite) {
+        this.diaporamaOpacite = diaporamaOpacite;
+    }
+
+    /**
+     * @return the bAfficheBoussole
+     */
+    public boolean isbAfficheBoussole() {
+        return bAfficheBoussole;
+    }
+
+    /**
+     * @param bAfficheBoussole the bAfficheBoussole to set
+     */
+    public void setbAfficheBoussole(boolean bAfficheBoussole) {
+        this.bAfficheBoussole = bAfficheBoussole;
+    }
+
+    /**
+     * @return the strImageBoussole
+     */
+    public String getStrImageBoussole() {
+        return strImageBoussole;
+    }
+
+    /**
+     * @param strImageBoussole the strImageBoussole to set
+     */
+    public void setStrImageBoussole(String strImageBoussole) {
+        this.strImageBoussole = strImageBoussole;
+    }
+
+    /**
+     * @return the strPositionBoussole
+     */
+    public String getStrPositionBoussole() {
+        return strPositionBoussole;
+    }
+
+    /**
+     * @param strPositionBoussole the strPositionBoussole to set
+     */
+    public void setStrPositionBoussole(String strPositionBoussole) {
+        this.strPositionBoussole = strPositionBoussole;
+    }
+
+    /**
+     * @return the offsetXBoussole
+     */
+    public double getOffsetXBoussole() {
+        return offsetXBoussole;
+    }
+
+    /**
+     * @param offsetXBoussole the offsetXBoussole to set
+     */
+    public void setOffsetXBoussole(double offsetXBoussole) {
+        this.offsetXBoussole = offsetXBoussole;
+    }
+
+    /**
+     * @return the offsetYBoussole
+     */
+    public double getOffsetYBoussole() {
+        return offsetYBoussole;
+    }
+
+    /**
+     * @param offsetYBoussole the offsetYBoussole to set
+     */
+    public void setOffsetYBoussole(double offsetYBoussole) {
+        this.offsetYBoussole = offsetYBoussole;
+    }
+
+    /**
+     * @return the tailleBoussole
+     */
+    public double getTailleBoussole() {
+        return tailleBoussole;
+    }
+
+    /**
+     * @param tailleBoussole the tailleBoussole to set
+     */
+    public void setTailleBoussole(double tailleBoussole) {
+        this.tailleBoussole = tailleBoussole;
+    }
+
+    /**
+     * @return the opaciteBoussole
+     */
+    public double getOpaciteBoussole() {
+        return opaciteBoussole;
+    }
+
+    /**
+     * @param opaciteBoussole the opaciteBoussole to set
+     */
+    public void setOpaciteBoussole(double opaciteBoussole) {
+        this.opaciteBoussole = opaciteBoussole;
+    }
+
+    /**
+     * @return the bAiguilleMobileBoussole
+     */
+    public boolean isbAiguilleMobileBoussole() {
+        return bAiguilleMobileBoussole;
+    }
+
+    /**
+     * @param bAiguilleMobileBoussole the bAiguilleMobileBoussole to set
+     */
+    public void setbAiguilleMobileBoussole(boolean bAiguilleMobileBoussole) {
+        this.bAiguilleMobileBoussole = bAiguilleMobileBoussole;
+    }
+
+    /**
+     * @return the bFenetreInfoPersonnalise
+     */
+    public boolean isbFenetreInfoPersonnalise() {
+        return bFenetreInfoPersonnalise;
+    }
+
+    /**
+     * @param bFenetreInfoPersonnalise the bFenetreInfoPersonnalise to set
+     */
+    public void setbFenetreInfoPersonnalise(boolean bFenetreInfoPersonnalise) {
+        this.bFenetreInfoPersonnalise = bFenetreInfoPersonnalise;
+    }
+
+    /**
+     * @return the bFenetreAidePersonnalise
+     */
+    public boolean isbFenetreAidePersonnalise() {
+        return bFenetreAidePersonnalise;
+    }
+
+    /**
+     * @param bFenetreAidePersonnalise the bFenetreAidePersonnalise to set
+     */
+    public void setbFenetreAidePersonnalise(boolean bFenetreAidePersonnalise) {
+        this.bFenetreAidePersonnalise = bFenetreAidePersonnalise;
+    }
+
+    /**
+     * @return the fenetreInfoTaille
+     */
+    public double getFenetreInfoTaille() {
+        return fenetreInfoTaille;
+    }
+
+    /**
+     * @param fenetreInfoTaille the fenetreInfoTaille to set
+     */
+    public void setFenetreInfoTaille(double fenetreInfoTaille) {
+        this.fenetreInfoTaille = fenetreInfoTaille;
+    }
+
+    /**
+     * @return the fenetreAideTaille
+     */
+    public double getFenetreAideTaille() {
+        return fenetreAideTaille;
+    }
+
+    /**
+     * @param fenetreAideTaille the fenetreAideTaille to set
+     */
+    public void setFenetreAideTaille(double fenetreAideTaille) {
+        this.fenetreAideTaille = fenetreAideTaille;
+    }
+
+    /**
+     * @return the fenetreInfoPosX
+     */
+    public double getFenetreInfoPosX() {
+        return fenetreInfoPosX;
+    }
+
+    /**
+     * @param fenetreInfoPosX the fenetreInfoPosX to set
+     */
+    public void setFenetreInfoPosX(double fenetreInfoPosX) {
+        this.fenetreInfoPosX = fenetreInfoPosX;
+    }
+
+    /**
+     * @return the fenetreInfoPosY
+     */
+    public double getFenetreInfoPosY() {
+        return fenetreInfoPosY;
+    }
+
+    /**
+     * @param fenetreInfoPosY the fenetreInfoPosY to set
+     */
+    public void setFenetreInfoPosY(double fenetreInfoPosY) {
+        this.fenetreInfoPosY = fenetreInfoPosY;
+    }
+
+    /**
+     * @return the fenetreAidePosX
+     */
+    public double getFenetreAidePosX() {
+        return fenetreAidePosX;
+    }
+
+    /**
+     * @param fenetreAidePosX the fenetreAidePosX to set
+     */
+    public void setFenetreAidePosX(double fenetreAidePosX) {
+        this.fenetreAidePosX = fenetreAidePosX;
+    }
+
+    /**
+     * @return the fenetreAidePosY
+     */
+    public double getFenetreAidePosY() {
+        return fenetreAidePosY;
+    }
+
+    /**
+     * @param fenetreAidePosY the fenetreAidePosY to set
+     */
+    public void setFenetreAidePosY(double fenetreAidePosY) {
+        this.fenetreAidePosY = fenetreAidePosY;
+    }
+
+    /**
+     * @return the fenetreInfoposX
+     */
+    public double getFenetreInfoposX() {
+        return fenetreInfoposX;
+    }
+
+    /**
+     * @param fenetreInfoposX the fenetreInfoposX to set
+     */
+    public void setFenetreInfoposX(double fenetreInfoposX) {
+        this.fenetreInfoposX = fenetreInfoposX;
+    }
+
+    /**
+     * @return the fenetreInfoOpacite
+     */
+    public double getFenetreInfoOpacite() {
+        return fenetreInfoOpacite;
+    }
+
+    /**
+     * @param fenetreInfoOpacite the fenetreInfoOpacite to set
+     */
+    public void setFenetreInfoOpacite(double fenetreInfoOpacite) {
+        this.fenetreInfoOpacite = fenetreInfoOpacite;
+    }
+
+    /**
+     * @return the fenetreAideOpacite
+     */
+    public double getFenetreAideOpacite() {
+        return fenetreAideOpacite;
+    }
+
+    /**
+     * @param fenetreAideOpacite the fenetreAideOpacite to set
+     */
+    public void setFenetreAideOpacite(double fenetreAideOpacite) {
+        this.fenetreAideOpacite = fenetreAideOpacite;
+    }
+
+    /**
+     * @return the fenetrePoliceTaille
+     */
+    public double getFenetrePoliceTaille() {
+        return fenetrePoliceTaille;
+    }
+
+    /**
+     * @param fenetrePoliceTaille the fenetrePoliceTaille to set
+     */
+    public void setFenetrePoliceTaille(double fenetrePoliceTaille) {
+        this.fenetrePoliceTaille = fenetrePoliceTaille;
+    }
+
+    /**
+     * @return the fenetreURLPosX
+     */
+    public double getFenetreURLPosX() {
+        return fenetreURLPosX;
+    }
+
+    /**
+     * @param fenetreURLPosX the fenetreURLPosX to set
+     */
+    public void setFenetreURLPosX(double fenetreURLPosX) {
+        this.fenetreURLPosX = fenetreURLPosX;
+    }
+
+    /**
+     * @return the fenetreURLPosY
+     */
+    public double getFenetreURLPosY() {
+        return fenetreURLPosY;
+    }
+
+    /**
+     * @param fenetreURLPosY the fenetreURLPosY to set
+     */
+    public void setFenetreURLPosY(double fenetreURLPosY) {
+        this.fenetreURLPosY = fenetreURLPosY;
+    }
+
+    /**
+     * @return the fenetreOpaciteFond
+     */
+    public double getFenetreOpaciteFond() {
+        return fenetreOpaciteFond;
+    }
+
+    /**
+     * @param fenetreOpaciteFond the fenetreOpaciteFond to set
+     */
+    public void setFenetreOpaciteFond(double fenetreOpaciteFond) {
+        this.fenetreOpaciteFond = fenetreOpaciteFond;
+    }
+
+    /**
+     * @return the strFenetreInfoImage
+     */
+    public String getStrFenetreInfoImage() {
+        return strFenetreInfoImage;
+    }
+
+    /**
+     * @param strFenetreInfoImage the strFenetreInfoImage to set
+     */
+    public void setStrFenetreInfoImage(String strFenetreInfoImage) {
+        this.strFenetreInfoImage = strFenetreInfoImage;
+    }
+
+    /**
+     * @return the strFenetreAideImage
+     */
+    public String getStrFenetreAideImage() {
+        return strFenetreAideImage;
+    }
+
+    /**
+     * @param strFenetreAideImage the strFenetreAideImage to set
+     */
+    public void setStrFenetreAideImage(String strFenetreAideImage) {
+        this.strFenetreAideImage = strFenetreAideImage;
+    }
+
+    /**
+     * @return the strFenetreURL
+     */
+    public String getStrFenetreURL() {
+        return strFenetreURL;
+    }
+
+    /**
+     * @param strFenetreURL the strFenetreURL to set
+     */
+    public void setStrFenetreURL(String strFenetreURL) {
+        this.strFenetreURL = strFenetreURL;
+    }
+
+    /**
+     * @return the strFenetreTexteURL
+     */
+    public String getStrFenetreTexteURL() {
+        return strFenetreTexteURL;
+    }
+
+    /**
+     * @param strFenetreTexteURL the strFenetreTexteURL to set
+     */
+    public void setStrFenetreTexteURL(String strFenetreTexteURL) {
+        this.strFenetreTexteURL = strFenetreTexteURL;
+    }
+
+    /**
+     * @return the strFenetreURLInfobulle
+     */
+    public String getStrFenetreURLInfobulle() {
+        return strFenetreURLInfobulle;
+    }
+
+    /**
+     * @param strFenetreURLInfobulle the strFenetreURLInfobulle to set
+     */
+    public void setStrFenetreURLInfobulle(String strFenetreURLInfobulle) {
+        this.strFenetreURLInfobulle = strFenetreURLInfobulle;
+    }
+
+    /**
+     * @return the strFenetreURLCouleur
+     */
+    public String getStrFenetreURLCouleur() {
+        return strFenetreURLCouleur;
+    }
+
+    /**
+     * @param strFenetreURLCouleur the strFenetreURLCouleur to set
+     */
+    public void setStrFenetreURLCouleur(String strFenetreURLCouleur) {
+        this.strFenetreURLCouleur = strFenetreURLCouleur;
+    }
+
+    /**
+     * @return the strFenetrePolice
+     */
+    public String getStrFenetrePolice() {
+        return strFenetrePolice;
+    }
+
+    /**
+     * @param strFenetrePolice the strFenetrePolice to set
+     */
+    public void setStrFenetrePolice(String strFenetrePolice) {
+        this.strFenetrePolice = strFenetrePolice;
+    }
+
+    /**
+     * @return the strFenetreCouleurFond
+     */
+    public String getStrFenetreCouleurFond() {
+        return strFenetreCouleurFond;
+    }
+
+    /**
+     * @param strFenetreCouleurFond the strFenetreCouleurFond to set
+     */
+    public void setStrFenetreCouleurFond(String strFenetreCouleurFond) {
+        this.strFenetreCouleurFond = strFenetreCouleurFond;
+    }
+
+    /**
+     * @return the bAfficheMasque
+     */
+    public boolean isbAfficheMasque() {
+        return bAfficheMasque;
+    }
+
+    /**
+     * @param bAfficheMasque the bAfficheMasque to set
+     */
+    public void setbAfficheMasque(boolean bAfficheMasque) {
+        this.bAfficheMasque = bAfficheMasque;
+    }
+
+    /**
+     * @return the strImageMasque
+     */
+    public String getStrImageMasque() {
+        return strImageMasque;
+    }
+
+    /**
+     * @param strImageMasque the strImageMasque to set
+     */
+    public void setStrImageMasque(String strImageMasque) {
+        this.strImageMasque = strImageMasque;
+    }
+
+    /**
+     * @return the strPositionMasque
+     */
+    public String getStrPositionMasque() {
+        return strPositionMasque;
+    }
+
+    /**
+     * @param strPositionMasque the strPositionMasque to set
+     */
+    public void setStrPositionMasque(String strPositionMasque) {
+        this.strPositionMasque = strPositionMasque;
+    }
+
+    /**
+     * @return the dXMasque
+     */
+    public double getdXMasque() {
+        return dXMasque;
+    }
+
+    /**
+     * @param dXMasque the dXMasque to set
+     */
+    public void setdXMasque(double dXMasque) {
+        this.dXMasque = dXMasque;
+    }
+
+    /**
+     * @return the dYMasque
+     */
+    public double getdYMasque() {
+        return dYMasque;
+    }
+
+    /**
+     * @param dYMasque the dYMasque to set
+     */
+    public void setdYMasque(double dYMasque) {
+        this.dYMasque = dYMasque;
+    }
+
+    /**
+     * @return the tailleMasque
+     */
+    public double getTailleMasque() {
+        return tailleMasque;
+    }
+
+    /**
+     * @param tailleMasque the tailleMasque to set
+     */
+    public void setTailleMasque(double tailleMasque) {
+        this.tailleMasque = tailleMasque;
+    }
+
+    /**
+     * @return the opaciteMasque
+     */
+    public double getOpaciteMasque() {
+        return opaciteMasque;
+    }
+
+    /**
+     * @param opaciteMasque the opaciteMasque to set
+     */
+    public void setOpaciteMasque(double opaciteMasque) {
+        this.opaciteMasque = opaciteMasque;
+    }
+
+    /**
+     * @return the bMasqueNavigation
+     */
+    public boolean isbMasqueNavigation() {
+        return bMasqueNavigation;
+    }
+
+    /**
+     * @param bMasqueNavigation the bMasqueNavigation to set
+     */
+    public void setbMasqueNavigation(boolean bMasqueNavigation) {
+        this.bMasqueNavigation = bMasqueNavigation;
+    }
+
+    /**
+     * @return the bMasqueBoussole
+     */
+    public boolean isbMasqueBoussole() {
+        return bMasqueBoussole;
+    }
+
+    /**
+     * @param bMasqueBoussole the bMasqueBoussole to set
+     */
+    public void setbMasqueBoussole(boolean bMasqueBoussole) {
+        this.bMasqueBoussole = bMasqueBoussole;
+    }
+
+    /**
+     * @return the bMasqueTitre
+     */
+    public boolean isbMasqueTitre() {
+        return bMasqueTitre;
+    }
+
+    /**
+     * @param bMasqueTitre the bMasqueTitre to set
+     */
+    public void setbMasqueTitre(boolean bMasqueTitre) {
+        this.bMasqueTitre = bMasqueTitre;
+    }
+
+    /**
+     * @return the bMasquePlan
+     */
+    public boolean isbMasquePlan() {
+        return bMasquePlan;
+    }
+
+    /**
+     * @param bMasquePlan the bMasquePlan to set
+     */
+    public void setbMasquePlan(boolean bMasquePlan) {
+        this.bMasquePlan = bMasquePlan;
+    }
+
+    /**
+     * @return the bMasqueReseaux
+     */
+    public boolean isbMasqueReseaux() {
+        return bMasqueReseaux;
+    }
+
+    /**
+     * @param bMasqueReseaux the bMasqueReseaux to set
+     */
+    public void setbMasqueReseaux(boolean bMasqueReseaux) {
+        this.bMasqueReseaux = bMasqueReseaux;
+    }
+
+    /**
+     * @return the bMasqueVignettes
+     */
+    public boolean isbMasqueVignettes() {
+        return bMasqueVignettes;
+    }
+
+    /**
+     * @param bMasqueVignettes the bMasqueVignettes to set
+     */
+    public void setbMasqueVignettes(boolean bMasqueVignettes) {
+        this.bMasqueVignettes = bMasqueVignettes;
+    }
+
+    /**
+     * @return the bMasqueCombo
+     */
+    public boolean isbMasqueCombo() {
+        return bMasqueCombo;
+    }
+
+    /**
+     * @param bMasqueCombo the bMasqueCombo to set
+     */
+    public void setbMasqueCombo(boolean bMasqueCombo) {
+        this.bMasqueCombo = bMasqueCombo;
+    }
+
+    /**
+     * @return the bMasqueSuivPrec
+     */
+    public boolean isbMasqueSuivPrec() {
+        return bMasqueSuivPrec;
+    }
+
+    /**
+     * @param bMasqueSuivPrec the bMasqueSuivPrec to set
+     */
+    public void setbMasqueSuivPrec(boolean bMasqueSuivPrec) {
+        this.bMasqueSuivPrec = bMasqueSuivPrec;
+    }
+
+    /**
+     * @return the bMasqueHotspots
+     */
+    public boolean isbMasqueHotspots() {
+        return bMasqueHotspots;
+    }
+
+    /**
+     * @param bMasqueHotspots the bMasqueHotspots to set
+     */
+    public void setbMasqueHotspots(boolean bMasqueHotspots) {
+        this.bMasqueHotspots = bMasqueHotspots;
+    }
+
+    /**
+     * @return the bAfficheReseauxSociaux
+     */
+    public boolean isbAfficheReseauxSociaux() {
+        return bAfficheReseauxSociaux;
+    }
+
+    /**
+     * @param bAfficheReseauxSociaux the bAfficheReseauxSociaux to set
+     */
+    public void setbAfficheReseauxSociaux(boolean bAfficheReseauxSociaux) {
+        this.bAfficheReseauxSociaux = bAfficheReseauxSociaux;
+    }
+
+    /**
+     * @return the strImageReseauxSociauxTwitter
+     */
+    public String getStrImageReseauxSociauxTwitter() {
+        return strImageReseauxSociauxTwitter;
+    }
+
+    /**
+     * @param strImageReseauxSociauxTwitter the strImageReseauxSociauxTwitter to
+     * set
+     */
+    public void setStrImageReseauxSociauxTwitter(String strImageReseauxSociauxTwitter) {
+        this.strImageReseauxSociauxTwitter = strImageReseauxSociauxTwitter;
+    }
+
+    /**
+     * @return the strImageReseauxSociauxGoogle
+     */
+    public String getStrImageReseauxSociauxGoogle() {
+        return strImageReseauxSociauxGoogle;
+    }
+
+    /**
+     * @param strImageReseauxSociauxGoogle the strImageReseauxSociauxGoogle to
+     * set
+     */
+    public void setStrImageReseauxSociauxGoogle(String strImageReseauxSociauxGoogle) {
+        this.strImageReseauxSociauxGoogle = strImageReseauxSociauxGoogle;
+    }
+
+    /**
+     * @return the strImageReseauxSociauxFacebook
+     */
+    public String getStrImageReseauxSociauxFacebook() {
+        return strImageReseauxSociauxFacebook;
+    }
+
+    /**
+     * @param strImageReseauxSociauxFacebook the strImageReseauxSociauxFacebook
+     * to set
+     */
+    public void setStrImageReseauxSociauxFacebook(String strImageReseauxSociauxFacebook) {
+        this.strImageReseauxSociauxFacebook = strImageReseauxSociauxFacebook;
+    }
+
+    /**
+     * @return the strImageReseauxSociauxEmail
+     */
+    public String getStrImageReseauxSociauxEmail() {
+        return strImageReseauxSociauxEmail;
+    }
+
+    /**
+     * @param strImageReseauxSociauxEmail the strImageReseauxSociauxEmail to set
+     */
+    public void setStrImageReseauxSociauxEmail(String strImageReseauxSociauxEmail) {
+        this.strImageReseauxSociauxEmail = strImageReseauxSociauxEmail;
+    }
+
+    /**
+     * @return the strPositionReseauxSociaux
+     */
+    public String getStrPositionReseauxSociaux() {
+        return strPositionReseauxSociaux;
+    }
+
+    /**
+     * @param strPositionReseauxSociaux the strPositionReseauxSociaux to set
+     */
+    public void setStrPositionReseauxSociaux(String strPositionReseauxSociaux) {
+        this.strPositionReseauxSociaux = strPositionReseauxSociaux;
+    }
+
+    /**
+     * @return the dXReseauxSociaux
+     */
+    public double getdXReseauxSociaux() {
+        return dXReseauxSociaux;
+    }
+
+    /**
+     * @param dXReseauxSociaux the dXReseauxSociaux to set
+     */
+    public void setdXReseauxSociaux(double dXReseauxSociaux) {
+        this.dXReseauxSociaux = dXReseauxSociaux;
+    }
+
+    /**
+     * @return the dYReseauxSociaux
+     */
+    public double getdYReseauxSociaux() {
+        return dYReseauxSociaux;
+    }
+
+    /**
+     * @param dYReseauxSociaux the dYReseauxSociaux to set
+     */
+    public void setdYReseauxSociaux(double dYReseauxSociaux) {
+        this.dYReseauxSociaux = dYReseauxSociaux;
+    }
+
+    /**
+     * @return the tailleReseauxSociaux
+     */
+    public double getTailleReseauxSociaux() {
+        return tailleReseauxSociaux;
+    }
+
+    /**
+     * @param tailleReseauxSociaux the tailleReseauxSociaux to set
+     */
+    public void setTailleReseauxSociaux(double tailleReseauxSociaux) {
+        this.tailleReseauxSociaux = tailleReseauxSociaux;
+    }
+
+    /**
+     * @return the opaciteReseauxSociaux
+     */
+    public double getOpaciteReseauxSociaux() {
+        return opaciteReseauxSociaux;
+    }
+
+    /**
+     * @param opaciteReseauxSociaux the opaciteReseauxSociaux to set
+     */
+    public void setOpaciteReseauxSociaux(double opaciteReseauxSociaux) {
+        this.opaciteReseauxSociaux = opaciteReseauxSociaux;
+    }
+
+    /**
+     * @return the bReseauxSociauxTwitter
+     */
+    public boolean isbReseauxSociauxTwitter() {
+        return bReseauxSociauxTwitter;
+    }
+
+    /**
+     * @param bReseauxSociauxTwitter the bReseauxSociauxTwitter to set
+     */
+    public void setbReseauxSociauxTwitter(boolean bReseauxSociauxTwitter) {
+        this.bReseauxSociauxTwitter = bReseauxSociauxTwitter;
+    }
+
+    /**
+     * @return the bReseauxSociauxGoogle
+     */
+    public boolean isbReseauxSociauxGoogle() {
+        return bReseauxSociauxGoogle;
+    }
+
+    /**
+     * @param bReseauxSociauxGoogle the bReseauxSociauxGoogle to set
+     */
+    public void setbReseauxSociauxGoogle(boolean bReseauxSociauxGoogle) {
+        this.bReseauxSociauxGoogle = bReseauxSociauxGoogle;
+    }
+
+    /**
+     * @return the bReseauxSociauxFacebook
+     */
+    public boolean isbReseauxSociauxFacebook() {
+        return bReseauxSociauxFacebook;
+    }
+
+    /**
+     * @param bReseauxSociauxFacebook the bReseauxSociauxFacebook to set
+     */
+    public void setbReseauxSociauxFacebook(boolean bReseauxSociauxFacebook) {
+        this.bReseauxSociauxFacebook = bReseauxSociauxFacebook;
+    }
+
+    /**
+     * @return the bReseauxSociauxEmail
+     */
+    public boolean isbReseauxSociauxEmail() {
+        return bReseauxSociauxEmail;
+    }
+
+    /**
+     * @param bReseauxSociauxEmail the bReseauxSociauxEmail to set
+     */
+    public void setbReseauxSociauxEmail(boolean bReseauxSociauxEmail) {
+        this.bReseauxSociauxEmail = bReseauxSociauxEmail;
+    }
+
+    /**
+     * @return the bAfficheVignettes
+     */
+    public boolean isbAfficheVignettes() {
+        return bAfficheVignettes;
+    }
+
+    /**
+     * @param bAfficheVignettes the bAfficheVignettes to set
+     */
+    public void setbAfficheVignettes(boolean bAfficheVignettes) {
+        this.bAfficheVignettes = bAfficheVignettes;
+    }
+
+    /**
+     * @return the strCouleurFondVignettes
+     */
+    public String getStrCouleurFondVignettes() {
+        return strCouleurFondVignettes;
+    }
+
+    /**
+     * @param strCouleurFondVignettes the strCouleurFondVignettes to set
+     */
+    public void setStrCouleurFondVignettes(String strCouleurFondVignettes) {
+        this.strCouleurFondVignettes = strCouleurFondVignettes;
+    }
+
+    /**
+     * @return the strCouleurTexteVignettes
+     */
+    public String getStrCouleurTexteVignettes() {
+        return strCouleurTexteVignettes;
+    }
+
+    /**
+     * @param strCouleurTexteVignettes the strCouleurTexteVignettes to set
+     */
+    public void setStrCouleurTexteVignettes(String strCouleurTexteVignettes) {
+        this.strCouleurTexteVignettes = strCouleurTexteVignettes;
+    }
+
+    /**
+     * @return the strPositionVignettes
+     */
+    public String getStrPositionVignettes() {
+        return strPositionVignettes;
+    }
+
+    /**
+     * @param strPositionVignettes the strPositionVignettes to set
+     */
+    public void setStrPositionVignettes(String strPositionVignettes) {
+        this.strPositionVignettes = strPositionVignettes;
+    }
+
+    /**
+     * @return the tailleImageVignettes
+     */
+    public double getTailleImageVignettes() {
+        return tailleImageVignettes;
+    }
+
+    /**
+     * @param tailleImageVignettes the tailleImageVignettes to set
+     */
+    public void setTailleImageVignettes(double tailleImageVignettes) {
+        this.tailleImageVignettes = tailleImageVignettes;
+    }
+
+    /**
+     * @return the opaciteVignettes
+     */
+    public double getOpaciteVignettes() {
+        return opaciteVignettes;
+    }
+
+    /**
+     * @param opaciteVignettes the opaciteVignettes to set
+     */
+    public void setOpaciteVignettes(double opaciteVignettes) {
+        this.opaciteVignettes = opaciteVignettes;
+    }
+
+    /**
+     * @return the bAfficheComboMenu
+     */
+    public boolean isbAfficheComboMenu() {
+        return bAfficheComboMenu;
+    }
+
+    /**
+     * @param bAfficheComboMenu the bAfficheComboMenu to set
+     */
+    public void setbAfficheComboMenu(boolean bAfficheComboMenu) {
+        this.bAfficheComboMenu = bAfficheComboMenu;
+    }
+
+    /**
+     * @return the bAfficheComboMenuImages
+     */
+    public boolean isbAfficheComboMenuImages() {
+        return bAfficheComboMenuImages;
+    }
+
+    /**
+     * @param bAfficheComboMenuImages the bAfficheComboMenuImages to set
+     */
+    public void setbAfficheComboMenuImages(boolean bAfficheComboMenuImages) {
+        this.bAfficheComboMenuImages = bAfficheComboMenuImages;
+    }
+
+    /**
+     * @return the strPositionXComboMenu
+     */
+    public String getStrPositionXComboMenu() {
+        return strPositionXComboMenu;
+    }
+
+    /**
+     * @param strPositionXComboMenu the strPositionXComboMenu to set
+     */
+    public void setStrPositionXComboMenu(String strPositionXComboMenu) {
+        this.strPositionXComboMenu = strPositionXComboMenu;
+    }
+
+    /**
+     * @return the strPositionYComboMenu
+     */
+    public String getStrPositionYComboMenu() {
+        return strPositionYComboMenu;
+    }
+
+    /**
+     * @param strPositionYComboMenu the strPositionYComboMenu to set
+     */
+    public void setStrPositionYComboMenu(String strPositionYComboMenu) {
+        this.strPositionYComboMenu = strPositionYComboMenu;
+    }
+
+    /**
+     * @return the offsetXComboMenu
+     */
+    public double getOffsetXComboMenu() {
+        return offsetXComboMenu;
+    }
+
+    /**
+     * @param offsetXComboMenu the offsetXComboMenu to set
+     */
+    public void setOffsetXComboMenu(double offsetXComboMenu) {
+        this.offsetXComboMenu = offsetXComboMenu;
+    }
+
+    /**
+     * @return the offsetYComboMenu
+     */
+    public double getOffsetYComboMenu() {
+        return offsetYComboMenu;
+    }
+
+    /**
+     * @param offsetYComboMenu the offsetYComboMenu to set
+     */
+    public void setOffsetYComboMenu(double offsetYComboMenu) {
+        this.offsetYComboMenu = offsetYComboMenu;
+    }
+
+    /**
+     * @return the bAffichePlan
+     */
+    public boolean isbAffichePlan() {
+        return bAffichePlan;
+    }
+
+    /**
+     * @param bAffichePlan the bAffichePlan to set
+     */
+    public void setbAffichePlan(boolean bAffichePlan) {
+        this.bAffichePlan = bAffichePlan;
+    }
+
+    /**
+     * @return the strPositionPlan
+     */
+    public String getStrPositionPlan() {
+        return strPositionPlan;
+    }
+
+    /**
+     * @param strPositionPlan the strPositionPlan to set
+     */
+    public void setStrPositionPlan(String strPositionPlan) {
+        this.strPositionPlan = strPositionPlan;
+    }
+
+    /**
+     * @return the largeurPlan
+     */
+    public double getLargeurPlan() {
+        return largeurPlan;
+    }
+
+    /**
+     * @param largeurPlan the largeurPlan to set
+     */
+    public void setLargeurPlan(double largeurPlan) {
+        this.largeurPlan = largeurPlan;
+    }
+
+    /**
+     * @return the couleurFondPlan
+     */
+    public Color getCouleurFondPlan() {
+        return couleurFondPlan;
+    }
+
+    /**
+     * @param couleurFondPlan the couleurFondPlan to set
+     */
+    public void setCouleurFondPlan(Color couleurFondPlan) {
+        this.couleurFondPlan = couleurFondPlan;
+    }
+
+    /**
+     * @return the strCouleurFondPlan
+     */
+    public String getStrCouleurFondPlan() {
+        return strCouleurFondPlan;
+    }
+
+    /**
+     * @param strCouleurFondPlan the strCouleurFondPlan to set
+     */
+    public void setStrCouleurFondPlan(String strCouleurFondPlan) {
+        this.strCouleurFondPlan = strCouleurFondPlan;
+    }
+
+    /**
+     * @return the opacitePlan
+     */
+    public double getOpacitePlan() {
+        return opacitePlan;
+    }
+
+    /**
+     * @param opacitePlan the opacitePlan to set
+     */
+    public void setOpacitePlan(double opacitePlan) {
+        this.opacitePlan = opacitePlan;
+    }
+
+    /**
+     * @return the couleurTextePlan
+     */
+    public Color getCouleurTextePlan() {
+        return couleurTextePlan;
+    }
+
+    /**
+     * @param couleurTextePlan the couleurTextePlan to set
+     */
+    public void setCouleurTextePlan(Color couleurTextePlan) {
+        this.couleurTextePlan = couleurTextePlan;
+    }
+
+    /**
+     * @return the strCouleurTextePlan
+     */
+    public String getStrCouleurTextePlan() {
+        return strCouleurTextePlan;
+    }
+
+    /**
+     * @param strCouleurTextePlan the strCouleurTextePlan to set
+     */
+    public void setStrCouleurTextePlan(String strCouleurTextePlan) {
+        this.strCouleurTextePlan = strCouleurTextePlan;
+    }
+
+    /**
+     * @return the bAfficheRadar
+     */
+    public boolean isbAfficheRadar() {
+        return bAfficheRadar;
+    }
+
+    /**
+     * @param bAfficheRadar the bAfficheRadar to set
+     */
+    public void setbAfficheRadar(boolean bAfficheRadar) {
+        this.bAfficheRadar = bAfficheRadar;
+    }
+
+    /**
+     * @return the couleurLigneRadar
+     */
+    public Color getCouleurLigneRadar() {
+        return couleurLigneRadar;
+    }
+
+    /**
+     * @param couleurLigneRadar the couleurLigneRadar to set
+     */
+    public void setCouleurLigneRadar(Color couleurLigneRadar) {
+        this.couleurLigneRadar = couleurLigneRadar;
+    }
+
+    /**
+     * @return the strCouleurLigneRadar
+     */
+    public String getStrCouleurLigneRadar() {
+        return strCouleurLigneRadar;
+    }
+
+    /**
+     * @param strCouleurLigneRadar the strCouleurLigneRadar to set
+     */
+    public void setStrCouleurLigneRadar(String strCouleurLigneRadar) {
+        this.strCouleurLigneRadar = strCouleurLigneRadar;
+    }
+
+    /**
+     * @return the couleurFondRadar
+     */
+    public Color getCouleurFondRadar() {
+        return couleurFondRadar;
+    }
+
+    /**
+     * @param couleurFondRadar the couleurFondRadar to set
+     */
+    public void setCouleurFondRadar(Color couleurFondRadar) {
+        this.couleurFondRadar = couleurFondRadar;
+    }
+
+    /**
+     * @return the strCouleurFondRadar
+     */
+    public String getStrCouleurFondRadar() {
+        return strCouleurFondRadar;
+    }
+
+    /**
+     * @param strCouleurFondRadar the strCouleurFondRadar to set
+     */
+    public void setStrCouleurFondRadar(String strCouleurFondRadar) {
+        this.strCouleurFondRadar = strCouleurFondRadar;
+    }
+
+    /**
+     * @return the tailleRadar
+     */
+    public double getTailleRadar() {
+        return tailleRadar;
+    }
+
+    /**
+     * @param tailleRadar the tailleRadar to set
+     */
+    public void setTailleRadar(double tailleRadar) {
+        this.tailleRadar = tailleRadar;
+    }
+
+    /**
+     * @return the opaciteRadar
+     */
+    public double getOpaciteRadar() {
+        return opaciteRadar;
+    }
+
+    /**
+     * @param opaciteRadar the opaciteRadar to set
+     */
+    public void setOpaciteRadar(double opaciteRadar) {
+        this.opaciteRadar = opaciteRadar;
+    }
+
+    /**
+     * @return the bAfficheMenuContextuel
+     */
+    public boolean isbAfficheMenuContextuel() {
+        return bAfficheMenuContextuel;
+    }
+
+    /**
+     * @param bAfficheMenuContextuel the bAfficheMenuContextuel to set
+     */
+    public void setbAfficheMenuContextuel(boolean bAfficheMenuContextuel) {
+        this.bAfficheMenuContextuel = bAfficheMenuContextuel;
+    }
+
+    /**
+     * @return the bAffichePrecSuivMC
+     */
+    public boolean isbAffichePrecSuivMC() {
+        return bAffichePrecSuivMC;
+    }
+
+    /**
+     * @param bAffichePrecSuivMC the bAffichePrecSuivMC to set
+     */
+    public void setbAffichePrecSuivMC(boolean bAffichePrecSuivMC) {
+        this.bAffichePrecSuivMC = bAffichePrecSuivMC;
+    }
+
+    /**
+     * @return the bAffichePlanetNormalMC
+     */
+    public boolean isbAffichePlanetNormalMC() {
+        return bAffichePlanetNormalMC;
+    }
+
+    /**
+     * @param bAffichePlanetNormalMC the bAffichePlanetNormalMC to set
+     */
+    public void setbAffichePlanetNormalMC(boolean bAffichePlanetNormalMC) {
+        this.bAffichePlanetNormalMC = bAffichePlanetNormalMC;
+    }
+
+    /**
+     * @return the bAffichePersMC1
+     */
+    public boolean isbAffichePersMC1() {
+        return bAffichePersMC1;
+    }
+
+    /**
+     * @param bAffichePersMC1 the bAffichePersMC1 to set
+     */
+    public void setbAffichePersMC1(boolean bAffichePersMC1) {
+        this.bAffichePersMC1 = bAffichePersMC1;
+    }
+
+    /**
+     * @return the strPersLib1
+     */
+    public String getStrPersLib1() {
+        return strPersLib1;
+    }
+
+    /**
+     * @param strPersLib1 the strPersLib1 to set
+     */
+    public void setStrPersLib1(String strPersLib1) {
+        this.strPersLib1 = strPersLib1;
+    }
+
+    /**
+     * @return the strPersURL1
+     */
+    public String getStrPersURL1() {
+        return strPersURL1;
+    }
+
+    /**
+     * @param strPersURL1 the strPersURL1 to set
+     */
+    public void setStrPersURL1(String strPersURL1) {
+        this.strPersURL1 = strPersURL1;
+    }
+
+    /**
+     * @return the bAffichePersMC2
+     */
+    public boolean isbAffichePersMC2() {
+        return bAffichePersMC2;
+    }
+
+    /**
+     * @param bAffichePersMC2 the bAffichePersMC2 to set
+     */
+    public void setbAffichePersMC2(boolean bAffichePersMC2) {
+        this.bAffichePersMC2 = bAffichePersMC2;
+    }
+
+    /**
+     * @return the strPersLib2
+     */
+    public String getStrPersLib2() {
+        return strPersLib2;
+    }
+
+    /**
+     * @param strPersLib2 the strPersLib2 to set
+     */
+    public void setStrPersLib2(String strPersLib2) {
+        this.strPersLib2 = strPersLib2;
+    }
+
+    /**
+     * @return the strPersURL2
+     */
+    public String getStrPersURL2() {
+        return strPersURL2;
+    }
+
+    /**
+     * @param strPersURL2 the strPersURL2 to set
+     */
+    public void setStrPersURL2(String strPersURL2) {
+        this.strPersURL2 = strPersURL2;
+    }
+
+    /**
+     * @return the bSuivantPrecedent
+     */
+    public boolean isbSuivantPrecedent() {
+        return bSuivantPrecedent;
+    }
+
+    /**
+     * @param bSuivantPrecedent the bSuivantPrecedent to set
+     */
+    public void setbSuivantPrecedent(boolean bSuivantPrecedent) {
+        this.bSuivantPrecedent = bSuivantPrecedent;
+    }
+
+    /**
+     * @return the imgBoutons
+     */
+    public Image[] getImgBoutons() {
+        return imgBoutons;
+    }
+
+    /**
+     * @param imgBoutons the imgBoutons to set
+     */
+    public void setImgBoutons(Image[] imgBoutons) {
+        this.imgBoutons = imgBoutons;
+    }
+
+    /**
+     * @return the strNomImagesBoutons
+     */
+    public String[] getStrNomImagesBoutons() {
+        return strNomImagesBoutons;
+    }
+
+    /**
+     * @param strNomImagesBoutons the strNomImagesBoutons to set
+     */
+    public void setStrNomImagesBoutons(String[] strNomImagesBoutons) {
+        this.strNomImagesBoutons = strNomImagesBoutons;
+    }
+
+    /**
+     * @return the prLisBoutons
+     */
+    public PixelReader[] getPrLisBoutons() {
+        return prLisBoutons;
+    }
+
+    /**
+     * @param prLisBoutons the prLisBoutons to set
+     */
+    public void setPrLisBoutons(PixelReader[] prLisBoutons) {
+        this.prLisBoutons = prLisBoutons;
+    }
+
+    /**
+     * @return the wiNouveauxBoutons
+     */
+    public WritableImage[] getWiNouveauxBoutons() {
+        return wiNouveauxBoutons;
+    }
+
+    /**
+     * @param wiNouveauxBoutons the wiNouveauxBoutons to set
+     */
+    public void setWiNouveauxBoutons(WritableImage[] wiNouveauxBoutons) {
+        this.wiNouveauxBoutons = wiNouveauxBoutons;
+    }
+
+    /**
+     * @return the pwNouveauxBoutons
+     */
+    public PixelWriter[] getPwNouveauxBoutons() {
+        return pwNouveauxBoutons;
+    }
+
+    /**
+     * @param pwNouveauxBoutons the pwNouveauxBoutons to set
+     */
+    public void setPwNouveauxBoutons(PixelWriter[] pwNouveauxBoutons) {
+        this.pwNouveauxBoutons = pwNouveauxBoutons;
+    }
+
+    /**
+     * @return the iNombreImagesBouton
+     */
+    public int getiNombreImagesBouton() {
+        return iNombreImagesBouton;
+    }
+
+    /**
+     * @param iNombreImagesBouton the iNombreImagesBouton to set
+     */
+    public void setiNombreImagesBouton(int iNombreImagesBouton) {
+        this.iNombreImagesBouton = iNombreImagesBouton;
+    }
+
+    /**
+     * @return the imgMasque
+     */
+    public Image getImgMasque() {
+        return imgMasque;
+    }
+
+    /**
+     * @param imgMasque the imgMasque to set
+     */
+    public void setImgMasque(Image imgMasque) {
+        this.imgMasque = imgMasque;
+    }
+
+    /**
+     * @return the prLisMasque
+     */
+    public PixelReader getPrLisMasque() {
+        return prLisMasque;
+    }
+
+    /**
+     * @param prLisMasque the prLisMasque to set
+     */
+    public void setPrLisMasque(PixelReader prLisMasque) {
+        this.prLisMasque = prLisMasque;
+    }
+
+    /**
+     * @return the wiNouveauxMasque
+     */
+    public WritableImage getWiNouveauxMasque() {
+        return wiNouveauxMasque;
+    }
+
+    /**
+     * @param wiNouveauxMasque the wiNouveauxMasque to set
+     */
+    public void setWiNouveauxMasque(WritableImage wiNouveauxMasque) {
+        this.wiNouveauxMasque = wiNouveauxMasque;
+    }
+
+    /**
+     * @return the pwNouveauxMasque
+     */
+    public PixelWriter getPwNouveauxMasque() {
+        return pwNouveauxMasque;
+    }
+
+    /**
+     * @param pwNouveauxMasque the pwNouveauxMasque to set
+     */
+    public void setPwNouveauxMasque(PixelWriter pwNouveauxMasque) {
+        this.pwNouveauxMasque = pwNouveauxMasque;
+    }
+
+    /**
+     * @return the imagesFond
+     */
+    public ImageFond[] getImagesFond() {
+        return imagesFond;
+    }
+
+    /**
+     * @param imagesFond the imagesFond to set
+     */
+    public void setImagesFond(ImageFond[] imagesFond) {
+        this.imagesFond = imagesFond;
+    }
+
+    /**
+     * @return the iNombreImagesFond
+     */
+    public int getiNombreImagesFond() {
+        return iNombreImagesFond;
+    }
+
+    /**
+     * @param iNombreImagesFond the iNombreImagesFond to set
+     */
+    public void setiNombreImagesFond(int iNombreImagesFond) {
+        this.iNombreImagesFond = iNombreImagesFond;
+    }
+
+    /**
+     * @return the strStyleHotSpots
+     */
+    public String getStrStyleHotSpots() {
+        return strStyleHotSpots;
+    }
+
+    /**
+     * @param strStyleHotSpots the strStyleHotSpots to set
+     */
+    public void setStrStyleHotSpots(String strStyleHotSpots) {
+        this.strStyleHotSpots = strStyleHotSpots;
+    }
+
+    /**
+     * @return the strStyleHotSpotImages
+     */
+    public String getStrStyleHotSpotImages() {
+        return strStyleHotSpotImages;
+    }
+
+    /**
+     * @param strStyleHotSpotImages the strStyleHotSpotImages to set
+     */
+    public void setStrStyleHotSpotImages(String strStyleHotSpotImages) {
+        this.strStyleHotSpotImages = strStyleHotSpotImages;
+    }
+
+    /**
+     * @return the zonesBarrePersonnalisee
+     */
+    public ZoneTelecommande[] getZonesBarrePersonnalisee() {
+        return zonesBarrePersonnalisee;
+    }
+
+    /**
+     * @param zonesBarrePersonnalisee the zonesBarrePersonnalisee to set
+     */
+    public void setZonesBarrePersonnalisee(ZoneTelecommande[] zonesBarrePersonnalisee) {
+        this.zonesBarrePersonnalisee = zonesBarrePersonnalisee;
     }
 
 }

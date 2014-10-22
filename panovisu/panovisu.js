@@ -46,6 +46,8 @@ function panovisu(num_pano) {
         this.image = "";
         this.anime = "false";
         this.info = "";
+        this.largeur="100%";
+        this.position="center";
     }
 
     function vignettePano() {
@@ -127,6 +129,7 @@ function panovisu(num_pano) {
             latitude = 0,
             fenPanoramique,
             texture_placeholder,
+            fichierXML = "",
             isUserInteracting = false,
             onPointerDownPointerX = 0,
             onPointerDownPointerY = 0,
@@ -161,7 +164,13 @@ function panovisu(num_pano) {
             memFOV,
             littleDisabled = false,
             normalDisbled = true,
+            masqueTout = "",
             littlePlanetView = false,
+            allerLongit,
+            allerLatit,
+            deltaLongit,
+            deltaLatit,
+            nombreIter = 0,
             suivant,
             precedent,
             langage = "fr_FR",
@@ -231,7 +240,6 @@ function panovisu(num_pano) {
             dY,
             mesh,
             container;
-    
     var pano,
             pano1,
             zeroNord,
@@ -259,6 +267,9 @@ function panovisu(num_pano) {
             marcheArretBoussole,
             marcheArretPlan,
             marcheArretReseaux,
+            marcheArretCombo,
+            marcheArretSuivPrec,
+            marcheArretHotspots,
             marcheArretVignettes,
             marcheArretTaille,
             reseauxSociaux,
@@ -334,18 +345,18 @@ function panovisu(num_pano) {
      */
 
 
-    $(document).on("webkitfullscreenchange mozfullscreenchange fullscreenchange MSFullscreenChange", function() {
+    $(document).on("webkitfullscreenchange mozfullscreenchange fullscreenchange MSFullscreenChange", function () {
         bPleinEcran = !bPleinEcran;
         changeTaille();
     });
-    $(document).on("click", ".hotSpots", function() {
+    $(document).on("click", ".hotSpots", function () {
         idHS = $(this).attr("id");
         numHS = parseInt(idHS.split("-")[1]);
         //console.log(idHS + " num " + numHS);
         switch (pointsInteret[numHS].type) {
             case "panoramique" :
                 $("#info-" + num_pano).fadeOut(1000);
-                pano1.fadeOut(1000, function() {
+                pano1.fadeOut(1000, function () {
                     chargeNouveauPano(numHS);
                 });
                 break;
@@ -357,14 +368,14 @@ function panovisu(num_pano) {
                 break;
         }
     });
-    $(document).on("click", "#container-" + num_pano, function(evenement) {
+    $(document).on("click", "#container-" + num_pano, function (evenement) {
         mouseMove = false;
     });
-    $(document).on("mousedown", "#container-" + num_pano, function(evenement) {
+    $(document).on("mousedown", "#container-" + num_pano, function (evenement) {
         if (evenement.which === 1) {
             if (bAfficheInfo)
             {
-                $("#infoPanovisu-" + num_pano).fadeOut(2000, function() {
+                $("#infoPanovisu-" + num_pano).fadeOut(2000, function () {
                     $(this).css({display: "none"});
                     bAfficheInfo = false;
                 });
@@ -391,7 +402,7 @@ function panovisu(num_pano) {
         }
         evenement.preventDefault();
     });
-    $(document).on("mousemove", "#container-" + num_pano, function(evenement) {
+    $(document).on("mousemove", "#container-" + num_pano, function (evenement) {
 
         if (isUserInteracting === true) {
 
@@ -409,7 +420,7 @@ function panovisu(num_pano) {
         }
         evenement.preventDefault();
     });
-    $(document).on("mouseup mouseleave touchend", "#container-" + num_pano, function(evenement) {
+    $(document).on("mouseup mouseleave touchend", "#container-" + num_pano, function (evenement) {
         pano.removeClass('curseurCroix');
         if (mode === 0) {
             $("#container-" + num_pano).css("cursor", "grab");
@@ -424,12 +435,11 @@ function panovisu(num_pano) {
             }
         }
         isUserInteracting = false;
-
     });
-    $(document).on("mouseover", "#panovisu-" + num_pano, function(evenement) {
+    $(document).on("mouseover", "#panovisu-" + num_pano, function (evenement) {
         clavierActif = true;
     });
-    $(document).on("mouseleave", "#panovisu-" + num_pano, function(evenement) {
+    $(document).on("mouseleave", "#panovisu-" + num_pano, function (evenement) {
         clavierActif = false;
     });
     /**
@@ -437,10 +447,10 @@ function panovisu(num_pano) {
      * 
      */
     $(document).on("mousewheel", "#container-" + num_pano,
-            function(evenement, delta) {
+            function (evenement, delta) {
                 if (bAfficheInfo)
                 {
-                    $("#infoPanovisu-" + num_pano).fadeOut(2000, function() {
+                    $("#infoPanovisu-" + num_pano).fadeOut(2000, function () {
                         $(this).css({display: "none"});
                         bAfficheInfo = false;
                     });
@@ -453,19 +463,19 @@ function panovisu(num_pano) {
      * Changement de la taille de l'ÃƒÂ©cran
      * 
      */
-    $(window).resize(function() {
+    $(window).resize(function () {
         changeTaille();
     });
     /**
      * Gestion du clavier
      */
     $(document).keydown(
-            function(evenement) {
+            function (evenement) {
 //                if (clavierActif) {
                 if (true) {
                     if (bAfficheInfo)
                     {
-                        $("#infoPanovisu-" + num_pano).fadeOut(2000, function() {
+                        $("#infoPanovisu-" + num_pano).fadeOut(2000, function () {
                             $(this).css({display: "none"});
                             bAfficheInfo = false;
                         });
@@ -598,10 +608,10 @@ function panovisu(num_pano) {
 
 
     $(document).on("mousedown", "#xmoins-" + num_pano + ",#xplus-" + num_pano + ",#ymoins-" + num_pano + ",#yplus-" + num_pano,
-            function(evenement) {
+            function (evenement) {
                 if (bAfficheInfo)
                 {
-                    $("#infoPanovisu-" + num_pano).fadeOut(2000, function() {
+                    $("#infoPanovisu-" + num_pano).fadeOut(2000, function () {
                         $(this).css({display: "none"});
                         bAfficheInfo = false;
                     });
@@ -613,8 +623,7 @@ function panovisu(num_pano) {
                 timer = requestAnimFrame(accelere);
                 evenement.preventDefault();
             });
-
-    $(document).on("mouseup mouseleave", "#xmoins-" + num_pano + ",#xplus-" + num_pano + ",#ymoins-" + num_pano + ",#yplus-" + num_pano, function(evenement) {
+    $(document).on("mouseup mouseleave", "#xmoins-" + num_pano + ",#xplus-" + num_pano + ",#ymoins-" + num_pano + ",#yplus-" + num_pano, function (evenement) {
         if (telecEnCours) {
             evenement.stopPropagation();
             telecEnCours = false;
@@ -623,10 +632,10 @@ function panovisu(num_pano) {
         }
     });
     $(document).on("mousedown", "#zoomPlus-" + num_pano,
-            function(evenement) {
+            function (evenement) {
                 if (bAfficheInfo)
                 {
-                    $("#infoPanovisu-" + num_pano).fadeOut(2000, function() {
+                    $("#infoPanovisu-" + num_pano).fadeOut(2000, function () {
                         $(this).css({display: "none"});
                         bAfficheInfo = false;
                     });
@@ -635,14 +644,14 @@ function panovisu(num_pano) {
                 timer = requestAnimFrame(zoomPlus);
                 evenement.preventDefault();
             });
-    $(document).on("mouseup mouseleave", "#zoomPlus-" + num_pano, function(evenement) {
+    $(document).on("mouseup mouseleave", "#zoomPlus-" + num_pano, function (evenement) {
         telecEnCours = false;
         evenement.preventDefault();
     });
-    $(document).on("click", "#zoomMoins-" + num_pano, function(evenement) {
+    $(document).on("click", "#zoomMoins-" + num_pano, function (evenement) {
         if (bAfficheInfo)
         {
-            $("#infoPanovisu-" + num_pano).fadeOut(2000, function() {
+            $("#infoPanovisu-" + num_pano).fadeOut(2000, function () {
                 $(this).css({display: "none"});
                 bAfficheInfo = false;
             });
@@ -652,10 +661,10 @@ function panovisu(num_pano) {
         evenement.preventDefault();
     });
     $(document).on("mousedown", "#zoomMoins-" + num_pano,
-            function(evenement) {
+            function (evenement) {
                 if (bAfficheInfo)
                 {
-                    $("#infoPanovisu-" + num_pano).fadeOut(2000, function() {
+                    $("#infoPanovisu-" + num_pano).fadeOut(2000, function () {
                         $(this).css({display: "none"});
                         bAfficheInfo = false;
                     });
@@ -664,7 +673,7 @@ function panovisu(num_pano) {
                 timer = requestAnimFrame(zoomMoins);
                 evenement.preventDefault();
             });
-    $(document).on("mouseup mouseleave", "#zoomMoins-" + num_pano, function(evenement) {
+    $(document).on("mouseup mouseleave", "#zoomMoins-" + num_pano, function (evenement) {
         telecEnCours = false;
         evenement.preventDefault();
     });
@@ -673,10 +682,10 @@ function panovisu(num_pano) {
      * 
      */
     $(document).on("click", "#xmoins-" + num_pano + ",#xplus-" + num_pano + ",#ymoins-" + num_pano + ",#yplus-" + num_pano,
-            function(evenement) {
+            function (evenement) {
                 if (bAfficheInfo)
                 {
-                    $("#infoPanovisu-" + num_pano).fadeOut(2000, function() {
+                    $("#infoPanovisu-" + num_pano).fadeOut(2000, function () {
                         $(this).css({display: "none"});
                         bAfficheInfo = false;
                     });
@@ -686,10 +695,10 @@ function panovisu(num_pano) {
                 latitude += 2 * dy;
                 affiche();
             });
-    $(document).on("click", "#zoomPlus-" + num_pano, function(evenement) {
+    $(document).on("click", "#zoomPlus-" + num_pano, function (evenement) {
         if (bAfficheInfo)
         {
-            $("#infoPanovisu-" + num_pano).fadeOut(2000, function() {
+            $("#infoPanovisu-" + num_pano).fadeOut(2000, function () {
                 $(this).css({display: "none"});
                 bAfficheInfo = false;
             });
@@ -698,22 +707,21 @@ function panovisu(num_pano) {
         zoom();
         evenement.preventDefault();
     });
-    $(document).on("click", "#souris-" + num_pano, function() {
+    $(document).on("click", "#souris-" + num_pano, function () {
         changeModeSouris();
     });
-
     function changeModeSouris() {
         mode = 1 - mode;
         if (mode === 0) {
             $("#container-" + num_pano).css("cursor", "grab");
             img = new Image();
             img.src = "./panovisu/images/" + styleBoutons + "/souris2.png";
-            img.onload = function() {
+            img.onload = function () {
                 $("#souris-" + num_pano + ">img").attr("src", this.src);
             };
             img2 = new Image();
             img2.src = "./panovisu/images/telecommande/souris2.png";
-            img2.onload = function() {
+            img2.onload = function () {
                 $("#telSouris-" + num_pano + ">img").attr("src", this.src);
             };
         }
@@ -721,12 +729,12 @@ function panovisu(num_pano) {
             $("#container-" + num_pano).css("cursor", "default");
             img = new Image();
             img.src = "./panovisu/images/" + styleBoutons + "/souris.png";
-            img.onload = function() {
+            img.onload = function () {
                 $("#souris-" + num_pano + ">img").attr("src", this.src);
             };
             img2 = new Image();
             img2.src = "./panovisu/images/telecommande/souris.png";
-            img2.onload = function() {
+            img2.onload = function () {
                 $("#telSouris-" + num_pano + ">img").attr("src", this.src);
             };
         }
@@ -735,13 +743,12 @@ function panovisu(num_pano) {
 
     }
 
-    $(document).on("click", "#pleinEcran-" + num_pano, function() {
+    $(document).on("click", "#pleinEcran-" + num_pano, function () {
         pleinEcran();
     });
-    $(document).on("click", "#auto-" + num_pano, function() {
+    $(document).on("click", "#auto-" + num_pano, function () {
         toggleAutorotation();
     });
-
     function toggleAutorotation() {
         if (autoRotation === "oui")
         {
@@ -758,14 +765,13 @@ function panovisu(num_pano) {
             demarreAutoRotation();
         }
     }
-    $(document).on("click", ".binfo", function() {
+    $(document).on("click", ".binfo", function () {
         afficheFenetreInfo();
     });
-
     function afficheFenetreInfo() {
         if (bAfficheInfo)
         {
-            $("#infoPanovisu-" + num_pano).fadeOut(1000, function() {
+            $("#infoPanovisu-" + num_pano).fadeOut(1000, function () {
                 $("#infoPanovisu-" + num_pano).css({display: "none"});
                 bAfficheInfo = false;
             });
@@ -774,7 +780,7 @@ function panovisu(num_pano) {
             if (bFenetreInfoPersonnalise) {
                 img = new Image();
                 img.src = fenetreInfoImage;
-                img.onload = function() {
+                img.onload = function () {
                     $("#infoPanovisu-" + num_pano).html("");
                     larg = Math.round(this.width * fenetreInfoTaille / 100);
                     haut = Math.round(this.height * fenetreInfoTaille / 100);
@@ -816,14 +822,14 @@ function panovisu(num_pano) {
                 $("#infoPanovisu-" + num_pano).css({top: posHaut + "px", left: posGauche + "px"});
             }
             if (bAfficheAide) {
-                $("#aidePanovisu-" + num_pano).fadeOut(1000, function() {
+                $("#aidePanovisu-" + num_pano).fadeOut(1000, function () {
                     bAfficheAide = false;
                 });
-                $("#infoPanovisu-" + num_pano).fadeIn(1000, function() {
+                $("#infoPanovisu-" + num_pano).fadeIn(1000, function () {
                     bAfficheInfo = true;
                 });
             } else {
-                $("#infoPanovisu-" + num_pano).fadeIn(1000, function() {
+                $("#infoPanovisu-" + num_pano).fadeIn(1000, function () {
                     bAfficheInfo = true;
                 });
             }
@@ -833,79 +839,59 @@ function panovisu(num_pano) {
     }
 
 
-    $(document).on("click", ".aide", function() {
+    $(document).on("click", ".aide", function () {
         afficheFenetreAide();
     });
-
     function afficheFenetreAide() {
         if (bAfficheAide)
         {
-            $("#aidePanovisu-" + num_pano).fadeOut(1000, function() {
+            $("#aidePanovisu-" + num_pano).fadeOut(1000, function () {
                 $("#aidePanovisu-" + num_pano).css({display: "none"});
                 bAfficheAide = false;
             });
         } else {
             if (bAfficheInfo) {
-                $("#infoPanovisu-" + num_pano).fadeOut(1000, function() {
+                $("#infoPanovisu-" + num_pano).fadeOut(1000, function () {
                     bAfficheInfo = false;
                 });
-                $("#aidePanovisu-" + num_pano).fadeIn(1000, function() {
+                $("#aidePanovisu-" + num_pano).fadeIn(1000, function () {
                     bAfficheAide = true;
                 });
             } else {
-                $("#aidePanovisu-" + num_pano).fadeIn(1000, function() {
+                $("#aidePanovisu-" + num_pano).fadeIn(1000, function () {
                     bAfficheAide = true;
                 });
             }
 
         }
     }
-    $(document).on("click", ".infoPanovisu", function() {
-        $(this).fadeOut(2000, function() {
+    $(document).on("click", ".infoPanovisu", function () {
+        $(this).fadeOut(2000, function () {
             $(this).css({display: "none"});
             bAfficheInfo = false;
         });
     });
-    $(document).on("click", ".aidePanovisu", function() {
-        $(this).fadeOut(2000, function() {
+    $(document).on("click", ".aidePanovisu", function () {
+        $(this).fadeOut(2000, function () {
             $(this).css({display: "none"});
             bAfficheAide = false;
         });
     });
-    $(document).on("click", ".infoPanovisu a", function(event) {
+    $(document).on("click", ".infoPanovisu a", function (event) {
         event.stopPropagation();
     });
-    $(document).on("click", ".imgVignette", function(evenement) {
+    $(document).on("click", ".imgVignette", function (evenement) {
         if (vignettesPano.length !== 0) {
             var element = $(this).attr("id");
             var numelement = parseInt(element.substring(6).split("-")[0]);
-            pano1.fadeOut(1000, function() {
-                clearInterval(timers);
-                longitude = 0;
-                latitude = 0;
-                fov = 75;
-                $("#infoBulle-" + num_pano).hide();
-                $("#infoBulle-" + num_pano).html("");
-                isReloaded = true;
-                xmlFile = vignettesPano[numelement].xml;
-                enleveHS();
-                hotSpot = new Array();
-                pointsInteret = new Array();
-                vignettesPano = new Array();
-                numHotspot = 0;
-                $("#boussole-" + num_pano).hide();
-                $("#marcheArret-" + num_pano).hide();
-                $("#divVignettes-" + num_pano).html("");
-                $("#divVignettes-" + num_pano).hide();
-                $("#titreVignettes-" + num_pano).hide();
-                $("#plan-" + num_pano).hide();
-                $("#planTitre-" + num_pano).hide();
-                chargeXML(xmlFile);
+            xmlFile = vignettesPano[numelement].xml;
+            pano1.fadeOut(1000, function () {
+                rechargePano(xmlFile);
             });
         }
 
     });
-    $(document).on("click", ".positionVignettes", function(evenement) {
+    $(document).on("click", ".positionVignettes", function (evenement) {
         if (vignettesTailleImage) {
             evenement.stopPropagation();
             element = $(this).attr("id");
@@ -943,7 +929,7 @@ function panovisu(num_pano) {
             }
             if (bAfficheInfo)
             {
-                $("#infoPanovisu-" + num_pano).fadeOut(2000, function() {
+                $("#infoPanovisu-" + num_pano).fadeOut(2000, function () {
                     $(this).css({display: "none"});
                     bAfficheInfo = false;
                 });
@@ -966,6 +952,16 @@ function panovisu(num_pano) {
             }
             if (marcheArretReseaux === "oui")
                 $("#reseauxSociaux-" + num_pano).fadeOut(500);
+            if (marcheArretCombo === "oui")
+                $("#comboMenu-" + num_pano).fadeOut(500);
+            if (marcheArretSuivPrec === "oui" && bSuivantPrecedent) {
+                $("#divPrecedent-" + num_pano).fadeOut(500);
+                $("#divSuivant-" + num_pano).fadeOut(500);
+            }
+            if (marcheArretHotspots === "oui") {
+                $(".hotSpots").fadeOut(500);
+            }
+
             if (marcheArretVignettes === "oui")
             {
                 $("#titreVignettes-" + num_pano).fadeOut(500);
@@ -999,6 +995,16 @@ function panovisu(num_pano) {
             }
             if (marcheArretReseaux === "oui")
                 $("#reseauxSociaux-" + num_pano).fadeIn(500);
+            if (marcheArretCombo === "oui")
+                $("#comboMenu-" + num_pano).fadeIn(500);
+            if (marcheArretSuivPrec === "oui" && bSuivantPrecedent) {
+                $("#divPrecedent-" + num_pano).fadeIn(500);
+                $("#divSuivant-" + num_pano).fadeIn(500);
+            }
+            if (marcheArretHotspots === "oui") {
+                $(".hotSpots").fadeIn(500);
+            }
+
             if (marcheArretVignettes === "oui")
             {
                 $("#titreVignettes-" + num_pano).fadeIn(500);
@@ -1049,6 +1055,16 @@ function panovisu(num_pano) {
             }
             if (marcheArretReseaux === "oui")
                 $("#reseauxSociaux-" + num_pano).hide();
+            if (marcheArretCombo === "oui")
+                $("#comboMenu-" + num_pano).hide();
+            if (marcheArretSuivPrec === "oui" && bSuivantPrecedent) {
+                $("#divPrecedent-" + num_pano).hide();
+                $("#divSuivant-" + num_pano).hide();
+            }
+            if (marcheArretHotspots === "oui") {
+                $(".hotSpots").hide();
+            }
+
             if (marcheArretVignettes === "oui")
             {
                 $("#titreVignettes-" + num_pano).hide();
@@ -1081,6 +1097,16 @@ function panovisu(num_pano) {
             }
             if (marcheArretReseaux === "oui")
                 $("#reseauxSociaux-" + num_pano).show();
+            if (marcheArretCombo === "oui")
+                $("#comboMenu-" + num_pano).show();
+            if (marcheArretSuivPrec === "oui" && bSuivantPrecedent) {
+                $("#divPrecedent-" + num_pano).show();
+                $("#divSuivant-" + num_pano).show();
+            }
+            if (marcheArretHotspots === "oui") {
+                $(".hotSpots").show();
+            }
+
             if (marcheArretVignettes === "oui")
             {
                 $("#titreVignettes-" + num_pano).show();
@@ -1115,58 +1141,21 @@ function panovisu(num_pano) {
 
 
 
-    $(document).on("click", ".marcheArret", function(evenement) {
+    $(document).on("click", ".marcheArret", function (evenement) {
         evenement.stopPropagation();
         toggleElements();
     });
-    $(document).on("click", "#divSuivant-" + num_pano, function() {
-        pano1.fadeOut(1000, function() {
-            clearInterval(timers);
-            longitude = 0;
-            latitude = 0;
-            fov = 75;
-            $("#infoBulle-" + num_pano).hide();
-            $("#infoBulle-" + num_pano).html("");
-            isReloaded = true;
-            enleveHS();
-            xmlFile = XMLsuivant;
-            hotSpot = new Array();
-            pointsInteret = new Array();
-            numHotspot = 0;
-            $("#boussole-" + num_pano).hide();
-            $("#marcheArret-" + num_pano).hide();
-            $("#plan-" + num_pano).hide();
-            $("#planTitre-" + num_pano).hide();
-            $("#divVignettes-" + num_pano).html("");
-            $("#divVignettes-" + num_pano).hide();
-            $("#titreVignettes-" + num_pano).hide();
-            chargeXML(xmlFile);
+    $(document).on("click", "#divSuivant-" + num_pano, function () {
+        pano1.fadeOut(1000, function () {
+            rechargePano(XMLsuivant)
         });
     });
-    $(document).on("click", "#divPrecedent-" + num_pano, function() {
-        pano1.fadeOut(1000, function() {
-            clearInterval(timers);
-            longitude = 0;
-            latitude = 0;
-            fov = 75;
-            $("#infoBulle-" + num_pano).hide();
-            $("#infoBulle-" + num_pano).html("");
-            isReloaded = true;
-            enleveHS();
-            xmlFile = XMLprecedent;
-            hotSpot = new Array();
-            pointsInteret = new Array();
-            numHotspot = 0;
-            $("#boussole-" + num_pano).hide();
-            $("#marcheArret-" + num_pano).hide();
-            $("#plan-" + num_pano).hide();
-            $("#planTitre-" + num_pano).hide();
-            $("#divVignettes-" + num_pano).html("");
-            $("#divVignettes-" + num_pano).hide();
-            $("#titreVignettes-" + num_pano).hide();
-            chargeXML(xmlFile);
+    $(document).on("click", "#divPrecedent-" + num_pano, function () {
+        pano1.fadeOut(1000, function () {
+            rechargePano(XMLprecedent)
         });
     });
+
     function planRentreGauche() {
         if (planRentre) {
             $("#planTitre-" + num_pano).css({
@@ -1204,7 +1193,7 @@ function panovisu(num_pano) {
 
 
 
-    $(document).on("click", "#planTitre-" + num_pano, function() {
+    $(document).on("click", "#planTitre-" + num_pano, function () {
         if (planPosition === "left") {
 
             if (!planRentre) {
@@ -1444,7 +1433,7 @@ function panovisu(num_pano) {
 
 
     }
-    $(document).on("click", ".titreVignettes", function() {
+    $(document).on("click", ".titreVignettes", function () {
         if (!vigRentre) {
             vigRentre = true;
         } else {
@@ -1452,32 +1441,13 @@ function panovisu(num_pano) {
         }
         vignettesRentre();
     });
-    $(document).on("click", ".planPoint", function() {
+    $(document).on("click", ".planPoint", function () {
         if (pointsPlan.length !== 0) {
             var numPlanPoint = parseInt($(this).attr("id").split("-")[1]);
             xmlFile = pointsPlan[numPlanPoint].xml;
             if (xmlFile !== "actif") {
-                pano1.fadeOut(1000, function() {
-                    clearInterval(timers);
-                    longitude = 0;
-                    latitude = 0;
-                    fov = 75;
-                    $("#infoBulle-" + num_pano).hide();
-                    $("#infoBulle-" + num_pano).html("");
-                    enleveHS();
-                    isReloaded = true;
-                    hotSpot = new Array();
-                    pointsInteret = new Array();
-                    vignettesPano = new Array();
-                    numHotspot = 0;
-                    $("#boussole-" + num_pano).hide();
-                    $("#marcheArret-" + num_pano).hide();
-                    $("#plan-" + num_pano).hide();
-                    $("#planTitre-" + num_pano).hide();
-                    $("#divVignettes-" + num_pano).html("");
-                    $("#divVignettes-" + num_pano).hide();
-                    $("#titreVignettes-" + num_pano).hide();
-                    chargeXML(xmlFile);
+                pano1.fadeOut(1000, function () {
+                    rechargePano(xmlFile);
                 });
             }
         }
@@ -1765,6 +1735,7 @@ function panovisu(num_pano) {
                 transform: "rotate(" + angleRadar + "deg)"
             });
         }
+        $('.data-title:before').css('content', "PanoVisu " + version + " - " + programmeur + "(" + anneeProgramme + ")");
     }
 //    $(document).on("click", "#divImage-" + num_pano, function() {
 //        $("#divImage-" + num_pano).animate({opacity: 0.01}, 10, function() {
@@ -1780,7 +1751,7 @@ function panovisu(num_pano) {
         posY = Math.round(haut * 0.1);
         var img = new Image();
         img.src = image;
-        img.onload = function() {
+        img.onload = function () {
             var hautImg = img.height;
             var largImg = img.width;
             ratio = largImg / hautImg;
@@ -1831,7 +1802,7 @@ function panovisu(num_pano) {
         };
     }
 
-    $(document).on("click", "#imgFerme-" + num_pano, function() {
+    $(document).on("click", "#imgFerme-" + num_pano, function () {
         $("#divHTML-" + num_pano).hide();
         $("#divImage-" + num_pano).hide();
     });
@@ -1931,7 +1902,7 @@ function panovisu(num_pano) {
         $("#barre-" + num_pano).css({height: "40px"});
         $("#button-" + num_pano).show();
 //        }
-        requestTimeout(function() {
+        requestTimeout(function () {
             w1 = $("#barre-" + num_pano).width();
             h1 = $("#barre-" + num_pano).height();
             dX1 = parseInt(dX);
@@ -2027,26 +1998,9 @@ function panovisu(num_pano) {
      * @returns {undefined}
      */
     function chargeNouveauPano(nHotspot) {
-        clearInterval(timers);
-        longitude = 0;
-        latitude = 0;
-        fov = 75;
-        $("#infoBulle-" + num_pano).hide();
-        $("#infoBulle-" + num_pano).html("");
-        isReloaded = true;
-        xmlFile = pointsInteret[nHotspot].contenu;
-        enleveHS();
-        hotSpot = new Array();
-        pointsInteret = new Array();
-        numHotspot = 0;
-        $("#boussole-" + num_pano).hide();
-        $("#marcheArret-" + num_pano).hide();
-        $("#plan-" + num_pano).hide();
-        $("#planTitre-" + num_pano).hide();
-        $("#divVignettes-" + num_pano).html("");
-        $("#divVignettes-" + num_pano).hide();
-        $("#titreVignettes-" + num_pano).hide();
-        chargeXML(xmlFile);
+        pano1.fadeOut(1000, function () {
+            rechargePano(pointsInteret[nHotspot].contenu);
+        });
     }
 
     /**
@@ -2066,7 +2020,7 @@ function panovisu(num_pano) {
 //        else {
 //            passeEnPleinEcran(element);
         //        }
-        requestTimeout(function() {
+        requestTimeout(function () {
             changeTaille();
         }, 300);
     }
@@ -2080,7 +2034,7 @@ function panovisu(num_pano) {
         if (bFenetreInfoPersonnalise) {
             img = new Image();
             img.src = fenetreInfoImage;
-            img.onload = function() {
+            img.onload = function () {
                 $("#infoPanovisu-" + num_pano).html("");
                 larg = Math.round(this.width * fenetreInfoTaille / 100);
                 haut = Math.round(this.height * fenetreInfoTaille / 100);
@@ -2133,7 +2087,7 @@ function panovisu(num_pano) {
         if (bFenetreAidePersonnalise) {
             img = new Image();
             img.src = fenetreAideImage;
-            img.onload = function() {
+            img.onload = function () {
                 $("#aidePanovisu-" + num_pano).html("");
                 larg = Math.round(this.width * fenetreAideTaille / 100);
                 haut = Math.round(this.height * fenetreAideTaille / 100);
@@ -2205,7 +2159,7 @@ function panovisu(num_pano) {
             camera.fov = fov;
             camera.updateProjectionMatrix();
             affiche();
-            requestTimeout(function() {
+            requestTimeout(function () {
                 reaffiche(lat, sensLat, FOV, sensFOV);
                 isUserInteracting = false;
             }, 5);
@@ -2225,7 +2179,7 @@ function panovisu(num_pano) {
         else {
             sensVisuel = -1;
         }
-        requestTimeout(function() {
+        requestTimeout(function () {
             reaffiche(lat, sensLat, champVisuel, sensVisuel);
         }, 5);
     }
@@ -2253,7 +2207,7 @@ function panovisu(num_pano) {
                         cursor: "pointer",
                         opacity: imagesFond[i].opacite
                     });
-                    $("#imgFond-" + i + "-" + num_pano).on("click", function() {
+                    $("#imgFond-" + i + "-" + num_pano).on("click", function () {
                         window.open(url1);
                     });
                 }
@@ -2325,7 +2279,7 @@ function panovisu(num_pano) {
             $("#reseauxSociaux-" + num_pano).css(reseauxSociauxPositionX, reseauxSociauxDX + "px");
             $("#reseauxSociaux-" + num_pano).css(reseauxSociauxPositionY, reseauxSociauxDY + "px");
             $("#reseauxSociaux-" + num_pano).css({
-                width: (reseauxSociauxTaille + 30) * 4 + "px",
+                width: (reseauxSociauxTaille + 5) * 4 - 5 + "px",
                 height: reseauxSociauxTaille + "px"
             });
             $("#reseauxSociaux-" + num_pano).css("opacity", reseauxSociauxOpacite);
@@ -2427,7 +2381,12 @@ function panovisu(num_pano) {
                 transform: "rotate(" + planNord + "deg)"
             });
             $("<img>", {id: "planImg-" + num_pano, class: "planImg", src: planImage, width: planLargeur}).appendTo("#plan-" + num_pano);
-            var positPlan = $("#info-" + num_pano).height() + 10;
+            if (afficheTitre === "oui") {
+                var positPlan = $("#info-" + num_pano).height() + 10;
+            }
+            else {
+                var positPlan = 0;
+            }
             $("#plan-" + num_pano).css("top", positPlan);
             $("<canvas>", {id: "radar-" + num_pano, class: "radar"}).appendTo("#plan-" + num_pano);
             transformTitre = $("#planTitre-" + num_pano).css("transform");
@@ -2514,20 +2473,20 @@ function panovisu(num_pano) {
         if (afficheMC) {
             if (precSuivMC) {
                 item[0] = {
-                    "suiv": {name: chainesTraduction[langage].panoSuivant, disabled: function(key, opt) {
+                    "suiv": {name: chainesTraduction[langage].panoSuivant, disabled: function (key, opt) {
                             return suivant;
                         }},
-                    "prec": {name: chainesTraduction[langage].panoPrecedent, disabled: function(key, opt) {
+                    "prec": {name: chainesTraduction[langage].panoPrecedent, disabled: function (key, opt) {
                             return precedent;
                         }}
                 };
             }
             if (planetMC) {
                 item[1] = {
-                    "little": {name: chainesTraduction[langage].petitePlanete, disabled: function(key, opt) {
+                    "little": {name: chainesTraduction[langage].petitePlanete, disabled: function (key, opt) {
                             return littleDisabled;
                         }},
-                    "normal": {name: chainesTraduction[langage].vueNoramale, disabled: function(key, opt) {
+                    "normal": {name: chainesTraduction[langage].vueNoramale, disabled: function (key, opt) {
                             return normalDisbled;
                         }}
                 };
@@ -2544,6 +2503,12 @@ function panovisu(num_pano) {
             }
         }
         item[4] = {
+            "sep3": "---------",
+            "masqueTout": {name: function (key, opt) {
+                    if (masqueTout === "")
+                        masqueTout = "Masque les éléments";
+                    return masqueTout;
+                }},
             "sep2": "---------",
             "lm360": {name: "Le Monde à  360°"},
             "apropos": {name: chainesTraduction[langage].aPropos}
@@ -2551,131 +2516,106 @@ function panovisu(num_pano) {
         items = $.extend(item[0], item[1], item[2], item[3], item[4]);
         $.contextMenu({
             selector: "#panovisu-" + num_pano,
-            className: 'data-title',
             appendTo: "#container-" + num_pano,
             zIndex: 15000,
-            position: function(opt, x, y)
-            {
-                opt.$menu.css({
-                    top: y - $("#container-" + num_pano).offset().top,
-                    left: x - $("#container-" + num_pano).offset().left
-                });
-            },
-            callback: function(key, options) {
-                switch (key) {
-                    case "lm360":
-                        window.open("http://lemondea360.fr");
-                        break;
-                    case "pers1":
-                        window.open(urlMC1);
-                        break;
-                    case "pers2":
-                        window.open(urlMC2);
-                        break;
-                    case "suiv":
-                        pano1.fadeOut(1000, function() {
-                            clearInterval(timers);
-                            longitude = 0;
-                            latitude = 0;
-                            fov = 75;
-                            $("#infoBulle-" + num_pano).hide();
-                            $("#infoBulle-" + num_pano).html("");
-                            isReloaded = true;
-                            enleveHS();
-                            xmlFile = XMLsuivant;
-                            hotSpot = new Array();
-                            pointsInteret = new Array();
-                            numHotspot = 0;
-                            $("#boussole-" + num_pano).hide();
-                            $("#marcheArret-" + num_pano).hide();
-                            $("#plan-" + num_pano).hide();
-                            $("#planTitre-" + num_pano).hide();
-                            $("#divVignettes-" + num_pano).html("");
-                            $("#divVignettes-" + num_pano).hide();
-                            $("#titreVignettes-" + num_pano).hide();
-                            chargeXML(xmlFile);
+            build: function ($trigger, e) {
+                return{
+                    className: 'data-title',
+                    position: function (opt, x, y)
+                    {
+                        opt.$menu.css({
+                            top: y - $("#container-" + num_pano).offset().top,
+                            left: x - $("#container-" + num_pano).offset().left
                         });
-                        break;
-                    case "prec":
-                        pano1.fadeOut(1000, function() {
-                            clearInterval(timers);
-                            longitude = 0;
-                            latitude = 0;
-                            fov = 75;
-                            $("#infoBulle-" + num_pano).hide();
-                            $("#infoBulle-" + num_pano).html("");
-                            isReloaded = true;
-                            enleveHS();
-                            xmlFile = XMLprecedent;
-                            hotSpot = new Array();
-                            pointsInteret = new Array();
-                            numHotspot = 0;
-                            $("#boussole-" + num_pano).hide();
-                            $("#marcheArret-" + num_pano).hide();
-                            $("#plan-" + num_pano).hide();
-                            $("#planTitre-" + num_pano).hide();
-                            $("#divVignettes-" + num_pano).html("");
-                            $("#divVignettes-" + num_pano).hide();
-                            $("#titreVignettes-" + num_pano).hide();
-                            chargeXML(xmlFile);
-                        });
-                        break;
-                    case "apropos":
-                        if (bAfficheInfo)
-                        {
-                            $("#infoPanovisu-" + num_pano).fadeOut(1000, function() {
-                                $("#infoPanovisu-" + num_pano).css({display: "none"});
-                                bAfficheInfo = false;
-                            });
-                        }
-                        else {
-                            panoInfo = chainesTraduction[langage].fenetreInfo;
-                            $("#infoPanovisu-" + num_pano).css({width: "450px", height: "190px"});
-                            $("#infoPanovisu-" + num_pano).html(panoInfo);
-                            posGauche = (pano.width() - $("#infoPanovisu-" + num_pano).width()) / 2;
-                            posHaut = (pano.height() - $("#infoPanovisu-" + num_pano).height()) / 2;
-                            $("#infoPanovisu-" + num_pano).css({top: posHaut + "px", left: posGauche + "px"});
-                            $("#infoPanovisu-" + num_pano).css({
-                                backgroundColor: "#000",
-                                border: "1px solid white",
-                                opacity: "0.8"
-                            });
-                            if (bAfficheAide) {
-                                $("#aidePanovisu-" + num_pano).fadeOut(1000, function() {
-                                    bAfficheAide = false;
+                    },
+                    callback: function (key, options) {
+                        switch (key) {
+                            case "lm360":
+                                window.open("http://lemondea360.fr");
+                                break;
+                            case "pers1":
+                                window.open(urlMC1);
+                                break;
+                            case "pers2":
+                                window.open(urlMC2);
+                                break;
+                            case "masqueTout":
+                                toggleElements();
+                                if (elementsVisibles) {
+                                    masqueTout = "Masque les éléments";
+                                }
+                                else {
+                                    masqueTout = "Affiche les éléments";
+                                }
+                                break;
+                            case "suiv":
+                                pano1.fadeOut(1000, function () {
+                                    rechargePano(XMLsuivant);
                                 });
-                                $("#infoPanovisu-" + num_pano).fadeIn(1000, function() {
-                                    bAfficheInfo = true;
+                                break;
+                            case "prec":
+                                pano1.fadeOut(1000, function () {
+                                    rechargePano(XMLprecedent);
                                 });
-                            } else {
-                                $("#infoPanovisu-" + num_pano).fadeIn(1000, function() {
-                                    bAfficheInfo = true;
-                                });
-                            }
+                                break;
+                            case "apropos":
+                                if (bAfficheInfo)
+                                {
+                                    $("#infoPanovisu-" + num_pano).fadeOut(1000, function () {
+                                        $("#infoPanovisu-" + num_pano).css({display: "none"});
+                                        bAfficheInfo = false;
+                                    });
+                                }
+                                else {
+                                    panoInfo = chainesTraduction[langage].fenetreInfo;
+                                    $("#infoPanovisu-" + num_pano).css({width: "450px", height: "190px"});
+                                    $("#infoPanovisu-" + num_pano).html(panoInfo);
+                                    posGauche = (pano.width() - $("#infoPanovisu-" + num_pano).width()) / 2;
+                                    posHaut = (pano.height() - $("#infoPanovisu-" + num_pano).height()) / 2;
+                                    $("#infoPanovisu-" + num_pano).css({top: posHaut + "px", left: posGauche + "px"});
+                                    $("#infoPanovisu-" + num_pano).css({
+                                        backgroundColor: "#000",
+                                        border: "1px solid white",
+                                        opacity: "0.8"
+                                    });
+                                    if (bAfficheAide) {
+                                        $("#aidePanovisu-" + num_pano).fadeOut(1000, function () {
+                                            bAfficheAide = false;
+                                        });
+                                        $("#infoPanovisu-" + num_pano).fadeIn(1000, function () {
+                                            bAfficheInfo = true;
+                                        });
+                                    } else {
+                                        $("#infoPanovisu-" + num_pano).fadeIn(1000, function () {
+                                            bAfficheInfo = true;
+                                        });
+                                    }
 
+                                }
+                                break;
+                            case "little":
+                                littleDisabled = true;
+                                normalDisbled = false;
+                                memFOV = fov;
+                                memMaxFOV = maxFOV;
+                                maxFOV = 170;
+                                littlePlanetView = true;
+                                gotoAffiche(-90, 145);
+                                //affiche();
+                                break;
+                            case "normal":
+                                littleDisabled = false;
+                                normalDisbled = true;
+                                maxFOV = memMaxFOV;
+                                littlePlanetView = false;
+                                gotoAffiche(0, memFOV);
+                                break;
                         }
-                        break;
-                    case "little":
-                        littleDisabled = true;
-                        normalDisbled = false;
-                        memFOV = fov;
-                        memMaxFOV = maxFOV;
-                        maxFOV = 170;
-                        littlePlanetView = true;
-                        gotoAffiche(-90, 145);
-                        //affiche();
-                        break;
-                    case "normal":
-                        littleDisabled = false;
-                        normalDisbled = true;
-                        maxFOV = memMaxFOV;
-                        littlePlanetView = false;
-                        gotoAffiche(0, memFOV);
-                        break;
-                }
-                isUserInteracting = false;
-            },
-            items: items
+                        isUserInteracting = false;
+                    },
+                    items: items
+                };
+            }
         });
         $('.data-title').attr('data-menutitle', "PanoVisu " + version + " - " + programmeur + "(" + anneeProgramme + ")");
     }
@@ -2685,7 +2625,7 @@ function panovisu(num_pano) {
         if (niveau < nombreNiveaux) {
             loader = new THREE.TextureLoader();
             var nomimage = panoImage.split("/")[0] + "/niveau" + niveau + "/" + panoImage.split("/")[1];
-            loader.load(nomimage + ".jpg", function(texture) {
+            loader.load(nomimage + ".jpg", function (texture) {
                 //                alert(nomimage);
                 if (texture.image.width <= maxTextureSize) {
                     var img = nomimage.split("/")[2];
@@ -2717,7 +2657,7 @@ function panovisu(num_pano) {
         else {
             loader = new THREE.TextureLoader();
             var nomimage = panoImage;
-            loader.load(nomimage + ".jpg", function(texture) {
+            loader.load(nomimage + ".jpg", function (texture) {
                 //                alert(nomimage);
                 if (texture.image.width <= maxTextureSize) {
                     var img = nomimage.split("/")[1];
@@ -2757,7 +2697,7 @@ function panovisu(num_pano) {
         if (multiReso === "oui") {
             loader = new THREE.TextureLoader();
             var nomimage = panoImage.split("/")[0] + "/niveau0/" + panoImage.split("/")[1];
-            loader.load(nomimage + ".jpg", function(texture) {
+            loader.load(nomimage + ".jpg", function (texture) {
                 //                alert(nomimage);
                 if (!isReloaded)
                 {
@@ -2805,7 +2745,7 @@ function panovisu(num_pano) {
                 {
                     creeHotspot(i);
                 }
-                timers = setInterval(function() {
+                timers = setInterval(function () {
                     positionHS();
                 }, 100);
                 changeTaille();
@@ -2823,7 +2763,7 @@ function panovisu(num_pano) {
         }
         else {
             loader = new THREE.TextureLoader();
-            loader.load(panoImage + ".jpg", function(texture) {
+            loader.load(panoImage + ".jpg", function (texture) {
                 if (!isReloaded)
                 {
                     if (supportWebgl())
@@ -2866,7 +2806,7 @@ function panovisu(num_pano) {
                 {
                     creeHotspot(i);
                 }
-                timers = setInterval(function() {
+                timers = setInterval(function () {
                     positionHS();
                 }, 50);
                 changeTaille();
@@ -2888,7 +2828,7 @@ function panovisu(num_pano) {
         var texture = new THREE.Texture(texture_placeholder);
         var material = new THREE.MeshBasicMaterial({map: texture, overdraw: true});
         var image = new Image();
-        image.onload = function() {
+        image.onload = function () {
             var img = path.split("/")[2].split("_")[0];
             var img2 = panoImage.split("/")[1].split("_")[0];
             if (img === img2) {
@@ -2969,7 +2909,7 @@ function panovisu(num_pano) {
         var texture = new THREE.Texture(texture_placeholder);
         var material = new THREE.MeshBasicMaterial({map: texture, overdraw: true});
         var image = new Image();
-        image.onload = function() {
+        image.onload = function () {
             texture.image = this;
             texture.needsUpdate = true;
             nbPanoCharges += 1;
@@ -3063,7 +3003,7 @@ function panovisu(num_pano) {
 
         renderer.setSize(pano.width(), pano.height());
         container.append(renderer.domElement);
-        requestTimeout(function() {
+        requestTimeout(function () {
             for (var i = 0; i < pointsInteret.length; i++)
             {
                 creeHotspot(i);
@@ -3073,7 +3013,7 @@ function panovisu(num_pano) {
             afficheBarre(pano.width(), pano.height());
             afficheInfoTitre();
             afficheMenuContextuel();
-            timers = setInterval(function() {
+            timers = setInterval(function () {
                 positionHS();
             }, 50);
             pano1.fadeIn(500);
@@ -3175,14 +3115,13 @@ function panovisu(num_pano) {
             img = new Image();
             var nomImage = "./panovisu/images/" + styleBoutons + "/fs.png";
             img.src = nomImage;
-            img.onload = function() {
+            img.onload = function () {
                 $("#pleinEcran-" + num_pano + ">img").attr("src", this.src);
             };
-
             if (bTelecommande) {
                 nomImage = "./panovisu/images/telecommande/fs.png";
                 img.src = nomImage;
-                img.onload = function() {
+                img.onload = function () {
                     $("#telFS-" + num_pano + ">img").attr("src", this.src);
                 };
             }
@@ -3210,15 +3149,14 @@ function panovisu(num_pano) {
         else {
             img = new Image();
             var nomImage = "./panovisu/images/" + styleBoutons + "/fs2.png";
-
             img.src = nomImage;
-            img.onload = function() {
+            img.onload = function () {
                 $("#pleinEcran-" + num_pano + ">img").attr("src", this.src);
             };
             if (bTelecommande) {
                 nomImage = "./panovisu/images/telecommande/fs2.png";
                 img.src = nomImage;
-                img.onload = function() {
+                img.onload = function () {
                     $("#telFS-" + num_pano + ">img").attr("src", this.src);
                 };
             }
@@ -3234,7 +3172,7 @@ function panovisu(num_pano) {
         if (renderer)
             renderer.setSize(pano.width(), pano.height());
         affiche();
-        requestTimeout(function() {
+        requestTimeout(function () {
             afficheInfo();
             afficheAide();
             afficheBarre(pano.width(), pano.height());
@@ -3466,16 +3404,17 @@ function panovisu(num_pano) {
             sDeltaLong = Math.sin((deltaLong) * cDegToRad);
             denom = (sLat * sLatitude + cLat * cLatitude * cDeltaLong);
             coef = c1 / denom;
-            if (cDeltaLong < 0 || littlePlanetView) {
-                $("#HS-" + i + "-" + num_pano).hide();
-            } else {
-                $("#HS-" + i + "-" + num_pano).show();
-                top1 = coef * (sLat * cLatitude - cLat * sLatitude * cDeltaLong)
-                        + pHeight / 2.0 - 15.0 + 'px';
-                left1 = coef * sDeltaLong * cLat
-                        + pWidth / 2.0 - 15.0 + 'px';
-                $("#HS-" + i + "-" + num_pano).css({top: top1, left: left1});
-            }
+            if (marcheArretHotspots === "non" || (marcheArretHotspots === "oui" && elementsVisibles))
+                if (cDeltaLong < 0 || littlePlanetView) {
+                    $("#HS-" + i + "-" + num_pano).hide();
+                } else {
+                    $("#HS-" + i + "-" + num_pano).show();
+                    top1 = coef * (sLat * cLatitude - cLat * sLatitude * cDeltaLong)
+                            + pHeight / 2.0 - 15.0 + 'px';
+                    left1 = coef * sDeltaLong * cLat
+                            + pWidth / 2.0 - 15.0 + 'px';
+                    $("#HS-" + i + "-" + num_pano).css({top: top1, left: left1});
+                }
 
         }
     }
@@ -3486,8 +3425,9 @@ function panovisu(num_pano) {
      * @returns {undefined}
      */
     function chargeXML(xmlFile) {
+        fichierXML = xmlFile;
         $.get(xmlFile,
-                function(d) {
+                function (d) {
                     littleDisabled = false;
                     normalDisbled = true;
                     littlePlanetView = false;
@@ -3533,7 +3473,7 @@ function panovisu(num_pano) {
                     fs = "oui";
                     autoR = "oui";
                     souris = "oui";
-                    boutons = "oui";
+                    boutons = "non";
                     autoRotation = "non";
                     positionX = "center";
                     positionY = "bottom";
@@ -3564,6 +3504,9 @@ function panovisu(num_pano) {
                     marcheArretBoussole = "non";
                     marcheArretPlan = "non";
                     marcheArretReseaux = "non";
+                    marcheArretCombo = "non";
+                    marcheArretSuivPrec = "non";
+                    marcheArretHotspots = "non";
                     marcheArretVignettes = "non";
                     reseauxSociaux = false;
                     reseauxSociauxAffiche = "non";
@@ -3784,6 +3727,10 @@ function panovisu(num_pano) {
                     marcheArretPlan = XMLMarcheArret.attr('plan') || marcheArretPlan;
                     marcheArretReseaux = XMLMarcheArret.attr('reseaux') || marcheArretReseaux;
                     marcheArretVignettes = XMLMarcheArret.attr('vignettes') || marcheArretVignettes;
+                    marcheArretCombo = XMLMarcheArret.attr('combo') || marcheArretCombo;
+                    marcheArretSuivPrec = XMLMarcheArret.attr('suivPrec') || marcheArretSuivPrec;
+                    marcheArretHotspots = XMLMarcheArret.attr('hotspots') || marcheArretHotspots;
+                    console.log("marcheArretCombo : " + marcheArretCombo);
                     //alert(boussoleImage);
                     /**
                      * Défintion pour la barre des boutons
@@ -3832,7 +3779,7 @@ function panovisu(num_pano) {
                     strLien2BarrePersonnalisee = XMLTelecommande.attr('lien2') || strLien2BarrePersonnalisee;
                     i = 0;
                     j = 0;
-                    $(d).find('zoneNavPerso').each(function() {
+                    $(d).find('zoneNavPerso').each(function () {
                         if ($(this).attr('id').substring(0, 4) === "area") {
                             var num = parseInt($(this).attr('id').substring(5, 6));
                             console.log("num : " + num);
@@ -3870,7 +3817,6 @@ function panovisu(num_pano) {
                             }
                             console.log("shape : " + zonesTelecommande[num].shape + " coords=" + zonesTelecommande[num].coords + " xmin:" + xmin + " ymin:" + ymin);
                             j++;
-
                         }
                         else {
                             boutonsTelecommande[i] = new boutonTelecommande();
@@ -3884,13 +3830,12 @@ function panovisu(num_pano) {
                             i++;
                         }
                     });
-
                     /*
                      * Hotspots
                      */
                     enleveHS();
                     i = 0;
-                    $(d).find('point').each(function() {
+                    $(d).find('point').each(function () {
                         pointsInteret[i] = new pointInteret();
                         pointsInteret[i].type = $(this).attr('type') || pointsInteret[i].type;
                         switch (pointsInteret[i].type) {
@@ -3928,7 +3873,7 @@ function panovisu(num_pano) {
                      *   vignettes des panoramiques
                      */
                     i = 0;
-                    $(d).find('imageVignette').each(function() {
+                    $(d).find('imageVignette').each(function () {
                         vignettesPano[i] = new vignettePano();
                         vignettesPano[i].xml = $(this).attr('xml');
                         vignettesPano[i].image = $(this).attr('image');
@@ -3951,7 +3896,7 @@ function panovisu(num_pano) {
                      *   comboMenu des panoramiques
                      */
                     i = 0;
-                    $(d).find('imageComboMenu').each(function() {
+                    $(d).find('imageComboMenu').each(function () {
                         comboMenuPano[i] = new cbMenuPano();
                         comboMenuPano[i].xml = $(this).attr('xml');
                         comboMenuPano[i].image = $(this).attr('image');
@@ -3960,7 +3905,6 @@ function panovisu(num_pano) {
                         comboMenuPano[i].sousTitre = $(this).attr('sousTitre') || "";
                         i++;
                     });
-
                     /*
                      * Images de fond
                      */
@@ -3968,7 +3912,7 @@ function panovisu(num_pano) {
                     nombreImageFond = 0;
                     imagesFond = new Array();
                     $(".imgFond").remove();
-                    $(d).find('imageFond').each(function() {
+                    $(d).find('imageFond').each(function () {
                         imagesFond[nombreImageFond] = new imageFond();
                         imagesFond[nombreImageFond].fichier = $(this).attr('fichier') || "";
                         imagesFond[nombreImageFond].url = $(this).attr('url') || "";
@@ -4006,7 +3950,7 @@ function panovisu(num_pano) {
                      *   vignettes des panoramiques
                      */
                     i = 0;
-                    $(d).find('pointPlan').each(function() {
+                    $(d).find('pointPlan').each(function () {
                         pointsPlan[i] = new pointPlan();
                         pointsPlan[i].xml = $(this).attr('xml');
                         pointsPlan[i].texte = $(this).attr('texte') || "";
@@ -4228,7 +4172,7 @@ function panovisu(num_pano) {
         if (bTelecommande) {
             img = new Image();
             img.src = "panovisu/images/telecommande/telecommande.png";
-            img.onload = function() {
+            img.onload = function () {
                 $("#telec-" + num_pano).css({
                     width: this.width,
                     height: this.height
@@ -4242,7 +4186,6 @@ function panovisu(num_pano) {
                     height: this.height,
                     usemap: "#telecommandeMap-" + num_pano,
                     alt: ""}).appendTo("#telec-" + num_pano);
-
                 var tailleBtnTelec = telecommandeTailleBouton;
                 var decalage = 0;
                 var zoneActive = 1;
@@ -4255,7 +4198,6 @@ function panovisu(num_pano) {
                             class: "imgTelecInfo",
                             style: "left : " + xm1 + "px;top : " + ym1 + "px;"
                         }).appendTo("#telec-" + num_pano);
-
                         $("<img>", {
                             src: "panovisu/images/telecommande/info.png",
                             border: "0",
@@ -4275,7 +4217,6 @@ function panovisu(num_pano) {
                             class: "imgTelecInfo",
                             style: "left : " + xm1 + "px;top : " + ym1 + "px;"
                         }).appendTo("#telec-" + num_pano);
-
                         $("<img>", {
                             src: "panovisu/images/telecommande/aide.png",
                             border: "0",
@@ -4356,7 +4297,6 @@ function panovisu(num_pano) {
                     id: "telecommandeMap-" + num_pano,
                     name: "telecommandeMap-" + num_pano
                 }).appendTo("#telec-" + num_pano);
-
                 for (i = 0; i < boutonsTelecommande.length; i++) {
                     switch (boutonsTelecommande[i].id) {
                         case "telUp":
@@ -4432,7 +4372,6 @@ function panovisu(num_pano) {
                     transformOrigin: trX + " " + trY,
                     transform: "scale(" + telecommandeTaille / 100.0 + "," + telecommandeTaille / 100.0 + ")"
                 });
-
                 if (telecommandePositionX !== "center") {
                     $("#telec-" + num_pano).css(telecommandePositionX, telecommandeDX + "px");
                 }
@@ -4440,134 +4379,130 @@ function panovisu(num_pano) {
                     $("#telec-" + num_pano).css("left", (pano.width() - $("#telec-" + num_pano).width()) / 2.0 + telecommandeDX + "px");
                 }
                 $("#telec-" + num_pano).css(telecommandePositionY, telecommandeDY + "px");
-                $(document).on("click", ".clicTelec,.imgTelecFS,.imgTelecInfo", function(evenement) {
-                    telecEnCours = true;
-                    if (bAfficheInfo)
-                    {
-                        $("#infoPanovisu-" + num_pano).fadeOut(2000, function() {
-                            $(this).css({display: "none"});
-                            bAfficheInfo = false;
-                        });
-                    }
-                    idClic = $(this).attr("id");
-                    console.log(idClic);
-                    sens = "";
-                    sensZoom = "";
-                    switch (idClic) {
-                        case "telUp-" + num_pano:
-                            sens = "ymoins";
-                            break;
-                        case "telDown-" + num_pano:
-                            sens = "yplus";
-                            break;
-                        case "telRight-" + num_pano:
-                            sens = "xplus";
-                            break;
-                        case "telLeft-" + num_pano:
-                            sens = "xmoins";
-                            break;
-                        case "telZoomMoins-" + num_pano:
-                            fov += 2;
-                            zoom();
-                            break;
-                        case "telZoomPlus-" + num_pano:
-                            fov -= 2;
-                            zoom();
-                            break;
-                        case "telInfo-" + num_pano:
-                            afficheFenetreInfo();
-                            break;
-                        case "telAide-" + num_pano:
-                            afficheFenetreAide();
-                            break;
-                        case "telFS-" + num_pano:
-                            pleinEcran();
-                            break;
-                        case "telSouris-" + num_pano:
-                            changeModeSouris();
-                            break;
-                        case "telRotation-" + num_pano:
-                            toggleAutorotation();
-                            break;
-                        case "telLien-1-" + num_pano:
-                            window.open(strLien1BarrePersonnalisee);
-                            break;
-                        case "telLien-2-" + num_pano:
-                            window.open(strLien2BarrePersonnalisee);
-                            break;
-                    }
-                    if (sens !== "") {
-                        dXdY(sens);
-                        longitude += 2 * dx;
-                        latitude += 2 * dy;
-                        affiche();
-                    }
-                    evenement.stopPropagation();
-                    evenement.preventDefault();
-                });
-
-                $(document).on("mousedown", ".clicTelec", function(evenement) {
-                    telecEnCours = true;
-                    isDeplacement = false;
-                    if (bAfficheInfo)
-                    {
-                        $("#infoPanovisu-" + num_pano).fadeOut(2000, function() {
-                            $(this).css({display: "none"});
-                            bAfficheInfo = false;
-                        });
-                    }
-                    idClic = $(this).attr("id");
-                    sens = "";
-                    sensZoom = "";
-                    switch (idClic) {
-                        case "telUp-" + num_pano:
-                            sens = "ymoins";
-                            break;
-                        case "telDown-" + num_pano:
-                            sens = "yplus";
-                            break;
-                        case "telRight-" + num_pano:
-                            sens = "xplus";
-                            break;
-                        case "telLeft-" + num_pano:
-                            sens = "xmoins";
-                            break;
-                        case "telZoomMoins-" + num_pano:
-                            timer = requestAnimFrame(zoomMoins);
-                            break;
-                        case "telZoomPlus-" + num_pano:
-                            timer = requestAnimFrame(zoomPlus);
-                            break;
-                    }
-                    if (sens !== "") {
-                        isDeplacement = true;
-                        dXdY(sens);
-                        ddx = dx / 5;
-                        ddy = dy / 5;
-                        timer = requestAnimFrame(accelere);
-                    }
-                    evenement.stopPropagation();
-                    evenement.preventDefault();
-                });
-
-
-                $(document).on("mouseup mouseleave", ".clicTelec", function(evenement) {
-                    if (telecEnCours) {
-                        evenement.stopPropagation();
-                        telecEnCours = false;
-                        cancelAnimationFrame(timer);
-                        if (isDeplacement) {
-                            timer = requestAnimFrame(ralenti);
-                        }
-                        evenement.preventDefault();
-                    }
-                });
-
             };
         }
     }
 
 
+    $(document).on("click", ".clicTelec,.imgTelecFS,.imgTelecInfo", function (evenement) {
+        telecEnCours = true;
+        if (bAfficheInfo)
+        {
+            $("#infoPanovisu-" + num_pano).fadeOut(2000, function () {
+                $(this).css({display: "none"});
+                bAfficheInfo = false;
+            });
+        }
+        idClic = $(this).attr("id");
+        console.log(idClic);
+        sens = "";
+        sensZoom = "";
+        switch (idClic) {
+            case "telUp-" + num_pano:
+                sens = "ymoins";
+                break;
+            case "telDown-" + num_pano:
+                sens = "yplus";
+                break;
+            case "telRight-" + num_pano:
+                sens = "xplus";
+                break;
+            case "telLeft-" + num_pano:
+                sens = "xmoins";
+                break;
+            case "telZoomMoins-" + num_pano:
+                fov += 2;
+                zoom();
+                break;
+            case "telZoomPlus-" + num_pano:
+                fov -= 2;
+                zoom();
+                break;
+            case "telInfo-" + num_pano:
+                afficheFenetreInfo();
+                break;
+            case "telAide-" + num_pano:
+                afficheFenetreAide();
+                break;
+            case "telFS-" + num_pano:
+                pleinEcran();
+                break;
+            case "telSouris-" + num_pano:
+                changeModeSouris();
+                break;
+            case "telRotation-" + num_pano:
+                toggleAutorotation();
+                break;
+            case "telLien-1-" + num_pano:
+                window.open(strLien1BarrePersonnalisee);
+                break;
+            case "telLien-2-" + num_pano:
+                window.open(strLien2BarrePersonnalisee);
+                break;
+        }
+        if (sens !== "") {
+            dXdY(sens);
+            longitude += 2 * dx;
+            latitude += 2 * dy;
+            affiche();
+        }
+        evenement.stopPropagation();
+        evenement.preventDefault();
+    });
+    $(document).on("mousedown", ".clicTelec", function (evenement) {
+        telecEnCours = true;
+        isDeplacement = false;
+        if (bAfficheInfo)
+        {
+            $("#infoPanovisu-" + num_pano).fadeOut(2000, function () {
+                $(this).css({display: "none"});
+                bAfficheInfo = false;
+            });
+        }
+        idClic = $(this).attr("id");
+        sens = "";
+        sensZoom = "";
+        switch (idClic) {
+            case "telUp-" + num_pano:
+                sens = "ymoins";
+                break;
+            case "telDown-" + num_pano:
+                sens = "yplus";
+                break;
+            case "telRight-" + num_pano:
+                sens = "xplus";
+                break;
+            case "telLeft-" + num_pano:
+                sens = "xmoins";
+                break;
+            case "telZoomMoins-" + num_pano:
+                timer = requestAnimFrame(zoomMoins);
+                break;
+            case "telZoomPlus-" + num_pano:
+                timer = requestAnimFrame(zoomPlus);
+                break;
+        }
+        if (sens !== "") {
+            isDeplacement = true;
+            dXdY(sens);
+            ddx = dx / 5;
+            ddy = dy / 5;
+            timer = requestAnimFrame(accelere);
+        }
+        evenement.stopPropagation();
+        evenement.preventDefault();
+    });
+    $(document).on("mouseup mouseleave", ".clicTelec", function (evenement) {
+        if (telecEnCours) {
+            evenement.stopPropagation();
+            telecEnCours = false;
+            cancelAnimationFrame(timer);
+            if (isDeplacement) {
+                timer = requestAnimFrame(ralenti);
+            }
+            evenement.preventDefault();
+        }
+    });
     function comboMenuAffiche() {
         $("#comboMenu-" + num_pano).html("");
         if (bComboMenuAffiche) {
@@ -4578,7 +4513,7 @@ function panovisu(num_pano) {
                 class: "cbMenu",
                 style: "left : 0px;width : 300px;"
             }).appendTo("#comboMenu-" + num_pano);
-            comboMenuPano.forEach(function(element) {
+            comboMenuPano.forEach(function (element) {
                 if (element.select === "selected") {
                     attrib = "selected";
                 }
@@ -4602,29 +4537,10 @@ function panovisu(num_pano) {
                 }
             });
             $("#cbMenu-" + num_pano).msDropdown({visibleRows: 4});
-            $("#cbMenu-" + num_pano).on('change', function() {
+            $("#cbMenu-" + num_pano).on('change', function () {
                 var nomPanoXML = this.value;
-                pano1.fadeOut(1000, function() {
-                    clearInterval(timers);
-                    longitude = 0;
-                    latitude = 0;
-                    fov = 75;
-                    $("#infoBulle-" + num_pano).hide();
-                    $("#infoBulle-" + num_pano).html("");
-                    isReloaded = true;
-                    enleveHS();
-                    hotSpot = new Array();
-                    pointsInteret = new Array();
-                    vignettesPano = new Array();
-                    numHotspot = 0;
-                    $("#boussole-" + num_pano).hide();
-                    $("#marcheArret-" + num_pano).hide();
-                    $("#divVignettes-" + num_pano).html("");
-                    $("#divVignettes-" + num_pano).hide();
-                    $("#titreVignettes-" + num_pano).hide();
-                    $("#plan-" + num_pano).hide();
-                    $("#planTitre-" + num_pano).hide();
-                    chargeXML(nomPanoXML);
+                pano1.fadeOut(1000, function () {
+                    rechargePano(nomPanoXML);
                 });
 
                 console.log(this.value); // or $(this).val()
@@ -4634,12 +4550,159 @@ function panovisu(num_pano) {
 
 
     /**
+     * 
+     * @param {type} champVision
+     * @returns {undefined}
+     */
+    this.setFOV = function (champVision) {
+        if (bAfficheInfo)
+        {
+            $("#infoPanovisu-" + num_pano).fadeOut(2000, function () {
+                $(this).css({display: "none"});
+                bAfficheInfo = false;
+            });
+        }
+        fov = champVision;
+        zoom();
+    };
+    /**
+     * 
+     * @returns {unresolved}
+     */
+    this.getFOV = function () {
+        return fov;
+    };
+    /**
+     * Permet de definir de l'exterieur la longitude
+     * 
+     * @param {type} longit
+     * @returns {undefined}
+     */
+    this.setLongitude = function (longit) {
+        if (bAfficheInfo)
+        {
+            $("#infoPanovisu-" + num_pano).fadeOut(2000, function () {
+                $(this).css({display: "none"});
+                bAfficheInfo = false;
+            });
+        }
+        longitude = longit;
+        affiche();
+    };
+    /**
+     * 
+     * @returns {unresolved}
+     */
+    this.getLongitude = function () {
+        return longitude;
+    };
+    /**
+     * 
+     * @param {type} latit
+     * @returns {undefined}
+     */
+    this.setLatitude = function (latit) {
+        if (bAfficheInfo)
+        {
+            $("#infoPanovisu-" + num_pano).fadeOut(2000, function () {
+                $(this).css({display: "none"});
+                bAfficheInfo = false;
+            });
+        }
+        latitude = latit;
+        affiche();
+    };
+    /**
+     * 
+     * @returns {unresolved}
+     */
+    this.getLatitude = function () {
+        return latitude;
+    };
+    /**
+     * 
+     * @param {type} longit
+     * @param {type} latit
+     * @returns {undefined}
+     */
+    this.setPoint = function (longit, latit) {
+        if (bAfficheInfo)
+        {
+            $("#infoPanovisu-" + num_pano).fadeOut(2000, function () {
+                $(this).css({display: "none"});
+                bAfficheInfo = false;
+            });
+        }
+        longitude = longit;
+        latitude = latit;
+        affiche();
+    };
+    this.allerAuPoint = function (longit, latit) {
+        if (bAfficheInfo)
+        {
+            $("#infoPanovisu-" + num_pano).fadeOut(2000, function () {
+                $(this).css({display: "none"});
+                bAfficheInfo = false;
+            });
+        }
+        deltaLongit = (longitude - longit) / 60.0;
+        deltaLatit = (latitude - latit) / 60.0;
+        nombreIter = 0;
+        requestAnimFrame(allerPoint);
+    };
+    function allerPoint() {
+        nombreIter++;
+        longitude -= deltaLongit;
+        latitude -= deltaLatit;
+        affiche();
+        console.log(nombreIter + " => " + longitude + ";" + latitude);
+        if (nombreIter < 60)
+            requestAnimFrame(allerPoint);
+    }
+    ;
+    /**
+     * 
+     * @param {type} xmlFile
+     * @returns {undefined}
+     */
+    this.setPano = function (xmlFile) {
+        pano1.fadeOut(1000, function () {
+            rechargePano(xmlFile);
+        });
+    };
+
+    function rechargePano(xmlFile) {
+        clearInterval(timers);
+        longitude = 0;
+        latitude = 0;
+        fov = 75;
+        $("#infoBulle-" + num_pano).hide();
+        $("#infoBulle-" + num_pano).html("");
+        isReloaded = true;
+        enleveHS();
+        hotSpot = new Array();
+        pointsInteret = new Array();
+        numHotspot = 0;
+        $("#boussole-" + num_pano).hide();
+        $("#marcheArret-" + num_pano).hide();
+        $("#plan-" + num_pano).hide();
+        $("#planTitre-" + num_pano).hide();
+        $("#divVignettes-" + num_pano).html("");
+        $("#divVignettes-" + num_pano).hide();
+        $("#titreVignettes-" + num_pano).hide();
+        chargeXML(xmlFile);
+    }
+
+    this.getXML = function () {
+        return fichierXML;
+    };
+    /**
      * intégration du panoramique 
      * 
      * @param {type} contexte
      * @returns {undefined}
      */
-    this.initialisePano = function(contexte)
+    this.initialisePano = function (contexte)
     {
         var defaut = {
             langue: "fr_FR",

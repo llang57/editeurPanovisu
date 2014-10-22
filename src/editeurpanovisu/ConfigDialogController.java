@@ -42,157 +42,157 @@ import org.controlsfx.dialog.Dialogs;
  */
 public class ConfigDialogController {
 
-    private static final ResourceBundle rb = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", EditeurPanovisu.locale);
-    private static Stage stConfig;
-    private static AnchorPane myPane;
+    private static final ResourceBundle rbLocalisation = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", EditeurPanovisu.locale);
+    private static Stage stConfigDialog;
+    private static AnchorPane apConfigDialog;
     private static Button btnAnnuler;
     private static Button btnSauvegarder;
-    private static final String[] codesLangues = EditeurPanovisu.strCodesLanguesTraduction;
-    private static final String[] langues = EditeurPanovisu.strLanguesTraduction;
-    final ToggleGroup grpStyle = new ToggleGroup();
+    private static final String[] strCodesLangues = EditeurPanovisu.strCodesLanguesTraduction;
+    private static final String[] strLangues = EditeurPanovisu.strLanguesTraduction;
+    final ToggleGroup tgStyle = new ToggleGroup();
     private static Label lblChoixStyle;
     private static RadioButton rbClair;
     private static RadioButton rbFonce;
 
-    private static ComboBox listeLangues;
-    private static TextField txtRepert;
+    private static ComboBox cbListeLangues;
+    private static TextField tfRepert;
 
     /**
      *
      * @throws IOException
      */
     public void afficheFenetre() throws IOException {
-        String chLangueConfig = EditeurPanovisu.locale.getLanguage() + "_" + EditeurPanovisu.locale.getCountry();
-        int codeL = 0;
-        for (int i = 0; i < codesLangues.length; i++) {
-            if (codesLangues[i].equals(chLangueConfig)) {
-                codeL = i;
+        String strLangueConfig = EditeurPanovisu.locale.getLanguage() + "_" + EditeurPanovisu.locale.getCountry();
+        int iCodeL = 0;
+        for (int i = 0; i < strCodesLangues.length; i++) {
+            if (strCodesLangues[i].equals(strLangueConfig)) {
+                iCodeL = i;
             }
         }
-        stConfig = new Stage(StageStyle.UTILITY);
-        stConfig.initModality(Modality.APPLICATION_MODAL);
-        stConfig.setResizable(false);
-        myPane = new AnchorPane();
-        myPane.setPrefWidth(600);
-        myPane.setPrefHeight(400);
-        Scene scene2 = new Scene(myPane);
-        stConfig.setScene(scene2);
-        VBox fenetre = new VBox();
-        Pane VBConfig = new Pane();
-        VBConfig.setPrefSize(600, 360);
-        Label lblType = new Label(rb.getString("config.langue"));
+        stConfigDialog = new Stage(StageStyle.UTILITY);
+        stConfigDialog.initModality(Modality.APPLICATION_MODAL);
+        stConfigDialog.setResizable(false);
+        apConfigDialog = new AnchorPane();
+        apConfigDialog.setPrefWidth(600);
+        apConfigDialog.setPrefHeight(400);
+        Scene sceneConfigDialog = new Scene(apConfigDialog);
+        stConfigDialog.setScene(sceneConfigDialog);
+        VBox vbFenetre = new VBox();
+        Pane paneConfig = new Pane();
+        paneConfig.setPrefSize(600, 360);
+        Label lblType = new Label(rbLocalisation.getString("config.langue"));
         lblType.setLayoutX(45);
         lblType.setLayoutY(25);
-        listeLangues = new ComboBox();
-        listeLangues.setLayoutX(190);
-        listeLangues.setLayoutY(25);
-        for (int i = 0; i < codesLangues.length; i++) {
-            listeLangues.getItems().add(langues[i] + " : " + codesLangues[i]);
+        cbListeLangues = new ComboBox();
+        cbListeLangues.setLayoutX(190);
+        cbListeLangues.setLayoutY(25);
+        for (int i = 0; i < strCodesLangues.length; i++) {
+            cbListeLangues.getItems().add(strLangues[i] + " : " + strCodesLangues[i]);
         }
-        listeLangues.setValue(langues[codeL] + " : " + codesLangues[codeL]);
-        Label lblRepert = new Label(rb.getString("config.choixRepert"));
+        cbListeLangues.setValue(strLangues[iCodeL] + " : " + strCodesLangues[iCodeL]);
+        Label lblRepert = new Label(rbLocalisation.getString("config.choixRepert"));
         lblRepert.setPrefWidth(320);
         lblRepert.setLayoutX(45);
         lblRepert.setLayoutY(70);
-        txtRepert = new TextField(EditeurPanovisu.strRepertoireProjet);
-        txtRepert.setLayoutX(190);
-        txtRepert.setLayoutY(110);
-        txtRepert.setPrefWidth(300);
+        tfRepert = new TextField(EditeurPanovisu.strRepertoireProjet);
+        tfRepert.setLayoutX(190);
+        tfRepert.setLayoutY(110);
+        tfRepert.setPrefWidth(300);
         Button btnChoixRepert = new Button("...");
         btnChoixRepert.setLayoutX(490);
         btnChoixRepert.setLayoutY(110);
-        lblChoixStyle = new Label(rb.getString("config.choixStyle"));
+        lblChoixStyle = new Label(rbLocalisation.getString("config.choixStyle"));
         lblChoixStyle.setLayoutX(45);
         lblChoixStyle.setLayoutY(150);
-        rbClair = new RadioButton(rb.getString("config.styleClair"));
-        rbFonce = new RadioButton(rb.getString("config.styleFonce"));
+        rbClair = new RadioButton(rbLocalisation.getString("config.styleClair"));
+        rbFonce = new RadioButton(rbLocalisation.getString("config.styleFonce"));
         rbClair.setLayoutX(190);
         rbClair.setLayoutY(180);
         rbFonce.setLayoutX(190);
         rbFonce.setLayoutY(200);
-        rbClair.setToggleGroup(grpStyle);
+        rbClair.setToggleGroup(tgStyle);
         rbClair.setUserData("clair");
         rbFonce.setUserData("fonce");
-        rbFonce.setToggleGroup(grpStyle);
+        rbFonce.setToggleGroup(tgStyle);
         if (strStyleCSS.equals("clair")) {
             rbClair.setSelected(true);
         } else {
             rbFonce.setSelected(true);
         }
-        grpStyle.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) -> {
-            if (grpStyle.getSelectedToggle() != null) {
-                setUserAgentStylesheet("file:css/" + grpStyle.getSelectedToggle().getUserData().toString() + ".css");
+        tgStyle.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) -> {
+            if (tgStyle.getSelectedToggle() != null) {
+                setUserAgentStylesheet("file:css/" + tgStyle.getSelectedToggle().getUserData().toString() + ".css");
 
             }
         });
 
-        VBConfig.getChildren().addAll(
-                lblType, listeLangues,
-                lblRepert, txtRepert, btnChoixRepert,
+        paneConfig.getChildren().addAll(
+                lblType, cbListeLangues,
+                lblRepert, tfRepert, btnChoixRepert,
                 lblChoixStyle, rbClair, rbFonce
         );
         btnChoixRepert.setOnAction((ActionEvent e) -> {
             DirectoryChooser repertChoix = new DirectoryChooser();
-            File repert = new File(EditeurPanovisu.strRepertoireProjet);
-            repertChoix.setInitialDirectory(repert);
+            File fileRepert = new File(EditeurPanovisu.strRepertoireProjet);
+            repertChoix.setInitialDirectory(fileRepert);
             File repertInitial = repertChoix.showDialog(null);
-            txtRepert.setText(repertInitial.getAbsolutePath());
+            tfRepert.setText(repertInitial.getAbsolutePath());
         });
-        Pane Pboutons = new Pane();
-        myPane.getChildren().add(fenetre);
-        fenetre.getChildren().add(VBConfig);
-        btnAnnuler = new Button(rb.getString("config.annuler"));
-        btnSauvegarder = new Button(rb.getString("config.sauvegarder"));
+        Pane paneBoutons = new Pane();
+        apConfigDialog.getChildren().add(vbFenetre);
+        vbFenetre.getChildren().add(paneConfig);
+        btnAnnuler = new Button(rbLocalisation.getString("config.annuler"));
+        btnSauvegarder = new Button(rbLocalisation.getString("config.sauvegarder"));
         btnAnnuler.setLayoutY(10);
         btnSauvegarder.setLayoutY(10);
         btnSauvegarder.setPrefWidth(200);
         btnAnnuler.setPrefWidth(100);
-        Pboutons.getChildren().addAll(btnAnnuler, btnSauvegarder);
-        stConfig.show();
+        paneBoutons.getChildren().addAll(btnAnnuler, btnSauvegarder);
+        stConfigDialog.show();
 //        btnSauvegarder.setAlignment(Pos.CENTER);
 //        btnAnnuler.setAlignment(Pos.CENTER);
         
-        btnSauvegarder.setLayoutX(VBConfig.getPrefWidth() - btnSauvegarder.getPrefWidth() - 20);
-        btnAnnuler.setLayoutX(VBConfig.getPrefWidth() - btnSauvegarder.getPrefWidth() - btnAnnuler.getPrefWidth() - 40);
+        btnSauvegarder.setLayoutX(paneConfig.getPrefWidth() - btnSauvegarder.getPrefWidth() - 20);
+        btnAnnuler.setLayoutX(paneConfig.getPrefWidth() - btnSauvegarder.getPrefWidth() - btnAnnuler.getPrefWidth() - 40);
 
-        fenetre.getChildren().add(Pboutons);
+        vbFenetre.getChildren().add(paneBoutons);
         btnAnnuler.setOnAction((ActionEvent e) -> {
-            stConfig.hide();
+            stConfigDialog.hide();
             setUserAgentStylesheet("file:css/" + strStyleCSS + ".css");
         });
         btnSauvegarder.setOnAction((ActionEvent e) -> {
-            strStyleCSS = grpStyle.getSelectedToggle().getUserData().toString();
+            strStyleCSS = tgStyle.getSelectedToggle().getUserData().toString();
             Dialogs.create()
                     .style(DialogStyle.CROSS_PLATFORM_DARK)
                     .owner(null)
-                    .title(rb.getString("config.titreDialogue"))
-                    .masthead(rb.getString("config.masthead"))
-                    .message(rb.getString("config.message"))
+                    .title(rbLocalisation.getString("config.titreDialogue"))
+                    .masthead(rbLocalisation.getString("config.masthead"))
+                    .message(rbLocalisation.getString("config.message"))
                     .showWarning();
-            String contenuFichier = "langue=" + listeLangues.getValue().toString().split("_")[0].split(" : ")[1] + "\n";
-            contenuFichier += "pays=" + listeLangues.getValue().toString().split("_")[1] + "\n";
-            contenuFichier += "repert=" + txtRepert.getText() + "\n";
-            contenuFichier += "style=" + grpStyle.getSelectedToggle().getUserData().toString() + "\n";
+            String contenuFichier = "langue=" + cbListeLangues.getValue().toString().split("_")[0].split(" : ")[1] + "\n";
+            contenuFichier += "pays=" + cbListeLangues.getValue().toString().split("_")[1] + "\n";
+            contenuFichier += "repert=" + tfRepert.getText() + "\n";
+            contenuFichier += "style=" + tgStyle.getSelectedToggle().getUserData().toString() + "\n";
             File fichConfig = new File(EditeurPanovisu.fileRepertConfig.getAbsolutePath() + File.separator + "panovisu.cfg");
             fichConfig.setWritable(true);
-            FileWriter fw = null;
+            FileWriter fwFichierConfig = null;
             try {
-                fw = new FileWriter(fichConfig);
+                fwFichierConfig = new FileWriter(fichConfig);
             } catch (IOException ex) {
                 Logger.getLogger(ConfigDialogController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            BufferedWriter bw = new BufferedWriter(fw);
+            BufferedWriter bwFichierConfig = new BufferedWriter(fwFichierConfig);
             try {
-                bw.write(contenuFichier);
+                bwFichierConfig.write(contenuFichier);
             } catch (IOException ex) {
                 Logger.getLogger(ConfigDialogController.class.getName()).log(Level.SEVERE, null, ex);
             }
             try {
-                bw.close();
+                bwFichierConfig.close();
             } catch (IOException ex) {
                 Logger.getLogger(ConfigDialogController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            stConfig.hide();
+            stConfigDialog.hide();
         });
     }
 

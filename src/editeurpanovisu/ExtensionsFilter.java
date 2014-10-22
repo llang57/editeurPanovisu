@@ -10,47 +10,47 @@ import java.io.FileFilter;
  */
 public class ExtensionsFilter implements FileFilter 
 {
-    private char[][] extensions;
+    private char[][] chExtensions;
 /**
  * 
- * @param extensions 
+ * @param strExtensions 
  */
-    ExtensionsFilter(String[] extensions)
+    ExtensionsFilter(String[] strExtensions)
     {
-        int length = extensions.length;
-        this.extensions = new char[length][];
-        for (String s : extensions)
+        int length = strExtensions.length;
+        this.chExtensions = new char[length][];
+        for (String s : strExtensions)
         {
-            this.extensions[--length] = s.toCharArray();
+            this.chExtensions[--length] = s.toCharArray();
         }
     }
 /**
  * 
- * @param file
+ * @param fileCharge
  * @return boolean
  */
     @Override
-    public boolean accept(File file)
+    public boolean accept(File fileCharge)
     {
-        char[] path = file.getPath().toCharArray();
-        for (char[] extension : extensions)
+        char[] chPath = fileCharge.getPath().toCharArray();
+        for (char[] chExtension : chExtensions)
         {
-            if (extension.length > path.length)
+            if (chExtension.length > chPath.length)
             {
                 continue;
             }
-            int pStart = path.length - 1;
-            int eStart = extension.length - 1;
-            boolean success = true;
-            for (int i = 0; i <= eStart; i++)
+            int iPStart = chPath.length - 1;
+            int iEStart = chExtension.length - 1;
+            boolean bSucces = true;
+            for (int i = 0; i <= iEStart; i++)
             {
-                if ((path[pStart - i] | 0x20) != (extension[eStart - i] | 0x20))
+                if ((chPath[iPStart - i] | 0x20) != (chExtension[iEStart - i] | 0x20))
                 {
-                    success = false;
+                    bSucces = false;
                     break;
                 }
             }
-            if (success)
+            if (bSucces)
                 return true;
         }
         return false;

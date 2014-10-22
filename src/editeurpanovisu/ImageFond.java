@@ -14,27 +14,27 @@ import javafx.scene.image.Image;
  */
 public class ImageFond {
     
-    private String fichierImage;
+    private String strFichierImage;
     private Image imgFond;
-    private String posY="bottom",posX="right";
+    private String strPosY="bottom",strPosX="right";
     private double offsetX=0,offsetY=0;
     private int tailleX,tailleY;
     private double opacite=0.8;
-    private String url="",infobulle="";
-    private boolean masquable=true;
+    private String strUrl="",strInfobulle="";
+    private boolean bMasquable=true;
 
     /**
      * @return the fichierImage
      */
-    public String getFichierImage() {
-        return fichierImage;
+    public String getStrFichierImage() {
+        return strFichierImage;
     }
 
     /**
-     * @param fichierImage the fichierImage to set
+     * @param strFichierImage the fichierImage to set
      */
-    public void setFichierImage(String fichierImage) {
-        this.fichierImage = fichierImage;
+    public void setStrFichierImage(String strFichierImage) {
+        this.strFichierImage = strFichierImage;
     }
 
     /**
@@ -54,29 +54,29 @@ public class ImageFond {
     /**
      * @return the posX
      */
-    public String getPosX() {
-        return posX;
+    public String getStrPosX() {
+        return strPosX;
     }
 
     /**
-     * @param posX the posX to set
+     * @param strPosX the posX to set
      */
-    public void setPosX(String posX) {
-        this.posX = posX;
+    public void setStrPosX(String strPosX) {
+        this.strPosX = strPosX;
     }
 
     /**
      * @return the posY
      */
-    public String getPosY() {
-        return posY;
+    public String getStrPosY() {
+        return strPosY;
     }
 
     /**
-     * @param posY the posY to set
+     * @param strPosY the posY to set
      */
-    public void setPosY(String posY) {
-        this.posY = posY;
+    public void setStrPosY(String strPosY) {
+        this.strPosY = strPosY;
     }
 
     /**
@@ -110,15 +110,15 @@ public class ImageFond {
     /**
      * @return the url
      */
-    public String getUrl() {
-        return url;
+    public String getStrUrl() {
+        return strUrl;
     }
 
     /**
-     * @param url the url to set
+     * @param strUrl the url to set
      */
-    public void setUrl(String url) {
-        this.url = url;
+    public void setStrUrl(String strUrl) {
+        this.strUrl = strUrl;
     }
 
     /**
@@ -167,28 +167,28 @@ public class ImageFond {
      * @return the masquable
      */
     public boolean isMasquable() {
-        return masquable;
+        return bMasquable;
     }
 
     /**
      * @param masquable the masquable to set
      */
     public void setMasquable(boolean masquable) {
-        this.masquable = masquable;
+        this.bMasquable = masquable;
     }
 
     /**
      * @return the infobulle
      */
-    public String getInfobulle() {
-        return infobulle;
+    public String getStrInfobulle() {
+        return strInfobulle;
     }
 
     /**
-     * @param infobulle the infobulle to set
+     * @param strInfobulle the infobulle to set
      */
-    public void setInfobulle(String infobulle) {
-        this.infobulle = infobulle;
+    public void setStrInfobulle(String strInfobulle) {
+        this.strInfobulle = strInfobulle;
     }
 
     

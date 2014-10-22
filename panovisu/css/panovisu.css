@@ -209,6 +209,9 @@ and open the template in the editor.
     -webkit-filter: grayscale(0.3);
     transition: 0.5s;    
 }
+.RS:last-child{
+    padding-right: 0;
+}
 
 .RS:hover{
     filter: none;
@@ -220,6 +223,7 @@ and open the template in the editor.
     position: absolute;
     z-index: 501;
     opacity: 0.8;
+    cursor: pointer;
 }
 .marcheArret:hover{
     opacity: 1.0;
@@ -326,7 +330,7 @@ and open the template in the editor.
 }
 
 .data-title:before {
-    content: attr(data-menutitle);
+    content:  "panoVisu (c) Laurent Lang 2014";
     display: block;
     position: absolute;
     top: 0;
