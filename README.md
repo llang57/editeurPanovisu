@@ -1,13 +1,14 @@
 editeurPanovisu
 ===============
 
-**Nouveau Version 1.1 disponible**
-
+Nouveau Version 1.1 disponible
+------------------------------
 la version 1.1 de panoVisu est disponible au téléchargement.
 
 Elle ajoute entre autre la possibilité de personnaliser les écran d'accueil et d'aide des visites. L'écran d'accueil peut de plus contenir un lien vers la page de votre choix.
 
-**panoVisu Kézako ?**
+panoVisu Kézako ?
+-----------------
 
 panoVisu est un visualiseur de panoramiques et de visites virtuelles construit sur une architecture HTML5/CSS3/javaScript. Il utilise la technologie webGL pour visualiser les panoramiques/visites virtuelles. Afin de simplifier son écriture, j'ai utilisé la bibliothèque three.js. Le visualiseur utilise des fichiers de description écrits en xml pour modéliser les éléments de la scène. Il permet l'ajout de nombreux éléments :
 
@@ -34,7 +35,8 @@ Ces deux programmes sont en développement continu, donc n'hésitez pas à me fa
 
 Il est donc possible aujourd'hui de réaliser des visites virtuelles (montages des vues avec Hugin et création des visites avec panoVisu) à l'aide de logiciels libres et gratuits.
 
-**Compatibilité**
+Compatibilité
+-------------
 
 J'ai fait le choix de développer ce visualiseur en utilisant le langage HTML5 plutôt que Flash pour plusieurs raisons. La première est que Flash est un langage lourd et en perte de vitesse nécessitant l'installation d'un plugin sur le navigateur, de plus il ne fonctionne pas sur toutes les plateformes. La seconde étant que je n'avais ni le temps ni les compétences pour le faire.
 
