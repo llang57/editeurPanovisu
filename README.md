@@ -1,13 +1,13 @@
 editeurPanovisu
 ===============
 
-Nouveau Version 1.1 disponible
+**Nouveau Version 1.1 disponible**
 
 la version 1.1 de panoVisu est disponible au téléchargement.
 
 Elle ajoute entre autre la possibilité de personnaliser les écran d'accueil et d'aide des visites. L'écran d'accueil peut de plus contenir un lien vers la page de votre choix.
 
-panoVisu Kézako ?
+**panoVisu Kézako ?**
 
 panoVisu est un visualiseur de panoramiques et de visites virtuelles construit sur une architecture HTML5/CSS3/javaScript. Il utilise la technologie webGL pour visualiser les panoramiques/visites virtuelles. Afin de simplifier son écriture, j'ai utilisé la bibliothèque three.js. Le visualiseur utilise des fichiers de description écrits en xml pour modéliser les éléments de la scène. Il permet l'ajout de nombreux éléments :
 
@@ -21,18 +21,20 @@ panoVisu est un visualiseur de panoramiques et de visites virtuelles construit s
     menu contextuel paramétrable
     ...
 
+Vous pouvez visualiser des visites réalisées avec editeurPanovisu [Voir les visites](http://panovisu.fr/exemples).
 
 J'ai débuté le développement de panoVisu en mars 2014, parce que j'aime comprendre ce que j'utilise. J'ai donc d'abord construit un visualiseur en utilisant uniquement le CSS3, puis le canvas 3D et enfin webGL.
 
-J'ai voulu panoVisu entièrement libre et gratuit, ses sources sont disponibles sur la plateforme GitHub : https://github.com/llang57/editeurPanovisu.
+J'ai voulu panoVisu entièrement libre et gratuit, ses sources sont disponibles sur la plateforme [GitHub](https://github.com/llang57/editeurPanovisu).
 
 Une fois le développement du visualiseur commencé, je me suis dit que pour simplifier l'écriture des visites virtuelles il serait bien d'avoir un éditeur. Celui ci est aussi entièrement libre et gratuit. Il ne saurait rivaliser avec des produits professionnels tel panoTour, mais permettra aux amateurs (dont je fais partie) de pouvoir réaliser des visites virtuelles de qualité à moindre coût. Afin d'assurer un maximum de portabilité à l' éditeur, je l'ai écrit en java; il est donc utilisable (une fois java installé sur votre machine) sur windows, mac-os ou linux.
 La version minimale de java devant être installée est la 8u20 (disponible ici puis choisir celle correspondant à votre système d'exploitation). Je suivrais l' évolution de java et vous préviendrais des mises à jour à effectuer.
 
-Ces deux programmes sont en développement continu, donc n'hésitez pas à me faire remonter vos remarques et desiderata en utilisant le système de tickets mis en place : Créer un ticket. J'essayerais de faire évoluer les programmes le plus rapidement possible (ceci étant fait sur mon temps libre). Vous pouvez également apporter votre pierre à l' édifice en participant au développement sur la plateforme GitHub : https://github.com/llang57/editeurPanovisu..
+Ces deux programmes sont en développement continu, donc n'hésitez pas à me faire remonter vos remarques et desiderata en utilisant le système de tickets mis en place : [Créer un ticket](http://panovisu.fr/hesk/). J'essayerais de faire évoluer les programmes le plus rapidement possible (ceci étant fait sur mon temps libre). Vous pouvez également apporter votre pierre à l' édifice en participant au développement sur la plateforme [GitHub](https://github.com/llang57/editeurPanovisu).
 
 Il est donc possible aujourd'hui de réaliser des visites virtuelles (montages des vues avec Hugin et création des visites avec panoVisu) à l'aide de logiciels libres et gratuits.
-Compatibilité
+
+**Compatibilité**
 
 J'ai fait le choix de développer ce visualiseur en utilisant le langage HTML5 plutôt que Flash pour plusieurs raisons. La première est que Flash est un langage lourd et en perte de vitesse nécessitant l'installation d'un plugin sur le navigateur, de plus il ne fonctionne pas sur toutes les plateformes. La seconde étant que je n'avais ni le temps ni les compétences pour le faire.
 
@@ -46,4 +48,4 @@ Le support de l'accélération matérielle par webGL est lui également actif su
     Chrome 9 et suivants
 
 
-Laurent LANG
+**Laurent LANG**
