@@ -5,20 +5,23 @@
  */
 package editeurpanovisu;
 
+import static editeurpanovisu.EditeurPanovisu.getPanoramiquesProjet;
+import static editeurpanovisu.EditeurPanovisu.getiPanoActuel;
 import java.awt.Desktop;
-import java.io.BufferedWriter;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -43,27 +46,41 @@ import javafx.stage.StageStyle;
 
 public class EditeurHTML {
 
-    /**
-     * @return the strTexteHTML
-     */
-    public static String getStrTexteHTML() {
-        return strTexteHTML;
+    protected transient PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
+
+    public void addPropertyChangeListener(String propertyName, PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(propertyName, listener);
     }
 
-    /**
-     * @param aStrTexteHTML the strTexteHTML to set
-     */
-    public static void setStrTexteHTML(String aStrTexteHTML) {
-        strTexteHTML = aStrTexteHTML;
+    public void removePropertyChangeListener(String propertyName, PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(propertyName, listener);
     }
+
+    public void firePropertyChange(String propertyName, BigDecimal oldValue, BigDecimal newValue) {
+        if (oldValue != null && newValue != null && oldValue.compareTo(newValue) == 0) {
+            return;
+        }
+        changeSupport.firePropertyChange(new PropertyChangeEvent(this, propertyName,
+                oldValue, newValue));
+
+    }
+    
+    
+    private ResourceBundle rbLocalisation = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", EditeurPanovisu.getLocale());
+    private boolean bValide = false;
+    private boolean bAnnule = false;
+
+    private HotspotHTML hsHTML;
+    private ToggleGroup tgPositionHTML;
+    private ToggleButton tgbGauche;
+    private ToggleButton tgbCentre;
+    private ToggleButton tgbDroite;
+    private Slider slOpacite = new Slider(0, 1, 0.7);
+
     private final File fileRep = new File("");
     private final String strAppPath = fileRep.getAbsolutePath();
     private String strNomRepertHTML = strAppPath + "/pagesHTML";
     private Stage stEditeurHTML;
-    private boolean bLienExterieur = true;
-    private static String strTexteHTML = "";
-    private int iNombreImages = 0;
-    private ImageEditeurHTML[] imagesEditeur = new ImageEditeurHTML[50];
     private String strImages;
     private HTMLEditor heEditeurHTML;
     private Node nodeBarreIconesSuperieure;
@@ -80,6 +97,7 @@ public class EditeurHTML {
     private AnchorPane apPrincipale;
     private String strNomFichierImage;
     private boolean bDejaSauve = true;
+    private ColorPicker cpCouleurHTML;
 
     private final String jsCodeInsertHtml
             = "function insertHtmlAtCursor(html) {\n"
@@ -203,45 +221,50 @@ public class EditeurHTML {
     }
 
     public void affiche(Number largeur, Number hauteur) {
+        double diffHauteur = 260;
         bDejaSauve = true;
         int iLargeur = (int) largeur;
         int iHauteur = (int) hauteur;
-        setStEditeurHTML(new Stage(StageStyle.UTILITY));
-        getStEditeurHTML().initModality(Modality.APPLICATION_MODAL);
-        getStEditeurHTML().setResizable(true);
+        stEditeurHTML = new Stage(StageStyle.UTILITY);
+        stEditeurHTML.initModality(Modality.APPLICATION_MODAL);
+        stEditeurHTML.setResizable(true);
         heEditeurHTML = new HTMLEditor();
-        heEditeurHTML.setHtmlText(EditeurHTML.getStrTexteHTML());
-        heEditeurHTML.setHtmlText("<html>\n"
-                + "    <head>\n"
-                + "        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n"
-                + "        <style>\n"
-                + "            *{\n"
-                + "                font-family: Verdana,Arial,sans-serif;                \n"
-                + "            }           \n"
-                + "            h1,h2,h3,h4,h5{\n"
-                + "                font-size : 1em;\n"
-                + "                font-weight: bold;                \n"
-                + "                color : #444;\n "
-                + "            }\n"
-                + "            h1{\n"
-                + "                font-size: 1.3em;\n"
-                + "            }\n"
-                + "            h2{\n"
-                + "                font-size: 1.2em;\n"
-                + "            }\n"
-                + "            h3{\n"
-                + "                font-size: 1.1em;\n"
-                + "            }\n"
-                + "\n"
-                + "        </style>\n"
-                + "    </head>\n"
-                + "    <body>\n"
-                + "    </body>\n"
-                + "</html>\n"
-                + "");
+        if (getHsHTML().getStrTexteHTML().equals("")) {
+            heEditeurHTML.setHtmlText("<html>\n"
+                    + "    <head>\n"
+                    + "        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n"
+                    + "        <style>\n"
+                    + "            *{\n"
+                    + "                font-family: Verdana,Arial,sans-serif;                \n"
+                    + "            }           \n"
+                    + "            h1,h2,h3,h4,h5{\n"
+                    + "                font-size : 1em;\n"
+                    + "                font-weight: bold;                \n"
+                    + "                color : #444;\n "
+                    + "            }\n"
+                    + "            h1{\n"
+                    + "                font-size: 1.3em;\n"
+                    + "            }\n"
+                    + "            h2{\n"
+                    + "                font-size: 1.2em;\n"
+                    + "            }\n"
+                    + "            h3{\n"
+                    + "                font-size: 1.1em;\n"
+                    + "            }\n"
+                    + "\n"
+                    + "        </style>\n"
+                    + "    </head>\n"
+                    + "    <body>\n"
+                    + "    </body>\n"
+                    + "</html>\n"
+                    + "");
+        } else {
+            heEditeurHTML.setHtmlText(getHsHTML().getStrTexteHTML());
+        }
         nodeBarreIconesSuperieure = heEditeurHTML.lookup(".bottom-toolbar");
         nodeEditeurHTML = heEditeurHTML.lookup(".web-view");
-        strImages = getStrAppPath() + File.separator + "images";
+        strImages = strAppPath + File.separator + "images";
+
         apDialog = new AnchorPane();
         apDialog.setVisible(false);
         apEditeur = new AnchorPane();
@@ -249,43 +272,116 @@ public class EditeurHTML {
         apPrincipale.setPrefSize(iLargeur, iHauteur);
         apPrincipale.getChildren().add(apDialog);
         apEditeur.setPrefSize(iLargeur, iHauteur);
-        apEditeur.getChildren().add(heEditeurHTML);
+
         Scene scPrincipale = new Scene(apPrincipale, iLargeur, iHauteur, null);
         scPrincipale.setFill(Color.gray(0.2));
-        getStEditeurHTML().setScene(scPrincipale);
+        stEditeurHTML.setScene(scPrincipale);
         heEditeurHTML.setFocusTraversable(true);
         heEditeurHTML.requestFocus();
-        heEditeurHTML.setPrefWidth(iLargeur - 30);
         heEditeurHTML.setLayoutX(10);
-        heEditeurHTML.setPrefHeight(iHauteur - 130);
-        heEditeurHTML.setLayoutY(70);
-        heEditeurHTML.setDisable(true);
+        heEditeurHTML.setLayoutY(10);
+        heEditeurHTML.setPrefHeight(iHauteur - diffHauteur);
+        heEditeurHTML.setMinHeight(iHauteur - diffHauteur);
+        heEditeurHTML.setMaxHeight(iHauteur - diffHauteur);
+        heEditeurHTML.setPrefWidth(getHsHTML().getLargeurHTML());
+        heEditeurHTML.setMaxWidth(getHsHTML().getLargeurHTML());
+        heEditeurHTML.setMinWidth(getHsHTML().getLargeurHTML());
+        AnchorPane apEditeur2 = new AnchorPane(heEditeurHTML);
+        ImageView ivFond = new ImageView(getPanoramiquesProjet()[getiPanoActuel()].getImgPanoramique());
+        apEditeur2.setLayoutX(5);
+        apEditeur2.setLayoutY(145);
+        apEditeur2.setPrefWidth(iLargeur - 20);
+        apEditeur2.setPrefHeight(heEditeurHTML.getPrefHeight() + 20);
+        ivFond.setPreserveRatio(false);
+        ivFond.setFitWidth(apEditeur2.getPrefWidth());
+        ivFond.setFitHeight(apEditeur2.getPrefHeight());
+        ivFond.setLayoutX(apEditeur2.getLayoutX());
+        ivFond.setLayoutY(apEditeur2.getLayoutY());
+        apEditeur.getChildren().addAll(ivFond, apEditeur2);
+        int iRouge = (int) (Color.valueOf(getHsHTML().getStrCouleurHTML()).getRed() * 255.d);
+        int iBleu = (int) (Color.valueOf(getHsHTML().getStrCouleurHTML()).getBlue() * 255.d);
+        int iVert = (int) (Color.valueOf(getHsHTML().getStrCouleurHTML()).getGreen() * 255.d);
+        String strCouleur = "rgba(" + iRouge + "," + iVert + "," + iBleu + "," + getHsHTML().getOpaciteHTML() + ")";
+        apEditeur2.setStyle("-fx-background-color : " + strCouleur + ";");
+        switch (getHsHTML().getStrPositionHTML()) {
+            case "left":
+                heEditeurHTML.setLayoutX(10);
+                break;
+            case "center":
+                heEditeurHTML.setLayoutX((iLargeur - 30 - heEditeurHTML.getPrefWidth()) / 2);
+                break;
+            case "right":
+                heEditeurHTML.setLayoutX(iLargeur - 30 - heEditeurHTML.getPrefWidth() - 35);
+                break;
+        }
+
+        //heEditeurHTML.setLayoutX(10);
+        if (getHsHTML().isbLienExterieur()) {
+            heEditeurHTML.setDisable(true);
+        }
+
         ToggleGroup tgLien = new ToggleGroup();
-        ToggleButton tgbLienExterieur = new ToggleButton("Lien externe");
+        ToggleButton tgbLienExterieur = new ToggleButton(rbLocalisation.getString("editeurHTML.lienExterne"));
         tgbLienExterieur.setLayoutX(10);
         tgbLienExterieur.setLayoutY(10);
-        tgbLienExterieur.setSelected(true);
+        tgbLienExterieur.setSelected(getHsHTML().isbLienExterieur());
         tgbLienExterieur.setToggleGroup(tgLien);
-        
-        ToggleButton tgbEditeurInterne = new ToggleButton("Editeur HTML Interne");
+
+        ToggleButton tgbEditeurInterne = new ToggleButton(rbLocalisation.getString("editeurHTML.htmlInterne"));
         tgbEditeurInterne.setLayoutX(10);
-        tgbEditeurInterne.setLayoutY(40);
+        tgbEditeurInterne.setLayoutY(115);
+        tgbEditeurInterne.setSelected(!getHsHTML().isbLienExterieur());
+
         tgbEditeurInterne.setToggleGroup(tgLien);
-        TextField tfLienExterieur = new TextField("");
+        TextField tfLienExterieur = new TextField(getHsHTML().getStrURLExterieure());
         tfLienExterieur.setPromptText("http://monsite.extension");
         tfLienExterieur.setPrefWidth(200);
         tfLienExterieur.setLayoutX(150);
         tfLienExterieur.setLayoutY(3);
-        Tooltip tpLenExterieur = new Tooltip("URL complète avec le préfixe http://");
+        Tooltip tpLenExterieur = new Tooltip(rbLocalisation.getString("editeurHTML.urlComplete"));
         tfLienExterieur.setTooltip(tpLenExterieur);
-        Label lblLargeurEditeur = new Label("largeur de l'éditeur");
-        Slider slLargeurEditeur = new Slider(400, iLargeur - 30, iLargeur - 30);
-        lblLargeurEditeur.setLayoutX(180);
+        Label lblPositionEditeur = new Label(rbLocalisation.getString("editeurHTML.position"));
+        lblPositionEditeur.setLayoutX(10);
+        lblPositionEditeur.setLayoutY(45);
+        tgPositionHTML = new ToggleGroup();
+        tgbGauche = new ToggleButton("", new ImageView(new Image("file:" + strImages + File.separator + "htmlGauche.png", 16, 16, true, true)));
+        tgbCentre = new ToggleButton("", new ImageView(new Image("file:" + strImages + File.separator + "htmlCentre.png", 16, 16, true, true)));
+        tgbDroite = new ToggleButton("", new ImageView(new Image("file:" + strImages + File.separator + "htmlDroite.png", 16, 16, true, true)));
+        tgbGauche.setSelected(getHsHTML().getStrPositionHTML().equals("left"));
+        tgbCentre.setSelected(getHsHTML().getStrPositionHTML().equals("center"));
+        tgbDroite.setSelected(getHsHTML().getStrPositionHTML().equals("right"));
+        tgbGauche.setLayoutX(90);
+        tgbGauche.setLayoutY(40);
+        tgbGauche.setUserData("left");
+        tgbGauche.setToggleGroup(tgPositionHTML);
+        tgbCentre.setLayoutX(125);
+        tgbCentre.setLayoutY(40);
+        tgbCentre.setUserData("center");
+        tgbCentre.setToggleGroup(tgPositionHTML);
+        tgbDroite.setLayoutX(160);
+        tgbDroite.setLayoutY(40);
+        tgbDroite.setUserData("right");
+        tgbDroite.setToggleGroup(tgPositionHTML);
+        Label lblLargeurEditeur = new Label(rbLocalisation.getString("editeurHTML.largeur"));
+        Slider slLargeurEditeur = new Slider(400, iLargeur - 30, getHsHTML().getLargeurHTML());
+        lblLargeurEditeur.setLayoutX(250);
         lblLargeurEditeur.setLayoutY(45);
-        slLargeurEditeur.setLayoutX(300);
+        slLargeurEditeur.setLayoutX(380);
         slLargeurEditeur.setLayoutY(45);
-        btnValide = new Button("valide", new ImageView(new Image("file:" + strImages + File.separator + "valide.png")));
-        btnAnnule = new Button("Annule", new ImageView(new Image("file:" + strImages + File.separator + "annule.png")));
+        Label lblCouleur = new Label(rbLocalisation.getString("editeurHTML.couleur"));
+        lblCouleur.setLayoutX(10);
+        lblCouleur.setLayoutY(75);
+        cpCouleurHTML = new ColorPicker(Color.web(getHsHTML().getStrCouleurHTML()));
+        cpCouleurHTML.setLayoutX(90);
+        cpCouleurHTML.setLayoutY(70);
+        Label lblOpacite = new Label(rbLocalisation.getString("editeurHTML.opacite"));
+        lblOpacite.setLayoutX(250);
+        lblOpacite.setLayoutY(75);
+        slOpacite = new Slider(0, 1, getHsHTML().getOpaciteHTML());
+        slOpacite.setLayoutX(380);
+        slOpacite.setLayoutY(75);
+        btnValide = new Button(rbLocalisation.getString("editeurHTML.valide"), new ImageView(new Image("file:" + strImages + File.separator + "valide.png")));
+        btnAnnule = new Button(rbLocalisation.getString("editeurHTML.annule"), new ImageView(new Image("file:" + strImages + File.separator + "annule.png")));
         btnValide.setPrefWidth(100);
         btnValide.setLayoutX(iLargeur - 130);
         btnValide.setLayoutY(iHauteur - 50);
@@ -294,21 +390,24 @@ public class EditeurHTML {
         btnAnnule.setLayoutY(iHauteur - 50);
         apEditeur.getChildren().addAll(
                 tgbLienExterieur, tfLienExterieur,
-                tgbEditeurInterne, lblLargeurEditeur, slLargeurEditeur,
+                lblPositionEditeur, tgbGauche, tgbCentre, tgbDroite, lblLargeurEditeur, slLargeurEditeur,
+                lblCouleur, cpCouleurHTML, lblOpacite, slOpacite,
+                tgbEditeurInterne,
                 btnAnnule, btnValide
         );
-        getStEditeurHTML().show();
+        stEditeurHTML.show();
         //hideImageNodesMatching(htmlEditor, Pattern.compile(".*(Cut|Copy|Paste).*"), 0);
         int i = 0;
         if (nodeBarreIconesSuperieure instanceof ToolBar && nodeEditeurHTML instanceof WebView) {
             tbBarreIconesSuperieure = (ToolBar) nodeBarreIconesSuperieure;
             wvEditeurHTML = (WebView) nodeEditeurHTML;
-            wvEditeurHTML.setMaxHeight(iHauteur - 250);
-            wvEditeurHTML.setMinHeight(iHauteur - 250);
-            wvEditeurHTML.setPrefHeight(iHauteur - 250);
+            wvEditeurHTML.setMaxHeight(heEditeurHTML.getPrefHeight() - 70);
+            wvEditeurHTML.setMinHeight(heEditeurHTML.getPrefHeight() - 70);
+            wvEditeurHTML.setPrefHeight(heEditeurHTML.getPrefHeight() - 70);
             engEditeurHTML = wvEditeurHTML.getEngine();
+
             heEditeurHTML.setOnKeyPressed((evenement) -> {
-                setStrTexteHTML(heEditeurHTML.getHtmlText());
+                getHsHTML().setStrTexteHTML(heEditeurHTML.getHtmlText());
                 bDejaSauve = false;
             });
             engEditeurHTML.locationProperty().addListener((ov, ancValeur, nouvValeur) -> {
@@ -319,7 +418,7 @@ public class EditeurHTML {
                     d.browse(uriAdresse);
                     engEditeurHTML.getLoadWorker().cancel();
                     Platform.runLater(() -> {
-                        heEditeurHTML.setHtmlText(getStrTexteHTML());
+                        heEditeurHTML.setHtmlText(getHsHTML().getStrTexteHTML());
 
                     });
                 } catch (URISyntaxException | IOException ex) {
@@ -329,97 +428,97 @@ public class EditeurHTML {
             tbBarreIconesSuperieure.getItems().add(new Separator(Orientation.VERTICAL));
             ImageView ivAjouteImage = new ImageView(new Image("file:" + strImages + File.separator + "ajouteImage.png", 22, 16, true, true));
             btnAjouteImage = new Button("", ivAjouteImage);
-            Tooltip tpAjouteImage = new Tooltip("Ajoute une image");
+            Tooltip tpAjouteImage = new Tooltip(rbLocalisation.getString("editeurHTML.ajouteImage"));
             btnAjouteImage.setTooltip(tpAjouteImage);
             tbBarreIconesSuperieure.getItems().add(btnAjouteImage);
 
             ImageView ivAjouteLien = new ImageView(new Image("file:" + strImages + File.separator + "lien.png", 16, 16, true, true));
             btnAjouteLien = new Button("", ivAjouteLien);
-            Tooltip tpAjouteLien = new Tooltip("Ajoute un lien hypertexte");
+            Tooltip tpAjouteLien = new Tooltip(rbLocalisation.getString("editeurHTML.ajouteLien"));
             btnAjouteLien.setTooltip(tpAjouteLien);
             tbBarreIconesSuperieure.getItems().add(btnAjouteLien);
 
         }
 
         heEditeurHTML.requestFocus();
+        tfLienExterieur.textProperty().addListener((ov, ancValeur, nouvValeur) -> {
+            getHsHTML().setStrURLExterieure(nouvValeur);
+        });
 
-        getStEditeurHTML().setOnCloseRequest((event) -> {
-            quitteEditeurHTML(getStEditeurHTML());
+        stEditeurHTML.setOnCloseRequest((event) -> {
+            quitteEditeurHTML(stEditeurHTML);
             event.consume();
         });
+        cpCouleurHTML.setOnAction((evt) -> {
+            String strCouleurHTML = cpCouleurHTML.getValue().toString().substring(2, 8);
+            getHsHTML().setStrCouleurHTML(strCouleurHTML);
+            int iRouge1 = (int) (Color.valueOf(getHsHTML().getStrCouleurHTML()).getRed() * 255.d);
+            int iBleu1 = (int) (Color.valueOf(getHsHTML().getStrCouleurHTML()).getBlue() * 255.d);
+            int iVert1 = (int) (Color.valueOf(getHsHTML().getStrCouleurHTML()).getGreen() * 255.d);
+            String strCouleur1 = "rgba(" + iRouge1 + "," + iVert1 + "," + iBleu1 + "," + getHsHTML().getOpaciteHTML() + ")";
+            apEditeur2.setStyle("-fx-background-color : " + strCouleur1 + ";");
+        });
+        slOpacite.valueProperty().addListener((ov, oldValue, newValue) -> {
+            if (newValue != null) {
+                getHsHTML().setOpaciteHTML((double) newValue);
+                int iRouge1 = (int) (Color.valueOf(getHsHTML().getStrCouleurHTML()).getRed() * 255.d);
+                int iBleu1 = (int) (Color.valueOf(getHsHTML().getStrCouleurHTML()).getBlue() * 255.d);
+                int iVert1 = (int) (Color.valueOf(getHsHTML().getStrCouleurHTML()).getGreen() * 255.d);
+                String strCouleur1 = "rgba(" + iRouge1 + "," + iVert1 + "," + iBleu1 + "," + getHsHTML().getOpaciteHTML() + ")";
+                apEditeur2.setStyle("-fx-background-color : " + strCouleur1 + ";");
 
-        tgbLienExterieur.setOnAction((evt)->{
+            }
+        });
+        tgbLienExterieur.setOnAction((evt) -> {
             tgbLienExterieur.setSelected(true);
-            setbLienExterieur(true);
+            getHsHTML().setbLienExterieur(true);
         });
-        tgbEditeurInterne.setOnAction((evt)->{
+        tgbEditeurInterne.setOnAction((evt) -> {
             tgbEditeurInterne.setSelected(true);
-            setbLienExterieur(false);
+            getHsHTML().setbLienExterieur(false);
         });
+
+        tgPositionHTML.selectedToggleProperty()
+                .addListener((ov, old_toggle, new_toggle) -> {
+                    if (new_toggle != null) {
+                        getHsHTML().setStrPositionHTML(tgPositionHTML.getSelectedToggle().getUserData().toString());
+                        switch (getHsHTML().getStrPositionHTML()) {
+                            case "left":
+                                heEditeurHTML.setLayoutX(10);
+                                break;
+                            case "center":
+                                heEditeurHTML.setLayoutX((stEditeurHTML.getWidth() - heEditeurHTML.getPrefWidth()) / 2);
+                                break;
+                            case "right":
+                                heEditeurHTML.setLayoutX(stEditeurHTML.getWidth() - heEditeurHTML.getPrefWidth() - 35);
+                                break;
+                        }
+
+                    }
+                });
 
         tgLien.selectedToggleProperty()
                 .addListener((ov, old_toggle, new_toggle) -> {
                     if (tgbLienExterieur.isSelected()) {
                         tfLienExterieur.setDisable(false);
                         heEditeurHTML.setDisable(true);
-                        setbLienExterieur(true);
+                        getHsHTML().setbLienExterieur(true);
                     } else {
                         tfLienExterieur.setDisable(true);
                         heEditeurHTML.setDisable(false);
-                        setbLienExterieur(false);
+                        getHsHTML().setbLienExterieur(false);
                     }
                 }
                 );
 
         btnAnnule.setOnAction((evenement) -> {
-                    quitteEditeurHTML(getStEditeurHTML());
-                }
+            quitteEditeurHTML(stEditeurHTML);
+        }
         );
         btnValide.setOnAction((evenement) -> {
-            OutputStreamWriter oswFichierHTML = null;
-            try {
-                String strPageHTML = getStrNomRepertHTML();
-                String strPageHTMLImages = strPageHTML + File.separator + "/images";
-                File filePageHTML = new File(strPageHTML);
-                File filePageHTMLImages = new File(strPageHTMLImages);
-                if (!filePageHTML.exists()) {
-                    filePageHTML.mkdirs();
-                }
-                if (!filePageHTMLImages.exists()) {
-                    filePageHTMLImages.mkdirs();
-                }
-                String strContenuHTML = heEditeurHTML.getHtmlText();
-                System.out.println(strContenuHTML);
-                System.out.println(" nombre Images : " + getiNombreImages());
-                File fileIndexHTML = new File(strPageHTML + File.separator + "index.html");
-                for (int j = 0; j < getiNombreImages(); j++) {
-                    ImageEditeurHTML img1 = getImagesEditeur()[j];
-                    strContenuHTML = strContenuHTML.replace("file:////" + img1.getStrImagePath(), "images/" + img1.getStrImage());
-                    try {
-                        copieFichierRepertoire(img1.getStrImagePath(), strPageHTMLImages);
-                    } catch (IOException ex) {
-                        Logger.getLogger(EditeurHTML.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-                strContenuHTML = strContenuHTML.replace(">", ">\n");
-                System.out.println(strContenuHTML);
-                fileIndexHTML.setWritable(true);
-                oswFichierHTML = new OutputStreamWriter(new FileOutputStream(fileIndexHTML), "UTF-8");
-                try (BufferedWriter bwFichierHTML = new BufferedWriter(oswFichierHTML)) {
-                    bwFichierHTML.write(strContenuHTML);
-                    getStEditeurHTML().hide();
-                } catch (IOException ex) {
-                    Logger.getLogger(EditeurHTML.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            } catch (UnsupportedEncodingException | FileNotFoundException ex) {
-                Logger.getLogger(EditeurHTML.class.getName()).log(Level.SEVERE, null, ex);
-            } finally {
-                try {
-                    oswFichierHTML.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(EditeurHTML.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+            getHsHTML().setStrTexteHTML(heEditeurHTML.getHtmlText().replace("[", "&lbrace;").replace("]", "&rbrace;"));
+            setbValide(true);
+            stEditeurHTML.hide();
         });
 
         btnAjouteLien.setOnAction(
@@ -438,10 +537,21 @@ public class EditeurHTML {
                     heEditeurHTML.setPrefWidth((double) nouvValeur);
                     heEditeurHTML.setMaxWidth((double) nouvValeur);
                     heEditeurHTML.setMinWidth((double) nouvValeur);
-                    heEditeurHTML.setLayoutX((getStEditeurHTML().getWidth() - heEditeurHTML.getPrefWidth()) / 2);
+                    getHsHTML().setLargeurHTML((double) nouvValeur);
+                    switch (getHsHTML().getStrPositionHTML()) {
+                        case "left":
+                            heEditeurHTML.setLayoutX(10);
+                            break;
+                        case "center":
+                            heEditeurHTML.setLayoutX((stEditeurHTML.getWidth() - heEditeurHTML.getPrefWidth()) / 2);
+                            break;
+                        case "right":
+                            heEditeurHTML.setLayoutX(stEditeurHTML.getWidth() - heEditeurHTML.getPrefWidth() - 35);
+                            break;
+                    }
                 });
 
-        getStEditeurHTML().widthProperty()
+        stEditeurHTML.widthProperty()
                 .addListener((ov, ancValeur, nouvValeur) -> {
                     System.out.println(nouvValeur);
                     slLargeurEditeur.setMax((double) nouvValeur - 35.d);
@@ -451,22 +561,33 @@ public class EditeurHTML {
                         heEditeurHTML.setMaxWidth((double) nouvValeur - 35.d);
                         heEditeurHTML.setMinWidth((double) nouvValeur - 35.d);
                     }
-                    heEditeurHTML.setLayoutX((getStEditeurHTML().getWidth() - heEditeurHTML.getPrefWidth()) / 2);
+                    apEditeur2.setPrefWidth((double) nouvValeur - 20);
+                    switch (getHsHTML().getStrPositionHTML()) {
+                        case "left":
+                            heEditeurHTML.setLayoutX(10);
+                            break;
+                        case "center":
+                            heEditeurHTML.setLayoutX((stEditeurHTML.getWidth() - heEditeurHTML.getPrefWidth()) / 2);
+                            break;
+                        case "right":
+                            heEditeurHTML.setLayoutX(stEditeurHTML.getWidth() - heEditeurHTML.getPrefWidth() - 35);
+                            break;
+                    }
                     apEditeur.setPrefWidth((double) nouvValeur);
                     apEditeur.setMinWidth((double) nouvValeur);
                     apEditeur.setMaxWidth((double) nouvValeur);
                     apPrincipale.setPrefWidth((double) nouvValeur);
                     apPrincipale.setMinWidth((double) nouvValeur);
                     apPrincipale.setMaxWidth((double) nouvValeur);
+                    ivFond.setFitWidth(apEditeur2.getPrefWidth());
 
                     btnValide.setLayoutX((double) nouvValeur - 135);
                     btnAnnule.setLayoutX((double) nouvValeur - 255);
                     apDialog.setLayoutX((apPrincipale.getPrefWidth() - apDialog.getPrefWidth()) / 2);
 
-                }
-                );
+                });
 
-        getStEditeurHTML().heightProperty()
+        stEditeurHTML.heightProperty()
                 .addListener((ov, ancValeur, nouvValeur) -> {
                     System.out.println(nouvValeur);
                     apEditeur.setPrefHeight((double) nouvValeur);
@@ -475,21 +596,24 @@ public class EditeurHTML {
                     apPrincipale.setPrefHeight((double) nouvValeur);
                     apPrincipale.setPrefHeight((double) nouvValeur);
                     apPrincipale.setPrefHeight((double) nouvValeur);
-                    heEditeurHTML.setPrefHeight((double) nouvValeur - 155.d);
-                    heEditeurHTML.setMaxHeight((double) nouvValeur - 155.d);
-                    heEditeurHTML.setMinHeight((double) nouvValeur - 155.d);
+                    heEditeurHTML.setPrefHeight((double) nouvValeur - diffHauteur);
+                    heEditeurHTML.setMaxHeight((double) nouvValeur - diffHauteur);
+                    heEditeurHTML.setMinHeight((double) nouvValeur - diffHauteur);
+                    apEditeur2.setPrefHeight(heEditeurHTML.getPrefHeight() + 20);
+                    ivFond.setFitHeight(apEditeur2.getPrefHeight());
                     btnValide.setLayoutY((double) nouvValeur - 75);
                     btnAnnule.setLayoutY((double) nouvValeur - 75);
                     apDialog.setLayoutY((apPrincipale.getPrefHeight() - apDialog.getPrefHeight()) / 2);
-                    wvEditeurHTML.setMaxHeight((double) nouvValeur - 250);
-                    wvEditeurHTML.setMinHeight((double) nouvValeur - 250);
-                    wvEditeurHTML.setPrefHeight((double) nouvValeur - 250);
+                    wvEditeurHTML.setMaxHeight(heEditeurHTML.getPrefHeight() - 70);
+                    wvEditeurHTML.setMinHeight(heEditeurHTML.getPrefHeight() - 70);
+                    wvEditeurHTML.setPrefHeight(heEditeurHTML.getPrefHeight() - 70);
                 });
 
     }
 
     private void quitteEditeurHTML(Stage stFenetre) {
-        System.out.println(getStEditeurHTML());
+        setbAnnule(true);
+        System.out.println(stEditeurHTML);
         stFenetre.hide();
     }
 
@@ -516,7 +640,7 @@ public class EditeurHTML {
         );
         apDialog.setLayoutX((apPrincipale.getPrefWidth() - apDialog.getPrefWidth()) / 2);
         apDialog.setLayoutY((apPrincipale.getPrefHeight() - apDialog.getPrefHeight()) / 2);
-        Label lblBarrePersonnalisee = new Label("Ajouter un lien");
+        Label lblBarrePersonnalisee = new Label(rbLocalisation.getString("editeurHTML.ajouteLien"));
         lblBarrePersonnalisee.setMinWidth(iLargeur - 10);
         lblBarrePersonnalisee.setAlignment(Pos.CENTER);
         lblBarrePersonnalisee.setStyle("-fx-background-color : #777;");
@@ -525,8 +649,8 @@ public class EditeurHTML {
         lblBarrePersonnalisee.setLayoutY(10);
         lblBarrePersonnalisee.setFont(Font.font(14));
         apDialog.getChildren().add(lblBarrePersonnalisee);
-        Button btnValideLien = new Button("Ok", new ImageView(new Image("file:" + strImages + File.separator + "valide.png")));
-        Button btnAnnuleLien = new Button("Annuler", new ImageView(new Image("file:" + strImages + File.separator + "annule.png")));
+        Button btnValideLien = new Button(rbLocalisation.getString("editeurHTML.valide"), new ImageView(new Image("file:" + strImages + File.separator + "valide.png")));
+        Button btnAnnuleLien = new Button(rbLocalisation.getString("editeurHTML.annule"), new ImageView(new Image("file:" + strImages + File.separator + "annule.png")));
         btnValideLien.setPrefWidth(100);
         btnValideLien.setLayoutX(iLargeur - 130);
         btnValideLien.setLayoutY(iHauteur - 50);
@@ -534,10 +658,10 @@ public class EditeurHTML {
         btnAnnuleLien.setLayoutX(iLargeur - 250);
         btnAnnuleLien.setLayoutY(iHauteur - 50);
         apDialog.getChildren().addAll(btnValideLien, btnAnnuleLien);
-        Label lblTexteLien = new Label("texte du lien");
+        Label lblTexteLien = new Label(rbLocalisation.getString("editeurHTML.texteLien"));
         lblTexteLien.setLayoutX(10);
         lblTexteLien.setLayoutY(40);
-        Label lblUrlLien = new Label("URL");
+        Label lblUrlLien = new Label(rbLocalisation.getString("editeurHTML.url"));
         lblUrlLien.setLayoutX(10);
         lblUrlLien.setLayoutY(70);
         TextField tfTexteLien = new TextField(strSelection);
@@ -545,12 +669,12 @@ public class EditeurHTML {
         tfTexteLien.setLayoutX(150);
         tfTexteLien.setLayoutY(40);
         TextField tfURLLien = new TextField("");
-        tfURLLien.setPromptText("http://monsite.extension");
+        tfURLLien.setPromptText("http://site.extension");
 
         tfURLLien.setPrefWidth(200);
         tfURLLien.setLayoutX(150);
         tfURLLien.setLayoutY(70);
-        Label lblCibleLien = new Label("cible du lien");
+        Label lblCibleLien = new Label(rbLocalisation.getString("editeurHTML.cibleLien"));
         lblCibleLien.setLayoutX(10);
         lblCibleLien.setLayoutY(100);
 
@@ -566,9 +690,9 @@ public class EditeurHTML {
         btnValideLien.setOnAction((evenement) -> {
             String strAjouteLien = "<a href='" + tfURLLien.getText() + "' target='" + cbListeTarget.getPromptText() + "'>" + tfTexteLien.getText() + "</a>";
             engEditeurHTML.executeScript(jsCodeInsertHtml);
-            setStrTexteHTML(heEditeurHTML.getHtmlText());
-            setStrTexteHTML(getStrTexteHTML().replace("####html####" + strSelection, strAjouteLien).replace(strSelection + "####html####", strAjouteLien));
-            heEditeurHTML.setHtmlText(getStrTexteHTML());
+            getHsHTML().setStrTexteHTML(heEditeurHTML.getHtmlText());
+            getHsHTML().setStrTexteHTML(getHsHTML().getStrTexteHTML().replace("####html####" + strSelection, strAjouteLien).replace(strSelection + "####html####", strAjouteLien));
+            heEditeurHTML.setHtmlText(getHsHTML().getStrTexteHTML());
             apDialog.setVisible(false);
             apEditeur.setDisable(false);
             bDejaSauve = false;
@@ -596,15 +720,15 @@ public class EditeurHTML {
         );
         apDialog.setLayoutX((apPrincipale.getPrefWidth() - apDialog.getPrefWidth()) / 2);
         apDialog.setLayoutY((apPrincipale.getPrefHeight() - apDialog.getPrefHeight()) / 2);
-        Button btnValideImage = new Button("Ok", new ImageView(new Image("file:" + strImages + File.separator + "valide.png")));
-        Button btnAnnuleImage = new Button("Annuler", new ImageView(new Image("file:" + strImages + File.separator + "annule.png")));
+        Button btnValideImage = new Button(rbLocalisation.getString("editeurHTML.valide"), new ImageView(new Image("file:" + strImages + File.separator + "valide.png")));
+        Button btnAnnuleImage = new Button(rbLocalisation.getString("editeurHTML.annule"), new ImageView(new Image("file:" + strImages + File.separator + "annule.png")));
         btnValideImage.setPrefWidth(100);
         btnValideImage.setLayoutX(iLargeur - 130);
         btnValideImage.setLayoutY(iHauteur - 50);
         btnAnnuleImage.setPrefWidth(100);
         btnAnnuleImage.setLayoutX(iLargeur - 250);
         btnAnnuleImage.setLayoutY(iHauteur - 50);
-        Label lblChoixFichierImage = new Label("Choix de l'image");
+        Label lblChoixFichierImage = new Label(rbLocalisation.getString("editeurHTML.choixImage"));
         lblChoixFichierImage.setLayoutX(10);
         lblChoixFichierImage.setLayoutY(40);
         TextField tfChoixFichierImage = new TextField("");
@@ -624,13 +748,13 @@ public class EditeurHTML {
         ToggleButton tgbPositionCentre = new ToggleButton("", ivImageCentre);
         ToggleButton tgbPositionDroite = new ToggleButton("", ivImageDroite);
         ToggleButton tgbPositionTexte = new ToggleButton("", ivImageDansTexte);
-        Tooltip tpPositionGauche = new Tooltip("à gauche");
+        Tooltip tpPositionGauche = new Tooltip(rbLocalisation.getString("editeurHTML.gauche"));
         tgbPositionCentre.setTooltip(tpPositionGauche);
-        Tooltip tpPositionCentre = new Tooltip("Centrée");
+        Tooltip tpPositionCentre = new Tooltip(rbLocalisation.getString("editeurHTML.centre"));
         tgbPositionGauche.setTooltip(tpPositionCentre);
-        Tooltip tpPositionDroite = new Tooltip("à droite");
+        Tooltip tpPositionDroite = new Tooltip(rbLocalisation.getString("editeurHTML.droite"));
         tgbPositionDroite.setTooltip(tpPositionDroite);
-        Tooltip tpPositionDansTexte = new Tooltip("Dans le texte");
+        Tooltip tpPositionDansTexte = new Tooltip(rbLocalisation.getString("editeurHTML.texte"));
         tgbPositionTexte.setTooltip(tpPositionDansTexte);
 
         tgbPositionGauche.setToggleGroup(tgPositionImage);
@@ -638,7 +762,7 @@ public class EditeurHTML {
         tgbPositionDroite.setToggleGroup(tgPositionImage);
         tgbPositionTexte.setToggleGroup(tgPositionImage);
         tgbPositionCentre.setSelected(true);
-        Label lblPositionImage = new Label("Position :");
+        Label lblPositionImage = new Label(rbLocalisation.getString("editeurHTML.position"));
         lblPositionImage.setLayoutX(10);
         lblPositionImage.setLayoutY(70);
         tgbPositionGauche.setLayoutX(150);
@@ -649,7 +773,7 @@ public class EditeurHTML {
         tgbPositionDroite.setLayoutY(70);
         tgbPositionTexte.setLayoutX(270);
         tgbPositionTexte.setLayoutY(70);
-        Label lblLargeurImage = new Label("Taille de l'image");
+        Label lblLargeurImage = new Label(rbLocalisation.getString("editeurHTML.tailleImage"));
         Slider slLargeurImage = new Slider(0, 600, 300);
         lblLargeurImage.setLayoutX(10);
         lblLargeurImage.setLayoutY(110);
@@ -679,7 +803,7 @@ public class EditeurHTML {
             File fileRepert = new File(strImages);
             fcRepertChoix.setInitialDirectory(fileRepert);
             File fileProjet = null;
-            fileProjet = fcRepertChoix.showOpenDialog(getStEditeurHTML());
+            fileProjet = fcRepertChoix.showOpenDialog(stEditeurHTML);
             if (fileProjet != null) {
                 strNomFichierImage = fileProjet.getAbsolutePath();
                 tfChoixFichierImage.setText(strNomFichierImage);
@@ -701,8 +825,6 @@ public class EditeurHTML {
         btnValideImage.setOnAction((evenement) -> {
             ImageEditeurHTML imageEdit = new ImageEditeurHTML();
             imageEdit.setStrImagePath(strNomFichierImage);
-            String strNomFich = strNomFichierImage.substring(strNomFichierImage.lastIndexOf(File.separator) + 1, strNomFichierImage.length());
-            imageEdit.setStrImage(strNomFich);
             String strAjouteImage
                     = "</p><p style='text-align : center;'><img width='" + (int) slLargeurImage.getValue()
                     + "' src='file:////" + strNomFichierImage
@@ -724,13 +846,13 @@ public class EditeurHTML {
             }
             System.out.println(strAjouteImage);
             engEditeurHTML.executeScript(jsCodeInsertHtml.replace("####html####", escapeJavaStyleString(strAjouteImage, true, true)));
-            setStrTexteHTML(heEditeurHTML.getHtmlText());
-            System.out.println(getStrTexteHTML());
+            getHsHTML().setStrTexteHTML(heEditeurHTML.getHtmlText());
+            System.out.println(getHsHTML().getStrTexteHTML());
             apDialog.setVisible(false);
             apEditeur.setDisable(false);
             bDejaSauve = false;
-            getImagesEditeur()[getiNombreImages()] = imageEdit;
-            setiNombreImages(getiNombreImages() + 1);
+            hsHTML.getImagesEditeur()[getHsHTML().getiNombreImages()] = imageEdit;
+            getHsHTML().setiNombreImages(getHsHTML().getiNombreImages() + 1);
         });
         btnAnnuleImage.setOnAction((evenement) -> {
             apDialog.setVisible(false);
@@ -756,86 +878,52 @@ public class EditeurHTML {
     }
 
     /**
-     * @return the fileRep
+     * @return the bValide
      */
-    public File getFileRep() {
-        return fileRep;
+    public boolean isbValide() {
+
+        return bValide;
     }
 
     /**
-     * @return the strAppPath
+     * @param bValide the bValide to set
      */
-    public String getStrAppPath() {
-        return strAppPath;
+    public void setbValide(boolean bValide) {
+        boolean ancienneValeur = this.bValide;
+        this.bValide = bValide;
+        boolean nouvelleValeur = this.bValide;
+        this.changeSupport.firePropertyChange("bValide", ancienneValeur, nouvelleValeur);
     }
 
     /**
-     * @return the strNomRepertHTML
+     * @return the bAnnule
      */
-    public String getStrNomRepertHTML() {
-        return strNomRepertHTML;
+    public boolean isbAnnule() {
+        return bAnnule;
     }
 
     /**
-     * @param strNomRepertHTML the strNomRepertHTML to set
+     * @param bAnnule the bAnnule to set
      */
-    public void setStrNomRepertHTML(String strNomRepertHTML) {
-        this.strNomRepertHTML = strNomRepertHTML;
+    public void setbAnnule(boolean bAnnule) {
+        boolean ancienneValeur = this.bAnnule;
+        this.bAnnule = bAnnule;
+        boolean nouvelleValeur = this.bAnnule;
+        this.changeSupport.firePropertyChange("bAnnule", ancienneValeur, nouvelleValeur);
     }
 
     /**
-     * @return the stEditeurHTML
+     * @return the hsHTML
      */
-    public Stage getStEditeurHTML() {
-        return stEditeurHTML;
+    public HotspotHTML getHsHTML() {
+        return hsHTML;
     }
 
     /**
-     * @param stEditeurHTML the stEditeurHTML to set
+     * @param hsHTML the hsHTML to set
      */
-    public void setStEditeurHTML(Stage stEditeurHTML) {
-        this.stEditeurHTML = stEditeurHTML;
+    public void setHsHTML(HotspotHTML hsHTML) {
+        this.hsHTML = hsHTML;
     }
 
-    /**
-     * @return the bLienExterieur
-     */
-    public boolean isbLienExterieur() {
-        return bLienExterieur;
-    }
-
-    /**
-     * @param bLienExterieur the bLienExterieur to set
-     */
-    public void setbLienExterieur(boolean bLienExterieur) {
-        this.bLienExterieur = bLienExterieur;
-    }
-
-    /**
-     * @return the iNombreImages
-     */
-    public int getiNombreImages() {
-        return iNombreImages;
-    }
-
-    /**
-     * @param iNombreImages the iNombreImages to set
-     */
-    public void setiNombreImages(int iNombreImages) {
-        this.iNombreImages = iNombreImages;
-    }
-
-    /**
-     * @return the imagesEditeur
-     */
-    public ImageEditeurHTML[] getImagesEditeur() {
-        return imagesEditeur;
-    }
-
-    /**
-     * @param imagesEditeur the imagesEditeur to set
-     */
-    public void setImagesEditeur(ImageEditeurHTML[] imagesEditeur) {
-        this.imagesEditeur = imagesEditeur;
-    }
 }

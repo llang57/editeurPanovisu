@@ -5,23 +5,29 @@
  */
 package editeurpanovisu;
 
-import static editeurpanovisu.EditeurPanovisu.mniAffichagePlan;
-import static editeurpanovisu.EditeurPanovisu.mniAjouterPlan;
+import static editeurpanovisu.EditeurPanovisu.apEnvironnement;
 import static editeurpanovisu.EditeurPanovisu.copieFichierRepertoire;
-import static editeurpanovisu.EditeurPanovisu.strCurrentDir;
-import static editeurpanovisu.EditeurPanovisu.gestionnairePlan;
-import static editeurpanovisu.EditeurPanovisu.ivAjouterPlan;
-import static editeurpanovisu.EditeurPanovisu.iNombrePanoramiques;
-import static editeurpanovisu.EditeurPanovisu.bDejaSauve;
-import static editeurpanovisu.EditeurPanovisu.iNombrePanoramiquesFichier;
-import static editeurpanovisu.EditeurPanovisu.iNombrePlans;
-import static editeurpanovisu.EditeurPanovisu.panoramiquesProjet;
-import static editeurpanovisu.EditeurPanovisu.plans;
-import static editeurpanovisu.EditeurPanovisu.stPrincipal;
-import static editeurpanovisu.EditeurPanovisu.strRepertAppli;
-import static editeurpanovisu.EditeurPanovisu.strRepertTemp;
-import static editeurpanovisu.EditeurPanovisu.tabPlan;
-import static editeurpanovisu.EditeurPanovisu.strTooltipStyle;
+import static editeurpanovisu.EditeurPanovisu.getGestionnairePlan;
+import static editeurpanovisu.EditeurPanovisu.getIvAjouterPlan;
+import static editeurpanovisu.EditeurPanovisu.getMniAffichagePlan;
+import static editeurpanovisu.EditeurPanovisu.getMniAjouterPlan;
+import static editeurpanovisu.EditeurPanovisu.getPanoramiquesProjet;
+import static editeurpanovisu.EditeurPanovisu.getPlans;
+import static editeurpanovisu.EditeurPanovisu.getStPrincipal;
+import static editeurpanovisu.EditeurPanovisu.getStrCurrentDir;
+import static editeurpanovisu.EditeurPanovisu.getStrRepertAppli;
+import static editeurpanovisu.EditeurPanovisu.getStrRepertTemp;
+import static editeurpanovisu.EditeurPanovisu.getStrTooltipStyle;
+import static editeurpanovisu.EditeurPanovisu.getTabPlan;
+import static editeurpanovisu.EditeurPanovisu.getiNombrePanoramiques;
+import static editeurpanovisu.EditeurPanovisu.getiNombrePanoramiquesFichier;
+import static editeurpanovisu.EditeurPanovisu.getiNombrePlans;
+import static editeurpanovisu.EditeurPanovisu.getiPanoActuel;
+import static editeurpanovisu.EditeurPanovisu.hbBarreBouton;
+import static editeurpanovisu.EditeurPanovisu.mbarPrincipal;
+import static editeurpanovisu.EditeurPanovisu.setbDejaSauve;
+import static editeurpanovisu.EditeurPanovisu.setiNombrePanoramiquesFichier;
+import static editeurpanovisu.EditeurPanovisu.tpEnvironnement;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -35,8 +41,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -59,6 +63,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
@@ -87,9 +92,11 @@ public class GestionnaireInterfaceController {
 
     private ImageFond[] imagesFond = new ImageFond[50];
     private int iNombreImagesFond = 0;
+    private boolean bTemplate;
 
     private String strStyleHotSpots = "hotspot.png";
     private String strStyleHotSpotImages = "photo2.png";
+    private String strStyleHotSpotHTML = "html1.png";
     private ResourceBundle rbLocalisation;
     /*
      Variables barre de navigation classique 
@@ -242,12 +249,12 @@ public class GestionnaireInterfaceController {
     private double fenetreAidePosX = 0.d;
     private double fenetreAidePosY = 0.d;
     private double fenetreInfoposX = 0.d;
-    private double fenetreInfoOpacite = 1.d;
-    private double fenetreAideOpacite = 1.d;
+    private double fenetreInfoOpacite = 0.8;
+    private double fenetreAideOpacite = 0.8;
     private double fenetrePoliceTaille = 10.d;
     private double fenetreURLPosX = 0.d;
     private double fenetreURLPosY = 0.d;
-    private double fenetreOpaciteFond = 0.d;
+    private double fenetreOpaciteFond = 0.8;
     private String strFenetreInfoImage = "";
     private String strFenetreAideImage = "";
     private String strFenetreURL = "";
@@ -278,7 +285,6 @@ public class GestionnaireInterfaceController {
     private BigDecimalField bdfFenetreURLPosY;
     private ColorPicker cpFenetreCouleurFond;
     private ColorPicker cpFenetreURLCouleur;
-    private Slider slFenetreOpaciteFond;
 
     private final AnchorPane apFenetreAfficheInfo = new AnchorPane();
     private final Label lblFenetreURL = new Label();
@@ -376,6 +382,9 @@ public class GestionnaireInterfaceController {
     private RadioButton rbVignettesBottom;
     private ColorPicker cpCouleurFondVignettes;
     private ColorPicker cpCouleurTexteVignettes;
+    private boolean bReplieDemarrageVignettes = false;
+    private CheckBox cbReplieDemarrageVignettes;
+
     /*
      *   variables ComboMenu
      */
@@ -417,7 +426,8 @@ public class GestionnaireInterfaceController {
     private Color couleurFondRadar = Color.rgb(200, 0, 0);
     private String strCouleurFondRadar = couleurFondRadar.toString().substring(2, 8);
     private double tailleRadar = 40;
-    private double opaciteRadar = 0.8;
+    private double opaciteRadar = 0.5;
+    private boolean bReplieDemarragePlan = false;
 
     /*
      Eléments de l'onglet plan
@@ -432,12 +442,62 @@ public class GestionnaireInterfaceController {
     private CheckBox cbAfficheRadar;
     private ColorPicker cpCouleurFondRadar;
     private ColorPicker cpCouleurLigneRadar;
+    private CheckBox cbReplieDemarragePlan;
     private Slider slTailleRadar;
     private Slider slOpaciteRadar;
     /*
+     Variable de la Carte
+     */
+    private AnchorPane apCarte;
+    private AnchorPane apVisuCarte;
+    private boolean bAfficheCarte = false;
+
+    private String strPositionCarte = "left";
+    private double largeurCarte = 400;
+    private double hauteurCarte = 300;
+    private Color couleurFondCarte = Color.hsb(180, 0.39, 0.5);
+    private String strCouleurFondCarte = couleurFondCarte.toString().substring(2, 8);
+    private double opaciteCarte = 0.8;
+    private Color couleurTexteCarte = Color.rgb(255, 255, 255);
+    private String strCouleurTexteCarte = couleurTexteCarte.toString().substring(2, 8);
+    private boolean bAfficheRadarCarte = false;
+    private Color couleurLigneRadarCarte = Color.rgb(200, 0, 0);
+    private String strCouleurLigneRadarCarte = couleurLigneRadarCarte.toString().substring(2, 8);
+    private Color couleurFondRadarCarte = Color.rgb(200, 0, 0);
+    private String strCouleurFondRadarCarte = couleurFondRadarCarte.toString().substring(2, 8);
+    private double tailleRadarCarte = 20;
+    private double opaciteRadarCarte = 0.4;
+    private CoordonneesGeographiques coordCentreCarte;
+    private int iFacteurZoomCarte = 14;
+    private double angleRadarCarte = 45.d;
+    private double ouvertureRadarCarte = 35.d;
+    private String strNomLayers = "OpenStreetMap";
+    private boolean bReplieDemarrageCarte = false;
+
+    /*
+     Eléments de l'onglet Carte
+     */
+    private CheckBox cbAfficheCarte;
+    private Slider slOpaciteCarte;
+    private RadioButton rbCarteLeft;
+    private RadioButton rbCarteRight;
+    private ColorPicker cpCouleurFondCarte;
+    private ColorPicker cpCouleurTexteCarte;
+    private Slider slLargeurCarte;
+    private Slider slHauteurCarte;
+    private Slider slZoomCarte;
+    private CheckBox cbAfficheRadarCarte;
+    private ColorPicker cpCouleurFondRadarCarte;
+    private ColorPicker cpCouleurLigneRadarCarte;
+    private Slider slTailleRadarCarte;
+    private Slider slOpaciteRadarCarte;
+    public NavigateurOpenLayersSeul navigateurCarteOL = null;
+    public AnchorPane apNavigateurCarte;
+    private CheckBox cbReplieDemarrageCarte;
+
+    /*
      Variables Images Fond
      */
-
     private AnchorPane apImageFond;
     private double taillePanelImageFond;
 
@@ -486,6 +546,7 @@ public class GestionnaireInterfaceController {
     final ToggleGroup tgPosVignettes = new ToggleGroup();
     final ToggleGroup tgPosComboMenu = new ToggleGroup();
     final ToggleGroup tgPosPlan = new ToggleGroup();
+    final ToggleGroup tgPosCarte = new ToggleGroup();
     private Image imgClaire;
     private Image imgSombre;
     private HBox hbbarreBoutons;
@@ -508,10 +569,12 @@ public class GestionnaireInterfaceController {
     private ImageView ivDroite;
     private ImageView ivHotSpot;
     private ImageView ivHotSpotImage;
+    private ImageView ivHotSpotHTML;
 
     private String strRepertBoutonsPrincipal;
     private String strRepertHotSpots;
     private String strRepertHotSpotsPhoto;
+    private String strRepertHotSpotsHTML;
     private String strRepertBoussoles;
     private CheckBox cbSuivantPrecedent;
     private ImageView imgSuivant;
@@ -526,15 +589,22 @@ public class GestionnaireInterfaceController {
     private Slider slTaillePolice;
     private Slider slOpacite;
     private Slider slTaille;
-    private ColorPicker cpCouleurTheme;
+    private ColorPicker cpCouleurFondTheme;
+    private ColorPicker cpCouleurTexteTheme;
+    private Slider slOpaciteTheme;
+    private ComboBox cbPoliceTheme;
     private ColorPicker cpCouleurHotspots;
     private ColorPicker cpCouleurHotspotsPhoto;
+    private ColorPicker cpCouleurHotspotsHTML;
     private ColorPicker cpCouleurMasques;
     private Color couleurHotspots = Color.hsb(180, 0.39, 0.5);
     private Color couleurHotspotsPhoto = Color.hsb(180, 0.39, 0.5);
+    private Color couleurHotspotsHTML = Color.hsb(180, 0.39, 0.5);
     private Color couleurMasque = Color.hsb(180, 0.39, 0.5);
-    private Color couleurTheme = Color.hsb(180, 0.39, 0.5);
-    private Image[] imgBoutons = new Image[25];
+    private Color couleurFondTheme = Color.hsb(180, 0.39, 0.5);
+    private Color couleurTexteTheme = Color.valueOf("white");
+    private double opaciteTheme = 0.8;
+    private Image[] imgBoutons = new Image[50];
     private String[] strNomImagesBoutons = new String[25];
     private PixelReader[] prLisBoutons = new PixelReader[25];
     private WritableImage[] wiNouveauxBoutons = new WritableImage[25];
@@ -545,6 +615,12 @@ public class GestionnaireInterfaceController {
     private WritableImage wiNouveauxMasque;
     private PixelWriter pwNouveauxMasque;
 
+    /**
+     *
+     * @param strStyleBarre
+     * @param strHotSpot
+     * @param strMA
+     */
     private void chargeBarre(String strStyleBarre, String strHotSpot, String strMA) {
         File fileRepertBarre = new File(strRepertBoutonsPrincipal + File.separator + strStyleBarre);
         File[] fileRepertoires = fileRepertBarre.listFiles(IMAGE_FILTER);
@@ -620,6 +696,15 @@ public class GestionnaireInterfaceController {
         getWiNouveauxBoutons()[getiNombreImagesBouton()] = new WritableImage(iLargeur, iHauteur);
         getPwNouveauxBoutons()[getiNombreImagesBouton()] = getWiNouveauxBoutons()[getiNombreImagesBouton()].getPixelWriter();
         ivHotSpotImage = new ImageView(getWiNouveauxBoutons()[getiNombreImagesBouton()]);
+        setiNombreImagesBouton(i + 2);
+        getImgBoutons()[getiNombreImagesBouton()] = new Image("file:" + strRepertHotSpotsHTML + File.separator + getStrStyleHotSpotHTML());
+        //System.out.println("file:" + strRepertHotSpotsHTML + File.separator + getStrStyleHotSpotHTML());
+        getPrLisBoutons()[getiNombreImagesBouton()] = getImgBoutons()[getiNombreImagesBouton()].getPixelReader();
+        iLargeur = (int) getImgBoutons()[getiNombreImagesBouton()].getWidth();
+        iHauteur = (int) getImgBoutons()[getiNombreImagesBouton()].getHeight();
+        getWiNouveauxBoutons()[getiNombreImagesBouton()] = new WritableImage(iLargeur, iHauteur);
+        getPwNouveauxBoutons()[getiNombreImagesBouton()] = getWiNouveauxBoutons()[getiNombreImagesBouton()].getPixelWriter();
+        ivHotSpotHTML = new ImageView(getWiNouveauxBoutons()[getiNombreImagesBouton()]);
 
         setImgMasque(new Image("file:" + strRepertMasques + File.separator + strMA));
 
@@ -633,9 +718,16 @@ public class GestionnaireInterfaceController {
         changeCouleurBarreClassique(couleurBarreClassique.getHue(), couleurBarreClassique.getSaturation(), couleurBarreClassique.getBrightness());
         changeCouleurHS(couleurHotspots.getHue(), couleurHotspots.getSaturation(), couleurHotspots.getBrightness());
         changeCouleurHSPhoto(couleurHotspotsPhoto.getHue(), couleurHotspotsPhoto.getSaturation(), couleurHotspotsPhoto.getBrightness());
+        changeCouleurHSHTML(couleurHotspotsHTML.getHue(), couleurHotspotsHTML.getSaturation(), couleurHotspotsHTML.getBrightness());
         changeCouleurMasque(couleurMasque.getHue(), couleurMasque.getSaturation(), couleurMasque.getBrightness());
     }
 
+    /**
+     *
+     * @param couleurFinale
+     * @param sat
+     * @param bright
+     */
     private void changeCouleurBarrePersonnalisee(double couleurFinale, double sat, double bright) {
         PixelReader prBarrePersonnalisee;
         prBarrePersonnalisee = imgPngBarrePersonnalisee.getPixelReader();
@@ -689,13 +781,18 @@ public class GestionnaireInterfaceController {
 
     }
 
+    /**
+     *
+     * @param couleurFinale
+     * @param sat
+     * @param bright
+     */
     private void changeCouleurBarreClassique(double couleurFinale, double sat, double bright) {
-        for (int i = 0; i < getiNombreImagesBouton() - 1; i++) {
+        for (int i = 0; i < getiNombreImagesBouton() - 2; i++) {
             for (int y = 0; y < getImgBoutons()[i].getHeight(); y++) {
                 for (int x = 0; x < getImgBoutons()[i].getWidth(); x++) {
                     Color color = getPrLisBoutons()[i].getColor(x, y);
                     double brightness = color.getBrightness();
-                    //double hue = color.getHue() / 360.0;  //getHue() return 0.0-360.0
                     double saturation = color.getSaturation();
                     double opacity = color.getOpacity();
                     Color couleur;
@@ -715,12 +812,17 @@ public class GestionnaireInterfaceController {
 
     }
 
+    /**
+     *
+     * @param couleurFinale
+     * @param sat
+     * @param bright
+     */
     private void changeCouleurMasque(double couleurFinale, double sat, double bright) {
         for (int y = 0; y < getImgMasque().getHeight(); y++) {
             for (int x = 0; x < getImgMasque().getWidth(); x++) {
                 Color color = getPrLisMasque().getColor(x, y);
                 double brightness = color.getBrightness();
-                //double hue = color.getHue() / 360.0;  //getHue() return 0.0-360.0
                 double saturation = color.getSaturation();
                 double opacity = color.getOpacity();
                 Color couleur;
@@ -743,11 +845,6 @@ public class GestionnaireInterfaceController {
                         double exp = Math.exp(-4 * Math.pow(2 * brightness - 1, 2));
                         bright1 = bright * exp + brightness * (1 - exp);
                     }
-//                            if (brightness > 0.1 && brightness < 0.9) {
-//                        bright1 = brightness * 0.5 + bright * 0.5;
-//                    } else {
-//                        bright1 = brightness;
-//                    }
                     couleur = Color.hsb(couleurFinale, sat1, bright1, opacity);
 
                 }
@@ -756,57 +853,142 @@ public class GestionnaireInterfaceController {
         }
     }
 
+    /**
+     *
+     * @param couleurFinale
+     * @param sat
+     * @param bright
+     */
     private void changeCouleurHS(double couleurFinale, double sat, double bright) {
-        for (int y = 0; y < getImgBoutons()[getiNombreImagesBouton() - 1].getHeight(); y++) {
-            for (int x = 0; x < getImgBoutons()[getiNombreImagesBouton() - 1].getWidth(); x++) {
-                Color color = getPrLisBoutons()[getiNombreImagesBouton() - 1].getColor(x, y);
+        for (int y = 0; y < getImgBoutons()[getiNombreImagesBouton() - 2].getHeight(); y++) {
+            for (int x = 0; x < getImgBoutons()[getiNombreImagesBouton() - 2].getWidth(); x++) {
+                Color color = getPrLisBoutons()[getiNombreImagesBouton() - 2].getColor(x, y);
                 double brightness = color.getBrightness();
-                //double hue = color.getHue() / 360.0;  //getHue() return 0.0-360.0
                 double saturation = color.getSaturation();
                 double opacity = color.getOpacity();
                 Color couleur;
                 if ((sat < 0.02) && (saturation > 0.05)) {
-                    couleur = Color.hsb(couleurFinale, sat, brightness * 0.5 + bright * 0.5, opacity);
-                } else {
-                    if (saturation > 0.05) {
-                        couleur = Color.hsb(couleurFinale, saturation * 0.5 + sat * 0.5, brightness * 0.5 + bright * 0.5, opacity);
+                    double bright1;
+                    if (brightness > 0.1 && brightness < 0.9) {
+                        bright1 = brightness * 0.5 + bright * 0.5;
                     } else {
-                        couleur = Color.hsb(couleurFinale, saturation, brightness, opacity);
+                        bright1 = brightness;
                     }
+                    couleur = Color.hsb(couleurFinale, sat, bright1, opacity);
+                } else {
+                    double sat1;
+                    double bright1;
+                    if (saturation < 0.3 || (brightness < 0.2 || brightness > 0.8)) {
+                        sat1 = saturation;
+                        bright1 = brightness;
+                    } else {
+                        sat1 = saturation * (1 - saturation + sat);
+                        double exp = Math.exp(-4 * Math.pow(2 * brightness - 1, 2));
+                        bright1 = bright * exp + brightness * (1 - exp);
+                    }
+                    couleur = Color.hsb(couleurFinale, sat1, bright1, opacity);
+
+                }
+                getPwNouveauxBoutons()[getiNombreImagesBouton() - 2].setColor(x, y, couleur);
+            }
+        }
+    }
+
+    /**
+     *
+     * @param couleurFinale
+     * @param sat
+     * @param bright
+     */
+    private void changeCouleurHSPhoto(double couleurFinale, double sat, double bright) {
+        for (int y = 0; y < getImgBoutons()[getiNombreImagesBouton() - 1].getHeight(); y++) {
+            for (int x = 0; x < getImgBoutons()[getiNombreImagesBouton() - 1].getWidth(); x++) {
+                Color color = getPrLisBoutons()[getiNombreImagesBouton() - 1].getColor(x, y);
+                double brightness = color.getBrightness();
+                double saturation = color.getSaturation();
+                double opacity = color.getOpacity();
+                Color couleur;
+                if ((sat < 0.02) && (saturation > 0.05)) {
+                    double bright1;
+                    if (brightness > 0.1 && brightness < 0.9) {
+                        bright1 = brightness * 0.5 + bright * 0.5;
+                    } else {
+                        bright1 = brightness;
+                    }
+                    couleur = Color.hsb(couleurFinale, sat, bright1, opacity);
+                } else {
+                    double sat1;
+                    double bright1;
+                    if (saturation < 0.3 || (brightness < 0.2 || brightness > 0.8)) {
+                        sat1 = saturation;
+                        bright1 = brightness;
+                    } else {
+                        sat1 = saturation * (1 - saturation + sat);
+                        double exp = Math.exp(-4 * Math.pow(2 * brightness - 1, 2));
+                        bright1 = bright * exp + brightness * (1 - exp);
+                    }
+                    couleur = Color.hsb(couleurFinale, sat1, bright1, opacity);
+
                 }
                 getPwNouveauxBoutons()[getiNombreImagesBouton() - 1].setColor(x, y, couleur);
             }
         }
     }
 
-    private void changeCouleurHSPhoto(double couleurFinale, double sat, double bright) {
+    /**
+     *
+     * @param couleurFinale
+     * @param sat
+     * @param bright
+     */
+    private void changeCouleurHSHTML(double couleurFinale, double sat, double bright) {
         for (int y = 0; y < getImgBoutons()[getiNombreImagesBouton()].getHeight(); y++) {
             for (int x = 0; x < getImgBoutons()[getiNombreImagesBouton()].getWidth(); x++) {
                 Color color = getPrLisBoutons()[getiNombreImagesBouton()].getColor(x, y);
                 double brightness = color.getBrightness();
-                //double hue = color.getHue() / 360.0;  //getHue() return 0.0-360.0
                 double saturation = color.getSaturation();
                 double opacity = color.getOpacity();
                 Color couleur;
                 if ((sat < 0.02) && (saturation > 0.05)) {
-                    couleur = Color.hsb(couleurFinale, sat, brightness * 0.5 + bright * 0.5, opacity);
-                } else {
-                    if (saturation > 0.05) {
-                        couleur = Color.hsb(couleurFinale, saturation * 0.5 + sat * 0.5, brightness * 0.5 + bright * 0.5, opacity);
+                    double bright1;
+                    if (brightness > 0.1 && brightness < 0.9) {
+                        bright1 = brightness * 0.5 + bright * 0.5;
                     } else {
-                        couleur = Color.hsb(couleurFinale, saturation, brightness, opacity);
+                        bright1 = brightness;
                     }
+                    couleur = Color.hsb(couleurFinale, sat, bright1, opacity);
+                } else {
+                    double sat1;
+                    double bright1;
+                    if (saturation < 0.3 || (brightness < 0.2 || brightness > 0.8)) {
+                        sat1 = saturation;
+                        bright1 = brightness;
+                    } else {
+                        sat1 = saturation * (1 - saturation + sat);
+                        double exp = Math.exp(-4 * Math.pow(2 * brightness - 1, 2));
+                        bright1 = bright * exp + brightness * (1 - exp);
+                    }
+                    couleur = Color.hsb(couleurFinale, sat1, bright1, opacity);
+
                 }
                 getPwNouveauxBoutons()[getiNombreImagesBouton()].setColor(x, y, couleur);
             }
         }
     }
 
+    /**
+     *
+     * @param coul
+     */
     private void changeCouleurTitre(String coul) {
         setStrCouleurFondTitre("#" + coul);
         lblTxtTitre.setStyle("-fx-background-color : " + getStrCouleurFondTitre());
     }
 
+    /**
+     *
+     * @param coul
+     */
     private void changeCouleurVignettes(String coul) {
         setStrCouleurFondVignettes("#" + coul);
         afficheVignettes();
@@ -877,8 +1059,12 @@ public class GestionnaireInterfaceController {
         imgBoussole.setVisible(isbAfficheBoussole());
     }
 
+    /**
+     *
+     * @param index
+     */
     private void afficheImage(int index) {
-        Image imgAffiche = panoramiquesProjet[index].getImgPanoramique();
+        Image imgAffiche = getPanoramiquesProjet()[index].getImgPanoramique();
         Rectangle2D r2dVue = new Rectangle2D(200, 0, 800, 600);
         ivVisualisation.setViewport(r2dVue);
         ivVisualisation.setImage(imgAffiche);
@@ -1019,6 +1205,9 @@ public class GestionnaireInterfaceController {
         ivEmail.setLayoutY(posY);
     }
 
+    /**
+     *
+     */
     public void afficheDiaporama() {
         apAfficheDiapo.getChildren().clear();
         apAfficheDiapo.setOpacity(getDiaporamaOpacite());
@@ -1056,7 +1245,7 @@ public class GestionnaireInterfaceController {
                 double URLPosY = (ivVisualisation.getFitHeight() - lblFenetreURL.prefHeight(-1)) / 2 + getFenetreURLPosY() + ivVisualisation.getLayoutY();
                 lblFenetreURL.relocate(URLPosX, URLPosY);
             } else {
-                Image imgFenetreInfo = new Image("file:" + strRepertAppli + File.separator + "images" + File.separator + "infoDefaut.jpg");
+                Image imgFenetreInfo = new Image("file:" + getStrRepertAppli() + File.separator + "images" + File.separator + "infoDefaut.jpg");
                 ImageView ivFenetreInfo = new ImageView(imgFenetreInfo);
                 ivFenetreInfo.setOpacity(0.8);
                 apFenetreAfficheInfo.getChildren().add(ivFenetreInfo);
@@ -1092,7 +1281,7 @@ public class GestionnaireInterfaceController {
                 apFenetreAfficheInfo.setLayoutY((ivVisualisation.getFitHeight() - ivFenetreAide.getFitHeight()) / 2 + getFenetreAidePosY() + ivVisualisation.getLayoutY());
 
             } else {
-                Image imgFenetreInfo = new Image("file:" + strRepertAppli + File.separator + "images/aideDefaut.jpg");
+                Image imgFenetreInfo = new Image("file:" + getStrRepertAppli() + File.separator + "images/aideDefaut.jpg");
                 ImageView ivFenetreInfo = new ImageView(imgFenetreInfo);
                 ivFenetreInfo.setOpacity(0.8);
                 apFenetreAfficheInfo.getChildren().add(ivFenetreInfo);
@@ -1107,23 +1296,93 @@ public class GestionnaireInterfaceController {
 
     }
 
+    /**
+     *
+     */
+    public void afficheCarte() {
+        if (isbAfficheCarte()) {
+            double marge = 10.d;
+            apVisuCarte.getChildren().clear();
+            apVisuCarte.getChildren().add(apNavigateurCarte);
+            apVisuCarte.setPrefSize(largeurCarte + marge * 2, hauteurCarte + marge * 2);
+            apVisuCarte.setMinSize(largeurCarte + marge * 2, hauteurCarte + marge * 2);
+            apVisuCarte.setMaxSize(largeurCarte + marge * 2, hauteurCarte + marge * 2);
+            apNavigateurCarte.setPrefSize(largeurCarte, hauteurCarte);
+            apNavigateurCarte.setMinSize(largeurCarte, hauteurCarte);
+            apNavigateurCarte.setMaxSize(largeurCarte, hauteurCarte);
+            apNavigateurCarte.setLayoutX(marge);
+            apNavigateurCarte.setLayoutY(marge);
+            int rouge, vert, bleu;
+            rouge = (int) Math.round(getCouleurFondCarte().getRed() * 255);
+            vert = (int) Math.round(getCouleurFondCarte().getGreen() * 255);
+            bleu = (int) Math.round(getCouleurFondCarte().getBlue() * 255);
+
+            apVisuCarte.setStyle("-fx-background-color : rgba(" + rouge + "," + vert + "," + bleu + "," + getOpaciteCarte() + ");");
+            double positionX = 0;
+            double positionY;
+            if (isbAfficheTitre()) {
+                positionY = ivVisualisation.getLayoutY() + lblTxtTitre.getHeight();
+            } else {
+                positionY = ivVisualisation.getLayoutY();
+            }
+            switch (getStrPositionCarte()) {
+                case "left":
+                    positionX = ivVisualisation.getLayoutX();
+                    break;
+                case "right":
+                    positionX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - apVisuCarte.getPrefWidth();
+                    break;
+            }
+            apVisuCarte.setLayoutX(positionX);
+            apVisuCarte.setLayoutY(positionY);
+            if (bAfficheRadarCarte) {
+                CoordonneesGeographiques coords = null;
+                if (getCoordCentreCarte() != null) {
+                    coords = getCoordCentreCarte();
+                } else {
+                    coords = navigateurCarteOL.recupereCoordonnees();
+                }
+                if (getiNombrePanoramiques() > 0) {
+                    if (getPanoramiquesProjet()[getiPanoActuel()].getMarqueurGeolocatisation() != null) {
+                        navigateurCarteOL.afficheRadar(
+                                getPanoramiquesProjet()[getiPanoActuel()].getMarqueurGeolocatisation(), angleRadarCarte, ouvertureRadarCarte, getTailleRadarCarte(), "#" + getStrCouleurLigneRadarCarte(), "#" + getStrCouleurFondRadarCarte(), getOpaciteRadarCarte()
+                        );
+                    } else {
+                        navigateurCarteOL.afficheRadar(
+                                coords, angleRadarCarte, ouvertureRadarCarte, getTailleRadarCarte(), "#" + getStrCouleurLigneRadarCarte(), "#" + getStrCouleurFondRadarCarte(), getOpaciteRadarCarte()
+                        );
+                    }
+                } else {
+                    navigateurCarteOL.afficheRadar(
+                            coords, angleRadarCarte, ouvertureRadarCarte, getTailleRadarCarte(), "#" + getStrCouleurLigneRadarCarte(), "#" + getStrCouleurFondRadarCarte(), getOpaciteRadarCarte()
+                    );
+                }
+
+            }
+        }
+        apVisuCarte.setVisible(isbAfficheCarte());
+    }
+
+    /**
+     *
+     */
     public void affichePlan() {
 
         apVisuPlan.setVisible(isbAffichePlan());
         if (isbAffichePlan()) {
             double marge = 10.d;
             apVisuPlan.getChildren().clear();
-            ImageView ivHSPlanActif = new ImageView(new Image("file:" + strRepertAppli + "/theme/plan/pointActif.png", 12, 12, true, true));
-            ImageView ivHSPlan = new ImageView(new Image("file:" + strRepertAppli + "/theme/plan/point.png", 12, 12, true, true));
+            ImageView ivHSPlanActif = new ImageView(new Image("file:" + getStrRepertAppli() + "/theme/plan/pointActif.png", 12, 12, true, true));
+            ImageView ivHSPlan = new ImageView(new Image("file:" + getStrRepertAppli() + "/theme/plan/point.png", 12, 12, true, true));
             Image imgPlan;
-            if (iNombrePlans > 0) {
-                String strFichier = strRepertTemp + "/images/" + plans[gestionnairePlan.getiPlanActuel()].getStrImagePlan();
+            if (getiNombrePlans() > 0) {
+                String strFichier = getStrRepertTemp() + "/images/" + getPlans()[getGestionnairePlan().getiPlanActuel()].getStrImagePlan();
                 imgPlan = new Image(
                         "file:" + strFichier, getLargeurPlan(), -1, true, true
                 );
             } else {
                 imgPlan = new Image(
-                        "file:" + strRepertAppli + "/theme/plan/planDefaut.jpg", getLargeurPlan(), -1, true, true
+                        "file:" + getStrRepertAppli() + "/theme/plan/planDefaut.jpg", getLargeurPlan(), -1, true, true
                 );
 
             }
@@ -1166,41 +1425,44 @@ public class GestionnaireInterfaceController {
             }
             apVisuPlan.setLayoutX(positionX);
             apVisuPlan.setLayoutY(positionY);
-            if (iNombrePlans > 0) {
+            if (getiNombrePlans() > 0) {
 
-                String strRepertImagePlan = strRepertAppli + File.separator + "theme/plan";
+                String strRepertImagePlan = getStrRepertAppli() + File.separator + "theme/plan";
                 String strImageBoussole1 = "file:" + strRepertImagePlan + "/aiguillePlan.png";
                 Image imgBoussole1 = new Image(strImageBoussole1);
                 ImageView ivNord = new ImageView(imgBoussole1);
 
-                String strPositX = plans[gestionnairePlan.getiPlanActuel()].getStrPosition().split(":")[1];
-                String strPositY = plans[gestionnairePlan.getiPlanActuel()].getStrPosition().split(":")[0];
+                String strPositX = getPlans()[getGestionnairePlan().getiPlanActuel()].getStrPosition().split(":")[1];
+                String strPositY = getPlans()[getGestionnairePlan().getiPlanActuel()].getStrPosition().split(":")[0];
                 positionX = 0;
                 positionY = 0;
                 switch (strPositX) {
                     case "left":
-                        positionX = ivImgPlan.getLayoutX() + plans[gestionnairePlan.getiPlanActuel()].getPositionX();
+                        positionX = ivImgPlan.getLayoutX() + getPlans()[getGestionnairePlan().getiPlanActuel()].getPositionX();
                         break;
                     case "right":
-                        positionX = ivImgPlan.getLayoutX() + imgPlan.getWidth() - imgBoussole1.getWidth() - plans[gestionnairePlan.getiPlanActuel()].getPositionX();
+                        positionX = ivImgPlan.getLayoutX() + imgPlan.getWidth() - imgBoussole1.getWidth() - getPlans()[getGestionnairePlan().getiPlanActuel()].getPositionX();
                         break;
                 }
                 switch (strPositY) {
                     case "top":
-                        positionY = ivImgPlan.getLayoutY() + plans[gestionnairePlan.getiPlanActuel()].getPositionY();
+                        positionY = ivImgPlan.getLayoutY() + getPlans()[getGestionnairePlan().getiPlanActuel()].getPositionY();
                         break;
                     case "bottom":
-                        positionY = ivImgPlan.getLayoutY() + imgPlan.getHeight() - imgBoussole1.getHeight() - plans[gestionnairePlan.getiPlanActuel()].getPositionY();
+                        positionY = ivImgPlan.getLayoutY() + imgPlan.getHeight() - imgBoussole1.getHeight() - getPlans()[getGestionnairePlan().getiPlanActuel()].getPositionY();
                         break;
                 }
                 ivNord.setLayoutX(positionX);
                 ivNord.setLayoutY(positionY);
-                ivNord.setRotate(plans[gestionnairePlan.getiPlanActuel()].getDirectionNord());
+                ivNord.setRotate(getPlans()[getGestionnairePlan().getiPlanActuel()].getDirectionNord());
                 apVisuPlan.getChildren().add(ivNord);
             }
         }
     }
 
+    /**
+     *
+     */
     private void afficheComboMenu() {
         apVisuComboMenu.getChildren().clear();
         if (isbAfficheComboMenu()) {
@@ -1208,9 +1470,9 @@ public class GestionnaireInterfaceController {
             apVisuComboMenu.setPrefHeight(50);
             ImageView ivImageMenu;
             if (isbAfficheComboMenuImages()) {
-                ivImageMenu = new ImageView(new Image("file:" + strRepertAppli + "/images/menuAvecImage.jpg"));
+                ivImageMenu = new ImageView(new Image("file:" + getStrRepertAppli() + "/images/menuAvecImage.jpg"));
             } else {
-                ivImageMenu = new ImageView(new Image("file:" + strRepertAppli + "/images/menuSansImage.jpg"));
+                ivImageMenu = new ImageView(new Image("file:" + getStrRepertAppli() + "/images/menuSansImage.jpg"));
             }
             apVisuComboMenu.getChildren().add(ivImageMenu);
             double posX = 0, posY = 0;
@@ -1295,7 +1557,7 @@ public class GestionnaireInterfaceController {
 
         apVisuVignettes.setVisible(isbAfficheVignettes());
         if (isbAfficheVignettes()) {
-            ImageView[] ivVignettes = new ImageView[iNombrePanoramiques];
+            ImageView[] ivVignettes = new ImageView[getiNombrePanoramiques()];
             apVisuVignettes.getChildren().clear();
             apVisuVignettes.setOpacity(getOpaciteVignettes());
             apVisuVignettes.setStyle("-fx-background-color : " + getStrCouleurFondVignettes());
@@ -1364,9 +1626,9 @@ public class GestionnaireInterfaceController {
                     break;
             }
             int iMaxVignettes = 5;
-            int iNombre = (iNombrePanoramiques > iMaxVignettes) ? iMaxVignettes : iNombrePanoramiques;
+            int iNombre = (getiNombrePanoramiques() > iMaxVignettes) ? iMaxVignettes : getiNombrePanoramiques();
             for (int i = 0; i < iNombre; i++) {
-                ivVignettes[i] = new ImageView(panoramiquesProjet[i].getImgVignettePanoramique());
+                ivVignettes[i] = new ImageView(getPanoramiquesProjet()[i].getImgVignettePanoramique());
                 ivVignettes[i].setFitWidth(getTailleImageVignettes());
                 ivVignettes[i].setFitHeight(getTailleImageVignettes() / 2);
                 switch (getStrPositionVignettes()) {
@@ -1395,6 +1657,11 @@ public class GestionnaireInterfaceController {
 
     }
 
+    /**
+     *
+     * @param nb
+     * @return
+     */
     private int chercheZone(int nb) {
         int iNumero = -1;
         String strZone = "area-" + nb;
@@ -1407,6 +1674,9 @@ public class GestionnaireInterfaceController {
         return iNumero;
     }
 
+    /**
+     *
+     */
     public void afficheBarrePersonnalisee() {
         apAfficheBarrePersonnalisee.getChildren().clear();
         if (!tfLienImageBarrePersonnalisee.getText().equals("")) {
@@ -1463,17 +1733,17 @@ public class GestionnaireInterfaceController {
                     switch (getStrPositionVignettes()) {
                         case "bottom":
                             if (strPositVert.equals("bottom")) {
-                                LY = ivVisualisation.getLayoutY() + ivVisualisation.getFitHeight() - apAfficheBarrePersonnalisee.getPrefHeight() - getOffsetYBarreClassique() - apVisuVignettes.getPrefHeight() + ajoutY - hauteur / 2.d;
+                                LY = LY - apVisuVignettes.getPrefHeight();
                             }
                             break;
                         case "left":
                             if (strPositHor.equals("left")) {
-                                LX = ivVisualisation.getLayoutX() + getOffsetXBarreClassique() + apVisuVignettes.getPrefWidth() + ajoutX - largeur / 2.d;
+                                LX = LX + apVisuVignettes.getPrefWidth();
                             }
                             break;
                         case "right":
                             if (strPositHor.equals("right")) {
-                                LX = ivVisualisation.getLayoutX() + ivVisualisation.getFitWidth() - apAfficheBarrePersonnalisee.getPrefWidth() - getOffsetXBarreClassique() - apVisuVignettes.getPrefWidth() - ajoutX + largeur / 2.d;
+                                LX = LX - apVisuVignettes.getPrefWidth();
                             }
                             break;
                     }
@@ -1485,7 +1755,7 @@ public class GestionnaireInterfaceController {
                 if (getStrInfoBarrePersonnalisee().equals("oui")) {
                     int iNum = chercheZone(zone);
                     if (iNum != -1) {
-                        ImageView ivInfoBarrePersonnalisee = new ImageView(new Image("file:" + strRepertAppli + "/theme/telecommandes/info.png"));
+                        ImageView ivInfoBarrePersonnalisee = new ImageView(new Image("file:" + getStrRepertAppli() + "/theme/telecommandes/info.png"));
                         ivInfoBarrePersonnalisee.setFitWidth(getTailleIconesBarrePersonnalisee());
                         ivInfoBarrePersonnalisee.setFitHeight(getTailleIconesBarrePersonnalisee());
                         ivInfoBarrePersonnalisee.setLayoutX(getZonesBarrePersonnalisee()[iNum].getCentre().getX() - getTailleIconesBarrePersonnalisee() / 2);
@@ -1497,7 +1767,7 @@ public class GestionnaireInterfaceController {
                 if (getStrAideBarrePersonnalisee().equals("oui")) {
                     int iNum = chercheZone(zone);
                     if (iNum != -1) {
-                        ImageView ivAideBarrePersonnalisee = new ImageView(new Image("file:" + strRepertAppli + "/theme/telecommandes/aide.png"));
+                        ImageView ivAideBarrePersonnalisee = new ImageView(new Image("file:" + getStrRepertAppli() + "/theme/telecommandes/aide.png"));
                         ivAideBarrePersonnalisee.setFitWidth(getTailleIconesBarrePersonnalisee());
                         ivAideBarrePersonnalisee.setFitHeight(getTailleIconesBarrePersonnalisee());
                         ivAideBarrePersonnalisee.setLayoutX(getZonesBarrePersonnalisee()[iNum].getCentre().getX() - getTailleIconesBarrePersonnalisee() / 2);
@@ -1509,7 +1779,7 @@ public class GestionnaireInterfaceController {
                 if (getStrRotationBarrePersonnalisee().equals("oui")) {
                     int iNum = chercheZone(zone);
                     if (iNum != -1) {
-                        ImageView ivRotationBarrePersonnalisee = new ImageView(new Image("file:" + strRepertAppli + "/theme/telecommandes/rotation.png"));
+                        ImageView ivRotationBarrePersonnalisee = new ImageView(new Image("file:" + getStrRepertAppli() + "/theme/telecommandes/rotation.png"));
                         ivRotationBarrePersonnalisee.setFitWidth(getTailleIconesBarrePersonnalisee());
                         ivRotationBarrePersonnalisee.setFitHeight(getTailleIconesBarrePersonnalisee());
                         ivRotationBarrePersonnalisee.setLayoutX(getZonesBarrePersonnalisee()[iNum].getCentre().getX() - getTailleIconesBarrePersonnalisee() / 2);
@@ -1521,7 +1791,7 @@ public class GestionnaireInterfaceController {
                 if (getStrSourisBarrePersonnalisee().equals("oui")) {
                     int iNum = chercheZone(zone);
                     if (iNum != -1) {
-                        ImageView ivSourisBarrePersonnalisee = new ImageView(new Image("file:" + strRepertAppli + "/theme/telecommandes/souris.png"));
+                        ImageView ivSourisBarrePersonnalisee = new ImageView(new Image("file:" + getStrRepertAppli() + "/theme/telecommandes/souris.png"));
                         ivSourisBarrePersonnalisee.setFitWidth(getTailleIconesBarrePersonnalisee());
                         ivSourisBarrePersonnalisee.setFitHeight(getTailleIconesBarrePersonnalisee());
                         ivSourisBarrePersonnalisee.setLayoutX(getZonesBarrePersonnalisee()[iNum].getCentre().getX() - getTailleIconesBarrePersonnalisee() / 2);
@@ -1533,7 +1803,7 @@ public class GestionnaireInterfaceController {
                 if (getStrPleinEcranBarrePersonnalisee().equals("oui")) {
                     int iNum = chercheZone(zone);
                     if (iNum != -1) {
-                        ImageView ivFSBarrePersonnalisee = new ImageView(new Image("file:" + strRepertAppli + "/theme/telecommandes/fs.png"));
+                        ImageView ivFSBarrePersonnalisee = new ImageView(new Image("file:" + getStrRepertAppli() + "/theme/telecommandes/fs.png"));
                         ivFSBarrePersonnalisee.setFitWidth(getTailleIconesBarrePersonnalisee());
                         ivFSBarrePersonnalisee.setFitHeight(getTailleIconesBarrePersonnalisee());
                         ivFSBarrePersonnalisee.setLayoutX(getZonesBarrePersonnalisee()[iNum].getCentre().getX() - getTailleIconesBarrePersonnalisee() / 2);
@@ -1546,6 +1816,14 @@ public class GestionnaireInterfaceController {
         }
     }
 
+    /**
+     *
+     * @param strNomFichier
+     * @param zonesBarre
+     * @return
+     * @throws UnsupportedEncodingException
+     * @throws IOException
+     */
     public int lisFichierShp(String strNomFichier, ZoneTelecommande[] zonesBarre) throws UnsupportedEncodingException, IOException {
         try {
             File fileFichier = new File(strNomFichier);
@@ -1556,10 +1834,10 @@ public class GestionnaireInterfaceController {
                         new FileInputStream(strNomFichier), "UTF-8"))) {
                     strTexte = "";
                     String strLigneTexte;
-                    iNombrePanoramiquesFichier = 0;
+                    setiNombrePanoramiquesFichier(0);
                     while ((strLigneTexte = brLisFichier.readLine()) != null) {
                         if (strLigneTexte.contains("Panoramique=>")) {
-                            iNombrePanoramiquesFichier++;
+                            setiNombrePanoramiquesFichier(getiNombrePanoramiquesFichier() + 1);
                             //System.out.println("nombre pano fichier : " + nombrePanoramiquesFichier);
                         }
                         strTexte += strLigneTexte + "\n";
@@ -1616,12 +1894,6 @@ public class GestionnaireInterfaceController {
                                 }
                             }
                             zonesBarre[iNombreZonesBarre].calculeCentre();
-                            //System.out.println("id : " + zonesBarre[nombreZonesBarre].getStrIdZone()
-                            // + ", shape : " + zonesBarre[nombreZonesBarre].getStrTypeZone()
-                            // + ", coord : " + zonesBarre[nombreZonesBarre].getStrCoordonneesZone()
-                            // + ", centre : " + zonesBarre[nombreZonesBarre].getCentre().getX()
-                            // + ";" + zonesBarre[nombreZonesBarre].getCentre().getY()
-                            //);
                             switch (zonesBarre[iNombreZonesBarre].getStrIdZone()) {
                                 case "telUp":
                                 case "telDown":
@@ -1682,8 +1954,12 @@ public class GestionnaireInterfaceController {
 
     }
 
+    /**
+     *
+     * @throws IOException
+     */
     public void choixBarrePersonnalisee() throws IOException {
-        strRepertBarrePersonnalisee = strRepertAppli + "/theme/telecommandes";
+        strRepertBarrePersonnalisee = getStrRepertAppli() + "/theme/telecommandes";
         File fileRepert;
         fileRepert = new File(strRepertBarrePersonnalisee);
         FileChooser fileChooser = new FileChooser();
@@ -1713,6 +1989,11 @@ public class GestionnaireInterfaceController {
         }
     }
 
+    /**
+     *
+     * @param strNomFichier
+     * @throws IOException
+     */
     public void chargeBarrePersonnalisee(String strNomFichier) throws IOException {
         if (strNomFichier.length() > 4) {
             strNomFichier = strNomFichier.substring(0, strNomFichier.length() - 4);
@@ -1800,7 +2081,7 @@ public class GestionnaireInterfaceController {
                 apVisualisation.getChildren().add(ivImageFond);
             }
         }
-        apVisualisation.getChildren().addAll(lblTxtTitre, imgBoussole, imgAiguille, ivTwitter, ivGoogle, ivFacebook, ivEmail, apVisuVignettes, apVisuComboMenu, apVisuPlan, vbFondSuivant, vbFondPrecedent);
+        apVisualisation.getChildren().addAll(lblTxtTitre, imgBoussole, imgAiguille, ivTwitter, ivGoogle, ivFacebook, ivEmail, apVisuVignettes, apVisuComboMenu, vbFondSuivant, vbFondPrecedent);
         lblTxtTitre.setVisible(isbAfficheTitre());
         chargeBarre(strStyleBoutons, strStyleHS, getStrImageMasque());
         afficheMasque();
@@ -1814,7 +2095,7 @@ public class GestionnaireInterfaceController {
         ivHotSpot.setLayoutY(310);
         ivHotSpot.setTranslateZ(1);
         Tooltip tltpHSPano = new Tooltip("Hotspot panoramique");
-        tltpHSPano.setStyle(strTooltipStyle);
+        tltpHSPano.setStyle(getStrTooltipStyle());
         Tooltip.install(ivHotSpot, tltpHSPano);
         ivHotSpotImage.setFitWidth(30);
         ivHotSpotImage.setPreserveRatio(true);
@@ -1822,8 +2103,19 @@ public class GestionnaireInterfaceController {
         ivHotSpotImage.setLayoutY(310);
         ivHotSpotImage.setTranslateZ(1);
         Tooltip tltpHSImage = new Tooltip("Hotspot Photo");
-        tltpHSImage.setStyle(strTooltipStyle);
+        tltpHSImage.setStyle(getStrTooltipStyle());
         Tooltip.install(ivHotSpotImage, tltpHSImage);
+        ivHotSpotHTML.setFitWidth(30);
+        ivHotSpotHTML.setPreserveRatio(true);
+        ivHotSpotHTML.setLayoutX(610);
+        ivHotSpotHTML.setLayoutY(310);
+        ivHotSpotHTML.setTranslateZ(1);
+        Tooltip tltpHSHTML = new Tooltip("Hotspot HTML");
+        tltpHSHTML.setStyle(getStrTooltipStyle());
+        Tooltip.install(ivHotSpotHTML, tltpHSHTML);
+        changeCouleurHS(couleurHotspots.getHue(), couleurHotspots.getSaturation(), couleurHotspots.getBrightness());
+        changeCouleurHSPhoto(couleurHotspotsPhoto.getHue(), couleurHotspotsPhoto.getSaturation(), couleurHotspotsPhoto.getBrightness());
+        changeCouleurHSHTML(couleurHotspotsHTML.getHue(), couleurHotspotsHTML.getSaturation(), couleurHotspotsHTML.getBrightness());
         int iNombreBoutons = 11;
         if (getStrDeplacementsBarreClassique().equals("non")) {
             iNombreBoutons -= 4;
@@ -1864,7 +2156,7 @@ public class GestionnaireInterfaceController {
         if (getStrOutilsBarreClassique().equals("non")) {
             hbbarreBoutons.getChildren().remove(hbOutils);
         }
-        apVisualisation.getChildren().addAll(hbbarreBoutons, ivHotSpot, ivHotSpotImage, apAfficheDiapo, apFenetreAfficheInfo, lblFenetreURL, ivDiapo, apAfficheBarrePersonnalisee);
+        apVisualisation.getChildren().addAll(hbbarreBoutons, ivHotSpot, ivHotSpotImage, ivHotSpotHTML, apAfficheDiapo, apFenetreAfficheInfo, lblFenetreURL, ivDiapo, apAfficheBarrePersonnalisee, apVisuPlan, apVisuCarte);
         ivHaut.setFitWidth(taille);
         ivHaut.setFitHeight(taille);
         ivBas.setFitWidth(taille);
@@ -1951,7 +2243,7 @@ public class GestionnaireInterfaceController {
 
     /**
      *
-     * @param repertoire
+     * @param strRepertoire
      * @return
      */
     private ArrayList<String> strListerStyle(String strRepertoire) {
@@ -1985,6 +2277,11 @@ public class GestionnaireInterfaceController {
         return strListe;
     }
 
+    /**
+     *
+     * @param strRepertoire
+     * @return
+     */
     private ArrayList<String> strListerBoussoles(String strRepertoire) {
         ArrayList<String> strListe = new ArrayList<>();
         File[] fileRepertoires = new File(strRepertoire).listFiles(PNG_FILTER);
@@ -1999,6 +2296,11 @@ public class GestionnaireInterfaceController {
         return strListe;
     }
 
+    /**
+     *
+     * @param strRepertoire
+     * @return
+     */
     private ArrayList<String> strListerMasques(String strRepertoire) {
         ArrayList<String> strListe = new ArrayList<>();
         File[] fileRepertoires = new File(strRepertoire).listFiles(PNG_FILTER);
@@ -2017,15 +2319,22 @@ public class GestionnaireInterfaceController {
      */
     public String strGetTemplate() {
         String strContenuFichier = "";
+        CoordonneesGeographiques coords = null;
+        if (getCoordCentreCarte() != null) {
+            coords = getCoordCentreCarte();
+        } else {
+            coords = navigateurCarteOL.recupereCoordonnees();
+        }
         strContenuFichier
                 += "styleBarre=" + getStyleBarreClassique() + "\n"
-                + "couleurTheme=" + couleurTheme.toString().substring(2, 8) + "\n"
                 + "couleurBoutons=" + couleurBarreClassique.toString().substring(2, 8) + "\n"
                 + "couleurHotspots=" + couleurHotspots.toString().substring(2, 8) + "\n"
                 + "couleurHotspotsPhoto=" + couleurHotspotsPhoto.toString().substring(2, 8) + "\n"
+                + "couleurHotspotsHTML=" + couleurHotspotsHTML.toString().substring(2, 8) + "\n"
                 + "couleurMasque=" + couleurMasque.toString().substring(2, 8) + "\n"
                 + "styleHotspots=" + getStrStyleHotSpots() + "\n"
                 + "styleHotspotImages=" + getStrStyleHotSpotImages() + "\n"
+                + "styleHotspotHTML=" + getStrStyleHotSpotHTML() + "\n"
                 + "position=" + getStrPositionBarreClassique() + "\n"
                 + "dX=" + Math.round(getOffsetXBarreClassique()) + "\n"
                 + "dY=" + Math.round(getOffsetYBarreClassique()) + "\n"
@@ -2128,6 +2437,7 @@ public class GestionnaireInterfaceController {
                 + "tailleImageVignettes=" + Math.round(getTailleImageVignettes()) + "\n"
                 + "couleurFondVignettes=" + getStrCouleurFondVignettes() + "\n"
                 + "couleurTexteVignettes=" + getStrCouleurTexteVignettes() + "\n"
+                + "replieDemarrageVignettes=" + isbReplieDemarrageVignettes() + "\n"
                 + "bAfficheComboMenu=" + isbAfficheComboMenu() + "\n"
                 + "bAfficheComboMenuImages=" + isbAfficheComboMenuImages() + "\n"
                 + "positionXComboMenu=" + getStrPositionXComboMenu() + "\n"
@@ -2145,6 +2455,24 @@ public class GestionnaireInterfaceController {
                 + "tailleRadar=" + Math.round(getTailleRadar()) + "\n"
                 + "couleurFondRadar=" + getStrCouleurFondRadar() + "\n"
                 + "couleurLigneRadar=" + getStrCouleurLigneRadar() + "\n"
+                + "replieDemarragePlan=" + isbReplieDemarragePlan() + "\n"
+                + "afficheCarte=" + isbAfficheCarte() + "\n"
+                + "nomLayer=" + getStrNomLayers() + "\n"
+                + "centreLongitude=" + coords.getLongitude() + "\n"
+                + "centreLatitude=" + coords.getLatitude() + "\n"
+                + "positionCarte=" + getStrPositionCarte() + "\n"
+                + "opaciteCarte=" + Math.round(getOpaciteCarte() * 100.d) / 100.d + "\n"
+                + "largeurCarte=" + Math.round(getLargeurCarte()) + "\n"
+                + "hauteurCarte=" + Math.round(getHauteurCarte()) + "\n"
+                + "zoomCarte=" + getiFacteurZoomCarte() + "\n"
+                + "couleurFondCarte=" + getStrCouleurFondCarte() + "\n"
+                + "couleurTexteCarte=" + getStrCouleurTexteCarte() + "\n"
+                + "afficheRadarCarte=" + isbAfficheRadarCarte() + "\n"
+                + "opaciteRadarCarte=" + Math.round(getOpaciteRadarCarte() * 100.d) / 100.d + "\n"
+                + "tailleRadarCarte=" + Math.round(getTailleRadarCarte()) + "\n"
+                + "couleurFondRadarCarte=" + getStrCouleurFondRadarCarte() + "\n"
+                + "couleurLigneRadarCarte=" + getStrCouleurLigneRadarCarte() + "\n"
+                + "replieDemarrageCarte=" + isbReplieDemarrageCarte() + "\n"
                 + "afficheMenuContextuel=" + isbAfficheMenuContextuel() + "\n"
                 + "affichePrecSuivMC=" + isbAffichePrecSuivMC() + "\n"
                 + "affichePlaneteNormalMC=" + isbAffichePlanetNormalMC() + "\n"
@@ -2205,7 +2533,7 @@ public class GestionnaireInterfaceController {
                         case "image":
                             getImagesFond()[getiNombreImagesFond()].setStrFichierImage(strValeur);
                             getImagesFond()[getiNombreImagesFond()].setImgFond(new Image("file:" + strValeur));
-                            fileRepertoirePlan = new File(strRepertTemp + File.separator + "images");
+                            fileRepertoirePlan = new File(getStrRepertTemp() + File.separator + "images");
                             if (!fileRepertoirePlan.exists()) {
                                 fileRepertoirePlan.mkdirs();
                             }
@@ -2258,7 +2586,6 @@ public class GestionnaireInterfaceController {
                 //System.out.println(variable + "=" + valeur);
                 switch (strVariable) {
                     case "couleurTheme":
-                        couleurTheme = Color.web(strValeur);
                         break;
                     case "couleurBoutons":
                         couleurBarreClassique = Color.web(strValeur);
@@ -2268,6 +2595,9 @@ public class GestionnaireInterfaceController {
                         break;
                     case "couleurHotspotsPhoto":
                         couleurHotspotsPhoto = Color.web(strValeur);
+                        break;
+                    case "couleurHotspotsHTML":
+                        couleurHotspotsHTML = Color.web(strValeur);
                         break;
                     case "couleurMasque":
                         couleurMasque = Color.web(strValeur);
@@ -2285,6 +2615,9 @@ public class GestionnaireInterfaceController {
                         break;
                     case "styleHotspotImages":
                         setStrStyleHotSpotImages(strValeur);
+                        break;
+                    case "styleHotspotHTML":
+                        setStrStyleHotSpotHTML(strValeur);
                         break;
                     case "position":
                         setStrPositionBarreClassique(strValeur);
@@ -2406,7 +2739,7 @@ public class GestionnaireInterfaceController {
                     case "strFenetreInfoImage ":
                         setStrFenetreInfoImage(strValeur);
                         if (!strFenetreInfoImage.equals("")) {
-                            fileRepertoirePlan = new File(strRepertTemp + File.separator + "images");
+                            fileRepertoirePlan = new File(getStrRepertTemp() + File.separator + "images");
                             if (!fileRepertoirePlan.exists()) {
                                 fileRepertoirePlan.mkdirs();
                             }
@@ -2421,7 +2754,7 @@ public class GestionnaireInterfaceController {
                     case "strFenetreAideImage":
                         setStrFenetreAideImage(strValeur);
                         if (!strFenetreAideImage.equals("")) {
-                            fileRepertoirePlan = new File(strRepertTemp + File.separator + "images");
+                            fileRepertoirePlan = new File(getStrRepertTemp() + File.separator + "images");
                             if (!fileRepertoirePlan.exists()) {
                                 fileRepertoirePlan.mkdirs();
                             }
@@ -2612,6 +2945,10 @@ public class GestionnaireInterfaceController {
                     case "couleurTexteVignettes":
                         setStrCouleurTexteVignettes(strValeur);
                         break;
+                    case "replieDemarrageVignettes":
+                        setbReplieDemarrageVignettes(strValeur.equals("true"));
+                        break;
+
                     case "bAfficheComboMenu":
                         setbAfficheComboMenu(strValeur.equals("true"));
                         break;
@@ -2667,6 +3004,72 @@ public class GestionnaireInterfaceController {
                         setStrCouleurLigneRadar(strValeur);
                         setCouleurLigneRadar(Color.valueOf(getStrCouleurLigneRadar()));
                         break;
+                    case "replieDemarragePlan":
+                        setbReplieDemarragePlan(strValeur.equals("true"));
+                        break;
+                    case "afficheCarte":
+                        setbAfficheCarte(strValeur.equals("true"));
+                        break;
+                    case "nomLayer":
+                        setStrNomLayers(strValeur);
+                        break;
+                    case "centreLongitude":
+                        if (!isbTemplate()) {
+                            setCoordCentreCarte(new CoordonneesGeographiques());
+                            getCoordCentreCarte().setLongitude(Double.parseDouble(strValeur));
+                        }
+                        break;
+                    case "centreLatitude":
+                        if (!isbTemplate()) {
+                            getCoordCentreCarte().setLatitude(Double.parseDouble(strValeur));
+                        }
+                        break;
+                    case "positionCarte":
+                        setStrPositionCarte(strValeur);
+                        break;
+                    case "opaciteCarte":
+                        setOpaciteCarte(Double.parseDouble(strValeur));
+                        break;
+                    case "largeurCarte":
+                        setLargeurCarte(Double.parseDouble(strValeur));
+                        break;
+                    case "hauteurCarte":
+                        setHauteurCarte(Double.parseDouble(strValeur));
+                        break;
+                    case "zoomCarte":
+                        if (!isbTemplate()) {
+                            setiFacteurZoomCarte(Integer.parseInt(strValeur) + 1);
+                        }
+                        break;
+                    case "couleurFondCarte":
+                        setStrCouleurFondCarte(strValeur);
+                        setCouleurFondCarte(Color.valueOf(strValeur));
+                        break;
+                    case "couleurTexteCarte":
+                        setStrCouleurTexteCarte(strValeur);
+                        setCouleurTexteCarte(Color.valueOf(strValeur));
+                        break;
+                    case "afficheRadarCarte":
+                        setbAfficheRadarCarte(strValeur.equals("true"));
+                        break;
+                    case "opaciteRadarCarte":
+                        setOpaciteRadarCarte(Double.parseDouble(strValeur));
+                        break;
+                    case "tailleRadarCarte":
+                        setTailleRadarCarte(Double.parseDouble(strValeur));
+                        break;
+                    case "couleurFondRadarCarte":
+                        setStrCouleurFondRadarCarte(strValeur);
+                        setCouleurFondRadarCarte(Color.valueOf(strValeur));
+                        break;
+                    case "couleurLigneRadarCarte":
+                        setStrCouleurLigneRadarCarte(strValeur);
+                        setCouleurLigneRadarCarte(Color.valueOf(strValeur));
+                        break;
+                    case "replieDemarrageCarte":
+                        setbReplieDemarrageCarte(strValeur.equals("true"));
+                        break;
+
                     case "afficheMenuContextuel":
                         setbAfficheMenuContextuel(strValeur.equals("true"));
                         break;
@@ -2700,9 +3103,13 @@ public class GestionnaireInterfaceController {
         }
     }
 
+    /**
+     *
+     * @throws IOException
+     */
     public void afficheTemplate() throws IOException {
         apVisualisation.getChildren().clear();
-        apVisualisation.getChildren().addAll(rbClair, rbSombre, rbPerso, cbImage, ivVisualisation, lblTxtTitre, imgBoussole, imgAiguille, ivTwitter, ivGoogle, ivFacebook, ivEmail, apVisuVignettes, apVisuComboMenu, apVisuPlan, ivMasque, apAfficheDiapo, apFenetreAfficheInfo, lblFenetreURL, ivDiapo, apAfficheBarrePersonnalisee);
+        apVisualisation.getChildren().addAll(rbClair, rbSombre, rbPerso, cbImage, ivVisualisation, lblTxtTitre, imgBoussole, imgAiguille, ivTwitter, ivGoogle, ivFacebook, ivEmail, apVisuVignettes, apVisuComboMenu, apVisuPlan, apVisuCarte, ivMasque, apAfficheDiapo, apFenetreAfficheInfo, lblFenetreURL, ivDiapo, apAfficheBarrePersonnalisee);
 
         lblTxtTitre.setTextFill(Color.valueOf(getStrCouleurTitre()));
         Color couleur = Color.valueOf(getStrCouleurFondTitre());
@@ -2722,7 +3129,6 @@ public class GestionnaireInterfaceController {
         cpCouleurTitre.setValue(Color.valueOf(getStrCouleurTitre()));
         cpCouleurFondTitre.setValue(Color.valueOf(getStrCouleurFondTitre()));
         cpCouleurBarreClassique.setValue(couleurBarreClassique);
-        cpCouleurTheme.setValue(couleurTheme);
         cpCouleurMasques.setValue(couleurMasque);
         cpCouleurHotspots.setValue(couleurHotspots);
         cpCouleurHotspotsPhoto.setValue(couleurHotspotsPhoto);
@@ -2870,6 +3276,7 @@ public class GestionnaireInterfaceController {
         apVisualisation.getChildren().remove(hbbarreBoutons);
         apVisualisation.getChildren().remove(ivHotSpot);
         apVisualisation.getChildren().remove(ivHotSpotImage);
+        apVisualisation.getChildren().remove(ivHotSpotHTML);
         slTailleBoussole.setValue(getTailleBoussole());
         slOpaciteBoussole.setValue(getOpaciteBoussole());
         bdfOffsetXBoussole.setNumber(new BigDecimal(getOffsetXBoussole()));
@@ -2919,6 +3326,7 @@ public class GestionnaireInterfaceController {
         rbVignettesBottom.setSelected(getStrPositionVignettes().equals("bottom"));
         cpCouleurFondVignettes.setValue(Color.valueOf(getStrCouleurFondVignettes()));
         cpCouleurTexteVignettes.setValue(Color.valueOf(getStrCouleurTexteVignettes()));
+        cbReplieDemarrageVignettes.setSelected(isbReplieDemarrageVignettes());
         cbAfficheComboMenu.setSelected(isbAfficheComboMenu());
         cbAfficheComboMenuImages.setSelected(isbAfficheComboMenuImages());
         String strPosit = getStrPositionYComboMenu() + ":" + getStrPositionXComboMenu();
@@ -2954,14 +3362,14 @@ public class GestionnaireInterfaceController {
         cpCouleurDiaporama.setValue(Color.valueOf(getStrCouleurDiaporama()));
         slOpaciteDiaporama.setValue(getDiaporamaOpacite());
         if (isbAffichePlan()) {
-            tabPlan.setDisable(!isbAffichePlan());
-            mniAffichagePlan.setDisable(!isbAffichePlan());
-            ivAjouterPlan.setDisable(!isbAffichePlan());
-            mniAjouterPlan.setDisable(!isbAffichePlan());
+            getTabPlan().setDisable(!isbAffichePlan());
+            getMniAffichagePlan().setDisable(!isbAffichePlan());
+            getIvAjouterPlan().setDisable(!isbAffichePlan());
+            getMniAjouterPlan().setDisable(!isbAffichePlan());
             if (isbAffichePlan()) {
-                ivAjouterPlan.setOpacity(1.0);
+                getIvAjouterPlan().setOpacity(1.0);
             } else {
-                ivAjouterPlan.setOpacity(0.3);
+                getIvAjouterPlan().setOpacity(0.3);
             }
 
         }
@@ -2970,6 +3378,25 @@ public class GestionnaireInterfaceController {
         slTailleRadar.setValue(getTailleRadar());
         cpCouleurFondRadar.setValue(getCouleurFondRadar());
         cpCouleurLigneRadar.setValue(getCouleurLigneRadar());
+        cbReplieDemarragePlan.setSelected(isbReplieDemarragePlan());
+        cbAfficheCarte.setSelected(isbAfficheCarte());
+        slOpaciteCarte.setValue(getOpaciteCarte());
+        slLargeurCarte.setValue(getLargeurCarte());
+        slHauteurCarte.setValue(getHauteurCarte());
+        slZoomCarte.setValue(getiFacteurZoomCarte());
+        rbCarteLeft.setSelected(getStrPositionCarte().equals("left"));
+        rbCarteRight.setSelected(getStrPositionCarte().equals("right"));
+        cpCouleurFondCarte.setValue(getCouleurFondCarte());
+        cpCouleurTexteCarte.setValue(getCouleurTexteCarte());
+        cpCouleurDiaporama.setValue(Color.valueOf(getStrCouleurDiaporama()));
+        slOpaciteDiaporama.setValue(getDiaporamaOpacite());
+        cbAfficheRadarCarte.setSelected(isbAfficheRadarCarte());
+        slOpaciteRadarCarte.setValue(getOpaciteRadarCarte());
+        slTailleRadarCarte.setValue(getTailleRadarCarte());
+        cpCouleurFondRadarCarte.setValue(getCouleurFondRadarCarte());
+        cpCouleurLigneRadarCarte.setValue(getCouleurLigneRadarCarte());
+        navigateurCarteOL.changeCarte(getStrNomLayers());
+        cbReplieDemarrageCarte.setSelected(isbReplieDemarrageCarte());
         cbAfficheMenuContextuel.setSelected(isbAfficheMenuContextuel());
         cbAffichePrecSuivMC.setSelected(isbAffichePrecSuivMC());
         cbAffichePlanetNormalMC.setSelected(isbAffichePlanetNormalMC());
@@ -2987,41 +3414,75 @@ public class GestionnaireInterfaceController {
         changeCouleurBarreClassique(couleurBarreClassique.getHue(), couleurBarreClassique.getSaturation(), couleurBarreClassique.getBrightness());
         changeCouleurMasque(couleurMasque.getHue(), couleurMasque.getSaturation(), couleurMasque.getBrightness());
         changeCouleurHS(couleurHotspots.getHue(), couleurHotspots.getSaturation(), couleurHotspots.getBrightness());
-        changeCouleurHSPhoto(couleurHotspots.getHue(), couleurHotspots.getSaturation(), couleurHotspots.getBrightness());
+        changeCouleurHSPhoto(couleurHotspotsPhoto.getHue(), couleurHotspotsPhoto.getSaturation(), couleurHotspotsPhoto.getBrightness());
+        changeCouleurHSHTML(couleurHotspotsHTML.getHue(), couleurHotspotsHTML.getSaturation(), couleurHotspotsHTML.getBrightness());
         afficheVignettes();
         affichePlan();
+        afficheCarte();
         afficheDiaporama();
         afficheFenetreAide();
         afficheFenetreInfo();
     }
 
+    /**
+     *
+     */
     public void rafraichit() {
 
         cbImage.getItems().clear();
-        if (iNombrePanoramiques > 0) {
+        if (getiNombrePanoramiques() > 0) {
             rbPerso.setDisable(false);
             String strImgAffiche = "";
             if (cbImage.getSelectionModel().getSelectedItem() != null) {
                 strImgAffiche = cbImage.getSelectionModel().getSelectedItem().toString();
             }
-            for (int i = 0; i < iNombrePanoramiques; i++) {
-                String strNomImage = panoramiquesProjet[i].getStrNomFichier().substring(
-                        panoramiquesProjet[i].getStrNomFichier().lastIndexOf(File.separator) + 1,
-                        panoramiquesProjet[i].getStrNomFichier().length()
+            for (int i = 0; i < getiNombrePanoramiques(); i++) {
+                String strNomImage = getPanoramiquesProjet()[i].getStrNomFichier().substring(
+                        getPanoramiquesProjet()[i].getStrNomFichier().lastIndexOf(File.separator) + 1,
+                        getPanoramiquesProjet()[i].getStrNomFichier().length()
                 );
                 cbImage.getItems().add(i, strNomImage);
             }
             cbImage.setValue(strImgAffiche);
         }
-
         afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
         afficheBoussole();
         afficheMasque();
         afficheReseauxSociaux();
         affichePlan();
         afficheVignettes();
+        if (navigateurCarteOL.isbDebut()) {
+            navigateurCarteOL.retireMarqueurs();
+            for (int ii = 0; ii < getiNombrePanoramiques(); ii++) {
+                CoordonneesGeographiques coord = getPanoramiquesProjet()[ii].getMarqueurGeolocatisation();
+                if (coord != null) {
+                    String strFichierPano = getPanoramiquesProjet()[ii]
+                            .getStrNomFichier().substring(getPanoramiquesProjet()[ii].getStrNomFichier()
+                                    .lastIndexOf(File.separator) + 1, getPanoramiquesProjet()[ii]
+                                    .getStrNomFichier().length()).split("\\.")[0];
+                    String strHTML = "<span style='font-family : Verdana,Arial,sans-serif;font-weight:bold;font-size : 12px;'>"
+                            + getPanoramiquesProjet()[ii].getStrTitrePanoramique()
+                            + "</span><br/>"
+                            + "<span style='font-family : Verdana,Arial,sans-serif;bold;font-size : 10px;'>"
+                            + strFichierPano
+                            + "</span>";
+                    strHTML = strHTML.replace("\\", "/");
+                    navigateurCarteOL.ajouteMarqueur(ii, coord, strHTML);
+                    navigateurCarteOL.allerCoordonnees(coord, iFacteurZoomCarte);
+                }
+            }
+            if (getCoordCentreCarte() != null) {
+                navigateurCarteOL.allerCoordonnees(getCoordCentreCarte(), iFacteurZoomCarte);
+            }
+            afficheCarte();
+        }
+
     }
 
+    /**
+     *
+     * @param iNumImage
+     */
     private void retireImageFond(int iNumImage) {
         for (int i = iNumImage; i < getiNombreImagesFond() - 1; i++) {
             getImagesFond()[i] = getImagesFond()[i + 1];
@@ -3031,10 +3492,13 @@ public class GestionnaireInterfaceController {
         //System.out.println("Retire l'image " + numImage + " Nombre Images : " + nombreImagesFond);
     }
 
+    /**
+     *
+     */
     private void afficheImagesFondInterface() {
 
         apImageFond.getChildren().clear();
-        Image imgAjoute = new Image("file:" + strRepertAppli + File.separator + "images/ajoute.png", 30, 30, true, true);
+        Image imgAjoute = new Image("file:" + getStrRepertAppli() + File.separator + "images/ajoute.png", 30, 30, true, true);
         Button btnAjouteImage = new Button(rbLocalisation.getString("interface.imageFondAjoute"), new ImageView(imgAjoute));
         btnAjouteImage.setLayoutX(10);
         btnAjouteImage.setLayoutY(10);
@@ -3059,11 +3523,11 @@ public class GestionnaireInterfaceController {
             apImagesFond.setLayoutY(i * (hauteurPanel + 10) + 60);
             Pane paneFond1 = new Pane();
             paneFond1.setCursor(Cursor.HAND);
-            ImageView ivAjouteImageFond1 = new ImageView(new Image("file:" + strRepertAppli + File.separator + "images/suppr.png", 30, 30, true, true));
+            ImageView ivAjouteImageFond1 = new ImageView(new Image("file:" + getStrRepertAppli() + File.separator + "images/suppr.png", 30, 30, true, true));
             paneFond1.setLayoutX(vbOutils.getPrefWidth() - 50);
             paneFond1.setLayoutY(0);
             Tooltip tltpRetireImageFond = new Tooltip(rbLocalisation.getString("interface.imageFondRetire"));
-            tltpRetireImageFond.setStyle(strTooltipStyle);
+            tltpRetireImageFond.setStyle(getStrTooltipStyle());
             Tooltip.install(paneFond1, tltpRetireImageFond);
             paneFond1.getChildren().add(ivAjouteImageFond1);
             paneFond1.setOnMouseClicked(
@@ -3284,10 +3748,14 @@ public class GestionnaireInterfaceController {
         afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
     }
 
+    /**
+     *
+     * @return
+     */
     private String ajoutFenetreImage() {
         File fileRepert;
         if (strRepertImagesFond.equals("")) {
-            fileRepert = new File(strCurrentDir + File.separator);
+            fileRepert = new File(getStrCurrentDir() + File.separator);
         } else {
             fileRepert = new File(strRepertImagesFond);
         }
@@ -3300,7 +3768,7 @@ public class GestionnaireInterfaceController {
         File fichierImage = fileChooser.showOpenDialog(null);
         if (fichierImage != null) {
             strRepertImagesFond = fichierImage.getParent();
-            File fileRepertImage = new File(strRepertTemp + File.separator + "images");
+            File fileRepertImage = new File(getStrRepertTemp() + File.separator + "images");
             if (!fileRepertImage.exists()) {
                 fileRepertImage.mkdirs();
             }
@@ -3317,11 +3785,14 @@ public class GestionnaireInterfaceController {
 
     }
 
+    /**
+     *
+     */
     private void ajoutImageFond() {
         if (getiNombreImagesFond() < 20) {
             File fileRepert;
             if (strRepertImagesFond.equals("")) {
-                fileRepert = new File(strCurrentDir + File.separator);
+                fileRepert = new File(getStrCurrentDir() + File.separator);
             } else {
                 fileRepert = new File(strRepertImagesFond);
             }
@@ -3335,7 +3806,7 @@ public class GestionnaireInterfaceController {
             File fileFichierImage = fileChooser.showOpenDialog(null);
             if (fileFichierImage != null) {
                 strRepertImagesFond = fileFichierImage.getParent();
-                File fileRepertImage = new File(strRepertTemp + File.separator + "images");
+                File fileRepertImage = new File(getStrRepertTemp() + File.separator + "images");
                 if (!fileRepertImage.exists()) {
                     fileRepertImage.mkdirs();
                 }
@@ -3376,27 +3847,31 @@ public class GestionnaireInterfaceController {
         strLstPolices.add("Times New Roman");
         strLstPolices.add("Verdana");
         ObservableList<String> strListePolices = FXCollections.observableList(strLstPolices);
-        rbLocalisation = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", EditeurPanovisu.locale);
-        strRepertBoutonsPrincipal = strRepertAppli + File.separator + "theme/barreNavigation";
-        strRepertHotSpots = strRepertAppli + File.separator + "theme/hotspots";
-        strRepertHotSpotsPhoto = strRepertAppli + File.separator + "theme/photos";
-        strRepertBoussoles = strRepertAppli + File.separator + "theme/boussoles";
-        strRepertMasques = strRepertAppli + File.separator + "theme/MA";
-        strRepertReseauxSociaux = strRepertAppli + File.separator + "theme/reseaux";
+        rbLocalisation = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", EditeurPanovisu.getLocale());
+        strRepertBoutonsPrincipal = getStrRepertAppli() + File.separator + "theme/barreNavigation";
+        strRepertHotSpots = getStrRepertAppli() + File.separator + "theme/hotspots";
+        strRepertHotSpotsPhoto = getStrRepertAppli() + File.separator + "theme/photos";
+        strRepertHotSpotsHTML = getStrRepertAppli() + File.separator + "theme/html";
+        strRepertBoussoles = getStrRepertAppli() + File.separator + "theme/boussoles";
+        strRepertMasques = getStrRepertAppli() + File.separator + "theme/MA";
+        strRepertReseauxSociaux = getStrRepertAppli() + File.separator + "theme/reseaux";
         chargeBarre(getStyleBarreClassique(), getStrStyleHotSpots(), getStrImageMasque());
         ArrayList<String> strListeStyles = strListerStyle(strRepertBoutonsPrincipal);
         ArrayList<String> strListeHotSpots = strListerHotSpots(strRepertHotSpots);
         ArrayList<String> strListeHotSpotsPhoto = strListerHotSpots(strRepertHotSpotsPhoto);
+        ArrayList<String> strListeHotSpotsHTML = strListerHotSpots(strRepertHotSpotsHTML);
         ArrayList<String> strListeBoussoles = strListerBoussoles(strRepertBoussoles);
         ArrayList<String> strListeMasques = strListerMasques(strRepertMasques);
         int iNombreHotSpots = strListeHotSpots.size();
         ImageView[] ivHotspots = new ImageView[iNombreHotSpots];
         int iNombreHotSpotsPhoto = strListeHotSpotsPhoto.size();
+        int iNombreHotSpotsHTML = strListeHotSpotsHTML.size();
         ImageView[] ivHotspotsPhoto = new ImageView[iNombreHotSpotsPhoto];
-        imgClaire = new Image("file:" + strRepertAppli + File.separator + "images/claire.jpg");
-        imgSombre = new Image("file:" + strRepertAppli + File.separator + "images/sombre.jpg");
-        imgSuivant = new ImageView(new Image("file:" + strRepertAppli + File.separator + "panovisu/images/suivant.png"));
-        imgPrecedent = new ImageView(new Image("file:" + strRepertAppli + File.separator + "panovisu/images/precedent.png"));
+        ImageView[] ivHotspotsHTML = new ImageView[iNombreHotSpotsHTML];
+        imgClaire = new Image("file:" + getStrRepertAppli() + File.separator + "images/claire.jpg");
+        imgSombre = new Image("file:" + getStrRepertAppli() + File.separator + "images/sombre.jpg");
+        imgSuivant = new ImageView(new Image("file:" + getStrRepertAppli() + File.separator + "panovisu/images/suivant.png"));
+        imgPrecedent = new ImageView(new Image("file:" + getStrRepertAppli() + File.separator + "panovisu/images/precedent.png"));
         vbFondSuivant = new VBox(imgSuivant);
         vbFondPrecedent = new VBox(imgPrecedent);
         vbFondSuivant.setStyle("-fx-background-color : black;");
@@ -3407,6 +3882,13 @@ public class GestionnaireInterfaceController {
         lblTxtTitre = new Label(rbLocalisation.getString("interface.titre"));
         Font fonte = Font.font(getStrTitrePoliceNom(), Double.parseDouble(getStrTitrePoliceTaille()));
         lblTxtTitre.setFont(fonte);
+        Color couleur = Color.valueOf(getStrCouleurFondTitre());
+        int iRouge = (int) (couleur.getRed() * 255.d);
+        int iBleu = (int) (couleur.getBlue() * 255.d);
+        int iVert = (int) (couleur.getGreen() * 255.d);
+        String strCoulFond = "rgba(" + iRouge + "," + iVert + "," + iBleu + "," + getTitreOpacite() + ")";
+
+        lblTxtTitre.setStyle("-fx-background-color : " + strCoulFond);
         double largeurOutils = 380;
 
         paneTabInterface = new Pane();
@@ -3459,7 +3941,6 @@ public class GestionnaireInterfaceController {
         lblTxtTitre.setPadding(new Insets(5));
         lblTxtTitre.setStyle("-fx-background-color : #000;-fx-border-radius: 5px;");
         lblTxtTitre.setAlignment(Pos.CENTER);
-        lblTxtTitre.setOpacity(getTitreOpacite());
         lblTxtTitre.setTextFill(Color.WHITE);
         lblTxtTitre.setLayoutY(20);
         lblTxtTitre.setLayoutX(ivVisualisation.getLayoutX() + (ivVisualisation.getFitWidth() - lblTxtTitre.getMinWidth()) / 2);
@@ -3498,6 +3979,9 @@ public class GestionnaireInterfaceController {
         ivEmail = new ImageView(new Image("file:" + strRepertReseauxSociaux + File.separator + getStrImageReseauxSociauxEmail()));
         apVisuVignettes = new AnchorPane();
         apVisuPlan = new AnchorPane();
+        apVisuCarte = new AnchorPane();
+        apVisuCarte.setTranslateZ(2);
+        apVisuPlan.setTranslateZ(2);
         apVisuComboMenu = new AnchorPane();
         apVisualisation.getChildren().clear();
         apVisualisation.getChildren().add(ivVisualisation);
@@ -3523,7 +4007,7 @@ public class GestionnaireInterfaceController {
         apAfficheDiapo.setLayoutY(20);
         apAfficheDiapo.setTranslateZ(10);
         apAfficheDiapo.setVisible(false);
-        ivDiapo = new ImageView(new Image("file:" + strRepertAppli + File.separator + "images/testImage.png"));
+        ivDiapo = new ImageView(new Image("file:" + getStrRepertAppli() + File.separator + "images/testImage.png"));
         ivDiapo.setPreserveRatio(false);
         ivDiapo.setFitHeight(ivVisualisation.getFitHeight() * 0.8);
         ivDiapo.setFitWidth(ivVisualisation.getFitWidth() * 0.8);
@@ -3543,18 +4027,49 @@ public class GestionnaireInterfaceController {
          * *****************************************
          */
         AnchorPane apCoulTheme = new AnchorPane();
-        cpCouleurTheme = new ColorPicker(couleurTheme);
-        String strCoul2 = cpCouleurTheme.getValue().toString().substring(2, 8);
+        cpCouleurFondTheme = new ColorPicker(couleurFondTheme);
+        cpCouleurTexteTheme = new ColorPicker(couleurTexteTheme);
+        slOpaciteTheme = new Slider(0, 1, opaciteTheme);
+        String strCoul2 = cpCouleurFondTheme.getValue().toString().substring(2, 8);
         changeCouleurTitre(strCoul2);
         changeCouleurVignettes(strCoul2);
-        Label lblCouleurTheme = new Label(rbLocalisation.getString("interface.couleurTheme"));
-        lblCouleurTheme.setLayoutX(20);
-        lblCouleurTheme.setLayoutY(20);
-        cpCouleurTheme.setLayoutX(150);
-        cpCouleurTheme.setLayoutY(20);
-        apCoulTheme.setPrefHeight(40);
-        apCoulTheme.setMinHeight(40);
-        apCoulTheme.getChildren().addAll(lblCouleurTheme, cpCouleurTheme);
+        Label lblTheme = new Label(rbLocalisation.getString("interface.theme"));
+        lblTheme.setStyle("-fx-font-weight: bold;-fx-font-variant : small-caps;");
+        lblTheme.setLayoutX(10);
+        lblTheme.setLayoutY(10);
+        Label lblCouleurFondTheme = new Label(rbLocalisation.getString("interface.couleurFondTheme"));
+        lblCouleurFondTheme.setLayoutX(10);
+        lblCouleurFondTheme.setLayoutY(40);
+        cpCouleurFondTheme.setLayoutX(200);
+        cpCouleurFondTheme.setLayoutY(40);
+        Label lblCouleurTexteTheme = new Label(rbLocalisation.getString("interface.couleurTexteTheme"));
+        lblCouleurTexteTheme.setLayoutX(10);
+        lblCouleurTexteTheme.setLayoutY(70);
+        cpCouleurTexteTheme.setLayoutX(200);
+        cpCouleurTexteTheme.setLayoutY(70);
+        Label lblOpaciteTheme = new Label(rbLocalisation.getString("interface.opaciteTheme"));
+        lblOpaciteTheme.setLayoutX(10);
+        lblOpaciteTheme.setLayoutY(100);
+        slOpaciteTheme.setLayoutX(200);
+        slOpaciteTheme.setLayoutY(100);
+        Label lblPoliceTheme = new Label(rbLocalisation.getString("interface.policeTheme"));
+        lblPoliceTheme.setLayoutX(10);
+        lblPoliceTheme.setLayoutY(130);
+        cbPoliceTheme = new ComboBox(strListePolices);
+        cbPoliceTheme.setValue(getStrTitrePoliceNom());
+        cbPoliceTheme.setLayoutX(200);
+        cbPoliceTheme.setLayoutY(130);
+        cbPoliceTheme.setMaxWidth(135);
+
+        apCoulTheme.setPrefHeight(160);
+        apCoulTheme.setMinHeight(160);
+        apCoulTheme.getChildren().addAll(
+                lblTheme,
+                lblCouleurFondTheme, cpCouleurFondTheme,
+                lblCouleurTexteTheme, cpCouleurTexteTheme,
+                lblOpaciteTheme, slOpaciteTheme,
+                lblPoliceTheme, cbPoliceTheme
+        );
 
         AnchorPane apCLASS = new AnchorPane();
         AnchorPane apPERS = new AnchorPane();
@@ -3568,6 +4083,7 @@ public class GestionnaireInterfaceController {
         AnchorPane apVIG = new AnchorPane();
         AnchorPane apCBM = new AnchorPane();
         AnchorPane apPLAN = new AnchorPane();
+        AnchorPane apCARTE = new AnchorPane();
         AnchorPane apIF = new AnchorPane();
         AnchorPane apMC = new AnchorPane();
 
@@ -4032,39 +4548,40 @@ public class GestionnaireInterfaceController {
         lblChoixHS.setLayoutX(10);
         lblChoixHS.setLayoutY(10);
 
-        double tailleHS = 35.d * ((int) (iNombreHotSpots / 9 + 1) + (int) (iNombreHotSpotsPhoto / 6 + 1)) + 100;
+        double tailleHS = 35.d * ((int) (iNombreHotSpots / 9 + 1) + (int) (iNombreHotSpotsPhoto / 9 + 1) + (int) (iNombreHotSpotsHTML / 9 + 1)) + 215;
         apHotSpots.setPrefHeight(tailleHS);
         apHotSpots.setLayoutX(50);
         apHotSpots.setLayoutY(40);
-        apHotSpots.setStyle("-fx-background-color : #fff");
+        apHotSpots.setStyle("-fx-background-color : #fff;-fx-font-variant: small-caps;");
         apHotSpots.setPadding(new Insets(5));
         int i = 0;
         double xHS;
         double yHS = 25;
         Label lblHSPanoramique = new Label(rbLocalisation.getString("interface.HSPanoramique"));
         lblHSPanoramique.setLayoutY(5);
-        lblHSPanoramique.setLayoutX(20);
-        Label lblHSPhoto = new Label(rbLocalisation.getString("interface.HSPhoto"));
-        lblHSPhoto.setLayoutY((int) (iNombreHotSpots / 6 + 1) * 35 + 45);
-        lblHSPhoto.setLayoutX(20);
-        apHotSpots.getChildren().addAll(lblHSPanoramique, lblHSPhoto);
+        lblHSPanoramique.setLayoutX(5);
+        lblHSPanoramique.setStyle("-fx-font-weight : bold;");
+        apHotSpots.getChildren().addAll(lblHSPanoramique);
         for (String strNomImage : strListeHotSpots) {
             Pane paneFond = new Pane();
             ivHotspots[i] = new ImageView(new Image("file:" + strRepertHotSpots + File.separator + strNomImage, -1, 30, true, true, true));
             int iCol = i % 9;
             int iRow = i / 9;
-            xHS = iCol * 40 + 5;
+            xHS = iCol * 40;
             yHS = iRow * 35 + 25;
             paneFond.setLayoutX(xHS);
             paneFond.setLayoutY(yHS);
-            paneFond.setStyle("-fx-background-color : #ccc");
+            //paneFond.setStyle("-fx-background-color : #ccc");
             paneFond.setOnMouseClicked((me) -> {
                 apVisualisation.getChildren().remove(hbbarreBoutons);
                 apVisualisation.getChildren().remove(ivHotSpot);
                 apVisualisation.getChildren().remove(ivHotSpotImage);
+                apVisualisation.getChildren().remove(ivHotSpotHTML);
                 setStrStyleHotSpots(strNomImage);
                 afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
-
+                changeCouleurHS(couleurHotspots.getHue(), couleurHotspots.getSaturation(), couleurHotspots.getBrightness());
+                changeCouleurHSPhoto(couleurHotspotsPhoto.getHue(), couleurHotspotsPhoto.getSaturation(), couleurHotspotsPhoto.getBrightness());
+                changeCouleurHSHTML(couleurHotspotsHTML.getHue(), couleurHotspotsHTML.getSaturation(), couleurHotspotsHTML.getBrightness());
             });
             paneFond.getChildren().add(ivHotspots[i]);
             apHotSpots.getChildren().add(paneFond);
@@ -4077,6 +4594,10 @@ public class GestionnaireInterfaceController {
         lblCouleurHotspot.setLayoutY(yHS + 50);
         cpCouleurHotspots.setLayoutX(200);
         cpCouleurHotspots.setLayoutY(yHS + 50);
+        Label lblHSPhoto = new Label(rbLocalisation.getString("interface.HSPhoto"));
+        lblHSPhoto.setLayoutY(yHS + 80);
+        lblHSPhoto.setLayoutX(5);
+        lblHSPhoto.setStyle("-fx-font-weight : bold;-fx-font-variant: small-caps;");
         apHotSpots.getChildren().addAll(lblCouleurHotspot, cpCouleurHotspots);
         i = 0;
         for (String strNomImage : strListeHotSpotsPhoto) {
@@ -4084,17 +4605,21 @@ public class GestionnaireInterfaceController {
             ivHotspotsPhoto[i] = new ImageView(new Image("file:" + strRepertHotSpotsPhoto + File.separator + strNomImage, -1, 30, true, true, true));
             int iCol = i % 9;
             int iRow = i / 9;
-            xHS = iCol * 40 + 5;
-            yHS = (iRow + (int) (iNombreHotSpots / 9 + 1)) * 35 + 65;
+            xHS = iCol * 40;
+            yHS = (iRow + (int) (iNombreHotSpots / 9 + 1)) * 35 + 95;
             paneFond.setLayoutX(xHS);
             paneFond.setLayoutY(yHS);
-            paneFond.setStyle("-fx-background-color : #ccc");
+            //paneFond.setStyle("-fx-background-color : #ccc");
             paneFond.setOnMouseClicked((me) -> {
                 apVisualisation.getChildren().remove(hbbarreBoutons);
                 apVisualisation.getChildren().remove(ivHotSpot);
                 apVisualisation.getChildren().remove(ivHotSpotImage);
+                apVisualisation.getChildren().remove(ivHotSpotHTML);
                 setStrStyleHotSpotImages(strNomImage);
                 afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
+                changeCouleurHS(couleurHotspots.getHue(), couleurHotspots.getSaturation(), couleurHotspots.getBrightness());
+                changeCouleurHSPhoto(couleurHotspotsPhoto.getHue(), couleurHotspotsPhoto.getSaturation(), couleurHotspotsPhoto.getBrightness());
+                changeCouleurHSHTML(couleurHotspotsHTML.getHue(), couleurHotspotsHTML.getSaturation(), couleurHotspotsHTML.getBrightness());
             });
             paneFond.getChildren().add(ivHotspotsPhoto[i]);
             apHotSpots.getChildren().add(paneFond);
@@ -4104,10 +4629,49 @@ public class GestionnaireInterfaceController {
         cpCouleurHotspotsPhoto = new ColorPicker(couleurHotspotsPhoto);
         Label lblCouleurHotspotPhoto = new Label(rbLocalisation.getString("interface.couleurHSPhoto"));
         lblCouleurHotspotPhoto.setLayoutX(20);
-        lblCouleurHotspotPhoto.setLayoutY(tailleHS - 20);
+        lblCouleurHotspotPhoto.setLayoutY(yHS + 50);
         cpCouleurHotspotsPhoto.setLayoutX(200);
-        cpCouleurHotspotsPhoto.setLayoutY(tailleHS - 20);
-        apHotSpots.getChildren().addAll(lblCouleurHotspotPhoto, cpCouleurHotspotsPhoto);
+        cpCouleurHotspotsPhoto.setLayoutY(yHS + 50);
+        apHotSpots.getChildren().addAll(lblHSPhoto, lblCouleurHotspotPhoto, cpCouleurHotspotsPhoto);
+        Label lblHSHTML = new Label(rbLocalisation.getString("interface.HSHTML"));
+        lblHSHTML.setLayoutY(yHS + 80);
+        lblHSHTML.setLayoutX(5);
+        lblHSHTML.setStyle("-fx-font-weight : bold;-fx-font-variant: small-caps;");
+        i = 0;
+        for (String strNomHTML : strListeHotSpotsHTML) {
+            Pane paneFond = new Pane();
+            ivHotspotsHTML[i] = new ImageView(new Image("file:" + strRepertHotSpotsHTML + File.separator + strNomHTML, -1, 30, true, true, true));
+            int iCol = i % 9;
+            int iRow = i / 9;
+            xHS = iCol * 40;
+            yHS = (iRow + (int) (iNombreHotSpots / 9 + 1) + (int) (iNombreHotSpotsPhoto / 9 + 1)) * 35 + 180;
+            paneFond.setLayoutX(xHS);
+            paneFond.setLayoutY(yHS);
+            //paneFond.setStyle("-fx-background-color : #ccc");
+            paneFond.setOnMouseClicked((me) -> {
+                apVisualisation.getChildren().remove(hbbarreBoutons);
+                apVisualisation.getChildren().remove(ivHotSpot);
+                apVisualisation.getChildren().remove(ivHotSpotImage);
+                apVisualisation.getChildren().remove(ivHotSpotHTML);
+                setStrStyleHotSpotHTML(strNomHTML);
+                afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
+                changeCouleurHS(couleurHotspots.getHue(), couleurHotspots.getSaturation(), couleurHotspots.getBrightness());
+                changeCouleurHSPhoto(couleurHotspotsPhoto.getHue(), couleurHotspotsPhoto.getSaturation(), couleurHotspotsPhoto.getBrightness());
+                changeCouleurHSHTML(couleurHotspotsHTML.getHue(), couleurHotspotsHTML.getSaturation(), couleurHotspotsHTML.getBrightness());
+            });
+            paneFond.getChildren().add(ivHotspotsHTML[i]);
+            apHotSpots.getChildren().add(paneFond);
+            i++;
+
+        }
+        cpCouleurHotspotsHTML = new ColorPicker(couleurHotspotsHTML);
+        Label lblCouleurHotspotHTML = new Label(rbLocalisation.getString("interface.couleurHSPhoto"));
+        lblCouleurHotspotHTML.setLayoutX(20);
+        lblCouleurHotspotHTML.setLayoutY(yHS + 50);
+        cpCouleurHotspotsHTML.setLayoutX(200);
+        cpCouleurHotspotsHTML.setLayoutY(yHS + 50);
+        apHotSpots.getChildren().addAll(lblHSHTML, lblCouleurHotspotHTML, cpCouleurHotspotsHTML);
+
         apHotSpots.setPrefHeight(0);
         apHotSpots.setMaxHeight(0);
         apHotSpots.setMinHeight(0);
@@ -5191,8 +5755,7 @@ public class GestionnaireInterfaceController {
         apVignettes.getChildren().addAll(lblChoixCouleurTexteVignettes, cpCouleurTexteVignettes);
         Label lblPositVignettes = new Label(rbLocalisation.getString("interface.choixPositVignettes"));
         lblPositVignettes.setLayoutX(10);
-        iBasImages = -30;
-        lblPositVignettes.setLayoutY(70 + iBasImages);
+        lblPositVignettes.setLayoutY(40);
         apVignettes.getChildren().add(lblPositVignettes);
 
         rbVignettesLeft = new RadioButton();
@@ -5208,7 +5771,7 @@ public class GestionnaireInterfaceController {
         rbVignettesBottom.setToggleGroup(tgPosVignettes);
 
         iPosX = 200;
-        iPosY = 70 + iBasImages;
+        iPosY = 40;
 
         rbVignettesLeft.setLayoutX(iPosX);
         rbVignettesRight.setLayoutX(iPosX + 40);
@@ -5223,22 +5786,26 @@ public class GestionnaireInterfaceController {
         );
         Label lblTailleVignettes = new Label(rbLocalisation.getString("interface.tailleVignettes"));
         lblTailleVignettes.setLayoutX(10);
-        lblTailleVignettes.setLayoutY(175 + iBasImages);
+        lblTailleVignettes.setLayoutY(145);
         slTailleVignettes = new Slider(50, 300, 120);
         slTailleVignettes.setLayoutX(200);
-        slTailleVignettes.setLayoutY(175 + iBasImages);
+        slTailleVignettes.setLayoutY(145);
         Label lblOpaciteVignettes = new Label(rbLocalisation.getString("interface.opaciteVignettes"));
         lblOpaciteVignettes.setLayoutX(10);
-        lblOpaciteVignettes.setLayoutY(205 + iBasImages);
+        lblOpaciteVignettes.setLayoutY(175);
         slOpaciteVignettes = new Slider(0, 1.0, 0.8);
         slOpaciteVignettes.setLayoutX(200);
-        slOpaciteVignettes.setLayoutY(205 + iBasImages);
-
+        slOpaciteVignettes.setLayoutY(175);
+        cbReplieDemarrageVignettes = new CheckBox(rbLocalisation.getString("interface.replie"));
+        cbReplieDemarrageVignettes.setLayoutX(10);
+        cbReplieDemarrageVignettes.setLayoutY(205);
+        cbReplieDemarrageVignettes.setSelected(false);
         apVignettes.getChildren().addAll(
                 lblTailleVignettes, slTailleVignettes,
-                lblOpaciteVignettes, slOpaciteVignettes
+                lblOpaciteVignettes, slOpaciteVignettes,
+                cbReplieDemarrageVignettes
         );
-        apVignettes.setPrefHeight(235 + iBasImages);
+        apVignettes.setPrefHeight(235);
         double taillePanelVignettes = apVignettes.getPrefHeight();
         apVignettes.setPrefHeight(0);
         apVignettes.setMaxHeight(0);
@@ -5420,7 +5987,7 @@ public class GestionnaireInterfaceController {
         apPlan = new AnchorPane();
 
         apPlan.setLayoutY(40);
-        apPlan.setPrefHeight(340);
+        apPlan.setPrefHeight(370);
         apPlan.setMinWidth(vbOutils.getPrefWidth() - 20);
         double taillePanelPlan = apPlan.getPrefHeight();
         cbAffichePlan = new CheckBox(rbLocalisation.getString("interface.affichagePlan"));
@@ -5502,6 +6069,11 @@ public class GestionnaireInterfaceController {
         cpCouleurLigneRadar = new ColorPicker(getCouleurLigneRadar());
         cpCouleurLigneRadar.setLayoutX(200);
         cpCouleurLigneRadar.setLayoutY(310);
+        cbReplieDemarragePlan = new CheckBox(rbLocalisation.getString("interface.replie"));
+        cbReplieDemarragePlan.setLayoutX(10);
+        cbReplieDemarragePlan.setLayoutY(340);
+        cbReplieDemarragePlan.setSelected(false);
+
         apPlan.getChildren().addAll(
                 lblLargeurPlan, slLargeurPlan,
                 lblPositPlan, rbPlanLeft, rbPlanRight,
@@ -5512,7 +6084,8 @@ public class GestionnaireInterfaceController {
                 lblTailleRadar, slTailleRadar,
                 lblOpaciteRadar, slOpaciteRadar,
                 lblCouleurFondRadar, cpCouleurFondRadar,
-                lblCouleurLigneRadar, cpCouleurLigneRadar
+                lblCouleurLigneRadar, cpCouleurLigneRadar,
+                cbReplieDemarragePlan
         );
 
         apPlan.setPrefHeight(0);
@@ -5552,6 +6125,206 @@ public class GestionnaireInterfaceController {
 
         /*
          * ********************************************
+         *     Panel Carte
+         * ********************************************
+         */
+        apCarte = new AnchorPane();
+        apCarte.setLayoutY(40);
+        apCarte.setPrefHeight(560);
+        apCarte.setMinWidth(vbOutils.getPrefWidth() - 20);
+        double taillePanelCarte = apCarte.getPrefHeight();
+        cbAfficheCarte = new CheckBox(rbLocalisation.getString("interface.affichageCarte"));
+        cbAfficheCarte.setLayoutX(10);
+        cbAfficheCarte.setLayoutY(10);
+        Label lblPanelCarte = new Label(rbLocalisation.getString("interface.carte"));
+        lblPanelCarte.setPrefWidth(vbOutils.getPrefWidth());
+        lblPanelCarte.setStyle("-fx-background-color : #666");
+        lblPanelCarte.setTextFill(Color.WHITE);
+        lblPanelCarte.setPadding(new Insets(5));
+        lblPanelCarte.setLayoutX(10);
+        lblPanelCarte.setLayoutY(10);
+        ImageView ivBtnPlusCarte = new ImageView(new Image("file:" + "images/plus.png", 20, 20, true, true));
+        ivBtnPlusCarte.setLayoutX(vbOutils.getPrefWidth() - 20);
+        ivBtnPlusCarte.setLayoutY(11);
+
+        Button btnChoixCentreCarte = new Button(rbLocalisation.getString("interface.choixCentreCarte"));
+        btnChoixCentreCarte.setLayoutX(10);
+        btnChoixCentreCarte.setLayoutY(40);
+        btnChoixCentreCarte.setPrefWidth(105);
+        Button btnRecentreCarte = new Button(rbLocalisation.getString("interface.recentreCarte"));
+        btnRecentreCarte.setLayoutX(125);
+        btnRecentreCarte.setLayoutY(40);
+        btnRecentreCarte.setPrefWidth(105);
+        Button btnChoixCarte = new Button(rbLocalisation.getString("interface.choixCarte"));
+        btnChoixCarte.setLayoutX(240);
+        btnChoixCarte.setLayoutY(40);
+        btnChoixCarte.setPrefWidth(105);
+
+        TextField tfAdresseCarte = new TextField("");
+        tfAdresseCarte.setLayoutX(10);
+        tfAdresseCarte.setLayoutY(70);
+        tfAdresseCarte.setPrefWidth(220);
+
+        Button btnRechercheAdresse = new Button(rbLocalisation.getString("interface.chercheAdresse"), new ImageView(new Image("file:" + getStrRepertAppli() + File.separator + "images/loupe.png", -1, 16, true, true)));
+        btnRechercheAdresse.setLayoutX(240);
+        btnRechercheAdresse.setLayoutY(70);
+        Label lblZoomCarte = new Label(rbLocalisation.getString("interface.zoomCarte"));
+        lblZoomCarte.setLayoutX(10);
+        lblZoomCarte.setLayoutY(110);
+        setSlZoomCarte(new Slider(1, 20, getiFacteurZoomCarte()));
+        slZoomCarte.setMajorTickUnit(1.d);
+        slZoomCarte.setMinorTickCount(0);
+        slZoomCarte.setSnapToTicks(true);
+        slZoomCarte.setLayoutX(200);
+        slZoomCarte.setLayoutY(110);
+
+        Label lblLargeurCarte = new Label(rbLocalisation.getString("interface.largeurCarte"));
+        lblLargeurCarte.setLayoutX(10);
+        lblLargeurCarte.setLayoutY(140);
+        slLargeurCarte = new Slider(200, 1200, largeurCarte);
+        slLargeurCarte.setLayoutX(200);
+        slLargeurCarte.setLayoutY(140);
+        Label lblHauteurCarte = new Label(rbLocalisation.getString("interface.hauteurCarte"));
+        lblHauteurCarte.setLayoutX(10);
+        lblHauteurCarte.setLayoutY(170);
+        slHauteurCarte = new Slider(200, 1200, getHauteurCarte());
+        slHauteurCarte.setLayoutX(200);
+        slHauteurCarte.setLayoutY(170);
+        Label lblPositCarte = new Label(rbLocalisation.getString("interface.positionCarte"));
+        lblPositCarte.setLayoutX(10);
+        lblPositCarte.setLayoutY(200);
+        rbCarteLeft = new RadioButton("");
+        rbCarteLeft.setLayoutX(200);
+        rbCarteLeft.setLayoutY(200);
+        rbCarteLeft.setUserData("left");
+        rbCarteLeft.setSelected(getStrPositionCarte().equals("left"));
+        rbCarteLeft.setToggleGroup(tgPosCarte);
+        rbCarteRight = new RadioButton("");
+        rbCarteRight.setLayoutX(230);
+        rbCarteRight.setLayoutY(200);
+        rbCarteRight.setUserData("right");
+        rbCarteRight.setSelected(getStrPositionCarte().equals("right"));
+        rbCarteRight.setToggleGroup(tgPosCarte);
+        Label lblCouleurFondCarte = new Label(rbLocalisation.getString("interface.couleurFondCarte"));
+        lblCouleurFondCarte.setLayoutX(10);
+        lblCouleurFondCarte.setLayoutY(230);
+        cpCouleurFondCarte = new ColorPicker(getCouleurFondCarte());
+        cpCouleurFondCarte.setLayoutX(200);
+        cpCouleurFondCarte.setLayoutY(225);
+        Label lblCouleurTexteCarte = new Label(rbLocalisation.getString("interface.couleurTexteCarte"));
+        lblCouleurTexteCarte.setLayoutX(10);
+        lblCouleurTexteCarte.setLayoutY(260);
+        cpCouleurTexteCarte = new ColorPicker(getCouleurTexteCarte());
+        cpCouleurTexteCarte.setLayoutX(200);
+        cpCouleurTexteCarte.setLayoutY(255);
+        Label lblOpaciteCarte = new Label(rbLocalisation.getString("interface.opaciteCarte"));
+        lblOpaciteCarte.setLayoutX(10);
+        lblOpaciteCarte.setLayoutY(290);
+        slOpaciteCarte = new Slider(0, 1.0, 0.8);
+        slOpaciteCarte.setLayoutX(200);
+        slOpaciteCarte.setLayoutY(290);
+        cbAfficheRadarCarte = new CheckBox(rbLocalisation.getString("interface.afficheRadarCarte"));
+        cbAfficheRadarCarte.setLayoutX(10);
+        cbAfficheRadarCarte.setLayoutY(320);
+
+        Label lblTailleRadarCarte = new Label(rbLocalisation.getString("interface.tailleRadarCarte"));
+        lblTailleRadarCarte.setLayoutX(10);
+        lblTailleRadarCarte.setLayoutY(350);
+        slTailleRadarCarte = new Slider(0, 80, getTailleRadarCarte());
+        slTailleRadarCarte.setLayoutX(200);
+        slTailleRadarCarte.setLayoutY(350);
+        Label lblOpaciteRadarCarte = new Label(rbLocalisation.getString("interface.opaciteRadarCarte"));
+        lblOpaciteRadarCarte.setLayoutX(10);
+        lblOpaciteRadarCarte.setLayoutY(380);
+        slOpaciteRadarCarte = new Slider(0, 1, 0.8);
+        slOpaciteRadarCarte.setLayoutX(200);
+        slOpaciteRadarCarte.setLayoutY(380);
+        Label lblCouleurFondRadarCarte = new Label(rbLocalisation.getString("interface.couleurFondRadarCarte"));
+        lblCouleurFondRadarCarte.setLayoutX(10);
+        lblCouleurFondRadarCarte.setLayoutY(410);
+        cpCouleurFondRadarCarte = new ColorPicker(getCouleurFondRadarCarte());
+        cpCouleurFondRadarCarte.setLayoutX(200);
+        cpCouleurFondRadarCarte.setLayoutY(410);
+        Label lblCouleurLigneRadarCarte = new Label(rbLocalisation.getString("interface.couleurLigneRadarCarte"));
+        lblCouleurLigneRadarCarte.setLayoutX(10);
+        lblCouleurLigneRadarCarte.setLayoutY(440);
+        cpCouleurLigneRadarCarte = new ColorPicker(getCouleurLigneRadarCarte());
+        cpCouleurLigneRadarCarte.setLayoutX(200);
+        cpCouleurLigneRadarCarte.setLayoutY(440);
+        Label lblAngleRadarCarte = new Label("Angle Radar");
+        lblAngleRadarCarte.setLayoutX(10);
+        lblAngleRadarCarte.setLayoutY(470);
+        Slider slAngleRadarCarte = new Slider(0, 720, 45);
+        slAngleRadarCarte.setLayoutX(200);
+        slAngleRadarCarte.setLayoutY(470);
+        Label lblOuvertureRadarCarte = new Label("Angle Radar");
+        lblOuvertureRadarCarte.setLayoutX(10);
+        lblOuvertureRadarCarte.setLayoutY(500);
+        Slider slOuvertureRadarCarte = new Slider(0, 100, 35);
+        slOuvertureRadarCarte.setLayoutX(200);
+        slOuvertureRadarCarte.setLayoutY(500);
+        cbReplieDemarrageCarte = new CheckBox(rbLocalisation.getString("interface.replie"));
+        cbReplieDemarrageCarte.setLayoutX(10);
+        cbReplieDemarrageCarte.setLayoutY(530);
+        cbReplieDemarrageCarte.setSelected(false);
+        apCarte.getChildren().addAll(
+                cbAfficheCarte,
+                btnChoixCentreCarte, btnRecentreCarte, btnChoixCarte,
+                tfAdresseCarte, btnRechercheAdresse,
+                lblZoomCarte, slZoomCarte,
+                lblHauteurCarte, slHauteurCarte,
+                lblLargeurCarte, slLargeurCarte,
+                lblPositCarte, rbCarteLeft, rbCarteRight,
+                lblCouleurFondCarte, cpCouleurFondCarte,
+                lblCouleurTexteCarte, cpCouleurTexteCarte,
+                lblOpaciteCarte, slOpaciteCarte,
+                cbAfficheRadarCarte,
+                lblTailleRadarCarte, slTailleRadarCarte,
+                lblOpaciteRadarCarte, slOpaciteRadarCarte,
+                lblCouleurFondRadarCarte, cpCouleurFondRadarCarte,
+                lblCouleurLigneRadarCarte, cpCouleurLigneRadarCarte,
+                lblAngleRadarCarte, slAngleRadarCarte,
+                lblOuvertureRadarCarte, slOuvertureRadarCarte,
+                cbReplieDemarrageCarte
+        );
+
+        apCarte.setPrefHeight(0);
+        apCarte.setMaxHeight(0);
+        apCarte.setMinHeight(0);
+        apCarte.setVisible(false);
+        lblPanelCarte.setOnMouseClicked((me) -> {
+            if (apCarte.isVisible()) {
+                ivBtnPlusCarte.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
+                apCarte.setPrefHeight(0);
+                apCarte.setMaxHeight(0);
+                apCarte.setMinHeight(0);
+                apCarte.setVisible(false);
+            } else {
+                ivBtnPlusCarte.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
+                apCarte.setPrefHeight(taillePanelCarte);
+                apCarte.setMaxHeight(taillePanelCarte);
+                apCarte.setMinHeight(taillePanelCarte);
+                apCarte.setVisible(true);
+            }
+        });
+        ivBtnPlusCarte.setOnMouseClicked((me) -> {
+            if (apCarte.isVisible()) {
+                ivBtnPlusCarte.setImage(new Image("file:" + "images/plus.png", 20, 20, true, true));
+                apCarte.setPrefHeight(0);
+                apCarte.setMaxHeight(0);
+                apCarte.setMinHeight(0);
+                apCarte.setVisible(false);
+            } else {
+                ivBtnPlusCarte.setImage(new Image("file:" + "images/moins.png", 20, 20, true, true));
+                apCarte.setPrefHeight(taillePanelCarte);
+                apCarte.setMaxHeight(taillePanelCarte);
+                apCarte.setMinHeight(taillePanelCarte);
+                apCarte.setVisible(true);
+            }
+        });
+
+        /*
+         * ********************************************
          *     Panel Image Fond
          * ********************************************
          */
@@ -5572,7 +6345,7 @@ public class GestionnaireInterfaceController {
         ivBtnPlusImageFond.setLayoutX(vbOutils.getPrefWidth() - 20);
         ivBtnPlusImageFond.setLayoutY(11);
         apImageFond.getChildren().addAll();
-        Image imgAjoute = new Image("file:" + strRepertAppli + File.separator + "images/ajoute.png", 30, 30, true, true);
+        Image imgAjoute = new Image("file:" + getStrRepertAppli() + File.separator + "images/ajoute.png", 30, 30, true, true);
         Button btnAjouteImage = new Button(rbLocalisation.getString("interface.imageFondAjoute"), new ImageView(imgAjoute));
         btnAjouteImage.setLayoutX(10);
         btnAjouteImage.setLayoutY(10);
@@ -5758,6 +6531,7 @@ public class GestionnaireInterfaceController {
         apVignettes.setStyle(strStyleAp);
         apComboMenu.setStyle(strStyleAp);
         apPlan.setStyle(strStyleAp);
+        apCarte.setStyle(strStyleAp);
         apMenuContextuel.setStyle(strStyleAp);
         apImageFond.setStyle(strStyleAp);
         apBoussole.setLayoutX(20);
@@ -5770,6 +6544,7 @@ public class GestionnaireInterfaceController {
         apVignettes.setLayoutX(20);
         apComboMenu.setLayoutX(20);
         apPlan.setLayoutX(20);
+        apCarte.setLayoutX(20);
         apMenuContextuel.setLayoutX(20);
         apImageFond.setLayoutX(20);
         /*
@@ -5789,6 +6564,7 @@ public class GestionnaireInterfaceController {
         apVIG.getChildren().addAll(apVignettes, lblPanelVignettes, ivBtnPlusVignettes);
         apCBM.getChildren().addAll(apComboMenu, lblPanelComboMenu, ivBtnPlusComboMenu);
         apPLAN.getChildren().addAll(apPlan, lblPanelPlan, ivBtnPlusPlan);
+        apCARTE.getChildren().addAll(apCarte, lblPanelCarte, ivBtnPlusCarte);
         apIF.getChildren().addAll(apImageFond, lblPanelImageFond, ivBtnPlusImageFond);
         apMC.getChildren().addAll(apMenuContextuel, lblPanelMenuContextuel, ivBtnPlusMenuContextuel);
 
@@ -5805,6 +6581,7 @@ public class GestionnaireInterfaceController {
                 apCLASS,
                 apPERS,
                 apPLAN,
+                apCARTE,
                 apHS,
                 apBOUSS,
                 apMASQ,
@@ -5856,56 +6633,72 @@ public class GestionnaireInterfaceController {
         /*
          Listeners Couleur Thème
          */
-        cpCouleurTheme.setOnAction((e) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+        cpCouleurFondTheme.valueProperty().addListener((ov, av, nv) -> {
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
-            couleurTheme = cpCouleurTheme.getValue();
-            String strCoul1 = cpCouleurTheme.getValue().toString().substring(2, 8);
-            couleurHotspots = couleurTheme;
-            couleurBarreClassique = couleurTheme;
-            couleurMasque = couleurTheme;
-            setCouleurFondPlan(couleurTheme);
-            couleurBarrePersonnalisee = couleurTheme;
-            setStrCouleurFondPlan(getCouleurFondPlan().toString().substring(2, 8));
-            affichePlan();
-            changeCouleurTitre(strCoul1);
-            changeCouleurVignettes(strCoul1);
-            //changeCouleur(hue);
-            cpCouleurFondTitre.setValue(couleurTheme);
-            cpCouleurFondPlan.setValue(couleurTheme);
-            cpCouleurHotspots.setValue(couleurTheme);
-            cpCouleurBarreClassique.setValue(couleurTheme);
-            cpCouleurMasques.setValue(couleurTheme);
-            cpCouleurBarrePersonnalisee.setValue(couleurTheme);
-            cpCouleurFondVignettes.setValue(Color.hsb(couleurTheme.getHue(), couleurTheme.getSaturation(), couleurTheme.getBrightness()));
-            changeCouleurBarreClassique(couleurTheme.getHue(), couleurTheme.getSaturation(), couleurTheme.getBrightness());
-            changeCouleurHS(couleurTheme.getHue(), couleurTheme.getSaturation(), couleurTheme.getBrightness());
-            changeCouleurHSPhoto(couleurTheme.getHue(), couleurTheme.getSaturation(), couleurTheme.getBrightness());
-            changeCouleurMasque(couleurTheme.getHue(), couleurTheme.getSaturation(), couleurTheme.getBrightness());
-            afficheBarrePersonnalisee();
+            couleurFondTheme = cpCouleurFondTheme.getValue();
+            cpCouleurFondTitre.setValue(couleurFondTheme);
+            cpCouleurFondPlan.setValue(couleurFondTheme);
+            cpCouleurFondCarte.setValue(couleurFondTheme);
+            cpCouleurHotspots.setValue(couleurFondTheme);
+            cpCouleurHotspotsPhoto.setValue(couleurFondTheme);
+            cpCouleurHotspotsHTML.setValue(couleurFondTheme);
+            cpCouleurBarreClassique.setValue(couleurFondTheme);
+            cpCouleurMasques.setValue(couleurFondTheme);
+            cpCouleurBarrePersonnalisee.setValue(couleurFondTheme);
+            cpCouleurFondVignettes.setValue(couleurFondTheme);
+            cpCouleurDiaporama.setValue(couleurFondTheme);
+        });
+        cpCouleurTexteTheme.valueProperty().addListener((ov, av, nv) -> {
+            cpCouleurTitre.setValue(cpCouleurTexteTheme.getValue());
+            cpCouleurTextePlan.setValue(cpCouleurTexteTheme.getValue());
+            cpCouleurTexteCarte.setValue(cpCouleurTexteTheme.getValue());
+            cpCouleurTexteVignettes.setValue(cpCouleurTexteTheme.getValue());
+        });
+        slOpaciteTheme.valueProperty().addListener((ov, av, nv) -> {
+            double opacite = (double) nv;
+            slOpacite.setValue(opacite);
+            slOpaciteCarte.setValue(opacite);
+            slOpacitePlan.setValue(opacite);
+            slOpaciteVignettes.setValue(opacite);
+            slOpaciteDiaporama.setValue(opacite);
+            slFenetreInfoOpacite.setValue(opacite);
+            slFenetreAideOpacite.setValue(opacite);
+        });
+        cbPoliceTheme.valueProperty().addListener((ov, av, nv) -> {
+            cbListePolices.setValue(nv);
         });
 
         /*
          Listeners HotSpots
          */
-        cpCouleurHotspots.setOnAction((e) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+        cpCouleurHotspots.valueProperty().addListener((ov, av, nv) -> {
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
 
             couleurHotspots = cpCouleurHotspots.getValue();
             changeCouleurHS(couleurHotspots.getHue(), couleurHotspots.getSaturation(), couleurHotspots.getBrightness());
         });
-        cpCouleurHotspotsPhoto.setOnAction((e) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+        cpCouleurHotspotsPhoto.valueProperty().addListener((ov, av, nv) -> {
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             couleurHotspotsPhoto = cpCouleurHotspotsPhoto.getValue();
             changeCouleurHSPhoto(couleurHotspotsPhoto.getHue(), couleurHotspotsPhoto.getSaturation(), couleurHotspotsPhoto.getBrightness());
+        });
+
+        cpCouleurHotspotsHTML.valueProperty().addListener((ov, av, nv) -> {
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+            }
+            couleurHotspotsHTML = cpCouleurHotspotsHTML.getValue();
+            changeCouleurHSHTML(couleurHotspotsHTML.getHue(), couleurHotspotsHTML.getSaturation(), couleurHotspotsHTML.getBrightness());
         });
 
         /*
@@ -5913,9 +6706,9 @@ public class GestionnaireInterfaceController {
          */
         cbListePolices.valueProperty().addListener((ov, old_val, new_val) -> {
             if (new_val != null) {
-                if (iNombrePanoramiques != 0) {
-                    bDejaSauve = false;
-                    stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+                if (getiNombrePanoramiques() != 0) {
+                    setbDejaSauve(false);
+                    getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
                 }
                 setStrTitrePoliceNom(new_val.toString());
                 Font fonte1 = Font.font(getStrTitrePoliceNom(), Double.parseDouble(getStrTitrePoliceTaille()));
@@ -5926,14 +6719,15 @@ public class GestionnaireInterfaceController {
             }
         });
         cbAfficheTitre.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             setbAfficheTitre((boolean) new_val);
             apVisualisation.getChildren().remove(hbbarreBoutons);
             apVisualisation.getChildren().remove(ivHotSpot);
             apVisualisation.getChildren().remove(ivHotSpotImage);
+            apVisualisation.getChildren().remove(ivHotSpotHTML);
             afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
             afficheVignettes();
             affichePlan();
@@ -5941,9 +6735,9 @@ public class GestionnaireInterfaceController {
 
         slTaillePolice.valueProperty().addListener((ov, oldValue, newValue) -> {
             if (newValue != null) {
-                if (iNombrePanoramiques != 0) {
-                    bDejaSauve = false;
-                    stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+                if (getiNombrePanoramiques() != 0) {
+                    setbDejaSauve(false);
+                    getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
                 }
                 double taille = (double) newValue;
                 setStrTitrePoliceTaille(Integer.toString((int) Math.round(taille)));
@@ -5952,29 +6746,30 @@ public class GestionnaireInterfaceController {
                 lblTxtTitre.setPrefHeight(-1);
                 afficheVignettes();
                 affichePlan();
+                afficheCarte();
             }
         });
         slOpacite.valueProperty().addListener((ov, oldValue, newValue) -> {
             if (newValue != null) {
-                if (iNombrePanoramiques != 0) {
-                    bDejaSauve = false;
-                    stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+                if (getiNombrePanoramiques() != 0) {
+                    setbDejaSauve(false);
+                    getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
                 }
                 setTitreOpacite((double) newValue);
                 String strCoul = cpCouleurFondTitre.getValue().toString().substring(2, 8);
-                Color couleur = cpCouleurFondTitre.getValue();
-                int iRouge = (int) (couleur.getRed() * 255.d);
-                int iBleu = (int) (couleur.getBlue() * 255.d);
-                int iVert = (int) (couleur.getGreen() * 255.d);
-                String strCoulFond = "rgba(" + iRouge + "," + iVert + "," + iBleu + "," + getTitreOpacite() + ")";
-                lblTxtTitre.setStyle("-fx-background-color : " + strCoulFond);
+                Color coul1 = cpCouleurFondTitre.getValue();
+                double iRouge1 = (int) (coul1.getRed() * 255.d);
+                double iBleu1 = (int) (coul1.getBlue() * 255.d);
+                double iVert1 = (int) (coul1.getGreen() * 255.d);
+                String strCoulFond1 = "rgba(" + iRouge1 + "," + iVert1 + "," + iBleu1 + "," + getTitreOpacite() + ")";
+                lblTxtTitre.setStyle("-fx-background-color : " + strCoulFond1);
             }
         });
         slTaille.valueProperty().addListener((ov, oldValue, newValue) -> {
             if (newValue != null) {
-                if (iNombrePanoramiques != 0) {
-                    bDejaSauve = false;
-                    stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+                if (getiNombrePanoramiques() != 0) {
+                    setbDejaSauve(false);
+                    getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
                 }
                 setTitreTaille((double) newValue);
                 double taille = (double) getTitreTaille() / 100.d * ivVisualisation.getFitWidth();
@@ -5982,37 +6777,38 @@ public class GestionnaireInterfaceController {
                 lblTxtTitre.setLayoutX(ivVisualisation.getLayoutX() + (ivVisualisation.getFitWidth() - lblTxtTitre.getMinWidth()) / 2);
             }
         });
-        cpCouleurTitre.setOnAction((e) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+        cpCouleurTitre.valueProperty().addListener((ov, av, nv) -> {
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             String strCoul = cpCouleurTitre.getValue().toString().substring(2, 8);
             setStrCouleurTitre("#" + strCoul);
             lblTxtTitre.setTextFill(Color.valueOf(getStrCouleurTitre()));
         });
-        cpCouleurFondTitre.setOnAction((e) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+
+        cpCouleurFondTitre.valueProperty().addListener((ov, av, nv) -> {
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             String strCouleur = cpCouleurFondTitre.getValue().toString().substring(2, 8);
-            Color couleur = cpCouleurFondTitre.getValue();
+            Color couleur1 = cpCouleurFondTitre.getValue();
             setStrCouleurFondTitre("#" + strCouleur);
-            int iRouge = (int) (couleur.getRed() * 255.d);
-            int iBleu = (int) (couleur.getBlue() * 255.d);
-            int iVert = (int) (couleur.getGreen() * 255.d);
-            String strCoulFond = "rgba(" + iRouge + "," + iVert + "," + iBleu + "," + getTitreOpacite() + ")";
+            double iRouge1 = (int) (couleur1.getRed() * 255.d);
+            double iBleu1 = (int) (couleur1.getBlue() * 255.d);
+            double iVert1 = (int) (couleur1.getGreen() * 255.d);
+            String strCoulFond1 = "rgba(" + iRouge1 + "," + iVert1 + "," + iBleu1 + "," + getTitreOpacite() + ")";
+            lblTxtTitre.setStyle("-fx-background-color : " + strCoulFond1);
 
-            lblTxtTitre.setStyle("-fx-background-color : " + strCoulFond);
         });
         /*
          Listeners Fenêtres
          */
         cbFenetreInfoPersonnalise.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             setbFenetreInfoPersonnalise((boolean) new_val);
             apFenetreInfoPers.setDisable(!isbFenetreInfoPersonnalise());
@@ -6020,9 +6816,9 @@ public class GestionnaireInterfaceController {
         });
 
         cbFenetreAidePersonnalise.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             setbFenetreAidePersonnalise((boolean) new_val);
             apFenetreAidePers.setDisable(!isbFenetreAidePersonnalise());
@@ -6030,9 +6826,9 @@ public class GestionnaireInterfaceController {
         });
 
         cbAfficheFenetreInfo.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             bAfficheFenetreInfo = new_val;
             if (new_val == true) {
@@ -6043,9 +6839,9 @@ public class GestionnaireInterfaceController {
         });
 
         cbAfficheFenetreAide.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             bAfficheFenetreAide = new_val;
             if (new_val == true) {
@@ -6056,9 +6852,9 @@ public class GestionnaireInterfaceController {
         });
 
         btnFenetreInfo.setOnMouseClicked((me) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             setStrFenetreInfoImage(ajoutFenetreImage());
             if (!strFenetreInfoImage.equals("")) {
@@ -6069,9 +6865,9 @@ public class GestionnaireInterfaceController {
         );
 
         btnFenetreAide.setOnMouseClicked((me) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             setStrFenetreAideImage(ajoutFenetreImage());
             if (!strFenetreAideImage.equals("")) {
@@ -6081,9 +6877,9 @@ public class GestionnaireInterfaceController {
         }
         );
         slFenetreInfoTaille.valueProperty().addListener((ov, oldValue, newValue) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (newValue != null) {
                 double taille = (double) newValue;
@@ -6092,9 +6888,9 @@ public class GestionnaireInterfaceController {
             }
         });
         slFenetreInfoOpacite.valueProperty().addListener((ov, oldValue, newValue) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (newValue != null) {
                 double opac = (double) newValue;
@@ -6103,34 +6899,34 @@ public class GestionnaireInterfaceController {
             }
         });
         bdfFenetreInfoPosX.numberProperty().addListener((ov, old_value, new_value) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             setFenetreInfoPosX(new_value.doubleValue());
             afficheFenetreInfo();
         });
         bdfFenetreInfoPosY.numberProperty().addListener((ov, old_value, new_value) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             setFenetreInfoPosY(new_value.doubleValue());
             afficheFenetreInfo();
         });
 
         tfFenetreURL.textProperty().addListener((ov, oldValue, newValue) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             setStrFenetreURL(newValue);
         });
 
         tfFenetreTexteURL.textProperty().addListener((ov, oldValue, newValue) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             setStrFenetreTexteURL(newValue);
             afficheFenetreInfo();
@@ -6138,9 +6934,9 @@ public class GestionnaireInterfaceController {
 
         slFenetrePoliceTaille.valueProperty().addListener((ov, oldValue, newValue) -> {
             if (newValue != null) {
-                if (iNombrePanoramiques != 0) {
-                    bDejaSauve = false;
-                    stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+                if (getiNombrePanoramiques() != 0) {
+                    setbDejaSauve(false);
+                    getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
                 }
                 double taille = Math.round((double) newValue * 10.d) / 10.d;
                 setFenetrePoliceTaille(taille);
@@ -6149,36 +6945,36 @@ public class GestionnaireInterfaceController {
         });
 
         cpFenetreURLCouleur.setOnAction((e) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             setStrFenetreURLCouleur("#" + cpFenetreURLCouleur.getValue().toString().substring(2, 8));
             afficheFenetreInfo();
         });
 
         bdfFenetreURLPosX.numberProperty().addListener((ov, old_value, new_value) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             setFenetreURLPosX(new_value.doubleValue());
             afficheFenetreInfo();
         });
 
         bdfFenetreURLPosY.numberProperty().addListener((ov, old_value, new_value) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             setFenetreURLPosY(new_value.doubleValue());
             afficheFenetreInfo();
         });
         slFenetreAideTaille.valueProperty().addListener((ov, oldValue, newValue) -> {
             if (newValue != null) {
-                if (iNombrePanoramiques != 0) {
-                    bDejaSauve = false;
-                    stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+                if (getiNombrePanoramiques() != 0) {
+                    setbDejaSauve(false);
+                    getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
                 }
                 double taille = (double) newValue;
                 setFenetreAideTaille(taille);
@@ -6187,9 +6983,9 @@ public class GestionnaireInterfaceController {
         });
         slFenetreAideOpacite.valueProperty().addListener((ov, oldValue, newValue) -> {
             if (newValue != null) {
-                if (iNombrePanoramiques != 0) {
-                    bDejaSauve = false;
-                    stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+                if (getiNombrePanoramiques() != 0) {
+                    setbDejaSauve(false);
+                    getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
                 }
                 double opac = (double) newValue;
                 setFenetreAideOpacite(opac);
@@ -6198,17 +6994,17 @@ public class GestionnaireInterfaceController {
         });
 
         bdfFenetreAidePosX.numberProperty().addListener((ov, old_value, new_value) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             setFenetreAidePosX(new_value.doubleValue());
             afficheFenetreAide();
         });
         bdfFenetreAidePosY.numberProperty().addListener((ov, old_value, new_value) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             setFenetreAidePosY(new_value.doubleValue());
             afficheFenetreAide();
@@ -6220,9 +7016,9 @@ public class GestionnaireInterfaceController {
          */
         slOpaciteDiaporama.valueProperty().addListener((ov, oldValue, newValue) -> {
             if (newValue != null) {
-                if (iNombrePanoramiques != 0) {
-                    bDejaSauve = false;
-                    stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+                if (getiNombrePanoramiques() != 0) {
+                    setbDejaSauve(false);
+                    getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
                 }
                 setDiaporamaOpacite((double) newValue);
                 afficheDiaporama();
@@ -6230,9 +7026,9 @@ public class GestionnaireInterfaceController {
         });
 
         cpCouleurDiaporama.setOnAction((e) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             String strCoul = cpCouleurDiaporama.getValue().toString().substring(2, 8);
             setStrCouleurDiaporama("#" + strCoul);
@@ -6240,9 +7036,9 @@ public class GestionnaireInterfaceController {
         });
 
         cbVisualiseDiapo.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             bVisualiseDiaporama = new_val;
             afficheDiaporama();
@@ -6255,9 +7051,9 @@ public class GestionnaireInterfaceController {
          Listeners Barre de navigation Classique
          */
         slEspacementBarreClassique.valueProperty().addListener((ov, oldValue, newValue) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             setEspacementBarreClassique((double) newValue);
             afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
@@ -6265,9 +7061,9 @@ public class GestionnaireInterfaceController {
 
         cblisteStyleBarreClassique.valueProperty().addListener((ov, t, t1) -> {
             if (t1 != null) {
-                if (iNombrePanoramiques != 0) {
-                    bDejaSauve = false;
-                    stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+                if (getiNombrePanoramiques() != 0) {
+                    setbDejaSauve(false);
+                    getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
                 }
                 setStyleBarreClassique(t1.toString());
                 afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
@@ -6275,18 +7071,18 @@ public class GestionnaireInterfaceController {
         });
 
         bdfOffsetXBarreClassique.numberProperty().addListener((ov, old_value, new_value) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
 
             setOffsetXBarreClassique(new_value.doubleValue());
             afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
         });
         bdfOffsetYBarreClassique.numberProperty().addListener((ov, old_value, new_value) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             setOffsetYBarreClassique(new_value.doubleValue());
             afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
@@ -6294,18 +7090,18 @@ public class GestionnaireInterfaceController {
 
         tgPositionBarreClassique.selectedToggleProperty().addListener((ov, old_toggle, new_toggle) -> {
             if (tgPositionBarreClassique.getSelectedToggle() != null) {
-                if (iNombrePanoramiques != 0) {
-                    bDejaSauve = false;
-                    stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+                if (getiNombrePanoramiques() != 0) {
+                    setbDejaSauve(false);
+                    getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
                 }
                 setStrPositionBarreClassique(tgPositionBarreClassique.getSelectedToggle().getUserData().toString());
                 afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
             }
         });
         cbBarreClassiqueVisible.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (new_val) {
                 setStrVisibiliteBarreClassique("oui");
@@ -6315,27 +7111,31 @@ public class GestionnaireInterfaceController {
             }
             afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
         });
+
         cbSuivantPrecedent.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             setbSuivantPrecedent((boolean) new_val);
+            if (!new_val) {
+                cbAffichePrecSuivMC.setSelected(new_val);
+            }
             vbFondSuivant.setVisible(isbSuivantPrecedent());
             vbFondPrecedent.setVisible(isbSuivantPrecedent());
         });
-        cpCouleurBarreClassique.setOnAction((e) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+        cpCouleurBarreClassique.valueProperty().addListener((ov, av, nv) -> {
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             couleurBarreClassique = cpCouleurBarreClassique.getValue();
             changeCouleurBarreClassique(couleurBarreClassique.getHue(), couleurBarreClassique.getSaturation(), couleurBarreClassique.getBrightness());
         });
         cbDeplacementsBarreClassique.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (new_val) {
                 setStrDeplacementsBarreClassique("oui");
@@ -6345,9 +7145,9 @@ public class GestionnaireInterfaceController {
             afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
         });
         cbZoomBarreClassique.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (new_val) {
                 setStrZoomBarreClassique("oui");
@@ -6357,9 +7157,9 @@ public class GestionnaireInterfaceController {
             afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
         });
         cbOutilsBarreClassique.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (new_val) {
                 setStrOutilsBarreClassique("oui");
@@ -6369,9 +7169,9 @@ public class GestionnaireInterfaceController {
             afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
         });
         cbSourisBarreClassique.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (new_val) {
                 setStrSourisBarreClassique("oui");
@@ -6381,9 +7181,9 @@ public class GestionnaireInterfaceController {
             afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
         });
         cbRotationBarreClassique.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (new_val) {
                 setStrRotationBarreClassique("oui");
@@ -6393,9 +7193,9 @@ public class GestionnaireInterfaceController {
             afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
         });
         cbFSBarreClassique.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (new_val) {
                 setStrPleinEcranBarreClassique("oui");
@@ -6409,17 +7209,17 @@ public class GestionnaireInterfaceController {
          */
 
         bdfOffsetXBarrePersonnalisee.numberProperty().addListener((ov, old_value, new_value) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             setOffsetXBarrePersonnalisee(new_value.doubleValue());
             afficheBarrePersonnalisee();
         });
         bdfOffsetYBarrePersonnalisee.numberProperty().addListener((ov, old_value, new_value) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             setOffsetYBarrePersonnalisee(new_value.doubleValue());
             afficheBarrePersonnalisee();
@@ -6427,9 +7227,9 @@ public class GestionnaireInterfaceController {
 
         grpCouleurBarrePersonnalisee.selectedToggleProperty().addListener((ov, old_toggle, new_toggle) -> {
             if (grpCouleurBarrePersonnalisee.getSelectedToggle() != null) {
-                if (iNombrePanoramiques != 0) {
-                    bDejaSauve = false;
-                    stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+                if (getiNombrePanoramiques() != 0) {
+                    setbDejaSauve(false);
+                    getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
                 }
                 setbCouleurOrigineBarrePersonnalisee((boolean) grpCouleurBarrePersonnalisee.getSelectedToggle().getUserData());
                 cpCouleurBarrePersonnalisee.setDisable(isbCouleurOrigineBarrePersonnalisee());
@@ -6439,18 +7239,18 @@ public class GestionnaireInterfaceController {
 
         grpPositionBarrePersonnalisee.selectedToggleProperty().addListener((ov, old_toggle, new_toggle) -> {
             if (grpPositionBarrePersonnalisee.getSelectedToggle() != null) {
-                if (iNombrePanoramiques != 0) {
-                    bDejaSauve = false;
-                    stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+                if (getiNombrePanoramiques() != 0) {
+                    setbDejaSauve(false);
+                    getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
                 }
                 setStrPositionBarrePersonnalisee(grpPositionBarrePersonnalisee.getSelectedToggle().getUserData().toString());
                 afficheBarrePersonnalisee();
             }
         });
         cbBarrePersonnaliseeVisible.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (new_val) {
                 setStrVisibiliteBarrePersonnalisee("oui");
@@ -6460,27 +7260,18 @@ public class GestionnaireInterfaceController {
             }
             afficheBarrePersonnalisee();
         });
-        cbSuivantPrecedent.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
-            }
-            setbSuivantPrecedent((boolean) new_val);
-            vbFondSuivant.setVisible(isbSuivantPrecedent());
-            vbFondPrecedent.setVisible(isbSuivantPrecedent());
-        });
-        cpCouleurBarrePersonnalisee.setOnAction((e) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+        cpCouleurBarrePersonnalisee.valueProperty().addListener((ov, av, nv) -> {
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             couleurBarrePersonnalisee = cpCouleurBarrePersonnalisee.getValue();
             afficheBarrePersonnalisee();
         });
         cbDeplacementsBarrePersonnalisee.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (new_val) {
                 setStrDeplacementsBarrePersonnalisee("oui");
@@ -6490,9 +7281,9 @@ public class GestionnaireInterfaceController {
             afficheBarrePersonnalisee();
         });
         cbZoomBarrePersonnalisee.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (new_val) {
                 setStrZoomBarrePersonnalisee("oui");
@@ -6502,9 +7293,9 @@ public class GestionnaireInterfaceController {
             afficheBarrePersonnalisee();
         });
         cbSourisBarrePersonnalisee.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (new_val) {
                 setStrSourisBarrePersonnalisee("oui");
@@ -6514,9 +7305,9 @@ public class GestionnaireInterfaceController {
             afficheBarrePersonnalisee();
         });
         cbRotationBarrePersonnalisee.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (new_val) {
                 setStrRotationBarrePersonnalisee("oui");
@@ -6526,9 +7317,9 @@ public class GestionnaireInterfaceController {
             afficheBarrePersonnalisee();
         });
         cbFSBarrePersonnalisee.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (new_val) {
                 setStrPleinEcranBarrePersonnalisee("oui");
@@ -6538,9 +7329,9 @@ public class GestionnaireInterfaceController {
             afficheBarrePersonnalisee();
         });
         sltailleBarrePersonnalisee.valueProperty().addListener((ov, oldValue, newValue) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (newValue != null) {
                 double taille = (double) newValue;
@@ -6549,9 +7340,9 @@ public class GestionnaireInterfaceController {
             }
         });
         sltailleIconesBarrePersonnalisee.valueProperty().addListener((ov, oldValue, newValue) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (newValue != null) {
                 double taille = (double) newValue;
@@ -6561,9 +7352,9 @@ public class GestionnaireInterfaceController {
         });
         btnLienBarrePersonnalisee.setOnMouseClicked(
                 (me) -> {
-                    if (iNombrePanoramiques != 0) {
-                        bDejaSauve = false;
-                        stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+                    if (getiNombrePanoramiques() != 0) {
+                        setbDejaSauve(false);
+                        getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
                     }
                     try {
                         choixBarrePersonnalisee();
@@ -6574,24 +7365,24 @@ public class GestionnaireInterfaceController {
         );
         btnEditerBarre.setOnMouseClicked(
                 (me) -> {
-                    if (iNombrePanoramiques != 0) {
-                        bDejaSauve = false;
-                        stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+                    if (getiNombrePanoramiques() != 0) {
+                        setbDejaSauve(false);
+                        getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
                     }
                     EditeurPanovisu.creerEditerBarre(tfLienImageBarrePersonnalisee.getText());
                 }
         );
         tfLien1BarrePersonnalisee.textProperty().addListener((ov, oldValue, newValue) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             setStrLien1BarrePersonnalisee(tfLien1BarrePersonnalisee.getText());
         });
         tfLien2BarrePersonnalisee.textProperty().addListener((ov, oldValue, newValue) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             setStrLien2BarrePersonnalisee(tfLien2BarrePersonnalisee.getText());
         });
@@ -6601,9 +7392,9 @@ public class GestionnaireInterfaceController {
          Listeners Boussole
          */
         tgPosBouss.selectedToggleProperty().addListener((ov, old_toggle, new_toggle) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (tgPosBouss.getSelectedToggle() != null) {
                 setStrPositionBoussole(tgPosBouss.getSelectedToggle().getUserData().toString());
@@ -6611,25 +7402,25 @@ public class GestionnaireInterfaceController {
             }
         });
         bdfOffsetXBoussole.numberProperty().addListener((ov, old_value, new_value) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             setOffsetXBoussole(new_value.doubleValue());
             afficheBoussole();
         });
         bdfOffsetYBoussole.numberProperty().addListener((ov, old_value, new_value) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             setOffsetYBoussole(new_value.doubleValue());
             afficheBoussole();
         });
         slTailleBoussole.valueProperty().addListener((ov, oldValue, newValue) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (newValue != null) {
                 double taille = (double) newValue;
@@ -6638,9 +7429,9 @@ public class GestionnaireInterfaceController {
             }
         });
         cbAfficheBoussole.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (new_val != null) {
                 setbAfficheBoussole((boolean) new_val);
@@ -6648,9 +7439,9 @@ public class GestionnaireInterfaceController {
             }
         });
         cbAiguilleMobile.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (new_val != null) {
                 setbAiguilleMobileBoussole((boolean) new_val);
@@ -6661,9 +7452,9 @@ public class GestionnaireInterfaceController {
          Listeners Bouton de Masquage
          */
         slOpaciteBoussole.valueProperty().addListener((ov, oldValue, newValue) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (newValue != null) {
                 double opac = (double) newValue;
@@ -6673,9 +7464,9 @@ public class GestionnaireInterfaceController {
         });
 
         tgPosMasque.selectedToggleProperty().addListener((ov, old_toggle, new_toggle) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (tgPosMasque.getSelectedToggle() != null) {
                 setStrPositionMasque(tgPosMasque.getSelectedToggle().getUserData().toString());
@@ -6684,25 +7475,25 @@ public class GestionnaireInterfaceController {
             }
         });
         bdfOffsetXMasque.numberProperty().addListener((ov, old_value, new_value) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             setdXMasque(new_value.doubleValue());
             afficheMasque();
         });
         bdfOffsetYMasque.numberProperty().addListener((ov, old_value, new_value) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             setdYMasque(new_value.doubleValue());
             afficheMasque();
         });
         slTailleMasque.valueProperty().addListener((ov, oldValue, newValue) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (newValue != null) {
                 double taille = (double) newValue;
@@ -6711,9 +7502,9 @@ public class GestionnaireInterfaceController {
             }
         });
         slOpaciteMasque.valueProperty().addListener((ov, oldValue, newValue) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (newValue != null) {
                 double opac = (double) newValue;
@@ -6722,26 +7513,26 @@ public class GestionnaireInterfaceController {
             }
         });
         cbMasqueNavigation.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (new_val != null) {
                 setbMasqueNavigation((boolean) new_val);
             }
         });
-        cpCouleurMasques.setOnAction((e) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+        cpCouleurMasques.valueProperty().addListener((ov, av, nv) -> {
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             couleurMasque = cpCouleurMasques.getValue();
             changeCouleurMasque(couleurMasque.getHue(), couleurMasque.getSaturation(), couleurMasque.getBrightness());
         });
         cbAfficheMasque.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (new_val != null) {
                 setbAfficheMasque((boolean) new_val);
@@ -6750,63 +7541,63 @@ public class GestionnaireInterfaceController {
             }
         });
         cbMasqueBoussole.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (new_val != null) {
                 setbMasqueBoussole((boolean) new_val);
             }
         });
         cbMasqueTitre.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (new_val != null) {
                 setbMasqueTitre((boolean) new_val);
             }
         });
         cbMasquePlan.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (new_val != null) {
                 setbMasquePlan((boolean) new_val);
             }
         });
         cbMasqueVignettes.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (new_val != null) {
                 setbMasqueVignettes((boolean) new_val);
             }
         });
         cbMasqueCombo.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (new_val != null) {
                 setbMasqueCombo((boolean) new_val);
             }
         });
         cbMasqueSuivPrec.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (new_val != null) {
                 setbMasqueSuivPrec((boolean) new_val);
             }
         });
         cbMasqueHotspots.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (new_val != null) {
                 setbMasqueHotspots((boolean) new_val);
@@ -6817,27 +7608,27 @@ public class GestionnaireInterfaceController {
          Listeners Reseaux Sociaux
          */
         bdfOffsetXReseauxSociaux.numberProperty().addListener((ov, old_value, new_value) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             setdXReseauxSociaux(new_value.doubleValue());
             afficheReseauxSociaux();
         });
 
         bdfOffsetYreseauxSociaux.numberProperty().addListener((ov, old_value, new_value) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             setdYReseauxSociaux(new_value.doubleValue());
             afficheReseauxSociaux();
         });
 
         tgPosReseauxSociaux.selectedToggleProperty().addListener((ov, old_toggle, new_toggle) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (tgPosReseauxSociaux.getSelectedToggle() != null) {
                 setStrPositionReseauxSociaux(tgPosReseauxSociaux.getSelectedToggle().getUserData().toString());
@@ -6845,9 +7636,9 @@ public class GestionnaireInterfaceController {
             }
         });
         slTailleReseauxSociaux.valueProperty().addListener((ov, oldValue, newValue) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (newValue != null) {
                 double taille = (double) newValue;
@@ -6856,9 +7647,9 @@ public class GestionnaireInterfaceController {
             }
         });
         slOpaciteReseauxSociaux.valueProperty().addListener((ov, oldValue, newValue) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (newValue != null) {
                 double opac = (double) newValue;
@@ -6867,9 +7658,9 @@ public class GestionnaireInterfaceController {
             }
         });
         cbAfficheReseauxSociaux.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (new_val != null) {
                 setbAfficheReseauxSociaux((boolean) new_val);
@@ -6877,9 +7668,9 @@ public class GestionnaireInterfaceController {
             }
         });
         cbReseauxSociauxTwitter.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (new_val != null) {
                 setbReseauxSociauxTwitter((boolean) new_val);
@@ -6887,9 +7678,9 @@ public class GestionnaireInterfaceController {
             }
         });
         cbReseauxSociauxGoogle.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (new_val != null) {
                 setbReseauxSociauxGoogle((boolean) new_val);
@@ -6897,9 +7688,9 @@ public class GestionnaireInterfaceController {
             }
         });
         cbReseauxSociauxFacebook.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (new_val != null) {
                 setbReseauxSociauxFacebook((boolean) new_val);
@@ -6907,9 +7698,9 @@ public class GestionnaireInterfaceController {
             }
         });
         cbReseauxSociauxEmail.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (new_val != null) {
                 setbReseauxSociauxEmail((boolean) new_val);
@@ -6921,9 +7712,9 @@ public class GestionnaireInterfaceController {
          Listeners Vignettes
          */
         tgPosVignettes.selectedToggleProperty().addListener((ov, old_toggle, new_toggle) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (tgPosVignettes.getSelectedToggle() != null) {
                 setStrPositionVignettes(tgPosVignettes.getSelectedToggle().getUserData().toString());
@@ -6933,9 +7724,9 @@ public class GestionnaireInterfaceController {
         });
 
         slTailleVignettes.valueProperty().addListener((ov, oldValue, newValue) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (newValue != null) {
                 double taille = (double) newValue;
@@ -6946,9 +7737,9 @@ public class GestionnaireInterfaceController {
         });
 
         slOpaciteVignettes.valueProperty().addListener((ov, oldValue, newValue) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (newValue != null) {
                 double opac = (double) newValue;
@@ -6959,31 +7750,32 @@ public class GestionnaireInterfaceController {
         });
 
         cbAfficheVignettes.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (new_val != null) {
                 setbAfficheVignettes((boolean) new_val);
-                afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
                 afficheVignettes();
+                afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
+                afficheBarrePersonnalisee();
             }
         });
 
-        cpCouleurFondVignettes.setOnAction((e) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+        cpCouleurFondVignettes.valueProperty().addListener((ov, av, nv) -> {
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             String coul = cpCouleurFondVignettes.getValue().toString().substring(2, 8);
             setStrCouleurFondVignettes("#" + coul);
             afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
             afficheVignettes();
         });
-        cpCouleurTexteVignettes.setOnAction((e) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+        cpCouleurTexteVignettes.valueProperty().addListener((ov, av, nv) -> {
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             String coul = cpCouleurTexteVignettes.getValue().toString().substring(2, 8);
             setStrCouleurTexteVignettes("#" + coul);
@@ -6991,13 +7783,18 @@ public class GestionnaireInterfaceController {
             afficheVignettes();
         });
 
+        cbReplieDemarrageVignettes.selectedProperty().addListener((ov, av, nv) -> {
+            setbReplieDemarrageVignettes(nv);
+        });
+
+
         /*
          Listeners ComboMenu
          */
         tgPosComboMenu.selectedToggleProperty().addListener((ov, old_toggle, new_toggle) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (tgPosComboMenu.getSelectedToggle() != null) {
                 setStrPositionXComboMenu(tgPosComboMenu.getSelectedToggle().getUserData().toString().split(":")[1]);
@@ -7007,9 +7804,9 @@ public class GestionnaireInterfaceController {
         });
 
         cbAfficheComboMenu.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (new_val != null) {
                 setbAfficheComboMenu((boolean) new_val);
@@ -7017,9 +7814,9 @@ public class GestionnaireInterfaceController {
             }
         });
         cbAfficheComboMenuImages.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (new_val != null) {
                 setbAfficheComboMenuImages((boolean) new_val);
@@ -7028,18 +7825,18 @@ public class GestionnaireInterfaceController {
         });
 
         bdfOffsetXComboMenu.numberProperty().addListener((ov, old_value, new_value) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             setOffsetXComboMenu(new_value.doubleValue());
             afficheComboMenu();
         });
 
         bdfOffsetYComboMenu.numberProperty().addListener((ov, old_value, new_value) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             setOffsetYComboMenu(new_value.doubleValue());
             afficheComboMenu();
@@ -7050,28 +7847,31 @@ public class GestionnaireInterfaceController {
          Listeners Plan
          */
         cbAffichePlan.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (new_val != null) {
+                if ((boolean) new_val) {
+                    cbAfficheCarte.setSelected(false);
+                }
                 setbAffichePlan((boolean) new_val);
-                tabPlan.setDisable(!isbAffichePlan());
-                mniAffichagePlan.setDisable(!isbAffichePlan());
-                ivAjouterPlan.setDisable(!isbAffichePlan());
-                mniAjouterPlan.setDisable(!isbAffichePlan());
+                getTabPlan().setDisable(!isbAffichePlan());
+                getMniAffichagePlan().setDisable(!isbAffichePlan());
+                getIvAjouterPlan().setDisable(!isbAffichePlan());
+                getMniAjouterPlan().setDisable(!isbAffichePlan());
                 if (new_val) {
-                    ivAjouterPlan.setOpacity(1.0);
+                    getIvAjouterPlan().setOpacity(1.0);
                 } else {
-                    ivAjouterPlan.setOpacity(0.3);
+                    getIvAjouterPlan().setOpacity(0.3);
                 }
                 affichePlan();
             }
         });
         cbAfficheRadar.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (new_val != null) {
                 setbAfficheRadar((boolean) new_val);
@@ -7080,9 +7880,9 @@ public class GestionnaireInterfaceController {
         });
 
         tgPosPlan.selectedToggleProperty().addListener((ov, old_toggle, new_toggle) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (tgPosPlan.getSelectedToggle() != null) {
                 setStrPositionPlan(tgPosPlan.getSelectedToggle().getUserData().toString());
@@ -7090,9 +7890,9 @@ public class GestionnaireInterfaceController {
             }
         });
         slLargeurPlan.valueProperty().addListener((observableValue, oldValue, newValue) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (newValue != null) {
                 double taille = (double) newValue;
@@ -7102,9 +7902,9 @@ public class GestionnaireInterfaceController {
             }
         });
         slOpacitePlan.valueProperty().addListener((observableValue, oldValue, newValue) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (newValue != null) {
                 double opac = (double) newValue;
@@ -7113,20 +7913,20 @@ public class GestionnaireInterfaceController {
             }
         });
 
-        cpCouleurFondPlan.setOnAction((e) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+        cpCouleurFondPlan.valueProperty().addListener((ov, av, nv) -> {
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             String strCoul = cpCouleurFondPlan.getValue().toString().substring(2, 8);
             setCouleurFondPlan(cpCouleurFondPlan.getValue());
             setStrCouleurFondPlan(strCoul);
             affichePlan();
         });
-        cpCouleurTextePlan.setOnAction((e) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+        cpCouleurTextePlan.valueProperty().addListener((ov, av, nv) -> {
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             String strCoul = cpCouleurTextePlan.getValue().toString().substring(2, 8);
             setCouleurTextePlan(cpCouleurTextePlan.getValue());
@@ -7134,9 +7934,9 @@ public class GestionnaireInterfaceController {
             affichePlan();
         });
         slTailleRadar.valueProperty().addListener((observableValue, oldValue, newValue) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (newValue != null) {
                 double taille = (double) newValue;
@@ -7145,9 +7945,9 @@ public class GestionnaireInterfaceController {
             }
         });
         slOpaciteRadar.valueProperty().addListener((observableValue, oldValue, newValue) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             if (newValue != null) {
                 double opacite = (double) newValue;
@@ -7156,9 +7956,9 @@ public class GestionnaireInterfaceController {
             }
         });
         cpCouleurFondRadar.setOnAction((e) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             String strCoul = cpCouleurFondRadar.getValue().toString().substring(2, 8);
             setCouleurFondRadar(cpCouleurFondRadar.getValue());
@@ -7166,44 +7966,293 @@ public class GestionnaireInterfaceController {
             affichePlan();
         });
         cpCouleurLigneRadar.setOnAction((e) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             String strCoul = cpCouleurLigneRadar.getValue().toString().substring(2, 8);
             setCouleurLigneRadar(cpCouleurLigneRadar.getValue());
             setStrCouleurLigneRadar(strCoul);
             affichePlan();
         });
+        cbReplieDemarragePlan.selectedProperty().addListener((ov, av, nv) -> {
+            setbReplieDemarragePlan(nv);
+        });
+        /*
+         Listeners Carte
+         */
+        cbAfficheCarte.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+            }
+            if (new_val != null) {
+                if ((boolean) new_val) {
+                    cbAffichePlan.setSelected(false);
+                    navigateurCarteOL.retireMarqueurs();
+                    for (int ii = 0; ii < getiNombrePanoramiques(); ii++) {
+                        System.out.println("panoramique n°" + ii);
+
+                        CoordonneesGeographiques coord = getPanoramiquesProjet()[ii].getMarqueurGeolocatisation();
+                        if (coord != null) {
+                            System.out.println("panoramique n°" + ii + " coordonnesPoint : " + coord.getLongitude() + ";" + coord.getLatitude());
+                            String strFichierPano = getPanoramiquesProjet()[ii]
+                                    .getStrNomFichier().substring(getPanoramiquesProjet()[ii].getStrNomFichier()
+                                            .lastIndexOf(File.separator) + 1, getPanoramiquesProjet()[ii]
+                                            .getStrNomFichier().length()).split("\\.")[0];
+                            String strHTML = "<span style='font-family : Verdana,Arial,sans-serif;font-weight:bold;font-size : 12px;'>"
+                                    + getPanoramiquesProjet()[ii].getStrTitrePanoramique()
+                                    + "</span><br/>"
+                                    + "<span style='font-family : Verdana,Arial,sans-serif;bold;font-size : 10px;'>"
+                                    + strFichierPano
+                                    + "</span>";
+                            strHTML = strHTML.replace("\\", "/");
+                            navigateurCarteOL.ajouteMarqueur(ii, coord, strHTML);
+                            navigateurCarteOL.allerCoordonnees(coord, iFacteurZoomCarte);
+                        }
+                    }
+                    if (getCoordCentreCarte() != null) {
+                        navigateurCarteOL.allerCoordonnees(getCoordCentreCarte(), iFacteurZoomCarte);
+                    }
+                }
+                setbAfficheCarte((boolean) new_val);
+                afficheCarte();
+            }
+        });
+        cbAfficheRadarCarte.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+            }
+            if (new_val != null) {
+                if (!new_val) {
+                    navigateurCarteOL.retireRadar();
+                }
+                setbAfficheRadarCarte((boolean) new_val);
+                afficheCarte();
+            }
+        });
+
+        slZoomCarte.valueProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+            }
+            iFacteurZoomCarte = (int) Math.round((double) newValue);
+            navigateurCarteOL.choixZoom(iFacteurZoomCarte);
+        });
+        btnChoixCentreCarte.setOnAction((e) -> {
+            setCoordCentreCarte(navigateurCarteOL.recupereCoordonnees());
+        });
+        btnRecentreCarte.setOnAction((e) -> {
+            if (getCoordCentreCarte() != null) {
+                navigateurCarteOL.allerCoordonnees(getCoordCentreCarte(), iFacteurZoomCarte);
+            }
+        });
+
+        btnChoixCarte.setOnAction((e) -> {
+            AnchorPane apOpenLayers = new AnchorPane();
+            navigateurCarteOL.afficheCartesOpenlayer();
+            apOpenLayers.setPrefSize(240, navigateurCarteOL.getApChoixCartographie().getPrefHeight() + 10);
+            navigateurCarteOL.getApChoixCartographie().setLayoutY(10);
+            apOpenLayers.setStyle("-fx-background-color : -fx-base;"
+                    + "-fx-border-color: derive(-fx-base,10%);"
+                    + "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.5) , 8, 0.0 , 0 , 8 );"
+                    + "-fx-border-width: 1px;");
+            apFenetre.getChildren().addAll(apOpenLayers);
+            Button btnFerme = new Button("X");
+            btnFerme.setLayoutY(10);
+            btnFerme.setLayoutX(205);
+            apOpenLayers.getChildren().addAll(navigateurCarteOL.getApChoixCartographie(), btnFerme);
+            apOpenLayers.setLayoutX((iLargeur - apOpenLayers.getPrefWidth()) / 2);
+            apOpenLayers.setLayoutY((iHauteur - apOpenLayers.getPrefHeight()) / 2);
+            apEnvironnement.getChildren().add(apOpenLayers);
+            mbarPrincipal.setDisable(true);
+            hbBarreBouton.setDisable(true);
+            tpEnvironnement.setDisable(true);
+            btnFerme.setOnAction((ev) -> {
+                apEnvironnement.getChildren().remove(apOpenLayers);
+                mbarPrincipal.setDisable(false);
+                hbBarreBouton.setDisable(false);
+                tpEnvironnement.setDisable(false);
+            });
+        });
+        btnRechercheAdresse.setOnAction((e) -> {
+            System.out.println("Recherche : " + tfAdresseCarte.getText());
+            navigateurCarteOL.allerAdresse(tfAdresseCarte.getText(), iFacteurZoomCarte);
+        });
+        tfAdresseCarte.setOnKeyPressed((e) -> {
+            if (e.getCode() == KeyCode.ENTER) {
+                navigateurCarteOL.allerAdresse(tfAdresseCarte.getText(), 17);
+            }
+        });
+
+        tgPosCarte.selectedToggleProperty().addListener((ov, old_toggle, new_toggle) -> {
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+            }
+            if (tgPosCarte.getSelectedToggle() != null) {
+                setStrPositionCarte(tgPosCarte.getSelectedToggle().getUserData().toString());
+                afficheCarte();
+            }
+        });
+        slLargeurCarte.valueProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+            }
+            if (newValue != null) {
+                double taille = (double) newValue;
+                setLargeurCarte(taille);
+                lblLargeurCarte.setText(rbLocalisation.getString("interface.largeurCarte") + " (" + Math.round(taille) + "px)");
+                afficheCarte();
+            }
+        });
+        slHauteurCarte.valueProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+            }
+            if (newValue != null) {
+                double taille = (double) newValue;
+                setHauteurCarte(taille);
+                lblHauteurCarte.setText(rbLocalisation.getString("interface.hauteurCarte") + " (" + Math.round(taille) + "px)");
+                afficheCarte();
+            }
+        });
+        slZoomCarte.valueProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+            }
+            if (newValue != null) {
+                int taille = (int) Math.round((double) newValue);
+                setiFacteurZoomCarte(taille);
+                lblZoomCarte.setText(rbLocalisation.getString("interface.zoomCarte") + " (" + Math.round(taille) + ")");
+                afficheCarte();
+            }
+        });
+        slOpaciteCarte.valueProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+            }
+            if (newValue != null) {
+                double opac = (double) newValue;
+                setOpaciteCarte(opac);
+                afficheCarte();
+            }
+        });
+
+        cpCouleurFondCarte.valueProperty().addListener((ov, av, nv) -> {
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+            }
+            String strCoul = cpCouleurFondCarte.getValue().toString().substring(2, 8);
+            setCouleurFondCarte(cpCouleurFondCarte.getValue());
+            setStrCouleurFondCarte(strCoul);
+            afficheCarte();
+        });
+        cpCouleurTexteCarte.valueProperty().addListener((ov, av, nv) -> {
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+            }
+            String strCoul = cpCouleurTexteCarte.getValue().toString().substring(2, 8);
+            setCouleurTexteCarte(cpCouleurTexteCarte.getValue());
+            setStrCouleurTexteCarte(strCoul);
+            afficheCarte();
+        });
+        slTailleRadarCarte.valueProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+            }
+            if (newValue != null) {
+                double taille = (double) newValue;
+                setTailleRadarCarte(taille);
+                afficheCarte();
+            }
+        });
+        slOpaciteRadarCarte.valueProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+            }
+            if (newValue != null) {
+                double opacite = (double) newValue;
+                setOpaciteRadarCarte(opacite);
+                afficheCarte();
+            }
+        });
+        slAngleRadarCarte.valueProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (newValue != null) {
+                double angle = (double) newValue;
+                angleRadarCarte = angle;
+                afficheCarte();
+            }
+        });
+        slOuvertureRadarCarte.valueProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (newValue != null) {
+                double angle = (double) newValue;
+                ouvertureRadarCarte = angle;
+                afficheCarte();
+            }
+        });
+        cpCouleurFondRadarCarte.setOnAction((e) -> {
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+            }
+            String strCoul = cpCouleurFondRadarCarte.getValue().toString().substring(2, 8);
+            setCouleurFondRadarCarte(cpCouleurFondRadarCarte.getValue());
+            setStrCouleurFondRadarCarte(strCoul);
+            afficheCarte();
+        });
+        cpCouleurLigneRadarCarte.setOnAction((e) -> {
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+            }
+            String strCoul = cpCouleurLigneRadarCarte.getValue().toString().substring(2, 8);
+            setCouleurLigneRadarCarte(cpCouleurLigneRadarCarte.getValue());
+            setStrCouleurLigneRadarCarte(strCoul);
+            afficheCarte();
+        });
+        cbReplieDemarrageCarte.selectedProperty().addListener((ov, av, nv) -> {
+            setbReplieDemarrageCarte(nv);
+        });
 
         /*
          Listeners Menu Contextuel
          */
         cbAfficheMenuContextuel.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             setbAfficheMenuContextuel((boolean) new_val);
         });
         cbAffichePrecSuivMC.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
-            setbAffichePrecSuivMC((boolean) new_val);
+            setbAffichePrecSuivMC(new_val);
         });
         cbAffichePlanetNormalMC.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             setbAffichePlanetNormalMC((boolean) new_val);
         });
         cbAffichePersMC1.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             setbAffichePersMC1((boolean) new_val);
             if (isbAffichePersMC1()) {
@@ -7218,9 +8267,9 @@ public class GestionnaireInterfaceController {
             }
         });
         cbAffichePersMC2.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             setbAffichePersMC2((boolean) new_val);
             if (isbAffichePersMC2()) {
@@ -7232,30 +8281,30 @@ public class GestionnaireInterfaceController {
             }
         });
         tfPersLib1.textProperty().addListener((ov, oldValue, newValue) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             setStrPersLib1(tfPersLib1.getText());
         });
         tfPersLib2.textProperty().addListener((ov, oldValue, newValue) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             setStrPersLib2(tfPersLib2.getText());
         });
         tfPersURL1.textProperty().addListener((ov, oldValue, newValue) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             setStrPersURL1(tfPersURL1.getText());
         });
         tfPersURL2.textProperty().addListener((ov, oldValue, newValue) -> {
-            if (iNombrePanoramiques != 0) {
-                bDejaSauve = false;
-                stPrincipal.setTitle(stPrincipal.getTitle().replace(" *", "") + " *");
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
             setStrPersURL2(tfPersURL2.getText());
         });
@@ -9452,4 +10501,353 @@ public class GestionnaireInterfaceController {
         this.zonesBarrePersonnalisee = zonesBarrePersonnalisee;
     }
 
+    /**
+     * @return the strStyleHotSpotHTML
+     */
+    public String getStrStyleHotSpotHTML() {
+        return strStyleHotSpotHTML;
+    }
+
+    /**
+     * @param strStyleHotSpotHTML the strStyleHotSpotHTML to set
+     */
+    public void setStrStyleHotSpotHTML(String strStyleHotSpotHTML) {
+        this.strStyleHotSpotHTML = strStyleHotSpotHTML;
+    }
+
+    /**
+     * @return the bAfficheCarte
+     */
+    public boolean isbAfficheCarte() {
+        return bAfficheCarte;
+    }
+
+    /**
+     * @param bAfficheCarte the bAfficheCarte to set
+     */
+    public void setbAfficheCarte(boolean bAfficheCarte) {
+        this.bAfficheCarte = bAfficheCarte;
+    }
+
+    /**
+     * @return the strPositionCarte
+     */
+    public String getStrPositionCarte() {
+        return strPositionCarte;
+    }
+
+    /**
+     * @param strPositionCarte the strPositionCarte to set
+     */
+    public void setStrPositionCarte(String strPositionCarte) {
+        this.strPositionCarte = strPositionCarte;
+    }
+
+    /**
+     * @return the largeurCarte
+     */
+    public double getLargeurCarte() {
+        return largeurCarte;
+    }
+
+    /**
+     * @param largeurCarte the largeurCarte to set
+     */
+    public void setLargeurCarte(double largeurCarte) {
+        this.largeurCarte = largeurCarte;
+    }
+
+    /**
+     * @return the couleurFondCarte
+     */
+    public Color getCouleurFondCarte() {
+        return couleurFondCarte;
+    }
+
+    /**
+     * @param couleurFondCarte the couleurFondCarte to set
+     */
+    public void setCouleurFondCarte(Color couleurFondCarte) {
+        this.couleurFondCarte = couleurFondCarte;
+    }
+
+    /**
+     * @return the strCouleurFondCarte
+     */
+    public String getStrCouleurFondCarte() {
+        return strCouleurFondCarte;
+    }
+
+    /**
+     * @param strCouleurFondCarte the strCouleurFondCarte to set
+     */
+    public void setStrCouleurFondCarte(String strCouleurFondCarte) {
+        this.strCouleurFondCarte = strCouleurFondCarte;
+    }
+
+    /**
+     * @return the opaciteCarte
+     */
+    public double getOpaciteCarte() {
+        return opaciteCarte;
+    }
+
+    /**
+     * @param opaciteCarte the opaciteCarte to set
+     */
+    public void setOpaciteCarte(double opaciteCarte) {
+        this.opaciteCarte = opaciteCarte;
+    }
+
+    /**
+     * @return the couleurTexteCarte
+     */
+    public Color getCouleurTexteCarte() {
+        return couleurTexteCarte;
+    }
+
+    /**
+     * @param couleurTexteCarte the couleurTexteCarte to set
+     */
+    public void setCouleurTexteCarte(Color couleurTexteCarte) {
+        this.couleurTexteCarte = couleurTexteCarte;
+    }
+
+    /**
+     * @return the strCouleurTexteCarte
+     */
+    public String getStrCouleurTexteCarte() {
+        return strCouleurTexteCarte;
+    }
+
+    /**
+     * @param strCouleurTexteCarte the strCouleurTexteCarte to set
+     */
+    public void setStrCouleurTexteCarte(String strCouleurTexteCarte) {
+        this.strCouleurTexteCarte = strCouleurTexteCarte;
+    }
+
+    /**
+     * @return the bAfficheRadarCarte
+     */
+    public boolean isbAfficheRadarCarte() {
+        return bAfficheRadarCarte;
+    }
+
+    /**
+     * @param bAfficheRadarCarte the bAfficheRadarCarte to set
+     */
+    public void setbAfficheRadarCarte(boolean bAfficheRadarCarte) {
+        this.bAfficheRadarCarte = bAfficheRadarCarte;
+    }
+
+    /**
+     * @return the couleurLigneRadarCarte
+     */
+    public Color getCouleurLigneRadarCarte() {
+        return couleurLigneRadarCarte;
+    }
+
+    /**
+     * @param couleurLigneRadarCarte the couleurLigneRadarCarte to set
+     */
+    public void setCouleurLigneRadarCarte(Color couleurLigneRadarCarte) {
+        this.couleurLigneRadarCarte = couleurLigneRadarCarte;
+    }
+
+    /**
+     * @return the strCouleurLigneRadarCarte
+     */
+    public String getStrCouleurLigneRadarCarte() {
+        return strCouleurLigneRadarCarte;
+    }
+
+    /**
+     * @param strCouleurLigneRadarCarte the strCouleurLigneRadarCarte to set
+     */
+    public void setStrCouleurLigneRadarCarte(String strCouleurLigneRadarCarte) {
+        this.strCouleurLigneRadarCarte = strCouleurLigneRadarCarte;
+    }
+
+    /**
+     * @return the couleurFondRadarCarte
+     */
+    public Color getCouleurFondRadarCarte() {
+        return couleurFondRadarCarte;
+    }
+
+    /**
+     * @param couleurFondRadarCarte the couleurFondRadarCarte to set
+     */
+    public void setCouleurFondRadarCarte(Color couleurFondRadarCarte) {
+        this.couleurFondRadarCarte = couleurFondRadarCarte;
+    }
+
+    /**
+     * @return the strCouleurFondRadarCarte
+     */
+    public String getStrCouleurFondRadarCarte() {
+        return strCouleurFondRadarCarte;
+    }
+
+    /**
+     * @param strCouleurFondRadarCarte the strCouleurFondRadarCarte to set
+     */
+    public void setStrCouleurFondRadarCarte(String strCouleurFondRadarCarte) {
+        this.strCouleurFondRadarCarte = strCouleurFondRadarCarte;
+    }
+
+    /**
+     * @return the tailleRadarCarte
+     */
+    public double getTailleRadarCarte() {
+        return tailleRadarCarte;
+    }
+
+    /**
+     * @param tailleRadarCarte the tailleRadarCarte to set
+     */
+    public void setTailleRadarCarte(double tailleRadarCarte) {
+        this.tailleRadarCarte = tailleRadarCarte;
+    }
+
+    /**
+     * @return the opaciteRadarCarte
+     */
+    public double getOpaciteRadarCarte() {
+        return opaciteRadarCarte;
+    }
+
+    /**
+     * @param opaciteRadarCarte the opaciteRadarCarte to set
+     */
+    public void setOpaciteRadarCarte(double opaciteRadarCarte) {
+        this.opaciteRadarCarte = opaciteRadarCarte;
+    }
+
+    /**
+     * @return the hauteurCarte
+     */
+    public double getHauteurCarte() {
+        return hauteurCarte;
+    }
+
+    /**
+     * @param hauteurCarte the hauteurCarte to set
+     */
+    public void setHauteurCarte(double hauteurCarte) {
+        this.hauteurCarte = hauteurCarte;
+    }
+
+    /**
+     * @return the iFacteurZoomCarte
+     */
+    public int getiFacteurZoomCarte() {
+        return iFacteurZoomCarte;
+    }
+
+    /**
+     * @param iFacteurZoomCarte the iFacteurZoomCarte to set
+     */
+    public void setiFacteurZoomCarte(int iFacteurZoomCarte) {
+        this.iFacteurZoomCarte = iFacteurZoomCarte;
+    }
+
+    /**
+     * @return the coordCentreCarte
+     */
+    public CoordonneesGeographiques getCoordCentreCarte() {
+        return coordCentreCarte;
+    }
+
+    /**
+     * @param coordCentreCarte the coordCentreCarte to set
+     */
+    public void setCoordCentreCarte(CoordonneesGeographiques coordCentreCarte) {
+        this.coordCentreCarte = coordCentreCarte;
+    }
+
+    /**
+     * @return the slZoomCarte
+     */
+    public Slider getSlZoomCarte() {
+        return slZoomCarte;
+    }
+
+    /**
+     * @param slZoomCarte the slZoomCarte to set
+     */
+    public void setSlZoomCarte(Slider slZoomCarte) {
+        this.slZoomCarte = slZoomCarte;
+    }
+
+    /**
+     * @return the strNomLayers
+     */
+    public String getStrNomLayers() {
+        return strNomLayers;
+    }
+
+    /**
+     * @param strNomLayers the strNomLayers to set
+     */
+    public void setStrNomLayers(String strNomLayers) {
+        this.strNomLayers = strNomLayers;
+    }
+
+    /**
+     * @return the bReplieDemmarage
+     */
+    public boolean isbReplieDemarrageCarte() {
+        return bReplieDemarrageCarte;
+    }
+
+    /**
+     * @param bReplieDemarrageCarte
+     */
+    public void setbReplieDemarrageCarte(boolean bReplieDemarrageCarte) {
+        this.bReplieDemarrageCarte = bReplieDemarrageCarte;
+    }
+
+    /**
+     * @return the cbReplieDemarragePlan
+     */
+    public boolean isbReplieDemarragePlan() {
+        return bReplieDemarragePlan;
+    }
+
+    /**
+     * @param bReplieDemarragePlan the bReplieDemmaragePlan to set
+     */
+    public void setbReplieDemarragePlan(boolean bReplieDemarragePlan) {
+        this.bReplieDemarragePlan = bReplieDemarragePlan;
+    }
+
+    /**
+     * @return the bReplieDemarrageVignettes
+     */
+    public boolean isbReplieDemarrageVignettes() {
+        return bReplieDemarrageVignettes;
+    }
+
+    /**
+     * @param bReplieDemarrageVignettes the bReplieDemarrageVignettes to set
+     */
+    public void setbReplieDemarrageVignettes(boolean bReplieDemarrageVignettes) {
+        this.bReplieDemarrageVignettes = bReplieDemarrageVignettes;
+    }
+
+    /**
+     * @return the bTemplate
+     */
+    public boolean isbTemplate() {
+        return bTemplate;
+    }
+
+    /**
+     * @param bTemplate the bTemplate to set
+     */
+    public void setbTemplate(boolean bTemplate) {
+        this.bTemplate = bTemplate;
+    }
 }

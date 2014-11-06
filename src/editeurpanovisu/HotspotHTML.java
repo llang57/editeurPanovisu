@@ -5,6 +5,17 @@
  */
 package editeurpanovisu;
 
+import static editeurpanovisu.EditeurHTML.copieFichierRepertoire;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author LANG Laurent
@@ -12,14 +23,18 @@ package editeurpanovisu;
 public class HotspotHTML {
 
     private double longitude, latitude;
-    private String strUrl, strInfo;
-    private boolean bAnime;
-    private boolean bHTMLInterne = false;
-    private String strTexteHTML;
-    private double tailleHTML;
-    private String strPositionHTML;
-    private String strCouleurHTML;
-    private String[] strFichierImage;
+    private String strInfo = "";
+    private boolean bAnime = false;
+    private String strURLExterieure = "";
+    private boolean bLienExterieur = true;
+    private double opaciteHTML = 1;
+    private String strTexteHTML = "";
+    private double largeurHTML = 1000;
+    private String strPositionHTML = "center";
+    private String strCouleurHTML = "#aaaaff";
+    //private String[] strFichierImage;
+    private ImageEditeurHTML[] imagesEditeur = new ImageEditeurHTML[50];
+    private int iNombreImages = 0;
 
     /**
      *
@@ -30,7 +45,7 @@ public class HotspotHTML {
         this.setLongitude((double) longit);
         this.setLatitude((double) latit);
         this.setAnime(false);
-        this.setStrUrl("");
+        setStrURLExterieure("");
         this.setStrInfo("");
     }
 
@@ -63,21 +78,6 @@ public class HotspotHTML {
     }
 
     /**
-     *
-     * @return
-     */
-    public String getStrUrl() {
-        return strUrl;
-    }
-
-    /**
-     * @param strUrl
-     */
-    public void setStrUrl(String strUrl) {
-        this.strUrl = strUrl;
-    }
-
-    /**
      * @return the info
      */
     public String getStrInfo() {
@@ -106,6 +106,48 @@ public class HotspotHTML {
     }
 
     /**
+     * @return the strURLExterieure
+     */
+    public String getStrURLExterieure() {
+        return strURLExterieure;
+    }
+
+    /**
+     * @param strURLExterieure the strURLExterieure to set
+     */
+    public void setStrURLExterieure(String strURLExterieure) {
+        this.strURLExterieure = strURLExterieure;
+    }
+
+    /**
+     * @return the bLienExterieur
+     */
+    public boolean isbLienExterieur() {
+        return bLienExterieur;
+    }
+
+    /**
+     * @param bLienExterieur the bLienExterieur to set
+     */
+    public void setbLienExterieur(boolean bLienExterieur) {
+        this.bLienExterieur = bLienExterieur;
+    }
+
+    /**
+     * @return the opaciteHTML
+     */
+    public double getOpaciteHTML() {
+        return opaciteHTML;
+    }
+
+    /**
+     * @param opaciteHTML the opaciteHTML to set
+     */
+    public void setOpaciteHTML(double opaciteHTML) {
+        this.opaciteHTML = opaciteHTML;
+    }
+
+    /**
      * @return the strTexteHTML
      */
     public String getStrTexteHTML() {
@@ -120,17 +162,17 @@ public class HotspotHTML {
     }
 
     /**
-     * @return the tailleHTML
+     * @return the largeurHTML
      */
-    public double getTailleHTML() {
-        return tailleHTML;
+    public double getLargeurHTML() {
+        return largeurHTML;
     }
 
     /**
-     * @param tailleHTML the tailleHTML to set
+     * @param largeurHTML the largeurHTML to set
      */
-    public void setTailleHTML(double tailleHTML) {
-        this.tailleHTML = tailleHTML;
+    public void setLargeurHTML(double largeurHTML) {
+        this.largeurHTML = largeurHTML;
     }
 
     /**
@@ -162,49 +204,78 @@ public class HotspotHTML {
     }
 
     /**
-     * @return the strFichierImage
+     * @return the imagesEditeur
      */
-    public String[] getStrFichierImage() {
-        return strFichierImage;
+    public ImageEditeurHTML[] getImagesEditeur() {
+        return imagesEditeur;
     }
 
     /**
-     * @param strFichierImage the strFichierImage to set
+     * @param imagesEditeur the imagesEditeur to set
      */
-    public void setStrFichierImage(String[] strFichierImage) {
-        this.strFichierImage = strFichierImage;
+    public void setImagesEditeur(ImageEditeurHTML[] imagesEditeur) {
+        this.imagesEditeur = imagesEditeur;
     }
 
     /**
-     *
-     * @param strFichierImage
-     * @param i
+     * @return the iNombreImages
      */
-    public void setStrFichierImageI(String strFichierImage, int i) {
-        this.strFichierImage[i] = strFichierImage;
+    public int getiNombreImages() {
+        return iNombreImages;
     }
 
     /**
-     *
-     * @param i
-     * @return
+     * @param iNombreImages the iNombreImages to set
      */
-    public String getStrFichierImageI(int i) {
-        return this.strFichierImage[i];
+    public void setiNombreImages(int iNombreImages) {
+        this.iNombreImages = iNombreImages;
     }
 
-    /**
-     * @return the bHTMLInterne
-     */
-    public boolean isbHTMLInterne() {
-        return bHTMLInterne;
-    }
+    public void creeHTML(String strPageHTML) {
+        OutputStreamWriter oswFichierHTML = null;
+        try {
+            String strPageHTMLImages = strPageHTML + File.separator + "/images";
+            File filePageHTML = new File(strPageHTML);
+            File filePageHTMLImages = new File(strPageHTMLImages);
+            if (!filePageHTML.exists()) {
+                filePageHTML.mkdirs();
+            }
+            if (!filePageHTMLImages.exists()) {
+                filePageHTMLImages.mkdirs();
+            }
+            String strContenuHTML = this.getStrTexteHTML();
+            
+            System.out.println(" nombre Images : " + this.getiNombreImages());
+            File fileIndexHTML = new File(strPageHTML + File.separator + "index.html");
+            for (int j = 0; j < this.getiNombreImages(); j++) {
+                ImageEditeurHTML img1 = this.getImagesEditeur()[j];
+                System.out.println("Remplace :"+"file:////" + img1.getStrImagePath()+"\n par : "+"images/" + img1.getStrNomImage());
+                strContenuHTML = strContenuHTML.replace("file:////" + img1.getStrImagePath(), "images/" + img1.getStrNomImage());
+                try {
+                    copieFichierRepertoire(img1.getStrImagePath(), strPageHTMLImages);
+                } catch (IOException ex) {
+                    Logger.getLogger(EditeurHTML.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            strContenuHTML = strContenuHTML.replace(">", ">\n");
+            fileIndexHTML.setWritable(true);
+            System.out.println(fileIndexHTML.getAbsolutePath());
+            oswFichierHTML = new OutputStreamWriter(new FileOutputStream(fileIndexHTML), "UTF-8");
+            try (BufferedWriter bwFichierHTML = new BufferedWriter(oswFichierHTML)) {
+                bwFichierHTML.write(strContenuHTML);
 
-    /**
-     * @param bHTMLInterne the bHTMLInterne to set
-     */
-    public void setbHTMLInterne(boolean bHTMLInterne) {
-        this.bHTMLInterne = bHTMLInterne;
-    }
+            } catch (IOException ex) {
+                Logger.getLogger(EditeurHTML.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (UnsupportedEncodingException | FileNotFoundException ex) {
+            Logger.getLogger(EditeurHTML.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                oswFichierHTML.close();
+            } catch (IOException ex) {
+                Logger.getLogger(EditeurHTML.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
 
+    }
 }

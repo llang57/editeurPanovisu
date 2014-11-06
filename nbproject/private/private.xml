@@ -4,14 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/GestionnaireInterfaceController.java</file>
-            <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/ImageEditeurHTML.java</file>
-            <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/Panoramique.java</file>
             <file>file:/D:/github/editeurPanovisu/panovisu/panovisu.js</file>
-            <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/HotspotHTML.java</file>
-            <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/AfficheNavigateurPanoramique.java</file>
+            <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/i18n/PanoVisu.properties</file>
+            <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/i18n/PanoVisu_en.properties</file>
             <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/EditeurPanovisu.java</file>
-            <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/TransformationsPanoramique.java</file>
-            <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/EditeurHTML.java</file>
+            <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/i18n/PanoVisu_fr.properties</file>
+            <file>file:/D:/github/editeurPanovisu/panovisu/css/panovisu.css</file>
         </group>
     </open-files>
 </project-private>

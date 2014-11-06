@@ -5,28 +5,23 @@
  */
 package editeurpanovisu;
 
+import java.io.File;
+
 /**
  *
  * @author LANG Laurent
  */
 public class ImageEditeurHTML {
         
-        private String strImage;
         private String strImagePath;
 
         /**
          * @return the strImage
          */
-        public String getStrImage() {
-            return strImage;
+        public String getStrNomImage() {            
+            return strImagePath.substring(strImagePath.lastIndexOf(File.separator) + 1, strImagePath.length());
         }
 
-        /**
-         * @param strImage the strImage to set
-         */
-        public void setStrImage(String strImage) {
-            this.strImage = strImage;
-        }
 
         /**
          * @return the strImagePath

@@ -13,6 +13,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.math.BigDecimal;
+import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -85,6 +86,8 @@ public final class AfficheNavigateurPanoramique {
     private final Sphere spPanorama = new Sphere(200, 50);
     private final Group root = new Group(spPanorama);
     private final PhongMaterial phmPanorama = new PhongMaterial();
+    private ResourceBundle rbLocalisation = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", EditeurPanovisu.getLocale());
+
 
     public AfficheNavigateurPanoramique(String nomFichierPanoramique, double positX, double positY, double largeur, double hauteur) {
         this.positX = positX;
@@ -131,7 +134,9 @@ public final class AfficheNavigateurPanoramique {
     }
 
     /**
-     * @param args the command line arguments
+     * 
+     * @param angleDeg
+     * @return 
      */
     private double degToRad(double angleDeg) {
         return angleDeg * rapportDegToRad;
@@ -340,11 +345,11 @@ public final class AfficheNavigateurPanoramique {
         //apPanorama.setStyle("-fx-background-color : #ccc;");
         apPanorama.getChildren().addAll(apNord, bdfLong, bdfLat, bdfFOV);
         sscPanorama.setFocusTraversable(true);
-        btnChoixNord = new Button("Nord");
+        btnChoixNord = new Button(rbLocalisation.getString("navigateur.nord"));
         btnChoixNord.setPrefWidth(80);
         btnChoixNord.setLayoutX(sscPanorama.getLayoutX() + sscPanorama.getWidth() - btnChoixNord.getPrefWidth() - 5);
         btnChoixNord.setLayoutY(sscPanorama.getLayoutY() + sscPanorama.getHeight() - btnChoixNord.getPrefHeight() + 5);
-        btnChoixVue = new Button("Choix vue");
+        btnChoixVue = new Button(rbLocalisation.getString("navigateur.choixPOV"));
         btnChoixVue.setPrefWidth(80);
         btnChoixVue.setLayoutX(btnChoixNord.getLayoutX() - btnChoixVue.getPrefWidth() - 5);
         btnChoixVue.setLayoutY(sscPanorama.getLayoutY() + sscPanorama.getHeight() - btnChoixNord.getPrefHeight() + 5);

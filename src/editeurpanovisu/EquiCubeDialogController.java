@@ -59,7 +59,7 @@ import org.controlsfx.dialog.Dialogs;
  */
 public class EquiCubeDialogController {
 
-    private static final ResourceBundle rbLocalisation = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", EditeurPanovisu.locale);
+    private static final ResourceBundle rbLocalisation = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", EditeurPanovisu.getLocale());
 
     private static Stage stTransformations;
     private static AnchorPane apTransformations;
@@ -91,7 +91,7 @@ public class EquiCubeDialogController {
      */
     public final static String CUBE2QUI = "C2E";
     private File[] fileLstFichier;
-    private static String strRepertFichier = EditeurPanovisu.strRepertoireProjet;
+    private static String strRepertFichier = EditeurPanovisu.getStrRepertoireProjet();
 
     /**
      *
@@ -463,9 +463,9 @@ public class EquiCubeDialogController {
     }
 
     /**
-     *
-     * @param typeTransf
-     * @throws Exception
+     * 
+     * @param strTypeTransf
+     * @throws Exception 
      */
     public void afficheFenetre(String strTypeTransf) throws Exception {
         lvListeFichier.getItems().clear();
@@ -495,10 +495,10 @@ public class EquiCubeDialogController {
         Image imgTransf;
         if (strTypeTransf.equals(EquiCubeDialogController.EQUI2CUBE)) {
             stTransformations.setTitle("Transformation d'équirectangulaire en faces de cube");
-            imgTransf = new Image("file:" + EditeurPanovisu.strRepertAppli + File.separator + "images/equi2cube.png");
+            imgTransf = new Image("file:" + EditeurPanovisu.getStrRepertAppli() + File.separator + "images/equi2cube.png");
         } else {
             stTransformations.setTitle("Transformation de faces de cube en équirectangulaire");
-            imgTransf = new Image("file:" + EditeurPanovisu.strRepertAppli + File.separator + "images/cube2equi.png");
+            imgTransf = new Image("file:" + EditeurPanovisu.getStrRepertAppli() + File.separator + "images/cube2equi.png");
         }
         ImageView ivTypeTransfert = new ImageView(imgTransf);
         ivTypeTransfert.setLayoutX(35);

@@ -1,0 +1,448 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de-de" style="height:100%;width:100%;margin:0;padding:0">
+
+    <!--
+    Based on http://wiki.openstreetmap.org/wiki/DE:Karte_in_Webseite_einbinden
+    -->
+
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta http-equiv="content-script-type" content="text/javascript" />
+        <meta http-equiv="content-style-type" content="text/css" />
+        <meta http-equiv="content-language" content="fr" />
+        <script type="text/javascript" src="http://www.openlayers.org/api/OpenLayers.js"></script>
+        <script type="text/javascript" src="http://www.openstreetmap.org/openlayers/OpenStreetMap.js"></script>
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3.5&sensor=false"></script>
+        <style>
+            .olControlLayerSwitcher
+            {
+                font-family: Verdana,Arial,sans-serif!important;
+                margin-top: 3px;
+                margin-left: 3px;
+                margin-bottom: 3px;
+                font-size: 10pt!important;
+                color: white;
+                background-color: transparent;
+                z-index: 10000;
+                background-color: #999!important;
+                color : #ff0!important;
+                max-width: 180px!important;
+                opacity: 0.95!important;
+            }
+            .olControlLayerSwitcher .layersDiv
+            {
+                padding-top: 5px;
+                padding-left: 10px;
+                padding-bottom: 5px;
+                padding-right: 10px;
+                background-color: #aaa!important;
+                color : #fff!important;
+                font-family: Verdana,Arial,sans-serif!important;
+                font-size: 10pt!important;
+                font-weight: normal!important;
+                max-width: 180px!important;
+                overflow: hidden!important;
+                opacity: 0.95!important;
+            }        
+        </style>
+        <script type="text/javascript">
+            function defRadar() {
+                this.longitude = 0;
+                this.latitude = 0;
+                this.angleOuverture = 0;
+                this.angleradar = 0;
+                this.pcRayon = 0;
+                this.couleurLigne = "";
+                this.couleurFond = "";
+                this.opaciteFond = "";
+            }
+
+            function traceArc(centreX, centreY, rayon, angleDebut, angleFin, secteur, couleurFond, couleurLigne, opaciteFond)
+            {
+                var epaisseur = (secteur) ? 1 : 3;
+                layerRadar.styleMap = new OpenLayers.StyleMap({'default':
+                            {
+                                'strokeWidth': 1,
+                                'fillColor': couleurFond,
+                                'fillOpacity': opaciteFond,
+                                'strokeColor': couleurLigne
+                            }
+                });
+
+                var segments = Math.abs(angleFin - angleDebut) * 2;
+                var pointCercle = [];
+                if (secteur) {
+                    pointCercle.push(new OpenLayers.Geometry.Point(centreX, centreY));
+                }
+                var dAngle = segments + 1;
+                for (var i = 0; i < dAngle; i++)
+                {
+                    var Angle = angleDebut - (angleDebut - angleFin) * i / (dAngle - 1);
+                    var x = centreX + rayon * Math.cos(Angle * Math.PI / 180);
+                    var y = centreY + rayon * Math.sin(Angle * Math.PI / 180);
+
+                    var point = new OpenLayers.Geometry.Point(x, y);
+                    //javafx.afficheChaine("n°" + i + " x=" + x + " y=" + y);
+                    pointCercle.push(point);
+                }
+                var arcCercle = null;
+                if (secteur) {
+                    //pointCercle.push(new OpenLayers.Geometry.Point(centreX, centreY));
+                    var linearRing = new OpenLayers.Geometry.LinearRing(pointCercle);
+                    arcCercle = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Polygon(linearRing));
+                }
+                else {
+                    arcCercle = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.LineString(pointCercle));
+                }
+                //arcCercle.style = vector_style;
+                return(arcCercle);
+            }
+
+            function allerCoordonnees(longitude, latitude, zoom) {
+                var x = longitude2Mercator(longitude);
+                var y = latitude2Mercator(latitude);
+                map.setCenter(new OpenLayers.LonLat(x, y), zoom);
+            }
+            function choixZoom(zoom) {
+                map.setCenter(map.getCenter(), zoom);
+            }
+            function toDMS(degDecimal) {
+                var signe = "";
+                if (degDecimal < 0) {
+                    signe = "-";
+                    degDecimal = Math.abs(degDecimal);
+                }
+                var degres = Math.round(degDecimal - 0.5);
+                var min = (degDecimal - degres) * 60;
+                var minutes = Math.round((degDecimal - degres) * 60 - 0.5);
+                var secondes = Math.round(((min - minutes) * 60) * 100) / 100;
+                return signe + degres + "°" + minutes + "'" + secondes + "\"";
+            }
+            function longitude2Mercator(lon) {
+                return 20037508.34 * lon / 180;
+            }
+            function latitude2Mercator(lat) {
+                var PI = 3.14159265358979323846;
+                lat = Math.log(Math.tan((90 + lat) * PI / 360)) / (PI / 180);
+                return 20037508.34 * lat / 180;
+            }
+            function mercator2Longitude(lon) {
+                return lon * 180 / 20037508.34;
+            }
+            function mercator2Latitude(lat) {
+                return Math.atan(Math.exp(lat * Math.PI / 20037508.34)) * 360 / Math.PI - 90;
+            }
+
+
+            function ajouteMarqueur(numeroMarqueur, longitude, latitude, contenuPopup) {
+                if (numeroMarqueur > iMaxMarqueur) {
+                    iMaxMarqueur = numeroMarqueur;
+                }
+                var popup;
+                var layer = layerMarqueurs;
+                var ll = new OpenLayers.LonLat(longitude2Mercator(longitude), latitude2Mercator(latitude));
+                var size = new OpenLayers.Size(32, 37);
+                var offset = new OpenLayers.Pixel(-(size.w / 2), -size.h);
+                var icon = new OpenLayers.Icon('./images/marqueur.png', size, offset);
+                var marker = new OpenLayers.Marker(ll, icon);
+                marker.setOpacity(0.5);
+                marker.events.register("mouseover", marker,
+                        function () {
+                            popup = new OpenLayers.Popup(
+                                    "marq" + numeroMarqueur,
+                                    new OpenLayers.LonLat(longitude2Mercator(longitude), latitude2Mercator(latitude)),
+                                    new OpenLayers.Size(200, 100),
+                                    contenuPopup,
+                                    true
+                                    );
+                            map.addPopup(popup);
+                            this.setOpacity(1);
+
+                        }
+                );
+                marker.events.register("mouseout", marker,
+                        function () {
+                            map.removePopup(popup);
+                            this.setOpacity(0.5);
+                        }
+                );
+                marker.events.register("mousedown", marker,
+                        function () {
+                            //document.getElementById("texte").innerHTML = "click : " + pId;
+                        }
+                );
+
+                layer.addMarker(marker);
+                marqueurs[numeroMarqueur] = marker;
+            }
+
+            function enleveMarqueurs() {
+                for (var i = 0; i <= iMaxMarqueur; i++) {
+                    var marker = marqueurs[i];
+                    if (marker !== null)
+                    {
+                        layerMarqueurs.removeMarker(marker);
+                    }
+                }
+            }
+
+            function enleveMarqueur(pId) {
+                var marker = marqueurs[pId];
+                if (marker !== null)
+                {
+                    layerMarqueurs.removeMarker(marker);
+                }
+            }
+            function getCoordonnees() {
+                lon = Math.round(mercator2Longitude(this.map.getCenter().lon) * 1000000) / 1000000;
+                lat = Math.round(mercator2Latitude(this.map.getCenter().lat) * 1000000) / 1000000;
+                return lon + ";" + lat;
+            }
+
+            function getNomsLayers() {
+                var strNoms = "";
+                for (var i = 0; i < map.getNumLayers(); i++) {
+                    if (map.layers[i].isBaseLayer) {
+                        if (map.layers[i].name === map.baseLayer.name) {
+                            strNoms += "*" + map.layers[i].name + "|";
+                        }
+                        else {
+                            strNoms += map.layers[i].name + "|";
+                        }
+                    }
+                }
+                return strNoms;
+            }
+
+            function getRayonRadar() {
+                return layerRadar.rayon;
+            }
+
+            function setRayonRadar(rayonRadar) {
+                return layerRadar.rayon = rayonRadar;
+            }
+
+            function retireRadar() {
+                layerRadar.destroyFeatures();
+                bRadar = false;
+            }
+
+            function changeLayer(strLayer) {
+                for (var i = 0; i < map.getNumLayers(); i++) {
+                    if (map.layers[i].name === strLayer) {
+                        map.setBaseLayer(map.layers[i]);
+                    }
+                }
+            }
+
+            function setBingApiKey(bingApiKey) {
+                if (bingMap === null) {
+                    bingMap = new OpenLayers.Layer.Bing({
+                        name: "Bing",
+                        type: "Road",
+                        key: bingApiKey,
+                        numZoomLevels: 19,
+                        transitionEffect: "resize"
+
+                    });
+                    bingHybride = new OpenLayers.Layer.Bing({
+                        name: "Bing Hybride",
+                        type: "AerialWithLabels",
+                        key: bingApiKey,
+                        numZoomLevels: 19,
+                        transitionEffect: "resize"
+
+                    });
+                    bingSatellite = new OpenLayers.Layer.Bing({
+                        name: "Bing Satellite",
+                        type: "Aerial",
+                        key: bingApiKey,
+                        numZoomLevels: 19,
+                        transitionEffect: "resize"
+
+                    });
+                    map.addLayers([bingMap, bingHybride, bingSatellite]);
+                }
+            }
+
+            var map;
+            var openStreetMap, googleMap, googleHybride, googlePhysique, googleSatellite, bingMap = null, bingHybride = null, bingSatellite = null;
+            var layerMarqueurs, layerReticule, layerRadar;
+            var marqueurs = new Array();
+            var iMaxMarqueur = -1;
+            var radar;
+            var bRadar = false;
+
+
+            function affichageRadar() {
+                layerRadar.destroyFeatures();
+                var rayon = radar.pcRayon / 100.0 * Math.min(map.getExtent().right - map.getExtent().left, map.getExtent().top - map.getExtent().bottom) / 2.0;
+                var angleDepart = radar.angleradar - radar.angleOuverture / 2;
+                var angleArrivee = radar.angleradar + radar.angleOuverture / 2;
+                var centreX = longitude2Mercator(radar.longitude);
+                var centreY = latitude2Mercator(radar.latitude);
+                var arc = traceArc(centreX, centreY, rayon, angleDepart, angleArrivee, true, radar.couleurLigne, radar.couleurFond, radar.opaciteFond);
+                var origine = new OpenLayers.Geometry.Point(centreX, centreY);
+                var style = {
+                    strokeColor: "#999999",
+                    strokeOpacity: 1,
+                    fillColor: "#555555",
+                    strokeWidth: 1,
+                    pointRadius: 5,
+                    pointerEvents: "visiblePainted"
+                };
+                var pointCentre = new OpenLayers.Feature.Vector(origine, null, style);
+                layerRadar.addFeatures([arc, pointCentre]);
+
+            }
+
+            function dessineCarte() {
+                radar = new defRadar();
+                OpenLayers.Lang.setCode('fr');
+                map = new OpenLayers.Map('map',
+                        {
+                            projection: new OpenLayers.Projection("EPSG:900913"),
+                            displayProjection: new OpenLayers.Projection("EPSG:4326"),
+                            controls: [
+                                new OpenLayers.Control.Navigation(),
+                                new OpenLayers.Control.PanZoom(),
+                                new OpenLayers.Control.LayerSwitcher()
+                            ],
+                            maxExtent:
+                                    new OpenLayers.Bounds(-20037508.34, -20037508.34,
+                                            20037508.34, 20037508.34),
+                            numZoomLevels: 18,
+                            maxResolution: 156543,
+                            lang: "fr",
+                            units: 'meters'
+                        });
+                openStreetMap = new OpenLayers.Layer.OSM.Mapnik("OpenStreetMap", {
+                    numZoomLevels: 20,
+                    transitionEffect: "resize"
+                });
+                layerMarqueurs = new OpenLayers.Layer.Markers("Adresse", {
+                    projection: new OpenLayers.Projection("EPSG:900913"),
+                    visibility: true,
+                    displayInLayerSwitcher: false
+                });
+                //layerReticule = creePlanReticule(2, "red", 30);
+                var rayon = 15;
+                layerRadar = creeRadar("none", "red", 0.4, rayon);
+                //map.addLayers([openStreetMap, layerRadar, layerReticule, layerMarqueurs]);
+                map.addLayers([openStreetMap, layerRadar, layerMarqueurs]);
+                googleMap = new OpenLayers.Layer.Google("Google", {
+                    numZoomLevels: 20,
+                    transitionEffect: "resize"
+                });
+                googlePhysique = new OpenLayers.Layer.Google("Google Physique", {
+                    type: google.maps.MapTypeId.TERRAIN,
+                    numZoomLevels: 16,
+                    transitionEffect: "resize"
+
+                });
+                googleHybride = new OpenLayers.Layer.Google("Google Hybride", {
+                    type: google.maps.MapTypeId.HYBRID,
+                    numZoomLevels: 20,
+                    transitionEffect: "resize"
+
+                });
+                googleSatellite = new OpenLayers.Layer.Google("Google Satellite", {
+                    type: google.maps.MapTypeId.SATELLITE,
+                    numZoomLevels: 20,
+                    transitionEffect: "resize"
+
+                });
+                map.addLayers([googlePhysique, googleMap, googleHybride, googleSatellite]);
+                map.events.register('move', map, function () {
+                    if (bRadar) {
+                        affichageRadar()
+                    }
+                });
+                map.events.register('zoomend', map, function () {
+                    javafx.zoom(map.getZoom());
+                    if (bRadar) {
+                        affichageRadar()
+                    }
+                });
+                map.events.register('changebaselayer', map, function () {
+                    javafx.changeLayer(map.baseLayer.name);
+                });
+
+                function creePlanReticule(epaisseurTrait, couleurTrait, taille)
+                {
+                    var vector = new OpenLayers.Layer.Vector("Reticule");
+                    vector.styleMap = new OpenLayers.StyleMap({'default': {'strokeWidth': epaisseurTrait, 'strokeColor': couleurTrait}});
+                    vector.taille = taille;
+                    return vector;
+                }
+
+                function centreReticule(objCarte, layerReticule, longitude, latitude)
+                {
+                    layerReticule.destroyFeatures();
+                    var deltaCoordonnees = (objCarte.getExtent().right - objCarte.getExtent().left) / layerReticule.taille;
+                    var point1 = new OpenLayers.Geometry.Point(longitude - deltaCoordonnees, latitude);
+                    var point2 = new OpenLayers.Geometry.Point(longitude + deltaCoordonnees, latitude);
+                    var point3 = new OpenLayers.Geometry.Point(longitude, latitude - deltaCoordonnees);
+                    var point4 = new OpenLayers.Geometry.Point(longitude, latitude + deltaCoordonnees);
+                    var ligneHorizontale = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.LineString([point1, point2]), null, null);
+                    var ligneVerticale = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.LineString([point3, point4]), null, null);
+                    layerReticule.addFeatures([ligneHorizontale, ligneVerticale]);
+                }
+            }
+
+            function afficheRadar(longitude, latitude, angleOuverture, angleradar, pcRayon, couleurLigne, couleurFond, opaciteFond) {
+                couleurLigne = couleurLigne || "yellow";
+                couleurFond = couleurFond || "green";
+                opaciteFond = opaciteFond || 0.2;
+                radar.longitude = longitude;
+                radar.latitude = latitude;
+                radar.angleOuverture = angleOuverture;
+                radar.angleradar = angleradar;
+                radar.pcRayon = pcRayon;
+                radar.couleurLigne = couleurLigne;
+                radar.couleurFond = couleurFond;
+                radar.opaciteFond = opaciteFond;
+                affichageRadar();
+                bRadar = true;
+            }
+
+            function creeRadar(couleurTrait, couleurFond, opacite, rayon) {
+                var vector = new OpenLayers.Layer.Vector("Radar");
+                vector.styleMap = new OpenLayers.StyleMap({'default':
+                            {
+                                'strokeWidth': 1,
+                                'strokeColor': couleurTrait,
+                                'fillColor': couleurFond,
+                                'fillOpacity': opacite
+                            }
+                });
+                vector.rayon = rayon;
+                return vector;
+            }
+            function chercheAdresse(adresse, zoom) {
+                var geocoder = new google.maps.Geocoder();
+                geocoder.geocode({'address': adresse},
+                function (results, status) {
+                    if (status !== google.maps.GeocoderStatus.OK) {
+                        javafx.adresseInconnue("\"" + adresse + "\" non trouvée\n" + status);
+                    } else {
+                        javafx.adresseTrouvee(results[0].geometry.location.lng(), results[0].geometry.location.lat());
+                        map.setCenter(
+                                new OpenLayers.LonLat(
+                                        longitude2Mercator(results[0].geometry.location.lng()),
+                                        latitude2Mercator(results[0].geometry.location.lat())
+                                        ),
+                                zoom);
+                    }
+                });
+            }
+
+        </script>
+
+    </head>
+    <body onload="dessineCarte()" 
+          style="height:100%;width:100%;margin:0;padding:0;background-color: rgba(255,255,255,0);margin:0;overflow: hidden;">
+        <div id="map" style="height:100%;width:100%">
+        </div>
+    </body>
+</html>

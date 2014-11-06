@@ -16,7 +16,9 @@ chainesTraduction['defaut'].aide = "Aide";
 chainesTraduction['defaut'].pleinEcran = "Plein écran (Marche/Arrêt)";
 chainesTraduction['defaut'].autorotation = "Autorotation (Marche/Arrêt)";
 chainesTraduction['defaut'].souris = "change le mode de déplacement de la souris";
-chainesTraduction['defaut'].plan = "Plan de la Visite";
+chainesTraduction['defaut'].plan = "Plan";
+chainesTraduction['defaut'].carte = "Carte";
+chainesTraduction['defaut'].panoVisuSite="panoVisu le site";
 chainesTraduction['defaut'].fenetreInfo = "<b>Panovisu version " +
         version +
         "</b><br>Un visualiseur de Visites Virtuelles 100% HTML5 - 100% libre<br>" +

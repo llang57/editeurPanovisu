@@ -5,7 +5,7 @@
  */
 package editeurpanovisu;
 
-import static editeurpanovisu.EditeurPanovisu.strRepertAppli;
+import static editeurpanovisu.EditeurPanovisu.getStrRepertAppli;
 import java.awt.Dimension;
 import java.io.File;
 import java.util.ResourceBundle;
@@ -27,7 +27,7 @@ import javafx.stage.StageStyle;
  */
 public class AideDialogController {
 
-    private static final ResourceBundle rb = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", EditeurPanovisu.locale);
+    private static final ResourceBundle rb = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", EditeurPanovisu.getLocale());
     private static Stage stAide;
     private static AnchorPane apAideDialog;
     private static Button btnAnnuler;
@@ -46,7 +46,7 @@ public class AideDialogController {
         
         WebView wvNavigateur = new WebView();
         WebEngine weNavigateur = wvNavigateur.getEngine();
-        weNavigateur.load("file:"+strRepertAppli + File.separator+"aide/aide.html"); 
+        weNavigateur.load("file:"+getStrRepertAppli() + File.separator+"aide/aide.html"); 
         wvNavigateur.setLayoutX(5);
         wvNavigateur.setLayoutY(5);
         wvNavigateur.setPrefWidth(iLargeur-110);

@@ -27,7 +27,8 @@ public class ZoneTelecommande {
     }
 
     /**
-     * @param strNomZone the strNomZone to set
+     * 
+     * @param strIdZone 
      */
     public void setStrIdZone(String strIdZone) {
         this.strIdZone = strIdZone;

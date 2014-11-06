@@ -44,6 +44,7 @@ public class Panoramique {
     private int iNumeroPlan = -1;
     private double zeroNord = 0;
     private double nombreNiveaux = 0;
+    private CoordonneesGeographiques marqueurGeolocatisation=null;
 
     /**
      *
@@ -403,6 +404,20 @@ public class Panoramique {
      */
     public void setImgVisuPanoramique(Image imgVisuPanoramique) {
         this.imgVisuPanoramique = imgVisuPanoramique;
+    }
+
+    /**
+     * @return the marqueurGeolocatisation
+     */
+    public CoordonneesGeographiques getMarqueurGeolocatisation() {
+        return marqueurGeolocatisation;
+    }
+
+    /**
+     * @param marqueurGeolocatisation the marqueurGeolocatisation to set
+     */
+    public void setMarqueurGeolocatisation(CoordonneesGeographiques marqueurGeolocatisation) {
+        this.marqueurGeolocatisation = marqueurGeolocatisation;
     }
 
 }

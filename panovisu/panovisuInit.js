@@ -8,18 +8,18 @@ sitePanovisu = "http://panovisu.fr",
         siteTextePanovisu = "panovisu.fr";
 
 
-window.requestAnimFrame = (function() {
+window.requestAnimFrame = (function () {
     return window.requestAnimationFrame ||
             window.webkitRequestAnimationFrame ||
             window.mozRequestAnimationFrame ||
             window.oRequestAnimationFrame ||
             window.msRequestAnimationFrame ||
-            function(/* function */ callback, /* DOMElement */ element) {
+            function (/* function */ callback, /* DOMElement */ element) {
                 window.setTimeout(callback, 1000 / 60);
             };
 })();
 
-window.requestTimeout = function(fn, delay) {
+window.requestTimeout = function (fn, delay) {
     if (!window.requestAnimationFrame &&
             !window.webkitRequestAnimationFrame &&
             !(window.mozRequestAnimationFrame && window.mozCancelRequestAnimationFrame) && // Firefox 5 ships without cancel support
@@ -57,7 +57,9 @@ function traduction() {
     this.pleinEcran = "Plein écran (Marche/Arrêt)";
     this.autorotation = "Autorotation (Marche/Arrêt)";
     this.souris = "change le mode de déplacement de la souris";
-    this.plan = "Plan de la Visite";
+    this.plan = "Plan";
+    this.carte = "Carte";
+    this.panoVisuSite = "panoVisu le site";
     this.clicFenetre = "cliquez pour fermer la fenêtre";
     this.fenetreInfo = "<b>Panovisu version " +
             version +
