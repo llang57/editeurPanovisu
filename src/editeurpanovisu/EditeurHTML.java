@@ -64,8 +64,7 @@ public class EditeurHTML {
                 oldValue, newValue));
 
     }
-    
-    
+
     private ResourceBundle rbLocalisation = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", EditeurPanovisu.getLocale());
     private boolean bValide = false;
     private boolean bAnnule = false;
@@ -81,7 +80,7 @@ public class EditeurHTML {
     private final String strAppPath = fileRep.getAbsolutePath();
     private String strNomRepertHTML = strAppPath + "/pagesHTML";
     private Stage stEditeurHTML;
-    private String strImages;
+    private String strImages = "";
     private HTMLEditor heEditeurHTML;
     private Node nodeBarreIconesSuperieure;
     private Node nodeEditeurHTML;
@@ -95,7 +94,7 @@ public class EditeurHTML {
     private AnchorPane apDialog;
     private AnchorPane apEditeur;
     private AnchorPane apPrincipale;
-    private String strNomFichierImage;
+    private String strNomFichierImage = "";
     private boolean bDejaSauve = true;
     private ColorPicker cpCouleurHTML;
 

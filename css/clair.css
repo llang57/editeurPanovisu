@@ -535,8 +535,8 @@ is being used to size a border should also be in pixels.
 .list-view:focused,
 .tree-view:focused,
 .tree-table-view:focused {
-/*    -fx-background-color: -fx-faint-focus-color, -fx-focus-color, -fx-control-inner-background; 
-    -fx-background-insets: -1, -0.3, 1;*/
+    /*    -fx-background-color: -fx-faint-focus-color, -fx-focus-color, -fx-control-inner-background; 
+        -fx-background-insets: -1, -0.3, 1;*/
 }
 /* ones with grey -fx-background not lighter -fx-control-inner-background */
 .scroll-pane,
@@ -1988,7 +1988,7 @@ is being used to size a border should also be in pixels.
  *                                                                             *
  ******************************************************************************/
 
- 
+
 .list-view > .virtual-flow > .scroll-bar:vertical{
     -fx-background-insets: 0, 0 0 0 1;
     -fx-padding: -1 -1 -1 0;
@@ -2002,13 +2002,13 @@ is being used to size a border should also be in pixels.
     -fx-background-insets: 0, 1 0 0 1;
 }
 .list-cell {
-    -fx-background-color: -fx-control-inner-background;
+    -fx-background-color: derive(-fx-base,5%);
     -fx-padding: 0.25em 0.583em 0.25em 0.583em; /* 3 7 3 7 */
     -fx-text-fill: -fx-text-inner-color;
     -fx-opacity: 1;
 }
 .list-cell:odd {
-    -fx-background-color: -fx-control-inner-background-alt;
+    -fx-background-color: derive(-fx-base,10%);
 }
 .list-view:focused > .virtual-flow > .clipped-container > .sheet > .list-cell:focused {
     -fx-background-color: -fx-focus-color, -fx-cell-focus-inner-border, -fx-control-inner-background;
@@ -2062,19 +2062,22 @@ is being used to size a border should also be in pixels.
     -fx-background-color: -fx-selection-bar;
 }
 
- .list-cell:filled:selected:focused, .list-cell:filled:selected {
-    -fx-background-color: #ff0000;
-    -fx-text-fill: white;
-}
-
-.list-view,.list-cell:even,.list-cell:odd { 
-    -fx-background-color: -fx-background;
+.list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-background-color: -fx-accent;
     -fx-text-fill: -fx-dark-text-color;
 }
 
+.list-view,.list-cell:even,.list-cell:odd { 
+    -fx-background-color: derive(-fx-base,5%);
+    -fx-text-fill: -fx-dark-text-color;
+}
+.list-cell:odd {
+    -fx-background-color: derive(-fx-base,15%);
+    -fx-text-fill: -fx-dark-text-color;
+}
 .list-cell:filled:hover {
-    -fx-background-color: #ff0000;
-    -fx-text-fill: white;
+    -fx-background-color: -fx-accent;
+    -fx-text-fill: -fx-light-text-color;
 }
 
 
@@ -3013,12 +3016,18 @@ is being used to size a border should also be in pixels.
     -fx-background-color: derive(-fx-base,-2%);     
 }
 .legendePane{
-    -fx-background-color: derive(-fx-base,-5%);  
-    -fx-border-color : #777777;
+    -fx-border-color : derive(-fx-base,-2%);
     -fx-border-width : 1px;
     -fx-border-radius : 3;
-}
+    -fx-background-color: derive(-fx-base,-2%);  
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.5) , 8, 0.0 , 0 , 8 );
 
+}
+.titreOutil{
+    -fx-background-color : linear-gradient( derive(-fx-base,-30%) 0%,  derive(-fx-base,-55%) 100%);
+    -fx-text-fill: white;
+    -fx-border-radius: 3;
+}
 
 
 

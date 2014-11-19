@@ -15,7 +15,7 @@ public class CartePanoVisu {
     private int facteurZoom;
     private int iNombreMarqueur;
     private MarqueurGeo[] marqueurs = new MarqueurGeo[100];
-    private String strTypeCarte;
+    private String strTypeCarte = "";
 
     /**
      *

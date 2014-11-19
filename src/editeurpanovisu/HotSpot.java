@@ -7,19 +7,18 @@ package editeurpanovisu;
 
 /**
  * Définition des hotspots panoramiques
- * 
+ *
  * @author LANG Laurent
  */
 public class HotSpot {
 
     private double longitude, latitude;
-    private String strFichierImage;
-    private String strFichierXML;
-    private String strInfo;
+    private String strFichierImage = "";
+    private String strFichierXML = "";
+    private String strInfo = "";
     private boolean bAnime;
-    private int iNumeroPano=-1;
+    private int iNumeroPano = -1;
 
-    
     /**
      *
      * @param longit

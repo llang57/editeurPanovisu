@@ -7,18 +7,17 @@ package editeurpanovisu;
 
 /**
  * Définition des hotspots Image
- * 
+ *
  * @author LANG Laurent
  */
 public class HotspotImage {
 
     private double longitude, latitude;
-    private String strNomImg;
-    private String strUrlImage;
-    private String strFichierImage, strInfo;
+    private String strNomImg = "";
+    private String strUrlImage = "";
+    private String strFichierImage = "", strInfo = "";
     private boolean bAnime;
 
-    
     /**
      *
      * @param longit

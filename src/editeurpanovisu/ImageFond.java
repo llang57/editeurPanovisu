@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package editeurpanovisu;
 
 import javafx.scene.image.Image;
@@ -13,15 +12,15 @@ import javafx.scene.image.Image;
  * @author laure_000
  */
 public class ImageFond {
-    
-    private String strFichierImage;
+
+    private String strFichierImage = "";
     private Image imgFond;
-    private String strPosY="bottom",strPosX="right";
-    private double offsetX=0,offsetY=0;
-    private int tailleX,tailleY;
-    private double opacite=0.8;
-    private String strUrl="",strInfobulle="";
-    private boolean bMasquable=true;
+    private String strPosY = "bottom", strPosX = "right";
+    private double offsetX = 0, offsetY = 0;
+    private int tailleX, tailleY;
+    private double opacite = 0.8;
+    private String strUrl = "", strInfobulle = "";
+    private boolean bMasquable = true;
 
     /**
      * @return the fichierImage
@@ -191,6 +190,4 @@ public class ImageFond {
         this.strInfobulle = strInfobulle;
     }
 
-    
-    
 }

@@ -3,13 +3,23 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/GestionnaireInterfaceController.java</file>
-            <file>file:/D:/github/editeurPanovisu/panovisu/panovisu.js</file>
-            <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/i18n/PanoVisu.properties</file>
-            <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/i18n/PanoVisu_en.properties</file>
-            <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/EditeurPanovisu.java</file>
-            <file>file:/D:/github/editeurPanovisu/src/editeurpanovisu/i18n/PanoVisu_fr.properties</file>
-            <file>file:/D:/github/editeurPanovisu/panovisu/css/panovisu.css</file>
+            <file>file:/E:/github/editeurPanovisu/src/editeurpanovisu/PaneOutil.java</file>
+            <file>file:/E:/github/editeurPanovisu/src/editeurpanovisu/Panoramique.java</file>
+            <file>file:/E:/github/editeurPanovisu/src/editeurpanovisu/GestionnairePlanController.java</file>
+            <file>file:/E:/github/editeurPanovisu/src/editeurpanovisu/OrdrePanoramique.java</file>
+            <file>file:/E:/github/editeurPanovisu/src/editeurpanovisu/EditeurPanovisu.java</file>
+            <file>file:/E:/github/editeurPanovisu/src/editeurpanovisu/NavigateurOpenLayersSeul.java</file>
+            <file>file:/E:/github/editeurPanovisu/css/fonce.css</file>
+            <file>file:/E:/github/editeurPanovisu/src/editeurpanovisu/i18n/PanoVisu_en.properties</file>
+            <file>file:/E:/github/editeurPanovisu/src/editeurpanovisu/NavigateurOpenLayers.java</file>
+            <file>file:/E:/github/editeurPanovisu/css/clair.css</file>
+            <file>file:/E:/github/editeurPanovisu/src/editeurpanovisu/GestionnaireInterfaceController.java</file>
+            <file>file:/E:/github/editeurPanovisu/src/editeurpanovisu/CelluleListView.java</file>
+            <file>file:/E:/github/editeurPanovisu/src/editeurpanovisu/i18n/PanoVisu_de.properties</file>
+            <file>file:/E:/github/editeurPanovisu/src/editeurpanovisu/i18n/PanoVisu.properties</file>
+            <file>file:/E:/github/editeurPanovisu/src/editeurpanovisu/CellulePanoramique.java</file>
+            <file>file:/E:/github/editeurPanovisu/src/editeurpanovisu/i18n/PanoVisu_fr.properties</file>
+            <file>file:/E:/github/editeurPanovisu/src/editeurpanovisu/NavigateurCarte.java</file>
         </group>
     </open-files>
 </project-private>

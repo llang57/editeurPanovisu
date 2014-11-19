@@ -27,8 +27,8 @@ public class Panoramique {
     private final HotSpot[] hotspots = new HotSpot[100];
     private final HotspotImage[] imageHotspot = new HotspotImage[100];
     private final HotspotHTML[] HTMLHotspot = new HotspotHTML[100];
-    private String strTitrePanoramique;
-    private String strNomFichier;
+    private String strTitrePanoramique="";
+    private String strNomFichier="";
     private double regardX = 0.d;
     private double regardY = 0.d;
     private Image imgPanoramique;
@@ -37,7 +37,7 @@ public class Panoramique {
     private int iNombreHotspots = 0;
     private int iNombreHotspotImage = 0;
     private int iNombreHotspotHTML = 0;
-    private String strTypePanoramique;
+    private String strTypePanoramique="";
     private boolean bAfficheTitre;
     private boolean bAfficheInfo;
     private boolean bAffichePlan;
@@ -46,10 +46,10 @@ public class Panoramique {
     private double nombreNiveaux = 0;
     private CoordonneesGeographiques marqueurGeolocatisation=null;
 
-    /**
-     *
-     * @param strFichier
-     */
+   /**
+    * 
+    * @param strFichier 
+    */
     public void Panoramique(String strFichier) {
         this.strNomFichier = strFichier;
         this.strTypePanoramique = Panoramique.SPHERE;

@@ -34,7 +34,7 @@ public class NavigateurOpenLayers {
     private String[] strCartesOpenLayers;
     private final ToggleGroup tgCartesOpenLayers = new ToggleGroup();
     private AnchorPane apChoixCartographie = new AnchorPane();
-    private String strCartoActive;
+    private String strCartoActive="";
     private String bingApiKey = "";
     //private String bingApiKey = "";
 
@@ -361,7 +361,7 @@ public class NavigateurOpenLayers {
          * @param msg
          */
         public void adresseInconnue(String msg) {
-            System.out.println("Adresse Inconnue\n" + msg);
+            //System.out.println("Adresse Inconnue\n" + msg);
         }
 
         /**
@@ -370,9 +370,9 @@ public class NavigateurOpenLayers {
          * @param lat
          */
         public void adresseTrouvee(double lon, double lat) {
-            System.out.println(
-                    "Adresse trouvée aux coordonnées : " + CoordonneesGeographiques.toDMS(lat) + "  " + CoordonneesGeographiques.toDMS(lon)
-            );
+//            System.out.println(
+//                    "Adresse trouvée aux coordonnées : " + CoordonneesGeographiques.toDMS(lat) + "  " + CoordonneesGeographiques.toDMS(lon)
+//            );
         }
 
         /**
@@ -381,7 +381,6 @@ public class NavigateurOpenLayers {
          */
         public void afficheChaine(String strChaine) {
             System.out.println(strChaine);
-
         }
     }
 

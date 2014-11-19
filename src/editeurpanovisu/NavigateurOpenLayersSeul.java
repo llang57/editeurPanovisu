@@ -4,27 +4,13 @@
  */
 package editeurpanovisu;
 
-import static editeurpanovisu.EditeurPanovisu.getPanoramiquesProjet;
-import static editeurpanovisu.EditeurPanovisu.getiPanoActuel;
-import java.io.File;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.concurrent.Worker.State;
-import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
-import javafx.util.Duration;
 import netscape.javascript.JSObject;
 
 /**
@@ -39,7 +25,7 @@ public class NavigateurOpenLayersSeul {
     private String[] strCartesOpenLayers;
     private final ToggleGroup tgCartesOpenLayers = new ToggleGroup();
     private AnchorPane apChoixCartographie = new AnchorPane();
-    private String strCartoActive;
+    private String strCartoActive = "";
     private String bingApiKey = "";
     //private String bingApiKey = "";
 
@@ -329,7 +315,7 @@ public class NavigateurOpenLayersSeul {
          * @param msg
          */
         public void adresseInconnue(String msg) {
-            System.out.println("Adresse Inconnue\n" + msg);
+            //System.out.println("Adresse Inconnue\n" + msg);
         }
 
         /**
@@ -338,9 +324,9 @@ public class NavigateurOpenLayersSeul {
          * @param lat
          */
         public void adresseTrouvee(double lon, double lat) {
-            System.out.println(
-                    "Adresse trouvée aux coordonnées : " + CoordonneesGeographiques.toDMS(lat) + "  " + CoordonneesGeographiques.toDMS(lon)
-            );
+//            System.out.println(
+//                    "Adresse trouvée aux coordonnées : " + CoordonneesGeographiques.toDMS(lat) + "  " + CoordonneesGeographiques.toDMS(lon)
+//            );
         }
 
         /**
@@ -348,7 +334,7 @@ public class NavigateurOpenLayersSeul {
          * @param strChaine
          */
         public void afficheChaine(String strChaine) {
-            System.out.println(strChaine);
+            //System.out.println(strChaine);
 
         }
 

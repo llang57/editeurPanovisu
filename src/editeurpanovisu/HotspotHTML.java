@@ -32,7 +32,6 @@ public class HotspotHTML {
     private double largeurHTML = 1000;
     private String strPositionHTML = "center";
     private String strCouleurHTML = "#aaaaff";
-    //private String[] strFichierImage;
     private ImageEditeurHTML[] imagesEditeur = new ImageEditeurHTML[50];
     private int iNombreImages = 0;
 

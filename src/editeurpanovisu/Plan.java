@@ -12,16 +12,16 @@ package editeurpanovisu;
 public class Plan {
 
     private final HotSpot[] hotspots = new HotSpot[100];
-    private String strTitrePlan="";
-    private String strImagePlan="";
-    private String strLienPlan;
+    private String strTitrePlan = "";
+    private String strImagePlan = "";
+    private String strLienPlan = "";
     private int iNombreHotspots = 0;
     private final String[] strPanoramiques = new String[50];
     private int iNombrePanoramiques = 0;
-    private double directionNord=0;
-    private String strPosition="top:right";
-    private double positionX=20;
-    private double positionY=20;
+    private double directionNord = 0;
+    private String strPosition = "top:right";
+    private double positionX = 20;
+    private double positionY = 20;
     private double largeurPlan;
     private double hauteurPlan;
 
@@ -68,10 +68,11 @@ public class Plan {
     public String getTitrePlan() {
         return strTitrePlan;
     }
-/**
- * 
- * @param strTitrePlan 
- */
+
+    /**
+     *
+     * @param strTitrePlan
+     */
     public void setTitrePlan(String strTitrePlan) {
         this.strTitrePlan = strTitrePlan;
     }
@@ -119,8 +120,8 @@ public class Plan {
 
         }
         if (trouve) {
-            for (int i = numero; i < iNombrePanoramiques-1; i++) {
-                this.strPanoramiques[i]=this.strPanoramiques[i+1];
+            for (int i = numero; i < iNombrePanoramiques - 1; i++) {
+                this.strPanoramiques[i] = this.strPanoramiques[i + 1];
             }
             this.iNombrePanoramiques--;
         }

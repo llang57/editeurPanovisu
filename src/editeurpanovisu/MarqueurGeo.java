@@ -12,8 +12,8 @@ package editeurpanovisu;
 public class MarqueurGeo {
 
     private CoordonneesGeographiques coordonnees;
-    private String strXMLMarqueur;
-    private String strHTMLMarqueur;
+    private String strXMLMarqueur = "";
+    private String strHTMLMarqueur = "";
 
     MarqueurGeo() {
         coordonnees = new CoordonneesGeographiques(0.d, 0.d);

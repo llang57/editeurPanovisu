@@ -93,7 +93,7 @@ is being used to size a border should also be in pixels.
     /* A light grey that is the base color for objects.  Instead of using
      * -fx-base directly, the sections in this file will typically use -fx-color.
      */
-    -fx-base: #161010;
+    -fx-base: #242424;
 
     /* A very light grey used for the background of windows.  See also
      * -fx-text-background-color, which should be used as the -fx-text-fill
@@ -2001,13 +2001,13 @@ is being used to size a border should also be in pixels.
     -fx-background-insets: 0, 1 0 0 1;
 }
 .list-cell {
-    -fx-background-color: -fx-control-inner-background;
+    -fx-background-color: derive(-fx-base,5%);
     -fx-padding: 0.25em 0.583em 0.25em 0.583em; /* 3 7 3 7 */
     -fx-text-fill: -fx-text-inner-color;
     -fx-opacity: 1;
 }
 .list-cell:odd {
-    -fx-background-color: -fx-control-inner-background-alt;
+    -fx-background-color: derive(-fx-base,10%);
 }
 .list-view:focused > .virtual-flow > .clipped-container > .sheet > .list-cell:focused {
     -fx-background-color: -fx-focus-color, -fx-cell-focus-inner-border, -fx-control-inner-background;
@@ -2061,14 +2061,21 @@ is being used to size a border should also be in pixels.
     -fx-background-color: -fx-selection-bar;
 }
 
+/*.list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-background-color: -fx-accent;
+    -fx-text-fill: white;
+}*/
 
 .list-view,.list-cell:even,.list-cell:odd { 
-    -fx-background-color: -fx-background;
+    -fx-background-color: derive(-fx-base,5%);
     -fx-text-fill: -fx-light-text-color;
 }
-
+.list-cell:odd {
+    -fx-background-color: derive(-fx-base,15%);
+    -fx-text-fill: -fx-light-text-color;
+}
 .list-cell:filled:hover {
-    -fx-background-color: #ff0000;
+    -fx-background-color: -fx-accent;
     -fx-text-fill: white;
 }
 
@@ -3009,12 +3016,6 @@ is being used to size a border should also be in pixels.
 }
 
 
-.legendePane{
-    -fx-background-color: derive(-fx-base,5%);  
-    -fx-border-color : #777777;
-    -fx-border-width : 1px;
-    -fx-border-radius : 3;
-}
 
 
 .dialog{
@@ -3083,7 +3084,20 @@ is being used to size a border should also be in pixels.
 .dialog:masthead > * > .content-pane .expandable-content {
     -fx-text-fill : black;
 }
+.legendePane{
+    -fx-border-color : derive(-fx-base,2%);
+    -fx-border-width : 1px;
+    -fx-border-radius : 3;
+    -fx-background-color: derive(-fx-base,-2%);  
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.5) , 8, 0.0 , 0 , 8 );
+}
 
+.titreOutil{
+    -fx-background-color : linear-gradient( derive(-fx-base,45%) 0%,  derive(-fx-base,15%) 100%);
+    -fx-text-fill: white;
+        -fx-border-radius: 3;
+
+}
 
 
 

@@ -45,7 +45,7 @@ import jfxtras.labs.scene.control.BigDecimalField;
  *
  * @author llang
  */
-public final class AfficheNavigateurPanoramique {
+public final class NavigateurPanoramique {
 
     protected transient PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
 
@@ -89,7 +89,7 @@ public final class AfficheNavigateurPanoramique {
     private ResourceBundle rbLocalisation = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", EditeurPanovisu.getLocale());
 
 
-    public AfficheNavigateurPanoramique(String nomFichierPanoramique, double positX, double positY, double largeur, double hauteur) {
+    public NavigateurPanoramique(String nomFichierPanoramique, double positX, double positY, double largeur, double hauteur) {
         this.positX = positX;
         this.positY = positY;
         this.largeurImage = largeur;
@@ -346,11 +346,11 @@ public final class AfficheNavigateurPanoramique {
         apPanorama.getChildren().addAll(apNord, bdfLong, bdfLat, bdfFOV);
         sscPanorama.setFocusTraversable(true);
         btnChoixNord = new Button(rbLocalisation.getString("navigateur.nord"));
-        btnChoixNord.setPrefWidth(80);
-        btnChoixNord.setLayoutX(sscPanorama.getLayoutX() + sscPanorama.getWidth() - btnChoixNord.getPrefWidth() - 5);
+        btnChoixNord.setPrefWidth(100);
+        btnChoixNord.setLayoutX(sscPanorama.getLayoutX() + sscPanorama.getWidth() - btnChoixNord.getPrefWidth() - 10);
         btnChoixNord.setLayoutY(sscPanorama.getLayoutY() + sscPanorama.getHeight() - btnChoixNord.getPrefHeight() + 5);
         btnChoixVue = new Button(rbLocalisation.getString("navigateur.choixPOV"));
-        btnChoixVue.setPrefWidth(80);
+        btnChoixVue.setPrefWidth(100);
         btnChoixVue.setLayoutX(btnChoixNord.getLayoutX() - btnChoixVue.getPrefWidth() - 5);
         btnChoixVue.setLayoutY(sscPanorama.getLayoutY() + sscPanorama.getHeight() - btnChoixNord.getPrefHeight() + 5);
         apPanorama.getChildren().addAll(btnChoixNord, btnChoixVue);

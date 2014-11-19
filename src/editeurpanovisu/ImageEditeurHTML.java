@@ -13,7 +13,7 @@ import java.io.File;
  */
 public class ImageEditeurHTML {
         
-        private String strImagePath;
+        private String strImagePath="";
 
         /**
          * @return the strImage
