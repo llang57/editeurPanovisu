@@ -94,15 +94,15 @@ function include(fileName) {
  * @returns {undefined}
  */
 function prechargeImages(images) {
-//    var i = 0;
-//    // Créer l'objet
-//    imageObj = new Image();
-//
-//    // Démarrer le préchargement
-//    for (i = 0; i <= images.length; i++)
-//    {
-//        imageObj.src = images[i];
-//    }
+    var i = 0;
+    // Créer l'objet
+    imageObj = new Image();
+
+    // Démarrer le préchargement
+    for (i = 0; i <= images.length; i++)
+    {
+        imageObj.src = images[i];
+    }
 }
 
 
