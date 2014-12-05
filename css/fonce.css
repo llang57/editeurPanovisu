@@ -535,8 +535,8 @@ is being used to size a border should also be in pixels.
 .list-view:focused,
 .tree-view:focused,
 .tree-table-view:focused {
-/*    -fx-background-color: -fx-faint-focus-color, -fx-focus-color, -fx-control-inner-background; 
-    -fx-background-insets: -2, -0.3, 1;*/
+    /*    -fx-background-color: -fx-faint-focus-color, -fx-focus-color, -fx-control-inner-background; 
+        -fx-background-insets: -2, -0.3, 1;*/
 }
 /* ones with grey -fx-background not lighter -fx-control-inner-background */
 .scroll-pane,
@@ -3095,8 +3095,25 @@ is being used to size a border should also be in pixels.
 .titreOutil{
     -fx-background-color : linear-gradient( derive(-fx-base,45%) 0%,  derive(-fx-base,15%) 100%);
     -fx-text-fill: white;
-        -fx-border-radius: 3;
+    -fx-border-radius: 3;
 
+}
+.titreOutil:disabled,.titreOutilRouge:disabled,.titreOutilBleu:disabled{
+    -fx-background-color : #555;
+    -fx-text-fill: #666;
+    -fx-border-radius: 3;
+}
+
+.titreOutilRouge{
+    -fx-background-color : linear-gradient( #557755 0%, #224422  100%);
+    -fx-text-fill: white;
+    -fx-border-radius: 3;
+}
+
+.titreOutilBleu{
+    -fx-background-color : linear-gradient( #555577 0%, #222244  100%);
+    -fx-text-fill: white;
+    -fx-border-radius: 3;
 }
 
 

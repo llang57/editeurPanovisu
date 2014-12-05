@@ -1,8 +1,12 @@
 chainesTraduction['defaut'] = new traduction();
 chainesTraduction['defaut'].panoPrecedent = "panoramique précedent";
 chainesTraduction['defaut'].panoSuivant = "panoramique suivant";
+chainesTraduction['defaut'].masqueElements = "Masque les éléments";
+chainesTraduction['defaut'].afficheElements = "Affiche les éléments";
+chainesTraduction['defaut'].demarreAutoTour = "Lance la visite Automatique";
+chainesTraduction['defaut'].arreteAutoTour = "Arrête la visite Automatique";
 chainesTraduction['defaut'].petitePlanete = "Vue petite planète";
-chainesTraduction['defaut'].vueNoramale = "Vue Normale";
+chainesTraduction['defaut'].vueNormale = "Vue Normale";
 chainesTraduction['defaut'].aPropos = "A Propos de panoVisu ...";
 chainesTraduction['defaut'].afficheMasque = "Affiche/masque les éléments";
 chainesTraduction['defaut'].vignettes = "Vignettes";
@@ -18,7 +22,7 @@ chainesTraduction['defaut'].autorotation = "Autorotation (Marche/Arrêt)";
 chainesTraduction['defaut'].souris = "change le mode de déplacement de la souris";
 chainesTraduction['defaut'].plan = "Plan";
 chainesTraduction['defaut'].carte = "Carte";
-chainesTraduction['defaut'].panoVisuSite="panoVisu le site";
+chainesTraduction['defaut'].panoVisuSite = "panoVisu le site";
 chainesTraduction['defaut'].fenetreInfo = "<b>Panovisu version " +
         version +
         "</b><br>Un visualiseur de Visites Virtuelles 100% HTML5 - 100% libre<br>" +

@@ -21,7 +21,7 @@ import javafx.scene.layout.AnchorPane;
 public class OrdrePanoramique {
 
     private static ObservableList<String> strPanos = FXCollections.observableArrayList();
-    public static final ObservableList<CellulePanoramique> cellulesPanoramiques = FXCollections.observableArrayList();
+    public static final ObservableList<PanoramiqueCellule> cellulesPanoramiques = FXCollections.observableArrayList();
     private AnchorPane apListePanoramiques = new AnchorPane();
     private ListView<String> lstStrPanos;
 
@@ -29,7 +29,7 @@ public class OrdrePanoramique {
         cellulesPanoramiques.clear();
         strPanos.clear();
         for (int i = 0; i < getiNombrePanoramiques(); i++) {
-            CellulePanoramique cellPano = new CellulePanoramique();
+            PanoramiqueCellule cellPano = new PanoramiqueCellule();
             cellPano.setImgPanoramique(new Image("file:" + getPanoramiquesProjet()[i].getStrNomFichier(), 70, 35, false, true));
             cellPano.setStrTitrePanoramique(getPanoramiquesProjet()[i].getStrTitrePanoramique());
             cellPano.setStrTitrePanoramiqueLigne2(getPanoramiquesProjet()[i].getStrNomFichier().substring(getPanoramiquesProjet()[i].getStrNomFichier().lastIndexOf(File.separator) + 1, getPanoramiquesProjet()[i].getStrNomFichier().length()));
@@ -38,7 +38,7 @@ public class OrdrePanoramique {
             cellulesPanoramiques.add(cellPano);
         }
         lstStrPanos = new ListView<>(strPanos);
-        lstStrPanos.setCellFactory(param -> new CelluleListView());
+        lstStrPanos.setCellFactory(param -> new ListePanoramiqueCellule());
         int iTaille = 46 * (getiNombrePanoramiques()) + 5;
         iTaille = (iTaille > 465) ? 465 : iTaille;
         lstStrPanos.setMaxSize(300, iTaille);
@@ -58,7 +58,7 @@ public class OrdrePanoramique {
         strPanos.clear();
         for (String strOrd11 : strOrd1) {
             int iPano = Integer.parseInt(strOrd11);
-            CellulePanoramique cellPano = new CellulePanoramique();
+            PanoramiqueCellule cellPano = new PanoramiqueCellule();
             cellPano.setImgPanoramique(new Image("file:" + getPanoramiquesProjet()[iPano].getStrNomFichier(), 70, 35, false, true));
             cellPano.setStrTitrePanoramique(getPanoramiquesProjet()[iPano].getStrTitrePanoramique());
             cellPano.setStrTitrePanoramiqueLigne2(getPanoramiquesProjet()[iPano].getStrNomFichier().substring(getPanoramiquesProjet()[iPano].getStrNomFichier().lastIndexOf(File.separator) + 1, getPanoramiquesProjet()[iPano].getStrNomFichier().length()));
@@ -67,7 +67,7 @@ public class OrdrePanoramique {
             cellulesPanoramiques.add(cellPano);
         }
         lstStrPanos = new ListView<>(strPanos);
-        lstStrPanos.setCellFactory(param -> new CelluleListView());
+        lstStrPanos.setCellFactory(param -> new ListePanoramiqueCellule());
         int iTaille = 46 * (getiNombrePanoramiques()) + 5;
         iTaille = (iTaille > 465) ? 465 : iTaille;
         lstStrPanos.setMaxSize(300, iTaille);
@@ -101,7 +101,7 @@ public class OrdrePanoramique {
                     iPano--;
                 }
                 strPanos.add(Integer.toString(iPano));
-                CellulePanoramique cellPano = new CellulePanoramique();
+                PanoramiqueCellule cellPano = new PanoramiqueCellule();
                 cellPano.setImgPanoramique(new Image("file:" + getPanoramiquesProjet()[iPano].getStrNomFichier(), 70, 35, false, true));
                 cellPano.setStrTitrePanoramique(getPanoramiquesProjet()[iPano].getStrTitrePanoramique());
                 cellPano.setStrTitrePanoramiqueLigne2(getPanoramiquesProjet()[iPano].getStrNomFichier().substring(getPanoramiquesProjet()[iPano].getStrNomFichier().lastIndexOf(File.separator) + 1, getPanoramiquesProjet()[iPano].getStrNomFichier().length()));
@@ -109,7 +109,7 @@ public class OrdrePanoramique {
                 cellulesPanoramiques.add(cellPano);
             }
             lstStrPanos = new ListView<>(strPanos);
-            lstStrPanos.setCellFactory(param -> new CelluleListView());
+            lstStrPanos.setCellFactory(param -> new ListePanoramiqueCellule());
             int iTaille = 46 * (strPanos.size()) + 5;
             iTaille = (iTaille > 465) ? 465 : iTaille;
             lstStrPanos.setMaxSize(300, iTaille);
@@ -131,7 +131,7 @@ public class OrdrePanoramique {
         for (int i = 0; i < strPanos1.size(); i++) {
             int iPano = Integer.parseInt(strPanos1.get(i));
             strPanos.add(strPanos1.get(i));
-            CellulePanoramique cellPano = new CellulePanoramique();
+            PanoramiqueCellule cellPano = new PanoramiqueCellule();
             cellPano.setImgPanoramique(new Image("file:" + getPanoramiquesProjet()[iPano].getStrNomFichier(), 70, 35, false, true));
             cellPano.setStrTitrePanoramique(getPanoramiquesProjet()[iPano].getStrTitrePanoramique());
             cellPano.setStrTitrePanoramiqueLigne2(getPanoramiquesProjet()[iPano].getStrNomFichier().substring(getPanoramiquesProjet()[iPano].getStrNomFichier().lastIndexOf(File.separator) + 1, getPanoramiquesProjet()[iPano].getStrNomFichier().length()));
@@ -140,7 +140,7 @@ public class OrdrePanoramique {
             cellulesPanoramiques.add(cellPano);
         }
         lstStrPanos = new ListView<>(strPanos);
-        lstStrPanos.setCellFactory(param -> new CelluleListView());
+        lstStrPanos.setCellFactory(param -> new ListePanoramiqueCellule());
         int iTaille = 46 * (strPanos.size()) + 5;
         iTaille = (iTaille > 465) ? 465 : iTaille;
         lstStrPanos.setMaxSize(300, iTaille);
@@ -155,13 +155,20 @@ public class OrdrePanoramique {
 
     public void ajouteNouveauxPanos() {
         ObservableList<String> strPanos1 = FXCollections.observableArrayList();
-        strPanos1 = strPanos;
-        strPanos = FXCollections.observableArrayList();
-        for (String strPanos11 : strPanos1) {
-            strPanos.add(strPanos11);
+        int iTaillePano = 0;
+        if (strPanos == null) {
+            iTaillePano = 0;
+            strPanos = FXCollections.observableArrayList();
+        } else {
+            iTaillePano = strPanos.size();
+            strPanos1 = strPanos;
+            strPanos = FXCollections.observableArrayList();
+            for (String strPano1 : strPanos1) {
+                strPanos.add(strPano1);
+            }
         }
-        for (int i = strPanos.size(); i < getiNombrePanoramiques(); i++) {
-            CellulePanoramique cellPano = new CellulePanoramique();
+        for (int i = iTaillePano; i < getiNombrePanoramiques(); i++) {
+            PanoramiqueCellule cellPano = new PanoramiqueCellule();
             cellPano.setImgPanoramique(new Image("file:" + getPanoramiquesProjet()[i].getStrNomFichier(), 70, 35, false, true));
             cellPano.setStrTitrePanoramique(getPanoramiquesProjet()[i].getStrTitrePanoramique());
             cellPano.setStrTitrePanoramiqueLigne2(getPanoramiquesProjet()[i].getStrNomFichier().substring(getPanoramiquesProjet()[i].getStrNomFichier().lastIndexOf(File.separator) + 1, getPanoramiquesProjet()[i].getStrNomFichier().length()));
@@ -169,18 +176,18 @@ public class OrdrePanoramique {
             strPanos.add(Integer.toString(i));
             cellulesPanoramiques.add(cellPano);
         }
-        ListView lstStrPanos = new ListView<>(strPanos);
-        lstStrPanos.setCellFactory(param -> new CelluleListView());
+        ListView lstStrPanos1 = new ListView<>(strPanos);
+        lstStrPanos1.setCellFactory(param -> new ListePanoramiqueCellule());
         int iTaille = 46 * (getiNombrePanoramiques()) + 5;
         iTaille = (iTaille > 465) ? 465 : iTaille;
-        lstStrPanos.setMaxSize(300, iTaille);
-        lstStrPanos.setMinSize(300, iTaille);
-        lstStrPanos.setPrefSize(300, iTaille);
+        lstStrPanos1.setMaxSize(300, iTaille);
+        lstStrPanos1.setMinSize(300, iTaille);
+        lstStrPanos1.setPrefSize(300, iTaille);
         apListePanoramiques.getChildren().clear();
         apListePanoramiques.setMaxSize(300, iTaille);
         apListePanoramiques.setMinSize(300, iTaille);
         apListePanoramiques.setPrefSize(300, iTaille);
-        apListePanoramiques.getChildren().add(lstStrPanos);
+        apListePanoramiques.getChildren().add(lstStrPanos1);
     }
 
     /**
@@ -193,7 +200,7 @@ public class OrdrePanoramique {
     /**
      * @return the cellulesPanoramiques
      */
-    public ObservableList<CellulePanoramique> getCellulesPanoramiques() {
+    public ObservableList<PanoramiqueCellule> getCellulesPanoramiques() {
         return cellulesPanoramiques;
     }
 

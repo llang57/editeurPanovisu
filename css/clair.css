@@ -3028,6 +3028,22 @@ is being used to size a border should also be in pixels.
     -fx-text-fill: white;
     -fx-border-radius: 3;
 }
+.titreOutil:disabled,.titreOutilRouge:disabled,.titreOutilBleu:disabled{
+    -fx-background-color : #999;
+    -fx-text-fill: #AAA;
+    -fx-border-radius: 3;
+}
+.titreOutilRouge{
+    -fx-background-color : linear-gradient( #779977  0%, #446644 100%);
+    -fx-text-fill: white;
+    -fx-border-radius: 3;
+}
+
+.titreOutilBleu{
+    -fx-background-color : linear-gradient( #777799  0%, #444466 100%);
+    -fx-text-fill: white;
+    -fx-border-radius: 3;
+}
 
 
 

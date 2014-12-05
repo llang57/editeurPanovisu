@@ -4,6 +4,7 @@
  */
 package editeurpanovisu;
 
+import static editeurpanovisu.EditeurPanovisu.getPoGeolocalisation;
 import static editeurpanovisu.EditeurPanovisu.getPanoramiquesProjet;
 import static editeurpanovisu.EditeurPanovisu.getTabInterface;
 import static editeurpanovisu.EditeurPanovisu.getiPanoActuel;
@@ -251,6 +252,7 @@ public class NavigateurOpenLayers {
                     if (tfLatitude != null) {
                         tfLatitude.setText(CoordonneesGeographiques.toDMS(getMarqueur().getLatitude()));
                     }
+                    getPoGeolocalisation().setbValide(true);
                     String strHTML = "<span style='font-family : Verdana,Arial,sans-serif;font-weight:bold;font-size : 12px;'>"
                             + getPanoramiquesProjet()[getiPanoActuel()].getStrTitrePanoramique()
                             + "</span><br/>"

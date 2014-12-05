@@ -15,7 +15,7 @@ window.requestAnimFrame = (function () {
             window.oRequestAnimationFrame ||
             window.msRequestAnimationFrame ||
             function (/* function */ callback, /* DOMElement */ element) {
-                window.setTimeout(callback, 1000 / 60);
+                window.setTimeout(callback, 1000.0 / 60.0);
             };
 })();
 
@@ -42,7 +42,11 @@ function traduction() {
     this.panoPrecedent = "panoramique précedent";
     this.panoSuivant = "panoramique suivant";
     this.petitePlanete = "Vue petite planète";
-    this.vueNoramale = "Vue Normale";
+    this.vueNormale = "Vue Normale";
+    this.masqueElements="Masque les éléments";
+    this.afficheElements="Affiche les éléments";
+    this.demarreAutoTour="Lance la visite Automatique";
+    this.arreteAutoTour="Arrête la visite Automatique";
     this.aPropos = "A Propos de panoVisu ...";
     this.afficheMasque = "Affiche/masque les éléments";
     this.vignettes = "Vignettes";

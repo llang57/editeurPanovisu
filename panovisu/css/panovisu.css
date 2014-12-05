@@ -437,3 +437,9 @@ and open the template in the editor.
     width: 80px;
     height : 40px;
 }
+.btnVisiteAuto{
+    z-index : 10000;
+    position: absolute;
+    display: none;
+    cursor: pointer;
+}

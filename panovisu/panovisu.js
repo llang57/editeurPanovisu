@@ -1,7 +1,7 @@
 /**
  * @name panoVisu
  * 
- * @version 1.2.0
+ * @version 1.2.4
  * @author LANG Laurent
  */
 
@@ -20,7 +20,6 @@ function estTactile() {
 
 function panovisu(iNumPano) {
 
-
     var tmp = window.location.search.substring(1).split("&");
     var GET = [];
     for (var i in tmp)
@@ -28,7 +27,12 @@ function panovisu(iNumPano) {
             GET[decodeURI(tmp[i].substring(0, tmp[i].indexOf("=")))] = decodeURI(tmp[i].substring(tmp[i].indexOf("=") + 1));
         else
             GET[decodeURI(tmp[i])] = '';
+
     var camera, scene, renderer;
+    /**
+     * 
+     * @returns {panovisu.spot}
+     */
     function spot() {
         this.id = 0;
         this.image = "";
@@ -37,7 +41,10 @@ function panovisu(iNumPano) {
         this.lat = 0;
         this.posY = 0;
     }
-
+    /**
+     * 
+     * @returns {panovisu.pointInteret}
+     */
     function pointInteret() {
         this.type = "panoramique";
         this.long = 0;
@@ -50,13 +57,19 @@ function panovisu(iNumPano) {
         this.position = "center";
         this.couleur = "rgba(0,0,0,0.7)";
     }
-
+    /**
+     * 
+     * @returns {panovisu.vignettePano}
+     */
     function vignettePano() {
         this.image = "";
         this.xml = "";
         this.txt = "";
     }
-
+    /**
+     * 
+     * @returns {panovisu.cbMenuPano}
+     */
     function cbMenuPano() {
         this.image = "";
         this.xml = "";
@@ -64,13 +77,20 @@ function panovisu(iNumPano) {
         this.sousTitre = "";
         this.select = "";
     }
-
+    /**
+     * 
+     * @returns {panovisu.pointPlan}
+     */
     function pointPlan() {
         this.positX = 0;
         this.positY = 0;
         this.xml = "";
         this.texte = "";
     }
+    /**
+     * 
+     * @returns {panovisu.pointCarte}
+     */
     function pointCarte() {
         this.positX = 0;
         this.positY = 0;
@@ -78,7 +98,10 @@ function panovisu(iNumPano) {
         this.html = "";
         this.image = "";
     }
-
+    /**
+     * 
+     * @returns {panovisu.imageFond}
+     */
     function imageFond() {
         this.fichier = "";
         this.url = "";
@@ -92,7 +115,10 @@ function panovisu(iNumPano) {
         this.tailleY = "";
         this.masquable = true;
     }
-
+    /**
+     * 
+     * @returns {panovisu.boutonTelecommande}
+     */
     function boutonTelecommande() {
         this.id = "";
         this.alt = "";
@@ -102,6 +128,10 @@ function panovisu(iNumPano) {
         this.centerX = 0;
         this.centerY = 0;
     }
+    /**
+     * 
+     * @returns {panovisu.defRadar}
+     */
     function defRadar() {
         this.longitude = 0;
         this.latitude = 0;
@@ -113,7 +143,19 @@ function panovisu(iNumPano) {
         this.opaciteFond = "";
     }
 
+    if (!Date.now) {
+        Date.now = function now() {
+            return new Date().getTime();
+        };
+    }
+
     var
+            ddxAutorotation = 0,
+            dxAutorotation = 0,
+            timerAutorotation,
+            timerDebutRotation,
+            longitudeDebutRotation,
+            bEltMasque = null,
             timer,
             ddx,
             ddy,
@@ -159,7 +201,7 @@ function panovisu(iNumPano) {
             onPointerDownLat = 0,
             phi = 0,
             theta = 0,
-            fov = 75,
+            fov = 50,
             dx = 0,
             dy = 0,
             deltaX = 0,
@@ -184,9 +226,13 @@ function panovisu(iNumPano) {
             positionVignettesY = 0,
             memMaxFOV,
             memFOV,
+            memLatitude,
+            memLongitude,
             bMemCarteRentre,
             bMemPlanRentre,
             bMemVignettesRentre,
+            bMemAutorotation,
+            bMemAutoTour,
             bLittleDisabled = false,
             bNormalDisbled = true,
             masqueTout = "",
@@ -224,7 +270,6 @@ function panovisu(iNumPano) {
             radar,
             ctrlLayerSwitcher,
             bRadar = false;
-
     /**
      * Variables par défaut pour l'affichage du panoramique
      * 
@@ -268,6 +313,17 @@ function panovisu(iNumPano) {
             fenetreAideDY,
             fenetreAideOpacite,
             strDiaporamaCouleur,
+            vitesseAutorotation,
+            bAutoTour,
+            bBtnAutoTour,
+            positBtnAutoTourX,
+            positBtnAutoTourY,
+            offsetBtnAutoTourX,
+            offsetBtnAutoTourY,
+            tailleBtnAutoTour,
+            strAutoTourType,
+            autoTourLimite,
+            bPetitePlaneteDemarrage,
             strPanoType,
             strAffInfo,
             bAfficheInfo,
@@ -377,15 +433,15 @@ function panovisu(iNumPano) {
             coordCentreLat,
             strNomLayerCarte,
             strBingAPIKey,
-            bAfficheMC,
-            bPrecSuivMC,
-            bPlanetMC,
-            bPersMC1,
-            bPersMC2,
-            strLibMC1,
-            strLibMC2,
-            strUrlMC1,
-            strUrlMC2,
+            bAfficheMenuContextuel,
+            bPrecedentSuivantMenuContextuel,
+            bPlaneteMenuContextuel,
+            bMenuPersonnalise1,
+            bMenuPersonnalise2,
+            strLibelleMenuContextuel1,
+            strLibelleMenuContextuel2,
+            strUrlMenuContextuel1,
+            strUrlMenuContextuel2,
             strTelecommande,
             bTelecommande,
             strTelecommandeFS,
@@ -1031,6 +1087,20 @@ function panovisu(iNumPano) {
             evenement.preventDefault();
         }
     });
+    $(document).on("click", ".btnVisiteAuto", function (evenement) {
+        evenement.preventDefault();
+        if (bAutoTour) {
+            bAutoTour = false;
+            bAutorotation = false;
+            arretAutoTour();
+        }
+        else {
+            bAutoTour = true;
+            bAutorotation = true;
+            demarreAutoTour();
+        }
+
+    });
 
     /**
      * 
@@ -1069,14 +1139,20 @@ function panovisu(iNumPano) {
         if (telecEnCours)
             timer = requestAnimFrame(zoomMoins);
     }
-
+    /**
+     * 
+     * @returns {undefined}
+     */
     function zoomPlus() {
         fov -= 1;
         zoom();
         if (telecEnCours)
             timer = requestAnimFrame(zoomPlus);
     }
-
+    /**
+     * 
+     * @returns {undefined}
+     */
     function accelere() {
         if (Math.abs(ddx) < Math.abs(4 * dx))
             ddx += dx / 5;
@@ -1088,7 +1164,10 @@ function panovisu(iNumPano) {
         if (telecEnCours)
             timer = requestAnimFrame(accelere);
     }
-
+    /**
+     * 
+     * @returns {undefined}
+     */
     function ralenti() {
         finX = false;
         finY = false;
@@ -1112,7 +1191,10 @@ function panovisu(iNumPano) {
 
     }
 
-
+    /**
+     * 
+     * @returns {undefined}
+     */
     function changeModeSouris() {
         iMode = 1 - iMode;
         if (iMode === 0) {
@@ -1145,24 +1227,34 @@ function panovisu(iNumPano) {
 
 
     }
-
+    /**
+     * 
+     * @returns {undefined}
+     */
     function toggleAutorotation() {
         if (strAutoRotationMarche === "oui")
         {
             strAutoRotationMarche = "non";
             bAutorotation = false;
+            bAutoTour = false;
             arreteAutorotation();
         }
         else
         {
             strAutoRotationMarche = "oui";
             bAutorotation = true;
-            dxAutorotation = 1;
+            dxAutorotation = 1 / vitesseAutorotation;
             ddxAutorotation = 0;
+            timerAutorotation = Date.now();
+            timerDebutRotation = timerAutorotation;
+            longitudeDebutRotation = 0;
             demarreAutoRotation();
         }
     }
-
+    /**
+     * 
+     * @returns {undefined}
+     */
     function afficheFenetreInfo() {
         if (bAfficheInfo)
         {
@@ -1232,7 +1324,10 @@ function panovisu(iNumPano) {
         }
 
     }
-
+    /**
+     * 
+     * @returns {undefined}
+     */
     function afficheFenetreAide() {
         if (bAfficheAide)
         {
@@ -1256,7 +1351,10 @@ function panovisu(iNumPano) {
 
         }
     }
-
+    /**
+     * 
+     * @returns {undefined}
+     */
     function toggleElements() {
         if (elementsVisibles) {
             if (strMarcheArretNavigation === "oui") {
@@ -1367,12 +1465,15 @@ function panovisu(iNumPano) {
         }
 
     }
-
+    /**
+     * 
+     * @returns {undefined}
+     */
     function afficheMasqueElements() {
         if (!elementsVisibles) {
             if (strMarcheArretNavigation === "oui") {
                 $("#barre-" + iNumPano).hide();
-                $("#telech-" + iNumPano).hide();
+                $("#telec-" + iNumPano).hide();
             }
             if (strMarcheArretBoussole === "oui")
                 $("#boussole-" + iNumPano).hide();
@@ -1416,7 +1517,7 @@ function panovisu(iNumPano) {
         else {
             if (strMarcheArretNavigation === "oui") {
                 $("#barre-" + iNumPano).show();
-                $("#telech-" + iNumPano).show();
+                $("#telec-" + iNumPano).show();
             }
             if (strMarcheArretBoussole === "oui")
                 $("#boussole-" + iNumPano).show();
@@ -1475,9 +1576,10 @@ function panovisu(iNumPano) {
         }
 
     }
-
-
-
+    /**
+     * 
+     * @returns {undefined}
+     */
     function planRentreGauche() {
         if (bPlanRentre) {
             $("#planTitre-" + iNumPano).css({
@@ -1495,6 +1597,10 @@ function panovisu(iNumPano) {
             });
         }
     }
+    /**
+     * 
+     * @returns {undefined}
+     */
     function planRentreDroite() {
         if (bPlanRentre) {
             $("#planTitre-" + iNumPano).css({
@@ -1512,7 +1618,10 @@ function panovisu(iNumPano) {
             });
         }
     }
-
+    /**
+     * 
+     * @returns {undefined}
+     */
     function carteRentreGauche() {
         if (bCarteRentre) {
             $("#carteTitre-" + iNumPano).css({
@@ -1530,6 +1639,10 @@ function panovisu(iNumPano) {
             });
         }
     }
+    /**
+     * 
+     * @returns {undefined}
+     */
     function carteRentreDroite() {
         if (bCarteRentre) {
             $("#carteTitre-" + iNumPano).css({
@@ -1547,9 +1660,10 @@ function panovisu(iNumPano) {
             });
         }
     }
-
-
-
+    /**
+     * 
+     * @returns {undefined}
+     */
     function vignettesRentre() {
         var largeurFenetre = vignettesTailleImage + 5;
         if (bVignettesRentre) {
@@ -1770,8 +1884,6 @@ function panovisu(iNumPano) {
         if (iNombreImageFond > 0) {
             positionImagesFond();
         }
-
-
     }
     /**
      * 
@@ -1785,7 +1897,10 @@ function panovisu(iNumPano) {
             timer = requestAnimFrame(deplaceMode2);
     }
 
-
+    /**
+     * 
+     * @returns {undefined}
+     */
     function afficheVignettesHorizontales() {
         typeVignettes = "horizontales";
         $("#hautVignettes-" + iNumPano).hide();
@@ -1870,7 +1985,10 @@ function panovisu(iNumPano) {
         $("#divVignettes-" + iNumPano).show();
         $("#titreVignettes-" + iNumPano).show();
     }
-
+    /**
+     * 
+     * @returns {undefined}
+     */
     function afficheVignettesVerticales() {
         typeVignettes = "verticales";
         $("#gaucheVignettes-" + iNumPano).hide();
@@ -2569,6 +2687,15 @@ function panovisu(iNumPano) {
      * @returns {undefined}
      */
     function init(fenetre) {
+        afficheInfoTitre();
+
+        if (bPetitePlaneteDemarrage || bAutoTour) {
+            if (bEltMasque === null) {
+                bEltMasque = elementsVisibles;
+            }
+            elementsVisibles = false;
+            afficheMasqueElements();
+        }
         if (iNombreImageFond > 0) {
             for (i = 0; i < iNombreImageFond; i++) {
                 $("<div>", {id: "imageFond-" + i + "-" + iNumPano, class: "imgFond"}).appendTo("#panovisu-" + iNumPano);
@@ -2731,7 +2858,6 @@ function panovisu(iNumPano) {
         $("#divSuivant-" + iNumPano).css("top", posit);
         $("#divPrecedent-" + iNumPano).css("top", posit);
         afficheInfo();
-        afficheInfoTitre();
         afficheAide();
         if (bVignettes) {
             if (strVignettesPosition === "bottom") {
@@ -2926,6 +3052,22 @@ function panovisu(iNumPano) {
             }
 
         }
+        if (bBtnAutoTour) {
+            $("#btnVisiteAuto-" + iNumPano).html("");
+            if (bAutoTour) {
+                $("<img>", {id: "imgBtnAutoTour-" + iNumPano, src: "panovisu/images/visiteAutoMatique/pauseAutoTour.png", width: tailleBtnAutoTour + "px"}).appendTo("#btnVisiteAuto-" + iNumPano);
+            } else {
+                $("<img>", {id: "imgBtnAutoTour-" + iNumPano, src: "panovisu/images/visiteAutoMatique/playAutoTour.png", width: tailleBtnAutoTour + "px"}).appendTo("#btnVisiteAuto-" + iNumPano);
+            }
+            $("#btnVisiteAuto-" + iNumPano).show();
+            switch (positBtnAutoTourX) {
+                case "left":
+                case "right":
+                    $("#btnVisiteAuto-" + iNumPano).css(positBtnAutoTourX, offsetBtnAutoTourX + "px");
+                    break;
+            }
+            $("#btnVisiteAuto-" + iNumPano).css(positBtnAutoTourY, offsetBtnAutoTourY + "px");
+        }
 
         vignettesRentre();
         afficheMasqueElements();
@@ -2934,56 +3076,119 @@ function panovisu(iNumPano) {
         comboMenuAffiche();
     }
 
+    function demarreAutoTour() {
+        if (bEltMasque === null) {
+            bEltMasque = elementsVisibles;
+        }
+        elementsVisibles = false;
+        afficheMasqueElements();
+
+        if (bAfficheInfo) {
+            requestTimeout(function () {
+                $("#infoPanovisu-" + iNumPano).fadeOut(500, function () {
+                    $("#infoPanovisu-" + iNumPano).css({display: "none"});
+                    bAfficheInfo = false;
+                });
+            }, 5000);
+        }
+        if (bBtnAutoTour) {
+            $("#btnVisiteAuto-" + iNumPano).html("");
+            $("<img>", {id: "imgBtnAutoTour-" + iNumPano,
+                src: "panovisu/images/visiteAutoMatique/pauseAutoTour.png",
+                alt: chainesTraduction[strLangage].arreteAutoTour,
+                title: chainesTraduction[strLangage].arreteAutoTour,
+                style: "cursor: pointer;width : " + tailleBtnAutoTour + "px"
+            }).appendTo("#btnVisiteAuto-" + iNumPano);
+        }
+
+        dxAutorotation = 1 / vitesseAutorotation;
+        ddxAutorotation = 0;
+        timerAutorotation = Date.now();
+        timerDebutRotation = timerAutorotation;
+        longitudeDebutRotation = 0;
+        demarreAutoRotation();
+    }
+
+    function arretAutoTour() {
+        elementsVisibles = bEltMasque;
+        afficheMasqueElements();
+        arreteAutorotation();
+        if (bBtnAutoTour) {
+            $("#btnVisiteAuto-" + iNumPano).html("");
+            $("<img>", {id: "imgBtnAutoTour-" + iNumPano,
+                src: "panovisu/images/visiteAutoMatique/playAutoTour.png",
+                alt: chainesTraduction[strLangage].demarreAutoTour,
+                title: chainesTraduction[strLangage].demarreAutoTour,
+                style: "cursor: pointer;width : " + tailleBtnAutoTour + "px"
+            }).appendTo("#btnVisiteAuto-" + iNumPano);
+        }
+
+    }
+
     function afficheMenuContextuel() {
         var arrItem = new Array();
-        for (i = 0; i < 5; i++) {
+        for (i = 0; i < 7; i++) {
             arrItem[i] = {};
         }
         $.contextMenu('destroy');
-        if (bAfficheMC) {
-            if (bPrecSuivMC) {
+        if (bAfficheMenuContextuel) {
+            if (bPrecedentSuivantMenuContextuel) {
                 arrItem[0] = {
                     "suiv": {name: chainesTraduction[strLangage].panoSuivant, disabled: function (key, opt) {
                             return bDisableSuivant;
                         }},
                     "prec": {name: chainesTraduction[strLangage].panoPrecedent, disabled: function (key, opt) {
                             return bDisablePrecedent;
-                        }}
+                        }},
+                    "sep1": "---------"
                 };
             }
-            if (bPlanetMC) {
+            if (bPlaneteMenuContextuel) {
                 arrItem[1] = {
                     "little": {name: chainesTraduction[strLangage].petitePlanete, disabled: function (key, opt) {
                             return bLittleDisabled;
                         }},
-                    "normal": {name: chainesTraduction[strLangage].vueNoramale, disabled: function (key, opt) {
+                    "normal": {name: chainesTraduction[strLangage].vueNormale, disabled: function (key, opt) {
                             return bNormalDisbled;
-                        }}
+                        }},
+                    "sep2": "---------"
                 };
             }
-            if (bPersMC1) {
-                arrItem[2] = {"sep1": "---------",
-                    "pers1": {name: strLibMC1}
+            if (bMenuPersonnalise1) {
+                arrItem[2] = {
+                    "pers1": {name: strLibelleMenuContextuel1}
                 };
-                if (bPersMC2) {
+                if (bMenuPersonnalise2) {
                     arrItem[3] = {
-                        "pers2": {name: strLibMC2}
+                        "pers2": {name: strLibelleMenuContextuel2}
                     };
                 }
+                arrItem[4] = {
+                    "sep3": "---------"
+                };
             }
+            arrItem[5] = {
+                "masqueTout": {name: function (key, opt) {
+                        if (masqueTout === "")
+                            masqueTout = chainesTraduction[strLangage].masqueElements;
+                        return masqueTout;
+                    }},
+                "visiteAuto": {name: function (key, opt) {
+                        if (bAutoTour) {
+                            strVisiteAuto = chainesTraduction[strLangage].arreteAutoTour;
+                        } else {
+                            strVisiteAuto = chainesTraduction[strLangage].demarreAutoTour;
+                        }
+                        return strVisiteAuto;
+                    }},
+                "sep4": "---------"
+            };
         }
-        arrItem[4] = {
-            "sep3": "---------",
-            "masqueTout": {name: function (key, opt) {
-                    if (masqueTout === "")
-                        masqueTout = "Masque les éléments";
-                    return masqueTout;
-                }},
-            "sep2": "---------",
+        arrItem[6] = {
             "lm360": {name: chainesTraduction[strLangage].panoVisuSite},
             "apropos": {name: chainesTraduction[strLangage].aPropos}
         };
-        items = $.extend(arrItem[0], arrItem[1], arrItem[2], arrItem[3], arrItem[4]);
+        items = $.extend(arrItem[0], arrItem[1], arrItem[2], arrItem[3], arrItem[4], arrItem[5], arrItem[6]);
         $.contextMenu({
             selector: "#panovisu-" + iNumPano,
             appendTo: "#container-" + iNumPano,
@@ -3004,18 +3209,31 @@ function panovisu(iNumPano) {
                                 window.open("http://panovisu.fr");
                                 break;
                             case "pers1":
-                                window.open(strUrlMC1);
+                                window.open(strUrlMenuContextuel1);
                                 break;
                             case "pers2":
-                                window.open(strUrlMC2);
+                                window.open(strUrlMenuContextuel2);
                                 break;
                             case "masqueTout":
                                 toggleElements();
                                 if (elementsVisibles) {
-                                    masqueTout = "Masque les éléments";
+                                    masqueTout = chainesTraduction[strLangage].masqueElements;
                                 }
                                 else {
-                                    masqueTout = "Affiche les éléments";
+                                    masqueTout = chainesTraduction[strLangage].afficheElements;
+                                }
+                                break;
+                            case "visiteAuto":
+                                if (bAutoTour) {
+                                    bAutoTour = false;
+                                    bAutorotation = false;
+                                    arretAutoTour();
+                                }
+                                else {
+                                    bAutoTour = true;
+                                    bAutorotation = true;
+
+                                    demarreAutoTour();
                                 }
                                 break;
                             case "suiv":
@@ -3088,6 +3306,7 @@ function panovisu(iNumPano) {
             }
         });
         $('.data-title').attr('data-menutitle', "PanoVisu " + version + " - " + programmeur + "(" + anneeProgramme + ")");
+
     }
 
 
@@ -3156,6 +3375,126 @@ function panovisu(iNumPano) {
             });
         }
     }
+
+    function reafficheLP(lat, sensLat, lon, sensLon, FOV, sensFOV) {
+        latitude += sensLat;
+        longitude += sensLon;
+        fov += sensFOV;
+        if (sensLat === 1 && latitude > lat) {
+            latitude = lat;
+        }
+        if (sensLat === -1 && latitude < lat) {
+            latitude = lat;
+        }
+        if (sensLon === 1 && longitude > lon) {
+            longitude = lon;
+        }
+        if (sensLon === -1 && longitude < lon) {
+            longitude = lon;
+        }
+        if (sensFOV === 1 && fov > FOV) {
+            fov = FOV;
+        }
+        if (sensFOV === -1 && fov < FOV) {
+            fov = FOV;
+        }
+        if (latitude !== lat || fov !== FOV || longitude !== lon) {
+            camera = new THREE.PerspectiveCamera(fov, pano.width() / pano.height(), 1, 1100);
+            camera.fov = fov;
+            camera.updateProjectionMatrix();
+            affiche();
+            requestTimeout(function () {
+                reafficheLP(lat, sensLat, lon, sensLon, FOV, sensFOV);
+                bUserInteracting = false;
+            }, 5);
+        }
+        else {
+            camera = new THREE.PerspectiveCamera(fov, pano.width() / pano.height(), 1, 1100);
+            camera.fov = fov;
+            camera.updateProjectionMatrix();
+            bLittlePlanetView = false;
+            fov = memFOV;
+            maxFOV = memMaxFOV;
+            longitude = memLongitude;
+            latitude = memLatitude;
+            elementsVisibles = bEltMasque;
+            afficheMasqueElements();
+            affiche();
+            afficheBarre(pano.width(), pano.height());
+            afficheInfoTitre();
+            $("#container-" + iNumPano).fadeIn(200);
+            if (strAutoRotationMarche === "oui")
+                bAutorotation = true;
+            dx = 1;
+            ddx = 0;
+            dxAutorotation = 1 / vitesseAutorotation;
+            ddxAutorotation = 0;
+            timerAutorotation = Date.now();
+            timerDebutRotation = timerAutorotation;
+            longitudeDebutRotation = 0;
+            if (bAutoTour) {
+                demarreAutoTour();
+            }
+            else {
+                demarreAutoRotation();
+            }
+
+        }
+    }
+
+    function gotoAfficheLP(lat, lon, champVisuel) {
+        if (lat > latitude) {
+            sensLat = 1;
+        }
+        else {
+            sensLat = -1;
+        }
+        if (lon > longitude) {
+            sensLon = 1;
+        }
+        else {
+            sensLon = -1;
+        }
+        if (champVisuel > fov) {
+            sensVisuel = 1;
+        }
+        else {
+            sensVisuel = -1;
+        }
+        requestTimeout(function () {
+            reafficheLP(lat, sensLat, lon, sensLon, champVisuel, sensVisuel);
+        }, 5);
+    }
+
+
+
+    function IntroPetitePlanete() {
+        afficheMenuContextuel();
+        memFOV = fov;
+        memMaxFOV = maxFOV;
+        memLatitude = latitude;
+        memLongitude = longitude;
+        maxFOV = 170;
+        bLittlePlanetView = true;
+        latitude = -90;
+        fov = 150;
+        camera = new THREE.PerspectiveCamera(fov, pano.width() / pano.height(), 1, 1100);
+        camera.fov = fov;
+        camera.updateProjectionMatrix();
+        affiche()
+        if (bAfficheInfo) {
+            requestTimeout(function () {
+                $("#infoPanovisu-" + iNumPano).fadeOut(500, function () {
+                    $("#infoPanovisu-" + iNumPano).css({display: "none"});
+                    bAfficheInfo = false;
+                });
+            }, 4000);
+        }
+
+        requestTimeout(function () {
+            gotoAfficheLP(memLatitude, memLongitude, memFOV);
+        }, 8000);
+    }
     /**
      * Initialisation du panoramique / équirectangulaire
      * 
@@ -3219,16 +3558,31 @@ function panovisu(iNumPano) {
                     positionHS();
                 }, 100);
                 changeTaille();
-                affiche();
-                afficheBarre(pano.width(), pano.height());
-                afficheInfoTitre();
-                afficheMenuContextuel();
-                $("#container-" + iNumPano).fadeIn(200);
-                if (strAutoRotationMarche === "oui")
-                    bAutorotation = true;
-                dx = 1;
-                ddx = 0;
-                demarreAutoRotation();
+                if (bPetitePlaneteDemarrage) {
+                    IntroPetitePlanete();
+                }
+                else {
+                    affiche();
+                    afficheBarre(pano.width(), pano.height());
+                    afficheInfoTitre();
+                    afficheMenuContextuel();
+                    $("#container-" + iNumPano).fadeIn(200);
+                    if (strAutoRotationMarche === "oui")
+                        bAutorotation = true;
+                    dx = 1;
+                    ddx = 0;
+                    dxAutorotation = 1 / vitesseAutorotation;
+                    ddxAutorotation = 0;
+                    timerAutorotation = Date.now();
+                    timerDebutRotation = timerAutorotation;
+                    longitudeDebutRotation = 0;
+                    if (bAutoTour) {
+                        demarreAutoTour();
+                    }
+                    else {
+                        demarreAutoRotation();
+                    }
+                }
             });
         }
         else {
@@ -3280,16 +3634,31 @@ function panovisu(iNumPano) {
                     positionHS();
                 }, 50);
                 changeTaille();
-                affiche();
-                afficheBarre(pano.width(), pano.height());
-                afficheInfoTitre();
-                afficheMenuContextuel();
-                $("#container-" + iNumPano).fadeIn(200);
-                if (strAutoRotationMarche === "oui")
-                    bAutorotation = true;
-                dx = 1;
-                ddx = 0;
-                demarreAutoRotation();
+                if (bPetitePlaneteDemarrage) {
+                    IntroPetitePlanete();
+                }
+                else {
+                    affiche();
+                    afficheBarre(pano.width(), pano.height());
+                    afficheInfoTitre();
+                    afficheMenuContextuel();
+                    $("#container-" + iNumPano).fadeIn(200);
+                    if (strAutoRotationMarche === "oui")
+                        bAutorotation = true;
+                    dx = 1;
+                    ddx = 0;
+                    dxAutorotation = 1 / vitesseAutorotation;
+                    ddxAutorotation = 0;
+                    timerAutorotation = Date.now();
+                    timerDebutRotation = timerAutorotation;
+                    longitudeDebutRotation = 0;
+                    if (bAutoTour) {
+                        demarreAutoTour();
+                    }
+                    else {
+                        demarreAutoRotation();
+                    }
+                }
             });
         }
     }
@@ -3479,19 +3848,35 @@ function panovisu(iNumPano) {
                 creeHotspot(i);
             }
             changeTaille();
-            affiche();
-            afficheBarre(pano.width(), pano.height());
-            afficheInfoTitre();
-            afficheMenuContextuel();
-            timers = setInterval(function () {
-                positionHS();
-            }, 50);
-            $("#container-" + iNumPano).fadeIn(200);
-            if (strAutoRotationMarche === "oui")
-                bAutorotation = true;
-            dx = 1;
-            ddx = 0;
-            demarreAutoRotation();
+            if (bPetitePlaneteDemarrage) {
+                IntroPetitePlanete();
+            }
+            else {
+
+                affiche();
+                afficheBarre(pano.width(), pano.height());
+                afficheInfoTitre();
+                afficheMenuContextuel();
+                timers = setInterval(function () {
+                    positionHS();
+                }, 50);
+                $("#container-" + iNumPano).fadeIn(200);
+                if (strAutoRotationMarche === "oui")
+                    bAutorotation = true;
+                dx = 1;
+                ddx = 0;
+                dxAutorotation = 1 / vitesseAutorotation;
+                ddxAutorotation = 0;
+                timerAutorotation = Date.now();
+                timerDebutRotation = timerAutorotation;
+                longitudeDebutRotation = 0;
+                if (bAutoTour) {
+                    demarreAutoTour();
+                }
+                else {
+                    demarreAutoRotation();
+                }
+            }
         }, 1000);
     }
 
@@ -3746,30 +4131,60 @@ function panovisu(iNumPano) {
      * @returns {undefined}
      */
     function demarreAutoRotation() {
-        if (Math.abs(ddxAutorotation) < Math.abs(dxAutorotation))
-            ddxAutorotation += dxAutorotation / 20;
+        timer2 = Date.now();
+        bFinPano = false;
+        dureeTotale = (timer2 - timerDebutRotation) / 1000.0;
         if (!bUserInteracting) {
-            longitude += ddxAutorotation;
+            temps = (timer2 - timerAutorotation) / 1000.0;
+            timerAutorotation = timer2;
+            if (Math.abs(ddxAutorotation) < Math.abs(dxAutorotation))
+                ddxAutorotation += dxAutorotation / 60.0;
+            longitude += 360.0 * ddxAutorotation * temps;
+            latitude = Math.max(-85, Math.min(85, latitude));
+            longitudeDebutRotation += 360.0 * ddxAutorotation * temps;
+            affiche();
         }
-        latitude = Math.max(-85, Math.min(85, latitude));
-        affiche();
-        if (bAutorotation)
+        if (bAutoTour) {
+            console.log("type : " + strAutoTourType + " long : " + longitudeDebutRotation);
+            switch (strAutoTourType) {
+                case "tours" :
+                    console.log("limite tours : " + longitudeDebutRotation + "  " + (autoTourLimite * 360));
+                    if (longitudeDebutRotation > autoTourLimite * 360)
+                        bFinPano = true;
+                    break;
+                case "secondes":
+                    console.log("limite secondes : " + dureeTotale + "  " + autoTourLimite);
+                    if (dureeTotale > autoTourLimite)
+                        bFinPano = true;
+                    break;
+            }
+            if (bFinPano) {
+                timerDebutRotation = Date.now();
+                longitudeDebutRotation = 0;
+                rechargePano(XMLsuivant);
+            }
+        }
+        if (bAutorotation && !bFinPano)
             requestAnimFrame(demarreAutoRotation);
     }
 
     function arreteAutorotation() {
+        finX = false;
         if (!bUserInteracting) {
-            finX = false;
+            timer2 = Date.now();
+            temps = (timer2 - timerAutorotation) / 1000;
+            timerAutorotation = timer2;
             if (Math.round(Math.abs(ddxAutorotation) * 10) / 10 > 0)
-                ddxAutorotation -= dxAutorotation / 20;
+                ddxAutorotation -= dxAutorotation / 60;
             else
                 finX = true;
-            longitude += ddxAutorotation;
+            longitude += 360 * ddxAutorotation * temps;
             affiche();
-            if (!finX) {
-                requestAnimFrame(arreteAutorotation);
-            }
         }
+        if (!finX) {
+            requestAnimFrame(arreteAutorotation);
+        }
+
 
     }
     /**
@@ -3914,6 +4329,8 @@ function panovisu(iNumPano) {
         bMemPlanRentre = bPlanRentre;
         bMemCarteRentre = bCarteRentre;
         bMemVignettesRentre = bVignettesRentre;
+        bMemAutorotation = bAutorotation;
+        bMemAutoTour = bAutoTour;
         $.get(xmlFile,
                 function (d) {
                     bLittleDisabled = false;
@@ -4026,6 +4443,22 @@ function panovisu(iNumPano) {
                     bComboMenuAffiche = false;
                     strComboMenuPositionX = "top";
                     strComboMenuPositionY = "right";
+                    vitesseAutorotation = 30;
+                    bAutorotation = false;
+                    bAutoTour = false;
+                    bBtnAutoTour = false;
+                    positBtnAutoTourX = "right";
+                    positBtnAutoTourY = "top";
+                    offsetBtnAutoTourX = 10;
+                    offsetBtnAutoTourY = 10;
+                    tailleBtnAutoTour = 32;
+
+                    strAutoTourType = "tours";
+                    autoTourLimite = 1;
+                    strARDemarrage = "non";
+                    strATDemarrage = "non";
+                    strPetitePlanete = "non";
+                    strBtnAT = "non";
                     comboMenuDX = 10;
                     comboMenuDY = 60;
                     arrPointsPlan = new Array();
@@ -4063,15 +4496,15 @@ function panovisu(iNumPano) {
                     strNomLayerCarte = "OpenStreetMap";
                     strBingAPIKey = "";
                     arrPointsCarte = new Array;
-                    bAfficheMC = true;
-                    bPrecSuivMC = true;
-                    bPlanetMC = true;
-                    bPersMC1 = false;
-                    bPersMC2 = false;
-                    strLibMC1 = "";
-                    strLibMC2 = "";
-                    strUrlMC1 = "";
-                    strUrlMC2 = "";
+                    bAfficheMenuContextuel = true;
+                    bPrecedentSuivantMenuContextuel = true;
+                    bPlaneteMenuContextuel = true;
+                    bMenuPersonnalise1 = false;
+                    bMenuPersonnalise2 = false;
+                    strLibelleMenuContextuel1 = "";
+                    strLibelleMenuContextuel2 = "";
+                    strUrlMenuContextuel1 = "";
+                    strUrlMenuContextuel2 = "";
                     strTelecommande = "non";
                     bTelecommande = false;
                     strTelecommandeFS = "oui";
@@ -4127,11 +4560,34 @@ function panovisu(iNumPano) {
                     console.log("strRepliePlan : " + strRepliePlan + " bPlanRentre " + bPlanRentre);
                     strReplieCarte = XMLPano.attr('replieCarte') || "";
                     bCarteRentre = (strReplieCarte === "oui" || bCarteRentre);
+                    strARDemarrage = XMLPano.attr('autorotation') || "non";
+                    bAutorotation = (strARDemarrage === "oui");
+                    vitesseAutorotation = parseFloat(XMLPano.attr('vitesseAR')) || vitesseAutorotation;
+                    strATDemarrage = XMLPano.attr('autotour') || "non";
+                    bAutoTour = (strATDemarrage === "oui");
+                    strBtnAT = XMLPano.attr('atBouton') || "non";
+                    bBtnAutoTour = (strBtnAT === "oui");
+                    tailleBtnAutoTour = parseFloat(XMLPano.attr('atBoutonTaille')) || tailleBtnAutoTour;
+                    positBtnAutoTourX = XMLPano.attr('atBoutonPositionX') || positBtnAutoTourX;
+                    positBtnAutoTourY = XMLPano.attr('atBoutonPositionY') || positBtnAutoTourY;
+                    offsetBtnAutoTourX = parseFloat(XMLPano.attr('atBoutonOffsetX')) || offsetBtnAutoTourX;
+                    offsetBtnAutoTourY = parseFloat(XMLPano.attr('atBoutonOffsetY')) || offsetBtnAutoTourY;
+                    autoTourLimite = parseFloat(XMLPano.attr('limiteAT')) || autoTourLimite;
+                    strAutoTourType = XMLPano.attr('typeAT') || strAutoTourType;
+                    if (bAutoTour)
+                        bAutorotation = true;
+                    console.log("bAutoTour : " + bAutoTour + " type " + strAutoTourType + "limite " + autoTourLimite);
                     console.log("strReplieCarte : " + strReplieCarte + " bCarteRentre " + bCarteRentre);
+                    strPetitePlanete = XMLPano.attr('petitePlanete') || "non";
+                    bPetitePlaneteDemarrage = (strPetitePlanete === "oui");
+
                     if (bDejaCharge) {
+                        bPetitePlaneteDemarrage = false;
                         bVignettesRentre = bMemVignettesRentre;
                         bCarteRentre = bMemCarteRentre;
                         bPlanRentre = bMemPlanRentre;
+                        bAutoTour = bMemAutoTour;
+                        bAutorotation = bMemAutorotation;
                     }
                     if (bReloaded) {
                         strAffInfo = false;
@@ -4196,20 +4652,20 @@ function panovisu(iNumPano) {
                      * 
                      */
                     var XMLMenuContextuel = $(d).find('menuContextuel');
-                    bMCAffiche = XMLMenuContextuel.attr('affiche') || "oui";
-                    bAfficheMC = (bMCAffiche === "oui");
-                    bPrecSuivMC = XMLMenuContextuel.attr('precSuiv') || "oui";
-                    bPrecSuivMC = (bPrecSuivMC === "oui");
-                    bPlaneteMC = XMLMenuContextuel.attr('planete') || "oui";
-                    bPlanetMC = (bPlaneteMC === "oui");
-                    bPersMC1 = XMLMenuContextuel.attr('pers1') || "non";
-                    bPersMC1 = (bPersMC1 === "oui");
-                    bPersMC2 = XMLMenuContextuel.attr('pers2') || "non";
-                    bPersMC2 = (bPersMC2 === "oui");
-                    strLibMC1 = XMLMenuContextuel.attr('lib1') || strLibMC1;
-                    strLibMC2 = XMLMenuContextuel.attr('lib2') || strLibMC2;
-                    strUrlMC1 = XMLMenuContextuel.attr('url1') || strUrlMC1;
-                    strUrlMC2 = XMLMenuContextuel.attr('url2') || strUrlMC2;
+                    bMCAffiche = XMLMenuContextuel.attr('affiche') || "non";
+                    bAfficheMenuContextuel = (bMCAffiche === "oui");
+                    strPrecSuivMC = XMLMenuContextuel.attr('precSuiv') || "oui";
+                    bPrecedentSuivantMenuContextuel = (strPrecSuivMC === "oui");
+                    strPlaneteMC = XMLMenuContextuel.attr('planete') || "oui";
+                    bPlaneteMenuContextuel = (strPlaneteMC === "oui");
+                    strPersMC1 = XMLMenuContextuel.attr('pers1') || "non";
+                    bMenuPersonnalise1 = (strPersMC1 === "oui");
+                    strPersMC2 = XMLMenuContextuel.attr('pers2') || "non";
+                    bMenuPersonnalise2 = (strPersMC2 === "oui");
+                    strLibelleMenuContextuel1 = XMLMenuContextuel.attr('lib1') || strLibelleMenuContextuel1;
+                    strLibelleMenuContextuel2 = XMLMenuContextuel.attr('lib2') || strLibelleMenuContextuel2;
+                    strUrlMenuContextuel1 = XMLMenuContextuel.attr('url1') || strUrlMenuContextuel1;
+                    strUrlMenuContextuel2 = XMLMenuContextuel.attr('url2') || strUrlMenuContextuel2;
                     /*
                      * Reseaux Sociaux
                      * 
@@ -4530,7 +4986,6 @@ function panovisu(iNumPano) {
                         strTitreTailleUnite = "%";
                         iTitreTailleFenetre = parseInt(strTitreTaille) / 100.0;
                     }
-
                     init(fenPanoramique);
                     creeImagesboutons();
                     /**
@@ -4596,6 +5051,7 @@ function panovisu(iNumPano) {
         $("<div>", {id: "divSuivant-" + iNumPano, class: "suivant", title: chainesTraduction[strLangage].panoSuivant}).appendTo("#pano1-" + iNumPano);
         $("#divPrecedent-" + iNumPano).hide();
         $("#divSuivant-" + iNumPano).hide();
+        $("<div>", {id: "btnVisiteAuto-" + iNumPano, class: "btnVisiteAuto"}).appendTo("#" + fenetrePanoramique);
         bPlanRentre = false;
         bCarteRentre = false;
         bVignettesRentre = true;
@@ -5001,7 +5457,7 @@ function panovisu(iNumPano) {
         clearInterval(timers);
         longitude = 0;
         latitude = 0;
-        fov = 75;
+        fov = 50;
         bReloaded = true;
         enleveHS();
         arrHotSpot = new Array();
@@ -5404,16 +5860,27 @@ function panovisu(iNumPano) {
     function getRayonRadar() {
         return layerRadar.rayon;
     }
-
+    /**
+     * 
+     * @param {type} rayonRadar
+     * @returns {layerRadar.rayonrayonRadar}
+     */
     function setRayonRadar(rayonRadar) {
         return layerRadar.rayon = rayonRadar;
     }
-
+    /**
+     * 
+     * @returns {undefined}
+     */
     function retireRadar() {
         layerRadar.destroyFeatures();
         bRadar = false;
     }
-
+    /**
+     * 
+     * @param {type} strLayer
+     * @returns {undefined}
+     */
     function changeLayer(strLayer) {
         for (var i = 0; i < map.getNumLayers(); i++) {
             if (map.layers[i].name === strLayer) {
@@ -5422,7 +5889,11 @@ function panovisu(iNumPano) {
         }
     }
     var resolutions = OpenLayers.Layer.Bing.prototype.serverResolutions.slice(10, 20);
-
+    /**
+     * 
+     * @param {type} bingApiKey
+     * @returns {undefined}
+     */
     function setBingApiKey(bingApiKey) {
         if (bingMap === null) {
             bingMap = new OpenLayers.Layer.Bing({
@@ -5460,7 +5931,10 @@ function panovisu(iNumPano) {
     }
 
 
-
+    /**
+     * 
+     * @returns {undefined}
+     */
     function affichageRadar() {
         layerRadar.destroyFeatures();
         var rayon = radar.pcRayon / 100.0 * Math.min(map.getExtent().right - map.getExtent().left, map.getExtent().top - map.getExtent().bottom) / 2.0;
@@ -5614,13 +6088,6 @@ function panovisu(iNumPano) {
             }
         });
     }
-    /*
-     *  Fonctions de gestion Openlayers
-     */
-
-
-
-
 }
 
 /*

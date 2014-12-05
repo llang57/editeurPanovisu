@@ -5,13 +5,12 @@
  */
 package editeurpanovisu;
 
-import static editeurpanovisu.EditeurPanovisu.strStyleCSS;
+import javafx.beans.property.BooleanProperty;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 
 /**
  *
@@ -21,6 +20,9 @@ public class PaneOutil {
 
     private AnchorPane apOutil;
     private AnchorPane apPaneOutil;
+    private Label lblPanelTitre;
+    private boolean bValide;
+    private boolean bInvariant=false;
 
     public static void deplieReplie(AnchorPane apTitre, ImageView ivBtnPlusTitre) {
         if (apTitre.isVisible()) {
@@ -42,14 +44,28 @@ public class PaneOutil {
         affiche(strTitre, apContenu, largeur, bOuvert);
     }
 
+    PaneOutil(boolean bInvariant, String strTitre, AnchorPane apContenu, double largeur) {
+        this.bInvariant = bInvariant;
+        affiche(strTitre, apContenu, largeur, false);
+    }
+
+    PaneOutil(boolean bInvariant, String strTitre, AnchorPane apContenu, double largeur, boolean bOuvert) {
+        this.bInvariant = bInvariant;
+        affiche(strTitre, apContenu, largeur, bOuvert);
+    }
+
     private void affiche(String strTitre, AnchorPane apContenu, double largeur, boolean bOuvert) {
         apOutil = apContenu;
         apOutil.setLayoutX(10);
         apOutil.setLayoutY(40);
         apPaneOutil = new AnchorPane();
-        Label lblPanelTitre = new Label("    "+strTitre);
+        lblPanelTitre = new Label("    " + strTitre);
         lblPanelTitre.setPrefWidth(largeur);
-        lblPanelTitre.getStyleClass().add("titreOutil");
+        if (isbInvariant()) {
+            lblPanelTitre.getStyleClass().add("titreOutilBleu");
+        } else {
+            lblPanelTitre.getStyleClass().add("titreOutil");
+        }
         lblPanelTitre.setPadding(new Insets(5));
         lblPanelTitre.setLayoutX(10);
         lblPanelTitre.setLayoutY(10);
@@ -96,6 +112,44 @@ public class PaneOutil {
      */
     public AnchorPane getApPaneOutil() {
         return apPaneOutil;
+    }
+
+    /**
+     * @return the bValide
+     */
+    public boolean getbValide() {
+        return bValide;
+    }
+
+    /**
+     * @param bValide the bValide to set
+     */
+    public void setbValide(boolean bValide) {
+        this.bValide = bValide;
+        if (!bValide) {
+            lblPanelTitre.getStyleClass().remove("titreOutil");
+            lblPanelTitre.getStyleClass().remove("titreOutilRouge");
+            lblPanelTitre.getStyleClass().add("titreOutil");
+
+        } else {
+            lblPanelTitre.getStyleClass().remove("titreOutil");
+            lblPanelTitre.getStyleClass().remove("titreOutilRouge");
+            lblPanelTitre.getStyleClass().add("titreOutilRouge");
+        }
+    }
+
+    /**
+     * @return the bInvariant
+     */
+    public boolean isbInvariant() {
+        return bInvariant;
+    }
+
+    /**
+     * @param bInvariant the bInvariant to set
+     */
+    public void setbInvariant(boolean bInvariant) {
+        this.bInvariant = bInvariant;
     }
 
 }

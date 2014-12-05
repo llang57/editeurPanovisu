@@ -1,9 +1,12 @@
-
 chainesTraduction['de_DE'] = new traduction();
 chainesTraduction['de_DE'].panoPrecedent = "nächsten Panoramas";
 chainesTraduction['de_DE'].panoSuivant = "vorherigen Panoramas";
 chainesTraduction['de_DE'].petitePlanete = "kleinen Planeten Sicht";
-chainesTraduction['de_DE'].vueNoramale = "Normal Sicht";
+chainesTraduction['de_DE'].masqueElements = "Hide elements";
+chainesTraduction['de_DE'].afficheElements = "Show elements";
+chainesTraduction['de_DE'].demarreAutoTour = "Start automatic tour";
+chainesTraduction['de_DE'].arreteAutoTour = "Stop automatic tour";
+chainesTraduction['de_DE'].vueNormale = "Normal Sicht";
 chainesTraduction['de_DE'].aPropos = "übrigens panoVisu ...";
 chainesTraduction['de_DE'].afficheMasque = "anzeigen/maskieren Elemente";
 chainesTraduction['de_DE'].vignettes = "Thumbnails";
@@ -18,3 +21,6 @@ chainesTraduction['de_DE'].pleinEcran = "ganzen Bildschirm (Ein/Aus)";
 chainesTraduction['de_DE'].autorotation = "Autorotationen (Ein/Aus)";
 chainesTraduction['de_DE'].souris = "change le mode de déplacement de la souris";
 chainesTraduction['de_DE'].plan = "Besuch Plan";
+chainesTraduction['de_DE'].carte = "Besuch Karte";
+chainesTraduction['de_DE'].panoVisuSite = "panoVisu website";
+chainesTraduction['de_DE'].clicFenetre = "click to close the window";

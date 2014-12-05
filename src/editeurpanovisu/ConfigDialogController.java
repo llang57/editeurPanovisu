@@ -184,11 +184,6 @@ public class ConfigDialogController {
             contenuFichier += "repert=" + tfRepert.getText() + "\n";
             contenuFichier += "bingAPIKey=" + tfBingAPIKey.getText() + "\n";
             contenuFichier += "style=" + tgStyle.getSelectedToggle().getUserData().toString() + "\n";
-            EditeurPanovisu.setStrBingAPIKey(tfBingAPIKey.getText());
-            EditeurPanovisu.navigateurOpenLayers.setBingApiKey(tfBingAPIKey.getText());
-            EditeurPanovisu.navigateurOpenLayers.valideBingApiKey(tfBingAPIKey.getText());
-            EditeurPanovisu.getGestionnaireInterface().navigateurCarteOL.setBingApiKey(tfBingAPIKey.getText());
-            EditeurPanovisu.getGestionnaireInterface().navigateurCarteOL.valideBingApiKey(tfBingAPIKey.getText());
             File fichConfig = new File(EditeurPanovisu.fileRepertConfig.getAbsolutePath() + File.separator + "panovisu.cfg");
             fichConfig.setWritable(true);
             FileWriter fwFichierConfig = null;
@@ -209,6 +204,11 @@ public class ConfigDialogController {
                 Logger.getLogger(ConfigDialogController.class.getName()).log(Level.SEVERE, null, ex);
             }
             stConfigDialog.hide();
+            EditeurPanovisu.setStrBingAPIKey(tfBingAPIKey.getText());
+            EditeurPanovisu.navigateurOpenLayers.setBingApiKey(tfBingAPIKey.getText());
+            EditeurPanovisu.navigateurOpenLayers.valideBingApiKey(tfBingAPIKey.getText());
+            EditeurPanovisu.getGestionnaireInterface().navigateurCarteOL.setBingApiKey(tfBingAPIKey.getText());
+            EditeurPanovisu.getGestionnaireInterface().navigateurCarteOL.valideBingApiKey(tfBingAPIKey.getText());
         });
     }
 

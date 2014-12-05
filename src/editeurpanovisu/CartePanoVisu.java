@@ -14,7 +14,7 @@ public class CartePanoVisu {
     private CoordonneesGeographiques centreCarte;
     private int facteurZoom;
     private int iNombreMarqueur;
-    private MarqueurGeo[] marqueurs = new MarqueurGeo[100];
+    private MarqueurGeolocalisation[] marqueurs = new MarqueurGeolocalisation[100];
     private String strTypeCarte = "";
 
     /**
@@ -35,7 +35,7 @@ public class CartePanoVisu {
      * @param marqueurs
      * @param facteurZoom
      */
-    public CartePanoVisu(int iNombreMarqueur, CoordonneesGeographiques coordonneesCentre, String strTypeCarte, MarqueurGeo[] marqueurs, int facteurZoom) {
+    public CartePanoVisu(int iNombreMarqueur, CoordonneesGeographiques coordonneesCentre, String strTypeCarte, MarqueurGeolocalisation[] marqueurs, int facteurZoom) {
         this.strTypeCarte = strTypeCarte;
         this.iNombreMarqueur = iNombreMarqueur;
         this.facteurZoom = facteurZoom;
@@ -50,7 +50,7 @@ public class CartePanoVisu {
      * @param strHTML
      */
     public void ajouteMarqueur(CoordonneesGeographiques coordonnees, String strXML, String strHTML) {
-        getMarqueurs()[getiNombreMarqueur()] = new MarqueurGeo(coordonnees, strHTML, strXML);
+        getMarqueurs()[getiNombreMarqueur()] = new MarqueurGeolocalisation(coordonnees, strHTML, strXML);
         setiNombreMarqueur(getiNombreMarqueur() + 1);
     }
 
@@ -99,14 +99,14 @@ public class CartePanoVisu {
     /**
      * @return the marqueurs
      */
-    public MarqueurGeo[] getMarqueurs() {
+    public MarqueurGeolocalisation[] getMarqueurs() {
         return marqueurs;
     }
 
     /**
      * @param marqueurs the marqueurs to set
      */
-    public void setMarqueurs(MarqueurGeo[] marqueurs) {
+    public void setMarqueurs(MarqueurGeolocalisation[] marqueurs) {
         this.marqueurs = marqueurs;
     }
 
@@ -115,7 +115,7 @@ public class CartePanoVisu {
      * @param i
      * @param marqueurs
      */
-    public void setMarqueursI(int i, MarqueurGeo marqueurs) {
+    public void setMarqueursI(int i, MarqueurGeolocalisation marqueurs) {
         this.marqueurs[i] = marqueurs;
     }
 
