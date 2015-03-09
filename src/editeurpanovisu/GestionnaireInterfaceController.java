@@ -28,6 +28,7 @@ import static editeurpanovisu.EditeurPanovisu.isbAutoTourDemarre;
 import static editeurpanovisu.EditeurPanovisu.mbarPrincipal;
 import static editeurpanovisu.EditeurPanovisu.setbDejaSauve;
 import static editeurpanovisu.EditeurPanovisu.setiNombrePanoramiquesFichier;
+import static editeurpanovisu.EditeurPanovisu.isbInternet;
 import static editeurpanovisu.EditeurPanovisu.strNumVersion;
 import static editeurpanovisu.EditeurPanovisu.tpEnvironnement;
 import java.io.BufferedReader;
@@ -3572,7 +3573,9 @@ public class GestionnaireInterfaceController {
         slTailleRadarCarte.setValue(getTailleRadarCarte());
         cpCouleurFondRadarCarte.setValue(getCouleurFondRadarCarte());
         cpCouleurLigneRadarCarte.setValue(getCouleurLigneRadarCarte());
-        navigateurCarteOL.changeCarte(getStrNomLayers());
+        if (isbInternet()) {
+            navigateurCarteOL.changeCarte(getStrNomLayers());
+        }
         cbReplieDemarrageCarte.setSelected(isbReplieDemarrageCarte());
         cbAfficheMenuContextuel.setSelected(isbAfficheMenuContextuel());
         cbAffichePrecSuivMC.setSelected(isbAffichePrecSuivMC());
@@ -3633,30 +3636,32 @@ public class GestionnaireInterfaceController {
         afficheVignettes();
         afficheComboMenu();
         afficheBoutonVisiteAuto();
-        if (navigateurCarteOL.isbDebut()) {
-            navigateurCarteOL.retireMarqueurs();
-            for (int ii = 0; ii < getiNombrePanoramiques(); ii++) {
-                CoordonneesGeographiques coord = getPanoramiquesProjet()[ii].getMarqueurGeolocatisation();
-                if (coord != null) {
-                    String strFichierPano = getPanoramiquesProjet()[ii]
-                            .getStrNomFichier().substring(getPanoramiquesProjet()[ii].getStrNomFichier()
-                                    .lastIndexOf(File.separator) + 1, getPanoramiquesProjet()[ii]
-                                    .getStrNomFichier().length()).split("\\.")[0];
-                    String strHTML = "<span style='font-family : Verdana,Arial,sans-serif;font-weight:bold;font-size : 12px;'>"
-                            + getPanoramiquesProjet()[ii].getStrTitrePanoramique()
-                            + "</span><br/>"
-                            + "<span style='font-family : Verdana,Arial,sans-serif;bold;font-size : 10px;'>"
-                            + strFichierPano
-                            + "</span>";
-                    strHTML = strHTML.replace("\\", "/");
-                    navigateurCarteOL.ajouteMarqueur(ii, coord, strHTML);
-                    navigateurCarteOL.allerCoordonnees(coord, iFacteurZoomCarte);
+        if (isbInternet()) {
+            if (navigateurCarteOL.isbDebut()) {
+                navigateurCarteOL.retireMarqueurs();
+                for (int ii = 0; ii < getiNombrePanoramiques(); ii++) {
+                    CoordonneesGeographiques coord = getPanoramiquesProjet()[ii].getMarqueurGeolocatisation();
+                    if (coord != null) {
+                        String strFichierPano = getPanoramiquesProjet()[ii]
+                                .getStrNomFichier().substring(getPanoramiquesProjet()[ii].getStrNomFichier()
+                                        .lastIndexOf(File.separator) + 1, getPanoramiquesProjet()[ii]
+                                        .getStrNomFichier().length()).split("\\.")[0];
+                        String strHTML = "<span style='font-family : Verdana,Arial,sans-serif;font-weight:bold;font-size : 12px;'>"
+                                + getPanoramiquesProjet()[ii].getStrTitrePanoramique()
+                                + "</span><br/>"
+                                + "<span style='font-family : Verdana,Arial,sans-serif;bold;font-size : 10px;'>"
+                                + strFichierPano
+                                + "</span>";
+                        strHTML = strHTML.replace("\\", "/");
+                        navigateurCarteOL.ajouteMarqueur(ii, coord, strHTML);
+                        navigateurCarteOL.allerCoordonnees(coord, iFacteurZoomCarte);
+                    }
                 }
+                if (getCoordCentreCarte() != null) {
+                    navigateurCarteOL.allerCoordonnees(getCoordCentreCarte(), iFacteurZoomCarte);
+                }
+                afficheCarte();
             }
-            if (getCoordCentreCarte() != null) {
-                navigateurCarteOL.allerCoordonnees(getCoordCentreCarte(), iFacteurZoomCarte);
-            }
-            afficheCarte();
         }
 
     }
@@ -6222,6 +6227,9 @@ public class GestionnaireInterfaceController {
          *     Ajouts des pannels dans la barre d'outils
          * ******************************************************
          */
+        if (!isbInternet()){
+            apCARTE.setDisable(true);
+        }
         vbOutils.getChildren().addAll(apTHEME,
                 apHS,
                 apDIA,
@@ -7694,247 +7702,292 @@ public class GestionnaireInterfaceController {
          Listeners Carte
          */
         cbAfficheCarte.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (getiNombrePanoramiques() != 0) {
-                setbDejaSauve(false);
-                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
-            }
-            if (new_val != null) {
-                if ((boolean) new_val) {
-                    cbAffichePlan.setSelected(false);
+            if (isbInternet()) {
+                if (getiNombrePanoramiques() != 0) {
+                    setbDejaSauve(false);
+                    getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+                }
+                if (new_val != null) {
+                    if ((boolean) new_val) {
+                        cbAffichePlan.setSelected(false);
 
-                    navigateurCarteOL.retireMarqueurs();
-                    for (int ii = 0; ii < getiNombrePanoramiques(); ii++) {
-                        CoordonneesGeographiques coord = getPanoramiquesProjet()[ii].getMarqueurGeolocatisation();
-                        if (coord != null) {
-                            String strFichierPano = getPanoramiquesProjet()[ii]
-                                    .getStrNomFichier().substring(getPanoramiquesProjet()[ii].getStrNomFichier()
-                                            .lastIndexOf(File.separator) + 1, getPanoramiquesProjet()[ii]
-                                            .getStrNomFichier().length()).split("\\.")[0];
-                            String strHTML = "<span style='font-family : Verdana,Arial,sans-serif;font-weight:bold;font-size : 12px;'>"
-                                    + getPanoramiquesProjet()[ii].getStrTitrePanoramique()
-                                    + "</span><br/>"
-                                    + "<span style='font-family : Verdana,Arial,sans-serif;bold;font-size : 10px;'>"
-                                    + strFichierPano
-                                    + "</span>";
-                            strHTML = strHTML.replace("\\", "/");
-                            navigateurCarteOL.ajouteMarqueur(ii, coord, strHTML);
-                            navigateurCarteOL.allerCoordonnees(coord, iFacteurZoomCarte);
+                        navigateurCarteOL.retireMarqueurs();
+                        for (int ii = 0; ii < getiNombrePanoramiques(); ii++) {
+                            CoordonneesGeographiques coord = getPanoramiquesProjet()[ii].getMarqueurGeolocatisation();
+                            if (coord != null) {
+                                String strFichierPano = getPanoramiquesProjet()[ii]
+                                        .getStrNomFichier().substring(getPanoramiquesProjet()[ii].getStrNomFichier()
+                                                .lastIndexOf(File.separator) + 1, getPanoramiquesProjet()[ii]
+                                                .getStrNomFichier().length()).split("\\.")[0];
+                                String strHTML = "<span style='font-family : Verdana,Arial,sans-serif;font-weight:bold;font-size : 12px;'>"
+                                        + getPanoramiquesProjet()[ii].getStrTitrePanoramique()
+                                        + "</span><br/>"
+                                        + "<span style='font-family : Verdana,Arial,sans-serif;bold;font-size : 10px;'>"
+                                        + strFichierPano
+                                        + "</span>";
+                                strHTML = strHTML.replace("\\", "/");
+                                navigateurCarteOL.ajouteMarqueur(ii, coord, strHTML);
+                                navigateurCarteOL.allerCoordonnees(coord, iFacteurZoomCarte);
+                            }
+                        }
+                        if (getCoordCentreCarte() != null) {
+                            navigateurCarteOL.allerCoordonnees(getCoordCentreCarte(), iFacteurZoomCarte);
                         }
                     }
-                    if (getCoordCentreCarte() != null) {
-                        navigateurCarteOL.allerCoordonnees(getCoordCentreCarte(), iFacteurZoomCarte);
-                    }
+                    setbAfficheCarte(new_val);
+                    poCarte.setbValide(isbAfficheCarte());
+                    afficheCarte();
                 }
-                setbAfficheCarte(new_val);
-                poCarte.setbValide(isbAfficheCarte());
-                afficheCarte();
             }
         });
+
         cbAfficheRadarCarte.selectedProperty().addListener((ov, old_val, new_val) -> {
-            if (getiNombrePanoramiques() != 0) {
-                setbDejaSauve(false);
-                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
-            }
-            if (new_val != null) {
-                if (!new_val) {
-                    navigateurCarteOL.retireRadar();
+            if (isbInternet()) {
+                if (getiNombrePanoramiques() != 0) {
+                    setbDejaSauve(false);
+                    getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
                 }
-                setbAfficheRadarCarte((boolean) new_val);
-                afficheCarte();
+                if (new_val != null) {
+                    if (!new_val) {
+                        navigateurCarteOL.retireRadar();
+                    }
+                    setbAfficheRadarCarte((boolean) new_val);
+                    afficheCarte();
+                }
             }
         });
 
         slZoomCarte.valueProperty().addListener((observableValue, oldValue, newValue) -> {
-            if (getiNombrePanoramiques() != 0) {
-                setbDejaSauve(false);
-                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
-            }
-            if (newValue != null) {
-                iFacteurZoomCarte = (int) Math.round((double) newValue);
-                navigateurCarteOL.choixZoom(iFacteurZoomCarte);
+            if (isbInternet()) {
+                if (getiNombrePanoramiques() != 0) {
+                    setbDejaSauve(false);
+                    getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+                }
+                if (newValue != null) {
+                    iFacteurZoomCarte = (int) Math.round((double) newValue);
+                    navigateurCarteOL.choixZoom(iFacteurZoomCarte);
+                }
             }
         });
         btnChoixCentreCarte.setOnAction((e) -> {
-            setCoordCentreCarte(navigateurCarteOL.recupereCoordonnees());
+            if (isbInternet()) {
+                setCoordCentreCarte(navigateurCarteOL.recupereCoordonnees());
+            }
         });
         btnRecentreCarte.setOnAction((e) -> {
-            if (getCoordCentreCarte() != null) {
-                navigateurCarteOL.allerCoordonnees(getCoordCentreCarte(), iFacteurZoomCarte);
+            if (isbInternet()) {
+                if (getCoordCentreCarte() != null) {
+                    navigateurCarteOL.allerCoordonnees(getCoordCentreCarte(), iFacteurZoomCarte);
+                }
             }
         });
 
         btnChoixCarte.setOnAction((e) -> {
-            AnchorPane apOpenLayers = new AnchorPane();
-            navigateurCarteOL.afficheCartesOpenlayer();
-            apOpenLayers.setPrefSize(240, navigateurCarteOL.getApChoixCartographie().getPrefHeight() + 10);
-            navigateurCarteOL.getApChoixCartographie().setLayoutY(10);
-            apOpenLayers.setStyle("-fx-background-color : -fx-base;"
-                    + "-fx-border-color: derive(-fx-base,10%);"
-                    + "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.5) , 8, 0.0 , 0 , 8 );"
-                    + "-fx-border-width: 1px;");
-            apFenetre.getChildren().addAll(apOpenLayers);
-            Button btnFerme = new Button("X");
-            btnFerme.setLayoutY(10);
-            btnFerme.setLayoutX(205);
-            apOpenLayers.getChildren().addAll(navigateurCarteOL.getApChoixCartographie(), btnFerme);
-            apOpenLayers.setLayoutX((iLargeur - apOpenLayers.getPrefWidth()) / 2);
-            apOpenLayers.setLayoutY((iHauteur - apOpenLayers.getPrefHeight()) / 2);
-            apEnvironnement.getChildren().add(apOpenLayers);
-            mbarPrincipal.setDisable(true);
-            hbBarreBouton.setDisable(true);
-            tpEnvironnement.setDisable(true);
-            btnFerme.setOnAction((ev) -> {
-                apEnvironnement.getChildren().remove(apOpenLayers);
-                mbarPrincipal.setDisable(false);
-                hbBarreBouton.setDisable(false);
-                tpEnvironnement.setDisable(false);
-            });
+            if (isbInternet()) {
+                AnchorPane apOpenLayers = new AnchorPane();
+                navigateurCarteOL.afficheCartesOpenlayer();
+                apOpenLayers.setPrefSize(240, navigateurCarteOL.getApChoixCartographie().getPrefHeight() + 10);
+                navigateurCarteOL.getApChoixCartographie().setLayoutY(10);
+                apOpenLayers.setStyle("-fx-background-color : -fx-base;"
+                        + "-fx-border-color: derive(-fx-base,10%);"
+                        + "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.5) , 8, 0.0 , 0 , 8 );"
+                        + "-fx-border-width: 1px;");
+                apFenetre.getChildren().addAll(apOpenLayers);
+                Button btnFerme = new Button("X");
+                btnFerme.setLayoutY(10);
+                btnFerme.setLayoutX(205);
+                apOpenLayers.getChildren().addAll(navigateurCarteOL.getApChoixCartographie(), btnFerme);
+                apOpenLayers.setLayoutX((iLargeur - apOpenLayers.getPrefWidth()) / 2);
+                apOpenLayers.setLayoutY((iHauteur - apOpenLayers.getPrefHeight()) / 2);
+                apEnvironnement.getChildren().add(apOpenLayers);
+                mbarPrincipal.setDisable(true);
+                hbBarreBouton.setDisable(true);
+                tpEnvironnement.setDisable(true);
+                btnFerme.setOnAction((ev) -> {
+                    apEnvironnement.getChildren().remove(apOpenLayers);
+                    mbarPrincipal.setDisable(false);
+                    hbBarreBouton.setDisable(false);
+                    tpEnvironnement.setDisable(false);
+                });
+            }
         });
         btnRechercheAdresse.setOnAction((e) -> {
-            navigateurCarteOL.allerAdresse(tfAdresseCarte.getText(), iFacteurZoomCarte);
+            if (isbInternet()) {
+                navigateurCarteOL.allerAdresse(tfAdresseCarte.getText(), iFacteurZoomCarte);
+            }
         });
         tfAdresseCarte.setOnKeyPressed((e) -> {
-            if (e.getCode() == KeyCode.ENTER) {
-                navigateurCarteOL.allerAdresse(tfAdresseCarte.getText(), 17);
+            if (isbInternet()) {
+                if (e.getCode() == KeyCode.ENTER) {
+                    navigateurCarteOL.allerAdresse(tfAdresseCarte.getText(), 17);
+                }
             }
         });
 
         tgPosCarte.selectedToggleProperty().addListener((ov, old_toggle, new_toggle) -> {
-            if (getiNombrePanoramiques() != 0) {
-                setbDejaSauve(false);
-                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
-            }
-            if (tgPosCarte.getSelectedToggle() != null) {
-                setStrPositionCarte(tgPosCarte.getSelectedToggle().getUserData().toString());
-                afficheCarte();
+            if (isbInternet()) {
+                if (getiNombrePanoramiques() != 0) {
+                    setbDejaSauve(false);
+                    getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+                }
+                if (tgPosCarte.getSelectedToggle() != null) {
+                    setStrPositionCarte(tgPosCarte.getSelectedToggle().getUserData().toString());
+                    afficheCarte();
+                }
             }
         });
         slLargeurCarte.valueProperty().addListener((observableValue, oldValue, newValue) -> {
-            if (getiNombrePanoramiques() != 0) {
-                setbDejaSauve(false);
-                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
-            }
-            if (newValue != null) {
-                double taille = (double) newValue;
-                setLargeurCarte(taille);
-                lblLargeurCarte.setText(rbLocalisation.getString("interface.largeurCarte") + " (" + Math.round(taille) + "px)");
-                afficheCarte();
+            if (isbInternet()) {
+                if (getiNombrePanoramiques() != 0) {
+                    setbDejaSauve(false);
+                    getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+                }
+                if (newValue != null) {
+                    double taille = (double) newValue;
+                    setLargeurCarte(taille);
+                    lblLargeurCarte.setText(rbLocalisation.getString("interface.largeurCarte") + " (" + Math.round(taille) + "px)");
+                    afficheCarte();
+                }
             }
         });
         slHauteurCarte.valueProperty().addListener((observableValue, oldValue, newValue) -> {
-            if (getiNombrePanoramiques() != 0) {
-                setbDejaSauve(false);
-                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
-            }
-            if (newValue != null) {
-                double taille = (double) newValue;
-                setHauteurCarte(taille);
-                lblHauteurCarte.setText(rbLocalisation.getString("interface.hauteurCarte") + " (" + Math.round(taille) + "px)");
-                afficheCarte();
+            if (isbInternet()) {
+                if (getiNombrePanoramiques() != 0) {
+                    setbDejaSauve(false);
+                    getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+                }
+                if (newValue != null) {
+                    double taille = (double) newValue;
+                    setHauteurCarte(taille);
+                    lblHauteurCarte.setText(rbLocalisation.getString("interface.hauteurCarte") + " (" + Math.round(taille) + "px)");
+                    afficheCarte();
+                }
             }
         });
         slZoomCarte.valueProperty().addListener((observableValue, oldValue, newValue) -> {
-            if (getiNombrePanoramiques() != 0) {
-                setbDejaSauve(false);
-                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
-            }
-            if (newValue != null) {
-                int taille = (int) Math.round((double) newValue);
-                setiFacteurZoomCarte(taille);
-                lblZoomCarte.setText(rbLocalisation.getString("interface.zoomCarte") + " (" + Math.round(taille) + ")");
-                afficheCarte();
+            if (isbInternet()) {
+                if (getiNombrePanoramiques() != 0) {
+                    setbDejaSauve(false);
+                    getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+                }
+                if (newValue != null) {
+                    int taille = (int) Math.round((double) newValue);
+                    setiFacteurZoomCarte(taille);
+                    lblZoomCarte.setText(rbLocalisation.getString("interface.zoomCarte") + " (" + Math.round(taille) + ")");
+                    afficheCarte();
+                }
             }
         });
         slOpaciteCarte.valueProperty().addListener((observableValue, oldValue, newValue) -> {
-            if (getiNombrePanoramiques() != 0) {
-                setbDejaSauve(false);
-                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
-            }
-            if (newValue != null) {
-                double opac = (double) newValue;
-                setOpaciteCarte(opac);
-                afficheCarte();
+            if (isbInternet()) {
+                if (getiNombrePanoramiques() != 0) {
+                    setbDejaSauve(false);
+                    getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+                }
+                if (newValue != null) {
+                    double opac = (double) newValue;
+                    setOpaciteCarte(opac);
+                    afficheCarte();
+                }
             }
         });
 
         cpCouleurFondCarte.valueProperty().addListener((ov, av, nv) -> {
-            if (getiNombrePanoramiques() != 0) {
-                setbDejaSauve(false);
-                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+            if (isbInternet()) {
+                if (getiNombrePanoramiques() != 0) {
+                    setbDejaSauve(false);
+                    getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+                }
+                String strCoul = cpCouleurFondCarte.getValue().toString().substring(2, 8);
+                setCouleurFondCarte(cpCouleurFondCarte.getValue());
+                setStrCouleurFondCarte(strCoul);
+                afficheCarte();
             }
-            String strCoul = cpCouleurFondCarte.getValue().toString().substring(2, 8);
-            setCouleurFondCarte(cpCouleurFondCarte.getValue());
-            setStrCouleurFondCarte(strCoul);
-            afficheCarte();
         });
         cpCouleurTexteCarte.valueProperty().addListener((ov, av, nv) -> {
-            if (getiNombrePanoramiques() != 0) {
-                setbDejaSauve(false);
-                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+            if (isbInternet()) {
+                if (getiNombrePanoramiques() != 0) {
+                    setbDejaSauve(false);
+                    getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+                }
+                String strCoul = cpCouleurTexteCarte.getValue().toString().substring(2, 8);
+                setCouleurTexteCarte(cpCouleurTexteCarte.getValue());
+                setStrCouleurTexteCarte(strCoul);
+                afficheCarte();
             }
-            String strCoul = cpCouleurTexteCarte.getValue().toString().substring(2, 8);
-            setCouleurTexteCarte(cpCouleurTexteCarte.getValue());
-            setStrCouleurTexteCarte(strCoul);
-            afficheCarte();
         });
         slTailleRadarCarte.valueProperty().addListener((observableValue, oldValue, newValue) -> {
-            if (getiNombrePanoramiques() != 0) {
-                setbDejaSauve(false);
-                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
-            }
-            if (newValue != null) {
-                double taille = (double) newValue;
-                setTailleRadarCarte(taille);
-                afficheCarte();
+            if (isbInternet()) {
+                if (getiNombrePanoramiques() != 0) {
+                    setbDejaSauve(false);
+                    getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+                }
+                if (newValue != null) {
+                    double taille = (double) newValue;
+                    setTailleRadarCarte(taille);
+                    afficheCarte();
+                }
             }
         });
         slOpaciteRadarCarte.valueProperty().addListener((observableValue, oldValue, newValue) -> {
-            if (getiNombrePanoramiques() != 0) {
-                setbDejaSauve(false);
-                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
-            }
-            if (newValue != null) {
-                double opacite = (double) newValue;
-                setOpaciteRadarCarte(opacite);
-                afficheCarte();
+            if (isbInternet()) {
+                if (getiNombrePanoramiques() != 0) {
+                    setbDejaSauve(false);
+                    getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+                }
+                if (newValue != null) {
+                    double opacite = (double) newValue;
+                    setOpaciteRadarCarte(opacite);
+                    afficheCarte();
+                }
             }
         });
         slAngleRadarCarte.valueProperty().addListener((observableValue, oldValue, newValue) -> {
-            if (newValue != null) {
-                double angle = (double) newValue;
-                angleRadarCarte = angle;
-                afficheCarte();
+            if (isbInternet()) {
+                if (newValue != null) {
+                    double angle = (double) newValue;
+                    angleRadarCarte = angle;
+                    afficheCarte();
+                }
             }
         });
         slOuvertureRadarCarte.valueProperty().addListener((observableValue, oldValue, newValue) -> {
-            if (newValue != null) {
-                double angle = (double) newValue;
-                ouvertureRadarCarte = angle;
-                afficheCarte();
+            if (isbInternet()) {
+                if (newValue != null) {
+                    double angle = (double) newValue;
+                    ouvertureRadarCarte = angle;
+                    afficheCarte();
+                }
             }
         });
         cpCouleurFondRadarCarte.setOnAction((e) -> {
-            if (getiNombrePanoramiques() != 0) {
-                setbDejaSauve(false);
-                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+            if (isbInternet()) {
+                if (getiNombrePanoramiques() != 0) {
+                    setbDejaSauve(false);
+                    getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+                }
+                String strCoul = cpCouleurFondRadarCarte.getValue().toString().substring(2, 8);
+                setCouleurFondRadarCarte(cpCouleurFondRadarCarte.getValue());
+                setStrCouleurFondRadarCarte(strCoul);
+                afficheCarte();
             }
-            String strCoul = cpCouleurFondRadarCarte.getValue().toString().substring(2, 8);
-            setCouleurFondRadarCarte(cpCouleurFondRadarCarte.getValue());
-            setStrCouleurFondRadarCarte(strCoul);
-            afficheCarte();
         });
         cpCouleurLigneRadarCarte.setOnAction((e) -> {
-            if (getiNombrePanoramiques() != 0) {
-                setbDejaSauve(false);
-                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+            if (isbInternet()) {
+                if (getiNombrePanoramiques() != 0) {
+                    setbDejaSauve(false);
+                    getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+                }
+                String strCoul = cpCouleurLigneRadarCarte.getValue().toString().substring(2, 8);
+                setCouleurLigneRadarCarte(cpCouleurLigneRadarCarte.getValue());
+                setStrCouleurLigneRadarCarte(strCoul);
+                afficheCarte();
             }
-            String strCoul = cpCouleurLigneRadarCarte.getValue().toString().substring(2, 8);
-            setCouleurLigneRadarCarte(cpCouleurLigneRadarCarte.getValue());
-            setStrCouleurLigneRadarCarte(strCoul);
-            afficheCarte();
         });
         cbReplieDemarrageCarte.selectedProperty().addListener((ov, av, nv) -> {
-            setbReplieDemarrageCarte(nv);
+            if (isbInternet()) {
+                setbReplieDemarrageCarte(nv);
+            }
         });
 
         /*

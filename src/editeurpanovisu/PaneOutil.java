@@ -23,6 +23,7 @@ public class PaneOutil {
     private Label lblPanelTitre;
     private boolean bValide;
     private boolean bInvariant=false;
+    private ImageView ivBtnPlusOutil;
 
     public static void deplieReplie(AnchorPane apTitre, ImageView ivBtnPlusTitre) {
         if (apTitre.isVisible()) {
@@ -69,7 +70,6 @@ public class PaneOutil {
         lblPanelTitre.setPadding(new Insets(5));
         lblPanelTitre.setLayoutX(10);
         lblPanelTitre.setLayoutY(10);
-        ImageView ivBtnPlusOutil;
         apOutil.setMinHeight(0);
 
         if (!bOuvert) {
@@ -150,6 +150,20 @@ public class PaneOutil {
      */
     public void setbInvariant(boolean bInvariant) {
         this.bInvariant = bInvariant;
+    }
+
+    /**
+     * @return the ivBtnPlusOutil
+     */
+    public ImageView getIvBtnPlusOutil() {
+        return ivBtnPlusOutil;
+    }
+
+    /**
+     * @param ivBtnPlusOutil the ivBtnPlusOutil to set
+     */
+    public void setIvBtnPlusOutil(ImageView ivBtnPlusOutil) {
+        this.ivBtnPlusOutil = ivBtnPlusOutil;
     }
 
 }

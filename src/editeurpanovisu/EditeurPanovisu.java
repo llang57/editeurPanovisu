@@ -19,6 +19,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
@@ -108,6 +111,19 @@ import org.controlsfx.dialog.Dialogs;
  * @author LANG Laurent
  */
 public class EditeurPanovisu extends Application {
+
+    private static boolean netIsAvailable() {
+        try {
+            final URL url = new URL("http://www.google.com");
+            final URLConnection conn = url.openConnection();
+            conn.connect();
+            return true;
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            return false;
+        }
+    }
 
     /**
      * @return the strStyleCSS
@@ -502,7 +518,7 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
-     * @param apAttends the apAttends to set
+     * @param apAttends1 the apAttends to set
      */
     public static void setApAttends(AnchorPane apAttends1) {
         apAttends = apAttends1;
@@ -632,6 +648,20 @@ public class EditeurPanovisu extends Application {
      */
     public static void setPoGeolocalisation(PaneOutil aPoGeolocalisation) {
         poGeolocalisation = aPoGeolocalisation;
+    }
+
+    /**
+     * @return the bInternet
+     */
+    public static boolean isbInternet() {
+        return bInternet;
+    }
+
+    /**
+     * @param abInternet the bInternet to set
+     */
+    public static void setbInternet(boolean abInternet) {
+        bInternet = abInternet;
     }
 
     private static class AncreForme extends Circle {
@@ -785,12 +815,15 @@ public class EditeurPanovisu extends Application {
     private static final String strTooltipStyle = "";
     static private boolean bDragDrop = false;
     static private String strTitreVisite = "";
-    private static AnchorPane apVisuPanoramique = new AnchorPane();
+    private static final AnchorPane apVisuPanoramique = new AnchorPane();
     private static AnchorPane apParametresVisite;
     private static NavigateurPanoramique navigateurPanoramique;
     private static String strBingAPIKey = "";
     private static VBox vbVisuHotspots;
     private static AnchorPane apVisuHS;
+    private static boolean bInternet;
+    private static AnchorPane apOpenLayers;
+    private static PaneOutil apHS1;
     /*
      Panel Creation Barre Navigation
      */
@@ -844,7 +877,7 @@ public class EditeurPanovisu extends Application {
 
     final static private ComboBox cbListeChoixPanoramique = new ComboBox();
     private static AnchorPane apListePanoTriable;
-    private static OrdrePanoramique ordPano = new OrdrePanoramique();
+    private static final OrdrePanoramique ordPano = new OrdrePanoramique();
     static private Label lblChoixPanoramique;
     static private boolean bPanoCharge = false;
     static private String strPanoAffiche = "";
@@ -3649,7 +3682,7 @@ public class EditeurPanovisu extends Application {
      *
      */
     private static void retireAffichageHotSpots() {
-        Pane paneLabels = (Pane) vbOutils.lookup("#labels");
+        Pane paneLabels = (Pane) vbVisuHotspots.lookup("#labels");
         vbVisuHotspots.getChildren().remove(paneLabels);
         dejaCharge = false;
     }
@@ -4147,14 +4180,20 @@ public class EditeurPanovisu extends Application {
      *
      */
     private static void ajouteAffichageHotspots() {
+        Pane paneLabels = (Pane) vbVisuHotspots.lookup("#labels");
+        vbVisuHotspots.getChildren().remove(paneLabels);
         dejaCharge = false;
-        Pane paneLabels = paneAffichageHS(strListePano(getiPanoActuel()), getiPanoActuel());
+        paneLabels = paneAffichageHS(strListePano(getiPanoActuel()), getiPanoActuel());
         paneLabels.setId("labels");
         vbVisuHotspots.getChildren().add(paneLabels);
         apVisuHS.setPrefHeight(paneLabels.getPrefHeight());
         iNumPoints = getPanoramiquesProjet()[getiPanoActuel()].getNombreHotspots();
         iNumImages = getPanoramiquesProjet()[getiPanoActuel()].getNombreHotspotImage();
         setiNumHTML(getPanoramiquesProjet()[getiPanoActuel()].getNombreHotspotHTML());
+        if (apHS1.getApOutil().isVisible()){
+            PaneOutil.deplieReplie(apHS1.getApOutil(), apHS1.getIvBtnPlusOutil());
+            PaneOutil.deplieReplie(apHS1.getApOutil(), apHS1.getIvBtnPlusOutil());
+        }
     }
 
     /**
@@ -5828,9 +5867,11 @@ public class EditeurPanovisu extends Application {
             tfLongitude.setText(CoordonneesGeographiques.toDMS(getPanoramiquesProjet()[iNumPanochoisi].getMarqueurGeolocatisation().getLongitude()));
             getPoGeolocalisation().setbValide(true);
         } else {
-            tfLatitude.setText("");
-            tfLongitude.setText("");
-            getPoGeolocalisation().setbValide(false);
+            if (isbInternet()) {
+                tfLatitude.setText("");
+                tfLongitude.setText("");
+                getPoGeolocalisation().setbValide(false);
+            }
 
         }
         ajouteAffichagePointsHotspots();
@@ -6688,6 +6729,7 @@ public class EditeurPanovisu extends Application {
      * @throws FileNotFoundException
      * @throws IOException
      */
+    @SuppressWarnings("null")
     private static void sauverBarre(String fichShp) throws FileNotFoundException, IOException {
         OutputStreamWriter oswFichierBarre = null;
         try {
@@ -7505,14 +7547,14 @@ public class EditeurPanovisu extends Application {
         tpEnvironnement.getTabs().addAll(tabVisite, getTabInterface(), getTabPlan());
         tpEnvironnement.setSide(Side.TOP);
         tpEnvironnement.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends Tab> ov, Tab t, Tab t1) -> {
-            if (getGestionnaireInterface().navigateurCarteOL == null) {
+            if (getGestionnaireInterface().navigateurCarteOL == null && isbInternet()) {
                 getGestionnaireInterface().navigateurCarteOL = new NavigateurOpenLayersSeul();
                 getGestionnaireInterface().apNavigateurCarte = getGestionnaireInterface().navigateurCarteOL.afficheNavigateurOpenLayer();
             }
             getGestionnaireInterface().rafraichit();
         });
         tabInterface.disableProperty().addListener((ov, av, nv) -> {
-            if (!nv && getGestionnaireInterface().navigateurCarteOL == null) {
+            if (!nv && getGestionnaireInterface().navigateurCarteOL == null && isbInternet()) {
                 getGestionnaireInterface().navigateurCarteOL = new NavigateurOpenLayersSeul();
                 getGestionnaireInterface().navigateurCarteOL.setBingApiKey(getStrBingAPIKey());
                 getGestionnaireInterface().apNavigateurCarte = getGestionnaireInterface().navigateurCarteOL.afficheNavigateurOpenLayer();
@@ -7526,7 +7568,9 @@ public class EditeurPanovisu extends Application {
         getTabPlan().setText(rbLocalisation.getString("main.tabPlan"));
         getTabPlan().setClosable(false);
         getTabPlan().setDisable(true);
-        getTabInterface().setDisable(true);
+        if (isbInternet()) {
+            getTabInterface().setDisable(true);
+        }
         tabVisite.setContent(hbEnvironnement);
         double largeur;
         String strLabelStyle = "-fx-color : white;-fx-background-color : #fff;-fx-padding : 5px;  -fx-border : 1px solid #777;-fx-width : 100px;-fx-margin : 5px; ";
@@ -7744,68 +7788,72 @@ public class EditeurPanovisu extends Application {
                 btnSupprimePano,
                 lblTitrePano, tfTitrePano
         );
+        AnchorPane apGEO = new AnchorPane();
+        apOpenLayers = new AnchorPane();
+        apOpenLayers.setVisible(false);
 
         AnchorPane apPPAN = new AnchorPane(new PaneOutil(true, rbLocalisation.getString("main.parametresPano"), apParametresPano, largeurOutil).getApPaneOutil());
+        if (isbInternet()) {
+            navigateurOpenLayers = new NavigateurOpenLayers();
+            navigateurOpenLayers.setBingApiKey(getStrBingAPIKey());
+            tfLongitude = new TextField();
+            tfLatitude = new TextField();
+            apOpenLayers = navigateurOpenLayers.afficheNavigateurOpenLayer(tfLongitude, tfLatitude, true);
+            apOpenLayers.setPrefSize(800, 600);
+            Button btnGeolocalise = new Button(rbLocalisation.getString("main.geolocalisation"));
 
-        navigateurOpenLayers = new NavigateurOpenLayers();
-        navigateurOpenLayers.setBingApiKey(getStrBingAPIKey());
-        tfLongitude = new TextField();
-        tfLatitude = new TextField();
-        AnchorPane apOpenLayers = navigateurOpenLayers.afficheNavigateurOpenLayer(tfLongitude, tfLatitude, true);
-        apOpenLayers.setPrefSize(800, 600);
-        Button btnGeolocalise = new Button(rbLocalisation.getString("main.geolocalisation"));
+            btnGeolocalise.setLayoutX(10);
+            btnGeolocalise.setLayoutY(25);
+            btnGeolocalise.setPrefWidth(120);
+            btnGeolocalise.setOnAction((e) -> {
+                navigateurOpenLayers.retireMarqueur(0);
+                if (navigateurOpenLayers.getBingApiKey().equals("")) {
+                    navigateurOpenLayers.afficheCartesOpenlayer();
+                } else {
+                    navigateurOpenLayers.valideBingApiKey(navigateurOpenLayers.getBingApiKey());
+                }
+                if (panoramiquesProjet[getiPanoActuel()].getMarqueurGeolocatisation() != null) {
+                    navigateurOpenLayers.allerCoordonnees(panoramiquesProjet[getiPanoActuel()].getMarqueurGeolocatisation(), 17);
+                    navigateurOpenLayers.setMarqueur(panoramiquesProjet[getiPanoActuel()].getMarqueurGeolocatisation());
+                    String strFichierPano = getPanoramiquesProjet()[getiPanoActuel()]
+                            .getStrNomFichier().substring(getPanoramiquesProjet()[getiPanoActuel()].getStrNomFichier()
+                                    .lastIndexOf(File.separator) + 1, getPanoramiquesProjet()[getiPanoActuel()]
+                                    .getStrNomFichier().length()).split("\\.")[0];
+                    String strHTML = "<span style='font-family : Verdana,Arial,sans-serif;font-weight:bold;font-size : 12px;'>"
+                            + getPanoramiquesProjet()[getiPanoActuel()].getStrTitrePanoramique()
+                            + "</span><br/>"
+                            + "<span style='font-family : Verdana,Arial,sans-serif;bold;font-size : 10px;'>"
+                            + strFichierPano
+                            + "</span>";
+                    strHTML = strHTML.replace("\\", "/");
+                    navigateurOpenLayers.ajouteMarqueur(0, panoramiquesProjet[getiPanoActuel()].getMarqueurGeolocatisation(), strHTML);
+                }
+                apOpenLayers.setVisible(true);
+            });
+            tfLatitude.setLayoutX(140);
+            tfLatitude.setLayoutY(10);
+            tfLongitude.setLayoutX(140);
+            tfLongitude.setLayoutY(40);
+            apOpenLayers.setLayoutX(200);
+            apOpenLayers.setLayoutY(150);
+            apOpenLayers.setVisible(false);
+            AnchorPane apGeolocalise = new AnchorPane();
+            apGeolocalise.setPrefHeight(75);
+            apGeolocalise.getChildren().addAll(btnGeolocalise, tfLatitude, tfLongitude);
+            apGeolocalise.setLayoutX(10);
+            apGeolocalise.setLayoutY(40);
+            setPoGeolocalisation(new PaneOutil(rbLocalisation.getString("main.geolocalisation"), apGeolocalise, largeurOutil));
+            apGEO = new AnchorPane(getPoGeolocalisation().getApPaneOutil());
 
-        btnGeolocalise.setLayoutX(10);
-        btnGeolocalise.setLayoutY(25);
-        btnGeolocalise.setPrefWidth(120);
-        btnGeolocalise.setOnAction((e) -> {
-            navigateurOpenLayers.retireMarqueur(0);
-            if (navigateurOpenLayers.getBingApiKey().equals("")) {
-                navigateurOpenLayers.afficheCartesOpenlayer();
-            } else {
-                navigateurOpenLayers.valideBingApiKey(navigateurOpenLayers.getBingApiKey());
-            }
-            if (panoramiquesProjet[getiPanoActuel()].getMarqueurGeolocatisation() != null) {
-                navigateurOpenLayers.allerCoordonnees(panoramiquesProjet[getiPanoActuel()].getMarqueurGeolocatisation(), 17);
-                navigateurOpenLayers.setMarqueur(panoramiquesProjet[getiPanoActuel()].getMarqueurGeolocatisation());
-                String strFichierPano = getPanoramiquesProjet()[getiPanoActuel()]
-                        .getStrNomFichier().substring(getPanoramiquesProjet()[getiPanoActuel()].getStrNomFichier()
-                                .lastIndexOf(File.separator) + 1, getPanoramiquesProjet()[getiPanoActuel()]
-                                .getStrNomFichier().length()).split("\\.")[0];
-                String strHTML = "<span style='font-family : Verdana,Arial,sans-serif;font-weight:bold;font-size : 12px;'>"
-                        + getPanoramiquesProjet()[getiPanoActuel()].getStrTitrePanoramique()
-                        + "</span><br/>"
-                        + "<span style='font-family : Verdana,Arial,sans-serif;bold;font-size : 10px;'>"
-                        + strFichierPano
-                        + "</span>";
-                strHTML = strHTML.replace("\\", "/");
-                navigateurOpenLayers.ajouteMarqueur(0, panoramiquesProjet[getiPanoActuel()].getMarqueurGeolocatisation(), strHTML);
-            }
-            apOpenLayers.setVisible(true);
-        });
-        tfLatitude.setLayoutX(140);
-        tfLatitude.setLayoutY(10);
-        tfLongitude.setLayoutX(140);
-        tfLongitude.setLayoutY(40);
-        apOpenLayers.setLayoutX(200);
-        apOpenLayers.setLayoutY(150);
-        apOpenLayers.setVisible(false);
-        AnchorPane apGeolocalise = new AnchorPane();
-        apGeolocalise.setPrefHeight(75);
-        apGeolocalise.getChildren().addAll(btnGeolocalise, tfLatitude, tfLongitude);
-        apGeolocalise.setLayoutX(10);
-        apGeolocalise.setLayoutY(40);
-        setPoGeolocalisation(new PaneOutil(rbLocalisation.getString("main.geolocalisation"), apGeolocalise, largeurOutil));
-        AnchorPane apGEO = new AnchorPane(getPoGeolocalisation().getApPaneOutil());
+            apOpenLayers.setLayoutX((iLargeur - apOpenLayers.getPrefWidth()) / 2);
+            apOpenLayers.setLayoutY((iHauteur - apOpenLayers.getPrefHeight()) / 2);
+            apOpenLayers.visibleProperty().addListener((ov, av, nv) -> {
+                mbarPrincipal.setDisable(nv);
+                hbBarreBouton.setDisable(nv);
+                tpEnvironnement.setDisable(nv);
 
-        apOpenLayers.setLayoutX((iLargeur - apOpenLayers.getPrefWidth()) / 2);
-        apOpenLayers.setLayoutY((iHauteur - apOpenLayers.getPrefHeight()) / 2);
-        apOpenLayers.visibleProperty().addListener((ov, av, nv) -> {
-            mbarPrincipal.setDisable(nv);
-            hbBarreBouton.setDisable(nv);
-            tpEnvironnement.setDisable(nv);
-
-        });
+            });
+        }
         apVisuPanoramique.setLayoutY(40);
         apVisuPanoramique.setPrefWidth(340);
         apVisuPanoramique.setPrefHeight(275);
@@ -7815,7 +7863,9 @@ public class EditeurPanovisu extends Application {
         vbVisuHotspots = new VBox();
         apVisuHS = new AnchorPane(vbVisuHotspots);
         apVisuHS.setLayoutY(40);
-        AnchorPane apHS = new AnchorPane(new PaneOutil(true, "Hotspots", apVisuHS, largeurOutil).getApPaneOutil());
+        apHS1=new PaneOutil(true, "Hotspots", apVisuHS, largeurOutil);
+        
+        AnchorPane apHS = new AnchorPane(apHS1.getApPaneOutil());
 
         vbChoixPanoramique.getChildren().addAll(
                 apPVIS,
@@ -7999,6 +8049,7 @@ public class EditeurPanovisu extends Application {
     @Override
     public void start(Stage stPrimaryStage) throws Exception {
         File fileRep = new File("");
+        setbInternet(netIsAvailable());
         setStrCurrentDir(fileRep.getAbsolutePath());
         setStrRepertAppli(fileRep.getAbsolutePath());
         fileRepertConfig = new File(getStrRepertAppli() + File.separator + "configPV");

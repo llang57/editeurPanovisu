@@ -11,26 +11,26 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="331.0" prefWidth="450.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="editeurpanovisu.PopUpDialogController">
+<AnchorPane id="AnchorPane" prefHeight="331.0" prefWidth="529.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="editeurpanovisu.PopUpDialogController">
     <stylesheets>
         <URL value="@popup.css" />
     </stylesheets>
    <children>
-      <Button fx:id="btnQuitte" layoutX="396.0" layoutY="293.0" mnemonicParsing="false" onAction="#handleQuitteAction" text="Ok" />
+      <Button fx:id="btnQuitte" layoutX="483.0" layoutY="292.0" mnemonicParsing="false" onAction="#handleQuitteAction" text="Ok" />
       <HBox layoutX="69.0" layoutY="8.0" />
       <Label layoutX="93.0" layoutY="41.0" text="  100% HTML5    100% Libre" />
-      <ImageView fitHeight="149.0" fitWidth="200.0" layoutX="127.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="234.0" fitWidth="315.0" layoutX="125.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/popUp.png" />
          </image>
       </ImageView>
-      <Label layoutX="31.0" layoutY="287.0" text="Développement :  Laurent LANG (2014)">
+      <Label layoutX="20.0" layoutY="298.0" text="Développement :  Laurent LANG (2014)">
          <font>
             <Font size="9.0" />
          </font>
       </Label>
       <Group layoutX="212.0" layoutY="-207.0" />
-      <Hyperlink fx:id="leMondea360" layoutX="26.0" layoutY="256.0" onAction="#handleOuvreLien" text="Une création : le monde à 360°" />
+      <Hyperlink fx:id="leMondea360" layoutX="15.0" layoutY="275.0" onAction="#handleOuvreLien" text="Une création : le monde à 360°" />
       <ImageView fitHeight="80.0" fitWidth="80.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/panovisu.png" />
