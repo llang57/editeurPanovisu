@@ -76,6 +76,8 @@ import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -83,6 +85,7 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -319,6 +322,13 @@ public class EditeurPanovisu extends Application {
      */
     public static void setStrSystemeExploitation(String aStrSystemeExploitation) {
         strSystemeExploitation = aStrSystemeExploitation;
+    }
+
+    public static Boolean isMac() {
+        if (getStrSystemeExploitation().contains("Mac")) {
+            setiDecalageMac(-30);
+        }
+        return getStrSystemeExploitation().contains("Mac");
     }
 
     /**
@@ -664,6 +674,20 @@ public class EditeurPanovisu extends Application {
         bInternet = abInternet;
     }
 
+    /**
+     * @return the iDecalageMac
+     */
+    public static int getiDecalageMac() {
+        return iDecalageMac;
+    }
+
+    /**
+     * @param aiDecalageMac the iDecalageMac to set
+     */
+    public static void setiDecalageMac(int aiDecalageMac) {
+        iDecalageMac = aiDecalageMac;
+    }
+
     private static class AncreForme extends Circle {
 
         private final DoubleProperty dpX, dpY;
@@ -742,6 +766,7 @@ public class EditeurPanovisu extends Application {
     /**
      * Définition de la langue locale par défaut fr_FR
      */
+    private static int iDecalageMac = 0;
     private static CheckBox cbAutoRotationDemarrage;
     private static CheckBox cbIntroPetitePlanete;
     private static BigDecimalField bdfAutoRotationVitesse;
@@ -761,8 +786,8 @@ public class EditeurPanovisu extends Application {
     static private PaneOutil poGeolocalisation;
 
     public static String strStyleCSS = "clair";
-    private static final String[] strCodesLanguesTraduction = {"fr_FR", "en_EN", "de_DE"};
-    private static final String[] strLanguesTraduction = {"Francais", "English", "Deutsch"};
+    private static final String[] strCodesLanguesTraduction = {"fr_FR", "en_EN", "de_DE", "pt_BR"};
+    private static final String[] strLanguesTraduction = {"Français", "English", "Deutsch", "Português"};
     private static String strCurrentDir = "";
     private static Locale locale = new Locale("fr", "FR");
     private static ResourceBundle rbLocalisation;
@@ -4190,7 +4215,7 @@ public class EditeurPanovisu extends Application {
         iNumPoints = getPanoramiquesProjet()[getiPanoActuel()].getNombreHotspots();
         iNumImages = getPanoramiquesProjet()[getiPanoActuel()].getNombreHotspotImage();
         setiNumHTML(getPanoramiquesProjet()[getiPanoActuel()].getNombreHotspotHTML());
-        if (apHS1.getApOutil().isVisible()){
+        if (apHS1.getApOutil().isVisible()) {
             PaneOutil.deplieReplie(apHS1.getApOutil(), apHS1.getIvBtnPlusOutil());
             PaneOutil.deplieReplie(apHS1.getApOutil(), apHS1.getIvBtnPlusOutil());
         }
@@ -4219,11 +4244,11 @@ public class EditeurPanovisu extends Application {
         circPoint.setFill(Color.YELLOW);
         circPoint.setStroke(Color.RED);
         circPoint.setCursor(Cursor.DEFAULT);
-        Circle circPoint2 = new Circle(180, 20, 5);
+        Circle circPoint2 = new Circle(30, 40, 5);
         circPoint2.setFill(Color.BLUE);
         circPoint2.setStroke(Color.YELLOW);
         circPoint2.setCursor(Cursor.DEFAULT);
-        Circle circPoint3 = new Circle(330, 20, 5);
+        Circle circPoint3 = new Circle(30, 60, 5);
         circPoint3.setFill(Color.GREEN);
         circPoint3.setStroke(Color.YELLOW);
         circPoint3.setCursor(Cursor.DEFAULT);
@@ -4258,10 +4283,10 @@ public class EditeurPanovisu extends Application {
         lineNord.setStrokeWidth(3);
         lblHS.setLayoutX(50);
         lblHS.setLayoutY(15);
-        lblHSImage.setLayoutX(200);
-        lblHSImage.setLayoutY(15);
-        lblHSHTML.setLayoutX(350);
-        lblHSHTML.setLayoutY(15);
+        lblHSImage.setLayoutX(50);
+        lblHSImage.setLayoutY(35);
+        lblHSHTML.setLayoutX(50);
+        lblHSHTML.setLayoutY(55);
         lblPoV.setLayoutX(520);
         lblPoV.setLayoutY(15);
         lblNord.setLayoutX(520);
@@ -4347,7 +4372,7 @@ public class EditeurPanovisu extends Application {
                 mouseX = ivImagePanoramique.getFitWidth();
             }
 
-            double mouseY = Y1 - panePanoramique.getLayoutY() - 109;
+            double mouseY = Y1 - panePanoramique.getLayoutY() - 119 - getiDecalageMac();
             if (mouseY < 0) {
                 mouseY = 0;
             }
@@ -4500,7 +4525,7 @@ public class EditeurPanovisu extends Application {
             if (mouseX > ivImagePanoramique.getFitWidth()) {
                 mouseX = ivImagePanoramique.getFitWidth();
             }
-            double mouseY = Y1 - panePanoramique.getLayoutY() - 109;
+            double mouseY = Y1 - panePanoramique.getLayoutY() - 119 - getiDecalageMac();
             if (mouseY < 0) {
                 mouseY = 0;
             }
@@ -4656,7 +4681,7 @@ public class EditeurPanovisu extends Application {
             if (mouseX > ivImagePanoramique.getFitWidth()) {
                 mouseX = ivImagePanoramique.getFitWidth();
             }
-            double mouseY = Y1 - panePanoramique.getLayoutY() - 109;
+            double mouseY = Y1 - panePanoramique.getLayoutY() - 119 - getiDecalageMac();
             if (mouseY < 0) {
                 mouseY = 0;
             }
@@ -4788,7 +4813,7 @@ public class EditeurPanovisu extends Application {
     private static void panoChoixRegard(double X, double Y) {
         if (X > 0 && X < ivImagePanoramique.getFitWidth()) {
             double mouseX = X;
-            double mouseY = Y - panePanoramique.getLayoutY() - 109;
+            double mouseY = Y - panePanoramique.getLayoutY() - 119;
             double largeur = ivImagePanoramique.getFitWidth();
             double regardX = 360.0f * mouseX / largeur - 180;
             double regardY = 90.0d - 2.0f * mouseY / largeur * 180.0f;
@@ -4927,7 +4952,7 @@ public class EditeurPanovisu extends Application {
                 XX = ivImagePanoramique.getFitWidth();
             }
             plgPoV.setLayoutX(XX + ivImagePanoramique.getLayoutX());
-            double YY = mouseEvent1.getSceneY() - panePanoramique.getLayoutY() - 109;
+            double YY = mouseEvent1.getSceneY() - panePanoramique.getLayoutY() - 119 - getiDecalageMac();
             if (YY < 0) {
                 YY = 0;
             }
@@ -4949,7 +4974,7 @@ public class EditeurPanovisu extends Application {
             if (mouseX1 > ivImagePanoramique.getFitWidth()) {
                 mouseX1 = ivImagePanoramique.getFitWidth();
             }
-            double mouseY1 = Y1 - panePanoramique.getLayoutY() - 109;
+            double mouseY1 = Y1 - panePanoramique.getLayoutY() - 119 - getiDecalageMac();
             if (mouseY1 < 0) {
                 mouseY1 = 0;
             }
@@ -4984,7 +5009,7 @@ public class EditeurPanovisu extends Application {
             setbDejaSauve(false);
             getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             double mouseX = X;
-            double mouseY = Y - panePanoramique.getLayoutY() - 109;
+            double mouseY = Y - panePanoramique.getLayoutY() - 119 - getiDecalageMac();
             if (X > 0 && X < ivImagePanoramique.getFitWidth()) {
                 double longitude, latitude;
                 double largeur = ivImagePanoramique.getFitWidth();
@@ -5074,7 +5099,7 @@ public class EditeurPanovisu extends Application {
                     if (mouseX1 > ivImagePanoramique.getFitWidth()) {
                         mouseX1 = ivImagePanoramique.getFitWidth();
                     }
-                    double mouseY1 = Y1 - panePanoramique.getLayoutY() - 109;
+                    double mouseY1 = Y1 - panePanoramique.getLayoutY() - 119 - getiDecalageMac();
                     if (mouseY1 < 0) {
                         mouseY1 = 0;
                     }
@@ -5162,7 +5187,7 @@ public class EditeurPanovisu extends Application {
             setbDejaSauve(false);
             getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             double mouseX = X;
-            double mouseY = Y - panePanoramique.getLayoutY() - 109;
+            double mouseY = Y - panePanoramique.getLayoutY() - 119 - getiDecalageMac();
             double longitude, latitude;
             double largeur = ivImagePanoramique.getFitWidth();
             longitude = 360.0f * mouseX / largeur - 180;
@@ -5266,7 +5291,7 @@ public class EditeurPanovisu extends Application {
                     mouseX1 = ivImagePanoramique.getFitWidth();
                 }
 
-                double mouseY1 = Y1 - panePanoramique.getLayoutY() - 109;
+                double mouseY1 = Y1 - panePanoramique.getLayoutY() - 119 - getiDecalageMac();
                 if (mouseY1 < 0) {
                     mouseY1 = 0;
                 }
@@ -5373,7 +5398,7 @@ public class EditeurPanovisu extends Application {
             setbDejaSauve(false);
             getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             double mouseX = X;
-            double mouseY = Y - panePanoramique.getLayoutY() - 109;
+            double mouseY = Y - panePanoramique.getLayoutY() - 119 - getiDecalageMac();
             double longitude, latitude;
             double largeur = ivImagePanoramique.getFitWidth();
             longitude = 360.0f * mouseX / largeur - 180;
@@ -5461,7 +5486,7 @@ public class EditeurPanovisu extends Application {
                     mouseX1 = ivImagePanoramique.getFitWidth();
                 }
 
-                double mouseY1 = Y1 - panePanoramique.getLayoutY() - 109;
+                double mouseY1 = Y1 - panePanoramique.getLayoutY() - 119 - getiDecalageMac();
                 if (mouseY1 < 0) {
                     mouseY1 = 0;
                 }
@@ -5549,7 +5574,7 @@ public class EditeurPanovisu extends Application {
                 mouseEvent.consume();
             } else if (mouseEvent.isControlDown()) {
             } else {
-                panoChoixRegard(mouseEvent.getSceneX() - ivImagePanoramique.getLayoutX(), mouseEvent.getSceneY());
+                panoChoixRegard(mouseEvent.getSceneX() - ivImagePanoramique.getLayoutX(), mouseEvent.getSceneY() - getiDecalageMac());
                 mouseEvent.consume();
             }
         }
@@ -5561,7 +5586,7 @@ public class EditeurPanovisu extends Application {
                             (me) -> {
                             }
                     );
-                    Circle c1 = new Circle(mouseEvent.getSceneX(), mouseEvent.getSceneY() - panePanoramique.getLayoutY() - 109, 3);
+                    Circle c1 = new Circle(mouseEvent.getSceneX(), mouseEvent.getSceneY() - panePanoramique.getLayoutY() - 119 - getiDecalageMac(), 3);
                     panePanoramique.getChildren().add(c1);
                     ListView<String> lvMenuChoixTypeHotspot = new ListView<>();
                     lvMenuChoixTypeHotspot.setMaxHeight(62);
@@ -5579,7 +5604,7 @@ public class EditeurPanovisu extends Application {
                     lvMenuChoixTypeHotspot.getItems().add("Annuler");
                     lvMenuChoixTypeHotspot.setCursor(Cursor.DEFAULT);
                     lvMenuChoixTypeHotspot.setLayoutX(mouseEvent.getSceneX());
-                    lvMenuChoixTypeHotspot.setLayoutY(mouseEvent.getSceneY() - panePanoramique.getLayoutY() - 104);
+                    lvMenuChoixTypeHotspot.setLayoutY(mouseEvent.getSceneY() - panePanoramique.getLayoutY() - 104 - getiDecalageMac());
                     panePanoramique.getChildren().add(lvMenuChoixTypeHotspot);
                     lvMenuChoixTypeHotspot.getSelectionModel().selectedItemProperty().addListener((ov, ancValeur, nouvValeur) -> {
                         panePanoramique.getChildren().remove(lvMenuChoixTypeHotspot);
@@ -5656,7 +5681,7 @@ public class EditeurPanovisu extends Application {
                         if (mouseX > ivImagePanoramique.getFitWidth()) {
                             mouseX = ivImagePanoramique.getFitWidth();
                         }
-                        double mouseY = mouseEvent.getSceneY() - panePanoramique.getLayoutY() - 109;
+                        double mouseY = mouseEvent.getSceneY() - panePanoramique.getLayoutY() - 119 - getiDecalageMac();
                         if (mouseY < 0) {
                             mouseY = 0;
                         }
@@ -5771,7 +5796,12 @@ public class EditeurPanovisu extends Application {
         iNumPoints = 0;
         if (navigateurPanoramique == null) {
             Dimension tailleEcran = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-            int iHauteur = (int) tailleEcran.getHeight() - 170;
+            int iHauteur;
+            if (isMac()) {
+                iHauteur = (int) tailleEcran.getHeight() - 230;
+            } else {
+                iHauteur = (int) tailleEcran.getHeight() - 170;
+            }
             int iLargeur = (int) tailleEcran.getWidth() - 20;
             apVisuPanoramique.getChildren().clear();
             Pane paneFond = new Pane();
@@ -6967,30 +6997,33 @@ public class EditeurPanovisu extends Application {
      */
     private static void creeMenu(VBox vbRacine, int iTaille) throws Exception {
         VBox vbMonPanneau = new VBox();
+
         vbMonPanneau.setPrefHeight(80);
         vbMonPanneau.setPrefWidth(3000);
         mbarPrincipal = new MenuBar();
         mbarPrincipal.setMinHeight(25);
         mbarPrincipal.setPrefHeight(29);
         mbarPrincipal.setPrefWidth(3000);
+        mbarPrincipal.setUseSystemMenuBar(true);
         /* 
          Menu projets
          */
         Menu mnuProjet = new Menu(rbLocalisation.getString("projets"));
         mbarPrincipal.getMenus().add(mnuProjet);
         mniNouveauProjet = new MenuItem(rbLocalisation.getString("nouveauProjet"));
-        mniNouveauProjet.setAccelerator(KeyCombination.keyCombination("Ctrl+N"));
+        mniNouveauProjet.setAccelerator(new KeyCodeCombination(KeyCode.N, KeyCombination.SHORTCUT_DOWN));
         mnuProjet.getItems().add(mniNouveauProjet);
         mniChargeProjet = new MenuItem(rbLocalisation.getString("ouvrirProjet"));
-        mniChargeProjet.setAccelerator(KeyCombination.keyCombination("Ctrl+O"));
+        mniChargeProjet.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.SHORTCUT_DOWN));
+
         mnuProjet.getItems().add(mniChargeProjet);
         mniSauveProjet = new MenuItem(rbLocalisation.getString("sauverProjet"));
         mniSauveProjet.setDisable(true);
-        mniSauveProjet.setAccelerator(KeyCombination.keyCombination("Ctrl+S"));
+        mniSauveProjet.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.SHORTCUT_DOWN));
         mnuProjet.getItems().add(mniSauveProjet);
         mniSauveSousProjet = new MenuItem(rbLocalisation.getString("sauverProjetSous"));
         mniSauveSousProjet.setDisable(true);
-        mniSauveSousProjet.setAccelerator(KeyCombination.keyCombination("Shift+Ctrl+S"));
+        mniSauveSousProjet.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.SHORTCUT_DOWN, KeyCodeCombination.SHIFT_DOWN));
         mnuProjet.getItems().add(mniSauveSousProjet);
         mnuDerniersProjets = new Menu(rbLocalisation.getString("derniersProjets"));
         mnuProjet.getItems().add(mnuDerniersProjets);
@@ -7028,7 +7061,7 @@ public class EditeurPanovisu extends Application {
         SeparatorMenuItem sepMenu1 = new SeparatorMenuItem();
         mnuProjet.getItems().add(sepMenu1);
         mniFermerProjet = new MenuItem(rbLocalisation.getString("quitterApplication"));
-        mniFermerProjet.setAccelerator(KeyCombination.keyCombination("Ctrl+Q"));
+        mniFermerProjet.setAccelerator(new KeyCodeCombination(KeyCode.A, KeyCombination.SHORTCUT_DOWN));
         mnuProjet.getItems().add(mniFermerProjet);
         /*
          Menu affichage
@@ -7036,13 +7069,13 @@ public class EditeurPanovisu extends Application {
         Menu mnuAffichage = new Menu(rbLocalisation.getString("affichage"));
         mbarPrincipal.getMenus().add(mnuAffichage);
         mniAffichageVisite = new MenuItem(rbLocalisation.getString("main.creationVisite"));
-        mniAffichageVisite.setAccelerator(KeyCombination.keyCombination("Ctrl+1"));
+        mniAffichageVisite.setAccelerator(new KeyCodeCombination(KeyCode.DIGIT1, KeyCombination.SHORTCUT_DOWN));
         mnuAffichage.getItems().add(mniAffichageVisite);
         mniAffichageInterface = new MenuItem(rbLocalisation.getString("main.creationInterface"));
-        mniAffichageInterface.setAccelerator(KeyCombination.keyCombination("Ctrl+2"));
+        mniAffichageInterface.setAccelerator(new KeyCodeCombination(KeyCode.DIGIT2, KeyCombination.SHORTCUT_DOWN));
         mnuAffichage.getItems().add(mniAffichageInterface);
         setMniAffichagePlan(new MenuItem(rbLocalisation.getString("main.tabPlan")));
-        getMniAffichagePlan().setAccelerator(KeyCombination.keyCombination("Ctrl+3"));
+        getMniAffichagePlan().setAccelerator(new KeyCodeCombination(KeyCode.DIGIT3, KeyCombination.SHORTCUT_DOWN));
         getMniAffichagePlan().setDisable(true);
         mnuAffichage.getItems().add(getMniAffichagePlan());
         SeparatorMenuItem sep3 = new SeparatorMenuItem();
@@ -7057,17 +7090,17 @@ public class EditeurPanovisu extends Application {
         mnuPanoramique.setDisable(true);
         mbarPrincipal.getMenus().add(mnuPanoramique);
         mniAjouterPano = new MenuItem(rbLocalisation.getString("ajouterPanoramiques"));
-        mniAjouterPano.setAccelerator(KeyCombination.keyCombination("Ctrl+A"));
+        mniAjouterPano.setAccelerator(new KeyCodeCombination(KeyCode.A, KeyCombination.SHORTCUT_DOWN));
         mnuPanoramique.getItems().add(mniAjouterPano);
         setMniAjouterPlan(new MenuItem(rbLocalisation.getString("ajouterPlan")));
-        getMniAjouterPlan().setAccelerator(KeyCombination.keyCombination("Ctrl+P"));
+        getMniAjouterPlan().setAccelerator(new KeyCodeCombination(KeyCode.P, KeyCombination.SHORTCUT_DOWN));
         mnuPanoramique.getItems().add(getMniAjouterPlan());
         getMniAjouterPlan().setDisable(true);
         SeparatorMenuItem sep2 = new SeparatorMenuItem();
         mnuPanoramique.getItems().add(sep2);
         mniVisiteGenere = new MenuItem(rbLocalisation.getString("genererVisite"));
         mniVisiteGenere.setDisable(true);
-        mniVisiteGenere.setAccelerator(KeyCombination.keyCombination("Ctrl+V"));
+        mniVisiteGenere.setAccelerator(new KeyCodeCombination(KeyCode.V, KeyCombination.SHORTCUT_DOWN));
         mnuPanoramique.getItems().add(mniVisiteGenere);
         /*
          Menu Modèles 
@@ -7093,7 +7126,7 @@ public class EditeurPanovisu extends Application {
         SeparatorMenuItem sep6 = new SeparatorMenuItem();
         mnuTransformation.getItems().add(sep6);
         mniOutilsBarre = new MenuItem(rbLocalisation.getString("outilsBarre"));
-        mniOutilsBarre.setAccelerator(KeyCombination.keyCombination("Ctrl+B"));
+        mniOutilsBarre.setAccelerator(new KeyCodeCombination(KeyCode.B, KeyCombination.SHORTCUT_DOWN));
         mnuTransformation.getItems().add(mniOutilsBarre);
 
         /*
@@ -7102,7 +7135,7 @@ public class EditeurPanovisu extends Application {
         Menu mnuAide = new Menu(rbLocalisation.getString("aide"));
         mbarPrincipal.getMenus().add(mnuAide);
         mniAide = new MenuItem(rbLocalisation.getString("aideAide"));
-        mniAide.setAccelerator(KeyCombination.keyCombination("Ctrl+H"));
+        mniAide.setAccelerator(new KeyCodeCombination(KeyCode.H, KeyCombination.SHORTCUT_DOWN));
         mnuAide.getItems().add(mniAide);
         SeparatorMenuItem sep4 = new SeparatorMenuItem();
         mnuAide.getItems().add(sep4);
@@ -7279,7 +7312,10 @@ public class EditeurPanovisu extends Application {
         tltpCube2Equi.setStyle(getStrTooltipStyle());
         spBtnCube2Equi.setTooltip(tltpCube2Equi);
         hbBarreBouton.getChildren().add(spBtnCube2Equi);
-
+        if (isMac()) {
+            mbarPrincipal.setMaxHeight(0);
+            hbBarreBouton.setTranslateY(-30);
+        }
         vbMonPanneau.getChildren().addAll(mbarPrincipal, hbBarreBouton);
         vbRacine.getChildren().add(vbMonPanneau);
         mniNouveauProjet.setOnAction((e) -> {
@@ -7574,9 +7610,10 @@ public class EditeurPanovisu extends Application {
         tabVisite.setContent(hbEnvironnement);
         double largeur;
         String strLabelStyle = "-fx-color : white;-fx-background-color : #fff;-fx-padding : 5px;  -fx-border : 1px solid #777;-fx-width : 100px;-fx-margin : 5px; ";
-
-        scnPrincipale = new Scene(vbRacine, iLargeur, iHauteur, Color.rgb(221, 221, 221));
+        StackPane panePrincipale = new StackPane(vbRacine);
+        scnPrincipale = new Scene(panePrincipale, iLargeur, iHauteur, Color.rgb(221, 221, 221));
         vbRacine.setStyle("-fx-font-size : 9pt;-fx-font-family: Arial;");
+        vbRacine.setTranslateY(15);
         spPanneauOutils = new ScrollPane();
         spPanneauOutils.setId("panOutils");
         vbOutils = new VBox(-5);
@@ -7586,27 +7623,35 @@ public class EditeurPanovisu extends Application {
         double largeurOutil = vbOutils.getPrefWidth();
 
         AnchorPane apPanovisu = new AnchorPane();
-        apPanovisu.setPrefHeight(118);
-        apPanovisu.setMinHeight(118);
-        apPanovisu.setMaxHeight(118);
-        apPanovisu.setStyle("-fx-background-color : derive(-fx-base,-5%);");
+        apPanovisu.setPrefHeight(50);
+        apPanovisu.setMinHeight(50);
+        apPanovisu.setMaxHeight(50);
 
-        ImageView ivPanoVisu = new ImageView(new Image("file:" + getStrRepertAppli() + File.separator + "images/panovisu.png", 83, 83, true, true));
-        ivPanoVisu.setLayoutX(25);
-        ivPanoVisu.setLayoutY(10);
+        apPanovisu.setMaxWidth(380);
+        apPanovisu.setPrefWidth(380);
+        apPanovisu.setMinWidth(380);
+        apPanovisu.setTranslateX((iLargeur - apPanovisu.getPrefWidth()) / 2);
+        if (isMac()) {
+            apPanovisu.setTranslateY((-iHauteur + apPanovisu.getPrefHeight()) / 2 + 3);
+
+        } else {
+            apPanovisu.setTranslateY((-iHauteur + apPanovisu.getPrefHeight()) / 2 + 33);
+        }
+        apPanovisu.setStyle("-fx-background-color : derive(-fx-base,-2%);");
+
+        ImageView ivPanoVisu = new ImageView(new Image("file:" + getStrRepertAppli() + File.separator + "images/panovisu.png", 48, 48, true, true));
+        ivPanoVisu.setLayoutX(40);
+        ivPanoVisu.setLayoutY(1);
         Label lblPanoVisu = new Label("panoVisu Vers. : " + strNumVersion);
         lblPanoVisu.setStyle("-fx-font-weight : bold;-fx-font-family : Verdana,Arial,sans-serif;-fx-font-size : 1.2em;");
         lblPanoVisu.setLayoutX(118);
-        lblPanoVisu.setLayoutY(25);
+        lblPanoVisu.setLayoutY(5);
         Label lblPanoVisu2 = new Label("(c) Laurent LANG (2014)");
         lblPanoVisu2.setLayoutX(118);
-        lblPanoVisu2.setLayoutY(55);
+        lblPanoVisu2.setLayoutY(35);
         lblPanoVisu2.setStyle("-fx-font-family : Verdana,Arial,sans-serif;-fx-font-size : 0.8em;");
-        Separator sepTitre = new Separator(Orientation.HORIZONTAL);
-        sepTitre.setPrefWidth(380);
-        sepTitre.setLayoutY(103);
-        apPanovisu.getChildren().addAll(ivPanoVisu, lblPanoVisu, lblPanoVisu2, sepTitre);
-
+        apPanovisu.getChildren().addAll(ivPanoVisu, lblPanoVisu, lblPanoVisu2);
+        panePrincipale.getChildren().add(apPanovisu);
         /*
          Paramètres de la visite
          */
@@ -7863,8 +7908,8 @@ public class EditeurPanovisu extends Application {
         vbVisuHotspots = new VBox();
         apVisuHS = new AnchorPane(vbVisuHotspots);
         apVisuHS.setLayoutY(40);
-        apHS1=new PaneOutil(true, "Hotspots", apVisuHS, largeurOutil);
-        
+        apHS1 = new PaneOutil(true, "Hotspots", apVisuHS, largeurOutil);
+
         AnchorPane apHS = new AnchorPane(apHS1.getApPaneOutil());
 
         vbChoixPanoramique.getChildren().addAll(
@@ -7904,16 +7949,16 @@ public class EditeurPanovisu extends Application {
          *
          */
         AnchorPane apPanneauOutils = new AnchorPane();
-        apPanneauOutils.getChildren().addAll(apPanovisu, spPanneauOutils);
+        apPanneauOutils.getChildren().addAll(spPanneauOutils);
         apPanneauOutils.setTranslateY(3);
         apPanneauOutils.setTranslateX(20);
         spPanneauOutils.setContent(vbOutils);
         spPanneauOutils.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         spPanneauOutils.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        spPanneauOutils.setPrefSize(largeurOutils, iHauteur - 230);
+        spPanneauOutils.setPrefSize(largeurOutils, iHauteur - 112 );
         spPanneauOutils.setMaxWidth(largeurOutils);
-        spPanneauOutils.setMaxHeight(iHauteur - 230);
-        spPanneauOutils.setLayoutY(118);
+        spPanneauOutils.setMaxHeight(iHauteur - 112 );
+        spPanneauOutils.setLayoutY(0);
         spPanneauOutils.setLayoutX(0);
         /**
          *
@@ -8020,6 +8065,9 @@ public class EditeurPanovisu extends Application {
         getApAttends().getChildren().addAll(lblAttends, pbarAvanceChargement, lblCharge, lblNiveaux);
         getApAttends().setVisible(false);
         apEnvironnement.getChildren().addAll(tpEnvironnement, getApAttends());
+        if (isMac()) {
+            apEnvironnement.setTranslateY(-30);
+        }
         vbRacine.getChildren().addAll(apEnvironnement);
         apPanneauPrincipal.getChildren().setAll(hbCoordonnees, panePanoramique);
         stPrimaryStage.show();
@@ -8067,7 +8115,12 @@ public class EditeurPanovisu extends Application {
         getStPrincipal().setTitle("PanoVisu v" + strNumVersion);
         stPrimaryStage.setMaximized(true);
         Dimension tailleEcran = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        int iHauteur = (int) tailleEcran.getHeight() - 20;
+        int iHauteur;
+        if (isMac()) {
+            iHauteur = (int) tailleEcran.getHeight() - 60;
+        } else {
+            iHauteur = (int) tailleEcran.getHeight() - 20;
+        }
         int iLargeur = (int) tailleEcran.getWidth() - 2;
         largeurMax = tailleEcran.getWidth() - 450.0d;
         creeEnvironnement(stPrimaryStage, iLargeur, iHauteur);

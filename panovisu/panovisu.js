@@ -343,7 +343,8 @@ function panovisu(iNumPano) {
             strDX,
             strDY,
             mesh,
-            container;
+            container,
+            container1;
     var pano,
             pano1,
             zeroNord,
@@ -3055,9 +3056,9 @@ function panovisu(iNumPano) {
         if (bBtnAutoTour) {
             $("#btnVisiteAuto-" + iNumPano).html("");
             if (bAutoTour) {
-                $("<img>", {id: "imgBtnAutoTour-" + iNumPano, src: "panovisu/images/visiteAutoMatique/pauseAutoTour.png", width: tailleBtnAutoTour + "px"}).appendTo("#btnVisiteAuto-" + iNumPano);
+                $("<img>", {id: "imgBtnAutoTour-" + iNumPano, src: "panovisu/images/visiteAutomatique/pauseAutoTour.png", width: tailleBtnAutoTour + "px"}).appendTo("#btnVisiteAuto-" + iNumPano);
             } else {
-                $("<img>", {id: "imgBtnAutoTour-" + iNumPano, src: "panovisu/images/visiteAutoMatique/playAutoTour.png", width: tailleBtnAutoTour + "px"}).appendTo("#btnVisiteAuto-" + iNumPano);
+                $("<img>", {id: "imgBtnAutoTour-" + iNumPano, src: "panovisu/images/visiteAutomatique/playAutoTour.png", width: tailleBtnAutoTour + "px"}).appendTo("#btnVisiteAuto-" + iNumPano);
             }
             $("#btnVisiteAuto-" + iNumPano).show();
             switch (positBtnAutoTourX) {
@@ -3094,7 +3095,7 @@ function panovisu(iNumPano) {
         if (bBtnAutoTour) {
             $("#btnVisiteAuto-" + iNumPano).html("");
             $("<img>", {id: "imgBtnAutoTour-" + iNumPano,
-                src: "panovisu/images/visiteAutoMatique/pauseAutoTour.png",
+                src: "panovisu/images/visiteAutomatique/pauseAutoTour.png",
                 alt: chainesTraduction[strLangage].arreteAutoTour,
                 title: chainesTraduction[strLangage].arreteAutoTour,
                 style: "cursor: pointer;width : " + tailleBtnAutoTour + "px"
@@ -3116,7 +3117,7 @@ function panovisu(iNumPano) {
         if (bBtnAutoTour) {
             $("#btnVisiteAuto-" + iNumPano).html("");
             $("<img>", {id: "imgBtnAutoTour-" + iNumPano,
-                src: "panovisu/images/visiteAutoMatique/playAutoTour.png",
+                src: "panovisu/images/visiteAutomatique/playAutoTour.png",
                 alt: chainesTraduction[strLangage].demarreAutoTour,
                 title: chainesTraduction[strLangage].demarreAutoTour,
                 style: "cursor: pointer;width : " + tailleBtnAutoTour + "px"
@@ -5037,7 +5038,8 @@ function panovisu(iNumPano) {
          * création du conteneur du panoramique
          */
         $("<div>", {id: "pano1-" + iNumPano, class: "pano1"}).appendTo("#" + fenetrePanoramique);
-        $("<div>", {id: "container-" + iNumPano, class: "container"}).appendTo("#pano1-" + iNumPano);
+        $("<div>", {id: "container1-" + iNumPano, class: "container",style:"z-index:10000"}).appendTo("#pano1-" + iNumPano);
+        $("<div>", {id: "container-" + iNumPano, class: "container",style:"z-index:10000"}).appendTo("#pano1-" + iNumPano);
         $("<div>", {id: "divVignettes-" + iNumPano, class: "vignettes"}).appendTo("#pano1-" + iNumPano);
         $("<div>", {id: "titreVignettes-" + iNumPano, class: "titreVignettes"}).appendTo("#pano1-" + iNumPano);
         $("#titreVignettes-" + iNumPano).html(chainesTraduction[strLangage].vignettes);
@@ -5089,6 +5091,7 @@ function panovisu(iNumPano) {
          * Création des racourcis vers les différentes fenÃªtres
          */
         container = $("#container-" + iNumPano);
+        container1 = $("#container-" + iNumPano);
         pano = $("#" + fenetrePanoramique);
         pano1 = $("#pano1-" + iNumPano);
 //        var conteneur = document.getElementById("container-" + num_pano);

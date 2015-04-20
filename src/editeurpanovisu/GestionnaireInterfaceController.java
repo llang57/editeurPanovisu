@@ -30,6 +30,7 @@ import static editeurpanovisu.EditeurPanovisu.setbDejaSauve;
 import static editeurpanovisu.EditeurPanovisu.setiNombrePanoramiquesFichier;
 import static editeurpanovisu.EditeurPanovisu.isbInternet;
 import static editeurpanovisu.EditeurPanovisu.strNumVersion;
+import static editeurpanovisu.EditeurPanovisu.getiDecalageMac;
 import static editeurpanovisu.EditeurPanovisu.tpEnvironnement;
 import java.io.BufferedReader;
 import java.io.File;
@@ -2288,7 +2289,7 @@ public class GestionnaireInterfaceController {
         if (getStrOutilsBarreClassique().equals("non")) {
             hbbarreBoutons.getChildren().remove(hbOutils);
         }
-        apVisualisation.getChildren().addAll(hbbarreBoutons, ivHotSpot, ivHotSpotImage, ivHotSpotHTML, apFenetreAfficheInfo, lblFenetreURL, apAfficheBarrePersonnalisee, apVisuPlan, apVisuCarte, apAfficheDiapo, ivDiapo);
+        apVisualisation.getChildren().addAll(hbbarreBoutons, ivHotSpot, ivHotSpotImage, ivHotSpotHTML, apFenetreAfficheInfo, lblFenetreURL, apAfficheBarrePersonnalisee, apVisuPlan, apVisuCarte, apAfficheDiapo, ivDiapo, apVisuBoutonVisiteAuto);
         ivHaut.setFitWidth(taille);
         ivHaut.setFitHeight(taille);
         ivBas.setFitWidth(taille);
@@ -4097,27 +4098,27 @@ public class GestionnaireInterfaceController {
         apVisualisation.setMinWidth(iLargeur - largeurOutils - 20);
         apVisualisation.setPrefHeight(iHauteur);
         vbOutils = new VBox(-5);
-        AnchorPane apPanovisu = new AnchorPane();
-        apPanovisu.setPrefHeight(118);
-        apPanovisu.setMinHeight(118);
-        apPanovisu.setMaxHeight(118);
-        apPanovisu.setStyle("-fx-background-color : derive(-fx-base,-5%);");
-
-        ImageView ivPanoVisu = new ImageView(new Image("file:" + getStrRepertAppli() + File.separator + "images/panovisu.png", 83, 83, true, true));
-        ivPanoVisu.setLayoutX(25);
-        ivPanoVisu.setLayoutY(10);
-        Label lblPanoVisu = new Label("panoVisu Vers. : " + strNumVersion);
-        lblPanoVisu.setStyle("-fx-font-weight : bold;-fx-font-family : Verdana,Arial,sans-serif;-fx-font-size : 1.2em;");
-        lblPanoVisu.setLayoutX(118);
-        lblPanoVisu.setLayoutY(25);
-        Label lblPanoVisu2 = new Label("(c) Laurent LANG (2014)");
-        lblPanoVisu2.setLayoutX(118);
-        lblPanoVisu2.setLayoutY(55);
-        lblPanoVisu2.setStyle("-fx-font-family : Verdana,Arial,sans-serif;-fx-font-size : 0.8em;");
-        Separator sepTitre = new Separator(Orientation.HORIZONTAL);
-        sepTitre.setPrefWidth(380);
-        sepTitre.setLayoutY(103);
-        apPanovisu.getChildren().addAll(ivPanoVisu, lblPanoVisu, lblPanoVisu2, sepTitre);
+//        AnchorPane apPanovisu = new AnchorPane();
+//        apPanovisu.setPrefHeight(118);
+//        apPanovisu.setMinHeight(118);
+//        apPanovisu.setMaxHeight(118);
+//        apPanovisu.setStyle("-fx-background-color : derive(-fx-base,-5%);");
+//
+//        ImageView ivPanoVisu = new ImageView(new Image("file:" + getStrRepertAppli() + File.separator + "images/panovisu.png", 83, 83, true, true));
+//        ivPanoVisu.setLayoutX(25);
+//        ivPanoVisu.setLayoutY(10);
+//        Label lblPanoVisu = new Label("panoVisu Vers. : " + strNumVersion);
+//        lblPanoVisu.setStyle("-fx-font-weight : bold;-fx-font-family : Verdana,Arial,sans-serif;-fx-font-size : 1.2em;");
+//        lblPanoVisu.setLayoutX(118);
+//        lblPanoVisu.setLayoutY(25);
+//        Label lblPanoVisu2 = new Label("(c) Laurent LANG (2014-2015)");
+//        lblPanoVisu2.setLayoutX(118);
+//        lblPanoVisu2.setLayoutY(55);
+//        lblPanoVisu2.setStyle("-fx-font-family : Verdana,Arial,sans-serif;-fx-font-size : 0.8em;");
+//        Separator sepTitre = new Separator(Orientation.HORIZONTAL);
+//        sepTitre.setPrefWidth(380);
+//        sepTitre.setLayoutY(103);
+//        apPanovisu.getChildren().addAll(ivPanoVisu, lblPanoVisu, lblPanoVisu2, sepTitre);
         vbOutils.setLayoutX(5);
         AnchorPane apOutils = new AnchorPane();
         apOutils.setPrefWidth(largeurOutils);
@@ -4125,17 +4126,18 @@ public class GestionnaireInterfaceController {
         apOutils.setTranslateY(3);
         apOutils.setTranslateX(20);
         ScrollPane spOutils = new ScrollPane(vbOutils);
-        apOutils.getChildren().addAll(apPanovisu, spOutils);
+        apOutils.getChildren().addAll(spOutils);
         spOutils.setId("spOutils");
         spOutils.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         spOutils.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        spOutils.setMinHeight(iHauteur - 170);
-        spOutils.setMaxHeight(iHauteur - 170);
+        spOutils.setMinHeight(iHauteur - 52 + getiDecalageMac());
+        spOutils.setMaxHeight(iHauteur - 52 + getiDecalageMac());
         spOutils.setPrefWidth(largeurOutils);
         spOutils.setMinWidth(largeurOutils);
         spOutils.setFitToWidth(true);
         spOutils.setFitToHeight(true);
-        spOutils.setLayoutY(118);
+
+        spOutils.setLayoutY(-getiDecalageMac());
         vbOutils.setPrefWidth(largeurOutils - 20);
         vbOutils.setMaxWidth(largeurOutils - 20);
         hbInterface.getChildren().addAll(apVisualisation, apOutils);
@@ -6227,7 +6229,7 @@ public class GestionnaireInterfaceController {
          *     Ajouts des pannels dans la barre d'outils
          * ******************************************************
          */
-        if (!isbInternet()){
+        if (!isbInternet()) {
             apCARTE.setDisable(true);
         }
         vbOutils.getChildren().addAll(apTHEME,

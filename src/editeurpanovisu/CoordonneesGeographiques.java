@@ -50,7 +50,8 @@ public class CoordonneesGeographiques {
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
-        public static double fromDMS(String degDMS) {
+
+    public static double fromDMS(String degDMS) {
         String degres = degDMS.split("°")[0];
         String minutes = degDMS.split("°")[1].split("'")[0];
         String secondes = degDMS.split("°")[1].split("'")[1].split("\"")[0];
