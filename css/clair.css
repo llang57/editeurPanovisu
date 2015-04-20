@@ -3010,10 +3010,10 @@ is being used to size a border should also be in pixels.
     -fx-background: derive(-fx-base,-5%); 
 }
 .menuBarreOutils1{
-    -fx-background-color: derive(-fx-base,-2%);     
+    -fx-background-color: derive(-fx-base,0%);     
 }
 .menuBarreOutils{
-    -fx-background-color: derive(-fx-base,-2%);     
+    -fx-background-color: derive(-fx-base,0%);     
 }
 .legendePane{
     -fx-border-color : derive(-fx-base,-2%);

@@ -343,7 +343,8 @@ function panovisu(iNumPano) {
             strDX,
             strDY,
             mesh,
-            container;
+            container,
+            container1;
     var pano,
             pano1,
             zeroNord,
@@ -5037,7 +5038,8 @@ function panovisu(iNumPano) {
          * création du conteneur du panoramique
          */
         $("<div>", {id: "pano1-" + iNumPano, class: "pano1"}).appendTo("#" + fenetrePanoramique);
-        $("<div>", {id: "container-" + iNumPano, class: "container"}).appendTo("#pano1-" + iNumPano);
+        $("<div>", {id: "container1-" + iNumPano, class: "container",style:"z-index:10000"}).appendTo("#pano1-" + iNumPano);
+        $("<div>", {id: "container-" + iNumPano, class: "container",style:"z-index:10000"}).appendTo("#pano1-" + iNumPano);
         $("<div>", {id: "divVignettes-" + iNumPano, class: "vignettes"}).appendTo("#pano1-" + iNumPano);
         $("<div>", {id: "titreVignettes-" + iNumPano, class: "titreVignettes"}).appendTo("#pano1-" + iNumPano);
         $("#titreVignettes-" + iNumPano).html(chainesTraduction[strLangage].vignettes);
@@ -5089,6 +5091,7 @@ function panovisu(iNumPano) {
          * Création des racourcis vers les différentes fenÃªtres
          */
         container = $("#container-" + iNumPano);
+        container1 = $("#container-" + iNumPano);
         pano = $("#" + fenetrePanoramique);
         pano1 = $("#pano1-" + iNumPano);
 //        var conteneur = document.getElementById("container-" + num_pano);
