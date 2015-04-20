@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.web.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
@@ -19,7 +20,7 @@
       <Button fx:id="btnQuitte" layoutX="483.0" layoutY="292.0" mnemonicParsing="false" onAction="#handleQuitteAction" text="Ok" />
       <HBox layoutX="69.0" layoutY="8.0" />
       <Label layoutX="93.0" layoutY="41.0" text="  100% HTML5    100% Libre" />
-      <ImageView fitHeight="234.0" fitWidth="315.0" layoutX="125.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="164.0" fitWidth="231.0" layoutX="31.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/popUp.png" />
          </image>
@@ -49,5 +50,6 @@
             <Font name="Verdana" size="22.0" />
          </font>
       </Label>
+      <TextArea layoutX="290.0" layoutY="63.0" prefHeight="220.0" prefWidth="228.0" text="Crédits&#10;&#10;Béta Test : &#10;         Matthieu Selme&#10;&#10;Traduction Portugais :&#10;          Carlos Eduardo G. Carvalho&#10;&#10;Soutien Moral :&#10;           Aline &amp; le forum panophoto&#10;          " wrapText="true" />
    </children>
 </AnchorPane>
