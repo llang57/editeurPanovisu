@@ -163,5 +163,3 @@ include("panovisu/libs/jqueryMenu/jquery.contextMenu.js");
 include("panovisu/libs/jqueryMenu/jquery.ui.position.js");
 include("panovisu/libs/msdropdown/jquery.dd.min.js");
 
-
-
