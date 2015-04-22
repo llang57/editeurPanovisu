@@ -50,6 +50,6 @@
             <Font name="Verdana" size="22.0" />
          </font>
       </Label>
-      <TextArea layoutX="290.0" layoutY="63.0" prefHeight="220.0" prefWidth="228.0" text="Crédits&#10;&#10;Béta Test : &#10;         Matthieu Selme&#10;&#10;Traduction Portugais :&#10;          Carlos Eduardo G. Carvalho&#10;&#10;Soutien Moral :&#10;           Aline &amp; le forum panophoto&#10;          " wrapText="true" />
+      <TextArea layoutX="272.0" layoutY="83.0" prefHeight="186.0" prefWidth="228.0" text="Crédits&#10;&#10;Béta Test : &#10;         Matthieu Selme&#10;&#10;Traduction Portugais :&#10;          Carlos Eduardo G. Carvalho&#10;&#10;Soutien Moral :&#10;           Aline &amp; le forum panophoto&#10;          " wrapText="true" />
    </children>
 </AnchorPane>
