@@ -81,14 +81,14 @@ and open the template in the editor.
     background-color: rgba(0,0,0,0);
     background-image:  url(fond.jpg);
     background-position:  center center;
-    background-repeat: no-repeat;    
+    background-repeat: repeat;    
 }
 
 .container{
     background-color: rgba(0,0,0,0);
     background-image:  url(fond.jpg);
     background-position:  center center;
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     margin-right: 0px;
     overflow: hidden;
 }

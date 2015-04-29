@@ -492,7 +492,8 @@ function panovisu(iNumPano) {
         changeTaille();
     });
 
-    $(document).on("click", ".hotSpots", function () {
+    $(document).on("click", ".hotSpots", function (evenement) {
+        evenement.preventDefault();
         idHS = $(this).attr("id");
         numHS = parseInt(idHS.split("-")[1]);
         //console.log(idHS + " num " + numHS);
@@ -567,7 +568,7 @@ function panovisu(iNumPano) {
         evenement.preventDefault();
     });
 
-    $(document).on("mouseup touchend", "#container-" + iNumPano, function (evenement) {
+    $(document).on("mouseup", "#container-" + iNumPano, function (evenement) {
         pano.removeClass('curseurCroix');
         if (iMode === 0) {
             $("#container-" + iNumPano).css("cursor", "grab");
@@ -1910,7 +1911,7 @@ function panovisu(iNumPano) {
         longitude += deltaX;
         latitude += deltaY;
         affiche();
-        if (bUserInteracting)
+        if (bUserInteracting || isUserInteracting)
             timer = requestAnimFrame(deplaceMode2);
     }
 
@@ -3532,6 +3533,7 @@ function panovisu(iNumPano) {
      */
     function initPanoSphere() {
         if (bReloaded) {
+            console.log("before prog : ", renderer.info.memory.programs, " geometries : ", renderer.info.memory.geometries, " Textures :", renderer.info.memory.textures);
             for (i = 1; i <= iNbMeshes; i++) {
                 scene.remove(meshes[i]);
             }
@@ -3549,6 +3551,7 @@ function panovisu(iNumPano) {
             iNbTextures = 0;
             iNbMeshes = 0;
             iNbGeometries = 0;
+            console.log("before prog : ", renderer.info.memory.programs, " geometries : ", renderer.info.memory.geometries, " Textures :", renderer.info.memory.textures);
         }
         //renderer.deallocateTexture( texture );
         camera = new THREE.PerspectiveCamera(fov, pano.width() / pano.height(), 1, 1100);
@@ -3728,16 +3731,17 @@ function panovisu(iNumPano) {
     function loadTexture1(path, niveau) {
 
         iNbTextures++;
-        textures[iNbTextures] = new THREE.Texture(texture_placeholder);
+        var iText = iNbTextures;
+        textures[iText] = new THREE.Texture(texture_placeholder);
         iNbMateriaux++;
-        materiaux[iNbMateriaux] = new THREE.MeshBasicMaterial({map: textures[iNbTextures], overdraw: true});
+        materiaux[iNbMateriaux] = new THREE.MeshBasicMaterial({map: textures[iText], overdraw: true});
         var image = new Image();
         image.onload = function () {
             var img = path.split("/")[2].split("_")[0];
             var img2 = strPanoImage.split("/")[1].split("_")[0];
             if (img === img2) {
-                textures[iNbTextures].image = this;
-                textures[iNbTextures].needsUpdate = true;
+                textures[iText].image = this;
+                textures[iText].needsUpdate = true;
                 nbPanoCharges += 1;
                 if (nbPanoCharges < 6)
                 {
@@ -3819,14 +3823,15 @@ function panovisu(iNumPano) {
      */
     function loadTexture(path) {
         iNbTextures++;
-        textures[iNbTextures] = new THREE.Texture(texture_placeholder);
+        var iText = iNbTextures;
+        textures[iText] = new THREE.Texture(texture_placeholder);
         iNbMateriaux++;
-        materiaux[iNbMateriaux] = new THREE.MeshBasicMaterial({map: textures[iNbTextures], overdraw: true});
-        ;
+        materiaux[iNbMateriaux] = new THREE.MeshBasicMaterial({map: textures[iText], overdraw: true});
+
         var image = new Image();
         image.onload = function () {
-            textures[iNbTextures].image = this;
-            textures[iNbTextures].needsUpdate = true;
+            textures[iText].image = this;
+            textures[iText].needsUpdate = true;
             nbPanoCharges += 1;
             if (nbPanoCharges < 6)
                 $(".panovisuCharge").html(nbPanoCharges + "/6");
@@ -5209,12 +5214,22 @@ function panovisu(iNumPano) {
                     });
 
                 }
+                isUserInteracting = true;
                 onPointerDownPointerX = evenement.touches[0].pageX;
                 onPointerDownPointerY = evenement.touches[0].pageY;
-                isUserInteracting = true;
-                onPointerDownLon = longitude;
-                onPointerDownLat = latitude;
-                pano.addClass('curseurCroix');
+
+                if (iMode === 1) {
+                    deltaX = 0;
+                    deltaY = 0;
+                    timer = requestAnimFrame(deplaceMode2);
+                }
+                else
+                {
+                    onPointerDownLon = longitude;
+                    onPointerDownLat = latitude;
+
+                }
+
             }
             if (evenement.targetTouches.length === 2) {
                 if (bAfficheInfo)
@@ -5257,10 +5272,17 @@ function panovisu(iNumPano) {
 
                 }
                 else {
-                    mouseMove = true;
-                    longitude = (onPointerDownPointerX - evenement.touches[0].pageX) * 0.1 + onPointerDownLon;
-                    latitude = (evenement.touches[0].pageY - onPointerDownPointerY) * 0.1 + onPointerDownLat;
-                    affiche();
+                    if (iMode === 1) {
+                        deltaX = -(onPointerDownPointerX - evenement.touches[0].pageX) * 0.01;
+                        deltaY = (onPointerDownPointerY - evenement.touches[0].pageY) * 0.01;
+                    }
+                    else {
+
+                        mouseMove = true;
+                        longitude = (onPointerDownPointerX - evenement.touches[0].pageX) * 0.1 + onPointerDownLon;
+                        latitude = (evenement.touches[0].pageY - onPointerDownPointerY) * 0.1 + onPointerDownLat;
+                        affiche();
+                    }
                 }
             }
             else if (isZoom) {
@@ -5281,6 +5303,13 @@ function panovisu(iNumPano) {
         }, false);
 
         conteneur.addEventListener('touchend', function (evenement) {
+            if (iMode === 1) {
+                ddx = deltaX;
+                ddy = deltaY;
+                dx = deltaX / 4.0;
+                dy = deltaY / 4.0;
+                timer = requestAnimFrame(ralenti);
+            }
             isUserInteracting = false;
             isZoom = false;
         }, false);
