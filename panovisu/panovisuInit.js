@@ -1,5 +1,5 @@
 var numeroPano = 0,
-        version = "1.2.4",
+        version = "1.2.6",
         programmeur = "Laurent LANG",
         anneeProgramme = "2014",
         site = "http://lemondea360.fr",
@@ -43,10 +43,10 @@ function traduction() {
     this.panoSuivant = "panoramique suivant";
     this.petitePlanete = "Vue petite planète";
     this.vueNormale = "Vue Normale";
-    this.masqueElements="Masque les éléments";
-    this.afficheElements="Affiche les éléments";
-    this.demarreAutoTour="Lance la visite Automatique";
-    this.arreteAutoTour="Arrête la visite Automatique";
+    this.masqueElements = "Masque les éléments";
+    this.afficheElements = "Affiche les éléments";
+    this.demarreAutoTour = "Lance la visite Automatique";
+    this.arreteAutoTour = "Arrête la visite Automatique";
     this.aPropos = "A Propos de panoVisu ...";
     this.afficheMasque = "Affiche/masque les éléments";
     this.vignettes = "Vignettes";
@@ -147,6 +147,10 @@ function ajoutePano(parametres) {
     pano.initialisePano(parametres);
     return pano;
 }
+
+include("panovisu/libs/openLayers/OpenLayers.js");
+include("panovisu/libs/openLayers/OpenStreetMap.js");
+include("panovisu/libs/openLayers/gmap.js?v=3.5&sensor=false");
 
 include("panovisu/i18n/defaut.js");
 include("panovisu/i18n/fr_FR.js");
