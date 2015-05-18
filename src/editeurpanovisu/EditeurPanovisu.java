@@ -991,22 +991,22 @@ public class EditeurPanovisu extends Application {
             if (!fileBoussoleRepert.exists()) {
                 fileBoussoleRepert.mkdirs();
             }
-            copieDirectory(getStrRepertAppli() + File.separator + "panovisu/images/boussoles", fileBoussoleRepert.getAbsolutePath());
+            copieRepertoire(getStrRepertAppli() + File.separator + "panovisu/images/boussoles", fileBoussoleRepert.getAbsolutePath());
             File filePlanRepert = new File(getStrRepertTemp() + "/panovisu/images/plan");
             if (!filePlanRepert.exists()) {
                 filePlanRepert.mkdirs();
             }
-            copieDirectory(getStrRepertAppli() + File.separator + "panovisu/images/plan", filePlanRepert.getAbsolutePath());
+            copieRepertoire(getStrRepertAppli() + File.separator + "panovisu/images/plan", filePlanRepert.getAbsolutePath());
             File fileReseauRepert = new File(getStrRepertTemp() + "/panovisu/images/reseaux");
             if (!fileReseauRepert.exists()) {
                 fileReseauRepert.mkdirs();
             }
-            copieDirectory(getStrRepertAppli() + File.separator + "panovisu/images/reseaux", fileReseauRepert.getAbsolutePath());
+            copieRepertoire(getStrRepertAppli() + File.separator + "panovisu/images/reseaux", fileReseauRepert.getAbsolutePath());
             File fileInterfaceRepert = new File(getStrRepertTemp() + "/panovisu/images/interface");
             if (!fileInterfaceRepert.exists()) {
                 fileInterfaceRepert.mkdirs();
             }
-            copieDirectory(getStrRepertAppli() + File.separator + "panovisu/images/interface", fileInterfaceRepert.getAbsolutePath());
+            copieRepertoire(getStrRepertAppli() + File.separator + "panovisu/images/interface", fileInterfaceRepert.getAbsolutePath());
             File fileMARepert = new File(getStrRepertTemp() + "/panovisu/images/MA");
             if (!fileMARepert.exists()) {
                 fileMARepert.mkdirs();
@@ -1824,7 +1824,7 @@ public class EditeurPanovisu extends Application {
             File fileRepertVisite = dcRepertChoix.showDialog(null);
             if (fileRepertVisite != null) {
                 String strNomRepertVisite = fileRepertVisite.getAbsolutePath();
-                copieDirectory(getStrRepertTemp(), strNomRepertVisite);
+                copieRepertoire(getStrRepertTemp(), strNomRepertVisite);
                 Dialogs.create().title(rbLocalisation.getString("main.dialog.generationVisite"))
                         .message(rbLocalisation.getString("main.dialog.generationVisiteMessage") + strNomRepertVisite)
                         .showInformation();
@@ -1863,8 +1863,8 @@ public class EditeurPanovisu extends Application {
         if (strExtension.equals("tif")) {
             try {
                 imgPano = ReadWriteImage.readTiff(strFichierImage);
-                if (imgPano.getWidth() > 8000) {
-                    imgPano = ReadWriteImage.resizeImage(imgPano, 8000, 4000);
+                if (imgPano.getWidth() > 8192) {
+                    imgPano = ReadWriteImage.resizeImage(imgPano, 8192, 4096);
 
                 }
             } catch (ImageReadException | IOException ex) {
@@ -1873,14 +1873,14 @@ public class EditeurPanovisu extends Application {
             }
         } else {
             imgPano = new Image("file:" + strFichierImage);
-            if (imgPano.getWidth() > 8000) {
-                imgPano = new Image("file:" + strFichierImage, 8000, 4000, true, true);
+            if (imgPano.getWidth() > 8192) {
+                imgPano = new Image("file:" + strFichierImage, 8192, 4096, true, true);
             }
         }
         String strNomPano = strFichierImage.substring(strFichierImage.lastIndexOf(File.separator) + 1, strFichierImage.length()).split("\\.")[0] + ".jpg";
         String strFicImage = strRepertoire + File.separator + strNomPano;
         try {
-            ReadWriteImage.writeJpeg(imgPano, strFicImage, 0.85f, true, 0.3f);
+            ReadWriteImage.writeJpeg(imgPano, strFicImage, 0.95f, true, 0.25f);
 
         } catch (IOException ex) {
             Logger.getLogger(EditeurPanovisu.class
@@ -1921,7 +1921,11 @@ public class EditeurPanovisu extends Application {
                     strNomPano = strFichierImage.substring(strFichierImage.lastIndexOf(File.separator) + 1, strFichierImage.length());
                     strNomPano = strNomPano.substring(strNomPano.lastIndexOf(File.separator) + 1, strNomPano.length()).split("\\.")[0] + ".jpg";
                     strFicImage = strRepNiveau + File.separator + strNomPano;
-                    ReadWriteImage.writeJpeg(imgPano, strFicImage, 0.7f, true, 0.1f);
+                    if (i < iNombreNiveaux - 1) {
+                        ReadWriteImage.writeJpeg(imgPano, strFicImage, 0.7f, true, 0.1f);
+                    } else {
+                        ReadWriteImage.writeJpeg(imgPano, strFicImage, 0.95f, true, 0.25f);
+                    }
 
                 } catch (IOException ex) {
                     Logger.getLogger(EditeurPanovisu.class
@@ -2337,7 +2341,7 @@ public class EditeurPanovisu extends Application {
                 String strRepertPanovisu = getStrRepertTemp() + File.separator + "panovisu";
                 File fileRptPanovisu = new File(strRepertPanovisu);
                 fileRptPanovisu.mkdirs();
-                copieDirectory(getStrRepertAppli() + File.separator + "panovisu", strRepertPanovisu);
+                copieRepertoire(getStrRepertAppli() + File.separator + "panovisu", strRepertPanovisu);
                 mnuPanoramique.setDisable(false);
                 ivAjouterPano.setDisable(false);
                 ivAjouterPano.setOpacity(1.0);
@@ -2492,7 +2496,7 @@ public class EditeurPanovisu extends Application {
                 String strRepertPanovisu = getStrRepertTemp() + File.separator + "panovisu";
                 File fileRptPanovisu = new File(strRepertPanovisu);
                 fileRptPanovisu.mkdirs();
-                copieDirectory(getStrRepertAppli() + File.separator + "panovisu", strRepertPanovisu);
+                copieRepertoire(getStrRepertAppli() + File.separator + "panovisu", strRepertPanovisu);
                 mnuPanoramique.setDisable(false);
                 ivAjouterPano.setDisable(false);
                 ivAjouterPano.setOpacity(1.0);
@@ -2825,7 +2829,7 @@ public class EditeurPanovisu extends Application {
             String strRepertPanovisu = getStrRepertTemp() + File.separator + "panovisu";
             File fileRptPanovisu = new File(strRepertPanovisu);
             fileRptPanovisu.mkdirs();
-            copieDirectory(getStrRepertAppli() + File.separator + "panovisu", strRepertPanovisu);
+            copieRepertoire(getStrRepertAppli() + File.separator + "panovisu", strRepertPanovisu);
             mnuPanoramique.setDisable(false);
 
             ivAjouterPano.setDisable(false);
@@ -3664,7 +3668,7 @@ public class EditeurPanovisu extends Application {
      * @param strEmplacement répertoire origine
      * @param strRepertoire répertoire cible
      */
-    static public void copieDirectory(String strEmplacement, String strRepertoire) {
+    static public void copieRepertoire(String strEmplacement, String strRepertoire) {
         File fileRepert2 = new File(strRepertoire);
         if (!fileRepert2.exists()) {
             fileRepert2.mkdirs();
@@ -3677,7 +3681,7 @@ public class EditeurPanovisu extends Application {
                     if (fileFichier.isDirectory()) {
                         String strRep1 = fileFichier.getAbsolutePath().substring(fileFichier.getAbsolutePath().lastIndexOf(File.separator) + 1);
                         strRep1 = strRepertoire + File.separator + strRep1;
-                        copieDirectory(fileFichier.getAbsolutePath(), strRep1);
+                        copieRepertoire(fileFichier.getAbsolutePath(), strRep1);
                     } else {
                         copieFichierRepertoire(fileFichier.getAbsolutePath(), strRepertoire);
 
@@ -5813,7 +5817,7 @@ public class EditeurPanovisu extends Application {
             paneFond.setLayoutY(10);
             paneFond.getChildren().add(ivExpShrk);
             navigateurPanoramique
-                    = new NavigateurPanoramique(getPanoramiquesProjet()[iNumPanochoisi].getStrNomFichier(), 10.d, 10.d, 340, 200);
+                    = new NavigateurPanoramique(getPanoramiquesProjet()[iNumPanochoisi].getImgVisuPanoramique(), 10.d, 10.d, 340, 200);
             apVisuPano = navigateurPanoramique.affichePano();
             navigateurPanoramique.addPropertyChangeListener("positNord", (e) -> {
                 double longitude = Math.round(Double.parseDouble(e.getNewValue().toString()) * 10) / 10.d - 180;
@@ -6009,6 +6013,7 @@ public class EditeurPanovisu extends Application {
             panoCree.setStrTypePanoramique(Panoramique.SPHERE);
         }
         if (typePano.equals(Panoramique.CUBE)) {
+            System.out.println(fichierPano);
             panoCree.setStrNomFichier(fichierPano);
             panoCree.setStrNomFichier(fichierPano);
             String strNom = fichierPano.substring(0, fichierPano.length() - 6);
@@ -6050,7 +6055,7 @@ public class EditeurPanovisu extends Application {
                 }
             }
             Image imgEquiRectangulaire = TransformationsPanoramique.cube2rect(imgFront, imgLeft, imgRight, imgBehind, imgTop, imgBottom, 1200);
-            Image imgEquiRectangulaire2 = TransformationsPanoramique.cube2rect(imgFront, imgLeft, imgRight, imgBehind, imgTop, imgBottom, 2400);
+            Image imgEquiRectangulaire2 = TransformationsPanoramique.cube2rect(imgFront, imgLeft, imgRight, imgBehind, imgTop, imgBottom, 4096);
             Image imgVignetteEquiRectangulaire = TransformationsPanoramique.cube2rect(imgFront, imgLeft, imgRight, imgBehind, imgTop, imgBottom, 300);
             panoCree.setImgPanoramique(imgEquiRectangulaire);
             Platform.runLater(() -> {
@@ -7955,9 +7960,9 @@ public class EditeurPanovisu extends Application {
         spPanneauOutils.setContent(vbOutils);
         spPanneauOutils.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         spPanneauOutils.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        spPanneauOutils.setPrefSize(largeurOutils, iHauteur - 112 );
+        spPanneauOutils.setPrefSize(largeurOutils, iHauteur - 112);
         spPanneauOutils.setMaxWidth(largeurOutils);
-        spPanneauOutils.setMaxHeight(iHauteur - 112 );
+        spPanneauOutils.setMaxHeight(iHauteur - 112);
         spPanneauOutils.setLayoutY(0);
         spPanneauOutils.setLayoutX(0);
         /**

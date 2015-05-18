@@ -396,7 +396,7 @@ public class Panoramique {
      * @return the imgVisuPanoramique
      */
     public Image getImgVisuPanoramique() {
-        return imgVisuPanoramique;
+        return this.imgVisuPanoramique;
     }
 
     /**
@@ -404,6 +404,7 @@ public class Panoramique {
      */
     public void setImgVisuPanoramique(Image imgVisuPanoramique) {
         this.imgVisuPanoramique = imgVisuPanoramique;
+        System.out.println("Largeur : "+this.getImgVisuPanoramique().getWidth());
     }
 
     /**

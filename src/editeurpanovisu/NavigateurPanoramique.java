@@ -82,19 +82,21 @@ public final class NavigateurPanoramique {
             bdfLat = new BigDecimalField(new BigDecimal(0)),
             bdfFOV = new BigDecimalField(new BigDecimal(70));
     private String nomFichierPanoramique = "";
+    private Image imgPanoramique;
     private Button btnChoixNord, btnChoixVue;
-    private final Sphere spPanorama = new Sphere(200, 50);
+    private final Sphere spPanorama = new Sphere(200, 100);
     private final Group root = new Group(spPanorama);
     private final PhongMaterial phmPanorama = new PhongMaterial();
     private ResourceBundle rbLocalisation = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", EditeurPanovisu.getLocale());
 
 
-    public NavigateurPanoramique(String nomFichierPanoramique, double positX, double positY, double largeur, double hauteur) {
+    public NavigateurPanoramique(Image imgFichierPanoramique, double positX, double positY, double largeur, double hauteur) {
         this.positX = positX;
         this.positY = positY;
         this.largeurImage = largeur;
         this.hauteurImage = hauteur;
-        this.setNomFichierPanoramique(nomFichierPanoramique);
+        this.setImgPanoramique(imgFichierPanoramique);
+        //this.setNomFichierPanoramique(nomFichierPanoramique);
     }
 
     public static Image imgTransformationImage(Image imgRect) {
@@ -148,11 +150,11 @@ public final class NavigateurPanoramique {
         setLongitude((getLongitude()) % 360);
         setLongitude(getLongitude() < 0 ? getLongitude() + 360 : getLongitude());
         setLongitude(getLongitude() > 180 ? getLongitude() - 360 : getLongitude());
-        if (getLatitude() + hfov / 2 > 80) {
-            setLatitude(80 - hfov / 2);
+        if (getLatitude() > 90) {
+            setLatitude(90);
         }
-        if (getLatitude() - hfov / 2 < -80) {
-            setLatitude(-80 + hfov / 2);
+        if (getLatitude() < -90) {
+            setLatitude(-90);
         }
         if (getFov() > 105) {
             setFov(105);
@@ -451,10 +453,8 @@ public final class NavigateurPanoramique {
     public AnchorPane affichePano() {
         apPanorama = new AnchorPane();
         apPanorama.setStyle("-fx-background-color :-fx-background");
-        Image imgRect = new Image("file:" + getNomFichierPanoramique());
-        Image imgTransf = imgTransformationImage(imgRect);
-        phmPanorama.setDiffuseMap(imgTransf);
-        phmPanorama.setSpecularMap(imgTransf);
+        phmPanorama.setDiffuseMap(this.getImgPanoramique());
+        phmPanorama.setSpecularMap(this.getImgPanoramique());
 
         spPanorama.setCullFace(CullFace.FRONT);
         spPanorama.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
@@ -468,14 +468,13 @@ public final class NavigateurPanoramique {
 
     public void setNomImagePanoramique(String strImagePanoramique, int iRapport) {
         this.setNomFichierPanoramique(strImagePanoramique);
-        Image imgRect = new Image("file:" + getNomFichierPanoramique());
-        Image imgTransf = imgTransformationImage(imgRect,iRapport);
-        phmPanorama.setDiffuseMap(imgTransf);
-        phmPanorama.setSpecularMap(imgTransf);
+        phmPanorama.setDiffuseMap(this.getImgPanoramique());
+        phmPanorama.setSpecularMap(this.getImgPanoramique());
     }
 
     public void setImagePanoramique(String strImagePanoramique, Image imgPanoramique) {
         this.setNomFichierPanoramique(strImagePanoramique);
+        this.setImgPanoramique(imgPanoramique);
         phmPanorama.setDiffuseMap(imgPanoramique);
         phmPanorama.setSpecularMap(imgPanoramique);
     }
@@ -611,6 +610,21 @@ public final class NavigateurPanoramique {
         this.choixFov = choixFov;
         double nouvelleValeur = this.choixFov;
         this.changeSupport.firePropertyChange("choixFov", ancienneValeur, nouvelleValeur);
+    }
+
+    /**
+     * @return the imgPanoramique
+     */
+    public Image getImgPanoramique() {
+        return this.imgPanoramique;
+    }
+
+    /**
+     * @param imgPanoramique the imgPanoramique to set
+     */
+    public void setImgPanoramique(Image imgPanoramique) {
+        this.imgPanoramique = imgPanoramique;
+        System.out.println("navigateur Largeur : "+this.imgPanoramique.getWidth());
     }
 
 }

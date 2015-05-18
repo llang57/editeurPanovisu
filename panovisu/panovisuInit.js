@@ -148,9 +148,9 @@ function ajoutePano(parametres) {
     return pano;
 }
 
-include("panovisu/libs/openLayers/OpenLayers.js");
-include("panovisu/libs/openLayers/OpenStreetMap.js");
-include("panovisu/libs/openLayers/gmap.js?v=3.5&sensor=false");
+//include("panovisu/libs/openLayers/OpenLayers.js");
+//include("panovisu/libs/openLayers/OpenStreetMap.js");
+//include("panovisu/libs/openLayers/gmap.js?v=3.5&sensor=false");
 
 include("panovisu/i18n/defaut.js");
 include("panovisu/i18n/fr_FR.js");
