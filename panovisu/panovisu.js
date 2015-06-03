@@ -3,7 +3,7 @@
 /**
  * @name panoVisu
  * 
- * @version 1.2.6
+ * @version 1.3.dev
  * @author LANG Laurent
  */
 
@@ -35,10 +35,10 @@ function panovisu(iNumPano) {
             GET[decodeURI(tmp[i].substring(0, tmp[i].indexOf("=")))] = decodeURI(tmp[i].substring(tmp[i].indexOf("=") + 1));
         else
             GET[decodeURI(tmp[i])] = '';
-/**
- * 
- * @type THREE.PerspectiveCamera|THREE.PerspectiveCamera|THREE.PerspectiveCamera|THREE.PerspectiveCamera|THREE.PerspectiveCamera|THREE.PerspectiveCamera
- */
+    /**
+     * 
+     * @type THREE.PerspectiveCamera|THREE.PerspectiveCamera|THREE.PerspectiveCamera|THREE.PerspectiveCamera|THREE.PerspectiveCamera|THREE.PerspectiveCamera
+     */
     var camera,
             scene,
             renderer,
@@ -75,10 +75,14 @@ function panovisu(iNumPano) {
         this.contenu = "";
         this.image = "";
         this.anime = "false";
+        this.longitude = -1000;
+        this.latitude = -1000;
+        this.fov = 0;
         this.info = "";
         this.largeur = "100%";
         this.position = "center";
         this.couleur = "rgba(0,0,0,0.7)";
+        this.taille="30px"
     }
 
     /**
@@ -178,11 +182,14 @@ function panovisu(iNumPano) {
             return new Date().getTime();
         };
     }
-/**
- * 
- * @type @exp;document@call;getElementById
- */
-    var conteneur,
+    /**
+     * 
+     * @type @exp;document@call;getElementById
+     */
+    var nouvLong = -1000,
+            nouvLat = -1000,
+            nouvFov = 0,
+            conteneur,
             isUserInteracting = false,
             isZoom = false,
             ddxAutorotation = 0,
@@ -226,6 +233,7 @@ function panovisu(iNumPano) {
             iMode = 1,
             longitude = 0,
             latitude = 0,
+            bDessusHS = false,
             fenPanoramique,
             texture_placeholder,
             fichierXML = "",
@@ -330,6 +338,7 @@ function panovisu(iNumPano) {
             strStyleBoutons,
             strBordure = "rgba(255,255,255,0)",
             strPanoTitre,
+            strPanoTitre2,
             strMultiReso,
             iNombreNiveaux,
             strTitrePolice,
@@ -337,6 +346,9 @@ function panovisu(iNumPano) {
             strTitreTailleUnite,
             iTitreTailleFenetre,
             strTitreTaillePolice,
+            strTitreTaillePolice2,
+            strTitrePosition,
+            strTitreDecalage,
             strTitreCouleur,
             strTitreFond,
             strTitreOpacite,
@@ -369,6 +381,8 @@ function panovisu(iNumPano) {
             tailleBtnAutoTour,
             strAutoTourType,
             autoTourLimite,
+            autoTourDemarrage,
+            dejaDemarre=false,
             bPetitePlaneteDemarrage,
             strPanoType,
             strAffInfo,
@@ -532,9 +546,9 @@ function panovisu(iNumPano) {
         numHS = parseInt(idHS.split("-")[1]);
         switch (arrPointsInteret[numHS].type) {
             case "panoramique" :
-                $("#container-" + iNumPano).fadeOut(200, function () {
-                    chargeNouveauPano(numHS);
-                });
+                //$("#container-" + iNumPano).fadeOut(200, function () {
+                chargeNouveauPano(numHS);
+                //});
                 break;
             case "image" :
                 afficheImage(arrPointsInteret[numHS].contenu);
@@ -543,6 +557,14 @@ function panovisu(iNumPano) {
                 afficheHTML(numHS);
                 break;
         }
+    });
+
+    $(document).on("mouseover", ".hotSpots", function (evenement) {
+        bDessusHS = true;
+    });
+
+    $(document).on("mouseout", ".hotSpots", function (evenement) {
+        bDessusHS = false;
     });
 
     $(document).on("click", "#container-" + iNumPano, function (evenement) {
@@ -679,6 +701,7 @@ function panovisu(iNumPano) {
                     }
                     evenement.preventDefault();
                     var touche = evenement.which;
+                    console.log("touche : " + touche);
                     switch (touche)
                     {
                         case 37:
@@ -694,9 +717,11 @@ function panovisu(iNumPano) {
                             latitude -= 1;
                             break;
                         case 16:
+                        case 109:
                             fov += 1;
                             break;
                         case 17:
+                        case 107:
                             fov -= 1;
                             break;
                         case 70:
@@ -723,6 +748,7 @@ function panovisu(iNumPano) {
                     zoom();
                 }
             });
+
 
     $(document).on("touchstart mousedown", "#xmoins-" + iNumPano + ",#xplus-" + iNumPano + ",#ymoins-" + iNumPano + ",#yplus-" + iNumPano,
             function (evenement) {
@@ -871,9 +897,9 @@ function panovisu(iNumPano) {
             var element = $(this).attr("id");
             var numelement = parseInt(element.substring(6).split("-")[0]);
             xmlFile = arrVignettesPano[numelement].xml;
-            $("#container-" + iNumPano).fadeOut(200, function () {
-                rechargePano(xmlFile);
-            });
+            //$("#container-" + iNumPano).fadeOut(200, function () {
+            rechargePano(xmlFile);
+            //});
         }
 
     });
@@ -930,15 +956,15 @@ function panovisu(iNumPano) {
     });
 
     $(document).on("click", "#divSuivant-" + iNumPano, function () {
-        $("#container-" + iNumPano).fadeOut(200, function () {
-            rechargePano(XMLsuivant);
-        });
+        //$("#container-" + iNumPano).fadeOut(200, function () {
+        rechargePano(XMLsuivant);
+        //});
     });
 
     $(document).on("click", "#divPrecedent-" + iNumPano, function () {
-        $("#container-" + iNumPano).fadeOut(500, function () {
-            rechargePano(XMLprecedent);
-        });
+        //$("#container-" + iNumPano).fadeOut(500, function () {
+        rechargePano(XMLprecedent);
+        //});
     });
 
     $(document).on("click", "#planTitre-" + iNumPano, function () {
@@ -995,9 +1021,9 @@ function panovisu(iNumPano) {
             var numPlanPoint = parseInt($(this).attr("id").split("-")[1]);
             xmlFile = arrPointsPlan[numPlanPoint].xml;
             if (xmlFile !== "actif") {
-                $("#container-" + iNumPano).fadeOut(200, function () {
-                    rechargePano(xmlFile);
-                });
+                //$("#container-" + iNumPano).fadeOut(200, function () {
+                rechargePano(xmlFile);
+                //});
             }
         }
     });
@@ -1009,7 +1035,7 @@ function panovisu(iNumPano) {
 
     $(document).on("click", "#homeCarte-" + iNumPano, function () {
         if (strNomLayerCarte.substring(0, 6) === "Google") {
-            allerCoordonnees(coordCentreLong, coordCentreLat, iCarteZoom);
+            allerCoordonnees(coordCentreLong, coordCentreLat, iCarteZoom - 11);
         }
         else {
             allerCoordonnees(coordCentreLong, coordCentreLat, iCarteZoom - 10);
@@ -1281,7 +1307,7 @@ function panovisu(iNumPano) {
      * @returns {undefined}
      */
     function toggleAutorotation() {
-        if (strAutoRotationMarche === "oui")
+        if (bAutorotation)
         {
             strAutoRotationMarche = "non";
             bAutorotation = false;
@@ -2518,9 +2544,12 @@ function panovisu(iNumPano) {
      * @returns {undefined}
      */
     function chargeNouveauPano(nHotspot) {
-        $("#container-" + iNumPano).fadeOut(200, function () {
-            rechargePano(arrPointsInteret[nHotspot].contenu);
-        });
+        //$("#container-" + iNumPano).fadeOut(200, function () {
+        nouvLong = arrPointsInteret[nHotspot].longitude;
+        nouvLat = arrPointsInteret[nHotspot].latitude;
+        nouvFov = arrPointsInteret[nHotspot].fov;
+        rechargePano(arrPointsInteret[nHotspot].contenu);
+        //});
     }
 
     /**
@@ -2825,20 +2854,23 @@ function panovisu(iNumPano) {
         else {
             $(".RS").hide();
         }
-
-        $("#info-" + iNumPano).html(strPanoTitre);
-        (strBoutons === "oui") ? $("#boutons-" + iNumPano).show() : $("#boutons-" + iNumPano).hide();
-        (strDeplacements === "oui") ? $("#deplacement-" + iNumPano).css({display: "inline-block"}) : $("#deplacement-" + iNumPano).hide();
-        (strZooms === "oui") ? $("#zoom-" + iNumPano).css({display: "inline-block"}) : $("#zoom-" + iNumPano).hide();
-        (strOutils === "oui") ? $("#outils-" + iNumPano).css({display: "inline-block"}) : $("#outils-" + iNumPano).hide();
-        (strFS === "oui") ? $("#pleinEcran-" + iNumPano).show() : $("#pleinEcran-" + iNumPano).hide();
-        (strAutoRotation === "oui") ? $("#auto-" + iNumPano).show() : $("#auto-" + iNumPano).hide;
-        (strModeSouris === "oui") ? $("#souris-" + iNumPano).show() : $("#souris-" + iNumPano).hide();
         if (strAfficheTitre === "oui") {
+            strTit = strPanoTitre;
+            if (strPanoTitre2 !== "")
+                strTit += "<br><span style='font-size:" + strTitreTaillePolice2 + "'>" + strPanoTitre2 + "</span>";
+            $("#info-" + iNumPano).html(strTit);
             $("#info-" + iNumPano).show();
             $("#info-" + iNumPano).css({
-                top: "0px"
+                top: "0px",
+                paddingLeft: "15px",
+                paddingRight: "15px"
             });
+            $("#info-" + iNumPano).css("text-align", strTitrePosition);
+            if (strTitrePosition !== "center") {
+                $("#info-" + iNumPano).css(strTitrePosition, "0px");
+                $("#info-" + iNumPano).css("padding-" + strTitrePosition, strTitreDecalage);
+            }
+
         }
         else {
             $("#info-" + iNumPano).css({
@@ -2847,6 +2879,14 @@ function panovisu(iNumPano) {
                 top: "-1000px"
             });
         }
+
+        (strBoutons === "oui") ? $("#boutons-" + iNumPano).show() : $("#boutons-" + iNumPano).hide();
+        (strDeplacements === "oui") ? $("#deplacement-" + iNumPano).css({display: "inline-block"}) : $("#deplacement-" + iNumPano).hide();
+        (strZooms === "oui") ? $("#zoom-" + iNumPano).css({display: "inline-block"}) : $("#zoom-" + iNumPano).hide();
+        (strOutils === "oui") ? $("#outils-" + iNumPano).css({display: "inline-block"}) : $("#outils-" + iNumPano).hide();
+        (strFS === "oui") ? $("#pleinEcran-" + iNumPano).show() : $("#pleinEcran-" + iNumPano).hide();
+        (strAutoRotation === "oui") ? $("#auto-" + iNumPano).show() : $("#auto-" + iNumPano).hide;
+        (strModeSouris === "oui") ? $("#souris-" + iNumPano).show() : $("#souris-" + iNumPano).hide();
         if (fenetreUniteX === "%") {
             largeur = Math.round(fenetreX * $("#" + fenPanoramique).parent().width());
         }
@@ -3048,7 +3088,7 @@ function panovisu(iNumPano) {
                     carteRentreDroite();
                 }
                 if (strNomLayerCarte.substring(0, 6) === "Google") {
-                    allerCoordonnees(coordCentreLong, coordCentreLat, iCarteZoom);
+                    allerCoordonnees(coordCentreLong, coordCentreLat, iCarteZoom - 11);
                 }
                 else {
                     allerCoordonnees(coordCentreLong, coordCentreLat, iCarteZoom - 10);
@@ -3119,7 +3159,16 @@ function panovisu(iNumPano) {
         timerAutorotation = Date.now();
         timerDebutRotation = timerAutorotation;
         longitudeDebutRotation = 0;
+        if (!dejaDemarre){
+            dejaDemarre=true;
+            requestTimeout(function(){
+                demarreAutoRotation();
+            },autoTourDemarrage*1000);
+        
+    }
+    else{
         demarreAutoRotation();
+    }
     }
 
     function arretAutoTour() {
@@ -3251,14 +3300,14 @@ function panovisu(iNumPano) {
                                     }
                                     break;
                                 case "suiv":
-                                    $("#container-" + iNumPano).fadeOut(200, function () {
-                                        rechargePano(XMLsuivant);
-                                    });
+                                    //$("#container-" + iNumPano).fadeOut(200, function () {
+                                    rechargePano(XMLsuivant);
+                                    //});
                                     break;
                                 case "prec":
-                                    $("#container-" + iNumPano).fadeOut(200, function () {
-                                        rechargePano(XMLprecedent);
-                                    });
+                                    //$("#container-" + iNumPano).fadeOut(200, function () {
+                                    rechargePano(XMLprecedent);
+                                    //});
                                     break;
                                 case "apropos":
                                     if (bAfficheInfo)
@@ -3447,7 +3496,7 @@ function panovisu(iNumPano) {
             affiche();
             afficheBarre(pano.width(), pano.height());
             afficheInfoTitre();
-            $("#container-" + iNumPano).fadeIn(200);
+            //$("#container-" + iNumPano).fadeIn(200);
             if (strAutoRotationMarche === "oui")
                 bAutorotation = true;
             dx = 1;
@@ -3527,6 +3576,7 @@ function panovisu(iNumPano) {
      */
     function initPanoSphere() {
         if (bReloaded) {
+            bDessusHS = false;
             for (i = 1; i <= iNbMeshes; i++) {
                 scene.remove(meshes[i]);
             }
@@ -3618,7 +3668,7 @@ function panovisu(iNumPano) {
                     afficheBarre(pano.width(), pano.height());
                     afficheInfoTitre();
                     afficheMenuContextuel();
-                    $("#container-" + iNumPano).fadeIn(200);
+                    //$("#container-" + iNumPano).fadeIn(200);
                     if (strAutoRotationMarche === "oui")
                         bAutorotation = true;
                     dx = 1;
@@ -3647,7 +3697,9 @@ function panovisu(iNumPano) {
                 {
                     if (supportWebgl())
                     {
-                        renderer = new THREE.WebGLRenderer();
+                        renderer = new THREE.WebGLRenderer({
+                            preserveDrawingBuffer: true
+                        });
                     }
                     else {
                         if (supportCanvas()) {
@@ -3701,7 +3753,7 @@ function panovisu(iNumPano) {
                     afficheBarre(pano.width(), pano.height());
                     afficheInfoTitre();
                     afficheMenuContextuel();
-                    $("#container-" + iNumPano).fadeIn(200);
+                    //$("#container-" + iNumPano).fadeIn(200);
                     if (strAutoRotationMarche === "oui")
                         bAutorotation = true;
                     dx = 1;
@@ -3979,7 +4031,7 @@ function panovisu(iNumPano) {
                 timers = setInterval(function () {
                     positionHS();
                 }, 50);
-                $("#container-" + iNumPano).fadeIn(200);
+                //$("#container-" + iNumPano).fadeIn(200);
                 if (strAutoRotationMarche === "oui")
                     bAutorotation = true;
                 dx = 1;
@@ -4004,26 +4056,46 @@ function panovisu(iNumPano) {
         if (strAfficheTitre === "oui" && ((strMarcheArretTitre !== "oui") || (strMarcheArretTitre === "oui" && elementsVisibles))) {
             var largeur = pano.width();
             var infoPosX = iTitreTailleFenetre;
-            if (strTitreTailleUnite === "%") {
-                infoPosX = (largeur - 10) * iTitreTailleFenetre;
-            }
+            if (strTitreTaille !== "adapte")
+                if (strTitreTailleUnite === "%") {
+                    infoPosX = (largeur - 10) * iTitreTailleFenetre;
+                }
+
             $("#info-" + iNumPano).css({
                 fontFamily: "'" + strTitrePolice + "',Verdana,Arial,sans-serif",
                 fontSize: strTitreTaillePolice,
                 color: strTitreCouleur,
                 opacite: 1.0,
                 backgroundColor: strTitreFond,
-                width: infoPosX + "px",
                 display: "block"
             });
-            var infoPosX = iTitreTailleFenetre;
-            if (strTitreTailleUnite === "%") {
-                infoPosX = largeur * iTitreTailleFenetre;
+            if (strTitreTaille !== "adapte") {
+                $("#info-" + iNumPano).css({
+                    width: infoPosX + "px",
+                });
             }
-            infoPosX = (largeur - infoPosX) / 2;
-            $("#info-" + iNumPano).css({
-                marginLeft: infoPosX
-            });
+            else {
+                $("#info-" + iNumPano).css({
+                    width: "auto",
+                });
+
+            }
+            titreDecalage = parseFloat(strTitreDecalage) / 2.0;
+            console.log("Décalage Titre " + titreDecalage);
+            infoPosX = parseInt((largeur - $("#info-" + iNumPano).width() - parseFloat(strTitreDecalage)) / 2.0);
+            if (strTitrePosition === "center") {
+                $("#info-" + iNumPano).css({
+                    marginLeft: infoPosX + "px",
+                    paddingLeft: titreDecalage + "px",
+                    paddingRight: titreDecalage + "px"
+                });
+            }
+            else {
+                $("#info-" + iNumPano).css({
+                    marginLeft: "0px"
+                });
+
+            }
         }
     }
     function positionImagesFond() {
@@ -4248,7 +4320,7 @@ function panovisu(iNumPano) {
         timer2 = Date.now();
         bFinPano = false;
         dureeTotale = (timer2 - timerDebutRotation) / 1000.0;
-        if (!bUserInteracting) {
+        if (!bUserInteracting && !bDessusHS) {
             temps = (timer2 - timerAutorotation) / 1000.0;
             timerAutorotation = timer2;
             if (Math.abs(ddxAutorotation) < Math.abs(dxAutorotation))
@@ -4258,6 +4330,8 @@ function panovisu(iNumPano) {
             longitudeDebutRotation += 360.0 * ddxAutorotation * temps;
             affiche();
         }
+        if (bDessusHS)
+            timerAutorotation = timer2;
         if (bAutoTour) {
             switch (strAutoTourType) {
                 case "tours" :
@@ -4303,27 +4377,27 @@ function panovisu(iNumPano) {
      * @returns {undefined}
      */
     function creeBarreNavigation() {
-        $("<button>", {type: "button", id: "xmoins-" + iNumPano, class: "xmoins", title: chainesTraduction[strLangage].gauche,
+        $("<div>", {id: "xmoins-" + iNumPano, class: "xmoins", title: chainesTraduction[strLangage].gauche,
             style: "background-color : " + strCouleur + ";border : 1px solid " + strBordure + ";"}).appendTo("#deplacement-" + iNumPano);
-        $("<button>", {type: "button", id: "ymoins-" + iNumPano, class: "ymoins", title: chainesTraduction[strLangage].haut,
+        $("<div>", {id: "ymoins-" + iNumPano, class: "ymoins", title: chainesTraduction[strLangage].haut,
             style: "background-color : " + strCouleur + ";border : 1px solid " + strBordure + ";"}).appendTo("#deplacement-" + iNumPano);
-        $("<button>", {type: "button", id: "yplus-" + iNumPano, class: "yplus", title: chainesTraduction[strLangage].bas,
+        $("<div>", {id: "yplus-" + iNumPano, class: "yplus", title: chainesTraduction[strLangage].bas,
             style: "background-color : " + strCouleur + ";border : 1px solid " + strBordure + ";"}).appendTo("#deplacement-" + iNumPano);
-        $("<button>", {type: "button", id: "xplus-" + iNumPano, class: "xplus", title: chainesTraduction[strLangage].droite,
+        $("<div>", {id: "xplus-" + iNumPano, class: "xplus", title: chainesTraduction[strLangage].droite,
             style: "background-color : " + strCouleur + ";border : 1px solid " + strBordure + ";"}).appendTo("#deplacement-" + iNumPano);
-        $("<button>", {type: "button", id: "zoomPlus-" + iNumPano, class: "zoomPlus", title: chainesTraduction[strLangage].zoomPlus,
+        $("<div>", {id: "zoomPlus-" + iNumPano, class: "zoomPlus", title: chainesTraduction[strLangage].zoomPlus,
             style: "background-color : " + strCouleur + ";border : 1px solid " + strBordure + ";"}).appendTo("#zoom-" + iNumPano);
-        $("<button>", {type: "button", id: "zoomMoins-" + iNumPano, class: "zoomMoins", title: chainesTraduction[strLangage].zoomMoins,
+        $("<div>", {id: "zoomMoins-" + iNumPano, class: "zoomMoins", title: chainesTraduction[strLangage].zoomMoins,
             style: "background-color : " + strCouleur + ";border : 1px solid " + strBordure + ";"}).appendTo("#zoom-" + iNumPano);
-        $("<button>", {type: "button", id: "pleinEcran-" + iNumPano, class: "pleinEcran", title: chainesTraduction[strLangage].pleinEcran,
+        $("<div>", {id: "pleinEcran-" + iNumPano, class: "pleinEcran", title: chainesTraduction[strLangage].pleinEcran,
             style: "background-color : " + strCouleur + ";border : 1px solid " + strBordure + ";"}).appendTo("#outils-" + iNumPano);
-        $("<button>", {type: "button", id: "souris-" + iNumPano, class: "souris", title: chainesTraduction[strLangage].souris,
+        $("<div>", {id: "souris-" + iNumPano, class: "souris", title: chainesTraduction[strLangage].souris,
             style: "background-color : " + strCouleur + ";border : 1px solid " + strBordure + ";"}).appendTo("#outils-" + iNumPano);
-        $("<button>", {type: "button", id: "auto-" + iNumPano, class: "auto", title: chainesTraduction[strLangage].autoratation,
+        $("<div>", {id: "auto-" + iNumPano, class: "auto", title: chainesTraduction[strLangage].autoratation,
             style: "background-color : " + strCouleur + ";border : 1px solid " + strBordure + ";"}).appendTo("#outils-" + iNumPano);
-        $("<button>", {type: "button", id: "binfo-" + iNumPano, class: "binfo", title: chainesTraduction[strLangage].aPropos,
+        $("<div>", {id: "binfo-" + iNumPano, class: "binfo", title: chainesTraduction[strLangage].aPropos,
             style: "background-color : " + strCouleur + ";border : 1px solid " + strBordure + ";"}).appendTo("#outils-" + iNumPano);
-        $("<button>", {type: "button", id: "aide-" + iNumPano, class: "aide", title: chainesTraduction[strLangage].aide,
+        $("<div>", {id: "aide-" + iNumPano, class: "aide", title: chainesTraduction[strLangage].aide,
             style: "background-color : " + strCouleur + ";border : 1px solid " + strBordure + ";"}).appendTo("#outils-" + iNumPano);
     }
     /**
@@ -4382,7 +4456,7 @@ function panovisu(iNumPano) {
      */
     function creeHotspot(num) {
         $("<div>", {id: "HS-" + num + "-" + iNumPano, class: "hotSpots"}).appendTo("#panovisu-" + iNumPano);
-        $("<img>", {id: "imgHS-" + num + "-" + iNumPano, width: "30px", src: arrPointsInteret[num].image, title: arrPointsInteret[num].info}).appendTo("#HS-" + num + "-" + iNumPano);
+        $("<img>", {id: "imgHS-" + num + "-" + iNumPano, width: arrPointsInteret[num].taille, src: arrPointsInteret[num].image, title: arrPointsInteret[num].info}).appendTo("#HS-" + num + "-" + iNumPano);
         numHotspot += 1;
     }
 
@@ -4449,12 +4523,16 @@ function panovisu(iNumPano) {
                     var strTypeHSDefaut = "panoramique";
                     strPanoImage = "faces";
                     strCouleur = "none";
-                    strStyleBoutons = "classique";
+                    strStyleBoutons = "navigation";
                     strBordure = "none";
                     strPanoTitre = "";
+                    strPanoTitre2 = "";
                     strTitrePolice = "Monospace";
                     strTitreCouleur = "#fff";
                     strTitreTaillePolice = "13px";
+                    strTitreTaillePolice2 = "11px";
+                    strTitrePosition = "center";
+                    strTitreDecalage = "10px";
                     strTitreTaille = "50%";
                     strTitreFond = "#000";
                     strTitreOpacite = "1.0";
@@ -4565,6 +4643,7 @@ function panovisu(iNumPano) {
 
                     strAutoTourType = "tours";
                     autoTourLimite = 1;
+                    autoTourDemarrage=0;
                     strARDemarrage = "non";
                     strATDemarrage = "non";
                     strPetitePlanete = "non";
@@ -4641,10 +4720,14 @@ function panovisu(iNumPano) {
                     var XMLPano = $(d).find('pano');
                     strPanoImage = XMLPano.attr('image') || strPanoImage;
                     strPanoTitre = XMLPano.attr('titre') || strPanoTitre;
+                    strPanoTitre2 = XMLPano.attr('titre2') || strPanoTitre2;
                     strTitrePolice = XMLPano.attr('titrePolice') || strTitrePolice;
                     strTitreCouleur = XMLPano.attr('titreCouleur') || strTitreCouleur;
                     strTitreTaille = XMLPano.attr('titreTaille') || strTitreTaille;
                     strTitreTaillePolice = XMLPano.attr('titreTaillePolice') || strTitreTaillePolice;
+                    strTitreTaillePolice2 = XMLPano.attr('titreTaillePolice2') || strTitreTaillePolice2;
+                    strTitrePosition = XMLPano.attr('titrePosition') || strTitrePosition;
+                    strTitreDecalage = XMLPano.attr('titreDecalage') || strTitreDecalage;
                     strTitreFond = XMLPano.attr('titreFond') || strTitreFond;
                     strTitreOpacite = XMLPano.attr('titreOpacite') || strTitreOpacite;
                     strDiaporamaCouleur = XMLPano.attr('diaporamaCouleur') || strDiaporamaCouleur;
@@ -4652,9 +4735,38 @@ function panovisu(iNumPano) {
                     strMultiReso = XMLPano.attr('multiReso') || strMultiReso;
                     iNombreNiveaux = parseInt(XMLPano.attr('nombreNiveaux')) || iNombreNiveaux;
                     strAutoRotationMarche = XMLPano.attr('rotation') || strAutoRotationMarche;
-                    longitude = parseFloat(XMLPano.attr('regardX')) || longitude;
-                    latitude = parseFloat(XMLPano.attr('regardY')) || latitude;
-                    fov = XMLPano.attr('champVision') || fov;
+                    if (nouvLong !== -1000) {
+                        longitude = nouvLong;
+                    }
+                    else {
+                        if (XMLPano.attr('regardX') === "0") {
+                            longitude = 0;
+                        }
+                        else {
+                            longitude = parseFloat(XMLPano.attr('regardX')) || longitude;
+                        }
+                    }
+                    if (nouvLat !== -1000) {
+                        latitude = nouvLat;
+                    }
+                    else {
+                        if (XMLPano.attr('regardY') === "0") {
+                            latitude = 0;
+                        }
+                        else {
+                            latitude = parseFloat(XMLPano.attr('regardY')) || latitude;
+                        }
+                    }
+
+                    if (nouvFov !== 0) {
+                        fov = nouvFov;
+                    }
+                    else {
+                        fov = parseFloat(XMLPano.attr('champVisuel')) || fov;
+                    }
+                    nouvLong = -1000;
+                    nouvLat = -1000;
+                    nouvFov = 0;
                     strAfficheTitre = XMLPano.attr('afftitre') || strAfficheTitre;
                     strAffInfo = XMLPano.attr('affinfo') || strAffInfo;
                     zeroNord = parseFloat(XMLPano.attr('zeroNord')) || zeroNord;
@@ -4677,6 +4789,7 @@ function panovisu(iNumPano) {
                     offsetBtnAutoTourX = parseFloat(XMLPano.attr('atBoutonOffsetX')) || offsetBtnAutoTourX;
                     offsetBtnAutoTourY = parseFloat(XMLPano.attr('atBoutonOffsetY')) || offsetBtnAutoTourY;
                     autoTourLimite = parseFloat(XMLPano.attr('limiteAT')) || autoTourLimite;
+                    autoTourDemarrage = parseFloat(XMLPano.attr('demarrageAT')) || autoTourDemarrage;
                     strAutoTourType = XMLPano.attr('typeAT') || strAutoTourType;
                     if (bAutoTour)
                         bAutorotation = true;
@@ -4929,7 +5042,10 @@ function panovisu(iNumPano) {
                         arrPointsInteret[i].long = $(this).attr('long') || 0;
                         arrPointsInteret[i].anime = $(this).attr('anime') || "false";
                         arrPointsInteret[i].lat = $(this).attr('lat') || 0;
-                        arrPointsInteret[i].largeur = $(this).attr('taille') || "100%";
+                        arrPointsInteret[i].longitude = parseFloat($(this).attr('regardX')) || -1000;
+                        arrPointsInteret[i].latitude = parseFloat($(this).attr('regardY')) || -1000;
+                        arrPointsInteret[i].fov = parseFloat($(this).attr('champVisuel')) || 0;
+                        arrPointsInteret[i].taille = $(this).attr('taille') || "30px";
                         arrPointsInteret[i].position = $(this).attr('position') || "center";
                         arrPointsInteret[i].couleur = $(this).attr('couleur') || "rgba(0,0,0,0.7)";
                         i++;
@@ -5074,16 +5190,17 @@ function panovisu(iNumPano) {
                     /**
                      * Initialisation de l'interface
                      */
-                    if (strTitreTaille.match("[px]", "g"))
-                    {
-                        strTitreTailleUnite = "px";
-                        iTitreTailleFenetre = parseInt(strTitreTaille);
-                    }
-                    else
-                    {
-                        strTitreTailleUnite = "%";
-                        iTitreTailleFenetre = parseInt(strTitreTaille) / 100.0;
-                    }
+                    if (strTitreTaille !== "adapte")
+                        if (strTitreTaille.match("[px]", "g"))
+                        {
+                            strTitreTailleUnite = "px";
+                            iTitreTailleFenetre = parseInt(strTitreTaille);
+                        }
+                        else
+                        {
+                            strTitreTailleUnite = "%";
+                            iTitreTailleFenetre = parseInt(strTitreTaille) / 100.0;
+                        }
                     init(fenPanoramique);
                     creeImagesboutons();
                     /**
@@ -5559,9 +5676,9 @@ function panovisu(iNumPano) {
             $("#cbMenu-" + iNumPano).msDropdown({visibleRows: 4});
             $("#cbMenu-" + iNumPano).on('change', function () {
                 var nomPanoXML = this.value;
-                $("#container-" + iNumPano).fadeOut(500, function () {
-                    rechargePano(nomPanoXML);
-                });
+                //$("#container-" + iNumPano).fadeOut(500, function () {
+                rechargePano(nomPanoXML);
+                //});
             });
         }
     }
@@ -5571,9 +5688,11 @@ function panovisu(iNumPano) {
     function rechargePano(xmlFile) {
         bDejaCharge = true;
         clearInterval(timers);
-        longitude = 0;
-        latitude = 0;
-        fov = 50;
+//        if (!bReloaded) {
+//            longitude = 0;
+//            latitude = 0;
+//            fov = 50;
+//        }
         bReloaded = true;
         enleveHS();
         arrHotSpot = new Array();
@@ -5836,9 +5955,9 @@ function panovisu(iNumPano) {
                 function () {
                     if (arrPointsCarte[numeroMarqueur].xml !== "actif") {
                         map.removePopup(popup);
-                        $("#container-" + iNumPano).fadeOut(200, function () {
-                            rechargePano(arrPointsCarte[numeroMarqueur].xml);
-                        });
+                        //$("#container-" + iNumPano).fadeOut(200, function () {
+                        rechargePano(arrPointsCarte[numeroMarqueur].xml);
+                        //});
                     }
                 }
         );
@@ -5943,38 +6062,40 @@ function panovisu(iNumPano) {
      * @returns {undefined}
      */
     function setBingApiKey(bingApiKey) {
-        if (bingMap === null) {
-            bingMap = new OpenLayers.Layer.Bing({
-                name: "Bing",
-                type: "Road",
-                key: bingApiKey,
-                zoomOffset: 10,
-                resolutions: resolutions,
-                numZoomLevels: 19,
-                transitionEffect: "resize"
+        if (bingApiKey !== "") {
+            if (bingMap === null) {
+                bingMap = new OpenLayers.Layer.Bing({
+                    name: "Bing",
+                    type: "Road",
+                    key: bingApiKey,
+                    zoomOffset: 10,
+                    resolutions: resolutions,
+                    numZoomLevels: 19,
+                    transitionEffect: "resize"
 
-            });
-            bingHybride = new OpenLayers.Layer.Bing({
-                name: "Bing Hybride",
-                type: "AerialWithLabels",
-                key: bingApiKey,
-                zoomOffset: 10,
-                resolutions: resolutions,
-                numZoomLevels: 19,
-                transitionEffect: "resize"
+                });
+                bingHybride = new OpenLayers.Layer.Bing({
+                    name: "Bing Hybride",
+                    type: "AerialWithLabels",
+                    key: bingApiKey,
+                    zoomOffset: 10,
+                    resolutions: resolutions,
+                    numZoomLevels: 19,
+                    transitionEffect: "resize"
 
-            });
-            bingSatellite = new OpenLayers.Layer.Bing({
-                name: "Bing Satellite",
-                type: "Aerial",
-                key: bingApiKey,
-                zoomOffset: 10,
-                resolutions: resolutions,
-                numZoomLevels: 19,
-                transitionEffect: "resize"
+                });
+                bingSatellite = new OpenLayers.Layer.Bing({
+                    name: "Bing Satellite",
+                    type: "Aerial",
+                    key: bingApiKey,
+                    zoomOffset: 10,
+                    resolutions: resolutions,
+                    numZoomLevels: 19,
+                    transitionEffect: "resize"
 
-            });
-            map.addLayers([bingMap, bingHybride, bingSatellite]);
+                });
+                map.addLayers([bingMap, bingHybride, bingSatellite]);
+            }
         }
     }
 
@@ -6367,9 +6488,9 @@ function panovisu(iNumPano) {
      * @returns {undefined}
      */
     this.setPano = function (xmlFile) {
-        $("#container-" + iNumPano).fadeOut(200, function () {
-            rechargePano(xmlFile);
-        });
+        //$("#container-" + iNumPano).fadeOut(200, function () {
+        rechargePano(xmlFile);
+        //});
     };
     this.stopMouvement = function () {
         arreteMouvement = true;
