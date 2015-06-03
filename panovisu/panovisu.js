@@ -82,7 +82,7 @@ function panovisu(iNumPano) {
         this.largeur = "100%";
         this.position = "center";
         this.couleur = "rgba(0,0,0,0.7)";
-        this.taille="30px"
+        this.taille="30px";
     }
 
     /**
@@ -2590,7 +2590,7 @@ function panovisu(iNumPano) {
                     left: posGauche + "px",
                     border: "none",
                     backgroundColor: "rgba(255,255,255,0)",
-                    opacity: "1.0"
+                    opacity: fenetreInfoOpacite
                 });
                 topUrl = ($("#infoPanovisu-" + iNumPano).height() - $("#infoUrl-" + iNumPano).height()) / 2 + fenetreInfoDYURL;
                 leftUrl = ($("#infoPanovisu-" + iNumPano).width() - $("#infoUrl-" + iNumPano).width()) / 2 + fenetreInfoDXURL;
@@ -2640,7 +2640,8 @@ function panovisu(iNumPano) {
                     top: posHaut + "px",
                     left: posGauche + "px",
                     border: "none",
-                    backgroundColor: "rgba(255,255,255,0)"
+                    backgroundColor: "rgba(255,255,255,0)",
+                    opacity: fenetreAideOpacite
                 });
                 if (bAfficheAide)
                 {
@@ -3162,7 +3163,7 @@ function panovisu(iNumPano) {
         if (!dejaDemarre){
             dejaDemarre=true;
             requestTimeout(function(){
-                demarreAutoRotation();
+        demarreAutoRotation();
             },autoTourDemarrage*1000);
         
     }
@@ -4071,12 +4072,12 @@ function panovisu(iNumPano) {
             });
             if (strTitreTaille !== "adapte") {
                 $("#info-" + iNumPano).css({
-                    width: infoPosX + "px",
+                    width: infoPosX + "px"
                 });
             }
             else {
                 $("#info-" + iNumPano).css({
-                    width: "auto",
+                    width: "auto"
                 });
 
             }
@@ -4743,8 +4744,8 @@ function panovisu(iNumPano) {
                             longitude = 0;
                         }
                         else {
-                            longitude = parseFloat(XMLPano.attr('regardX')) || longitude;
-                        }
+                        longitude = parseFloat(XMLPano.attr('regardX')) || longitude;
+                    }
                     }
                     if (nouvLat !== -1000) {
                         latitude = nouvLat;
@@ -4754,8 +4755,8 @@ function panovisu(iNumPano) {
                             latitude = 0;
                         }
                         else {
-                            latitude = parseFloat(XMLPano.attr('regardY')) || latitude;
-                        }
+                        latitude = parseFloat(XMLPano.attr('regardY')) || latitude;
+                    }
                     }
 
                     if (nouvFov !== 0) {
@@ -5045,7 +5046,8 @@ function panovisu(iNumPano) {
                         arrPointsInteret[i].longitude = parseFloat($(this).attr('regardX')) || -1000;
                         arrPointsInteret[i].latitude = parseFloat($(this).attr('regardY')) || -1000;
                         arrPointsInteret[i].fov = parseFloat($(this).attr('champVisuel')) || 0;
-                        arrPointsInteret[i].taille = $(this).attr('taille') || "30px";
+                        arrPointsInteret[i].largeur = $(this).attr('taille') || "100%";
+                        arrPointsInteret[i].taille = $(this).attr('tailleHS') || "30px";
                         arrPointsInteret[i].position = $(this).attr('position') || "center";
                         arrPointsInteret[i].couleur = $(this).attr('couleur') || "rgba(0,0,0,0.7)";
                         i++;

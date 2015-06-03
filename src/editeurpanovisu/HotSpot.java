@@ -5,6 +5,8 @@
  */
 package editeurpanovisu;
 
+import javafx.scene.image.Image;
+
 /**
  * Définition des hotspots panoramiques
  *
@@ -18,6 +20,10 @@ public class HotSpot {
     private String strInfo = "";
     private boolean bAnime;
     private int iNumeroPano = -1;
+    private double regardX=-1000;
+    private double regardY=-1000;
+    private double champVisuel=0;
+    private Image imgVueHs;
 
     /**
      *
@@ -128,6 +134,62 @@ public class HotSpot {
      */
     public void setNumeroPano(int iNumeroPano) {
         this.iNumeroPano = iNumeroPano;
+    }
+
+    /**
+     * @return the regardX
+     */
+    public double getRegardX() {
+        return regardX;
+    }
+
+    /**
+     * @param regardX the regardX to set
+     */
+    public void setRegardX(double regardX) {
+        this.regardX = regardX;
+    }
+
+    /**
+     * @return the regardY
+     */
+    public double getRegardY() {
+        return regardY;
+    }
+
+    /**
+     * @param regardY the regardY to set
+     */
+    public void setRegardY(double regardY) {
+        this.regardY = regardY;
+    }
+
+    /**
+     * @return the champVisuel
+     */
+    public double getChampVisuel() {
+        return champVisuel;
+    }
+
+    /**
+     * @param champVisuel the champVisuel to set
+     */
+    public void setChampVisuel(double champVisuel) {
+        this.champVisuel = champVisuel;
+    }
+
+    /**
+     * @return the imgVueHs
+     */
+    public Image getImgVueHs() {
+        return imgVueHs;
+    }
+
+    /**
+     * @param imgVueHs the imgVueHs to set
+     */
+    public void setImgVueHs(Image imgVueHs) {
+        this.imgVueHs = imgVueHs;
     }
 
 }

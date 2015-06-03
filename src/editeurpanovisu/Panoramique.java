@@ -31,9 +31,11 @@ public class Panoramique {
     private String strNomFichier="";
     private double regardX = 0.d;
     private double regardY = 0.d;
+    private double champVisuel=75.d;
     private Image imgPanoramique;
     private Image imgVisuPanoramique;
     private Image imgVignettePanoramique;
+    private Image imgPanoRect;
     private int iNombreHotspots = 0;
     private int iNombreHotspotImage = 0;
     private int iNombreHotspotHTML = 0;
@@ -83,6 +85,7 @@ public class Panoramique {
      */
     public void setStrNomFichier(String strNomFichier) {
         this.strNomFichier = strNomFichier;
+        System.out.println(strNomFichier);
     }
 
     /**
@@ -209,7 +212,7 @@ public class Panoramique {
      */
     public void addHotspotHTML(HotspotHTML hotspot) {
         this.HTMLHotspot[this.getNombreHotspotHTML()] = hotspot;
-        this.iNombreHotspotHTML++;
+        this.setNombreHotspotHTML(this.getNombreHotspotHTML()+1);
     }
 
     /**
@@ -419,6 +422,34 @@ public class Panoramique {
      */
     public void setMarqueurGeolocatisation(CoordonneesGeographiques marqueurGeolocatisation) {
         this.marqueurGeolocatisation = marqueurGeolocatisation;
+    }
+
+    /**
+     * @return the champVisuel
+     */
+    public double getChampVisuel() {
+        return champVisuel;
+    }
+
+    /**
+     * @param champVisuel the champVisuel to set
+     */
+    public void setChampVisuel(double champVisuel) {
+        this.champVisuel = champVisuel;
+    }
+
+    /**
+     * @return the imgPanoRect
+     */
+    public Image getImgPanoRect() {
+        return imgPanoRect;
+    }
+
+    /**
+     * @param imgPanoRect the imgPanoRect to set
+     */
+    public void setImgPanoRect(Image imgPanoRect) {
+        this.imgPanoRect = imgPanoRect;
     }
 
 }

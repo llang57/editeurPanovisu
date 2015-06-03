@@ -11,7 +11,6 @@ import java.io.File;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -22,7 +21,7 @@ public class OrdrePanoramique {
 
     private static ObservableList<String> strPanos = FXCollections.observableArrayList();
     public static final ObservableList<PanoramiqueCellule> cellulesPanoramiques = FXCollections.observableArrayList();
-    private AnchorPane apListePanoramiques = new AnchorPane();
+    private final AnchorPane apListePanoramiques = new AnchorPane();
     private ListView<String> lstStrPanos;
 
     public void creeListe() {
@@ -30,7 +29,7 @@ public class OrdrePanoramique {
         strPanos.clear();
         for (int i = 0; i < getiNombrePanoramiques(); i++) {
             PanoramiqueCellule cellPano = new PanoramiqueCellule();
-            cellPano.setImgPanoramique(new Image("file:" + getPanoramiquesProjet()[i].getStrNomFichier(), 70, 35, false, true));
+            cellPano.setImgPanoramique(ReadWriteImage.resizeImage(getPanoramiquesProjet()[i].getImgPanoRect(), 70, 35));
             cellPano.setStrTitrePanoramique(getPanoramiquesProjet()[i].getStrTitrePanoramique());
             cellPano.setStrTitrePanoramiqueLigne2(getPanoramiquesProjet()[i].getStrNomFichier().substring(getPanoramiquesProjet()[i].getStrNomFichier().lastIndexOf(File.separator) + 1, getPanoramiquesProjet()[i].getStrNomFichier().length()));
             cellPano.setiNumPano(i);
@@ -59,7 +58,7 @@ public class OrdrePanoramique {
         for (String strOrd11 : strOrd1) {
             int iPano = Integer.parseInt(strOrd11);
             PanoramiqueCellule cellPano = new PanoramiqueCellule();
-            cellPano.setImgPanoramique(new Image("file:" + getPanoramiquesProjet()[iPano].getStrNomFichier(), 70, 35, false, true));
+            cellPano.setImgPanoramique(ReadWriteImage.resizeImage(getPanoramiquesProjet()[iPano].getImgPanoRect(), 70, 35));
             cellPano.setStrTitrePanoramique(getPanoramiquesProjet()[iPano].getStrTitrePanoramique());
             cellPano.setStrTitrePanoramiqueLigne2(getPanoramiquesProjet()[iPano].getStrNomFichier().substring(getPanoramiquesProjet()[iPano].getStrNomFichier().lastIndexOf(File.separator) + 1, getPanoramiquesProjet()[iPano].getStrNomFichier().length()));
             cellPano.setiNumPano(iPano);
@@ -102,7 +101,7 @@ public class OrdrePanoramique {
                 }
                 strPanos.add(Integer.toString(iPano));
                 PanoramiqueCellule cellPano = new PanoramiqueCellule();
-                cellPano.setImgPanoramique(new Image("file:" + getPanoramiquesProjet()[iPano].getStrNomFichier(), 70, 35, false, true));
+                cellPano.setImgPanoramique(ReadWriteImage.resizeImage(getPanoramiquesProjet()[iPano].getImgPanoRect(), 70, 35));
                 cellPano.setStrTitrePanoramique(getPanoramiquesProjet()[iPano].getStrTitrePanoramique());
                 cellPano.setStrTitrePanoramiqueLigne2(getPanoramiquesProjet()[iPano].getStrNomFichier().substring(getPanoramiquesProjet()[iPano].getStrNomFichier().lastIndexOf(File.separator) + 1, getPanoramiquesProjet()[iPano].getStrNomFichier().length()));
                 cellPano.setiNumPano(iPano);
@@ -132,7 +131,7 @@ public class OrdrePanoramique {
             int iPano = Integer.parseInt(strPanos1.get(i));
             strPanos.add(strPanos1.get(i));
             PanoramiqueCellule cellPano = new PanoramiqueCellule();
-            cellPano.setImgPanoramique(new Image("file:" + getPanoramiquesProjet()[iPano].getStrNomFichier(), 70, 35, false, true));
+            cellPano.setImgPanoramique(ReadWriteImage.resizeImage(getPanoramiquesProjet()[iPano].getImgPanoRect(), 70, 35));
             cellPano.setStrTitrePanoramique(getPanoramiquesProjet()[iPano].getStrTitrePanoramique());
             cellPano.setStrTitrePanoramiqueLigne2(getPanoramiquesProjet()[iPano].getStrNomFichier().substring(getPanoramiquesProjet()[iPano].getStrNomFichier().lastIndexOf(File.separator) + 1, getPanoramiquesProjet()[iPano].getStrNomFichier().length()));
             cellPano.setiNumPano(iPano);
@@ -169,7 +168,7 @@ public class OrdrePanoramique {
         }
         for (int i = iTaillePano; i < getiNombrePanoramiques(); i++) {
             PanoramiqueCellule cellPano = new PanoramiqueCellule();
-            cellPano.setImgPanoramique(new Image("file:" + getPanoramiquesProjet()[i].getStrNomFichier(), 70, 35, false, true));
+            cellPano.setImgPanoramique(ReadWriteImage.resizeImage(getPanoramiquesProjet()[i].getImgPanoRect(), 70, 35));
             cellPano.setStrTitrePanoramique(getPanoramiquesProjet()[i].getStrTitrePanoramique());
             cellPano.setStrTitrePanoramiqueLigne2(getPanoramiquesProjet()[i].getStrNomFichier().substring(getPanoramiquesProjet()[i].getStrNomFichier().lastIndexOf(File.separator) + 1, getPanoramiquesProjet()[i].getStrNomFichier().length()));
             cellPano.setiNumPano(i);

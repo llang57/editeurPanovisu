@@ -3,14 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package editeurpanovisu;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -23,7 +24,7 @@ import javafx.stage.StageStyle;
 
 /**
  * Controleur de la Popup d'info
- * 
+ *
  * @author llang
  */
 public class PopUpDialogController {
@@ -52,31 +53,31 @@ public class PopUpDialogController {
      */
     @FXML
     public void handleOuvreLien() throws URISyntaxException {
-        try {
-            java.awt.Desktop.getDesktop().browse(new URI("http://lemondea360.fr"));
-        } catch (IOException ex) {
-            Logger.getLogger(PopUpDialogController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Application app = new Application() {
+            @Override
+            public void start(Stage stage) {
+            }
+        };
+        app.getHostServices().showDocument("http://lemondea360.fr");
     }
 
     /**
      *
      */
-    public void popUpHandler(){
+    public void popUpHandler() {
     }
-    
+
     /**
      *
      * @throws Exception
      */
     public void affichePopup() throws Exception {
-        stPopUp= new Stage(StageStyle.UTILITY);
-        stPopUp.initModality(Modality.APPLICATION_MODAL);        
-        Pane panePopup = (Pane) FXMLLoader.load(getClass().getResource("popUpAccueil.fxml"));        
+        stPopUp = new Stage(StageStyle.UTILITY);
+        stPopUp.initModality(Modality.APPLICATION_MODAL);
+        Pane panePopup = (Pane) FXMLLoader.load(getClass().getResource("popUpAccueil.fxml"));
         Scene scnPopup = new Scene(panePopup);
         stPopUp.setScene(scnPopup);
         stPopUp.show();
     }
 
-    
 }

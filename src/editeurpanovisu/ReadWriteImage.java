@@ -34,7 +34,7 @@ import org.apache.commons.imaging.ImageWriteException;
 
 import org.apache.commons.imaging.Imaging;
 import org.apache.commons.imaging.ImagingConstants;
-import org.apache.commons.imaging.common.IBufferedImageFactory;
+import org.apache.commons.imaging.common.BufferedImageFactory;
 import org.apache.commons.imaging.formats.tiff.constants.TiffConstants;
 import net.coobird.thumbnailator.Thumbnails;
 
@@ -71,7 +71,7 @@ public class ReadWriteImage {
     }
 
     public static class ManagedImageBufferedImageFactory implements
-            IBufferedImageFactory {
+            BufferedImageFactory {
 
         @Override
         public BufferedImage getColorBufferedImage(final int iLargeur, final int iHauteur,
@@ -132,6 +132,7 @@ public class ReadWriteImage {
         // set optional parameters if you like
         params.put(ImagingConstants.PARAM_KEY_COMPRESSION, new Integer(
                 TiffConstants.TIFF_COMPRESSION_UNCOMPRESSED));
+       
         if (bSharpen) {
             try {
                 Imaging.writeImage(imageRGBSharpen, file, format, params);

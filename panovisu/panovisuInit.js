@@ -1,5 +1,5 @@
 var numeroPano = 0,
-        version = "1.2.6",
+        version = "1.3.dev",
         programmeur = "Laurent LANG",
         anneeProgramme = "2014",
         site = "http://lemondea360.fr",
@@ -163,7 +163,7 @@ include("panovisu/libs/jquery/jquery.mousewheel.min.js");
 include("panovisu/libs/jqueryMobile/jquery.mobile.custom.min.js");
 include("panovisu/libs/three.js/types.js");  //redéfnit le type float32Array() pour IE9
 include("panovisu/libs/three.js/three.min.js");
-include("panovisu/libs/jqueryMenu/jquery.contextMenu.js");
-include("panovisu/libs/jqueryMenu/jquery.ui.position.js");
+include("panovisu/libs/jquerymenu/jquery.contextMenu.js");
+include("panovisu/libs/jquerymenu/jquery.ui.position.js");
 include("panovisu/libs/msdropdown/jquery.dd.min.js");
 

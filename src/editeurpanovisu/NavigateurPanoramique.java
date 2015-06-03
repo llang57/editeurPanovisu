@@ -9,11 +9,18 @@
  */
 package editeurpanovisu;
 
+import static editeurpanovisu.EditeurPanovisu.getPanoramiquesProjet;
+import static editeurpanovisu.EditeurPanovisu.getStrRepertAppli;
+import static editeurpanovisu.EditeurPanovisu.getiPanoActuel;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -21,10 +28,12 @@ import javafx.geometry.NodeOrientation;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.PerspectiveCamera;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.SubScene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
@@ -47,6 +56,25 @@ import jfxtras.labs.scene.control.BigDecimalField;
  */
 public final class NavigateurPanoramique {
 
+    public void captureEcran() {
+        WritableImage image = sscPanorama.snapshot(new SnapshotParameters(), null);
+        try {
+            String nomFichier = getPanoramiquesProjet()[getiPanoActuel()].getStrNomFichier();
+            getPanoramiquesProjet()[getiPanoActuel()].setImgVignettePanoramique(image);
+            String nomVignette = nomFichier.substring(0, nomFichier.lastIndexOf(".")) + "Vignette.jpg";
+            Image img1 = ReadWriteImage.resizeImage(image, 300, 150);
+            ReadWriteImage.writeJpeg(img1, nomVignette, 1, false, 0.05f);
+            setiChangeVignette();
+        } catch (IOException ex) {
+            Logger.getLogger(NavigateurPanoramique.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public Image captureEcranHS() {
+        return sscPanorama.snapshot(new SnapshotParameters(), null);
+    }
+
     protected transient PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
 
     public void addPropertyChangeListener(String propertyName, PropertyChangeListener listener) {
@@ -65,7 +93,9 @@ public final class NavigateurPanoramique {
                 oldValue, newValue));
 
     }
-
+    private double maxFov = 120;
+    private double minFov = 35;
+    private boolean bChoixHotSpot = false;
     private double anchorX, anchorY,
             latitude, longitude, fov = 70, positNord = 32,
             choixLongitude = 0, choixLatitude = 0, choixFov = 0,
@@ -82,13 +112,24 @@ public final class NavigateurPanoramique {
             bdfLat = new BigDecimalField(new BigDecimal(0)),
             bdfFOV = new BigDecimalField(new BigDecimal(70));
     private String nomFichierPanoramique = "";
+    private int iChangeVignette = 0;
     private Image imgPanoramique;
-    private Button btnChoixNord, btnChoixVue;
+    private Button btnChoixNord, btnChoixVue, btnChoixVignette;
     private final Sphere spPanorama = new Sphere(200, 100);
     private final Group root = new Group(spPanorama);
     private final PhongMaterial phmPanorama = new PhongMaterial();
     private ResourceBundle rbLocalisation = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", EditeurPanovisu.getLocale());
+    private Image imgVignetteHS;
 
+    public NavigateurPanoramique(Image imgFichierPanoramique, double positX, double positY, double largeur, double hauteur, boolean bVignettes) {
+        this.positX = positX;
+        this.positY = positY;
+        this.largeurImage = largeur;
+        this.hauteurImage = hauteur;
+        this.setImgPanoramique(imgFichierPanoramique);
+        this.bChoixHotSpot = bVignettes;
+        //this.setNomFichierPanoramique(nomFichierPanoramique);
+    }
 
     public NavigateurPanoramique(Image imgFichierPanoramique, double positX, double positY, double largeur, double hauteur) {
         this.positX = positX;
@@ -136,9 +177,9 @@ public final class NavigateurPanoramique {
     }
 
     /**
-     * 
+     *
      * @param angleDeg
-     * @return 
+     * @return
      */
     private double degToRad(double angleDeg) {
         return angleDeg * rapportDegToRad;
@@ -156,11 +197,11 @@ public final class NavigateurPanoramique {
         if (getLatitude() < -90) {
             setLatitude(-90);
         }
-        if (getFov() > 105) {
-            setFov(105);
+        if (getFov() > getMaxFov()) {
+            setFov(getMaxFov());
         }
-        if (getFov() < 25) {
-            setFov(25);
+        if (getFov() < getMinFov()) {
+            setFov(getMinFov());
         }
         camera1.getTransforms().clear();
         Rotate ry = new Rotate(getLongitude(), Rotate.Y_AXIS);
@@ -215,7 +256,7 @@ public final class NavigateurPanoramique {
         for (int i = 0; i < iNombreTrait; i++) {
             angle = i + getPositNord() - getLongitude();
             positionTrait = sscPanorama.getWidth() / 2.d + rayon * Math.sin((angle) * rapportDegToRad);
-            Color couleur=Color.WHITE;
+            Color couleur = Color.WHITE;
             double hautTrait = 15;
             if (i % 5 == 0) {
                 hautTrait = 10;
@@ -223,13 +264,13 @@ public final class NavigateurPanoramique {
             if (i % 10 == 0) {
                 hautTrait = 5;
             }
-            if (i%45==0){
-                hautTrait=15;
-                couleur=Color.GREEN;
+            if (i % 45 == 0) {
+                hautTrait = 15;
+                couleur = Color.GREEN;
             }
-            if (i%90==0){
-                hautTrait=15;
-                couleur=Color.RED;
+            if (i % 90 == 0) {
+                hautTrait = 15;
+                couleur = Color.RED;
             }
 
             Line ligneTrait = new Line(positionTrait, hautTrait, positionTrait, 45);
@@ -241,9 +282,9 @@ public final class NavigateurPanoramique {
         ligneCentre.setStroke(Color.RED);
         ligneCentre.setStrokeWidth(3);
         apNord.getChildren().add(ligneCentre);
-        bdfLong.setNumber(new BigDecimal(longitude));
-        bdfLat.setNumber(new BigDecimal(latitude));
-        bdfFOV.setNumber(new BigDecimal(fov));
+        bdfLong.setNumber(new BigDecimal(getLongitude()));
+        bdfLat.setNumber(new BigDecimal(getLatitude()));
+        bdfFOV.setNumber(new BigDecimal(getFov()));
     }
 
     public void changeTaille(double largeur, double hauteur) {
@@ -335,8 +376,8 @@ public final class NavigateurPanoramique {
         bdfLong.setMaxValue(new BigDecimal(181));
         bdfLat.setMinValue(new BigDecimal(-90));
         bdfLat.setMaxValue(new BigDecimal(90));
-        bdfFOV.setMaxValue(new BigDecimal(25));
-        bdfFOV.setMaxValue(new BigDecimal(105));
+        bdfFOV.setMaxValue(new BigDecimal(getMinFov()));
+        bdfFOV.setMaxValue(new BigDecimal(getMaxFov()));
         apPanorama.getChildren().add(sscPanorama);
         apPanorama.setPrefWidth(largeurImage + 2 * positX);
         apPanorama.setMinWidth(largeurImage + 2 * positX);
@@ -347,19 +388,52 @@ public final class NavigateurPanoramique {
         //apPanorama.setStyle("-fx-background-color : #ccc;");
         apPanorama.getChildren().addAll(apNord, bdfLong, bdfLat, bdfFOV);
         sscPanorama.setFocusTraversable(true);
+
+        Button btnHome = new Button("", new ImageView(new Image("file:" + getStrRepertAppli() + File.separator + "images/maison.png", 15, 15, true, true)));
+        btnHome.setPrefWidth(30);
+        btnHome.setPrefHeight(20);
+        btnHome.setMaxHeight(20);
+        btnHome.setOnMouseClicked(
+                (me) -> {
+                    setLongitude(getChoixLongitude());
+                    setLatitude(getChoixLatitude());
+                    setFov(getChoixFov());
+                    affiche();
+                }
+        );
+
+        btnChoixVignette = new Button("Choix Vignette");
         btnChoixNord = new Button(rbLocalisation.getString("navigateur.nord"));
-        btnChoixNord.setPrefWidth(100);
-        btnChoixNord.setLayoutX(sscPanorama.getLayoutX() + sscPanorama.getWidth() - btnChoixNord.getPrefWidth() - 10);
-        btnChoixNord.setLayoutY(sscPanorama.getLayoutY() + sscPanorama.getHeight() - btnChoixNord.getPrefHeight() + 5);
         btnChoixVue = new Button(rbLocalisation.getString("navigateur.choixPOV"));
+        btnChoixNord.setPrefWidth(90);
         btnChoixVue.setPrefWidth(100);
+        btnChoixVignette.setPrefWidth(100);
+        if (isbChoixHotSpot()) {
+            btnChoixVignette.setPrefWidth(0);
+            btnChoixVignette.setVisible(false);
+            btnChoixNord.setPrefWidth(0);
+            btnChoixNord.setVisible(false);
+
+        }
+        btnChoixVignette.setOnMouseClicked(
+                (me) -> {
+                    this.captureEcran();
+                }
+        );
+
+        btnChoixNord.setLayoutX(sscPanorama.getLayoutX() + sscPanorama.getWidth() - btnChoixNord.getPrefWidth());
+        btnChoixNord.setLayoutY(sscPanorama.getLayoutY() + sscPanorama.getHeight() + 5);
         btnChoixVue.setLayoutX(btnChoixNord.getLayoutX() - btnChoixVue.getPrefWidth() - 5);
-        btnChoixVue.setLayoutY(sscPanorama.getLayoutY() + sscPanorama.getHeight() - btnChoixNord.getPrefHeight() + 5);
-        apPanorama.getChildren().addAll(btnChoixNord, btnChoixVue);
+        btnChoixVue.setLayoutY(sscPanorama.getLayoutY() + sscPanorama.getHeight() + 5);
+        btnChoixVignette.setLayoutX(btnChoixVue.getLayoutX() - btnChoixVignette.getPrefWidth() - 5);
+        btnHome.setLayoutX(btnChoixVignette.getLayoutX() - btnHome.getPrefWidth() - 5);
+        btnHome.setLayoutY(sscPanorama.getLayoutY() + sscPanorama.getHeight() + 2);
+        btnChoixVignette.setLayoutY(sscPanorama.getLayoutY() + sscPanorama.getHeight() + 5);
+        apPanorama.getChildren().addAll(btnHome, btnChoixVignette, btnChoixNord, btnChoixVue);
         camera1 = addCamera(sscPanorama);
         affiche();
         sscPanorama.setOnScroll((event) -> {
-            double facteurEchelle = event.getDeltaY() > 0 ? 1.1d : 1.d / 1.1d;
+            double facteurEchelle = event.getDeltaY() < 0 ? 1.1d : 1.d / 1.1d;
             setFov(getFov() * facteurEchelle);
             affiche();
             event.consume();
@@ -376,9 +450,10 @@ public final class NavigateurPanoramique {
             affiche();
         });
         btnChoixVue.setOnAction((event) -> {
-            setChoixLongitude(longitude);
-            setChoixLatitude(latitude);
-            setChoixFov(fov);
+            setChoixLongitude(getLongitude());
+            setChoixLatitude(getLatitude());
+            setChoixFov(getFov());
+            setImgVignetteHS(captureEcranHS());
         });
         sscPanorama.setOnMousePressed((event) -> {
             if (!bMouvement) {
@@ -428,22 +503,22 @@ public final class NavigateurPanoramique {
         });
         bdfLong.numberProperty().addListener((e) -> {
             if (bdfLong.getNumber().doubleValue() != ancLongitude) {
-                longitude = bdfLong.getNumber().doubleValue();
-                ancLongitude = longitude;
+                setLongitude(bdfLong.getNumber().doubleValue());
+                ancLongitude = getLongitude();
                 affiche();
             }
         });
         bdfLat.numberProperty().addListener((e) -> {
             if (bdfLat.getNumber().doubleValue() != ancLatitude) {
-                latitude = bdfLat.getNumber().doubleValue();
-                ancLatitude = latitude;
+                setLatitude(bdfLat.getNumber().doubleValue());
+                ancLatitude = getLatitude();
                 affiche();
             }
         });
         bdfFOV.numberProperty().addListener((e) -> {
             if (bdfFOV.getNumber().doubleValue() != ancFov) {
-                fov = bdfFOV.getNumber().doubleValue();
-                ancFov = fov;
+                setFov(bdfFOV.getNumber().doubleValue());
+                ancFov = getFov();
                 affiche();
             }
         });
@@ -624,7 +699,79 @@ public final class NavigateurPanoramique {
      */
     public void setImgPanoramique(Image imgPanoramique) {
         this.imgPanoramique = imgPanoramique;
-        System.out.println("navigateur Largeur : "+this.imgPanoramique.getWidth());
+        System.out.println("navigateur Largeur : " + this.imgPanoramique.getWidth());
     }
 
+    /**
+     * @return the maxFov
+     */
+    public double getMaxFov() {
+        return maxFov;
+    }
+
+    /**
+     * @param maxFov the maxFov to set
+     */
+    public void setMaxFov(double maxFov) {
+        this.maxFov = maxFov;
+    }
+
+    /**
+     * @return the minFov
+     */
+    public double getMinFov() {
+        return minFov;
+    }
+
+    /**
+     * @param minFov the minFov to set
+     */
+    public void setMinFov(double minFov) {
+        this.minFov = minFov;
+    }
+
+    /**
+     * @return the iChangeVignette
+     */
+    public int getiChangeVignette() {
+        return iChangeVignette;
+    }
+
+    /**
+     * @param iChangeVignette the iChangeVignette to set
+     */
+    public void setiChangeVignette() {
+        int ancienneValeur = this.iChangeVignette;
+        this.iChangeVignette = 1 - iChangeVignette;
+        int nouvelleValeur = this.iChangeVignette;
+        this.changeSupport.firePropertyChange("changeVignette", ancienneValeur, nouvelleValeur);
+    }
+
+    /**
+     * @return the bChoixHotSpot
+     */
+    public boolean isbChoixHotSpot() {
+        return bChoixHotSpot;
+    }
+
+    /**
+     * @param bChoixHotSpot the bChoixHotSpot to set
+     */
+    public void setbChoixHotSpot(boolean bChoixHotSpot) {
+        this.bChoixHotSpot = bChoixHotSpot;
+    }
+
+    /**
+     * @return the imgVignetteHS
+     */
+    public Image getImgVignetteHS() {
+        return imgVignetteHS;
+    }
+
+    /**
+     * @param imgVignetteHS the imgVignetteHS to set
+     */
+    public void setImgVignetteHS(Image imgVignetteHS) {
+        this.imgVignetteHS = imgVignetteHS;
+    }
 }

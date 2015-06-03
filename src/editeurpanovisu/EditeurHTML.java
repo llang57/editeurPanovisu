@@ -34,6 +34,8 @@ import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.web.HTMLEditor;
@@ -97,6 +99,8 @@ public class EditeurHTML {
     private String strNomFichierImage = "";
     private boolean bDejaSauve = true;
     private ColorPicker cpCouleurHTML;
+    private ColorPicker cpCouleurFond;
+    public String strCouleurFond = "#FFFFFF";
 
     private final String jsCodeInsertHtml
             = "function insertHtmlAtCursor(html) {\n"
@@ -236,6 +240,8 @@ public class EditeurHTML {
                     + "            *{\n"
                     + "                font-family: Verdana,Arial,sans-serif;                \n"
                     + "            }           \n"
+                    + "            body{background-color : " + strCouleurFond + ";}\n"
+                    + "            body{color : #ffffff;}\n"
                     + "            h1,h2,h3,h4,h5{\n"
                     + "                font-size : 1em;\n"
                     + "                font-weight: bold;                \n"
@@ -379,6 +385,12 @@ public class EditeurHTML {
         slOpacite = new Slider(0, 1, getHsHTML().getOpaciteHTML());
         slOpacite.setLayoutX(380);
         slOpacite.setLayoutY(75);
+        Label lblCouleurFond = new Label(rbLocalisation.getString("editeurHTML.couleurFond"));
+        lblCouleurFond.setLayoutX(550);
+        lblCouleurFond.setLayoutY(75);
+        cpCouleurFond = new ColorPicker(Color.web(strCouleurFond));
+        cpCouleurFond.setLayoutX(680);
+        cpCouleurFond.setLayoutY(70);
         btnValide = new Button(rbLocalisation.getString("editeurHTML.valide"), new ImageView(new Image("file:" + strImages + File.separator + "valide.png")));
         btnAnnule = new Button(rbLocalisation.getString("editeurHTML.annule"), new ImageView(new Image("file:" + strImages + File.separator + "annule.png")));
         btnValide.setPrefWidth(100);
@@ -390,7 +402,7 @@ public class EditeurHTML {
         apEditeur.getChildren().addAll(
                 tgbLienExterieur, tfLienExterieur,
                 lblPositionEditeur, tgbGauche, tgbCentre, tgbDroite, lblLargeurEditeur, slLargeurEditeur,
-                lblCouleur, cpCouleurHTML, lblOpacite, slOpacite,
+                lblCouleur, cpCouleurHTML, lblOpacite, slOpacite, lblCouleurFond, cpCouleurFond,
                 tgbEditeurInterne,
                 btnAnnule, btnValide
         );
@@ -457,6 +469,20 @@ public class EditeurHTML {
             String strCouleur1 = "rgba(" + iRouge1 + "," + iVert1 + "," + iBleu1 + "," + getHsHTML().getOpaciteHTML() + ")";
             apEditeur2.setStyle("-fx-background-color : " + strCouleur1 + ";");
         });
+        
+        cpCouleurFond.setOnAction((evt) -> {
+            String strCouleurHTML = "#" + cpCouleurFond.getValue().toString().substring(2, 8);
+            String strTextHTML = heEditeurHTML.getHtmlText();
+            String strTrouve = "body\\{background-color : \\#......\\;\\}";
+            if (strTextHTML.indexOf("body{background-color :")!=-1) {
+                strTextHTML = strTextHTML.replaceAll(strTrouve, "body{background-color : " + strCouleurHTML + ";}");
+            } else {
+                strTextHTML = strTextHTML.replaceAll("</style>", "body{background-color : " + strCouleurHTML + ";}\n</style>");
+            }
+            heEditeurHTML.setHtmlText(strTextHTML);
+            strCouleurFond = strCouleurHTML;
+        });
+
         slOpacite.valueProperty().addListener((ov, oldValue, newValue) -> {
             if (newValue != null) {
                 getHsHTML().setOpaciteHTML((double) newValue);

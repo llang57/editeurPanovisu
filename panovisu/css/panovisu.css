@@ -92,6 +92,15 @@ and open the template in the editor.
     margin-right: 0px;
     overflow: hidden;
 }
+.divCanvas{
+    background-color: rgba(0,0,0,0);
+    margin-right: 0px;
+    overflow: hidden;
+    z-index:0;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
 
 
 .panoramique {
@@ -130,7 +139,7 @@ and open the template in the editor.
     transition: 0.5s;    
     padding : 1px;
 }
-.barre button{
+/*.barre div{
     height: 40px;
     width: 40px;
     border: 1px solid rgba(255,255,255,0);
@@ -139,30 +148,33 @@ and open the template in the editor.
     opacity: 0.8;
     margin-right: 0px;
     padding : 1px;
-}
+    cursor: pointer;
+}*/
 
 .info {
     position: absolute;
-    top: 0px; width: 100%;
+    top: 0px; 
     color: #ffffff;
     padding: 5px;
     font-family:Monospace;
     font-size:13px;
     text-align:center;
     background-color: #000;
-    width: 50%;
-    margin-left: 25%;
     z-index: 350;
     display: none;
 }
 
 
-.barre button:hover{
+.barre img:hover{
     opacity: 1;
 }
-.barre button img{
+.barre  img{
     width: 20px;
-    height: 20px;
+    height: 20px;    
+}
+.barre  img:hover{
+    width: 25px;
+    height: 25px;
 }
 
 .infoPanovisu,.aidePanovisu{
@@ -442,4 +454,15 @@ and open the template in the editor.
     position: absolute;
     display: none;
     cursor: pointer;
+}
+.xmoins,.xplus,.ymoins,.yplus,.zoomPlus,.zoomMoins,.pleinEcran,.souris,.auto,.binfo,.aide{
+    display : inline-block;
+    height: 26px;
+    width : 26px;
+    vertical-align: top;
+    cursor: pointer;
+}
+.xmoins img,.xplus img,.ymoins img,.yplus img,.zoomPlus img,.zoomMoins img,.pleinEcran img,.souris img,.auto img,.binfo img,.aide img{
+    position: relative;
+    bottom: 0px;
 }
