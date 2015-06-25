@@ -6,6 +6,7 @@
 package editeurpanovisu;
 
 import static editeurpanovisu.EditeurPanovisu.getStrRepertAppli;
+import java.awt.Dimension;
 import java.io.File;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -35,6 +36,7 @@ public class AideDialogController {
     private static Scene sceneAideDialog;
 
     public static void affiche() {
+        //Rectangle2D tailleEcran = Screen.getPrimary().getBounds();
         Rectangle2D tailleEcran = Screen.getPrimary().getBounds();
         int iHauteur = (int) tailleEcran.getHeight() - 20;
         int iLargeur = (int) tailleEcran.getWidth() - 20;

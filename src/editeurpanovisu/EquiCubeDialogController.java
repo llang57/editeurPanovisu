@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,7 +18,10 @@ import javafx.concurrent.Task;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -43,10 +47,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import org.apache.commons.imaging.ImageReadException;
-import org.controlsfx.control.action.Action;
-import org.controlsfx.dialog.Dialog;
-import org.controlsfx.dialog.DialogStyle;
-import org.controlsfx.dialog.Dialogs;
 
 /**
  * Controleur pour l'affichage des transformations cube / Equi
@@ -59,7 +59,7 @@ public class EquiCubeDialogController {
 
     private static Stage stTransformations;
     private static AnchorPane apTransformations;
-    private String strTypeTransformation="";
+    private String strTypeTransformation = "";
     static private final ListView lvListeFichier = new ListView();
     public static final ProgressBar pbBarreImage = new ProgressBar();
     static private Button btnAnnuler;
@@ -93,18 +93,20 @@ public class EquiCubeDialogController {
      *
      */
     private void annulerE2C() {
-        Action actReponse = null;
 
+        ButtonType reponse = null;
+        ButtonType buttonTypeOui = new ButtonType(rbLocalisation.getString("main.oui"));
+        ButtonType buttonTypeNon = new ButtonType(rbLocalisation.getString("main.non"));
         if ((lvListeFichier.getItems().size() != 0) && (!bTraitementEffectue)) {
-            actReponse = Dialogs.create()
-                    .owner(null)
-                    .title(rbLocalisation.getString("transformation.traiteImages"))
-                    .message(rbLocalisation.getString("transformation.traiteImagesQuitte"))
-                    .actions(Dialog.Actions.YES, Dialog.Actions.NO)
-                    .style(DialogStyle.CROSS_PLATFORM_DARK)
-                    .showConfirm();
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle(rbLocalisation.getString("transformation.traiteImages"));
+            alert.setHeaderText(null);
+            alert.setContentText(rbLocalisation.getString("transformation.traiteImagesQuitte"));
+            alert.getButtonTypes().setAll(buttonTypeOui, buttonTypeNon);
+            Optional<ButtonType> actReponse = alert.showAndWait();
+            reponse = actReponse.get();
         }
-        if ((actReponse == Dialog.Actions.YES) || (actReponse == null)) {
+        if ((reponse == buttonTypeOui) || (reponse == null)) {
             stTransformations.hide();
         }
     }
@@ -113,7 +115,7 @@ public class EquiCubeDialogController {
      *
      * @param nomFichier
      * @param j
-     * @throws InterruptedException
+     * @throws InterruptedException Exception interruption
      */
     private void traiteFichier(String nomFichier, int j) throws InterruptedException {
         if (strTypeTransformation.equals(EquiCubeDialogController.EQUI2CUBE)) {
@@ -261,15 +263,18 @@ public class EquiCubeDialogController {
      */
     private void validerE2C() {
         if (fileLstFichier == null) {
-            Dialogs.create().title(rbLocalisation.getString("transformation.traiteImages"))
-                    .message(rbLocalisation.getString("transformation.traiteImagesPasFichiers"))
-                    .style(DialogStyle.CROSS_PLATFORM_DARK)
-                    .showError();
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle(rbLocalisation.getString("transformation.traiteImages"));
+            alert.setHeaderText(null);
+            alert.setContentText(rbLocalisation.getString("transformation.traiteImagesPasFichiers"));
+            alert.showAndWait();
         } else {
-            Dialogs.create().title(rbLocalisation.getString("transformation.traiteImages"))
-                    .message(rbLocalisation.getString("transformation.traiteImagesMessage"))
-                    .style(DialogStyle.CROSS_PLATFORM_DARK)
-                    .showWarning();
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle(rbLocalisation.getString("transformation.traiteImages"));
+            alert.setHeaderText(null);
+            alert.setContentText(rbLocalisation.getString("transformation.traiteImagesMessage"));
+            alert.showAndWait();
+
             lblTermine = new Label();
             lblTermine.setText("Traitement en cours");
             lblTermine.setLayoutX(24);
@@ -407,11 +412,11 @@ public class EquiCubeDialogController {
                 }
             }
             if (bAttention) {
-                Dialogs.create().title(rbLocalisation.getString("transformation.traiteImages"))
-                        .message(rbLocalisation.getString("transformation.traiteImagesType"))
-                        .style(DialogStyle.CROSS_PLATFORM_DARK)
-                        .showError();
-
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle(rbLocalisation.getString("transformation.traiteImages"));
+                alert.setHeaderText(null);
+                alert.setContentText(rbLocalisation.getString("transformation.traiteImagesType"));
+                alert.showAndWait();
             }
             fileLstFich = new File[i];
             System.arraycopy(fileLstFich1, 0, fileLstFich, 0, i);
@@ -459,9 +464,9 @@ public class EquiCubeDialogController {
     }
 
     /**
-     * 
+     *
      * @param strTypeTransf
-     * @throws Exception 
+     * @throws Exception Exceptions
      */
     public void afficheFenetre(String strTypeTransf) throws Exception {
         lvListeFichier.getItems().clear();
@@ -753,11 +758,11 @@ public class EquiCubeDialogController {
                     }
                 }
                 if (bAttention) {
-                    Dialogs.create().title(rbLocalisation.getString("transformation.traiteImages"))
-                            .message(rbLocalisation.getString("transformation.traiteImagesType"))
-                            .style(DialogStyle.CROSS_PLATFORM_DARK)
-                            .showError();
-
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle(rbLocalisation.getString("transformation.traiteImages"));
+                    alert.setHeaderText(null);
+                    alert.setContentText(rbLocalisation.getString("transformation.traiteImagesType"));
+                    alert.showAndWait();
                 }
                 fileLstFichier = new File[i];
                 System.arraycopy(fileLstFich1, 0, fileLstFichier, 0, i);

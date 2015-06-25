@@ -1,0 +1,112 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" 
+"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="1" height="1" version="1.1" 
+     xmlns="http://www.w3.org/2000/svg" 
+     xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <filter id="flou_gaussien">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="1" />
+        </filter>
+        
+        <filter id="gris">
+            <feColorMatrix type="matrix" values="0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0"/>
+        </filter>
+        
+        <filter id="grisflou">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="1" />
+            <feColorMatrix type="saturate" values = "0.5"/>
+            <!--<feColorMatrix type="matrix" values="0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0"/>-->
+        </filter>
+        <filter id='gris10'>
+            <feColorMatrix in='SourceGraphic' type='saturate' values='0.1' />
+        </filter>
+        <filter id='gris20'>
+            <feColorMatrix in='SourceGraphic' type='saturate' values='0.2' />
+        </filter>
+        <filter id='gris30'>
+            <feColorMatrix in='SourceGraphic' type='saturate' values='0.3' />
+        </filter>
+        <filter id='gris40'>
+            <feColorMatrix in='SourceGraphic' type='saturate' values='0.4' />
+        </filter>        
+        <filter id='gris50'>
+            <feColorMatrix in='SourceGraphic' type='saturate' values='0.5' />
+        </filter>
+        <filter id='gris60'>
+            <feColorMatrix in='SourceGraphic' type='saturate' values='0.6' />
+        </filter>
+        <filter id='gris70'>
+            <feColorMatrix in='SourceGraphic' type='saturate' values='0.7' />
+        </filter>
+        <filter id='gris80'>
+            <feColorMatrix in='SourceGraphic' type='saturate' values='0.8' />
+        </filter>
+        <filter id='gris90'>
+            <feColorMatrix in='SourceGraphic' type='saturate' values='0.9' />
+        </filter>
+        
+        <filter id="gamma+"
+                color-interpolation-filters="sRGB">
+            <feComponentTransfer>
+                <feFuncR type="table" tableValues="0 0.66 1"/>
+                <feFuncG type="table" tableValues="0 0.66 1"/>
+                <feFuncB type="table" tableValues="0 0.66 1"/>
+            </feComponentTransfer>
+        </filter>
+        
+        <filter id="gamma-"
+                color-interpolation-filters="sRGB">
+            <feComponentTransfer>
+                <feFuncR type="table" tableValues="0 0.33 1"/>
+                <feFuncG type="table" tableValues="0 0.33 1"/>
+                <feFuncB type="table" tableValues="0 0.33 1"/>
+            </feComponentTransfer>
+        </filter>
+        
+        <filter id="hover"
+                color-interpolation-filters="sRGB">
+            <feComponentTransfer>
+                <feFuncR type="table" tableValues="-0.05 1.15"/>
+                <feFuncG type="table" tableValues="-0.05 1.15"/>
+                <feFuncB type="table" tableValues="-0.05 1.15"/>
+            </feComponentTransfer>
+        </filter>
+
+        <filter id="active"
+                color-interpolation-filters="sRGB">
+            <feComponentTransfer>
+                <feFuncR type="table" tableValues="-0.3 0.9"/>
+                <feFuncG type="table" tableValues="-0.3 0.9"/>
+                <feFuncB type="table" tableValues="-0.3 0.9"/>
+            </feComponentTransfer>
+        </filter>
+
+        <filter id="disabled"
+                color-interpolation-filters="sRGB">
+            <feColorMatrix type="saturate" values = "0.0"/>
+            <feComponentTransfer>
+                <feFuncA type="table" tableValues="0 0.4"/>
+            </feComponentTransfer>
+        </filter> 
+         
+        <filter id="invert"
+                color-interpolation-filters="sRGB">
+            <feComponentTransfer>
+                <feFuncR type="table" tableValues="1 0"/>
+                <feFuncG type="table" tableValues="1 0"/>
+                <feFuncB type="table" tableValues="1 0"/>
+            </feComponentTransfer>
+        </filter>
+        
+        <filter id='sepia'>
+            <feColorMatrix type='matrix' values='0.64 0.55 0.15 0 0 0.52 0.49 0.14 0 0 0.18 0.38 0.13 0 0 0 0 0 1 0'/>
+        </filter>
+        
+        <filter id='sepiaflou'>
+            <feGaussianBlur in="SourceGraphic" stdDeviation="1" />
+            <feColorMatrix type='matrix' values='0.64 0.55 0.15 0 0 0.52 0.49 0.14 0 0 0.18 0.38 0.13 0 0 0 0 0 1 0'/>
+        </filter>
+        
+    </defs>
+</svg>

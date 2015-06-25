@@ -93,8 +93,8 @@ public final class NavigateurPanoramique {
                 oldValue, newValue));
 
     }
-    private double maxFov = 120;
-    private double minFov = 35;
+    private double maxFov = 240;
+    private double minFov = 70;
     private boolean bChoixHotSpot = false;
     private double anchorX, anchorY,
             latitude, longitude, fov = 70, positNord = 32,
@@ -738,7 +738,7 @@ public final class NavigateurPanoramique {
     }
 
     /**
-     * @param iChangeVignette the iChangeVignette to set
+     * 
      */
     public void setiChangeVignette() {
         int ancienneValeur = this.iChangeVignette;

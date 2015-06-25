@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <title>Visite du Vercors</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" media="screen" href="panovisu/libs/jquerymenu/jquery.contextMenu.css" type="text/css"/>
+        <link rel="stylesheet" type="text/css" href="panovisu/css/msdropdown/dd.css" />
+        <meta name="url" property="og:url" content="" />
+        <meta property="og:title"  name="twitter:title" content="Visite du Vercors" />
+        <meta itemprop="description" property="og:description" name="twitter:description" content="Une page créée avec panoVisu Editeur : 100% Libre 100% HTML5" />
+        <meta name="img" property="og:image" itemprop="image primaryImageOfPage" content="./panos/DSC05261_DxO PanoramaVignette.jpg" />
+        <script type="text/javascript" src="panovisu/libs/openlayers/OpenLayers.js"></script>
+        <script type="text/javascript" src="panovisu/libs/openlayers/OpenStreetMap.js"></script>
+        <script type="text/javascript" src="panovisu/libs/openlayers/gmap.js?v=3.5&sensor=false"></script>
+        <style>
+            .olControlLayerSwitcher
+            {
+                font-family: Verdana,Arial,sans-serif!important;
+                margin-top: 3px;
+                margin-left: 3px;
+                margin-bottom: 3px;
+                font-size: 10pt!important;
+                color: white;
+                background-color: transparent;
+                z-index: 10000;
+                background-color: #999!important;
+                color : #ff0!important;
+                max-width: 180px!important;
+                opacity: 0.95!important;
+            }
+            .olControlLayerSwitcher .layersDiv
+            {
+                padding-top: 5px;
+                padding-left: 10px;
+                padding-bottom: 5px;
+                padding-right: 10px;
+                background-color: #aaa!important;
+                color : #fff!important;
+                font-family: Verdana,Arial,sans-serif!important;
+                font-size: 10pt!important;
+                font-weight: normal!important;
+                max-width: 180px!important;
+                overflow: hidden!important;
+                opacity: 0.95!important;
+            }        
+
+            #infoBulle {
+                background: #000000;
+                border-top: 1px solid #333333;
+                border-bottom: 1px solid #333333;
+                border-left: 10px solid #333333;
+                border-right: 1px solid #333333;
+                padding: 3px 10px;
+                opacity: 0.8;
+                color : #ffffff;
+                font-family: Arial,Arial,sans-serif!important;  
+                border-radius: 0px  5px 5px 0px;  
+                font-size : 12.19047619047619px;           
+                z-index : 10000000;
+            } 
+
+        </style>
+    </head>
+    <body style='background-color:#777; margin-top: 8px; margin-bottom: 2px;overflow: hidden;'>
+        <header>
+
+        </header>
+        <article style="height : 880px;">
+            <div style='background-color : #777' id="pano">
+            </div>
+        </article>
+        <script src="panovisu/panovisuInit.js"></script>
+        <script src="panovisu/panovisu.js"></script>
+        <script>
+
+            $(function() {
+                $('meta[name=img]').attr('content', document.location.href+"panos/DSC05261_DxO PanoramaVignette.jpg");
+                $('meta[name=url]').attr('content', document.location.href);
+                $(window).resize(function(){
+                    $("article").height($(window).height()-17);
+                    $("#pano").height($(window).height()-17);
+                })
+                $("article").height($(window).height()-17);
+                $("#pano").height($(window).height()-17);
+                ajoutePano({
+                    langue : "fr_FR",
+                    panoramique: "pano",
+                    minFOV: 35,
+                    maxFOV: 120,
+                    fenX: "100%",
+                    fenY: "100%",
+                    xml: "xml/panovisu0.xml"
+                });
+                $(".reseauSocial-twitter").on("click", function() {
+                    window.open(
+                            "https://twitter.com/share?url=" + document.location.href
+                            );
+                    return false;
+                });
+                $(".reseauSocial-fb").on("click", function() {
+                    url="http://www.facebook.com/sharer.php?s=100&p[url]=" + encodeURIComponent(document.location.href)
+                            + "&p[images][0]=" + encodeURIComponent(document.location.href + "panos/DSC05261_DxO PanoramaVignette.jpg")
+                            + "&p[title]=" + encodeURIComponent("Visite du Vercors")
+                            + "&p[summary]=" + encodeURIComponent("Une page créée avec panoVisu Editeur : 100% Libre 100% HTML5");
+                    window.open(url);
+                     //window.open(
+                      //      "http://www.facebook.com/sharer/sharer.php?u=" + document.location.href
+                      //      );
+                    return false;
+                });
+                $(".reseauSocial-google").on("click", function() {
+                    window.open(
+                            "https://plus.google.com/share?url=" + document.location.href + "&amp;hl=fr"
+                            );
+                    return false;
+                });
+                $(".reseauSocial-email").attr("href","mailto:?body=" + document.location.href + "&amp;hl=fr");
+            });
+        </script>
+    </body>
+</html>

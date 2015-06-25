@@ -16,6 +16,8 @@ public class HotspotImage {
     private String strNomImg = "";
     private String strUrlImage = "";
     private String strFichierImage = "", strInfo = "";
+    private String strCouleurFond="";
+    private double opacite=-1;
     private boolean bAnime;
 
     /**
@@ -127,6 +129,34 @@ public class HotspotImage {
      */
     public void setStrUrlImage(String strUrlImage) {
         this.strUrlImage = strUrlImage;
+    }
+
+    /**
+     * @return the strCouleurFond
+     */
+    public String getStrCouleurFond() {
+        return strCouleurFond;
+    }
+
+    /**
+     * @param strCouleurFond the strCouleurFond to set
+     */
+    public void setStrCouleurFond(String strCouleurFond) {
+        this.strCouleurFond = strCouleurFond;
+    }
+
+    /**
+     * @return the opacite
+     */
+    public double getOpacite() {
+        return opacite;
+    }
+
+    /**
+     * @param opacite the opacite to set
+     */
+    public void setOpacite(double opacite) {
+        this.opacite = opacite;
     }
 
 }

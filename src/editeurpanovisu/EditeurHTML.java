@@ -100,7 +100,9 @@ public class EditeurHTML {
     private boolean bDejaSauve = true;
     private ColorPicker cpCouleurHTML;
     private ColorPicker cpCouleurFond;
+    private ColorPicker cpCouleurTexte;
     public String strCouleurFond = "#FFFFFF";
+    public String strCouleurTexte = "#000000";
 
     private final String jsCodeInsertHtml
             = "function insertHtmlAtCursor(html) {\n"
@@ -224,7 +226,7 @@ public class EditeurHTML {
     }
 
     public void affiche(Number largeur, Number hauteur) {
-        double diffHauteur = 260;
+        double diffHauteur = 290;
         bDejaSauve = true;
         int iLargeur = (int) largeur;
         int iHauteur = (int) hauteur;
@@ -232,6 +234,12 @@ public class EditeurHTML {
         stEditeurHTML.initModality(Modality.APPLICATION_MODAL);
         stEditeurHTML.setResizable(true);
         heEditeurHTML = new HTMLEditor();
+        Color coulFond=Color.valueOf(strCouleurFond);
+        double lum=coulFond.getBrightness();
+        String strCoul="#000000";
+        if (lum>0.5){
+            strCoul="#ffffff";
+        }
         if (getHsHTML().getStrTexteHTML().equals("")) {
             heEditeurHTML.setHtmlText("<html>\n"
                     + "    <head>\n"
@@ -255,6 +263,11 @@ public class EditeurHTML {
                     + "            }\n"
                     + "            h3{\n"
                     + "                font-size: 1.1em;\n"
+                    + "            }\n"
+                    + "            a{"
+                    + "               text-decoration : none;\n"
+                    + "               font-weight : bold;\n"
+                    + "               color : inherit;\n"
                     + "            }\n"
                     + "\n"
                     + "        </style>\n"
@@ -294,7 +307,7 @@ public class EditeurHTML {
         AnchorPane apEditeur2 = new AnchorPane(heEditeurHTML);
         ImageView ivFond = new ImageView(getPanoramiquesProjet()[getiPanoActuel()].getImgPanoramique());
         apEditeur2.setLayoutX(5);
-        apEditeur2.setLayoutY(145);
+        apEditeur2.setLayoutY(195);
         apEditeur2.setPrefWidth(iLargeur - 20);
         apEditeur2.setPrefHeight(heEditeurHTML.getPrefHeight() + 20);
         ivFond.setPreserveRatio(false);
@@ -334,7 +347,7 @@ public class EditeurHTML {
 
         ToggleButton tgbEditeurInterne = new ToggleButton(rbLocalisation.getString("editeurHTML.htmlInterne"));
         tgbEditeurInterne.setLayoutX(10);
-        tgbEditeurInterne.setLayoutY(115);
+        tgbEditeurInterne.setLayoutY(145);
         tgbEditeurInterne.setSelected(!getHsHTML().isbLienExterieur());
 
         tgbEditeurInterne.setToggleGroup(tgLien);
@@ -385,12 +398,19 @@ public class EditeurHTML {
         slOpacite = new Slider(0, 1, getHsHTML().getOpaciteHTML());
         slOpacite.setLayoutX(380);
         slOpacite.setLayoutY(75);
+        
         Label lblCouleurFond = new Label(rbLocalisation.getString("editeurHTML.couleurFond"));
-        lblCouleurFond.setLayoutX(550);
-        lblCouleurFond.setLayoutY(75);
+        lblCouleurFond.setLayoutX(10);
+        lblCouleurFond.setLayoutY(125);
         cpCouleurFond = new ColorPicker(Color.web(strCouleurFond));
-        cpCouleurFond.setLayoutX(680);
-        cpCouleurFond.setLayoutY(70);
+        cpCouleurFond.setLayoutX(160);
+        cpCouleurFond.setLayoutY(120);
+        Label lblCouleurTexte = new Label(rbLocalisation.getString("editeurHTML.couleurTexte"));
+        lblCouleurTexte.setLayoutX(450);
+        lblCouleurTexte.setLayoutY(125);
+        cpCouleurTexte = new ColorPicker(Color.web(strCouleurTexte));
+        cpCouleurTexte.setLayoutX(600);
+        cpCouleurTexte.setLayoutY(120);
         btnValide = new Button(rbLocalisation.getString("editeurHTML.valide"), new ImageView(new Image("file:" + strImages + File.separator + "valide.png")));
         btnAnnule = new Button(rbLocalisation.getString("editeurHTML.annule"), new ImageView(new Image("file:" + strImages + File.separator + "annule.png")));
         btnValide.setPrefWidth(100);
@@ -402,7 +422,9 @@ public class EditeurHTML {
         apEditeur.getChildren().addAll(
                 tgbLienExterieur, tfLienExterieur,
                 lblPositionEditeur, tgbGauche, tgbCentre, tgbDroite, lblLargeurEditeur, slLargeurEditeur,
-                lblCouleur, cpCouleurHTML, lblOpacite, slOpacite, lblCouleurFond, cpCouleurFond,
+                lblCouleur, cpCouleurHTML, lblOpacite, slOpacite, 
+                lblCouleurFond, cpCouleurFond,
+                lblCouleurTexte,cpCouleurTexte,
                 tgbEditeurInterne,
                 btnAnnule, btnValide
         );
@@ -469,18 +491,30 @@ public class EditeurHTML {
             String strCouleur1 = "rgba(" + iRouge1 + "," + iVert1 + "," + iBleu1 + "," + getHsHTML().getOpaciteHTML() + ")";
             apEditeur2.setStyle("-fx-background-color : " + strCouleur1 + ";");
         });
-        
+
         cpCouleurFond.setOnAction((evt) -> {
             String strCouleurHTML = "#" + cpCouleurFond.getValue().toString().substring(2, 8);
             String strTextHTML = heEditeurHTML.getHtmlText();
             String strTrouve = "body\\{background-color : \\#......\\;\\}";
-            if (strTextHTML.indexOf("body{background-color :")!=-1) {
+            if (strTextHTML.contains("body{background-color :")) {
                 strTextHTML = strTextHTML.replaceAll(strTrouve, "body{background-color : " + strCouleurHTML + ";}");
             } else {
                 strTextHTML = strTextHTML.replaceAll("</style>", "body{background-color : " + strCouleurHTML + ";}\n</style>");
             }
             heEditeurHTML.setHtmlText(strTextHTML);
             strCouleurFond = strCouleurHTML;
+        });
+        cpCouleurTexte.setOnAction((evt) -> {
+            String strCouleurHTML = "#" + cpCouleurTexte.getValue().toString().substring(2, 8);
+            String strTextHTML = heEditeurHTML.getHtmlText();
+            String strTrouve = "body\\{color : \\#......\\;\\}";
+            if (strTextHTML.contains("body{color :")) {
+                strTextHTML = strTextHTML.replaceAll(strTrouve, "body{color : " + strCouleurHTML + ";}");
+            } else {
+                strTextHTML = strTextHTML.replaceAll("</style>", "body{color : " + strCouleurHTML + ";}\n</style>");
+            }
+            heEditeurHTML.setHtmlText(strTextHTML);
+            strCouleurTexte = strCouleurHTML;
         });
 
         slOpacite.valueProperty().addListener((ov, oldValue, newValue) -> {
@@ -541,7 +575,9 @@ public class EditeurHTML {
         }
         );
         btnValide.setOnAction((evenement) -> {
-            getHsHTML().setStrTexteHTML(heEditeurHTML.getHtmlText().replace("[", "&lbrace;").replace("]", "&rbrace;"));
+            System.out.println(heEditeurHTML.getHtmlText());
+            getHsHTML().setStrTexteHTML(heEditeurHTML.getHtmlText().replace("[", "&lbrace;").replace("]", "&rbrace;").replace("contenteditable=\"true\"", ""));
+            System.out.println(getHsHTML().getStrTexteHTML());
             setbValide(true);
             stEditeurHTML.hide();
         });

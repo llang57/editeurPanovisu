@@ -5,6 +5,7 @@
  */
 package editeurpanovisu;
 
+import static editeurpanovisu.EditeurPanovisu.getScnPrincipale;
 import static editeurpanovisu.EditeurPanovisu.getStrStyleCSS;
 import static editeurpanovisu.EditeurPanovisu.setStrStyleCSS;
 import java.io.BufferedWriter;
@@ -14,7 +15,6 @@ import java.io.IOException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static javafx.application.Application.setUserAgentStylesheet;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
@@ -32,11 +32,12 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import org.controlsfx.dialog.DialogStyle;
-import org.controlsfx.dialog.Dialogs;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 /**
- *
+ * Affichage de la fenêtre de configuration
+ * 
  * @author LANG Laurent
  */
 public class ConfigDialogController {
@@ -59,7 +60,7 @@ public class ConfigDialogController {
 
     /**
      *
-     * @throws IOException
+     * @throws IOException Exception d'entrée sortie 
      */
     public void afficheFenetre() throws IOException {
         String strLangueConfig = EditeurPanovisu.getLocale().getLanguage() + "_" + EditeurPanovisu.getLocale().getCountry();
@@ -130,7 +131,9 @@ public class ConfigDialogController {
         }
         tgStyle.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) -> {
             if (tgStyle.getSelectedToggle() != null) {
-                setUserAgentStylesheet("file:css/" + tgStyle.getSelectedToggle().getUserData().toString() + ".css");
+                //setUserAgentStylesheet("file:css/" + tgStyle.getSelectedToggle().getUserData().toString() + ".css");
+                    File f = new File("css/" + tgStyle.getSelectedToggle().getUserData().toString() + ".css");
+                    getScnPrincipale().getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
 
             }
         });
@@ -168,17 +171,19 @@ public class ConfigDialogController {
         vbFenetre.getChildren().add(paneBoutons);
         btnAnnuler.setOnAction((ActionEvent e) -> {
             stConfigDialog.hide();
-            setUserAgentStylesheet("file:css/" + getStrStyleCSS() + ".css");
+                    File f = new File("css/" + getStrStyleCSS() + ".css");
+                    getScnPrincipale().getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
+            //setUserAgentStylesheet("file:css/" + getStrStyleCSS() + ".css");
         });
         btnSauvegarder.setOnAction((ActionEvent e) -> {
             setStrStyleCSS(tgStyle.getSelectedToggle().getUserData().toString());
-            Dialogs.create()
-                    .style(DialogStyle.CROSS_PLATFORM_DARK)
-                    .owner(null)
-                    .title(rbLocalisation.getString("config.titreDialogue"))
-                    .masthead(rbLocalisation.getString("config.masthead"))
-                    .message(rbLocalisation.getString("config.message"))
-                    .showWarning();
+            
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle(rbLocalisation.getString("config.titreDialogue"));
+            alert.setHeaderText(rbLocalisation.getString("config.masthead"));
+            alert.setContentText(rbLocalisation.getString("config.message"));
+            alert.showAndWait();
+
             String contenuFichier = "langue=" + cbListeLangues.getValue().toString().split("_")[0].split(" : ")[1] + "\n";
             contenuFichier += "pays=" + cbListeLangues.getValue().toString().split("_")[1] + "\n";
             contenuFichier += "repert=" + tfRepert.getText() + "\n";

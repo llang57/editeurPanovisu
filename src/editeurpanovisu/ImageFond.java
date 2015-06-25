@@ -21,6 +21,10 @@ public class ImageFond {
     private double opacite = 0.8;
     private String strUrl = "", strInfobulle = "";
     private boolean bMasquable = true;
+    private String strType="aucun";
+    private int iNumDiapo=-1;
+    private String strCible="interne";
+    private int iCalqueImage=1;
 
     /**
      * @return the fichierImage
@@ -188,6 +192,62 @@ public class ImageFond {
      */
     public void setStrInfobulle(String strInfobulle) {
         this.strInfobulle = strInfobulle;
+    }
+
+    /**
+     * @return the strType
+     */
+    public String getStrType() {
+        return strType;
+    }
+
+    /**
+     * @param strType the strType to set
+     */
+    public void setStrType(String strType) {
+        this.strType = strType;
+    }
+
+    /**
+     * @return the iNumDiapo
+     */
+    public int getiNumDiapo() {
+        return iNumDiapo;
+    }
+
+    /**
+     * @param iNumDiapo the iNumDiapo to set
+     */
+    public void setiNumDiapo(int iNumDiapo) {
+        this.iNumDiapo = iNumDiapo;
+    }
+
+    /**
+     * @return the strCible
+     */
+    public String getStrCible() {
+        return strCible;
+    }
+
+    /**
+     * @param strCible the strCible to set
+     */
+    public void setStrCible(String strCible) {
+        this.strCible = strCible;
+    }
+
+    /**
+     * @return the iCalqueImage
+     */
+    public int getiCalqueImage() {
+        return iCalqueImage;
+    }
+
+    /**
+     * @param iCalqueImage the iCalqueImage to set
+     */
+    public void setiCalqueImage(int iCalqueImage) {
+        this.iCalqueImage = iCalqueImage;
     }
 
 }

@@ -18,11 +18,11 @@ import static editeurpanovisu.EditeurPanovisu.getiNombrePanoramiques;
 import static editeurpanovisu.EditeurPanovisu.getiNombrePlans;
 import static editeurpanovisu.EditeurPanovisu.setbDejaSauve;
 import static editeurpanovisu.EditeurPanovisu.setiNombrePlans;
-import static editeurpanovisu.EditeurPanovisu.strNumVersion;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,6 +36,8 @@ import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -61,9 +63,6 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
 import jfxtras.labs.scene.control.BigDecimalField;
-import org.controlsfx.control.action.Action;
-import org.controlsfx.dialog.Dialog;
-import org.controlsfx.dialog.Dialogs;
 
 /**
  *
@@ -131,7 +130,11 @@ public class GestionnairePlanController {
                 getPlans()[getiPlanActuel()].getHotspot(i).setStrInfo(tfTexteHS.getText());
             }
             if (cbx != null) {
-                getPlans()[getiPlanActuel()].getHotspot(i).setStrFichierXML(cbx.getValue() + ".xml");
+                int iNum = cbx.getSelectionModel().getSelectedIndex();
+                getPlans()[getiPlanActuel()].getHotspot(i).setNumeroPano(iNum);
+                getPlans()[getiPlanActuel()].getHotspot(i).setStrFichierXML(
+                        cbx.getValue()+".xml"
+                );
             }
         }
     }
@@ -929,15 +932,17 @@ public class GestionnairePlanController {
 
     private void retirePlanCourant() {
 
-        Action actReponse = null;
-        actReponse = Dialogs.create()
-                .owner(null)
-                .title(rbLocalisation.getString("plan.supprimerPlan"))
-                .message(rbLocalisation.getString("plan.etesVousSur"))
-                .actions(Dialog.Actions.YES, Dialog.Actions.NO)
-                .showWarning();
+        ButtonType buttonTypeOui = new ButtonType(rbLocalisation.getString("main.oui"));
+        ButtonType buttonTypeNon = new ButtonType(rbLocalisation.getString("main.non"));
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(rbLocalisation.getString("plan.supprimerPlan"));
+        alert.setHeaderText(null);
+        alert.setContentText(rbLocalisation.getString("plan.etesVousSur"));
+        alert.getButtonTypes().clear();
+        alert.getButtonTypes().setAll(buttonTypeOui, buttonTypeNon);
+        Optional<ButtonType> actReponse = alert.showAndWait();
 
-        if (actReponse == Dialog.Actions.YES) {
+        if (actReponse.get() == buttonTypeOui) {
 
             int iPlanCour = cbChoixPlan.getSelectionModel().getSelectedIndex();
             //System.out.println("Plan Courant : " + planCour);

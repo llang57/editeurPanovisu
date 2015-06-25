@@ -162,12 +162,12 @@ public class ListePanoramiqueCellule extends ListCell<String> {
             lbl1.setStyle("-fx-font-weight : bold;-fx-font-size : 1.0em; -fx-font-family : Verdana,Arial,sans-serif;");
             Label lbl2 = new Label(cellulesPanoramiques.get(getListView().getItems().indexOf(item)).getStrTitrePanoramiqueLigne2());
             lbl2.setStyle("-fx-font-size : 0.8em; -fx-font-family : Verdana,Arial,sans-serif;");
-            lbl1.setLayoutX(cellulesPanoramiques.get(getListView().getItems().indexOf(item)).getImgPanoramique().getWidth() + 10);
+            lbl1.setLayoutX(90);
             lbl1.setLayoutY(5);
-            lbl1.setMaxWidth(300 - cellulesPanoramiques.get(getListView().getItems().indexOf(item)).getImgPanoramique().getWidth() - 30);
-            lbl2.setMaxWidth(300 - cellulesPanoramiques.get(getListView().getItems().indexOf(item)).getImgPanoramique().getWidth() - 30);
+            lbl1.setMaxWidth(200);
+            lbl2.setMaxWidth(200);
 
-            lbl2.setLayoutX(cellulesPanoramiques.get(getListView().getItems().indexOf(item)).getImgPanoramique().getWidth() + 10);
+            lbl2.setLayoutX(90);
             lbl2.setLayoutY(25);
             apCellFactory.getChildren().addAll(paneFond, lbl1, lbl2);
             setGraphic(apCellFactory);

@@ -6,7 +6,8 @@
 package editeurpanovisu;
 
 /**
- *
+ * définition de l'ensemble carte + marqueurs
+ * 
  * @author LANG Laurent
  */
 public class CartePanoVisu {
@@ -29,11 +30,11 @@ public class CartePanoVisu {
 
     /**
      *
-     * @param iNombreMarqueur
-     * @param coordonneesCentre
-     * @param strTypeCarte
-     * @param marqueurs
-     * @param facteurZoom
+     * @param iNombreMarqueur nombres de marqueurs de la carte
+     * @param coordonneesCentre coordonnées du centre de la carte
+     * @param strTypeCarte type de carte (OSM, Bing, Google)
+     * @param marqueurs les marqueurs de la carte
+     * @param facteurZoom niveau de zoom
      */
     public CartePanoVisu(int iNombreMarqueur, CoordonneesGeographiques coordonneesCentre, String strTypeCarte, MarqueurGeolocalisation[] marqueurs, int facteurZoom) {
         this.strTypeCarte = strTypeCarte;
@@ -45,9 +46,9 @@ public class CartePanoVisu {
 
     /**
      *
-     * @param coordonnees
-     * @param strXML
-     * @param strHTML
+     * @param coordonnees Coordonnées géographiques du marqueur
+     * @param strXML fichier XML du pano
+     * @param strHTML chaine HTML
      */
     public void ajouteMarqueur(CoordonneesGeographiques coordonnees, String strXML, String strHTML) {
         getMarqueurs()[getiNombreMarqueur()] = new MarqueurGeolocalisation(coordonnees, strHTML, strXML);
@@ -55,7 +56,7 @@ public class CartePanoVisu {
     }
 
     /**
-     * @return the centreCarte
+     * @return the centreCarte 
      */
     public CoordonneesGeographiques getCentreCarte() {
         return centreCarte;
@@ -112,8 +113,8 @@ public class CartePanoVisu {
 
     /**
      *
-     * @param i
-     * @param marqueurs
+     * @param i numéro du marqueur
+     * @param marqueurs valeur du marqueur 
      */
     public void setMarqueursI(int i, MarqueurGeolocalisation marqueurs) {
         this.marqueurs[i] = marqueurs;

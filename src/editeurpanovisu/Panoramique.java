@@ -27,18 +27,25 @@ public class Panoramique {
     private final HotSpot[] hotspots = new HotSpot[100];
     private final HotspotImage[] imageHotspot = new HotspotImage[100];
     private final HotspotHTML[] HTMLHotspot = new HotspotHTML[100];
+    private final HotspotDiaporama[] diapoHotspot = new HotspotDiaporama[100];
     private String strTitrePanoramique="";
     private String strNomFichier="";
     private double regardX = 0.d;
     private double regardY = 0.d;
     private double champVisuel=75.d;
+    private double minLat=-1000;
+    private double maxLat=1000;
+    private boolean bMinLat=false;
+    private boolean bMaxLat=false;
     private Image imgPanoramique;
     private Image imgVisuPanoramique;
     private Image imgVignettePanoramique;
     private Image imgPanoRect;
+    private Image imgPanoRectListe;
     private int iNombreHotspots = 0;
     private int iNombreHotspotImage = 0;
     private int iNombreHotspotHTML = 0;
+    private int iNombreHotspotDiapo = 0;
     private String strTypePanoramique="";
     private boolean bAfficheTitre;
     private boolean bAfficheInfo;
@@ -227,6 +234,44 @@ public class Panoramique {
         //int nombre
     }
 
+        /**
+     * @param i
+     * @return le hotspot numero i
+     */
+    public HotspotDiaporama getHotspotDiapo(int i) {
+        return diapoHotspot[i];
+    }
+
+    /**
+     * @param hotspot the hotspots to set
+     * @param i
+     */
+    public void setHotspotDiapo(HotspotDiaporama hotspot, int i) {
+        this.diapoHotspot[i] = hotspot;
+    }
+
+    /**
+     *
+     * @param hotspot
+     */
+    public void addHotspotDiapo(HotspotDiaporama hotspot) {
+        this.diapoHotspot[this.getiNombreHotspotDiapo()] = hotspot;
+        this.setiNombreHotspotDiapo(this.getiNombreHotspotDiapo()+1);
+    }
+
+    /**
+     *
+     * @param num
+     */
+    public void removeHotspotdiapo(int num) {
+        for (int i = num; i < this.iNombreHotspotDiapo - 1; i++) {
+            this.diapoHotspot[i] = this.diapoHotspot[i + 1];
+        }
+        this.setiNombreHotspotDiapo(this.getiNombreHotspotDiapo()-1);
+        //int nombre
+    }
+
+    
     /**
      * @return the imagePanoramique
      */
@@ -450,6 +495,90 @@ public class Panoramique {
      */
     public void setImgPanoRect(Image imgPanoRect) {
         this.imgPanoRect = imgPanoRect;
+    }
+
+    /**
+     * @return the minLat
+     */
+    public double getMinLat() {
+        return minLat;
+    }
+
+    /**
+     * @param minLat the minLat to set
+     */
+    public void setMinLat(double minLat) {
+        this.minLat = minLat;
+    }
+
+    /**
+     * @return the maxLat
+     */
+    public double getMaxLat() {
+        return maxLat;
+    }
+
+    /**
+     * @param maxLat the maxLat to set
+     */
+    public void setMaxLat(double maxLat) {
+        this.maxLat = maxLat;
+    }
+
+    /**
+     * @return the bMinLat
+     */
+    public boolean isbMinLat() {
+        return bMinLat;
+    }
+
+    /**
+     * @param bMinLat the bMinLat to set
+     */
+    public void setbMinLat(boolean bMinLat) {
+        this.bMinLat = bMinLat;
+    }
+
+    /**
+     * @return the bMaxLat
+     */
+    public boolean isbMaxLat() {
+        return bMaxLat;
+    }
+
+    /**
+     * @param bMaxLat the bMaxLat to set
+     */
+    public void setbMaxLat(boolean bMaxLat) {
+        this.bMaxLat = bMaxLat;
+    }
+
+    /**
+     * @return the iNombreHotspotDiapo
+     */
+    public int getiNombreHotspotDiapo() {
+        return iNombreHotspotDiapo;
+    }
+
+    /**
+     * @param iNombreHotspotDiapo the iNombreHotspotDiapo to set
+     */
+    public void setiNombreHotspotDiapo(int iNombreHotspotDiapo) {
+        this.iNombreHotspotDiapo = iNombreHotspotDiapo;
+    }
+
+    /**
+     * @return the imgPanoRectListe
+     */
+    public Image getImgPanoRectListe() {
+        return imgPanoRectListe;
+    }
+
+    /**
+     * @param imgPanoRectListe the imgPanoRectListe to set
+     */
+    public void setImgPanoRectListe(Image imgPanoRectListe) {
+        this.imgPanoRectListe = imgPanoRectListe;
     }
 
 }
