@@ -1484,7 +1484,7 @@ public class EditeurPanovisu extends Application {
                         + "      zeroNord=\"" + zN + "\"\n"
                         + "      regardX=\"" + regX + "\"\n"
                         + "      regardY=\"" + Math.round((getPanoramiquesProjet()[i].getRegardY() * 1000) + 0.002) / 1000 + "\"\n"
-                        + "      champVisuel=\"" + Math.round((getPanoramiquesProjet()[i].getChampVisuel() / 2.0 + 0.002) * 1000) / 1000 + "\"\n";
+                        + "      champVisuel=\"" + Math.round((getPanoramiquesProjet()[i].getChampVisuel() + 0.002) * 1000) / 1000 + "\"\n";
 
                 if (getPanoramiquesProjet()[i].getMinLat() != -1000 && getPanoramiquesProjet()[i].isbMinLat()) {
                     strContenuFichier
@@ -2242,8 +2242,8 @@ public class EditeurPanovisu extends Application {
                     + "                ajoutePano({\n"
                     + "                    langue : \"" + getLocale().toString() + "\",\n"
                     + "                    panoramique: \"pano\",\n"
-                    + "                    minFOV: 35,\n"
-                    + "                    maxFOV: 120,\n"
+                    + "                    minFOV: " + navigateurPanoramique.getMinFov() + ",\n"
+                    + "                    maxFOV: " + navigateurPanoramique.getMaxFov() + ",\n"
                     + "                    fenX: \"100%\",\n"
                     + "                    fenY: \"100%\",\n"
                     + "                    xml: \"xml/PANO.xml\"\n"
@@ -3103,7 +3103,7 @@ public class EditeurPanovisu extends Application {
                     + ";maxLat:" + getPanoramiquesProjet()[i].getMaxLat()
                     + ";bMinLat:" + getPanoramiquesProjet()[i].isbMinLat()
                     + ";bMaxLat:" + getPanoramiquesProjet()[i].isbMaxLat()
-                    + ";fov:" + getPanoramiquesProjet()[i].getChampVisuel()
+                    + ";fov:" + (getPanoramiquesProjet()[i].getChampVisuel() * 2)
                     + ";zeroNord:" + getPanoramiquesProjet()[i].getZeroNord()
                     + ";affichePlan:" + getPanoramiquesProjet()[i].isAffichePlan()
                     + ";numeroPlan:" + getPanoramiquesProjet()[i].getNumeroPlan();
@@ -3129,7 +3129,7 @@ public class EditeurPanovisu extends Application {
                     strContenuFichier += ";regardY:" + HS.getRegardY();
                 }
                 if (HS.getChampVisuel() != 0) {
-                    strContenuFichier += ";champVisuel:" + HS.getChampVisuel();
+                    strContenuFichier += ";champVisuel:" + (HS.getChampVisuel() * 2);
                 }
                 strContenuFichier += "]\n";
             }
@@ -3721,7 +3721,7 @@ public class EditeurPanovisu extends Application {
                                     getPanoramiquesProjet()[getiPanoActuel()].setbMaxLat(strValeur[1].equals("true"));
                                     break;
                                 case "fov":
-                                    getPanoramiquesProjet()[getiPanoActuel()].setChampVisuel(Double.parseDouble(strValeur[1]));
+                                    getPanoramiquesProjet()[getiPanoActuel()].setChampVisuel(Double.parseDouble(strValeur[1]) / 2.0);
                                     break;
                                 case "zeroNord":
                                     getPanoramiquesProjet()[getiPanoActuel()].setZeroNord(Double.parseDouble(strValeur[1]));
@@ -3770,7 +3770,7 @@ public class EditeurPanovisu extends Application {
                                         HS.setRegardY(Double.parseDouble(strValeur[1]));
                                         break;
                                     case "champVisuel":
-                                        HS.setChampVisuel(Double.parseDouble(strValeur[1]));
+                                        HS.setChampVisuel(Double.parseDouble(strValeur[1]) / 2.0);
                                         break;
                                     case "image":
                                         if ("null".equals(strValeur[1])) {

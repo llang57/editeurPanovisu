@@ -93,8 +93,8 @@ public final class NavigateurPanoramique {
                 oldValue, newValue));
 
     }
-    private double maxFov = 240;
-    private double minFov = 70;
+    private double maxFov = 140;
+    private double minFov = 25;
     private boolean bChoixHotSpot = false;
     private double anchorX, anchorY,
             latitude, longitude, fov = 70, positNord = 32,
@@ -171,7 +171,7 @@ public final class NavigateurPanoramique {
         scene.setCamera(perspectiveCamera);
         perspectiveCamera.setFarClip(10000);
         perspectiveCamera.setNearClip(0.1);
-        perspectiveCamera.setFieldOfView(getFov());
+        perspectiveCamera.setFieldOfView(getFov()*2);
         perspectiveCamera.setVerticalFieldOfView(false);
         return perspectiveCamera;
     }
@@ -208,7 +208,7 @@ public final class NavigateurPanoramique {
         camera1.getTransforms().add(ry);
         Rotate rx = new Rotate(getLatitude(), Rotate.X_AXIS);
         camera1.getTransforms().add(rx);
-        camera1.setFieldOfView(getFov());
+        camera1.setFieldOfView(getFov()*2);
         double rayon = sscPanorama.getWidth() / 2.d / Math.sin(getFov() / 2.d * rapportDegToRad);
         double positionNord;
         double angle = getPositNord() - getLongitude();
