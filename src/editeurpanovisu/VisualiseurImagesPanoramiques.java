@@ -124,7 +124,6 @@ public final class VisualiseurImagesPanoramiques {
 
     private PerspectiveCamera addCamera(SubScene scene) {
         PerspectiveCamera perspectiveCamera = new PerspectiveCamera(true);
-        perspectiveCamera.setTranslateZ(0);
         scene.setCamera(perspectiveCamera);
         perspectiveCamera.setFarClip(10000);
         perspectiveCamera.setNearClip(0.1);
@@ -252,7 +251,6 @@ public final class VisualiseurImagesPanoramiques {
 
     private void reaffiche() {
         apPanorama.getChildren().clear();
-        //parent.setTranslateZ(500);
         spPanorama.setRotationAxis(Rotate.Y_AXIS);
         sscPanorama.setWidth(largeurImage);
         sscPanorama.setHeight(hauteurImage);
@@ -342,7 +340,6 @@ public final class VisualiseurImagesPanoramiques {
         apPanorama.setPrefHeight(hauteurImage + 2 * positY + 60);
         apPanorama.setMinHeight(hauteurImage + 2 * positY + 60);
         apPanorama.setMaxHeight(hauteurImage + 2 * positY + 60);
-        //apPanorama.setStyle("-fx-background-color : #ccc;");
         apPanorama.getChildren().addAll(apNord, bdfLong, bdfLat, bdfFOV);
         sscPanorama.setFocusTraversable(true);
         btnChoixNord = new Button(rbLocalisation.getString("navigateur.nord"));
@@ -400,7 +397,6 @@ public final class VisualiseurImagesPanoramiques {
         });
         sscPanorama.setOnKeyPressed((event) -> {
             String code = event.getCode().toString();
-            //System.out.println("code : " + code);
             switch (code) {
                 case "RIGHT":
                     setLongitude(getLongitude() + 0.5);

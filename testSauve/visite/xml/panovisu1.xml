@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Visite générée par l'éditeur panoVisu 
+
+             Création L.LANG      le monde à 360°  : http://lemondea360.fr
+
+             fichier image : E:\test2\visite\panos\panovisu2.jpg
+
+-->
+
+
+<scene>
+   <pano 
+      image="panos/panovisu1"
+      afftitre="oui"
+      titre="Test"
+      titre2="Panoramique 2"
+      titrePosition="left"
+      titreDecalage="150px"
+      titrePolice="Verdana"
+      titreTaillePolice="23px"
+      titreTaillePolice2="17px"
+      titreCalque="1"
+      titreTaille="adapte"
+      titreFond="rgba(0,0,0,0.8)"
+      titreCouleur="#ffffff"
+      type="sphere"
+      multiReso="oui"
+      nombreNiveaux="5.0"
+      zeroNord="-115.0"
+      regardX="-242.0"
+      regardY="48"
+      champVisuel="38"
+      minLat="-71"
+      autorotation="non"
+      vitesseAR="30"
+      autotour="non"
+      atBouton="non"
+      atBoutonTaille="32.0"
+      atBoutonPositionX="right"
+      atBoutonPositionY="top"
+      atBoutonOffsetX="10.0"
+      atBoutonOffsetY="10.0"
+      atCalque="1"
+      typeAT="tours"
+      limiteAT="1"
+      demarrageAT="0"
+      affinfo="oui"
+   />
+   <!--Définition de la Barre de navigation-->
+   <boutons 
+      styleBoutons="navigation"
+      couleur="rgba(255,255,255,0)"
+      bordure="rgba(255,255,255,0)"
+      deplacements="oui" 
+      zoom="oui" 
+      outils="oui"
+      fs="oui" 
+      souris="oui" 
+      rotation="oui" 
+      positionX="center"
+      positionY="bottom" 
+      barreCCalque="1"
+      dX="0.0" 
+      dY="10.0"
+      espacement="4"
+      visible="oui"
+   />
+<!--  Bouton Suivant Precedent -->
+    <suivantPrecedent
+        suivPrecCalque="1"
+        suivant="xml/panovisu0.xml"            
+        precedent="xml/panovisu0.xml"            
+    />    
+<!--  Bouton de Masquage -->
+    <marcheArret 
+        affiche="non"
+        image="MA.png"
+        taille="30.0"
+        positionY="top"
+        positionX="right"
+        opacite="0.8"
+        dX="20.0"
+        dY="20.0"
+        navigation="oui"
+        boussole="oui"
+        titre="oui"
+        plan="oui"
+        reseaux="oui"
+        masquageCalque="1"
+        vignettes="oui"
+        combo="oui"
+        suivPrec="oui"
+        hotspots="oui"
+    />
+<!-- Barre des vignettes -->    <vignettes 
+        affiche="oui"
+        tailleImage="120.0"
+        fondCouleur="rgba(0,0,0,0.8)"
+        texteCouleur="#ffffff"
+        opacite="1.0"
+        vignettesCalque="1"
+        position="left"
+    >
+        <imageVignette 
+            image="panos/panovisu0Vignette.jpg"
+            xml="xml/panovisu0.xml"
+            infoBulle="Panoramique 1"
+        />
+        <imageVignette 
+            image="panos/panovisu1Vignette.jpg"
+            xml="xml/panovisu1.xml"
+            infoBulle="Panoramique 2"
+        />
+    </vignettes>       
+    <!--Définition des hotspots-->  
+   <hotspots>
+   </hotspots>
+
+<!-- Définition des images de fond -->
+
+</scene>

@@ -30,18 +30,13 @@ public class TextUtils {
     }
 
     public static double computeTextWidth(Font font, String text, double help0) {
-    // Toolkit.getToolkit().getFontLoader().computeStringWidth(field.getText(),
-        // field.getFont());
-
         helper.setText(text);
         helper.setFont(font);
-
         helper.setWrappingWidth(0.0D);
         helper.setLineSpacing(0.0D);
         double d = Math.min(helper.prefWidth(-1.0D), help0);
         helper.setWrappingWidth((int) Math.ceil(d));
         d = Math.ceil(helper.getLayoutBounds().getWidth());
-
         helper.setWrappingWidth(DEFAULT_WRAPPING_WIDTH);
         helper.setLineSpacing(DEFAULT_LINE_SPACING);
         helper.setText(DEFAULT_TEXT);

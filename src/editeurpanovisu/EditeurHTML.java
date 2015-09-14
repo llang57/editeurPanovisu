@@ -30,12 +30,24 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.scene.*;
-import javafx.scene.control.*;
-import javafx.scene.image.*;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ColorPicker;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Separator;
+import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.ToolBar;
+import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.web.HTMLEditor;
@@ -129,12 +141,22 @@ public class EditeurHTML {
             + " return text;\n"
             + "})()";
 
+    /**
+     *
+     * @param i
+     * @return
+     */
     private static String hex(int i) {
         return Integer.toHexString(i);
     }
 
-//a method to convert to a javas/js style string
-//https://commons.apache.org/proper/commons-lang/javadocs/api-2.6/src-html/org/apache/commons/lang/StringEscapeUtils.html
+    /**
+     *
+     * @param strEntree
+     * @param bEscapeSingleQuote
+     * @param escapeForwardSlash
+     * @return
+     */
     private static String escapeJavaStyleString(String strEntree,
             boolean bEscapeSingleQuote, boolean escapeForwardSlash) {
         StringBuilder sbSortie = new StringBuilder("");
@@ -145,8 +167,6 @@ public class EditeurHTML {
         sz = strEntree.length();
         for (int i = 0; i < sz; i++) {
             char chEntree = strEntree.charAt(i);
-
-// handle unicode
             if (chEntree > 0xfff) {
                 sbSortie.append("\\u").append(hex(chEntree));
             } else if (chEntree > 0xff) {
@@ -234,11 +254,11 @@ public class EditeurHTML {
         stEditeurHTML.initModality(Modality.APPLICATION_MODAL);
         stEditeurHTML.setResizable(true);
         heEditeurHTML = new HTMLEditor();
-        Color coulFond=Color.valueOf(strCouleurFond);
-        double lum=coulFond.getBrightness();
-        String strCoul="#000000";
-        if (lum>0.5){
-            strCoul="#ffffff";
+        Color coulFond = Color.valueOf(strCouleurFond);
+        double lum = coulFond.getBrightness();
+        String strCoul = "#000000";
+        if (lum > 0.5) {
+            strCoul = "#ffffff";
         }
         if (getHsHTML().getStrTexteHTML().equals("")) {
             heEditeurHTML.setHtmlText("<html>\n"
@@ -249,7 +269,7 @@ public class EditeurHTML {
                     + "                font-family: Verdana,Arial,sans-serif;                \n"
                     + "            }           \n"
                     + "            body{background-color : " + strCouleurFond + ";}\n"
-                    + "            body{color : #ffffff;}\n"
+                    + "            body{color : " + strCouleurTexte + ";}\n"
                     + "            h1,h2,h3,h4,h5{\n"
                     + "                font-size : 1em;\n"
                     + "                font-weight: bold;                \n"
@@ -332,8 +352,6 @@ public class EditeurHTML {
                 heEditeurHTML.setLayoutX(iLargeur - 30 - heEditeurHTML.getPrefWidth() - 35);
                 break;
         }
-
-        //heEditeurHTML.setLayoutX(10);
         if (getHsHTML().isbLienExterieur()) {
             heEditeurHTML.setDisable(true);
         }
@@ -398,7 +416,7 @@ public class EditeurHTML {
         slOpacite = new Slider(0, 1, getHsHTML().getOpaciteHTML());
         slOpacite.setLayoutX(380);
         slOpacite.setLayoutY(75);
-        
+
         Label lblCouleurFond = new Label(rbLocalisation.getString("editeurHTML.couleurFond"));
         lblCouleurFond.setLayoutX(10);
         lblCouleurFond.setLayoutY(125);
@@ -422,14 +440,13 @@ public class EditeurHTML {
         apEditeur.getChildren().addAll(
                 tgbLienExterieur, tfLienExterieur,
                 lblPositionEditeur, tgbGauche, tgbCentre, tgbDroite, lblLargeurEditeur, slLargeurEditeur,
-                lblCouleur, cpCouleurHTML, lblOpacite, slOpacite, 
+                lblCouleur, cpCouleurHTML, lblOpacite, slOpacite,
                 lblCouleurFond, cpCouleurFond,
-                lblCouleurTexte,cpCouleurTexte,
+                lblCouleurTexte, cpCouleurTexte,
                 tgbEditeurInterne,
                 btnAnnule, btnValide
         );
         stEditeurHTML.show();
-        //hideImageNodesMatching(htmlEditor, Pattern.compile(".*(Cut|Copy|Paste).*"), 0);
         int i = 0;
         if (nodeBarreIconesSuperieure instanceof ToolBar && nodeEditeurHTML instanceof WebView) {
             tbBarreIconesSuperieure = (ToolBar) nodeBarreIconesSuperieure;
@@ -447,7 +464,6 @@ public class EditeurHTML {
                 try {
                     Desktop d = Desktop.getDesktop();
                     URI uriAdresse = new URI(nouvValeur);
-                    System.out.println(uriAdresse);
                     d.browse(uriAdresse);
                     engEditeurHTML.getLoadWorker().cancel();
                     Platform.runLater(() -> {
@@ -575,9 +591,7 @@ public class EditeurHTML {
         }
         );
         btnValide.setOnAction((evenement) -> {
-            System.out.println(heEditeurHTML.getHtmlText());
             getHsHTML().setStrTexteHTML(heEditeurHTML.getHtmlText().replace("[", "&lbrace;").replace("]", "&rbrace;").replace("contenteditable=\"true\"", ""));
-            System.out.println(getHsHTML().getStrTexteHTML());
             setbValide(true);
             stEditeurHTML.hide();
         });
@@ -614,7 +628,6 @@ public class EditeurHTML {
 
         stEditeurHTML.widthProperty()
                 .addListener((ov, ancValeur, nouvValeur) -> {
-                    System.out.println(nouvValeur);
                     slLargeurEditeur.setMax((double) nouvValeur - 35.d);
                     if (slLargeurEditeur.getValue() > (double) nouvValeur - 35.d) {
                         slLargeurEditeur.setValue((double) nouvValeur - 35.d);
@@ -650,7 +663,6 @@ public class EditeurHTML {
 
         stEditeurHTML.heightProperty()
                 .addListener((ov, ancValeur, nouvValeur) -> {
-                    System.out.println(nouvValeur);
                     apEditeur.setPrefHeight((double) nouvValeur);
                     apEditeur.setPrefHeight((double) nouvValeur);
                     apEditeur.setPrefHeight((double) nouvValeur);
@@ -674,7 +686,6 @@ public class EditeurHTML {
 
     private void quitteEditeurHTML(Stage stFenetre) {
         setbAnnule(true);
-        System.out.println(stEditeurHTML);
         stFenetre.hide();
     }
 
@@ -871,7 +882,6 @@ public class EditeurHTML {
                 Image imgImageInserer = new Image("file:" + strNomFichierImage);
                 double largeur = imgImageInserer.getWidth();
                 double hauteur = imgImageInserer.getHeight();
-                System.out.println(largeur + "x" + hauteur);
                 slLargeurImage.setMax(largeur * 2);
                 slLargeurImage.setValue(largeur);
                 ivImageInserer.setImage(imgImageInserer);
@@ -905,10 +915,8 @@ public class EditeurHTML {
                         + " src='file:////" + strNomFichierImage
                         + "'/>";
             }
-            System.out.println(strAjouteImage);
             engEditeurHTML.executeScript(jsCodeInsertHtml.replace("####html####", escapeJavaStyleString(strAjouteImage, true, true)));
             getHsHTML().setStrTexteHTML(heEditeurHTML.getHtmlText());
-            System.out.println(getHsHTML().getStrTexteHTML());
             apDialog.setVisible(false);
             apEditeur.setDisable(false);
             bDejaSauve = false;

@@ -49,7 +49,9 @@ public class NavigateurOpenLayersSeul {
      * @param iFacteurZoom
      */
     public void allerCoordonnees(CoordonneesGeographiques coordonnees, int iFacteurZoom) {
-        navigateurCarteSeul.getWebEngine().executeScript("allerCoordonnees(" + coordonnees.getLongitude() + "," + coordonnees.getLatitude() + "," + iFacteurZoom + ")");
+        if (coordonnees != null) {
+            navigateurCarteSeul.getWebEngine().executeScript("allerCoordonnees(" + coordonnees.getLongitude() + "," + coordonnees.getLatitude() + "," + iFacteurZoom + ")");
+        }
     }
 
     /**
@@ -86,7 +88,9 @@ public class NavigateurOpenLayersSeul {
      * @param strHTML
      */
     public void ajouteMarqueur(int iNumeroMarqueur, CoordonneesGeographiques coordMarqueur, String strHTML) {
-        navigateurCarteSeul.getWebEngine().executeScript("ajouteMarqueur(" + iNumeroMarqueur + "," + coordMarqueur.getLongitude() + "," + coordMarqueur.getLatitude() + ",\"" + strHTML + "\")");
+        if (coordMarqueur != null) {
+            navigateurCarteSeul.getWebEngine().executeScript("ajouteMarqueur(" + iNumeroMarqueur + "," + coordMarqueur.getLongitude() + "," + coordMarqueur.getLatitude() + ",\"" + strHTML + "\")");
+        }
     }
 
     /**
@@ -151,16 +155,18 @@ public class NavigateurOpenLayersSeul {
             String strCouleurLigne,
             double opacite
     ) {
-        navigateurCarteSeul.getWebEngine().executeScript(" afficheRadar("
-                + centre.getLongitude() + ","
-                + centre.getLatitude() + ","
-                + ouverture + ","
-                + angle + ","
-                + rayon + ","
-                + "'" + strCouleurLigne + "',"
-                + "'" + strCouleurFond + "',"
-                + opacite
-                + ")");
+        if (centre != null) {
+            navigateurCarteSeul.getWebEngine().executeScript(" afficheRadar("
+                    + centre.getLongitude() + ","
+                    + centre.getLatitude() + ","
+                    + ouverture + ","
+                    + angle + ","
+                    + rayon + ","
+                    + "'" + strCouleurLigne + "',"
+                    + "'" + strCouleurFond + "',"
+                    + opacite
+                    + ")");
+        }
     }
 
     /**
@@ -315,7 +321,7 @@ public class NavigateurOpenLayersSeul {
          * @param msg
          */
         public void adresseInconnue(String msg) {
-            //System.out.println("Adresse Inconnue\n" + msg);
+            // System.out.println("Adresse Inconnue\n" + msg);
         }
 
         /**
@@ -324,7 +330,7 @@ public class NavigateurOpenLayersSeul {
          * @param lat
          */
         public void adresseTrouvee(double lon, double lat) {
-//            System.out.println(
+            // System.out.println(
 //                    "Adresse trouvée aux coordonnées : " + CoordonneesGeographiques.toDMS(lat) + "  " + CoordonneesGeographiques.toDMS(lon)
 //            );
         }
@@ -334,7 +340,7 @@ public class NavigateurOpenLayersSeul {
          * @param strChaine
          */
         public void afficheChaine(String strChaine) {
-            //System.out.println(strChaine);
+            System.out.println(strChaine);
 
         }
 

@@ -35,6 +35,8 @@ public class Panoramique {
     private double champVisuel=75.d;
     private double minLat=-1000;
     private double maxLat=1000;
+    private double fovMax=70;
+    private double fovMin=12;
     private boolean bMinLat=false;
     private boolean bMaxLat=false;
     private Image imgPanoramique;
@@ -42,6 +44,7 @@ public class Panoramique {
     private Image imgVignettePanoramique;
     private Image imgPanoRect;
     private Image imgPanoRectListe;
+    private Image imgCubeEqui;
     private int iNombreHotspots = 0;
     private int iNombreHotspotImage = 0;
     private int iNombreHotspotHTML = 0;
@@ -92,7 +95,6 @@ public class Panoramique {
      */
     public void setStrNomFichier(String strNomFichier) {
         this.strNomFichier = strNomFichier;
-        System.out.println(strNomFichier);
     }
 
     /**
@@ -452,7 +454,6 @@ public class Panoramique {
      */
     public void setImgVisuPanoramique(Image imgVisuPanoramique) {
         this.imgVisuPanoramique = imgVisuPanoramique;
-        System.out.println("Largeur : "+this.getImgVisuPanoramique().getWidth());
     }
 
     /**
@@ -579,6 +580,48 @@ public class Panoramique {
      */
     public void setImgPanoRectListe(Image imgPanoRectListe) {
         this.imgPanoRectListe = imgPanoRectListe;
+    }
+
+    /**
+     * @return the imgCubeEqui
+     */
+    public Image getImgCubeEqui() {
+        return imgCubeEqui;
+    }
+
+    /**
+     * @param imgCubeEqui the imgCubeEqui to set
+     */
+    public void setImgCubeEqui(Image imgCubeEqui) {
+        this.imgCubeEqui = imgCubeEqui;
+    }
+
+    /**
+     * @return the fovMax
+     */
+    public double getFovMax() {
+        return fovMax;
+    }
+
+    /**
+     * @param fovMax the fovMax to set
+     */
+    public void setFovMax(double fovMax) {
+        this.fovMax = fovMax;
+    }
+
+    /**
+     * @return the fovMin
+     */
+    public double getFovMin() {
+        return fovMin;
+    }
+
+    /**
+     * @param fovMin the fovMin to set
+     */
+    public void setFovMin(double fovMin) {
+        this.fovMin = fovMin;
     }
 
 }

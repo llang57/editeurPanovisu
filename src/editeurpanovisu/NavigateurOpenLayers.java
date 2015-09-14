@@ -4,8 +4,8 @@
  */
 package editeurpanovisu;
 
-import static editeurpanovisu.EditeurPanovisu.getPoGeolocalisation;
 import static editeurpanovisu.EditeurPanovisu.getPanoramiquesProjet;
+import static editeurpanovisu.EditeurPanovisu.getPoGeolocalisation;
 import static editeurpanovisu.EditeurPanovisu.getTabInterface;
 import static editeurpanovisu.EditeurPanovisu.getiPanoActuel;
 import java.io.File;
@@ -372,7 +372,7 @@ public class NavigateurOpenLayers {
          * @param lat
          */
         public void adresseTrouvee(double lon, double lat) {
-//            System.out.println(
+            //System.out.println(
 //                    "Adresse trouvée aux coordonnées : " + CoordonneesGeographiques.toDMS(lat) + "  " + CoordonneesGeographiques.toDMS(lon)
 //            );
         }

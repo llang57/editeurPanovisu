@@ -760,7 +760,6 @@ function panovisu(iNumPano) {
                     }
                     evenement.preventDefault();
                     var touche = evenement.which;
-                    console.log("touche : " + touche);
                     switch (touche)
                     {
                         case 37:
@@ -818,19 +817,22 @@ function panovisu(iNumPano) {
                         bAfficheInfo = false;
                     });
                 }
-                telecEnCours = true;
-                dXdY($(this).attr('id'));
-                ddx = dx / 5;
-                ddy = dy / 5;
-                timer = requestAnimFrame(accelere);
+                if (!telecEnCours) {
+                    telecEnCours = true;
+                    dXdY($(this).attr('id'));
+                    ddx = dx / 5;
+                    ddy = dy / 5;
+                    timer = requestAnimFrame(accelere);
+                }
                 evenement.preventDefault();
+
             });
 
-    $(document).on("touchend mouseup mouseleave", "#xmoins-" + iNumPano + ",#xplus-" + iNumPano + ",#ymoins-" + iNumPano + ",#yplus-" + iNumPano, function (evenement) {
+    $(document).on("mouseup mouseleave touchend", "#xmoins-" + iNumPano + ",#xplus-" + iNumPano + ",#ymoins-" + iNumPano + ",#yplus-" + iNumPano, function (evenement) {
         if (telecEnCours) {
-            evenement.stopPropagation();
             telecEnCours = false;
             timer = requestAnimFrame(ralenti);
+            evenement.stopPropagation();
             evenement.preventDefault();
         }
     });
@@ -854,18 +856,18 @@ function panovisu(iNumPano) {
         evenement.preventDefault();
     });
 
-    $(document).on("click", "#zoomMoins-" + iNumPano, function (evenement) {
-        if (bAfficheInfo)
-        {
-            $("#infoPanovisu-" + iNumPano).fadeOut(2000, function () {
-                $(this).css({display: "none"});
-                bAfficheInfo = false;
-            });
-        }
-        fov += 1;
-        zoom();
-        evenement.preventDefault();
-    });
+//    $(document).on("click", "#zoomMoins-" + iNumPano, function (evenement) {
+//        if (bAfficheInfo)
+//        {
+//            $("#infoPanovisu-" + iNumPano).fadeOut(2000, function () {
+//                $(this).css({display: "none"});
+//                bAfficheInfo = false;
+//            });
+//        }
+//        fov += 1;
+//        zoom();
+//        evenement.preventDefault();
+//    });
 
     $(document).on("touchstart mousedown", "#zoomMoins-" + iNumPano,
             function (evenement) {
@@ -886,33 +888,33 @@ function panovisu(iNumPano) {
         evenement.preventDefault();
     });
 
-    $(document).on("click", "#xmoins-" + iNumPano + ",#xplus-" + iNumPano + ",#ymoins-" + iNumPano + ",#yplus-" + iNumPano,
-            function (evenement) {
-                if (bAfficheInfo)
-                {
-                    $("#infoPanovisu-" + iNumPano).fadeOut(2000, function () {
-                        $(this).css({display: "none"});
-                        bAfficheInfo = false;
-                    });
-                }
-                dXdY($(this).attr('class'));
-                longitude += 2 * dx;
-                latitude += 2 * dy;
-                affiche();
-            });
+//    $(document).on("click", "#xmoins-" + iNumPano + ",#xplus-" + iNumPano + ",#ymoins-" + iNumPano + ",#yplus-" + iNumPano,
+//            function (evenement) {
+//                if (bAfficheInfo)
+//                {
+//                    $("#infoPanovisu-" + iNumPano).fadeOut(2000, function () {
+//                        $(this).css({display: "none"});
+//                        bAfficheInfo = false;
+//                    });
+//                }
+//                dXdY($(this).attr('class'));
+//                longitude += 2 * dx;
+//                latitude += 2 * dy;
+//                affiche();
+//            });
 
-    $(document).on("click", "#zoomPlus-" + iNumPano, function (evenement) {
-        if (bAfficheInfo)
-        {
-            $("#infoPanovisu-" + iNumPano).fadeOut(2000, function () {
-                $(this).css({display: "none"});
-                bAfficheInfo = false;
-            });
-        }
-        fov -= 1;
-        zoom();
-        evenement.preventDefault();
-    });
+//    $(document).on("click", "#zoomPlus-" + iNumPano, function (evenement) {
+//        if (bAfficheInfo)
+//        {
+//            $("#infoPanovisu-" + iNumPano).fadeOut(2000, function () {
+//                $(this).css({display: "none"});
+//                bAfficheInfo = false;
+//            });
+//        }
+//        fov -= 1;
+//        zoom();
+//        evenement.preventDefault();
+//    });
 
     $(document).on("click", "#souris-" + iNumPano, function () {
         changeModeSouris();
@@ -2027,7 +2029,13 @@ function panovisu(iNumPano) {
      * 
      * @returns {undefined}
      */
+    var lastLoop = new Date;
+
     function deplaceMode2() {
+        var thisLoop = new Date;
+        var fps = 1000 / (thisLoop - lastLoop);
+        lastLoop = thisLoop;
+        console.log("fps : " + fps + "img/s");
         longitude += deltaX;
         latitude += deltaY;
         affiche();
@@ -3274,25 +3282,24 @@ function panovisu(iNumPano) {
             }
             $("#btnVisiteAuto-" + iNumPano).css(positBtnAutoTourY, offsetBtnAutoTourY + "px");
         }
-        console.log("Creation des niveaux "+(10000+carteCalque));
-        $("#carte-" + iNumPano).css("z-index", (10000 + carteCalque) );
-        $("#carteTitre-" + iNumPano).css("z-index", (10000 + carteCalque) );
-        $("#plan-" + iNumPano).css("z-index", (10000 + planCalque) );
-        $("#planTitre-" + iNumPano).css("z-index", (10000 + planCalque) );
-        $("#comboMenu-" + iNumPano).css("z-index", (10000 + comboCalque) );
-        $("#divVignettes-" + iNumPano).css("z-index", (10000 + vignettesCalque) );
-        $("#titreVignettes-" + iNumPano).css("z-index", (10000 + vignettesCalque) );
-        $("#reseauxSociaux-" + iNumPano).css("z-index", (10000 + partageCalque) );
-        $("#marcheArret-" + iNumPano).css("z-index", (10000 + masquageCalque) );
-        $("#boussole-" + iNumPano).css("z-index", (10000 + boussoleCalque) );
-        $("#telec-" + iNumPano).css("z-index", (10000 + barrePCalque) );
-        $("#barre-" + iNumPano).css("z-index", (10000 + barreCCalque) );
-        $("#btnVisiteAuto-" + iNumPano).css("z-index", (10000 + atCalque) );
-        $("#info-" + iNumPano).css("z-index", (10000 + titreCalque) );
-        $("#divPrecedent-" + iNumPano).css("z-index", (10000 + suivPrecCalque) );
-        $("#divSuivant-" + iNumPano).css("z-index", (10000 + suivPrecCalque) );
+        $("#carte-" + iNumPano).css("z-index", (10000 + carteCalque));
+        $("#carteTitre-" + iNumPano).css("z-index", (10000 + carteCalque));
+        $("#plan-" + iNumPano).css("z-index", (10000 + planCalque));
+        $("#planTitre-" + iNumPano).css("z-index", (10000 + planCalque));
+        $("#comboMenu-" + iNumPano).css("z-index", (10000 + comboCalque));
+        $("#divVignettes-" + iNumPano).css("z-index", (10000 + vignettesCalque));
+        $("#titreVignettes-" + iNumPano).css("z-index", (10000 + vignettesCalque));
+        $("#reseauxSociaux-" + iNumPano).css("z-index", (10000 + partageCalque));
+        $("#marcheArret-" + iNumPano).css("z-index", (10000 + masquageCalque));
+        $("#boussole-" + iNumPano).css("z-index", (10000 + boussoleCalque));
+        $("#telec-" + iNumPano).css("z-index", (10000 + barrePCalque));
+        $("#barre-" + iNumPano).css("z-index", (10000 + barreCCalque));
+        $("#btnVisiteAuto-" + iNumPano).css("z-index", (10000 + atCalque));
+        $("#info-" + iNumPano).css("z-index", (10000 + titreCalque));
+        $("#divPrecedent-" + iNumPano).css("z-index", (10000 + suivPrecCalque));
+        $("#divSuivant-" + iNumPano).css("z-index", (10000 + suivPrecCalque));
         for (i = 0; i < iNombreImageFond; i++) {
-            $("#imageFond-" + i + "-" + iNumPano).css("z-index", (10000 + arrImagesFond[i].calque) );
+            $("#imageFond-" + i + "-" + iNumPano).css("z-index", (10000 + arrImagesFond[i].calque));
         }
 
         vignettesRentre();
@@ -4260,7 +4267,6 @@ function panovisu(iNumPano) {
 
             }
             titreDecalage = parseFloat(strTitreDecalage) / 2.0;
-            console.log("Décalage Titre " + titreDecalage);
             infoPosX = parseInt((largeur - $("#info-" + iNumPano).width() - parseFloat(strTitreDecalage)) / 2.0);
             if (strTitrePosition === "center") {
                 $("#info-" + iNumPano).css({
@@ -4572,7 +4578,7 @@ function panovisu(iNumPano) {
             style: "background-color : " + strCouleur + ";border : 1px solid " + strBordure + ";"}).appendTo("#outils-" + iNumPano);
         $("<div>", {id: "souris-" + iNumPano, class: "souris", title: chainesTraduction[strLangage].souris,
             style: "background-color : " + strCouleur + ";border : 1px solid " + strBordure + ";"}).appendTo("#outils-" + iNumPano);
-        $("<div>", {id: "auto-" + iNumPano, class: "auto", title: chainesTraduction[strLangage].autoratation,
+        $("<div>", {id: "auto-" + iNumPano, class: "auto", title: chainesTraduction[strLangage].autorotation,
             style: "background-color : " + strCouleur + ";border : 1px solid " + strBordure + ";"}).appendTo("#outils-" + iNumPano);
         $("<div>", {id: "binfo-" + iNumPano, class: "binfo", title: chainesTraduction[strLangage].aPropos,
             style: "background-color : " + strCouleur + ";border : 1px solid " + strBordure + ";"}).appendTo("#outils-" + iNumPano);
@@ -4964,6 +4970,12 @@ function panovisu(iNumPano) {
                     else {
                         fov = parseFloat(XMLPano.attr('champVisuel')) || fov;
                     }
+                    maxFOV = parseFloat(XMLPano.attr('maxFOV')) || maxFOV;
+                    minFOV = parseFloat(XMLPano.attr('minFOV')) || minFOV;
+                    if (fov > maxFOV)
+                        fov = maxFOV;
+                    if (fov < minFOV)
+                        fov = minFOV;
                     nouvLong = -1000;
                     nouvLat = -1000;
                     nouvFov = 0;
@@ -5939,8 +5951,8 @@ function panovisu(iNumPano) {
             fenX: "75%",
             fenY: "80%",
             panoramique: "panovisu",
-            minFOV: 35,
-            maxFOV: 120
+            minFOV: 25,
+            maxFOV: 140
         };
         elementsVisibles = true;
         contexte = $.extend(defaut, contexte);

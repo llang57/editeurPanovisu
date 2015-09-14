@@ -7,7 +7,6 @@ package editeurpanovisu;
  */
 import static editeurpanovisu.EditeurPanovisu.affichePanoChoisit;
 import static editeurpanovisu.OrdrePanoramique.cellulesPanoramiques;
-
 import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.ObservableList;
@@ -119,7 +118,6 @@ public class ListePanoramiqueCellule extends ListCell<String> {
                     cellulesPanoramiques.set(thisIdx, cpDragged);
                     items.set(thisIdx, strItems);
                 }
-                //System.out.println(items);
                 List<String> itemscopy = new ArrayList<>(getListView().getItems());
                 getListView().getItems().setAll(itemscopy);
                 EditeurPanovisu.rafraichitListePano();

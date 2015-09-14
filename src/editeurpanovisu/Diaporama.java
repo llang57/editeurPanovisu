@@ -62,18 +62,13 @@ public class Diaporama implements Cloneable {
     }
 
     public Object clone() {
-        Object o = null;
+        Object objet = null;
         try {
-            // On récupère l'instance à renvoyer par l'appel de la 
-            // méthode super.clone()
-            o = super.clone();
-        } catch (CloneNotSupportedException cnse) {
-            // Ne devrait jamais arriver car nous implémentons 
-            // l'interface Cloneable
-            cnse.printStackTrace(System.err);
+            objet = super.clone();
+        } catch (CloneNotSupportedException exception) {
+            exception.printStackTrace(System.err);
         }
-        // on renvoie le clone
-        return o;
+        return objet;
     }
 
     /**

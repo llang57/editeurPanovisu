@@ -16,21 +16,21 @@ import static editeurpanovisu.EditeurPanovisu.getPlans;
 import static editeurpanovisu.EditeurPanovisu.getStPrincipal;
 import static editeurpanovisu.EditeurPanovisu.getStrCurrentDir;
 import static editeurpanovisu.EditeurPanovisu.getStrRepertAppli;
-import static editeurpanovisu.EditeurPanovisu.getStrRepertPanos;
 import static editeurpanovisu.EditeurPanovisu.getStrRepertTemp;
 import static editeurpanovisu.EditeurPanovisu.getStrTooltipStyle;
 import static editeurpanovisu.EditeurPanovisu.getTabPlan;
+import static editeurpanovisu.EditeurPanovisu.getiDecalageMac;
 import static editeurpanovisu.EditeurPanovisu.getiNombrePanoramiques;
 import static editeurpanovisu.EditeurPanovisu.getiNombrePanoramiquesFichier;
 import static editeurpanovisu.EditeurPanovisu.getiNombrePlans;
 import static editeurpanovisu.EditeurPanovisu.getiPanoActuel;
 import static editeurpanovisu.EditeurPanovisu.hbBarreBouton;
 import static editeurpanovisu.EditeurPanovisu.isbAutoTourDemarre;
+import static editeurpanovisu.EditeurPanovisu.isbInternet;
+import static editeurpanovisu.EditeurPanovisu.largeurOutils;
 import static editeurpanovisu.EditeurPanovisu.mbarPrincipal;
 import static editeurpanovisu.EditeurPanovisu.setbDejaSauve;
 import static editeurpanovisu.EditeurPanovisu.setiNombrePanoramiquesFichier;
-import static editeurpanovisu.EditeurPanovisu.isbInternet;
-import static editeurpanovisu.EditeurPanovisu.getiDecalageMac;
 import static editeurpanovisu.EditeurPanovisu.tpEnvironnement;
 import java.io.BufferedReader;
 import java.io.File;
@@ -50,11 +50,8 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Cursor;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -467,6 +464,7 @@ public class GestionnaireInterfaceController {
     private RadioButton rbComboMenuBottomCenter;
     private RadioButton rbComboMenuBottomRight;
     private ScrollPane spOutils;
+    private AnchorPane apVis;
     /*
      *   variables Bouton Visite Automatique
      */
@@ -1543,9 +1541,6 @@ public class GestionnaireInterfaceController {
             ivImgPlan.setLayoutY(marge);
             apVisuPlan2.getChildren().addAll(ivImgPlan, ivHSPlan);
             lblTitrePlan.setStyle("-fx-text-fill : #" + couleurTextePlan.toString().substring(2, 8) + ";-fx-background-color : rgba(" + rouge + "," + vert + "," + bleu + "," + getOpaciteCarte() + ");-fx-background-radius : 0 0 5 5;-fx-font-family : Verdana,Arial,sans-serif;");
-            System.out.println("Couleur : " + couleurTextePlan.toString());
-            //lblTitrePlan.setTextFill(couleurTextePlan);
-
             double positionX = 0;
             double positionY;
             if (isbAfficheTitre()) {
@@ -1637,7 +1632,6 @@ public class GestionnaireInterfaceController {
             apVisuBoutonVisiteAuto.getChildren().add(ivBtnVisiteAuto);
             apVisuBoutonVisiteAuto.setPrefWidth(tailleBoutonVisiteAuto);
             apVisuBoutonVisiteAuto.setPrefHeight(tailleBoutonVisiteAuto);
-            apVisuBoutonVisiteAuto.setTranslateZ(4);
             ivBtnVisiteAuto.setFitWidth(tailleBoutonVisiteAuto);
             double posX = 0, posY = 0;
             switch (getStrPositionXBoutonVisiteAuto()) {
@@ -2417,7 +2411,9 @@ public class GestionnaireInterfaceController {
         cbCalques.setPrefWidth(150);
         cbCalques.selectedProperty().addListener((ov, old_val, new_val) -> {
             for (int i = 0; i < iNombreCalques; i++) {
-                cbNiveauxCalque[i].setSelected(new_val);
+                if (!cbNiveauxCalque[i].isDisabled()) {
+                    cbNiveauxCalque[i].setSelected(new_val);
+                }
             }
             reOrdonneElementsCalque();
         });
@@ -2464,7 +2460,16 @@ public class GestionnaireInterfaceController {
         for (int i = 0; i < getiNombreImagesFond(); i++) {
             apVisualisation.getChildren().remove(ivImageFond[i]);
         }
+        Boolean[] bCalques = new Boolean[20];
         for (int ii = 1; ii <= iNombreCalques; ii++) {
+            bCalques[ii - 1]
+                    = (getiCalqueTitre() == ii) || (getiCalquePartage() == ii) || (getiCalqueMasquage() == ii)
+                    || (getiCalqueMenuPanoramiques() == ii) || (getiCalqueVignettes() == ii) || (getiCalqueBoussole() == ii)
+                    || (getiCalqueBarrePersonnalisee() == ii) || (getiCalqueBarreClassique() == ii) || (getiCalquePlan() == ii)
+                    || (getiCalqueCarte() == ii) || (getiCalqueVisiteAuto() == ii) || (getiCalqueSuivPrec() == ii);
+            for (int i1 = 0; i1 < getiNombreImagesFond(); i1++) {
+                bCalques[ii - 1] = bCalques[ii - 1] || (getImagesFond()[i1].getiCalqueImage() == ii);
+            }
             if (cbNiveauxCalque[ii - 1].isSelected()) {
                 if (getiCalqueTitre() == ii) {
                     if (lblTxtTitre != null) {
@@ -2560,7 +2565,9 @@ public class GestionnaireInterfaceController {
 
             }
         }
-
+        for (int ii1 = 0; ii1 < iNombreCalques; ii1++) {
+            cbNiveauxCalque[ii1].setDisable(!bCalques[ii1]);
+        }
     }
 
     /**
@@ -2631,8 +2638,6 @@ public class GestionnaireInterfaceController {
                 apVisualisation.getChildren().add(ivImageFond[i]);
             }
         }
-        imgBoussole.setTranslateZ(-2);
-        imgAiguille.setTranslateZ(-1);
         apVisualisation.getChildren().addAll(lblTxtTitre, lblTxtTitre2, imgBoussole, imgAiguille, ivTwitter, ivGoogle, ivFacebook, ivEmail, apVisuVignettes, apVisuComboMenu, paneFondSuivant, paneFondPrecedent);
         lblTxtTitre.setVisible(isbAfficheTitre());
         chargeBarre(strStyleBoutons, strStyleHS, getStrImageMasque());
@@ -2640,12 +2645,10 @@ public class GestionnaireInterfaceController {
         hbbarreBoutons = new HBox(espacement);
         hbbarreBoutons.setId("barreBoutons");
         hbbarreBoutons.setVisible(getStrVisibiliteBarreClassique().equals("oui"));
-        hbbarreBoutons.setTranslateZ(1);
         ivHotSpotPanoramique.setFitWidth(30);
         ivHotSpotPanoramique.setPreserveRatio(true);
         ivHotSpotPanoramique.setLayoutX(510);
         ivHotSpotPanoramique.setLayoutY(310);
-        ivHotSpotPanoramique.setTranslateZ(1);
         Tooltip tltpHSPano = new Tooltip("Hotspot panoramique");
         tltpHSPano.setStyle(getStrTooltipStyle());
         Tooltip.install(ivHotSpotPanoramique, tltpHSPano);
@@ -2653,7 +2656,6 @@ public class GestionnaireInterfaceController {
         ivHotSpotImage.setPreserveRatio(true);
         ivHotSpotImage.setLayoutX(620);
         ivHotSpotImage.setLayoutY(310);
-        ivHotSpotImage.setTranslateZ(1);
         Tooltip tltpHSImage = new Tooltip("Hotspot Photo");
         tltpHSImage.setStyle(getStrTooltipStyle());
         Tooltip.install(ivHotSpotImage, tltpHSImage);
@@ -2661,7 +2663,6 @@ public class GestionnaireInterfaceController {
         ivHotSpotHTML.setPreserveRatio(true);
         ivHotSpotHTML.setLayoutX(730);
         ivHotSpotHTML.setLayoutY(310);
-        ivHotSpotHTML.setTranslateZ(1);
         Tooltip tltpHSHTML = new Tooltip("Hotspot HTML");
         tltpHSHTML.setStyle(getStrTooltipStyle());
         Tooltip.install(ivHotSpotHTML, tltpHSHTML);
@@ -2877,11 +2878,15 @@ public class GestionnaireInterfaceController {
     public String strGetTemplate() {
         String strContenuFichier = "";
         CoordonneesGeographiques coords;
-        if (getCoordCentreCarte() != null) {
-            coords = getCoordCentreCarte();
-        } else {
-            coords = navigateurCarteOL.recupereCoordonnees();
-        }
+         if (getCoordCentreCarte() != null) {
+             coords = getCoordCentreCarte();
+         } else {
+             if (navigateurCarteOL != null) {
+                 coords = navigateurCarteOL.recupereCoordonnees();
+             } else {
+                 coords = new CoordonneesGeographiques();
+             }
+         }
         strContenuFichier
                 += "styleBarre=" + getStyleBarreClassique() + "\n"
                 + "couleurBoutons=" + couleurBarreClassique.toString().substring(2, 8) + "\n"
@@ -3094,7 +3099,7 @@ public class GestionnaireInterfaceController {
             strContenuFichier += "numDiapo=" + getImagesFond()[i].getiNumDiapo() + "#";
             strContenuFichier += "cible=" + getImagesFond()[i].getStrCible() + "#";
             strContenuFichier += "url=" + getImagesFond()[i].getStrUrl() + "#";
-            strContenuFichier += "infobulle=" + getImagesFond()[i].getStrInfobulle() + "#";
+            strContenuFichier += "infobulle=" + getImagesFond()[i].getStrInfobulle().replace(";", "&pv").replace(":", "&dp").replace("#", "&ds") + "#";
             strContenuFichier += "calque=" + getImagesFond()[i].getiCalqueImage() + "#";
             strContenuFichier += ">\n";
         }
@@ -3171,7 +3176,6 @@ public class GestionnaireInterfaceController {
                                             + File.separator
                                             + "imagePasTrouvee2."
                                             + strExtension);
-                                    System.out.println(fFichier.getAbsolutePath() + "==>" + fNouvFichier.getAbsolutePath());
                                     fFichier.renameTo(fNouvFichier);
                                 }
                             } catch (IOException ex) {
@@ -3189,7 +3193,7 @@ public class GestionnaireInterfaceController {
                             getImagesFond()[getiNombreImagesFond()].setStrUrl(strValeur);
                             break;
                         case "infobulle":
-                            getImagesFond()[getiNombreImagesFond()].setStrInfobulle(strValeur);
+                            getImagesFond()[getiNombreImagesFond()].setStrInfobulle(strValeur.replace("&pv", ";").replace("&dp", ":").replace("&ds", "#"));
                             break;
                         case "type":
                             getImagesFond()[getiNombreImagesFond()].setStrType(strValeur);
@@ -4711,7 +4715,6 @@ public class GestionnaireInterfaceController {
                         default:
                             break;
                     }
-                    System.out.println("url : " + getImagesFond()[ij].getStrUrl());
                 }
             }
             );
@@ -4822,7 +4825,7 @@ public class GestionnaireInterfaceController {
         }
 
         if (bNouvelle) {
-            spOutils.setVvalue(spOutils.getVvalue() + 500);
+            getSpOutils().setVvalue(getSpOutils().getVvalue() + 500);
         }
 
         afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
@@ -4922,12 +4925,7 @@ public class GestionnaireInterfaceController {
                 + "-fx-border-radius: " + iArrondiTL + "px  " + iArrondiTR
                 + "px " + iArrondiBR + "px " + iArrondiBL + "px;  "
                 + "-fx-font-size : " + taillePoliceInfoBulle + "px;";
-//        if (bOmbreInfoBulle) {
-//            strStyle += "-fx-box-shadow: 5px 5px 10px #444;";
-//        }
-        System.out.println(strPoliceInfoBulle);
         lblInfoBulle.setStyle(strStyle);
-        //lblInfoBulle.setFont(Font.font(strPoliceInfoBulle, taillePoliceInfoBulle));
     }
 
     /**
@@ -4955,7 +4953,7 @@ public class GestionnaireInterfaceController {
         strRepertBoussoles = getStrRepertAppli() + File.separator + "theme/boussoles";
         strRepertMasques = getStrRepertAppli() + File.separator + "theme/MA";
         strRepertReseauxSociaux = getStrRepertAppli() + File.separator + "theme/reseaux";
-        ivBtnVisiteAuto = new ImageView(new Image("file:" + getStrRepertAppli() + File.separator + "images/playAutoTour.jpg"));
+        ivBtnVisiteAuto = new ImageView(new Image("file:" + getStrRepertAppli() + File.separator + "images/playAutoTour.png"));
         ivBtnVisiteAuto.setFitWidth(32);
         ivBtnVisiteAuto.setPreserveRatio(true);
         apVisuBoutonVisiteAuto = new AnchorPane();
@@ -5004,72 +5002,51 @@ public class GestionnaireInterfaceController {
         lblTxtTitre.setStyle("-fx-text-fill : " + getStrCouleurTitre() + ";-fx-background-color : " + strCoulFond);
         lblTxtTitre2.setStyle("-fx-text-fill : " + getStrCouleurTitre() + ";-fx-background-color : " + strCoulFond);
 
-        double largeurOutils = 380;
 
         paneTabInterface = new Pane();
         hbInterface = new HBox();
         hbInterface.setPrefWidth(iLargeur);
         hbInterface.setPrefHeight(iHauteur);
         paneTabInterface.getChildren().add(hbInterface);
-        AnchorPane apVis = new AnchorPane();
-        apVis.setPrefWidth(iLargeur - largeurOutils - 20);
-        apVis.setMaxWidth(iLargeur - largeurOutils - 20);
-        apVis.setMinWidth(iLargeur - largeurOutils - 20);
-        apVis.setPrefHeight(iHauteur);
+        setApVis(new AnchorPane());
+        getApVis().setPrefWidth(iLargeur - largeurOutils - 20);
+        getApVis().setMaxWidth(iLargeur - largeurOutils - 20);
+        getApVis().setMinWidth(iLargeur - largeurOutils - 20);
+        getApVis().setPrefHeight(iHauteur);
 
         apVisualisation = new AnchorPane();
-        apVis.getChildren().add(apVisualisation);
+        getApVis().getChildren().add(apVisualisation);
         apVisualisation.setPrefWidth(iLargeur - largeurOutils - 20);
         apVisualisation.setMaxWidth(iLargeur - largeurOutils - 20);
         apVisualisation.setMinWidth(iLargeur - largeurOutils - 20);
         apVisualisation.setPrefHeight(iHauteur);
         vbOutils = new VBox(-5);
-//        AnchorPane apPanovisu = new AnchorPane();
-//        apPanovisu.setPrefHeight(118);
-//        apPanovisu.setMinHeight(118);
-//        apPanovisu.setMaxHeight(118);
-//        apPanovisu.setStyle("-fx-background-color : derive(-fx-base,-5%);");
-//
-//        ImageView ivPanoVisu = new ImageView(new Image("file:" + getStrRepertAppli() + File.separator + "images/panovisu.png", 83, 83, true, true));
-//        ivPanoVisu.setLayoutX(25);
-//        ivPanoVisu.setLayoutY(10);
-//        Label lblPanoVisu = new Label("panoVisu Vers. : " + strNumVersion);
-//        lblPanoVisu.setStyle("-fx-font-weight : bold;-fx-font-family : Verdana,Arial,sans-serif;-fx-font-size : 1.2em;");
-//        lblPanoVisu.setLayoutX(118);
-//        lblPanoVisu.setLayoutY(25);
-//        Label lblPanoVisu2 = new Label("(c) Laurent LANG (2014-2015)");
-//        lblPanoVisu2.setLayoutX(118);
-//        lblPanoVisu2.setLayoutY(55);
-//        lblPanoVisu2.setStyle("-fx-font-family : Verdana,Arial,sans-serif;-fx-font-size : 0.8em;");
-//        Separator sepTitre = new Separator(Orientation.HORIZONTAL);
-//        sepTitre.setPrefWidth(380);
-//        sepTitre.setLayoutY(103);
-//        apPanovisu.getChildren().addAll(ivPanoVisu, lblPanoVisu, lblPanoVisu2, sepTitre);
         vbOutils.setLayoutX(5);
         AnchorPane apOutils = new AnchorPane();
         apOutils.setPrefWidth(largeurOutils);
         apOutils.setMaxWidth(largeurOutils);
         apOutils.setTranslateY(3);
         apOutils.setTranslateX(20);
-        spOutils = new ScrollPane(vbOutils);
-        apOutils.getChildren().addAll(spOutils);
-        spOutils.setId("spOutils");
-        spOutils.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-        spOutils.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        spOutils.setMinHeight(iHauteur - 52 + getiDecalageMac());
-        spOutils.setMaxHeight(iHauteur - 52 + getiDecalageMac());
-        spOutils.setPrefWidth(largeurOutils);
-        spOutils.setMinWidth(largeurOutils);
-        spOutils.setFitToWidth(true);
-        spOutils.setFitToHeight(true);
+        setSpOutils(new ScrollPane(vbOutils));
+        apOutils.getChildren().addAll(getSpOutils());
+        getSpOutils().setId("spOutils");
+        getSpOutils().setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        getSpOutils().setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        getSpOutils().setPrefHeight(iHauteur - 52 - getiDecalageMac());
+        getSpOutils().setMinHeight(iHauteur - 52 - getiDecalageMac());
+        getSpOutils().setMaxHeight(iHauteur - 52 - getiDecalageMac());
+        getSpOutils().setPrefWidth(largeurOutils);
+        getSpOutils().setMinWidth(largeurOutils);
+        getSpOutils().setFitToWidth(true);
+        getSpOutils().setFitToHeight(true);
 
-        spOutils.setLayoutY(-getiDecalageMac());
+        getSpOutils().setLayoutY(-getiDecalageMac());
         vbOutils.setPrefWidth(largeurOutils - 20);
         vbOutils.setMaxWidth(largeurOutils - 20);
         apCalque = apAfficheCalques();
-        apVis.getChildren().add(apCalque);
+        getApVis().getChildren().add(apCalque);
 
-        hbInterface.getChildren().addAll(apVis, apOutils);
+        hbInterface.getChildren().addAll(getApVis(), apOutils);
         /*
          * ***************************************************************
          *     Panneau de visualisation de l'interface
@@ -5142,8 +5119,6 @@ public class GestionnaireInterfaceController {
         apVisuVignettes = new AnchorPane();
         apVisuPlan = new AnchorPane();
         apVisuCarte = new AnchorPane();
-        apVisuCarte.setTranslateZ(2);
-        apVisuPlan.setTranslateZ(2);
         apVisuComboMenu = new AnchorPane();
         apVisualisation.getChildren().clear();
         apVisualisation.getChildren().add(ivVisualisation);
@@ -12542,5 +12517,33 @@ public class GestionnaireInterfaceController {
      */
     public void setiCalqueSuivPrec(int iCalqueSuivPrec) {
         this.iCalqueSuivPrec = iCalqueSuivPrec;
+    }
+
+    /**
+     * @return the spOutils
+     */
+    public ScrollPane getSpOutils() {
+        return spOutils;
+    }
+
+    /**
+     * @param spOutils the spOutils to set
+     */
+    public void setSpOutils(ScrollPane spOutils) {
+        this.spOutils = spOutils;
+    }
+
+    /**
+     * @return the apVis
+     */
+    public AnchorPane getApVis() {
+        return apVis;
+    }
+
+    /**
+     * @param apVis the apVis to set
+     */
+    public void setApVis(AnchorPane apVis) {
+        this.apVis = apVis;
     }
 }

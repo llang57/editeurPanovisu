@@ -172,7 +172,6 @@ public class TransformationsPanoramique {
                 green = green / coeff;
                 blue = blue / coeff;
                 PWBehind.setColor(tailleCube - pX - 1, tailleCube - pY - 1, new Color(red, green, blue, 1));
-//                PWBehind.setColor(tailleCube - pX - 1, tailleCube - pY - 1, PREqui.getColor(pixelX, pixelY));
             }
         }
         Platform.runLater(() -> {
@@ -230,7 +229,6 @@ public class TransformationsPanoramique {
                 green = green / coeff;
                 blue = blue / coeff;
                 PWLeft.setColor(pY, tailleCube - pZ - 1, new Color(red, green, blue, 1));
-//                PWLeft.setColor(pY, tailleCube - pZ - 1, PREqui.getColor(pixelX, pixelY));
             }
         }
         Platform.runLater(() -> {
@@ -289,7 +287,6 @@ public class TransformationsPanoramique {
                 green = green / coeff;
                 blue = blue / coeff;
                 PWRight.setColor(pY, tailleCube - pZ - 1, new Color(red, green, blue, 1));
-//                PWRight.setColor(pY, tailleCube - pZ - 1, PREqui.getColor(pixelX, pixelY));
             }
         }
         Platform.runLater(() -> {
@@ -351,7 +348,6 @@ public class TransformationsPanoramique {
                 green = green / coeff;
                 blue = blue / coeff;
                 PWTop.setColor(tailleCube - pZ - 1, tailleCube - pX - 1, new Color(red, green, blue, 1));
-//                PWTop.setColor(tailleCube - pZ - 1, tailleCube - pX - 1, PREqui.getColor(pixelX, pixelY));
             }
         }
         Platform.runLater(() -> {
@@ -413,7 +409,6 @@ public class TransformationsPanoramique {
                 green = green / coeff;
                 blue = blue / coeff;
                 PWBottom.setColor(tailleCube - pZ - 1, pX, new Color(red, green, blue, 1));
-//                PWBottom.setColor(tailleCube - pZ - 1, pX, PREqui.getColor(pixelX, pixelY));
             }
         }
         Platform.runLater(() -> {

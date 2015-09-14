@@ -56,7 +56,6 @@ public class CoordonneesGeographiques {
         String minutes = degDMS.split("°")[1].split("'")[0];
         String secondes = degDMS.split("°")[1].split("'")[1].split("\"")[0];
         double degreDecimal = Double.parseDouble(degres) + Double.parseDouble(minutes) / 60.d + Double.parseDouble(secondes) / 3600.d;
-        System.out.println(degres + "°" + minutes + "'" + secondes + "\" = " + degreDecimal);
         return degreDecimal;
     }
 

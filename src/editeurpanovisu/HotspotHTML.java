@@ -243,12 +243,9 @@ public class HotspotHTML {
                 filePageHTMLImages.mkdirs();
             }
             String strContenuHTML = this.getStrTexteHTML();
-            
-            System.out.println(" nombre Images : " + this.getiNombreImages());
             File fileIndexHTML = new File(strPageHTML + File.separator + "index.html");
             for (int j = 0; j < this.getiNombreImages(); j++) {
                 ImageEditeurHTML img1 = this.getImagesEditeur()[j];
-                System.out.println("Remplace :"+"file:////" + img1.getStrImagePath()+"\n par : "+"images/" + img1.getStrNomImage());
                 strContenuHTML = strContenuHTML.replace("file:////" + img1.getStrImagePath(), "images/" + img1.getStrNomImage());
                 try {
                     copieFichierRepertoire(img1.getStrImagePath(), strPageHTMLImages);
@@ -258,7 +255,6 @@ public class HotspotHTML {
             }
             strContenuHTML = strContenuHTML.replace(">", ">\n");
             fileIndexHTML.setWritable(true);
-            System.out.println(fileIndexHTML.getAbsolutePath());
             oswFichierHTML = new OutputStreamWriter(new FileOutputStream(fileIndexHTML), "UTF-8");
             try (BufferedWriter bwFichierHTML = new BufferedWriter(oswFichierHTML)) {
                 bwFichierHTML.write(strContenuHTML);

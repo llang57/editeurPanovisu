@@ -18,6 +18,8 @@ import java.util.logging.Logger;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -32,8 +34,6 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 
 /**
  * Affichage de la fenêtre de configuration
@@ -131,7 +131,6 @@ public class ConfigDialogController {
         }
         tgStyle.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) -> {
             if (tgStyle.getSelectedToggle() != null) {
-                //setUserAgentStylesheet("file:css/" + tgStyle.getSelectedToggle().getUserData().toString() + ".css");
                     File f = new File("css/" + tgStyle.getSelectedToggle().getUserData().toString() + ".css");
                     getScnPrincipale().getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
 
@@ -162,9 +161,6 @@ public class ConfigDialogController {
         btnAnnuler.setPrefWidth(100);
         paneBoutons.getChildren().addAll(btnAnnuler, btnSauvegarder);
         stConfigDialog.show();
-//        btnSauvegarder.setAlignment(Pos.CENTER);
-//        btnAnnuler.setAlignment(Pos.CENTER);
-
         btnSauvegarder.setLayoutX(paneConfig.getPrefWidth() - btnSauvegarder.getPrefWidth() - 20);
         btnAnnuler.setLayoutX(paneConfig.getPrefWidth() - btnSauvegarder.getPrefWidth() - btnAnnuler.getPrefWidth() - 40);
 
@@ -173,7 +169,6 @@ public class ConfigDialogController {
             stConfigDialog.hide();
                     File f = new File("css/" + getStrStyleCSS() + ".css");
                     getScnPrincipale().getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
-            //setUserAgentStylesheet("file:css/" + getStrStyleCSS() + ".css");
         });
         btnSauvegarder.setOnAction((ActionEvent e) -> {
             setStrStyleCSS(tgStyle.getSelectedToggle().getUserData().toString());

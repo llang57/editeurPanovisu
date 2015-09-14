@@ -26,17 +26,15 @@ import javax.imageio.ImageIO;
 import javax.imageio.ImageWriteParam;
 import javax.imageio.ImageWriter;
 import javax.imageio.stream.FileImageOutputStream;
+import net.coobird.thumbnailator.Thumbnails;
 import org.apache.commons.imaging.ImageFormat;
 import org.apache.commons.imaging.ImageFormats;
-
 import org.apache.commons.imaging.ImageReadException;
 import org.apache.commons.imaging.ImageWriteException;
-
 import org.apache.commons.imaging.Imaging;
 import org.apache.commons.imaging.ImagingConstants;
 import org.apache.commons.imaging.common.BufferedImageFactory;
 import org.apache.commons.imaging.formats.tiff.constants.TiffConstants;
-import net.coobird.thumbnailator.Thumbnails;
 
 /**
  * fonctions de sauvegarde des images
@@ -96,12 +94,9 @@ public class ReadWriteImage {
         File file = new File(strNomFich);
         final Map<String, Object> params = new HashMap<>();
 
-        // set optional parameters if you like
         params.put(ImagingConstants.BUFFERED_IMAGE_FACTORY,
                 new ManagedImageBufferedImageFactory());
 
-        // params.put(ImagingConstants.PARAM_KEY_VERBOSE, Boolean.TRUE);
-        // read image
         final BufferedImage img = Imaging.getBufferedImage(file, params);
 
         Image image = SwingFXUtils.toFXImage(img, null);
@@ -128,8 +123,6 @@ public class ReadWriteImage {
 
         final ImageFormat format = ImageFormats.TIFF;
         final Map<String, Object> params = new HashMap<>();
-
-        // set optional parameters if you like
         params.put(ImagingConstants.PARAM_KEY_COMPRESSION, new Integer(
                 TiffConstants.TIFF_COMPRESSION_UNCOMPRESSED));
        

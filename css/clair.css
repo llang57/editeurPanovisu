@@ -1186,6 +1186,11 @@ is being used to size a border should also be in pixels.
 .menu-bar > .container > .menu > .arrow-button {
     -fx-padding: 0;
 }
+
+.menu-bar > .container > .menu> .arrow-button{
+    -fx-margin-top : 20px;
+}
+
 .menu > .arrow {
     -fx-background-color: -fx-mark-color;
     -fx-shape: "M0,-4L4,0L0,4Z";
@@ -1223,7 +1228,7 @@ is being used to size a border should also be in pixels.
         -fx-background-color: linear-gradient(to bottom, derive(-fx-color,50%), derive(-fx-color,-30%)), -fx-body-color;*/
     -fx-background-insets: 0, 1 0 1 0;
     -fx-background-radius: 0, 0 ;
-    -fx-font-size : 1.2em;
+    /*-fx-font-size : 1.2em;*/
 }
 /* Show nothing for background of normal menu button in a menu bar */
 .menu-bar > .container > .menu-button {
@@ -1233,7 +1238,7 @@ is being used to size a border should also be in pixels.
 }
 /* Change padding of menu buttons when in menu bar */
 .menu-bar > .container > .menu-button > .label {
-    -fx-padding: 0;
+    -fx-padding: 0;   
 }
 .menu-bar > .container > .menu-button:hover, .menu-bar > .container > .menu-button:focused, .menu-bar > .container > .menu-button:showing {
     -fx-background: -fx-accent;
@@ -1269,9 +1274,11 @@ is being used to size a border should also be in pixels.
     -fx-padding: 0em 0.5em 0em 0em;
     -fx-text-fill: -fx-text-base-color;
 }
+
 .menu-item:disabled > .label {
     -fx-opacity: -fx-disabled-opacity;
 }
+
 .menu-item:focused {
     -fx-background: -fx-accent;
     -fx-background-color: -fx-selection-bar;
@@ -3016,31 +3023,47 @@ is being used to size a border should also be in pixels.
 }
 
 .calque>.box {
-  -fx-background-insets: 0;
-  -fx-background-radius: 0;
-  -fx-background-color: transparent!important;
-  -fx-min-width : 16px!important; 
-  -fx-min-height : 10px!important; 
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent!important;
+    -fx-min-width : 16px!important; 
+    -fx-min-height : 10px!important; 
 }
 
 .calque>.box>.mark{
-  -fx-background-image: url("masque.png");
-  -fx-background-position: center;
-  -fx-background-repeat: stretch;
-  -fx-background-color: transparent!important;
-  -fx-shape: none;
-  -fx-min-width : 16px!important; 
-  -fx-min-height : 10px!important; 
+    -fx-background-image: url("masque.png");
+    -fx-background-position: center;
+    -fx-background-repeat: stretch;
+    -fx-background-color: transparent!important;
+    -fx-shape: none;
+    -fx-min-width : 16px!important; 
+    -fx-min-height : 10px!important; 
 }
 
 .calque:selected>.box>.mark{
-  -fx-background-image: url("visible.png");
-  -fx-background-position: center;
-  -fx-background-repeat: stretch;
-  -fx-background-color: transparent!important;
-  -fx-shape: none;
-  -fx-min-width : 16px!important; 
-  -fx-min-height : 10px!important; 
+    -fx-background-image: url("visible.png");
+    -fx-background-position: center;
+    -fx-background-repeat: stretch;
+    -fx-background-color: transparent!important;
+    -fx-shape: none;
+    -fx-min-width : 16px!important; 
+    -fx-min-height : 10px!important; 
+}
+.menuBar{
+    -fx-border-width : 0!important;
+    -fx-border-color : transparent!important;
+    -fx-border-radius : 0!important;
+    -fx-background-color : transparent;
+    -fx-mark-color: -fx-base;
+    -fx-background-radius: 0, 0, 0!important;
+    -fx-shape: none;
+
+}
+
+.menuBar:hover,.menuBar:hover > .label,.menuBar:armed,.menuBar:armed > .label{
+    -fx-background-color : -fx-accent;
+    -fx-text-fill: white!important;
+    -fx-mark-color: -fx-accent;
 }
 
 

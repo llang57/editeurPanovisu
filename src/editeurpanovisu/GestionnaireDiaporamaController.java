@@ -200,9 +200,7 @@ public final class GestionnaireDiaporamaController {
                 btnAnnulerDiaporama, btnSauverDiaporama
         );
         if (getDiaporama() != null) {
-            System.out.println("Nombre : " + getDiaporama().getiNombreImages());
             for (int i = 0; i < getDiaporama().getiNombreImages(); i++) {
-                System.out.println("Image => " + getDiaporama().getStrFichiers(i));
                 listImage.getItems().add(getDiaporama().getStrFichiers(i));
             }
             cpCouleurFondDiapo.setValue(Color.valueOf(getDiaporama().getStrCouleurFondDiaporama()));
@@ -316,7 +314,6 @@ public final class GestionnaireDiaporamaController {
                 });
         listImage.getSelectionModel().selectedIndexProperty().addListener((ov, oldValue, newValue) -> {
             if ((int) newValue != -1) {
-                System.out.println(newValue + " => " + "file:" + getDiaporama().getStrFichiersImage((int) newValue));
                 tfLibImage.setText(getDiaporama().getStrLibellesImages((int) newValue));
                 apImage.getChildren().clear();
                 Image imgDiapo = new Image("file:" + getDiaporama().getStrFichiersImage((int) newValue));
@@ -361,16 +358,6 @@ public final class GestionnaireDiaporamaController {
 
     public void reInit(Diaporama nouveauDiapo) {
         setDiaporama((Diaporama) nouveauDiapo.clone());
-//        setDiaporama(new Diaporama());
-//        getDiaporama().setStrNomDiaporama(nouveauDiapo.getStrNomDiaporama());
-//        getDiaporama().setStrFichierDiaporama(nouveauDiapo.getStrFichierDiaporama());
-//        getDiaporama().setiOrdreDiaporama(nouveauDiapo.getiOrdreDiaporama());        
-//        getDiaporama().setDelaiDiaporama(nouveauDiapo.getDelaiDiaporama());
-//        getDiaporama().setOpaciteDiaporama(nouveauDiapo.getOpaciteDiaporama());
-//        getDiaporama().setStrCouleurFondDiaporama(nouveauDiapo.getStrCouleurFondDiaporama());
-//        getDiaporama().setStrFichiersImage(nouveauDiapo.getStrFichiersImage());
-//        getDiaporama().setStrLibellesImages(nouveauDiapo.getStrLibellesImages());
-//        getDiaporama().setiNombreImages(nouveauDiapo.getiNombreImages());        
         initDiaporama();
     }
 

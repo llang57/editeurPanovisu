@@ -70,4 +70,10 @@
     nbproject/build-impl.xml file. 
 
     -->
+    <target name="-pre-jar" description="Numero build">
+        <propertyfile file="${src.dir}/editeurpanovisu/i18n/PanoVisu.properties">
+            <entry key="build.numero" value="1" type="int" operation="+"/>
+        </propertyfile>
+    </target>
 </project>
+
