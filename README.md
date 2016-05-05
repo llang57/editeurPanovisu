@@ -1,26 +1,32 @@
 editeurPanovisu
 ===============
 
-Nouveau Version 1.1 disponible
+Nouveau Version 1.3 disponible
 ------------------------------
-la version 1.1 de panoVisu est disponible au téléchargement.
+la version 1.3 de panoVisu est disponible au téléchargement.
 
-Elle ajoute entre autre la possibilité de personnaliser les écran d'accueil et d'aide des visites. L'écran d'accueil peut de plus contenir un lien vers la page de votre choix.
+Elle corrige quelques petits défauts (angle de FOV max, blocage lors du chargement d'images panoramiques de format incorrect) et ajoute le surlignage de la vignette courante lors de la visite. 
 
 panoVisu Kézako ?
 -----------------
 
 panoVisu est un visualiseur de panoramiques et de visites virtuelles construit sur une architecture HTML5/CSS3/javaScript. Il utilise la technologie webGL pour visualiser les panoramiques/visites virtuelles. Afin de simplifier son écriture, j'ai utilisé la bibliothèque three.js. Le visualiseur utilise des fichiers de description écrits en xml pour modéliser les éléments de la scène. Il permet l'ajout de nombreux éléments :
 
+    
     panoramiques sphériques (pour l'instant uniquement) équirectangulaires ou faces de cube
-    ajout de hotspots de visite ou vers des images/photos
+    ajout de hotspots de visite, vers des images/photos ou des pages HTML internes/externes
     plans avec hotspots et radar
+    Cartes (Google/Bing/OSM) avec hotspots et radar
     boussole
-    images de fond avec ou sans lien vers une page extérieure
+    images de fond avec ou sans lien vers une page extérieure ou un diaporama
     vignettes des panoramiques de la visite
     réseaux sociaux
     menu contextuel paramétrable
+    barres de navigation pouvant être définies par l'utilisateur
+    actionneurs externe permettant de commander la visite en javascript depuis la page HTML
+    un système de calques à 10 niveau permettant de placer les éléments les uns par rapport aux autres
     ...
+
 
 Vous pouvez visualiser des visites réalisées avec editeurPanovisu [Voir les visites](http://panovisu.fr/exemples).
 
