@@ -6,6 +6,7 @@ Nouveau Version 1.3 disponible
 la version 1.3 de panoVisu est disponible au téléchargement.
 
 Elle corrige quelques petits défauts (angle de FOV max, blocage lors du chargement d'images panoramiques de format incorrect) et ajoute le surlignage de la vignette courante lors de la visite. 
+[Télécharger la dernière version](http://panovisu.fr/telechargement/editeurPanovisu_1_3_1.zip)
 
 panoVisu Kézako ?
 -----------------
