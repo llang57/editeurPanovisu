@@ -1,7 +1,7 @@
 editeurPanovisu
 ===============
 
-Nouveau Version 1.3 disponible
+Nouveau Version 2.0.alpha1 disponible
 ------------------------------
 la version 1.3 de panoVisu est disponible au téléchargement.
 
@@ -14,7 +14,7 @@ panoVisu Kézako ?
 panoVisu est un visualiseur de panoramiques et de visites virtuelles construit sur une architecture HTML5/CSS3/javaScript. Il utilise la technologie webGL pour visualiser les panoramiques/visites virtuelles. Afin de simplifier son écriture, j'ai utilisé la bibliothèque three.js. Le visualiseur utilise des fichiers de description écrits en xml pour modéliser les éléments de la scène. Il permet l'ajout de nombreux éléments :
 
     
-    panoramiques sphériques (pour l'instant uniquement) équirectangulaires ou faces de cube
+    panoramiques sphériques équirectangulaires ou faces de cube, spériques partiels et cylindriques
     ajout de hotspots de visite, vers des images/photos ou des pages HTML internes/externes
     plans avec hotspots et radar
     Cartes (Google/Bing/OSM) avec hotspots et radar
