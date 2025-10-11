@@ -46,7 +46,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
-import org.apache.commons.imaging.ImageReadException;
+import org.apache.commons.imaging.ImagingException;
 
 /**
  * Controleur pour l'affichage des transformations cube / Equi
@@ -129,7 +129,7 @@ public class EquiCubeDialogController {
             } else {
                 try {
                     imgEquiImage = ReadWriteImage.readTiff(nomFichier);
-                } catch (ImageReadException ex) {
+                } catch (ImagingException ex) {
                     Logger.getLogger(EquiCubeDialogController.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IOException ex) {
                     Logger.getLogger(EquiCubeDialogController.class.getName()).log(Level.SEVERE, null, ex);
@@ -173,7 +173,7 @@ public class EquiCubeDialogController {
                         try {
                             ReadWriteImage.writeTiff(imgFacesCube[i], strNomFich1 + "_cube" + strSuffixe + ".tif",
                                     bSharpen, (float) Math.round(slSharpen.getValue() * 20.f) / 20.f);
-                        } catch (ImageReadException ex) {
+                        } catch (ImagingException ex) {
                             Logger.getLogger(EquiCubeDialogController.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
@@ -223,7 +223,7 @@ public class EquiCubeDialogController {
                     imgRight = ReadWriteImage.readTiff(strNom + "_r.tif");
                     imgFront = ReadWriteImage.readTiff(strNom + "_f.tif");
                     imgBehind = ReadWriteImage.readTiff(strNom + "_b.tif");
-                } catch (ImageReadException ex) {
+                } catch (ImagingException ex) {
                     Logger.getLogger(EquiCubeDialogController.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IOException ex) {
                     Logger.getLogger(EquiCubeDialogController.class.getName()).log(Level.SEVERE, null, ex);
@@ -246,7 +246,7 @@ public class EquiCubeDialogController {
                     EditeurPanovisu.setStrTypeFichierTransf("tif");
                     try {
                         ReadWriteImage.writeTiff(imgEquiRectangulaire, strNom + "_sphere.tif", bSharpen, (float) Math.round(slSharpen.getValue() * 20.f) / 20.f);
-                    } catch (ImageReadException ex) {
+                    } catch (ImagingException ex) {
                         Logger.getLogger(EquiCubeDialogController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
@@ -382,7 +382,7 @@ public class EquiCubeDialogController {
                 } else {
                     try {
                         img = ReadWriteImage.readTiff(strNomFich);
-                    } catch (ImageReadException | IOException ex) {
+                    } catch (IOException ex) {
                         Logger.getLogger(EquiCubeDialogController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
@@ -742,7 +742,7 @@ public class EquiCubeDialogController {
                         } else {
                             try {
                                 img = ReadWriteImage.readTiff(strNomfich);
-                            } catch (ImageReadException ex) {
+                            } catch (ImagingException ex) {
                                 Logger.getLogger(EquiCubeDialogController.class.getName()).log(Level.SEVERE, null, ex);
                             } catch (IOException ex) {
                                 Logger.getLogger(EquiCubeDialogController.class.getName()).log(Level.SEVERE, null, ex);

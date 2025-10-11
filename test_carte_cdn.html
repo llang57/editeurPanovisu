@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Carte Leaflet - CDN</title>
+    
+    <!-- Leaflet CSS depuis CDN -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body, html {
+            height: 100%;
+            width: 100%;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        
+        /* Panneau de diagnostic */
+        #debug-panel {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,255,0,0.9);
+            color: #000;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 11px;
+            z-index: 99999;
+            border-bottom: 2px solid #0f0;
+        }
+        
+        #map {
+            position: fixed !important;
+            top: 60px !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            width: 100% !important;
+            height: calc(100% - 60px) !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            background-color: #f0f0f0;
+        }
+        
+        /* Contrôles de type de carte */
+        .map-controls {
+            position: absolute;
+            top: 70px;
+            right: 10px;
+            z-index: 1000;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        
+        .map-controls select {
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Panneau de diagnostic PERMANENT -->
+    <div id="debug-panel">
+        🔍 DEBUG: Chargement...
+    </div>
+    
+    <div id="map"></div>
+    
+    <div class="map-controls">
+        <select id="mapType">
+            <option value="osm">OpenStreetMap Standard</option>
+            <option value="satellite">Satellite (Esri)</option>
+        </select>
+    </div>
+    
+    <!-- Leaflet JavaScript depuis CDN -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+    
+    <script>
+        console.log('🚀 Script principal démarré');
+        
+        const debugPanel = document.getElementById('debug-panel');
+        let map = null;
+        let currentLayer = null;
+        
+        // Définition des couches de tuiles
+        const tileLayers = {
+            'osm': {
+                url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                maxZoom: 19
+            },
+            'satellite': {
+                url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+                attribution: 'Tiles &copy; Esri',
+                maxZoom: 19
+            }
+        };
+        
+        function initializeMap() {
+            console.log('🗺️ Initialisation de la carte...');
+            
+            if (debugPanel) {
+                debugPanel.innerHTML = '🗺️ Initialisation en cours...';
+            }
+            
+            // GARDE contre double initialisation
+            if (map !== null) {
+                console.warn('⚠️ Carte déjà initialisée');
+                if (debugPanel) {
+                    debugPanel.innerHTML = '⚠️ ERREUR: Double initialisation détectée!';
+                    debugPanel.style.background = 'rgba(255,0,0,0.9)';
+                    debugPanel.style.color = '#fff';
+                }
+                return;
+            }
+            
+            // Vérifier Leaflet
+            if (typeof L === 'undefined') {
+                console.error('❌ Leaflet non disponible');
+                if (debugPanel) {
+                    debugPanel.innerHTML = '❌ Leaflet non chargé!';
+                    debugPanel.style.background = 'rgba(255,0,0,0.9)';
+                    debugPanel.style.color = '#fff';
+                }
+                return;
+            }
+            
+            console.log('✅ Leaflet version:', L.version);
+            
+            try {
+                // Créer la carte
+                map = L.map('map', {
+                    center: [48.8566, 2.3522],
+                    zoom: 13,
+                    zoomControl: true,
+                    preferCanvas: true,
+                    fadeAnimation: false,
+                    zoomAnimation: false,
+                    markerZoomAnimation: false
+                });
+                
+                console.log('✅ Carte créée');
+                
+                // Ajouter la couche OSM par défaut
+                currentLayer = L.tileLayer(tileLayers['osm'].url, {
+                    attribution: tileLayers['osm'].attribution,
+                    maxZoom: tileLayers['osm'].maxZoom
+                });
+                
+                currentLayer.addTo(map);
+                console.log('✅ Couche OSM ajoutée');
+                
+                // Diagnostic
+                const container = map.getContainer();
+                const size = map.getSize();
+                
+                if (debugPanel) {
+                    debugPanel.innerHTML = '✅ Carte OK | Container: ' + container.offsetWidth + 'x' + container.offsetHeight + 
+                                          ' | Map: ' + size.x + 'x' + size.y + ' | Zoom: ' + map.getZoom();
+                }
+                
+                // Invalider la taille plusieurs fois
+                setTimeout(() => map.invalidateSize(true), 100);
+                setTimeout(() => map.invalidateSize(true), 300);
+                setTimeout(() => map.invalidateSize(true), 500);
+                
+            } catch (error) {
+                console.error('❌ Erreur:', error);
+                if (debugPanel) {
+                    debugPanel.innerHTML = '❌ Erreur: ' + error.message;
+                    debugPanel.style.background = 'rgba(255,0,0,0.9)';
+                    debugPanel.style.color = '#fff';
+                }
+            }
+        }
+        
+        // Changement de type de carte
+        document.getElementById('mapType').addEventListener('change', function(e) {
+            const type = e.target.value;
+            console.log('🔄 Changement de couche:', type);
+            
+            if (map && currentLayer) {
+                map.removeLayer(currentLayer);
+                currentLayer = L.tileLayer(tileLayers[type].url, {
+                    attribution: tileLayers[type].attribution,
+                    maxZoom: tileLayers[type].maxZoom
+                });
+                currentLayer.addTo(map);
+            }
+        });
+        
+        // Auto-initialisation
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                console.log('📋 DOM prêt');
+                setTimeout(initializeMap, 100);
+            });
+        } else {
+            console.log('📋 DOM déjà prêt');
+            setTimeout(initializeMap, 100);
+        }
+    </script>
+</body>
+</html>

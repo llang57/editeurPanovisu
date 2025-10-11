@@ -50,7 +50,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Sphere;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
-import jfxtras.labs.scene.control.BigDecimalField;
+import editeurpanovisu.BigDecimalField;
 
 /**
  *

@@ -37,6 +37,11 @@ public class NavigateurOpenLayers {
     private AnchorPane apChoixCartographie = new AnchorPane();
     private String strCartoActive="";
     private String bingApiKey = "";
+    // Références aux TextFields pour mise à jour automatique
+    private TextField tfLongitudeRef = null;
+    private TextField tfLatitudeRef = null;
+    // Flag pour savoir si le marqueur a été mis à jour par JavaScript
+    private boolean marqueurMisAJourParJS = false;
     //private String bingApiKey = "";
 
     /**
@@ -59,7 +64,11 @@ public class NavigateurOpenLayers {
      * @param iFacteurZoom
      */
     public void allerCoordonnees(CoordonneesGeographiques coordonnees, int iFacteurZoom) {
-        navigateurCarte.getWebEngine().executeScript("allerCoordonnees(" + coordonnees.getLongitude() + "," + coordonnees.getLatitude() + "," + iFacteurZoom + ")");
+        try {
+            navigateurCarte.getWebEngine().executeScript("if (typeof centerOn === 'function') { centerOn(" + coordonnees.getLatitude() + "," + coordonnees.getLongitude() + "," + iFacteurZoom + "); }");
+        } catch (netscape.javascript.JSException e) {
+            System.err.println("Erreur allerCoordonnees: " + e.getMessage());
+        }
     }
 
     /**
@@ -67,10 +76,38 @@ public class NavigateurOpenLayers {
      * @return
      */
     public CoordonneesGeographiques recupereCoordonnees() {
+        // Si le marqueur a été mis à jour par JavaScript via updateCoordinates(), on utilise ces coordonnées
+        if (marqueurMisAJourParJS && marqueur != null) {
+            System.out.println("✅ Récupération depuis marqueur mis à jour par JS: Lat=" + marqueur.getLatitude() + ", Lng=" + marqueur.getLongitude());
+            return marqueur;
+        }
+        
+        // Sinon, on tente de récupérer depuis JavaScript (méthode legacy)
         CoordonneesGeographiques coordonnees = new CoordonneesGeographiques();
-        String strCoord = navigateurCarte.getWebEngine().executeScript("getCoordonnees()").toString();
-        coordonnees.setLongitude(Double.parseDouble(strCoord.split(";")[0]));
-        coordonnees.setLatitude(Double.parseDouble(strCoord.split(";")[1]));
+        try {
+            Object result = navigateurCarte.getWebEngine().executeScript("typeof getCenter === 'function' ? JSON.stringify(getCenter()) : null");
+            String strCoord = result != null ? result.toString() : "";
+            
+            // Si le résultat est un objet JSON, on l'ignore (problème de format)
+            if (strCoord.startsWith("{")) {
+                System.err.println("⚠️ Format JSON détecté, utilisation de getMarkerPosition() à la place");
+                // Essayer de récupérer la position du marqueur directement
+                result = navigateurCarte.getWebEngine().executeScript(
+                    "typeof currentMarker !== 'undefined' && currentMarker ? " +
+                    "currentMarker.getLatLng().lat + ';' + currentMarker.getLatLng().lng : null"
+                );
+                strCoord = result != null ? result.toString() : "";
+            }
+            
+            if (strCoord.contains(";")) {
+                coordonnees.setLongitude(Double.parseDouble(strCoord.split(";")[1]));
+                coordonnees.setLatitude(Double.parseDouble(strCoord.split(";")[0]));
+                System.out.println("✅ Coordonnées récupérées depuis JavaScript: Lat=" + coordonnees.getLatitude() + ", Lng=" + coordonnees.getLongitude());
+            }
+        } catch (Exception e) {
+            System.err.println("❌ Erreur recupereCoordonnees: " + e.getMessage());
+            e.printStackTrace();
+        }
         return coordonnees;
     }
 
@@ -79,7 +116,11 @@ public class NavigateurOpenLayers {
      * @param iNumeroMarqueur
      */
     public void retireMarqueur(int iNumeroMarqueur) {
-        navigateurCarte.getWebEngine().executeScript("enleveMarqueur(" + iNumeroMarqueur + ")");
+        try {
+            navigateurCarte.getWebEngine().executeScript("if (typeof removeMarker === 'function') { removeMarker(" + iNumeroMarqueur + "); }");
+        } catch (netscape.javascript.JSException e) {
+            System.err.println("Erreur retireMarqueur: " + e.getMessage());
+        }
     }
 
     /**
@@ -89,7 +130,11 @@ public class NavigateurOpenLayers {
      * @param strHTML
      */
     public void ajouteMarqueur(int iNumeroMarqueur, CoordonneesGeographiques coordMarqueur, String strHTML) {
-        navigateurCarte.getWebEngine().executeScript("ajouteMarqueur(" + iNumeroMarqueur + "," + coordMarqueur.getLongitude() + "," + coordMarqueur.getLatitude() + ",\"" + strHTML + "\")");
+        try {
+            navigateurCarte.getWebEngine().executeScript("if (typeof ajouteMarqueur === 'function') { ajouteMarqueur(" + iNumeroMarqueur + "," + coordMarqueur.getLongitude() + "," + coordMarqueur.getLatitude() + ",\"" + strHTML + "\"); }");
+        } catch (Exception e) {
+            System.err.println("Erreur ajouteMarqueur: " + e.getMessage());
+        }
     }
 
     /**
@@ -98,7 +143,33 @@ public class NavigateurOpenLayers {
      * @param iFacteurZoom
      */
     public void allerAdresse(String strAdresse, int iFacteurZoom) {
-        navigateurCarte.getWebEngine().executeScript("chercheAdresse('" + strAdresse + "'," + iFacteurZoom + ")");
+        System.out.println("📞 Java allerAdresse() appelé avec: '" + strAdresse + "', zoom=" + iFacteurZoom);
+        // Réinitialiser le flag car on va chercher une nouvelle adresse
+        marqueurMisAJourParJS = false;
+        try {
+            // Vérifier quelle fonction existe dans le JavaScript
+            Boolean hasChercheAdresse = (Boolean) navigateurCarte.getWebEngine().executeScript("typeof chercheAdresse === 'function'");
+            Boolean hasAllerAdresse = (Boolean) navigateurCarte.getWebEngine().executeScript("typeof allerAdresse === 'function'");
+            
+            System.out.println("🔍 Fonctions JS disponibles:");
+            System.out.println("   - chercheAdresse: " + hasChercheAdresse);
+            System.out.println("   - allerAdresse: " + hasAllerAdresse);
+            
+            if (hasAllerAdresse) {
+                System.out.println("✅ Appel allerAdresse() JavaScript...");
+                String jsCode = "allerAdresse('" + strAdresse.replace("'", "\\'") + "')";
+                System.out.println("📝 Code JS: " + jsCode);
+                navigateurCarte.getWebEngine().executeScript(jsCode);
+            } else if (hasChercheAdresse) {
+                System.out.println("✅ Appel chercheAdresse() JavaScript...");
+                navigateurCarte.getWebEngine().executeScript("chercheAdresse('" + strAdresse.replace("'", "\\'") + "'," + iFacteurZoom + ")");
+            } else {
+                System.err.println("❌ Aucune fonction de recherche trouvée dans le JavaScript!");
+            }
+        } catch (Exception e) {
+            System.err.println("❌ Erreur dans allerAdresse: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -106,7 +177,11 @@ public class NavigateurOpenLayers {
      * @param iFacteurZoom
      */
     public void choixZoom(int iFacteurZoom) {
-        navigateurCarte.getWebEngine().executeScript("choixZoom(" + iFacteurZoom + ")");
+        try {
+            navigateurCarte.getWebEngine().executeScript("if (typeof choixZoom === 'function') { choixZoom(" + iFacteurZoom + "); }");
+        } catch (Exception e) {
+            System.err.println("Erreur choixZoom: " + e.getMessage());
+        }
     }
 
     /**
@@ -119,7 +194,12 @@ public class NavigateurOpenLayers {
         };
 
         if (!bingApiKey.equals("")) {
-            navigateurCarte.getWebEngine().executeScript("setBingApiKey(\"" + bingApiKey + "\");");
+            // Note: setBingApiKey n'est plus utilisé avec la carte simple
+            try {
+                navigateurCarte.getWebEngine().executeScript("if (typeof setBingApiKey === 'function') { setBingApiKey(\"" + bingApiKey + "\"); }");
+            } catch (Exception e) {
+                System.out.println("setBingApiKey non disponible (normal avec carte simple)");
+            }
         }
         afficheCartesOpenlayer();
     }
@@ -129,11 +209,21 @@ public class NavigateurOpenLayers {
      * @return
      */
     public String recupereCartographiesOpenLayers() {
-        return navigateurCarte.getWebEngine().executeScript("getNomsLayers()").toString();
+        try {
+            Object result = navigateurCarte.getWebEngine().executeScript("typeof getNomsLayers === 'function' ? getNomsLayers() : 'OpenStreetMap,Satellite'");
+            return result != null ? result.toString() : "OpenStreetMap,Satellite";
+        } catch (Exception e) {
+            System.err.println("Erreur recupereCartographiesOpenLayers: " + e.getMessage());
+            return "OpenStreetMap,Satellite";
+        }
     }
 
     public void changeCarte(String strCarto) {
-        navigateurCarte.getWebEngine().executeScript("changeLayer('" + strCarto + "')");
+        try {
+            navigateurCarte.getWebEngine().executeScript("if (typeof setMapType === 'function') { setMapType('" + (strCarto.toLowerCase().contains("satellite") ? "satellite" : "osm") + "'); }");
+        } catch (Exception e) {
+            System.err.println("Erreur changeCarte: " + e.getMessage());
+        }
     }
 
     public void afficheCartesOpenlayer() {
@@ -164,6 +254,10 @@ public class NavigateurOpenLayers {
      * @return
      */
     public AnchorPane afficheNavigateurOpenLayer(TextField tfLongitude, TextField tfLatitude, boolean bChoixMarqueur) {
+        // Stocker les références aux TextFields pour mise à jour automatique
+        this.tfLongitudeRef = tfLongitude;
+        this.tfLatitudeRef = tfLatitude;
+        
         AnchorPane apOpenLayers = new AnchorPane();
 
         apOpenLayers.setStyle("-fx-background-color : -fx-base;-fx-border-width : 1px;-fx-border-style : solid;-fx-border-color : #777;"
@@ -224,17 +318,46 @@ public class NavigateurOpenLayers {
         }
 
         navigateurCarte.getWebEngine().getLoadWorker().stateProperty().addListener((paramObservableValue, from, to) -> {
+            System.out.println("🔄 WebEngine State Change: " + from + " → " + to);
+            
             if (to == State.SUCCEEDED) {
+                System.out.println("✅✅✅ NavigateurCarte chargé avec SUCCÈS!");
                 navigateurCarte.setVisible(true);
 
                 valideBingApiKey(getBingApiKey());
                 JSObject window = (JSObject) navigateurCarte.getWebEngine().executeScript("window");
-                window.setMember("javafx", new JavaApplication());
+                JavaApplication javaApp = new JavaApplication();
+                window.setMember("javafx", javaApp);
+                window.setMember("javaConnector", javaApp); // Connecteur pour updateCoordinates
+                System.out.println("✅ Pont JavaScript configuré (javafx + javaConnector)");
+                System.out.println("🔄 Appel allerAdresse() de test...");
                 allerAdresse("Metz rue Serpenoise", 14);
+                System.out.println("✅ bDebut mis à TRUE");
                 bDebut = true;
                 getTabInterface().setDisable(false);
+            } else if (to == State.FAILED) {
+                System.err.println("❌❌❌ ÉCHEC du chargement de la carte!");
+                Throwable exception = navigateurCarte.getWebEngine().getLoadWorker().getException();
+                if (exception != null) {
+                    exception.printStackTrace();
+                }
             }
         });
+        
+        // Si la page est déjà chargée, rendre visible immédiatement
+        if (navigateurCarte.getWebEngine().getLoadWorker().getState() == State.SUCCEEDED) {
+            System.out.println("✅ NavigateurCarte déjà chargé - affichage immédiat");
+            navigateurCarte.setVisible(true);
+            valideBingApiKey(getBingApiKey());
+            JSObject window = (JSObject) navigateurCarte.getWebEngine().executeScript("window");
+            JavaApplication javaApp = new JavaApplication();
+            window.setMember("javafx", javaApp);
+            window.setMember("javaConnector", javaApp); // Connecteur pour updateCoordinates
+            System.out.println("✅ Pont JavaScript configuré (javafx + javaConnector)");
+            allerAdresse("Metz rue Serpenoise", 14);
+            bDebut = true;
+            getTabInterface().setDisable(false);
+        }
         if (bChoixMarqueur) {
             btnCentreCarte.setOnAction((e) -> {
                 if (bDebut) {
@@ -275,8 +398,15 @@ public class NavigateurOpenLayers {
         });
 
         btnRechercheAdresse.setOnAction((e) -> {
+            System.out.println("🔍 Bouton Recherche cliqué!");
+            System.out.println("📊 bDebut = " + bDebut);
+            System.out.println("📝 Adresse à rechercher: '" + tfRechercheAdresse.getText() + "'");
+            
             if (bDebut) {
+                System.out.println("✅ Appel allerAdresse()...");
                 allerAdresse(tfRechercheAdresse.getText(), 17);
+            } else {
+                System.out.println("❌ bDebut est false - carte pas encore chargée!");
             }
         });
 
@@ -354,7 +484,7 @@ public class NavigateurOpenLayers {
     }
 
     /**
-     *
+     * Classe pour la communication JavaScript <-> Java
      */
     public class JavaApplication {
 
@@ -383,6 +513,45 @@ public class NavigateurOpenLayers {
          */
         public void afficheChaine(String strChaine) {
             System.out.println(strChaine);
+        }
+        
+        /**
+         * Méthode appelée depuis JavaScript pour mettre à jour les coordonnées
+         * @param lon Longitude en degrés décimaux
+         * @param lat Latitude en degrés décimaux
+         */
+        public void updateCoordinates(double lon, double lat) {
+            System.out.println("📍 Coordonnées reçues de JavaScript: Lat=" + lat + ", Lng=" + lon);
+            System.out.println("🔍 tfLongitudeRef = " + (tfLongitudeRef != null ? "OK" : "NULL"));
+            System.out.println("🔍 tfLatitudeRef = " + (tfLatitudeRef != null ? "OK" : "NULL"));
+            
+            // Mettre à jour le marqueur
+            if (marqueur == null) {
+                marqueur = new CoordonneesGeographiques();
+            }
+            marqueur.setLongitude(lon);
+            marqueur.setLatitude(lat);
+            marqueurMisAJourParJS = true; // Indiquer que le marqueur a été mis à jour par JavaScript
+            System.out.println("✅ Marqueur mis à jour: Lat=" + marqueur.getLatitude() + ", Lng=" + marqueur.getLongitude() + " (marqueurMisAJourParJS=true)");
+            
+            // Mettre à jour les TextFields si présents
+            javafx.application.Platform.runLater(() -> {
+                if (tfLongitudeRef != null) {
+                    String lonDMS = CoordonneesGeographiques.toDMS(lon);
+                    tfLongitudeRef.setText(lonDMS);
+                    System.out.println("✅ TextField Longitude mis à jour: " + lonDMS);
+                } else {
+                    System.err.println("❌ tfLongitudeRef est NULL!");
+                }
+                
+                if (tfLatitudeRef != null) {
+                    String latDMS = CoordonneesGeographiques.toDMS(lat);
+                    tfLatitudeRef.setText(latDMS);
+                    System.out.println("✅ TextField Latitude mis à jour: " + latDMS);
+                } else {
+                    System.err.println("❌ tfLatitudeRef est NULL!");
+                }
+            });
         }
     }
 

@@ -1,0 +1,157 @@
+# ═══════════════════════════════════════════════════════════════════════
+# Configuration des clés API - TEMPLATE
+# ═══════════════════════════════════════════════════════════════════════
+#
+# 📋 INSTRUCTIONS :
+# 1. Copiez ce fichier vers 'api-keys.properties'
+# 2. Remplacez les valeurs YOUR_*_HERE par vos vraies clés API
+# 3. Ne commitez JAMAIS le fichier api-keys.properties (il est dans .gitignore)
+#
+# ═══════════════════════════════════════════════════════════════════════
+
+# ───────────────────────────────────────────────────────────────────────
+# LocationIQ - Géocodage et Recherche d'Adresses
+# ───────────────────────────────────────────────────────────────────────
+# 
+# 🌐 Site : https://locationiq.com/
+# 💰 Gratuit : 5 000 requêtes/jour
+# 📖 Docs : https://locationiq.com/docs
+#
+# 🔧 Comment obtenir :
+# 1. Créer un compte sur locationiq.com
+# 2. Aller dans le dashboard
+# 3. Copier votre clé API (format : pk.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx)
+#
+# 📌 Exemple de clé (32 caractères hexadécimaux) :
+# locationiq.api.key=pk.0f147952a41c555a5b70614039fd148b
+#
+locationiq.api.key=YOUR_LOCATIONIQ_API_KEY_HERE
+
+# ───────────────────────────────────────────────────────────────────────
+# Bing Maps (Optionnel)
+# ───────────────────────────────────────────────────────────────────────
+#
+# 🌐 Site : https://www.bingmapsportal.com/
+# 💰 Gratuit : 125 000 transactions/an
+# 📖 Docs : https://docs.microsoft.com/en-us/bingmaps/
+#
+# 🔧 Comment obtenir :
+# 1. Créer un compte Microsoft
+# 2. Aller sur Bing Maps Dev Center
+# 3. Créer une nouvelle clé (Basic)
+#
+# 📌 Exemple de clé (64 caractères alphanumériques) :
+# bing.maps.api.key=AqGHvMp2d4hF6tZ7j8kL9mN0pQrSt1uV2wX3yZ4aB5cD6eF7gH8iJ9kL0mN1o2P3
+#
+bing.maps.api.key=YOUR_BING_MAPS_API_KEY_HERE
+
+# ───────────────────────────────────────────────────────────────────────
+# OpenWeatherMap (Optionnel)
+# ───────────────────────────────────────────────────────────────────────
+#
+# 🌐 Site : https://openweathermap.org/api
+# 💰 Gratuit : 1 000 appels/jour
+# 📖 Docs : https://openweathermap.org/api
+#
+# 🔧 Comment obtenir :
+# 1. Créer un compte sur openweathermap.org
+# 2. Aller dans API keys
+# 3. Copier la clé par défaut ou créer une nouvelle
+#
+# 📌 Exemple de clé (32 caractères hexadécimaux) :
+# openweather.api.key=a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6
+#
+openweather.api.key=YOUR_OPENWEATHER_API_KEY_HERE
+
+# ───────────────────────────────────────────────────────────────────────
+# Mapbox (Optionnel)
+# ───────────────────────────────────────────────────────────────────────
+#
+# 🌐 Site : https://www.mapbox.com/
+# 💰 Gratuit : 50 000 chargements de carte/mois
+# 📖 Docs : https://docs.mapbox.com/api/
+#
+# 🔧 Comment obtenir :
+# 1. Créer un compte sur mapbox.com
+# 2. Aller dans Account → Tokens
+# 3. Copier le token par défaut ou créer un nouveau
+#
+# 📌 Exemple de token (commence par pk.) :
+# mapbox.access.token=pk.eyJ1IjoiZXhhbXBsZSIsImEiOiJja2R1ZG1kZG0wMXd1MnFtdjBxYjB1Y3d1In0.abcdefghijklmnopqrstuvwxyz123456
+#
+mapbox.access.token=YOUR_MAPBOX_ACCESS_TOKEN_HERE
+
+# ───────────────────────────────────────────────────────────────────────
+# Hugging Face - Intelligence Artificielle
+# ───────────────────────────────────────────────────────────────────────
+#
+# 🌐 Site : https://huggingface.co/
+# 💰 Gratuit : Modèles gratuits disponibles (ex: gpt2)
+# 📖 Docs : https://huggingface.co/docs/api-inference/index
+#
+# 🔧 Comment obtenir :
+# 1. Créer un compte sur huggingface.co
+# 2. Aller dans Settings → Access Tokens
+# 3. Créer un nouveau token (Read access suffit)
+# 4. Copier le token (format : hf_...)
+#
+# 📌 Exemple de clé (commence par hf_ suivi de ~37 caractères) :
+# huggingface.api.key=hf_AbCdEfGhIjKlMnOpQrStUvWxYz1234567890
+#
+# 🎯 Modèles gratuits recommandés :
+# - gpt2 : Génération de texte générique
+# - distilbert-base-uncased : Analyse de sentiment
+# - facebook/bart-large-cnn : Résumé de texte
+#
+huggingface.api.key=YOUR_HUGGINGFACE_API_KEY_HERE
+huggingface.model=gpt2
+
+# ───────────────────────────────────────────────────────────────────────
+# OpenRouter - Gateway vers plusieurs LLMs
+# ───────────────────────────────────────────────────────────────────────
+#
+# 🌐 Site : https://openrouter.ai/
+# 💰 Gratuit : Plusieurs modèles gratuits disponibles
+# 📖 Docs : https://openrouter.ai/docs
+#
+# 🔧 Comment obtenir :
+# 1. Créer un compte sur openrouter.ai
+# 2. Aller dans Keys
+# 3. Créer une nouvelle clé API
+# 4. Copier la clé (format : sk-or-v1-...)
+#
+# 📌 Exemple de clé (commence par sk-or-v1- suivi de ~64 caractères) :
+# openrouter.api.key=sk-or-v1-0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
+#
+# 🎯 Modèles GRATUITS recommandés :
+# - meta-llama/llama-3.2-3b-instruct:free (par défaut)
+# - google/gemma-2-9b-it:free
+# - microsoft/phi-3-mini-128k-instruct:free
+# - mistralai/mistral-7b-instruct:free
+# - huggingfaceh4/zephyr-7b-beta:free
+#
+# 💡 Usage pour EditeurPanovisu :
+# - Génération de descriptions de panoramas
+# - Suggestions automatiques de hotspots
+# - Assistant conversationnel pour l'édition
+#
+openrouter.api.key=YOUR_OPENROUTER_API_KEY_HERE
+openrouter.model=meta-llama/llama-3.2-3b-instruct:free
+
+# ═══════════════════════════════════════════════════════════════════════
+# Notes de Sécurité
+# ═══════════════════════════════════════════════════════════════════════
+#
+# ⚠️  IMPORTANT :
+# - Ce fichier template peut être versionné (pas de clés réelles)
+# - Le fichier api-keys.properties est dans .gitignore
+# - Ne partagez JAMAIS vos clés API publiquement
+# - Régénérez vos clés si elles sont compromises
+# - Limitez les domaines autorisés dans les dashboards des fournisseurs
+#
+# 🔒 Bonne pratique :
+# - Utilisez des clés différentes pour dev/prod
+# - Surveillez l'usage dans les dashboards
+# - Activez les alertes de quota
+#
+# ═══════════════════════════════════════════════════════════════════════

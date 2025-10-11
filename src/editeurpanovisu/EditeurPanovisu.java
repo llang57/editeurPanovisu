@@ -126,8 +126,8 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
-import jfxtras.labs.scene.control.BigDecimalField;
-import org.apache.commons.imaging.ImageReadException;
+import editeurpanovisu.BigDecimalField;
+import org.apache.commons.imaging.ImagingException;
 
 /**
  * Editeur de visites virtuelles
@@ -2491,7 +2491,7 @@ public class EditeurPanovisu extends Application {
                     imgPano = ReadWriteImage.resizeImage(imgPano, 8192, 4096);
 
                 }
-            } catch (ImageReadException | IOException ex) {
+            } catch (IOException ex) {
                 Logger.getLogger(EditeurPanovisu.class
                         .getName()).log(Level.SEVERE, null, ex);
             }
@@ -2530,7 +2530,7 @@ public class EditeurPanovisu extends Application {
                             imgPano = ReadWriteImage.readTiff(strFichierImage);
                             imgPano = ReadWriteImage.resizeImage(imgPano, (int) tailleNiveau, (int) tailleNiveau / 2);
 
-                        } catch (ImageReadException ex) {
+                        } catch (ImagingException ex) {
                             Logger.getLogger(EditeurPanovisu.class
                                     .getName()).log(Level.SEVERE, null, ex);
                         }
@@ -2603,7 +2603,7 @@ public class EditeurPanovisu extends Application {
                     imgPano = ReadWriteImage.resizeImage(imgPano, 4096, 4096);
 
                 }
-            } catch (ImageReadException | IOException ex) {
+            } catch (IOException ex) {
                 Logger.getLogger(EditeurPanovisu.class
                         .getName()).log(Level.SEVERE, null, ex);
             }
@@ -2640,7 +2640,7 @@ public class EditeurPanovisu extends Application {
                             imgPano = ReadWriteImage.readTiff(strFichierImage);
                             imgPano = ReadWriteImage.resizeImage(imgPano, (int) tailleNiveau, (int) tailleNiveau);
 
-                        } catch (ImageReadException ex) {
+                        } catch (ImagingException ex) {
                             Logger.getLogger(EditeurPanovisu.class
                                     .getName()).log(Level.SEVERE, null, ex);
                         }
@@ -2730,7 +2730,7 @@ public class EditeurPanovisu extends Application {
                             try {
                                 imgPano = ReadWriteImage.readTiff(fileFichier.getAbsolutePath());
 
-                            } catch (ImageReadException | IOException ex) {
+                            } catch (IOException ex) {
                                 Logger.getLogger(EditeurPanovisu.class
                                         .getName()).log(Level.SEVERE, null, ex);
                             }
@@ -7774,7 +7774,7 @@ public class EditeurPanovisu extends Application {
                     }
                     panoCree.setImgVisuPanoramique(imgTransformationImage(ReadWriteImage.readTiff(jpegFile.getAbsolutePath()), 2));
 
-                } catch (ImageReadException | IOException ex) {
+                } catch (IOException ex) {
                     Logger.getLogger(EditeurPanovisu.class
                             .getName()).log(Level.SEVERE, null, ex);
                 }
@@ -7834,7 +7834,7 @@ public class EditeurPanovisu extends Application {
                     imgFront = ReadWriteImage.readTiff(strNom + "_f.tif");
                     imgBehind = ReadWriteImage.readTiff(strNom + "_b.tif");
 
-                } catch (ImageReadException | IOException ex) {
+                } catch (IOException ex) {
                     Logger.getLogger(EditeurPanovisu.class
                             .getName()).log(Level.SEVERE, null, ex);
                 }
@@ -7966,7 +7966,7 @@ public class EditeurPanovisu extends Application {
                     }
                     getPanoramiquesProjet()[getiPanoActuel()].setImgVisuPanoramique(imgTransformationImage(ReadWriteImage.readTiff(imageFile.getAbsolutePath()), 2));
 
-                } catch (ImageReadException | IOException ex) {
+                } catch (IOException ex) {
                     Logger.getLogger(EditeurPanovisu.class
                             .getName()).log(Level.SEVERE, null, ex);
                 }
@@ -8027,7 +8027,7 @@ public class EditeurPanovisu extends Application {
                     imgFront = ReadWriteImage.readTiff(strNom + "_f.tif");
                     imgBehind = ReadWriteImage.readTiff(strNom + "_b.tif");
 
-                } catch (ImageReadException | IOException ex) {
+                } catch (IOException ex) {
                     Logger.getLogger(EditeurPanovisu.class
                             .getName()).log(Level.SEVERE, null, ex);
                 }
@@ -10517,7 +10517,7 @@ public class EditeurPanovisu extends Application {
                     try {
                         imgPano = ReadWriteImage.readTiff(strFilePano);
 
-                    } catch (IOException | ImageReadException ex) {
+                    } catch (IOException ex) {
                         Logger.getLogger(EditeurPanovisu.class
                                 .getName()).log(Level.SEVERE, null, ex);
                     }
@@ -10784,16 +10784,35 @@ public class EditeurPanovisu extends Application {
                 }
                 apOpenLayers.setVisible(true);
             });
-            tfLatitude.setLayoutX(140);
+            // Labels pour les coordonnées
+            Label lblLatitude = new Label("Latitude:");
+            lblLatitude.setLayoutX(140);
+            lblLatitude.setLayoutY(10);
+            lblLatitude.setPrefWidth(60);
+            lblLatitude.setStyle("-fx-font-weight: bold;");
+            
+            Label lblLongitude = new Label("Longitude:");
+            lblLongitude.setLayoutX(140);
+            lblLongitude.setLayoutY(40);
+            lblLongitude.setPrefWidth(70);
+            lblLongitude.setStyle("-fx-font-weight: bold;");
+            
+            tfLatitude.setLayoutX(210);
             tfLatitude.setLayoutY(10);
-            tfLongitude.setLayoutX(140);
+            tfLatitude.setPrefWidth(150);
+            tfLatitude.setPromptText("Latitude (ex: 48°51'29.6\"N)");
+            
+            tfLongitude.setLayoutX(210);
             tfLongitude.setLayoutY(40);
+            tfLongitude.setPrefWidth(150);
+            tfLongitude.setPromptText("Longitude (ex: 2°17'30.5\"E)");
+            
             apOpenLayers.setLayoutX(200);
             apOpenLayers.setLayoutY(150);
             apOpenLayers.setVisible(false);
             AnchorPane apGeolocalise = new AnchorPane();
             apGeolocalise.setPrefHeight(75);
-            apGeolocalise.getChildren().addAll(btnGeolocalise, tfLatitude, tfLongitude);
+            apGeolocalise.getChildren().addAll(btnGeolocalise, lblLatitude, tfLatitude, lblLongitude, tfLongitude);
             apGeolocalise.setLayoutX(10);
             apGeolocalise.setLayoutY(40);
             setPoGeolocalisation(new PaneOutil(rbLocalisation.getString("main.geolocalisation"), apGeolocalise, largeurOutil));

@@ -119,7 +119,11 @@ public class NavigateurOpenLayersSeul {
             bingApiKey = EditeurPanovisu.getStrBingAPIKey();
         };
         if (!bingApiKey.equals("")) {
-            navigateurCarteSeul.getWebEngine().executeScript("setBingApiKey(\"" + bingApiKey + "\");");
+            try {
+                navigateurCarteSeul.getWebEngine().executeScript("if (typeof setBingApiKey === 'function') { setBingApiKey(\"" + bingApiKey + "\"); }");
+            } catch (Exception e) {
+                System.out.println("setBingApiKey non disponible dans NavigateurOpenLayersSeul (normal avec carte simple)");
+            }
         }
         afficheCartesOpenlayer();
     }

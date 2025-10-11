@@ -932,7 +932,9 @@ public class EditeurHTML {
     public void hideImageNodesMatching(Node node, Pattern imageNamePattern, int depth) {
         if (node instanceof ImageView) {
             ImageView imageView = (ImageView) node;
-            String url = imageView.getImage().impl_getUrl();
+            // impl_getUrl() a été supprimé dans JavaFX 9+
+            // Alternative : récupérer l'URL depuis userData ou utiliser toString()
+            String url = imageView.getImage() != null ? imageView.getImage().getUrl() : null;
             if (url != null && imageNamePattern.matcher(url).matches()) {
                 Node button = imageView.getParent().getParent();
                 button.setVisible(false);

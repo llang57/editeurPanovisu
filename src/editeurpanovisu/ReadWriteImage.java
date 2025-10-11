@@ -29,8 +29,8 @@ import javax.imageio.stream.FileImageOutputStream;
 import net.coobird.thumbnailator.Thumbnails;
 import org.apache.commons.imaging.ImageFormat;
 import org.apache.commons.imaging.ImageFormats;
-import org.apache.commons.imaging.ImageReadException;
-import org.apache.commons.imaging.ImageWriteException;
+import org.apache.commons.imaging.ImagingException;
+import org.apache.commons.imaging.ImagingException;
 import org.apache.commons.imaging.Imaging;
 import org.apache.commons.imaging.ImagingConstants;
 import org.apache.commons.imaging.common.BufferedImageFactory;
@@ -90,14 +90,11 @@ public class ReadWriteImage {
     }
 
     public static Image readTiff(String strNomFich)
-            throws ImageReadException, IOException {
+            throws ImagingException, IOException {
         File file = new File(strNomFich);
-        final Map<String, Object> params = new HashMap<>();
-
-        params.put(ImagingConstants.BUFFERED_IMAGE_FACTORY,
-                new ManagedImageBufferedImageFactory());
-
-        final BufferedImage img = Imaging.getBufferedImage(file, params);
+        
+        // La nouvelle API ne nécessite plus de paramètres spécifiques
+        final BufferedImage img = Imaging.getBufferedImage(file);
 
         Image image = SwingFXUtils.toFXImage(img, null);
 
@@ -105,7 +102,7 @@ public class ReadWriteImage {
     }
 
     public static void writeTiff(Image imgImage, String strNomFich, boolean bSharpen, float sharpenLevel)
-            throws ImageReadException, IOException {
+            throws ImagingException, IOException {
         File file = new File(strNomFich);
         BufferedImage imageRGBSharpen = null;
         BufferedImage imageRGB = SwingFXUtils.fromFXImage(imgImage, null);
@@ -122,20 +119,19 @@ public class ReadWriteImage {
         }
 
         final ImageFormat format = ImageFormats.TIFF;
-        final Map<String, Object> params = new HashMap<>();
-        params.put(ImagingConstants.PARAM_KEY_COMPRESSION, new Integer(
-                TiffConstants.TIFF_COMPRESSION_UNCOMPRESSED));
+        // La nouvelle API ne supporte plus les paramètres de compression personnalisés
+        // dans writeImage - utilise des valeurs par défaut
        
         if (bSharpen) {
             try {
-                Imaging.writeImage(imageRGBSharpen, file, format, params);
-            } catch (ImageWriteException ex) {
+                Imaging.writeImage(imageRGBSharpen, file, format);
+            } catch (ImagingException ex) {
                 Logger.getLogger(ReadWriteImage.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             try {
-                Imaging.writeImage(imageRGB, file, format, params);
-            } catch (ImageWriteException ex) {
+                Imaging.writeImage(imageRGB, file, format);
+            } catch (ImagingException ex) {
                 Logger.getLogger(ReadWriteImage.class.getName()).log(Level.SEVERE, null, ex);
             }
         }

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carte Interactive - OpenStreetMap</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
+          crossorigin=""/>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body, html {
+            height: 100%;
+            width: 100%;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        
+        #map {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        
+        /* Contrôles de type de carte */
+        .map-controls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        
+        .map-controls select {
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+        
+        /* Personnalisation des popups */
+        .leaflet-popup-content {
+            margin: 10px;
+            min-width: 150px;
+        }
+        
+        .popup-title {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .popup-description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        
+        .popup-link {
+            display: inline-block;
+            padding: 5px 10px;
+            background: #0078d4;
+            color: white;
+            text-decoration: none;
+            border-radius: 3px;
+            font-size: 13px;
+        }
+        
+        .popup-link:hover {
+            background: #005a9e;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    
+    <div class="map-controls">
+        <select id="mapType">
+            <option value="osm">OpenStreetMap Standard</option>
+            <option value="satellite">Satellite (Esri)</option>
+        </select>
+    </div>
+    
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+    
+    <script>
+        // Configuration des couches de carte (100% gratuites)
+        const tileLayers = {
+            'osm': {
+                url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                maxZoom: 19
+            },
+            'satellite': {
+                url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+                attribution: '© <a href="https://www.esri.com/">Esri</a>, Maxar, Earthstar Geographics',
+                maxZoom: 19
+            }
+        };
+        
+        // Initialisation de la carte (Paris par défaut)
+        const map = L.map('map', {
+            center: [48.8566, 2.3522],
+            zoom: 13,
+            zoomControl: true
+        });
+        
+        // Couche de carte par défaut (OSM)
+        let currentLayer = L.tileLayer(tileLayers['osm'].url, {
+            attribution: tileLayers['osm'].attribution,
+            maxZoom: tileLayers['osm'].maxZoom
+        }).addTo(map);
+        
+        // Gestion du changement de type de carte
+        document.getElementById('mapType').addEventListener('change', function(e) {
+            const selectedType = e.target.value;
+            const layerConfig = tileLayers[selectedType];
+            
+            // Retirer l'ancienne couche
+            map.removeLayer(currentLayer);
+            
+            // Ajouter la nouvelle couche
+            currentLayer = L.tileLayer(layerConfig.url, {
+                attribution: layerConfig.attribution,
+                maxZoom: layerConfig.maxZoom
+            }).addTo(map);
+        });
+        
+        // Stockage des marqueurs
+        const markers = {};
+        let markerIdCounter = 0;
+        
+        // === API JavaScript pour interaction avec Java ===
+        
+        /**
+         * Ajoute un marqueur sur la carte.
+         * @param {number} lat - Latitude
+         * @param {number} lng - Longitude
+         * @param {string} title - Titre du marqueur (tooltip)
+         * @param {string} popup - Contenu HTML du popup (optionnel)
+         * @param {string} icon - URL de l'icône personnalisée (optionnel)
+         * @returns {number} ID du marqueur
+         */
+        window.addMarker = function(lat, lng, title, popup, icon) {
+            const markerId = markerIdCounter++;
+            
+            const markerOptions = {
+                title: title || ''
+            };
+            
+            // Icône personnalisée si fournie
+            if (icon) {
+                markerOptions.icon = L.icon({
+                    iconUrl: icon,
+                    iconSize: [32, 32],
+                    iconAnchor: [16, 32],
+                    popupAnchor: [0, -32]
+                });
+            }
+            
+            const marker = L.marker([lat, lng], markerOptions).addTo(map);
+            
+            // Tooltip (survol)
+            if (title) {
+                marker.bindTooltip(title, {
+                    permanent: false,
+                    direction: 'top'
+                });
+            }
+            
+            // Popup (clic)
+            if (popup) {
+                marker.bindPopup(popup);
+            }
+            
+            // Stocker le marqueur
+            markers[markerId] = marker;
+            
+            return markerId;
+        };
+        
+        /**
+         * Supprime un marqueur spécifique.
+         * @param {number} markerId - ID du marqueur
+         */
+        window.removeMarker = function(markerId) {
+            if (markers[markerId]) {
+                map.removeLayer(markers[markerId]);
+                delete markers[markerId];
+            }
+        };
+        
+        /**
+         * Supprime tous les marqueurs.
+         */
+        window.clearMarkers = function() {
+            Object.values(markers).forEach(marker => {
+                map.removeLayer(marker);
+            });
+            markers = {};
+            markerIdCounter = 0;
+        };
+        
+        /**
+         * Centre la carte sur une position.
+         * @param {number} lat - Latitude
+         * @param {number} lng - Longitude
+         * @param {number} zoom - Niveau de zoom (optionnel, défaut: 13)
+         */
+        window.setCenter = function(lat, lng, zoom) {
+            map.setView([lat, lng], zoom || 13);
+        };
+        
+        /**
+         * Change le type de carte.
+         * @param {string} type - Type de carte ('osm', 'osm-topo', etc.)
+         */
+        window.setMapType = function(type) {
+            if (tileLayers[type]) {
+                document.getElementById('mapType').value = type;
+                document.getElementById('mapType').dispatchEvent(new Event('change'));
+            }
+        };
+        
+        /**
+         * Ajuste la vue pour afficher tous les marqueurs.
+         */
+        window.fitBounds = function() {
+            const markerList = Object.values(markers);
+            if (markerList.length > 0) {
+                const group = L.featureGroup(markerList);
+                map.fitBounds(group.getBounds().pad(0.1));
+            }
+        };
+        
+        /**
+         * Ajoute un cercle sur la carte.
+         * @param {number} lat - Latitude
+         * @param {number} lng - Longitude
+         * @param {number} radius - Rayon en mètres
+         * @param {string} color - Couleur (défaut: blue)
+         */
+        window.addCircle = function(lat, lng, radius, color) {
+            return L.circle([lat, lng], {
+                color: color || 'blue',
+                fillColor: color || 'blue',
+                fillOpacity: 0.2,
+                radius: radius
+            }).addTo(map);
+        };
+        
+        /**
+         * Ajoute une polyligne (chemin).
+         * @param {Array} points - Tableau de [lat, lng]
+         * @param {string} color - Couleur (défaut: red)
+         * @param {number} weight - Épaisseur (défaut: 3)
+         */
+        window.addPolyline = function(points, color, weight) {
+            return L.polyline(points, {
+                color: color || 'red',
+                weight: weight || 3
+            }).addTo(map);
+        };
+        
+        /**
+         * Obtient le centre actuel de la carte.
+         * @returns {Object} {lat, lng, zoom}
+         */
+        window.getCenter = function() {
+            const center = map.getCenter();
+            return {
+                lat: center.lat,
+                lng: center.lng,
+                zoom: map.getZoom()
+            };
+        };
+        
+        /**
+         * Active/désactive l'interaction utilisateur.
+         * @param {boolean} enabled - true pour activer, false pour désactiver
+         */
+        window.setInteractive = function(enabled) {
+            if (enabled) {
+                map.dragging.enable();
+                map.touchZoom.enable();
+                map.doubleClickZoom.enable();
+                map.scrollWheelZoom.enable();
+                map.boxZoom.enable();
+                map.keyboard.enable();
+            } else {
+                map.dragging.disable();
+                map.touchZoom.disable();
+                map.doubleClickZoom.disable();
+                map.scrollWheelZoom.disable();
+                map.boxZoom.disable();
+                map.keyboard.disable();
+            }
+        };
+        
+        // === Events vers Java ===
+        
+        // Clic sur la carte
+        map.on('click', function(e) {
+            if (window.javaConnector && window.javaConnector.onMapClick) {
+                window.javaConnector.onMapClick(e.latlng.lat, e.latlng.lng);
+            }
+        });
+        
+        // Clic sur un marqueur
+        Object.values(markers).forEach(marker => {
+            marker.on('click', function(e) {
+                if (window.javaConnector && window.javaConnector.onMarkerClick) {
+                    window.javaConnector.onMarkerClick(
+                        e.latlng.lat, 
+                        e.latlng.lng,
+                        markers.indexOf(marker)
+                    );
+                }
+            });
+        });
+        
+        // Changement de vue (zoom/pan)
+        map.on('moveend', function() {
+            if (window.javaConnector && window.javaConnector.onViewChanged) {
+                const center = map.getCenter();
+                window.javaConnector.onViewChanged(
+                    center.lat, 
+                    center.lng, 
+                    map.getZoom()
+                );
+            }
+        });
+        
+        // Notifier Java que la carte est prête
+        window.addEventListener('load', function() {
+            console.log('✅ Carte OpenStreetMap initialisée');
+            
+            if (window.javaConnector && window.javaConnector.mapReady) {
+                window.javaConnector.mapReady();
+            }
+        });
+        
+        // Gérer le redimensionnement
+        window.addEventListener('resize', function() {
+            map.invalidateSize();
+        });
+    </script>
+</body>
+</html>

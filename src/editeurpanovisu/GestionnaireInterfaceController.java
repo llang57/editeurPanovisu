@@ -86,7 +86,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
-import jfxtras.labs.scene.control.BigDecimalField;
+import editeurpanovisu.BigDecimalField;
 
 /**
  * Gestion de l'interface de visualition de la visite virtuelle
@@ -1350,7 +1350,7 @@ public class GestionnaireInterfaceController {
                 apFenetreAfficheInfo.setLayoutX((ivVisualisation.getFitWidth() - ivFenetreInfo.getFitWidth()) / 2 + getFenetreInfoPosX() + ivVisualisation.getLayoutX());
                 apFenetreAfficheInfo.setLayoutY((ivVisualisation.getFitHeight() - ivFenetreInfo.getFitHeight()) / 2 + getFenetreInfoPosY() + ivVisualisation.getLayoutY());
                 lblFenetreURL.setText(getStrFenetreTexteURL());
-                lblFenetreURL.impl_processCSS(true);
+                lblFenetreURL.applyCss(); // Remplace impl_processCSS(true) depuis JavaFX 9+
                 lblFenetreURL.setStyle("-fx-font-size:" + Math.round(getFenetrePoliceTaille() * 10) / 10 + "px;-fx-font-family: \"Arial\";");
                 lblFenetreURL.setTextFill(Color.valueOf(getStrFenetreURLCouleur()));
                 apFenetreAfficheInfo.getChildren().addAll(ivFenetreInfo);

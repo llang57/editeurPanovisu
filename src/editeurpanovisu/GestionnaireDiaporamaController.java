@@ -30,7 +30,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
-import jfxtras.labs.scene.control.BigDecimalField;
+import editeurpanovisu.BigDecimalField;
 
 /**
  *

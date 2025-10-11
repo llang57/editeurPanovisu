@@ -63,7 +63,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
-import jfxtras.labs.scene.control.BigDecimalField;
+import editeurpanovisu.BigDecimalField;
 
 /**
  *

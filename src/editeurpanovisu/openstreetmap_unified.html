@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carte OpenStreetMap - Leaflet</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="libs/leaflet/leaflet.css" />
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+        
+        /* Debug panel - VISIBLE POUR DIAGNOSTIC */
+        #debugPanel {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: #1a1a1a;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            display: block;
+            padding: 10px;
+            overflow-y: auto;
+            z-index: 10000;
+            border-bottom: 2px solid #00ff00;
+        }
+        
+        #debugPanel h3 {
+            color: #00ffff;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+        
+        #debugContent {
+            line-height: 1.4;
+        }
+        
+        .debug-timestamp {
+            color: #888;
+            margin-right: 5px;
+        }
+        
+        .debug-success {
+            color: #00ff00;
+        }
+        
+        .debug-error {
+            color: #ff0000;
+        }
+        
+        .debug-info {
+            color: #ffaa00;
+        }
+        
+        /* Map container */
+        #map {
+            position: absolute;
+            top: 200px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #f0f0f0;
+        }
+        
+        /* Loading indicator */
+        #loadingIndicator {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            font-size: 18px;
+            color: #333;
+            z-index: 9999;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Debug Panel -->
+    <div id="debugPanel">
+        <h3>🔍 Debug Console - Carte Leaflet Unifiée</h3>
+        <div id="debugContent"></div>
+    </div>
+    
+    <!-- Loading Indicator -->
+    <div id="loadingIndicator">
+        <div class="spinner"></div>
+        <div>Chargement de la carte...</div>
+    </div>
+    
+    <!-- Map Container -->
+    <div id="map"></div>
+    
+    <!-- Leaflet JS -->
+    <script src="libs/leaflet/leaflet.js"></script>
+    
+    <script>
+        // Debug logging function
+        let debugCounter = 0;
+        function updateDebug(message, type = 'info') {
+            debugCounter++;
+            const timestamp = new Date().toLocaleTimeString('fr-FR', { 
+                hour12: false, 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit',
+                fractionalSecondDigits: 3
+            });
+            
+            const debugContent = document.getElementById('debugContent');
+            const line = document.createElement('div');
+            
+            let icon = '📋';
+            let className = 'debug-info';
+            if (type === 'success') {
+                icon = '✅';
+                className = 'debug-success';
+            } else if (type === 'error') {
+                icon = '❌';
+                className = 'debug-error';
+            } else if (type === 'warn') {
+                icon = '⚠️';
+                className = 'debug-info';
+            }
+            
+            line.className = className;
+            line.innerHTML = `<span class="debug-timestamp">[${timestamp}]</span> ${icon} ${message}`;
+            debugContent.appendChild(line);
+            
+            // Auto-scroll to bottom
+            debugContent.scrollTop = debugContent.scrollHeight;
+            
+            console.log(`[${timestamp}] ${message}`);
+        }
+        
+        // Map and markers
+        var map = null;
+        var markers = [];
+        var currentMapType = 'osm';
+        var currentMarker = null; // Alias pour searchMarker (compatibilité)
+        
+        // Tile layers configuration
+        const tileLayers = {
+            osm: L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+                maxZoom: 19
+            }),
+            satellite: L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                attribution: 'Tiles &copy; Esri',
+                maxZoom: 19
+            })
+        };
+        
+        // Initialize map
+        function initMap() {
+            try {
+                updateDebug('Initialisation de la carte Leaflet...', 'info');
+                
+                // Create map with SVG renderer for better compatibility
+                map = L.map('map', {
+                    center: [48.8566, 2.3522], // Paris par défaut
+                    zoom: 13,
+                    preferCanvas: false,
+                    renderer: L.svg()
+                });
+                
+                updateDebug('Instance L.map() créée', 'success');
+                
+                // Add default tile layer
+                tileLayers.osm.addTo(map);
+                updateDebug('Couche OSM ajoutée', 'success');
+                
+                // Force map invalidation after a short delay
+                setTimeout(() => {
+                    map.invalidateSize();
+                    updateDebug('invalidateSize() appelé', 'success');
+                }, 100);
+                
+                // Hide loading indicator
+                const loadingIndicator = document.getElementById('loadingIndicator');
+                if (loadingIndicator) {
+                    loadingIndicator.style.display = 'none';
+                    updateDebug('Indicateur de chargement masqué', 'success');
+                }
+                
+                updateDebug('✅ Carte initialisée avec succès!', 'success');
+                
+                // Notify Java that map is ready
+                if (window.javaConnector) {
+                    window.javaConnector.mapReady();
+                }
+                
+            } catch (error) {
+                updateDebug('Erreur initialisation: ' + error.message, 'error');
+                console.error('Map initialization error:', error);
+            }
+        }
+        
+        // API Functions for Java compatibility
+        
+        function addMarker(lat, lng, title) {
+            try {
+                if (!map) {
+                    updateDebug('addMarker: carte non initialisée', 'warn');
+                    return -1;
+                }
+                
+                const marker = L.marker([lat, lng]);
+                if (title) {
+                    marker.bindPopup(title);
+                }
+                marker.addTo(map);
+                markers.push(marker);
+                
+                updateDebug(`Marqueur ajouté: [${lat}, ${lng}] - "${title}"`, 'success');
+                return markers.length - 1;
+            } catch (error) {
+                updateDebug('Erreur addMarker: ' + error.message, 'error');
+                return -1;
+            }
+        }
+        
+        function removeMarker(index) {
+            try {
+                if (index >= 0 && index < markers.length && markers[index]) {
+                    map.removeLayer(markers[index]);
+                    markers[index] = null;
+                    updateDebug(`Marqueur ${index} supprimé`, 'success');
+                }
+            } catch (error) {
+                updateDebug('Erreur removeMarker: ' + error.message, 'error');
+            }
+        }
+        
+        function removeAllMarkers() {
+            try {
+                markers.forEach((marker, index) => {
+                    if (marker) {
+                        map.removeLayer(marker);
+                    }
+                });
+                markers = [];
+                updateDebug('Tous les marqueurs supprimés', 'success');
+            } catch (error) {
+                updateDebug('Erreur removeAllMarkers: ' + error.message, 'error');
+            }
+        }
+        
+        function centerOn(lat, lng, zoom) {
+            try {
+                if (!map) {
+                    updateDebug('centerOn: carte non initialisée', 'warn');
+                    return;
+                }
+                
+                const targetZoom = zoom !== undefined ? zoom : map.getZoom();
+                map.setView([lat, lng], targetZoom);
+                updateDebug(`Centrage: [${lat}, ${lng}] zoom=${targetZoom}`, 'success');
+            } catch (error) {
+                updateDebug('Erreur centerOn: ' + error.message, 'error');
+            }
+        }
+        
+        function setMapType(type) {
+            try {
+                if (!map) {
+                    updateDebug('setMapType: carte non initialisée', 'warn');
+                    return;
+                }
+                
+                // Remove current layer
+                if (currentMapType && tileLayers[currentMapType]) {
+                    map.removeLayer(tileLayers[currentMapType]);
+                }
+                
+                // Add new layer
+                const newType = type.toLowerCase() === 'satellite' ? 'satellite' : 'osm';
+                if (tileLayers[newType]) {
+                    tileLayers[newType].addTo(map);
+                    currentMapType = newType;
+                    updateDebug(`Type de carte changé: ${newType}`, 'success');
+                }
+            } catch (error) {
+                updateDebug('Erreur setMapType: ' + error.message, 'error');
+            }
+        }
+        
+        function setZoom(level) {
+            try {
+                if (!map) {
+                    updateDebug('setZoom: carte non initialisée', 'warn');
+                    return;
+                }
+                
+                map.setZoom(level);
+                updateDebug(`Zoom défini: ${level}`, 'success');
+            } catch (error) {
+                updateDebug('Erreur setZoom: ' + error.message, 'error');
+            }
+        }
+        
+        function getCenter() {
+            try {
+                if (!map) return { lat: 0, lng: 0 };
+                const center = map.getCenter();
+                return { lat: center.lat, lng: center.lng };
+            } catch (error) {
+                updateDebug('Erreur getCenter: ' + error.message, 'error');
+                return { lat: 0, lng: 0 };
+            }
+        }
+        
+        function getZoom() {
+            try {
+                if (!map) return 13;
+                return map.getZoom();
+            } catch (error) {
+                return 13;
+            }
+        }
+        
+        // Variable pour stocker le marqueur de recherche
+        var searchMarker = null;
+        
+        // Compatibility function for OpenLayers API
+        function allerAdresse(address) {
+            updateDebug('═══════════════════════════════════════', 'info');
+            updateDebug('🔍 DÉBUT allerAdresse()', 'info');
+            updateDebug(`📍 Adresse reçue: "${address}"`, 'info');
+            
+            try {
+                // Vérifier que la carte est initialisée
+                if (!map) {
+                    updateDebug('❌ ERREUR: Carte non initialisée!', 'error');
+                    return;
+                }
+                updateDebug('✅ Carte initialisée', 'success');
+                
+                // Use LocationIQ geocoding service (free tier: 5000 requests/day)
+                // Clé API gratuite pour démo - Remplacer par votre propre clé en production
+                const apiKey = 'pk.0f147952a41c555a5b70614039fd148b';
+                const url = `https://us1.locationiq.com/v1/search.php?key=${apiKey}&q=${encodeURIComponent(address)}&format=json`;
+                
+                updateDebug(`🌐 URL API: ${url}`, 'info');
+                updateDebug('📡 Envoi requête fetch()...', 'info');
+                
+                fetch(url)
+                    .then(response => {
+                        updateDebug(`📨 Réponse reçue: HTTP ${response.status}`, response.ok ? 'success' : 'error');
+                        
+                        if (!response.ok) {
+                            throw new Error(`HTTP ${response.status} - ${response.statusText}`);
+                        }
+                        
+                        updateDebug('🔄 Parsing JSON...', 'info');
+                        return response.json();
+                    })
+                    .then(data => {
+                        updateDebug(`📦 Données reçues: ${JSON.stringify(data).substring(0, 200)}...`, 'info');
+                        updateDebug(`📊 Nombre de résultats: ${data ? data.length : 0}`, 'info');
+                        
+                        if (data && data.length > 0) {
+                            const result = data[0];
+                            const lat = parseFloat(result.lat);
+                            const lng = parseFloat(result.lon);
+                            
+                            updateDebug(`📍 Coordonnées trouvées: Lat=${lat}, Lng=${lng}`, 'success');
+                            updateDebug(`📝 Lieu: ${result.display_name}`, 'info');
+                            
+                            // Centrer la carte
+                            updateDebug('🗺️ Appel centerOn()...', 'info');
+                            centerOn(lat, lng, 15);
+                            updateDebug('✅ centerOn() terminé', 'success');
+                            
+                            // Supprimer l'ancien marqueur de recherche s'il existe
+                            if (searchMarker) {
+                                updateDebug('🗑️ Suppression ancien marqueur', 'info');
+                                map.removeLayer(searchMarker);
+                            }
+                            
+                            // Créer un marqueur déplaçable
+                            updateDebug('📌 Création marqueur déplaçable...', 'info');
+                            searchMarker = L.marker([lat, lng], {
+                                draggable: true,
+                                title: result.display_name
+                            }).addTo(map);
+                            currentMarker = searchMarker; // Alias pour compatibilité
+                            updateDebug('✅ Marqueur créé et ajouté à la carte', 'success');
+                            
+                            // Ajouter un popup
+                            searchMarker.bindPopup(`
+                                <b>${result.display_name}</b><br>
+                                Lat: ${lat.toFixed(6)}<br>
+                                Lng: ${lng.toFixed(6)}<br>
+                                <small>Glissez le marqueur pour affiner la position</small>
+                            `).openPopup();
+                            updateDebug('✅ Popup configuré', 'success');
+                            
+                            // Événement de déplacement du marqueur
+                            searchMarker.on('dragend', function(event) {
+                                const position = event.target.getLatLng();
+                                updateDebug(`📍 Marqueur déplacé: Lat=${position.lat}, Lng=${position.lng}`, 'info');
+                                updateCoordinates(position.lat, position.lng);
+                                
+                                // Mettre à jour le popup
+                                searchMarker.setPopupContent(`
+                                    <b>Position affinée</b><br>
+                                    Lat: ${position.lat.toFixed(6)}<br>
+                                    Lng: ${position.lng.toFixed(6)}
+                                `);
+                            });
+                            updateDebug('✅ Événement dragend configuré', 'success');
+                            
+                            // Mettre à jour les coordonnées dans Java
+                            updateDebug('☕ Appel updateCoordinates()...', 'info');
+                            updateCoordinates(lat, lng);
+                            
+                            updateDebug('✅ ✅ ✅ SUCCÈS COMPLET!', 'success');
+                        } else {
+                            updateDebug('⚠️ Aucun résultat trouvé', 'warn');
+                        }
+                    })
+                    .catch(error => {
+                        updateDebug(`❌ ERREUR fetch: ${error.message}`, 'error');
+                        updateDebug(`❌ Stack: ${error.stack}`, 'error');
+                        console.error('LocationIQ geocoding error:', error);
+                    });
+                    
+                updateDebug('🔚 FIN allerAdresse() (attente réponse async)', 'info');
+                
+            } catch (error) {
+                updateDebug(`❌ EXCEPTION dans allerAdresse: ${error.message}`, 'error');
+                updateDebug(`❌ Stack: ${error.stack}`, 'error');
+            }
+        }
+        
+        // Fonction pour notifier Java des nouvelles coordonnées
+        function updateCoordinates(lat, lng) {
+            updateDebug('───────────────────────────────────────', 'info');
+            updateDebug('☕ DÉBUT updateCoordinates()', 'info');
+            updateDebug(`📍 Paramètres: Lat=${lat}, Lng=${lng}`, 'info');
+            
+            try {
+                // Vérifier l'existence du connecteur Java
+                updateDebug(`🔍 window.javaConnector existe? ${!!window.javaConnector}`, 'info');
+                
+                if (window.javaConnector) {
+                    updateDebug(`🔍 javaConnector.updateCoordinates existe? ${typeof window.javaConnector.updateCoordinates}`, 'info');
+                    
+                    if (typeof window.javaConnector.updateCoordinates === 'function') {
+                        updateDebug(`☕ Appel javaConnector.updateCoordinates(${lng}, ${lat})...`, 'info');
+                        window.javaConnector.updateCoordinates(lng, lat); // longitude, latitude
+                        updateDebug('✅ Coordonnées envoyées à Java avec succès!', 'success');
+                    } else {
+                        updateDebug('❌ javaConnector.updateCoordinates n\'est pas une fonction!', 'error');
+                    }
+                } else {
+                    updateDebug('❌ window.javaConnector n\'existe pas!', 'error');
+                    updateDebug('💡 Le pont Java n\'est pas configuré', 'warn');
+                }
+            } catch (error) {
+                updateDebug(`❌ ERREUR updateCoordinates: ${error.message}`, 'error');
+                updateDebug(`❌ Stack: ${error.stack}`, 'error');
+            }
+            
+            updateDebug('🔚 FIN updateCoordinates()', 'info');
+        }
+        
+        function choixZoom(level) {
+            setZoom(level);
+        }
+        
+        function getNomsLayers() {
+            // Retourne les noms des couches disponibles avec | comme séparateur
+            // Le * indique la couche active
+            if (currentMapType === 'osm') {
+                return "*OpenStreetMap|Satellite";
+            } else {
+                return "OpenStreetMap|*Satellite";
+            }
+        }
+        
+        // Initialize when DOM is ready
+        updateDebug('[1/2] DOM chargé, initialisation Leaflet...', 'info');
+        
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                updateDebug('[2/2] DOMContentLoaded déclenché', 'success');
+                initMap();
+            });
+        } else {
+            updateDebug('[2/2] DOM déjà prêt', 'success');
+            initMap();
+        }
+    </script>
+</body>
+</html>
