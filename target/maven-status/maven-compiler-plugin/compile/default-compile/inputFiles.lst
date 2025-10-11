@@ -1,6 +1,7 @@
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\AideDialogController.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\ApiKeysConfig.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\BigDecimalField.java
+D:\developpement\java\editeurPanovisu\src\editeurpanovisu\BuildNumberIncrementer.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\CartePanoVisu.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\ConfigDialogController.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\CoordonneesGeographiques.java
@@ -8,6 +9,7 @@ D:\developpement\java\editeurPanovisu\src\editeurpanovisu\Diaporama.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\EditeurHTML.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\EditeurPanovisu.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\EquiCubeDialogController.java
+D:\developpement\java\editeurPanovisu\src\editeurpanovisu\EsriTileRetriever.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\ExtensionsFilter.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\GestionnaireDiaporamaController.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\GestionnaireInterfaceController.java
@@ -24,6 +26,7 @@ D:\developpement\java\editeurPanovisu\src\editeurpanovisu\MarqueurGeolocalisatio
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\NavigateurCarte.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\NavigateurCarteGluon.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\NavigateurCarteSeul.java
+D:\developpement\java\editeurPanovisu\src\editeurpanovisu\NavigateurGluonCarte.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\NavigateurOpenLayers.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\NavigateurOpenLayersGluon.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\NavigateurOpenLayersSeul.java

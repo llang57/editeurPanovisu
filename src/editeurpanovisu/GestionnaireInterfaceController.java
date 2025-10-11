@@ -601,7 +601,7 @@ public class GestionnaireInterfaceController {
     private ColorPicker cpCouleurLigneRadarCarte;
     private Slider slTailleRadarCarte;
     private Slider slOpaciteRadarCarte;
-    public NavigateurOpenLayersSeul navigateurCarteOL = null;
+    public NavigateurCarteGluon navigateurCarteOL = null;
     public AnchorPane apNavigateurCarte;
     private CheckBox cbReplieDemarrageCarte;
 

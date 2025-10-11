@@ -10238,16 +10238,16 @@ public class EditeurPanovisu extends Application {
         tpEnvironnement.setSide(Side.TOP);
         tpEnvironnement.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends Tab> ov, Tab t, Tab t1) -> {
             if (getGestionnaireInterface().navigateurCarteOL == null && isbInternet()) {
-                getGestionnaireInterface().navigateurCarteOL = new NavigateurOpenLayersSeul();
-                getGestionnaireInterface().apNavigateurCarte = getGestionnaireInterface().navigateurCarteOL.afficheNavigateurOpenLayer();
+                getGestionnaireInterface().navigateurCarteOL = new NavigateurCarteGluon();
+                getGestionnaireInterface().navigateurCarteOL.afficheNavigateurOpenLayer();
             }
             getGestionnaireInterface().rafraichit();
         });
         tabInterface.disableProperty().addListener((ov, av, nv) -> {
             if (!nv && getGestionnaireInterface().navigateurCarteOL == null && isbInternet()) {
-                getGestionnaireInterface().navigateurCarteOL = new NavigateurOpenLayersSeul();
+                getGestionnaireInterface().navigateurCarteOL = new NavigateurCarteGluon();
                 getGestionnaireInterface().navigateurCarteOL.setBingApiKey(getStrBingAPIKey());
-                getGestionnaireInterface().apNavigateurCarte = getGestionnaireInterface().navigateurCarteOL.afficheNavigateurOpenLayer();
+                getGestionnaireInterface().navigateurCarteOL.afficheNavigateurOpenLayer();
             }
         });
 

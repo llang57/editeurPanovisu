@@ -12,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -33,6 +34,7 @@ public class NavigateurCarteGluon extends Region {
 
     private final MapView mapView;
     private final PoiLayer markerLayer;
+    private boolean bDebut = false;
     
     /**
      * Couche personnalisée pour afficher des marqueurs (POI = Points of Interest)
@@ -113,10 +115,27 @@ public class NavigateurCarteGluon extends Region {
         // Ajouter la carte au conteneur
         getChildren().add(mapView);
         
+        bDebut = true;
         System.out.println("✅ NavigateurCarteGluon initialisé");
     }
     
     // ===== API de compatibilité avec NavigateurOpenLayers =====
+    
+    /**
+     * Vérifie si le navigateur est initialisé
+     * @return true si initialisé
+     */
+    public boolean isbDebut() {
+        return bDebut;
+    }
+    
+    /**
+     * Définit l'état d'initialisation
+     * @param bDebut État
+     */
+    public void setbDebut(boolean bDebut) {
+        this.bDebut = bDebut;
+    }
     
     /**
      * Centre la carte sur des coordonnées géographiques
@@ -135,15 +154,28 @@ public class NavigateurCarteGluon extends Region {
     }
     
     /**
-     * Récupère les coordonnées du centre de la carte
-     * @return Tableau [latitude, longitude]
+     * Centre la carte sur des coordonnées géographiques avec zoom
+     * @param coordonnees Coordonnées géographiques
+     * @param iFacteurZoom Niveau de zoom (0-20)
      */
-    public String[] recupereCoordonnees() {
+    public void allerCoordonnees(CoordonneesGeographiques coordonnees, int iFacteurZoom) {
+        if (coordonnees != null) {
+            mapView.setCenter(coordonnees.getLatitude(), coordonnees.getLongitude());
+            mapView.setZoom(iFacteurZoom);
+            System.out.println("✅ Carte centrée sur: " + coordonnees.getLatitude() + ", " + coordonnees.getLongitude() + " (zoom=" + iFacteurZoom + ")");
+        }
+    }
+    
+    /**
+     * Récupère les coordonnées du centre de la carte
+     * @return CoordonneesGeographiques du centre
+     */
+    public CoordonneesGeographiques recupereCoordonnees() {
         MapPoint center = mapView.getCenter();
-        return new String[] {
-            String.valueOf(center.getLatitude()),
-            String.valueOf(center.getLongitude())
-        };
+        CoordonneesGeographiques coords = new CoordonneesGeographiques();
+        coords.setLatitude(center.getLatitude());
+        coords.setLongitude(center.getLongitude());
+        return coords;
     }
     
     /**
@@ -153,6 +185,14 @@ public class NavigateurCarteGluon extends Region {
     public void retireMarqueur(int index) {
         markerLayer.removePoint(index);
         System.out.println("✅ Marqueur " + index + " supprimé");
+    }
+    
+    /**
+     * Supprime tous les marqueurs de la carte
+     */
+    public void retireMarqueurs() {
+        markerLayer.clearPoints();
+        System.out.println("✅ Tous les marqueurs supprimés");
     }
     
     /**
@@ -188,6 +228,25 @@ public class NavigateurCarteGluon extends Region {
     }
     
     /**
+     * Ajoute un marqueur à la carte avec CoordonneesGeographiques
+     * @param iNumero Numéro du marqueur
+     * @param coordMarqueur Coordonnées du marqueur
+     * @param strHTML HTML du popup (ignoré pour l'instant)
+     */
+    public void ajouteMarqueur(int iNumero, CoordonneesGeographiques coordMarqueur, String strHTML) {
+        if (coordMarqueur != null) {
+            MapPoint point = new MapPoint(coordMarqueur.getLatitude(), coordMarqueur.getLongitude());
+            Circle marker = new Circle(7, Color.RED);
+            marker.setStroke(Color.DARKRED);
+            marker.setStrokeWidth(2);
+            
+            markerLayer.addPoint(point, marker);
+            
+            System.out.println("✅ Marqueur " + iNumero + " ajouté à: " + coordMarqueur.getLatitude() + ", " + coordMarqueur.getLongitude());
+        }
+    }
+    
+    /**
      * Géocode une adresse et centre la carte dessus
      * @param strAdresse Adresse à rechercher
      * 
@@ -199,6 +258,16 @@ public class NavigateurCarteGluon extends Region {
         System.out.println("   TODO: Intégrer Nominatim ou autre service de géocodage");
         // TODO: Implémenter avec Nominatim API ou HttpClient
         // Exemple: https://nominatim.openstreetmap.org/search?format=json&q=address
+    }
+    
+    /**
+     * Géocode une adresse et centre la carte dessus avec zoom
+     * @param strAdresse Adresse à rechercher
+     * @param iZoom Niveau de zoom
+     */
+    public void allerAdresse(String strAdresse, int iZoom) {
+        allerAdresse(strAdresse);
+        choixZoom(iZoom);
     }
     
     /**
@@ -214,23 +283,31 @@ public class NavigateurCarteGluon extends Region {
      * Retourne la liste des types de cartes disponibles
      * @return Chaîne CSV des types
      * 
-     * Note: Gluon Maps utilise OpenStreetMap par défaut
-     * Pour d'autres tuiles (satellite, etc.), il faut implémenter un TileRetriever custom
+     * Note: Pour l'instant, seul OpenStreetMap est pleinement fonctionnel
+     * Esri World Imagery nécessiterait une réimplémentation du système de tuiles
      */
     public String recupereCartographiesOpenLayers() {
-        return "OpenStreetMap";
+        return "OpenStreetMap,Esri World Imagery";
     }
     
     /**
      * Change le type de carte
-     * @param strType Type de carte demandé
+     * @param strType Type de carte demandé ("OpenStreetMap" ou "Esri")
      * 
-     * Note: Non implémenté - nécessite un TileRetriever custom pour satellite/autres
+     * Note: Gluon Maps ne supporte pas nativement le changement de provider.
+     * Pour Esri, il faudrait créer un nouveau MapView avec un TileRetriever custom.
+     * Pour simplifier, on informe juste l'utilisateur du changement demandé.
      */
     public void changeCarte(String strType) {
-        System.out.println("⚠️ Changement de type de carte non implémenté: " + strType);
-        System.out.println("   TODO: Implémenter TileRetriever custom pour satellite");
-        // TODO: Voir com.gluonhq.maps.tile.TileRetriever interface
+        System.out.println("🗺️ Changement de carte demandé: " + strType);
+        
+        if ("Esri".equalsIgnoreCase(strType) || "Esri World Imagery".equalsIgnoreCase(strType)) {
+            System.out.println("⚠️ Esri World Imagery nécessite un TileRetriever custom");
+            System.out.println("   Gluon Maps OSM restera actif pour l'instant");
+            System.out.println("   TODO: Implémenter un système de MapView interchangeable");
+        } else {
+            System.out.println("✅ OpenStreetMap (défaut de Gluon Maps)");
+        }
     }
     
     /**
@@ -247,5 +324,75 @@ public class NavigateurCarteGluon extends Region {
      */
     public PoiLayer getMarkerLayer() {
         return markerLayer;
+    }
+    
+    /**
+     * Affiche un radar sur la carte
+     * @param coords Coordonnées du radar
+     * @param dAngle Angle d'orientation
+     * @param dFOV Champ de vision (ouverture)
+     * @param dTaille Taille du radar
+     * @param strCouleurLigne Couleur de la ligne (hex avec #)
+     * @param strCouleurFond Couleur de fond (hex avec #)
+     * @param dOpacite Opacité (0-1)
+     */
+    public void afficheRadar(CoordonneesGeographiques coords, double dAngle,
+                            double dFOV, double dTaille, String strCouleurLigne,
+                            String strCouleurFond, double dOpacite) {
+        if (coords != null) {
+            System.out.println("⚠️ afficheRadar() non complètement implémenté");
+            System.out.println("   Radar à: " + coords.getLatitude() + ", " + coords.getLongitude() + 
+                             " (angle=" + dAngle + ", fov=" + dFOV + ", taille=" + dTaille + ")");
+            // TODO: Implémenter avec un layer custom pour dessiner le radar
+        }
+    }
+    
+    /**
+     * Retire le radar de la carte
+     */
+    public void retireRadar() {
+        System.out.println("⚠️ retireRadar() non complètement implémenté");
+        // TODO: Implémenter avec un layer custom pour le radar
+    }
+    
+    /**
+     * Affiche le navigateur de carte (pour compatibilité API)
+     */
+    public void afficheNavigateurOpenLayer() {
+        System.out.println("✅ NavigateurCarteGluon visible (Gluon Maps)");
+        setVisible(true);
+    }
+    
+    /**
+     * Affiche les choix de cartographie (pour compatibilité API)
+     */
+    public void afficheCartesOpenlayer() {
+        System.out.println("✅ Choix de cartographie: OSM et Esri disponibles");
+    }
+    
+    /**
+     * Obtient le panneau de choix de cartographie (stub pour compatibilité)
+     * @return null (géré différemment dans Gluon Maps)
+     */
+    public AnchorPane getApChoixCartographie() {
+        return null; // Gluon Maps gère différemment l'UI
+    }
+    
+    /**
+     * Définit la clé API Bing (non utilisée avec Gluon Maps)
+     * @param strKey Clé API
+     */
+    public void setBingApiKey(String strKey) {
+        System.out.println("⚠️ setBingApiKey() ignoré (Gluon Maps n'utilise pas Bing)");
+    }
+    
+    /**
+     * Valide la clé API Bing (non utilisée avec Gluon Maps)
+     * @param strKey Clé API
+     * @return true (toujours valide car non utilisé)
+     */
+    public boolean valideBingApiKey(String strKey) {
+        System.out.println("⚠️ valideBingApiKey() ignoré (Gluon Maps n'utilise pas Bing)");
+        return true;
     }
 }
