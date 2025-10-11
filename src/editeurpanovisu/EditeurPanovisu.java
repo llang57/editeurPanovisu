@@ -3722,10 +3722,19 @@ public class EditeurPanovisu extends Application {
             }
             ii++;
         }
-        rectVignettePano.setLayoutY((iLargeurVignettes / 2 + 10) * iPano + 10);
-        rectVignettePano.setVisible(true);
-        apVignettesPano.getChildren().add(rectVignettePano);
-        cbListeChoixPanoramique.setValue(cbListeChoixPanoramique.getItems().get(getiPanoActuel()));
+        
+        if (iPano >= 0) {
+            rectVignettePano.setLayoutY((iLargeurVignettes / 2 + 10) * iPano + 10);
+            rectVignettePano.setVisible(true);
+            apVignettesPano.getChildren().add(rectVignettePano);
+        }
+        
+        // Vérifier que la liste n'est pas vide et que l'index est valide
+        if (!cbListeChoixPanoramique.getItems().isEmpty() && 
+            getiPanoActuel() >= 0 && 
+            getiPanoActuel() < cbListeChoixPanoramique.getItems().size()) {
+            cbListeChoixPanoramique.setValue(cbListeChoixPanoramique.getItems().get(getiPanoActuel()));
+        }
     }
 
     private static String suprimeEspaceFin(String strChaine) {
@@ -4484,14 +4493,28 @@ public class EditeurPanovisu extends Application {
                     apParametresVisite.setMaxHeight(120 + apListePanoTriable.getPrefHeight() + 20);
                 }
                 getGestionnaireInterface().rafraichit();
-                setiPanoActuel(Integer.parseInt(ordPano.getStrPanos().get(0)));
-                rafraichitListePano();
-                affichePanoChoisit(getiPanoActuel());
-                bPanoCharge = true;
-                getVbChoixPanoramique().setVisible(true);
-                cbListeChoixPanoramique.setValue(cbListeChoixPanoramique.getItems().get(0));
+                
+                // Vérifier que la liste n'est pas vide avant d'accéder aux éléments
+                if (!ordPano.getStrPanos().isEmpty()) {
+                    setiPanoActuel(Integer.parseInt(ordPano.getStrPanos().get(0)));
+                    rafraichitListePano();
+                    affichePanoChoisit(getiPanoActuel());
+                    bPanoCharge = true;
+                    getVbChoixPanoramique().setVisible(true);
+                    
+                    if (!cbListeChoixPanoramique.getItems().isEmpty()) {
+                        cbListeChoixPanoramique.setValue(cbListeChoixPanoramique.getItems().get(0));
+                    }
+                } else {
+                    // Aucun panoramique chargé
+                    System.out.println("⚠️ Aucun panoramique disponible dans la liste");
+                    bPanoCharge = false;
+                }
+                
                 TextField tfVisite = (TextField) getVbChoixPanoramique().lookup("#titreVisite");
-                tfVisite.setText(strTitreVisite);
+                if (tfVisite != null) {
+                    tfVisite.setText(strTitreVisite);
+                }
                 getApAttends().setVisible(false);
                 mbarPrincipal.setDisable(false);
                 bbarPrincipal.setDisable(false);

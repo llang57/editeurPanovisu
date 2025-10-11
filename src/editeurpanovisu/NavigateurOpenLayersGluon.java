@@ -68,7 +68,13 @@ public class NavigateurOpenLayersGluon {
      */
     public String[] recupereCoordonnees() {
         if (navigateurCarte != null) {
-            return navigateurCarte.recupereCoordonnees();
+            CoordonneesGeographiques coords = navigateurCarte.recupereCoordonnees();
+            if (coords != null) {
+                return new String[]{
+                    String.valueOf(coords.getLatitude()),
+                    String.valueOf(coords.getLongitude())
+                };
+            }
         }
         return new String[]{"0", "0"};
     }
