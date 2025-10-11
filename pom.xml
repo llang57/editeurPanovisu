@@ -61,11 +61,19 @@
             <version>${javafx.version}</version>
         </dependency>
 
-        <!-- Gluon Maps - Cartes OpenStreetMap natives JavaFX -->
+        <!-- Gluon Maps - DÉSACTIVÉ (crashs sur Desktop avec cache)
         <dependency>
             <groupId>com.gluonhq</groupId>
             <artifactId>maps</artifactId>
             <version>2.0.0-ea+6</version>
+        </dependency>
+        -->
+        
+        <!-- JMapViewer - Cartes OpenStreetMap pour Java Desktop (STABLE) -->
+        <dependency>
+            <groupId>org.openstreetmap.jmapviewer</groupId>
+            <artifactId>jmapviewer</artifactId>
+            <version>2.18</version>
         </dependency>
 
         <!-- JFXtras - Composants JavaFX additionnels -->
@@ -351,6 +359,11 @@
         <repository>
             <id>central</id>
             <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+        <repository>
+            <id>JOSM</id>
+            <name>JOSM OpenStreetMap Repository</name>
+            <url>https://josm.openstreetmap.de/repository/releases/</url>
         </repository>
     </repositories>
 </project>

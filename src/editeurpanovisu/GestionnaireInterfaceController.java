@@ -602,7 +602,6 @@ public class GestionnaireInterfaceController {
     private Slider slTailleRadarCarte;
     private Slider slOpaciteRadarCarte;
     public NavigateurCarteGluon navigateurCarteOL = null;
-    public AnchorPane apNavigateurCarte;
     private CheckBox cbReplieDemarrageCarte;
 
     /*
@@ -1415,6 +1414,11 @@ public class GestionnaireInterfaceController {
     public void afficheCarte() {
         apVisuCarte.getChildren().clear();
         if (isbAfficheCarte()) {
+            // Initialiser navigateurCarteOL si nécessaire
+            if (navigateurCarteOL == null) {
+                navigateurCarteOL = new NavigateurCarteGluon();
+                navigateurCarteOL.afficheNavigateurOpenLayer();
+            }
             Label lblTitreCarte = new Label("Carte");
             lblTitreCarte.setPrefSize(160, 30);
             lblTitreCarte.setAlignment(Pos.CENTER);
@@ -1422,16 +1426,16 @@ public class GestionnaireInterfaceController {
             lblTitreCarte.setTranslateY(lblTitreCarte.getPrefWidth() / 2 - lblTitreCarte.getPrefHeight() / 2);
             double marge = 10.d;
             AnchorPane apVisuCarte2 = new AnchorPane();
-            apVisuCarte2.getChildren().add(apNavigateurCarte);
+            apVisuCarte2.getChildren().add(navigateurCarteOL);
             apVisuCarte2.setPrefSize(largeurCarte + marge * 2, hauteurCarte + marge * 2);
             apVisuCarte.setPrefSize(largeurCarte + marge * 2 + 30, hauteurCarte + marge * 2);
             apVisuCarte2.setMinSize(largeurCarte + marge * 2, hauteurCarte + marge * 2);
             apVisuCarte2.setMaxSize(largeurCarte + marge * 2, hauteurCarte + marge * 2);
-            apNavigateurCarte.setPrefSize(largeurCarte, hauteurCarte);
-            apNavigateurCarte.setMinSize(largeurCarte, hauteurCarte);
-            apNavigateurCarte.setMaxSize(largeurCarte, hauteurCarte);
-            apNavigateurCarte.setLayoutX(marge);
-            apNavigateurCarte.setLayoutY(marge);
+            navigateurCarteOL.setPrefSize(largeurCarte, hauteurCarte);
+            navigateurCarteOL.setMinSize(largeurCarte, hauteurCarte);
+            navigateurCarteOL.setMaxSize(largeurCarte, hauteurCarte);
+            navigateurCarteOL.setLayoutX(marge);
+            navigateurCarteOL.setLayoutY(marge);
             int rouge, vert, bleu;
             rouge = (int) Math.round(getCouleurFondCarte().getRed() * 255);
             vert = (int) Math.round(getCouleurFondCarte().getGreen() * 255);
