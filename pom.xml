@@ -199,6 +199,31 @@
         </resources>
 
         <plugins>
+            <!-- Build Number Incrementer - Exécuté avant la compilation -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.1.1</version>
+                <executions>
+                    <execution>
+                        <id>increment-build-number</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>powershell</executable>
+                            <arguments>
+                                <argument>-ExecutionPolicy</argument>
+                                <argument>Bypass</argument>
+                                <argument>-File</argument>
+                                <argument>${project.basedir}/increment-build.ps1</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
             <!-- Compiler Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -242,6 +267,12 @@
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <mainClass>editeurpanovisu.EditeurPanovisu</mainClass>
+                                    <manifestEntries>
+                                        <Implementation-Title>${project.name}</Implementation-Title>
+                                        <Implementation-Version>3.0</Implementation-Version>
+                                        <Implementation-Vendor>Laurent LANG</Implementation-Vendor>
+                                        <Built-By>Maven</Built-By>
+                                    </manifestEntries>
                                 </transformer>
                             </transformers>
                             <filters>
@@ -257,6 +288,28 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+
+            <!-- JAR Plugin - Configuration du MANIFEST -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.4.2</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>editeurpanovisu.EditeurPanovisu</mainClass>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                        </manifest>
+                        <manifestEntries>
+                            <Implementation-Title>${project.name}</Implementation-Title>
+                            <Implementation-Version>3.0</Implementation-Version>
+                            <Implementation-Vendor>Laurent LANG</Implementation-Vendor>
+                            <Built-By>Maven ${maven.build.timestamp}</Built-By>
+                            <Created-By>Java ${java.version}</Created-By>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
             </plugin>
 
             <!-- Tests JUnit 5 -->

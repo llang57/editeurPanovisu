@@ -215,5 +215,9 @@ pip-log.txt
 .mr.developer.cfg
 /nbproject/private/
 
+# Maven
+target/
+dependency-reduced-pom.xml
+
 # Fichiers de configuration avec clés API (ne pas versionner)
 api-keys.properties
