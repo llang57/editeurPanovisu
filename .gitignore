@@ -219,5 +219,9 @@ pip-log.txt
 target/
 dependency-reduced-pom.xml
 
+# Dossiers temporaires et de travail
+temp/
+forum/
+
 # Fichiers de configuration avec clés API (ne pas versionner)
 api-keys.properties
