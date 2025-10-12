@@ -1,6 +1,6 @@
 # 📚 Documentation EditeurPanovisu
 
-**Date de mise à jour :** 11 octobre 2025  
+**Date de mise à jour :** 12 octobre 2025  
 **Version :** 2.0.0-SNAPSHOT  
 **Java :** 25 (OpenJDK Temurin-25+36)  
 **JavaFX :** 19.0.2.1
@@ -16,9 +16,26 @@ Documentation relative à la migration vers Java 25 et JavaFX 19.0.2.1
 - **[MEMO_MIGRATION.md](migration/MEMO_MIGRATION.md)** - Notes et mémos de la migration
 - **[QUICKSTART_MIGRATION.md](migration/QUICKSTART_MIGRATION.md)** - Guide rapide de migration
 - **[RESUME_MIGRATION.md](migration/RESUME_MIGRATION.md)** - Résumé de la migration effectuée
+- **[MIGRATION_COMPLETED.md](migration/MIGRATION_COMPLETED.md)** - Migration complète vers Java 25
 - **[PROCHAINES_ETAPES.md](migration/PROCHAINES_ETAPES.md)** - Étapes futures et améliorations prévues
 
-### 🗺️ [geolocalisation/](geolocalisation/)
+### � [installation/](installation/)
+Guides d'installation et de déploiement
+
+- **[INSTALLATION_GUIDE.md](installation/INSTALLATION_GUIDE.md)** - Guide complet d'installation pour développeurs
+  - Solution au problème de lancement jpackage
+  - Architecture batch + VBS + Inno Setup
+  - Procédure de build automatisée
+  
+- **[INSTALLATION_UTILISATEUR.md](installation/INSTALLATION_UTILISATEUR.md)** - Guide d'installation pour utilisateurs finaux
+  - Installation simple par double-clic
+  - Configuration post-installation
+  
+- **[BUILD_EXE_GUIDE.md](installation/BUILD_EXE_GUIDE.md)** - Guide de création de l'installeur Windows
+  - Utilisation de build-installer.ps1
+  - Génération de l'installeur Inno Setup
+
+### �🗺️ [geolocalisation/](geolocalisation/)
 Documentation de la fonctionnalité de géolocalisation avec Leaflet.js et LocationIQ
 
 - **[CORRECTIONS_GEOLOCALISATION.md](geolocalisation/CORRECTIONS_GEOLOCALISATION.md)** - Corrections des 3 problèmes principaux
@@ -50,9 +67,27 @@ Guides d'utilisation, configuration et tutoriels
 - **[API_KEYS_README.md](guides/API_KEYS_README.md)** - README simplifié pour les clés API
   - Instructions de base
   - Configuration minimale
+  
+- **[INTEGRATION_API_IA.md](guides/INTEGRATION_API_IA.md)** - Guide d'intégration des API d'IA
+  - Configuration OpenAI, Claude, Gemini
+  - Utilisation dans l'éditeur
+  
+- **[RESUME_INTEGRATION_API_IA.md](guides/RESUME_INTEGRATION_API_IA.md)** - Résumé de l'intégration IA
+- **[RESUME_CONFIGURATION_API.md](guides/RESUME_CONFIGURATION_API.md)** - Résumé configuration API
 
-### 🏗️ [architecture/](architecture/)
-Documentation de l'architecture du projet *(à venir)*
+### 💻 [development/](development/)
+Documentation pour les développeurs
+
+- **[NOTES_VERSION_JAVA25.md](development/NOTES_VERSION_JAVA25.md)** - Notes spécifiques à Java 25
+- **[CSS_MODERNIZATION_2025.md](development/CSS_MODERNIZATION_2025.md)** - Modernisation du CSS
+- **[FLAT_TITLEDPANE_2025.md](development/FLAT_TITLEDPANE_2025.md)** - Composants JavaFX personnalisés
+- **[VERSIONING.md](development/VERSIONING.md)** - Gestion des versions et numéros de build
+- **[AUDIT_SECURITY_README.md](development/AUDIT_SECURITY_README.md)** - Audit de sécurité du code
+
+### 🏗️ [travail/](travail/)
+Notes de travail et sessions de développement
+
+- **[TRAVAIL_2025-10-11_VERSIONING.md](travail/TRAVAIL_2025-10-11_VERSIONING.md)** - Session versioning
 
 ---
 
@@ -80,14 +115,13 @@ mvn test
 ### ✅ Fonctionnalités Opérationnelles
 
 - **Migration Java 25** : ✅ Complète et fonctionnelle
-- **JavaFX 19.0.2.1** : ✅ Intégré avec succès (downgrade depuis 23.0.1)
-- **Gluon Maps 2.0.0-ea+6** : ✅ Alternative fonctionnelle
-- **Leaflet.js 1.9.4** : ✅ Intégration WebView principale
-- **Géolocalisation LocationIQ** : ✅ API gratuite (5000 req/jour)
-- **Recherche d'adresse** : ✅ Avec centrage automatique
-- **Marqueur déplaçable** : ✅ Mise à jour automatique des coordonnées
-- **Basculement carte/satellite** : ✅ Bidirectionnel
-- **Validation des coordonnées** : ✅ Récupération correcte
+- **JavaFX 19.0.2.1** : ✅ Intégré avec succès
+- **Migration OpenLayers** : ✅ Suppression Google Maps et Bing Maps
+- **Cartes ESRI ArcGIS** : ✅ World Street Map, World Imagery, World Topo Map
+- **OpenStreetMap** : ✅ Intégration complète
+- **Géolocalisation** : ✅ Fonctionnelle
+- **Installeur Windows** : ✅ Inno Setup automatisé (168 MB)
+- **Déploiement** : ✅ Installation sans droits admin (AppData\Local)
 
 ### 🔧 Dépendances Principales
 
@@ -99,37 +133,41 @@ mvn test
 </dependency>
 
 <dependency>
-    <groupId>com.gluonhq</groupId>
-    <artifactId>maps</artifactId>
-    <version>2.0.0-ea+6</version>
+    <groupId>org.openjfx</groupId>
+    <artifactId>javafx-web</artifactId>
+    <version>19.0.2.1</version>
 </dependency>
 ```
 
-### 🔑 Configuration Requise
+### � Outils de Build et Déploiement
 
-**Fichier `src/api-keys.properties` :**
-```properties
-locationiq.api.key=pk.0f147952a41c555a5b70614039fd148b
-```
+- **Maven 3.9.9** : Build automation
+- **jpackage** : Création de l'app-image avec runtime Java embarqué
+- **Inno Setup 6.5.4** : Création de l'installeur Windows
+- **Script PowerShell** : `build-installer.ps1` pour automatisation complète
 
 ---
 
 ## 🎯 Problèmes Résolus Récemment
 
-### 1. TextFields non visibles
-- **Solution** : Ajout de Labels et prompts explicites
-- **Statut** : ✅ Résolu
+### 1. Lancement de l'application depuis l'installeur Windows (12/10/2025)
+- **Problème** : "Failed to launch JVM" au double-clic sur l'EXE jpackage
+- **Cause** : Répertoire de travail incorrect (root au lieu de app/)
+- **Solution** : Launcher batch + VBS + raccourcis Inno Setup personnalisés
+- **Statut** : ✅ Résolu - Installeur automatique de 168 MB
 
-### 2. Erreur "For input string: {JSON}"
-- **Solution** : Priorité à l'objet `marqueur` mis à jour par JavaScript
-- **Statut** : ✅ Résolu
+### 2. Migration OpenLayers - Suppression Google Maps et Bing Maps (12/10/2025)
+- **Problème** : Dépendances aux API propriétaires Google et Bing
+- **Solution** : Migration vers ESRI ArcGIS REST API (World Street Map, Imagery, Topo)
+- **Services supprimés** : Google Maps, Google+, Bing Maps, clés API Bing
+- **Statut** : ✅ Résolu - OpenLayers utilise maintenant OpenStreetMap et ESRI
 
-### 3. Bouton radio unique carte/satellite
-- **Solution** : Fonction `getNomsLayers()` retournant le bon format avec `|` et `*`
-- **Statut** : ✅ Résolu
-
-### 4. Coordonnées toujours à Metz
+### 3. Coordonnées toujours à Metz (11/10/2025)
 - **Solution** : Flag `marqueurMisAJourParJS` pour distinction marqueur initial/mis à jour
+- **Statut** : ✅ Résolu
+
+### 4. Géolocalisation (11/10/2025)
+- **Solutions** : TextFields visibles, validation correcte, basculement bidirectionnel
 - **Statut** : ✅ Résolu
 
 ---
@@ -140,10 +178,32 @@ Pour toute question ou problème, consulter les guides de debug dans le dossier 
 
 ---
 
-## 📝 Historique des Modifications
+## � Build et Installation
+
+### Build de l'installeur Windows
+```powershell
+.\build-installer.ps1
+```
+
+**Génère** :
+- `target\installer\EditeurPanovisu-Setup-2.0.0.exe` (168.42 MB)
+- Inclut le runtime Java 25 complet
+- Installation sans droits administrateur
+- Raccourcis automatiques (Bureau + Menu Démarrer)
+
+### Test en développement
+```powershell
+mvn clean javafx:run
+```
+
+---
+
+## �📝 Historique des Modifications
 
 | Date | Version | Modifications |
 |------|---------|---------------|
+| 12/10/2025 | 2.0.0-SNAPSHOT | ✅ Installeur Inno Setup automatisé (168 MB) |
+| 12/10/2025 | 2.0.0-SNAPSHOT | ✅ Migration OpenLayers : suppression Google/Bing, ajout ESRI |
 | 11/10/2025 | 2.0.0-SNAPSHOT | Correctif marqueur Metz + flag `marqueurMisAJourParJS` |
 | 11/10/2025 | 2.0.0-SNAPSHOT | Corrections géolocalisation (3 problèmes) |
 | 10/10/2025 | 2.0.0-SNAPSHOT | Intégration LocationIQ + marqueur déplaçable |
@@ -151,4 +211,4 @@ Pour toute question ou problème, consulter les guides de debug dans le dossier 
 
 ---
 
-**Dernière mise à jour :** 11 octobre 2025, 08:45
+**Dernière mise à jour :** 12 octobre 2025
