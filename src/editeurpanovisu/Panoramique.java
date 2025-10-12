@@ -57,6 +57,7 @@ public class Panoramique {
     private double zeroNord = 0;
     private double nombreNiveaux = 0;
     private CoordonneesGeographiques marqueurGeolocatisation=null;
+    private String strDescriptionIA = "";
 
    /**
     * 
@@ -622,6 +623,20 @@ public class Panoramique {
      */
     public void setFovMin(double fovMin) {
         this.fovMin = fovMin;
+    }
+
+    /**
+     * @return the strDescriptionIA
+     */
+    public String getStrDescriptionIA() {
+        return strDescriptionIA != null ? strDescriptionIA : "";
+    }
+
+    /**
+     * @param strDescriptionIA the strDescriptionIA to set
+     */
+    public void setStrDescriptionIA(String strDescriptionIA) {
+        this.strDescriptionIA = strDescriptionIA != null ? strDescriptionIA : "";
     }
 
 }
