@@ -26,7 +26,6 @@ import javafx.animation.Timeline;
 import javafx.application.ConditionalFeature;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.geometry.NodeOrientation;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.PerspectiveCamera;
@@ -43,14 +42,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.PhongMaterial;
-import javafx.scene.shape.CullFace;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Sphere;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
-import editeurpanovisu.BigDecimalField;
 
 /**
  *
@@ -95,11 +90,11 @@ public final class NavigateurPanoramique {
                 oldValue, newValue));
 
     }
-    private double maxFov = 70;
-    private double minFov = 7;
+    private double maxFov = 35;  // Limité à 35° (70° pour la caméra avec *2) pour éviter l'inversion
+    private double minFov = 1;   // 1° pour permettre un zoom important
     private boolean bChoixHotSpot = false;
     private double anchorX, anchorY,
-            latitude = 0, longitude = 0, fov = 70, positNord = 32,
+            latitude = 0, longitude = 0, fov = 35, positNord = 32,
             choixLongitude = 0, choixLatitude = 0, choixFov = 50,
             largeurImage = 340, hauteurImage = 200, positX = 100, positY = 100,
             bougeX, bougeY,
@@ -112,14 +107,16 @@ public final class NavigateurPanoramique {
     private boolean bMouvement = false;
     private final BigDecimalField bdfLong = new BigDecimalField(new BigDecimal(0)),
             bdfLat = new BigDecimalField(new BigDecimal(0)),
-            bdfFOV = new BigDecimalField(new BigDecimal(70));
+            bdfFOV = new BigDecimalField(new BigDecimal(35));
+    private final Label lblLongValue = new Label("0.00");
+    private final Label lblLatValue = new Label("0.00");
+    private final Label lblFovValue = new Label("35.00");
     private String nomFichierPanoramique = "";
     private int iChangeVignette = 0;
     private Image imgPanoramique;
     private Button btnChoixNord, btnChoixVue, btnChoixVignette;
-    private final Sphere spPanorama = new Sphere(200, 100);
-    private final Group root = new Group(spPanorama);
-    private final PhongMaterial phmPanorama = new PhongMaterial();
+    private final PanoramicCube panoramicCube = new PanoramicCube();
+    private final Group root = new Group(panoramicCube);
     private ResourceBundle rbLocalisation = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", EditeurPanovisu.getLocale());
     private Image imgVignetteHS;
 
@@ -289,6 +286,11 @@ public final class NavigateurPanoramique {
         bdfLong.setNumber(new BigDecimal(getLongitude()));
         bdfLat.setNumber(new BigDecimal(getLatitude()));
         bdfFOV.setNumber(new BigDecimal(getFov()));
+        
+        // Mise à jour des labels d'affichage
+        lblLongValue.setText(String.format("Long: %.2f°", getLongitude()));
+        lblLatValue.setText(String.format("Lat: %.2f°", getLatitude()));
+        lblFovValue.setText(String.format("FOV: %.2f°", getFov()));
     }
 
     public void changeTaille(double largeur, double hauteur) {
@@ -300,7 +302,7 @@ public final class NavigateurPanoramique {
     private void reaffiche() {
         apPanorama.getChildren().clear();
         if (Platform.isSupported(ConditionalFeature.SCENE3D)) {
-            spPanorama.setRotationAxis(Rotate.Y_AXIS);
+            panoramicCube.setRotationAxis(Rotate.Y_AXIS);
             sscPanorama.setWidth(largeurImage);
             sscPanorama.setHeight(hauteurImage);
             apNord = new AnchorPane();
@@ -361,26 +363,56 @@ public final class NavigateurPanoramique {
             apNord.setClip(new Rectangle(largeurImage, 20));
             sscPanorama.setLayoutX(positX);
             sscPanorama.setLayoutY(positY + 30);
-            bdfLong.setPrefWidth((largeurImage - 30) / 3 - 10);
-            bdfLat.setPrefWidth((largeurImage - 30) / 3 - 10);
-            bdfFOV.setPrefWidth((largeurImage - 30) / 3 - 10);
-            bdfLong.setMaxWidth((largeurImage - 30) / 3 - 10);
-            bdfLat.setMaxWidth((largeurImage - 30) / 3 - 10);
-            bdfFOV.setMaxWidth((largeurImage - 30) / 3 - 10);
-            bdfLong.setMinWidth((largeurImage - 30) / 3 - 10);
-            bdfLat.setMinWidth((largeurImage - 30) / 3 - 10);
-            bdfFOV.setMinWidth((largeurImage - 30) / 3 - 10);
-            bdfLong.setLayoutX(positX + 40);
+            bdfLong.setPrefWidth((largeurImage) / 3);
+            bdfLat.setPrefWidth((largeurImage) / 3);
+            bdfFOV.setPrefWidth((largeurImage) / 3);
+            bdfLong.setMaxWidth((largeurImage) / 3);
+            bdfLat.setMaxWidth((largeurImage) / 3);
+            bdfFOV.setMaxWidth((largeurImage) / 3);
+            bdfLong.setMinWidth((largeurImage) / 3);
+            bdfLat.setMinWidth((largeurImage) / 3);
+            bdfFOV.setMinWidth((largeurImage) / 3);
+            bdfLong.setPrefHeight(25);
+            bdfLat.setPrefHeight(25);
+            bdfFOV.setPrefHeight(25);
+            // BigDecimalField masqués (on utilise les Labels à la place)
+            bdfLong.setVisible(false);
+            bdfLat.setVisible(false);
+            bdfFOV.setVisible(false);
+            bdfLong.setLayoutX(positX);
             bdfLong.setLayoutY(positY);
-            bdfLat.setLayoutX(positX + 40 + (largeurImage - 30) / 3);
+            bdfLat.setLayoutX(positX + (largeurImage) / 3);
             bdfLat.setLayoutY(positY);
-            bdfFOV.setLayoutX(positX + 40 + 2 * (largeurImage - 30) / 3);
+            bdfFOV.setLayoutX(positX + 2 * (largeurImage) / 3);
             bdfFOV.setLayoutY(positY);
+            
+            // Labels d'affichage des coordonnées (style moderne flat design 2025)
+            String labelStyleModerne = "-fx-background-color: rgba(255, 255, 255, 0.96); "
+                    + "-fx-text-fill: #1A1A1A; "
+                    + "-fx-padding: 6 12 6 12; "
+                    + "-fx-font-size: 13px; "
+                    + "-fx-font-weight: 500; "
+                    + "-fx-font-family: 'Segoe UI', 'Roboto', system-ui; "
+                    + "-fx-border-color: rgba(0, 0, 0, 0.10); "
+                    + "-fx-border-width: 1; "
+                    + "-fx-background-radius: 6; "
+                    + "-fx-border-radius: 6; "
+                    + "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.12), 3, 0, 0, 1);";
+            lblLongValue.setStyle(labelStyleModerne);
+            lblLatValue.setStyle(labelStyleModerne);
+            lblFovValue.setStyle(labelStyleModerne);
+            lblLongValue.setLayoutX(positX);
+            lblLongValue.setLayoutY(positY + 3);
+            lblLatValue.setLayoutX(positX + (largeurImage) / 3);
+            lblLatValue.setLayoutY(positY + 3);
+            lblFovValue.setLayoutX(positX + 2 * (largeurImage) / 3);
+            lblFovValue.setLayoutY(positY + 3);
+            
             bdfLong.setMinValue(new BigDecimal(-181));
             bdfLong.setMaxValue(new BigDecimal(181));
             bdfLat.setMinValue(new BigDecimal(-90));
             bdfLat.setMaxValue(new BigDecimal(90));
-            bdfFOV.setMaxValue(new BigDecimal(getMinFov()));
+            bdfFOV.setMinValue(new BigDecimal(getMinFov()));
             bdfFOV.setMaxValue(new BigDecimal(getMaxFov()));
             apPanorama.getChildren().add(sscPanorama);
             apPanorama.setPrefWidth(largeurImage + 2 * positX);
@@ -390,7 +422,7 @@ public final class NavigateurPanoramique {
             apPanorama.setMinHeight(hauteurImage + 2 * positY + 60);
             apPanorama.setMaxHeight(hauteurImage + 2 * positY + 60);
             //apPanorama.setStyle("-fx-background-color : #ccc;");
-            apPanorama.getChildren().addAll(apNord, bdfLong, bdfLat, bdfFOV);
+            apPanorama.getChildren().addAll(apNord, bdfLong, bdfLat, bdfFOV, lblLongValue, lblLatValue, lblFovValue);
             sscPanorama.setFocusTraversable(true);
 
             Button btnHome = new Button("", new ImageView(new Image("file:" + getStrRepertAppli() + File.separator + "images/maison.png", 15, 15, true, true)));
@@ -536,26 +568,32 @@ public final class NavigateurPanoramique {
             lblPanorama.setPrefHeight(hauteurImage + 2 * positY + 60);
             lblPanorama.setMinHeight(hauteurImage + 2 * positY + 60);
             lblPanorama.setMaxHeight(hauteurImage + 2 * positY + 60);
-            bdfLong.setPrefWidth((largeurImage - 30) / 3 - 10);
-            bdfLat.setPrefWidth((largeurImage - 30) / 3 - 10);
-            bdfFOV.setPrefWidth((largeurImage - 30) / 3 - 10);
-            bdfLong.setMaxWidth((largeurImage - 30) / 3 - 10);
-            bdfLat.setMaxWidth((largeurImage - 30) / 3 - 10);
-            bdfFOV.setMaxWidth((largeurImage - 30) / 3 - 10);
-            bdfLong.setMinWidth((largeurImage - 30) / 3 - 10);
-            bdfLat.setMinWidth((largeurImage - 30) / 3 - 10);
-            bdfFOV.setMinWidth((largeurImage - 30) / 3 - 10);
-            bdfLong.setLayoutX(positX + 40);
+            bdfLong.setPrefWidth((largeurImage) / 3);
+            bdfLat.setPrefWidth((largeurImage) / 3);
+            bdfFOV.setPrefWidth((largeurImage) / 3);
+            bdfLong.setMaxWidth((largeurImage) / 3);
+            bdfLat.setMaxWidth((largeurImage) / 3);
+            bdfFOV.setMaxWidth((largeurImage) / 3);
+            bdfLong.setMinWidth((largeurImage) / 3);
+            bdfLat.setMinWidth((largeurImage) / 3);
+            bdfFOV.setMinWidth((largeurImage) / 3);
+            bdfLong.setPrefHeight(25);
+            bdfLat.setPrefHeight(25);
+            bdfFOV.setPrefHeight(25);
+            bdfLong.setStyle("-fx-background-color: white; -fx-border-color: #ccc; -fx-font-size: 12px;");
+            bdfLat.setStyle("-fx-background-color: white; -fx-border-color: #ccc; -fx-font-size: 12px;");
+            bdfFOV.setStyle("-fx-background-color: white; -fx-border-color: #ccc; -fx-font-size: 12px;");
+            bdfLong.setLayoutX(positX);
             bdfLong.setLayoutY(positY);
-            bdfLat.setLayoutX(positX + 40 + (largeurImage - 30) / 3);
+            bdfLat.setLayoutX(positX + (largeurImage) / 3);
             bdfLat.setLayoutY(positY);
-            bdfFOV.setLayoutX(positX + 40 + 2 * (largeurImage - 30) / 3);
+            bdfFOV.setLayoutX(positX + 2 * (largeurImage) / 3);
             bdfFOV.setLayoutY(positY);
             bdfLong.setMinValue(new BigDecimal(-181));
             bdfLong.setMaxValue(new BigDecimal(181));
             bdfLat.setMinValue(new BigDecimal(-90));
             bdfLat.setMaxValue(new BigDecimal(90));
-            bdfFOV.setMaxValue(new BigDecimal(getMinFov()));
+            bdfFOV.setMinValue(new BigDecimal(getMinFov()));
             bdfFOV.setMaxValue(new BigDecimal(getMaxFov()));
             bdfLong.setNumber(new BigDecimal(0));
             bdfLat.setNumber(new BigDecimal(0));
@@ -640,12 +678,7 @@ public final class NavigateurPanoramique {
         apPanorama.setStyle("-fx-background-color :-fx-background");
         if (Platform.isSupported(ConditionalFeature.SCENE3D)) {
 
-            phmPanorama.setDiffuseMap(this.getImgPanoramique());
-            phmPanorama.setSpecularMap(this.getImgPanoramique());
-
-            spPanorama.setCullFace(CullFace.FRONT);
-            spPanorama.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
-            spPanorama.setMaterial(phmPanorama);
+            panoramicCube.setPanoramicImage(this.getImgPanoramique());
             sscPanorama = new SubScene(root, largeurImage, hauteurImage);
         }
 
@@ -657,15 +690,13 @@ public final class NavigateurPanoramique {
 
     public void setNomImagePanoramique(String strImagePanoramique, int iRapport) {
         this.setNomFichierPanoramique(strImagePanoramique);
-        phmPanorama.setDiffuseMap(this.getImgPanoramique());
-        phmPanorama.setSpecularMap(this.getImgPanoramique());
+        panoramicCube.setPanoramicImage(this.getImgPanoramique());
     }
 
     public void setImagePanoramique(String strImagePanoramique, Image imgPanoramique) {
         this.setNomFichierPanoramique(strImagePanoramique);
         this.setImgPanoramique(imgPanoramique);
-        phmPanorama.setDiffuseMap(imgPanoramique);
-        phmPanorama.setSpecularMap(imgPanoramique);
+        panoramicCube.setPanoramicImage(imgPanoramique);
     }
 
     /**
@@ -714,7 +745,8 @@ public final class NavigateurPanoramique {
      */
     public void setFov(double fov) {
         double ancienneValeur = this.fov;
-        this.fov = fov;
+        // Limiter le FOV pour éviter l'inversion de la caméra
+        this.fov = Math.max(getMinFov(), Math.min(fov, getMaxFov()));
         double nouvelleValeur = this.fov;
         this.changeSupport.firePropertyChange("fov", ancienneValeur, nouvelleValeur);
     }
@@ -826,7 +858,13 @@ public final class NavigateurPanoramique {
      * @param maxFov the maxFov to set
      */
     public void setMaxFov(double maxFov) {
-        this.maxFov = maxFov;
+        // FORCER les nouvelles limites (ignorer les anciennes valeurs des fichiers projets)
+        if (maxFov > 40) {
+            System.out.println("⚠️ setMaxFov() - Valeur " + maxFov + "° refusée, forcée à 35°");
+            this.maxFov = 35;
+        } else {
+            this.maxFov = Math.min(maxFov, 35);
+        }
     }
 
     /**
@@ -840,7 +878,13 @@ public final class NavigateurPanoramique {
      * @param minFov the minFov to set
      */
     public void setMinFov(double minFov) {
-        this.minFov = minFov;
+        // FORCER les nouvelles limites (ignorer les anciennes valeurs des fichiers projets)
+        if (minFov > 10) {
+            System.out.println("⚠️ setMinFov() - Valeur " + minFov + "° refusée, forcée à 1°");
+            this.minFov = 1;
+        } else {
+            this.minFov = Math.max(minFov, 1);
+        }
     }
 
     /**

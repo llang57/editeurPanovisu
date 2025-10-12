@@ -10,8 +10,9 @@ import static editeurpanovisu.EditeurPanovisu.getStrStyleCSS;
 import static editeurpanovisu.EditeurPanovisu.setStrStyleCSS;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -186,13 +187,13 @@ public class ConfigDialogController {
             contenuFichier += "style=" + tgStyle.getSelectedToggle().getUserData().toString() + "\n";
             File fichConfig = new File(EditeurPanovisu.fileRepertConfig.getAbsolutePath() + File.separator + "panovisu.cfg");
             fichConfig.setWritable(true);
-            FileWriter fwFichierConfig = null;
+            OutputStreamWriter oswFichierConfig = null;
             try {
-                fwFichierConfig = new FileWriter(fichConfig);
+                oswFichierConfig = new OutputStreamWriter(new FileOutputStream(fichConfig), "UTF-8");
             } catch (IOException ex) {
                 Logger.getLogger(ConfigDialogController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            BufferedWriter bwFichierConfig = new BufferedWriter(fwFichierConfig);
+            BufferedWriter bwFichierConfig = new BufferedWriter(oswFichierConfig);
             try {
                 bwFichierConfig.write(contenuFichier);
             } catch (IOException ex) {

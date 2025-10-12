@@ -28,7 +28,7 @@ public class BigDecimalField extends TextField {
      * Constructeur par défaut
      */
     public BigDecimalField() {
-        this(new DecimalFormat("#,##0.00"));
+        this(new DecimalFormat("0.00"));
     }
     
     /**
@@ -54,25 +54,20 @@ public class BigDecimalField extends TextField {
      * Configure le TextField avec validation
      */
     private void setupTextField() {
-        // Pattern pour valider les nombres décimaux (accepte , et . comme séparateurs)
-        Pattern validEditingState = Pattern.compile("-?(([1-9][0-9]*)|0)?(\\[.,][0-9]*)?");
-        
-        UnaryOperator<TextFormatter.Change> filter = c -> {
-            String text = c.getControlNewText();
-            if (validEditingState.matcher(text).matches()) {
-                return c;
-            } else {
-                return null;
-            }
-        };
-        
-        TextFormatter<String> textFormatter = new TextFormatter<>(filter);
-        this.setTextFormatter(textFormatter);
+        // Désactivation temporaire du TextFormatter qui bloque l'affichage
+        // Le TextFormatter sera réactivé plus tard si nécessaire
         
         // Validation à la perte de focus
         this.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
             if (!isNowFocused) {
                 validateAndFormat();
+            }
+        });
+        
+        // Permettre uniquement les caractères numériques lors de la saisie
+        this.textProperty().addListener((obs, oldValue, newValue) -> {
+            if (newValue != null && !newValue.matches("-?[0-9]*\\.?[0-9]*")) {
+                setText(oldValue);
             }
         });
     }
@@ -130,10 +125,15 @@ public class BigDecimalField extends TextField {
     public void setNumber(BigDecimal value) {
         if (value != null) {
             number.set(value);
-            setText(format.format(value));
+            String formatted = format.format(value);
+            // Contourner le TextFormatter en utilisant Platform.runLater
+            javafx.application.Platform.runLater(() -> {
+                this.setText(formatted);
+                this.positionCaret(formatted.length());
+            });
         } else {
             number.set(BigDecimal.ZERO);
-            setText("");
+            javafx.application.Platform.runLater(() -> this.setText("0.00"));
         }
     }
     
