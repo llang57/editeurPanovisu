@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Fragment>
+    <CustomAction Id="CreateLauncherBatch" 
+                  Directory="INSTALLDIR" 
+                  ExeCommand='cmd.exe /c "echo @echo off > Lancer_EditeurPanovisu.bat && echo cd /d "[INSTALLDIR]app" >> Lancer_EditeurPanovisu.bat && echo start """" "[INSTALLDIR]runtime\bin\javaw.exe" -Dfile.encoding=UTF-8 --enable-preview --enable-native-access=ALL-UNNAMED -Xms512m -Xmx2048m -jar "editeurPanovisu-2.0.0-SNAPSHOT.jar" >> Lancer_EditeurPanovisu.bat"'
+                  Execute="deferred"
+                  Return="check"
+                  Impersonate="no"/>
+    
+    <InstallExecuteSequence>
+      <Custom Action="CreateLauncherBatch" After="InstallFiles">NOT Installed</Custom>
+    </InstallExecuteSequence>
+  </Fragment>
+</Wix>

@@ -34,9 +34,9 @@ Name: "french"; MessagesFile: "compiler:Languages\French.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-; Copier TOUS les fichiers de l'image d'application
-Source: "target\dist-msi\EditeurPanovisu\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-; NOTE: Ne pas utiliser "Flags: ignoreversion" sur les exécutables système
+; Copier TOUS les fichiers de l'image d'application SAUF configPV (contient des clés API)
+Source: "target\dist-msi\EditeurPanovisu\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Excludes: "configPV"
+; NOTE: configPV est créé automatiquement au premier lancement de l'application
 
 [Icons]
 ; Raccourci Menu Démarrer - pointe vers le VBS

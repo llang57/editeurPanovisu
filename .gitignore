@@ -223,5 +223,8 @@ dependency-reduced-pom.xml
 temp/
 forum/
 
+# Configuration utilisateur (contient potentiellement des clés API)
+configPV/
+
 # Fichiers de configuration avec clés API (ne pas versionner)
 api-keys.properties
