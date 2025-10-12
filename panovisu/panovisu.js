@@ -357,13 +357,9 @@ function panovisu(iNumPano) {
     var
             map,
             openStreetMap,
-            googleMap,
-            googleHybride,
-            googlePhysique,
-            googleSatellite,
-            bingMap = null,
-            bingHybride = null,
-            bingSatellite = null,
+            esriWorldStreetMap = null,
+            esriWorldImagery = null,
+            esriWorldTopo = null,
             layerMarqueurs,
             layerRadar,
             arrMarqueurs = new Array(),
@@ -509,7 +505,6 @@ function panovisu(iNumPano) {
             reseauxSociauxTaille,
             strReseauxSociauxTwitter,
             strReseauxSociauxFacebook,
-            strReseauxSociauxGoogle,
             strReseauxSociauxEmail,
             strVignettesAffiche,
             bVignettes,
@@ -555,7 +550,6 @@ function panovisu(iNumPano) {
             coordCentreLong,
             coordCentreLat,
             strNomLayerCarte,
-            strBingAPIKey,
             bAfficheMenuContextuel,
             bPrecedentSuivantMenuContextuel,
             bPlaneteMenuContextuel,
@@ -2989,23 +2983,20 @@ function panovisu(iNumPano) {
             $("#reseauxSociaux-" + iNumPano).css(strReseauxSociauxPositionX, reseauxSociauxDX + "px");
             $("#reseauxSociaux-" + iNumPano).css(strReseauxSociauxPositionY, reseauxSociauxDY + "px");
             $("#reseauxSociaux-" + iNumPano).css({
-                width: (reseauxSociauxTaille + 5) * 4 - 5 + "px",
+                width: (reseauxSociauxTaille + 5) * 3 - 5 + "px",
                 height: reseauxSociauxTaille + "px"
             });
             $("#reseauxSociaux-" + iNumPano).css("opacity", reseauxSociauxOpacite);
             $("#RSTW-" + iNumPano).attr("src", "panovisu/images/reseaux/twitter.png");
-            $("#RSGO-" + iNumPano).attr("src", "panovisu/images/reseaux/google.png");
             $("#RSFB-" + iNumPano).attr("src", "panovisu/images/reseaux/facebook.png");
             $("#RSEM-" + iNumPano).attr("src", "panovisu/images/reseaux/email.png");
-            $("#RSTW-" + iNumPano + ", #RSGO-" + iNumPano + ", #RSFB-" + iNumPano + ", #RSEM-" + iNumPano).css({
+            $("#RSTW-" + iNumPano + ", #RSFB-" + iNumPano + ", #RSEM-" + iNumPano).css({
                 width: reseauxSociauxTaille + "px",
                 height: reseauxSociauxTaille + "px",
                 top: "0px"
             });
             if (strReseauxSociauxTwitter === "non")
                 $("#RSTW-" + iNumPano).hide(0);
-            if (strReseauxSociauxGoogle === "non")
-                $("#RSGO-" + iNumPano).hide(0);
             if (strReseauxSociauxFacebook === "non")
                 $("#RSFB-" + iNumPano).hide(0);
             if (strReseauxSociauxEmail === "non")
@@ -3201,7 +3192,7 @@ function panovisu(iNumPano) {
                 });
 
                 dessineCarte("carteOL-" + iNumPano);
-                setBingApiKey(strBingAPIKey);
+                initEsriLayers();
                 changeLayer(strNomLayerCarte);
 
                 if (strAfficheTitre === "oui") {
@@ -4694,9 +4685,9 @@ function panovisu(iNumPano) {
         $("#infoBulle").remove();
         $("#infoBulle").remove();
         $("#infoBulle").remove();
-        bingMap = null;
-        bingHybride = null;
-        bingSatellite = null;
+        esriWorldStreetMap = null;
+        esriWorldImagery = null;
+        esriWorldTopo = null;
         fichierXML = xmlFile;
         bMemPlanRentre = bPlanRentre;
         bMemCarteRentre = bCarteRentre;
@@ -4814,7 +4805,6 @@ function panovisu(iNumPano) {
                     reseauxSociauxTaille = 30;
                     strReseauxSociauxTwitter = "non";
                     strReseauxSociauxFacebook = "non";
-                    strReseauxSociauxGoogle = "non";
                     strReseauxSociauxEmail = "non";
                     strVignettesAffiche = "non";
                     bVignettes = false;
@@ -4886,7 +4876,6 @@ function panovisu(iNumPano) {
                     coordCentreLong = 0.0;
                     coordCentreLat = 0.0;
                     strNomLayerCarte = "OpenStreetMap";
-                    strBingAPIKey = "";
                     arrPointsCarte = new Array;
                     bAfficheMenuContextuel = true;
                     bPrecedentSuivantMenuContextuel = true;
@@ -5113,7 +5102,6 @@ function panovisu(iNumPano) {
                     reseauxSociauxTaille = parseFloat(XMLReseauxSociaux.attr('taille')) || reseauxSociauxTaille;
                     strReseauxSociauxTwitter = XMLReseauxSociaux.attr('twitter') || strReseauxSociauxTwitter;
                     strReseauxSociauxFacebook = XMLReseauxSociaux.attr('facebook') || strReseauxSociauxFacebook;
-                    strReseauxSociauxGoogle = XMLReseauxSociaux.attr('google') || strReseauxSociauxGoogle;
                     strReseauxSociauxEmail = XMLReseauxSociaux.attr('email') || strReseauxSociauxEmail;
                     /*
                      * Bouton de masquage
@@ -5397,7 +5385,6 @@ function panovisu(iNumPano) {
                     coordCentreLong = parseFloat(XMLCarte.attr("coordCentreLong")) || coordCentreLong;
                     coordCentreLat = parseFloat(XMLCarte.attr("coordCentreLat")) || coordCentreLat;
                     strNomLayerCarte = XMLCarte.attr("nomLayer") || strNomLayerCarte;
-                    strBingAPIKey = XMLCarte.attr("bingAPIKey") || strBingAPIKey;
                     strAfficheRadarCarte = XMLCarte.attr('radarCarteAffiche') || "non";
                     iRadarCarteTaille = parseInt(XMLCarte.attr('radarCarteTaille')) || iRadarCarteTaille;
                     radarCarteOpacite = parseFloat(XMLCarte.attr('radarCarteOpacite')) || radarCarteOpacite;
@@ -5473,7 +5460,6 @@ function panovisu(iNumPano) {
         $("#marcheArret-" + iNumPano).hide();
         $("<div>", {id: "reseauxSociaux-" + iNumPano, class: "reseauxSociaux"}).appendTo("#" + fenetrePanoramique);
         $("<img>", {id: "RSTW-" + iNumPano, class: "RS reseauSocial-twitter", src: "", title: "twitter"}).appendTo("#reseauxSociaux-" + iNumPano);
-        $("<img>", {id: "RSGO-" + iNumPano, class: "RS reseauSocial-google", src: "", title: "google"}).appendTo("#reseauxSociaux-" + iNumPano);
         $("<img>", {id: "RSFB-" + iNumPano, class: "RS reseauSocial-fb", src: "", title: "facebook"}).appendTo("#reseauxSociaux-" + iNumPano);
         $("<a>", {id: "lienEmail" + iNumPano, class: "RS reseauSocial-email", href: ""}).appendTo("#reseauxSociaux-" + iNumPano);
         $("<img>", {id: "RSEM-" + iNumPano, src: "", title: "email"}).appendTo("#lienEmail" + iNumPano);
@@ -6289,47 +6275,56 @@ function panovisu(iNumPano) {
             }
         }
     }
-    var resolutions = OpenLayers.Layer.Bing.prototype.serverResolutions.slice(10, 20);
     /**
-     * 
-     * @param {type} bingApiKey
+     * Initialise les couches cartographiques ESRI (ArcGIS)
+     * Propose World Street Map, World Imagery et World Topo Map
      * @returns {undefined}
      */
-    function setBingApiKey(bingApiKey) {
-        if (bingApiKey !== "") {
-            if (bingMap === null) {
-                bingMap = new OpenLayers.Layer.Bing({
-                    name: "Bing",
-                    type: "Road",
-                    key: bingApiKey,
-                    zoomOffset: 10,
-                    resolutions: resolutions,
+    function initEsriLayers() {
+        if (esriWorldStreetMap === null) {
+            // ESRI World Street Map - Carte routière détaillée
+            esriWorldStreetMap = new OpenLayers.Layer.XYZ(
+                "ESRI World Street Map",
+                [
+                    "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/${z}/${y}/${x}"
+                ],
+                {
+                    sphericalMercator: true,
+                    isBaseLayer: true,
                     numZoomLevels: 19,
                     transitionEffect: "resize"
+                }
+            );
 
-                });
-                bingHybride = new OpenLayers.Layer.Bing({
-                    name: "Bing Hybride",
-                    type: "AerialWithLabels",
-                    key: bingApiKey,
-                    zoomOffset: 10,
-                    resolutions: resolutions,
+            // ESRI World Imagery - Imagerie satellitaire
+            esriWorldImagery = new OpenLayers.Layer.XYZ(
+                "ESRI World Imagery",
+                [
+                    "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/${z}/${y}/${x}"
+                ],
+                {
+                    sphericalMercator: true,
+                    isBaseLayer: true,
                     numZoomLevels: 19,
                     transitionEffect: "resize"
+                }
+            );
 
-                });
-                bingSatellite = new OpenLayers.Layer.Bing({
-                    name: "Bing Satellite",
-                    type: "Aerial",
-                    key: bingApiKey,
-                    zoomOffset: 10,
-                    resolutions: resolutions,
+            // ESRI World Topo Map - Carte topographique
+            esriWorldTopo = new OpenLayers.Layer.XYZ(
+                "ESRI World Topo Map",
+                [
+                    "https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/${z}/${y}/${x}"
+                ],
+                {
+                    sphericalMercator: true,
+                    isBaseLayer: true,
                     numZoomLevels: 19,
                     transitionEffect: "resize"
+                }
+            );
 
-                });
-                map.addLayers([bingMap, bingHybride, bingSatellite]);
-            }
+            map.addLayers([esriWorldStreetMap, esriWorldImagery, esriWorldTopo]);
         }
     }
 
@@ -6389,7 +6384,6 @@ function panovisu(iNumPano) {
                 });
 
         openStreetMap = new OpenLayers.Layer.OSM.Mapnik("OpenStreetMap", {
-            zoomOffset: 10, resolutions: resolutions,
             numZoomLevels: 20,
             transitionEffect: "resize"
         });
@@ -6401,33 +6395,6 @@ function panovisu(iNumPano) {
         layerRadar = creeRadar("none", "red", 0.4, 35);
         map.addLayers([openStreetMap, layerRadar, layerMarqueurs]);
         map.autoUpdateSize = false;
-        googleMap = new OpenLayers.Layer.Google("Google", {
-            minZoomLevel: 10,
-            maxZoomLevel: 20,
-            transitionEffect: "resize"
-        });
-        googlePhysique = new OpenLayers.Layer.Google("Google Physique", {
-            type: google.maps.MapTypeId.TERRAIN,
-            minZoomLevel: 10,
-            maxZoomLevel: 16,
-            transitionEffect: "resize"
-
-        });
-        googleHybride = new OpenLayers.Layer.Google("Google Hybride", {
-            type: google.maps.MapTypeId.HYBRID,
-            minZoomLevel: 10,
-            maxZoomLevel: 20,
-            transitionEffect: "resize"
-
-        });
-        googleSatellite = new OpenLayers.Layer.Google("Google Satellite", {
-            type: google.maps.MapTypeId.SATELLITE,
-            minZoomLevel: 10,
-            maxZoomLevel: 20,
-            transitionEffect: "resize"
-
-        });
-        map.addLayers([googlePhysique, googleMap, googleHybride, googleSatellite]);
 
         map.events.register('move', map, function () {
             if (bRadar) {
