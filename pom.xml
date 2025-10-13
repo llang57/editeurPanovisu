@@ -158,6 +158,27 @@
             <version>0.22.0</version>
         </dependency>
 
+        <!-- AtlantaFX - Thèmes modernes JavaFX -->
+        <dependency>
+            <groupId>io.github.mkpaz</groupId>
+            <artifactId>atlantafx-base</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+
+        <!-- MaterialFX - Composants Material Design - TEST OK ✅ -->
+        <dependency>
+            <groupId>io.github.palexdev</groupId>
+            <artifactId>materialfx</artifactId>
+            <version>11.17.0</version>
+        </dependency>
+
+        <!-- FlatLaf - Thèmes modernes plats - TEST OK ✅ -->
+        <dependency>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf</artifactId>
+            <version>3.6.2</version>
+        </dependency>
+
         <!-- Tests -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -221,6 +242,7 @@
                     <include>**/*.jpg</include>
                     <include>**/*.gif</include>
                     <include>**/*.md</include>
+                    <include>**/*.ttf</include>
                 </includes>
             </resource>
             <!-- Documentation Markdown -->
@@ -441,7 +463,7 @@
                     
                     <!-- Chemin vers le JAR avec dépendances et ressources -->
                     <input>target/app-input</input>
-                    <mainJar>editeurPanovisu-2.0.0-SNAPSHOT.jar</mainJar>
+                    <mainJar>editeurPanovisu-3.0.0-SNAPSHOT.jar</mainJar>
                     <mainClass>editeurpanovisu.Launcher</mainClass>
                     
                     <!-- Utiliser le runtime Java complet au lieu de jlink -->

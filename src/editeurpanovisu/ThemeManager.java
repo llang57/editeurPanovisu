@@ -8,44 +8,104 @@ import java.util.prefs.Preferences;
 
 /**
  * Gestionnaire de thèmes pour l'application EditeurPanovisu.
- * Permet de basculer entre différents thèmes modernes AtlantaFX.
+ * Permet de basculer entre différents thèmes modernes (AtlantaFX, MaterialFX, FlatLaf).
  */
 public class ThemeManager {
     
     /**
-     * Liste des thèmes disponibles
+     * Type de bibliothèque de thème
+     */
+    public enum ThemeProvider {
+        ATLANTAFX,
+        MATERIALFX,
+        FLATLAF,
+        CUSTOM
+    }
+    
+    /**
+     * Liste des thèmes disponibles - organisés par thème clair/sombre
      */
     public enum Theme {
-        // Thèmes clairs
-        PRIMER_LIGHT("Primer Light", new PrimerLight(), false),
-        NORD_LIGHT("Nord Light", new NordLight(), false),
-        CUPERTINO_LIGHT("Cupertino Light", new CupertinoLight(), false),
+        // ═══════════════════════════════════════════════════════════
+        // 🌞 THÈMES CLAIRS
+        // ═══════════════════════════════════════════════════════════
         
-        // Thèmes sombres
-        PRIMER_DARK("Primer Dark", new PrimerDark(), true),
-        NORD_DARK("Nord Dark", new NordDark(), true),
-        CUPERTINO_DARK("Cupertino Dark", new CupertinoDark(), true),
-        DRACULA("Dracula", new Dracula(), true),
+        // AtlantaFX - Thèmes clairs
+        PRIMER_LIGHT("Primer Light", ThemeProvider.ATLANTAFX, "PrimerLight", false),
+        NORD_LIGHT("Nord Light", ThemeProvider.ATLANTAFX, "NordLight", false),
+        CUPERTINO_LIGHT("Cupertino Light", ThemeProvider.ATLANTAFX, "CupertinoLight", false),
         
-        // Thèmes personnalisés legacy (vos CSS actuels)
-        CUSTOM_LIGHT("Thème Clair Personnalisé", null, false),
-        CUSTOM_DARK("Thème Foncé Personnalisé", null, true);
+        // MaterialFX - Thème clair
+        MATERIAL_LIGHT("Material Light", ThemeProvider.MATERIALFX, null, false),
+        
+        // FlatLaf - Thèmes clairs
+        FLATLAF_LIGHT("FlatLaf Light", ThemeProvider.FLATLAF, null, false),
+        FLATLAF_INTELLIJ("FlatLaf IntelliJ", ThemeProvider.FLATLAF, "IntelliJ", false),
+        
+        // Personnalisé legacy
+        CUSTOM_LIGHT("Thème Clair Personnalisé", ThemeProvider.CUSTOM, null, false),
+        
+        // ═══════════════════════════════════════════════════════════
+        // 🌙 THÈMES SOMBRES
+        // ═══════════════════════════════════════════════════════════
+        
+        // AtlantaFX - Thèmes sombres
+        PRIMER_DARK("Primer Dark", ThemeProvider.ATLANTAFX, "PrimerDark", true),
+        NORD_DARK("Nord Dark", ThemeProvider.ATLANTAFX, "NordDark", true),
+        CUPERTINO_DARK("Cupertino Dark", ThemeProvider.ATLANTAFX, "CupertinoDark", true),
+        DRACULA("Dracula", ThemeProvider.ATLANTAFX, "Dracula", true),
+        
+        // MaterialFX - Thème sombre
+        MATERIAL_DARK("Material Dark", ThemeProvider.MATERIALFX, null, true),
+        
+        // FlatLaf - Thèmes sombres
+        FLATLAF_DARK("FlatLaf Dark", ThemeProvider.FLATLAF, null, true),
+        FLATLAF_DARCULA("FlatLaf Darcula", ThemeProvider.FLATLAF, "Darcula", true),
+        
+        // Personnalisé legacy
+        CUSTOM_DARK("Thème Foncé Personnalisé", ThemeProvider.CUSTOM, null, true);
         
         private final String displayName;
-        private final atlantafx.base.theme.Theme atlantaTheme;
+        private final ThemeProvider provider;
+        private final String atlantaThemeClassName; // Nom de la classe au lieu d'instance
         private final boolean isDark;
+        private atlantafx.base.theme.Theme atlantaTheme; // Initialisation paresseuse
         
-        Theme(String displayName, atlantafx.base.theme.Theme atlantaTheme, boolean isDark) {
+        Theme(String displayName, ThemeProvider provider, String atlantaThemeClassName, boolean isDark) {
             this.displayName = displayName;
-            this.atlantaTheme = atlantaTheme;
+            this.provider = provider;
+            this.atlantaThemeClassName = atlantaThemeClassName;
             this.isDark = isDark;
+            this.atlantaTheme = null; // Sera initialisé à la demande
         }
         
         public String getDisplayName() {
             return displayName;
         }
         
+        public ThemeProvider getProvider() {
+            return provider;
+        }
+        
         public atlantafx.base.theme.Theme getAtlantaTheme() {
+            // Initialisation paresseuse : créer l'instance seulement quand nécessaire
+            if (atlantaTheme == null && atlantaThemeClassName != null) {
+                try {
+                    switch (atlantaThemeClassName) {
+                        case "PrimerLight": atlantaTheme = new PrimerLight(); break;
+                        case "PrimerDark": atlantaTheme = new PrimerDark(); break;
+                        case "NordLight": atlantaTheme = new NordLight(); break;
+                        case "NordDark": atlantaTheme = new NordDark(); break;
+                        case "CupertinoLight": atlantaTheme = new CupertinoLight(); break;
+                        case "CupertinoDark": atlantaTheme = new CupertinoDark(); break;
+                        case "Dracula": atlantaTheme = new Dracula(); break;
+                        default:
+                            System.err.println("⚠️ Classe de thème AtlantaFX inconnue : " + atlantaThemeClassName);
+                    }
+                } catch (Exception e) {
+                    System.err.println("⚠️ Erreur création thème AtlantaFX : " + e.getMessage());
+                }
+            }
             return atlantaTheme;
         }
         
@@ -54,7 +114,19 @@ public class ThemeManager {
         }
         
         public boolean isCustom() {
-            return atlantaTheme == null;
+            return provider == ThemeProvider.CUSTOM;
+        }
+        
+        public boolean isAtlantaFX() {
+            return provider == ThemeProvider.ATLANTAFX;
+        }
+        
+        public boolean isMaterialFX() {
+            return provider == ThemeProvider.MATERIALFX;
+        }
+        
+        public boolean isFlatLaf() {
+            return provider == ThemeProvider.FLATLAF;
         }
     }
     
@@ -77,40 +149,124 @@ public class ThemeManager {
         scene.getStylesheets().clear();
         
         // Nettoyer les classes CSS du root
+        cleanRootClasses(scene);
+        
+        // Appliquer le thème selon son type
+        switch (theme.getProvider()) {
+            case CUSTOM:
+                applyCustomTheme(scene, theme);
+                break;
+            case MATERIALFX:
+                applyMaterialFXTheme(scene, theme);
+                break;
+            case FLATLAF:
+                applyFlatLafTheme(scene, theme);
+                break;
+            case ATLANTAFX:
+            default:
+                applyAtlantaFXTheme(scene, theme);
+                break;
+        }
+        
+        // Ajouter les styles personnalisés de l'application
+        addCustomStyles(scene, theme);
+        
+        currentTheme = theme;
+        saveThemePreference(theme);
+    }
+    
+    /**
+     * Nettoie toutes les classes CSS du root
+     */
+    private static void cleanRootClasses(Scene scene) {
         scene.getRoot().getStyleClass().removeAll(
             "primer-light", "primer-dark",
             "nord-light", "nord-dark",
             "cupertino-light", "cupertino-dark",
             "dracula"
         );
+    }
+    
+    /**
+     * Applique un thème AtlantaFX
+     */
+    private static void applyAtlantaFXTheme(Scene scene, Theme theme) {
+        Application.setUserAgentStylesheet(theme.getAtlantaTheme().getUserAgentStylesheet());
         
-        if (theme.isCustom()) {
-            // Utiliser les CSS personnalisés existants
-            String cssPath = theme.isDark() ? 
-                "/css/fonce.css" : 
-                "/css/clair.css";
-            
-            String cssUrl = ThemeManager.class.getResource(cssPath).toExternalForm();
+        String themeClass = theme.name().toLowerCase().replace('_', '-');
+        scene.getRoot().getStyleClass().add(themeClass);
+        
+        System.out.println("✅ Thème AtlantaFX appliqué : " + theme.getDisplayName());
+        System.out.println("  ↳ Classe CSS ajoutée : " + themeClass);
+    }
+    
+    /**
+     * Applique un thème personnalisé (CSS legacy)
+     */
+    private static void applyCustomTheme(Scene scene, Theme theme) {
+        Application.setUserAgentStylesheet(null); // Reset
+        
+        String cssPath = theme.isDark() ? 
+            "/css/fonce.css" : 
+            "/css/clair.css";
+        
+        String cssUrl = ThemeManager.class.getResource(cssPath).toExternalForm();
+        scene.getStylesheets().add(cssUrl);
+        
+        System.out.println("✅ Thème personnalisé appliqué : " + theme.getDisplayName());
+    }
+    
+    /**
+     * Applique un thème MaterialFX
+     */
+    private static void applyMaterialFXTheme(Scene scene, Theme theme) {
+        Application.setUserAgentStylesheet(null); // Reset
+        
+        try {
+            // Charger le CSS Material adapté pour JavaFX
+            String cssUrl = ThemeManager.class.getResource("/css/material-javafx.css").toExternalForm();
             scene.getStylesheets().add(cssUrl);
             
-            System.out.println("✅ Thème personnalisé appliqué : " + theme.getDisplayName());
-        } else {
-            // Utiliser AtlantaFX
-            Application.setUserAgentStylesheet(theme.getAtlantaTheme().getUserAgentStylesheet());
+            // Ajouter une classe CSS pour le mode sombre/clair
+            if (theme.isDark()) {
+                scene.getRoot().getStyleClass().add("material-dark");
+            } else {
+                scene.getRoot().getStyleClass().add("material-light");
+            }
             
-            // Ajouter une classe CSS au root pour les sélecteurs spécifiques
-            String themeClass = theme.name().toLowerCase().replace('_', '-');
-            scene.getRoot().getStyleClass().add(themeClass);
-            
-            // Ajouter les CSS personnalisés en complément
-            addCustomStyles(scene, theme);
-            
-            System.out.println("✅ Thème AtlantaFX appliqué : " + theme.getDisplayName());
-            System.out.println("  ↳ Classe CSS ajoutée : " + themeClass);
+            System.out.println("✅ Thème MaterialFX appliqué : " + theme.getDisplayName());
+        } catch (Exception e) {
+            System.err.println("⚠️ Erreur chargement thème MaterialFX : " + e.getMessage());
+            // Fallback sur thème par défaut
+            applyAtlantaFXTheme(scene, theme.isDark() ? Theme.PRIMER_DARK : Theme.PRIMER_LIGHT);
         }
+    }
+    
+    /**
+     * Applique un thème FlatLaf
+     */
+    private static void applyFlatLafTheme(Scene scene, Theme theme) {
+        Application.setUserAgentStylesheet(null); // Reset
         
-        currentTheme = theme;
-        saveThemePreference(theme);
+        try {
+            // Charger le CSS FlatLaf adapté pour JavaFX
+            String cssUrl = ThemeManager.class.getResource("/css/flatlaf-javafx.css").toExternalForm();
+            scene.getStylesheets().add(cssUrl);
+            
+            // Ajouter une classe CSS selon le variant
+            String variant = theme.atlantaThemeClassName; // On réutilise ce champ pour stocker le variant
+            if (variant != null) {
+                scene.getRoot().getStyleClass().add("flatlaf-" + variant.toLowerCase());
+            } else {
+                scene.getRoot().getStyleClass().add(theme.isDark() ? "flatlaf-dark" : "flatlaf-light");
+            }
+            
+            System.out.println("✅ Thème FlatLaf appliqué : " + theme.getDisplayName());
+        } catch (Exception e) {
+            System.err.println("⚠️ Erreur chargement thème FlatLaf : " + e.getMessage());
+            // Fallback sur thème par défaut
+            applyAtlantaFXTheme(scene, theme.isDark() ? Theme.PRIMER_DARK : Theme.PRIMER_LIGHT);
+        }
     }
     
     /**

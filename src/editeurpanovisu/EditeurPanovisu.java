@@ -10964,6 +10964,7 @@ public class EditeurPanovisu extends Application {
         setApGEO(new AnchorPane());
         apOpenLayers = new AnchorPane();
         apOpenLayers.setVisible(false);
+        apOpenLayers.getStyleClass().add("dialog-content-pane");
         if (isbInternet()) {
             navigateurOpenLayers = new NavigateurOpenLayers();
             navigateurOpenLayers.setBingApiKey(getStrBingAPIKey());
@@ -11446,17 +11447,21 @@ public class EditeurPanovisu extends Application {
         dialogStage.setTitle("Choisir un thème");
         dialogStage.setResizable(false);
         
-        VBox root = new VBox(20);
-        root.setPadding(new Insets(20));
-        root.setAlignment(Pos.CENTER);
+        VBox root = new VBox(10);
+        root.setPadding(new Insets(15));
+        root.setAlignment(Pos.TOP_CENTER);
         
         Label lblTitle = new Label("Sélectionnez un thème pour l'application");
-        lblTitle.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
+        lblTitle.setStyle("-fx-font-size: 15px; -fx-font-weight: bold;");
+        
+        // Container avec ScrollPane pour gérer le débordement
+        VBox vboxThemes = new VBox(8);
+        vboxThemes.setPadding(new Insets(5));
         
         // Section thèmes clairs
-        Label lblLight = new Label("Thèmes Clairs");
-        lblLight.setStyle("-fx-font-size: 14px; -fx-font-weight: bold;");
-        VBox vboxLight = new VBox(10);
+        Label lblLight = new Label("🌞 Thèmes Clairs");
+        lblLight.setStyle("-fx-font-size: 13px; -fx-font-weight: bold;");
+        VBox vboxLight = new VBox(5);
         ToggleGroup groupThemes = new ToggleGroup();
         
         ThemeManager.Theme currentTheme = ThemeManager.loadSavedTheme();
@@ -11472,9 +11477,9 @@ public class EditeurPanovisu extends Application {
         }
         
         // Section thèmes sombres
-        Label lblDark = new Label("Thèmes Sombres");
-        lblDark.setStyle("-fx-font-size: 14px; -fx-font-weight: bold;");
-        VBox vboxDark = new VBox(10);
+        Label lblDark = new Label("🌙 Thèmes Sombres");
+        lblDark.setStyle("-fx-font-size: 13px; -fx-font-weight: bold;");
+        VBox vboxDark = new VBox(5);
         
         for (ThemeManager.Theme theme : ThemeManager.getDarkThemes()) {
             RadioButton rb = new RadioButton(theme.getDisplayName());
@@ -11486,9 +11491,24 @@ public class EditeurPanovisu extends Application {
             vboxDark.getChildren().add(rb);
         }
         
+        vboxThemes.getChildren().addAll(
+            lblLight,
+            vboxLight,
+            new Separator(),
+            lblDark,
+            vboxDark
+        );
+        
+        // ScrollPane pour gérer le contenu si la liste est trop longue
+        ScrollPane scrollPane = new ScrollPane(vboxThemes);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setPrefHeight(450);
+        scrollPane.setStyle("-fx-background-color: transparent;");
+        
         // Boutons
         HBox hboxButtons = new HBox(10);
         hboxButtons.setAlignment(Pos.CENTER);
+        hboxButtons.setPadding(new Insets(10, 0, 0, 0));
         
         Button btnAppliquer = new Button("Appliquer");
         btnAppliquer.setOnAction(e -> {
@@ -11509,16 +11529,11 @@ public class EditeurPanovisu extends Application {
         root.getChildren().addAll(
             lblTitle,
             new Separator(),
-            lblLight,
-            vboxLight,
-            new Separator(),
-            lblDark,
-            vboxDark,
-            new Separator(),
+            scrollPane,
             hboxButtons
         );
         
-        Scene scene = new Scene(root, 400, 640); // Augmenté de 600 à 640 pour plus d'espace en bas
+        Scene scene = new Scene(root, 400, 580); // Réduit à 580px avec ScrollPane
         // Appliquer le thème actuel au dialogue
         ThemeManager.applyTheme(scene, currentTheme);
         
