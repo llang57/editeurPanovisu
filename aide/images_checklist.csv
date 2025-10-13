@@ -1,0 +1,50 @@
+Fichier,Description,Dimensions,Priorité,Statut,Type,Section
+editeurVisitePano.jpg,Panneau de la vue panoramique,800x600px,⭐⭐⭐,À créer,Vue d'ensemble,Éditeur de visite
+editeurVisiteOutils.jpg,Barre d'outils de l'éditeur de visite,800x200px,⭐⭐⭐,À créer,Vue d'ensemble,Éditeur de visite
+editeurInterface.jpg,Éditeur d'interface (thème clair),800x600px,⭐⭐⭐,À créer,Vue d'ensemble,Éditeur d'interface
+editeurInterfaceSombre.jpg,Éditeur d'interface (thème sombre),800x600px,⭐⭐⭐,À créer,Vue d'ensemble,Éditeur d'interface
+editeurPlan.jpg,Éditeur de plan avec positionnement,800x600px,⭐⭐,À créer,Vue d'ensemble,Éditeur de plan
+iconeNouveauProjet.png,Icône Nouveau projet,64x64px,⭐⭐,À vérifier,Icône,Barre d'outils
+iconeOuvrirProjet.png,Icône Ouvrir projet,64x64px,⭐⭐,À vérifier,Icône,Barre d'outils
+iconeSauvegarder.png,Icône Sauvegarder,64x64px,⭐⭐,À vérifier,Icône,Barre d'outils
+iconeAfficherVisite.png,Icône Afficher la visite,64x64px,⭐⭐,À vérifier,Icône,Barre d'outils
+iconeAfficherInterface.png,Icône Afficher l'interface,64x64px,⭐⭐,À vérifier,Icône,Barre d'outils
+iconeAfficherPlan.png,Icône Afficher le plan,64x64px,⭐⭐,À vérifier,Icône,Barre d'outils
+iconeLoupe.png,Icône Loupe,64x64px,⭐⭐,À vérifier,Icône,Barre d'outils
+iconeConfiguration.png,Icône Configuration,64x64px,⭐⭐,À vérifier,Icône,Barre d'outils
+iconeGenererVisite.png,Icône Générer la visite,64x64px,⭐⭐,À vérifier,Icône,Barre d'outils
+editeurVisiteEntree.jpg,Configuration du panoramique d'entrée,600x400px,⭐⭐⭐,À créer,Configuration,Éditeur de visite
+editeurVisiteChoixPano.jpg,Paramètres du panoramique sélectionné,600x500px,⭐⭐⭐,À créer,Configuration,Éditeur de visite
+generationIA.jpg,Interface de génération de description par IA,600x400px,⭐⭐⭐,À créer,NOUVELLE,Éditeur de visite
+editeurVisiteHS.jpg,Gestion des HotSpots,600x500px,⭐⭐⭐,À créer,Configuration,Éditeur de visite
+hotspotPanoramique.jpg,Configuration HotSpot Panoramique,500x400px,⭐⭐,À créer,Détail,HotSpots
+hotspotImage.jpg,Configuration HotSpot Image,500x400px,⭐⭐,À créer,Détail,HotSpots
+hotspotDiaporama.jpg,Configuration HotSpot Diaporama,500x400px,⭐⭐,À créer,Détail,HotSpots
+hotspotHTML.jpg,Configuration HotSpot HTML,500x400px,⭐⭐,À créer,Détail,HotSpots
+couleurTheme.jpg,Panneau Couleur générale de l'interface,600x400px,⭐⭐⭐,À mettre à jour,MODIFIÉ,Interface - Thème
+titre.jpg,Configuration complète de la barre de titre,600x500px,⭐⭐⭐,À mettre à jour,MODIFIÉ,Interface - Titre
+interfaceNavigation.jpg,Barre de navigation classique + personnalisée,600x600px,⭐⭐⭐,À mettre à jour,MODIFIÉ,Interface - Navigation
+navigationClassique.jpg,Détail barre classique avec styles,600x400px,⭐⭐,À créer,NOUVELLE,Interface - Navigation
+navigationPersonnalisee.jpg,Détail barre personnalisée avec images,600x400px,⭐⭐,À créer,NOUVELLE,Interface - Navigation
+hotspots.jpg,Styles des 3 types de HotSpots,600x500px,⭐⭐⭐,À mettre à jour,MODIFIÉ,Interface - HotSpots
+boussole.jpg,Configuration boussole avec aiguille mobile,600x500px,⭐⭐⭐,À mettre à jour,MODIFIÉ,Interface - Boussole
+masquage.jpg,Bouton de masquage avec éléments masquables,600x500px,⭐⭐⭐,À mettre à jour,MODIFIÉ,Interface - Masquage
+reseauxSociaux.jpg,Configuration des boutons de partage,600x400px,⭐⭐⭐,À mettre à jour,MODIFIÉ,Interface - Réseaux
+vignettes.jpg,Bande de vignettes avec configuration,600x400px,⭐⭐⭐,À mettre à jour,MODIFIÉ,Interface - Vignettes
+plan.jpg,Configuration du mini-plan avec radar,600x500px,⭐⭐⭐,À créer,NOUVELLE,Interface - Plan
+carte.jpg,Configuration carte géographique complète,600x600px,⭐⭐⭐,À créer,NOUVELLE,Interface - Carte
+carteOpenStreetMap.jpg,Exemple avec OpenStreetMap,600x400px,⭐⭐,À créer,NOUVELLE,Interface - Carte
+carteBingMaps.jpg,Exemple avec Bing Maps,600x400px,⭐,À créer,NOUVELLE,Interface - Carte
+imagesFond.jpg,Gestion des images de fond flottantes,600x500px,⭐⭐,À créer,NOUVELLE,Interface - Images
+menuContextuel.jpg,Configuration menu contextuel personnalisé,600x400px,⭐⭐,À créer,NOUVELLE,Interface - Menu
+visiteAuto.jpg,Bouton de visite automatique,600x400px,⭐⭐,À créer,NOUVELLE,Interface - Visite auto
+infoBulles.jpg,Personnalisation des info-bulles,600x500px,⭐⭐,À créer,NOUVELLE,Interface - Info-bulles
+fenetres.jpg,Fenêtres d'info et d'aide personnalisées,600x500px,⭐⭐,À créer,NOUVELLE,Interface - Fenêtres
+cubeEqui.jpg,Outil Cube vers Équirectangulaire,600x500px,⭐⭐,À mettre à jour,MODIFIÉ,Outils
+equiCube.jpg,Outil Équirectangulaire vers Cube,600x500px,⭐⭐,À mettre à jour,MODIFIÉ,Outils
+exempleCubemap.jpg,Exemple de 6 faces cubiques,800x400px,⭐,À créer,NOUVELLE,Outils - Exemples
+exempleEquirect.jpg,Exemple d'image équirectangulaire,800x400px,⭐,À créer,NOUVELLE,Outils - Exemples
+exempleVisite1.jpg,Exemple de visite complète (thème clair),1280x720px,⭐,À créer,NOUVELLE,Démonstration
+exempleVisite2.jpg,Exemple de visite complète (thème sombre),1280x720px,⭐,À créer,NOUVELLE,Démonstration
+exempleHotspots.jpg,Exemple de panoramique avec HotSpots visibles,1280x720px,⭐,À créer,NOUVELLE,Démonstration
+exempleNavigation.jpg,Exemple de barre de navigation en action,1280x720px,⭐,À créer,NOUVELLE,Démonstration

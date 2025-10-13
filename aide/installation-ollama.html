@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Installation d'Ollama - EditeurPanovisu</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        
+        .header p {
+            margin: 10px 0 0 0;
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+        
+        h3 {
+            color: #764ba2;
+            margin-top: 30px;
+        }
+        
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .warning-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .success-box {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .tip-box {
+            background: #f3e5f5;
+            border-left: 4px solid #9c27b0;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #d32f2f;
+        }
+        
+        pre {
+            background: #263238;
+            color: #aed581;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 0.95em;
+        }
+        
+        pre code {
+            background: none;
+            color: #aed581;
+            padding: 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        table th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        table td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        table tr:hover {
+            background: #f5f5f5;
+        }
+        
+        .step {
+            background: #fafafa;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 4px solid #667eea;
+            border-radius: 5px;
+        }
+        
+        .step-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        ul {
+            line-height: 2;
+        }
+        
+        .button-link {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px 5px;
+            transition: background 0.3s;
+        }
+        
+        .button-link:hover {
+            background: #764ba2;
+        }
+        
+        .advantages {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .advantage-card {
+            background: white;
+            border: 2px solid #667eea;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .advantage-card h4 {
+            color: #667eea;
+            margin-top: 10px;
+        }
+        
+        .icon {
+            font-size: 2em;
+        }
+        
+        .faq {
+            background: #f9f9f9;
+            padding: 15px 20px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border-left: 3px solid #667eea;
+        }
+        
+        .faq h4 {
+            color: #667eea;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🤖 Installation d'Ollama</h1>
+        <p>Intelligence Artificielle locale pour vos descriptions de panoramiques</p>
+    </div>
+
+    <div class="content">
+        <h2>Qu'est-ce qu'Ollama ?</h2>
+        <p><strong>Ollama</strong> est un logiciel gratuit qui permet d'utiliser l'intelligence artificielle directement sur votre ordinateur, <strong>sans connexion internet</strong> et <strong>sans partager vos données</strong> en ligne.</p>
+        
+        <p>Dans <strong>EditeurPanovisu</strong>, Ollama vous permet de générer automatiquement des descriptions pour vos panoramiques en utilisant l'IA de manière <strong>privée</strong> et <strong>gratuite</strong>.</p>
+
+        <div class="advantages">
+            <div class="advantage-card">
+                <div class="icon">🔒</div>
+                <h4>Confidentialité</h4>
+                <p>Vos données restent sur votre ordinateur</p>
+            </div>
+            <div class="advantage-card">
+                <div class="icon">💰</div>
+                <h4>100% Gratuit</h4>
+                <p>Pas d'abonnement ni de limite</p>
+            </div>
+            <div class="advantage-card">
+                <div class="icon">🚀</div>
+                <h4>Rapide</h4>
+                <p>L'IA fonctionne directement sur votre PC</p>
+            </div>
+            <div class="advantage-card">
+                <div class="icon">🌐</div>
+                <h4>Hors ligne</h4>
+                <p>Fonctionne sans internet</p>
+            </div>
+        </div>
+
+        <h2>📋 Prérequis</h2>
+        <p>Avant d'installer Ollama, vérifiez que votre ordinateur répond aux exigences minimales :</p>
+        
+        <table>
+            <tr>
+                <th>Composant</th>
+                <th>Minimum</th>
+                <th>Recommandé</th>
+            </tr>
+            <tr>
+                <td>Système d'exploitation</td>
+                <td>Windows 10/11 (64 bits)</td>
+                <td>Windows 11</td>
+            </tr>
+            <tr>
+                <td>Mémoire RAM</td>
+                <td>8 Go</td>
+                <td>16 Go ou plus</td>
+            </tr>
+            <tr>
+                <td>Espace disque</td>
+                <td>10 Go</td>
+                <td>20 Go ou plus</td>
+            </tr>
+            <tr>
+                <td>Processeur</td>
+                <td>Intel i5 / AMD Ryzen 5</td>
+                <td>Intel i7 / AMD Ryzen 7</td>
+            </tr>
+        </table>
+
+        <div class="info-box">
+            <strong>ℹ️ Note :</strong> Ollama fonctionne sur CPU, mais une carte graphique NVIDIA améliore considérablement les performances.
+        </div>
+
+        <h2>🚀 Installation d'Ollama (Windows)</h2>
+
+        <h3>Étape 1 : Télécharger Ollama</h3>
+        <div class="step">
+            <span class="step-number">1</span> Ouvrez votre navigateur web
+        </div>
+        <div class="step">
+            <span class="step-number">2</span> Allez sur le site officiel : <code>https://ollama.com/</code>
+        </div>
+        <div class="step">
+            <span class="step-number">3</span> Cliquez sur le bouton <strong>"Download"</strong> (Télécharger)
+        </div>
+        <div class="step">
+            <span class="step-number">4</span> Le fichier <code>OllamaSetup.exe</code> sera téléchargé
+        </div>
+
+        <h3>Étape 2 : Installer Ollama</h3>
+        <div class="step">
+            <span class="step-number">1</span> Localisez le fichier <code>OllamaSetup.exe</code> dans votre dossier Téléchargements
+        </div>
+        <div class="step">
+            <span class="step-number">2</span> Double-cliquez sur le fichier pour lancer l'installation
+        </div>
+        <div class="step">
+            <span class="step-number">3</span> Si Windows affiche une alerte de sécurité, cliquez sur <strong>"Exécuter quand même"</strong>
+        </div>
+        <div class="step">
+            <span class="step-number">4</span> Suivez l'assistant d'installation et cliquez sur <strong>"Install"</strong>
+        </div>
+
+        <div class="warning-box">
+            <strong>⚠️ Important :</strong> Une icône Ollama apparaîtra dans la barre des tâches (près de l'horloge). Cela signifie qu'Ollama est en cours d'exécution.
+        </div>
+
+        <h3>Étape 3 : Vérifier l'installation</h3>
+        <p>Pour vérifier qu'Ollama est bien installé :</p>
+        <div class="step">
+            <span class="step-number">1</span> Ouvrez le <strong>Menu Démarrer</strong>
+        </div>
+        <div class="step">
+            <span class="step-number">2</span> Tapez <code>cmd</code> et appuyez sur <strong>Entrée</strong>
+        </div>
+        <div class="step">
+            <span class="step-number">3</span> Dans la fenêtre qui s'ouvre, tapez :
+        </div>
+        <pre><code>ollama --version</code></pre>
+        <div class="step">
+            <span class="step-number">4</span> Appuyez sur <strong>Entrée</strong>
+        </div>
+
+        <div class="success-box">
+            <strong>✅ Succès :</strong> Si vous voyez un numéro de version (par exemple <code>ollama version is 0.3.12</code>), l'installation a réussi !
+        </div>
+
+        <h2>📦 Installation d'un Modèle d'IA</h2>
+        <p>Ollama ne contient pas de modèle d'IA par défaut. Vous devez en télécharger un.</p>
+
+        <h3>Modèles recommandés</h3>
+        <table>
+            <tr>
+                <th>Modèle</th>
+                <th>Taille</th>
+                <th>RAM nécessaire</th>
+                <th>Qualité</th>
+                <th>Vitesse</th>
+            </tr>
+            <tr>
+                <td><strong>llama3.2</strong></td>
+                <td>2 GB</td>
+                <td>8 GB</td>
+                <td>⭐⭐⭐</td>
+                <td>🚀🚀🚀</td>
+            </tr>
+            <tr>
+                <td><strong>mistral</strong></td>
+                <td>4 GB</td>
+                <td>8 GB</td>
+                <td>⭐⭐⭐⭐</td>
+                <td>🚀🚀</td>
+            </tr>
+            <tr>
+                <td><strong>llama3.1</strong></td>
+                <td>5 GB</td>
+                <td>12 GB</td>
+                <td>⭐⭐⭐⭐⭐</td>
+                <td>🚀</td>
+            </tr>
+            <tr>
+                <td><strong>gemma2</strong></td>
+                <td>5 GB</td>
+                <td>12 GB</td>
+                <td>⭐⭐⭐⭐⭐</td>
+                <td>🚀</td>
+            </tr>
+        </table>
+
+        <div class="tip-box">
+            <strong>💡 Recommandation :</strong> Pour débuter, installez <strong>llama3.2</strong> (petit et rapide) ou <strong>mistral</strong> (bon compromis qualité/vitesse).
+        </div>
+
+        <h3>Comment installer un modèle</h3>
+        <div class="step">
+            <span class="step-number">1</span> Ouvrez le <strong>Menu Démarrer</strong>
+        </div>
+        <div class="step">
+            <span class="step-number">2</span> Tapez <code>cmd</code> et appuyez sur <strong>Entrée</strong>
+        </div>
+        <div class="step">
+            <span class="step-number">3</span> Dans la fenêtre qui s'ouvre, tapez l'une de ces commandes :
+        </div>
+
+        <p><strong>Pour Llama 3.2 (recommandé pour débuter)</strong> :</p>
+        <pre><code>ollama pull llama3.2</code></pre>
+
+        <p><strong>Pour Mistral (bon compromis)</strong> :</p>
+        <pre><code>ollama pull mistral</code></pre>
+
+        <p><strong>Pour Llama 3.1 (qualité maximale)</strong> :</p>
+        <pre><code>ollama pull llama3.1</code></pre>
+
+        <div class="step">
+            <span class="step-number">4</span> Appuyez sur <strong>Entrée</strong>
+        </div>
+        <div class="step">
+            <span class="step-number">5</span> Le téléchargement commence (5 à 30 minutes selon votre connexion)
+        </div>
+        <div class="step">
+            <span class="step-number">6</span> Attendez que le message <strong>"success"</strong> s'affiche
+        </div>
+
+        <div class="warning-box">
+            <strong>⏱️ Patience :</strong> Le téléchargement peut être long la première fois (plusieurs gigaoctets). Une fois téléchargé, le modèle est disponible immédiatement.
+        </div>
+
+        <h2>🎯 Utilisation dans EditeurPanovisu</h2>
+        <p>Une fois Ollama et un modèle installés, vous pouvez utiliser l'IA :</p>
+
+        <div class="step">
+            <span class="step-number">1</span> <strong>Ouvrez EditeurPanovisu</strong>
+        </div>
+        <div class="step">
+            <span class="step-number">2</span> <strong>Chargez votre projet</strong> de visite virtuelle
+        </div>
+        <div class="step">
+            <span class="step-number">3</span> <strong>Sélectionnez un panoramique</strong> dans la liste
+        </div>
+        <div class="step">
+            <span class="step-number">4</span> Dans le panneau <strong>"Paramètres du panoramique"</strong>, descendez jusqu'à la section <strong>"Description IA"</strong>
+        </div>
+        <div class="step">
+            <span class="step-number">5</span> Cliquez sur le bouton <strong>"Générer description IA"</strong>
+        </div>
+        <div class="step">
+            <span class="step-number">6</span> Attendez quelques secondes ⏳
+        </div>
+        <div class="step">
+            <span class="step-number">7</span> La description apparaît automatiquement ! ✨
+        </div>
+
+        <div class="success-box">
+            <h4>Exemple de résultat :</h4>
+            <p><em>"Le Château de Versailles est un monument historique situé dans les Yvelines, à 20 km de Paris. Construit au XVIIe siècle sous Louis XIV, il est célèbre pour sa galerie des Glaces et ses jardins à la française."</em></p>
+        </div>
+
+        <h2>🔧 Dépannage</h2>
+
+        <h3>Problème : "Ollama non disponible"</h3>
+        <p><strong>Solutions :</strong></p>
+        <ul>
+            <li>Vérifiez qu'Ollama est installé : tapez <code>ollama --version</code> dans cmd</li>
+            <li>Vérifiez que l'icône Ollama est présente dans la barre des tâches</li>
+            <li>Si elle n'est pas là, lancez <strong>"Ollama"</strong> depuis le Menu Démarrer</li>
+        </ul>
+
+        <h3>Problème : "Aucun modèle disponible"</h3>
+        <p><strong>Solution :</strong></p>
+        <ol>
+            <li>Ouvrez <code>cmd</code></li>
+            <li>Tapez : <code>ollama pull llama3.2</code></li>
+            <li>Attendez la fin du téléchargement</li>
+            <li>Relancez EditeurPanovisu</li>
+        </ol>
+
+        <h3>Problème : La génération est très lente</h3>
+        <p><strong>Solutions :</strong></p>
+        <ul>
+            <li>Fermez les autres applications</li>
+            <li>Utilisez un modèle plus petit (llama3.2 au lieu de llama3.1)</li>
+            <li>Augmentez la RAM de votre PC si possible</li>
+        </ul>
+
+        <h2>❓ Questions Fréquentes (FAQ)</h2>
+
+        <div class="faq">
+            <h4>Ollama est-il vraiment gratuit ?</h4>
+            <p><strong>Oui !</strong> Ollama est 100% gratuit et open source. Pas de frais cachés, pas d'abonnement.</p>
+        </div>
+
+        <div class="faq">
+            <h4>Mes données sont-elles envoyées quelque part ?</h4>
+            <p><strong>Non !</strong> Avec Ollama, tout reste sur votre ordinateur. Vos données ne quittent jamais votre PC.</p>
+        </div>
+
+        <div class="faq">
+            <h4>Puis-je utiliser Ollama sans internet ?</h4>
+            <p><strong>Oui !</strong> Une fois installé, Ollama fonctionne complètement hors ligne.</p>
+        </div>
+
+        <div class="faq">
+            <h4>Quelle différence avec ChatGPT ?</h4>
+            <p>Ollama utilise des modèles similaires mais fonctionne <strong>sur votre ordinateur</strong>, c'est <strong>gratuit</strong>, <strong>privé</strong> et <strong>illimité</strong>.</p>
+        </div>
+
+        <h2>🆘 Support et Aide</h2>
+        <p>Besoin d'aide ?</p>
+        <ul>
+            <li>📧 <strong>Email :</strong> support@panovisu.com</li>
+            <li>🌐 <strong>Site web :</strong> <a href="https://www.lemondea360.fr" target="_blank">https://www.lemondea360.fr</a></li>
+            <li>📖 <strong>Documentation Ollama :</strong> <a href="https://github.com/ollama/ollama" target="_blank">github.com/ollama/ollama</a></li>
+        </ul>
+
+        <h2>✨ Conclusion</h2>
+        <p>Félicitations ! Vous savez maintenant comment installer et utiliser Ollama avec EditeurPanovisu.</p>
+        <p>L'intelligence artificielle est désormais à portée de main pour enrichir vos visites virtuelles avec des descriptions automatiques de qualité.</p>
+        
+        <div class="success-box">
+            <strong>🎉 Bon travail avec EditeurPanovisu !</strong>
+        </div>
+
+        <hr style="margin: 40px 0; border: none; border-top: 2px solid #e0e0e0;">
+        <p style="text-align: center; color: #999;">
+            <strong>Version :</strong> 1.0 | 
+            <strong>Date :</strong> 13 octobre 2025 | 
+            <strong>Auteur :</strong> EditeurPanovisu - Laurent LANG
+        </p>
+    </div>
+</body>
+</html>

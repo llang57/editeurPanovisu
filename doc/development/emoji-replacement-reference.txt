@@ -1,0 +1,34 @@
+
+# Table de correspondance Emoji → Wingdings/HTML Entities
+
+## Symboles de base (Unicode standard - fonctionnent partout)
+✓ (checkmark) → &#10004; ou &#x2714;
+✗ (cross) → &#10006; ou &#x2716;
+⚠ (warning) → &#9888; ou &#x26A0;
+ℹ (info) → &#8505; ou &#x2139;
+☎ (phone) → &#9742; ou &#x260E;
+✉ (envelope) → &#9993; ou &#x2709;
+⚙ (gear) → &#9881; ou &#x2699;
+★ (star) → &#9733; ou &#x2605;
+● (bullet) → &#9679; ou &#x25CF;
+▶ (play) → &#9654; ou &#x25B6;
+◼ (square) → &#9724; ou &#x25FC;
+✎ (pencil) → &#9998; ou &#x270E;
+🔒 (lock) → &#128274; ou &#x1F512;
+🔑 (key) → &#128273; ou &#x1F511;
+
+## Wingdings (codes 33-255)
+Dossier → Wingdings &#48; (0)
+Document → Wingdings &#52; (4)
+Fichier → Wingdings &#53; (5)
+Outils → Wingdings &#119; (w)
+Ordinateur → Wingdings &#112; (p)
+Globe → Wingdings &#128; (€)
+Idée/Ampoule → Wingdings &#161; (¡)
+Cadenas → Wingdings &#128; (€)
+
+## Stratégie pour les emojis complexes
+Pour tous les emojis qui ne s'affichent PAS en Unicode standard :
+1. Utiliser <span class='wi'> avec Wingdings
+2. Utiliser un symbole alternatif simple (●, ▶, ★, etc.)
+3. TOUJOURS ajouter le texte en backup

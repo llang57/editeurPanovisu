@@ -228,3 +228,6 @@ configPV/
 
 # Fichiers de configuration avec clés API (ne pas versionner)
 api-keys.properties
+# Logs JVM
+logs/
+hs_err_*.log
