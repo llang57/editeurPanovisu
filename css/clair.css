@@ -2992,26 +2992,73 @@ is being used to size a border should also be in pixels.
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.5) , 8, 0.0 , 0 , 8 );
 
 }
+/* ===== En-têtes des panels d'outils - Thème Clair ===== */
+
+/* État neutre / désactivé */
 .titreOutil{
-    -fx-background-color : linear-gradient( derive(-fx-base,-30%) 0%,  derive(-fx-base,-55%) 100%);
-    -fx-text-fill: white;
-    -fx-border-radius: 3;
-}
-.titreOutil:disabled,.titreOutilRouge:disabled,.titreOutilBleu:disabled{
-    -fx-background-color : #999;
-    -fx-text-fill: #AAA;
-    -fx-border-radius: 3;
-}
-.titreOutilRouge{
-    -fx-background-color : linear-gradient( #779977  0%, #446644 100%);
-    -fx-text-fill: white;
-    -fx-border-radius: 3;
+    -fx-background-color: linear-gradient(to bottom, #ECECEC 0%, #D5D5D5 100%);
+    -fx-text-fill: #424242;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 4, 0.0, 0, 2);
+    -fx-cursor: hand;
+    -fx-padding: 8 10 8 10;
 }
 
+.titreOutil:hover{
+    -fx-background-color: linear-gradient(to bottom, #F5F5F5 0%, #E0E0E0 100%);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 6, 0.0, 0, 3);
+    -fx-scale-y: 1.02;
+}
+
+/* État désactivé */
+.titreOutil:disabled, .titreOutilRouge:disabled, .titreOutilBleu:disabled{
+    -fx-background-color: linear-gradient(to bottom, #E0E0E0 0%, #CCCCCC 100%);
+    -fx-text-fill: #9E9E9E;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-opacity: 0.6;
+    -fx-cursor: default;
+}
+
+/* État actif / validé (vert) - Pour paramètres actifs */
+.titreOutilRouge{
+    -fx-background-color: linear-gradient(to bottom, #66BB6A 0%, #4CAF50 100%);
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-effect: dropshadow(gaussian, rgba(76,175,80,0.4), 6, 0.0, 0, 3);
+    -fx-cursor: hand;
+    -fx-padding: 8 10 8 10;
+}
+
+.titreOutilRouge:hover{
+    -fx-background-color: linear-gradient(to bottom, #81C784 0%, #66BB6A 100%);
+    -fx-effect: dropshadow(gaussian, rgba(76,175,80,0.6), 8, 0.0, 0, 4);
+    -fx-scale-y: 1.02;
+}
+
+/* État invariant / spécial (bleu) - Pour sections importantes */
 .titreOutilBleu{
-    -fx-background-color : linear-gradient( #777799  0%, #444466 100%);
-    -fx-text-fill: white;
-    -fx-border-radius: 3;
+    -fx-background-color: linear-gradient(to bottom, #42A5F5 0%, #2196F3 100%);
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-effect: dropshadow(gaussian, rgba(33,150,243,0.4), 6, 0.0, 0, 3);
+    -fx-cursor: hand;
+    -fx-padding: 8 10 8 10;
+}
+
+.titreOutilBleu:hover{
+    -fx-background-color: linear-gradient(to bottom, #64B5F6 0%, #42A5F5 100%);
+    -fx-effect: dropshadow(gaussian, rgba(33,150,243,0.6), 8, 0.0, 0, 4);
+    -fx-scale-y: 1.02;
 }
 
 .calque{

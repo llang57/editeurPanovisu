@@ -50,6 +50,7 @@
           <include>**/*.xml</include>
           <include>**/*.html</include>
           <include>**/*.css</include>
+          <include>**/*.js</include>
           <include>**/*.png</include>
           <include>**/*.jpg</include>
           <include>**/*.gif</include>
@@ -57,6 +58,29 @@
       </resource>
     </resources>
     <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.1.1</version>
+        <executions>
+          <execution>
+            <id>increment-build-number</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <executable>powershell</executable>
+              <arguments>
+                <argument>-ExecutionPolicy</argument>
+                <argument>Bypass</argument>
+                <argument>-File</argument>
+                <argument>${project.basedir}/increment-build.ps1</argument>
+              </arguments>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.13.0</version>
@@ -92,7 +116,13 @@
             <configuration>
               <transformers>
                 <transformer>
-                  <mainClass>editeurpanovisu.EditeurPanovisu</mainClass>
+                  <mainClass>editeurpanovisu.Launcher</mainClass>
+                  <manifestEntries>
+                    <Implementation-Title>${project.name}</Implementation-Title>
+                    <Implementation-Version>3.0</Implementation-Version>
+                    <Implementation-Vendor>Laurent LANG</Implementation-Vendor>
+                    <Built-By>Maven</Built-By>
+                  </manifestEntries>
                 </transformer>
               </transformers>
               <filters>
@@ -110,6 +140,25 @@
         </executions>
       </plugin>
       <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.4.2</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <mainClass>editeurpanovisu.Launcher</mainClass>
+              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+            </manifest>
+            <manifestEntries>
+              <Implementation-Title>${project.name}</Implementation-Title>
+              <Implementation-Version>3.0</Implementation-Version>
+              <Implementation-Vendor>Laurent LANG</Implementation-Vendor>
+              <Built-By>Maven ${maven.build.timestamp}</Built-By>
+              <Created-By>Java ${java.version}</Created-By>
+            </manifestEntries>
+          </archive>
+        </configuration>
+      </plugin>
+      <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.5.2</version>
         <configuration>
@@ -121,20 +170,35 @@
         <artifactId>jpackage-maven-plugin</artifactId>
         <version>1.6.5</version>
         <configuration>
-          <name>editeurPanovisu</name>
+          <name>EditeurPanovisu</name>
           <appVersion>2.0.0</appVersion>
-          <vendor>panoVisu</vendor>
+          <vendor>PanoVisu - Laurent LANG</vendor>
+          <copyright>Copyright © 2025 PanoVisu</copyright>
+          <description>Éditeur de visites virtuelles panoramiques</description>
           <destination>target/dist</destination>
-          <module>editeurpanovisu/editeurpanovisu.EditeurPanovisu</module>
-          <runtimeImage>target/runtime-image</runtimeImage>
+          <type>MSI</type>
+          <input>target</input>
+          <mainJar>editeurPanovisu-2.0.0-SNAPSHOT.jar</mainJar>
+          <mainClass>editeurpanovisu.Launcher</mainClass>
+          <runtimeImage>${java.home}</runtimeImage>
           <javaOptions>
             <option>-Dfile.encoding=UTF-8</option>
             <option>--enable-preview</option>
+            <option>--enable-native-access=ALL-UNNAMED</option>
+            <option>-Xms512m</option>
+            <option>-Xmx2048m</option>
           </javaOptions>
-          <icon>images/cube2equi.png</icon>
+          <icon>images/panovisu.ico</icon>
           <winMenu>true</winMenu>
           <winShortcut>true</winShortcut>
-          <linuxShortcut>true</linuxShortcut>
+          <winDirChooser>true</winDirChooser>
+          <winPerUserInstall>false</winPerUserInstall>
+          <winMenuGroup>PanoVisu</winMenuGroup>
+          <arguments>
+            <argument>--enable-preview</argument>
+          </arguments>
+          <resourceDir>target/classes</resourceDir>
+          <verbose>true</verbose>
         </configuration>
       </plugin>
     </plugins>
@@ -143,6 +207,11 @@
     <repository>
       <id>central</id>
       <url>https://repo.maven.apache.org/maven2</url>
+    </repository>
+    <repository>
+      <id>JOSM</id>
+      <name>JOSM OpenStreetMap Repository</name>
+      <url>https://josm.openstreetmap.de/repository/releases/</url>
     </repository>
   </repositories>
   <dependencies>
@@ -193,7 +262,7 @@
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <slf4j.version>2.0.16</slf4j.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <javafx.version>21.0.5</javafx.version>
+    <javafx.version>19.0.2.1</javafx.version>
     <junit.version>5.11.3</junit.version>
     <javalin.version>6.3.0</javalin.version>
     <logback.version>1.5.11</logback.version>

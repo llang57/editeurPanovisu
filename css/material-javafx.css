@@ -1,0 +1,391 @@
+/*
+ * Material Design inspired CSS for JavaFX
+ * Adaptation du Material Design pour JavaFX
+ */
+
+/* Variables Material Design */
+.root {
+    /* Material Light */
+    -material-primary: #1976d2;
+    -material-primary-dark: #1565c0;
+    -material-primary-light: #42a5f5;
+    -material-accent: #ff4081;
+    -material-background: #fafafa;
+    -material-surface: #ffffff;
+    -material-text-primary: rgba(0, 0, 0, 0.87);
+    -material-text-secondary: rgba(0, 0, 0, 0.54);
+    -material-divider: rgba(0, 0, 0, 0.12);
+    -material-elevation-1: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    -material-elevation-2: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    -material-elevation-3: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.root.material-dark {
+    /* Material Dark */
+    -material-primary: #90caf9;
+    -material-primary-dark: #42a5f5;
+    -material-primary-light: #e3f2fd;
+    -material-accent: #ff4081;
+    -material-background: #121212;
+    -material-surface: #1e1e1e;
+    -material-text-primary: rgba(255, 255, 255, 0.87);
+    -material-text-secondary: rgba(255, 255, 255, 0.60);
+    -material-divider: rgba(255, 255, 255, 0.12);
+}
+
+/* Styles généraux */
+.root {
+    -fx-base: -material-background;
+    -fx-background: -material-background;
+    -fx-control-inner-background: -material-surface;
+    -fx-accent: -material-primary;
+    -fx-focus-color: -material-primary;
+    -fx-faint-focus-color: derive(-fx-focus-color, 50%);
+    -fx-font-family: "Roboto", "Segoe UI", sans-serif;
+}
+
+/* Elevation (Material Shadow) */
+.elevation-1 {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 3, 0, 0, 1);
+}
+
+.elevation-2 {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.26), 6, 0, 0, 3);
+}
+
+.elevation-3 {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 6);
+}
+
+/* Buttons Material */
+.button {
+    -fx-background-color: -material-primary;
+    -fx-text-fill: white;
+    -fx-background-radius: 4;
+    -fx-padding: 8 16 8 16;
+    -fx-font-weight: 500;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 3, 0, 0, 1);
+}
+
+.button:hover {
+    -fx-background-color: -material-primary-dark;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.26), 6, 0, 0, 3);
+}
+
+.button:pressed {
+    -fx-background-color: derive(-material-primary, -20%);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 6);
+}
+
+.button:focused {
+    -fx-border-color: transparent;
+}
+
+/* Flat Button (Text Button) */
+.button.flat {
+    -fx-background-color: transparent;
+    -fx-text-fill: -material-primary;
+    -fx-effect: null;
+}
+
+.button.flat:hover {
+    -fx-background-color: rgba(25, 118, 210, 0.08);
+}
+
+.button.flat:pressed {
+    -fx-background-color: rgba(25, 118, 210, 0.16);
+}
+
+/* Outlined Button */
+.button.outlined {
+    -fx-background-color: transparent;
+    -fx-text-fill: -material-primary;
+    -fx-border-color: -material-primary;
+    -fx-border-width: 1;
+    -fx-border-radius: 4;
+    -fx-effect: null;
+}
+
+.button.outlined:hover {
+    -fx-background-color: rgba(25, 118, 210, 0.08);
+}
+
+/* FAB (Floating Action Button) */
+.button.fab {
+    -fx-background-color: -material-accent;
+    -fx-background-radius: 28;
+    -fx-min-width: 56;
+    -fx-min-height: 56;
+    -fx-max-width: 56;
+    -fx-max-height: 56;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 6);
+}
+
+/* Text Fields Material */
+.text-field, .text-area {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent -material-divider transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 8 0 8 0;
+    -fx-text-fill: -material-text-primary;
+    -fx-prompt-text-fill: -material-text-secondary;
+}
+
+.text-field:focused, .text-area:focused {
+    -fx-border-color: transparent transparent -material-primary transparent;
+    -fx-border-width: 0 0 2 0;
+}
+
+/* ComboBox Material */
+.combo-box {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent -material-divider transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.combo-box:focused {
+    -fx-border-color: transparent transparent -material-primary transparent;
+    -fx-border-width: 0 0 2 0;
+}
+
+.combo-box .list-cell {
+    -fx-background-color: -material-surface;
+    -fx-text-fill: -material-text-primary;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: -material-surface;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 6);
+}
+
+/* ListView Material */
+.list-view {
+    -fx-background-color: -material-surface;
+    -fx-border-color: transparent;
+}
+
+.list-cell {
+    -fx-background-color: -material-surface;
+    -fx-text-fill: -material-text-primary;
+    -fx-padding: 12 16 12 16;
+}
+
+.list-cell:hover {
+    -fx-background-color: derive(-material-surface, -5%);
+}
+
+.list-cell:selected {
+    -fx-background-color: derive(-material-primary, 80%);
+    -fx-text-fill: -material-primary;
+}
+
+/* TableView Material */
+.table-view {
+    -fx-background-color: -material-surface;
+    -fx-border-color: transparent;
+}
+
+.table-row-cell {
+    -fx-background-color: -material-surface;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: derive(-material-surface, -3%);
+}
+
+.table-row-cell:selected {
+    -fx-background-color: derive(-material-primary, 80%);
+}
+
+.table-cell {
+    -fx-text-fill: -material-text-primary;
+    -fx-padding: 12 16 12 16;
+}
+
+/* MenuBar Material */
+.menu-bar {
+    -fx-background-color: -material-primary;
+    -fx-border-width: 0;
+}
+
+.menu-bar .label {
+    -fx-text-fill: white;
+}
+
+.menu {
+    -fx-text-fill: white;
+}
+
+.menu-item {
+    -fx-background-color: -material-surface;
+    -fx-text-fill: -material-text-primary;
+    -fx-padding: 12 16 12 16;
+}
+
+.menu-item:focused, .menu-item:hover {
+    -fx-background-color: derive(-material-surface, -5%);
+}
+
+.context-menu {
+    -fx-background-color: -material-surface;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 6);
+}
+
+/* Scroll bars Material */
+.scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: -material-text-secondary;
+    -fx-background-radius: 4;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-color: derive(-material-text-secondary, -20%);
+}
+
+.scroll-bar .track {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar .increment-button, .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+}
+
+/* TabPane Material */
+.tab-pane {
+    -fx-background-color: -material-background;
+}
+
+.tab-pane .tab-header-background {
+    -fx-background-color: -material-surface;
+}
+
+.tab {
+    -fx-background-color: transparent;
+    -fx-text-fill: -material-text-secondary;
+    -fx-font-weight: 500;
+    -fx-padding: 12 24 12 24;
+}
+
+.tab:selected {
+    -fx-text-fill: -material-primary;
+    -fx-border-color: transparent transparent -material-primary transparent;
+    -fx-border-width: 0 0 2 0;
+}
+
+.tab:hover {
+    -fx-background-color: derive(-material-surface, -3%);
+}
+
+/* Cards Material */
+.card {
+    -fx-background-color: -material-surface;
+    -fx-background-radius: 4;
+    -fx-padding: 16;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 3, 0, 0, 1);
+}
+
+/* TitledPane Material */
+.titled-pane {
+    -fx-background-color: -material-surface;
+}
+
+.titled-pane > .title {
+    -fx-background-color: -material-surface;
+    -fx-text-fill: -material-text-primary;
+    -fx-font-weight: 500;
+    -fx-padding: 12 16 12 16;
+}
+
+.titled-pane > .content {
+    -fx-background-color: -material-surface;
+    -fx-border-color: -material-divider;
+    -fx-border-width: 1 0 0 0;
+}
+
+/* ProgressBar Material */
+.progress-bar {
+    -fx-background-color: derive(-material-primary, 80%);
+    -fx-background-radius: 2;
+}
+
+.progress-bar .bar {
+    -fx-background-color: -material-primary;
+    -fx-background-radius: 2;
+}
+
+/* CheckBox Material */
+.check-box {
+    -fx-text-fill: -material-text-primary;
+}
+
+.check-box .box {
+    -fx-background-color: transparent;
+    -fx-border-color: -material-text-secondary;
+    -fx-border-width: 2;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+}
+
+.check-box:selected .box {
+    -fx-background-color: -material-primary;
+    -fx-border-color: -material-primary;
+}
+
+.check-box:hover .box {
+    -fx-background-color: rgba(25, 118, 210, 0.08);
+}
+
+/* RadioButton Material */
+.radio-button {
+    -fx-text-fill: -material-text-primary;
+}
+
+.radio-button .radio {
+    -fx-background-color: transparent;
+    -fx-border-color: -material-text-secondary;
+    -fx-border-width: 2;
+}
+
+.radio-button:selected .radio {
+    -fx-background-color: -material-primary;
+    -fx-border-color: -material-primary;
+}
+
+.radio-button .dot {
+    -fx-background-color: white;
+}
+
+/* Switch (Toggle Button) Material */
+.toggle-button {
+    -fx-background-color: derive(-material-text-secondary, 50%);
+    -fx-background-radius: 10;
+    -fx-text-fill: -material-text-primary;
+}
+
+.toggle-button:selected {
+    -fx-background-color: derive(-material-primary, 50%);
+}
+
+/* Tooltips Material */
+.tooltip {
+    -fx-background-color: #616161;
+    -fx-text-fill: white;
+    -fx-background-radius: 4;
+    -fx-padding: 8 12 8 12;
+    -fx-font-size: 12;
+}
+
+/* Dividers */
+.separator .line {
+    -fx-border-color: -material-divider;
+    -fx-border-width: 1 0 0 0;
+}
+
+/* Ripple effect (via pseudo-class - nécessite implémentation Java) */
+.ripple {
+    -fx-background-color: radial-gradient(center 50% 50%, radius 50%, rgba(255, 255, 255, 0.3), transparent);
+}

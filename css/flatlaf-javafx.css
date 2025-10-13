@@ -1,0 +1,228 @@
+/*
+ * FlatLaf-inspired CSS for JavaFX
+ * Adaptation des thèmes FlatLaf pour JavaFX
+ */
+
+/* Variables de couleur FlatLaf */
+.root {
+    /* FlatLaf Light */
+    -flatlaf-background: #f2f2f2;
+    -flatlaf-foreground: #000000;
+    -flatlaf-selection-background: #2675bf;
+    -flatlaf-selection-foreground: #ffffff;
+    -flatlaf-border: #c8c8c8;
+    -flatlaf-component-background: #ffffff;
+}
+
+.root.flatlaf-dark, .root.flatlaf-darcula {
+    /* FlatLaf Dark/Darcula */
+    -flatlaf-background: #3c3f41;
+    -flatlaf-foreground: #bbbbbb;
+    -flatlaf-selection-background: #4b6eaf;
+    -flatlaf-selection-foreground: #ffffff;
+    -flatlaf-border: #555555;
+    -flatlaf-component-background: #2b2b2b;
+}
+
+.root.flatlaf-intellij {
+    /* FlatLaf IntelliJ */
+    -flatlaf-background: #f2f2f2;
+    -flatlaf-foreground: #000000;
+    -flatlaf-selection-background: #0d5b9e;
+    -flatlaf-selection-foreground: #ffffff;
+    -flatlaf-border: #c8c8c8;
+    -flatlaf-component-background: #ffffff;
+}
+
+/* Styles généraux */
+.root {
+    -fx-base: -flatlaf-background;
+    -fx-background: -flatlaf-background;
+    -fx-control-inner-background: -flatlaf-component-background;
+    -fx-accent: -flatlaf-selection-background;
+    -fx-focus-color: -flatlaf-selection-background;
+    -fx-faint-focus-color: derive(-fx-focus-color, 50%);
+}
+
+/* Buttons */
+.button {
+    -fx-background-color: -flatlaf-component-background;
+    -fx-border-color: -flatlaf-border;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+    -fx-padding: 5 15 5 15;
+    -fx-text-fill: -flatlaf-foreground;
+}
+
+.button:hover {
+    -fx-background-color: derive(-flatlaf-component-background, -5%);
+}
+
+.button:pressed {
+    -fx-background-color: derive(-flatlaf-component-background, -10%);
+}
+
+.button:focused {
+    -fx-border-color: -flatlaf-selection-background;
+    -fx-border-width: 2;
+}
+
+/* Text Fields */
+.text-field, .text-area {
+    -fx-background-color: -flatlaf-component-background;
+    -fx-border-color: -flatlaf-border;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+    -fx-text-fill: -flatlaf-foreground;
+}
+
+.text-field:focused, .text-area:focused {
+    -fx-border-color: -flatlaf-selection-background;
+    -fx-border-width: 2;
+}
+
+/* ComboBox */
+.combo-box {
+    -fx-background-color: -flatlaf-component-background;
+    -fx-border-color: -flatlaf-border;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+}
+
+.combo-box .list-cell {
+    -fx-background-color: -flatlaf-component-background;
+    -fx-text-fill: -flatlaf-foreground;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: -flatlaf-component-background;
+    -fx-border-color: -flatlaf-border;
+}
+
+/* ListView */
+.list-view {
+    -fx-background-color: -flatlaf-component-background;
+    -fx-border-color: -flatlaf-border;
+}
+
+.list-cell {
+    -fx-background-color: -flatlaf-component-background;
+    -fx-text-fill: -flatlaf-foreground;
+}
+
+.list-cell:selected {
+    -fx-background-color: -flatlaf-selection-background;
+    -fx-text-fill: -flatlaf-selection-foreground;
+}
+
+/* TableView */
+.table-view {
+    -fx-background-color: -flatlaf-component-background;
+    -fx-border-color: -flatlaf-border;
+}
+
+.table-cell {
+    -fx-text-fill: -flatlaf-foreground;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: -flatlaf-selection-background;
+    -fx-text-fill: -flatlaf-selection-foreground;
+}
+
+/* MenuBar */
+.menu-bar {
+    -fx-background-color: -flatlaf-background;
+    -fx-border-color: -flatlaf-border;
+    -fx-border-width: 0 0 1 0;
+}
+
+.menu-item {
+    -fx-background-color: -flatlaf-component-background;
+    -fx-text-fill: -flatlaf-foreground;
+}
+
+.menu-item:focused, .menu-item:hover {
+    -fx-background-color: -flatlaf-selection-background;
+    -fx-text-fill: -flatlaf-selection-foreground;
+}
+
+/* Scroll bars - style plat moderne */
+.scroll-bar {
+    -fx-background-color: -flatlaf-background;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: derive(-flatlaf-border, 20%);
+    -fx-background-radius: 5;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-color: derive(-flatlaf-border, -10%);
+}
+
+.scroll-bar .track {
+    -fx-background-color: -flatlaf-background;
+}
+
+/* TabPane */
+.tab-pane {
+    -fx-background-color: -flatlaf-background;
+}
+
+.tab {
+    -fx-background-color: -flatlaf-component-background;
+    -fx-border-color: -flatlaf-border;
+    -fx-border-radius: 3 3 0 0;
+    -fx-background-radius: 3 3 0 0;
+}
+
+.tab:selected {
+    -fx-background-color: -flatlaf-selection-background;
+    -fx-text-base-color: -flatlaf-selection-foreground;
+}
+
+/* TitledPane */
+.titled-pane {
+    -fx-background-color: -flatlaf-component-background;
+    -fx-border-color: -flatlaf-border;
+}
+
+.titled-pane > .title {
+    -fx-background-color: derive(-flatlaf-component-background, -5%);
+    -fx-text-fill: -flatlaf-foreground;
+}
+
+/* ProgressBar */
+.progress-bar {
+    -fx-background-color: -flatlaf-component-background;
+    -fx-border-color: -flatlaf-border;
+}
+
+.progress-bar .bar {
+    -fx-background-color: -flatlaf-selection-background;
+}
+
+/* CheckBox & RadioButton */
+.check-box, .radio-button {
+    -fx-text-fill: -flatlaf-foreground;
+}
+
+.check-box .box, .radio-button .radio {
+    -fx-background-color: -flatlaf-component-background;
+    -fx-border-color: -flatlaf-border;
+}
+
+.check-box:selected .box, .radio-button:selected .radio {
+    -fx-background-color: -flatlaf-selection-background;
+}
+
+/* Tooltips */
+.tooltip {
+    -fx-background-color: derive(-flatlaf-component-background, -10%);
+    -fx-text-fill: -flatlaf-foreground;
+    -fx-border-color: -flatlaf-border;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+    -fx-padding: 5;
+}

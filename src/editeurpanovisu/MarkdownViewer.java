@@ -1,5 +1,6 @@
 package editeurpanovisu;
 
+import javafx.scene.text.Font;
 import javafx.scene.web.WebView;
 import org.commonmark.Extension;
 import org.commonmark.ext.gfm.strikethrough.StrikethroughExtension;
@@ -22,11 +23,18 @@ public class MarkdownViewer {
     
     private final Parser parser;
     private final HtmlRenderer renderer;
+    private static boolean fontesChargees = false;
     
     /**
      * Constructeur avec support des extensions GFM (GitHub Flavored Markdown)
      */
     public MarkdownViewer() {
+        // Charger les polices personnalisées (une seule fois)
+        if (!fontesChargees) {
+            chargerFontes();
+            fontesChargees = true;
+        }
+        
         // Extensions pour les tables et le texte barré
         List<Extension> extensions = Arrays.asList(
             TablesExtension.create(),
@@ -40,6 +48,58 @@ public class MarkdownViewer {
         this.renderer = HtmlRenderer.builder()
                 .extensions(extensions)
                 .build();
+    }
+    
+    /**
+     * Charge les polices personnalisées pour le WebView
+     * Wingdings doit être chargée explicitement car WebView ne peut pas accéder aux polices système Windows
+     */
+    private void chargerFontes() {
+        try {
+            // Charger Wingdings depuis les ressources
+            String wingdingsPath = MarkdownViewer.class.getResource("fonts/wingdings.ttf").toExternalForm();
+            Font.loadFont(wingdingsPath, 10);
+            System.out.println("✅ Police Wingdings chargée avec succès pour WebView");
+        } catch (Exception e) {
+            System.err.println("⚠️ Impossible de charger Wingdings : " + e.getMessage());
+            System.err.println("⚠️ Assurez-vous que src/editeurpanovisu/fonts/wingdings.ttf existe");
+            System.err.println("⚠️ Copiez C:\\Windows\\Fonts\\wingding.ttf vers src/editeurpanovisu/fonts/wingdings.ttf");
+        }
+    }
+    
+    /**
+     * Retourne l'URL de la police Wingdings pour @font-face CSS
+     * @return URL de la police ou chaîne vide si non trouvée
+     */
+    private String getWingdingsFontUrl() {
+        try {
+            return MarkdownViewer.class.getResource("fonts/wingdings.ttf").toExternalForm();
+        } catch (Exception e) {
+            System.err.println("⚠️ URL Wingdings non disponible : " + e.getMessage());
+            return "";
+        }
+    }
+    
+    /**
+     * Génère le CSS @font-face pour charger Wingdings dans le WebView
+     * @return Code CSS @font-face ou chaîne vide si police non disponible
+     */
+    private String genererFontFaceCSS() {
+        String fontUrl = getWingdingsFontUrl();
+        if (fontUrl.isEmpty()) {
+            return "";
+        }
+        return """
+                <style>
+                    /* Chargement de la police Wingdings pour les symboles */
+                    @font-face {
+                        font-family: 'Wingdings';
+                        src: url('%s') format('truetype');
+                        font-weight: normal;
+                        font-style: normal;
+                    }
+                </style>
+                """.formatted(fontUrl);
     }
     
     /**
@@ -96,69 +156,138 @@ public class MarkdownViewer {
     }
     
     /**
-     * Remplace les émojis courants par des icônes Font Awesome
-     * JavaFX WebView sous Windows ne supporte pas bien les émojis Unicode
+     * Remplace les émojis courants par des badges visuels stylisés
+     * Affiche uniquement l'icône, le texte apparaît au survol (tooltip)
      * 
      * @param html Contenu HTML avec émojis
-     * @return HTML avec émojis remplacés par des icônes Font Awesome
+     * @return HTML avec émojis remplacés par des icônes avec tooltips
      */
     private String remplacerEmojis(String html) {
-        // Remplacer les émojis par des badges textuels colorés
-        // JavaFX WebView a des limitations avec les polices web, on utilise des badges simples
+        // Format: <span class='badge badge-xxx' title='TEXTE'>&#XXXX;</span>
+        // Seule l'icône est visible, le texte apparaît au survol
         return html
-            // Emojis de la documentation aide
-            .replace("📚", "<span class='emoji-badge emoji-doc' title='Documentation'>[DOC]</span>")
-            .replace("📖", "<span class='emoji-badge emoji-doc' title='Livre'>[LIVRE]</span>")
-            .replace("📋", "<span class='emoji-badge emoji-note' title='Liste'>[LISTE]</span>")
-            .replace("📞", "<span class='emoji-badge emoji-contact' title='Contact'>[CONTACT]</span>")
-            .replace("📦", "<span class='emoji-badge emoji-package' title='Paquet'>[PAQUET]</span>")
-            .replace("🎯", "<span class='emoji-badge emoji-target' title='Objectif'>[OBJECTIF]</span>")
-            .replace("✅", "<span class='emoji-badge emoji-check' title='OK'>[OK]</span>")
-            .replace("❌", "<span class='emoji-badge emoji-cross' title='Erreur'>[ERREUR]</span>")
-            .replace("🔧", "<span class='emoji-badge emoji-tools' title='Outils'>[OUTILS]</span>")
-            .replace("🛠️", "<span class='emoji-badge emoji-tools' title='Outils'>[OUTILS]</span>")
-            .replace("🚀", "<span class='emoji-badge emoji-rocket' title='Déploiement'>[DEPLOIEMENT]</span>")
-            .replace("⚠️", "<span class='emoji-badge emoji-warning' title='Attention'>[ATTENTION]</span>")
-            .replace("⚠", "<span class='emoji-badge emoji-warning' title='Attention'>[ATTENTION]</span>")
-            .replace("🐛", "<span class='emoji-badge emoji-bug' title='Bogue'>[BOGUE]</span>")
-            .replace("🔗", "<span class='emoji-badge emoji-link' title='Lien'>[LIEN]</span>")
-            .replace("📝", "<span class='emoji-badge emoji-note' title='Note'>[NOTE]</span>")
-            .replace("💻", "<span class='emoji-badge emoji-dev' title='Développement'>[DEV]</span>")
-            .replace("🏗️", "<span class='emoji-badge emoji-build' title='Construction'>[CONSTRUCTION]</span>")
-            .replace("🏗", "<span class='emoji-badge emoji-build' title='Construction'>[CONSTRUCTION]</span>")
-            .replace("🗺️", "<span class='emoji-badge emoji-map' title='Carte'>[CARTE]</span>")
-            .replace("🗺", "<span class='emoji-badge emoji-map' title='Carte'>[CARTE]</span>")
-            .replace("🔒", "<span class='emoji-badge emoji-lock' title='Sécurité'>[SECURITE]</span>")
-            .replace("💡", "<span class='emoji-badge emoji-idea' title='Idée'>[IDEE]</span>")
-            .replace("🔑", "<span class='emoji-badge emoji-key' title='Clé'>[CLE]</span>")
-            .replace("🔄", "<span class='emoji-badge emoji-refresh' title='Synchronisation'>[SYNC]</span>")
-            .replace("📂", "<span class='emoji-badge emoji-folder' title='Dossier'>[DOSSIER]</span>")
+            // Documentation
+            .replace("📚", "<span class='badge badge-doc' title='Documentation'>&#128214;</span>")
+            .replace("📖", "<span class='badge badge-doc' title='Livre'>&#128214;</span>")
+            .replace("📋", "<span class='badge badge-note' title='Liste'>&#128203;</span>")
+            .replace("📞", "<span class='badge badge-contact' title='Contact'>&#9742;</span>")
+            .replace("📦", "<span class='badge badge-package' title='Paquet'>&#128230;</span>")
+            .replace("🎯", "<span class='badge badge-target' title='Objectif'>&#9679;</span>")
+            .replace("✅", "<span class='badge badge-check' title='Validé'>&#10004;</span>")
+            .replace("❌", "<span class='badge badge-cross' title='Erreur'>&#10006;</span>")
+            .replace("🔧", "<span class='badge badge-tools' title='Outils'>&#9881;</span>")
+            .replace("🛠️", "<span class='badge badge-tools' title='Outils'>&#9881;</span>")
+            .replace("🛠", "<span class='badge badge-tools' title='Outils'>&#9881;</span>")
+            .replace("🚀", "<span class='badge badge-rocket' title='Déploiement'>&#9654;</span>")
+            .replace("⚠️", "<span class='badge badge-warning' title='Attention'>&#9888;</span>")
+            .replace("⚠", "<span class='badge badge-warning' title='Attention'>&#9888;</span>")
+            .replace("🐛", "<span class='badge badge-bug' title='Bug'>&#128027;</span>")
+            .replace("🔗", "<span class='badge badge-link' title='Lien'>&#128279;</span>")
+            .replace("📝", "<span class='badge badge-note' title='Note'>&#128221;</span>")
+            .replace("💻", "<span class='badge badge-dev' title='Développement'>&#128187;</span>")
+            .replace("🏗️", "<span class='badge badge-build' title='Construction'>&#127959;</span>")
+            .replace("🏗", "<span class='badge badge-build' title='Construction'>&#127959;</span>")
+            .replace("🗺️", "<span class='badge badge-map' title='Carte'>&#128506;</span>")
+            .replace("🗺", "<span class='badge badge-map' title='Carte'>&#128506;</span>")
+            .replace("🔒", "<span class='badge badge-lock' title='Sécurité'>&#128274;</span>")
+            .replace("💡", "<span class='badge badge-idea' title='Idée'>&#128161;</span>")
+            .replace("🔑", "<span class='badge badge-key' title='Clé'>&#128273;</span>")
+            .replace("🔄", "<span class='badge badge-refresh' title='Synchronisation'>&#128260;</span>")
+            .replace("📂", "<span class='badge badge-folder' title='Dossier'>&#128193;</span>")
+            .replace("📁", "<span class='badge badge-folder' title='Dossier'>&#128193;</span>")
             // Emojis supplémentaires de la présentation
-            .replace("🌍", "<span class='emoji-badge emoji-globe' title='Monde'>[MONDE]</span>")
-            .replace("🤝", "<span class='emoji-badge emoji-handshake' title='Partenariat'>[PARTENARIAT]</span>")
-            .replace("👥", "<span class='emoji-badge emoji-users' title='Communauté'>[COMMUNAUTE]</span>")
-            .replace("📊", "<span class='emoji-badge emoji-chart' title='Statistiques'>[STATS]</span>")
+            .replace("🌍", "<span class='badge badge-globe' title='Monde'>&#127758;</span>")
+            .replace("🌐", "<span class='badge badge-world' title='Web'>&#127760;</span>")
+            .replace("🤝", "<span class='badge badge-handshake' title='Partenariat'>&#129309;</span>")
+            .replace("👥", "<span class='badge badge-users' title='Communauté'>&#128101;</span>")
+            .replace("📊", "<span class='badge badge-chart' title='Statistiques'>&#128202;</span>")
             // Emojis de la documentation Ollama
-            .replace("🤖", "<span class='emoji-badge emoji-robot' title='Robot'>[IA]</span>")
-            .replace("💰", "<span class='emoji-badge emoji-money' title='Gratuit'>[GRATUIT]</span>")
-            .replace("ℹ️", "<span class='emoji-badge emoji-info' title='Info'>[INFO]</span>")
-            .replace("ℹ", "<span class='emoji-badge emoji-info' title='Info'>[INFO]</span>")
-            .replace("⭐", "<span class='emoji-badge emoji-star' title='Étoile'>[*]</span>")
-            .replace("🏷️", "<span class='emoji-badge emoji-tag' title='Étiquette'>[TAG]</span>")
-            .replace("🏷", "<span class='emoji-badge emoji-tag' title='Étiquette'>[TAG]</span>")
-            .replace("✏️", "<span class='emoji-badge emoji-pencil' title='Modifier'>[EDIT]</span>")
-            .replace("✏", "<span class='emoji-badge emoji-pencil' title='Modifier'>[EDIT]</span>")
-            .replace("💾", "<span class='emoji-badge emoji-save' title='Sauvegarder'>[SAVE]</span>")
-            .replace("⏱️", "<span class='emoji-badge emoji-timer' title='Patience'>[TIMER]</span>")
-            .replace("⏱", "<span class='emoji-badge emoji-timer' title='Patience'>[TIMER]</span>")
-            .replace("✨", "<span class='emoji-badge emoji-sparkles' title='Magie'>[MAGIC]</span>")
-            .replace("💬", "<span class='emoji-badge emoji-comment' title='Forum'>[FORUM]</span>")
-            .replace("🎥", "<span class='emoji-badge emoji-video' title='Vidéo'>[VIDEO]</span>")
-            .replace("🆘", "<span class='emoji-badge emoji-sos' title='Aide'>[SOS]</span>")
-            .replace("🎉", "<span class='emoji-badge emoji-party' title='Succès'>[SUCCESS]</span>")
-            .replace("❓", "<span class='emoji-badge emoji-question' title='Question'>[?]</span>")
-            .replace("🌐", "<span class='emoji-badge emoji-world' title='Internet'>[INTERNET]</span>")
-            .replace("📧", "<span class='emoji-badge emoji-email' title='Email'>[EMAIL]</span>");
+            .replace("🤖", "<span class='badge badge-robot' title='Intelligence Artificielle'>&#129302;</span>")
+            .replace("💰", "<span class='badge badge-money' title='Gratuit'>&#128176;</span>")
+            .replace("ℹ️", "<span class='badge badge-info' title='Information'>&#8505;</span>")
+            .replace("ℹ", "<span class='badge badge-info' title='Information'>&#8505;</span>")
+            .replace("⭐", "<span class='badge badge-star' title='Favori'>&#11088;</span>")
+            .replace("🏷️", "<span class='badge badge-tag' title='Tag'>&#127991;</span>")
+            .replace("🏷", "<span class='badge badge-tag' title='Tag'>&#127991;</span>")
+            .replace("✏️", "<span class='badge badge-pencil' title='Éditer'>&#9998;</span>")
+            .replace("✏", "<span class='badge badge-pencil' title='Éditer'>&#9998;</span>")
+            .replace("💾", "<span class='badge badge-save' title='Sauvegarder'>&#128190;</span>")
+            .replace("⏱️", "<span class='badge badge-timer' title='Chronomètre'>&#9201;</span>")
+            .replace("⏱", "<span class='badge badge-timer' title='Chronomètre'>&#9201;</span>")
+            .replace("✨", "<span class='badge badge-sparkles' title='Magie'>&#10024;</span>")
+            .replace("💬", "<span class='badge badge-comment' title='Forum'>&#128172;</span>")
+            .replace("🎥", "<span class='badge badge-video' title='Vidéo'>&#127909;</span>")
+            .replace("🆘", "<span class='badge badge-sos' title='Aide'>&#128629;</span>")
+            .replace("🎉", "<span class='badge badge-party' title='Succès'>&#127881;</span>")
+            .replace("❓", "<span class='badge badge-question' title='Question'>&#10067;</span>")
+            .replace("📧", "<span class='badge badge-email' title='Email'>&#128231;</span>")
+            // Emojis de aide.md (nouveaux)
+            .replace("🎨", "<span class='badge badge-art' title='Design'>&#127912;</span>")
+            .replace("📍", "<span class='badge badge-pin' title='Position'>&#128205;</span>")
+            .replace("🔤", "<span class='badge badge-text' title='Texte'>&#128228;</span>")
+            .replace("🌫️", "<span class='badge badge-cloud' title='Opacité'>&#9729;</span>")
+            .replace("🌫", "<span class='badge badge-cloud' title='Opacité'>&#9729;</span>")
+            .replace("🖌️", "<span class='badge badge-brush' title='Pinceau'>&#128396;</span>")
+            .replace("🖌", "<span class='badge badge-brush' title='Pinceau'>&#128396;</span>")
+            .replace("🔘", "<span class='badge badge-radio' title='Option'>&#128280;</span>")
+            .replace("☑️", "<span class='badge badge-checkbox' title='Case à cocher'>&#9745;</span>")
+            .replace("☑", "<span class='badge badge-checkbox' title='Case à cocher'>&#9745;</span>")
+            .replace("🏞️", "<span class='badge badge-panorama' title='Panorama'>&#127966;</span>")
+            .replace("🏞", "<span class='badge badge-panorama' title='Panorama'>&#127966;</span>")
+            .replace("🖼️", "<span class='badge badge-picture' title='Image'>&#128444;</span>")
+            .replace("🖼", "<span class='badge badge-picture' title='Image'>&#128444;</span>")
+            .replace("📽️", "<span class='badge badge-projector' title='Diaporama'>&#128253;</span>")
+            .replace("📽", "<span class='badge badge-projector' title='Diaporama'>&#128253;</span>")
+            .replace("🔵", "<span class='badge badge-blue' title='Bleu'>&#128309;</span>")
+            .replace("🟠", "<span class='badge badge-orange' title='Orange'>&#128992;</span>")
+            .replace("🟣", "<span class='badge badge-purple' title='Violet'>&#128995;</span>")
+            .replace("🧭", "<span class='badge badge-compass' title='Boussole'>&#129517;</span>")
+            .replace("👁️", "<span class='badge badge-eye' title='Œil'>&#128065;</span>")
+            .replace("👁", "<span class='badge badge-eye' title='Œil'>&#128065;</span>")
+            .replace("📱", "<span class='badge badge-mobile' title='Mobile'>&#128241;</span>")
+            .replace("🏨", "<span class='badge badge-hotel' title='Hôtel'>&#127976;</span>")
+            .replace("🏡", "<span class='badge badge-house' title='Maison'>&#127969;</span>")
+            .replace("🏙️", "<span class='badge badge-city' title='Ville'>&#127961;</span>")
+            .replace("🏙", "<span class='badge badge-city' title='Ville'>&#127961;</span>")
+            .replace("🏘️", "<span class='badge badge-houses' title='Quartier'>&#127960;</span>")
+            .replace("🏘", "<span class='badge badge-houses' title='Quartier'>&#127960;</span>")
+            .replace("🏛️", "<span class='badge badge-monument' title='Monument'>&#127963;</span>")
+            .replace("🏛", "<span class='badge badge-monument' title='Monument'>&#127963;</span>")
+            .replace("🏰", "<span class='badge badge-castle' title='Château'>&#127984;</span>")
+            .replace("🏰️", "<span class='badge badge-castle' title='Château'>&#127984;</span>")
+            .replace("⏱️", "<span class='badge badge-stopwatch' title='Chronomètre'>&#9201;</span>")
+            .replace("⏱", "<span class='badge badge-stopwatch' title='Chronomètre'>&#9201;</span>")
+            .replace("▶️", "<span class='badge badge-play' title='Lecture'>&#9654;</span>")
+            .replace("▶", "<span class='badge badge-play' title='Lecture'>&#9654;</span>")
+            .replace("🚪", "<span class='badge badge-door' title='Porte'>&#128682;</span>")
+            .replace("➕", "<span class='badge badge-plus' title='Ajouter'>&#10133;</span>")
+            .replace("↔️", "<span class='badge badge-arrows' title='Flèches'>&#8596;</span>")
+            .replace("↔", "<span class='badge badge-arrows' title='Flèches'>&#8596;</span>")
+            .replace("📏", "<span class='badge badge-ruler' title='Règle'>&#128207;</span>")
+            .replace("📐", "<span class='badge badge-triangle' title='Triangle'>&#128208;</span>")
+            .replace("🔺", "<span class='badge badge-triangle-up' title='Triangle'>&#128314;</span>")
+            .replace("🔲", "<span class='badge badge-square' title='Carré'>&#128306;</span>")
+            .replace("🎭", "<span class='badge badge-theater' title='Théâtre'>&#127917;</span>")
+            .replace("🎬", "<span class='badge badge-clapper' title='Action'>&#127916;</span>")
+            .replace("👴", "<span class='badge badge-elder' title='Accessibilité'>&#128116;</span>")
+            .replace("🖱️", "<span class='badge badge-mouse' title='Souris'>&#128433;</span>")
+            .replace("🖱", "<span class='badge badge-mouse' title='Souris'>&#128433;</span>")
+            .replace("🖵", "<span class='badge badge-fullscreen' title='Plein écran'>&#128441;</span>")
+            .replace("📘", "<span class='badge badge-book-blue' title='Livre'>&#128216;</span>")
+            .replace("🐦", "<span class='badge badge-bird' title='Twitter'>&#128038;</span>")
+            .replace("🛒", "<span class='badge badge-cart' title='Boutique'>&#128722;</span>")
+            .replace("📷", "<span class='badge badge-camera' title='Photo'>&#128247;</span>")
+            .replace("📸", "<span class='badge badge-camera' title='Photo'>&#128248;</span>")
+            .replace("📄", "<span class='badge badge-page' title='Document'>&#128196;</span>")
+            .replace("🏠", "<span class='badge badge-home' title='Accueil'>&#127968;</span>")
+            .replace("🌳", "<span class='badge badge-tree' title='Arbre'>&#127795;</span>")
+            .replace("🆓", "<span class='badge badge-free' title='Gratuit'>&#127345;</span>")
+            .replace("©️", "<span class='badge badge-copyright' title='Copyright'>&#169;</span>")
+            .replace("©", "<span class='badge badge-copyright' title='Copyright'>&#169;</span>")
+            .replace("🏆", "<span class='badge badge-trophy' title='Trophée'>&#127942;</span>")
+            .replace("🔖", "<span class='badge badge-bookmark' title='Signet'>&#128278;</span>")
+            .replace("🎛️", "<span class='badge badge-controls' title='Contrôles'>&#127899;</span>")
+            .replace("🎛", "<span class='badge badge-controls' title='Contrôles'>&#127899;</span>");
     }
     
     /**
@@ -187,7 +316,8 @@ public class MarkdownViewer {
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                """ + baseTag + """
+                """ + baseTag + 
+                genererFontFaceCSS() + """
                 <style>
                     body {
                         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', sans-serif;
@@ -331,74 +461,124 @@ public class MarkdownViewer {
                         color: #6a737d;
                     }
                     
-                    /* Badges pour remplacer les émojis */
-                    .emoji-badge {
-                        display: inline-block;
-                        padding: 2px 6px;
-                        margin: 0 2px;
-                        border-radius: 3px;
-                        font-size: 0.75em;
-                        font-weight: bold;
-                        font-family: 'Consolas', 'Monaco', monospace;
-                        vertical-align: middle;
-                        white-space: nowrap;
-                        color: white;
-                    }
-                    
-                    /* Badges spécifiques par type */
-                    .emoji-check { background-color: #28a745; }  /* Vert - Succès */
-                    .emoji-cross { background-color: #dc3545; }  /* Rouge - Erreur */
-                    .emoji-warning { background-color: #ffc107; color: #333; } /* Orange - Attention */
-                    .emoji-doc { background-color: #6f42c1; }    /* Violet - Documentation */
-                    .emoji-package { background-color: #6c757d; } /* Gris - Package */
-                    .emoji-target { background-color: #007bff; }  /* Bleu - Objectif */
-                    .emoji-tools { background-color: #17a2b8; }   /* Cyan - Outils */
-                    .emoji-rocket { background-color: #fd7e14; }  /* Orange vif - Déploiement */
-                    .emoji-bug { background-color: #e83e8c; }     /* Rose - Bug */
-                    .emoji-note { background-color: #20c997; }    /* Vert menthe - Note */
-                    .emoji-dev { background-color: #343a40; }     /* Noir - Dev */
-                    .emoji-build { background-color: #795548; }   /* Marron - Build */
-                    .emoji-map { background-color: #4caf50; }     /* Vert - Carte */
-                    .emoji-lock { background-color: #f44336; }    /* Rouge foncé - Sécurité */
-                    .emoji-idea { background-color: #ffeb3b; color: #333; } /* Jaune - Idée */
-                    .emoji-key { background-color: #9c27b0; }     /* Violet foncé - Clé */
-                    .emoji-refresh { background-color: #03a9f4; } /* Bleu clair - Sync */
-                    .emoji-folder { background-color: #607d8b; }  /* Gris bleu - Dossier */
-                    .emoji-contact { background-color: #2196f3; } /* Bleu - Contact */
-                    .emoji-globe { background-color: #00897b; }   /* Vert-bleu - Monde */
-                    .emoji-handshake { background-color: #ffa726; } /* Orange clair - Partenariat */
-                    .emoji-users { background-color: #8e24aa; }   /* Violet - Communauté */
-                    .emoji-chart { background-color: #3f51b5; }   /* Bleu indigo - Statistiques */
-                    .emoji-link { background-color: #0288d1; }    /* Bleu - Lien */
-                    .emoji-robot { background-color: #455a64; }   /* Gris foncé - Robot/IA */
-                    .emoji-money { background-color: #4caf50; }   /* Vert - Gratuit */
-                    .emoji-info { background-color: #2196f3; }    /* Bleu - Info */
-                    .emoji-star { background-color: #ffb300; color: #333; } /* Or - Étoile */
-                    .emoji-tag { background-color: #9e9e9e; }     /* Gris - Tag */
-                    .emoji-pencil { background-color: #ff9800; }  /* Orange - Modifier */
-                    .emoji-save { background-color: #00bcd4; }    /* Cyan - Sauvegarder */
-                    .emoji-timer { background-color: #9c27b0; }   /* Violet - Timer */
-                    .emoji-sparkles { background-color: #e91e63; } /* Rose - Magie */
-                    .emoji-comment { background-color: #4caf50; } /* Vert - Forum */
-                    .emoji-video { background-color: #f44336; }   /* Rouge - Vidéo */
-                    .emoji-sos { background-color: #d32f2f; }     /* Rouge foncé - SOS */
-                    .emoji-party { background-color: #ff4081; }   /* Rose vif - Succès */
-                    .emoji-question { background-color: #ff9800; } /* Orange - Question */
-                    .emoji-world { background-color: #2196f3; }   /* Bleu - Internet */
-                    .emoji-email { background-color: #4caf50; }   /* Vert - Email */
-                    
-                    /* Badges et éléments spéciaux */
+                    /* Badges visuels pour les indicateurs - Icônes avec tooltips */
                     .badge {
                         display: inline-block;
-                        padding: 0.25em 0.4em;
-                        font-size: 75%;
-                        font-weight: 700;
-                        line-height: 1;
-                        text-align: center;
+                        padding: 4px 8px;
+                        margin: 0 2px;
+                        border-radius: 4px;
+                        font-size: 1em;
+                        font-weight: normal;
+                        font-family: 'Segoe UI', Arial, sans-serif;
                         white-space: nowrap;
-                        vertical-align: baseline;
-                        border-radius: 0.25rem;
+                        vertical-align: middle;
+                        line-height: 1.4;
+                        cursor: help;
+                        transition: transform 0.2s ease, box-shadow 0.2s ease;
                     }
+                    
+                    /* Effet au survol */
+                    .badge:hover {
+                        transform: scale(1.15);
+                        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+                    }
+                    
+                    /* Symboles Wingdings pour icônes fiables */
+                    .wi {
+                        font-family: 'Wingdings', 'Webdings', 'Segoe UI Symbol', sans-serif;
+                        font-size: 1.1em;
+                        display: inline-block;
+                        margin-right: 2px;
+                    }
+                    
+                    /* Couleurs par catégorie sémantique */
+                    .badge-check { background: #28a745; color: #fff; }    /* Vert - Succès */
+                    .badge-cross { background: #dc3545; color: #fff; }    /* Rouge - Erreur */
+                    .badge-warning { background: #ffc107; color: #333; }  /* Orange - Attention */
+                    .badge-info { background: #17a2b8; color: #fff; }     /* Cyan - Information */
+                    .badge-robot { background: #546e7a; color: #fff; }    /* Gris - IA/Robot */
+                    .badge-doc { background: #6f42c1; color: #fff; }      /* Violet - Documentation */
+                    .badge-package { background: #795548; color: #fff; }  /* Marron - Package */
+                    .badge-target { background: #dc3545; color: #fff; }   /* Rouge - Objectif */
+                    .badge-tools { background: #607d8b; color: #fff; }    /* Gris bleu - Outils */
+                    .badge-rocket { background: #ff6f00; color: #fff; }   /* Orange vif - Déploiement */
+                    .badge-bug { background: #e91e63; color: #fff; }      /* Rose - Bug */
+                    .badge-note { background: #00897b; color: #fff; }     /* Vert-bleu - Note */
+                    .badge-dev { background: #37474f; color: #fff; }      /* Gris foncé - Dev */
+                    .badge-build { background: #8d6e63; color: #fff; }    /* Marron - Build */
+                    .badge-map { background: #43a047; color: #fff; }      /* Vert - Carte */
+                    .badge-lock { background: #d32f2f; color: #fff; }     /* Rouge foncé - Sécurité */
+                    .badge-idea { background: #ffd600; color: #333; }     /* Jaune - Idée */
+                    .badge-key { background: #7b1fa2; color: #fff; }      /* Violet foncé - Clé */
+                    .badge-refresh { background: #0288d1; color: #fff; }  /* Bleu clair - Sync */
+                    .badge-folder { background: #ffb300; color: #333; }   /* Jaune/Orange - Dossier */
+                    .badge-contact { background: #1976d2; color: #fff; }  /* Bleu - Contact */
+                    .badge-world { background: #1976d2; color: #fff; }    /* Bleu - Internet */
+                    .badge-handshake { background: #ff6f00; color: #fff; } /* Orange - Partenariat */
+                    .badge-users { background: #5e35b1; color: #fff; }    /* Violet - Communauté */
+                    .badge-chart { background: #3949ab; color: #fff; }    /* Bleu indigo - Statistiques */
+                    .badge-link { background: #0277bd; color: #fff; }     /* Bleu - Lien */
+                    .badge-money { background: #388e3c; color: #fff; }    /* Vert - Gratuit */
+                    .badge-star { background: #f57f17; color: #fff; }     /* Or - Étoile */
+                    .badge-tag { background: #757575; color: #fff; }      /* Gris - Tag */
+                    .badge-pencil { background: #f57c00; color: #fff; }   /* Orange - Modifier */
+                    .badge-save { background: #0097a7; color: #fff; }     /* Cyan - Sauvegarder */
+                    .badge-timer { background: #6a1b9a; color: #fff; }    /* Violet - Timer */
+                    .badge-sparkles { background: #c2185b; color: #fff; } /* Rose - Magie */
+                    .badge-comment { background: #388e3c; color: #fff; }  /* Vert - Forum */
+                    .badge-video { background: #c62828; color: #fff; }    /* Rouge - Vidéo */
+                    .badge-sos { background: #b71c1c; color: #fff; }      /* Rouge foncé - SOS */
+                    .badge-party { background: #ad1457; color: #fff; }    /* Rose vif - Succès */
+                    .badge-question { background: #ef6c00; color: #fff; } /* Orange - Question */
+                    .badge-email { background: #43a047; color: #fff; }    /* Vert - Email */
+                    .badge-art { background: #8e24aa; color: #fff; }      /* Violet - Design */
+                    .badge-pin { background: #d32f2f; color: #fff; }      /* Rouge - Position */
+                    .badge-text { background: #424242; color: #fff; }     /* Gris foncé - Texte */
+                    .badge-cloud { background: #90a4ae; color: #fff; }    /* Gris clair - Opacité */
+                    .badge-brush { background: #6a1b9a; color: #fff; }    /* Violet - Pinceau */
+                    .badge-radio { background: #1976d2; color: #fff; }    /* Bleu - Option radio */
+                    .badge-checkbox { background: #388e3c; color: #fff; } /* Vert - Checkbox */
+                    .badge-panorama { background: #00897b; color: #fff; } /* Vert-bleu - Panoramique */
+                    .badge-picture { background: #ef6c00; color: #fff; }  /* Orange - Image */
+                    .badge-projector { background: #5e35b1; color: #fff; } /* Violet - Diaporama */
+                    .badge-blue { background: #1976d2; color: #fff; }     /* Bleu */
+                    .badge-orange { background: #f57c00; color: #fff; }   /* Orange */
+                    .badge-purple { background: #7b1fa2; color: #fff; }   /* Violet */
+                    .badge-compass { background: #d32f2f; color: #fff; }  /* Rouge - Boussole */
+                    .badge-eye { background: #424242; color: #fff; }      /* Gris foncé - Œil */
+                    .badge-mobile { background: #424242; color: #fff; }   /* Gris foncé - Mobile */
+                    .badge-hotel { background: #1976d2; color: #fff; }    /* Bleu - Hôtel */
+                    .badge-house { background: #f57c00; color: #fff; }    /* Orange - Maison */
+                    .badge-city { background: #424242; color: #fff; }     /* Gris foncé - Ville */
+                    .badge-houses { background: #8d6e63; color: #fff; }   /* Marron - Quartier */
+                    .badge-monument { background: #8d6e63; color: #fff; } /* Marron - Monument */
+                    .badge-castle { background: #5e35b1; color: #fff; }   /* Violet - Château */
+                    .badge-stopwatch { background: #6a1b9a; color: #fff; } /* Violet - Chronomètre */
+                    .badge-play { background: #388e3c; color: #fff; }     /* Vert - Lecture */
+                    .badge-door { background: #795548; color: #fff; }     /* Marron - Porte */
+                    .badge-plus { background: #388e3c; color: #fff; }     /* Vert - Ajouter */
+                    .badge-arrows { background: #1976d2; color: #fff; }   /* Bleu - Flèches */
+                    .badge-ruler { background: #ff6f00; color: #fff; }    /* Orange - Règle */
+                    .badge-triangle { background: #f57c00; color: #fff; } /* Orange - Triangle */
+                    .badge-triangle-up { background: #1976d2; color: #fff; } /* Bleu - Triangle */
+                    .badge-square { background: #424242; color: #fff; }   /* Gris - Carré */
+                    .badge-theater { background: #8e24aa; color: #fff; }  /* Violet - Théâtre */
+                    .badge-clapper { background: #424242; color: #fff; }  /* Gris foncé - Clap */
+                    .badge-elder { background: #795548; color: #fff; }    /* Marron - Accessibilité */
+                    .badge-mouse { background: #424242; color: #fff; }    /* Gris foncé - Souris */
+                    .badge-fullscreen { background: #1976d2; color: #fff; } /* Bleu - Plein écran */
+                    .badge-book-blue { background: #1976d2; color: #fff; } /* Bleu - Livre */
+                    .badge-bird { background: #1da1f2; color: #fff; }     /* Bleu Twitter */
+                    .badge-cart { background: #ff6f00; color: #fff; }     /* Orange - Boutique */
+                    .badge-camera { background: #424242; color: #fff; }   /* Gris foncé - Photo */
+                    .badge-page { background: #757575; color: #fff; }     /* Gris - Document */
+                    .badge-home { background: #f57c00; color: #fff; }     /* Orange - Accueil */
+                    .badge-tree { background: #388e3c; color: #fff; }     /* Vert - Arbre */
+                    .badge-free { background: #388e3c; color: #fff; }     /* Vert - Gratuit */
+                    .badge-copyright { background: #424242; color: #fff; } /* Gris - Copyright */
+                    .badge-trophy { background: #ffd600; color: #333; }   /* Or - Trophée */
+                    .badge-bookmark { background: #1976d2; color: #fff; } /* Bleu - Signet */
+                    .badge-controls { background: #424242; color: #fff; } /* Gris foncé - Contrôles */
                 </style>
             </head>
             <body>
