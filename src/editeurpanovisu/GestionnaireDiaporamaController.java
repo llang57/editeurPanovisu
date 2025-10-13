@@ -108,11 +108,11 @@ public final class GestionnaireDiaporamaController {
         apDiaporama.setPrefHeight(iHauteur);
         apDiaporama.setMinHeight(iHauteur);
         apDiaporama.setMaxHeight(iHauteur);
-        apDiaporama.setStyle("-fx-background-color : #dde");
+        apDiaporama.getStyleClass().add("editor-panel");
         apDiaporama.setLayoutY(80);
 
         AnchorPane apImage = new AnchorPane();
-        apImage.setStyle("-fx-background-color : #ede");
+        apImage.getStyleClass().add("preview-panel");
         apImage.setLayoutX(320);
         apImage.setLayoutY(25);
         apImage.setPrefSize(450, 300);

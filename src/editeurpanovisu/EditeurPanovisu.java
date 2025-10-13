@@ -124,6 +124,7 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -1123,8 +1124,8 @@ public class EditeurPanovisu extends Application {
     private static double positLoupeX;
     private static double positLoupeY;
     private static String strTypeFichierTransf = "jpg";
-    private static double largeurE2C = 600;
-    private static double hauteurE2C = 400;
+    private static double largeurE2C = 650;
+    private static double hauteurE2C = 420;
     private static boolean bNetteteTransf = false;
     private static double niveauNetteteTransf = 0.2;
     private static int iNumeroPanoChoisitHS;
@@ -1319,7 +1320,7 @@ public class EditeurPanovisu extends Application {
     private static MenuItem mniChargerModele;
     private static MenuItem mniSauverModele;
     private static MenuItem mniAPropos;
-    private static MenuItem mniAide;
+    // Supprimé : private static MenuItem mniAide; (option redondante)
     private static MenuItem mniDocumentation;
 
     private static MenuItem mniNouveauProjet;
@@ -8649,9 +8650,9 @@ public class EditeurPanovisu extends Application {
         Button btnAnnuler = new Button(rbLocalisation.getString("main.annuler"), new ImageView(new Image("file:" + getStrRepertAppli() + "/images/annule.png")));
         Button btnValider = new Button(rbLocalisation.getString("main.valider"), new ImageView(new Image("file:" + getStrRepertAppli() + "/images/valide.png")));
         btnValider.setLayoutX(180);
-        btnValider.setLayoutY(170);
+        btnValider.setLayoutY(155); // Réduit de 170 à 155 pour plus d'espace en bas
         btnAnnuler.setLayoutX(80);
-        btnAnnuler.setLayoutY(170);
+        btnAnnuler.setLayoutY(155); // Réduit de 170 à 155 pour plus d'espace en bas
         ToggleGroup tgTypeZone = new ToggleGroup();
         Label lblTypeZone = new Label(rbLocalisation.getString("main.typeZone"));
         lblTypeZone.setLayoutX(20);
@@ -9360,10 +9361,10 @@ public class EditeurPanovisu extends Application {
      */
     public static void creerEditerBarre(String strNomFichierBarre) {
         apCreationBarre.getChildren().clear();
-        apCreationBarre.setStyle("-fx-background-color : -fx-base;"
-                + "-fx-border-color: derive(-fx-base,10%);"
-                + "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.5) , 8, 0.0 , 0 , 8 );"
-                + "-fx-border-width: 1px;");
+        apCreationBarre.getStyleClass().clear();
+        apCreationBarre.getStyleClass().add("editor-panel");
+        apCreationBarre.setStyle("-fx-border-width: 1px;"
+                + "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.5) , 8, 0.0 , 0 , 8 );");
 
         AnchorPane apOutilsBarre = new AnchorPane();
         Button btnAnnulerBarre = new Button(rbLocalisation.getString("main.quitter"), new ImageView(new Image("file:" + getStrRepertAppli() + "/images/annule.png")));
@@ -9414,13 +9415,15 @@ public class EditeurPanovisu extends Application {
         apOutilsBarre.setLayoutX(iLargeur - 302);
         apOutilsBarre.setLayoutY(50);
 
-        apOutilsBarre.setStyle("-fx-background-color : -fx-background;-fx-border-width : 1px;-fx-border-color : transparent transparent transparent -fx-outer-border;");
+        apOutilsBarre.getStyleClass().clear();
+        apOutilsBarre.getStyleClass().add("editor-panel");
+        apOutilsBarre.setStyle("-fx-border-width : 1px;");
         btnAnnulerBarre.setPrefWidth(120);
         btnAnnulerBarre.setLayoutX(30);
-        btnAnnulerBarre.setLayoutY(iHauteur - 90);
+        btnAnnulerBarre.setLayoutY(iHauteur - 110); // Augmenté de 90 à 110 pour plus d'espace en bas
         btnSauverBarre.setPrefWidth(120);
         btnSauverBarre.setLayoutX(160);
-        btnSauverBarre.setLayoutY(iHauteur - 90);
+        btnSauverBarre.setLayoutY(iHauteur - 110); // Augmenté de 90 à 110 pour plus d'espace en bas
         btnSauverBarre.setDisable(true);
         Label lblChargeImage = new Label(rbLocalisation.getString("main.chargeImage"));
         lblChargeImage.setLayoutX(20);
@@ -9653,6 +9656,18 @@ public class EditeurPanovisu extends Application {
         mnuAffichage.getItems().add(sep3);
         mniConfigTransformation = new MenuItem(rbLocalisation.getString("affichageConfiguration"));
         mnuAffichage.getItems().add(mniConfigTransformation);
+        
+        // ✨ NOUVEAU : Menu pour changer de thème
+        MenuItem mniChangerTheme = new MenuItem("Changer le thème...");
+        mniChangerTheme.setAccelerator(new KeyCodeCombination(KeyCode.T, KeyCombination.SHORTCUT_DOWN));
+        mniChangerTheme.setOnAction(e -> {
+            try {
+                afficherDialogueTheme();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+        mnuAffichage.getItems().add(mniChangerTheme);
 
         /*
          Menu panoramiques
@@ -9711,9 +9726,7 @@ public class EditeurPanovisu extends Application {
         mniDocumentation = new MenuItem(rbLocalisation.getString("aideDocumentation"));
         mniDocumentation.setAccelerator(new KeyCodeCombination(KeyCode.F1));
         mnuAide.getItems().add(mniDocumentation);
-        mniAide = new MenuItem(rbLocalisation.getString("aideAide"));
-        mniAide.setAccelerator(new KeyCodeCombination(KeyCode.H, KeyCombination.SHORTCUT_DOWN));
-        mnuAide.getItems().add(mniAide);
+        // Supprimé : mniAide (option redondante, remplacée par Documentation)
         SeparatorMenuItem sep4 = new SeparatorMenuItem();
         mnuAide.getItems().add(sep4);
         mniAPropos = new MenuItem(rbLocalisation.getString("aideAPropos"));
@@ -9967,9 +9980,7 @@ public class EditeurPanovisu extends Application {
         mniAPropos.setOnAction((e) -> {
             aideapropos();
         });
-        mniAide.setOnAction((e) -> {
-            AideDialogController.affiche();
-        });
+        // Supprimé : gestionnaire pour mniAide (option redondante avec Documentation)
         mniDocumentation.setOnAction((e) -> {
             DocumentationDialog.afficher();
         });
@@ -10359,14 +10370,18 @@ public class EditeurPanovisu extends Application {
         vbRacine = new VBox();
         AnchorPane panePrincipale = new AnchorPane(vbRacine);
         setScnPrincipale(new Scene(panePrincipale, iLargeur, iHauteur, Color.rgb(221, 221, 221)));
+        
+        // ✨ NOUVEAU : Appliquer le thème moderne AtlantaFX
         if (!fileRepertConfig.exists()) {
             fileRepertConfig.mkdirs();
             setLocale(new Locale("fr", "FR"));
-            File f = new File("css/clair.css");
-            getScnPrincipale().getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
+            // Appliquer le thème par défaut (Primer Light)
+            ThemeManager.applyTheme(getScnPrincipale(), ThemeManager.Theme.PRIMER_LIGHT);
             setStrRepertoireProjet(getStrRepertAppli());
         } else {
             lisFichierConfig();
+            // Charger et appliquer le thème sauvegardé
+            ThemeManager.applySavedTheme(getScnPrincipale());
         }
 
         creeMenu(vbRacine);
@@ -11420,6 +11435,95 @@ public class EditeurPanovisu extends Application {
                 event.consume();
             }
         });
+    }
+    
+    /**
+     * Affiche le dialogue de sélection de thème
+     */
+    private static void afficherDialogueTheme() {
+        Stage dialogStage = new Stage();
+        dialogStage.initModality(Modality.APPLICATION_MODAL);
+        dialogStage.setTitle("Choisir un thème");
+        dialogStage.setResizable(false);
+        
+        VBox root = new VBox(20);
+        root.setPadding(new Insets(20));
+        root.setAlignment(Pos.CENTER);
+        
+        Label lblTitle = new Label("Sélectionnez un thème pour l'application");
+        lblTitle.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
+        
+        // Section thèmes clairs
+        Label lblLight = new Label("Thèmes Clairs");
+        lblLight.setStyle("-fx-font-size: 14px; -fx-font-weight: bold;");
+        VBox vboxLight = new VBox(10);
+        ToggleGroup groupThemes = new ToggleGroup();
+        
+        ThemeManager.Theme currentTheme = ThemeManager.loadSavedTheme();
+        
+        for (ThemeManager.Theme theme : ThemeManager.getLightThemes()) {
+            RadioButton rb = new RadioButton(theme.getDisplayName());
+            rb.setToggleGroup(groupThemes);
+            rb.setUserData(theme);
+            if (theme == currentTheme) {
+                rb.setSelected(true);
+            }
+            vboxLight.getChildren().add(rb);
+        }
+        
+        // Section thèmes sombres
+        Label lblDark = new Label("Thèmes Sombres");
+        lblDark.setStyle("-fx-font-size: 14px; -fx-font-weight: bold;");
+        VBox vboxDark = new VBox(10);
+        
+        for (ThemeManager.Theme theme : ThemeManager.getDarkThemes()) {
+            RadioButton rb = new RadioButton(theme.getDisplayName());
+            rb.setToggleGroup(groupThemes);
+            rb.setUserData(theme);
+            if (theme == currentTheme) {
+                rb.setSelected(true);
+            }
+            vboxDark.getChildren().add(rb);
+        }
+        
+        // Boutons
+        HBox hboxButtons = new HBox(10);
+        hboxButtons.setAlignment(Pos.CENTER);
+        
+        Button btnAppliquer = new Button("Appliquer");
+        btnAppliquer.setOnAction(e -> {
+            RadioButton selected = (RadioButton) groupThemes.getSelectedToggle();
+            if (selected != null) {
+                ThemeManager.Theme selectedTheme = (ThemeManager.Theme) selected.getUserData();
+                ThemeManager.applyTheme(getScnPrincipale(), selectedTheme);
+                System.out.println("✅ Thème changé: " + selectedTheme.getDisplayName());
+            }
+            dialogStage.close();
+        });
+        
+        Button btnAnnuler = new Button("Annuler");
+        btnAnnuler.setOnAction(e -> dialogStage.close());
+        
+        hboxButtons.getChildren().addAll(btnAppliquer, btnAnnuler);
+        
+        root.getChildren().addAll(
+            lblTitle,
+            new Separator(),
+            lblLight,
+            vboxLight,
+            new Separator(),
+            lblDark,
+            vboxDark,
+            new Separator(),
+            hboxButtons
+        );
+        
+        Scene scene = new Scene(root, 400, 640); // Augmenté de 600 à 640 pour plus d'espace en bas
+        // Appliquer le thème actuel au dialogue
+        ThemeManager.applyTheme(scene, currentTheme);
+        
+        dialogStage.setScene(scene);
+        dialogStage.showAndWait();
     }
 
     /**

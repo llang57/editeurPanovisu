@@ -59,7 +59,7 @@ public class AideDialogController {
         stAide.show();
         btnAnnuler = new Button(rb.getString("aide.fermer"));
         btnAnnuler.setLayoutX(iLargeur-250);
-        btnAnnuler.setLayoutY(iHauteur-150);
+        btnAnnuler.setLayoutY(iHauteur-170); // Augmenté de 20px pour plus d'espace en bas
         apAideDialog.getChildren().addAll(wvNavigateur,btnAnnuler);
         btnAnnuler.setOnAction((ActionEvent e) -> {
             stAide.hide();

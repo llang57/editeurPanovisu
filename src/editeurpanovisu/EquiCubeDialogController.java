@@ -476,28 +476,68 @@ public class EquiCubeDialogController {
         apTransformations = new AnchorPane();
         stTransformations.initModality(Modality.APPLICATION_MODAL);
         stTransformations.setResizable(true);
-        apTransformations.setStyle("-fx-background-color : #ff0000;");
+        //apTransformations.setStyle("-fx-background-color : #434343ff;");
 
-        VBox vbFenetre = new VBox();
-        HBox hbChoix = new HBox();
-        Pane paneChoixFichier = new Pane();
+        // === Architecture simplifiée avec VBox/HBox ===
+        VBox vbFenetre = new VBox(15); // 15px d'espacement entre les éléments
+        vbFenetre.setPadding(new javafx.geometry.Insets(15, 15, 15, 15)); // 15px de padding tout autour
+        
+        // Panneau horizontal principal (liste fichiers + options)
+        HBox hbChoix = new HBox(15); // 15px d'espacement entre colonnes
+        HBox.setHgrow(hbChoix, javafx.scene.layout.Priority.ALWAYS);
+        
+        // === COLONNE GAUCHE : Liste des fichiers ===
+        VBox vbFichiers = new VBox(10);
+        vbFichiers.setPadding(new javafx.geometry.Insets(10));
+        vbFichiers.getStyleClass().add("dialog-content-pane");
+        vbFichiers.setPrefWidth(420);
+        VBox.setVgrow(vbFichiers, javafx.scene.layout.Priority.ALWAYS);
+        
+        lvListeFichier.setPrefHeight(250);
+        lvListeFichier.setMaxHeight(Double.MAX_VALUE);
+        VBox.setVgrow(lvListeFichier, javafx.scene.layout.Priority.ALWAYS);
+        
         btnAjouteFichiers = new Button("Ajouter des Fichiers");
-        paneChoixTypeFichier = new Pane();
+        btnAjouteFichiers.setPrefWidth(180);
+        
+        vbFichiers.getChildren().addAll(lvListeFichier, btnAjouteFichiers);
+        
+        // === COLONNE DROITE : Options ===
+        VBox vbOptions = new VBox(10);
+        vbOptions.setPadding(new javafx.geometry.Insets(10));
+        vbOptions.getStyleClass().add("dialog-content-pane");
+        vbOptions.setPrefWidth(200);
+        
+        // Assigner vbOptions à la variable statique pour compatibilité avec le code existant
+        paneChoixTypeFichier = vbOptions;
+        
         Label lblType = new Label("Type des Fichiers de sortie");
+        lblType.setWrapText(true);
+        lblType.setStyle("-fx-font-weight: bold;");
+        
         rbJpeg = new RadioButton("JPEG (.jpg)");
         rbBmp = new RadioButton("BMP (.bmp)");
         rbTiff = new RadioButton("TIFF (.tif)");
+        
         cbSharpen = new CheckBox("Masque de netteté");
         cbSharpen.setSelected(EditeurPanovisu.isbNetteteTransf());
+        
         slSharpen = new Slider(0, 2, EditeurPanovisu.getNiveauNetteteTransf());
         lblSharpen = new Label();
         double lbl = (Math.round(EditeurPanovisu.getNiveauNetteteTransf() * 20.d) / 20.d);
         lblSharpen.setText(lbl + "");
         slSharpen.setDisable(!EditeurPanovisu.isbNetteteTransf());
         lblSharpen.setDisable(!EditeurPanovisu.isbNetteteTransf());
-        Pane paneboutons = new Pane();
+        
+        // === PANNEAU BOUTONS BAS ===
+        HBox hbBoutons = new HBox(15);
+        hbBoutons.setPadding(new javafx.geometry.Insets(10));
+        hbBoutons.setAlignment(javafx.geometry.Pos.CENTER);
+        
         btnAnnuler = new Button("Fermer la fenêtre");
+        btnAnnuler.setPrefWidth(150);
         btnValider = new Button("Lancer le traitement");
+        btnValider.setPrefWidth(180);
 
         strTypeTransformation = strTypeTransf;
         Image imgTransf;
@@ -508,103 +548,63 @@ public class EquiCubeDialogController {
             stTransformations.setTitle("Transformation de faces de cube en équirectangulaire");
             imgTransf = new Image("file:" + EditeurPanovisu.getStrRepertAppli() + File.separator + "images/cube2equi.png");
         }
-        ImageView ivTypeTransfert = new ImageView(imgTransf);
-        ivTypeTransfert.setLayoutX(35);
-        ivTypeTransfert.setLayoutY(280);
-        paneChoixTypeFichier.getChildren().add(ivTypeTransfert);
-        apTransformations.setPrefHeight(EditeurPanovisu.getHauteurE2C());
-        apTransformations.setPrefWidth(EditeurPanovisu.getLargeurE2C());
-
-        paneChoixFichier.setPrefHeight(350);
-        paneChoixFichier.setPrefWidth(410);
-        paneChoixFichier.setStyle("-fx-background-color: #d0d0d0; -fx-border-color: #bbb;");
-        paneChoixTypeFichier.setPrefHeight(350);
-        paneChoixTypeFichier.setPrefWidth(180);
-        paneChoixTypeFichier.setStyle("-fx-background-color: #d0d0d0; -fx-border-color: #bbb;");
-        hbChoix.getChildren().addAll(paneChoixFichier, paneChoixTypeFichier);
-        vbFenetre.setPrefHeight(400);
-        vbFenetre.setPrefWidth(600);
-        apTransformations.getChildren().add(vbFenetre);
-        hbChoix.setPrefHeight(350);
-        hbChoix.setPrefWidth(600);
-        hbChoix.setStyle("-fx-background-color: #d0d0d0;");
-        paneboutons.setPrefHeight(50);
-        paneboutons.setPrefWidth(600);
-        paneboutons.setStyle("-fx-background-color: #d0d0d0;");
-        vbFenetre.setStyle("-fx-background-color: #d0d0d0;");
-        btnAnnuler.setLayoutX(296);
-        btnAnnuler.setLayoutY(10);
-        btnValider.setLayoutX(433);
-        btnValider.setLayoutY(10);
-        lvListeFichier.setPrefHeight(290);
-        lvListeFichier.setPrefWidth(380);
-        lvListeFichier.setEditable(true);
-        lvListeFichier.setLayoutX(14);
-        lvListeFichier.setLayoutY(14);
-        btnAjouteFichiers.setLayoutX(259);
-        btnAjouteFichiers.setLayoutY(319);
-        paneChoixFichier.getChildren().addAll(lvListeFichier, btnAjouteFichiers);
+        // Label drag & drop pour la liste de fichiers
         if (strTypeTransf.equals(EquiCubeDialogController.EQUI2CUBE)) {
             lblDragDropE2C = new Label(rbLocalisation.getString("transformation.dragDropE2C"));
         } else {
             lblDragDropE2C = new Label(rbLocalisation.getString("transformation.dragDropC2E"));
         }
-        lblDragDropE2C.setMinHeight(lvListeFichier.getPrefHeight());
-        lblDragDropE2C.setMaxHeight(lvListeFichier.getPrefHeight());
-        lblDragDropE2C.setMinWidth(lvListeFichier.getPrefWidth());
-        lblDragDropE2C.setMaxWidth(lvListeFichier.getPrefWidth());
-        lblDragDropE2C.setLayoutX(14);
-        lblDragDropE2C.setLayoutY(14);
+        lblDragDropE2C.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         lblDragDropE2C.setAlignment(Pos.CENTER);
         lblDragDropE2C.setTextFill(Color.web("#c9c7c7"));
         lblDragDropE2C.setTextAlignment(TextAlignment.CENTER);
         lblDragDropE2C.setWrapText(true);
-        lblDragDropE2C.setStyle("-fx-font-size : 24px");
-        lblDragDropE2C.setStyle("-fx-background-color : rgba(128,128,128,0.1)");
-        paneChoixFichier.getChildren().add(lblDragDropE2C);
-
-        lblType.setLayoutX(14);
-        lblType.setLayoutY(14);
-        rbBmp.setLayoutX(43);
-        rbBmp.setLayoutY(43);
+        lblDragDropE2C.setStyle("-fx-font-size: 24px; -fx-background-color: rgba(128,128,128,0.1);");
+        
+        // Ajout du label drag & drop en superposition avec la liste
+        javafx.scene.layout.StackPane stackListeFichiers = new javafx.scene.layout.StackPane();
+        stackListeFichiers.getChildren().addAll(lvListeFichier, lblDragDropE2C);
+        VBox.setVgrow(stackListeFichiers, javafx.scene.layout.Priority.ALWAYS);
+        vbFichiers.getChildren().clear();
+        vbFichiers.getChildren().addAll(stackListeFichiers, btnAjouteFichiers);
+        
+        // Configuration des RadioButtons (Type de fichier)
         rbBmp.setUserData("bmp");
+        rbJpeg.setUserData("jpg");
+        rbTiff.setUserData("tif");
+        
         if (EditeurPanovisu.getStrTypeFichierTransf().equals("bmp")) {
             rbBmp.setSelected(true);
-        }
-        rbBmp.setToggleGroup(tgTypeFichier);
-        rbJpeg.setLayoutX(43);
-        rbJpeg.setLayoutY(71);
-        rbJpeg.setUserData("jpg");
-        if (EditeurPanovisu.getStrTypeFichierTransf().equals("jpg")) {
+        } else if (EditeurPanovisu.getStrTypeFichierTransf().equals("jpg")) {
             rbJpeg.setSelected(true);
-        }
-        rbJpeg.setToggleGroup(tgTypeFichier);
-        if (EditeurPanovisu.getStrTypeFichierTransf().equals("tif")) {
+        } else if (EditeurPanovisu.getStrTypeFichierTransf().equals("tif")) {
             rbTiff.setSelected(true);
         }
-        rbTiff.setLayoutX(43);
-        rbTiff.setLayoutY(99);
+        
+        rbBmp.setToggleGroup(tgTypeFichier);
+        rbJpeg.setToggleGroup(tgTypeFichier);
         rbTiff.setToggleGroup(tgTypeFichier);
-        rbTiff.setUserData("tif");
+        
         tgTypeFichier.selectedToggleProperty().addListener((ov, old_toggle, new_toggle) -> {
-            EditeurPanovisu.setStrTypeFichierTransf(tgTypeFichier.getSelectedToggle().getUserData().toString());
+            if (new_toggle != null) {
+                EditeurPanovisu.setStrTypeFichierTransf(tgTypeFichier.getSelectedToggle().getUserData().toString());
+            }
         });
-        cbSharpen.setLayoutX(43);
-        cbSharpen.setLayoutY(127);
+        
+        // Configuration du Slider (Masque de netteté)
         cbSharpen.selectedProperty().addListener((ov, old_val, new_val) -> {
             slSharpen.setDisable(!new_val);
             lblSharpen.setDisable(!new_val);
             EditeurPanovisu.setbNetteteTransf(new_val);
         });
-
+        
         slSharpen.setShowTickMarks(true);
         slSharpen.setShowTickLabels(true);
         slSharpen.setMajorTickUnit(0.5f);
         slSharpen.setMinorTickCount(4);
         slSharpen.setBlockIncrement(0.05f);
         slSharpen.setSnapToTicks(true);
-        slSharpen.setLayoutX(23);
-        slSharpen.setLayoutY(157);
+        slSharpen.setPrefWidth(180);
         slSharpen.setTooltip(new Tooltip("Choisissez le niveau d'accentuation de l'image"));
         slSharpen.valueProperty().addListener((observableValue, oldValue, newValue) -> {
             if (newValue == null) {
@@ -612,37 +612,65 @@ public class EquiCubeDialogController {
                 return;
             }
             DecimalFormat dfArrondi = new DecimalFormat();
-            dfArrondi.setMaximumFractionDigits(2); //arrondi à 2 chiffres apres la virgules
+            dfArrondi.setMaximumFractionDigits(2);
             dfArrondi.setMinimumFractionDigits(2);
             dfArrondi.setDecimalSeparatorAlwaysShown(true);
-
             lblSharpen.setText(dfArrondi.format(Math.round(newValue.floatValue() * 20.f) / 20.f) + "");
             EditeurPanovisu.setNiveauNetteteTransf(newValue.doubleValue());
         });
-
-        slSharpen.setPrefWidth(120);
-        lblSharpen.setLayoutX(150);
-        lblSharpen.setLayoutY(150);
-        lblSharpen.setMinWidth(30);
-        lblSharpen.setMaxWidth(30);
-        lblSharpen.setTextAlignment(TextAlignment.RIGHT);
-
-        paneChoixTypeFichier.getChildren().addAll(lblType, rbBmp, rbJpeg, rbTiff, cbSharpen, slSharpen, lblSharpen);
-        pbBarreImage.setLayoutX(40);
-        pbBarreImage.setLayoutY(190);
-        pbBarreImage.setStyle("-fx-accent : #0000bb");
+        
+        HBox hbSlider = new HBox(10);
+        hbSlider.setAlignment(Pos.CENTER_LEFT);
+        hbSlider.getChildren().addAll(slSharpen, lblSharpen);
+        
+        // Barres de progression
+        pbBarreImage.setStyle("-fx-accent: #0000bb;");
         pbBarreImage.setVisible(false);
-        paneChoixTypeFichier.getChildren().add(pbBarreImage);
+        pbBarreImage.setMaxWidth(Double.MAX_VALUE);
+        
         pbBarreAvancement = new ProgressBar();
-        pbBarreAvancement.setLayoutX(40);
-        pbBarreAvancement.setLayoutY(220);
-        pbBarreImage.setStyle("-fx-accent : #00bb00");
-        paneChoixTypeFichier.getChildren().add(pbBarreAvancement);
+        pbBarreAvancement.setStyle("-fx-accent: #00bb00;");
         pbBarreAvancement.setVisible(false);
-
-        paneboutons.getChildren().addAll(btnAnnuler, btnValider);
-        vbFenetre.getChildren().addAll(hbChoix, paneboutons);
+        pbBarreAvancement.setMaxWidth(Double.MAX_VALUE);
+        
+        // Image du type de transformation
+        ImageView ivTypeTransfert = new ImageView(imgTransf);
+        ivTypeTransfert.setFitWidth(150);
+        ivTypeTransfert.setPreserveRatio(true);
+        
+        // Assemblage de la colonne OPTIONS
+        vbOptions.getChildren().addAll(
+            lblType,
+            rbBmp,
+            rbJpeg,
+            rbTiff,
+            new javafx.scene.layout.Region(), // Séparateur
+            cbSharpen,
+            hbSlider,
+            new javafx.scene.layout.Region(), // Séparateur
+            pbBarreImage,
+            pbBarreAvancement,
+            new javafx.scene.layout.Region(), // Séparateur flexible
+            ivTypeTransfert
+        );
+        // Faire en sorte que l'image soit poussée vers le bas
+        VBox.setVgrow(vbOptions.getChildren().get(vbOptions.getChildren().size() - 2), javafx.scene.layout.Priority.ALWAYS);
+        
+        // Assemblage final
+        hbChoix.getChildren().addAll(vbFichiers, vbOptions);
+        hbBoutons.getChildren().addAll(btnAnnuler, btnValider);
+        vbFenetre.getChildren().addAll(hbChoix, hbBoutons);
+        
+        apTransformations.setPrefSize(650, 420);
+        apTransformations.setMaxSize(650, 420);
+        apTransformations.getChildren().add(vbFenetre);
+        
         Scene scnTransformations = new Scene(apTransformations);
+        // Appliquer le thème actuel au dialogue
+        editeurpanovisu.ThemeManager.applyTheme(scnTransformations, editeurpanovisu.ThemeManager.getCurrentTheme());
+        
+        // Appliquer le style de fond approprié à la fenêtre principale
+        apTransformations.getStyleClass().add("dialog-content-pane");
         stTransformations.setScene(scnTransformations);
         stTransformations.show();
 
@@ -682,33 +710,17 @@ public class EquiCubeDialogController {
                 event.consume();
             }
         });
-        stTransformations.widthProperty().addListener((arg0, arg1, arg2) -> {
-            EditeurPanovisu.setLargeurE2C(stTransformations.getWidth());
-            apTransformations.setPrefWidth(stTransformations.getWidth());
-            vbFenetre.setPrefWidth(stTransformations.getWidth());
-            btnAnnuler.setLayoutX(stTransformations.getWidth() - 314);
-            btnValider.setLayoutX(stTransformations.getWidth() - 157);
-            paneChoixFichier.setPrefWidth(stTransformations.getWidth() - 200);
-            lvListeFichier.setPrefWidth(stTransformations.getWidth() - 240);
-            lblDragDropE2C.setMinWidth(lvListeFichier.getPrefWidth());
-            lblDragDropE2C.setMaxWidth(lvListeFichier.getPrefWidth());
-
-            btnAjouteFichiers.setLayoutX(stTransformations.getWidth() - 341);
+        // Listeners simplifiés pour le redimensionnement (sauvegarde des préférences)
+        stTransformations.widthProperty().addListener((obs, oldVal, newVal) -> {
+            EditeurPanovisu.setLargeurE2C(newVal.doubleValue());
         });
-
-        stTransformations.heightProperty().addListener((arg0, arg1, arg2) -> {
-            EditeurPanovisu.setHauteurE2C(stTransformations.getHeight());
-            apTransformations.setPrefHeight(stTransformations.getHeight());
-            vbFenetre.setPrefHeight(stTransformations.getHeight());
-            paneChoixFichier.setPrefHeight(stTransformations.getHeight() - 80);
-            hbChoix.setPrefHeight(stTransformations.getHeight() - 80);
-            lvListeFichier.setPrefHeight(stTransformations.getHeight() - 140);
-            lblDragDropE2C.setMinHeight(lvListeFichier.getPrefHeight());
-            lblDragDropE2C.setMaxHeight(lvListeFichier.getPrefHeight());
-            btnAjouteFichiers.setLayoutY(stTransformations.getHeight() - 121);
+        
+        stTransformations.heightProperty().addListener((obs, oldVal, newVal) -> {
+            EditeurPanovisu.setHauteurE2C(newVal.doubleValue());
         });
-        stTransformations.setWidth(EditeurPanovisu.getLargeurE2C());
-        stTransformations.setHeight(EditeurPanovisu.getHauteurE2C());
+        
+        stTransformations.setMaxWidth(EditeurPanovisu.getLargeurE2C());
+        stTransformations.setMaxHeight(EditeurPanovisu.getHauteurE2C());
         apTransformations.setOnDragDropped((event) -> {
             Dragboard dbFichiersTransformation = event.getDragboard();
             boolean bSucces = false;

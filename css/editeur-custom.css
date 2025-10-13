@@ -1,0 +1,327 @@
+/*
+ * =====================================================
+ * STYLES PERSONNALISÉS ÉDITEUR PANOVISU
+ * Compatibles avec tous les thèmes (AtlantaFX + Custom)
+ * =====================================================
+ */
+
+/* ===== En-têtes des panels d'outils - Style Universel ===== */
+
+/* État neutre / désactivé */
+.titreOutil {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+    -fx-padding: 8 10 8 10;
+}
+
+/* Variante pour thèmes clairs AtlantaFX (Primer Light, Nord Light, Cupertino Light) */
+.root.primer-light .titreOutil,
+.root.nord-light .titreOutil,
+.root.cupertino-light .titreOutil {
+    -fx-background-color: linear-gradient(to bottom, #ECECEC 0%, #D5D5D5 100%);
+    -fx-text-fill: #424242;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 4, 0.0, 0, 2);
+}
+
+.root.primer-light .titreOutil:hover,
+.root.nord-light .titreOutil:hover,
+.root.cupertino-light .titreOutil:hover {
+    -fx-background-color: linear-gradient(to bottom, #F5F5F5 0%, #E0E0E0 100%);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 6, 0.0, 0, 3);
+    -fx-scale-y: 1.02;
+}
+
+/* Variante pour thèmes sombres AtlantaFX (Primer Dark, Nord Dark, Cupertino Dark, Dracula) */
+.root.primer-dark .titreOutil,
+.root.nord-dark .titreOutil,
+.root.cupertino-dark .titreOutil,
+.root.dracula .titreOutil {
+    -fx-background-color: linear-gradient(to bottom, #3A3A3A 0%, #2A2A2A 100%);
+    -fx-text-fill: #E0E0E0;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 4, 0.0, 0, 2);
+}
+
+.root.primer-dark .titreOutil:hover,
+.root.nord-dark .titreOutil:hover,
+.root.cupertino-dark .titreOutil:hover,
+.root.dracula .titreOutil:hover {
+    -fx-background-color: linear-gradient(to bottom, #454545 0%, #353535 100%);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 6, 0.0, 0, 3);
+    -fx-scale-y: 1.02;
+}
+
+/* État désactivé - Universel */
+.titreOutil:disabled,
+.titreOutilRouge:disabled,
+.titreOutilBleu:disabled {
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-opacity: 0.6;
+    -fx-cursor: default;
+}
+
+/* Désactivé - Thèmes clairs */
+.root.primer-light .titreOutil:disabled,
+.root.nord-light .titreOutil:disabled,
+.root.cupertino-light .titreOutil:disabled,
+.root.primer-light .titreOutilRouge:disabled,
+.root.nord-light .titreOutilRouge:disabled,
+.root.cupertino-light .titreOutilRouge:disabled,
+.root.primer-light .titreOutilBleu:disabled,
+.root.nord-light .titreOutilBleu:disabled,
+.root.cupertino-light .titreOutilBleu:disabled {
+    -fx-background-color: linear-gradient(to bottom, #E0E0E0 0%, #CCCCCC 100%);
+    -fx-text-fill: #9E9E9E;
+}
+
+/* Désactivé - Thèmes sombres */
+.root.primer-dark .titreOutil:disabled,
+.root.nord-dark .titreOutil:disabled,
+.root.cupertino-dark .titreOutil:disabled,
+.root.dracula .titreOutil:disabled,
+.root.primer-dark .titreOutilRouge:disabled,
+.root.nord-dark .titreOutilRouge:disabled,
+.root.cupertino-dark .titreOutilRouge:disabled,
+.root.dracula .titreOutilRouge:disabled,
+.root.primer-dark .titreOutilBleu:disabled,
+.root.nord-dark .titreOutilBleu:disabled,
+.root.cupertino-dark .titreOutilBleu:disabled,
+.root.dracula .titreOutilBleu:disabled {
+    -fx-background-color: linear-gradient(to bottom, #2C2C2C 0%, #1E1E1E 100%);
+    -fx-text-fill: #555555;
+}
+
+/* ===== État actif / validé (VERT) - Pour paramètres actifs ===== */
+
+.titreOutilRouge {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+    -fx-padding: 8 10 8 10;
+}
+
+/* Vert - Thèmes clairs */
+.root.primer-light .titreOutilRouge,
+.root.nord-light .titreOutilRouge,
+.root.cupertino-light .titreOutilRouge {
+    -fx-background-color: linear-gradient(to bottom, #66BB6A 0%, #4CAF50 100%);
+    -fx-text-fill: #FFFFFF;
+    -fx-effect: dropshadow(gaussian, rgba(76,175,80,0.4), 6, 0.0, 0, 3);
+}
+
+.root.primer-light .titreOutilRouge:hover,
+.root.nord-light .titreOutilRouge:hover,
+.root.cupertino-light .titreOutilRouge:hover {
+    -fx-background-color: linear-gradient(to bottom, #81C784 0%, #66BB6A 100%);
+    -fx-effect: dropshadow(gaussian, rgba(76,175,80,0.6), 8, 0.0, 0, 4);
+    -fx-scale-y: 1.02;
+}
+
+/* Vert - Thèmes sombres */
+.root.primer-dark .titreOutilRouge,
+.root.nord-dark .titreOutilRouge,
+.root.cupertino-dark .titreOutilRouge,
+.root.dracula .titreOutilRouge {
+    -fx-background-color: linear-gradient(to bottom, #4CAF50 0%, #388E3C 100%);
+    -fx-text-fill: #FFFFFF;
+    -fx-effect: dropshadow(gaussian, rgba(76,175,80,0.5), 6, 0.0, 0, 3);
+}
+
+.root.primer-dark .titreOutilRouge:hover,
+.root.nord-dark .titreOutilRouge:hover,
+.root.cupertino-dark .titreOutilRouge:hover,
+.root.dracula .titreOutilRouge:hover {
+    -fx-background-color: linear-gradient(to bottom, #66BB6A 0%, #43A047 100%);
+    -fx-effect: dropshadow(gaussian, rgba(76,175,80,0.7), 8, 0.0, 0, 4);
+    -fx-scale-y: 1.02;
+}
+
+/* ===== État invariant / spécial (BLEU) - Pour sections importantes ===== */
+
+.titreOutilBleu {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+    -fx-padding: 8 10 8 10;
+}
+
+/* Bleu - Thèmes clairs */
+.root.primer-light .titreOutilBleu,
+.root.nord-light .titreOutilBleu,
+.root.cupertino-light .titreOutilBleu {
+    -fx-background-color: linear-gradient(to bottom, #42A5F5 0%, #2196F3 100%);
+    -fx-text-fill: #FFFFFF;
+    -fx-effect: dropshadow(gaussian, rgba(33,150,243,0.4), 6, 0.0, 0, 3);
+}
+
+.root.primer-light .titreOutilBleu:hover,
+.root.nord-light .titreOutilBleu:hover,
+.root.cupertino-light .titreOutilBleu:hover {
+    -fx-background-color: linear-gradient(to bottom, #64B5F6 0%, #42A5F5 100%);
+    -fx-effect: dropshadow(gaussian, rgba(33,150,243,0.6), 8, 0.0, 0, 4);
+    -fx-scale-y: 1.02;
+}
+
+/* Bleu - Thèmes sombres */
+.root.primer-dark .titreOutilBleu,
+.root.nord-dark .titreOutilBleu,
+.root.cupertino-dark .titreOutilBleu,
+.root.dracula .titreOutilBleu {
+    -fx-background-color: linear-gradient(to bottom, #2196F3 0%, #1976D2 100%);
+    -fx-text-fill: #FFFFFF;
+    -fx-effect: dropshadow(gaussian, rgba(33,150,243,0.5), 6, 0.0, 0, 3);
+}
+
+.root.primer-dark .titreOutilBleu:hover,
+.root.nord-dark .titreOutilBleu:hover,
+.root.cupertino-dark .titreOutilBleu:hover,
+.root.dracula .titreOutilBleu:hover {
+    -fx-background-color: linear-gradient(to bottom, #42A5F5 0%, #1E88E5 100%);
+    -fx-effect: dropshadow(gaussian, rgba(33,150,243,0.7), 8, 0.0, 0, 4);
+    -fx-scale-y: 1.02;
+}
+
+/* ===== Autres styles personnalisés éditeur ===== */
+
+.legendePane {
+    -fx-border-width: 1px;
+    -fx-border-radius: 3;
+}
+
+/* Calques */
+.calque {
+    -fx-border-width: 0 0 1px 0;
+    -fx-border-style: dotted;
+    -fx-padding: 0 0 3px 0;
+}
+
+.calque > .box {
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent !important;
+    -fx-min-width: 16px !important;
+    -fx-min-height: 10px !important;
+}
+
+.calque > .box > .mark {
+    -fx-background-position: center;
+    -fx-background-repeat: stretch;
+    -fx-background-color: transparent !important;
+    -fx-shape: none;
+    -fx-min-width: 16px !important;
+    -fx-min-height: 10px !important;
+}
+
+/* Thèmes clairs - Calques */
+.root.primer-light .legendePane,
+.root.nord-light .legendePane,
+.root.cupertino-light .legendePane {
+    -fx-border-color: derive(-fx-base, 2%);
+    -fx-background-color: derive(-fx-base, -2%);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 8, 0.0, 0, 8);
+}
+
+.root.primer-light .calque,
+.root.nord-light .calque,
+.root.cupertino-light .calque {
+    -fx-border-color: #bbb;
+}
+
+.root.primer-light .calque > .box > .mark,
+.root.nord-light .calque > .box > .mark,
+.root.cupertino-light .calque > .box > .mark {
+    -fx-background-image: url("masque.png");
+}
+
+.root.primer-light .calque:selected > .box > .mark,
+.root.nord-light .calque:selected > .box > .mark,
+.root.cupertino-light .calque:selected > .box > .mark {
+    -fx-background-image: url("visible.png");
+}
+
+/* Thèmes sombres - Calques */
+.root.primer-dark .legendePane,
+.root.nord-dark .legendePane,
+.root.cupertino-dark .legendePane,
+.root.dracula .legendePane {
+    -fx-border-color: derive(-fx-base, 2%);
+    -fx-background-color: derive(-fx-base, -2%);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 8, 0.0, 0, 8);
+}
+
+.root.primer-dark .calque,
+.root.nord-dark .calque,
+.root.cupertino-dark .calque,
+.root.dracula .calque {
+    -fx-border-color: #555;
+}
+
+.root.primer-dark .calque > .box > .mark,
+.root.nord-dark .calque > .box > .mark,
+.root.cupertino-dark .calque > .box > .mark,
+.root.dracula .calque > .box > .mark {
+    -fx-background-image: url("masque2.png");
+}
+
+.root.primer-dark .calque:selected > .box > .mark,
+.root.nord-dark .calque:selected > .box > .mark,
+.root.cupertino-dark .calque:selected > .box > .mark,
+.root.dracula .calque:selected > .box > .mark {
+    -fx-background-image: url("visible2.png");
+}
+
+/* ===== Styles pour les dialogues et panneaux spéciaux ===== */
+
+/* Panneaux de contenu des dialogues - Thèmes clairs */
+.root.primer-light .dialog-content-pane,
+.root.nord-light .dialog-content-pane,
+.root.cupertino-light .dialog-content-pane {
+    -fx-background-color: #eceff4;
+    -fx-border-color: #d8dee9;
+}
+
+/* Panneaux de contenu des dialogues - Thèmes sombres */
+.root.primer-dark .dialog-content-pane,
+.root.nord-dark .dialog-content-pane,
+.root.cupertino-dark .dialog-content-pane,
+.root.dracula .dialog-content-pane {
+    -fx-background-color: #2e3440;
+    -fx-border-color: #3b4252;
+}
+
+/* Panneaux d'édition (diaporama, barre personnalisée) - Thèmes clairs */
+.root.primer-light .editor-panel,
+.root.nord-light .editor-panel,
+.root.cupertino-light .editor-panel {
+    -fx-background-color: #e5e9f0;
+}
+
+/* Panneaux d'édition (diaporama, barre personnalisée) - Thèmes sombres */
+.root.primer-dark .editor-panel,
+.root.nord-dark .editor-panel,
+.root.cupertino-dark .editor-panel,
+.root.dracula .editor-panel {
+    -fx-background-color: #3b4252;
+}
+
+/* Panneaux d'image/prévisualisation - Thèmes clairs */
+.root.primer-light .preview-panel,
+.root.nord-light .preview-panel,
+.root.cupertino-light .preview-panel {
+    -fx-background-color: #d8dee9;
+}
+
+/* Panneaux d'image/prévisualisation - Thèmes sombres */
+.root.primer-dark .preview-panel,
+.root.nord-dark .preview-panel,
+.root.cupertino-dark .preview-panel,
+.root.dracula .preview-panel {
+    -fx-background-color: #434c5e;
+}
