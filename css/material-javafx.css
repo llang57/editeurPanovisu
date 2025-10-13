@@ -389,3 +389,139 @@
 .ripple {
     -fx-background-color: radial-gradient(center 50% 50%, radius 50%, rgba(255, 255, 255, 0.3), transparent);
 }
+
+/* ===== En-têtes des panels d'outils - Style Material ===== */
+
+/* État neutre / désactivé - Material Light */
+.root.material-light .titreOutil {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-cursor: hand;
+    -fx-padding: 12 16 12 16;
+    -fx-background-color: -material-surface;
+    -fx-text-fill: -material-text-primary;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 3, 0, 0, 1);
+}
+
+.root.material-light .titreOutil:hover {
+    -fx-background-color: derive(-material-surface, 5%);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 4, 0, 0, 2);
+    -fx-scale-y: 1.01;
+}
+
+/* État neutre / désactivé - Material Dark */
+.root.material-dark .titreOutil {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-cursor: hand;
+    -fx-padding: 12 16 12 16;
+    -fx-background-color: -material-surface;
+    -fx-text-fill: -material-text-primary;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 4, 0, 0, 2);
+}
+
+.root.material-dark .titreOutil:hover {
+    -fx-background-color: derive(-material-surface, 10%);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 3);
+    -fx-scale-y: 1.01;
+}
+
+/* État désactivé - Material Light */
+.root.material-light .titreOutil:disabled,
+.root.material-light .titreOutilRouge:disabled,
+.root.material-light .titreOutilBleu:disabled {
+    -fx-background-color: derive(-material-surface, -5%);
+    -fx-text-fill: -material-text-secondary;
+    -fx-opacity: 0.6;
+    -fx-cursor: default;
+}
+
+/* État désactivé - Material Dark */
+.root.material-dark .titreOutil:disabled,
+.root.material-dark .titreOutilRouge:disabled,
+.root.material-dark .titreOutilBleu:disabled {
+    -fx-background-color: derive(-material-surface, -10%);
+    -fx-text-fill: derive(-material-text-secondary, -20%);
+    -fx-opacity: 0.6;
+    -fx-cursor: default;
+}
+
+/* État actif / validé (VERT) - Material Light */
+.root.material-light .titreOutilRouge {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-cursor: hand;
+    -fx-padding: 12 16 12 16;
+    -fx-background-color: linear-gradient(to bottom, #66bb6a 0%, #4caf50 100%);
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(76, 175, 80, 0.4), 4, 0, 0, 2);
+}
+
+.root.material-light .titreOutilRouge:hover {
+    -fx-background-color: linear-gradient(to bottom, #81c784 0%, #66bb6a 100%);
+    -fx-effect: dropshadow(gaussian, rgba(76, 175, 80, 0.5), 5, 0, 0, 3);
+    -fx-scale-y: 1.01;
+}
+
+/* État actif / validé (VERT) - Material Dark */
+.root.material-dark .titreOutilRouge {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-cursor: hand;
+    -fx-padding: 12 16 12 16;
+    -fx-background-color: linear-gradient(to bottom, #4caf50 0%, #388e3c 100%);
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(76, 175, 80, 0.5), 5, 0, 0, 2);
+}
+
+.root.material-dark .titreOutilRouge:hover {
+    -fx-background-color: linear-gradient(to bottom, #66bb6a 0%, #4caf50 100%);
+    -fx-effect: dropshadow(gaussian, rgba(76, 175, 80, 0.6), 6, 0, 0, 3);
+    -fx-scale-y: 1.01;
+}
+
+/* État bleu (configuration active) - Material Light */
+.root.material-light .titreOutilBleu {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-cursor: hand;
+    -fx-padding: 12 16 12 16;
+    -fx-background-color: linear-gradient(to bottom, #42a5f5 0%, #1976d2 100%);
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(25, 118, 210, 0.4), 4, 0, 0, 2);
+}
+
+.root.material-light .titreOutilBleu:hover {
+    -fx-background-color: linear-gradient(to bottom, #64b5f6 0%, #42a5f5 100%);
+    -fx-effect: dropshadow(gaussian, rgba(25, 118, 210, 0.5), 5, 0, 0, 3);
+    -fx-scale-y: 1.01;
+}
+
+/* État bleu (configuration active) - Material Dark */
+.root.material-dark .titreOutilBleu {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-cursor: hand;
+    -fx-padding: 12 16 12 16;
+    -fx-background-color: linear-gradient(to bottom, #1976d2 0%, #1565c0 100%);
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(25, 118, 210, 0.5), 5, 0, 0, 2);
+}
+
+.root.material-dark .titreOutilBleu:hover {
+    -fx-background-color: linear-gradient(to bottom, #42a5f5 0%, #1976d2 100%);
+    -fx-effect: dropshadow(gaussian, rgba(25, 118, 210, 0.6), 6, 0, 0, 3);
+    -fx-scale-y: 1.01;
+}

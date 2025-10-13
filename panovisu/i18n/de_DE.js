@@ -24,3 +24,4 @@ chainesTraduction['de_DE'].plan = "Besuch Plan";
 chainesTraduction['de_DE'].carte = "Besuch Karte";
 chainesTraduction['de_DE'].panoVisuSite = "panoVisu website";
 chainesTraduction['de_DE'].clicFenetre = "click to close the window";
+chainesTraduction['de_DE'].fermer = "Schließen";

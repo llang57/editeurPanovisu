@@ -24,4 +24,5 @@ chainesTraduction['en_EN'].plan = "tour plan";
 chainesTraduction['en_EN'].carte = "tour map";
 chainesTraduction['en_EN'].panoVisuSite = "panoVisu website";
 chainesTraduction['en_EN'].clicFenetre = "click to close the window";
+chainesTraduction['en_EN'].fermer = "Close";
 

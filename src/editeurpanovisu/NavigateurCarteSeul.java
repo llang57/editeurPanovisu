@@ -23,6 +23,11 @@ public class NavigateurCarteSeul extends Region {
      *
      */
     NavigateurCarteSeul() {
+        // Corriger le fond transparent de la WebView
+        webView.setStyle("-fx-background-color: white;");
+        webEngine.setUserStyleSheetLocation("data:text/css;base64," + 
+            java.util.Base64.getEncoder().encodeToString("body { background-color: white !important; }".getBytes()));
+        
         final URL urlGoogleMaps = getClass().getResource("openstreetmap1.html");
         webEngine.load(urlGoogleMaps.toExternalForm());
         getChildren().add(webView);

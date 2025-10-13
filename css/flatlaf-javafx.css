@@ -226,3 +226,283 @@
     -fx-background-radius: 3;
     -fx-padding: 5;
 }
+
+/* ===== En-têtes des panels d'outils - Style FlatLaf ===== */
+
+/* État neutre / désactivé - FlatLaf Light */
+.root.flatlaf-light .titreOutil {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+    -fx-cursor: hand;
+    -fx-padding: 10 14 10 14;
+    -fx-background-color: -flatlaf-component-background;
+    -fx-border-color: -flatlaf-border;
+    -fx-border-width: 1;
+    -fx-text-fill: -flatlaf-foreground;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 2, 0, 0, 1);
+}
+
+.root.flatlaf-light .titreOutil:hover {
+    -fx-background-color: derive(-flatlaf-component-background, -5%);
+    -fx-border-color: derive(-flatlaf-border, -10%);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 3, 0, 0, 1);
+}
+
+/* État neutre / désactivé - FlatLaf IntelliJ */
+.root.flatlaf-intellij .titreOutil {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+    -fx-cursor: hand;
+    -fx-padding: 10 14 10 14;
+    -fx-background-color: -flatlaf-component-background;
+    -fx-border-color: -flatlaf-border;
+    -fx-border-width: 1;
+    -fx-text-fill: -flatlaf-foreground;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 2, 0, 0, 1);
+}
+
+.root.flatlaf-intellij .titreOutil:hover {
+    -fx-background-color: derive(-flatlaf-component-background, -5%);
+    -fx-border-color: derive(-flatlaf-border, -10%);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 3, 0, 0, 1);
+}
+
+/* État neutre / désactivé - FlatLaf Dark */
+.root.flatlaf-dark .titreOutil {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+    -fx-cursor: hand;
+    -fx-padding: 10 14 10 14;
+    -fx-background-color: -flatlaf-component-background;
+    -fx-border-color: -flatlaf-border;
+    -fx-border-width: 1;
+    -fx-text-fill: -flatlaf-foreground;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 3, 0, 0, 1);
+}
+
+.root.flatlaf-dark .titreOutil:hover {
+    -fx-background-color: derive(-flatlaf-component-background, 10%);
+    -fx-border-color: derive(-flatlaf-border, 10%);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 4, 0, 0, 2);
+}
+
+/* État neutre / désactivé - FlatLaf Darcula */
+.root.flatlaf-darcula .titreOutil {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+    -fx-cursor: hand;
+    -fx-padding: 10 14 10 14;
+    -fx-background-color: -flatlaf-component-background;
+    -fx-border-color: -flatlaf-border;
+    -fx-border-width: 1;
+    -fx-text-fill: -flatlaf-foreground;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 3, 0, 0, 1);
+}
+
+.root.flatlaf-darcula .titreOutil:hover {
+    -fx-background-color: derive(-flatlaf-component-background, 10%);
+    -fx-border-color: derive(-flatlaf-border, 10%);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 4, 0, 0, 2);
+}
+
+/* État désactivé - FlatLaf Light & IntelliJ */
+.root.flatlaf-light .titreOutil:disabled,
+.root.flatlaf-light .titreOutilRouge:disabled,
+.root.flatlaf-light .titreOutilBleu:disabled,
+.root.flatlaf-intellij .titreOutil:disabled,
+.root.flatlaf-intellij .titreOutilRouge:disabled,
+.root.flatlaf-intellij .titreOutilBleu:disabled {
+    -fx-background-color: derive(-flatlaf-component-background, 5%);
+    -fx-text-fill: derive(-flatlaf-foreground, 50%);
+    -fx-opacity: 0.6;
+    -fx-cursor: default;
+}
+
+/* État désactivé - FlatLaf Dark & Darcula */
+.root.flatlaf-dark .titreOutil:disabled,
+.root.flatlaf-dark .titreOutilRouge:disabled,
+.root.flatlaf-dark .titreOutilBleu:disabled,
+.root.flatlaf-darcula .titreOutil:disabled,
+.root.flatlaf-darcula .titreOutilRouge:disabled,
+.root.flatlaf-darcula .titreOutilBleu:disabled {
+    -fx-background-color: derive(-flatlaf-component-background, -5%);
+    -fx-text-fill: derive(-flatlaf-foreground, -30%);
+    -fx-opacity: 0.6;
+    -fx-cursor: default;
+}
+
+/* État actif / validé (VERT) - FlatLaf Light */
+.root.flatlaf-light .titreOutilRouge {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+    -fx-cursor: hand;
+    -fx-padding: 10 14 10 14;
+    -fx-background-color: #5fb765;
+    -fx-border-color: #4d9653;
+    -fx-border-width: 1;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(79, 157, 83, 0.3), 3, 0, 0, 1);
+}
+
+.root.flatlaf-light .titreOutilRouge:hover {
+    -fx-background-color: #6ec874;
+    -fx-border-color: #5fb765;
+    -fx-effect: dropshadow(gaussian, rgba(79, 157, 83, 0.4), 4, 0, 0, 2);
+}
+
+/* État actif / validé (VERT) - FlatLaf IntelliJ */
+.root.flatlaf-intellij .titreOutilRouge {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+    -fx-cursor: hand;
+    -fx-padding: 10 14 10 14;
+    -fx-background-color: #5fb765;
+    -fx-border-color: #4d9653;
+    -fx-border-width: 1;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(79, 157, 83, 0.3), 3, 0, 0, 1);
+}
+
+.root.flatlaf-intellij .titreOutilRouge:hover {
+    -fx-background-color: #6ec874;
+    -fx-border-color: #5fb765;
+    -fx-effect: dropshadow(gaussian, rgba(79, 157, 83, 0.4), 4, 0, 0, 2);
+}
+
+/* État actif / validé (VERT) - FlatLaf Dark */
+.root.flatlaf-dark .titreOutilRouge {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+    -fx-cursor: hand;
+    -fx-padding: 10 14 10 14;
+    -fx-background-color: #4d9653;
+    -fx-border-color: #3d7641;
+    -fx-border-width: 1;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(79, 157, 83, 0.4), 4, 0, 0, 1);
+}
+
+.root.flatlaf-dark .titreOutilRouge:hover {
+    -fx-background-color: #5fb765;
+    -fx-border-color: #4d9653;
+    -fx-effect: dropshadow(gaussian, rgba(79, 157, 83, 0.5), 5, 0, 0, 2);
+}
+
+/* État actif / validé (VERT) - FlatLaf Darcula */
+.root.flatlaf-darcula .titreOutilRouge {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+    -fx-cursor: hand;
+    -fx-padding: 10 14 10 14;
+    -fx-background-color: #4d9653;
+    -fx-border-color: #3d7641;
+    -fx-border-width: 1;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(79, 157, 83, 0.4), 4, 0, 0, 1);
+}
+
+.root.flatlaf-darcula .titreOutilRouge:hover {
+    -fx-background-color: #5fb765;
+    -fx-border-color: #4d9653;
+    -fx-effect: dropshadow(gaussian, rgba(79, 157, 83, 0.5), 5, 0, 0, 2);
+}
+
+/* État bleu (configuration active) - FlatLaf Light */
+.root.flatlaf-light .titreOutilBleu {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+    -fx-cursor: hand;
+    -fx-padding: 10 14 10 14;
+    -fx-background-color: #3592c4;
+    -fx-border-color: #2675bf;
+    -fx-border-width: 1;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(53, 146, 196, 0.3), 3, 0, 0, 1);
+}
+
+.root.flatlaf-light .titreOutilBleu:hover {
+    -fx-background-color: #4aa8d4;
+    -fx-border-color: #3592c4;
+    -fx-effect: dropshadow(gaussian, rgba(53, 146, 196, 0.4), 4, 0, 0, 2);
+}
+
+/* État bleu (configuration active) - FlatLaf IntelliJ */
+.root.flatlaf-intellij .titreOutilBleu {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+    -fx-cursor: hand;
+    -fx-padding: 10 14 10 14;
+    -fx-background-color: #0d5b9e;
+    -fx-border-color: #094b82;
+    -fx-border-width: 1;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(13, 91, 158, 0.3), 3, 0, 0, 1);
+}
+
+.root.flatlaf-intellij .titreOutilBleu:hover {
+    -fx-background-color: #1070b4;
+    -fx-border-color: #0d5b9e;
+    -fx-effect: dropshadow(gaussian, rgba(13, 91, 158, 0.4), 4, 0, 0, 2);
+}
+
+/* État bleu (configuration active) - FlatLaf Dark */
+.root.flatlaf-dark .titreOutilBleu {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+    -fx-cursor: hand;
+    -fx-padding: 10 14 10 14;
+    -fx-background-color: #4b6eaf;
+    -fx-border-color: #3a578c;
+    -fx-border-width: 1;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(75, 110, 175, 0.4), 4, 0, 0, 1);
+}
+
+.root.flatlaf-dark .titreOutilBleu:hover {
+    -fx-background-color: #5a7fc4;
+    -fx-border-color: #4b6eaf;
+    -fx-effect: dropshadow(gaussian, rgba(75, 110, 175, 0.5), 5, 0, 0, 2);
+}
+
+/* État bleu (configuration active) - FlatLaf Darcula */
+.root.flatlaf-darcula .titreOutilBleu {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+    -fx-cursor: hand;
+    -fx-padding: 10 14 10 14;
+    -fx-background-color: #4b6eaf;
+    -fx-border-color: #3a578c;
+    -fx-border-width: 1;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(75, 110, 175, 0.4), 4, 0, 0, 1);
+}
+
+.root.flatlaf-darcula .titreOutilBleu:hover {
+    -fx-background-color: #5a7fc4;
+    -fx-border-color: #4b6eaf;
+    -fx-effect: dropshadow(gaussian, rgba(75, 110, 175, 0.5), 5, 0, 0, 2);
+}

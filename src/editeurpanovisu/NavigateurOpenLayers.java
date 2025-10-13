@@ -259,15 +259,15 @@ public class NavigateurOpenLayers {
         this.tfLatitudeRef = tfLatitude;
         
         AnchorPane apOpenLayers = new AnchorPane();
-
-        apOpenLayers.setStyle("-fx-background-color : -fx-base;-fx-border-width : 1px;-fx-border-style : solid;-fx-border-color : #777;"
+        apOpenLayers.getStyleClass().add("dialog-content-pane");
+        apOpenLayers.setStyle("-fx-border-width : 1px;-fx-border-style : solid;-fx-border-color : #777;"
                 + "-fx-border-color: #777;"
                 + "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.5) , 8, 0.0 , 0 , 8 );"
                 + "-fx-border-width: 1px;"
         );
         Label lblAttente = new Label("Chargement en cours. Veuillez patienter");
         lblAttente.setAlignment(Pos.CENTER);
-        lblAttente.setStyle("-fx-background-color : #777;");
+        lblAttente.setStyle("-fx-background-color : #777; -fx-opacity: 1.0;");
         lblAttente.setTextFill(Color.WHITE);
         lblAttente.setLayoutX(10);
         lblAttente.setLayoutY(70);

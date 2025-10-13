@@ -24,6 +24,11 @@ public class NavigateurCarte extends Region {
      *
      */
     NavigateurCarte() {
+        // Corriger le fond transparent de la WebView
+        webView.setStyle("-fx-background-color: white;");
+        webEngine.setUserStyleSheetLocation("data:text/css;base64," + 
+            java.util.Base64.getEncoder().encodeToString("body { background-color: white !important; }".getBytes()));
+        
         // Activer la console JavaScript pour le débogage
         webEngine.setOnAlert(event -> System.out.println("JS Alert: " + event.getData()));
         
