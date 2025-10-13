@@ -34,8 +34,8 @@ function panovisu(iNumPano) {
             donnees = "_infoBulle",
             decalageX = 20,
             decalageY = 10,
-            container;
-
+            container,
+            bPremierChargement = true;
 
     afficheInfobulle = function (evenement) {
         var haut = evenement.pageY + decalageY;
@@ -429,9 +429,11 @@ function panovisu(iNumPano) {
             bPetitePlaneteDemarrage,
             strPanoType,
             strAffInfo,
-            bAfficheInfo,
+            bAfficheInfo = false, // Initialisé à false pour le nouveau système modal
             bAfficheAide,
             strAfficheTitre,
+            strAffDescriptionChargement,
+            strDescription,
             strZooms,
             strOutils,
             strDeplacements,
@@ -1383,106 +1385,600 @@ function panovisu(iNumPano) {
             demarreAutoRotation();
         }
     }
+    
+    /**
+     * Affiche directement la modale de bienvenue au premier chargement
+     * Sans vérifier bAfficheInfo (qui est déjà à true pour bloquer la description)
+     * @returns {undefined}
+     */
+    function afficheModaleBienvenue() {
+        console.log("DEBUG afficheModaleBienvenue() - Affichage direct de la modale");
+        
+        if (bFenetreInfoPersonnalise) {
+            console.log("DEBUG afficheModaleBienvenue() - Version personnalisée");
+            // Version personnalisée avec image
+            img = new Image();
+            img.src = strFenetreInfoImage;
+            img.onload = function () {
+                var overlayId = "infoOverlay-" + iNumPano;
+                var modalId = "infoModal-" + iNumPano;
+                
+                // Supprimer les éléments existants
+                $("#" + overlayId).remove();
+                $("#" + modalId).remove();
+                
+                larg = Math.round(this.width * fenetreInfoTaille / 100);
+                haut = Math.round(this.height * fenetreInfoTaille / 100);
+                
+                // Créer l'overlay + modale (code identique à afficheFenetreInfo)
+                $("<div>", {
+                    id: overlayId,
+                    css: {
+                        position: "fixed", top: 0, left: 0, width: "100%", height: "100%",
+                        backgroundColor: "rgba(0, 0, 0, 0.7)", zIndex: 9998, display: "none"
+                    }
+                }).appendTo("body");
+                
+                $("<div>", {
+                    id: modalId,
+                    css: {
+                        position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)",
+                        backgroundColor: strTitreFond || "rgba(0, 0, 0, 0.85)", padding: "30px",
+                        borderRadius: "10px", maxWidth: "80%", maxHeight: "80%", overflow: "auto",
+                        zIndex: 9999, boxShadow: "0 4px 20px rgba(0, 0, 0, 0.5)", display: "none",
+                        textAlign: "center",
+                        fontFamily: "'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif"
+                    }
+                }).appendTo("body");
+                
+                $("<img>", {
+                    id: "infoImg-" + iNumPano, src: img.src, alt: "",
+                    css: { maxWidth: "100%", height: "auto", marginBottom: "15px", borderRadius: "5px" }
+                }).appendTo("#" + modalId);
+                
+                if (strFenetreInfoURL && strFenetreInfoURL !== "") {
+                    $("<a>", {
+                        id: "infoUrl-" + iNumPano, text: strFenetreInfoTexteURL, href: strFenetreInfoURL, target: "_blank",
+                        css: {
+                            color: strFenetreInfoCouleurURL || "#ffffff",
+                            fontSize: (fenetreInfoTailleURL || 16) + "px",
+                            textDecoration: "underline", display: "block", marginBottom: "20px"
+                        }
+                    }).appendTo("#" + modalId);
+                }
+                
+                $("<button>", {
+                    text: chainesTraduction[strLangage].fermer || "Fermer",
+                    css: {
+                        display: "block", margin: "0 auto", padding: "10px 30px",
+                        backgroundColor: "rgba(255, 255, 255, 0.2)", color: "#ffffff",
+                        border: "2px solid rgba(255, 255, 255, 0.5)", borderRadius: "5px",
+                        fontSize: "16px", cursor: "pointer", fontWeight: "bold"
+                    },
+                    click: function() { afficheFenetreInfo(); }
+                }).appendTo("#" + modalId);
+                
+                $("#" + overlayId).click(function() { afficheFenetreInfo(); });
+                
+                if (bAfficheAide) {
+                    $("#aidePanovisu-" + iNumPano).fadeOut(500, function () { bAfficheAide = false; });
+                }
+                $("#" + overlayId).fadeIn(500);
+                $("#" + modalId).fadeIn(500);
+            };
+        } else {
+            console.log("DEBUG afficheModaleBienvenue() - Version par défaut");
+            // Version par défaut modernisée
+            var overlayId = "infoOverlay-" + iNumPano;
+            var modalId = "infoModal-" + iNumPano;
+            
+            $("#" + overlayId).remove();
+            $("#" + modalId).remove();
+            
+            // Créer l'overlay + modale par défaut
+            $("<div>", {
+                id: overlayId,
+                css: {
+                    position: "fixed", top: 0, left: 0, width: "100%", height: "100%",
+                    backgroundColor: "rgba(0, 0, 0, 0.7)", zIndex: 9998, display: "none"
+                }
+            }).appendTo("body");
+            
+            $("<div>", {
+                id: modalId,
+                css: {
+                    position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)",
+                    backgroundColor: strTitreFond || "rgba(0, 0, 0, 0.85)", padding: "30px",
+                    borderRadius: "10px", maxWidth: "80%", maxHeight: "80%", overflow: "auto",
+                    zIndex: 9999, boxShadow: "0 4px 20px rgba(0, 0, 0, 0.5)", display: "none",
+                    fontFamily: "'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif"
+                }
+            }).appendTo("body");
+            
+            var panoInfo = chainesTraduction[strLangage].fenetreInfo;
+            $("<div>", {
+                html: panoInfo,
+                css: { 
+                    color: "#ffffff", 
+                    fontSize: "16px", 
+                    lineHeight: "1.6", 
+                    marginBottom: "20px",
+                    fontFamily: "'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif"
+                }
+            }).appendTo("#" + modalId);
+            
+            $("<button>", {
+                text: chainesTraduction[strLangage].fermer || "Fermer",
+                css: {
+                    display: "block", margin: "0 auto", padding: "10px 30px",
+                    backgroundColor: "rgba(255, 255, 255, 0.2)", color: "#ffffff",
+                    border: "2px solid rgba(255, 255, 255, 0.5)", borderRadius: "5px",
+                    fontSize: "16px", cursor: "pointer", fontWeight: "bold"
+                },
+                click: function() { afficheFenetreInfo(); }
+            }).appendTo("#" + modalId);
+            
+            $("#" + overlayId).click(function() { afficheFenetreInfo(); });
+            
+            if (bAfficheAide) {
+                $("#aidePanovisu-" + iNumPano).fadeOut(500, function () { bAfficheAide = false; });
+            }
+            $("#" + overlayId).fadeIn(500);
+            $("#" + modalId).fadeIn(500);
+        }
+    }
+    
     /**
      * 
      * @returns {undefined}
      */
     function afficheFenetreInfo() {
+        console.log("DEBUG afficheFenetreInfo() - Début - bAfficheInfo:", bAfficheInfo);
         if (bAfficheInfo)
         {
-            $("#infoPanovisu-" + iNumPano).fadeOut(1000, function () {
-                $("#infoPanovisu-" + iNumPano).css({display: "none"});
+            console.log("DEBUG afficheFenetreInfo() - Fermeture de la fenêtre");
+            // Fermer la fenêtre modale moderne
+            var overlayId = "infoOverlay-" + iNumPano;
+            var modalId = "infoModal-" + iNumPano;
+            
+            $("#" + overlayId).fadeOut(500, function() { 
+                $(this).remove(); 
+            });
+            $("#" + modalId).fadeOut(500, function() { 
+                $(this).remove();
                 bAfficheInfo = false;
             });
         }
         else {
+            console.log("DEBUG afficheFenetreInfo() - Ouverture - bFenetreInfoPersonnalise:", bFenetreInfoPersonnalise);
+            
+            // Marquer immédiatement que la fenêtre d'info est affichée
+            // pour bloquer l'affichage de la description
+            bAfficheInfo = true;
+            
             if (bFenetreInfoPersonnalise) {
+                console.log("DEBUG afficheFenetreInfo() - Version personnalisée avec image:", strFenetreInfoImage);
+                // Version personnalisée avec image
                 img = new Image();
                 img.src = strFenetreInfoImage;
                 img.onload = function () {
-                    $("#infoPanovisu-" + iNumPano).html("");
+                    var overlayId = "infoOverlay-" + iNumPano;
+                    var modalId = "infoModal-" + iNumPano;
+                    
+                    // Supprimer les éléments existants
+                    $("#" + overlayId).remove();
+                    $("#" + modalId).remove();
+                    
                     larg = Math.round(this.width * fenetreInfoTaille / 100);
                     haut = Math.round(this.height * fenetreInfoTaille / 100);
-                    $("<img>", {id: "infoImg-" + iNumPano, src: this.src, alt: "", height: haut, width: larg}).appendTo("#infoPanovisu-" + iNumPano);
-                    $("#infoImg-" + iNumPano).attr("title", chainesTraduction[strLangage].clicFenetre);
-                    $("<a>", {id: "infoUrl-" + iNumPano,
-                        text: strFenetreInfoTexteURL,
-                        href: strFenetreInfoURL,
-                        target: "_blank"}).appendTo("#infoPanovisu-" + iNumPano);
-                    $("#infoPanovisu-" + iNumPano).css({
-                        width: larg,
-                        height: haut
+                    
+                    // Créer l'overlay de fond
+                    $("<div>", {
+                        id: overlayId,
+                        css: {
+                            position: "fixed",
+                            top: 0,
+                            left: 0,
+                            width: "100%",
+                            height: "100%",
+                            backgroundColor: "rgba(0, 0, 0, 0.7)",
+                            zIndex: 9998,
+                            display: "none"
+                        }
+                    }).appendTo("body");
+                    
+                    // Créer la fenêtre modale
+                    $("<div>", {
+                        id: modalId,
+                        css: {
+                            position: "fixed",
+                            top: "50%",
+                            left: "50%",
+                            transform: "translate(-50%, -50%)",
+                            backgroundColor: strTitreFond || "rgba(0, 0, 0, 0.85)",
+                            padding: "30px",
+                            borderRadius: "10px",
+                            maxWidth: "80%",
+                            maxHeight: "80%",
+                            overflow: "auto",
+                            zIndex: 9999,
+                            boxShadow: "0 4px 20px rgba(0, 0, 0, 0.5)",
+                            display: "none",
+                            textAlign: "center",
+                            fontFamily: "'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif"
+                        }
+                    }).appendTo("body");
+                    
+                    // Ajouter l'image
+                    $("<img>", {
+                        id: "infoImg-" + iNumPano,
+                        src: img.src,
+                        alt: "",
+                        css: {
+                            maxWidth: "100%",
+                            height: "auto",
+                            marginBottom: "15px",
+                            borderRadius: "5px"
+                        }
+                    }).appendTo("#" + modalId);
+                    
+                    // Ajouter le lien URL si présent
+                    if (strFenetreInfoURL && strFenetreInfoURL !== "") {
+                        $("<a>", {
+                            id: "infoUrl-" + iNumPano,
+                            text: strFenetreInfoTexteURL,
+                            href: strFenetreInfoURL,
+                            target: "_blank",
+                            css: {
+                                color: strFenetreInfoCouleurURL || "#ffffff",
+                                fontSize: (fenetreInfoTailleURL || 16) + "px",
+                                textDecoration: "underline",
+                                display: "block",
+                                marginBottom: "20px"
+                            }
+                        }).appendTo("#" + modalId);
+                    }
+                    
+                    // Ajouter le bouton de fermeture
+                    $("<button>", {
+                        text: chainesTraduction[strLangage].fermer || "Fermer",
+                        css: {
+                            display: "block",
+                            margin: "0 auto",
+                            padding: "10px 30px",
+                            backgroundColor: "rgba(255, 255, 255, 0.2)",
+                            color: "#ffffff",
+                            border: "2px solid rgba(255, 255, 255, 0.5)",
+                            borderRadius: "5px",
+                            fontSize: "16px",
+                            cursor: "pointer",
+                            fontWeight: "bold"
+                        },
+                        click: function() {
+                            afficheFenetreInfo();
+                        }
+                    }).appendTo("#" + modalId);
+                    
+                    // Permettre la fermeture en cliquant sur l'overlay
+                    $("#" + overlayId).click(function() {
+                        afficheFenetreInfo();
                     });
-                    $("#infoPanovisu-" + iNumPano).attr("title", chainesTraduction[strLangage].clicFenetre);
-                    posGauche = (pano.width() - $("#infoPanovisu-" + iNumPano).width()) / 2 + fenetreInfoDX;
-                    posHaut = (pano.height() - $("#infoPanovisu-" + iNumPano).height()) / 2 + fenetreInfoDX;
-                    $("#infoPanovisu-" + iNumPano).css({
-                        top: posHaut + "px",
-                        left: posGauche + "px",
-                        border: "none",
-                        backgroundColor: "rgba(255,255,255,0)",
-                        opacity: "1.0"
-                    });
-                    topUrl = ($("#infoPanovisu-" + iNumPano).height() - $("#infoUrl-" + iNumPano).height()) / 2 + fenetreInfoDYURL;
-                    leftUrl = ($("#infoPanovisu-" + iNumPano).width() - $("#infoUrl-" + iNumPano).width()) / 2 + fenetreInfoDXURL;
-                    $("#infoUrl-" + iNumPano).css({color: strFenetreInfoCouleurURL,
-                        fontSize: fenetreInfoTailleURL + "px",
-                        position: "absolute",
-                        top: topUrl + "px",
-                        left: leftUrl + "px"
-                    });
+                    
+                    // Afficher avec animation
+                    if (bAfficheAide) {
+                        $("#aidePanovisu-" + iNumPano).fadeOut(500, function () {
+                            bAfficheAide = false;
+                        });
+                    }
+                    $("#" + overlayId).fadeIn(500);
+                    $("#" + modalId).fadeIn(500);
+                    // bAfficheInfo est déjà mis à true au début de else
                 };
             }
             else {
+                console.log("DEBUG afficheFenetreInfo() - Version par défaut modernisée");
+                // Version par défaut modernisée
+                var overlayId = "infoOverlay-" + iNumPano;
+                var modalId = "infoModal-" + iNumPano;
+                
+                console.log("DEBUG afficheFenetreInfo() - Création des éléments avec overlayId:", overlayId, "modalId:", modalId);
+                
+                // Supprimer les éléments existants
+                $("#" + overlayId).remove();
+                $("#" + modalId).remove();
+                
+                // Créer l'overlay de fond
+                $("<div>", {
+                    id: overlayId,
+                    css: {
+                        position: "fixed",
+                        top: 0,
+                        left: 0,
+                        width: "100%",
+                        height: "100%",
+                        backgroundColor: "rgba(0, 0, 0, 0.7)",
+                        zIndex: 9998,
+                        display: "none"
+                    }
+                }).appendTo("body");
+                
+                // Créer la fenêtre modale
+                $("<div>", {
+                    id: modalId,
+                    css: {
+                        position: "fixed",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        backgroundColor: strTitreFond || "rgba(0, 0, 0, 0.85)",
+                        color: "#ffffff",
+                        padding: "30px",
+                        borderRadius: "10px",
+                        maxWidth: "600px",
+                        minWidth: "300px",
+                        maxHeight: "80%",
+                        overflow: "auto",
+                        zIndex: 9999,
+                        boxShadow: "0 4px 20px rgba(0, 0, 0, 0.5)",
+                        fontFamily: "'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif",
+                        fontSize: "15px",
+                        lineHeight: "1.6",
+                        display: "none"
+                    }
+                }).appendTo("body");
+                
+                // Ajouter le contenu
                 panoInfo = chainesTraduction[strLangage].fenetreInfo;
-                $("#infoPanovisu-" + iNumPano).css({width: "450px", height: "190px"});
-                $("#infoPanovisu-" + iNumPano).html(panoInfo);
-                $("#infoPanovisu-" + iNumPano).attr("title", chainesTraduction[strLangage].clicFenetre);
-                posGauche = (pano.width() - $("#infoPanovisu-" + iNumPano).width()) / 2;
-                posHaut = (pano.height() - $("#infoPanovisu-" + iNumPano).height()) / 2;
-                $("#infoPanovisu-" + iNumPano).css({top: posHaut + "px", left: posGauche + "px"});
+                $("<div>", {
+                    css: {
+                        marginBottom: "20px",
+                        textAlign: "center"
+                    },
+                    html: panoInfo
+                }).appendTo("#" + modalId);
+                
+                // Ajouter le bouton de fermeture
+                $("<button>", {
+                    text: chainesTraduction[strLangage].fermer || "Fermer",
+                    css: {
+                        display: "block",
+                        margin: "0 auto",
+                        padding: "10px 30px",
+                        backgroundColor: "rgba(255, 255, 255, 0.2)",
+                        color: "#ffffff",
+                        border: "2px solid rgba(255, 255, 255, 0.5)",
+                        borderRadius: "5px",
+                        fontSize: "16px",
+                        cursor: "pointer",
+                        fontWeight: "bold"
+                    },
+                    click: function() {
+                        afficheFenetreInfo();
+                    }
+                }).appendTo("#" + modalId);
+                
+                // Permettre la fermeture en cliquant sur l'overlay
+                $("#" + overlayId).click(function() {
+                    afficheFenetreInfo();
+                });
+                
+                // Afficher avec animation
+                console.log("DEBUG afficheFenetreInfo() - Affichage avec animation - bAfficheAide:", bAfficheAide);
+                if (bAfficheAide) {
+                    $("#aidePanovisu-" + iNumPano).fadeOut(500, function () {
+                        bAfficheAide = false;
+                    });
+                }
+                $("#" + overlayId).fadeIn(500);
+                $("#" + modalId).fadeIn(500);
+                // bAfficheInfo est déjà mis à true au début de la fonction
+                console.log("DEBUG afficheFenetreInfo() - Fin de la fonction");
             }
-            if (bAfficheAide) {
-                $("#aidePanovisu-" + iNumPano).fadeOut(1000, function () {
-                    bAfficheAide = false;
-                });
-                $("#infoPanovisu-" + iNumPano).fadeIn(1000, function () {
-                    bAfficheInfo = true;
-                });
-            } else {
-                $("#infoPanovisu-" + iNumPano).fadeIn(1000, function () {
-                    bAfficheInfo = true;
-                });
-            }
-
         }
-
     }
     /**
-     * 
+     * Affiche ou masque la fenêtre d'aide moderne en mode modal
      * @returns {undefined}
      */
     function afficheFenetreAide() {
         if (bAfficheAide)
         {
-            $("#aidePanovisu-" + iNumPano).fadeOut(1000, function () {
-                $("#aidePanovisu-" + iNumPano).css({display: "none"});
+            // Fermer la fenêtre modale d'aide
+            var overlayId = "aideOverlay-" + iNumPano;
+            var modalId = "aideModal-" + iNumPano;
+            
+            $("#" + overlayId).fadeOut(500, function() { 
+                $(this).remove(); 
+            });
+            $("#" + modalId).fadeOut(500, function() { 
+                $(this).remove();
                 bAfficheAide = false;
             });
         } else {
+            // Fermer la fenêtre d'info si ouverte
             if (bAfficheInfo) {
-                $("#infoPanovisu-" + iNumPano).fadeOut(1000, function () {
-                    bAfficheInfo = false;
+                afficheFenetreInfo();
+            }
+            
+            // Afficher la fenêtre d'aide moderne
+            var overlayId = "aideOverlay-" + iNumPano;
+            var modalId = "aideModal-" + iNumPano;
+            
+            // Supprimer les éléments existants
+            $("#" + overlayId).remove();
+            $("#" + modalId).remove();
+            
+            if (bFenetreAidePersonnalise) {
+                // Version personnalisée avec image
+                img = new Image();
+                img.src = strFenetreAideImage;
+                img.onload = function () {
+                    larg = Math.round(this.width * fenetreAideTaille / 100);
+                    haut = Math.round(this.height * fenetreAideTaille / 100);
+                    
+                    // Créer l'overlay de fond
+                    $("<div>", {
+                        id: overlayId,
+                        css: {
+                            position: "fixed",
+                            top: 0,
+                            left: 0,
+                            width: "100%",
+                            height: "100%",
+                            backgroundColor: "rgba(0, 0, 0, 0.7)",
+                            zIndex: 9998,
+                            display: "none"
+                        }
+                    }).appendTo("body");
+                    
+                    // Créer la fenêtre modale
+                    $("<div>", {
+                        id: modalId,
+                        css: {
+                            position: "fixed",
+                            top: "50%",
+                            left: "50%",
+                            transform: "translate(-50%, -50%)",
+                            backgroundColor: strTitreFond || "rgba(0, 0, 0, 0.85)",
+                            padding: "30px",
+                            borderRadius: "10px",
+                            maxWidth: "80%",
+                            maxHeight: "80%",
+                            overflow: "auto",
+                            zIndex: 9999,
+                            boxShadow: "0 4px 20px rgba(0, 0, 0, 0.5)",
+                            display: "none",
+                            textAlign: "center"
+                        }
+                    }).appendTo("body");
+                    
+                    // Ajouter l'image
+                    $("<img>", {
+                        src: img.src,
+                        alt: "",
+                        css: {
+                            maxWidth: "100%",
+                            height: "auto",
+                            marginBottom: "15px",
+                            borderRadius: "5px"
+                        }
+                    }).appendTo("#" + modalId);
+                    
+                    // Ajouter le bouton de fermeture
+                    $("<button>", {
+                        text: chainesTraduction[strLangage].fermer || "Fermer",
+                        css: {
+                            display: "block",
+                            margin: "0 auto",
+                            padding: "10px 30px",
+                            backgroundColor: "rgba(255, 255, 255, 0.2)",
+                            color: "#ffffff",
+                            border: "2px solid rgba(255, 255, 255, 0.5)",
+                            borderRadius: "5px",
+                            fontSize: "16px",
+                            cursor: "pointer",
+                            fontWeight: "bold"
+                        },
+                        click: function() {
+                            afficheFenetreAide();
+                        }
+                    }).appendTo("#" + modalId);
+                    
+                    // Permettre la fermeture en cliquant sur l'overlay
+                    $("#" + overlayId).click(function() {
+                        afficheFenetreAide();
+                    });
+                    
+                    // Afficher avec animation
+                    $("#" + overlayId).fadeIn(500);
+                    $("#" + modalId).fadeIn(500, function() {
+                        bAfficheAide = true;
+                    });
+                };
+            }
+            else {
+                // Version par défaut modernisée
+                // Créer l'overlay de fond
+                $("<div>", {
+                    id: overlayId,
+                    css: {
+                        position: "fixed",
+                        top: 0,
+                        left: 0,
+                        width: "100%",
+                        height: "100%",
+                        backgroundColor: "rgba(0, 0, 0, 0.7)",
+                        zIndex: 9998,
+                        display: "none"
+                    }
+                }).appendTo("body");
+                
+                // Créer la fenêtre modale
+                $("<div>", {
+                    id: modalId,
+                    css: {
+                        position: "fixed",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        backgroundColor: strTitreFond || "rgba(0, 0, 0, 0.85)",
+                        color: "#ffffff",
+                        padding: "30px",
+                        borderRadius: "10px",
+                        maxWidth: "600px",
+                        minWidth: "300px",
+                        maxHeight: "80%",
+                        overflow: "auto",
+                        zIndex: 9999,
+                        boxShadow: "0 4px 20px rgba(0, 0, 0, 0.5)",
+                        fontFamily: "Arial, sans-serif",
+                        fontSize: "15px",
+                        lineHeight: "1.6",
+                        display: "none"
+                    }
+                }).appendTo("body");
+                
+                // Ajouter le contenu
+                panoInfo = chainesTraduction[strLangage].fenetreAide;
+                $("<div>", {
+                    css: {
+                        marginBottom: "20px",
+                        textAlign: "center"
+                    },
+                    html: panoInfo
+                }).appendTo("#" + modalId);
+                
+                // Ajouter le bouton de fermeture
+                $("<button>", {
+                    text: chainesTraduction[strLangage].fermer || "Fermer",
+                    css: {
+                        display: "block",
+                        margin: "0 auto",
+                        padding: "10px 30px",
+                        backgroundColor: "rgba(255, 255, 255, 0.2)",
+                        color: "#ffffff",
+                        border: "2px solid rgba(255, 255, 255, 0.5)",
+                        borderRadius: "5px",
+                        fontSize: "16px",
+                        cursor: "pointer",
+                        fontWeight: "bold"
+                    },
+                    click: function() {
+                        afficheFenetreAide();
+                    }
+                }).appendTo("#" + modalId);
+                
+                // Permettre la fermeture en cliquant sur l'overlay
+                $("#" + overlayId).click(function() {
+                    afficheFenetreAide();
                 });
-                $("#aidePanovisu-" + iNumPano).fadeIn(1000, function () {
-                    bAfficheAide = true;
-                });
-            } else {
-                $("#aidePanovisu-" + iNumPano).fadeIn(1000, function () {
+                
+                // Afficher avec animation
+                $("#" + overlayId).fadeIn(500);
+                $("#" + modalId).fadeIn(500, function() {
                     bAfficheAide = true;
                 });
             }
-
         }
     }
     /**
@@ -2706,107 +3202,30 @@ function panovisu(iNumPano) {
     }
 
     /**
-     * 
+     * Fonction héritée - redirige vers afficheFenetreInfo() moderne
      * @returns {undefined}
+     * @deprecated Utiliser afficheFenetreInfo() à la place
      */
     function afficheInfo() {
-        if (bFenetreInfoPersonnalise) {
-            img = new Image();
-            img.src = strFenetreInfoImage;
-            img.onload = function () {
-                $("#infoPanovisu-" + iNumPano).html("");
-                larg = Math.round(this.width * fenetreInfoTaille / 100);
-                haut = Math.round(this.height * fenetreInfoTaille / 100);
-                $("<img>", {
-                    id: "infoImg-" + iNumPano,
-                    src: this.src,
-                    alt: "",
-                    height: haut,
-                    width: larg
-                    , title: chainesTraduction[strLangage].clicFenetre
-                }).appendTo("#infoPanovisu-" + iNumPano);
-                $("<a>", {id: "infoUrl-" + iNumPano, text: strFenetreInfoTexteURL, href: strFenetreInfoURL, target: "_blank"}).appendTo("#infoPanovisu-" + iNumPano);
-                $("#infoPanovisu-" + iNumPano).css({width: larg, height: haut});
-                //$("#infoPanovisu-" + iNumPano).attr("title", chainesTraduction[strLangage].clicFenetre);
-                posGauche = (pano.width() - $("#infoPanovisu-" + iNumPano).width()) / 2 + fenetreInfoDX;
-                posHaut = (pano.height() - $("#infoPanovisu-" + iNumPano).height()) / 2 + fenetreInfoDX;
-                $("#infoPanovisu-" + iNumPano).css({
-                    top: posHaut + "px",
-                    left: posGauche + "px",
-                    border: "none",
-                    backgroundColor: "rgba(255,255,255,0)",
-                    opacity: fenetreInfoOpacite
-                });
-                topUrl = ($("#infoPanovisu-" + iNumPano).height() - $("#infoUrl-" + iNumPano).height()) / 2 + fenetreInfoDYURL;
-                leftUrl = ($("#infoPanovisu-" + iNumPano).width() - $("#infoUrl-" + iNumPano).width()) / 2 + fenetreInfoDXURL;
-                $("#infoUrl-" + iNumPano).css({color: strFenetreInfoCouleurURL,
-                    fontSize: fenetreInfoTailleURL + "px",
-                    position: "absolute",
-                    top: topUrl + "px",
-                    left: leftUrl + "px"
-                });
-                if (bAfficheInfo)
-                {
-                    $("#infoPanovisu-" + iNumPano).css({display: "block"});
-                }
-            };
-        }
-        else {
-            panoInfo = chainesTraduction[strLangage].fenetreInfo;
-            $("#infoPanovisu-" + iNumPano).css({width: "450px", height: "190px"});
-            $("#infoPanovisu-" + iNumPano).html(panoInfo);
-            $("#infoPanovisu-" + iNumPano).attr("title", chainesTraduction[strLangage].clicFenetre);
-            posGauche = (pano.width() - $("#infoPanovisu-" + iNumPano).width()) / 2;
-            posHaut = (pano.height() - $("#infoPanovisu-" + iNumPano).height()) / 2;
-            $("#infoPanovisu-" + iNumPano).css({top: posHaut + "px", left: posGauche + "px"});
-            if (bAfficheInfo)
-            {
-                $("#infoPanovisu-" + iNumPano).css({display: "block"});
-            }
+        // Rediriger vers la nouvelle fonction modale moderne
+        // Affiche la fenêtre UNIQUEMENT au premier chargement de la visite
+        console.log("DEBUG afficheInfo() - bPremierChargement:", bPremierChargement, "bAfficheInfo:", bAfficheInfo);
+        if (bPremierChargement && !bAfficheInfo) {
+            console.log("DEBUG afficheInfo() - Affichage de la fenêtre");
+            afficheFenetreInfo();
+            bPremierChargement = false; // Ne plus afficher aux changements suivants
+        } else {
+            console.log("DEBUG afficheInfo() - Conditions non remplies pour afficher");
         }
     }
     /**
-     * 
+     * Fonction héritée - ne fait plus rien (l'aide ne s'affiche plus automatiquement)
      * @returns {undefined}
+     * @deprecated Cette fonction est désactivée - utiliser le bouton d'aide manuel
      */
     function afficheAide() {
-        if (bFenetreAidePersonnalise) {
-            img = new Image();
-            img.src = strFenetreAideImage;
-            img.onload = function () {
-                $("#aidePanovisu-" + iNumPano).html("");
-                larg = Math.round(this.width * fenetreAideTaille / 100);
-                haut = Math.round(this.height * fenetreAideTaille / 100);
-                $("<img>", {id: "infoImg-" + iNumPano, src: this.src, alt: "", height: haut, width: larg}).appendTo("#aidePanovisu-" + iNumPano);
-                $("#aidePanovisu-" + iNumPano).css({width: larg, height: haut});
-                $("#aidePanovisu-" + iNumPano).attr("title", chainesTraduction[strLangage].clicFenetre);
-                posGauche = (pano.width() - $("#aidePanovisu-" + iNumPano).width()) / 2 + fenetreAideDX;
-                posHaut = (pano.height() - $("#aidePanovisu-" + iNumPano).height()) / 2 + fenetreAideDX;
-                $("#aidePanovisu-" + iNumPano).css({
-                    top: posHaut + "px",
-                    left: posGauche + "px",
-                    border: "none",
-                    backgroundColor: "rgba(255,255,255,0)",
-                    opacity: fenetreAideOpacite
-                });
-                if (bAfficheAide)
-                {
-                    $("#aidePanovisu-" + iNumPano).css({display: "block"});
-                }
-            };
-        }
-        else {
-            panoInfo = chainesTraduction[strLangage].fenetreAide;
-            $("#aidePanovisu-" + iNumPano).css({width: "400px", height: "220px"});
-            $("#aidePanovisu-" + iNumPano).html(panoInfo);
-            posGauche = (pano.width() - $("#aidePanovisu-" + iNumPano).width()) / 2;
-            posHaut = (pano.height() - $("#aidePanovisu-" + iNumPano).height()) / 2;
-            $("#aidePanovisu-" + iNumPano).css({top: posHaut + "px", left: posGauche + "px"});
-            if (bAfficheAide)
-            {
-                $("#aidePanovisu-" + iNumPano).css({display: "block"});
-            }
-        }
+        // Ne rien faire - l'aide ne s'affiche plus automatiquement
+        // L'utilisateur doit cliquer sur le bouton d'aide pour afficher la fenêtre
     }
     /**
      * 
@@ -2824,6 +3243,138 @@ function panovisu(iNumPano) {
         posHaut = (pano.height() - $("#infoPanovisu-" + iNumPano).height()) / 2;
         $("#infoPanovisu-" + iNumPano).css({top: posHaut + "px", left: posGauche + "px"});
         $("#infoPanovisu-" + iNumPano).html(panoInfo);
+    }
+
+    /**
+     * Affiche la fenêtre modale avec la description du panoramique au chargement
+     * Attend que la fenêtre d'info soit fermée avant d'afficher
+     * @returns {undefined}
+     */
+    function afficheDescriptionChargement() {
+        if (strAffDescriptionChargement === "oui" && strDescription !== "") {
+            // Vérifier si la fenêtre d'info est affichée
+            if (bAfficheInfo) {
+                // Attendre que la fenêtre d'info soit fermée
+                requestTimeout(function() {
+                    afficheDescriptionChargement();
+                }, 500);
+                return;
+            }
+            
+            // Créer l'overlay modal
+            var overlayId = "descriptionOverlay-" + iNumPano;
+            var modalId = "descriptionModal-" + iNumPano;
+            
+            // Supprimer les éléments existants si présents
+            $("#" + overlayId).remove();
+            $("#" + modalId).remove();
+            
+            // Créer l'overlay de fond
+            $("<div>", {
+                id: overlayId,
+                css: {
+                    position: "fixed",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    backgroundColor: "rgba(0, 0, 0, 0.7)",
+                    zIndex: 9998,
+                    display: "block"
+                }
+            }).appendTo("body");
+            
+            // Créer la fenêtre modale
+            $("<div>", {
+                id: modalId,
+                css: {
+                    position: "fixed",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    backgroundColor: strTitreFond || "rgba(0, 0, 0, 0.85)",
+                    color: "#ffffff",
+                    padding: "30px",
+                    borderRadius: "10px",
+                    maxWidth: "700px",
+                    minWidth: "300px",
+                    maxHeight: "80%",
+                    overflow: "auto",
+                    zIndex: 9999,
+                    boxShadow: "0 4px 20px rgba(0, 0, 0, 0.5)",
+                    fontFamily: "'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif",
+                    fontSize: "16px",
+                    lineHeight: "1.6"
+                }
+            }).appendTo("body");
+            
+            // Ajouter le titre de la visite en gras
+            if (strPanoTitre && strPanoTitre !== "") {
+                $("<div>", {
+                    css: {
+                        fontWeight: "bold",
+                        fontSize: "20px",
+                        marginBottom: strPanoTitre2 && strPanoTitre2 !== "" ? "8px" : "15px",
+                        textAlign: "center",
+                        color: "#ffffff",
+                        fontFamily: "'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif"
+                    },
+                    text: strPanoTitre
+                }).appendTo("#" + modalId);
+            }
+            
+            // Ajouter le titre du panoramique en normal (sous-titre)
+            if (strPanoTitre2 && strPanoTitre2 !== "") {
+                $("<div>", {
+                    css: {
+                        fontWeight: "normal",
+                        fontSize: "16px",
+                        marginBottom: "15px",
+                        textAlign: "center",
+                        color: "#ffffff",
+                        fontFamily: "'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif"
+                    },
+                    text: strPanoTitre2
+                }).appendTo("#" + modalId);
+            }
+            
+            // Ajouter le contenu de la description
+            $("<div>", {
+                css: {
+                    marginBottom: "20px",
+                    textAlign: "justify",
+                    fontFamily: "'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif"
+                },
+                html: strDescription
+            }).appendTo("#" + modalId);
+            
+            // Ajouter un bouton de fermeture
+            $("<button>", {
+                text: "Fermer",
+                css: {
+                    display: "block",
+                    margin: "0 auto",
+                    padding: "10px 30px",
+                    backgroundColor: "rgba(255, 255, 255, 0.2)",
+                    color: "#ffffff",
+                    border: "2px solid rgba(255, 255, 255, 0.5)",
+                    borderRadius: "5px",
+                    fontSize: "16px",
+                    cursor: "pointer",
+                    fontWeight: "bold"
+                },
+                click: function() {
+                    $("#" + overlayId).fadeOut(300, function() { $(this).remove(); });
+                    $("#" + modalId).fadeOut(300, function() { $(this).remove(); });
+                }
+            }).appendTo("#" + modalId);
+            
+            // Permettre la fermeture en cliquant sur l'overlay
+            $("#" + overlayId).click(function() {
+                $("#" + overlayId).fadeOut(300, function() { $(this).remove(); });
+                $("#" + modalId).fadeOut(300, function() { $(this).remove(); });
+            });
+        }
     }
 
     function reaffiche(lat, sensLat, FOV, sensFOV) {
@@ -3062,8 +3613,9 @@ function panovisu(iNumPano) {
         var posit = (hauteur - $("#divSuivant-" + iNumPano).height()) / 2;
         $("#divSuivant-" + iNumPano).css("top", posit);
         $("#divPrecedent-" + iNumPano).css("top", posit);
-        afficheInfo();
+        // afficheInfo() est maintenant appelée de manière asynchrone dans initialisePano()
         afficheAide();
+        afficheDescriptionChargement();
         if (bVignettes) {
             if (strVignettesPosition === "bottom") {
                 afficheVignettesHorizontales();
@@ -4405,7 +4957,7 @@ function panovisu(iNumPano) {
             renderer.setSize(pano.width(), pano.height());
         affiche();
         requestTimeout(function () {
-            afficheInfo();
+            // afficheInfo() supprimé - ne doit s'afficher qu'au démarrage initial
             afficheAide();
             afficheBarre(pano.width(), pano.height());
             afficheInfoTitre();
@@ -4731,7 +5283,7 @@ function panovisu(iNumPano) {
                     strDiaporamaCouleur = "rgba(0,0,0,0.8)";
                     strPanoType = "cube";
                     strAffInfo = "oui";
-                    bAfficheInfo = true;
+                    // bAfficheInfo = true; // DESACTIVE - géré par le nouveau système avec bPremierChargement
                     bAfficheAide = false;
                     maxLat = 1000;
                     minLat = -1000;
@@ -4970,6 +5522,8 @@ function panovisu(iNumPano) {
                     nouvFov = 0;
                     strAfficheTitre = XMLPano.attr('afftitre') || strAfficheTitre;
                     strAffInfo = XMLPano.attr('affinfo') || strAffInfo;
+                    strAffDescriptionChargement = XMLPano.attr('affDescriptionChargement') || "non";
+                    strDescription = XMLPano.attr('description') || "";
                     zeroNord = parseFloat(XMLPano.attr('zeroNord')) || zeroNord;
                     strReplieVignettes = XMLPano.attr('replieVignettes') || "";
                     bVignettesRentre = (strReplieVignettes === "oui" || bVignettesRentre);
@@ -5009,11 +5563,13 @@ function panovisu(iNumPano) {
                     if (bReloaded) {
                         strAffInfo = false;
                     }
-                    if (strAffInfo === "oui") {
-                        bAfficheInfo = true;
-                    } else {
-                        bAfficheInfo = false;
-                    }
+                    // ANCIENNE LOGIQUE DESACTIVEE - utilise maintenant bPremierChargement + système modal moderne
+                    // L'affichage automatique de la fenêtre d'info se fait dans initialisePano() via setTimeout
+                    // if (strAffInfo === "oui") {
+                    //     bAfficheInfo = true;
+                    // } else {
+                    //     bAfficheInfo = false;
+                    // }
                     var XMLFenetreInfo = $(d).find('fenetreInfo');
                     InfoAffiche = XMLFenetreInfo.attr('affiche') || "non";
                     bFenetreInfoPersonnalise = (InfoAffiche === "oui");
@@ -5980,6 +6536,29 @@ function panovisu(iNumPano) {
          * lecture du fichier XML
          */
         chargeXML(xmlFile);
+        
+        /**
+         * Affichage asynchrone de la fenêtre d'info au tout début du chargement
+         * Marquer immédiatement bAfficheInfo=true pour bloquer l'affichage de la description
+         * pendant le chargement. La fenêtre sera affichée après le délai.
+         */
+        console.log("DEBUG initialisePano() - Avant setTimeout - bPremierChargement:", bPremierChargement, "bAfficheInfo:", bAfficheInfo);
+        if (bPremierChargement) {
+            bAfficheInfo = true; // Bloquer immédiatement la description
+            console.log("DEBUG initialisePano() - bAfficheInfo mis à true immédiatement");
+        }
+        setTimeout(function() {
+            console.log("DEBUG initialisePano() setTimeout - bPremierChargement:", bPremierChargement);
+            if (bPremierChargement) {
+                console.log("DEBUG initialisePano() - Affichage de la fenêtre de bienvenue");
+                // Ne pas appeler afficheFenetreInfo() qui testerait bAfficheInfo
+                // Afficher directement la fenêtre modale
+                afficheModaleBienvenue();
+                bPremierChargement = false;
+            } else {
+                console.log("DEBUG initialisePano() - Pas le premier chargement");
+            }
+        }, 100); // Délai minimal pour laisser le DOM se mettre en place
     };
     /*
      *  Fonctions de gestion Openlayers

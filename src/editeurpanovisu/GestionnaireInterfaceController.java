@@ -267,6 +267,14 @@ public class GestionnaireInterfaceController {
     private double titreTaille = 100.0;
 
     /**
+     * Variable description
+     */
+    private boolean bAfficheDescription = false;
+    private CheckBox cbAfficheDescription;
+    private PaneOutil poDescription;
+    private boolean bChargementEnCours = false;
+
+    /**
      * Variables boussole
      */
     private boolean bAfficheBoussole = false;
@@ -2938,6 +2946,7 @@ public class GestionnaireInterfaceController {
                 .append("afficheTitreVisite=").append(isbTitreVisite()).append("\n")
                 .append("afficheTitrePanoramique=").append(isbTitrePanoramique()).append("\n")
                 .append("titreAdapte=").append(isbTitreAdapte()).append("\n")
+                .append("afficheDescription=").append(isbAfficheDescription()).append("\n")
                 .append("titrePosition=").append(getStrTitrePosition()).append("\n")
                 .append("titreDecalage=").append(Math.round(getTitreDecalage() * 100.d) / 100.d).append("\n")
                 .append("titrePolice=").append(getStrTitrePoliceNom()).append("\n")
@@ -3388,6 +3397,9 @@ public class GestionnaireInterfaceController {
                         break;
                     case "titreAdapte":
                         setbTitreAdapte(strValeur.equals("true"));
+                        break;
+                    case "afficheDescription":
+                        setbAfficheDescription(strValeur.equals("true"));
                         break;
                     case "titrePosition":
                         setStrTitrePosition(strValeur);
@@ -5343,6 +5355,38 @@ public class GestionnaireInterfaceController {
         apTitre.getChildren().addAll(
                 apTit1, cbNiveauTitre, cbAfficheTitre
         );
+        
+        /*
+         * *****************************************
+         *     Panel Description 
+         * ****************************************
+         */
+        AnchorPane apDescription = new AnchorPane();
+        apDescription.setPrefHeight(60);
+        poDescription = new PaneOutil(rbLocalisation.getString("interface.description"), apDescription, largeur);
+        AnchorPane apDESC = new AnchorPane(poDescription.getApPaneOutil());
+        
+        cbAfficheDescription = new CheckBox(rbLocalisation.getString("interface.afficheDescriptionChargement"));
+        cbAfficheDescription.setSelected(isbAfficheDescription());
+        cbAfficheDescription.setLayoutX(10);
+        cbAfficheDescription.setLayoutY(15);
+        cbAfficheDescription.selectedProperty().addListener((ov, old_val, new_val) -> {
+            // Ignore les changements pendant le chargement des données
+            if (!bChargementEnCours && getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+                // Met à jour l'objet Panoramique
+                getPanoramiquesProjet()[getiPanoActuel()].setAffDescription(new_val);
+            }
+            if (!bChargementEnCours) {
+                setbAfficheDescription(new_val);
+                poDescription.setbValide(new_val);
+            }
+        });
+        poDescription.setbValide(isbAfficheDescription());
+        
+        apDescription.getChildren().addAll(cbAfficheDescription);
+        
         /*
          * *****************************************
          *     Panel Infobulles 
@@ -7568,7 +7612,9 @@ public class GestionnaireInterfaceController {
                 apHS1,
                 apHS2,
                 apHS3,
-                apTIT, getApBtnVA(),
+                apTIT,
+                apDESC,
+                getApBtnVA(),
                 apECR1,
                 apECR2,
                 apCLASS,
@@ -10066,6 +10112,42 @@ public class GestionnaireInterfaceController {
      */
     public void setbAfficheTitre(boolean bAfficheTitre) {
         this.bAfficheTitre = bAfficheTitre;
+    }
+
+    /**
+     * @return the bAfficheDescription
+     */
+    public boolean isbAfficheDescription() {
+        return bAfficheDescription;
+    }
+
+    /**
+     * @param bAfficheDescription the bAfficheDescription to set
+     */
+    public void setbAfficheDescription(boolean bAfficheDescription) {
+        this.bAfficheDescription = bAfficheDescription;
+    }
+
+    /**
+     * @return the cbAfficheDescription checkbox
+     */
+    public CheckBox getCbAfficheDescription() {
+        return cbAfficheDescription;
+    }
+
+    /**
+     * @return the poDescription panel
+     */
+    public PaneOutil getPoDescription() {
+        return poDescription;
+    }
+
+    /**
+     * Active ou désactive le mode chargement pour éviter les mises à jour intempestives
+     * @param bChargement true si on est en train de charger des données
+     */
+    public void setbChargementEnCours(boolean bChargement) {
+        this.bChargementEnCours = bChargement;
     }
 
     /**

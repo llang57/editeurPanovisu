@@ -51,6 +51,7 @@ public class Panoramique {
     private int iNombreHotspotDiapo = 0;
     private String strTypePanoramique="";
     private boolean bAfficheTitre;
+    private boolean bAffDescription;
     private boolean bAfficheInfo;
     private boolean bAffichePlan;
     private int iNumeroPlan = -1;
@@ -67,6 +68,7 @@ public class Panoramique {
         this.strNomFichier = strFichier;
         this.strTypePanoramique = Panoramique.SPHERE;
         this.bAfficheTitre = true;
+        this.bAffDescription = false;
         this.bAfficheInfo = true;
     }
 
@@ -329,6 +331,20 @@ public class Panoramique {
      */
     public void setAfficheTitre(boolean bAfficheTitre) {
         this.bAfficheTitre = bAfficheTitre;
+    }
+
+    /**
+     * @return the affDescription
+     */
+    public boolean isAffDescription() {
+        return bAffDescription;
+    }
+
+    /**
+     * @param bAffDescription the affDescription to set
+     */
+    public void setAffDescription(boolean bAffDescription) {
+        this.bAffDescription = bAffDescription;
     }
 
     /**

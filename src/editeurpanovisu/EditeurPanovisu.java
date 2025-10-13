@@ -453,6 +453,20 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * @return the strDernierRepertoireVisite
+     */
+    public static String getStrDernierRepertoireVisite() {
+        return strDernierRepertoireVisite;
+    }
+
+    /**
+     * @param aStrDernierRepertoireVisite the strDernierRepertoireVisite to set
+     */
+    public static void setStrDernierRepertoireVisite(String aStrDernierRepertoireVisite) {
+        strDernierRepertoireVisite = aStrDernierRepertoireVisite;
+    }
+
+    /**
      * @return the bDejaSauve
      */
     public static boolean isbDejaSauve() {
@@ -1279,6 +1293,10 @@ public class EditeurPanovisu extends Application {
      */
     private static String strRepertoireProjet = "";
     /**
+     * Dernier répertoire utilisé pour la génération de visite
+     */
+    private static String strDernierRepertoireVisite = "";
+    /**
      * Répertoire du fichier de configuration
      */
     static public File fileRepertConfig;
@@ -1655,10 +1673,10 @@ public class EditeurPanovisu extends Application {
                         + "      nombreNiveaux=\"" + getPanoramiquesProjet()[i].getNombreNiveaux() + "\"\n"
                         + "      zeroNord=\"" + zN + "\"\n"
                         + "      regardX=\"" + regX + "\"\n"
-                        + "      regardY=\"" + Math.round((getPanoramiquesProjet()[i].getRegardY() * 1000) + 0.002) / 1000 + "\"\n"
-                        + "      minFOV=\"" + Math.round((getPanoramiquesProjet()[i].getFovMin() * 200)) / 100 + "\"\n"
-                        + "      maxFOV=\"" + Math.round((getPanoramiquesProjet()[i].getFovMax() * 200)) / 100 + "\"\n"
-                        + "      champVisuel=\"" + Math.round((getPanoramiquesProjet()[i].getChampVisuel() + 0.002) * 1000) / 1000 + "\"\n";
+                        + "      regardY=\"" + Math.round((getPanoramiquesProjet()[i].getRegardY() * 1000) + 0.002) / 1000.0 + "\"\n"
+                        + "      minFOV=\"" + Math.round((getPanoramiquesProjet()[i].getFovMin() * 200)) / 100.0 + "\"\n"
+                        + "      maxFOV=\"" + Math.round((getPanoramiquesProjet()[i].getFovMax() * 200)) / 100.0 + "\"\n"
+                        + "      champVisuel=\"" + Math.round((getPanoramiquesProjet()[i].getChampVisuel() + 0.002) * 1000) / 1000.0 + "\"\n";
 
                 if (getPanoramiquesProjet()[i].getMinLat() != -1000 && getPanoramiquesProjet()[i].isbMinLat()) {
                     strContenuFichier
@@ -1683,6 +1701,22 @@ public class EditeurPanovisu extends Application {
                         + "      limiteAT=\"" + getiAutoTourLimite() + "\"\n"
                         + "      demarrageAT=\"" + getiAutoTourDemarrage() + "\"\n"
                         + "      affinfo=\"" + strAffInfo + "\"\n";
+                
+                // Ajout de l'affichage de la description
+                if (getGestionnaireInterface().isbAfficheDescription()) {
+                    strContenuFichier += "      affDescriptionChargement=\"oui\"\n";
+                    // Échapper les caractères spéciaux dans la description
+                    String description = getPanoramiquesProjet()[i].getStrDescriptionIA()
+                            .replace("&", "&amp;")
+                            .replace("<", "&lt;")
+                            .replace(">", "&gt;")
+                            .replace("\"", "&quot;")
+                            .replace("'", "&apos;");
+                    strContenuFichier += "      description=\"" + description + "\"\n";
+                } else {
+                    strContenuFichier += "      affDescriptionChargement=\"non\"\n";
+                }
+                
                 if (getPanoramiquesProjet()[i].getStrNomFichier()
                         .substring(getPanoramiquesProjet()[i].getStrNomFichier().lastIndexOf(File.separator) + 1, getPanoramiquesProjet()[i].getStrNomFichier().length())
                         .split("\\.")[0].equals(strPanoEntree) && isbPetitePlaneteDemarrage()) {
@@ -2336,8 +2370,9 @@ public class EditeurPanovisu extends Application {
                     + "        <meta name=\"img\" property=\"og:image\" itemprop=\"image primaryImageOfPage\" content=\"./" + strFPano1 + "\" />\n"
                     + "        <script type=\"text/javascript\" src=\"panovisu/libs/openlayers/OpenLayers.js\"></script>\n"
                     + "        <script type=\"text/javascript\" src=\"panovisu/libs/openlayers/OpenStreetMap.js\"></script>\n"
-                    + "        <script src=\"http://maps.google.com/maps/api/js?v=3.5&sensor=false\" style=\"\"></script>\n"
-                    + "        <script src=\"http://maps.gstatic.com/maps-api-v3/api/js/20/13/intl/fr_ALL/main.js\"></script>\n"
+                    // Google Maps API obsolète v3.5 - désactivé (warnings + version retirée)
+                    // + "        <script src=\"http://maps.google.com/maps/api/js?v=3.5&sensor=false\" style=\"\"></script>\n"
+                    // + "        <script src=\"http://maps.gstatic.com/maps-api-v3/api/js/20/13/intl/fr_ALL/main.js\"></script>\n"
                     + "        <style>\n"
                     + "            .olControlLayerSwitcher\n"
                     + "            {\n"
@@ -2457,11 +2492,24 @@ public class EditeurPanovisu extends Application {
             }
             DirectoryChooser dcRepertChoix = new DirectoryChooser();
             dcRepertChoix.setTitle("Choix du repertoire de sauvegarde de la visite");
-            File fileRepert = new File(EditeurPanovisu.getStrRepertoireProjet());
+            // Utiliser le dernier répertoire de visite s'il existe, sinon le répertoire du projet
+            File fileRepert;
+            if (!getStrDernierRepertoireVisite().isEmpty() && new File(getStrDernierRepertoireVisite()).exists()) {
+                fileRepert = new File(getStrDernierRepertoireVisite());
+            } else {
+                fileRepert = new File(EditeurPanovisu.getStrRepertoireProjet());
+            }
             dcRepertChoix.setInitialDirectory(fileRepert);
             File fileRepertVisite = dcRepertChoix.showDialog(null);
             if (fileRepertVisite != null) {
                 String strNomRepertVisite = fileRepertVisite.getAbsolutePath();
+                // Sauvegarder ce répertoire pour la prochaine fois
+                setStrDernierRepertoireVisite(strNomRepertVisite);
+                try {
+                    sauvePreferences();
+                } catch (IOException ex) {
+                    Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 copieRepertoire(getStrRepertTemp(), strNomRepertVisite);
                 Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setHeaderText(null);
@@ -2473,7 +2521,9 @@ public class EditeurPanovisu extends Application {
                     public void start(Stage stage) {
                     }
                 };
-                app.getHostServices().showDocument(strNomRepertVisite + File.separator + "index.html");
+                // Utiliser le protocole file:// pour que les ressources se chargent correctement
+                File indexFile = new File(strNomRepertVisite + File.separator + "index.html");
+                app.getHostServices().showDocument(indexFile.toURI().toString());
             }
         } else {
             Alert alert = new Alert(AlertType.ERROR);
@@ -3271,6 +3321,7 @@ public class EditeurPanovisu extends Application {
                     + ";type:" + getPanoramiquesProjet()[i].getStrTypePanoramique()
                     + ";afficheInfo:" + getPanoramiquesProjet()[i].isAfficheInfo()
                     + ";afficheTitre:" + getPanoramiquesProjet()[i].isAfficheTitre()
+                    + ";affDescription:" + getPanoramiquesProjet()[i].isAffDescription()
                     + ";regardX:" + getPanoramiquesProjet()[i].getRegardX()
                     + ";regardY:" + getPanoramiquesProjet()[i].getRegardY()
                     + ";minLat:" + getPanoramiquesProjet()[i].getMinLat()
@@ -3890,6 +3941,9 @@ public class EditeurPanovisu extends Application {
                                 case "afficheTitre":
                                     getPanoramiquesProjet()[getiPanoActuel()].setAfficheTitre(strValeur[1].equals("true"));
                                     break;
+                                case "affDescription":
+                                    getPanoramiquesProjet()[getiPanoActuel()].setAffDescription(strValeur[1].equals("true"));
+                                    break;
                                 case "nb":
                                     iNbHS = Integer.parseInt(strValeur[1]);
                                     break;
@@ -3924,10 +3978,10 @@ public class EditeurPanovisu extends Application {
                                     getPanoramiquesProjet()[getiPanoActuel()].setChampVisuel(Double.parseDouble(strValeur[1]) / 2.0);
                                     break;
                                 case "minfov":
-                                    getPanoramiquesProjet()[getiPanoActuel()].setFovMin(Double.parseDouble(strValeur[1]));
+                                    getPanoramiquesProjet()[getiPanoActuel()].setFovMin(Double.parseDouble(strValeur[1]) / 2.0);
                                     break;
                                 case "maxfov":
-                                    getPanoramiquesProjet()[getiPanoActuel()].setFovMax(Double.parseDouble(strValeur[1]));
+                                    getPanoramiquesProjet()[getiPanoActuel()].setFovMax(Double.parseDouble(strValeur[1]) / 2.0);
                                     break;
                                 case "zeroNord":
                                     getPanoramiquesProjet()[getiPanoActuel()].setZeroNord(Double.parseDouble(strValeur[1]));
@@ -7751,6 +7805,25 @@ public class EditeurPanovisu extends Application {
                 taDescriptionIA.setText("");
             }
         }
+        
+        // Met à jour la checkbox "Afficher la description au chargement" et la validation du panel
+        if (getGestionnaireInterface().getCbAfficheDescription() != null) {
+            // Active le mode chargement pour éviter le déclenchement du listener
+            getGestionnaireInterface().setbChargementEnCours(true);
+            
+            boolean bAffDesc = getPanoramiquesProjet()[getiPanoActuel()].isAffDescription();
+            
+            getGestionnaireInterface().getCbAfficheDescription().setSelected(bAffDesc);
+            getGestionnaireInterface().setbAfficheDescription(bAffDesc);
+            
+            // Met à jour la validation du panel pour qu'il devienne vert
+            if (getGestionnaireInterface().getPoDescription() != null) {
+                getGestionnaireInterface().getPoDescription().setbValide(bAffDesc);
+            }
+            
+            // Désactive le mode chargement
+            getGestionnaireInterface().setbChargementEnCours(false);
+        }
     }
 
     /**
@@ -10807,7 +10880,7 @@ public class EditeurPanovisu extends Application {
             setbDejaSauve(false);
             getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
 
-            getPanoramiquesProjet()[iPanoActuel].setFovMin((double) newValue);
+            getPanoramiquesProjet()[getiPanoActuel()].setFovMin((double) newValue);
             double val1 = Math.round((double) newValue * 10) / 10;
             lblMinFov.setText("min. FOV : " + val1 + "°");
             slMaxFov.setMin(val1);
@@ -10825,7 +10898,7 @@ public class EditeurPanovisu extends Application {
             setbDejaSauve(false);
             getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
 
-            getPanoramiquesProjet()[iPanoActuel].setFovMax((double) newValue);
+            getPanoramiquesProjet()[getiPanoActuel()].setFovMax((double) newValue);
             double val1 = Math.round((double) newValue * 10) / 10;
             lblMaxFov.setText("max. FOV : " + val1 + "°");
             slMinFov.setMax(val1);
@@ -11173,14 +11246,17 @@ public class EditeurPanovisu extends Application {
         spVuePanoramique.setContent(apPanneauPrincipal);
         hbEnvironnement.getChildren().setAll(spVuePanoramique, apPanneauOutils);
         apEnvironnement = new AnchorPane();
+        apEnvironnement.getStyleClass().add("dialog-content-pane");
+
         setApAttends(new AnchorPane());
+        getApAttends().getStyleClass().add("dialog-content-pane");
         getApAttends().setPrefHeight(250);
         getApAttends().setPrefWidth(600);
         getApAttends().setMaxWidth(600);
-        getApAttends().setStyle("-fx-background-color : -fx-base;"
-                + "-fx-border-color: derive(-fx-base,10%);"
-                + "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.5) , 8, 0.0 , 0 , 8 );"
-                + "-fx-border-width: 1px;");
+        //getApAttends().setStyle("-fx-background-color: -fx-base;"
+        //        + "-fx-border-color: derive(-fx-base,10%);"
+        //        + "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.5) , 8, 0.0 , 0 , 8 );"
+        //        + "-fx-border-width: 1px;");
         getApAttends().setLayoutX((iLargeur - getApAttends().getPrefWidth()) / 2.d);
         getApAttends().setLayoutY((iHauteur - getApAttends().getPrefHeight()) / 2.d - 55);
         pbarAvanceChargement = new ProgressBar();
@@ -11274,6 +11350,9 @@ public class EditeurPanovisu extends Application {
                             case "niveauNetteteTransf":
                                 setNiveauNetteteTransf(Double.parseDouble(valeur));
                                 break;
+                            case "dernierRepertoireVisite":
+                                setStrDernierRepertoireVisite(valeur);
+                                break;
                         }
 
                     }
@@ -11301,6 +11380,7 @@ public class EditeurPanovisu extends Application {
         strContenuFichier += "hauteurE2C=" + getHauteurE2C() + "\n";
         strContenuFichier += "netteteTransf=" + isbNetteteTransf() + "\n";
         strContenuFichier += "niveauNetteteTransf=" + getNiveauNetteteTransf() + "\n";
+        strContenuFichier += "dernierRepertoireVisite=" + getStrDernierRepertoireVisite() + "\n";
         OutputStreamWriter oswFichierHisto = null;
         try {
             oswFichierHisto = new OutputStreamWriter(new FileOutputStream(fileFichPreferences), "UTF-8");
