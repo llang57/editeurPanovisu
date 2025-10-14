@@ -40,7 +40,8 @@ jobs:
         shell: pwsh
       
       - name: 🔨 Build with Maven
-        run: mvn clean package -DskipTests -Dskip.build.increment=true
+        run: mvn clean package -DskipTests "-Dskip.build.increment=true"
+        shell: pwsh
       
       - name: 📦 Create Windows Installer
         run: .\build-installer.ps1
