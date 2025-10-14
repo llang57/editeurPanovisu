@@ -39,6 +39,7 @@ public class OllamaService {
     // anthropic/claude-3-opus : Claude 3 Opus - Raisonnement approfondi, très factuel
     // anthropic/claude-3.5-sonnet:20241022 : Claude 3.5 Sonnet daté - Excellent précision
     // mistralai/mistral-nemo : Mistral Nemo - Bon rapport qualité/prix, multilingue
+    // deepcogito/cogito-v2-preview-deepseek-671b : Cogito v2 Preview - 671B params, raisonnement extrême
     // openai/gpt-oss-120b : GPT-OSS-120B - Open source, 117B params, très économique (0.04$/M)
     // openai/gpt-4-turbo : GPT-4 Turbo - Très bon, connaissance encyclopédique
     // google/gemini-pro : Gemini Pro - Bon, gratuit
@@ -47,6 +48,7 @@ public class OllamaService {
         "anthropic/claude-3-opus",              // 🔷 Puissant génération 3
         "anthropic/claude-3.5-sonnet:20241022", // 📅 Version datée précédente
         "mistralai/mistral-nemo",               // 🇫🇷 Mistral AI français, multilingue
+        "deepcogito/cogito-v2-preview-deepseek-671b", // 🧠 Cogito v2 - 671B params, raisonnement avancé
         "openai/gpt-oss-120b",                  // 💰 Open source, très économique
         "openai/gpt-4-turbo",                   // 🌍 Excellent géographie
         "google/gemini-pro",                    // 🆓 Gratuit, bon compromis
@@ -575,10 +577,10 @@ public class OllamaService {
         
         // IMPORTANT : Ignorer le champ "name" s'il s'agit d'un cours d'eau (waterway)
         // Les noms de cours d'eau sont souvent incorrects dans OpenStreetMap
-        if (waterway != null && !waterway.isEmpty()) {
-            System.out.println("[GEO] ⚠️ Cours d'eau détecté (" + waterway + "), nom ignoré: " + name);
-            name = null; // Ignorer le nom s'il s'agit d'un cours d'eau
-        }
+        //if (waterway != null && !waterway.isEmpty()) {
+        //    System.out.println("[GEO] ⚠️ Cours d'eau détecté (" + waterway + "), nom ignoré: " + name);
+        //    name = null; // Ignorer le nom s'il s'agit d'un cours d'eau
+        //}
 
         // Construire une description structurée et explicite
         StringBuilder description = new StringBuilder();
@@ -605,6 +607,10 @@ public class OllamaService {
             description.append("NOM: ").append(name);
         }
         
+        if (waterway != null && !waterway.isEmpty()) {
+            description.append("CATÉGORIE COURS D'EAU: ").append(waterway).append(" (").append(tradTypeEau(waterway)).append(")");
+        }
+
         // 3. Commune/Ville (ne pas répéter si c'est le même que le nom)
         String localite = null;
         if (village != null && !village.isEmpty() && !village.equals(name)) {
@@ -721,6 +727,21 @@ public class OllamaService {
             case "sports_centre": return "Centre sportif";
             case "playground": return "Aire de jeux";
             default: return "Lieu de loisirs - " + type;
+        }
+    }
+    /**
+     * Traduit les types de loisirs OpenStreetMap en français explicite
+     */
+    private static String tradTypeEau(String type) {
+        switch (type.toLowerCase()) {
+            case "river": return "Rivière";
+            case "stream": return "Ruisseau";
+            case "canal": return "Canal";
+            case "drain": return "Drain";
+            case "ditch": return "Fossé";
+            case "weir": return "Seuil";
+            case "waterway": return "Cours d'eau";
+            default: return "Cours d'eau - " + type;
         }
     }
     

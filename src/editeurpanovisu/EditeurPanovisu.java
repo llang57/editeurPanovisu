@@ -7318,22 +7318,28 @@ public class EditeurPanovisu extends Application {
                     Circle c1 = new Circle(mouseEvent.getSceneX(), mouseEvent.getSceneY() - panePanoramique.getLayoutY() - 130 - getiDecalageMac(), 3);
                     panePanoramique.getChildren().add(c1);
                     ListView<String> lvMenuChoixTypeHotspot = new ListView<>();
-                    double tailleFenetre = 70;
+                    
+                    // Ajout des items
                     if (getiNombrePanoramiques() > 1) {
                         lvMenuChoixTypeHotspot.getItems().add("Panoramique");
-                        tailleFenetre += 20;
                     }
                     lvMenuChoixTypeHotspot.getItems().add("Image");
                     if (getiNombreDiapo() > 0) {
                         lvMenuChoixTypeHotspot.getItems().add("Diaporama");
-                        tailleFenetre += 20;
                     }
                     lvMenuChoixTypeHotspot.getItems().add("HTML");
                     lvMenuChoixTypeHotspot.getItems().add("Annuler");
-                    lvMenuChoixTypeHotspot.setMaxHeight(tailleFenetre);
-                    lvMenuChoixTypeHotspot.setPrefHeight(tailleFenetre);
-                    lvMenuChoixTypeHotspot.setMinHeight(tailleFenetre);
-                    lvMenuChoixTypeHotspot.setPrefWidth(120);
+                    
+                    // Taille adaptative basée sur le nombre d'items et la hauteur des cellules
+                    int nbItems = lvMenuChoixTypeHotspot.getItems().size();
+                    double cellHeight = 36; // Hauteur d'une cellule avec les nouveaux CSS (augmentée)
+                    double padding = 10; // Padding vertical (augmenté)
+                    double calculatedHeight = (nbItems * cellHeight) + padding;
+                    
+                    lvMenuChoixTypeHotspot.setPrefHeight(calculatedHeight);
+                    lvMenuChoixTypeHotspot.setMaxHeight(calculatedHeight);
+                    lvMenuChoixTypeHotspot.setMinWidth(150); // Largeur minimale augmentée pour le contenu
+                    lvMenuChoixTypeHotspot.setPrefWidth(150);
                     lvMenuChoixTypeHotspot.setCursor(Cursor.DEFAULT);
                     lvMenuChoixTypeHotspot.setLayoutX(mouseEvent.getSceneX());
                     lvMenuChoixTypeHotspot.setLayoutY(mouseEvent.getSceneY() - panePanoramique.getLayoutY() - 104 - getiDecalageMac());
@@ -11388,10 +11394,9 @@ public class EditeurPanovisu extends Application {
         getApAttends().setPrefHeight(250);
         getApAttends().setPrefWidth(600);
         getApAttends().setMaxWidth(600);
-        //getApAttends().setStyle("-fx-background-color: -fx-base;"
-        //        + "-fx-border-color: derive(-fx-base,10%);"
-        //        + "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.5) , 8, 0.0 , 0 , 8 );"
-        //        + "-fx-border-width: 1px;");
+        getApAttends().setStyle("-fx-border-color: derive(-fx-base,10%);"
+                + "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.5) , 8, 0.0 , 0 , 8 );"
+                + "-fx-border-width: 1px;");
         getApAttends().setLayoutX((iLargeur - getApAttends().getPrefWidth()) / 2.d);
         getApAttends().setLayoutY((iHauteur - getApAttends().getPrefHeight()) / 2.d - 55);
         pbarAvanceChargement = new ProgressBar();

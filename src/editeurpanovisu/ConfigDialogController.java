@@ -428,6 +428,8 @@ public class ConfigDialogController {
             return "📅 Claude 3.5 Sonnet (oct 2024)";
         } else if (modelName.equals("mistralai/mistral-nemo")) {
             return "🇫🇷 Mistral Nemo (Mistral AI)";
+        } else if (modelName.equals("deepcogito/cogito-v2-preview-deepseek-671b")) {
+            return "🧠 Cogito v2 Preview (671B)";
         } else if (modelName.equals("openai/gpt-oss-120b")) {
             return "💰 GPT-OSS-120B (Open Source)";
         } else if (modelName.equals("openai/gpt-4-turbo")) {
@@ -473,6 +475,8 @@ public class ConfigDialogController {
             return "anthropic/claude-3.5-sonnet:20241022";
         } else if (displayName.contains("Mistral Nemo") && displayName.contains("Mistral AI")) {
             return "mistralai/mistral-nemo";
+        } else if (displayName.contains("Cogito v2 Preview")) {
+            return "deepcogito/cogito-v2-preview-deepseek-671b";
         } else if (displayName.contains("GPT-OSS-120B")) {
             return "openai/gpt-oss-120b";
         } else if (displayName.contains("GPT-4 Turbo")) {
