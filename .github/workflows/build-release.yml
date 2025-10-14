@@ -1,0 +1,370 @@
+name: 🚀 Build Multi-Platform Installers
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version number (e.g., 3.0.0)'
+        required: true
+        default: '3.0.0'
+
+jobs:
+  build-windows:
+    name: 🪟 Windows Installer
+    runs-on: windows-latest
+    
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+      
+      - name: ☕ Setup Java 25
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '25'
+          cache: 'maven'
+      
+      - name: 🔨 Build with Maven
+        run: mvn clean package -DskipTests
+      
+      - name: 📦 Create Windows Installer
+        run: .\build-installer.ps1
+        shell: pwsh
+      
+      - name: 📊 Calculate SHA256
+        id: sha256
+        run: |
+          $hash = (Get-FileHash target\installer\EditeurPanovisu-Setup-*.exe -Algorithm SHA256).Hash
+          echo "HASH=$hash" >> $env:GITHUB_OUTPUT
+        shell: pwsh
+      
+      - name: 📤 Upload Windows Installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-installer
+          path: target/installer/*.exe
+          retention-days: 30
+
+  build-macos:
+    name: 🍎 macOS Installer
+    runs-on: macos-latest
+    
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+      
+      - name: ☕ Setup Java 25
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '25'
+          cache: 'maven'
+      
+      - name: 🖼️ Convert icon to .icns
+        run: |
+          # Créer l'icône macOS si elle n'existe pas
+          if [ ! -f "images/panovisu.icns" ]; then
+            echo "⚠️  Icône .icns manquante, création d'un placeholder"
+            # On utilise l'icône PNG comme fallback
+            cp images/panovisu.png images/panovisu.icns || true
+          fi
+      
+      - name: 🔨 Build with Maven
+        run: mvn clean package -DskipTests
+      
+      - name: 📦 Create macOS DMG
+        run: |
+          APP_VERSION="${{ github.event.inputs.version || '3.0.0' }}"
+          
+          jpackage \
+            --type dmg \
+            --name EditeurPanovisu \
+            --app-version "$APP_VERSION" \
+            --vendor "PanoVisu" \
+            --input target \
+            --main-jar editeurPanovisu-*-SNAPSHOT.jar \
+            --main-class editeurpanovisu.EditeurPanovisu \
+            --runtime-image "$JAVA_HOME" \
+            --dest target/installer \
+            --mac-package-name EditeurPanovisu \
+            --mac-package-identifier fr.panovisu.editeur \
+            --java-options "-Xmx2048m" \
+            --java-options "-Dfile.encoding=UTF-8" \
+            --verbose || {
+              echo "❌ Erreur jpackage, essai sans icône..."
+              jpackage \
+                --type dmg \
+                --name EditeurPanovisu \
+                --app-version "$APP_VERSION" \
+                --vendor "PanoVisu" \
+                --input target \
+                --main-jar editeurPanovisu-*-SNAPSHOT.jar \
+                --main-class editeurpanovisu.EditeurPanovisu \
+                --runtime-image "$JAVA_HOME" \
+                --dest target/installer \
+                --mac-package-name EditeurPanovisu \
+                --mac-package-identifier fr.panovisu.editeur \
+                --java-options "-Xmx2048m" \
+                --java-options "-Dfile.encoding=UTF-8"
+            }
+      
+      - name: 📊 Calculate SHA256
+        id: sha256
+        run: |
+          HASH=$(shasum -a 256 target/installer/*.dmg | cut -d ' ' -f 1)
+          echo "HASH=$HASH" >> $GITHUB_OUTPUT
+      
+      - name: 📤 Upload macOS Installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-installer
+          path: target/installer/*.dmg
+          retention-days: 30
+
+  build-linux:
+    name: 🐧 Linux Installers
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+      
+      - name: ☕ Setup Java 25
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '25'
+          cache: 'maven'
+      
+      - name: 📦 Install packaging tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fakeroot rpm
+      
+      - name: 🔨 Build with Maven
+        run: mvn clean package -DskipTests
+      
+      - name: 📦 Create Debian Package (.deb)
+        run: |
+          APP_VERSION="${{ github.event.inputs.version || '3.0.0' }}"
+          
+          jpackage \
+            --type deb \
+            --name editeurpanovisu \
+            --app-version "$APP_VERSION" \
+            --vendor "PanoVisu" \
+            --icon images/panovisu.png \
+            --input target \
+            --main-jar editeurPanovisu-*-SNAPSHOT.jar \
+            --main-class editeurpanovisu.EditeurPanovisu \
+            --runtime-image "$JAVA_HOME" \
+            --dest target/installer \
+            --linux-package-name editeurpanovisu \
+            --linux-app-category "Graphics" \
+            --linux-shortcut \
+            --linux-menu-group "Graphics" \
+            --java-options "-Xmx2048m" \
+            --java-options "-Dfile.encoding=UTF-8" \
+            --verbose
+      
+      - name: 📦 Create RPM Package (.rpm)
+        run: |
+          APP_VERSION="${{ github.event.inputs.version || '3.0.0' }}"
+          
+          jpackage \
+            --type rpm \
+            --name editeurpanovisu \
+            --app-version "$APP_VERSION" \
+            --vendor "PanoVisu" \
+            --icon images/panovisu.png \
+            --input target \
+            --main-jar editeurPanovisu-*-SNAPSHOT.jar \
+            --main-class editeurpanovisu.EditeurPanovisu \
+            --runtime-image "$JAVA_HOME" \
+            --dest target/installer \
+            --linux-package-name editeurpanovisu \
+            --linux-app-category "Graphics" \
+            --linux-shortcut \
+            --linux-menu-group "Graphics" \
+            --java-options "-Xmx2048m" \
+            --java-options "-Dfile.encoding=UTF-8" \
+            --verbose
+      
+      - name: 📊 Calculate SHA256
+        id: sha256
+        run: |
+          echo "### 📊 Checksums" >> $GITHUB_STEP_SUMMARY
+          for file in target/installer/*.{deb,rpm}; do
+            if [ -f "$file" ]; then
+              HASH=$(sha256sum "$file" | cut -d ' ' -f 1)
+              FILENAME=$(basename "$file")
+              echo "- **$FILENAME**: \`$HASH\`" >> $GITHUB_STEP_SUMMARY
+              echo "SHA256_$(echo $FILENAME | tr '.-' '_')=$HASH" >> $GITHUB_OUTPUT
+            fi
+          done
+      
+      - name: 📤 Upload Linux Installers
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-installers
+          path: |
+            target/installer/*.deb
+            target/installer/*.rpm
+          retention-days: 30
+
+  create-release:
+    name: 🎉 Create GitHub Release
+    needs: [build-windows, build-macos, build-linux]
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    
+    permissions:
+      contents: write
+    
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+      
+      - name: 📥 Download Windows Installer
+        uses: actions/download-artifact@v4
+        with:
+          name: windows-installer
+          path: ./artifacts/windows
+      
+      - name: 📥 Download macOS Installer
+        uses: actions/download-artifact@v4
+        with:
+          name: macos-installer
+          path: ./artifacts/macos
+      
+      - name: 📥 Download Linux Installers
+        uses: actions/download-artifact@v4
+        with:
+          name: linux-installers
+          path: ./artifacts/linux
+      
+      - name: 📊 Generate checksums
+        id: checksums
+        run: |
+          echo "# 📊 SHA256 Checksums" > checksums.txt
+          echo "" >> checksums.txt
+          
+          for file in artifacts/**/*; do
+            if [ -f "$file" ]; then
+              HASH=$(sha256sum "$file" | cut -d ' ' -f 1)
+              FILENAME=$(basename "$file")
+              echo "$HASH  $FILENAME" >> checksums.txt
+            fi
+          done
+          
+          cat checksums.txt
+      
+      - name: 📝 Extract build number
+        id: build_info
+        run: |
+          BUILD_NUM=$(cat build.num 2>/dev/null || echo "unknown")
+          echo "BUILD_NUM=$BUILD_NUM" >> $GITHUB_OUTPUT
+      
+      - name: 🎉 Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: "EditeurPanovisu ${{ github.ref_name }} - Build ${{ steps.build_info.outputs.BUILD_NUM }}"
+          body: |
+            ## 🎉 EditeurPanovisu ${{ github.ref_name }} - Build ${{ steps.build_info.outputs.BUILD_NUM }}
+            
+            ### ✨ Nouveautés
+            
+            - **🧠 Cogito v2 Preview (671B)** : Nouveau modèle OpenRouter pour raisonnement avancé
+            - **9 modèles OpenRouter** premium disponibles
+            - **🔧 Fenêtre hotspot** : Dimensionnement adaptatif selon CSS
+            - **🗺️ Géolocalisation** : Leaflet.js + LocationIQ intégrés
+            - **🎨 Interface** : Thème AtlantaFX Dracula moderne
+            
+            ### 📥 Téléchargements
+            
+            | Plateforme | Fichier | Taille |
+            |------------|---------|--------|
+            | 🪟 **Windows 10/11** | `EditeurPanovisu-Setup-3.0.0.exe` | ~188 MB |
+            | 🍎 **macOS 11+** | `EditeurPanovisu-3.0.0.dmg` | ~200 MB |
+            | 🐧 **Linux (Debian/Ubuntu)** | `editeurpanovisu_3.0.0-1_amd64.deb` | ~180 MB |
+            | 🐧 **Linux (RedHat/Fedora)** | `editeurpanovisu-3.0.0-1.x86_64.rpm` | ~180 MB |
+            
+            ### 📋 Configuration requise
+            
+            - **Windows** : Windows 10/11 64-bit
+            - **macOS** : macOS 11 Big Sur ou supérieur
+            - **Linux** : Debian 11+, Ubuntu 20.04+, Fedora 35+
+            - **RAM** : 4 GB minimum, 8 GB recommandé
+            - **Disque** : 500 MB d'espace libre
+            
+            ⚠️ **Java runtime inclus** - Aucune installation Java séparée requise !
+            
+            ### 🔧 Installation
+            
+            #### Windows
+            1. Téléchargez `EditeurPanovisu-Setup-3.0.0.exe`
+            2. Double-cliquez pour installer
+            3. Suivez l'assistant d'installation
+            4. Lancez via le raccourci Bureau ou Menu Démarrer
+            
+            #### macOS
+            1. Téléchargez `EditeurPanovisu-3.0.0.dmg`
+            2. Ouvrez le fichier `.dmg`
+            3. Glissez l'icône vers le dossier Applications
+            4. Lancez depuis le Launchpad
+            
+            #### Linux (Debian/Ubuntu)
+            ```bash
+            sudo dpkg -i editeurpanovisu_3.0.0-1_amd64.deb
+            # ou
+            sudo apt install ./editeurpanovisu_3.0.0-1_amd64.deb
+            ```
+            
+            #### Linux (RedHat/Fedora)
+            ```bash
+            sudo rpm -i editeurpanovisu-3.0.0-1.x86_64.rpm
+            # ou
+            sudo dnf install ./editeurpanovisu-3.0.0-1.x86_64.rpm
+            ```
+            
+            ### 🔐 Vérification d'intégrité
+            
+            Checksums SHA256 disponibles dans le fichier `checksums.txt` joint.
+            
+            ### 📚 Documentation
+            
+            - [Guide d'installation](doc/installation/INSTALLATION_UTILISATEUR.md)
+            - [Documentation complète](doc/README.md)
+            - [Configuration API](doc/guides/CONFIGURATION_API_KEYS.md)
+            
+            ### 🙏 Remerciements
+            
+            Merci à tous les contributeurs et testeurs !
+          files: |
+            artifacts/windows/*
+            artifacts/macos/*
+            artifacts/linux/*
+            checksums.txt
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  notify-summary:
+    name: 📊 Build Summary
+    needs: [build-windows, build-macos, build-linux]
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📊 Generate Summary
+        run: |
+          echo "# 🎉 Build Multi-Platform Completed!" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "✅ **Windows** installer created" >> $GITHUB_STEP_SUMMARY
+          echo "✅ **macOS** installer created" >> $GITHUB_STEP_SUMMARY
+          echo "✅ **Linux** installers created (DEB + RPM)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📦 All artifacts ready for download!" >> $GITHUB_STEP_SUMMARY

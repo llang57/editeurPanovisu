@@ -1,0 +1,41 @@
+# SHA256 Checksums - EditeurPanovisu v3.0.0 Build 2598
+
+## Windows
+
+C527D56C0973C73DE3A7AA11C5C4BFA5F5DDB0687E85F7CD72E68EC6C3B47445  EditeurPanovisu-Setup-3.0.0.exe
+
+## macOS
+
+(Sera calculé par GitHub Actions lors du build automatique)
+
+## Linux
+
+(Sera calculé par GitHub Actions lors du build automatique)
+
+---
+
+## Vérification d'intégrité
+
+### Windows (PowerShell)
+
+```powershell
+Get-FileHash EditeurPanovisu-Setup-3.0.0.exe -Algorithm SHA256
+```
+
+Comparez le hash obtenu avec celui ci-dessus.
+
+### macOS/Linux (Terminal)
+
+```bash
+sha256sum EditeurPanovisu-3.0.0.dmg
+sha256sum editeurpanovisu_3.0.0-1_amd64.deb
+sha256sum editeurpanovisu-3.0.0-1.x86_64.rpm
+```
+
+Comparez les hashs obtenus avec ceux ci-dessus.
+
+---
+
+**Date de création** : 14 octobre 2025  
+**Build** : 2598  
+**Généré par** : build-installer.ps1 (Windows) / GitHub Actions (macOS/Linux)
