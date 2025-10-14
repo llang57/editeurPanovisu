@@ -88,6 +88,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.ToolBar;
 import javafx.scene.control.Tooltip;
@@ -3126,6 +3127,9 @@ public class EditeurPanovisu extends Application {
             fileProjet = null;
             fileProjet = fcRepertChoix.showOpenDialog(getStPrincipal());
             if (fileProjet != null) {
+                // NOUVEAU : Réinitialiser le cache des descriptions IA au chargement d'une nouvelle visite
+                editeurpanovisu.OllamaService.reinitialiserCacheDescriptions();
+                
                 getStPrincipal().setTitle("Panovisu v" + strNumVersion.split("-")[0] + " : " + fileProjet.getAbsolutePath());
                 lblDragDrop.setVisible(false);
                 setStrRepertoireProjet(fileProjet.getParent());
@@ -10627,7 +10631,7 @@ public class EditeurPanovisu extends Application {
         lblPanoVisu.setStyle("-fx-font-weight : bold;-fx-font-family : Verdana,Arial,sans-serif;-fx-font-size : 1.2em;");
         lblPanoVisu.setLayoutX(108);
         lblPanoVisu.setLayoutY(5);
-        Label lblPanoVisu2 = new Label("Laurent LANG (2014-2015)");
+        Label lblPanoVisu2 = new Label("Laurent LANG (2014-2025)");
         lblPanoVisu2.setLayoutX(108);
         lblPanoVisu2.setLayoutY(35);
         lblPanoVisu2.setStyle("-fx-font-family : Verdana,Arial,sans-serif;-fx-font-size : 0.8em;");
@@ -11102,15 +11106,66 @@ public class EditeurPanovisu extends Application {
             }
         });
         
+        // Avertissement sur la vérification des informations IA (agrandi pour meilleure visibilité)
+        Label lblAvertissementIA = new Label(rbLocalisation.getString("main.descriptionIAAvertissement"));
+        lblAvertissementIA.setLayoutX(10);
+        lblAvertissementIA.setLayoutY(195);
+        lblAvertissementIA.setPrefWidth(330);
+        lblAvertissementIA.setWrapText(true);
+        lblAvertissementIA.setStyle("-fx-font-size: 12px; -fx-text-fill: #FF8C00; -fx-font-style: italic; -fx-font-weight: bold;");
+        
         Button btnGenererIA = new Button(rbLocalisation.getString("main.genererDescriptionIA"));
         btnGenererIA.setLayoutX(10);
-        btnGenererIA.setLayoutY(200);
+        btnGenererIA.setLayoutY(220);
         btnGenererIA.setPrefSize(160, 30);
         btnGenererIA.setOnAction((e) -> {
             genererDescriptionIA(taDescriptionIA);
         });
         
-        apDescriptionIA.getChildren().addAll(lblDescriptionIA, taDescriptionIA, btnGenererIA);
+        // ToggleSwitch pour basculer entre OpenRouter (online) et Ollama (offline)
+        Label lblModeIA = new Label("Mode IA:");
+        lblModeIA.setLayoutX(180);
+        lblModeIA.setLayoutY(220);
+        lblModeIA.setStyle("-fx-font-size: 11px;");
+        
+        ToggleButton toggleModeIA = new ToggleButton();
+        toggleModeIA.setLayoutX(240);
+        toggleModeIA.setLayoutY(218);
+        toggleModeIA.setPrefSize(90, 30);
+        
+        // État initial basé sur la disponibilité OpenRouter
+        boolean openRouterDispo = OllamaService.verifierOpenRouterDisponible();
+        toggleModeIA.setSelected(!openRouterDispo); // Si OpenRouter dispo, on commence en mode online (not selected)
+        
+        // Mettre à jour le texte du bouton
+        if (toggleModeIA.isSelected()) {
+            toggleModeIA.setText("🔸 Offline");
+            toggleModeIA.setStyle("-fx-background-color: #4A90E2; -fx-text-fill: white;");
+            OllamaService.setForceOllama(true);
+        } else {
+            toggleModeIA.setText("🌐 Online");
+            toggleModeIA.setStyle("-fx-background-color: #2ECC71; -fx-text-fill: white;");
+            OllamaService.setForceOllama(false);
+        }
+        
+        // Listener pour changer de mode
+        toggleModeIA.selectedProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal) {
+                // Mode Offline (Ollama)
+                toggleModeIA.setText("🔸 Offline");
+                toggleModeIA.setStyle("-fx-background-color: #4A90E2; -fx-text-fill: white;");
+                OllamaService.setForceOllama(true);
+                System.out.println("[IA] 🔸 Mode basculé: Ollama (offline)");
+            } else {
+                // Mode Online (OpenRouter)
+                toggleModeIA.setText("🌐 Online");
+                toggleModeIA.setStyle("-fx-background-color: #2ECC71; -fx-text-fill: white;");
+                OllamaService.setForceOllama(false);
+                System.out.println("[IA] 🌐 Mode basculé: OpenRouter (online)");
+            }
+        });
+        
+        apDescriptionIA.getChildren().addAll(lblDescriptionIA, taDescriptionIA, lblAvertissementIA, btnGenererIA, lblModeIA, toggleModeIA);
         
         setApDESCIA(new AnchorPane(new PaneOutil(true, rbLocalisation.getString("main.descriptionIA"), apDescriptionIA, largeurOutil).getApPaneOutil()));
 
@@ -11265,13 +11320,14 @@ public class EditeurPanovisu extends Application {
         lblLat.setTranslateX(50);
         apPanneauPrincipal.setPrefSize(iLargeur - largeurOutils - 20, iHauteur - 110);
         apListeImagesPanoramiques = new AnchorPane();
+        apListeImagesPanoramiques.getStyleClass().add("dialog-content-pane");
         apListeImagesPanoramiques.setPrefWidth(iLargeurVignettes + 40);
         apListeImagesPanoramiques.setMinWidth(iLargeurVignettes + 40);
         apListeImagesPanoramiques.setMaxWidth(iLargeurVignettes + 40);
         apListeImagesPanoramiques.setPrefHeight(iHauteur - 140);
         apListeImagesPanoramiques.setLayoutX(-iLargeurVignettes - 30);
         apListeImagesPanoramiques.setLayoutY(0);
-        apListeImagesPanoramiques.setStyle("-fx-background-color :rgba(0,0,0,0);");
+        //apListeImagesPanoramiques.setStyle("-fx-background-color:-fx-base;");
         apListeImagesPanoramiques.setOnMouseEntered((e) -> {
             apListeImagesPanoramiques.setLayoutX(0);
         });
@@ -11279,11 +11335,10 @@ public class EditeurPanovisu extends Application {
             apListeImagesPanoramiques.setLayoutX(-iLargeurVignettes - 30);
         });
         Label lblVignettes = new Label(rbLocalisation.getString("main.vignettes"));
+
         lblVignettes.setPrefSize(70, 20);
         lblVignettes.setTextAlignment(TextAlignment.CENTER);
-        lblVignettes.setStyle("-fx-background-color:-fx-base;"
-                + "-fx-border-color: derive(-fx-base,10%);"
-                + "-fx-border-width: 1px;");
+        lblVignettes.getStyleClass().add("dialog-content-pane");
         lblVignettes.setTranslateX(-lblVignettes.getPrefWidth() / 2 + lblVignettes.getPrefHeight() / 2);
         lblVignettes.setTranslateY(lblVignettes.getPrefWidth() / 2 - lblVignettes.getPrefHeight() / 2);
         lblVignettes.setRotate(270);
@@ -11432,6 +11487,18 @@ public class EditeurPanovisu extends Application {
                                 break;
                             case "dernierRepertoireVisite":
                                 setStrDernierRepertoireVisite(valeur);
+                                break;
+                            case "openrouterModel":
+                                if (!valeur.isEmpty()) {
+                                    OllamaService.setOpenRouterModel(valeur);
+                                    System.out.println("[Config] 🤖 Modèle OpenRouter chargé: " + valeur);
+                                }
+                                break;
+                            case "ollamaModel":
+                                if (!valeur.isEmpty()) {
+                                    OllamaService.setOllamaModel(valeur);
+                                    System.out.println("[Config] 🤖 Modèle Ollama chargé: " + valeur);
+                                }
                                 break;
                         }
 

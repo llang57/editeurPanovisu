@@ -6,6 +6,7 @@
 package editeurpanovisu;
 
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -54,6 +55,8 @@ public class ConfigDialogController {
     private static TextField tfLocationIQKey;
     private static TextField tfHuggingFaceKey;
     private static TextField tfOpenRouterKey;
+    private static ComboBox<String> cbOpenRouterModel;
+    private static ComboBox<String> cbOllamaModel;
 
     /**
      *
@@ -75,12 +78,12 @@ public class ConfigDialogController {
         stConfigDialog.setResizable(false);
         apConfigDialog = new AnchorPane();
         apConfigDialog.setPrefWidth(600);
-        apConfigDialog.setPrefHeight(590); // Augmenté de 550 à 590 pour éviter que les boutons soient coupés
+        apConfigDialog.setPrefHeight(680); // Augmenté pour les nouveaux champs IA
         Scene sceneConfigDialog = new Scene(apConfigDialog);
         stConfigDialog.setScene(sceneConfigDialog);
         VBox vbFenetre = new VBox();
         Pane paneConfig = new Pane();
-        paneConfig.setPrefSize(600, 510);
+        paneConfig.setPrefSize(600, 600); // Augmenté pour accueillir les modèles IA
         Label lblType = new Label(rbLocalisation.getString("config.langue"));
         lblType.setLayoutX(45);
         lblType.setLayoutY(25);
@@ -148,6 +151,66 @@ public class ConfigDialogController {
         lblInfoAPI.setStyle("-fx-font-size: 11px; -fx-text-fill: #666;");
         lblInfoAPI.setLayoutX(45);
         lblInfoAPI.setLayoutY(360);
+        
+        // ===== Modèles IA =====
+        Label lblTitreModeles = new Label("═══ Modèles IA pour descriptions ═══");
+        lblTitreModeles.setStyle("-fx-font-weight: bold; -fx-font-size: 14px;");
+        lblTitreModeles.setLayoutX(45);
+        lblTitreModeles.setLayoutY(390);
+        
+        // OpenRouter (priorité 1)
+        Label lblOpenRouterModel = new Label("OpenRouter (GPT-5, Claude) - Priorité 1");
+        lblOpenRouterModel.setPrefWidth(320);
+        lblOpenRouterModel.setLayoutX(45);
+        lblOpenRouterModel.setLayoutY(420);
+        cbOpenRouterModel = new ComboBox<>();
+        cbOpenRouterModel.setLayoutX(45);
+        cbOpenRouterModel.setLayoutY(445);
+        cbOpenRouterModel.setPrefWidth(500);
+        // Charger les modèles OpenRouter disponibles avec emoji
+        for (String model : OllamaService.getModelesOpenRouterDisponibles()) {
+            String displayName = ajouterEmojiModele(model);
+            cbOpenRouterModel.getItems().add(displayName);
+        }
+        // Sélectionner le modèle configuré
+        String currentOpenRouterModel = OllamaService.getOpenRouterModel();
+        String displayCurrentModel = ajouterEmojiModele(currentOpenRouterModel);
+        cbOpenRouterModel.setValue(displayCurrentModel);
+        
+        // Ollama (fallback)
+        Label lblOllamaModel = new Label("Ollama (local) - Fallback");
+        lblOllamaModel.setPrefWidth(320);
+        lblOllamaModel.setLayoutX(45);
+        lblOllamaModel.setLayoutY(480);
+        cbOllamaModel = new ComboBox<>();
+        cbOllamaModel.setLayoutX(45);
+        cbOllamaModel.setLayoutY(505);
+        cbOllamaModel.setPrefWidth(500);
+        // Charger les modèles Ollama installés avec emoji
+        java.util.List<String> modelesOllama = OllamaService.getModelesOllamaDisponibles();
+        if (modelesOllama.isEmpty()) {
+            cbOllamaModel.getItems().add("❌ (Ollama non installé ou aucun modèle)");
+            cbOllamaModel.setDisable(true);
+        } else {
+            for (String model : modelesOllama) {
+                String displayName = ajouterEmojiModele(model);
+                cbOllamaModel.getItems().add(displayName);
+            }
+            // Sélectionner le modèle configuré
+            String currentOllamaModel = OllamaService.getOllamaModel();
+            String displayCurrentOllama = ajouterEmojiModele(currentOllamaModel);
+            if (cbOllamaModel.getItems().contains(displayCurrentOllama)) {
+                cbOllamaModel.setValue(displayCurrentOllama);
+            } else if (!cbOllamaModel.getItems().isEmpty()) {
+                cbOllamaModel.setValue(cbOllamaModel.getItems().get(0));
+            }
+        }
+        
+        // Info bulle modèles
+        Label lblInfoModeles = new Label("💡 Les modèles sont sauvegardés dans preferences.cfg");
+        lblInfoModeles.setStyle("-fx-font-size: 11px; -fx-text-fill: #666;");
+        lblInfoModeles.setLayoutX(45);
+        lblInfoModeles.setLayoutY(540);
 
         paneConfig.getChildren().addAll(
                 lblType, cbListeLangues,
@@ -156,7 +219,11 @@ public class ConfigDialogController {
                 lblLocationIQKey, tfLocationIQKey,
                 lblHuggingFaceKey, tfHuggingFaceKey,
                 lblOpenRouterKey, tfOpenRouterKey,
-                lblInfoAPI
+                lblInfoAPI,
+                lblTitreModeles,
+                lblOpenRouterModel, cbOpenRouterModel,
+                lblOllamaModel, cbOllamaModel,
+                lblInfoModeles
         );
         btnChoixRepert.setOnAction((ActionEvent e) -> {
             DirectoryChooser repertChoix = new DirectoryChooser();
@@ -218,6 +285,23 @@ public class ConfigDialogController {
             // Sauvegarder les clés API dans api-keys.properties
             saveApiKeys(tfLocationIQKey.getText(), tfHuggingFaceKey.getText(), tfOpenRouterKey.getText());
             
+            // Sauvegarder les modèles IA sélectionnés dans preferences.cfg (enlever les emoji)
+            if (cbOpenRouterModel.getValue() != null && !cbOpenRouterModel.getValue().isEmpty()) {
+                String modelNameOnly = extraireNomModele(cbOpenRouterModel.getValue());
+                OllamaService.setOpenRouterModel(modelNameOnly);
+            }
+            if (cbOllamaModel.getValue() != null && !cbOllamaModel.getValue().isEmpty() && 
+                !cbOllamaModel.getValue().contains("non installé")) {
+                String modelNameOnly = extraireNomModele(cbOllamaModel.getValue());
+                OllamaService.setOllamaModel(modelNameOnly);
+            }
+            
+            try {
+                saveModelsPreferences();
+            } catch (IOException ex) {
+                Logger.getLogger(ConfigDialogController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             stConfigDialog.hide();
         });
     }
@@ -277,6 +361,147 @@ public class ConfigDialogController {
             Logger.getLogger(ConfigDialogController.class.getName()).log(Level.SEVERE, null, ex);
             System.err.println("❌ Erreur lors de la sauvegarde de api-keys.properties");
         }
+    }
+    
+    /**
+     * Sauvegarde les modèles IA sélectionnés dans preferences.cfg
+     */
+    private void saveModelsPreferences() throws IOException {
+        File filePreferences = new File(EditeurPanovisu.fileRepertConfig.getAbsolutePath() + 
+                                         File.separator + "preferences.cfg");
+        
+        // Lire les préférences existantes
+        StringBuilder existingContent = new StringBuilder();
+        if (filePreferences.exists()) {
+            try (BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(new FileInputStream(filePreferences), "UTF-8"))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    // Ignorer les anciennes lignes de modèles pour éviter les doublons
+                    if (!line.startsWith("openrouterModel=") && !line.startsWith("ollamaModel=")) {
+                        existingContent.append(line).append("\n");
+                    }
+                }
+            }
+        }
+        
+        // Ajouter les nouveaux paramètres de modèles
+        String openRouterModel = OllamaService.getOpenRouterModel();
+        String ollamaModel = OllamaService.getOllamaModel();
+        
+        if (openRouterModel != null && !openRouterModel.isEmpty()) {
+            existingContent.append("openrouterModel=").append(openRouterModel).append("\n");
+        }
+        if (ollamaModel != null && !ollamaModel.isEmpty()) {
+            existingContent.append("ollamaModel=").append(ollamaModel).append("\n");
+        }
+        
+        // Réécrire le fichier
+        filePreferences.setWritable(true);
+        try (OutputStreamWriter writer = new OutputStreamWriter(
+                new FileOutputStream(filePreferences), "UTF-8");
+             BufferedWriter bw = new BufferedWriter(writer)) {
+            bw.write(existingContent.toString());
+        }
+        
+        System.out.println("💾 Modèles IA sauvegardés dans preferences.cfg");
+        System.out.println("  - OpenRouter: " + openRouterModel);
+        System.out.println("  - Ollama: " + ollamaModel);
+    }
+    
+    /**
+     * Ajoute un emoji visuel devant le nom du modèle pour l'interface
+     * @param modelName Nom du modèle (ex: "openai/gpt-5")
+     * @return Nom avec emoji (ex: "⭐ GPT-5")
+     */
+    private static String ajouterEmojiModele(String modelName) {
+        if (modelName == null || modelName.isEmpty()) {
+            return modelName;
+        }
+        
+        // Modèles OpenRouter (GPT-5 retiré - instable)
+        if (modelName.equals("anthropic/claude-sonnet-4.5")) {
+            return "⭐ Claude Sonnet 4.5 (Anthropic)";
+        } else if (modelName.equals("anthropic/claude-3-opus")) {
+            return "🔷 Claude 3 Opus (Anthropic)";
+        } else if (modelName.equals("anthropic/claude-3.5-sonnet:20241022")) {
+            return "📅 Claude 3.5 Sonnet (oct 2024)";
+        } else if (modelName.equals("mistralai/mistral-nemo")) {
+            return "🇫🇷 Mistral Nemo (Mistral AI)";
+        } else if (modelName.equals("openai/gpt-oss-120b")) {
+            return "💰 GPT-OSS-120B (Open Source)";
+        } else if (modelName.equals("openai/gpt-4-turbo")) {
+            return "🌍 GPT-4 Turbo (OpenAI)";
+        } else if (modelName.equals("google/gemini-pro")) {
+            return "🆓 Gemini Pro (Google)";
+        } else if (modelName.equals("meta-llama/llama-3.1-8b-instruct")) {
+            return "🆓 Llama 3.1 8B (Meta)";
+        } 
+        // Modèles Ollama locaux
+        else if (modelName.contains("deepseek-r1")) {
+            return "🔸 DeepSeek-R1";
+        } else if (modelName.equals("mistral-nemo")) {
+            return "🔸 Mistral Nemo";
+        } else if (modelName.equals("qwen2.5")) {
+            return "🔸 Qwen 2.5";
+        } else if (modelName.equals("llama3.1")) {
+            return "🔸 Llama 3.1";
+        } else if (modelName.equals("gemma2")) {
+            return "🔸 Gemma 2";
+        }
+        
+        // Par défaut : ajouter un emoji générique
+        return "🤖 " + modelName;
+    }
+    
+    /**
+     * Extrait le nom du modèle sans l'emoji et la description
+     * @param displayName Nom affiché avec emoji (ex: "⭐ GPT-5 (OpenAI)")
+     * @return Nom technique du modèle (ex: "openai/gpt-5")
+     */
+    private static String extraireNomModele(String displayName) {
+        if (displayName == null || displayName.isEmpty()) {
+            return displayName;
+        }
+        
+        // Mapping inverse (GPT-5 retiré)
+        if (displayName.contains("Claude Sonnet 4.5")) {
+            return "anthropic/claude-sonnet-4.5";
+        } else if (displayName.contains("Claude 3 Opus")) {
+            return "anthropic/claude-3-opus";
+        } else if (displayName.contains("Claude 3.5 Sonnet") && displayName.contains("oct 2024")) {
+            return "anthropic/claude-3.5-sonnet:20241022";
+        } else if (displayName.contains("Mistral Nemo") && displayName.contains("Mistral AI")) {
+            return "mistralai/mistral-nemo";
+        } else if (displayName.contains("GPT-OSS-120B")) {
+            return "openai/gpt-oss-120b";
+        } else if (displayName.contains("GPT-4 Turbo")) {
+            return "openai/gpt-4-turbo";
+        } else if (displayName.contains("Gemini Pro")) {
+            return "google/gemini-pro";
+        } else if (displayName.contains("Llama 3.1 8B")) {
+            return "meta-llama/llama-3.1-8b-instruct";
+        }
+        // Ollama
+        else if (displayName.contains("DeepSeek-R1")) {
+            // Extraire la version exacte (ex: deepseek-r1:70b)
+            if (displayName.contains(":")) {
+                // Si le nom complet avec version est dans displayName, le retourner
+                return displayName.replaceFirst("^[^a-z]+\\s*", "").split("\\s+")[0];
+            }
+            return "deepseek-r1:70b"; // Version par défaut
+        } else if (displayName.contains("Mistral Nemo")) {
+            return "mistral-nemo";
+        } else if (displayName.contains("Qwen 2.5")) {
+            return "qwen2.5";
+        } else if (displayName.contains("Llama 3.1") && !displayName.contains("8B")) {
+            return "llama3.1";
+        } else if (displayName.contains("Gemma 2")) {
+            return "gemma2";
+        }
+        
+        // Si pas de correspondance, enlever juste l'emoji au début
+        return displayName.replaceFirst("^[^a-zA-Z0-9]+\\s*", "");
     }
 
 }

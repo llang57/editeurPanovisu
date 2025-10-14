@@ -1,7 +1,8 @@
 # 📚 Documentation EditeurPanovisu
 
-**Date de mise à jour :** 12 octobre 2025  
-**Version :** 2.0.0-SNAPSHOT  
+**Date de mise à jour :** 14 octobre 2025  
+**Version :** 3.0.0-SNAPSHOT  
+**Build :** 2584
 **Java :** 25 (OpenJDK Temurin-25+36)  
 **JavaFX :** 19.0.2.1
 
@@ -58,6 +59,8 @@ Guides de débogage et diagnostics
 ### 📖 [guides/](guides/)
 Guides d'utilisation, configuration et tutoriels
 
+#### 🗺️ Configuration Géolocalisation
+
 - **[CONFIGURATION_API_KEYS.md](guides/CONFIGURATION_API_KEYS.md)** - Guide complet de configuration des clés API
   - Configuration rapide (3 minutes)
   - Obtention des clés pour chaque service (LocationIQ, Bing Maps, OpenWeather, Mapbox)
@@ -67,6 +70,27 @@ Guides d'utilisation, configuration et tutoriels
 - **[API_KEYS_README.md](guides/API_KEYS_README.md)** - README simplifié pour les clés API
   - Instructions de base
   - Configuration minimale
+
+#### 🤖 Système IA
+
+- **[SYSTEME_IA_COMPLET.md](guides/SYSTEME_IA_COMPLET.md)** - ⭐ **Documentation complète du système IA (Build 2584)**
+  - 8 modèles OpenRouter premium (Claude Sonnet 4.5, GPT-4, Gemini Pro...)
+  - 5 modèles Ollama locaux avec système de priorité
+  - Toggle Online/Offline avec bascule visuelle 🌐/🔸
+  - DeepSeek-R1 32B : Raisonnement avancé (~20 GB)
+  - Gestion d'erreur intelligente avec messages contextuels
+  - Guide d'installation et configuration complet
+  
+- **[MIGRATION_DEEPSEEK_32B.md](guides/MIGRATION_DEEPSEEK_32B.md)** - Migration DeepSeek-R1 70B → 32B
+  - Problème : HTTP 500 avec le 70B (42 GB trop lourd)
+  - Solution : Version 32B (~20 GB) plus stable
+  - Procédure de migration pas à pas
+  - Comparaison performances et qualité
+  
+- **[DESCRIPTION_IA.md](guides/DESCRIPTION_IA.md)** - Guide d'utilisation de la génération IA
+  - Fonctionnalités et utilisation de base
+  - Configuration Ollama et Hugging Face (obsolète)
+  - ⚠️ Document partiellement obsolète (voir SYSTEME_IA_COMPLET.md)
   
 - **[INTEGRATION_API_IA.md](guides/INTEGRATION_API_IA.md)** - Guide d'intégration des API d'IA
   - Configuration OpenAI, Claude, Gemini
@@ -150,23 +174,38 @@ mvn test
 
 ## 🎯 Problèmes Résolus Récemment
 
-### 1. Lancement de l'application depuis l'installeur Windows (12/10/2025)
+### 1. Système IA complet (Build 2570-2584, 12-14/10/2025)
+- **Nouveautés** : 
+  - 8 modèles OpenRouter premium (Claude Sonnet 4.5, GPT-4 Turbo, Gemini Pro...)
+  - 5 modèles Ollama locaux avec détection automatique et priorité
+  - Toggle Online/Offline (🌐/🔸) pour bascule facile entre services
+  - Interface emoji pour identification visuelle des modèles
+  - DeepSeek-R1 32B : Raisonnement avancé (~20 GB au lieu de 70B/42 GB)
+  - Gestion d'erreur intelligente avec messages contextuels et solutions
+- **Problèmes résolus** :
+  - ✅ GPT-5 retiré (instabilité `finish_reason: length`)
+  - ✅ Hugging Face désactivé (modèles obsolètes HTTP 404)
+  - ✅ DeepSeek-R1 70B remplacé par 32B (évite HTTP 500)
+  - ✅ max_tokens augmenté à 1500 (évite troncature)
+- **Statut** : ✅ Résolu - Système stable et performant
+
+### 2. Lancement de l'application depuis l'installeur Windows (12/10/2025)
 - **Problème** : "Failed to launch JVM" au double-clic sur l'EXE jpackage
 - **Cause** : Répertoire de travail incorrect (root au lieu de app/)
 - **Solution** : Launcher batch + VBS + raccourcis Inno Setup personnalisés
 - **Statut** : ✅ Résolu - Installeur automatique de 168 MB
 
-### 2. Migration OpenLayers - Suppression Google Maps et Bing Maps (12/10/2025)
+### 3. Migration OpenLayers - Suppression Google Maps et Bing Maps (12/10/2025)
 - **Problème** : Dépendances aux API propriétaires Google et Bing
 - **Solution** : Migration vers ESRI ArcGIS REST API (World Street Map, Imagery, Topo)
 - **Services supprimés** : Google Maps, Google+, Bing Maps, clés API Bing
 - **Statut** : ✅ Résolu - OpenLayers utilise maintenant OpenStreetMap et ESRI
 
-### 3. Coordonnées toujours à Metz (11/10/2025)
+### 4. Coordonnées toujours à Metz (11/10/2025)
 - **Solution** : Flag `marqueurMisAJourParJS` pour distinction marqueur initial/mis à jour
 - **Statut** : ✅ Résolu
 
-### 4. Géolocalisation (11/10/2025)
+### 5. Géolocalisation (11/10/2025)
 - **Solutions** : TextFields visibles, validation correcte, basculement bidirectionnel
 - **Statut** : ✅ Résolu
 
