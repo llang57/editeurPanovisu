@@ -140,6 +140,24 @@
             <version>${xmp.core.version}</version>
         </dependency>
 
+        <!-- Apache Batik - Rendu SVG -->
+        <dependency>
+            <groupId>org.apache.xmlgraphics</groupId>
+            <artifactId>batik-transcoder</artifactId>
+            <version>1.17</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.xmlgraphics</groupId>
+            <artifactId>batik-codec</artifactId>
+            <version>1.17</version>
+        </dependency>
+        <!-- Xerces est requis par Batik pour le parsing XML/SVG -->
+        <dependency>
+            <groupId>xerces</groupId>
+            <artifactId>xercesImpl</artifactId>
+            <version>2.12.2</version>
+        </dependency>
+
         <!-- Markdown Parser -->
         <dependency>
             <groupId>org.commonmark</groupId>

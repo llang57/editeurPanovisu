@@ -325,3 +325,13 @@
 .root.dracula .preview-panel {
     -fx-background-color: #434c5e;
 }
+
+/* ===== MENU PRINCIPAL - Taille de police augmentée ===== */
+
+/* Augmentation de la taille de police pour meilleure lisibilité */
+.menu-bar,
+.menu-bar .label,
+.menu .label,
+.menu-item .label {
+    -fx-font-size: 14px;
+}

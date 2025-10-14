@@ -29,13 +29,13 @@ function estTactile() {
 function panovisu(iNumPano) {
 
     var idInfoBulle = "infoBulle",
-            ClasseInfobulle = "infoBulleMarche",
-            suiviSouris = true,
-            donnees = "_infoBulle",
-            decalageX = 20,
-            decalageY = 10,
-            container,
-            bPremierChargement = true;
+        ClasseInfobulle = "infoBulleMarche",
+        suiviSouris = true,
+        donnees = "_infoBulle",
+        decalageX = 20,
+        decalageY = 10,
+        container,
+        bPremierChargement = true;
 
     afficheInfobulle = function (evenement) {
         var haut = evenement.pageY + decalageY;
@@ -56,7 +56,7 @@ function panovisu(iNumPano) {
         if ($(this).attr("title") !== "" && $(this).attr("title") !== null && typeof attr !== typeof undefined && attr !== false) {
             $(this).data(donnees, $(this).attr("title"));
             $(this).removeAttr("title").addClass(ClasseInfobulle);
-            $("<div>", {id: idInfoBulle, class: idInfoBulle}).appendTo("#container-" + iNumPano);
+            $("<div>", { id: idInfoBulle, class: idInfoBulle }).appendTo("#container-" + iNumPano);
 
             //$("<div id='" + idInfoBulle + "' />").appendTo("body");
             afficheInfobulle(evenement);
@@ -83,16 +83,16 @@ function panovisu(iNumPano) {
      * @type THREE.PerspectiveCamera|THREE.PerspectiveCamera|THREE.PerspectiveCamera|THREE.PerspectiveCamera|THREE.PerspectiveCamera|THREE.PerspectiveCamera
      */
     var camera,
-            scene,
-            renderer,
-            materiaux = [],
-            textures = [],
-            meshes = [],
-            geometries = [],
-            iNbMateriaux = 0,
-            iNbTextures = 0,
-            iNbMeshes = 0,
-            iNbGeometries = 0;
+        scene,
+        renderer,
+        materiaux = [],
+        textures = [],
+        meshes = [],
+        geometries = [],
+        iNbMateriaux = 0,
+        iNbTextures = 0,
+        iNbMeshes = 0,
+        iNbGeometries = 0;
 
     /**
      * 
@@ -232,122 +232,122 @@ function panovisu(iNumPano) {
      * @type @exp;document@call;getElementById
      */
     var nouvLong = -1000,
-            nouvLat = -1000,
-            nouvFov = 0,
-            conteneur,
-            isUserInteracting = false,
-            isZoom = false,
-            ddxAutorotation = 0,
-            dxAutorotation = 0,
-            timerAutorotation,
-            timerDebutRotation,
-            longitudeDebutRotation,
-            bEltMasque = null,
-            timer,
-            ddx,
-            ddy,
-            telecEnCours,
-            bDeplacement = false,
-            bAutorotation = false,
-            bWebGL = true,
-            positXRadar,
-            positYRadar,
-            maxTextureSize,
-            timers,
-            i,
-            affHS = 0,
-            deltaHS = 0.02,
-            numHS,
-            numHotspot = 0,
-            mouseMove,
-            bDejaCharge = false,
-            bReloaded = false,
-            arrHotSpot = new Array(),
-            arrPointsInteret = new Array(),
-            arrVignettesPano = new Array(),
-            arrComboMenuPano = new Array(),
-            arrPointsPlan = new Array(),
-            arrImagesFond = new Array(),
-            arrBoutonsTelecommande = new Array(),
-            arrZonesTelecommande = new Array(),
-            iNombreImageFond = 0,
-            bPlanRentre,
-            bCarteRentre,
-            iNbPointCarte,
-            bVignettesRentre,
-            iMode = 1,
-            longitude = 0,
-            latitude = 0,
-            minLat = -1000,
-            maxLat = 1000,
-            bDessusHS = false,
-            fenPanoramique,
-            texture_placeholder,
-            fichierXML = "",
-            bUserInteracting = false,
-            onPointerDownPointerX = 0,
-            onPointerDownPointerY = 0,
-            onPointerZoom = 0,
-            distance = 0,
-            onPointerDownLon = 0,
-            onPointerDownLat = 0,
-            phi = 0,
-            theta = 0,
-            fov = 50,
-            dx = 0,
-            dy = 0,
-            deltaX = 0,
-            deltaY = 0,
-            $_GET = [],
-            maxFOV = 125,
-            minFOV = 25,
-            target = new THREE.Vector3(),
-            bPleinEcran = false,
-            largeur,
-            hauteur,
-            xmlFile,
-            fenetreX,
-            fenetreY,
-            panovisu,
-            fenetreUniteX,
-            fenetreUniteY,
-            typeVignettes,
-            marginPanoLeft,
-            nbPanoCharges = 0,
-            positionVignettesX = 0,
-            positionVignettesY = 0,
-            memMaxFOV,
-            memFOV,
-            memLatitude,
-            memLongitude,
-            bMemCarteRentre,
-            bMemPlanRentre,
-            bMemVignettesRentre,
-            bMemAutorotation,
-            bMemAutoTour,
-            bLittleDisabled = false,
-            bNormalDisbled = true,
-            masqueTout = "",
-            bLittlePlanetView = false,
-            allerLongit,
-            allerLatit,
-            arreteMouvement,
-            deltaLongit,
-            longitInit,
-            latitInit,
-            fovInit,
-            deltaFOV,
-            start,
-            seconds,
-            nombreIterMax,
-            deltaLatit,
-            nombreIter = 0,
-            bDisableSuivant,
-            bDisablePrecedent,
-            strLangage = "fr_FR",
-            bClavierActif = false,
-            cDegToRad = Math.PI / 180.0
-            ;
+        nouvLat = -1000,
+        nouvFov = 0,
+        conteneur,
+        isUserInteracting = false,
+        isZoom = false,
+        ddxAutorotation = 0,
+        dxAutorotation = 0,
+        timerAutorotation,
+        timerDebutRotation,
+        longitudeDebutRotation,
+        bEltMasque = null,
+        timer,
+        ddx,
+        ddy,
+        telecEnCours,
+        bDeplacement = false,
+        bAutorotation = false,
+        bWebGL = true,
+        positXRadar,
+        positYRadar,
+        maxTextureSize,
+        timers,
+        i,
+        affHS = 0,
+        deltaHS = 0.02,
+        numHS,
+        numHotspot = 0,
+        mouseMove,
+        bDejaCharge = false,
+        bReloaded = false,
+        arrHotSpot = new Array(),
+        arrPointsInteret = new Array(),
+        arrVignettesPano = new Array(),
+        arrComboMenuPano = new Array(),
+        arrPointsPlan = new Array(),
+        arrImagesFond = new Array(),
+        arrBoutonsTelecommande = new Array(),
+        arrZonesTelecommande = new Array(),
+        iNombreImageFond = 0,
+        bPlanRentre,
+        bCarteRentre,
+        iNbPointCarte,
+        bVignettesRentre,
+        iMode = 1,
+        longitude = 0,
+        latitude = 0,
+        minLat = -1000,
+        maxLat = 1000,
+        bDessusHS = false,
+        fenPanoramique,
+        texture_placeholder,
+        fichierXML = "",
+        bUserInteracting = false,
+        onPointerDownPointerX = 0,
+        onPointerDownPointerY = 0,
+        onPointerZoom = 0,
+        distance = 0,
+        onPointerDownLon = 0,
+        onPointerDownLat = 0,
+        phi = 0,
+        theta = 0,
+        fov = 50,
+        dx = 0,
+        dy = 0,
+        deltaX = 0,
+        deltaY = 0,
+        $_GET = [],
+        maxFOV = 125,
+        minFOV = 25,
+        target = new THREE.Vector3(),
+        bPleinEcran = false,
+        largeur,
+        hauteur,
+        xmlFile,
+        fenetreX,
+        fenetreY,
+        panovisu,
+        fenetreUniteX,
+        fenetreUniteY,
+        typeVignettes,
+        marginPanoLeft,
+        nbPanoCharges = 0,
+        positionVignettesX = 0,
+        positionVignettesY = 0,
+        memMaxFOV,
+        memFOV,
+        memLatitude,
+        memLongitude,
+        bMemCarteRentre,
+        bMemPlanRentre,
+        bMemVignettesRentre,
+        bMemAutorotation,
+        bMemAutoTour,
+        bLittleDisabled = false,
+        bNormalDisbled = true,
+        masqueTout = "",
+        bLittlePlanetView = false,
+        allerLongit,
+        allerLatit,
+        arreteMouvement,
+        deltaLongit,
+        longitInit,
+        latitInit,
+        fovInit,
+        deltaFOV,
+        start,
+        seconds,
+        nombreIterMax,
+        deltaLatit,
+        nombreIter = 0,
+        bDisableSuivant,
+        bDisablePrecedent,
+        strLangage = "fr_FR",
+        bClavierActif = false,
+        cDegToRad = Math.PI / 180.0
+        ;
 
     /**
      * Variables pour OpenLayers
@@ -355,233 +355,233 @@ function panovisu(iNumPano) {
      * @type OpenLayers.Map
      */
     var
-            map,
-            openStreetMap,
-            esriWorldStreetMap = null,
-            esriWorldImagery = null,
-            esriWorldTopo = null,
-            layerMarqueurs,
-            layerRadar,
-            arrMarqueurs = new Array(),
-            iMaxMarqueur = -1,
-            radar,
-            ctrlLayerSwitcher,
-            bRadar = false;
+        map,
+        openStreetMap,
+        esriWorldStreetMap = null,
+        esriWorldImagery = null,
+        esriWorldTopo = null,
+        layerMarqueurs,
+        layerRadar,
+        arrMarqueurs = new Array(),
+        iMaxMarqueur = -1,
+        radar,
+        ctrlLayerSwitcher,
+        bRadar = false;
     /**
      * Variables par défaut pour l'affichage du panoramique
      * 
      * @type String|@exp;_L1@pro;panoImage|@exp;XMLPano@call;attr
      */
     var strPanoImage,
-            loader,
-            strCouleur = "rgba(255,255,255,0)",
-            bSuivantPrecedent,
-            XMLsuivant,
-            XMLprecedent,
-            strStyleBoutons,
-            strBordure = "rgba(255,255,255,0)",
-            strPanoTitre,
-            strPanoTitre2,
-            strMultiReso,
-            iNombreNiveaux,
-            strTitrePolice,
-            strTitreTaille,
-            strTitreTailleUnite,
-            iTitreTailleFenetre,
-            strTitreTaillePolice,
-            strTitreTaillePolice2,
-            strTitrePosition,
-            strTitreDecalage,
-            strTitreCouleur,
-            strTitreFond,
-            strTitreOpacite,
-            bFenetreInfoPersonnalise,
-            strFenetreInfoImage,
-            fenetreInfoTaille,
-            fenetreInfoDX,
-            fenetreInfoDY,
-            fenetreInfoOpacite,
-            strFenetreInfoURL,
-            strFenetreInfoTexteURL,
-            strFenetreInfoCouleurURL,
-            fenetreInfoTailleURL,
-            fenetreInfoDXURL,
-            fenetreInfoDYURL,
-            bFenetreAidePersonnalise,
-            strFenetreAideImage,
-            fenetreAideTaille,
-            fenetreAideDX,
-            fenetreAideDY,
-            fenetreAideOpacite,
-            strDiaporamaCouleur,
-            vitesseAutorotation,
-            bAutoTour,
-            bBtnAutoTour,
-            positBtnAutoTourX,
-            positBtnAutoTourY,
-            offsetBtnAutoTourX,
-            offsetBtnAutoTourY,
-            tailleBtnAutoTour,
-            strAutoTourType,
-            autoTourLimite,
-            autoTourDemarrage,
-            dejaDemarre = false,
-            bPetitePlaneteDemarrage,
-            strPanoType,
-            strAffInfo,
-            bAfficheInfo = false, // Initialisé à false pour le nouveau système modal
-            bAfficheAide,
-            strAfficheTitre,
-            strAffDescriptionChargement,
-            strDescription,
-            strZooms,
-            strOutils,
-            strDeplacements,
-            strFS,
-            strAutoRotation,
-            strModeSouris,
-            iEspacementBoutons,
-            strBoutons,
-            strAutoRotationMarche,
-            strPositionX,
-            strPositionY,
-            strDX,
-            strDY,
-            mesh,
-            carteCalque = 1,
-            planCalque = 1,
-            comboCalque = 1,
-            vignettesCalque = 1,
-            partageCalque = 1,
-            masquageCalque = 1,
-            boussoleCalque = 1,
-            barreCCalque = 1,
-            barrePCalque = 1,
-            atCalque = 1,
-            titreCalque = 1,
-            suivPrecCalque = 1
-            ;
+        loader,
+        strCouleur = "rgba(255,255,255,0)",
+        bSuivantPrecedent,
+        XMLsuivant,
+        XMLprecedent,
+        strStyleBoutons,
+        strBordure = "rgba(255,255,255,0)",
+        strPanoTitre,
+        strPanoTitre2,
+        strMultiReso,
+        iNombreNiveaux,
+        strTitrePolice,
+        strTitreTaille,
+        strTitreTailleUnite,
+        iTitreTailleFenetre,
+        strTitreTaillePolice,
+        strTitreTaillePolice2,
+        strTitrePosition,
+        strTitreDecalage,
+        strTitreCouleur,
+        strTitreFond,
+        strTitreOpacite,
+        bFenetreInfoPersonnalise,
+        strFenetreInfoImage,
+        fenetreInfoTaille,
+        fenetreInfoDX,
+        fenetreInfoDY,
+        fenetreInfoOpacite,
+        strFenetreInfoURL,
+        strFenetreInfoTexteURL,
+        strFenetreInfoCouleurURL,
+        fenetreInfoTailleURL,
+        fenetreInfoDXURL,
+        fenetreInfoDYURL,
+        bFenetreAidePersonnalise,
+        strFenetreAideImage,
+        fenetreAideTaille,
+        fenetreAideDX,
+        fenetreAideDY,
+        fenetreAideOpacite,
+        strDiaporamaCouleur,
+        vitesseAutorotation,
+        bAutoTour,
+        bBtnAutoTour,
+        positBtnAutoTourX,
+        positBtnAutoTourY,
+        offsetBtnAutoTourX,
+        offsetBtnAutoTourY,
+        tailleBtnAutoTour,
+        strAutoTourType,
+        autoTourLimite,
+        autoTourDemarrage,
+        dejaDemarre = false,
+        bPetitePlaneteDemarrage,
+        strPanoType,
+        strAffInfo,
+        bAfficheInfo = false, // Initialisé à false pour le nouveau système modal
+        bAfficheAide,
+        strAfficheTitre,
+        strAffDescriptionChargement,
+        strDescription,
+        strZooms,
+        strOutils,
+        strDeplacements,
+        strFS,
+        strAutoRotation,
+        strModeSouris,
+        iEspacementBoutons,
+        strBoutons,
+        strAutoRotationMarche,
+        strPositionX,
+        strPositionY,
+        strDX,
+        strDY,
+        mesh,
+        carteCalque = 1,
+        planCalque = 1,
+        comboCalque = 1,
+        vignettesCalque = 1,
+        partageCalque = 1,
+        masquageCalque = 1,
+        boussoleCalque = 1,
+        barreCCalque = 1,
+        barrePCalque = 1,
+        atCalque = 1,
+        titreCalque = 1,
+        suivPrecCalque = 1
+        ;
     /**
      * 
      * @type @call;$
      */
     var pano,
-            pano1,
-            zeroNord,
-            bBoussole,
-            strBoussoleImage,
-            strBoussoleTaille,
-            strBoussolePositionX,
-            strBoussolePositionY,
-            strBoussoleDX,
-            strBoussoleDY,
-            strBoussoleAffiche,
-            boussoleOpacite,
-            strBoussoleAiguille,
-            elementsVisibles,
-            bMarcheArret,
-            bMarcheArretAffiche,
-            strMarcheArretImage,
-            marcheArretOpacite,
-            strMarcheArretPositionX,
-            strMarcheArretPositionY,
-            marcheArretDX,
-            marcheArretDY,
-            strMarcheArretTitre,
-            strMarcheArretNavigation,
-            strMarcheArretBoussole,
-            strMarcheArretPlan,
-            strMarcheArretReseaux,
-            strMarcheArretCombo,
-            strMarcheArretSuivPrec,
-            strMarcheArretHotspots,
-            strMarcheArretVignettes,
-            marcheArretTaille,
-            bReseauxSociaux,
-            strReseauxSociauxAffiche,
-            reseauxSociauxOpacite,
-            strReseauxSociauxPositionX,
-            strReseauxSociauxPositionY,
-            reseauxSociauxDX,
-            reseauxSociauxDY,
-            reseauxSociauxTaille,
-            strReseauxSociauxTwitter,
-            strReseauxSociauxFacebook,
-            strReseauxSociauxEmail,
-            strVignettesAffiche,
-            bVignettes,
-            vignettesOpacite,
-            strVignettesPosition,
-            strVignettesFondCouleur,
-            strVignettesTexteCouleur,
-            vignettesTaille,
-            vignettesTailleImage,
-            bPlanAffiche,
-            planLargeur,
-            strPlanImage,
-            strPlanPosition,
-            strPlanCouleurFond,
-            strPlanCouleurTexte,
-            opacitePlan,
-            planNord,
-            strPlanBoussolePosition,
-            iPlanBoussoleX,
-            iPlanBoussoleY,
-            bRadarAffiche,
-            iRadarTaille,
-            radarOpacite,
-            strRadarCouleurFond,
-            strRadarCouleurLigne,
-            strCarteAff,
-            bCarteAffiche,
-            strCartePosition,
-            strCarteCouleurFond,
-            strCarteCouleurTexte,
-            opaciteCarte,
-            carteLargeur,
-            carteNord,
-            strAfficheRadarCarte,
-            iRadarCarteTaille,
-            radarCarteOpacite,
-            strRadarCarteCouleurFond,
-            strRadarCarteCouleurLigne,
-            radarCarteAffiche,
-            arrPointsCarte = new Array(),
-            carteHauteur,
-            iCarteZoom,
-            coordCentreLong,
-            coordCentreLat,
-            strNomLayerCarte,
-            bAfficheMenuContextuel,
-            bPrecedentSuivantMenuContextuel,
-            bPlaneteMenuContextuel,
-            bMenuPersonnalise1,
-            bMenuPersonnalise2,
-            strLibelleMenuContextuel1,
-            strLibelleMenuContextuel2,
-            strUrlMenuContextuel1,
-            strUrlMenuContextuel2,
-            strTelecommande,
-            bTelecommande,
-            strTelecommandeFS,
-            strTelecommandeAutorotation,
-            strTelecommandeSouris,
-            strTelecommandeInfo,
-            strTelecommandeAide,
-            strTelecommandePositionX,
-            strTelecommandePositionY,
-            telecommandeDX,
-            telecommandeDY,
-            telecommandeTaille,
-            telecommandeTailleBouton,
-            strLien1BarrePersonnalisee,
-            strLien2BarrePersonnalisee,
-            strComboMenu,
-            bComboMenuAffiche,
-            strComboMenuPositionX,
-            strComboMenuPositionY,
-            comboMenuDX,
-            comboMenuDY;
+        pano1,
+        zeroNord,
+        bBoussole,
+        strBoussoleImage,
+        strBoussoleTaille,
+        strBoussolePositionX,
+        strBoussolePositionY,
+        strBoussoleDX,
+        strBoussoleDY,
+        strBoussoleAffiche,
+        boussoleOpacite,
+        strBoussoleAiguille,
+        elementsVisibles,
+        bMarcheArret,
+        bMarcheArretAffiche,
+        strMarcheArretImage,
+        marcheArretOpacite,
+        strMarcheArretPositionX,
+        strMarcheArretPositionY,
+        marcheArretDX,
+        marcheArretDY,
+        strMarcheArretTitre,
+        strMarcheArretNavigation,
+        strMarcheArretBoussole,
+        strMarcheArretPlan,
+        strMarcheArretReseaux,
+        strMarcheArretCombo,
+        strMarcheArretSuivPrec,
+        strMarcheArretHotspots,
+        strMarcheArretVignettes,
+        marcheArretTaille,
+        bReseauxSociaux,
+        strReseauxSociauxAffiche,
+        reseauxSociauxOpacite,
+        strReseauxSociauxPositionX,
+        strReseauxSociauxPositionY,
+        reseauxSociauxDX,
+        reseauxSociauxDY,
+        reseauxSociauxTaille,
+        strReseauxSociauxTwitter,
+        strReseauxSociauxFacebook,
+        strReseauxSociauxEmail,
+        strVignettesAffiche,
+        bVignettes,
+        vignettesOpacite,
+        strVignettesPosition,
+        strVignettesFondCouleur,
+        strVignettesTexteCouleur,
+        vignettesTaille,
+        vignettesTailleImage,
+        bPlanAffiche,
+        planLargeur,
+        strPlanImage,
+        strPlanPosition,
+        strPlanCouleurFond,
+        strPlanCouleurTexte,
+        opacitePlan,
+        planNord,
+        strPlanBoussolePosition,
+        iPlanBoussoleX,
+        iPlanBoussoleY,
+        bRadarAffiche,
+        iRadarTaille,
+        radarOpacite,
+        strRadarCouleurFond,
+        strRadarCouleurLigne,
+        strCarteAff,
+        bCarteAffiche,
+        strCartePosition,
+        strCarteCouleurFond,
+        strCarteCouleurTexte,
+        opaciteCarte,
+        carteLargeur,
+        carteNord,
+        strAfficheRadarCarte,
+        iRadarCarteTaille,
+        radarCarteOpacite,
+        strRadarCarteCouleurFond,
+        strRadarCarteCouleurLigne,
+        radarCarteAffiche,
+        arrPointsCarte = new Array(),
+        carteHauteur,
+        iCarteZoom,
+        coordCentreLong,
+        coordCentreLat,
+        strNomLayerCarte,
+        bAfficheMenuContextuel,
+        bPrecedentSuivantMenuContextuel,
+        bPlaneteMenuContextuel,
+        bMenuPersonnalise1,
+        bMenuPersonnalise2,
+        strLibelleMenuContextuel1,
+        strLibelleMenuContextuel2,
+        strUrlMenuContextuel1,
+        strUrlMenuContextuel2,
+        strTelecommande,
+        bTelecommande,
+        strTelecommandeFS,
+        strTelecommandeAutorotation,
+        strTelecommandeSouris,
+        strTelecommandeInfo,
+        strTelecommandeAide,
+        strTelecommandePositionX,
+        strTelecommandePositionY,
+        telecommandeDX,
+        telecommandeDY,
+        telecommandeTaille,
+        telecommandeTailleBouton,
+        strLien1BarrePersonnalisee,
+        strLien2BarrePersonnalisee,
+        strComboMenu,
+        bComboMenuAffiche,
+        strComboMenuPositionX,
+        strComboMenuPositionY,
+        comboMenuDX,
+        comboMenuDY;
 
     /**
      * Geston des Evènements souris / Clavier / Touche sur écran
@@ -599,15 +599,15 @@ function panovisu(iNumPano) {
         idHS = $(this).attr("id");
         numHS = parseInt(idHS.split("-")[1]);
         switch (arrPointsInteret[numHS].type) {
-            case "panoramique" :
+            case "panoramique":
                 //$("#container-" + iNumPano).fadeOut(200, function () {
                 chargeNouveauPano(numHS);
                 //});
                 break;
-            case "image" :
+            case "image":
                 afficheImage(numHS);
                 break;
-            case "html" :
+            case "html":
                 afficheHTML(numHS);
                 break;
         }
@@ -627,10 +627,9 @@ function panovisu(iNumPano) {
 
     $(document).on("mousedown", "#container-" + iNumPano, function (evenement) {
         if (evenement.which === 1) {
-            if (bAfficheInfo)
-            {
+            if (bAfficheInfo) {
                 $("#infoPanovisu-" + iNumPano).fadeOut(2000, function () {
-                    $(this).css({display: "none"});
+                    $(this).css({ display: "none" });
                     bAfficheInfo = false;
                 });
             }
@@ -642,8 +641,7 @@ function panovisu(iNumPano) {
                 deltaY = 0;
                 timer = requestAnimFrame(deplaceMode2);
             }
-            else
-            {
+            else {
                 onPointerDownLon = longitude;
                 onPointerDownLat = latitude;
                 pano.addClass('curseurCroix');
@@ -723,18 +721,17 @@ function panovisu(iNumPano) {
      * 
      */
     $(document).on("mousewheel", "#container-" + iNumPano,
-            function (evenement, delta) {
-                if (bAfficheInfo)
-                {
-                    $("#infoPanovisu-" + iNumPano).fadeOut(2000, function () {
-                        $(this).css({display: "none"});
-                        bAfficheInfo = false;
-                    });
-                }
-                evenement.preventDefault();
-                fov -= delta;
-                zoom();
-            });
+        function (evenement, delta) {
+            if (bAfficheInfo) {
+                $("#infoPanovisu-" + iNumPano).fadeOut(2000, function () {
+                    $(this).css({ display: "none" });
+                    bAfficheInfo = false;
+                });
+            }
+            evenement.preventDefault();
+            fov -= delta;
+            zoom();
+        });
     /**
      * Changement de la taille de l'écran
      * 
@@ -744,85 +741,82 @@ function panovisu(iNumPano) {
     });
 
     $(document).keydown(
-            function (evenement) {
-//                if (clavierActif) {
-                if (true) {
-                    if (bAfficheInfo)
-                    {
-                        $("#infoPanovisu-" + iNumPano).fadeOut(2000, function () {
-                            $(this).css({display: "none"});
-                            bAfficheInfo = false;
-                        });
-                    }
-                    evenement.preventDefault();
-                    var touche = evenement.which;
-                    switch (touche)
-                    {
-                        case 37:
-                            longitude -= 1;
-                            break;
-                        case 38:
-                            latitude += 1;
-                            break;
-                        case 39:
-                            longitude += 1;
-                            break;
-                        case 40:
-                            latitude -= 1;
-                            break;
-                        case 16:
-                        case 109:
-                            fov += 1;
-                            break;
-                        case 17:
-                        case 107:
-                            fov -= 1;
-                            break;
-                        case 70:
-                            pleinEcran();
-                            break;
-                        case 86:
-                            bVignettesRentre = !bVignettesRentre;
-                            vignettesRentre();
-                            break;
-                        case 80:
-                            bPlanRentre = !bPlanRentre;
-                            if (strPlanPosition === "left") {
-
-                                planRentreGauche();
-                            }
-                            else {
-                                planRentreDroite();
-                            }
-                            break;
-                        case 77:
-                            toggleElements();
-                            break;
-                    }
-                    zoom();
-                }
-            });
-
-
-    $(document).on("touchstart mousedown", "#xmoins-" + iNumPano + ",#xplus-" + iNumPano + ",#ymoins-" + iNumPano + ",#yplus-" + iNumPano,
-            function (evenement) {
-                if (bAfficheInfo)
-                {
+        function (evenement) {
+            //                if (clavierActif) {
+            if (true) {
+                if (bAfficheInfo) {
                     $("#infoPanovisu-" + iNumPano).fadeOut(2000, function () {
-                        $(this).css({display: "none"});
+                        $(this).css({ display: "none" });
                         bAfficheInfo = false;
                     });
                 }
-                if (!telecEnCours) {
-                    telecEnCours = true;
-                    dXdY($(this).attr('id'));
-                    ddx = dx / 5;
-                    ddy = dy / 5;
-                    timer = requestAnimFrame(accelere);
-                }
                 evenement.preventDefault();
+                var touche = evenement.which;
+                switch (touche) {
+                    case 37:
+                        longitude -= 1;
+                        break;
+                    case 38:
+                        latitude += 1;
+                        break;
+                    case 39:
+                        longitude += 1;
+                        break;
+                    case 40:
+                        latitude -= 1;
+                        break;
+                    case 16:
+                    case 109:
+                        fov += 1;
+                        break;
+                    case 17:
+                    case 107:
+                        fov -= 1;
+                        break;
+                    case 70:
+                        pleinEcran();
+                        break;
+                    case 86:
+                        bVignettesRentre = !bVignettesRentre;
+                        vignettesRentre();
+                        break;
+                    case 80:
+                        bPlanRentre = !bPlanRentre;
+                        if (strPlanPosition === "left") {
 
-            });
+                            planRentreGauche();
+                        }
+                        else {
+                            planRentreDroite();
+                        }
+                        break;
+                    case 77:
+                        toggleElements();
+                        break;
+                }
+                zoom();
+            }
+        });
+
+
+    $(document).on("touchstart mousedown", "#xmoins-" + iNumPano + ",#xplus-" + iNumPano + ",#ymoins-" + iNumPano + ",#yplus-" + iNumPano,
+        function (evenement) {
+            if (bAfficheInfo) {
+                $("#infoPanovisu-" + iNumPano).fadeOut(2000, function () {
+                    $(this).css({ display: "none" });
+                    bAfficheInfo = false;
+                });
+            }
+            if (!telecEnCours) {
+                telecEnCours = true;
+                dXdY($(this).attr('id'));
+                ddx = dx / 5;
+                ddy = dy / 5;
+                timer = requestAnimFrame(accelere);
+            }
+            evenement.preventDefault();
+
+        });
 
     $(document).on("mouseup mouseleave touchend", "#xmoins-" + iNumPano + ",#xplus-" + iNumPano + ",#ymoins-" + iNumPano + ",#yplus-" + iNumPano, function (evenement) {
         if (telecEnCours) {
@@ -834,83 +828,81 @@ function panovisu(iNumPano) {
     });
 
     $(document).on("touchstart mousedown", "#zoomPlus-" + iNumPano,
-            function (evenement) {
-                if (bAfficheInfo)
-                {
-                    $("#infoPanovisu-" + iNumPano).fadeOut(2000, function () {
-                        $(this).css({display: "none"});
-                        bAfficheInfo = false;
-                    });
-                }
-                telecEnCours = true;
-                timer = requestAnimFrame(zoomPlus);
-                evenement.preventDefault();
-            });
+        function (evenement) {
+            if (bAfficheInfo) {
+                $("#infoPanovisu-" + iNumPano).fadeOut(2000, function () {
+                    $(this).css({ display: "none" });
+                    bAfficheInfo = false;
+                });
+            }
+            telecEnCours = true;
+            timer = requestAnimFrame(zoomPlus);
+            evenement.preventDefault();
+        });
 
     $(document).on("touchend mouseup mouseleave", "#zoomPlus-" + iNumPano, function (evenement) {
         telecEnCours = false;
         evenement.preventDefault();
     });
 
-//    $(document).on("click", "#zoomMoins-" + iNumPano, function (evenement) {
-//        if (bAfficheInfo)
-//        {
-//            $("#infoPanovisu-" + iNumPano).fadeOut(2000, function () {
-//                $(this).css({display: "none"});
-//                bAfficheInfo = false;
-//            });
-//        }
-//        fov += 1;
-//        zoom();
-//        evenement.preventDefault();
-//    });
+    //    $(document).on("click", "#zoomMoins-" + iNumPano, function (evenement) {
+    //        if (bAfficheInfo)
+    //        {
+    //            $("#infoPanovisu-" + iNumPano).fadeOut(2000, function () {
+    //                $(this).css({display: "none"});
+    //                bAfficheInfo = false;
+    //            });
+    //        }
+    //        fov += 1;
+    //        zoom();
+    //        evenement.preventDefault();
+    //    });
 
     $(document).on("touchstart mousedown", "#zoomMoins-" + iNumPano,
-            function (evenement) {
-                if (bAfficheInfo)
-                {
-                    $("#infoPanovisu-" + iNumPano).fadeOut(2000, function () {
-                        $(this).css({display: "none"});
-                        bAfficheInfo = false;
-                    });
-                }
-                telecEnCours = true;
-                timer = requestAnimFrame(zoomMoins);
-                evenement.preventDefault();
-            });
+        function (evenement) {
+            if (bAfficheInfo) {
+                $("#infoPanovisu-" + iNumPano).fadeOut(2000, function () {
+                    $(this).css({ display: "none" });
+                    bAfficheInfo = false;
+                });
+            }
+            telecEnCours = true;
+            timer = requestAnimFrame(zoomMoins);
+            evenement.preventDefault();
+        });
 
     $(document).on("touchend mouseup mouseleave", "#zoomMoins-" + iNumPano, function (evenement) {
         telecEnCours = false;
         evenement.preventDefault();
     });
 
-//    $(document).on("click", "#xmoins-" + iNumPano + ",#xplus-" + iNumPano + ",#ymoins-" + iNumPano + ",#yplus-" + iNumPano,
-//            function (evenement) {
-//                if (bAfficheInfo)
-//                {
-//                    $("#infoPanovisu-" + iNumPano).fadeOut(2000, function () {
-//                        $(this).css({display: "none"});
-//                        bAfficheInfo = false;
-//                    });
-//                }
-//                dXdY($(this).attr('class'));
-//                longitude += 2 * dx;
-//                latitude += 2 * dy;
-//                affiche();
-//            });
+    //    $(document).on("click", "#xmoins-" + iNumPano + ",#xplus-" + iNumPano + ",#ymoins-" + iNumPano + ",#yplus-" + iNumPano,
+    //            function (evenement) {
+    //                if (bAfficheInfo)
+    //                {
+    //                    $("#infoPanovisu-" + iNumPano).fadeOut(2000, function () {
+    //                        $(this).css({display: "none"});
+    //                        bAfficheInfo = false;
+    //                    });
+    //                }
+    //                dXdY($(this).attr('class'));
+    //                longitude += 2 * dx;
+    //                latitude += 2 * dy;
+    //                affiche();
+    //            });
 
-//    $(document).on("click", "#zoomPlus-" + iNumPano, function (evenement) {
-//        if (bAfficheInfo)
-//        {
-//            $("#infoPanovisu-" + iNumPano).fadeOut(2000, function () {
-//                $(this).css({display: "none"});
-//                bAfficheInfo = false;
-//            });
-//        }
-//        fov -= 1;
-//        zoom();
-//        evenement.preventDefault();
-//    });
+    //    $(document).on("click", "#zoomPlus-" + iNumPano, function (evenement) {
+    //        if (bAfficheInfo)
+    //        {
+    //            $("#infoPanovisu-" + iNumPano).fadeOut(2000, function () {
+    //                $(this).css({display: "none"});
+    //                bAfficheInfo = false;
+    //            });
+    //        }
+    //        fov -= 1;
+    //        zoom();
+    //        evenement.preventDefault();
+    //    });
 
     $(document).on("click", "#souris-" + iNumPano, function () {
         changeModeSouris();
@@ -934,14 +926,14 @@ function panovisu(iNumPano) {
 
     $(document).on("click", ".infoPanovisu", function () {
         $(this).fadeOut(2000, function () {
-            $(this).css({display: "none"});
+            $(this).css({ display: "none" });
             bAfficheInfo = false;
         });
     });
 
     $(document).on("click", ".aidePanovisu", function () {
         $(this).fadeOut(2000, function () {
-            $(this).css({display: "none"});
+            $(this).css({ display: "none" });
             bAfficheAide = false;
         });
     });
@@ -997,10 +989,9 @@ function panovisu(iNumPano) {
                     transform: "translate(0px," + positionVignettesY + "px)"
                 });
             }
-            if (bAfficheInfo)
-            {
+            if (bAfficheInfo) {
                 $("#infoPanovisu-" + iNumPano).fadeOut(2000, function () {
-                    $(this).css({display: "none"});
+                    $(this).css({ display: "none" });
                     bAfficheInfo = false;
                 });
             }
@@ -1101,10 +1092,9 @@ function panovisu(iNumPano) {
 
     $(document).on("click", ".clicTelec,.imgTelecFS,.imgTelecInfo", function (evenement) {
         telecEnCours = true;
-        if (bAfficheInfo)
-        {
+        if (bAfficheInfo) {
             $("#infoPanovisu-" + iNumPano).fadeOut(2000, function () {
-                $(this).css({display: "none"});
+                $(this).css({ display: "none" });
                 bAfficheInfo = false;
             });
         }
@@ -1167,10 +1157,9 @@ function panovisu(iNumPano) {
     $(document).on("touchstart mousedown", ".clicTelec", function (evenement) {
         telecEnCours = true;
         bDeplacement = false;
-        if (bAfficheInfo)
-        {
+        if (bAfficheInfo) {
             $("#infoPanovisu-" + iNumPano).fadeOut(2000, function () {
-                $(this).css({display: "none"});
+                $(this).css({ display: "none" });
                 bAfficheInfo = false;
             });
         }
@@ -1244,18 +1233,17 @@ function panovisu(iNumPano) {
         dy = 0;
         id1 = id.split("-");
         id = id1[0];
-        switch (id)
-        {
-            case "xmoins" :
+        switch (id) {
+            case "xmoins":
                 dx -= 0.5;
                 break;
-            case "xplus" :
+            case "xplus":
                 dx += 0.5;
                 break;
-            case "ymoins" :
+            case "ymoins":
                 dy += 0.5;
                 break;
-            case "yplus" :
+            case "yplus":
                 dy -= 0.5;
                 break;
         }
@@ -1366,15 +1354,13 @@ function panovisu(iNumPano) {
      * @returns {undefined}
      */
     function toggleAutorotation() {
-        if (bAutorotation)
-        {
+        if (bAutorotation) {
             strAutoRotationMarche = "non";
             bAutorotation = false;
             bAutoTour = false;
             arreteAutorotation();
         }
-        else
-        {
+        else {
             strAutoRotationMarche = "oui";
             bAutorotation = true;
             dxAutorotation = 1 / vitesseAutorotation;
@@ -1385,7 +1371,7 @@ function panovisu(iNumPano) {
             demarreAutoRotation();
         }
     }
-    
+
     /**
      * Affiche directement la modale de bienvenue au premier chargement
      * Sans vérifier bAfficheInfo (qui est déjà à true pour bloquer la description)
@@ -1393,7 +1379,7 @@ function panovisu(iNumPano) {
      */
     function afficheModaleBienvenue() {
         console.log("DEBUG afficheModaleBienvenue() - Affichage direct de la modale");
-        
+
         if (bFenetreInfoPersonnalise) {
             console.log("DEBUG afficheModaleBienvenue() - Version personnalisée");
             // Version personnalisée avec image
@@ -1402,14 +1388,14 @@ function panovisu(iNumPano) {
             img.onload = function () {
                 var overlayId = "infoOverlay-" + iNumPano;
                 var modalId = "infoModal-" + iNumPano;
-                
+
                 // Supprimer les éléments existants
                 $("#" + overlayId).remove();
                 $("#" + modalId).remove();
-                
+
                 larg = Math.round(this.width * fenetreInfoTaille / 100);
                 haut = Math.round(this.height * fenetreInfoTaille / 100);
-                
+
                 // Créer l'overlay + modale (code identique à afficheFenetreInfo)
                 $("<div>", {
                     id: overlayId,
@@ -1418,7 +1404,7 @@ function panovisu(iNumPano) {
                         backgroundColor: "rgba(0, 0, 0, 0.7)", zIndex: 9998, display: "none"
                     }
                 }).appendTo("body");
-                
+
                 $("<div>", {
                     id: modalId,
                     css: {
@@ -1430,12 +1416,12 @@ function panovisu(iNumPano) {
                         fontFamily: "'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif"
                     }
                 }).appendTo("body");
-                
+
                 $("<img>", {
                     id: "infoImg-" + iNumPano, src: img.src, alt: "",
                     css: { maxWidth: "100%", height: "auto", marginBottom: "15px", borderRadius: "5px" }
                 }).appendTo("#" + modalId);
-                
+
                 if (strFenetreInfoURL && strFenetreInfoURL !== "") {
                     $("<a>", {
                         id: "infoUrl-" + iNumPano, text: strFenetreInfoTexteURL, href: strFenetreInfoURL, target: "_blank",
@@ -1446,7 +1432,7 @@ function panovisu(iNumPano) {
                         }
                     }).appendTo("#" + modalId);
                 }
-                
+
                 $("<button>", {
                     text: chainesTraduction[strLangage].fermer || "Fermer",
                     css: {
@@ -1455,11 +1441,11 @@ function panovisu(iNumPano) {
                         border: "2px solid rgba(255, 255, 255, 0.5)", borderRadius: "5px",
                         fontSize: "16px", cursor: "pointer", fontWeight: "bold"
                     },
-                    click: function() { afficheFenetreInfo(); }
+                    click: function () { afficheFenetreInfo(); }
                 }).appendTo("#" + modalId);
-                
-                $("#" + overlayId).click(function() { afficheFenetreInfo(); });
-                
+
+                $("#" + overlayId).click(function () { afficheFenetreInfo(); });
+
                 if (bAfficheAide) {
                     $("#aidePanovisu-" + iNumPano).fadeOut(500, function () { bAfficheAide = false; });
                 }
@@ -1471,10 +1457,10 @@ function panovisu(iNumPano) {
             // Version par défaut modernisée
             var overlayId = "infoOverlay-" + iNumPano;
             var modalId = "infoModal-" + iNumPano;
-            
+
             $("#" + overlayId).remove();
             $("#" + modalId).remove();
-            
+
             // Créer l'overlay + modale par défaut
             $("<div>", {
                 id: overlayId,
@@ -1483,7 +1469,7 @@ function panovisu(iNumPano) {
                     backgroundColor: "rgba(0, 0, 0, 0.7)", zIndex: 9998, display: "none"
                 }
             }).appendTo("body");
-            
+
             $("<div>", {
                 id: modalId,
                 css: {
@@ -1494,19 +1480,19 @@ function panovisu(iNumPano) {
                     fontFamily: "'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif"
                 }
             }).appendTo("body");
-            
+
             var panoInfo = chainesTraduction[strLangage].fenetreInfo;
             $("<div>", {
                 html: panoInfo,
-                css: { 
-                    color: "#ffffff", 
-                    fontSize: "16px", 
-                    lineHeight: "1.6", 
+                css: {
+                    color: "#ffffff",
+                    fontSize: "16px",
+                    lineHeight: "1.6",
                     marginBottom: "20px",
                     fontFamily: "'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif"
                 }
             }).appendTo("#" + modalId);
-            
+
             $("<button>", {
                 text: chainesTraduction[strLangage].fermer || "Fermer",
                 css: {
@@ -1515,11 +1501,11 @@ function panovisu(iNumPano) {
                     border: "2px solid rgba(255, 255, 255, 0.5)", borderRadius: "5px",
                     fontSize: "16px", cursor: "pointer", fontWeight: "bold"
                 },
-                click: function() { afficheFenetreInfo(); }
+                click: function () { afficheFenetreInfo(); }
             }).appendTo("#" + modalId);
-            
-            $("#" + overlayId).click(function() { afficheFenetreInfo(); });
-            
+
+            $("#" + overlayId).click(function () { afficheFenetreInfo(); });
+
             if (bAfficheAide) {
                 $("#aidePanovisu-" + iNumPano).fadeOut(500, function () { bAfficheAide = false; });
             }
@@ -1527,35 +1513,34 @@ function panovisu(iNumPano) {
             $("#" + modalId).fadeIn(500);
         }
     }
-    
+
     /**
      * 
      * @returns {undefined}
      */
     function afficheFenetreInfo() {
         console.log("DEBUG afficheFenetreInfo() - Début - bAfficheInfo:", bAfficheInfo);
-        if (bAfficheInfo)
-        {
+        if (bAfficheInfo) {
             console.log("DEBUG afficheFenetreInfo() - Fermeture de la fenêtre");
             // Fermer la fenêtre modale moderne
             var overlayId = "infoOverlay-" + iNumPano;
             var modalId = "infoModal-" + iNumPano;
-            
-            $("#" + overlayId).fadeOut(500, function() { 
-                $(this).remove(); 
+
+            $("#" + overlayId).fadeOut(500, function () {
+                $(this).remove();
             });
-            $("#" + modalId).fadeOut(500, function() { 
+            $("#" + modalId).fadeOut(500, function () {
                 $(this).remove();
                 bAfficheInfo = false;
             });
         }
         else {
             console.log("DEBUG afficheFenetreInfo() - Ouverture - bFenetreInfoPersonnalise:", bFenetreInfoPersonnalise);
-            
+
             // Marquer immédiatement que la fenêtre d'info est affichée
             // pour bloquer l'affichage de la description
             bAfficheInfo = true;
-            
+
             if (bFenetreInfoPersonnalise) {
                 console.log("DEBUG afficheFenetreInfo() - Version personnalisée avec image:", strFenetreInfoImage);
                 // Version personnalisée avec image
@@ -1564,14 +1549,14 @@ function panovisu(iNumPano) {
                 img.onload = function () {
                     var overlayId = "infoOverlay-" + iNumPano;
                     var modalId = "infoModal-" + iNumPano;
-                    
+
                     // Supprimer les éléments existants
                     $("#" + overlayId).remove();
                     $("#" + modalId).remove();
-                    
+
                     larg = Math.round(this.width * fenetreInfoTaille / 100);
                     haut = Math.round(this.height * fenetreInfoTaille / 100);
-                    
+
                     // Créer l'overlay de fond
                     $("<div>", {
                         id: overlayId,
@@ -1586,7 +1571,7 @@ function panovisu(iNumPano) {
                             display: "none"
                         }
                     }).appendTo("body");
-                    
+
                     // Créer la fenêtre modale
                     $("<div>", {
                         id: modalId,
@@ -1608,7 +1593,7 @@ function panovisu(iNumPano) {
                             fontFamily: "'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif"
                         }
                     }).appendTo("body");
-                    
+
                     // Ajouter l'image
                     $("<img>", {
                         id: "infoImg-" + iNumPano,
@@ -1621,7 +1606,7 @@ function panovisu(iNumPano) {
                             borderRadius: "5px"
                         }
                     }).appendTo("#" + modalId);
-                    
+
                     // Ajouter le lien URL si présent
                     if (strFenetreInfoURL && strFenetreInfoURL !== "") {
                         $("<a>", {
@@ -1638,7 +1623,7 @@ function panovisu(iNumPano) {
                             }
                         }).appendTo("#" + modalId);
                     }
-                    
+
                     // Ajouter le bouton de fermeture
                     $("<button>", {
                         text: chainesTraduction[strLangage].fermer || "Fermer",
@@ -1654,16 +1639,16 @@ function panovisu(iNumPano) {
                             cursor: "pointer",
                             fontWeight: "bold"
                         },
-                        click: function() {
+                        click: function () {
                             afficheFenetreInfo();
                         }
                     }).appendTo("#" + modalId);
-                    
+
                     // Permettre la fermeture en cliquant sur l'overlay
-                    $("#" + overlayId).click(function() {
+                    $("#" + overlayId).click(function () {
                         afficheFenetreInfo();
                     });
-                    
+
                     // Afficher avec animation
                     if (bAfficheAide) {
                         $("#aidePanovisu-" + iNumPano).fadeOut(500, function () {
@@ -1680,13 +1665,13 @@ function panovisu(iNumPano) {
                 // Version par défaut modernisée
                 var overlayId = "infoOverlay-" + iNumPano;
                 var modalId = "infoModal-" + iNumPano;
-                
+
                 console.log("DEBUG afficheFenetreInfo() - Création des éléments avec overlayId:", overlayId, "modalId:", modalId);
-                
+
                 // Supprimer les éléments existants
                 $("#" + overlayId).remove();
                 $("#" + modalId).remove();
-                
+
                 // Créer l'overlay de fond
                 $("<div>", {
                     id: overlayId,
@@ -1701,7 +1686,7 @@ function panovisu(iNumPano) {
                         display: "none"
                     }
                 }).appendTo("body");
-                
+
                 // Créer la fenêtre modale
                 $("<div>", {
                     id: modalId,
@@ -1726,7 +1711,7 @@ function panovisu(iNumPano) {
                         display: "none"
                     }
                 }).appendTo("body");
-                
+
                 // Ajouter le contenu
                 panoInfo = chainesTraduction[strLangage].fenetreInfo;
                 $("<div>", {
@@ -1736,7 +1721,7 @@ function panovisu(iNumPano) {
                     },
                     html: panoInfo
                 }).appendTo("#" + modalId);
-                
+
                 // Ajouter le bouton de fermeture
                 $("<button>", {
                     text: chainesTraduction[strLangage].fermer || "Fermer",
@@ -1752,16 +1737,16 @@ function panovisu(iNumPano) {
                         cursor: "pointer",
                         fontWeight: "bold"
                     },
-                    click: function() {
+                    click: function () {
                         afficheFenetreInfo();
                     }
                 }).appendTo("#" + modalId);
-                
+
                 // Permettre la fermeture en cliquant sur l'overlay
-                $("#" + overlayId).click(function() {
+                $("#" + overlayId).click(function () {
                     afficheFenetreInfo();
                 });
-                
+
                 // Afficher avec animation
                 console.log("DEBUG afficheFenetreInfo() - Affichage avec animation - bAfficheAide:", bAfficheAide);
                 if (bAfficheAide) {
@@ -1781,16 +1766,15 @@ function panovisu(iNumPano) {
      * @returns {undefined}
      */
     function afficheFenetreAide() {
-        if (bAfficheAide)
-        {
+        if (bAfficheAide) {
             // Fermer la fenêtre modale d'aide
             var overlayId = "aideOverlay-" + iNumPano;
             var modalId = "aideModal-" + iNumPano;
-            
-            $("#" + overlayId).fadeOut(500, function() { 
-                $(this).remove(); 
+
+            $("#" + overlayId).fadeOut(500, function () {
+                $(this).remove();
             });
-            $("#" + modalId).fadeOut(500, function() { 
+            $("#" + modalId).fadeOut(500, function () {
                 $(this).remove();
                 bAfficheAide = false;
             });
@@ -1799,15 +1783,15 @@ function panovisu(iNumPano) {
             if (bAfficheInfo) {
                 afficheFenetreInfo();
             }
-            
+
             // Afficher la fenêtre d'aide moderne
             var overlayId = "aideOverlay-" + iNumPano;
             var modalId = "aideModal-" + iNumPano;
-            
+
             // Supprimer les éléments existants
             $("#" + overlayId).remove();
             $("#" + modalId).remove();
-            
+
             if (bFenetreAidePersonnalise) {
                 // Version personnalisée avec image
                 img = new Image();
@@ -1815,7 +1799,7 @@ function panovisu(iNumPano) {
                 img.onload = function () {
                     larg = Math.round(this.width * fenetreAideTaille / 100);
                     haut = Math.round(this.height * fenetreAideTaille / 100);
-                    
+
                     // Créer l'overlay de fond
                     $("<div>", {
                         id: overlayId,
@@ -1830,7 +1814,7 @@ function panovisu(iNumPano) {
                             display: "none"
                         }
                     }).appendTo("body");
-                    
+
                     // Créer la fenêtre modale
                     $("<div>", {
                         id: modalId,
@@ -1851,7 +1835,7 @@ function panovisu(iNumPano) {
                             textAlign: "center"
                         }
                     }).appendTo("body");
-                    
+
                     // Ajouter l'image
                     $("<img>", {
                         src: img.src,
@@ -1863,7 +1847,7 @@ function panovisu(iNumPano) {
                             borderRadius: "5px"
                         }
                     }).appendTo("#" + modalId);
-                    
+
                     // Ajouter le bouton de fermeture
                     $("<button>", {
                         text: chainesTraduction[strLangage].fermer || "Fermer",
@@ -1879,19 +1863,19 @@ function panovisu(iNumPano) {
                             cursor: "pointer",
                             fontWeight: "bold"
                         },
-                        click: function() {
+                        click: function () {
                             afficheFenetreAide();
                         }
                     }).appendTo("#" + modalId);
-                    
+
                     // Permettre la fermeture en cliquant sur l'overlay
-                    $("#" + overlayId).click(function() {
+                    $("#" + overlayId).click(function () {
                         afficheFenetreAide();
                     });
-                    
+
                     // Afficher avec animation
                     $("#" + overlayId).fadeIn(500);
-                    $("#" + modalId).fadeIn(500, function() {
+                    $("#" + modalId).fadeIn(500, function () {
                         bAfficheAide = true;
                     });
                 };
@@ -1912,7 +1896,7 @@ function panovisu(iNumPano) {
                         display: "none"
                     }
                 }).appendTo("body");
-                
+
                 // Créer la fenêtre modale
                 $("<div>", {
                     id: modalId,
@@ -1937,7 +1921,7 @@ function panovisu(iNumPano) {
                         display: "none"
                     }
                 }).appendTo("body");
-                
+
                 // Ajouter le contenu
                 panoInfo = chainesTraduction[strLangage].fenetreAide;
                 $("<div>", {
@@ -1947,7 +1931,7 @@ function panovisu(iNumPano) {
                     },
                     html: panoInfo
                 }).appendTo("#" + modalId);
-                
+
                 // Ajouter le bouton de fermeture
                 $("<button>", {
                     text: chainesTraduction[strLangage].fermer || "Fermer",
@@ -1963,19 +1947,19 @@ function panovisu(iNumPano) {
                         cursor: "pointer",
                         fontWeight: "bold"
                     },
-                    click: function() {
+                    click: function () {
                         afficheFenetreAide();
                     }
                 }).appendTo("#" + modalId);
-                
+
                 // Permettre la fermeture en cliquant sur l'overlay
-                $("#" + overlayId).click(function() {
+                $("#" + overlayId).click(function () {
                     afficheFenetreAide();
                 });
-                
+
                 // Afficher avec animation
                 $("#" + overlayId).fadeIn(500);
-                $("#" + modalId).fadeIn(500, function() {
+                $("#" + modalId).fadeIn(500, function () {
                     bAfficheAide = true;
                 });
             }
@@ -2013,15 +1997,14 @@ function panovisu(iNumPano) {
                 $(".hotSpots").fadeOut(500);
             }
 
-            if (strMarcheArretVignettes === "oui")
-            {
+            if (strMarcheArretVignettes === "oui") {
                 $("#titreVignettes-" + iNumPano).fadeOut(500);
                 $("#divVignettes-" + iNumPano).fadeOut(500);
                 if (strVignettesPosition === "left") {
-                    $("#divPrecedent-" + iNumPano).css({left: 0});
+                    $("#divPrecedent-" + iNumPano).css({ left: 0 });
                 }
                 if (strVignettesPosition === "right") {
-                    $("#divSuivant-" + iNumPano).css({right: 0});
+                    $("#divSuivant-" + iNumPano).css({ right: 0 });
                 }
             }
             for (i = 0; i < iNombreImageFond; i++) {
@@ -2062,25 +2045,24 @@ function panovisu(iNumPano) {
                 $(".hotSpots").fadeIn(500);
             }
 
-            if (strMarcheArretVignettes === "oui")
-            {
+            if (strMarcheArretVignettes === "oui") {
                 $("#titreVignettes-" + iNumPano).fadeIn(500);
                 $("#divVignettes-" + iNumPano).fadeIn(500);
                 if (!bVignettesRentre) {
                     var largeur = $("#divVignettes-" + iNumPano).width() + 6;
                     if (strVignettesPosition === "left") {
-                        $("#divPrecedent-" + iNumPano).css({left: largeur});
+                        $("#divPrecedent-" + iNumPano).css({ left: largeur });
                     }
                     if (strVignettesPosition === "right") {
-                        $("#divSuivant-" + iNumPano).css({right: largeur});
+                        $("#divSuivant-" + iNumPano).css({ right: largeur });
                     }
                 }
                 else {
                     if (strVignettesPosition === "left") {
-                        $("#divPrecedent-" + iNumPano).css({left: 0});
+                        $("#divPrecedent-" + iNumPano).css({ left: 0 });
                     }
                     if (strVignettesPosition === "right") {
-                        $("#divSuivant-" + iNumPano).css({right: 0});
+                        $("#divSuivant-" + iNumPano).css({ right: 0 });
                     }
                 }
 
@@ -2127,15 +2109,14 @@ function panovisu(iNumPano) {
                 $(".hotSpots").hide();
             }
 
-            if (strMarcheArretVignettes === "oui")
-            {
+            if (strMarcheArretVignettes === "oui") {
                 $("#titreVignettes-" + iNumPano).hide();
                 $("#divVignettes-" + iNumPano).hide();
                 if (strVignettesPosition === "left") {
-                    $("#divPrecedent-" + iNumPano).css({left: 0});
+                    $("#divPrecedent-" + iNumPano).css({ left: 0 });
                 }
                 if (strVignettesPosition === "right") {
-                    $("#divSuivant-" + iNumPano).css({right: 0});
+                    $("#divSuivant-" + iNumPano).css({ right: 0 });
                 }
             }
             for (i = 0; i < iNombreImageFond; i++) {
@@ -2175,25 +2156,24 @@ function panovisu(iNumPano) {
                 $(".hotSpots").show();
             }
 
-            if (strMarcheArretVignettes === "oui")
-            {
+            if (strMarcheArretVignettes === "oui") {
                 $("#titreVignettes-" + iNumPano).show();
                 $("#divVignettes-" + iNumPano).show();
                 if (!bVignettesRentre) {
                     var largeur = $("#divVignettes-" + iNumPano).width() + 6;
                     if (strVignettesPosition === "left") {
-                        $("#divPrecedent-" + iNumPano).css({left: largeur});
+                        $("#divPrecedent-" + iNumPano).css({ left: largeur });
                     }
                     if (strVignettesPosition === "right") {
-                        $("#divSuivant-" + iNumPano).css({right: largeur});
+                        $("#divSuivant-" + iNumPano).css({ right: largeur });
                     }
                 }
                 else {
                     if (strVignettesPosition === "left") {
-                        $("#divPrecedent-" + iNumPano).css({left: 0});
+                        $("#divPrecedent-" + iNumPano).css({ left: 0 });
                     }
                     if (strVignettesPosition === "right") {
-                        $("#divSuivant-" + iNumPano).css({right: 0});
+                        $("#divSuivant-" + iNumPano).css({ right: 0 });
                     }
                 }
 
@@ -2300,25 +2280,25 @@ function panovisu(iNumPano) {
             switch (strVignettesPosition) {
                 case "left":
 
-                    $("#divVignettes-" + iNumPano).css({transform: "translateX(-" + ($("#divVignettes-" + iNumPano).width() + 5) + "px)"});
-                    $("#titreVignettes-" + iNumPano).css({transform: "translateX(-" + ($("#divVignettes-" + iNumPano).width() + 5) + "px) rotate(90deg)"});
+                    $("#divVignettes-" + iNumPano).css({ transform: "translateX(-" + ($("#divVignettes-" + iNumPano).width() + 5) + "px)" });
+                    $("#titreVignettes-" + iNumPano).css({ transform: "translateX(-" + ($("#divVignettes-" + iNumPano).width() + 5) + "px) rotate(90deg)" });
                     dX1 = parseInt(strDX);
                     $("#divPrecedent-" + iNumPano).css("left", "0");
                     if (strPositionX === "left") {
                         if (strPositionY === "top") {
-                            $("#barre-" + iNumPano).css({left: dX1 + $("#titreVignettes-" + iNumPano).height() + 4 + "px"});
+                            $("#barre-" + iNumPano).css({ left: dX1 + $("#titreVignettes-" + iNumPano).height() + 4 + "px" });
                         }
                         else {
-                            $("#barre-" + iNumPano).css({left: dX1 + "px"});
+                            $("#barre-" + iNumPano).css({ left: dX1 + "px" });
                         }
                     }
                     dX1 = parseInt(telecommandeDX);
                     if (strTelecommandePositionX === "left") {
                         if (strTelecommandePositionY === "top") {
-                            $("#telec-" + iNumPano).css({left: dX1 + $("#titreVignettes-" + iNumPano).height() + 4 + "px"});
+                            $("#telec-" + iNumPano).css({ left: dX1 + $("#titreVignettes-" + iNumPano).height() + 4 + "px" });
                         }
                         else {
-                            $("#telec-" + iNumPano).css({left: dX1 + "px"});
+                            $("#telec-" + iNumPano).css({ left: dX1 + "px" });
                         }
                     }
 
@@ -2333,25 +2313,25 @@ function panovisu(iNumPano) {
 
                     break;
                 case "right":
-                    $("#divVignettes-" + iNumPano).css({transform: "translateX(" + ($("#divVignettes-" + iNumPano).width() + 5) + "px)"});
-                    $("#titreVignettes-" + iNumPano).css({transform: "translateX(" + ($("#divVignettes-" + iNumPano).width() + 5) + "px) rotate(90deg)"});
+                    $("#divVignettes-" + iNumPano).css({ transform: "translateX(" + ($("#divVignettes-" + iNumPano).width() + 5) + "px)" });
+                    $("#titreVignettes-" + iNumPano).css({ transform: "translateX(" + ($("#divVignettes-" + iNumPano).width() + 5) + "px) rotate(90deg)" });
                     dX1 = parseInt(strDX);
                     $("#divSuivant-" + iNumPano).css("right", "0");
                     if (strPositionX === "right") {
                         if (strPositionY === "top") {
-                            $("#barre-" + iNumPano).css({right: dX1 + $("#titreVignettes-" + iNumPano).height() + 4 + "px"});
+                            $("#barre-" + iNumPano).css({ right: dX1 + $("#titreVignettes-" + iNumPano).height() + 4 + "px" });
                         }
                         else {
-                            $("#barre-" + iNumPano).css({right: dX1 + "px"});
+                            $("#barre-" + iNumPano).css({ right: dX1 + "px" });
                         }
                     }
                     dX1 = parseInt(telecommandeDX);
                     if (strTelecommandePositionX === "right") {
                         if (strTelecommandePositionY === "top") {
-                            $("#telec-" + iNumPano).css({right: dX1 + $("#titreVignettes-" + iNumPano).height() + 4 + "px"});
+                            $("#telec-" + iNumPano).css({ right: dX1 + $("#titreVignettes-" + iNumPano).height() + 4 + "px" });
                         }
                         else {
-                            $("#telec-" + iNumPano).css({right: dX1 + "px"});
+                            $("#telec-" + iNumPano).css({ right: dX1 + "px" });
                         }
                     }
 
@@ -2365,30 +2345,30 @@ function panovisu(iNumPano) {
                     }
 
                     if (strPositionX === "right")
-                        $("#barre-" + iNumPano).css({right: dX1 + "px"});
+                        $("#barre-" + iNumPano).css({ right: dX1 + "px" });
                     if (bBoussole && (strBoussolePositionX === "right"))
                         $("#boussole-" + iNumPano).css(strBoussolePositionX, (parseInt(strBoussoleDX)) + "px");
                     break;
                 case "bottom":
 
-                    $("#divVignettes-" + iNumPano).css({transform: "translateY(" + ($("#divVignettes-" + iNumPano).height() + 5) + "px)"});
-                    $("#titreVignettes-" + iNumPano).css({transform: "translateY(" + ($("#divVignettes-" + iNumPano).height() + 5) + "px)"});
+                    $("#divVignettes-" + iNumPano).css({ transform: "translateY(" + ($("#divVignettes-" + iNumPano).height() + 5) + "px)" });
+                    $("#titreVignettes-" + iNumPano).css({ transform: "translateY(" + ($("#divVignettes-" + iNumPano).height() + 5) + "px)" });
                     dY1 = parseInt(strDY);
                     if (strPositionY === "bottom") {
                         if (strPositionX === "right") {
-                            $("#barre-" + iNumPano).css({top: -(35 + dY1 - 2 + $("#titreVignettes-" + iNumPano).height()) + "px"});
+                            $("#barre-" + iNumPano).css({ top: -(35 + dY1 - 2 + $("#titreVignettes-" + iNumPano).height()) + "px" });
                         }
                         else {
-                            $("#barre-" + iNumPano).css({top: -(35 + dY1 - 2) + "px"});
+                            $("#barre-" + iNumPano).css({ top: -(35 + dY1 - 2) + "px" });
                         }
                     }
                     dY1 = parseInt(telecommandeDY);
                     if (strTelecommandePositionY === "bottom") {
                         if (strTelecommandePositionX === "right") {
-                            $("#telec-" + iNumPano).css({bottom: dY1 + $("#titreVignettes-" + iNumPano).height() + "px"});
+                            $("#telec-" + iNumPano).css({ bottom: dY1 + $("#titreVignettes-" + iNumPano).height() + "px" });
                         }
                         else {
-                            $("#telec-" + iNumPano).css({bottom: dY1 + "px"});
+                            $("#telec-" + iNumPano).css({ bottom: dY1 + "px" });
                         }
                     }
 
@@ -2406,27 +2386,27 @@ function panovisu(iNumPano) {
         else {
             switch (strVignettesPosition) {
                 case "left":
-                    $("#divVignettes-" + iNumPano).css({transform: "translateX(0px)"});
-                    $("#titreVignettes-" + iNumPano).css({transform: "rotate(90deg)"});
+                    $("#divVignettes-" + iNumPano).css({ transform: "translateX(0px)" });
+                    $("#titreVignettes-" + iNumPano).css({ transform: "rotate(90deg)" });
                     dX1 = parseInt(strDX) + largeurFenetre;
                     $("#divPrecedent-" + iNumPano).css("left", largeurFenetre + 6);
                     $("#divPrecedent-" + iNumPano).css("left", largeurFenetre + 6);
                     dX1 = parseInt(strDX) + parseInt(vignettesTailleImage) + 5;
                     if (strPositionX === "left") {
                         if (strPositionY === "top") {
-                            $("#barre-" + iNumPano).css({left: dX1 + $("#titreVignettes-" + iNumPano).height() + 4 + "px"});
+                            $("#barre-" + iNumPano).css({ left: dX1 + $("#titreVignettes-" + iNumPano).height() + 4 + "px" });
                         }
                         else {
-                            $("#barre-" + iNumPano).css({left: dX1 + "px"});
+                            $("#barre-" + iNumPano).css({ left: dX1 + "px" });
                         }
                     }
                     dX1 = parseInt(telecommandeDX) + parseInt(vignettesTailleImage) + 5;
                     if (strTelecommandePositionX === "left") {
                         if (strTelecommandePositionY === "top") {
-                            $("#telec-" + iNumPano).css({left: dX1 + $("#titreVignettes-" + iNumPano).height() + 4 + "px"});
+                            $("#telec-" + iNumPano).css({ left: dX1 + $("#titreVignettes-" + iNumPano).height() + 4 + "px" });
                         }
                         else {
-                            $("#telec-" + iNumPano).css({left: dX1 + "px"});
+                            $("#telec-" + iNumPano).css({ left: dX1 + "px" });
                         }
                     }
 
@@ -2442,26 +2422,26 @@ function panovisu(iNumPano) {
 
                     break;
                 case "right":
-                    $("#divVignettes-" + iNumPano).css({transform: "translateX(0px)"});
-                    $("#titreVignettes-" + iNumPano).css({transform: "rotate(90deg)"});
+                    $("#divVignettes-" + iNumPano).css({ transform: "translateX(0px)" });
+                    $("#titreVignettes-" + iNumPano).css({ transform: "rotate(90deg)" });
                     dX1 = parseInt(strDX) + largeurFenetre;
                     $("#divSuivant-" + iNumPano).css("right", largeurFenetre + 6);
                     if (strPositionX === "right") {
                         if (strPositionY === "top") {
-                            $("#barre-" + iNumPano).css({right: dX1 + $("#titreVignettes-" + iNumPano).height() + 4 + "px"});
+                            $("#barre-" + iNumPano).css({ right: dX1 + $("#titreVignettes-" + iNumPano).height() + 4 + "px" });
                         }
                         else {
-                            $("#barre-" + iNumPano).css({right: dX1 + "px"});
+                            $("#barre-" + iNumPano).css({ right: dX1 + "px" });
                         }
                     }
                     dX1 = parseInt(telecommandeDX) + largeurFenetre;
                     $("#divSuivant-" + iNumPano).css("right", largeurFenetre + 6);
                     if (strTelecommandePositionX === "right") {
                         if (strTelecommandePositionY === "top") {
-                            $("#telec-" + iNumPano).css({right: dX1 + $("#titreVignettes-" + iNumPano).height() + 4 + "px"});
+                            $("#telec-" + iNumPano).css({ right: dX1 + $("#titreVignettes-" + iNumPano).height() + 4 + "px" });
                         }
                         else {
-                            $("#telec-" + iNumPano).css({right: dX1 + "px"});
+                            $("#telec-" + iNumPano).css({ right: dX1 + "px" });
                         }
                     }
 
@@ -2476,24 +2456,24 @@ function panovisu(iNumPano) {
 
                     break;
                 case "bottom":
-                    $("#divVignettes-" + iNumPano).css({transform: "translateY(0px)"});
-                    $("#titreVignettes-" + iNumPano).css({transform: "translateY(0px)"});
+                    $("#divVignettes-" + iNumPano).css({ transform: "translateY(0px)" });
+                    $("#titreVignettes-" + iNumPano).css({ transform: "translateY(0px)" });
                     dY1 = parseInt(strDY) + $("#divVignettes-" + iNumPano).height() + 5;
                     if (strPositionY === "bottom") {
                         if (strPositionX === "right") {
-                            $("#barre-" + iNumPano).css({top: -(35 + dY1 - 2 + $("#titreVignettes-" + iNumPano).height()) + +"px"});
+                            $("#barre-" + iNumPano).css({ top: -(35 + dY1 - 2 + $("#titreVignettes-" + iNumPano).height()) + +"px" });
                         }
                         else {
-                            $("#barre-" + iNumPano).css({top: -(35 + dY1 - 2) + "px"});
+                            $("#barre-" + iNumPano).css({ top: -(35 + dY1 - 2) + "px" });
                         }
                     }
                     dY1 = parseInt(telecommandeDY) + $("#divVignettes-" + iNumPano).height() + 5;
                     if (strTelecommandePositionY === "bottom") {
                         if (strTelecommandePositionX === "right") {
-                            $("#telec-" + iNumPano).css({bottom: dY1 + $("#titreVignettes-" + iNumPano).height() + +"px"});
+                            $("#telec-" + iNumPano).css({ bottom: dY1 + $("#titreVignettes-" + iNumPano).height() + +"px" });
                         }
                         else {
-                            $("#telec-" + iNumPano).css({bottom: dY1 + "px"});
+                            $("#telec-" + iNumPano).css({ bottom: dY1 + "px" });
                         }
                     }
 
@@ -2541,7 +2521,7 @@ function panovisu(iNumPano) {
         typeVignettes = "horizontales";
         $("#hautVignettes-" + iNumPano).hide();
         $("#basVignettes-" + iNumPano).hide();
-        $("<div>", {id: "vignettes-" + iNumPano, class: "vignettes"}).appendTo("#divVignettes-" + iNumPano);
+        $("<div>", { id: "vignettes-" + iNumPano, class: "vignettes" }).appendTo("#divVignettes-" + iNumPano);
         var hauteur = vignettesTailleImage / 2;
         var largeurFenetre = $("#pano1-" + iNumPano).width() - 15;
         if (largeurFenetre < (vignettesTailleImage + 10) * arrVignettesPano.length) {
@@ -2626,7 +2606,7 @@ function panovisu(iNumPano) {
         typeVignettes = "verticales";
         $("#gaucheVignettes-" + iNumPano).hide();
         $("#droiteVignettes-" + iNumPano).hide();
-        $("<div>", {id: "vignettes-" + iNumPano, class: "vignettes"}).appendTo("#divVignettes-" + iNumPano);
+        $("<div>", { id: "vignettes-" + iNumPano, class: "vignettes" }).appendTo("#divVignettes-" + iNumPano);
         if (strAfficheTitre === "oui") {
             var hauteur = $("#pano1-" + iNumPano).height() - 30 - $("#info-" + iNumPano).height();
         }
@@ -2725,10 +2705,10 @@ function panovisu(iNumPano) {
             dX1 = parseInt(strDX) + parseInt(vignettesTailleImage) + 5;
             if (strPositionX === "right") {
                 if (strPositionY === "top") {
-                    $("#barre-" + iNumPano).css({right: dX1 + $("#titreVignettes-" + iNumPano).height() + 2 * paddingTitre + "px"});
+                    $("#barre-" + iNumPano).css({ right: dX1 + $("#titreVignettes-" + iNumPano).height() + 2 * paddingTitre + "px" });
                 }
                 else {
-                    $("#barre-" + iNumPano).css({right: dX1 + "px"});
+                    $("#barre-" + iNumPano).css({ right: dX1 + "px" });
                 }
             }
 
@@ -2746,10 +2726,10 @@ function panovisu(iNumPano) {
             dX1 = parseInt(strDX) + parseInt(vignettesTailleImage) + 5;
             if (strPositionX === "left") {
                 if (strPositionY === "top") {
-                    $("#barre-" + iNumPano).css({left: dX1 + $("#titreVignettes-" + iNumPano).height() + 2 * paddingTitre + "px"});
+                    $("#barre-" + iNumPano).css({ left: dX1 + $("#titreVignettes-" + iNumPano).height() + 2 * paddingTitre + "px" });
                 }
                 else {
-                    $("#barre-" + iNumPano).css({left: dX1 + "px"});
+                    $("#barre-" + iNumPano).css({ left: dX1 + "px" });
                 }
             }
             if (bBoussole && (strBoussolePositionX === "left")) {
@@ -2791,8 +2771,8 @@ function panovisu(iNumPano) {
         }
         longitude = longitude % 360;
         positionHS();
-        phi = THREE.Math.degToRad(90 - latitude);
-        theta = THREE.Math.degToRad(longitude);
+        phi = THREE.MathUtils.degToRad(90 - latitude);
+        theta = THREE.MathUtils.degToRad(longitude);
         target.x = 500 * Math.sin(phi) * Math.cos(theta);
         target.y = 500 * Math.cos(phi);
         target.z = 500 * Math.sin(phi) * Math.sin(theta);
@@ -2803,18 +2783,16 @@ function panovisu(iNumPano) {
         if (renderer)
             renderer.render(scene, camera);
         var bouss = longitude - zeroNord;
-        if (strBoussoleAiguille === "oui")
-        {
-            $("#bousAig-" + iNumPano).css({transform: "rotate(" + bouss + "deg)"});
+        if (strBoussoleAiguille === "oui") {
+            $("#bousAig-" + iNumPano).css({ transform: "rotate(" + bouss + "deg)" });
         }
         else {
-            $("#bousImg-" + iNumPano).css({transform: "rotate(" + (-bouss) + "deg)"});
+            $("#bousImg-" + iNumPano).css({ transform: "rotate(" + (-bouss) + "deg)" });
         }
         if (bPlanAffiche && bRadarAffiche) {
             angleRadar = fov / 180 * Math.PI / 2;
             var canvas = document.getElementById("radar-" + iNumPano);
-            if (canvas.getContext)
-            {
+            if (canvas.getContext) {
                 var ctx = canvas.getContext("2d");
                 ctx.clearRect(0, 0, iRadarTaille * 2, iRadarTaille * 2);
                 ctx.fillStyle = strRadarCouleurFond;
@@ -2875,8 +2853,10 @@ function panovisu(iNumPano) {
                 opacity: 0,
                 backgroundColor: couleur
             });
-            $("<img>", {id: "hsImg-" + iNumPano, class: "hsImg", src: image, title: "",
-                style: "background-color : #fff;padding : 20px;box-shadow: 10px 10px 20px 0px #656565;"}).appendTo("#divImage-" + iNumPano);
+            $("<img>", {
+                id: "hsImg-" + iNumPano, class: "hsImg", src: image, title: "",
+                style: "background-color : #fff;padding : 20px;box-shadow: 10px 10px 20px 0px #656565;"
+            }).appendTo("#divImage-" + iNumPano);
             $("#hsImg-" + iNumPano).css({
                 width: largImg + "px",
                 height: hautImg + "px",
@@ -2893,7 +2873,7 @@ function panovisu(iNumPano) {
                 title: "Cliquez pour quitter"
             }).appendTo("#divImage-" + iNumPano);
             $("#divImage-" + iNumPano).show();
-            $("#divImage-" + iNumPano).animate({opacity: 1}, 1500);
+            $("#divImage-" + iNumPano).animate({ opacity: 1 }, 1500);
         };
     }
 
@@ -2930,7 +2910,7 @@ function panovisu(iNumPano) {
         }).appendTo("#divHTML-" + iNumPano);
         $("#imgFerme-" + iNumPano).css("left", "94%");
         $("#divHTML-" + iNumPano).show();
-        $("#divHTML-" + iNumPano).animate({opacity: 1}, 1500);
+        $("#divHTML-" + iNumPano).animate({ opacity: 1 }, 1500);
     }
 
     function afficheHTML(numeroHS) {
@@ -2984,7 +2964,7 @@ function panovisu(iNumPano) {
         }
         switch (arrPointsInteret[numeroHS].position) {
             case "left":
-            case "right" :
+            case "right":
                 $("#ifHTML-" + iNumPano).css(arrPointsInteret[numeroHS].position, "10px");
                 break;
             case "center":
@@ -3010,7 +2990,7 @@ function panovisu(iNumPano) {
             case "left":
                 $("#imgFerme-" + iNumPano).css(arrPointsInteret[numeroHS].position, (taille - 10) + "px");
                 break
-            case "right" :
+            case "right":
                 $("#imgFerme-" + iNumPano).css(arrPointsInteret[numeroHS].position, "1px");
                 break;
             case "center":
@@ -3023,7 +3003,7 @@ function panovisu(iNumPano) {
                 break;
         }
         $("#divHTML-" + iNumPano).show();
-        $("#divHTML-" + iNumPano).animate({opacity: 1}, 1500);
+        $("#divHTML-" + iNumPano).animate({ opacity: 1 }, 1500);
     }
 
 
@@ -3046,8 +3026,7 @@ function panovisu(iNumPano) {
     function positionneTelecommande() {
         var dX1 = telecommandeDX;
         var dY1 = telecommandeDY;
-        if (bVignettes && !bVignettesRentre)
-        {
+        if (bVignettes && !bVignettesRentre) {
             if ((strVignettesPosition === "right") && (strTelecommandePositionX === "right")) {
                 dX1 = dX1 + parseInt(vignettesTailleImage) + 5;
             }
@@ -3079,16 +3058,15 @@ function panovisu(iNumPano) {
             border: "1px solid " + strBordure,
             backgroundColor: strCouleur
         });
-        $("#barre-" + iNumPano + " button img").css({height: "26px", width: "26px", paddingBottom: "0px", marginLeft: "0px"});
-        $("#barre-" + iNumPano).css({height: "40px"});
+        $("#barre-" + iNumPano + " button img").css({ height: "26px", width: "26px", paddingBottom: "0px", marginLeft: "0px" });
+        $("#barre-" + iNumPano).css({ height: "40px" });
         $("#button-" + iNumPano).show();
         requestTimeout(function () {
             w1 = $("#barre-" + iNumPano).width();
             h1 = $("#barre-" + iNumPano).height();
             dX1 = parseInt(strDX);
             dY1 = parseInt(strDY) - 2;
-            if (bVignettes)
-            {
+            if (bVignettes) {
                 if ((strVignettesPosition === "right") && (strPositionX === "right") && (!bVignettesRentre)) {
                     dX1 = parseInt(strDX) + parseInt(vignettesTailleImage) + 5;
                 }
@@ -3101,28 +3079,28 @@ function panovisu(iNumPano) {
             }
 
             switch (strPositionX) {
-                case "left" :
-                    $("#barre-" + iNumPano).css({left: dX1 + "px"});
+                case "left":
+                    $("#barre-" + iNumPano).css({ left: dX1 + "px" });
                     break;
-                case "center" :
+                case "center":
                     posX = (larg1 - w1) / 2 + dX1;
-                    $("#barre-" + iNumPano).css({left: posX + "px"});
+                    $("#barre-" + iNumPano).css({ left: posX + "px" });
                     break;
-                case "right" :
-                    $("#barre-" + iNumPano).css({right: dX1 + "px"});
+                case "right":
+                    $("#barre-" + iNumPano).css({ right: dX1 + "px" });
                     break;
             }
             switch (strPositionY) {
-                case "top" :
+                case "top":
                     posY = -(haut1 - dY1);
-                    $("#barre-" + iNumPano).css({top: posY + "px"});
+                    $("#barre-" + iNumPano).css({ top: posY + "px" });
                     break;
-                case "center" :
+                case "center":
                     posY = -(haut1 + h1) / 2 - dY1;
-                    $("#barre-" + iNumPano).css({top: posY + "px"});
+                    $("#barre-" + iNumPano).css({ top: posY + "px" });
                     break;
-                case "bottom" :
-                    $("#barre-" + iNumPano).css({top: -(35 + dY1) + "px"});
+                case "bottom":
+                    $("#barre-" + iNumPano).css({ top: -(35 + dY1) + "px" });
                     break;
             }
         }, 200);
@@ -3233,15 +3211,15 @@ function panovisu(iNumPano) {
      */
     function afficheErreur() {
         panoInfo = "<b>Panovisu version " +
-                version +
-                "</b><br><span style='color : red; font-weight : bold;'>Désolé votre navigateur ne supporte pas Webgl & Canvas</span><br>\n\
+            version +
+            "</b><br><span style='color : red; font-weight : bold;'>Désolé votre navigateur ne supporte pas Webgl & Canvas</span><br>\n\
                 Veuillez opter pour un navigateur plus récent<br>\n\
                 Internet Explorer 10+ / Firefox / Chrome / Opéra / Safari<br><br>\n\
         &copy; Laurent LANG (2014)";
-        $("#infoPanovisu-" + iNumPano).css({width: "450px", height: "150px"});
+        $("#infoPanovisu-" + iNumPano).css({ width: "450px", height: "150px" });
         posGauche = (pano.width() - $("#infoPanovisu-" + iNumPano).width()) / 2;
         posHaut = (pano.height() - $("#infoPanovisu-" + iNumPano).height()) / 2;
-        $("#infoPanovisu-" + iNumPano).css({top: posHaut + "px", left: posGauche + "px"});
+        $("#infoPanovisu-" + iNumPano).css({ top: posHaut + "px", left: posGauche + "px" });
         $("#infoPanovisu-" + iNumPano).html(panoInfo);
     }
 
@@ -3255,20 +3233,20 @@ function panovisu(iNumPano) {
             // Vérifier si la fenêtre d'info est affichée
             if (bAfficheInfo) {
                 // Attendre que la fenêtre d'info soit fermée
-                requestTimeout(function() {
+                requestTimeout(function () {
                     afficheDescriptionChargement();
                 }, 500);
                 return;
             }
-            
+
             // Créer l'overlay modal
             var overlayId = "descriptionOverlay-" + iNumPano;
             var modalId = "descriptionModal-" + iNumPano;
-            
+
             // Supprimer les éléments existants si présents
             $("#" + overlayId).remove();
             $("#" + modalId).remove();
-            
+
             // Créer l'overlay de fond
             $("<div>", {
                 id: overlayId,
@@ -3283,7 +3261,7 @@ function panovisu(iNumPano) {
                     display: "block"
                 }
             }).appendTo("body");
-            
+
             // Créer la fenêtre modale
             $("<div>", {
                 id: modalId,
@@ -3307,7 +3285,7 @@ function panovisu(iNumPano) {
                     lineHeight: "1.6"
                 }
             }).appendTo("body");
-            
+
             // Ajouter le titre de la visite en gras
             if (strPanoTitre && strPanoTitre !== "") {
                 $("<div>", {
@@ -3322,7 +3300,7 @@ function panovisu(iNumPano) {
                     text: strPanoTitre
                 }).appendTo("#" + modalId);
             }
-            
+
             // Ajouter le titre du panoramique en normal (sous-titre)
             if (strPanoTitre2 && strPanoTitre2 !== "") {
                 $("<div>", {
@@ -3337,7 +3315,7 @@ function panovisu(iNumPano) {
                     text: strPanoTitre2
                 }).appendTo("#" + modalId);
             }
-            
+
             // Ajouter le contenu de la description
             $("<div>", {
                 css: {
@@ -3347,7 +3325,7 @@ function panovisu(iNumPano) {
                 },
                 html: strDescription
             }).appendTo("#" + modalId);
-            
+
             // Ajouter un bouton de fermeture
             $("<button>", {
                 text: "Fermer",
@@ -3363,16 +3341,16 @@ function panovisu(iNumPano) {
                     cursor: "pointer",
                     fontWeight: "bold"
                 },
-                click: function() {
-                    $("#" + overlayId).fadeOut(300, function() { $(this).remove(); });
-                    $("#" + modalId).fadeOut(300, function() { $(this).remove(); });
+                click: function () {
+                    $("#" + overlayId).fadeOut(300, function () { $(this).remove(); });
+                    $("#" + modalId).fadeOut(300, function () { $(this).remove(); });
                 }
             }).appendTo("#" + modalId);
-            
+
             // Permettre la fermeture en cliquant sur l'overlay
-            $("#" + overlayId).click(function() {
-                $("#" + overlayId).fadeOut(300, function() { $(this).remove(); });
-                $("#" + modalId).fadeOut(300, function() { $(this).remove(); });
+            $("#" + overlayId).click(function () {
+                $("#" + overlayId).fadeOut(300, function () { $(this).remove(); });
+                $("#" + modalId).fadeOut(300, function () { $(this).remove(); });
             });
         }
     }
@@ -3438,12 +3416,12 @@ function panovisu(iNumPano) {
         }
         if (iNombreImageFond > 0) {
             for (i = 0; i < iNombreImageFond; i++) {
-                $("<div>", {id: "imageFond-" + i + "-" + iNumPano, class: "imgFond"}).appendTo("#panovisu-" + iNumPano);
+                $("<div>", { id: "imageFond-" + i + "-" + iNumPano, class: "imgFond" }).appendTo("#panovisu-" + iNumPano);
                 if (arrImagesFond[i].tailleX !== "") {
-                    $("<img>", {id: "imgFond-" + i + "-" + iNumPano, width: arrImagesFond[i].tailleX, height: arrImagesFond[i].tailleY, src: arrImagesFond[i].fichier, title: arrImagesFond[i].infobulle}).appendTo("#imageFond-" + i + "-" + iNumPano);
+                    $("<img>", { id: "imgFond-" + i + "-" + iNumPano, width: arrImagesFond[i].tailleX, height: arrImagesFond[i].tailleY, src: arrImagesFond[i].fichier, title: arrImagesFond[i].infobulle }).appendTo("#imageFond-" + i + "-" + iNumPano);
                 }
                 else {
-                    $("<img>", {id: "imgFond-" + i + "-" + iNumPano, src: arrImagesFond[i].fichier, title: arrImagesFond[i].infobulle}).appendTo("#imageFond-" + i + "-" + iNumPano);
+                    $("<img>", { id: "imgFond-" + i + "-" + iNumPano, src: arrImagesFond[i].fichier, title: arrImagesFond[i].infobulle }).appendTo("#imageFond-" + i + "-" + iNumPano);
                 }
                 $("#imgFond-" + i + "-" + iNumPano).css({
                     opacity: arrImagesFond[i].opacite,
@@ -3584,9 +3562,9 @@ function panovisu(iNumPano) {
         }
 
         (strBoutons === "oui") ? $("#boutons-" + iNumPano).show() : $("#boutons-" + iNumPano).hide();
-        (strDeplacements === "oui") ? $("#deplacement-" + iNumPano).css({display: "inline-block"}) : $("#deplacement-" + iNumPano).hide();
-        (strZooms === "oui") ? $("#zoom-" + iNumPano).css({display: "inline-block"}) : $("#zoom-" + iNumPano).hide();
-        (strOutils === "oui") ? $("#outils-" + iNumPano).css({display: "inline-block"}) : $("#outils-" + iNumPano).hide();
+        (strDeplacements === "oui") ? $("#deplacement-" + iNumPano).css({ display: "inline-block" }) : $("#deplacement-" + iNumPano).hide();
+        (strZooms === "oui") ? $("#zoom-" + iNumPano).css({ display: "inline-block" }) : $("#zoom-" + iNumPano).hide();
+        (strOutils === "oui") ? $("#outils-" + iNumPano).css({ display: "inline-block" }) : $("#outils-" + iNumPano).hide();
         (strFS === "oui") ? $("#pleinEcran-" + iNumPano).show() : $("#pleinEcran-" + iNumPano).hide();
         (strAutoRotation === "oui") ? $("#auto-" + iNumPano).show() : $("#auto-" + iNumPano).hide;
         (strModeSouris === "oui") ? $("#souris-" + iNumPano).show() : $("#souris-" + iNumPano).hide();
@@ -3620,8 +3598,7 @@ function panovisu(iNumPano) {
             if (strVignettesPosition === "bottom") {
                 afficheVignettesHorizontales();
             }
-            else
-            {
+            else {
                 afficheVignettesVerticales();
             }
             vignettesRentre();
@@ -3634,18 +3611,18 @@ function panovisu(iNumPano) {
                 padding: "10px",
                 top: "0px"
             });
-            $("<img>", {id: "planAig-" + iNumPano, class: "planAig", src: "panovisu/images/plan/aiguillePlan.png"}).appendTo("#plan-" + iNumPano);
+            $("<img>", { id: "planAig-" + iNumPano, class: "planAig", src: "panovisu/images/plan/aiguillePlan.png" }).appendTo("#plan-" + iNumPano);
             bousX = strPlanBoussolePosition.split(":")[1];
             bousY = strPlanBoussolePosition.split(":")[0];
             $("#planAig-" + iNumPano).css(bousY, parseInt(iPlanBoussoleY + 10) + "px");
             imageObj = new Image();
             imageObj.src = "panovisu/images/plan/aiguillePlan.png";
             $("#planAig-" + iNumPano).css(bousX, parseInt(iPlanBoussoleX + 10
-                    + imageObj.height / 2) + "px");
+                + imageObj.height / 2) + "px");
             $("#planAig-" + iNumPano).css({
                 transform: "rotate(" + planNord + "deg)"
             });
-            $("<img>", {id: "planImg-" + iNumPano, class: "planImg", src: strPlanImage, width: planLargeur}).appendTo("#plan-" + iNumPano);
+            $("<img>", { id: "planImg-" + iNumPano, class: "planImg", src: strPlanImage, width: planLargeur }).appendTo("#plan-" + iNumPano);
             if (strAfficheTitre === "oui") {
                 var positPlan = $("#info-" + iNumPano).height() + 10;
             }
@@ -3653,7 +3630,7 @@ function panovisu(iNumPano) {
                 var positPlan = 0;
             }
             $("#plan-" + iNumPano).css("top", positPlan);
-            $("<canvas>", {id: "radar-" + iNumPano, class: "radar"}).appendTo("#plan-" + iNumPano);
+            $("<canvas>", { id: "radar-" + iNumPano, class: "radar" }).appendTo("#plan-" + iNumPano);
             transformTitre = $("#planTitre-" + iNumPano).css("transform");
             $("#planTitre-" + iNumPano).css({
                 width: "160px",
@@ -3675,18 +3652,17 @@ function panovisu(iNumPano) {
                 planRentreGauche();
             } else {
                 $("#planTitre-" + iNumPano).css(strPlanPosition, $("#planImg-" + iNumPano).width() + 20 - $("#planTitre-" + iNumPano).width()
-                        - parseInt($("#planTitre-" + iNumPano).css("paddingLeft")) + "px");
+                    - parseInt($("#planTitre-" + iNumPano).css("paddingLeft")) + "px");
                 planRentreDroite();
             }
             $("#radar-" + iNumPano).attr("width", 2 * iRadarTaille);
             $("#radar-" + iNumPano).attr("height", 2 * iRadarTaille);
-            $("#radar-" + iNumPano).css({transformOrigin: "50% 50%"});
+            $("#radar-" + iNumPano).css({ transformOrigin: "50% 50%" });
             var angleRadar = fov / 180 * Math.PI / 2;
-            $("#radar-" + iNumPano).css({opacity: radarOpacite});
+            $("#radar-" + iNumPano).css({ opacity: radarOpacite });
             if (bRadarAffiche) {
                 var canvas = document.getElementById("radar-" + iNumPano);
-                if (canvas.getContext)
-                {
+                if (canvas.getContext) {
                     var ctx = canvas.getContext("2d");
                     ctx.fillStyle = strRadarCouleurFond;
                     ctx.strokeStyle = strRadarCouleurLigne;
@@ -3702,7 +3678,7 @@ function panovisu(iNumPano) {
             }
             for (var i = 0; i < arrPointsPlan.length; i++) {
                 if (arrPointsPlan[i].xml === "actif") {
-                    $("<img>", {id: "planPt-" + i + "-" + iNumPano, class: "planPoint actif", src: "panovisu/images/plan/pointActif.png", width: "12"}).appendTo("#plan-" + iNumPano);
+                    $("<img>", { id: "planPt-" + i + "-" + iNumPano, class: "planPoint actif", src: "panovisu/images/plan/pointActif.png", width: "12" }).appendTo("#plan-" + iNumPano);
                     if (bRadarAffiche) {
                         positXRadar = arrPointsPlan[i].positX - iRadarTaille + 10;
                         positYRadar = (arrPointsPlan[i].positY - iRadarTaille + 10);
@@ -3715,7 +3691,7 @@ function panovisu(iNumPano) {
 
                 }
                 else {
-                    $("<img>", {id: "planPt-" + i + "-" + iNumPano, class: "planPoint", title: arrPointsPlan[i].texte, src: "panovisu/images/plan/point.png", width: "12"}).appendTo("#plan-" + iNumPano);
+                    $("<img>", { id: "planPt-" + i + "-" + iNumPano, class: "planPoint", title: arrPointsPlan[i].texte, src: "panovisu/images/plan/point.png", width: "12" }).appendTo("#plan-" + iNumPano);
                 }
                 $("#planPt-" + i + "-" + iNumPano).css({
                     top: arrPointsPlan[i].positY - $("#planPt-" + i + "-" + iNumPano).width() / 2 + 10,
@@ -3736,7 +3712,7 @@ function panovisu(iNumPano) {
                     width: carteLargeur + "px",
                     height: carteHauteur + "px"
                 });
-                $("<div>", {id: "carteOL-" + iNumPano}).appendTo("#carte-" + iNumPano);
+                $("<div>", { id: "carteOL-" + iNumPano }).appendTo("#carte-" + iNumPano);
                 $("#carteOL-" + iNumPano).css({
                     padding: "0px",
                     width: carteLargeur + "px",
@@ -3755,9 +3731,11 @@ function panovisu(iNumPano) {
                 }
 
                 $("#carte-" + iNumPano).css("top", positCarte);
-                $("<img>", {id: "homeCarte-" + iNumPano,
+                $("<img>", {
+                    id: "homeCarte-" + iNumPano,
                     src: "panovisu/images/marqueursOL/home.png",
-                    style: "position : absolute;top :19px;left : 57px;width : 24px;height: 24px;z-index :1000000;cursor : pointer;"}
+                    style: "position : absolute;top :19px;left : 57px;width : 24px;height: 24px;z-index :1000000;cursor : pointer;"
+                }
                 ).appendTo("#carte-" + iNumPano);
                 transformTitre = $("#carteTitre-" + iNumPano).css("transform");
                 $("#carteTitre-" + iNumPano).css({
@@ -3784,7 +3762,7 @@ function panovisu(iNumPano) {
                     carteRentreGauche();
                 } else {
                     $("#carteTitre-" + iNumPano).css(strCartePosition, carteLargeur + 20 - $("#carteTitre-" + iNumPano).width()
-                            - parseInt($("#carteTitre-" + iNumPano).css("paddingLeft")) + "px");
+                        - parseInt($("#carteTitre-" + iNumPano).css("paddingLeft")) + "px");
                     $("#carteTitre-" + iNumPano).css({
                         borderBottomLeftRadius: "5px",
                         borderBottomRightRadius: "5px"
@@ -3812,9 +3790,9 @@ function panovisu(iNumPano) {
         if (bBtnAutoTour) {
             $("#btnVisiteAuto-" + iNumPano).html("");
             if (bAutoTour) {
-                $("<img>", {id: "imgBtnAutoTour-" + iNumPano, src: "panovisu/images/visiteAutomatique/pauseAutoTour.png", width: tailleBtnAutoTour + "px"}).appendTo("#btnVisiteAuto-" + iNumPano);
+                $("<img>", { id: "imgBtnAutoTour-" + iNumPano, src: "panovisu/images/visiteAutomatique/pauseAutoTour.png", width: tailleBtnAutoTour + "px" }).appendTo("#btnVisiteAuto-" + iNumPano);
             } else {
-                $("<img>", {id: "imgBtnAutoTour-" + iNumPano, src: "panovisu/images/visiteAutomatique/playAutoTour.png", width: tailleBtnAutoTour + "px"}).appendTo("#btnVisiteAuto-" + iNumPano);
+                $("<img>", { id: "imgBtnAutoTour-" + iNumPano, src: "panovisu/images/visiteAutomatique/playAutoTour.png", width: tailleBtnAutoTour + "px" }).appendTo("#btnVisiteAuto-" + iNumPano);
             }
             $("#btnVisiteAuto-" + iNumPano).show();
             switch (positBtnAutoTourX) {
@@ -3863,14 +3841,15 @@ function panovisu(iNumPano) {
         if (bAfficheInfo) {
             requestTimeout(function () {
                 $("#infoPanovisu-" + iNumPano).fadeOut(500, function () {
-                    $("#infoPanovisu-" + iNumPano).css({display: "none"});
+                    $("#infoPanovisu-" + iNumPano).css({ display: "none" });
                     bAfficheInfo = false;
                 });
             }, 5000);
         }
         if (bBtnAutoTour) {
             $("#btnVisiteAuto-" + iNumPano).html("");
-            $("<img>", {id: "imgBtnAutoTour-" + iNumPano,
+            $("<img>", {
+                id: "imgBtnAutoTour-" + iNumPano,
                 src: "panovisu/images/visiteAutomatique/pauseAutoTour.png",
                 alt: chainesTraduction[strLangage].arreteAutoTour,
                 title: chainesTraduction[strLangage].arreteAutoTour,
@@ -3901,7 +3880,8 @@ function panovisu(iNumPano) {
         arreteAutorotation();
         if (bBtnAutoTour) {
             $("#btnVisiteAuto-" + iNumPano).html("");
-            $("<img>", {id: "imgBtnAutoTour-" + iNumPano,
+            $("<img>", {
+                id: "imgBtnAutoTour-" + iNumPano,
                 src: "panovisu/images/visiteAutomatique/playAutoTour.png",
                 alt: chainesTraduction[strLangage].demarreAutoTour,
                 title: chainesTraduction[strLangage].demarreAutoTour,
@@ -3921,33 +3901,41 @@ function panovisu(iNumPano) {
             if (bAfficheMenuContextuel) {
                 if (bPrecedentSuivantMenuContextuel) {
                     arrItem[0] = {
-                        "suiv": {name: chainesTraduction[strLangage].panoSuivant, disabled: function (key, opt) {
+                        "suiv": {
+                            name: chainesTraduction[strLangage].panoSuivant, disabled: function (key, opt) {
                                 return bDisableSuivant;
-                            }},
-                        "prec": {name: chainesTraduction[strLangage].panoPrecedent, disabled: function (key, opt) {
+                            }
+                        },
+                        "prec": {
+                            name: chainesTraduction[strLangage].panoPrecedent, disabled: function (key, opt) {
                                 return bDisablePrecedent;
-                            }},
+                            }
+                        },
                         "sep1": "---------"
                     };
                 }
                 if (bPlaneteMenuContextuel) {
                     arrItem[1] = {
-                        "little": {name: chainesTraduction[strLangage].petitePlanete, disabled: function (key, opt) {
+                        "little": {
+                            name: chainesTraduction[strLangage].petitePlanete, disabled: function (key, opt) {
                                 return bLittleDisabled;
-                            }},
-                        "normal": {name: chainesTraduction[strLangage].vueNormale, disabled: function (key, opt) {
+                            }
+                        },
+                        "normal": {
+                            name: chainesTraduction[strLangage].vueNormale, disabled: function (key, opt) {
                                 return bNormalDisbled;
-                            }},
+                            }
+                        },
                         "sep2": "---------"
                     };
                 }
                 if (bMenuPersonnalise1) {
                     arrItem[2] = {
-                        "pers1": {name: strLibelleMenuContextuel1}
+                        "pers1": { name: strLibelleMenuContextuel1 }
                     };
                     if (bMenuPersonnalise2) {
                         arrItem[3] = {
-                            "pers2": {name: strLibelleMenuContextuel2}
+                            "pers2": { name: strLibelleMenuContextuel2 }
                         };
                     }
                     arrItem[4] = {
@@ -3955,25 +3943,29 @@ function panovisu(iNumPano) {
                     };
                 }
                 arrItem[5] = {
-                    "masqueTout": {name: function (key, opt) {
+                    "masqueTout": {
+                        name: function (key, opt) {
                             if (masqueTout === "")
                                 masqueTout = chainesTraduction[strLangage].masqueElements;
                             return masqueTout;
-                        }},
-                    "visiteAuto": {name: function (key, opt) {
+                        }
+                    },
+                    "visiteAuto": {
+                        name: function (key, opt) {
                             if (bAutoTour) {
                                 strVisiteAuto = chainesTraduction[strLangage].arreteAutoTour;
                             } else {
                                 strVisiteAuto = chainesTraduction[strLangage].demarreAutoTour;
                             }
                             return strVisiteAuto;
-                        }},
+                        }
+                    },
                     "sep4": "---------"
                 };
             }
             arrItem[6] = {
-                "lm360": {name: chainesTraduction[strLangage].panoVisuSite},
-                "apropos": {name: chainesTraduction[strLangage].aPropos}
+                "lm360": { name: chainesTraduction[strLangage].panoVisuSite },
+                "apropos": { name: chainesTraduction[strLangage].aPropos }
             };
             items = $.extend(arrItem[0], arrItem[1], arrItem[2], arrItem[3], arrItem[4], arrItem[5], arrItem[6]);
             $.contextMenu({
@@ -3981,10 +3973,9 @@ function panovisu(iNumPano) {
                 appendTo: "#container-" + iNumPano,
                 zIndex: 15000,
                 build: function ($trigger, e) {
-                    return{
+                    return {
                         className: 'data-title',
-                        position: function (opt, x, y)
-                        {
+                        position: function (opt, x, y) {
                             opt.$menu.css({
                                 top: y - $("#container-" + iNumPano).offset().top,
                                 left: x - $("#container-" + iNumPano).offset().left
@@ -4034,20 +4025,19 @@ function panovisu(iNumPano) {
                                     //});
                                     break;
                                 case "apropos":
-                                    if (bAfficheInfo)
-                                    {
+                                    if (bAfficheInfo) {
                                         $("#infoPanovisu-" + iNumPano).fadeOut(1000, function () {
-                                            $("#infoPanovisu-" + iNumPano).css({display: "none"});
+                                            $("#infoPanovisu-" + iNumPano).css({ display: "none" });
                                             bAfficheInfo = false;
                                         });
                                     }
                                     else {
                                         panoInfo = chainesTraduction[strLangage].fenetreInfo;
-                                        $("#infoPanovisu-" + iNumPano).css({width: "450px", height: "190px"});
+                                        $("#infoPanovisu-" + iNumPano).css({ width: "450px", height: "190px" });
                                         $("#infoPanovisu-" + iNumPano).html(panoInfo);
                                         posGauche = (pano.width() - $("#infoPanovisu-" + iNumPano).width()) / 2;
                                         posHaut = (pano.height() - $("#infoPanovisu-" + iNumPano).height()) / 2;
-                                        $("#infoPanovisu-" + iNumPano).css({top: posHaut + "px", left: posGauche + "px"});
+                                        $("#infoPanovisu-" + iNumPano).css({ top: posHaut + "px", left: posGauche + "px" });
                                         $("#infoPanovisu-" + iNumPano).css({
                                             backgroundColor: "#000",
                                             border: "1px solid white",
@@ -4104,6 +4094,7 @@ function panovisu(iNumPano) {
             loader.load(nomimage + ".jpg", function (texture) {
                 iNbTextures++;
                 textures[iNbTextures] = texture;
+                textures[iNbTextures].colorSpace = THREE.SRGBColorSpace;
                 textures[iNbTextures].minFilter = THREE.LinearFilter;
                 if (texture.image.width <= maxTextureSize) {
                     var img = nomimage.split("/")[2];
@@ -4111,23 +4102,31 @@ function panovisu(iNumPano) {
                     if (img === img2) {
                         if (bWebGL) {
                             iNbGeometries++;
-                            geometries[iNbGeometries] = new THREE.SphereGeometry(405 - niveau, 100, 50);
+                            // MIGRATION THREE.JS R160: Rayon ajusté (avant: 405-niveau puis *multiplyScalar(550-niveau))
+                            geometries[iNbGeometries] = new THREE.SphereGeometry(550 - niveau, 100, 50);
+                            geometries[iNbGeometries].scale(- 1, 1, 1);
                         }
                         else {
                             iNbGeometries++;
-                            geometries[iNbGeometries] = new THREE.SphereGeometry(405 - niveau, 50, 25);
+                            // MIGRATION THREE.JS R160: Rayon ajusté (avant: 405-niveau puis *multiplyScalar(550-niveau))
+                            geometries[iNbGeometries] = new THREE.SphereGeometry(550 - niveau, 50, 25);
+                            geometries[iNbGeometries].scale(- 1, 1, 1);
                         }
                         iNbMateriaux++;
-                        materiaux[iNbMateriaux] = new THREE.MeshBasicMaterial({map: texture, overdraw: true});
+                        // MIGRATION THREE.JS R160: SRGBColorSpace gère correctement l'exposition
+                        materiaux[iNbMateriaux] = new THREE.MeshBasicMaterial({ 
+                            map: texture
+                        });
                         iNbMeshes++;
                         meshes[iNbMeshes] = new THREE.Mesh(geometries[iNbGeometries], materiaux[iNbMateriaux]);
-                        meshes[iNbMeshes].scale.x = -1;
+                        //meshes[iNbMeshes].scale.x = -1;
                         scene.add(meshes[iNbMeshes]);
-                        for (var i = 0, l = meshes[iNbMeshes].geometry.vertices.length; i < l; i++) {
-                            var vertex = meshes[iNbMeshes].geometry.vertices[ i ];
-                            vertex.normalize();
-                            vertex.multiplyScalar(550 - niveau);
-                        }
+                        // MIGRATION THREE.JS R160: geometry.vertices supprimé (BufferGeometry)
+                        // for (var i = 0, l = meshes[iNbMeshes].geometry.vertices.length; i < l; i++) {
+                        //     var vertex = meshes[iNbMeshes].geometry.vertices[ i ];
+                        //     vertex.normalize();
+                        //     vertex.multiplyScalar(550 - niveau);
+                        // }
                         niveau += 1;
                         afficheNiveauSphere(image, niveau);
                         affiche();
@@ -4141,32 +4140,39 @@ function panovisu(iNumPano) {
             loader.load(nomimage + ".jpg", function (texture) {
                 iNbTextures++;
                 textures[iNbTextures] = texture;
+                textures[iNbTextures].colorSpace = THREE.SRGBColorSpace;
                 textures[iNbTextures].minFilter = THREE.LinearFilter;
                 if (texture.image.width <= maxTextureSize) {
                     var img = nomimage.split("/")[1];
                     var img2 = strPanoImage.split("/")[1];
-                    if (img === img2)
-                    {
+                    if (img === img2) {
                         if (bWebGL) {
                             iNbGeometries++;
-                            geometries[iNbGeometries] = new THREE.SphereGeometry(390, 100, 50);
+                            // MIGRATION THREE.JS R160: Rayon ajusté à 545 (avant: 390 puis *multiplyScalar(545))
+                            geometries[iNbGeometries] = new THREE.SphereGeometry(545, 100, 50);
+                            geometries[iNbGeometries].scale(- 1, 1, 1);
                         }
                         else {
                             iNbGeometries++;
-                            geometries[iNbGeometries] = new THREE.SphereGeometry(390, 50, 25);
+                            // MIGRATION THREE.JS R160: Rayon ajusté à 545 (avant: 390 puis *multiplyScalar(545))
+                            geometries[iNbGeometries] = new THREE.SphereGeometry(545, 50, 25);
+                            geometries[iNbGeometries].scale(- 1, 1, 1);
                         }
                         iNbMateriaux++;
-                        materiaux[iNbMateriaux] = new THREE.MeshBasicMaterial({map: texture, overdraw: true});
+                        // MIGRATION THREE.JS R160: SRGBColorSpace gère correctement l'exposition
+                        materiaux[iNbMateriaux] = new THREE.MeshBasicMaterial({ 
+                            map: texture
+                        });
                         iNbMeshes++;
                         meshes[iNbMeshes] = new THREE.Mesh(geometries[iNbGeometries], materiaux[iNbMateriaux]);
-                        meshes[iNbMeshes].scale.x = -1;
+                        //meshes[iNbMeshes].scale.x = -1;
                         scene.add(meshes[iNbMeshes]);
-                        for (var i = 0, l = meshes[iNbMeshes].geometry.vertices.length; i < l; i++) {
-
-                            var vertex = meshes[iNbMeshes].geometry.vertices[ i ];
-                            vertex.normalize();
-                            vertex.multiplyScalar(545);
-                        }
+                        // MIGRATION THREE.JS R160: geometry.vertices supprimé (BufferGeometry)
+                        // for (var i = 0, l = meshes[iNbMeshes].geometry.vertices.length; i < l; i++) {
+                        //     var vertex = meshes[iNbMeshes].geometry.vertices[ i ];
+                        //     vertex.normalize();
+                        //     vertex.multiplyScalar(545);
+                        // }
                         affiche();
                     }
                 }
@@ -4284,7 +4290,7 @@ function panovisu(iNumPano) {
         if (bAfficheInfo) {
             requestTimeout(function () {
                 $("#infoPanovisu-" + iNumPano).fadeOut(500, function () {
-                    $("#infoPanovisu-" + iNumPano).css({display: "none"});
+                    $("#infoPanovisu-" + iNumPano).css({ display: "none" });
                     bAfficheInfo = false;
                 });
             }, 4000);
@@ -4321,18 +4327,25 @@ function panovisu(iNumPano) {
         iNbGeometries = 0;
         camera = new THREE.PerspectiveCamera(fov, pano.width() / pano.height(), 1, 1100);
         scene = new THREE.Scene();
+        const color = 0xFFFFFF;
+        const intensity = 0.2;
+        const light = new THREE.AmbientLight(color, intensity);
+        scene.add(light);
         if (strMultiReso === "oui") {
             loader = new THREE.TextureLoader();
             var nomimage = strPanoImage.split("/")[0] + "/niveau0/" + strPanoImage.split("/")[1];
             loader.load(nomimage + ".jpg", function (texture) {
                 iNbTextures++;
                 textures[iNbTextures] = texture;
+                textures[iNbTextures].colorSpace = THREE.SRGBColorSpace;
                 textures[iNbTextures].minFilter = THREE.LinearFilter;
-                if (!bReloaded)
-                {
-                    if (supportWebgl())
-                    {
+                if (!bReloaded) {
+                    if (supportWebgl()) {
                         renderer = new THREE.WebGLRenderer();
+                        // MIGRATION THREE.JS R160: No Tone Mapping pour rendu brut, couleurs originales
+                        // Avec SRGBColorSpace, les couleurs sont déjà correctement interprétées
+                        renderer.toneMapping = THREE.NoToneMapping;
+                        renderer.toneMappingExposure = 1.0;
                     }
                     else {
                         if (supportCanvas()) {
@@ -4346,14 +4359,18 @@ function panovisu(iNumPano) {
                 }
                 if (bWebGL) {
                     iNbGeometries++;
-                    geometries[iNbGeometries] = new THREE.SphereGeometry(405, 100, 50);
+                    // MIGRATION THREE.JS R160: Rayon ajusté à 550 (avant fait via vertex.multiplyScalar)
+                    geometries[iNbGeometries] = new THREE.SphereGeometry(550, 100, 50);
+                    geometries[iNbGeometries].scale(- 1, 1, 1);
                 }
                 else {
                     iNbGeometries++;
-                    geometries[iNbGeometries] = new THREE.SphereGeometry(405, 50, 25);
+                    // MIGRATION THREE.JS R160: Rayon ajusté à 550 (avant fait via vertex.multiplyScalar)
+                    geometries[iNbGeometries] = new THREE.SphereGeometry(550, 50, 25);
+                    geometries[iNbGeometries].scale(- 1, 1, 1);
                 }
                 if (bWebGL) {
-                    var webgl = renderer.context;
+                    var webgl = renderer.getContext();
                     maxTextureSize = webgl.getParameter(webgl.MAX_TEXTURE_SIZE);
                     if (estTactile()) {
                         maxTextureSize = 4096;
@@ -4363,22 +4380,25 @@ function panovisu(iNumPano) {
                     maxTextureSize = 4096;
                 }
                 iNbMateriaux++;
-                materiaux[iNbMateriaux] = new THREE.MeshBasicMaterial({map: texture, overdraw: true});
+                // MIGRATION THREE.JS R160: SRGBColorSpace gère correctement l'exposition
+                materiaux[iNbMateriaux] = new THREE.MeshBasicMaterial({ 
+                    map: texture
+                });
                 iNbMeshes++;
                 meshes[iNbMeshes] = new THREE.Mesh(geometries[iNbGeometries], materiaux[iNbMateriaux]);
-                meshes[iNbMeshes].scale.x = -1;
+                //meshes[iNbMeshes].scale.x = -1;
                 scene.add(meshes[iNbMeshes]);
-                for (var i = 0, l = meshes[iNbMeshes].geometry.vertices.length; i < l; i++) {
-
-                    var vertex = meshes[iNbMeshes].geometry.vertices[ i ];
-                    vertex.normalize();
-                    vertex.multiplyScalar(550);
-                }
+                // MIGRATION THREE.JS R160: geometry.vertices n'existe plus avec BufferGeometry
+                // Ce code de modification des vertices n'est plus nécessaire avec les géométries modernes
+                // for (var i = 0, l = meshes[iNbMeshes].geometry.vertices.length; i < l; i++) {
+                //     var vertex = meshes[iNbMeshes].geometry.vertices[ i ];
+                //     vertex.normalize();
+                //     vertex.multiplyScalar(550);
+                // }
                 afficheNiveauSphere(strPanoImage, 1);
                 renderer.setSize(pano.width(), pano.height());
                 container.append(renderer.domElement);
-                for (var i = 0; i < arrPointsInteret.length; i++)
-                {
+                for (var i = 0; i < arrPointsInteret.length; i++) {
                     creeHotspot(i);
                 }
                 timers = setInterval(function () {
@@ -4417,14 +4437,17 @@ function panovisu(iNumPano) {
             loader.load(strPanoImage + ".jpg", function (texture) {
                 iNbTextures++;
                 textures[iNbTextures] = texture;
+                textures[iNbTextures].colorSpace = THREE.SRGBColorSpace;
                 textures[iNbTextures].minFilter = THREE.LinearFilter;
-                if (!bReloaded)
-                {
-                    if (supportWebgl())
-                    {
+                if (!bReloaded) {
+                    if (supportWebgl()) {
                         renderer = new THREE.WebGLRenderer({
                             preserveDrawingBuffer: true
                         });
+                        // MIGRATION THREE.JS R160: No Tone Mapping pour rendu brut, couleurs originales
+                        // Avec SRGBColorSpace, les couleurs sont déjà correctement interprétées
+                        renderer.toneMapping = THREE.NoToneMapping;
+                        renderer.toneMappingExposure = 1.0;
                     }
                     else {
                         if (supportCanvas()) {
@@ -4438,32 +4461,38 @@ function panovisu(iNumPano) {
                 }
                 if (bWebGL) {
                     iNbGeometries++;
-                    geometries[iNbGeometries] = new THREE.SphereGeometry(405, 100, 50);
-                    var webgl = renderer.context;
+                    // MIGRATION THREE.JS R160: Rayon ajusté à 550 (avant: 405 puis *multiplyScalar(550))
+                    geometries[iNbGeometries] = new THREE.SphereGeometry(550, 100, 50);
+                    geometries[iNbGeometries].scale(- 1, 1, 1);
+                    var webgl = renderer.getContext();
                     maxTextureSize = webgl.getParameter(webgl.MAX_TEXTURE_SIZE);
                 }
                 else {
                     iNbGeometries++;
-                    geometries[iNbGeometries] = new THREE.SphereGeometry(405, 50, 25);
+                    // MIGRATION THREE.JS R160: Rayon ajusté à 550 (avant: 405 puis *multiplyScalar(550))
+                    geometries[iNbGeometries] = new THREE.SphereGeometry(550, 50, 25);
+                    geometries[iNbGeometries].scale(- 1, 1, 1);
                     maxTextureSize = 4096;
                 }
 
                 iNbMateriaux++;
-                materiaux[iNbMateriaux] = new THREE.MeshBasicMaterial({map: texture, overdraw: true});
+                // MIGRATION THREE.JS R160: SRGBColorSpace gère correctement l'exposition
+                materiaux[iNbMateriaux] = new THREE.MeshBasicMaterial({ 
+                    map: texture
+                });
                 iNbMeshes++;
                 meshes[iNbMeshes] = new THREE.Mesh(geometries[iNbGeometries], materiaux[iNbMateriaux]);
-                meshes[iNbMeshes].scale.x = -1;
+                //meshes[iNbMeshes].scale.x = -1;
                 scene.add(meshes[iNbMeshes]);
-                for (var i = 0, l = meshes[iNbMeshes].geometry.vertices.length; i < l; i++) {
-
-                    var vertex = meshes[iNbMeshes].geometry.vertices[ i ];
-                    vertex.normalize();
-                    vertex.multiplyScalar(550);
-                }
+                // MIGRATION THREE.JS R160: geometry.vertices supprimé (BufferGeometry)
+                // for (var i = 0, l = meshes[iNbMeshes].geometry.vertices.length; i < l; i++) {
+                //     var vertex = meshes[iNbMeshes].geometry.vertices[ i ];
+                //     vertex.normalize();
+                //     vertex.multiplyScalar(550);
+                // }
                 renderer.setSize(pano.width(), pano.height());
                 container.append(renderer.domElement);
-                for (var i = 0; i < arrPointsInteret.length; i++)
-                {
+                for (var i = 0; i < arrPointsInteret.length; i++) {
                     creeHotspot(i);
                 }
                 timers = setInterval(function () {
@@ -4506,9 +4535,13 @@ function panovisu(iNumPano) {
         iNbTextures++;
         var iText = iNbTextures;
         textures[iText] = new THREE.Texture(texture_placeholder);
+        textures[iText].colorSpace = THREE.SRGBColorSpace;
         textures[iText].minFilter = THREE.LinearFilter;
         iNbMateriaux++;
-        materiaux[iNbMateriaux] = new THREE.MeshBasicMaterial({map: textures[iText], overdraw: true});
+        // MIGRATION THREE.JS R160: SRGBColorSpace gère correctement l'exposition
+        materiaux[iNbMateriaux] = new THREE.MeshBasicMaterial({ 
+            map: textures[iText]
+        });
         var image = new Image();
         image.onload = function () {
             var img = path.split("/")[2].split("_")[0];
@@ -4517,18 +4550,15 @@ function panovisu(iNumPano) {
                 textures[iText].image = this;
                 textures[iText].needsUpdate = true;
                 nbPanoCharges += 1;
-                if (nbPanoCharges < 6)
-                {
+                if (nbPanoCharges < 6) {
                     $(".panovisuCharge").html(nbPanoCharges + "/6");
                 }
-                else
-                {
+                else {
                     $(".panovisuCharge").html("&nbsp;");
                     afficheBarre(pano.width(), pano.height());
                     afficheInfoTitre();
                     affiche();
-                    if (strMultiReso === "oui" && niveau < iNombreNiveaux - 1)
-                    {
+                    if (strMultiReso === "oui" && niveau < iNombreNiveaux - 1) {
                         nbPanoCharges = 0;
                         niveau += 1;
                         var nomimage = strPanoImage.split("/")[0] + "/niveau" + niveau + "/" + strPanoImage.split("/")[1];
@@ -4541,20 +4571,23 @@ function panovisu(iNumPano) {
                             loadTexture1(nomimage + '_b.jpg', niveau)  // derriere z-
                         ];
                         iNbGeometries++;
-                        geometries[iNbGeometries] = new THREE.BoxGeometry(405 + niveau, 405 + niveau, 405 + niveau, 5, 5, 5);
+                        geometries[iNbGeometries] = new THREE.BoxGeometry(405 - niveau, 405 - niveau, 405 - niveau, 5, 5, 5);
+                        geometries[iNbGeometries].scale(- 1, 1, 1);
                         if (iNbMeshes > 1) {
                             eff = iNbMeshes - 1;
                             meshes[eff].visible = false;
                         }
                         iNbMeshes++;
-                        meshes[iNbMeshes] = new THREE.Mesh(geometries[iNbGeometries], new THREE.MeshFaceMaterial(materials1));
-                        meshes[iNbMeshes].scale.x = -1;
+                        meshes[iNbMeshes] = new THREE.Mesh(geometries[iNbGeometries], materials1);
+
+                        //meshes[iNbMeshes].scale.x = -1;
                         scene.add(meshes[iNbMeshes]);
-                        for (var i = 0, l = meshes[iNbMeshes].geometry.vertices.length; i < l; i++) {
-                            var vertex = meshes[iNbMeshes].geometry.vertices[ i ];
-                            vertex.normalize();
-                            vertex.multiplyScalar(550 - niveau);
-                        }
+                        // MIGRATION THREE.JS R160: geometry.vertices supprimé (BufferGeometry)
+                        // for (var i = 0, l = meshes[iNbMeshes].geometry.vertices.length; i < l; i++) {
+                        //     var vertex = meshes[iNbMeshes].geometry.vertices[ i ];
+                        //     vertex.normalize();
+                        //     vertex.multiplyScalar(550 - niveau);
+                        // }
                     }
                     else {
                         nbPanoCharges = 0;
@@ -4568,19 +4601,21 @@ function panovisu(iNumPano) {
                         ];
                         iNbGeometries++;
                         geometries[iNbGeometries] = new THREE.BoxGeometry(415, 415, 415, 40, 40, 40);
+                        geometries[iNbGeometries].scale(- 1, 1, 1);
                         if (iNbMeshes > 1) {
                             eff = iNbMeshes - 1;
                             meshes[eff].visible = false;
                         }
                         iNbMeshes++;
-                        meshes[iNbMeshes] = new THREE.Mesh(geometries[iNbGeometries], new THREE.MeshFaceMaterial(materials));
-                        meshes[iNbMeshes].scale.x = -1;
+                        meshes[iNbMeshes] = new THREE.Mesh(geometries[iNbGeometries], materials);
+                        //meshes[iNbMeshes].scale.x = -1;
                         scene.add(meshes[iNbMeshes]);
-                        for (var i = 0, l = meshes[iNbMeshes].geometry.vertices.length; i < l; i++) {
-                            var vertex = meshes[iNbMeshes].geometry.vertices[ i ];
-                            vertex.normalize();
-                            vertex.multiplyScalar(550 - niveau);
-                        }
+                        // MIGRATION THREE.JS R160: geometry.vertices supprimé (BufferGeometry)
+                        // for (var i = 0, l = meshes[iNbMeshes].geometry.vertices.length; i < l; i++) {
+                        //     var vertex = meshes[iNbMeshes].geometry.vertices[ i ];
+                        //     vertex.normalize();
+                        //     vertex.multiplyScalar(550 - niveau);
+                        // }
                     }
 
                 }
@@ -4605,9 +4640,13 @@ function panovisu(iNumPano) {
         iNbTextures++;
         var iText = iNbTextures;
         textures[iText] = new THREE.Texture(texture_placeholder);
+        textures[iText].colorSpace = THREE.SRGBColorSpace;
         textures[iText].minFilter = THREE.LinearFilter;
         iNbMateriaux++;
-        materiaux[iNbMateriaux] = new THREE.MeshBasicMaterial({map: textures[iText], overdraw: true});
+        // MIGRATION THREE.JS R160: SRGBColorSpace gère correctement l'exposition
+        materiaux[iNbMateriaux] = new THREE.MeshBasicMaterial({ 
+            map: textures[iText]
+        });
 
         var image = new Image();
         image.onload = function () {
@@ -4617,8 +4656,7 @@ function panovisu(iNumPano) {
             nbPanoCharges += 1;
             if (nbPanoCharges < 6)
                 $(".panovisuCharge").html(nbPanoCharges + "/6");
-            else
-            {
+            else {
                 if (strMultiReso === "oui") {
                     if (iNbMeshes > 1) {
                         eff = iNbMeshes - 1;
@@ -4669,18 +4707,24 @@ function panovisu(iNumPano) {
         $(".panovisuCharge").html("0/6");
         camera = new THREE.PerspectiveCamera(fov, pano.width() / pano.height(), 1, 1100);
         scene = new THREE.Scene();
-        bWebGL = false;
-        if (!bReloaded)
-        {
+        const color = 0xFFFFFF;
+        const intensity = 0.2;
+        const light = new THREE.AmbientLight(color, intensity);
+        scene.add(light);
+        bWebGL = true;
+        if (!bReloaded) {
             texture_placeholder = document.createElement('canvas');
             texture_placeholder.width = 128;
             texture_placeholder.height = 128;
             var context = texture_placeholder.getContext('2d');
             context.fillStyle = 'rgb( 128, 128, 128 )';
             context.fillRect(0, 0, texture_placeholder.width, texture_placeholder.height);
-            if (supportWebgl())
-            {
+            if (supportWebgl()) {
                 renderer = new THREE.WebGLRenderer();
+                // MIGRATION THREE.JS R160: No Tone Mapping pour rendu brut, couleurs originales
+                // Avec SRGBColorSpace, les couleurs sont déjà correctement interprétées
+                renderer.toneMapping = THREE.NoToneMapping;
+                renderer.toneMappingExposure = 1.0;
                 bWebGL = true;
             }
             else {
@@ -4693,7 +4737,7 @@ function panovisu(iNumPano) {
             }
         }
         if (bWebGL) {
-            var webgl = renderer.context;
+            var webgl = renderer.getContext();
             maxTextureSize = webgl.getParameter(webgl.MAX_TEXTURE_SIZE);
             if (estTactile()) {
                 maxTextureSize = 4096;
@@ -4714,8 +4758,9 @@ function panovisu(iNumPano) {
             ];
             iNbGeometries++;
             geometries[iNbGeometries] = new THREE.BoxGeometry(405, 405, 405, 5, 5, 5);
+            geometries[iNbGeometries].scale(- 1, 1, 1);
             iNbMeshes++;
-            meshes[iNbMeshes] = new THREE.Mesh(geometries[iNbGeometries], new THREE.MeshFaceMaterial(materials));
+            meshes[iNbMeshes] = new THREE.Mesh(geometries[iNbGeometries], materials);
         }
         else {
             nbPanoCharges = 0;
@@ -4729,22 +4774,23 @@ function panovisu(iNumPano) {
             ];
             iNbGeometries++;
             geometries[iNbGeometries] = new THREE.BoxGeometry(405, 405, 405, 40, 40, 40);
+            geometries[iNbGeometries].scale(- 1, 1, 1);
             iNbMeshes++;
-            meshes[iNbMeshes] = new THREE.Mesh(geometries[iNbGeometries], new THREE.MeshFaceMaterial(materials));
+            meshes[iNbMeshes] = new THREE.Mesh(geometries[iNbGeometries], materials);
         }
-        meshes[iNbMeshes].scale.x = -1;
+        //meshes[iNbMeshes].scale.x = -1;
         scene.add(meshes[iNbMeshes]);
-        for (var i = 0, l = meshes[iNbMeshes].geometry.vertices.length; i < l; i++) {
-            var vertex = meshes[iNbMeshes].geometry.vertices[ i ];
-            vertex.normalize();
-            vertex.multiplyScalar(550);
-        }
+        // MIGRATION THREE.JS R160: geometry.vertices supprimé (BufferGeometry)
+        // for (var i = 0, l = meshes[iNbMeshes].geometry.vertices.length; i < l; i++) {
+        //     var vertex = meshes[iNbMeshes].geometry.vertices[ i ];
+        //     vertex.normalize();
+        //     vertex.multiplyScalar(550);
+        // }
 
         renderer.setSize(pano.width(), pano.height());
         container.append(renderer.domElement);
         requestTimeout(function () {
-            for (var i = 0; i < arrPointsInteret.length; i++)
-            {
+            for (var i = 0; i < arrPointsInteret.length; i++) {
                 creeHotspot(i);
             }
             changeTaille();
@@ -4829,40 +4875,40 @@ function panovisu(iNumPano) {
     function positionImagesFond() {
         for (i = 0; i < iNombreImageFond; i++) {
             switch (arrImagesFond[i].posX) {
-                case "left" :
+                case "left":
                     if (!(bVignettesRentre) && strVignettesAffiche === "oui" && strVignettesPosition === "left") {
                         var posit = parseInt(arrImagesFond[i].offsetX) + Math.round(vignettesTailleImage) + 10;
                         $("#imageFond-" + i + "-" + iNumPano).css(
-                                arrImagesFond[i].posX, posit + "px"
-                                );
+                            arrImagesFond[i].posX, posit + "px"
+                        );
                     }
                     else {
                         $("#imageFond-" + i + "-" + iNumPano).css(
-                                arrImagesFond[i].posX, parseInt(arrImagesFond[i].offsetX) + "px"
-                                );
+                            arrImagesFond[i].posX, parseInt(arrImagesFond[i].offsetX) + "px"
+                        );
                     }
                     $("#imgFond-" + i + "-" + iNumPano).css(
-                            arrImagesFond[i].posX, "0px"
-                            );
+                        arrImagesFond[i].posX, "0px"
+                    );
 
                     break;
-                case "right" :
+                case "right":
                     if (!(bVignettesRentre) && strVignettesAffiche === "oui" && strVignettesPosition === "right") {
                         var posit = parseInt(arrImagesFond[i].offsetX) + Math.round(vignettesTailleImage) + 10;
                         $("#imageFond-" + i + "-" + iNumPano).css(
-                                arrImagesFond[i].posX, posit + "px"
-                                );
+                            arrImagesFond[i].posX, posit + "px"
+                        );
                     }
                     else {
                         $("#imageFond-" + i + "-" + iNumPano).css(
-                                arrImagesFond[i].posX, arrImagesFond[i].offsetX + "px"
-                                );
+                            arrImagesFond[i].posX, arrImagesFond[i].offsetX + "px"
+                        );
                     }
                     $("#imgFond-" + i + "-" + iNumPano).css(
-                            arrImagesFond[i].posX, "0px"
-                            );
+                        arrImagesFond[i].posX, "0px"
+                    );
                     break;
-                case "center" :
+                case "center":
                     var positX = ($("#panovisu-" + iNumPano).width() - $("#imgFond-" + i + "-" + iNumPano).width()) / 2 + parseInt(arrImagesFond[i].offsetX);
                     $("#imageFond-" + i + "-" + iNumPano).css("left", positX + "px");
                     break
@@ -4871,17 +4917,17 @@ function panovisu(iNumPano) {
                 if (!(bVignettesRentre) && strVignettesAffiche === "oui" && strVignettesPosition === "bottom" && arrImagesFond[i].posY === "bottom") {
                     var posit = parseInt(arrImagesFond[i].offsetY) + Math.round(vignettesTailleImage / 2) + 10;
                     $("#imageFond-" + i + "-" + iNumPano).css(
-                            arrImagesFond[i].posY, posit + "px"
-                            );
+                        arrImagesFond[i].posY, posit + "px"
+                    );
                 }
                 else {
                     $("#imageFond-" + i + "-" + iNumPano).css(
-                            arrImagesFond[i].posY, arrImagesFond[i].offsetY + "px"
-                            );
+                        arrImagesFond[i].posY, arrImagesFond[i].offsetY + "px"
+                    );
                 }
                 $("#imgFond-" + i + "-" + iNumPano).css(
-                        arrImagesFond[i].posY, "0px"
-                        );
+                    arrImagesFond[i].posY, "0px"
+                );
 
             }
             else {
@@ -4980,8 +5026,7 @@ function panovisu(iNumPano) {
                     $("#gaucheVignettes-" + iNumPano).show();
                     $("#droiteVignettes-" + iNumPano).show();
                 }
-                else
-                {
+                else {
                     $("#gaucheVignettes-" + iNumPano).hide();
                     $("#droiteVignettes-" + iNumPano).hide();
                 }
@@ -5017,8 +5062,7 @@ function panovisu(iNumPano) {
                     topVignette = "17px";
                     dHauteur = 3;
                 }
-                else
-                {
+                else {
                     $("#hautVignettes-" + iNumPano).hide();
                     $("#basVignettes-" + iNumPano).hide();
                     topVignette = "4px";
@@ -5062,7 +5106,7 @@ function panovisu(iNumPano) {
             timerAutorotation = timer2;
         if (bAutoTour) {
             switch (strAutoTourType) {
-                case "tours" :
+                case "tours":
                     if (longitudeDebutRotation > autoTourLimite * 360)
                         bFinPano = true;
                     break;
@@ -5105,28 +5149,50 @@ function panovisu(iNumPano) {
      * @returns {undefined}
      */
     function creeBarreNavigation() {
-        $("<div>", {id: "xmoins-" + iNumPano, class: "xmoins", title: chainesTraduction[strLangage].gauche,
-            style: "background-color : " + strCouleur + ";border : 1px solid " + strBordure + ";"}).appendTo("#deplacement-" + iNumPano);
-        $("<div>", {id: "ymoins-" + iNumPano, class: "ymoins", title: chainesTraduction[strLangage].haut,
-            style: "background-color : " + strCouleur + ";border : 1px solid " + strBordure + ";"}).appendTo("#deplacement-" + iNumPano);
-        $("<div>", {id: "yplus-" + iNumPano, class: "yplus", title: chainesTraduction[strLangage].bas,
-            style: "background-color : " + strCouleur + ";border : 1px solid " + strBordure + ";"}).appendTo("#deplacement-" + iNumPano);
-        $("<div>", {id: "xplus-" + iNumPano, class: "xplus", title: chainesTraduction[strLangage].droite,
-            style: "background-color : " + strCouleur + ";border : 1px solid " + strBordure + ";"}).appendTo("#deplacement-" + iNumPano);
-        $("<div>", {id: "zoomPlus-" + iNumPano, class: "zoomPlus", title: chainesTraduction[strLangage].zoomPlus,
-            style: "background-color : " + strCouleur + ";border : 1px solid " + strBordure + ";"}).appendTo("#zoom-" + iNumPano);
-        $("<div>", {id: "zoomMoins-" + iNumPano, class: "zoomMoins", title: chainesTraduction[strLangage].zoomMoins,
-            style: "background-color : " + strCouleur + ";border : 1px solid " + strBordure + ";"}).appendTo("#zoom-" + iNumPano);
-        $("<div>", {id: "pleinEcran-" + iNumPano, class: "pleinEcran", title: chainesTraduction[strLangage].pleinEcran,
-            style: "background-color : " + strCouleur + ";border : 1px solid " + strBordure + ";"}).appendTo("#outils-" + iNumPano);
-        $("<div>", {id: "souris-" + iNumPano, class: "souris", title: chainesTraduction[strLangage].souris,
-            style: "background-color : " + strCouleur + ";border : 1px solid " + strBordure + ";"}).appendTo("#outils-" + iNumPano);
-        $("<div>", {id: "auto-" + iNumPano, class: "auto", title: chainesTraduction[strLangage].autorotation,
-            style: "background-color : " + strCouleur + ";border : 1px solid " + strBordure + ";"}).appendTo("#outils-" + iNumPano);
-        $("<div>", {id: "binfo-" + iNumPano, class: "binfo", title: chainesTraduction[strLangage].aPropos,
-            style: "background-color : " + strCouleur + ";border : 1px solid " + strBordure + ";"}).appendTo("#outils-" + iNumPano);
-        $("<div>", {id: "aide-" + iNumPano, class: "aide", title: chainesTraduction[strLangage].aide,
-            style: "background-color : " + strCouleur + ";border : 1px solid " + strBordure + ";"}).appendTo("#outils-" + iNumPano);
+        $("<div>", {
+            id: "xmoins-" + iNumPano, class: "xmoins", title: chainesTraduction[strLangage].gauche,
+            style: "background-color : " + strCouleur + ";border : 1px solid " + strBordure + ";"
+        }).appendTo("#deplacement-" + iNumPano);
+        $("<div>", {
+            id: "ymoins-" + iNumPano, class: "ymoins", title: chainesTraduction[strLangage].haut,
+            style: "background-color : " + strCouleur + ";border : 1px solid " + strBordure + ";"
+        }).appendTo("#deplacement-" + iNumPano);
+        $("<div>", {
+            id: "yplus-" + iNumPano, class: "yplus", title: chainesTraduction[strLangage].bas,
+            style: "background-color : " + strCouleur + ";border : 1px solid " + strBordure + ";"
+        }).appendTo("#deplacement-" + iNumPano);
+        $("<div>", {
+            id: "xplus-" + iNumPano, class: "xplus", title: chainesTraduction[strLangage].droite,
+            style: "background-color : " + strCouleur + ";border : 1px solid " + strBordure + ";"
+        }).appendTo("#deplacement-" + iNumPano);
+        $("<div>", {
+            id: "zoomPlus-" + iNumPano, class: "zoomPlus", title: chainesTraduction[strLangage].zoomPlus,
+            style: "background-color : " + strCouleur + ";border : 1px solid " + strBordure + ";"
+        }).appendTo("#zoom-" + iNumPano);
+        $("<div>", {
+            id: "zoomMoins-" + iNumPano, class: "zoomMoins", title: chainesTraduction[strLangage].zoomMoins,
+            style: "background-color : " + strCouleur + ";border : 1px solid " + strBordure + ";"
+        }).appendTo("#zoom-" + iNumPano);
+        $("<div>", {
+            id: "pleinEcran-" + iNumPano, class: "pleinEcran", title: chainesTraduction[strLangage].pleinEcran,
+            style: "background-color : " + strCouleur + ";border : 1px solid " + strBordure + ";"
+        }).appendTo("#outils-" + iNumPano);
+        $("<div>", {
+            id: "souris-" + iNumPano, class: "souris", title: chainesTraduction[strLangage].souris,
+            style: "background-color : " + strCouleur + ";border : 1px solid " + strBordure + ";"
+        }).appendTo("#outils-" + iNumPano);
+        $("<div>", {
+            id: "auto-" + iNumPano, class: "auto", title: chainesTraduction[strLangage].autorotation,
+            style: "background-color : " + strCouleur + ";border : 1px solid " + strBordure + ";"
+        }).appendTo("#outils-" + iNumPano);
+        $("<div>", {
+            id: "binfo-" + iNumPano, class: "binfo", title: chainesTraduction[strLangage].aPropos,
+            style: "background-color : " + strCouleur + ";border : 1px solid " + strBordure + ";"
+        }).appendTo("#outils-" + iNumPano);
+        $("<div>", {
+            id: "aide-" + iNumPano, class: "aide", title: chainesTraduction[strLangage].aide,
+            style: "background-color : " + strCouleur + ";border : 1px solid " + strBordure + ";"
+        }).appendTo("#outils-" + iNumPano);
     }
     /**
      * 
@@ -5135,27 +5201,27 @@ function panovisu(iNumPano) {
     function creeImagesboutons() {
         if (strBoutons === "oui") {
             $("#xmoins-" + iNumPano).html("");
-            $("<img>", {src: "panovisu/images/" + strStyleBoutons + "/gauche.png", alt: ""}).appendTo("#xmoins-" + iNumPano);
+            $("<img>", { src: "panovisu/images/" + strStyleBoutons + "/gauche.png", alt: "" }).appendTo("#xmoins-" + iNumPano);
             $("#ymoins-" + iNumPano).html("");
-            $("<img>", {src: "panovisu/images/" + strStyleBoutons + "/haut.png", alt: ""}).appendTo("#ymoins-" + iNumPano);
+            $("<img>", { src: "panovisu/images/" + strStyleBoutons + "/haut.png", alt: "" }).appendTo("#ymoins-" + iNumPano);
             $("#yplus-" + iNumPano).html("");
-            $("<img>", {src: "panovisu/images/" + strStyleBoutons + "/bas.png", alt: ""}).appendTo("#yplus-" + iNumPano);
+            $("<img>", { src: "panovisu/images/" + strStyleBoutons + "/bas.png", alt: "" }).appendTo("#yplus-" + iNumPano);
             $("#xplus-" + iNumPano).html("");
-            $("<img>", {src: "panovisu/images/" + strStyleBoutons + "/droite.png", alt: ""}).appendTo("#xplus-" + iNumPano);
+            $("<img>", { src: "panovisu/images/" + strStyleBoutons + "/droite.png", alt: "" }).appendTo("#xplus-" + iNumPano);
             $("#zoomPlus-" + iNumPano).html("");
-            $("<img>", {src: "panovisu/images/" + strStyleBoutons + "/zoomin.png", alt: ""}).appendTo("#zoomPlus-" + iNumPano);
+            $("<img>", { src: "panovisu/images/" + strStyleBoutons + "/zoomin.png", alt: "" }).appendTo("#zoomPlus-" + iNumPano);
             $("#zoomMoins-" + iNumPano).html("");
-            $("<img>", {src: "panovisu/images/" + strStyleBoutons + "/zoomout.png", alt: ""}).appendTo("#zoomMoins-" + iNumPano);
+            $("<img>", { src: "panovisu/images/" + strStyleBoutons + "/zoomout.png", alt: "" }).appendTo("#zoomMoins-" + iNumPano);
             $("#pleinEcran-" + iNumPano).html("");
-            $("<img>", {src: "panovisu/images/" + strStyleBoutons + "/fs.png", alt: ""}).appendTo("#pleinEcran-" + iNumPano);
+            $("<img>", { src: "panovisu/images/" + strStyleBoutons + "/fs.png", alt: "" }).appendTo("#pleinEcran-" + iNumPano);
             $("#souris-" + iNumPano).html("");
-            $("<img>", {src: "panovisu/images/" + strStyleBoutons + "/souris.png", alt: ""}).appendTo("#souris-" + iNumPano);
+            $("<img>", { src: "panovisu/images/" + strStyleBoutons + "/souris.png", alt: "" }).appendTo("#souris-" + iNumPano);
             $("#auto-" + iNumPano).html("");
-            $("<img>", {src: "panovisu/images/" + strStyleBoutons + "/rotation.png", alt: ""}).appendTo("#auto-" + iNumPano);
+            $("<img>", { src: "panovisu/images/" + strStyleBoutons + "/rotation.png", alt: "" }).appendTo("#auto-" + iNumPano);
             $("#binfo-" + iNumPano).html("");
-            $("<img>", {src: "panovisu/images/" + strStyleBoutons + "/info.png", alt: ""}).appendTo("#binfo-" + iNumPano);
+            $("<img>", { src: "panovisu/images/" + strStyleBoutons + "/info.png", alt: "" }).appendTo("#binfo-" + iNumPano);
             $("#aide-" + iNumPano).html("");
-            $("<img>", {src: "panovisu/images/" + strStyleBoutons + "/aide.png", alt: ""}).appendTo("#aide-" + iNumPano);
+            $("<img>", { src: "panovisu/images/" + strStyleBoutons + "/aide.png", alt: "" }).appendTo("#aide-" + iNumPano);
         }
     }
 
@@ -5165,7 +5231,7 @@ function panovisu(iNumPano) {
      * @returns {undefined}
      */
     function creeInfo(fenetrePanoramique) {
-        $("<div>", {id: "infoPanovisu-" + iNumPano, class: "infoPanovisu"}).appendTo("#" + fenetrePanoramique);
+        $("<div>", { id: "infoPanovisu-" + iNumPano, class: "infoPanovisu" }).appendTo("#" + fenetrePanoramique);
         $("#infoPanovisu-" + iNumPano).hide();
     }
     /**
@@ -5174,7 +5240,7 @@ function panovisu(iNumPano) {
      * @returns {undefined}
      */
     function creeAide(fenetrePanoramique) {
-        $("<div>", {id: "aidePanovisu-" + iNumPano, class: "aidePanovisu"}).appendTo("#" + fenetrePanoramique);
+        $("<div>", { id: "aidePanovisu-" + iNumPano, class: "aidePanovisu" }).appendTo("#" + fenetrePanoramique);
         $("#aidePanovisu-" + iNumPano).hide();
     }
     /**
@@ -5183,14 +5249,13 @@ function panovisu(iNumPano) {
      * @returns {undefined}
      */
     function creeHotspot(num) {
-        $("<div>", {id: "HS-" + num + "-" + iNumPano, class: "hotSpots"}).appendTo("#panovisu-" + iNumPano);
-        $("<img>", {id: "imgHS-" + num + "-" + iNumPano, width: arrPointsInteret[num].taille, src: arrPointsInteret[num].image, title: arrPointsInteret[num].info}).appendTo("#HS-" + num + "-" + iNumPano);
+        $("<div>", { id: "HS-" + num + "-" + iNumPano, class: "hotSpots" }).appendTo("#panovisu-" + iNumPano);
+        $("<img>", { id: "imgHS-" + num + "-" + iNumPano, width: arrPointsInteret[num].taille, src: arrPointsInteret[num].image, title: arrPointsInteret[num].info }).appendTo("#HS-" + num + "-" + iNumPano);
         numHotspot += 1;
     }
 
     function enleveHS() {
-        for (var i = 0; i < numHotspot; i++)
-        {
+        for (var i = 0; i < numHotspot; i++) {
             $("#HS-" + i + "-" + iNumPano).html();
             $("#HS-" + i + "-" + iNumPano).remove();
         }
@@ -5204,8 +5269,7 @@ function panovisu(iNumPano) {
         cLatitude = Math.cos(latitude * cDegToRad);
         sLatitude = Math.sin(latitude * cDegToRad);
         c1 = -pHeight / Math.tan(fov * Math.PI / 360.0) / 2; // * 0.3 -> * 1.2 / 4.0
-        for (var i = 0; i < numHotspot; i++)
-        {
+        for (var i = 0; i < numHotspot; i++) {
             deltaLong = longitude % 360 - arrPointsInteret[i].long;
             cLat = Math.cos(arrPointsInteret[i].lat * cDegToRad);
             sLat = Math.sin(arrPointsInteret[i].lat * cDegToRad);
@@ -5219,10 +5283,10 @@ function panovisu(iNumPano) {
                 } else {
                     $("#HS-" + i + "-" + iNumPano).show();
                     top1 = coef * (sLat * cLatitude - cLat * sLatitude * cDeltaLong)
-                            + pHeight / 2.0 - 15.0 + 'px';
+                        + pHeight / 2.0 - 15.0 + 'px';
                     left1 = coef * sDeltaLong * cLat
-                            + pWidth / 2.0 - 15.0 + 'px';
-                    $("#HS-" + i + "-" + iNumPano).css({top: top1, left: left1});
+                        + pWidth / 2.0 - 15.0 + 'px';
+                    $("#HS-" + i + "-" + iNumPano).css({ top: top1, left: left1 });
                 }
 
         }
@@ -5248,750 +5312,747 @@ function panovisu(iNumPano) {
         bMemAutoTour = bAutoTour;
         $(".chargement").show();
         $.get(xmlFile,
-                function (d) {
-                    carteCalque = 1;
-                    planCalque = 1;
-                    comboCalque = 1;
-                    vignettesCalque = 1;
-                    partageCalque = 1;
-                    masquageCalque = 1;
-                    boussoleCalque = 1;
-                    barreCCalque = 1;
-                    barrePCalque = 1;
-                    atCalque = 1;
-                    titreCalque = 1;
-                    suivPrecCalque = 1;
-                    bLittleDisabled = false;
-                    bNormalDisbled = true;
-                    bLittlePlanetView = false;
-                    var strTypeHSDefaut = "panoramique";
-                    strPanoImage = "faces";
-                    strCouleur = "none";
-                    strStyleBoutons = "navigation";
-                    strBordure = "none";
-                    strPanoTitre = "";
-                    strPanoTitre2 = "";
-                    strTitrePolice = "Monospace";
-                    strTitreCouleur = "#fff";
-                    strTitreTaillePolice = "13px";
-                    strTitreTaillePolice2 = "11px";
-                    strTitrePosition = "center";
-                    strTitreDecalage = "10px";
-                    strTitreTaille = "50%";
-                    strTitreFond = "#000";
-                    strTitreOpacite = "1.0";
-                    strDiaporamaCouleur = "rgba(0,0,0,0.8)";
-                    strPanoType = "cube";
-                    strAffInfo = "oui";
-                    // bAfficheInfo = true; // DESACTIVE - géré par le nouveau système avec bPremierChargement
-                    bAfficheAide = false;
-                    maxLat = 1000;
-                    minLat = -1000;
-                    strAfficheTitre = "oui";
-                    bFenetreInfoPersonnalise = false;
-                    strFenetreInfoImage = "";
-                    fenetreInfoTaille = 100;
-                    fenetreInfoDX = 0;
-                    fenetreInfoDY = 0;
-                    fenetreInfoOpacite = 0.8;
-                    strFenetreInfoURL = "";
-                    strFenetreInfoTexteURL = "";
-                    strFenetreInfoCouleurURL = "#ffff00";
-                    fenetreInfoTailleURL = 12;
-                    fenetreInfoDXURL = 0;
-                    fenetreInfoDYURL = 0;
-                    bFenetreAidePersonnalise = false;
-                    strFenetreAideImage = "";
-                    fenetreAideTaille = 100;
-                    fenetreAideDX = 0;
-                    fenetreAideDY = 0;
-                    fenetreAideOpacite = 0.8;
-                    strZooms = "oui";
-                    strOutils = "oui";
-                    strDeplacements = "oui";
-                    strFS = "oui";
-                    strAutoRotation = "oui";
-                    strModeSouris = "oui";
-                    strBoutons = "non";
-                    strAutoRotationMarche = "non";
-                    strPositionX = "center";
-                    strPositionY = "bottom";
-                    strDX = "0";
-                    strDY = "10";
-                    zeroNord = 0;
-                    bBoussole = false;
-                    strBoussoleImage = "rose2.png";
-                    strBoussoleTaille = "120";
-                    strBoussolePositionX = "right";
-                    strBoussolePositionY = "bottom";
-                    strBoussoleDX = "20";
-                    strBoussoleDY = "20";
-                    strBoussoleAffiche = "non";
-                    boussoleOpacite = 0.75;
-                    strBoussoleAiguille = "non";
-                    bMarcheArret = false;
-                    bMarcheArretAffiche = "non";
-                    marcheArretOpacite = 0.8;
-                    strMarcheArretImage = "MAVert.png";
-                    strMarcheArretPositionX = "left";
-                    strMarcheArretPositionY = "bottom";
-                    marcheArretDX = 10;
-                    marcheArretDY = 10;
-                    marcheArretTaille = 30;
-                    strMarcheArretNavigation = "non";
-                    strMarcheArretTitre = "non";
-                    strMarcheArretBoussole = "non";
-                    strMarcheArretPlan = "non";
-                    strMarcheArretReseaux = "non";
-                    strMarcheArretCombo = "non";
-                    strMarcheArretSuivPrec = "non";
-                    strMarcheArretHotspots = "non";
-                    strMarcheArretVignettes = "non";
-                    bReseauxSociaux = false;
-                    strReseauxSociauxAffiche = "non";
-                    reseauxSociauxOpacite = 0.8;
-                    strReseauxSociauxPositionX = "left";
-                    strReseauxSociauxPositionY = "bottom";
-                    reseauxSociauxDX = 0;
-                    reseauxSociauxDY = 0;
-                    reseauxSociauxTaille = 30;
-                    strReseauxSociauxTwitter = "non";
-                    strReseauxSociauxFacebook = "non";
-                    strReseauxSociauxEmail = "non";
-                    strVignettesAffiche = "non";
-                    bVignettes = false;
-                    strMultiReso = "non";
-                    iNombreNiveaux = 0;
-                    bSuivantPrecedent = false;
-                    iNombreImageFond = 0;
-                    vignettesOpacite = 0.8;
-                    strVignettesPosition = "bottom";
-                    strVignettesFondCouleur = "green";
-                    strVignettesTexteCouleur = "yellow";
-                    vignettesTailleImage = 0;
-                    arrVignettesPano = new Array();
-                    arrPointsInteret = new Array();
-                    arrComboMenuPano = new Array();
-                    strComboMenu = "non";
-                    bComboMenuAffiche = false;
-                    strComboMenuPositionX = "top";
-                    strComboMenuPositionY = "right";
-                    vitesseAutorotation = 30;
-                    bAutorotation = false;
-                    bAutoTour = false;
-                    bBtnAutoTour = false;
-                    positBtnAutoTourX = "right";
-                    positBtnAutoTourY = "top";
-                    offsetBtnAutoTourX = 10;
-                    offsetBtnAutoTourY = 10;
-                    tailleBtnAutoTour = 32;
+            function (d) {
+                carteCalque = 1;
+                planCalque = 1;
+                comboCalque = 1;
+                vignettesCalque = 1;
+                partageCalque = 1;
+                masquageCalque = 1;
+                boussoleCalque = 1;
+                barreCCalque = 1;
+                barrePCalque = 1;
+                atCalque = 1;
+                titreCalque = 1;
+                suivPrecCalque = 1;
+                bLittleDisabled = false;
+                bNormalDisbled = true;
+                bLittlePlanetView = false;
+                var strTypeHSDefaut = "panoramique";
+                strPanoImage = "faces";
+                strCouleur = "none";
+                strStyleBoutons = "navigation";
+                strBordure = "none";
+                strPanoTitre = "";
+                strPanoTitre2 = "";
+                strTitrePolice = "Monospace";
+                strTitreCouleur = "#fff";
+                strTitreTaillePolice = "13px";
+                strTitreTaillePolice2 = "11px";
+                strTitrePosition = "center";
+                strTitreDecalage = "10px";
+                strTitreTaille = "50%";
+                strTitreFond = "#000";
+                strTitreOpacite = "1.0";
+                strDiaporamaCouleur = "rgba(0,0,0,0.8)";
+                strPanoType = "cube";
+                strAffInfo = "oui";
+                // bAfficheInfo = true; // DESACTIVE - géré par le nouveau système avec bPremierChargement
+                bAfficheAide = false;
+                maxLat = 1000;
+                minLat = -1000;
+                strAfficheTitre = "oui";
+                bFenetreInfoPersonnalise = false;
+                strFenetreInfoImage = "";
+                fenetreInfoTaille = 100;
+                fenetreInfoDX = 0;
+                fenetreInfoDY = 0;
+                fenetreInfoOpacite = 0.8;
+                strFenetreInfoURL = "";
+                strFenetreInfoTexteURL = "";
+                strFenetreInfoCouleurURL = "#ffff00";
+                fenetreInfoTailleURL = 12;
+                fenetreInfoDXURL = 0;
+                fenetreInfoDYURL = 0;
+                bFenetreAidePersonnalise = false;
+                strFenetreAideImage = "";
+                fenetreAideTaille = 100;
+                fenetreAideDX = 0;
+                fenetreAideDY = 0;
+                fenetreAideOpacite = 0.8;
+                strZooms = "oui";
+                strOutils = "oui";
+                strDeplacements = "oui";
+                strFS = "oui";
+                strAutoRotation = "oui";
+                strModeSouris = "oui";
+                strBoutons = "non";
+                strAutoRotationMarche = "non";
+                strPositionX = "center";
+                strPositionY = "bottom";
+                strDX = "0";
+                strDY = "10";
+                zeroNord = 0;
+                bBoussole = false;
+                strBoussoleImage = "rose2.png";
+                strBoussoleTaille = "120";
+                strBoussolePositionX = "right";
+                strBoussolePositionY = "bottom";
+                strBoussoleDX = "20";
+                strBoussoleDY = "20";
+                strBoussoleAffiche = "non";
+                boussoleOpacite = 0.75;
+                strBoussoleAiguille = "non";
+                bMarcheArret = false;
+                bMarcheArretAffiche = "non";
+                marcheArretOpacite = 0.8;
+                strMarcheArretImage = "MAVert.png";
+                strMarcheArretPositionX = "left";
+                strMarcheArretPositionY = "bottom";
+                marcheArretDX = 10;
+                marcheArretDY = 10;
+                marcheArretTaille = 30;
+                strMarcheArretNavigation = "non";
+                strMarcheArretTitre = "non";
+                strMarcheArretBoussole = "non";
+                strMarcheArretPlan = "non";
+                strMarcheArretReseaux = "non";
+                strMarcheArretCombo = "non";
+                strMarcheArretSuivPrec = "non";
+                strMarcheArretHotspots = "non";
+                strMarcheArretVignettes = "non";
+                bReseauxSociaux = false;
+                strReseauxSociauxAffiche = "non";
+                reseauxSociauxOpacite = 0.8;
+                strReseauxSociauxPositionX = "left";
+                strReseauxSociauxPositionY = "bottom";
+                reseauxSociauxDX = 0;
+                reseauxSociauxDY = 0;
+                reseauxSociauxTaille = 30;
+                strReseauxSociauxTwitter = "non";
+                strReseauxSociauxFacebook = "non";
+                strReseauxSociauxEmail = "non";
+                strVignettesAffiche = "non";
+                bVignettes = false;
+                strMultiReso = "non";
+                iNombreNiveaux = 0;
+                bSuivantPrecedent = false;
+                iNombreImageFond = 0;
+                vignettesOpacite = 0.8;
+                strVignettesPosition = "bottom";
+                strVignettesFondCouleur = "green";
+                strVignettesTexteCouleur = "yellow";
+                vignettesTailleImage = 0;
+                arrVignettesPano = new Array();
+                arrPointsInteret = new Array();
+                arrComboMenuPano = new Array();
+                strComboMenu = "non";
+                bComboMenuAffiche = false;
+                strComboMenuPositionX = "top";
+                strComboMenuPositionY = "right";
+                vitesseAutorotation = 30;
+                bAutorotation = false;
+                bAutoTour = false;
+                bBtnAutoTour = false;
+                positBtnAutoTourX = "right";
+                positBtnAutoTourY = "top";
+                offsetBtnAutoTourX = 10;
+                offsetBtnAutoTourY = 10;
+                tailleBtnAutoTour = 32;
 
-                    strAutoTourType = "tours";
-                    autoTourLimite = 1;
-                    autoTourDemarrage = 0;
-                    strARDemarrage = "non";
-                    strATDemarrage = "non";
-                    strPetitePlanete = "non";
-                    strBtnAT = "non";
-                    comboMenuDX = 10;
-                    comboMenuDY = 60;
-                    arrPointsPlan = new Array();
-                    bPlanAffiche = false;
-                    strPlanImage = "";
-                    planLargeur = 0;
-                    planNord = 0;
-                    strPlanPosition = "left";
-                    strPlanCouleurFond = "rgba(0,0,0,0.5)";
-                    opacitePlan = 0.8;
-                    strPlanCouleurTexte = "white";
-                    strPlanBoussolePosition = "top:right";
-                    iPlanBoussoleX = 0;
-                    iPlanBoussoleY = 0;
-                    iRadarTaille = 50;
-                    radarOpacite = 0.6;
-                    strRadarCouleurFond = "rgb(128,128,128)";
-                    strRadarCouleurLigne = "rgb(200,200,0)";
-                    bRadarAffiche = false;
-                    strCarteAff = "non";
-                    strCartePosition = "right";
-                    strCarteCouleurFond = "#ff0000";
-                    strCarteCouleurTexte = "#ffff00";
-                    opaciteCarte = 0.7;
-                    carteLargeur = 400;
-                    carteHauteur = 300;
-                    iCarteZoom = 17;
-                    strAfficheRadarCarte = "non";
-                    iRadarCarteTaille = 30;
-                    radarCarteOpacite = 0.4;
-                    strRadarCarteCouleurFond = "#ff0000";
-                    strRadarCarteCouleurLigne = "#ffff00";
-                    coordCentreLong = 0.0;
-                    coordCentreLat = 0.0;
-                    strNomLayerCarte = "OpenStreetMap";
-                    arrPointsCarte = new Array;
-                    bAfficheMenuContextuel = true;
-                    bPrecedentSuivantMenuContextuel = true;
-                    bPlaneteMenuContextuel = true;
-                    bMenuPersonnalise1 = false;
-                    bMenuPersonnalise2 = false;
-                    strLibelleMenuContextuel1 = "";
-                    strLibelleMenuContextuel2 = "";
-                    strUrlMenuContextuel1 = "";
-                    strUrlMenuContextuel2 = "";
-                    strTelecommande = "non";
-                    bTelecommande = false;
-                    strTelecommandeFS = "oui";
-                    strTelecommandeAutorotation = "oui";
-                    strTelecommandeSouris = "oui";
-                    strTelecommandeInfo = "oui";
-                    strTelecommandeAide = "oui";
-                    strTelecommandePositionX = "bottom";
-                    strTelecommandePositionY = "right";
-                    telecommandeDX = 0;
-                    telecommandeDY = 0;
-                    telecommandeTaille = 25.0;
-                    telecommandeTailleBouton = 40.0;
-                    strLien1BarrePersonnalisee = "";
-                    strLien2BarrePersonnalisee = "";
-                    $("#divVignettes-" + iNumPano).html("");
-                    $("<img>", {id: "gaucheVignettes-" + iNumPano, class: "positionVignettes", src: "panovisu/images/interface/gauche.png"}).appendTo("#divVignettes-" + iNumPano);
-                    $("<img>", {id: "droiteVignettes-" + iNumPano, class: "positionVignettes", src: "panovisu/images/interface/droite.png"}).appendTo("#divVignettes-" + iNumPano);
-                    $("<img>", {id: "hautVignettes-" + iNumPano, class: "positionVignettes", src: "panovisu/images/interface/haut.png"}).appendTo("#divVignettes-" + iNumPano);
-                    $("<img>", {id: "basVignettes-" + iNumPano, class: "positionVignettes", src: "panovisu/images/interface/bas.png"}).appendTo("#divVignettes-" + iNumPano);
-                    /**
-                     * Définition du panoramique Ã  afficher 
-                     */
-                    var XMLPano = $(d).find('pano');
-                    strPanoImage = XMLPano.attr('image') || strPanoImage;
-                    strPanoTitre = XMLPano.attr('titre') || strPanoTitre;
-                    strPanoTitre2 = XMLPano.attr('titre2') || strPanoTitre2;
-                    strTitrePolice = XMLPano.attr('titrePolice') || strTitrePolice;
-                    strTitreCouleur = XMLPano.attr('titreCouleur') || strTitreCouleur;
-                    strTitreTaille = XMLPano.attr('titreTaille') || strTitreTaille;
-                    strTitreTaillePolice = XMLPano.attr('titreTaillePolice') || strTitreTaillePolice;
-                    strTitreTaillePolice2 = XMLPano.attr('titreTaillePolice2') || strTitreTaillePolice2;
-                    strTitrePosition = XMLPano.attr('titrePosition') || strTitrePosition;
-                    strTitreDecalage = XMLPano.attr('titreDecalage') || strTitreDecalage;
-                    strTitreFond = XMLPano.attr('titreFond') || strTitreFond;
-                    strTitreOpacite = XMLPano.attr('titreOpacite') || strTitreOpacite;
-                    titreCalque = parseInt(XMLPano.attr('titreCalque')) || titreCalque;
-                    strDiaporamaCouleur = XMLPano.attr('diaporamaCouleur') || strDiaporamaCouleur;
-                    strPanoType = XMLPano.attr('type') || strPanoType;
-                    strMultiReso = XMLPano.attr('multiReso') || strMultiReso;
-                    iNombreNiveaux = parseInt(XMLPano.attr('nombreNiveaux')) || iNombreNiveaux;
-                    strAutoRotationMarche = XMLPano.attr('rotation') || strAutoRotationMarche;
-                    maxLat = parseFloat(XMLPano.attr('maxLat')) || maxLat;
-                    minLat = parseFloat(XMLPano.attr('minLat')) || minLat;
-                    if (nouvLong !== -1000) {
-                        longitude = nouvLong;
+                strAutoTourType = "tours";
+                autoTourLimite = 1;
+                autoTourDemarrage = 0;
+                strARDemarrage = "non";
+                strATDemarrage = "non";
+                strPetitePlanete = "non";
+                strBtnAT = "non";
+                comboMenuDX = 10;
+                comboMenuDY = 60;
+                arrPointsPlan = new Array();
+                bPlanAffiche = false;
+                strPlanImage = "";
+                planLargeur = 0;
+                planNord = 0;
+                strPlanPosition = "left";
+                strPlanCouleurFond = "rgba(0,0,0,0.5)";
+                opacitePlan = 0.8;
+                strPlanCouleurTexte = "white";
+                strPlanBoussolePosition = "top:right";
+                iPlanBoussoleX = 0;
+                iPlanBoussoleY = 0;
+                iRadarTaille = 50;
+                radarOpacite = 0.6;
+                strRadarCouleurFond = "rgb(128,128,128)";
+                strRadarCouleurLigne = "rgb(200,200,0)";
+                bRadarAffiche = false;
+                strCarteAff = "non";
+                strCartePosition = "right";
+                strCarteCouleurFond = "#ff0000";
+                strCarteCouleurTexte = "#ffff00";
+                opaciteCarte = 0.7;
+                carteLargeur = 400;
+                carteHauteur = 300;
+                iCarteZoom = 17;
+                strAfficheRadarCarte = "non";
+                iRadarCarteTaille = 30;
+                radarCarteOpacite = 0.4;
+                strRadarCarteCouleurFond = "#ff0000";
+                strRadarCarteCouleurLigne = "#ffff00";
+                coordCentreLong = 0.0;
+                coordCentreLat = 0.0;
+                strNomLayerCarte = "OpenStreetMap";
+                arrPointsCarte = new Array;
+                bAfficheMenuContextuel = true;
+                bPrecedentSuivantMenuContextuel = true;
+                bPlaneteMenuContextuel = true;
+                bMenuPersonnalise1 = false;
+                bMenuPersonnalise2 = false;
+                strLibelleMenuContextuel1 = "";
+                strLibelleMenuContextuel2 = "";
+                strUrlMenuContextuel1 = "";
+                strUrlMenuContextuel2 = "";
+                strTelecommande = "non";
+                bTelecommande = false;
+                strTelecommandeFS = "oui";
+                strTelecommandeAutorotation = "oui";
+                strTelecommandeSouris = "oui";
+                strTelecommandeInfo = "oui";
+                strTelecommandeAide = "oui";
+                strTelecommandePositionX = "bottom";
+                strTelecommandePositionY = "right";
+                telecommandeDX = 0;
+                telecommandeDY = 0;
+                telecommandeTaille = 25.0;
+                telecommandeTailleBouton = 40.0;
+                strLien1BarrePersonnalisee = "";
+                strLien2BarrePersonnalisee = "";
+                $("#divVignettes-" + iNumPano).html("");
+                $("<img>", { id: "gaucheVignettes-" + iNumPano, class: "positionVignettes", src: "panovisu/images/interface/gauche.png" }).appendTo("#divVignettes-" + iNumPano);
+                $("<img>", { id: "droiteVignettes-" + iNumPano, class: "positionVignettes", src: "panovisu/images/interface/droite.png" }).appendTo("#divVignettes-" + iNumPano);
+                $("<img>", { id: "hautVignettes-" + iNumPano, class: "positionVignettes", src: "panovisu/images/interface/haut.png" }).appendTo("#divVignettes-" + iNumPano);
+                $("<img>", { id: "basVignettes-" + iNumPano, class: "positionVignettes", src: "panovisu/images/interface/bas.png" }).appendTo("#divVignettes-" + iNumPano);
+                /**
+                 * Définition du panoramique Ã  afficher 
+                 */
+                var XMLPano = $(d).find('pano');
+                strPanoImage = XMLPano.attr('image') || strPanoImage;
+                strPanoTitre = XMLPano.attr('titre') || strPanoTitre;
+                strPanoTitre2 = XMLPano.attr('titre2') || strPanoTitre2;
+                strTitrePolice = XMLPano.attr('titrePolice') || strTitrePolice;
+                strTitreCouleur = XMLPano.attr('titreCouleur') || strTitreCouleur;
+                strTitreTaille = XMLPano.attr('titreTaille') || strTitreTaille;
+                strTitreTaillePolice = XMLPano.attr('titreTaillePolice') || strTitreTaillePolice;
+                strTitreTaillePolice2 = XMLPano.attr('titreTaillePolice2') || strTitreTaillePolice2;
+                strTitrePosition = XMLPano.attr('titrePosition') || strTitrePosition;
+                strTitreDecalage = XMLPano.attr('titreDecalage') || strTitreDecalage;
+                strTitreFond = XMLPano.attr('titreFond') || strTitreFond;
+                strTitreOpacite = XMLPano.attr('titreOpacite') || strTitreOpacite;
+                titreCalque = parseInt(XMLPano.attr('titreCalque')) || titreCalque;
+                strDiaporamaCouleur = XMLPano.attr('diaporamaCouleur') || strDiaporamaCouleur;
+                strPanoType = XMLPano.attr('type') || strPanoType;
+                strMultiReso = XMLPano.attr('multiReso') || strMultiReso;
+                iNombreNiveaux = parseInt(XMLPano.attr('nombreNiveaux')) || iNombreNiveaux;
+                strAutoRotationMarche = XMLPano.attr('rotation') || strAutoRotationMarche;
+                maxLat = parseFloat(XMLPano.attr('maxLat')) || maxLat;
+                minLat = parseFloat(XMLPano.attr('minLat')) || minLat;
+                if (nouvLong !== -1000) {
+                    longitude = nouvLong;
+                }
+                else {
+                    if (XMLPano.attr('regardX') === "0") {
+                        longitude = 0;
                     }
                     else {
-                        if (XMLPano.attr('regardX') === "0") {
-                            longitude = 0;
-                        }
-                        else {
-                            longitude = parseFloat(XMLPano.attr('regardX')) || longitude;
-                        }
+                        longitude = parseFloat(XMLPano.attr('regardX')) || longitude;
                     }
-                    if (nouvLat !== -1000) {
-                        latitude = nouvLat;
-                    }
-                    else {
-                        if (XMLPano.attr('regardY') === "0") {
-                            latitude = 0;
-                        }
-                        else {
-                            latitude = parseFloat(XMLPano.attr('regardY')) || latitude;
-                        }
-                    }
-
-                    if (nouvFov !== 0) {
-                        fov = nouvFov;
+                }
+                if (nouvLat !== -1000) {
+                    latitude = nouvLat;
+                }
+                else {
+                    if (XMLPano.attr('regardY') === "0") {
+                        latitude = 0;
                     }
                     else {
-                        fov = parseFloat(XMLPano.attr('champVisuel')) || fov;
+                        latitude = parseFloat(XMLPano.attr('regardY')) || latitude;
                     }
-                    maxFOV = parseFloat(XMLPano.attr('maxFOV')) || maxFOV;
-                    minFOV = parseFloat(XMLPano.attr('minFOV')) || minFOV;
-                    if (fov > maxFOV)
-                        fov = maxFOV;
-                    if (fov < minFOV)
-                        fov = minFOV;
-                    nouvLong = -1000;
-                    nouvLat = -1000;
-                    nouvFov = 0;
-                    strAfficheTitre = XMLPano.attr('afftitre') || strAfficheTitre;
-                    strAffInfo = XMLPano.attr('affinfo') || strAffInfo;
-                    strAffDescriptionChargement = XMLPano.attr('affDescriptionChargement') || "non";
-                    strDescription = XMLPano.attr('description') || "";
-                    zeroNord = parseFloat(XMLPano.attr('zeroNord')) || zeroNord;
-                    strReplieVignettes = XMLPano.attr('replieVignettes') || "";
-                    bVignettesRentre = (strReplieVignettes === "oui" || bVignettesRentre);
-                    strRepliePlan = XMLPano.attr('repliePlan') || "";
-                    bPlanRentre = (strRepliePlan === "oui" || bPlanRentre);
-                    strReplieCarte = XMLPano.attr('replieCarte') || "";
-                    bCarteRentre = (strReplieCarte === "oui" || bCarteRentre);
-                    strARDemarrage = XMLPano.attr('autorotation') || "non";
-                    bAutorotation = (strARDemarrage === "oui");
-                    vitesseAutorotation = parseFloat(XMLPano.attr('vitesseAR')) || vitesseAutorotation;
-                    strATDemarrage = XMLPano.attr('autotour') || "non";
-                    bAutoTour = (strATDemarrage === "oui");
-                    strBtnAT = XMLPano.attr('atBouton') || "non";
-                    bBtnAutoTour = (strBtnAT === "oui");
-                    tailleBtnAutoTour = parseFloat(XMLPano.attr('atBoutonTaille')) || tailleBtnAutoTour;
-                    positBtnAutoTourX = XMLPano.attr('atBoutonPositionX') || positBtnAutoTourX;
-                    positBtnAutoTourY = XMLPano.attr('atBoutonPositionY') || positBtnAutoTourY;
-                    offsetBtnAutoTourX = parseFloat(XMLPano.attr('atBoutonOffsetX')) || offsetBtnAutoTourX;
-                    offsetBtnAutoTourY = parseFloat(XMLPano.attr('atBoutonOffsetY')) || offsetBtnAutoTourY;
-                    atCalque = parseInt(XMLPano.attr('atCalque')) || atCalque;
-                    autoTourLimite = parseFloat(XMLPano.attr('limiteAT')) || autoTourLimite;
-                    autoTourDemarrage = parseFloat(XMLPano.attr('demarrageAT')) || autoTourDemarrage;
-                    strAutoTourType = XMLPano.attr('typeAT') || strAutoTourType;
-                    if (bAutoTour)
-                        bAutorotation = true;
-                    strPetitePlanete = XMLPano.attr('petitePlanete') || "non";
-                    bPetitePlaneteDemarrage = (strPetitePlanete === "oui");
+                }
 
-                    if (bDejaCharge) {
-                        bPetitePlaneteDemarrage = false;
-                        bVignettesRentre = bMemVignettesRentre;
-                        bCarteRentre = bMemCarteRentre;
-                        bPlanRentre = bMemPlanRentre;
-                        bAutoTour = bMemAutoTour;
-                        bAutorotation = bMemAutorotation;
-                    }
-                    if (bReloaded) {
-                        strAffInfo = false;
-                    }
-                    // ANCIENNE LOGIQUE DESACTIVEE - utilise maintenant bPremierChargement + système modal moderne
-                    // L'affichage automatique de la fenêtre d'info se fait dans initialisePano() via setTimeout
-                    // if (strAffInfo === "oui") {
-                    //     bAfficheInfo = true;
-                    // } else {
-                    //     bAfficheInfo = false;
-                    // }
-                    var XMLFenetreInfo = $(d).find('fenetreInfo');
-                    InfoAffiche = XMLFenetreInfo.attr('affiche') || "non";
-                    bFenetreInfoPersonnalise = (InfoAffiche === "oui");
-                    if (bFenetreInfoPersonnalise) {
-                        strFenetreInfoImage = XMLFenetreInfo.attr('image') || strFenetreInfoImage;
-                        fenetreInfoTaille = parseFloat(XMLFenetreInfo.attr('taille')) || fenetreInfoTaille;
-                        fenetreInfoDX = parseFloat(XMLFenetreInfo.attr('dX')) || fenetreInfoDX;
-                        fenetreInfoDY = parseFloat(XMLFenetreInfo.attr('dY')) || fenetreInfoDY;
-                        fenetreInfoOpacite = parseFloat(XMLFenetreInfo.attr('opacite')) || fenetreInfoOpacite;
-                        strFenetreInfoURL = XMLFenetreInfo.attr('URL') || strFenetreInfoURL;
-                        strFenetreInfoTexteURL = XMLFenetreInfo.attr('texteURL') || strFenetreInfoTexteURL;
-                        strFenetreInfoCouleurURL = XMLFenetreInfo.attr('couleurURL') || strFenetreInfoCouleurURL;
-                        fenetreInfoTailleURL = parseFloat(XMLFenetreInfo.attr('tailleURL')) || fenetreInfoTailleURL;
-                        fenetreInfoDXURL = parseFloat(XMLFenetreInfo.attr('URLdX')) || fenetreInfoDXURL;
-                        fenetreInfoDYURL = parseFloat(XMLFenetreInfo.attr('URLdY')) || fenetreInfoDYURL;
-                    }
+                if (nouvFov !== 0) {
+                    fov = nouvFov;
+                }
+                else {
+                    fov = parseFloat(XMLPano.attr('champVisuel')) || fov;
+                }
+                maxFOV = parseFloat(XMLPano.attr('maxFOV')) || maxFOV;
+                minFOV = parseFloat(XMLPano.attr('minFOV')) || minFOV;
+                if (fov > maxFOV)
+                    fov = maxFOV;
+                if (fov < minFOV)
+                    fov = minFOV;
+                nouvLong = -1000;
+                nouvLat = -1000;
+                nouvFov = 0;
+                strAfficheTitre = XMLPano.attr('afftitre') || strAfficheTitre;
+                strAffInfo = XMLPano.attr('affinfo') || strAffInfo;
+                strAffDescriptionChargement = XMLPano.attr('affDescriptionChargement') || "non";
+                strDescription = XMLPano.attr('description') || "";
+                zeroNord = parseFloat(XMLPano.attr('zeroNord')) || zeroNord;
+                strReplieVignettes = XMLPano.attr('replieVignettes') || "";
+                bVignettesRentre = (strReplieVignettes === "oui" || bVignettesRentre);
+                strRepliePlan = XMLPano.attr('repliePlan') || "";
+                bPlanRentre = (strRepliePlan === "oui" || bPlanRentre);
+                strReplieCarte = XMLPano.attr('replieCarte') || "";
+                bCarteRentre = (strReplieCarte === "oui" || bCarteRentre);
+                strARDemarrage = XMLPano.attr('autorotation') || "non";
+                bAutorotation = (strARDemarrage === "oui");
+                vitesseAutorotation = parseFloat(XMLPano.attr('vitesseAR')) || vitesseAutorotation;
+                strATDemarrage = XMLPano.attr('autotour') || "non";
+                bAutoTour = (strATDemarrage === "oui");
+                strBtnAT = XMLPano.attr('atBouton') || "non";
+                bBtnAutoTour = (strBtnAT === "oui");
+                tailleBtnAutoTour = parseFloat(XMLPano.attr('atBoutonTaille')) || tailleBtnAutoTour;
+                positBtnAutoTourX = XMLPano.attr('atBoutonPositionX') || positBtnAutoTourX;
+                positBtnAutoTourY = XMLPano.attr('atBoutonPositionY') || positBtnAutoTourY;
+                offsetBtnAutoTourX = parseFloat(XMLPano.attr('atBoutonOffsetX')) || offsetBtnAutoTourX;
+                offsetBtnAutoTourY = parseFloat(XMLPano.attr('atBoutonOffsetY')) || offsetBtnAutoTourY;
+                atCalque = parseInt(XMLPano.attr('atCalque')) || atCalque;
+                autoTourLimite = parseFloat(XMLPano.attr('limiteAT')) || autoTourLimite;
+                autoTourDemarrage = parseFloat(XMLPano.attr('demarrageAT')) || autoTourDemarrage;
+                strAutoTourType = XMLPano.attr('typeAT') || strAutoTourType;
+                if (bAutoTour)
+                    bAutorotation = true;
+                strPetitePlanete = XMLPano.attr('petitePlanete') || "non";
+                bPetitePlaneteDemarrage = (strPetitePlanete === "oui");
 
-                    var XMLFenetreAide = $(d).find('fenetreAide');
-                    AideAffiche = XMLFenetreAide.attr('affiche') || "non";
-                    bFenetreAidePersonnalise = (AideAffiche === "oui");
-                    if (bFenetreAidePersonnalise) {
-                        strFenetreAideImage = XMLFenetreAide.attr('image') || strFenetreAideImage;
-                        fenetreAideTaille = parseFloat(XMLFenetreAide.attr('taille')) || fenetreAideTaille;
-                        fenetreAideDX = parseFloat(XMLFenetreAide.attr('dX')) || fenetreAideDX;
-                        fenetreAideDY = parseFloat(XMLFenetreAide.attr('dY')) || fenetreAideDY;
-                        fenetreAideOpacite = parseFloat(XMLFenetreAide.attr('opacite')) || fenetreAideOpacite;
-                    }
+                if (bDejaCharge) {
+                    bPetitePlaneteDemarrage = false;
+                    bVignettesRentre = bMemVignettesRentre;
+                    bCarteRentre = bMemCarteRentre;
+                    bPlanRentre = bMemPlanRentre;
+                    bAutoTour = bMemAutoTour;
+                    bAutorotation = bMemAutorotation;
+                }
+                if (bReloaded) {
+                    strAffInfo = false;
+                }
+                // ANCIENNE LOGIQUE DESACTIVEE - utilise maintenant bPremierChargement + système modal moderne
+                // L'affichage automatique de la fenêtre d'info se fait dans initialisePano() via setTimeout
+                // if (strAffInfo === "oui") {
+                //     bAfficheInfo = true;
+                // } else {
+                //     bAfficheInfo = false;
+                // }
+                var XMLFenetreInfo = $(d).find('fenetreInfo');
+                InfoAffiche = XMLFenetreInfo.attr('affiche') || "non";
+                bFenetreInfoPersonnalise = (InfoAffiche === "oui");
+                if (bFenetreInfoPersonnalise) {
+                    strFenetreInfoImage = XMLFenetreInfo.attr('image') || strFenetreInfoImage;
+                    fenetreInfoTaille = parseFloat(XMLFenetreInfo.attr('taille')) || fenetreInfoTaille;
+                    fenetreInfoDX = parseFloat(XMLFenetreInfo.attr('dX')) || fenetreInfoDX;
+                    fenetreInfoDY = parseFloat(XMLFenetreInfo.attr('dY')) || fenetreInfoDY;
+                    fenetreInfoOpacite = parseFloat(XMLFenetreInfo.attr('opacite')) || fenetreInfoOpacite;
+                    strFenetreInfoURL = XMLFenetreInfo.attr('URL') || strFenetreInfoURL;
+                    strFenetreInfoTexteURL = XMLFenetreInfo.attr('texteURL') || strFenetreInfoTexteURL;
+                    strFenetreInfoCouleurURL = XMLFenetreInfo.attr('couleurURL') || strFenetreInfoCouleurURL;
+                    fenetreInfoTailleURL = parseFloat(XMLFenetreInfo.attr('tailleURL')) || fenetreInfoTailleURL;
+                    fenetreInfoDXURL = parseFloat(XMLFenetreInfo.attr('URLdX')) || fenetreInfoDXURL;
+                    fenetreInfoDYURL = parseFloat(XMLFenetreInfo.attr('URLdY')) || fenetreInfoDYURL;
+                }
+
+                var XMLFenetreAide = $(d).find('fenetreAide');
+                AideAffiche = XMLFenetreAide.attr('affiche') || "non";
+                bFenetreAidePersonnalise = (AideAffiche === "oui");
+                if (bFenetreAidePersonnalise) {
+                    strFenetreAideImage = XMLFenetreAide.attr('image') || strFenetreAideImage;
+                    fenetreAideTaille = parseFloat(XMLFenetreAide.attr('taille')) || fenetreAideTaille;
+                    fenetreAideDX = parseFloat(XMLFenetreAide.attr('dX')) || fenetreAideDX;
+                    fenetreAideDY = parseFloat(XMLFenetreAide.attr('dY')) || fenetreAideDY;
+                    fenetreAideOpacite = parseFloat(XMLFenetreAide.attr('opacite')) || fenetreAideOpacite;
+                }
 
 
 
-                    var XMLSuivantPrecedent = $(d).find('suivantPrecedent');
-                    XMLsuivant = XMLSuivantPrecedent.attr('suivant') || "";
-                    XMLprecedent = XMLSuivantPrecedent.attr('precedent') || "";
-                    suivPrecCalque = parseInt(XMLSuivantPrecedent.attr('suivPrecCalque')) || suivPrecCalque;
-                    strAfficheSuivantPrecedent = XMLSuivantPrecedent.attr('afficheSuivantPrecedent') || "non";
-                    bSuivantPrecedent = (strAfficheSuivantPrecedent === "oui");
-                    /*
-                     * 
-                     * 
-                     */
-                    var XMLBoussole = $(d).find('boussole');
-                    strBoussoleAffiche = XMLBoussole.attr('affiche') || strBoussoleAffiche;
-                    bBoussole = (strBoussoleAffiche === "oui");
-                    strBoussoleImage = XMLBoussole.attr('image') || strBoussoleImage;
-                    strBoussoleTaille = XMLBoussole.attr('taille') || strBoussoleTaille;
-                    strBoussolePositionX = XMLBoussole.attr('positionX') || strBoussolePositionX;
-                    strBoussolePositionY = XMLBoussole.attr('positionY') || strBoussolePositionY;
-                    boussoleCalque = parseInt(XMLBoussole.attr('boussoleCalque')) || boussoleCalque;
-                    strBoussoleDX = XMLBoussole.attr('dX') || strBoussoleDX;
-                    strBoussoleDY = XMLBoussole.attr('dY') || strBoussoleDY;
-                    boussoleOpacite = parseFloat(XMLBoussole.attr('opacite')) || boussoleOpacite;
-                    strBoussoleAiguille = XMLBoussole.attr('aiguille') || strBoussoleAiguille;
-                    /*
-                     * 
-                     * 
-                     */
-                    var XMLMenuContextuel = $(d).find('menuContextuel');
-                    bMCAffiche = XMLMenuContextuel.attr('affiche') || "non";
-                    bAfficheMenuContextuel = (bMCAffiche === "oui");
-                    strPrecSuivMC = XMLMenuContextuel.attr('precSuiv') || "oui";
-                    bPrecedentSuivantMenuContextuel = (strPrecSuivMC === "oui");
-                    strPlaneteMC = XMLMenuContextuel.attr('planete') || "oui";
-                    bPlaneteMenuContextuel = (strPlaneteMC === "oui");
-                    strPersMC1 = XMLMenuContextuel.attr('pers1') || "non";
-                    bMenuPersonnalise1 = (strPersMC1 === "oui");
-                    strPersMC2 = XMLMenuContextuel.attr('pers2') || "non";
-                    bMenuPersonnalise2 = (strPersMC2 === "oui");
-                    strLibelleMenuContextuel1 = XMLMenuContextuel.attr('lib1') || strLibelleMenuContextuel1;
-                    strLibelleMenuContextuel2 = XMLMenuContextuel.attr('lib2') || strLibelleMenuContextuel2;
-                    strUrlMenuContextuel1 = XMLMenuContextuel.attr('url1') || strUrlMenuContextuel1;
-                    strUrlMenuContextuel2 = XMLMenuContextuel.attr('url2') || strUrlMenuContextuel2;
-                    /*
-                     * Reseaux Sociaux
-                     * 
-                     */
-                    var XMLReseauxSociaux = $(d).find('reseauxSociaux');
-                    strReseauxSociauxAffiche = XMLReseauxSociaux.attr('affiche') || strReseauxSociauxAffiche;
-                    bReseauxSociaux = (strReseauxSociauxAffiche === "oui");
-                    reseauxSociauxOpacite = parseFloat(XMLReseauxSociaux.attr('opacite')) || reseauxSociauxOpacite;
-                    strReseauxSociauxPositionX = XMLReseauxSociaux.attr('positionX') || strReseauxSociauxPositionX;
-                    strReseauxSociauxPositionY = XMLReseauxSociaux.attr('positionY') || strReseauxSociauxPositionY;
-                    reseauxSociauxDX = parseFloat(XMLReseauxSociaux.attr('dX')) || reseauxSociauxDX;
-                    reseauxSociauxDY = parseFloat(XMLReseauxSociaux.attr('dY')) || reseauxSociauxDY;
-                    partageCalque = parseInt(XMLReseauxSociaux.attr('partageCalque')) || partageCalque;
+                var XMLSuivantPrecedent = $(d).find('suivantPrecedent');
+                XMLsuivant = XMLSuivantPrecedent.attr('suivant') || "";
+                XMLprecedent = XMLSuivantPrecedent.attr('precedent') || "";
+                suivPrecCalque = parseInt(XMLSuivantPrecedent.attr('suivPrecCalque')) || suivPrecCalque;
+                strAfficheSuivantPrecedent = XMLSuivantPrecedent.attr('afficheSuivantPrecedent') || "non";
+                bSuivantPrecedent = (strAfficheSuivantPrecedent === "oui");
+                /*
+                 * 
+                 * 
+                 */
+                var XMLBoussole = $(d).find('boussole');
+                strBoussoleAffiche = XMLBoussole.attr('affiche') || strBoussoleAffiche;
+                bBoussole = (strBoussoleAffiche === "oui");
+                strBoussoleImage = XMLBoussole.attr('image') || strBoussoleImage;
+                strBoussoleTaille = XMLBoussole.attr('taille') || strBoussoleTaille;
+                strBoussolePositionX = XMLBoussole.attr('positionX') || strBoussolePositionX;
+                strBoussolePositionY = XMLBoussole.attr('positionY') || strBoussolePositionY;
+                boussoleCalque = parseInt(XMLBoussole.attr('boussoleCalque')) || boussoleCalque;
+                strBoussoleDX = XMLBoussole.attr('dX') || strBoussoleDX;
+                strBoussoleDY = XMLBoussole.attr('dY') || strBoussoleDY;
+                boussoleOpacite = parseFloat(XMLBoussole.attr('opacite')) || boussoleOpacite;
+                strBoussoleAiguille = XMLBoussole.attr('aiguille') || strBoussoleAiguille;
+                /*
+                 * 
+                 * 
+                 */
+                var XMLMenuContextuel = $(d).find('menuContextuel');
+                bMCAffiche = XMLMenuContextuel.attr('affiche') || "non";
+                bAfficheMenuContextuel = (bMCAffiche === "oui");
+                strPrecSuivMC = XMLMenuContextuel.attr('precSuiv') || "oui";
+                bPrecedentSuivantMenuContextuel = (strPrecSuivMC === "oui");
+                strPlaneteMC = XMLMenuContextuel.attr('planete') || "oui";
+                bPlaneteMenuContextuel = (strPlaneteMC === "oui");
+                strPersMC1 = XMLMenuContextuel.attr('pers1') || "non";
+                bMenuPersonnalise1 = (strPersMC1 === "oui");
+                strPersMC2 = XMLMenuContextuel.attr('pers2') || "non";
+                bMenuPersonnalise2 = (strPersMC2 === "oui");
+                strLibelleMenuContextuel1 = XMLMenuContextuel.attr('lib1') || strLibelleMenuContextuel1;
+                strLibelleMenuContextuel2 = XMLMenuContextuel.attr('lib2') || strLibelleMenuContextuel2;
+                strUrlMenuContextuel1 = XMLMenuContextuel.attr('url1') || strUrlMenuContextuel1;
+                strUrlMenuContextuel2 = XMLMenuContextuel.attr('url2') || strUrlMenuContextuel2;
+                /*
+                 * Reseaux Sociaux
+                 * 
+                 */
+                var XMLReseauxSociaux = $(d).find('reseauxSociaux');
+                strReseauxSociauxAffiche = XMLReseauxSociaux.attr('affiche') || strReseauxSociauxAffiche;
+                bReseauxSociaux = (strReseauxSociauxAffiche === "oui");
+                reseauxSociauxOpacite = parseFloat(XMLReseauxSociaux.attr('opacite')) || reseauxSociauxOpacite;
+                strReseauxSociauxPositionX = XMLReseauxSociaux.attr('positionX') || strReseauxSociauxPositionX;
+                strReseauxSociauxPositionY = XMLReseauxSociaux.attr('positionY') || strReseauxSociauxPositionY;
+                reseauxSociauxDX = parseFloat(XMLReseauxSociaux.attr('dX')) || reseauxSociauxDX;
+                reseauxSociauxDY = parseFloat(XMLReseauxSociaux.attr('dY')) || reseauxSociauxDY;
+                partageCalque = parseInt(XMLReseauxSociaux.attr('partageCalque')) || partageCalque;
 
-                    reseauxSociauxTaille = parseFloat(XMLReseauxSociaux.attr('taille')) || reseauxSociauxTaille;
-                    strReseauxSociauxTwitter = XMLReseauxSociaux.attr('twitter') || strReseauxSociauxTwitter;
-                    strReseauxSociauxFacebook = XMLReseauxSociaux.attr('facebook') || strReseauxSociauxFacebook;
-                    strReseauxSociauxEmail = XMLReseauxSociaux.attr('email') || strReseauxSociauxEmail;
-                    /*
-                     * Bouton de masquage
-                     * 
-                     */
+                reseauxSociauxTaille = parseFloat(XMLReseauxSociaux.attr('taille')) || reseauxSociauxTaille;
+                strReseauxSociauxTwitter = XMLReseauxSociaux.attr('twitter') || strReseauxSociauxTwitter;
+                strReseauxSociauxFacebook = XMLReseauxSociaux.attr('facebook') || strReseauxSociauxFacebook;
+                strReseauxSociauxEmail = XMLReseauxSociaux.attr('email') || strReseauxSociauxEmail;
+                /*
+                 * Bouton de masquage
+                 * 
+                 */
 
-                    var XMLMarcheArret = $(d).find('marcheArret');
-                    bMarcheArretAffiche = XMLMarcheArret.attr('affiche') || bMarcheArretAffiche;
-                    bMarcheArret = (bMarcheArretAffiche === "oui");
-                    strMarcheArretImage = XMLMarcheArret.attr('image') || strMarcheArretImage;
-                    marcheArretOpacite = parseFloat(XMLMarcheArret.attr('opacite')) || marcheArretOpacite;
-                    strMarcheArretPositionX = XMLMarcheArret.attr('positionX') || strMarcheArretPositionX;
-                    strMarcheArretPositionY = XMLMarcheArret.attr('positionY') || strMarcheArretPositionY;
-                    marcheArretDX = parseFloat(XMLMarcheArret.attr('dX')) || marcheArretDX;
-                    marcheArretDY = parseFloat(XMLMarcheArret.attr('dY')) || marcheArretDY;
-                    marcheArretTaille = parseFloat(XMLMarcheArret.attr('taille')) || marcheArretTaille;
-                    strMarcheArretNavigation = XMLMarcheArret.attr('navigation') || strMarcheArretNavigation;
-                    strMarcheArretBoussole = XMLMarcheArret.attr('boussole') || strMarcheArretBoussole;
-                    strMarcheArretTitre = XMLMarcheArret.attr('titre') || strMarcheArretTitre;
-                    strMarcheArretPlan = XMLMarcheArret.attr('plan') || strMarcheArretPlan;
-                    strMarcheArretReseaux = XMLMarcheArret.attr('reseaux') || strMarcheArretReseaux;
-                    masquageCalque = parseInt(XMLMarcheArret.attr('masquageCalque')) || masquageCalque;
-                    strMarcheArretVignettes = XMLMarcheArret.attr('vignettes') || strMarcheArretVignettes;
-                    strMarcheArretCombo = XMLMarcheArret.attr('combo') || strMarcheArretCombo;
-                    strMarcheArretSuivPrec = XMLMarcheArret.attr('suivPrec') || strMarcheArretSuivPrec;
-                    strMarcheArretHotspots = XMLMarcheArret.attr('hotspots') || strMarcheArretHotspots;
-                    /**
-                     * Défintion pour la barre des boutons
-                     */
-                    var XMLBoutons = $(d).find('boutons');
-                    strDeplacements = XMLBoutons.attr('deplacements') || strDeplacements;
-                    strStyleBoutons = XMLBoutons.attr('styleBoutons') || strStyleBoutons;
-                    strZooms = XMLBoutons.attr('zoom') || strZooms;
-                    strOutils = XMLBoutons.attr('outils') || strOutils;
-                    iEspacementBoutons = parseInt(XMLBoutons.attr('espacement')) - 4 || 0;
-                    strFS = XMLBoutons.attr('fs') || strFS;
-                    strAutoRotation = XMLBoutons.attr('rotation') || strAutoRotation;
-                    strModeSouris = XMLBoutons.attr('souris') || strModeSouris;
-                    strBoutons = XMLBoutons.attr('visible') || strBoutons;
-                    strPositionX = XMLBoutons.attr('positionX') || strPositionX;
-                    strPositionY = XMLBoutons.attr('positionY') || strPositionY;
-                    barreCCalque = parseInt(XMLBoutons.attr('barreCCalque')) || barreCCalque;
+                var XMLMarcheArret = $(d).find('marcheArret');
+                bMarcheArretAffiche = XMLMarcheArret.attr('affiche') || bMarcheArretAffiche;
+                bMarcheArret = (bMarcheArretAffiche === "oui");
+                strMarcheArretImage = XMLMarcheArret.attr('image') || strMarcheArretImage;
+                marcheArretOpacite = parseFloat(XMLMarcheArret.attr('opacite')) || marcheArretOpacite;
+                strMarcheArretPositionX = XMLMarcheArret.attr('positionX') || strMarcheArretPositionX;
+                strMarcheArretPositionY = XMLMarcheArret.attr('positionY') || strMarcheArretPositionY;
+                marcheArretDX = parseFloat(XMLMarcheArret.attr('dX')) || marcheArretDX;
+                marcheArretDY = parseFloat(XMLMarcheArret.attr('dY')) || marcheArretDY;
+                marcheArretTaille = parseFloat(XMLMarcheArret.attr('taille')) || marcheArretTaille;
+                strMarcheArretNavigation = XMLMarcheArret.attr('navigation') || strMarcheArretNavigation;
+                strMarcheArretBoussole = XMLMarcheArret.attr('boussole') || strMarcheArretBoussole;
+                strMarcheArretTitre = XMLMarcheArret.attr('titre') || strMarcheArretTitre;
+                strMarcheArretPlan = XMLMarcheArret.attr('plan') || strMarcheArretPlan;
+                strMarcheArretReseaux = XMLMarcheArret.attr('reseaux') || strMarcheArretReseaux;
+                masquageCalque = parseInt(XMLMarcheArret.attr('masquageCalque')) || masquageCalque;
+                strMarcheArretVignettes = XMLMarcheArret.attr('vignettes') || strMarcheArretVignettes;
+                strMarcheArretCombo = XMLMarcheArret.attr('combo') || strMarcheArretCombo;
+                strMarcheArretSuivPrec = XMLMarcheArret.attr('suivPrec') || strMarcheArretSuivPrec;
+                strMarcheArretHotspots = XMLMarcheArret.attr('hotspots') || strMarcheArretHotspots;
+                /**
+                 * Défintion pour la barre des boutons
+                 */
+                var XMLBoutons = $(d).find('boutons');
+                strDeplacements = XMLBoutons.attr('deplacements') || strDeplacements;
+                strStyleBoutons = XMLBoutons.attr('styleBoutons') || strStyleBoutons;
+                strZooms = XMLBoutons.attr('zoom') || strZooms;
+                strOutils = XMLBoutons.attr('outils') || strOutils;
+                iEspacementBoutons = parseInt(XMLBoutons.attr('espacement')) - 4 || 0;
+                strFS = XMLBoutons.attr('fs') || strFS;
+                strAutoRotation = XMLBoutons.attr('rotation') || strAutoRotation;
+                strModeSouris = XMLBoutons.attr('souris') || strModeSouris;
+                strBoutons = XMLBoutons.attr('visible') || strBoutons;
+                strPositionX = XMLBoutons.attr('positionX') || strPositionX;
+                strPositionY = XMLBoutons.attr('positionY') || strPositionY;
+                barreCCalque = parseInt(XMLBoutons.attr('barreCCalque')) || barreCCalque;
 
-                    strCouleur = XMLBoutons.attr('couleur') || strCouleur;
-                    strBordure = XMLBoutons.attr('bordure') || strBordure;
-                    $("#xmoins-" + iNumPano + ",#xplus-" + iNumPano + ",#ymoins-" + iNumPano + ",#yplus-" + iNumPano + ",#zoomPlus-" + iNumPano + ",#zoomMoins-" + iNumPano +
-                            ",#pleinEcran-" + iNumPano + ",#souris-" + iNumPano + ",#auto-" + iNumPano + ",#binfo-" + iNumPano + ",#aide-" + iNumPano).css({
+                strCouleur = XMLBoutons.attr('couleur') || strCouleur;
+                strBordure = XMLBoutons.attr('bordure') || strBordure;
+                $("#xmoins-" + iNumPano + ",#xplus-" + iNumPano + ",#ymoins-" + iNumPano + ",#yplus-" + iNumPano + ",#zoomPlus-" + iNumPano + ",#zoomMoins-" + iNumPano +
+                    ",#pleinEcran-" + iNumPano + ",#souris-" + iNumPano + ",#auto-" + iNumPano + ",#binfo-" + iNumPano + ",#aide-" + iNumPano).css({
                         backgroundColor: strCouleur,
                         border: "1px solid " + strBordure
                     });
-                    strDX = XMLBoutons.attr('dX') || strDX;
-                    strDY = XMLBoutons.attr('dY') || strDY;
-                    /**
-                     * Défintion pour la barre des telecommande
-                     */
-                    arrBoutonsTelecommande = new Array();
-                    arrZonesTelecommande = new Array();
-                    var XMLTelecommande = $(d).find('telecommande');
-                    strTelecommande = XMLTelecommande.attr('visible') || strTelecommande;
-                    bTelecommande = (strTelecommande === "oui");
-                    strTelecommandeFS = XMLTelecommande.attr('fs') || strTelecommandeFS;
-                    strTelecommandeAutorotation = XMLTelecommande.attr('rotation') || strTelecommandeAutorotation;
-                    strTelecommandeSouris = XMLTelecommande.attr('souris') || strTelecommandeSouris;
-                    strTelecommandeInfo = XMLTelecommande.attr('info') || strTelecommandeSouris;
-                    strTelecommandeAide = XMLTelecommande.attr('aide') || strTelecommandeSouris;
-                    strTelecommandePositionX = XMLTelecommande.attr('positionX') || strTelecommandePositionX;
-                    strTelecommandePositionY = XMLTelecommande.attr('positionY') || strTelecommandePositionY;
-                    barrePCalque = parseInt(XMLTelecommande.attr('barrePCalque')) || barrePCalque;
+                strDX = XMLBoutons.attr('dX') || strDX;
+                strDY = XMLBoutons.attr('dY') || strDY;
+                /**
+                 * Défintion pour la barre des telecommande
+                 */
+                arrBoutonsTelecommande = new Array();
+                arrZonesTelecommande = new Array();
+                var XMLTelecommande = $(d).find('telecommande');
+                strTelecommande = XMLTelecommande.attr('visible') || strTelecommande;
+                bTelecommande = (strTelecommande === "oui");
+                strTelecommandeFS = XMLTelecommande.attr('fs') || strTelecommandeFS;
+                strTelecommandeAutorotation = XMLTelecommande.attr('rotation') || strTelecommandeAutorotation;
+                strTelecommandeSouris = XMLTelecommande.attr('souris') || strTelecommandeSouris;
+                strTelecommandeInfo = XMLTelecommande.attr('info') || strTelecommandeSouris;
+                strTelecommandeAide = XMLTelecommande.attr('aide') || strTelecommandeSouris;
+                strTelecommandePositionX = XMLTelecommande.attr('positionX') || strTelecommandePositionX;
+                strTelecommandePositionY = XMLTelecommande.attr('positionY') || strTelecommandePositionY;
+                barrePCalque = parseInt(XMLTelecommande.attr('barrePCalque')) || barrePCalque;
 
-                    telecommandeDX = parseFloat(XMLTelecommande.attr('dX')) || telecommandeDX;
-                    telecommandeDY = parseFloat(XMLTelecommande.attr('dY')) || telecommandeDY;
-                    telecommandeTaille = parseFloat(XMLTelecommande.attr('taille')) || telecommandeTaille;
-                    telecommandeTailleBouton = parseFloat(XMLTelecommande.attr('tailleBouton')) || telecommandeTailleBouton;
-                    strLien1BarrePersonnalisee = XMLTelecommande.attr('lien1') || strLien1BarrePersonnalisee;
-                    strLien2BarrePersonnalisee = XMLTelecommande.attr('lien2') || strLien2BarrePersonnalisee;
-                    i = 0;
-                    j = 0;
-                    $(d).find('zoneNavPerso').each(function () {
-                        if ($(this).attr('id').substring(0, 4) === "area") {
-                            var iNum = parseInt($(this).attr('id').substring(5, 6));
-                            arrZonesTelecommande[iNum] = new boutonTelecommande();
-                            arrZonesTelecommande[iNum].id = $(this).attr('id');
-                            arrZonesTelecommande[iNum].alt = $(this).attr('alt');
-                            arrZonesTelecommande[iNum].title = $(this).attr('title') || "";
-                            arrZonesTelecommande[iNum].shape = $(this).attr('shape') || "";
-                            arrZonesTelecommande[iNum].coords = $(this).attr('coords') || "";
-                            xmin = 1500;
-                            ymin = 1500;
-                            xmax = -1500;
-                            ymax = -1500;
-                            if (arrZonesTelecommande[iNum].shape === "poly" || arrZonesTelecommande[iNum].shape === "rect") {
-                                coord = arrZonesTelecommande[iNum].coords.split(",");
-                                for (kk = 0; kk < coord.length; kk += 2) {
-                                    if (parseFloat(coord[kk]) < xmin)
-                                        xmin = parseFloat(coord[kk]);
-                                    if (parseFloat(coord[kk + 1]) < ymin)
-                                        ymin = parseFloat(coord[kk + 1]);
-                                    if (parseFloat(coord[kk]) > xmax)
-                                        xmax = parseFloat(coord[kk]);
-                                    if (parseFloat(coord[kk + 1]) > ymax)
-                                        ymax = parseFloat(coord[kk + 1]);
-                                    arrZonesTelecommande[iNum].centerX = (xmin + xmax) / 2.0;
-                                    arrZonesTelecommande[iNum].centerY = (ymin + ymax) / 2.0;
-                                }
+                telecommandeDX = parseFloat(XMLTelecommande.attr('dX')) || telecommandeDX;
+                telecommandeDY = parseFloat(XMLTelecommande.attr('dY')) || telecommandeDY;
+                telecommandeTaille = parseFloat(XMLTelecommande.attr('taille')) || telecommandeTaille;
+                telecommandeTailleBouton = parseFloat(XMLTelecommande.attr('tailleBouton')) || telecommandeTailleBouton;
+                strLien1BarrePersonnalisee = XMLTelecommande.attr('lien1') || strLien1BarrePersonnalisee;
+                strLien2BarrePersonnalisee = XMLTelecommande.attr('lien2') || strLien2BarrePersonnalisee;
+                i = 0;
+                j = 0;
+                $(d).find('zoneNavPerso').each(function () {
+                    if ($(this).attr('id').substring(0, 4) === "area") {
+                        var iNum = parseInt($(this).attr('id').substring(5, 6));
+                        arrZonesTelecommande[iNum] = new boutonTelecommande();
+                        arrZonesTelecommande[iNum].id = $(this).attr('id');
+                        arrZonesTelecommande[iNum].alt = $(this).attr('alt');
+                        arrZonesTelecommande[iNum].title = $(this).attr('title') || "";
+                        arrZonesTelecommande[iNum].shape = $(this).attr('shape') || "";
+                        arrZonesTelecommande[iNum].coords = $(this).attr('coords') || "";
+                        xmin = 1500;
+                        ymin = 1500;
+                        xmax = -1500;
+                        ymax = -1500;
+                        if (arrZonesTelecommande[iNum].shape === "poly" || arrZonesTelecommande[iNum].shape === "rect") {
+                            coord = arrZonesTelecommande[iNum].coords.split(",");
+                            for (kk = 0; kk < coord.length; kk += 2) {
+                                if (parseFloat(coord[kk]) < xmin)
+                                    xmin = parseFloat(coord[kk]);
+                                if (parseFloat(coord[kk + 1]) < ymin)
+                                    ymin = parseFloat(coord[kk + 1]);
+                                if (parseFloat(coord[kk]) > xmax)
+                                    xmax = parseFloat(coord[kk]);
+                                if (parseFloat(coord[kk + 1]) > ymax)
+                                    ymax = parseFloat(coord[kk + 1]);
+                                arrZonesTelecommande[iNum].centerX = (xmin + xmax) / 2.0;
+                                arrZonesTelecommande[iNum].centerY = (ymin + ymax) / 2.0;
                             }
-                            else {
-                                coord = arrZonesTelecommande[iNum].coords.split(",");
-                                xmin = parseFloat(coord[0]);
-                                ymin = parseFloat(coord[1]);
-                                arrZonesTelecommande[iNum].centerX = xmin;
-                                arrZonesTelecommande[iNum].centerY = ymin;
-                            }
-                            j++;
                         }
                         else {
-                            arrBoutonsTelecommande[i] = new boutonTelecommande();
-                            arrBoutonsTelecommande[i].id = $(this).attr('id');
-                            arrBoutonsTelecommande[i].alt = $(this).attr('alt');
-                            arrBoutonsTelecommande[i].title = $(this).attr('title') || "";
-                            arrBoutonsTelecommande[i].shape = $(this).attr('shape') || "";
-                            arrBoutonsTelecommande[i].coords = $(this).attr('coords') || "";
-                            xmin = 1500;
-                            ymin = 1500;
-                            i++;
+                            coord = arrZonesTelecommande[iNum].coords.split(",");
+                            xmin = parseFloat(coord[0]);
+                            ymin = parseFloat(coord[1]);
+                            arrZonesTelecommande[iNum].centerX = xmin;
+                            arrZonesTelecommande[iNum].centerY = ymin;
                         }
-                    });
-                    /*
-                     * Hotspots
-                     */
-                    enleveHS();
-                    i = 0;
-                    $(d).find('point').each(function () {
-                        arrPointsInteret[i] = new pointInteret();
-                        arrPointsInteret[i].type = $(this).attr('type') || arrPointsInteret[i].type;
-                        switch (arrPointsInteret[i].type) {
-                            case "panoramique" :
-                                arrPointsInteret[i].contenu = $(this).attr('xml');
-                                break;
-                            case "image" :
-                                arrPointsInteret[i].contenu = $(this).attr('img');
-                                break;
-                            case "html" :
-                                arrPointsInteret[i].contenu = $(this).attr('url');
-                                break;
-                        }
-                        arrPointsInteret[i].info = $(this).attr('info') || "";
-                        arrPointsInteret[i].image = $(this).attr('image') || "panovisu/images/sprite2.png";
-                        arrPointsInteret[i].long = $(this).attr('long') || 0;
-                        arrPointsInteret[i].anime = $(this).attr('anime') || "false";
-                        arrPointsInteret[i].lat = $(this).attr('lat') || 0;
-                        arrPointsInteret[i].longitude = parseFloat($(this).attr('regardX')) || -1000;
-                        arrPointsInteret[i].latitude = parseFloat($(this).attr('regardY')) || -1000;
-                        arrPointsInteret[i].fov = parseFloat($(this).attr('champVisuel')) || 0;
-                        arrPointsInteret[i].largeur = $(this).attr('taille') || "100%";
-                        arrPointsInteret[i].taille = $(this).attr('tailleHS') || "30px";
-                        arrPointsInteret[i].position = $(this).attr('position') || "center";
-                        arrPointsInteret[i].couleur = $(this).attr('couleur') || "rgba(0,0,0,0.7)";
+                        j++;
+                    }
+                    else {
+                        arrBoutonsTelecommande[i] = new boutonTelecommande();
+                        arrBoutonsTelecommande[i].id = $(this).attr('id');
+                        arrBoutonsTelecommande[i].alt = $(this).attr('alt');
+                        arrBoutonsTelecommande[i].title = $(this).attr('title') || "";
+                        arrBoutonsTelecommande[i].shape = $(this).attr('shape') || "";
+                        arrBoutonsTelecommande[i].coords = $(this).attr('coords') || "";
+                        xmin = 1500;
+                        ymin = 1500;
                         i++;
-                    });
-                    /*
-                     * 
-                     * barre des vignettes
-                     */
-                    var XMLVignettes = $(d).find('vignettes');
-                    strVignettesAffiche = XMLVignettes.attr('affiche') || strVignettesAffiche;
-                    bVignettes = (strVignettesAffiche === "oui");
-                    vignettesOpacite = parseFloat(XMLVignettes.attr('opacite')) || vignettesOpacite;
-                    strVignettesPosition = XMLVignettes.attr('position') || strVignettesPosition;
-                    strVignettesFondCouleur = XMLVignettes.attr("fondCouleur") || strVignettesFondCouleur;
-                    vignettesCalque = parseInt(XMLVignettes.attr('vignettesCalque')) || vignettesCalque;
-                    strVignettesTexteCouleur = XMLVignettes.attr("texteCouleur") || strVignettesTexteCouleur;
-                    vignettesTaille = parseFloat(XMLVignettes.attr('taille')) || vignettesTaille;
-                    vignettesTailleImage = parseFloat(XMLVignettes.attr('tailleImage')) || vignettesTailleImage;
-                    /*
-                     *   vignettes des panoramiques
-                     */
-                    i = 0;
-                    $(d).find('imageVignette').each(function () {
-                        arrVignettesPano[i] = new vignettePano();
-                        arrVignettesPano[i].xml = $(this).attr('xml');
-                        arrVignettesPano[i].image = $(this).attr('image');
-                        arrVignettesPano[i].txt = $(this).attr('infoBulle') || "";
-                        i++;
-                    });
-                    /*
-                     * 
-                     * barre des comboMenu
-                     */
-
-                    var XMLComboMenu = $(d).find('comboMenu');
-                    strComboMenu = XMLComboMenu.attr('affiche') || strComboMenu;
-                    bComboMenuAffiche = (strComboMenu === "oui");
-                    strComboMenuPositionX = XMLComboMenu.attr('positionX') || strComboMenuPositionX;
-                    strComboMenuPositionY = XMLComboMenu.attr('positionY') || strComboMenuPositionY;
-                    comboCalque = parseInt(XMLComboMenu.attr('comboCalque')) || comboCalque;
-
-                    comboMenuDX = XMLComboMenu.attr('dX') || comboMenuDX;
-                    comboMenuDY = XMLComboMenu.attr('dY') || comboMenuDY;
-                    /*
-                     *   comboMenu des panoramiques
-                     */
-                    i = 0;
-                    $(d).find('imageComboMenu').each(function () {
-                        arrComboMenuPano[i] = new cbMenuPano();
-                        arrComboMenuPano[i].xml = $(this).attr('xml');
-                        arrComboMenuPano[i].image = $(this).attr('image');
-                        arrComboMenuPano[i].titre = $(this).attr('titre') || "";
-                        arrComboMenuPano[i].select = $(this).attr('selectionne') || "";
-                        arrComboMenuPano[i].sousTitre = $(this).attr('sousTitre') || "";
-                        i++;
-                    });
-                    /*
-                     * Images de fond
-                     */
-
-                    iNombreImageFond = 0;
-                    arrImagesFond = new Array();
-                    $(".imgFond").remove();
-                    $(d).find('imageFond').each(function () {
-                        arrImagesFond[iNombreImageFond] = new imageFond();
-                        arrImagesFond[iNombreImageFond].fichier = $(this).attr('fichier') || "";
-                        arrImagesFond[iNombreImageFond].url = $(this).attr('url') || "";
-                        arrImagesFond[iNombreImageFond].infobulle = $(this).attr('infobulle') || "";
-                        arrImagesFond[iNombreImageFond].tailleX = $(this).attr('tailleX') || "";
-                        arrImagesFond[iNombreImageFond].tailleY = $(this).attr('tailleY') || "";
-                        arrImagesFond[iNombreImageFond].posX = $(this).attr('posX') || "right";
-                        arrImagesFond[iNombreImageFond].posY = $(this).attr('posY') || "bottom";
-                        arrImagesFond[iNombreImageFond].offsetX = $(this).attr('offsetX') || 0;
-                        arrImagesFond[iNombreImageFond].offsetY = $(this).attr('offsetY') || 0;
-                        arrImagesFond[iNombreImageFond].opacite = $(this).attr('opacite') || 0;
-                        arrImagesFond[iNombreImageFond].calque = parseInt($(this).attr('calque')) || 1;
-                        arrImagesFond[iNombreImageFond].cible = $(this).attr('cible') || "interne";
-                        arrImagesFond[iNombreImageFond].masquable = (($(this).attr('masquable') || "oui") === "oui");
-                        iNombreImageFond++;
-                    });
-                    var XMLPlan = $(d).find('plan');
-                    planAff = XMLPlan.attr('affiche') || "non";
-                    bPlanAffiche = (planAff === "oui");
-                    strPlanImage = XMLPlan.attr('image') || strPlanImage;
-                    strPlanPosition = XMLPlan.attr('position') || strPlanPosition;
-                    strPlanCouleurFond = XMLPlan.attr("couleurFond") || strPlanCouleurFond;
-                    strPlanCouleurTexte = XMLPlan.attr("couleurTexte") || strPlanCouleurTexte;
-                    opacitePlan = parseFloat(XMLPlan.attr("opacitePlan")) || opacitePlan;
-                    planCalque = parseInt(XMLPlan.attr('planCalque')) || planCalque;
-
-                    planLargeur = parseFloat(XMLPlan.attr('largeur')) || planLargeur;
-                    planNord = parseFloat(XMLPlan.attr('nord')) || planNord;
-                    strPlanBoussolePosition = XMLPlan.attr('boussolePosition') || strPlanBoussolePosition;
-                    iPlanBoussoleX = parseInt(XMLPlan.attr('boussoleX')) || iPlanBoussoleX;
-                    iPlanBoussoleY = parseInt(XMLPlan.attr('boussoleY')) || iPlanBoussoleY;
-                    afficheRadar = XMLPlan.attr('radarAffiche') || "non";
-                    iRadarTaille = parseInt(XMLPlan.attr('radarTaille')) || iRadarTaille;
-                    radarOpacite = parseFloat(XMLPlan.attr('radarOpacite')) || radarOpacite;
-                    strRadarCouleurFond = XMLPlan.attr('radarCouleurFond') || strRadarCouleurFond;
-                    strRadarCouleurLigne = XMLPlan.attr('radarCouleurLigne') || strRadarCouleurLigne;
-                    bRadarAffiche = (afficheRadar === "oui");
-                    /*
-                     *   points du plan
-                     */
-                    i = 0;
-                    $(d).find('pointPlan').each(function () {
-                        arrPointsPlan[i] = new pointPlan();
-                        arrPointsPlan[i].xml = $(this).attr('xml');
-                        arrPointsPlan[i].texte = $(this).attr('texte') || "";
-                        arrPointsPlan[i].positX = parseInt($(this).attr('positX')) || 0;
-                        arrPointsPlan[i].positY = parseInt($(this).attr('positY')) || 0;
-                        i++;
-                    });
-                    var XMLCarte = $(d).find('carte');
-                    strCarteAff = XMLCarte.attr('affiche') || "non";
-                    bCarteAffiche = (strCarteAff === "oui");
-                    strCartePosition = XMLCarte.attr('position') || strCartePosition;
-                    strCarteCouleurFond = XMLCarte.attr("couleurFond") || strCarteCouleurFond;
-                    strCarteCouleurTexte = XMLCarte.attr("couleurTexte") || strCarteCouleurTexte;
-                    opaciteCarte = parseFloat(XMLCarte.attr("opaciteCarte")) || opaciteCarte;
-                    carteLargeur = parseFloat(XMLCarte.attr('largeur')) || carteLargeur;
-                    carteHauteur = parseFloat(XMLCarte.attr('hauteur')) || carteHauteur;
-                    iCarteZoom = parseInt(XMLCarte.attr('zoom')) || iCarteZoom;
-                    carteCalque = parseInt(XMLCarte.attr('carteCalque')) || carteCalque;
-
-                    coordCentreLong = parseFloat(XMLCarte.attr("coordCentreLong")) || coordCentreLong;
-                    coordCentreLat = parseFloat(XMLCarte.attr("coordCentreLat")) || coordCentreLat;
-                    strNomLayerCarte = XMLCarte.attr("nomLayer") || strNomLayerCarte;
-                    strAfficheRadarCarte = XMLCarte.attr('radarCarteAffiche') || "non";
-                    iRadarCarteTaille = parseInt(XMLCarte.attr('radarCarteTaille')) || iRadarCarteTaille;
-                    radarCarteOpacite = parseFloat(XMLCarte.attr('radarCarteOpacite')) || radarCarteOpacite;
-                    strRadarCarteCouleurFond = XMLCarte.attr('radarCarteCouleurFond') || strRadarCarteCouleurFond;
-                    strRadarCarteCouleurLigne = XMLCarte.attr('radarCarteCouleurLigne') || strRadarCarteCouleurLigne;
-                    radarCarteAffiche = (strAfficheRadarCarte === "oui");
-                    /*
-                     *   points du carte
-                     */
-                    i = 0;
-                    $(d).find('pointCarte').each(function () {
-                        arrPointsCarte[i] = new pointCarte();
-                        arrPointsCarte[i].xml = $(this).attr('xml');
-                        arrPointsCarte[i].html = $(this).attr('html') || "";
-                        arrPointsCarte[i].image = $(this).attr('image') || "";
-                        arrPointsCarte[i].positX = parseFloat($(this).attr('positX')) || 0;
-                        arrPointsCarte[i].positY = parseFloat($(this).attr('positY')) || 0;
-                        arrPointsCarte[i].html = arrPointsCarte[i].html.replace("&gt;", ">").replace("&lt;", "<");
-                        i++;
-                    });
-                    iNbPointCarte = i;
-                    /**
-                     * Initialisation de l'interface
-                     */
-                    if (strTitreTaille !== "adapte")
-                        if (strTitreTaille.match("[px]", "g"))
-                        {
-                            strTitreTailleUnite = "px";
-                            iTitreTailleFenetre = parseInt(strTitreTaille);
-                        }
-                        else
-                        {
-                            strTitreTailleUnite = "%";
-                            iTitreTailleFenetre = parseInt(strTitreTaille) / 100.0;
-                        }
-                    init(fenPanoramique);
-                    creeImagesboutons();
-                    /**
-                     * Initialisation de l'affichage du panoramique
-                     */
-                    switch (strPanoType)
-                    {
-                        case "cube":
-                            initPanoCube();
+                    }
+                });
+                /*
+                 * Hotspots
+                 */
+                enleveHS();
+                i = 0;
+                $(d).find('point').each(function () {
+                    arrPointsInteret[i] = new pointInteret();
+                    arrPointsInteret[i].type = $(this).attr('type') || arrPointsInteret[i].type;
+                    switch (arrPointsInteret[i].type) {
+                        case "panoramique":
+                            arrPointsInteret[i].contenu = $(this).attr('xml');
                             break;
-                        case "sphere":
-                            initPanoSphere();
+                        case "image":
+                            arrPointsInteret[i].contenu = $(this).attr('img');
+                            break;
+                        case "html":
+                            arrPointsInteret[i].contenu = $(this).attr('url');
                             break;
                     }
-                    changeTaille();
+                    arrPointsInteret[i].info = $(this).attr('info') || "";
+                    arrPointsInteret[i].image = $(this).attr('image') || "panovisu/images/sprite2.png";
+                    arrPointsInteret[i].long = $(this).attr('long') || 0;
+                    arrPointsInteret[i].anime = $(this).attr('anime') || "false";
+                    arrPointsInteret[i].lat = $(this).attr('lat') || 0;
+                    arrPointsInteret[i].longitude = parseFloat($(this).attr('regardX')) || -1000;
+                    arrPointsInteret[i].latitude = parseFloat($(this).attr('regardY')) || -1000;
+                    arrPointsInteret[i].fov = parseFloat($(this).attr('champVisuel')) || 0;
+                    arrPointsInteret[i].largeur = $(this).attr('taille') || "100%";
+                    arrPointsInteret[i].taille = $(this).attr('tailleHS') || "30px";
+                    arrPointsInteret[i].position = $(this).attr('position') || "center";
+                    arrPointsInteret[i].couleur = $(this).attr('couleur') || "rgba(0,0,0,0.7)";
+                    i++;
                 });
+                /*
+                 * 
+                 * barre des vignettes
+                 */
+                var XMLVignettes = $(d).find('vignettes');
+                strVignettesAffiche = XMLVignettes.attr('affiche') || strVignettesAffiche;
+                bVignettes = (strVignettesAffiche === "oui");
+                vignettesOpacite = parseFloat(XMLVignettes.attr('opacite')) || vignettesOpacite;
+                strVignettesPosition = XMLVignettes.attr('position') || strVignettesPosition;
+                strVignettesFondCouleur = XMLVignettes.attr("fondCouleur") || strVignettesFondCouleur;
+                vignettesCalque = parseInt(XMLVignettes.attr('vignettesCalque')) || vignettesCalque;
+                strVignettesTexteCouleur = XMLVignettes.attr("texteCouleur") || strVignettesTexteCouleur;
+                vignettesTaille = parseFloat(XMLVignettes.attr('taille')) || vignettesTaille;
+                vignettesTailleImage = parseFloat(XMLVignettes.attr('tailleImage')) || vignettesTailleImage;
+                /*
+                 *   vignettes des panoramiques
+                 */
+                i = 0;
+                $(d).find('imageVignette').each(function () {
+                    arrVignettesPano[i] = new vignettePano();
+                    arrVignettesPano[i].xml = $(this).attr('xml');
+                    arrVignettesPano[i].image = $(this).attr('image');
+                    arrVignettesPano[i].txt = $(this).attr('infoBulle') || "";
+                    i++;
+                });
+                /*
+                 * 
+                 * barre des comboMenu
+                 */
+
+                var XMLComboMenu = $(d).find('comboMenu');
+                strComboMenu = XMLComboMenu.attr('affiche') || strComboMenu;
+                bComboMenuAffiche = (strComboMenu === "oui");
+                strComboMenuPositionX = XMLComboMenu.attr('positionX') || strComboMenuPositionX;
+                strComboMenuPositionY = XMLComboMenu.attr('positionY') || strComboMenuPositionY;
+                comboCalque = parseInt(XMLComboMenu.attr('comboCalque')) || comboCalque;
+
+                comboMenuDX = XMLComboMenu.attr('dX') || comboMenuDX;
+                comboMenuDY = XMLComboMenu.attr('dY') || comboMenuDY;
+                /*
+                 *   comboMenu des panoramiques
+                 */
+                i = 0;
+                $(d).find('imageComboMenu').each(function () {
+                    arrComboMenuPano[i] = new cbMenuPano();
+                    arrComboMenuPano[i].xml = $(this).attr('xml');
+                    arrComboMenuPano[i].image = $(this).attr('image');
+                    arrComboMenuPano[i].titre = $(this).attr('titre') || "";
+                    arrComboMenuPano[i].select = $(this).attr('selectionne') || "";
+                    arrComboMenuPano[i].sousTitre = $(this).attr('sousTitre') || "";
+                    i++;
+                });
+                /*
+                 * Images de fond
+                 */
+
+                iNombreImageFond = 0;
+                arrImagesFond = new Array();
+                $(".imgFond").remove();
+                $(d).find('imageFond').each(function () {
+                    arrImagesFond[iNombreImageFond] = new imageFond();
+                    arrImagesFond[iNombreImageFond].fichier = $(this).attr('fichier') || "";
+                    arrImagesFond[iNombreImageFond].url = $(this).attr('url') || "";
+                    arrImagesFond[iNombreImageFond].infobulle = $(this).attr('infobulle') || "";
+                    arrImagesFond[iNombreImageFond].tailleX = $(this).attr('tailleX') || "";
+                    arrImagesFond[iNombreImageFond].tailleY = $(this).attr('tailleY') || "";
+                    arrImagesFond[iNombreImageFond].posX = $(this).attr('posX') || "right";
+                    arrImagesFond[iNombreImageFond].posY = $(this).attr('posY') || "bottom";
+                    arrImagesFond[iNombreImageFond].offsetX = $(this).attr('offsetX') || 0;
+                    arrImagesFond[iNombreImageFond].offsetY = $(this).attr('offsetY') || 0;
+                    arrImagesFond[iNombreImageFond].opacite = $(this).attr('opacite') || 0;
+                    arrImagesFond[iNombreImageFond].calque = parseInt($(this).attr('calque')) || 1;
+                    arrImagesFond[iNombreImageFond].cible = $(this).attr('cible') || "interne";
+                    arrImagesFond[iNombreImageFond].masquable = (($(this).attr('masquable') || "oui") === "oui");
+                    iNombreImageFond++;
+                });
+                var XMLPlan = $(d).find('plan');
+                planAff = XMLPlan.attr('affiche') || "non";
+                bPlanAffiche = (planAff === "oui");
+                strPlanImage = XMLPlan.attr('image') || strPlanImage;
+                strPlanPosition = XMLPlan.attr('position') || strPlanPosition;
+                strPlanCouleurFond = XMLPlan.attr("couleurFond") || strPlanCouleurFond;
+                strPlanCouleurTexte = XMLPlan.attr("couleurTexte") || strPlanCouleurTexte;
+                opacitePlan = parseFloat(XMLPlan.attr("opacitePlan")) || opacitePlan;
+                planCalque = parseInt(XMLPlan.attr('planCalque')) || planCalque;
+
+                planLargeur = parseFloat(XMLPlan.attr('largeur')) || planLargeur;
+                planNord = parseFloat(XMLPlan.attr('nord')) || planNord;
+                strPlanBoussolePosition = XMLPlan.attr('boussolePosition') || strPlanBoussolePosition;
+                iPlanBoussoleX = parseInt(XMLPlan.attr('boussoleX')) || iPlanBoussoleX;
+                iPlanBoussoleY = parseInt(XMLPlan.attr('boussoleY')) || iPlanBoussoleY;
+                afficheRadar = XMLPlan.attr('radarAffiche') || "non";
+                iRadarTaille = parseInt(XMLPlan.attr('radarTaille')) || iRadarTaille;
+                radarOpacite = parseFloat(XMLPlan.attr('radarOpacite')) || radarOpacite;
+                strRadarCouleurFond = XMLPlan.attr('radarCouleurFond') || strRadarCouleurFond;
+                strRadarCouleurLigne = XMLPlan.attr('radarCouleurLigne') || strRadarCouleurLigne;
+                bRadarAffiche = (afficheRadar === "oui");
+                /*
+                 *   points du plan
+                 */
+                i = 0;
+                $(d).find('pointPlan').each(function () {
+                    arrPointsPlan[i] = new pointPlan();
+                    arrPointsPlan[i].xml = $(this).attr('xml');
+                    arrPointsPlan[i].texte = $(this).attr('texte') || "";
+                    arrPointsPlan[i].positX = parseInt($(this).attr('positX')) || 0;
+                    arrPointsPlan[i].positY = parseInt($(this).attr('positY')) || 0;
+                    i++;
+                });
+                var XMLCarte = $(d).find('carte');
+                strCarteAff = XMLCarte.attr('affiche') || "non";
+                bCarteAffiche = (strCarteAff === "oui");
+                strCartePosition = XMLCarte.attr('position') || strCartePosition;
+                strCarteCouleurFond = XMLCarte.attr("couleurFond") || strCarteCouleurFond;
+                strCarteCouleurTexte = XMLCarte.attr("couleurTexte") || strCarteCouleurTexte;
+                opaciteCarte = parseFloat(XMLCarte.attr("opaciteCarte")) || opaciteCarte;
+                carteLargeur = parseFloat(XMLCarte.attr('largeur')) || carteLargeur;
+                carteHauteur = parseFloat(XMLCarte.attr('hauteur')) || carteHauteur;
+                iCarteZoom = parseInt(XMLCarte.attr('zoom')) || iCarteZoom;
+                carteCalque = parseInt(XMLCarte.attr('carteCalque')) || carteCalque;
+
+                coordCentreLong = parseFloat(XMLCarte.attr("coordCentreLong")) || coordCentreLong;
+                coordCentreLat = parseFloat(XMLCarte.attr("coordCentreLat")) || coordCentreLat;
+                strNomLayerCarte = XMLCarte.attr("nomLayer") || strNomLayerCarte;
+                strAfficheRadarCarte = XMLCarte.attr('radarCarteAffiche') || "non";
+                iRadarCarteTaille = parseInt(XMLCarte.attr('radarCarteTaille')) || iRadarCarteTaille;
+                radarCarteOpacite = parseFloat(XMLCarte.attr('radarCarteOpacite')) || radarCarteOpacite;
+                strRadarCarteCouleurFond = XMLCarte.attr('radarCarteCouleurFond') || strRadarCarteCouleurFond;
+                strRadarCarteCouleurLigne = XMLCarte.attr('radarCarteCouleurLigne') || strRadarCarteCouleurLigne;
+                radarCarteAffiche = (strAfficheRadarCarte === "oui");
+                /*
+                 *   points du carte
+                 */
+                i = 0;
+                $(d).find('pointCarte').each(function () {
+                    arrPointsCarte[i] = new pointCarte();
+                    arrPointsCarte[i].xml = $(this).attr('xml');
+                    arrPointsCarte[i].html = $(this).attr('html') || "";
+                    arrPointsCarte[i].image = $(this).attr('image') || "";
+                    arrPointsCarte[i].positX = parseFloat($(this).attr('positX')) || 0;
+                    arrPointsCarte[i].positY = parseFloat($(this).attr('positY')) || 0;
+                    arrPointsCarte[i].html = arrPointsCarte[i].html.replace("&gt;", ">").replace("&lt;", "<");
+                    i++;
+                });
+                iNbPointCarte = i;
+                /**
+                 * Initialisation de l'interface
+                 */
+                if (strTitreTaille !== "adapte")
+                    if (strTitreTaille.match("[px]", "g")) {
+                        strTitreTailleUnite = "px";
+                        iTitreTailleFenetre = parseInt(strTitreTaille);
+                    }
+                    else {
+                        strTitreTailleUnite = "%";
+                        iTitreTailleFenetre = parseInt(strTitreTaille) / 100.0;
+                    }
+                init(fenPanoramique);
+                creeImagesboutons();
+                /**
+                 * Initialisation de l'affichage du panoramique
+                 */
+                switch (strPanoType) {
+                    case "cube":
+                        initPanoCube();
+                        break;
+                    case "sphere":
+                        initPanoSphere();
+                        break;
+                }
+                changeTaille();
+            });
     }
 
     /**
@@ -6005,43 +6066,43 @@ function panovisu(iNumPano) {
          * Création de la barre de titreF
          */
         var fenetrePanoramique = "panovisu-" + iNumPano;
-        $("<div>", {id: fenetrePanoramique, class: "panovisu", style: "width : 100%;height : 100%;position: relative;"}).appendTo("#" + fenetre);
-        $("<img>", {id: "charge-" + iNumPano, class: "chargement", src: "panovisu/images/chargement.gif"}).appendTo("#" + fenetrePanoramique);
-        $("<div>", {id: "boussole-" + iNumPano, class: "boussole"}).appendTo("#" + fenetrePanoramique);
-        $("<img>", {id: "bousImg-" + iNumPano, class: "bousImg", src: ""}).appendTo("#boussole-" + iNumPano);
-        $("<img>", {id: "bousAig-" + iNumPano, class: "bousAig", src: ""}).appendTo("#boussole-" + iNumPano);
+        $("<div>", { id: fenetrePanoramique, class: "panovisu", style: "width : 100%;height : 100%;position: relative;" }).appendTo("#" + fenetre);
+        $("<img>", { id: "charge-" + iNumPano, class: "chargement", src: "panovisu/images/chargement.gif" }).appendTo("#" + fenetrePanoramique);
+        $("<div>", { id: "boussole-" + iNumPano, class: "boussole" }).appendTo("#" + fenetrePanoramique);
+        $("<img>", { id: "bousImg-" + iNumPano, class: "bousImg", src: "" }).appendTo("#boussole-" + iNumPano);
+        $("<img>", { id: "bousAig-" + iNumPano, class: "bousAig", src: "" }).appendTo("#boussole-" + iNumPano);
         $("#boussole-" + iNumPano).hide();
-        $("<div>", {id: "marcheArret-" + iNumPano, class: "marcheArret"}).appendTo("#" + fenetrePanoramique);
-        $("<img>", {id: "MAImg-" + iNumPano, class: "MAImg", src: "", title: chainesTraduction[strLangage].afficheMasque}).appendTo("#marcheArret-" + iNumPano);
+        $("<div>", { id: "marcheArret-" + iNumPano, class: "marcheArret" }).appendTo("#" + fenetrePanoramique);
+        $("<img>", { id: "MAImg-" + iNumPano, class: "MAImg", src: "", title: chainesTraduction[strLangage].afficheMasque }).appendTo("#marcheArret-" + iNumPano);
         $("#marcheArret-" + iNumPano).hide();
-        $("<div>", {id: "reseauxSociaux-" + iNumPano, class: "reseauxSociaux"}).appendTo("#" + fenetrePanoramique);
-        $("<img>", {id: "RSTW-" + iNumPano, class: "RS reseauSocial-twitter", src: "", title: "twitter"}).appendTo("#reseauxSociaux-" + iNumPano);
-        $("<img>", {id: "RSFB-" + iNumPano, class: "RS reseauSocial-fb", src: "", title: "facebook"}).appendTo("#reseauxSociaux-" + iNumPano);
-        $("<a>", {id: "lienEmail" + iNumPano, class: "RS reseauSocial-email", href: ""}).appendTo("#reseauxSociaux-" + iNumPano);
-        $("<img>", {id: "RSEM-" + iNumPano, src: "", title: "email"}).appendTo("#lienEmail" + iNumPano);
+        $("<div>", { id: "reseauxSociaux-" + iNumPano, class: "reseauxSociaux" }).appendTo("#" + fenetrePanoramique);
+        $("<img>", { id: "RSTW-" + iNumPano, class: "RS reseauSocial-twitter", src: "", title: "twitter" }).appendTo("#reseauxSociaux-" + iNumPano);
+        $("<img>", { id: "RSFB-" + iNumPano, class: "RS reseauSocial-fb", src: "", title: "facebook" }).appendTo("#reseauxSociaux-" + iNumPano);
+        $("<a>", { id: "lienEmail" + iNumPano, class: "RS reseauSocial-email", href: "" }).appendTo("#reseauxSociaux-" + iNumPano);
+        $("<img>", { id: "RSEM-" + iNumPano, src: "", title: "email" }).appendTo("#lienEmail" + iNumPano);
         $("#reseauxSociaux-" + iNumPano).hide();
-        $("<div>", {id: "info-" + iNumPano, class: "info"}).appendTo("#" + fenetrePanoramique);
-        $("<div>", {id: "infoBulle-" + iNumPano, class: "infoBulle", style: "display:none;position: absolute;"}).appendTo("#" + fenetrePanoramique);
+        $("<div>", { id: "info-" + iNumPano, class: "info" }).appendTo("#" + fenetrePanoramique);
+        $("<div>", { id: "infoBulle-" + iNumPano, class: "infoBulle", style: "display:none;position: absolute;" }).appendTo("#" + fenetrePanoramique);
         //$("#infoBulle-" + iNumPano).html("infoBulle");
         /**
          * création du conteneur du panoramique
          */
-        $("<div>", {id: "pano1-" + iNumPano, class: "pano1"}).appendTo("#" + fenetrePanoramique);
-        $("<div>", {id: "container-" + iNumPano, class: "container", style: "z-index:10000"}).appendTo("#pano1-" + iNumPano);
-        $("<div>", {id: "divVignettes-" + iNumPano, class: "vignettes"}).appendTo("#pano1-" + iNumPano);
-        $("<div>", {id: "titreVignettes-" + iNumPano, class: "titreVignettes"}).appendTo("#pano1-" + iNumPano);
+        $("<div>", { id: "pano1-" + iNumPano, class: "pano1" }).appendTo("#" + fenetrePanoramique);
+        $("<div>", { id: "container-" + iNumPano, class: "container", style: "z-index:10000" }).appendTo("#pano1-" + iNumPano);
+        $("<div>", { id: "divVignettes-" + iNumPano, class: "vignettes" }).appendTo("#pano1-" + iNumPano);
+        $("<div>", { id: "titreVignettes-" + iNumPano, class: "titreVignettes" }).appendTo("#pano1-" + iNumPano);
         $("#titreVignettes-" + iNumPano).html(chainesTraduction[strLangage].vignettes);
         $("#divVignettes-" + iNumPano).hide();
         $("#titreVignettes-" + iNumPano).hide();
-        $("<div>", {id: "divImage-" + iNumPano, class: "vignettes"}).appendTo("#pano1-" + iNumPano);
+        $("<div>", { id: "divImage-" + iNumPano, class: "vignettes" }).appendTo("#pano1-" + iNumPano);
         $("#divImage-" + iNumPano).hide();
-        $("<div>", {id: "divHTML-" + iNumPano, class: "vignettes"}).appendTo("#pano1-" + iNumPano);
+        $("<div>", { id: "divHTML-" + iNumPano, class: "vignettes" }).appendTo("#pano1-" + iNumPano);
         $("#divHTML-" + iNumPano).hide();
-        $("<div>", {id: "divPrecedent-" + iNumPano, class: "precedent", title: chainesTraduction[strLangage].panoPrecedent}).appendTo("#pano1-" + iNumPano);
-        $("<div>", {id: "divSuivant-" + iNumPano, class: "suivant", title: chainesTraduction[strLangage].panoSuivant}).appendTo("#pano1-" + iNumPano);
+        $("<div>", { id: "divPrecedent-" + iNumPano, class: "precedent", title: chainesTraduction[strLangage].panoPrecedent }).appendTo("#pano1-" + iNumPano);
+        $("<div>", { id: "divSuivant-" + iNumPano, class: "suivant", title: chainesTraduction[strLangage].panoSuivant }).appendTo("#pano1-" + iNumPano);
         $("#divPrecedent-" + iNumPano).hide();
         $("#divSuivant-" + iNumPano).hide();
-        $("<div>", {id: "btnVisiteAuto-" + iNumPano, class: "btnVisiteAuto"}).appendTo("#" + fenetrePanoramique);
+        $("<div>", { id: "btnVisiteAuto-" + iNumPano, class: "btnVisiteAuto" }).appendTo("#" + fenetrePanoramique);
         bPlanRentre = false;
         bCarteRentre = false;
         bVignettesRentre = true;
@@ -6052,20 +6113,20 @@ function panovisu(iNumPano) {
          *              - zoom 
          *              - outils (plein écran, mode souris et autorotation)
          */
-        $("<div>", {id: "telec-" + iNumPano, class: "telecommande"}).appendTo("#" + fenetrePanoramique);
-        $("<div>", {id: "comboMenu-" + iNumPano, class: "comboMenu"}).appendTo("#" + fenetrePanoramique);
-        $("<div>", {id: "boutons-" + iNumPano, class: "boutons"}).appendTo("#" + fenetrePanoramique);
-        $("<div>", {id: "barre-" + iNumPano, class: "barre"}).appendTo("#boutons-" + iNumPano);
-        $("<div>", {id: "deplacement-" + iNumPano, class: "deplacement"}).appendTo("#barre-" + iNumPano);
-        $("<div>", {id: "zoom-" + iNumPano, class: "zoom"}).appendTo("#barre-" + iNumPano);
-        $("<div>", {id: "outils-" + iNumPano, class: "outils"}).appendTo("#barre-" + iNumPano);
-        $("<div>", {id: "plan-" + iNumPano, class: "plan"}).appendTo("#pano1-" + iNumPano);
-        $("<div>", {id: "planTitre-" + iNumPano, class: "planTitre"}).appendTo("#pano1-" + iNumPano);
+        $("<div>", { id: "telec-" + iNumPano, class: "telecommande" }).appendTo("#" + fenetrePanoramique);
+        $("<div>", { id: "comboMenu-" + iNumPano, class: "comboMenu" }).appendTo("#" + fenetrePanoramique);
+        $("<div>", { id: "boutons-" + iNumPano, class: "boutons" }).appendTo("#" + fenetrePanoramique);
+        $("<div>", { id: "barre-" + iNumPano, class: "barre" }).appendTo("#boutons-" + iNumPano);
+        $("<div>", { id: "deplacement-" + iNumPano, class: "deplacement" }).appendTo("#barre-" + iNumPano);
+        $("<div>", { id: "zoom-" + iNumPano, class: "zoom" }).appendTo("#barre-" + iNumPano);
+        $("<div>", { id: "outils-" + iNumPano, class: "outils" }).appendTo("#barre-" + iNumPano);
+        $("<div>", { id: "plan-" + iNumPano, class: "plan" }).appendTo("#pano1-" + iNumPano);
+        $("<div>", { id: "planTitre-" + iNumPano, class: "planTitre" }).appendTo("#pano1-" + iNumPano);
         $("#plan-" + iNumPano).hide();
         $("#planTitre-" + iNumPano).hide();
         $("#planTitre-" + iNumPano).css("transform", "rotate(90deg)");
-        $("<div>", {id: "carte-" + iNumPano, class: "carte"}).appendTo("#pano1-" + iNumPano);
-        $("<div>", {id: "carteTitre-" + iNumPano, class: "carteTitre"}).appendTo("#pano1-" + iNumPano);
+        $("<div>", { id: "carte-" + iNumPano, class: "carte" }).appendTo("#pano1-" + iNumPano);
+        $("<div>", { id: "carteTitre-" + iNumPano, class: "carteTitre" }).appendTo("#pano1-" + iNumPano);
         $("#carte-" + iNumPano).hide();
         $("#carteTitre-" + iNumPano).hide();
         $("#carteTitre-" + iNumPano).css("transform", "rotate(90deg)");
@@ -6093,10 +6154,9 @@ function panovisu(iNumPano) {
         conteneur.addEventListener('touchstart', function (evenement) {
             evenement.preventDefault();
             if (evenement.targetTouches.length === 1) {
-                if (bAfficheInfo)
-                {
+                if (bAfficheInfo) {
                     $("#infoPanovisu-" + iNumPano).fadeOut(2000, function () {
-                        $(this).css({display: "none"});
+                        $(this).css({ display: "none" });
                         bAfficheInfo = false;
                     });
 
@@ -6110,8 +6170,7 @@ function panovisu(iNumPano) {
                     deltaY = 0;
                     timer = requestAnimFrame(deplaceMode2);
                 }
-                else
-                {
+                else {
                     onPointerDownLon = longitude;
                     onPointerDownLat = latitude;
 
@@ -6119,10 +6178,9 @@ function panovisu(iNumPano) {
 
             }
             if (evenement.targetTouches.length === 2) {
-                if (bAfficheInfo)
-                {
+                if (bAfficheInfo) {
                     $("#infoPanovisu-" + iNumPano).fadeOut(2000, function () {
-                        $(this).css({display: "none"});
+                        $(this).css({ display: "none" });
                         bAfficheInfo = false;
                     });
 
@@ -6219,7 +6277,8 @@ function panovisu(iNumPano) {
                         width: this.width,
                         height: this.height,
                         usemap: "#telecommandeMap-" + iNumPano,
-                        alt: ""}).appendTo("#telec-" + iNumPano);
+                        alt: ""
+                    }).appendTo("#telec-" + iNumPano);
                     var tailleBtnTelec = telecommandeTailleBouton;
                     var decalage = 0;
                     var zoneActive = 1;
@@ -6381,7 +6440,8 @@ function panovisu(iNumPano) {
                             shape: arrBoutonsTelecommande[i].shape,
                             coords: arrBoutonsTelecommande[i].coords,
                             style: "outline:none;",
-                            target: "_self"}).appendTo("#telecommandeMap-" + iNumPano);
+                            target: "_self"
+                        }).appendTo("#telecommandeMap-" + iNumPano);
                     }
                     trX = "50%";
                     trY = "50%";
@@ -6436,19 +6496,19 @@ function panovisu(iNumPano) {
                     $("#cbMenu-" + iNumPano).append($("<option>", {
                         value: element.xml
                     }).attr("data-image", element.image)
-                            .attr("data-description", element.sousTitre)
-                            .attr(attrib, element.select)
-                            .text(element.titre));
+                        .attr("data-description", element.sousTitre)
+                        .attr(attrib, element.select)
+                        .text(element.titre));
                 }
                 else {
                     $("#cbMenu-" + iNumPano).append($("<option>", {
                         value: element.xml
                     }).attr("data-description", element.sousTitre)
-                            .attr(attrib, element.select)
-                            .text(element.titre));
+                        .attr(attrib, element.select)
+                        .text(element.titre));
                 }
             });
-            $("#cbMenu-" + iNumPano).msDropdown({visibleRows: 4});
+            $("#cbMenu-" + iNumPano).msDropdown({ visibleRows: 4 });
             $("#cbMenu-" + iNumPano).on('change', function () {
                 var nomPanoXML = this.value;
                 //$("#container-" + iNumPano).fadeOut(500, function () {
@@ -6463,11 +6523,11 @@ function panovisu(iNumPano) {
     function rechargePano(xmlFile) {
         bDejaCharge = true;
         clearInterval(timers);
-//        if (!bReloaded) {
-//            longitude = 0;
-//            latitude = 0;
-//            fov = 50;
-//        }
+        //        if (!bReloaded) {
+        //            longitude = 0;
+        //            latitude = 0;
+        //            fov = 50;
+        //        }
         bReloaded = true;
         enleveHS();
         arrHotSpot = new Array();
@@ -6485,8 +6545,7 @@ function panovisu(iNumPano) {
      * @param {type} contexte
      * @returns {undefined}
      */
-    this.initialisePano = function (contexte)
-    {
+    this.initialisePano = function (contexte) {
         var defaut = {
             langue: "fr_FR",
             xml: 'xml/panovisu.xml',
@@ -6504,26 +6563,22 @@ function panovisu(iNumPano) {
         maxFOV = contexte.maxFOV;
         minFOV = contexte.minFOV;
         var fenetre = fenPanoramique;
-        $(fenetre).css({overflow: "hidden"});
+        $(fenetre).css({ overflow: "hidden" });
         creeContexte(fenetre);
         xmlFile = GET["xml"] || contexte.xml;
-        if (contexte.fenX.match("[px]", "g"))
-        {
+        if (contexte.fenX.match("[px]", "g")) {
             fenetreUniteX = "px";
             fenetreX = parseInt(contexte.fenX);
         }
-        else
-        {
+        else {
             fenetreUniteX = "%";
             fenetreX = parseInt(contexte.fenX) / 100.0;
         }
-        if (contexte.fenY.match("[px]", "g"))
-        {
+        if (contexte.fenY.match("[px]", "g")) {
             fenetreUniteY = "px";
             fenetreY = parseInt(contexte.fenY);
         }
-        else
-        {
+        else {
             fenetreUniteY = "%";
             fenetreY = parseInt(contexte.fenY) / 100.0;
         }
@@ -6536,7 +6591,7 @@ function panovisu(iNumPano) {
          * lecture du fichier XML
          */
         chargeXML(xmlFile);
-        
+
         /**
          * Affichage asynchrone de la fenêtre d'info au tout début du chargement
          * Marquer immédiatement bAfficheInfo=true pour bloquer l'affichage de la description
@@ -6547,7 +6602,7 @@ function panovisu(iNumPano) {
             bAfficheInfo = true; // Bloquer immédiatement la description
             console.log("DEBUG initialisePano() - bAfficheInfo mis à true immédiatement");
         }
-        setTimeout(function() {
+        setTimeout(function () {
             console.log("DEBUG initialisePano() setTimeout - bPremierChargement:", bPremierChargement);
             if (bPremierChargement) {
                 console.log("DEBUG initialisePano() - Affichage de la fenêtre de bienvenue");
@@ -6580,16 +6635,16 @@ function panovisu(iNumPano) {
      * @param {type} opaciteFond
      * @returns {unresolved}
      */
-    function traceArc(centreX, centreY, rayon, angleDebut, angleFin, secteur, couleurFond, couleurLigne, opaciteFond)
-    {
+    function traceArc(centreX, centreY, rayon, angleDebut, angleFin, secteur, couleurFond, couleurLigne, opaciteFond) {
         var epaisseur = (secteur) ? 1 : 3;
-        layerRadar.styleMap = new OpenLayers.StyleMap({'default':
-                    {
-                        'strokeWidth': 1,
-                        'fillColor': couleurFond,
-                        'fillOpacity': opaciteFond,
-                        'strokeColor': couleurLigne
-                    }
+        layerRadar.styleMap = new OpenLayers.StyleMap({
+            'default':
+            {
+                'strokeWidth': 1,
+                'fillColor': couleurFond,
+                'fillOpacity': opaciteFond,
+                'strokeColor': couleurLigne
+            }
         });
 
         var segments = Math.abs(angleFin - angleDebut) * 2;
@@ -6598,8 +6653,7 @@ function panovisu(iNumPano) {
             pointCercle.push(new OpenLayers.Geometry.Point(centreX, centreY));
         }
         var dAngle = segments + 1;
-        for (var i = 0; i < dAngle; i++)
-        {
+        for (var i = 0; i < dAngle; i++) {
             var Angle = angleDebut - (angleDebut - angleFin) * i / (dAngle - 1);
             var x = centreX + rayon * Math.cos(Angle * Math.PI / 180);
             var y = centreY + rayon * Math.sin(Angle * Math.PI / 180);
@@ -6615,7 +6669,7 @@ function panovisu(iNumPano) {
         else {
             arcCercle = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.LineString(pointCercle));
         }
-        return(arcCercle);
+        return (arcCercle);
     }
 
     /**
@@ -6723,42 +6777,42 @@ function panovisu(iNumPano) {
             marker.setOpacity(1.0);
         }
         marker.events.register("mouseover", marker,
-                function () {
-                    if (arrPointsCarte[numeroMarqueur].xml !== "actif") {
-                        popup = new OpenLayers.Popup(
-                                "marq" + numeroMarqueur,
-                                new OpenLayers.LonLat(longitude2Mercator(longitude), latitude2Mercator(latitude)),
-                                new OpenLayers.Size(250, 150),
-                                contenuPopup,
-                                true
-                                );
-                        map.addPopup(popup);
-                    }
-                    this.setOpacity(1);
+            function () {
+                if (arrPointsCarte[numeroMarqueur].xml !== "actif") {
+                    popup = new OpenLayers.Popup(
+                        "marq" + numeroMarqueur,
+                        new OpenLayers.LonLat(longitude2Mercator(longitude), latitude2Mercator(latitude)),
+                        new OpenLayers.Size(250, 150),
+                        contenuPopup,
+                        true
+                    );
+                    map.addPopup(popup);
                 }
+                this.setOpacity(1);
+            }
         );
         marker.events.register("mouseout", marker,
-                function () {
-                    if (arrPointsCarte[numeroMarqueur].xml !== "actif") {
-                        map.removePopup(popup);
-                    }
-                    if (arrPointsCarte[numeroMarqueur].xml !== "actif") {
-                        marker.setOpacity(0.8);
-                    }
-                    else {
-                        marker.setOpacity(1.0);
-                    }
+            function () {
+                if (arrPointsCarte[numeroMarqueur].xml !== "actif") {
+                    map.removePopup(popup);
                 }
+                if (arrPointsCarte[numeroMarqueur].xml !== "actif") {
+                    marker.setOpacity(0.8);
+                }
+                else {
+                    marker.setOpacity(1.0);
+                }
+            }
         );
         marker.events.register("mousedown", marker,
-                function () {
-                    if (arrPointsCarte[numeroMarqueur].xml !== "actif") {
-                        map.removePopup(popup);
-                        //$("#container-" + iNumPano).fadeOut(200, function () {
-                        rechargePano(arrPointsCarte[numeroMarqueur].xml);
-                        //});
-                    }
+            function () {
+                if (arrPointsCarte[numeroMarqueur].xml !== "actif") {
+                    map.removePopup(popup);
+                    //$("#container-" + iNumPano).fadeOut(200, function () {
+                    rechargePano(arrPointsCarte[numeroMarqueur].xml);
+                    //});
                 }
+            }
         );
         layer.addMarker(marker);
         arrMarqueurs[numeroMarqueur] = marker;
@@ -6771,8 +6825,7 @@ function panovisu(iNumPano) {
     function enleveMarqueurs() {
         for (var i = 0; i <= iMaxMarqueur; i++) {
             var marker = arrMarqueurs[i];
-            if (marker !== null)
-            {
+            if (marker !== null) {
                 layerMarqueurs.removeMarker(marker);
             }
         }
@@ -6785,8 +6838,7 @@ function panovisu(iNumPano) {
      */
     function enleveMarqueur(pId) {
         var marker = arrMarqueurs[pId];
-        if (marker !== null)
-        {
+        if (marker !== null) {
             layerMarqueurs.removeMarker(marker);
         }
     }
@@ -6944,23 +6996,23 @@ function panovisu(iNumPano) {
         radar = new defRadar();
         OpenLayers.Lang.setCode('fr');
         map = new OpenLayers.Map(idCarte,
-                {
-                    projection: new OpenLayers.Projection("EPSG:900913"),
-                    displayProjection: new OpenLayers.Projection("EPSG:4326"),
-                    controls: [
-                        new OpenLayers.Control.Navigation(),
-                        new OpenLayers.Control.PanZoomBar(),
-                        new OpenLayers.Control.ScaleLine(),
-                        new OpenLayers.Control.MousePosition(),
-                        new OpenLayers.Control.LayerSwitcher()
-                    ],
-                    maxExtent:
-                            new OpenLayers.Bounds(-20037508.34, -20037508.34,
-                                    20037508.34, 20037508.34),
-                    maxResolution: 156543,
-                    lang: "fr",
-                    units: 'meters'
-                });
+            {
+                projection: new OpenLayers.Projection("EPSG:900913"),
+                displayProjection: new OpenLayers.Projection("EPSG:4326"),
+                controls: [
+                    new OpenLayers.Control.Navigation(),
+                    new OpenLayers.Control.PanZoomBar(),
+                    new OpenLayers.Control.ScaleLine(),
+                    new OpenLayers.Control.MousePosition(),
+                    new OpenLayers.Control.LayerSwitcher()
+                ],
+                maxExtent:
+                    new OpenLayers.Bounds(-20037508.34, -20037508.34,
+                        20037508.34, 20037508.34),
+                maxResolution: 156543,
+                lang: "fr",
+                units: 'meters'
+            });
 
         openStreetMap = new OpenLayers.Layer.OSM.Mapnik("OpenStreetMap", {
             numZoomLevels: 20,
@@ -7038,14 +7090,15 @@ function panovisu(iNumPano) {
      * @returns {unresolved}
      */
     function creeRadar(couleurTrait, couleurFond, opacite, rayon) {
-        var vector = new OpenLayers.Layer.Vector("Radar", {'displayInLayerSwitcher': false});
-        vector.styleMap = new OpenLayers.StyleMap({'default':
-                    {
-                        'strokeWidth': 1,
-                        'strokeColor': couleurTrait,
-                        'fillColor': couleurFond,
-                        'fillOpacity': opacite
-                    }
+        var vector = new OpenLayers.Layer.Vector("Radar", { 'displayInLayerSwitcher': false });
+        vector.styleMap = new OpenLayers.StyleMap({
+            'default':
+            {
+                'strokeWidth': 1,
+                'strokeColor': couleurTrait,
+                'fillColor': couleurFond,
+                'fillOpacity': opacite
+            }
         });
         vector.rayon = rayon;
         return vector;
@@ -7059,20 +7112,20 @@ function panovisu(iNumPano) {
      */
     function chercheAdresse(adresse, zoom) {
         var geocoder = new google.maps.Geocoder();
-        geocoder.geocode({'address': adresse},
-        function (results, status) {
-            if (status !== google.maps.GeocoderStatus.OK) {
-                javafx.adresseInconnue("\"" + adresse + "\" non trouvée\n" + status);
-            } else {
-                javafx.adresseTrouvee(results[0].geometry.location.lng(), results[0].geometry.location.lat());
-                map.setCenter(
+        geocoder.geocode({ 'address': adresse },
+            function (results, status) {
+                if (status !== google.maps.GeocoderStatus.OK) {
+                    javafx.adresseInconnue("\"" + adresse + "\" non trouvée\n" + status);
+                } else {
+                    javafx.adresseTrouvee(results[0].geometry.location.lng(), results[0].geometry.location.lat());
+                    map.setCenter(
                         new OpenLayers.LonLat(
-                                longitude2Mercator(results[0].geometry.location.lng()),
-                                latitude2Mercator(results[0].geometry.location.lat())
-                                ),
+                            longitude2Mercator(results[0].geometry.location.lng()),
+                            latitude2Mercator(results[0].geometry.location.lat())
+                        ),
                         zoom);
-            }
-        });
+                }
+            });
     }
 
     /**
@@ -7107,10 +7160,9 @@ function panovisu(iNumPano) {
         arreteMouvement = false;
         start = null;
         seconds = secondes || 2;
-        if (bAfficheInfo)
-        {
+        if (bAfficheInfo) {
             $("#infoPanovisu-" + iNumPano).fadeOut(200, function () {
-                $(this).css({display: "none"});
+                $(this).css({ display: "none" });
                 bAfficheInfo = false;
             });
         }
@@ -7128,10 +7180,9 @@ function panovisu(iNumPano) {
      * @returns {undefined}
      */
     this.setFOV = function (champVision) {
-        if (bAfficheInfo)
-        {
+        if (bAfficheInfo) {
             $("#infoPanovisu-" + iNumPano).fadeOut(2000, function () {
-                $(this).css({display: "none"});
+                $(this).css({ display: "none" });
                 bAfficheInfo = false;
             });
         }
@@ -7154,10 +7205,9 @@ function panovisu(iNumPano) {
      * @returns {undefined}
      */
     this.setLongitude = function (longit) {
-        if (bAfficheInfo)
-        {
+        if (bAfficheInfo) {
             $("#infoPanovisu-" + iNumPano).fadeOut(2000, function () {
-                $(this).css({display: "none"});
+                $(this).css({ display: "none" });
                 bAfficheInfo = false;
             });
         }
@@ -7179,10 +7229,9 @@ function panovisu(iNumPano) {
      * @returns {undefined}
      */
     this.setLatitude = function (latit) {
-        if (bAfficheInfo)
-        {
+        if (bAfficheInfo) {
             $("#infoPanovisu-" + iNumPano).fadeOut(2000, function () {
-                $(this).css({display: "none"});
+                $(this).css({ display: "none" });
                 bAfficheInfo = false;
             });
         }
@@ -7205,10 +7254,9 @@ function panovisu(iNumPano) {
      * @returns {undefined}
      */
     this.setPoint = function (longit, latit) {
-        if (bAfficheInfo)
-        {
+        if (bAfficheInfo) {
             $("#infoPanovisu-" + iNumPano).fadeOut(2000, function () {
-                $(this).css({display: "none"});
+                $(this).css({ display: "none" });
                 bAfficheInfo = false;
             });
         }
@@ -7245,10 +7293,9 @@ function panovisu(iNumPano) {
         arreteMouvement = false;
         start = null;
         seconds = secondes || 2;
-        if (bAfficheInfo)
-        {
+        if (bAfficheInfo) {
             $("#infoPanovisu-" + iNumPano).fadeOut(200, function () {
-                $(this).css({display: "none"});
+                $(this).css({ display: "none" });
                 bAfficheInfo = false;
             });
         }
@@ -7290,8 +7337,8 @@ function panovisu(iNumPano) {
  * 
  */
 $("head").append(
-        $(document.createElement("link")).attr({rel: "stylesheet", type: "text/css", href: "panovisu/css/panovisu.css", media: "screen"})
-        );
+    $(document.createElement("link")).attr({ rel: "stylesheet", type: "text/css", href: "panovisu/css/panovisu.css", media: "screen" })
+);
 /*
  * Teste si le navigateur supporte les fonctions HTML5-3D
  */

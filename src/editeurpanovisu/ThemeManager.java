@@ -173,6 +173,24 @@ public class ThemeManager {
         
         currentTheme = theme;
         saveThemePreference(theme);
+        
+        // Vider le cache des icônes SVG pour forcer le rechargement avec la nouvelle couleur
+        try {
+            Class<?> svgLoaderClass = Class.forName("editeurpanovisu.util.SvgIconLoader");
+            java.lang.reflect.Method clearCacheMethod = svgLoaderClass.getMethod("clearCache");
+            clearCacheMethod.invoke(null);
+            System.out.println("  ↳ Cache des icônes SVG vidé pour le nouveau thème");
+            
+            // Recharger les icônes de la barre d'outils avec les nouvelles couleurs
+            Class<?> editeurClass = Class.forName("editeurpanovisu.EditeurPanovisu");
+            java.lang.reflect.Method rechargerIconesMethod = editeurClass.getDeclaredMethod("rechargerIcones");
+            rechargerIconesMethod.setAccessible(true);
+            rechargerIconesMethod.invoke(null);
+            System.out.println("  ↳ Icônes de la barre d'outils rechargées");
+        } catch (Exception e) {
+            // Si SvgIconLoader ou rechargerIcones n'est pas disponible, ce n'est pas grave
+            System.out.println("  ⚠ Impossible de recharger les icônes : " + e.getMessage());
+        }
     }
     
     /**

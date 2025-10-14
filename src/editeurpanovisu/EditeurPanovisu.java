@@ -15,6 +15,7 @@ import static editeurpanovisu.GestionnaireInterfaceController.strNomfichierHSIma
 import static editeurpanovisu.GestionnaireInterfaceController.strTypeHS;
 import static editeurpanovisu.GestionnaireInterfaceController.strTypeHSHTML;
 import static editeurpanovisu.GestionnaireInterfaceController.strTypeHSImage;
+import editeurpanovisu.util.SvgIconLoader;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.io.BufferedReader;
@@ -164,6 +165,10 @@ public class EditeurPanovisu extends Application {
      */
     public static void setStrStyleCSS(String aStrStyleCSS) {
         strStyleCSS = aStrStyleCSS;
+        // Vider le cache des icônes SVG lors du changement de thème
+        editeurpanovisu.util.SvgIconLoader.clearCache();
+        // Recharger toutes les icônes avec les nouvelles couleurs
+        rechargerIcones();
     }
 
     /**
@@ -394,6 +399,73 @@ public class EditeurPanovisu extends Application {
      */
     public static void setStrRepertAppli(String aStrRepertAppli) {
         strRepertAppli = aStrRepertAppli;
+    }
+    
+    /**
+     * Charge une icône SVG avec la taille spécifiée
+     * @param iconName Nom de l'icône SVG (sans extension)
+     * @param size Taille en pixels
+     * @return ImageView contenant l'icône
+     */
+    public static ImageView loadSvgIcon(String iconName, int size) {
+        SvgIconLoader.setBaseAppPath(getStrRepertAppli());
+        return SvgIconLoader.loadSvgIcon(iconName, size);
+    }
+    
+    /**
+     * Charge une icône SVG avec couleur personnalisée
+     * @param iconName Nom de l'icône SVG (sans extension)
+     * @param size Taille en pixels
+     * @param color Couleur de l'icône
+     * @return ImageView contenant l'icône
+     */
+    public static ImageView loadSvgIcon(String iconName, int size, javafx.scene.paint.Color color) {
+        SvgIconLoader.setBaseAppPath(getStrRepertAppli());
+        return SvgIconLoader.loadSvgIcon(iconName, size, color);
+    }
+    
+    /**
+     * Charge une icône SVG avec dimensions rectangulaires
+     * @param iconName Nom de l'icône SVG (sans extension)
+     * @param width Largeur en pixels
+     * @param height Hauteur en pixels
+     * @param color Couleur de l'icône (null pour couleur automatique selon le thème)
+     * @return ImageView contenant l'icône
+     */
+    public static ImageView loadSvgIcon(String iconName, int width, int height, javafx.scene.paint.Color color) {
+        SvgIconLoader.setBaseAppPath(getStrRepertAppli());
+        return SvgIconLoader.loadSvgIcon(iconName, width, height, color);
+    }
+    
+    /**
+     * Recharge toutes les icônes SVG de la barre d'outils
+     * Appelé lors du changement de thème pour mettre à jour les couleurs
+     */
+    private static void rechargerIcones() {
+        if (ivNouveauProjet != null) {
+            ivNouveauProjet.setImage(loadSvgIcon("nouveau-projet", 32).getImage());
+        }
+        if (ivChargeProjet != null) {
+            ivChargeProjet.setImage(loadSvgIcon("ouvrir-projet", 32).getImage());
+        }
+        if (ivSauveProjet != null) {
+            ivSauveProjet.setImage(loadSvgIcon("sauve-projet", 32).getImage());
+        }
+        if (ivAjouterPano != null) {
+            ivAjouterPano.setImage(loadSvgIcon("ajoute-panoramique", 32).getImage());
+        }
+        if (getIvAjouterPlan() != null) {
+            getIvAjouterPlan().setImage(loadSvgIcon("ajoute-plan", 32).getImage());
+        }
+        if (ivVisiteGenere != null) {
+            ivVisiteGenere.setImage(loadSvgIcon("genere-visite", 32).getImage());
+        }
+        if (ivEqui2Cube != null) {
+            ivEqui2Cube.setImage(loadSvgIcon("vue-sphere", 128, 64, null).getImage());
+        }
+        if (ivCube2Equi != null) {
+            ivCube2Equi.setImage(loadSvgIcon("vue-cube", 128, 64, null).getImage());
+        }
     }
 
     /**
@@ -9828,7 +9900,7 @@ public class EditeurPanovisu extends Application {
         spBtnNouvprojet.setPrefWidth(35);
 
         HBox.setMargin(spBtnNouvprojet, new Insets(5, 15, 0, 15));
-        ivNouveauProjet = new ImageView(new Image("file:" + getStrRepertAppli() + File.separator + "images/nouveauProjet.png"));
+        ivNouveauProjet = loadSvgIcon("nouveau-projet", 32);
         spBtnNouvprojet.setContent(ivNouveauProjet);
         Tooltip tltpNouveauProjet = new Tooltip(rbLocalisation.getString("nouveauProjet"));
         tltpNouveauProjet.setStyle(getStrTooltipStyle());
@@ -9846,7 +9918,7 @@ public class EditeurPanovisu extends Application {
         spBtnOuvrirProjet.setPrefWidth(35);
 
         HBox.setMargin(spBtnOuvrirProjet, new Insets(5, 15, 0, 0));
-        ivChargeProjet = new ImageView(new Image("file:" + getStrRepertAppli() + File.separator + "images/ouvrirProjet.png"));
+        ivChargeProjet = loadSvgIcon("ouvrir-projet", 32);
         spBtnOuvrirProjet.setContent(ivChargeProjet);
         Tooltip tltpOuvrirProjet = new Tooltip(rbLocalisation.getString("ouvrirProjet"));
         tltpOuvrirProjet.setStyle(getStrTooltipStyle());
@@ -9865,7 +9937,7 @@ public class EditeurPanovisu extends Application {
         spBtnSauveProjet.setPrefWidth(35);
 
         HBox.setMargin(spBtnSauveProjet, new Insets(5, 15, 0, 0));
-        ivSauveProjet = new ImageView(new Image("file:" + getStrRepertAppli() + File.separator + "images/sauveProjet.png"));
+        ivSauveProjet = loadSvgIcon("sauve-projet", 32);
         spBtnSauveProjet.setContent(ivSauveProjet);
         Tooltip tltpSauverProjet = new Tooltip(rbLocalisation.getString("sauverProjet"));
         tltpSauverProjet.setStyle(getStrTooltipStyle());
@@ -9888,7 +9960,7 @@ public class EditeurPanovisu extends Application {
         spBtnAjoutePano.setPrefWidth(35);
 
         HBox.setMargin(spBtnAjoutePano, new Insets(5, 15, 0, 15));
-        ivAjouterPano = new ImageView(new Image("file:" + getStrRepertAppli() + File.separator + "images/ajoutePanoramique.png"));
+        ivAjouterPano = loadSvgIcon("ajoute-panoramique", 32);
         spBtnAjoutePano.setContent(ivAjouterPano);
         Tooltip tltpAjouterPano = new Tooltip(rbLocalisation.getString("ajouterPanoramiques"));
         tltpAjouterPano.setStyle(getStrTooltipStyle());
@@ -9909,7 +9981,7 @@ public class EditeurPanovisu extends Application {
         spBtnAjoutePlan.setPrefWidth(35);
 
         HBox.setMargin(spBtnAjoutePlan, new Insets(5, 15, 0, 15));
-        setIvAjouterPlan(new ImageView(new Image("file:" + getStrRepertAppli() + File.separator + "images/ajoutePlan.png")));
+        setIvAjouterPlan(loadSvgIcon("ajoute-plan", 32));
         spBtnAjoutePlan.setContent(getIvAjouterPlan());
         Tooltip tltpAjouterPlan = new Tooltip(rbLocalisation.getString("ajouterPlan"));
         tltpAjouterPlan.setStyle(getStrTooltipStyle());
@@ -9930,7 +10002,7 @@ public class EditeurPanovisu extends Application {
         spBtnGenereVisite.setPrefWidth(70);
 
         HBox.setMargin(spBtnGenereVisite, new Insets(5, 15, 0, 0));
-        ivVisiteGenere = new ImageView(new Image("file:" + getStrRepertAppli() + File.separator + "images/genereVisite.png"));
+        ivVisiteGenere = loadSvgIcon("genere-visite", 32);
         spBtnGenereVisite.setContent(ivVisiteGenere);
         Tooltip tltpGenererVisite = new Tooltip(rbLocalisation.getString("genererVisite"));
         tltpGenererVisite.setStyle(getStrTooltipStyle());
@@ -9947,13 +10019,17 @@ public class EditeurPanovisu extends Application {
         ScrollPane spBtnEqui2Cube = new ScrollPane();
         spBtnEqui2Cube.getStyleClass().add("menuBarreOutils");
         spBtnEqui2Cube.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        spBtnEqui2Cube.setPrefHeight(35);
-        spBtnEqui2Cube.setMaxHeight(35);
-        spBtnEqui2Cube.setPadding(new Insets(2));
-        spBtnEqui2Cube.setPrefWidth(109);
+        spBtnEqui2Cube.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        spBtnEqui2Cube.setPrefHeight(72);
+        spBtnEqui2Cube.setMaxHeight(72);
+        spBtnEqui2Cube.setPadding(new Insets(0));
+        spBtnEqui2Cube.setPrefWidth(145);
+        spBtnEqui2Cube.setMaxWidth(145);
+        spBtnEqui2Cube.setFitToHeight(true);
+        spBtnEqui2Cube.setFitToWidth(true);
 
-        HBox.setMargin(spBtnEqui2Cube, new Insets(5, 15, 0, 250));
-        ivEqui2Cube = new ImageView(new Image("file:" + getStrRepertAppli() + File.separator + "images/equi2cube.png"));
+        HBox.setMargin(spBtnEqui2Cube, new Insets(-2, 15, 0, 250));
+        ivEqui2Cube = loadSvgIcon("vue-sphere", 128, 64, null);
         spBtnEqui2Cube.setContent(ivEqui2Cube);
         Tooltip tltpEqui2Cube = new Tooltip(rbLocalisation.getString("outilsEqui2Cube"));
         tltpEqui2Cube.setStyle(getStrTooltipStyle());
@@ -9966,13 +10042,17 @@ public class EditeurPanovisu extends Application {
         ScrollPane spBtnCube2Equi = new ScrollPane();
         spBtnCube2Equi.getStyleClass().add("menuBarreOutils");
         spBtnCube2Equi.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        spBtnCube2Equi.setPrefHeight(35);
-        spBtnCube2Equi.setMaxHeight(35);
-        spBtnCube2Equi.setPadding(new Insets(2));
-        spBtnCube2Equi.setPrefWidth(109);
+        spBtnCube2Equi.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        spBtnCube2Equi.setPrefHeight(72);
+        spBtnCube2Equi.setMaxHeight(72);
+        spBtnCube2Equi.setPadding(new Insets(0));
+        spBtnCube2Equi.setPrefWidth(145);
+        spBtnCube2Equi.setMaxWidth(145);
+        spBtnCube2Equi.setFitToHeight(true);
+        spBtnCube2Equi.setFitToWidth(true);
 
-        HBox.setMargin(spBtnCube2Equi, new Insets(5, 25, 0, 0));
-        ivCube2Equi = new ImageView(new Image("file:" + getStrRepertAppli() + File.separator + "images/cube2equi.png"));
+        HBox.setMargin(spBtnCube2Equi, new Insets(-2, 25, 0, 0));
+        ivCube2Equi = loadSvgIcon("vue-cube", 128, 64, null);
         spBtnCube2Equi.setContent(ivCube2Equi);
         Tooltip tltpCube2Equi = new Tooltip(rbLocalisation.getString("outilsCube2Equi"));
         tltpCube2Equi.setStyle(getStrTooltipStyle());
