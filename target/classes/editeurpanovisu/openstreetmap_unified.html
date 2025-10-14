@@ -22,7 +22,7 @@
             font-family: Arial, sans-serif;
         }
         
-        /* Debug panel - VISIBLE POUR DIAGNOSTIC */
+        /* Debug panel - MASQUÉ EN PRODUCTION */
         #debugPanel {
             position: fixed;
             top: 0;
@@ -33,7 +33,7 @@
             color: #00ff00;
             font-family: 'Courier New', monospace;
             font-size: 11px;
-            display: block;
+            display: none; /* MASQUÉ PAR DÉFAUT */
             padding: 10px;
             overflow-y: auto;
             z-index: 10000;
@@ -70,7 +70,7 @@
         /* Map container */
         #map {
             position: absolute;
-            top: 200px;
+            top: 0; /* Ajusté car le debug panel est masqué */
             left: 0;
             right: 0;
             bottom: 0;
@@ -273,6 +273,54 @@
                 updateDebug('Tous les marqueurs supprimés', 'success');
             } catch (error) {
                 updateDebug('Erreur removeAllMarkers: ' + error.message, 'error');
+            }
+        }
+        
+        // Fonction ajouteMarqueur pour compatibilité Java
+        // Paramètres: index, longitude, latitude, htmlContent
+        function ajouteMarqueur(index, lng, lat, htmlContent) {
+            try {
+                if (!map) {
+                    updateDebug('ajouteMarqueur: carte non initialisée', 'warn');
+                    return;
+                }
+                
+                // Supprimer le marqueur de recherche (searchMarker) s'il existe
+                if (searchMarker) {
+                    updateDebug('🗑️ Suppression searchMarker existant', 'info');
+                    map.removeLayer(searchMarker);
+                    searchMarker = null;
+                    currentMarker = null;
+                }
+                
+                // Supprimer le marqueur existant à cet index si présent
+                if (index >= 0 && index < markers.length && markers[index]) {
+                    map.removeLayer(markers[index]);
+                    markers[index] = null;
+                }
+                
+                // Créer le nouveau marqueur avec les coordonnées correctes
+                const marker = L.marker([lat, lng]);
+                
+                // Ajouter le popup HTML si fourni
+                if (htmlContent) {
+                    marker.bindPopup(htmlContent);
+                }
+                
+                // Ajouter le marqueur à la carte
+                marker.addTo(map);
+                
+                // Stocker le marqueur dans le tableau à l'index spécifié
+                if (index >= markers.length) {
+                    // Étendre le tableau si nécessaire
+                    markers.length = index + 1;
+                }
+                markers[index] = marker;
+                
+                updateDebug(`✅ ajouteMarqueur[${index}]: [${lat}, ${lng}] - "${htmlContent}"`, 'success');
+            } catch (error) {
+                updateDebug('❌ Erreur ajouteMarqueur: ' + error.message, 'error');
+                console.error('ajouteMarqueur error:', error);
             }
         }
         

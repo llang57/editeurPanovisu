@@ -36,6 +36,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
+        
+        <!-- Build Number Increment - Désactivé par défaut sur CI -->
+        <skip.build.increment>false</skip.build.increment>
     </properties>
 
     <dependencies>
@@ -278,7 +281,7 @@
         </resources>
 
         <plugins>
-            <!-- Build Number Incrementer - Exécuté avant la compilation -->
+            <!-- Build Number Incrementer - Désactivé sur CI (GitHub Actions) -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
@@ -291,6 +294,7 @@
                             <goal>exec</goal>
                         </goals>
                         <configuration>
+                            <skip>${skip.build.increment}</skip>
                             <executable>powershell</executable>
                             <arguments>
                                 <argument>-ExecutionPolicy</argument>

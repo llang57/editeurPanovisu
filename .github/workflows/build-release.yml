@@ -27,14 +27,20 @@ jobs:
           java-version: '25'
           cache: 'maven'
       
-      - name: � Create api-keys.properties
+      - name: 🛠️ Install Inno Setup
+        run: |
+          choco install innosetup -y
+          Write-Host "✅ Inno Setup installé"
+        shell: pwsh
+      
+      - name: 📝 Create api-keys.properties
         run: |
           Copy-Item api-keys.properties.template api-keys.properties
           Write-Host "✅ api-keys.properties créé depuis template"
         shell: pwsh
       
-      - name: �🔨 Build with Maven
-        run: mvn clean package -DskipTests
+      - name: 🔨 Build with Maven
+        run: mvn clean package -DskipTests -Dskip.build.increment=true
       
       - name: 📦 Create Windows Installer
         run: .\build-installer.ps1
@@ -74,7 +80,7 @@ jobs:
           cp api-keys.properties.template api-keys.properties
           echo "✅ api-keys.properties créé depuis template"
       
-      - name: �🖼️ Convert icon to .icns
+      - name: �️ Convert icon to .icns
         run: |
           # Créer l'icône macOS si elle n'existe pas
           if [ ! -f "images/panovisu.icns" ]; then
@@ -84,11 +90,15 @@ jobs:
           fi
       
       - name: 🔨 Build with Maven
-        run: mvn clean package -DskipTests
+        run: mvn clean package -DskipTests -Dskip.build.increment=true
       
       - name: 📦 Create macOS DMG
         run: |
           APP_VERSION="${{ github.event.inputs.version || '3.0.0' }}"
+          
+          # Trouver le nom exact du JAR
+          MAIN_JAR=$(ls target/editeurPanovisu-*-SNAPSHOT.jar | xargs basename)
+          echo "📦 JAR trouvé: $MAIN_JAR"
           
           jpackage \
             --type dmg \
@@ -96,7 +106,7 @@ jobs:
             --app-version "$APP_VERSION" \
             --vendor "PanoVisu" \
             --input target \
-            --main-jar editeurPanovisu-*-SNAPSHOT.jar \
+            --main-jar "$MAIN_JAR" \
             --main-class editeurpanovisu.EditeurPanovisu \
             --runtime-image "$JAVA_HOME" \
             --dest target/installer \
@@ -112,7 +122,7 @@ jobs:
                 --app-version "$APP_VERSION" \
                 --vendor "PanoVisu" \
                 --input target \
-                --main-jar editeurPanovisu-*-SNAPSHOT.jar \
+                --main-jar "$MAIN_JAR" \
                 --main-class editeurpanovisu.EditeurPanovisu \
                 --runtime-image "$JAVA_HOME" \
                 --dest target/installer \
@@ -161,11 +171,15 @@ jobs:
           sudo apt-get install -y fakeroot rpm
       
       - name: 🔨 Build with Maven
-        run: mvn clean package -DskipTests
+        run: mvn clean package -DskipTests -Dskip.build.increment=true
       
       - name: 📦 Create Debian Package (.deb)
         run: |
           APP_VERSION="${{ github.event.inputs.version || '3.0.0' }}"
+          
+          # Trouver le nom exact du JAR
+          MAIN_JAR=$(ls target/editeurPanovisu-*-SNAPSHOT.jar | xargs basename)
+          echo "📦 JAR trouvé: $MAIN_JAR"
           
           jpackage \
             --type deb \
@@ -174,7 +188,7 @@ jobs:
             --vendor "PanoVisu" \
             --icon images/panovisu.png \
             --input target \
-            --main-jar editeurPanovisu-*-SNAPSHOT.jar \
+            --main-jar "$MAIN_JAR" \
             --main-class editeurpanovisu.EditeurPanovisu \
             --runtime-image "$JAVA_HOME" \
             --dest target/installer \
@@ -190,6 +204,10 @@ jobs:
         run: |
           APP_VERSION="${{ github.event.inputs.version || '3.0.0' }}"
           
+          # Trouver le nom exact du JAR
+          MAIN_JAR=$(ls target/editeurPanovisu-*-SNAPSHOT.jar | xargs basename)
+          echo "📦 JAR trouvé: $MAIN_JAR"
+          
           jpackage \
             --type rpm \
             --name editeurpanovisu \
@@ -197,7 +215,7 @@ jobs:
             --vendor "PanoVisu" \
             --icon images/panovisu.png \
             --input target \
-            --main-jar editeurPanovisu-*-SNAPSHOT.jar \
+            --main-jar "$MAIN_JAR" \
             --main-class editeurpanovisu.EditeurPanovisu \
             --runtime-image "$JAVA_HOME" \
             --dest target/installer \

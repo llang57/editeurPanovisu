@@ -86,57 +86,34 @@ is being used to size a border should also be in pixels.
 .root {
     /***************************************************************************
      *                                                                         *
-     * The main color palette from which the rest of the colors are derived.   *
+     * MODERN FLAT DESIGN 2025 - Thème Clair                                   *
+     * Inspiré de Material Design 3 / Fluent Design / macOS Sonoma            *
      *                                                                         *
      **************************************************************************/
 
-    /* A light grey that is the base color for objects.  Instead of using
-     * -fx-base directly, the sections in this file will typically use -fx-color.
-     */
-    -fx-base: #e0e0e9;
+    /* Couleur de base - Gris très clair moderne */
+    -fx-base: #F5F5F5;
 
-    /* A very light grey used for the background of windows.  See also
-     * -fx-text-background-color, which should be used as the -fx-text-fill
-     * value for text painted on top of backgrounds colored with -fx-background.
-     */
-    -fx-background: derive(-fx-base,26.4%);
+    /* Fond de fenêtre - Blanc cassé doux pour les yeux */
+    -fx-background: #FAFAFA;
 
-    /* Used for the inside of text boxes, password boxes, lists, trees, and
-     * tables.  See also -fx-text-inner-color, which should be used as the
-     * -fx-text-fill value for text painted on top of backgrounds colored
-     * with -fx-control-inner-background.
-     */
-    -fx-control-inner-background: derive(-fx-base,80%);
-    /* Version of -fx-control-inner-background for alternative rows */
-    -fx-control-inner-background-alt: derive(-fx-control-inner-background,-2%);
+    /* Fond des contrôles de saisie (TextField, TextArea, etc.) - Blanc pur */
+    -fx-control-inner-background: #FFFFFF;
+    /* Lignes alternées (tableaux, listes) - Gris ultra-léger */
+    -fx-control-inner-background-alt: #F8F9FA;
 
-    /* One of these colors will be chosen based upon a ladder calculation
-     * that uses the brightness of a background color.  Instead of using these
-     * colors directly as -fx-text-fill values, the sections in this file should
-     * use a derived color to match the background in use.  See also:
-     *
-     * -fx-text-base-color for text on top of -fx-base, -fx-color, and -fx-body-color
-     * -fx-text-background-color for text on top of -fx-background
-     * -fx-text-inner-color for text on top of -fx-control-inner-color
-     * -fx-selection-bar-text for text on top of -fx-selection-bar
-     */
-    -fx-dark-text-color: black;
-    -fx-mid-text-color: #292929;
-    -fx-light-text-color: white;
+    /* Textes - Haute lisibilité */
+    -fx-dark-text-color: #1A1A1A;      /* Noir moderne (pas pur noir) */
+    -fx-mid-text-color: #424242;       /* Gris foncé */
+    -fx-light-text-color: #FFFFFF;     /* Blanc pur */
 
-    /* A bright blue for highlighting/accenting objects.  For example: selected
-     * text; selected items in menus, lists, trees, and tables; progress bars */
-    -fx-accent: #0099CC;
+    /* ACCENT - Bleu moderne 2025 (style Microsoft/Google) */
+    -fx-accent: #0078D4;               /* Bleu vif professionnel */
+    -fx-default-button: #005A9E;       /* Bleu plus foncé pour boutons primaires */
 
-    /* Default buttons color, this is similar to accent but more subtle */
-    -fx-default-button: #4fb6d6;
-
-    /* A bright blue for the focus indicator of objects. Typically used as the
-     * first color in -fx-background-color for the "focused" pseudo-class. Also
-     * typically used with insets of -1.4 to provide a glowing effect.
-     */
-    -fx-focus-color: #f25f29;
-    -fx-faint-focus-color: #f25f2933;
+    /* Focus - Bleu électrique visible mais pas agressif */
+    -fx-focus-color: #0078D4;
+    -fx-faint-focus-color: #0078D433;
 
     /* The color that is used in styling controls. The default value is based
      * on -fx-base, but is changed by pseudoclasses to change the base color.
@@ -225,50 +202,20 @@ is being used to size a border should also be in pixels.
         rgba(255,255,255,1) 100%
         );
 
-    /* A gradient that goes from a little darker than -fx-color on the top to
-     * even more darker than -fx-color on the bottom.  Typically is the second
-     * color in the -fx-background-color list as the small thin border around
-     * a control. It is typically the same size as the control (i.e., insets
-     * are 0).
-     */
-    -fx-outer-border: derive(-fx-color,-23%);
+    /* FLAT DESIGN 2025 - Bordures et couleurs de corps sans gradients */
+    
+    /* Bordure extérieure flat - gris moyen */
+    -fx-outer-border: #BDBDBD;
 
-    /* A gradient that goes from a bit lighter than -fx-color on the top to
-     * a little darker at the bottom.  Typically is the third color in the
-     * -fx-background-color list as a thin highlight inside the outer border.
-     * Insets are typically 1.
-     */
-    -fx-inner-border: linear-gradient(to bottom, derive(-fx-color,75%), derive(-fx-color,2%));
+    /* Bordure intérieure flat - gris clair (même pour toutes directions) */
+    -fx-inner-border: #E0E0E0;
+    -fx-inner-border-horizontal: #E0E0E0;
+    -fx-inner-border-bottomup: #E0E0E0;
 
-    -fx-inner-border-horizontal: linear-gradient(to right, derive(-fx-color,75%), derive(-fx-color,2%));
-    /*    -fx-inner-border-horizontal: linear-gradient(
-            to right,
-            ladder(-fx-color, 
-                   derive(-fx-color,80%) 60%, 
-                   white 82%) 0%,
-            ladder(-fx-color, 
-                   derive(-fx-color,20%) 10%, 
-                   derive(-fx-color,-10%) 80%) 100%
-        );*/
-
-    -fx-inner-border-bottomup: linear-gradient(
-        to top,
-        ladder(-fx-color, 
-        derive(-fx-color,80%) 60%, 
-        white 82%) 0%,
-        ladder(-fx-color, 
-        derive(-fx-color,20%) 10%, 
-        derive(-fx-color,-10%) 80%) 100%);
-
-    /* A gradient that goes from a little lighter than -fx-color at the top to
-     * a little darker than -fx-color at the bottom and is used to fill the
-     * body of many controls such as buttons.  Typically is the fourth color
-     * in the -fx-background-color list and represents main body of the control.
-     * Insets are typically 2.
-     */
-    -fx-body-color: linear-gradient(to bottom, derive(-fx-color,10%) ,derive(-fx-color,-6%));
-    -fx-body-color-bottomup: linear-gradient(to top, derive(-fx-color,10%) ,derive(-fx-color,-6%));
-    -fx-body-color-to-right: linear-gradient(to right, derive(-fx-color,10%) ,derive(-fx-color,-6%));
+    /* Couleur de corps flat - gris ultra-léger uniforme (boutons, contrôles) */
+    -fx-body-color: #F5F5F5;
+    -fx-body-color-bottomup: #F5F5F5;
+    -fx-body-color-to-right: #F5F5F5;
 
     /* The color to use as -fx-text-fill when painting text on top of
      * backgrounds filled with -fx-base, -fx-color, and -fx-body-color.
@@ -373,12 +320,15 @@ is being used to size a border should also be in pixels.
 .color-picker.split-button > .color-picker-label,
 .combo-box-base,
 .combo-box-base > .arrow-button {
-    -fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color; 
-    -fx-background-insets: 0, 1, 2;
-    -fx-background-radius: 5, 4, 3;
-    -fx-padding: 0.333333em 0.666667em 0.416667em 0.666667em; /* 4 8 5 8 */
-    -fx-text-fill: -fx-text-base-color;
-    -fx-alignment :CENTER;
+    -fx-background-color: #E0E0E0; /* Flat gris clair neutre */
+    -fx-background-insets: 0;
+    -fx-background-radius: 4;
+    -fx-padding: 6 12 6 12; /* Modern spacing */
+    -fx-text-fill: #1A1A1A;
+    -fx-alignment: CENTER;
+    -fx-border-color: #BDBDBD;
+    -fx-border-width: 1;
+    -fx-border-radius: 4;
 }
 
 .button:hover,
@@ -397,7 +347,7 @@ is being used to size a border should also be in pixels.
 .color-picker.split-button > .color-picker-label:hover,
 .combo-box-base:hover,
 .tab-pane > .tab-header-area > .control-buttons-tab > .container > .tab-down-button:hover {
-    -fx-color: -fx-hover-base;
+    -fx-background-color: #D0D0D0; /* Flat gris plus foncé au hover */
 }
 .button:armed,
 .toggle-button:armed,
@@ -414,7 +364,7 @@ is being used to size a border should also be in pixels.
 .choice-box:showing,
 .combo-box-base:showing,
 .tab-pane > .tab-header-area > .control-buttons-tab > .container > .tab-down-button:pressed {
-    -fx-color: -fx-pressed-base;
+    -fx-background-color: #BDBDBD; /* Flat gris encore plus foncé au pressed */
 }
 .button:focused,
 .toggle-button:focused,
@@ -424,9 +374,12 @@ is being used to size a border should also be in pixels.
 .choice-box:focused,
 .color-picker.split-button:focused > .color-picker-label,
 .combo-box-base:focused {
-    -fx-background-color: -fx-faint-focus-color, -fx-focus-color, -fx-inner-border, -fx-body-color; 
-    -fx-background-insets: -2, -0.3, 1, 2;
-    -fx-background-radius: 7, 6, 4, 3;
+    -fx-background-color: #E0E0E0;
+    -fx-background-insets: 0;
+    -fx-background-radius: 4;
+    -fx-border-color: #0078D4; /* Bordure bleue moderne au focus */
+    -fx-border-width: 2;
+    -fx-border-radius: 4;
 }
 .pane{
     -fx-border-color : #777;
@@ -1133,32 +1086,37 @@ is being used to size a border should also be in pixels.
 
 /*******************************************************************************
  *                                                                             *
- * PopupMenu                                                                   *
+ * PopupMenu / ContextMenu - FLAT DESIGN 2025                                  *
  *                                                                             *
  ******************************************************************************/
 
 .context-menu {
-    -fx-background-color:
-        -fx-box-border,
-        -fx-control-inner-background;
-    -fx-background-insets: 0, 1;
-    -fx-padding: 0.333333em 0.083333em 0.333333em 0.083333em; /* 4 1 8 1 */
-    /*-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.5) , 8, 0.0 , 0 , 8 );*/
+    -fx-background-color: #FFFFFF; /* ✅ Fond blanc flat */
+    -fx-background-insets: 0;
+    -fx-padding: 4 1 4 1; /* Padding minimal */
+    -fx-border-color: #BDBDBD; /* ✅ Bordure grise subtile */
+    -fx-border-width: 1;
+    -fx-background-radius: 6; /* ✅ Coins arrondis modernes */
+    -fx-border-radius: 6;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8, 0, 0, 2); /* ✅ Ombre douce élévation */
 }
+
 .context-menu > .separator {
-    -fx-padding: 0.0em 0.333333em 0.0em 0.333333em; /* 0 4 0 4 */
+    -fx-padding: 0 4 0 4;
 }
+
 .context-menu > .scroll-arrow {
-    -fx-padding: 0.416667em 0.416667em 0.416667em 0.416667em; /* 5 */
+    -fx-padding: 5;
     -fx-background-color: transparent;
 }
+
 .context-menu > .scroll-arrow:hover {
-    -fx-background: -fx-accent;
-    -fx-background-color: -fx-selection-bar;
-    -fx-text-fill: -fx-selection-bar-text;
+    -fx-background-color: #E8F4FD; /* ✅ Bleu très clair flat */
+    -fx-text-fill: #0078D4; /* ✅ Texte bleu accent */
 }
+
 .context-menu:show-mnemonics > .mnemonic-underline {
-    -fx-stroke: -fx-text-fill;
+    -fx-stroke: #0078D4; /* ✅ Bleu accent */
 } 
 
 /*******************************************************************************
@@ -1215,83 +1173,93 @@ is being used to size a border should also be in pixels.
 
 /*******************************************************************************
  *                                                                             *
- * MenuBar                                                                     *
+ * MenuBar - FLAT DESIGN 2025                                                  *
  *                                                                             *
  ******************************************************************************/
 
 .menu-bar {
-    -fx-padding: 0.0em 0.666667em 0.0em 0.666667em; /* 0 8 0 8 */
-    -fx-spacing: 0.166667em; /* 2 */
-    -fx-background : #eeeeee;
-    -fx-text-fill : white;
-    /*    -fx-base: derive(#d0d0d0,-70%);
-        -fx-background-color: linear-gradient(to bottom, derive(-fx-color,50%), derive(-fx-color,-30%)), -fx-body-color;*/
-    -fx-background-insets: 0, 1 0 1 0;
-    -fx-background-radius: 0, 0 ;
-    /*-fx-font-size : 1.2em;*/
+    -fx-padding: 0 8 0 8; /* Padding horizontal uniforme */
+    -fx-spacing: 2; /* Espacement entre menus */
+    -fx-background-color: #FAFAFA; /* ✅ Fond flat gris très clair */
+    -fx-border-color: #E0E0E0; /* ✅ Bordure inférieure subtile */
+    -fx-border-width: 0 0 1 0; /* Bordure uniquement en bas */
 }
-/* Show nothing for background of normal menu button in a menu bar */
+
+/* Boutons de menu : transparent par défaut */
 .menu-bar > .container > .menu-button {
-    -fx-background-radius: 0;
+    -fx-background-radius: 4; /* ✅ Coins arrondis modernes */
     -fx-background-color: transparent;
     -fx-background-insets: 0;
+    -fx-padding: 6 12 6 12; /* ✅ Padding généreux */
 }
-/* Change padding of menu buttons when in menu bar */
+
+/* Labels de menu */
 .menu-bar > .container > .menu-button > .label {
-    -fx-padding: 0;   
+    -fx-text-fill: #1A1A1A; /* ✅ Texte noir moderne */
 }
-.menu-bar > .container > .menu-button:hover, .menu-bar > .container > .menu-button:focused, .menu-bar > .container > .menu-button:showing {
-    -fx-background: -fx-accent;
-    -fx-background-color: -fx-selection-bar;
-    -fx-text-fill: white;
+
+/* Hover/Focus/Showing : fond bleu flat avec transition douce */
+.menu-bar > .container > .menu-button:hover, 
+.menu-bar > .container > .menu-button:focused, 
+.menu-bar > .container > .menu-button:showing {
+    -fx-background-color: #E8F4FD; /* ✅ Bleu très clair flat (pas selection-bar) */
 }
-.menu-bar > .container > .menu-button:hover {
-    -fx-background: -fx-accent;
-    -fx-background-color: -fx-selection-bar;
-    -fx-text-fill: white;
+
+.menu-bar > .container > .menu-button:hover > .label,
+.menu-bar > .container > .menu-button:focused > .label,
+.menu-bar > .container > .menu-button:showing > .label {
+    -fx-text-fill: #0078D4; /* ✅ Texte bleu accent */
 }
+
+/* Mnémoniques (raccourcis clavier) */
 .menu-bar:show-mnemonics > .mnemonic-underline {
-    -fx-stroke: -fx-text-fill;
+    -fx-stroke: #0078D4; /* ✅ Bleu accent */
 }
 
 /*******************************************************************************
  *                                                                             *
- * MenuItem                                                                    *
+ * MenuItem - FLAT DESIGN 2025                                                 *
  *                                                                             *
  ******************************************************************************/
 
 .menu-item {
     -fx-background-color: transparent;
-    -fx-padding: 0.333333em 0.41777em 0.333333em 0.41777em;  /* 4 5 4 5 */
+    -fx-padding: 6 8 6 8; /* ✅ Padding uniforme généreux */
+    -fx-background-radius: 4; /* ✅ Coins arrondis légers */
 }
+
 .menu-item > .left-container {
-    -fx-padding: 0.458em 0.791em 0.458em 0.458em;
+    -fx-padding: 0 8 0 0;
 }
+
 .menu-item > .graphic-container {
-    -fx-padding: 0em 0.333em 0em 0em;
+    -fx-padding: 0 8 0 0;
 }
-.menu-item >.label {
-    -fx-padding: 0em 0.5em 0em 0em;
-    -fx-text-fill: -fx-text-base-color;
+
+.menu-item > .label {
+    -fx-padding: 0 8 0 0;
+    -fx-text-fill: #1A1A1A; /* ✅ Texte noir moderne */
 }
 
 .menu-item:disabled > .label {
-    -fx-opacity: -fx-disabled-opacity;
+    -fx-opacity: 0.4; /* ✅ Désactivé subtil */
 }
 
+/* Hover/Focus : fond bleu très clair flat */
 .menu-item:focused {
-    -fx-background: -fx-accent;
-    -fx-background-color: -fx-selection-bar;
-    -fx-text-fill: -fx-selection-bar-text;
+    -fx-background-color: #E8F4FD; /* ✅ Bleu très clair flat */
 }
+
 .menu-item:focused > .label {
-    -fx-text-fill: white;
+    -fx-text-fill: #0078D4; /* ✅ Texte bleu accent */
 }
+
 .menu-item > .right-container {
-    -fx-padding: 0em 0em 0em 0.5em;
+    -fx-padding: 0 0 0 8;
 }
+
 .menu-item:show-mnemonics > .mnemonic-underline {
-    -fx-stroke: -fx-text-fill;
+    -fx-stroke: #0078D4; /* ✅ Bleu accent */
 } 
 .radio-menu-item:checked > .left-container > .radio {
     -fx-background-color: -fx-mark-color;
@@ -1353,28 +1321,33 @@ is being used to size a border should also be in pixels.
     -fx-text-fill: -fx-text-base-color;
 }
 .tab-pane > .tab-header-area > .headers-region > .tab {
-    -fx-background-insets: 0 1 1 0, 1 2 1 1, 2 3 1 2;
-    -fx-background-radius: 5 5 0 0, 4 4 0 0, 3 3 0 0;
-    -fx-padding: 0.083333em 0.5em 0.083333em 0.5em; /* 1 6 1 6 */
+    -fx-background-insets: 0;
+    -fx-background-radius: 4 4 0 0;
+    -fx-padding: 8 16 8 16; /* Padding moderne généreux */
+    -fx-background-color: transparent; /* Transparent par défaut */
+    -fx-border-color: transparent;
+    -fx-border-width: 0 0 2 0; /* Bordure inférieure pour l'état sélectionné */
 }
 .tab-pane > .tab-header-area > .headers-region > .tab:top {
-    -fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-color: transparent; /* Flat transparent */
 }
 .tab-pane > .tab-header-area > .headers-region > .tab:right {
-    -fx-background-color: -fx-outer-border, -fx-inner-border-bottomup, -fx-body-color-bottomup;
+    -fx-background-color: transparent;
 }
 .tab-pane > .tab-header-area > .headers-region > .tab:bottom {
-    -fx-background-color: -fx-outer-border, -fx-inner-border-bottomup, -fx-body-color-bottomup;
+    -fx-background-color: transparent;
 }
 .tab-pane > .tab-header-area > .headers-region > .tab:left {
-    -fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-color: transparent;
 }
 .tab-pane > .tab-header-area > .headers-region > .tab:hover {
-    -fx-color: -fx-hover-base;
+    -fx-background-color: #F5F5F5; /* Hover gris très clair flat */
 }
 .tab-pane > .tab-header-area > .headers-region > .tab:selected {
-    -fx-background-color: -fx-outer-border, -fx-inner-border, -fx-background;
-    -fx-background-insets: 0 1 1 0, 1 2 0 1, 2 3 0 2;
+    -fx-background-color: #FFFFFF; /* Blanc pur pour l'onglet sélectionné */
+    -fx-background-insets: 0;
+    -fx-border-color: transparent transparent #0078D4 transparent; /* Bordure bleue en bas */
+    -fx-border-width: 0 0 3 0; /* Bordure épaisse moderne */
 }
 .tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
     /*    -fx-border-style: segments(0.166667em, 0.166667em);
@@ -1386,23 +1359,22 @@ is being used to size a border should also be in pixels.
     -fx-opacity: -fx-disabled-opacity;
 }
 .tab-pane > .tab-header-area > .tab-header-background {
-    /* TODO should not be using text-box-border I tink? */
-    -fx-background-color:  
-        -fx-outer-border,
-        -fx-text-box-border, 
-        linear-gradient(from 0px 0px to 0px 5px, -fx-text-box-border, derive(-fx-text-box-border, 30%));
+    /* Fond flat moderne pour la zone d'onglets */
+    -fx-background-color: #FAFAFA; /* Gris ultra-clair flat */
+    -fx-border-color: #E0E0E0; /* Bordure subtile */
+    -fx-border-width: 0 0 1 0; /* Bordure uniquement en bas */
 }
 .tab-pane:top > .tab-header-area > .tab-header-background {
-    -fx-background-insets: 0, 0 0 1 0, 1;
+    -fx-background-insets: 0;
 }
 .tab-pane:bottom > .tab-header-area > .tab-header-background {
-    -fx-background-insets: 0, 1 0 0 0, 1;
+    -fx-background-insets: 0;
 }
 .tab-pane:left > .tab-header-area > .tab-header-background {
-    -fx-background-insets: 0, 0 1 0 0, 1;
+    -fx-background-insets: 0;
 }
 .tab-pane:right > .tab-header-area > .tab-header-background {
-    -fx-background-insets: 0, 0 0 0 1, 1;
+    -fx-background-insets: 0;
 }
 .tab-pane:top > .tab-header-area {
     -fx-padding: 0.416667em 0.166667em 0.0em 0.416667em; /* 5 2 0 5 */
@@ -1521,49 +1493,64 @@ is being used to size a border should also be in pixels.
 
 /*******************************************************************************
  *                                                                             *
- * TitledPane                                                                  *
+ * TitledPane - FLAT DESIGN 2025                                               *
  *                                                                             *
  ******************************************************************************/
 
 .titled-pane {
     -fx-text-fill: -fx-text-base-color;
 }
-.titled-pane:focused {
-    -fx-text-fill: white;
-}
+
+/* En-tête flat moderne avec bordure subtile */
 .titled-pane > .title {
-    -fx-background-color: -fx-box-border, -fx-inner-border, -fx-body-color;
-    -fx-background-insets: 0, 1, 2;
-    -fx-background-radius: 5 5 0 0, 4 4 0 0, 3 3 0 0;
-    -fx-padding: 0.166667em 0.833333em 0.25em 0.833333em; /* 2 10 3 10 */
+    -fx-background-color: #F5F5F5; /* Gris ultra-léger flat */
+    -fx-background-insets: 0;
+    -fx-background-radius: 4 4 0 0; /* Coins arrondis modernes */
+    -fx-padding: 10 12 10 12; /* Padding généreux */
+    -fx-border-color: #E0E0E0; /* Bordure subtile */
+    -fx-border-width: 0 0 1 0; /* Bordure uniquement en bas */
 }
+
+/* Focus : bordure bleue gauche (accent moderne) */
 .titled-pane:focused > .title {
-    -fx-color: -fx-focus-color;
+    -fx-background-color: #F8F9FA; /* Légèrement plus clair */
+    -fx-border-color: #0078D4 #E0E0E0 #E0E0E0 #0078D4; /* Bleu à gauche */
+    -fx-border-width: 0 0 1 3; /* Bordure gauche épaisse */
 }
+
+/* Bouton flèche : transparent */
 .titled-pane > .title > .arrow-button {
-    -fx-background-color: null;
+    -fx-background-color: transparent;
     -fx-background-insets: 0;
     -fx-background-radius: 0;
-    -fx-padding: 0.0em 0.25em 0.0em 0.0em; /* 0 3 0 0 */
+    -fx-padding: 0 8 0 0; /* Espacement droit */
 }
+
+/* Flèche flat moderne */
 .titled-pane > .title > .arrow-button > .arrow {
-    -fx-background-color: -fx-mark-highlight-color, -fx-mark-color;
-    -fx-background-insets: 1 0 -1 0, 0;
-    -fx-padding: 0.25em 0.3125em 0.25em 0.3125em; /* 3 3.75 3 3.75 */
-    -fx-shape: "M 0 0 h 7 l -3.5 4 z";
+    -fx-background-color: #424242; /* Gris foncé flat */
+    -fx-background-insets: 0;
+    -fx-padding: 4 5 4 5; /* Taille icône */
+    -fx-shape: "M 0 0 h 7 l -3.5 4 z"; /* Triangle vers bas */
 }
+
+/* Rotation flèche quand collapsed */
 .titled-pane:collapsed > .title > .arrow-button > .arrow {
     -fx-rotate: -90;
 }
-.titled-pane > *.content {
-    -fx-background-color:
-        -fx-box-border,
-        linear-gradient(to bottom, derive(-fx-color,-02%), derive(-fx-color,65%) 12%, derive(-fx-color,23%) 88%, derive(-fx-color,50%) 99%, -fx-box-border);
-    -fx-background-insets: 0, 0 1 1 1;
-    -fx-padding: 0.167em;
-}
+
+/* Flèche en focus : bleu accent */
 .titled-pane:focused > .title > .arrow-button > .arrow {
-    -fx-background-color: white;
+    -fx-background-color: #0078D4; /* Bleu moderne */
+}
+
+/* Contenu : fond blanc flat avec bordure subtile */
+.titled-pane > *.content {
+    -fx-background-color: #FFFFFF; /* Blanc pur flat */
+    -fx-background-insets: 0;
+    -fx-padding: 12; /* Padding uniforme */
+    -fx-border-color: #E0E0E0; /* Bordure subtile */
+    -fx-border-width: 0 1 1 1; /* Bordures sauf haut */
 }
 
 /*******************************************************************************
@@ -1572,28 +1559,40 @@ is being used to size a border should also be in pixels.
  *                                                                             *
  ******************************************************************************/
 
+/* Accordion : style flat moderne cohérent avec TitledPane */
 .accordion > .titled-pane > .title {
-    -fx-background-color:
-        -fx-box-border,
-        -fx-inner-border,
-        -fx-body-color;
-    -fx-background-insets: -1 0 0 0, 0 1 1 1, 1 2 2 2;
-    -fx-background-radius: 0, 0, 0;
+    -fx-background-color: #F5F5F5; /* Flat gris ultra-léger */
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 0 0 1 0;
 }
+
+/* Premier TitledPane : pas de bordure haute */
 .accordion > .first-titled-pane > .title {
-    -fx-background-insets: 0, 1, 2;
+    -fx-background-insets: 0;
 }
+
+/* Focus : bordure bleue gauche 3px (accent moderne) */
 .accordion > .titled-pane:focused > .title {
-    -fx-color: -fx-focus-color;
+    -fx-background-color: #F8F9FA;
+    -fx-border-color: #0078D4 #E0E0E0 #E0E0E0 #0078D4;
+    -fx-border-width: 0 0 1 3;
 }
+
+/* Texte en focus : couleur accent */
 .accordion > .titled-pane:focused {
-    -fx-text-fill: white;
+    -fx-text-fill: #0078D4;
 }
+
+/* Flèche en focus : bleu accent */
 .accordion > .titled-pane:focused > .title > .arrow-button > .arrow {
-    -fx-background-color: white;
+    -fx-background-color: #0078D4;
 }
+
+/* Flèche collapsed en focus : même couleur */
 .accordion > .titled-pane:focused > .titled-pane:collapsed > .title > .arrow-button > .arrow {
-    -fx-background-color: white;
+    -fx-background-color: #0078D4;
 }
 .accordion > .titled-pane:collapsed:focused > .title {
     -fx-color: -fx-focus-color;
@@ -2993,26 +2992,73 @@ is being used to size a border should also be in pixels.
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.5) , 8, 0.0 , 0 , 8 );
 
 }
+/* ===== En-têtes des panels d'outils - Thème Clair ===== */
+
+/* État neutre / désactivé */
 .titreOutil{
-    -fx-background-color : linear-gradient( derive(-fx-base,-30%) 0%,  derive(-fx-base,-55%) 100%);
-    -fx-text-fill: white;
-    -fx-border-radius: 3;
-}
-.titreOutil:disabled,.titreOutilRouge:disabled,.titreOutilBleu:disabled{
-    -fx-background-color : #999;
-    -fx-text-fill: #AAA;
-    -fx-border-radius: 3;
-}
-.titreOutilRouge{
-    -fx-background-color : linear-gradient( #779977  0%, #446644 100%);
-    -fx-text-fill: white;
-    -fx-border-radius: 3;
+    -fx-background-color: linear-gradient(to bottom, #ECECEC 0%, #D5D5D5 100%);
+    -fx-text-fill: #424242;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 4, 0.0, 0, 2);
+    -fx-cursor: hand;
+    -fx-padding: 8 10 8 10;
 }
 
+.titreOutil:hover{
+    -fx-background-color: linear-gradient(to bottom, #F5F5F5 0%, #E0E0E0 100%);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 6, 0.0, 0, 3);
+    -fx-scale-y: 1.02;
+}
+
+/* État désactivé */
+.titreOutil:disabled, .titreOutilRouge:disabled, .titreOutilBleu:disabled{
+    -fx-background-color: linear-gradient(to bottom, #E0E0E0 0%, #CCCCCC 100%);
+    -fx-text-fill: #9E9E9E;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-opacity: 0.6;
+    -fx-cursor: default;
+}
+
+/* État actif / validé (vert) - Pour paramètres actifs */
+.titreOutilRouge{
+    -fx-background-color: linear-gradient(to bottom, #66BB6A 0%, #4CAF50 100%);
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-effect: dropshadow(gaussian, rgba(76,175,80,0.4), 6, 0.0, 0, 3);
+    -fx-cursor: hand;
+    -fx-padding: 8 10 8 10;
+}
+
+.titreOutilRouge:hover{
+    -fx-background-color: linear-gradient(to bottom, #81C784 0%, #66BB6A 100%);
+    -fx-effect: dropshadow(gaussian, rgba(76,175,80,0.6), 8, 0.0, 0, 4);
+    -fx-scale-y: 1.02;
+}
+
+/* État invariant / spécial (bleu) - Pour sections importantes */
 .titreOutilBleu{
-    -fx-background-color : linear-gradient( #777799  0%, #444466 100%);
-    -fx-text-fill: white;
-    -fx-border-radius: 3;
+    -fx-background-color: linear-gradient(to bottom, #42A5F5 0%, #2196F3 100%);
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-effect: dropshadow(gaussian, rgba(33,150,243,0.4), 6, 0.0, 0, 3);
+    -fx-cursor: hand;
+    -fx-padding: 8 10 8 10;
+}
+
+.titreOutilBleu:hover{
+    -fx-background-color: linear-gradient(to bottom, #64B5F6 0%, #42A5F5 100%);
+    -fx-effect: dropshadow(gaussian, rgba(33,150,243,0.6), 8, 0.0, 0, 4);
+    -fx-scale-y: 1.02;
 }
 
 .calque{
