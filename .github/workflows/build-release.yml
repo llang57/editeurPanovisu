@@ -300,8 +300,10 @@ jobs:
       - name: 📝 Extract build number
         id: build_info
         run: |
-          BUILD_NUM=$(cat build.num 2>/dev/null || echo "unknown")
+          # Extraire le numéro de build depuis le fichier Java Properties
+          BUILD_NUM=$(grep '^build\.number=' build.num 2>/dev/null | cut -d'=' -f2 || echo "unknown")
           echo "BUILD_NUM=$BUILD_NUM" >> $GITHUB_OUTPUT
+          echo "✅ Build number: $BUILD_NUM"
       
       - name: 🎉 Create Release
         uses: softprops/action-gh-release@v1
