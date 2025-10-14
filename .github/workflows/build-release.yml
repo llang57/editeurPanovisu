@@ -27,7 +27,13 @@ jobs:
           java-version: '25'
           cache: 'maven'
       
-      - name: 🔨 Build with Maven
+      - name: � Create api-keys.properties
+        run: |
+          Copy-Item api-keys.properties.template api-keys.properties
+          Write-Host "✅ api-keys.properties créé depuis template"
+        shell: pwsh
+      
+      - name: �🔨 Build with Maven
         run: mvn clean package -DskipTests
       
       - name: 📦 Create Windows Installer
@@ -63,7 +69,12 @@ jobs:
           java-version: '25'
           cache: 'maven'
       
-      - name: 🖼️ Convert icon to .icns
+      - name: � Create api-keys.properties
+        run: |
+          cp api-keys.properties.template api-keys.properties
+          echo "✅ api-keys.properties créé depuis template"
+      
+      - name: �🖼️ Convert icon to .icns
         run: |
           # Créer l'icône macOS si elle n'existe pas
           if [ ! -f "images/panovisu.icns" ]; then
@@ -139,7 +150,12 @@ jobs:
           java-version: '25'
           cache: 'maven'
       
-      - name: 📦 Install packaging tools
+      - name: � Create api-keys.properties
+        run: |
+          cp api-keys.properties.template api-keys.properties
+          echo "✅ api-keys.properties créé depuis template"
+      
+      - name: �📦 Install packaging tools
         run: |
           sudo apt-get update
           sudo apt-get install -y fakeroot rpm
