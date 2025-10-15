@@ -254,7 +254,7 @@ jobs:
     name: 🎉 Create GitHub Release
     needs: [build-windows, build-macos, build-linux]
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/')
+    if: startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch'
     
     permissions:
       contents: write
@@ -297,18 +297,28 @@ jobs:
           
           cat checksums.txt
       
-      - name: 📝 Extract build number
+      - name: 📝 Extract build number and version
         id: build_info
         run: |
           # Extraire le numéro de build depuis le fichier Java Properties
           BUILD_NUM=$(grep '^build\.number=' build.num 2>/dev/null | cut -d'=' -f2 || echo "unknown")
           echo "BUILD_NUM=$BUILD_NUM" >> $GITHUB_OUTPUT
           echo "✅ Build number: $BUILD_NUM"
+          
+          # Déterminer la version (depuis le tag ou depuis l'input)
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            VERSION="v${{ github.event.inputs.version }}"
+          else
+            VERSION="${{ github.ref_name }}"
+          fi
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          echo "✅ Version: $VERSION"
       
       - name: 🎉 Create Release
         uses: softprops/action-gh-release@v1
         with:
-          name: "EditeurPanovisu ${{ github.ref_name }} - Build ${{ steps.build_info.outputs.BUILD_NUM }}"
+          tag_name: ${{ steps.build_info.outputs.VERSION }}
+          name: "EditeurPanovisu ${{ steps.build_info.outputs.VERSION }} - Build ${{ steps.build_info.outputs.BUILD_NUM }}"
           body: |
             ## 🔧 EditeurPanovisu ${{ github.ref_name }} - Correctif Critique Case-Sensitivity
             
