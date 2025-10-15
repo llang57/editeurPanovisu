@@ -21,7 +21,7 @@ Welcome to the complete documentation for version 3.1.0 of Panovisu Editor.
 ### For Existing Users
 - 🚀 [Complete Migration Guide](MIGRATION_GUIDE_V3.1.0_EN.md) - **Detailed steps**
 - ⚠️ [Required Actions](#-required-actions)
-- 🔧 [Common Issues and Solutions](PROBLEMES_SOLUTIONS_V3.1.0.md) (French only)
+- 🔧 [Common Issues and Solutions](PROBLEMES_SOLUTIONS_V3.1.0_EN.md)
 
 ### For Developers
 - 📝 [Detailed Release Notes](../RELEASE_NOTES_3.1.0.md)
@@ -104,7 +104,24 @@ Welcome to the complete documentation for version 3.1.0 of Panovisu Editor.
 
 ---
 
-### 4. [Release Notes](../RELEASE_NOTES_3.1.0.md)
+### 4. [Issues and Solutions](PROBLEMES_SOLUTIONS_V3.1.0_EN.md)
+**Content:**
+- 14 documented issues with solutions
+- Diagnostic commands
+- Fix scripts
+- Log file locations
+
+**For whom:** Technical support, troubleshooting  
+**Reading time:** 15 minutes (reference)
+
+**Common issues:**
+- [P1 - 404 errors persist](PROBLEMES_SOLUTIONS_V3.1.0_EN.md#p1-404-errors-persist-after-re-export)
+- [P5 - macOS "Application damaged"](PROBLEMES_SOLUTIONS_V3.1.0_EN.md#p5-macos---application-is-damaged)
+- [P7 - Export fails](PROBLEMES_SOLUTIONS_V3.1.0_EN.md#p7-export-fails-with-write-error)
+
+---
+
+### 5. [Release Notes](../RELEASE_NOTES_3.1.0.md)
 **Content:**
 - Detailed changelog
 - Technical modifications
