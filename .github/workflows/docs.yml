@@ -1,0 +1,118 @@
+name: 📚 Générer et publier la documentation Doxygen
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - 'src/**/*.java'
+      - 'panovisu/**/*.js'
+      - 'doc/doxygen/Doxyfile'
+      - '.github/workflows/docs.yml'
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Forcer la publication'
+        required: false
+        default: 'false'
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout du code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: 🔧 Installer Doxygen et Graphviz
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y doxygen graphviz
+        doxygen --version
+    
+    - name: 📚 Générer la documentation Doxygen
+      run: |
+        cd doc/doxygen
+        doxygen Doxyfile
+        
+        # Vérifier que la génération a réussi
+        if [ ! -f "html/index.html" ]; then
+          echo "❌ Erreur : La documentation n'a pas été générée !"
+          exit 1
+        fi
+        
+        # Créer .nojekyll pour désactiver Jekyll
+        touch html/.nojekyll
+        
+        # Afficher les statistiques
+        echo "📊 Statistiques de la documentation :"
+        echo "   - Fichiers HTML : $(find html -name '*.html' | wc -l)"
+        echo "   - Taille totale : $(du -sh html | cut -f1)"
+    
+    - name: 📝 Créer README pour gh-pages
+      run: |
+        cat > doc/doxygen/html/README.md << 'EOF'
+        # 📖 Documentation EditeurPanovisu
+        
+        Documentation technique générée automatiquement avec Doxygen.
+        
+        ## 🔗 Accès
+        
+        **[📚 Accéder à la documentation](https://llang57.github.io/editeurPanovisu/)**
+        
+        ## 📊 Informations
+        
+        - **Projet** : EditeurPanovisu
+        - **Version** : 3.0.0
+        - **Dernière mise à jour** : $(date '+%d/%m/%Y à %H:%M UTC')
+        - **Générateur** : Doxygen 1.14.0
+        - **Langage** : Java + JavaScript
+        
+        ## 📁 Contenu
+        
+        Cette documentation inclut :
+        - Classes Java (package `editeurpanovisu`)
+        - Code JavaScript (`panovisu.js`)
+        - Fichiers d'internationalisation
+        - Index et recherche intégrés
+        
+        ## 🔄 Mise à jour
+        
+        Cette documentation est automatiquement régénérée à chaque commit sur la branche `master` qui modifie :
+        - Les fichiers Java dans `src/`
+        - Les fichiers JavaScript dans `panovisu/`
+        - Le fichier `Doxyfile`
+        
+        ---
+        
+        *Généré automatiquement par GitHub Actions*
+        EOF
+    
+    - name: 🚀 Déployer sur GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./doc/doxygen/html
+        publish_branch: gh-pages
+        user_name: 'github-actions[bot]'
+        user_email: 'github-actions[bot]@users.noreply.github.com'
+        commit_message: |
+          docs: 📚 Mise à jour automatique de la documentation
+          
+          Mise à jour de la documentation Doxygen
+          Commit source: ${{ github.sha }}
+          Date: $(date '+%d/%m/%Y %H:%M:%S UTC')
+        force_orphan: true
+    
+    - name: ✅ Publication réussie
+      run: |
+        echo "✅ Documentation publiée avec succès !"
+        echo ""
+        echo "📖 La documentation sera accessible dans quelques minutes à :"
+        echo "   https://llang57.github.io/editeurPanovisu/"
+        echo ""
+        echo "⏱️  Délai de propagation : 2-3 minutes"

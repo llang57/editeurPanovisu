@@ -1,0 +1,2 @@
+# Ce fichier maintient le répertoire doxygen dans le dépôt Git
+# Les fichiers générés (html/, latex/, etc.) sont exclus via .gitignore
