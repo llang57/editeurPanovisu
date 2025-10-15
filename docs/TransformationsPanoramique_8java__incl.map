@@ -1,0 +1,17 @@
+<map id="src/editeurpanovisu/TransformationsPanoramique.java" name="src/editeurpanovisu/TransformationsPanoramique.java">
+<area shape="rect" id="Node000001" title=" " alt="" coords="599,5,822,48"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,96,205,139"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="599,45,221,98,220,93,598,39"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="229,104,405,131"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="619,51,389,103,388,97,618,46"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="428,104,603,131"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="666,51,558,100,556,95,664,46"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="627,96,794,139"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="713,48,713,81,708,81,708,48"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="819,96,986,139"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="756,46,845,87,843,92,754,51"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="1010,96,1195,139"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="803,46,996,89,995,95,802,51"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="1218,104,1381,131"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="823,38,1004,62,1208,93,1231,98,1230,103,1207,99,1003,67,822,43"/>
+</map>

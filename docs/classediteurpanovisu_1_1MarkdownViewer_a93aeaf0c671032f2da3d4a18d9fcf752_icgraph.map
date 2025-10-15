@@ -1,0 +1,9 @@
+<map id="editeurpanovisu.MarkdownViewer.convertirMarkdownEnHtml" name="editeurpanovisu.MarkdownViewer.convertirMarkdownEnHtml">
+<area shape="rect" id="Node000001" title="Convertit du Markdown en HTML." alt="" coords="260,72,479,115"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1MarkdownViewer.html#a10f899a1cf8b710a6116d89fe47f9b64" title="Affiche un fichier Markdown dans une WebView." alt="" coords="5,5,212,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="268,70,194,51,195,46,269,65"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1MarkdownViewer.html#ac6ca1198098ccc428fbcc1c1ff10b495" title="Affiche du contenu Markdown dans une WebView." alt="" coords="20,72,197,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="244,96,197,96,197,91,244,91"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1MarkdownViewer.html#a6a08acdfb7fcb27bbb308ce0487da36d" title="Exemple d&#39;utilisation." alt="" coords="20,139,197,181"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="269,122,195,141,194,135,268,116"/>
+</map>

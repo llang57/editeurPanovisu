@@ -1,0 +1,12 @@
+<map id="editeurpanovisu.MarkdownViewer.main" name="editeurpanovisu.MarkdownViewer.main">
+<area shape="rect" id="Node000001" title="Exemple d&#39;utilisation." alt="" coords="5,39,182,81"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1MarkdownViewer.html#a93aeaf0c671032f2da3d4a18d9fcf752" title="Convertit du Markdown en HTML." alt="" coords="230,5,449,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="182,45,214,41,214,46,183,51"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1MarkdownViewer.html#a97cf5f887bf60ee77ea235722283e071" title="Constructeur avec support des extensions GFM (GitHub Flavored Markdown)" alt="" coords="251,72,428,115"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="183,69,236,77,235,82,182,75"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1MarkdownViewer.html#a861f2a104621e752b0eee2e71ee2c071" title="Remplace les émojis courants par des badges visuels stylisés Affiche uniquement l&#39;icône,..." alt="" coords="497,5,673,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="449,24,481,24,481,29,449,29"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1MarkdownViewer.html#a5823f5194e7e655cfdff1325fe7b59a9" title="Charge les polices personnalisées pour le WebView Wingdings doit être chargée explicitement car WebVi..." alt="" coords="497,72,673,115"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="428,99,481,100,481,105,428,105"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="496,87,443,87,443,82,496,82"/>
+</map>

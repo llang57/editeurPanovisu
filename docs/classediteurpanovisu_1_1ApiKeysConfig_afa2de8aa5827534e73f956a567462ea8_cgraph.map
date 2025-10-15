@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.ApiKeysConfig.hasOpenRouterApiKey" name="editeurpanovisu.ApiKeysConfig.hasOpenRouterApiKey">
+<area shape="rect" id="Node000001" title="Vérifie si une clé API OpenRouter est configurée." alt="" coords="5,5,234,48"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1ApiKeysConfig.html#af9241a594f0e5419b8d0f8b338e38ae9" title="Récupère la clé API OpenRouter." alt="" coords="282,5,507,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="234,24,266,24,266,29,234,29"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1ApiKeysConfig.html#a7babcdd2b84a59ec6088d85c66d00551" title="Charge le fichier de configuration des clés API." alt="" coords="555,5,786,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="507,24,539,24,539,29,507,29"/>
+</map>

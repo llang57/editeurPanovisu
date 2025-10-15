@@ -1,0 +1,23 @@
+<map id="editeurpanovisu.GestionnaireInterfaceController" name="editeurpanovisu.GestionnaireInterfaceController">
+<area shape="rect" id="Node000001" title="Gestion de l&#39;interface de visualition de la visite virtuelle." alt="" coords="566,448,756,491"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1ExtensionsFilter.html" title="Génération de listes FileFilter." alt="" coords="155,46,336,88"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="352,49,400,48,451,55,500,70,544,96,581,134,610,180,631,230,646,282,660,378,663,448,658,448,655,379,641,283,626,232,605,183,577,138,541,100,498,74,450,60,400,54,352,54"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="7,54,78,80"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="94,64,155,64,155,70,94,70"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1ImageFond.html" title=" " alt="" coords="155,112,336,139"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="352,122,464,129,511,138,544,153,577,185,603,222,623,264,638,307,655,388,662,448,656,448,650,388,633,308,618,266,598,225,573,188,541,157,510,144,463,135,352,127"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1PaneOutil.html" title=" " alt="" coords="159,188,332,215"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="348,199,461,206,510,215,544,229,571,252,593,279,612,309,627,340,648,400,659,447,654,449,643,402,622,342,607,311,589,282,567,255,541,233,509,220,461,212,348,204"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1BigDecimalField.html" title="Classe de remplacement pour jfxtras.labs.scene.control.BigDecimalField qui n&#39;est plus disponible dans..." alt="" coords="154,444,337,487"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="353,465,386,466,566,467,566,472,386,471,353,471"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="5,452,80,479"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="95,463,154,463,154,468,95,468"/>
+<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1ZoneTelecommande.html" title=" " alt="" coords="129,511,362,538"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="378,515,459,508,542,496,579,489,580,494,543,502,460,513,378,520"/>
+<area shape="rect" id="Node000009" href="$classediteurpanovisu_1_1CoordonneesGeographiques.html" title=" " alt="" coords="149,562,342,604"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="358,578,449,567,496,557,541,543,591,518,632,489,635,494,594,523,543,548,497,562,450,572,359,583"/>
+<area shape="rect" id="Node000010" href="$classediteurpanovisu_1_1NavigateurCarteGluon.html" title="NavigateurCarte utilisant JMapViewer (OpenStreetMap pour Java Desktop) Remplace Gluon Maps qui crasha..." alt="" coords="156,628,335,671"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="350,650,397,646,446,638,495,625,541,605,575,580,605,549,646,490,650,493,609,553,579,584,544,609,497,630,447,643,398,651,351,655"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="11,636,74,663"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="89,647,155,647,155,652,89,652"/>
+</map>

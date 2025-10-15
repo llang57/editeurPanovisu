@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>EditeurPanovisu: Référence du fichier src/editeurpanovisu/ListePanoramiqueCellule.java</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">EditeurPanovisu<span id="projectnumber">&#160;3.1.0</span>
+   </div>
+   <div id="projectbrief">Éditeur de visites virtuelles 360° Panovisu</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Recherche',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('ListePanoramiqueCellule_8java.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Chargement...</div>
+<div class="SRStatus" id="Searching">Recherche...</div>
+<div class="SRStatus" id="NoMatches">Aucune correspondance</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Référence du fichier ListePanoramiqueCellule.java</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>import editeurpanovisu.EditeurPanovisu.affichePanoChoisit;</code><br />
+<code>import editeurpanovisu.OrdrePanoramique.cellulesPanoramiques;</code><br />
+<code>import java.util.ArrayList;</code><br />
+<code>import java.util.List;</code><br />
+<code>import javafx.collections.ObservableList;</code><br />
+<code>import javafx.scene.control.Label;</code><br />
+<code>import javafx.scene.control.ListCell;</code><br />
+<code>import javafx.scene.image.ImageView;</code><br />
+<code>import javafx.scene.input.ClipboardContent;</code><br />
+<code>import javafx.scene.input.DragEvent;</code><br />
+<code>import javafx.scene.input.Dragboard;</code><br />
+<code>import javafx.scene.input.TransferMode;</code><br />
+<code>import javafx.scene.layout.AnchorPane;</code><br />
+<code>import javafx.scene.layout.Pane;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Graphe des dépendances par inclusion de ListePanoramiqueCellule.java:</div>
+<div class="dyncontent">
+<div class="center"><img src="ListePanoramiqueCellule_8java__incl.png" border="0" usemap="#asrc_2editeurpanovisu_2ListePanoramiqueCellule_8java" loading="lazy" alt=""/></div>
+<map name="asrc_2editeurpanovisu_2ListePanoramiqueCellule_8java" id="asrc_2editeurpanovisu_2ListePanoramiqueCellule_8java">
+<area shape="rect" title=" " alt="" coords="1379,5,1576,48"/>
+<area shape="rect" title=" " alt="" coords="5,96,259,139"/>
+<area shape="poly" title=" " alt="" coords="1378,33,907,53,594,72,274,98,274,93,594,66,906,47,1378,28"/>
+<area shape="rect" title=" " alt="" coords="282,96,555,139"/>
+<area shape="poly" title=" " alt="" coords="1378,36,1026,59,571,98,570,93,1026,54,1378,31"/>
+<area shape="rect" title=" " alt="" coords="579,104,701,131"/>
+<area shape="poly" title=" " alt="" coords="1378,34,1246,41,1080,53,897,71,714,99,696,102,695,97,713,93,896,66,1079,47,1246,35,1378,29"/>
+<area shape="rect" title=" " alt="" coords="725,104,816,131"/>
+<area shape="poly" title=" " alt="" coords="1378,34,1265,40,1127,52,977,71,829,99,817,101,816,96,827,93,976,66,1127,47,1265,35,1378,29"/>
+<area shape="rect" title=" " alt="" coords="840,104,1053,131"/>
+<area shape="poly" title=" " alt="" coords="1379,47,1066,99,1037,104,1036,98,1065,93,1378,42"/>
+<area shape="rect" title=" " alt="" coords="1077,104,1251,131"/>
+<area shape="poly" title=" " alt="" coords="1405,51,1224,102,1223,97,1403,46"/>
+<area shape="rect" title=" " alt="" coords="1275,104,1461,131"/>
+<area shape="poly" title=" " alt="" coords="1454,50,1397,96,1393,92,1450,46"/>
+<area shape="rect" title=" " alt="" coords="1485,104,1688,131"/>
+<area shape="poly" title=" " alt="" coords="1504,46,1561,92,1558,96,1501,50"/>
+<area shape="rect" title=" " alt="" coords="1712,96,1898,139"/>
+<area shape="poly" title=" " alt="" coords="1555,46,1715,89,1713,94,1554,51"/>
+<area shape="rect" title=" " alt="" coords="1922,104,2115,131"/>
+<area shape="poly" title=" " alt="" coords="1577,40,1911,93,1937,98,1937,103,1910,99,1576,45"/>
+<area shape="rect" title=" " alt="" coords="2139,104,2330,131"/>
+<area shape="poly" title=" " alt="" coords="1577,33,1827,57,2128,93,2158,98,2157,103,2128,99,1827,62,1576,38"/>
+<area shape="rect" title=" " alt="" coords="2354,104,2566,131"/>
+<area shape="poly" title=" " alt="" coords="1576,30,1916,52,2129,70,2343,93,2378,98,2377,104,2342,99,2129,75,1916,57,1576,36"/>
+<area shape="rect" title=" " alt="" coords="2590,104,2799,131"/>
+<area shape="poly" title=" " alt="" coords="1577,28,2012,47,2293,66,2578,93,2613,98,2613,104,2577,99,2293,71,2011,52,1577,33"/>
+<area shape="rect" title=" " alt="" coords="2824,104,2992,131"/>
+<area shape="poly" title=" " alt="" coords="1577,25,1799,28,2106,37,2457,58,2636,73,2812,93,2840,98,2840,103,2812,99,2636,79,2456,63,2105,43,1799,33,1577,30"/>
+</map>
+</div>
+</div>
+<p><a href="ListePanoramiqueCellule_8java_source.html">Aller au code source de ce fichier.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:editeurpanovisu_2EListePanoramiqueCellule" id="r_editeurpanovisu_2EListePanoramiqueCellule"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1ListePanoramiqueCellule.html">editeurpanovisu.ListePanoramiqueCellule</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
+Paquetages</h2></td></tr>
+<tr class="memitem:editeurpanovisu" id="r_editeurpanovisu"><td class="memItemLeft" align="right" valign="top">package &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceediteurpanovisu.html">editeurpanovisu</a></td></tr>
+</table>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="dir_184160a943439c2c782fe244782aeddc.html">editeurpanovisu</a></li><li class="navelem"><a href="ListePanoramiqueCellule_8java.html">ListePanoramiqueCellule.java</a></li>
+    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>EditeurPanovisu:  Fichier source de src/editeurpanovisu/Plan.java</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">EditeurPanovisu<span id="projectnumber">&#160;3.1.0</span>
+   </div>
+   <div id="projectbrief">Éditeur de visites virtuelles 360° Panovisu</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Recherche',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('Plan_8java_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Chargement...</div>
+<div class="SRStatus" id="Searching">Recherche...</div>
+<div class="SRStatus" id="NoMatches">Aucune correspondance</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Plan.java</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="Plan_8java.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * To change this license header, choose License Headers in Project Properties.</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> * To change this template file, choose Tools | Templates</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> * and open the template in the editor.</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">package </span>editeurpanovisu;</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span></div>
+<div class="foldopen" id="foldopen00012" data-start="{" data-end="};">
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html">   12</a></span><span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_class" href="classediteurpanovisu_1_1Plan.html">Plan</a> {</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#a5f63db2b16ca34ea1820c7c22a464cee">   14</a></span>    <span class="keyword">private</span> <span class="keyword">final</span> <a class="code hl_class" href="classediteurpanovisu_1_1HotSpot.html">HotSpot</a>[] <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#a5f63db2b16ca34ea1820c7c22a464cee">hotspots</a> = <span class="keyword">new</span> <a class="code hl_class" href="classediteurpanovisu_1_1HotSpot.html">HotSpot</a>[100];</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#a5ab5fdc17ccf64912d739ddfd296c28c">   15</a></span>    <span class="keyword">private</span> <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#a5ab5fdc17ccf64912d739ddfd296c28c">strTitrePlan</a> = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#a5052820a1058ce900e5cd3cfb9029610">   16</a></span>    <span class="keyword">private</span> <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#a5052820a1058ce900e5cd3cfb9029610">strImagePlan</a> = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#a6bb1a9f4a75a716d8f35149633e85965">   17</a></span>    <span class="keyword">private</span> <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#a6bb1a9f4a75a716d8f35149633e85965">strLienPlan</a> = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#aab9ac31fc4a3eb7d1942b0448d8c538a">   18</a></span>    <span class="keyword">private</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#aab9ac31fc4a3eb7d1942b0448d8c538a">iNombreHotspots</a> = 0;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#abf20890a7ac5d96e07f58fff11ffd5ff">   19</a></span>    <span class="keyword">private</span> <span class="keyword">final</span> <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a>[] <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#abf20890a7ac5d96e07f58fff11ffd5ff">strPanoramiques</a> = <span class="keyword">new</span> <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a>[50];</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#a38e026271ab08649fa6717f57eda4129">   20</a></span>    <span class="keyword">private</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#a38e026271ab08649fa6717f57eda4129">iNombrePanoramiques</a> = 0;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#a0987178fdfd56cb786ba0735153c32ef">   21</a></span>    <span class="keyword">private</span> <span class="keywordtype">double</span> <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#a0987178fdfd56cb786ba0735153c32ef">directionNord</a> = 0;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#ac59e9c360e935c7f72211cce05c116b1">   22</a></span>    <span class="keyword">private</span> <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#ac59e9c360e935c7f72211cce05c116b1">strPosition</a> = <span class="stringliteral">&quot;top:right&quot;</span>;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#a0309911c1dda109d86a56d10753df9ab">   23</a></span>    <span class="keyword">private</span> <span class="keywordtype">double</span> <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#a0309911c1dda109d86a56d10753df9ab">positionX</a> = 20;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#a5885b7dcd448b7db08e1e0793b9f1570">   24</a></span>    <span class="keyword">private</span> <span class="keywordtype">double</span> <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#a5885b7dcd448b7db08e1e0793b9f1570">positionY</a> = 20;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#a42ee7e2796bb132e290d9dd906f2be4f">   25</a></span>    <span class="keyword">private</span> <span class="keywordtype">double</span> <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#a42ee7e2796bb132e290d9dd906f2be4f">largeurPlan</a>;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#af7c1070eadb36139e166c3909f3f2069">   26</a></span>    <span class="keyword">private</span> <span class="keywordtype">double</span> <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#af7c1070eadb36139e166c3909f3f2069">hauteurPlan</a>;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span></div>
+<div class="foldopen" id="foldopen00032" data-start="{" data-end="}">
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#a6e20f2d79947a7d68332eeee6dec9d7c">   32</a></span>    <span class="keyword">public</span> <a class="code hl_class" href="classediteurpanovisu_1_1HotSpot.html">HotSpot</a> <a class="code hl_function" href="classediteurpanovisu_1_1Plan.html#a6e20f2d79947a7d68332eeee6dec9d7c">getHotspot</a>(<span class="keywordtype">int</span> <a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>) {</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#a5f63db2b16ca34ea1820c7c22a464cee">hotspots</a>[<a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>];</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    }</div>
+</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span></div>
+<div class="foldopen" id="foldopen00040" data-start="{" data-end="}">
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#a01a28b2ecf45025b0ca5a8354a86b944">   40</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1Plan.html#a01a28b2ecf45025b0ca5a8354a86b944">setHotspot</a>(<a class="code hl_class" href="classediteurpanovisu_1_1HotSpot.html">HotSpot</a> hotspot, <span class="keywordtype">int</span> <a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>) {</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        this.hotspots[<a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>] = hotspot;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    }</div>
+</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span></div>
+<div class="foldopen" id="foldopen00048" data-start="{" data-end="}">
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#abc20604eeeae1726806fb7d338d64217">   48</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1Plan.html#abc20604eeeae1726806fb7d338d64217">addHotspot</a>(<a class="code hl_class" href="classediteurpanovisu_1_1HotSpot.html">HotSpot</a> hotspot) {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        this.hotspots[this.<a class="code hl_function" href="classediteurpanovisu_1_1Plan.html#a914b72ad79df4aee991e1457e42e7519">getNombreHotspots</a>()] = hotspot;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        this.<a class="code hl_function" href="classediteurpanovisu_1_1Plan.html#ac7422af07c69a90e71fbb6d8630fbc1c">setNombreHotspots</a>(this.<a class="code hl_function" href="classediteurpanovisu_1_1Plan.html#a914b72ad79df4aee991e1457e42e7519">getNombreHotspots</a>() + 1);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    }</div>
+</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span></div>
+<div class="foldopen" id="foldopen00057" data-start="{" data-end="}">
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#a6709ffa38a472d6571f537767a56d2de">   57</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1Plan.html#a6709ffa38a472d6571f537767a56d2de">removeHotspot</a>(<span class="keywordtype">int</span> iNum) {</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a> = iNum; <a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a> &lt; this.<a class="code hl_function" href="classediteurpanovisu_1_1Plan.html#a914b72ad79df4aee991e1457e42e7519">getNombreHotspots</a>() - 1; <a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>++) {</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            this.hotspots[<a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>] = this.hotspots[<a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a> + 1];</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        }</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        this.<a class="code hl_function" href="classediteurpanovisu_1_1Plan.html#ac7422af07c69a90e71fbb6d8630fbc1c">setNombreHotspots</a>(this.<a class="code hl_function" href="classediteurpanovisu_1_1Plan.html#a914b72ad79df4aee991e1457e42e7519">getNombreHotspots</a>() - 1);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="comment">//int nombre</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    }</div>
+</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span></div>
+<div class="foldopen" id="foldopen00068" data-start="{" data-end="}">
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#aedfce88c5c2478dc00285ecc0c11667d">   68</a></span>    <span class="keyword">public</span> <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_function" href="classediteurpanovisu_1_1Plan.html#aedfce88c5c2478dc00285ecc0c11667d">getTitrePlan</a>() {</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#a5ab5fdc17ccf64912d739ddfd296c28c">strTitrePlan</a>;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    }</div>
+</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span></div>
+<div class="foldopen" id="foldopen00076" data-start="{" data-end="}">
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#a222c85c88908e635357941cb48138518">   76</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1Plan.html#a222c85c88908e635357941cb48138518">setTitrePlan</a>(<a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#a5ab5fdc17ccf64912d739ddfd296c28c">strTitrePlan</a>) {</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        this.strTitrePlan = <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#a5ab5fdc17ccf64912d739ddfd296c28c">strTitrePlan</a>;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    }</div>
+</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span></div>
+<div class="foldopen" id="foldopen00083" data-start="{" data-end="}">
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#a914b72ad79df4aee991e1457e42e7519">   83</a></span>    <span class="keyword">public</span> <span class="keywordtype">int</span> <a class="code hl_function" href="classediteurpanovisu_1_1Plan.html#a914b72ad79df4aee991e1457e42e7519">getNombreHotspots</a>() {</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#aab9ac31fc4a3eb7d1942b0448d8c538a">iNombreHotspots</a>;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    }</div>
+</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span></div>
+<div class="foldopen" id="foldopen00090" data-start="{" data-end="}">
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#ac7422af07c69a90e71fbb6d8630fbc1c">   90</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1Plan.html#ac7422af07c69a90e71fbb6d8630fbc1c">setNombreHotspots</a>(<span class="keywordtype">int</span> <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#aab9ac31fc4a3eb7d1942b0448d8c538a">iNombreHotspots</a>) {</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        this.iNombreHotspots = <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#aab9ac31fc4a3eb7d1942b0448d8c538a">iNombreHotspots</a>;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    }</div>
+</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span></div>
+<div class="foldopen" id="foldopen00097" data-start="{" data-end="}">
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#a626eefb6c9eaa255261da52b7059e432">   97</a></span>    <span class="keyword">public</span> <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a>[] <a class="code hl_function" href="classediteurpanovisu_1_1Plan.html#a626eefb6c9eaa255261da52b7059e432">getStrPanoramiques</a>() {</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#abf20890a7ac5d96e07f58fff11ffd5ff">strPanoramiques</a>;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    }</div>
+</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span></div>
+<div class="foldopen" id="foldopen00104" data-start="{" data-end="}">
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#a59b883ff0928238dc303636c205872f2">  104</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1Plan.html#a59b883ff0928238dc303636c205872f2">addStrPanoramique</a>(<a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> strPanoramique) {</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        this.strPanoramiques[<a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#a38e026271ab08649fa6717f57eda4129">iNombrePanoramiques</a>] = strPanoramique;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        this.iNombrePanoramiques++;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    }</div>
+</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span></div>
+<div class="foldopen" id="foldopen00112" data-start="{" data-end="}">
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#a8a7b5f5bec64851b990b54a70d4082ab">  112</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1Plan.html#a8a7b5f5bec64851b990b54a70d4082ab">removeStrPanoramique</a>(<a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> strPanoramique) {</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        <span class="keywordtype">boolean</span> trouve = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        <span class="keywordtype">int</span> numero = -1;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a> = 0; <a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a> &lt; <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#a38e026271ab08649fa6717f57eda4129">iNombrePanoramiques</a>; <a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>++) {</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>            <span class="keywordflow">if</span> (this.strPanoramiques[<a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#a38e026271ab08649fa6717f57eda4129">iNombrePanoramiques</a>].equals(strPanoramique)) {</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>                trouve = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>                numero = <a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>;</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>            }</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        }</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>        <span class="keywordflow">if</span> (trouve) {</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a> = numero; <a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a> &lt; <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#a38e026271ab08649fa6717f57eda4129">iNombrePanoramiques</a> - 1; <a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>++) {</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                this.strPanoramiques[<a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>] = this.strPanoramiques[<a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a> + 1];</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>            }</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>            this.iNombrePanoramiques--;</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        }</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    }</div>
+</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span></div>
+<div class="foldopen" id="foldopen00133" data-start="{" data-end="}">
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#a13f55c5da67c5dd82c755ee442ba2e72">  133</a></span>    <span class="keyword">public</span> <span class="keywordtype">int</span> <a class="code hl_function" href="classediteurpanovisu_1_1Plan.html#a13f55c5da67c5dd82c755ee442ba2e72">getNombrePanoramiques</a>() {</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#a38e026271ab08649fa6717f57eda4129">iNombrePanoramiques</a>;</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    }</div>
+</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span></div>
+<div class="foldopen" id="foldopen00140" data-start="{" data-end="}">
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#afc449c874f390d63d7dc8698b30bce5f">  140</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1Plan.html#afc449c874f390d63d7dc8698b30bce5f">setNombrePanoramiques</a>(<span class="keywordtype">int</span> <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#a38e026271ab08649fa6717f57eda4129">iNombrePanoramiques</a>) {</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        this.iNombrePanoramiques = <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#a38e026271ab08649fa6717f57eda4129">iNombrePanoramiques</a>;</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    }</div>
+</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span></div>
+<div class="foldopen" id="foldopen00147" data-start="{" data-end="}">
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#aa8df296661ebfcf68929531a363f3858">  147</a></span>    <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code hl_function" href="classediteurpanovisu_1_1Plan.html#aa8df296661ebfcf68929531a363f3858">getDirectionNord</a>() {</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#a0987178fdfd56cb786ba0735153c32ef">directionNord</a>;</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    }</div>
+</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span></div>
+<div class="foldopen" id="foldopen00154" data-start="{" data-end="}">
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#ac5ce55711d30e5bd75f429885b592bd9">  154</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1Plan.html#ac5ce55711d30e5bd75f429885b592bd9">setDirectionNord</a>(<span class="keywordtype">double</span> <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#a0987178fdfd56cb786ba0735153c32ef">directionNord</a>) {</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>        this.directionNord = <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#a0987178fdfd56cb786ba0735153c32ef">directionNord</a>;</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    }</div>
+</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span></div>
+<div class="foldopen" id="foldopen00161" data-start="{" data-end="}">
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#afbcd02823a9c30423b6457b480562136">  161</a></span>    <span class="keyword">public</span> <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_function" href="classediteurpanovisu_1_1Plan.html#afbcd02823a9c30423b6457b480562136">getStrPosition</a>() {</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#ac59e9c360e935c7f72211cce05c116b1">strPosition</a>;</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    }</div>
+</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span></div>
+<div class="foldopen" id="foldopen00168" data-start="{" data-end="}">
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#a81a9d7abf2032769b8234ea2fda62ca0">  168</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1Plan.html#a81a9d7abf2032769b8234ea2fda62ca0">setStrPosition</a>(<a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#ac59e9c360e935c7f72211cce05c116b1">strPosition</a>) {</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        this.strPosition = <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#ac59e9c360e935c7f72211cce05c116b1">strPosition</a>;</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    }</div>
+</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span></div>
+<div class="foldopen" id="foldopen00175" data-start="{" data-end="}">
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#a7ae9a778e16b249747a4556051d3e65a">  175</a></span>    <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code hl_function" href="classediteurpanovisu_1_1Plan.html#a7ae9a778e16b249747a4556051d3e65a">getPositionX</a>() {</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#a0309911c1dda109d86a56d10753df9ab">positionX</a>;</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    }</div>
+</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span></div>
+<div class="foldopen" id="foldopen00182" data-start="{" data-end="}">
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#a7a38456119bd566d5ed1f7f88f26c52f">  182</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1Plan.html#a7a38456119bd566d5ed1f7f88f26c52f">setPositionX</a>(<span class="keywordtype">double</span> <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#a0309911c1dda109d86a56d10753df9ab">positionX</a>) {</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>        this.positionX = <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#a0309911c1dda109d86a56d10753df9ab">positionX</a>;</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    }</div>
+</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span></div>
+<div class="foldopen" id="foldopen00189" data-start="{" data-end="}">
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#a8b6d59904874af82347e377aec3e0778">  189</a></span>    <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code hl_function" href="classediteurpanovisu_1_1Plan.html#a8b6d59904874af82347e377aec3e0778">getPositionY</a>() {</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#a5885b7dcd448b7db08e1e0793b9f1570">positionY</a>;</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    }</div>
+</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span></div>
+<div class="foldopen" id="foldopen00196" data-start="{" data-end="}">
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#ab807fd25902aea5f3a5b4faccdfd7495">  196</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1Plan.html#ab807fd25902aea5f3a5b4faccdfd7495">setPositionY</a>(<span class="keywordtype">double</span> <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#a5885b7dcd448b7db08e1e0793b9f1570">positionY</a>) {</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>        this.positionY = <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#a5885b7dcd448b7db08e1e0793b9f1570">positionY</a>;</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    }</div>
+</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span></div>
+<div class="foldopen" id="foldopen00203" data-start="{" data-end="}">
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#a077ee228e221fa215527116c0e5fc61c">  203</a></span>    <span class="keyword">public</span> <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_function" href="classediteurpanovisu_1_1Plan.html#a077ee228e221fa215527116c0e5fc61c">getStrImagePlan</a>() {</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#a5052820a1058ce900e5cd3cfb9029610">strImagePlan</a>;</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    }</div>
+</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span></div>
+<div class="foldopen" id="foldopen00210" data-start="{" data-end="}">
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#a1fa4274730673e0d0cbdc20f622ae8b7">  210</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1Plan.html#a1fa4274730673e0d0cbdc20f622ae8b7">setStrImagePlan</a>(<a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#a5052820a1058ce900e5cd3cfb9029610">strImagePlan</a>) {</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>        this.strImagePlan = <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#a5052820a1058ce900e5cd3cfb9029610">strImagePlan</a>;</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>    }</div>
+</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span></div>
+<div class="foldopen" id="foldopen00217" data-start="{" data-end="}">
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#a5b4982d2aa2929ecd306c091f5df4d9e">  217</a></span>    <span class="keyword">public</span> <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_function" href="classediteurpanovisu_1_1Plan.html#a5b4982d2aa2929ecd306c091f5df4d9e">getStrLienPlan</a>() {</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#a6bb1a9f4a75a716d8f35149633e85965">strLienPlan</a>;</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    }</div>
+</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span></div>
+<div class="foldopen" id="foldopen00224" data-start="{" data-end="}">
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#ae5aeab055cbc0f673b98f5cdf60f1237">  224</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1Plan.html#ae5aeab055cbc0f673b98f5cdf60f1237">setStrLienPlan</a>(<a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#a6bb1a9f4a75a716d8f35149633e85965">strLienPlan</a>) {</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>        this.strLienPlan = <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#a6bb1a9f4a75a716d8f35149633e85965">strLienPlan</a>;</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    }</div>
+</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span></div>
+<div class="foldopen" id="foldopen00231" data-start="{" data-end="}">
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#ad2c8455007177517e30af28d9361770e">  231</a></span>    <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code hl_function" href="classediteurpanovisu_1_1Plan.html#ad2c8455007177517e30af28d9361770e">getLargeurPlan</a>() {</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#a42ee7e2796bb132e290d9dd906f2be4f">largeurPlan</a>;</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>    }</div>
+</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span></div>
+<div class="foldopen" id="foldopen00238" data-start="{" data-end="}">
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#a616bcfb96e9928315fb5e91787be3f65">  238</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1Plan.html#a616bcfb96e9928315fb5e91787be3f65">setLargeurPlan</a>(<span class="keywordtype">double</span> <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#a42ee7e2796bb132e290d9dd906f2be4f">largeurPlan</a>) {</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>        this.largeurPlan = <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#a42ee7e2796bb132e290d9dd906f2be4f">largeurPlan</a>;</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>    }</div>
+</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span></div>
+<div class="foldopen" id="foldopen00245" data-start="{" data-end="}">
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#ad847abf46864f18d142541866847da97">  245</a></span>    <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code hl_function" href="classediteurpanovisu_1_1Plan.html#ad847abf46864f18d142541866847da97">getHauteurPlan</a>() {</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#af7c1070eadb36139e166c3909f3f2069">hauteurPlan</a>;</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>    }</div>
+</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span></div>
+<div class="foldopen" id="foldopen00252" data-start="{" data-end="}">
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1Plan.html#ac0b84ea3e80d6449031c288031bb566f">  252</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1Plan.html#ac0b84ea3e80d6449031c288031bb566f">setHauteurPlan</a>(<span class="keywordtype">double</span> <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#af7c1070eadb36139e166c3909f3f2069">hauteurPlan</a>) {</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>        this.hauteurPlan = <a class="code hl_variable" href="classediteurpanovisu_1_1Plan.html#af7c1070eadb36139e166c3909f3f2069">hauteurPlan</a>;</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>    }</div>
+</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span> </div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>}</div>
+</div>
+<div class="ttc" id="aOpenLayers_8js_html_a4ca754488880c6622cdd0e257fe5f5ea"><div class="ttname"><a href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a></div><div class="ttdeci">OpenLayers String</div><div class="ttdef"><b>Definition</b> <a href="OpenLayers_8js_source.html#l00059">OpenLayers.js:59</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1HotSpot_html"><div class="ttname"><a href="classediteurpanovisu_1_1HotSpot.html">editeurpanovisu.HotSpot</a></div><div class="ttdoc">Définition des hotspots panoramiques.</div><div class="ttdef"><b>Definition</b> <a href="HotSpot_8java_source.html#l00015">HotSpot.java:15</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html">editeurpanovisu.Plan</a></div><div class="ttdef"><b>Definition</b> <a href="#l00012">Plan.java:12</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_a01a28b2ecf45025b0ca5a8354a86b944"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#a01a28b2ecf45025b0ca5a8354a86b944">editeurpanovisu.Plan.setHotspot</a></div><div class="ttdeci">void setHotspot(HotSpot hotspot, int i)</div><div class="ttdef"><b>Definition</b> <a href="#l00040">Plan.java:40</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_a0309911c1dda109d86a56d10753df9ab"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#a0309911c1dda109d86a56d10753df9ab">editeurpanovisu.Plan.positionX</a></div><div class="ttdeci">double positionX</div><div class="ttdef"><b>Definition</b> <a href="#l00023">Plan.java:23</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_a077ee228e221fa215527116c0e5fc61c"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#a077ee228e221fa215527116c0e5fc61c">editeurpanovisu.Plan.getStrImagePlan</a></div><div class="ttdeci">String getStrImagePlan()</div><div class="ttdef"><b>Definition</b> <a href="#l00203">Plan.java:203</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_a0987178fdfd56cb786ba0735153c32ef"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#a0987178fdfd56cb786ba0735153c32ef">editeurpanovisu.Plan.directionNord</a></div><div class="ttdeci">double directionNord</div><div class="ttdef"><b>Definition</b> <a href="#l00021">Plan.java:21</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_a13f55c5da67c5dd82c755ee442ba2e72"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#a13f55c5da67c5dd82c755ee442ba2e72">editeurpanovisu.Plan.getNombrePanoramiques</a></div><div class="ttdeci">int getNombrePanoramiques()</div><div class="ttdef"><b>Definition</b> <a href="#l00133">Plan.java:133</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_a1fa4274730673e0d0cbdc20f622ae8b7"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#a1fa4274730673e0d0cbdc20f622ae8b7">editeurpanovisu.Plan.setStrImagePlan</a></div><div class="ttdeci">void setStrImagePlan(String strImagePlan)</div><div class="ttdef"><b>Definition</b> <a href="#l00210">Plan.java:210</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_a222c85c88908e635357941cb48138518"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#a222c85c88908e635357941cb48138518">editeurpanovisu.Plan.setTitrePlan</a></div><div class="ttdeci">void setTitrePlan(String strTitrePlan)</div><div class="ttdef"><b>Definition</b> <a href="#l00076">Plan.java:76</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_a38e026271ab08649fa6717f57eda4129"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#a38e026271ab08649fa6717f57eda4129">editeurpanovisu.Plan.iNombrePanoramiques</a></div><div class="ttdeci">int iNombrePanoramiques</div><div class="ttdef"><b>Definition</b> <a href="#l00020">Plan.java:20</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_a42ee7e2796bb132e290d9dd906f2be4f"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#a42ee7e2796bb132e290d9dd906f2be4f">editeurpanovisu.Plan.largeurPlan</a></div><div class="ttdeci">double largeurPlan</div><div class="ttdef"><b>Definition</b> <a href="#l00025">Plan.java:25</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_a5052820a1058ce900e5cd3cfb9029610"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#a5052820a1058ce900e5cd3cfb9029610">editeurpanovisu.Plan.strImagePlan</a></div><div class="ttdeci">String strImagePlan</div><div class="ttdef"><b>Definition</b> <a href="#l00016">Plan.java:16</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_a5885b7dcd448b7db08e1e0793b9f1570"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#a5885b7dcd448b7db08e1e0793b9f1570">editeurpanovisu.Plan.positionY</a></div><div class="ttdeci">double positionY</div><div class="ttdef"><b>Definition</b> <a href="#l00024">Plan.java:24</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_a59b883ff0928238dc303636c205872f2"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#a59b883ff0928238dc303636c205872f2">editeurpanovisu.Plan.addStrPanoramique</a></div><div class="ttdeci">void addStrPanoramique(String strPanoramique)</div><div class="ttdef"><b>Definition</b> <a href="#l00104">Plan.java:104</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_a5ab5fdc17ccf64912d739ddfd296c28c"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#a5ab5fdc17ccf64912d739ddfd296c28c">editeurpanovisu.Plan.strTitrePlan</a></div><div class="ttdeci">String strTitrePlan</div><div class="ttdef"><b>Definition</b> <a href="#l00015">Plan.java:15</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_a5b4982d2aa2929ecd306c091f5df4d9e"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#a5b4982d2aa2929ecd306c091f5df4d9e">editeurpanovisu.Plan.getStrLienPlan</a></div><div class="ttdeci">String getStrLienPlan()</div><div class="ttdef"><b>Definition</b> <a href="#l00217">Plan.java:217</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_a5f63db2b16ca34ea1820c7c22a464cee"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#a5f63db2b16ca34ea1820c7c22a464cee">editeurpanovisu.Plan.hotspots</a></div><div class="ttdeci">final HotSpot[] hotspots</div><div class="ttdef"><b>Definition</b> <a href="#l00014">Plan.java:14</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_a616bcfb96e9928315fb5e91787be3f65"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#a616bcfb96e9928315fb5e91787be3f65">editeurpanovisu.Plan.setLargeurPlan</a></div><div class="ttdeci">void setLargeurPlan(double largeurPlan)</div><div class="ttdef"><b>Definition</b> <a href="#l00238">Plan.java:238</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_a626eefb6c9eaa255261da52b7059e432"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#a626eefb6c9eaa255261da52b7059e432">editeurpanovisu.Plan.getStrPanoramiques</a></div><div class="ttdeci">String[] getStrPanoramiques()</div><div class="ttdef"><b>Definition</b> <a href="#l00097">Plan.java:97</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_a6709ffa38a472d6571f537767a56d2de"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#a6709ffa38a472d6571f537767a56d2de">editeurpanovisu.Plan.removeHotspot</a></div><div class="ttdeci">void removeHotspot(int iNum)</div><div class="ttdef"><b>Definition</b> <a href="#l00057">Plan.java:57</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_a6bb1a9f4a75a716d8f35149633e85965"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#a6bb1a9f4a75a716d8f35149633e85965">editeurpanovisu.Plan.strLienPlan</a></div><div class="ttdeci">String strLienPlan</div><div class="ttdef"><b>Definition</b> <a href="#l00017">Plan.java:17</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_a6e20f2d79947a7d68332eeee6dec9d7c"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#a6e20f2d79947a7d68332eeee6dec9d7c">editeurpanovisu.Plan.getHotspot</a></div><div class="ttdeci">HotSpot getHotspot(int i)</div><div class="ttdef"><b>Definition</b> <a href="#l00032">Plan.java:32</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_a7a38456119bd566d5ed1f7f88f26c52f"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#a7a38456119bd566d5ed1f7f88f26c52f">editeurpanovisu.Plan.setPositionX</a></div><div class="ttdeci">void setPositionX(double positionX)</div><div class="ttdef"><b>Definition</b> <a href="#l00182">Plan.java:182</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_a7ae9a778e16b249747a4556051d3e65a"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#a7ae9a778e16b249747a4556051d3e65a">editeurpanovisu.Plan.getPositionX</a></div><div class="ttdeci">double getPositionX()</div><div class="ttdef"><b>Definition</b> <a href="#l00175">Plan.java:175</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_a81a9d7abf2032769b8234ea2fda62ca0"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#a81a9d7abf2032769b8234ea2fda62ca0">editeurpanovisu.Plan.setStrPosition</a></div><div class="ttdeci">void setStrPosition(String strPosition)</div><div class="ttdef"><b>Definition</b> <a href="#l00168">Plan.java:168</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_a8a7b5f5bec64851b990b54a70d4082ab"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#a8a7b5f5bec64851b990b54a70d4082ab">editeurpanovisu.Plan.removeStrPanoramique</a></div><div class="ttdeci">void removeStrPanoramique(String strPanoramique)</div><div class="ttdef"><b>Definition</b> <a href="#l00112">Plan.java:112</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_a8b6d59904874af82347e377aec3e0778"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#a8b6d59904874af82347e377aec3e0778">editeurpanovisu.Plan.getPositionY</a></div><div class="ttdeci">double getPositionY()</div><div class="ttdef"><b>Definition</b> <a href="#l00189">Plan.java:189</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_a914b72ad79df4aee991e1457e42e7519"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#a914b72ad79df4aee991e1457e42e7519">editeurpanovisu.Plan.getNombreHotspots</a></div><div class="ttdeci">int getNombreHotspots()</div><div class="ttdef"><b>Definition</b> <a href="#l00083">Plan.java:83</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_aa8df296661ebfcf68929531a363f3858"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#aa8df296661ebfcf68929531a363f3858">editeurpanovisu.Plan.getDirectionNord</a></div><div class="ttdeci">double getDirectionNord()</div><div class="ttdef"><b>Definition</b> <a href="#l00147">Plan.java:147</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_aab9ac31fc4a3eb7d1942b0448d8c538a"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#aab9ac31fc4a3eb7d1942b0448d8c538a">editeurpanovisu.Plan.iNombreHotspots</a></div><div class="ttdeci">int iNombreHotspots</div><div class="ttdef"><b>Definition</b> <a href="#l00018">Plan.java:18</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_ab807fd25902aea5f3a5b4faccdfd7495"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#ab807fd25902aea5f3a5b4faccdfd7495">editeurpanovisu.Plan.setPositionY</a></div><div class="ttdeci">void setPositionY(double positionY)</div><div class="ttdef"><b>Definition</b> <a href="#l00196">Plan.java:196</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_abc20604eeeae1726806fb7d338d64217"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#abc20604eeeae1726806fb7d338d64217">editeurpanovisu.Plan.addHotspot</a></div><div class="ttdeci">void addHotspot(HotSpot hotspot)</div><div class="ttdef"><b>Definition</b> <a href="#l00048">Plan.java:48</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_abf20890a7ac5d96e07f58fff11ffd5ff"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#abf20890a7ac5d96e07f58fff11ffd5ff">editeurpanovisu.Plan.strPanoramiques</a></div><div class="ttdeci">final String[] strPanoramiques</div><div class="ttdef"><b>Definition</b> <a href="#l00019">Plan.java:19</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_ac0b84ea3e80d6449031c288031bb566f"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#ac0b84ea3e80d6449031c288031bb566f">editeurpanovisu.Plan.setHauteurPlan</a></div><div class="ttdeci">void setHauteurPlan(double hauteurPlan)</div><div class="ttdef"><b>Definition</b> <a href="#l00252">Plan.java:252</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_ac59e9c360e935c7f72211cce05c116b1"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#ac59e9c360e935c7f72211cce05c116b1">editeurpanovisu.Plan.strPosition</a></div><div class="ttdeci">String strPosition</div><div class="ttdef"><b>Definition</b> <a href="#l00022">Plan.java:22</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_ac5ce55711d30e5bd75f429885b592bd9"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#ac5ce55711d30e5bd75f429885b592bd9">editeurpanovisu.Plan.setDirectionNord</a></div><div class="ttdeci">void setDirectionNord(double directionNord)</div><div class="ttdef"><b>Definition</b> <a href="#l00154">Plan.java:154</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_ac7422af07c69a90e71fbb6d8630fbc1c"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#ac7422af07c69a90e71fbb6d8630fbc1c">editeurpanovisu.Plan.setNombreHotspots</a></div><div class="ttdeci">void setNombreHotspots(int iNombreHotspots)</div><div class="ttdef"><b>Definition</b> <a href="#l00090">Plan.java:90</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_ad2c8455007177517e30af28d9361770e"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#ad2c8455007177517e30af28d9361770e">editeurpanovisu.Plan.getLargeurPlan</a></div><div class="ttdeci">double getLargeurPlan()</div><div class="ttdef"><b>Definition</b> <a href="#l00231">Plan.java:231</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_ad847abf46864f18d142541866847da97"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#ad847abf46864f18d142541866847da97">editeurpanovisu.Plan.getHauteurPlan</a></div><div class="ttdeci">double getHauteurPlan()</div><div class="ttdef"><b>Definition</b> <a href="#l00245">Plan.java:245</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_ae5aeab055cbc0f673b98f5cdf60f1237"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#ae5aeab055cbc0f673b98f5cdf60f1237">editeurpanovisu.Plan.setStrLienPlan</a></div><div class="ttdeci">void setStrLienPlan(String strLienPlan)</div><div class="ttdef"><b>Definition</b> <a href="#l00224">Plan.java:224</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_aedfce88c5c2478dc00285ecc0c11667d"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#aedfce88c5c2478dc00285ecc0c11667d">editeurpanovisu.Plan.getTitrePlan</a></div><div class="ttdeci">String getTitrePlan()</div><div class="ttdef"><b>Definition</b> <a href="#l00068">Plan.java:68</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_af7c1070eadb36139e166c3909f3f2069"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#af7c1070eadb36139e166c3909f3f2069">editeurpanovisu.Plan.hauteurPlan</a></div><div class="ttdeci">double hauteurPlan</div><div class="ttdef"><b>Definition</b> <a href="#l00026">Plan.java:26</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_afbcd02823a9c30423b6457b480562136"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#afbcd02823a9c30423b6457b480562136">editeurpanovisu.Plan.getStrPosition</a></div><div class="ttdeci">String getStrPosition()</div><div class="ttdef"><b>Definition</b> <a href="#l00161">Plan.java:161</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1Plan_html_afc449c874f390d63d7dc8698b30bce5f"><div class="ttname"><a href="classediteurpanovisu_1_1Plan.html#afc449c874f390d63d7dc8698b30bce5f">editeurpanovisu.Plan.setNombrePanoramiques</a></div><div class="ttdeci">void setNombrePanoramiques(int iNombrePanoramiques)</div><div class="ttdef"><b>Definition</b> <a href="#l00140">Plan.java:140</a></div></div>
+<div class="ttc" id="aleaflet_8js_html_a73aff07b65d7c0b09ccf6b4c4f1b7a9d"><div class="ttname"><a href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a></div><div class="ttdeci">function i(t, e)</div><div class="ttdef"><b>Definition</b> <a href="leaflet_8js_source.html#l00005">leaflet.js:5</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="dir_184160a943439c2c782fe244782aeddc.html">editeurpanovisu</a></li><li class="navelem"><a href="Plan_8java.html">Plan.java</a></li>
+    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>

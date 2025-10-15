@@ -1,0 +1,5 @@
+<map id="editeurpanovisu.util.SvgIconLoader.loadFallbackPng" name="editeurpanovisu.util.SvgIconLoader.loadFallbackPng">
+<area shape="rect" id="Node000001" title="Fallback: charge l&#39;icône PNG si le SVG n&#39;est pas disponible." alt="" coords="5,5,191,48"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1util_1_1SvgIconLoader.html#af546932dfbd067f7700bd0832d5efb64" title="Mappe les noms de fichiers SVG vers les noms PNG existants." alt="" coords="239,5,413,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="191,24,223,24,223,29,191,29"/>
+</map>

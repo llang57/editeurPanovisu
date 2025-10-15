@@ -1,0 +1,19 @@
+<map id="editeurpanovisu.GestionnairePlanController.getTemplate" name="editeurpanovisu.GestionnairePlanController.getTemplate">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,239,195,281"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1HotSpot.html#aabeea0db5867aa8789a3da77ed32ec5c" title=" " alt="" coords="243,5,429,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="109,237,129,199,158,151,196,101,241,58,247,54,250,58,244,62,199,105,162,154,133,201,114,239"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1HotSpot.html#ac3bcc43e17f107bde5043c73aa4e1c49" title=" " alt="" coords="243,72,429,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="117,236,170,181,204,151,241,124,250,119,253,124,244,129,207,155,173,185,121,240"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1HotSpot.html#a7dab20b819051215bf45192f657660c5" title=" " alt="" coords="243,139,429,181"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="144,236,242,191,257,185,259,190,244,196,146,241"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1HotSpot.html#a99ddded4ecf0e48de7c065874a810a11" title=" " alt="" coords="243,205,429,248"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="195,244,227,239,228,245,196,249"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1HotSpot.html#ab01097260b0771e8dec113040188ce8c" title=" " alt="" coords="243,272,429,315"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="196,271,228,275,227,281,195,276"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1HotSpot.html#ab12f601507141790312ecf53919b19e0" title=" " alt="" coords="243,339,429,381"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="146,279,244,324,259,330,257,335,242,329,144,284"/>
+<area shape="rect" id="Node000008" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="317,405,355,432"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="120,280,172,336,206,366,244,391,273,403,302,411,301,416,271,408,241,396,203,370,168,340,117,284"/>
+<area shape="rect" id="Node000009" href="$classediteurpanovisu_1_1HotSpot.html#abcf44c773cb82720388dc959853eb629" title=" " alt="" coords="247,456,425,499"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="115,281,165,359,201,403,244,442,250,446,247,450,241,446,197,407,160,362,110,283"/>
+</map>

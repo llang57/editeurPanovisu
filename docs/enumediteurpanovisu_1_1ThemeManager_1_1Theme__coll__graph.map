@@ -1,0 +1,9 @@
+<map id="editeurpanovisu.ThemeManager.Theme" name="editeurpanovisu.ThemeManager.Theme">
+<area shape="rect" id="Node000001" title="Liste des thèmes disponibles &#45; organisés par thème clair/sombre." alt="" coords="5,235,216,277"/>
+<area shape="rect" id="Node000002" href="$enumediteurpanovisu_1_1ThemeManager_1_1ThemeProvider.html" title="Type de bibliothèque de thème." alt="" coords="5,5,216,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="108,64,103,120,103,163,110,234,105,235,98,163,98,120,103,63"/>
+<area shape="rect" id="Node000003" href="$enumediteurpanovisu_1_1ThemeManager_1_1Theme.html" title="Liste des thèmes disponibles &#45; organisés par thème clair/sombre." alt="" coords="167,120,377,163"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="154,55,244,117,241,122,151,59"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="231,174,141,236,138,232,228,170"/>
+<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="394,132,404,141,396,150,378,153,377,148,393,145,398,141,390,137"/>
+</map>

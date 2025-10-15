@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>EditeurPanovisu: Référence du fichier src/editeurpanovisu/MarkdownViewer.java</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">EditeurPanovisu<span id="projectnumber">&#160;3.1.0</span>
+   </div>
+   <div id="projectbrief">Éditeur de visites virtuelles 360° Panovisu</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Recherche',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('MarkdownViewer_8java.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Chargement...</div>
+<div class="SRStatus" id="Searching">Recherche...</div>
+<div class="SRStatus" id="NoMatches">Aucune correspondance</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Référence du fichier MarkdownViewer.java</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>import javafx.scene.text.Font;</code><br />
+<code>import javafx.scene.web.WebView;</code><br />
+<code>import org.commonmark.Extension;</code><br />
+<code>import org.commonmark.ext.gfm.strikethrough.StrikethroughExtension;</code><br />
+<code>import org.commonmark.ext.gfm.tables.TablesExtension;</code><br />
+<code>import org.commonmark.parser.Parser;</code><br />
+<code>import org.commonmark.renderer.html.HtmlRenderer;</code><br />
+<code>import java.io.IOException;</code><br />
+<code>import java.nio.charset.StandardCharsets;</code><br />
+<code>import java.nio.file.Files;</code><br />
+<code>import java.nio.file.Path;</code><br />
+<code>import java.util.Arrays;</code><br />
+<code>import java.util.List;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Graphe des dépendances par inclusion de MarkdownViewer.java:</div>
+<div class="dyncontent">
+<div class="center"><img src="MarkdownViewer_8java__incl.png" border="0" usemap="#asrc_2editeurpanovisu_2MarkdownViewer_8java" loading="lazy" alt=""/></div>
+<map name="asrc_2editeurpanovisu_2MarkdownViewer_8java" id="asrc_2editeurpanovisu_2MarkdownViewer_8java">
+<area shape="rect" title=" " alt="" coords="1366,5,1519,48"/>
+<area shape="rect" title=" " alt="" coords="5,104,157,131"/>
+<area shape="poly" title=" " alt="" coords="1365,30,1158,32,861,41,518,61,342,78,169,99,145,103,144,98,169,93,341,72,518,56,861,36,1157,27,1365,25"/>
+<area shape="rect" title=" " alt="" coords="180,104,363,131"/>
+<area shape="poly" title=" " alt="" coords="1365,32,1188,38,943,49,661,69,376,99,346,103,345,98,375,93,661,64,942,44,1188,33,1365,27"/>
+<area shape="rect" title=" " alt="" coords="388,104,572,131"/>
+<area shape="poly" title=" " alt="" coords="1365,34,1026,54,806,73,584,99,554,103,553,98,583,93,805,68,1025,49,1365,29"/>
+<area shape="rect" title=" " alt="" coords="596,96,849,139"/>
+<area shape="poly" title=" " alt="" coords="1365,39,865,98,865,93,1365,34"/>
+<area shape="rect" title=" " alt="" coords="873,96,1086,139"/>
+<area shape="poly" title=" " alt="" coords="1366,45,1102,95,1101,90,1365,40"/>
+<area shape="rect" title=" " alt="" coords="1111,104,1315,131"/>
+<area shape="poly" title=" " alt="" coords="1390,51,1261,100,1259,96,1388,46"/>
+<area shape="rect" title=" " alt="" coords="1339,96,1546,139"/>
+<area shape="poly" title=" " alt="" coords="1445,48,1445,81,1440,81,1440,48"/>
+<area shape="rect" title=" " alt="" coords="1569,104,1705,131"/>
+<area shape="poly" title=" " alt="" coords="1489,46,1597,95,1594,100,1487,51"/>
+<area shape="rect" title=" " alt="" coords="1728,96,1898,139"/>
+<area shape="poly" title=" " alt="" coords="1520,44,1714,90,1713,95,1519,49"/>
+<area shape="rect" title=" " alt="" coords="1921,104,2041,131"/>
+<area shape="poly" title=" " alt="" coords="1520,33,1699,56,1911,93,1926,97,1924,102,1910,99,1698,62,1519,39"/>
+<area shape="rect" title=" " alt="" coords="2064,104,2183,131"/>
+<area shape="poly" title=" " alt="" coords="1520,30,1759,51,1906,69,2054,93,2069,97,2068,102,2052,99,1906,74,1759,56,1519,35"/>
+<area shape="rect" title=" " alt="" coords="2207,104,2315,131"/>
+<area shape="poly" title=" " alt="" coords="1519,27,1649,33,1817,44,2006,64,2195,93,2210,97,2208,102,2194,99,2005,69,1817,50,1648,38,1519,33"/>
+<area shape="rect" title=" " alt="" coords="2339,104,2431,131"/>
+<area shape="poly" title=" " alt="" coords="1520,25,1670,27,1872,36,2100,57,2215,73,2328,93,2340,96,2339,102,2327,99,2215,78,2099,62,1871,41,1670,32,1520,30"/>
+</map>
+</div>
+</div>
+<p><a href="MarkdownViewer_8java_source.html">Aller au code source de ce fichier.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:editeurpanovisu_2EMarkdownViewer" id="r_editeurpanovisu_2EMarkdownViewer"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1MarkdownViewer.html">editeurpanovisu.MarkdownViewer</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Classe utilitaire pour afficher des fichiers Markdown dans une WebView JavaFX.  <a href="classediteurpanovisu_1_1MarkdownViewer.html#details">Plus de détails...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
+Paquetages</h2></td></tr>
+<tr class="memitem:editeurpanovisu" id="r_editeurpanovisu"><td class="memItemLeft" align="right" valign="top">package &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceediteurpanovisu.html">editeurpanovisu</a></td></tr>
+</table>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="dir_184160a943439c2c782fe244782aeddc.html">editeurpanovisu</a></li><li class="navelem"><a href="MarkdownViewer_8java.html">MarkdownViewer.java</a></li>
+    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<map id="editeurpanovisu.EditeurPanovisu.iCreeNiveauxImageCube" name="editeurpanovisu.EditeurPanovisu.iCreeNiveauxImageCube">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,80,224,122"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="731,100,770,126"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="144,77,201,43,235,26,271,15,335,4,401,4,466,11,528,25,639,60,718,94,716,99,637,65,527,30,465,17,400,9,336,10,272,20,237,31,203,47,147,81"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ab7046ae25351b998b61260f82cabe8" title=" " alt="" coords="341,29,380,56"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="206,77,325,48,326,53,207,82"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1ReadWriteImage.html#ac16a47fd8d8c27b8be3304abb86b5f05" title=" " alt="" coords="272,80,449,122"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="224,98,256,98,256,104,224,104"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1ReadWriteImage.html#a34d056113779842aefe031f13af8d8a1" title=" " alt="" coords="272,146,449,189"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="196,120,265,139,264,144,195,126"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1ReadWriteImage.html#ac875b8819ddfbadc3482dab5e043f16b" title=" " alt="" coords="272,213,449,256"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="147,121,204,159,273,199,284,204,282,209,270,203,202,164,144,125"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1ReadWriteImage.html#ae93614e117cb7a4718f4ac3d5fd33c4e" title=" " alt="" coords="497,121,683,164"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="419,210,448,199,523,168,525,172,450,204,421,215"/>
+<area shape="poly" id="edge7_Node000007_Node000002" title=" " alt="" coords="683,123,716,117,717,122,684,128"/>
+</map>

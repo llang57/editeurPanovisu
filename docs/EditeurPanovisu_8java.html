@@ -1,0 +1,257 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>EditeurPanovisu: Référence du fichier src/editeurpanovisu/EditeurPanovisu.java</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">EditeurPanovisu<span id="projectnumber">&#160;3.1.0</span>
+   </div>
+   <div id="projectbrief">Éditeur de visites virtuelles 360° Panovisu</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Recherche',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('EditeurPanovisu_8java.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Chargement...</div>
+<div class="SRStatus" id="Searching">Recherche...</div>
+<div class="SRStatus" id="NoMatches">Aucune correspondance</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Référence du fichier EditeurPanovisu.java</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>import com.drew.imaging.ImageMetadataReader;</code><br />
+<code>import com.drew.imaging.ImageProcessingException;</code><br />
+<code>import com.drew.metadata.Directory;</code><br />
+<code>import com.drew.metadata.Metadata;</code><br />
+<code>import editeurpanovisu.GestionnaireInterfaceController.strNomfichierHS;</code><br />
+<code>import editeurpanovisu.GestionnaireInterfaceController.strNomfichierHSHTML;</code><br />
+<code>import editeurpanovisu.GestionnaireInterfaceController.strNomfichierHSImage;</code><br />
+<code>import editeurpanovisu.GestionnaireInterfaceController.strTypeHS;</code><br />
+<code>import editeurpanovisu.GestionnaireInterfaceController.strTypeHSHTML;</code><br />
+<code>import editeurpanovisu.GestionnaireInterfaceController.strTypeHSImage;</code><br />
+<code>import editeurpanovisu.util.SvgIconLoader;</code><br />
+<code>import java.awt.MouseInfo;</code><br />
+<code>import java.awt.Point;</code><br />
+<code>import java.io.BufferedReader;</code><br />
+<code>import java.io.BufferedWriter;</code><br />
+<code>import java.io.File;</code><br />
+<code>import java.io.FileInputStream;</code><br />
+<code>import java.io.FileNotFoundException;</code><br />
+<code>import java.io.FileOutputStream;</code><br />
+<code>import java.io.IOException;</code><br />
+<code>import java.io.InputStreamReader;</code><br />
+<code>import java.io.OutputStreamWriter;</code><br />
+<code>import java.io.UnsupportedEncodingException;</code><br />
+<code>import java.math.BigDecimal;</code><br />
+<code>import java.net.MalformedURLException;</code><br />
+<code>import java.net.URL;</code><br />
+<code>import java.net.URLConnection;</code><br />
+<code>import java.nio.file.Files;</code><br />
+<code>import java.nio.file.StandardCopyOption;</code><br />
+<code>import java.util.ArrayList;</code><br />
+<code>import java.util.Arrays;</code><br />
+<code>import java.util.List;</code><br />
+<code>import java.util.Locale;</code><br />
+<code>import java.util.Optional;</code><br />
+<code>import java.util.Properties;</code><br />
+<code>import java.util.ResourceBundle;</code><br />
+<code>import java.util.logging.Level;</code><br />
+<code>import java.util.logging.Logger;</code><br />
+<code>import javafx.animation.KeyFrame;</code><br />
+<code>import javafx.animation.Timeline;</code><br />
+<code>import javafx.application.Application;</code><br />
+<code>import javafx.application.Platform;</code><br />
+<code>import javafx.beans.property.DoubleProperty;</code><br />
+<code>import javafx.beans.property.SimpleDoubleProperty;</code><br />
+<code>import javafx.beans.value.ObservableValue;</code><br />
+<code>import javafx.collections.FXCollections;</code><br />
+<code>import javafx.collections.ObservableList;</code><br />
+<code>import javafx.concurrent.Task;</code><br />
+<code>import javafx.event.ActionEvent;</code><br />
+<code>import javafx.geometry.Insets;</code><br />
+<code>import javafx.geometry.Orientation;</code><br />
+<code>import javafx.geometry.Pos;</code><br />
+<code>import javafx.geometry.Rectangle2D;</code><br />
+<code>import javafx.geometry.Side;</code><br />
+<code>import javafx.scene.Cursor;</code><br />
+<code>import javafx.scene.Node;</code><br />
+<code>import javafx.scene.Scene;</code><br />
+<code>import javafx.scene.control.Alert;</code><br />
+<code>import javafx.scene.control.Alert.AlertType;</code><br />
+<code>import javafx.scene.control.Button;</code><br />
+<code>import javafx.scene.control.ButtonType;</code><br />
+<code>import javafx.scene.control.CheckBox;</code><br />
+<code>import javafx.scene.control.ChoiceDialog;</code><br />
+<code>import javafx.scene.control.ColorPicker;</code><br />
+<code>import javafx.scene.control.ComboBox;</code><br />
+<code>import javafx.scene.control.Label;</code><br />
+<code>import javafx.scene.control.ListView;</code><br />
+<code>import javafx.scene.control.Menu;</code><br />
+<code>import javafx.scene.control.MenuBar;</code><br />
+<code>import javafx.scene.control.MenuButton;</code><br />
+<code>import javafx.scene.control.MenuItem;</code><br />
+<code>import javafx.scene.control.ProgressBar;</code><br />
+<code>import javafx.scene.control.RadioButton;</code><br />
+<code>import javafx.scene.control.ScrollPane;</code><br />
+<code>import javafx.scene.control.Separator;</code><br />
+<code>import javafx.scene.control.SeparatorMenuItem;</code><br />
+<code>import javafx.scene.control.Slider;</code><br />
+<code>import javafx.scene.control.Tab;</code><br />
+<code>import javafx.scene.control.TabPane;</code><br />
+<code>import javafx.scene.control.TextArea;</code><br />
+<code>import javafx.scene.control.TextField;</code><br />
+<code>import javafx.scene.control.TextInputDialog;</code><br />
+<code>import javafx.scene.control.Toggle;</code><br />
+<code>import javafx.scene.control.ToggleButton;</code><br />
+<code>import javafx.scene.control.ToggleGroup;</code><br />
+<code>import javafx.scene.control.ToolBar;</code><br />
+<code>import javafx.scene.control.Tooltip;</code><br />
+<code>import javafx.scene.image.Image;</code><br />
+<code>import javafx.scene.image.ImageView;</code><br />
+<code>import javafx.scene.image.PixelReader;</code><br />
+<code>import javafx.scene.image.PixelWriter;</code><br />
+<code>import javafx.scene.image.WritableImage;</code><br />
+<code>import javafx.scene.input.DragEvent;</code><br />
+<code>import javafx.scene.input.Dragboard;</code><br />
+<code>import javafx.scene.input.KeyCode;</code><br />
+<code>import javafx.scene.input.KeyCodeCombination;</code><br />
+<code>import javafx.scene.input.KeyCombination;</code><br />
+<code>import javafx.scene.input.MouseButton;</code><br />
+<code>import javafx.scene.input.MouseEvent;</code><br />
+<code>import javafx.scene.input.TransferMode;</code><br />
+<code>import javafx.scene.layout.AnchorPane;</code><br />
+<code>import javafx.scene.layout.Background;</code><br />
+<code>import javafx.scene.layout.BackgroundFill;</code><br />
+<code>import javafx.scene.layout.CornerRadii;</code><br />
+<code>import javafx.scene.layout.HBox;</code><br />
+<code>import javafx.scene.layout.Pane;</code><br />
+<code>import javafx.scene.layout.VBox;</code><br />
+<code>import javafx.scene.paint.Color;</code><br />
+<code>import javafx.scene.shape.Circle;</code><br />
+<code>import javafx.scene.shape.Line;</code><br />
+<code>import javafx.scene.shape.Polygon;</code><br />
+<code>import javafx.scene.shape.Rectangle;</code><br />
+<code>import javafx.scene.shape.StrokeLineCap;</code><br />
+<code>import javafx.scene.shape.StrokeLineJoin;</code><br />
+<code>import javafx.scene.shape.StrokeType;</code><br />
+<code>import javafx.scene.text.Font;</code><br />
+<code>import javafx.scene.text.TextAlignment;</code><br />
+<code>import javafx.scene.web.WebEngine;</code><br />
+<code>import javafx.scene.web.WebView;</code><br />
+<code>import javafx.stage.DirectoryChooser;</code><br />
+<code>import javafx.stage.FileChooser;</code><br />
+<code>import javafx.stage.Modality;</code><br />
+<code>import javafx.stage.Screen;</code><br />
+<code>import javafx.stage.Stage;</code><br />
+<code>import javafx.stage.WindowEvent;</code><br />
+<code>import javafx.util.Duration;</code><br />
+<code>import editeurpanovisu.BigDecimalField;</code><br />
+<code>import org.apache.commons.imaging.ImagingException;</code><br />
+</div>
+<p><a href="EditeurPanovisu_8java_source.html">Aller au code source de ce fichier.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:editeurpanovisu_2EEditeurPanovisu" id="r_editeurpanovisu_2EEditeurPanovisu"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1EditeurPanovisu.html">editeurpanovisu.EditeurPanovisu</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Editeur de visites virtuelles panoramiques.  <a href="classediteurpanovisu_1_1EditeurPanovisu.html#details">Plus de détails...</a><br /></td></tr>
+<tr class="memitem:editeurpanovisu_2EEditeurPanovisu_2EAncreForme" id="r_editeurpanovisu_2EEditeurPanovisu_2EAncreForme"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1EditeurPanovisu_1_1AncreForme.html">editeurpanovisu.EditeurPanovisu.AncreForme</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">définit les ancrages des formes (cercle, rectangle, polygone) pour les barres personnalisées  <a href="classediteurpanovisu_1_1EditeurPanovisu_1_1AncreForme.html#details">Plus de détails...</a><br /></td></tr>
+<tr class="memitem:editeurpanovisu_2EEditeurPanovisu_2EAncreForme_2EDelta" id="r_editeurpanovisu_2EEditeurPanovisu_2EAncreForme_2EDelta"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1EditeurPanovisu_1_1AncreForme_1_1Delta.html">editeurpanovisu.EditeurPanovisu.AncreForme.Delta</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">définit un couple de coordonnées  <a href="classediteurpanovisu_1_1EditeurPanovisu_1_1AncreForme_1_1Delta.html#details">Plus de détails...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
+Paquetages</h2></td></tr>
+<tr class="memitem:editeurpanovisu" id="r_editeurpanovisu"><td class="memItemLeft" align="right" valign="top">package &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceediteurpanovisu.html">editeurpanovisu</a></td></tr>
+</table>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="dir_184160a943439c2c782fe244782aeddc.html">editeurpanovisu</a></li><li class="navelem"><a href="EditeurPanovisu_8java.html">EditeurPanovisu.java</a></li>
+    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>

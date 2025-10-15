@@ -1,0 +1,9 @@
+<map id="editeurpanovisu.NavigateurCarteGluon.allerCoordonnees" name="editeurpanovisu.NavigateurCarteGluon.allerCoordonnees">
+<area shape="rect" id="Node000001" title="Centre la carte sur des coordonnées géographiques avec zoom." alt="" coords="5,72,198,115"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1CoordonneesGeographiques.html#af33141f53510962ac8c8bf3973ce8ed9" title=" " alt="" coords="246,5,439,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="180,69,247,50,249,55,182,74"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1CoordonneesGeographiques.html#a7f94a4bb132e0a244fccb8f29ff4688a" title=" " alt="" coords="246,72,439,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="198,91,230,91,230,96,198,96"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1NavigateurCarteGluon.html#a550a7fc12fb8b19e05c58a529f134dd9" title="Initialise réellement le JMapViewer (appelé la première fois qu&#39;on affiche la carte)" alt="" coords="253,139,432,181"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="182,113,249,131,247,137,180,118"/>
+</map>

@@ -1,0 +1,11 @@
+<map id="makeSetter" name="makeSetter">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,56,94,83"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="159,5,198,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="85,53,144,29,146,34,87,58"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#ad6ed3998db5d3752930802ce2c9ddef7" title=" " alt="" coords="159,56,198,83"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="94,67,144,67,144,72,94,72"/>
+<area shape="rect" id="Node000004" href="$types_8js.html#a0b3d7f0fdd834a9de0cb0d0bf787f0b2" title=" " alt="" coords="142,107,215,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="87,81,129,98,127,103,85,86"/>
+<area shape="rect" id="Node000005" href="$leaflet_8js.html#a68bde8ea3a92a44f147823a6b968a199" title=" " alt="" coords="263,107,301,133"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="216,117,247,117,247,123,216,123"/>
+</map>

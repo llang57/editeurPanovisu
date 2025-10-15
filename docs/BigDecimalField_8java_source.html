@@ -1,0 +1,261 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>EditeurPanovisu:  Fichier source de src/editeurpanovisu/BigDecimalField.java</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">EditeurPanovisu<span id="projectnumber">&#160;3.1.0</span>
+   </div>
+   <div id="projectbrief">Éditeur de visites virtuelles 360° Panovisu</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Recherche',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('BigDecimalField_8java_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Chargement...</div>
+<div class="SRStatus" id="Searching">Recherche...</div>
+<div class="SRStatus" id="NoMatches">Aucune correspondance</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">BigDecimalField.java</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="BigDecimalField_8java.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="keyword">package </span>editeurpanovisu;</div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keyword">import</span> javafx.beans.property.ObjectProperty;</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keyword">import</span> javafx.beans.property.SimpleObjectProperty;</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">import</span> javafx.scene.control.TextField;</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">import</span> javafx.scene.control.TextFormatter;</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">import</span> java.math.BigDecimal;</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">import</span> java.text.DecimalFormat;</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">import</span> java.util.function.UnaryOperator;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">import</span> java.util.regex.Pattern;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span></div>
+<div class="foldopen" id="foldopen00020" data-start="{" data-end="};">
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1BigDecimalField.html">   20</a></span><span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_function" href="classediteurpanovisu_1_1BigDecimalField.html#a3ca5cf7989b5b9ae904c86dd9028ad15">BigDecimalField</a> <span class="keyword">extends</span> TextField {</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1BigDecimalField.html#adf446b1ee569397616088092a352080e">   22</a></span>    <span class="keyword">private</span> <span class="keyword">final</span> DecimalFormat <a class="code hl_variable" href="classediteurpanovisu_1_1BigDecimalField.html#adf446b1ee569397616088092a352080e">format</a>;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1BigDecimalField.html#aa9d0086c18fc171f986f729d77575eda">   23</a></span>    <span class="keyword">private</span> BigDecimal <a class="code hl_variable" href="classediteurpanovisu_1_1BigDecimalField.html#aa9d0086c18fc171f986f729d77575eda">minValue</a> = <span class="keyword">null</span>;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1BigDecimalField.html#ac072b2eb0b43c01c92ab9858bb56e7a7">   24</a></span>    <span class="keyword">private</span> BigDecimal <a class="code hl_variable" href="classediteurpanovisu_1_1BigDecimalField.html#ac072b2eb0b43c01c92ab9858bb56e7a7">maxValue</a> = <span class="keyword">null</span>;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1BigDecimalField.html#a69567cef5ea8fd74d8413751df2110e9">   25</a></span>    <span class="keyword">private</span> <span class="keyword">final</span> ObjectProperty&lt;BigDecimal&gt; <a class="code hl_variable" href="classediteurpanovisu_1_1BigDecimalField.html#a69567cef5ea8fd74d8413751df2110e9">number</a> = <span class="keyword">new</span> SimpleObjectProperty&lt;&gt;(BigDecimal.ZERO);</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    </div>
+<div class="foldopen" id="foldopen00030" data-start="{" data-end="}">
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1BigDecimalField.html#a3ca5cf7989b5b9ae904c86dd9028ad15">   30</a></span>    <span class="keyword">public</span> <a class="code hl_function" href="classediteurpanovisu_1_1BigDecimalField.html#a3ca5cf7989b5b9ae904c86dd9028ad15">BigDecimalField</a>() {</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        <span class="keyword">this</span>(<span class="keyword">new</span> DecimalFormat(<span class="stringliteral">&quot;0.00&quot;</span>));</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    }</div>
+</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    </div>
+<div class="foldopen" id="foldopen00038" data-start="{" data-end="}">
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1BigDecimalField.html#ad34ec74d53cf111b53bff964744ea03f">   38</a></span>    <span class="keyword">public</span> <a class="code hl_function" href="classediteurpanovisu_1_1BigDecimalField.html#ad34ec74d53cf111b53bff964744ea03f">BigDecimalField</a>(DecimalFormat <a class="code hl_variable" href="classediteurpanovisu_1_1BigDecimalField.html#adf446b1ee569397616088092a352080e">format</a>) {</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        super();</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        this.format = <a class="code hl_variable" href="classediteurpanovisu_1_1BigDecimalField.html#adf446b1ee569397616088092a352080e">format</a>;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <a class="code hl_function" href="classediteurpanovisu_1_1BigDecimalField.html#a165e53e9101194e5b3397b41fd7110c9">setupTextField</a>();</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    }</div>
+</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    </div>
+<div class="foldopen" id="foldopen00048" data-start="{" data-end="}">
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1BigDecimalField.html#ae89951222ef046cb6343690c5f3334e6">   48</a></span>    <span class="keyword">public</span> <a class="code hl_function" href="classediteurpanovisu_1_1BigDecimalField.html#ae89951222ef046cb6343690c5f3334e6">BigDecimalField</a>(BigDecimal initialValue) {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <span class="keyword">this</span>();</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <a class="code hl_function" href="classediteurpanovisu_1_1BigDecimalField.html#adc2700ac44fad89e58019ce2b13206c9">setNumber</a>(initialValue);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    }</div>
+</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    </div>
+<div class="foldopen" id="foldopen00056" data-start="{" data-end="}">
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1BigDecimalField.html#a165e53e9101194e5b3397b41fd7110c9">   56</a></span>    <span class="keyword">private</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1BigDecimalField.html#a165e53e9101194e5b3397b41fd7110c9">setupTextField</a>() {</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <span class="comment">// Désactivation temporaire du TextFormatter qui bloque l&#39;affichage</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="comment">// Le TextFormatter sera réactivé plus tard si nécessaire</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="comment">// Validation à la perte de focus</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        this.focusedProperty().addListener((obs, wasFocused, isNowFocused) -&gt; {</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>            <span class="keywordflow">if</span> (!isNowFocused) {</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                <a class="code hl_function" href="classediteurpanovisu_1_1BigDecimalField.html#a7a676cd4efbf34b1b8372550d6d6c1ad">validateAndFormat</a>();</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>            }</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        });</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        <span class="comment">// Permettre uniquement les caractères numériques lors de la saisie</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        this.textProperty().addListener((obs, oldValue, newValue) -&gt; {</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>            <span class="keywordflow">if</span> (newValue != <span class="keyword">null</span> &amp;&amp; !newValue.matches(<span class="stringliteral">&quot;-?[0-9]*\\.?[0-9]*&quot;</span>)) {</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>                setText(oldValue);</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>            }</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        });</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    }</div>
+</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    </div>
+<div class="foldopen" id="foldopen00078" data-start="{" data-end="}">
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1BigDecimalField.html#a7a676cd4efbf34b1b8372550d6d6c1ad">   78</a></span>    <span class="keyword">private</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1BigDecimalField.html#a7a676cd4efbf34b1b8372550d6d6c1ad">validateAndFormat</a>() {</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        <span class="keywordflow">try</span> {</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>            <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> text = getText().replace(<span class="charliteral">&#39;,&#39;</span>, <span class="charliteral">&#39;.&#39;</span>);</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>            <span class="keywordflow">if</span> (text != <span class="keyword">null</span> &amp;&amp; !text.isEmpty()) {</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>                BigDecimal value = <span class="keyword">new</span> BigDecimal(text);</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>                </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>                <span class="comment">// Vérifier les limites</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>                <span class="keywordflow">if</span> (<a class="code hl_variable" href="classediteurpanovisu_1_1BigDecimalField.html#aa9d0086c18fc171f986f729d77575eda">minValue</a> != <span class="keyword">null</span> &amp;&amp; value.compareTo(<a class="code hl_variable" href="classediteurpanovisu_1_1BigDecimalField.html#aa9d0086c18fc171f986f729d77575eda">minValue</a>) &lt; 0) {</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>                    value = <a class="code hl_variable" href="classediteurpanovisu_1_1BigDecimalField.html#aa9d0086c18fc171f986f729d77575eda">minValue</a>;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>                }</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>                <span class="keywordflow">if</span> (<a class="code hl_variable" href="classediteurpanovisu_1_1BigDecimalField.html#ac072b2eb0b43c01c92ab9858bb56e7a7">maxValue</a> != <span class="keyword">null</span> &amp;&amp; value.compareTo(<a class="code hl_variable" href="classediteurpanovisu_1_1BigDecimalField.html#ac072b2eb0b43c01c92ab9858bb56e7a7">maxValue</a>) &gt; 0) {</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>                    value = <a class="code hl_variable" href="classediteurpanovisu_1_1BigDecimalField.html#ac072b2eb0b43c01c92ab9858bb56e7a7">maxValue</a>;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>                }</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>                </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>                <a class="code hl_variable" href="classediteurpanovisu_1_1BigDecimalField.html#a69567cef5ea8fd74d8413751df2110e9">number</a>.set(value);</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                setText(<a class="code hl_variable" href="classediteurpanovisu_1_1BigDecimalField.html#adf446b1ee569397616088092a352080e">format</a>.format(value));</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                <a class="code hl_variable" href="classediteurpanovisu_1_1BigDecimalField.html#a69567cef5ea8fd74d8413751df2110e9">number</a>.set(BigDecimal.ZERO);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                setText(<a class="code hl_variable" href="classediteurpanovisu_1_1BigDecimalField.html#adf446b1ee569397616088092a352080e">format</a>.format(BigDecimal.ZERO));</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>            }</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        } <span class="keywordflow">catch</span> (Exception <a class="code hl_variable" href="leaflet_8js.html#ab5902775854a8b8440bcd25e0fe1c120">e</a>) {</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>            <span class="comment">// En cas d&#39;erreur, réinitialiser à 0</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>            <a class="code hl_variable" href="classediteurpanovisu_1_1BigDecimalField.html#a69567cef5ea8fd74d8413751df2110e9">number</a>.set(BigDecimal.ZERO);</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>            setText(<a class="code hl_variable" href="classediteurpanovisu_1_1BigDecimalField.html#adf446b1ee569397616088092a352080e">format</a>.format(BigDecimal.ZERO));</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        }</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    }</div>
+</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    </div>
+<div class="foldopen" id="foldopen00109" data-start="{" data-end="}">
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1BigDecimalField.html#a2ddb75ec2e1d79bb0a984366df7f3f43">  109</a></span>    <span class="keyword">public</span> ObjectProperty&lt;BigDecimal&gt; <a class="code hl_function" href="classediteurpanovisu_1_1BigDecimalField.html#a2ddb75ec2e1d79bb0a984366df7f3f43">numberProperty</a>() {</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1BigDecimalField.html#a69567cef5ea8fd74d8413751df2110e9">number</a>;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    }</div>
+</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    </div>
+<div class="foldopen" id="foldopen00117" data-start="{" data-end="}">
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1BigDecimalField.html#a2cb609e11ffc830ac925af1998f983ba">  117</a></span>    <span class="keyword">public</span> BigDecimal <a class="code hl_function" href="classediteurpanovisu_1_1BigDecimalField.html#a2cb609e11ffc830ac925af1998f983ba">getNumber</a>() {</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1BigDecimalField.html#a69567cef5ea8fd74d8413751df2110e9">number</a>.get();</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    }</div>
+</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    </div>
+<div class="foldopen" id="foldopen00125" data-start="{" data-end="}">
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1BigDecimalField.html#adc2700ac44fad89e58019ce2b13206c9">  125</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1BigDecimalField.html#adc2700ac44fad89e58019ce2b13206c9">setNumber</a>(BigDecimal value) {</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        <span class="keywordflow">if</span> (value != <span class="keyword">null</span>) {</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>            <a class="code hl_variable" href="classediteurpanovisu_1_1BigDecimalField.html#a69567cef5ea8fd74d8413751df2110e9">number</a>.set(value);</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>            <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> formatted = <a class="code hl_variable" href="classediteurpanovisu_1_1BigDecimalField.html#adf446b1ee569397616088092a352080e">format</a>.format(value);</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>            <span class="comment">// Contourner le TextFormatter en utilisant Platform.runLater</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>            javafx.application.Platform.runLater(() -&gt; {</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>                this.setText(formatted);</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>                this.positionCaret(formatted.length());</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>            });</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>            <a class="code hl_variable" href="classediteurpanovisu_1_1BigDecimalField.html#a69567cef5ea8fd74d8413751df2110e9">number</a>.set(BigDecimal.ZERO);</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>            javafx.application.Platform.runLater(() -&gt; this.setText(<span class="stringliteral">&quot;0.00&quot;</span>));</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        }</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    }</div>
+</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    </div>
+<div class="foldopen" id="foldopen00144" data-start="{" data-end="}">
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1BigDecimalField.html#a2f7ead8a25f7518bfcc3bf4fb17410a5">  144</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1BigDecimalField.html#a2f7ead8a25f7518bfcc3bf4fb17410a5">setMinValue</a>(BigDecimal <a class="code hl_variable" href="classediteurpanovisu_1_1BigDecimalField.html#aa9d0086c18fc171f986f729d77575eda">minValue</a>) {</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        this.minValue = <a class="code hl_variable" href="classediteurpanovisu_1_1BigDecimalField.html#aa9d0086c18fc171f986f729d77575eda">minValue</a>;</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    }</div>
+</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    </div>
+<div class="foldopen" id="foldopen00152" data-start="{" data-end="}">
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1BigDecimalField.html#aa6af3be37997598da20f3ef554088b9e">  152</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1BigDecimalField.html#aa6af3be37997598da20f3ef554088b9e">setMaxValue</a>(BigDecimal <a class="code hl_variable" href="classediteurpanovisu_1_1BigDecimalField.html#ac072b2eb0b43c01c92ab9858bb56e7a7">maxValue</a>) {</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>        this.maxValue = <a class="code hl_variable" href="classediteurpanovisu_1_1BigDecimalField.html#ac072b2eb0b43c01c92ab9858bb56e7a7">maxValue</a>;</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    }</div>
+</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    </div>
+<div class="foldopen" id="foldopen00160" data-start="{" data-end="}">
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1BigDecimalField.html#a3a615c448f7b693021f96fe047673824">  160</a></span>    <span class="keyword">public</span> DecimalFormat <a class="code hl_function" href="classediteurpanovisu_1_1BigDecimalField.html#a3a615c448f7b693021f96fe047673824">getFormat</a>() {</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1BigDecimalField.html#adf446b1ee569397616088092a352080e">format</a>;</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    }</div>
+</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>}</div>
+</div>
+<div class="ttc" id="aOpenLayers_8js_html_a4ca754488880c6622cdd0e257fe5f5ea"><div class="ttname"><a href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a></div><div class="ttdeci">OpenLayers String</div><div class="ttdef"><b>Definition</b> <a href="OpenLayers_8js_source.html#l00059">OpenLayers.js:59</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1BigDecimalField_html_a165e53e9101194e5b3397b41fd7110c9"><div class="ttname"><a href="classediteurpanovisu_1_1BigDecimalField.html#a165e53e9101194e5b3397b41fd7110c9">editeurpanovisu.BigDecimalField.setupTextField</a></div><div class="ttdeci">void setupTextField()</div><div class="ttdoc">Configure le TextField avec validation.</div><div class="ttdef"><b>Definition</b> <a href="#l00056">BigDecimalField.java:56</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1BigDecimalField_html_a2cb609e11ffc830ac925af1998f983ba"><div class="ttname"><a href="classediteurpanovisu_1_1BigDecimalField.html#a2cb609e11ffc830ac925af1998f983ba">editeurpanovisu.BigDecimalField.getNumber</a></div><div class="ttdeci">BigDecimal getNumber()</div><div class="ttdoc">Obtient la valeur BigDecimal.</div><div class="ttdef"><b>Definition</b> <a href="#l00117">BigDecimalField.java:117</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1BigDecimalField_html_a2ddb75ec2e1d79bb0a984366df7f3f43"><div class="ttname"><a href="classediteurpanovisu_1_1BigDecimalField.html#a2ddb75ec2e1d79bb0a984366df7f3f43">editeurpanovisu.BigDecimalField.numberProperty</a></div><div class="ttdeci">ObjectProperty&lt; BigDecimal &gt; numberProperty()</div><div class="ttdoc">Obtient la propriété du nombre.</div><div class="ttdef"><b>Definition</b> <a href="#l00109">BigDecimalField.java:109</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1BigDecimalField_html_a2f7ead8a25f7518bfcc3bf4fb17410a5"><div class="ttname"><a href="classediteurpanovisu_1_1BigDecimalField.html#a2f7ead8a25f7518bfcc3bf4fb17410a5">editeurpanovisu.BigDecimalField.setMinValue</a></div><div class="ttdeci">void setMinValue(BigDecimal minValue)</div><div class="ttdoc">Définit la valeur minimale.</div><div class="ttdef"><b>Definition</b> <a href="#l00144">BigDecimalField.java:144</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1BigDecimalField_html_a3a615c448f7b693021f96fe047673824"><div class="ttname"><a href="classediteurpanovisu_1_1BigDecimalField.html#a3a615c448f7b693021f96fe047673824">editeurpanovisu.BigDecimalField.getFormat</a></div><div class="ttdeci">DecimalFormat getFormat()</div><div class="ttdoc">Obtient le format utilisé</div><div class="ttdef"><b>Definition</b> <a href="#l00160">BigDecimalField.java:160</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1BigDecimalField_html_a3ca5cf7989b5b9ae904c86dd9028ad15"><div class="ttname"><a href="classediteurpanovisu_1_1BigDecimalField.html#a3ca5cf7989b5b9ae904c86dd9028ad15">editeurpanovisu.BigDecimalField.BigDecimalField</a></div><div class="ttdeci">BigDecimalField()</div><div class="ttdoc">Constructeur par défaut.</div><div class="ttdef"><b>Definition</b> <a href="#l00030">BigDecimalField.java:30</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1BigDecimalField_html_a69567cef5ea8fd74d8413751df2110e9"><div class="ttname"><a href="classediteurpanovisu_1_1BigDecimalField.html#a69567cef5ea8fd74d8413751df2110e9">editeurpanovisu.BigDecimalField.number</a></div><div class="ttdeci">final ObjectProperty&lt; BigDecimal &gt; number</div><div class="ttdef"><b>Definition</b> <a href="#l00025">BigDecimalField.java:25</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1BigDecimalField_html_a7a676cd4efbf34b1b8372550d6d6c1ad"><div class="ttname"><a href="classediteurpanovisu_1_1BigDecimalField.html#a7a676cd4efbf34b1b8372550d6d6c1ad">editeurpanovisu.BigDecimalField.validateAndFormat</a></div><div class="ttdeci">void validateAndFormat()</div><div class="ttdoc">Valide et formate la valeur.</div><div class="ttdef"><b>Definition</b> <a href="#l00078">BigDecimalField.java:78</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1BigDecimalField_html_aa6af3be37997598da20f3ef554088b9e"><div class="ttname"><a href="classediteurpanovisu_1_1BigDecimalField.html#aa6af3be37997598da20f3ef554088b9e">editeurpanovisu.BigDecimalField.setMaxValue</a></div><div class="ttdeci">void setMaxValue(BigDecimal maxValue)</div><div class="ttdoc">Définit la valeur maximale.</div><div class="ttdef"><b>Definition</b> <a href="#l00152">BigDecimalField.java:152</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1BigDecimalField_html_aa9d0086c18fc171f986f729d77575eda"><div class="ttname"><a href="classediteurpanovisu_1_1BigDecimalField.html#aa9d0086c18fc171f986f729d77575eda">editeurpanovisu.BigDecimalField.minValue</a></div><div class="ttdeci">BigDecimal minValue</div><div class="ttdef"><b>Definition</b> <a href="#l00023">BigDecimalField.java:23</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1BigDecimalField_html_ac072b2eb0b43c01c92ab9858bb56e7a7"><div class="ttname"><a href="classediteurpanovisu_1_1BigDecimalField.html#ac072b2eb0b43c01c92ab9858bb56e7a7">editeurpanovisu.BigDecimalField.maxValue</a></div><div class="ttdeci">BigDecimal maxValue</div><div class="ttdef"><b>Definition</b> <a href="#l00024">BigDecimalField.java:24</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1BigDecimalField_html_ad34ec74d53cf111b53bff964744ea03f"><div class="ttname"><a href="classediteurpanovisu_1_1BigDecimalField.html#ad34ec74d53cf111b53bff964744ea03f">editeurpanovisu.BigDecimalField.BigDecimalField</a></div><div class="ttdeci">BigDecimalField(DecimalFormat format)</div><div class="ttdoc">Constructeur avec format personnalisé</div><div class="ttdef"><b>Definition</b> <a href="#l00038">BigDecimalField.java:38</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1BigDecimalField_html_adc2700ac44fad89e58019ce2b13206c9"><div class="ttname"><a href="classediteurpanovisu_1_1BigDecimalField.html#adc2700ac44fad89e58019ce2b13206c9">editeurpanovisu.BigDecimalField.setNumber</a></div><div class="ttdeci">void setNumber(BigDecimal value)</div><div class="ttdoc">Définit la valeur BigDecimal.</div><div class="ttdef"><b>Definition</b> <a href="#l00125">BigDecimalField.java:125</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1BigDecimalField_html_adf446b1ee569397616088092a352080e"><div class="ttname"><a href="classediteurpanovisu_1_1BigDecimalField.html#adf446b1ee569397616088092a352080e">editeurpanovisu.BigDecimalField.format</a></div><div class="ttdeci">final DecimalFormat format</div><div class="ttdef"><b>Definition</b> <a href="#l00022">BigDecimalField.java:22</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1BigDecimalField_html_ae89951222ef046cb6343690c5f3334e6"><div class="ttname"><a href="classediteurpanovisu_1_1BigDecimalField.html#ae89951222ef046cb6343690c5f3334e6">editeurpanovisu.BigDecimalField.BigDecimalField</a></div><div class="ttdeci">BigDecimalField(BigDecimal initialValue)</div><div class="ttdoc">Constructeur avec valeur initiale.</div><div class="ttdef"><b>Definition</b> <a href="#l00048">BigDecimalField.java:48</a></div></div>
+<div class="ttc" id="aleaflet_8js_html_ab5902775854a8b8440bcd25e0fe1c120"><div class="ttname"><a href="leaflet_8js.html#ab5902775854a8b8440bcd25e0fe1c120">e</a></div><div class="ttdeci">var e</div><div class="ttdef"><b>Definition</b> <a href="leaflet_8js_source.html#l00005">leaflet.js:5</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="dir_184160a943439c2c782fe244782aeddc.html">editeurpanovisu</a></li><li class="navelem"><a href="BigDecimalField_8java.html">BigDecimalField.java</a></li>
+    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>

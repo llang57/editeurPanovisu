@@ -1,0 +1,19 @@
+<map id="editeurpanovisu.ThemeManager.applyTheme" name="editeurpanovisu.ThemeManager.applyTheme">
+<area shape="rect" id="Node000001" title="Applique un thème à une scène JavaFX." alt="" coords="5,189,247,232"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1ThemeManager.html#afd4bdeb257d4dc5f4974ac2b7ea52ba7" title="Ajoute des styles personnalisés complémentaires pour les composants spécifiques de l&#39;application." alt="" coords="300,5,531,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="145,187,208,127,249,94,293,64,319,52,322,57,296,69,252,98,211,131,149,191"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1ThemeManager.html#a14f6bcaa7772dbe0a9895a52a392625f" title="Applique un thème AtlantaFX." alt="" coords="584,189,825,232"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="152,187,214,144,253,123,294,108,361,92,415,87,470,92,537,108,573,121,608,139,667,177,664,182,605,143,571,126,535,113,469,97,415,92,362,97,295,113,255,128,217,148,155,191"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1ThemeManager.html#a44ee3b09a7f6b1960fdcbef28902dc35" title="Applique un thème personnalisé (CSS legacy)" alt="" coords="295,123,536,165"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="221,186,304,167,306,172,222,191"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1ThemeManager.html#ac773b6d34662ca4f15efee8230dd4fed" title="Applique un thème FlatLaf." alt="" coords="295,189,536,232"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="247,208,279,208,279,213,247,213"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1ThemeManager.html#a9d8b4213c67946a529741ac1e9362c55" title="Applique un thème MaterialFX." alt="" coords="295,256,536,299"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="222,230,306,249,304,255,221,235"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1ThemeManager.html#af5771c5a56ec049ce335c9a9bb76b47d" title="Nettoie toutes les classes CSS du root." alt="" coords="295,323,536,365"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="160,230,221,269,296,308,312,315,310,320,294,313,218,274,157,235"/>
+<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1ThemeManager.html#a539715f04c7d0e5411fb62afef4e6ba2" title="Sauvegarde le thème dans les préférences." alt="" coords="296,389,534,432"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="145,231,206,302,249,341,296,375,306,380,303,385,293,380,245,346,202,306,141,234"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="537,208,568,208,568,213,537,213"/>
+<area shape="poly" id="edge7_Node000006_Node000003" title=" " alt="" coords="510,253,594,233,595,239,512,258"/>
+</map>

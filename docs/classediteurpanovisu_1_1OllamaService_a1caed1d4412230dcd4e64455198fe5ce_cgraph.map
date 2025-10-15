@@ -1,0 +1,5 @@
+<map id="editeurpanovisu.OllamaService.appellerOllamaLocal" name="editeurpanovisu.OllamaService.appellerOllamaLocal">
+<area shape="rect" id="Node000001" title="Appelle l&#39;API Ollama locale pour générer le texte." alt="" coords="5,5,256,48"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1OllamaService.html#a368a60df70b43652f89aaf8ffa1ec3fc" title="Extrait la réponse du JSON retourné par Ollama." alt="" coords="304,5,552,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="256,24,288,24,288,29,256,29"/>
+</map>

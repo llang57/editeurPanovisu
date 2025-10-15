@@ -1,0 +1,10 @@
+<map id="editeurpanovisu.MarkdownViewer.genererFontFaceCSS" name="editeurpanovisu.MarkdownViewer.genererFontFaceCSS">
+<area shape="rect" id="Node000001" title="Génère le CSS @font&#45;face pour charger Wingdings dans le WebView." alt="" coords="5,5,197,48"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1MarkdownViewer.html#a7dd9cb34e8163f5e8849b594d2e0d7ec" title="Retourne l&#39;URL de la police Wingdings pour @font&#45;face CSS." alt="" coords="245,5,432,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="197,24,229,24,229,29,197,29"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1MarkdownViewer.html#a97cf5f887bf60ee77ea235722283e071" title="Constructeur avec support des extensions GFM (GitHub Flavored Markdown)" alt="" coords="480,5,656,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="432,24,465,24,465,29,432,29"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1MarkdownViewer.html#a5823f5194e7e655cfdff1325fe7b59a9" title="Charge les polices personnalisées pour le WebView Wingdings doit être chargée explicitement car WebVi..." alt="" coords="704,5,881,48"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="656,33,689,33,689,38,656,38"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="704,21,672,20,672,15,704,15"/>
+</map>

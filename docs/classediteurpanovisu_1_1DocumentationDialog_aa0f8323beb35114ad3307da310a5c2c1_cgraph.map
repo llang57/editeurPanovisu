@@ -1,0 +1,16 @@
+<map id="editeurpanovisu.DocumentationDialog.DocumentationDialog" name="editeurpanovisu.DocumentationDialog.DocumentationDialog">
+<area shape="rect" id="Node000001" title="Constructeur." alt="" coords="5,97,210,140"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1DocumentationDialog.html#a63eba557cc6f0e6e9a203792a785b215" title="Charge le document sélectionné dans le ComboBox." alt="" coords="258,64,491,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="210,103,242,99,243,104,211,109"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1DocumentationDialog.html#ac1870b3fbef3d6aa08f8ddbd316e157b" title="Ouvre un dialogue pour sélectionner un fichier Markdown." alt="" coords="272,131,476,173"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="211,129,257,135,257,140,210,134"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1DocumentationDialog.html#a27fb5370868a2c048a5135e642d3b997" title="Charge un document Markdown." alt="" coords="539,5,743,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="474,61,525,49,526,55,475,66"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1DocumentationDialog_1_1DocumentItem.html#a0ed1c037fa26bcdca198e0d8cb88b8d7" title=" " alt="" coords="539,72,743,115"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="492,86,523,87,523,92,491,92"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1DocumentationDialog.html#af05cb292b0268f3867b7e5d84f016a27" title="Affiche un message d&#39;erreur dans la WebView." alt="" coords="798,101,1002,144"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="711,46,744,57,834,93,832,98,742,63,710,51"/>
+<area shape="rect" id="Node000005" href="$enumediteurpanovisu_1_1DocumentationDialog_1_1DocumentType.html#a073cf6874d89ef94b06a4d69f303c7f0" title=" " alt="" coords="791,5,1009,48"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="744,24,776,24,776,29,744,29"/>
+<area shape="poly" id="edge7_Node000007_Node000004" title=" " alt="" coords="477,144,782,127,783,132,477,149"/>
+</map>

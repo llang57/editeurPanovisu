@@ -1,0 +1,19 @@
+<map id="src/editeurpanovisu/NavigateurOpenLayersSeul.java" name="src/editeurpanovisu/NavigateurOpenLayersSeul.java">
+<area shape="rect" id="Node000001" title=" " alt="" coords="646,5,858,48"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,96,176,139"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="646,41,440,64,191,98,191,93,439,58,645,36"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="200,104,341,131"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="646,47,506,70,354,99,335,103,334,97,353,93,506,65,645,42"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="365,104,538,131"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="682,51,510,102,509,97,681,46"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="562,96,739,139"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="730,50,687,88,684,84,727,46"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="763,96,943,139"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="777,46,820,84,816,88,774,50"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="967,104,1176,131"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="828,46,1012,97,1010,102,826,51"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="1200,104,1362,131"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="859,40,1015,64,1190,93,1211,98,1210,103,1189,99,1015,69,858,45"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="1386,104,1579,131"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="859,35,1096,58,1375,93,1404,98,1403,103,1374,99,1095,64,858,40"/>
+</map>

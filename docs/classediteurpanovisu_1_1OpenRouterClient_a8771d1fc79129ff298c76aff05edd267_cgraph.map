@@ -1,0 +1,6 @@
+<map id="editeurpanovisu.OpenRouterClient.generatePanoramaDescription" name="editeurpanovisu.OpenRouterClient.generatePanoramaDescription">
+<area shape="rect" id="Node000001" title="Génère des suggestions de description pour un panorama." alt="" coords="5,29,240,72"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1OpenRouterClient.html#a6d6d3b5ec9d11ab65aa452a40c246df5" title="Envoie un message au modèle et obtient une réponse." alt="" coords="288,29,474,72"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="240,48,272,48,272,53,240,53"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="332,29,330,19,338,10,355,5,381,3,408,5,425,11,423,16,407,10,381,8,356,10,341,15,335,21,337,28"/>
+</map>

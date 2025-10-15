@@ -1,0 +1,10 @@
+<map id="editeurpanovisu.NavigateurCarte.NavigateurCarte" name="editeurpanovisu.NavigateurCarte.NavigateurCarte">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,185,48"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1ApiKeysConfig.html#a9e2b14331cf4892ef3078733c4c543ed" title="Récupère la clé API LocationIQ." alt="" coords="509,5,734,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="185,21,233,20,461,20,494,21,493,26,461,25,233,25,185,26"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1ApiKeysConfig.html#a904967c4ca879709082fd0b58c115562" title="Vérifie si une clé API LocationIQ est configurée." alt="" coords="233,35,461,77"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="186,34,217,38,217,44,185,40"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1ApiKeysConfig.html#a7babcdd2b84a59ec6088d85c66d00551" title="Charge le fichier de configuration des clés API." alt="" coords="782,5,1014,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="735,24,767,24,767,29,735,29"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="461,41,493,38,494,43,462,46"/>
+</map>

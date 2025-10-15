@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.HuggingFaceClient.summarize" name="editeurpanovisu.HuggingFaceClient.summarize">
+<area shape="rect" id="Node000001" title="Résume un texte." alt="" coords="5,39,199,81"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1HuggingFaceClient.html#ae1fed5c04dd4e895c2b5d7a6eca84346" title="Échappe les caractères spéciaux pour JSON." alt="" coords="247,5,440,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="199,44,231,40,232,45,199,49"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1HuggingFaceClient.html#a3ced220359e7bb0dd0cee4abf6143037" title="Extrait le texte résumé de la réponse JSON Format: [{&quot;summary_text&quot;: &quot;...&quot;}]." alt="" coords="247,72,440,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="199,71,232,75,231,80,199,76"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.PanoramicCube.resizeToEquirectangular" name="editeurpanovisu.PanoramicCube.resizeToEquirectangular">
+<area shape="rect" id="Node000001" title="Redimensionne une image au format équirectangulaire avec ratio 2:1." alt="" coords="5,23,201,65"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a008d931e56b6fc013061112f26afbffb" title=" " alt="" coords="249,5,287,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="201,26,233,21,234,26,201,32"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a9f9b62a373d2bb4624b7ac2df8151435" title=" " alt="" coords="249,56,287,83"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="201,56,234,62,233,67,201,62"/>
+</map>

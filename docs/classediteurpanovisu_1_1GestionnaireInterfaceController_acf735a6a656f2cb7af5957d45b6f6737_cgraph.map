@@ -1,0 +1,15 @@
+<map id="editeurpanovisu.GestionnaireInterfaceController.changeCouleurHSPhoto" name="editeurpanovisu.GestionnaireInterfaceController.changeCouleurHSPhoto">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,184,225,243"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a983d74a7f753792b5fdc241d07e7153e" title=" " alt="" coords="284,5,504,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="137,182,193,119,231,86,271,58,282,52,284,57,274,62,234,90,197,123,141,185"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a79db307bf3dc80979bb8d62ef7843ea4" title=" " alt="" coords="273,72,515,131"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="178,181,272,140,288,134,290,139,274,145,180,186"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a51203c9ecf97b1e3f057e0d3471a57b7" title=" " alt="" coords="280,155,508,197"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="225,196,264,191,265,196,225,201"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a26a8714c1be2bd8f02fcb958b4e9fbf7" title=" " alt="" coords="280,221,508,280"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="225,225,265,231,264,236,225,231"/>
+<area shape="rect" id="Node000006" href="$leaflet_8js.html#a008d931e56b6fc013061112f26afbffb" title=" " alt="" coords="375,304,413,331"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="169,241,219,267,274,289,318,302,360,310,359,315,317,307,272,295,216,271,166,246"/>
+<area shape="rect" id="Node000007" href="$leaflet_8js.html#a9f9b62a373d2bb4624b7ac2df8151435" title=" " alt="" coords="375,355,413,381"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="145,241,201,293,236,319,274,340,317,355,359,363,359,368,316,360,272,345,233,323,198,297,141,245"/>
+</map>

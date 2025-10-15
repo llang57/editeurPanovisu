@@ -1,0 +1,34 @@
+<map id="editeurpanovisu.EquiCubeDialogController.traiteFichier" name="editeurpanovisu.EquiCubeDialogController.traiteFichier">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,302,192,345"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1TransformationsPanoramique.html#a1996d35a9e7dcf6f2802baad590febb5" title=" " alt="" coords="251,185,461,227"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="134,299,183,271,239,243,271,230,273,235,241,248,185,276,137,304"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="755,226,794,253"/>
+<area shape="poly" id="edge10_Node000001_Node000003" title=" " alt="" coords="183,299,239,287,385,267,528,253,740,238,740,243,529,258,385,272,240,293,184,304"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#afa3c32d9f7f168b0e59ddc33ec31bb84" title=" " alt="" coords="595,150,633,177"/>
+<area shape="poly" id="edge11_Node000001_Node000004" title=" " alt="" coords="110,300,130,269,159,233,195,197,238,170,284,154,332,143,380,138,428,137,515,143,580,153,579,159,514,148,428,142,381,143,333,149,285,159,241,175,199,201,163,236,134,272,114,303"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1TransformationsPanoramique.html#a0cc52e5ea8c62bf993d60216992d1993" title=" " alt="" coords="251,67,461,110"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="107,301,127,263,156,217,193,168,238,126,257,115,260,119,241,131,197,172,160,220,131,266,112,303"/>
+<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1ReadWriteImage.html#ac16a47fd8d8c27b8be3304abb86b5f05" title=" " alt="" coords="268,435,445,478"/>
+<area shape="poly" id="edge12_Node000001_Node000008" title=" " alt="" coords="126,343,177,382,241,421,254,427,252,432,238,426,174,387,123,347"/>
+<area shape="rect" id="Node000009" href="$classediteurpanovisu_1_1EditeurPanovisu.html#a54bb4a3d5ddcc81d0a59f84bda4830cf" title=" " alt="" coords="240,502,473,545"/>
+<area shape="poly" id="edge13_Node000001_Node000009" title=" " alt="" coords="114,344,164,415,200,454,241,488,249,492,246,497,238,492,196,458,160,418,110,347"/>
+<area shape="rect" id="Node000010" href="$classediteurpanovisu_1_1ReadWriteImage.html#a7b400a8c48ae7235834aacc7e1729893" title=" " alt="" coords="268,369,445,411"/>
+<area shape="poly" id="edge14_Node000001_Node000010" title=" " alt="" coords="184,343,257,362,256,367,183,348"/>
+<area shape="rect" id="Node000012" href="$classediteurpanovisu_1_1ReadWriteImage.html#ac875b8819ddfbadc3482dab5e043f16b" title=" " alt="" coords="268,302,445,345"/>
+<area shape="poly" id="edge17_Node000001_Node000012" title=" " alt="" coords="192,321,252,321,252,326,192,326"/>
+<area shape="rect" id="Node000013" href="$classediteurpanovisu_1_1ReadWriteImage.html#a51b638334cf7682f0af306be38141133" title=" " alt="" coords="268,569,445,611"/>
+<area shape="poly" id="edge19_Node000001_Node000013" title=" " alt="" coords="109,344,126,388,154,445,192,504,215,531,241,554,255,563,252,568,238,559,211,535,188,508,149,448,121,391,104,346"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="462,212,740,234,740,239,462,217"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="461,186,579,166,580,171,462,191"/>
+<area shape="rect" id="Node000005" href="$leaflet_8js.html#a873cae0273c5a7d9673544bbe0a6fe8b" title=" " alt="" coords="595,99,633,126"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="405,182,520,135,579,118,580,123,522,140,407,187"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="395,64,460,34,499,20,542,10,585,4,629,5,671,14,709,34,728,52,743,73,763,120,773,169,776,210,771,210,768,170,758,122,738,75,724,55,706,39,669,19,628,10,586,9,543,15,501,26,462,39,397,69"/>
+<area shape="poly" id="edge7_Node000006_Node000004" title=" " alt="" coords="430,108,522,135,581,152,579,157,520,140,428,113"/>
+<area shape="poly" id="edge8_Node000006_Node000005" title=" " alt="" coords="462,96,580,107,579,112,462,101"/>
+<area shape="rect" id="Node000007" href="$leaflet_8js.html#a225602860fb21629c65836853697cc39" title=" " alt="" coords="595,49,633,75"/>
+<area shape="poly" id="edge9_Node000006_Node000007" title=" " alt="" coords="462,75,579,63,580,68,462,80"/>
+<area shape="rect" id="Node000011" href="$classediteurpanovisu_1_1ReadWriteImage.html#ae93614e117cb7a4718f4ac3d5fd33c4e" title=" " alt="" coords="521,302,707,345"/>
+<area shape="poly" id="edge15_Node000010_Node000011" title=" " alt="" coords="441,365,513,346,515,352,442,371"/>
+<area shape="poly" id="edge16_Node000011_Node000003" title=" " alt="" coords="669,299,706,281,741,259,744,264,709,286,671,304"/>
+<area shape="poly" id="edge18_Node000012_Node000011" title=" " alt="" coords="445,321,505,321,505,326,445,326"/>
+</map>

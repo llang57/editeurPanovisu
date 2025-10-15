@@ -1,0 +1,10 @@
+<map id="editeurpanovisu.VisualiseurImagesPanoramiques.setNomImagePanoramique" name="editeurpanovisu.VisualiseurImagesPanoramiques.setNomImagePanoramique">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,112,315,155"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html#aa6e3390d3a749d9e996d8018c0398a18" title=" " alt="" coords="392,5,628,64"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="238,109,362,73,387,66,389,71,363,79,239,114"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html#a522b4603bd26534742ebf6d00aed9752" title=" " alt="" coords="363,112,658,155"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="315,131,347,131,347,136,315,136"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html#a7bcf9b8c5922a4b663161f09ead21eb3" title=" " alt="" coords="392,179,628,237"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="264,153,378,177,377,182,263,158"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="445,112,443,102,454,93,476,87,510,85,548,88,570,94,568,99,547,93,510,91,477,93,456,98,448,103,450,111"/>
+</map>

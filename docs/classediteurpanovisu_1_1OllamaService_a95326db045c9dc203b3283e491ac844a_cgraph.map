@@ -1,0 +1,9 @@
+<map id="editeurpanovisu.OllamaService.appellerOllama" name="editeurpanovisu.OllamaService.appellerOllama">
+<area shape="rect" id="Node000001" title="Appelle l&#39;API appropriée (Ollama ou Hugging Face) pour générer le texte." alt="" coords="5,39,256,81"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1OllamaService.html#a1caed1d4412230dcd4e64455198fe5ce" title="Appelle l&#39;API Ollama locale pour générer le texte." alt="" coords="304,5,554,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="256,43,288,40,288,45,256,49"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1OllamaService.html#ad46cd20a1434f44192b570bbbf272f2c" title="Appelle OpenRouter API (accès unifié à GPT&#45;4, Claude, Gemini, etc.) Documentation: https://openrouter..." alt="" coords="304,72,554,115"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="256,71,288,75,288,80,256,77"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1OllamaService.html#a368a60df70b43652f89aaf8ffa1ec3fc" title="Extrait la réponse du JSON retourné par Ollama." alt="" coords="602,5,850,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="554,24,586,24,586,29,554,29"/>
+</map>

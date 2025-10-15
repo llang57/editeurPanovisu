@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>EditeurPanovisu:  Fichier source de src/editeurpanovisu/CartePanoVisu.java</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">EditeurPanovisu<span id="projectnumber">&#160;3.1.0</span>
+   </div>
+   <div id="projectbrief">Éditeur de visites virtuelles 360° Panovisu</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Recherche',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('CartePanoVisu_8java_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Chargement...</div>
+<div class="SRStatus" id="Searching">Recherche...</div>
+<div class="SRStatus" id="NoMatches">Aucune correspondance</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">CartePanoVisu.java</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="CartePanoVisu_8java.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * To change this license header, choose License Headers in Project Properties.</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> * To change this template file, choose Tools | Templates</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> * and open the template in the editor.</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">package </span>editeurpanovisu;</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span></div>
+<div class="foldopen" id="foldopen00013" data-start="{" data-end="};">
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1CartePanoVisu.html">   13</a></span><span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_function" href="classediteurpanovisu_1_1CartePanoVisu.html#afcdaa95092b408f8a3535866a992dc62">CartePanoVisu</a> {</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1CartePanoVisu.html#aabf21833a6f4dc4146c5492b07e95dcc">   15</a></span>    <span class="keyword">private</span> <a class="code hl_class" href="classediteurpanovisu_1_1CoordonneesGeographiques.html">CoordonneesGeographiques</a> <a class="code hl_variable" href="classediteurpanovisu_1_1CartePanoVisu.html#aabf21833a6f4dc4146c5492b07e95dcc">centreCarte</a>;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1CartePanoVisu.html#a0ecbef750a75766cc383bbba1f5d5bc0">   16</a></span>    <span class="keyword">private</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="classediteurpanovisu_1_1CartePanoVisu.html#a0ecbef750a75766cc383bbba1f5d5bc0">facteurZoom</a>;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1CartePanoVisu.html#afb0cbb01016fb34dbe15511b425b359f">   17</a></span>    <span class="keyword">private</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="classediteurpanovisu_1_1CartePanoVisu.html#afb0cbb01016fb34dbe15511b425b359f">iNombreMarqueur</a>;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1CartePanoVisu.html#aaac2939701f53d8b395c19eb642ac44e">   18</a></span>    <span class="keyword">private</span> <a class="code hl_class" href="classediteurpanovisu_1_1MarqueurGeolocalisation.html">MarqueurGeolocalisation</a>[] <a class="code hl_variable" href="classediteurpanovisu_1_1CartePanoVisu.html#aaac2939701f53d8b395c19eb642ac44e">marqueurs</a> = <span class="keyword">new</span> <a class="code hl_class" href="classediteurpanovisu_1_1MarqueurGeolocalisation.html">MarqueurGeolocalisation</a>[100];</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1CartePanoVisu.html#a6165e2f0c98f1e6ac306c5a3854a86ec">   19</a></span>    <span class="keyword">private</span> <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_variable" href="classediteurpanovisu_1_1CartePanoVisu.html#a6165e2f0c98f1e6ac306c5a3854a86ec">strTypeCarte</a> = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span></div>
+<div class="foldopen" id="foldopen00024" data-start="{" data-end="}">
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1CartePanoVisu.html#afcdaa95092b408f8a3535866a992dc62">   24</a></span>    <span class="keyword">public</span> <a class="code hl_function" href="classediteurpanovisu_1_1CartePanoVisu.html#afcdaa95092b408f8a3535866a992dc62">CartePanoVisu</a>() {</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        this.iNombreMarqueur = 0;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        this.facteurZoom = 13;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        this.centreCarte = <span class="keyword">new</span> <a class="code hl_class" href="classediteurpanovisu_1_1CoordonneesGeographiques.html">CoordonneesGeographiques</a>(0.<a class="code hl_variable" href="leaflet_8js.html#aeb337d295abaddb5ec3cb34cc2e2bbc9">d</a>, 0.<a class="code hl_variable" href="leaflet_8js.html#aeb337d295abaddb5ec3cb34cc2e2bbc9">d</a>);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        this.strTypeCarte = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    }</div>
+</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span></div>
+<div class="foldopen" id="foldopen00039" data-start="{" data-end="}">
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1CartePanoVisu.html#a6fd9eb2c8ac17e46ed115e3946256438">   39</a></span>    <span class="keyword">public</span> <a class="code hl_function" href="classediteurpanovisu_1_1CartePanoVisu.html#a6fd9eb2c8ac17e46ed115e3946256438">CartePanoVisu</a>(<span class="keywordtype">int</span> <a class="code hl_variable" href="classediteurpanovisu_1_1CartePanoVisu.html#afb0cbb01016fb34dbe15511b425b359f">iNombreMarqueur</a>, <a class="code hl_class" href="classediteurpanovisu_1_1CoordonneesGeographiques.html">CoordonneesGeographiques</a> coordonneesCentre, <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_variable" href="classediteurpanovisu_1_1CartePanoVisu.html#a6165e2f0c98f1e6ac306c5a3854a86ec">strTypeCarte</a>, <a class="code hl_class" href="classediteurpanovisu_1_1MarqueurGeolocalisation.html">MarqueurGeolocalisation</a>[] <a class="code hl_variable" href="classediteurpanovisu_1_1CartePanoVisu.html#aaac2939701f53d8b395c19eb642ac44e">marqueurs</a>, <span class="keywordtype">int</span> <a class="code hl_variable" href="classediteurpanovisu_1_1CartePanoVisu.html#a0ecbef750a75766cc383bbba1f5d5bc0">facteurZoom</a>) {</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        this.strTypeCarte = <a class="code hl_variable" href="classediteurpanovisu_1_1CartePanoVisu.html#a6165e2f0c98f1e6ac306c5a3854a86ec">strTypeCarte</a>;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        this.iNombreMarqueur = <a class="code hl_variable" href="classediteurpanovisu_1_1CartePanoVisu.html#afb0cbb01016fb34dbe15511b425b359f">iNombreMarqueur</a>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        this.facteurZoom = <a class="code hl_variable" href="classediteurpanovisu_1_1CartePanoVisu.html#a0ecbef750a75766cc383bbba1f5d5bc0">facteurZoom</a>;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        this.centreCarte = coordonneesCentre;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        this.marqueurs = <a class="code hl_variable" href="classediteurpanovisu_1_1CartePanoVisu.html#aaac2939701f53d8b395c19eb642ac44e">marqueurs</a>;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    }</div>
+</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span></div>
+<div class="foldopen" id="foldopen00053" data-start="{" data-end="}">
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1CartePanoVisu.html#a3071b62c1b2981a4e81de0f5fa3b9d16">   53</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1CartePanoVisu.html#a3071b62c1b2981a4e81de0f5fa3b9d16">ajouteMarqueur</a>(<a class="code hl_class" href="classediteurpanovisu_1_1CoordonneesGeographiques.html">CoordonneesGeographiques</a> coordonnees, <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> strXML, <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> strHTML) {</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <a class="code hl_function" href="classediteurpanovisu_1_1CartePanoVisu.html#ab7ce50311349fdd981130c509f6a4836">getMarqueurs</a>()[<a class="code hl_function" href="classediteurpanovisu_1_1CartePanoVisu.html#ac6fb89f896ceeb2e13fd710808f4e78b">getiNombreMarqueur</a>()] = <span class="keyword">new</span> <a class="code hl_class" href="classediteurpanovisu_1_1MarqueurGeolocalisation.html">MarqueurGeolocalisation</a>(coordonnees, strHTML, strXML);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <a class="code hl_function" href="classediteurpanovisu_1_1CartePanoVisu.html#a80582095f7604330d92b78a6328e2a9d">setiNombreMarqueur</a>(<a class="code hl_function" href="classediteurpanovisu_1_1CartePanoVisu.html#ac6fb89f896ceeb2e13fd710808f4e78b">getiNombreMarqueur</a>() + 1);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    }</div>
+</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span></div>
+<div class="foldopen" id="foldopen00061" data-start="{" data-end="}">
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1CartePanoVisu.html#adfdf5893058a9bb0acee1f8d92c76974">   61</a></span>    <span class="keyword">public</span> <a class="code hl_class" href="classediteurpanovisu_1_1CoordonneesGeographiques.html">CoordonneesGeographiques</a> <a class="code hl_function" href="classediteurpanovisu_1_1CartePanoVisu.html#adfdf5893058a9bb0acee1f8d92c76974">getCentreCarte</a>() {</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1CartePanoVisu.html#aabf21833a6f4dc4146c5492b07e95dcc">centreCarte</a>;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    }</div>
+</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span></div>
+<div class="foldopen" id="foldopen00068" data-start="{" data-end="}">
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1CartePanoVisu.html#a5e9f0c869ce2415d3293a384f2cc6c05">   68</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1CartePanoVisu.html#a5e9f0c869ce2415d3293a384f2cc6c05">setCentreCarte</a>(<a class="code hl_class" href="classediteurpanovisu_1_1CoordonneesGeographiques.html">CoordonneesGeographiques</a> <a class="code hl_variable" href="classediteurpanovisu_1_1CartePanoVisu.html#aabf21833a6f4dc4146c5492b07e95dcc">centreCarte</a>) {</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        this.centreCarte = <a class="code hl_variable" href="classediteurpanovisu_1_1CartePanoVisu.html#aabf21833a6f4dc4146c5492b07e95dcc">centreCarte</a>;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    }</div>
+</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span></div>
+<div class="foldopen" id="foldopen00075" data-start="{" data-end="}">
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1CartePanoVisu.html#a68c2a4627d10159cc215948a5c652919">   75</a></span>    <span class="keyword">public</span> <span class="keywordtype">int</span> <a class="code hl_function" href="classediteurpanovisu_1_1CartePanoVisu.html#a68c2a4627d10159cc215948a5c652919">getFacteurZoom</a>() {</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1CartePanoVisu.html#a0ecbef750a75766cc383bbba1f5d5bc0">facteurZoom</a>;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    }</div>
+</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span></div>
+<div class="foldopen" id="foldopen00082" data-start="{" data-end="}">
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1CartePanoVisu.html#a39d014fd181abd9a01ed712596cd13aa">   82</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1CartePanoVisu.html#a39d014fd181abd9a01ed712596cd13aa">setFacteurZoom</a>(<span class="keywordtype">int</span> <a class="code hl_variable" href="classediteurpanovisu_1_1CartePanoVisu.html#a0ecbef750a75766cc383bbba1f5d5bc0">facteurZoom</a>) {</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        this.facteurZoom = <a class="code hl_variable" href="classediteurpanovisu_1_1CartePanoVisu.html#a0ecbef750a75766cc383bbba1f5d5bc0">facteurZoom</a>;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    }</div>
+</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span></div>
+<div class="foldopen" id="foldopen00089" data-start="{" data-end="}">
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1CartePanoVisu.html#ac6fb89f896ceeb2e13fd710808f4e78b">   89</a></span>    <span class="keyword">public</span> <span class="keywordtype">int</span> <a class="code hl_function" href="classediteurpanovisu_1_1CartePanoVisu.html#ac6fb89f896ceeb2e13fd710808f4e78b">getiNombreMarqueur</a>() {</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1CartePanoVisu.html#afb0cbb01016fb34dbe15511b425b359f">iNombreMarqueur</a>;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    }</div>
+</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span></div>
+<div class="foldopen" id="foldopen00096" data-start="{" data-end="}">
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1CartePanoVisu.html#a80582095f7604330d92b78a6328e2a9d">   96</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1CartePanoVisu.html#a80582095f7604330d92b78a6328e2a9d">setiNombreMarqueur</a>(<span class="keywordtype">int</span> <a class="code hl_variable" href="classediteurpanovisu_1_1CartePanoVisu.html#afb0cbb01016fb34dbe15511b425b359f">iNombreMarqueur</a>) {</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        this.iNombreMarqueur = <a class="code hl_variable" href="classediteurpanovisu_1_1CartePanoVisu.html#afb0cbb01016fb34dbe15511b425b359f">iNombreMarqueur</a>;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    }</div>
+</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span></div>
+<div class="foldopen" id="foldopen00103" data-start="{" data-end="}">
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1CartePanoVisu.html#ab7ce50311349fdd981130c509f6a4836">  103</a></span>    <span class="keyword">public</span> <a class="code hl_class" href="classediteurpanovisu_1_1MarqueurGeolocalisation.html">MarqueurGeolocalisation</a>[] <a class="code hl_function" href="classediteurpanovisu_1_1CartePanoVisu.html#ab7ce50311349fdd981130c509f6a4836">getMarqueurs</a>() {</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1CartePanoVisu.html#aaac2939701f53d8b395c19eb642ac44e">marqueurs</a>;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    }</div>
+</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span></div>
+<div class="foldopen" id="foldopen00110" data-start="{" data-end="}">
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1CartePanoVisu.html#a1e934193826f65d2585346670a35a65b">  110</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1CartePanoVisu.html#a1e934193826f65d2585346670a35a65b">setMarqueurs</a>(<a class="code hl_class" href="classediteurpanovisu_1_1MarqueurGeolocalisation.html">MarqueurGeolocalisation</a>[] <a class="code hl_variable" href="classediteurpanovisu_1_1CartePanoVisu.html#aaac2939701f53d8b395c19eb642ac44e">marqueurs</a>) {</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        this.marqueurs = <a class="code hl_variable" href="classediteurpanovisu_1_1CartePanoVisu.html#aaac2939701f53d8b395c19eb642ac44e">marqueurs</a>;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    }</div>
+</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span></div>
+<div class="foldopen" id="foldopen00119" data-start="{" data-end="}">
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1CartePanoVisu.html#a48b0c237a981101e1e2be7ab6b1481a4">  119</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1CartePanoVisu.html#a48b0c237a981101e1e2be7ab6b1481a4">setMarqueursI</a>(<span class="keywordtype">int</span> <a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>, <a class="code hl_class" href="classediteurpanovisu_1_1MarqueurGeolocalisation.html">MarqueurGeolocalisation</a> <a class="code hl_variable" href="classediteurpanovisu_1_1CartePanoVisu.html#aaac2939701f53d8b395c19eb642ac44e">marqueurs</a>) {</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        this.marqueurs[<a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>] = <a class="code hl_variable" href="classediteurpanovisu_1_1CartePanoVisu.html#aaac2939701f53d8b395c19eb642ac44e">marqueurs</a>;</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    }</div>
+</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span></div>
+<div class="foldopen" id="foldopen00126" data-start="{" data-end="}">
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1CartePanoVisu.html#a91ee789abc766378ed0b4b9603b7a2a8">  126</a></span>    <span class="keyword">public</span> <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_function" href="classediteurpanovisu_1_1CartePanoVisu.html#a91ee789abc766378ed0b4b9603b7a2a8">getStrTypeCarte</a>() {</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1CartePanoVisu.html#a6165e2f0c98f1e6ac306c5a3854a86ec">strTypeCarte</a>;</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    }</div>
+</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span></div>
+<div class="foldopen" id="foldopen00133" data-start="{" data-end="}">
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1CartePanoVisu.html#a7f1384aa11fd18d99850cf8139ed9b20">  133</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1CartePanoVisu.html#a7f1384aa11fd18d99850cf8139ed9b20">setStrTypeCarte</a>(<a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_variable" href="classediteurpanovisu_1_1CartePanoVisu.html#a6165e2f0c98f1e6ac306c5a3854a86ec">strTypeCarte</a>) {</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        this.strTypeCarte = <a class="code hl_variable" href="classediteurpanovisu_1_1CartePanoVisu.html#a6165e2f0c98f1e6ac306c5a3854a86ec">strTypeCarte</a>;</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    }</div>
+</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>}</div>
+</div>
+<div class="ttc" id="aOpenLayers_8js_html_a4ca754488880c6622cdd0e257fe5f5ea"><div class="ttname"><a href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a></div><div class="ttdeci">OpenLayers String</div><div class="ttdef"><b>Definition</b> <a href="OpenLayers_8js_source.html#l00059">OpenLayers.js:59</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1CartePanoVisu_html_a0ecbef750a75766cc383bbba1f5d5bc0"><div class="ttname"><a href="classediteurpanovisu_1_1CartePanoVisu.html#a0ecbef750a75766cc383bbba1f5d5bc0">editeurpanovisu.CartePanoVisu.facteurZoom</a></div><div class="ttdeci">int facteurZoom</div><div class="ttdef"><b>Definition</b> <a href="#l00016">CartePanoVisu.java:16</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1CartePanoVisu_html_a1e934193826f65d2585346670a35a65b"><div class="ttname"><a href="classediteurpanovisu_1_1CartePanoVisu.html#a1e934193826f65d2585346670a35a65b">editeurpanovisu.CartePanoVisu.setMarqueurs</a></div><div class="ttdeci">void setMarqueurs(MarqueurGeolocalisation[] marqueurs)</div><div class="ttdef"><b>Definition</b> <a href="#l00110">CartePanoVisu.java:110</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1CartePanoVisu_html_a3071b62c1b2981a4e81de0f5fa3b9d16"><div class="ttname"><a href="classediteurpanovisu_1_1CartePanoVisu.html#a3071b62c1b2981a4e81de0f5fa3b9d16">editeurpanovisu.CartePanoVisu.ajouteMarqueur</a></div><div class="ttdeci">void ajouteMarqueur(CoordonneesGeographiques coordonnees, String strXML, String strHTML)</div><div class="ttdef"><b>Definition</b> <a href="#l00053">CartePanoVisu.java:53</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1CartePanoVisu_html_a39d014fd181abd9a01ed712596cd13aa"><div class="ttname"><a href="classediteurpanovisu_1_1CartePanoVisu.html#a39d014fd181abd9a01ed712596cd13aa">editeurpanovisu.CartePanoVisu.setFacteurZoom</a></div><div class="ttdeci">void setFacteurZoom(int facteurZoom)</div><div class="ttdef"><b>Definition</b> <a href="#l00082">CartePanoVisu.java:82</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1CartePanoVisu_html_a48b0c237a981101e1e2be7ab6b1481a4"><div class="ttname"><a href="classediteurpanovisu_1_1CartePanoVisu.html#a48b0c237a981101e1e2be7ab6b1481a4">editeurpanovisu.CartePanoVisu.setMarqueursI</a></div><div class="ttdeci">void setMarqueursI(int i, MarqueurGeolocalisation marqueurs)</div><div class="ttdef"><b>Definition</b> <a href="#l00119">CartePanoVisu.java:119</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1CartePanoVisu_html_a5e9f0c869ce2415d3293a384f2cc6c05"><div class="ttname"><a href="classediteurpanovisu_1_1CartePanoVisu.html#a5e9f0c869ce2415d3293a384f2cc6c05">editeurpanovisu.CartePanoVisu.setCentreCarte</a></div><div class="ttdeci">void setCentreCarte(CoordonneesGeographiques centreCarte)</div><div class="ttdef"><b>Definition</b> <a href="#l00068">CartePanoVisu.java:68</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1CartePanoVisu_html_a6165e2f0c98f1e6ac306c5a3854a86ec"><div class="ttname"><a href="classediteurpanovisu_1_1CartePanoVisu.html#a6165e2f0c98f1e6ac306c5a3854a86ec">editeurpanovisu.CartePanoVisu.strTypeCarte</a></div><div class="ttdeci">String strTypeCarte</div><div class="ttdef"><b>Definition</b> <a href="#l00019">CartePanoVisu.java:19</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1CartePanoVisu_html_a68c2a4627d10159cc215948a5c652919"><div class="ttname"><a href="classediteurpanovisu_1_1CartePanoVisu.html#a68c2a4627d10159cc215948a5c652919">editeurpanovisu.CartePanoVisu.getFacteurZoom</a></div><div class="ttdeci">int getFacteurZoom()</div><div class="ttdef"><b>Definition</b> <a href="#l00075">CartePanoVisu.java:75</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1CartePanoVisu_html_a6fd9eb2c8ac17e46ed115e3946256438"><div class="ttname"><a href="classediteurpanovisu_1_1CartePanoVisu.html#a6fd9eb2c8ac17e46ed115e3946256438">editeurpanovisu.CartePanoVisu.CartePanoVisu</a></div><div class="ttdeci">CartePanoVisu(int iNombreMarqueur, CoordonneesGeographiques coordonneesCentre, String strTypeCarte, MarqueurGeolocalisation[] marqueurs, int facteurZoom)</div><div class="ttdef"><b>Definition</b> <a href="#l00039">CartePanoVisu.java:39</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1CartePanoVisu_html_a7f1384aa11fd18d99850cf8139ed9b20"><div class="ttname"><a href="classediteurpanovisu_1_1CartePanoVisu.html#a7f1384aa11fd18d99850cf8139ed9b20">editeurpanovisu.CartePanoVisu.setStrTypeCarte</a></div><div class="ttdeci">void setStrTypeCarte(String strTypeCarte)</div><div class="ttdef"><b>Definition</b> <a href="#l00133">CartePanoVisu.java:133</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1CartePanoVisu_html_a80582095f7604330d92b78a6328e2a9d"><div class="ttname"><a href="classediteurpanovisu_1_1CartePanoVisu.html#a80582095f7604330d92b78a6328e2a9d">editeurpanovisu.CartePanoVisu.setiNombreMarqueur</a></div><div class="ttdeci">void setiNombreMarqueur(int iNombreMarqueur)</div><div class="ttdef"><b>Definition</b> <a href="#l00096">CartePanoVisu.java:96</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1CartePanoVisu_html_a91ee789abc766378ed0b4b9603b7a2a8"><div class="ttname"><a href="classediteurpanovisu_1_1CartePanoVisu.html#a91ee789abc766378ed0b4b9603b7a2a8">editeurpanovisu.CartePanoVisu.getStrTypeCarte</a></div><div class="ttdeci">String getStrTypeCarte()</div><div class="ttdef"><b>Definition</b> <a href="#l00126">CartePanoVisu.java:126</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1CartePanoVisu_html_aaac2939701f53d8b395c19eb642ac44e"><div class="ttname"><a href="classediteurpanovisu_1_1CartePanoVisu.html#aaac2939701f53d8b395c19eb642ac44e">editeurpanovisu.CartePanoVisu.marqueurs</a></div><div class="ttdeci">MarqueurGeolocalisation[] marqueurs</div><div class="ttdef"><b>Definition</b> <a href="#l00018">CartePanoVisu.java:18</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1CartePanoVisu_html_aabf21833a6f4dc4146c5492b07e95dcc"><div class="ttname"><a href="classediteurpanovisu_1_1CartePanoVisu.html#aabf21833a6f4dc4146c5492b07e95dcc">editeurpanovisu.CartePanoVisu.centreCarte</a></div><div class="ttdeci">CoordonneesGeographiques centreCarte</div><div class="ttdef"><b>Definition</b> <a href="#l00015">CartePanoVisu.java:15</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1CartePanoVisu_html_ab7ce50311349fdd981130c509f6a4836"><div class="ttname"><a href="classediteurpanovisu_1_1CartePanoVisu.html#ab7ce50311349fdd981130c509f6a4836">editeurpanovisu.CartePanoVisu.getMarqueurs</a></div><div class="ttdeci">MarqueurGeolocalisation[] getMarqueurs()</div><div class="ttdef"><b>Definition</b> <a href="#l00103">CartePanoVisu.java:103</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1CartePanoVisu_html_ac6fb89f896ceeb2e13fd710808f4e78b"><div class="ttname"><a href="classediteurpanovisu_1_1CartePanoVisu.html#ac6fb89f896ceeb2e13fd710808f4e78b">editeurpanovisu.CartePanoVisu.getiNombreMarqueur</a></div><div class="ttdeci">int getiNombreMarqueur()</div><div class="ttdef"><b>Definition</b> <a href="#l00089">CartePanoVisu.java:89</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1CartePanoVisu_html_adfdf5893058a9bb0acee1f8d92c76974"><div class="ttname"><a href="classediteurpanovisu_1_1CartePanoVisu.html#adfdf5893058a9bb0acee1f8d92c76974">editeurpanovisu.CartePanoVisu.getCentreCarte</a></div><div class="ttdeci">CoordonneesGeographiques getCentreCarte()</div><div class="ttdef"><b>Definition</b> <a href="#l00061">CartePanoVisu.java:61</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1CartePanoVisu_html_afb0cbb01016fb34dbe15511b425b359f"><div class="ttname"><a href="classediteurpanovisu_1_1CartePanoVisu.html#afb0cbb01016fb34dbe15511b425b359f">editeurpanovisu.CartePanoVisu.iNombreMarqueur</a></div><div class="ttdeci">int iNombreMarqueur</div><div class="ttdef"><b>Definition</b> <a href="#l00017">CartePanoVisu.java:17</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1CartePanoVisu_html_afcdaa95092b408f8a3535866a992dc62"><div class="ttname"><a href="classediteurpanovisu_1_1CartePanoVisu.html#afcdaa95092b408f8a3535866a992dc62">editeurpanovisu.CartePanoVisu.CartePanoVisu</a></div><div class="ttdeci">CartePanoVisu()</div><div class="ttdef"><b>Definition</b> <a href="#l00024">CartePanoVisu.java:24</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1CoordonneesGeographiques_html"><div class="ttname"><a href="classediteurpanovisu_1_1CoordonneesGeographiques.html">editeurpanovisu.CoordonneesGeographiques</a></div><div class="ttdef"><b>Definition</b> <a href="CoordonneesGeographiques_8java_source.html#l00012">CoordonneesGeographiques.java:12</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1MarqueurGeolocalisation_html"><div class="ttname"><a href="classediteurpanovisu_1_1MarqueurGeolocalisation.html">editeurpanovisu.MarqueurGeolocalisation</a></div><div class="ttdef"><b>Definition</b> <a href="MarqueurGeolocalisation_8java_source.html#l00012">MarqueurGeolocalisation.java:12</a></div></div>
+<div class="ttc" id="aleaflet_8js_html_a73aff07b65d7c0b09ccf6b4c4f1b7a9d"><div class="ttname"><a href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a></div><div class="ttdeci">function i(t, e)</div><div class="ttdef"><b>Definition</b> <a href="leaflet_8js_source.html#l00005">leaflet.js:5</a></div></div>
+<div class="ttc" id="aleaflet_8js_html_aeb337d295abaddb5ec3cb34cc2e2bbc9"><div class="ttname"><a href="leaflet_8js.html#aeb337d295abaddb5ec3cb34cc2e2bbc9">d</a></div><div class="ttdeci">var d</div><div class="ttdef"><b>Definition</b> <a href="leaflet_8js_source.html#l00005">leaflet.js:5</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="dir_184160a943439c2c782fe244782aeddc.html">editeurpanovisu</a></li><li class="navelem"><a href="CartePanoVisu_8java.html">CartePanoVisu.java</a></li>
+    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>

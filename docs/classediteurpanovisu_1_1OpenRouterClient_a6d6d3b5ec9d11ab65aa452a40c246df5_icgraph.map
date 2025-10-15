@@ -1,0 +1,19 @@
+<map id="editeurpanovisu.OpenRouterClient.chat" name="editeurpanovisu.OpenRouterClient.chat">
+<area shape="rect" id="Node000001" title="Envoie un message au modèle et obtient une réponse." alt="" coords="832,131,1019,173"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="968,118,952,112,925,109,901,111,886,116,880,122,882,129,877,131,875,121,883,112,900,106,926,104,953,106,969,113"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1OpenRouterClient.html#a2d325a1bbe2af91ea6cbf0262130bd03" title="Envoie un message avec un contexte système." alt="" coords="574,5,760,48"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="883,124,836,92,783,62,755,51,757,46,785,58,839,87,886,119"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1OpenRouterClient.html#abd04c3bcd52a589bcf2efcc36a23b650" title="Envoie un message de manière asynchrone." alt="" coords="574,72,760,115"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="816,130,760,117,761,112,818,125"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1TestAIClients.html#a77fbca3f26c8ae02ffe75835740034f7" title="Test du client OpenRouter." alt="" coords="281,160,502,203"/>
+<area shape="poly" id="edge10_Node000001_Node000004" title=" " alt="" coords="817,161,502,178,502,173,817,155"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1OpenRouterClient.html#a8771d1fc79129ff298c76aff05edd267" title="Génère des suggestions de description pour un panorama." alt="" coords="550,189,784,232"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="818,179,765,191,764,186,817,174"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1OpenRouterClient.html#ad0e45a62c406dae1c0e9aa17e1fe335f" title="Suggère des hotspots pertinents pour un panorama." alt="" coords="574,256,760,299"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="886,185,839,217,785,246,757,258,755,253,783,242,836,212,883,180"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="584,122,461,162,460,157,583,117"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1TestAIClients.html#a0513dc754d9bc85fc8b50d2b9993b35a" title=" " alt="" coords="5,168,233,195"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="265,184,233,184,233,179,265,179"/>
+<area shape="poly" id="edge7_Node000006_Node000004" title=" " alt="" coords="534,199,502,196,503,190,535,194"/>
+<area shape="poly" id="edge9_Node000007_Node000004" title=" " alt="" coords="571,254,549,247,443,206,445,201,551,241,572,249"/>
+</map>

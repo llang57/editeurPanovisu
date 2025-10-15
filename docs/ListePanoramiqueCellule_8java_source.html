@@ -1,0 +1,297 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>EditeurPanovisu:  Fichier source de src/editeurpanovisu/ListePanoramiqueCellule.java</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">EditeurPanovisu<span id="projectnumber">&#160;3.1.0</span>
+   </div>
+   <div id="projectbrief">Éditeur de visites virtuelles 360° Panovisu</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Recherche',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('ListePanoramiqueCellule_8java_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Chargement...</div>
+<div class="SRStatus" id="Searching">Recherche...</div>
+<div class="SRStatus" id="NoMatches">Aucune correspondance</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">ListePanoramiqueCellule.java</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="ListePanoramiqueCellule_8java.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="keyword">package </span>editeurpanovisu;</div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">/*</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> * To change this license header, choose License Headers in Project Properties.</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> * To change this template file, choose Tools | Templates</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"> * and open the template in the editor.</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">import</span> <span class="keyword">static</span> editeurpanovisu.EditeurPanovisu.affichePanoChoisit;</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">import</span> <span class="keyword">static</span> editeurpanovisu.OrdrePanoramique.cellulesPanoramiques;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">import</span> java.util.ArrayList;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">import</span> java.util.List;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">import</span> javafx.collections.ObservableList;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">import</span> javafx.scene.control.Label;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">import</span> javafx.scene.control.ListCell;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">import</span> javafx.scene.image.ImageView;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">import</span> javafx.scene.input.ClipboardContent;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">import</span> javafx.scene.input.DragEvent;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">import</span> javafx.scene.input.Dragboard;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">import</span> javafx.scene.input.TransferMode;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">import</span> javafx.scene.layout.AnchorPane;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">import</span> javafx.scene.layout.Pane;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="foldopen" id="foldopen00023" data-start="{" data-end="};">
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1ListePanoramiqueCellule.html">   23</a></span><span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_function" href="classediteurpanovisu_1_1ListePanoramiqueCellule.html#aba8f5f0f9c72cf81533898ba87cd12fd">ListePanoramiqueCellule</a> <span class="keyword">extends</span> ListCell&lt;String&gt; {</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1ListePanoramiqueCellule.html#a7ee082fafbb71e5b5dd504d7d100c4ad">   25</a></span>    <span class="keyword">private</span> <span class="keyword">final</span> ImageView <a class="code hl_variable" href="classediteurpanovisu_1_1ListePanoramiqueCellule.html#a7ee082fafbb71e5b5dd504d7d100c4ad">imageView</a> = <span class="keyword">new</span> ImageView();</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1ListePanoramiqueCellule.html#ae8fb81926035b65ec49a882b8943eb62">   26</a></span>    <span class="keyword">private</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="classediteurpanovisu_1_1ListePanoramiqueCellule.html#ae8fb81926035b65ec49a882b8943eb62">iCell</a> = 0;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="foldopen" id="foldopen00028" data-start="{" data-end="}">
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1ListePanoramiqueCellule.html#aba8f5f0f9c72cf81533898ba87cd12fd">   28</a></span>    <span class="keyword">public</span> <a class="code hl_function" href="classediteurpanovisu_1_1ListePanoramiqueCellule.html#aba8f5f0f9c72cf81533898ba87cd12fd">ListePanoramiqueCellule</a>() {</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        ListCell cellule = <span class="keyword">this</span>;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        setOnMouseClicked((<a class="code hl_function" href="leaflet_8js.html#abf5830200d869e463ea38504a19985f6">me</a>)-&gt;{</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>           <span class="keywordtype">int</span> inumPano=Integer.parseInt(getListView().getSelectionModel().getSelectedItem());</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>           affichePanoChoisit(inumPano);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        });</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        setOnDragDetected(evenement -&gt; {</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>            <span class="keywordflow">if</span> (getItem() == <span class="keyword">null</span>) {</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>                <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>            }</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>            ObservableList&lt;String&gt; items = getListView().getItems();</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>            Dragboard dragboard = startDragAndDrop(TransferMode.MOVE);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>            ClipboardContent content = <span class="keyword">new</span> ClipboardContent();</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>            content.putString(getItem());</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>            dragboard.setDragView(</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>                    cellulesPanoramiques.get(</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>                            items.indexOf(</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>                                    getItem()</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>                            )</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>                    ).getImgPanoramique()</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            );</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>            dragboard.setContent(content);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            evenement.consume();</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        });</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        setOnDragOver(evenement -&gt; {</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            <span class="keywordflow">if</span> (evenement.getGestureSource() != cellule</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>                    &amp;&amp; evenement.getDragboard().hasString()) {</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>                evenement.acceptTransferModes(TransferMode.MOVE);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>            }</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">//            evenement.consume();</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        });</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        setOnDragEntered(evenement -&gt; {</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>            <span class="keywordflow">if</span> (evenement.getGestureSource() != cellule</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>                    &amp;&amp; evenement.getDragboard().hasString()) {</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>                setOpacity(0.3);</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>            }</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        });</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        setOnDragExited(evenement -&gt; {</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>            <span class="keywordflow">if</span> (evenement.getGestureSource() != cellule</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>                    &amp;&amp; evenement.getDragboard().hasString()) {</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>                setOpacity(1);</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>            }</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        });</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        setOnDragDropped(evenement -&gt; {</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>            <span class="keywordflow">if</span> (getItem() == <span class="keyword">null</span>) {</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>                <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>            }</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            Dragboard db = evenement.getDragboard();</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            <span class="keywordtype">boolean</span> success = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>            <span class="keywordflow">if</span> (db.hasString()) {</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>                ObservableList&lt;String&gt; items = getListView().getItems();</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>                <span class="keywordtype">int</span> draggedIdx = items.indexOf(db.getString());</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>                <span class="keywordtype">int</span> thisIdx = items.indexOf(getItem());</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>                <span class="keywordtype">int</span> i1;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                <span class="keywordtype">int</span> i2;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                <span class="keywordflow">if</span> (draggedIdx &lt; thisIdx) {</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                    i1 = draggedIdx;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                    i2 = thisIdx;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>                    <a class="code hl_class" href="classediteurpanovisu_1_1PanoramiqueCellule.html">PanoramiqueCellule</a> cpDragged = cellulesPanoramiques.get(draggedIdx);</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>                    <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> strItems = items.get(draggedIdx);</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>                    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a> = i1; <a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a> &lt; i2; <a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>++) {</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>                        <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> strTemp = items.get(<a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a> + 1);</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>                        items.set(<a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>, strTemp);</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>                        <a class="code hl_class" href="classediteurpanovisu_1_1PanoramiqueCellule.html">PanoramiqueCellule</a> temp = cellulesPanoramiques.get(<a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a> + 1);</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>                        cellulesPanoramiques.set(<a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>, temp);</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>                    }</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>                    cellulesPanoramiques.set(thisIdx, cpDragged);</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                    items.set(thisIdx, strItems);</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>                } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>                    i2 = draggedIdx;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                    i1 = thisIdx;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                    <a class="code hl_class" href="classediteurpanovisu_1_1PanoramiqueCellule.html">PanoramiqueCellule</a> cpDragged = cellulesPanoramiques.get(draggedIdx);</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>                    <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> strItems = items.get(draggedIdx);</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>                    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a> = i2 - 1; <a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a> &gt;= i1; <a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>--) {</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>                        <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> strTemp = items.get(<a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>);</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>                        items.set(<a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a> + 1, strTemp);</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>                        <a class="code hl_class" href="classediteurpanovisu_1_1PanoramiqueCellule.html">PanoramiqueCellule</a> temp = cellulesPanoramiques.get(<a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>);</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>                        cellulesPanoramiques.set(<a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a> + 1, temp);</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>                    }</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>                    cellulesPanoramiques.set(thisIdx, cpDragged);</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>                    items.set(thisIdx, strItems);</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>                }</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>                List&lt;String&gt; itemscopy = <span class="keyword">new</span> ArrayList&lt;&gt;(getListView().getItems());</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>                getListView().getItems().setAll(itemscopy);</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>                <a class="code hl_class" href="classediteurpanovisu_1_1EditeurPanovisu.html">EditeurPanovisu</a>.<a class="code hl_function" href="classediteurpanovisu_1_1EditeurPanovisu.html#a76ed7eef8e6bac2af7f4b8ccf8e17934">rafraichitListePano</a>();</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                success = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>            }</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>            evenement.setDropCompleted(success);</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>            evenement.consume();</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        });</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        setOnDragDone(DragEvent::consume);</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    }</div>
+</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    @Override</div>
+<div class="foldopen" id="foldopen00135" data-start="{" data-end="}">
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1ListePanoramiqueCellule.html#a36724a15699d2b9ed6ab57bd06b372c1">  135</a></span>    <span class="keyword">protected</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1ListePanoramiqueCellule.html#a36724a15699d2b9ed6ab57bd06b372c1">updateItem</a>(<a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> item, <span class="keywordtype">boolean</span> empty) {</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        super.updateItem(item, empty);</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        <span class="keywordflow">if</span> (empty || item == <span class="keyword">null</span>) {</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>            setGraphic(<span class="keyword">null</span>);</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>            <a class="code hl_variable" href="classediteurpanovisu_1_1ListePanoramiqueCellule.html#ae8fb81926035b65ec49a882b8943eb62">iCell</a>++;</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>            AnchorPane apCellFactory = <span class="keyword">new</span> AnchorPane();</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>            apCellFactory.setMinHeight(40);</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>            apCellFactory.setMaxHeight(40);</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>            apCellFactory.setMaxWidth(295);</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>            Pane paneFond = <span class="keyword">new</span> Pane(<a class="code hl_variable" href="classediteurpanovisu_1_1ListePanoramiqueCellule.html#a7ee082fafbb71e5b5dd504d7d100c4ad">imageView</a>);</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>            <a class="code hl_variable" href="classediteurpanovisu_1_1ListePanoramiqueCellule.html#a7ee082fafbb71e5b5dd504d7d100c4ad">imageView</a>.setImage(</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>                    cellulesPanoramiques.get(</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>                            getListView().getItems().<a class="code hl_variable" href="OpenLayers_8js.html#afacde02f31f10899194ae213cf74a607">indexOf</a>(item)</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>                    ).getImgPanoramique()</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>            );</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>            paneFond.setLayoutX(0);</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>            paneFond.setLayoutY(2);</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>            paneFond.setPrefSize(72, 37);</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>            <a class="code hl_variable" href="classediteurpanovisu_1_1ListePanoramiqueCellule.html#a7ee082fafbb71e5b5dd504d7d100c4ad">imageView</a>.setLayoutX(1);</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>            <a class="code hl_variable" href="classediteurpanovisu_1_1ListePanoramiqueCellule.html#a7ee082fafbb71e5b5dd504d7d100c4ad">imageView</a>.setLayoutY(1);</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>            paneFond.setStyle(<span class="stringliteral">&quot;-fx-border-width : 1px;-fx-border-color:#700;-fx-border-style : solid;&quot;</span>);</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>            Label lbl1 = <span class="keyword">new</span> Label(cellulesPanoramiques.get(getListView().getItems().<a class="code hl_variable" href="OpenLayers_8js.html#afacde02f31f10899194ae213cf74a607">indexOf</a>(item)).getStrTitrePanoramique().toUpperCase());</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>            lbl1.setId(<span class="stringliteral">&quot;lvTitre&quot;</span>+cellulesPanoramiques.get(getListView().getItems().<a class="code hl_variable" href="OpenLayers_8js.html#afacde02f31f10899194ae213cf74a607">indexOf</a>(item)).getiNumPano());</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>            lbl1.setStyle(<span class="stringliteral">&quot;-fx-font-weight : bold;-fx-font-size : 1.0em; -fx-font-family : Verdana,Arial,sans-serif;&quot;</span>);</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>            Label lbl2 = <span class="keyword">new</span> Label(cellulesPanoramiques.get(getListView().getItems().<a class="code hl_variable" href="OpenLayers_8js.html#afacde02f31f10899194ae213cf74a607">indexOf</a>(item)).getStrTitrePanoramiqueLigne2());</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>            lbl2.setStyle(<span class="stringliteral">&quot;-fx-font-size : 0.8em; -fx-font-family : Verdana,Arial,sans-serif;&quot;</span>);</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>            lbl1.setLayoutX(90);</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>            lbl1.setLayoutY(5);</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>            lbl1.setMaxWidth(200);</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>            lbl2.setMaxWidth(200);</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>            lbl2.setLayoutX(90);</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>            lbl2.setLayoutY(25);</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>            apCellFactory.getChildren().addAll(paneFond, lbl1, lbl2);</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>            setGraphic(apCellFactory);</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>        }</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    }</div>
+</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>}</div>
+</div>
+<div class="ttc" id="aOpenLayers_8js_html_a4ca754488880c6622cdd0e257fe5f5ea"><div class="ttname"><a href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a></div><div class="ttdeci">OpenLayers String</div><div class="ttdef"><b>Definition</b> <a href="OpenLayers_8js_source.html#l00059">OpenLayers.js:59</a></div></div>
+<div class="ttc" id="aOpenLayers_8js_html_afacde02f31f10899194ae213cf74a607"><div class="ttname"><a href="OpenLayers_8js.html#afacde02f31f10899194ae213cf74a607">indexOf</a></div><div class="ttdeci">OpenLayers Util indexOf</div><div class="ttdef"><b>Definition</b> <a href="OpenLayers_8js_source.html#l00083">OpenLayers.js:83</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1EditeurPanovisu_html"><div class="ttname"><a href="classediteurpanovisu_1_1EditeurPanovisu.html">editeurpanovisu.EditeurPanovisu</a></div><div class="ttdoc">Editeur de visites virtuelles panoramiques.</div><div class="ttdef"><b>Definition</b> <a href="EditeurPanovisu_8java_source.html#l00159">EditeurPanovisu.java:159</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1EditeurPanovisu_html_a76ed7eef8e6bac2af7f4b8ccf8e17934"><div class="ttname"><a href="classediteurpanovisu_1_1EditeurPanovisu.html#a76ed7eef8e6bac2af7f4b8ccf8e17934">editeurpanovisu.EditeurPanovisu.rafraichitListePano</a></div><div class="ttdeci">static void rafraichitListePano()</div><div class="ttdef"><b>Definition</b> <a href="EditeurPanovisu_8java_source.html#l04108">EditeurPanovisu.java:4108</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1ListePanoramiqueCellule_html_a36724a15699d2b9ed6ab57bd06b372c1"><div class="ttname"><a href="classediteurpanovisu_1_1ListePanoramiqueCellule.html#a36724a15699d2b9ed6ab57bd06b372c1">editeurpanovisu.ListePanoramiqueCellule.updateItem</a></div><div class="ttdeci">void updateItem(String item, boolean empty)</div><div class="ttdef"><b>Definition</b> <a href="#l00135">ListePanoramiqueCellule.java:135</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1ListePanoramiqueCellule_html_a7ee082fafbb71e5b5dd504d7d100c4ad"><div class="ttname"><a href="classediteurpanovisu_1_1ListePanoramiqueCellule.html#a7ee082fafbb71e5b5dd504d7d100c4ad">editeurpanovisu.ListePanoramiqueCellule.imageView</a></div><div class="ttdeci">final ImageView imageView</div><div class="ttdef"><b>Definition</b> <a href="#l00025">ListePanoramiqueCellule.java:25</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1ListePanoramiqueCellule_html_aba8f5f0f9c72cf81533898ba87cd12fd"><div class="ttname"><a href="classediteurpanovisu_1_1ListePanoramiqueCellule.html#aba8f5f0f9c72cf81533898ba87cd12fd">editeurpanovisu.ListePanoramiqueCellule.ListePanoramiqueCellule</a></div><div class="ttdeci">ListePanoramiqueCellule()</div><div class="ttdef"><b>Definition</b> <a href="#l00028">ListePanoramiqueCellule.java:28</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1ListePanoramiqueCellule_html_ae8fb81926035b65ec49a882b8943eb62"><div class="ttname"><a href="classediteurpanovisu_1_1ListePanoramiqueCellule.html#ae8fb81926035b65ec49a882b8943eb62">editeurpanovisu.ListePanoramiqueCellule.iCell</a></div><div class="ttdeci">int iCell</div><div class="ttdef"><b>Definition</b> <a href="#l00026">ListePanoramiqueCellule.java:26</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1PanoramiqueCellule_html"><div class="ttname"><a href="classediteurpanovisu_1_1PanoramiqueCellule.html">editeurpanovisu.PanoramiqueCellule</a></div><div class="ttdef"><b>Definition</b> <a href="PanoramiqueCellule_8java_source.html#l00012">PanoramiqueCellule.java:12</a></div></div>
+<div class="ttc" id="aleaflet_8js_html_a73aff07b65d7c0b09ccf6b4c4f1b7a9d"><div class="ttname"><a href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a></div><div class="ttdeci">function i(t, e)</div><div class="ttdef"><b>Definition</b> <a href="leaflet_8js_source.html#l00005">leaflet.js:5</a></div></div>
+<div class="ttc" id="aleaflet_8js_html_abf5830200d869e463ea38504a19985f6"><div class="ttname"><a href="leaflet_8js.html#abf5830200d869e463ea38504a19985f6">me</a></div><div class="ttdeci">function me(t)</div><div class="ttdef"><b>Definition</b> <a href="leaflet_8js_source.html#l00005">leaflet.js:5</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="dir_184160a943439c2c782fe244782aeddc.html">editeurpanovisu</a></li><li class="navelem"><a href="ListePanoramiqueCellule_8java.html">ListePanoramiqueCellule.java</a></li>
+    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<map id="editeurpanovisu.OpenRouterClient.OpenRouterClient" name="editeurpanovisu.OpenRouterClient.OpenRouterClient">
+<area shape="rect" id="Node000001" title="Constructeur avec configuration automatique depuis ApiKeysConfig." alt="" coords="5,25,192,68"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1ApiKeysConfig.html#af9241a594f0e5419b8d0f8b338e38ae9" title="Récupère la clé API OpenRouter." alt="" coords="516,17,741,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="177,22,239,11,354,3,468,11,501,14,500,19,468,16,354,8,240,16,178,27"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1ApiKeysConfig.html#a07437012271cfa9737d8b07351e80c2a" title="Récupère le modèle OpenRouter configuré" alt="" coords="516,84,741,127"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="182,66,240,77,374,92,501,100,501,105,374,98,239,83,181,71"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1ApiKeysConfig.html#afa2de8aa5827534e73f956a567462ea8" title="Vérifie si une clé API OpenRouter est configurée." alt="" coords="240,25,468,68"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="192,44,224,44,224,49,192,49"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1ApiKeysConfig.html#a7babcdd2b84a59ec6088d85c66d00551" title="Charge le fichier de configuration des clés API." alt="" coords="789,51,1021,93"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="742,50,774,53,773,59,741,55"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="741,89,773,85,774,90,742,94"/>
+<area shape="poly" id="edge6_Node000005_Node000002" title=" " alt="" coords="469,41,500,40,500,45,469,46"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.NavigateurOpenLayersSeul.afficheRadar" name="editeurpanovisu.NavigateurOpenLayersSeul.afficheRadar">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,39,200,81"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1CoordonneesGeographiques.html#af33141f53510962ac8c8bf3973ce8ed9" title=" " alt="" coords="248,5,441,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="200,44,232,39,233,45,200,49"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1CoordonneesGeographiques.html#a7f94a4bb132e0a244fccb8f29ff4688a" title=" " alt="" coords="248,72,441,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="200,71,233,75,232,81,200,76"/>
+</map>

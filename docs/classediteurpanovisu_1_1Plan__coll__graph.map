@@ -1,0 +1,5 @@
+<map id="editeurpanovisu.Plan" name="editeurpanovisu.Plan">
+<area shape="rect" id="Node000001" title=" " alt="" coords="16,104,159,131"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1HotSpot.html" title="Définition des hotspots panoramiques." alt="" coords="5,5,170,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="90,48,90,104,85,104,85,48"/>
+</map>

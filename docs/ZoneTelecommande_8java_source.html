@@ -1,0 +1,234 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>EditeurPanovisu:  Fichier source de src/editeurpanovisu/ZoneTelecommande.java</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">EditeurPanovisu<span id="projectnumber">&#160;3.1.0</span>
+   </div>
+   <div id="projectbrief">Éditeur de visites virtuelles 360° Panovisu</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Recherche',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('ZoneTelecommande_8java_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Chargement...</div>
+<div class="SRStatus" id="Searching">Recherche...</div>
+<div class="SRStatus" id="NoMatches">Aucune correspondance</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">ZoneTelecommande.java</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="ZoneTelecommande_8java.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * To change this license header, choose License Headers in Project Properties.</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> * To change this template file, choose Tools | Templates</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> * and open the template in the editor.</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">package </span>editeurpanovisu;</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">import</span> javafx.geometry.Point2D;</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span></div>
+<div class="foldopen" id="foldopen00014" data-start="{" data-end="};">
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1ZoneTelecommande.html">   14</a></span><span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_class" href="classediteurpanovisu_1_1ZoneTelecommande.html">ZoneTelecommande</a> {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1ZoneTelecommande.html#a38f35474948286a5643635f193f0fc5e">   16</a></span>    <span class="keyword">private</span> <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_variable" href="classediteurpanovisu_1_1ZoneTelecommande.html#a38f35474948286a5643635f193f0fc5e">strIdZone</a> = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1ZoneTelecommande.html#a2eafa99912bea18618a6b0647f00c7fc">   17</a></span>    <span class="keyword">private</span> <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_variable" href="classediteurpanovisu_1_1ZoneTelecommande.html#a2eafa99912bea18618a6b0647f00c7fc">strTypeZone</a> = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1ZoneTelecommande.html#a938e9780d4353d9fd8218ab9e1b903c2">   18</a></span>    <span class="keyword">private</span> <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_variable" href="classediteurpanovisu_1_1ZoneTelecommande.html#a938e9780d4353d9fd8218ab9e1b903c2">strCoordonneesZone</a> = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1ZoneTelecommande.html#a37ba698247637dcca1bfca99b2e77a12">   19</a></span>    <span class="keyword">private</span> Point2D <a class="code hl_variable" href="classediteurpanovisu_1_1ZoneTelecommande.html#a37ba698247637dcca1bfca99b2e77a12">centre</a> = <span class="keyword">new</span> Point2D(0, 0);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1ZoneTelecommande.html#a3a1061d21171b7cb6f88dfeb65b40f40">   20</a></span>    <span class="keyword">private</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="classediteurpanovisu_1_1ZoneTelecommande.html#a3a1061d21171b7cb6f88dfeb65b40f40">iNombrePoints</a> = 0;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span></div>
+<div class="foldopen" id="foldopen00025" data-start="{" data-end="}">
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1ZoneTelecommande.html#a957b162f5d5a34f7521b0f79c77a37c8">   25</a></span>    <span class="keyword">public</span> <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_function" href="classediteurpanovisu_1_1ZoneTelecommande.html#a957b162f5d5a34f7521b0f79c77a37c8">getStrIdZone</a>() {</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1ZoneTelecommande.html#a38f35474948286a5643635f193f0fc5e">strIdZone</a>;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    }</div>
+</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span></div>
+<div class="foldopen" id="foldopen00033" data-start="{" data-end="}">
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1ZoneTelecommande.html#a03a62159ad9225abda2eb0bcccda7aaf">   33</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1ZoneTelecommande.html#a03a62159ad9225abda2eb0bcccda7aaf">setStrIdZone</a>(<a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_variable" href="classediteurpanovisu_1_1ZoneTelecommande.html#a38f35474948286a5643635f193f0fc5e">strIdZone</a>) {</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        this.strIdZone = <a class="code hl_variable" href="classediteurpanovisu_1_1ZoneTelecommande.html#a38f35474948286a5643635f193f0fc5e">strIdZone</a>;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    }</div>
+</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span></div>
+<div class="foldopen" id="foldopen00040" data-start="{" data-end="}">
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1ZoneTelecommande.html#a5891adda23405e784b8f56effcb6b004">   40</a></span>    <span class="keyword">public</span> <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_function" href="classediteurpanovisu_1_1ZoneTelecommande.html#a5891adda23405e784b8f56effcb6b004">getStrTypeZone</a>() {</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1ZoneTelecommande.html#a2eafa99912bea18618a6b0647f00c7fc">strTypeZone</a>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    }</div>
+</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span></div>
+<div class="foldopen" id="foldopen00047" data-start="{" data-end="}">
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1ZoneTelecommande.html#a54c828d370b34550c3a9bec25e165281">   47</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1ZoneTelecommande.html#a54c828d370b34550c3a9bec25e165281">setStrTypeZone</a>(<a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_variable" href="classediteurpanovisu_1_1ZoneTelecommande.html#a2eafa99912bea18618a6b0647f00c7fc">strTypeZone</a>) {</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        this.strTypeZone = <a class="code hl_variable" href="classediteurpanovisu_1_1ZoneTelecommande.html#a2eafa99912bea18618a6b0647f00c7fc">strTypeZone</a>;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    }</div>
+</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span></div>
+<div class="foldopen" id="foldopen00054" data-start="{" data-end="}">
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1ZoneTelecommande.html#a0f64c648f9559ce62bcc2c7f911e152b">   54</a></span>    <span class="keyword">public</span> <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_function" href="classediteurpanovisu_1_1ZoneTelecommande.html#a0f64c648f9559ce62bcc2c7f911e152b">getStrCoordonneesZone</a>() {</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1ZoneTelecommande.html#a938e9780d4353d9fd8218ab9e1b903c2">strCoordonneesZone</a>;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    }</div>
+</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span></div>
+<div class="foldopen" id="foldopen00061" data-start="{" data-end="}">
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1ZoneTelecommande.html#a5939ef148a8e93b5e504949809a156c9">   61</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1ZoneTelecommande.html#a5939ef148a8e93b5e504949809a156c9">setStrCoordonneesZone</a>(<a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_variable" href="classediteurpanovisu_1_1ZoneTelecommande.html#a938e9780d4353d9fd8218ab9e1b903c2">strCoordonneesZone</a>) {</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        this.strCoordonneesZone = <a class="code hl_variable" href="classediteurpanovisu_1_1ZoneTelecommande.html#a938e9780d4353d9fd8218ab9e1b903c2">strCoordonneesZone</a>;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    }</div>
+</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span></div>
+<div class="foldopen" id="foldopen00068" data-start="{" data-end="}">
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1ZoneTelecommande.html#a0be55011886f7b1183fa57ed7d608abc">   68</a></span>    <span class="keyword">public</span> Point2D <a class="code hl_function" href="classediteurpanovisu_1_1ZoneTelecommande.html#a0be55011886f7b1183fa57ed7d608abc">getCentre</a>() {</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1ZoneTelecommande.html#a37ba698247637dcca1bfca99b2e77a12">centre</a>;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    }</div>
+</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span></div>
+<div class="foldopen" id="foldopen00075" data-start="{" data-end="}">
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1ZoneTelecommande.html#a5c1c0eb4348c1c672d6d42dfd8c13b1a">   75</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1ZoneTelecommande.html#a5c1c0eb4348c1c672d6d42dfd8c13b1a">setCentre</a>(Point2D <a class="code hl_variable" href="classediteurpanovisu_1_1ZoneTelecommande.html#a37ba698247637dcca1bfca99b2e77a12">centre</a>) {</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        this.centre = <a class="code hl_variable" href="classediteurpanovisu_1_1ZoneTelecommande.html#a37ba698247637dcca1bfca99b2e77a12">centre</a>;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    }</div>
+</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="foldopen" id="foldopen00079" data-start="{" data-end="}">
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1ZoneTelecommande.html#a5420fc9e6ceff5f672393dce524db5aa">   79</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1ZoneTelecommande.html#a5420fc9e6ceff5f672393dce524db5aa">calculeCentre</a>() {</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        <span class="keywordflow">if</span> (!this.strCoordonneesZone.equals(<span class="stringliteral">&quot;&quot;</span>) &amp;&amp; <span class="keyword">this</span>.strCoordonneesZone != <span class="keyword">null</span>) {</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>            Point2D[] pointsZone = <span class="keyword">new</span> Point2D[50];</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a>[] strPoints;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>            strPoints = this.strCoordonneesZone.split(<span class="stringliteral">&quot;,&quot;</span>);</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>            <span class="keywordflow">switch</span> (this.strTypeZone) {</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>                <span class="keywordflow">case</span> <span class="stringliteral">&quot;circle&quot;</span>:</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>                    this.centre = <span class="keyword">new</span> Point2D(Double.parseDouble(strPoints[0]), Double.parseDouble(strPoints[1]));</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>                <span class="keywordflow">case</span> <span class="stringliteral">&quot;rect&quot;</span>:</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>                    this.centre = <span class="keyword">new</span> Point2D(</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>                            (Double.parseDouble(strPoints[0]) + Double.parseDouble(strPoints[2])) / 2.d,</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>                            (Double.parseDouble(strPoints[1]) + Double.parseDouble(strPoints[3])) / 2.d</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>                    );</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                <span class="keywordflow">case</span> <span class="stringliteral">&quot;poly&quot;</span>:</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                    <span class="keywordtype">double</span> xMax = -5000;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                    <span class="keywordtype">double</span> yMax = -5000;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>                    <span class="keywordtype">double</span> yMin = 5000;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>                    <span class="keywordtype">double</span> xMin = 5000;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>                    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a> = 0; <a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a> &lt; strPoints.length; <a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a> += 2) {</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>                        <span class="keywordflow">if</span> (Double.parseDouble(strPoints[<a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>]) &gt; xMax) {</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>                            xMax = Double.parseDouble(strPoints[<a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>]);</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>                        }</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>                        <span class="keywordflow">if</span> (Double.parseDouble(strPoints[<a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>]) &lt; xMin) {</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>                            xMin = Double.parseDouble(strPoints[<a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>]);</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>                        }</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                        <span class="keywordflow">if</span> (Double.parseDouble(strPoints[<a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a> + 1]) &gt; yMax) {</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>                            yMax = Double.parseDouble(strPoints[<a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a> + 1]);</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>                        }</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                        <span class="keywordflow">if</span> (Double.parseDouble(strPoints[<a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a> + 1]) &lt; yMin) {</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                            yMin = Double.parseDouble(strPoints[<a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a> + 1]);</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>                        }</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>                    }</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>                    this.centre = <span class="keyword">new</span> Point2D((xMax + xMin) / 2.<a class="code hl_variable" href="leaflet_8js.html#aeb337d295abaddb5ec3cb34cc2e2bbc9">d</a>, (yMax + yMin) / 2.<a class="code hl_variable" href="leaflet_8js.html#aeb337d295abaddb5ec3cb34cc2e2bbc9">d</a>);</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>            }</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        }</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    }</div>
+</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>}</div>
+</div>
+<div class="ttc" id="aOpenLayers_8js_html_a4ca754488880c6622cdd0e257fe5f5ea"><div class="ttname"><a href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a></div><div class="ttdeci">OpenLayers String</div><div class="ttdef"><b>Definition</b> <a href="OpenLayers_8js_source.html#l00059">OpenLayers.js:59</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1ZoneTelecommande_html"><div class="ttname"><a href="classediteurpanovisu_1_1ZoneTelecommande.html">editeurpanovisu.ZoneTelecommande</a></div><div class="ttdef"><b>Definition</b> <a href="#l00014">ZoneTelecommande.java:14</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1ZoneTelecommande_html_a03a62159ad9225abda2eb0bcccda7aaf"><div class="ttname"><a href="classediteurpanovisu_1_1ZoneTelecommande.html#a03a62159ad9225abda2eb0bcccda7aaf">editeurpanovisu.ZoneTelecommande.setStrIdZone</a></div><div class="ttdeci">void setStrIdZone(String strIdZone)</div><div class="ttdef"><b>Definition</b> <a href="#l00033">ZoneTelecommande.java:33</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1ZoneTelecommande_html_a0be55011886f7b1183fa57ed7d608abc"><div class="ttname"><a href="classediteurpanovisu_1_1ZoneTelecommande.html#a0be55011886f7b1183fa57ed7d608abc">editeurpanovisu.ZoneTelecommande.getCentre</a></div><div class="ttdeci">Point2D getCentre()</div><div class="ttdef"><b>Definition</b> <a href="#l00068">ZoneTelecommande.java:68</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1ZoneTelecommande_html_a0f64c648f9559ce62bcc2c7f911e152b"><div class="ttname"><a href="classediteurpanovisu_1_1ZoneTelecommande.html#a0f64c648f9559ce62bcc2c7f911e152b">editeurpanovisu.ZoneTelecommande.getStrCoordonneesZone</a></div><div class="ttdeci">String getStrCoordonneesZone()</div><div class="ttdef"><b>Definition</b> <a href="#l00054">ZoneTelecommande.java:54</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1ZoneTelecommande_html_a2eafa99912bea18618a6b0647f00c7fc"><div class="ttname"><a href="classediteurpanovisu_1_1ZoneTelecommande.html#a2eafa99912bea18618a6b0647f00c7fc">editeurpanovisu.ZoneTelecommande.strTypeZone</a></div><div class="ttdeci">String strTypeZone</div><div class="ttdef"><b>Definition</b> <a href="#l00017">ZoneTelecommande.java:17</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1ZoneTelecommande_html_a37ba698247637dcca1bfca99b2e77a12"><div class="ttname"><a href="classediteurpanovisu_1_1ZoneTelecommande.html#a37ba698247637dcca1bfca99b2e77a12">editeurpanovisu.ZoneTelecommande.centre</a></div><div class="ttdeci">Point2D centre</div><div class="ttdef"><b>Definition</b> <a href="#l00019">ZoneTelecommande.java:19</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1ZoneTelecommande_html_a38f35474948286a5643635f193f0fc5e"><div class="ttname"><a href="classediteurpanovisu_1_1ZoneTelecommande.html#a38f35474948286a5643635f193f0fc5e">editeurpanovisu.ZoneTelecommande.strIdZone</a></div><div class="ttdeci">String strIdZone</div><div class="ttdef"><b>Definition</b> <a href="#l00016">ZoneTelecommande.java:16</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1ZoneTelecommande_html_a3a1061d21171b7cb6f88dfeb65b40f40"><div class="ttname"><a href="classediteurpanovisu_1_1ZoneTelecommande.html#a3a1061d21171b7cb6f88dfeb65b40f40">editeurpanovisu.ZoneTelecommande.iNombrePoints</a></div><div class="ttdeci">int iNombrePoints</div><div class="ttdef"><b>Definition</b> <a href="#l00020">ZoneTelecommande.java:20</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1ZoneTelecommande_html_a5420fc9e6ceff5f672393dce524db5aa"><div class="ttname"><a href="classediteurpanovisu_1_1ZoneTelecommande.html#a5420fc9e6ceff5f672393dce524db5aa">editeurpanovisu.ZoneTelecommande.calculeCentre</a></div><div class="ttdeci">void calculeCentre()</div><div class="ttdef"><b>Definition</b> <a href="#l00079">ZoneTelecommande.java:79</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1ZoneTelecommande_html_a54c828d370b34550c3a9bec25e165281"><div class="ttname"><a href="classediteurpanovisu_1_1ZoneTelecommande.html#a54c828d370b34550c3a9bec25e165281">editeurpanovisu.ZoneTelecommande.setStrTypeZone</a></div><div class="ttdeci">void setStrTypeZone(String strTypeZone)</div><div class="ttdef"><b>Definition</b> <a href="#l00047">ZoneTelecommande.java:47</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1ZoneTelecommande_html_a5891adda23405e784b8f56effcb6b004"><div class="ttname"><a href="classediteurpanovisu_1_1ZoneTelecommande.html#a5891adda23405e784b8f56effcb6b004">editeurpanovisu.ZoneTelecommande.getStrTypeZone</a></div><div class="ttdeci">String getStrTypeZone()</div><div class="ttdef"><b>Definition</b> <a href="#l00040">ZoneTelecommande.java:40</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1ZoneTelecommande_html_a5939ef148a8e93b5e504949809a156c9"><div class="ttname"><a href="classediteurpanovisu_1_1ZoneTelecommande.html#a5939ef148a8e93b5e504949809a156c9">editeurpanovisu.ZoneTelecommande.setStrCoordonneesZone</a></div><div class="ttdeci">void setStrCoordonneesZone(String strCoordonneesZone)</div><div class="ttdef"><b>Definition</b> <a href="#l00061">ZoneTelecommande.java:61</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1ZoneTelecommande_html_a5c1c0eb4348c1c672d6d42dfd8c13b1a"><div class="ttname"><a href="classediteurpanovisu_1_1ZoneTelecommande.html#a5c1c0eb4348c1c672d6d42dfd8c13b1a">editeurpanovisu.ZoneTelecommande.setCentre</a></div><div class="ttdeci">void setCentre(Point2D centre)</div><div class="ttdef"><b>Definition</b> <a href="#l00075">ZoneTelecommande.java:75</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1ZoneTelecommande_html_a938e9780d4353d9fd8218ab9e1b903c2"><div class="ttname"><a href="classediteurpanovisu_1_1ZoneTelecommande.html#a938e9780d4353d9fd8218ab9e1b903c2">editeurpanovisu.ZoneTelecommande.strCoordonneesZone</a></div><div class="ttdeci">String strCoordonneesZone</div><div class="ttdef"><b>Definition</b> <a href="#l00018">ZoneTelecommande.java:18</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1ZoneTelecommande_html_a957b162f5d5a34f7521b0f79c77a37c8"><div class="ttname"><a href="classediteurpanovisu_1_1ZoneTelecommande.html#a957b162f5d5a34f7521b0f79c77a37c8">editeurpanovisu.ZoneTelecommande.getStrIdZone</a></div><div class="ttdeci">String getStrIdZone()</div><div class="ttdef"><b>Definition</b> <a href="#l00025">ZoneTelecommande.java:25</a></div></div>
+<div class="ttc" id="aleaflet_8js_html_a73aff07b65d7c0b09ccf6b4c4f1b7a9d"><div class="ttname"><a href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a></div><div class="ttdeci">function i(t, e)</div><div class="ttdef"><b>Definition</b> <a href="leaflet_8js_source.html#l00005">leaflet.js:5</a></div></div>
+<div class="ttc" id="aleaflet_8js_html_aeb337d295abaddb5ec3cb34cc2e2bbc9"><div class="ttname"><a href="leaflet_8js.html#aeb337d295abaddb5ec3cb34cc2e2bbc9">d</a></div><div class="ttdeci">var d</div><div class="ttdef"><b>Definition</b> <a href="leaflet_8js_source.html#l00005">leaflet.js:5</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="dir_184160a943439c2c782fe244782aeddc.html">editeurpanovisu</a></li><li class="navelem"><a href="ZoneTelecommande_8java.html">ZoneTelecommande.java</a></li>
+    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>

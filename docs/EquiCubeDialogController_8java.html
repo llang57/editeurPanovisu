@@ -1,0 +1,261 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>EditeurPanovisu: Référence du fichier src/editeurpanovisu/EquiCubeDialogController.java</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">EditeurPanovisu<span id="projectnumber">&#160;3.1.0</span>
+   </div>
+   <div id="projectbrief">Éditeur de visites virtuelles 360° Panovisu</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Recherche',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('EquiCubeDialogController_8java.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Chargement...</div>
+<div class="SRStatus" id="Searching">Recherche...</div>
+<div class="SRStatus" id="NoMatches">Aucune correspondance</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Référence du fichier EquiCubeDialogController.java</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>import java.io.File;</code><br />
+<code>import java.io.IOException;</code><br />
+<code>import java.text.DecimalFormat;</code><br />
+<code>import java.util.List;</code><br />
+<code>import java.util.Optional;</code><br />
+<code>import java.util.ResourceBundle;</code><br />
+<code>import java.util.logging.Level;</code><br />
+<code>import java.util.logging.Logger;</code><br />
+<code>import javafx.application.Platform;</code><br />
+<code>import javafx.concurrent.Task;</code><br />
+<code>import javafx.geometry.Pos;</code><br />
+<code>import javafx.scene.Cursor;</code><br />
+<code>import javafx.scene.Scene;</code><br />
+<code>import javafx.scene.control.Alert;</code><br />
+<code>import javafx.scene.control.Alert.AlertType;</code><br />
+<code>import javafx.scene.control.Button;</code><br />
+<code>import javafx.scene.control.ButtonType;</code><br />
+<code>import javafx.scene.control.CheckBox;</code><br />
+<code>import javafx.scene.control.Label;</code><br />
+<code>import javafx.scene.control.ListCell;</code><br />
+<code>import javafx.scene.control.ListView;</code><br />
+<code>import javafx.scene.control.ProgressBar;</code><br />
+<code>import javafx.scene.control.RadioButton;</code><br />
+<code>import javafx.scene.control.Slider;</code><br />
+<code>import javafx.scene.control.ToggleGroup;</code><br />
+<code>import javafx.scene.control.Tooltip;</code><br />
+<code>import javafx.scene.image.Image;</code><br />
+<code>import javafx.scene.image.ImageView;</code><br />
+<code>import javafx.scene.input.Dragboard;</code><br />
+<code>import javafx.scene.input.TransferMode;</code><br />
+<code>import javafx.scene.layout.AnchorPane;</code><br />
+<code>import javafx.scene.layout.HBox;</code><br />
+<code>import javafx.scene.layout.Pane;</code><br />
+<code>import javafx.scene.layout.VBox;</code><br />
+<code>import javafx.scene.paint.Color;</code><br />
+<code>import javafx.scene.text.TextAlignment;</code><br />
+<code>import javafx.stage.FileChooser;</code><br />
+<code>import javafx.stage.Modality;</code><br />
+<code>import javafx.stage.Stage;</code><br />
+<code>import javafx.stage.StageStyle;</code><br />
+<code>import javafx.util.Callback;</code><br />
+<code>import org.apache.commons.imaging.ImagingException;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Graphe des dépendances par inclusion de EquiCubeDialogController.java:</div>
+<div class="dyncontent">
+<div class="center"><img src="EquiCubeDialogController_8java__incl.png" border="0" usemap="#asrc_2editeurpanovisu_2EquiCubeDialogController_8java" loading="lazy" alt=""/></div>
+<map name="asrc_2editeurpanovisu_2EquiCubeDialogController_8java" id="asrc_2editeurpanovisu_2EquiCubeDialogController_8java">
+<area shape="rect" title=" " alt="" coords="3694,5,3897,48"/>
+<area shape="rect" title=" " alt="" coords="5,104,90,131"/>
+<area shape="poly" title=" " alt="" coords="3693,30,2947,31,1823,38,1249,47,736,59,336,76,195,87,101,99,91,101,90,96,100,93,194,81,336,71,736,54,1249,41,1823,33,2947,26,3693,25"/>
+<area shape="rect" title=" " alt="" coords="113,104,248,131"/>
+<area shape="poly" title=" " alt="" coords="3693,31,2976,37,1903,49,866,69,485,82,350,90,260,99,238,103,237,97,259,93,349,85,484,77,866,63,1903,43,2976,31,3693,26"/>
+<area shape="rect" title=" " alt="" coords="272,104,436,131"/>
+<area shape="poly" title=" " alt="" coords="3693,32,1997,53,1021,73,661,85,449,99,420,103,419,98,449,93,661,80,1020,68,1997,48,3693,26"/>
+<area shape="rect" title=" " alt="" coords="460,104,552,131"/>
+<area shape="poly" title=" " alt="" coords="3693,31,3032,34,2054,45,1557,53,1114,65,768,80,646,89,565,99,552,102,551,96,564,93,646,83,768,75,1114,60,1557,48,2054,39,3031,29,3693,26"/>
+<area shape="rect" title=" " alt="" coords="576,104,695,131"/>
+<area shape="poly" title=" " alt="" coords="3694,31,3058,37,2125,50,1230,70,902,83,708,99,689,102,688,97,707,93,901,78,1230,65,2125,45,3058,32,3693,26"/>
+<area shape="rect" title=" " alt="" coords="719,104,885,131"/>
+<area shape="poly" title=" " alt="" coords="3693,31,3146,32,2337,40,1909,49,1507,61,1159,77,897,99,869,103,868,98,897,93,1159,72,1506,55,1909,43,2337,35,3146,27,3693,25"/>
+<area shape="rect" title=" " alt="" coords="909,104,1055,131"/>
+<area shape="poly" title=" " alt="" coords="3693,30,3175,31,2415,39,2014,47,1638,60,1313,76,1068,99,1043,103,1042,98,1067,93,1312,71,1637,54,2014,42,2415,34,3175,26,3693,25"/>
+<area shape="rect" title=" " alt="" coords="1080,104,1234,131"/>
+<area shape="poly" title=" " alt="" coords="3694,31,3205,33,2497,42,2125,51,1776,63,1474,78,1246,99,1220,103,1219,98,1246,93,1474,73,1775,57,2125,46,2497,37,3205,28,3693,25"/>
+<area shape="rect" title=" " alt="" coords="1258,104,1434,131"/>
+<area shape="poly" title=" " alt="" coords="3693,31,3239,36,2589,47,1929,67,1653,81,1445,99,1415,103,1414,98,1445,93,1653,76,1929,62,2589,41,3239,30,3693,26"/>
+<area shape="rect" title=" " alt="" coords="1458,104,1611,131"/>
+<area shape="poly" title=" " alt="" coords="3694,31,3270,36,2671,46,2066,66,1813,81,1623,99,1597,103,1596,98,1622,93,1813,76,2066,61,2671,41,3270,30,3694,26"/>
+<area shape="rect" title=" " alt="" coords="1635,104,1775,131"/>
+<area shape="poly" title=" " alt="" coords="3694,31,3299,36,2748,47,2193,67,1962,81,1788,99,1765,103,1764,97,1787,93,1962,76,2193,62,2748,42,3299,31,3694,26"/>
+<area shape="rect" title=" " alt="" coords="1800,104,1938,131"/>
+<area shape="poly" title=" " alt="" coords="3693,32,3327,37,2824,49,2319,69,2109,82,1951,99,1929,103,1928,97,1950,93,2109,77,2319,63,2823,43,3327,32,3693,26"/>
+<area shape="rect" title=" " alt="" coords="1962,104,2098,131"/>
+<area shape="poly" title=" " alt="" coords="3693,32,3356,38,2899,51,2443,70,2254,83,2111,99,2089,103,2088,97,2110,93,2253,78,2443,65,2899,45,3356,33,3693,27"/>
+<area shape="rect" title=" " alt="" coords="2123,104,2292,131"/>
+<area shape="poly" title=" " alt="" coords="3693,30,3447,31,3103,40,2707,60,2504,77,2305,99,2277,103,2276,98,2304,93,2503,72,2707,55,3103,34,3447,26,3693,24"/>
+<area shape="rect" title=" " alt="" coords="2317,96,2490,139"/>
+<area shape="poly" title=" " alt="" coords="3693,31,3479,34,3186,44,2850,65,2677,80,2505,98,2505,93,2676,74,2850,59,3186,39,3479,29,3693,26"/>
+<area shape="rect" title=" " alt="" coords="2515,104,2695,131"/>
+<area shape="poly" title=" " alt="" coords="3694,33,3509,38,3263,50,2987,70,2708,99,2678,103,2677,98,2707,93,2986,64,3263,45,3509,33,3693,27"/>
+<area shape="rect" title=" " alt="" coords="2719,104,2928,131"/>
+<area shape="poly" title=" " alt="" coords="3694,36,3358,58,3150,76,2940,99,2906,104,2905,98,2939,93,3149,70,3358,52,3694,30"/>
+<area shape="rect" title=" " alt="" coords="2951,104,3154,131"/>
+<area shape="poly" title=" " alt="" coords="3694,40,3453,64,3167,99,3135,104,3134,98,3166,93,3452,58,3693,34"/>
+<area shape="rect" title=" " alt="" coords="3178,104,3352,131"/>
+<area shape="poly" title=" " alt="" coords="3694,45,3364,99,3340,103,3339,98,3363,93,3693,40"/>
+<area shape="rect" title=" " alt="" coords="3376,104,3562,131"/>
+<area shape="poly" title=" " alt="" coords="3720,51,3531,102,3530,97,3718,46"/>
+<area shape="rect" title=" " alt="" coords="3586,104,3778,131"/>
+<area shape="poly" title=" " alt="" coords="3771,51,3712,96,3709,92,3768,46"/>
+<area shape="rect" title=" " alt="" coords="3803,104,4017,131"/>
+<area shape="poly" title=" " alt="" coords="3824,46,3884,93,3881,97,3820,51"/>
+<area shape="rect" title=" " alt="" coords="4042,96,4218,139"/>
+<area shape="poly" title=" " alt="" coords="3875,46,4037,89,4036,94,3873,51"/>
+<area shape="rect" title=" " alt="" coords="4242,104,4418,131"/>
+<area shape="poly" title=" " alt="" coords="3898,40,4231,93,4255,98,4254,103,4230,99,3897,45"/>
+<area shape="rect" title=" " alt="" coords="4441,96,4622,139"/>
+<area shape="poly" title=" " alt="" coords="3898,33,4135,56,4426,93,4426,98,4135,62,3897,39"/>
+<area shape="rect" title=" " alt="" coords="4645,104,4826,131"/>
+<area shape="poly" title=" " alt="" coords="3897,30,4226,51,4430,69,4635,93,4663,98,4662,103,4634,99,4429,74,4226,56,3897,35"/>
+<area shape="rect" title=" " alt="" coords="4850,104,5024,131"/>
+<area shape="poly" title=" " alt="" coords="3898,27,4076,33,4310,45,4573,64,4839,93,4867,98,4866,103,4838,99,4573,70,4309,50,4075,39,3898,33"/>
+<area shape="rect" title=" " alt="" coords="5048,104,5252,131"/>
+<area shape="poly" title=" " alt="" coords="3898,27,4106,32,4389,44,4710,63,5036,93,5071,98,5070,103,5035,99,4710,69,4388,49,4106,38,3897,32"/>
+<area shape="rect" title=" " alt="" coords="5276,104,5467,131"/>
+<area shape="poly" title=" " alt="" coords="3898,25,4141,28,4479,38,4869,58,5068,74,5264,93,5297,98,5296,103,5263,99,5068,79,4868,63,4479,43,4140,33,3898,31"/>
+<area shape="rect" title=" " alt="" coords="5491,104,5702,131"/>
+<area shape="poly" title=" " alt="" coords="3897,25,4172,27,4563,36,5017,56,5251,72,5480,93,5517,98,5517,104,5479,99,5251,78,5017,61,4563,41,4171,32,3897,30"/>
+<area shape="rect" title=" " alt="" coords="5727,104,5936,131"/>
+<area shape="poly" title=" " alt="" coords="3898,27,4801,49,5328,68,5548,80,5714,93,5752,98,5751,104,5714,99,5547,86,5328,74,4801,54,3897,32"/>
+<area shape="rect" title=" " alt="" coords="5960,104,6132,131"/>
+<area shape="poly" title=" " alt="" coords="3898,26,4318,32,4911,43,5510,63,5760,77,5949,93,5978,98,5977,103,5949,99,5760,82,5510,69,4911,49,4318,37,3898,32"/>
+<area shape="rect" title=" " alt="" coords="6155,104,6324,131"/>
+<area shape="poly" title=" " alt="" coords="3898,26,4351,30,5001,41,5660,61,5936,76,6144,93,6173,98,6172,103,6143,99,5935,81,5660,66,5001,46,4351,35,3898,31"/>
+<area shape="rect" title=" " alt="" coords="6348,104,6518,131"/>
+<area shape="poly" title=" " alt="" coords="3898,26,4385,29,5090,39,5808,59,6109,74,6336,93,6366,98,6365,103,6335,99,6108,80,5808,65,5090,45,4385,34,3898,31"/>
+<area shape="rect" title=" " alt="" coords="6542,104,6705,131"/>
+<area shape="poly" title=" " alt="" coords="3898,25,4417,27,5179,36,5581,45,5958,57,6284,73,6530,93,6558,98,6558,103,6530,99,6284,78,5958,62,5580,50,5179,41,4417,33,3897,31"/>
+<area shape="rect" title=" " alt="" coords="6729,104,6937,131"/>
+<area shape="poly" title=" " alt="" coords="3898,26,4448,29,5264,40,6102,60,6452,75,6717,93,6755,98,6755,104,6717,99,6452,80,6101,65,5264,45,4448,35,3897,31"/>
+<area shape="rect" title=" " alt="" coords="6962,104,7128,131"/>
+<area shape="poly" title=" " alt="" coords="3898,25,4487,25,5371,33,5839,41,6281,53,6662,70,6949,93,6978,98,6977,103,6949,99,6661,76,6280,58,5839,46,5371,38,4487,31,3898,30"/>
+<area shape="rect" title=" " alt="" coords="7152,104,7298,131"/>
+<area shape="poly" title=" " alt="" coords="3898,26,4580,33,5593,46,6569,66,6928,79,7140,93,7165,98,7164,103,7139,99,6927,84,6568,71,5593,51,4580,38,3898,31"/>
+<area shape="rect" title=" " alt="" coords="7321,104,7451,131"/>
+<area shape="poly" title=" " alt="" coords="3897,26,4610,31,5677,43,6708,63,7087,77,7221,85,7311,93,7331,97,7330,102,7310,99,7221,90,7087,82,6707,68,5677,48,4610,36,3897,31"/>
+<area shape="rect" title=" " alt="" coords="7475,104,7636,131"/>
+<area shape="poly" title=" " alt="" coords="3898,26,4638,32,5753,45,6832,66,7229,78,7464,93,7492,98,7491,103,7463,99,7229,84,6832,71,5753,51,4638,38,3898,31"/>
+<area shape="rect" title=" " alt="" coords="7660,104,7792,131"/>
+<area shape="poly" title=" " alt="" coords="3898,26,4671,30,5844,41,6445,50,6982,62,7401,76,7549,84,7648,93,7670,97,7669,103,7647,99,7549,90,7400,81,6981,67,6445,55,5844,47,4671,35,3898,31"/>
+<area shape="rect" title=" " alt="" coords="7816,96,8015,139"/>
+<area shape="poly" title=" " alt="" coords="3897,26,5893,46,7077,67,7524,79,7801,93,7800,98,7524,84,7077,72,5893,52,3897,31"/>
+</map>
+</div>
+</div>
+<p><a href="EquiCubeDialogController_8java_source.html">Aller au code source de ce fichier.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:editeurpanovisu_2EEquiCubeDialogController" id="r_editeurpanovisu_2EEquiCubeDialogController"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1EquiCubeDialogController.html">editeurpanovisu.EquiCubeDialogController</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Controleur pour l'affichage des transformations cube / Equi.  <a href="classediteurpanovisu_1_1EquiCubeDialogController.html#details">Plus de détails...</a><br /></td></tr>
+<tr class="memitem:editeurpanovisu_2EEquiCubeDialogController_2EListeTransformationCouleur" id="r_editeurpanovisu_2EEquiCubeDialogController_2EListeTransformationCouleur"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1EquiCubeDialogController_1_1ListeTransformationCouleur.html">editeurpanovisu.EquiCubeDialogController.ListeTransformationCouleur</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Colorisation de la ListView des images à transformer.  <a href="classediteurpanovisu_1_1EquiCubeDialogController_1_1ListeTransformationCouleur.html#details">Plus de détails...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
+Paquetages</h2></td></tr>
+<tr class="memitem:editeurpanovisu" id="r_editeurpanovisu"><td class="memItemLeft" align="right" valign="top">package &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceediteurpanovisu.html">editeurpanovisu</a></td></tr>
+</table>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="dir_184160a943439c2c782fe244782aeddc.html">editeurpanovisu</a></li><li class="navelem"><a href="EquiCubeDialogController_8java.html">EquiCubeDialogController.java</a></li>
+    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>

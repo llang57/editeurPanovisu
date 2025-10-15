@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.EditeurHTML.afficheConfigLien" name="editeurpanovisu.EditeurHTML.afficheConfigLien">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,39,241,81"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1EditeurHTML.html#a0f31da3ecff133531fa99a2e0cc92249" title=" " alt="" coords="291,5,506,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="241,43,275,39,276,44,241,48"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1HotspotHTML.html#a463064a03eee60a92c24e98035bc484e" title=" " alt="" coords="289,72,509,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="241,72,273,76,273,81,241,77"/>
+</map>

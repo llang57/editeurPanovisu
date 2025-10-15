@@ -1,0 +1,337 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>EditeurPanovisu:  Fichier source de src/editeurpanovisu/util/LocalHTTPServer.java</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">EditeurPanovisu<span id="projectnumber">&#160;3.1.0</span>
+   </div>
+   <div id="projectbrief">Éditeur de visites virtuelles 360° Panovisu</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Recherche',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('LocalHTTPServer_8java_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Chargement...</div>
+<div class="SRStatus" id="Searching">Recherche...</div>
+<div class="SRStatus" id="NoMatches">Aucune correspondance</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">LocalHTTPServer.java</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="LocalHTTPServer_8java.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno"><a class="line" href="namespaceediteurpanovisu_1_1util.html">    1</a></span><span class="keyword">package </span>editeurpanovisu.util;</div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keyword">import</span> com.sun.net.httpserver.HttpExchange;</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keyword">import</span> com.sun.net.httpserver.HttpHandler;</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">import</span> com.sun.net.httpserver.HttpServer;</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">import</span> java.io.*;</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">import</span> java.net.InetSocketAddress;</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">import</span> java.nio.file.Files;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">import</span> java.nio.file.Path;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">import</span> java.util.HashMap;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">import</span> java.util.Map;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">import</span> java.util.concurrent.Executors;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span></div>
+<div class="foldopen" id="foldopen00035" data-start="{" data-end="};">
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html">   35</a></span><span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_function" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a174eb2f08516d7ce77b8e4f30f7eedf1">LocalHTTPServer</a> {</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a3cf0cef46773f2ea9780710295db11a0">   37</a></span>    <span class="keyword">private</span> <span class="keyword">static</span> <a class="code hl_function" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a174eb2f08516d7ce77b8e4f30f7eedf1">LocalHTTPServer</a> <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a3cf0cef46773f2ea9780710295db11a0">instance</a>;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a7b9ba4fc3dfb5528bce7e045cbaa9573">   38</a></span>    <span class="keyword">private</span> HttpServer <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a7b9ba4fc3dfb5528bce7e045cbaa9573">server</a>;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#aa0b92e84b019cc17a7275fcab40e2013">   39</a></span>    <span class="keyword">private</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#aa0b92e84b019cc17a7275fcab40e2013">port</a> = 8080;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#aed011a9fe9703b4e8203bf0983f7757d">   40</a></span>    <span class="keyword">private</span> <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#aed011a9fe9703b4e8203bf0983f7757d">rootDirectory</a>;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a2d0c656465f1873707f664253075043e">   41</a></span>    <span class="keyword">private</span> <span class="keywordtype">boolean</span> <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a2d0c656465f1873707f664253075043e">isRunning</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="comment">// Types MIME pour les fichiers communs</span></div>
+<div class="foldopen" id="foldopen00044" data-start="{" data-end="}">
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#ae51d15064e6912f5630af255baa602ff">   44</a></span>    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <a class="code hl_variable" href="OpenLayers_8js.html#aa8a59085f9fc9a3b74d2e1e2281b3b06">Map&lt;String, String&gt;</a> <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a5754ef4f0ed732a6d68ae8f3b2d922a9">MIME_TYPES</a> = <span class="keyword">new</span> HashMap&lt;&gt;();</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keyword">static</span> {</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a5754ef4f0ed732a6d68ae8f3b2d922a9">MIME_TYPES</a>.put(<span class="stringliteral">&quot;html&quot;</span>, <span class="stringliteral">&quot;text/html&quot;</span>);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a5754ef4f0ed732a6d68ae8f3b2d922a9">MIME_TYPES</a>.put(<span class="stringliteral">&quot;htm&quot;</span>, <span class="stringliteral">&quot;text/html&quot;</span>);</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a5754ef4f0ed732a6d68ae8f3b2d922a9">MIME_TYPES</a>.put(<span class="stringliteral">&quot;css&quot;</span>, <span class="stringliteral">&quot;text/css&quot;</span>);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a5754ef4f0ed732a6d68ae8f3b2d922a9">MIME_TYPES</a>.put(<span class="stringliteral">&quot;js&quot;</span>, <span class="stringliteral">&quot;application/javascript&quot;</span>);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a5754ef4f0ed732a6d68ae8f3b2d922a9">MIME_TYPES</a>.put(<span class="stringliteral">&quot;json&quot;</span>, <span class="stringliteral">&quot;application/json&quot;</span>);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a5754ef4f0ed732a6d68ae8f3b2d922a9">MIME_TYPES</a>.put(<span class="stringliteral">&quot;xml&quot;</span>, <span class="stringliteral">&quot;application/xml&quot;</span>);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a5754ef4f0ed732a6d68ae8f3b2d922a9">MIME_TYPES</a>.put(<span class="stringliteral">&quot;png&quot;</span>, <span class="stringliteral">&quot;image/png&quot;</span>);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a5754ef4f0ed732a6d68ae8f3b2d922a9">MIME_TYPES</a>.put(<span class="stringliteral">&quot;jpg&quot;</span>, <span class="stringliteral">&quot;image/jpeg&quot;</span>);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a5754ef4f0ed732a6d68ae8f3b2d922a9">MIME_TYPES</a>.put(<span class="stringliteral">&quot;jpeg&quot;</span>, <span class="stringliteral">&quot;image/jpeg&quot;</span>);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a5754ef4f0ed732a6d68ae8f3b2d922a9">MIME_TYPES</a>.put(<span class="stringliteral">&quot;gif&quot;</span>, <span class="stringliteral">&quot;image/gif&quot;</span>);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a5754ef4f0ed732a6d68ae8f3b2d922a9">MIME_TYPES</a>.put(<span class="stringliteral">&quot;svg&quot;</span>, <span class="stringliteral">&quot;image/svg+xml&quot;</span>);</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a5754ef4f0ed732a6d68ae8f3b2d922a9">MIME_TYPES</a>.put(<span class="stringliteral">&quot;ico&quot;</span>, <span class="stringliteral">&quot;image/x-icon&quot;</span>);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a5754ef4f0ed732a6d68ae8f3b2d922a9">MIME_TYPES</a>.put(<span class="stringliteral">&quot;ttf&quot;</span>, <span class="stringliteral">&quot;font/ttf&quot;</span>);</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a5754ef4f0ed732a6d68ae8f3b2d922a9">MIME_TYPES</a>.put(<span class="stringliteral">&quot;woff&quot;</span>, <span class="stringliteral">&quot;font/woff&quot;</span>);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a5754ef4f0ed732a6d68ae8f3b2d922a9">MIME_TYPES</a>.put(<span class="stringliteral">&quot;woff2&quot;</span>, <span class="stringliteral">&quot;font/woff2&quot;</span>);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a5754ef4f0ed732a6d68ae8f3b2d922a9">MIME_TYPES</a>.put(<span class="stringliteral">&quot;eot&quot;</span>, <span class="stringliteral">&quot;application/vnd.ms-fontobject&quot;</span>);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a5754ef4f0ed732a6d68ae8f3b2d922a9">MIME_TYPES</a>.put(<span class="stringliteral">&quot;otf&quot;</span>, <span class="stringliteral">&quot;font/otf&quot;</span>);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    }</div>
+</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    </div>
+<div class="foldopen" id="foldopen00069" data-start="{" data-end="}">
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a174eb2f08516d7ce77b8e4f30f7eedf1">   69</a></span>    <span class="keyword">private</span> <a class="code hl_function" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a174eb2f08516d7ce77b8e4f30f7eedf1">LocalHTTPServer</a>() {</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    }</div>
+</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    </div>
+<div class="foldopen" id="foldopen00077" data-start="{" data-end="}">
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a65c55feb491509b8848d19b0db7bb123">   77</a></span>    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <a class="code hl_function" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a174eb2f08516d7ce77b8e4f30f7eedf1">LocalHTTPServer</a> <a class="code hl_function" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a65c55feb491509b8848d19b0db7bb123">getInstance</a>() {</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a3cf0cef46773f2ea9780710295db11a0">instance</a> == <span class="keyword">null</span>) {</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a3cf0cef46773f2ea9780710295db11a0">instance</a> = <span class="keyword">new</span> <a class="code hl_function" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a174eb2f08516d7ce77b8e4f30f7eedf1">LocalHTTPServer</a>();</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        }</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a3cf0cef46773f2ea9780710295db11a0">instance</a>;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    }</div>
+</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    </div>
+<div class="foldopen" id="foldopen00089" data-start="{" data-end="}">
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a1ad4983abc374f9561829754f6bb6c54">   89</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a1ad4983abc374f9561829754f6bb6c54">setRootDirectory</a>(<a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#aed011a9fe9703b4e8203bf0983f7757d">rootDirectory</a>) {</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        this.rootDirectory = <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#aed011a9fe9703b4e8203bf0983f7757d">rootDirectory</a>;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    }</div>
+</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    </div>
+<div class="foldopen" id="foldopen00098" data-start="{" data-end="}">
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#aaaeb06041946c5503d0a938200d5a359">   98</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#aaaeb06041946c5503d0a938200d5a359">setPort</a>(<span class="keywordtype">int</span> <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#aa0b92e84b019cc17a7275fcab40e2013">port</a>) {</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        this.port = <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#aa0b92e84b019cc17a7275fcab40e2013">port</a>;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    }</div>
+</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    </div>
+<div class="foldopen" id="foldopen00107" data-start="{" data-end="}">
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a80ee20c7f7ee7c51c8ab61eb097d031a">  107</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a80ee20c7f7ee7c51c8ab61eb097d031a">start</a>() throws IOException {</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a2d0c656465f1873707f664253075043e">isRunning</a>) {</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>            System.out.println(<span class="stringliteral">&quot;⚠️ Le serveur HTTP est déjà démarré&quot;</span>);</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>            <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        }</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#aed011a9fe9703b4e8203bf0983f7757d">rootDirectory</a> == <span class="keyword">null</span> || <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#aed011a9fe9703b4e8203bf0983f7757d">rootDirectory</a>.isEmpty()) {</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>            <span class="keywordflow">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="stringliteral">&quot;Le répertoire racine n&#39;est pas défini&quot;</span>);</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        }</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        <span class="comment">// Trouver un port disponible</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        <span class="keywordtype">int</span> tentatives = 0;</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        <span class="keywordflow">while</span> (tentatives &lt; 10) {</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>            <span class="keywordflow">try</span> {</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>                <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a7b9ba4fc3dfb5528bce7e045cbaa9573">server</a> = HttpServer.create(<span class="keyword">new</span> InetSocketAddress(<a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#aa0b92e84b019cc17a7275fcab40e2013">port</a>), 0);</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>            } <span class="keywordflow">catch</span> (IOException <a class="code hl_variable" href="leaflet_8js.html#ab5902775854a8b8440bcd25e0fe1c120">e</a>) {</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#aa0b92e84b019cc17a7275fcab40e2013">port</a>++;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>                tentatives++;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>                <span class="keywordflow">if</span> (tentatives &gt;= 10) {</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>                    <span class="keywordflow">throw</span> <span class="keyword">new</span> IOException(<span class="stringliteral">&quot;Impossible de trouver un port disponible&quot;</span>, <a class="code hl_variable" href="leaflet_8js.html#ab5902775854a8b8440bcd25e0fe1c120">e</a>);</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>                }</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>            }</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        }</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        </div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>        <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a7b9ba4fc3dfb5528bce7e045cbaa9573">server</a>.createContext(<span class="stringliteral">&quot;/&quot;</span>, <span class="keyword">new</span> <a class="code hl_class" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer_1_1FileHandler.html">FileHandler</a>(<a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#aed011a9fe9703b4e8203bf0983f7757d">rootDirectory</a>));</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a7b9ba4fc3dfb5528bce7e045cbaa9573">server</a>.setExecutor(Executors.newFixedThreadPool(4));</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a7b9ba4fc3dfb5528bce7e045cbaa9573">server</a>.start();</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a2d0c656465f1873707f664253075043e">isRunning</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        </div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        System.out.println(<span class="stringliteral">&quot;✅ Serveur HTTP démarré sur le port &quot;</span> + <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#aa0b92e84b019cc17a7275fcab40e2013">port</a>);</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        System.out.println(<span class="stringliteral">&quot;📂 Répertoire racine : &quot;</span> + <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#aed011a9fe9703b4e8203bf0983f7757d">rootDirectory</a>);</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        System.out.println(<span class="stringliteral">&quot;🌐 URL : &quot;</span> + <a class="code hl_function" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a318e7e3a86fcf1fdea6e1d962fc82740">getUrl</a>());</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    }</div>
+</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    </div>
+<div class="foldopen" id="foldopen00145" data-start="{" data-end="}">
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a8a3d24f63439c2e54fb502e869ff0502">  145</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a8a3d24f63439c2e54fb502e869ff0502">stop</a>() {</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a7b9ba4fc3dfb5528bce7e045cbaa9573">server</a> != <span class="keyword">null</span> &amp;&amp; <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a2d0c656465f1873707f664253075043e">isRunning</a>) {</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>            <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a7b9ba4fc3dfb5528bce7e045cbaa9573">server</a>.stop(0);</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>            <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a2d0c656465f1873707f664253075043e">isRunning</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>            System.out.println(<span class="stringliteral">&quot;⏹️ Serveur HTTP arrêté&quot;</span>);</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        }</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    }</div>
+</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    </div>
+<div class="foldopen" id="foldopen00158" data-start="{" data-end="}">
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a6d0778fbd7210e1a3f653128cef32910">  158</a></span>    <span class="keyword">public</span> <span class="keywordtype">boolean</span> <a class="code hl_function" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a6d0778fbd7210e1a3f653128cef32910">isRunning</a>() {</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a2d0c656465f1873707f664253075043e">isRunning</a>;</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    }</div>
+</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    </div>
+<div class="foldopen" id="foldopen00167" data-start="{" data-end="}">
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a318e7e3a86fcf1fdea6e1d962fc82740">  167</a></span>    <span class="keyword">public</span> <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_function" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a318e7e3a86fcf1fdea6e1d962fc82740">getUrl</a>() {</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;http://localhost:&quot;</span> + <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#aa0b92e84b019cc17a7275fcab40e2013">port</a>;</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    }</div>
+</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    </div>
+<div class="foldopen" id="foldopen00176" data-start="{" data-end="}">
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#afe23288e0131d72c973c56bc3f3312c8">  176</a></span>    <span class="keyword">public</span> <span class="keywordtype">int</span> <a class="code hl_function" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#afe23288e0131d72c973c56bc3f3312c8">getPort</a>() {</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#aa0b92e84b019cc17a7275fcab40e2013">port</a>;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    }</div>
+</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    </div>
+<div class="foldopen" id="foldopen00183" data-start="{" data-end="};">
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer_1_1FileHandler.html">  183</a></span>    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class </span><a class="code hl_function" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer_1_1FileHandler.html#a072b6696fdc74014984d274266f662f0">FileHandler</a> <span class="keyword">implements</span> HttpHandler {</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer_1_1FileHandler.html#ae96c66a4a24aa52002341019d49111d4">  184</a></span>        <span class="keyword">private</span> <span class="keyword">final</span> <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer_1_1FileHandler.html#ae96c66a4a24aa52002341019d49111d4">rootDirectory</a>;</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>        </div>
+<div class="foldopen" id="foldopen00186" data-start="{" data-end="}">
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer_1_1FileHandler.html#a072b6696fdc74014984d274266f662f0">  186</a></span>        <span class="keyword">public</span> <a class="code hl_function" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer_1_1FileHandler.html#a072b6696fdc74014984d274266f662f0">FileHandler</a>(<a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer_1_1FileHandler.html#ae96c66a4a24aa52002341019d49111d4">rootDirectory</a>) {</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>            this.rootDirectory = <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer_1_1FileHandler.html#ae96c66a4a24aa52002341019d49111d4">rootDirectory</a>;</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>        }</div>
+</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>        </div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>        @Override</div>
+<div class="foldopen" id="foldopen00191" data-start="{" data-end="}">
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer_1_1FileHandler.html#a6f748bf1025e50fff07e29fe313cf8a8">  191</a></span>        <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer_1_1FileHandler.html#a6f748bf1025e50fff07e29fe313cf8a8">handle</a>(HttpExchange exchange) <span class="keywordflow">throws</span> IOException {</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>            <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> requestPath = exchange.getRequestURI().getPath();</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>            </div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>            <span class="comment">// Si la requête est pour &quot;/&quot;, servir &quot;index.html&quot;</span></div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>            <span class="keywordflow">if</span> (requestPath.equals(<span class="stringliteral">&quot;/&quot;</span>)) {</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>                requestPath = <span class="stringliteral">&quot;/index.html&quot;</span>;</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>            }</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>            </div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>            <span class="comment">// Construire le chemin du fichier</span></div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>            <a class="code hl_variable" href="three_8min1_8js.html#a930e3162b7618d0d27ee5b4e543a58b8">Path</a> filePath = <a class="code hl_variable" href="three_8min1_8js.html#a930e3162b7618d0d27ee5b4e543a58b8">Path</a>.of(<a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer_1_1FileHandler.html#ae96c66a4a24aa52002341019d49111d4">rootDirectory</a> + requestPath);</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>            File file = filePath.toFile();</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>            </div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>            <span class="keywordflow">if</span> (!file.exists() || file.isDirectory()) {</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>                <span class="comment">// Fichier non trouvé</span></div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>                <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> response = <span class="stringliteral">&quot;404 - Fichier non trouvé&quot;</span>;</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>                exchange.sendResponseHeaders(404, response.length());</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>                <span class="keywordflow">try</span> (OutputStream os = exchange.getResponseBody()) {</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>                    os.write(response.getBytes());</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>                }</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>                <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>            }</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>            </div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>            <span class="comment">// Déterminer le type MIME</span></div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>            <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> extension = <a class="code hl_function" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer_1_1FileHandler.html#ae3192d2797484ccb999583c6f4ece6b9">getFileExtension</a>(file.getName());</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>            <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> mimeType = <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a5754ef4f0ed732a6d68ae8f3b2d922a9">MIME_TYPES</a>.getOrDefault(extension, <span class="stringliteral">&quot;application/octet-stream&quot;</span>);</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>            </div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>            <span class="comment">// Envoyer le fichier</span></div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>            exchange.getResponseHeaders().set(<span class="stringliteral">&quot;Content-Type&quot;</span>, mimeType);</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>            </div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>            <span class="comment">// Ajouter les headers CORS pour éviter les problèmes</span></div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>            exchange.getResponseHeaders().set(<span class="stringliteral">&quot;Access-Control-Allow-Origin&quot;</span>, <span class="stringliteral">&quot;*&quot;</span>);</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>            exchange.getResponseHeaders().set(<span class="stringliteral">&quot;Access-Control-Allow-Methods&quot;</span>, <span class="stringliteral">&quot;GET, POST, OPTIONS&quot;</span>);</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>            exchange.getResponseHeaders().set(<span class="stringliteral">&quot;Access-Control-Allow-Headers&quot;</span>, <span class="stringliteral">&quot;Content-Type&quot;</span>);</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>            </div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>            <span class="keywordtype">byte</span>[] fileBytes = Files.readAllBytes(filePath);</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>            exchange.sendResponseHeaders(200, fileBytes.length);</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>            </div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>            <span class="keywordflow">try</span> (OutputStream os = exchange.getResponseBody()) {</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>                os.write(fileBytes);</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>            }</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>        }</div>
+</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>        </div>
+<div class="foldopen" id="foldopen00239" data-start="{" data-end="}">
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer_1_1FileHandler.html#ae3192d2797484ccb999583c6f4ece6b9">  239</a></span>        <span class="keyword">private</span> <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_function" href="classediteurpanovisu_1_1util_1_1LocalHTTPServer_1_1FileHandler.html#ae3192d2797484ccb999583c6f4ece6b9">getFileExtension</a>(<a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> fileName) {</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>            <span class="keywordtype">int</span> lastDot = fileName.lastIndexOf(<span class="charliteral">&#39;.&#39;</span>);</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>            <span class="keywordflow">if</span> (lastDot &gt; 0 &amp;&amp; lastDot &lt; fileName.length() - 1) {</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>                <span class="keywordflow">return</span> fileName.substring(lastDot + 1).toLowerCase();</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>            }</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>            <span class="keywordflow">return</span> <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>        }</div>
+</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>    }</div>
+</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>}</div>
+</div>
+<div class="ttc" id="aOpenLayers_8js_html_a4ca754488880c6622cdd0e257fe5f5ea"><div class="ttname"><a href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a></div><div class="ttdeci">OpenLayers String</div><div class="ttdef"><b>Definition</b> <a href="OpenLayers_8js_source.html#l00059">OpenLayers.js:59</a></div></div>
+<div class="ttc" id="aOpenLayers_8js_html_aa8a59085f9fc9a3b74d2e1e2281b3b06"><div class="ttname"><a href="OpenLayers_8js.html#aa8a59085f9fc9a3b74d2e1e2281b3b06">Map</a></div><div class="ttdeci">OpenLayers Map</div><div class="ttdef"><b>Definition</b> <a href="OpenLayers_8js_source.html#l00159">OpenLayers.js:159</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1util_1_1LocalHTTPServer_1_1FileHandler_html"><div class="ttname"><a href="classediteurpanovisu_1_1util_1_1LocalHTTPServer_1_1FileHandler.html">editeurpanovisu.util.LocalHTTPServer.FileHandler</a></div><div class="ttdoc">Handler HTTP pour servir les fichiers.</div><div class="ttdef"><b>Definition</b> <a href="#l00183">LocalHTTPServer.java:183</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1util_1_1LocalHTTPServer_1_1FileHandler_html_a072b6696fdc74014984d274266f662f0"><div class="ttname"><a href="classediteurpanovisu_1_1util_1_1LocalHTTPServer_1_1FileHandler.html#a072b6696fdc74014984d274266f662f0">editeurpanovisu.util.LocalHTTPServer.FileHandler.FileHandler</a></div><div class="ttdeci">FileHandler(String rootDirectory)</div><div class="ttdef"><b>Definition</b> <a href="#l00186">LocalHTTPServer.java:186</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1util_1_1LocalHTTPServer_1_1FileHandler_html_a6f748bf1025e50fff07e29fe313cf8a8"><div class="ttname"><a href="classediteurpanovisu_1_1util_1_1LocalHTTPServer_1_1FileHandler.html#a6f748bf1025e50fff07e29fe313cf8a8">editeurpanovisu.util.LocalHTTPServer.FileHandler.handle</a></div><div class="ttdeci">void handle(HttpExchange exchange)</div><div class="ttdef"><b>Definition</b> <a href="#l00191">LocalHTTPServer.java:191</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1util_1_1LocalHTTPServer_1_1FileHandler_html_ae3192d2797484ccb999583c6f4ece6b9"><div class="ttname"><a href="classediteurpanovisu_1_1util_1_1LocalHTTPServer_1_1FileHandler.html#ae3192d2797484ccb999583c6f4ece6b9">editeurpanovisu.util.LocalHTTPServer.FileHandler.getFileExtension</a></div><div class="ttdeci">String getFileExtension(String fileName)</div><div class="ttdoc">Extrait l&#39;extension d&#39;un nom de fichier.</div><div class="ttdef"><b>Definition</b> <a href="#l00239">LocalHTTPServer.java:239</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1util_1_1LocalHTTPServer_1_1FileHandler_html_ae96c66a4a24aa52002341019d49111d4"><div class="ttname"><a href="classediteurpanovisu_1_1util_1_1LocalHTTPServer_1_1FileHandler.html#ae96c66a4a24aa52002341019d49111d4">editeurpanovisu.util.LocalHTTPServer.FileHandler.rootDirectory</a></div><div class="ttdeci">final String rootDirectory</div><div class="ttdef"><b>Definition</b> <a href="#l00184">LocalHTTPServer.java:184</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1util_1_1LocalHTTPServer_html_a174eb2f08516d7ce77b8e4f30f7eedf1"><div class="ttname"><a href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a174eb2f08516d7ce77b8e4f30f7eedf1">editeurpanovisu.util.LocalHTTPServer.LocalHTTPServer</a></div><div class="ttdeci">LocalHTTPServer()</div><div class="ttdoc">Constructeur privé (pattern Singleton)</div><div class="ttdef"><b>Definition</b> <a href="#l00069">LocalHTTPServer.java:69</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1util_1_1LocalHTTPServer_html_a1ad4983abc374f9561829754f6bb6c54"><div class="ttname"><a href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a1ad4983abc374f9561829754f6bb6c54">editeurpanovisu.util.LocalHTTPServer.setRootDirectory</a></div><div class="ttdeci">void setRootDirectory(String rootDirectory)</div><div class="ttdoc">Définit le répertoire racine à servir.</div><div class="ttdef"><b>Definition</b> <a href="#l00089">LocalHTTPServer.java:89</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1util_1_1LocalHTTPServer_html_a2d0c656465f1873707f664253075043e"><div class="ttname"><a href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a2d0c656465f1873707f664253075043e">editeurpanovisu.util.LocalHTTPServer.isRunning</a></div><div class="ttdeci">boolean isRunning</div><div class="ttdef"><b>Definition</b> <a href="#l00041">LocalHTTPServer.java:41</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1util_1_1LocalHTTPServer_html_a318e7e3a86fcf1fdea6e1d962fc82740"><div class="ttname"><a href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a318e7e3a86fcf1fdea6e1d962fc82740">editeurpanovisu.util.LocalHTTPServer.getUrl</a></div><div class="ttdeci">String getUrl()</div><div class="ttdoc">Obtient l&#39;URL complète du serveur.</div><div class="ttdef"><b>Definition</b> <a href="#l00167">LocalHTTPServer.java:167</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1util_1_1LocalHTTPServer_html_a3cf0cef46773f2ea9780710295db11a0"><div class="ttname"><a href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a3cf0cef46773f2ea9780710295db11a0">editeurpanovisu.util.LocalHTTPServer.instance</a></div><div class="ttdeci">static LocalHTTPServer instance</div><div class="ttdef"><b>Definition</b> <a href="#l00037">LocalHTTPServer.java:37</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1util_1_1LocalHTTPServer_html_a5754ef4f0ed732a6d68ae8f3b2d922a9"><div class="ttname"><a href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a5754ef4f0ed732a6d68ae8f3b2d922a9">editeurpanovisu.util.LocalHTTPServer.MIME_TYPES</a></div><div class="ttdeci">static final Map&lt; String, String &gt; MIME_TYPES</div><div class="ttdef"><b>Definition</b> <a href="#l00044">LocalHTTPServer.java:44</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1util_1_1LocalHTTPServer_html_a65c55feb491509b8848d19b0db7bb123"><div class="ttname"><a href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a65c55feb491509b8848d19b0db7bb123">editeurpanovisu.util.LocalHTTPServer.getInstance</a></div><div class="ttdeci">static synchronized LocalHTTPServer getInstance()</div><div class="ttdoc">Obtient l&#39;instance unique du serveur.</div><div class="ttdef"><b>Definition</b> <a href="#l00077">LocalHTTPServer.java:77</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1util_1_1LocalHTTPServer_html_a6d0778fbd7210e1a3f653128cef32910"><div class="ttname"><a href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a6d0778fbd7210e1a3f653128cef32910">editeurpanovisu.util.LocalHTTPServer.isRunning</a></div><div class="ttdeci">boolean isRunning()</div><div class="ttdoc">Vérifie si le serveur est en cours d&#39;exécution.</div><div class="ttdef"><b>Definition</b> <a href="#l00158">LocalHTTPServer.java:158</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1util_1_1LocalHTTPServer_html_a7b9ba4fc3dfb5528bce7e045cbaa9573"><div class="ttname"><a href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a7b9ba4fc3dfb5528bce7e045cbaa9573">editeurpanovisu.util.LocalHTTPServer.server</a></div><div class="ttdeci">HttpServer server</div><div class="ttdef"><b>Definition</b> <a href="#l00038">LocalHTTPServer.java:38</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1util_1_1LocalHTTPServer_html_a80ee20c7f7ee7c51c8ab61eb097d031a"><div class="ttname"><a href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a80ee20c7f7ee7c51c8ab61eb097d031a">editeurpanovisu.util.LocalHTTPServer.start</a></div><div class="ttdeci">void start()</div><div class="ttdoc">Démarre le serveur HTTP.</div><div class="ttdef"><b>Definition</b> <a href="#l00107">LocalHTTPServer.java:107</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1util_1_1LocalHTTPServer_html_a8a3d24f63439c2e54fb502e869ff0502"><div class="ttname"><a href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a8a3d24f63439c2e54fb502e869ff0502">editeurpanovisu.util.LocalHTTPServer.stop</a></div><div class="ttdeci">void stop()</div><div class="ttdoc">Arrête le serveur HTTP.</div><div class="ttdef"><b>Definition</b> <a href="#l00145">LocalHTTPServer.java:145</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1util_1_1LocalHTTPServer_html_aa0b92e84b019cc17a7275fcab40e2013"><div class="ttname"><a href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#aa0b92e84b019cc17a7275fcab40e2013">editeurpanovisu.util.LocalHTTPServer.port</a></div><div class="ttdeci">int port</div><div class="ttdef"><b>Definition</b> <a href="#l00039">LocalHTTPServer.java:39</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1util_1_1LocalHTTPServer_html_aaaeb06041946c5503d0a938200d5a359"><div class="ttname"><a href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#aaaeb06041946c5503d0a938200d5a359">editeurpanovisu.util.LocalHTTPServer.setPort</a></div><div class="ttdeci">void setPort(int port)</div><div class="ttdoc">Définit le port du serveur.</div><div class="ttdef"><b>Definition</b> <a href="#l00098">LocalHTTPServer.java:98</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1util_1_1LocalHTTPServer_html_aed011a9fe9703b4e8203bf0983f7757d"><div class="ttname"><a href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#aed011a9fe9703b4e8203bf0983f7757d">editeurpanovisu.util.LocalHTTPServer.rootDirectory</a></div><div class="ttdeci">String rootDirectory</div><div class="ttdef"><b>Definition</b> <a href="#l00040">LocalHTTPServer.java:40</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1util_1_1LocalHTTPServer_html_afe23288e0131d72c973c56bc3f3312c8"><div class="ttname"><a href="classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#afe23288e0131d72c973c56bc3f3312c8">editeurpanovisu.util.LocalHTTPServer.getPort</a></div><div class="ttdeci">int getPort()</div><div class="ttdoc">Obtient le numéro de port utilisé</div><div class="ttdef"><b>Definition</b> <a href="#l00176">LocalHTTPServer.java:176</a></div></div>
+<div class="ttc" id="aleaflet_8js_html_ab5902775854a8b8440bcd25e0fe1c120"><div class="ttname"><a href="leaflet_8js.html#ab5902775854a8b8440bcd25e0fe1c120">e</a></div><div class="ttdeci">var e</div><div class="ttdef"><b>Definition</b> <a href="leaflet_8js_source.html#l00005">leaflet.js:5</a></div></div>
+<div class="ttc" id="athree_8min1_8js_html_a930e3162b7618d0d27ee5b4e543a58b8"><div class="ttname"><a href="three_8min1_8js.html#a930e3162b7618d0d27ee5b4e543a58b8">Path</a></div><div class="ttdeci">THREE Path</div><div class="ttdef"><b>Definition</b> <a href="three_8min1_8js_source.html#l00625">three.min1.js:625</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="dir_184160a943439c2c782fe244782aeddc.html">editeurpanovisu</a></li><li class="navelem"><a href="dir_58297869b1328f064a94224c606048cd.html">util</a></li><li class="navelem"><a href="LocalHTTPServer_8java.html">LocalHTTPServer.java</a></li>
+    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>

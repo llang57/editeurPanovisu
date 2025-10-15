@@ -1,0 +1,9 @@
+<map id="editeurpanovisu.Plan.getHauteurPlan" name="editeurpanovisu.Plan.getHauteurPlan">
+<area shape="rect" id="Node000001" title=" " alt="" coords="916,5,1081,48"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1EditeurPanovisu.html#a94e36b9e9d09ab1a4c852b8a8cefa927" title="Génère la visite virtuelle HTML complète." alt="" coords="614,5,868,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="901,29,869,29,869,24,901,24"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1EditeurPanovisu.html#ac912b80c1f2ac97def60ff005c5c480b" title=" " alt="" coords="294,13,566,40"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="598,29,566,29,566,24,598,24"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1EditeurPanovisu.html#a86c393eee88f54c694db994ddd85b90d" title=" " alt="" coords="5,5,246,48"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="278,29,246,29,246,24,278,24"/>
+</map>

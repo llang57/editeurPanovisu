@@ -1,0 +1,9 @@
+<map id="editeurpanovisu.PaneOutil.affiche" name="editeurpanovisu.PaneOutil.affiche">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,80,221,107"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1PaneOutil.html#ab1329e6891c20bdba55c279b44f72ff7" title=" " alt="" coords="269,5,480,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="168,77,273,50,274,55,169,82"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1PaneOutil.html#ae31c93e705e43ba0cca41edcff34e335" title=" " alt="" coords="277,72,472,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="221,91,262,91,262,96,221,96"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#abf5830200d869e463ea38504a19985f6" title=" " alt="" coords="355,139,394,165"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="176,105,340,142,339,147,175,110"/>
+</map>

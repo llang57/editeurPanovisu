@@ -1,0 +1,290 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>EditeurPanovisu:  Fichier source de src/editeurpanovisu/PanoramicCube.java</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">EditeurPanovisu<span id="projectnumber">&#160;3.1.0</span>
+   </div>
+   <div id="projectbrief">Éditeur de visites virtuelles 360° Panovisu</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Recherche',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('PanoramicCube_8java_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Chargement...</div>
+<div class="SRStatus" id="Searching">Recherche...</div>
+<div class="SRStatus" id="NoMatches">Aucune correspondance</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">PanoramicCube.java</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="PanoramicCube_8java.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="keyword">package </span>editeurpanovisu;</div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keyword">import</span> javafx.scene.Group;</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keyword">import</span> javafx.scene.image.Image;</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">import</span> javafx.scene.image.PixelReader;</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">import</span> javafx.scene.image.PixelWriter;</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">import</span> javafx.scene.image.WritableImage;</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">import</span> javafx.scene.paint.Color;</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">import</span> javafx.scene.paint.PhongMaterial;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">import</span> javafx.scene.shape.Box;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">import</span> javafx.scene.shape.CullFace;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">import</span> javafx.scene.transform.Rotate;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span></div>
+<div class="foldopen" id="foldopen00020" data-start="{" data-end="};">
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1PanoramicCube.html">   20</a></span><span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_function" href="classediteurpanovisu_1_1PanoramicCube.html#a011d3c5a56b7428f54133c89693d66ff">PanoramicCube</a> <span class="keyword">extends</span> Group {</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1PanoramicCube.html#a365372f1788979824f21da092c33ccd8">   22</a></span>    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keywordtype">double</span> <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a365372f1788979824f21da092c33ccd8">CUBE_SIZE</a> = 400;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1PanoramicCube.html#a504a737fe58c77d521a321cb6ca428b4">   23</a></span>    <span class="keyword">private</span> <span class="keyword">final</span> Box[] <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a504a737fe58c77d521a321cb6ca428b4">faces</a> = <span class="keyword">new</span> Box[6];</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1PanoramicCube.html#aa66a8b0610ca3556b8b6731e20854fc0">   24</a></span>    <span class="keyword">private</span> <span class="keyword">final</span> PhongMaterial[] <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#aa66a8b0610ca3556b8b6731e20854fc0">materials</a> = <span class="keyword">new</span> PhongMaterial[6];</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="comment">// Indices des faces</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1PanoramicCube.html#af155dd2adb7fb46ce4f656161e11121c">   27</a></span>    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#af155dd2adb7fb46ce4f656161e11121c">FRONT</a> = 0;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1PanoramicCube.html#a707a6184593803c5f70413a8a43b6962">   28</a></span>    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a707a6184593803c5f70413a8a43b6962">BACK</a> = 1;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1PanoramicCube.html#adbdae4a917c5a2e9a88f0515e49eaf03">   29</a></span>    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#adbdae4a917c5a2e9a88f0515e49eaf03">LEFT</a> = 2;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1PanoramicCube.html#add9b6413be01face18e285c77ef5429d">   30</a></span>    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#add9b6413be01face18e285c77ef5429d">RIGHT</a> = 3;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1PanoramicCube.html#a572226277673b22a67dbba414aef85bf">   31</a></span>    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a572226277673b22a67dbba414aef85bf">TOP</a> = 4;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1PanoramicCube.html#aed9036402e1997c30544b7c6f8c6e674">   32</a></span>    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#aed9036402e1997c30544b7c6f8c6e674">BOTTOM</a> = 5;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    </div>
+<div class="foldopen" id="foldopen00034" data-start="{" data-end="}">
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1PanoramicCube.html#a011d3c5a56b7428f54133c89693d66ff">   34</a></span>    <span class="keyword">public</span> <a class="code hl_function" href="classediteurpanovisu_1_1PanoramicCube.html#a011d3c5a56b7428f54133c89693d66ff">PanoramicCube</a>() {</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        <a class="code hl_function" href="classediteurpanovisu_1_1PanoramicCube.html#ae030a871c78c8d44cbaa9f08cb6c572b">createCubeFaces</a>();</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <span class="comment">// Rotation initiale de 180° pour corriger l&#39;orientation</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        this.setRotationAxis(Rotate.Y_AXIS);</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        this.setRotate(180);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    }</div>
+</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    </div>
+<div class="foldopen" id="foldopen00044" data-start="{" data-end="}">
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1PanoramicCube.html#ae030a871c78c8d44cbaa9f08cb6c572b">   44</a></span>    <span class="keyword">private</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1PanoramicCube.html#ae030a871c78c8d44cbaa9f08cb6c572b">createCubeFaces</a>() {</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <span class="keywordtype">double</span> halfSize = <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a365372f1788979824f21da092c33ccd8">CUBE_SIZE</a> / 2;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <span class="comment">// Face AVANT (Front) - Z positif</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a504a737fe58c77d521a321cb6ca428b4">faces</a>[<a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#af155dd2adb7fb46ce4f656161e11121c">FRONT</a>] = <span class="keyword">new</span> Box(<a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a365372f1788979824f21da092c33ccd8">CUBE_SIZE</a>, <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a365372f1788979824f21da092c33ccd8">CUBE_SIZE</a>, 0.1);</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a504a737fe58c77d521a321cb6ca428b4">faces</a>[<a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#af155dd2adb7fb46ce4f656161e11121c">FRONT</a>].setTranslateZ(halfSize);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="comment">// Face ARRIÈRE (Back) - Z négatif</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a504a737fe58c77d521a321cb6ca428b4">faces</a>[<a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a707a6184593803c5f70413a8a43b6962">BACK</a>] = <span class="keyword">new</span> Box(<a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a365372f1788979824f21da092c33ccd8">CUBE_SIZE</a>, <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a365372f1788979824f21da092c33ccd8">CUBE_SIZE</a>, 0.1);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a504a737fe58c77d521a321cb6ca428b4">faces</a>[<a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a707a6184593803c5f70413a8a43b6962">BACK</a>].setTranslateZ(-halfSize);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a504a737fe58c77d521a321cb6ca428b4">faces</a>[<a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a707a6184593803c5f70413a8a43b6962">BACK</a>].setRotationAxis(Rotate.Y_AXIS);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a504a737fe58c77d521a321cb6ca428b4">faces</a>[<a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a707a6184593803c5f70413a8a43b6962">BACK</a>].setRotate(180);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <span class="comment">// Face GAUCHE (Left) - X négatif</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a504a737fe58c77d521a321cb6ca428b4">faces</a>[<a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#adbdae4a917c5a2e9a88f0515e49eaf03">LEFT</a>] = <span class="keyword">new</span> Box(0.1, <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a365372f1788979824f21da092c33ccd8">CUBE_SIZE</a>, <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a365372f1788979824f21da092c33ccd8">CUBE_SIZE</a>);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a504a737fe58c77d521a321cb6ca428b4">faces</a>[<a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#adbdae4a917c5a2e9a88f0515e49eaf03">LEFT</a>].setTranslateX(-halfSize);</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <span class="comment">// Face DROITE (Right) - X positif</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a504a737fe58c77d521a321cb6ca428b4">faces</a>[<a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#add9b6413be01face18e285c77ef5429d">RIGHT</a>] = <span class="keyword">new</span> Box(0.1, <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a365372f1788979824f21da092c33ccd8">CUBE_SIZE</a>, <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a365372f1788979824f21da092c33ccd8">CUBE_SIZE</a>);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a504a737fe58c77d521a321cb6ca428b4">faces</a>[<a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#add9b6413be01face18e285c77ef5429d">RIGHT</a>].setTranslateX(halfSize);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <span class="comment">// Face HAUT (Top) - Y négatif</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a504a737fe58c77d521a321cb6ca428b4">faces</a>[<a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a572226277673b22a67dbba414aef85bf">TOP</a>] = <span class="keyword">new</span> Box(<a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a365372f1788979824f21da092c33ccd8">CUBE_SIZE</a>, 0.1, <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a365372f1788979824f21da092c33ccd8">CUBE_SIZE</a>);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a504a737fe58c77d521a321cb6ca428b4">faces</a>[<a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a572226277673b22a67dbba414aef85bf">TOP</a>].setTranslateY(-halfSize);</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="comment">// Face BAS (Bottom) - Y positif</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a504a737fe58c77d521a321cb6ca428b4">faces</a>[<a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#aed9036402e1997c30544b7c6f8c6e674">BOTTOM</a>] = <span class="keyword">new</span> Box(<a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a365372f1788979824f21da092c33ccd8">CUBE_SIZE</a>, 0.1, <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a365372f1788979824f21da092c33ccd8">CUBE_SIZE</a>);</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a504a737fe58c77d521a321cb6ca428b4">faces</a>[<a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#aed9036402e1997c30544b7c6f8c6e674">BOTTOM</a>].setTranslateY(halfSize);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        <span class="comment">// Configurer les matériaux et ajouter au groupe</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a> = 0; <a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a> &lt; 6; <a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>++) {</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>            <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#aa66a8b0610ca3556b8b6731e20854fc0">materials</a>[<a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>] = <span class="keyword">new</span> PhongMaterial();</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>            <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#aa66a8b0610ca3556b8b6731e20854fc0">materials</a>[<a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>].setDiffuseColor(<a class="code hl_variable" href="three_8min1_8js.html#a83dbaf53627db610030f458d575b3074">Color</a>.BLACK); <span class="comment">// Noir pour éliminer l&#39;éclairage diffus</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>            <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#aa66a8b0610ca3556b8b6731e20854fc0">materials</a>[<a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>].setSpecularColor(<a class="code hl_variable" href="three_8min1_8js.html#a83dbaf53627db610030f458d575b3074">Color</a>.BLACK); <span class="comment">// Pas de reflets spéculaires</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>            <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a504a737fe58c77d521a321cb6ca428b4">faces</a>[<a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>].setMaterial(<a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#aa66a8b0610ca3556b8b6731e20854fc0">materials</a>[<a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>]);</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a504a737fe58c77d521a321cb6ca428b4">faces</a>[<a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>].setCullFace(CullFace.BACK); <span class="comment">// Cacher les faces arrière, montrer les faces avant (intérieur)</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>            getChildren().add(<a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a504a737fe58c77d521a321cb6ca428b4">faces</a>[<a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>]);</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        }</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    }</div>
+</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    </div>
+<div class="foldopen" id="foldopen00090" data-start="{" data-end="}">
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1PanoramicCube.html#a8ea2acf3ee3e9946ce530a960d38bffe">   90</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1PanoramicCube.html#a8ea2acf3ee3e9946ce530a960d38bffe">setPanoramicImage</a>(Image panoramicImage) {</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        <span class="keywordflow">if</span> (panoramicImage == <span class="keyword">null</span>) {</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>            <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        }</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        <span class="keywordflow">try</span> {</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>            <span class="comment">// Redimensionner l&#39;image au ratio 2:1 (obligatoire pour equi2cube)</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>            Image resizedImage = <a class="code hl_function" href="classediteurpanovisu_1_1PanoramicCube.html#ae3447e86fef1c622cc0a4ed3796b7982">resizeToEquirectangular</a>(panoramicImage, 1500, 750);</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>            </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>            <span class="comment">// Convertir l&#39;image équirectangulaire en 6 faces de cube</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>            <span class="comment">// Order equi2cube: [0]=Front, [1]=Behind, [2]=Right, [3]=Left, [4]=Top, [5]=Bottom</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>            Image[] cubeFaces = <a class="code hl_class" href="classediteurpanovisu_1_1TransformationsPanoramique.html">TransformationsPanoramique</a>.<a class="code hl_function" href="classediteurpanovisu_1_1TransformationsPanoramique.html#a0cc52e5ea8c62bf993d60216992d1993">equi2cube</a>(resizedImage, 500);</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>            </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>            <span class="comment">// Mapper les faces correctement avec selfIlluminationMap pour éliminer les ombres</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>            <span class="comment">// Notre ordre: [0]=FRONT, [1]=BACK, [2]=LEFT, [3]=RIGHT, [4]=TOP, [5]=BOTTOM</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>            <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#aa66a8b0610ca3556b8b6731e20854fc0">materials</a>[<a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#af155dd2adb7fb46ce4f656161e11121c">FRONT</a>].setSelfIlluminationMap(cubeFaces[0]);   <span class="comment">// Front -&gt; Front</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>            <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#aa66a8b0610ca3556b8b6731e20854fc0">materials</a>[<a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a707a6184593803c5f70413a8a43b6962">BACK</a>].setSelfIlluminationMap(cubeFaces[1]);    <span class="comment">// Behind -&gt; Back</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>            <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#aa66a8b0610ca3556b8b6731e20854fc0">materials</a>[<a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#adbdae4a917c5a2e9a88f0515e49eaf03">LEFT</a>].setSelfIlluminationMap(cubeFaces[3]);    <span class="comment">// Left -&gt; Left</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>            <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#aa66a8b0610ca3556b8b6731e20854fc0">materials</a>[<a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#add9b6413be01face18e285c77ef5429d">RIGHT</a>].setSelfIlluminationMap(cubeFaces[2]);   <span class="comment">// Right -&gt; Right</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>            <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#aa66a8b0610ca3556b8b6731e20854fc0">materials</a>[<a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a572226277673b22a67dbba414aef85bf">TOP</a>].setSelfIlluminationMap(cubeFaces[4]);     <span class="comment">// Top -&gt; Top</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>            <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#aa66a8b0610ca3556b8b6731e20854fc0">materials</a>[<a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#aed9036402e1997c30544b7c6f8c6e674">BOTTOM</a>].setSelfIlluminationMap(cubeFaces[5]);  <span class="comment">// Bottom -&gt; Bottom</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>            </div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>            <span class="comment">// Désactiver diffuse et spéculaire pour éliminer totalement les ombres</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a> = 0; <a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a> &lt; 6; <a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>++) {</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>                <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#aa66a8b0610ca3556b8b6731e20854fc0">materials</a>[<a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>].setDiffuseMap(<span class="keyword">null</span>);</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>                <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#aa66a8b0610ca3556b8b6731e20854fc0">materials</a>[<a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>].setSpecularMap(<span class="keyword">null</span>);</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>                <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#aa66a8b0610ca3556b8b6731e20854fc0">materials</a>[<a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>].setDiffuseColor(<a class="code hl_variable" href="three_8min1_8js.html#a83dbaf53627db610030f458d575b3074">Color</a>.BLACK); <span class="comment">// Pas de couleur diffuse</span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>            }</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        } <span class="keywordflow">catch</span> (InterruptedException ex) {</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>            <span class="comment">// En cas d&#39;interruption, appliquer l&#39;image complète (fallback)</span></div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a> = 0; <a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a> &lt; 6; <a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>++) {</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>                <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#aa66a8b0610ca3556b8b6731e20854fc0">materials</a>[<a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>].setSelfIlluminationMap(panoramicImage);</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>                <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#aa66a8b0610ca3556b8b6731e20854fc0">materials</a>[<a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>].setDiffuseMap(<span class="keyword">null</span>);</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>                <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#aa66a8b0610ca3556b8b6731e20854fc0">materials</a>[<a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>].setSpecularMap(<span class="keyword">null</span>);</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#aa66a8b0610ca3556b8b6731e20854fc0">materials</a>[<a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>].setDiffuseColor(<a class="code hl_variable" href="three_8min1_8js.html#a83dbaf53627db610030f458d575b3074">Color</a>.BLACK);</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>            }</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        }</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    }</div>
+</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    </div>
+<div class="foldopen" id="foldopen00137" data-start="{" data-end="}">
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1PanoramicCube.html#ae3447e86fef1c622cc0a4ed3796b7982">  137</a></span>    <span class="keyword">private</span> Image <a class="code hl_function" href="classediteurpanovisu_1_1PanoramicCube.html#ae3447e86fef1c622cc0a4ed3796b7982">resizeToEquirectangular</a>(Image source, <span class="keywordtype">int</span> targetWidth, <span class="keywordtype">int</span> targetHeight) {</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        <span class="keywordtype">int</span> srcWidth = (int) source.getWidth();</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        <span class="keywordtype">int</span> srcHeight = (int) source.getHeight();</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        </div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        <span class="comment">// Si l&#39;image est déjà à la bonne taille, la retourner directement</span></div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>        <span class="keywordflow">if</span> (srcWidth == targetWidth &amp;&amp; srcHeight == targetHeight) {</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>            <span class="keywordflow">return</span> source;</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>        }</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        </div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        <span class="comment">// Créer une nouvelle image redimensionnée</span></div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        WritableImage resized = <span class="keyword">new</span> WritableImage(targetWidth, targetHeight);</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        PixelReader reader = source.getPixelReader();</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        PixelWriter writer = resized.getPixelWriter();</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        </div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>        <span class="comment">// Redimensionnement par échantillonnage simple</span></div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>        <span class="keywordtype">double</span> xRatio = (double) srcWidth / targetWidth;</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>        <span class="keywordtype">double</span> yRatio = (double) srcHeight / targetHeight;</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>        </div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_function" href="leaflet_8js.html#a9f9b62a373d2bb4624b7ac2df8151435">y</a> = 0; <a class="code hl_function" href="leaflet_8js.html#a9f9b62a373d2bb4624b7ac2df8151435">y</a> &lt; targetHeight; <a class="code hl_function" href="leaflet_8js.html#a9f9b62a373d2bb4624b7ac2df8151435">y</a>++) {</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code hl_function" href="leaflet_8js.html#a008d931e56b6fc013061112f26afbffb">x</a> = 0; <a class="code hl_function" href="leaflet_8js.html#a008d931e56b6fc013061112f26afbffb">x</a> &lt; targetWidth; <a class="code hl_function" href="leaflet_8js.html#a008d931e56b6fc013061112f26afbffb">x</a>++) {</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>                <span class="keywordtype">int</span> srcX = (int) (<a class="code hl_function" href="leaflet_8js.html#a008d931e56b6fc013061112f26afbffb">x</a> * xRatio);</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>                <span class="keywordtype">int</span> srcY = (int) (<a class="code hl_function" href="leaflet_8js.html#a9f9b62a373d2bb4624b7ac2df8151435">y</a> * yRatio);</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>                </div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>                <span class="comment">// S&#39;assurer qu&#39;on ne dépasse pas les limites de l&#39;image source</span></div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>                <span class="keywordflow">if</span> (srcX &gt;= srcWidth) srcX = srcWidth - 1;</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>                <span class="keywordflow">if</span> (srcY &gt;= srcHeight) srcY = srcHeight - 1;</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>                </div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>                <a class="code hl_variable" href="three_8min1_8js.html#a83dbaf53627db610030f458d575b3074">Color</a> color = reader.getColor(srcX, srcY);</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>                writer.setColor(<a class="code hl_function" href="leaflet_8js.html#a008d931e56b6fc013061112f26afbffb">x</a>, <a class="code hl_function" href="leaflet_8js.html#a9f9b62a373d2bb4624b7ac2df8151435">y</a>, color);</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>            }</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>        }</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>        </div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        <span class="keywordflow">return</span> resized;</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    }</div>
+</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    </div>
+<div class="foldopen" id="foldopen00176" data-start="{" data-end="}">
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1PanoramicCube.html#aeb5166566cfe8d01d54e05fb09c7f4c6">  176</a></span>    <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code hl_function" href="classediteurpanovisu_1_1PanoramicCube.html#aeb5166566cfe8d01d54e05fb09c7f4c6">getCubeSize</a>() {</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1PanoramicCube.html#a365372f1788979824f21da092c33ccd8">CUBE_SIZE</a>;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    }</div>
+</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>}</div>
+</div>
+<div class="ttc" id="aclassediteurpanovisu_1_1PanoramicCube_html_a011d3c5a56b7428f54133c89693d66ff"><div class="ttname"><a href="classediteurpanovisu_1_1PanoramicCube.html#a011d3c5a56b7428f54133c89693d66ff">editeurpanovisu.PanoramicCube.PanoramicCube</a></div><div class="ttdeci">PanoramicCube()</div><div class="ttdef"><b>Definition</b> <a href="#l00034">PanoramicCube.java:34</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1PanoramicCube_html_a365372f1788979824f21da092c33ccd8"><div class="ttname"><a href="classediteurpanovisu_1_1PanoramicCube.html#a365372f1788979824f21da092c33ccd8">editeurpanovisu.PanoramicCube.CUBE_SIZE</a></div><div class="ttdeci">static final double CUBE_SIZE</div><div class="ttdef"><b>Definition</b> <a href="#l00022">PanoramicCube.java:22</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1PanoramicCube_html_a504a737fe58c77d521a321cb6ca428b4"><div class="ttname"><a href="classediteurpanovisu_1_1PanoramicCube.html#a504a737fe58c77d521a321cb6ca428b4">editeurpanovisu.PanoramicCube.faces</a></div><div class="ttdeci">final Box[] faces</div><div class="ttdef"><b>Definition</b> <a href="#l00023">PanoramicCube.java:23</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1PanoramicCube_html_a572226277673b22a67dbba414aef85bf"><div class="ttname"><a href="classediteurpanovisu_1_1PanoramicCube.html#a572226277673b22a67dbba414aef85bf">editeurpanovisu.PanoramicCube.TOP</a></div><div class="ttdeci">static final int TOP</div><div class="ttdef"><b>Definition</b> <a href="#l00031">PanoramicCube.java:31</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1PanoramicCube_html_a707a6184593803c5f70413a8a43b6962"><div class="ttname"><a href="classediteurpanovisu_1_1PanoramicCube.html#a707a6184593803c5f70413a8a43b6962">editeurpanovisu.PanoramicCube.BACK</a></div><div class="ttdeci">static final int BACK</div><div class="ttdef"><b>Definition</b> <a href="#l00028">PanoramicCube.java:28</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1PanoramicCube_html_a8ea2acf3ee3e9946ce530a960d38bffe"><div class="ttname"><a href="classediteurpanovisu_1_1PanoramicCube.html#a8ea2acf3ee3e9946ce530a960d38bffe">editeurpanovisu.PanoramicCube.setPanoramicImage</a></div><div class="ttdeci">void setPanoramicImage(Image panoramicImage)</div><div class="ttdoc">Applique une image panoramique équirectangulaire sur le cube Utilise TransformationsPanoramique pour ...</div><div class="ttdef"><b>Definition</b> <a href="#l00090">PanoramicCube.java:90</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1PanoramicCube_html_aa66a8b0610ca3556b8b6731e20854fc0"><div class="ttname"><a href="classediteurpanovisu_1_1PanoramicCube.html#aa66a8b0610ca3556b8b6731e20854fc0">editeurpanovisu.PanoramicCube.materials</a></div><div class="ttdeci">final PhongMaterial[] materials</div><div class="ttdef"><b>Definition</b> <a href="#l00024">PanoramicCube.java:24</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1PanoramicCube_html_adbdae4a917c5a2e9a88f0515e49eaf03"><div class="ttname"><a href="classediteurpanovisu_1_1PanoramicCube.html#adbdae4a917c5a2e9a88f0515e49eaf03">editeurpanovisu.PanoramicCube.LEFT</a></div><div class="ttdeci">static final int LEFT</div><div class="ttdef"><b>Definition</b> <a href="#l00029">PanoramicCube.java:29</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1PanoramicCube_html_add9b6413be01face18e285c77ef5429d"><div class="ttname"><a href="classediteurpanovisu_1_1PanoramicCube.html#add9b6413be01face18e285c77ef5429d">editeurpanovisu.PanoramicCube.RIGHT</a></div><div class="ttdeci">static final int RIGHT</div><div class="ttdef"><b>Definition</b> <a href="#l00030">PanoramicCube.java:30</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1PanoramicCube_html_ae030a871c78c8d44cbaa9f08cb6c572b"><div class="ttname"><a href="classediteurpanovisu_1_1PanoramicCube.html#ae030a871c78c8d44cbaa9f08cb6c572b">editeurpanovisu.PanoramicCube.createCubeFaces</a></div><div class="ttdeci">void createCubeFaces()</div><div class="ttdoc">Crée les 6 faces du cube.</div><div class="ttdef"><b>Definition</b> <a href="#l00044">PanoramicCube.java:44</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1PanoramicCube_html_ae3447e86fef1c622cc0a4ed3796b7982"><div class="ttname"><a href="classediteurpanovisu_1_1PanoramicCube.html#ae3447e86fef1c622cc0a4ed3796b7982">editeurpanovisu.PanoramicCube.resizeToEquirectangular</a></div><div class="ttdeci">Image resizeToEquirectangular(Image source, int targetWidth, int targetHeight)</div><div class="ttdoc">Redimensionne une image au format équirectangulaire avec ratio 2:1.</div><div class="ttdef"><b>Definition</b> <a href="#l00137">PanoramicCube.java:137</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1PanoramicCube_html_aeb5166566cfe8d01d54e05fb09c7f4c6"><div class="ttname"><a href="classediteurpanovisu_1_1PanoramicCube.html#aeb5166566cfe8d01d54e05fb09c7f4c6">editeurpanovisu.PanoramicCube.getCubeSize</a></div><div class="ttdeci">double getCubeSize()</div><div class="ttdoc">Obtient la taille du cube.</div><div class="ttdef"><b>Definition</b> <a href="#l00176">PanoramicCube.java:176</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1PanoramicCube_html_aed9036402e1997c30544b7c6f8c6e674"><div class="ttname"><a href="classediteurpanovisu_1_1PanoramicCube.html#aed9036402e1997c30544b7c6f8c6e674">editeurpanovisu.PanoramicCube.BOTTOM</a></div><div class="ttdeci">static final int BOTTOM</div><div class="ttdef"><b>Definition</b> <a href="#l00032">PanoramicCube.java:32</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1PanoramicCube_html_af155dd2adb7fb46ce4f656161e11121c"><div class="ttname"><a href="classediteurpanovisu_1_1PanoramicCube.html#af155dd2adb7fb46ce4f656161e11121c">editeurpanovisu.PanoramicCube.FRONT</a></div><div class="ttdeci">static final int FRONT</div><div class="ttdef"><b>Definition</b> <a href="#l00027">PanoramicCube.java:27</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1TransformationsPanoramique_html"><div class="ttname"><a href="classediteurpanovisu_1_1TransformationsPanoramique.html">editeurpanovisu.TransformationsPanoramique</a></div><div class="ttdoc">fonctions de transformation des images panoramiques (Cube / Equirectangulaire)</div><div class="ttdef"><b>Definition</b> <a href="TransformationsPanoramique_8java_source.html#l00021">TransformationsPanoramique.java:21</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1TransformationsPanoramique_html_a0cc52e5ea8c62bf993d60216992d1993"><div class="ttname"><a href="classediteurpanovisu_1_1TransformationsPanoramique.html#a0cc52e5ea8c62bf993d60216992d1993">editeurpanovisu.TransformationsPanoramique.equi2cube</a></div><div class="ttdeci">static Image[] equi2cube(Image equi, int taille)</div><div class="ttdef"><b>Definition</b> <a href="TransformationsPanoramique_8java_source.html#l00035">TransformationsPanoramique.java:35</a></div></div>
+<div class="ttc" id="aleaflet_8js_html_a008d931e56b6fc013061112f26afbffb"><div class="ttname"><a href="leaflet_8js.html#a008d931e56b6fc013061112f26afbffb">x</a></div><div class="ttdeci">function x(t, e, i)</div><div class="ttdef"><b>Definition</b> <a href="leaflet_8js_source.html#l00005">leaflet.js:5</a></div></div>
+<div class="ttc" id="aleaflet_8js_html_a73aff07b65d7c0b09ccf6b4c4f1b7a9d"><div class="ttname"><a href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a></div><div class="ttdeci">function i(t, e)</div><div class="ttdef"><b>Definition</b> <a href="leaflet_8js_source.html#l00005">leaflet.js:5</a></div></div>
+<div class="ttc" id="aleaflet_8js_html_a9f9b62a373d2bb4624b7ac2df8151435"><div class="ttname"><a href="leaflet_8js.html#a9f9b62a373d2bb4624b7ac2df8151435">y</a></div><div class="ttdeci">function y(t)</div><div class="ttdef"><b>Definition</b> <a href="leaflet_8js_source.html#l00005">leaflet.js:5</a></div></div>
+<div class="ttc" id="athree_8min1_8js_html_a83dbaf53627db610030f458d575b3074"><div class="ttname"><a href="three_8min1_8js.html#a83dbaf53627db610030f458d575b3074">Color</a></div><div class="ttdeci">THREE Color</div><div class="ttdef"><b>Definition</b> <a href="three_8min1_8js_source.html#l00006">three.min1.js:6</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="dir_184160a943439c2c782fe244782aeddc.html">editeurpanovisu</a></li><li class="navelem"><a href="PanoramicCube_8java.html">PanoramicCube.java</a></li>
+    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>

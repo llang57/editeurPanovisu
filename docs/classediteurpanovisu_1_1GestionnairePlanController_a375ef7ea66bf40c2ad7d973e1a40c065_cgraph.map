@@ -1,0 +1,28 @@
+<map id="editeurpanovisu.GestionnairePlanController.afficherListePanosVignettes" name="editeurpanovisu.GestionnairePlanController.afficherListePanosVignettes">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,327,220,385"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1GestionnairePlanController.html#ac6a814832aad8390d7157032c3f7f107" title=" " alt="" coords="268,209,517,252"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="179,324,327,257,330,261,181,329"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1GestionnairePlanController.html#ae85c33829adf0dab112e4120e0dd2df2" title=" " alt="" coords="802,95,1048,137"/>
+<area shape="poly" id="edge14_Node000001_Node000004" title=" " alt="" coords="131,325,155,293,186,257,224,223,266,195,331,167,398,146,467,129,537,118,670,106,787,105,787,110,671,111,538,123,468,135,400,151,333,172,269,200,227,227,190,261,159,296,135,328"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1GestionnairePlanController.html#ae1523e38be18cc67cdfc275adff5dd18" title=" " alt="" coords="830,216,1020,259"/>
+<area shape="poly" id="edge16_Node000001_Node000005" title=" " alt="" coords="220,364,332,369,467,369,612,357,684,345,754,328,788,316,822,300,881,265,883,270,825,305,790,321,755,333,685,350,612,362,467,374,332,375,220,369"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1GestionnairePlanController.html#a2edd566ca304172fcd4ab5559dd1738c" title=" " alt="" coords="1096,153,1287,196"/>
+<area shape="poly" id="edge11_Node000001_Node000006" title=" " alt="" coords="124,325,145,283,175,231,216,181,240,158,266,139,371,80,466,38,556,14,643,4,732,7,827,22,931,47,1049,80,1079,92,1107,107,1156,141,1153,146,1105,112,1076,97,1047,85,930,52,826,27,732,12,643,9,557,19,468,43,373,85,269,144,243,162,220,184,180,235,149,285,128,328"/>
+<area shape="rect" id="Node000007" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="1172,284,1211,311"/>
+<area shape="poly" id="edge12_Node000001_Node000007" title=" " alt="" coords="220,371,268,376,405,384,511,386,618,380,754,367,871,352,985,334,1156,302,1157,307,986,339,871,357,755,372,618,385,511,391,404,390,267,381,220,376"/>
+<area shape="rect" id="Node000009" href="$leaflet_8js.html#abf5830200d869e463ea38504a19985f6" title=" " alt="" coords="373,444,412,471"/>
+<area shape="poly" id="edge13_Node000001_Node000009" title=" " alt="" coords="175,384,269,423,358,448,357,453,267,428,173,388"/>
+<area shape="rect" id="Node000010" href="$classediteurpanovisu_1_1GestionnairePlanController.html#a2f1b683e1be605730a62f963e130bdc2" title=" " alt="" coords="270,495,514,537"/>
+<area shape="poly" id="edge15_Node000001_Node000010" title=" " alt="" coords="144,384,199,434,233,459,269,480,281,486,279,491,266,485,230,463,196,438,141,388"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1GestionnairePlanController.html#ad4f72bd693b5b3bd93bee89bda000990" title=" " alt="" coords="565,209,754,252"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="517,237,549,237,549,242,517,242"/>
+<area shape="poly" id="edge8_Node000002_Node000006" title=" " alt="" coords="492,206,565,195,704,182,843,175,1080,171,1080,176,843,180,704,188,565,200,493,211"/>
+<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1GestionnairePlanController.html#ace9c9d5683a0db9254026f3cb20cedd3" title=" " alt="" coords="565,276,754,319"/>
+<area shape="poly" id="edge9_Node000002_Node000008" title=" " alt="" coords="481,250,557,269,556,274,480,255"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="565,225,533,224,533,219,565,219"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="710,206,859,142,861,146,712,211"/>
+<area shape="poly" id="edge5_Node000003_Node000005" title=" " alt="" coords="755,230,815,232,815,237,755,236"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="1018,213,1083,198,1084,203,1019,218"/>
+<area shape="poly" id="edge7_Node000005_Node000007" title=" " alt="" coords="1021,256,1158,287,1157,293,1019,261"/>
+<area shape="poly" id="edge10_Node000008_Node000007" title=" " alt="" coords="755,295,1157,295,1157,300,755,300"/>
+</map>

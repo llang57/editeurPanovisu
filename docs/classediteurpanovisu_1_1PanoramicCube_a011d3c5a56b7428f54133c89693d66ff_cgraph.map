@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.PanoramicCube.PanoramicCube" name="editeurpanovisu.PanoramicCube.PanoramicCube">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,184,48"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1PanoramicCube.html#ae030a871c78c8d44cbaa9f08cb6c572b" title="Crée les 6 faces du cube." alt="" coords="232,5,410,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="184,24,216,24,216,29,184,29"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="458,13,496,40"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="410,24,442,24,442,29,410,29"/>
+</map>

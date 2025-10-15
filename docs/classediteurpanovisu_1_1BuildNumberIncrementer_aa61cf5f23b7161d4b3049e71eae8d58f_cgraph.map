@@ -1,0 +1,8 @@
+<map id="editeurpanovisu.BuildNumberIncrementer.updateI18nProperties" name="editeurpanovisu.BuildNumberIncrementer.updateI18nProperties">
+<area shape="rect" id="Node000001" title="Met à jour le fichier i18n/PanoVisu.properties." alt="" coords="5,35,223,77"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1BuildNumberIncrementer.html#a4fe00236345fc2a0ac8562a5c92281ad" title="Formate le numéro de build avec espace insécable Exemple : 1990 &#45;&gt; &quot;1\u00a0990&quot;, 2000 &#45;&gt; &quot;2\u00a0000&quot;..." alt="" coords="271,5,477,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="223,41,255,37,256,43,224,46"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="525,43,563,69"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="223,57,345,59,477,57,509,56,509,61,477,63,345,64,223,62"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="478,42,510,48,509,53,477,47"/>
+</map>

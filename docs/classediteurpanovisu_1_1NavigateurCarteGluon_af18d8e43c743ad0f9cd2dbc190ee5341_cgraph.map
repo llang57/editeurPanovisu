@@ -1,0 +1,5 @@
+<map id="editeurpanovisu.NavigateurCarteGluon.choixZoom" name="editeurpanovisu.NavigateurCarteGluon.choixZoom">
+<area shape="rect" id="Node000001" title="Définit le niveau de zoom." alt="" coords="5,5,185,48"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1NavigateurCarteGluon.html#a550a7fc12fb8b19e05c58a529f134dd9" title="Initialise réellement le JMapViewer (appelé la première fois qu&#39;on affiche la carte)" alt="" coords="233,5,412,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="185,24,217,24,217,29,185,29"/>
+</map>

@@ -1,0 +1,20 @@
+<map id="editeurpanovisu.PanoramicCube.setPanoramicImage" name="editeurpanovisu.PanoramicCube.setPanoramicImage">
+<area shape="rect" id="Node000001" title="Applique une image panoramique équirectangulaire sur le cube Utilise TransformationsPanoramique pour ..." alt="" coords="5,77,184,120"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1TransformationsPanoramique.html#a0cc52e5ea8c62bf993d60216992d1993" title=" " alt="" coords="232,77,442,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="184,96,216,96,216,101,184,101"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="490,5,528,32"/>
+<area shape="poly" id="edge6_Node000001_Node000003" title=" " alt="" coords="181,74,231,63,366,38,474,21,475,26,367,43,232,68,182,79"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1PanoramicCube.html#ae3447e86fef1c622cc0a4ed3796b7982" title="Redimensionne une image au format équirectangulaire avec ratio 2:1." alt="" coords="239,200,434,243"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="140,118,280,190,278,195,137,123"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="383,74,474,31,477,36,386,79"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#afa3c32d9f7f168b0e59ddc33ec31bb84" title=" " alt="" coords="490,56,528,83"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="442,78,474,73,475,78,443,83"/>
+<area shape="rect" id="Node000005" href="$leaflet_8js.html#a873cae0273c5a7d9673544bbe0a6fe8b" title=" " alt="" coords="490,107,528,133"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="443,109,475,113,474,118,442,114"/>
+<area shape="rect" id="Node000006" href="$leaflet_8js.html#a225602860fb21629c65836853697cc39" title=" " alt="" coords="490,157,528,184"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="391,118,476,154,474,159,389,123"/>
+<area shape="rect" id="Node000008" href="$leaflet_8js.html#a008d931e56b6fc013061112f26afbffb" title=" " alt="" coords="490,208,528,235"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="435,219,474,219,474,224,435,224"/>
+<area shape="rect" id="Node000009" href="$leaflet_8js.html#a9f9b62a373d2bb4624b7ac2df8151435" title=" " alt="" coords="490,259,528,285"/>
+<area shape="poly" id="edge9_Node000007_Node000009" title=" " alt="" coords="412,241,476,260,474,265,411,246"/>
+</map>

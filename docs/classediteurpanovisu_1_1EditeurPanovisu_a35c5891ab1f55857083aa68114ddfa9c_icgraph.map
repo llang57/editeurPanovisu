@@ -1,0 +1,18 @@
+<map id="editeurpanovisu.EditeurPanovisu.getStrBingAPIKey" name="editeurpanovisu.EditeurPanovisu.getStrBingAPIKey">
+<area shape="rect" id="Node000001" title=" " alt="" coords="916,78,1150,121"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1EditeurPanovisu.html#a86c393eee88f54c694db994ddd85b90d" title=" " alt="" coords="5,14,246,57"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="976,74,924,52,868,36,785,22,700,14,531,8,375,13,246,24,245,18,375,8,531,3,701,9,786,17,869,30,926,47,978,69"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1EditeurPanovisu.html#a94e36b9e9d09ab1a4c852b8a8cefa927" title="Génère la visite virtuelle HTML complète." alt="" coords="614,45,868,88"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="901,87,869,84,869,78,901,82"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1NavigateurOpenLayers.html#a3a6dc2db0ee3eacba379c83d31c17903" title=" " alt="" coords="642,112,840,154"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="901,117,841,124,840,119,901,112"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1NavigateurOpenLayersSeul.html#a90af8f534bb74bfb718faa9c50193d76" title=" " alt="" coords="630,180,853,222"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="969,130,869,169,828,182,827,177,867,164,968,125"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1EditeurPanovisu.html#ac912b80c1f2ac97def60ff005c5c480b" title=" " alt="" coords="294,49,566,76"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="598,67,566,67,566,61,598,62"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="278,52,246,49,246,44,278,46"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1NavigateurOpenLayers.html#af404b0c40f1be6ee0fa9f05525606813" title=" " alt="" coords="300,109,560,152"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="627,135,560,134,560,129,627,129"/>
+<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1NavigateurOpenLayersSeul.html#a86413462bed95fc61c68740e91499c5c" title=" " alt="" coords="319,176,541,234"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="614,205,541,206,541,201,614,200"/>
+</map>

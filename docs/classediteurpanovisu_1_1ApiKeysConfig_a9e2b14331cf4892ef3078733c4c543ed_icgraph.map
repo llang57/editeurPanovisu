@@ -1,0 +1,8 @@
+<map id="editeurpanovisu.ApiKeysConfig.getLocationIQApiKey" name="editeurpanovisu.ApiKeysConfig.getLocationIQApiKey">
+<area shape="rect" id="Node000001" title="Récupère la clé API LocationIQ." alt="" coords="509,35,734,77"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1ApiKeysConfig.html#a904967c4ca879709082fd0b58c115562" title="Vérifie si une clé API LocationIQ est configurée." alt="" coords="233,5,461,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="493,45,461,42,462,36,494,40"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1NavigateurCarte.html#add60fa1d1b3a4a15cddc4715fc5ee85d" title=" " alt="" coords="5,35,185,77"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="494,62,461,63,233,63,185,62,185,56,233,57,461,57,493,57"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="217,44,185,48,185,43,217,39"/>
+</map>

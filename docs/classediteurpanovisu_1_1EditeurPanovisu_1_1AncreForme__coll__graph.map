@@ -1,0 +1,5 @@
+<map id="editeurpanovisu.EditeurPanovisu.AncreForme" name="editeurpanovisu.EditeurPanovisu.AncreForme">
+<area shape="rect" id="Node000001" title="définit les ancrages des formes (cercle, rectangle, polygone) pour les barres personnalisées" alt="" coords="5,80,221,123"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="85,5,141,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="116,48,116,80,110,80,110,48"/>
+</map>

@@ -1,0 +1,14 @@
+<map id="editeurpanovisu.MarkdownViewer.chargerFontes" name="editeurpanovisu.MarkdownViewer.chargerFontes">
+<area shape="rect" id="Node000001" title="Charge les polices personnalisées pour le WebView Wingdings doit être chargée explicitement car WebVi..." alt="" coords="940,39,1116,81"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1MarkdownViewer.html#a97cf5f887bf60ee77ea235722283e071" title="Constructeur avec support des extensions GFM (GitHub Flavored Markdown)" alt="" coords="715,39,892,81"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="924,72,892,71,892,66,924,66"/>
+<area shape="poly" id="edge2_Node000002_Node000001" title=" " alt="" coords="907,48,940,49,940,54,907,54"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1MarkdownViewer.html#a7dd9cb34e8163f5e8849b594d2e0d7ec" title="Retourne l&#39;URL de la police Wingdings pour @font&#45;face CSS." alt="" coords="480,5,667,48"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="700,48,668,43,668,38,700,42"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1MarkdownViewer.html#a6a08acdfb7fcb27bbb308ce0487da36d" title="Exemple d&#39;utilisation." alt="" coords="486,72,662,115"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="700,78,663,83,662,78,699,72"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1MarkdownViewer.html#af174733239ea1569baee494ad3b0e77c" title="Génère le CSS @font&#45;face pour charger Wingdings dans le WebView." alt="" coords="241,5,432,48"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="465,29,432,29,432,24,465,24"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1MarkdownViewer.html#a6174fefac84f4ff02188525f02b64dc3" title="Enveloppe le HTML dans une structure complète avec CSS et URL de base." alt="" coords="5,5,193,48"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="225,29,193,29,193,24,225,24"/>
+</map>

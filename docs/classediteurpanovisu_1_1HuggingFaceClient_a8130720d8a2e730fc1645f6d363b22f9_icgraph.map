@@ -1,0 +1,5 @@
+<map id="editeurpanovisu.HuggingFaceClient.extractGeneratedText" name="editeurpanovisu.HuggingFaceClient.extractGeneratedText">
+<area shape="rect" id="Node000001" title="Extrait le texte généré de la réponse JSON Format: [{&quot;generated_text&quot;: &quot;...&quot;}]." alt="" coords="247,5,440,48"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1HuggingFaceClient.html#a951ca423d3860a4169be9bd25cc83bd7" title="Génère du texte avec des paramètres personnalisés." alt="" coords="5,5,199,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="231,29,199,29,199,24,231,24"/>
+</map>

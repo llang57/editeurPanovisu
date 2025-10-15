@@ -1,0 +1,9 @@
+<map id="editeurpanovisu.EquiCubeDialogController.choixFichiers" name="editeurpanovisu.EquiCubeDialogController.choixFichiers">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,48,201,91"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="318,5,357,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="201,46,302,23,303,29,202,51"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#afa3c32d9f7f168b0e59ddc33ec31bb84" title=" " alt="" coords="318,56,357,83"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="201,67,302,67,302,72,201,72"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1ReadWriteImage.html#ac16a47fd8d8c27b8be3304abb86b5f05" title=" " alt="" coords="249,107,426,149"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="191,89,235,100,234,105,190,94"/>
+</map>

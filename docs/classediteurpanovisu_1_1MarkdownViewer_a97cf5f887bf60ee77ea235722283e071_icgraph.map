@@ -1,0 +1,14 @@
+<map id="editeurpanovisu.MarkdownViewer.MarkdownViewer" name="editeurpanovisu.MarkdownViewer.MarkdownViewer">
+<area shape="rect" id="Node000001" title="Constructeur avec support des extensions GFM (GitHub Flavored Markdown)" alt="" coords="715,39,892,81"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1MarkdownViewer.html#a5823f5194e7e655cfdff1325fe7b59a9" title="Charge les polices personnalisées pour le WebView Wingdings doit être chargée explicitement car WebVi..." alt="" coords="486,5,662,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="699,57,662,51,663,46,700,51"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1MarkdownViewer.html#a7dd9cb34e8163f5e8849b594d2e0d7ec" title="Retourne l&#39;URL de la police Wingdings pour @font&#45;face CSS." alt="" coords="480,72,667,115"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="700,78,668,82,668,77,700,72"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1MarkdownViewer.html#a6a08acdfb7fcb27bbb308ce0487da36d" title="Exemple d&#39;utilisation." alt="" coords="486,139,662,181"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="748,91,668,129,639,141,637,136,666,124,746,87"/>
+<area shape="poly" id="edge2_Node000002_Node000001" title=" " alt="" coords="678,30,715,36,715,41,677,35"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1MarkdownViewer.html#af174733239ea1569baee494ad3b0e77c" title="Génère le CSS @font&#45;face pour charger Wingdings dans le WebView." alt="" coords="241,72,432,115"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="465,96,432,96,432,91,465,91"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1MarkdownViewer.html#a6174fefac84f4ff02188525f02b64dc3" title="Enveloppe le HTML dans une structure complète avec CSS et URL de base." alt="" coords="5,72,193,115"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="225,96,193,96,193,91,225,91"/>
+</map>

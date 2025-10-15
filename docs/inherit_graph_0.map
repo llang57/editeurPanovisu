@@ -1,0 +1,7 @@
+<map id="Graphe hiérarchique des classes" name="Graphe hiérarchique des classes">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,43,91,69"/>
+<area shape="rect" id="Node000001" href="$classediteurpanovisu_1_1DocumentationDialog_1_1TestApp.html" title="Application de test." alt="" coords="142,5,346,48"/>
+<area shape="poly" id="edge1_Node000000_Node000001" title=" " alt="" coords="105,45,141,39,142,45,106,50"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1EditeurPanovisu.html" title="Editeur de visites virtuelles panoramiques." alt="" coords="139,72,350,99"/>
+<area shape="poly" id="edge2_Node000000_Node000002" title=" " alt="" coords="106,62,151,69,150,74,106,67"/>
+</map>

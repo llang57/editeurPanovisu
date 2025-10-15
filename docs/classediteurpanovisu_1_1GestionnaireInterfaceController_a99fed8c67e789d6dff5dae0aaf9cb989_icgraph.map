@@ -1,0 +1,11 @@
+<map id="editeurpanovisu.GestionnaireInterfaceController.getOpaciteTheme" name="editeurpanovisu.GestionnaireInterfaceController.getOpaciteTheme">
+<area shape="rect" id="Node000001" title=" " alt="" coords="916,39,1152,81"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#ac7fa988dc99d8684686127a2269cd66e" title=" " alt="" coords="637,5,845,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="901,48,846,41,846,36,901,42"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1EditeurPanovisu.html#a94e36b9e9d09ab1a4c852b8a8cefa927" title="Génère la visite virtuelle HTML complète." alt="" coords="614,72,868,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="901,78,869,82,868,76,900,72"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1EditeurPanovisu.html#ac912b80c1f2ac97def60ff005c5c480b" title=" " alt="" coords="294,80,566,107"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="598,96,566,96,566,91,598,91"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1EditeurPanovisu.html#a86c393eee88f54c694db994ddd85b90d" title=" " alt="" coords="5,72,246,115"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="278,96,246,96,246,91,278,91"/>
+</map>

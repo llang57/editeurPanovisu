@@ -1,0 +1,11 @@
+<map id="editeurpanovisu.OrdrePanoramique.creeListe" name="editeurpanovisu.OrdrePanoramique.creeListe">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,105,259,148"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1PanoramiqueCellule.html#a5197a61ac2c8a575a88a7205a3827788" title=" " alt="" coords="331,5,523,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="185,102,306,57,328,50,330,55,308,63,187,107"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1PanoramiqueCellule.html#a66dca565b3713687c8d34f97013ef83a" title=" " alt="" coords="331,72,523,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="259,110,315,103,315,109,259,115"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1PanoramiqueCellule.html#ad9195089981021670fbc734ad202a8dc" title=" " alt="" coords="326,139,528,181"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="259,138,310,144,310,149,259,144"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1PanoramiqueCellule.html#a9399b6003010f4a490aba9b6dbbde7e2" title=" " alt="" coords="307,205,547,248"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="187,146,308,191,330,198,328,203,306,196,185,151"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="panovisu" name="panovisu">
+<area shape="rect" id="Node000001" title=" " alt="" coords="140,31,213,57"/>
+<area shape="rect" id="Node000002" href="$panovisuInit_8js.html#ae455fc1fa752dced76c2baf5bdc1ceb8" title="Crée les objets correspondants à chacun des panoramiques." alt="" coords="5,5,92,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="124,36,91,30,92,25,125,31"/>
+<area shape="rect" id="Node000003" href="$panovisu_8js.html#a3c4f378c54da41f093aa3289ae5453af" title=" " alt="" coords="12,56,85,83"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="125,57,86,65,85,59,124,52"/>
+</map>

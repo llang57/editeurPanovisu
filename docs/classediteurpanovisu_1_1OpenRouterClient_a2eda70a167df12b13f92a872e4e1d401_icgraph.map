@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.OpenRouterClient.isConfigured" name="editeurpanovisu.OpenRouterClient.isConfigured">
+<area shape="rect" id="Node000001" title="Vérifie si le client est configuré correctement." alt="" coords="550,5,736,48"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1TestAIClients.html#a77fbca3f26c8ae02ffe75835740034f7" title="Test du client OpenRouter." alt="" coords="281,5,502,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="534,29,503,29,503,24,534,24"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1TestAIClients.html#a0513dc754d9bc85fc8b50d2b9993b35a" title=" " alt="" coords="5,13,233,40"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="265,29,233,29,233,24,265,24"/>
+</map>

@@ -1,0 +1,20 @@
+<map id="editeurpanovisu.EditeurHTML.afficheConfigImage" name="editeurpanovisu.EditeurHTML.afficheConfigImage">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,189,241,232"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1EditeurHTML.html#a71bb6dcb22a0aaffec7ead3c835b23e1" title=" " alt="" coords="289,23,528,65"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="143,187,205,131,245,101,287,75,300,69,302,74,290,80,248,105,208,135,147,191"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1EditeurHTML.html#a0f31da3ecff133531fa99a2e0cc92249" title=" " alt="" coords="301,89,516,132"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="173,186,288,141,310,134,311,139,290,147,175,191"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1HotspotHTML.html#a69c25901cb3b08778f512e5a8122b3ab" title=" " alt="" coords="297,156,520,199"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="241,194,281,190,281,195,241,200"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1HotspotHTML.html#a221f55d0424591e6326727fc5cc6f8e0" title=" " alt="" coords="297,223,520,265"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="241,222,281,227,281,232,241,227"/>
+<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1ImageEditeurHTML.html#a67a09b520fbbbce9985a8ee631991e36" title=" " alt="" coords="312,289,505,332"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="175,230,290,275,311,282,310,287,288,280,173,235"/>
+<area shape="rect" id="Node000009" href="$classediteurpanovisu_1_1HotspotHTML.html#a463064a03eee60a92c24e98035bc484e" title=" " alt="" coords="298,356,518,399"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="147,230,208,286,248,316,290,342,302,348,300,352,287,346,245,320,205,290,143,234"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1EditeurHTML.html#a2bc338efa2d1b9253a062e0097b2b942" title=" " alt="" coords="576,5,794,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="528,30,560,27,561,33,529,36"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="842,31,881,57"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="529,41,827,41,827,47,529,47"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="782,30,827,37,827,42,782,35"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.NavigateurCarteGluon.ajouteMarqueur" name="editeurpanovisu.NavigateurCarteGluon.ajouteMarqueur">
+<area shape="rect" id="Node000001" title="Ajoute un marqueur à la carte." alt="" coords="5,39,186,81"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1NavigateurCarteGluon.html#a550a7fc12fb8b19e05c58a529f134dd9" title="Initialise réellement le JMapViewer (appelé la première fois qu&#39;on affiche la carte)" alt="" coords="235,5,414,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="186,44,219,39,220,45,187,49"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1MapMarkerWithHtml.html#aa234fa23c949952b45e93ae057a9c078" title="Définit le contenu (peut contenir du HTML: titre nom) Extrait le texte brut et formate: &quot;titre &#45; nom&quot;..." alt="" coords="234,72,415,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="187,71,219,75,218,81,186,76"/>
+</map>

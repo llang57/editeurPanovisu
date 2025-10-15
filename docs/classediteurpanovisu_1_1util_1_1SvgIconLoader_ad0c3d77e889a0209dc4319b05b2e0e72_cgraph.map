@@ -1,0 +1,13 @@
+<map id="editeurpanovisu.util.SvgIconLoader.loadThemedIcon" name="editeurpanovisu.util.SvgIconLoader.loadThemedIcon">
+<area shape="rect" id="Node000001" title="Crée un ImageView avec couleur adaptée au thème." alt="" coords="5,72,191,115"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1util_1_1SvgIconLoader.html#ab0e96e5ebb4dce78ea938d9adca21ce2" title="Charge une icône SVG et la convertit en ImageView avec dimensions personnalisées." alt="" coords="239,72,400,115"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="191,91,223,91,223,96,191,96"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1util_1_1SvgIconLoader.html#a8cf07e331f244b74d124210c1569d3b4" title="Convertit un SVG en BufferedImage PNG avec Batik (dimensions personnalisées)" alt="" coords="448,5,640,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="393,69,454,50,456,56,394,74"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1util_1_1SvgIconLoader.html#af5cfc8e00f14b39cc7972184362e819c" title="Détecte la couleur appropriée selon le thème actif (clair ou foncé) Fonctionne avec tous les thèmes :..." alt="" coords="455,72,633,115"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="400,91,439,91,439,96,400,96"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1util_1_1SvgIconLoader.html#ab9fdb534790cb51ab1b57c506d003289" title="Fallback: charge l&#39;icône PNG si le SVG n&#39;est pas disponible." alt="" coords="452,139,637,181"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="394,113,456,131,454,136,393,118"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1util_1_1SvgIconLoader.html#af546932dfbd067f7700bd0832d5efb64" title="Mappe les noms de fichiers SVG vers les noms PNG existants." alt="" coords="688,139,863,181"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="637,157,673,157,673,163,637,163"/>
+</map>

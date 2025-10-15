@@ -1,0 +1,368 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>EditeurPanovisu:  Fichier source de src/editeurpanovisu/util/SvgIconLoader.java</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">EditeurPanovisu<span id="projectnumber">&#160;3.1.0</span>
+   </div>
+   <div id="projectbrief">Éditeur de visites virtuelles 360° Panovisu</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Recherche',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('SvgIconLoader_8java_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Chargement...</div>
+<div class="SRStatus" id="Searching">Recherche...</div>
+<div class="SRStatus" id="NoMatches">Aucune correspondance</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">SvgIconLoader.java</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="SvgIconLoader_8java.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="keyword">package </span>editeurpanovisu.util;</div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keyword">import</span> javafx.scene.image.Image;</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keyword">import</span> javafx.scene.image.ImageView;</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">import</span> javafx.scene.paint.Color;</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">import</span> javafx.embed.swing.SwingFXUtils;</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">import</span> java.awt.image.BufferedImage;</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">import</span> java.io.*;</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">import</span> java.nio.file.Files;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">import</span> java.nio.file.Paths;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">import</span> java.util.HashMap;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">import</span> java.util.Map;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">import</span> org.apache.batik.transcoder.TranscoderInput;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">import</span> org.apache.batik.transcoder.TranscoderOutput;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">import</span> org.apache.batik.transcoder.image.PNGTranscoder;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span></div>
+<div class="foldopen" id="foldopen00031" data-start="{" data-end="};">
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html">   31</a></span><span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_class" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html">SvgIconLoader</a> {</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#ab210a9a62674642f08d5fd850afc020a">   33</a></span>    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#ab210a9a62674642f08d5fd850afc020a">SVG_PATH</a> = <span class="stringliteral">&quot;images/svg/&quot;</span>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#a970644cf6fed64a80500b9497c83a698">   34</a></span>    <span class="keyword">private</span> <span class="keyword">static</span> <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#a970644cf6fed64a80500b9497c83a698">baseAppPath</a> = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="comment">// Cache pour éviter de recharger les mêmes icônes</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#a88986494a08044da95d77f8a3887ad89">   37</a></span>    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <a class="code hl_variable" href="OpenLayers_8js.html#aa8a59085f9fc9a3b74d2e1e2281b3b06">Map&lt;String, Image&gt;</a> <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#a88986494a08044da95d77f8a3887ad89">iconCache</a> = <span class="keyword">new</span> HashMap&lt;&gt;();</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    </div>
+<div class="foldopen" id="foldopen00043" data-start="{" data-end="}">
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#a10cd814eb1151190717a3b14b61172be">   43</a></span>    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#a10cd814eb1151190717a3b14b61172be">setBaseAppPath</a>(<a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> path) {</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#a970644cf6fed64a80500b9497c83a698">baseAppPath</a> = path;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    }</div>
+</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    </div>
+<div class="foldopen" id="foldopen00050" data-start="{" data-end="}">
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#abfbfc1ff4bf72f51b52559dbb8e18867">   50</a></span>    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#abfbfc1ff4bf72f51b52559dbb8e18867">clearCache</a>() {</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#a88986494a08044da95d77f8a3887ad89">iconCache</a>.clear();</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    }</div>
+</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    </div>
+<div class="foldopen" id="foldopen00060" data-start="{" data-end="}">
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#af5cfc8e00f14b39cc7972184362e819c">   60</a></span>    <span class="keyword">private</span> <span class="keyword">static</span> <a class="code hl_variable" href="three_8min1_8js.html#a83dbaf53627db610030f458d575b3074">Color</a> <a class="code hl_function" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#af5cfc8e00f14b39cc7972184362e819c">getThemeColor</a>() {</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <span class="keywordflow">try</span> {</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>            <span class="comment">// Utiliser ThemeManager pour détecter le thème actuel</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            <a class="code hl_variable" href="OpenLayers_8js.html#aefa2f98d8a5cec8a46a9da512ae3fc6f">Class&lt;?&gt;</a> themeManagerClass = <a class="code hl_variable" href="OpenLayers_8js.html#aefa2f98d8a5cec8a46a9da512ae3fc6f">Class</a>.forName(<span class="stringliteral">&quot;editeurpanovisu.ThemeManager&quot;</span>);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>            java.lang.reflect.Method getCurrentThemeMethod = themeManagerClass.getMethod(<span class="stringliteral">&quot;getCurrentTheme&quot;</span>);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>            Object currentTheme = getCurrentThemeMethod.invoke(<span class="keyword">null</span>);</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>            </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>            <span class="comment">// Récupérer le nom du thème</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>            java.lang.reflect.Method nameMethod = currentTheme.getClass().getMethod(<span class="stringliteral">&quot;name&quot;</span>);</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>            <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> themeName = (<a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a>) nameMethod.invoke(currentTheme);</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>            </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>            <span class="comment">// Couleurs spéciales pour Dracula et Darcula</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>            <span class="keywordflow">if</span> (<span class="stringliteral">&quot;DRACULA&quot;</span>.equals(themeName)) {</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>                <span class="keywordflow">return</span> <a class="code hl_variable" href="three_8min1_8js.html#a83dbaf53627db610030f458d575b3074">Color</a>.web(<span class="stringliteral">&quot;#BD93F9&quot;</span>); <span class="comment">// Mauve Dracula caractéristique</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<span class="stringliteral">&quot;FLATLAF_DARCULA&quot;</span>.equals(themeName)) {</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>                <span class="keywordflow">return</span> <a class="code hl_variable" href="three_8min1_8js.html#a83dbaf53627db610030f458d575b3074">Color</a>.web(<span class="stringliteral">&quot;#9876AA&quot;</span>); <span class="comment">// Violet Darcula IntelliJ</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>            }</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>            </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>            <span class="comment">// Vérifier si le thème est sombre</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            java.lang.reflect.Method isDarkMethod = currentTheme.getClass().getMethod(<span class="stringliteral">&quot;isDark&quot;</span>);</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>            <span class="keywordtype">boolean</span> isDark = (Boolean) isDarkMethod.invoke(currentTheme);</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>            </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            <span class="comment">// Thème sombre = icônes claires, thème clair = icônes foncées</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>            <span class="keywordflow">if</span> (isDark) {</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>                <span class="keywordflow">return</span> <a class="code hl_variable" href="three_8min1_8js.html#a83dbaf53627db610030f458d575b3074">Color</a>.web(<span class="stringliteral">&quot;#E0E0E0&quot;</span>); <span class="comment">// Gris très clair pour thèmes sombres</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>                <span class="keywordflow">return</span> <a class="code hl_variable" href="three_8min1_8js.html#a83dbaf53627db610030f458d575b3074">Color</a>.web(<span class="stringliteral">&quot;#333333&quot;</span>); <span class="comment">// Gris foncé pour thèmes clairs</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>            }</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        } <span class="keywordflow">catch</span> (Exception <a class="code hl_variable" href="leaflet_8js.html#ab5902775854a8b8440bcd25e0fe1c120">e</a>) {</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>            <span class="comment">// Fallback sur l&#39;ancienne méthode avec EditeurPanovisu.getStrStyleCSS()</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>            <span class="keywordflow">try</span> {</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>                <a class="code hl_variable" href="OpenLayers_8js.html#aefa2f98d8a5cec8a46a9da512ae3fc6f">Class&lt;?&gt;</a> editeurClass = <a class="code hl_variable" href="OpenLayers_8js.html#aefa2f98d8a5cec8a46a9da512ae3fc6f">Class</a>.forName(<span class="stringliteral">&quot;editeurpanovisu.EditeurPanovisu&quot;</span>);</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>                java.lang.reflect.Method getStyleMethod = editeurClass.getMethod(<span class="stringliteral">&quot;getStrStyleCSS&quot;</span>);</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> theme = (<a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a>) getStyleMethod.invoke(<span class="keyword">null</span>);</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                <span class="keywordflow">if</span> (<span class="stringliteral">&quot;fonce&quot;</span>.equalsIgnoreCase(theme)) {</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                    <span class="keywordflow">return</span> <a class="code hl_variable" href="three_8min1_8js.html#a83dbaf53627db610030f458d575b3074">Color</a>.web(<span class="stringliteral">&quot;#E0E0E0&quot;</span>);</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>                } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>                    <span class="keywordflow">return</span> <a class="code hl_variable" href="three_8min1_8js.html#a83dbaf53627db610030f458d575b3074">Color</a>.web(<span class="stringliteral">&quot;#333333&quot;</span>);</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>                }</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>            } <span class="keywordflow">catch</span> (Exception ex) {</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>                <span class="comment">// En cas d&#39;erreur totale, utiliser la couleur par défaut (thème clair)</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>                System.err.println(<span class="stringliteral">&quot;Impossible de détecter le thème, utilisation de la couleur par défaut&quot;</span>);</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>                <span class="keywordflow">return</span> <a class="code hl_variable" href="three_8min1_8js.html#a83dbaf53627db610030f458d575b3074">Color</a>.web(<span class="stringliteral">&quot;#333333&quot;</span>);</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>            }</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        }</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    }</div>
+</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    </div>
+<div class="foldopen" id="foldopen00116" data-start="{" data-end="}">
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#ab0e96e5ebb4dce78ea938d9adca21ce2">  116</a></span>    <span class="keyword">public</span> <span class="keyword">static</span> ImageView <a class="code hl_function" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#ab0e96e5ebb4dce78ea938d9adca21ce2">loadSvgIcon</a>(<a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> iconName, <span class="keywordtype">int</span> width, <span class="keywordtype">int</span> height, <a class="code hl_variable" href="three_8min1_8js.html#a83dbaf53627db610030f458d575b3074">Color</a> color) {</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        <span class="comment">// Si aucune couleur spécifiée, détecter automatiquement selon le thème</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        <span class="keywordflow">if</span> (color == <span class="keyword">null</span>) {</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>            color = <a class="code hl_function" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#af5cfc8e00f14b39cc7972184362e819c">getThemeColor</a>();</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        }</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        </div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>        <span class="comment">// Créer une clé unique pour le cache</span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> cacheKey = iconName + <span class="stringliteral">&quot;_&quot;</span> + width + <span class="stringliteral">&quot;x&quot;</span> + height + <span class="stringliteral">&quot;_&quot;</span> + color.toString();</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        <span class="comment">// Vérifier si l&#39;icône est déjà en cache</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#a88986494a08044da95d77f8a3887ad89">iconCache</a>.containsKey(cacheKey)) {</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>            <span class="keywordflow">return</span> <span class="keyword">new</span> ImageView(<a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#a88986494a08044da95d77f8a3887ad89">iconCache</a>.get(cacheKey));</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        }</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        </div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        <span class="keywordflow">try</span> {</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>            <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> svgPath = <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#a970644cf6fed64a80500b9497c83a698">baseAppPath</a> + File.separator + <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#ab210a9a62674642f08d5fd850afc020a">SVG_PATH</a> + iconName + <span class="stringliteral">&quot;.svg&quot;</span>;</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>            File svgFile = <span class="keyword">new</span> File(svgPath);</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>            </div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>            <span class="comment">// Si le SVG n&#39;existe pas, essayer de charger le PNG équivalent</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>            <span class="keywordflow">if</span> (!svgFile.exists()) {</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>                <span class="keywordflow">return</span> <a class="code hl_function" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#ab9fdb534790cb51ab1b57c506d003289">loadFallbackPng</a>(iconName, width);</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>            }</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>            </div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>            <span class="comment">// Lire le contenu du SVG</span></div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>            <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> svgContent = <span class="keyword">new</span> <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a>(Files.readAllBytes(Paths.get(svgPath)), <span class="stringliteral">&quot;UTF-8&quot;</span>);</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>            </div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>            <span class="comment">// Remplacer currentColor par la couleur spécifiée</span></div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>            <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> hexColor = <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a>.format(<span class="stringliteral">&quot;#%02X%02X%02X&quot;</span>,</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>                (<span class="keywordtype">int</span>)(color.getRed() * 255),</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>                (<span class="keywordtype">int</span>)(color.getGreen() * 255),</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>                (<span class="keywordtype">int</span>)(color.getBlue() * 255));</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>            svgContent = svgContent.replace(<span class="stringliteral">&quot;currentColor&quot;</span>, hexColor);</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>            </div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>            <span class="comment">// Remplacer également &quot;white&quot; par la couleur de fond (blanc pour thème clair)</span></div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>            <span class="comment">// Note: ceci est une simplification, dans un vrai système il faudrait détecter le thème</span></div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>            </div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>            <span class="comment">// Convertir le SVG en PNG avec Batik</span></div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>            BufferedImage bufferedImage = <a class="code hl_function" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#a8cf07e331f244b74d124210c1569d3b4">convertSvgToPng</a>(svgContent, width, height);</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>            </div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>            <span class="comment">// Convertir BufferedImage en JavaFX Image</span></div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>            Image fxImage = SwingFXUtils.toFXImage(bufferedImage, <span class="keyword">null</span>);</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>            </div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>            <span class="comment">// Mettre en cache</span></div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>            <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#a88986494a08044da95d77f8a3887ad89">iconCache</a>.put(cacheKey, fxImage);</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>            </div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>            <span class="keywordflow">return</span> <span class="keyword">new</span> ImageView(fxImage);</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>            </div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>        } <span class="keywordflow">catch</span> (Exception <a class="code hl_variable" href="leaflet_8js.html#ab5902775854a8b8440bcd25e0fe1c120">e</a>) {</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>            System.err.println(<span class="stringliteral">&quot;Erreur lors du chargement de l&#39;icône SVG: &quot;</span> + iconName);</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>            <a class="code hl_variable" href="leaflet_8js.html#ab5902775854a8b8440bcd25e0fe1c120">e</a>.printStackTrace();</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>            <span class="keywordflow">return</span> <a class="code hl_function" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#ab9fdb534790cb51ab1b57c506d003289">loadFallbackPng</a>(iconName, width);</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>        }</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    }</div>
+</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    </div>
+<div class="foldopen" id="foldopen00177" data-start="{" data-end="}">
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#a25b0a4ec1f9c84559d94725278288b57">  177</a></span>    <span class="keyword">public</span> <span class="keyword">static</span> ImageView <a class="code hl_function" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#a25b0a4ec1f9c84559d94725278288b57">loadSvgIcon</a>(<a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> iconName, <span class="keywordtype">int</span> size, <a class="code hl_variable" href="three_8min1_8js.html#a83dbaf53627db610030f458d575b3074">Color</a> color) {</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#ab0e96e5ebb4dce78ea938d9adca21ce2">loadSvgIcon</a>(iconName, size, size, color);</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    }</div>
+</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    </div>
+<div class="foldopen" id="foldopen00188" data-start="{" data-end="}">
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#a8cf07e331f244b74d124210c1569d3b4">  188</a></span>    <span class="keyword">private</span> <span class="keyword">static</span> BufferedImage <a class="code hl_function" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#a8cf07e331f244b74d124210c1569d3b4">convertSvgToPng</a>(<a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> svgContent, <span class="keywordtype">int</span> width, <span class="keywordtype">int</span> height) <span class="keywordflow">throws</span> Exception {</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>        <span class="comment">// Créer le transcoder PNG</span></div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>        PNGTranscoder transcoder = <span class="keyword">new</span> PNGTranscoder();</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>        </div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>        <span class="comment">// Définir la taille de sortie</span></div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        transcoder.addTranscodingHint(PNGTranscoder.KEY_WIDTH, (<span class="keywordtype">float</span>) width);</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        transcoder.addTranscodingHint(PNGTranscoder.KEY_HEIGHT, (<span class="keywordtype">float</span>) height);</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>        </div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>        <span class="comment">// Créer un flux pour le SVG</span></div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>        ByteArrayInputStream inputStream = <span class="keyword">new</span> ByteArrayInputStream(svgContent.getBytes(<span class="stringliteral">&quot;UTF-8&quot;</span>));</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>        TranscoderInput input = <span class="keyword">new</span> TranscoderInput(inputStream);</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>        </div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        <span class="comment">// Créer un flux de sortie pour le PNG</span></div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>        ByteArrayOutputStream outputStream = <span class="keyword">new</span> ByteArrayOutputStream();</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>        TranscoderOutput output = <span class="keyword">new</span> TranscoderOutput(outputStream);</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>        </div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>        <span class="comment">// Effectuer la conversion</span></div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>        transcoder.transcode(input, output);</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>        </div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>        <span class="comment">// Convertir le flux en BufferedImage</span></div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>        ByteArrayInputStream pngInputStream = <span class="keyword">new</span> ByteArrayInputStream(outputStream.toByteArray());</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>        <span class="keywordflow">return</span> javax.imageio.ImageIO.read(pngInputStream);</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    }</div>
+</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    </div>
+<div class="foldopen" id="foldopen00218" data-start="{" data-end="}">
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#a2ae79f6c1319c7c91677f5ad6373e518">  218</a></span>    <span class="keyword">private</span> <span class="keyword">static</span> BufferedImage <a class="code hl_function" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#a2ae79f6c1319c7c91677f5ad6373e518">convertSvgToPng</a>(<a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> svgContent, <span class="keywordtype">int</span> size) <span class="keywordflow">throws</span> Exception {</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#a8cf07e331f244b74d124210c1569d3b4">convertSvgToPng</a>(svgContent, size, size);</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    }</div>
+</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    </div>
+<div class="foldopen" id="foldopen00228" data-start="{" data-end="}">
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#a613449af7000fc565e48cb0c25aafcc6">  228</a></span>    <span class="keyword">public</span> <span class="keyword">static</span> ImageView <a class="code hl_function" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#a613449af7000fc565e48cb0c25aafcc6">loadSvgIcon</a>(<a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> iconName, <span class="keywordtype">int</span> size) {</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#ab0e96e5ebb4dce78ea938d9adca21ce2">loadSvgIcon</a>(iconName, size, <span class="keyword">null</span>);</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>    }</div>
+</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    </div>
+<div class="foldopen" id="foldopen00235" data-start="{" data-end="}">
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#ab9fdb534790cb51ab1b57c506d003289">  235</a></span>    <span class="keyword">private</span> <span class="keyword">static</span> ImageView <a class="code hl_function" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#ab9fdb534790cb51ab1b57c506d003289">loadFallbackPng</a>(<a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> iconName, <span class="keywordtype">int</span> size) {</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>        <span class="keywordflow">try</span> {</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>            <span class="comment">// Mapper les noms SVG vers les noms PNG existants</span></div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>            <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> pngName = <a class="code hl_function" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#af546932dfbd067f7700bd0832d5efb64">mapSvgToPng</a>(iconName);</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>            <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> pngPath = <span class="stringliteral">&quot;file:&quot;</span> + <a class="code hl_variable" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#a970644cf6fed64a80500b9497c83a698">baseAppPath</a> + File.separator + <span class="stringliteral">&quot;images&quot;</span> + File.separator + pngName;</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>            Image image = <span class="keyword">new</span> Image(pngPath, size, size, <span class="keyword">true</span>, <span class="keyword">true</span>);</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>            <span class="keywordflow">return</span> <span class="keyword">new</span> ImageView(image);</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>        } <span class="keywordflow">catch</span> (Exception <a class="code hl_variable" href="leaflet_8js.html#ab5902775854a8b8440bcd25e0fe1c120">e</a>) {</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>            System.err.println(<span class="stringliteral">&quot;Erreur lors du chargement du PNG fallback: &quot;</span> + iconName);</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>            <span class="comment">// Retourner une ImageView vide plutôt que null</span></div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>            <span class="keywordflow">return</span> <span class="keyword">new</span> ImageView();</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>        }</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>    }</div>
+</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    </div>
+<div class="foldopen" id="foldopen00252" data-start="{" data-end="}">
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#af546932dfbd067f7700bd0832d5efb64">  252</a></span>    <span class="keyword">private</span> <span class="keyword">static</span> <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_function" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#af546932dfbd067f7700bd0832d5efb64">mapSvgToPng</a>(<a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> svgName) {</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>        <span class="keywordflow">switch</span> (svgName) {</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>            <span class="keywordflow">case</span> <span class="stringliteral">&quot;nouveau-projet&quot;</span>: <span class="keywordflow">return</span> <span class="stringliteral">&quot;nouveauProjet.png&quot;</span>;</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>            <span class="keywordflow">case</span> <span class="stringliteral">&quot;ouvrir-projet&quot;</span>: <span class="keywordflow">return</span> <span class="stringliteral">&quot;ouvrirProjet.png&quot;</span>;</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>            <span class="keywordflow">case</span> <span class="stringliteral">&quot;sauve-projet&quot;</span>: <span class="keywordflow">return</span> <span class="stringliteral">&quot;sauveProjet.png&quot;</span>;</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>            <span class="keywordflow">case</span> <span class="stringliteral">&quot;ajoute-panoramique&quot;</span>: <span class="keywordflow">return</span> <span class="stringliteral">&quot;ajoutePanoramique.png&quot;</span>;</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>            <span class="keywordflow">case</span> <span class="stringliteral">&quot;ajoute-plan&quot;</span>: <span class="keywordflow">return</span> <span class="stringliteral">&quot;ajoutePlan.png&quot;</span>;</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>            <span class="keywordflow">case</span> <span class="stringliteral">&quot;genere-visite&quot;</span>: <span class="keywordflow">return</span> <span class="stringliteral">&quot;genereVisite.png&quot;</span>;</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>            <span class="keywordflow">case</span> <span class="stringliteral">&quot;ajoute-image&quot;</span>: <span class="keywordflow">return</span> <span class="stringliteral">&quot;ajouteImage.png&quot;</span>;</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>            <span class="keywordflow">case</span> <span class="stringliteral">&quot;play-auto-tour&quot;</span>: <span class="keywordflow">return</span> <span class="stringliteral">&quot;playAutoTour.png&quot;</span>;</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>            <span class="keywordflow">case</span> <span class="stringliteral">&quot;pause-auto-tour&quot;</span>: <span class="keywordflow">return</span> <span class="stringliteral">&quot;pauseAutoTour.png&quot;</span>;</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>            <span class="keywordflow">case</span> <span class="stringliteral">&quot;vue-sphere&quot;</span>: <span class="keywordflow">return</span> <span class="stringliteral">&quot;equi2cube.png&quot;</span>;</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>            <span class="keywordflow">case</span> <span class="stringliteral">&quot;vue-cube&quot;</span>: <span class="keywordflow">return</span> <span class="stringliteral">&quot;cube2equi.png&quot;</span>;</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>            <span class="keywordflow">case</span> <span class="stringliteral">&quot;valide&quot;</span>: <span class="keywordflow">return</span> <span class="stringliteral">&quot;valide.png&quot;</span>;</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>            <span class="keywordflow">case</span> <span class="stringliteral">&quot;annule&quot;</span>: <span class="keywordflow">return</span> <span class="stringliteral">&quot;annule.png&quot;</span>;</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>            <span class="keywordflow">case</span> <span class="stringliteral">&quot;lien&quot;</span>: <span class="keywordflow">return</span> <span class="stringliteral">&quot;lien.png&quot;</span>;</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>            <span class="keywordflow">case</span> <span class="stringliteral">&quot;loupe&quot;</span>: <span class="keywordflow">return</span> <span class="stringliteral">&quot;loupe.png&quot;</span>;</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>            <span class="keywordflow">case</span> <span class="stringliteral">&quot;ajoute&quot;</span>: <span class="keywordflow">return</span> <span class="stringliteral">&quot;ajoute.png&quot;</span>;</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>            <span class="keywordflow">case</span> <span class="stringliteral">&quot;suppr&quot;</span>: <span class="keywordflow">return</span> <span class="stringliteral">&quot;suppr.png&quot;</span>;</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>            <span class="keywordflow">case</span> <span class="stringliteral">&quot;maison&quot;</span>: <span class="keywordflow">return</span> <span class="stringliteral">&quot;maison.png&quot;</span>;</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>            <span class="keywordflow">case</span> <span class="stringliteral">&quot;modifie&quot;</span>: <span class="keywordflow">return</span> <span class="stringliteral">&quot;modifie.png&quot;</span>;</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>            <span class="keywordflow">case</span> <span class="stringliteral">&quot;ferme&quot;</span>: <span class="keywordflow">return</span> <span class="stringliteral">&quot;ferme.png&quot;</span>;</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>            <span class="keywordflow">case</span> <span class="stringliteral">&quot;expand&quot;</span>: <span class="keywordflow">return</span> <span class="stringliteral">&quot;expand.png&quot;</span>;</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>            <span class="keywordflow">case</span> <span class="stringliteral">&quot;shrink&quot;</span>: <span class="keywordflow">return</span> <span class="stringliteral">&quot;shrink.png&quot;</span>;</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>            <span class="keywordflow">default</span>: <span class="keywordflow">return</span> svgName + <span class="stringliteral">&quot;.png&quot;</span>;</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>        }</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>    }</div>
+</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>    </div>
+<div class="foldopen" id="foldopen00287" data-start="{" data-end="}">
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#ad0c3d77e889a0209dc4319b05b2e0e72">  287</a></span>    <span class="keyword">public</span> <span class="keyword">static</span> ImageView <a class="code hl_function" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#ad0c3d77e889a0209dc4319b05b2e0e72">loadThemedIcon</a>(<a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> iconName, <span class="keywordtype">int</span> size, <span class="keywordtype">boolean</span> isDarkTheme) {</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>        <a class="code hl_variable" href="three_8min1_8js.html#a83dbaf53627db610030f458d575b3074">Color</a> iconColor = isDarkTheme ? <a class="code hl_variable" href="three_8min1_8js.html#a83dbaf53627db610030f458d575b3074">Color</a>.web(<span class="stringliteral">&quot;#E0E0E0&quot;</span>) : <a class="code hl_variable" href="three_8min1_8js.html#a83dbaf53627db610030f458d575b3074">Color</a>.web(<span class="stringliteral">&quot;#333333&quot;</span>);</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#ab0e96e5ebb4dce78ea938d9adca21ce2">loadSvgIcon</a>(iconName, size, iconColor);</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>    }</div>
+</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>}</div>
+</div>
+<div class="ttc" id="aOpenLayers_8js_html_a4ca754488880c6622cdd0e257fe5f5ea"><div class="ttname"><a href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a></div><div class="ttdeci">OpenLayers String</div><div class="ttdef"><b>Definition</b> <a href="OpenLayers_8js_source.html#l00059">OpenLayers.js:59</a></div></div>
+<div class="ttc" id="aOpenLayers_8js_html_aa8a59085f9fc9a3b74d2e1e2281b3b06"><div class="ttname"><a href="OpenLayers_8js.html#aa8a59085f9fc9a3b74d2e1e2281b3b06">Map</a></div><div class="ttdeci">OpenLayers Map</div><div class="ttdef"><b>Definition</b> <a href="OpenLayers_8js_source.html#l00159">OpenLayers.js:159</a></div></div>
+<div class="ttc" id="aOpenLayers_8js_html_aefa2f98d8a5cec8a46a9da512ae3fc6f"><div class="ttname"><a href="OpenLayers_8js.html#aefa2f98d8a5cec8a46a9da512ae3fc6f">Class</a></div><div class="ttdeci">OpenLayers Class</div><div class="ttdef"><b>Definition</b> <a href="OpenLayers_8js_source.html#l00058">OpenLayers.js:58</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1util_1_1SvgIconLoader_html"><div class="ttname"><a href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html">editeurpanovisu.util.SvgIconLoader</a></div><div class="ttdoc">Utilitaire pour charger des icônes SVG et les adapter au thème CSS Les SVG utilisent &quot;currentColor&quot; q...</div><div class="ttdef"><b>Definition</b> <a href="#l00031">SvgIconLoader.java:31</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1util_1_1SvgIconLoader_html_a10cd814eb1151190717a3b14b61172be"><div class="ttname"><a href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#a10cd814eb1151190717a3b14b61172be">editeurpanovisu.util.SvgIconLoader.setBaseAppPath</a></div><div class="ttdeci">static void setBaseAppPath(String path)</div><div class="ttdoc">Définit le chemin de base de l&#39;application.</div><div class="ttdef"><b>Definition</b> <a href="#l00043">SvgIconLoader.java:43</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1util_1_1SvgIconLoader_html_a25b0a4ec1f9c84559d94725278288b57"><div class="ttname"><a href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#a25b0a4ec1f9c84559d94725278288b57">editeurpanovisu.util.SvgIconLoader.loadSvgIcon</a></div><div class="ttdeci">static ImageView loadSvgIcon(String iconName, int size, Color color)</div><div class="ttdoc">Charge une icône SVG et la convertit en ImageView (version carrée)</div><div class="ttdef"><b>Definition</b> <a href="#l00177">SvgIconLoader.java:177</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1util_1_1SvgIconLoader_html_a2ae79f6c1319c7c91677f5ad6373e518"><div class="ttname"><a href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#a2ae79f6c1319c7c91677f5ad6373e518">editeurpanovisu.util.SvgIconLoader.convertSvgToPng</a></div><div class="ttdeci">static BufferedImage convertSvgToPng(String svgContent, int size)</div><div class="ttdoc">Convertit un SVG en BufferedImage PNG avec Batik (version carrée)</div><div class="ttdef"><b>Definition</b> <a href="#l00218">SvgIconLoader.java:218</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1util_1_1SvgIconLoader_html_a613449af7000fc565e48cb0c25aafcc6"><div class="ttname"><a href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#a613449af7000fc565e48cb0c25aafcc6">editeurpanovisu.util.SvgIconLoader.loadSvgIcon</a></div><div class="ttdeci">static ImageView loadSvgIcon(String iconName, int size)</div><div class="ttdoc">Charge une icône SVG avec la couleur par défaut.</div><div class="ttdef"><b>Definition</b> <a href="#l00228">SvgIconLoader.java:228</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1util_1_1SvgIconLoader_html_a88986494a08044da95d77f8a3887ad89"><div class="ttname"><a href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#a88986494a08044da95d77f8a3887ad89">editeurpanovisu.util.SvgIconLoader.iconCache</a></div><div class="ttdeci">static final Map&lt; String, Image &gt; iconCache</div><div class="ttdef"><b>Definition</b> <a href="#l00037">SvgIconLoader.java:37</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1util_1_1SvgIconLoader_html_a8cf07e331f244b74d124210c1569d3b4"><div class="ttname"><a href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#a8cf07e331f244b74d124210c1569d3b4">editeurpanovisu.util.SvgIconLoader.convertSvgToPng</a></div><div class="ttdeci">static BufferedImage convertSvgToPng(String svgContent, int width, int height)</div><div class="ttdoc">Convertit un SVG en BufferedImage PNG avec Batik (dimensions personnalisées)</div><div class="ttdef"><b>Definition</b> <a href="#l00188">SvgIconLoader.java:188</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1util_1_1SvgIconLoader_html_a970644cf6fed64a80500b9497c83a698"><div class="ttname"><a href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#a970644cf6fed64a80500b9497c83a698">editeurpanovisu.util.SvgIconLoader.baseAppPath</a></div><div class="ttdeci">static String baseAppPath</div><div class="ttdef"><b>Definition</b> <a href="#l00034">SvgIconLoader.java:34</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1util_1_1SvgIconLoader_html_ab0e96e5ebb4dce78ea938d9adca21ce2"><div class="ttname"><a href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#ab0e96e5ebb4dce78ea938d9adca21ce2">editeurpanovisu.util.SvgIconLoader.loadSvgIcon</a></div><div class="ttdeci">static ImageView loadSvgIcon(String iconName, int width, int height, Color color)</div><div class="ttdoc">Charge une icône SVG et la convertit en ImageView avec dimensions personnalisées.</div><div class="ttdef"><b>Definition</b> <a href="#l00116">SvgIconLoader.java:116</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1util_1_1SvgIconLoader_html_ab210a9a62674642f08d5fd850afc020a"><div class="ttname"><a href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#ab210a9a62674642f08d5fd850afc020a">editeurpanovisu.util.SvgIconLoader.SVG_PATH</a></div><div class="ttdeci">static final String SVG_PATH</div><div class="ttdef"><b>Definition</b> <a href="#l00033">SvgIconLoader.java:33</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1util_1_1SvgIconLoader_html_ab9fdb534790cb51ab1b57c506d003289"><div class="ttname"><a href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#ab9fdb534790cb51ab1b57c506d003289">editeurpanovisu.util.SvgIconLoader.loadFallbackPng</a></div><div class="ttdeci">static ImageView loadFallbackPng(String iconName, int size)</div><div class="ttdoc">Fallback: charge l&#39;icône PNG si le SVG n&#39;est pas disponible.</div><div class="ttdef"><b>Definition</b> <a href="#l00235">SvgIconLoader.java:235</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1util_1_1SvgIconLoader_html_abfbfc1ff4bf72f51b52559dbb8e18867"><div class="ttname"><a href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#abfbfc1ff4bf72f51b52559dbb8e18867">editeurpanovisu.util.SvgIconLoader.clearCache</a></div><div class="ttdeci">static void clearCache()</div><div class="ttdoc">Vide le cache des icônes (utile lors d&#39;un changement de thème)</div><div class="ttdef"><b>Definition</b> <a href="#l00050">SvgIconLoader.java:50</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1util_1_1SvgIconLoader_html_ad0c3d77e889a0209dc4319b05b2e0e72"><div class="ttname"><a href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#ad0c3d77e889a0209dc4319b05b2e0e72">editeurpanovisu.util.SvgIconLoader.loadThemedIcon</a></div><div class="ttdeci">static ImageView loadThemedIcon(String iconName, int size, boolean isDarkTheme)</div><div class="ttdoc">Crée un ImageView avec couleur adaptée au thème.</div><div class="ttdef"><b>Definition</b> <a href="#l00287">SvgIconLoader.java:287</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1util_1_1SvgIconLoader_html_af546932dfbd067f7700bd0832d5efb64"><div class="ttname"><a href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#af546932dfbd067f7700bd0832d5efb64">editeurpanovisu.util.SvgIconLoader.mapSvgToPng</a></div><div class="ttdeci">static String mapSvgToPng(String svgName)</div><div class="ttdoc">Mappe les noms de fichiers SVG vers les noms PNG existants.</div><div class="ttdef"><b>Definition</b> <a href="#l00252">SvgIconLoader.java:252</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1util_1_1SvgIconLoader_html_af5cfc8e00f14b39cc7972184362e819c"><div class="ttname"><a href="classediteurpanovisu_1_1util_1_1SvgIconLoader.html#af5cfc8e00f14b39cc7972184362e819c">editeurpanovisu.util.SvgIconLoader.getThemeColor</a></div><div class="ttdeci">static Color getThemeColor()</div><div class="ttdoc">Détecte la couleur appropriée selon le thème actif (clair ou foncé) Fonctionne avec tous les thèmes :...</div><div class="ttdef"><b>Definition</b> <a href="#l00060">SvgIconLoader.java:60</a></div></div>
+<div class="ttc" id="aleaflet_8js_html_ab5902775854a8b8440bcd25e0fe1c120"><div class="ttname"><a href="leaflet_8js.html#ab5902775854a8b8440bcd25e0fe1c120">e</a></div><div class="ttdeci">var e</div><div class="ttdef"><b>Definition</b> <a href="leaflet_8js_source.html#l00005">leaflet.js:5</a></div></div>
+<div class="ttc" id="athree_8min1_8js_html_a83dbaf53627db610030f458d575b3074"><div class="ttname"><a href="three_8min1_8js.html#a83dbaf53627db610030f458d575b3074">Color</a></div><div class="ttdeci">THREE Color</div><div class="ttdef"><b>Definition</b> <a href="three_8min1_8js_source.html#l00006">three.min1.js:6</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="dir_184160a943439c2c782fe244782aeddc.html">editeurpanovisu</a></li><li class="navelem"><a href="dir_58297869b1328f064a94224c606048cd.html">util</a></li><li class="navelem"><a href="SvgIconLoader_8java.html">SvgIconLoader.java</a></li>
+    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>

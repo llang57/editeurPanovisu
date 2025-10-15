@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>EditeurPanovisu: Référence du fichier src/editeurpanovisu/EditeurHTML.java</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">EditeurPanovisu<span id="projectnumber">&#160;3.1.0</span>
+   </div>
+   <div id="projectbrief">Éditeur de visites virtuelles 360° Panovisu</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Recherche',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('EditeurHTML_8java.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Chargement...</div>
+<div class="SRStatus" id="Searching">Recherche...</div>
+<div class="SRStatus" id="NoMatches">Aucune correspondance</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Référence du fichier EditeurHTML.java</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>import editeurpanovisu.EditeurPanovisu.getPanoramiquesProjet;</code><br />
+<code>import editeurpanovisu.EditeurPanovisu.getiPanoActuel;</code><br />
+<code>import java.awt.Desktop;</code><br />
+<code>import java.beans.PropertyChangeEvent;</code><br />
+<code>import java.beans.PropertyChangeListener;</code><br />
+<code>import java.beans.PropertyChangeSupport;</code><br />
+<code>import java.io.File;</code><br />
+<code>import java.io.FileNotFoundException;</code><br />
+<code>import java.io.IOException;</code><br />
+<code>import java.math.BigDecimal;</code><br />
+<code>import java.net.URI;</code><br />
+<code>import java.net.URISyntaxException;</code><br />
+<code>import java.nio.file.Files;</code><br />
+<code>import java.nio.file.StandardCopyOption;</code><br />
+<code>import java.util.ArrayList;</code><br />
+<code>import java.util.List;</code><br />
+<code>import java.util.ResourceBundle;</code><br />
+<code>import java.util.logging.Level;</code><br />
+<code>import java.util.logging.Logger;</code><br />
+<code>import java.util.regex.Pattern;</code><br />
+<code>import javafx.application.Platform;</code><br />
+<code>import javafx.collections.FXCollections;</code><br />
+<code>import javafx.collections.ObservableList;</code><br />
+<code>import javafx.geometry.Orientation;</code><br />
+<code>import javafx.geometry.Pos;</code><br />
+<code>import javafx.scene.Node;</code><br />
+<code>import javafx.scene.Parent;</code><br />
+<code>import javafx.scene.Scene;</code><br />
+<code>import javafx.scene.control.Button;</code><br />
+<code>import javafx.scene.control.ColorPicker;</code><br />
+<code>import javafx.scene.control.ComboBox;</code><br />
+<code>import javafx.scene.control.Label;</code><br />
+<code>import javafx.scene.control.ScrollPane;</code><br />
+<code>import javafx.scene.control.Separator;</code><br />
+<code>import javafx.scene.control.Slider;</code><br />
+<code>import javafx.scene.control.TextField;</code><br />
+<code>import javafx.scene.control.ToggleButton;</code><br />
+<code>import javafx.scene.control.ToggleGroup;</code><br />
+<code>import javafx.scene.control.ToolBar;</code><br />
+<code>import javafx.scene.control.Tooltip;</code><br />
+<code>import javafx.scene.image.Image;</code><br />
+<code>import javafx.scene.image.ImageView;</code><br />
+<code>import javafx.scene.layout.AnchorPane;</code><br />
+<code>import javafx.scene.paint.Color;</code><br />
+<code>import javafx.scene.text.Font;</code><br />
+<code>import javafx.scene.web.HTMLEditor;</code><br />
+<code>import javafx.scene.web.WebEngine;</code><br />
+<code>import javafx.scene.web.WebView;</code><br />
+<code>import javafx.stage.FileChooser;</code><br />
+<code>import javafx.stage.Modality;</code><br />
+<code>import javafx.stage.Stage;</code><br />
+<code>import javafx.stage.StageStyle;</code><br />
+</div>
+<p><a href="EditeurHTML_8java_source.html">Aller au code source de ce fichier.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:editeurpanovisu_2EEditeurHTML" id="r_editeurpanovisu_2EEditeurHTML"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1EditeurHTML.html">editeurpanovisu.EditeurHTML</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
+Paquetages</h2></td></tr>
+<tr class="memitem:editeurpanovisu" id="r_editeurpanovisu"><td class="memItemLeft" align="right" valign="top">package &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceediteurpanovisu.html">editeurpanovisu</a></td></tr>
+</table>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="dir_184160a943439c2c782fe244782aeddc.html">editeurpanovisu</a></li><li class="navelem"><a href="EditeurHTML_8java.html">EditeurHTML.java</a></li>
+    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>

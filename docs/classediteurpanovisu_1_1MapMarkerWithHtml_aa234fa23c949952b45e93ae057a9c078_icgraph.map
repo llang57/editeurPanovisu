@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.MapMarkerWithHtml.setHtmlContent" name="editeurpanovisu.MapMarkerWithHtml.setHtmlContent">
+<area shape="rect" id="Node000001" title="Définit le contenu (peut contenir du HTML: titre nom) Extrait le texte brut et formate: &quot;titre &#45; nom&quot;..." alt="" coords="234,39,415,81"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1NavigateurCarteGluon.html#a4a6e606145fb4686d0bf387e0ac24c57" title="Ajoute un marqueur à la carte avec CoordonneesGeographiques." alt="" coords="5,5,186,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="218,47,186,42,187,37,219,42"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1NavigateurCarteGluon.html#afff3d7140d138311deb7ec3b54b2a071" title="Ajoute un marqueur à la carte." alt="" coords="5,72,186,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="219,78,187,83,186,78,218,73"/>
+</map>

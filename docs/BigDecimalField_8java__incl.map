@@ -1,0 +1,19 @@
+<map id="src/editeurpanovisu/BigDecimalField.java" name="src/editeurpanovisu/BigDecimalField.java">
+<area shape="rect" id="Node000001" title=" " alt="" coords="722,5,870,48"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,96,193,139"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="722,37,496,61,208,98,208,93,496,56,722,32"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="216,96,406,139"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="722,44,421,98,420,93,721,39"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="430,96,597,139"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="731,51,595,93,593,88,729,46"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="622,96,789,139"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="777,50,739,87,736,83,773,46"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="814,104,963,131"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="820,46,866,91,862,95,816,50"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="988,104,1152,131"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="861,46,1017,96,1015,101,860,51"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="1176,96,1331,139"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="871,38,1162,93,1161,98,870,44"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="1356,104,1504,131"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="871,32,1084,55,1343,93,1365,98,1364,103,1343,99,1083,61,871,37"/>
+</map>

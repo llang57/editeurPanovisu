@@ -1,0 +1,18 @@
+<map id="editeurpanovisu.DocumentationDialog.TestApp.start" name="editeurpanovisu.DocumentationDialog.TestApp.start">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,97,210,140"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1DocumentationDialog.html#aa0f8323beb35114ad3307da310a5c2c1" title="Constructeur." alt="" coords="258,97,462,140"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="210,116,242,116,242,121,210,121"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1DocumentationDialog.html#a63eba557cc6f0e6e9a203792a785b215" title="Charge le document sélectionné dans le ComboBox." alt="" coords="510,64,743,107"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="462,103,494,99,495,104,463,109"/>
+<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1DocumentationDialog.html#ac1870b3fbef3d6aa08f8ddbd316e157b" title="Ouvre un dialogue pour sélectionner un fichier Markdown." alt="" coords="524,131,729,173"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="463,129,510,135,509,140,462,134"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1DocumentationDialog.html#a27fb5370868a2c048a5135e642d3b997" title="Charge un document Markdown." alt="" coords="791,5,996,48"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="726,61,778,49,779,55,727,66"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1DocumentationDialog_1_1DocumentItem.html#a0ed1c037fa26bcdca198e0d8cb88b8d7" title=" " alt="" coords="791,72,996,115"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="744,86,776,87,776,92,744,92"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1DocumentationDialog.html#af05cb292b0268f3867b7e5d84f016a27" title="Affiche un message d&#39;erreur dans la WebView." alt="" coords="1050,101,1254,144"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="964,46,997,57,1086,93,1084,98,995,63,962,51"/>
+<area shape="rect" id="Node000006" href="$enumediteurpanovisu_1_1DocumentationDialog_1_1DocumentType.html#a073cf6874d89ef94b06a4d69f303c7f0" title=" " alt="" coords="1044,5,1261,48"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="996,24,1028,24,1028,29,996,29"/>
+<area shape="poly" id="edge8_Node000008_Node000005" title=" " alt="" coords="729,144,1035,127,1035,132,730,149"/>
+</map>

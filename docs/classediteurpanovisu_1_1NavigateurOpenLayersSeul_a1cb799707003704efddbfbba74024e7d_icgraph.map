@@ -1,0 +1,10 @@
+<map id="editeurpanovisu.NavigateurOpenLayersSeul.getApChoixCartographie" name="editeurpanovisu.NavigateurOpenLayersSeul.getApChoixCartographie">
+<area shape="rect" id="Node000001" title=" " alt="" coords="852,35,1116,77"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1NavigateurOpenLayersSeul.html#a6a948b85fe184214f9e5d7b774807b6a" title=" " alt="" coords="547,5,804,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="836,45,805,42,805,36,837,39"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1NavigateurOpenLayersSeul.html#a86413462bed95fc61c68740e91499c5c" title=" " alt="" coords="5,27,228,85"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="836,62,804,63,540,65,276,63,228,62,228,56,276,57,540,59,804,57,836,57"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1NavigateurOpenLayersSeul.html#a90af8f534bb74bfb718faa9c50193d76" title=" " alt="" coords="276,5,499,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="531,29,499,29,499,24,531,24"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="261,43,228,47,228,41,260,38"/>
+</map>

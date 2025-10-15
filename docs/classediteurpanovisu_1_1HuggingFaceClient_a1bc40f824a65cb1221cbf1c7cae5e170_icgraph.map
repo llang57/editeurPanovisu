@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.HuggingFaceClient.generateTextAsync" name="editeurpanovisu.HuggingFaceClient.generateTextAsync">
+<area shape="rect" id="Node000001" title="Génère du texte de manière asynchrone." alt="" coords="550,5,743,48"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1TestAIClients.html#a55d1e3e95eea57dd03038092f607bff7" title="Test du client Hugging Face." alt="" coords="281,5,502,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="534,29,502,29,502,24,534,24"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1TestAIClients.html#a0513dc754d9bc85fc8b50d2b9993b35a" title=" " alt="" coords="5,13,233,40"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="265,29,233,29,233,24,265,24"/>
+</map>

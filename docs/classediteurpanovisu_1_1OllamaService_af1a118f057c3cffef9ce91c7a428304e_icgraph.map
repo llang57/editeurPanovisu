@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.OllamaService.genererDescription" name="editeurpanovisu.OllamaService.genererDescription">
+<area shape="rect" id="Node000001" title="Génère une description géographique basée sur les informations disponibles IMPORTANT : Tient compte d..." alt="" coords="600,5,848,48"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1EditeurPanovisu.html#a31698230ca6021fb284e21e7a35135d0" title="Génère une description IA pour le panoramique courant." alt="" coords="294,5,552,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="585,29,552,29,552,24,585,24"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1EditeurPanovisu.html#a86c393eee88f54c694db994ddd85b90d" title=" " alt="" coords="5,5,246,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="278,29,246,29,246,24,278,24"/>
+</map>

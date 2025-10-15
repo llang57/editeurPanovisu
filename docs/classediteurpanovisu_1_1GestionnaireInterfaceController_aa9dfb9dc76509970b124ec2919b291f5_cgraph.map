@@ -1,0 +1,13 @@
+<map id="editeurpanovisu.GestionnaireInterfaceController.changeCouleurMasque" name="editeurpanovisu.GestionnaireInterfaceController.changeCouleurMasque">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,139,225,197"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#afc1fe32f830791ed641d875b89427aca" title=" " alt="" coords="278,5,496,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="151,136,206,96,271,58,285,52,287,56,274,62,209,100,154,140"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a59340fa9224b7f5b7f764833ced68bf6" title=" " alt="" coords="274,72,500,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="224,135,292,117,293,122,225,141"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#aa71013435a49b6180d667647ba290ce0" title=" " alt="" coords="273,139,501,197"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="225,165,257,165,257,171,225,171"/>
+<area shape="rect" id="Node000005" href="$leaflet_8js.html#a008d931e56b6fc013061112f26afbffb" title=" " alt="" coords="368,221,406,248"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="226,195,273,207,353,225,352,230,272,212,224,200"/>
+<area shape="rect" id="Node000006" href="$leaflet_8js.html#a9f9b62a373d2bb4624b7ac2df8151435" title=" " alt="" coords="368,272,406,299"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="160,195,213,228,274,258,314,270,352,278,351,283,313,275,272,262,210,233,157,200"/>
+</map>

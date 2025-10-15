@@ -1,0 +1,15 @@
+<map id="editeurpanovisu.VisualiseurImagesPanoramiques.getFov" name="editeurpanovisu.VisualiseurImagesPanoramiques.getFov">
+<area shape="rect" id="Node000001" title=" " alt="" coords="791,64,983,107"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html#ae8973d3b3335139032ad3e2991dcfeba" title=" " alt="" coords="525,5,743,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="777,63,729,51,730,46,778,57"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html#af8054a76c76eed1ef022005db88148c1" title=" " alt="" coords="277,64,477,107"/>
+<area shape="poly" id="edge7_Node000001_Node000003" title=" " alt="" coords="776,88,477,88,477,83,776,83"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html#ac38446a4ab5c61c1dfd273f9d50c69c8" title=" " alt="" coords="540,123,729,165"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="778,113,730,125,729,119,777,108"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="523,55,474,66,473,61,522,49"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html#ae11a24d852acc18c1ad74844be5f5061" title=" " alt="" coords="7,31,227,73"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="261,73,227,69,228,63,261,68"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html#aed1e4d51da4f14c268b1ee2a70f96738" title=" " alt="" coords="5,97,229,140"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="261,103,229,107,229,102,261,98"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="524,122,473,110,474,105,525,116"/>
+</map>

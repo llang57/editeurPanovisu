@@ -1,0 +1,5 @@
+<map id="editeurpanovisu.MarqueurGeolocalisation" name="editeurpanovisu.MarqueurGeolocalisation">
+<area shape="rect" id="Node000001" title=" " alt="" coords="17,120,187,163"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1CoordonneesGeographiques.html" title=" " alt="" coords="5,5,199,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="105,64,105,120,99,120,99,64"/>
+</map>

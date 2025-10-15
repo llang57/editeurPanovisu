@@ -1,0 +1,11 @@
+<map id="editeurpanovisu.GestionnairePlanController" name="editeurpanovisu.GestionnairePlanController">
+<area shape="rect" id="Node000001" title=" " alt="" coords="104,217,293,260"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1ExtensionsFilter.html" title="Génération de listes FileFilter." alt="" coords="5,81,187,124"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="116,136,154,192,176,215,173,219,150,195,112,139"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="60,5,132,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="99,48,99,81,93,81,93,48"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1BigDecimalField.html" title="Classe de remplacement pour jfxtras.labs.scene.control.BigDecimalField qui n&#39;est plus disponible dans..." alt="" coords="211,81,394,124"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="291,140,276,168,257,195,231,219,227,215,253,192,271,165,286,137"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="266,5,340,32"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="305,48,305,81,300,81,300,48"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.DocumentationDialog.chargerDocument" name="editeurpanovisu.DocumentationDialog.chargerDocument">
+<area shape="rect" id="Node000001" title="Charge un document Markdown." alt="" coords="5,39,210,81"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1DocumentationDialog.html#af05cb292b0268f3867b7e5d84f016a27" title="Affiche un message d&#39;erreur dans la WebView." alt="" coords="264,5,468,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="210,44,248,39,249,44,210,49"/>
+<area shape="rect" id="Node000003" href="$enumediteurpanovisu_1_1DocumentationDialog_1_1DocumentType.html#a073cf6874d89ef94b06a4d69f303c7f0" title=" " alt="" coords="258,72,475,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="210,71,243,75,242,80,210,76"/>
+</map>

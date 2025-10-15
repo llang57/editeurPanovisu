@@ -1,0 +1,10 @@
+<map id="editeurpanovisu.MarkdownViewer.afficherFichierMarkdown" name="editeurpanovisu.MarkdownViewer.afficherFichierMarkdown">
+<area shape="rect" id="Node000001" title="Affiche un fichier Markdown dans une WebView." alt="" coords="5,51,212,93"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1MarkdownViewer.html#a93aeaf0c671032f2da3d4a18d9fcf752" title="Convertit du Markdown en HTML." alt="" coords="260,5,479,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="212,51,244,46,245,51,213,57"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1MarkdownViewer.html#a819e79889af18dc33a07fab30c6e1369" title="Enveloppe le HTML dans une structure complète avec CSS." alt="" coords="276,96,463,139"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="213,87,261,96,260,101,212,93"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1MarkdownViewer.html#a861f2a104621e752b0eee2e71ee2c071" title="Remplace les émojis courants par des badges visuels stylisés Affiche uniquement l&#39;icône,..." alt="" coords="527,5,703,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="479,24,511,24,511,29,479,29"/>
+<area shape="poly" id="edge4_Node000004_Node000004" title=" " alt="" coords="323,96,321,86,329,77,345,71,369,69,396,72,411,78,409,83,394,77,369,75,346,77,332,81,326,87,328,95"/>
+</map>

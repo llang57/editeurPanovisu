@@ -1,0 +1,5 @@
+<map id="editeurpanovisu.ApiKeysConfig.getHuggingFaceModel" name="editeurpanovisu.ApiKeysConfig.getHuggingFaceModel">
+<area shape="rect" id="Node000001" title="Récupère le modèle Hugging Face configuré" alt="" coords="247,5,472,48"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1HuggingFaceClient.html#a12e6bcc947b3a15c9b32ff54c3b2a7f1" title="Constructeur avec configuration automatique depuis ApiKeysConfig." alt="" coords="5,5,199,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="231,29,199,29,199,24,231,24"/>
+</map>

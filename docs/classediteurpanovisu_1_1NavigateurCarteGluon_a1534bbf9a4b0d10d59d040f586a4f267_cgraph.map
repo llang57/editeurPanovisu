@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.NavigateurCarteGluon.allerAdresse" name="editeurpanovisu.NavigateurCarteGluon.allerAdresse">
+<area shape="rect" id="Node000001" title="Géocode une adresse avec zoom personnalisé" alt="" coords="5,5,185,48"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1NavigateurCarteGluon.html#a72b2a64cef1c0fde6e1c61c6ba62b013" title="Centre la carte sur des coordonnées géographiques." alt="" coords="233,5,425,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="185,24,217,24,217,29,185,29"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1NavigateurCarteGluon.html#a550a7fc12fb8b19e05c58a529f134dd9" title="Initialise réellement le JMapViewer (appelé la première fois qu&#39;on affiche la carte)" alt="" coords="473,5,652,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="426,24,457,24,457,29,426,29"/>
+</map>

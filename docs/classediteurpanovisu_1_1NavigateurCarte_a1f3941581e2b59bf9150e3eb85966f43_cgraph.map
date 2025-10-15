@@ -1,0 +1,5 @@
+<map id="editeurpanovisu.NavigateurCarte.replaceImageUrlsWithBase64" name="editeurpanovisu.NavigateurCarte.replaceImageUrlsWithBase64">
+<area shape="rect" id="Node000001" title="Remplace les URLs d&#39;images dans le CSS par des données base64." alt="" coords="5,5,236,48"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1NavigateurCarte.html#a9e2c051b6a68c9f879d067944c2f8d81" title="Encode une image en base64." alt="" coords="284,5,477,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="236,24,268,24,268,29,236,29"/>
+</map>

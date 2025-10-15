@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.NavigateurCarteGluon.recupereCoordonnees" name="editeurpanovisu.NavigateurCarteGluon.recupereCoordonnees">
+<area shape="rect" id="Node000001" title="Récupère les coordonnées du centre de la carte." alt="" coords="5,39,224,81"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1CoordonneesGeographiques.html#ad2ef91e64b34a719226ba08ac698c478" title=" " alt="" coords="272,5,465,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="224,43,256,39,257,44,225,48"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1CoordonneesGeographiques.html#ab259d2b489394191a5f8a2960ac322bd" title=" " alt="" coords="272,72,465,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="225,72,257,76,256,81,224,77"/>
+</map>

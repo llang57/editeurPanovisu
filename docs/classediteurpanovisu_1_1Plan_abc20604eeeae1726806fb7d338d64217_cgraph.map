@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.Plan.addHotspot" name="editeurpanovisu.Plan.addHotspot">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,39,173,81"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1Plan.html#a914b72ad79df4aee991e1457e42e7519" title=" " alt="" coords="221,5,385,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="173,44,205,39,206,44,174,50"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1Plan.html#ac7422af07c69a90e71fbb6d8630fbc1c" title=" " alt="" coords="221,72,385,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="174,70,206,76,205,81,173,76"/>
+</map>

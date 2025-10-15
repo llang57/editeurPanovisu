@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.DocumentationDialog" name="editeurpanovisu.DocumentationDialog">
+<area shape="rect" id="Node000001" title="Dialogue pour afficher la documentation au format Markdown." alt="" coords="5,120,210,163"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="10,13,66,40"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="56,52,97,118,93,121,52,55"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1MarkdownViewer.html" title="Classe utilitaire pour afficher des fichiers Markdown dans une WebView JavaFX." alt="" coords="90,5,266,48"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="159,63,123,121,118,118,155,60"/>
+</map>

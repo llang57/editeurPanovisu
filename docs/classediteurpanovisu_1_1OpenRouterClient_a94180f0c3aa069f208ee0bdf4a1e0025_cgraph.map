@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.OpenRouterClient.chat" name="editeurpanovisu.OpenRouterClient.chat">
+<area shape="rect" id="Node000001" title="Envoie un message avec tous les paramètres personnalisables." alt="" coords="5,39,192,81"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1OpenRouterClient.html#a040378b66306cab4e811640f07a2b310" title="Échappe les caractères spéciaux pour JSON." alt="" coords="246,5,432,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="192,44,230,39,231,44,192,50"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1OpenRouterClient.html#ab18c7d6d9d1fc30d4eecf2c6b82837fb" title="Extrait le contenu du message de la réponse JSON Format OpenRouter: {&quot;choices&quot;: [{&quot;message&quot;: {&quot;conten..." alt="" coords="240,72,438,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="192,70,224,75,224,80,192,76"/>
+</map>

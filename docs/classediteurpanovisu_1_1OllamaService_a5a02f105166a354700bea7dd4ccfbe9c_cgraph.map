@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.OllamaService.isOllamaAvailable" name="editeurpanovisu.OllamaService.isOllamaAvailable">
+<area shape="rect" id="Node000001" title="Vérifie si un service IA est disponible (Ollama ou Hugging Face)" alt="" coords="5,5,221,48"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1OllamaService.html#a3c02edbb2bc9e72804627518163b544a" title="Détecte automatiquement le meilleur modèle Ollama installé Priorise les modèles les plus fiables pour..." alt="" coords="269,5,521,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="221,24,253,24,253,29,221,29"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="569,13,607,40"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="521,24,554,24,554,29,521,29"/>
+</map>

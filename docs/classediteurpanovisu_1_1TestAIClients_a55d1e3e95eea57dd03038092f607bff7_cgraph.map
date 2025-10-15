@@ -1,0 +1,13 @@
+<map id="editeurpanovisu.TestAIClients.testHuggingFace" name="editeurpanovisu.TestAIClients.testHuggingFace">
+<area shape="rect" id="Node000001" title="Test du client Hugging Face." alt="" coords="5,92,227,135"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1HuggingFaceClient.html#a4c0af2a214470600ed8821aa4038331f" title="Génère du texte à partir d&#39;un prompt." alt="" coords="516,29,709,72"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="156,89,211,64,274,44,332,36,391,32,501,35,500,40,391,37,332,41,275,49,212,69,158,94"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1HuggingFaceClient.html#a1bc40f824a65cb1221cbf1c7cae5e170" title="Génère du texte de manière asynchrone." alt="" coords="275,59,468,101"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="227,96,259,92,260,97,227,102"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1HuggingFaceClient.html#adb750e8b85863fec36e617afdb9be775" title="Récupère le nom du modèle utilisé" alt="" coords="275,125,468,168"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="227,125,260,129,259,135,227,130"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1HuggingFaceClient.html#a8ab14ad60a8c19d17407402ca93cbbce" title="Vérifie si le client est configuré correctement." alt="" coords="275,192,468,235"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="168,133,276,178,292,184,291,189,274,182,166,138"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="567,29,565,19,573,10,589,5,613,3,638,5,654,11,652,16,637,10,613,8,590,10,576,15,570,21,572,28"/>
+<area shape="poly" id="edge4_Node000003_Node000002" title=" " alt="" coords="468,66,500,62,501,67,469,71"/>
+</map>

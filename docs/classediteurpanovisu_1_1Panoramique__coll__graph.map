@@ -1,0 +1,15 @@
+<map id="editeurpanovisu.Panoramique" name="editeurpanovisu.Panoramique">
+<area shape="rect" id="Node000001" title="Défintions des vues Panoramiques." alt="" coords="799,120,991,146"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1HotSpot.html" title="Définition des hotspots panoramiques." alt="" coords="404,10,568,37"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="585,23,678,33,728,43,776,57,834,86,878,117,875,122,831,91,774,62,727,48,678,39,584,28"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1HotspotImage.html" title="Définition des hotspots Image." alt="" coords="387,65,586,92"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="601,84,775,105,835,117,834,122,775,110,600,90"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1HotspotHTML.html" title=" " alt="" coords="387,120,586,146"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="601,130,799,130,799,136,601,136"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1ImageEditeurHTML.html" title=" " alt="" coords="5,120,235,146"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="250,130,387,130,387,136,250,136"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1HotspotDiaporama.html" title="Définition des hotspots Image." alt="" coords="374,174,599,201"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="614,178,694,171,775,160,844,144,845,150,775,165,694,176,615,183"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1CoordonneesGeographiques.html" title=" " alt="" coords="390,225,583,268"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="598,241,686,230,731,220,774,207,804,193,832,177,876,145,879,149,834,181,806,198,776,212,732,225,687,235,599,246"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="editeurpanovisu.GestionnaireInterfaceController.chercheZone" name="editeurpanovisu.GestionnaireInterfaceController.chercheZone">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,96,213,139"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a1c6ac3176357d8507ce82a90a72e7fef" title=" " alt="" coords="261,5,496,64"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="180,93,265,67,267,72,182,98"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a772989932b75e9e5a035e42b31d84bd5" title=" " alt="" coords="270,88,487,147"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="213,115,254,115,254,120,213,120"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="359,171,398,197"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="188,137,261,156,344,175,343,180,260,161,186,142"/>
+</map>

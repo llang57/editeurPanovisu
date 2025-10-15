@@ -1,0 +1,8 @@
+<map id="editeurpanovisu.ApiKeysConfig.getHuggingFaceApiKey" name="editeurpanovisu.ApiKeysConfig.getHuggingFaceApiKey">
+<area shape="rect" id="Node000001" title="Récupère la clé API Hugging Face." alt="" coords="523,35,748,77"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1ApiKeysConfig.html#a048ff9cd5ae4cb7c5738168b4234f333" title="Vérifie si une clé API Hugging Face est configurée." alt="" coords="247,5,475,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="507,45,475,42,476,36,508,40"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1HuggingFaceClient.html#a12e6bcc947b3a15c9b32ff54c3b2a7f1" title="Constructeur avec configuration automatique depuis ApiKeysConfig." alt="" coords="5,35,199,77"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="508,62,475,63,247,63,199,62,199,56,247,57,475,57,507,57"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="231,44,199,48,199,42,231,39"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="editeurpanovisu.CartePanoVisu.ajouteMarqueur" name="editeurpanovisu.CartePanoVisu.ajouteMarqueur">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,72,184,115"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1CartePanoVisu.html#ac6fb89f896ceeb2e13fd710808f4e78b" title=" " alt="" coords="232,5,410,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="168,69,230,50,232,56,170,74"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1CartePanoVisu.html#ab7ce50311349fdd981130c509f6a4836" title=" " alt="" coords="232,72,410,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="184,91,216,91,216,96,184,96"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1CartePanoVisu.html#a80582095f7604330d92b78a6328e2a9d" title=" " alt="" coords="232,139,410,181"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="170,113,232,131,230,136,168,118"/>
+</map>

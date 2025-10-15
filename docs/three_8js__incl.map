@@ -1,0 +1,11 @@
+<map id="panovisu/libs/three.js/three.js" name="panovisu/libs/three.js/three.js">
+<area shape="rect" id="Node000001" title=" " alt="" coords="161,5,305,48"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,104,101,131"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="192,51,94,99,91,94,190,46"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="125,104,229,131"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="222,50,195,92,191,89,218,47"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="253,104,325,131"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="248,47,275,89,271,92,244,50"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="349,96,480,139"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="277,46,360,87,357,91,274,51"/>
+</map>

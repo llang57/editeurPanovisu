@@ -1,0 +1,364 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>EditeurPanovisu: Référence de la classe editeurpanovisu.EsriTileRetriever</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">EditeurPanovisu<span id="projectnumber">&#160;3.1.0</span>
+   </div>
+   <div id="projectbrief">Éditeur de visites virtuelles 360° Panovisu</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Recherche',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classediteurpanovisu_1_1EsriTileRetriever.html','','classediteurpanovisu_1_1EsriTileRetriever-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Chargement...</div>
+<div class="SRStatus" id="Searching">Recherche...</div>
+<div class="SRStatus" id="NoMatches">Aucune correspondance</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Référence de la classe editeurpanovisu.EsriTileRetriever</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>TileRetriever pour les tuiles Esri World Imagery (satellite) URL: <a href="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}">https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}</a>.  
+ <a href="#details">Plus de détails...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Fonctions membres publiques statiques</h2></td></tr>
+<tr class="memitem:a1b165be3e934aa172315560a581d5da4" id="r_a1b165be3e934aa172315560a581d5da4"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1b165be3e934aa172315560a581d5da4">getTileUrl</a> (int zoom, long <a class="el" href="leaflet_8js.html#a008d931e56b6fc013061112f26afbffb">x</a>, long <a class="el" href="leaflet_8js.html#a9f9b62a373d2bb4624b7ac2df8151435">y</a>)</td></tr>
+<tr class="memdesc:a1b165be3e934aa172315560a581d5da4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construit l'URL d'une tuile Esri.  <br /></td></tr>
+<tr class="memitem:aad1aacf2fa19d14532e29f5333a53aff" id="r_aad1aacf2fa19d14532e29f5333a53aff"><td class="memItemLeft" align="right" valign="top">static Image&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aad1aacf2fa19d14532e29f5333a53aff">loadTile</a> (int zoom, long <a class="el" href="leaflet_8js.html#a008d931e56b6fc013061112f26afbffb">x</a>, long <a class="el" href="leaflet_8js.html#a9f9b62a373d2bb4624b7ac2df8151435">y</a>)</td></tr>
+<tr class="memdesc:aad1aacf2fa19d14532e29f5333a53aff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Charge une tuile Esri.  <br /></td></tr>
+<tr class="memitem:adb3b4a31cb26e2181e3c9afb56e58027" id="r_adb3b4a31cb26e2181e3c9afb56e58027"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adb3b4a31cb26e2181e3c9afb56e58027">getAttribution</a> ()</td></tr>
+<tr class="memdesc:adb3b4a31cb26e2181e3c9afb56e58027"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtenir l'attribution pour Esri.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pri-static-attribs" class="groupheader"><a id="pri-static-attribs" name="pri-static-attribs"></a>
+Attributs privés statiques</h2></td></tr>
+<tr class="memitem:a25e9b3782cf3c856651ef397e6cf5232" id="r_a25e9b3782cf3c856651ef397e6cf5232"><td class="memItemLeft" align="right" valign="top">static final Logger&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a25e9b3782cf3c856651ef397e6cf5232">LOGGER</a> = Logger.getLogger(EsriTileRetriever.class.getName())</td></tr>
+<tr class="memitem:a77c72c02b8e1697ea3432931ee6ac0e7" id="r_a77c72c02b8e1697ea3432931ee6ac0e7"><td class="memItemLeft" align="right" valign="top">static final <a class="el" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a77c72c02b8e1697ea3432931ee6ac0e7">ESRI_TILE_URL</a> = &quot;https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/&quot;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>TileRetriever pour les tuiles Esri World Imagery (satellite) URL: <a href="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}">https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}</a>. </p>
+<p>Note: Gluon Maps charge les tuiles via Image(url) directement</p>
+<dl class="section author"><dt>Auteur</dt><dd>LANG Laurent </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="EsriTileRetriever_8java_source.html#l00021">21</a> du fichier <a class="el" href="EsriTileRetriever_8java_source.html">EsriTileRetriever.java</a>.</p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Documentation des fonctions membres</h2>
+<a id="adb3b4a31cb26e2181e3c9afb56e58027" name="adb3b4a31cb26e2181e3c9afb56e58027"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb3b4a31cb26e2181e3c9afb56e58027">&#9670;&#160;</a></span>getAttribution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> editeurpanovisu.EsriTileRetriever.getAttribution </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Obtenir l'attribution pour Esri. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>Texte d'attribution </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="EsriTileRetriever_8java_source.html#l00068">68</a> du fichier <a class="el" href="EsriTileRetriever_8java_source.html">EsriTileRetriever.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>.</p>
+
+</div>
+</div>
+<a id="a1b165be3e934aa172315560a581d5da4" name="a1b165be3e934aa172315560a581d5da4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b165be3e934aa172315560a581d5da4">&#9670;&#160;</a></span>getTileUrl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> editeurpanovisu.EsriTileRetriever.getTileUrl </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>zoom</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long</td>          <td class="paramname"><span class="paramname"><em>y</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construit l'URL d'une tuile Esri. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">zoom</td><td>Niveau de zoom </td></tr>
+    <tr><td class="paramname">x</td><td>Coordonnée X de la tuile </td></tr>
+    <tr><td class="paramname">y</td><td>Coordonnée Y de la tuile </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>URL de la tuile </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="EsriTileRetriever_8java_source.html#l00034">34</a> du fichier <a class="el" href="EsriTileRetriever_8java_source.html">EsriTileRetriever.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="EsriTileRetriever_8java_source.html#l00024">ESRI_TILE_URL</a>, <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>, <a class="el" href="leaflet_8js_source.html#l00005">x()</a>, et <a class="el" href="leaflet_8js_source.html#l00005">y()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="EsriTileRetriever_8java_source.html#l00047">loadTile()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1EsriTileRetriever_a1b165be3e934aa172315560a581d5da4_cgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1EsriTileRetriever_a1b165be3e934aa172315560a581d5da4_cgraph" loading="lazy" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1EsriTileRetriever_a1b165be3e934aa172315560a581d5da4_cgraph" id="aclassediteurpanovisu_1_1EsriTileRetriever_a1b165be3e934aa172315560a581d5da4_cgraph">
+<area shape="rect" title="Construit l&#39;URL d&#39;une tuile Esri." alt="" coords="5,23,166,65"/>
+<area shape="rect" href="leaflet_8js.html#a008d931e56b6fc013061112f26afbffb" title=" " alt="" coords="214,5,252,32"/>
+<area shape="poly" title=" " alt="" coords="165,28,198,22,199,27,166,33"/>
+<area shape="rect" href="leaflet_8js.html#a9f9b62a373d2bb4624b7ac2df8151435" title=" " alt="" coords="214,56,252,83"/>
+<area shape="poly" title=" " alt="" coords="166,55,199,61,198,66,165,60"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1EsriTileRetriever_a1b165be3e934aa172315560a581d5da4_icgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1EsriTileRetriever_a1b165be3e934aa172315560a581d5da4_icgraph" loading="lazy" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1EsriTileRetriever_a1b165be3e934aa172315560a581d5da4_icgraph" id="aclassediteurpanovisu_1_1EsriTileRetriever_a1b165be3e934aa172315560a581d5da4_icgraph">
+<area shape="rect" title="Construit l&#39;URL d&#39;une tuile Esri." alt="" coords="214,5,374,48"/>
+<area shape="rect" href="classediteurpanovisu_1_1EsriTileRetriever.html#aad1aacf2fa19d14532e29f5333a53aff" title="Charge une tuile Esri." alt="" coords="5,5,166,48"/>
+<area shape="poly" title=" " alt="" coords="198,29,166,29,166,24,198,24"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aad1aacf2fa19d14532e29f5333a53aff" name="aad1aacf2fa19d14532e29f5333a53aff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad1aacf2fa19d14532e29f5333a53aff">&#9670;&#160;</a></span>loadTile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Image editeurpanovisu.EsriTileRetriever.loadTile </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>zoom</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long</td>          <td class="paramname"><span class="paramname"><em>y</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Charge une tuile Esri. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">zoom</td><td>Niveau de zoom </td></tr>
+    <tr><td class="paramname">x</td><td>Coordonnée X de la tuile </td></tr>
+    <tr><td class="paramname">y</td><td>Coordonnée Y de la tuile </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Image de la tuile </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="EsriTileRetriever_8java_source.html#l00047">47</a> du fichier <a class="el" href="EsriTileRetriever_8java_source.html">EsriTileRetriever.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="leaflet_8js_source.html#l00005">e</a>, <a class="el" href="EsriTileRetriever_8java_source.html#l00034">getTileUrl()</a>, <a class="el" href="EsriTileRetriever_8java_source.html#l00023">LOGGER</a>, <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>, <a class="el" href="leaflet_8js_source.html#l00005">x()</a>, et <a class="el" href="leaflet_8js_source.html#l00005">y()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1EsriTileRetriever_aad1aacf2fa19d14532e29f5333a53aff_cgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1EsriTileRetriever_aad1aacf2fa19d14532e29f5333a53aff_cgraph" loading="lazy" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1EsriTileRetriever_aad1aacf2fa19d14532e29f5333a53aff_cgraph" id="aclassediteurpanovisu_1_1EsriTileRetriever_aad1aacf2fa19d14532e29f5333a53aff_cgraph">
+<area shape="rect" title="Charge une tuile Esri." alt="" coords="5,24,166,67"/>
+<area shape="rect" href="classediteurpanovisu_1_1EsriTileRetriever.html#a1b165be3e934aa172315560a581d5da4" title="Construit l&#39;URL d&#39;une tuile Esri." alt="" coords="214,24,374,67"/>
+<area shape="poly" title=" " alt="" coords="166,43,198,43,198,48,166,48"/>
+<area shape="rect" href="leaflet_8js.html#a008d931e56b6fc013061112f26afbffb" title=" " alt="" coords="422,5,460,32"/>
+<area shape="poly" title=" " alt="" coords="157,21,213,9,294,5,374,9,407,12,406,17,374,15,294,10,214,15,158,26"/>
+<area shape="rect" href="leaflet_8js.html#a9f9b62a373d2bb4624b7ac2df8151435" title=" " alt="" coords="422,60,460,87"/>
+<area shape="poly" title=" " alt="" coords="158,65,214,76,294,81,374,76,406,74,407,79,374,81,294,86,213,81,157,70"/>
+<area shape="poly" title=" " alt="" coords="374,28,406,22,407,27,375,33"/>
+<area shape="poly" title=" " alt="" coords="375,58,407,64,406,69,374,63"/>
+</map>
+</div>
+
+</div>
+</div>
+<a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Documentation des données membres</h2>
+<a id="a77c72c02b8e1697ea3432931ee6ac0e7" name="a77c72c02b8e1697ea3432931ee6ac0e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77c72c02b8e1697ea3432931ee6ac0e7">&#9670;&#160;</a></span>ESRI_TILE_URL</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">final <a class="el" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> editeurpanovisu.EsriTileRetriever.ESRI_TILE_URL = &quot;https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="EsriTileRetriever_8java_source.html#l00024">24</a> du fichier <a class="el" href="EsriTileRetriever_8java_source.html">EsriTileRetriever.java</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="EsriTileRetriever_8java_source.html#l00034">getTileUrl()</a>.</p>
+
+</div>
+</div>
+<a id="a25e9b3782cf3c856651ef397e6cf5232" name="a25e9b3782cf3c856651ef397e6cf5232"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25e9b3782cf3c856651ef397e6cf5232">&#9670;&#160;</a></span>LOGGER</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">final Logger editeurpanovisu.EsriTileRetriever.LOGGER = Logger.getLogger(EsriTileRetriever.class.getName())</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="EsriTileRetriever_8java_source.html#l00023">23</a> du fichier <a class="el" href="EsriTileRetriever_8java_source.html">EsriTileRetriever.java</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="EsriTileRetriever_8java_source.html#l00047">loadTile()</a>.</p>
+
+</div>
+</div>
+<hr/>La documentation de cette classe a été générée à partir du fichier suivant :<ul>
+<li>src/editeurpanovisu/<a class="el" href="EsriTileRetriever_8java_source.html">EsriTileRetriever.java</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="namespaceediteurpanovisu.html">editeurpanovisu</a></li><li class="navelem"><a href="classediteurpanovisu_1_1EsriTileRetriever.html">EsriTileRetriever</a></li>
+    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>

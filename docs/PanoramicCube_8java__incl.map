@@ -1,0 +1,23 @@
+<map id="src/editeurpanovisu/PanoramicCube.java" name="src/editeurpanovisu/PanoramicCube.java">
+<area shape="rect" id="Node000001" title=" " alt="" coords="863,5,1010,48"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,104,140,131"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="863,33,553,52,354,71,153,99,133,103,132,97,152,93,353,66,552,46,863,28"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="164,104,338,131"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="863,37,634,61,350,99,324,103,323,98,349,93,633,56,863,32"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="362,96,530,139"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="863,43,545,98,544,93,862,37"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="554,96,722,139"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="867,51,723,94,722,89,866,46"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="745,96,930,139"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="915,50,874,87,871,83,912,46"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="954,104,1116,131"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="961,46,1012,91,1008,95,958,50"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="1140,96,1309,139"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="1005,46,1143,88,1142,93,1003,51"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="1333,104,1494,131"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="1011,38,1321,93,1342,98,1341,103,1320,99,1010,43"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="1519,104,1709,131"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="1010,33,1233,57,1508,93,1536,98,1535,103,1507,99,1233,62,1010,38"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="1732,104,1930,131"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="1010,29,1320,51,1520,70,1721,93,1753,98,1752,103,1720,99,1519,75,1320,57,1010,35"/>
+</map>

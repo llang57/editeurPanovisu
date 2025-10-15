@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>EditeurPanovisu: Référence du fichier src/editeurpanovisu/ReadWriteImage.java</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">EditeurPanovisu<span id="projectnumber">&#160;3.1.0</span>
+   </div>
+   <div id="projectbrief">Éditeur de visites virtuelles 360° Panovisu</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Recherche',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('ReadWriteImage_8java.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Chargement...</div>
+<div class="SRStatus" id="Searching">Recherche...</div>
+<div class="SRStatus" id="NoMatches">Aucune correspondance</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Référence du fichier ReadWriteImage.java</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>import java.awt.Graphics2D;</code><br />
+<code>import java.awt.GraphicsConfiguration;</code><br />
+<code>import java.awt.GraphicsDevice;</code><br />
+<code>import java.awt.GraphicsEnvironment;</code><br />
+<code>import java.awt.Transparency;</code><br />
+<code>import java.awt.image.BufferedImage;</code><br />
+<code>import java.awt.image.ConvolveOp;</code><br />
+<code>import java.awt.image.Kernel;</code><br />
+<code>import java.io.File;</code><br />
+<code>import java.io.IOException;</code><br />
+<code>import java.util.HashMap;</code><br />
+<code>import java.util.Map;</code><br />
+<code>import java.util.logging.Level;</code><br />
+<code>import java.util.logging.Logger;</code><br />
+<code>import javafx.embed.swing.SwingFXUtils;</code><br />
+<code>import javafx.scene.image.Image;</code><br />
+<code>import javax.imageio.IIOImage;</code><br />
+<code>import javax.imageio.ImageIO;</code><br />
+<code>import javax.imageio.ImageWriteParam;</code><br />
+<code>import javax.imageio.ImageWriter;</code><br />
+<code>import javax.imageio.stream.FileImageOutputStream;</code><br />
+<code>import net.coobird.thumbnailator.Thumbnails;</code><br />
+<code>import org.apache.commons.imaging.ImageFormat;</code><br />
+<code>import org.apache.commons.imaging.ImageFormats;</code><br />
+<code>import org.apache.commons.imaging.ImagingException;</code><br />
+<code>import org.apache.commons.imaging.Imaging;</code><br />
+<code>import org.apache.commons.imaging.ImagingConstants;</code><br />
+<code>import org.apache.commons.imaging.common.BufferedImageFactory;</code><br />
+<code>import org.apache.commons.imaging.formats.tiff.constants.TiffConstants;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Graphe des dépendances par inclusion de ReadWriteImage.java:</div>
+<div class="dyncontent">
+<div class="center"><img src="ReadWriteImage_8java__incl.png" border="0" usemap="#asrc_2editeurpanovisu_2ReadWriteImage_8java" loading="lazy" alt=""/></div>
+<map name="asrc_2editeurpanovisu_2ReadWriteImage_8java" id="asrc_2editeurpanovisu_2ReadWriteImage_8java">
+<area shape="rect" title=" " alt="" coords="2498,5,2648,48"/>
+<area shape="rect" title=" " alt="" coords="5,104,149,131"/>
+<area shape="poly" title=" " alt="" coords="2497,31,2048,33,1371,42,1012,50,673,62,381,78,161,99,138,103,137,97,161,93,381,73,673,57,1012,45,1371,36,2048,28,2497,25"/>
+<area shape="rect" title=" " alt="" coords="173,104,376,131"/>
+<area shape="poly" title=" " alt="" coords="2497,32,2086,38,1475,50,848,70,586,83,388,99,352,103,351,98,387,93,586,78,848,65,1475,45,2086,32,2497,26"/>
+<area shape="rect" title=" " alt="" coords="400,104,567,131"/>
+<area shape="poly" title=" " alt="" coords="2498,32,2118,37,1563,49,996,69,759,83,580,99,551,103,551,98,579,93,759,77,996,64,1563,44,2118,32,2498,26"/>
+<area shape="rect" title=" " alt="" coords="592,104,791,131"/>
+<area shape="poly" title=" " alt="" coords="2497,32,1666,54,1168,74,960,86,803,99,768,103,767,98,802,93,959,80,1168,68,1666,49,2497,27"/>
+<area shape="rect" title=" " alt="" coords="815,104,968,131"/>
+<area shape="poly" title=" " alt="" coords="2498,32,1748,53,1306,72,1121,85,981,99,955,103,955,98,981,93,1120,79,1305,67,1748,47,2497,27"/>
+<area shape="rect" title=" " alt="" coords="993,104,1190,131"/>
+<area shape="poly" title=" " alt="" coords="2497,31,2277,34,1956,44,1583,65,1391,80,1203,99,1169,103,1168,98,1202,93,1390,74,1583,59,1956,39,2276,29,2497,26"/>
+<area shape="rect" title=" " alt="" coords="1215,104,1400,131"/>
+<area shape="poly" title=" " alt="" coords="2497,32,2307,37,2038,48,1728,67,1413,99,1382,103,1382,98,1413,93,1728,62,2038,42,2307,31,2497,26"/>
+<area shape="rect" title=" " alt="" coords="1424,104,1575,131"/>
+<area shape="poly" title=" " alt="" coords="2498,32,2333,37,2107,48,1848,67,1587,99,1563,103,1562,98,1586,93,1848,62,2106,42,2333,31,2498,26"/>
+<area shape="rect" title=" " alt="" coords="1599,104,1683,131"/>
+<area shape="poly" title=" " alt="" coords="2498,34,2084,57,1858,75,1765,86,1695,99,1685,101,1684,96,1694,93,1765,81,1858,70,2084,51,2497,28"/>
+<area shape="rect" title=" " alt="" coords="1707,104,1842,131"/>
+<area shape="poly" title=" " alt="" coords="2498,34,2214,54,2035,73,1855,99,1835,103,1834,97,1854,93,2034,67,2214,49,2497,29"/>
+<area shape="rect" title=" " alt="" coords="1866,104,1992,131"/>
+<area shape="poly" title=" " alt="" coords="2498,36,2275,58,2140,76,2004,99,1987,102,1986,97,2003,93,2139,71,2275,53,2497,31"/>
+<area shape="rect" title=" " alt="" coords="2016,104,2111,131"/>
+<area shape="poly" title=" " alt="" coords="2498,38,2326,60,2225,77,2124,99,2114,101,2112,96,2123,93,2224,72,2325,55,2497,33"/>
+<area shape="rect" title=" " alt="" coords="2136,104,2282,131"/>
+<area shape="poly" title=" " alt="" coords="2498,49,2276,102,2275,97,2497,44"/>
+<area shape="rect" title=" " alt="" coords="2306,104,2461,131"/>
+<area shape="poly" title=" " alt="" coords="2530,51,2426,99,2423,95,2527,46"/>
+<area shape="rect" title=" " alt="" coords="2484,96,2662,139"/>
+<area shape="poly" title=" " alt="" coords="2576,48,2576,81,2570,81,2570,48"/>
+<area shape="rect" title=" " alt="" coords="2686,104,2860,131"/>
+<area shape="poly" title=" " alt="" coords="2621,46,2731,95,2729,100,2619,51"/>
+<area shape="rect" title=" " alt="" coords="2884,104,3043,131"/>
+<area shape="poly" title=" " alt="" coords="2649,42,2894,98,2893,103,2648,48"/>
+<area shape="rect" title=" " alt="" coords="3067,104,3223,131"/>
+<area shape="poly" title=" " alt="" coords="2649,34,2835,58,3056,93,3078,98,3077,103,3055,99,2834,64,2648,39"/>
+<area shape="rect" title=" " alt="" coords="3247,96,3419,139"/>
+<area shape="poly" title=" " alt="" coords="2649,31,2903,53,3065,71,3232,93,3232,98,3065,76,2903,58,2648,36"/>
+<area shape="rect" title=" " alt="" coords="3443,104,3618,131"/>
+<area shape="poly" title=" " alt="" coords="2649,28,2988,48,3208,67,3431,93,3459,98,3458,103,3430,99,3208,73,2988,54,2648,34"/>
+<area shape="rect" title=" " alt="" coords="3642,96,3813,139"/>
+<area shape="poly" title=" " alt="" coords="2648,27,2821,32,3062,43,3341,62,3628,93,3627,98,3340,68,3062,48,2821,37,2648,32"/>
+<area shape="rect" title=" " alt="" coords="3837,96,4008,139"/>
+<area shape="poly" title=" " alt="" coords="2649,26,2850,29,3138,38,3475,59,3650,74,3822,93,3821,98,3649,79,3475,64,3138,44,2850,34,2648,31"/>
+<area shape="rect" title=" " alt="" coords="4032,96,4231,139"/>
+<area shape="poly" title=" " alt="" coords="2649,25,2878,28,3214,38,3609,58,3814,73,4017,93,4016,98,3814,79,3609,63,3213,43,2878,34,2649,31"/>
+<area shape="rect" title=" " alt="" coords="4256,96,4455,139"/>
+<area shape="poly" title=" " alt="" coords="2649,25,2909,26,3299,34,3763,54,4003,71,4241,93,4240,98,4003,76,3762,59,3299,39,2909,31,2649,30"/>
+<area shape="rect" title=" " alt="" coords="4480,96,4679,139"/>
+<area shape="poly" title=" " alt="" coords="2649,27,3524,47,4059,67,4287,79,4465,93,4464,99,4287,85,4059,72,3524,53,2649,32"/>
+<area shape="rect" title=" " alt="" coords="4704,96,4903,139"/>
+<area shape="poly" title=" " alt="" coords="2649,26,3043,33,3627,45,4232,65,4489,78,4689,93,4688,99,4489,83,4232,70,3627,51,3043,38,2649,32"/>
+<area shape="rect" title=" " alt="" coords="4928,96,5127,139"/>
+<area shape="poly" title=" " alt="" coords="2648,26,3080,31,3729,43,4404,63,4691,77,4913,93,4912,99,4691,82,4404,69,3729,49,3080,37,2648,31"/>
+<area shape="rect" title=" " alt="" coords="5152,96,5405,139"/>
+<area shape="poly" title=" " alt="" coords="2649,26,3117,32,3831,45,4576,65,4892,78,5136,93,5136,98,4892,83,4575,70,3831,50,3117,38,2649,31"/>
+<area shape="rect" title=" " alt="" coords="5428,96,5755,139"/>
+<area shape="poly" title=" " alt="" coords="2649,26,3957,47,4788,67,5142,79,5413,93,5413,98,5141,85,4788,72,3957,52,2649,32"/>
+</map>
+</div>
+</div>
+<p><a href="ReadWriteImage_8java_source.html">Aller au code source de ce fichier.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:editeurpanovisu_2EReadWriteImage" id="r_editeurpanovisu_2EReadWriteImage"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1ReadWriteImage.html">editeurpanovisu.ReadWriteImage</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">fonctions de sauvegarde des images  <a href="classediteurpanovisu_1_1ReadWriteImage.html#details">Plus de détails...</a><br /></td></tr>
+<tr class="memitem:editeurpanovisu_2EReadWriteImage_2EManagedImageBufferedImageFactory" id="r_editeurpanovisu_2EReadWriteImage_2EManagedImageBufferedImageFactory"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1ReadWriteImage_1_1ManagedImageBufferedImageFactory.html">editeurpanovisu.ReadWriteImage.ManagedImageBufferedImageFactory</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
+Paquetages</h2></td></tr>
+<tr class="memitem:editeurpanovisu" id="r_editeurpanovisu"><td class="memItemLeft" align="right" valign="top">package &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceediteurpanovisu.html">editeurpanovisu</a></td></tr>
+</table>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="dir_184160a943439c2c782fe244782aeddc.html">editeurpanovisu</a></li><li class="navelem"><a href="ReadWriteImage_8java.html">ReadWriteImage.java</a></li>
+    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>

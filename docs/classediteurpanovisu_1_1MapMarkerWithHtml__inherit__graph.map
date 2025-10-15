@@ -1,0 +1,5 @@
+<map id="editeurpanovisu.MapMarkerWithHtml" name="editeurpanovisu.MapMarkerWithHtml">
+<area shape="rect" id="Node000001" title="Marqueur personnalisé &#45; tooltip uniquement (pas d&#39;affichage du nom sur la carte)" alt="" coords="5,80,187,123"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="42,5,150,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="99,48,99,80,93,80,93,48"/>
+</map>

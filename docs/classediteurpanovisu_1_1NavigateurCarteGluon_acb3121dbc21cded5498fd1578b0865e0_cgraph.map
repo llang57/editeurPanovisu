@@ -1,0 +1,5 @@
+<map id="editeurpanovisu.NavigateurCarteGluon.afficheNavigateurOpenLayer" name="editeurpanovisu.NavigateurCarteGluon.afficheNavigateurOpenLayer">
+<area shape="rect" id="Node000001" title="Affiche le navigateur de carte." alt="" coords="5,5,261,48"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1NavigateurCarteGluon.html#a550a7fc12fb8b19e05c58a529f134dd9" title="Initialise réellement le JMapViewer (appelé la première fois qu&#39;on affiche la carte)" alt="" coords="309,5,488,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="261,24,293,24,293,29,261,29"/>
+</map>

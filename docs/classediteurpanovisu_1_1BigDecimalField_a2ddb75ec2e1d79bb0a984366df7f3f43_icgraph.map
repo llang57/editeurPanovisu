@@ -1,0 +1,9 @@
+<map id="editeurpanovisu.BigDecimalField.numberProperty" name="editeurpanovisu.BigDecimalField.numberProperty">
+<area shape="rect" id="Node000001" title="Obtient la propriété du nombre." alt="" coords="515,51,698,93"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a7c5cff6934d95be9a4babb6426a5ac26" title=" " alt="" coords="248,5,462,64"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="499,59,462,53,462,48,500,54"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1GestionnaireDiaporamaController.html#ae05b9285b2f87ad3a870c65e0571401b" title=" " alt="" coords="243,88,467,131"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="500,90,468,95,467,90,499,85"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1GestionnaireDiaporamaController.html#ac5731a825a950a1b47f5d54087d1fe3f" title=" " alt="" coords="5,88,195,131"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="227,112,195,112,195,107,227,107"/>
+</map>
