@@ -135,12 +135,38 @@ import editeurpanovisu.BigDecimalField;
 import org.apache.commons.imaging.ImagingException;
 
 /**
- * Editeur de visites virtuelles
+ * Editeur de visites virtuelles panoramiques
+ * 
+ * <p>Cette classe principale de l'application permet de créer et éditer des visites virtuelles
+ * basées sur des images panoramiques 360°. Elle gère l'interface utilisateur, la création de 
+ * panoramiques, l'ajout de hotspots, la géolocalisation et la génération de visites HTML.</p>
+ * 
+ * <p><b>Fonctionnalités principales :</b></p>
+ * <ul>
+ *   <li>Création et gestion de projets de visite virtuelle</li>
+ *   <li>Import et traitement d'images panoramiques (équirectangulaires et cubiques)</li>
+ *   <li>Ajout de hotspots interactifs (liens, images, HTML)</li>
+ *   <li>Géolocalisation des panoramiques</li>
+ *   <li>Génération de visites HTML autonomes</li>
+ *   <li>Support multilingue (français, anglais, allemand, portugais)</li>
+ *   <li>Thèmes d'interface (clair/foncé)</li>
+ * </ul>
  *
  * @author LANG Laurent
+ * @version 3.0.0
+ * @since 1.0
  */
 public class EditeurPanovisu extends Application {
 
+    /**
+     * Vérifie la disponibilité de la connexion Internet
+     * 
+     * <p>Cette méthode tente de se connecter à Google pour vérifier la connexion réseau.
+     * Elle est utilisée pour activer/désactiver les fonctionnalités nécessitant Internet
+     * (géolocalisation, cartes, etc.).</p>
+     * 
+     * @return true si la connexion Internet est disponible, false sinon
+     */
     private static boolean netIsAvailable() {
         try {
             final URL url = new URL("http://www.google.com");
@@ -404,9 +430,20 @@ public class EditeurPanovisu extends Application {
     
     /**
      * Charge une icône SVG avec la taille spécifiée
-     * @param iconName Nom de l'icône SVG (sans extension)
-     * @param size Taille en pixels
-     * @return ImageView contenant l'icône
+     * 
+     * <p>Charge un fichier SVG depuis le répertoire des ressources et le convertit en ImageView.
+     * L'icône est redimensionnée en carré de la taille spécifiée.</p>
+     * 
+     * <p><b>Exemple :</b></p>
+     * <pre>{@code
+     * ImageView icone = loadSvgIcon("nouveau-projet", 32);
+     * bouton.setGraphic(icone);
+     * }</pre>
+     * 
+     * @param iconName Nom du fichier SVG sans extension (ex: "nouveau-projet" pour "nouveau-projet.svg")
+     * @param size Taille en pixels (largeur et hauteur identiques)
+     * @return ImageView contenant l'icône SVG redimensionnée
+     * @see SvgIconLoader#loadSvgIcon(String, int)
      */
     public static ImageView loadSvgIcon(String iconName, int size) {
         SvgIconLoader.setBaseAppPath(getStrRepertAppli());
@@ -415,10 +452,21 @@ public class EditeurPanovisu extends Application {
     
     /**
      * Charge une icône SVG avec couleur personnalisée
-     * @param iconName Nom de l'icône SVG (sans extension)
-     * @param size Taille en pixels
-     * @param color Couleur de l'icône
-     * @return ImageView contenant l'icône
+     * 
+     * <p>Charge un fichier SVG et applique une couleur spécifique. Utile pour adapter
+     * les icônes au thème ou créer des variantes colorées.</p>
+     * 
+     * <p><b>Exemple :</b></p>
+     * <pre>{@code
+     * ImageView iconeRouge = loadSvgIcon("alerte", 24, Color.RED);
+     * ImageView iconeVerte = loadSvgIcon("valide", 24, Color.GREEN);
+     * }</pre>
+     * 
+     * @param iconName Nom du fichier SVG sans extension
+     * @param size Taille en pixels (carré)
+     * @param color Couleur à appliquer à l'icône (remplace les couleurs d'origine)
+     * @return ImageView contenant l'icône SVG colorée
+     * @see javafx.scene.paint.Color
      */
     public static ImageView loadSvgIcon(String iconName, int size, javafx.scene.paint.Color color) {
         SvgIconLoader.setBaseAppPath(getStrRepertAppli());
@@ -426,12 +474,23 @@ public class EditeurPanovisu extends Application {
     }
     
     /**
-     * Charge une icône SVG avec dimensions rectangulaires
-     * @param iconName Nom de l'icône SVG (sans extension)
+     * Charge une icône SVG avec dimensions rectangulaires personnalisées
+     * 
+     * <p>Version avancée permettant de spécifier des dimensions rectangulaires
+     * (largeur et hauteur différentes). La couleur peut être null pour utiliser
+     * les couleurs par défaut du thème actif.</p>
+     * 
+     * <p><b>Exemple :</b></p>
+     * <pre>{@code
+     * // Icône panoramique 2:1
+     * ImageView vue = loadSvgIcon("vue-sphere", 128, 64, null);
+     * }</pre>
+     * 
+     * @param iconName Nom du fichier SVG sans extension
      * @param width Largeur en pixels
      * @param height Hauteur en pixels
-     * @param color Couleur de l'icône (null pour couleur automatique selon le thème)
-     * @return ImageView contenant l'icône
+     * @param color Couleur de l'icône (null pour couleur automatique selon le thème actif)
+     * @return ImageView contenant l'icône SVG aux dimensions spécifiées
      */
     public static ImageView loadSvgIcon(String iconName, int width, int height, javafx.scene.paint.Color color) {
         SvgIconLoader.setBaseAppPath(getStrRepertAppli());
@@ -440,7 +499,14 @@ public class EditeurPanovisu extends Application {
     
     /**
      * Recharge toutes les icônes SVG de la barre d'outils
-     * Appelé lors du changement de thème pour mettre à jour les couleurs
+     * 
+     * <p>Appelée automatiquement lors du changement de thème (clair/sombre) pour mettre à jour
+     * toutes les icônes avec les couleurs appropriées au nouveau thème.</p>
+     * 
+     * <p>Cette méthode parcourt tous les ImageView de la barre d'outils et recharge leur
+     * contenu SVG avec les nouvelles couleurs.</p>
+     * 
+     * @see #setStrStyleCSS(String)
      */
     private static void rechargerIcones() {
         if (ivNouveauProjet != null) {
@@ -1248,14 +1314,62 @@ public class EditeurPanovisu extends Application {
     static private boolean bPetitePlaneteDemarrage = true;
     static private PaneOutil poGeolocalisation;
 
-    public static String strStyleCSS = "clair";
-    private static final String[] strCodesLanguesTraduction = {"fr_FR", "en_EN", "de_DE", "pt_BR"};
-    private static final String[] strLanguesTraduction = {"Français", "English", "Deutsch", "Português"};
-    private static String strCurrentDir = "";
+    // ====================================================================
+    // CONFIGURATION ET INTERNATIONALISATION
+    // ====================================================================
+    
     /**
-     * Définition de la langue locale par défaut fr_FR
+     * Style CSS de l'interface utilisateur
+     * 
+     * <p>Définit le thème graphique de l'application. Valeurs possibles :</p>
+     * <ul>
+     *   <li>"clair" - Thème clair (par défaut)</li>
+     *   <li>"fonce" - Thème sombre</li>
+     * </ul>
+     * 
+     * @see #getStrStyleCSS()
+     * @see #setStrStyleCSS(String)
+     */
+    public static String strStyleCSS = "clair";
+    
+    /**
+     * Codes des langues supportées pour la traduction
+     * 
+     * <p>Liste des codes locale au format language_COUNTRY utilisés pour 
+     * l'internationalisation de l'interface.</p>
+     */
+    private static final String[] strCodesLanguesTraduction = {"fr_FR", "en_EN", "de_DE", "pt_BR"};
+    
+    /**
+     * Noms des langues affichés dans l'interface
+     * 
+     * <p>Liste des noms de langues présentés à l'utilisateur dans le menu de sélection.</p>
+     */
+    private static final String[] strLanguesTraduction = {"Français", "English", "Deutsch", "Português"};
+    
+    /**
+     * Répertoire courant de l'application
+     * 
+     * <p>Stocke le répertoire de travail actuel, utilisé pour les opérations de fichiers.</p>
+     */
+    private static String strCurrentDir = "";
+    
+    /**
+     * Locale de l'application
+     * 
+     * <p>Définit la langue et la région utilisées pour l'interface utilisateur.
+     * Par défaut configuré en français (France).</p>
+     * 
+     * @see java.util.Locale
      */
     private static Locale locale = new Locale("fr", "FR");
+    
+    /**
+     * Bundle de ressources pour la localisation
+     * 
+     * <p>Contient les chaînes de caractères traduites pour l'interface utilisateur
+     * en fonction de la locale sélectionnée.</p>
+     */
     private static ResourceBundle rbLocalisation;
     private static Label lblDragDrop;
     static private PopUpDialogController popUp;
@@ -1272,11 +1386,59 @@ public class EditeurPanovisu extends Application {
     static private int iNumPoints = 0;
     static private int iNumImages = 0;
     static private boolean dejaCharge = false;
+    // ====================================================================
+    // DONNÉES DU PROJET
+    // ====================================================================
+    
+    /**
+     * Compteur de fichiers HTML générés
+     * 
+     * <p>Utilisé pour générer des noms de fichiers HTML uniques lors de la création
+     * de pages personnalisées (hotspots HTML, etc.).</p>
+     */
     private static int iNumHTML = 0;
+    
+    /**
+     * Compteur de diaporamas
+     * 
+     * <p>Nombre de diaporamas créés dans le projet courant.</p>
+     */
     private static int iNumDiapo = 0;
+    
+    /**
+     * Tableau des panoramiques du projet
+     * 
+     * <p>Contient l'ensemble des panoramiques constituant la visite virtuelle.
+     * Limité à 100 panoramiques maximum par projet.</p>
+     * 
+     * @see Panoramique
+     * @see #iNombrePanoramiques
+     */
     private static Panoramique[] panoramiquesProjet = new Panoramique[100];
+    
+    /**
+     * Tableau des plans du projet
+     * 
+     * <p>Contient les plans/cartes utilisés pour la navigation. Limité à 20 plans maximum.</p>
+     * 
+     * @see Plan
+     * @see #iNombrePlans
+     */
     private static Plan[] plans = new Plan[20];
+    
+    /**
+     * Nombre total de panoramiques dans le projet
+     * 
+     * <p>Compteur du nombre de panoramiques effectivement utilisés dans le tableau
+     * {@link #panoramiquesProjet}.</p>
+     */
     private static int iNombrePanoramiques = 0;
+    
+    /**
+     * Nombre de fichiers panoramiques chargés
+     * 
+     * <p>Compteur des fichiers d'images panoramiques importés dans le projet.</p>
+     */
     private static int iNombrePanoramiquesFichier = 0;
     static private ProgressBar pbarAvanceChargement;
     static public MenuBar mbarPrincipal = new MenuBar();
@@ -1354,23 +1516,80 @@ public class EditeurPanovisu extends Application {
         "area-6", "area-7", "area-8", "area-9", "area-10"
     };
 
+    // ====================================================================
+    // RÉPERTOIRES ET CHEMINS
+    // ====================================================================
+    
     /**
-     * Répertoires de l'application
+     * Répertoire d'installation de l'application
+     * 
+     * <p>Chemin absolu vers le répertoire racine de l'application, utilisé pour
+     * localiser les ressources (images, CSS, JavaScript, etc.).</p>
+     * 
+     * @see #getStrRepertAppli()
+     * @see #setStrRepertAppli(String)
      */
     private static String strRepertAppli = "";
-    private static String strRepertTemp = "";
-    static private String strRepertPanos = "";
-    static private String strRepertHSImages = "";
+    
     /**
-     * Répertoire de sauvegarde du projet
+     * Répertoire temporaire de travail
+     * 
+     * <p>Utilisé pour stocker les fichiers temporaires lors du traitement des images
+     * et de la génération des visites.</p>
+     * 
+     * @see #getStrRepertTemp()
+     * @see #setStrRepertTemp(String)
+     */
+    private static String strRepertTemp = "";
+    
+    /**
+     * Répertoire des images panoramiques
+     * 
+     * <p>Stocke les images panoramiques du projet en cours.</p>
+     * 
+     * @see #getStrRepertPanos()
+     * @see #setStrRepertPanos(String)
+     */
+    static private String strRepertPanos = "";
+    
+    /**
+     * Répertoire des images des hotspots
+     * 
+     * <p>Contient les images personnalisées utilisées pour les hotspots (icônes, vignettes).</p>
+     * 
+     * @see #getStrRepertHSImages()
+     * @see #setStrRepertHSImages(String)
+     */
+    static private String strRepertHSImages = "";
+    
+    /**
+     * Répertoire de sauvegarde du projet courant
+     * 
+     * <p>Chemin du répertoire où le projet est sauvegardé. Utilisé pour sauvegarder
+     * les fichiers .pvi (projet) et les ressources associées.</p>
+     * 
+     * @see #getStrRepertoireProjet()
+     * @see #setStrRepertoireProjet(String)
      */
     private static String strRepertoireProjet = "";
+    
     /**
      * Dernier répertoire utilisé pour la génération de visite
+     * 
+     * <p>Mémorise le dernier emplacement choisi par l'utilisateur pour générer
+     * une visite HTML. Utilisé pour proposer ce répertoire par défaut lors de 
+     * la prochaine génération.</p>
+     * 
+     * @see #getStrDernierRepertoireVisite()
+     * @see #setStrDernierRepertoireVisite(String)
      */
     private static String strDernierRepertoireVisite = "";
+    
     /**
-     * Répertoire du fichier de configuration
+     * Fichier de configuration de l'application
+     * 
+     * <p>Référence vers le fichier contenant les préférences et paramètres de l'application
+     * (préférences utilisateur, historique des projets, etc.).</p>
      */
     static public File fileRepertConfig;
 
@@ -1472,8 +1691,26 @@ public class EditeurPanovisu extends Application {
     private static AnchorPane apHS;
 
     /**
-     *
-     * @throws IOException Exception d'entrée sortie
+     * Génère la visite virtuelle HTML complète
+     * 
+     * <p>Cette méthode est le point d'entrée principal pour la génération d'une visite virtuelle.
+     * Elle effectue les opérations suivantes :</p>
+     * <ol>
+     *   <li>Vérifie que le projet est sauvegardé</li>
+     *   <li>Crée l'arborescence des répertoires nécessaires</li>
+     *   <li>Copie les fichiers de ressources (JavaScript, CSS, images)</li>
+     *   <li>Génère le fichier XML de configuration des panoramiques</li>
+     *   <li>Génère les pages HTML pour chaque panoramique</li>
+     *   <li>Crée les fichiers de hotspots et de navigation</li>
+     *   <li>Assemble le tout dans le répertoire de destination</li>
+     * </ol>
+     * 
+     * <p>La visite générée est autonome et peut être déployée sur un serveur web
+     * ou consultée localement dans un navigateur.</p>
+     * 
+     * @throws IOException Si une erreur se produit lors de la création des fichiers ou répertoires
+     * @see #projetSauve()
+     * @see #isbDejaSauve()
      */
     private static void genereVisite() throws IOException {
         if (!bRepertSauveChoisi) {
@@ -11560,12 +11797,29 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
-     *
-     * @param stPrimaryStage
-     * @throws Exception Exceptions
+     * Méthode de démarrage de l'application JavaFX
+     * 
+     * <p>Cette méthode est appelée automatiquement au lancement de l'application.
+     * Elle initialise tous les composants de l'interface utilisateur :</p>
+     * 
+     * <ul>
+     *   <li>Détection du système d'exploitation et adaptation de l'interface</li>
+     *   <li>Vérification de la connexion Internet</li>
+     *   <li>Chargement de la localisation et des préférences utilisateur</li>
+     *   <li>Création de la fenêtre principale et des menus</li>
+     *   <li>Initialisation des barres d'outils et panneaux</li>
+     *   <li>Configuration des gestionnaires d'événements (drag & drop, raccourcis clavier)</li>
+     *   <li>Chargement du dernier projet si nécessaire</li>
+     * </ul>
+     * 
+     * <p>La fenêtre principale est créée en mode maximisé avec une interface adaptative
+     * qui s'ajuste à la résolution de l'écran.</p>
+     * 
+     * @param stPrimaryStage La scène principale JavaFX fournie par le framework
+     * @throws Exception Si une erreur se produit lors de l'initialisation
+     * @see javafx.application.Application#start(javafx.stage.Stage)
      */
     @Override
-
     public void start(Stage stPrimaryStage) throws Exception {
         if (isLinux()) {
             stPrimaryStage.setFullScreen(true);
@@ -11774,7 +12028,25 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
-     * @param args the command line arguments
+     * Point d'entrée principal de l'application
+     * 
+     * <p>Cette méthode est appelée au démarrage du programme. Elle effectue les initialisations
+     * de base avant de lancer l'interface JavaFX :</p>
+     * 
+     * <ul>
+     *   <li>Configure l'encodage des fichiers en UTF-8 pour supporter les caractères internationaux</li>
+     *   <li>Détecte le système d'exploitation (Windows, Mac, Linux) pour adapter le comportement</li>
+     *   <li>Lance l'application JavaFX via la méthode {@link #start(Stage)}</li>
+     * </ul>
+     * 
+     * <p><b>Exemple d'utilisation :</b></p>
+     * <pre>{@code
+     * java -jar EditeurPanovisu.jar
+     * }</pre>
+     * 
+     * @param args Arguments de ligne de commande (non utilisés actuellement)
+     * @see #start(Stage)
+     * @see javafx.application.Application#launch(String...)
      */
     public static void main(String[] args) {
         System.setProperty("file.encoding", "UTF-8");
