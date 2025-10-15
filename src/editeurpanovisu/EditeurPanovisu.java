@@ -2821,19 +2821,51 @@ public class EditeurPanovisu extends Application {
                     Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 copieRepertoire(getStrRepertTemp(), strNomRepertVisite);
-                Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setHeaderText(null);
-                alert.setTitle(rbLocalisation.getString("main.dialog.generationVisite"));
-                alert.setContentText(rbLocalisation.getString("main.dialog.generationVisiteMessage") + strNomRepertVisite);
-                alert.showAndWait();
-                Application app = new Application() {
-                    @Override
-                    public void start(Stage stage) {
-                    }
-                };
-                // Utiliser le protocole file:// pour que les ressources se chargent correctement
-                File indexFile = new File(strNomRepertVisite + File.separator + "index.html");
-                app.getHostServices().showDocument(indexFile.toURI().toString());
+                
+                // Démarrer le serveur HTTP local pour éviter les problèmes CORS
+                editeurpanovisu.util.LocalHTTPServer server = editeurpanovisu.util.LocalHTTPServer.getInstance();
+                try {
+                    server.setRootDirectory(strNomRepertVisite);
+                    server.start();
+                    
+                    String serverUrl = server.getUrl();
+                    
+                    Alert alert = new Alert(AlertType.INFORMATION);
+                    alert.setHeaderText(null);
+                    alert.setTitle(rbLocalisation.getString("main.dialog.generationVisite"));
+                    alert.setContentText(rbLocalisation.getString("main.dialog.generationVisiteMessage") + strNomRepertVisite + "\n\n"
+                            + "🌐 La visite sera accessible sur : " + serverUrl + "\n"
+                            + "⚠️ Ne fermez pas l'application pour conserver l'accès à la visite.");
+                    alert.showAndWait();
+                    
+                    Application app = new Application() {
+                        @Override
+                        public void start(Stage stage) {
+                        }
+                    };
+                    // Ouvrir le navigateur avec le serveur HTTP local
+                    app.getHostServices().showDocument(serverUrl);
+                    
+                } catch (IOException ex) {
+                    System.err.println("❌ Erreur lors du démarrage du serveur HTTP : " + ex.getMessage());
+                    // Fallback : ouvrir en mode file:// (avec avertissement)
+                    Alert alertFallback = new Alert(AlertType.WARNING);
+                    alertFallback.setHeaderText(null);
+                    alertFallback.setTitle(rbLocalisation.getString("main.dialog.generationVisite"));
+                    alertFallback.setContentText(rbLocalisation.getString("main.dialog.generationVisiteMessage") + strNomRepertVisite + "\n\n"
+                            + "⚠️ Le serveur HTTP n'a pas pu démarrer.\n"
+                            + "La visite s'ouvrira en mode local (file://) ce qui peut causer des problèmes de sécurité.\n"
+                            + "Pour une expérience optimale, copiez le dossier sur un serveur web.");
+                    alertFallback.showAndWait();
+                    
+                    Application app = new Application() {
+                        @Override
+                        public void start(Stage stage) {
+                        }
+                    };
+                    File indexFile = new File(strNomRepertVisite + File.separator + "index.html");
+                    app.getHostServices().showDocument(indexFile.toURI().toString());
+                }
             }
         } else {
             Alert alert = new Alert(AlertType.ERROR);
