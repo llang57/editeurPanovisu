@@ -20,13 +20,16 @@ class JavaElement:
     """Représente un élément Java (classe, méthode, propriété)"""
     
     def __init__(self, name: str, element_type: str, line_number: int, 
-                 has_javadoc: bool, javadoc_lines: int = 0, signature: str = ""):
+                 has_javadoc: bool, javadoc_lines: int = 0, signature: str = "",
+                 javadoc_content: str = "", javadoc_quality: str = "none"):
         self.name = name
         self.element_type = element_type  # 'class', 'method', 'field'
         self.line_number = line_number
         self.has_javadoc = has_javadoc
         self.javadoc_lines = javadoc_lines
         self.signature = signature
+        self.javadoc_content = javadoc_content  # Contenu du Javadoc
+        self.javadoc_quality = javadoc_quality  # 'none', 'minimal', 'partial', 'complete'
 
 class JavaClass:
     """Représente une classe Java avec tous ses éléments"""
@@ -45,16 +48,16 @@ def find_java_files(src_dir: str) -> List[Path]:
     src_path = Path(src_dir)
     return list(src_path.rglob("*.java"))
 
-def extract_javadoc(lines: List[str], start_index: int) -> Tuple[bool, int]:
+def extract_javadoc(lines: List[str], start_index: int) -> Tuple[bool, int, str, str]:
     """
-    Vérifie s'il y a un commentaire Javadoc avant l'élément
+    Vérifie s'il y a un commentaire Javadoc avant l'élément et analyse sa qualité
     
-    Retourne (has_javadoc, nb_lines)
+    Retourne (has_javadoc, nb_lines, content, quality)
+    quality: 'none', 'minimal', 'partial', 'complete'
     """
     # Remonter pour chercher le Javadoc
     i = start_index - 1
-    javadoc_lines = 0
-    in_javadoc = False
+    javadoc_lines_list = []
     
     while i >= 0:
         line = lines[i].strip()
@@ -66,23 +69,74 @@ def extract_javadoc(lines: List[str], start_index: int) -> Tuple[bool, int]:
         
         # Fin du Javadoc (début dans le sens de la lecture)
         if line.startswith("/**"):
-            in_javadoc = True
-            javadoc_lines += 1
             # Vérifier que ce n'est pas un commentaire vide /** */
             if line.endswith("*/") and len(line.strip()) <= 5:
-                return False, 0
-            return True, javadoc_lines
+                return False, 0, "", "none"
+            
+            javadoc_lines_list.append(line)
+            javadoc_lines_list.reverse()  # Remettre dans l'ordre
+            
+            # Extraire le contenu et analyser la qualité
+            content = "\n".join(javadoc_lines_list)
+            quality = analyze_javadoc_quality(content)
+            
+            return True, len(javadoc_lines_list), content, quality
         
         # Ligne de Javadoc
         if line.startswith("*"):
-            javadoc_lines += 1
+            javadoc_lines_list.append(line)
             i -= 1
             continue
         
         # Si on trouve autre chose, pas de Javadoc
         break
         
-    return False, 0
+    return False, 0, "", "none"
+
+def analyze_javadoc_quality(javadoc_content: str) -> str:
+    """
+    Analyse la qualité d'un commentaire Javadoc
+    
+    Retourne:
+    - 'none': Pas de Javadoc
+    - 'minimal': Javadoc présent mais sans tags (@param, @return, etc.)
+    - 'partial': Javadoc avec quelques tags mais incomplet
+    - 'complete': Javadoc complet avec description et tous les tags nécessaires
+    """
+    if not javadoc_content:
+        return "none"
+    
+    # Nettoyer le contenu
+    content = javadoc_content.lower()
+    
+    # Détecter les tags
+    has_description = len(javadoc_content) > 20  # Au moins une description minimale
+    has_param = "@param" in content
+    has_return = "@return" in content
+    has_throws = "@throws" in content or "@exception" in content
+    has_see = "@see" in content
+    has_author = "@author" in content
+    has_since = "@since" in content
+    has_deprecated = "@deprecated" in content
+    has_example = "@example" in content or "{@code" in content
+    
+    # Compter les tags présents
+    tags_count = sum([
+        has_param, has_return, has_throws, has_see, 
+        has_author, has_since, has_deprecated, has_example
+    ])
+    
+    # Évaluer la qualité
+    if not has_description:
+        return "minimal"
+    
+    if tags_count == 0:
+        return "minimal"  # Juste une description, pas de tags
+    
+    if tags_count >= 3 or (has_param and has_return):
+        return "complete"  # Description + plusieurs tags importants
+    
+    return "partial"  # Description + quelques tags
 
 def parse_java_file(file_path: Path) -> List[JavaClass]:
     """Parse un fichier Java et extrait les informations"""
@@ -127,7 +181,7 @@ def parse_java_file(file_path: Path) -> List[JavaClass]:
         class_match = class_pattern.match(stripped)
         if class_match:
             class_name = class_match.group(6)
-            has_javadoc, javadoc_lines = extract_javadoc(lines, i - 1)
+            has_javadoc, javadoc_lines, javadoc_content, javadoc_quality = extract_javadoc(lines, i - 1)
             
             # Si classe interne, l'ajouter à la classe parente
             if current_class and "{" in line:
@@ -152,7 +206,7 @@ def parse_java_file(file_path: Path) -> List[JavaClass]:
             # if method_name.startswith("get") or method_name.startswith("set"):
             #     continue
             
-            has_javadoc, javadoc_lines = extract_javadoc(lines, i - 1)
+            has_javadoc, javadoc_lines, javadoc_content, javadoc_quality = extract_javadoc(lines, i - 1)
             
             # Extraire la signature complète
             signature = stripped
@@ -165,7 +219,9 @@ def parse_java_file(file_path: Path) -> List[JavaClass]:
                 line_number=i,
                 has_javadoc=has_javadoc,
                 javadoc_lines=javadoc_lines,
-                signature=signature
+                signature=signature,
+                javadoc_content=javadoc_content,
+                javadoc_quality=javadoc_quality
             )
             current_class.methods.append(method)
             continue
@@ -174,7 +230,7 @@ def parse_java_file(file_path: Path) -> List[JavaClass]:
         field_match = field_pattern.match(stripped)
         if field_match and "(" not in line:  # Éviter les faux positifs avec méthodes
             field_name = field_match.group(5)
-            has_javadoc, javadoc_lines = extract_javadoc(lines, i - 1)
+            has_javadoc, javadoc_lines, javadoc_content, javadoc_quality = extract_javadoc(lines, i - 1)
             
             signature = stripped
             if len(signature) > 80:
@@ -186,7 +242,9 @@ def parse_java_file(file_path: Path) -> List[JavaClass]:
                 line_number=i,
                 has_javadoc=has_javadoc,
                 javadoc_lines=javadoc_lines,
-                signature=signature
+                signature=signature,
+                javadoc_content=javadoc_content,
+                javadoc_quality=javadoc_quality
             )
             current_class.fields.append(field)
     
@@ -201,9 +259,15 @@ def generate_markdown_report(all_classes: List[JavaClass], output_file: str):
     
     total_methods = sum(len(c.methods) for c in all_classes)
     documented_methods = sum(sum(1 for m in c.methods if m.has_javadoc) for c in all_classes)
+    complete_methods = sum(sum(1 for m in c.methods if m.javadoc_quality == "complete") for c in all_classes)
+    partial_methods = sum(sum(1 for m in c.methods if m.javadoc_quality == "partial") for c in all_classes)
+    minimal_methods = sum(sum(1 for m in c.methods if m.javadoc_quality == "minimal") for c in all_classes)
     
     total_fields = sum(len(c.fields) for c in all_classes)
     documented_fields = sum(sum(1 for f in c.fields if f.has_javadoc) for c in all_classes)
+    complete_fields = sum(sum(1 for f in c.fields if f.javadoc_quality == "complete") for c in all_classes)
+    partial_fields = sum(sum(1 for f in c.fields if f.javadoc_quality == "partial") for c in all_classes)
+    minimal_fields = sum(sum(1 for f in c.fields if f.javadoc_quality == "minimal") for c in all_classes)
     
     # Calculer les pourcentages
     pct_classes = (documented_classes / total_classes * 100) if total_classes > 0 else 0
@@ -224,6 +288,24 @@ def generate_markdown_report(all_classes: List[JavaClass], output_file: str):
         f.write(f"| **Méthodes** | {total_methods} | {documented_methods} | {total_methods - documented_methods} | {pct_methods:.1f}% |\n")
         f.write(f"| **Propriétés** | {total_fields} | {documented_fields} | {total_fields - documented_fields} | {pct_fields:.1f}% |\n")
         f.write(f"| **TOTAL** | {total_classes + total_methods + total_fields} | {documented_classes + documented_methods + documented_fields} | {(total_classes + total_methods + total_fields) - (documented_classes + documented_methods + documented_fields)} | **{pct_total:.1f}%** |\n\n")
+        
+        # Qualité de la documentation
+        f.write("## 🎯 Qualité de la documentation\n\n")
+        f.write("### Méthodes\n\n")
+        f.write("| Qualité | Nombre | % |\n")
+        f.write("|---------|--------|---|\n")
+        f.write(f"| 🟢 Complète (tags @param, @return, etc.) | {complete_methods} | {(complete_methods/total_methods*100) if total_methods > 0 else 0:.1f}% |\n")
+        f.write(f"| 🟡 Partielle (quelques tags) | {partial_methods} | {(partial_methods/total_methods*100) if total_methods > 0 else 0:.1f}% |\n")
+        f.write(f"| 🟠 Minimale (description seulement) | {minimal_methods} | {(minimal_methods/total_methods*100) if total_methods > 0 else 0:.1f}% |\n")
+        f.write(f"| ⚫ Absente | {total_methods - documented_methods} | {((total_methods - documented_methods)/total_methods*100) if total_methods > 0 else 0:.1f}% |\n\n")
+        
+        f.write("### Propriétés\n\n")
+        f.write("| Qualité | Nombre | % |\n")
+        f.write("|---------|--------|---|\n")
+        f.write(f"| 🟢 Complète | {complete_fields} | {(complete_fields/total_fields*100) if total_fields > 0 else 0:.1f}% |\n")
+        f.write(f"| 🟡 Partielle | {partial_fields} | {(partial_fields/total_fields*100) if total_fields > 0 else 0:.1f}% |\n")
+        f.write(f"| 🟠 Minimale | {minimal_fields} | {(minimal_fields/total_fields*100) if total_fields > 0 else 0:.1f}% |\n")
+        f.write(f"| ⚫ Absente | {total_fields - documented_fields} | {((total_fields - documented_fields)/total_fields*100) if total_fields > 0 else 0:.1f}% |\n\n")
         
         # Barre de progression visuelle
         f.write("### 📊 Progression globale\n\n")
@@ -305,38 +387,127 @@ def generate_markdown_report(all_classes: List[JavaClass], output_file: str):
             # Propriétés
             if java_class.fields:
                 f.write(f"#### Propriétés ({len(java_class.fields)})\n\n")
-                f.write("| Nom | Ligne | Documentée | Signature |\n")
-                f.write("|-----|-------|------------|------------|\n")
                 
                 for field in java_class.fields:
-                    status = "✅" if field.has_javadoc else "❌"
-                    signature = field.signature.replace("|", "\\|")  # Escape pipe pour Markdown
-                    f.write(f"| `{field.name}` | {field.line_number} | {status} | `{signature}` |\n")
-                f.write("\n")
+                    # Icône selon la qualité
+                    if field.javadoc_quality == "complete":
+                        quality_icon = "🟢"
+                        quality_text = "Complète"
+                    elif field.javadoc_quality == "partial":
+                        quality_icon = "🟡"
+                        quality_text = "Partielle"
+                    elif field.javadoc_quality == "minimal":
+                        quality_icon = "🟠"
+                        quality_text = "Minimale"
+                    else:
+                        quality_icon = "⚫"
+                        quality_text = "Absente"
+                    
+                    signature = field.signature.replace("|", "\\|")
+                    
+                    f.write(f"##### {quality_icon} `{field.name}` - Ligne {field.line_number}\n\n")
+                    f.write(f"**Qualité :** {quality_text}\n\n")
+                    f.write(f"**Déclaration :**\n```java\n{field.signature}\n```\n\n")
+                    
+                    if field.has_javadoc and field.javadoc_content:
+                        f.write(f"**Documentation actuelle :**\n```java\n{field.javadoc_content}\n```\n\n")
+                    else:
+                        f.write(f"**❌ Aucune documentation**\n\n")
+                        f.write(f"**Suggestion :** Ajouter un Javadoc avec une description du rôle de cette propriété.\n\n")
+                    
+                    f.write("---\n\n")
             
             # Méthodes
             if java_class.methods:
                 f.write(f"#### Méthodes ({len(java_class.methods)})\n\n")
-                f.write("| Nom | Ligne | Documentée | Signature |\n")
-                f.write("|-----|-------|------------|------------|\n")
                 
                 for method in java_class.methods:
-                    status = "✅" if method.has_javadoc else "❌"
+                    # Icône selon la qualité
+                    if method.javadoc_quality == "complete":
+                        quality_icon = "🟢"
+                        quality_text = "Complète"
+                    elif method.javadoc_quality == "partial":
+                        quality_icon = "🟡"
+                        quality_text = "Partielle"
+                    elif method.javadoc_quality == "minimal":
+                        quality_icon = "🟠"
+                        quality_text = "Minimale"
+                    else:
+                        quality_icon = "⚫"
+                        quality_text = "Absente"
+                    
                     signature = method.signature.replace("|", "\\|")
-                    f.write(f"| `{method.name}` | {method.line_number} | {status} | `{signature}` |\n")
-                f.write("\n")
+                    
+                    f.write(f"##### {quality_icon} `{method.name}()` - Ligne {method.line_number}\n\n")
+                    f.write(f"**Qualité :** {quality_text}\n\n")
+                    f.write(f"**Signature :**\n```java\n{method.signature}\n```\n\n")
+                    
+                    if method.has_javadoc and method.javadoc_content:
+                        f.write(f"**Documentation actuelle :**\n```java\n{method.javadoc_content}\n```\n\n")
+                        
+                        # Analyser les tags présents
+                        content_lower = method.javadoc_content.lower()
+                        tags_present = []
+                        tags_missing = []
+                        
+                        if "@param" in content_lower:
+                            tags_present.append("@param")
+                        else:
+                            tags_missing.append("@param")
+                        
+                        if "@return" in content_lower:
+                            tags_present.append("@return")
+                        else:
+                            tags_missing.append("@return")
+                        
+                        if "@throws" in content_lower or "@exception" in content_lower:
+                            tags_present.append("@throws")
+                        
+                        if "@see" in content_lower:
+                            tags_present.append("@see")
+                        
+                        if "@author" in content_lower:
+                            tags_present.append("@author")
+                        
+                        if "@example" in content_lower or "{@code" in content_lower:
+                            tags_present.append("@example")
+                        
+                        if tags_present:
+                            f.write(f"**Tags présents :** {', '.join(tags_present)}\n\n")
+                        
+                        if tags_missing and "(" in method.signature:  # Si la méthode a des paramètres
+                            f.write(f"**⚠️ Tags manquants :** {', '.join(tags_missing)}\n\n")
+                    else:
+                        f.write(f"**❌ Aucune documentation**\n\n")
+                        f.write(f"**Suggestion :** Ajouter un Javadoc avec :\n")
+                        f.write(f"- Description de la méthode\n")
+                        if "(" in method.signature and "void" not in method.signature.split("(")[0]:
+                            f.write(f"- Tag `@param` pour chaque paramètre\n")
+                        if "void" not in method.signature.split()[0]:
+                            f.write(f"- Tag `@return` pour la valeur de retour\n")
+                        f.write(f"\n")
+                    
+                    f.write("---\n\n")
             
             f.write("---\n\n")
         
         # Légende
         f.write("## 📖 Légende\n\n")
+        f.write("### Qualité de la documentation\n\n")
+        f.write("| Icône | Qualité | Description |\n")
+        f.write("|-------|---------|-------------|\n")
+        f.write("| 🟢 | Complète | Description + tags (@param, @return, @throws, @see, etc.) |\n")
+        f.write("| 🟡 | Partielle | Description + quelques tags |\n")
+        f.write("| 🟠 | Minimale | Description seule, sans tags structurés |\n")
+        f.write("| ⚫ | Absente | Pas de Javadoc |\n\n")
+        
+        f.write("### État des classes\n\n")
         f.write("| Icône | Signification |\n")
         f.write("|-------|---------------|\n")
-        f.write("| ✅ | Élément documenté avec Javadoc |\n")
-        f.write("| ❌ | Élément non documenté |\n")
+        f.write("| ✅ | Classe bien documentée (>80%) |\n")
         f.write("| 🔶 | Classe partiellement documentée (50-80%) |\n")
         f.write("| ⚠️ | Classe peu documentée (20-50%) |\n")
-        f.write("| 🏆 | Classe bien documentée (>80%) |\n\n")
+        f.write("| ❌ | Classe très peu documentée (<20%) |\n\n")
         
         f.write("---\n\n")
         f.write(f"*Rapport généré automatiquement par `analyse-javadoc.py` le {datetime.now().strftime('%d/%m/%Y à %H:%M:%S')}*\n")
