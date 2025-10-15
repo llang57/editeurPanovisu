@@ -1,6 +1,6 @@
 # 📊 Rapport d'analyse Javadoc - EditeurPanovisu
 
-**Date de génération :** 15/10/2025 15:02:30
+**Date de génération :** 15/10/2025 15:15:52
 
 ## 📈 Statistiques globales
 
@@ -52,6 +52,118 @@
 3. **OllamaService** : 86 éléments non documentés (25.9% complété)
 4. **GestionnairePlanController** : 85 éléments non documentés (29.8% complété)
 5. **NavigateurPanoramique** : 75 éléments non documentés (28.6% complété)
+
+## � Table des matières
+
+*Cliquez sur le nom d'une classe pour accéder à son détail*
+
+### A
+
+- ❌ [AideDialogController](#aidedialogcontroller) - 0.0% (0/5) - 1 méthode(s), 4 propriété(s)
+- ✅ [ApiKeysConfig](#apikeysconfig) - 83.3% (10/12) - 10 méthode(s), 2 propriété(s)
+
+### B
+
+- 🔶 [BigDecimalField](#bigdecimalfield) - 68.8% (11/16) - 11 méthode(s), 5 propriété(s)
+- ⚠️ [BuildNumberIncrementer](#buildnumberincrementer) - 35.7% (5/14) - 6 méthode(s), 8 propriété(s)
+
+### C
+
+- 🔶 [CartePanoVisu](#cartepanovisu) - 58.3% (14/24) - 14 méthode(s), 10 propriété(s)
+- ⚠️ [ConfigDialogController](#configdialogcontroller) - 22.2% (6/27) - 10 méthode(s), 17 propriété(s)
+- ⚠️ [CoordonneesGeographiques](#coordonneesgeographiques) - 36.4% (4/11) - 6 méthode(s), 5 propriété(s)
+
+### D
+
+- 🔶 [Diaporama](#diaporama) - 50.0% (26/52) - 28 méthode(s), 24 propriété(s)
+- ⚠️ [DocumentationDialog](#documentationdialog) - 25.9% (7/27) - 16 méthode(s), 11 propriété(s)
+
+### E
+
+- ❌ [EditeurHTML](#editeurhtml) - 11.6% (8/69) - 18 méthode(s), 51 propriété(s)
+- ⚠️ [EditeurPanovisu](#editeurpanovisu) - 29.5% (230/779) - 240 méthode(s), 539 propriété(s)
+- ❌ [EquiCubeDialogController](#equicubedialogcontroller) - 10.4% (7/67) - 12 méthode(s), 55 propriété(s)
+- 🔶 [EsriTileRetriever](#esritileretriever) - 50.0% (3/6) - 3 méthode(s), 3 propriété(s)
+- ❌ [ExtensionsFilter](#extensionsfilter) - 0.0% (0/8) - 1 méthode(s), 7 propriété(s)
+
+### G
+
+- ❌ [GestionnaireDiaporamaController](#gestionnairediaporamacontroller) - 12.5% (4/32) - 9 méthode(s), 23 propriété(s)
+- ⚠️ [GestionnaireInterfaceController](#gestionnaireinterfacecontroller) - 35.9% (470/1309) - 471 méthode(s), 838 propriété(s)
+- ⚠️ [GestionnairePlanController](#gestionnaireplancontroller) - 29.2% (35/120) - 43 méthode(s), 77 propriété(s)
+
+### H
+
+- 🔶 [HotSpot](#hotspot) - 52.3% (23/44) - 23 méthode(s), 21 propriété(s)
+- 🔶 [HotspotDiaporama](#hotspotdiaporama) - 55.0% (11/20) - 11 méthode(s), 9 propriété(s)
+- ⚠️ [HotspotHTML](#hotspothtml) - 49.1% (27/55) - 28 méthode(s), 27 propriété(s)
+- 🔶 [HotspotImage](#hotspotimage) - 54.3% (19/35) - 19 méthode(s), 16 propriété(s)
+- ⚠️ [HuggingFaceClient](#huggingfaceclient) - 27.5% (11/40) - 24 méthode(s), 16 propriété(s)
+
+### I
+
+- 🔶 [ImageEditeurHTML](#imageediteurhtml) - 60.0% (3/5) - 3 méthode(s), 2 propriété(s)
+- 🔶 [ImageFond](#imagefond) - 53.3% (32/60) - 32 méthode(s), 28 propriété(s)
+
+### L
+
+- ❌ [Launcher](#launcher) - 0.0% (0/1) - 1 méthode(s), 0 propriété(s)
+- ❌ [ListePanoramiqueCellule](#listepanoramiquecellule) - 0.0% (0/7) - 2 méthode(s), 5 propriété(s)
+
+### M
+
+- ❌ [ManagedImageBufferedImageFactory](#managedimagebufferedimagefactory) - 10.3% (3/29) - 9 méthode(s), 20 propriété(s)
+- ⚠️ [MapMarkerWithHtml](#mapmarkerwithhtml) - 49.1% (26/53) - 32 méthode(s), 21 propriété(s)
+- 🔶 [MarkdownViewer](#markdownviewer) - 55.0% (11/20) - 13 méthode(s), 7 propriété(s)
+- 🔶 [MarqueurGeolocalisation](#marqueurgeolocalisation) - 50.0% (6/12) - 6 méthode(s), 6 propriété(s)
+
+### N
+
+- 🔶 [NavigateurCarte](#navigateurcarte) - 70.0% (7/10) - 7 méthode(s), 3 propriété(s)
+- 🔶 [NavigateurCarteSeul](#navigateurcarteseul) - 66.7% (4/6) - 4 méthode(s), 2 propriété(s)
+- 🔶 [NavigateurOpenLayers](#navigateuropenlayers) - 50.0% (21/42) - 24 méthode(s), 18 propriété(s)
+- 🔶 [NavigateurOpenLayersSeul](#navigateuropenlayersseul) - 65.1% (28/43) - 29 méthode(s), 14 propriété(s)
+- ⚠️ [NavigateurPanoramique](#navigateurpanoramique) - 27.9% (29/104) - 46 méthode(s), 58 propriété(s)
+
+### O
+
+- ⚠️ [OllamaService](#ollamaservice) - 25.2% (29/115) - 49 méthode(s), 66 propriété(s)
+- ⚠️ [OpenRouterClient](#openrouterclient) - 37.1% (13/35) - 24 méthode(s), 11 propriété(s)
+- ❌ [OrdrePanoramique](#ordrepanoramique) - 18.8% (3/16) - 8 méthode(s), 8 propriété(s)
+
+### P
+
+- ⚠️ [PaneOutil](#paneoutil) - 40.9% (9/22) - 11 méthode(s), 11 propriété(s)
+- ⚠️ [PanoramicCube](#panoramiccube) - 22.2% (4/18) - 5 méthode(s), 13 propriété(s)
+- 🔶 [Panoramique](#panoramique) - 55.9% (81/145) - 79 méthode(s), 66 propriété(s)
+- ❌ [PanoramiqueCellule](#panoramiquecellule) - 50.0% (8/16) - 8 méthode(s), 8 propriété(s)
+- 🔶 [Plan](#plan) - 51.8% (29/56) - 29 méthode(s), 27 propriété(s)
+- ⚠️ [PopUpDialogController](#popupdialogcontroller) - 37.5% (3/8) - 5 méthode(s), 3 propriété(s)
+
+### R
+
+- ❌ [ReadWriteImage](#readwriteimage) - 16.7% (1/6) - 1 méthode(s), 5 propriété(s)
+
+### S
+
+- ⚠️ [SvgIconLoader](#svgiconloader) - 44.0% (11/25) - 21 méthode(s), 4 propriété(s)
+- ❌ [SvgIconLoaderTest](#svgiconloadertest) - 0.0% (0/4) - 2 méthode(s), 2 propriété(s)
+
+### T
+
+- ❌ [TestAIClients](#testaiclients) - 13.3% (2/15) - 3 méthode(s), 12 propriété(s)
+- ❌ [TestThemeDetection](#testthemedetection) - 0.0% (0/11) - 7 méthode(s), 4 propriété(s)
+- ❌ [TextUtils](#textutils) - 0.0% (0/7) - 1 méthode(s), 6 propriété(s)
+- ⚠️ [ThemeManager](#thememanager) - 38.5% (15/39) - 22 méthode(s), 17 propriété(s)
+- ❌ [TransformationsPanoramique](#transformationspanoramique) - 4.5% (3/67) - 2 méthode(s), 65 propriété(s)
+
+### V
+
+- ⚠️ [VisualiseurImagesPanoramiques](#visualiseurimagespanoramiques) - 21.8% (17/78) - 31 méthode(s), 47 propriété(s)
+
+### Z
+
+- ⚠️ [ZoneTelecommande](#zonetelecommande) - 34.8% (8/23) - 9 méthode(s), 14 propriété(s)
 
 ## 📋 Détail par classe
 
@@ -69019,4 +69131,4 @@ public void calculeCentre() {
 
 ---
 
-*Rapport généré automatiquement par `analyse-javadoc.py` le 15/10/2025 à 15:02:30*
+*Rapport généré automatiquement par `analyse-javadoc.py` le 15/10/2025 à 15:15:52*

@@ -345,12 +345,51 @@ def generate_markdown_report(all_classes: List[JavaClass], output_file: str):
             f.write(f"{i}. **{c.name}** : {missing} éléments non documentés ({score:.1f}% complété)\n")
         f.write("\n")
         
+        # Trier les classes par nom pour la TDM et le détail
+        all_classes.sort(key=lambda x: x.name)
+        
+        # Table des matières
+        f.write("## � Table des matières\n\n")
+        f.write("*Cliquez sur le nom d'une classe pour accéder à son détail*\n\n")
+        
+        # Grouper par première lettre pour faciliter la navigation
+        classes_by_letter = {}
+        for c in all_classes:
+            first_letter = c.name[0].upper()
+            if first_letter not in classes_by_letter:
+                classes_by_letter[first_letter] = []
+            classes_by_letter[first_letter].append(c)
+        
+        for letter in sorted(classes_by_letter.keys()):
+            f.write(f"### {letter}\n\n")
+            for c in classes_by_letter[letter]:
+                # Calculer les stats
+                total_elements = len(c.methods) + len(c.fields)
+                documented_elements = sum(1 for m in c.methods if m.has_javadoc) + \
+                                     sum(1 for f in c.fields if f.has_javadoc)
+                pct = (documented_elements / total_elements * 100) if total_elements > 0 else 0
+                
+                # Choisir l'icône selon le statut
+                if c.has_javadoc:
+                    if pct >= 80:
+                        icon = "✅"
+                    elif pct >= 50:
+                        icon = "🔶"
+                    elif pct >= 20:
+                        icon = "⚠️"
+                    else:
+                        icon = "❌"
+                else:
+                    icon = "❌"
+                
+                # Créer le lien vers la classe (ancre Markdown)
+                anchor = c.name.lower().replace(" ", "-")
+                f.write(f"- {icon} [{c.name}](#{anchor}) - {pct:.1f}% ({documented_elements}/{total_elements}) - {len(c.methods)} méthode(s), {len(c.fields)} propriété(s)\n")
+            f.write("\n")
+        
         # Détail par classe
         f.write("## 📋 Détail par classe\n\n")
         f.write("---\n\n")
-        
-        # Trier les classes par nom
-        all_classes.sort(key=lambda x: x.name)
         
         for java_class in all_classes:
             # Calculer les stats de la classe
