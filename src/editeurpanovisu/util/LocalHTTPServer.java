@@ -30,7 +30,7 @@ import java.util.concurrent.Executors;
  * }</pre>
  * 
  * @author EditeurPanovisu
- * @since 1.0
+ * @since 3.1
  */
 public class LocalHTTPServer {
     

@@ -128,7 +128,7 @@ Créez facilement des visites virtuelles immersives en HTML5/WebGL sans aucune c
 
 ### Exemple de visite
 
-Consultez les [exemples de visites](http://panovisu.fr/exemples) réalisées avec PanoVisu.
+Consultez les [exemples de visites](https://lemondea360.fr/visites) réalisées avec PanoVisu.
 
 ## 🔧 Technologies utilisées
 
@@ -281,7 +281,7 @@ Les contributions sont les bienvenues ! PanoVisu est un projet communautaire.
 
 ### Signaler un bug
 
-Utilisez le [système de tickets](http://panovisu.fr/hesk/) ou créez une [issue GitHub](https://github.com/llang57/editeurPanovisu/issues).
+Créez une [issue GitHub](https://github.com/llang57/editeurPanovisu/issues) pour signaler un problème.
 
 ### Idées et suggestions
 
@@ -289,11 +289,11 @@ Toutes les idées sont bonnes à prendre ! N'hésitez pas à participer aux disc
 
 ## 💬 Support et contact
 
-- **Site web** : [panovisu.fr](http://panovisu.fr)
-- **Documentation** : [panovisu.fr/documentation](http://panovisu.fr/documentation)
-- **Exemples** : [panovisu.fr/exemples](http://panovisu.fr/exemples)
-- **Support** : [panovisu.fr/hesk](http://panovisu.fr/hesk/)
-- **GitHub** : [github.com/llang57/editeurPanovisu](https://github.com/llang57/editeurPanovisu)
+- **Site web** : [lemondea360.fr/panovisu](https://lemondea360.fr/panovisu)
+- **Documentation** : [GitHub Wiki](https://github.com/llang57/editeurPanovisu/wiki)
+- **Issues** : [GitHub Issues](https://github.com/llang57/editeurPanovisu/issues)
+- **Discussions** : [GitHub Discussions](https://github.com/llang57/editeurPanovisu/discussions)
+- **Dépôt** : [github.com/llang57/editeurPanovisu](https://github.com/llang57/editeurPanovisu)
 
 ## 📜 Licence
 
