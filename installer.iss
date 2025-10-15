@@ -2,7 +2,7 @@
 ; Installe l'application avec les bons raccourcis vers le lanceur VBS
 
 #define MyAppName "EditeurPanovisu"
-#define MyAppVersion "3.0.0"
+#define MyAppVersion "3.1.0"
 #define MyAppPublisher "PanoVisu - Laurent LANG"
 #define MyAppExeName "Lancer_EditeurPanovisu.vbs"
 
