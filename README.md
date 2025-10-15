@@ -1,13 +1,37 @@
 # 🌐 Éditeur PanoVisu
 
-[![Version](https://img.shields.io/badge/version-3.1-blue.svg)](https://github.com/llang57/editeurPanovisu)
+[![Version](https://img.shields.io/badge/version-3.1.0-blue.svg)](https://github.com/llang57/editeurPanovisu/releases)
 [![Java](https://img.shields.io/badge/Java-25-orange.svg)](https://adoptium.net/)
 [![JavaFX](https://img.shields.io/badge/JavaFX-19-green.svg)](https://openjfx.io/)
-[![License](https://img.shields.io/badge/license-Open%20Source-brightgreen.svg)](LICENSE)
+[![License](https://img.shields.io/badge/license-GPL--3.0-brightgreen.svg)](LICENSE)
+[![Wiki](https://img.shields.io/badge/docs-Wiki-blue.svg)](https://github.com/llang57/editeurPanovisu/wiki)
+[![Downloads](https://img.shields.io/github/downloads/llang57/editeurPanovisu/total.svg)](https://github.com/llang57/editeurPanovisu/releases)
+[![Stars](https://img.shields.io/github/stars/llang57/editeurPanovisu.svg)](https://github.com/llang57/editeurPanovisu/stargazers)
 
-> **Éditeur visuel pour la création de visites virtuelles et panoramiques 360° interactifs**
+<div align="center">
 
-Créez facilement des visites virtuelles immersives en HTML5/WebGL sans aucune connaissance en programmation. PanoVisu combine puissance, simplicité et liberté pour offrir une solution complète et gratuite de création de visites virtuelles de qualité professionnelle.
+**🎯 Éditeur visuel pour la création de visites virtuelles et panoramiques 360° interactifs**
+
+Créez facilement des visites virtuelles immersives en HTML5/WebGL sans aucune connaissance en programmation.  
+PanoVisu combine puissance, simplicité et liberté pour offrir une solution complète et gratuite.
+
+[📦 Télécharger](https://github.com/llang57/editeurPanovisu/releases) • [📚 Documentation](https://github.com/llang57/editeurPanovisu/wiki) • [🌐 Site Web](https://lemondea360.fr/panovisu) • [💬 Discussions](https://github.com/llang57/editeurPanovisu/discussions)
+
+**Languages:** [🇫🇷 Français](README.md) • [🇬🇧 English](README_EN.md)
+
+</div>
+
+---
+
+## 🔧 Version 3.1.0 - Critical Update
+
+**Important:** If you host tours on Linux servers, please read:
+- 🇫🇷 [Annonce v3.1.0](doc/DISCUSSION_V3.1.0.md) • [FAQ](doc/FAQ_V3.1.0.md) • [Guide de migration](doc/MIGRATION_GUIDE_V3.1.0.md)
+- 🇬🇧 [v3.1.0 Announcement](doc/DISCUSSION_V3.1.0_EN.md) • [FAQ](doc/FAQ_V3.1.0_EN.md) • [Migration Guide](doc/MIGRATION_GUIDE_V3.1.0_EN.md)
+
+**What's new?** Critical fix for case-sensitivity issue on Linux servers. All tours hosted on Linux must be re-exported with v3.1.0.
+
+---
 
 ## 📑 Table des matières
 
@@ -76,15 +100,34 @@ Créez facilement des visites virtuelles immersives en HTML5/WebGL sans aucune c
 
 ## 📥 Installation
 
-### Prérequis
+### 🚀 Installation rapide (Recommandé)
+
+**Des installateurs prêts à l'emploi sont disponibles !** Ils incluent Java 25 et toutes les dépendances.
+
+➡️ **[Télécharger depuis GitHub Releases](https://github.com/llang57/editeurPanovisu/releases)**
+
+| Système | Fichier | Taille |
+|---------|---------|--------|
+| 🪟 **Windows** | `EditeurPanovisu-[version].exe` | ~200 MB |
+| 🍎 **macOS** | `EditeurPanovisu-[version].dmg` | ~200 MB |
+| 🐧 **Linux** | `.deb` ou `.rpm` | ~200 MB |
+
+**Aucune installation de Java requise** - Tout est inclus ! ✅
+
+### 🛠️ Installation depuis les sources (Développeurs)
+
+<details>
+<summary>Cliquez pour voir les instructions de compilation</summary>
+
+#### Prérequis
 
 - **Java 25** (OpenJDK Temurin recommandé) - [Télécharger](https://adoptium.net/)
-- **Maven 3.9+** (pour la compilation depuis les sources)
-- **Système d'exploitation** : Windows 10/11, macOS 10.15+, Linux (toute distribution récente)
+- **Maven 3.9+**
+- **Système d'exploitation** : Windows 10/11, macOS 10.15+, Linux
 
-### Installation rapide
+#### Étapes
 
-1. **Téléchargez la dernière version**
+1. **Clonez le dépôt**
    ```bash
    git clone https://github.com/llang57/editeurPanovisu.git
    cd editeurPanovisu
@@ -98,37 +141,49 @@ Créez facilement des visites virtuelles immersives en HTML5/WebGL sans aucune c
 3. **Lancez l'éditeur**
    ```bash
    mvn javafx:run
+   # Ou directement :
+   java -jar target/editeurPanovisu.jar
    ```
+
+📖 **Documentation complète** : [Guide d'installation](https://github.com/llang57/editeurPanovisu/wiki/Installation)
+
+</details>
 
 ## 🎯 Démarrage rapide
 
-### Créer votre première visite virtuelle
+### Créer votre première visite en 10 minutes ! ⏱️
 
-1. **Préparez vos images panoramiques**
-   - Format recommandé : équirectangulaire (ratio 2:1)
-   - Résolution conseillée : 8192×4096 pixels pour une qualité optimale
-   - Outil recommandé : [Hugin](http://hugin.sourceforge.net/) (assemblage gratuit)
+1. **📥 Téléchargez et installez** PanoVisu depuis [Releases](https://github.com/llang57/editeurPanovisu/releases)
 
-2. **Lancez l'éditeur PanoVisu**
+2. **📸 Préparez vos images panoramiques**
+   - Format : équirectangulaire (ratio 2:1) ou cubemap
+   - Résolution : 8192×4096 px recommandée
+   - Outil gratuit : [Hugin](http://hugin.sourceforge.net/)
 
-3. **Créez un nouveau projet**
+3. **🆕 Créez un nouveau projet**
    - Fichier → Nouveau projet
-   - Importez vos panoramiques
-   - Placez-les sur un plan ou une carte
+   - Importez vos panoramiques (drag & drop)
 
-4. **Ajoutez de l'interactivité**
-   - Créez des hotspots de navigation entre panoramiques
-   - Ajoutez des informations contextuelles
-   - Personnalisez l'interface
+4. **🔗 Ajoutez de l'interactivité**
+   - Créez des hotspots de navigation
+   - Ajoutez des galeries photos
+   - Insérez du contenu HTML
 
-5. **Exportez et publiez**
+5. **🎨 Personnalisez l'interface**
+   - Barre de navigation
+   - Couleurs et thèmes
+   - Logo et splash screen
+
+6. **🚀 Exportez et publiez**
    - Fichier → Exporter la visite
-   - Copiez le dossier généré sur votre serveur web
-   - Ouvrez `index.html` dans un navigateur
+   - Test local automatique (serveur HTTP intégré)
+   - Hébergez sur votre serveur ou GitHub Pages
 
-### Exemple de visite
+📖 **Tutoriel complet** : [Démarrage rapide](https://github.com/llang57/editeurPanovisu/wiki/Démarrage-rapide)
 
-Consultez les [exemples de visites](https://lemondea360.fr/visites) réalisées avec PanoVisu.
+### 🎬 Exemples de visites
+
+Découvrez des exemples réalisés avec PanoVisu : [lemondea360.fr/panovisu](https://lemondea360.fr/panovisu)
 
 ## 🔧 Technologies utilisées
 
