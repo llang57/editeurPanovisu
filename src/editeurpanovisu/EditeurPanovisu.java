@@ -153,7 +153,7 @@ import org.apache.commons.imaging.ImagingException;
  * </ul>
  *
  * @author LANG Laurent
- * @version 3.0.0
+ * @version 3.1.0
  * @since 1.0
  */
 public class EditeurPanovisu extends Application {
@@ -11863,13 +11863,13 @@ public class EditeurPanovisu extends Application {
         fileRepertConfig = new File(getStrRepertAppli() + File.separator + "configPV");
         rbLocalisation = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", getLocale());
         // Lire la version depuis project.properties
-        String version = "3.0";
+        String version = "3.1";
         try {
             Properties propVersion = new Properties();
             java.io.InputStream is = getClass().getResourceAsStream("/project.properties");
             if (is != null) {
                 propVersion.load(is);
-                version = propVersion.getProperty("project.version", "3.0");
+                version = propVersion.getProperty("project.version", "3.1");
                 is.close();
             }
         } catch (Exception e) {

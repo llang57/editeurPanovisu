@@ -1,6 +1,6 @@
 # 🌐 Éditeur PanoVisu
 
-[![Version](https://img.shields.io/badge/version-3.0-blue.svg)](https://github.com/llang57/editeurPanovisu)
+[![Version](https://img.shields.io/badge/version-3.1-blue.svg)](https://github.com/llang57/editeurPanovisu)
 [![Java](https://img.shields.io/badge/Java-25-orange.svg)](https://adoptium.net/)
 [![JavaFX](https://img.shields.io/badge/JavaFX-19-green.svg)](https://openjfx.io/)
 [![License](https://img.shields.io/badge/license-Open%20Source-brightgreen.svg)](LICENSE)
