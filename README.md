@@ -27,13 +27,9 @@ PanoVisu combine puissance, simplicité et liberté pour offrir une solution com
 
 **Important :** Si vous hébergez des visites sur des serveurs Linux, lisez ceci :
 
-### 📢 Discussions GitHub (RECOMMANDÉ)
+### 📢 Discussions GitHub
 - 🇫🇷 [📢 Annonce v3.1.0](https://github.com/llang57/editeurPanovisu/discussions/6) • [❓ FAQ](https://github.com/llang57/editeurPanovisu/discussions/8) • [🚀 Guide migration](https://github.com/llang57/editeurPanovisu/discussions/10)
 - 🇬🇧 [📢 v3.1.0 Announcement](https://github.com/llang57/editeurPanovisu/discussions/7) • [❓ FAQ](https://github.com/llang57/editeurPanovisu/discussions/9) • [🚀 Migration Guide](https://github.com/llang57/editeurPanovisu/discussions/11)
-
-### 📖 Documentation complète
-- 🇫🇷 [Annonce v3.1.0](doc/DISCUSSION_V3.1.0.md) • [FAQ](doc/FAQ_V3.1.0.md) • [Guide de migration](doc/MIGRATION_GUIDE_V3.1.0.md)
-- 🇬🇧 [v3.1.0 Announcement](doc/DISCUSSION_V3.1.0_EN.md) • [FAQ](doc/FAQ_V3.1.0_EN.md) • [Migration Guide](doc/MIGRATION_GUIDE_V3.1.0_EN.md)
 
 **Quoi de neuf ?** Correctif critique pour le problème de case-sensitivity sur les serveurs Linux. Toutes les visites hébergées sur Linux doivent être ré-exportées avec la v3.1.0.
 
