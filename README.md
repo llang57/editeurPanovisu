@@ -41,8 +41,6 @@ PanoVisu combine puissance, simplicité et liberté pour offrir une solution com
 
 **Quelles sont les nouveautés ?** Correction critique du problème de sensibilité à la casse sur les serveurs Linux. Toutes les visites hébergées sur Linux doivent être réexportées avec la version 3.1.0.
 
-Traduit avec DeepL.com (version gratuite)
-
 ---
 
 ## 📑 Table des matières
