@@ -39,6 +39,16 @@ PanoVisu combine puissance, simplicité et liberté pour offrir une solution com
 
 ---
 
+## 🔧 Version 3.1.0 - Mise à jour critique
+
+**Important :** si vous hébergez des visites sur des serveurs Linux, veuillez lire :
+- 🇫🇷 [Annonce v3.1.0](doc/DISCUSSION_V3.1.0.md) • [FAQ](doc/FAQ_V3.1.0.md) • [Guide de migration](doc/MIGRATION_GUIDE_V3.1.0.md)
+- 🇬🇧 [Annonce v3.1.0](doc/DISCUSSION_V3.1.0_EN.md) • [FAQ](doc/FAQ_V3.1.0_EN.md) • [Migration Guide](doc/MIGRATION_GUIDE_V3.1.0_EN.md)
+
+**Quelles sont les nouveautés ?** Correction critique du problème de sensibilité à la casse sur les serveurs Linux. Toutes les visites hébergées sur Linux doivent être réexportées avec la version 3.1.0.
+
+---
+
 ## 📑 Table des matières
 
 - [Qu'est-ce que PanoVisu ?](#quest-ce-que-panovisu-)
