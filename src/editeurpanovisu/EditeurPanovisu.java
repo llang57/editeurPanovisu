@@ -11276,10 +11276,13 @@ public class EditeurPanovisu extends Application {
 
         tabVisite.setText(rbLocalisation.getString("main.creationVisite"));
         tabVisite.setClosable(false);
+        tabVisite.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
         getTabInterface().setText(rbLocalisation.getString("main.creationInterface"));
         getTabInterface().setClosable(false);
+        getTabInterface().setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
         getTabPlan().setText(rbLocalisation.getString("main.tabPlan"));
         getTabPlan().setClosable(false);
+        getTabPlan().setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
         getTabPlan().setDisable(true);
         if (isbInternet()) {
             getTabInterface().setDisable(true);
