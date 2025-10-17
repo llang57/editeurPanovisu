@@ -34,6 +34,9 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -527,6 +530,9 @@ public class EditeurPanovisu extends Application {
         if (ivVisiteGenere != null) {
             ivVisiteGenere.setImage(loadSvgIcon("genere-visite", 32).getImage());
         }
+        if (ivGenereZip != null) {
+            ivGenereZip.setImage(loadSvgIcon("genere-zip", 35).getImage());
+        }
         if (ivEqui2Cube != null) {
             ivEqui2Cube.setImage(loadSvgIcon("vue-sphere", 128, 64, null).getImage());
         }
@@ -603,6 +609,20 @@ public class EditeurPanovisu extends Application {
      */
     public static void setStrDernierRepertoireVisite(String aStrDernierRepertoireVisite) {
         strDernierRepertoireVisite = aStrDernierRepertoireVisite;
+    }
+
+    /**
+     * @return the strDernierRepertoireImages
+     */
+    public static String getStrDernierRepertoireImages() {
+        return strDernierRepertoireImages;
+    }
+
+    /**
+     * @param aStrDernierRepertoireImages the strDernierRepertoireImages to set
+     */
+    public static void setStrDernierRepertoireImages(String aStrDernierRepertoireImages) {
+        strDernierRepertoireImages = aStrDernierRepertoireImages;
     }
 
     /**
@@ -1586,6 +1606,18 @@ public class EditeurPanovisu extends Application {
     private static String strDernierRepertoireVisite = "";
     
     /**
+     * Dernier répertoire utilisé pour le chargement d'images
+     * 
+     * <p>Mémorise le dernier emplacement choisi par l'utilisateur pour charger
+     * des images (redimensionnement, traitement, etc.). Indépendant du répertoire
+     * de projet et du répertoire de génération de visite.</p>
+     * 
+     * @see #getStrDernierRepertoireImages()
+     * @see #setStrDernierRepertoireImages(String)
+     */
+    private static String strDernierRepertoireImages = "";
+    
+    /**
      * Fichier de configuration de l'application
      * 
      * <p>Référence vers le fichier contenant les préférences et paramètres de l'application
@@ -1642,20 +1674,46 @@ public class EditeurPanovisu extends Application {
 
     private static MenuItem mniSauveSousProjet;
     private static MenuItem mniVisiteGenere;
+    private static MenuItem mniCreerZipVisite;
     private static MenuItem mniChargeProjet;
 
     private static MenuItem mniAffichageVisite;
     private static MenuItem mniAffichageInterface;
     private static MenuItem mniAffichagePlan;
+    
+    /**
+     * MenuItem pour l'outil de redimensionnement et compression d'images
+     * Permet de traiter des images par lots pour les redimensionner et les compresser
+     */
+    private static MenuItem mniRedimensionnerImages;
+    
+    /**
+     * MenuItem pour l'outil de conversion des images au ratio 2:1
+     * Convertit des images au format panoramique 2:1 avec padding intelligent
+     */
+    private static MenuItem mniConvertirRatio2to1;
 
     private static ImageView ivNouveauProjet;
     private static ImageView ivSauveProjet;
     private static ImageView ivChargeProjet;
     private static ImageView ivVisiteGenere;
+    private static ImageView ivGenereZip;
     private static ImageView ivAjouterPano;
     private static ImageView ivAjouterPlan;
     private static ImageView ivCube2Equi;
     private static ImageView ivEqui2Cube;
+    
+    /**
+     * ImageView pour l'icône de l'outil de redimensionnement et compression d'images
+     * dans la barre d'outils
+     */
+    private static ImageView ivRedimensionnerImages;
+    
+    /**
+     * ImageView pour l'icône de l'outil de conversion au ratio 2:1
+     * dans la barre d'outils
+     */
+    private static ImageView ivConvertirRatio2to1;
 
     private static TextField tfLongitude;
     private static TextField tfLatitude;
@@ -1713,6 +1771,10 @@ public class EditeurPanovisu extends Application {
      * @see #isbDejaSauve()
      */
     private static void genereVisite() throws IOException {
+        genereVisite(false);
+    }
+    
+    private static void genereVisite(boolean isZip) throws IOException {
         if (!bRepertSauveChoisi) {
             setStrRepertoireProjet(getStrCurrentDir());
         }
@@ -2800,71 +2862,78 @@ public class EditeurPanovisu extends Application {
             try (BufferedWriter bwFichierHTML = new BufferedWriter(oswFichierHTML)) {
                 bwFichierHTML.write(strFichierHTML);
             }
-            DirectoryChooser dcRepertChoix = new DirectoryChooser();
-            dcRepertChoix.setTitle("Choix du repertoire de sauvegarde de la visite");
-            // Utiliser le dernier répertoire de visite s'il existe, sinon le répertoire du projet
-            File fileRepert;
-            if (!getStrDernierRepertoireVisite().isEmpty() && new File(getStrDernierRepertoireVisite()).exists()) {
-                fileRepert = new File(getStrDernierRepertoireVisite());
+            
+            if (isZip) {
+                // Mode ZIP : sauvegarder automatiquement puis créer le ZIP
+                creerZipDepuisTemp();
             } else {
-                fileRepert = new File(EditeurPanovisu.getStrRepertoireProjet());
-            }
-            dcRepertChoix.setInitialDirectory(fileRepert);
-            File fileRepertVisite = dcRepertChoix.showDialog(null);
-            if (fileRepertVisite != null) {
-                String strNomRepertVisite = fileRepertVisite.getAbsolutePath();
-                // Sauvegarder ce répertoire pour la prochaine fois
-                setStrDernierRepertoireVisite(strNomRepertVisite);
-                try {
-                    sauvePreferences();
-                } catch (IOException ex) {
-                    Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
+                // Mode normal : demander le répertoire de sauvegarde
+                DirectoryChooser dcRepertChoix = new DirectoryChooser();
+                dcRepertChoix.setTitle("Choix du repertoire de sauvegarde de la visite");
+                // Utiliser le dernier répertoire de visite s'il existe, sinon le répertoire du projet
+                File fileRepert;
+                if (!getStrDernierRepertoireVisite().isEmpty() && new File(getStrDernierRepertoireVisite()).exists()) {
+                    fileRepert = new File(getStrDernierRepertoireVisite());
+                } else {
+                    fileRepert = new File(EditeurPanovisu.getStrRepertoireProjet());
                 }
-                copieRepertoire(getStrRepertTemp(), strNomRepertVisite);
-                
-                // Démarrer le serveur HTTP local pour éviter les problèmes CORS
-                editeurpanovisu.util.LocalHTTPServer server = editeurpanovisu.util.LocalHTTPServer.getInstance();
-                try {
-                    server.setRootDirectory(strNomRepertVisite);
-                    server.start();
+                dcRepertChoix.setInitialDirectory(fileRepert);
+                File fileRepertVisite = dcRepertChoix.showDialog(null);
+                if (fileRepertVisite != null) {
+                    String strNomRepertVisite = fileRepertVisite.getAbsolutePath();
+                    // Sauvegarder ce répertoire pour la prochaine fois
+                    setStrDernierRepertoireVisite(strNomRepertVisite);
+                    try {
+                        sauvePreferences();
+                    } catch (IOException ex) {
+                        Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    copieRepertoire(getStrRepertTemp(), strNomRepertVisite);
                     
-                    String serverUrl = server.getUrl();
-                    
-                    Alert alert = new Alert(AlertType.INFORMATION);
-                    alert.setHeaderText(null);
-                    alert.setTitle(rbLocalisation.getString("main.dialog.generationVisite"));
-                    alert.setContentText(rbLocalisation.getString("main.dialog.generationVisiteMessage") + strNomRepertVisite + "\n\n"
-                            + "🌐 La visite sera accessible sur : " + serverUrl + "\n"
-                            + "⚠️ Ne fermez pas l'application pour conserver l'accès à la visite.");
-                    alert.showAndWait();
-                    
-                    Application app = new Application() {
-                        @Override
-                        public void start(Stage stage) {
-                        }
-                    };
-                    // Ouvrir le navigateur avec le serveur HTTP local
-                    app.getHostServices().showDocument(serverUrl);
-                    
-                } catch (IOException ex) {
-                    System.err.println("❌ Erreur lors du démarrage du serveur HTTP : " + ex.getMessage());
-                    // Fallback : ouvrir en mode file:// (avec avertissement)
-                    Alert alertFallback = new Alert(AlertType.WARNING);
-                    alertFallback.setHeaderText(null);
-                    alertFallback.setTitle(rbLocalisation.getString("main.dialog.generationVisite"));
-                    alertFallback.setContentText(rbLocalisation.getString("main.dialog.generationVisiteMessage") + strNomRepertVisite + "\n\n"
-                            + "⚠️ Le serveur HTTP n'a pas pu démarrer.\n"
-                            + "La visite s'ouvrira en mode local (file://) ce qui peut causer des problèmes de sécurité.\n"
-                            + "Pour une expérience optimale, copiez le dossier sur un serveur web.");
-                    alertFallback.showAndWait();
-                    
-                    Application app = new Application() {
-                        @Override
-                        public void start(Stage stage) {
-                        }
-                    };
-                    File indexFile = new File(strNomRepertVisite + File.separator + "index.html");
-                    app.getHostServices().showDocument(indexFile.toURI().toString());
+                    // Démarrer le serveur HTTP local pour éviter les problèmes CORS
+                    editeurpanovisu.util.LocalHTTPServer server = editeurpanovisu.util.LocalHTTPServer.getInstance();
+                    try {
+                        server.setRootDirectory(strNomRepertVisite);
+                        server.start();
+                        
+                        String serverUrl = server.getUrl();
+                        
+                        Alert alert = new Alert(AlertType.INFORMATION);
+                        alert.setHeaderText(null);
+                        alert.setTitle(rbLocalisation.getString("main.dialog.generationVisite"));
+                        alert.setContentText(rbLocalisation.getString("main.dialog.generationVisiteMessage") + strNomRepertVisite + "\n\n"
+                                + "🌐 La visite sera accessible sur : " + serverUrl + "\n"
+                                + "⚠️ Ne fermez pas l'application pour conserver l'accès à la visite.");
+                        alert.showAndWait();
+                        
+                        Application app = new Application() {
+                            @Override
+                            public void start(Stage stage) {
+                            }
+                        };
+                        // Ouvrir le navigateur avec le serveur HTTP local
+                        app.getHostServices().showDocument(serverUrl);
+                        
+                    } catch (IOException ex) {
+                        System.err.println("❌ Erreur lors du démarrage du serveur HTTP : " + ex.getMessage());
+                        // Fallback : ouvrir en mode file:// (avec avertissement)
+                        Alert alertFallback = new Alert(AlertType.WARNING);
+                        alertFallback.setHeaderText(null);
+                        alertFallback.setTitle(rbLocalisation.getString("main.dialog.generationVisite"));
+                        alertFallback.setContentText(rbLocalisation.getString("main.dialog.generationVisiteMessage") + strNomRepertVisite + "\n\n"
+                                + "⚠️ Le serveur HTTP n'a pas pu démarrer.\n"
+                                + "La visite s'ouvrira en mode local (file://) ce qui peut causer des problèmes de sécurité.\n"
+                                + "Pour une expérience optimale, copiez le dossier sur un serveur web.");
+                        alertFallback.showAndWait();
+                        
+                        Application app = new Application() {
+                            @Override
+                            public void start(Stage stage) {
+                            }
+                        };
+                        File indexFile = new File(strNomRepertVisite + File.separator + "index.html");
+                        app.getHostServices().showDocument(indexFile.toURI().toString());
+                    }
                 }
             }
         } else {
@@ -2877,10 +2946,169 @@ public class EditeurPanovisu extends Application {
         }
     }
 
+    
+    
     /**
-     *
-     *     /**
-     *
+     * Crée un fichier ZIP contenant la visite virtuelle depuis le répertoire temporaire
+     * @throws IOException si une erreur se produit lors de la création du ZIP
+     */
+    private static void creerZipDepuisTemp() throws IOException {
+        // Demander à l'utilisateur où sauvegarder le ZIP
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Sauvegarder l'archive ZIP de la visite");
+        
+        // Utiliser le nom du fichier PVU comme nom par défaut pour le ZIP
+        String nomProjet = "visite"; // Nom par défaut
+        try {
+            if (fileProjet != null) {
+                String nomFichier = fileProjet.getName();
+                if (nomFichier.endsWith(".pvu")) {
+                    nomProjet = nomFichier.substring(0, nomFichier.length() - 4);
+                }
+            }
+        } catch (Exception e) {
+            // En cas d'erreur, garder le nom par défaut
+        }
+        
+        fileChooser.setInitialFileName(nomProjet + ".zip");
+        
+        // Utiliser le dernier répertoire de visite s'il existe, sinon le répertoire du projet
+        File fileRepert;
+        if (!getStrDernierRepertoireVisite().isEmpty() && new File(getStrDernierRepertoireVisite()).exists()) {
+            fileRepert = new File(getStrDernierRepertoireVisite());
+        } else {
+            fileRepert = new File(EditeurPanovisu.getStrRepertoireProjet());
+        }
+        fileChooser.setInitialDirectory(fileRepert);
+        
+        // Ajouter des filtres d'extension
+        FileChooser.ExtensionFilter zipFilter = new FileChooser.ExtensionFilter("Archives ZIP (*.zip)", "*.zip");
+        fileChooser.getExtensionFilters().add(zipFilter);
+        
+        File zipFile = fileChooser.showSaveDialog(null);
+        if (zipFile != null) {
+            // Sauvegarder le répertoire pour la prochaine fois
+            setStrDernierRepertoireVisite(zipFile.getParent());
+            try {
+                sauvePreferences();
+            } catch (IOException ex) {
+                Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            // Créer le fichier ZIP depuis le répertoire temporaire
+            creerZipFromDirectory(new File(getStrRepertTemp()), zipFile);
+            
+            // Afficher un message de succès
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle(rbLocalisation.getString("main.dialog.generationVisite"));
+            alert.setHeaderText(null);
+            alert.setContentText("Archive ZIP de la visite créée avec succès :\\n" + zipFile.getAbsolutePath());
+            alert.showAndWait();
+        }
+    }
+    
+    /**
+     * Crée un fichier ZIP contenant la visite virtuelle
+     * @throws IOException si une erreur se produit lors de la création du ZIP
+     */
+    private static void creerZipVisite() throws IOException {
+        if (!bRepertSauveChoisi) {
+            setStrRepertoireProjet(getStrCurrentDir());
+        }
+        if (!isbDejaSauve()) {
+            projetSauve();
+        }
+        if (isbDejaSauve()) {
+            // Utiliser la nouvelle méthode genereVisite avec le paramètre isZip=true
+            genereVisite(true);
+        } else {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle(rbLocalisation.getString("main.dialog.generationVisite"));
+            alert.setHeaderText(null);
+            alert.setContentText(rbLocalisation.getString("main.dialog.generationVisiteMessageErreur"));
+            alert.showAndWait();
+        }
+    }
+
+    /**
+     * Méthode temporaire - génère les fichiers de visite dans le répertoire temp
+     * TODO: Refactoriser pour extraire la logique commune avec genereVisite()
+     */
+    private static void generateVisitFilesInTemp() throws IOException {
+        // Réutiliser une partie de la logique de genereVisite()
+        String strHTMLRepert = getStrRepertTemp() + "/pagesHTML";
+        File fileHTMLRepert = new File(strHTMLRepert);
+        if (!fileHTMLRepert.exists()) {
+            fileHTMLRepert.mkdirs();
+        }
+        deleteDirectory(getStrRepertTemp() + "/panovisu/images");
+        File fileImagesRepert = new File(getStrRepertTemp() + "/panovisu/images");
+        if (!fileImagesRepert.exists()) {
+            fileImagesRepert.mkdirs();
+        }
+        
+        // Copier les ressources essentielles
+        copieRepertoire(getStrRepertAppli() + File.separator + "panovisu", getStrRepertTemp() + "/panovisu");
+        copieRepertoire(getStrRepertAppli() + File.separator + "css", getStrRepertTemp() + "/css");
+        
+        // Créer un index.html de base
+        String htmlContent = "<!DOCTYPE html>\\n<html>\\n<head>\\n<title>Visite Virtuelle</title>\\n</head>\\n<body>\\n<h1>Archive ZIP de la visite créée</h1>\\n<p>Extrayez ce fichier et ouvrez index.html dans un navigateur web.</p>\\n</body>\\n</html>";
+        File indexFile = new File(getStrRepertTemp() + "/index.html");
+        try (FileOutputStream fos = new FileOutputStream(indexFile);
+             OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
+             BufferedWriter bw = new BufferedWriter(osw)) {
+            bw.write(htmlContent);
+        }
+    }
+
+    /**
+     * Crée un fichier ZIP à partir d'un répertoire
+     * @param sourceDir Le répertoire source à compresser
+     * @param zipFile Le fichier ZIP de destination
+     * @throws IOException si une erreur se produit lors de la création
+     */
+    private static void creerZipFromDirectory(File sourceDir, File zipFile) throws IOException {
+        try (FileOutputStream fos = new FileOutputStream(zipFile);
+             ZipOutputStream zos = new ZipOutputStream(fos)) {
+            
+            addDirectoryToZip(sourceDir, sourceDir, zos);
+        }
+    }
+
+    /**
+     * Ajoute récursivement un répertoire au ZIP
+     * @param rootDir Le répertoire racine (pour les chemins relatifs)
+     * @param sourceDir Le répertoire à ajouter
+     * @param zos Le ZipOutputStream
+     * @throws IOException si une erreur se produit
+     */
+    private static void addDirectoryToZip(File rootDir, File sourceDir, ZipOutputStream zos) throws IOException {
+        File[] files = sourceDir.listFiles();
+        if (files == null) return;
+        
+        for (File file : files) {
+            if (file.isDirectory()) {
+                addDirectoryToZip(rootDir, file, zos);
+            } else {
+                // Calculer le chemin relatif
+                String relativePath = rootDir.toURI().relativize(file.toURI()).getPath();
+                
+                ZipEntry zipEntry = new ZipEntry(relativePath);
+                zos.putNextEntry(zipEntry);
+                
+                try (FileInputStream fis = new FileInputStream(file)) {
+                    byte[] buffer = new byte[1024];
+                    int length;
+                    while ((length = fis.read(buffer)) > 0) {
+                        zos.write(buffer, 0, length);
+                    }
+                }
+                zos.closeEntry();
+            }
+        }
+    }
+
+    /**
      * @param strFichierImage fichier image à  charger
      * @param strRepertoire répertoire de sauvegarde
      * @param iNumPanoXML numéro pour la génération des fichiers
@@ -3261,7 +3489,11 @@ public class EditeurPanovisu extends Application {
                 afficheNord(getPanoramiquesProjet()[getiPanoActuel()].getZeroNord());
                 installeEvenements();
                 ivVisiteGenere.setOpacity(1.0);
+                ivGenereZip.setDisable(false);
+                ivGenereZip.setOpacity(1.0);
                 ivVisiteGenere.setDisable(false);
+                ivGenereZip.setOpacity(1.0);
+                ivGenereZip.setDisable(false);
                 getGestionnaireInterface().rafraichit();
                 affichePanoChoisit(getiPanoActuel());
                 bPanoCharge = true;
@@ -3417,12 +3649,15 @@ public class EditeurPanovisu extends Application {
                 ivSauveProjet.setOpacity(1.0);
                 ivVisiteGenere.setDisable(false);
                 ivVisiteGenere.setOpacity(1.0);
+                ivGenereZip.setDisable(false);
+                ivGenereZip.setOpacity(1.0);
 
                 getVbChoixPanoramique().setVisible(false);
 
                 mniSauveProjet.setDisable(false);
                 mniSauveSousProjet.setDisable(false);
                 mniVisiteGenere.setDisable(false);
+                mniCreerZipVisite.setDisable(false);
                 setiNumPoints(0);
                 setiNumImages(0);
                 setiNombreDiapo(0);
@@ -3580,12 +3815,15 @@ public class EditeurPanovisu extends Application {
                 ivSauveProjet.setOpacity(1.0);
                 ivVisiteGenere.setDisable(false);
                 ivVisiteGenere.setOpacity(1.0);
+                ivGenereZip.setDisable(false);
+                ivGenereZip.setOpacity(1.0);
 
                 getVbChoixPanoramique().setVisible(false);
 
                 mniSauveProjet.setDisable(false);
                 mniSauveSousProjet.setDisable(false);
                 mniVisiteGenere.setDisable(false);
+                mniCreerZipVisite.setDisable(false);
                 setiNumPoints(0);
                 setiNumImages(0);
                 setiNumHTML(0);
@@ -3991,6 +4229,7 @@ public class EditeurPanovisu extends Application {
             mniSauveProjet.setDisable(false);
             mniSauveSousProjet.setDisable(false);
             mniVisiteGenere.setDisable(false);
+            mniCreerZipVisite.setDisable(false);
             fileProjet = null;
             getVbChoixPanoramique().setVisible(false);
             setPanoramiquesProjet(new Panoramique[50]);
@@ -8677,6 +8916,58 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Ouvre l'interface de l'outil de redimensionnement et compression d'images.
+     * 
+     * Cet outil permet de :
+     * <ul>
+     * <li>Charger plusieurs images via drag & drop ou FileChooser</li>
+     * <li>Redimensionner les images en conservant ou non le ratio</li>
+     * <li>Compresser les images avec différents niveaux de qualité</li>
+     * <li>Convertir entre différents formats (JPEG, PNG, WEBP)</li>
+     * <li>Traiter les images par lots</li>
+     * </ul>
+     * 
+     * La fenêtre est modale et centrée sur la fenêtre principale.
+     * 
+     * @see #ouvrirOutilConversionRatio2to1()
+     */
+    private static void ouvrirOutilRedimensionnementImages() {
+        RedimensionnementImagesDialogController controller = new RedimensionnementImagesDialogController();
+        try {
+            controller.afficheFenetre();
+        } catch (Exception ex) {
+            Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /**
+     * Ouvre l'interface de l'outil de conversion des images au ratio 2:1.
+     * 
+     * Cet outil permet de convertir des images au format panoramique 2:1 requis
+     * pour les visualisations équirectangulaires. Les fonctionnalités incluent :
+     * <ul>
+     * <li>Charger plusieurs images via drag & drop ou FileChooser</li>
+     * <li>Analyse automatique des couleurs de bordure pour un padding intelligent</li>
+     * <li>Positionnement de l'image source (centré, haut, bas)</li>
+     * <li>Extension avec remplissage basé sur les couleurs de bord</li>
+     * <li>Prévisualisation avant traitement</li>
+     * <li>Traitement par lots de multiples images</li>
+     * </ul>
+     * 
+     * La fenêtre est modale et centrée sur la fenêtre principale.
+     * 
+     * @see #ouvrirOutilRedimensionnementImages()
+     */
+    private static void ouvrirOutilConversionRatio2to1() {
+        ConversionRatio2to1DialogController controller = new ConversionRatio2to1DialogController();
+        try {
+            controller.afficheFenetre();
+        } catch (Exception ex) {
+            Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /**
      *
      * @throws IOException Exception d'entrée sortie
      */
@@ -10112,6 +10403,11 @@ public class EditeurPanovisu extends Application {
         mniVisiteGenere.setDisable(true);
         mniVisiteGenere.setAccelerator(new KeyCodeCombination(KeyCode.V, KeyCombination.SHORTCUT_DOWN));
         mnuPanoramique.getItems().add(mniVisiteGenere);
+        
+        mniCreerZipVisite = new MenuItem(rbLocalisation.getString("creerZipVisite"));
+        mniCreerZipVisite.setDisable(true);
+        mniCreerZipVisite.setAccelerator(new KeyCodeCombination(KeyCode.Z, KeyCombination.SHORTCUT_DOWN));
+        mnuPanoramique.getItems().add(mniCreerZipVisite);
         /*
          Menu Modèles 
          */
@@ -10141,6 +10437,17 @@ public class EditeurPanovisu extends Application {
         mniOutilsDiaporama = new MenuItem(rbLocalisation.getString("outilsDiaporama"));
         mniOutilsDiaporama.setAccelerator(new KeyCodeCombination(KeyCode.D, KeyCombination.SHORTCUT_DOWN));
         mnuTransformation.getItems().add(mniOutilsDiaporama);
+        
+        // Ajout d'un séparateur pour les outils d'images
+        SeparatorMenuItem sep7 = new SeparatorMenuItem();
+        mnuTransformation.getItems().add(sep7);
+        
+        // Nouveaux outils de traitement d'images
+        mniRedimensionnerImages = new MenuItem(rbLocalisation.getString("outilsRedimensionnement"));
+        mnuTransformation.getItems().add(mniRedimensionnerImages);
+        
+        mniConvertirRatio2to1 = new MenuItem(rbLocalisation.getString("outilsRatio2to1"));
+        mnuTransformation.getItems().add(mniConvertirRatio2to1);
 
         /*
          Menu Aide
@@ -10280,7 +10587,7 @@ public class EditeurPanovisu extends Application {
         spBtnGenereVisite.setPadding(new Insets(2));
         spBtnGenereVisite.setPrefWidth(70);
 
-        HBox.setMargin(spBtnGenereVisite, new Insets(5, 15, 0, 0));
+        HBox.setMargin(spBtnGenereVisite, new Insets(5, 3, 0, 0));
         ivVisiteGenere = loadSvgIcon("genere-visite", 32);
         spBtnGenereVisite.setContent(ivVisiteGenere);
         Tooltip tltpGenererVisite = new Tooltip(rbLocalisation.getString("genererVisite"));
@@ -10289,9 +10596,79 @@ public class EditeurPanovisu extends Application {
         hbBarreBouton.getChildren().add(spBtnGenereVisite);
         ivVisiteGenere.setDisable(true);
         ivVisiteGenere.setOpacity(0.3);
+
+        /*
+         Bouton Génère ZIP
+         */
+        ScrollPane spBtnGenereZip = new ScrollPane();
+        spBtnGenereZip.getStyleClass().add("menuBarreOutils");
+        spBtnGenereZip.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        spBtnGenereZip.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        spBtnGenereZip.setPrefHeight(30);
+        spBtnGenereZip.setMaxHeight(30);
+        spBtnGenereZip.setPadding(new Insets(0));
+        spBtnGenereZip.setPrefWidth(35);
+
+        HBox.setMargin(spBtnGenereZip, new Insets(5, 3, 0, -5));
+        ivGenereZip = loadSvgIcon("genere-zip", 35);
+        spBtnGenereZip.setContent(ivGenereZip);
+        Tooltip tltpGenererZip = new Tooltip(rbLocalisation.getString("creerZipVisite"));
+        tltpGenererZip.setStyle(getStrTooltipStyle());
+        spBtnGenereZip.setTooltip(tltpGenererZip);
+        hbBarreBouton.getChildren().add(spBtnGenereZip);
+        ivGenereZip.setDisable(true);
+        ivGenereZip.setOpacity(0.3);
+
         Separator sepImages1 = new Separator(Orientation.VERTICAL);
         sepImages1.prefHeight(200);
         hbBarreBouton.getChildren().add(sepImages1);
+        
+        /*
+         Bouton Redimensionner/Compresser les images
+         */
+        ScrollPane spBtnRedimensionner = new ScrollPane();
+        spBtnRedimensionner.getStyleClass().add("menuBarreOutils");
+        spBtnRedimensionner.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        spBtnRedimensionner.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        spBtnRedimensionner.setPrefHeight(72);
+        spBtnRedimensionner.setMaxHeight(72);
+        spBtnRedimensionner.setPadding(new Insets(0));
+        spBtnRedimensionner.setPrefWidth(90);
+        spBtnRedimensionner.setMaxWidth(145);
+        spBtnRedimensionner.setFitToHeight(true);
+        spBtnRedimensionner.setFitToWidth(true);
+
+        HBox.setMargin(spBtnRedimensionner, new Insets(-3, -3, 0, 3));
+        ivRedimensionnerImages = loadSvgIcon("redimensionner-images", 95, 48, null);
+        spBtnRedimensionner.setContent(ivRedimensionnerImages);
+        Tooltip tltpRedimensionner = new Tooltip(rbLocalisation.getString("outilsRedimensionnement"));
+        tltpRedimensionner.setStyle(getStrTooltipStyle());
+        spBtnRedimensionner.setTooltip(tltpRedimensionner);
+        hbBarreBouton.getChildren().add(spBtnRedimensionner);
+
+        /*
+         Bouton Convertir au ratio 2:1
+         */
+        ScrollPane spBtnRatio2to1 = new ScrollPane();
+        spBtnRatio2to1.getStyleClass().add("menuBarreOutils");
+        spBtnRatio2to1.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        spBtnRatio2to1.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        spBtnRatio2to1.setPrefHeight(72);
+        spBtnRatio2to1.setMaxHeight(72);
+        spBtnRatio2to1.setPadding(new Insets(0));
+        spBtnRatio2to1.setPrefWidth(100);
+        spBtnRatio2to1.setMaxWidth(145);
+        spBtnRatio2to1.setFitToHeight(true);
+        spBtnRatio2to1.setFitToWidth(true);
+
+        HBox.setMargin(spBtnRatio2to1, new Insets(-10, 3, 0, -5));
+        ivConvertirRatio2to1 = loadSvgIcon("ratio-2to1", 128, 72, null);
+        spBtnRatio2to1.setContent(ivConvertirRatio2to1);
+        Tooltip tltpRatio2to1 = new Tooltip(rbLocalisation.getString("outilsRatio2to1"));
+        tltpRatio2to1.setStyle(getStrTooltipStyle());
+        spBtnRatio2to1.setTooltip(tltpRatio2to1);
+        hbBarreBouton.getChildren().add(spBtnRatio2to1);
+        
         /*
          Bouton equi -> faces de  Cube
          */
@@ -10307,7 +10684,7 @@ public class EditeurPanovisu extends Application {
         spBtnEqui2Cube.setFitToHeight(true);
         spBtnEqui2Cube.setFitToWidth(true);
 
-        HBox.setMargin(spBtnEqui2Cube, new Insets(-2, 15, 0, 250));
+        HBox.setMargin(spBtnEqui2Cube, new Insets(-4, 15, 0, 20));
         ivEqui2Cube = loadSvgIcon("vue-sphere", 128, 64, null);
         spBtnEqui2Cube.setContent(ivEqui2Cube);
         Tooltip tltpEqui2Cube = new Tooltip(rbLocalisation.getString("outilsEqui2Cube"));
@@ -10330,7 +10707,7 @@ public class EditeurPanovisu extends Application {
         spBtnCube2Equi.setFitToHeight(true);
         spBtnCube2Equi.setFitToWidth(true);
 
-        HBox.setMargin(spBtnCube2Equi, new Insets(-2, 25, 0, 0));
+        HBox.setMargin(spBtnCube2Equi, new Insets(-4, 25, 0, 5));
         ivCube2Equi = loadSvgIcon("vue-cube", 128, 64, null);
         spBtnCube2Equi.setContent(ivCube2Equi);
         Tooltip tltpCube2Equi = new Tooltip(rbLocalisation.getString("outilsCube2Equi"));
@@ -10388,6 +10765,17 @@ public class EditeurPanovisu extends Application {
                         .getName()).log(Level.SEVERE, null, ex);
             }
         });
+        
+        mniCreerZipVisite.setOnAction((e) -> {
+            try {
+                creerZipVisite();
+
+            } catch (IOException ex) {
+                Logger.getLogger(EditeurPanovisu.class
+                        .getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
         mniFermerProjet.setOnAction((e) -> {
             try {
                 projetsFermer();
@@ -10450,6 +10838,15 @@ public class EditeurPanovisu extends Application {
         });
         mniOutilsDiaporama.setOnAction((e) -> {
             creerEditerDiaporama("");
+        });
+        
+        // Gestionnaires d'événements pour les nouveaux outils d'images
+        mniRedimensionnerImages.setOnAction((e) -> {
+            ouvrirOutilRedimensionnementImages();
+        });
+        
+        mniConvertirRatio2to1.setOnAction((e) -> {
+            ouvrirOutilConversionRatio2to1();
         });
         mniOutilsLoupe.setOnAction((e) -> {
             e.consume();
@@ -10538,6 +10935,24 @@ public class EditeurPanovisu extends Application {
                         .getName()).log(Level.SEVERE, null, ex);
             }
         });
+        spBtnGenereZip.setOnMouseClicked((t) -> {
+            try {
+                creerZipVisite();
+
+            } catch (IOException ex) {
+                Logger.getLogger(EditeurPanovisu.class
+                        .getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
+        spBtnRedimensionner.setOnMouseClicked((t) -> {
+            ouvrirOutilRedimensionnementImages();
+        });
+        
+        spBtnRatio2to1.setOnMouseClicked((t) -> {
+            ouvrirOutilConversionRatio2to1();
+        });
+        
         spBtnEqui2Cube.setOnMouseClicked((t) -> {
             transformationEqui2Cube();
         });
@@ -11762,6 +12177,9 @@ public class EditeurPanovisu extends Application {
                             case "dernierRepertoireVisite":
                                 setStrDernierRepertoireVisite(valeur);
                                 break;
+                            case "dernierRepertoireImages":
+                                setStrDernierRepertoireImages(valeur);
+                                break;
                             case "openrouterModel":
                                 if (!valeur.isEmpty()) {
                                     OllamaService.setOpenRouterModel(valeur);
@@ -11788,7 +12206,12 @@ public class EditeurPanovisu extends Application {
         }
     }
 
-    private static void sauvePreferences() throws IOException {
+    /**
+     * Sauvegarde les préférences de l'application dans le fichier preferences.cfg.
+     * 
+     * @throws IOException En cas d'erreur d'écriture du fichier
+     */
+    public static void sauvePreferences() throws IOException {
         File fileFichPreferences = new File(EditeurPanovisu.fileRepertConfig.getAbsolutePath() + File.separator + "preferences.cfg");
         if (!fileFichPreferences.exists()) {
             fileFichPreferences.createNewFile();
@@ -11802,6 +12225,7 @@ public class EditeurPanovisu extends Application {
         strContenuFichier += "netteteTransf=" + isbNetteteTransf() + "\n";
         strContenuFichier += "niveauNetteteTransf=" + getNiveauNetteteTransf() + "\n";
         strContenuFichier += "dernierRepertoireVisite=" + getStrDernierRepertoireVisite() + "\n";
+        strContenuFichier += "dernierRepertoireImages=" + getStrDernierRepertoireImages() + "\n";
         OutputStreamWriter oswFichierHisto = null;
         try {
             oswFichierHisto = new OutputStreamWriter(new FileOutputStream(fileFichPreferences), "UTF-8");

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Icône simple : conversion vers format panoramique -->
+  <!-- Image normale (carrée) -->
+  <rect x="2" y="8" width="8" height="8" rx="0.5"/>
+  <!-- Flèche -->
+  <path d="M11 12h2m0 0l-1-1m1 1l-1 1"/>
+  <!-- Image panoramique (2:1) -->
+  <rect x="14" y="10" width="8" height="4" rx="0.5"/>
+</svg>

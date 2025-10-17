@@ -1,6 +1,6 @@
 # 🌐 Éditeur PanoVisu
 
-[![Version](https://img.shields.io/badge/version-3.1.0-blue.svg)](https://github.com/llang57/editeurPanovisu/releases)
+[![Version](https://img.shields.io/badge/version-3.2.0-blue.svg)](https://github.com/llang57/editeurPanovisu/releases)
 [![Java](https://img.shields.io/badge/Java-25-orange.svg)](https://adoptium.net/)
 [![JavaFX](https://img.shields.io/badge/JavaFX-19-green.svg)](https://openjfx.io/)
 [![License](https://img.shields.io/badge/license-GPL--3.0-brightgreen.svg)](LICENSE)
@@ -23,15 +23,22 @@ PanoVisu combine puissance, simplicité et liberté pour offrir une solution com
 
 ---
 
-## 🔧 Version 3.1.0 - Mise à jour CRITIQUE
+## 🔧 Version 3.2.0 - Nouveaux outils
 
-**Important :** Si vous hébergez des visites sur des serveurs Linux, lisez ceci :
+**Quoi de neuf ?**
+
+### ✨ Nouvelles fonctionnalités
+- **📦 Export ZIP** : Exportez vos visites directement en archive ZIP pour un partage simplifié
+- **🖼️ Redimensionnement d'images** : Nouvel outil de redimensionnement et compression des images panoramiques
+- **📐 Conversion ratio 2:1** : Améliorations du positionnement des icônes dans l'interface
+
+### ⚠️ Important - Migration depuis v3.0.0
+
+Si vous hébergez des visites sur des serveurs Linux, notez que la **v3.1.0** a corrigé un problème critique de case-sensitivity. Les visites créées avec v3.0.0 et hébergées sur Linux doivent être ré-exportées avec v3.1.0 ou supérieure.
 
 ### 📢 Discussions GitHub
-- 🇫🇷 [📢 Annonce v3.1.0](https://github.com/llang57/editeurPanovisu/discussions/6) • [❓ FAQ](https://github.com/llang57/editeurPanovisu/discussions/8) • [🚀 Guide migration](https://github.com/llang57/editeurPanovisu/discussions/10)
-- 🇬🇧 [📢 v3.1.0 Announcement](https://github.com/llang57/editeurPanovisu/discussions/7) • [❓ FAQ](https://github.com/llang57/editeurPanovisu/discussions/9) • [🚀 Migration Guide](https://github.com/llang57/editeurPanovisu/discussions/11)
-
-**Quoi de neuf ?** Correctif critique pour le problème de case-sensitivity sur les serveurs Linux. Toutes les visites hébergées sur Linux doivent être ré-exportées avec la v3.1.0.
+- 🇫🇷 [📢 Annonce v3.2.0](https://github.com/llang57/editeurPanovisu/discussions) • [❓ FAQ](https://github.com/llang57/editeurPanovisu/discussions/8) • [🚀 Guide migration](https://github.com/llang57/editeurPanovisu/discussions/10)
+- 🇬🇧 [📢 v3.2.0 Announcement](https://github.com/llang57/editeurPanovisu/discussions) • [❓ FAQ](https://github.com/llang57/editeurPanovisu/discussions/9) • [🚀 Guide](https://github.com/llang57/editeurPanovisu/discussions/11)
 
 ---
 

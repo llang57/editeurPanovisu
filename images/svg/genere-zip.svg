@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 24" fill="none" stroke="currentColor" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Icône : dossier avec fermeture ZIP + texte ZIP -->
+  <!-- Dossier -->
+  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+  <path d="M14 2v6h6"/>
+  <!-- Fermeture éclair ZIP (trait plus fin) -->
+  <path d="M9 12v6" stroke-width="0.5"/>
+  <path d="M8 12h2M8 13h2M8 14h2M8 15h2M8 16h2M8 17h2M8 18h2" stroke-width="0.5"/>
+  <!-- Texte ZIP à côté du dossier -->
+  <text x="21" y="14" font-size="7" font-weight="bold" fill="currentColor" font-family="Arial, sans-serif">ZIP</text>
+</svg>

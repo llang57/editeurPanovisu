@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Carré inférieur (grand, arrière-plan) -->
+  <rect x="20" y="20" width="34" height="34" rx="4" ry="4" stroke-width="2.2"/>
+
+  <!-- Carré supérieur (petit, avant-plan, masque partiellement) -->
+  <rect x="10" y="10" width="24" height="24" rx="3" ry="3" stroke-width="1.5" fill="var(--color-bg-default, white)"/>
+
+  <!-- Flèche extérieure (descendante diagonale ↘, plus petite) -->
+  <line x1="31" y1="35" x2="38" y2="42" stroke-width="1.5"/>
+  <polyline points="35 42 38 42 38 39" stroke-width="1.5"/>
+
+  <!-- Flèche intérieure (montante diagonale ↖, plus petite) -->
+  <line x1="49" y1="49" x2="43" y2="43" stroke-width="1.6"/>
+  <polyline points="43 46 43 43 46 43" stroke-width="1.6"/>
+</svg>

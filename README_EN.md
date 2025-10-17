@@ -1,6 +1,6 @@
 # 🌐 PanoVisu Editor
 
-[![Version](https://img.shields.io/badge/version-3.1.0-blue.svg)](https://github.com/llang57/editeurPanovisu/releases)
+[![Version](https://img.shields.io/badge/version-3.2.0-blue.svg)](https://github.com/llang57/editeurPanovisu/releases)
 [![Java](https://img.shields.io/badge/Java-25-orange.svg)](https://adoptium.net/)
 [![JavaFX](https://img.shields.io/badge/JavaFX-19-green.svg)](https://openjfx.io/)
 [![License](https://img.shields.io/badge/license-GPL--3.0-brightgreen.svg)](LICENSE)
@@ -23,15 +23,22 @@ PanoVisu combines power, simplicity, and freedom to offer a complete and free so
 
 ---
 
-## 🔧 Version 3.1.0 - Critical Update
+## 🔧 Version 3.2.0 - New Tools
 
-**Important:** If you host tours on Linux servers, please read:
+**What's new?**
+
+### ✨ New Features
+- **📦 ZIP Export**: Export your tours directly as ZIP archives for simplified sharing
+- **🖼️ Image Resizing**: New tool for resizing and compressing panoramic images
+- **📐 2:1 Ratio Conversion**: Improved icon positioning in the user interface
+
+### ⚠️ Important - Migration from v3.0.0
+
+If you host tours on Linux servers, note that **v3.1.0** fixed a critical case-sensitivity issue. Tours created with v3.0.0 and hosted on Linux must be re-exported with v3.1.0 or higher.
 
 ### 📢 GitHub Discussions
-- 🇬🇧 [📢 v3.1.0 Announcement](https://github.com/llang57/editeurPanovisu/discussions/7) • [❓ FAQ](https://github.com/llang57/editeurPanovisu/discussions/9) • [🚀 Migration Guide](https://github.com/llang57/editeurPanovisu/discussions/11)
-- 🇫🇷 [📢 Annonce v3.1.0](https://github.com/llang57/editeurPanovisu/discussions/6) • [❓ FAQ](https://github.com/llang57/editeurPanovisu/discussions/8) • [🚀 Guide migration](https://github.com/llang57/editeurPanovisu/discussions/10)
-
-**What's new?** Critical fix for case-sensitivity issue on Linux servers. All tours hosted on Linux must be re-exported with v3.1.0.
+- 🇬🇧 [📢 v3.2.0 Announcement](https://github.com/llang57/editeurPanovisu/discussions) • [❓ FAQ](https://github.com/llang57/editeurPanovisu/discussions/9) • [🚀 Guide](https://github.com/llang57/editeurPanovisu/discussions/11)
+- 🇫🇷 [📢 Annonce v3.2.0](https://github.com/llang57/editeurPanovisu/discussions) • [❓ FAQ](https://github.com/llang57/editeurPanovisu/discussions/8) • [🚀 Guide](https://github.com/llang57/editeurPanovisu/discussions/10)
 
 ---
 

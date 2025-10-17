@@ -7,9 +7,9 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Version number (e.g., 3.1.0)'
+        description: 'Version number (e.g., 3.2.0)'
         required: true
-        default: '3.1.0'
+        default: '3.2.0'
 
 jobs:
   build-windows:
@@ -176,7 +176,7 @@ jobs:
       
       - name: 📦 Create Debian Package (.deb)
         run: |
-          APP_VERSION="${{ github.event.inputs.version || '3.1.0' }}"
+          APP_VERSION="${{ github.event.inputs.version || '3.2.0' }}"
           
           # Trouver le nom exact du JAR
           MAIN_JAR=$(ls target/editeurPanovisu-*-SNAPSHOT.jar | xargs basename)
@@ -203,7 +203,7 @@ jobs:
       
       - name: 📦 Create RPM Package (.rpm)
         run: |
-          APP_VERSION="${{ github.event.inputs.version || '3.1.0' }}"
+          APP_VERSION="${{ github.event.inputs.version || '3.2.0' }}"
           
           # Trouver le nom exact du JAR
           MAIN_JAR=$(ls target/editeurPanovisu-*-SNAPSHOT.jar | xargs basename)
@@ -320,31 +320,31 @@ jobs:
           tag_name: ${{ steps.build_info.outputs.VERSION }}
           name: "EditeurPanovisu ${{ steps.build_info.outputs.VERSION }} - Build ${{ steps.build_info.outputs.BUILD_NUM }}"
           body: |
-            ## 🔧 EditeurPanovisu ${{ github.ref_name }} - Correctif Critique Case-Sensitivity
+            ## 🔧 EditeurPanovisu ${{ github.ref_name }} - Nouveaux outils
             
             **Build** : ${{ steps.build_info.outputs.BUILD_NUM }}  
-            **Priorité** : ⚠️ **CRITIQUE** - Mise à jour fortement recommandée
+            **Priorité** : ✨ Nouvelles fonctionnalités
             
-            ### 🚨 Problème Résolu
+            ### ✨ Nouveautés v3.2.0
             
-            **Bug critique de case-sensitivity (Windows vs Linux)**
+            **Nouvelles fonctionnalités**
             
-            - ✅ Correction des chemins `jqueryMenu/` et `openLayers/` (casse incorrecte)
-            - ✅ Les visites fonctionnent maintenant correctement sur serveurs Linux/Unix
-            - ⚠️ **ACTION REQUISE** : Ré-exporter toutes vos visites existantes avec cette version
+            - 📦 **Export ZIP** : Exportez vos visites directement en archive ZIP pour un partage simplifié
+            - 🖼️ **Redimensionnement d'images** : Nouvel outil de redimensionnement et compression des images panoramiques
+            - 📐 **Conversion ratio 2:1** : Améliorations du positionnement des icônes dans l'interface
             
-            **Fichiers corrigés** :
-            - `EditeurPanovisu.java` : Correction casse CSS et JS
-            - `panovisuInit.js` : Correction includes dynamiques
+            ### ⚠️ Important - Migration depuis v3.0.0
+            
+            Si vous hébergez des visites sur des serveurs Linux, notez que la **v3.1.0** a corrigé un problème critique de case-sensitivity. Les visites créées avec v3.0.0 et hébergées sur Linux doivent être ré-exportées avec v3.1.0 ou supérieure.
             
             ### 📥 Téléchargements
             
             | Plateforme | Fichier | Taille |
             |------------|---------|--------|
-            | 🪟 **Windows 10/11** | `EditeurPanovisu-Setup-3.1.0.exe` | ~188 MB |
-            | 🍎 **macOS 11+** | `EditeurPanovisu-3.1.0.dmg` | ~200 MB |
-            | 🐧 **Linux (Debian/Ubuntu)** | `editeurpanovisu_3.1.0-1_amd64.deb` | ~180 MB |
-            | 🐧 **Linux (RedHat/Fedora)** | `editeurpanovisu-3.1.0-1.x86_64.rpm` | ~180 MB |
+            | 🪟 **Windows 10/11** | `EditeurPanovisu-Setup-3.2.0.exe` | ~188 MB |
+            | 🍎 **macOS 11+** | `EditeurPanovisu-3.2.0.dmg` | ~200 MB |
+            | 🐧 **Linux (Debian/Ubuntu)** | `editeurpanovisu_3.2.0-1_amd64.deb` | ~180 MB |
+            | 🐧 **Linux (RedHat/Fedora)** | `editeurpanovisu-3.2.0-1.x86_64.rpm` | ~180 MB |
             
             ### 📋 Configuration requise
             
@@ -359,34 +359,30 @@ jobs:
             ### 🔧 Installation
             
             #### Windows
-            1. Téléchargez `EditeurPanovisu-Setup-3.1.0.exe`
+            1. Téléchargez `EditeurPanovisu-Setup-3.2.0.exe`
             2. Double-cliquez pour installer
             3. Suivez l'assistant d'installation
             4. Lancez via le raccourci Bureau ou Menu Démarrer
-            5. **IMPORTANT** : Ré-exportez toutes vos visites existantes
             
             #### macOS
-            1. Téléchargez `EditeurPanovisu-3.1.0.dmg`
+            1. Téléchargez `EditeurPanovisu-3.2.0.dmg`
             2. Ouvrez le fichier `.dmg`
             3. Glissez l'icône vers le dossier Applications
             4. Lancez depuis le Launchpad
-            5. **IMPORTANT** : Ré-exportez toutes vos visites existantes
             
             #### Linux (Debian/Ubuntu)
             ```bash
-            sudo dpkg -i editeurpanovisu_3.1.0-1_amd64.deb
+            sudo dpkg -i editeurpanovisu_3.2.0-1_amd64.deb
             # ou
-            sudo apt install ./editeurpanovisu_3.1.0-1_amd64.deb
+            sudo apt install ./editeurpanovisu_3.2.0-1_amd64.deb
             ```
             
             #### Linux (RedHat/Fedora)
             ```bash
-            sudo rpm -i editeurpanovisu-3.1.0-1.x86_64.rpm
+            sudo rpm -i editeurpanovisu-3.2.0-1.x86_64.rpm
             # ou
-            sudo dnf install ./editeurpanovisu-3.1.0-1.x86_64.rpm
+            sudo dnf install ./editeurpanovisu-3.2.0-1.x86_64.rpm
             ```
-            
-            ⚠️ **ATTENTION** : Après installation, vous DEVEZ ré-exporter toutes vos visites existantes pour corriger la case-sensitivity !
             
             ### 🔐 Vérification d'intégrité
             
