@@ -92,7 +92,19 @@ function panovisu(iNumPano) {
         iNbMateriaux = 0,
         iNbTextures = 0,
         iNbMeshes = 0,
-        iNbGeometries = 0;
+        iNbGeometries = 0,
+        // Variables pour le crossfade WebGL
+        oldScene = null,           // Ancienne scène pour crossfade
+        oldCamera = null,          // Ancienne caméra pour crossfade
+        oldFBO = null,             // FBO pour l'ancien panoramique
+        newFBO = null,             // FBO pour le nouveau panoramique
+        transitionScene = null,    // Scène de transition avec shader
+        transitionCamera = null,   // Caméra orthographique pour transition
+        transitionQuad = null,     // Quad fullscreen pour le shader
+        transitionMaterial = null, // Material avec shader de mix
+        isTransitioning = false,   // Flag de transition en cours
+        transitionStartTime = 0,   // Timestamp de début de transition
+        transitionDuration = 2000; // Durée en ms
 
     /**
      * 
@@ -946,9 +958,7 @@ function panovisu(iNumPano) {
             var element = $(this).attr("id");
             var numelement = parseInt(element.substring(6).split("-")[0]);
             xmlFile = arrVignettesPano[numelement].xml;
-            //$("#container-" + iNumPano).fadeOut(200, function () {
             rechargePano(xmlFile);
-            //});
         }
 
     });
@@ -1004,15 +1014,11 @@ function panovisu(iNumPano) {
     });
 
     $(document).on("click", "#divSuivant-" + iNumPano, function () {
-        //$("#container-" + iNumPano).fadeOut(200, function () {
         rechargePano(XMLsuivant);
-        //});
     });
 
     $(document).on("click", "#divPrecedent-" + iNumPano, function () {
-        //$("#container-" + iNumPano).fadeOut(500, function () {
         rechargePano(XMLprecedent);
-        //});
     });
 
     $(document).on("click", "#planTitre-" + iNumPano, function () {
@@ -1069,9 +1075,7 @@ function panovisu(iNumPano) {
             var numPlanPoint = parseInt($(this).attr("id").split("-")[1]);
             xmlFile = arrPointsPlan[numPlanPoint].xml;
             if (xmlFile !== "actif") {
-                //$("#container-" + iNumPano).fadeOut(200, function () {
                 rechargePano(xmlFile);
-                //});
             }
         }
     });
@@ -2505,7 +2509,7 @@ function panovisu(iNumPano) {
         var thisLoop = new Date;
         var fps = 1000 / (thisLoop - lastLoop);
         lastLoop = thisLoop;
-        console.log("fps : " + fps + "img/s");
+        // console.log("fps : " + fps + "img/s"); // Commenté pour ne pas saturer la console
         longitude += deltaX;
         latitude += deltaY;
         affiche();
@@ -2744,6 +2748,134 @@ function panovisu(iNumPano) {
 
     }
 
+    /**
+     * Fonction de rendu pendant la transition WebGL entre deux panoramiques
+     */
+    function renderTransition() {
+        if (!oldScene || !oldCamera || !newFBO || !oldFBO || !transitionScene) {
+            console.warn("DEBUG renderTransition() - Objets manquants:", {
+                oldScene: !!oldScene,
+                oldCamera: !!oldCamera, 
+                newFBO: !!newFBO,
+                oldFBO: !!oldFBO,
+                transitionScene: !!transitionScene
+            });
+            return;
+        }
+        
+        // Si la nouvelle scène n'est pas encore prête, afficher l'ancienne en attendant
+        if (!scene || !camera) {
+            renderer.setRenderTarget(null);
+            renderer.clear();
+            renderer.render(oldScene, oldCamera);
+            return;
+        }
+        
+        // Calculer la progression de la transition (0 → 1)
+        var elapsed = Date.now() - transitionStartTime;
+        var progress = Math.min(elapsed / transitionDuration, 1);
+        
+        // Log seulement tous les 10% pour ne pas saturer la console
+        if (progress === 0 || progress >= 1 || Math.floor(progress * 10) !== Math.floor((progress - 0.05) * 10)) {
+            console.log("DEBUG renderTransition() - progress:", progress.toFixed(3), "elapsed:", elapsed, "ms");
+        }
+        
+        // Mettre à jour le mixRatio dans le shader (0 = ancienne scène, 1 = nouvelle scène)
+        if (transitionMaterial && transitionMaterial.uniforms) {
+            transitionMaterial.uniforms.mixRatio.value = progress;
+        }
+        
+        // Rendre l'ancienne scène dans oldFBO
+        renderer.setRenderTarget(oldFBO);
+        renderer.clear();
+        renderer.render(oldScene, oldCamera);
+        
+        // Rendre la nouvelle scène dans newFBO
+        renderer.setRenderTarget(newFBO);
+        renderer.clear();
+        renderer.render(scene, camera);
+        
+        // Lier les textures au shader
+        if (transitionMaterial && transitionMaterial.uniforms) {
+            transitionMaterial.uniforms.tDiffuse1.value = oldFBO.texture;
+            transitionMaterial.uniforms.tDiffuse2.value = newFBO.texture;
+        }
+        
+        // Rendre la scène de transition à l'écran
+        renderer.setRenderTarget(null);
+        renderer.clear();
+        renderer.render(transitionScene, transitionCamera);
+        
+        // Terminer la transition quand progress atteint 1
+        if (progress >= 1) {
+            isTransitioning = false;
+            console.log("DEBUG renderTransition() - Transition terminée !");
+            
+            // Nettoyer l'ancienne scène
+            if (oldScene) {
+                cleanupScene(oldScene);
+                oldScene = null;
+            }
+            oldCamera = null;
+        } else {
+            // Forcer le rendu continu pendant la transition
+            requestAnimationFrame(affiche);
+        }
+    }
+    
+    /**
+     * Démarre la transition WebGL
+     */
+    function startTransition() {
+        if (oldScene && oldCamera && transitionScene && transitionMaterial) {
+            isTransitioning = true;
+            transitionStartTime = Date.now();
+            transitionMaterial.uniforms.mixRatio.value = 0.0;
+            console.log("DEBUG startTransition() - Transition démarrée, durée:", transitionDuration, "ms");
+        } else {
+            console.warn("DEBUG startTransition() - Impossible de démarrer:", {
+                oldScene: !!oldScene,
+                oldCamera: !!oldCamera,
+                transitionScene: !!transitionScene,
+                transitionMaterial: !!transitionMaterial
+            });
+        }
+    }
+    
+    /**
+     * Nettoie une scène Three.js (dispose des géométries, matériaux, textures)
+     */
+    function cleanupScene(sceneToClean) {
+        if (!sceneToClean) return;
+        
+        sceneToClean.traverse(function(object) {
+            if (object.geometry) {
+                object.geometry.dispose();
+            }
+            if (object.material) {
+                if (Array.isArray(object.material)) {
+                    object.material.forEach(function(mat) {
+                        if (mat.map) mat.map.dispose();
+                        if (mat.lightMap) mat.lightMap.dispose();
+                        if (mat.bumpMap) mat.bumpMap.dispose();
+                        if (mat.normalMap) mat.normalMap.dispose();
+                        if (mat.specularMap) mat.specularMap.dispose();
+                        if (mat.envMap) mat.envMap.dispose();
+                        mat.dispose();
+                    });
+                } else {
+                    if (object.material.map) object.material.map.dispose();
+                    if (object.material.lightMap) object.material.lightMap.dispose();
+                    if (object.material.bumpMap) object.material.bumpMap.dispose();
+                    if (object.material.normalMap) object.material.normalMap.dispose();
+                    if (object.material.specularMap) object.material.specularMap.dispose();
+                    if (object.material.envMap) object.material.envMap.dispose();
+                    object.material.dispose();
+                }
+            }
+        });
+    }
+
 
     /**
      * 
@@ -2780,8 +2912,16 @@ function panovisu(iNumPano) {
         if (bLittlePlanetView) {
             camera.position.copy(target).negate();
         }
-        if (renderer)
+        
+        // Rendu avec transition WebGL si en cours
+        if (isTransitioning && oldScene && oldCamera && transitionScene && scene && camera) {
+            renderTransition();
+        } else if (renderer && scene && camera) {
             renderer.render(scene, camera);
+        } else {
+            console.warn("DEBUG affiche() - AUCUN RENDU - renderer:", !!renderer, "scene:", !!scene, "camera:", !!camera, "isTransitioning:", isTransitioning);
+        }
+        
         var bouss = longitude - zeroNord;
         if (strBoussoleAiguille === "oui") {
             $("#bousAig-" + iNumPano).css({ transform: "rotate(" + bouss + "deg)" });
@@ -3156,12 +3296,10 @@ function panovisu(iNumPano) {
      * @returns {undefined}
      */
     function chargeNouveauPano(nHotspot) {
-        //$("#container-" + iNumPano).fadeOut(200, function () {
         nouvLong = arrPointsInteret[nHotspot].longitude;
         nouvLat = arrPointsInteret[nHotspot].latitude;
         nouvFov = arrPointsInteret[nHotspot].fov;
         rechargePano(arrPointsInteret[nHotspot].contenu);
-        //});
     }
 
     /**
@@ -4015,14 +4153,10 @@ function panovisu(iNumPano) {
                                     }
                                     break;
                                 case "suiv":
-                                    //$("#container-" + iNumPano).fadeOut(200, function () {
                                     rechargePano(XMLsuivant);
-                                    //});
                                     break;
                                 case "prec":
-                                    //$("#container-" + iNumPano).fadeOut(200, function () {
                                     rechargePano(XMLprecedent);
-                                    //});
                                     break;
                                 case "apropos":
                                     if (bAfficheInfo) {
@@ -4177,6 +4311,7 @@ function panovisu(iNumPano) {
                     }
                 }
                 $(".chargement").hide();
+                // La transition est déjà démarrée dans rechargePano() si nécessaire
             });
         }
     }
@@ -4339,13 +4474,18 @@ function panovisu(iNumPano) {
                 textures[iNbTextures] = texture;
                 textures[iNbTextures].colorSpace = THREE.SRGBColorSpace;
                 textures[iNbTextures].minFilter = THREE.LinearFilter;
-                if (!bReloaded) {
+                if (!renderer) {
+                    // Créer le renderer seulement s'il n'existe pas encore
+                    console.log("DEBUG initPanoSphere() - Création du renderer");
+                    
                     if (supportWebgl()) {
                         renderer = new THREE.WebGLRenderer();
                         // MIGRATION THREE.JS R160: No Tone Mapping pour rendu brut, couleurs originales
                         // Avec SRGBColorSpace, les couleurs sont déjà correctement interprétées
                         renderer.toneMapping = THREE.NoToneMapping;
                         renderer.toneMappingExposure = 1.0;
+                        // MIGRATION THREE.JS R160: Output color space en sRGB pour affichage correct
+                        renderer.outputColorSpace = THREE.SRGBColorSpace;
                     }
                     else {
                         if (supportCanvas()) {
@@ -4413,7 +4553,6 @@ function panovisu(iNumPano) {
                     afficheBarre(pano.width(), pano.height());
                     afficheInfoTitre();
                     afficheMenuContextuel();
-                    //$("#container-" + iNumPano).fadeIn(200);
                     if (strAutoRotationMarche === "oui")
                         bAutorotation = true;
                     dx = 1;
@@ -4439,7 +4578,10 @@ function panovisu(iNumPano) {
                 textures[iNbTextures] = texture;
                 textures[iNbTextures].colorSpace = THREE.SRGBColorSpace;
                 textures[iNbTextures].minFilter = THREE.LinearFilter;
-                if (!bReloaded) {
+                if (!renderer) {
+                    // Créer le renderer seulement s'il n'existe pas encore
+                    console.log("DEBUG initPanoSphere() sans MultiReso - Création du renderer");
+                    
                     if (supportWebgl()) {
                         renderer = new THREE.WebGLRenderer({
                             preserveDrawingBuffer: true
@@ -4448,6 +4590,8 @@ function panovisu(iNumPano) {
                         // Avec SRGBColorSpace, les couleurs sont déjà correctement interprétées
                         renderer.toneMapping = THREE.NoToneMapping;
                         renderer.toneMappingExposure = 1.0;
+                        // MIGRATION THREE.JS R160: Output color space en sRGB pour affichage correct
+                        renderer.outputColorSpace = THREE.SRGBColorSpace;
                     }
                     else {
                         if (supportCanvas()) {
@@ -4507,7 +4651,6 @@ function panovisu(iNumPano) {
                     afficheBarre(pano.width(), pano.height());
                     afficheInfoTitre();
                     afficheMenuContextuel();
-                    //$("#container-" + iNumPano).fadeIn(200);
                     if (strAutoRotationMarche === "oui")
                         bAutorotation = true;
                     dx = 1;
@@ -4525,7 +4668,7 @@ function panovisu(iNumPano) {
                     }
                 }
                 $(".chargement").hide();
-
+                // La transition est déjà démarrée dans rechargePano() si nécessaire
             });
         }
     }
@@ -4667,6 +4810,7 @@ function panovisu(iNumPano) {
                 afficheBarre(pano.width(), pano.height());
                 afficheInfoTitre();
                 $(".chargement").hide();
+                // La transition est déjà démarrée dans rechargePano() si nécessaire
 
             }
             changeTaille();
@@ -4712,19 +4856,25 @@ function panovisu(iNumPano) {
         const light = new THREE.AmbientLight(color, intensity);
         scene.add(light);
         bWebGL = true;
-        if (!bReloaded) {
+        if (!renderer) {
             texture_placeholder = document.createElement('canvas');
             texture_placeholder.width = 128;
             texture_placeholder.height = 128;
             var context = texture_placeholder.getContext('2d');
             context.fillStyle = 'rgb( 128, 128, 128 )';
             context.fillRect(0, 0, texture_placeholder.width, texture_placeholder.height);
+            
+            // Créer le renderer seulement s'il n'existe pas encore
+            console.log("DEBUG initPanoCube() - Création du renderer");
+            
             if (supportWebgl()) {
                 renderer = new THREE.WebGLRenderer();
                 // MIGRATION THREE.JS R160: No Tone Mapping pour rendu brut, couleurs originales
                 // Avec SRGBColorSpace, les couleurs sont déjà correctement interprétées
                 renderer.toneMapping = THREE.NoToneMapping;
                 renderer.toneMappingExposure = 1.0;
+                // MIGRATION THREE.JS R160: Output color space en sRGB pour affichage correct
+                renderer.outputColorSpace = THREE.SRGBColorSpace;
                 bWebGL = true;
             }
             else {
@@ -4806,7 +4956,6 @@ function panovisu(iNumPano) {
                 timers = setInterval(function () {
                     positionHS();
                 }, 50);
-                //$("#container-" + iNumPano).fadeIn(200);
                 if (strAutoRotationMarche === "oui")
                     bAutorotation = true;
                 dx = 1;
@@ -4823,6 +4972,7 @@ function panovisu(iNumPano) {
                     demarreAutoRotation();
                 }
             }
+            // La transition est déjà démarrée dans rechargePano() si nécessaire
         }, 1000);
     }
 
@@ -5249,8 +5399,42 @@ function panovisu(iNumPano) {
      * @returns {undefined}
      */
     function creeHotspot(num) {
-        $("<div>", { id: "HS-" + num + "-" + iNumPano, class: "hotSpots" }).appendTo("#panovisu-" + iNumPano);
-        $("<img>", { id: "imgHS-" + num + "-" + iNumPano, width: arrPointsInteret[num].taille, src: arrPointsInteret[num].image, title: arrPointsInteret[num].info }).appendTo("#HS-" + num + "-" + iNumPano);
+        // Créer le div du hotspot
+        var $hotspot = $("<div>", { 
+            id: "HS-" + num + "-" + iNumPano, 
+            class: "hotSpots" 
+        });
+        
+        // Debug : afficher les propriétés du hotspot
+        console.log("Hotspot " + num + " - anime: " + arrPointsInteret[num].anime + ", agranditSurvol: " + arrPointsInteret[num].agranditSurvol);
+        
+        // Ajouter la classe CSS selon le type d'animation
+        // Si anime contient un type spécifique, utiliser ce type
+        // Sinon, si anime === "true", utiliser "pulse" par défaut
+        if (arrPointsInteret[num].anime && arrPointsInteret[num].anime !== "false" && arrPointsInteret[num].anime !== "none") {
+            var typeAnimation = arrPointsInteret[num].anime;
+            if (typeAnimation === "true") {
+                typeAnimation = "pulse"; // Compatibilité avec l'ancien système
+            }
+            console.log("Ajout de la classe hotspot-anime-" + typeAnimation + " au hotspot " + num);
+            $hotspot.addClass("hotspot-anime-" + typeAnimation);
+        }
+        
+        // Ajouter la classe pour l'agrandissement au survol
+        if (arrPointsInteret[num].agranditSurvol === "true") {
+            console.log("Ajout de la classe hotspot-agrandit au hotspot " + num);
+            $hotspot.addClass("hotspot-agrandit");
+        }
+        
+        $hotspot.appendTo("#panovisu-" + iNumPano);
+        
+        $("<img>", { 
+            id: "imgHS-" + num + "-" + iNumPano, 
+            width: arrPointsInteret[num].taille, 
+            src: arrPointsInteret[num].image, 
+            title: arrPointsInteret[num].info 
+        }).appendTo("#HS-" + num + "-" + iNumPano);
+        
         numHotspot += 1;
     }
 
@@ -5871,6 +6055,7 @@ function panovisu(iNumPano) {
                     arrPointsInteret[i].image = $(this).attr('image') || "panovisu/images/sprite2.png";
                     arrPointsInteret[i].long = $(this).attr('long') || 0;
                     arrPointsInteret[i].anime = $(this).attr('anime') || "false";
+                    arrPointsInteret[i].agranditSurvol = $(this).attr('agranditSurvol') || "false";
                     arrPointsInteret[i].lat = $(this).attr('lat') || 0;
                     arrPointsInteret[i].longitude = parseFloat($(this).attr('regardX')) || -1000;
                     arrPointsInteret[i].latitude = parseFloat($(this).attr('regardY')) || -1000;
@@ -6511,9 +6696,7 @@ function panovisu(iNumPano) {
             $("#cbMenu-" + iNumPano).msDropdown({ visibleRows: 4 });
             $("#cbMenu-" + iNumPano).on('change', function () {
                 var nomPanoXML = this.value;
-                //$("#container-" + iNumPano).fadeOut(500, function () {
                 rechargePano(nomPanoXML);
-                //});
             });
         }
     }
@@ -6523,12 +6706,111 @@ function panovisu(iNumPano) {
     function rechargePano(xmlFile) {
         bDejaCharge = true;
         clearInterval(timers);
-        //        if (!bReloaded) {
-        //            longitude = 0;
-        //            latitude = 0;
-        //            fov = 50;
-        //        }
-        bReloaded = true;
+        
+        // Forcer la recréation de la scène en mettant bReloaded à false
+        // Cela garantit que tous les meshes seront recréés
+        bReloaded = false;
+        
+        // Fondu enchaîné WebGL : sauvegarder l'ancienne scène et créer les FBOs
+        if (bDejaCharge && renderer && scene && camera) {
+            console.log("DEBUG rechargePano() - Préparation transition WebGL");
+            // Sauvegarder l'ancienne scène et caméra
+            oldScene = scene;
+            oldCamera = camera;
+            
+            // Créer les FBOs si nécessaire
+            var width = $("#container-" + iNumPano).width();
+            var height = $("#container-" + iNumPano).height();
+            
+            if (!oldFBO || oldFBO.width !== width || oldFBO.height !== height) {
+                if (oldFBO) oldFBO.dispose();
+                oldFBO = new THREE.WebGLRenderTarget(width, height, {
+                    minFilter: THREE.LinearFilter,
+                    magFilter: THREE.LinearFilter,
+                    format: THREE.RGBAFormat,
+                    // LinearSRGBColorSpace : pas de double conversion gamma
+                    colorSpace: THREE.LinearSRGBColorSpace,
+                    stencilBuffer: false
+                });
+            }
+            
+            if (!newFBO || newFBO.width !== width || newFBO.height !== height) {
+                if (newFBO) newFBO.dispose();
+                newFBO = new THREE.WebGLRenderTarget(width, height, {
+                    minFilter: THREE.LinearFilter,
+                    magFilter: THREE.LinearFilter,
+                    format: THREE.RGBAFormat,
+                    // LinearSRGBColorSpace : pas de double conversion gamma
+                    colorSpace: THREE.LinearSRGBColorSpace,
+                    stencilBuffer: false
+                });
+            }
+            
+            // Créer la scène de transition avec shader si elle n'existe pas
+            if (!transitionScene) {
+                transitionScene = new THREE.Scene();
+                
+                // Caméra orthographique normalisée (-1 à 1) pour post-processing
+                transitionCamera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+                
+                transitionMaterial = new THREE.ShaderMaterial({
+                    uniforms: {
+                        tDiffuse1: { value: null },
+                        tDiffuse2: { value: null },
+                        mixRatio: { value: 0.0 }
+                    },
+                    vertexShader: `
+                        varying vec2 vUv;
+                        void main() {
+                            vUv = uv;
+                            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                        }`,
+                    fragmentShader: `
+                        uniform float mixRatio;
+                        uniform sampler2D tDiffuse1;
+                        uniform sampler2D tDiffuse2;
+                        varying vec2 vUv;
+                        
+                        void main() {
+                            vec4 texel1 = texture2D(tDiffuse1, vUv);
+                            vec4 texel2 = texture2D(tDiffuse2, vUv);
+                            
+                            // Éclaircir les textures des FBOs qui sont trop sombres
+                            // Compensation gamma pour les rendus dans les FBOs
+                            float gamma = 1.7;
+                            texel1.rgb = pow(texel1.rgb, vec3(1.0 / gamma));
+                            texel2.rgb = pow(texel2.rgb, vec3(1.0 / gamma));
+                            
+                            // Mélanger les deux textures éclaircies
+                            vec4 mixed = mix(texel1, texel2, mixRatio);
+                            
+                            gl_FragColor = vec4(mixed.rgb, 1.0);
+                        }`
+                });
+                
+                // Quad de taille 2x2 centré à l'origine (couvre tout l'écran en coordonnées normalisées)
+                var quadGeometry = new THREE.PlaneGeometry(2, 2);
+                transitionQuad = new THREE.Mesh(quadGeometry, transitionMaterial);
+                transitionScene.add(transitionQuad);
+                
+                console.log("DEBUG - Scène de transition créée avec quad 2x2 et caméra ortho normalisée");
+            }
+            // Pas besoin de mettre à jour la taille, la caméra est normalisée
+            
+            // IMPORTANT : Forcer la recréation de la scène (meshes) 
+            // tout en gardant le renderer existant
+            bReloaded = false;
+            
+            // Démarrer la transition AVANT le chargement du nouveau pano
+            // pour que affiche() utilise renderTransition() dès le début
+            isTransitioning = true;
+            transitionStartTime = Date.now();
+            transitionMaterial.uniforms.mixRatio.value = 0.0;
+            
+            console.log("DEBUG rechargePano() - Transition activée IMMÉDIATEMENT, bReloaded forcé à false");
+        }
+        
+        // Charger le nouveau panoramique
         enleveHS();
         arrHotSpot = new Array();
         arrPointsInteret = new Array();
@@ -6808,9 +7090,7 @@ function panovisu(iNumPano) {
             function () {
                 if (arrPointsCarte[numeroMarqueur].xml !== "actif") {
                     map.removePopup(popup);
-                    //$("#container-" + iNumPano).fadeOut(200, function () {
                     rechargePano(arrPointsCarte[numeroMarqueur].xml);
-                    //});
                 }
             }
         );
@@ -7315,9 +7595,7 @@ function panovisu(iNumPano) {
      * @returns {undefined}
      */
     this.setPano = function (xmlFile) {
-        //$("#container-" + iNumPano).fadeOut(200, function () {
         rechargePano(xmlFile);
-        //});
     };
     this.stopMouvement = function () {
         arreteMouvement = true;

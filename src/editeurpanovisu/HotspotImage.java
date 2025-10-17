@@ -19,6 +19,9 @@ public class HotspotImage {
     private String strCouleurFond="";
     private double opacite=-1;
     private boolean bAnime;
+    private String strTypeAnimation = "none"; // Type d'animation: none, pulse, rotation, etc.
+    private boolean bAgranditSurvol = false;
+    private String strCouleurPerso = ""; // Couleur personnalisée pour ce hotspot (vide = utiliser la couleur par défaut)
 
     /**
      *
@@ -115,6 +118,42 @@ public class HotspotImage {
      */
     public void setAnime(boolean anime) {
         this.bAnime = anime;
+        // Compatibilité: si on active l'animation sans type spécifique, utiliser "pulse" par défaut
+        if (anime && "none".equals(strTypeAnimation)) {
+            strTypeAnimation = "pulse";
+        } else if (!anime) {
+            strTypeAnimation = "none";
+        }
+    }
+
+    /**
+     * @return the typeAnimation
+     */
+    public String getStrTypeAnimation() {
+        return strTypeAnimation;
+    }
+
+    /**
+     * @param strTypeAnimation the typeAnimation to set
+     */
+    public void setStrTypeAnimation(String strTypeAnimation) {
+        this.strTypeAnimation = strTypeAnimation;
+        // Synchroniser avec bAnime
+        this.bAnime = !("none".equals(strTypeAnimation) || strTypeAnimation == null || strTypeAnimation.isEmpty());
+    }
+
+    /**
+     * @return the agranditSurvol
+     */
+    public boolean isAgranditSurvol() {
+        return bAgranditSurvol;
+    }
+
+    /**
+     * @param bAgranditSurvol the agranditSurvol to set
+     */
+    public void setAgranditSurvol(boolean bAgranditSurvol) {
+        this.bAgranditSurvol = bAgranditSurvol;
     }
 
     /**
@@ -157,6 +196,20 @@ public class HotspotImage {
      */
     public void setOpacite(double opacite) {
         this.opacite = opacite;
+    }
+
+    /**
+     * @return the couleurPerso
+     */
+    public String getStrCouleurPerso() {
+        return strCouleurPerso;
+    }
+
+    /**
+     * @param strCouleurPerso the couleurPerso to set (format: "hue;saturation;brightness" ou vide pour couleur par défaut)
+     */
+    public void setStrCouleurPerso(String strCouleurPerso) {
+        this.strCouleurPerso = strCouleurPerso;
     }
 
 }

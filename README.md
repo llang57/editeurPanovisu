@@ -23,11 +23,17 @@ PanoVisu combine puissance, simplicité et liberté pour offrir une solution com
 
 ---
 
-## 🔧 Version 3.2.0 - Nouveaux outils
+## 🔧 Version 3.2.0 - Personnalisation avancée et transitions fluides
 
 **Quoi de neuf ?**
 
 ### ✨ Nouvelles fonctionnalités
+- **🎨 Personnalisation individuelle des hotspots** : 
+  - **16 animations différentes** : bounce, pulse, flash, shake, swing, tada, wobble, jello, heartbeat, rubberBand, rotate, flip, zoomIn, zoomOut, fadeIn, slideIn
+  - **Couleurs personnalisées** : Choisissez une couleur unique pour chaque hotspot avec le sélecteur de couleur HSB
+  - **Agrandissement au survol** : Effet de zoom configurable pour chaque hotspot
+  - Configuration complète depuis l'interface graphique avec prévisualisation en temps réel
+- **🌊 Fondu enchaîné WebGL** : Transitions fluides et élégantes entre panoramiques avec effet de fondu enchaîné (2 secondes) utilisant WebGL et shaders pour une expérience visuelle professionnelle
 - **📦 Export ZIP** : Exportez vos visites directement en archive ZIP pour un partage simplifié
 - **🖼️ Redimensionnement d'images** : Nouvel outil de redimensionnement et compression des images panoramiques
 - **📐 Conversion ratio 2:1** : Améliorations du positionnement des icônes dans l'interface
@@ -81,7 +87,10 @@ Si vous hébergez des visites sur des serveurs Linux, notez que la **v3.1.0** a 
 - Panoramiques **partiels** et **cylindriques**
 
 ### 🎨 Éléments interactifs
-- **Hotspots de navigation** - Liens entre panoramiques
+- **Hotspots de navigation** - Liens entre panoramiques avec transitions en fondu enchaîné
+  - 16 animations différentes (bounce, pulse, flash, shake, swing, tada, etc.)
+  - Couleurs personnalisables par hotspot (HSB)
+  - Agrandissement au survol configurable
 - **Hotspots d'images/photos** - Galeries photo intégrées
 - **Hotspots HTML** - Contenu riche (vidéos, textes, liens externes)
 - **Plans interactifs** - Carte 2D avec points d'intérêt et radar

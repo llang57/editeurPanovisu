@@ -1787,6 +1787,93 @@ public class EditeurPanovisu extends Application {
             if (!fileHTMLRepert.exists()) {
                 fileHTMLRepert.mkdirs();
             }
+            
+            // Sauvegarder les icônes colorées personnalisées avant de supprimer le répertoire images
+            // Au lieu de chercher les fichiers existants, on va régénérer les icônes colorées
+            // à partir des hotspots qui ont une couleur personnalisée définie
+            java.util.Map<String, WritableImage> iconesARegenerer = new java.util.HashMap<>();
+            
+            System.out.println("🔍 DEBUG - Recherche des hotspots avec couleurs personnalisées...");
+            
+            for (int iPano = 0; iPano < getiNombrePanoramiques(); iPano++) {
+                // Hotspots panoramiques
+                for (int iHS = 0; iHS < getPanoramiquesProjet()[iPano].getNombreHotspots(); iHS++) {
+                    HotSpot hs = getPanoramiquesProjet()[iPano].getHotspot(iHS);
+                    if (hs.getStrCouleurPerso() != null && !hs.getStrCouleurPerso().isEmpty()) {
+                        String nomFichier = hs.getStrFichierImage();
+                        if (nomFichier != null && !nomFichier.isEmpty()) {
+                            System.out.println("✅ Hotspot pano " + iPano + "." + iHS + " a une couleur : " + nomFichier);
+                            // Parser la couleur HSB depuis la chaîne "hue;saturation;brightness"
+                            String[] couleurParts = hs.getStrCouleurPerso().split(";");
+                            if (couleurParts.length == 3) {
+                                double hue = Double.parseDouble(couleurParts[0]);
+                                double saturation = Double.parseDouble(couleurParts[1]);
+                                double brightness = Double.parseDouble(couleurParts[2]);
+                                WritableImage imgColoree = transformerCouleurHotspot(
+                                    getGestionnaireInterface().getWiNouveauxBoutons()[getGestionnaireInterface().getiNombreImagesBouton() - 2],
+                                    hue, saturation, brightness
+                                );
+                                if (imgColoree != null) {
+                                    iconesARegenerer.put(nomFichier, imgColoree);
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                // Hotspots images
+                for (int iHS = 0; iHS < getPanoramiquesProjet()[iPano].getNombreHotspotImage(); iHS++) {
+                    HotspotImage hs = getPanoramiquesProjet()[iPano].getHotspotImage(iHS);
+                    if (hs.getStrCouleurPerso() != null && !hs.getStrCouleurPerso().isEmpty()) {
+                        String nomFichier = hs.getStrFichierImage();
+                        if (nomFichier != null && !nomFichier.isEmpty()) {
+                            System.out.println("✅ Hotspot image " + iPano + "." + iHS + " a une couleur : " + nomFichier);
+                            // Parser la couleur HSB depuis la chaîne "hue;saturation;brightness"
+                            String[] couleurParts = hs.getStrCouleurPerso().split(";");
+                            if (couleurParts.length == 3) {
+                                double hue = Double.parseDouble(couleurParts[0]);
+                                double saturation = Double.parseDouble(couleurParts[1]);
+                                double brightness = Double.parseDouble(couleurParts[2]);
+                                WritableImage imgColoree = transformerCouleurHotspot(
+                                    getGestionnaireInterface().getWiNouveauxBoutons()[getGestionnaireInterface().getiNombreImagesBouton() - 1],
+                                    hue, saturation, brightness
+                                );
+                                if (imgColoree != null) {
+                                    iconesARegenerer.put(nomFichier, imgColoree);
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                // Hotspots HTML
+                for (int iHS = 0; iHS < getPanoramiquesProjet()[iPano].getNombreHotspotHTML(); iHS++) {
+                    HotspotHTML hs = getPanoramiquesProjet()[iPano].getHotspotHTML(iHS);
+                    if (hs.getStrCouleurPerso() != null && !hs.getStrCouleurPerso().isEmpty()) {
+                        String nomFichier = hs.getStrFichierImage();
+                        if (nomFichier != null && !nomFichier.isEmpty()) {
+                            System.out.println("✅ Hotspot HTML " + iPano + "." + iHS + " a une couleur : " + nomFichier);
+                            // Parser la couleur HSB depuis la chaîne "hue;saturation;brightness"
+                            String[] couleurParts = hs.getStrCouleurPerso().split(";");
+                            if (couleurParts.length == 3) {
+                                double hue = Double.parseDouble(couleurParts[0]);
+                                double saturation = Double.parseDouble(couleurParts[1]);
+                                double brightness = Double.parseDouble(couleurParts[2]);
+                                WritableImage imgColoree = transformerCouleurHotspot(
+                                    getGestionnaireInterface().getWiNouveauxBoutons()[getGestionnaireInterface().getiNombreImagesBouton()],
+                                    hue, saturation, brightness
+                                );
+                                if (imgColoree != null) {
+                                    iconesARegenerer.put(nomFichier, imgColoree);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            System.out.println("🔍 DEBUG - Nombre d'icônes à régénérer : " + iconesARegenerer.size());
+            
             deleteDirectory(getStrRepertTemp() + "/panovisu/images");
             File fileImagesRepert = new File(getStrRepertTemp() + "/panovisu/images");
             if (!fileImagesRepert.exists()) {
@@ -1824,6 +1911,37 @@ public class EditeurPanovisu extends Application {
             if (!fileHotspotsRepert.exists()) {
                 fileHotspotsRepert.mkdirs();
             }
+            
+            System.out.println("🔍 DEBUG - Régénération des icônes dans : " + fileHotspotsRepert.getAbsolutePath());
+            
+            // Régénérer les icônes colorées personnalisées
+            int compteurRegenere = 0;
+            for (java.util.Map.Entry<String, WritableImage> entry : iconesARegenerer.entrySet()) {
+                try {
+                    String nomFichier = entry.getKey();
+                    WritableImage img = entry.getValue();
+                    String cheminComplet = fileHotspotsRepert.getAbsolutePath() + File.separator + nomFichier;
+                    
+                    ReadWriteImage.writePng(img, cheminComplet, false, 0.f);
+                    System.out.println("✅ Icône colorée régénérée : " + nomFichier);
+                    compteurRegenere++;
+                } catch (IOException ex) {
+                    System.err.println("⚠️ Erreur lors de la régénération de l'icône : " + entry.getKey());
+                    ex.printStackTrace();
+                }
+            }
+            
+            System.out.println("🔍 DEBUG - " + compteurRegenere + " icônes régénérées");
+            
+            // Vérifier le contenu final du répertoire hotspots
+            File[] fichiersFinal = fileHotspotsRepert.listFiles();
+            System.out.println("🔍 DEBUG - Fichiers dans hotspots après régénération : " + (fichiersFinal != null ? fichiersFinal.length : 0));
+            if (fichiersFinal != null) {
+                for (File f : fichiersFinal) {
+                    System.out.println("  - " + f.getName());
+                }
+            }
+            
             if (getGestionnaireInterface().getStrVisibiliteBarrePersonnalisee().equals("oui")) {
                 File fileTelecommandeRepert = new File(getStrRepertTemp() + "/panovisu/images/telecommande");
                 if (!fileTelecommandeRepert.exists()) {
@@ -1888,6 +2006,9 @@ public class EditeurPanovisu extends Application {
             } else {
                 copieFichierRepertoire(getStrRepertAppli() + "/theme/html" + File.separator + strNomfichierHSHTML, fileHotspotsRepert.getAbsolutePath() + File.separator);
             }
+
+            // Note : Les icônes colorées personnalisées sont déjà créées dans temp/panovisu/images/hotspots
+            // par la méthode sauvegardeIconeHotspot() lors de la modification des hotspots
 
             ReadWriteImage.writePng(getGestionnaireInterface().getWiNouveauxMasque(),
                     fileMARepert.getAbsolutePath() + File.separator + "MA.png",
@@ -2388,6 +2509,7 @@ public class EditeurPanovisu extends Application {
                     } else {
                         longit = HS.getLongitude() + 90;
                     }
+                    String strTypeAnimation = HS.getStrTypeAnimation();
                     String strAnime = (HS.isAnime()) ? "true" : "false";
                     strContenuFichier
                             += "      <point \n"
@@ -2395,7 +2517,12 @@ public class EditeurPanovisu extends Application {
                             + "           long=\"" + longit + "\"\n"
                             + "           lat=\"" + HS.getLatitude() + "\"\n"
                             + "           tailleHS=\"" + getGestionnaireInterface().getiTailleHotspotsPanoramique() + "px\"\n";
-                    if (!strTypeHS.equals("gif")) {
+                    
+                    // Utiliser l'icône colorée personnalisée si disponible
+                    if (HS.getStrFichierImage() != null && !HS.getStrFichierImage().isEmpty()) {
+                        strContenuFichier
+                                += "           image=\"panovisu/images/hotspots/" + HS.getStrFichierImage() + "\"\n";
+                    } else if (!strTypeHS.equals("gif")) {
                         strContenuFichier
                                 += "           image=\"panovisu/images/hotspots/hotspot.png\"\n";
                     } else {
@@ -2414,8 +2541,10 @@ public class EditeurPanovisu extends Application {
                     if (HS.getChampVisuel() != 0) {
                         strContenuFichier += "           champVisuel=\"" + HS.getChampVisuel() + "\"\n";
                     }
+                    String strAgranditSurvol = (HS.isAgranditSurvol()) ? "true" : "false";
                     strContenuFichier += "           info=\"" + HS.getStrInfo().replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;") + "\"\n"
-                            + "           anime=\"" + strAnime + "\"\n"
+                            + "           anime=\"" + strTypeAnimation + "\"\n"
+                            + "           agranditSurvol=\"" + strAgranditSurvol + "\"\n"
                             + "      />\n";
                 }
                 for (int j = 0; j < getPanoramiquesProjet()[i].getNombreHotspotHTML(); j++) {
@@ -2438,7 +2567,9 @@ public class EditeurPanovisu extends Application {
                     } else {
                         longit = HS.getLongitude() + 90;
                     }
+                    String strTypeAnimation = HS.getStrTypeAnimation();
                     String strAnime = (HS.isAnime()) ? "true" : "false";
+                    String strAgranditSurvol = (HS.isAgranditSurvol()) ? "true" : "false";
 
                     strContenuFichier
                             += "      <point \n"
@@ -2446,7 +2577,12 @@ public class EditeurPanovisu extends Application {
                             + "           long=\"" + longit + "\"\n"
                             + "           lat=\"" + HS.getLatitude() + "\"\n"
                             + "           tailleHS=\"" + getGestionnaireInterface().getiTailleHotspotsHTML() + "px\"\n";
-                    if (!strTypeHSHTML.equals("gif")) {
+                    
+                    // Utiliser l'icône colorée personnalisée si disponible
+                    if (HS.getStrFichierImage() != null && !HS.getStrFichierImage().isEmpty()) {
+                        strContenuFichier
+                                += "           image=\"panovisu/images/hotspots/" + HS.getStrFichierImage() + "\"\n";
+                    } else if (!strTypeHSHTML.equals("gif")) {
                         strContenuFichier
                                 += "           image=\"panovisu/images/hotspots/hotspotHTML.png\"\n";
                     } else {
@@ -2460,7 +2596,8 @@ public class EditeurPanovisu extends Application {
                             + "           taille=\"" + Math.round(HS.getLargeurHTML()) + "px\"\n"
                             + "           position=\"" + HS.getStrPositionHTML() + "\"\n"
                             + "           couleur=\"" + strCoulHTML + "\"\n"
-                            + "           anime=\"" + strAnime + "\"\n"
+                            + "           anime=\"" + strTypeAnimation + "\"\n"
+                            + "           agranditSurvol=\"" + strAgranditSurvol + "\"\n"
                             + "      />\n";
                 }
 
@@ -2530,14 +2667,21 @@ public class EditeurPanovisu extends Application {
                     } else {
                         longit = HS.getLongitude() + 90;
                     }
+                    String strTypeAnimation = HS.getStrTypeAnimation();
                     String strAnime = (HS.isAnime()) ? "true" : "false";
+                    String strAgranditSurvol = (HS.isAgranditSurvol()) ? "true" : "false";
                     strContenuFichier
                             += "      <point \n"
                             + "           type=\"image\"\n"
                             + "           long=\"" + longit + "\"\n"
                             + "           lat=\"" + HS.getLatitude() + "\"\n"
                             + "           tailleHS=\"" + getGestionnaireInterface().getiTailleHotspotsImage() + "px\"\n";
-                    if (!strTypeHSImage.equals("gif")) {
+                    
+                    // Utiliser l'icône colorée personnalisée si disponible
+                    if (HS.getStrFichierImage() != null && !HS.getStrFichierImage().isEmpty()) {
+                        strContenuFichier
+                                += "           image=\"panovisu/images/hotspots/" + HS.getStrFichierImage() + "\"\n";
+                    } else if (!strTypeHSImage.equals("gif")) {
                         strContenuFichier
                                 += "           image=\"panovisu/images/hotspots/hotspotImage.png\"\n";
                     } else {
@@ -2549,7 +2693,8 @@ public class EditeurPanovisu extends Application {
                             += "           img=\"images/" + HS.getStrLienImg() + "\"\n"
                             + "           info=\"" + HS.getStrInfo().replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;") + "\"\n"
                             + "           couleur=\"" + strCoulImage + "\"\n"
-                            + "           anime=\"" + strAnime + "\"\n"
+                            + "           anime=\"" + strTypeAnimation + "\"\n"
+                            + "           agranditSurvol=\"" + strAgranditSurvol + "\"\n"
                             + "      />\n";
                 }
                 strContenuFichier += "   </hotspots>\n";
@@ -2736,6 +2881,7 @@ public class EditeurPanovisu extends Application {
                     + "        <meta name=\"viewport\" content=\"width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0\">\n"
                     + "        <link rel=\"stylesheet\" media=\"screen\" href=\"panovisu/libs/jqueryMenu/jquery.contextMenu.css\" type=\"text/css\"/>\n"
                     + "        <link rel=\"stylesheet\" type=\"text/css\" href=\"panovisu/css/msdropdown/dd.css\" />\n"
+                    + "        <link rel=\"stylesheet\" type=\"text/css\" href=\"panovisu/css/panovisu.css\" />\n"
                     + "        <meta name=\"url\" property=\"og:url\" content=\"\" />\n"
                     + "        <meta property=\"og:title\"  name=\"twitter:title\" content=\"" + strTitreVis + "\" />\n"
                     + "        <meta itemprop=\"description\" property=\"og:description\" name=\"twitter:description\" content=\"Une page créée avec panoVisu Editeur : 100% Libre 100% HTML5\" />\n"
@@ -2893,6 +3039,11 @@ public class EditeurPanovisu extends Application {
                     // Démarrer le serveur HTTP local pour éviter les problèmes CORS
                     editeurpanovisu.util.LocalHTTPServer server = editeurpanovisu.util.LocalHTTPServer.getInstance();
                     try {
+                        // Arrêter le serveur précédent s'il est en cours
+                        if (server.isRunning()) {
+                            server.stop();
+                        }
+                        
                         server.setRootDirectory(strNomRepertVisite);
                         server.start();
                         
@@ -3941,7 +4092,9 @@ public class EditeurPanovisu extends Application {
                         + ";xml:" + HS.getStrFichierXML()
                         + ";numXML:" + HS.getNumeroPano()
                         + ";info:" + HS.getStrInfo().replace(";", "&pv").replace(":", "&dp")
-                        + ";anime:" + HS.isAnime();
+                        + ";typeAnimation:" + HS.getStrTypeAnimation()
+                        + ";agranditSurvol:" + HS.isAgranditSurvol()
+                        + ";couleurPerso:" + (HS.getStrCouleurPerso() != null ? HS.getStrCouleurPerso().replace(";", "&pv") : "");
                 if (HS.getRegardX() != 1000) {
                     strContenuFichier += ";regardX:" + HS.getRegardX();
                 }
@@ -3964,7 +4117,9 @@ public class EditeurPanovisu extends Application {
                         + ";couleur:" + HS.getStrCouleurFond()
                         + ";opacite:" + HS.getOpacite()
                         + ";info:" + HS.getStrInfo().replace(";", "&pv").replace(":", "&dp")
-                        + ";anime:" + HS.isAnime()
+                        + ";typeAnimation:" + HS.getStrTypeAnimation()
+                        + ";agranditSurvol:" + HS.isAgranditSurvol()
+                        + ";couleurPerso:" + (HS.getStrCouleurPerso() != null ? HS.getStrCouleurPerso().replace(";", "&pv") : "")
                         + "]\n";
             }
             for (int j = 0; j < getPanoramiquesProjet()[i].getiNombreHotspotDiapo(); j++) {
@@ -3985,11 +4140,13 @@ public class EditeurPanovisu extends Application {
                         + ";lienExterieur:" + HS.isbLienExterieur()
                         + ";url:" + HS.getStrURLExterieure()
                         + ";info:" + HS.getStrInfo().replace(";", "&pv").replace(":", "&dp")
-                        + ";anime:" + HS.isAnime()
+                        + ";typeAnimation:" + HS.getStrTypeAnimation()
+                        + ";agranditSurvol:" + HS.isAgranditSurvol()
                         + ";position:" + HS.getStrPositionHTML()
                         + ";couleur:" + HS.getStrCouleurHTML()
                         + ";opacite:" + HS.getOpaciteHTML()
                         + ";largeur:" + HS.getLargeurHTML()
+                        + ";couleurPerso:" + (HS.getStrCouleurPerso() != null ? HS.getStrCouleurPerso().replace(";", "&pv") : "")
                         + "]\n";
             }
         }
@@ -4177,6 +4334,15 @@ public class EditeurPanovisu extends Application {
         }
         if ((reponse == buttonTypeOui) || (reponse == buttonTypeNon) || (reponse == null)) {
             sauveHistoFichiers();
+            
+            // Arrêter le serveur HTTP pour libérer le port
+            try {
+                editeurpanovisu.util.LocalHTTPServer.getInstance().stop();
+                System.out.println("✅ Serveur HTTP arrêté lors de la fermeture de l'application");
+            } catch (Exception ex) {
+                System.err.println("⚠️ Erreur lors de l'arrêt du serveur HTTP : " + ex.getMessage());
+            }
+            
             deleteDirectory(getStrRepertTemp());
             File fileTemp = new File(getStrRepertTemp());
             fileTemp.delete();
@@ -4596,7 +4762,7 @@ public class EditeurPanovisu extends Application {
                         for (int jj = 0; jj < iNbHS; jj++) {
                             ikk++;
                             strLigne = strLignes[ikk];
-                            strElementsLigne = strLigne.split(";", 10);
+                            strElementsLigne = strLigne.split(";", 12);
                             strTypeElement = strElementsLigne[0].split(">", 2);
                             strTypeElement[0] = strTypeElement[0].replace(" ", "").replace("=", "").replace("[", "");
                             strElementsLigne[0] = strTypeElement[1];
@@ -4645,18 +4811,33 @@ public class EditeurPanovisu extends Application {
                                     case "numXML":
                                         HS.setNumeroPano(Integer.parseInt(strValeur[1]));
                                         break;
+                                    case "typeAnimation":
+                                        HS.setStrTypeAnimation(strValeur[1]);
+                                        break;
                                     case "anime":
+                                        // Compatibilité avec l'ancien format
                                         HS.setAnime(strValeur[1].equals("true"));
+                                        break;
+                                    case "agranditSurvol":
+                                        HS.setAgranditSurvol(strValeur[1].equals("true"));
+                                        break;
+                                    case "couleurPerso":
+                                        HS.setStrCouleurPerso(strValeur[1].replace("&pv", ";"));
                                         break;
                                 }
                             }
                             getPanoramiquesProjet()[getiPanoActuel()].addHotspot(HS);
+                            
+                            // Reconstruire l'icône colorée si nécessaire
+                            if (HS.getStrCouleurPerso() != null && !HS.getStrCouleurPerso().isEmpty()) {
+                                reconstruireIconeHotspot(HS, getiPanoActuel(), getPanoramiquesProjet()[getiPanoActuel()].getNombreHotspots() - 1, "hs", strNomfichierHS);
+                            }
                         }
 
                         for (int jj = 0; jj < iNbImg; jj++) {
                             ikk++;
                             strLigne = strLignes[ikk];
-                            strElementsLigne = strLigne.split(";", 10);
+                            strElementsLigne = strLigne.split(";", 12);
                             strTypeElement = strElementsLigne[0].split(">", 2);
                             strTypeElement[0] = strTypeElement[0].replace(" ", "").replace("=", "").replace("[", "");
                             strElementsLigne[0] = strTypeElement[1];
@@ -4754,17 +4935,32 @@ public class EditeurPanovisu extends Application {
                                         }
 
                                         break;
+                                    case "typeAnimation":
+                                        HS.setStrTypeAnimation(strValeur[1]);
+                                        break;
                                     case "anime":
+                                        // Compatibilité avec l'ancien format
                                         HS.setAnime(strValeur[1].equals("true"));
+                                        break;
+                                    case "agranditSurvol":
+                                        HS.setAgranditSurvol(strValeur[1].equals("true"));
+                                        break;
+                                    case "couleurPerso":
+                                        HS.setStrCouleurPerso(strValeur[1].replace("&pv", ";"));
                                         break;
                                 }
                             }
                             getPanoramiquesProjet()[getiPanoActuel()].addHotspotImage(HS);
+                            
+                            // Reconstruire l'icône colorée si nécessaire
+                            if (HS.getStrCouleurPerso() != null && !HS.getStrCouleurPerso().isEmpty()) {
+                                reconstruireIconeHotspot(HS, getiPanoActuel(), getPanoramiquesProjet()[getiPanoActuel()].getNombreHotspotImage() - 1, "hsImage", strNomfichierHSImage);
+                            }
                         }
                         for (int jj = 0; jj < iNbHSDiapo; jj++) {
                             ikk++;
                             strLigne = strLignes[ikk];
-                            strElementsLigne = strLigne.split(";", 10);
+                            strElementsLigne = strLigne.split(";", 12);
                             strTypeElement = strElementsLigne[0].split(">", 2);
                             strTypeElement[0] = strTypeElement[0].replace(" ", "").replace("=", "").replace("[", "");
                             strElementsLigne[0] = strTypeElement[1];
@@ -4800,7 +4996,7 @@ public class EditeurPanovisu extends Application {
                         for (int jj = 0; jj < iNbHTML; jj++) {
                             ikk++;
                             strLigne = strLignes[ikk];
-                            strElementsLigne = strLigne.split(";", 10);
+                            strElementsLigne = strLigne.split(";", 12);
                             strTypeElement = strElementsLigne[0].split(">", 2);
                             strTypeElement[0] = strTypeElement[0].replace(" ", "").replace("=", "").replace("[", "");
                             strElementsLigne[0] = strTypeElement[1];
@@ -4829,8 +5025,15 @@ public class EditeurPanovisu extends Application {
                                             HS.setStrInfo(strValeur[1].replace("&pv", ";").replace("&dp", ":").replace("&ds", "#"));
                                         }
                                         break;
+                                    case "typeAnimation":
+                                        HS.setStrTypeAnimation(strValeur[1]);
+                                        break;
                                     case "anime":
+                                        // Compatibilité avec l'ancien format
                                         HS.setAnime(strValeur[1].equals("true"));
+                                        break;
+                                    case "agranditSurvol":
+                                        HS.setAgranditSurvol(strValeur[1].equals("true"));
                                         break;
                                     case "position":
                                         HS.setStrPositionHTML(strValeur[1]);
@@ -4844,10 +5047,18 @@ public class EditeurPanovisu extends Application {
                                     case "largeur":
                                         HS.setLargeurHTML(Double.parseDouble(strValeur[1]));
                                         break;
+                                    case "couleurPerso":
+                                        HS.setStrCouleurPerso(strValeur[1].replace("&pv", ";"));
+                                        break;
 
                                 }
                             }
                             getPanoramiquesProjet()[getiPanoActuel()].addHotspotHTML(HS);
+                            
+                            // Reconstruire l'icône colorée si nécessaire
+                            if (HS.getStrCouleurPerso() != null && !HS.getStrCouleurPerso().isEmpty()) {
+                                reconstruireIconeHotspot(HS, getiPanoActuel(), getPanoramiquesProjet()[getiPanoActuel()].getNombreHotspotHTML() - 1, "hsHTML", strNomfichierHSHTML);
+                            }
                         }
 
                     }
@@ -5414,6 +5625,20 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Rafraîchit l'affichage des hotspots dans le panneau de visite
+     * Utilisé notamment après l'application des options par défaut à tous les hotspots
+     */
+    public static void rafraichitAffichageHotSpots() {
+        if (getiNombrePanoramiques() > 0) {
+            retireAffichageHotSpots();
+            dejaCharge = false;
+            Pane paneAfficheHS1 = paneAffichageHS(strListePano(), getiPanoActuel());
+            paneAfficheHS1.setId("labels");
+            vbVisuHotspots.getChildren().add(paneAfficheHS1);
+        }
+    }
+
+    /**
      *
      */
     private static void retireAffichagePointsHotSpots() {
@@ -5640,9 +5865,19 @@ public class EditeurPanovisu extends Application {
                         cbPanos.getSelectionModel().getSelectedIndex()
                 );
             }
-            CheckBox cbAnime = (CheckBox) vbOutils.lookup("#anime" + i);
-            if (cbAnime != null) {
-                getPanoramiquesProjet()[getiPanoActuel()].getHotspot(i).setAnime(cbAnime.isSelected());
+            ComboBox<String> cbTypeAnimation = (ComboBox<String>) vbOutils.lookup("#anime" + i);
+            if (cbTypeAnimation != null && cbTypeAnimation.getValue() != null) {
+                getPanoramiquesProjet()[getiPanoActuel()].getHotspot(i).setStrTypeAnimation(cbTypeAnimation.getValue());
+            }
+            CheckBox cbAgrandit = (CheckBox) vbOutils.lookup("#agranditSurvol" + i);
+            if (cbAgrandit != null) {
+                getPanoramiquesProjet()[getiPanoActuel()].getHotspot(i).setAgranditSurvol(cbAgrandit.isSelected());
+            }
+            ColorPicker cpCouleurPerso = (ColorPicker) vbOutils.lookup("#couleurPerso" + i);
+            if (cpCouleurPerso != null && cpCouleurPerso.getValue() != null) {
+                Color couleur = cpCouleurPerso.getValue();
+                String strCouleur = couleur.getHue() + ";" + couleur.getSaturation() + ";" + couleur.getBrightness();
+                getPanoramiquesProjet()[getiPanoActuel()].getHotspot(i).setStrCouleurPerso(strCouleur);
             }
         }
         for (int i = 0; i < getPanoramiquesProjet()[getiPanoActuel()].getNombreHotspotImage(); i++) {
@@ -5650,9 +5885,19 @@ public class EditeurPanovisu extends Application {
             if (tfTexteHS != null) {
                 getPanoramiquesProjet()[getiPanoActuel()].getHotspotImage(i).setStrInfo(tfTexteHS.getText());
             }
-            CheckBox cbAnime = (CheckBox) vbOutils.lookup("#animeImage" + i);
-            if (cbAnime != null) {
-                getPanoramiquesProjet()[getiPanoActuel()].getHotspotImage(i).setAnime(cbAnime.isSelected());
+            ComboBox<String> cbTypeAnimation = (ComboBox<String>) vbOutils.lookup("#animeImage" + i);
+            if (cbTypeAnimation != null && cbTypeAnimation.getValue() != null) {
+                getPanoramiquesProjet()[getiPanoActuel()].getHotspotImage(i).setStrTypeAnimation(cbTypeAnimation.getValue());
+            }
+            CheckBox cbAgrandit = (CheckBox) vbOutils.lookup("#agranditSurvolImage" + i);
+            if (cbAgrandit != null) {
+                getPanoramiquesProjet()[getiPanoActuel()].getHotspotImage(i).setAgranditSurvol(cbAgrandit.isSelected());
+            }
+            ColorPicker cpCouleurPersoImage = (ColorPicker) vbOutils.lookup("#couleurPersoImage" + i);
+            if (cpCouleurPersoImage != null && cpCouleurPersoImage.getValue() != null) {
+                Color couleur = cpCouleurPersoImage.getValue();
+                String strCouleur = couleur.getHue() + ";" + couleur.getSaturation() + ";" + couleur.getBrightness();
+                getPanoramiquesProjet()[getiPanoActuel()].getHotspotImage(i).setStrCouleurPerso(strCouleur);
             }
         }
         for (int i = 0; i < getPanoramiquesProjet()[getiPanoActuel()].getNombreHotspotHTML(); i++) {
@@ -5660,9 +5905,19 @@ public class EditeurPanovisu extends Application {
             if (tfTexteHS != null) {
                 getPanoramiquesProjet()[getiPanoActuel()].getHotspotHTML(i).setStrInfo(tfTexteHS.getText());
             }
-            CheckBox cbAnime = (CheckBox) vbOutils.lookup("#animeHTML" + i);
-            if (cbAnime != null) {
-                getPanoramiquesProjet()[getiPanoActuel()].getHotspotHTML(i).setAnime(cbAnime.isSelected());
+            ComboBox<String> cbTypeAnimation = (ComboBox<String>) vbOutils.lookup("#animeHTML" + i);
+            if (cbTypeAnimation != null && cbTypeAnimation.getValue() != null) {
+                getPanoramiquesProjet()[getiPanoActuel()].getHotspotHTML(i).setStrTypeAnimation(cbTypeAnimation.getValue());
+            }
+            CheckBox cbAgrandit = (CheckBox) vbOutils.lookup("#agranditSurvolHTML" + i);
+            if (cbAgrandit != null) {
+                getPanoramiquesProjet()[getiPanoActuel()].getHotspotHTML(i).setAgranditSurvol(cbAgrandit.isSelected());
+            }
+            ColorPicker cpCouleurPersoHTML = (ColorPicker) vbOutils.lookup("#couleurPersoHTML" + i);
+            if (cpCouleurPersoHTML != null && cpCouleurPersoHTML.getValue() != null) {
+                Color couleur = cpCouleurPersoHTML.getValue();
+                String strCouleur = couleur.getHue() + ";" + couleur.getSaturation() + ";" + couleur.getBrightness();
+                getPanoramiquesProjet()[getiPanoActuel()].getHotspotHTML(i).setStrCouleurPerso(strCouleur);
             }
         }
         for (int i = 0; i < getPanoramiquesProjet()[getiPanoActuel()].getiNombreHotspotDiapo(); i++) {
@@ -5676,6 +5931,160 @@ public class EditeurPanovisu extends Application {
             }
         }
 
+    }
+
+    /**
+     * Applique une transformation de couleur à une image de hotspot
+     * @param imageSource L'image source
+     * @param couleurFinale La teinte cible (hue)
+     * @param sat La saturation cible
+     * @param bright La luminosité cible
+     * @return Une nouvelle image avec la couleur transformée
+     */
+    private static WritableImage transformerCouleurHotspot(Image imageSource, double couleurFinale, double sat, double bright) {
+        if (imageSource == null) {
+            return null;
+        }
+        
+        int width = (int) imageSource.getWidth();
+        int height = (int) imageSource.getHeight();
+        WritableImage imageTransformee = new WritableImage(width, height);
+        PixelReader pr = imageSource.getPixelReader();
+        PixelWriter pw = imageTransformee.getPixelWriter();
+        
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                Color color = pr.getColor(x, y);
+                double brightness = color.getBrightness();
+                double saturation = color.getSaturation();
+                double opacity = color.getOpacity();
+                Color couleur;
+                
+                if ((sat < 0.02) && (saturation > 0.05)) {
+                    double bright1;
+                    if (brightness > 0.1 && brightness < 0.9) {
+                        bright1 = brightness * 0.5 + bright * 0.5;
+                    } else {
+                        bright1 = brightness;
+                    }
+                    couleur = Color.hsb(couleurFinale, sat, bright1, opacity);
+                } else {
+                    double sat1;
+                    double bright1;
+                    if (saturation < 0.3 || (brightness < 0.2 || brightness > 0.8)) {
+                        sat1 = saturation;
+                        bright1 = brightness;
+                    } else {
+                        sat1 = saturation * (1 - saturation + sat);
+                        double exp = Math.exp(-4 * Math.pow(2 * brightness - 1, 2));
+                        bright1 = bright * exp + brightness * (1 - exp);
+                    }
+                    couleur = Color.hsb(couleurFinale, sat1, bright1, opacity);
+                }
+                pw.setColor(x, y, couleur);
+            }
+        }
+        
+        return imageTransformee;
+    }
+
+    /**
+     * Sauvegarde une image de hotspot colorée dans le répertoire temp et retourne le nom du fichier
+     * @param imageColoree L'image colorée à sauvegarder
+     * @param prefixe Le préfixe du nom de fichier ("hs", "hsImage", "hsHTML")
+     * @param index L'index du hotspot
+     * @param numPano Le numéro du panoramique
+     * @return Le nom du fichier sauvegardé, ou null en cas d'erreur
+     */
+    private static String sauvegardeIconeHotspot(WritableImage imageColoree, String prefixe, int index, int numPano) {
+        if (imageColoree == null) {
+            return null;
+        }
+        
+        try {
+            // Créer le répertoire temp/panovisu/images/hotspots s'il n'existe pas
+            File repertoireHotspots = new File(getStrRepertTemp() + File.separator + "panovisu" + File.separator + "images" + File.separator + "hotspots");
+            if (!repertoireHotspots.exists()) {
+                repertoireHotspots.mkdirs();
+            }
+            
+            // Générer un nom de fichier unique
+            String nomFichier = prefixe + "_pano" + numPano + "_" + index + "_" + System.currentTimeMillis() + ".png";
+            String cheminComplet = repertoireHotspots.getAbsolutePath() + File.separator + nomFichier;
+            
+            // Sauvegarder l'image
+            ReadWriteImage.writePng(imageColoree, cheminComplet, false, 0.f);
+            
+            return nomFichier;
+        } catch (IOException ex) {
+            Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+
+    /**
+     * Reconstruit une icône de hotspot colorée lors du chargement d'un projet
+     * @param hotspot Le hotspot (peut être HotSpot, HotspotImage ou HotspotHTML)
+     * @param numPano Le numéro du panoramique
+     * @param index L'index du hotspot
+     * @param prefixe Le préfixe du nom de fichier ("hs", "hsImage", "hsHTML")
+     * @param nomFichierIconeDefaut Le nom du fichier d'icône par défaut
+     */
+    private static void reconstruireIconeHotspot(Object hotspot, int numPano, int index, String prefixe, String nomFichierIconeDefaut) {
+        try {
+            String couleurPerso = null;
+            
+            // Récupérer la couleur personnalisée selon le type de hotspot
+            if (hotspot instanceof HotSpot) {
+                couleurPerso = ((HotSpot) hotspot).getStrCouleurPerso();
+            } else if (hotspot instanceof HotspotImage) {
+                couleurPerso = ((HotspotImage) hotspot).getStrCouleurPerso();
+            } else if (hotspot instanceof HotspotHTML) {
+                couleurPerso = ((HotspotHTML) hotspot).getStrCouleurPerso();
+            }
+            
+            // Si pas de couleur personnalisée, on ne fait rien
+            if (couleurPerso == null || couleurPerso.isEmpty()) {
+                return;
+            }
+            
+            // Parser la couleur
+            String[] couleurParts = couleurPerso.split(";");
+            if (couleurParts.length != 3) {
+                return;
+            }
+            
+            double hue = Double.parseDouble(couleurParts[0]);
+            double saturation = Double.parseDouble(couleurParts[1]);
+            double brightness = Double.parseDouble(couleurParts[2]);
+            
+            // Charger l'icône par défaut
+            File fileIcone = new File(getStrRepertAppli() + File.separator + "theme" + File.separator + "hotspots" + File.separator + nomFichierIconeDefaut);
+            if (!fileIcone.exists()) {
+                return;
+            }
+            
+            Image imgOriginal = new Image("file:" + fileIcone.getAbsolutePath());
+            
+            // Appliquer la transformation de couleur
+            WritableImage imgColoree = transformerCouleurHotspot(imgOriginal, hue, saturation, brightness);
+            
+            // Sauvegarder l'icône transformée
+            String nomFichier = sauvegardeIconeHotspot(imgColoree, prefixe, index, numPano);
+            
+            // Stocker le nom du fichier dans le hotspot
+            if (nomFichier != null) {
+                if (hotspot instanceof HotSpot) {
+                    ((HotSpot) hotspot).setStrFichierImage(nomFichier);
+                } else if (hotspot instanceof HotspotImage) {
+                    ((HotspotImage) hotspot).setStrFichierImage(nomFichier);
+                } else if (hotspot instanceof HotspotHTML) {
+                    ((HotspotHTML) hotspot).setStrFichierImage(nomFichier);
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -5700,9 +6109,9 @@ public class EditeurPanovisu extends Application {
             double deplacement = 0;
             vbPanneauHS.setLayoutX(deplacement);
             Pane paneHsPanoramique = new Pane(vbPanneauHS);
-            paneHsPanoramique.setPrefHeight(300);
-            paneHsPanoramique.setMinHeight(300);
-            paneHsPanoramique.setMaxHeight(300);
+            paneHsPanoramique.setPrefHeight(440);
+            paneHsPanoramique.setMinHeight(440);
+            paneHsPanoramique.setMaxHeight(440);
 
             int iNum1 = io;
             Timeline timBouge = new Timeline(new KeyFrame(Duration.millis(500), (ActionEvent event) -> {
@@ -5796,11 +6205,147 @@ public class EditeurPanovisu extends Application {
             tfTexteHS.setPrefSize(200, 25);
             tfTexteHS.setMaxSize(200, 20);
             tfTexteHS.setTranslateX(60);
-            vbPanneauHS.getChildren().addAll(lblTexteHS, tfTexteHS, lblSep1);
+            
+            // ComboBox pour le type d'animation
+            Label lblTypeAnimation = new Label(rbLocalisation.getString("main.typeAnimation"));
+            lblTypeAnimation.setTranslateX(10);
+            ComboBox<String> cbTypeAnimation = new ComboBox<>();
+            cbTypeAnimation.setId("anime" + io);
+            cbTypeAnimation.setTranslateX(10);
+            cbTypeAnimation.setPrefWidth(200);
+            cbTypeAnimation.getItems().addAll(
+                "none",
+                "pulse",
+                "rotation", 
+                "desaturation",
+                "bounce",
+                "swing",
+                "glow",
+                "heartbeat",
+                "shake",
+                "flip",
+                "wobble",
+                "tada",
+                "flash",
+                "rubber",
+                "jello",
+                "neon",
+                "float"
+            );
+            cbTypeAnimation.setValue(getPanoramiquesProjet()[iNumPano].getHotspot(io).getStrTypeAnimation());
+            cbTypeAnimation.valueProperty().addListener((obs, oldVal, newVal) -> {
+                valideHS();
+            });
+            
+            // CheckBox pour Agrandissement au survol
+            CheckBox cbAgrandit = new CheckBox(rbLocalisation.getString("main.agrandissementSurvol"));
+            cbAgrandit.setId("agranditSurvol" + io);
+            cbAgrandit.setTranslateX(10);
+            cbAgrandit.setSelected(getPanoramiquesProjet()[iNumPano].getHotspot(io).isAgranditSurvol());
+            cbAgrandit.selectedProperty().addListener((obs, oldVal, newVal) -> {
+                valideHS();
+            });
+            
+            // Label et ColorPicker pour couleur personnalisée
+            Label lblCouleurPerso = new Label(rbLocalisation.getString("main.couleurPersonnalisee"));
+            lblCouleurPerso.setPrefHeight(29);
+            lblCouleurPerso.setMaxHeight(29);
+            lblCouleurPerso.setPrefWidth(200);
+            lblCouleurPerso.setTranslateX(10);
+            
+            ColorPicker cpCouleurPerso = new ColorPicker();
+            cpCouleurPerso.setId("couleurPerso" + io);
+            cpCouleurPerso.setTranslateX(10);
+            cpCouleurPerso.setPrefWidth(160);
+            
+            // ImageView pour l'aperçu du hotspot avec la couleur
+            ImageView ivApercuCouleur = new ImageView();
+            ivApercuCouleur.setId("apercuCouleur" + io);
+            ivApercuCouleur.setFitWidth(32);
+            ivApercuCouleur.setFitHeight(32);
+            ivApercuCouleur.setPreserveRatio(true);
+            ivApercuCouleur.setTranslateX(180);
+            
+            // Charger l'image du hotspot panoramique
+            String strNomHotspot = strNomfichierHS;
+            String strTypeHotspot = strTypeHS;
+            Image imgHotspotOriginal = null;
+            if (strTypeHotspot != null && !strTypeHotspot.equals("gif")) {
+                try {
+                    File fileHotspot = new File(getStrRepertAppli() + File.separator + "theme" + File.separator + "hotspots" + File.separator + strNomHotspot);
+                    if (fileHotspot.exists()) {
+                        imgHotspotOriginal = new Image("file:" + fileHotspot.getAbsolutePath());
+                    }
+                } catch (Exception e) {
+                    // Ignorer les erreurs de chargement
+                }
+            }
+            
+            // Initialiser la couleur depuis le hotspot
+            String couleurPerso = getPanoramiquesProjet()[iNumPano].getHotspot(io).getStrCouleurPerso();
+            Color couleurInitiale;
+            if (couleurPerso != null && !couleurPerso.isEmpty()) {
+                String[] couleurParts = couleurPerso.split(";");
+                if (couleurParts.length == 3) {
+                    try {
+                        double hue = Double.parseDouble(couleurParts[0]);
+                        double saturation = Double.parseDouble(couleurParts[1]);
+                        double brightness = Double.parseDouble(couleurParts[2]);
+                        couleurInitiale = Color.hsb(hue, saturation, brightness);
+                    } catch (NumberFormatException e) {
+                        couleurInitiale = Color.YELLOW; // Couleur par défaut
+                    }
+                } else {
+                    couleurInitiale = Color.YELLOW;
+                }
+            } else {
+                couleurInitiale = Color.YELLOW; // Couleur par défaut
+            }
+            cpCouleurPerso.setValue(couleurInitiale);
+            
+            // Appliquer la couleur initiale à l'aperçu
+            if (imgHotspotOriginal != null) {
+                WritableImage imgApercuColoree = transformerCouleurHotspot(
+                    imgHotspotOriginal,
+                    couleurInitiale.getHue(),
+                    couleurInitiale.getSaturation(),
+                    couleurInitiale.getBrightness()
+                );
+                ivApercuCouleur.setImage(imgApercuColoree);
+            }
+            
+            // Mettre à jour l'aperçu quand la couleur change
+            Image imgHotspotFinal = imgHotspotOriginal;
+            final int iNumHS = io;
+            cpCouleurPerso.valueProperty().addListener((obs, oldVal, newVal) -> {
+                if (imgHotspotFinal != null && newVal != null) {
+                    WritableImage imgApercuColoree = transformerCouleurHotspot(
+                        imgHotspotFinal,
+                        newVal.getHue(),
+                        newVal.getSaturation(),
+                        newVal.getBrightness()
+                    );
+                    ivApercuCouleur.setImage(imgApercuColoree);
+                    
+                    // Sauvegarder l'icône colorée et stocker le nom du fichier
+                    String nomFichier = sauvegardeIconeHotspot(imgApercuColoree, "hs", iNumHS, iNumPano);
+                    if (nomFichier != null) {
+                        getPanoramiquesProjet()[iNumPano].getHotspot(iNumHS).setStrFichierImage(nomFichier);
+                    }
+                }
+                valideHS();
+            });
+            
+            // Créer un HBox pour aligner le ColorPicker et l'aperçu
+            HBox hboxCouleur = new HBox(10);
+            hboxCouleur.setTranslateX(10);
+            hboxCouleur.getChildren().addAll(cpCouleurPerso, ivApercuCouleur);
+            
+            vbPanneauHS.getChildren().addAll(lblTexteHS, tfTexteHS, lblTypeAnimation, cbTypeAnimation, cbAgrandit, lblCouleurPerso, hboxCouleur, lblSep1);
             vbHotspots.getChildren().addAll(paneHsPanoramique, lblSep);
         }
         int iNbHS = io;
-        int iTaillePane = io * 325;
+        int iTaillePane = io * 385;
         for (io = 0; io < getPanoramiquesProjet()[iNumPano].getNombreHotspotImage(); io++) {
             Label lblSep = new Label(" ");
             Label lblSep1 = new Label(" ");
@@ -5870,7 +6415,143 @@ public class EditeurPanovisu extends Application {
             tfTexteHS.setPrefSize(200, 25);
             tfTexteHS.setMaxSize(200, 20);
             tfTexteHS.setTranslateX(60);
-            vbPanneauHsImage.getChildren().addAll(lblTexteHS, tfTexteHS, lblSep1);
+            
+            // ComboBox pour le type d'animation
+            Label lblTypeAnimationImage = new Label(rbLocalisation.getString("main.typeAnimation"));
+            lblTypeAnimationImage.setTranslateX(10);
+            ComboBox<String> cbTypeAnimationImage = new ComboBox<>();
+            cbTypeAnimationImage.setId("animeImage" + io);
+            cbTypeAnimationImage.setTranslateX(10);
+            cbTypeAnimationImage.setPrefWidth(200);
+            cbTypeAnimationImage.getItems().addAll(
+                "none",
+                "pulse",
+                "rotation", 
+                "desaturation",
+                "bounce",
+                "swing",
+                "glow",
+                "heartbeat",
+                "shake",
+                "flip",
+                "wobble",
+                "tada",
+                "flash",
+                "rubber",
+                "jello",
+                "neon",
+                "float"
+            );
+            cbTypeAnimationImage.setValue(getPanoramiquesProjet()[iNumPano].getHotspotImage(io).getStrTypeAnimation());
+            cbTypeAnimationImage.valueProperty().addListener((obs, oldVal, newVal) -> {
+                valideHS();
+            });
+            
+            // CheckBox pour Agrandissement au survol
+            CheckBox cbAgranditImage = new CheckBox(rbLocalisation.getString("main.agrandissementSurvol"));
+            cbAgranditImage.setId("agranditSurvolImage" + io);
+            cbAgranditImage.setTranslateX(10);
+            cbAgranditImage.setSelected(getPanoramiquesProjet()[iNumPano].getHotspotImage(io).isAgranditSurvol());
+            cbAgranditImage.selectedProperty().addListener((obs, oldVal, newVal) -> {
+                valideHS();
+            });
+            
+            // Label et ColorPicker pour couleur personnalisée hotspot
+            Label lblCouleurPersoImage = new Label(rbLocalisation.getString("main.couleurPersonnalisee"));
+            lblCouleurPersoImage.setPrefHeight(29);
+            lblCouleurPersoImage.setMaxHeight(29);
+            lblCouleurPersoImage.setPrefWidth(200);
+            lblCouleurPersoImage.setTranslateX(10);
+            
+            ColorPicker cpCouleurPersoImage = new ColorPicker();
+            cpCouleurPersoImage.setId("couleurPersoImage" + io);
+            cpCouleurPersoImage.setTranslateX(10);
+            cpCouleurPersoImage.setPrefWidth(160);
+            
+            // ImageView pour l'aperçu du hotspot image avec la couleur
+            ImageView ivApercuCouleurImage = new ImageView();
+            ivApercuCouleurImage.setId("apercuCouleurImage" + io);
+            ivApercuCouleurImage.setFitWidth(32);
+            ivApercuCouleurImage.setFitHeight(32);
+            ivApercuCouleurImage.setPreserveRatio(true);
+            ivApercuCouleurImage.setTranslateX(180);
+            
+            // Charger l'image du hotspot image
+            String strNomHotspotImage = strNomfichierHSImage;
+            String strTypeHotspotImage = strTypeHSImage;
+            Image imgHotspotImageOriginal = null;
+            if (strTypeHotspotImage != null && !strTypeHotspotImage.equals("gif")) {
+                try {
+                    File fileHotspotImage = new File(getStrRepertAppli() + File.separator + "theme" + File.separator + "hotspots" + File.separator + strNomHotspotImage);
+                    if (fileHotspotImage.exists()) {
+                        imgHotspotImageOriginal = new Image("file:" + fileHotspotImage.getAbsolutePath());
+                    }
+                } catch (Exception e) {
+                    // Ignorer les erreurs de chargement
+                }
+            }
+            
+            // Initialiser la couleur depuis le hotspot
+            String couleurPersoImage = getPanoramiquesProjet()[iNumPano].getHotspotImage(io).getStrCouleurPerso();
+            Color couleurInitialeImage;
+            if (couleurPersoImage != null && !couleurPersoImage.isEmpty()) {
+                String[] couleurParts = couleurPersoImage.split(";");
+                if (couleurParts.length == 3) {
+                    try {
+                        double hue = Double.parseDouble(couleurParts[0]);
+                        double saturation = Double.parseDouble(couleurParts[1]);
+                        double brightness = Double.parseDouble(couleurParts[2]);
+                        couleurInitialeImage = Color.hsb(hue, saturation, brightness);
+                    } catch (NumberFormatException e) {
+                        couleurInitialeImage = Color.RED; // Couleur par défaut pour images
+                    }
+                } else {
+                    couleurInitialeImage = Color.RED;
+                }
+            } else {
+                couleurInitialeImage = Color.RED; // Couleur par défaut pour images
+            }
+            cpCouleurPersoImage.setValue(couleurInitialeImage);
+            
+            // Appliquer la couleur initiale à l'aperçu
+            if (imgHotspotImageOriginal != null) {
+                WritableImage imgApercuColoreeImage = transformerCouleurHotspot(
+                    imgHotspotImageOriginal,
+                    couleurInitialeImage.getHue(),
+                    couleurInitialeImage.getSaturation(),
+                    couleurInitialeImage.getBrightness()
+                );
+                ivApercuCouleurImage.setImage(imgApercuColoreeImage);
+            }
+            
+            // Mettre à jour l'aperçu quand la couleur change
+            Image imgHotspotImageFinal = imgHotspotImageOriginal;
+            final int iNumHSImage = io;
+            cpCouleurPersoImage.valueProperty().addListener((obs, oldVal, newVal) -> {
+                if (imgHotspotImageFinal != null && newVal != null) {
+                    WritableImage imgApercuColoreeImage = transformerCouleurHotspot(
+                        imgHotspotImageFinal,
+                        newVal.getHue(),
+                        newVal.getSaturation(),
+                        newVal.getBrightness()
+                    );
+                    ivApercuCouleurImage.setImage(imgApercuColoreeImage);
+                    
+                    // Sauvegarder l'icône colorée et stocker le nom du fichier
+                    String nomFichier = sauvegardeIconeHotspot(imgApercuColoreeImage, "hsImage", iNumHSImage, iNumPano);
+                    if (nomFichier != null) {
+                        getPanoramiquesProjet()[iNumPano].getHotspotImage(iNumHSImage).setStrFichierImage(nomFichier);
+                    }
+                }
+                valideHS();
+            });
+            
+            // Créer un HBox pour aligner le ColorPicker et l'aperçu
+            HBox hboxCouleurImage = new HBox(10);
+            hboxCouleurImage.setTranslateX(10);
+            hboxCouleurImage.getChildren().addAll(cpCouleurPersoImage, ivApercuCouleurImage);
+            
+            vbPanneauHsImage.getChildren().addAll(lblTexteHS, tfTexteHS, lblTypeAnimationImage, cbTypeAnimationImage, cbAgranditImage, lblCouleurPersoImage, hboxCouleurImage, lblSep1);
             Label lblCoulFond = new Label(rbLocalisation.getString("diapo.couleurFond"));
             lblCoulFond.setTranslateX(10);
             Label lblOpacite = new Label(rbLocalisation.getString("diapo.opacite"));
@@ -5908,10 +6589,10 @@ public class EditeurPanovisu extends Application {
             vbPanneauHsImage.getChildren().addAll(lblCoulFond, cpCouleurFond, lblOpacite, slOpacite);
 
             vbHotspots.getChildren().addAll(paneHsImage, lblSep);
-            iTaillePane += 225 + ivChoisie.getFitHeight();
-            paneHsImage.setPrefHeight(200 + ivChoisie.getFitHeight());
-            paneHsImage.setMinHeight(200 + ivChoisie.getFitHeight());
-            paneHsImage.setMaxHeight(200 + ivChoisie.getFitHeight());
+            iTaillePane += 365 + ivChoisie.getFitHeight();
+            paneHsImage.setPrefHeight(340 + ivChoisie.getFitHeight());
+            paneHsImage.setMinHeight(340 + ivChoisie.getFitHeight());
+            paneHsImage.setMaxHeight(340 + ivChoisie.getFitHeight());
         }
 
         iNbHS += io;
@@ -5970,7 +6651,143 @@ public class EditeurPanovisu extends Application {
             tfTexteHS.setPrefSize(200, 25);
             tfTexteHS.setMaxSize(200, 20);
             tfTexteHS.setTranslateX(60);
-            vbPanneauHS.getChildren().addAll(lblPoint, sepHS, lblTexteHS, tfTexteHS);
+            
+            // ComboBox pour le type d'animation
+            Label lblTypeAnimationHTML = new Label(rbLocalisation.getString("main.typeAnimation"));
+            lblTypeAnimationHTML.setTranslateX(10);
+            ComboBox<String> cbTypeAnimationHTML = new ComboBox<>();
+            cbTypeAnimationHTML.setId("animeHTML" + io);
+            cbTypeAnimationHTML.setTranslateX(10);
+            cbTypeAnimationHTML.setPrefWidth(200);
+            cbTypeAnimationHTML.getItems().addAll(
+                "none",
+                "pulse",
+                "rotation", 
+                "desaturation",
+                "bounce",
+                "swing",
+                "glow",
+                "heartbeat",
+                "shake",
+                "flip",
+                "wobble",
+                "tada",
+                "flash",
+                "rubber",
+                "jello",
+                "neon",
+                "float"
+            );
+            cbTypeAnimationHTML.setValue(getPanoramiquesProjet()[iNumPano].getHotspotHTML(io).getStrTypeAnimation());
+            cbTypeAnimationHTML.valueProperty().addListener((obs, oldVal, newVal) -> {
+                valideHS();
+            });
+            
+            // CheckBox pour Agrandissement au survol
+            CheckBox cbAgranditHTML = new CheckBox(rbLocalisation.getString("main.agrandissementSurvol"));
+            cbAgranditHTML.setId("agranditSurvolHTML" + io);
+            cbAgranditHTML.setTranslateX(10);
+            cbAgranditHTML.setSelected(getPanoramiquesProjet()[iNumPano].getHotspotHTML(io).isAgranditSurvol());
+            cbAgranditHTML.selectedProperty().addListener((obs, oldVal, newVal) -> {
+                valideHS();
+            });
+            
+            // Label et ColorPicker pour couleur personnalisée hotspot HTML
+            Label lblCouleurPersoHTML = new Label(rbLocalisation.getString("main.couleurPersonnalisee"));
+            lblCouleurPersoHTML.setPrefHeight(29);
+            lblCouleurPersoHTML.setMaxHeight(29);
+            lblCouleurPersoHTML.setPrefWidth(200);
+            lblCouleurPersoHTML.setTranslateX(10);
+            
+            ColorPicker cpCouleurPersoHTML = new ColorPicker();
+            cpCouleurPersoHTML.setId("couleurPersoHTML" + io);
+            cpCouleurPersoHTML.setTranslateX(10);
+            cpCouleurPersoHTML.setPrefWidth(160);
+            
+            // ImageView pour l'aperçu du hotspot HTML avec la couleur
+            ImageView ivApercuCouleurHTML = new ImageView();
+            ivApercuCouleurHTML.setId("apercuCouleurHTML" + io);
+            ivApercuCouleurHTML.setFitWidth(32);
+            ivApercuCouleurHTML.setFitHeight(32);
+            ivApercuCouleurHTML.setPreserveRatio(true);
+            ivApercuCouleurHTML.setTranslateX(180);
+            
+            // Charger l'image du hotspot HTML
+            String strNomHotspotHTML = strNomfichierHSHTML;
+            String strTypeHotspotHTML = strTypeHSHTML;
+            Image imgHotspotHTMLOriginal = null;
+            if (strTypeHotspotHTML != null && !strTypeHotspotHTML.equals("gif")) {
+                try {
+                    File fileHotspotHTML = new File(getStrRepertAppli() + File.separator + "theme" + File.separator + "hotspots" + File.separator + strNomHotspotHTML);
+                    if (fileHotspotHTML.exists()) {
+                        imgHotspotHTMLOriginal = new Image("file:" + fileHotspotHTML.getAbsolutePath());
+                    }
+                } catch (Exception e) {
+                    // Ignorer les erreurs de chargement
+                }
+            }
+            
+            // Initialiser la couleur depuis le hotspot
+            String couleurPersoHTML = getPanoramiquesProjet()[iNumPano].getHotspotHTML(io).getStrCouleurPerso();
+            Color couleurInitialeHTML;
+            if (couleurPersoHTML != null && !couleurPersoHTML.isEmpty()) {
+                String[] couleurParts = couleurPersoHTML.split(";");
+                if (couleurParts.length == 3) {
+                    try {
+                        double hue = Double.parseDouble(couleurParts[0]);
+                        double saturation = Double.parseDouble(couleurParts[1]);
+                        double brightness = Double.parseDouble(couleurParts[2]);
+                        couleurInitialeHTML = Color.hsb(hue, saturation, brightness);
+                    } catch (NumberFormatException e) {
+                        couleurInitialeHTML = Color.GREEN; // Couleur par défaut pour HTML
+                    }
+                } else {
+                    couleurInitialeHTML = Color.GREEN;
+                }
+            } else {
+                couleurInitialeHTML = Color.GREEN; // Couleur par défaut pour HTML
+            }
+            cpCouleurPersoHTML.setValue(couleurInitialeHTML);
+            
+            // Appliquer la couleur initiale à l'aperçu
+            if (imgHotspotHTMLOriginal != null) {
+                WritableImage imgApercuColoreeHTML = transformerCouleurHotspot(
+                    imgHotspotHTMLOriginal,
+                    couleurInitialeHTML.getHue(),
+                    couleurInitialeHTML.getSaturation(),
+                    couleurInitialeHTML.getBrightness()
+                );
+                ivApercuCouleurHTML.setImage(imgApercuColoreeHTML);
+            }
+            
+            // Mettre à jour l'aperçu quand la couleur change
+            Image imgHotspotHTMLFinal = imgHotspotHTMLOriginal;
+            final int iNumHSHTML = io;
+            cpCouleurPersoHTML.valueProperty().addListener((obs, oldVal, newVal) -> {
+                if (imgHotspotHTMLFinal != null && newVal != null) {
+                    WritableImage imgApercuColoreeHTML = transformerCouleurHotspot(
+                        imgHotspotHTMLFinal,
+                        newVal.getHue(),
+                        newVal.getSaturation(),
+                        newVal.getBrightness()
+                    );
+                    ivApercuCouleurHTML.setImage(imgApercuColoreeHTML);
+                    
+                    // Sauvegarder l'icône colorée et stocker le nom du fichier
+                    String nomFichier = sauvegardeIconeHotspot(imgApercuColoreeHTML, "hsHTML", iNumHSHTML, iNumPano);
+                    if (nomFichier != null) {
+                        getPanoramiquesProjet()[iNumPano].getHotspotHTML(iNumHSHTML).setStrFichierImage(nomFichier);
+                    }
+                }
+                valideHS();
+            });
+            
+            // Créer un HBox pour aligner le ColorPicker et l'aperçu
+            HBox hboxCouleurHTML = new HBox(10);
+            hboxCouleurHTML.setTranslateX(10);
+            hboxCouleurHTML.getChildren().addAll(cpCouleurPersoHTML, ivApercuCouleurHTML);
+            
+            vbPanneauHS.getChildren().addAll(lblPoint, sepHS, lblTexteHS, tfTexteHS, lblTypeAnimationHTML, cbTypeAnimationHTML, cbAgranditHTML, lblCouleurPersoHTML, hboxCouleurHTML);
             Button btnEditeHSHTML = new Button(rbLocalisation.getString("main.editeHTML"));
             btnEditeHSHTML.setPrefWidth(80);
             btnEditeHSHTML.setTranslateX(paneHsHtml.getPrefWidth() - btnEditeHSHTML.getPrefWidth() - 10);
@@ -5998,10 +6815,10 @@ public class EditeurPanovisu extends Application {
                     });
 
             vbHotspots.getChildren().addAll(paneHsHtml, lblSep);
-            paneHsHtml.setPrefHeight(120);
-            paneHsHtml.setMinHeight(120);
-            paneHsHtml.setMaxHeight(120);
-            iTaillePane += 145;
+            paneHsHtml.setPrefHeight(260);
+            paneHsHtml.setMinHeight(260);
+            paneHsHtml.setMaxHeight(260);
+            iTaillePane += 285;
         }
         iNbHS += io;
         for (io = 0; io < getPanoramiquesProjet()[iNumPano].getiNombreHotspotDiapo(); io++) {
@@ -7066,6 +7883,8 @@ public class EditeurPanovisu extends Application {
                 HotSpot HS = new HotSpot();
                 HS.setLongitude(longitude);
                 HS.setLatitude(latitude);
+                HS.setStrTypeAnimation(getGestionnaireInterface().getStrTypeAnimationPanoDefaut());
+                HS.setAgranditSurvol(getGestionnaireInterface().isbHotspotsPanoAgrandisDefaut());
                 getPanoramiquesProjet()[getiPanoActuel()].addHotspot(HS);
                 retireAffichageHotSpots();
                 dejaCharge = false;
@@ -7253,6 +8072,8 @@ public class EditeurPanovisu extends Application {
                 HS.setStrUrlImage(fileFichierImage.getAbsolutePath());
                 HS.setStrLienImg(fileFichierImage.getName());
                 HS.setStrInfo(fileFichierImage.getName().split("\\.")[0]);
+                HS.setStrTypeAnimation(getGestionnaireInterface().getStrTypeAnimationPhotoDefaut());
+                HS.setAgranditSurvol(getGestionnaireInterface().isbHotspotsPhotoAgrandisDefaut());
                 File fileRepertImage = new File(getStrRepertTemp() + File.separator + "images");
                 if (!fileRepertImage.exists()) {
                     fileRepertImage.mkdirs();
@@ -7451,6 +8272,8 @@ public class EditeurPanovisu extends Application {
             editHTML.setHsHTML(HS);
             HS.setLongitude(longitude);
             HS.setLatitude(latitude);
+            HS.setStrTypeAnimation(getGestionnaireInterface().getStrTypeAnimationHTMLDefaut());
+            HS.setAgranditSurvol(getGestionnaireInterface().isbHotspotsHTMLAgrandisDefaut());
             Rectangle2D tailleEcran = Screen.getPrimary().getBounds();
             int iHauteur = (int) tailleEcran.getHeight() - 100;
             int iLargeur = (int) tailleEcran.getWidth() - 100;
@@ -12280,6 +13103,14 @@ public class EditeurPanovisu extends Application {
      */
     @Override
     public void start(Stage stPrimaryStage) throws Exception {
+        // Réinitialiser le serveur HTTP au démarrage pour libérer les ports
+        try {
+            editeurpanovisu.util.LocalHTTPServer.getInstance().reset();
+            System.out.println("✅ Serveur HTTP réinitialisé au démarrage");
+        } catch (Exception e) {
+            System.err.println("⚠️ Erreur lors de la réinitialisation du serveur HTTP : " + e.getMessage());
+        }
+        
         if (isLinux()) {
             stPrimaryStage.setFullScreen(true);
         }
@@ -12372,6 +13203,14 @@ public class EditeurPanovisu extends Application {
                 } catch (IOException ex) {
                     Logger.getLogger(EditeurPanovisu.class
                             .getName()).log(Level.SEVERE, null, ex);
+                }
+
+                // Arrêter le serveur HTTP pour libérer le port
+                try {
+                    editeurpanovisu.util.LocalHTTPServer.getInstance().stop();
+                    System.out.println("✅ Serveur HTTP arrêté lors de la fermeture de l'application");
+                } catch (Exception ex) {
+                    System.err.println("⚠️ Erreur lors de l'arrêt du serveur HTTP : " + ex.getMessage());
                 }
 
                 deleteDirectory(getStrRepertTemp());

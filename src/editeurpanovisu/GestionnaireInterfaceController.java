@@ -29,6 +29,7 @@ import static editeurpanovisu.EditeurPanovisu.isbAutoTourDemarre;
 import static editeurpanovisu.EditeurPanovisu.isbInternet;
 import static editeurpanovisu.EditeurPanovisu.largeurOutils;
 import static editeurpanovisu.EditeurPanovisu.mbarPrincipal;
+import static editeurpanovisu.EditeurPanovisu.rafraichitAffichageHotSpots;
 import static editeurpanovisu.EditeurPanovisu.setbDejaSauve;
 import static editeurpanovisu.EditeurPanovisu.setiNombrePanoramiquesFichier;
 import static editeurpanovisu.EditeurPanovisu.tpEnvironnement;
@@ -86,6 +87,17 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
+import javafx.animation.Timeline;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Interpolator;
+import javafx.animation.RotateTransition;
+import javafx.animation.ScaleTransition;
+import javafx.animation.FadeTransition;
+import javafx.animation.TranslateTransition;
+import javafx.animation.ParallelTransition;
+import javafx.animation.SequentialTransition;
+import javafx.util.Duration;
 import editeurpanovisu.BigDecimalField;
 
 /**
@@ -732,6 +744,28 @@ public class GestionnaireInterfaceController {
     private Slider slTailleHotspotsPanoramique;
     private Slider slTailleHotspotsImage;
     private Slider slTailleHotspotsHTML;
+    
+    // Nouvelles options pour les hotspots
+    private boolean bHotspotsPanoAnimesDefaut = false;
+    private boolean bHotspotsPhotoAnimesDefaut = false;
+    private boolean bHotspotsHTMLAnimesDefaut = false;
+    private String strTypeAnimationPanoDefaut = "none";
+    private String strTypeAnimationPhotoDefaut = "none";
+    private String strTypeAnimationHTMLDefaut = "none";
+    private boolean bHotspotsPanoAgrandisDefaut = false;
+    private boolean bHotspotsPhotoAgrandisDefaut = false;
+    private boolean bHotspotsHTMLAgrandisDefaut = false;
+    private ComboBox<String> cbTypeAnimationPanoDefaut;
+    private ComboBox<String> cbTypeAnimationPhotoDefaut;
+    private ComboBox<String> cbTypeAnimationHTMLDefaut;
+    
+    // Animations en cours pour pouvoir les arrêter
+    private javafx.animation.Animation animationPanoEnCours = null;
+    private javafx.animation.Animation animationPhotoEnCours = null;
+    private javafx.animation.Animation animationHTMLEnCours = null;
+    private CheckBox cbHotspotsPanoAgrandisDefaut;
+    private CheckBox cbHotspotsPhotoAgrandisDefaut;
+    private CheckBox cbHotspotsHTMLAgrandisDefaut;
     private Color couleurMasque = Color.hsb(180, 0.39, 0.5);
     private Color couleurFondTheme = Color.hsb(180, 0.39, 0.5);
     final private Color couleurTexteTheme = Color.valueOf("white");
@@ -1124,6 +1158,236 @@ public class GestionnaireInterfaceController {
                     getPwNouveauxBoutons()[getiNombreImagesBouton()].setColor(x, y, couleur);
                 }
             }
+        }
+    }
+
+    /**
+     * Applique une animation de prévisualisation au hotspot
+     * @param imageView Le hotspot à animer
+     * @param animationType Le type d'animation
+     * @param hotspotType Le type de hotspot ("pano", "photo", "html")
+     */
+    private void previsualiserAnimation(ImageView imageView, String animationType, String hotspotType) {
+        // Arrêter l'animation en cours pour ce hotspot
+        javafx.animation.Animation animationEnCours = null;
+        switch (hotspotType) {
+            case "pano":
+                if (animationPanoEnCours != null) {
+                    animationPanoEnCours.stop();
+                    animationPanoEnCours = null;
+                }
+                break;
+            case "photo":
+                if (animationPhotoEnCours != null) {
+                    animationPhotoEnCours.stop();
+                    animationPhotoEnCours = null;
+                }
+                break;
+            case "html":
+                if (animationHTMLEnCours != null) {
+                    animationHTMLEnCours.stop();
+                    animationHTMLEnCours = null;
+                }
+                break;
+        }
+        
+        // Réinitialiser les transformations
+        imageView.setTranslateX(0);
+        imageView.setTranslateY(0);
+        imageView.setRotate(0);
+        imageView.setScaleX(1);
+        imageView.setScaleY(1);
+        imageView.setOpacity(1);
+        
+        if (animationType == null || animationType.equals("none")) {
+            return;
+        }
+        
+        javafx.animation.Animation nouvelleAnimation = null;
+        
+        switch (animationType) {
+            case "pulse":
+                ScaleTransition stPulse = new ScaleTransition(Duration.millis(1000), imageView);
+                stPulse.setFromX(1.0);
+                stPulse.setFromY(1.0);
+                stPulse.setToX(1.3);
+                stPulse.setToY(1.3);
+                stPulse.setAutoReverse(true);
+                stPulse.setCycleCount(Timeline.INDEFINITE);
+                nouvelleAnimation = stPulse;
+                break;
+                
+            case "rotation":
+                RotateTransition rtRotation = new RotateTransition(Duration.millis(2000), imageView);
+                rtRotation.setByAngle(360);
+                rtRotation.setCycleCount(Timeline.INDEFINITE);
+                nouvelleAnimation = rtRotation;
+                break;
+                
+            case "bounce":
+                TranslateTransition ttBounce = new TranslateTransition(Duration.millis(1000), imageView);
+                ttBounce.setFromY(0);
+                ttBounce.setToY(-20);
+                ttBounce.setAutoReverse(true);
+                ttBounce.setCycleCount(Timeline.INDEFINITE);
+                ttBounce.setInterpolator(Interpolator.EASE_OUT);
+                nouvelleAnimation = ttBounce;
+                break;
+                
+            case "swing":
+                RotateTransition rtSwing = new RotateTransition(Duration.millis(1000), imageView);
+                rtSwing.setFromAngle(-15);
+                rtSwing.setToAngle(15);
+                rtSwing.setAutoReverse(true);
+                rtSwing.setCycleCount(Timeline.INDEFINITE);
+                nouvelleAnimation = rtSwing;
+                break;
+                
+            case "glow":
+                FadeTransition ftGlow = new FadeTransition(Duration.millis(1000), imageView);
+                ftGlow.setFromValue(1.0);
+                ftGlow.setToValue(0.4);
+                ftGlow.setAutoReverse(true);
+                ftGlow.setCycleCount(Timeline.INDEFINITE);
+                nouvelleAnimation = ftGlow;
+                break;
+                
+            case "heartbeat":
+                ScaleTransition st1 = new ScaleTransition(Duration.millis(200), imageView);
+                st1.setToX(1.3);
+                st1.setToY(1.3);
+                ScaleTransition st2 = new ScaleTransition(Duration.millis(200), imageView);
+                st2.setToX(1.0);
+                st2.setToY(1.0);
+                SequentialTransition seqHeartbeat = new SequentialTransition(st1, st2, st1, st2);
+                seqHeartbeat.setCycleCount(Timeline.INDEFINITE);
+                nouvelleAnimation = seqHeartbeat;
+                break;
+                
+            case "shake":
+                TranslateTransition tt1 = new TranslateTransition(Duration.millis(100), imageView);
+                tt1.setToX(-10);
+                TranslateTransition tt2 = new TranslateTransition(Duration.millis(100), imageView);
+                tt2.setToX(10);
+                TranslateTransition tt3 = new TranslateTransition(Duration.millis(100), imageView);
+                tt3.setToX(0);
+                SequentialTransition seqShake = new SequentialTransition(tt1, tt2, tt1, tt2, tt3);
+                seqShake.setCycleCount(Timeline.INDEFINITE);
+                nouvelleAnimation = seqShake;
+                break;
+                
+            case "flip":
+                RotateTransition rtFlip = new RotateTransition(Duration.millis(1000), imageView);
+                rtFlip.setAxis(javafx.geometry.Point3D.ZERO.add(0, 1, 0));
+                rtFlip.setByAngle(360);
+                rtFlip.setCycleCount(Timeline.INDEFINITE);
+                nouvelleAnimation = rtFlip;
+                break;
+                
+            case "wobble":
+                RotateTransition rtWobble1 = new RotateTransition(Duration.millis(100), imageView);
+                rtWobble1.setToAngle(-5);
+                RotateTransition rtWobble2 = new RotateTransition(Duration.millis(100), imageView);
+                rtWobble2.setToAngle(5);
+                RotateTransition rtWobble3 = new RotateTransition(Duration.millis(100), imageView);
+                rtWobble3.setToAngle(0);
+                SequentialTransition seqWobble = new SequentialTransition(rtWobble1, rtWobble2, rtWobble1, rtWobble2, rtWobble3);
+                seqWobble.setCycleCount(Timeline.INDEFINITE);
+                nouvelleAnimation = seqWobble;
+                break;
+                
+            case "tada":
+                ScaleTransition stTada = new ScaleTransition(Duration.millis(1000), imageView);
+                stTada.setToX(1.2);
+                stTada.setToY(1.2);
+                stTada.setAutoReverse(true);
+                RotateTransition rtTada = new RotateTransition(Duration.millis(1000), imageView);
+                rtTada.setFromAngle(-3);
+                rtTada.setToAngle(3);
+                rtTada.setAutoReverse(true);
+                rtTada.setCycleCount(6);
+                ParallelTransition parTada = new ParallelTransition(stTada, rtTada);
+                parTada.setCycleCount(Timeline.INDEFINITE);
+                nouvelleAnimation = parTada;
+                break;
+                
+            case "flash":
+                FadeTransition ftFlash = new FadeTransition(Duration.millis(500), imageView);
+                ftFlash.setFromValue(1.0);
+                ftFlash.setToValue(0.0);
+                ftFlash.setAutoReverse(true);
+                ftFlash.setCycleCount(Timeline.INDEFINITE);
+                nouvelleAnimation = ftFlash;
+                break;
+                
+            case "rubber":
+                ScaleTransition stRubberX = new ScaleTransition(Duration.millis(1000), imageView);
+                stRubberX.setFromX(1.0);
+                stRubberX.setToX(1.25);
+                stRubberX.setAutoReverse(true);
+                ScaleTransition stRubberY = new ScaleTransition(Duration.millis(1000), imageView);
+                stRubberY.setFromY(1.0);
+                stRubberY.setToY(0.75);
+                stRubberY.setAutoReverse(true);
+                ParallelTransition parRubber = new ParallelTransition(stRubberX, stRubberY);
+                parRubber.setCycleCount(Timeline.INDEFINITE);
+                nouvelleAnimation = parRubber;
+                break;
+                
+            case "jello":
+                RotateTransition rtJello = new RotateTransition(Duration.millis(1000), imageView);
+                rtJello.setFromAngle(-12.5);
+                rtJello.setToAngle(12.5);
+                rtJello.setAutoReverse(true);
+                rtJello.setCycleCount(Timeline.INDEFINITE);
+                nouvelleAnimation = rtJello;
+                break;
+                
+            case "neon":
+                FadeTransition ftNeon = new FadeTransition(Duration.millis(500), imageView);
+                ftNeon.setFromValue(1.0);
+                ftNeon.setToValue(0.2);
+                ftNeon.setAutoReverse(true);
+                ftNeon.setCycleCount(Timeline.INDEFINITE);
+                nouvelleAnimation = ftNeon;
+                break;
+                
+            case "float":
+                TranslateTransition ttFloat = new TranslateTransition(Duration.millis(2000), imageView);
+                ttFloat.setFromY(0);
+                ttFloat.setToY(-15);
+                ttFloat.setAutoReverse(true);
+                ttFloat.setCycleCount(Timeline.INDEFINITE);
+                ttFloat.setInterpolator(Interpolator.EASE_BOTH);
+                nouvelleAnimation = ttFloat;
+                break;
+                
+            case "desaturation":
+                // La désaturation n'est pas facilement réalisable en JavaFX sans effet CSS
+                // On fait un effet de fade pour simuler
+                FadeTransition ftDesat = new FadeTransition(Duration.millis(1000), imageView);
+                ftDesat.setFromValue(1.0);
+                ftDesat.setToValue(0.5);
+                ftDesat.setAutoReverse(true);
+                ftDesat.setCycleCount(Timeline.INDEFINITE);
+                nouvelleAnimation = ftDesat;
+                break;
+        }
+        
+        // Démarrer la nouvelle animation et la stocker
+        if (nouvelleAnimation != null) {
+            switch (hotspotType) {
+                case "pano":
+                    animationPanoEnCours = nouvelleAnimation;
+                    break;
+                case "photo":
+                    animationPhotoEnCours = nouvelleAnimation;
+                    break;
+                case "html":
+                    animationHTMLEnCours = nouvelleAnimation;
+                    break;
+            }
+            nouvelleAnimation.play();
         }
     }
 
@@ -2659,22 +2923,22 @@ public class GestionnaireInterfaceController {
         hbbarreBoutons.setVisible(getStrVisibiliteBarreClassique().equals("oui"));
         ivHotSpotPanoramique.setFitWidth(30);
         ivHotSpotPanoramique.setPreserveRatio(true);
-        ivHotSpotPanoramique.setLayoutX(510);
-        ivHotSpotPanoramique.setLayoutY(310);
+        ivHotSpotPanoramique.setLayoutX(700);
+        ivHotSpotPanoramique.setLayoutY(260);
         Tooltip tltpHSPano = new Tooltip("Hotspot panoramique");
         tltpHSPano.setStyle(getStrTooltipStyle());
         Tooltip.install(ivHotSpotPanoramique, tltpHSPano);
         ivHotSpotImage.setFitWidth(30);
         ivHotSpotImage.setPreserveRatio(true);
-        ivHotSpotImage.setLayoutX(620);
-        ivHotSpotImage.setLayoutY(310);
+        ivHotSpotImage.setLayoutX(820);
+        ivHotSpotImage.setLayoutY(260);
         Tooltip tltpHSImage = new Tooltip("Hotspot Photo");
         tltpHSImage.setStyle(getStrTooltipStyle());
         Tooltip.install(ivHotSpotImage, tltpHSImage);
         ivHotSpotHTML.setFitWidth(30);
         ivHotSpotHTML.setPreserveRatio(true);
-        ivHotSpotHTML.setLayoutX(730);
-        ivHotSpotHTML.setLayoutY(310);
+        ivHotSpotHTML.setLayoutX(940);
+        ivHotSpotHTML.setLayoutY(260);
         Tooltip tltpHSHTML = new Tooltip("Hotspot HTML");
         tltpHSHTML.setStyle(getStrTooltipStyle());
         Tooltip.install(ivHotSpotHTML, tltpHSHTML);
@@ -5756,7 +6020,7 @@ public class GestionnaireInterfaceController {
         AnchorPane apHotSpots1 = new AnchorPane();
         AnchorPane apHS1 = new AnchorPane(new PaneOutil(true, rbLocalisation.getString("interface.HSPanoramique"), apHotSpots1, largeur).getApPaneOutil());
 
-        apHotSpots1.setPrefHeight(35.d * ((int) (iNombreHotSpots / 9 + 1)) + 140);
+        apHotSpots1.setPrefHeight(35.d * ((int) (iNombreHotSpots / 9 + 1)) + 200);
         apHotSpots1.setLayoutX(10);
         apHotSpots1.setLayoutY(40);
         //apHotSpots.setStyle("-fx-background-color : #fff;-fx-font-variant: small-caps;");
@@ -5812,9 +6076,53 @@ public class GestionnaireInterfaceController {
         slTailleHotspotsPanoramique = new Slider(15, 100, getiTailleHotspotsPanoramique());
         slTailleHotspotsPanoramique.setLayoutX(200);
         slTailleHotspotsPanoramique.setLayoutY(yHS + 90);
+        
+        // ComboBox pour le type d'animation des nouveaux hotspots panoramiques
+        Label lblTypeAnimationPano = new Label(rbLocalisation.getString("main.typeAnimation"));
+        lblTypeAnimationPano.setLayoutX(20);
+        lblTypeAnimationPano.setLayoutY(yHS + 130);
+        
+        cbTypeAnimationPanoDefaut = new ComboBox<>();
+        cbTypeAnimationPanoDefaut.setLayoutX(20);
+        cbTypeAnimationPanoDefaut.setLayoutY(yHS + 155);
+        cbTypeAnimationPanoDefaut.setPrefWidth(160);
+        cbTypeAnimationPanoDefaut.getItems().addAll(
+            "none", "pulse", "rotation", "desaturation", "bounce", "swing", "glow",
+            "heartbeat", "shake", "flip", "wobble", "tada", "flash", "rubber", "jello", "neon", "float"
+        );
+        cbTypeAnimationPanoDefaut.setValue(strTypeAnimationPanoDefaut);
+        cbTypeAnimationPanoDefaut.valueProperty().addListener((obs, oldVal, newVal) -> {
+            strTypeAnimationPanoDefaut = newVal;
+            previsualiserAnimation(ivHotSpotPanoramique, newVal, "pano");
+        });
+        
+        cbHotspotsPanoAgrandisDefaut = new CheckBox(rbLocalisation.getString("main.agrandissementSurvol"));
+        cbHotspotsPanoAgrandisDefaut.setLayoutX(20);
+        cbHotspotsPanoAgrandisDefaut.setLayoutY(yHS + 190);
+        cbHotspotsPanoAgrandisDefaut.setSelected(bHotspotsPanoAgrandisDefaut);
+        
+        // Bouton pour appliquer à tous les hotspots panoramiques existants
+        Button btnAppliquerTousPano = new Button(rbLocalisation.getString("main.appliquerATous"));
+        btnAppliquerTousPano.setLayoutX(200);
+        btnAppliquerTousPano.setLayoutY(yHS + 160);
+        btnAppliquerTousPano.setOnAction((e) -> {
+            if (getiNombrePanoramiques() != 0) {
+                for (int iPano = 0; iPano < getiNombrePanoramiques(); iPano++) {
+                    for (int iHS = 0; iHS < getPanoramiquesProjet()[iPano].getNombreHotspots(); iHS++) {
+                        getPanoramiquesProjet()[iPano].getHotspot(iHS).setStrTypeAnimation(strTypeAnimationPanoDefaut);
+                        getPanoramiquesProjet()[iPano].getHotspot(iHS).setAgranditSurvol(cbHotspotsPanoAgrandisDefaut.isSelected());
+                    }
+                }
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+                rafraichitAffichageHotSpots();
+            }
+        });
+        
         apHotSpots1.getChildren().addAll(
                 lblCouleurHotspot, cpCouleurHotspotsPanoramique,
-                lblTailleHotspots, slTailleHotspotsPanoramique
+                lblTailleHotspots, slTailleHotspotsPanoramique,
+                lblTypeAnimationPano, cbTypeAnimationPanoDefaut, cbHotspotsPanoAgrandisDefaut, btnAppliquerTousPano
         );
         /*
          * *************************************************
@@ -5825,7 +6133,7 @@ public class GestionnaireInterfaceController {
         AnchorPane apHotSpots2 = new AnchorPane();
         AnchorPane apHS2 = new AnchorPane(new PaneOutil(true, rbLocalisation.getString("interface.HSPhoto"), apHotSpots2, largeur).getApPaneOutil());
 
-        apHotSpots2.setPrefHeight(35.d * (int) (iNombreHotSpotsPhoto / 9 + 1) + 120);
+        apHotSpots2.setPrefHeight(35.d * (int) (iNombreHotSpotsPhoto / 9 + 1) + 200);
         apHotSpots2.setLayoutX(10);
         apHotSpots2.setLayoutY(40);
         //apHotSpots.setStyle("-fx-background-color : #fff;-fx-font-variant: small-caps;");
@@ -5875,9 +6183,53 @@ public class GestionnaireInterfaceController {
         slTailleHotspotsImage = new Slider(15, 100, getiTailleHotspotsImage());
         slTailleHotspotsImage.setLayoutX(200);
         slTailleHotspotsImage.setLayoutY(yHS + 90);
+        
+        // ComboBox pour le type d'animation des nouveaux hotspots photos
+        Label lblTypeAnimationPhoto = new Label(rbLocalisation.getString("main.typeAnimation"));
+        lblTypeAnimationPhoto.setLayoutX(20);
+        lblTypeAnimationPhoto.setLayoutY(yHS + 130);
+        
+        cbTypeAnimationPhotoDefaut = new ComboBox<>();
+        cbTypeAnimationPhotoDefaut.setLayoutX(20);
+        cbTypeAnimationPhotoDefaut.setLayoutY(yHS + 155);
+        cbTypeAnimationPhotoDefaut.setPrefWidth(160);
+        cbTypeAnimationPhotoDefaut.getItems().addAll(
+            "none", "pulse", "rotation", "desaturation", "bounce", "swing", "glow",
+            "heartbeat", "shake", "flip", "wobble", "tada", "flash", "rubber", "jello", "neon", "float"
+        );
+        cbTypeAnimationPhotoDefaut.setValue(strTypeAnimationPhotoDefaut);
+        cbTypeAnimationPhotoDefaut.valueProperty().addListener((obs, oldVal, newVal) -> {
+            strTypeAnimationPhotoDefaut = newVal;
+            previsualiserAnimation(ivHotSpotImage, newVal, "photo");
+        });
+        
+        cbHotspotsPhotoAgrandisDefaut = new CheckBox(rbLocalisation.getString("main.agrandissementSurvol"));
+        cbHotspotsPhotoAgrandisDefaut.setLayoutX(20);
+        cbHotspotsPhotoAgrandisDefaut.setLayoutY(yHS + 190);
+        cbHotspotsPhotoAgrandisDefaut.setSelected(bHotspotsPhotoAgrandisDefaut);
+        
+        // Bouton pour appliquer à tous les hotspots photos existants
+        Button btnAppliquerTousPhoto = new Button(rbLocalisation.getString("main.appliquerATous"));
+        btnAppliquerTousPhoto.setLayoutX(200);
+        btnAppliquerTousPhoto.setLayoutY(yHS + 160);
+        btnAppliquerTousPhoto.setOnAction((e) -> {
+            if (getiNombrePanoramiques() != 0) {
+                for (int iPano = 0; iPano < getiNombrePanoramiques(); iPano++) {
+                    for (int iHS = 0; iHS < getPanoramiquesProjet()[iPano].getNombreHotspotImage(); iHS++) {
+                        getPanoramiquesProjet()[iPano].getHotspotImage(iHS).setStrTypeAnimation(strTypeAnimationPhotoDefaut);
+                        getPanoramiquesProjet()[iPano].getHotspotImage(iHS).setAgranditSurvol(cbHotspotsPhotoAgrandisDefaut.isSelected());
+                    }
+                }
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+                rafraichitAffichageHotSpots();
+            }
+        });
+        
         apHotSpots2.getChildren().addAll(
                 lblCouleurHotspotPhoto, cpCouleurHotspotsPhoto,
-                lblTailleHotspotsImage, slTailleHotspotsImage
+                lblTailleHotspotsImage, slTailleHotspotsImage,
+                lblTypeAnimationPhoto, cbTypeAnimationPhotoDefaut, cbHotspotsPhotoAgrandisDefaut, btnAppliquerTousPhoto
         );
         /*
          * *************************************************
@@ -5888,7 +6240,7 @@ public class GestionnaireInterfaceController {
         AnchorPane apHotSpots3 = new AnchorPane();
         AnchorPane apHS3 = new AnchorPane(new PaneOutil(true, rbLocalisation.getString("interface.HSHTML"), apHotSpots3, largeur).getApPaneOutil());
 
-        apHotSpots3.setPrefHeight(35.d * ((int) (iNombreHotSpotsHTML / 9 + 1)) + 140);
+        apHotSpots3.setPrefHeight(35.d * ((int) (iNombreHotSpotsHTML / 9 + 1)) + 200);
         apHotSpots3.setLayoutX(10);
         apHotSpots3.setLayoutY(40);
         //apHotSpots.setStyle("-fx-background-color : #fff;-fx-font-variant: small-caps;");
@@ -5938,9 +6290,53 @@ public class GestionnaireInterfaceController {
         slTailleHotspotsHTML = new Slider(15, 100, getiTailleHotspotsHTML());
         slTailleHotspotsHTML.setLayoutX(200);
         slTailleHotspotsHTML.setLayoutY(yHS + 90);
+        
+        // ComboBox pour le type d'animation des nouveaux hotspots HTML
+        Label lblTypeAnimationHTML = new Label(rbLocalisation.getString("main.typeAnimation"));
+        lblTypeAnimationHTML.setLayoutX(20);
+        lblTypeAnimationHTML.setLayoutY(yHS + 130);
+        
+        cbTypeAnimationHTMLDefaut = new ComboBox<>();
+        cbTypeAnimationHTMLDefaut.setLayoutX(20);
+        cbTypeAnimationHTMLDefaut.setLayoutY(yHS + 155);
+        cbTypeAnimationHTMLDefaut.setPrefWidth(160);
+        cbTypeAnimationHTMLDefaut.getItems().addAll(
+            "none", "pulse", "rotation", "desaturation", "bounce", "swing", "glow",
+            "heartbeat", "shake", "flip", "wobble", "tada", "flash", "rubber", "jello", "neon", "float"
+        );
+        cbTypeAnimationHTMLDefaut.setValue(strTypeAnimationHTMLDefaut);
+        cbTypeAnimationHTMLDefaut.valueProperty().addListener((obs, oldVal, newVal) -> {
+            strTypeAnimationHTMLDefaut = newVal;
+            previsualiserAnimation(ivHotSpotHTML, newVal, "html");
+        });
+        
+        cbHotspotsHTMLAgrandisDefaut = new CheckBox(rbLocalisation.getString("main.agrandissementSurvol"));
+        cbHotspotsHTMLAgrandisDefaut.setLayoutX(20);
+        cbHotspotsHTMLAgrandisDefaut.setLayoutY(yHS + 190);
+        cbHotspotsHTMLAgrandisDefaut.setSelected(bHotspotsHTMLAgrandisDefaut);
+        
+        // Bouton pour appliquer à tous les hotspots HTML existants
+        Button btnAppliquerTousHTML = new Button(rbLocalisation.getString("main.appliquerATous"));
+        btnAppliquerTousHTML.setLayoutX(200);
+        btnAppliquerTousHTML.setLayoutY(yHS + 160);
+        btnAppliquerTousHTML.setOnAction((e) -> {
+            if (getiNombrePanoramiques() != 0) {
+                for (int iPano = 0; iPano < getiNombrePanoramiques(); iPano++) {
+                    for (int iHS = 0; iHS < getPanoramiquesProjet()[iPano].getNombreHotspotHTML(); iHS++) {
+                        getPanoramiquesProjet()[iPano].getHotspotHTML(iHS).setStrTypeAnimation(strTypeAnimationHTMLDefaut);
+                        getPanoramiquesProjet()[iPano].getHotspotHTML(iHS).setAgranditSurvol(cbHotspotsHTMLAgrandisDefaut.isSelected());
+                    }
+                }
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+                rafraichitAffichageHotSpots();
+            }
+        });
+        
         apHotSpots3.getChildren().addAll(
                 lblCouleurHotspotHTML, cpCouleurHotspotsHTML,
-                lblTailleHotspotsHTML, slTailleHotspotsHTML
+                lblTailleHotspotsHTML, slTailleHotspotsHTML,
+                lblTypeAnimationHTML, cbTypeAnimationHTMLDefaut, cbHotspotsHTMLAgrandisDefaut, btnAppliquerTousHTML
         );
 
 
@@ -7792,6 +8188,36 @@ public class GestionnaireInterfaceController {
             ivHotSpotImage.setFitWidth(iTailleHotspotsImage);
             ivHotSpotHTML.setFitWidth(iTailleHotspotsHTML);
 
+        });
+        
+        // Listeners pour les options par défaut des hotspots
+        cbHotspotsPanoAgrandisDefaut.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+            }
+            setbHotspotsPanoAgrandisDefaut(new_val);
+        });
+        
+        cbHotspotsPhotoAgrandisDefaut.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+            }
+            setbHotspotsPhotoAgrandisDefaut(new_val);
+        });
+        
+        cbHotspotsHTMLAgrandisDefaut.selectedProperty().addListener((ov, old_val, new_val) -> {
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+            }
+            setbHotspotsHTMLAgrandisDefaut(new_val);
+        });
+        
+        slTailleHotspotsPanoramique.valueProperty().addListener((ov, old_val, new_val) -> {
+            setbDejaSauve(false);
+            getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
         });
 
         /*
@@ -12413,6 +12839,132 @@ public class GestionnaireInterfaceController {
      */
     public void setiTailleHotspotsHTML(int iTailleHotspotsHTML) {
         this.iTailleHotspotsHTML = iTailleHotspotsHTML;
+    }
+
+    /**
+     * @return the bHotspotsPanoAnimesDefaut
+     */
+    public boolean isbHotspotsPanoAnimesDefaut() {
+        return bHotspotsPanoAnimesDefaut;
+    }
+
+    /**
+     * @param bHotspotsPanoAnimesDefaut the bHotspotsPanoAnimesDefaut to set
+     */
+    public void setbHotspotsPanoAnimesDefaut(boolean bHotspotsPanoAnimesDefaut) {
+        this.bHotspotsPanoAnimesDefaut = bHotspotsPanoAnimesDefaut;
+    }
+
+    /**
+     * @return the bHotspotsPhotoAnimesDefaut
+     */
+    public boolean isbHotspotsPhotoAnimesDefaut() {
+        return bHotspotsPhotoAnimesDefaut;
+    }
+
+    /**
+     * @param bHotspotsPhotoAnimesDefaut the bHotspotsPhotoAnimesDefaut to set
+     */
+    public void setbHotspotsPhotoAnimesDefaut(boolean bHotspotsPhotoAnimesDefaut) {
+        this.bHotspotsPhotoAnimesDefaut = bHotspotsPhotoAnimesDefaut;
+    }
+
+    /**
+     * @return the bHotspotsHTMLAnimesDefaut
+     */
+    public boolean isbHotspotsHTMLAnimesDefaut() {
+        return bHotspotsHTMLAnimesDefaut;
+    }
+
+    /**
+     * @param bHotspotsHTMLAnimesDefaut the bHotspotsHTMLAnimesDefaut to set
+     */
+    public void setbHotspotsHTMLAnimesDefaut(boolean bHotspotsHTMLAnimesDefaut) {
+        this.bHotspotsHTMLAnimesDefaut = bHotspotsHTMLAnimesDefaut;
+    }
+
+    /**
+     * @return le type d'animation par défaut pour les hotspots panoramiques
+     */
+    public String getStrTypeAnimationPanoDefaut() {
+        return strTypeAnimationPanoDefaut;
+    }
+
+    /**
+     * @param strTypeAnimationPanoDefaut le type d'animation par défaut à définir
+     */
+    public void setStrTypeAnimationPanoDefaut(String strTypeAnimationPanoDefaut) {
+        this.strTypeAnimationPanoDefaut = strTypeAnimationPanoDefaut;
+    }
+
+    /**
+     * @return le type d'animation par défaut pour les hotspots photo
+     */
+    public String getStrTypeAnimationPhotoDefaut() {
+        return strTypeAnimationPhotoDefaut;
+    }
+
+    /**
+     * @param strTypeAnimationPhotoDefaut le type d'animation par défaut à définir
+     */
+    public void setStrTypeAnimationPhotoDefaut(String strTypeAnimationPhotoDefaut) {
+        this.strTypeAnimationPhotoDefaut = strTypeAnimationPhotoDefaut;
+    }
+
+    /**
+     * @return le type d'animation par défaut pour les hotspots HTML
+     */
+    public String getStrTypeAnimationHTMLDefaut() {
+        return strTypeAnimationHTMLDefaut;
+    }
+
+    /**
+     * @param strTypeAnimationHTMLDefaut le type d'animation par défaut à définir
+     */
+    public void setStrTypeAnimationHTMLDefaut(String strTypeAnimationHTMLDefaut) {
+        this.strTypeAnimationHTMLDefaut = strTypeAnimationHTMLDefaut;
+    }
+
+    /**
+     * @return the bHotspotsPanoAgrandisDefaut
+     */
+    public boolean isbHotspotsPanoAgrandisDefaut() {
+        return bHotspotsPanoAgrandisDefaut;
+    }
+
+    /**
+     * @param bHotspotsPanoAgrandisDefaut the bHotspotsPanoAgrandisDefaut to set
+     */
+    public void setbHotspotsPanoAgrandisDefaut(boolean bHotspotsPanoAgrandisDefaut) {
+        this.bHotspotsPanoAgrandisDefaut = bHotspotsPanoAgrandisDefaut;
+    }
+
+    /**
+     * @return the bHotspotsPhotoAgrandisDefaut
+     */
+    public boolean isbHotspotsPhotoAgrandisDefaut() {
+        return bHotspotsPhotoAgrandisDefaut;
+    }
+
+    /**
+     * @param bHotspotsPhotoAgrandisDefaut the bHotspotsPhotoAgrandisDefaut to set
+     */
+    public void setbHotspotsPhotoAgrandisDefaut(boolean bHotspotsPhotoAgrandisDefaut) {
+        this.bHotspotsPhotoAgrandisDefaut = bHotspotsPhotoAgrandisDefaut;
+    }
+
+    /**
+     * @return the bHotspotsHTMLAgrandisDefaut
+     */
+    public boolean isbHotspotsHTMLAgrandisDefaut() {
+        return bHotspotsHTMLAgrandisDefaut;
+    }
+
+    /**
+     * @param bHotspotsHTMLAgrandisDefaut the bHotspotsHTMLAgrandisDefaut to set
+     */
+    public void setbHotspotsHTMLAgrandisDefaut(boolean bHotspotsHTMLAgrandisDefaut) {
+        this.bHotspotsHTMLAgrandisDefaut = bHotspotsHTMLAgrandisDefaut;
     }
 
     /**

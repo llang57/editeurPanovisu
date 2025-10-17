@@ -23,11 +23,17 @@ PanoVisu combines power, simplicity, and freedom to offer a complete and free so
 
 ---
 
-## 🔧 Version 3.2.0 - New Tools
+## 🔧 Version 3.2.0 - Advanced Customization and Smooth Transitions
 
 **What's new?**
 
 ### ✨ New Features
+- **🎨 Individual Hotspot Customization**: 
+  - **16 different animations**: bounce, pulse, flash, shake, swing, tada, wobble, jello, heartbeat, rubberBand, rotate, flip, zoomIn, zoomOut, fadeIn, slideIn
+  - **Custom colors**: Choose a unique color for each hotspot with the HSB color picker
+  - **Hover magnification**: Configurable zoom effect for each hotspot
+  - Complete configuration from the graphical interface with real-time preview
+- **🌊 WebGL Crossfade**: Smooth and elegant transitions between panoramas with crossfade effect (2 seconds) using WebGL and shaders for a professional visual experience
 - **📦 ZIP Export**: Export your tours directly as ZIP archives for simplified sharing
 - **🖼️ Image Resizing**: New tool for resizing and compressing panoramic images
 - **📐 2:1 Ratio Conversion**: Improved icon positioning in the user interface
@@ -81,7 +87,10 @@ If you host tours on Linux servers, note that **v3.1.0** fixed a critical case-s
 - **Partial** and **cylindrical** panoramas
 
 ### 🎨 Interactive Elements
-- **Navigation hotspots** - Links between panoramas
+- **Navigation hotspots** - Links between panoramas with crossfade transitions
+  - 16 different animations (bounce, pulse, flash, shake, swing, tada, etc.)
+  - Customizable colors per hotspot (HSB)
+  - Configurable hover magnification
 - **Image/photo hotspots** - Integrated photo galleries
 - **HTML hotspots** - Rich content (videos, texts, external links)
 - **Interactive maps** - 2D map with points of interest and radar

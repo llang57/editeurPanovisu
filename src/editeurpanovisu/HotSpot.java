@@ -19,6 +19,9 @@ public class HotSpot {
     private String strFichierXML = "";
     private String strInfo = "";
     private boolean bAnime;
+    private String strTypeAnimation = "none"; // Type d'animation: none, pulse, rotation, etc.
+    private boolean bAgranditSurvol = false;
+    private String strCouleurPerso = ""; // Couleur personnalisée pour ce hotspot (vide = utiliser la couleur par défaut)
     private int iNumeroPano = -1;
     private double regardX=-1000;
     private double regardY=-1000;
@@ -120,6 +123,42 @@ public class HotSpot {
      */
     public void setAnime(boolean bAnime) {
         this.bAnime = bAnime;
+        // Compatibilité: si on active l'animation sans type spécifique, utiliser "pulse" par défaut
+        if (bAnime && "none".equals(strTypeAnimation)) {
+            strTypeAnimation = "pulse";
+        } else if (!bAnime) {
+            strTypeAnimation = "none";
+        }
+    }
+
+    /**
+     * @return the typeAnimation
+     */
+    public String getStrTypeAnimation() {
+        return strTypeAnimation;
+    }
+
+    /**
+     * @param strTypeAnimation the typeAnimation to set
+     */
+    public void setStrTypeAnimation(String strTypeAnimation) {
+        this.strTypeAnimation = strTypeAnimation;
+        // Synchroniser avec bAnime
+        this.bAnime = !("none".equals(strTypeAnimation) || strTypeAnimation == null || strTypeAnimation.isEmpty());
+    }
+
+    /**
+     * @return the agranditSurvol
+     */
+    public boolean isAgranditSurvol() {
+        return bAgranditSurvol;
+    }
+
+    /**
+     * @param bAgranditSurvol the agranditSurvol to set
+     */
+    public void setAgranditSurvol(boolean bAgranditSurvol) {
+        this.bAgranditSurvol = bAgranditSurvol;
     }
 
     /**
@@ -190,6 +229,20 @@ public class HotSpot {
      */
     public void setImgVueHs(Image imgVueHs) {
         this.imgVueHs = imgVueHs;
+    }
+
+    /**
+     * @return the couleurPerso
+     */
+    public String getStrCouleurPerso() {
+        return strCouleurPerso;
+    }
+
+    /**
+     * @param strCouleurPerso the couleurPerso to set (format: "hue;saturation;brightness" ou vide pour couleur par défaut)
+     */
+    public void setStrCouleurPerso(String strCouleurPerso) {
+        this.strCouleurPerso = strCouleurPerso;
     }
 
 }

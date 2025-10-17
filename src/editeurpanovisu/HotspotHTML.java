@@ -25,6 +25,10 @@ public class HotspotHTML {
     private double longitude, latitude;
     private String strInfo = "";
     private boolean bAnime = false;
+    private String strTypeAnimation = "none"; // Type d'animation: none, pulse, rotation, etc.
+    private boolean bAgranditSurvol = false;
+    private String strCouleurPerso = ""; // Couleur personnalisée pour ce hotspot (vide = utiliser la couleur par défaut)
+    private String strFichierImage = ""; // Nom du fichier d'icône personnalisée
     private String strURLExterieure = "";
     private boolean bLienExterieur = true;
     private double opaciteHTML = 1;
@@ -102,6 +106,44 @@ public class HotspotHTML {
      */
     public void setAnime(boolean anime) {
         this.bAnime = anime;
+        // Synchronisation avec strTypeAnimation
+        if (anime) {
+            if (strTypeAnimation.equals("none")) {
+                strTypeAnimation = "pulse"; // Animation par défaut
+            }
+        } else {
+            strTypeAnimation = "none";
+        }
+    }
+
+    /**
+     * @return le type d'animation
+     */
+    public String getStrTypeAnimation() {
+        return strTypeAnimation;
+    }
+
+    /**
+     * @param strTypeAnimation le type d'animation à définir
+     */
+    public void setStrTypeAnimation(String strTypeAnimation) {
+        this.strTypeAnimation = strTypeAnimation;
+        // Synchronisation avec bAnime
+        this.bAnime = !strTypeAnimation.equals("none");
+    }
+
+    /**
+     * @return the agranditSurvol
+     */
+    public boolean isAgranditSurvol() {
+        return bAgranditSurvol;
+    }
+
+    /**
+     * @param bAgranditSurvol the agranditSurvol to set
+     */
+    public void setAgranditSurvol(boolean bAgranditSurvol) {
+        this.bAgranditSurvol = bAgranditSurvol;
     }
 
     /**
@@ -272,5 +314,33 @@ public class HotspotHTML {
             }
         }
 
+    }
+
+    /**
+     * @return the couleurPerso
+     */
+    public String getStrCouleurPerso() {
+        return strCouleurPerso;
+    }
+
+    /**
+     * @param strCouleurPerso the couleurPerso to set (format: "hue;saturation;brightness" ou vide pour couleur par défaut)
+     */
+    public void setStrCouleurPerso(String strCouleurPerso) {
+        this.strCouleurPerso = strCouleurPerso;
+    }
+
+    /**
+     * @return the strFichierImage
+     */
+    public String getStrFichierImage() {
+        return strFichierImage;
+    }
+
+    /**
+     * @param strFichierImage the strFichierImage to set
+     */
+    public void setStrFichierImage(String strFichierImage) {
+        this.strFichierImage = strFichierImage;
     }
 }

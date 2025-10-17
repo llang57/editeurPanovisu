@@ -475,3 +475,337 @@ and open the template in the editor.
     opacity: 0.6;
    
 }
+
+/* ============================================
+   Animations des hotspots
+   ============================================ */
+
+/* Animation pulse - effet de pulsation */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.6;
+    }
+}
+
+.hotspot-anime-pulse {
+    animation: pulse 1s ease-in-out infinite;
+    transform-origin: center center;
+}
+
+/* Animation rotation - rotation douce */
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.hotspot-anime-rotation {
+    animation: rotation 4s linear infinite;
+    transform-origin: center center;
+}
+
+/* Animation désaturation - changement de couleur */
+@keyframes desaturation {
+    0%, 100% {
+        filter: grayscale(0%) brightness(1);
+    }
+    50% {
+        filter: grayscale(100%) brightness(1.2);
+    }
+}
+
+.hotspot-anime-desaturation {
+    animation: desaturation 2s ease-in-out infinite;
+}
+
+/* Animation bounce - rebond */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+    }
+    25% {
+        transform: translateY(-8px) scale(1.05);
+    }
+    50% {
+        transform: translateY(0) scale(1);
+    }
+}
+
+.hotspot-anime-bounce {
+    animation: bounce 1.5s ease-in-out infinite;
+    transform-origin: center center;
+}
+
+/* Animation swing - balancement */
+@keyframes swing {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(15deg);
+    }
+    75% {
+        transform: rotate(-15deg);
+    }
+}
+
+.hotspot-anime-swing {
+    animation: swing 2s ease-in-out infinite;
+    transform-origin: center center;
+}
+
+/* Animation glow - lueur pulsante */
+@keyframes glow {
+    0%, 100% {
+        filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
+    }
+    50% {
+        filter: drop-shadow(0 0 12px rgba(255, 255, 0, 0.9)) 
+                drop-shadow(0 0 20px rgba(255, 255, 0, 0.6));
+    }
+}
+
+.hotspot-anime-glow {
+    animation: glow 1.5s ease-in-out infinite;
+}
+
+/* Animation heartbeat - battement de coeur */
+@keyframes heartbeat {
+    0%, 40%, 80%, 100% {
+        transform: scale(1);
+    }
+    10%, 50% {
+        transform: scale(1.3);
+    }
+}
+
+.hotspot-anime-heartbeat {
+    animation: heartbeat 1.5s ease-in-out infinite;
+    transform-origin: center center;
+}
+
+/* Animation shake - tremblement */
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: translateX(-4px);
+    }
+    20%, 40%, 60%, 80% {
+        transform: translateX(4px);
+    }
+}
+
+.hotspot-anime-shake {
+    animation: shake 2s ease-in-out infinite;
+}
+
+/* Animation flip - rotation 3D */
+@keyframes flip {
+    0% {
+        transform: perspective(400px) rotateY(0);
+    }
+    100% {
+        transform: perspective(400px) rotateY(360deg);
+    }
+}
+
+.hotspot-anime-flip {
+    animation: flip 3s linear infinite;
+    transform-origin: center center;
+}
+
+/* Animation wobble - oscillation */
+@keyframes wobble {
+    0%, 100% {
+        transform: translateX(0) rotate(0deg);
+    }
+    15% {
+        transform: translateX(-8px) rotate(-5deg);
+    }
+    30% {
+        transform: translateX(6px) rotate(3deg);
+    }
+    45% {
+        transform: translateX(-6px) rotate(-3deg);
+    }
+    60% {
+        transform: translateX(4px) rotate(2deg);
+    }
+    75% {
+        transform: translateX(-2px) rotate(-1deg);
+    }
+}
+
+.hotspot-anime-wobble {
+    animation: wobble 2s ease-in-out infinite;
+    transform-origin: center center;
+}
+
+/* Animation tada - attention */
+@keyframes tada {
+    0%, 100% {
+        transform: scale(1) rotate(0deg);
+    }
+    10%, 20% {
+        transform: scale(0.9) rotate(-3deg);
+    }
+    30%, 50%, 70%, 90% {
+        transform: scale(1.1) rotate(3deg);
+    }
+    40%, 60%, 80% {
+        transform: scale(1.1) rotate(-3deg);
+    }
+}
+
+.hotspot-anime-tada {
+    animation: tada 2s ease-in-out infinite;
+    transform-origin: center center;
+}
+
+/* Animation flash - clignotement rapide */
+@keyframes flash {
+    0%, 50%, 100% {
+        opacity: 1;
+    }
+    25%, 75% {
+        opacity: 0.3;
+    }
+}
+
+.hotspot-anime-flash {
+    animation: flash 1.5s ease-in-out infinite;
+}
+
+/* Animation rubber - effet élastique */
+@keyframes rubber {
+    0%, 100% {
+        transform: scale(1);
+    }
+    30% {
+        transform: scaleX(1.25) scaleY(0.75);
+    }
+    40% {
+        transform: scaleX(0.75) scaleY(1.25);
+    }
+    50% {
+        transform: scaleX(1.15) scaleY(0.85);
+    }
+    65% {
+        transform: scaleX(0.95) scaleY(1.05);
+    }
+    75% {
+        transform: scaleX(1.05) scaleY(0.95);
+    }
+}
+
+.hotspot-anime-rubber {
+    animation: rubber 2s ease-in-out infinite;
+    transform-origin: center center;
+}
+
+/* Animation jello - effet gélatine */
+@keyframes jello {
+    0%, 100% {
+        transform: skewX(0deg) skewY(0deg);
+    }
+    30% {
+        transform: skewX(12.5deg) skewY(12.5deg);
+    }
+    40% {
+        transform: skewX(-6.25deg) skewY(-6.25deg);
+    }
+    50% {
+        transform: skewX(3.125deg) skewY(3.125deg);
+    }
+    65% {
+        transform: skewX(-1.5625deg) skewY(-1.5625deg);
+    }
+    75% {
+        transform: skewX(0.78125deg) skewY(0.78125deg);
+    }
+}
+
+.hotspot-anime-jello {
+    animation: jello 2s ease-in-out infinite;
+    transform-origin: center center;
+}
+
+/* Animation neon - néon clignotant */
+@keyframes neon {
+    0%, 100% {
+        filter: drop-shadow(0 0 5px rgba(255, 0, 255, 0.8))
+                drop-shadow(0 0 10px rgba(255, 0, 255, 0.6))
+                drop-shadow(0 0 15px rgba(255, 0, 255, 0.4));
+        opacity: 1;
+    }
+    50% {
+        filter: drop-shadow(0 0 2px rgba(255, 0, 255, 0.4));
+        opacity: 0.7;
+    }
+}
+
+.hotspot-anime-neon {
+    animation: neon 1.5s ease-in-out infinite;
+}
+
+/* Animation float - flottement doux */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.hotspot-anime-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Agrandissement au survol - 1.5x avec centre fixe */
+.hotspot-agrandit {
+    transition: transform 0.3s ease;
+    transform-origin: center center;
+}
+
+.hotspot-agrandit:hover {
+    transform: scale(1.5) !important;
+    z-index: 1000;
+}
+
+/* Combinaison animation + agrandissement au survol */
+.hotspot-anime-pulse.hotspot-agrandit:hover,
+.hotspot-anime-rotation.hotspot-agrandit:hover,
+.hotspot-anime-bounce.hotspot-agrandit:hover,
+.hotspot-anime-swing.hotspot-agrandit:hover,
+.hotspot-anime-heartbeat.hotspot-agrandit:hover,
+.hotspot-anime-shake.hotspot-agrandit:hover,
+.hotspot-anime-flip.hotspot-agrandit:hover,
+.hotspot-anime-wobble.hotspot-agrandit:hover,
+.hotspot-anime-tada.hotspot-agrandit:hover,
+.hotspot-anime-rubber.hotspot-agrandit:hover,
+.hotspot-anime-jello.hotspot-agrandit:hover,
+.hotspot-anime-float.hotspot-agrandit:hover {
+    animation: none;
+    transform: scale(1.5) !important;
+}
+
+/* Cas spécial pour les animations basées sur filter */
+.hotspot-anime-desaturation.hotspot-agrandit:hover,
+.hotspot-anime-glow.hotspot-agrandit:hover,
+.hotspot-anime-flash.hotspot-agrandit:hover,
+.hotspot-anime-neon.hotspot-agrandit:hover {
+    transform: scale(1.5);
+    z-index: 1000;
+}
+
