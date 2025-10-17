@@ -114,17 +114,20 @@ public class LocalHTTPServer {
             throw new IllegalStateException("Le répertoire racine n'est pas défini");
         }
         
-        // Trouver un port disponible
+        // Trouver un port disponible (essai jusqu'à 100 ports)
         int tentatives = 0;
-        while (tentatives < 10) {
+        int portOriginal = port;
+        while (tentatives < 100) {
             try {
                 server = HttpServer.create(new InetSocketAddress(port), 0);
                 break;
             } catch (IOException e) {
+                System.out.println("⚠️ Port " + port + " occupé, tentative port " + (port + 1));
                 port++;
                 tentatives++;
-                if (tentatives >= 10) {
-                    throw new IOException("Impossible de trouver un port disponible", e);
+                if (tentatives >= 100) {
+                    System.err.println("❌ Impossible de trouver un port disponible entre " + portOriginal + " et " + port);
+                    throw new IOException("Impossible de trouver un port disponible après " + tentatives + " tentatives", e);
                 }
             }
         }
@@ -148,6 +151,16 @@ public class LocalHTTPServer {
             isRunning = false;
             System.out.println("⏹️ Serveur HTTP arrêté");
         }
+    }
+    
+    /**
+     * Réinitialise le serveur (arrête et remet le port à 8080)
+     */
+    public void reset() {
+        stop();
+        port = 8080;
+        rootDirectory = null;
+        System.out.println("🔄 Serveur HTTP réinitialisé");
     }
     
     /**

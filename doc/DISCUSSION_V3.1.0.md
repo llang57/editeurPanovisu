@@ -2,7 +2,7 @@
 
 ## ⚠️ Mise à jour CRITIQUE - Action requise
 
-Chers utilisateurs de l'Éditeur Panovisu,
+Chers utilisateurs de editeurPanoVisu,
 
 Nous venons de publier la **version 3.1.0** qui corrige un bug critique affectant le fonctionnement des visites virtuelles sur les **serveurs Linux**.
 
