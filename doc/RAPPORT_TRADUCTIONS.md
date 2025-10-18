@@ -1,6 +1,6 @@
 # 📊 Rapport d'analyse des traductions PanoVisu
 
-**Date**: 17/10/2025 10:10:39
+**Date**: 18/10/2025 12:38:22
 
 **Répertoire**: `src\editeurpanovisu\i18n`
 
@@ -8,20 +8,20 @@
 
 ## 📈 Résumé
 
-- **Fichier de référence**: `PanoVisu.properties` (437 clés)
+- **Fichier de référence**: `PanoVisu.properties` (448 clés)
 - **Langues supportées**: 6
-- **Clés totales uniques**: 681
+- **Clés totales uniques**: 695
 
 ## 🎯 Couverture par langue
 
 | Fichier | Langue | Total clés | Manquantes | En trop | Couverture |
 |---------|--------|------------|------------|---------|------------|
-| `PanoVisu.properties` | English (Default) | 437 | 0 | 0 | 🟢 100.0% |
-| `PanoVisu_de.properties` | Deutsch (German) | 436 | 1 | 0 | 🟢 99.8% |
-| `PanoVisu_en.properties` | English (Explicit) | 436 | 1 | 0 | 🟢 99.8% |
-| `PanoVisu_es_ES.properties` | Español (Spanish) | 680 | 1 | 244 | 🟢 99.8% |
-| `PanoVisu_fr.properties` | Français | 436 | 1 | 0 | 🟢 99.8% |
-| `PanoVisu_pt.properties` | Português (Portuguese) | 436 | 1 | 0 | 🟢 99.8% |
+| `PanoVisu.properties` | English (Default) | 448 | 0 | 0 | 🟢 100.0% |
+| `PanoVisu_de.properties` | Deutsch (German) | 450 | 1 | 3 | 🟢 99.8% |
+| `PanoVisu_en.properties` | English (Explicit) | 450 | 1 | 3 | 🟢 99.8% |
+| `PanoVisu_es_ES.properties` | Español (Spanish) | 694 | 1 | 247 | 🟢 99.8% |
+| `PanoVisu_fr.properties` | Français | 450 | 1 | 3 | 🟢 99.8% |
+| `PanoVisu_pt.properties` | Português (Portuguese) | 450 | 1 | 3 | 🟢 99.8% |
 
 ---
 
@@ -30,10 +30,10 @@
 ### Deutsch (German) (`PanoVisu_de.properties`)
 
 **Statistiques**:
-- Total de clés: 436
+- Total de clés: 450
 - Couverture: 99.8%
 - Clés manquantes: 1
-- Clés en trop: 0
+- Clés en trop: 3
 
 #### ❌ Clés manquantes (1)
 
@@ -42,6 +42,18 @@
 
 ```
 ﻿#Mon, 14 Sep 2015 08=48:10 +0200
+```
+</details>
+
+#### ⚠️ Clés en trop (non présentes dans le fichier de référence) (3)
+
+<details>
+<summary>Cliquez pour afficher la liste</summary>
+
+```
+main.appliquerATous
+main.hotspotAnime
+main.utiliserCouleurDefaut
 ```
 </details>
 
@@ -50,10 +62,10 @@
 ### English (Explicit) (`PanoVisu_en.properties`)
 
 **Statistiques**:
-- Total de clés: 436
+- Total de clés: 450
 - Couverture: 99.8%
 - Clés manquantes: 1
-- Clés en trop: 0
+- Clés en trop: 3
 
 #### ❌ Clés manquantes (1)
 
@@ -62,6 +74,18 @@
 
 ```
 ﻿#Mon, 14 Sep 2015 08=48:10 +0200
+```
+</details>
+
+#### ⚠️ Clés en trop (non présentes dans le fichier de référence) (3)
+
+<details>
+<summary>Cliquez pour afficher la liste</summary>
+
+```
+main.appliquerATous
+main.hotspotAnime
+main.utiliserCouleurDefaut
 ```
 </details>
 
@@ -70,10 +94,10 @@
 ### Español (Spanish) (`PanoVisu_es_ES.properties`)
 
 **Statistiques**:
-- Total de clés: 680
+- Total de clés: 694
 - Couverture: 99.8%
 - Clés manquantes: 1
-- Clés en trop: 244
+- Clés en trop: 247
 
 #### ❌ Clés manquantes (1)
 
@@ -85,7 +109,7 @@
 ```
 </details>
 
-#### ⚠️ Clés en trop (non présentes dans le fichier de référence) (244)
+#### ⚠️ Clés en trop (non présentes dans le fichier de référence) (247)
 
 <details>
 <summary>Cliquez pour afficher la liste</summary>
@@ -177,6 +201,7 @@ main.actionRaf
 main.afficheInterface
 main.afficherPanoChoisi
 main.apercuPano
+main.appliquerATous
 main.chargerModele
 main.choixPolice
 main.choixTelechargement
@@ -206,6 +231,7 @@ main.formatImage
 main.geo
 main.gererHotspots
 main.gestionHS
+main.hotspotAnime
 main.hotspots
 main.image
 main.infosPanoramique
@@ -242,6 +268,7 @@ main.titre
 main.titres
 main.typeImageSource
 main.typeProj
+main.utiliserCouleurDefaut
 main.voirHS
 main.voirImage
 menu.affichageAide
@@ -343,10 +370,10 @@ visu.rotation
 ### Français (`PanoVisu_fr.properties`)
 
 **Statistiques**:
-- Total de clés: 436
+- Total de clés: 450
 - Couverture: 99.8%
 - Clés manquantes: 1
-- Clés en trop: 0
+- Clés en trop: 3
 
 #### ❌ Clés manquantes (1)
 
@@ -358,15 +385,27 @@ visu.rotation
 ```
 </details>
 
+#### ⚠️ Clés en trop (non présentes dans le fichier de référence) (3)
+
+<details>
+<summary>Cliquez pour afficher la liste</summary>
+
+```
+main.appliquerATous
+main.hotspotAnime
+main.utiliserCouleurDefaut
+```
+</details>
+
 ---
 
 ### Português (Portuguese) (`PanoVisu_pt.properties`)
 
 **Statistiques**:
-- Total de clés: 436
+- Total de clés: 450
 - Couverture: 99.8%
 - Clés manquantes: 1
-- Clés en trop: 0
+- Clés en trop: 3
 
 #### ❌ Clés manquantes (1)
 
@@ -375,6 +414,18 @@ visu.rotation
 
 ```
 ﻿#Mon, 14 Sep 2015 08=48:10 +0200
+```
+</details>
+
+#### ⚠️ Clés en trop (non présentes dans le fichier de référence) (3)
+
+<details>
+<summary>Cliquez pour afficher la liste</summary>
+
+```
+main.appliquerATous
+main.hotspotAnime
+main.utiliserCouleurDefaut
 ```
 </details>
 
@@ -464,15 +515,15 @@ Le fichier de référence contient **14** catégories:
 | Français | 🟢 168/168 (100.0%) |
 | Português (Portuguese) | 🟢 168/168 (100.0%) |
 
-### `main` (83 clés)
+### `main` (94 clés)
 
 | Langue | Couverture |
 |--------|------------|
-| Deutsch (German) | 🟢 83/83 (100.0%) |
-| English (Explicit) | 🟢 83/83 (100.0%) |
-| Español (Spanish) | 🟢 83/83 (100.0%) |
-| Français | 🟢 83/83 (100.0%) |
-| Português (Portuguese) | 🟢 83/83 (100.0%) |
+| Deutsch (German) | 🟢 94/94 (100.0%) |
+| English (Explicit) | 🟢 94/94 (100.0%) |
+| Español (Spanish) | 🟢 94/94 (100.0%) |
+| Français | 🟢 94/94 (100.0%) |
+| Português (Portuguese) | 🟢 94/94 (100.0%) |
 
 ### `navigateur` (2 clés)
 
