@@ -31,12 +31,19 @@ PanoVisu combines power, simplicity, and freedom to offer a complete and free so
 - **🎨 Individual Hotspot Customization**: 
   - **16 different animations**: bounce, pulse, flash, shake, swing, tada, wobble, jello, heartbeat, rubberBand, rotate, flip, zoomIn, zoomOut, fadeIn, slideIn
   - **Custom colors**: Choose a unique color for each hotspot with the HSB color picker
+  - **Custom icons**: Replace the default icon of each hotspot with an image of your choice, with automatic color transformation
   - **Hover magnification**: Configurable zoom effect for each hotspot
+  - **Complete persistence**: Custom icons and colors are saved in PVU projects
   - Complete configuration from the graphical interface with real-time preview
 - **🌊 WebGL Crossfade**: Smooth and elegant transitions between panoramas with crossfade effect (2 seconds) using WebGL and shaders for a professional visual experience
 - **📦 ZIP Export**: Export your tours directly as ZIP archives for simplified sharing
 - **🖼️ Image Resizing**: New tool for resizing and compressing panoramic images
 - **📐 2:1 Ratio Conversion**: Improved icon positioning in the user interface
+
+### 🔧 Technical Improvements
+- **Robust architecture**: Image dimension validation and enhanced error handling
+- **Improved parsing**: Safe handling of empty fields in PVU files
+- **Optimized UI**: Hotspot panels widened (+30px) for better ergonomics
 
 ### ⚠️ Important - Migration from v3.0.0
 

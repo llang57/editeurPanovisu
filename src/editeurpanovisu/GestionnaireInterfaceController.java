@@ -6017,14 +6017,20 @@ public class GestionnaireInterfaceController {
          * *************************************************
         
          */
-        AnchorPane apHotSpots1 = new AnchorPane();
-        AnchorPane apHS1 = new AnchorPane(new PaneOutil(true, rbLocalisation.getString("interface.HSPanoramique"), apHotSpots1, largeur).getApPaneOutil());
-
-        apHotSpots1.setPrefHeight(35.d * ((int) (iNombreHotSpots / 9 + 1)) + 200);
-        apHotSpots1.setLayoutX(10);
-        apHotSpots1.setLayoutY(40);
-        //apHotSpots.setStyle("-fx-background-color : #fff;-fx-font-variant: small-caps;");
-        apHotSpots1.setPadding(new Insets(5));
+        int iIconesParLigne = 6;  // Réduit de 9 à 6 pour l'espacement
+        
+        // AnchorPane pour les icônes seulement (dans le ScrollPane)
+        AnchorPane apIconesHS1 = new AnchorPane();
+        // Calcul correct du nombre de lignes : arrondi supérieur de (nombre / par ligne)
+        int iNombreLignes = (int) Math.ceil((double) iNombreHotSpots / iIconesParLigne);
+        apIconesHS1.setPrefHeight(45.d * iNombreLignes + 50);
+        apIconesHS1.setPadding(new Insets(5, 5, 5, 15));  // Décalage à gauche pour centrer
+        
+        // Déterminer la couleur de fond selon le thème
+        boolean estThemeSombre = ThemeManager.getCurrentTheme().isDark();
+        String couleurFond = estThemeSombre ? "#3a3a3a" : "#e8e8e8";  // Plus clair si sombre, plus sombre si clair
+        apIconesHS1.setStyle("-fx-background-color: " + couleurFond + "; -fx-background-radius: 5px;");
+        
         int i = 0;
         double xHS;
         double yHS = 25;
@@ -6033,10 +6039,10 @@ public class GestionnaireInterfaceController {
             Pane paneFond = new Pane();
             ivHotspots[i] = new ImageView(new Image("file:" + strRepertHotSpots + File.separator + strNomImage, -1, 30, true, true, true));
 
-            int iCol = i % 9;
-            int iRow = i / 9;
-            xHS = iCol * 40 + 5;
-            yHS = iRow * 35 + 25;
+            int iCol = i % iIconesParLigne;
+            int iRow = i / iIconesParLigne;
+            xHS = iCol * 50 + 5;  // Espacement horizontal
+            yHS = iRow * 45 + 25;  // Espacement vertical
             paneFond.setLayoutX(xHS);
             paneFond.setLayoutY(yHS);
             paneFond.setOnMouseClicked((me) -> {
@@ -6052,39 +6058,92 @@ public class GestionnaireInterfaceController {
                 afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
 
                 changeCouleurHS(couleurHotspots.getHue(), couleurHotspots.getSaturation(), couleurHotspots.getBrightness());
+                
+                // Recréer l'ImageView avec l'image colorée
+                if (!strTypeHS.equals("gif")) {
+                    ivHotSpotPanoramique = new ImageView(getWiNouveauxBoutons()[getiNombreImagesBouton() - 2]);
+                    ivHotSpotPanoramique.setSmooth(true);
+                }
 
                 changeCouleurHSPhoto(couleurHotspotsPhoto.getHue(), couleurHotspotsPhoto.getSaturation(), couleurHotspotsPhoto.getBrightness());
+                
+                // Recréer l'ImageView avec l'image colorée
+                if (!strTypeHSImage.equals("gif")) {
+                    ivHotSpotImage = new ImageView(getWiNouveauxBoutons()[getiNombreImagesBouton() - 1]);
+                    ivHotSpotImage.setSmooth(true);
+                }
+                
                 changeCouleurHSHTML(couleurHotspotsHTML.getHue(), couleurHotspotsHTML.getSaturation(), couleurHotspotsHTML.getBrightness());
+                
+                // Recréer l'ImageView avec l'image colorée
+                if (!strTypeHSHTML.equals("gif")) {
+                    ivHotSpotHTML = new ImageView(getWiNouveauxBoutons()[getiNombreImagesBouton()]);
+                    ivHotSpotHTML.setSmooth(true);
+                }
+                
                 ivHotSpotPanoramique.setFitWidth(iTailleHotspotsPanoramique);
                 ivHotSpotImage.setFitWidth(iTailleHotspotsImage);
                 ivHotSpotHTML.setFitWidth(iTailleHotspotsHTML);
+                
+                // Ajouter les ImageView à la visualisation
+                ivHotSpotPanoramique.setPreserveRatio(true);
+                ivHotSpotPanoramique.setLayoutX(700);
+                ivHotSpotPanoramique.setLayoutY(260);
+                ivHotSpotImage.setPreserveRatio(true);
+                ivHotSpotImage.setLayoutX(820);
+                ivHotSpotImage.setLayoutY(260);
+                ivHotSpotHTML.setPreserveRatio(true);
+                ivHotSpotHTML.setLayoutX(940);
+                ivHotSpotHTML.setLayoutY(260);
+                
+                apVisualisation.getChildren().addAll(ivHotSpotPanoramique, ivHotSpotImage, ivHotSpotHTML);
             });
             paneFond.getChildren().add(ivHotspots[i]);
-            apHotSpots1.getChildren().add(paneFond);
+            apIconesHS1.getChildren().add(paneFond);
             i++;
-
         }
+        
+        // ScrollPane uniquement pour les icônes
+        ScrollPane spIconesHS1 = new ScrollPane();
+        spIconesHS1.setContent(apIconesHS1);
+        spIconesHS1.setFitToWidth(true);
+        spIconesHS1.setPrefHeight(200);  // Hauteur fixe pour la zone des icônes
+        spIconesHS1.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        spIconesHS1.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        spIconesHS1.setStyle("-fx-background: transparent; -fx-background-color: transparent;");
+        
+        // AnchorPane principal contenant le ScrollPane et les contrôles
+        AnchorPane apHotSpots1 = new AnchorPane();
+        apHotSpots1.setPrefHeight(450);
+        
+        spIconesHS1.setLayoutX(0);
+        spIconesHS1.setLayoutY(0);
+        spIconesHS1.setPrefWidth(largeur - 20);
+        
+        apHotSpots1.getChildren().add(spIconesHS1);
+        
+        // Contrôles en dessous du ScrollPane (toujours visibles)
         cpCouleurHotspotsPanoramique = new ColorPicker(couleurHotspots);
         Label lblCouleurHotspot = new Label(rbLocalisation.getString("interface.couleurHS"));
         lblCouleurHotspot.setLayoutX(20);
-        lblCouleurHotspot.setLayoutY(yHS + 50);
+        lblCouleurHotspot.setLayoutY(220);
         cpCouleurHotspotsPanoramique.setLayoutX(200);
-        cpCouleurHotspotsPanoramique.setLayoutY(yHS + 50);
+        cpCouleurHotspotsPanoramique.setLayoutY(220);
         Label lblTailleHotspots = new Label(rbLocalisation.getString("interface.tailleMasque"));
         lblTailleHotspots.setLayoutX(20);
-        lblTailleHotspots.setLayoutY(yHS + 90);
+        lblTailleHotspots.setLayoutY(260);
         slTailleHotspotsPanoramique = new Slider(15, 100, getiTailleHotspotsPanoramique());
         slTailleHotspotsPanoramique.setLayoutX(200);
-        slTailleHotspotsPanoramique.setLayoutY(yHS + 90);
+        slTailleHotspotsPanoramique.setLayoutY(260);
         
         // ComboBox pour le type d'animation des nouveaux hotspots panoramiques
         Label lblTypeAnimationPano = new Label(rbLocalisation.getString("main.typeAnimation"));
         lblTypeAnimationPano.setLayoutX(20);
-        lblTypeAnimationPano.setLayoutY(yHS + 130);
+        lblTypeAnimationPano.setLayoutY(300);
         
         cbTypeAnimationPanoDefaut = new ComboBox<>();
         cbTypeAnimationPanoDefaut.setLayoutX(20);
-        cbTypeAnimationPanoDefaut.setLayoutY(yHS + 155);
+        cbTypeAnimationPanoDefaut.setLayoutY(325);
         cbTypeAnimationPanoDefaut.setPrefWidth(160);
         cbTypeAnimationPanoDefaut.getItems().addAll(
             "none", "pulse", "rotation", "desaturation", "bounce", "swing", "glow",
@@ -6098,13 +6157,13 @@ public class GestionnaireInterfaceController {
         
         cbHotspotsPanoAgrandisDefaut = new CheckBox(rbLocalisation.getString("main.agrandissementSurvol"));
         cbHotspotsPanoAgrandisDefaut.setLayoutX(20);
-        cbHotspotsPanoAgrandisDefaut.setLayoutY(yHS + 190);
+        cbHotspotsPanoAgrandisDefaut.setLayoutY(360);
         cbHotspotsPanoAgrandisDefaut.setSelected(bHotspotsPanoAgrandisDefaut);
         
         // Bouton pour appliquer à tous les hotspots panoramiques existants
         Button btnAppliquerTousPano = new Button(rbLocalisation.getString("main.appliquerATous"));
         btnAppliquerTousPano.setLayoutX(200);
-        btnAppliquerTousPano.setLayoutY(yHS + 160);
+        btnAppliquerTousPano.setLayoutY(330);
         btnAppliquerTousPano.setOnAction((e) -> {
             if (getiNombrePanoramiques() != 0) {
                 for (int iPano = 0; iPano < getiNombrePanoramiques(); iPano++) {
@@ -6124,29 +6183,35 @@ public class GestionnaireInterfaceController {
                 lblTailleHotspots, slTailleHotspotsPanoramique,
                 lblTypeAnimationPano, cbTypeAnimationPanoDefaut, cbHotspotsPanoAgrandisDefaut, btnAppliquerTousPano
         );
+        
+        AnchorPane apHS1 = new AnchorPane(new PaneOutil(true, rbLocalisation.getString("interface.HSPanoramique"), apHotSpots1, largeur).getApPaneOutil());
         /*
          * *************************************************
          *     Panel HotSpots Photos
          * *************************************************
         
          */
-        AnchorPane apHotSpots2 = new AnchorPane();
-        AnchorPane apHS2 = new AnchorPane(new PaneOutil(true, rbLocalisation.getString("interface.HSPhoto"), apHotSpots2, largeur).getApPaneOutil());
-
-        apHotSpots2.setPrefHeight(35.d * (int) (iNombreHotSpotsPhoto / 9 + 1) + 200);
-        apHotSpots2.setLayoutX(10);
-        apHotSpots2.setLayoutY(40);
-        //apHotSpots.setStyle("-fx-background-color : #fff;-fx-font-variant: small-caps;");
-        apHotSpots2.setPadding(new Insets(5));
+        // AnchorPane pour les icônes seulement (dans le ScrollPane)
+        AnchorPane apIconesHS2 = new AnchorPane();
+        // Calcul correct du nombre de lignes : arrondi supérieur de (nombre / par ligne)
+        int iNombreLignesPhoto = (int) Math.ceil((double) iNombreHotSpotsPhoto / iIconesParLigne);
+        apIconesHS2.setPrefHeight(45.d * iNombreLignesPhoto + 50);
+        apIconesHS2.setPadding(new Insets(5, 5, 5, 15));  // Décalage à gauche pour centrer
+        
+        // Déterminer la couleur de fond selon le thème
+        boolean estThemeSombre2 = ThemeManager.getCurrentTheme().isDark();
+        String couleurFond2 = estThemeSombre2 ? "#3a3a3a" : "#e8e8e8";
+        apIconesHS2.setStyle("-fx-background-color: " + couleurFond2 + "; -fx-background-radius: 5px;");
+        
         i = 0;
         for (String strNomImage : strListeHotSpotsPhoto) {
             String strExtension = strNomImage.substring(strNomImage.length() - 3, strNomImage.length());
             Pane paneFond = new Pane();
             ivHotspotsPhoto[i] = new ImageView(new Image("file:" + strRepertHotSpotsPhoto + File.separator + strNomImage, -1, 30, true, true, true));
-            int iCol = i % 9;
-            int iRow = i / 9;
-            xHS = iCol * 40 + 5;
-            yHS = (iRow) * 35 + 25;
+            int iCol = i % iIconesParLigne;
+            int iRow = i / iIconesParLigne;
+            xHS = iCol * 50 + 5;
+            yHS = (iRow) * 45 + 25;
             paneFond.setLayoutX(xHS);
             paneFond.setLayoutY(yHS);
             paneFond.setOnMouseClicked((me) -> {
@@ -6159,39 +6224,91 @@ public class GestionnaireInterfaceController {
                 strNomfichierHSImage = strNomImage;
                 setStrStyleHotSpotImages(strNomImage);
                 afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
+                
                 changeCouleurHS(couleurHotspots.getHue(), couleurHotspots.getSaturation(), couleurHotspots.getBrightness());
+                // Recréer l'ImageView avec l'image colorée
+                if (!strTypeHS.equals("gif")) {
+                    ivHotSpotPanoramique = new ImageView(getWiNouveauxBoutons()[getiNombreImagesBouton() - 2]);
+                    ivHotSpotPanoramique.setSmooth(true);
+                }
+                
                 changeCouleurHSPhoto(couleurHotspotsPhoto.getHue(), couleurHotspotsPhoto.getSaturation(), couleurHotspotsPhoto.getBrightness());
+                // Recréer l'ImageView avec l'image colorée
+                if (!strTypeHSImage.equals("gif")) {
+                    ivHotSpotImage = new ImageView(getWiNouveauxBoutons()[getiNombreImagesBouton() - 1]);
+                    ivHotSpotImage.setSmooth(true);
+                }
+                
                 changeCouleurHSHTML(couleurHotspotsHTML.getHue(), couleurHotspotsHTML.getSaturation(), couleurHotspotsHTML.getBrightness());
+                // Recréer l'ImageView avec l'image colorée
+                if (!strTypeHSHTML.equals("gif")) {
+                    ivHotSpotHTML = new ImageView(getWiNouveauxBoutons()[getiNombreImagesBouton()]);
+                    ivHotSpotHTML.setSmooth(true);
+                }
+                
                 ivHotSpotPanoramique.setFitWidth(iTailleHotspotsPanoramique);
                 ivHotSpotImage.setFitWidth(iTailleHotspotsImage);
                 ivHotSpotHTML.setFitWidth(iTailleHotspotsHTML);
+                
+                // Ajouter les ImageView à la visualisation
+                ivHotSpotPanoramique.setPreserveRatio(true);
+                ivHotSpotPanoramique.setLayoutX(700);
+                ivHotSpotPanoramique.setLayoutY(260);
+                ivHotSpotImage.setPreserveRatio(true);
+                ivHotSpotImage.setLayoutX(820);
+                ivHotSpotImage.setLayoutY(260);
+                ivHotSpotHTML.setPreserveRatio(true);
+                ivHotSpotHTML.setLayoutX(940);
+                ivHotSpotHTML.setLayoutY(260);
+                
+                apVisualisation.getChildren().addAll(ivHotSpotPanoramique, ivHotSpotImage, ivHotSpotHTML);
             });
             paneFond.getChildren().add(ivHotspotsPhoto[i]);
-            apHotSpots2.getChildren().add(paneFond);
+            apIconesHS2.getChildren().add(paneFond);
             i++;
-
         }
+        
+        // ScrollPane uniquement pour les icônes
+        ScrollPane spIconesHS2 = new ScrollPane();
+        spIconesHS2.setContent(apIconesHS2);
+        spIconesHS2.setFitToWidth(true);
+        spIconesHS2.setPrefHeight(200);  // Hauteur fixe pour la zone des icônes
+        spIconesHS2.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        spIconesHS2.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        spIconesHS2.setStyle("-fx-background: transparent; -fx-background-color: transparent;");
+        
+        // AnchorPane principal contenant le ScrollPane et les contrôles
+        AnchorPane apHotSpots2 = new AnchorPane();
+        apHotSpots2.setPrefHeight(450);
+        
+        spIconesHS2.setLayoutX(0);
+        spIconesHS2.setLayoutY(0);
+        spIconesHS2.setPrefWidth(largeur - 20);
+        
+        apHotSpots2.getChildren().add(spIconesHS2);
+        
+        // Contrôles en dessous du ScrollPane (toujours visibles)
         cpCouleurHotspotsPhoto = new ColorPicker(couleurHotspotsPhoto);
         Label lblCouleurHotspotPhoto = new Label(rbLocalisation.getString("interface.couleurHSPhoto"));
         lblCouleurHotspotPhoto.setLayoutX(20);
-        lblCouleurHotspotPhoto.setLayoutY(yHS + 50);
+        lblCouleurHotspotPhoto.setLayoutY(220);
         cpCouleurHotspotsPhoto.setLayoutX(200);
-        cpCouleurHotspotsPhoto.setLayoutY(yHS + 50);
+        cpCouleurHotspotsPhoto.setLayoutY(220);
         Label lblTailleHotspotsImage = new Label(rbLocalisation.getString("interface.tailleMasque"));
         lblTailleHotspotsImage.setLayoutX(20);
-        lblTailleHotspotsImage.setLayoutY(yHS + 90);
+        lblTailleHotspotsImage.setLayoutY(260);
         slTailleHotspotsImage = new Slider(15, 100, getiTailleHotspotsImage());
         slTailleHotspotsImage.setLayoutX(200);
-        slTailleHotspotsImage.setLayoutY(yHS + 90);
+        slTailleHotspotsImage.setLayoutY(260);
         
         // ComboBox pour le type d'animation des nouveaux hotspots photos
         Label lblTypeAnimationPhoto = new Label(rbLocalisation.getString("main.typeAnimation"));
         lblTypeAnimationPhoto.setLayoutX(20);
-        lblTypeAnimationPhoto.setLayoutY(yHS + 130);
+        lblTypeAnimationPhoto.setLayoutY(300);
         
         cbTypeAnimationPhotoDefaut = new ComboBox<>();
         cbTypeAnimationPhotoDefaut.setLayoutX(20);
-        cbTypeAnimationPhotoDefaut.setLayoutY(yHS + 155);
+        cbTypeAnimationPhotoDefaut.setLayoutY(325);
         cbTypeAnimationPhotoDefaut.setPrefWidth(160);
         cbTypeAnimationPhotoDefaut.getItems().addAll(
             "none", "pulse", "rotation", "desaturation", "bounce", "swing", "glow",
@@ -6205,13 +6322,13 @@ public class GestionnaireInterfaceController {
         
         cbHotspotsPhotoAgrandisDefaut = new CheckBox(rbLocalisation.getString("main.agrandissementSurvol"));
         cbHotspotsPhotoAgrandisDefaut.setLayoutX(20);
-        cbHotspotsPhotoAgrandisDefaut.setLayoutY(yHS + 190);
+        cbHotspotsPhotoAgrandisDefaut.setLayoutY(360);
         cbHotspotsPhotoAgrandisDefaut.setSelected(bHotspotsPhotoAgrandisDefaut);
         
         // Bouton pour appliquer à tous les hotspots photos existants
         Button btnAppliquerTousPhoto = new Button(rbLocalisation.getString("main.appliquerATous"));
         btnAppliquerTousPhoto.setLayoutX(200);
-        btnAppliquerTousPhoto.setLayoutY(yHS + 160);
+        btnAppliquerTousPhoto.setLayoutY(330);
         btnAppliquerTousPhoto.setOnAction((e) -> {
             if (getiNombrePanoramiques() != 0) {
                 for (int iPano = 0; iPano < getiNombrePanoramiques(); iPano++) {
@@ -6231,29 +6348,35 @@ public class GestionnaireInterfaceController {
                 lblTailleHotspotsImage, slTailleHotspotsImage,
                 lblTypeAnimationPhoto, cbTypeAnimationPhotoDefaut, cbHotspotsPhotoAgrandisDefaut, btnAppliquerTousPhoto
         );
+        
+        AnchorPane apHS2 = new AnchorPane(new PaneOutil(true, rbLocalisation.getString("interface.HSPhoto"), apHotSpots2, largeur).getApPaneOutil());
         /*
          * *************************************************
          *     Panel HotSpots HTML
          * *************************************************
         
          */
-        AnchorPane apHotSpots3 = new AnchorPane();
-        AnchorPane apHS3 = new AnchorPane(new PaneOutil(true, rbLocalisation.getString("interface.HSHTML"), apHotSpots3, largeur).getApPaneOutil());
-
-        apHotSpots3.setPrefHeight(35.d * ((int) (iNombreHotSpotsHTML / 9 + 1)) + 200);
-        apHotSpots3.setLayoutX(10);
-        apHotSpots3.setLayoutY(40);
-        //apHotSpots.setStyle("-fx-background-color : #fff;-fx-font-variant: small-caps;");
-        apHotSpots3.setPadding(new Insets(5));
+        // AnchorPane pour les icônes seulement (dans le ScrollPane)
+        AnchorPane apIconesHS3 = new AnchorPane();
+        // Calcul correct du nombre de lignes : arrondi supérieur de (nombre / par ligne)
+        int iNombreLignesHTML = (int) Math.ceil((double) iNombreHotSpotsHTML / iIconesParLigne);
+        apIconesHS3.setPrefHeight(45.d * iNombreLignesHTML + 50);
+        apIconesHS3.setPadding(new Insets(5, 5, 5, 15));  // Décalage à gauche pour centrer
+        
+        // Déterminer la couleur de fond selon le thème
+        boolean estThemeSombre3 = ThemeManager.getCurrentTheme().isDark();
+        String couleurFond3 = estThemeSombre3 ? "#3a3a3a" : "#e8e8e8";
+        apIconesHS3.setStyle("-fx-background-color: " + couleurFond3 + "; -fx-background-radius: 5px;");
+        
         i = 0;
         for (String strNomHTML : strListeHotSpotsHTML) {
             String strExtension = strNomHTML.substring(strNomHTML.length() - 3, strNomHTML.length());
             Pane paneFond = new Pane();
             ivHotspotsHTML[i] = new ImageView(new Image("file:" + strRepertHotSpotsHTML + File.separator + strNomHTML, -1, 30, true, true, true));
-            int iCol = i % 9;
-            int iRow = i / 9;
-            xHS = iCol * 40 + 5;
-            yHS = (iRow) * 35 + 25;
+            int iCol = i % iIconesParLigne;
+            int iRow = i / iIconesParLigne;
+            xHS = iCol * 50 + 5;
+            yHS = (iRow) * 45 + 25;
             paneFond.setLayoutX(xHS);
             paneFond.setLayoutY(yHS);
             paneFond.setOnMouseClicked((me) -> {
@@ -6266,39 +6389,91 @@ public class GestionnaireInterfaceController {
                 strNomfichierHSHTML = strNomHTML;
                 setStrStyleHotSpotHTML(strNomHTML);
                 afficheBarreClassique(getStrPositionBarreClassique(), getOffsetXBarreClassique(), getOffsetYBarreClassique(), getTailleBarreClassique(), getStyleBarreClassique(), getStrStyleHotSpots(), getEspacementBarreClassique());
+                
                 changeCouleurHS(couleurHotspots.getHue(), couleurHotspots.getSaturation(), couleurHotspots.getBrightness());
+                // Recréer l'ImageView avec l'image colorée
+                if (!strTypeHS.equals("gif")) {
+                    ivHotSpotPanoramique = new ImageView(getWiNouveauxBoutons()[getiNombreImagesBouton() - 2]);
+                    ivHotSpotPanoramique.setSmooth(true);
+                }
+                
                 changeCouleurHSPhoto(couleurHotspotsPhoto.getHue(), couleurHotspotsPhoto.getSaturation(), couleurHotspotsPhoto.getBrightness());
+                // Recréer l'ImageView avec l'image colorée
+                if (!strTypeHSImage.equals("gif")) {
+                    ivHotSpotImage = new ImageView(getWiNouveauxBoutons()[getiNombreImagesBouton() - 1]);
+                    ivHotSpotImage.setSmooth(true);
+                }
+                
                 changeCouleurHSHTML(couleurHotspotsHTML.getHue(), couleurHotspotsHTML.getSaturation(), couleurHotspotsHTML.getBrightness());
+                // Recréer l'ImageView avec l'image colorée
+                if (!strTypeHSHTML.equals("gif")) {
+                    ivHotSpotHTML = new ImageView(getWiNouveauxBoutons()[getiNombreImagesBouton()]);
+                    ivHotSpotHTML.setSmooth(true);
+                }
+                
                 ivHotSpotPanoramique.setFitWidth(iTailleHotspotsPanoramique);
                 ivHotSpotImage.setFitWidth(iTailleHotspotsImage);
                 ivHotSpotHTML.setFitWidth(iTailleHotspotsHTML);
+                
+                // Ajouter les ImageView à la visualisation
+                ivHotSpotPanoramique.setPreserveRatio(true);
+                ivHotSpotPanoramique.setLayoutX(700);
+                ivHotSpotPanoramique.setLayoutY(260);
+                ivHotSpotImage.setPreserveRatio(true);
+                ivHotSpotImage.setLayoutX(820);
+                ivHotSpotImage.setLayoutY(260);
+                ivHotSpotHTML.setPreserveRatio(true);
+                ivHotSpotHTML.setLayoutX(940);
+                ivHotSpotHTML.setLayoutY(260);
+                
+                apVisualisation.getChildren().addAll(ivHotSpotPanoramique, ivHotSpotImage, ivHotSpotHTML);
             });
             paneFond.getChildren().add(ivHotspotsHTML[i]);
-            apHotSpots3.getChildren().add(paneFond);
+            apIconesHS3.getChildren().add(paneFond);
             i++;
-
         }
+        
+        // ScrollPane uniquement pour les icônes
+        ScrollPane spIconesHS3 = new ScrollPane();
+        spIconesHS3.setContent(apIconesHS3);
+        spIconesHS3.setFitToWidth(true);
+        spIconesHS3.setPrefHeight(200);  // Hauteur fixe pour la zone des icônes
+        spIconesHS3.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        spIconesHS3.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        spIconesHS3.setStyle("-fx-background: transparent; -fx-background-color: transparent;");
+        
+        // AnchorPane principal contenant le ScrollPane et les contrôles
+        AnchorPane apHotSpots3 = new AnchorPane();
+        apHotSpots3.setPrefHeight(450);
+        
+        spIconesHS3.setLayoutX(0);
+        spIconesHS3.setLayoutY(0);
+        spIconesHS3.setPrefWidth(largeur - 20);
+        
+        apHotSpots3.getChildren().add(spIconesHS3);
+        
+        // Contrôles en dessous du ScrollPane (toujours visibles)
         cpCouleurHotspotsHTML = new ColorPicker(couleurHotspotsHTML);
         Label lblCouleurHotspotHTML = new Label(rbLocalisation.getString("interface.couleurHSHTML"));
         lblCouleurHotspotHTML.setLayoutX(20);
-        lblCouleurHotspotHTML.setLayoutY(yHS + 50);
+        lblCouleurHotspotHTML.setLayoutY(220);
         cpCouleurHotspotsHTML.setLayoutX(200);
-        cpCouleurHotspotsHTML.setLayoutY(yHS + 50);
+        cpCouleurHotspotsHTML.setLayoutY(220);
         Label lblTailleHotspotsHTML = new Label(rbLocalisation.getString("interface.tailleMasque"));
         lblTailleHotspotsHTML.setLayoutX(20);
-        lblTailleHotspotsHTML.setLayoutY(yHS + 90);
+        lblTailleHotspotsHTML.setLayoutY(260);
         slTailleHotspotsHTML = new Slider(15, 100, getiTailleHotspotsHTML());
         slTailleHotspotsHTML.setLayoutX(200);
-        slTailleHotspotsHTML.setLayoutY(yHS + 90);
+        slTailleHotspotsHTML.setLayoutY(260);
         
         // ComboBox pour le type d'animation des nouveaux hotspots HTML
         Label lblTypeAnimationHTML = new Label(rbLocalisation.getString("main.typeAnimation"));
         lblTypeAnimationHTML.setLayoutX(20);
-        lblTypeAnimationHTML.setLayoutY(yHS + 130);
+        lblTypeAnimationHTML.setLayoutY(300);
         
         cbTypeAnimationHTMLDefaut = new ComboBox<>();
         cbTypeAnimationHTMLDefaut.setLayoutX(20);
-        cbTypeAnimationHTMLDefaut.setLayoutY(yHS + 155);
+        cbTypeAnimationHTMLDefaut.setLayoutY(325);
         cbTypeAnimationHTMLDefaut.setPrefWidth(160);
         cbTypeAnimationHTMLDefaut.getItems().addAll(
             "none", "pulse", "rotation", "desaturation", "bounce", "swing", "glow",
@@ -6312,13 +6487,13 @@ public class GestionnaireInterfaceController {
         
         cbHotspotsHTMLAgrandisDefaut = new CheckBox(rbLocalisation.getString("main.agrandissementSurvol"));
         cbHotspotsHTMLAgrandisDefaut.setLayoutX(20);
-        cbHotspotsHTMLAgrandisDefaut.setLayoutY(yHS + 190);
+        cbHotspotsHTMLAgrandisDefaut.setLayoutY(360);
         cbHotspotsHTMLAgrandisDefaut.setSelected(bHotspotsHTMLAgrandisDefaut);
         
         // Bouton pour appliquer à tous les hotspots HTML existants
         Button btnAppliquerTousHTML = new Button(rbLocalisation.getString("main.appliquerATous"));
         btnAppliquerTousHTML.setLayoutX(200);
-        btnAppliquerTousHTML.setLayoutY(yHS + 160);
+        btnAppliquerTousHTML.setLayoutY(330);
         btnAppliquerTousHTML.setOnAction((e) -> {
             if (getiNombrePanoramiques() != 0) {
                 for (int iPano = 0; iPano < getiNombrePanoramiques(); iPano++) {
@@ -6338,6 +6513,8 @@ public class GestionnaireInterfaceController {
                 lblTailleHotspotsHTML, slTailleHotspotsHTML,
                 lblTypeAnimationHTML, cbTypeAnimationHTMLDefaut, cbHotspotsHTMLAgrandisDefaut, btnAppliquerTousHTML
         );
+        
+        AnchorPane apHS3 = new AnchorPane(new PaneOutil(true, rbLocalisation.getString("interface.HSHTML"), apHotSpots3, largeur).getApPaneOutil());
 
 
         /*        
@@ -12982,6 +13159,27 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * @return la couleur des hotspots panoramiques
+     */
+    public Color getCouleurHotspots() {
+        return couleurHotspots;
+    }
+
+    /**
+     * @return la couleur des hotspots photo
+     */
+    public Color getCouleurHotspotsPhoto() {
+        return couleurHotspotsPhoto;
+    }
+
+    /**
+     * @return la couleur des hotspots HTML
+     */
+    public Color getCouleurHotspotsHTML() {
+        return couleurHotspotsHTML;
+    }
+
+    /**
      * @return the opaciteTheme
      */
     public double getOpaciteTheme() {
@@ -13182,5 +13380,49 @@ public class GestionnaireInterfaceController {
      */
     public void setApVis(AnchorPane apVis) {
         this.apVis = apVis;
+    }
+    
+    /**
+     * Met à jour les couleurs de fond des panneaux d'icônes de hotspots
+     * selon le thème actuel (clair ou sombre)
+     */
+    public void mettreAJourCouleursHotspots() {
+        // Déterminer la couleur de fond selon le thème
+        boolean estThemeSombre = ThemeManager.getCurrentTheme().isDark();
+        String couleurFond = estThemeSombre ? "#3a3a3a" : "#e8e8e8";
+        String style = "-fx-background-color: " + couleurFond + "; -fx-background-radius: 5px;";
+        
+        // Mettre à jour les trois panneaux d'icônes de hotspots
+        if (getSpOutils() != null && getSpOutils().getContent() != null) {
+            VBox vbOutils = (VBox) getSpOutils().getContent();
+            
+            // Parcourir les enfants pour trouver les panneaux de hotspots
+            for (javafx.scene.Node node : vbOutils.getChildren()) {
+                if (node instanceof AnchorPane) {
+                    AnchorPane ap = (AnchorPane) node;
+                    
+                    // Chercher les PaneOutil qui contiennent les hotspots
+                    for (javafx.scene.Node child : ap.getChildren()) {
+                        if (child instanceof AnchorPane) {
+                            AnchorPane apChild = (AnchorPane) child;
+                            
+                            // Chercher les ScrollPane d'icônes
+                            for (javafx.scene.Node scrollNode : apChild.getChildren()) {
+                                if (scrollNode instanceof ScrollPane) {
+                                    ScrollPane sp = (ScrollPane) scrollNode;
+                                    
+                                    // Vérifier si c'est bien un ScrollPane d'icônes de hotspots
+                                    // (ils ont une hauteur fixe de 200px)
+                                    if (sp.getPrefHeight() == 200 && sp.getContent() instanceof AnchorPane) {
+                                        AnchorPane apIcones = (AnchorPane) sp.getContent();
+                                        apIcones.setStyle(style);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

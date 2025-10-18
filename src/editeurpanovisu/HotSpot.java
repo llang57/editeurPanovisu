@@ -22,11 +22,13 @@ public class HotSpot {
     private String strTypeAnimation = "none"; // Type d'animation: none, pulse, rotation, etc.
     private boolean bAgranditSurvol = false;
     private String strCouleurPerso = ""; // Couleur personnalisée pour ce hotspot (vide = utiliser la couleur par défaut)
+    private String strNomIconeSource = ""; // Nom du fichier d'icône source original (avant coloration)
     private int iNumeroPano = -1;
     private double regardX=-1000;
     private double regardY=-1000;
     private double champVisuel=0;
     private Image imgVueHs;
+    private Image imgIconeSource = null; // Image source de l'icône (PNG non colorée) pour ce hotspot spécifique
 
     /**
      *
@@ -243,6 +245,34 @@ public class HotSpot {
      */
     public void setStrCouleurPerso(String strCouleurPerso) {
         this.strCouleurPerso = strCouleurPerso;
+    }
+
+    /**
+     * @return the imgIconeSource - Image source (PNG non colorée) pour ce hotspot
+     */
+    public Image getImgIconeSource() {
+        return imgIconeSource;
+    }
+
+    /**
+     * @param imgIconeSource the imgIconeSource to set - Image source (PNG non colorée) pour ce hotspot
+     */
+    public void setImgIconeSource(Image imgIconeSource) {
+        this.imgIconeSource = imgIconeSource;
+    }
+
+    /**
+     * @return the strNomIconeSource - Nom du fichier d'icône source original
+     */
+    public String getStrNomIconeSource() {
+        return strNomIconeSource;
+    }
+
+    /**
+     * @param strNomIconeSource the strNomIconeSource to set - Nom du fichier d'icône source original
+     */
+    public void setStrNomIconeSource(String strNomIconeSource) {
+        this.strNomIconeSource = strNomIconeSource;
     }
 
 }

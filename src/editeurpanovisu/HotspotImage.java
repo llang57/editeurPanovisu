@@ -5,6 +5,8 @@
  */
 package editeurpanovisu;
 
+import javafx.scene.image.Image;
+
 /**
  * Définition des hotspots Image
  *
@@ -22,6 +24,8 @@ public class HotspotImage {
     private String strTypeAnimation = "none"; // Type d'animation: none, pulse, rotation, etc.
     private boolean bAgranditSurvol = false;
     private String strCouleurPerso = ""; // Couleur personnalisée pour ce hotspot (vide = utiliser la couleur par défaut)
+    private String strNomIconeSource = ""; // Nom du fichier d'icône source original (avant coloration)
+    private Image imgIconeSource;  // Image source pour ce hotspot spécifique
 
     /**
      *
@@ -210,6 +214,34 @@ public class HotspotImage {
      */
     public void setStrCouleurPerso(String strCouleurPerso) {
         this.strCouleurPerso = strCouleurPerso;
+    }
+
+    /**
+     * @return the imgIconeSource
+     */
+    public Image getImgIconeSource() {
+        return imgIconeSource;
+    }
+
+    /**
+     * @param imgIconeSource the imgIconeSource to set
+     */
+    public void setImgIconeSource(Image imgIconeSource) {
+        this.imgIconeSource = imgIconeSource;
+    }
+
+    /**
+     * @return the strNomIconeSource - Nom du fichier d'icône source original
+     */
+    public String getStrNomIconeSource() {
+        return strNomIconeSource;
+    }
+
+    /**
+     * @param strNomIconeSource the strNomIconeSource to set - Nom du fichier d'icône source original
+     */
+    public void setStrNomIconeSource(String strNomIconeSource) {
+        this.strNomIconeSource = strNomIconeSource;
     }
 
 }

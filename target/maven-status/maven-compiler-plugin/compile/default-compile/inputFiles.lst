@@ -4,6 +4,7 @@ D:\developpement\java\editeurPanovisu\src\editeurpanovisu\BigDecimalField.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\BuildNumberIncrementer.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\CartePanoVisu.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\ConfigDialogController.java
+D:\developpement\java\editeurPanovisu\src\editeurpanovisu\ConversionRatio2to1DialogController.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\CoordonneesGeographiques.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\Diaporama.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\DocumentationDialog.java
@@ -41,11 +42,14 @@ D:\developpement\java\editeurPanovisu\src\editeurpanovisu\Panoramique.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\PanoramiqueCellule.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\Plan.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\PopUpDialogController.java
+D:\developpement\java\editeurPanovisu\src\editeurpanovisu\PrevisualiserConversionDialog.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\ReadWriteImage.java
+D:\developpement\java\editeurPanovisu\src\editeurpanovisu\RedimensionnementImagesDialogController.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\TestAIClients.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\TextUtils.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\ThemeManager.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\TransformationsPanoramique.java
+D:\developpement\java\editeurPanovisu\src\editeurpanovisu\util\LocalHTTPServer.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\util\SvgIconLoader.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\VisualiseurImagesPanoramiques.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\ZoneTelecommande.java

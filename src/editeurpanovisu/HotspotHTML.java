@@ -15,6 +15,7 @@ import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.image.Image;
 
 /**
  *
@@ -29,6 +30,8 @@ public class HotspotHTML {
     private boolean bAgranditSurvol = false;
     private String strCouleurPerso = ""; // Couleur personnalisée pour ce hotspot (vide = utiliser la couleur par défaut)
     private String strFichierImage = ""; // Nom du fichier d'icône personnalisée
+    private String strNomIconeSource = ""; // Nom du fichier d'icône source original (avant coloration)
+    private Image imgIconeSource;  // Image source pour ce hotspot spécifique
     private String strURLExterieure = "";
     private boolean bLienExterieur = true;
     private double opaciteHTML = 1;
@@ -342,5 +345,33 @@ public class HotspotHTML {
      */
     public void setStrFichierImage(String strFichierImage) {
         this.strFichierImage = strFichierImage;
+    }
+
+    /**
+     * @return the imgIconeSource
+     */
+    public Image getImgIconeSource() {
+        return imgIconeSource;
+    }
+
+    /**
+     * @param imgIconeSource the imgIconeSource to set
+     */
+    public void setImgIconeSource(Image imgIconeSource) {
+        this.imgIconeSource = imgIconeSource;
+    }
+
+    /**
+     * @return the strNomIconeSource - Nom du fichier d'icône source original
+     */
+    public String getStrNomIconeSource() {
+        return strNomIconeSource;
+    }
+
+    /**
+     * @param strNomIconeSource the strNomIconeSource to set - Nom du fichier d'icône source original
+     */
+    public void setStrNomIconeSource(String strNomIconeSource) {
+        this.strNomIconeSource = strNomIconeSource;
     }
 }
