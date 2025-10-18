@@ -45,10 +45,10 @@ Write-Host "  Java: $javaHome" -ForegroundColor Gray
 & jpackage `
   --type app-image `
   --name EditeurPanovisu `
-  --app-version 3.2.0 `
+  --app-version 3.3.0 `
   --vendor "PanoVisu - Laurent LANG" `
   --input target\app-input `
-  --main-jar editeurPanovisu-3.2.0-SNAPSHOT.jar `
+  --main-jar editeurPanovisu-3.3.0-SNAPSHOT.jar `
   --main-class editeurpanovisu.Launcher `
   --runtime-image "$javaHome" `
   --icon images\panovisu.ico `
@@ -81,7 +81,7 @@ if (Test-Path $exeFile) {
 $batchContent = @'
 @echo off
 cd /d "%~dp0app"
-start "" "%~dp0runtime\bin\javaw.exe" -Dfile.encoding=UTF-8 --enable-preview --enable-native-access=ALL-UNNAMED -Xms512m -Xmx2048m -jar "editeurPanovisu-3.2.0-SNAPSHOT.jar"
+start "" "%~dp0runtime\bin\javaw.exe" -Dfile.encoding=UTF-8 --enable-preview --enable-native-access=ALL-UNNAMED -Xms512m -Xmx2048m -jar "editeurPanovisu-3.3.0-SNAPSHOT.jar"
 '@
 $batchContent | Out-File -FilePath "$appDir\Lancer_EditeurPanovisu.bat" -Encoding ASCII
 Write-Host "  [OK] Batch cree" -ForegroundColor Green
