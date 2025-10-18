@@ -1,0 +1,70 @@
+/* Style clair pour HTMLEditor - Amélioration visibilité des boutons */
+
+.html-editor {
+    -fx-background-color: white;
+}
+
+.html-editor .top-toolbar,
+.html-editor .bottom-toolbar {
+    -fx-background-color: #f8f8f8;
+    -fx-border-color: #d0d0d0;
+}
+
+/* Boutons de la toolbar */
+.html-editor .tool-bar .button {
+    -fx-background-color: #f0f0f0;
+    -fx-border-color: #c0c0c0;
+    -fx-border-width: 1;
+    -fx-background-insets: 0;
+    -fx-background-radius: 3;
+    -fx-border-radius: 3;
+}
+
+.html-editor .tool-bar .button:hover {
+    -fx-background-color: #e0e0e0;
+    -fx-border-color: #a0a0a0;
+}
+
+.html-editor .tool-bar .button:pressed {
+    -fx-background-color: #d0d0d0;
+}
+
+/* ToggleButton (boutons gras, italique, etc.) */
+.html-editor .tool-bar .toggle-button {
+    -fx-background-color: #f0f0f0;
+    -fx-border-color: #c0c0c0;
+    -fx-border-width: 1;
+}
+
+.html-editor .tool-bar .toggle-button:selected {
+    -fx-background-color: #4CAF50;
+    -fx-border-color: #2E7D32;
+}
+
+.html-editor .tool-bar .toggle-button:hover {
+    -fx-background-color: #e0e0e0;
+}
+
+/* Icônes des boutons - améliorer le contraste */
+.html-editor .tool-bar .button .glyph-icon,
+.html-editor .tool-bar .toggle-button .glyph-icon {
+    -fx-fill: #2a2a2a;
+    -fx-text-fill: #2a2a2a;
+}
+
+/* ComboBox dans la toolbar */
+.html-editor .tool-bar .combo-box {
+    -fx-background-color: white;
+    -fx-border-color: #c0c0c0;
+}
+
+/* ColorPicker dans la toolbar */
+.html-editor .tool-bar .color-picker {
+    -fx-background-color: white;
+    -fx-border-color: #c0c0c0;
+}
+
+/* WebView (zone d'édition) */
+.html-editor .web-view {
+    -fx-background-color: white;
+}

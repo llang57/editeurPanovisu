@@ -16,6 +16,7 @@ public class HotspotDiaporama {
     private int iNumDiapo=-1;
     private String strInfo="";
     private boolean bAnime = false;
+    private String strTypeAnimation = "blink"; // Type d'animation par défaut pour les hotspots diaporama
     
     
 
@@ -97,6 +98,22 @@ public class HotspotDiaporama {
      */
     public void setbAnime(boolean bAnime) {
         this.bAnime = bAnime;
+    }
+
+    /**
+     * @return the strTypeAnimation
+     */
+    public String getStrTypeAnimation() {
+        return strTypeAnimation;
+    }
+
+    /**
+     * @param strTypeAnimation the strTypeAnimation to set
+     */
+    public void setStrTypeAnimation(String strTypeAnimation) {
+        this.strTypeAnimation = strTypeAnimation;
+        // Synchroniser bAnime avec strTypeAnimation
+        this.bAnime = !("none".equals(strTypeAnimation) || strTypeAnimation == null || strTypeAnimation.isEmpty());
     }
 
 }

@@ -1,8 +1,8 @@
 # 📚 Documentation EditeurPanovisu
 
-**Date de mise à jour :** 14 octobre 2025  
-**Version :** 3.0.0-SNAPSHOT  
-**Build :** 2584
+**Date de mise à jour :** 19 octobre 2025  
+**Version :** 3.3.0-SNAPSHOT  
+**Build :** 2999
 **Java :** 25 (OpenJDK Temurin-25+36)  
 **JavaFX :** 19.0.2.1
 

@@ -24,7 +24,7 @@ PanoVisu combine puissance, simplicité et liberté pour offrir une solution com
 
 ---
 
-## 🚀 Version 3.3.0 - Accélération GPU et Performance
+## 🚀 Version 3.3.0 - Accélération GPU, Interface Moderne et Diaporama Refondus
 
 **Quoi de neuf ?**
 
@@ -44,6 +44,32 @@ PanoVisu combine puissance, simplicité et liberté pour offrir une solution com
   - Interpolation Bicubic remplace Nearest Neighbor
   - Interpolation Lanczos3 pour agrandissements ×2+
   - Réduction d'aliasing et meilleur anti-crénelage
+
+### 🎨 Interface Modernisée et Visualiseur Diaporama
+- **�️ Éditeur d'interface modernisé** : Refonte complète des fenêtres de création/édition
+  - **Interface création diaporama** : Design épuré avec gestion thématique automatique
+  - **Éditeur HTML intégré** : WYSIWYG JavaFX moderne pour contenus riches (hotspots HTML)
+  - **Création de barres personnalisées** : Interface intuitive avec drag & drop et prévisualisation temps réel
+  - **Theme-Aware Design** : Toutes les fenêtres s'adaptent automatiquement au thème (clair/sombre)
+  - **Corrections ergonomiques** : Redimensionnement optimal, boutons correctement positionnés
+  - **Cohérence visuelle** : Suppression des couleurs hardcodées, utilisation des variables de thème
+- **�📽️ Visualiseur diaporama HTML5 moderne** : Remplacement complet du visualiseur obsolète Supersized (jQuery 2012)
+  - **Design Material Design** : Interface élégante avec glassmorphism et animations fluides
+  - **Barre de progression visuelle** : Suivi temps réel avec animation de remplissage
+  - **Navigation intuitive** : Boutons, flèches directionnelles, clavier, miniatures cliquables
+  - **Indicateurs de position** : Dots avec effet de survol et compteur (X/Total)
+  - **Contrôles complets** : Play/Pause, Précédent/Suivant, Plein écran, Miniatures
+  - **Mode miniatures** : Galerie avec survol et sélection directe
+  - **Masquage auto** : Contrôles disparaissent après 3s d'inactivité (réapparaissent au survol)
+  - **Responsive** : Adaptation automatique mobile/tablette/desktop
+  - **Léger et performant** : ~20 KB vs ~150 KB (ancien), code HTML5/CSS3/JavaScript pur
+- **🎭 Animations hotspots diaporama** : 
+  - Cohérence avec hotspots photo : animations "blink", "pulse", "rotation", etc.
+  - Configuration depuis l'éditeur avec prévisualisation
+- **⏸️ Comportement pause intelligent** :
+  - État pause/lecture respecté lors de la navigation manuelle
+  - Changement d'image en pause = reste en pause (action volontaire requise)
+  - Seul le bouton Play/Pause modifie explicitement l'état de lecture
 
 ### 🔧 Architecture technique
 - Support OpenCL 1.2+ (NVIDIA CUDA, AMD ROCm, Intel compatible)
@@ -129,6 +155,10 @@ Si vous hébergez des visites sur des serveurs Linux, notez que la **v3.1.0** a 
   - Couleurs personnalisables par hotspot (HSB)
   - Agrandissement au survol configurable
 - **Hotspots d'images/photos** - Galeries photo intégrées
+- **Hotspots de diaporama** - Visualiseur HTML5 moderne avec animations complètes
+  - Contrôles complets (play/pause, navigation, plein écran, miniatures)
+  - Animations cohérentes avec les autres types de hotspots
+  - Comportement pause/lecture intelligent
 - **Hotspots HTML** - Contenu riche (vidéos, textes, liens externes)
 - **Plans interactifs** - Carte 2D avec points d'intérêt et radar
 - **Cartes géolocalisées** - OpenStreetMap, Google Maps, Bing Maps
@@ -150,7 +180,10 @@ Si vous hébergez des visites sur des serveurs Linux, notez que la **v3.1.0** a 
 - Interface intuitive **drag & drop**
 - Prévisualisation en temps réel
 - Gestion des transformations d'images (équirectangulaire ↔ cubemap)
-- Éditeur HTML WYSIWYG pour les contenus riches
+- **Éditeur HTML WYSIWYG intégré** : Création de contenus riches sans code HTML
+- **Création de diaporamas modernisée** : Interface épurée avec gestion des transitions
+- **Barres de navigation personnalisées** : Création visuelle avec zones cliquables
+- **Adaptation thématique** : Toutes les fenêtres suivent le thème choisi (clair/sombre)
 - Export en un clic vers HTML/XML
 
 ## 📥 Installation

@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diaporama Moderne - PanoVisu</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            background: #000;
+        }
+
+        /* Conteneur principal du diaporama */
+        #slideshow-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+        }
+
+        /* Images du diaporama */
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+            z-index: 1;
+        }
+
+        .slide.active {
+            opacity: 1;
+            z-index: 2;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: radial-gradient(ellipse at center, #2c3e50 0%, #000 100%);
+        }
+
+        /* Barre de contrôle moderne */
+        #controls-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 50%, transparent 100%);
+            padding: 30px 40px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            z-index: 100;
+            opacity: 0;
+            transform: translateY(100%);
+            transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+
+        #controls-bar.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Boutons de contrôle */
+        .control-button {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .control-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: scale(1.1);
+        }
+
+        .control-button:active {
+            transform: scale(0.95);
+        }
+
+        .control-button svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+
+        /* Bouton play/pause plus grand */
+        #play-pause-btn {
+            width: 60px;
+            height: 60px;
+        }
+
+        #play-pause-btn svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        /* Barre de progression */
+        #progress-container {
+            flex: 1;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+        }
+
+        #progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #3498db 0%, #2ecc71 100%);
+            border-radius: 3px;
+            width: 0%;
+            transition: width 0.1s linear;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+        }
+
+        /* Compteur d'images */
+        #slide-counter {
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            min-width: 80px;
+            text-align: center;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Titre de l'image */
+        #slide-title {
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 24px;
+            font-weight: 600;
+            text-align: center;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+            z-index: 99;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            max-width: 80%;
+        }
+
+        #slide-title.visible {
+            opacity: 1;
+        }
+
+        /* Flèches de navigation */
+        .nav-arrow {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 98;
+            opacity: 0;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-arrow.visible {
+            opacity: 1;
+        }
+
+        .nav-arrow:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .nav-arrow:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        #prev-arrow {
+            left: 30px;
+        }
+
+        #next-arrow {
+            right: 30px;
+        }
+
+        .nav-arrow svg {
+            width: 28px;
+            height: 28px;
+            fill: white;
+        }
+
+        /* Miniatures */
+        #thumbnails-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 100%);
+            padding: 20px;
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            z-index: 101;
+            max-height: 150px;
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+
+        #thumbnails-container.visible {
+            transform: translateY(0);
+        }
+
+        #thumbnails-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        #thumbnails-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        #thumbnails-container::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+        }
+
+        #thumbnails-container::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .thumbnail {
+            flex-shrink: 0;
+            width: 120px;
+            height: 80px;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .thumbnail:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+        }
+
+        .thumbnail.active {
+            border-color: #3498db;
+            box-shadow: 0 0 20px rgba(52, 152, 219, 0.6);
+        }
+
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .thumbnail-number {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Bouton basculer miniatures */
+        #toggle-thumbnails {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 102;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        #toggle-thumbnails:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: scale(1.1);
+        }
+
+        #toggle-thumbnails svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+
+        /* Bouton plein écran */
+        #fullscreen-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 102;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+        }
+
+        #fullscreen-btn.visible {
+            opacity: 1;
+        }
+
+        #fullscreen-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: scale(1.1);
+        }
+
+        #fullscreen-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+
+        /* Indicateurs de points */
+        #dots-container {
+            position: fixed;
+            bottom: 150px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 97;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        #dots-container.visible {
+            opacity: 1;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot:hover {
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(1.2);
+        }
+
+        .dot.active {
+            background: white;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        /* Animation de chargement */
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 18px;
+            opacity: 0.7;
+        }
+
+        /* Effet de zoom au survol */
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.95);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .slide.active img {
+            animation: zoomIn 1.2s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div id="slideshow-container">
+        <!-- Les diapositives seront ajoutées ici dynamiquement -->
+    </div>
+
+    <!-- Titre de la diapositive -->
+    <div id="slide-title"></div>
+
+    <!-- Flèches de navigation -->
+    <div id="prev-arrow" class="nav-arrow">
+        <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+    </div>
+    <div id="next-arrow" class="nav-arrow">
+        <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+    </div>
+
+    <!-- Barre de contrôle -->
+    <div id="controls-bar">
+        <!-- Précédent -->
+        <div id="prev-btn" class="control-button" title="Précédent">
+            <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+        </div>
+
+        <!-- Play/Pause -->
+        <div id="play-pause-btn" class="control-button" title="Lecture/Pause">
+            <svg id="play-icon" viewBox="0 0 24 24" style="display:none;"><path d="M8 5v14l11-7z"/></svg>
+            <svg id="pause-icon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        </div>
+
+        <!-- Suivant -->
+        <div id="next-btn" class="control-button" title="Suivant">
+            <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+        </div>
+
+        <!-- Barre de progression -->
+        <div id="progress-container">
+            <div id="progress-bar"></div>
+        </div>
+
+        <!-- Compteur -->
+        <div id="slide-counter">
+            <span id="current-slide">1</span> / <span id="total-slides">0</span>
+        </div>
+    </div>
+
+    <!-- Indicateurs de points -->
+    <div id="dots-container"></div>
+
+    <!-- Bouton plein écran -->
+    <div id="fullscreen-btn" title="Plein écran">
+        <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+    </div>
+
+    <!-- Bouton basculer miniatures -->
+    <div id="toggle-thumbnails" title="Afficher/Masquer les miniatures">
+        <svg viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg>
+    </div>
+
+    <!-- Conteneur de miniatures -->
+    <div id="thumbnails-container"></div>
+
+    <script>
+        // Configuration du diaporama
+        const slideshowConfig = {
+            slides: [
+                // Les images seront injectées ici depuis Java
+            ],
+            interval: 5000, // 5 secondes par défaut
+            autoplay: true,
+            transition: 'fade',
+            transitionSpeed: 1200
+        };
+
+        // État du diaporama
+        let currentSlide = 0;
+        let isPlaying = true;
+        let slideTimer = null;
+        let progressTimer = null;
+        let controlsTimeout = null;
+        let thumbnailsVisible = false;
+
+        // Initialisation
+        function init() {
+            createSlides();
+            createThumbnails();
+            createDots();
+            showSlide(0);
+            setupEventListeners();
+            showControls();
+            
+            if (slideshowConfig.autoplay) {
+                startSlideshow();
+            }
+        }
+
+        // Créer les diapositives
+        function createSlides() {
+            const container = document.getElementById('slideshow-container');
+            slideshowConfig.slides.forEach((slide, index) => {
+                const slideDiv = document.createElement('div');
+                slideDiv.className = 'slide';
+                slideDiv.dataset.index = index;
+                
+                const img = document.createElement('img');
+                img.src = slide.image;
+                img.alt = slide.title || '';
+                slideDiv.appendChild(img);
+                
+                container.appendChild(slideDiv);
+            });
+            
+            document.getElementById('total-slides').textContent = slideshowConfig.slides.length;
+        }
+
+        // Créer les miniatures
+        function createThumbnails() {
+            const container = document.getElementById('thumbnails-container');
+            slideshowConfig.slides.forEach((slide, index) => {
+                const thumb = document.createElement('div');
+                thumb.className = 'thumbnail';
+                thumb.dataset.index = index;
+                thumb.onclick = () => goToSlide(index);
+                
+                const img = document.createElement('img');
+                img.src = slide.thumb || slide.image;
+                img.alt = slide.title || '';
+                
+                const number = document.createElement('div');
+                number.className = 'thumbnail-number';
+                number.textContent = index + 1;
+                
+                thumb.appendChild(img);
+                thumb.appendChild(number);
+                container.appendChild(thumb);
+            });
+        }
+
+        // Créer les indicateurs de points
+        function createDots() {
+            const container = document.getElementById('dots-container');
+            slideshowConfig.slides.forEach((slide, index) => {
+                const dot = document.createElement('div');
+                dot.className = 'dot';
+                dot.dataset.index = index;
+                dot.onclick = () => goToSlide(index);
+                container.appendChild(dot);
+            });
+        }
+
+        // Afficher une diapositive
+        function showSlide(index) {
+            if (index < 0) index = slideshowConfig.slides.length - 1;
+            if (index >= slideshowConfig.slides.length) index = 0;
+            
+            currentSlide = index;
+            
+            // Mettre à jour les diapositives
+            document.querySelectorAll('.slide').forEach(slide => {
+                slide.classList.remove('active');
+            });
+            document.querySelector(`.slide[data-index="${index}"]`).classList.add('active');
+            
+            // Mettre à jour les miniatures
+            document.querySelectorAll('.thumbnail').forEach(thumb => {
+                thumb.classList.remove('active');
+            });
+            const activeThumb = document.querySelector(`.thumbnail[data-index="${index}"]`);
+            activeThumb.classList.add('active');
+            activeThumb.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            
+            // Mettre à jour les points
+            document.querySelectorAll('.dot').forEach(dot => {
+                dot.classList.remove('active');
+            });
+            document.querySelector(`.dot[data-index="${index}"]`)?.classList.add('active');
+            
+            // Mettre à jour le titre
+            const title = slideshowConfig.slides[index].title;
+            const titleElement = document.getElementById('slide-title');
+            if (title) {
+                titleElement.textContent = title;
+                titleElement.classList.add('visible');
+            } else {
+                titleElement.classList.remove('visible');
+            }
+            
+            // Mettre à jour le compteur
+            document.getElementById('current-slide').textContent = index + 1;
+            
+            // Réinitialiser la barre de progression
+            resetProgress();
+        }
+
+        // Diapositive suivante
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        // Diapositive précédente
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        // Aller à une diapositive spécifique
+        function goToSlide(index) {
+            stopSlideshow();
+            showSlide(index);
+            startSlideshow();
+        }
+
+        // Démarrer le diaporama
+        function startSlideshow() {
+            if (slideTimer) clearInterval(slideTimer);
+            if (progressTimer) clearInterval(progressTimer);
+            
+            isPlaying = true;
+            updatePlayPauseButton();
+            
+            slideTimer = setInterval(nextSlide, slideshowConfig.interval);
+            startProgress();
+        }
+
+        // Arrêter le diaporama
+        function stopSlideshow() {
+            if (slideTimer) clearInterval(slideTimer);
+            if (progressTimer) clearInterval(progressTimer);
+            
+            isPlaying = false;
+            updatePlayPauseButton();
+        }
+
+        // Basculer lecture/pause
+        function togglePlayPause() {
+            if (isPlaying) {
+                stopSlideshow();
+            } else {
+                startSlideshow();
+            }
+        }
+
+        // Mettre à jour le bouton play/pause
+        function updatePlayPauseButton() {
+            document.getElementById('play-icon').style.display = isPlaying ? 'none' : 'block';
+            document.getElementById('pause-icon').style.display = isPlaying ? 'block' : 'none';
+        }
+
+        // Barre de progression
+        function startProgress() {
+            let progress = 0;
+            const progressBar = document.getElementById('progress-bar');
+            const increment = 100 / (slideshowConfig.interval / 100);
+            
+            progressTimer = setInterval(() => {
+                progress += increment;
+                if (progress >= 100) {
+                    progress = 100;
+                }
+                progressBar.style.width = progress + '%';
+            }, 100);
+        }
+
+        function resetProgress() {
+            if (progressTimer) clearInterval(progressTimer);
+            document.getElementById('progress-bar').style.width = '0%';
+            if (isPlaying) {
+                startProgress();
+            }
+        }
+
+        // Afficher/masquer les contrôles
+        function showControls() {
+            document.getElementById('controls-bar').classList.add('visible');
+            document.getElementById('prev-arrow').classList.add('visible');
+            document.getElementById('next-arrow').classList.add('visible');
+            document.getElementById('fullscreen-btn').classList.add('visible');
+            document.getElementById('dots-container').classList.add('visible');
+            
+            if (controlsTimeout) clearTimeout(controlsTimeout);
+            controlsTimeout = setTimeout(hideControls, 3000);
+        }
+
+        function hideControls() {
+            if (!thumbnailsVisible) {
+                document.getElementById('controls-bar').classList.remove('visible');
+                document.getElementById('prev-arrow').classList.remove('visible');
+                document.getElementById('next-arrow').classList.remove('visible');
+                document.getElementById('fullscreen-btn').classList.remove('visible');
+                document.getElementById('dots-container').classList.remove('visible');
+            }
+        }
+
+        // Basculer les miniatures
+        function toggleThumbnails() {
+            thumbnailsVisible = !thumbnailsVisible;
+            const container = document.getElementById('thumbnails-container');
+            if (thumbnailsVisible) {
+                container.classList.add('visible');
+                showControls();
+            } else {
+                container.classList.remove('visible');
+            }
+        }
+
+        // Plein écran
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        // Configuration des événements
+        function setupEventListeners() {
+            // Boutons de contrôle
+            document.getElementById('prev-btn').onclick = () => { stopSlideshow(); prevSlide(); startSlideshow(); };
+            document.getElementById('next-btn').onclick = () => { stopSlideshow(); nextSlide(); startSlideshow(); };
+            document.getElementById('play-pause-btn').onclick = togglePlayPause;
+            
+            // Flèches de navigation
+            document.getElementById('prev-arrow').onclick = () => { stopSlideshow(); prevSlide(); startSlideshow(); };
+            document.getElementById('next-arrow').onclick = () => { stopSlideshow(); nextSlide(); startSlideshow(); };
+            
+            // Boutons
+            document.getElementById('toggle-thumbnails').onclick = toggleThumbnails;
+            document.getElementById('fullscreen-btn').onclick = toggleFullscreen;
+            
+            // Barre de progression cliquable
+            document.getElementById('progress-container').onclick = (e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                const percent = (e.clientX - rect.left) / rect.width;
+                const slideIndex = Math.floor(percent * slideshowConfig.slides.length);
+                goToSlide(slideIndex);
+            };
+            
+            // Navigation au clavier
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') {
+                    stopSlideshow();
+                    prevSlide();
+                    startSlideshow();
+                } else if (e.key === 'ArrowRight') {
+                    stopSlideshow();
+                    nextSlide();
+                    startSlideshow();
+                } else if (e.key === ' ') {
+                    e.preventDefault();
+                    togglePlayPause();
+                } else if (e.key === 'Escape') {
+                    if (document.fullscreenElement) {
+                        document.exitFullscreen();
+                    }
+                } else if (e.key === 'f' || e.key === 'F') {
+                    toggleFullscreen();
+                }
+            });
+            
+            // Montrer les contrôles au mouvement de la souris
+            document.addEventListener('mousemove', showControls);
+            document.addEventListener('touchstart', showControls);
+        }
+
+        // Démarrer au chargement
+        window.addEventListener('load', init);
+    </script>
+</body>
+</html>

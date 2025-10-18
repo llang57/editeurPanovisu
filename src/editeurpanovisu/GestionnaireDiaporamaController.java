@@ -93,8 +93,8 @@ public final class GestionnaireDiaporamaController {
 
         }
         ivImage = new ImageView();
-        final int iLargeur = 800;
-        final int iHauteur = 550;
+        final int iLargeur = 900;
+        final int iHauteur = 650;
         apDiapo1 = new AnchorPane();
         apDiapo1.setPrefWidth(iLargeur);
         apDiapo1.setMinWidth(iLargeur);
@@ -108,87 +108,342 @@ public final class GestionnaireDiaporamaController {
         apDiaporama.setPrefHeight(iHauteur);
         apDiaporama.setMinHeight(iHauteur);
         apDiaporama.setMaxHeight(iHauteur);
-        apDiaporama.getStyleClass().add("editor-panel");
+        apDiaporama.setStyle(
+            "-fx-background-color: #f5f5f5;" +
+            "-fx-padding: 20;"
+        );
         apDiaporama.setLayoutY(80);
 
-        AnchorPane apImage = new AnchorPane();
-        apImage.getStyleClass().add("preview-panel");
-        apImage.setLayoutX(320);
-        apImage.setLayoutY(25);
-        apImage.setPrefSize(450, 300);
-
-        Label lblLibImage = new Label(rbLocalisation.getString("diapo.libelleImage"));
-        lblLibImage.setLayoutX(320);
-        lblLibImage.setLayoutY(345);
-
-        TextField tfLibImage = new TextField();
-        tfLibImage.setMinSize(350, 30);
-        tfLibImage.setPrefSize(350, 30);
-        tfLibImage.setMaxSize(350, 30);
-        tfLibImage.setLayoutX(420);
-        tfLibImage.setLayoutY(335);
-
+        // === PANNEAU GAUCHE: Liste des images ===
+        Label lblTitreImages = new Label(rbLocalisation.getString("diapo.listeImages"));
+        lblTitreImages.setLayoutX(30);
+        lblTitreImages.setLayoutY(15);
+        lblTitreImages.setStyle(
+            "-fx-font-size: 16px;" +
+            "-fx-font-weight: bold;" +
+            "-fx-text-fill: #2c3e50;"
+        );
+        
         listImage.getItems().clear();
         listImage.setLayoutX(30);
-        listImage.setLayoutY(25);
-        listImage.setPrefSize(250, 300);
-        double debutOutils = 390;
-        Label lblCouleurFondDiapo = new Label(rbLocalisation.getString("diapo.couleurFond"));
-        lblCouleurFondDiapo.setLayoutX(30);
-        lblCouleurFondDiapo.setLayoutY(debutOutils);
-
-        ColorPicker cpCouleurFondDiapo = new ColorPicker();
-        cpCouleurFondDiapo.setLayoutX(180);
-        cpCouleurFondDiapo.setLayoutY(debutOutils);
-        cpCouleurFondDiapo.setPrefWidth(140);
-
-        Label lblOpaciteDiapo = new Label(rbLocalisation.getString("diapo.opacite"));
-        lblOpaciteDiapo.setLayoutX(30);
-        lblOpaciteDiapo.setLayoutY(debutOutils + 30);
-        Slider slOpaciteDiapo = new Slider(0.0, 1.0, 0.5);
-        slOpaciteDiapo.setLayoutX(180);
-        slOpaciteDiapo.setLayoutY(debutOutils + 30);
-        slOpaciteDiapo.setPrefWidth(140);
-
-        Label lblDelaiDiapo = new Label(rbLocalisation.getString("diapo.delai"));
-        lblDelaiDiapo.setLayoutX(30);
-        lblDelaiDiapo.setLayoutY(debutOutils + 60);
-        BigDecimalField bdfDelaiDiapo = new BigDecimalField(BigDecimal.valueOf(3));
-        bdfDelaiDiapo.setLayoutX(180);
-        bdfDelaiDiapo.setLayoutY(debutOutils + 60);
-        bdfDelaiDiapo.setPrefWidth(140);
-
-        double largeurBouton = 250;
-        Button btnVisualiseDiapo = new Button(rbLocalisation.getString("diapo.visualise"));
-        btnVisualiseDiapo.setLayoutX(iLargeur - largeurBouton - 30);
-        btnVisualiseDiapo.setLayoutY(debutOutils);
-        btnVisualiseDiapo.setPrefSize(largeurBouton, 90);
+        listImage.setLayoutY(45);
+        listImage.setPrefSize(280, 320);
+        listImage.setStyle(
+            "-fx-background-color: white;" +
+            "-fx-border-color: #d0d0d0;" +
+            "-fx-border-width: 1;" +
+            "-fx-border-radius: 5;" +
+            "-fx-background-radius: 5;"
+        );
 
         Button btnAjouteImage = new Button(rbLocalisation.getString("diapo.ajouteImage"));
         btnAjouteImage.setLayoutX(30);
-        btnAjouteImage.setLayoutY(335);
-        btnAjouteImage.setPrefSize(120, 30);
-        btnAjouteImage.setMinSize(120, 30);
-        btnAjouteImage.setMaxSize(120, 30);
+        btnAjouteImage.setLayoutY(375);
+        btnAjouteImage.setPrefSize(135, 35);
+        btnAjouteImage.setStyle(
+            "-fx-background-color: #4CAF50;" +
+            "-fx-text-fill: white;" +
+            "-fx-font-weight: bold;" +
+            "-fx-border-radius: 5;" +
+            "-fx-background-radius: 5;" +
+            "-fx-cursor: hand;" +
+            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 2);"
+        );
+        btnAjouteImage.setOnMouseEntered(e -> 
+            btnAjouteImage.setStyle(
+                "-fx-background-color: #45a049;" +
+                "-fx-text-fill: white;" +
+                "-fx-font-weight: bold;" +
+                "-fx-border-radius: 5;" +
+                "-fx-background-radius: 5;" +
+                "-fx-cursor: hand;" +
+                "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 4, 0, 0, 3);"
+            )
+        );
+        btnAjouteImage.setOnMouseExited(e -> 
+            btnAjouteImage.setStyle(
+                "-fx-background-color: #4CAF50;" +
+                "-fx-text-fill: white;" +
+                "-fx-font-weight: bold;" +
+                "-fx-border-radius: 5;" +
+                "-fx-background-radius: 5;" +
+                "-fx-cursor: hand;" +
+                "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 2);"
+            )
+        );
+        
         Button btnSupprimeImage = new Button(rbLocalisation.getString("diapo.supprimeImage"));
-        btnSupprimeImage.setLayoutX(160);
-        btnSupprimeImage.setLayoutY(335);
-        btnSupprimeImage.setPrefSize(120, 30);
-        btnSupprimeImage.setMinSize(120, 30);
-        btnSupprimeImage.setMaxSize(120, 130);
+        btnSupprimeImage.setLayoutX(175);
+        btnSupprimeImage.setLayoutY(375);
+        btnSupprimeImage.setPrefSize(135, 35);
+        btnSupprimeImage.setStyle(
+            "-fx-background-color: #f44336;" +
+            "-fx-text-fill: white;" +
+            "-fx-font-weight: bold;" +
+            "-fx-border-radius: 5;" +
+            "-fx-background-radius: 5;" +
+            "-fx-cursor: hand;" +
+            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 2);"
+        );
+        btnSupprimeImage.setOnMouseEntered(e -> 
+            btnSupprimeImage.setStyle(
+                "-fx-background-color: #da190b;" +
+                "-fx-text-fill: white;" +
+                "-fx-font-weight: bold;" +
+                "-fx-border-radius: 5;" +
+                "-fx-background-radius: 5;" +
+                "-fx-cursor: hand;" +
+                "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 4, 0, 0, 3);"
+            )
+        );
+        btnSupprimeImage.setOnMouseExited(e -> 
+            btnSupprimeImage.setStyle(
+                "-fx-background-color: #f44336;" +
+                "-fx-text-fill: white;" +
+                "-fx-font-weight: bold;" +
+                "-fx-border-radius: 5;" +
+                "-fx-background-radius: 5;" +
+                "-fx-cursor: hand;" +
+                "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 2);"
+            )
+        );
 
-        btnAnnulerDiaporama.setPrefWidth(120);
-        btnAnnulerDiaporama.setLayoutX(iLargeur - 260);
-        btnAnnulerDiaporama.setLayoutY(iHauteur - 40);
-        btnSauverDiaporama.setPrefWidth(120);
-        btnSauverDiaporama.setLayoutX(iLargeur - 130);
-        btnSauverDiaporama.setLayoutY(iHauteur - 40);
+        // === PANNEAU DROIT: Prévisualisation ===
+        Label lblTitrePreview = new Label(rbLocalisation.getString("diapo.previsualisation"));
+        lblTitrePreview.setLayoutX(350);
+        lblTitrePreview.setLayoutY(15);
+        lblTitrePreview.setStyle(
+            "-fx-font-size: 16px;" +
+            "-fx-font-weight: bold;" +
+            "-fx-text-fill: #2c3e50;"
+        );
+        
+        AnchorPane apImage = new AnchorPane();
+        apImage.setLayoutX(350);
+        apImage.setLayoutY(45);
+        apImage.setPrefSize(500, 320);
+        apImage.setStyle(
+            "-fx-background-color: #2c3e50;" +
+            "-fx-border-color: #34495e;" +
+            "-fx-border-width: 2;" +
+            "-fx-border-radius: 8;" +
+            "-fx-background-radius: 8;" +
+            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 5);"
+        );
+
+        Label lblLibImage = new Label(rbLocalisation.getString("diapo.libelleImage"));
+        lblLibImage.setLayoutX(350);
+        lblLibImage.setLayoutY(380);
+        lblLibImage.setStyle(
+            "-fx-font-size: 13px;" +
+            "-fx-font-weight: bold;" +
+            "-fx-text-fill: #34495e;"
+        );
+
+        TextField tfLibImage = new TextField();
+        tfLibImage.setMinSize(400, 30);
+        tfLibImage.setPrefSize(400, 30);
+        tfLibImage.setMaxSize(400, 30);
+        tfLibImage.setLayoutX(450);
+        tfLibImage.setLayoutY(375);
+        tfLibImage.setStyle(
+            "-fx-background-color: white;" +
+            "-fx-border-color: #bdc3c7;" +
+            "-fx-border-width: 1;" +
+            "-fx-border-radius: 4;" +
+            "-fx-background-radius: 4;" +
+            "-fx-padding: 5 10;"
+        );
+
+        // === PARAMETRES DU DIAPORAMA ===
+        double debutOutils = 430;
+        
+        Label lblTitreParams = new Label(rbLocalisation.getString("diapo.parametres"));
+        lblTitreParams.setLayoutX(30);
+        lblTitreParams.setLayoutY(debutOutils - 10);
+        lblTitreParams.setStyle(
+            "-fx-font-size: 16px;" +
+            "-fx-font-weight: bold;" +
+            "-fx-text-fill: #2c3e50;"
+        );
+        
+        Label lblCouleurFondDiapo = new Label(rbLocalisation.getString("diapo.couleurFond"));
+        lblCouleurFondDiapo.setLayoutX(30);
+        lblCouleurFondDiapo.setLayoutY(debutOutils + 25);
+        lblCouleurFondDiapo.setStyle(
+            "-fx-font-size: 13px;" +
+            "-fx-text-fill: #34495e;"
+        );
+
+        ColorPicker cpCouleurFondDiapo = new ColorPicker();
+        cpCouleurFondDiapo.setLayoutX(200);
+        cpCouleurFondDiapo.setLayoutY(debutOutils + 20);
+        cpCouleurFondDiapo.setPrefWidth(150);
+        cpCouleurFondDiapo.setStyle(
+            "-fx-background-color: white;" +
+            "-fx-border-radius: 4;" +
+            "-fx-background-radius: 4;"
+        );
+
+        Label lblOpaciteDiapo = new Label(rbLocalisation.getString("diapo.opacite"));
+        lblOpaciteDiapo.setLayoutX(390);
+        lblOpaciteDiapo.setLayoutY(debutOutils + 25);
+        lblOpaciteDiapo.setStyle(
+            "-fx-font-size: 13px;" +
+            "-fx-text-fill: #34495e;"
+        );
+        
+        Slider slOpaciteDiapo = new Slider(0.0, 1.0, 0.5);
+        slOpaciteDiapo.setLayoutX(480);
+        slOpaciteDiapo.setLayoutY(debutOutils + 25);
+        slOpaciteDiapo.setPrefWidth(180);
+        slOpaciteDiapo.setShowTickMarks(true);
+        slOpaciteDiapo.setShowTickLabels(false);
+
+        Label lblDelaiDiapo = new Label(rbLocalisation.getString("diapo.delai"));
+        lblDelaiDiapo.setLayoutX(680);
+        lblDelaiDiapo.setLayoutY(debutOutils + 25);
+        lblDelaiDiapo.setStyle(
+            "-fx-font-size: 13px;" +
+            "-fx-text-fill: #34495e;"
+        );
+        
+        BigDecimalField bdfDelaiDiapo = new BigDecimalField(BigDecimal.valueOf(3));
+        bdfDelaiDiapo.setLayoutX(740);
+        bdfDelaiDiapo.setLayoutY(debutOutils + 25);
+        bdfDelaiDiapo.setPrefWidth(110);
+        bdfDelaiDiapo.setStyle(
+            "-fx-background-color: white;" +
+            "-fx-border-color: #bdc3c7;" +
+            "-fx-border-width: 1;" +
+            "-fx-border-radius: 4;" +
+            "-fx-background-radius: 4;" +
+            "-fx-padding: 5 10;"
+        );
+
+        // === BOUTON VISUALISATION ===
+        Button btnVisualiseDiapo = new Button(rbLocalisation.getString("diapo.visualise"));
+        btnVisualiseDiapo.setLayoutX(30);
+        btnVisualiseDiapo.setLayoutY(debutOutils + 65);
+        btnVisualiseDiapo.setPrefSize(820, 45);
+        btnVisualiseDiapo.setStyle(
+            "-fx-background-color: #3498db;" +
+            "-fx-text-fill: white;" +
+            "-fx-font-size: 14px;" +
+            "-fx-font-weight: bold;" +
+            "-fx-border-radius: 6;" +
+            "-fx-background-radius: 6;" +
+            "-fx-cursor: hand;" +
+            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 5, 0, 0, 3);"
+        );
+        btnVisualiseDiapo.setOnMouseEntered(e -> 
+            btnVisualiseDiapo.setStyle(
+                "-fx-background-color: #2980b9;" +
+                "-fx-text-fill: white;" +
+                "-fx-font-size: 14px;" +
+                "-fx-font-weight: bold;" +
+                "-fx-border-radius: 6;" +
+                "-fx-background-radius: 6;" +
+                "-fx-cursor: hand;" +
+                "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 6, 0, 0, 4);"
+            )
+        );
+        btnVisualiseDiapo.setOnMouseExited(e -> 
+            btnVisualiseDiapo.setStyle(
+                "-fx-background-color: #3498db;" +
+                "-fx-text-fill: white;" +
+                "-fx-font-size: 14px;" +
+                "-fx-font-weight: bold;" +
+                "-fx-border-radius: 6;" +
+                "-fx-background-radius: 6;" +
+                "-fx-cursor: hand;" +
+                "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 5, 0, 0, 3);"
+            )
+        );
+
+        // === BOUTONS ANNULER / VALIDER ===
+        btnAnnulerDiaporama.setPrefSize(150, 40);
+        btnAnnulerDiaporama.setLayoutX(iLargeur - 330);
+        btnAnnulerDiaporama.setLayoutY(iHauteur - 50);
+        btnAnnulerDiaporama.setStyle(
+            "-fx-background-color: #95a5a6;" +
+            "-fx-text-fill: white;" +
+            "-fx-font-size: 13px;" +
+            "-fx-font-weight: bold;" +
+            "-fx-border-radius: 5;" +
+            "-fx-background-radius: 5;" +
+            "-fx-cursor: hand;" +
+            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 2);"
+        );
+        btnAnnulerDiaporama.setOnMouseEntered(e -> 
+            btnAnnulerDiaporama.setStyle(
+                "-fx-background-color: #7f8c8d;" +
+                "-fx-text-fill: white;" +
+                "-fx-font-size: 13px;" +
+                "-fx-font-weight: bold;" +
+                "-fx-border-radius: 5;" +
+                "-fx-background-radius: 5;" +
+                "-fx-cursor: hand;" +
+                "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 4, 0, 0, 3);"
+            )
+        );
+        btnAnnulerDiaporama.setOnMouseExited(e -> 
+            btnAnnulerDiaporama.setStyle(
+                "-fx-background-color: #95a5a6;" +
+                "-fx-text-fill: white;" +
+                "-fx-font-size: 13px;" +
+                "-fx-font-weight: bold;" +
+                "-fx-border-radius: 5;" +
+                "-fx-background-radius: 5;" +
+                "-fx-cursor: hand;" +
+                "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 2);"
+            )
+        );
+        
+        btnSauverDiaporama.setPrefSize(150, 40);
+        btnSauverDiaporama.setLayoutX(iLargeur - 170);
+        btnSauverDiaporama.setLayoutY(iHauteur - 50);
+        btnSauverDiaporama.setStyle(
+            "-fx-background-color: #27ae60;" +
+            "-fx-text-fill: white;" +
+            "-fx-font-size: 13px;" +
+            "-fx-font-weight: bold;" +
+            "-fx-border-radius: 5;" +
+            "-fx-background-radius: 5;" +
+            "-fx-cursor: hand;" +
+            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 2);"
+        );
+        btnSauverDiaporama.setOnMouseEntered(e -> 
+            btnSauverDiaporama.setStyle(
+                "-fx-background-color: #229954;" +
+                "-fx-text-fill: white;" +
+                "-fx-font-size: 13px;" +
+                "-fx-font-weight: bold;" +
+                "-fx-border-radius: 5;" +
+                "-fx-background-radius: 5;" +
+                "-fx-cursor: hand;" +
+                "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 4, 0, 0, 3);"
+            )
+        );
+        btnSauverDiaporama.setOnMouseExited(e -> 
+            btnSauverDiaporama.setStyle(
+                "-fx-background-color: #27ae60;" +
+                "-fx-text-fill: white;" +
+                "-fx-font-size: 13px;" +
+                "-fx-font-weight: bold;" +
+                "-fx-border-radius: 5;" +
+                "-fx-background-radius: 5;" +
+                "-fx-cursor: hand;" +
+                "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 2);"
+            )
+        );
 
         apDiapo1.getChildren().addAll(
-                listImage,
+                lblTitreImages, listImage,
                 btnAjouteImage, btnSupprimeImage,
-                apImage,
+                lblTitrePreview, apImage,
                 lblLibImage, tfLibImage,
+                lblTitreParams,
                 lblCouleurFondDiapo, cpCouleurFondDiapo,
                 lblOpaciteDiapo, slOpaciteDiapo,
                 lblDelaiDiapo, bdfDelaiDiapo,
@@ -204,7 +459,12 @@ public final class GestionnaireDiaporamaController {
                 listImage.getItems().add(getDiaporama().getStrFichiers(i));
             }
             cpCouleurFondDiapo.setValue(Color.valueOf(getDiaporama().getStrCouleurFondDiaporama()));
-            apImage.setStyle("-fx-background-color : " + getDiaporama().getStrCouleurFondDiaporama() + ";");
+            apImage.setStyle("-fx-background-color: " + getDiaporama().getStrCouleurFondDiaporama() + ";" +
+                "-fx-border-color: #34495e;" +
+                "-fx-border-width: 2;" +
+                "-fx-border-radius: 8;" +
+                "-fx-background-radius: 8;" +
+                "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 5);");
 
             slOpaciteDiapo.setValue(getDiaporama().getOpaciteDiaporama());
             bdfDelaiDiapo.setNumber(BigDecimal.valueOf(getDiaporama().getDelaiDiaporama()));
@@ -235,7 +495,12 @@ public final class GestionnaireDiaporamaController {
             if (newValue != null) {
                 diapoSauve = false;
                 getDiaporama().setStrCouleurFondDiaporama("#" + newValue.toString().substring(2, 8));
-                apImage.setStyle("-fx-background-color : " + getDiaporama().getStrCouleurFondDiaporama() + ";");
+                apImage.setStyle("-fx-background-color: " + getDiaporama().getStrCouleurFondDiaporama() + ";" +
+                    "-fx-border-color: #34495e;" +
+                    "-fx-border-width: 2;" +
+                    "-fx-border-radius: 8;" +
+                    "-fx-background-radius: 8;" +
+                    "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 5);");
             }
         });
 

@@ -2643,7 +2643,11 @@ public class EditeurPanovisu extends Application {
                     } else {
                         longit = HS.getLongitude() + 90;
                     }
-                    String strAnime = (HS.isbAnime()) ? "true" : "false";
+                    // Récupérer le type d'animation comme pour les hotspots photo
+                    String strTypeAnimation = HS.getStrTypeAnimation();
+                    if (strTypeAnimation == null || strTypeAnimation.isEmpty()) {
+                        strTypeAnimation = "blink"; // Animation par défaut
+                    }
 
                     strContenuFichier
                             += "      <point \n"
@@ -2664,7 +2668,7 @@ public class EditeurPanovisu extends Application {
                             + "           taille=\"90%\"\n"
                             + "           info=\"" + HS.getStrInfo().replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;") + "\"\n"
                             + "           couleur=\"" + strCoulHTML + "\"\n"
-                            + "           anime=\"" + strAnime + "\"\n"
+                            + "           anime=\"" + strTypeAnimation + "\"\n"
                             + "      />\n";
                 }
 
@@ -10574,14 +10578,6 @@ public class EditeurPanovisu extends Application {
      * @param mouseEvent
      */
     private static void choixZone(int iLargeur, int iHauteur, boolean bMasqueZones, String strIdZone, MouseEvent mouseEvent) {
-        ComboBox cbTouchesBarre = new ComboBox();
-        cbTouchesBarre.getItems().clear();
-        for (int i = 0; i < strTouchesBarre.length; i++) {
-            cbTouchesBarre.getItems().add(i, strTouchesBarre[i]);
-        }
-        cbTouchesBarre.setLayoutX(200);
-        cbTouchesBarre.setLayoutX(40);
-
         final int iNumeroZone = Integer.parseInt(strIdZone.split("-")[1]);
         if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
             if (mouseEvent.getClickCount() == 2) {
@@ -10593,8 +10589,30 @@ public class EditeurPanovisu extends Application {
             } else {
                 afficheBarrePersonnalisee(iLargeur, iHauteur, bMasqueZones);
                 apZoneBarrePersonnalisee.getChildren().clear();
-                apZoneBarrePersonnalisee.getChildren().add(cbTouchesBarre);
+                
                 ZoneTelecommande zone = zones[iNumeroZone];
+                
+                // ComboBox moderne pour le choix de touche
+                ComboBox cbTouchesBarre = new ComboBox();
+                cbTouchesBarre.getItems().clear();
+                for (int i = 0; i < strTouchesBarre.length; i++) {
+                    cbTouchesBarre.getItems().add(i, strTouchesBarre[i]);
+                }
+                cbTouchesBarre.setLayoutX(20);
+                cbTouchesBarre.setLayoutY(30); // Décalé de 30px vers le bas
+                cbTouchesBarre.setPrefWidth(295);
+                cbTouchesBarre.setStyle(
+                    "-fx-background-color: white;" +
+                    "-fx-control-inner-background: white;" +
+                    "-fx-text-fill: black;" +
+                    "-fx-border-color: #3498db;" +
+                    "-fx-border-width: 2;" +
+                    "-fx-border-radius: 4;" +
+                    "-fx-background-radius: 4;" +
+                    "-fx-font-size: 13px;"
+                );
+                
+                // Trouver l'index de l'action de la zone et sélectionner dans la ComboBox
                 int index = -1;
                 for (int ij = 0; ij < strCodeBarre.length; ij++) {
                     if (strCodeBarre[ij].equals(zone.getStrIdZone())) {
@@ -10604,6 +10622,52 @@ public class EditeurPanovisu extends Application {
                 if (index != -1) {
                     cbTouchesBarre.getSelectionModel().select(index);
                 }
+                
+                // Utiliser une CellFactory pour forcer le style des items (fond blanc, texte noir)
+                cbTouchesBarre.setCellFactory(param -> new javafx.scene.control.ListCell<String>() {
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty || item == null) {
+                            setText(null);
+                            setStyle("");
+                        } else {
+                            setText(item);
+                            setStyle(
+                                "-fx-background-color: white;" +
+                                "-fx-text-fill: black;" +
+                                "-fx-padding: 5px;"
+                            );
+                        }
+                    }
+                });
+                
+                // Style pour le bouton de la ComboBox (affichage de la valeur sélectionnée)
+                cbTouchesBarre.setButtonCell(new javafx.scene.control.ListCell<String>() {
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty || item == null) {
+                            setText(null);
+                        } else {
+                            setText(item);
+                            setStyle("-fx-text-fill: black;");
+                        }
+                    }
+                });
+                
+                // Label titre pour la section
+                Label lblTitreZone = new Label("Zone sélectionnée");
+                lblTitreZone.setLayoutX(20);
+                lblTitreZone.setLayoutY(5);
+                lblTitreZone.setStyle(
+                    "-fx-font-size: 14px;" +
+                    "-fx-font-weight: bold;" +
+                    "-fx-text-fill: #2c3e50;"
+                );
+                
+                // Ajouter les éléments au panel
+                apZoneBarrePersonnalisee.getChildren().addAll(lblTitreZone, cbTouchesBarre);
 
                 cbTouchesBarre.valueProperty().addListener((ov, ancienneValeur, nouvelleValeur) -> {
                     if (nouvelleValeur != null) {
@@ -10612,17 +10676,51 @@ public class EditeurPanovisu extends Application {
                     }
                 });
 
+                // Label Type avec style moderne
+                Label lblTypeLabel = new Label("Type :");
+                lblTypeLabel.setLayoutX(20);
+                lblTypeLabel.setLayoutY(70);
+                lblTypeLabel.setStyle(
+                    "-fx-font-size: 12px;" +
+                    "-fx-font-weight: bold;" +
+                    "-fx-text-fill: #34495e;"
+                );
+                
                 Label lblTypeBarre = new Label(zone.getStrTypeZone());
-                lblTypeBarre.setLayoutX(20);
-                lblTypeBarre.setLayoutY(40);
+                lblTypeBarre.setLayoutX(70);
+                lblTypeBarre.setLayoutY(70);
+                lblTypeBarre.setStyle(
+                    "-fx-font-size: 12px;" +
+                    "-fx-text-fill: #7f8c8d;"
+                );
+                
+                // Label Coordonnées avec style moderne
+                Label lblCoordsLabel = new Label("Coordonnées :");
+                lblCoordsLabel.setLayoutX(20);
+                lblCoordsLabel.setLayoutY(95);
+                lblCoordsLabel.setStyle(
+                    "-fx-font-size: 12px;" +
+                    "-fx-font-weight: bold;" +
+                    "-fx-text-fill: #34495e;"
+                );
+                
                 Label lblCoordsBarre = new Label(zone.getStrCoordonneesZone());
                 lblCoordsBarre.setLayoutX(20);
-                lblCoordsBarre.setLayoutY(70);
-                lblCoordsBarre.setPrefWidth(260);
-                lblCoordsBarre.setMaxWidth(260);
+                lblCoordsBarre.setLayoutY(115);
+                lblCoordsBarre.setPrefWidth(295);
+                lblCoordsBarre.setMaxWidth(295);
                 lblCoordsBarre.setWrapText(true);
+                lblCoordsBarre.setStyle(
+                    "-fx-font-size: 11px;" +
+                    "-fx-text-fill: #7f8c8d;" +
+                    "-fx-background-color: #ecf0f1;" +
+                    "-fx-padding: 5;" +
+                    "-fx-border-radius: 4;" +
+                    "-fx-background-radius: 4;"
+                );
+                
                 apZoneBarrePersonnalisee.getChildren()
-                        .addAll(lblTypeBarre, lblCoordsBarre);
+                        .addAll(lblTypeLabel, lblTypeBarre, lblCoordsLabel, lblCoordsBarre);
                 switch (zone.getStrTypeZone()) {
                     case "poly":
                         Polygon poly = (Polygon) apImgBarrePersonnalisee.lookup("#" + strIdZone);
@@ -10737,40 +10835,156 @@ public class EditeurPanovisu extends Application {
         iNombrePointsZone = 0;
         bRecommenceZone = false;
         apZoneBarrePersonnalisee.getChildren().clear();
+        
+        // Boutons modernes avec effets hover
         Button btnAnnuler = new Button(rbLocalisation.getString("main.annuler"), new ImageView(new Image("file:" + getStrRepertAppli() + "/images/annule.png")));
         Button btnValider = new Button(rbLocalisation.getString("main.valider"), new ImageView(new Image("file:" + getStrRepertAppli() + "/images/valide.png")));
-        btnValider.setLayoutX(180);
-        btnValider.setLayoutY(155); // Réduit de 170 à 155 pour plus d'espace en bas
-        btnAnnuler.setLayoutX(80);
-        btnAnnuler.setLayoutY(155); // Réduit de 170 à 155 pour plus d'espace en bas
+        
+        btnValider.setLayoutX(175);
+        btnValider.setLayoutY(235);
+        btnValider.setPrefWidth(140);
+        btnValider.setPrefHeight(35);
+        btnValider.setStyle(
+            "-fx-background-color: #27ae60;" +
+            "-fx-text-fill: white;" +
+            "-fx-font-weight: bold;" +
+            "-fx-font-size: 13px;" +
+            "-fx-border-radius: 5;" +
+            "-fx-background-radius: 5;" +
+            "-fx-cursor: hand;" +
+            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 2);"
+        );
+        btnValider.setOnMouseEntered(e -> btnValider.setStyle(
+            "-fx-background-color: #229954;" +
+            "-fx-text-fill: white;" +
+            "-fx-font-weight: bold;" +
+            "-fx-font-size: 13px;" +
+            "-fx-border-radius: 5;" +
+            "-fx-background-radius: 5;" +
+            "-fx-cursor: hand;" +
+            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 0, 3);"
+        ));
+        btnValider.setOnMouseExited(e -> btnValider.setStyle(
+            "-fx-background-color: #27ae60;" +
+            "-fx-text-fill: white;" +
+            "-fx-font-weight: bold;" +
+            "-fx-font-size: 13px;" +
+            "-fx-border-radius: 5;" +
+            "-fx-background-radius: 5;" +
+            "-fx-cursor: hand;" +
+            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 2);"
+        ));
+        
+        btnAnnuler.setLayoutX(20);
+        btnAnnuler.setLayoutY(235);
+        btnAnnuler.setPrefWidth(140);
+        btnAnnuler.setPrefHeight(35);
+        btnAnnuler.setStyle(
+            "-fx-background-color: #95a5a6;" +
+            "-fx-text-fill: white;" +
+            "-fx-font-weight: bold;" +
+            "-fx-font-size: 13px;" +
+            "-fx-border-radius: 5;" +
+            "-fx-background-radius: 5;" +
+            "-fx-cursor: hand;" +
+            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 2);"
+        );
+        btnAnnuler.setOnMouseEntered(e -> btnAnnuler.setStyle(
+            "-fx-background-color: #7f8c8d;" +
+            "-fx-text-fill: white;" +
+            "-fx-font-weight: bold;" +
+            "-fx-font-size: 13px;" +
+            "-fx-border-radius: 5;" +
+            "-fx-background-radius: 5;" +
+            "-fx-cursor: hand;" +
+            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 0, 3);"
+        ));
+        btnAnnuler.setOnMouseExited(e -> btnAnnuler.setStyle(
+            "-fx-background-color: #95a5a6;" +
+            "-fx-text-fill: white;" +
+            "-fx-font-weight: bold;" +
+            "-fx-font-size: 13px;" +
+            "-fx-border-radius: 5;" +
+            "-fx-background-radius: 5;" +
+            "-fx-cursor: hand;" +
+            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 2);"
+        ));
+        
         ToggleGroup tgTypeZone = new ToggleGroup();
+        
+        // Label de section moderne
         Label lblTypeZone = new Label(rbLocalisation.getString("main.typeZone"));
         lblTypeZone.setLayoutX(20);
         lblTypeZone.setLayoutY(10);
+        lblTypeZone.setStyle(
+            "-fx-font-size: 14px;" +
+            "-fx-font-weight: bold;" +
+            "-fx-text-fill: #2c3e50;"
+        );
 
+        // RadioButtons modernes avec fond blanc
         RadioButton rbCercleZone = new RadioButton(rbLocalisation.getString("main.cercle"));
         rbCercleZone.setLayoutX(20);
         rbCercleZone.setLayoutY(40);
         rbCercleZone.setUserData("circle");
         rbCercleZone.setToggleGroup(tgTypeZone);
+        rbCercleZone.setStyle(
+            "-fx-font-size: 12px;" +
+            "-fx-text-fill: black;" +
+            "-fx-background-color: white;" +
+            "-fx-padding: 3px;"
+        );
+        
         RadioButton rbRectZone = new RadioButton(rbLocalisation.getString("main.rectangle"));
-        rbRectZone.setLayoutX(120);
-        rbRectZone.setLayoutY(40);
+        rbRectZone.setLayoutX(20);
+        rbRectZone.setLayoutY(70);
         rbRectZone.setUserData("rect");
         rbRectZone.setToggleGroup(tgTypeZone);
+        rbRectZone.setStyle(
+            "-fx-font-size: 12px;" +
+            "-fx-text-fill: black;" +
+            "-fx-background-color: white;" +
+            "-fx-padding: 3px;"
+        );
+        
         RadioButton rbPolyZone = new RadioButton(rbLocalisation.getString("main.polygone"));
-        rbPolyZone.setLayoutX(220);
-        rbPolyZone.setLayoutY(40);
+        rbPolyZone.setLayoutX(20);
+        rbPolyZone.setLayoutY(100);
         rbPolyZone.setUserData("poly");
         rbPolyZone.setToggleGroup(tgTypeZone);
         rbPolyZone.setSelected(true);
+        rbPolyZone.setStyle(
+            "-fx-font-size: 12px;" +
+            "-fx-text-fill: black;" +
+            "-fx-background-color: white;" +
+            "-fx-padding: 3px;"
+        );
+        
+        // Label pour la ComboBox
+        Label lblTouche = new Label("Touche :");
+        lblTouche.setLayoutX(20);
+        lblTouche.setLayoutY(140);
+        lblTouche.setStyle(
+            "-fx-font-size: 13px;" +
+            "-fx-text-fill: #34495e;"
+        );
+        
+        // ComboBox moderne
         ComboBox cbTouchesBarre = new ComboBox();
         cbTouchesBarre.getItems().clear();
         for (int i = 0; i < strTouchesBarre.length; i++) {
             cbTouchesBarre.getItems().add(i, strTouchesBarre[i]);
         }
-        cbTouchesBarre.setLayoutX(50);
-        cbTouchesBarre.setLayoutY(110);
+        cbTouchesBarre.setLayoutX(20);
+        cbTouchesBarre.setLayoutY(165);
+        cbTouchesBarre.setPrefWidth(295);
+        cbTouchesBarre.setStyle(
+            "-fx-background-color: white;" +
+            "-fx-border-color: #bdc3c7;" +
+            "-fx-border-width: 1;" +
+            "-fx-border-radius: 4;" +
+            "-fx-background-radius: 4;"
+        );
 
         afficheBarrePersonnalisee(iLargeur, iHauteur, bMasqueZones);
         AnchorPane apCreeZone = new AnchorPane();
@@ -10782,6 +10996,7 @@ public class EditeurPanovisu extends Application {
         apZoneBarrePersonnalisee.getChildren().addAll(
                 lblTypeZone,
                 rbCercleZone, rbRectZone, rbPolyZone,
+                lblTouche,
                 cbTouchesBarre,
                 btnAnnuler, btnValider
         );
@@ -11039,155 +11254,139 @@ public class EditeurPanovisu extends Application {
         }
         String strDiapoNom = "diapo" + iNumero + ".html";
         int intervalle = (int) (diapo.getDelaiDiaporama() * 1000);
-        String strContenuHTML = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n"
-                + "\n"
-                + "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\" lang=\"en\">\n"
-                + "\n"
-                + "    <!--\n"
-                + "            Supersized - Fullscreen Slideshow jQuery Plugin\n"
-                + "            Version : 3.2.7\n"
-                + "            Site	: www.buildinternet.com/project/supersized\n"
-                + "            \n"
-                + "            Author	: Sam Dunn\n"
-                + "            Company : One Mighty Roar (www.onemightyroar.com)\n"
-                + "            License : MIT License / GPL License\n"
-                + "    -->\n"
-                + "\n"
-                + "    <head>\n"
-                + "\n"
-                + "        <title>Supersized - Full Screen Background Slideshow jQuery Plugin</title>\n"
-                + "        <meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\" />\n"
-                + "\n"
-                + "        <link rel=\"stylesheet\" href=\"css/supersized.css\" type=\"text/css\" media=\"screen\" />\n"
-                + "        <link rel=\"stylesheet\" href=\"theme/supersized.shutter.css\" type=\"text/css\" media=\"screen\" />\n"
-                + "\n"
-                + "        <script type=\"text/javascript\" src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js\"></script>\n"
-                + "        <script type=\"text/javascript\" src=\"js/jquery.easing.min.js\"></script>\n"
-                + "\n"
-                + "        <script type=\"text/javascript\" src=\"js/supersized.3.2.7.min.js\"></script>\n"
-                + "        <script type=\"text/javascript\" src=\"theme/supersized.shutter.min.js\"></script>\n"
-                + "\n"
-                + "        <script type=\"text/javascript\">\n"
-                + "\n"
-                + "            jQuery(function ($) {\n"
-                + "\n"
-                + "                $.supersized({\n"
-                + "                    // Functionality\n"
-                + "                    slideshow: 1, // Slideshow on/off\n"
-                + "                    autoplay: 1, // Slideshow starts playing automatically\n"
-                + "                    start_slide: 1, // Start slide (0 is random)\n"
-                + "                    stop_loop: 0, // Pauses slideshow on last slide\n"
-                + "                    random: 0, // Randomize slide order (Ignores start slide)\n"
-                + "                    slide_interval: " + intervalle + ", // Length between transitions\n"
-                + "                    transition: 1, // 0-None, 1-Fade, 2-Slide Top, 3-Slide Right, 4-Slide Bottom, 5-Slide Left, 6-Carousel Right, 7-Carousel Left\n"
-                + "                    transition_speed: 1200, // Speed of transition\n"
-                + "                    new_window: 1, // Image links open in new window/tab\n"
-                + "                    pause_hover: 0, // Pause slideshow on hover\n"
-                + "                    keyboard_nav: 1, // Keyboard navigation on/off\n"
-                + "                    performance: 2, // 0-Normal, 1-Hybrid speed/quality, 2-Optimizes image quality, 3-Optimizes transition speed // (Only works for Firefox/IE, not Webkit)\n"
-                + "                    image_protect: 1, // Disables image dragging and right click with Javascript\n"
-                + "\n"
-                + "                    // Size & Position						   \n"
-                + "                    min_width: 0, // Min width allowed (in pixels)\n"
-                + "                    min_height: 0, // Min height allowed (in pixels)\n"
-                + "                    vertical_center: 1, // Vertically center background\n"
-                + "                    horizontal_center: 1, // Horizontally center background\n"
-                + "                    fit_always: 1, // Image will never exceed browser width or height (Ignores min. dimensions)\n"
-                + "                    fit_portrait: 1, // Portrait images will not exceed browser height\n"
-                + "                    fit_landscape: 0, // Landscape images will not exceed browser width\n"
-                + "\n"
-                + "                    // Components							\n"
-                + "                    slide_links: 'blank', // Individual links for each slide (Options: false, 'num', 'name', 'blank')\n"
-                + "                    thumb_links: 1, // Individual thumb links for each slide\n"
-                + "                    thumbnail_navigation: 0, // Thumbnail navigation\n"
-                + "                    slides: [// Slideshow Images\n";
+        
+        // Générer le contenu HTML moderne
+        String strContenuHTML = "<!DOCTYPE html>\n"
+                + "<html lang=\"fr\">\n"
+                + "<head>\n"
+                + "    <meta charset=\"UTF-8\">\n"
+                + "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
+                + "    <title>Diaporama - PanoVisu</title>\n"
+                + "    <style>\n"
+                + "        * { margin: 0; padding: 0; box-sizing: border-box; }\n"
+                + "        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; overflow: hidden; background: #000; }\n"
+                + "        #slideshow-container { position: relative; width: 100vw; height: 100vh; background: #000; }\n"
+                + "        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1.2s cubic-bezier(0.4, 0.0, 0.2, 1); z-index: 1; }\n"
+                + "        .slide.active { opacity: 1; z-index: 2; }\n"
+                + "        .slide img { width: 100%; height: 100%; object-fit: contain; background: " + diapo.getStrCouleurFondDiaporama() + "; }\n"
+                + "        #controls-bar { position: fixed; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 50%, transparent 100%); padding: 30px 40px 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px; z-index: 100; opacity: 0; transform: translateY(100%); transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1); }\n"
+                + "        #controls-bar.visible { opacity: 1; transform: translateY(0); }\n"
+                + "        .control-button { background: rgba(255, 255, 255, 0.1); border: 2px solid rgba(255, 255, 255, 0.3); border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease; backdrop-filter: blur(10px); }\n"
+                + "        .control-button:hover { background: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.6); transform: scale(1.1); }\n"
+                + "        .control-button:active { transform: scale(0.95); }\n"
+                + "        .control-button svg { width: 24px; height: 24px; fill: white; }\n"
+                + "        #play-pause-btn { width: 60px; height: 60px; }\n"
+                + "        #play-pause-btn svg { width: 28px; height: 28px; }\n"
+                + "        #progress-container { flex: 1; height: 6px; background: rgba(255, 255, 255, 0.2); border-radius: 3px; overflow: hidden; cursor: pointer; position: relative; }\n"
+                + "        #progress-bar { height: 100%; background: linear-gradient(90deg, #3498db 0%, #2ecc71 100%); border-radius: 3px; width: 0%; transition: width 0.1s linear; box-shadow: 0 0 10px rgba(52, 152, 219, 0.5); }\n"
+                + "        #slide-counter { color: white; font-size: 16px; font-weight: 600; min-width: 80px; text-align: center; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }\n"
+                + "        #slide-title { position: fixed; top: 30px; left: 50%; transform: translateX(-50%); color: white; font-size: 24px; font-weight: 600; text-align: center; text-shadow: 0 2px 10px rgba(0,0,0,0.8); z-index: 99; opacity: 0; transition: opacity 0.4s ease; max-width: 80%; }\n"
+                + "        #slide-title.visible { opacity: 1; }\n"
+                + "        .nav-arrow { position: fixed; top: 50%; transform: translateY(-50%); background: rgba(255, 255, 255, 0.1); border: 2px solid rgba(255, 255, 255, 0.3); border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 98; opacity: 0; transition: all 0.3s ease; backdrop-filter: blur(10px); }\n"
+                + "        .nav-arrow.visible { opacity: 1; }\n"
+                + "        .nav-arrow:hover { background: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.6); transform: translateY(-50%) scale(1.1); }\n"
+                + "        .nav-arrow:active { transform: translateY(-50%) scale(0.95); }\n"
+                + "        #prev-arrow { left: 30px; }\n"
+                + "        #next-arrow { right: 30px; }\n"
+                + "        .nav-arrow svg { width: 28px; height: 28px; fill: white; }\n"
+                + "        #thumbnails-container { position: fixed; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 100%); padding: 20px; display: flex; gap: 15px; overflow-x: auto; overflow-y: hidden; z-index: 101; max-height: 150px; transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.4, 0.0, 0.2, 1); }\n"
+                + "        #thumbnails-container.visible { transform: translateY(0); }\n"
+                + "        #thumbnails-container::-webkit-scrollbar { height: 8px; }\n"
+                + "        #thumbnails-container::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.1); border-radius: 4px; }\n"
+                + "        #thumbnails-container::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.3); border-radius: 4px; }\n"
+                + "        #thumbnails-container::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.5); }\n"
+                + "        .thumbnail { flex-shrink: 0; width: 120px; height: 80px; border-radius: 8px; overflow: hidden; cursor: pointer; border: 3px solid transparent; transition: all 0.3s ease; position: relative; }\n"
+                + "        .thumbnail:hover { transform: translateY(-5px); box-shadow: 0 5px 20px rgba(0,0,0,0.5); }\n"
+                + "        .thumbnail.active { border-color: #3498db; box-shadow: 0 0 20px rgba(52, 152, 219, 0.6); }\n"
+                + "        .thumbnail img { width: 100%; height: 100%; object-fit: cover; }\n"
+                + "        .thumbnail-number { position: absolute; top: 5px; left: 5px; background: rgba(0,0,0,0.7); color: white; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: 600; }\n"
+                + "        #toggle-thumbnails { position: fixed; bottom: 20px; right: 20px; background: rgba(255, 255, 255, 0.1); border: 2px solid rgba(255, 255, 255, 0.3); border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 102; transition: all 0.3s ease; backdrop-filter: blur(10px); }\n"
+                + "        #toggle-thumbnails:hover { background: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.6); transform: scale(1.1); }\n"
+                + "        #toggle-thumbnails svg { width: 24px; height: 24px; fill: white; }\n"
+                + "        #fullscreen-btn { position: fixed; top: 20px; right: 20px; background: rgba(255, 255, 255, 0.1); border: 2px solid rgba(255, 255, 255, 0.3); border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 102; transition: all 0.3s ease; backdrop-filter: blur(10px); opacity: 0; }\n"
+                + "        #fullscreen-btn.visible { opacity: 1; }\n"
+                + "        #fullscreen-btn:hover { background: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.6); transform: scale(1.1); }\n"
+                + "        #fullscreen-btn svg { width: 24px; height: 24px; fill: white; }\n"
+                + "        #dots-container { position: fixed; bottom: 150px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 97; opacity: 0; transition: opacity 0.4s ease; }\n"
+                + "        #dots-container.visible { opacity: 1; }\n"
+                + "        .dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255, 255, 255, 0.3); cursor: pointer; transition: all 0.3s ease; }\n"
+                + "        .dot:hover { background: rgba(255, 255, 255, 0.6); transform: scale(1.2); }\n"
+                + "        .dot.active { background: white; box-shadow: 0 0 10px rgba(255, 255, 255, 0.8); }\n"
+                + "        @keyframes zoomIn { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }\n"
+                + "        .slide.active img { animation: zoomIn 1.2s ease-out; }\n"
+                + "    </style>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "    <div id=\"slideshow-container\"></div>\n"
+                + "    <div id=\"slide-title\"></div>\n"
+                + "    <div id=\"prev-arrow\" class=\"nav-arrow\"><svg viewBox=\"0 0 24 24\"><path d=\"M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z\"/></svg></div>\n"
+                + "    <div id=\"next-arrow\" class=\"nav-arrow\"><svg viewBox=\"0 0 24 24\"><path d=\"M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z\"/></svg></div>\n"
+                + "    <div id=\"controls-bar\">\n"
+                + "        <div id=\"prev-btn\" class=\"control-button\" title=\"Précédent\"><svg viewBox=\"0 0 24 24\"><path d=\"M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z\"/></svg></div>\n"
+                + "        <div id=\"play-pause-btn\" class=\"control-button\" title=\"Lecture/Pause\">\n"
+                + "            <svg id=\"play-icon\" viewBox=\"0 0 24 24\" style=\"display:none;\"><path d=\"M8 5v14l11-7z\"/></svg>\n"
+                + "            <svg id=\"pause-icon\" viewBox=\"0 0 24 24\"><path d=\"M6 19h4V5H6v14zm8-14v14h4V5h-4z\"/></svg>\n"
+                + "        </div>\n"
+                + "        <div id=\"next-btn\" class=\"control-button\" title=\"Suivant\"><svg viewBox=\"0 0 24 24\"><path d=\"M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z\"/></svg></div>\n"
+                + "        <div id=\"progress-container\"><div id=\"progress-bar\"></div></div>\n"
+                + "        <div id=\"slide-counter\"><span id=\"current-slide\">1</span> / <span id=\"total-slides\">0</span></div>\n"
+                + "    </div>\n"
+                + "    <div id=\"dots-container\"></div>\n"
+                + "    <div id=\"fullscreen-btn\" title=\"Plein écran\"><svg viewBox=\"0 0 24 24\"><path d=\"M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z\"/></svg></div>\n"
+                + "    <div id=\"toggle-thumbnails\" title=\"Afficher/Masquer les miniatures\"><svg viewBox=\"0 0 24 24\"><path d=\"M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z\"/></svg></div>\n"
+                + "    <div id=\"thumbnails-container\"></div>\n"
+                + "    <script>\n"
+                + "        const slideshowConfig = {\n"
+                + "            slides: [\n";
+        
+        // Ajouter les images du diaporama
         for (int i = 0; i < diapo.getiNombreImages(); i++) {
-            strContenuHTML += "                        {"
-                    + "image: 'images/" + diapo.getStrFichiers(i) + "', "
-                    + "title: '" + diapo.getStrLibellesImages(i).replace("'", "&apos;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;") + "', "
-                    + "thumb: 'vignettes/" + diapo.getStrFichiers(i) + "', "
-                    + "url: ''"
-                    + "},\n";
+            String titre = diapo.getStrLibellesImages(i)
+                    .replace("\\", "\\\\")
+                    .replace("\"", "\\\"")
+                    .replace("\n", "\\n")
+                    .replace("\r", "");
+            strContenuHTML += "                {image: 'images/" + diapo.getStrFichiers(i) + "', "
+                    + "title: \"" + titre + "\", "
+                    + "thumb: 'vignettes/" + diapo.getStrFichiers(i) + "'}";
+            if (i < diapo.getiNombreImages() - 1) {
+                strContenuHTML += ",\n";
+            } else {
+                strContenuHTML += "\n";
+            }
         }
-        strContenuHTML += "                    ],\n"
-                + "                    // Theme Options			   \n"
-                + "                    progress_bar: 1, // Timer for each slide							\n"
-                + "                    mouse_scrub: 0\n"
-                + "\n"
-                + "                });\n"
-                + "            });\n"
-                + "\n"
-                + "        </script>\n"
-                + "        <style type=\"text/css\">\n"
-                + "            #prevslide,#nextslide,#controls,#controls-wrapper,#progress-back,#thumb-tray{\n"
-                + "                opacity : 0.4;\n"
-                + "                transition : 0.5 ease;\n"
-                + "            }\n"
-                + "            #supersized li{\n"
-                + "                background: " + diapo.getStrCouleurFondDiaporama() + ";\n"
-                + "            }\n"
-                + "        </style>\n"
-                + "\n"
-                + "    </head>\n"
-                + "\n"
-                + "    <body>\n"
-                + "\n"
-                + "\n"
-                + "        <!--Thumbnail Navigation-->\n"
-                + "        <div id=\"prevthumb\"></div>\n"
-                + "        <div id=\"nextthumb\"></div>\n"
-                + "\n"
-                + "        <!--Arrow Navigation-->\n"
-                + "        <a id=\"prevslide\" class=\"load-item\"></a>\n"
-                + "        <a id=\"nextslide\" class=\"load-item\"></a>\n"
-                + "\n"
-                + "        <div id=\"thumb-tray\" class=\"load-item\">\n"
-                + "            <div id=\"thumb-back\"></div>\n"
-                + "            <div id=\"thumb-forward\"></div>\n"
-                + "        </div>\n"
-                + "\n"
-                + "        <!--Time Bar-->\n"
-                + "<!--        <div id=\"progress-back\" class=\"load-item\">\n"
-                + "            <div id=\"progress-bar\"></div>\n"
-                + "        </div>-->\n"
-                + "\n"
-                + "        <!--Control Bar-->\n"
-                + "        <div id=\"controls-wrapper\" class=\"load-item\">\n"
-                + "            <div id=\"controls\">\n"
-                + "\n"
-                + "                <a id=\"play-button\"><img id=\"pauseplay\" src=\"img/pause.png\"/></a>\n"
-                + "\n"
-                + "                <!--Slide counter-->\n"
-                + "                <div id=\"slidecounter\">\n"
-                + "                    <span class=\"slidenumber\"></span> / <span class=\"totalslides\"></span>\n"
-                + "                </div>\n"
-                + "\n"
-                + "                <!--Slide captions displayed here-->\n"
-                + "                <div id=\"slidecaption\"></div>\n"
-                + "\n"
-                + "                <!--Thumb Tray button-->\n"
-                + "                <a id=\"tray-button\"><img id=\"tray-arrow\" src=\"img/button-tray-up.png\"/></a>\n"
-                + "\n"
-                + "                <!--Navigation-->\n"
-                + "                <!--                <ul id=\"slide-list\"></ul>-->\n"
-                + "\n"
-                + "            </div>\n"
-                + "        </div>\n"
-                + "        <script type=\"text/javascript\">\n"
-                + "            $(function () {\n"
-                + "                $(\"body\").mouseover(function () {\n"
-                + "                    $(\"#prevslide,#nextslide\").css({opacity: 0.6});\n"
-                + "                    $(\"#controls-wrapper\").css({opacity: 0.8});\n"
-                + "                    $(\"#thumb-tray,#controls,#progress-back\").css({opacity: 1.0});\n"
-                + "                })\n"
-                + "                $(\"body\").mouseout(function () {\n"
-                + "                    $(\"#prevslide,#nextslide\").css({opacity: 0.2});\n"
-                + "                    $(\"#progress-back,#thumb-tray,#controls,#controls-wrapper\").css({opacity: 0.0});\n"
-                + "                });\n"
-                + "            });\n"
-                + "        </script>\n"
-                + "\n"
-                + "    </body>\n"
+        
+        strContenuHTML += "            ],\n"
+                + "            interval: " + intervalle + ",\n"
+                + "            autoplay: true,\n"
+                + "            transition: 'fade',\n"
+                + "            transitionSpeed: 1200\n"
+                + "        };\n"
+                + "        let currentSlide = 0, isPlaying = true, slideTimer = null, progressTimer = null, controlsTimeout = null, thumbnailsVisible = false;\n"
+                + "        function init() { createSlides(); createThumbnails(); createDots(); showSlide(0); setupEventListeners(); showControls(); if (slideshowConfig.autoplay) startSlideshow(); }\n"
+                + "        function createSlides() { const container = document.getElementById('slideshow-container'); slideshowConfig.slides.forEach((slide, index) => { const slideDiv = document.createElement('div'); slideDiv.className = 'slide'; slideDiv.dataset.index = index; const img = document.createElement('img'); img.src = slide.image; img.alt = slide.title || ''; slideDiv.appendChild(img); container.appendChild(slideDiv); }); document.getElementById('total-slides').textContent = slideshowConfig.slides.length; }\n"
+                + "        function createThumbnails() { const container = document.getElementById('thumbnails-container'); slideshowConfig.slides.forEach((slide, index) => { const thumb = document.createElement('div'); thumb.className = 'thumbnail'; thumb.dataset.index = index; thumb.onclick = () => goToSlide(index); const img = document.createElement('img'); img.src = slide.thumb || slide.image; img.alt = slide.title || ''; const number = document.createElement('div'); number.className = 'thumbnail-number'; number.textContent = index + 1; thumb.appendChild(img); thumb.appendChild(number); container.appendChild(thumb); }); }\n"
+                + "        function createDots() { const container = document.getElementById('dots-container'); slideshowConfig.slides.forEach((slide, index) => { const dot = document.createElement('div'); dot.className = 'dot'; dot.dataset.index = index; dot.onclick = () => goToSlide(index); container.appendChild(dot); }); }\n"
+                + "        function showSlide(index) { if (index < 0) index = slideshowConfig.slides.length - 1; if (index >= slideshowConfig.slides.length) index = 0; currentSlide = index; document.querySelectorAll('.slide').forEach(slide => slide.classList.remove('active')); document.querySelector(`.slide[data-index=\"${index}\"]`).classList.add('active'); document.querySelectorAll('.thumbnail').forEach(thumb => thumb.classList.remove('active')); const activeThumb = document.querySelector(`.thumbnail[data-index=\"${index}\"]`); activeThumb.classList.add('active'); activeThumb.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' }); document.querySelectorAll('.dot').forEach(dot => dot.classList.remove('active')); document.querySelector(`.dot[data-index=\"${index}\"]`)?.classList.add('active'); const title = slideshowConfig.slides[index].title; const titleElement = document.getElementById('slide-title'); if (title) { titleElement.textContent = title; titleElement.classList.add('visible'); } else { titleElement.classList.remove('visible'); } document.getElementById('current-slide').textContent = index + 1; resetProgress(); }\n"
+                + "        function nextSlide() { showSlide(currentSlide + 1); }\n"
+                + "        function prevSlide() { showSlide(currentSlide - 1); }\n"
+                + "        function goToSlide(index) { const wasPlaying = isPlaying; stopSlideshow(); showSlide(index); if (wasPlaying) startSlideshow(); }\n"
+                + "        function startSlideshow() { if (slideTimer) clearInterval(slideTimer); if (progressTimer) clearInterval(progressTimer); isPlaying = true; updatePlayPauseButton(); slideTimer = setInterval(nextSlide, slideshowConfig.interval); startProgress(); }\n"
+                + "        function stopSlideshow() { if (slideTimer) clearInterval(slideTimer); if (progressTimer) clearInterval(progressTimer); isPlaying = false; updatePlayPauseButton(); }\n"
+                + "        function togglePlayPause() { if (isPlaying) stopSlideshow(); else startSlideshow(); }\n"
+                + "        function updatePlayPauseButton() { document.getElementById('play-icon').style.display = isPlaying ? 'none' : 'block'; document.getElementById('pause-icon').style.display = isPlaying ? 'block' : 'none'; }\n"
+                + "        function startProgress() { let progress = 0; const progressBar = document.getElementById('progress-bar'); const increment = 100 / (slideshowConfig.interval / 100); progressTimer = setInterval(() => { progress += increment; if (progress >= 100) progress = 100; progressBar.style.width = progress + '%'; }, 100); }\n"
+                + "        function resetProgress() { if (progressTimer) clearInterval(progressTimer); document.getElementById('progress-bar').style.width = '0%'; if (isPlaying) startProgress(); }\n"
+                + "        function showControls() { document.getElementById('controls-bar').classList.add('visible'); document.getElementById('prev-arrow').classList.add('visible'); document.getElementById('next-arrow').classList.add('visible'); document.getElementById('fullscreen-btn').classList.add('visible'); document.getElementById('dots-container').classList.add('visible'); if (controlsTimeout) clearTimeout(controlsTimeout); controlsTimeout = setTimeout(hideControls, 3000); }\n"
+                + "        function hideControls() { if (!thumbnailsVisible) { document.getElementById('controls-bar').classList.remove('visible'); document.getElementById('prev-arrow').classList.remove('visible'); document.getElementById('next-arrow').classList.remove('visible'); document.getElementById('fullscreen-btn').classList.remove('visible'); document.getElementById('dots-container').classList.remove('visible'); } }\n"
+                + "        function toggleThumbnails() { thumbnailsVisible = !thumbnailsVisible; const container = document.getElementById('thumbnails-container'); if (thumbnailsVisible) { container.classList.add('visible'); showControls(); } else { container.classList.remove('visible'); } }\n"
+                + "        function toggleFullscreen() { if (!document.fullscreenElement) document.documentElement.requestFullscreen(); else document.exitFullscreen(); }\n"
+                + "        function manualPrevSlide() { const wasPlaying = isPlaying; stopSlideshow(); prevSlide(); if (wasPlaying) startSlideshow(); }\n"
+                + "        function manualNextSlide() { const wasPlaying = isPlaying; stopSlideshow(); nextSlide(); if (wasPlaying) startSlideshow(); }\n"
+                + "        function setupEventListeners() { document.getElementById('prev-btn').onclick = manualPrevSlide; document.getElementById('next-btn').onclick = manualNextSlide; document.getElementById('play-pause-btn').onclick = togglePlayPause; document.getElementById('prev-arrow').onclick = manualPrevSlide; document.getElementById('next-arrow').onclick = manualNextSlide; document.getElementById('toggle-thumbnails').onclick = toggleThumbnails; document.getElementById('fullscreen-btn').onclick = toggleFullscreen; document.getElementById('progress-container').onclick = (e) => { const rect = e.currentTarget.getBoundingClientRect(); const percent = (e.clientX - rect.left) / rect.width; const slideIndex = Math.floor(percent * slideshowConfig.slides.length); goToSlide(slideIndex); }; document.addEventListener('keydown', (e) => { if (e.key === 'ArrowLeft') { manualPrevSlide(); } else if (e.key === 'ArrowRight') { manualNextSlide(); } else if (e.key === ' ') { e.preventDefault(); togglePlayPause(); } else if (e.key === 'Escape') { if (document.fullscreenElement) document.exitFullscreen(); } else if (e.key === 'f' || e.key === 'F') { toggleFullscreen(); } }); document.addEventListener('mousemove', showControls); document.addEventListener('touchstart', showControls); }\n"
+                + "        window.addEventListener('load', init);\n"
+                + "    </script>\n"
+                + "</body>\n"
                 + "</html>";
         File fileIndexHTML = new File(strDiapoRepert + File.separator + strDiapoNom);
         fileIndexHTML.setWritable(true);
@@ -11452,9 +11651,14 @@ public class EditeurPanovisu extends Application {
     public static void creerEditerBarre(String strNomFichierBarre) {
         apCreationBarre.getChildren().clear();
         apCreationBarre.getStyleClass().clear();
-        apCreationBarre.getStyleClass().add("editor-panel");
-        apCreationBarre.setStyle("-fx-border-width: 1px;"
-                + "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.5) , 8, 0.0 , 0 , 8 );");
+        
+        // Style moderne avec fond gris clair et padding
+        apCreationBarre.setStyle(
+            "-fx-background-color: #f5f5f5;" +
+            "-fx-padding: 20;" +
+            "-fx-border-width: 1px;" +
+            "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0.0, 0, 5);"
+        );
 
         AnchorPane apOutilsBarre = new AnchorPane();
         Button btnAnnulerBarre = new Button(rbLocalisation.getString("main.quitter"), new ImageView(new Image("file:" + getStrRepertAppli() + "/images/annule.png")));
@@ -11466,14 +11670,14 @@ public class EditeurPanovisu extends Application {
         apZoneBarrePersonnalisee = new AnchorPane();
         apZoneBarrePersonnalisee.getChildren().clear();
         apZoneBarrePersonnalisee.setLayoutX(0);
-        apZoneBarrePersonnalisee.setLayoutY(150);
-        apZoneBarrePersonnalisee.setPrefWidth(300);
-        apZoneBarrePersonnalisee.setPrefHeight(200);
+        apZoneBarrePersonnalisee.setLayoutY(180);
+        apZoneBarrePersonnalisee.setPrefWidth(330);
+        apZoneBarrePersonnalisee.setPrefHeight(280);
 
         int iLargeurEcran = (int) tailleEcran.getWidth();
         int iHauteurEcran = (int) tailleEcran.getHeight() - 100;
-        final int iLargeur = 1200;
-        final int iHauteur = 600;
+        final int iLargeur = 1300;
+        final int iHauteur = 700;
         mbarPrincipal.setDisable(true);
         bbarPrincipal.setDisable(true);
         hbBarreBouton.setDisable(true);
@@ -11487,53 +11691,243 @@ public class EditeurPanovisu extends Application {
         apCreationBarre.setLayoutX((iLargeurEcran - iLargeur) / 2);
         apCreationBarre.setLayoutY((iHauteurEcran - iHauteur) / 2);
         apCreationBarre.setVisible(true);
+        
+        // Titre moderne
         Label lblBarrePersonnalisee = new Label(rbLocalisation.getString("main.creeBarrePersonnalisee"));
-        lblBarrePersonnalisee.setMinWidth(iLargeur - 10);
+        lblBarrePersonnalisee.setMinWidth(iLargeur - 40);
         lblBarrePersonnalisee.setAlignment(Pos.CENTER);
-        lblBarrePersonnalisee.setStyle("-fx-background-color : #777;");
-        lblBarrePersonnalisee.setTextFill(Color.WHITE);
-        lblBarrePersonnalisee.setLayoutX(5);
+        lblBarrePersonnalisee.setStyle(
+            "-fx-background-color: #2c3e50;" +
+            "-fx-background-radius: 8;" +
+            "-fx-text-fill: white;" +
+            "-fx-font-size: 18px;" +
+            "-fx-font-weight: bold;" +
+            "-fx-padding: 15;" +
+            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2);"
+        );
+        lblBarrePersonnalisee.setLayoutX(20);
         lblBarrePersonnalisee.setLayoutY(10);
-        lblBarrePersonnalisee.setFont(Font.font(14));
         apCreationBarre.getChildren().add(lblBarrePersonnalisee);
-        apOutilsBarre.setPrefWidth(300);
-        apOutilsBarre.setMinWidth(300);
-        apOutilsBarre.setMaxWidth(300);
-        apOutilsBarre.setPrefHeight(iHauteur - 50);
-        apOutilsBarre.setMinHeight(iHauteur - 50);
-        apOutilsBarre.setMaxHeight(iHauteur - 50);
-        apOutilsBarre.setLayoutX(iLargeur - 302);
-        apOutilsBarre.setLayoutY(50);
-
-        apOutilsBarre.getStyleClass().clear();
-        apOutilsBarre.getStyleClass().add("editor-panel");
-        apOutilsBarre.setStyle("-fx-border-width : 1px;");
-        btnAnnulerBarre.setPrefWidth(120);
-        btnAnnulerBarre.setLayoutX(30);
-        btnAnnulerBarre.setLayoutY(iHauteur - 110); // Augmenté de 90 à 110 pour plus d'espace en bas
-        btnSauverBarre.setPrefWidth(120);
-        btnSauverBarre.setLayoutX(160);
-        btnSauverBarre.setLayoutY(iHauteur - 110); // Augmenté de 90 à 110 pour plus d'espace en bas
-        btnSauverBarre.setDisable(true);
+        
+        // Panel d'outils à droite avec style moderne
+        apOutilsBarre.setPrefWidth(350);
+        apOutilsBarre.setMinWidth(350);
+        apOutilsBarre.setMaxWidth(350);
+        apOutilsBarre.setPrefHeight(iHauteur - 100);
+        apOutilsBarre.setMinHeight(iHauteur - 100);
+        apOutilsBarre.setMaxHeight(iHauteur - 100);
+        apOutilsBarre.setLayoutX(iLargeur - 370);
+        apOutilsBarre.setLayoutY(70);
+        apOutilsBarre.setStyle(
+            "-fx-background-color: white;" +
+            "-fx-border-color: #bdc3c7;" +
+            "-fx-border-width: 1;" +
+            "-fx-border-radius: 8;" +
+            "-fx-background-radius: 8;" +
+            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8, 0, 0, 3);"
+        );
+        
+        // Titre de section "Outils"
+        Label lblTitreOutils = new Label("Outils");
+        lblTitreOutils.setLayoutX(20);
+        lblTitreOutils.setLayoutY(15);
+        lblTitreOutils.setStyle(
+            "-fx-font-size: 16px;" +
+            "-fx-font-weight: bold;" +
+            "-fx-text-fill: #2c3e50;"
+        );
+        
+        // Label et champ de chargement d'image
         Label lblChargeImage = new Label(rbLocalisation.getString("main.chargeImage"));
         lblChargeImage.setLayoutX(20);
-        lblChargeImage.setLayoutY(10);
+        lblChargeImage.setLayoutY(50);
+        lblChargeImage.setStyle(
+            "-fx-font-size: 13px;" +
+            "-fx-text-fill: #34495e;"
+        );
+        
         TextField tfChargeImage = new TextField("");
         tfChargeImage.setDisable(true);
-        tfChargeImage.setPrefWidth(200);
-        tfChargeImage.setLayoutX(50);
-        tfChargeImage.setLayoutY(40);
-        Button btnChargeImage = new Button("...");
-        btnChargeImage.setLayoutX(260);
-        btnChargeImage.setLayoutY(40);
+        tfChargeImage.setPrefWidth(240);
+        tfChargeImage.setLayoutX(20);
+        tfChargeImage.setLayoutY(75);
+        tfChargeImage.setStyle(
+            "-fx-background-color: #ecf0f1;" +
+            "-fx-border-color: #bdc3c7;" +
+            "-fx-border-width: 1;" +
+            "-fx-border-radius: 4;" +
+            "-fx-background-radius: 4;"
+        );
+        
+        Button btnChargeImage = new Button("📁");
+        btnChargeImage.setLayoutX(270);
+        btnChargeImage.setLayoutY(75);
+        btnChargeImage.setPrefWidth(50);
+        btnChargeImage.setStyle(
+            "-fx-background-color: #3498db;" +
+            "-fx-text-fill: white;" +
+            "-fx-font-size: 18px;" +
+            "-fx-border-radius: 4;" +
+            "-fx-background-radius: 4;" +
+            "-fx-cursor: hand;" +
+            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 2);"
+        );
+        btnChargeImage.setOnMouseEntered(e -> btnChargeImage.setStyle(
+            "-fx-background-color: #2980b9;" +
+            "-fx-text-fill: white;" +
+            "-fx-font-size: 18px;" +
+            "-fx-border-radius: 4;" +
+            "-fx-background-radius: 4;" +
+            "-fx-cursor: hand;" +
+            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 0, 3);"
+        ));
+        btnChargeImage.setOnMouseExited(e -> btnChargeImage.setStyle(
+            "-fx-background-color: #3498db;" +
+            "-fx-text-fill: white;" +
+            "-fx-font-size: 18px;" +
+            "-fx-border-radius: 4;" +
+            "-fx-background-radius: 4;" +
+            "-fx-cursor: hand;" +
+            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 2);"
+        ));
+        
+        // CheckBox pour masquer les zones
         final CheckBox cbMasqueZones = new CheckBox(rbLocalisation.getString("main.masqueZones"));
         cbMasqueZones.setDisable(true);
         cbMasqueZones.setLayoutX(20);
-        cbMasqueZones.setLayoutY(70);
-        btnAjouteZone.setLayoutX(130);
-        btnAjouteZone.setLayoutY(110);
+        cbMasqueZones.setLayoutY(115);
+        cbMasqueZones.setStyle(
+            "-fx-font-size: 13px;" +
+            "-fx-text-fill: #34495e;"
+        );
+        
+        // Bouton Ajouter Zone
+        btnAjouteZone.setLayoutX(20);
+        btnAjouteZone.setLayoutY(145);
+        btnAjouteZone.setPrefWidth(300);
+        btnAjouteZone.setPrefHeight(35);
         btnAjouteZone.setDisable(true);
+        btnAjouteZone.setStyle(
+            "-fx-background-color: #4CAF50;" +
+            "-fx-text-fill: white;" +
+            "-fx-font-weight: bold;" +
+            "-fx-font-size: 13px;" +
+            "-fx-border-radius: 5;" +
+            "-fx-background-radius: 5;" +
+            "-fx-cursor: hand;" +
+            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 2);"
+        );
+        btnAjouteZone.setOnMouseEntered(e -> {
+            if (!btnAjouteZone.isDisabled()) {
+                btnAjouteZone.setStyle(
+                    "-fx-background-color: #45a049;" +
+                    "-fx-text-fill: white;" +
+                    "-fx-font-weight: bold;" +
+                    "-fx-font-size: 13px;" +
+                    "-fx-border-radius: 5;" +
+                    "-fx-background-radius: 5;" +
+                    "-fx-cursor: hand;" +
+                    "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 0, 3);"
+                );
+            }
+        });
+        btnAjouteZone.setOnMouseExited(e -> {
+            if (!btnAjouteZone.isDisabled()) {
+                btnAjouteZone.setStyle(
+                    "-fx-background-color: #4CAF50;" +
+                    "-fx-text-fill: white;" +
+                    "-fx-font-weight: bold;" +
+                    "-fx-font-size: 13px;" +
+                    "-fx-border-radius: 5;" +
+                    "-fx-background-radius: 5;" +
+                    "-fx-cursor: hand;" +
+                    "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 2);"
+                );
+            }
+        });
+        
+        // Style des boutons Annuler et Sauver
+        btnAnnulerBarre.setPrefWidth(150);
+        btnAnnulerBarre.setPrefHeight(40);
+        btnAnnulerBarre.setLayoutX(20);
+        btnAnnulerBarre.setLayoutY(iHauteur - 140);
+        btnAnnulerBarre.setStyle(
+            "-fx-background-color: #95a5a6;" +
+            "-fx-text-fill: white;" +
+            "-fx-font-weight: bold;" +
+            "-fx-font-size: 13px;" +
+            "-fx-border-radius: 5;" +
+            "-fx-background-radius: 5;" +
+            "-fx-cursor: hand;" +
+            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 2);"
+        );
+        btnAnnulerBarre.setOnMouseEntered(e -> btnAnnulerBarre.setStyle(
+            "-fx-background-color: #7f8c8d;" +
+            "-fx-text-fill: white;" +
+            "-fx-font-weight: bold;" +
+            "-fx-font-size: 13px;" +
+            "-fx-border-radius: 5;" +
+            "-fx-background-radius: 5;" +
+            "-fx-cursor: hand;" +
+            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 0, 3);"
+        ));
+        btnAnnulerBarre.setOnMouseExited(e -> btnAnnulerBarre.setStyle(
+            "-fx-background-color: #95a5a6;" +
+            "-fx-text-fill: white;" +
+            "-fx-font-weight: bold;" +
+            "-fx-font-size: 13px;" +
+            "-fx-border-radius: 5;" +
+            "-fx-background-radius: 5;" +
+            "-fx-cursor: hand;" +
+            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 2);"
+        ));
+        
+        btnSauverBarre.setPrefWidth(150);
+        btnSauverBarre.setPrefHeight(40);
+        btnSauverBarre.setLayoutX(180);
+        btnSauverBarre.setLayoutY(iHauteur - 140);
+        btnSauverBarre.setDisable(true);
+        btnSauverBarre.setStyle(
+            "-fx-background-color: #27ae60;" +
+            "-fx-text-fill: white;" +
+            "-fx-font-weight: bold;" +
+            "-fx-font-size: 13px;" +
+            "-fx-border-radius: 5;" +
+            "-fx-background-radius: 5;" +
+            "-fx-cursor: hand;" +
+            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 2);"
+        );
+        btnSauverBarre.setOnMouseEntered(e -> {
+            if (!btnSauverBarre.isDisabled()) {
+                btnSauverBarre.setStyle(
+                    "-fx-background-color: #229954;" +
+                    "-fx-text-fill: white;" +
+                    "-fx-font-weight: bold;" +
+                    "-fx-font-size: 13px;" +
+                    "-fx-border-radius: 5;" +
+                    "-fx-background-radius: 5;" +
+                    "-fx-cursor: hand;" +
+                    "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 0, 3);"
+                );
+            }
+        });
+        btnSauverBarre.setOnMouseExited(e -> {
+            if (!btnSauverBarre.isDisabled()) {
+                btnSauverBarre.setStyle(
+                    "-fx-background-color: #27ae60;" +
+                    "-fx-text-fill: white;" +
+                    "-fx-font-weight: bold;" +
+                    "-fx-font-size: 13px;" +
+                    "-fx-border-radius: 5;" +
+                    "-fx-background-radius: 5;" +
+                    "-fx-cursor: hand;" +
+                    "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 2);"
+                );
+            }
+        });
+        
         apOutilsBarre.getChildren().addAll(
+                lblTitreOutils,
                 lblChargeImage,
                 tfChargeImage, btnChargeImage,
                 cbMasqueZones,

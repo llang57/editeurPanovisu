@@ -23,6 +23,7 @@ editeurpanovisu\RedimensionnementImagesDialogController$1.class
 editeurpanovisu\util\SvgIconLoader.class
 editeurpanovisu\gpu\TestBicubicVsLanczos.class
 editeurpanovisu\DocumentationDialog$DocumentItem.class
+editeurpanovisu\EditeurPanovisu$5.class
 editeurpanovisu\ImageFond.class
 editeurpanovisu\HotspotImage.class
 editeurpanovisu\EditeurPanovisu$4.class
@@ -61,6 +62,7 @@ editeurpanovisu\util\LocalHTTPServer$FileHandler.class
 editeurpanovisu\ConfigDialogController.class
 editeurpanovisu\ZoneTelecommande.class
 editeurpanovisu\GestionnairePlanController.class
+editeurpanovisu\EditeurPanovisu$6.class
 editeurpanovisu\NavigateurOpenLayersSeul.class
 editeurpanovisu\ThemeManager$ThemeProvider.class
 editeurpanovisu\ReadWriteImage$ManagedImageBufferedImageFactory.class

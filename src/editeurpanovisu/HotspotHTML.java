@@ -39,6 +39,8 @@ public class HotspotHTML {
     private double largeurHTML = 1000;
     private String strPositionHTML = "center";
     private String strCouleurHTML = "#aaaaff";
+    private String strCouleurTexteHTML = "#000000"; // Couleur du texte de la page HTML
+    private String strThemeHTML = "Défaut (simple)"; // Thème CSS pour la page HTML
     private ImageEditeurHTML[] imagesEditeur = new ImageEditeurHTML[50];
     private int iNombreImages = 0;
 
@@ -245,6 +247,34 @@ public class HotspotHTML {
      */
     public void setStrCouleurHTML(String strCouleurHTML) {
         this.strCouleurHTML = strCouleurHTML;
+    }
+
+    /**
+     * @return the strCouleurTexteHTML
+     */
+    public String getStrCouleurTexteHTML() {
+        return strCouleurTexteHTML;
+    }
+
+    /**
+     * @param strCouleurTexteHTML the strCouleurTexteHTML to set
+     */
+    public void setStrCouleurTexteHTML(String strCouleurTexteHTML) {
+        this.strCouleurTexteHTML = strCouleurTexteHTML;
+    }
+
+    /**
+     * @return the strThemeHTML
+     */
+    public String getStrThemeHTML() {
+        return strThemeHTML;
+    }
+
+    /**
+     * @param strThemeHTML the strThemeHTML to set
+     */
+    public void setStrThemeHTML(String strThemeHTML) {
+        this.strThemeHTML = strThemeHTML;
     }
 
     /**

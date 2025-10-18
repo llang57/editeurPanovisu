@@ -686,6 +686,20 @@ and open the template in the editor.
     animation: flash 1.5s ease-in-out infinite;
 }
 
+/* Animation blink - alias de flash pour compatibilité */
+@keyframes blink {
+    0%, 50%, 100% {
+        opacity: 1;
+    }
+    25%, 75% {
+        opacity: 0.3;
+    }
+}
+
+.hotspot-anime-blink {
+    animation: blink 1.5s ease-in-out infinite;
+}
+
 /* Animation rubber - effet élastique */
 @keyframes rubber {
     0%, 100% {

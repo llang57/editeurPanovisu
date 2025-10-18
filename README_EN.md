@@ -45,6 +45,32 @@ PanoVisu combines power, simplicity, and freedom to offer a complete and free so
   - Lanczos3 interpolation for ×2+ enlargements
   - Reduced aliasing and better anti-aliasing
 
+### 🎨 Modernized Interface and Slideshow Viewer
+- **🖥️ Modernized editor interface**: Complete redesign of creation/editing windows
+  - **Slideshow creation interface**: Clean design with automatic theme management
+  - **Integrated HTML editor**: Modern JavaFX WYSIWYG for rich content (HTML hotspots)
+  - **Custom navigation bar creation**: Intuitive interface with drag & drop and real-time preview
+  - **Theme-Aware Design**: All windows automatically adapt to theme (light/dark)
+  - **Ergonomic fixes**: Optimal resizing, properly positioned buttons
+  - **Visual consistency**: Removed hardcoded colors, using theme variables
+- **📽️ Modern HTML5 slideshow viewer**: Complete replacement of obsolete Supersized viewer (jQuery 2012)
+  - **Material Design**: Elegant interface with glassmorphism and fluid animations
+  - **Visual progress bar**: Real-time tracking with fill animation
+  - **Intuitive navigation**: Buttons, directional arrows, keyboard, clickable thumbnails
+  - **Position indicators**: Dots with hover effect and counter (X/Total)
+  - **Complete controls**: Play/Pause, Previous/Next, Fullscreen, Thumbnails
+  - **Thumbnail mode**: Gallery with hover and direct selection
+  - **Auto-hide**: Controls disappear after 3s of inactivity (reappear on hover)
+  - **Responsive**: Automatic adaptation mobile/tablet/desktop
+  - **Lightweight and performant**: ~20 KB vs ~150 KB (old), pure HTML5/CSS3/JavaScript code
+- **🎭 Slideshow hotspot animations**: 
+  - Consistency with photo hotspots: "blink", "pulse", "rotation" animations, etc.
+  - Configuration from editor with preview
+- **⏸️ Intelligent pause behavior**:
+  - Pause/play state respected during manual navigation
+  - Image change while paused = stays paused (voluntary action required)
+  - Only the Play/Pause button explicitly changes playback state
+
 ### 🔧 Technical Architecture
 - OpenCL 1.2+ support (NVIDIA CUDA, AMD ROCm, Intel compatible)
 - Intelligent GPU/CPU auto-routing based on image size
@@ -129,6 +155,10 @@ If you host tours on Linux servers, note that **v3.1.0** fixed a critical case-s
   - Customizable colors per hotspot (HSB)
   - Configurable hover magnification
 - **Image/photo hotspots** - Integrated photo galleries
+- **Slideshow hotspots** - Modern HTML5 viewer with complete animations
+  - Complete controls (play/pause, navigation, fullscreen, thumbnails)
+  - Consistent animations with other hotspot types
+  - Intelligent pause/play behavior
 - **HTML hotspots** - Rich content (videos, texts, external links)
 - **Interactive maps** - 2D map with points of interest and radar
 - **Geolocated maps** - OpenStreetMap, Google Maps, Bing Maps
@@ -150,7 +180,10 @@ If you host tours on Linux servers, note that **v3.1.0** fixed a critical case-s
 - Intuitive **drag & drop** interface
 - Real-time preview
 - Image transformation management (equirectangular ↔ cubemap)
-- WYSIWYG HTML editor for rich content
+- **Integrated WYSIWYG HTML editor**: Create rich content without HTML code
+- **Modernized slideshow creation**: Clean interface with transition management
+- **Custom navigation bars**: Visual creation with clickable zones
+- **Theme adaptation**: All windows follow chosen theme (light/dark)
 - One-click export to HTML/XML
 
 ## 📦 Installation
