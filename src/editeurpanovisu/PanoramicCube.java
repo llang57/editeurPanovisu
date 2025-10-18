@@ -1,5 +1,7 @@
 package editeurpanovisu;
 
+import editeurpanovisu.gpu.ImageResizeGPU;
+import editeurpanovisu.gpu.InterpolationMethod;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
@@ -10,6 +12,8 @@ import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Box;
 import javafx.scene.shape.CullFace;
 import javafx.scene.transform.Rotate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Cube panoramique pour l'affichage de panoramas équirectangulaires
@@ -98,7 +102,7 @@ public class PanoramicCube extends Group {
             
             // Convertir l'image équirectangulaire en 6 faces de cube
             // Order equi2cube: [0]=Front, [1]=Behind, [2]=Right, [3]=Left, [4]=Top, [5]=Bottom
-            Image[] cubeFaces = TransformationsPanoramique.equi2cube(resizedImage, 500);
+            Image[] cubeFaces = TransformationsPanoramique.equi2cubeAuto(resizedImage, 500);
             
             // Mapper les faces correctement avec selfIlluminationMap pour éliminer les ombres
             // Notre ordre: [0]=FRONT, [1]=BACK, [2]=LEFT, [3]=RIGHT, [4]=TOP, [5]=BOTTOM
@@ -134,6 +138,20 @@ public class PanoramicCube extends Group {
      * @param targetHeight Hauteur cible (devrait être targetWidth/2 pour ratio 2:1)
      * @return Image redimensionnée au ratio 2:1
      */
+    /**
+     * Redimensionne une image panoramique au format équirectangulaire.
+     * 
+     * <p>Utilise l'accélération GPU avec interpolation intelligente :</p>
+     * <ul>
+     * <li>Bicubic pour la plupart des cas (équilibre qualité/vitesse)</li>
+     * <li>Fallback CPU si GPU indisponible</li>
+     * </ul>
+     * 
+     * @param source Image source à redimensionner
+     * @param targetWidth Largeur cible
+     * @param targetHeight Hauteur cible
+     * @return Image redimensionnée
+     */
     private Image resizeToEquirectangular(Image source, int targetWidth, int targetHeight) {
         int srcWidth = (int) source.getWidth();
         int srcHeight = (int) source.getHeight();
@@ -142,6 +160,48 @@ public class PanoramicCube extends Group {
         if (srcWidth == targetWidth && srcHeight == targetHeight) {
             return source;
         }
+        
+        try {
+            // Utiliser GPU resize avec Bicubic (qualité optimale)
+            Image resized = ImageResizeGPU.resizeAuto(
+                source, 
+                targetWidth, 
+                targetHeight, 
+                InterpolationMethod.BICUBIC
+            );
+            
+            Logger.getLogger(PanoramicCube.class.getName()).log(
+                Level.INFO,
+                String.format("📐 Panorama redimensionné: %dx%d → %dx%d (Bicubic)",
+                    srcWidth, srcHeight, targetWidth, targetHeight
+                )
+            );
+            
+            return resized;
+            
+        } catch (Exception e) {
+            // Fallback sur l'ancien algorithme en cas d'erreur
+            Logger.getLogger(PanoramicCube.class.getName()).log(
+                Level.WARNING,
+                "⚠️ Erreur GPU, fallback sur CPU: " + e.getMessage()
+            );
+            
+            return resizeToEquirectangularCPU(source, targetWidth, targetHeight);
+        }
+    }
+    
+    /**
+     * Fallback CPU : Redimensionnement par échantillonnage simple (nearest neighbor).
+     * Utilisé uniquement si le GPU échoue.
+     * 
+     * @param source Image source
+     * @param targetWidth Largeur cible
+     * @param targetHeight Hauteur cible
+     * @return Image redimensionnée
+     */
+    private Image resizeToEquirectangularCPU(Image source, int targetWidth, int targetHeight) {
+        int srcWidth = (int) source.getWidth();
+        int srcHeight = (int) source.getHeight();
         
         // Créer une nouvelle image redimensionnée
         WritableImage resized = new WritableImage(targetWidth, targetHeight);

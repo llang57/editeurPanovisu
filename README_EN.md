@@ -1,6 +1,6 @@
 # 🌐 PanoVisu Editor
 
-[![Version](https://img.shields.io/badge/version-3.2.0-blue.svg)](https://github.com/llang57/editeurPanovisu/releases)
+[![Version](https://img.shields.io/badge/version-3.3.0-blue.svg)](https://github.com/llang57/editeurPanovisu/releases)
 [![Java](https://img.shields.io/badge/Java-25-orange.svg)](https://adoptium.net/)
 [![JavaFX](https://img.shields.io/badge/JavaFX-19-green.svg)](https://openjfx.io/)
 [![License](https://img.shields.io/badge/license-GPL--3.0-brightgreen.svg)](LICENSE)
@@ -20,6 +20,35 @@ PanoVisu combines power, simplicity, and freedom to offer a complete and free so
 **Languages:** [🇫🇷 Français](README.md) • [🇬🇧 English](README_EN.md)
 
 </div>
+
+---
+
+## 🚀 Version 3.3.0 - GPU Acceleration and Performance
+
+**What's new?**
+
+### ⚡ GPU Acceleration (OpenCL)
+- **🎮 GPU Processing**: Hardware acceleration for all image processing operations
+  - **Panoramic transformations**: Equirectangular ↔ Cube conversion **3.3× faster**
+  - **Image resizing**: High-quality Bicubic and Lanczos3 algorithms on GPU
+  - **Tour display**: Panoramic rendering **10× faster**
+  - **Level of Detail (LOD)**: Accelerated progressive level generation
+  - **Automatic fallback**: Switches to CPU if GPU unavailable
+- **📊 Performance gains**:
+  - Panoramic tour loading: **3.4× faster** (15s → 4.5s)
+  - Batch resizing: **1.7× faster**
+  - Screen display: **10× faster** (1000ms → 100ms)
+  - Visual quality: Bicubic/Lanczos3 eliminates aliasing
+- **🎨 Improved image quality**:
+  - Bicubic interpolation replaces Nearest Neighbor
+  - Lanczos3 interpolation for ×2+ enlargements
+  - Reduced aliasing and better anti-aliasing
+
+### 🔧 Technical Architecture
+- OpenCL 1.2+ support (NVIDIA CUDA, AMD ROCm, Intel compatible)
+- Intelligent GPU/CPU auto-routing based on image size
+- Robust colorspace management (CMYK, YCbCr, RGB)
+- Comprehensive technical documentation (1200+ lines)
 
 ---
 

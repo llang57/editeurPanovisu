@@ -135,7 +135,7 @@ public class EquiCubeDialogController {
                     Logger.getLogger(EquiCubeDialogController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            Image[] imgFacesCube = TransformationsPanoramique.equi2cube(imgEquiImage, -1);
+            Image[] imgFacesCube = TransformationsPanoramique.equi2cubeAuto(imgEquiImage, -1);
             for (int i = 0; i < 6; i++) {
                 String strSuffixe = "";
                 switch (i) {

@@ -13578,6 +13578,11 @@ public class EditeurPanovisu extends Application {
                                     System.out.println("[Config] 🤖 Modèle Ollama chargé: " + valeur);
                                 }
                                 break;
+                            case "gpuEnabled":
+                                boolean gpuEnabled = valeur.equals("true");
+                                editeurpanovisu.gpu.GPUManager.getInstance().setGPUEnabled(gpuEnabled);
+                                System.out.println("[Config] 🎮 GPU " + (gpuEnabled ? "activé" : "désactivé"));
+                                break;
                         }
 
                     }
@@ -13612,6 +13617,7 @@ public class EditeurPanovisu extends Application {
         strContenuFichier += "niveauNetteteTransf=" + getNiveauNetteteTransf() + "\n";
         strContenuFichier += "dernierRepertoireVisite=" + getStrDernierRepertoireVisite() + "\n";
         strContenuFichier += "dernierRepertoireImages=" + getStrDernierRepertoireImages() + "\n";
+        strContenuFichier += "gpuEnabled=" + editeurpanovisu.gpu.GPUManager.getInstance().isGPUEnabled() + "\n";
         OutputStreamWriter oswFichierHisto = null;
         try {
             oswFichierHisto = new OutputStreamWriter(new FileOutputStream(fileFichPreferences), "UTF-8");
@@ -13671,6 +13677,16 @@ public class EditeurPanovisu extends Application {
             System.err.println("⚠️ Erreur lors de la réinitialisation du serveur HTTP : " + e.getMessage());
         }
         
+        // Initialiser le GPU au démarrage pour afficher les informations
+        try {
+            editeurpanovisu.gpu.GPUManager gpuManager = editeurpanovisu.gpu.GPUManager.getInstance();
+            if (!gpuManager.isGPUAvailable()) {
+                System.out.println("[GPU] ℹ️  Aucun GPU OpenCL détecté - Les transformations utiliseront le CPU");
+            }
+        } catch (Exception e) {
+            System.out.println("[GPU] ⚠️  Erreur lors de l'initialisation GPU : " + e.getMessage());
+        }
+        
         if (isLinux()) {
             stPrimaryStage.setFullScreen(true);
         }
@@ -13681,7 +13697,7 @@ public class EditeurPanovisu extends Application {
         fileRepertConfig = new File(getStrRepertAppli() + File.separator + "configPV");
         rbLocalisation = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", getLocale());
         // Lire la version depuis project.properties
-        String version = "3.1";
+        String version = "3.3";
         try {
             Properties propVersion = new Properties();
             java.io.InputStream is = getClass().getResourceAsStream("/project.properties");

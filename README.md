@@ -1,6 +1,6 @@
 # 🌐 Éditeur PanoVisu
 
-[![Version](https://img.shields.io/badge/version-3.2.0-blue.svg)](https://github.com/llang57/editeurPanovisu/releases)
+[![Version](https://img.shields.io/badge/version-3.3.0-blue.svg)](https://github.com/llang57/editeurPanovisu/releases)
 [![Java](https://img.shields.io/badge/Java-25-orange.svg)](https://adoptium.net/)
 [![JavaFX](https://img.shields.io/badge/JavaFX-19-green.svg)](https://openjfx.io/)
 [![License](https://img.shields.io/badge/license-GPL--3.0-brightgreen.svg)](LICENSE)
@@ -20,6 +20,35 @@ PanoVisu combine puissance, simplicité et liberté pour offrir une solution com
 **Languages:** [🇫🇷 Français](README.md) • [🇬🇧 English](README_EN.md)
 
 </div>
+
+---
+
+## 🚀 Version 3.3.0 - Accélération GPU et Performance
+
+**Quoi de neuf ?**
+
+### ⚡ Accélération GPU (OpenCL)
+- **🎮 Traitement GPU** : Accélération matérielle pour toutes les opérations de traitement d'images
+  - **Transformations panoramiques** : Conversion Équirectangulaire ↔ Cube **3.3× plus rapide**
+  - **Redimensionnement d'images** : Algorithmes Bicubic et Lanczos3 haute qualité sur GPU
+  - **Affichage des visites** : Rendu panoramique **10× plus rapide**
+  - **Niveaux de détail (LOD)** : Génération des niveaux progressifs accélérée
+  - **Fallback automatique** : Bascule sur CPU si GPU indisponible
+- **📊 Gains de performance** :
+  - Chargement des visites panoramiques : **3.4× plus rapide** (15s → 4.5s)
+  - Redimensionnement batch : **1.7× plus rapide**
+  - Affichage à l'écran : **10× plus rapide** (1000ms → 100ms)
+  - Qualité visuelle : Bicubic/Lanczos3 élimine le crénelage
+- **🎨 Qualité d'image améliorée** :
+  - Interpolation Bicubic remplace Nearest Neighbor
+  - Interpolation Lanczos3 pour agrandissements ×2+
+  - Réduction d'aliasing et meilleur anti-crénelage
+
+### 🔧 Architecture technique
+- Support OpenCL 1.2+ (NVIDIA CUDA, AMD ROCm, Intel compatible)
+- Auto-routing intelligent GPU/CPU selon taille d'image
+- Gestion robuste des colorspaces (CMYK, YCbCr, RGB)
+- Documentation technique complète (1200+ lignes)
 
 ---
 

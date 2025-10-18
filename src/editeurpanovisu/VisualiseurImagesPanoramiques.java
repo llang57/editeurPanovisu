@@ -40,6 +40,10 @@ import javafx.scene.shape.Sphere;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 import editeurpanovisu.BigDecimalField;
+import editeurpanovisu.gpu.ImageResizeGPU;
+import editeurpanovisu.gpu.InterpolationMethod;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -104,6 +108,35 @@ public final class VisualiseurImagesPanoramiques {
     public static Image imgTransformationImage(Image imgRect, int iRapport) {
         int iLargeur = (int) imgRect.getWidth() / iRapport;
         int iHauteur = iLargeur / 2 / iRapport;
+        
+        try {
+            // Tentative GPU Bicubic pour affichage visite (plus rapide)
+            Image resized = ImageResizeGPU.resizeAuto(
+                imgRect,
+                iLargeur,
+                iHauteur,
+                InterpolationMethod.BICUBIC
+            );
+            Logger.getLogger(VisualiseurImagesPanoramiques.class.getName()).log(Level.FINE, 
+                String.format("imgTransformationImage GPU: %dx%d → %dx%d (Bicubic)",
+                    (int) imgRect.getWidth(), (int) imgRect.getHeight(),
+                    iLargeur, iHauteur)
+            );
+            return resized;
+            
+        } catch (Exception e) {
+            // Fallback CPU : boucle pixel par pixel (transformation Mercator)
+            Logger.getLogger(VisualiseurImagesPanoramiques.class.getName()).log(Level.WARNING, 
+                "Erreur GPU imgTransformationImage, fallback CPU: " + e.getMessage()
+            );
+            return imgTransformationImageCPU(imgRect, iRapport, iLargeur, iHauteur);
+        }
+    }
+    
+    /**
+     * Version CPU de la transformation Mercator (fallback)
+     */
+    private static Image imgTransformationImageCPU(Image imgRect, int iRapport, int iLargeur, int iHauteur) {
         WritableImage imgMercator = new WritableImage(iLargeur, iHauteur);
         PixelReader prRect = imgRect.getPixelReader();
         PixelWriter pwMercator = imgMercator.getPixelWriter();

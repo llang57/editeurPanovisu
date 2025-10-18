@@ -16,6 +16,9 @@
  */
 package editeurpanovisu;
 
+import editeurpanovisu.gpu.GPUManager;
+import editeurpanovisu.gpu.ImageResizeGPU;
+import editeurpanovisu.gpu.InterpolationMethod;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
@@ -37,6 +40,7 @@ import javax.imageio.ImageWriter;
 import javax.imageio.stream.ImageOutputStream;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -1041,10 +1045,35 @@ public class RedimensionnementImagesDialogController {
         
         task.setOnFailed(event -> {
             lblStatut.setText(rbLocalisation.getString("traitementEchec"));
+            
+            // Logger l'exception complète avec stack trace
+            Throwable exception = task.getException();
+            Logger.getLogger(RedimensionnementImagesDialogController.class.getName()).log(
+                Level.SEVERE,
+                "❌❌❌ ERREUR COMPLÈTE LORS DU TRAITEMENT ❌❌❌",
+                exception
+            );
+            
+            // Afficher aussi la cause racine si elle existe
+            Throwable cause = exception;
+            while (cause.getCause() != null) {
+                cause = cause.getCause();
+                Logger.getLogger(RedimensionnementImagesDialogController.class.getName()).log(
+                    Level.SEVERE,
+                    "   └─ Cause: " + cause.getClass().getName() + ": " + cause.getMessage()
+                );
+            }
+            
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle(rbLocalisation.getString("erreur"));
             alert.setHeaderText(rbLocalisation.getString("traitementEchec"));
-            alert.setContentText(task.getException().getMessage());
+            
+            // Afficher le message d'erreur complet
+            String errorMessage = exception.getMessage();
+            if (exception.getCause() != null) {
+                errorMessage += "\n\nCause: " + exception.getCause().getMessage();
+            }
+            alert.setContentText(errorMessage);
             alert.showAndWait();
             
             // Réactiver les contrôles
@@ -1205,10 +1234,56 @@ public class RedimensionnementImagesDialogController {
      * @throws IOException En cas d'erreur de lecture/écriture
      */
     private void traiterImage(File fichierSource) throws IOException {
-        // Lire l'image source
-        BufferedImage imageOriginale = ImageIO.read(fichierSource);
-        if (imageOriginale == null) {
-            throw new IOException("Impossible de lire l'image : " + fichierSource.getName());
+        Logger.getLogger(RedimensionnementImagesDialogController.class.getName()).log(
+            Level.INFO,
+            "📂 Début traitement: " + fichierSource.getName()
+        );
+        
+        // Lire l'image source avec gestion robuste des erreurs
+        BufferedImage imageTemp = null;
+        try {
+            imageTemp = ImageIO.read(fichierSource);
+            if (imageTemp == null) {
+                throw new IOException("ImageIO.read() a retourné null pour : " + fichierSource.getName());
+            }
+            
+            Logger.getLogger(RedimensionnementImagesDialogController.class.getName()).log(
+                Level.INFO,
+                String.format("✅ Image chargée: %dx%d, type=%d",
+                    imageTemp.getWidth(), imageTemp.getHeight(), imageTemp.getType()
+                )
+            );
+            
+        } catch (Exception e) {
+            Logger.getLogger(RedimensionnementImagesDialogController.class.getName()).log(
+                Level.SEVERE,
+                "❌ Erreur lors du chargement de l'image: " + e.getMessage(),
+                e
+            );
+            throw new IOException("Impossible de lire l'image : " + fichierSource.getName() + 
+                                " - " + e.getMessage(), e);
+        }
+        
+        // Normaliser immédiatement en RGB pour éviter les problèmes de colorspace
+        BufferedImage imageOriginale = null;
+        try {
+            imageOriginale = normaliserEnRGB(imageTemp);
+            imageTemp.flush();
+            imageTemp = null;
+            
+            Logger.getLogger(RedimensionnementImagesDialogController.class.getName()).log(
+                Level.INFO,
+                "✅ Normalisation RGB réussie"
+            );
+            
+        } catch (Exception e) {
+            Logger.getLogger(RedimensionnementImagesDialogController.class.getName()).log(
+                Level.SEVERE,
+                "❌ Erreur lors de la normalisation RGB: " + e.getMessage(),
+                e
+            );
+            if (imageTemp != null) imageTemp.flush();
+            throw new IOException("Impossible de normaliser l'image en RGB: " + e.getMessage(), e);
         }
         
         // Récupérer les dimensions cibles
@@ -1264,8 +1339,20 @@ public class RedimensionnementImagesDialogController {
         }
     }
     
+    
     /**
-     * Redimensionne une image aux dimensions spécifiées avec une qualité optimale.
+     * Redimensionne une image aux dimensions spécifiées avec interpolation optimale.
+     * 
+     * <p>Sélection automatique de la méthode d'interpolation :</p>
+     * <ul>
+     * <li><b>GPU disponible :</b>
+     *     <ul>
+     *     <li>Agrandissement ×2+ ou Réduction ÷4+ : Lanczos3 (qualité maximale)</li>
+     *     <li>Autres cas : Bicubique (équilibre qualité/vitesse)</li>
+     *     </ul>
+     * </li>
+     * <li><b>CPU uniquement :</b> Bilinéaire (Graphics2D optimisé)</li>
+     * </ul>
      * 
      * @param imageSource Image source à redimensionner
      * @param largeur Largeur cible
@@ -1273,16 +1360,118 @@ public class RedimensionnementImagesDialogController {
      * @return Image redimensionnée
      */
     private BufferedImage redimensionnerImage(BufferedImage imageSource, int largeur, int hauteur) {
+        // Vérifier si le GPU est disponible
+        GPUManager gpu = GPUManager.getInstance();
+        boolean gpuDisponible = gpu.isGPUAvailable() && gpu.isGPUEnabled();
+        
+        if (gpuDisponible) {
+            try {
+                Logger.getLogger(RedimensionnementImagesDialogController.class.getName()).log(
+                    Level.INFO,
+                    String.format("🎨 Début redimensionnement GPU: %dx%d → %dx%d",
+                        imageSource.getWidth(), imageSource.getHeight(), largeur, hauteur
+                    )
+                );
+                
+                // L'image est déjà normalisée en RGB dans traiterImage()
+                // Conversion BufferedImage → JavaFX Image
+                Logger.getLogger(RedimensionnementImagesDialogController.class.getName()).log(
+                    Level.INFO,
+                    "🔄 Conversion BufferedImage → JavaFX Image..."
+                );
+                
+                Image fxImage = SwingFXUtils.toFXImage(imageSource, null);
+                
+                Logger.getLogger(RedimensionnementImagesDialogController.class.getName()).log(
+                    Level.INFO,
+                    "✅ Conversion JavaFX réussie"
+                );
+                
+                // Calcul du facteur de redimensionnement
+                double facteurLargeur = (double) largeur / imageSource.getWidth();
+                double facteurHauteur = (double) hauteur / imageSource.getHeight();
+                double facteur = Math.max(facteurLargeur, facteurHauteur);
+                
+                // Sélection de la méthode d'interpolation
+                InterpolationMethod methode;
+                
+                if (facteur >= 2.0) {
+                    // Agrandissement ×2+ → Lanczos3 (meilleure qualité pour upscaling)
+                    methode = InterpolationMethod.LANCZOS3;
+                } else if (facteur <= 0.25) {
+                    // Réduction ÷4+ → Lanczos3 (meilleur anti-aliasing)
+                    methode = InterpolationMethod.LANCZOS3;
+                } else {
+                    // Cas général → Bicubique (optimal)
+                    methode = InterpolationMethod.BICUBIC;
+                }
+                
+                // Redimensionnement GPU
+                Image fxImageRedim = ImageResizeGPU.resizeAuto(fxImage, largeur, hauteur, methode);
+                
+                Logger.getLogger(RedimensionnementImagesDialogController.class.getName()).log(
+                    Level.INFO,
+                    "🔄 Conversion JavaFX Image → BufferedImage..."
+                );
+                
+                // Conversion JavaFX Image → BufferedImage avec création explicite RGB
+                // Créer un BufferedImage RGB de destination
+                BufferedImage resultat = new BufferedImage(
+                    (int) fxImageRedim.getWidth(),
+                    (int) fxImageRedim.getHeight(),
+                    BufferedImage.TYPE_INT_RGB  // Force RGB pour éviter "Bogus colorspace"
+                );
+                
+                // Convertir en passant le BufferedImage de destination
+                SwingFXUtils.fromFXImage(fxImageRedim, resultat);
+                
+                Logger.getLogger(RedimensionnementImagesDialogController.class.getName()).log(
+                    Level.INFO,
+                    "✅ Conversion BufferedImage réussie"
+                );
+                
+                // Log pour debug
+                Logger.getLogger(RedimensionnementImagesDialogController.class.getName()).log(
+                    Level.INFO,
+                    String.format("🎨 Redimensionnement GPU %s : %dx%d → %dx%d (facteur: %.2f×, méthode: %s)",
+                        facteur >= 1.0 ? "Agrandissement" : "Réduction",
+                        imageSource.getWidth(), imageSource.getHeight(),
+                        largeur, hauteur,
+                        facteur,
+                        methode.name()
+                    )
+                );
+                
+                return resultat;
+                
+            } catch (Exception e) {
+                // En cas d'erreur GPU, basculer sur CPU
+                Logger.getLogger(RedimensionnementImagesDialogController.class.getName()).log(
+                    Level.WARNING, 
+                    "⚠️ Erreur GPU, bascule sur CPU : " + e.getMessage()
+                );
+            }
+        }
+        
+        // Fallback CPU : Graphics2D avec Bilinéaire
         BufferedImage imageRedimensionnee = new BufferedImage(largeur, hauteur, BufferedImage.TYPE_INT_RGB);
         Graphics2D g2d = imageRedimensionnee.createGraphics();
         
-        // Configuration pour une qualité optimale
-        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        // Configuration CPU optimisée (Bilinéaire rapide)
+        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED);
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         
         g2d.drawImage(imageSource, 0, 0, largeur, hauteur, null);
         g2d.dispose();
+        
+        Logger.getLogger(RedimensionnementImagesDialogController.class.getName()).log(
+            Level.INFO,
+            String.format("💻 Redimensionnement CPU : %dx%d → %dx%d (Bilinéaire)",
+                imageSource.getWidth(), imageSource.getHeight(),
+                largeur, hauteur
+            )
+        );
         
         return imageRedimensionnee;
     }
@@ -1381,6 +1570,110 @@ public class RedimensionnementImagesDialogController {
         } else {
             // Sauvegarde PNG ou WEBP (sans compression personnalisée pour l'instant)
             ImageIO.write(image, format.toLowerCase(), fichierSortie);
+        }
+    }
+    
+    /**
+     * Normalise un BufferedImage en RGB pour éviter l'erreur "Bogus input colorspace".
+     * 
+     * <p>Certaines images JPEG utilisent des espaces colorimétriques non-standard
+     * (CMYK, YCbCr, etc.) qui causent des erreurs lors de la conversion JavaFX.
+     * Cette méthode convertit l'image en RGB standard.</p>
+     * 
+     * @param source Image source à normaliser
+     * @return Image normalisée en RGB
+     */
+    private BufferedImage normaliserEnRGB(BufferedImage source) {
+        if (source == null) {
+            throw new IllegalArgumentException("Image source null");
+        }
+        
+        try {
+            // Logs pour debug
+            int type = source.getType();
+            String typeName = getBufferedImageTypeName(type);
+            
+            Logger.getLogger(RedimensionnementImagesDialogController.class.getName()).log(
+                Level.INFO,
+                String.format("🔍 Image source: %dx%d, type=%d (%s), colorModel=%s",
+                    source.getWidth(), source.getHeight(),
+                    type, typeName,
+                    source.getColorModel().getClass().getSimpleName()
+                )
+            );
+            
+            // Si l'image est déjà en RGB ou ARGB compatible, la retourner directement
+            if (type == BufferedImage.TYPE_INT_RGB || 
+                type == BufferedImage.TYPE_INT_ARGB ||
+                type == BufferedImage.TYPE_3BYTE_BGR ||
+                type == BufferedImage.TYPE_4BYTE_ABGR) {
+                Logger.getLogger(RedimensionnementImagesDialogController.class.getName()).log(
+                    Level.INFO, "✅ Image déjà compatible RGB, pas de conversion"
+                );
+                return source;
+            }
+            
+            // Créer une nouvelle image RGB
+            Logger.getLogger(RedimensionnementImagesDialogController.class.getName()).log(
+                Level.INFO,
+                String.format("🔄 Conversion nécessaire: %s → TYPE_INT_RGB", typeName)
+            );
+            
+            BufferedImage imageRGB = new BufferedImage(
+                source.getWidth(), 
+                source.getHeight(), 
+                BufferedImage.TYPE_INT_RGB
+            );
+            
+            // Dessiner l'image source sur la nouvelle image RGB
+            Graphics2D g2d = imageRGB.createGraphics();
+            
+            // Configuration pour meilleure qualité de conversion
+            g2d.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY);
+            g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+            
+            g2d.drawImage(source, 0, 0, null);
+            g2d.dispose();
+            
+            Logger.getLogger(RedimensionnementImagesDialogController.class.getName()).log(
+                Level.INFO, "✅ Conversion RGB réussie"
+            );
+            
+            return imageRGB;
+            
+        } catch (Exception e) {
+            Logger.getLogger(RedimensionnementImagesDialogController.class.getName()).log(
+                Level.SEVERE,
+                "❌ Erreur lors de la normalisation RGB: " + e.getMessage(),
+                e
+            );
+            throw new RuntimeException("Impossible de normaliser l'image en RGB", e);
+        }
+    }
+    
+    /**
+     * Retourne le nom lisible du type de BufferedImage.
+     * 
+     * @param type Type de BufferedImage
+     * @return Nom lisible du type
+     */
+    private String getBufferedImageTypeName(int type) {
+        switch (type) {
+            case BufferedImage.TYPE_INT_RGB: return "TYPE_INT_RGB";
+            case BufferedImage.TYPE_INT_ARGB: return "TYPE_INT_ARGB";
+            case BufferedImage.TYPE_INT_ARGB_PRE: return "TYPE_INT_ARGB_PRE";
+            case BufferedImage.TYPE_INT_BGR: return "TYPE_INT_BGR";
+            case BufferedImage.TYPE_3BYTE_BGR: return "TYPE_3BYTE_BGR";
+            case BufferedImage.TYPE_4BYTE_ABGR: return "TYPE_4BYTE_ABGR";
+            case BufferedImage.TYPE_4BYTE_ABGR_PRE: return "TYPE_4BYTE_ABGR_PRE";
+            case BufferedImage.TYPE_BYTE_GRAY: return "TYPE_BYTE_GRAY";
+            case BufferedImage.TYPE_BYTE_BINARY: return "TYPE_BYTE_BINARY";
+            case BufferedImage.TYPE_BYTE_INDEXED: return "TYPE_BYTE_INDEXED";
+            case BufferedImage.TYPE_USHORT_GRAY: return "TYPE_USHORT_GRAY";
+            case BufferedImage.TYPE_USHORT_565_RGB: return "TYPE_USHORT_565_RGB";
+            case BufferedImage.TYPE_USHORT_555_RGB: return "TYPE_USHORT_555_RGB";
+            case BufferedImage.TYPE_CUSTOM: return "TYPE_CUSTOM";
+            default: return "UNKNOWN(" + type + ")";
         }
     }
 }

@@ -7,7 +7,7 @@
 
     <groupId>fr.panovisu</groupId>
     <artifactId>editeurPanovisu</artifactId>
-    <version>3.2.0-SNAPSHOT</version>
+    <version>3.3.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>editeurPanovisu</name>
@@ -204,6 +204,13 @@
             <version>3.6.2</version>
         </dependency>
 
+        <!-- JOCL - Java Bindings for OpenCL (Accélération GPU) -->
+        <dependency>
+            <groupId>org.jocl</groupId>
+            <artifactId>jocl</artifactId>
+            <version>2.0.5</version>
+        </dependency>
+
         <!-- Tests -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -268,6 +275,7 @@
                     <include>**/*.gif</include>
                     <include>**/*.md</include>
                     <include>**/*.ttf</include>
+                    <include>**/*.cl</include>
                 </includes>
             </resource>
             <!-- Documentation Markdown -->
@@ -489,7 +497,7 @@
                     
                     <!-- Chemin vers le JAR avec dépendances et ressources -->
                     <input>target/app-input</input>
-                    <mainJar>editeurPanovisu-3.0.0-SNAPSHOT.jar</mainJar>
+                    <mainJar>editeurPanovisu-3.3.0-SNAPSHOT.jar</mainJar>
                     <mainClass>editeurpanovisu.Launcher</mainClass>
                     
                     <!-- Utiliser le runtime Java complet au lieu de jlink -->

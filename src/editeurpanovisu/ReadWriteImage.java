@@ -5,6 +5,8 @@
  */
 package editeurpanovisu;
 
+import editeurpanovisu.gpu.ImageResizeGPU;
+import editeurpanovisu.gpu.InterpolationMethod;
 import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsDevice;
@@ -138,16 +140,52 @@ public class ReadWriteImage {
 
     }
 
+    /**
+     * Redimensionne une image avec accélération GPU.
+     * 
+     * <p>Utilise l'accélération GPU avec interpolation Bicubic pour une qualité optimale.
+     * Fallback sur Thumbnails (CPU) si GPU indisponible.</p>
+     * 
+     * @param img Image source à redimensionner
+     * @param newW Nouvelle largeur
+     * @param newH Nouvelle hauteur
+     * @return Image redimensionnée
+     */
     public static Image resizeImage(Image img, int newW, int newH) {
-        BufferedImage image = SwingFXUtils.fromFXImage(img, null);
-
         try {
-            BufferedImage imgRetour = Thumbnails.of(image).size(newW, newH).asBufferedImage();
-            return SwingFXUtils.toFXImage(imgRetour, null);
-        } catch (IOException ex) {
-            Logger.getLogger(ReadWriteImage.class.getName()).log(Level.SEVERE, null, ex);
+            // Essayer GPU d'abord (Bicubic)
+            Image resized = ImageResizeGPU.resizeAuto(
+                img,
+                newW,
+                newH,
+                InterpolationMethod.BICUBIC
+            );
+            
+            Logger.getLogger(ReadWriteImage.class.getName()).log(
+                Level.FINE,
+                String.format("Resize GPU: %dx%d → %dx%d (Bicubic)",
+                    (int)img.getWidth(), (int)img.getHeight(), newW, newH
+                )
+            );
+            
+            return resized;
+            
+        } catch (Exception e) {
+            // Fallback sur Thumbnails (CPU) en cas d'erreur GPU
+            Logger.getLogger(ReadWriteImage.class.getName()).log(
+                Level.WARNING,
+                "Erreur GPU resize, fallback Thumbnails: " + e.getMessage()
+            );
+            
+            BufferedImage image = SwingFXUtils.fromFXImage(img, null);
+            try {
+                BufferedImage imgRetour = Thumbnails.of(image).size(newW, newH).asBufferedImage();
+                return SwingFXUtils.toFXImage(imgRetour, null);
+            } catch (IOException ex) {
+                Logger.getLogger(ReadWriteImage.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return null;
         }
-        return null;
     }
 
     /**

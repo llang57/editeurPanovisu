@@ -16,6 +16,14 @@ D:\developpement\java\editeurPanovisu\src\editeurpanovisu\ExtensionsFilter.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\GestionnaireDiaporamaController.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\GestionnaireInterfaceController.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\GestionnairePlanController.java
+D:\developpement\java\editeurPanovisu\src\editeurpanovisu\gpu\GPUKernelLoader.java
+D:\developpement\java\editeurPanovisu\src\editeurpanovisu\gpu\GPUManager.java
+D:\developpement\java\editeurPanovisu\src\editeurpanovisu\gpu\ImageResizeGPU.java
+D:\developpement\java\editeurPanovisu\src\editeurpanovisu\gpu\InterpolationMethod.java
+D:\developpement\java\editeurPanovisu\src\editeurpanovisu\gpu\TestBicubicVsLanczos.java
+D:\developpement\java\editeurPanovisu\src\editeurpanovisu\gpu\TestImageResize.java
+D:\developpement\java\editeurPanovisu\src\editeurpanovisu\gpu\TestImageResizeInteractive.java
+D:\developpement\java\editeurPanovisu\src\editeurpanovisu\gpu\TestReductionImage.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\HotSpot.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\HotspotDiaporama.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\HotspotHTML.java
@@ -49,6 +57,7 @@ D:\developpement\java\editeurPanovisu\src\editeurpanovisu\TestAIClients.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\TextUtils.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\ThemeManager.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\TransformationsPanoramique.java
+D:\developpement\java\editeurPanovisu\src\editeurpanovisu\TransformationsPanoramiqueGPU.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\util\LocalHTTPServer.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\util\SvgIconLoader.java
 D:\developpement\java\editeurPanovisu\src\editeurpanovisu\VisualiseurImagesPanoramiques.java

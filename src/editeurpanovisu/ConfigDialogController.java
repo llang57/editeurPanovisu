@@ -24,6 +24,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -57,6 +58,7 @@ public class ConfigDialogController {
     private static TextField tfOpenRouterKey;
     private static ComboBox<String> cbOpenRouterModel;
     private static ComboBox<String> cbOllamaModel;
+    private static CheckBox chkGPUEnabled;
 
     /**
      *
@@ -78,12 +80,12 @@ public class ConfigDialogController {
         stConfigDialog.setResizable(false);
         apConfigDialog = new AnchorPane();
         apConfigDialog.setPrefWidth(600);
-        apConfigDialog.setPrefHeight(680); // Augmenté pour les nouveaux champs IA
+        apConfigDialog.setPrefHeight(780); // Augmenté pour la section GPU (680 -> 780)
         Scene sceneConfigDialog = new Scene(apConfigDialog);
         stConfigDialog.setScene(sceneConfigDialog);
         VBox vbFenetre = new VBox();
         Pane paneConfig = new Pane();
-        paneConfig.setPrefSize(600, 600); // Augmenté pour accueillir les modèles IA
+        paneConfig.setPrefSize(600, 700); // Augmenté pour la section GPU (600 -> 700)
         Label lblType = new Label(rbLocalisation.getString("config.langue"));
         lblType.setLayoutX(45);
         lblType.setLayoutY(25);
@@ -211,6 +213,35 @@ public class ConfigDialogController {
         lblInfoModeles.setStyle("-fx-font-size: 11px; -fx-text-fill: #666;");
         lblInfoModeles.setLayoutX(45);
         lblInfoModeles.setLayoutY(540);
+        
+        // Section GPU
+        Label lblTitreGPU = new Label("🎮 " + rbLocalisation.getString("config.gpu.titre"));
+        lblTitreGPU.setStyle("-fx-font-size: 14px; -fx-font-weight: bold;");
+        lblTitreGPU.setLayoutX(45);
+        lblTitreGPU.setLayoutY(570);
+        
+        chkGPUEnabled = new CheckBox(rbLocalisation.getString("config.gpu.activer"));
+        chkGPUEnabled.setLayoutX(45);
+        chkGPUEnabled.setLayoutY(600);
+        
+        // Charger l'état actuel du GPU
+        chkGPUEnabled.setSelected(editeurpanovisu.gpu.GPUManager.getInstance().isGPUEnabled());
+        
+        // Afficher les informations GPU si disponible
+        Label lblInfoGPU = new Label();
+        lblInfoGPU.setStyle("-fx-font-size: 11px; -fx-text-fill: #666;");
+        lblInfoGPU.setLayoutX(45);
+        lblInfoGPU.setLayoutY(625);
+        lblInfoGPU.setMaxWidth(500);
+        lblInfoGPU.setWrapText(true);
+        
+        editeurpanovisu.gpu.GPUManager gpuMgr = editeurpanovisu.gpu.GPUManager.getInstance();
+        if (gpuMgr.isGPUAvailable()) {
+            lblInfoGPU.setText("✅ " + gpuMgr.getGPUInfo());
+        } else {
+            lblInfoGPU.setText("⚠️ " + rbLocalisation.getString("config.gpu.nonDisponible"));
+            chkGPUEnabled.setDisable(true);
+        }
 
         paneConfig.getChildren().addAll(
                 lblType, cbListeLangues,
@@ -223,7 +254,8 @@ public class ConfigDialogController {
                 lblTitreModeles,
                 lblOpenRouterModel, cbOpenRouterModel,
                 lblOllamaModel, cbOllamaModel,
-                lblInfoModeles
+                lblInfoModeles,
+                lblTitreGPU, chkGPUEnabled, lblInfoGPU
         );
         btnChoixRepert.setOnAction((ActionEvent e) -> {
             DirectoryChooser repertChoix = new DirectoryChooser();
@@ -298,6 +330,17 @@ public class ConfigDialogController {
             
             try {
                 saveModelsPreferences();
+            } catch (IOException ex) {
+                Logger.getLogger(ConfigDialogController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            // Sauvegarder et appliquer la préférence GPU
+            boolean gpuEnabled = chkGPUEnabled.isSelected();
+            editeurpanovisu.gpu.GPUManager.getInstance().setGPUEnabled(gpuEnabled);
+            System.out.println("[Config] GPU " + (gpuEnabled ? "activé" : "désactivé"));
+            
+            try {
+                EditeurPanovisu.sauvePreferences();
             } catch (IOException ex) {
                 Logger.getLogger(ConfigDialogController.class.getName()).log(Level.SEVERE, null, ex);
             }
