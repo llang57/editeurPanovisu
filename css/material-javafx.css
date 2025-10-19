@@ -209,22 +209,41 @@
     -fx-border-width: 0;
 }
 
+/* Barre de menu (en haut) - Toujours blanc sur fond bleu */
 .menu-bar .label {
     -fx-text-fill: white;
 }
 
-.menu {
+.menu-bar > .container > .menu-button > .label {
     -fx-text-fill: white;
 }
 
+/* Menus déroulants - Utilise la couleur du texte selon le thème */
 .menu-item {
     -fx-background-color: -material-surface;
     -fx-text-fill: -material-text-primary;
     -fx-padding: 12 16 12 16;
 }
 
+/* Labels dans les menu-items (texte des options) */
+.menu-item .label {
+    -fx-text-fill: -material-text-primary;
+}
+
+/* Mode sombre : texte blanc dans les menus déroulants */
+.root.material-dark .menu-item .label {
+    -fx-text-fill: rgba(255, 255, 255, 0.87);
+}
+
+/* Hover plus visible avec assombrissement */
 .menu-item:focused, .menu-item:hover {
-    -fx-background-color: derive(-material-surface, -5%);
+    -fx-background-color: derive(-material-surface, -10%);
+}
+
+/* Pour le mode sombre, hover encore plus visible */
+.root.material-dark .menu-item:focused,
+.root.material-dark .menu-item:hover {
+    -fx-background-color: derive(-material-surface, 15%);
 }
 
 .context-menu {

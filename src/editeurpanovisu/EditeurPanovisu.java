@@ -539,6 +539,12 @@ public class EditeurPanovisu extends Application {
         if (ivCube2Equi != null) {
             ivCube2Equi.setImage(loadSvgIcon("vue-cube", 128, 64, null).getImage());
         }
+        if (ivRedimensionnerImages != null) {
+            ivRedimensionnerImages.setImage(loadSvgIcon("redimensionner-images", 95, 48, null).getImage());
+        }
+        if (ivConvertirRatio2to1 != null) {
+            ivConvertirRatio2to1.setImage(loadSvgIcon("ratio-2to1", 128, 72, null).getImage());
+        }
     }
 
     /**
@@ -1464,6 +1470,7 @@ public class EditeurPanovisu extends Application {
     static public MenuBar mbarPrincipal = new MenuBar();
     static public ToolBar bbarPrincipal = new ToolBar();
     static public HBox hbBarreBouton;
+    static public VBox vbMonPanneau; // Panneau contenant le menu et la barre d'outils
     static public TabPane tpEnvironnement;
     static public AnchorPane apEnvironnement;
     private static int iNombrePlans = 0;
@@ -7584,8 +7591,9 @@ public class EditeurPanovisu extends Application {
      */
     private static void afficheHS(int i, double longitude, double latitude) {
         double largeur = ivImagePanoramique.getFitWidth();
+        double hauteur = ivImagePanoramique.getFitHeight();
         double X = (longitude + 180.0d) * largeur / 360.0d + ivImagePanoramique.getLayoutX();
-        double Y = (90.0d - latitude) * largeur / 360.0d;
+        double Y = (90.0d - latitude) * hauteur / 180.0d;
         Circle circPoint = new Circle(X, Y, 5);
         circPoint.setFill(Color.YELLOW);
         circPoint.setStroke(Color.RED);
@@ -7629,7 +7637,7 @@ public class EditeurPanovisu extends Application {
             strChPoint = strChPoint.substring(5, strChPoint.length());
             int iNumeroPoint = Integer.parseInt(strChPoint);
             double X1 = mouseEvent1.getSceneX();
-            double Y1 = mouseEvent1.getSceneY();
+            double Y1 = mouseEvent1.getY(); // Coordonnées locales du panePanoramique
             double mouseX = X1 - ivImagePanoramique.getLayoutX();
             if (mouseX < 0) {
                 mouseX = 0;
@@ -7638,7 +7646,7 @@ public class EditeurPanovisu extends Application {
                 mouseX = ivImagePanoramique.getFitWidth();
             }
 
-            double mouseY = Y1 - panePanoramique.getLayoutY() - 130 - getiDecalageMac();
+            double mouseY = Y1; // Y déjà en coordonnées locales
             if (mouseY < 0) {
                 mouseY = 0;
             }
@@ -7650,7 +7658,7 @@ public class EditeurPanovisu extends Application {
             double larg = ivImagePanoramique.getFitWidth();
             String strLong, strLat;
             longit = 360.0f * mouseX / larg - 180;
-            lat = 90.0d - 2.0f * mouseY / larg * 180.0f;
+            lat = 90.0d - (mouseY / ivImagePanoramique.getFitHeight()) * 180.0f;
             getPanoramiquesProjet()[getiPanoActuel()].getHotspot(iNumeroPoint).setLatitude(lat);
             getPanoramiquesProjet()[getiPanoActuel()].getHotspot(iNumeroPoint).setLongitude(longit);
             circPoint.setFill(Color.YELLOW);
@@ -7717,8 +7725,9 @@ public class EditeurPanovisu extends Application {
      */
     private static void afficheHSImage(int i, double longitude, double latitude) {
         double largeur = ivImagePanoramique.getFitWidth();
+        double hauteur = ivImagePanoramique.getFitHeight();
         double X = (longitude + 180.0d) * largeur / 360.0d + ivImagePanoramique.getLayoutX();
-        double Y = (90.0d - latitude) * largeur / 360.0d;
+        double Y = (90.0d - latitude) * hauteur / 180.0d;
         Circle circPoint = new Circle(X, Y, 5);
         circPoint.setFill(Color.BLUE);
         circPoint.setStroke(Color.YELLOW);
@@ -7761,7 +7770,7 @@ public class EditeurPanovisu extends Application {
             strPoint = strPoint.substring(3, strPoint.length());
             int iNumeroPoint = Integer.parseInt(strPoint);
             double X1 = mouseEvent1.getSceneX();
-            double Y1 = mouseEvent1.getSceneY();
+            double Y1 = mouseEvent1.getY(); // Coordonnées locales du panePanoramique
             double mouseX = X1 - ivImagePanoramique.getLayoutX();
             if (mouseX < 0) {
                 mouseX = 0;
@@ -7769,7 +7778,7 @@ public class EditeurPanovisu extends Application {
             if (mouseX > ivImagePanoramique.getFitWidth()) {
                 mouseX = ivImagePanoramique.getFitWidth();
             }
-            double mouseY = Y1 - panePanoramique.getLayoutY() - 130 - getiDecalageMac();
+            double mouseY = Y1; // Y déjà en coordonnées locales
             if (mouseY < 0) {
                 mouseY = 0;
             }
@@ -7781,7 +7790,7 @@ public class EditeurPanovisu extends Application {
             double larg = ivImagePanoramique.getFitWidth();
             String strLong, strLat;
             longit = 360.0f * mouseX / larg - 180;
-            lat = 90.0d - 2.0f * mouseY / larg * 180.0f;
+            lat = 90.0d - (mouseY / ivImagePanoramique.getFitHeight()) * 180.0f;
             getPanoramiquesProjet()[getiPanoActuel()].getHotspotImage(iNumeroPoint).setLatitude(lat);
             getPanoramiquesProjet()[getiPanoActuel()].getHotspotImage(iNumeroPoint).setLongitude(longit);
             circPoint.setFill(Color.BLUE);
@@ -7873,8 +7882,9 @@ public class EditeurPanovisu extends Application {
      */
     private static void afficheHSDiapo(int i, double longitude, double latitude) {
         double largeur = ivImagePanoramique.getFitWidth();
+        double hauteur = ivImagePanoramique.getFitHeight();
         double X = (longitude + 180.0d) * largeur / 360.0d + ivImagePanoramique.getLayoutX();
-        double Y = (90.0d - latitude) * largeur / 360.0d;
+        double Y = (90.0d - latitude) * hauteur / 180.0d;
         Circle circPoint = new Circle(X, Y, 5);
         circPoint.setFill(Color.TURQUOISE);
         circPoint.setStroke(Color.ORANGE);
@@ -7917,7 +7927,7 @@ public class EditeurPanovisu extends Application {
             strPoint = strPoint.substring(3, strPoint.length());
             int iNumeroPoint = Integer.parseInt(strPoint);
             double X1 = mouseEvent1.getSceneX();
-            double Y1 = mouseEvent1.getSceneY();
+            double Y1 = mouseEvent1.getY(); // Coordonnées locales du panePanoramique
             double mouseX = X1 - ivImagePanoramique.getLayoutX();
             if (mouseX < 0) {
                 mouseX = 0;
@@ -7925,7 +7935,7 @@ public class EditeurPanovisu extends Application {
             if (mouseX > ivImagePanoramique.getFitWidth()) {
                 mouseX = ivImagePanoramique.getFitWidth();
             }
-            double mouseY = Y1 - panePanoramique.getLayoutY() - 130 - getiDecalageMac();
+            double mouseY = Y1; // Y déjà en coordonnées locales
             if (mouseY < 0) {
                 mouseY = 0;
             }
@@ -7937,7 +7947,7 @@ public class EditeurPanovisu extends Application {
             double larg = ivImagePanoramique.getFitWidth();
             String strLong, strLat;
             longit = 360.0f * mouseX / larg - 180;
-            lat = 90.0d - 2.0f * mouseY / larg * 180.0f;
+            lat = 90.0d - (mouseY / ivImagePanoramique.getFitHeight()) * 180.0f;
             getPanoramiquesProjet()[getiPanoActuel()].getHotspotDiapo(iNumeroPoint).setLatitude(lat);
             getPanoramiquesProjet()[getiPanoActuel()].getHotspotDiapo(iNumeroPoint).setLongitude(longit);
             circPoint.setFill(Color.TURQUOISE);
@@ -8020,8 +8030,9 @@ public class EditeurPanovisu extends Application {
      */
     private static void afficheHSHTML(int i, double longitude, double latitude) {
         double largeur = ivImagePanoramique.getFitWidth();
+        double hauteur = ivImagePanoramique.getFitHeight();
         double X = (longitude + 180.0d) * largeur / 360.0d + ivImagePanoramique.getLayoutX();
-        double Y = (90.0d - latitude) * largeur / 360.0d;
+        double Y = (90.0d - latitude) * hauteur / 180.0d;
         Circle circPoint = new Circle(X, Y, 5);
         circPoint.setFill(Color.DARKGREEN);
         circPoint.setStroke(Color.YELLOWGREEN);
@@ -8064,7 +8075,7 @@ public class EditeurPanovisu extends Application {
             strPoint = strPoint.substring(4, strPoint.length());
             int iNumeroPoint = Integer.parseInt(strPoint);
             double X1 = mouseEvent1.getSceneX();
-            double Y1 = mouseEvent1.getSceneY();
+            double Y1 = mouseEvent1.getY(); // Coordonnées locales du panePanoramique
             double mouseX = X1 - ivImagePanoramique.getLayoutX();
             if (mouseX < 0) {
                 mouseX = 0;
@@ -8072,7 +8083,7 @@ public class EditeurPanovisu extends Application {
             if (mouseX > ivImagePanoramique.getFitWidth()) {
                 mouseX = ivImagePanoramique.getFitWidth();
             }
-            double mouseY = Y1 - panePanoramique.getLayoutY() - 130 - getiDecalageMac();
+            double mouseY = Y1; // Y déjà en coordonnées locales
             if (mouseY < 0) {
                 mouseY = 0;
             }
@@ -8084,7 +8095,7 @@ public class EditeurPanovisu extends Application {
             double larg = ivImagePanoramique.getFitWidth();
             String strLong, strLat;
             longit = 360.0f * mouseX / larg - 180;
-            lat = 90.0d - 2.0f * mouseY / larg * 180.0f;
+            lat = 90.0d - (mouseY / ivImagePanoramique.getFitHeight()) * 180.0f;
             getPanoramiquesProjet()[getiPanoActuel()].getHotspotHTML(iNumeroPoint).setLatitude(lat);
             getPanoramiquesProjet()[getiPanoActuel()].getHotspotHTML(iNumeroPoint).setLongitude(longit);
             circPoint.setFill(Color.DARKGREEN);
@@ -8219,10 +8230,11 @@ public class EditeurPanovisu extends Application {
     private static void panoChoixRegard(double X, double Y) {
         if (X > 0 && X < ivImagePanoramique.getFitWidth()) {
             double mouseX = X;
-            double mouseY = Y - panePanoramique.getLayoutY() - 130;
+            double mouseY = Y; // Y est déjà en coordonnées locales du panePanoramique
             double largeur = ivImagePanoramique.getFitWidth();
+            double hauteur = ivImagePanoramique.getFitHeight();
             double regardX = 360.0f * mouseX / largeur - 180;
-            double regardY = 90.0d - 2.0f * mouseY / largeur * 180.0f;
+            double regardY = 90.0d - (mouseY / hauteur) * 180.0f;
             getPanoramiquesProjet()[getiPanoActuel()].setRegardX(regardX);
             getPanoramiquesProjet()[getiPanoActuel()].setRegardY(regardY);
             navigateurPanoramique.setLongitude(regardX - 180);
@@ -8420,13 +8432,14 @@ public class EditeurPanovisu extends Application {
             setbDejaSauve(false);
             getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             double mouseX = X;
-            double mouseY = Y - panePanoramique.getLayoutY() - 130 - getiDecalageMac();
+            double mouseY = Y; // Y est déjà en coordonnées locales du panePanoramique
             if (X > 0 && X < ivImagePanoramique.getFitWidth()) {
                 double longitude, latitude;
                 double largeur = ivImagePanoramique.getFitWidth();
+                double hauteur = ivImagePanoramique.getFitHeight();
                 String strLong, strLat;
                 longitude = 360.0f * mouseX / largeur - 180;
-                latitude = 90.0d - 2.0f * mouseY / largeur * 180.0f;
+                latitude = 90.0d - (mouseY / hauteur) * 180.0f;
                 Circle circPoint = new Circle(mouseX + ivImagePanoramique.getLayoutX(), mouseY, 5);
                 circPoint.setFill(Color.YELLOW);
                 circPoint.setStroke(Color.RED);
@@ -8499,7 +8512,7 @@ public class EditeurPanovisu extends Application {
                     strPoint = strPoint.substring(5, strPoint.length());
                     int iNumeroPoint = Integer.parseInt(strPoint);
                     double X1 = mouseEvent1.getSceneX();
-                    double Y1 = mouseEvent1.getSceneY();
+                    double Y1 = mouseEvent1.getY(); // Coordonnées locales du panePanoramique
                     double mouseX1 = X1 - ivImagePanoramique.getLayoutX();
                     if (mouseX1 < 0) {
                         mouseX1 = 0;
@@ -8507,7 +8520,7 @@ public class EditeurPanovisu extends Application {
                     if (mouseX1 > ivImagePanoramique.getFitWidth()) {
                         mouseX1 = ivImagePanoramique.getFitWidth();
                     }
-                    double mouseY1 = Y1 - panePanoramique.getLayoutY() - 130 - getiDecalageMac();
+                    double mouseY1 = Y1; // Y déjà en coordonnées locales
                     if (mouseY1 < 0) {
                         mouseY1 = 0;
                     }
@@ -8517,7 +8530,7 @@ public class EditeurPanovisu extends Application {
                     double longit, lat;
                     double larg = ivImagePanoramique.getFitWidth();
                     longit = 360.0f * mouseX1 / larg - 180;
-                    lat = 90.0d - 2.0f * mouseY1 / larg * 180.0f;
+                    lat = 90.0d - (mouseY1 / ivImagePanoramique.getFitHeight()) * 180.0f;
                     getPanoramiquesProjet()[getiPanoActuel()].getHotspot(iNumeroPoint).setLatitude(lat);
                     getPanoramiquesProjet()[getiPanoActuel()].getHotspot(iNumeroPoint).setLongitude(longit);
                     circPoint.setFill(Color.YELLOW);
@@ -8592,11 +8605,12 @@ public class EditeurPanovisu extends Application {
             getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
 
             double mouseX = X;
-            double mouseY = Y - panePanoramique.getLayoutY() - 130 - getiDecalageMac();
+            double mouseY = Y; // Y est déjà en coordonnées locales du panePanoramique
             double longitude, latitude;
             double largeur = ivImagePanoramique.getFitWidth();
+            double hauteur = ivImagePanoramique.getFitHeight();
             longitude = 360.0f * mouseX / largeur - 180;
-            latitude = 90.0d - 2.0f * mouseY / largeur * 180.0f;
+            latitude = 90.0d - (mouseY / hauteur) * 180.0f;
             Circle circPoint = new Circle(mouseX + ivImagePanoramique.getLayoutX(), mouseY, 5);
             circPoint.setFill(Color.BLUE);
             circPoint.setStroke(Color.YELLOW);
@@ -8692,7 +8706,7 @@ public class EditeurPanovisu extends Application {
                 strPoint = strPoint.substring(3, strPoint.length());
                 int iNumeroPoint = Integer.parseInt(strPoint);
                 double X1 = mouseEvent1.getSceneX();
-                double Y1 = mouseEvent1.getSceneY();
+                double Y1 = mouseEvent1.getY(); // Coordonnées locales du panePanoramique
                 double mouseX1 = X1 - ivImagePanoramique.getLayoutX();
                 if (mouseX1 < 0) {
                     mouseX1 = 0;
@@ -8701,7 +8715,7 @@ public class EditeurPanovisu extends Application {
                     mouseX1 = ivImagePanoramique.getFitWidth();
                 }
 
-                double mouseY1 = Y1 - panePanoramique.getLayoutY() - 130 - getiDecalageMac();
+                double mouseY1 = Y1; // Y déjà en coordonnées locales
                 if (mouseY1 < 0) {
                     mouseY1 = 0;
                 }
@@ -8712,7 +8726,7 @@ public class EditeurPanovisu extends Application {
                 double longit, lat;
                 double larg = ivImagePanoramique.getFitWidth();
                 longit = 360.0f * mouseX1 / larg - 180;
-                lat = 90.0d - 2.0f * mouseY1 / larg * 180.0f;
+                lat = 90.0d - (mouseY1 / ivImagePanoramique.getFitHeight()) * 180.0f;
                 getPanoramiquesProjet()[getiPanoActuel()].getHotspotImage(iNumeroPoint).setLatitude(lat);
                 getPanoramiquesProjet()[getiPanoActuel()].getHotspotImage(iNumeroPoint).setLongitude(longit);
                 circPoint.setFill(Color.BLUE);
@@ -8809,11 +8823,12 @@ public class EditeurPanovisu extends Application {
             setbDejaSauve(false);
             getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             double mouseX = X;
-            double mouseY = Y - panePanoramique.getLayoutY() - 130 - getiDecalageMac();
+            double mouseY = Y; // Y est déjà en coordonnées locales du panePanoramique
             double longitude, latitude;
             double largeur = ivImagePanoramique.getFitWidth();
+            double hauteur = ivImagePanoramique.getFitHeight();
             longitude = 360.0f * mouseX / largeur - 180;
-            latitude = 90.0d - 2.0f * mouseY / largeur * 180.0f;
+            latitude = 90.0d - (mouseY / hauteur) * 180.0f;
             Circle circPoint = new Circle(mouseX + ivImagePanoramique.getLayoutX(), mouseY, 5);
             circPoint.setFill(Color.DARKGREEN);
             circPoint.setStroke(Color.YELLOWGREEN);
@@ -8893,7 +8908,7 @@ public class EditeurPanovisu extends Application {
                 strPoint = strPoint.substring(4, strPoint.length());
                 int iNumeroPoint = Integer.parseInt(strPoint);
                 double X1 = mouseEvent1.getSceneX();
-                double Y1 = mouseEvent1.getSceneY();
+                double Y1 = mouseEvent1.getY(); // Coordonnées locales du panePanoramique
                 double mouseX1 = X1 - ivImagePanoramique.getLayoutX();
                 if (mouseX1 < 0) {
                     mouseX1 = 0;
@@ -8902,7 +8917,7 @@ public class EditeurPanovisu extends Application {
                     mouseX1 = ivImagePanoramique.getFitWidth();
                 }
 
-                double mouseY1 = Y1 - panePanoramique.getLayoutY() - 130 - getiDecalageMac();
+                double mouseY1 = Y1; // Y déjà en coordonnées locales
                 if (mouseY1 < 0) {
                     mouseY1 = 0;
                 }
@@ -8913,7 +8928,7 @@ public class EditeurPanovisu extends Application {
                 double longit, lat;
                 double larg = ivImagePanoramique.getFitWidth();
                 longit = 360.0f * mouseX1 / larg - 180;
-                lat = 90.0d - 2.0f * mouseY1 / larg * 180.0f;
+                lat = 90.0d - (mouseY1 / ivImagePanoramique.getFitHeight()) * 180.0f;
                 getPanoramiquesProjet()[getiPanoActuel()].getHotspotHTML(iNumeroPoint).setLatitude(lat);
                 getPanoramiquesProjet()[getiPanoActuel()].getHotspotHTML(iNumeroPoint).setLongitude(longit);
                 circPoint.setFill(Color.DARKGREEN);
@@ -8993,11 +9008,12 @@ public class EditeurPanovisu extends Application {
             setbDejaSauve(false);
             getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             double mouseX = X;
-            double mouseY = Y - panePanoramique.getLayoutY() - 130 - getiDecalageMac();
+            double mouseY = Y; // Y est déjà en coordonnées locales du panePanoramique
             double longitude, latitude;
             double largeur = ivImagePanoramique.getFitWidth();
+            double hauteur = ivImagePanoramique.getFitHeight();
             longitude = 360.0f * mouseX / largeur - 180;
-            latitude = 90.0d - 2.0f * mouseY / largeur * 180.0f;
+            latitude = 90.0d - (mouseY / hauteur) * 180.0f;
             Circle circPoint = new Circle(mouseX + ivImagePanoramique.getLayoutX(), mouseY, 5);
             circPoint.setFill(Color.TURQUOISE);
             circPoint.setStroke(Color.ORANGE);
@@ -9078,7 +9094,7 @@ public class EditeurPanovisu extends Application {
                 strPoint = strPoint.substring(3, strPoint.length());
                 int iNumeroPoint = Integer.parseInt(strPoint);
                 double X1 = mouseEvent1.getSceneX();
-                double Y1 = mouseEvent1.getSceneY();
+                double Y1 = mouseEvent1.getY(); // Coordonnées locales du panePanoramique
                 double mouseX1 = X1 - ivImagePanoramique.getLayoutX();
                 if (mouseX1 < 0) {
                     mouseX1 = 0;
@@ -9087,7 +9103,7 @@ public class EditeurPanovisu extends Application {
                     mouseX1 = ivImagePanoramique.getFitWidth();
                 }
 
-                double mouseY1 = Y1 - panePanoramique.getLayoutY() - 130 - getiDecalageMac();
+                double mouseY1 = Y1; // Y déjà en coordonnées locales
                 if (mouseY1 < 0) {
                     mouseY1 = 0;
                 }
@@ -9098,7 +9114,7 @@ public class EditeurPanovisu extends Application {
                 double longit, lat;
                 double larg = ivImagePanoramique.getFitWidth();
                 longit = 360.0f * mouseX1 / larg - 180;
-                lat = 90.0d - 2.0f * mouseY1 / larg * 180.0f;
+                lat = 90.0d - (mouseY1 / ivImagePanoramique.getFitHeight()) * 180.0f;
                 getPanoramiquesProjet()[getiPanoActuel()].getHotspotDiapo(iNumeroPoint).setLatitude(lat);
                 getPanoramiquesProjet()[getiPanoActuel()].getHotspotDiapo(iNumeroPoint).setLongitude(longit);
                 circPoint.setFill(Color.TURQUOISE);
@@ -9190,7 +9206,7 @@ public class EditeurPanovisu extends Application {
                 mouseEvent.consume();
             } else if (mouseEvent.isControlDown()) {
             } else {
-                panoChoixRegard(mouseEvent.getSceneX() - ivImagePanoramique.getLayoutX(), mouseEvent.getSceneY() - getiDecalageMac());
+                panoChoixRegard(mouseEvent.getSceneX() - ivImagePanoramique.getLayoutX(), mouseEvent.getY());
                 mouseEvent.consume();
             }
         }
@@ -9237,16 +9253,16 @@ public class EditeurPanovisu extends Application {
 
                         switch (nouvValeur) {
                             case "Panoramique":
-                                panoMouseClic(mouseEvent.getSceneX() - ivImagePanoramique.getLayoutX(), mouseEvent.getSceneY());
+                                panoMouseClic(mouseEvent.getSceneX() - ivImagePanoramique.getLayoutX(), mouseEvent.getY());
                                 break;
                             case "Image":
-                                panoAjouteImage(mouseEvent.getSceneX() - ivImagePanoramique.getLayoutX(), mouseEvent.getSceneY());
+                                panoAjouteImage(mouseEvent.getSceneX() - ivImagePanoramique.getLayoutX(), mouseEvent.getY());
                                 break;
                             case "HTML":
-                                panoAjouteHTML(mouseEvent.getSceneX() - ivImagePanoramique.getLayoutX(), mouseEvent.getSceneY());
+                                panoAjouteHTML(mouseEvent.getSceneX() - ivImagePanoramique.getLayoutX(), mouseEvent.getY());
                                 break;
                             case "Diaporama":
-                                panoAjouteDiaporama(mouseEvent.getSceneX() - ivImagePanoramique.getLayoutX(), mouseEvent.getSceneY());
+                                panoAjouteDiaporama(mouseEvent.getSceneX() - ivImagePanoramique.getLayoutX(), mouseEvent.getY());
                                 break;
                             case "Annuler":
                                 break;
@@ -9384,7 +9400,10 @@ public class EditeurPanovisu extends Application {
                         if (mouseX > ivImagePanoramique.getFitWidth()) {
                             mouseX = ivImagePanoramique.getFitWidth();
                         }
-                        double mouseY = mouseEvent.getSceneY() - panePanoramique.getLayoutY() - 130 - getiDecalageMac();
+                        // Test: essayons sans aucun offset pour voir la valeur brute
+                        double mouseYBrut = mouseEvent.getY();
+                        // Calcul avec les offsets
+                        double mouseY = mouseYBrut;
                         if (mouseY < 0) {
                             mouseY = 0;
                         }
@@ -9393,9 +9412,10 @@ public class EditeurPanovisu extends Application {
                         }
 
                         double longitude, latitude;
-                        double largeur = ivImagePanoramique.getFitWidth() * panePanoramique.getScaleX();
+                        double largeur = ivImagePanoramique.getFitWidth();
+                        double hauteur = ivImagePanoramique.getFitHeight();
                         longitude = 360.0f * mouseX / largeur - 180;
-                        latitude = 90.0d - 2.0f * mouseY / largeur * 180.0f;
+                        latitude = 90.0d - (mouseY / hauteur) * 180.0f;
                         String strLong = "Long : " + String.format("%.1f", longitude);
                         String strLat = "Lat : " + String.format("%.1f", latitude);
                         lblLong.setText(strLong);
@@ -12045,7 +12065,7 @@ public class EditeurPanovisu extends Application {
      * @throws Exception Exceptions
      */
     private static void creeMenu(VBox vbRacine) throws Exception {
-        VBox vbMonPanneau = new VBox();
+        vbMonPanneau = new VBox();
 
         vbMonPanneau.setPrefHeight(80);
         vbMonPanneau.setPrefWidth(3000);
@@ -12243,6 +12263,11 @@ public class EditeurPanovisu extends Application {
         hbBarreBouton.setPrefHeight(50);
         hbBarreBouton.setMinHeight(50);
         hbBarreBouton.setPrefWidth(3000);
+        // Empêcher les icônes avec insets négatifs de déborder sur le menu
+        javafx.scene.shape.Rectangle clip = new javafx.scene.shape.Rectangle();
+        clip.widthProperty().bind(hbBarreBouton.widthProperty());
+        clip.heightProperty().bind(hbBarreBouton.heightProperty());
+        hbBarreBouton.setClip(clip);
         /*
          Bouton nouveau Projet
          */
@@ -13001,6 +13026,7 @@ public class EditeurPanovisu extends Application {
         }
 
         creeMenu(vbRacine);
+        
         tpEnvironnement = new TabPane();
         tpEnvironnement.setMinHeight(iHauteur - 60);
         tpEnvironnement.setMaxHeight(iHauteur - 60);
@@ -14107,7 +14133,7 @@ public class EditeurPanovisu extends Application {
         lisPreferences();
         setStPrincipal(stPrimaryStage);
         stPrimaryStage.setResizable(false);
-        getStPrincipal().setResizable(true);
+        // getStPrincipal().setResizable(true); // Désactivé : empêche les problèmes de redimensionnement
         getStPrincipal().setAlwaysOnTop(false);
         getStPrincipal().setTitle("PanoVisu v" + strNumVersion.split("-")[0]);
         stPrimaryStage.setMaximized(true);
