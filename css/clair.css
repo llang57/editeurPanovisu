@@ -115,6 +115,12 @@ is being used to size a border should also be in pixels.
     -fx-focus-color: #0078D4;
     -fx-faint-focus-color: #0078D433;
 
+    /* Variables custom pour différenciation visuelle */
+    -color-bg-default: #FAFAFA;        /* Fond par défaut (même que -fx-background) */
+    -color-bg-subtle: #F0F0F0;         /* Fond légèrement plus foncé pour zones secondaires */
+    -color-accent-emphasis: #0078D4;   /* Couleur accent pour bordures */
+    -color-fg-muted: #757575;          /* Texte secondaire grisé */
+
     /* The color that is used in styling controls. The default value is based
      * on -fx-base, but is changed by pseudoclasses to change the base color.
      * For example, the "hover" pseudoclass will typically set -fx-color to
@@ -3111,5 +3117,16 @@ is being used to size a border should also be in pixels.
     -fx-text-fill: white!important;
     -fx-mark-color: -fx-accent;
 }
+
+/* ===== Styles personnalisés Editeur PanoVisu ===== */
+
+/* Panneaux de contenu des dialogues - Thème Clair */
+.dialog-content-pane {
+    -fx-background-color: -color-bg-default;
+    -fx-border-color: derive(-fx-base, -15%);
+    -fx-border-width: 1;
+}
+
+
 
 

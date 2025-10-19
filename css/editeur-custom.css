@@ -5,6 +5,22 @@
  * =====================================================
  */
 
+/* ===== Classes utilitaires pour panels ===== */
+.bordered-pane {
+    -fx-border-color: -color-border;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+
+.info-pane {
+    -fx-border-color: -color-border;
+    -fx-border-width: 1;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-padding: 10;
+}
+
 /* ===== En-têtes des panels d'outils - Style Universel ===== */
 
 /* État neutre / désactivé */
@@ -294,6 +310,32 @@
 .root.dracula .dialog-content-pane {
     -fx-background-color: #2e3440;
     -fx-border-color: #3b4252;
+}
+
+/* Panneaux de contenu des dialogues - Material Light */
+.root .dialog-content-pane {
+    -fx-background-color: #fafafa;
+    -fx-border-color: rgba(0, 0, 0, 0.12);
+}
+
+/* Panneaux de contenu des dialogues - Material Dark */
+.root.material-dark .dialog-content-pane {
+    -fx-background-color: #1e1e1e;
+    -fx-border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Panneaux de contenu des dialogues - FlatLaf Light/IntelliJ */
+.root.flatlaf-light .dialog-content-pane,
+.root.flatlaf-intellij .dialog-content-pane {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #c8c8c8;
+}
+
+/* Panneaux de contenu des dialogues - FlatLaf Dark/Darcula */
+.root.flatlaf-dark .dialog-content-pane,
+.root.flatlaf-darcula .dialog-content-pane {
+    -fx-background-color: #2b2b2b;
+    -fx-border-color: #555555;
 }
 
 /* Panneaux d'édition (diaporama, barre personnalisée) - Thèmes clairs */

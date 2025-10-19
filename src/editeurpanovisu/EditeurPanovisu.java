@@ -10621,16 +10621,6 @@ public class EditeurPanovisu extends Application {
                 cbTouchesBarre.setLayoutX(20);
                 cbTouchesBarre.setLayoutY(30); // Décalé de 30px vers le bas
                 cbTouchesBarre.setPrefWidth(295);
-                cbTouchesBarre.setStyle(
-                    "-fx-background-color: white;" +
-                    "-fx-control-inner-background: white;" +
-                    "-fx-text-fill: black;" +
-                    "-fx-border-color: #3498db;" +
-                    "-fx-border-width: 2;" +
-                    "-fx-border-radius: 4;" +
-                    "-fx-background-radius: 4;" +
-                    "-fx-font-size: 13px;"
-                );
                 
                 // Trouver l'index de l'action de la zone et sélectionner dans la ComboBox
                 int index = -1;
@@ -10654,9 +10644,7 @@ public class EditeurPanovisu extends Application {
                         } else {
                             setText(item);
                             setStyle(
-                                "-fx-background-color: white;" +
-                                "-fx-text-fill: black;" +
-                                "-fx-padding: 5px;"
+                                ""
                             );
                         }
                     }
@@ -10671,7 +10659,7 @@ public class EditeurPanovisu extends Application {
                             setText(null);
                         } else {
                             setText(item);
-                            setStyle("-fx-text-fill: black;");
+                            setStyle(null);
                         }
                     }
                 });
@@ -10680,11 +10668,6 @@ public class EditeurPanovisu extends Application {
                 Label lblTitreZone = new Label("Zone sélectionnée");
                 lblTitreZone.setLayoutX(20);
                 lblTitreZone.setLayoutY(5);
-                lblTitreZone.setStyle(
-                    "-fx-font-size: 14px;" +
-                    "-fx-font-weight: bold;" +
-                    "-fx-text-fill: #2c3e50;"
-                );
                 
                 // Ajouter les éléments au panel
                 apZoneBarrePersonnalisee.getChildren().addAll(lblTitreZone, cbTouchesBarre);
@@ -10700,29 +10683,15 @@ public class EditeurPanovisu extends Application {
                 Label lblTypeLabel = new Label("Type :");
                 lblTypeLabel.setLayoutX(20);
                 lblTypeLabel.setLayoutY(70);
-                lblTypeLabel.setStyle(
-                    "-fx-font-size: 12px;" +
-                    "-fx-font-weight: bold;" +
-                    "-fx-text-fill: #34495e;"
-                );
                 
                 Label lblTypeBarre = new Label(zone.getStrTypeZone());
                 lblTypeBarre.setLayoutX(70);
                 lblTypeBarre.setLayoutY(70);
-                lblTypeBarre.setStyle(
-                    "-fx-font-size: 12px;" +
-                    "-fx-text-fill: #7f8c8d;"
-                );
                 
                 // Label Coordonnées avec style moderne
                 Label lblCoordsLabel = new Label("Coordonnées :");
                 lblCoordsLabel.setLayoutX(20);
                 lblCoordsLabel.setLayoutY(95);
-                lblCoordsLabel.setStyle(
-                    "-fx-font-size: 12px;" +
-                    "-fx-font-weight: bold;" +
-                    "-fx-text-fill: #34495e;"
-                );
                 
                 Label lblCoordsBarre = new Label(zone.getStrCoordonneesZone());
                 lblCoordsBarre.setLayoutX(20);
@@ -10730,14 +10699,6 @@ public class EditeurPanovisu extends Application {
                 lblCoordsBarre.setPrefWidth(295);
                 lblCoordsBarre.setMaxWidth(295);
                 lblCoordsBarre.setWrapText(true);
-                lblCoordsBarre.setStyle(
-                    "-fx-font-size: 11px;" +
-                    "-fx-text-fill: #7f8c8d;" +
-                    "-fx-background-color: #ecf0f1;" +
-                    "-fx-padding: 5;" +
-                    "-fx-border-radius: 4;" +
-                    "-fx-background-radius: 4;"
-                );
                 
                 apZoneBarrePersonnalisee.getChildren()
                         .addAll(lblTypeLabel, lblTypeBarre, lblCoordsLabel, lblCoordsBarre);
@@ -10855,6 +10816,7 @@ public class EditeurPanovisu extends Application {
         iNombrePointsZone = 0;
         bRecommenceZone = false;
         apZoneBarrePersonnalisee.getChildren().clear();
+        apZoneBarrePersonnalisee.getStyleClass().add("dialog-content-pane");
         
         // Boutons modernes avec effets hover
         Button btnAnnuler = new Button(rbLocalisation.getString("main.annuler"), new ImageView(new Image("file:" + getStrRepertAppli() + "/images/annule.png")));
@@ -10864,71 +10826,11 @@ public class EditeurPanovisu extends Application {
         btnValider.setLayoutY(235);
         btnValider.setPrefWidth(140);
         btnValider.setPrefHeight(35);
-        btnValider.setStyle(
-            "-fx-background-color: #27ae60;" +
-            "-fx-text-fill: white;" +
-            "-fx-font-weight: bold;" +
-            "-fx-font-size: 13px;" +
-            "-fx-border-radius: 5;" +
-            "-fx-background-radius: 5;" +
-            "-fx-cursor: hand;" +
-            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 2);"
-        );
-        btnValider.setOnMouseEntered(e -> btnValider.setStyle(
-            "-fx-background-color: #229954;" +
-            "-fx-text-fill: white;" +
-            "-fx-font-weight: bold;" +
-            "-fx-font-size: 13px;" +
-            "-fx-border-radius: 5;" +
-            "-fx-background-radius: 5;" +
-            "-fx-cursor: hand;" +
-            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 0, 3);"
-        ));
-        btnValider.setOnMouseExited(e -> btnValider.setStyle(
-            "-fx-background-color: #27ae60;" +
-            "-fx-text-fill: white;" +
-            "-fx-font-weight: bold;" +
-            "-fx-font-size: 13px;" +
-            "-fx-border-radius: 5;" +
-            "-fx-background-radius: 5;" +
-            "-fx-cursor: hand;" +
-            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 2);"
-        ));
         
         btnAnnuler.setLayoutX(20);
         btnAnnuler.setLayoutY(235);
         btnAnnuler.setPrefWidth(140);
         btnAnnuler.setPrefHeight(35);
-        btnAnnuler.setStyle(
-            "-fx-background-color: #95a5a6;" +
-            "-fx-text-fill: white;" +
-            "-fx-font-weight: bold;" +
-            "-fx-font-size: 13px;" +
-            "-fx-border-radius: 5;" +
-            "-fx-background-radius: 5;" +
-            "-fx-cursor: hand;" +
-            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 2);"
-        );
-        btnAnnuler.setOnMouseEntered(e -> btnAnnuler.setStyle(
-            "-fx-background-color: #7f8c8d;" +
-            "-fx-text-fill: white;" +
-            "-fx-font-weight: bold;" +
-            "-fx-font-size: 13px;" +
-            "-fx-border-radius: 5;" +
-            "-fx-background-radius: 5;" +
-            "-fx-cursor: hand;" +
-            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 0, 3);"
-        ));
-        btnAnnuler.setOnMouseExited(e -> btnAnnuler.setStyle(
-            "-fx-background-color: #95a5a6;" +
-            "-fx-text-fill: white;" +
-            "-fx-font-weight: bold;" +
-            "-fx-font-size: 13px;" +
-            "-fx-border-radius: 5;" +
-            "-fx-background-radius: 5;" +
-            "-fx-cursor: hand;" +
-            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 2);"
-        ));
         
         ToggleGroup tgTypeZone = new ToggleGroup();
         
@@ -10936,11 +10838,6 @@ public class EditeurPanovisu extends Application {
         Label lblTypeZone = new Label(rbLocalisation.getString("main.typeZone"));
         lblTypeZone.setLayoutX(20);
         lblTypeZone.setLayoutY(10);
-        lblTypeZone.setStyle(
-            "-fx-font-size: 14px;" +
-            "-fx-font-weight: bold;" +
-            "-fx-text-fill: #2c3e50;"
-        );
 
         // RadioButtons modernes avec fond blanc
         RadioButton rbCercleZone = new RadioButton(rbLocalisation.getString("main.cercle"));
@@ -10948,24 +10845,12 @@ public class EditeurPanovisu extends Application {
         rbCercleZone.setLayoutY(40);
         rbCercleZone.setUserData("circle");
         rbCercleZone.setToggleGroup(tgTypeZone);
-        rbCercleZone.setStyle(
-            "-fx-font-size: 12px;" +
-            "-fx-text-fill: black;" +
-            "-fx-background-color: white;" +
-            "-fx-padding: 3px;"
-        );
         
         RadioButton rbRectZone = new RadioButton(rbLocalisation.getString("main.rectangle"));
         rbRectZone.setLayoutX(20);
         rbRectZone.setLayoutY(70);
         rbRectZone.setUserData("rect");
         rbRectZone.setToggleGroup(tgTypeZone);
-        rbRectZone.setStyle(
-            "-fx-font-size: 12px;" +
-            "-fx-text-fill: black;" +
-            "-fx-background-color: white;" +
-            "-fx-padding: 3px;"
-        );
         
         RadioButton rbPolyZone = new RadioButton(rbLocalisation.getString("main.polygone"));
         rbPolyZone.setLayoutX(20);
@@ -10973,21 +10858,11 @@ public class EditeurPanovisu extends Application {
         rbPolyZone.setUserData("poly");
         rbPolyZone.setToggleGroup(tgTypeZone);
         rbPolyZone.setSelected(true);
-        rbPolyZone.setStyle(
-            "-fx-font-size: 12px;" +
-            "-fx-text-fill: black;" +
-            "-fx-background-color: white;" +
-            "-fx-padding: 3px;"
-        );
         
         // Label pour la ComboBox
         Label lblTouche = new Label("Touche :");
         lblTouche.setLayoutX(20);
         lblTouche.setLayoutY(140);
-        lblTouche.setStyle(
-            "-fx-font-size: 13px;" +
-            "-fx-text-fill: #34495e;"
-        );
         
         // ComboBox moderne
         ComboBox cbTouchesBarre = new ComboBox();
@@ -10998,13 +10873,6 @@ public class EditeurPanovisu extends Application {
         cbTouchesBarre.setLayoutX(20);
         cbTouchesBarre.setLayoutY(165);
         cbTouchesBarre.setPrefWidth(295);
-        cbTouchesBarre.setStyle(
-            "-fx-background-color: white;" +
-            "-fx-border-color: #bdc3c7;" +
-            "-fx-border-width: 1;" +
-            "-fx-border-radius: 4;" +
-            "-fx-background-radius: 4;"
-        );
 
         afficheBarrePersonnalisee(iLargeur, iHauteur, bMasqueZones);
         AnchorPane apCreeZone = new AnchorPane();
@@ -11422,10 +11290,7 @@ public class EditeurPanovisu extends Application {
 
     public static void creerEditerDiaporama(String strDiaporama) {
         apCreationDiaporama.getChildren().clear();
-        apCreationDiaporama.setStyle("-fx-background-color : -fx-base;"
-                + "-fx-border-color: derive(-fx-base,10%);"
-                + "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.5) , 8, 0.0 , 0 , 8 );"
-                + "-fx-border-width: 1px;");
+        apCreationDiaporama.getStyleClass().add("dialog-content-pane");
         mbarPrincipal.setDisable(true);
         bbarPrincipal.setDisable(true);
         hbBarreBouton.setDisable(true);
@@ -11434,8 +11299,8 @@ public class EditeurPanovisu extends Application {
         Rectangle2D tailleEcran = Screen.getPrimary().getBounds();
         int iLargeurEcran = (int) tailleEcran.getWidth();
         int iHauteurEcran = (int) tailleEcran.getHeight() - 100;
-        final int iLargeur = 800;
-        final int iHauteur = 630;
+        final int iLargeur = 900;
+        final int iHauteur = 720;
         Label lblNomDiapo = new Label(rbLocalisation.getString("main.nomDiapo"));
         lblNomDiapo.setLayoutX(30);
         lblNomDiapo.setLayoutY(45);
@@ -11467,10 +11332,10 @@ public class EditeurPanovisu extends Application {
         );
 
         apCreationDiaporama.setPrefWidth(iLargeur);
-        apCreationDiaporama.setMinWidth(iLargeur);
+        //apCreationDiaporama.setMinWidth(iLargeur);
         apCreationDiaporama.setMaxWidth(iLargeur);
         apCreationDiaporama.setPrefHeight(iHauteur);
-        apCreationDiaporama.setMinHeight(iHauteur);
+        //apCreationDiaporama.setMinHeight(iHauteur);
         apCreationDiaporama.setMaxHeight(iHauteur);
         apCreationDiaporama.setLayoutX((iLargeurEcran - iLargeur) / 2);
         apCreationDiaporama.setLayoutY((iHauteurEcran - iHauteur) / 2);
@@ -11670,17 +11535,12 @@ public class EditeurPanovisu extends Application {
      */
     public static void creerEditerBarre(String strNomFichierBarre) {
         apCreationBarre.getChildren().clear();
-        apCreationBarre.getStyleClass().clear();
+        apCreationBarre.getStyleClass().add("dialog-content-pane");
         
         // Style moderne avec fond gris clair et padding
-        apCreationBarre.setStyle(
-            "-fx-background-color: #f5f5f5;" +
-            "-fx-padding: 20;" +
-            "-fx-border-width: 1px;" +
-            "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0.0, 0, 5);"
-        );
 
         AnchorPane apOutilsBarre = new AnchorPane();
+        apOutilsBarre.getStyleClass().add("dialog-content-pane");
         Button btnAnnulerBarre = new Button(rbLocalisation.getString("main.quitter"), new ImageView(new Image("file:" + getStrRepertAppli() + "/images/annule.png")));
         final Button btnSauverBarre = new Button(rbLocalisation.getString("main.sauver"), new ImageView(new Image("file:" + getStrRepertAppli() + "/images/sauveProjet.png", 24, 24, true, true, true)));
         Rectangle2D tailleEcran = Screen.getPrimary().getBounds();
@@ -11716,15 +11576,6 @@ public class EditeurPanovisu extends Application {
         Label lblBarrePersonnalisee = new Label(rbLocalisation.getString("main.creeBarrePersonnalisee"));
         lblBarrePersonnalisee.setMinWidth(iLargeur - 40);
         lblBarrePersonnalisee.setAlignment(Pos.CENTER);
-        lblBarrePersonnalisee.setStyle(
-            "-fx-background-color: #2c3e50;" +
-            "-fx-background-radius: 8;" +
-            "-fx-text-fill: white;" +
-            "-fx-font-size: 18px;" +
-            "-fx-font-weight: bold;" +
-            "-fx-padding: 15;" +
-            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2);"
-        );
         lblBarrePersonnalisee.setLayoutX(20);
         lblBarrePersonnalisee.setLayoutY(10);
         apCreationBarre.getChildren().add(lblBarrePersonnalisee);
@@ -11738,88 +11589,37 @@ public class EditeurPanovisu extends Application {
         apOutilsBarre.setMaxHeight(iHauteur - 100);
         apOutilsBarre.setLayoutX(iLargeur - 370);
         apOutilsBarre.setLayoutY(70);
-        apOutilsBarre.setStyle(
-            "-fx-background-color: white;" +
-            "-fx-border-color: #bdc3c7;" +
-            "-fx-border-width: 1;" +
-            "-fx-border-radius: 8;" +
-            "-fx-background-radius: 8;" +
-            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8, 0, 0, 3);"
-        );
+        apOutilsBarre.setPadding(new Insets(15, 15, 20, 15)); // Padding: top, right, bottom, left
         
         // Titre de section "Outils"
         Label lblTitreOutils = new Label("Outils");
         lblTitreOutils.setLayoutX(20);
         lblTitreOutils.setLayoutY(15);
-        lblTitreOutils.setStyle(
-            "-fx-font-size: 16px;" +
-            "-fx-font-weight: bold;" +
-            "-fx-text-fill: #2c3e50;"
-        );
         
         // Label et champ de chargement d'image
         Label lblChargeImage = new Label(rbLocalisation.getString("main.chargeImage"));
         lblChargeImage.setLayoutX(20);
         lblChargeImage.setLayoutY(50);
-        lblChargeImage.setStyle(
-            "-fx-font-size: 13px;" +
-            "-fx-text-fill: #34495e;"
-        );
         
         TextField tfChargeImage = new TextField("");
         tfChargeImage.setDisable(true);
         tfChargeImage.setPrefWidth(240);
         tfChargeImage.setLayoutX(20);
         tfChargeImage.setLayoutY(75);
-        tfChargeImage.setStyle(
-            "-fx-background-color: #ecf0f1;" +
-            "-fx-border-color: #bdc3c7;" +
-            "-fx-border-width: 1;" +
-            "-fx-border-radius: 4;" +
-            "-fx-background-radius: 4;"
-        );
+        tfChargeImage.getStyleClass().add("text-field");
         
         Button btnChargeImage = new Button("📁");
         btnChargeImage.setLayoutX(270);
         btnChargeImage.setLayoutY(75);
         btnChargeImage.setPrefWidth(50);
-        btnChargeImage.setStyle(
-            "-fx-background-color: #3498db;" +
-            "-fx-text-fill: white;" +
-            "-fx-font-size: 18px;" +
-            "-fx-border-radius: 4;" +
-            "-fx-background-radius: 4;" +
-            "-fx-cursor: hand;" +
-            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 2);"
-        );
-        btnChargeImage.setOnMouseEntered(e -> btnChargeImage.setStyle(
-            "-fx-background-color: #2980b9;" +
-            "-fx-text-fill: white;" +
-            "-fx-font-size: 18px;" +
-            "-fx-border-radius: 4;" +
-            "-fx-background-radius: 4;" +
-            "-fx-cursor: hand;" +
-            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 0, 3);"
-        ));
-        btnChargeImage.setOnMouseExited(e -> btnChargeImage.setStyle(
-            "-fx-background-color: #3498db;" +
-            "-fx-text-fill: white;" +
-            "-fx-font-size: 18px;" +
-            "-fx-border-radius: 4;" +
-            "-fx-background-radius: 4;" +
-            "-fx-cursor: hand;" +
-            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 2);"
-        ));
+        btnChargeImage.getStyleClass().add("button-icon");
+
         
         // CheckBox pour masquer les zones
         final CheckBox cbMasqueZones = new CheckBox(rbLocalisation.getString("main.masqueZones"));
         cbMasqueZones.setDisable(true);
         cbMasqueZones.setLayoutX(20);
         cbMasqueZones.setLayoutY(115);
-        cbMasqueZones.setStyle(
-            "-fx-font-size: 13px;" +
-            "-fx-text-fill: #34495e;"
-        );
         
         // Bouton Ajouter Zone
         btnAjouteZone.setLayoutX(20);
@@ -11827,124 +11627,18 @@ public class EditeurPanovisu extends Application {
         btnAjouteZone.setPrefWidth(300);
         btnAjouteZone.setPrefHeight(35);
         btnAjouteZone.setDisable(true);
-        btnAjouteZone.setStyle(
-            "-fx-background-color: #4CAF50;" +
-            "-fx-text-fill: white;" +
-            "-fx-font-weight: bold;" +
-            "-fx-font-size: 13px;" +
-            "-fx-border-radius: 5;" +
-            "-fx-background-radius: 5;" +
-            "-fx-cursor: hand;" +
-            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 2);"
-        );
-        btnAjouteZone.setOnMouseEntered(e -> {
-            if (!btnAjouteZone.isDisabled()) {
-                btnAjouteZone.setStyle(
-                    "-fx-background-color: #45a049;" +
-                    "-fx-text-fill: white;" +
-                    "-fx-font-weight: bold;" +
-                    "-fx-font-size: 13px;" +
-                    "-fx-border-radius: 5;" +
-                    "-fx-background-radius: 5;" +
-                    "-fx-cursor: hand;" +
-                    "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 0, 3);"
-                );
-            }
-        });
-        btnAjouteZone.setOnMouseExited(e -> {
-            if (!btnAjouteZone.isDisabled()) {
-                btnAjouteZone.setStyle(
-                    "-fx-background-color: #4CAF50;" +
-                    "-fx-text-fill: white;" +
-                    "-fx-font-weight: bold;" +
-                    "-fx-font-size: 13px;" +
-                    "-fx-border-radius: 5;" +
-                    "-fx-background-radius: 5;" +
-                    "-fx-cursor: hand;" +
-                    "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 2);"
-                );
-            }
-        });
         
         // Style des boutons Annuler et Sauver
         btnAnnulerBarre.setPrefWidth(150);
         btnAnnulerBarre.setPrefHeight(40);
         btnAnnulerBarre.setLayoutX(20);
-        btnAnnulerBarre.setLayoutY(iHauteur - 140);
-        btnAnnulerBarre.setStyle(
-            "-fx-background-color: #95a5a6;" +
-            "-fx-text-fill: white;" +
-            "-fx-font-weight: bold;" +
-            "-fx-font-size: 13px;" +
-            "-fx-border-radius: 5;" +
-            "-fx-background-radius: 5;" +
-            "-fx-cursor: hand;" +
-            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 2);"
-        );
-        btnAnnulerBarre.setOnMouseEntered(e -> btnAnnulerBarre.setStyle(
-            "-fx-background-color: #7f8c8d;" +
-            "-fx-text-fill: white;" +
-            "-fx-font-weight: bold;" +
-            "-fx-font-size: 13px;" +
-            "-fx-border-radius: 5;" +
-            "-fx-background-radius: 5;" +
-            "-fx-cursor: hand;" +
-            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 0, 3);"
-        ));
-        btnAnnulerBarre.setOnMouseExited(e -> btnAnnulerBarre.setStyle(
-            "-fx-background-color: #95a5a6;" +
-            "-fx-text-fill: white;" +
-            "-fx-font-weight: bold;" +
-            "-fx-font-size: 13px;" +
-            "-fx-border-radius: 5;" +
-            "-fx-background-radius: 5;" +
-            "-fx-cursor: hand;" +
-            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 2);"
-        ));
+        btnAnnulerBarre.setLayoutY((iHauteur - 100) - 60); // Position depuis le bas du panel
         
         btnSauverBarre.setPrefWidth(150);
         btnSauverBarre.setPrefHeight(40);
         btnSauverBarre.setLayoutX(180);
-        btnSauverBarre.setLayoutY(iHauteur - 140);
+        btnSauverBarre.setLayoutY((iHauteur - 100) - 60); // Position depuis le bas du panel
         btnSauverBarre.setDisable(true);
-        btnSauverBarre.setStyle(
-            "-fx-background-color: #27ae60;" +
-            "-fx-text-fill: white;" +
-            "-fx-font-weight: bold;" +
-            "-fx-font-size: 13px;" +
-            "-fx-border-radius: 5;" +
-            "-fx-background-radius: 5;" +
-            "-fx-cursor: hand;" +
-            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 2);"
-        );
-        btnSauverBarre.setOnMouseEntered(e -> {
-            if (!btnSauverBarre.isDisabled()) {
-                btnSauverBarre.setStyle(
-                    "-fx-background-color: #229954;" +
-                    "-fx-text-fill: white;" +
-                    "-fx-font-weight: bold;" +
-                    "-fx-font-size: 13px;" +
-                    "-fx-border-radius: 5;" +
-                    "-fx-background-radius: 5;" +
-                    "-fx-cursor: hand;" +
-                    "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 0, 3);"
-                );
-            }
-        });
-        btnSauverBarre.setOnMouseExited(e -> {
-            if (!btnSauverBarre.isDisabled()) {
-                btnSauverBarre.setStyle(
-                    "-fx-background-color: #27ae60;" +
-                    "-fx-text-fill: white;" +
-                    "-fx-font-weight: bold;" +
-                    "-fx-font-size: 13px;" +
-                    "-fx-border-radius: 5;" +
-                    "-fx-background-radius: 5;" +
-                    "-fx-cursor: hand;" +
-                    "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 2);"
-                );
-            }
-        });
         
         apOutilsBarre.getChildren().addAll(
                 lblTitreOutils,
