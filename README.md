@@ -71,6 +71,30 @@ PanoVisu combine puissance, simplicité et liberté pour offrir une solution com
   - Changement d'image en pause = reste en pause (action volontaire requise)
   - Seul le bouton Play/Pause modifie explicitement l'état de lecture
 
+### 🎨 Système de thèmes enrichi (24 thèmes disponibles)
+- **🎯 Nouveaux thèmes minimalistes** : 8 thèmes flat design professionnels
+  - **4 palettes de couleurs** : Bleu 🔷🔹, Vert 🟢🟩, Rouge 🔴🟥, Mauve 💜🟪
+  - **2 variantes par palette** : Clair et Foncé pour chaque couleur
+  - **Design flat sobre** : Interface épurée sans effets excessifs, focus sur la lisibilité
+  - **Couleurs d'accent harmonieuses** : Cohérence visuelle dans toute l'application
+- **🎨 Icônes colorées dynamiques** : Les icônes SVG prennent automatiquement la couleur du thème
+  - Icônes Glyph/Ikonli colorées via CSS
+  - Icônes SVG avec remplacement intelligent de `currentColor` et `fill="white"`
+  - Conversion dynamique en PNG avec Apache Batik
+- **🌓 Visibilité optimisée thèmes sombres** :
+  - Contrôles de formulaire éclaircis (checkboxes, radio buttons, sliders, spinners, progressbars)
+  - Bordures plus contrastées et épaissies pour meilleure identification
+  - Texte des menus toujours blanc (normal, hover, dropdown ouvert)
+- **📦 Collection complète de 24 thèmes** :
+  - 9 thèmes AtlantaFX (Primer, Nord, Cupertino, Dracula)
+  - 2 thèmes MaterialFX (Light, Dark)
+  - 2 thèmes FlatLaf (Light/IntelliJ, Dark/Darcula)
+  - 2 thèmes legacy personnalisés (Clair, Foncé)
+  - 2 thèmes acidulés (Clair 🌸, Foncé 🌌)
+  - 2 thèmes modernes (Clair 🌿, Foncé 🌃)
+  - 8 thèmes minimalistes (Bleu/Vert/Rouge/Mauve × Clair/Foncé)
+- **🔄 Application universelle** : Fenêtre d'accueil FXML intégrée au système de thèmes
+
 ### 🔧 Architecture technique
 - Support OpenCL 1.2+ (NVIDIA CUDA, AMD ROCm, Intel compatible)
 - Auto-routing intelligent GPU/CPU selon taille d'image

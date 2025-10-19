@@ -1,0 +1,263 @@
+/*
+ * Thème Moderne Clair - Style Flat Tendance 2025
+ * Palette : Vert Sauge / Terracotta / Beige Chaud / Bleu Doux
+ * Inspiré par : Scandinavian Design, Minimalism, Earth Tones
+ */
+
+.root.moderne-clair {
+    /***************************************************************************
+     *                                                                         *
+     * Palette couleurs naturelles et apaisantes                               *
+     *                                                                         *
+     **************************************************************************/
+    
+    /* Couleurs de base - Tons neutres chaleureux */
+    -fx-base: #FAF8F5;                      /* Blanc cassé crème */
+    -fx-background: #FFFFFF;                /* Blanc pur */
+    -fx-control-inner-background: #F8F6F3;  /* Beige très pâle */
+    -fx-control-inner-background-alt: #F5F3EF; /* Beige alterné */
+    
+    /* Accent - Vert sauge moderne */
+    -fx-accent: #8B9A7A;                    /* Vert sauge */
+    -fx-default-button: #6B7A5A;            /* Vert sauge foncé */
+    
+    /* Focus - Terracotta doux */
+    -fx-focus-color: #C67B5C;               /* Terracotta/Terre cuite */
+    -fx-faint-focus-color: #C67B5C44;
+    
+    /* Textes */
+    -fx-dark-text-color: #2C3333;           /* Gris anthracite chaud */
+    -fx-mid-text-color: #5A6C57;            /* Vert olive */
+    -fx-light-text-color: #FFFFFF;
+    
+    /* Couleurs secondaires tendance */
+    -color-bg-default: #FFFFFF;
+    -color-bg-subtle: #F8F6F3;
+    -color-accent-emphasis: #8B9A7A;
+    -color-fg-muted: #9CA89E;               /* Gris-vert doux */
+    -color-border: #D4CABD;                 /* Beige taupe */
+    
+    /* Palette étendue - Tons naturels */
+    -color-sage: #8B9A7A;                   /* Vert sauge */
+    -color-terracotta: #C67B5C;             /* Terracotta */
+    -color-beige: #E5DDD5;                  /* Beige chaud */
+    -color-blue-soft: #A8C5D1;              /* Bleu poudré */
+    -color-olive: #9B8B6A;                  /* Olive doré */
+    -color-clay: #B88B6F;                   /* Argile rosé */
+    
+    /* Hover states - Subtils */
+    -fx-hover-base: derive(-fx-base, -3%);
+    -fx-pressed-base: derive(-fx-base, -6%);
+    -fx-color: -fx-base;
+}
+
+/* Boutons - Style flat moderne */
+.root.moderne-clair .button {
+    -fx-background-color: #8B9A7A;
+    -fx-text-fill: white;
+    -fx-font-weight: 500;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-padding: 8 16 8 16;
+}
+
+.root.moderne-clair .button:hover {
+    -fx-background-color: #6B7A5A;
+}
+
+.root.moderne-clair .button:pressed {
+    -fx-background-color: #5A6949;
+}
+
+/* Bouton par défaut - Terracotta */
+.root.moderne-clair .button:default {
+    -fx-background-color: #C67B5C;
+}
+
+.root.moderne-clair .button:default:hover {
+    -fx-background-color: #B56A4C;
+}
+
+/* TextField - Bordure subtile */
+.root.moderne-clair .text-field {
+    -fx-background-color: #F8F6F3;
+    -fx-border-color: #D4CABD;
+    -fx-border-width: 1.5;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 6 10 6 10;
+}
+
+.root.moderne-clair .text-field:focused {
+    -fx-border-color: #8B9A7A;
+    -fx-background-color: white;
+}
+
+/* CheckBox - Minimal */
+.root.moderne-clair .check-box .box {
+    -fx-background-color: white;
+    -fx-border-color: #D4CABD;
+    -fx-border-width: 1.5;
+    -fx-border-radius: 3;
+}
+
+.root.moderne-clair .check-box:selected .mark {
+    -fx-background-color: #8B9A7A;
+}
+
+/* ComboBox */
+.root.moderne-clair .combo-box {
+    -fx-background-color: #F8F6F3;
+    -fx-border-color: #D4CABD;
+    -fx-border-width: 1.5;
+    -fx-border-radius: 6;
+}
+
+.root.moderne-clair .combo-box:hover {
+    -fx-border-color: #8B9A7A;
+}
+
+/* ScrollBar - Discret */
+.root.moderne-clair .scroll-bar {
+    -fx-background-color: #F8F6F3;
+}
+
+.root.moderne-clair .scroll-bar .thumb {
+    -fx-background-color: #C4B5A6;
+    -fx-background-radius: 4;
+}
+
+.root.moderne-clair .scroll-bar .thumb:hover {
+    -fx-background-color: #8B9A7A;
+}
+
+/* TabPane - Minimal */
+.root.moderne-clair .tab-pane {
+    -fx-background-color: transparent;
+}
+
+.root.moderne-clair .tab-pane .tab {
+    -fx-background-color: #F8F6F3;
+    -fx-border-color: transparent transparent #D4CABD transparent;
+    -fx-border-width: 0 0 2 0;
+    -fx-padding: 10 20 10 20;
+}
+
+.root.moderne-clair .tab-pane .tab:selected {
+    -fx-background-color: white;
+    -fx-border-color: transparent transparent #8B9A7A transparent;
+    -fx-border-width: 0 0 3 0;
+}
+
+/* MenuBar - Épuré */
+.root.moderne-clair .menu-bar {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E5DDD5;
+    -fx-border-width: 0 0 1 0;
+}
+
+.root.moderne-clair .menu-item:hover {
+    -fx-background-color: #F8F6F3;
+}
+
+.root.moderne-clair .menu-item:focused {
+    -fx-background-color: #8B9A7A;
+    -fx-text-fill: white;
+}
+
+/* Dialog content pane */
+.root.moderne-clair .dialog-content-pane {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #D4CABD;
+    -fx-border-width: 1;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.08), 20, 0, 0, 4);
+}
+
+/* Progress Bar - Flat */
+.root.moderne-clair .progress-bar {
+    -fx-background-color: #E5DDD5;
+    -fx-background-radius: 8;
+}
+
+.root.moderne-clair .progress-bar .bar {
+    -fx-background-color: #8B9A7A;
+    -fx-background-radius: 8;
+}
+
+/* Titres - Élégants */
+.root.moderne-clair .h1,
+.root.moderne-clair .h2,
+.root.moderne-clair .h3 {
+    -fx-text-fill: #2C3333;
+    -fx-font-weight: 600;
+}
+
+/* Bordered pane - Subtil */
+.root.moderne-clair .bordered-pane {
+    -fx-background-color: #F8F6F3;
+    -fx-border-color: #D4CABD;
+    -fx-border-width: 1;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+/* Info pane - Doux */
+.root.moderne-clair .info-pane {
+    -fx-background-color: #F8F6F3;
+    -fx-border-color: #C67B5C;
+    -fx-border-width: 1 1 1 4;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 12;
+}
+
+/* Séparateurs */
+.root.moderne-clair .separator .line {
+    -fx-border-color: #E5DDD5;
+}
+
+/* Labels */
+.root.moderne-clair .label {
+    -fx-text-fill: #2C3333;
+}
+
+/* ListView sélection */
+.root.moderne-clair .list-view .list-cell:selected {
+    -fx-background-color: #8B9A7A;
+    -fx-text-fill: white;
+}
+
+.root.moderne-clair .list-view .list-cell:hover {
+    -fx-background-color: #F8F6F3;
+}
+
+/* Tooltips */
+.root.moderne-clair .tooltip {
+    -fx-background-color: #2C3333;
+    -fx-text-fill: white;
+    -fx-background-radius: 4;
+    -fx-font-size: 12px;
+}
+
+/* En-têtes des panels d'outils */
+.root.moderne-clair .titreOutil {
+    -fx-background-color: linear-gradient(to bottom, #A8B89A 0%, #8B9A7A 100%);
+    -fx-text-fill: white;
+    -fx-font-weight: 600;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 5, 0, 0, 2);
+}
+
+.root.moderne-clair .titreOutil:hover {
+    -fx-background-color: linear-gradient(to bottom, #B5C4A7 0%, #9BAA8A 100%);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 7, 0, 0, 3);
+    -fx-scale-y: 1.02;
+}
+
+.root.moderne-clair .titreOutil:disabled {
+    -fx-background-color: linear-gradient(to bottom, #E5DDD5 0%, #D4CABD 100%);
+    -fx-text-fill: #9CA89E;
+    -fx-opacity: 0.6;
+}
+

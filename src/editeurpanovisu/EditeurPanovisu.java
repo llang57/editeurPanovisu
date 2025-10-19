@@ -3876,6 +3876,13 @@ public class EditeurPanovisu extends Application {
                             .getName()).log(Level.SEVERE, null, ex);
                 }
 
+            } else {
+                // L'utilisateur a annulé le FileChooser - fermer la modale et réactiver l'interface
+                getApAttends().setVisible(false);
+                mbarPrincipal.setDisable(false);
+                bbarPrincipal.setDisable(false);
+                hbBarreBouton.setDisable(false);
+                tpEnvironnement.setDisable(false);
             }
         }
     }

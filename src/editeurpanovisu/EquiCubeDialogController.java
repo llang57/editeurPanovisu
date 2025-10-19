@@ -60,7 +60,7 @@ public class EquiCubeDialogController {
     private static Stage stTransformations;
     private static AnchorPane apTransformations;
     private String strTypeTransformation = "";
-    static private final ListView lvListeFichier = new ListView();
+    static private final ListView<String> lvListeFichier = new ListView<String>();
     public static final ProgressBar pbBarreImage = new ProgressBar();
     static private Button btnAnnuler;
     static private Button btnValider;
@@ -289,7 +289,7 @@ public class EquiCubeDialogController {
             lblTermine.setId("lblTermine");
             pbBarreAvancement.setVisible(true);
             pbBarreImage.setVisible(true);
-            Task taskTraitement;
+            Task<Boolean> taskTraitement;
             taskTraitement = tskTraitement();
             pbBarreAvancement.progressProperty().unbind();
             pbBarreImage.setProgress(0.001);
@@ -303,10 +303,10 @@ public class EquiCubeDialogController {
         }
     }
 
-    public Task tskTraitement() {
-        return new Task() {
+    public Task<Boolean> tskTraitement() {
+        return new Task<Boolean>() {
             @Override
-            protected Object call() throws Exception {
+            protected Boolean call() throws Exception {
                 apTransformations.setCursor(Cursor.WAIT);
                 Platform.runLater(() -> {
                     for (int ij = 0; ij < lvListeFichier.getItems().size(); ij++) {
@@ -470,6 +470,7 @@ public class EquiCubeDialogController {
      * @param strTypeTransf
      * @throws Exception Exceptions
      */
+    @SuppressWarnings("unused")
     public void afficheFenetre(String strTypeTransf) throws Exception {
         lvListeFichier.getItems().clear();
         stTransformations = new Stage(StageStyle.UTILITY);
@@ -724,6 +725,7 @@ public class EquiCubeDialogController {
         apTransformations.setOnDragDropped((event) -> {
             Dragboard dbFichiersTransformation = event.getDragboard();
             boolean bSucces = false;
+            @SuppressWarnings("unused")
             File[] fileLstFich;
             fileLstFich = null;
             if (dbFichiersTransformation.hasFiles()) {

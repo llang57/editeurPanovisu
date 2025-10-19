@@ -1,0 +1,263 @@
+/*
+ * Thème Acidulé Foncé - Style Cyberpunk/Néon 2025
+ * Palette : Violet Électrique / Cyan Néon / Magenta / Vert Lime
+ * Inspiré par : Cyberpunk, Synthwave, Dark Mode moderne
+ */
+
+.root.acidule-fonce {
+    /***************************************************************************
+     *                                                                         *
+     * Palette cyberpunk néon                                                  *
+     *                                                                         *
+     **************************************************************************/
+    
+    /* Couleurs de base - Fond sombre avec nuances violettes */
+    -fx-base: #0F0A1E;                      /* Noir violacé très foncé */
+    -fx-background: #080510;                /* Noir pur avec teinte violette */
+    -fx-control-inner-background: #1A1233;  /* Violet très foncé */
+    -fx-control-inner-background-alt: #150D28; /* Violet foncé alterné */
+    
+    /* Accent - Magenta néon électrique */
+    -fx-accent: #FF00FF;                    /* Magenta pur */
+    -fx-default-button: #E600E6;            /* Magenta plus foncé */
+    
+    /* Focus - Cyan néon brillant */
+    -fx-focus-color: #00FFFF;               /* Cyan néon pur */
+    -fx-faint-focus-color: #00FFFF55;
+    
+    /* Textes - Néon clair */
+    -fx-dark-text-color: #E0E0FF;           /* Blanc violacé */
+    -fx-mid-text-color: #B084FF;            /* Violet clair */
+    -fx-light-text-color: #FFFFFF;
+    
+    /* Couleurs secondaires néon */
+    -color-bg-default: #080510;
+    -color-bg-subtle: #1A1233;
+    -color-accent-emphasis: #FF00FF;
+    -color-fg-muted: #B084FF;
+    -color-border: #7B2FFF;                 /* Violet néon */
+    
+    /* Palette néon étendue */
+    -color-cyan: #00FFFF;                   /* Cyan néon */
+    -color-magenta: #FF00FF;                /* Magenta néon */
+    -color-purple: #A855F7;                 /* Violet vif */
+    -color-pink: #FF10F0;                   /* Rose néon */
+    -color-lime: #CCFF00;                   /* Lime néon */
+    -color-blue-neon: #00F0FF;              /* Bleu néon */
+    
+    /* Hover states - Effets lumineux */
+    -fx-hover-base: derive(-fx-base, 15%);
+    -fx-pressed-base: derive(-fx-base, 25%);
+    -fx-color: -fx-base;
+}
+
+/* Boutons - Style néon cyberpunk */
+.root.acidule-fonce .button {
+    -fx-background-color: linear-gradient(to right, #FF00FF 0%, #7B2FFF 100%);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-border-color: #FF00FF;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-effect: dropshadow(gaussian, rgba(255, 0, 255, 0.6), 12, 0, 0, 0);
+}
+
+.root.acidule-fonce .button:hover {
+    -fx-background-color: linear-gradient(to right, #FF33FF 0%, #9D4FFF 100%);
+    -fx-effect: dropshadow(gaussian, rgba(255, 0, 255, 0.9), 18, 0, 0, 0);
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+}
+
+.root.acidule-fonce .button:pressed {
+    -fx-background-color: linear-gradient(to right, #CC00CC 0%, #6020CC 100%);
+    -fx-effect: innershadow(gaussian, rgba(255, 0, 255, 0.8), 8, 0, 0, 0);
+}
+
+/* Bouton par défaut - Gradient cyan néon */
+.root.acidule-fonce .button:default {
+    -fx-background-color: linear-gradient(135deg, #00FFFF 0%, #FF00FF 50%, #00FFFF 100%);
+    -fx-effect: dropshadow(gaussian, rgba(0, 255, 255, 0.7), 15, 0, 0, 0);
+    -fx-border-color: #00FFFF;
+}
+
+/* TextField - Bordure néon */
+.root.acidule-fonce .text-field {
+    -fx-background-color: #1A1233;
+    -fx-text-fill: #E0E0FF;
+    -fx-border-color: #7B2FFF;
+    -fx-border-width: 2;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-prompt-text-fill: #B084FF;
+}
+
+.root.acidule-fonce .text-field:focused {
+    -fx-border-color: #00FFFF;
+    -fx-effect: dropshadow(gaussian, rgba(0, 255, 255, 0.6), 10, 0, 0, 0);
+}
+
+/* CheckBox - Style néon */
+.root.acidule-fonce .check-box .box {
+    -fx-background-color: #1A1233;
+    -fx-border-color: #FF00FF;
+    -fx-border-width: 2;
+    -fx-border-radius: 4;
+}
+
+.root.acidule-fonce .check-box:selected .mark {
+    -fx-background-color: #00FFFF;
+    -fx-effect: dropshadow(gaussian, rgba(0, 255, 255, 0.8), 6, 0, 0, 0);
+}
+
+/* ComboBox - Néon */
+.root.acidule-fonce .combo-box {
+    -fx-background-color: #1A1233;
+    -fx-border-color: #7B2FFF;
+    -fx-border-width: 2;
+    -fx-border-radius: 6;
+}
+
+.root.acidule-fonce .combo-box:hover {
+    -fx-border-color: #FF00FF;
+    -fx-effect: dropshadow(gaussian, rgba(255, 0, 255, 0.4), 8, 0, 0, 0);
+}
+
+/* ScrollBar - Gradient néon */
+.root.acidule-fonce .scroll-bar {
+    -fx-background-color: #0F0A1E;
+}
+
+.root.acidule-fonce .scroll-bar .thumb {
+    -fx-background-color: linear-gradient(to bottom, #FF00FF, #00FFFF);
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(gaussian, rgba(0, 255, 255, 0.5), 6, 0, 0, 0);
+}
+
+/* TabPane - Onglets néon */
+.root.acidule-fonce .tab-pane {
+    -fx-background-color: #0F0A1E;
+}
+
+.root.acidule-fonce .tab-pane .tab {
+    -fx-background-color: #1A1233;
+    -fx-border-color: #7B2FFF;
+    -fx-text-fill: #B084FF;
+}
+
+.root.acidule-fonce .tab-pane .tab:selected {
+    -fx-background-color: linear-gradient(to bottom, #FF00FF, #7B2FFF);
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(255, 0, 255, 0.6), 10, 0, 0, 0);
+}
+
+/* MenuBar - Style cyberpunk */
+.root.acidule-fonce .menu-bar {
+    -fx-background-color: linear-gradient(to bottom, #1A1233 0%, #0F0A1E 100%);
+    -fx-border-color: #7B2FFF;
+    -fx-border-width: 0 0 2 0;
+}
+
+.root.acidule-fonce .menu-item {
+    -fx-text-fill: #E0E0FF;
+}
+
+.root.acidule-fonce .menu-item:hover {
+    -fx-background-color: #FF00FF;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(255, 0, 255, 0.5), 8, 0, 0, 0);
+}
+
+/* Dialog content pane - Effet néon */
+.root.acidule-fonce .dialog-content-pane {
+    -fx-background-color: #1A1233;
+    -fx-border-color: #FF00FF;
+    -fx-border-width: 2;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(255, 0, 255, 0.4), 20, 0, 0, 0);
+}
+
+/* Progress Bar - Gradient cyberpunk */
+.root.acidule-fonce .progress-bar {
+    -fx-background-color: #0F0A1E;
+    -fx-background-radius: 10;
+}
+
+.root.acidule-fonce .progress-bar .bar {
+    -fx-background-color: linear-gradient(to right, #00FFFF 0%, #FF00FF 50%, #CCFF00 100%);
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 255, 255, 0.6), 10, 0, 0, 0);
+}
+
+/* Titres - Effet néon */
+.root.acidule-fonce .h1,
+.root.acidule-fonce .h2,
+.root.acidule-fonce .h3 {
+    -fx-text-fill: #00FFFF;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0, 255, 255, 0.8), 8, 0, 0, 0);
+}
+
+/* Bordered pane - Cyberpunk */
+.root.acidule-fonce .bordered-pane {
+    -fx-background-color: #1A1233;
+    -fx-border-color: #7B2FFF;
+    -fx-border-width: 2;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-effect: innershadow(gaussian, rgba(123, 47, 255, 0.3), 10, 0, 0, 0);
+}
+
+/* Info pane - Néon */
+.root.acidule-fonce .info-pane {
+    -fx-background-color: linear-gradient(135deg, #1A1233, #0F0A1E);
+    -fx-border-color: #00FFFF;
+    -fx-border-width: 2;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 15;
+    -fx-effect: dropshadow(gaussian, rgba(0, 255, 255, 0.4), 12, 0, 0, 0);
+}
+
+/* Effet glow sur éléments sélectionnés */
+.root.acidule-fonce .list-view .list-cell:selected {
+    -fx-background-color: linear-gradient(to right, #FF00FF, #00FFFF);
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(255, 0, 255, 0.6), 10, 0, 0, 0);
+}
+
+/* Labels avec effet néon */
+.root.acidule-fonce .label {
+    -fx-text-fill: #E0E0FF;
+}
+
+.root.acidule-fonce .label.neon {
+    -fx-text-fill: #00FFFF;
+    -fx-effect: dropshadow(gaussian, rgba(0, 255, 255, 0.8), 6, 0, 0, 0);
+}
+
+/* En-têtes des panels d'outils */
+.root.acidule-fonce .titreOutil {
+    -fx-background-color: linear-gradient(to right, #FF00FF 0%, #7B2FFF 100%);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-border-color: #FF00FF;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(255, 0, 255, 0.6), 10, 0, 0, 0);
+}
+
+.root.acidule-fonce .titreOutil:hover {
+    -fx-background-color: linear-gradient(to right, #FF33FF 0%, #9D4FFF 100%);
+    -fx-effect: dropshadow(gaussian, rgba(255, 0, 255, 0.9), 15, 0, 0, 0);
+    -fx-scale-y: 1.02;
+}
+
+.root.acidule-fonce .titreOutil:disabled {
+    -fx-background-color: linear-gradient(to bottom, #3A3A3A 0%, #2A2A2A 100%);
+    -fx-text-fill: #808080;
+    -fx-opacity: 0.6;
+    -fx-border-color: transparent;
+}
+

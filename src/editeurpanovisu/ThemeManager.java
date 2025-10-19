@@ -45,6 +45,18 @@ public class ThemeManager {
         // Personnalisé legacy
         CUSTOM_LIGHT("Thème Clair Personnalisé", ThemeProvider.CUSTOM, null, false),
         
+        // 🍬 Thèmes Acidulés - Clairs
+        ACIDULE_CLAIR("Acidulé Clair 🌸", ThemeProvider.CUSTOM, "acidule-clair", false),
+        
+        // 🌿 Thèmes Modernes Flat - Clairs
+        MODERNE_CLAIR("Moderne Clair 🌿", ThemeProvider.CUSTOM, "moderne-clair", false),
+        
+        // � Thèmes Minimalistes - Clairs
+        MINIMALISTE_BLEU_CLAIR("Minimaliste Bleu 🔷", ThemeProvider.CUSTOM, "minimaliste-bleu-clair", false),
+        MINIMALISTE_VERT_CLAIR("Minimaliste Vert 🟢", ThemeProvider.CUSTOM, "minimaliste-vert-clair", false),
+        MINIMALISTE_ROUGE_CLAIR("Minimaliste Rouge 🔴", ThemeProvider.CUSTOM, "minimaliste-rouge-clair", false),
+        MINIMALISTE_MAUVE_CLAIR("Minimaliste Mauve 💜", ThemeProvider.CUSTOM, "minimaliste-mauve-clair", false),
+        
         // ═══════════════════════════════════════════════════════════
         // 🌙 THÈMES SOMBRES
         // ═══════════════════════════════════════════════════════════
@@ -63,7 +75,19 @@ public class ThemeManager {
         FLATLAF_DARCULA("FlatLaf Darcula", ThemeProvider.FLATLAF, "Darcula", true),
         
         // Personnalisé legacy
-        CUSTOM_DARK("Thème Foncé Personnalisé", ThemeProvider.CUSTOM, null, true);
+        CUSTOM_DARK("Thème Foncé Personnalisé", ThemeProvider.CUSTOM, null, true),
+        
+        // 🍬 Thèmes Acidulés - Foncés
+        ACIDULE_FONCE("Acidulé Foncé 🌌", ThemeProvider.CUSTOM, "acidule-fonce", true),
+        
+        // 🌃 Thèmes Modernes Flat - Foncés
+        MODERNE_FONCE("Moderne Foncé 🌃", ThemeProvider.CUSTOM, "moderne-fonce", true),
+        
+        // 🔹 Thèmes Minimalistes - Foncés
+        MINIMALISTE_BLEU_FONCE("Minimaliste Bleu 🔹", ThemeProvider.CUSTOM, "minimaliste-bleu-fonce", true),
+        MINIMALISTE_VERT_FONCE("Minimaliste Vert 🟩", ThemeProvider.CUSTOM, "minimaliste-vert-fonce", true),
+        MINIMALISTE_ROUGE_FONCE("Minimaliste Rouge 🟥", ThemeProvider.CUSTOM, "minimaliste-rouge-fonce", true),
+        MINIMALISTE_MAUVE_FONCE("Minimaliste Mauve 🟪", ThemeProvider.CUSTOM, "minimaliste-mauve-fonce", true);
         
         private final String displayName;
         private final ThemeProvider provider;
@@ -201,7 +225,13 @@ public class ThemeManager {
             "primer-light", "primer-dark",
             "nord-light", "nord-dark",
             "cupertino-light", "cupertino-dark",
-            "dracula"
+            "dracula",
+            "acidule-clair", "acidule-fonce",
+            "moderne-clair", "moderne-fonce",
+            "minimaliste-bleu-clair", "minimaliste-bleu-fonce",
+            "minimaliste-vert-clair", "minimaliste-vert-fonce",
+            "minimaliste-rouge-clair", "minimaliste-rouge-fonce",
+            "minimaliste-mauve-clair", "minimaliste-mauve-fonce"
         );
     }
     
@@ -224,12 +254,58 @@ public class ThemeManager {
     private static void applyCustomTheme(Scene scene, Theme theme) {
         Application.setUserAgentStylesheet(null); // Reset
         
-        String cssPath = theme.isDark() ? 
-            "/css/fonce.css" : 
-            "/css/clair.css";
+        String cssPath;
+        String themeClass = null;
+        
+        // Déterminer le fichier CSS et la classe selon le thème
+        if (theme == Theme.ACIDULE_CLAIR) {
+            cssPath = "/css/acidule-clair.css";
+            themeClass = "acidule-clair";
+        } else if (theme == Theme.ACIDULE_FONCE) {
+            cssPath = "/css/acidule-fonce.css";
+            themeClass = "acidule-fonce";
+        } else if (theme == Theme.MODERNE_CLAIR) {
+            cssPath = "/css/moderne-clair.css";
+            themeClass = "moderne-clair";
+        } else if (theme == Theme.MODERNE_FONCE) {
+            cssPath = "/css/moderne-fonce.css";
+            themeClass = "moderne-fonce";
+        } else if (theme == Theme.MINIMALISTE_BLEU_CLAIR) {
+            cssPath = "/css/minimaliste-bleu-clair.css";
+            themeClass = "minimaliste-bleu-clair";
+        } else if (theme == Theme.MINIMALISTE_BLEU_FONCE) {
+            cssPath = "/css/minimaliste-bleu-fonce.css";
+            themeClass = "minimaliste-bleu-fonce";
+        } else if (theme == Theme.MINIMALISTE_VERT_CLAIR) {
+            cssPath = "/css/minimaliste-vert-clair.css";
+            themeClass = "minimaliste-vert-clair";
+        } else if (theme == Theme.MINIMALISTE_VERT_FONCE) {
+            cssPath = "/css/minimaliste-vert-fonce.css";
+            themeClass = "minimaliste-vert-fonce";
+        } else if (theme == Theme.MINIMALISTE_ROUGE_CLAIR) {
+            cssPath = "/css/minimaliste-rouge-clair.css";
+            themeClass = "minimaliste-rouge-clair";
+        } else if (theme == Theme.MINIMALISTE_ROUGE_FONCE) {
+            cssPath = "/css/minimaliste-rouge-fonce.css";
+            themeClass = "minimaliste-rouge-fonce";
+        } else if (theme == Theme.MINIMALISTE_MAUVE_CLAIR) {
+            cssPath = "/css/minimaliste-mauve-clair.css";
+            themeClass = "minimaliste-mauve-clair";
+        } else if (theme == Theme.MINIMALISTE_MAUVE_FONCE) {
+            cssPath = "/css/minimaliste-mauve-fonce.css";
+            themeClass = "minimaliste-mauve-fonce";
+        } else {
+            // Thèmes personnalisés legacy (clair.css / fonce.css)
+            cssPath = theme.isDark() ? "/css/fonce.css" : "/css/clair.css";
+        }
         
         String cssUrl = ThemeManager.class.getResource(cssPath).toExternalForm();
         scene.getStylesheets().add(cssUrl);
+        
+        // Ajouter la classe CSS au root si définie
+        if (themeClass != null) {
+            scene.getRoot().getStyleClass().add(themeClass);
+        }
         
         System.out.println("✅ Thème personnalisé appliqué : " + theme.getDisplayName());
     }

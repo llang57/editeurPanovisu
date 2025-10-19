@@ -1,0 +1,203 @@
+/*
+ * Thème Acidulé Clair - Style moderne tendance 2025
+ * Palette : Rose Vif / Violet / Cyan / Corail
+ * Inspiré par : Y2K aesthetic, Vaporwave, Modern UI trends
+ */
+
+.root.acidule-clair {
+    /***************************************************************************
+     *                                                                         *
+     * Palette de couleurs acidulées modernes                                  *
+     *                                                                         *
+     **************************************************************************/
+    
+    /* Couleurs de base - Fond blanc cassé avec touche de couleur */
+    -fx-base: #FFF5F8;                      /* Blanc rosé très léger */
+    -fx-background: #FFFFFF;                /* Blanc pur */
+    -fx-control-inner-background: #FAFCFF;  /* Blanc avec nuance cyan */
+    -fx-control-inner-background-alt: #FFF0F5; /* Blanc rosé alterné */
+    
+    /* Accent - Rose électrique vibrant */
+    -fx-accent: #FF006E;                    /* Rose magenta vif */
+    -fx-default-button: #E6005C;            /* Rose plus foncé */
+    
+    /* Focus - Cyan électrique */
+    -fx-focus-color: #00F5FF;               /* Cyan néon */
+    -fx-faint-focus-color: #00F5FF44;
+    
+    /* Textes */
+    -fx-dark-text-color: #1A1A2E;           /* Bleu nuit très foncé */
+    -fx-mid-text-color: #6B21A8;            /* Violet profond */
+    -fx-light-text-color: #FFFFFF;
+    
+    /* Couleurs secondaires acidulées */
+    -color-bg-default: #FFFFFF;
+    -color-bg-subtle: #FFF5F8;
+    -color-accent-emphasis: #FF006E;
+    -color-fg-muted: #A855F7;               /* Violet clair */
+    -color-border: #FFB3D9;                 /* Rose pastel */
+    
+    /* Palette acidulée étendue */
+    -color-cyan: #00F5FF;                   /* Cyan néon */
+    -color-pink: #FF006E;                   /* Rose vif */
+    -color-purple: #8B5CF6;                 /* Violet tendance */
+    -color-coral: #FF6B9D;                  /* Corail rose */
+    -color-lime: #CCFF00;                   /* Lime acidulé */
+    
+    /* Hover states - Effets vibrants */
+    -fx-hover-base: derive(-fx-base, -5%);
+    -fx-pressed-base: derive(-fx-base, -10%);
+    -fx-color: -fx-base;
+}
+
+/* Boutons - Style acidulé */
+.root.acidule-clair .button {
+    -fx-background-color: linear-gradient(to bottom, #FF6B9D 0%, #FF006E 100%);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-effect: dropshadow(gaussian, rgba(255, 0, 110, 0.3), 8, 0, 0, 2);
+}
+
+.root.acidule-clair .button:hover {
+    -fx-background-color: linear-gradient(to bottom, #FF85B3 0%, #FF1A7F 100%);
+    -fx-effect: dropshadow(gaussian, rgba(255, 0, 110, 0.5), 12, 0, 0, 3);
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+}
+
+.root.acidule-clair .button:pressed {
+    -fx-background-color: linear-gradient(to bottom, #E6005C 0%, #CC0050 100%);
+}
+
+/* Bouton par défaut - Gradient cyan/violet */
+.root.acidule-clair .button:default {
+    -fx-background-color: linear-gradient(to right, #8B5CF6 0%, #00F5FF 100%);
+    -fx-effect: dropshadow(gaussian, rgba(0, 245, 255, 0.4), 10, 0, 0, 2);
+}
+
+/* TextField - Bordure acidulée */
+.root.acidule-clair .text-field {
+    -fx-background-color: #FAFCFF;
+    -fx-border-color: #FFB3D9;
+    -fx-border-width: 2;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+
+.root.acidule-clair .text-field:focused {
+    -fx-border-color: #00F5FF;
+    -fx-effect: dropshadow(gaussian, rgba(0, 245, 255, 0.4), 6, 0, 0, 0);
+}
+
+/* CheckBox - Accent rose */
+.root.acidule-clair .check-box .box {
+    -fx-background-color: white;
+    -fx-border-color: #FF006E;
+    -fx-border-width: 2;
+    -fx-border-radius: 4;
+}
+
+.root.acidule-clair .check-box:selected .mark {
+    -fx-background-color: #FF006E;
+}
+
+/* ComboBox */
+.root.acidule-clair .combo-box {
+    -fx-background-color: white;
+    -fx-border-color: #FFB3D9;
+    -fx-border-width: 2;
+    -fx-border-radius: 6;
+}
+
+/* ScrollBar - Gradient acidulé */
+.root.acidule-clair .scroll-bar .thumb {
+    -fx-background-color: linear-gradient(to bottom, #FF6B9D, #8B5CF6);
+    -fx-background-radius: 8;
+}
+
+/* TabPane - Onglets colorés */
+.root.acidule-clair .tab-pane .tab {
+    -fx-background-color: #FFF5F8;
+    -fx-border-color: #FFB3D9;
+}
+
+.root.acidule-clair .tab-pane .tab:selected {
+    -fx-background-color: linear-gradient(to bottom, #FF6B9D, #FF006E);
+    -fx-text-fill: white;
+}
+
+/* MenuBar - Style moderne */
+.root.acidule-clair .menu-bar {
+    -fx-background-color: linear-gradient(to bottom, #FFFFFF 0%, #FFF5F8 100%);
+    -fx-border-color: #FFB3D9;
+    -fx-border-width: 0 0 2 0;
+}
+
+.root.acidule-clair .menu-item:hover {
+    -fx-background-color: #FF006E;
+    -fx-text-fill: white;
+}
+
+/* Dialog content pane */
+.root.acidule-clair .dialog-content-pane {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #FFB3D9;
+    -fx-border-width: 2;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(255, 0, 110, 0.2), 15, 0, 0, 5);
+}
+
+/* Progress Bar - Gradient néon */
+.root.acidule-clair .progress-bar .bar {
+    -fx-background-color: linear-gradient(to right, #FF006E, #00F5FF);
+    -fx-background-radius: 10;
+}
+
+/* Titres */
+.root.acidule-clair .h1, .root.acidule-clair .h2, .root.acidule-clair .h3 {
+    -fx-text-fill: linear-gradient(to right, #FF006E, #8B5CF6);
+    -fx-font-weight: bold;
+}
+
+/* Bordered pane */
+.root.acidule-clair .bordered-pane {
+    -fx-background-color: #FAFCFF;
+    -fx-border-color: #FFB3D9;
+    -fx-border-width: 2;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+}
+
+/* Info pane */
+.root.acidule-clair .info-pane {
+    -fx-background-color: linear-gradient(to bottom right, #FFF5F8, #FAFCFF);
+    -fx-border-color: #00F5FF;
+    -fx-border-width: 2;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 15;
+}
+
+/* En-têtes des panels d'outils */
+.root.acidule-clair .titreOutil {
+    -fx-background-color: linear-gradient(to bottom, #FF6B9D 0%, #FF006E 100%);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(255, 0, 110, 0.3), 6, 0, 0, 2);
+}
+
+.root.acidule-clair .titreOutil:hover {
+    -fx-background-color: linear-gradient(to bottom, #FF85B3 0%, #FF1A7F 100%);
+    -fx-effect: dropshadow(gaussian, rgba(255, 0, 110, 0.5), 10, 0, 0, 3);
+    -fx-scale-y: 1.02;
+}
+
+.root.acidule-clair .titreOutil:disabled {
+    -fx-background-color: linear-gradient(to bottom, #E0E0E0 0%, #CCCCCC 100%);
+    -fx-text-fill: #9E9E9E;
+    -fx-opacity: 0.6;
+}
+

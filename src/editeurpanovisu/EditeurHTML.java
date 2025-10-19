@@ -103,6 +103,7 @@ public class EditeurHTML {
 
     private final File fileRep = new File("");
     private final String strAppPath = fileRep.getAbsolutePath();
+    @SuppressWarnings("unused")
     private String strNomRepertHTML = strAppPath + "/pagesHTML";
     private Stage stEditeurHTML;
     private String strImages = "";
@@ -120,6 +121,7 @@ public class EditeurHTML {
     private AnchorPane apEditeur;
     private AnchorPane apPrincipale;
     private String strNomFichierImage = "";
+    @SuppressWarnings("unused")
     private boolean bDejaSauve = true;
     private ColorPicker cpCouleurHTML;
     private ColorPicker cpCouleurFond;
@@ -393,6 +395,7 @@ public class EditeurHTML {
         return strTemplate;
     }
 
+    @SuppressWarnings("unused")
     public void affiche(Number largeur, Number hauteur) {
         double diffHauteur = 340; // Augmenté pour tenir compte des nouvelles zones
         bDejaSauve = true;
@@ -411,6 +414,7 @@ public class EditeurHTML {
         
         Color coulFond = Color.valueOf(strCouleurFond);
         double lum = coulFond.getBrightness();
+        @SuppressWarnings("unused")
         String strCoul = "#000000";
         if (lum > 0.5) {
             strCoul = "#ffffff";
@@ -707,6 +711,7 @@ public class EditeurHTML {
             });
         }
         
+        @SuppressWarnings("unused")
         int i = 0;
         if (nodeBarreIconesSuperieure instanceof ToolBar && nodeEditeurHTML instanceof WebView) {
             tbBarreIconesSuperieure = (ToolBar) nodeBarreIconesSuperieure;
@@ -842,6 +847,7 @@ public class EditeurHTML {
             engEditeurHTML.getLoadWorker().stateProperty().addListener((obs, oldState, newState) -> {
                 if (newState == javafx.concurrent.Worker.State.SUCCEEDED) {
                     // Utiliser un Timeline pour ajouter un délai avant d'ajouter les listeners
+                    @SuppressWarnings("unused")
                     javafx.animation.Timeline timeline = new javafx.animation.Timeline(
                         new javafx.animation.KeyFrame(javafx.util.Duration.millis(500), e -> {
                             ajouterListenerAncresImages();
@@ -1150,6 +1156,7 @@ public class EditeurHTML {
         stFenetre.hide();
     }
 
+    @SuppressWarnings("unused")
     private void afficheConfigLien() {
         String strSelection = (String) engEditeurHTML.executeScript(strSelectText);
         List<String> strLstTarget = new ArrayList<>();
@@ -1236,6 +1243,7 @@ public class EditeurHTML {
         });
     }
 
+    @SuppressWarnings("unused")
     private void afficheConfigImage() {
         int iHauteur = 700;
         int iLargeur = 900;
@@ -1431,6 +1439,7 @@ public class EditeurHTML {
                 tfChoixFichierImage.setText(strNomFichierImage);
                 Image imgImageInserer = new Image("file:" + strNomFichierImage);
                 double largeur = imgImageInserer.getWidth();
+                @SuppressWarnings("unused")
                 double hauteur = imgImageInserer.getHeight();
                 slLargeurImage.setMax(largeur * 2);
                 slLargeurImage.setValue(largeur);
@@ -1576,6 +1585,7 @@ public class EditeurHTML {
      * Ajoute des ancres d'édition aux images existantes dans le HTML chargé
      * Cette méthode scanne toutes les balises img et leur ajoute une ancre d'édition
      */
+    @SuppressWarnings("unused")
     private void ajouterAncresAuxImagesExistantes() {
         String jsScript = 
             "console.log('=== Début ajout ancres ===');" +
@@ -1880,6 +1890,7 @@ public class EditeurHTML {
     /**
      * Affiche le code HTML source dans une fenêtre de dialogue
      */
+    @SuppressWarnings("unused")
     private void afficherCodeHTML() {
         Stage stDialog = new Stage();
         stDialog.initModality(Modality.APPLICATION_MODAL);

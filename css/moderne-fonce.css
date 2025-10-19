@@ -1,0 +1,303 @@
+/*
+ * Thème Moderne Foncé - Style Flat Tendance 2025
+ * Palette : Indigo Profond / Corail Pêche / Turquoise / Lavande
+ * Inspiré par : Modern Dark UI, Flat Design, Soft Contrast
+ */
+
+.root.moderne-fonce {
+    /***************************************************************************
+     *                                                                         *
+     * Palette couleurs modernes contrastées                                   *
+     *                                                                         *
+     **************************************************************************/
+    
+    /* Couleurs de base - Bleu nuit sophistiqué */
+    -fx-base: #1B2838;                      /* Bleu nuit profond */
+    -fx-background: #0D1117;                /* Noir bleuté */
+    -fx-control-inner-background: #1F2937;  /* Gris ardoise foncé */
+    -fx-control-inner-background-alt: #1A2332; /* Bleu nuit alterné */
+    
+    /* Accent - Corail moderne */
+    -fx-accent: #FF9E80;                    /* Corail pêche */
+    -fx-default-button: #FF7F5C;            /* Corail vif */
+    
+    /* Focus - Turquoise vibrant */
+    -fx-focus-color: #4DD0E1;               /* Turquoise clair */
+    -fx-faint-focus-color: #4DD0E144;
+    
+    /* Textes */
+    -fx-dark-text-color: #E8EDF3;           /* Blanc bleuté */
+    -fx-mid-text-color: #B8C5D6;            /* Gris bleu clair */
+    -fx-light-text-color: #FFFFFF;
+    
+    /* Couleurs secondaires tendance */
+    -color-bg-default: #0D1117;
+    -color-bg-subtle: #1F2937;
+    -color-accent-emphasis: #FF9E80;
+    -color-fg-muted: #8B98A9;               /* Gris bleu moyen */
+    -color-border: #374151;                 /* Gris ardoise */
+    
+    /* Palette étendue - Tons sophistiqués */
+    -color-coral: #FF9E80;                  /* Corail */
+    -color-turquoise: #4DD0E1;              /* Turquoise */
+    -color-lavender: #B39DDB;               /* Lavande */
+    -color-mint: #80CBC4;                   /* Menthe */
+    -color-peach: #FFAB91;                  /* Pêche */
+    -color-sky: #81D4FA;                    /* Bleu ciel */
+    
+    /* Hover states - Doux */
+    -fx-hover-base: derive(-fx-base, 8%);
+    -fx-pressed-base: derive(-fx-base, 15%);
+    -fx-color: -fx-base;
+}
+
+/* Boutons - Style flat moderne */
+.root.moderne-fonce .button {
+    -fx-background-color: #FF9E80;
+    -fx-text-fill: #0D1117;
+    -fx-font-weight: 500;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-padding: 8 16 8 16;
+}
+
+.root.moderne-fonce .button:hover {
+    -fx-background-color: #FFAB91;
+}
+
+.root.moderne-fonce .button:pressed {
+    -fx-background-color: #FF8A65;
+}
+
+/* Bouton par défaut - Turquoise */
+.root.moderne-fonce .button:default {
+    -fx-background-color: #4DD0E1;
+    -fx-text-fill: #0D1117;
+}
+
+.root.moderne-fonce .button:default:hover {
+    -fx-background-color: #80DEEA;
+}
+
+/* TextField - Contraste doux */
+.root.moderne-fonce .text-field {
+    -fx-background-color: #1F2937;
+    -fx-text-fill: #E8EDF3;
+    -fx-border-color: #374151;
+    -fx-border-width: 1.5;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 6 10 6 10;
+    -fx-prompt-text-fill: #8B98A9;
+}
+
+.root.moderne-fonce .text-field:focused {
+    -fx-border-color: #4DD0E1;
+    -fx-background-color: #2A3647;
+}
+
+/* CheckBox - Minimal */
+.root.moderne-fonce .check-box .box {
+    -fx-background-color: #1F2937;
+    -fx-border-color: #374151;
+    -fx-border-width: 1.5;
+    -fx-border-radius: 3;
+}
+
+.root.moderne-fonce .check-box:selected .mark {
+    -fx-background-color: #4DD0E1;
+}
+
+/* ComboBox */
+.root.moderne-fonce .combo-box {
+    -fx-background-color: #1F2937;
+    -fx-border-color: #374151;
+    -fx-border-width: 1.5;
+    -fx-border-radius: 6;
+}
+
+.root.moderne-fonce .combo-box:hover {
+    -fx-border-color: #FF9E80;
+}
+
+/* ScrollBar - Discret */
+.root.moderne-fonce .scroll-bar {
+    -fx-background-color: #1B2838;
+}
+
+.root.moderne-fonce .scroll-bar .thumb {
+    -fx-background-color: #4B5563;
+    -fx-background-radius: 4;
+}
+
+.root.moderne-fonce .scroll-bar .thumb:hover {
+    -fx-background-color: #FF9E80;
+}
+
+/* TabPane - Minimal */
+.root.moderne-fonce .tab-pane {
+    -fx-background-color: transparent;
+}
+
+.root.moderne-fonce .tab-pane .tab {
+    -fx-background-color: #1B2838;
+    -fx-text-fill: #B8C5D6;
+    -fx-border-color: transparent transparent #374151 transparent;
+    -fx-border-width: 0 0 2 0;
+    -fx-padding: 10 20 10 20;
+}
+
+.root.moderne-fonce .tab-pane .tab:selected {
+    -fx-background-color: #1F2937;
+    -fx-text-fill: #E8EDF3;
+    -fx-border-color: transparent transparent #FF9E80 transparent;
+    -fx-border-width: 0 0 3 0;
+}
+
+/* MenuBar - Épuré */
+.root.moderne-fonce .menu-bar {
+    -fx-background-color: #1B2838;
+    -fx-border-color: #374151;
+    -fx-border-width: 0 0 1 0;
+}
+
+.root.moderne-fonce .menu-item {
+    -fx-text-fill: #E8EDF3;
+}
+
+.root.moderne-fonce .menu-item:hover {
+    -fx-background-color: #2A3647;
+}
+
+.root.moderne-fonce .menu-item:focused {
+    -fx-background-color: #FF9E80;
+    -fx-text-fill: #0D1117;
+}
+
+/* Dialog content pane */
+.root.moderne-fonce .dialog-content-pane {
+    -fx-background-color: #1F2937;
+    -fx-border-color: #374151;
+    -fx-border-width: 1;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 25, 0, 0, 6);
+}
+
+/* Progress Bar - Flat */
+.root.moderne-fonce .progress-bar {
+    -fx-background-color: #374151;
+    -fx-background-radius: 8;
+}
+
+.root.moderne-fonce .progress-bar .bar {
+    -fx-background-color: linear-gradient(to right, #FF9E80, #4DD0E1);
+    -fx-background-radius: 8;
+}
+
+/* Titres - Élégants */
+.root.moderne-fonce .h1,
+.root.moderne-fonce .h2,
+.root.moderne-fonce .h3 {
+    -fx-text-fill: #E8EDF3;
+    -fx-font-weight: 600;
+}
+
+/* Bordered pane - Subtil */
+.root.moderne-fonce .bordered-pane {
+    -fx-background-color: #1F2937;
+    -fx-border-color: #374151;
+    -fx-border-width: 1;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+/* Info pane - Accent coloré */
+.root.moderne-fonce .info-pane {
+    -fx-background-color: #1F2937;
+    -fx-border-color: #4DD0E1;
+    -fx-border-width: 1 1 1 4;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 12;
+}
+
+/* Séparateurs */
+.root.moderne-fonce .separator .line {
+    -fx-border-color: #374151;
+}
+
+/* Labels */
+.root.moderne-fonce .label {
+    -fx-text-fill: #E8EDF3;
+}
+
+/* ListView sélection */
+.root.moderne-fonce .list-view .list-cell:selected {
+    -fx-background-color: #FF9E80;
+    -fx-text-fill: #0D1117;
+}
+
+.root.moderne-fonce .list-view .list-cell:hover {
+    -fx-background-color: #2A3647;
+}
+
+/* Tooltips */
+.root.moderne-fonce .tooltip {
+    -fx-background-color: #374151;
+    -fx-text-fill: #E8EDF3;
+    -fx-background-radius: 4;
+    -fx-font-size: 12px;
+    -fx-border-color: #4DD0E1;
+    -fx-border-width: 1;
+}
+
+/* Effet de focus doux */
+.root.moderne-fonce :focused {
+    -fx-effect: dropshadow(gaussian, rgba(77, 208, 225, 0.3), 8, 0, 0, 0);
+}
+
+/* Slider */
+.root.moderne-fonce .slider .thumb {
+    -fx-background-color: #FF9E80;
+}
+
+.root.moderne-fonce .slider .track {
+    -fx-background-color: #374151;
+}
+
+/* Table View */
+.root.moderne-fonce .table-view {
+    -fx-background-color: #1F2937;
+}
+
+.root.moderne-fonce .table-view .column-header {
+    -fx-background-color: #1B2838;
+    -fx-text-fill: #B8C5D6;
+}
+
+.root.moderne-fonce .table-row-cell:selected {
+    -fx-background-color: #FF9E80;
+    -fx-text-fill: #0D1117;
+}
+
+/* En-têtes des panels d'outils */
+.root.moderne-fonce .titreOutil {
+    -fx-background-color: linear-gradient(to bottom, #FFAB91 0%, #FF9E80 100%);
+    -fx-text-fill: #0D1117;
+    -fx-font-weight: 600;
+    -fx-effect: dropshadow(gaussian, rgba(255, 158, 128, 0.3), 6, 0, 0, 2);
+}
+
+.root.moderne-fonce .titreOutil:hover {
+    -fx-background-color: linear-gradient(to bottom, #FFBCA0 0%, #FFAB91 100%);
+    -fx-effect: dropshadow(gaussian, rgba(255, 158, 128, 0.5), 10, 0, 0, 3);
+    -fx-scale-y: 1.02;
+}
+
+.root.moderne-fonce .titreOutil:disabled {
+    -fx-background-color: linear-gradient(to bottom, #3A3A3A 0%, #2A2A2A 100%);
+    -fx-text-fill: #8B98A9;
+    -fx-opacity: 0.6;
+}
+

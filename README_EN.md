@@ -71,6 +71,30 @@ PanoVisu combines power, simplicity, and freedom to offer a complete and free so
   - Image change while paused = stays paused (voluntary action required)
   - Only the Play/Pause button explicitly changes playback state
 
+### 🎨 Enhanced Theme System (24 themes available)
+- **🎯 New minimalist themes**: 8 professional flat design themes
+  - **4 color palettes**: Blue 🔷🔹, Green 🟢🟩, Red 🔴🟥, Purple 💜🟪
+  - **2 variants per palette**: Light and Dark for each color
+  - **Sober flat design**: Clean interface without excessive effects, focus on readability
+  - **Harmonious accent colors**: Visual consistency throughout the application
+- **🎨 Dynamic colored icons**: SVG icons automatically take the theme color
+  - Glyph/Ikonli icons colored via CSS
+  - SVG icons with intelligent replacement of `currentColor` and `fill="white"`
+  - Dynamic conversion to PNG with Apache Batik
+- **🌓 Optimized visibility for dark themes**:
+  - Lightened form controls (checkboxes, radio buttons, sliders, spinners, progressbars)
+  - More contrasted and thickened borders for better identification
+  - Menu text always white (normal, hover, dropdown open)
+- **📦 Complete collection of 24 themes**:
+  - 9 AtlantaFX themes (Primer, Nord, Cupertino, Dracula)
+  - 2 MaterialFX themes (Light, Dark)
+  - 2 FlatLaf themes (Light/IntelliJ, Dark/Darcula)
+  - 2 legacy custom themes (Light, Dark)
+  - 2 acidic themes (Light 🌸, Dark 🌌)
+  - 2 modern themes (Light 🌿, Dark 🌃)
+  - 8 minimalist themes (Blue/Green/Red/Purple × Light/Dark)
+- **🔄 Universal application**: FXML welcome window integrated into the theme system
+
 ### 🔧 Technical Architecture
 - OpenCL 1.2+ support (NVIDIA CUDA, AMD ROCm, Intel compatible)
 - Intelligent GPU/CPU auto-routing based on image size

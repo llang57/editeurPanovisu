@@ -110,6 +110,204 @@
     -fx-text-fill: #555555;
 }
 
+/* ===== Thèmes Acidulés - titreOutil ===== */
+
+/* Acidulé Clair - Normal */
+.root.acidule-clair .titreOutil {
+    -fx-background-color: linear-gradient(to bottom, #FFB3D9 0%, #FF85B3 100%);
+    -fx-text-fill: #6B21A8;
+    -fx-effect: dropshadow(gaussian, rgba(255, 0, 110, 0.3), 6, 0.0, 0, 2);
+}
+
+.root.acidule-clair .titreOutil:hover {
+    -fx-background-color: linear-gradient(to bottom, #FFC7E3 0%, #FFA3C7 100%);
+    -fx-effect: dropshadow(gaussian, rgba(255, 0, 110, 0.5), 8, 0.0, 0, 3);
+    -fx-scale-y: 1.02;
+}
+
+.root.acidule-clair .titreOutil:disabled {
+    -fx-background-color: linear-gradient(to bottom, #F0E0E8 0%, #E0D0D8 100%);
+    -fx-text-fill: #C0A0B0;
+}
+
+/* Acidulé Foncé - Normal */
+.root.acidule-fonce .titreOutil {
+    -fx-background-color: linear-gradient(to bottom, #7B2FFF 0%, #5F20CC 100%);
+    -fx-text-fill: #E0E0FF;
+    -fx-effect: dropshadow(gaussian, rgba(255, 0, 255, 0.5), 8, 0.0, 0, 2);
+}
+
+.root.acidule-fonce .titreOutil:hover {
+    -fx-background-color: linear-gradient(to bottom, #9D4FFF 0%, #7B2FFF 100%);
+    -fx-effect: dropshadow(gaussian, rgba(255, 0, 255, 0.8), 12, 0.0, 0, 3);
+    -fx-scale-y: 1.02;
+}
+
+.root.acidule-fonce .titreOutil:disabled {
+    -fx-background-color: linear-gradient(to bottom, #3A2050 0%, #2A1840 100%);
+    -fx-text-fill: #6050A0;
+}
+
+/* ===== Thèmes Modernes - titreOutil ===== */
+
+/* Moderne Clair - Normal */
+.root.moderne-clair .titreOutil {
+    -fx-background-color: linear-gradient(to bottom, #A8B89A 0%, #8B9A7A 100%);
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(107, 122, 90, 0.3), 4, 0.0, 0, 2);
+}
+
+.root.moderne-clair .titreOutil:hover {
+    -fx-background-color: linear-gradient(to bottom, #B8C8AA 0%, #9BAA8A 100%);
+    -fx-effect: dropshadow(gaussian, rgba(107, 122, 90, 0.4), 6, 0.0, 0, 3);
+    -fx-scale-y: 1.02;
+}
+
+.root.moderne-clair .titreOutil:disabled {
+    -fx-background-color: linear-gradient(to bottom, #D4CABD 0%, #C4B5A6 100%);
+    -fx-text-fill: #9CA89E;
+}
+
+/* Moderne Foncé - Normal */
+.root.moderne-fonce .titreOutil {
+    -fx-background-color: linear-gradient(to bottom, #FFAB91 0%, #FF9E80 100%);
+    -fx-text-fill: #0D1117;
+    -fx-effect: dropshadow(gaussian, rgba(255, 158, 128, 0.4), 6, 0.0, 0, 2);
+}
+
+.root.moderne-fonce .titreOutil:hover {
+    -fx-background-color: linear-gradient(to bottom, #FFBDA5 0%, #FFAB91 100%);
+    -fx-effect: dropshadow(gaussian, rgba(255, 158, 128, 0.6), 8, 0.0, 0, 3);
+    -fx-scale-y: 1.02;
+}
+
+.root.moderne-fonce .titreOutil:disabled {
+    -fx-background-color: linear-gradient(to bottom, #4B5563 0%, #374151 100%);
+    -fx-text-fill: #6B7280;
+}
+
+/* ===== Thèmes Minimalistes - titreOutil ===== */
+
+/* Minimaliste Bleu Clair - Normal */
+.root.minimaliste-bleu-clair .titreOutil {
+    -fx-background-color: #E8EDF3;
+    -fx-text-fill: #2C3E50;
+}
+
+.root.minimaliste-bleu-clair .titreOutil:hover {
+    -fx-background-color: #D4DEEA;
+}
+
+.root.minimaliste-bleu-clair .titreOutil:disabled {
+    -fx-background-color: #F5F5F5;
+    -fx-text-fill: #9E9E9E;
+}
+
+/* Minimaliste Bleu Foncé - Normal */
+.root.minimaliste-bleu-fonce .titreOutil {
+    -fx-background-color: #353535;
+    -fx-text-fill: #E0E0E0;
+}
+
+.root.minimaliste-bleu-fonce .titreOutil:hover {
+    -fx-background-color: #404040;
+}
+
+.root.minimaliste-bleu-fonce .titreOutil:disabled {
+    -fx-background-color: #2C2C2C;
+    -fx-text-fill: #666666;
+}
+
+/* Minimaliste Vert Clair - Normal */
+.root.minimaliste-vert-clair .titreOutil {
+    -fx-background-color: #E8F3EA;
+    -fx-text-fill: #2C3E50;
+}
+
+.root.minimaliste-vert-clair .titreOutil:hover {
+    -fx-background-color: #D4E8D7;
+}
+
+.root.minimaliste-vert-clair .titreOutil:disabled {
+    -fx-background-color: #F5F5F5;
+    -fx-text-fill: #9E9E9E;
+}
+
+/* Minimaliste Vert Foncé - Normal */
+.root.minimaliste-vert-fonce .titreOutil {
+    -fx-background-color: #353535;
+    -fx-text-fill: #E0E0E0;
+}
+
+.root.minimaliste-vert-fonce .titreOutil:hover {
+    -fx-background-color: #404040;
+}
+
+.root.minimaliste-vert-fonce .titreOutil:disabled {
+    -fx-background-color: #2C2C2C;
+    -fx-text-fill: #666666;
+}
+
+/* Minimaliste Rouge Clair - Normal */
+.root.minimaliste-rouge-clair .titreOutil {
+    -fx-background-color: #F3E8E8;
+    -fx-text-fill: #2C3E50;
+}
+
+.root.minimaliste-rouge-clair .titreOutil:hover {
+    -fx-background-color: #EAD4D4;
+}
+
+.root.minimaliste-rouge-clair .titreOutil:disabled {
+    -fx-background-color: #F5F5F5;
+    -fx-text-fill: #9E9E9E;
+}
+
+/* Minimaliste Rouge Foncé - Normal */
+.root.minimaliste-rouge-fonce .titreOutil {
+    -fx-background-color: #353535;
+    -fx-text-fill: #E0E0E0;
+}
+
+.root.minimaliste-rouge-fonce .titreOutil:hover {
+    -fx-background-color: #404040;
+}
+
+.root.minimaliste-rouge-fonce .titreOutil:disabled {
+    -fx-background-color: #2C2C2C;
+    -fx-text-fill: #666666;
+}
+
+/* Minimaliste Mauve Clair - Normal */
+.root.minimaliste-mauve-clair .titreOutil {
+    -fx-background-color: #F3E8F8;
+    -fx-text-fill: #2C3E50;
+}
+
+.root.minimaliste-mauve-clair .titreOutil:hover {
+    -fx-background-color: #E8D4F3;
+}
+
+.root.minimaliste-mauve-clair .titreOutil:disabled {
+    -fx-background-color: #F5F5F5;
+    -fx-text-fill: #9E9E9E;
+}
+
+/* Minimaliste Mauve Foncé - Normal */
+.root.minimaliste-mauve-fonce .titreOutil {
+    -fx-background-color: #353535;
+    -fx-text-fill: #E0E0E0;
+}
+
+.root.minimaliste-mauve-fonce .titreOutil:hover {
+    -fx-background-color: #404040;
+}
+
+.root.minimaliste-mauve-fonce .titreOutil:disabled {
+    -fx-background-color: #2C2C2C;
+    -fx-text-fill: #666666;
+}
+
 /* ===== État actif / validé (VERT) - Pour paramètres actifs ===== */
 
 .titreOutilRouge {
@@ -157,6 +355,198 @@
     -fx-scale-y: 1.02;
 }
 
+/* Vert - Acidulé Clair */
+.root.acidule-clair .titreOutilRouge {
+    -fx-background-color: linear-gradient(to bottom, #CCFF00 0%, #A8D600 100%);
+    -fx-text-fill: #2C3E50;
+    -fx-effect: dropshadow(gaussian, rgba(204, 255, 0, 0.4), 6, 0.0, 0, 3);
+}
+
+.root.acidule-clair .titreOutilRouge:hover {
+    -fx-background-color: linear-gradient(to bottom, #D6FF33 0%, #B8E600 100%);
+    -fx-effect: dropshadow(gaussian, rgba(204, 255, 0, 0.6), 8, 0.0, 0, 4);
+    -fx-scale-y: 1.02;
+}
+
+.root.acidule-clair .titreOutilRouge:disabled {
+    -fx-background-color: linear-gradient(to bottom, #E8F5D0 0%, #D0E8B0 100%);
+    -fx-text-fill: #A0B080;
+}
+
+/* Vert - Acidulé Foncé */
+.root.acidule-fonce .titreOutilRouge {
+    -fx-background-color: linear-gradient(to bottom, #CCFF00 0%, #A8D600 100%);
+    -fx-text-fill: #0F0A1E;
+    -fx-effect: dropshadow(gaussian, rgba(204, 255, 0, 0.6), 8, 0.0, 0, 3);
+}
+
+.root.acidule-fonce .titreOutilRouge:hover {
+    -fx-background-color: linear-gradient(to bottom, #D6FF33 0%, #B8E600 100%);
+    -fx-effect: dropshadow(gaussian, rgba(204, 255, 0, 0.9), 12, 0.0, 0, 4);
+    -fx-scale-y: 1.02;
+}
+
+.root.acidule-fonce .titreOutilRouge:disabled {
+    -fx-background-color: linear-gradient(to bottom, #3A4020 0%, #2A3010 100%);
+    -fx-text-fill: #606040;
+}
+
+/* Vert - Moderne Clair */
+.root.moderne-clair .titreOutilRouge {
+    -fx-background-color: linear-gradient(to bottom, #80CBC4 0%, #5FB3AC 100%);
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(95, 179, 172, 0.4), 6, 0.0, 0, 3);
+}
+
+.root.moderne-clair .titreOutilRouge:hover {
+    -fx-background-color: linear-gradient(to bottom, #A0DCD4 0%, #6FC3BC 100%);
+    -fx-effect: dropshadow(gaussian, rgba(95, 179, 172, 0.6), 8, 0.0, 0, 4);
+    -fx-scale-y: 1.02;
+}
+
+.root.moderne-clair .titreOutilRouge:disabled {
+    -fx-background-color: linear-gradient(to bottom, #C4D5D0 0%, #B4C5C0 100%);
+    -fx-text-fill: #8C9C97;
+}
+
+/* Vert - Moderne Foncé */
+.root.moderne-fonce .titreOutilRouge {
+    -fx-background-color: linear-gradient(to bottom, #80CBC4 0%, #5FB3AC 100%);
+    -fx-text-fill: #0D1117;
+    -fx-effect: dropshadow(gaussian, rgba(128, 203, 196, 0.5), 6, 0.0, 0, 3);
+}
+
+.root.moderne-fonce .titreOutilRouge:hover {
+    -fx-background-color: linear-gradient(to bottom, #A0DCD4 0%, #6FC3BC 100%);
+    -fx-effect: dropshadow(gaussian, rgba(128, 203, 196, 0.7), 8, 0.0, 0, 4);
+    -fx-scale-y: 1.02;
+}
+
+.root.moderne-fonce .titreOutilRouge:disabled {
+    -fx-background-color: linear-gradient(to bottom, #3A4C47 0%, #2A3C37 100%);
+    -fx-text-fill: #5A6C67;
+}
+
+/* Vert - Minimaliste Bleu Clair */
+.root.minimaliste-bleu-clair .titreOutilRouge {
+    -fx-background-color: #6BAA75;
+    -fx-text-fill: white;
+}
+
+.root.minimaliste-bleu-clair .titreOutilRouge:hover {
+    -fx-background-color: #5A9A64;
+}
+
+.root.minimaliste-bleu-clair .titreOutilRouge:disabled {
+    -fx-background-color: #D0E0D5;
+    -fx-text-fill: #9E9E9E;
+}
+
+/* Vert - Minimaliste Bleu Foncé */
+.root.minimaliste-bleu-fonce .titreOutilRouge {
+    -fx-background-color: #5A8F64;
+    -fx-text-fill: white;
+}
+
+.root.minimaliste-bleu-fonce .titreOutilRouge:hover {
+    -fx-background-color: #6BAA75;
+}
+
+.root.minimaliste-bleu-fonce .titreOutilRouge:disabled {
+    -fx-background-color: #2A3C30;
+    -fx-text-fill: #666666;
+}
+
+/* Vert - Minimaliste Vert Clair */
+.root.minimaliste-vert-clair .titreOutilRouge {
+    -fx-background-color: #6BAA75;
+    -fx-text-fill: white;
+}
+
+.root.minimaliste-vert-clair .titreOutilRouge:hover {
+    -fx-background-color: #5A9A64;
+}
+
+.root.minimaliste-vert-clair .titreOutilRouge:disabled {
+    -fx-background-color: #D0E0D5;
+    -fx-text-fill: #9E9E9E;
+}
+
+/* Vert - Minimaliste Vert Foncé */
+.root.minimaliste-vert-fonce .titreOutilRouge {
+    -fx-background-color: #5A8F64;
+    -fx-text-fill: white;
+}
+
+.root.minimaliste-vert-fonce .titreOutilRouge:hover {
+    -fx-background-color: #6BAA75;
+}
+
+.root.minimaliste-vert-fonce .titreOutilRouge:disabled {
+    -fx-background-color: #2A3C30;
+    -fx-text-fill: #666666;
+}
+
+/* Vert - Minimaliste Rouge Clair */
+.root.minimaliste-rouge-clair .titreOutilRouge {
+    -fx-background-color: #6BAA75;
+    -fx-text-fill: white;
+}
+
+.root.minimaliste-rouge-clair .titreOutilRouge:hover {
+    -fx-background-color: #5A9A64;
+}
+
+.root.minimaliste-rouge-clair .titreOutilRouge:disabled {
+    -fx-background-color: #D0E0D5;
+    -fx-text-fill: #9E9E9E;
+}
+
+/* Vert - Minimaliste Rouge Foncé */
+.root.minimaliste-rouge-fonce .titreOutilRouge {
+    -fx-background-color: #5A8F64;
+    -fx-text-fill: white;
+}
+
+.root.minimaliste-rouge-fonce .titreOutilRouge:hover {
+    -fx-background-color: #6BAA75;
+}
+
+.root.minimaliste-rouge-fonce .titreOutilRouge:disabled {
+    -fx-background-color: #2A3C30;
+    -fx-text-fill: #666666;
+}
+
+/* Vert - Minimaliste Mauve Clair */
+.root.minimaliste-mauve-clair .titreOutilRouge {
+    -fx-background-color: #6BAA75;
+    -fx-text-fill: white;
+}
+
+.root.minimaliste-mauve-clair .titreOutilRouge:hover {
+    -fx-background-color: #5A9A64;
+}
+
+.root.minimaliste-mauve-clair .titreOutilRouge:disabled {
+    -fx-background-color: #D0E0D5;
+    -fx-text-fill: #9E9E9E;
+}
+
+/* Vert - Minimaliste Mauve Foncé */
+.root.minimaliste-mauve-fonce .titreOutilRouge {
+    -fx-background-color: #5A8F64;
+    -fx-text-fill: white;
+}
+
+.root.minimaliste-mauve-fonce .titreOutilRouge:hover {
+    -fx-background-color: #6BAA75;
+}
+
+.root.minimaliste-mauve-fonce .titreOutilRouge:disabled {
+    -fx-background-color: #2A3C30;
+    -fx-text-fill: #666666;
+}
+
 /* ===== État invariant / spécial (BLEU) - Pour sections importantes ===== */
 
 .titreOutilBleu {
@@ -202,6 +592,198 @@
     -fx-background-color: linear-gradient(to bottom, #42A5F5 0%, #1E88E5 100%);
     -fx-effect: dropshadow(gaussian, rgba(33,150,243,0.7), 8, 0.0, 0, 4);
     -fx-scale-y: 1.02;
+}
+
+/* Bleu - Acidulé Clair */
+.root.acidule-clair .titreOutilBleu {
+    -fx-background-color: linear-gradient(to bottom, #64B5F6 0%, #00F5FF 100%);
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(0, 245, 255, 0.5), 6, 0.0, 0, 3);
+}
+
+.root.acidule-clair .titreOutilBleu:hover {
+    -fx-background-color: linear-gradient(to bottom, #7FC5FF 0%, #33F7FF 100%);
+    -fx-effect: dropshadow(gaussian, rgba(0, 245, 255, 0.7), 8, 0.0, 0, 4);
+    -fx-scale-y: 1.02;
+}
+
+.root.acidule-clair .titreOutilBleu:disabled {
+    -fx-background-color: linear-gradient(to bottom, #D0E8F0 0%, #B0D8E8 100%);
+    -fx-text-fill: #8AB8C8;
+}
+
+/* Bleu - Acidulé Foncé */
+.root.acidule-fonce .titreOutilBleu {
+    -fx-background-color: linear-gradient(to bottom, #00FFFF 0%, #00CED1 100%);
+    -fx-text-fill: #0F0A1E;
+    -fx-effect: dropshadow(gaussian, rgba(0, 255, 255, 0.7), 10, 0.0, 0, 3);
+}
+
+.root.acidule-fonce .titreOutilBleu:hover {
+    -fx-background-color: linear-gradient(to bottom, #33FFFF 0%, #33DED1 100%);
+    -fx-effect: dropshadow(gaussian, rgba(0, 255, 255, 1.0), 14, 0.0, 0, 4);
+    -fx-scale-y: 1.02;
+}
+
+.root.acidule-fonce .titreOutilBleu:disabled {
+    -fx-background-color: linear-gradient(to bottom, #204040 0%, #103030 100%);
+    -fx-text-fill: #406060;
+}
+
+/* Bleu - Moderne Clair */
+.root.moderne-clair .titreOutilBleu {
+    -fx-background-color: linear-gradient(to bottom, #B0C9D8 0%, #A8C5D1 100%);
+    -fx-text-fill: #2C3333;
+    -fx-effect: dropshadow(gaussian, rgba(168, 197, 209, 0.4), 6, 0.0, 0, 3);
+}
+
+.root.moderne-clair .titreOutilBleu:hover {
+    -fx-background-color: linear-gradient(to bottom, #C0D9E8 0%, #B8D5E1 100%);
+    -fx-effect: dropshadow(gaussian, rgba(168, 197, 209, 0.6), 8, 0.0, 0, 4);
+    -fx-scale-y: 1.02;
+}
+
+.root.moderne-clair .titreOutilBleu:disabled {
+    -fx-background-color: linear-gradient(to bottom, #D4E0E8 0%, #C4D0D8 100%);
+    -fx-text-fill: #94A0A8;
+}
+
+/* Bleu - Moderne Foncé */
+.root.moderne-fonce .titreOutilBleu {
+    -fx-background-color: linear-gradient(to bottom, #81D4FA 0%, #4DD0E1 100%);
+    -fx-text-fill: #0D1117;
+    -fx-effect: dropshadow(gaussian, rgba(77, 208, 225, 0.5), 6, 0.0, 0, 3);
+}
+
+.root.moderne-fonce .titreOutilBleu:hover {
+    -fx-background-color: linear-gradient(to bottom, #A1E4FF 0%, #6DE0F1 100%);
+    -fx-effect: dropshadow(gaussian, rgba(77, 208, 225, 0.7), 8, 0.0, 0, 4);
+    -fx-scale-y: 1.02;
+}
+
+.root.moderne-fonce .titreOutilBleu:disabled {
+    -fx-background-color: linear-gradient(to bottom, #3A4C57 0%, #2A3C47 100%);
+    -fx-text-fill: #5A6C77;
+}
+
+/* Bleu - Minimaliste Bleu Clair */
+.root.minimaliste-bleu-clair .titreOutilBleu {
+    -fx-background-color: #5C8AE6;
+    -fx-text-fill: white;
+}
+
+.root.minimaliste-bleu-clair .titreOutilBleu:hover {
+    -fx-background-color: #4A7BC8;
+}
+
+.root.minimaliste-bleu-clair .titreOutilBleu:disabled {
+    -fx-background-color: #D0D8E8;
+    -fx-text-fill: #9E9E9E;
+}
+
+/* Bleu - Minimaliste Bleu Foncé */
+.root.minimaliste-bleu-fonce .titreOutilBleu {
+    -fx-background-color: #4A7BC8;
+    -fx-text-fill: white;
+}
+
+.root.minimaliste-bleu-fonce .titreOutilBleu:hover {
+    -fx-background-color: #5C8AE6;
+}
+
+.root.minimaliste-bleu-fonce .titreOutilBleu:disabled {
+    -fx-background-color: #2A3440;
+    -fx-text-fill: #666666;
+}
+
+/* Bleu - Minimaliste Vert Clair */
+.root.minimaliste-vert-clair .titreOutilBleu {
+    -fx-background-color: #5C8AE6;
+    -fx-text-fill: white;
+}
+
+.root.minimaliste-vert-clair .titreOutilBleu:hover {
+    -fx-background-color: #4A7BC8;
+}
+
+.root.minimaliste-vert-clair .titreOutilBleu:disabled {
+    -fx-background-color: #D0D8E8;
+    -fx-text-fill: #9E9E9E;
+}
+
+/* Bleu - Minimaliste Vert Foncé */
+.root.minimaliste-vert-fonce .titreOutilBleu {
+    -fx-background-color: #4A7BC8;
+    -fx-text-fill: white;
+}
+
+.root.minimaliste-vert-fonce .titreOutilBleu:hover {
+    -fx-background-color: #5C8AE6;
+}
+
+.root.minimaliste-vert-fonce .titreOutilBleu:disabled {
+    -fx-background-color: #2A3440;
+    -fx-text-fill: #666666;
+}
+
+/* Bleu - Minimaliste Rouge Clair */
+.root.minimaliste-rouge-clair .titreOutilBleu {
+    -fx-background-color: #5C8AE6;
+    -fx-text-fill: white;
+}
+
+.root.minimaliste-rouge-clair .titreOutilBleu:hover {
+    -fx-background-color: #4A7BC8;
+}
+
+.root.minimaliste-rouge-clair .titreOutilBleu:disabled {
+    -fx-background-color: #D0D8E8;
+    -fx-text-fill: #9E9E9E;
+}
+
+/* Bleu - Minimaliste Rouge Foncé */
+.root.minimaliste-rouge-fonce .titreOutilBleu {
+    -fx-background-color: #4A7BC8;
+    -fx-text-fill: white;
+}
+
+.root.minimaliste-rouge-fonce .titreOutilBleu:hover {
+    -fx-background-color: #5C8AE6;
+}
+
+.root.minimaliste-rouge-fonce .titreOutilBleu:disabled {
+    -fx-background-color: #2A3440;
+    -fx-text-fill: #666666;
+}
+
+/* Bleu - Minimaliste Mauve Clair */
+.root.minimaliste-mauve-clair .titreOutilBleu {
+    -fx-background-color: #9B7EBD;
+    -fx-text-fill: white;
+}
+
+.root.minimaliste-mauve-clair .titreOutilBleu:hover {
+    -fx-background-color: #8A6DAC;
+}
+
+.root.minimaliste-mauve-clair .titreOutilBleu:disabled {
+    -fx-background-color: #E0D8E8;
+    -fx-text-fill: #9E9E9E;
+}
+
+/* Bleu - Minimaliste Mauve Foncé */
+.root.minimaliste-mauve-fonce .titreOutilBleu {
+    -fx-background-color: #8A6DAC;
+    -fx-text-fill: white;
+}
+
+.root.minimaliste-mauve-fonce .titreOutilBleu:hover {
+    -fx-background-color: #9B7EBD;
+}
+
+.root.minimaliste-mauve-fonce .titreOutilBleu:disabled {
+    -fx-background-color: #3A3440;
+    -fx-text-fill: #666666;
 }
 
 /* ===== Autres styles personnalisés éditeur ===== */
@@ -338,6 +920,78 @@
     -fx-border-color: #555555;
 }
 
+/* Panneaux de contenu des dialogues - Acidulé Clair */
+.root.acidule-clair .dialog-content-pane {
+    -fx-background-color: #FFF0F5;
+    -fx-border-color: #FFB3D9;
+}
+
+/* Panneaux de contenu des dialogues - Acidulé Foncé */
+.root.acidule-fonce .dialog-content-pane {
+    -fx-background-color: #1A0A1F;
+    -fx-border-color: #7B2FFF;
+}
+
+/* Panneaux de contenu des dialogues - Moderne Clair */
+.root.moderne-clair .dialog-content-pane {
+    -fx-background-color: #F8F6F3;
+    -fx-border-color: #D4CABD;
+}
+
+/* Panneaux de contenu des dialogues - Moderne Foncé */
+.root.moderne-fonce .dialog-content-pane {
+    -fx-background-color: #1B2838;
+    -fx-border-color: #374151;
+}
+
+/* Panneaux de contenu des dialogues - Minimaliste Bleu Clair */
+.root.minimaliste-bleu-clair .dialog-content-pane {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E0E0E0;
+}
+
+/* Panneaux de contenu des dialogues - Minimaliste Bleu Foncé */
+.root.minimaliste-bleu-fonce .dialog-content-pane {
+    -fx-background-color: #2C2C2C;
+    -fx-border-color: #404040;
+}
+
+/* Panneaux de contenu des dialogues - Minimaliste Vert Clair */
+.root.minimaliste-vert-clair .dialog-content-pane {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E0E0E0;
+}
+
+/* Panneaux de contenu des dialogues - Minimaliste Vert Foncé */
+.root.minimaliste-vert-fonce .dialog-content-pane {
+    -fx-background-color: #2C2C2C;
+    -fx-border-color: #404040;
+}
+
+/* Panneaux de contenu des dialogues - Minimaliste Rouge Clair */
+.root.minimaliste-rouge-clair .dialog-content-pane {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E0E0E0;
+}
+
+/* Panneaux de contenu des dialogues - Minimaliste Rouge Foncé */
+.root.minimaliste-rouge-fonce .dialog-content-pane {
+    -fx-background-color: #2C2C2C;
+    -fx-border-color: #404040;
+}
+
+/* Panneaux de contenu des dialogues - Minimaliste Mauve Clair */
+.root.minimaliste-mauve-clair .dialog-content-pane {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E0E0E0;
+}
+
+/* Panneaux de contenu des dialogues - Minimaliste Mauve Foncé */
+.root.minimaliste-mauve-fonce .dialog-content-pane {
+    -fx-background-color: #2C2C2C;
+    -fx-border-color: #404040;
+}
+
 /* Panneaux d'édition (diaporama, barre personnalisée) - Thèmes clairs */
 .root.primer-light .editor-panel,
 .root.nord-light .editor-panel,
@@ -377,3 +1031,296 @@
 .menu-item .label {
     -fx-font-size: 14px;
 }
+
+/* Correction : garder le texte du menu blanc quand le dropdown est ouvert (thèmes foncés) */
+.root.minimaliste-bleu-fonce .menu:showing > .label,
+.root.minimaliste-vert-fonce .menu:showing > .label,
+.root.minimaliste-rouge-fonce .menu:showing > .label,
+.root.minimaliste-mauve-fonce .menu:showing > .label,
+.root.primer-dark .menu:showing > .label,
+.root.nord-dark .menu:showing > .label,
+.root.cupertino-dark .menu:showing > .label,
+.root.dracula .menu:showing > .label,
+.root.flatlaf-dark .menu:showing > .label,
+.root.flatlaf-darcula .menu:showing > .label,
+.root.material-dark .menu:showing > .label,
+.root.acidule-fonce .menu:showing > .label,
+.root.moderne-fonce .menu:showing > .label {
+    -fx-text-fill: white !important;
+}
+
+/* Correction : garder le texte du menu blanc au survol (hover) pour tous les thèmes foncés */
+.root.minimaliste-bleu-fonce .menu:hover > .label,
+.root.minimaliste-vert-fonce .menu:hover > .label,
+.root.minimaliste-rouge-fonce .menu:hover > .label,
+.root.minimaliste-mauve-fonce .menu:hover > .label,
+.root.primer-dark .menu:hover > .label,
+.root.nord-dark .menu:hover > .label,
+.root.cupertino-dark .menu:hover > .label,
+.root.dracula .menu:hover > .label,
+.root.flatlaf-dark .menu:hover > .label,
+.root.flatlaf-darcula .menu:hover > .label,
+.root.material-dark .menu:hover > .label,
+.root.acidule-fonce .menu:hover > .label,
+.root.moderne-fonce .menu:hover > .label {
+    -fx-text-fill: white !important;
+}
+
+/* ===== ICÔNES SVG - Couleurs thématiques minimalistes ===== */
+
+/* Icônes SVG - Minimaliste Bleu Clair */
+.root.minimaliste-bleu-clair .glyph-icon,
+.root.minimaliste-bleu-clair .ikonli-font-icon {
+    -fx-fill: #5C8AE6;
+    -fx-icon-color: #5C8AE6;
+}
+
+.root.minimaliste-bleu-clair .button:hover .glyph-icon,
+.root.minimaliste-bleu-clair .button:hover .ikonli-font-icon {
+    -fx-fill: #4A7BC8;
+    -fx-icon-color: #4A7BC8;
+}
+
+/* Icônes SVG - Minimaliste Bleu Foncé */
+.root.minimaliste-bleu-fonce .glyph-icon,
+.root.minimaliste-bleu-fonce .ikonli-font-icon {
+    -fx-fill: #3A6AB0;
+    -fx-icon-color: #3A6AB0;
+}
+
+.root.minimaliste-bleu-fonce .button:hover .glyph-icon,
+.root.minimaliste-bleu-fonce .button:hover .ikonli-font-icon {
+    -fx-fill: #4A7BC8;
+    -fx-icon-color: #4A7BC8;
+}
+
+/* Icônes SVG - Minimaliste Vert Clair */
+.root.minimaliste-vert-clair .glyph-icon,
+.root.minimaliste-vert-clair .ikonli-font-icon {
+    -fx-fill: #6BAA75;
+    -fx-icon-color: #6BAA75;
+}
+
+.root.minimaliste-vert-clair .button:hover .glyph-icon,
+.root.minimaliste-vert-clair .button:hover .ikonli-font-icon {
+    -fx-fill: #5A9A64;
+    -fx-icon-color: #5A9A64;
+}
+
+/* Icônes SVG - Minimaliste Vert Foncé */
+.root.minimaliste-vert-fonce .glyph-icon,
+.root.minimaliste-vert-fonce .ikonli-font-icon {
+    -fx-fill: #4A7F54;
+    -fx-icon-color: #4A7F54;
+}
+
+.root.minimaliste-vert-fonce .button:hover .glyph-icon,
+.root.minimaliste-vert-fonce .button:hover .ikonli-font-icon {
+    -fx-fill: #5A8F64;
+    -fx-icon-color: #5A8F64;
+}
+
+/* Icônes SVG - Minimaliste Rouge Clair */
+.root.minimaliste-rouge-clair .glyph-icon,
+.root.minimaliste-rouge-clair .ikonli-font-icon {
+    -fx-fill: #D66B6B;
+    -fx-icon-color: #D66B6B;
+}
+
+.root.minimaliste-rouge-clair .button:hover .glyph-icon,
+.root.minimaliste-rouge-clair .button:hover .ikonli-font-icon {
+    -fx-fill: #C55555;
+    -fx-icon-color: #C55555;
+}
+
+/* Icônes SVG - Minimaliste Rouge Foncé */
+.root.minimaliste-rouge-fonce .glyph-icon,
+.root.minimaliste-rouge-fonce .ikonli-font-icon {
+    -fx-fill: #A84545;
+    -fx-icon-color: #A84545;
+}
+
+.root.minimaliste-rouge-fonce .button:hover .glyph-icon,
+.root.minimaliste-rouge-fonce .button:hover .ikonli-font-icon {
+    -fx-fill: #B85555;
+    -fx-icon-color: #B85555;
+}
+
+/* Icônes SVG - Minimaliste Mauve Clair */
+.root.minimaliste-mauve-clair .glyph-icon,
+.root.minimaliste-mauve-clair .ikonli-font-icon {
+    -fx-fill: #9B7EBD;
+    -fx-icon-color: #9B7EBD;
+}
+
+.root.minimaliste-mauve-clair .button:hover .glyph-icon,
+.root.minimaliste-mauve-clair .button:hover .ikonli-font-icon {
+    -fx-fill: #8A6DAC;
+    -fx-icon-color: #8A6DAC;
+}
+
+/* Icônes SVG - Minimaliste Mauve Foncé */
+.root.minimaliste-mauve-fonce .glyph-icon,
+.root.minimaliste-mauve-fonce .ikonli-font-icon {
+    -fx-fill: #7A5D9C;
+    -fx-icon-color: #7A5D9C;
+}
+
+.root.minimaliste-mauve-fonce .button:hover .glyph-icon,
+.root.minimaliste-mauve-fonce .button:hover .ikonli-font-icon {
+    -fx-fill: #8A6DAC;
+    -fx-icon-color: #8A6DAC;
+}
+
+/* ===== AMÉLIORATION VISIBILITÉ - Thèmes sombres ===== */
+
+/* Éclaircir les checkboxes et radio buttons pour meilleure visibilité sur fond noir */
+.root.minimaliste-bleu-fonce .check-box > .box,
+.root.minimaliste-bleu-fonce .radio-button > .radio,
+.root.minimaliste-vert-fonce .check-box > .box,
+.root.minimaliste-vert-fonce .radio-button > .radio,
+.root.minimaliste-rouge-fonce .check-box > .box,
+.root.minimaliste-rouge-fonce .radio-button > .radio,
+.root.minimaliste-mauve-fonce .check-box > .box,
+.root.minimaliste-mauve-fonce .radio-button > .radio,
+.root.primer-dark .check-box > .box,
+.root.primer-dark .radio-button > .radio,
+.root.nord-dark .check-box > .box,
+.root.nord-dark .radio-button > .radio,
+.root.cupertino-dark .check-box > .box,
+.root.cupertino-dark .radio-button > .radio,
+.root.dracula .check-box > .box,
+.root.dracula .radio-button > .radio,
+.root.flatlaf-dark .check-box > .box,
+.root.flatlaf-dark .radio-button > .radio,
+.root.flatlaf-darcula .check-box > .box,
+.root.flatlaf-darcula .radio-button > .radio,
+.root.material-dark .check-box > .box,
+.root.material-dark .radio-button > .radio,
+.root.acidule-fonce .check-box > .box,
+.root.acidule-fonce .radio-button > .radio,
+.root.moderne-fonce .check-box > .box,
+.root.moderne-fonce .radio-button > .radio {
+    -fx-background-color: #3A3A3A !important;
+    -fx-border-color: #5A5A5A !important;
+    -fx-border-width: 1.5 !important;
+}
+
+/* Sliders - Track (barre) éclaircie */
+.root.minimaliste-bleu-fonce .slider .track,
+.root.minimaliste-vert-fonce .slider .track,
+.root.minimaliste-rouge-fonce .slider .track,
+.root.minimaliste-mauve-fonce .slider .track,
+.root.primer-dark .slider .track,
+.root.nord-dark .slider .track,
+.root.cupertino-dark .slider .track,
+.root.dracula .slider .track,
+.root.flatlaf-dark .slider .track,
+.root.flatlaf-darcula .slider .track,
+.root.material-dark .slider .track,
+.root.acidule-fonce .slider .track,
+.root.moderne-fonce .slider .track {
+    -fx-background-color: #3A3A3A !important;
+    -fx-border-color: #5A5A5A !important;
+    -fx-border-width: 1 !important;
+}
+
+/* Sliders - Thumb (curseur) éclairci */
+.root.minimaliste-bleu-fonce .slider .thumb,
+.root.minimaliste-vert-fonce .slider .thumb,
+.root.minimaliste-rouge-fonce .slider .thumb,
+.root.minimaliste-mauve-fonce .slider .thumb,
+.root.primer-dark .slider .thumb,
+.root.nord-dark .slider .thumb,
+.root.cupertino-dark .slider .thumb,
+.root.dracula .slider .thumb,
+.root.flatlaf-dark .slider .thumb,
+.root.flatlaf-darcula .slider .thumb,
+.root.material-dark .slider .thumb,
+.root.acidule-fonce .slider .thumb,
+.root.moderne-fonce .slider .thumb {
+    -fx-background-color: #5A5A5A !important;
+    -fx-border-color: #7A7A7A !important;
+    -fx-border-width: 1.5 !important;
+}
+
+.root.minimaliste-bleu-fonce .slider .thumb:hover,
+.root.minimaliste-vert-fonce .slider .thumb:hover,
+.root.minimaliste-rouge-fonce .slider .thumb:hover,
+.root.minimaliste-mauve-fonce .slider .thumb:hover,
+.root.primer-dark .slider .thumb:hover,
+.root.nord-dark .slider .thumb:hover,
+.root.cupertino-dark .slider .thumb:hover,
+.root.dracula .slider .thumb:hover,
+.root.flatlaf-dark .slider .thumb:hover,
+.root.flatlaf-darcula .slider .thumb:hover,
+.root.material-dark .slider .thumb:hover,
+.root.acidule-fonce .slider .thumb:hover,
+.root.moderne-fonce .slider .thumb:hover {
+    -fx-background-color: #6A6A6A !important;
+}
+
+/* ProgressBar - Éclaircir pour meilleure visibilité */
+.root.minimaliste-bleu-fonce .progress-bar > .track,
+.root.minimaliste-vert-fonce .progress-bar > .track,
+.root.minimaliste-rouge-fonce .progress-bar > .track,
+.root.minimaliste-mauve-fonce .progress-bar > .track,
+.root.primer-dark .progress-bar > .track,
+.root.nord-dark .progress-bar > .track,
+.root.cupertino-dark .progress-bar > .track,
+.root.dracula .progress-bar > .track,
+.root.flatlaf-dark .progress-bar > .track,
+.root.flatlaf-darcula .progress-bar > .track,
+.root.material-dark .progress-bar > .track,
+.root.acidule-fonce .progress-bar > .track,
+.root.moderne-fonce .progress-bar > .track {
+    -fx-background-color: #3A3A3A !important;
+    -fx-border-color: #5A5A5A !important;
+}
+
+/* Spinner - Éclaircir les flèches et bordures */
+.root.minimaliste-bleu-fonce .spinner,
+.root.minimaliste-vert-fonce .spinner,
+.root.minimaliste-rouge-fonce .spinner,
+.root.minimaliste-mauve-fonce .spinner,
+.root.primer-dark .spinner,
+.root.nord-dark .spinner,
+.root.cupertino-dark .spinner,
+.root.dracula .spinner,
+.root.flatlaf-dark .spinner,
+.root.flatlaf-darcula .spinner,
+.root.material-dark .spinner,
+.root.acidule-fonce .spinner,
+.root.moderne-fonce .spinner {
+    -fx-border-color: #5A5A5A !important;
+}
+
+.root.minimaliste-bleu-fonce .spinner .increment-arrow-button,
+.root.minimaliste-bleu-fonce .spinner .decrement-arrow-button,
+.root.minimaliste-vert-fonce .spinner .increment-arrow-button,
+.root.minimaliste-vert-fonce .spinner .decrement-arrow-button,
+.root.minimaliste-rouge-fonce .spinner .increment-arrow-button,
+.root.minimaliste-rouge-fonce .spinner .decrement-arrow-button,
+.root.minimaliste-mauve-fonce .spinner .increment-arrow-button,
+.root.minimaliste-mauve-fonce .spinner .decrement-arrow-button,
+.root.primer-dark .spinner .increment-arrow-button,
+.root.primer-dark .spinner .decrement-arrow-button,
+.root.nord-dark .spinner .increment-arrow-button,
+.root.nord-dark .spinner .decrement-arrow-button,
+.root.cupertino-dark .spinner .increment-arrow-button,
+.root.cupertino-dark .spinner .decrement-arrow-button,
+.root.dracula .spinner .increment-arrow-button,
+.root.dracula .spinner .decrement-arrow-button,
+.root.flatlaf-dark .spinner .increment-arrow-button,
+.root.flatlaf-dark .spinner .decrement-arrow-button,
+.root.flatlaf-darcula .spinner .increment-arrow-button,
+.root.flatlaf-darcula .spinner .decrement-arrow-button,
+.root.material-dark .spinner .increment-arrow-button,
+.root.material-dark .spinner .decrement-arrow-button,
+.root.acidule-fonce .spinner .increment-arrow-button,
+.root.acidule-fonce .spinner .decrement-arrow-button,
+.root.moderne-fonce .spinner .increment-arrow-button,
+.root.moderne-fonce .spinner .decrement-arrow-button {
+    -fx-background-color: #3A3A3A !important;
+}
+

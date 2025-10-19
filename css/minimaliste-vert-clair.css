@@ -1,0 +1,296 @@
+/*
+ * =====================================================
+ * THÈME MINIMALISTE VERT CLAIR
+ * Design flat sobre et professionnel
+ * Palette: Blanc/Gris clair + Vert sauge
+ * =====================================================
+ */
+
+/* ===== VARIABLES DE COULEUR ===== */
+.root {
+    /* Couleurs de base */
+    -fx-base: #FAFAFA;                  /* Blanc cassé très clair */
+    -fx-background: #FFFFFF;            /* Blanc pur */
+    -fx-control-inner-background: #FFFFFF;
+    
+    /* Couleur d'accent principale - VERT */
+    -fx-accent: #6BAA75;                /* Vert sauge moderne */
+    -fx-focus-color: #6BAA75;
+    -fx-faint-focus-color: #6BAA7544;
+    
+    /* Couleurs de texte */
+    -fx-text-base-color: #2C3E50;       /* Gris anthracite */
+    -fx-text-fill: #2C3E50;
+    
+    /* Bordures et séparateurs */
+    -color-border: #E0E0E0;             /* Gris très clair */
+    -fx-outer-border: #E0E0E0;
+    -fx-inner-border: #F5F5F5;
+    
+    /* États */
+    -fx-selection-bar: #6BAA75;
+    -fx-selection-bar-text: white;
+    -fx-hover-base: #F5F5F5;
+}
+
+/* ===== BOUTONS ===== */
+.button {
+    -fx-background-color: #6BAA75;
+    -fx-text-fill: white;
+    -fx-font-weight: 500;
+    -fx-padding: 8 16 8 16;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+
+.button:hover {
+    -fx-background-color: #5A9A64;
+}
+
+.button:pressed {
+    -fx-background-color: #498852;
+}
+
+.button:disabled {
+    -fx-background-color: #E0E0E0;
+    -fx-text-fill: #9E9E9E;
+    -fx-opacity: 1.0;
+}
+
+/* Bouton par défaut */
+.button.default {
+    -fx-background-color: #5A9A64;
+    -fx-text-fill: white;
+}
+
+.button.default:hover {
+    -fx-background-color: #498852;
+}
+
+/* ===== CHAMPS DE TEXTE ===== */
+.text-field,
+.text-area {
+    -fx-background-color: white;
+    -fx-text-fill: #2C3E50;
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 1;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-padding: 6 10 6 10;
+}
+
+.text-field:focused,
+.text-area:focused {
+    -fx-border-color: #6BAA75;
+    -fx-border-width: 2;
+}
+
+.text-field:disabled,
+.text-area:disabled {
+    -fx-background-color: #F5F5F5;
+    -fx-text-fill: #9E9E9E;
+}
+
+/* ===== COMBOBOX / CHOICEBOX ===== */
+.combo-box,
+.choice-box {
+    -fx-background-color: white;
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 1;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+
+.combo-box:focused,
+.choice-box:focused {
+    -fx-border-color: #6BAA75;
+    -fx-border-width: 2;
+}
+
+.combo-box .list-cell,
+.choice-box .list-cell {
+    -fx-text-fill: #2C3E50;
+}
+
+/* ===== LISTES ===== */
+.list-view {
+    -fx-background-color: white;
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 1;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+
+.list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #2C3E50;
+    -fx-padding: 6 10 6 10;
+}
+
+.list-cell:selected {
+    -fx-background-color: #6BAA75;
+    -fx-text-fill: white;
+}
+
+.list-cell:hover {
+    -fx-background-color: #F5F5F5;
+}
+
+.list-cell:selected:hover {
+    -fx-background-color: #5A9A64;
+}
+
+/* ===== TABLEAUX ===== */
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 1;
+}
+
+.table-view .column-header {
+    -fx-background-color: #F5F5F5;
+    -fx-text-fill: #2C3E50;
+    -fx-font-weight: 600;
+    -fx-border-color: #E0E0E0;
+}
+
+.table-row-cell {
+    -fx-background-color: white;
+    -fx-text-fill: #2C3E50;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #6BAA75;
+    -fx-text-fill: white;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: #F5F5F5;
+}
+
+/* ===== PROGRESS BAR ===== */
+.progress-bar {
+    -fx-background-color: #E0E0E0;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+
+.progress-bar > .bar {
+    -fx-background-color: #6BAA75;
+    -fx-background-insets: 0;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+
+/* ===== SCROLLBAR ===== */
+.scroll-bar {
+    -fx-background-color: #F5F5F5;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #BDBDBD;
+    -fx-background-radius: 4;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-color: #9E9E9E;
+}
+
+.scroll-bar .thumb:pressed {
+    -fx-background-color: #757575;
+}
+
+/* ===== CHECKBOX / RADIOBUTTON ===== */
+.check-box,
+.radio-button {
+    -fx-text-fill: #2C3E50;
+}
+
+.check-box > .box,
+.radio-button > .radio {
+    -fx-background-color: white;
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 1;
+    -fx-border-radius: 3;
+}
+
+.check-box:selected > .box > .mark,
+.radio-button:selected > .radio > .dot {
+    -fx-background-color: #6BAA75;
+}
+
+/* ===== TABS ===== */
+.tab-pane {
+    -fx-background-color: #FAFAFA;
+    -fx-border-color: #E0E0E0;
+}
+
+.tab {
+    -fx-background-color: #F5F5F5;
+    -fx-text-fill: #2C3E50;
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 0 0 2 0;
+    -fx-padding: 8 16 8 16;
+}
+
+.tab:selected {
+    -fx-background-color: white;
+    -fx-border-color: #6BAA75;
+    -fx-border-width: 0 0 3 0;
+}
+
+.tab:hover {
+    -fx-background-color: #E8E8E8;
+}
+
+/* ===== TITLED PANE ===== */
+.titled-pane > .title {
+    -fx-background-color: #F5F5F5;
+    -fx-text-fill: #2C3E50;
+    -fx-font-weight: 600;
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 10;
+}
+
+.titled-pane > .content {
+    -fx-background-color: white;
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 0 1 1 1;
+}
+
+/* ===== MENU BAR ===== */
+.menu-bar {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 0 0 1 0;
+}
+
+.menu-item {
+    -fx-background-color: transparent;
+    -fx-text-fill: #2C3E50;
+}
+
+.menu-item:focused,
+.menu-item:hover {
+    -fx-background-color: #F5F5F5;
+}
+
+.menu-item:focused .label,
+.menu-item:hover .label {
+    -fx-text-fill: #6BAA75;
+}
+
+/* ===== TOOLTIPS ===== */
+.tooltip {
+    -fx-background-color: #2C3E50;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-padding: 6 10 6 10;
+    -fx-background-radius: 4;
+}
+
+/* ===== SEPARATEURS ===== */
+.separator {
+    -fx-background-color: #E0E0E0;
+}

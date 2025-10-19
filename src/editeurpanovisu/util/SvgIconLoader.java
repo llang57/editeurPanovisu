@@ -54,7 +54,7 @@ public class SvgIconLoader {
     /**
      * Détecte la couleur appropriée selon le thème actif (clair ou foncé)
      * Fonctionne avec tous les thèmes : AtlantaFX, MaterialFX, FlatLaf et thèmes personnalisés
-     * Couleurs spéciales pour Dracula et Darcula (mauve caractéristique)
+     * Couleurs spéciales pour Dracula, Darcula et thèmes minimalistes
      * @return Couleur adaptée au thème
      */
     private static Color getThemeColor() {
@@ -73,6 +73,34 @@ public class SvgIconLoader {
                 return Color.web("#BD93F9"); // Mauve Dracula caractéristique
             } else if ("FLATLAF_DARCULA".equals(themeName)) {
                 return Color.web("#9876AA"); // Violet Darcula IntelliJ
+            }
+            
+            // Couleurs pour les thèmes minimalistes - Bleu
+            else if ("MINIMALISTE_BLEU_CLAIR".equals(themeName)) {
+                return Color.web("#5C8AE6"); // Bleu minimaliste clair
+            } else if ("MINIMALISTE_BLEU_FONCE".equals(themeName)) {
+                return Color.web("#3A6AB0"); // Bleu minimaliste foncé (assombri)
+            }
+            
+            // Couleurs pour les thèmes minimalistes - Vert
+            else if ("MINIMALISTE_VERT_CLAIR".equals(themeName)) {
+                return Color.web("#6BAA75"); // Vert minimaliste clair
+            } else if ("MINIMALISTE_VERT_FONCE".equals(themeName)) {
+                return Color.web("#4A7F54"); // Vert minimaliste foncé (assombri)
+            }
+            
+            // Couleurs pour les thèmes minimalistes - Rouge
+            else if ("MINIMALISTE_ROUGE_CLAIR".equals(themeName)) {
+                return Color.web("#D66B6B"); // Rouge minimaliste clair
+            } else if ("MINIMALISTE_ROUGE_FONCE".equals(themeName)) {
+                return Color.web("#A84545"); // Rouge minimaliste foncé (assombri)
+            }
+            
+            // Couleurs pour les thèmes minimalistes - Mauve
+            else if ("MINIMALISTE_MAUVE_CLAIR".equals(themeName)) {
+                return Color.web("#9B7EBD"); // Mauve minimaliste clair
+            } else if ("MINIMALISTE_MAUVE_FONCE".equals(themeName)) {
+                return Color.web("#7A5D9C"); // Mauve minimaliste foncé (assombri)
             }
             
             // Vérifier si le thème est sombre
@@ -139,15 +167,20 @@ public class SvgIconLoader {
             // Lire le contenu du SVG
             String svgContent = new String(Files.readAllBytes(Paths.get(svgPath)), "UTF-8");
             
-            // Remplacer currentColor par la couleur spécifiée
+            // Remplacer les couleurs blanches par currentColor pour qu'elles prennent la couleur du thème
+            svgContent = svgContent.replaceAll("fill\\s*=\\s*['\"]white['\"]", "fill=\"currentColor\"");
+            svgContent = svgContent.replaceAll("fill\\s*=\\s*['\"]#[Ff]{6}['\"]", "fill=\"currentColor\"");
+            svgContent = svgContent.replaceAll("fill\\s*=\\s*['\"]#[Ff]{3}['\"]", "fill=\"currentColor\"");
+            svgContent = svgContent.replaceAll("fill\\s*:\\s*white", "fill:currentColor");
+            svgContent = svgContent.replaceAll("fill\\s*:\\s*#[Ff]{6}", "fill:currentColor");
+            svgContent = svgContent.replaceAll("fill\\s*:\\s*#[Ff]{3}", "fill:currentColor");
+            
+            // Remplacer currentColor par la couleur spécifiée du thème
             String hexColor = String.format("#%02X%02X%02X",
                 (int)(color.getRed() * 255),
                 (int)(color.getGreen() * 255),
                 (int)(color.getBlue() * 255));
             svgContent = svgContent.replace("currentColor", hexColor);
-            
-            // Remplacer également "white" par la couleur de fond (blanc pour thème clair)
-            // Note: ceci est une simplification, dans un vrai système il faudrait détecter le thème
             
             // Convertir le SVG en PNG avec Batik
             BufferedImage bufferedImage = convertSvgToPng(svgContent, width, height);

@@ -68,7 +68,7 @@ public class PopUpDialogController {
     }
 
     /**
-     *
+     * Affiche la popup d'accueil avec le thème actif
      * @throws Exception
      */
     public void affichePopup() throws Exception {
@@ -76,7 +76,16 @@ public class PopUpDialogController {
         stPopUp.initModality(Modality.APPLICATION_MODAL);
         Pane panePopup = (Pane) FXMLLoader.load(getClass().getResource("popUpAccueil.fxml"));
         Scene scnPopup = new Scene(panePopup);
+        
+        // Appliquer le thème actif à la popup
+        try {
+            ThemeManager.applyTheme(scnPopup, ThemeManager.getCurrentTheme());
+        } catch (Exception e) {
+            System.err.println("Impossible d'appliquer le thème à la popup d'accueil: " + e.getMessage());
+        }
+        
         stPopUp.setScene(scnPopup);
+        stPopUp.setTitle("À propos de PanoVisu");
         stPopUp.show();
     }
 
