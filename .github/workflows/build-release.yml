@@ -7,9 +7,9 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Version number (e.g., 3.3.0)'
+        description: 'Version number (e.g., 3.3.1)'
         required: true
-        default: '3.3.0'
+        default: '3.3.1'
 
 jobs:
   build-windows:
@@ -95,7 +95,7 @@ jobs:
       
       - name: 📦 Create macOS DMG
         run: |
-          APP_VERSION="${{ github.event.inputs.version || '3.3.0' }}"
+          APP_VERSION="${{ github.event.inputs.version || '3.3.1' }}"
           
           # Trouver le nom exact du JAR
           MAIN_JAR=$(ls target/editeurPanovisu-*-SNAPSHOT.jar | xargs basename)
@@ -176,7 +176,7 @@ jobs:
       
       - name: 📦 Create Debian Package (.deb)
         run: |
-          APP_VERSION="${{ github.event.inputs.version || '3.3.0' }}"
+          APP_VERSION="${{ github.event.inputs.version || '3.3.1' }}"
           
           # Trouver le nom exact du JAR
           MAIN_JAR=$(ls target/editeurPanovisu-*-SNAPSHOT.jar | xargs basename)
@@ -203,7 +203,7 @@ jobs:
       
       - name: 📦 Create RPM Package (.rpm)
         run: |
-          APP_VERSION="${{ github.event.inputs.version || '3.3.0' }}"
+          APP_VERSION="${{ github.event.inputs.version || '3.3.1' }}"
           
           # Trouver le nom exact du JAR
           MAIN_JAR=$(ls target/editeurPanovisu-*-SNAPSHOT.jar | xargs basename)
