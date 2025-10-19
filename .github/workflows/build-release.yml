@@ -320,10 +320,36 @@ jobs:
           tag_name: ${{ steps.build_info.outputs.VERSION }}
           name: "EditeurPanovisu ${{ steps.build_info.outputs.VERSION }} - Build ${{ steps.build_info.outputs.BUILD_NUM }}"
           body: |
-            ## � EditeurPanovisu ${{ github.ref_name }} - Accélération GPU
+            ## 🎨 EditeurPanovisu ${{ github.ref_name }} - Thèmes Minimalistes & Accélération GPU
             
             **Build** : ${{ steps.build_info.outputs.BUILD_NUM }}  
-            **Priorité** : ⚡ Performance majeure
+            **Priorité** : 🎨 Nouveaux thèmes + ⚡ Performance majeure
+            
+            ### 🎨 Nouveautés Build 3176 - Système de thèmes enrichi
+            
+            **24 thèmes disponibles** (nouveaux en gras)
+            - 9 thèmes AtlantaFX (Primer Light/Dark, Nord Light/Dark, Cupertino Light/Dark, Dracula, Mocha, Gruvbox)
+            - 2 thèmes MaterialFX (Light/Dark)
+            - 2 thèmes FlatLaf (Light/Dark)
+            - 2 thèmes Legacy (Clair/Foncé)
+            - 2 thèmes Acidulés (Clair/Foncé)
+            - 2 thèmes Modernes (Clair/Foncé)
+            - **8 thèmes Minimalistes** :
+              - **Minimaliste Bleu 🔷🔹** (Clair/Foncé)
+              - **Minimaliste Vert 🟢🟩** (Clair/Foncé)
+              - **Minimaliste Rouge 🔴🟥** (Clair/Foncé)
+              - **Minimaliste Mauve 💜🟪** (Clair/Foncé)
+            
+            **Icônes dynamiques colorées** 🎨
+            - Les icônes SVG prennent automatiquement la couleur du thème
+            - Icônes Glyph/Ikonli colorées via CSS
+            - Conversion PNG dynamique avec Apache Batik
+            
+            **Visibilité optimisée thèmes sombres** 🌓
+            - Contrôles éclaircis (checkboxes, radio, sliders, spinners, progressbars)
+            - Menus toujours blancs (normal, hover, dropdown)
+            - Contraste amélioré avec bordures renforcées
+            - Couleurs d'accent assombries (~15%) pour variantes foncées
             
             ### ⚡ Nouveautés v3.3.0
             
