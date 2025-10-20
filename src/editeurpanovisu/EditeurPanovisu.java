@@ -3373,7 +3373,7 @@ public class EditeurPanovisu extends Application {
                     strNomPano = strNomPano.substring(strNomPano.lastIndexOf(File.separator) + 1, strNomPano.length()).split("\\.")[0] + ".jpg";
                     strFicImage = strRepNiveau + File.separator + "panovisu" + iNumPanoXML + ".jpg";
                     if (i < iNombreNiveaux - 1) {
-                        ReadWriteImage.writeJpeg(imgPano, strFicImage, 0.7f, true, 0.1f);
+                        ReadWriteImage.writeJpeg(imgPano, strFicImage, 0.90f, true, 0.2f);
                     } else {
                         ReadWriteImage.writeJpeg(imgPano, strFicImage, 0.95f, true, 0.25f);
                     }
@@ -3443,7 +3443,7 @@ public class EditeurPanovisu extends Application {
         String strNomPano = strFichierImage.substring(strFichierImage.lastIndexOf(File.separator) + 1, strFichierImage.length());
         String strFicImage = strRepertoire + File.separator + "panovisu" + iNumPanoXML + strSuffixe + ".jpg";
         try {
-            ReadWriteImage.writeJpeg(imgPano, strFicImage, 0.85f, true, 0.3f);
+            ReadWriteImage.writeJpeg(imgPano, strFicImage, 0.92f, true, 0.3f);
 
         } catch (IOException ex) {
             Logger.getLogger(EditeurPanovisu.class
@@ -3482,7 +3482,7 @@ public class EditeurPanovisu extends Application {
                     }
                     strNomPano = strFichierImage.substring(strFichierImage.lastIndexOf(File.separator) + 1, strFichierImage.length());
                     strFicImage = strRepNiveau + File.separator + "panovisu" + iNumPanoXML + strSuffixe + ".jpg";
-                    ReadWriteImage.writeJpeg(imgPano, strFicImage, 0.7f, true, 0.1f);
+                    ReadWriteImage.writeJpeg(imgPano, strFicImage, 0.88f, true, 0.15f);
 
                 } catch (IOException ex) {
                     Logger.getLogger(EditeurPanovisu.class

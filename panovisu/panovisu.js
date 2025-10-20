@@ -4254,7 +4254,10 @@ function panovisu(iNumPano) {
                 iNbTextures++;
                 textures[iNbTextures] = texture;
                 textures[iNbTextures].colorSpace = THREE.SRGBColorSpace;
-                textures[iNbTextures].minFilter = THREE.LinearFilter;
+                textures[iNbTextures].minFilter = THREE.LinearMipmapLinearFilter;
+                textures[iNbTextures].magFilter = THREE.LinearFilter;
+                textures[iNbTextures].generateMipmaps = true;
+                textures[iNbTextures].anisotropy = 16; // Anisotropie maximale pour qualité optimale
                 if (texture.image.width <= maxTextureSize) {
                     var img = nomimage.split("/")[2];
                     var img2 = strPanoImage.split("/")[1];
@@ -4300,7 +4303,10 @@ function panovisu(iNumPano) {
                 iNbTextures++;
                 textures[iNbTextures] = texture;
                 textures[iNbTextures].colorSpace = THREE.SRGBColorSpace;
-                textures[iNbTextures].minFilter = THREE.LinearFilter;
+                textures[iNbTextures].minFilter = THREE.LinearMipmapLinearFilter;
+                textures[iNbTextures].magFilter = THREE.LinearFilter;
+                textures[iNbTextures].generateMipmaps = true;
+                textures[iNbTextures].anisotropy = 16; // Anisotropie maximale pour qualité optimale
                 if (texture.image.width <= maxTextureSize) {
                     var img = nomimage.split("/")[1];
                     var img2 = strPanoImage.split("/")[1];
@@ -4498,7 +4504,10 @@ function panovisu(iNumPano) {
                 iNbTextures++;
                 textures[iNbTextures] = texture;
                 textures[iNbTextures].colorSpace = THREE.SRGBColorSpace;
-                textures[iNbTextures].minFilter = THREE.LinearFilter;
+                textures[iNbTextures].minFilter = THREE.LinearMipmapLinearFilter;
+                textures[iNbTextures].magFilter = THREE.LinearFilter;
+                textures[iNbTextures].generateMipmaps = true;
+                textures[iNbTextures].anisotropy = 16; // Anisotropie maximale pour qualité optimale
                 if (!renderer) {
                     // Créer le renderer seulement s'il n'existe pas encore
                     console.log("DEBUG initPanoSphere() - Création du renderer");
@@ -4602,7 +4611,10 @@ function panovisu(iNumPano) {
                 iNbTextures++;
                 textures[iNbTextures] = texture;
                 textures[iNbTextures].colorSpace = THREE.SRGBColorSpace;
-                textures[iNbTextures].minFilter = THREE.LinearFilter;
+                textures[iNbTextures].minFilter = THREE.LinearMipmapLinearFilter;
+                textures[iNbTextures].magFilter = THREE.LinearFilter;
+                textures[iNbTextures].generateMipmaps = true;
+                textures[iNbTextures].anisotropy = 16; // Anisotropie maximale pour qualité optimale
                 if (!renderer) {
                     // Créer le renderer seulement s'il n'existe pas encore
                     console.log("DEBUG initPanoSphere() sans MultiReso - Création du renderer");
@@ -4704,7 +4716,10 @@ function panovisu(iNumPano) {
         var iText = iNbTextures;
         textures[iText] = new THREE.Texture(texture_placeholder);
         textures[iText].colorSpace = THREE.SRGBColorSpace;
-        textures[iText].minFilter = THREE.LinearFilter;
+        textures[iText].minFilter = THREE.LinearMipmapLinearFilter;
+        textures[iText].magFilter = THREE.LinearFilter;
+        textures[iText].generateMipmaps = true;
+        textures[iText].anisotropy = 16; // Anisotropie maximale pour qualité optimale
         iNbMateriaux++;
         // MIGRATION THREE.JS R160: SRGBColorSpace gère correctement l'exposition
         materiaux[iNbMateriaux] = new THREE.MeshBasicMaterial({ 
@@ -4809,7 +4824,10 @@ function panovisu(iNumPano) {
         var iText = iNbTextures;
         textures[iText] = new THREE.Texture(texture_placeholder);
         textures[iText].colorSpace = THREE.SRGBColorSpace;
-        textures[iText].minFilter = THREE.LinearFilter;
+        textures[iText].minFilter = THREE.LinearMipmapLinearFilter;
+        textures[iText].magFilter = THREE.LinearFilter;
+        textures[iText].generateMipmaps = true;
+        textures[iText].anisotropy = 16; // Anisotropie maximale pour qualité optimale
         iNbMateriaux++;
         // MIGRATION THREE.JS R160: SRGBColorSpace gère correctement l'exposition
         materiaux[iNbMateriaux] = new THREE.MeshBasicMaterial({ 
