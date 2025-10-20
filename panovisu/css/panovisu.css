@@ -375,19 +375,20 @@ and open the template in the editor.
 }
 
 .data-title:before {
-    content:  "panoVisu (c) Laurent Lang 2014";
+    content:  "panoVisu v3 - L. LANG (2014-2025)";
     display: block;
     position: absolute;
     top: 0;
     right: 0;
     left: 0;
-    background-color: #444;
+    background-color: rgba(0, 0, 0, 0.6);
     color : #fff;
-    padding: 2px;
+    padding: 5px;
     text-align: center;
     font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 0.6em;;
+    font-size: 0.7em;
     font-weight: bold;
+    border-radius: 6px 6px 0 0;
 }
 .data-title :first-child {
     margin-top: 20px;
@@ -411,6 +412,13 @@ and open the template in the editor.
     display: inline-block;
     transition: 0.5s;
 }
+
+.telecommande:hover{
+    opacity: 1.0 !important;
+    transition: 0.5s;
+}
+
+
 .imgTelec{
     position : absolute;
     top : 0px;

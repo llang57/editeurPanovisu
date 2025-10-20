@@ -20,6 +20,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import netscape.javascript.JSObject;
 
@@ -35,6 +36,8 @@ public class NavigateurOpenLayers {
     private String[] strCartesOpenLayers;
     private final ToggleGroup tgCartesOpenLayers = new ToggleGroup();
     private AnchorPane apChoixCartographie = new AnchorPane();
+    private AnchorPane apOpenLayersContainer; // Container pour lazy loading
+    private boolean bChoixMarqueurSaved; // Stocké pour lazy loading
     private String strCartoActive="";
     private String bingApiKey = "";
     // Références aux TextFields pour mise à jour automatique
@@ -247,76 +250,58 @@ public class NavigateurOpenLayers {
     }
 
     /**
-     *
-     * @param tfLongitude
-     * @param tfLatitude
-     * @param bChoixMarqueur
-     * @return
+     * Initialise NavigateurCarte en lazy loading (uniquement au premier appel)
+     * pour éviter l'erreur "texture is null" au démarrage (bug JavaFX 19)
      */
-    public AnchorPane afficheNavigateurOpenLayer(TextField tfLongitude, TextField tfLatitude, boolean bChoixMarqueur) {
-        // Stocker les références aux TextFields pour mise à jour automatique
-        this.tfLongitudeRef = tfLongitude;
-        this.tfLatitudeRef = tfLatitude;
+    @SuppressWarnings("unused")
+    public void ensureNavigateurCarteInitialized() {
+        if (navigateurCarte != null) {
+            return; // Déjà initialisé
+        }
         
-        AnchorPane apOpenLayers = new AnchorPane();
-        apOpenLayers.getStyleClass().add("dialog-content-pane");
-        apOpenLayers.setStyle("-fx-border-width : 1px;-fx-border-style : solid;-fx-border-color : #777;"
-                + "-fx-border-color: #777;"
-                + "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.5) , 8, 0.0 , 0 , 8 );"
-                + "-fx-border-width: 1px;"
-        );
-        Label lblAttente = new Label("Chargement en cours. Veuillez patienter");
-        lblAttente.setAlignment(Pos.CENTER);
-        lblAttente.setStyle("-fx-background-color : #777; -fx-opacity: 1.0;");
-        lblAttente.setTextFill(Color.WHITE);
-        lblAttente.setLayoutX(10);
-        lblAttente.setLayoutY(70);
-        apOpenLayers.getChildren().add(lblAttente);
+        if (apOpenLayersContainer == null) {
+            System.err.println("❌ apOpenLayersContainer n'est pas encore créé!");
+            return;
+        }
+        
+        System.out.println("🚀 Initialisation LAZY de NavigateurCarte...");
         navigateurCarte = new NavigateurCarte();
-        navigateurCarte.setLayoutX(10);
-        navigateurCarte.setLayoutY(70);
+        
+        // Constantes pour la nouvelle architecture
+        final double HEADER_HEIGHT = 50;
+        final double PANEL_RIGHT_WIDTH = 200;
+        final double SPACING = 10;
+        
+        // Position de la carte : juste en dessous du header, à gauche
+        navigateurCarte.setLayoutX(SPACING);
+        navigateurCarte.setLayoutY(HEADER_HEIGHT + SPACING);
         navigateurCarte.setVisible(false);
-        getApChoixCartographie().setMaxWidth(180);
-        apOpenLayers.getChildren().add(navigateurCarte);
-        File fileRep = new File("");
-        String strRepertAppli = fileRep.getAbsolutePath();
-        TextField tfRechercheAdresse = new TextField();
-        Button btnRechercheAdresse = new Button("Recherche", new ImageView(new Image("file:" + strRepertAppli + File.separator + "images/loupe.png", -1, 16, true, true)));
-        Button btnRecupereCoordonnees = new Button("valide position");
-        Button btnCentreCarte = new Button("recentre carte");
-        Button btnFerme = new Button("X");
-        btnFerme.setOnAction((e) -> {
-            apOpenLayers.setVisible(false);
-        });
-        if (bChoixMarqueur) {
-            tfRechercheAdresse.setPromptText("Votre recherche d'adresse");
-            tfRechercheAdresse.setPrefWidth(200);
-            tfRechercheAdresse.setLayoutX(10);
-            tfRechercheAdresse.setLayoutY(40);
-            btnRechercheAdresse.setLayoutX(220);
-            btnRechercheAdresse.setLayoutY(40);
-            btnRecupereCoordonnees.setLayoutX(10);
-            btnRecupereCoordonnees.setLayoutY(10);
-            btnRecupereCoordonnees.setPrefWidth(120);
-            btnCentreCarte.setLayoutX(140);
-            btnCentreCarte.setLayoutY(10);
-            btnCentreCarte.setPrefWidth(120);
-            apOpenLayers.getChildren().addAll(btnRecupereCoordonnees, btnCentreCarte, btnFerme,
-                    tfRechercheAdresse, btnRechercheAdresse, getApChoixCartographie());
-        }
-        lblAttente.setPrefSize(apOpenLayers.getPrefWidth() - 220, apOpenLayers.getPrefHeight() - 120);
-        if (bChoixMarqueur) {
-            navigateurCarte.getWebView().setPrefWidth(apOpenLayers.getPrefWidth() - 220);
-            navigateurCarte.getWebView().setPrefHeight(apOpenLayers.getPrefHeight() - 120);
-            getApChoixCartographie().setLayoutX(apOpenLayers.getPrefWidth() - 180);
-            getApChoixCartographie().setLayoutY(70);
+        
+        // Configuration des dimensions : largeur = container - panneau droit - marges
+        // hauteur = container - header - marges
+        // IMPORTANT: Modifier NavigateurCarte (Region) et non WebView (qui est lié/bound)
+        if (bChoixMarqueurSaved) {
+            navigateurCarte.setPrefWidth(apOpenLayersContainer.getPrefWidth() - PANEL_RIGHT_WIDTH - (2 * SPACING));
+            navigateurCarte.setPrefHeight(apOpenLayersContainer.getPrefHeight() - HEADER_HEIGHT - (2 * SPACING));
+            navigateurCarte.setMinWidth(apOpenLayersContainer.getPrefWidth() - PANEL_RIGHT_WIDTH - (2 * SPACING));
+            navigateurCarte.setMinHeight(apOpenLayersContainer.getPrefHeight() - HEADER_HEIGHT - (2 * SPACING));
+            navigateurCarte.setMaxWidth(apOpenLayersContainer.getPrefWidth() - PANEL_RIGHT_WIDTH - (2 * SPACING));
+            navigateurCarte.setMaxHeight(apOpenLayersContainer.getPrefHeight() - HEADER_HEIGHT - (2 * SPACING));
         } else {
-            navigateurCarte.getWebView().setPrefWidth(apOpenLayers.getPrefWidth());
-            navigateurCarte.getWebView().setPrefHeight(apOpenLayers.getPrefHeight());
-            navigateurCarte.setLayoutX(0);
-            navigateurCarte.setLayoutY(0);
+            navigateurCarte.setPrefWidth(apOpenLayersContainer.getPrefWidth() - (2 * SPACING));
+            navigateurCarte.setPrefHeight(apOpenLayersContainer.getPrefHeight() - HEADER_HEIGHT - (2 * SPACING));
+            navigateurCarte.setMinWidth(apOpenLayersContainer.getPrefWidth() - (2 * SPACING));
+            navigateurCarte.setMinHeight(apOpenLayersContainer.getPrefHeight() - HEADER_HEIGHT - (2 * SPACING));
+            navigateurCarte.setMaxWidth(apOpenLayersContainer.getPrefWidth() - (2 * SPACING));
+            navigateurCarte.setMaxHeight(apOpenLayersContainer.getPrefHeight() - HEADER_HEIGHT - (2 * SPACING));
+            navigateurCarte.setLayoutX(SPACING);
+            navigateurCarte.setLayoutY(HEADER_HEIGHT + SPACING);
         }
-
+        
+        // Ajouter au container
+        apOpenLayersContainer.getChildren().add(navigateurCarte);
+        
+        // Configuration des listeners WebEngine
         navigateurCarte.getWebEngine().getLoadWorker().stateProperty().addListener((paramObservableValue, from, to) -> {
             System.out.println("🔄 WebEngine State Change: " + from + " → " + to);
             
@@ -328,10 +313,9 @@ public class NavigateurOpenLayers {
                 JSObject window = (JSObject) navigateurCarte.getWebEngine().executeScript("window");
                 JavaApplication javaApp = new JavaApplication();
                 window.setMember("javafx", javaApp);
-                window.setMember("javaConnector", javaApp); // Connecteur pour updateCoordinates
+                window.setMember("javaConnector", javaApp);
                 System.out.println("✅ Pont JavaScript configuré (javafx + javaConnector)");
-                System.out.println("🔄 Appel allerAdresse() de test...");
-                allerAdresse("Metz rue Serpenoise", 14);
+                // NE PAS centrer sur Metz ici - le code appelant gèrera le positionnement
                 System.out.println("✅ bDebut mis à TRUE");
                 bDebut = true;
                 getTabInterface().setDisable(false);
@@ -352,13 +336,128 @@ public class NavigateurOpenLayers {
             JSObject window = (JSObject) navigateurCarte.getWebEngine().executeScript("window");
             JavaApplication javaApp = new JavaApplication();
             window.setMember("javafx", javaApp);
-            window.setMember("javaConnector", javaApp); // Connecteur pour updateCoordinates
+            window.setMember("javaConnector", javaApp);
             System.out.println("✅ Pont JavaScript configuré (javafx + javaConnector)");
-            allerAdresse("Metz rue Serpenoise", 14);
+            // NE PAS centrer sur Metz ici - le code appelant gèrera le positionnement
             bDebut = true;
             getTabInterface().setDisable(false);
         }
+        
+        // Pas de listeners de redimensionnement - taille fixe
+    }
+
+    /**
+     *
+     * @param tfLongitude
+     * @param tfLatitude
+     * @param bChoixMarqueur
+     * @return
+     */
+    @SuppressWarnings("unused")
+    public AnchorPane afficheNavigateurOpenLayer(TextField tfLongitude, TextField tfLatitude, boolean bChoixMarqueur) {
+        // Stocker les références aux TextFields pour mise à jour automatique
+        this.tfLongitudeRef = tfLongitude;
+        this.tfLatitudeRef = tfLatitude;
+        this.bChoixMarqueurSaved = bChoixMarqueur; // Sauvegarder pour lazy loading
+        
+        apOpenLayersContainer = new AnchorPane();
+        AnchorPane apOpenLayers = apOpenLayersContainer;
+        apOpenLayers.getStyleClass().add("dialog-content-pane");
+        apOpenLayers.setStyle("-fx-border-width : 1px;-fx-border-style : solid;-fx-border-color : #777;"
+                + "-fx-border-color: #777;"
+                + "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.5) , 8, 0.0 , 0 , 8 );"
+                + "-fx-border-width: 1px;"
+        );
+        
+        // ⚠️ LAZY LOADING: NavigateurCarte sera créé au premier clic sur géolocalisation
+        navigateurCarte = null;
+        
+        File fileRep = new File("");
+        String strRepertAppli = fileRep.getAbsolutePath();
+        
+        // ============ BARRE DU HAUT : Recherche + Bouton Fermer ============
+        final double HEADER_HEIGHT = 50;
+        final double PANEL_RIGHT_WIDTH = 200;
+        final double SPACING = 10;
+        
+        // Champ de recherche d'adresse
+        TextField tfRechercheAdresse = new TextField();
+        tfRechercheAdresse.setPromptText("Rechercher une adresse...");
+        tfRechercheAdresse.setPrefWidth(300);
+        tfRechercheAdresse.setLayoutX(SPACING);
+        tfRechercheAdresse.setLayoutY(SPACING);
+        
+        // Bouton recherche
+        Button btnRechercheAdresse = new Button("🔍 Rechercher", 
+            new ImageView(new Image("file:" + strRepertAppli + File.separator + "images/loupe.png", -1, 16, true, true)));
+        btnRechercheAdresse.setLayoutX(320);
+        btnRechercheAdresse.setLayoutY(SPACING);
+        btnRechercheAdresse.setPrefWidth(120);
+        
+        // Label d'attente (sur la zone carte)
+        Label lblAttente = new Label("⏳ Chargement de la carte en cours...\nVeuillez patienter");
+        lblAttente.setAlignment(Pos.CENTER);
+        lblAttente.setStyle("-fx-background-color : #777; -fx-opacity: 0.9; -fx-padding: 20px;");
+        lblAttente.setTextFill(Color.WHITE);
+        lblAttente.setLayoutX(SPACING);
+        lblAttente.setLayoutY(HEADER_HEIGHT + SPACING);
+        
+        // Bouton fermer (en haut à droite) - sera positionné après
+        Button btnFerme = new Button("✖ Fermer");
+        btnFerme.setStyle("-fx-background-color: #d32f2f; -fx-text-fill: white; -fx-font-weight: bold;");
+        btnFerme.setLayoutY(SPACING);
+        btnFerme.setPrefWidth(100);
+        btnFerme.setLayoutX(900 - 110 - SPACING); // Position calculée pour largeur 900px
+        btnFerme.setOnAction((e) -> {
+            apOpenLayers.setVisible(false);
+        });
+        
+        apOpenLayers.getChildren().addAll(tfRechercheAdresse, btnRechercheAdresse, lblAttente, btnFerme);
+        
         if (bChoixMarqueur) {
+            // ============ PANNEAU DE DROITE : Boutons de contrôle ============
+            VBox panelRight = new VBox(SPACING);
+            panelRight.getStyleClass().add("panel-right-geoloc"); // Utilise le CSS de l'application
+            panelRight.setPrefWidth(PANEL_RIGHT_WIDTH);
+            panelRight.setLayoutY(HEADER_HEIGHT);
+            panelRight.setLayoutX(900 - PANEL_RIGHT_WIDTH); // Position à droite (900 = largeur fenêtre)
+            
+            // Boutons de contrôle
+            Button btnRecupereCoordonnees = new Button("📍 Valider position");
+            btnRecupereCoordonnees.setPrefWidth(PANEL_RIGHT_WIDTH - 20);
+            btnRecupereCoordonnees.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;");
+            
+            Button btnCentreCarte = new Button("🎯 Recentrer carte");
+            btnCentreCarte.setPrefWidth(PANEL_RIGHT_WIDTH - 20);
+            
+            // Séparateur
+            Label lblSeparator = new Label("─────────────────");
+            lblSeparator.setStyle("-fx-text-fill: #999;");
+            
+            // Label pour le choix de carte
+            Label lblChoixCarte = new Label("Type de carte :");
+            lblChoixCarte.setStyle("-fx-font-weight: bold; -fx-padding: 10 0 5 0;");
+            
+            // Configuration du panel de choix de carte - utilise le CSS
+            getApChoixCartographie().setMaxWidth(PANEL_RIGHT_WIDTH - 20);
+            getApChoixCartographie().getStyleClass().add("panel-choix-carte");
+            
+            // Ajout des éléments au panneau droit
+            panelRight.getChildren().addAll(
+                btnRecupereCoordonnees,
+                btnCentreCarte,
+                lblSeparator,
+                lblChoixCarte,
+                getApChoixCartographie()
+            );
+            
+            apOpenLayers.getChildren().add(panelRight);
+            
+            // Configuration initiale des dimensions (taille fixe - pas de listeners)
+            lblAttente.setPrefSize(900 - PANEL_RIGHT_WIDTH - 30, 650 - HEADER_HEIGHT - 20);
+            panelRight.setPrefHeight(650 - HEADER_HEIGHT);
+            
+            // Configuration des listeners pour les boutons
             btnCentreCarte.setOnAction((e) -> {
                 if (bDebut) {
                     if (getMarqueur() != null) {
@@ -366,9 +465,14 @@ public class NavigateurOpenLayers {
                     }
                 }
             });
+            
             btnRecupereCoordonnees.setOnAction((e) -> {
                 if (bDebut) {
-                    setMarqueur(this.recupereCoordonnees());
+                    System.out.println("🎯 Validation position marqueur - récupération coordonnées...");
+                    // Récupérer la position du marqueur à l'index 0 (pas le centre de la carte)
+                    setMarqueur(navigateurCarte.recupereCoordonnees(0));
+                    System.out.println("📍 Coordonnées récupérées: " + getMarqueur().getLatitude() + ", " + getMarqueur().getLongitude());
+                    
                     if (tfLongitude != null) {
                         tfLongitude.setText(CoordonneesGeographiques.toDMS(getMarqueur().getLongitude()));
                     }
@@ -386,9 +490,14 @@ public class NavigateurOpenLayers {
                     retireMarqueur(0);
                     getPanoramiquesProjet()[getiPanoActuel()].setMarqueurGeolocatisation(getMarqueur());
                     ajouteMarqueur(0, getMarqueur(), strHTML);
+                    System.out.println("✅ Position validée et marqueur mis à jour");
                 }
             });
         }
+        
+        // Tout le code de configuration navigateurCarte déplacé dans ensureNavigateurCarteInitialized()
+        
+        // Configuration des listeners pour le champ de recherche
         tfRechercheAdresse.setOnKeyPressed((e) -> {
             if (e.getCode() == KeyCode.ENTER) {
                 if (bDebut) {
@@ -417,27 +526,9 @@ public class NavigateurOpenLayers {
             }
         });
 
-        apOpenLayers.widthProperty().addListener((ov, av, nv) -> {
-            if (bChoixMarqueur) {
-                lblAttente.setPrefWidth(apOpenLayers.getPrefWidth() - 220);
-                navigateurCarte.getWebView().setPrefWidth((double) nv - 200);
-                getApChoixCartographie().setLayoutX((double) nv - 180);
-                btnFerme.setLayoutX((double) nv - 35);
-            } else {
-                navigateurCarte.getWebView().setPrefWidth((double) nv);
-
-            }
-        });
-
-        apOpenLayers.heightProperty().addListener((ov, av, nv) -> {
-            if (bChoixMarqueur) {
-                lblAttente.setPrefHeight(apOpenLayers.getPrefHeight() - 120);
-                navigateurCarte.getWebView().setPrefHeight((double) nv - 80);
-                btnFerme.setLayoutY(10);
-            } else {
-                navigateurCarte.getWebView().setPrefHeight((double) nv);
-            }
-        });
+        // Les listeners widthProperty et heightProperty sont maintenant dans ensureNavigateurCarteInitialized()
+        // car ils dépendent de navigateurCarte
+        
         return apOpenLayers;
     }
 
@@ -481,6 +572,13 @@ public class NavigateurOpenLayers {
      */
     public void setBingApiKey(String bingApiKey) {
         this.bingApiKey = bingApiKey;
+    }
+
+    /**
+     * @return true si la carte est chargée et prête
+     */
+    public boolean isbDebut() {
+        return bDebut;
     }
 
     /**

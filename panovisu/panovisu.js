@@ -586,6 +586,7 @@ function panovisu(iNumPano) {
         telecommandeDY,
         telecommandeTaille,
         telecommandeTailleBouton,
+        opaciteBarrePersonnalisee,
         strLien1BarrePersonnalisee,
         strLien2BarrePersonnalisee,
         strComboMenu,
@@ -1087,10 +1088,10 @@ function panovisu(iNumPano) {
 
     $(document).on("click", "#homeCarte-" + iNumPano, function () {
         if (strNomLayerCarte.substring(0, 6) === "Google") {
-            allerCoordonnees(coordCentreLong, coordCentreLat, iCarteZoom - 11);
+            allerCoordonnees(coordCentreLong, coordCentreLat, iCarteZoom);
         }
         else {
-            allerCoordonnees(coordCentreLong, coordCentreLat, iCarteZoom - 10);
+            allerCoordonnees(coordCentreLong, coordCentreLat, iCarteZoom);
         }
     });
 
@@ -3200,6 +3201,23 @@ function panovisu(iNumPano) {
         });
         $("#barre-" + iNumPano + " button img").css({ height: "26px", width: "26px", paddingBottom: "0px", marginLeft: "0px" });
         $("#barre-" + iNumPano).css({ height: "40px" });
+        
+        // Appliquer l'opacité au conteneur boutons-
+        var boutonsElement = $("#boutons-" + iNumPano);
+        boutonsElement.css({ 
+            opacity: opaciteBarrePersonnalisee,
+            transition: "opacity 0.3s ease"
+        });
+        
+        // Ajouter l'effet hover pour passer à opacité 1.0
+        boutonsElement.off("mouseenter mouseleave"); // Retirer les anciens événements
+        boutonsElement.on("mouseenter", function() {
+            $(this).css({ opacity: 1.0 });
+        });
+        boutonsElement.on("mouseleave", function() {
+            $(this).css({ opacity: opaciteBarrePersonnalisee });
+        });
+        
         $("#button-" + iNumPano).show();
         requestTimeout(function () {
             w1 = $("#barre-" + iNumPano).width();
@@ -3908,10 +3926,10 @@ function panovisu(iNumPano) {
                     carteRentreDroite();
                 }
                 if (strNomLayerCarte.substring(0, 6) === "Google") {
-                    allerCoordonnees(coordCentreLong, coordCentreLat, iCarteZoom - 11);
+                    allerCoordonnees(coordCentreLong, coordCentreLat, iCarteZoom);
                 }
                 else {
-                    allerCoordonnees(coordCentreLong, coordCentreLat, iCarteZoom - 10);
+                    allerCoordonnees(coordCentreLong, coordCentreLat, iCarteZoom);
                 }
                 $("#carte-" + iNumPano).show();
                 $("#carteTitre-" + iNumPano).show();
@@ -3920,7 +3938,7 @@ function panovisu(iNumPano) {
             for (var i = 0; i < iNbPointCarte; i++) {
                 ajouteMarqueur(i, arrPointsCarte[i].positX, arrPointsCarte[i].positY, arrPointsCarte[i].html + "<br><img src='" + arrPointsCarte[i].image + "' width='150' style='margin-left : 60px' />");
                 if (arrPointsCarte[i].xml === "actif" && strAfficheRadarCarte === "oui") {
-                    afficheRadars(arrPointsCarte[i].positX, arrPointsCarte[i].positY, 45, 45, iRadarCarteTaille, strRadarCarteCouleurLigne, strRadarCarteCouleurFond, radarCarteOpacite);
+                    afficheRadars(arrPointsCarte[i].positX, arrPointsCarte[i].positY, 45, 45, iRadarCarteTaille / 3, strRadarCarteCouleurLigne, strRadarCarteCouleurFond, radarCarteOpacite);
                 }
             }
 
@@ -4122,7 +4140,7 @@ function panovisu(iNumPano) {
                         callback: function (key, options) {
                             switch (key) {
                                 case "lm360":
-                                    window.open("http://panovisu.fr");
+                                    window.open("https://lemondea360.fr/panovisu");
                                     break;
                                 case "pers1":
                                     window.open(strUrlMenuContextuel1);
@@ -4166,17 +4184,24 @@ function panovisu(iNumPano) {
                                         });
                                     }
                                     else {
-                                        panoInfo = chainesTraduction[strLangage].fenetreInfo;
-                                        $("#infoPanovisu-" + iNumPano).css({ width: "450px", height: "190px" });
-                                        $("#infoPanovisu-" + iNumPano).html(panoInfo);
+                                        // Fenêtre À propos personnalisée
+                                        var aproposHTML = '<div style="text-align: center; padding: 30px; font-family: Arial, sans-serif;">' +
+                                            '<h2 style="color: white; margin: 0 0 20px 0; font-size: 24px; font-weight: bold;">panoVisu v3</h2>' +
+                                            '<p style="color: white; margin: 0; font-size: 16px;">L. LANG (2014-2025)</p>' +
+                                            '<p style="color: #ccc; margin: 20px 0 0 0; font-size: 14px;">Éditeur de visites virtuelles panoramiques</p>' +
+                                            '</div>';
+                                        $("#infoPanovisu-" + iNumPano).html(aproposHTML);
+                                        $("#infoPanovisu-" + iNumPano).css({ 
+                                            width: "450px", 
+                                            height: "200px",
+                                            backgroundColor: "rgba(0, 0, 0, 0.85)",
+                                            border: "2px solid white",
+                                            borderRadius: "10px",
+                                            boxShadow: "0 4px 20px rgba(0, 0, 0, 0.5)"
+                                        });
                                         posGauche = (pano.width() - $("#infoPanovisu-" + iNumPano).width()) / 2;
                                         posHaut = (pano.height() - $("#infoPanovisu-" + iNumPano).height()) / 2;
                                         $("#infoPanovisu-" + iNumPano).css({ top: posHaut + "px", left: posGauche + "px" });
-                                        $("#infoPanovisu-" + iNumPano).css({
-                                            backgroundColor: "#000",
-                                            border: "1px solid white",
-                                            opacity: "0.8"
-                                        });
                                         if (bAfficheAide) {
                                             $("#aidePanovisu-" + iNumPano).fadeOut(1000, function () {
                                                 bAfficheAide = false;
@@ -5699,6 +5724,7 @@ function panovisu(iNumPano) {
                 telecommandeDY = 0;
                 telecommandeTaille = 25.0;
                 telecommandeTailleBouton = 40.0;
+                opaciteBarrePersonnalisee = 1.0;
                 strLien1BarrePersonnalisee = "";
                 strLien2BarrePersonnalisee = "";
                 $("#divVignettes-" + iNumPano).html("");
@@ -5979,6 +6005,7 @@ function panovisu(iNumPano) {
                 telecommandeDY = parseFloat(XMLTelecommande.attr('dY')) || telecommandeDY;
                 telecommandeTaille = parseFloat(XMLTelecommande.attr('taille')) || telecommandeTaille;
                 telecommandeTailleBouton = parseFloat(XMLTelecommande.attr('tailleBouton')) || telecommandeTailleBouton;
+                opaciteBarrePersonnalisee = parseFloat(XMLTelecommande.attr('opacite')) || opaciteBarrePersonnalisee;
                 strLien1BarrePersonnalisee = XMLTelecommande.attr('lien1') || strLien1BarrePersonnalisee;
                 strLien2BarrePersonnalisee = XMLTelecommande.attr('lien2') || strLien2BarrePersonnalisee;
                 i = 0;
@@ -6649,8 +6676,21 @@ function panovisu(iNumPano) {
 
                     $("#telec-" + iNumPano).css({
                         transformOrigin: trX + " " + trY,
-                        transform: "scale(" + telecommandeTaille / 100.0 + "," + telecommandeTaille / 100.0 + ")"
+                        transform: "scale(" + telecommandeTaille / 100.0 + "," + telecommandeTaille / 100.0 + ")",
+                        opacity: opaciteBarrePersonnalisee,
+                        transition: "opacity 0.3s ease"
                     });
+                    
+                    // Ajouter l'effet hover pour passer à opacité 1.0
+                    var telecElement = $("#telec-" + iNumPano);
+                    telecElement.off("mouseenter mouseleave"); // Retirer les anciens événements
+                    telecElement.on("mouseenter", function() {
+                        $(this).css({ opacity: 1.0 });
+                    });
+                    telecElement.on("mouseleave", function() {
+                        $(this).css({ opacity: opaciteBarrePersonnalisee });
+                    });
+                    
                     if (strTelecommandePositionX === "center") {
                         $("#telec-" + iNumPano).css("left", (pano.width() - $("#telec-" + iNumPano).width()) / 2.0 + telecommandeDX + "px");
                     }

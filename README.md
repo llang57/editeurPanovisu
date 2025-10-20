@@ -51,6 +51,51 @@ PanoVisu combine puissance, simplicité et liberté pour offrir une solution com
   - **Conversion Equi→Cube** : génération 6 faces 1000×1000 en ~125ms
   - Traitement total < 500ms pour qualité maximale
 
+### 🗺️ Refonte Carte et Géolocalisation (Builds 3376-3416)
+- **🌐 Migration vers Leaflet** :
+  - Remplacement de NavigateurCarteGluon par **NavigateurCarte** (Leaflet pur)
+  - Architecture **lazy loading** avec callback `onMapReady` pour éviter bugs JavaFX
+  - Chargement HTML via `load()` préservant les chemins relatifs des ressources
+  - Injection dynamique de la clé API LocationIQ après initialisation
+- **📍 API complète de gestion** :
+  - **Marqueurs draggables** : déplaçables à la souris avec mise à jour automatique
+  - **Radar (champ de vision)** : taille configurable 0-240m (×3 vs ancien 0-80m)
+  - **Géocodage Nominatim** : recherche d'adresse avec résultats OpenStreetMap
+  - **Méthodes** : `ajouteMarqueur()`, `retireMarqueurs()`, `allerCoordonnees()`, `afficheRadar()`
+- **🔧 Corrections critiques** :
+  - Inversion longitude/latitude corrigée dans constructeur `CoordonneesGeographiques`
+  - Distinction entre `recupereCoordonnees(0)` (marqueur) et `recupereCoordonnees()` (centre)
+  - Callback asynchrone `setOnMapReady()` pour éviter "texture is null" (bug JavaFX 19)
+  - Méthode `miseAJourRadarSeul()` pour optimiser les mises à jour partielles
+
+### 🎨 Interface et Visualisation (Builds 3376-3416)
+- **📐 Adaptation taille viewport** :
+  - Calcul intelligent du ratio container/image pour extraction correcte
+  - Remplacement des dimensions hardcodées par `getVisualisationWidth()`/`getVisualisationHeight()`
+  - Viewport ajusté dynamiquement selon dimensions réelles
+- **📱 Réseaux sociaux modernisés** :
+  - Remplacement Google+/Facebook par **Meta** (plateforme unifiée)
+  - Suppression références obsolètes à Google+
+  - Interface épurée avec 3 options : Twitter, Meta, Email
+- **🎛️ Barre personnalisée enrichie** :
+  - **Opacité configurable** : slider 0-1 avec effet hover (opacité → 1.0 au survol)
+  - Télécommande et barre de navigation avec transparence réglable
+  - Amélioration visibilité tout en préservant l'immersion
+
+### 🛡️ Corrections et Stabilité (Builds 3376-3416)
+- **🖼️ Protection images invalides** :
+  - Vérification `BufferedImage` avant écriture JPEG (diaporama)
+  - Skip des images corrompues au lieu de crasher l'application
+  - Message d'avertissement dans la console avec nom du fichier
+- **🎯 Positionnement UI** :
+  - Correction décalages éléments interface (labels, boutons, contrôles)
+  - Espacement constant via `PANEL_TOP_MARGIN` et `PANEL_ELEMENT_SPACING`
+  - Architecture en 3 zones pour géolocalisation : Header / Carte / Panneau contrôles
+- **⏱️ Gestion asynchrone** :
+  - Chargement carte en lazy loading (au premier clic géolocalisation)
+  - Flag `carteEnCoursDeChargement` pour éviter re-configurations multiples
+  - Listeners d'état WebEngine pour synchronisation Java/JavaScript
+
 ### ⚡ Accélération GPU (OpenCL)
 - **🎮 Traitement GPU** : Accélération matérielle pour toutes les opérations de traitement d'images
   - **Transformations panoramiques** : Conversion Équirectangulaire ↔ Cube **3.3× plus rapide**

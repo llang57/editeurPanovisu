@@ -9,6 +9,7 @@ Write-Host "=== Incrémentation du numéro de build ===" -ForegroundColor Cyan
 $buildNumFile = "build.num"
 $i18nFile = "src\editeurpanovisu\i18n\PanoVisu.properties"
 $projectFile = "src\project.properties"
+$pomFile = "pom.xml"
 
 # Fonction pour lire le numéro de build
 function Get-BuildNumber {
@@ -25,6 +26,28 @@ function Get-BuildNumber {
     }
     
     return 1990
+}
+
+# Fonction pour lire la version du projet depuis pom.xml
+function Get-ProjectVersion {
+    if (!(Test-Path $pomFile)) {
+        Write-Host "Fichier pom.xml non trouvé" -ForegroundColor Yellow
+        return "3.3.1"
+    }
+    
+    $content = Get-Content $pomFile -Encoding UTF8
+    foreach ($line in $content) {
+        if ($line -match "<version>(\d+\.\d+\.\d+)(-SNAPSHOT)?</version>") {
+            # Extraire uniquement la partie majeure.mineure (ex: 3.3.1 -> 3.3)
+            $fullVersion = $matches[1]
+            if ($fullVersion -match "^(\d+\.\d+)") {
+                return $matches[1]
+            }
+            return $fullVersion
+        }
+    }
+    
+    return "3.3"
 }
 
 # Fonction pour mettre à jour build.num
@@ -95,7 +118,7 @@ function Update-I18nFile {
 
 # Fonction pour mettre à jour project.properties
 function Update-ProjectFile {
-    param([int]$buildNumber)
+    param([int]$buildNumber, [string]$version)
     
     if (!(Test-Path $projectFile)) {
         Write-Host "Fichier $projectFile non trouvé" -ForegroundColor Yellow
@@ -103,17 +126,21 @@ function Update-ProjectFile {
     }
     
     $lines = Get-Content $projectFile -Encoding UTF8
-    $found = $false
+    $foundBuild = $false
+    $foundVersion = $false
     
     for ($i = 0; $i -lt $lines.Count; $i++) {
         if ($lines[$i] -match "^Application\.buildnumber=") {
             $lines[$i] = "Application.buildnumber=$buildNumber"
-            $found = $true
-            break
+            $foundBuild = $true
+        }
+        elseif ($lines[$i] -match "^project\.version=") {
+            $lines[$i] = "project.version=$version"
+            $foundVersion = $true
         }
     }
     
-    if (!$found) {
+    if (!$foundBuild) {
         # Ajouter après project.version
         for ($i = 0; $i -lt $lines.Count; $i++) {
             if ($lines[$i] -match "^project\.version=") {
@@ -123,14 +150,28 @@ function Update-ProjectFile {
         }
     }
     
+    if (!$foundVersion) {
+        # Ajouter après le commentaire "# Version configuration"
+        for ($i = 0; $i -lt $lines.Count; $i++) {
+            if ($lines[$i] -match "# Version configuration") {
+                $lines = $lines[0..$i] + "project.version=$version" + $lines[($i+1)..($lines.Count-1)]
+                break
+            }
+        }
+    }
+    
     Set-Content -Path $projectFile -Value $lines -Encoding UTF8
-    Write-Host "Fichier $projectFile mis a jour" -ForegroundColor Green
+    Write-Host "Fichier $projectFile mis a jour (version=$version, build=$buildNumber)" -ForegroundColor Green
 }
 
 # Script principal
 # Lire le numéro actuel
 $currentBuild = Get-BuildNumber
 Write-Host "Build actuel : $currentBuild" -ForegroundColor White
+
+# Lire la version du projet
+$projectVersion = Get-ProjectVersion
+Write-Host "Version du projet : $projectVersion" -ForegroundColor White
 
 # Incrémenter
 $newBuild = $currentBuild + 1
@@ -139,7 +180,7 @@ Write-Host "Nouveau build : $newBuild" -ForegroundColor Yellow
 # Mettre à jour les fichiers
 Update-BuildNumFile $newBuild
 Update-I18nFile $newBuild
-Update-ProjectFile $newBuild
+Update-ProjectFile $newBuild $projectVersion
 
 Write-Host ""
 Write-Host "Build mis a jour avec succes !" -ForegroundColor Green

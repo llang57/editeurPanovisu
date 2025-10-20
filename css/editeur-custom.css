@@ -21,6 +21,234 @@
     -fx-padding: 10;
 }
 
+/* ===== Panneau droit géolocalisation ===== */
+
+/* Thèmes clairs AtlantaFX */
+.root.primer-light .panel-right-geoloc,
+.root.nord-light .panel-right-geoloc,
+.root.cupertino-light .panel-right-geoloc {
+    -fx-background-color: #F5F5F5;
+    -fx-padding: 10px;
+    -fx-border-color: #D0D0D0;
+    -fx-border-width: 0 0 0 1px;
+}
+
+/* Thèmes sombres AtlantaFX */
+.root.primer-dark .panel-right-geoloc,
+.root.nord-dark .panel-right-geoloc,
+.root.cupertino-dark .panel-right-geoloc,
+.root.dracula .panel-right-geoloc {
+    -fx-background-color: #2C2C2C;
+    -fx-padding: 10px;
+    -fx-border-color: #404040;
+    -fx-border-width: 0 0 0 1px;
+}
+
+/* Acidulé Clair */
+.root.acidule-clair .panel-right-geoloc {
+    -fx-background-color: #FFF0F5;
+    -fx-padding: 10px;
+    -fx-border-color: #FFB3D9;
+    -fx-border-width: 0 0 0 1px;
+}
+
+/* Acidulé Foncé */
+.root.acidule-fonce .panel-right-geoloc {
+    -fx-background-color: #1A0A1F;
+    -fx-padding: 10px;
+    -fx-border-color: #7B2FFF;
+    -fx-border-width: 0 0 0 1px;
+}
+
+/* Moderne Clair */
+.root.moderne-clair .panel-right-geoloc {
+    -fx-background-color: #F8F6F3;
+    -fx-padding: 10px;
+    -fx-border-color: #D4CABD;
+    -fx-border-width: 0 0 0 1px;
+}
+
+/* Moderne Foncé */
+.root.moderne-fonce .panel-right-geoloc {
+    -fx-background-color: #1B2838;
+    -fx-padding: 10px;
+    -fx-border-color: #374151;
+    -fx-border-width: 0 0 0 1px;
+}
+
+/* Minimaliste Bleu Clair */
+.root.minimaliste-bleu-clair .panel-right-geoloc {
+    -fx-background-color: #F8FAFB;
+    -fx-padding: 10px;
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 0 0 0 1px;
+}
+
+/* Minimaliste Bleu Foncé */
+.root.minimaliste-bleu-fonce .panel-right-geoloc {
+    -fx-background-color: #2C2C2C;
+    -fx-padding: 10px;
+    -fx-border-color: #404040;
+    -fx-border-width: 0 0 0 1px;
+}
+
+/* Minimaliste Vert Clair */
+.root.minimaliste-vert-clair .panel-right-geoloc {
+    -fx-background-color: #F8FAF8;
+    -fx-padding: 10px;
+    -fx-border-color: #D0E0D5;
+    -fx-border-width: 0 0 0 1px;
+}
+
+/* Minimaliste Vert Foncé */
+.root.minimaliste-vert-fonce .panel-right-geoloc {
+    -fx-background-color: #2C2C2C;
+    -fx-padding: 10px;
+    -fx-border-color: #3A4A3A;
+    -fx-border-width: 0 0 0 1px;
+}
+
+/* Minimaliste Rouge Clair */
+.root.minimaliste-rouge-clair .panel-right-geoloc {
+    -fx-background-color: #FBF8F8;
+    -fx-padding: 10px;
+    -fx-border-color: #E8D0D0;
+    -fx-border-width: 0 0 0 1px;
+}
+
+/* Minimaliste Rouge Foncé */
+.root.minimaliste-rouge-fonce .panel-right-geoloc {
+    -fx-background-color: #2C2C2C;
+    -fx-padding: 10px;
+    -fx-border-color: #4A3030;
+    -fx-border-width: 0 0 0 1px;
+}
+
+/* Minimaliste Mauve Clair */
+.root.minimaliste-mauve-clair .panel-right-geoloc {
+    -fx-background-color: #FAF8FB;
+    -fx-padding: 10px;
+    -fx-border-color: #E8D8F0;
+    -fx-border-width: 0 0 0 1px;
+}
+
+/* Minimaliste Mauve Foncé */
+.root.minimaliste-mauve-fonce .panel-right-geoloc {
+    -fx-background-color: #2C2C2C;
+    -fx-padding: 10px;
+    -fx-border-color: #3A304A;
+    -fx-border-width: 0 0 0 1px;
+}
+
+/* ===== Panneau choix de carte (radio buttons) ===== */
+
+/* Thèmes clairs AtlantaFX */
+.root.primer-light .panel-choix-carte,
+.root.nord-light .panel-choix-carte,
+.root.cupertino-light .panel-choix-carte {
+    -fx-background-color: #FAFAFA;
+    -fx-padding: 5px;
+}
+
+/* Thèmes sombres AtlantaFX */
+.root.primer-dark .panel-choix-carte,
+.root.nord-dark .panel-choix-carte,
+.root.cupertino-dark .panel-choix-carte,
+.root.dracula .panel-choix-carte {
+    -fx-background-color: #1E1E1E;
+    -fx-padding: 5px;
+}
+
+/* Acidulé Clair */
+.root.acidule-clair .panel-choix-carte {
+    -fx-background-color: #FFF5F9;
+    -fx-padding: 5px;
+}
+
+/* Acidulé Foncé */
+.root.acidule-fonce .panel-choix-carte {
+    -fx-background-color: #0F0A1E;
+    -fx-padding: 5px;
+}
+
+/* Moderne Clair */
+.root.moderne-clair .panel-choix-carte {
+    -fx-background-color: #FCFAF8;
+    -fx-padding: 5px;
+}
+
+/* Moderne Foncé */
+.root.moderne-fonce .panel-choix-carte {
+    -fx-background-color: #0D1117;
+    -fx-padding: 5px;
+}
+
+/* Minimaliste Bleu Clair */
+.root.minimaliste-bleu-clair .panel-choix-carte {
+    -fx-background-color: #FCFDFE;
+    -fx-padding: 5px;
+}
+
+/* Minimaliste Bleu Foncé */
+.root.minimaliste-bleu-fonce .panel-choix-carte {
+    -fx-background-color: #1E1E1E;
+    -fx-padding: 5px;
+}
+
+/* Minimaliste Vert Clair */
+.root.minimaliste-vert-clair .panel-choix-carte {
+    -fx-background-color: #FCFEFC;
+    -fx-padding: 5px;
+}
+
+/* Minimaliste Vert Foncé */
+.root.minimaliste-vert-fonce .panel-choix-carte {
+    -fx-background-color: #1E1E1E;
+    -fx-padding: 5px;
+}
+
+/* Minimaliste Rouge Clair */
+.root.minimaliste-rouge-clair .panel-choix-carte {
+    -fx-background-color: #FEFCFC;
+    -fx-padding: 5px;
+}
+
+/* Minimaliste Rouge Foncé */
+.root.minimaliste-rouge-fonce .panel-choix-carte {
+    -fx-background-color: #1E1E1E;
+    -fx-padding: 5px;
+}
+
+/* Minimaliste Mauve Clair */
+.root.minimaliste-mauve-clair .panel-choix-carte {
+    -fx-background-color: #FEFCFE;
+    -fx-padding: 5px;
+}
+
+/* Minimaliste Mauve Foncé */
+.root.minimaliste-mauve-fonce .panel-choix-carte {
+    -fx-background-color: #1E1E1E;
+    -fx-padding: 5px;
+}
+
+/* ===== TitledPane - Espacement contenu ===== */
+/* Ajoute un espacement entre l'en-tête et le contenu de tous les panels */
+.titled-pane {
+    -fx-margin-bottom: 10px !important;
+}
+
+/* Force un padding-top sur les AnchorPane dans les TitledPane */
+/* Car certains utilisent du positionnement absolu qui ignore le padding du parent */
+.titled-pane > .content > .anchor-pane,
+.titled-pane .anchor-pane {
+    -fx-padding: 10 5 5 5 !important;
+}
+
+/* Alternative: ajouter un translate-y pour décaler le contenu vers le bas */
+.titled-pane > .content > * {
+    -fx-translate-y: 10 !important;
+}
+
 /* ===== En-têtes des panels d'outils - Style Universel ===== */
 
 /* État neutre / désactivé */

@@ -274,7 +274,9 @@
             const markerId = markerIdCounter++;
             
             const markerOptions = {
-                title: title || ''
+                title: title || '',
+                draggable: true,  // 🔧 MARQUEUR DRAGGABLE
+                autoPan: true
             };
             
             // Icône personnalisée si fournie
@@ -288,6 +290,19 @@
             }
             
             const marker = L.marker([lat, lng], markerOptions).addTo(map);
+            
+            // 🔧 Événement de drag pour notifier Java
+            marker.on('dragend', function(event) {
+                const position = marker.getLatLng();
+                console.log('📍 Marqueur ' + markerId + ' déplacé:', position.lat, position.lng);
+                
+                // Notifier Java des nouvelles coordonnées
+                if (window.javafx) {
+                    window.javafx.majMarqueur(markerId, position.lng, position.lat);
+                } else if (window.javaConnector) {
+                    window.javaConnector.majMarqueur(markerId, position.lng, position.lat);
+                }
+            });
             
             // Tooltip (survol)
             if (title) {
@@ -736,19 +751,40 @@
         /**
          * Ajoute un marqueur (compatibilité OpenLayers)
          */
+        /**
+         * Ajoute un marqueur draggable (compatibilité OpenLayers)
+         */
         function ajouteMarqueur(numeroMarqueur, longitude, latitude, contenuPopup) {
             if (!map) {
                 console.warn('⚠️ Carte non initialisée pour ajouteMarqueur');
                 return;
             }
             
-            const marker = L.marker([latitude, longitude]).addTo(map);
+            // Créer un marqueur DRAGGABLE
+            const marker = L.marker([latitude, longitude], {
+                draggable: true,
+                autoPan: true
+            }).addTo(map);
+            
+            // Événement de drag pour mettre à jour les coordonnées
+            marker.on('dragend', function(event) {
+                const position = marker.getLatLng();
+                console.log('📍 Marqueur déplacé:', position.lat, position.lng);
+                
+                // Notifier Java des nouvelles coordonnées
+                if (window.javafx) {
+                    window.javafx.majMarqueur(numeroMarqueur, position.lng, position.lat);
+                } else if (window.javaConnector) {
+                    window.javaConnector.majMarqueur(numeroMarqueur, position.lng, position.lat);
+                }
+            });
             
             if (contenuPopup) {
                 marker.bindPopup(contenuPopup);
             }
             
             marqueursCompat[numeroMarqueur] = marker;
+            console.log('✅ Marqueur ' + numeroMarqueur + ' ajouté en mode draggable');
         }
         
         /**
@@ -803,11 +839,49 @@
         }
         
         /**
-         * Recherche une adresse (compatibilité OpenLayers - fonction vide pour l'instant)
+         * Recherche une adresse avec Nominatim (geocoding)
+         */
+        function allerAdresse(adresse) {
+            console.log('🔍 Recherche adresse:', adresse);
+            
+            // Supprimer le marqueur existant (numéro 0)
+            enleveMarqueur(0);
+            
+            // Geocoding avec Nominatim (OpenStreetMap)
+            const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(adresse)}&limit=1`;
+            
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.length > 0) {
+                        const result = data[0];
+                        const lat = parseFloat(result.lat);
+                        const lng = parseFloat(result.lon);
+                        
+                        console.log('✅ Adresse trouvée:', result.display_name);
+                        console.log('📍 Coordonnées:', lat, lng);
+                        
+                        // Centrer la carte
+                        map.setView([lat, lng], 17);
+                        
+                        // Créer un nouveau marqueur draggable (numéro 0)
+                        ajouteMarqueur(0, lng, lat, `<b>${result.display_name}</b>`);
+                    } else {
+                        console.warn('❌ Adresse non trouvée');
+                        alert('Adresse non trouvée: ' + adresse);
+                    }
+                })
+                .catch(error => {
+                    console.error('❌ Erreur geocoding:', error);
+                    alert('Erreur lors de la recherche: ' + error.message);
+                });
+        }
+        
+        /**
+         * Recherche une adresse (compatibilité OpenLayers - ancienne fonction)
          */
         function chercheAdresse(adresse, zoom) {
-            console.log("Recherche d'adresse non implémentée dans Leaflet:", adresse);
-            // TODO: Implémenter avec Nominatim si nécessaire
+            allerAdresse(adresse);
         }
         
         /**

@@ -203,6 +203,12 @@ public class ReadWriteImage {
         BufferedImage imageRGBSharpen = null;
         IIOImage iioImage = null;
         BufferedImage image = SwingFXUtils.fromFXImage(img, null); // Get buffered image.
+        
+        // Vérification que l'image a été correctement chargée
+        if (image == null || image.getWidth() == 0 || image.getHeight() == 0) {
+            System.err.println("⚠️ writeJpeg: image invalide ou dimensions nulles pour " + destFile);
+            return; // On ignore cette image plutôt que de crasher
+        }
 
         BufferedImage imageRGB = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.OPAQUE); // Remove alpha-channel from buffered image.
 

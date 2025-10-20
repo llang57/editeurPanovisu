@@ -33,7 +33,7 @@
             color: #00ff00;
             font-family: 'Courier New', monospace;
             font-size: 11px;
-            display: none; /* MASQUÉ PAR DÉFAUT */
+            display: none; /* MASQUÉ EN PRODUCTION */
             padding: 10px;
             overflow-y: auto;
             z-index: 10000;
@@ -70,7 +70,7 @@
         /* Map container */
         #map {
             position: absolute;
-            top: 0; /* Ajusté car le debug panel est masqué */
+            top: 0; /* Plein écran, debug panel masqué */
             left: 0;
             right: 0;
             bottom: 0;
@@ -276,6 +276,28 @@
             }
         }
         
+        /**
+         * Récupère la position d'un marqueur par son index
+         * @param {number} index - Index du marqueur dans le tableau markers
+         * @returns {Object|null} - Objet {lat, lng} ou null si le marqueur n'existe pas
+         */
+        function getMarkerPosition(index) {
+            try {
+                if (index >= 0 && index < markers.length && markers[index]) {
+                    const position = markers[index].getLatLng();
+                    updateDebug(`📍 Position marqueur ${index}: [${position.lat}, ${position.lng}]`, 'info');
+                    return {lat: position.lat, lng: position.lng};
+                } else {
+                    updateDebug(`⚠️ Marqueur ${index} non trouvé`, 'warn');
+                    return null;
+                }
+            } catch (error) {
+                updateDebug('❌ Erreur getMarkerPosition: ' + error.message, 'error');
+                console.error('getMarkerPosition error:', error);
+                return null;
+            }
+        }
+        
         // Fonction ajouteMarqueur pour compatibilité Java
         // Paramètres: index, longitude, latitude, htmlContent
         function ajouteMarqueur(index, lng, lat, htmlContent) {
@@ -299,8 +321,24 @@
                     markers[index] = null;
                 }
                 
-                // Créer le nouveau marqueur avec les coordonnées correctes
-                const marker = L.marker([lat, lng]);
+                // Créer le nouveau marqueur DRAGGABLE avec les coordonnées correctes
+                const marker = L.marker([lat, lng], {
+                    draggable: true,
+                    autoPan: true
+                });
+                
+                // Événement de drag pour mettre à jour les coordonnées
+                marker.on('dragend', function(event) {
+                    const position = marker.getLatLng();
+                    updateDebug(`📍 Marqueur ${index} déplacé: ${position.lat}, ${position.lng}`, 'info');
+                    
+                    // Notifier Java des nouvelles coordonnées
+                    if (window.javafx) {
+                        window.javafx.majMarqueur(index, position.lng, position.lat);
+                    } else if (window.javaConnector) {
+                        window.javaConnector.majMarqueur(index, position.lng, position.lat);
+                    }
+                });
                 
                 // Ajouter le popup HTML si fourni
                 if (htmlContent) {
@@ -321,6 +359,38 @@
             } catch (error) {
                 updateDebug('❌ Erreur ajouteMarqueur: ' + error.message, 'error');
                 console.error('ajouteMarqueur error:', error);
+            }
+        }
+        
+        /**
+         * Supprime un marqueur par son index
+         */
+        function enleveMarqueur(index) {
+            try {
+                if (!map) {
+                    updateDebug('enleveMarqueur: carte non initialisée', 'warn');
+                    return;
+                }
+                
+                // Supprimer le marqueur de recherche (searchMarker) s'il existe
+                if (searchMarker) {
+                    updateDebug(`🗑️ Suppression searchMarker`, 'info');
+                    map.removeLayer(searchMarker);
+                    searchMarker = null;
+                    currentMarker = null;
+                }
+                
+                // Supprimer le marqueur à l'index spécifié
+                if (index >= 0 && index < markers.length && markers[index]) {
+                    updateDebug(`🗑️ Suppression marqueur[${index}]`, 'info');
+                    map.removeLayer(markers[index]);
+                    markers[index] = null;
+                }
+                
+                updateDebug(`✅ enleveMarqueur[${index}] terminé`, 'success');
+            } catch (error) {
+                updateDebug('❌ Erreur enleveMarqueur: ' + error.message, 'error');
+                console.error('enleveMarqueur error:', error);
             }
         }
         
@@ -413,6 +483,10 @@
                     return;
                 }
                 updateDebug('✅ Carte initialisée', 'success');
+                
+                // Supprimer le marqueur existant (index 0)
+                updateDebug('🗑️ Suppression marqueur existant (index 0)...', 'info');
+                enleveMarqueur(0);
                 
                 // Use LocationIQ geocoding service (free tier: 5000 requests/day)
                 // Clé API gratuite pour démo - Remplacer par votre propre clé en production
@@ -557,6 +631,96 @@
                 return "OpenStreetMap|*Satellite";
             }
         }
+        
+        // ═══════════════════════════════════════════════════════════════════
+        // RADAR (Champ de vision)
+        // ═══════════════════════════════════════════════════════════════════
+        
+        let radarLayer = null; // Layer pour le radar (champ de vision)
+        
+        /**
+         * Affiche un radar (champ de vision) sur la carte
+         * @param {number} lat - Latitude du centre
+         * @param {number} lng - Longitude du centre
+         * @param {number} angle - Angle de direction en degrés (0 = Nord)
+         * @param {number} fov - Ouverture du champ de vision en degrés
+         * @param {number} radius - Rayon en mètres
+         * @param {string} strokeColor - Couleur de la bordure (#RRGGBB)
+         * @param {string} fillColor - Couleur de remplissage (#RRGGBB)
+         * @param {number} opacity - Opacité (0-1)
+         */
+        function afficheRadar(lat, lng, angle, fov, radius, strokeColor, fillColor, opacity) {
+            updateDebug(`📡 afficheRadar(${lat}, ${lng}, angle=${angle}°, FOV=${fov}°, radius=${radius}m)`, 'info');
+            
+            try {
+                // Retirer l'ancien radar si existant
+                retireRadar();
+                
+                // Convertir l'angle (0° = Nord) en radians
+                const angleRad = (angle - 90) * Math.PI / 180; // -90 car 0° = Est en math
+                const fovRad = fov * Math.PI / 180;
+                
+                // Calculer les angles de début et fin de l'arc
+                const startAngle = angleRad - fovRad / 2;
+                const endAngle = angleRad + fovRad / 2;
+                
+                // Créer les points de l'arc
+                const points = [[lat, lng]]; // Commencer au centre
+                
+                // Nombre de segments pour l'arc
+                const segments = Math.max(20, Math.ceil(fov / 5));
+                
+                // Générer les points de l'arc
+                for (let i = 0; i <= segments; i++) {
+                    const currentAngle = startAngle + (endAngle - startAngle) * i / segments;
+                    
+                    // Calculer la distance en degrés (approximation simple)
+                    const radiusInDegrees = radius / 111320; // ~111320m par degré de latitude
+                    
+                    const pointLat = lat + radiusInDegrees * Math.sin(currentAngle);
+                    const pointLng = lng + radiusInDegrees * Math.cos(currentAngle) / Math.cos(lat * Math.PI / 180);
+                    
+                    points.push([pointLat, pointLng]);
+                }
+                
+                // Fermer le polygone en revenant au centre
+                points.push([lat, lng]);
+                
+                // Créer le polygone Leaflet
+                radarLayer = L.polygon(points, {
+                    color: strokeColor,
+                    fillColor: fillColor,
+                    fillOpacity: opacity,
+                    weight: 2,
+                    interactive: false // Le radar ne doit pas intercepter les clics
+                }).addTo(map);
+                
+                updateDebug(`✅ Radar affiché avec ${segments} segments`, 'success');
+                
+            } catch (error) {
+                updateDebug(`❌ Erreur afficheRadar: ${error.message}`, 'error');
+                console.error(error);
+            }
+        }
+        
+        /**
+         * Retire le radar de la carte
+         */
+        function retireRadar() {
+            if (radarLayer) {
+                try {
+                    map.removeLayer(radarLayer);
+                    radarLayer = null;
+                    updateDebug('✅ Radar retiré', 'info');
+                } catch (error) {
+                    updateDebug(`❌ Erreur retireRadar: ${error.message}`, 'error');
+                }
+            }
+        }
+        
+        // ═══════════════════════════════════════════════════════════════════
+        // INITIALISATION
+        // ═══════════════════════════════════════════════════════════════════
         
         // Initialize when DOM is ready
         updateDebug('[1/2] DOM chargé, initialisation Leaflet...', 'info');

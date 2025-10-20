@@ -281,15 +281,49 @@
         
         /**
          * Obtient le centre actuel de la carte.
-         * @returns {Object} {lat, lng, zoom}
+         * @returns {string} Format "lat;lng" pour compatibilité Java
          */
         window.getCenter = function() {
             const center = map.getCenter();
-            return {
-                lat: center.lat,
-                lng: center.lng,
-                zoom: map.getZoom()
-            };
+            return center.lat + ';' + center.lng;
+        };
+        
+        /**
+         * Centre la carte (alias pour compatibilité).
+         * @param {number} lat - Latitude
+         * @param {number} lng - Longitude
+         * @param {number} zoom - Niveau de zoom
+         */
+        window.centerOn = function(lat, lng, zoom) {
+            map.setView([lat, lng], zoom || map.getZoom());
+        };
+        
+        /**
+         * Change le niveau de zoom.
+         * @param {number} zoom - Niveau de zoom
+         */
+        window.choixZoom = function(zoom) {
+            map.setZoom(zoom);
+        };
+        
+        /**
+         * Récupère les noms des couches disponibles.
+         * @returns {string} Liste séparée par | avec * devant la carte active
+         */
+        window.getNomsLayers = function() {
+            const currentType = document.getElementById('mapType').value;
+            const layers = [];
+            
+            // Marquer la couche active avec *
+            if (currentType === 'osm') {
+                layers.push('*OpenStreetMap');
+                layers.push('Satellite');
+            } else {
+                layers.push('OpenStreetMap');
+                layers.push('*Satellite');
+            }
+            
+            return layers.join('|');
         };
         
         /**

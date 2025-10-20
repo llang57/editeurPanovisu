@@ -18,7 +18,7 @@
 }*/
 .context-menu-list {
     margin:0; 
-    padding:0;
+    padding: 5px 0;
     
     min-width: 120px;
     max-width: 250px;
@@ -26,8 +26,10 @@
     position: absolute;
     list-style-type: none;
     
-    border: 1px solid #DDD;
-    background: #EEE;
+    border: 2px solid #FFF;
+    background: rgba(0, 0, 0, 0.5) !important;
+    border-radius: 8px;
+    overflow: hidden;
     
     -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
        -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
@@ -42,10 +44,11 @@
 }
 
 .context-menu-item {
-    padding: 2px 4px 4px 24px;
+    padding: 6px 4px 6px 24px;
     margin-left: 25px;
-    border-left: 1px solid #aaa;
-    background-color: #EEE;
+    border-left: 1px solid #666;
+    background-color: transparent !important;
+    color: #FFF;
     position: relative;
     -webkit-user-select: none;
        -moz-user-select: -moz-none;
@@ -55,7 +58,7 @@
 
 .context-menu-separator {
     padding-bottom:0;
-    border-bottom: 1px solid #DDD;
+    border-bottom: 1px solid #555;
 }
 
 .context-menu-item > label > input,
@@ -68,17 +71,18 @@
 
 .context-menu-item.hover {
     cursor: pointer;
-    background-color: #39F;
+    background-color: rgba(57, 153, 255, 0.6) !important;
+    border-radius: 4px;
 }
 
 .context-menu-item.disabled {
-    color: #666;
+    color: #888;
 }
 
 .context-menu-input.hover,
 .context-menu-item.disabled.hover {
     cursor: default;
-    background-color: #EEE;
+    background-color: transparent !important;
 }
 
 .context-menu-submenu:after {

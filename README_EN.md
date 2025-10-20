@@ -51,6 +51,51 @@ PanoVisu combines power, simplicity, and freedom to offer a complete and free so
   - **Equi→Cube conversion**: 6 faces generation 1000×1000 in ~125ms
   - Total processing < 500ms for maximum quality
 
+### 🗺️ Maps and Geolocation Refactoring (Builds 3376-3416)
+- **🌐 Migration to Leaflet**:
+  - Replaced NavigateurCarteGluon with **NavigateurCarte** (pure Leaflet)
+  - **Lazy loading** architecture with `onMapReady` callback to avoid JavaFX bugs
+  - HTML loading via `load()` preserving relative resource paths
+  - Dynamic injection of LocationIQ API key after initialization
+- **📍 Complete management API**:
+  - **Draggable markers**: mouse-draggable with automatic update
+  - **Radar (field of view)**: configurable size 0-240m (×3 vs old 0-80m)
+  - **Nominatim geocoding**: address search with OpenStreetMap results
+  - **Methods**: `ajouteMarqueur()`, `retireMarqueurs()`, `allerCoordonnees()`, `afficheRadar()`
+- **🔧 Critical fixes**:
+  - Fixed longitude/latitude inversion in `CoordonneesGeographiques` constructor
+  - Distinction between `recupereCoordonnees(0)` (marker) and `recupereCoordonnees()` (center)
+  - Asynchronous callback `setOnMapReady()` to avoid "texture is null" (JavaFX 19 bug)
+  - `miseAJourRadarSeul()` method to optimize partial updates
+
+### 🎨 Interface and Visualization (Builds 3376-3416)
+- **📐 Viewport size adaptation**:
+  - Intelligent calculation of container/image ratio for correct extraction
+  - Replaced hardcoded dimensions with `getVisualisationWidth()`/`getVisualisationHeight()`
+  - Viewport adjusted dynamically according to actual dimensions
+- **📱 Modernized social networks**:
+  - Replaced Google+/Facebook with **Meta** (unified platform)
+  - Removed obsolete references to Google+
+  - Streamlined interface with 3 options: Twitter, Meta, Email
+- **🎛️ Enhanced custom bar**:
+  - **Configurable opacity**: slider 0-1 with hover effect (opacity → 1.0 on hover)
+  - Remote control and navigation bar with adjustable transparency
+  - Improved visibility while preserving immersion
+
+### 🛡️ Fixes and Stability (Builds 3376-3416)
+- **🖼️ Invalid image protection**:
+  - `BufferedImage` verification before JPEG writing (slideshow)
+  - Skip corrupted images instead of crashing the application
+  - Warning message in console with filename
+- **🎯 UI positioning**:
+  - Fixed interface element offsets (labels, buttons, controls)
+  - Consistent spacing via `PANEL_TOP_MARGIN` and `PANEL_ELEMENT_SPACING`
+  - 3-zone architecture for geolocation: Header / Map / Control panel
+- **⏱️ Asynchronous management**:
+  - Lazy loading map (on first geolocation click)
+  - `carteEnCoursDeChargement` flag to avoid multiple re-configurations
+  - WebEngine state listeners for Java/JavaScript synchronization
+
 ### ⚡ GPU Acceleration (OpenCL)
 - **🎮 GPU Processing**: Hardware acceleration for all image processing operations
   - **Panoramic transformations**: Equirectangular ↔ Cube conversion **3.3× faster**
