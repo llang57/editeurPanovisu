@@ -92,26 +92,39 @@ public class PanoramicCube extends Group {
      * @param panoramicImage L'image panoramique équirectangulaire
      */
     public void setPanoramicImage(Image panoramicImage) {
+        setPanoramicImage(panoramicImage, 1500, 750, 500);
+    }
+    
+    /**
+     * Applique une image panoramique équirectangulaire sur le cube avec qualité configurable
+     * 
+     * @param panoramicImage L'image panoramique équirectangulaire
+     * @param equiWidth Largeur de l'image équirectangulaire intermédiaire
+     * @param equiHeight Hauteur de l'image équirectangulaire intermédiaire
+     * @param faceSize Taille des faces du cube (pixels)
+     */
+    public void setPanoramicImage(Image panoramicImage, int equiWidth, int equiHeight, int faceSize) {
         if (panoramicImage == null) {
             return;
         }
         
         try {
             // Redimensionner l'image au ratio 2:1 (obligatoire pour equi2cube)
-            Image resizedImage = resizeToEquirectangular(panoramicImage, 1500, 750);
+            Image resizedImage = resizeToEquirectangular(panoramicImage, equiWidth, equiHeight);
             
             // Convertir l'image équirectangulaire en 6 faces de cube
             // Order equi2cube: [0]=Front, [1]=Behind, [2]=Right, [3]=Left, [4]=Top, [5]=Bottom
-            Image[] cubeFaces = TransformationsPanoramique.equi2cubeAuto(resizedImage, 500);
+            Image[] cubeFaces = TransformationsPanoramique.equi2cubeAuto(resizedImage, faceSize);
             
             // Mapper les faces correctement avec selfIlluminationMap pour éliminer les ombres
             // Notre ordre: [0]=FRONT, [1]=BACK, [2]=LEFT, [3]=RIGHT, [4]=TOP, [5]=BOTTOM
+            // ATTENTION: equi2cube inverse TOP et BOTTOM, donc on inverse ici
             materials[FRONT].setSelfIlluminationMap(cubeFaces[0]);   // Front -> Front
             materials[BACK].setSelfIlluminationMap(cubeFaces[1]);    // Behind -> Back
             materials[LEFT].setSelfIlluminationMap(cubeFaces[3]);    // Left -> Left
             materials[RIGHT].setSelfIlluminationMap(cubeFaces[2]);   // Right -> Right
-            materials[TOP].setSelfIlluminationMap(cubeFaces[4]);     // Top -> Top
-            materials[BOTTOM].setSelfIlluminationMap(cubeFaces[5]);  // Bottom -> Bottom
+            materials[TOP].setSelfIlluminationMap(cubeFaces[5]);     // Bottom -> Top (inversé)
+            materials[BOTTOM].setSelfIlluminationMap(cubeFaces[4]);  // Top -> Bottom (inversé)
             
             // Désactiver diffuse et spéculaire pour éliminer totalement les ombres
             for (int i = 0; i < 6; i++) {

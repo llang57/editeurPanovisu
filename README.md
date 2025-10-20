@@ -28,6 +28,29 @@ PanoVisu combine puissance, simplicité et liberté pour offrir une solution com
 
 **Quoi de neuf ?**
 
+### 🎯 Visualiseur Panoramique 3D Amélioré (Build 3417 - 20 oct. 2025)
+- **📱 Interface modernisée avec icônes** :
+  - Remplacement des boutons texte par des **icônes PNG intuitives** (home, photo, boussole, œil)
+  - **Adaptation automatique au thème** : icônes blanches pour thèmes sombres, noires pour thèmes clairs
+  - **Tooltips informatifs** : aide contextuelle au survol de chaque bouton
+  - Boutons avec **effet de survol** : opacité 0.6 → 1.0 pour retour visuel
+  - **Positionnement optimisé** : labels en haut, visualiseur 3D au centre, 5 boutons en bas
+- **🖼️ Mode plein écran haute résolution** :
+  - **Fenêtre popup dédiée** (1200×780) au lieu du plein écran système
+  - **Résolution doublée** : charge l'image originale sans réduction (iRapport=1 au lieu de 2)
+  - **Qualité cube 4× supérieure** : faces de **1000×1000 pixels** (au lieu de 500×500)
+  - Image équirectangulaire intermédiaire de **3000×1500** (au lieu de 1500×750)
+  - **Préservation parfaite** : image 8192×4096 → rendu 8192×4096 (vs 4096×1024 en mode normal)
+  - **Mode haute qualité configurable** : flag activable pour affichages haute résolution
+- **🎨 Gestion des erreurs améliorée** :
+  - Vérification de l'existence des fichiers avant chargement
+  - **Logs détaillés** : dimensions d'image, chemins de fichiers, performances GPU
+  - **Espacement optimal** : hauteur calculée avec marge de 100px pour éviter les boutons coupés
+- **⚡ Performances GPU** :
+  - **Redimensionnement bicubique** : 8192×4096 → 3000×1500 en ~350ms
+  - **Conversion Equi→Cube** : génération 6 faces 1000×1000 en ~125ms
+  - Traitement total < 500ms pour qualité maximale
+
 ### ⚡ Accélération GPU (OpenCL)
 - **🎮 Traitement GPU** : Accélération matérielle pour toutes les opérations de traitement d'images
   - **Transformations panoramiques** : Conversion Équirectangulaire ↔ Cube **3.3× plus rapide**

@@ -28,6 +28,29 @@ PanoVisu combines power, simplicity, and freedom to offer a complete and free so
 
 **What's new?**
 
+### 🎯 Enhanced 3D Panoramic Viewer (Build 3417 - Oct 20, 2025)
+- **📱 Modernized interface with icons**:
+  - Replaced text buttons with **intuitive PNG icons** (home, photo, compass, eye)
+  - **Automatic theme adaptation**: white icons for dark themes, black for light themes
+  - **Informative tooltips**: contextual help on hover for each button
+  - Buttons with **hover effect**: opacity 0.6 → 1.0 for visual feedback
+  - **Optimized positioning**: labels at top, 3D viewer in center, 5 buttons at bottom
+- **🖼️ High-resolution fullscreen mode**:
+  - **Dedicated popup window** (1200×780) instead of system fullscreen
+  - **Doubled resolution**: loads original image without reduction (iRapport=1 instead of 2)
+  - **4× superior cube quality**: **1000×1000 pixel** faces (instead of 500×500)
+  - Intermediate equirectangular image of **3000×1500** (instead of 1500×750)
+  - **Perfect preservation**: 8192×4096 image → 8192×4096 rendering (vs 4096×1024 in normal mode)
+  - **Configurable high-quality mode**: activatable flag for high-resolution displays
+- **🎨 Enhanced error handling**:
+  - File existence verification before loading
+  - **Detailed logs**: image dimensions, file paths, GPU performance
+  - **Optimal spacing**: height calculated with 100px margin to avoid cut-off buttons
+- **⚡ GPU Performance**:
+  - **Bicubic resizing**: 8192×4096 → 3000×1500 in ~350ms
+  - **Equi→Cube conversion**: 6 faces generation 1000×1000 in ~125ms
+  - Total processing < 500ms for maximum quality
+
 ### ⚡ GPU Acceleration (OpenCL)
 - **🎮 GPU Processing**: Hardware acceleration for all image processing operations
   - **Panoramic transformations**: Equirectangular ↔ Cube conversion **3.3× faster**

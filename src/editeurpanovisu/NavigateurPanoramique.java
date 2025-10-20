@@ -33,6 +33,7 @@ import javafx.scene.SnapshotParameters;
 import javafx.scene.SubScene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
@@ -114,7 +115,9 @@ public final class NavigateurPanoramique {
     private String nomFichierPanoramique = "";
     private int iChangeVignette = 0;
     private Image imgPanoramique;
-    private Button btnChoixNord, btnChoixVue, btnChoixVignette;
+    private Button btnChoixNord, btnChoixVue, btnChoixVignette, btnPleinEcran;
+    private boolean bPleinEcran = false;
+    private boolean hauteQualite = false; // Flag pour activer le rendu haute qualité
     private final PanoramicCube panoramicCube = new PanoramicCube();
     private final Group root = new Group(panoramicCube);
     private ResourceBundle rbLocalisation = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", EditeurPanovisu.getLocale());
@@ -389,24 +392,46 @@ public final class NavigateurPanoramique {
             // Labels d'affichage des coordonnées (style moderne flat design 2025)
             String labelStyleModerne = "-fx-background-color: rgba(255, 255, 255, 0.96); "
                     + "-fx-text-fill: #1A1A1A; "
-                    + "-fx-padding: 6 12 6 12; "
-                    + "-fx-font-size: 13px; "
+                    + "-fx-padding: 4 8 4 8; "
+                    + "-fx-font-size: 11px; "
                     + "-fx-font-weight: 500; "
                     + "-fx-font-family: 'Segoe UI', 'Roboto', system-ui; "
                     + "-fx-border-color: rgba(0, 0, 0, 0.10); "
                     + "-fx-border-width: 1; "
-                    + "-fx-background-radius: 6; "
-                    + "-fx-border-radius: 6; "
-                    + "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.12), 3, 0, 0, 1);";
+                    + "-fx-background-radius: 4; "
+                    + "-fx-border-radius: 4; "
+                    + "-fx-alignment: center; "
+                    + "-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.12), 2, 0, 0, 1);";
+            
+            // Largeur identique pour les 3 labels avec espacement
+            double labelWidth = (largeurImage - 20) / 3;  // 20px d'espacement total (3 x 5px + marges)
+            double espacementLabels = 5;
+            
             lblLongValue.setStyle(labelStyleModerne);
             lblLatValue.setStyle(labelStyleModerne);
             lblFovValue.setStyle(labelStyleModerne);
-            lblLongValue.setLayoutX(positX);
-            lblLongValue.setLayoutY(positY + 3);
-            lblLatValue.setLayoutX(positX + (largeurImage) / 3);
-            lblLatValue.setLayoutY(positY + 3);
-            lblFovValue.setLayoutX(positX + 2 * (largeurImage) / 3);
-            lblFovValue.setLayoutY(positY + 3);
+            
+            lblLongValue.setPrefWidth(labelWidth);
+            lblLatValue.setPrefWidth(labelWidth);
+            lblFovValue.setPrefWidth(labelWidth);
+            
+            lblLongValue.setMinWidth(labelWidth);
+            lblLatValue.setMinWidth(labelWidth);
+            lblFovValue.setMinWidth(labelWidth);
+            
+            lblLongValue.setMaxWidth(labelWidth);
+            lblLatValue.setMaxWidth(labelWidth);
+            lblFovValue.setMaxWidth(labelWidth);
+            
+            // Position Y plus haute pour éviter le chevauchement avec le visualiseur
+            double labelY = positY - 5;  // Remonté de 8px (était à positY + 3)
+            
+            lblLongValue.setLayoutX(positX + 5);
+            lblLongValue.setLayoutY(labelY);
+            lblLatValue.setLayoutX(positX + 5 + labelWidth + espacementLabels);
+            lblLatValue.setLayoutY(labelY);
+            lblFovValue.setLayoutX(positX + 5 + 2 * (labelWidth + espacementLabels));
+            lblFovValue.setLayoutY(labelY);
             
             bdfLong.setMinValue(new BigDecimal(-181));
             bdfLong.setMaxValue(new BigDecimal(181));
@@ -418,17 +443,22 @@ public final class NavigateurPanoramique {
             apPanorama.setPrefWidth(largeurImage + 2 * positX);
             apPanorama.setMinWidth(largeurImage + 2 * positX);
             apPanorama.setMaxWidth(largeurImage + 2 * positX);
-            apPanorama.setPrefHeight(hauteurImage + 2 * positY + 60);
-            apPanorama.setMinHeight(hauteurImage + 2 * positY + 60);
-            apPanorama.setMaxHeight(hauteurImage + 2 * positY + 60);
+            // Hauteur = labels (30px en haut) + viewer (hauteurImage) + espace (5px) + boutons (32px) + marge (positY)
+            apPanorama.setPrefHeight(hauteurImage + 2 * positY + 70);
+            apPanorama.setMinHeight(hauteurImage + 2 * positY + 70);
+            apPanorama.setMaxHeight(hauteurImage + 2 * positY + 70);
             //apPanorama.setStyle("-fx-background-color : #ccc;");
             apPanorama.getChildren().addAll(apNord, bdfLong, bdfLat, bdfFOV, lblLongValue, lblLatValue, lblFovValue);
             sscPanorama.setFocusTraversable(true);
 
-            Button btnHome = new Button("", new ImageView(new Image("file:" + getStrRepertAppli() + File.separator + "images/maison.png", 15, 15, true, true)));
-            btnHome.setPrefWidth(30);
-            btnHome.setPrefHeight(20);
-            btnHome.setMaxHeight(20);
+            // Détection du thème pour choisir les bonnes icônes
+            boolean estThemeSombre = ThemeManager.getCurrentTheme().isDark();
+            String suffixeIcone = estThemeSombre ? "_bl.png" : ".png";
+            
+            // Création des boutons avec icônes PNG adaptées au thème et tooltips
+            // Bouton Home - Retour à la vue initiale
+            Button btnHome = new Button("", new ImageView(new Image("file:" + getStrRepertAppli() + File.separator + "images/home" + suffixeIcone, 30, 30, true, true)));
+            btnHome.setTooltip(new Tooltip(rbLocalisation.getString("navigateur.retourVueInitiale")));
             btnHome.setOnMouseClicked(
                     (me) -> {
                         setLongitude(getChoixLongitude());
@@ -438,18 +468,122 @@ public final class NavigateurPanoramique {
                     }
             );
 
-            btnChoixVignette = new Button("Choix Vignette");
-            btnChoixNord = new Button(rbLocalisation.getString("navigateur.nord"));
-            btnChoixVue = new Button(rbLocalisation.getString("navigateur.choixPOV"));
-            btnChoixNord.setPrefWidth(90);
-            btnChoixVue.setPrefWidth(100);
-            btnChoixVignette.setPrefWidth(100);
+            // Bouton Vignette - Capture d'écran (icône PNG)
+            btnChoixVignette = new Button("", new ImageView(new Image("file:" + getStrRepertAppli() + File.separator + "images/photo" + suffixeIcone, 30, 30, true, true)));
+            btnChoixVignette.setTooltip(new Tooltip(rbLocalisation.getString("navigateur.capturerVignette")));
+            
+            // Bouton Nord - Définir le Nord (icône PNG)
+            btnChoixNord = new Button("", new ImageView(new Image("file:" + getStrRepertAppli() + File.separator + "images/boussole" + suffixeIcone, 30, 30, true, true)));
+            btnChoixNord.setTooltip(new Tooltip(rbLocalisation.getString("navigateur.nord")));
+            
+            // Bouton Vue - Point de vue par défaut (icône PNG)
+            btnChoixVue = new Button("", new ImageView(new Image("file:" + getStrRepertAppli() + File.separator + "images/oeil" + suffixeIcone, 30, 30, true, true)));
+            btnChoixVue.setTooltip(new Tooltip(rbLocalisation.getString("navigateur.choixPOV")));
+            
+            // Bouton Plein écran
+            btnPleinEcran = new Button("", new ImageView(new Image("file:" + getStrRepertAppli() + File.separator + "images/expand" + suffixeIcone, 30, 30, true, true)));
+            btnPleinEcran.setTooltip(new Tooltip(rbLocalisation.getString("navigateur.pleinEcran")));
+            
+            // Dimensions uniformes pour tous les boutons (carrés agrandis)
+            int btnSize = 40;
+            int btnHeight = 40;
+            
+            btnHome.setPrefWidth(btnSize);
+            btnHome.setPrefHeight(btnHeight);
+            btnHome.setMinWidth(btnSize);
+            btnHome.setMaxWidth(btnSize);
+            btnHome.setMinHeight(btnHeight);
+            btnHome.setMaxHeight(btnHeight);
+            
+            btnChoixVignette.setPrefWidth(btnSize);
+            btnChoixVignette.setPrefHeight(btnHeight);
+            btnChoixVignette.setMinWidth(btnSize);
+            btnChoixVignette.setMaxWidth(btnSize);
+            btnChoixVignette.setMinHeight(btnHeight);
+            btnChoixVignette.setMaxHeight(btnHeight);
+            
+            btnChoixNord.setPrefWidth(btnSize);
+            btnChoixNord.setPrefHeight(btnHeight);
+            btnChoixNord.setMinWidth(btnSize);
+            btnChoixNord.setMaxWidth(btnSize);
+            btnChoixNord.setMinHeight(btnHeight);
+            btnChoixNord.setMaxHeight(btnHeight);
+            
+            btnChoixVue.setPrefWidth(btnSize);
+            btnChoixVue.setPrefHeight(btnHeight);
+            btnChoixVue.setMinWidth(btnSize);
+            btnChoixVue.setMaxWidth(btnSize);
+            btnChoixVue.setMinHeight(btnHeight);
+            btnChoixVue.setMaxHeight(btnHeight);
+            
+            btnPleinEcran.setPrefWidth(btnSize);
+            btnPleinEcran.setPrefHeight(btnHeight);
+            btnPleinEcran.setMinWidth(btnSize);
+            btnPleinEcran.setMaxWidth(btnSize);
+            btnPleinEcran.setMinHeight(btnHeight);
+            btnPleinEcran.setMaxHeight(btnHeight);
+            
+            // Style des boutons adapté au thème (clair/sombre)
+            // Utilise la variable estThemeSombre déjà déclarée plus haut
+            
+            String btnStyle = estThemeSombre
+                    ? "-fx-background-color: rgba(40, 40, 40, 0.9); "
+                    + "-fx-border-color: rgba(255, 255, 255, 0.3); "
+                    + "-fx-border-width: 1px; "
+                    + "-fx-border-radius: 4px; "
+                    + "-fx-background-radius: 4px; "
+                    + "-fx-padding: 4px; "
+                    + "-fx-cursor: hand;"
+                    : "-fx-background-color: rgba(255, 255, 255, 0.9); "
+                    + "-fx-border-color: rgba(0, 0, 0, 0.2); "
+                    + "-fx-border-width: 1px; "
+                    + "-fx-border-radius: 4px; "
+                    + "-fx-background-radius: 4px; "
+                    + "-fx-padding: 4px; "
+                    + "-fx-cursor: hand;";
+            
+            String btnHoverStyle = estThemeSombre
+                    ? "-fx-background-color: rgba(60, 60, 60, 0.95); "
+                    + "-fx-border-color: rgba(255, 255, 255, 0.4); "
+                    + "-fx-border-width: 1px; "
+                    + "-fx-border-radius: 4px; "
+                    + "-fx-background-radius: 4px; "
+                    + "-fx-padding: 4px; "
+                    + "-fx-cursor: hand;"
+                    : "-fx-background-color: rgba(230, 230, 230, 0.95); "
+                    + "-fx-border-color: rgba(0, 0, 0, 0.3); "
+                    + "-fx-border-width: 1px; "
+                    + "-fx-border-radius: 4px; "
+                    + "-fx-background-radius: 4px; "
+                    + "-fx-padding: 4px; "
+                    + "-fx-cursor: hand;";
+            
+            // Appliquer le style à tous les boutons
+            btnHome.setStyle(btnStyle);
+            btnHome.setOnMouseEntered(e -> btnHome.setStyle(btnHoverStyle));
+            btnHome.setOnMouseExited(e -> btnHome.setStyle(btnStyle));
+            
+            btnChoixVignette.setStyle(btnStyle);
+            btnChoixVignette.setOnMouseEntered(e -> btnChoixVignette.setStyle(btnHoverStyle));
+            btnChoixVignette.setOnMouseExited(e -> btnChoixVignette.setStyle(btnStyle));
+            
+            btnChoixNord.setStyle(btnStyle);
+            btnChoixNord.setOnMouseEntered(e -> btnChoixNord.setStyle(btnHoverStyle));
+            btnChoixNord.setOnMouseExited(e -> btnChoixNord.setStyle(btnStyle));
+            
+            btnChoixVue.setStyle(btnStyle);
+            btnChoixVue.setOnMouseEntered(e -> btnChoixVue.setStyle(btnHoverStyle));
+            btnChoixVue.setOnMouseExited(e -> btnChoixVue.setStyle(btnStyle));
+            
+            btnPleinEcran.setStyle(btnStyle);
+            btnPleinEcran.setOnMouseEntered(e -> btnPleinEcran.setStyle(btnHoverStyle));
+            btnPleinEcran.setOnMouseExited(e -> btnPleinEcran.setStyle(btnStyle));
+            
             if (isbChoixHotSpot()) {
                 btnChoixVignette.setPrefWidth(0);
                 btnChoixVignette.setVisible(false);
                 btnChoixNord.setPrefWidth(0);
                 btnChoixNord.setVisible(false);
-
             }
             btnChoixVignette.setOnMouseClicked(
                     (me) -> {
@@ -457,15 +591,28 @@ public final class NavigateurPanoramique {
                     }
             );
 
-            btnChoixNord.setLayoutX(sscPanorama.getLayoutX() + sscPanorama.getWidth() - btnChoixNord.getPrefWidth());
-            btnChoixNord.setLayoutY(sscPanorama.getLayoutY() + sscPanorama.getHeight() + 5);
-            btnChoixVue.setLayoutX(btnChoixNord.getLayoutX() - btnChoixVue.getPrefWidth() - 5);
-            btnChoixVue.setLayoutY(sscPanorama.getLayoutY() + sscPanorama.getHeight() + 5);
-            btnChoixVignette.setLayoutX(btnChoixVue.getLayoutX() - btnChoixVignette.getPrefWidth() - 5);
-            btnHome.setLayoutX(btnChoixVignette.getLayoutX() - btnHome.getPrefWidth() - 5);
-            btnHome.setLayoutY(sscPanorama.getLayoutY() + sscPanorama.getHeight() + 2);
-            btnChoixVignette.setLayoutY(sscPanorama.getLayoutY() + sscPanorama.getHeight() + 5);
-            apPanorama.getChildren().addAll(btnHome, btnChoixVignette, btnChoixNord, btnChoixVue);
+            // Positionnement des 5 boutons de gauche à droite avec espacement de 5px
+            double btnY = sscPanorama.getLayoutY() + sscPanorama.getHeight() + 5;
+            double espacementBoutons = 5;
+            double btnStartX = positX + 5;
+            
+            btnHome.setLayoutX(btnStartX);
+            btnHome.setLayoutY(btnY);
+            
+            btnChoixVignette.setLayoutX(btnHome.getLayoutX() + btnSize + espacementBoutons);
+            btnChoixVignette.setLayoutY(btnY);
+            
+            btnChoixNord.setLayoutX(btnChoixVignette.getLayoutX() + btnSize + espacementBoutons);
+            btnChoixNord.setLayoutY(btnY);
+            
+            btnChoixVue.setLayoutX(btnChoixNord.getLayoutX() + btnSize + espacementBoutons);
+            btnChoixVue.setLayoutY(btnY);
+            
+            btnPleinEcran.setLayoutX(btnChoixVue.getLayoutX() + btnSize + espacementBoutons);
+            btnPleinEcran.setLayoutY(btnY);
+            
+            // Ajouter les 5 boutons
+            apPanorama.getChildren().addAll(btnChoixVignette, btnChoixNord, btnChoixVue, btnPleinEcran, btnHome);
             camera1 = addCamera(sscPanorama);
             affiche();
             sscPanorama.setOnScroll((event) -> {
@@ -490,6 +637,12 @@ public final class NavigateurPanoramique {
                 setChoixLatitude(getLatitude());
                 setChoixFov(getFov());
                 setImgVignetteHS(captureEcranHS());
+            });
+            btnPleinEcran.setOnAction((event) -> {
+                // Déclencher le changement d'état plein écran via PropertyChange
+                boolean ancienneValeur = this.bPleinEcran;
+                this.bPleinEcran = !this.bPleinEcran;
+                this.changeSupport.firePropertyChange("pleinEcran", ancienneValeur, this.bPleinEcran);
             });
             sscPanorama.setOnMousePressed((event) -> {
                 if (!bMouvement) {
@@ -678,7 +831,12 @@ public final class NavigateurPanoramique {
         apPanorama.setStyle("-fx-background-color :-fx-background");
         if (Platform.isSupported(ConditionalFeature.SCENE3D)) {
 
-            panoramicCube.setPanoramicImage(this.getImgPanoramique());
+            // Utiliser haute qualité si activé, sinon qualité standard
+            if (hauteQualite) {
+                panoramicCube.setPanoramicImage(this.getImgPanoramique(), 3000, 1500, 1000);
+            } else {
+                panoramicCube.setPanoramicImage(this.getImgPanoramique());
+            }
             sscPanorama = new SubScene(root, largeurImage, hauteurImage);
         }
 
@@ -697,6 +855,31 @@ public final class NavigateurPanoramique {
         this.setNomFichierPanoramique(strImagePanoramique);
         this.setImgPanoramique(imgPanoramique);
         panoramicCube.setPanoramicImage(imgPanoramique);
+    }
+
+    /**
+     * Active le mode haute qualité pour le rendu panoramique.
+     * Doit être appelé AVANT affichePano() pour être pris en compte.
+     * Utilise des paramètres optimisés pour les grandes résolutions d'affichage :
+     * - Image équirectangulaire intermédiaire : 3000x1500
+     * - Faces du cube : 1000x1000
+     */
+    public void setHauteQualite(boolean hauteQualite) {
+        this.hauteQualite = hauteQualite;
+    }
+    
+    /**
+     * Définit l'image panoramique avec une qualité haute résolution
+     * Utilise des paramètres optimisés pour les grandes résolutions d'affichage :
+     * - Image équirectangulaire intermédiaire : 3000x1500
+     * - Faces du cube : 1000x1000
+     * 
+     * @param imgPanoramique L'image panoramique haute résolution
+     */
+    public void setImagePanoraMiqueHauteQualite(Image imgPanoramique) {
+        this.hauteQualite = true;
+        this.setImgPanoramique(imgPanoramique);
+        panoramicCube.setPanoramicImage(imgPanoramique, 3000, 1500, 1000);
     }
 
     /**
@@ -930,5 +1113,12 @@ public final class NavigateurPanoramique {
      */
     public void setImgVignetteHS(Image imgVignetteHS) {
         this.imgVignetteHS = imgVignetteHS;
+    }
+
+    /**
+     * @return the btnPleinEcran
+     */
+    public Button getBtnPleinEcran() {
+        return btnPleinEcran;
     }
 }
