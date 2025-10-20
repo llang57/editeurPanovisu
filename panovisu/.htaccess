@@ -1,0 +1,80 @@
+# =========================================
+# Configuration Apache pour PanoVisu
+# Désactive toute optimisation/compression d'images
+# CRITICAL: Ce fichier doit être à la racine du dossier panovisu/
+# =========================================
+
+# Désactiver mod_pagespeed (Google PageSpeed)
+<IfModule pagespeed_module>
+    ModPagespeed off
+    ModPagespeedDisableFilters rewrite_images
+    ModPagespeedDisableFilters convert_jpeg_to_progressive
+    ModPagespeedDisableFilters recompress_jpeg
+    ModPagespeedDisableFilters resize_images
+</IfModule>
+
+# Désactiver CloudFlare Polish / Mirage
+<IfModule mod_headers.c>
+    Header set cf-polished "off"
+    Header set cf-bgj "off"
+    Header set cf-mirage "off"
+</IfModule>
+
+# Désactiver la compression des images JPEG
+<IfModule mod_headers.c>
+    <FilesMatch "\.(jpg|jpeg)$">
+        # Forcer le serveur à envoyer l'image telle quelle
+        Header set Cache-Control "public, max-age=31536000, immutable, no-transform"
+        Header unset Content-Encoding
+        Header unset Vary
+        Header set Accept-Ranges "bytes"
+        
+        # Désactiver toute transformation d'image
+        Header set X-Content-Type-Options "nosniff"
+        Header set X-UA-Compatible "IE=edge"
+        
+        # Headers anti-compression
+        Header set X-No-Compression "1"
+        Header set X-Original-Content "1"
+    </FilesMatch>
+</IfModule>
+
+# Désactiver la compression gzip pour les images
+<IfModule mod_deflate.c>
+    SetEnvIfNoCase Request_URI \.(jpg|jpeg|png|gif)$ no-gzip dont-vary
+</IfModule>
+
+# Types MIME corrects
+<IfModule mod_mime.c>
+    AddType image/jpeg .jpg .jpeg
+    AddType image/png .png
+    AddType application/javascript .js
+    AddType text/css .css
+</IfModule>
+
+# Désactiver toute optimisation d'image
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Bloquer les tentatives de redimensionnement automatique
+    RewriteCond %{QUERY_STRING} (width|height|resize|scale|thumbnail) [NC]
+    RewriteRule ^.*\.(jpg|jpeg|png)$ - [F,L]
+</IfModule>
+
+# Performances - mais sans altérer les images
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType text/css "access plus 1 month"
+</IfModule>
+
+# CORS pour les textures WebGL
+<IfModule mod_headers.c>
+    <FilesMatch "\.(jpg|jpeg|png|js)$">
+        Header set Access-Control-Allow-Origin "*"
+        Header set Access-Control-Allow-Methods "GET, OPTIONS"
+        Header set Access-Control-Allow-Headers "Content-Type"
+    </FilesMatch>
+</IfModule>

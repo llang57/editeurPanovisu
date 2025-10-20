@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnostic WebGL - PanoVisu</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+        .container {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #764ba2;
+            margin-top: 30px;
+        }
+        .section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .info-row:last-child {
+            border-bottom: none;
+        }
+        .label {
+            font-weight: bold;
+            color: #555;
+        }
+        .value {
+            color: #000;
+            font-family: 'Courier New', monospace;
+        }
+        .good { color: #28a745; font-weight: bold; }
+        .warning { color: #ffc107; font-weight: bold; }
+        .bad { color: #dc3545; font-weight: bold; }
+        .test-image {
+            margin: 20px 0;
+            border: 2px solid #ddd;
+            padding: 10px;
+            background: #f0f0f0;
+        }
+        canvas {
+            border: 1px solid #ccc;
+            display: block;
+            margin: 10px 0;
+        }
+        #imageTest {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Diagnostic WebGL & Textures - PanoVisu</h1>
+        <p>Ce diagnostic permet de vérifier les capacités de votre navigateur pour afficher correctement les panoramas.</p>
+
+        <div class="section">
+            <h2>📊 Capacités WebGL</h2>
+            <div id="webglInfo"></div>
+        </div>
+
+        <div class="section">
+            <h2>🖼️ Test de Chargement d'Image</h2>
+            <p>Vérifiez si les images sont chargées à leur résolution complète :</p>
+            <div class="test-image">
+                <div class="info-row">
+                    <span class="label">URL de test :</span>
+                    <input type="text" id="testImageUrl" style="width: 60%;" 
+                           placeholder="Entrez l'URL d'une image panoramique...">
+                    <button onclick="testImage()">Tester</button>
+                </div>
+                <div id="imageTestResult"></div>
+                <img id="imageTest" style="display:none;">
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🌐 Informations Réseau</h2>
+            <div id="networkInfo"></div>
+        </div>
+
+        <div class="section">
+            <h2>💾 Console de Logs</h2>
+            <div id="consoleOutput" style="background:#222; color:#0f0; padding:15px; font-family:monospace; max-height:300px; overflow-y:auto;"></div>
+        </div>
+    </div>
+
+    <script>
+        // Capturer les logs de la console
+        const originalLog = console.log;
+        const consoleOutput = document.getElementById('consoleOutput');
+        
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            const line = document.createElement('div');
+            line.textContent = args.join(' ');
+            consoleOutput.appendChild(line);
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        };
+
+        console.log('=== Démarrage du diagnostic ===');
+
+        // Test WebGL
+        function getWebGLInfo() {
+            const canvas = document.createElement('canvas');
+            const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+            
+            if (!gl) {
+                return { error: 'WebGL non disponible' };
+            }
+
+            const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+            const anisotropicExt = gl.getExtension('EXT_texture_filter_anisotropic') ||
+                                   gl.getExtension('WEBKIT_EXT_texture_filter_anisotropic') ||
+                                   gl.getExtension('MOZ_EXT_texture_filter_anisotropic');
+
+            const info = {
+                vendor: gl.getParameter(gl.VENDOR),
+                renderer: gl.getParameter(gl.RENDERER),
+                version: gl.getParameter(gl.VERSION),
+                shadingLanguageVersion: gl.getParameter(gl.SHADING_LANGUAGE_VERSION),
+                maxTextureSize: gl.getParameter(gl.MAX_TEXTURE_SIZE),
+                maxCubeMapTextureSize: gl.getParameter(gl.MAX_CUBE_MAP_TEXTURE_SIZE),
+                maxRenderbufferSize: gl.getParameter(gl.MAX_RENDERBUFFER_SIZE),
+                maxViewportDims: gl.getParameter(gl.MAX_VIEWPORT_DIMS),
+                maxTextureImageUnits: gl.getParameter(gl.MAX_TEXTURE_IMAGE_UNITS),
+                maxAnisotropy: anisotropicExt ? gl.getParameter(anisotropicExt.MAX_TEXTURE_MAX_ANISOTROPY_EXT) : 'Non supporté',
+                unmaskedVendor: debugInfo ? gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL) : 'Non disponible',
+                unmaskedRenderer: debugInfo ? gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL) : 'Non disponible'
+            };
+
+            console.log('WebGL Info:', info);
+            return info;
+        }
+
+        function displayWebGLInfo() {
+            const info = getWebGLInfo();
+            const container = document.getElementById('webglInfo');
+
+            if (info.error) {
+                container.innerHTML = `<div class="bad">❌ ${info.error}</div>`;
+                return;
+            }
+
+            let html = '';
+            
+            // Analyse de la qualité
+            const maxTextureSize = info.maxTextureSize;
+            const maxAnisotropy = info.maxAnisotropy;
+            
+            let textureQuality = maxTextureSize >= 16384 ? 'good' : (maxTextureSize >= 8192 ? 'warning' : 'bad');
+            let anisoQuality = maxAnisotropy >= 16 ? 'good' : (maxAnisotropy >= 8 ? 'warning' : 'bad');
+
+            const fields = [
+                { label: 'Fabricant GPU', value: info.vendor },
+                { label: 'Modèle GPU', value: info.renderer },
+                { label: 'GPU Réel', value: info.unmaskedRenderer },
+                { label: 'Version WebGL', value: info.version },
+                { label: 'Taille Texture Max', value: `${info.maxTextureSize}px`, class: textureQuality },
+                { label: 'Taille Cube Map Max', value: `${info.maxCubeMapTextureSize}px` },
+                { label: 'Anisotropie Max', value: info.maxAnisotropy, class: anisoQuality },
+                { label: 'Unités de Texture', value: info.maxTextureImageUnits },
+                { label: 'Viewport Max', value: `${info.maxViewportDims[0]} × ${info.maxViewportDims[1]}` }
+            ];
+
+            fields.forEach(field => {
+                const className = field.class || '';
+                html += `
+                    <div class="info-row">
+                        <span class="label">${field.label} :</span>
+                        <span class="value ${className}">${field.value}</span>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+
+            // Recommandations
+            if (maxTextureSize < 8192) {
+                console.log('⚠️ ATTENTION: Taille de texture maximale insuffisante (' + maxTextureSize + 'px)');
+                console.log('   Recommandation: Mettre à jour les pilotes graphiques');
+            }
+
+            if (maxAnisotropy < 8) {
+                console.log('⚠️ ATTENTION: Anisotropie maximale faible (' + maxAnisotropy + ')');
+                console.log('   Impact: Textures floues à angles obliques');
+            }
+        }
+
+        // Test de chargement d'image
+        function testImage() {
+            const url = document.getElementById('testImageUrl').value;
+            if (!url) {
+                alert('Veuillez entrer une URL d\'image');
+                return;
+            }
+
+            console.log('🔍 Test de chargement:', url);
+            
+            const img = document.getElementById('imageTest');
+            const result = document.getElementById('imageTestResult');
+            
+            result.innerHTML = '<p>⏳ Chargement en cours...</p>';
+            
+            img.onload = function() {
+                const actualWidth = img.naturalWidth;
+                const actualHeight = img.naturalHeight;
+                const displayWidth = img.width;
+                const displayHeight = img.height;
+                
+                console.log(`✅ Image chargée: ${actualWidth}×${actualHeight} (affichée: ${displayWidth}×${displayHeight})`);
+                
+                const quality = actualWidth >= 4096 ? 'good' : (actualWidth >= 2048 ? 'warning' : 'bad');
+                
+                let html = `
+                    <div class="info-row">
+                        <span class="label">Dimensions réelles :</span>
+                        <span class="value ${quality}">${actualWidth} × ${actualHeight} px</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Dimensions affichées :</span>
+                        <span class="value">${displayWidth} × ${displayHeight} px</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Taille fichier :</span>
+                        <span class="value" id="fileSize">Calcul en cours...</span>
+                    </div>
+                `;
+                
+                result.innerHTML = html;
+                img.style.display = 'block';
+                
+                // Obtenir la taille du fichier
+                fetch(url, { method: 'HEAD' })
+                    .then(response => {
+                        const size = response.headers.get('Content-Length');
+                        const sizeKB = Math.round(size / 1024);
+                        const sizeMB = (size / 1024 / 1024).toFixed(2);
+                        document.getElementById('fileSize').textContent = 
+                            size ? `${sizeMB} MB (${sizeKB} KB)` : 'Non disponible';
+                        console.log(`📦 Taille fichier: ${sizeMB} MB`);
+                    })
+                    .catch(err => {
+                        document.getElementById('fileSize').textContent = 'Non disponible (CORS)';
+                        console.log('⚠️ Impossible de récupérer la taille (CORS)');
+                    });
+            };
+            
+            img.onerror = function() {
+                console.log('❌ Erreur de chargement de l\'image');
+                result.innerHTML = '<p class="bad">❌ Erreur de chargement de l\'image (vérifier CORS ou URL)</p>';
+            };
+            
+            img.src = url;
+        }
+
+        // Informations réseau
+        function displayNetworkInfo() {
+            const container = document.getElementById('networkInfo');
+            const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+            
+            let html = `
+                <div class="info-row">
+                    <span class="label">User Agent :</span>
+                    <span class="value" style="font-size:11px;">${navigator.userAgent}</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Langue :</span>
+                    <span class="value">${navigator.language}</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Résolution écran :</span>
+                    <span class="value">${screen.width} × ${screen.height} (${window.devicePixelRatio}×)</span>
+                </div>
+            `;
+
+            if (connection) {
+                html += `
+                    <div class="info-row">
+                        <span class="label">Type de connexion :</span>
+                        <span class="value">${connection.effectiveType || connection.type || 'Inconnu'}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Downlink :</span>
+                        <span class="value">${connection.downlink ? connection.downlink + ' Mbps' : 'Non disponible'}</span>
+                    </div>
+                `;
+                
+                console.log('📶 Connexion:', connection.effectiveType, connection.downlink + ' Mbps');
+            }
+
+            container.innerHTML = html;
+        }
+
+        // Initialisation
+        displayWebGLInfo();
+        displayNetworkInfo();
+
+        console.log('=== Diagnostic terminé ===');
+        console.log('💡 Pour tester une image, entrez son URL et cliquez sur "Tester"');
+    </script>
+</body>
+</html>

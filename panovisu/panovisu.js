@@ -4250,6 +4250,19 @@ function panovisu(iNumPano) {
             loader = new THREE.TextureLoader();
 
             var nomimage = strPanoImage.split("/")[0] + "/niveau" + niveau + "/" + strPanoImage.split("/")[1];
+            
+            // Vérifier la taille réelle du fichier téléchargé
+            fetch(nomimage + ".jpg", { method: 'HEAD', cache: 'no-store' })
+                .then(response => {
+                    const contentLength = response.headers.get('Content-Length');
+                    const contentEncoding = response.headers.get('Content-Encoding');
+                    const sizeMB = contentLength ? (contentLength / 1024 / 1024).toFixed(2) : 'inconnu';
+                    console.log("📦 Niveau", niveau, "- Fichier téléchargé:", sizeMB, "MB", 
+                               contentEncoding ? "(Encodage: " + contentEncoding + ")" : "",
+                               "URL:", nomimage + ".jpg");
+                })
+                .catch(err => console.log("⚠️ Impossible de vérifier la taille du fichier niveau", niveau));
+            
             loader.load(nomimage + ".jpg", function (texture) {
                 iNbTextures++;
                 textures[iNbTextures] = texture;
@@ -4257,7 +4270,9 @@ function panovisu(iNumPano) {
                 textures[iNbTextures].minFilter = THREE.LinearMipmapLinearFilter;
                 textures[iNbTextures].magFilter = THREE.LinearFilter;
                 textures[iNbTextures].generateMipmaps = true;
-                textures[iNbTextures].anisotropy = 16; // Anisotropie maximale pour qualité optimale
+                var maxAniso = renderer ? renderer.capabilities.getMaxAnisotropy() : 4;
+                textures[iNbTextures].anisotropy = maxAniso;
+                console.log("📐 Niveau", niveau, "- Texture chargée:", texture.image.width + "x" + texture.image.height, "Anisotropy:", maxAniso);
                 if (texture.image.width <= maxTextureSize) {
                     var img = nomimage.split("/")[2];
                     var img2 = strPanoImage.split("/")[1];
@@ -4306,7 +4321,9 @@ function panovisu(iNumPano) {
                 textures[iNbTextures].minFilter = THREE.LinearMipmapLinearFilter;
                 textures[iNbTextures].magFilter = THREE.LinearFilter;
                 textures[iNbTextures].generateMipmaps = true;
-                textures[iNbTextures].anisotropy = 16; // Anisotropie maximale pour qualité optimale
+                var maxAniso = renderer ? renderer.capabilities.getMaxAnisotropy() : 4;
+                textures[iNbTextures].anisotropy = maxAniso;
+                console.log("📐 Niveau final - Texture:", texture.image.width + "x" + texture.image.height, "Anisotropy:", maxAniso);
                 if (texture.image.width <= maxTextureSize) {
                     var img = nomimage.split("/")[1];
                     var img2 = strPanoImage.split("/")[1];
@@ -4507,7 +4524,9 @@ function panovisu(iNumPano) {
                 textures[iNbTextures].minFilter = THREE.LinearMipmapLinearFilter;
                 textures[iNbTextures].magFilter = THREE.LinearFilter;
                 textures[iNbTextures].generateMipmaps = true;
-                textures[iNbTextures].anisotropy = 16; // Anisotropie maximale pour qualité optimale
+                var maxAniso = renderer ? renderer.capabilities.getMaxAnisotropy() : 4;
+                textures[iNbTextures].anisotropy = maxAniso;
+                console.log("📐 Sphere niveau 0 - Texture:", texture.image.width + "x" + texture.image.height, "Anisotropy:", maxAniso);
                 if (!renderer) {
                     // Créer le renderer seulement s'il n'existe pas encore
                     console.log("DEBUG initPanoSphere() - Création du renderer");
@@ -4546,12 +4565,16 @@ function panovisu(iNumPano) {
                 if (bWebGL) {
                     var webgl = renderer.getContext();
                     maxTextureSize = webgl.getParameter(webgl.MAX_TEXTURE_SIZE);
+                    var maxAnisotropy = renderer.capabilities.getMaxAnisotropy();
+                    console.log("🔍 WebGL Capabilities - MAX_TEXTURE_SIZE:", maxTextureSize, "MAX_ANISOTROPY:", maxAnisotropy);
                     if (estTactile()) {
                         maxTextureSize = 4096;
+                        console.log("📱 Device tactile détecté - maxTextureSize limité à 4096");
                     }
                 }
                 else {
                     maxTextureSize = 4096;
+                    console.log("⚠️ Mode Canvas - maxTextureSize = 4096");
                 }
                 iNbMateriaux++;
                 // MIGRATION THREE.JS R160: SRGBColorSpace gère correctement l'exposition
@@ -4614,7 +4637,9 @@ function panovisu(iNumPano) {
                 textures[iNbTextures].minFilter = THREE.LinearMipmapLinearFilter;
                 textures[iNbTextures].magFilter = THREE.LinearFilter;
                 textures[iNbTextures].generateMipmaps = true;
-                textures[iNbTextures].anisotropy = 16; // Anisotropie maximale pour qualité optimale
+                var maxAniso = renderer ? renderer.capabilities.getMaxAnisotropy() : 4;
+                textures[iNbTextures].anisotropy = maxAniso;
+                console.log("📐 Sphere sans MultiReso - Texture:", texture.image.width + "x" + texture.image.height, "Anisotropy:", maxAniso);
                 if (!renderer) {
                     // Créer le renderer seulement s'il n'existe pas encore
                     console.log("DEBUG initPanoSphere() sans MultiReso - Création du renderer");
@@ -4719,7 +4744,9 @@ function panovisu(iNumPano) {
         textures[iText].minFilter = THREE.LinearMipmapLinearFilter;
         textures[iText].magFilter = THREE.LinearFilter;
         textures[iText].generateMipmaps = true;
-        textures[iText].anisotropy = 16; // Anisotropie maximale pour qualité optimale
+        var maxAniso = renderer ? renderer.capabilities.getMaxAnisotropy() : 4;
+        textures[iText].anisotropy = maxAniso;
+        console.log("📦 Cube niveau", niveau, "- Anisotropy:", maxAniso);
         iNbMateriaux++;
         // MIGRATION THREE.JS R160: SRGBColorSpace gère correctement l'exposition
         materiaux[iNbMateriaux] = new THREE.MeshBasicMaterial({ 
@@ -4827,7 +4854,9 @@ function panovisu(iNumPano) {
         textures[iText].minFilter = THREE.LinearMipmapLinearFilter;
         textures[iText].magFilter = THREE.LinearFilter;
         textures[iText].generateMipmaps = true;
-        textures[iText].anisotropy = 16; // Anisotropie maximale pour qualité optimale
+        var maxAniso = renderer ? renderer.capabilities.getMaxAnisotropy() : 4;
+        textures[iText].anisotropy = maxAniso;
+        console.log("📦 Cube - Anisotropy:", maxAniso);
         iNbMateriaux++;
         // MIGRATION THREE.JS R160: SRGBColorSpace gère correctement l'exposition
         materiaux[iNbMateriaux] = new THREE.MeshBasicMaterial({ 
