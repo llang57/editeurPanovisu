@@ -7,7 +7,7 @@
 
     <groupId>fr.panovisu</groupId>
     <artifactId>editeurPanovisu</artifactId>
-    <version>3.3.1-SNAPSHOT</version>
+    <version>3.3.2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>editeurPanovisu</name>
@@ -497,7 +497,7 @@
                     
                     <!-- Chemin vers le JAR avec dépendances et ressources -->
                     <input>target/app-input</input>
-                    <mainJar>editeurPanovisu-3.3.1-SNAPSHOT.jar</mainJar>
+                    <mainJar>editeurPanovisu-3.3.2-SNAPSHOT.jar</mainJar>
                     <mainClass>editeurpanovisu.Launcher</mainClass>
                     
                     <!-- Utiliser le runtime Java complet au lieu de jlink -->

@@ -7,9 +7,9 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Version number (e.g., 3.3.1)'
+        description: 'Version number (e.g., 3.3.2)'
         required: true
-        default: '3.3.1'
+        default: '3.3.2'
 
 jobs:
   build-windows:
@@ -95,7 +95,7 @@ jobs:
       
       - name: 📦 Create macOS DMG
         run: |
-          APP_VERSION="${{ github.event.inputs.version || '3.3.1' }}"
+          APP_VERSION="${{ github.event.inputs.version || '3.3.2' }}"
           
           # Trouver le nom exact du JAR
           MAIN_JAR=$(ls target/editeurPanovisu-*-SNAPSHOT.jar | xargs basename)
@@ -176,7 +176,7 @@ jobs:
       
       - name: 📦 Create Debian Package (.deb)
         run: |
-          APP_VERSION="${{ github.event.inputs.version || '3.3.1' }}"
+          APP_VERSION="${{ github.event.inputs.version || '3.3.2' }}"
           
           # Trouver le nom exact du JAR
           MAIN_JAR=$(ls target/editeurPanovisu-*-SNAPSHOT.jar | xargs basename)
@@ -203,7 +203,7 @@ jobs:
       
       - name: 📦 Create RPM Package (.rpm)
         run: |
-          APP_VERSION="${{ github.event.inputs.version || '3.3.1' }}"
+          APP_VERSION="${{ github.event.inputs.version || '3.3.2' }}"
           
           # Trouver le nom exact du JAR
           MAIN_JAR=$(ls target/editeurPanovisu-*-SNAPSHOT.jar | xargs basename)
@@ -320,43 +320,64 @@ jobs:
           tag_name: ${{ steps.build_info.outputs.VERSION }}
           name: "EditeurPanovisu ${{ steps.build_info.outputs.VERSION }} - Build ${{ steps.build_info.outputs.BUILD_NUM }}"
           body: |
-            ## 🎨 EditeurPanovisu ${{ github.ref_name }} - Thèmes Minimalistes & Accélération GPU
+            ## � EditeurPanovisu ${{ github.ref_name }} - Qualité Images & Interface Améliorée
             
             **Build** : ${{ steps.build_info.outputs.BUILD_NUM }}  
-            **Priorité** : 🎨 Nouveaux thèmes + ⚡ Performance majeure
+            **Priorité** : 🖼️ Qualité panoramas + 🎯 Interface visualiseur + 🗺️ Refonte carte
             
-            ### 🎨 Nouveautés Build 3176 - Système de thèmes enrichi
+            ### 🖼️ Nouveautés v3.3.2 - Qualité Images Optimale en Ligne
             
-            **24 thèmes disponibles** (nouveaux en gras)
-            - 9 thèmes AtlantaFX (Primer Light/Dark, Nord Light/Dark, Cupertino Light/Dark, Dracula, Mocha, Gruvbox)
-            - 2 thèmes MaterialFX (Light/Dark)
-            - 2 thèmes FlatLaf (Light/Dark)
-            - 2 thèmes Legacy (Clair/Foncé)
-            - 2 thèmes Acidulés (Clair/Foncé)
-            - 2 thèmes Modernes (Clair/Foncé)
-            - **8 thèmes Minimalistes** :
-              - **Minimaliste Bleu 🔷🔹** (Clair/Foncé)
-              - **Minimaliste Vert 🟢🟩** (Clair/Foncé)
-              - **Minimaliste Rouge 🔴🟥** (Clair/Foncé)
-              - **Minimaliste Mauve 💜🟪** (Clair/Foncé)
+            **Résolution du problème de compression serveur** ✨
+            - ❌ **Problème résolu** : Images compressées 60× par le serveur (220kB au lieu de 13.4MB)
+            - ✅ **Solution complète** : Configuration .htaccess anti-compression automatique
+            - 📈 **Résultat** : Qualité parfaite identique local/en ligne
+            - ⚡ **Performance** : Chargement égal ou plus rapide grâce aux mipmaps GPU
             
-            **Icônes dynamiques colorées** 🎨
-            - Les icônes SVG prennent automatiquement la couleur du thème
-            - Icônes Glyph/Ikonli colorées via CSS
-            - Conversion PNG dynamique avec Apache Batik
+            **Optimisations WebGL** 🎮
+            - Filtrage trilinéaire (LinearMipmapLinearFilter) pour netteté à toutes distances
+            - Anisotropie dynamique basée sur capacités GPU (jusqu'à 16×)
+            - Mipmaps automatiques pour rendu optimal
+            - Détection compression temps réel avec logs détaillés
             
-            **Visibilité optimisée thèmes sombres** 🌓
-            - Contrôles éclaircis (checkboxes, radio, sliders, spinners, progressbars)
-            - Menus toujours blancs (normal, hover, dropdown)
-            - Contraste amélioré avec bordures renforcées
-            - Couleurs d'accent assombries (~15%) pour variantes foncées
+            **Qualité JPEG augmentée** 📸
+            - Panoramas équi : 70% → 90% (niveaux), 95% (principal)
+            - Panoramas cubes : 70% → 88% (niveaux), 92% (principal)
+            - Sharpening optimisé (0.15-0.2) pour netteté sans artefacts
             
-            ### ⚡ Nouveautés v3.3.0
+            **Outils de diagnostic inclus** 🛠️
+            - `diagnostic-webgl.html` : Test capacités GPU navigateur
+            - `test-compression.php` : Vérification compression serveur
+            - `.htaccess` pré-configuré pour éviter compression automatique
             
-            **Accélération GPU (OpenCL)**
+            ### 🎯 Visualiseur Panoramique 3D Haute Qualité
+            
+            **Interface modernisée avec icônes** 🎨
+            - Boutons icônes intuitifs (home, photo, boussole, œil)
+            - Adaptation automatique au thème clair/sombre
+            - Mode plein écran haute résolution (popup 1200×780)
+            
+            **Qualité d'affichage multipliée par 4** 🚀
+            - Faces de cube : 500×500 → 1000×1000 pixels
+            - Préservation parfaite des panoramas 8192×4096
+            - Performances GPU : traitement total < 500ms
+            
+            ### 🗺️ Refonte Carte et Géolocalisation
+            
+            **Migration vers Leaflet** �
+            - Remplacement de NavigateurCarteGluon (bugs crashes)
+            - Architecture lazy loading avec callbacks anti-bugs JavaFX
+            - Marqueurs draggables déplaçables à la souris
+            - Radar champ de vision configurable 0-240m (×3 vs ancien)
+            
+            **Géocodage amélioré** 📍
+            - Recherche d'adresse via Nominatim OpenStreetMap
+            - API complète : ajouteMarqueur(), afficheRadar(), allerCoordonnees()
+            - Chargement asynchrone pour interface réactive
+            
+            ### ⚡ Accélération GPU (OpenCL)
             
             - 🎮 **Traitement GPU** : Accélération matérielle pour toutes les opérations de traitement d'images
-            - � **Performances** : 
+            - 📊 **Performances** : 
               - Chargement des visites : **3.4× plus rapide** (15s → 4.5s)
               - Affichage à l'écran : **10× plus rapide** (1000ms → 100ms)
               - Redimensionnement batch : **1.7× plus rapide**
@@ -368,19 +389,37 @@ jobs:
             - Auto-routing intelligent GPU/CPU selon taille d'image
             - Gestion robuste des colorspaces (CMYK, YCbCr, RGB)
             
+            ### 🎨 Système de thèmes enrichi
+            
+            **24 thèmes disponibles**
+            - 9 thèmes AtlantaFX (Primer Light/Dark, Nord Light/Dark, Cupertino Light/Dark, Dracula, Mocha, Gruvbox)
+            - 2 thèmes MaterialFX (Light/Dark)
+            - 2 thèmes FlatLaf (Light/Dark)
+            - 2 thèmes Legacy (Clair/Foncé)
+            - 2 thèmes Acidulés (Clair/Foncé)
+            - 2 thèmes Modernes (Clair/Foncé)
+            - 8 thèmes Minimalistes (Bleu/Vert/Rouge/Mauve - Clair/Foncé)
+            
+            **Icônes dynamiques colorées** 🎨
+            - Les icônes SVG prennent automatiquement la couleur du thème
+            - Conversion PNG dynamique avec Apache Batik
+            - Visibilité optimisée thèmes sombres
+            
             ### 📥 Téléchargements
             
             | Plateforme | Fichier | Taille |
             |------------|---------|--------|
-            | 🪟 **Windows 10/11** | `EditeurPanovisu-Setup-3.3.0.exe` | ~188 MB |
-            | 🍎 **macOS 11+** | `EditeurPanovisu-3.3.0.dmg` | ~200 MB |
-            | 🐧 **Linux (Debian/Ubuntu)** | `editeurpanovisu_3.3.0-1_amd64.deb` | ~180 MB |
-            | 🐧 **Linux (RedHat/Fedora)** | `editeurpanovisu-3.3.0-1.x86_64.rpm` | ~180 MB |
+            | 🪟 **Windows 10/11** | `EditeurPanovisu-Setup-3.3.2.exe` | ~188 MB |
+            | 🍎 **macOS 11+** | `EditeurPanovisu-3.3.2.dmg` | ~200 MB |
+            | 🐧 **Linux (Debian/Ubuntu)** | `editeurpanovisu_3.3.2-1_amd64.deb` | ~180 MB |
+            | 🐧 **Linux (RedHat/Fedora)** | `editeurpanovisu-3.3.2-1.x86_64.rpm` | ~180 MB |
             
             ### ⚠️ Versions précédentes
             
-            **v3.2.0** : Personnalisation avancée des hotspots (16 animations, couleurs, icônes personnalisées) + fondu enchaîné WebGL  
-            **v3.1.0** : Correction critique case-sensitivity pour serveurs Linux - Ré-exportation requise si hébergement Linux  
+            **v3.3.1** : Système de thèmes enrichi (24 thèmes, icônes dynamiques colorées)  
+            **v3.3.0** : Accélération GPU OpenCL, performances 3-10× améliorées  
+            **v3.2.0** : Personnalisation avancée des hotspots (16 animations, couleurs, icônes personnalisées)  
+            **v3.1.0** : Correction critique case-sensitivity pour serveurs Linux  
             **v3.0.0** : Intelligence artificielle (Ollama), génération de descriptions automatiques
             
             ### 📋 Configuration requise
@@ -397,29 +436,29 @@ jobs:
             ### 🔧 Installation
             
             #### Windows
-            1. Téléchargez `EditeurPanovisu-Setup-3.3.0.exe`
+            1. Téléchargez `EditeurPanovisu-Setup-3.3.2.exe`
             2. Double-cliquez pour installer
             3. Suivez l'assistant d'installation
             4. Lancez via le raccourci Bureau ou Menu Démarrer
             
             #### macOS
-            1. Téléchargez `EditeurPanovisu-3.3.0.dmg`
+            1. Téléchargez `EditeurPanovisu-3.3.2.dmg`
             2. Ouvrez le fichier `.dmg`
             3. Glissez l'icône vers le dossier Applications
             4. Lancez depuis le Launchpad
             
             #### Linux (Debian/Ubuntu)
             ```bash
-            sudo dpkg -i editeurpanovisu_3.3.0-1_amd64.deb
+            sudo dpkg -i editeurpanovisu_3.3.2-1_amd64.deb
             # ou
-            sudo apt install ./editeurpanovisu_3.3.0-1_amd64.deb
+            sudo apt install ./editeurpanovisu_3.3.2-1_amd64.deb
             ```
             
             #### Linux (RedHat/Fedora)
             ```bash
-            sudo rpm -i editeurpanovisu-3.3.0-1.x86_64.rpm
+            sudo rpm -i editeurpanovisu-3.3.2-1.x86_64.rpm
             # ou
-            sudo dnf install ./editeurpanovisu-3.3.0-1.x86_64.rpm
+            sudo dnf install ./editeurpanovisu-3.3.2-1.x86_64.rpm
             ```
             
             ### 🔐 Vérification d'intégrité

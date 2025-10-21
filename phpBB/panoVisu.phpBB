@@ -1,0 +1,227 @@
+[size=150][b][color=#0066CC]🌐 EditeurPanovisu - Créateur de visites virtuelles 360° professionnelles[/color][/b][/size]
+
+[img]https://img.shields.io/badge/version-3.3-blue.svg[/img] [img]https://img.shields.io/badge/Java-25-orange.svg[/img] [img]https://img.shields.io/badge/license-Open%20Source-green.svg[/img]
+
+[hr][/hr]
+
+[size=120][b]📖 Présentation[/b][/size]
+
+[b]EditeurPanovisu[/b] est un logiciel open source professionnel permettant de créer des visites virtuelles 360° interactives sans aucune connaissance en programmation. Conçu pour les photographes, agents immobiliers, musées, et professionnels du tourisme, il transforme vos photos panoramiques en expériences immersives web.
+
+[size=120][b]✨ Fonctionnalités principales[/b][/size]
+
+[b]🎯 Visualiseur Panoramique 3D Amélioré[/b] (Build 3417)
+[list]
+[*]Interface modernisée avec icônes intuitives (home, photo, boussole, œil)
+[*]Adaptation automatique au thème (clair/sombre)
+[*]Mode plein écran haute résolution (fenêtre popup 1200×780)
+[*]Qualité cube 4× supérieure : faces de 1000×1000 pixels
+[*]Préservation parfaite : images 8192×4096 → rendu 8192×4096
+[*]Performances GPU : traitement total < 500ms
+[/list]
+
+[b]🗺️ Refonte Carte et Géolocalisation[/b] (Builds 3376-3416)
+[list]
+[*]Migration vers Leaflet (remplacement de NavigateurCarteGluon)
+[*]Architecture lazy loading avec callback anti-bugs JavaFX
+[*]Marqueurs draggables déplaçables à la souris
+[*]Radar champ de vision configurable 0-240m (×3 vs ancien)
+[*]Géocodage Nominatim avec recherche d'adresse OpenStreetMap
+[*]API complète : ajouteMarqueur(), afficheRadar(), allerCoordonnees()
+[/list]
+
+[b]⚡ Accélération GPU (OpenCL)[/b]
+[list]
+[*]Transformations panoramiques 3.3× plus rapides (Equi ↔ Cube)
+[*]Redimensionnement haute qualité (Bicubic, Lanczos3) sur GPU
+[*]Rendu visite 10× plus rapide
+[*]Génération LOD progressive accélérée
+[*]Fallback CPU automatique si GPU indisponible
+[/list]
+
+[b]🎨 Interface & Visualisation[/b]
+[list]
+[*]Adaptation intelligente taille viewport
+[*]Réseaux sociaux modernisés (Meta, Twitter, Email)
+[*]Barre personnalisée : opacité configurable avec effet hover
+[*]Plan interactif avec zones cliquables
+[*]Diaporama automatique avec transitions
+[*]Hotspots personnalisables (images, vidéos, liens)
+[/list]
+
+[b]🖼️ Formats supportés[/b]
+[list]
+[*]Panoramiques équirectangulaires (2:1) - jusqu'à 8192×4096
+[*]Panoramiques cubiques (6 faces séparées) - 2048×2048 par face
+[*]Formats : JPEG, TIFF, PNG
+[*]Export optimisé avec multi-résolution (LOD)
+[/list]
+
+[b]🌍 Export Web Optimisé[/b]
+[list]
+[*]HTML5 + WebGL natif (Three.js R160)
+[*]Responsive design (desktop, tablettes, mobiles)
+[*]Qualité JPEG optimale : 88-95% selon niveau
+[*]Mipmaps WebGL pour netteté à toutes distances
+[*]Anisotropie dynamique basée sur capacités GPU
+[*]Configuration .htaccess anti-compression serveur incluse
+[/list]
+
+[size=120][b]🔧 Corrections et Stabilité[/b][/size]
+[list]
+[*]Protection images invalides (diaporama)
+[*]Gestion asynchrone chargement carte
+[*]Positionnement UI corrigé (labels, boutons, contrôles)
+[*]Architecture 3 zones géolocalisation (Header/Carte/Panneau)
+[/list]
+
+[hr][/hr]
+
+[size=120][b]💾 Téléchargement & Installation[/b][/size]
+
+[b]GitHub :[/b] [url=https://github.com/llang57/editeurPanovisu]https://github.com/llang57/editeurPanovisu[/url]
+
+[size=110][b][color=#00AA00]📦 Releases pré-compilées (Recommandé)[/color][/b][/size]
+
+[b]✨ Aucune installation Java requise ![/b]
+
+[url=https://github.com/llang57/editeurPanovisu/releases]→ Télécharger une release[/url]
+
+Les releases incluent Java 25 + toutes les dépendances. [b]Téléchargez, décompressez, lancez ![/b]
+
+[b]Plateformes disponibles :[/b]
+[list]
+[*][b]Windows[/b] : .exe installateur ou .zip portable
+[*][b]macOS[/b] : .dmg ou .app
+[*][b]Linux[/b] : .deb, .rpm, ou .tar.gz
+[/list]
+
+[hr][/hr]
+
+[size=110][b]Compilation depuis les sources (Développeurs)[/b][/size]
+
+[b]Prérequis :[/b]
+[list]
+[*]Java 25
+[*]Maven 3.x
+[*]Carte graphique compatible OpenCL (recommandé pour accélération)
+[*]4 GB RAM minimum, 8 GB recommandé
+[*]Windows / Linux / macOS
+[/list]
+
+[b]Installation rapide :[/b]
+[code]
+git clone https://github.com/llang57/editeurPanovisu.git
+cd editeurPanovisu
+mvn clean install
+mvn javafx:run
+[/code]
+
+[hr][/hr]
+
+[size=120][b]📚 Documentation[/b][/size]
+
+[list]
+[*][b]README complet[/b] : [url]https://github.com/llang57/editeurPanovisu/blob/master/README.md[/url]
+[*][b]Guide installation[/b] : doc/installation/
+[*][b]Guide développement[/b] : doc/development/
+[*][b]Wiki[/b] : [url]https://github.com/llang57/editeurPanovisu/wiki[/url]
+[/list]
+
+[hr][/hr]
+
+[size=120][b]🛠️ Outils de Diagnostic Inclus[/b][/size]
+
+[b]diagnostic-webgl.html[/b] - Test capacités GPU navigateur
+[list]
+[*]Affiche MAX_TEXTURE_SIZE et MAX_ANISOTROPY
+[*]Test chargement images avec tailles réelles
+[*]Détection compression serveur
+[*]Console logs intégrée
+[/list]
+
+[b]test-compression.php[/b] - Vérification compression serveur
+[list]
+[*]Liste modules Apache chargés
+[*]Test Content-Length vs taille fichier
+[*]Détection mod_pagespeed/CloudFlare Polish
+[*]Recommandations configuration
+[/list]
+
+[hr][/hr]
+
+[size=120][b]🎯 Cas d'usage[/b][/size]
+
+[list]
+[*][b]Immobilier[/b] : Visites virtuelles d'appartements, maisons, bureaux
+[*][b]Tourisme[/b] : Hôtels, musées, sites touristiques
+[*][b]Événementiel[/b] : Salles de réception, exposition, showrooms
+[*][b]Éducation[/b] : Campus virtuels, laboratoires, bibliothèques
+[*][b]Commerce[/b] : Boutiques, restaurants, espaces commerciaux
+[/list]
+
+[hr][/hr]
+
+[size=120][b]📊 Statistiques Techniques[/b][/size]
+
+[list]
+[*][b]Build actuel :[/b] 3421 (21 octobre 2025)
+[*][b]Lignes de code :[/b] ~50,000 (Java + JavaScript)
+[*][b]Langages :[/b] Java (backend), JavaScript (frontend), CSS, HTML
+[*][b]Frameworks :[/b] JavaFX 17, Three.js R160, Leaflet, OpenCL
+[*][b]Développement actif[/b] depuis 2014
+[/list]
+
+[hr][/hr]
+
+[size=120][b]🚀 Avantages vs Solutions Commerciales[/b][/size]
+
+[table="head"]
+[tr][th]Critère[/th][th]EditeurPanovisu[/th][th]Solutions commerciales[/th][/tr]
+[tr][td]Prix[/td][td][color=green]Gratuit (Open Source)[/color][/td][td]50-500€[/td][/tr]
+[tr][td]Données[/td][td][color=green]100% sur votre serveur[/color][/td][td]Cloud tiers[/td][/tr]
+[tr][td]Personnalisation[/td][td][color=green]Code source modifiable[/color][/td][td]Limité par templates[/td][/tr]
+[tr][td]Qualité images[/td][td][color=green]8192×4096 non compressé[/color][/td][td]Souvent réduite[/td][/tr]
+[tr][td]Performance[/td][td][color=green]Accélération GPU native[/color][/td][td]Variable[/td][/tr]
+[tr][td]Vie privée[/td][td][color=green]Aucun tracking[/color][/td][td]Analytics tiers[/td][/tr]
+[/table]
+
+[hr][/hr]
+
+[size=120][b]🌟 Dernières Améliorations (Octobre 2025)[/b][/size]
+
+[b]Qualité Images en Ligne RÉSOLUE :[/b]
+[list]
+[*]Problème : Serveur compressait images (220kB au lieu de 13.4MB)
+[*]Solution : .htaccess anti-compression + filtres WebGL optimisés
+[*]Résultat : Qualité parfaite identique WAMP/en ligne
+[*]Bonus : Performance égale ou meilleure qu'avant
+[/list]
+
+[b]Optimisations WebGL :[/b]
+[list]
+[*]LinearMipmapLinearFilter (mipmaps trilinéaires)
+[*]Anisotropie dynamique (renderer.capabilities)
+[*]Logs détaillés tailles fichiers + dimensions
+[*]Détection compression temps réel
+[/list]
+
+[hr][/hr]
+
+[size=120][b]📞 Support & Contribution[/b][/size]
+
+[b]Issues GitHub :[/b] [url]https://github.com/llang57/editeurPanovisu/issues[/url]
+[b]Discussions :[/b] [url]https://github.com/llang57/editeurPanovisu/discussions[/url]
+[b]Pull Requests :[/b] Bienvenues !
+
+[b]Auteur :[/b] Laurent LANG
+[b]Année :[/b] 2014-2025
+[b]License :[/b] Open Source
+
+[hr][/hr]
+
+[hr][/hr]
+
+[size=150][b][color=#0066CC]Essayez EditeurPanovisu aujourd'hui et créez des visites virtuelles professionnelles gratuitement ! 🚀[/color][/b][/size]
+
+[center][b]⭐ N'hésitez pas à mettre une étoile sur GitHub si vous appréciez le projet ! ⭐[/b][/center]
