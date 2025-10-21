@@ -3043,6 +3043,55 @@ public class EditeurPanovisu extends Application {
                 bwFichierHTML.write(strFichierHTML);
             }
             
+            // Créer le fichier .htaccess à la racine de la visite pour éviter la compression des images
+            String strHtaccess = "# Configuration pour éviter la compression automatique des images\n"
+                    + "# Nécessaire pour préserver la qualité des panoramas haute résolution\n\n"
+                    + "# Désactiver mod_pagespeed complètement\n"
+                    + "<IfModule pagespeed_module>\n"
+                    + "    ModPagespeed off\n"
+                    + "    ModPagespeedDisableFilters rewrite_images,convert_jpeg_to_progressive,recompress_jpeg,resize_images,recompress_png,recompress_webp,convert_png_to_jpeg,convert_jpeg_to_webp\n"
+                    + "</IfModule>\n\n"
+                    + "# Empêcher la compression des images\n"
+                    + "<IfModule mod_headers.c>\n"
+                    + "    # CloudFlare : désactiver Polish/Mirage/BGJ\n"
+                    + "    Header set cf-polished \"off\"\n"
+                    + "    Header set cf-bgj \"off\"\n"
+                    + "    Header set cf-mirage \"off\"\n"
+                    + "    \n"
+                    + "    # Empêcher toute transformation proxy/CDN\n"
+                    + "    <FilesMatch \"\\.(jpg|jpeg|png|gif|webp)$\">\n"
+                    + "        Header set Cache-Control \"public, max-age=31536000, immutable, no-transform\"\n"
+                    + "        Header unset Content-Encoding\n"
+                    + "        Header set X-No-Compression \"1\"\n"
+                    + "    </FilesMatch>\n"
+                    + "</IfModule>\n\n"
+                    + "# Désactiver la compression pour les images\n"
+                    + "<IfModule mod_deflate.c>\n"
+                    + "    SetEnvIfNoCase Request_URI \\.(?:jpg|jpeg|png|gif|webp)$ no-gzip dont-vary\n"
+                    + "</IfModule>\n\n"
+                    + "# Bloquer les tentatives de redimensionnement automatique\n"
+                    + "<IfModule mod_rewrite.c>\n"
+                    + "    RewriteEngine On\n"
+                    + "    # Bloquer les paramètres de redimensionnement\n"
+                    + "    RewriteCond %{QUERY_STRING} (width|height|resize|scale|thumbnail) [NC]\n"
+                    + "    RewriteRule ^.*\\.(jpg|jpeg|png)$ - [F,L]\n"
+                    + "</IfModule>\n\n"
+                    + "# Types MIME corrects\n"
+                    + "<IfModule mod_mime.c>\n"
+                    + "    AddType image/jpeg .jpg .jpeg\n"
+                    + "    AddType image/png .png\n"
+                    + "    AddType image/gif .gif\n"
+                    + "    AddType image/webp .webp\n"
+                    + "</IfModule>\n";
+            
+            File fileHtaccess = new File(getStrRepertTemp() + File.separator + ".htaccess");
+            fileHtaccess.setWritable(true);
+            try (OutputStreamWriter oswHtaccess = new OutputStreamWriter(new FileOutputStream(fileHtaccess), "UTF-8");
+                 BufferedWriter bwHtaccess = new BufferedWriter(oswHtaccess)) {
+                bwHtaccess.write(strHtaccess);
+            }
+            System.out.println("✅ Fichier .htaccess créé à la racine de la visite");
+            
             if (isZip) {
                 // Mode ZIP : sauvegarder automatiquement puis créer le ZIP
                 creerZipDepuisTemp();

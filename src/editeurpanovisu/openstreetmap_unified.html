@@ -283,6 +283,15 @@
          */
         function getMarkerPosition(index) {
             try {
+                // 🔍 CORRECTIF BUG 0,0 : Si index 0 et qu'un searchMarker existe,
+                // retourner sa position (cas recherche d'adresse avant validation)
+                if (index === 0 && searchMarker) {
+                    const position = searchMarker.getLatLng();
+                    updateDebug(`✅ Position récupérée depuis searchMarker: [${position.lat}, ${position.lng}]`, 'success');
+                    return {lat: position.lat, lng: position.lng};
+                }
+                
+                // Sinon, chercher dans le tableau markers[]
                 if (index >= 0 && index < markers.length && markers[index]) {
                     const position = markers[index].getLatLng();
                     updateDebug(`📍 Position marqueur ${index}: [${position.lat}, ${position.lng}]`, 'info');
