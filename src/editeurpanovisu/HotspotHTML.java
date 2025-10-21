@@ -31,6 +31,7 @@ public class HotspotHTML {
     private String strCouleurPerso = ""; // Couleur personnalisée pour ce hotspot (vide = utiliser la couleur par défaut)
     private String strFichierImage = ""; // Nom du fichier d'icône personnalisée
     private String strNomIconeSource = ""; // Nom du fichier d'icône source original (avant coloration)
+    private int iTailleHotspot = 32; // Taille du hotspot en pixels (par défaut 32)
     private Image imgIconeSource;  // Image source pour ce hotspot spécifique
     private String strURLExterieure = "";
     private boolean bLienExterieur = true;
@@ -403,5 +404,19 @@ public class HotspotHTML {
      */
     public void setStrNomIconeSource(String strNomIconeSource) {
         this.strNomIconeSource = strNomIconeSource;
+    }
+
+    /**
+     * @return the iTailleHotspot - Taille du hotspot en pixels
+     */
+    public int getTailleHotspot() {
+        return iTailleHotspot;
+    }
+
+    /**
+     * @param iTailleHotspot the iTailleHotspot to set - Taille du hotspot en pixels
+     */
+    public void setTailleHotspot(int iTailleHotspot) {
+        this.iTailleHotspot = iTailleHotspot;
     }
 }
