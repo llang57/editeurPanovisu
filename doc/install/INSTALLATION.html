@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EditeurPanovisu - Installation Linux</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        header .version {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        
+        nav {
+            background: #f7fafc;
+            padding: 15px 30px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        nav a {
+            color: #4a5568;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #667eea;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        section {
+            margin-bottom: 40px;
+        }
+        
+        h2 {
+            color: #2d3748;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        h3 {
+            color: #4a5568;
+            font-size: 1.3em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        
+        .info-box {
+            background: #ebf8ff;
+            border-left: 4px solid #3182ce;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .warning-box {
+            background: #fffaf0;
+            border-left: 4px solid #dd6b20;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .success-box {
+            background: #f0fff4;
+            border-left: 4px solid #38a169;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        pre {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+        
+        code {
+            background: #edf2f7;
+            color: #c53030;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+        }
+        
+        pre code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+        }
+        
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 15px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .file-tree {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 6px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+            margin: 20px 0;
+        }
+        
+        .step-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 28px;
+            height: 28px;
+            line-height: 28px;
+            text-align: center;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        footer {
+            background: #2d3748;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+        
+        footer a {
+            color: #90cdf4;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🐧 EditeurPanovisu pour Linux</h1>
+            <p class="version">Guide d'installation - Version portable 3.3.3</p>
+        </header>
+        
+        <nav>
+            <ul>
+                <li><a href="#prerequis">Prérequis</a></li>
+                <li><a href="#java">Installation Java</a></li>
+                <li><a href="#app">Installation App</a></li>
+                <li><a href="#config">Configuration</a></li>
+                <li><a href="#depannage">Dépannage</a></li>
+            </ul>
+        </nav>
+        
+        <div class="content">
+            <section id="prerequis">
+                <h2>📋 Prérequis système</h2>
+                <div class="info-box">
+                    <strong>Configuration minimale requise :</strong>
+                    <ul style="margin-top: 10px;">
+                        <li><strong>Java</strong> : OpenJDK 25 ou supérieur</li>
+                        <li><strong>JavaFX</strong> : Version 19 ou supérieure</li>
+                        <li><strong>OpenGL</strong> : Version 3.0+ (pour l'affichage 3D)</li>
+                        <li><strong>Environnement</strong> : X11 ou Wayland</li>
+                        <li><strong>Mémoire</strong> : 2 GB RAM minimum, 4 GB recommandé</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="java">
+                <h2>☕ Installation Java + JavaFX</h2>
+                
+                <h3><span class="step-number">1</span>Option 1 : Via les dépôts Ubuntu/Debian</h3>
+                <p>La méthode la plus simple pour Ubuntu, Debian et leurs dérivés :</p>
+                <pre><code>sudo apt update
+sudo apt install openjdk-25-jdk openjfx</code></pre>
+                
+                <h3><span class="step-number">2</span>Option 2 : Installation manuelle</h3>
+                <p>Pour plus de contrôle sur la version et l'emplacement :</p>
+                
+                <p><strong>1. Télécharger OpenJDK 25</strong></p>
+                <p>Rendez-vous sur <a href="https://adoptium.net/" target="_blank">https://adoptium.net/</a> et téléchargez la dernière version.</p>
+                
+                <p><strong>2. Extraire l'archive</strong></p>
+                <pre><code>tar -xzf OpenJDK25*.tar.gz -C /opt/</code></pre>
+                
+                <p><strong>3. Configurer les variables d'environnement</strong></p>
+                <p>Ajouter à <code>~/.bashrc</code> ou <code>~/.zshrc</code> :</p>
+                <pre><code>export JAVA_HOME=/opt/jdk-25
+export PATH=$JAVA_HOME/bin:$PATH</code></pre>
+                
+                <p><strong>4. Recharger la configuration</strong></p>
+                <pre><code>source ~/.bashrc</code></pre>
+                
+                <h3><span class="step-number">3</span>Option 3 : Utiliser SDKMAN</h3>
+                <p>Un gestionnaire de versions Java très pratique :</p>
+                <pre><code>curl -s "https://get.sdkman.io" | bash
+source "$HOME/.sdkman/bin/sdkman-init.sh"
+sdk install java 25-open</code></pre>
+                
+                <div class="success-box">
+                    <strong>✅ Vérification de l'installation :</strong>
+                    <pre style="margin-top: 10px;"><code>java -version</code></pre>
+                    <p style="margin-top: 10px;">Doit afficher Java 25 ou supérieur.</p>
+                </div>
+            </section>
+
+            <section id="app">
+                <h2>🚀 Installation d'EditeurPanovisu</h2>
+                
+                <h3><span class="step-number">1</span>Extraire l'archive</h3>
+                <p>Choisissez un emplacement pour l'application :</p>
+                <pre><code># Pour archive ZIP
+unzip EditeurPanovisu-Linux-Portable-*.zip
+
+# Pour archive TAR.GZ
+tar -xzf EditeurPanovisu-Linux-Portable-*.tar.gz</code></pre>
+                
+                <h3><span class="step-number">2</span>Rendre le script exécutable</h3>
+                <pre><code>cd EditeurPanovisu
+chmod +x lancer-editeur-panovisu.sh</code></pre>
+                
+                <h3><span class="step-number">3</span>Lancer l'application</h3>
+                <pre><code>./lancer-editeur-panovisu.sh</code></pre>
+                
+                <div class="info-box">
+                    <strong>💡 Astuce :</strong> Vous pouvez créer un lanceur sur votre bureau ou dans le menu des applications en pointant vers ce script.
+                </div>
+                
+                <h3>📁 Structure des fichiers</h3>
+                <div class="file-tree"><pre>EditeurPanovisu/
+├── editeurPanovisu-3.3.3-SNAPSHOT.jar  <em># Application principale</em>
+├── lancer-editeur-panovisu.sh          <em># Script de lancement</em>
+├── configPV/                            <em># Configuration utilisateur</em>
+├── theme/                               <em># Thèmes d'interface</em>
+├── panovisu/                            <em># Viewer panoramique</em>
+├── images/                              <em># Ressources images</em>
+├── css/                                 <em># Feuilles de style</em>
+├── diaporama/                           <em># Templates diaporama</em>
+├── aide/                                <em># Documentation</em>
+├── doc/                                 <em># Documentation technique</em>
+└── INSTALLATION.*                       <em># Ce guide</em></pre>
+                </div>
+            </section>
+
+            <section id="config">
+                <h2>⚙️ Configuration</h2>
+                
+                <h3>Configuration GPU (Optionnel mais recommandé)</h3>
+                <p>Pour de meilleures performances 3D, vérifiez le support OpenGL :</p>
+                <pre><code>glxinfo | grep "OpenGL version"</code></pre>
+                
+                <div class="warning-box">
+                    <strong>⚠️ Note :</strong> Si <code>glxinfo</code> n'est pas trouvé, installez-le :
+                    <pre style="margin-top: 10px;"><code>sudo apt install mesa-utils</code></pre>
+                </div>
+                
+                <h3>Pilotes graphiques</h3>
+                <p>Assurez-vous d'avoir les pilotes appropriés :</p>
+                <ul>
+                    <li><strong>Intel/AMD</strong> : Pilotes open-source généralement préinstallés</li>
+                    <li><strong>NVIDIA</strong> : Installez les pilotes propriétaires via les paramètres système</li>
+                </ul>
+                <p>Sur Ubuntu : <em>Paramètres → Logiciels et mises à jour → Pilotes additionnels</em></p>
+                
+                <h3>Configuration de l'application</h3>
+                <p>Au premier lancement, accédez à : <strong>Affichage → Préférences</strong></p>
+                <ul>
+                    <li>Langue de l'interface</li>
+                    <li>Répertoire de travail par défaut</li>
+                    <li>Clés API (LocationIQ, OpenRouter, Ollama)</li>
+                    <li>Options d'accélération GPU</li>
+                </ul>
+            </section>
+
+            <section id="depannage">
+                <h2>🔧 Dépannage</h2>
+                
+                <h3>❌ Erreur "java: command not found"</h3>
+                <p><strong>Cause :</strong> Java n'est pas installé ou pas dans le PATH</p>
+                <p><strong>Solution :</strong> Suivez les instructions d'installation Java ci-dessus</p>
+                
+                <h3>❌ Erreur "NoClassDefFoundError"</h3>
+                <p><strong>Cause :</strong> JavaFX n'est pas installé</p>
+                <p><strong>Solution :</strong></p>
+                <pre><code>sudo apt install openjfx</code></pre>
+                
+                <h3>❌ Problèmes d'affichage 3D / Panoramas noirs</h3>
+                <p><strong>Cause :</strong> Problème avec l'accélération 3D OpenGL</p>
+                <p><strong>Solutions :</strong></p>
+                <ol>
+                    <li>Vérifier le support OpenGL : <code>glxinfo | grep "OpenGL"</code></li>
+                    <li>Mettre à jour les pilotes graphiques</li>
+                    <li>En dernier recours, éditer <code>lancer-editeur-panovisu.sh</code> et ajouter :</li>
+                </ol>
+                <pre><code>export PRISM_ORDER=sw  # Force le mode logiciel</code></pre>
+                
+                <h3>❌ Fenêtre de configuration qui se bloque</h3>
+                <div class="success-box">
+                    <strong>✅ Résolu dans cette version (3.3.3+)</strong>
+                    <p style="margin-top: 10px;">Les problèmes de blocage modal sous Linux ont été corrigés.</p>
+                </div>
+                
+                <h3>❌ Performance lente au chargement des panoramas</h3>
+                <div class="success-box">
+                    <strong>✅ Optimisé dans cette version</strong>
+                    <p style="margin-top: 10px;">Le système de cache a été amélioré pour Linux. Les chargements successifs devraient être beaucoup plus rapides.</p>
+                </div>
+                
+                <h3>🔄 Mise à jour</h3>
+                <p>Pour mettre à jour vers une nouvelle version :</p>
+                <ol>
+                    <li>Sauvegarder votre répertoire <code>configPV/</code></li>
+                    <li>Extraire la nouvelle version dans un nouveau dossier</li>
+                    <li>Copier votre <code>configPV/</code> vers le nouveau dossier</li>
+                </ol>
+            </section>
+        </div>
+        
+        <footer>
+            <p><strong>EditeurPanovisu</strong> - Version 3.3.3-SNAPSHOT | Build 3596+</p>
+            <p>Support : <a href="https://github.com/llang57/editeurPanovisu" target="_blank">GitHub Issues</a></p>
+            <p>Documentation complète : Voir INSTALLATION.md dans cette archive</p>
+        </footer>
+    </div>
+</body>
+</html>

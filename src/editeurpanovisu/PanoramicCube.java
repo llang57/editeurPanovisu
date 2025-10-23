@@ -23,7 +23,7 @@ import java.util.logging.Logger;
  */
 public class PanoramicCube extends Group {
     
-    private static final double CUBE_SIZE = 400;
+    private static final double CUBE_SIZE = 1000;
     private final Box[] faces = new Box[6];
     private final PhongMaterial[] materials = new PhongMaterial[6];
     
@@ -108,6 +108,10 @@ public class PanoramicCube extends Group {
             return;
         }
         
+        System.out.println("🔄 PanoramicCube.setPanoramicImage() appelé");
+        System.out.println("   📏 Taille image source: " + (int)panoramicImage.getWidth() + "×" + (int)panoramicImage.getHeight());
+        System.out.println("   📦 Cube demandé: " + faceSize + "×" + faceSize);
+        
         try {
             // Redimensionner l'image au ratio 2:1 (obligatoire pour equi2cube)
             Image resizedImage = resizeToEquirectangular(panoramicImage, equiWidth, equiHeight);
@@ -117,14 +121,15 @@ public class PanoramicCube extends Group {
             Image[] cubeFaces = TransformationsPanoramique.equi2cubeAuto(resizedImage, faceSize);
             
             // Mapper les faces correctement avec selfIlluminationMap pour éliminer les ombres
-            // Notre ordre: [0]=FRONT, [1]=BACK, [2]=LEFT, [3]=RIGHT, [4]=TOP, [5]=BOTTOM
-            // ATTENTION: equi2cube inverse TOP et BOTTOM, donc on inverse ici
+            // Notre ordre de materials: [0]=FRONT, [1]=BACK, [2]=LEFT, [3]=RIGHT, [4]=TOP, [5]=BOTTOM
+            // equi2cubeAuto retourne: [0]=Front, [1]=Behind, [2]=Right, [3]=Left, [4]=Top, [5]=Bottom
+            // ATTENTION: Il faut inverser Top et Bottom pour l'affichage correct dans le visualiseur 3D
             materials[FRONT].setSelfIlluminationMap(cubeFaces[0]);   // Front -> Front
             materials[BACK].setSelfIlluminationMap(cubeFaces[1]);    // Behind -> Back
             materials[LEFT].setSelfIlluminationMap(cubeFaces[3]);    // Left -> Left
             materials[RIGHT].setSelfIlluminationMap(cubeFaces[2]);   // Right -> Right
-            materials[TOP].setSelfIlluminationMap(cubeFaces[5]);     // Bottom -> Top (inversé)
-            materials[BOTTOM].setSelfIlluminationMap(cubeFaces[4]);  // Top -> Bottom (inversé)
+            materials[TOP].setSelfIlluminationMap(cubeFaces[5]);     // Bottom -> Top (inversé pour affichage)
+            materials[BOTTOM].setSelfIlluminationMap(cubeFaces[4]);  // Top -> Bottom (inversé pour affichage)
             
             // Désactiver diffuse et spéculaire pour éliminer totalement les ombres
             for (int i = 0; i < 6; i++) {
@@ -140,6 +145,36 @@ public class PanoramicCube extends Group {
                 materials[i].setSpecularMap(null);
                 materials[i].setDiffuseColor(Color.BLACK);
             }
+        }
+    }
+    
+    /**
+     * Applique directement les faces du cube pré-calculées (optimisation)
+     * Cette méthode évite de recalculer les faces à chaque affichage
+     * 
+     * @param cubeFaces Tableau de 6 images pré-calculées [Front, Behind, Right, Left, Top, Bottom]
+     */
+    public void setCubeFaces(Image[] cubeFaces) {
+        if (cubeFaces == null || cubeFaces.length != 6) {
+            System.err.println("⚠️ PanoramicCube.setCubeFaces() - Tableau invalide");
+            return;
+        }
+        
+        System.out.println("⚡ PanoramicCube.setCubeFaces() - Utilisation du cache");
+        
+        // Mapper les faces pré-calculées avec inversion Top/Bottom
+        materials[FRONT].setSelfIlluminationMap(cubeFaces[0]);   // Front -> Front
+        materials[BACK].setSelfIlluminationMap(cubeFaces[1]);    // Behind -> Back
+        materials[LEFT].setSelfIlluminationMap(cubeFaces[3]);    // Left -> Left
+        materials[RIGHT].setSelfIlluminationMap(cubeFaces[2]);   // Right -> Right
+        materials[TOP].setSelfIlluminationMap(cubeFaces[5]);     // Bottom -> Top (inversé)
+        materials[BOTTOM].setSelfIlluminationMap(cubeFaces[4]);  // Top -> Bottom (inversé)
+        
+        // Désactiver diffuse et spéculaire
+        for (int i = 0; i < 6; i++) {
+            materials[i].setDiffuseMap(null);
+            materials[i].setSpecularMap(null);
+            materials[i].setDiffuseColor(Color.BLACK);
         }
     }
     

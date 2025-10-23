@@ -81,9 +81,13 @@ public class TransformationsPanoramique {
             tailleCube = taille;
         }
         
+        double ratioActuel = (double)tailleEqui / hauteurEqui;
         System.out.println("🖥️  Transformation Equi→Cube sur CPU");
-        System.out.println("   📐 Équi: " + tailleEqui + "×" + hauteurEqui);
+        System.out.println("   📐 Équi: " + tailleEqui + "×" + hauteurEqui + " (ratio: " + String.format("%.3f", ratioActuel) + ")");
         System.out.println("   📦 Cube: " + tailleCube + "×" + tailleCube);
+        if (Math.abs(ratioActuel - 2.0) > 0.01) {
+            System.out.println("   ⚠️  ATTENTION: Ratio non conforme (attendu 2:1, obtenu " + String.format("%.3f", ratioActuel) + ":1)");
+        }
         
         for (int i = 0; i < 6; i++) {
             cube[i] = new WritableImage(tailleCube, tailleCube);
@@ -107,18 +111,25 @@ public class TransformationsPanoramique {
             pbBarreImage.setProgress(0.0f);
         });
         Thread.sleep(50);
+        // Face Front (0) - Aligné avec le kernel OpenCL : vecX=X, vecY=-Y, vecZ=1
         for (int pX = 0; pX < tailleCube; pX++) {
             for (int pY = 0; pY < tailleCube; pY++) {
                 double X = (2.d * (double) pX - tailleCube) / tailleCube;
-                double Y = (2.d * (double) pY - tailleCube) / tailleCube;
+                double Y = -(2.d * (double) pY - tailleCube) / tailleCube;  // vecY = -Y
                 double Z = 1;
-                if (X != 0) {
-                    theta = Math.atan(X);
-                } else {
-                    theta = 0;
-                }
-                phi = Math.acos(-Y / Math.sqrt(X * X + Y * Y + Z * Z));
-                pixelX = ((theta) * rapport + tailleEqui / 2.d);
+                
+                // Calcul theta avec atan2 pour cohérence avec OpenCL
+                theta = Math.atan2(X, Z);
+                
+                // Calcul phi
+                double r = Math.sqrt(X * X + Y * Y + Z * Z);
+                phi = Math.acos(Y / r);
+                
+                // Normalisation comme OpenCL
+                theta = (theta + Math.PI + deuxPI) % deuxPI;
+                phi = (phi + Math.PI) % Math.PI;
+                
+                pixelX = (theta * rapport);
                 pixelY = (phi * rapport);
                 red = 0.0d;
                 green = 0.0d;
@@ -164,21 +175,26 @@ public class TransformationsPanoramique {
         });
         Thread.sleep(50);
 
+        // Face Behind (1) - Aligné avec le kernel OpenCL : vecX=-X, vecY=-Y, vecZ=-1
         for (int pX = 0; pX < tailleCube; pX++) {
             for (int pY = 0; pY < tailleCube; pY++) {
 
-                double X = (2.d * pX - tailleCube) / tailleCube;
-                double Y = (2.d * pY - tailleCube) / tailleCube;
+                double X = -(2.d * pX - tailleCube) / tailleCube;  // vecX = -X
+                double Y = -(2.d * pY - tailleCube) / tailleCube;  // vecY = -Y
                 double Z = -1;
-                if (X != 0) {
-                    theta = Math.atan(-X);
-                } else {
-                    theta = 0;
-                }
-                phi = Math.acos(Y / Math.sqrt(X * X + Y * Y + Z * Z));
-                theta = (theta + deuxPI) % deuxPI;
+                
+                // Calcul theta avec atan2 pour cohérence avec OpenCL
+                theta = Math.atan2(X, Z);
+                
+                // Calcul phi
+                double r = Math.sqrt(X * X + Y * Y + Z * Z);
+                phi = Math.acos(Y / r);
+                
+                // Normalisation comme OpenCL
+                theta = (theta + Math.PI + deuxPI) % deuxPI;
                 phi = (phi + Math.PI) % Math.PI;
-                pixelX = ((theta) * rapport);
+                
+                pixelX = (theta * rapport);
                 pixelY = (phi * rapport);
                 red = 0.0d;
                 green = 0.0d;
@@ -214,28 +230,33 @@ public class TransformationsPanoramique {
                 red = red / coeff;
                 green = green / coeff;
                 blue = blue / coeff;
-                PWBehind.setColor(tailleCube - pX - 1, tailleCube - pY - 1, new Color(red, green, blue, 1));
+                PWBehind.setColor(pX, pY, new Color(red, green, blue, 1));  // Écriture directe comme OpenCL
             }
         }
         Platform.runLater(() -> {
             pbBarreImage.setProgress(2.0f / 6.0f);
         });
         Thread.sleep(50);
-        for (int pY = 0; pY < tailleCube; pY++) {
-            for (int pZ = 0; pZ < tailleCube; pZ++) {
+        // Face Left (3) - Aligné avec le kernel OpenCL : vecX=-1, vecY=-Y, vecZ=X
+        for (int pX = 0; pX < tailleCube; pX++) {
+            for (int pY = 0; pY < tailleCube; pY++) {
 
-                double Z = (2.d * pZ - tailleCube) / tailleCube;
-                double Y = (2.d * pY - tailleCube) / tailleCube;
-                double X = 1;
-                if (X != 0) {
-                    theta = Math.atan(Y) + Math.PI / 2;
-                } else {
-                    theta = 0;
-                }
-                phi = Math.acos(Z / Math.sqrt(X * X + Y * Y + Z * Z));
-                theta = (theta + deuxPI) % deuxPI;
+                double X = -1;  // vecX = -1
+                double Y = -(2.d * pY - tailleCube) / tailleCube;  // vecY = -Y
+                double Z = (2.d * pX - tailleCube) / tailleCube;  // vecZ = X (pX correspond à l'axe X)
+                
+                // Calcul theta avec atan2 pour cohérence avec OpenCL
+                theta = Math.atan2(X, Z);
+                
+                // Calcul phi
+                double r = Math.sqrt(X * X + Y * Y + Z * Z);
+                phi = Math.acos(Y / r);
+                
+                // Normalisation comme OpenCL
+                theta = (theta + Math.PI + deuxPI) % deuxPI;
                 phi = (phi + Math.PI) % Math.PI;
-                pixelX = ((theta) * rapport);
+                
+                pixelX = (theta * rapport);
                 pixelY = (phi * rapport);
                 red = 0.0d;
                 green = 0.0d;
@@ -271,7 +292,7 @@ public class TransformationsPanoramique {
                 red = red / coeff;
                 green = green / coeff;
                 blue = blue / coeff;
-                PWLeft.setColor(pY, tailleCube - pZ - 1, new Color(red, green, blue, 1));
+                PWLeft.setColor(pX, pY, new Color(red, green, blue, 1));  // Écriture directe comme OpenCL
             }
         }
         Platform.runLater(() -> {
@@ -279,21 +300,26 @@ public class TransformationsPanoramique {
         });
         Thread.sleep(50);
 
-        for (int pY = 0; pY < tailleCube; pY++) {
-            for (int pZ = 0; pZ < tailleCube; pZ++) {
+        // Face Right (2) - Aligné avec le kernel OpenCL : vecX=1, vecY=-Y, vecZ=-X
+        for (int pX = 0; pX < tailleCube; pX++) {
+            for (int pY = 0; pY < tailleCube; pY++) {
 
-                double Z = (2.d * pZ - tailleCube) / tailleCube;
-                double Y = (2.d * pY - tailleCube) / tailleCube;
-                double X = 1;
-                if (X != 0) {
-                    theta = Math.atan(Y) - Math.PI / 2;
-                } else {
-                    theta = 0;
-                }
-                phi = Math.acos(Z / Math.sqrt(X * X + Y * Y + Z * Z));
-                theta = (theta + deuxPI) % deuxPI;
+                double X = 1;  // vecX = 1
+                double Y = -(2.d * pY - tailleCube) / tailleCube;  // vecY = -Y
+                double Z = -(2.d * pX - tailleCube) / tailleCube;  // vecZ = -X (pX correspond à l'axe X)
+                
+                // Calcul theta avec atan2 pour cohérence avec OpenCL
+                theta = Math.atan2(X, Z);
+                
+                // Calcul phi
+                double r = Math.sqrt(X * X + Y * Y + Z * Z);
+                phi = Math.acos(Y / r);
+                
+                // Normalisation comme OpenCL
+                theta = (theta + Math.PI + deuxPI) % deuxPI;
                 phi = (phi + Math.PI) % Math.PI;
-                pixelX = ((theta) * rapport);
+                
+                pixelX = (theta * rapport);
                 pixelY = (phi * rapport);
                 red = 0.0d;
                 green = 0.0d;
@@ -329,7 +355,7 @@ public class TransformationsPanoramique {
                 red = red / coeff;
                 green = green / coeff;
                 blue = blue / coeff;
-                PWRight.setColor(pY, tailleCube - pZ - 1, new Color(red, green, blue, 1));
+                PWRight.setColor(pX, pY, new Color(red, green, blue, 1));  // Écriture directe comme OpenCL
             }
         }
         Platform.runLater(() -> {
@@ -337,24 +363,26 @@ public class TransformationsPanoramique {
         });
         Thread.sleep(50);
 
+        // Face Top - Aligné avec le kernel OpenCL : vecY = -1.0f, vecZ = -Y
         for (int pX = 0; pX < tailleCube; pX++) {
-            for (int pZ = 0; pZ < tailleCube; pZ++) {
+            for (int pY = 0; pY < tailleCube; pY++) {
 
-                double Z = (2.d * pZ - tailleCube) / tailleCube;
                 double X = (2.d * pX - tailleCube) / tailleCube;
-                double Y = 1;
-                if (X != 0) {
-                    theta = Math.atan(Z / X);
-                } else {
-                    theta = 0;
-                }
-                if (X < 0) {
-                    theta = theta - Math.PI;
-                }
-                phi = Math.acos(Y / Math.sqrt(X * X + Y * Y + Z * Z));
-                theta = (theta + deuxPI) % deuxPI;
+                double Y = -1;  // Top face: Y = -1 (comme OpenCL)
+                double Z = -(2.d * pY - tailleCube) / tailleCube;  // Z = -Y (comme OpenCL)
+                
+                // Calcul theta avec atan2 pour cohérence avec OpenCL
+                theta = Math.atan2(X, Z);
+                
+                // Calcul phi
+                double r = Math.sqrt(X * X + Y * Y + Z * Z);
+                phi = Math.acos(Y / r);
+                
+                // Normalisation comme OpenCL
+                theta = (theta + Math.PI + deuxPI) % deuxPI;
                 phi = (phi + Math.PI) % Math.PI;
-                pixelX = ((theta) * rapport);
+                
+                pixelX = (theta * rapport);
                 pixelY = (phi * rapport);
                 red = 0.0d;
                 green = 0.0d;
@@ -390,7 +418,7 @@ public class TransformationsPanoramique {
                 red = red / coeff;
                 green = green / coeff;
                 blue = blue / coeff;
-                PWTop.setColor(tailleCube - pZ - 1, tailleCube - pX - 1, new Color(red, green, blue, 1));
+                PWTop.setColor(pX, pY, new Color(red, green, blue, 1));  // Écriture directe comme OpenCL
             }
         }
         Platform.runLater(() -> {
@@ -398,24 +426,26 @@ public class TransformationsPanoramique {
         });
         Thread.sleep(50);
 
+        // Face Bottom - Aligné avec le kernel OpenCL : vecY = 1.0f, vecZ = Y
         for (int pX = 0; pX < tailleCube; pX++) {
-            for (int pZ = 0; pZ < tailleCube; pZ++) {
+            for (int pY = 0; pY < tailleCube; pY++) {
 
-                double Z = (2.d * pZ - tailleCube) / tailleCube;
                 double X = (2.d * pX - tailleCube) / tailleCube;
-                double Y = -1;
-                if (X != 0) {
-                    theta = Math.atan(Z / X);
-                } else {
-                    theta = 0;
-                }
-                if (X < 0) {
-                    theta = theta - Math.PI;
-                }
-                phi = Math.acos(Y / Math.sqrt(X * X + Y * Y + Z * Z));
-                theta = (theta + deuxPI) % deuxPI;
+                double Y = 1;  // Bottom face: Y = 1 (comme OpenCL)
+                double Z = (2.d * pY - tailleCube) / tailleCube;  // Z = Y (comme OpenCL)
+                
+                // Calcul theta avec atan2 pour cohérence avec OpenCL
+                theta = Math.atan2(X, Z);
+                
+                // Calcul phi
+                double r = Math.sqrt(X * X + Y * Y + Z * Z);
+                phi = Math.acos(Y / r);
+                
+                // Normalisation comme OpenCL
+                theta = (theta + Math.PI + deuxPI) % deuxPI;
                 phi = (phi + Math.PI) % Math.PI;
-                pixelX = ((theta) * rapport);
+                
+                pixelX = (theta * rapport);
                 pixelY = (phi * rapport);
                 red = 0.0d;
                 green = 0.0d;
@@ -451,7 +481,7 @@ public class TransformationsPanoramique {
                 red = red / coeff;
                 green = green / coeff;
                 blue = blue / coeff;
-                PWBottom.setColor(tailleCube - pZ - 1, pX, new Color(red, green, blue, 1));
+                PWBottom.setColor(pX, pY, new Color(red, green, blue, 1));  // Écriture directe comme OpenCL
             }
         }
         Platform.runLater(() -> {

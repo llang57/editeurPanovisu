@@ -825,7 +825,28 @@ public class GestionnaireInterfaceController {
      */
     private void chargeBarre(String strStyleBarre, String strHotSpot, String strMA) {
         File fileRepertBarre = new File(strRepertBoutonsPrincipal + File.separator + strStyleBarre);
+        
+        // Vérifier que le répertoire existe
+        if (!fileRepertBarre.exists()) {
+            System.err.println("❌ Répertoire de barre introuvable : " + fileRepertBarre.getAbsolutePath());
+            return;
+        }
+        
         File[] fileRepertoires = fileRepertBarre.listFiles(IMAGE_FILTER);
+        
+        // Vérifier que des fichiers ont été trouvés
+        if (fileRepertoires == null || fileRepertoires.length == 0) {
+            System.err.println("❌ Aucun fichier d'image trouvé dans : " + fileRepertBarre.getAbsolutePath());
+            System.err.println("   Contenu du répertoire :");
+            File[] allFiles = fileRepertBarre.listFiles();
+            if (allFiles != null) {
+                for (File f : allFiles) {
+                    System.err.println("     - " + f.getName());
+                }
+            }
+            return;
+        }
+        
         int i = 0;
         for (File fileRepert : fileRepertoires) {
             if (!fileRepert.isDirectory()) {
@@ -978,6 +999,9 @@ public class GestionnaireInterfaceController {
      * @param bright luminosité
      */
     private void changeCouleurBarrePersonnalisee(double couleurFinale, double sat, double bright) {
+        if (imgPngBarrePersonnalisee == null) {
+            return; // Image non chargée, on ne fait rien
+        }
         PixelReader prBarrePersonnalisee;
         prBarrePersonnalisee = imgPngBarrePersonnalisee.getPixelReader();
         setWiBarrePersonnaliseeCouleur(new WritableImage((int) imgPngBarrePersonnalisee.getWidth(), (int) imgPngBarrePersonnalisee.getHeight()));
@@ -2643,6 +2667,12 @@ public class GestionnaireInterfaceController {
         if (!tfLienImageBarrePersonnalisee.getText().equals("")) {
             if (getStrVisibiliteBarrePersonnalisee().equals("oui")) {
                 changeCouleurBarrePersonnalisee(couleurBarrePersonnalisee.getHue(), couleurBarrePersonnalisee.getSaturation(), couleurBarrePersonnalisee.getBrightness());
+                
+                // Vérifier que l'image a bien été créée
+                if (getWiBarrePersonnaliseeCouleur() == null) {
+                    return; // Image non disponible, on ne peut pas afficher
+                }
+                
                 ivBarrePersonnalisee.setImage(getWiBarrePersonnaliseeCouleur());
                 ivBarrePersonnalisee.setPreserveRatio(true);
                 ivBarrePersonnalisee.setSmooth(true);
@@ -10441,7 +10471,9 @@ public class GestionnaireInterfaceController {
                 }
                 if (newValue != null) {
                     iFacteurZoomCarte = (int) Math.round((double) newValue);
-                    navigateurCarteOL.choixZoom(iFacteurZoomCarte);
+                    if (navigateurCarteOL != null) {
+                        navigateurCarteOL.choixZoom(iFacteurZoomCarte);
+                    }
                 }
             }
         });

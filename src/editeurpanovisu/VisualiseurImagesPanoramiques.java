@@ -75,7 +75,8 @@ public final class VisualiseurImagesPanoramiques {
             choixLongitude = 0, choixLatitude = 0, choixFov = 0,
             largeurImage = 340, hauteurImage = 200, positX = 100, positY = 100,
             bougeX, bougeY,
-            ancLongitude = 0, ancLatitude = 0, ancFov = 70;
+            ancLongitude = 0, ancLatitude = 0, ancFov = 70,
+            minFov = 12, maxFov = 70;
     private final double rapportDegToRad = Math.PI / 180.d;
     private PerspectiveCamera camera1;
     private SubScene sscPanorama;
@@ -186,11 +187,11 @@ public final class VisualiseurImagesPanoramiques {
         if (getLatitude() - hfov / 2 < -80) {
             setLatitude(-80 + hfov / 2);
         }
-        if (getFov() > 105) {
-            setFov(105);
+        if (getFov() > getMaxFov()) {
+            setFov(getMaxFov());
         }
-        if (getFov() < 25) {
-            setFov(25);
+        if (getFov() < getMinFov()) {
+            setFov(getMinFov());
         }
         camera1.getTransforms().clear();
         Rotate ry = new Rotate(getLongitude(), Rotate.Y_AXIS);
@@ -640,6 +641,34 @@ public final class VisualiseurImagesPanoramiques {
         this.choixFov = choixFov;
         double nouvelleValeur = this.choixFov;
         this.changeSupport.firePropertyChange("choixFov", ancienneValeur, nouvelleValeur);
+    }
+
+    /**
+     * @return the maxFov
+     */
+    public double getMaxFov() {
+        return maxFov;
+    }
+
+    /**
+     * @param maxFov the maxFov to set
+     */
+    public void setMaxFov(double maxFov) {
+        this.maxFov = maxFov;
+    }
+
+    /**
+     * @return the minFov
+     */
+    public double getMinFov() {
+        return minFov;
+    }
+
+    /**
+     * @param minFov the minFov to set
+     */
+    public void setMinFov(double minFov) {
+        this.minFov = minFov;
     }
 
 }

@@ -1,6 +1,6 @@
 # 🌐 PanoVisu Editor
 
-[![Version](https://img.shields.io/badge/version-3.3.0-blue.svg)](https://github.com/llang57/editeurPanovisu/releases)
+[![Version](https://img.shields.io/badge/version-3.3.3-blue.svg)](https://github.com/llang57/editeurPanovisu/releases)
 [![Java](https://img.shields.io/badge/Java-25-orange.svg)](https://adoptium.net/)
 [![JavaFX](https://img.shields.io/badge/JavaFX-19-green.svg)](https://openjfx.io/)
 [![License](https://img.shields.io/badge/license-GPL--3.0-brightgreen.svg)](LICENSE)
@@ -24,9 +24,31 @@ PanoVisu combines power, simplicity, and freedom to offer a complete and free so
 
 ---
 
-## 🚀 Version 3.3.0 - GPU Acceleration and Performance
+## 🚀 Version 3.3.3 - Simplified Linux Portable Support
 
 **What's new?**
+
+### 🐧 Portable Linux Distribution (Build 3597+ - Oct 23, 2025)
+
+**Standalone portable archive** 📦
+- **ZIP and TAR.GZ**: Complete archives without system dependencies
+- **Ultra-simple installation**: Extract, `chmod +x`, run
+- **Triple format documentation**:
+  - `INSTALLATION.md`: Complete Markdown guide with all details
+  - `INSTALLATION.txt`: Text version for terminals (80 columns)
+  - `INSTALLATION.html`: Styled web version with modern CSS
+- **Intelligent bash script**:
+  - Automatic Java detection and version check (recommends Java 25+)
+  - Optimal JavaFX 3D configuration (PRISM_FORCEGL, PRISM_ORDER)
+  - Clear error messages with solutions
+- **Clean structure**: Windows files (.bat/.vbs) automatically excluded
+- **Installation guide**: See [doc/install/INSTALLATION.md](doc/install/INSTALLATION.md)
+
+**Critical Linux fixes** 🐛
+- ✅ **Panorama cache**: Cache usage fixed (700ms → <50ms)
+- ✅ **Modal blocking**: Configuration window no longer freezes (Platform.runLater + show())
+- ✅ **NullPointerException**: Protection against crashes on reload (unloaded images)
+- ✅ **Maven build**: All classes included in JAR (93/93 classes)
 
 ### 🎯 Enhanced 3D Panoramic Viewer (Build 3417 - Oct 20, 2025)
 - **📱 Modernized interface with icons**:

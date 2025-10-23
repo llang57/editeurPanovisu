@@ -1,0 +1,131 @@
+===========================================
+   EditeurPanovisu - Installation Linux
+===========================================
+
+PRÉREQUIS
+---------
+- Java 25 ou supérieur (OpenJDK recommandé)
+- JavaFX 19 ou supérieur
+- Carte graphique avec support OpenGL 3.0+
+- Environnement de bureau X11 ou Wayland
+
+INSTALLATION JAVA + JAVAFX
+---------------------------
+
+Option 1 : Installation via les dépôts Ubuntu/Debian
+-----------------------------------------------------
+sudo apt update
+sudo apt install openjdk-25-jdk openjfx
+
+Option 2 : Installation manuelle Java
+--------------------------------------
+1. Télécharger OpenJDK 25 depuis https://adoptium.net/
+2. Extraire l'archive :
+   tar -xzf OpenJDK25*.tar.gz -C /opt/
+3. Ajouter au PATH dans ~/.bashrc :
+   export JAVA_HOME=/opt/jdk-25
+   export PATH=$JAVA_HOME/bin:$PATH
+4. Recharger : source ~/.bashrc
+
+Option 3 : Utiliser SDKMAN
+---------------------------
+curl -s "https://get.sdkman.io" | bash
+source "$HOME/.sdkman/bin/sdkman-init.sh"
+sdk install java 25-open
+
+VÉRIFICATION DE L'INSTALLATION
+-------------------------------
+java -version
+# Doit afficher Java 25 ou supérieur
+
+INSTALLATION D'EDITEURPANOVISU
+-------------------------------
+1. Extraire cette archive où vous voulez :
+   unzip EditeurPanovisu-Linux-Portable-*.zip
+   ou
+   tar -xzf EditeurPanovisu-Linux-Portable-*.tar.gz
+
+2. Rendre le script exécutable :
+   cd EditeurPanovisu
+   chmod +x lancer-editeur-panovisu.sh
+
+3. Lancer l'application :
+   ./lancer-editeur-panovisu.sh
+
+CONFIGURATION GRAPHIQUE (GPU)
+------------------------------
+Si vous rencontrez des problèmes d'affichage 3D :
+
+1. Vérifier le support OpenGL :
+   glxinfo | grep "OpenGL version"
+   (installer mesa-utils si nécessaire)
+
+2. Pour cartes Intel/AMD/NVIDIA propriétaires :
+   - Assurez-vous que les pilotes sont installés
+   - Ubuntu : Paramètres > Logiciels supplémentaires
+
+3. En cas de problème avec JavaFX 3D :
+   Éditer lancer-editeur-panovisu.sh et essayer :
+   export PRISM_ORDER=sw  # Mode logiciel
+   
+STRUCTURE DES FICHIERS
+----------------------
+EditeurPanovisu/
+├── editeurPanovisu-3.3.3-SNAPSHOT.jar  # Application principale
+├── lancer-editeur-panovisu.sh          # Script de lancement
+├── configPV/                            # Configuration (vide au départ)
+├── theme/                               # Thèmes d'interface
+├── panovisu/                            # Viewer panoramique
+├── images/                              # Ressources images
+├── css/                                 # Feuilles de style
+├── diaporama/                           # Templates diaporama
+├── aide/                                # Documentation
+├── doc/                                 # Documentation technique
+└── INSTALLATION.*                       # Ce fichier
+
+CONFIGURATION INITIALE
+----------------------
+Au premier lancement, l'application créera automatiquement les fichiers
+de configuration dans le répertoire configPV/.
+
+Menu Affichage > Préférences :
+- Langue de l'interface
+- Répertoire de travail par défaut
+- Clés API (LocationIQ, OpenRouter, Ollama)
+- Activation GPU
+
+DÉPANNAGE
+---------
+
+Erreur "java: command not found"
+→ Java n'est pas installé ou pas dans le PATH
+  Suivre les instructions d'installation ci-dessus
+
+Erreur "NoClassDefFoundError"
+→ JavaFX n'est pas correctement installé
+  sudo apt install openjfx
+
+Problèmes d'affichage 3D / panoramas
+→ Vérifier le support OpenGL
+  glxinfo | grep "OpenGL"
+→ Éditer le script et passer en mode logiciel
+
+Fenêtre se bloque (modale)
+→ Problème résolu dans cette version (3.3.3+)
+
+MISE À JOUR
+-----------
+1. Sauvegarder votre répertoire configPV/
+2. Extraire la nouvelle version
+3. Copier votre configPV/ dans la nouvelle version
+
+SUPPORT
+-------
+Issues GitHub : https://github.com/llang57/editeurPanovisu
+Documentation complète : Voir INSTALLATION.md dans cette archive
+
+===========================================
+Version : 3.3.3-SNAPSHOT
+Build : 3596+
+Date : Octobre 2025
+===========================================

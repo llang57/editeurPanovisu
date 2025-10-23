@@ -138,6 +138,7 @@ public class EquiCubeDialogController {
             Image[] imgFacesCube = TransformationsPanoramique.equi2cubeAuto(imgEquiImage, -1);
             for (int i = 0; i < 6; i++) {
                 String strSuffixe = "";
+                int faceIndex = i;
                 switch (i) {
                     case 0:
                         strSuffixe = "_f";
@@ -153,9 +154,11 @@ public class EquiCubeDialogController {
                         break;
                     case 4:
                         strSuffixe = "_u";
+                        faceIndex = 5;  // Sauver Bottom comme Up
                         break;
                     case 5:
                         strSuffixe = "_d";
+                        faceIndex = 4;  // Sauver Top comme Down
                         break;
                 }
                 try {
@@ -166,12 +169,12 @@ public class EquiCubeDialogController {
                     }
 
                     if (rbBmp.isSelected()) {
-                        ReadWriteImage.writeBMP(imgFacesCube[i], strNomFich1 + "_cube" + strSuffixe + ".bmp",
+                        ReadWriteImage.writeBMP(imgFacesCube[faceIndex], strNomFich1 + "_cube" + strSuffixe + ".bmp",
                                 bSharpen, (float) Math.round(slSharpen.getValue() * 20.f) / 20.f);
                     }
                     if (rbTiff.isSelected()) {
                         try {
-                            ReadWriteImage.writeTiff(imgFacesCube[i], strNomFich1 + "_cube" + strSuffixe + ".tif",
+                            ReadWriteImage.writeTiff(imgFacesCube[faceIndex], strNomFich1 + "_cube" + strSuffixe + ".tif",
                                     bSharpen, (float) Math.round(slSharpen.getValue() * 20.f) / 20.f);
                         } catch (ImagingException ex) {
                             Logger.getLogger(EquiCubeDialogController.class.getName()).log(Level.SEVERE, null, ex);
@@ -179,7 +182,7 @@ public class EquiCubeDialogController {
                     }
                     if (rbJpeg.isSelected()) {
                         float quality = 1.0f; //qualité jpeg à 100% : le moins de pertes possible
-                        ReadWriteImage.writeJpeg(imgFacesCube[i], strNomFich1 + "_cube" + strSuffixe + ".jpg", quality,
+                        ReadWriteImage.writeJpeg(imgFacesCube[faceIndex], strNomFich1 + "_cube" + strSuffixe + ".jpg", quality,
                                 bSharpen, (float) Math.round(slSharpen.getValue() * 20.f) / 20.f);
                     }
                 } catch (IOException ex) {

@@ -45,6 +45,12 @@ public class Panoramique {
     private Image imgPanoRect;
     private Image imgPanoRectListe;
     private Image imgCubeEqui;
+    
+    // Cache des faces du cube pré-calculées pour optimiser l'affichage
+    private Image[] cubeFacesPetiteResolution = null;  // 6 faces 500×500
+    private Image[] cubeFacesGrandeResolution = null;  // 6 faces 1000×1000
+    private Image imgHauteResolution = null;  // Image transformée haute résolution (iRapport=1)
+    
     private int iNombreHotspots = 0;
     private int iNombreHotspotImage = 0;
     private int iNombreHotspotHTML = 0;
@@ -639,6 +645,48 @@ public class Panoramique {
      */
     public void setFovMin(double fovMin) {
         this.fovMin = fovMin;
+    }
+
+    /**
+     * @return the cubeFacesPetiteResolution
+     */
+    public Image[] getCubeFacesPetiteResolution() {
+        return cubeFacesPetiteResolution;
+    }
+
+    /**
+     * @param cubeFacesPetiteResolution the cubeFacesPetiteResolution to set
+     */
+    public void setCubeFacesPetiteResolution(Image[] cubeFacesPetiteResolution) {
+        this.cubeFacesPetiteResolution = cubeFacesPetiteResolution;
+    }
+
+    /**
+     * @return the cubeFacesGrandeResolution
+     */
+    public Image[] getCubeFacesGrandeResolution() {
+        return cubeFacesGrandeResolution;
+    }
+
+    /**
+     * @param cubeFacesGrandeResolution the cubeFacesGrandeResolution to set
+     */
+    public void setCubeFacesGrandeResolution(Image[] cubeFacesGrandeResolution) {
+        this.cubeFacesGrandeResolution = cubeFacesGrandeResolution;
+    }
+
+    /**
+     * @return the imgHauteResolution
+     */
+    public Image getImgHauteResolution() {
+        return imgHauteResolution;
+    }
+
+    /**
+     * @param imgHauteResolution the imgHauteResolution to set
+     */
+    public void setImgHauteResolution(Image imgHauteResolution) {
+        this.imgHauteResolution = imgHauteResolution;
     }
 
     /**

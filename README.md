@@ -1,6 +1,6 @@
 # 🌐 Éditeur PanoVisu
 
-[![Version](https://img.shields.io/badge/version-3.3.0-blue.svg)](https://github.com/llang57/editeurPanovisu/releases)
+[![Version](https://img.shields.io/badge/version-3.3.3-blue.svg)](https://github.com/llang57/editeurPanovisu/releases)
 [![Java](https://img.shields.io/badge/Java-25-orange.svg)](https://adoptium.net/)
 [![JavaFX](https://img.shields.io/badge/JavaFX-19-green.svg)](https://openjfx.io/)
 [![License](https://img.shields.io/badge/license-GPL--3.0-brightgreen.svg)](LICENSE)
@@ -24,9 +24,31 @@ PanoVisu combine puissance, simplicité et liberté pour offrir une solution com
 
 ---
 
-## 🚀 Version 3.3.0 - Accélération GPU, Interface Moderne et Diaporama Refondus
+## 🚀 Version 3.3.3 - Support Linux Portable Simplifié
 
 **Quoi de neuf ?**
+
+### 🐧 Distribution Linux Portable (Build 3597+ - 23 oct. 2025)
+
+**Archive portable autonome** 📦
+- **ZIP et TAR.GZ** : Archives complètes sans dépendances système
+- **Installation ultra-simple** : Extraire, `chmod +x`, lancer
+- **Documentation triple format** :
+  - `INSTALLATION.md` : Guide Markdown complet avec tous les détails
+  - `INSTALLATION.txt` : Version texte pour terminaux (80 colonnes)
+  - `INSTALLATION.html` : Version web stylisée avec CSS moderne
+- **Script bash intelligent** :
+  - Détection automatique Java et version (recommande Java 25+)
+  - Configuration JavaFX 3D optimale (PRISM_FORCEGL, PRISM_ORDER)
+  - Messages d'erreur clairs avec solutions
+- **Structure propre** : Fichiers Windows (.bat/.vbs) automatiquement exclus
+- **Guide installation** : Voir [doc/install/INSTALLATION.md](doc/install/INSTALLATION.md)
+
+**Corrections critiques Linux** 🐛
+- ✅ **Cache panoramas** : Correction utilisation cache (700ms → <50ms)
+- ✅ **Blocage modal** : Fenêtre configuration ne se bloque plus (Platform.runLater + show())
+- ✅ **NullPointerException** : Protection contre crashes au rechargement (images non chargées)
+- ✅ **Build Maven** : Toutes les classes incluses dans le JAR (93/93 classes)
 
 ### 🎯 Visualiseur Panoramique 3D Amélioré (Build 3417 - 20 oct. 2025)
 - **📱 Interface modernisée avec icônes** :

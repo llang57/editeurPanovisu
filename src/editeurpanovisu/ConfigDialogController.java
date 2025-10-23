@@ -18,11 +18,11 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -284,12 +284,6 @@ public class ConfigDialogController {
             stConfigDialog.hide();
         });
         btnSauvegarder.setOnAction((ActionEvent e) -> {
-            Alert alert = new Alert(AlertType.WARNING);
-            alert.setTitle(rbLocalisation.getString("config.titreDialogue"));
-            alert.setHeaderText(rbLocalisation.getString("config.masthead"));
-            alert.setContentText(rbLocalisation.getString("config.message"));
-            alert.showAndWait();
-
             // Sauvegarder la configuration panovisu.cfg
             String contenuFichier = "langue=" + cbListeLangues.getValue().toString().split("_")[0].split(" : ")[1] + "\n";
             contenuFichier += "pays=" + cbListeLangues.getValue().toString().split("_")[1] + "\n";
@@ -345,7 +339,17 @@ public class ConfigDialogController {
                 Logger.getLogger(ConfigDialogController.class.getName()).log(Level.SEVERE, null, ex);
             }
             
+            // Fermer d'abord le dialog pour éviter les blocages modaux sous Linux
             stConfigDialog.hide();
+            
+            // PUIS afficher l'alerte de confirmation (non bloquant)
+            Platform.runLater(() -> {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle(rbLocalisation.getString("config.titreDialogue"));
+                alert.setHeaderText(rbLocalisation.getString("config.masthead"));
+                alert.setContentText(rbLocalisation.getString("config.message"));
+                alert.show(); // show() au lieu de showAndWait() pour ne pas bloquer
+            });
         });
     }
     

@@ -711,10 +711,34 @@ public final class NavigateurPanoramique {
                 }
             });
         } else {
+            // Diagnostic détaillé du support JavaFX
+            System.err.println("❌ SCENE3D non supporté - Diagnostic JavaFX:");
+            System.err.println("   OS: " + System.getProperty("os.name") + " " + System.getProperty("os.version"));
+            System.err.println("   JavaFX Version: " + System.getProperty("javafx.version", "N/A"));
+            System.err.println("   SCENE3D: " + Platform.isSupported(ConditionalFeature.SCENE3D));
+            System.err.println("   GRAPHICS: " + Platform.isSupported(ConditionalFeature.GRAPHICS));
+            System.err.println("   CONTROLS: " + Platform.isSupported(ConditionalFeature.CONTROLS));
+            System.err.println("   FXML: " + Platform.isSupported(ConditionalFeature.FXML));
+            System.err.println("   WEB: " + Platform.isSupported(ConditionalFeature.WEB));
+            System.err.println("\n💡 Solutions possibles sur Linux:");
+            System.err.println("   1. Installer Mesa OpenGL: sudo apt install libgl1-mesa-glx libgl1-mesa-dri");
+            System.err.println("   2. Vérifier les pilotes GPU: sudo ubuntu-drivers list");
+            System.err.println("   3. Variables d'environnement:");
+            System.err.println("      export PRISM_VERBOSE=true");
+            System.err.println("      export PRISM_FORCEGL=true");
 
-            Label lblPanorama = new Label(rbLocalisation.getString("visu.nonSupporte"));
-            lblPanorama.setStyle("-fx-text-fill : red;-fx-font-size : 18px;");
+            String messageDiagnostic = rbLocalisation.getString("visu.nonSupporte") + "\n\n" +
+                    "JavaFX 3D (SCENE3D) n'est pas disponible.\n" +
+                    "OS: " + System.getProperty("os.name") + "\n\n" +
+                    "Sur Linux, installez:\n" +
+                    "sudo apt install libgl1-mesa-glx libgl1-mesa-dri\n\n" +
+                    "Puis relancez avec:\n" +
+                    "PRISM_FORCEGL=true java -jar ...";
+            
+            Label lblPanorama = new Label(messageDiagnostic);
+            lblPanorama.setStyle("-fx-text-fill : #FF3333;-fx-font-size : 12px;-fx-font-family: monospace;");
             lblPanorama.setAlignment(Pos.CENTER);
+            lblPanorama.setWrapText(true);
             lblPanorama.setPrefWidth(largeurImage + 2 * positX);
             lblPanorama.setMinWidth(largeurImage + 2 * positX);
             lblPanorama.setMaxWidth(largeurImage + 2 * positX);
@@ -826,22 +850,68 @@ public final class NavigateurPanoramique {
     }
 
     public AnchorPane affichePano() {
+        return affichePano(null);
+    }
 
+    /**
+     * Affiche le panorama avec cache des cubes pré-calculés si disponible
+     * 
+     * @param panoramique Objet Panoramique contenant le cache (peut être null)
+     * @return AnchorPane contenant le panorama affiché
+     */
+    public AnchorPane affichePano(Panoramique panoramique) {
+        long startTotal = System.currentTimeMillis();
+        
         apPanorama = new AnchorPane();
         apPanorama.setStyle("-fx-background-color :-fx-background");
         if (Platform.isSupported(ConditionalFeature.SCENE3D)) {
 
-            // Utiliser haute qualité si activé, sinon qualité standard
-            if (hauteQualite) {
-                panoramicCube.setPanoramicImage(this.getImgPanoramique(), 3000, 1500, 1000);
-            } else {
-                panoramicCube.setPanoramicImage(this.getImgPanoramique());
+            // Utiliser le cache si disponible
+            Image[] cubeFaces = null;
+            if (panoramique != null) {
+                if (hauteQualite && panoramique.getCubeFacesGrandeResolution() != null) {
+                    cubeFaces = panoramique.getCubeFacesGrandeResolution();
+                    System.out.println("   ⚡ Utilisation du cache 1000×1000 (affichePano)");
+                } else if (!hauteQualite && panoramique.getCubeFacesPetiteResolution() != null) {
+                    cubeFaces = panoramique.getCubeFacesPetiteResolution();
+                    System.out.println("   ⚡ Utilisation du cache 500×500 (affichePano)");
+                }
             }
+            
+            long startApply = System.currentTimeMillis();
+            if (cubeFaces != null) {
+                panoramicCube.setCubeFaces(cubeFaces);
+            } else {
+                // Fallback : recalcul si pas de cache
+                if (panoramique == null) {
+                    System.out.println("   ⚠️ Pas d'objet Panoramique fourni, recalcul des faces");
+                } else {
+                    System.out.println("   ⚠️ Pas de cache, recalcul des faces");
+                }
+                
+                if (hauteQualite) {
+                    panoramicCube.setPanoramicImage(this.getImgPanoramique(), 3000, 1500, 1000);
+                } else {
+                    panoramicCube.setPanoramicImage(this.getImgPanoramique());
+                }
+            }
+            long endApply = System.currentTimeMillis();
+            System.out.println("   ⏱️ Application des textures: " + (endApply - startApply) + " ms");
+            
+            long startSubScene = System.currentTimeMillis();
             sscPanorama = new SubScene(root, largeurImage, hauteurImage);
+            long endSubScene = System.currentTimeMillis();
+            System.out.println("   ⏱️ Création SubScene: " + (endSubScene - startSubScene) + " ms");
         }
 
+        long startReaffiche = System.currentTimeMillis();
         reaffiche();
+        long endReaffiche = System.currentTimeMillis();
+        System.out.println("   ⏱️ reaffiche(): " + (endReaffiche - startReaffiche) + " ms");
 
+        long endTotal = System.currentTimeMillis();
+        System.out.println("   ⏱️ TOTAL affichePano(): " + (endTotal - startTotal) + " ms");
+        
         return apPanorama;
 
     }
@@ -852,9 +922,59 @@ public final class NavigateurPanoramique {
     }
 
     public void setImagePanoramique(String strImagePanoramique, Image imgPanoramique) {
+        System.out.println("📸 NavigateurPanoramique.setImagePanoramique() appelé");
+        System.out.println("   📄 Fichier: " + strImagePanoramique);
+        System.out.println("   📏 Image: " + (imgPanoramique != null ? (int)imgPanoramique.getWidth() + "×" + (int)imgPanoramique.getHeight() : "null"));
+        System.out.println("   🎨 Mode haute qualité: " + hauteQualite);
+        
         this.setNomFichierPanoramique(strImagePanoramique);
         this.setImgPanoramique(imgPanoramique);
-        panoramicCube.setPanoramicImage(imgPanoramique);
+        
+        // Appliquer la qualité appropriée selon le mode actif
+        if (hauteQualite) {
+            panoramicCube.setPanoramicImage(imgPanoramique, 3000, 1500, 1000);
+        } else {
+            panoramicCube.setPanoramicImage(imgPanoramique);
+        }
+    }
+
+    /**
+     * Applique une image panoramique avec cubes pré-calculés (optimisation)
+     * Utilise le cache si disponible, sinon recalcule
+     * 
+     * @param strImagePanoramique Nom du fichier panoramique
+     * @param imgPanoramique Image panoramique source
+     * @param panoramique Objet Panoramique contenant le cache des cubes
+     */
+    public void setImagePanoramique(String strImagePanoramique, Image imgPanoramique, Panoramique panoramique) {
+        System.out.println("📸 NavigateurPanoramique.setImagePanoramique() avec cache appelé");
+        System.out.println("   📄 Fichier: " + strImagePanoramique);
+        System.out.println("   🎨 Mode haute qualité: " + hauteQualite);
+        
+        this.setNomFichierPanoramique(strImagePanoramique);
+        this.setImgPanoramique(imgPanoramique);
+        
+        // Utiliser le cache si disponible
+        Image[] cubeFaces = null;
+        if (hauteQualite && panoramique.getCubeFacesGrandeResolution() != null) {
+            cubeFaces = panoramique.getCubeFacesGrandeResolution();
+            System.out.println("   ⚡ Utilisation du cache 1000×1000");
+        } else if (!hauteQualite && panoramique.getCubeFacesPetiteResolution() != null) {
+            cubeFaces = panoramique.getCubeFacesPetiteResolution();
+            System.out.println("   ⚡ Utilisation du cache 500×500");
+        }
+        
+        if (cubeFaces != null) {
+            panoramicCube.setCubeFaces(cubeFaces);
+        } else {
+            // Fallback : recalcul si pas de cache
+            System.out.println("   ⚠️ Pas de cache, recalcul des faces");
+            if (hauteQualite) {
+                panoramicCube.setPanoramicImage(imgPanoramique, 3000, 1500, 1000);
+            } else {
+                panoramicCube.setPanoramicImage(imgPanoramique);
+            }
+        }
     }
 
     /**
@@ -1041,13 +1161,8 @@ public final class NavigateurPanoramique {
      * @param maxFov the maxFov to set
      */
     public void setMaxFov(double maxFov) {
-        // FORCER les nouvelles limites (ignorer les anciennes valeurs des fichiers projets)
-        if (maxFov > 40) {
-            System.out.println("⚠️ setMaxFov() - Valeur " + maxFov + "° refusée, forcée à 35°");
-            this.maxFov = 35;
-        } else {
-            this.maxFov = Math.min(maxFov, 35);
-        }
+        // Accepter la valeur de l'utilisateur (limite raisonnable à 120°)
+        this.maxFov = Math.min(maxFov, 120);
     }
 
     /**
@@ -1061,13 +1176,8 @@ public final class NavigateurPanoramique {
      * @param minFov the minFov to set
      */
     public void setMinFov(double minFov) {
-        // FORCER les nouvelles limites (ignorer les anciennes valeurs des fichiers projets)
-        if (minFov > 10) {
-            System.out.println("⚠️ setMinFov() - Valeur " + minFov + "° refusée, forcée à 1°");
-            this.minFov = 1;
-        } else {
-            this.minFov = Math.max(minFov, 1);
-        }
+        // Accepter la valeur de l'utilisateur (limite raisonnable à 1° minimum)
+        this.minFov = Math.max(minFov, 1);
     }
 
     /**
@@ -1120,5 +1230,19 @@ public final class NavigateurPanoramique {
      */
     public Button getBtnPleinEcran() {
         return btnPleinEcran;
+    }
+
+    /**
+     * @return the bPleinEcran
+     */
+    public boolean isbPleinEcran() {
+        return bPleinEcran;
+    }
+
+    /**
+     * @param bPleinEcran the bPleinEcran to set
+     */
+    public void setbPleinEcran(boolean bPleinEcran) {
+        this.bPleinEcran = bPleinEcran;
     }
 }

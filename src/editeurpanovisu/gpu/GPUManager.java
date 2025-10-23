@@ -52,6 +52,21 @@ public class GPUManager {
      */
     private void initializeGPU() {
         try {
+            // Vérifier si OpenCL est disponible
+            try {
+                // Tenter d'accéder à la classe CL pour déclencher le chargement de la bibliothèque native
+                Class.forName("org.jocl.CL");
+            } catch (UnsatisfiedLinkError | ExceptionInInitializerError e) {
+                System.out.println("⚠️  OpenCL non disponible sur ce système - Mode CPU activé");
+                System.out.println("   Détails: " + e.getMessage());
+                gpuAvailable = false;
+                return;
+            } catch (ClassNotFoundException e) {
+                System.out.println("⚠️  Bibliothèque JOCL non trouvée - Mode CPU activé");
+                gpuAvailable = false;
+                return;
+            }
+            
             // Activer les exceptions OpenCL
             CL.setExceptionsEnabled(true);
             
@@ -123,6 +138,10 @@ public class GPUManager {
                 System.out.println("⚠️  Aucun GPU OpenCL détecté, utilisation du CPU");
             }
             
+        } catch (UnsatisfiedLinkError | ExceptionInInitializerError e) {
+            System.out.println("⚠️  Erreur de chargement de la bibliothèque OpenCL: " + e.getMessage());
+            System.out.println("   L'application continuera en mode CPU");
+            gpuAvailable = false;
         } catch (Exception e) {
             System.err.println("❌ Erreur lors de l'initialisation OpenCL: " + e.getMessage());
             gpuAvailable = false;

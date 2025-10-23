@@ -7,6 +7,8 @@ import javafx.scene.image.PixelReader;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.application.Platform;
+import javafx.embed.swing.SwingFXUtils;
+import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
 
 /**
@@ -202,13 +204,27 @@ public class ImageResizeGPU {
     
     /**
      * Redimensionnement via CPU (fallback)
-     * Utilise la bibliothèque Thumbnails pour Bicubique/Lanczos
+     * Utilise la bibliothèque Thumbnails directement pour éviter la récursion
      */
     private static Image resizeCPU(Image source, int targetWidth, int targetHeight, 
                                    InterpolationMethod method) {
-        // Pour CPU, on utilise la bibliothèque Java standard via ReadWriteImage
-        // qui utilise Thumbnails avec interpolation de bonne qualité
-        return editeurpanovisu.ReadWriteImage.resizeImage(source, targetWidth, targetHeight);
+        try {
+            // Convertir JavaFX Image en BufferedImage
+            BufferedImage bufferedImage = SwingFXUtils.fromFXImage(source, null);
+            
+            // Utiliser Thumbnails directement (pas via ReadWriteImage pour éviter la récursion)
+            BufferedImage resized = net.coobird.thumbnailator.Thumbnails.of(bufferedImage)
+                .size(targetWidth, targetHeight)
+                .asBufferedImage();
+            
+            // Convertir BufferedImage en JavaFX Image
+            return SwingFXUtils.toFXImage(resized, null);
+        } catch (Exception e) {
+            System.err.println("❌ Erreur lors du redimensionnement CPU : " + e.getMessage());
+            e.printStackTrace();
+            // En dernier recours, retourner l'image source
+            return source;
+        }
     }
     
     /**
