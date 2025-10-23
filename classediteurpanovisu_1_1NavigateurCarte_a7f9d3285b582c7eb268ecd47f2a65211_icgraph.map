@@ -1,0 +1,5 @@
+<map id="editeurpanovisu.NavigateurCarte.retireRadar" name="editeurpanovisu.NavigateurCarte.retireRadar">
+<area shape="rect" id="Node000001" title="Retire le radar de la carte." alt="" coords="332,5,535,45"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a0600c622268357d2f5f537164b0d3bfd" title="Met à jour uniquement le radar sur la carte sans toucher aux marqueurs ni au centrage." alt="" coords="5,5,284,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="318,28,284,28,284,23,318,23"/>
+</map>

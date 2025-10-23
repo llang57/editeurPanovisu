@@ -1,0 +1,11 @@
+<map id="editeurpanovisu.HuggingFaceClient.generateText" name="editeurpanovisu.HuggingFaceClient.generateText">
+<area shape="rect" id="Node000001" title="Génère du texte avec des paramètres personnalisés." alt="" coords="5,63,220,103"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1HuggingFaceClient.html#ae1fed5c04dd4e895c2b5d7a6eca84346" title="Échappe les caractères spéciaux pour JSON." alt="" coords="268,5,483,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="204,60,269,46,270,51,206,65"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="531,70,569,95"/>
+<area shape="poly" id="edge5_Node000001_Node000003" title=" " alt="" coords="220,80,517,80,517,85,220,85"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1HuggingFaceClient.html#a8130720d8a2e730fc1645f6d363b22f9" title="Extrait le texte généré de la réponse JSON Format: [{&quot;generated_text&quot;: &quot;...&quot;}]." alt="" coords="268,120,483,160"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="206,100,270,114,269,120,204,105"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="438,43,519,70,517,75,436,48"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="436,117,517,90,519,96,438,122"/>
+</map>

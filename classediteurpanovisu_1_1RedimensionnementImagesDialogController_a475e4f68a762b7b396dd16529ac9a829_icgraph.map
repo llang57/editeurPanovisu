@@ -1,0 +1,13 @@
+<map id="editeurpanovisu.RedimensionnementImagesDialogController.getBufferedImageTypeName" name="editeurpanovisu.RedimensionnementImagesDialogController.getBufferedImageTypeName">
+<area shape="rect" id="Node000001" title="Retourne le nom lisible du type de BufferedImage." alt="" coords="1673,5,1969,60"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a6bda189e213cef5787b129e80098b066" title="Normalise un BufferedImage en RGB pour éviter l&#39;erreur &quot;Bogus input colorspace&quot;." alt="" coords="1332,13,1625,53"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1659,35,1626,35,1626,30,1659,30"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#ab168aa11eb9244730c3e3862da44f500" title="Traite (redimensionne et compresse) une image selon les paramètres définis." alt="" coords="1017,13,1284,53"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="1318,35,1284,35,1284,30,1318,30"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a93a629dce64b4bfc868b54c629642061" title="Lance le traitement des images." alt="" coords="680,13,969,53"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="1003,35,970,35,970,30,1003,30"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a3537215c3ae75ac08746b31652a789d4" title="Crée les boutons d&#39;action (Valider, Annuler)." alt="" coords="325,13,632,53"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="666,35,632,35,632,30,666,30"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a182869c52f51180d4809f7e0f1e2fcec" title="Affiche la fenêtre de dialogue de redimensionnement d&#39;images." alt="" coords="5,13,277,53"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="312,35,278,35,278,30,312,30"/>
+</map>

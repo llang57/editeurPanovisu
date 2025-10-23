@@ -1,0 +1,17 @@
+<map id="editeurpanovisu.HuggingFaceClient.HuggingFaceClient" name="editeurpanovisu.HuggingFaceClient.HuggingFaceClient">
+<area shape="rect" id="Node000001" title="Constructeur avec configuration automatique depuis ApiKeysConfig." alt="" coords="5,63,220,103"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1ApiKeysConfig.html#a918cc5fdfc57722e40aef9f055a7f6b4" title="Récupère la clé API Hugging Face." alt="" coords="567,84,816,124"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="220,84,553,97,553,102,220,90"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="1168,34,1207,60"/>
+<area shape="poly" id="edge9_Node000001_Node000004" title=" " alt="" coords="152,60,205,37,267,19,324,12,407,7,631,3,886,9,1009,17,1120,28,1155,35,1154,40,1120,34,1009,22,886,15,631,8,408,12,324,17,269,24,207,42,154,65"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1ApiKeysConfig.html#a2294156977bc950d191de4ffd2364ee1" title="Récupère le modèle Hugging Face configuré" alt="" coords="567,148,816,188"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="221,96,553,145,552,151,220,101"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1ApiKeysConfig.html#a048ff9cd5ae4cb7c5738168b4234f333" title="Vérifie si une clé API Hugging Face est configurée." alt="" coords="268,34,519,74"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="220,69,254,66,255,71,221,74"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1ApiKeysConfig.html#a7babcdd2b84a59ec6088d85c66d00551" title="Charge le fichier de configuration des clés API." alt="" coords="864,84,1120,124"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="816,102,850,102,850,107,816,107"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="1060,82,1154,54,1156,59,1061,87"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="786,146,884,125,885,130,787,151"/>
+<area shape="poly" id="edge7_Node000006_Node000002" title=" " alt="" coords="512,71,560,79,559,85,511,76"/>
+<area shape="poly" id="edge8_Node000006_Node000004" title=" " alt="" coords="519,50,1154,45,1154,50,519,55"/>
+</map>

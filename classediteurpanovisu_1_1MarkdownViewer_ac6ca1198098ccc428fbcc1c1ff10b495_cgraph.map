@@ -1,0 +1,15 @@
+<map id="editeurpanovisu.MarkdownViewer.afficherMarkdown" name="editeurpanovisu.MarkdownViewer.afficherMarkdown">
+<area shape="rect" id="Node000001" title="Affiche du contenu Markdown dans une WebView." alt="" coords="5,96,204,136"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1MarkdownViewer.html#a93aeaf0c671032f2da3d4a18d9fcf752" title="Convertit du Markdown en HTML." alt="" coords="252,38,496,78"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="199,93,265,79,266,84,200,98"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="800,75,839,100"/>
+<area shape="poly" id="edge8_Node000001_Node000003" title=" " alt="" coords="204,109,752,88,786,86,786,92,752,93,205,115"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1MarkdownViewer.html#a819e79889af18dc33a07fab30c6e1369" title="Enveloppe le HTML dans une structure complète avec CSS." alt="" coords="544,177,752,217"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="205,128,531,177,530,182,204,133"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="432,36,499,18,580,5,624,3,668,5,711,11,753,24,781,41,803,63,799,66,778,45,751,29,710,16,667,10,624,8,581,10,500,23,433,41"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1MarkdownViewer.html#a861f2a104621e752b0eee2e71ee2c071" title="Remplace les émojis courants par des badges visuels stylisés Affiche uniquement l&#39;icône,..." alt="" coords="549,38,747,78"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="496,56,535,56,535,61,496,61"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="748,73,787,80,786,85,747,78"/>
+<area shape="poly" id="edge7_Node000005_Node000003" title=" " alt="" coords="682,175,751,132,788,107,791,111,753,137,685,179"/>
+<area shape="poly" id="edge6_Node000005_Node000005" title=" " alt="" coords="615,177,613,167,619,158,630,152,648,150,668,153,679,161,676,165,666,158,648,156,632,158,622,162,619,168,621,176"/>
+</map>

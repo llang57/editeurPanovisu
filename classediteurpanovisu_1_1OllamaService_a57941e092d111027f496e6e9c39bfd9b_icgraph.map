@@ -1,0 +1,5 @@
+<map id="editeurpanovisu.OllamaService.parserLocationIQ" name="editeurpanovisu.OllamaService.parserLocationIQ">
+<area shape="rect" id="Node000001" title="Parse la réponse JSON de LocationIQ et construit une description structurée pour que l&#39;IA comprenne p..." alt="" coords="339,5,609,45"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1OllamaService.html#a024a97abb9fbff8d815dffbfe2acb1a3" title="Géocodage inverse : convertit des coordonnées GPS en adresse/lieu réel Utilise l&#39;API LocationIQ (5000..." alt="" coords="5,5,291,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="325,28,291,28,291,23,325,23"/>
+</map>

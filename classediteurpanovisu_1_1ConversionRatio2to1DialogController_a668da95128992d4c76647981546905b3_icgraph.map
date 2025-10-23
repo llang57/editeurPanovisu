@@ -1,0 +1,29 @@
+<map id="editeurpanovisu.ConversionRatio2to1DialogController.calculerPositionY" name="editeurpanovisu.ConversionRatio2to1DialogController.calculerPositionY">
+<area shape="rect" id="Node000001" title="Calcule la position Y en fonction de la position verticale choisie." alt="" coords="1775,124,2020,179"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#aaaaf7b4c40362cd44e8af691b726139f" title="Applique un remplissage par couleur moyenne des bords." alt="" coords="1472,163,1727,217"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1762,172,1727,176,1727,171,1761,166"/>
+<area shape="rect" id="Node000009" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#ab1520702375f0993d7bd5bd7469b1ff5" title="Applique un remplissage flou très prononcé (image source étirée et fortement floutée en arrière&#45;plan)..." alt="" coords="1472,241,1727,296"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="1831,187,1728,232,1696,244,1694,239,1726,228,1828,182"/>
+<area shape="rect" id="Node000010" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#aa5ad7ef1b8983f74a90c0ed104de11c5" title="Applique un remplissage miroir (image source reflétée sur les bords)." alt="" coords="1472,5,1727,60"/>
+<area shape="poly" id="edge11_Node000001_Node000010" title=" " alt="" coords="1830,120,1726,74,1694,63,1696,58,1728,69,1832,116"/>
+<area shape="rect" id="Node000011" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#ad8454fcd3164a4e64f8ef0a44ff1dd22" title="Applique un remplissage noir autour de l&#39;image." alt="" coords="1472,84,1727,139"/>
+<area shape="poly" id="edge14_Node000001_Node000011" title=" " alt="" coords="1761,136,1727,131,1727,126,1762,130"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#acae1621a49553371b6d694fddac32edc" title="Convertit une image au ratio 2:1 en ajoutant du padding selon le type choisi." alt="" coords="1172,84,1424,139"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="1480,162,1403,141,1404,136,1481,157"/>
+<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#a2827f2caa4ce93c4b53b8887949da2d8" title="Convertit une image au ratio 2:1 avec des paramètres individuels." alt="" coords="1172,163,1424,217"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="1458,193,1424,193,1424,187,1458,187"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#af8e88820e15376004518e4965651d7f6" title="Traite (convertit au ratio 2:1) une image selon les paramètres définis." alt="" coords="849,91,1124,131"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="1158,114,1124,114,1124,109,1158,109"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#aced6771bf749a7901051d5959a073b37" title="Lance le traitement de conversion pour tous les fichiers." alt="" coords="567,84,801,139"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="836,114,802,114,802,109,836,109"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#aac5a46f9a3affb943ff5e103fd098b48" title="Crée les boutons d&#39;action (Valider, Annuler)." alt="" coords="292,84,519,139"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="553,114,519,114,519,109,553,109"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#a44e7c111f70ca443dad83445f187d3f4" title="Affiche la fenêtre de dialogue de conversion au ratio 2:1." alt="" coords="5,84,244,139"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="278,114,244,114,244,109,278,109"/>
+<area shape="poly" id="edge9_Node000009_Node000003" title=" " alt="" coords="1476,236,1470,232,1453,212,1445,192,1438,172,1422,153,1403,141,1406,137,1426,149,1443,169,1450,190,1458,209,1474,228,1479,232"/>
+<area shape="poly" id="edge10_Node000009_Node000008" title=" " alt="" coords="1480,240,1403,220,1404,215,1481,235"/>
+<area shape="poly" id="edge12_Node000010_Node000003" title=" " alt="" coords="1481,66,1404,86,1403,81,1480,61"/>
+<area shape="poly" id="edge13_Node000010_Node000008" title=" " alt="" coords="1479,70,1474,73,1458,92,1450,112,1443,133,1426,153,1408,165,1405,160,1422,149,1438,130,1445,110,1453,90,1470,69,1475,65"/>
+<area shape="poly" id="edge15_Node000011_Node000003" title=" " alt="" coords="1458,114,1424,114,1424,109,1458,109"/>
+<area shape="poly" id="edge16_Node000011_Node000008" title=" " alt="" coords="1481,145,1404,165,1403,160,1480,140"/>
+</map>

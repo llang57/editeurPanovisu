@@ -1,0 +1,9 @@
+<map id="editeurpanovisu.PrevisualiserConversionDialog.calculerCouleurMoyenne" name="editeurpanovisu.PrevisualiserConversionDialog.calculerCouleurMoyenne">
+<area shape="rect" id="Node000001" title="Calcule la couleur moyenne d&#39;une zone." alt="" coords="5,40,248,95"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="296,5,335,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="231,37,282,24,283,29,232,43"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a008d931e56b6fc013061112f26afbffb" title=" " alt="" coords="296,55,335,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="248,65,282,65,282,70,248,70"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#a9f9b62a373d2bb4624b7ac2df8151435" title=" " alt="" coords="296,104,335,129"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="232,92,283,106,282,111,231,97"/>
+</map>

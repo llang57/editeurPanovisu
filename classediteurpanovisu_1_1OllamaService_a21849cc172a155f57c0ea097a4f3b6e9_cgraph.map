@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.OllamaService.construirePrompt" name="editeurpanovisu.OllamaService.construirePrompt">
+<area shape="rect" id="Node000001" title="Construit le prompt pour Ollama selon les données disponibles et la langue Utilise le géocodage inver..." alt="" coords="5,23,300,63"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="348,5,387,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="300,23,334,19,335,24,300,29"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="348,55,387,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="300,57,335,61,334,66,300,63"/>
+</map>

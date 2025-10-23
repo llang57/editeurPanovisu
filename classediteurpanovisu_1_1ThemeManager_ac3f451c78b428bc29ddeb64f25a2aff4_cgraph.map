@@ -1,0 +1,31 @@
+<map id="editeurpanovisu.ThemeManager.toggleDarkMode" name="editeurpanovisu.ThemeManager.toggleDarkMode">
+<area shape="rect" id="Node000001" title="Bascule entre thème clair et sombre (utilise les thèmes Primer par défaut)" alt="" coords="5,365,283,405"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1ThemeManager.html#a5e8923bdccce312cd3cad810c607135f" title="Applique un thème à une scène JavaFX." alt="" coords="331,251,603,291"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="201,363,396,293,397,298,202,368"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="1291,258,1329,283"/>
+<area shape="poly" id="edge19_Node000001_Node000004" title=" " alt="" coords="187,403,263,438,369,480,500,523,646,558,722,570,800,578,878,580,956,576,1032,564,1105,543,1175,513,1241,473,1260,455,1275,435,1294,387,1304,338,1306,297,1312,297,1309,338,1299,388,1279,437,1264,459,1244,477,1178,518,1107,548,1033,569,957,581,879,586,800,584,722,576,645,563,498,528,368,485,261,443,185,408"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1ThemeManager.html#afd4bdeb257d4dc5f4974ac2b7ea52ba7" title="Ajoute des styles personnalisés complémentaires pour les composants spécifiques de l&#39;application." alt="" coords="977,79,1237,119"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="486,249,554,190,600,159,650,135,728,112,810,98,889,91,963,89,963,94,890,96,810,103,729,117,652,140,603,164,557,194,489,253"/>
+<area shape="poly" id="edge16_Node000002_Node000004" title=" " alt="" coords="518,248,580,227,650,208,781,184,951,161,1038,155,1119,155,1189,162,1219,169,1244,179,1263,192,1278,209,1300,244,1296,247,1274,212,1259,196,1241,184,1217,174,1188,167,1119,160,1038,160,951,167,781,189,651,213,582,232,520,253"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1ThemeManager.html#a14f6bcaa7772dbe0a9895a52a392625f" title="Applique un thème AtlantaFX." alt="" coords="971,308,1243,348"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="570,288,651,300,809,314,957,322,957,327,808,319,650,305,570,294"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1ThemeManager.html#a44ee3b09a7f6b1960fdcbef28902dc35" title="Applique un thème personnalisé (CSS legacy)" alt="" coords="971,193,1243,233"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="570,248,650,236,808,222,957,215,957,220,809,228,651,241,570,253"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1ThemeManager.html#ac773b6d34662ca4f15efee8230dd4fed" title="Applique un thème FlatLaf." alt="" coords="651,251,923,291"/>
+<area shape="poly" id="edge8_Node000002_Node000007" title=" " alt="" coords="603,268,637,268,637,273,603,273"/>
+<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1ThemeManager.html#a9d8b4213c67946a529741ac1e9362c55" title="Applique un thème MaterialFX." alt="" coords="651,365,923,405"/>
+<area shape="poly" id="edge11_Node000002_Node000008" title=" " alt="" coords="513,288,652,344,698,359,696,364,650,349,511,293"/>
+<area shape="rect" id="Node000009" href="$classediteurpanovisu_1_1ThemeManager.html#af5771c5a56ec049ce335c9a9bb76b47d" title="Nettoie toutes les classes CSS du root." alt="" coords="971,423,1242,463"/>
+<area shape="poly" id="edge14_Node000002_Node000009" title=" " alt="" coords="487,289,515,319,554,355,600,389,652,415,727,437,807,450,885,455,957,454,957,460,884,460,806,455,726,443,650,420,598,393,551,359,512,323,483,293"/>
+<area shape="rect" id="Node000010" href="$classediteurpanovisu_1_1ThemeManager.html#a539715f04c7d0e5411fb62afef4e6ba2" title="Sauvegarde le thème dans les préférences." alt="" coords="653,24,920,64"/>
+<area shape="poly" id="edge17_Node000002_Node000010" title=" " alt="" coords="481,249,547,169,595,123,649,83,683,67,686,71,652,88,599,127,551,172,485,252"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="1214,117,1244,135,1267,160,1285,189,1305,244,1300,246,1280,192,1263,163,1241,140,1211,121"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="1177,306,1277,277,1278,282,1179,311"/>
+<area shape="poly" id="edge7_Node000006_Node000004" title=" " alt="" coords="1179,231,1278,259,1277,264,1177,236"/>
+<area shape="poly" id="edge10_Node000007_Node000004" title=" " alt="" coords="923,268,1277,268,1277,273,923,273"/>
+<area shape="poly" id="edge9_Node000007_Node000005" title=" " alt="" coords="899,288,982,303,981,308,899,294"/>
+<area shape="poly" id="edge13_Node000008_Node000004" title=" " alt="" coords="908,403,986,408,1073,405,1160,389,1202,376,1241,358,1259,345,1273,330,1295,295,1300,298,1278,333,1262,349,1244,362,1204,381,1161,395,1073,410,986,413,908,408"/>
+<area shape="poly" id="edge12_Node000008_Node000005" title=" " alt="" coords="899,363,981,348,982,353,899,368"/>
+<area shape="poly" id="edge15_Node000009_Node000004" title=" " alt="" coords="1211,420,1241,402,1263,378,1280,350,1300,296,1305,298,1285,352,1267,381,1244,406,1214,425"/>
+<area shape="poly" id="edge18_Node000010_Node000004" title=" " alt="" coords="863,21,949,7,998,4,1049,3,1101,8,1152,19,1200,38,1244,65,1263,83,1279,105,1299,154,1309,203,1312,244,1306,244,1303,204,1294,155,1274,107,1259,87,1241,69,1198,42,1150,24,1100,13,1049,9,998,9,949,13,864,27"/>
+</map>

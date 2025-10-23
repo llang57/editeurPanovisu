@@ -1,0 +1,36 @@
+<map id="editeurpanovisu.ConversionRatio2to1DialogController.convertirRatio2to1" name="editeurpanovisu.ConversionRatio2to1DialogController.convertirRatio2to1">
+<area shape="rect" id="Node000001" title="Convertit une image au ratio 2:1 en ajoutant du padding selon le type choisi." alt="" coords="5,439,257,494"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#aaaaf7b4c40362cd44e8af691b726139f" title="Applique un remplissage par couleur moyenne des bords." alt="" coords="305,439,560,494"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="258,464,291,464,291,469,258,469"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="901,454,940,479"/>
+<area shape="poly" id="edge23_Node000001_Node000004" title=" " alt="" coords="163,492,225,542,264,565,306,583,460,628,526,641,588,647,648,644,711,630,778,604,852,566,871,550,887,531,908,491,913,493,891,534,875,554,855,570,780,609,712,635,649,649,588,652,525,646,459,633,304,588,262,570,222,546,159,496"/>
+<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#ab1520702375f0993d7bd5bd7469b1ff5" title="Applique un remplissage flou très prononcé (image source étirée et fortement floutée en arrière&#45;plan)..." alt="" coords="305,187,560,242"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="163,437,387,249,390,253,167,441"/>
+<area shape="rect" id="Node000010" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#aa5ad7ef1b8983f74a90c0ed104de11c5" title="Applique un remplissage miroir (image source reflétée sur les bords)." alt="" coords="305,518,560,573"/>
+<area shape="poly" id="edge15_Node000001_Node000010" title=" " alt="" coords="237,491,315,512,313,517,236,497"/>
+<area shape="rect" id="Node000011" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#ad8454fcd3164a4e64f8ef0a44ff1dd22" title="Applique un remplissage noir autour de l&#39;image." alt="" coords="305,361,560,415"/>
+<area shape="poly" id="edge18_Node000001_Node000011" title=" " alt="" coords="236,437,313,416,315,421,237,442"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#afbde9272ad5dd7d68c3ab3a325923a38" title="Calcule la couleur moyenne d&#39;une zone rectangulaire de l&#39;image." alt="" coords="608,258,853,313"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="532,437,559,424,596,401,632,374,691,321,695,325,635,378,599,405,561,429,534,442"/>
+<area shape="poly" id="edge8_Node000002_Node000004" title=" " alt="" coords="529,491,600,506,682,516,768,516,811,511,852,503,891,485,893,489,854,508,812,517,769,522,682,521,599,511,528,497"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#a668da95128992d4c76647981546905b3" title="Calcule la position Y en fonction de la position verticale choisie." alt="" coords="608,439,853,494"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="560,464,594,464,594,469,560,469"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="827,311,855,330,877,356,894,385,915,439,910,441,890,387,873,359,852,334,824,315"/>
+<area shape="rect" id="Node000005" href="$leaflet_8js.html#a008d931e56b6fc013061112f26afbffb" title=" " alt="" coords="901,207,940,233"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="810,255,888,228,889,233,812,260"/>
+<area shape="rect" id="Node000006" href="$leaflet_8js.html#a9f9b62a373d2bb4624b7ac2df8151435" title=" " alt="" coords="901,157,940,182"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="775,255,888,185,891,190,778,260"/>
+<area shape="poly" id="edge7_Node000007_Node000004" title=" " alt="" coords="854,464,887,464,887,469,854,469"/>
+<area shape="poly" id="edge12_Node000008_Node000004" title=" " alt="" coords="472,240,535,282,609,321,645,335,677,342,734,348,790,357,821,369,855,387,884,412,906,440,902,444,880,416,852,391,819,373,789,363,733,354,676,347,644,340,607,326,532,286,469,245"/>
+<area shape="poly" id="edge13_Node000008_Node000005" title=" " alt="" coords="560,197,701,190,778,192,854,199,889,207,888,212,853,204,778,197,702,195,560,202"/>
+<area shape="poly" id="edge14_Node000008_Node000006" title=" " alt="" coords="449,186,475,150,511,109,556,70,607,40,675,15,733,3,762,4,791,10,821,22,855,40,879,61,897,88,909,117,917,142,912,144,904,118,892,91,875,65,852,45,819,27,789,15,761,9,734,8,676,20,609,45,559,74,515,112,479,153,453,189"/>
+<area shape="poly" id="edge10_Node000008_Node000007" title=" " alt="" coords="466,240,610,367,685,428,681,432,606,371,463,244"/>
+<area shape="rect" id="Node000009" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="711,55,750,81"/>
+<area shape="poly" id="edge11_Node000008_Node000009" title=" " alt="" coords="467,185,530,140,607,97,654,81,697,71,698,76,655,86,609,102,533,145,470,189"/>
+<area shape="poly" id="edge17_Node000010_Node000004" title=" " alt="" coords="560,558,629,560,704,557,780,545,852,523,878,507,899,488,902,492,881,512,854,528,781,550,704,562,629,565,560,563"/>
+<area shape="poly" id="edge16_Node000010_Node000007" title=" " alt="" coords="536,515,613,495,614,500,538,520"/>
+<area shape="poly" id="edge20_Node000011_Node000004" title=" " alt="" coords="560,382,629,385,703,392,780,404,854,424,893,444,891,448,852,429,779,410,703,397,628,390,560,388"/>
+<area shape="poly" id="edge21_Node000011_Node000005" title=" " alt="" coords="456,358,519,297,561,267,607,243,644,230,684,221,762,212,833,211,888,214,888,219,833,216,762,217,685,226,646,235,609,248,564,271,523,301,460,362"/>
+<area shape="poly" id="edge22_Node000011_Node000006" title=" " alt="" coords="457,359,541,269,581,229,607,208,644,193,682,181,761,167,832,163,888,164,888,170,832,169,761,173,683,186,645,198,609,213,585,233,545,273,461,362"/>
+<area shape="poly" id="edge19_Node000011_Node000007" title=" " alt="" coords="538,413,614,433,613,438,536,418"/>
+</map>

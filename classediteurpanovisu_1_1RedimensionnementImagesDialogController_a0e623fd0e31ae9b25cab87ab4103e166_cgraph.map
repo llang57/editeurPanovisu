@@ -1,0 +1,8 @@
+<map id="editeurpanovisu.RedimensionnementImagesDialogController.ajouterFichiers" name="editeurpanovisu.RedimensionnementImagesDialogController.ajouterFichiers">
+<area shape="rect" id="Node000001" title="Ajoute des fichiers à la liste de traitement." alt="" coords="5,35,280,75"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a296d1a36971c72175f03caafe9b6e3bf" title="Vérifie si un fichier est une image valide." alt="" coords="328,5,608,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="280,40,314,37,315,42,281,45"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="656,42,695,67"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="280,55,608,55,642,54,642,59,608,60,280,60"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="608,43,643,48,642,53,608,48"/>
+</map>

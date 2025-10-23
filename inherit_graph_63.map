@@ -1,0 +1,5 @@
+<map id="Graphe hiérarchique des classes" name="Graphe hiérarchique des classes">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,5,67,31"/>
+<area shape="rect" id="Node000001" href="$classediteurpanovisu_1_1PanoramicCube.html" title="Cube panoramique pour l&#39;affichage de panoramas équirectangulaires Utilise 6 faces de cube au lieu d&#39;u..." alt="" coords="115,5,347,31"/>
+<area shape="poly" id="edge10_Node000000_Node000001" title=" " alt="" coords="80,15,115,15,115,21,80,21"/>
+</map>

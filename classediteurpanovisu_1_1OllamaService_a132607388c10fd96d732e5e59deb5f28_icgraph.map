@@ -1,0 +1,6 @@
+<map id="editeurpanovisu.OllamaService.extraireReponseHuggingFace" name="editeurpanovisu.OllamaService.extraireReponseHuggingFace">
+<area shape="rect" id="Node000001" title="Extrait la réponse du JSON retourné par Hugging Face." alt="" coords="336,29,617,69"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1OllamaService.html#a66f06bbc5d60eb447588a448a3c7f857" title="Appelle l&#39;API Hugging Face pour générer le texte." alt="" coords="5,29,288,69"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="322,52,288,52,288,47,322,47"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="203,18,183,11,147,8,115,10,95,15,88,21,91,28,87,30,83,20,93,10,114,5,147,3,184,5,205,13"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="editeurpanovisu.util.SvgIconLoader.loadFallbackPng" name="editeurpanovisu.util.SvgIconLoader.loadFallbackPng">
+<area shape="rect" id="Node000001" title="Fallback: charge l&#39;icône PNG si le SVG n&#39;est pas disponible." alt="" coords="5,5,207,45"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="489,13,528,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="207,19,441,19,475,20,475,26,441,24,207,25"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1util_1_1SvgIconLoader.html#af546932dfbd067f7700bd0832d5efb64" title="Mappe les noms de fichiers SVG vers les noms PNG existants." alt="" coords="255,33,441,73"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="207,34,241,38,241,44,206,40"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="441,34,475,28,476,34,442,40"/>
+</map>

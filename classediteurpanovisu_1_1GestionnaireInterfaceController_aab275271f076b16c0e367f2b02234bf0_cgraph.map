@@ -1,0 +1,9 @@
+<map id="editeurpanovisu.GestionnaireInterfaceController.afficheImage" name="editeurpanovisu.GestionnaireInterfaceController.afficheImage">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,85,237,125"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a2cfb9c2807597994d00b97fde8d37b28" title="Retourne la hauteur réelle de l&#39;image de visualisation affichée." alt="" coords="305,5,557,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="207,82,299,61,300,66,209,87"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a9e850d024075a94fade7333821a909b5" title="Retourne la largeur réelle de l&#39;image de visualisation affichée." alt="" coords="285,85,576,125"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="238,102,272,102,272,107,238,107"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="411,149,450,175"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="223,122,286,134,398,154,397,159,285,139,222,127"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="editeurpanovisu.NavigateurOpenLayersSeul" name="editeurpanovisu.NavigateurOpenLayersSeul">
+<area shape="rect" id="Node000001" title=" " alt="" coords="95,183,297,223"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1CoordonneesGeographiques.html" title=" " alt="" coords="5,80,221,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="140,129,183,181,178,184,135,132"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1NavigateurCarteSeul.html" title=" " alt="" coords="245,80,448,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="308,130,226,185,223,180,305,125"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="313,5,380,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="349,44,349,80,344,80,344,44"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.EditeurPanovisu.ajouterZone" name="editeurpanovisu.EditeurPanovisu.ajouterZone">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,31,324,56"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="372,5,411,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="278,28,358,19,359,24,279,33"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="372,55,411,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="285,53,359,61,358,67,284,59"/>
+</map>

@@ -1,0 +1,12 @@
+<map id="editeurpanovisu.ConversionRatio2to1DialogController.appliquerRemplissageNoir" name="editeurpanovisu.ConversionRatio2to1DialogController.appliquerRemplissageNoir">
+<area shape="rect" id="Node000001" title="Applique un remplissage noir autour de l&#39;image." alt="" coords="5,96,260,151"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#a668da95128992d4c76647981546905b3" title="Calcule la position Y en fonction de la position verticale choisie." alt="" coords="308,5,553,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="223,93,327,61,328,66,224,98"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="601,53,640,79"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="260,106,587,67,588,72,261,111"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#a008d931e56b6fc013061112f26afbffb" title=" " alt="" coords="411,136,450,161"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="260,131,397,143,397,149,260,137"/>
+<area shape="rect" id="Node000005" href="$leaflet_8js.html#a9f9b62a373d2bb4624b7ac2df8151435" title=" " alt="" coords="411,185,450,211"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="227,148,309,170,399,189,397,195,307,175,226,153"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="554,52,588,58,587,63,553,57"/>
+</map>

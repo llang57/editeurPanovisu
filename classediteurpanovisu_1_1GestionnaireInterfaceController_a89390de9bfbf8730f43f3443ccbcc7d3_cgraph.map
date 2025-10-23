@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.GestionnaireInterfaceController.mettreAJourCouleursHotspots" name="editeurpanovisu.GestionnaireInterfaceController.mettreAJourCouleursHotspots">
+<area shape="rect" id="Node000001" title="Met à jour les couleurs de fond des panneaux d&#39;icônes de hotspots selon le thème actuel (clair ou som..." alt="" coords="5,27,231,82"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1ThemeManager.html#af4e2d4bf6d30500b39856da225e16dbb" title="Retourne le thème actuellement appliqué" alt="" coords="279,5,536,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="231,41,265,37,265,42,231,46"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="388,70,427,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="231,63,374,77,374,82,231,68"/>
+</map>

@@ -1,0 +1,11 @@
+<map id="editeurpanovisu.MarkdownViewer.main" name="editeurpanovisu.MarkdownViewer.main">
+<area shape="rect" id="Node000001" title="Exemple d&#39;utilisation." alt="" coords="5,5,204,45"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="745,34,784,59"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="204,20,252,19,475,12,573,15,698,28,732,35,731,40,697,33,573,20,475,17,252,24,204,25"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1MarkdownViewer.html#a97cf5f887bf60ee77ea235722283e071" title="Constructeur avec support des extensions GFM (GitHub Flavored Markdown)" alt="" coords="252,33,451,73"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="204,34,239,38,238,43,204,39"/>
+<area shape="poly" id="edge5_Node000003_Node000002" title=" " alt="" coords="451,49,732,45,732,50,451,54"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1MarkdownViewer.html#a5823f5194e7e655cfdff1325fe7b59a9" title="Charge les polices personnalisées pour le WebView Wingdings doit être chargée explicitement car WebVi..." alt="" coords="499,84,697,124"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="450,71,488,79,486,84,449,76"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="656,81,732,55,733,60,658,86"/>
+</map>

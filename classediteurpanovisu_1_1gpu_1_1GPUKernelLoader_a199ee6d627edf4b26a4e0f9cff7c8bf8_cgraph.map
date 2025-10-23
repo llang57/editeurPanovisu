@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.gpu.GPUKernelLoader.loadEqui2CubeKernel" name="editeurpanovisu.gpu.GPUKernelLoader.loadEqui2CubeKernel">
+<area shape="rect" id="Node000001" title="Charge le kernel equi2cube." alt="" coords="5,5,233,45"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1gpu_1_1GPUKernelLoader.html#af75a057bee5cbaaad3ea651050f058f0" title="Charge un kernel OpenCL depuis les ressources." alt="" coords="281,5,509,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="233,23,268,23,268,28,233,28"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="557,13,596,38"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="510,23,543,23,543,28,510,28"/>
+</map>

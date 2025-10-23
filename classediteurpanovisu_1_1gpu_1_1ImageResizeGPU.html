@@ -1,0 +1,1064 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>EditeurPanovisu: Référence de la classe editeurpanovisu.gpu.ImageResizeGPU</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">EditeurPanovisu<span id="projectnumber">&#160;3.1.0</span>
+   </div>
+   <div id="projectbrief">Éditeur de visites virtuelles 360° Panovisu</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Chargement...</div>
+<div class="SRStatus" id="Searching">Recherche...</div>
+<div class="SRStatus" id="NoMatches">Aucune correspondance</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-static-methods">Fonctions membres publiques statiques</a> &#124;
+<a href="#pri-static-methods">Fonctions membres privées statiques</a> &#124;
+<a href="#pri-static-attribs">Attributs privés statiques</a> &#124;
+<a href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU-members.html">Liste de tous les membres</a>  </div>
+  <div class="headertitle"><div class="title">Référence de la classe editeurpanovisu.gpu.ImageResizeGPU</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Classe pour le redimensionnement d'images accéléré par GPU via OpenCL.  
+ <a href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#details">Plus de détails...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Fonctions membres publiques statiques</h2></td></tr>
+<tr class="memitem:a56af72c51956399056e1f0de5b253319" id="r_a56af72c51956399056e1f0de5b253319"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">static</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Image</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a56af72c51956399056e1f0de5b253319">resizeAuto</a> (<a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Image</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">source</a>, <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">int</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">targetWidth</a>, <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">int</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">targetHeight</a>, <a class="el" href="enumediteurpanovisu_1_1gpu_1_1InterpolationMethod.html">InterpolationMethod</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">method</a>)  <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">throws</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">InterruptedException</a> </td></tr>
+<tr class="memdesc:a56af72c51956399056e1f0de5b253319"><td class="mdescLeft">&#160;</td><td class="mdescRight">Redimensionne une image avec routage automatique GPU/CPU.  <br /></td></tr>
+<tr class="separator:a56af72c51956399056e1f0de5b253319"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a878f31076eed5d7e7feb535c05e6de" id="r_a4a878f31076eed5d7e7feb535c05e6de"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">static</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a4a878f31076eed5d7e7feb535c05e6de">cleanup</a> ()</td></tr>
+<tr class="memdesc:a4a878f31076eed5d7e7feb535c05e6de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Libère les ressources OpenCL (à appeler lors de la fermeture de l'application)  <br /></td></tr>
+<tr class="separator:a4a878f31076eed5d7e7feb535c05e6de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-static-methods" name="pri-static-methods"></a>
+Fonctions membres privées statiques</h2></td></tr>
+<tr class="memitem:a8938ddd095bf1e545f06dfbc9ecfee09" id="r_a8938ddd095bf1e545f06dfbc9ecfee09"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">static</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Image</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a8938ddd095bf1e545f06dfbc9ecfee09">resizeGPU</a> (<a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Image</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">source</a>, <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">int</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">targetWidth</a>, <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">int</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">targetHeight</a>, <a class="el" href="enumediteurpanovisu_1_1gpu_1_1InterpolationMethod.html">InterpolationMethod</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">method</a>)  <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">throws</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Exception</a> </td></tr>
+<tr class="memdesc:a8938ddd095bf1e545f06dfbc9ecfee09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Redimensionnement via GPU OpenCL.  <br /></td></tr>
+<tr class="separator:a8938ddd095bf1e545f06dfbc9ecfee09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbb5bce1b5bafeb8197e5e74476daa09" id="r_afbb5bce1b5bafeb8197e5e74476daa09"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">static</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Image</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#afbb5bce1b5bafeb8197e5e74476daa09">resizeCPU</a> (<a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Image</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">source</a>, <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">int</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">targetWidth</a>, <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">int</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">targetHeight</a>, <a class="el" href="enumediteurpanovisu_1_1gpu_1_1InterpolationMethod.html">InterpolationMethod</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">method</a>)</td></tr>
+<tr class="memdesc:afbb5bce1b5bafeb8197e5e74476daa09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Redimensionnement via CPU (fallback) Utilise la bibliothèque Thumbnails directement pour éviter la récursion.  <br /></td></tr>
+<tr class="separator:afbb5bce1b5bafeb8197e5e74476daa09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70a13e24789d5c6150c606cd077b5137" id="r_a70a13e24789d5c6150c606cd077b5137"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">static</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a70a13e24789d5c6150c606cd077b5137">initializeKernels</a> ()  <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">throws</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Exception</a> </td></tr>
+<tr class="memdesc:a70a13e24789d5c6150c606cd077b5137"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise les kernels OpenCL (compilation à la demande)  <br /></td></tr>
+<tr class="separator:a70a13e24789d5c6150c606cd077b5137"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9efed67c5ab186019b0222610507a48f" id="r_a9efed67c5ab186019b0222610507a48f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">static</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">long</a>[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a9efed67c5ab186019b0222610507a48f">calculateOptimalLocalWorkSize</a> (<a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">int</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">width</a>, <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">int</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">height</a>)</td></tr>
+<tr class="memdesc:a9efed67c5ab186019b0222610507a48f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calcule la taille optimale du local work size pour le GPU Pour les très grandes images, retourne null (laisse OpenCL décider)  <br /></td></tr>
+<tr class="separator:a9efed67c5ab186019b0222610507a48f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5094b97f55ac2ef762873e642caa7c8" id="r_af5094b97f55ac2ef762873e642caa7c8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">static</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">ByteBuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#af5094b97f55ac2ef762873e642caa7c8">imageToByteBuffer</a> (<a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Image</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">image</a>)</td></tr>
+<tr class="memdesc:af5094b97f55ac2ef762873e642caa7c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convertit une Image JavaFX en ByteBuffer pour OpenCL (format RGBA)  <br /></td></tr>
+<tr class="separator:af5094b97f55ac2ef762873e642caa7c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18787250db43d608a12770317d82f13f" id="r_a18787250db43d608a12770317d82f13f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">static</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Image</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a18787250db43d608a12770317d82f13f">byteBufferToImage</a> (<a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">ByteBuffer</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">buffer</a>, <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">int</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">width</a>, <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">int</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">height</a>)</td></tr>
+<tr class="memdesc:a18787250db43d608a12770317d82f13f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convertit un ByteBuffer OpenCL (format RGBA) en Image JavaFX.  <br /></td></tr>
+<tr class="separator:a18787250db43d608a12770317d82f13f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-static-attribs" name="pri-static-attribs"></a>
+Attributs privés statiques</h2></td></tr>
+<tr class="memitem:a6af74b24f2bf41fd27ab2f16bf7e320f" id="r_a6af74b24f2bf41fd27ab2f16bf7e320f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">static</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">cl_program</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a6af74b24f2bf41fd27ab2f16bf7e320f">bicubicProgram</a> = <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">null</a></td></tr>
+<tr class="separator:a6af74b24f2bf41fd27ab2f16bf7e320f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c547706225ec6e55e7901e153e73ae2" id="r_a7c547706225ec6e55e7901e153e73ae2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">static</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">cl_program</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a7c547706225ec6e55e7901e153e73ae2">lanczosProgram</a> = <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">null</a></td></tr>
+<tr class="separator:a7c547706225ec6e55e7901e153e73ae2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ad70052b2ed462f11fe4fabfd5eaa19" id="r_a3ad70052b2ed462f11fe4fabfd5eaa19"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">static</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">cl_kernel</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a3ad70052b2ed462f11fe4fabfd5eaa19">bicubicKernel</a> = <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">null</a></td></tr>
+<tr class="separator:a3ad70052b2ed462f11fe4fabfd5eaa19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a092ff584a960c0fced59fe62c71538b8" id="r_a092ff584a960c0fced59fe62c71538b8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">static</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">cl_kernel</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a092ff584a960c0fced59fe62c71538b8">lanczosKernel</a> = <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">null</a></td></tr>
+<tr class="separator:a092ff584a960c0fced59fe62c71538b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bbeeffdcbd43218a7dabe5fcc64bdc9" id="r_a8bbeeffdcbd43218a7dabe5fcc64bdc9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">static</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">final</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a8bbeeffdcbd43218a7dabe5fcc64bdc9">GPU_THRESHOLD_MEGAPIXELS</a> = 2</td></tr>
+<tr class="memdesc:a8bbeeffdcbd43218a7dabe5fcc64bdc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Seuil de taille d'image pour utiliser le GPU (en mégapixels) En dessous de ce seuil, le CPU est plus rapide à cause de l'overhead GPU.  <br /></td></tr>
+<tr class="separator:a8bbeeffdcbd43218a7dabe5fcc64bdc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Classe pour le redimensionnement d'images accéléré par GPU via OpenCL. </p>
+<p>Supporte plusieurs méthodes d'interpolation :</p><ul>
+<li>Bicubique (Catmull-Rom) : Recommandé pour la plupart des cas</li>
+<li>Lanczos3 : Meilleure qualité pour agrandissements critiques</li>
+</ul>
+<p>Utilise le GPUManager pour la gestion du contexte OpenCL et effectue automatiquement un fallback CPU si le GPU n'est pas disponible.</p>
+<dl class="section author"><dt>Auteur</dt><dd>PanoVisu Team </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="ImageResizeGPU_8java_source.html#l00027">27</a> du fichier <a class="el" href="ImageResizeGPU_8java_source.html">ImageResizeGPU.java</a>.</p>
+</div><h2 class="groupheader">Documentation des fonctions membres</h2>
+<a id="a18787250db43d608a12770317d82f13f" name="a18787250db43d608a12770317d82f13f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18787250db43d608a12770317d82f13f">&#9670;&#160;</a></span>byteBufferToImage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">static</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Image</a> editeurpanovisu.gpu.ImageResizeGPU.byteBufferToImage </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">ByteBuffer</a>&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">int</a>&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">int</a>&#160;</td>
+          <td class="paramname"><em>height</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convertit un ByteBuffer OpenCL (format RGBA) en Image JavaFX. </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="ImageResizeGPU_8java_source.html#l00362">362</a> du fichier <a class="el" href="ImageResizeGPU_8java_source.html">ImageResizeGPU.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="leaflet_8js_source.html#l00005">x()</a>, et <a class="el" href="leaflet_8js_source.html#l00005">y()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="ImageResizeGPU_8java_source.html#l00112">editeurpanovisu.gpu.ImageResizeGPU.resizeGPU()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a18787250db43d608a12770317d82f13f_cgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a18787250db43d608a12770317d82f13f_cgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a18787250db43d608a12770317d82f13f_cgraph" id="aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a18787250db43d608a12770317d82f13f_cgraph">
+<area shape="rect" title="Convertit un ByteBuffer OpenCL (format RGBA) en Image JavaFX." alt="" coords="5,47,225,87"/>
+<area shape="rect" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="273,5,312,31"/>
+<area shape="poly" title=" " alt="" coords="187,45,259,24,261,29,188,50"/>
+<area shape="rect" href="leaflet_8js.html#a008d931e56b6fc013061112f26afbffb" title=" " alt="" coords="273,55,312,80"/>
+<area shape="poly" title=" " alt="" coords="226,65,259,65,259,70,226,70"/>
+<area shape="rect" href="leaflet_8js.html#a9f9b62a373d2bb4624b7ac2df8151435" title=" " alt="" coords="273,104,312,129"/>
+<area shape="poly" title=" " alt="" coords="188,85,261,105,259,110,187,90"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a18787250db43d608a12770317d82f13f_icgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a18787250db43d608a12770317d82f13f_icgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a18787250db43d608a12770317d82f13f_icgraph" id="aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a18787250db43d608a12770317d82f13f_icgraph">
+<area shape="rect" title="Convertit un ByteBuffer OpenCL (format RGBA) en Image JavaFX." alt="" coords="760,101,980,141"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a8938ddd095bf1e545f06dfbc9ecfee09" title="Redimensionnement via GPU OpenCL." alt="" coords="512,101,712,141"/>
+<area shape="poly" title=" " alt="" coords="746,124,712,124,712,119,746,119"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a56af72c51956399056e1f0de5b253319" title="Redimensionne une image avec routage automatique GPU/CPU." alt="" coords="264,101,464,141"/>
+<area shape="poly" title=" " alt="" coords="499,124,464,124,464,119,499,119"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestImageResize.html#ab1e39892471c5658890c8a78904be64c" title=" " alt="" coords="18,5,203,45"/>
+<area shape="poly" title=" " alt="" coords="307,98,215,60,180,48,182,43,217,55,309,93"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestBicubicVsLanczos.html#a4cef8c04b1386d551c4cfec1b3361458" title=" " alt="" coords="18,69,203,109"/>
+<area shape="poly" title=" " alt="" coords="250,110,203,104,204,98,251,104"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestImageResizeInteractive.html#a16412151c83ac1a5ef58bfbd75bb0a42" title=" " alt="" coords="5,133,216,173"/>
+<area shape="poly" title=" " alt="" coords="251,138,217,143,216,137,250,133"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestReductionImage.html#a868abe4fd92adbc966d1c9c89fb72cc3" title=" " alt="" coords="18,197,203,237"/>
+<area shape="poly" title=" " alt="" coords="309,150,217,188,182,200,180,195,215,183,307,145"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a9efed67c5ab186019b0222610507a48f" name="a9efed67c5ab186019b0222610507a48f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9efed67c5ab186019b0222610507a48f">&#9670;&#160;</a></span>calculateOptimalLocalWorkSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">static</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">long</a>[] editeurpanovisu.gpu.ImageResizeGPU.calculateOptimalLocalWorkSize </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">int</a>&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">int</a>&#160;</td>
+          <td class="paramname"><em>height</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calcule la taille optimale du local work size pour le GPU Pour les très grandes images, retourne null (laisse OpenCL décider) </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="ImageResizeGPU_8java_source.html#l00293">293</a> du fichier <a class="el" href="ImageResizeGPU_8java_source.html">ImageResizeGPU.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00043">editeurpanovisu.gpu.GPUManager.getInstance()</a>, <a class="el" href="GPUManager_8java_source.html#l00270">editeurpanovisu.gpu.GPUManager.getMaxWorkGroupSize()</a>, et <a class="el" href="leaflet_8js_source.html#l00005">k()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="ImageResizeGPU_8java_source.html#l00112">editeurpanovisu.gpu.ImageResizeGPU.resizeGPU()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a9efed67c5ab186019b0222610507a48f_cgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a9efed67c5ab186019b0222610507a48f_cgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a9efed67c5ab186019b0222610507a48f_cgraph" id="aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a9efed67c5ab186019b0222610507a48f_cgraph">
+<area shape="rect" title="Calcule la taille optimale du local work size pour le GPU Pour les très grandes images,..." alt="" coords="5,152,248,206"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a65cc6674dbee14bcf2d3f11f06a26e4b" title="Récupère l&#39;instance unique du gestionnaire GPU." alt="" coords="296,102,564,142"/>
+<area shape="poly" title=" " alt="" coords="248,154,310,142,311,147,249,159"/>
+<area shape="rect" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="1632,109,1671,134"/>
+<area shape="poly" title=" " alt="" coords="248,176,734,176,1073,176,1218,180,1331,185,1385,184,1443,179,1508,168,1583,151,1619,137,1621,142,1585,156,1509,174,1444,184,1386,189,1331,190,1218,186,1073,182,734,182,248,182"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#ab9275a8ae387b50294debd8f0ab02d3c" title="Récupère la taille maximale d&#39;un workgroup." alt="" coords="296,216,564,256"/>
+<area shape="poly" title=" " alt="" coords="249,199,311,211,310,217,248,205"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a3ba0aa0d6379b3b216d07d19ee71e251" title="Constructeur privé (singleton)" alt="" coords="612,74,859,114"/>
+<area shape="poly" title=" " alt="" coords="564,107,598,104,599,109,564,112"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#ad758dc8906499865aeaf412236ba042c" title="Initialise OpenCL et détecte les GPU disponibles." alt="" coords="907,81,1237,106"/>
+<area shape="poly" title=" " alt="" coords="859,91,893,91,893,96,859,96"/>
+<area shape="poly" title=" " alt="" coords="1100,79,1186,46,1244,29,1309,14,1378,5,1449,4,1519,14,1585,37,1603,48,1618,63,1640,95,1636,98,1614,66,1599,52,1583,42,1518,19,1449,9,1378,10,1310,19,1245,34,1187,51,1102,84"/>
+<area shape="rect" href="leaflet_8js.html#acaad4b36c0476b761b674f28b36d565c" title=" " alt="" coords="1415,52,1454,77"/>
+<area shape="poly" title=" " alt="" coords="1229,78,1402,64,1402,70,1229,84"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#af70605c6c0bf0dd246801d1c51fb90dc" title="Récupère les informations détaillées du GPU." alt="" coords="1285,102,1584,142"/>
+<area shape="poly" title=" " alt="" coords="1237,104,1272,107,1271,112,1236,109"/>
+<area shape="poly" title=" " alt="" coords="1584,119,1618,119,1618,124,1584,124"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a9efed67c5ab186019b0222610507a48f_icgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a9efed67c5ab186019b0222610507a48f_icgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a9efed67c5ab186019b0222610507a48f_icgraph" id="aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a9efed67c5ab186019b0222610507a48f_icgraph">
+<area shape="rect" title="Calcule la taille optimale du local work size pour le GPU Pour les très grandes images,..." alt="" coords="760,94,1003,149"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a8938ddd095bf1e545f06dfbc9ecfee09" title="Redimensionnement via GPU OpenCL." alt="" coords="512,101,712,141"/>
+<area shape="poly" title=" " alt="" coords="746,124,712,124,712,119,746,119"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a56af72c51956399056e1f0de5b253319" title="Redimensionne une image avec routage automatique GPU/CPU." alt="" coords="264,101,464,141"/>
+<area shape="poly" title=" " alt="" coords="499,124,464,124,464,119,499,119"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestImageResize.html#ab1e39892471c5658890c8a78904be64c" title=" " alt="" coords="18,5,203,45"/>
+<area shape="poly" title=" " alt="" coords="307,98,215,60,180,48,182,43,217,55,309,93"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestBicubicVsLanczos.html#a4cef8c04b1386d551c4cfec1b3361458" title=" " alt="" coords="18,69,203,109"/>
+<area shape="poly" title=" " alt="" coords="250,110,203,104,204,98,251,104"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestImageResizeInteractive.html#a16412151c83ac1a5ef58bfbd75bb0a42" title=" " alt="" coords="5,133,216,173"/>
+<area shape="poly" title=" " alt="" coords="251,138,217,143,216,137,250,133"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestReductionImage.html#a868abe4fd92adbc966d1c9c89fb72cc3" title=" " alt="" coords="18,197,203,237"/>
+<area shape="poly" title=" " alt="" coords="309,150,217,188,182,200,180,195,215,183,307,145"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a4a878f31076eed5d7e7feb535c05e6de" name="a4a878f31076eed5d7e7feb535c05e6de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a878f31076eed5d7e7feb535c05e6de">&#9670;&#160;</a></span>cleanup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">static</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">void</a> editeurpanovisu.gpu.ImageResizeGPU.cleanup </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Libère les ressources OpenCL (à appeler lors de la fermeture de l'application) </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="ImageResizeGPU_8java_source.html#l00387">387</a> du fichier <a class="el" href="ImageResizeGPU_8java_source.html">ImageResizeGPU.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="ImageResizeGPU_8java_source.html#l00031">editeurpanovisu.gpu.ImageResizeGPU.bicubicKernel</a>, <a class="el" href="ImageResizeGPU_8java_source.html#l00029">editeurpanovisu.gpu.ImageResizeGPU.bicubicProgram</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="ImageResizeGPU_8java_source.html#l00032">editeurpanovisu.gpu.ImageResizeGPU.lanczosKernel</a>, et <a class="el" href="ImageResizeGPU_8java_source.html#l00030">editeurpanovisu.gpu.ImageResizeGPU.lanczosProgram</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="TestImageResize_8java_source.html#l00014">editeurpanovisu.gpu.TestImageResize.main()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a4a878f31076eed5d7e7feb535c05e6de_cgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a4a878f31076eed5d7e7feb535c05e6de_cgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a4a878f31076eed5d7e7feb535c05e6de_cgraph" id="aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a4a878f31076eed5d7e7feb535c05e6de_cgraph">
+<area shape="rect" title="Libère les ressources OpenCL (à appeler lors de la fermeture de l&#39;application)" alt="" coords="5,5,205,45"/>
+<area shape="rect" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="253,13,292,38"/>
+<area shape="poly" title=" " alt="" coords="206,23,240,23,240,28,206,28"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a4a878f31076eed5d7e7feb535c05e6de_icgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a4a878f31076eed5d7e7feb535c05e6de_icgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a4a878f31076eed5d7e7feb535c05e6de_icgraph" id="aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a4a878f31076eed5d7e7feb535c05e6de_icgraph">
+<area shape="rect" title="Libère les ressources OpenCL (à appeler lors de la fermeture de l&#39;application)" alt="" coords="239,5,439,45"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestImageResize.html#ab1e39892471c5658890c8a78904be64c" title=" " alt="" coords="5,5,191,45"/>
+<area shape="poly" title=" " alt="" coords="225,28,191,28,191,23,225,23"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="af5094b97f55ac2ef762873e642caa7c8" name="af5094b97f55ac2ef762873e642caa7c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5094b97f55ac2ef762873e642caa7c8">&#9670;&#160;</a></span>imageToByteBuffer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">static</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">ByteBuffer</a> editeurpanovisu.gpu.ImageResizeGPU.imageToByteBuffer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Image</a>&#160;</td>
+          <td class="paramname"><em>image</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convertit une Image JavaFX en ByteBuffer pour OpenCL (format RGBA) </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="ImageResizeGPU_8java_source.html#l00330">330</a> du fichier <a class="el" href="ImageResizeGPU_8java_source.html">ImageResizeGPU.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="leaflet_8js_source.html#l00005">x()</a>, et <a class="el" href="leaflet_8js_source.html#l00005">y()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="ImageResizeGPU_8java_source.html#l00112">editeurpanovisu.gpu.ImageResizeGPU.resizeGPU()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU_af5094b97f55ac2ef762873e642caa7c8_cgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_af5094b97f55ac2ef762873e642caa7c8_cgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_af5094b97f55ac2ef762873e642caa7c8_cgraph" id="aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_af5094b97f55ac2ef762873e642caa7c8_cgraph">
+<area shape="rect" title="Convertit une Image JavaFX en ByteBuffer pour OpenCL (format RGBA)" alt="" coords="5,47,227,87"/>
+<area shape="rect" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="275,5,313,31"/>
+<area shape="poly" title=" " alt="" coords="188,45,260,24,262,29,189,50"/>
+<area shape="rect" href="leaflet_8js.html#a008d931e56b6fc013061112f26afbffb" title=" " alt="" coords="275,55,313,80"/>
+<area shape="poly" title=" " alt="" coords="227,65,261,65,261,70,227,70"/>
+<area shape="rect" href="leaflet_8js.html#a9f9b62a373d2bb4624b7ac2df8151435" title=" " alt="" coords="275,104,313,129"/>
+<area shape="poly" title=" " alt="" coords="189,85,262,105,260,110,188,90"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU_af5094b97f55ac2ef762873e642caa7c8_icgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_af5094b97f55ac2ef762873e642caa7c8_icgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_af5094b97f55ac2ef762873e642caa7c8_icgraph" id="aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_af5094b97f55ac2ef762873e642caa7c8_icgraph">
+<area shape="rect" title="Convertit une Image JavaFX en ByteBuffer pour OpenCL (format RGBA)" alt="" coords="760,101,981,141"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a8938ddd095bf1e545f06dfbc9ecfee09" title="Redimensionnement via GPU OpenCL." alt="" coords="512,101,712,141"/>
+<area shape="poly" title=" " alt="" coords="746,124,712,124,712,119,746,119"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a56af72c51956399056e1f0de5b253319" title="Redimensionne une image avec routage automatique GPU/CPU." alt="" coords="264,101,464,141"/>
+<area shape="poly" title=" " alt="" coords="499,124,464,124,464,119,499,119"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestImageResize.html#ab1e39892471c5658890c8a78904be64c" title=" " alt="" coords="18,5,203,45"/>
+<area shape="poly" title=" " alt="" coords="307,98,215,60,180,48,182,43,217,55,309,93"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestBicubicVsLanczos.html#a4cef8c04b1386d551c4cfec1b3361458" title=" " alt="" coords="18,69,203,109"/>
+<area shape="poly" title=" " alt="" coords="250,110,203,104,204,98,251,104"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestImageResizeInteractive.html#a16412151c83ac1a5ef58bfbd75bb0a42" title=" " alt="" coords="5,133,216,173"/>
+<area shape="poly" title=" " alt="" coords="251,138,217,143,216,137,250,133"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestReductionImage.html#a868abe4fd92adbc966d1c9c89fb72cc3" title=" " alt="" coords="18,197,203,237"/>
+<area shape="poly" title=" " alt="" coords="309,150,217,188,182,200,180,195,215,183,307,145"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a70a13e24789d5c6150c606cd077b5137" name="a70a13e24789d5c6150c606cd077b5137"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70a13e24789d5c6150c606cd077b5137">&#9670;&#160;</a></span>initializeKernels()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">static</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">void</a> editeurpanovisu.gpu.ImageResizeGPU.initializeKernels </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">throws</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Exception</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Initialise les kernels OpenCL (compilation à la demande) </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="ImageResizeGPU_8java_source.html#l00233">233</a> du fichier <a class="el" href="ImageResizeGPU_8java_source.html">ImageResizeGPU.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="ImageResizeGPU_8java_source.html#l00031">editeurpanovisu.gpu.ImageResizeGPU.bicubicKernel</a>, <a class="el" href="ImageResizeGPU_8java_source.html#l00029">editeurpanovisu.gpu.ImageResizeGPU.bicubicProgram</a>, <a class="el" href="GPUManager_8java_source.html#l00214">editeurpanovisu.gpu.GPUManager.getContext()</a>, <a class="el" href="GPUManager_8java_source.html#l00230">editeurpanovisu.gpu.GPUManager.getDevice()</a>, <a class="el" href="GPUManager_8java_source.html#l00043">editeurpanovisu.gpu.GPUManager.getInstance()</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="ImageResizeGPU_8java_source.html#l00032">editeurpanovisu.gpu.ImageResizeGPU.lanczosKernel</a>, <a class="el" href="ImageResizeGPU_8java_source.html#l00030">editeurpanovisu.gpu.ImageResizeGPU.lanczosProgram</a>, <a class="el" href="GPUKernelLoader_8java_source.html#l00076">editeurpanovisu.gpu.GPUKernelLoader.loadBicubicKernel()</a>, <a class="el" href="GPUKernelLoader_8java_source.html#l00085">editeurpanovisu.gpu.GPUKernelLoader.loadLanczosKernel()</a>, <a class="el" href="types_8js_source.html#l00070">log</a>, et <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="ImageResizeGPU_8java_source.html#l00112">editeurpanovisu.gpu.ImageResizeGPU.resizeGPU()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a70a13e24789d5c6150c606cd077b5137_cgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a70a13e24789d5c6150c606cd077b5137_cgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a70a13e24789d5c6150c606cd077b5137_cgraph" id="aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a70a13e24789d5c6150c606cd077b5137_cgraph">
+<area shape="rect" title="Initialise les kernels OpenCL (compilation à la demande)" alt="" coords="5,163,207,203"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#af6b7c94329ec7306bbc48a3524b8e8a0" title="Récupère le contexte OpenCL." alt="" coords="255,5,523,45"/>
+<area shape="poly" title=" " alt="" coords="123,160,178,108,214,79,253,55,269,48,271,53,256,60,217,83,181,112,127,164"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a70047c6b01da4afd29934b79a0120b46" title="Récupère le device OpenCL." alt="" coords="255,69,523,109"/>
+<area shape="poly" title=" " alt="" coords="150,160,254,119,282,110,284,115,256,124,151,165"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a65cc6674dbee14bcf2d3f11f06a26e4b" title="Récupère l&#39;instance unique du gestionnaire GPU." alt="" coords="255,133,523,173"/>
+<area shape="poly" title=" " alt="" coords="207,170,241,166,241,171,207,175"/>
+<area shape="rect" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="1591,170,1629,195"/>
+<area shape="poly" title=" " alt="" coords="207,188,429,201,693,208,1032,208,1193,205,1350,198,1577,183,1577,188,1350,203,1193,210,1032,213,693,213,429,206,207,193"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUKernelLoader.html#a588fbb00f7d95388ff3f2fe88f7e2d87" title="Charge le kernel de redimensionnement bicubique." alt="" coords="275,248,503,288"/>
+<area shape="poly" title=" " alt="" coords="170,200,255,227,305,242,304,247,254,232,169,205"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUKernelLoader.html#aab2e17ecd14e3e0984001381a3fb6d5a" title="Charge le kernel de redimensionnement Lanczos3." alt="" coords="275,312,503,352"/>
+<area shape="poly" title=" " alt="" coords="129,201,183,250,218,276,256,298,273,305,270,310,253,302,215,280,180,254,125,205"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a3ba0aa0d6379b3b216d07d19ee71e251" title="Constructeur privé (singleton)" alt="" coords="571,105,817,145"/>
+<area shape="poly" title=" " alt="" coords="523,138,557,135,557,141,523,144"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#ad758dc8906499865aeaf412236ba042c" title="Initialise OpenCL et détecte les GPU disponibles." alt="" coords="865,113,1196,138"/>
+<area shape="poly" title=" " alt="" coords="818,123,852,123,852,128,818,128"/>
+<area shape="poly" title=" " alt="" coords="1057,110,1143,75,1202,56,1268,40,1338,30,1409,30,1479,41,1512,53,1544,68,1566,86,1583,109,1604,156,1599,158,1579,112,1562,90,1541,73,1510,58,1477,47,1409,35,1338,36,1269,45,1204,61,1145,80,1059,115"/>
+<area shape="rect" href="leaflet_8js.html#acaad4b36c0476b761b674f28b36d565c" title=" " alt="" coords="1374,83,1413,109"/>
+<area shape="poly" title=" " alt="" coords="1188,110,1360,96,1361,101,1188,115"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#af70605c6c0bf0dd246801d1c51fb90dc" title="Récupère les informations détaillées du GPU." alt="" coords="1244,133,1543,173"/>
+<area shape="poly" title=" " alt="" coords="1195,135,1230,138,1230,143,1195,141"/>
+<area shape="poly" title=" " alt="" coords="1541,171,1578,176,1577,181,1541,176"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUKernelLoader.html#af75a057bee5cbaaad3ea651050f058f0" title="Charge un kernel OpenCL depuis les ressources." alt="" coords="580,248,808,288"/>
+<area shape="poly" title=" " alt="" coords="503,265,566,265,566,271,503,271"/>
+<area shape="poly" title=" " alt="" coords="808,280,958,291,1047,293,1143,292,1243,286,1345,274,1445,254,1542,227,1564,216,1584,202,1587,207,1567,221,1544,232,1446,260,1346,279,1244,291,1144,297,1047,299,957,296,808,285"/>
+<area shape="poly" title=" " alt="" coords="484,309,584,288,585,293,485,315"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a70a13e24789d5c6150c606cd077b5137_icgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a70a13e24789d5c6150c606cd077b5137_icgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a70a13e24789d5c6150c606cd077b5137_icgraph" id="aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a70a13e24789d5c6150c606cd077b5137_icgraph">
+<area shape="rect" title="Initialise les kernels OpenCL (compilation à la demande)" alt="" coords="760,101,961,141"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a8938ddd095bf1e545f06dfbc9ecfee09" title="Redimensionnement via GPU OpenCL." alt="" coords="512,101,712,141"/>
+<area shape="poly" title=" " alt="" coords="747,124,712,124,712,119,747,119"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a56af72c51956399056e1f0de5b253319" title="Redimensionne une image avec routage automatique GPU/CPU." alt="" coords="264,101,464,141"/>
+<area shape="poly" title=" " alt="" coords="499,124,464,124,464,119,499,119"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestImageResize.html#ab1e39892471c5658890c8a78904be64c" title=" " alt="" coords="18,5,203,45"/>
+<area shape="poly" title=" " alt="" coords="307,98,215,60,180,48,182,43,217,55,309,93"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestBicubicVsLanczos.html#a4cef8c04b1386d551c4cfec1b3361458" title=" " alt="" coords="18,69,203,109"/>
+<area shape="poly" title=" " alt="" coords="250,110,203,104,204,98,251,104"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestImageResizeInteractive.html#a16412151c83ac1a5ef58bfbd75bb0a42" title=" " alt="" coords="5,133,216,173"/>
+<area shape="poly" title=" " alt="" coords="251,138,217,143,216,137,250,133"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestReductionImage.html#a868abe4fd92adbc966d1c9c89fb72cc3" title=" " alt="" coords="18,197,203,237"/>
+<area shape="poly" title=" " alt="" coords="309,150,217,188,182,200,180,195,215,183,307,145"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a56af72c51956399056e1f0de5b253319" name="a56af72c51956399056e1f0de5b253319"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56af72c51956399056e1f0de5b253319">&#9670;&#160;</a></span>resizeAuto()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">static</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Image</a> editeurpanovisu.gpu.ImageResizeGPU.resizeAuto </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Image</a>&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">int</a>&#160;</td>
+          <td class="paramname"><em>targetWidth</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">int</a>&#160;</td>
+          <td class="paramname"><em>targetHeight</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="enumediteurpanovisu_1_1gpu_1_1InterpolationMethod.html">InterpolationMethod</a>&#160;</td>
+          <td class="paramname"><em>method</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">throws</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">InterruptedException</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Redimensionne une image avec routage automatique GPU/CPU. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">source</td><td>Image source </td></tr>
+    <tr><td class="paramname">targetWidth</td><td>Largeur cible </td></tr>
+    <tr><td class="paramname">targetHeight</td><td>Hauteur cible </td></tr>
+    <tr><td class="paramname">method</td><td>Méthode d'interpolation </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Image redimensionnée </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">InterruptedException</td><td>Si l'opération est interrompue </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="ImageResizeGPU_8java_source.html#l00050">50</a> du fichier <a class="el" href="ImageResizeGPU_8java_source.html">ImageResizeGPU.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="leaflet_8js_source.html#l00005">e</a>, <a class="el" href="GPUManager_8java_source.html#l00043">editeurpanovisu.gpu.GPUManager.getInstance()</a>, <a class="el" href="ImageResizeGPU_8java_source.html#l00038">editeurpanovisu.gpu.ImageResizeGPU.GPU_THRESHOLD_MEGAPIXELS</a>, <a class="el" href="GPUManager_8java_source.html#l00195">editeurpanovisu.gpu.GPUManager.isGPUEnabled()</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="InterpolationMethod_8java_source.html#l00043">editeurpanovisu.gpu.InterpolationMethod.LANCZOS3</a>, <a class="el" href="ImageResizeGPU_8java_source.html#l00209">editeurpanovisu.gpu.ImageResizeGPU.resizeCPU()</a>, <a class="el" href="ImageResizeGPU_8java_source.html#l00112">editeurpanovisu.gpu.ImageResizeGPU.resizeGPU()</a>, et <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="TestImageResize_8java_source.html#l00014">editeurpanovisu.gpu.TestImageResize.main()</a>, <a class="el" href="TestBicubicVsLanczos_8java_source.html#l00024">editeurpanovisu.gpu.TestBicubicVsLanczos.start()</a>, <a class="el" href="TestImageResizeInteractive_8java_source.html#l00024">editeurpanovisu.gpu.TestImageResizeInteractive.start()</a>, et <a class="el" href="TestReductionImage_8java_source.html#l00024">editeurpanovisu.gpu.TestReductionImage.start()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a56af72c51956399056e1f0de5b253319_cgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a56af72c51956399056e1f0de5b253319_cgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a56af72c51956399056e1f0de5b253319_cgraph" id="aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a56af72c51956399056e1f0de5b253319_cgraph">
+<area shape="rect" title="Redimensionne une image avec routage automatique GPU/CPU." alt="" coords="5,240,205,280"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a65cc6674dbee14bcf2d3f11f06a26e4b" title="Récupère l&#39;instance unique du gestionnaire GPU." alt="" coords="876,758,1144,798"/>
+<area shape="poly" title=" " alt="" coords="118,279,168,379,210,449,261,526,322,603,393,675,432,708,473,737,516,763,561,784,605,799,652,809,746,815,837,810,915,798,916,803,837,815,746,821,651,814,604,804,559,789,513,768,470,742,428,712,389,679,318,606,257,529,205,452,164,382,113,282"/>
+<area shape="rect" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="2212,566,2251,592"/>
+<area shape="poly" title=" " alt="" coords="123,238,177,186,213,158,252,135,369,83,418,65,465,53,565,40,693,38,1653,38,1734,33,1806,24,1933,5,1991,4,2048,16,2077,27,2106,43,2166,92,2188,127,2205,179,2217,242,2225,312,2233,451,2233,552,2228,552,2227,451,2220,313,2212,243,2200,180,2183,129,2162,95,2103,48,2074,32,2046,21,1990,10,1933,10,1807,29,1734,39,1653,43,693,43,565,46,466,58,419,71,371,88,255,140,216,163,181,190,127,242"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a911a28e45e8baa207c84e9b4c0c9a0d7" title="Vérifie si l&#39;utilisation du GPU est activée par l&#39;utilisateur." alt="" coords="253,240,512,280"/>
+<area shape="poly" title=" " alt="" coords="205,258,240,258,240,263,205,263"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#afbb5bce1b5bafeb8197e5e74476daa09" title="Redimensionnement via CPU (fallback) Utilise la bibliothèque Thumbnails directement pour éviter la ré..." alt="" coords="1552,78,1752,118"/>
+<area shape="poly" title=" " alt="" coords="148,238,243,197,376,150,452,129,532,111,612,99,693,95,1011,95,1538,95,1538,100,1011,100,693,100,613,105,532,116,453,134,378,155,245,202,150,243"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a8938ddd095bf1e545f06dfbc9ecfee09" title="Redimensionnement via GPU OpenCL." alt="" coords="283,436,483,476"/>
+<area shape="poly" title=" " alt="" coords="137,278,344,426,341,431,133,283"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a3ba0aa0d6379b3b216d07d19ee71e251" title="Constructeur privé (singleton)" alt="" coords="1192,754,1439,794"/>
+<area shape="poly" title=" " alt="" coords="1144,773,1178,773,1179,778,1144,778"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#ad758dc8906499865aeaf412236ba042c" title="Initialise OpenCL et détecte les GPU disponibles." alt="" coords="1487,758,1817,784"/>
+<area shape="poly" title=" " alt="" coords="1439,770,1473,770,1473,775,1439,775"/>
+<area shape="poly" title=" " alt="" coords="1683,781,1773,814,1833,830,1899,842,1968,848,2037,843,2103,827,2134,812,2162,794,2182,775,2198,753,2218,701,2227,649,2228,605,2234,606,2232,649,2223,703,2202,756,2186,779,2166,798,2136,817,2105,832,2038,849,1968,853,1898,848,1832,835,1771,819,1681,786"/>
+<area shape="rect" href="leaflet_8js.html#acaad4b36c0476b761b674f28b36d565c" title=" " alt="" coords="1995,694,2034,720"/>
+<area shape="poly" title=" " alt="" coords="1722,756,1865,730,1981,710,1982,715,1866,735,1723,761"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#af70605c6c0bf0dd246801d1c51fb90dc" title="Récupère les informations détaillées du GPU." alt="" coords="1865,744,2164,784"/>
+<area shape="poly" title=" " alt="" coords="1817,765,1851,765,1851,770,1818,771"/>
+<area shape="poly" title=" " alt="" coords="2142,742,2162,729,2187,701,2205,668,2216,634,2223,605,2229,606,2222,636,2210,670,2191,704,2166,733,2145,746"/>
+<area shape="poly" title=" " alt="" coords="1752,88,1864,85,1986,88,2043,94,2094,103,2136,116,2166,134,2187,166,2203,212,2214,270,2223,333,2231,459,2233,552,2228,552,2226,459,2217,333,2209,270,2198,214,2182,168,2162,138,2134,121,2093,108,2043,99,1986,94,1864,91,1752,94"/>
+<area shape="poly" title=" " alt="" coords="394,475,415,524,451,588,500,653,529,682,561,706,596,725,633,741,711,763,789,776,863,781,862,786,788,781,710,768,631,746,594,730,559,710,525,686,496,656,446,591,411,526,389,478"/>
+<area shape="poly" title=" " alt="" coords="391,476,408,538,441,622,463,667,491,711,524,751,562,785,619,823,672,849,721,864,770,872,821,874,876,873,1009,870,1653,870,1734,875,1805,887,1928,914,1985,920,2041,915,2070,906,2100,893,2130,875,2162,852,2175,835,2187,809,2205,740,2218,665,2225,605,2230,605,2223,666,2211,741,2192,811,2180,838,2166,855,2133,880,2102,898,2072,911,2042,920,1985,925,1927,919,1804,892,1733,880,1653,875,1009,875,876,879,821,880,769,877,720,869,670,854,617,827,558,789,520,755,487,714,459,670,436,624,403,539,386,477"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a18787250db43d608a12770317d82f13f" title="Convertit un ByteBuffer OpenCL (format RGBA) en Image JavaFX." alt="" coords="584,188,804,228"/>
+<area shape="poly" title=" " alt="" coords="395,434,421,397,459,349,505,299,559,255,605,231,608,236,561,260,509,303,463,353,425,400,399,437"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a9efed67c5ab186019b0222610507a48f" title="Calcule la taille optimale du local work size pour le GPU Pour les très grandes images,..." alt="" coords="573,642,815,697"/>
+<area shape="poly" title=" " alt="" coords="414,474,562,578,641,632,638,637,558,582,411,479"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#aa4dd384566854de3efd63a9397ad0f9e" title="Récupère la file de commandes OpenCL." alt="" coords="560,350,828,390"/>
+<area shape="poly" title=" " alt="" coords="455,434,607,391,608,396,456,439"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#af6b7c94329ec7306bbc48a3524b8e8a0" title="Récupère le contexte OpenCL." alt="" coords="876,336,1144,376"/>
+<area shape="poly" title=" " alt="" coords="483,446,645,428,827,399,875,386,910,377,911,382,877,391,829,404,646,433,483,451"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#af5094b97f55ac2ef762873e642caa7c8" title="Convertit une Image JavaFX en ByteBuffer pour OpenCL (format RGBA)" alt="" coords="583,270,805,310"/>
+<area shape="poly" title=" " alt="" coords="408,434,474,386,559,335,613,312,615,317,561,340,477,390,411,438"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a70a13e24789d5c6150c606cd077b5137" title="Initialise les kernels OpenCL (compilation à la demande)" alt="" coords="593,464,795,504"/>
+<area shape="poly" title=" " alt="" coords="483,463,580,471,580,477,483,468"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a752164a6622addc5ebd518baf4f9cab7" title="Vérifie si un GPU est disponible." alt="" coords="565,528,823,568"/>
+<area shape="poly" title=" " alt="" coords="440,474,561,514,592,522,591,527,559,519,438,479"/>
+<area shape="poly" title=" " alt="" coords="781,186,876,171,1020,160,1143,155,1251,158,1352,168,1452,185,1558,209,1818,278,1923,300,2007,317,2046,329,2084,348,2124,374,2166,412,2191,445,2210,483,2222,520,2229,552,2224,553,2217,521,2205,485,2187,448,2162,415,2120,378,2081,352,2044,334,2006,322,1922,305,1817,283,1557,215,1451,191,1351,174,1251,164,1143,161,1020,165,876,176,782,191"/>
+<area shape="rect" href="leaflet_8js.html#a008d931e56b6fc013061112f26afbffb" title=" " alt="" coords="991,236,1029,261"/>
+<area shape="poly" title=" " alt="" coords="804,219,978,242,977,247,804,225"/>
+<area shape="rect" href="leaflet_8js.html#a9f9b62a373d2bb4624b7ac2df8151435" title=" " alt="" coords="991,186,1029,212"/>
+<area shape="poly" title=" " alt="" coords="804,202,977,197,977,203,804,208"/>
+<area shape="poly" title=" " alt="" coords="755,695,813,720,877,743,905,751,903,757,875,748,811,725,753,699"/>
+<area shape="poly" title=" " alt="" coords="816,663,1047,657,1314,654,1653,654,1799,659,1913,665,1968,664,2025,658,2089,644,2163,622,2185,612,2204,598,2207,603,2187,616,2165,627,2090,649,2026,663,1968,670,1913,671,1799,664,1653,659,1314,659,1047,662,816,668"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#ab9275a8ae387b50294debd8f0ab02d3c" title="Récupère la taille maximale d&#39;un workgroup." alt="" coords="876,694,1144,734"/>
+<area shape="poly" title=" " alt="" coords="816,684,862,690,862,696,815,689"/>
+<area shape="poly" title=" " alt="" coords="805,290,1314,296,1653,296,1698,298,1742,305,1829,327,1913,361,1991,401,2061,444,2122,487,2207,555,2204,559,2119,491,2059,449,1988,406,1911,366,1828,333,1741,310,1697,304,1653,302,1314,302,805,295"/>
+<area shape="poly" title=" " alt="" coords="805,272,977,250,978,255,805,278"/>
+<area shape="poly" title=" " alt="" coords="748,267,875,220,977,200,978,206,877,225,750,272"/>
+<area shape="poly" title=" " alt="" coords="796,493,814,502,830,514,850,543,859,573,859,602,855,631,851,660,851,688,859,716,878,744,881,747,877,751,874,747,854,718,845,689,845,660,849,631,853,602,853,573,845,546,826,518,811,506,794,497"/>
+<area shape="poly" title=" " alt="" coords="796,498,830,514,846,531,854,548,862,564,877,578,937,605,990,620,1039,626,1086,625,1187,612,1246,606,1314,603,1653,603,1814,600,1971,593,2198,579,2198,584,1971,599,1814,605,1653,608,1314,608,1246,611,1188,617,1087,630,1039,631,989,626,935,610,875,582,857,568,849,550,841,534,826,518,794,503"/>
+<area shape="poly" title=" " alt="" coords="789,462,826,443,841,430,850,415,858,400,874,386,886,379,889,384,878,390,863,404,854,418,845,433,830,448,791,467"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a70047c6b01da4afd29934b79a0120b46" title="Récupère le device OpenCL." alt="" coords="876,400,1144,440"/>
+<area shape="poly" title=" " alt="" coords="793,462,897,440,898,446,794,467"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUKernelLoader.html#a588fbb00f7d95388ff3f2fe88f7e2d87" title="Charge le kernel de redimensionnement bicubique." alt="" coords="896,464,1124,504"/>
+<area shape="poly" title=" " alt="" coords="795,482,882,482,882,487,795,487"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUKernelLoader.html#aab2e17ecd14e3e0984001381a3fb6d5a" title="Charge le kernel de redimensionnement Lanczos3." alt="" coords="896,528,1124,568"/>
+<area shape="poly" title=" " alt="" coords="794,502,898,523,897,528,793,507"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUKernelLoader.html#af75a057bee5cbaaad3ea651050f058f0" title="Charge un kernel OpenCL depuis les ressources." alt="" coords="1201,528,1429,568"/>
+<area shape="poly" title=" " alt="" coords="1107,502,1207,523,1206,528,1106,507"/>
+<area shape="poly" title=" " alt="" coords="1430,549,2198,575,2198,581,1429,555"/>
+<area shape="poly" title=" " alt="" coords="1124,546,1187,546,1187,551,1124,551"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a56af72c51956399056e1f0de5b253319_icgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a56af72c51956399056e1f0de5b253319_icgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a56af72c51956399056e1f0de5b253319_icgraph" id="aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a56af72c51956399056e1f0de5b253319_icgraph">
+<area shape="rect" title="Redimensionne une image avec routage automatique GPU/CPU." alt="" coords="264,101,464,141"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestImageResize.html#ab1e39892471c5658890c8a78904be64c" title=" " alt="" coords="18,5,203,45"/>
+<area shape="poly" title=" " alt="" coords="307,98,215,60,180,48,182,43,217,55,309,93"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestBicubicVsLanczos.html#a4cef8c04b1386d551c4cfec1b3361458" title=" " alt="" coords="18,69,203,109"/>
+<area shape="poly" title=" " alt="" coords="250,110,203,104,204,98,251,104"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestImageResizeInteractive.html#a16412151c83ac1a5ef58bfbd75bb0a42" title=" " alt="" coords="5,133,216,173"/>
+<area shape="poly" title=" " alt="" coords="251,138,217,143,216,137,250,133"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestReductionImage.html#a868abe4fd92adbc966d1c9c89fb72cc3" title=" " alt="" coords="18,197,203,237"/>
+<area shape="poly" title=" " alt="" coords="309,150,217,188,182,200,180,195,215,183,307,145"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="afbb5bce1b5bafeb8197e5e74476daa09" name="afbb5bce1b5bafeb8197e5e74476daa09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbb5bce1b5bafeb8197e5e74476daa09">&#9670;&#160;</a></span>resizeCPU()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">static</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Image</a> editeurpanovisu.gpu.ImageResizeGPU.resizeCPU </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Image</a>&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">int</a>&#160;</td>
+          <td class="paramname"><em>targetWidth</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">int</a>&#160;</td>
+          <td class="paramname"><em>targetHeight</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="enumediteurpanovisu_1_1gpu_1_1InterpolationMethod.html">InterpolationMethod</a>&#160;</td>
+          <td class="paramname"><em>method</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Redimensionnement via CPU (fallback) Utilise la bibliothèque Thumbnails directement pour éviter la récursion. </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="ImageResizeGPU_8java_source.html#l00209">209</a> du fichier <a class="el" href="ImageResizeGPU_8java_source.html">ImageResizeGPU.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="leaflet_8js_source.html#l00005">e</a>, et <a class="el" href="leaflet_8js_source.html#l00005">k()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="ImageResizeGPU_8java_source.html#l00050">editeurpanovisu.gpu.ImageResizeGPU.resizeAuto()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU_afbb5bce1b5bafeb8197e5e74476daa09_cgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_afbb5bce1b5bafeb8197e5e74476daa09_cgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_afbb5bce1b5bafeb8197e5e74476daa09_cgraph" id="aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_afbb5bce1b5bafeb8197e5e74476daa09_cgraph">
+<area shape="rect" title="Redimensionnement via CPU (fallback) Utilise la bibliothèque Thumbnails directement pour éviter la ré..." alt="" coords="5,5,205,45"/>
+<area shape="rect" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="253,13,292,38"/>
+<area shape="poly" title=" " alt="" coords="206,23,240,23,240,28,206,28"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU_afbb5bce1b5bafeb8197e5e74476daa09_icgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_afbb5bce1b5bafeb8197e5e74476daa09_icgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_afbb5bce1b5bafeb8197e5e74476daa09_icgraph" id="aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_afbb5bce1b5bafeb8197e5e74476daa09_icgraph">
+<area shape="rect" title="Redimensionnement via CPU (fallback) Utilise la bibliothèque Thumbnails directement pour éviter la ré..." alt="" coords="512,101,712,141"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a56af72c51956399056e1f0de5b253319" title="Redimensionne une image avec routage automatique GPU/CPU." alt="" coords="264,101,464,141"/>
+<area shape="poly" title=" " alt="" coords="499,124,464,124,464,119,499,119"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestImageResize.html#ab1e39892471c5658890c8a78904be64c" title=" " alt="" coords="18,5,203,45"/>
+<area shape="poly" title=" " alt="" coords="307,98,215,60,180,48,182,43,217,55,309,93"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestBicubicVsLanczos.html#a4cef8c04b1386d551c4cfec1b3361458" title=" " alt="" coords="18,69,203,109"/>
+<area shape="poly" title=" " alt="" coords="250,110,203,104,204,98,251,104"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestImageResizeInteractive.html#a16412151c83ac1a5ef58bfbd75bb0a42" title=" " alt="" coords="5,133,216,173"/>
+<area shape="poly" title=" " alt="" coords="251,138,217,143,216,137,250,133"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestReductionImage.html#a868abe4fd92adbc966d1c9c89fb72cc3" title=" " alt="" coords="18,197,203,237"/>
+<area shape="poly" title=" " alt="" coords="309,150,217,188,182,200,180,195,215,183,307,145"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a8938ddd095bf1e545f06dfbc9ecfee09" name="a8938ddd095bf1e545f06dfbc9ecfee09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8938ddd095bf1e545f06dfbc9ecfee09">&#9670;&#160;</a></span>resizeGPU()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">static</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Image</a> editeurpanovisu.gpu.ImageResizeGPU.resizeGPU </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Image</a>&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">int</a>&#160;</td>
+          <td class="paramname"><em>targetWidth</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">int</a>&#160;</td>
+          <td class="paramname"><em>targetHeight</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="enumediteurpanovisu_1_1gpu_1_1InterpolationMethod.html">InterpolationMethod</a>&#160;</td>
+          <td class="paramname"><em>method</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">throws</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Exception</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Redimensionnement via GPU OpenCL. </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="ImageResizeGPU_8java_source.html#l00112">112</a> du fichier <a class="el" href="ImageResizeGPU_8java_source.html">ImageResizeGPU.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="ImageResizeGPU_8java_source.html#l00031">editeurpanovisu.gpu.ImageResizeGPU.bicubicKernel</a>, <a class="el" href="ImageResizeGPU_8java_source.html#l00362">editeurpanovisu.gpu.ImageResizeGPU.byteBufferToImage()</a>, <a class="el" href="ImageResizeGPU_8java_source.html#l00293">editeurpanovisu.gpu.ImageResizeGPU.calculateOptimalLocalWorkSize()</a>, <a class="el" href="GPUManager_8java_source.html#l00222">editeurpanovisu.gpu.GPUManager.getCommandQueue()</a>, <a class="el" href="GPUManager_8java_source.html#l00214">editeurpanovisu.gpu.GPUManager.getContext()</a>, <a class="el" href="GPUManager_8java_source.html#l00043">editeurpanovisu.gpu.GPUManager.getInstance()</a>, <a class="el" href="ImageResizeGPU_8java_source.html#l00330">editeurpanovisu.gpu.ImageResizeGPU.imageToByteBuffer()</a>, <a class="el" href="ImageResizeGPU_8java_source.html#l00233">editeurpanovisu.gpu.ImageResizeGPU.initializeKernels()</a>, <a class="el" href="GPUManager_8java_source.html#l00187">editeurpanovisu.gpu.GPUManager.isGPUAvailable()</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="InterpolationMethod_8java_source.html#l00043">editeurpanovisu.gpu.InterpolationMethod.LANCZOS3</a>, et <a class="el" href="ImageResizeGPU_8java_source.html#l00032">editeurpanovisu.gpu.ImageResizeGPU.lanczosKernel</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="ImageResizeGPU_8java_source.html#l00050">editeurpanovisu.gpu.ImageResizeGPU.resizeAuto()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a8938ddd095bf1e545f06dfbc9ecfee09_cgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a8938ddd095bf1e545f06dfbc9ecfee09_cgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a8938ddd095bf1e545f06dfbc9ecfee09_cgraph" id="aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a8938ddd095bf1e545f06dfbc9ecfee09_cgraph">
+<area shape="rect" title="Redimensionnement via GPU OpenCL." alt="" coords="5,476,205,516"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a18787250db43d608a12770317d82f13f" title="Convertit un ByteBuffer OpenCL (format RGBA) en Image JavaFX." alt="" coords="277,597,497,637"/>
+<area shape="poly" title=" " alt="" coords="135,514,189,549,254,583,276,591,274,596,252,588,186,554,132,519"/>
+<area shape="rect" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="1905,294,1944,319"/>
+<area shape="poly" title=" " alt="" coords="106,475,115,407,139,311,158,259,182,208,213,161,252,120,307,76,358,46,408,27,458,16,511,12,567,12,702,15,1347,15,1499,8,1563,4,1623,4,1680,11,1737,28,1796,59,1859,106,1877,125,1891,146,1911,194,1921,241,1925,280,1920,281,1916,242,1906,195,1886,149,1873,128,1856,110,1793,63,1735,33,1679,16,1623,9,1564,9,1499,13,1347,20,702,20,567,17,511,17,459,21,410,32,361,51,310,80,255,123,217,164,187,211,162,261,144,313,120,408,111,476"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a9efed67c5ab186019b0222610507a48f" title="Calcule la taille optimale du local work size pour le GPU Pour les très grandes images,..." alt="" coords="266,134,509,189"/>
+<area shape="poly" title=" " alt="" coords="111,475,130,428,160,365,201,297,251,234,278,212,308,193,311,198,281,216,255,238,205,300,165,367,135,430,116,477"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a65cc6674dbee14bcf2d3f11f06a26e4b" title="Récupère l&#39;instance unique du gestionnaire GPU." alt="" coords="569,169,837,209"/>
+<area shape="poly" title=" " alt="" coords="118,474,172,406,209,368,252,334,330,290,413,255,495,229,571,210,573,215,497,234,415,260,332,295,255,338,213,372,176,410,122,478"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#aa4dd384566854de3efd63a9397ad0f9e" title="Récupère la file de commandes OpenCL." alt="" coords="253,661,521,701"/>
+<area shape="poly" title=" " alt="" coords="122,515,175,581,212,617,255,647,268,654,265,659,252,652,209,621,171,585,118,518"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#af6b7c94329ec7306bbc48a3524b8e8a0" title="Récupère le contexte OpenCL." alt="" coords="569,476,837,516"/>
+<area shape="poly" title=" " alt="" coords="206,493,556,493,556,499,206,499"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#af5094b97f55ac2ef762873e642caa7c8" title="Convertit une Image JavaFX en ByteBuffer pour OpenCL (format RGBA)" alt="" coords="277,533,498,573"/>
+<area shape="poly" title=" " alt="" coords="205,514,275,528,274,533,204,519"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a70a13e24789d5c6150c606cd077b5137" title="Initialise les kernels OpenCL (compilation à la demande)" alt="" coords="287,348,488,388"/>
+<area shape="poly" title=" " alt="" coords="149,474,329,391,331,396,151,479"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a752164a6622addc5ebd518baf4f9cab7" title="Vérifie si un GPU est disponible." alt="" coords="258,725,517,765"/>
+<area shape="poly" title=" " alt="" coords="117,516,136,557,165,611,205,665,229,690,255,711,264,717,261,721,252,716,225,694,201,669,160,614,131,560,112,518"/>
+<area shape="poly" title=" " alt="" coords="488,635,523,647,547,663,556,670,570,676,634,694,689,705,738,710,785,711,883,706,1007,701,1347,701,1503,702,1568,699,1628,690,1685,673,1740,646,1796,607,1855,552,1875,527,1891,499,1911,438,1919,380,1921,333,1927,333,1925,380,1916,440,1895,501,1880,530,1859,555,1799,611,1742,651,1687,678,1629,695,1569,704,1503,707,1347,707,1007,707,883,711,785,716,738,715,688,710,633,699,568,681,554,675,544,667,520,652,486,640"/>
+<area shape="rect" href="leaflet_8js.html#a008d931e56b6fc013061112f26afbffb" title=" " alt="" coords="684,641,723,666"/>
+<area shape="poly" title=" " alt="" coords="498,627,671,647,670,653,497,633"/>
+<area shape="rect" href="leaflet_8js.html#a9f9b62a373d2bb4624b7ac2df8151435" title=" " alt="" coords="684,591,723,617"/>
+<area shape="poly" title=" " alt="" coords="497,610,670,603,671,608,497,616"/>
+<area shape="poly" title=" " alt="" coords="509,150,844,128,1266,109,1469,105,1647,108,1782,120,1828,129,1859,142,1875,155,1888,171,1907,208,1918,247,1924,280,1919,280,1913,248,1902,210,1884,174,1871,159,1856,146,1827,134,1781,125,1647,113,1469,110,1266,114,844,133,509,155"/>
+<area shape="poly" title=" " alt="" coords="509,170,556,174,555,179,509,175"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#ab9275a8ae387b50294debd8f0ab02d3c" title="Récupère la taille maximale d&#39;un workgroup." alt="" coords="569,55,837,95"/>
+<area shape="poly" title=" " alt="" coords="487,131,615,96,617,101,489,137"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a3ba0aa0d6379b3b216d07d19ee71e251" title="Constructeur privé (singleton)" alt="" coords="885,185,1132,225"/>
+<area shape="poly" title=" " alt="" coords="838,194,872,196,872,201,837,199"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#ad758dc8906499865aeaf412236ba042c" title="Initialise OpenCL et détecte les GPU disponibles." alt="" coords="1180,203,1511,229"/>
+<area shape="poly" title=" " alt="" coords="1133,207,1167,208,1166,213,1132,212"/>
+<area shape="poly" title=" " alt="" coords="1437,201,1528,195,1635,196,1692,201,1749,210,1805,224,1859,243,1885,260,1907,281,1903,285,1882,264,1856,248,1803,229,1748,215,1691,206,1635,201,1528,200,1437,206"/>
+<area shape="rect" href="leaflet_8js.html#acaad4b36c0476b761b674f28b36d565c" title=" " alt="" coords="1689,157,1727,182"/>
+<area shape="poly" title=" " alt="" coords="1444,201,1675,171,1675,176,1445,206"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#af70605c6c0bf0dd246801d1c51fb90dc" title="Récupère les informations détaillées du GPU." alt="" coords="1559,257,1857,297"/>
+<area shape="poly" title=" " alt="" coords="1422,226,1576,252,1575,258,1421,231"/>
+<area shape="poly" title=" " alt="" coords="1856,295,1892,300,1892,305,1855,300"/>
+<area shape="poly" title=" " alt="" coords="498,551,1007,551,1347,551,1499,549,1562,545,1619,535,1674,519,1730,495,1790,460,1856,414,1875,396,1890,374,1912,331,1917,334,1895,377,1879,399,1859,418,1793,465,1733,500,1676,524,1620,540,1562,550,1499,555,1347,556,1007,556,498,556"/>
+<area shape="poly" title=" " alt="" coords="494,571,523,583,538,594,547,605,556,616,571,626,622,643,671,650,670,655,621,648,568,631,553,620,543,609,534,598,520,588,492,576"/>
+<area shape="poly" title=" " alt="" coords="499,569,671,596,670,602,498,574"/>
+<area shape="poly" title=" " alt="" coords="485,345,569,334,765,317,930,308,1076,305,1212,306,1495,310,1661,311,1857,307,1891,306,1891,311,1857,312,1661,316,1495,316,1212,311,1076,310,931,313,765,322,570,339,486,351"/>
+<area shape="poly" title=" " alt="" coords="419,346,468,313,519,272,542,244,552,232,568,219,581,213,583,217,571,224,556,235,546,247,523,275,471,317,422,350"/>
+<area shape="poly" title=" " alt="" coords="422,386,489,424,570,462,594,470,592,475,568,467,487,429,419,391"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a70047c6b01da4afd29934b79a0120b46" title="Récupère le device OpenCL." alt="" coords="569,233,837,273"/>
+<area shape="poly" title=" " alt="" coords="431,346,568,290,614,275,615,280,570,295,433,351"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUKernelLoader.html#a588fbb00f7d95388ff3f2fe88f7e2d87" title="Charge le kernel de redimensionnement bicubique." alt="" coords="589,412,817,452"/>
+<area shape="poly" title=" " alt="" coords="487,386,591,407,590,412,486,391"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUKernelLoader.html#aab2e17ecd14e3e0984001381a3fb6d5a" title="Charge le kernel de redimensionnement Lanczos3." alt="" coords="589,348,817,388"/>
+<area shape="poly" title=" " alt="" coords="488,365,575,365,575,371,488,371"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUKernelLoader.html#af75a057bee5cbaaad3ea651050f058f0" title="Charge un kernel OpenCL depuis les ressources." alt="" coords="895,365,1123,405"/>
+<area shape="poly" title=" " alt="" coords="817,412,880,402,881,408,818,417"/>
+<area shape="poly" title=" " alt="" coords="1123,398,1273,411,1362,414,1458,414,1558,408,1660,397,1760,378,1856,351,1879,340,1898,326,1901,331,1881,345,1858,356,1761,383,1660,402,1559,414,1458,419,1362,419,1272,416,1123,404"/>
+<area shape="poly" title=" " alt="" coords="818,372,881,376,881,381,817,377"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a8938ddd095bf1e545f06dfbc9ecfee09_icgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a8938ddd095bf1e545f06dfbc9ecfee09_icgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a8938ddd095bf1e545f06dfbc9ecfee09_icgraph" id="aclassediteurpanovisu_1_1gpu_1_1ImageResizeGPU_a8938ddd095bf1e545f06dfbc9ecfee09_icgraph">
+<area shape="rect" title="Redimensionnement via GPU OpenCL." alt="" coords="512,101,712,141"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a56af72c51956399056e1f0de5b253319" title="Redimensionne une image avec routage automatique GPU/CPU." alt="" coords="264,101,464,141"/>
+<area shape="poly" title=" " alt="" coords="499,124,464,124,464,119,499,119"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestImageResize.html#ab1e39892471c5658890c8a78904be64c" title=" " alt="" coords="18,5,203,45"/>
+<area shape="poly" title=" " alt="" coords="307,98,215,60,180,48,182,43,217,55,309,93"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestBicubicVsLanczos.html#a4cef8c04b1386d551c4cfec1b3361458" title=" " alt="" coords="18,69,203,109"/>
+<area shape="poly" title=" " alt="" coords="250,110,203,104,204,98,251,104"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestImageResizeInteractive.html#a16412151c83ac1a5ef58bfbd75bb0a42" title=" " alt="" coords="5,133,216,173"/>
+<area shape="poly" title=" " alt="" coords="251,138,217,143,216,137,250,133"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestReductionImage.html#a868abe4fd92adbc966d1c9c89fb72cc3" title=" " alt="" coords="18,197,203,237"/>
+<area shape="poly" title=" " alt="" coords="309,150,217,188,182,200,180,195,215,183,307,145"/>
+</map>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">Documentation des données membres</h2>
+<a id="a3ad70052b2ed462f11fe4fabfd5eaa19" name="a3ad70052b2ed462f11fe4fabfd5eaa19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ad70052b2ed462f11fe4fabfd5eaa19">&#9670;&#160;</a></span>bicubicKernel</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">cl_kernel</a> editeurpanovisu.gpu.ImageResizeGPU.bicubicKernel = <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">null</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="ImageResizeGPU_8java_source.html#l00031">31</a> du fichier <a class="el" href="ImageResizeGPU_8java_source.html">ImageResizeGPU.java</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="ImageResizeGPU_8java_source.html#l00387">editeurpanovisu.gpu.ImageResizeGPU.cleanup()</a>, <a class="el" href="ImageResizeGPU_8java_source.html#l00233">editeurpanovisu.gpu.ImageResizeGPU.initializeKernels()</a>, et <a class="el" href="ImageResizeGPU_8java_source.html#l00112">editeurpanovisu.gpu.ImageResizeGPU.resizeGPU()</a>.</p>
+
+</div>
+</div>
+<a id="a6af74b24f2bf41fd27ab2f16bf7e320f" name="a6af74b24f2bf41fd27ab2f16bf7e320f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6af74b24f2bf41fd27ab2f16bf7e320f">&#9670;&#160;</a></span>bicubicProgram</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">cl_program</a> editeurpanovisu.gpu.ImageResizeGPU.bicubicProgram = <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">null</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="ImageResizeGPU_8java_source.html#l00029">29</a> du fichier <a class="el" href="ImageResizeGPU_8java_source.html">ImageResizeGPU.java</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="ImageResizeGPU_8java_source.html#l00387">editeurpanovisu.gpu.ImageResizeGPU.cleanup()</a>, et <a class="el" href="ImageResizeGPU_8java_source.html#l00233">editeurpanovisu.gpu.ImageResizeGPU.initializeKernels()</a>.</p>
+
+</div>
+</div>
+<a id="a8bbeeffdcbd43218a7dabe5fcc64bdc9" name="a8bbeeffdcbd43218a7dabe5fcc64bdc9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8bbeeffdcbd43218a7dabe5fcc64bdc9">&#9670;&#160;</a></span>GPU_THRESHOLD_MEGAPIXELS</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">final</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">int</a> editeurpanovisu.gpu.ImageResizeGPU.GPU_THRESHOLD_MEGAPIXELS = 2</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Seuil de taille d'image pour utiliser le GPU (en mégapixels) En dessous de ce seuil, le CPU est plus rapide à cause de l'overhead GPU. </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="ImageResizeGPU_8java_source.html#l00038">38</a> du fichier <a class="el" href="ImageResizeGPU_8java_source.html">ImageResizeGPU.java</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="ImageResizeGPU_8java_source.html#l00050">editeurpanovisu.gpu.ImageResizeGPU.resizeAuto()</a>.</p>
+
+</div>
+</div>
+<a id="a092ff584a960c0fced59fe62c71538b8" name="a092ff584a960c0fced59fe62c71538b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a092ff584a960c0fced59fe62c71538b8">&#9670;&#160;</a></span>lanczosKernel</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">cl_kernel</a> editeurpanovisu.gpu.ImageResizeGPU.lanczosKernel = <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">null</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="ImageResizeGPU_8java_source.html#l00032">32</a> du fichier <a class="el" href="ImageResizeGPU_8java_source.html">ImageResizeGPU.java</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="ImageResizeGPU_8java_source.html#l00387">editeurpanovisu.gpu.ImageResizeGPU.cleanup()</a>, <a class="el" href="ImageResizeGPU_8java_source.html#l00233">editeurpanovisu.gpu.ImageResizeGPU.initializeKernels()</a>, et <a class="el" href="ImageResizeGPU_8java_source.html#l00112">editeurpanovisu.gpu.ImageResizeGPU.resizeGPU()</a>.</p>
+
+</div>
+</div>
+<a id="a7c547706225ec6e55e7901e153e73ae2" name="a7c547706225ec6e55e7901e153e73ae2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c547706225ec6e55e7901e153e73ae2">&#9670;&#160;</a></span>lanczosProgram</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">cl_program</a> editeurpanovisu.gpu.ImageResizeGPU.lanczosProgram = <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">null</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="ImageResizeGPU_8java_source.html#l00030">30</a> du fichier <a class="el" href="ImageResizeGPU_8java_source.html">ImageResizeGPU.java</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="ImageResizeGPU_8java_source.html#l00387">editeurpanovisu.gpu.ImageResizeGPU.cleanup()</a>, et <a class="el" href="ImageResizeGPU_8java_source.html#l00233">editeurpanovisu.gpu.ImageResizeGPU.initializeKernels()</a>.</p>
+
+</div>
+</div>
+<hr/>La documentation de cette classe a été générée à partir du fichier suivant :<ul>
+<li>src/editeurpanovisu/gpu/<a class="el" href="ImageResizeGPU_8java_source.html">ImageResizeGPU.java</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespaceediteurpanovisu.html">editeurpanovisu</a></li><li class="navelem"><a class="el" href="namespaceediteurpanovisu_1_1gpu.html">gpu</a></li><li class="navelem"><a class="el" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html">ImageResizeGPU</a></li>
+    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

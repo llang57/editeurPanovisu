@@ -1,0 +1,9 @@
+<map id="editeurpanovisu.HuggingFaceClient.generateTextAsync" name="editeurpanovisu.HuggingFaceClient.generateTextAsync">
+<area shape="rect" id="Node000001" title="Génère du texte de manière asynchrone." alt="" coords="5,59,220,99"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1HuggingFaceClient.html#a4c0af2a214470600ed8821aa4038331f" title="Génère du texte à partir d&#39;un prompt." alt="" coords="268,29,483,69"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="220,64,254,60,255,65,220,69"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="531,66,569,91"/>
+<area shape="poly" id="edge4_Node000001_Node000003" title=" " alt="" coords="220,78,483,79,516,78,517,83,483,84,220,84"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="342,30,340,20,346,11,357,5,375,3,396,6,407,13,404,17,394,11,375,8,359,10,349,15,346,21,347,28"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="484,65,517,71,516,76,483,70"/>
+</map>

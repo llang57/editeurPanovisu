@@ -1,0 +1,14 @@
+<map id="editeurpanovisu.EditeurPanovisu.creeDiaporamaHTML" name="editeurpanovisu.EditeurPanovisu.creeDiaporamaHTML">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,51,272,91"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="823,5,861,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="245,49,320,37,447,20,546,11,646,9,775,11,809,13,808,18,775,17,646,14,547,17,447,25,320,42,245,54"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="823,91,861,116"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="235,89,320,101,463,108,603,109,809,103,809,108,603,115,463,114,320,106,234,94"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1ReadWriteImage.html#ac875b8819ddfbadc3482dab5e043f16b" title=" " alt="" coords="320,51,519,91"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="272,69,306,69,306,74,272,74"/>
+<area shape="poly" id="edge7_Node000004_Node000003" title=" " alt="" coords="519,76,809,98,809,104,519,81"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1ReadWriteImage.html#ae93614e117cb7a4718f4ac3d5fd33c4e" title=" " alt="" coords="567,26,775,66"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="519,59,553,55,553,60,519,64"/>
+<area shape="poly" id="edge5_Node000005_Node000002" title=" " alt="" coords="775,26,809,21,810,26,775,32"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="732,64,810,90,808,95,730,69"/>
+</map>

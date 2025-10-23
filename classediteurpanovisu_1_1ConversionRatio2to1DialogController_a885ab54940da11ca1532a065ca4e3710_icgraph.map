@@ -1,0 +1,14 @@
+<map id="editeurpanovisu.ConversionRatio2to1DialogController.afficherErreur" name="editeurpanovisu.ConversionRatio2to1DialogController.afficherErreur">
+<area shape="rect" id="Node000001" title="Affiche une boîte de dialogue d&#39;erreur." alt="" coords="893,45,1136,100"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#aced6771bf749a7901051d5959a073b37" title="Lance le traitement de conversion pour tous les fichiers." alt="" coords="589,5,823,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="879,58,823,51,824,45,880,53"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#ac983c41d4abce2e1fff638827ac90d0c" title="Prévisualise la conversion pour le fichier sélectionné." alt="" coords="567,84,845,139"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="880,92,846,96,845,91,880,87"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#aac5a46f9a3affb943ff5e103fd098b48" title="Crée les boutons d&#39;action (Valider, Annuler)." alt="" coords="292,5,519,60"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="575,35,519,35,519,30,575,30"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#a44e7c111f70ca443dad83445f187d3f4" title="Affiche la fenêtre de dialogue de conversion au ratio 2:1." alt="" coords="5,45,244,100"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="279,53,245,58,244,53,278,48"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#af678a16d007290ec9b28b93299f29cfd" title="Crée la zone d&#39;affichage de la liste des fichiers." alt="" coords="292,84,519,139"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="553,114,519,114,519,109,553,109"/>
+<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="278,97,244,92,245,86,279,91"/>
+</map>

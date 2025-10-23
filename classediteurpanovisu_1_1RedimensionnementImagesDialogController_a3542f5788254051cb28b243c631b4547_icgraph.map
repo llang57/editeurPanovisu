@@ -1,0 +1,10 @@
+<map id="editeurpanovisu.RedimensionnementImagesDialogController.ouvrirFileChooser" name="editeurpanovisu.RedimensionnementImagesDialogController.ouvrirFileChooser">
+<area shape="rect" id="Node000001" title="Ouvre un FileChooser pour sélectionner des fichiers d&#39;images." alt="" coords="680,41,973,81"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#ae5969de62f5a0a7a3a567c063c7d085e" title="Crée la zone de drag &amp; drop pour ajouter des images." alt="" coords="325,5,632,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="666,47,632,44,633,39,667,42"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#abee140580eb7286689c97847bce687e9" title="Crée la zone contenant la liste des fichiers à traiter." alt="" coords="341,70,617,125"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="666,81,617,86,617,80,666,75"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a182869c52f51180d4809f7e0f1e2fcec" title="Affiche la fenêtre de dialogue de redimensionnement d&#39;images." alt="" coords="5,41,277,81"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="312,46,278,49,277,44,311,40"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="326,84,277,78,278,73,327,78"/>
+</map>

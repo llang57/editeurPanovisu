@@ -1,0 +1,8 @@
+<map id="editeurpanovisu.RedimensionnementImagesDialogController.determinerFichierSortie" name="editeurpanovisu.RedimensionnementImagesDialogController.determinerFichierSortie">
+<area shape="rect" id="Node000001" title="Détermine le fichier de sortie selon le mode de sauvegarde sélectionné." alt="" coords="5,35,337,75"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a59551983c228147c9352d7fde75769f7" title="Retourne le format de sortie sélectionné." alt="" coords="385,5,669,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="337,38,371,36,371,41,338,44"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="717,42,756,67"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="338,55,669,55,703,54,703,59,669,60,338,60"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="670,43,704,48,704,53,669,48"/>
+</map>

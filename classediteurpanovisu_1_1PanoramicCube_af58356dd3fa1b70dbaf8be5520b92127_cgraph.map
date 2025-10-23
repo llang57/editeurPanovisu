@@ -1,0 +1,9 @@
+<map id="editeurpanovisu.PanoramicCube.resizeToEquirectangularCPU" name="editeurpanovisu.PanoramicCube.resizeToEquirectangularCPU">
+<area shape="rect" id="Node000001" title="Fallback CPU : Redimensionnement par échantillonnage simple (nearest neighbor)." alt="" coords="5,47,247,87"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="295,5,333,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="202,45,281,24,282,29,203,50"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a008d931e56b6fc013061112f26afbffb" title=" " alt="" coords="295,55,333,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="247,65,281,65,281,70,247,70"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#a9f9b62a373d2bb4624b7ac2df8151435" title=" " alt="" coords="295,104,333,129"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="203,85,282,106,281,111,202,90"/>
+</map>

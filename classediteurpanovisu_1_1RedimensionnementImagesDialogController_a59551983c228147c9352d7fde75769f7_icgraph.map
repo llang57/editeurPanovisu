@@ -1,0 +1,14 @@
+<map id="editeurpanovisu.RedimensionnementImagesDialogController.getFormatSortie" name="editeurpanovisu.RedimensionnementImagesDialogController.getFormatSortie">
+<area shape="rect" id="Node000001" title="Retourne le format de sortie sélectionné." alt="" coords="1712,35,1996,75"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a00a3fa2440f3e8be278c85fa64837687" title="Détermine le fichier de sortie selon le mode de sauvegarde sélectionné." alt="" coords="1332,5,1664,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1698,44,1664,42,1664,36,1698,39"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#ab168aa11eb9244730c3e3862da44f500" title="Traite (redimensionne et compresse) une image selon les paramètres définis." alt="" coords="1017,35,1284,75"/>
+<area shape="poly" id="edge6_Node000001_Node000003" title=" " alt="" coords="1698,60,1664,60,1332,60,1284,60,1284,54,1332,55,1664,55,1698,54"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="1319,43,1285,46,1284,41,1318,38"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a93a629dce64b4bfc868b54c629642061" title="Lance le traitement des images." alt="" coords="680,35,969,75"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="1003,57,970,57,970,52,1003,52"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a3537215c3ae75ac08746b31652a789d4" title="Crée les boutons d&#39;action (Valider, Annuler)." alt="" coords="325,35,632,75"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="666,57,632,57,632,52,666,52"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a182869c52f51180d4809f7e0f1e2fcec" title="Affiche la fenêtre de dialogue de redimensionnement d&#39;images." alt="" coords="5,35,277,75"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="312,57,278,57,278,52,312,52"/>
+</map>

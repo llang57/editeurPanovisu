@@ -1,0 +1,12 @@
+<map id="editeurpanovisu.PanoramicCube.resizeToEquirectangular" name="editeurpanovisu.PanoramicCube.resizeToEquirectangular">
+<area shape="rect" id="Node000001" title="Redimensionne une image au format équirectangulaire avec ratio 2:1." alt="" coords="5,23,220,63"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="557,5,596,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="220,35,543,17,544,22,221,40"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1PanoramicCube.html#af58356dd3fa1b70dbaf8be5520b92127" title="Fallback CPU : Redimensionnement par échantillonnage simple (nearest neighbor)." alt="" coords="268,51,509,91"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="220,52,255,55,254,60,220,57"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="459,49,543,24,545,30,460,54"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#a008d931e56b6fc013061112f26afbffb" title=" " alt="" coords="557,56,596,81"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="509,67,544,66,544,72,510,72"/>
+<area shape="rect" id="Node000005" href="$leaflet_8js.html#a9f9b62a373d2bb4624b7ac2df8151435" title=" " alt="" coords="557,105,596,131"/>
+<area shape="poly" id="edge5_Node000003_Node000005" title=" " alt="" coords="470,89,544,107,543,113,469,94"/>
+</map>

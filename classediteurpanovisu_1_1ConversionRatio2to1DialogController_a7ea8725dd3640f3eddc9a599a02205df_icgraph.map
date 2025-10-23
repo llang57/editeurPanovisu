@@ -1,0 +1,16 @@
+<map id="editeurpanovisu.ConversionRatio2to1DialogController.estImageValide" name="editeurpanovisu.ConversionRatio2to1DialogController.estImageValide">
+<area shape="rect" id="Node000001" title="Vérifie si un fichier est une image valide." alt="" coords="1161,45,1416,100"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#aa223b59907abdcaf93b77e163a54afd1" title="Ajoute des fichiers à la liste après validation." alt="" coords="873,45,1113,100"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1148,75,1114,75,1114,70,1148,70"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#abdc1f6877f4c5e097d4234528fb4b5a2" title="Ouvre un dialogue pour ajouter des fichiers manuellement." alt="" coords="576,5,816,60"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="859,57,816,51,817,46,860,52"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#aa933d07671d387bef485d662567e60ee" title="Configure les gestionnaires d&#39;événements pour le drag &amp; drop." alt="" coords="567,84,825,139"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="860,93,826,97,825,92,859,87"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#af678a16d007290ec9b28b93299f29cfd" title="Crée la zone d&#39;affichage de la liste des fichiers." alt="" coords="292,5,519,60"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="562,35,519,35,519,30,562,30"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#a44e7c111f70ca443dad83445f187d3f4" title="Affiche la fenêtre de dialogue de conversion au ratio 2:1." alt="" coords="5,45,244,100"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="279,53,245,58,244,53,278,48"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#ae5f52d522deb4370f576a0670f9b530e" title="Crée la zone de drag &amp; drop pour ajouter des images." alt="" coords="292,84,519,139"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="553,114,519,114,519,109,553,109"/>
+<area shape="poly" id="edge7_Node000007_Node000005" title=" " alt="" coords="278,97,244,92,245,86,279,91"/>
+</map>

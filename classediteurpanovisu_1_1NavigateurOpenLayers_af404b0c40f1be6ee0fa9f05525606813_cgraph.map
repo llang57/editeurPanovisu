@@ -1,0 +1,10 @@
+<map id="editeurpanovisu.NavigateurOpenLayers.afficheNavigateurOpenLayer" name="editeurpanovisu.NavigateurOpenLayers.afficheNavigateurOpenLayer">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,32,295,72"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="607,43,645,69"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="225,29,296,15,380,5,470,4,515,9,559,18,597,34,595,39,558,23,515,14,470,10,381,11,297,21,226,35"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1NavigateurCarte.html#a2a4620d2b0d62aef80e48e934b720efc" title="Récupère les coordonnées actuelles du centre de la carte." alt="" coords="349,32,552,72"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="295,49,336,49,336,55,295,55"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1CoordonneesGeographiques.html#a1c060dfcff179c760b9938736c26a944" title=" " alt="" coords="343,96,559,136"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="245,70,344,91,343,96,244,75"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="522,93,558,82,593,68,595,72,560,87,524,99"/>
+</map>

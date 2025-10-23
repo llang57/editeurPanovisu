@@ -1,0 +1,14 @@
+<map id="editeurpanovisu.gpu.GPUManager.getInstance" name="editeurpanovisu.gpu.GPUManager.getInstance">
+<area shape="rect" id="Node000001" title="Récupère l&#39;instance unique du gestionnaire GPU." alt="" coords="5,27,273,67"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1gpu_1_1GPUManager.html#a3ba0aa0d6379b3b216d07d19ee71e251" title="Constructeur privé (singleton)" alt="" coords="321,27,568,67"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="273,45,308,45,308,50,273,50"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1gpu_1_1GPUManager.html#ad758dc8906499865aeaf412236ba042c" title="Initialise OpenCL et détecte les GPU disponibles." alt="" coords="616,35,947,60"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="568,45,602,45,602,50,568,50"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="1341,39,1380,64"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="842,32,930,18,1043,6,1169,5,1232,10,1294,20,1330,32,1328,37,1293,25,1232,15,1169,10,1044,11,931,23,842,37"/>
+<area shape="rect" id="Node000005" href="$leaflet_8js.html#acaad4b36c0476b761b674f28b36d565c" title=" " alt="" coords="1125,35,1163,60"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="947,45,1111,45,1111,50,947,50"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1gpu_1_1GPUManager.html#af70605c6c0bf0dd246801d1c51fb90dc" title="Récupère les informations détaillées du GPU." alt="" coords="995,85,1293,125"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="863,58,1004,80,1003,85,862,63"/>
+<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="1239,82,1293,69,1327,59,1329,64,1294,74,1240,87"/>
+</map>

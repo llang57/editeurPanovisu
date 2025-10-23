@@ -1,0 +1,17 @@
+<map id="editeurpanovisu.gpu.GPUManager.getDevice" name="editeurpanovisu.gpu.GPUManager.getDevice">
+<area shape="rect" id="Node000001" title="Récupère le device OpenCL." alt="" coords="1009,101,1277,141"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a70a13e24789d5c6150c606cd077b5137" title="Initialise les kernels OpenCL (compilation à la demande)" alt="" coords="760,101,961,141"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="996,124,962,124,962,119,996,119"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a8938ddd095bf1e545f06dfbc9ecfee09" title="Redimensionnement via GPU OpenCL." alt="" coords="512,101,712,141"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="747,124,712,124,712,119,747,119"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a56af72c51956399056e1f0de5b253319" title="Redimensionne une image avec routage automatique GPU/CPU." alt="" coords="264,101,464,141"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="499,124,464,124,464,119,499,119"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1gpu_1_1TestImageResize.html#ab1e39892471c5658890c8a78904be64c" title=" " alt="" coords="18,5,203,45"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="307,98,215,60,180,48,182,43,217,55,309,93"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1gpu_1_1TestBicubicVsLanczos.html#a4cef8c04b1386d551c4cfec1b3361458" title=" " alt="" coords="18,69,203,109"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="250,110,203,104,204,98,251,104"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1gpu_1_1TestImageResizeInteractive.html#a16412151c83ac1a5ef58bfbd75bb0a42" title=" " alt="" coords="5,133,216,173"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="251,138,217,143,216,137,250,133"/>
+<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1gpu_1_1TestReductionImage.html#a868abe4fd92adbc966d1c9c89fb72cc3" title=" " alt="" coords="18,197,203,237"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="309,150,217,188,182,200,180,195,215,183,307,145"/>
+</map>

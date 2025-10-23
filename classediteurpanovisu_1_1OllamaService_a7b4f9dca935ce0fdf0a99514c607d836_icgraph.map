@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.OllamaService.setOllamaModel" name="editeurpanovisu.OllamaService.setOllamaModel">
+<area shape="rect" id="Node000001" title="Définit le modèle Ollama à utiliser." alt="" coords="308,37,559,77"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1ConfigDialogController.html#a228e9366c0d6a335d6bb5e6b8a09ef78" title=" " alt="" coords="25,5,240,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="294,45,240,39,240,34,295,40"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1EditeurPanovisu.html#a6d5fd7170b4fe9e54f3606c9ce90a56a" title=" " alt="" coords="5,69,260,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="295,75,261,78,260,73,294,69"/>
+</map>

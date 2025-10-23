@@ -1,0 +1,17 @@
+<map id="editeurpanovisu.OpenRouterClient.OpenRouterClient" name="editeurpanovisu.OpenRouterClient.OpenRouterClient">
+<area shape="rect" id="Node000001" title="Constructeur avec configuration automatique depuis ApiKeysConfig." alt="" coords="5,63,213,103"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1ApiKeysConfig.html#af9241a594f0e5419b8d0f8b338e38ae9" title="Récupère la clé API OpenRouter." alt="" coords="560,85,809,125"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="214,84,546,97,546,102,214,90"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="1161,35,1200,60"/>
+<area shape="poly" id="edge9_Node000001_Node000004" title=" " alt="" coords="147,61,200,37,261,19,317,12,400,7,623,3,878,9,1002,17,1114,29,1148,35,1147,41,1113,34,1001,22,878,15,623,8,400,12,317,18,262,24,202,42,149,66"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1ApiKeysConfig.html#a07437012271cfa9737d8b07351e80c2a" title="Récupère le modèle OpenRouter configuré" alt="" coords="560,149,809,189"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="214,96,547,145,546,151,213,101"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1ApiKeysConfig.html#afa2de8aa5827534e73f956a567462ea8" title="Vérifie si une clé API OpenRouter est configurée." alt="" coords="261,34,512,74"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="213,70,248,66,248,71,214,75"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1ApiKeysConfig.html#a7babcdd2b84a59ec6088d85c66d00551" title="Charge le fichier de configuration des clés API." alt="" coords="857,85,1113,125"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="809,102,844,102,844,107,809,107"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="1053,82,1147,54,1149,59,1055,87"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="779,146,877,125,878,130,780,151"/>
+<area shape="poly" id="edge7_Node000006_Node000002" title=" " alt="" coords="505,71,554,80,553,85,504,77"/>
+<area shape="poly" id="edge8_Node000006_Node000004" title=" " alt="" coords="512,50,1147,45,1147,50,512,56"/>
+</map>

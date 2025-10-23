@@ -1,0 +1,9 @@
+<map id="editeurpanovisu.ConfigDialogController.saveModelsPreferences" name="editeurpanovisu.ConfigDialogController.saveModelsPreferences">
+<area shape="rect" id="Node000001" title="Sauvegarde les modèles IA sélectionnés dans preferences.cfg." alt="" coords="5,69,249,109"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1OllamaService.html#a4d8c44f8d5c83dc0258d5d6edb5dd5d1" title="Retourne le modèle Ollama actuellement configuré" alt="" coords="297,5,548,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="220,67,316,46,317,51,221,72"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1OllamaService.html#a1637c8c8f43ca2e3f5052ceb7c6c050a" title="Retourne le modèle OpenRouter actuellement configuré" alt="" coords="297,69,548,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="249,87,284,87,284,92,249,92"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="403,134,442,159"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="232,107,390,138,389,143,231,112"/>
+</map>

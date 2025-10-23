@@ -1,0 +1,10 @@
+<map id="editeurpanovisu.gpu.GPUManager.initializeGPU" name="editeurpanovisu.gpu.GPUManager.initializeGPU">
+<area shape="rect" id="Node000001" title="Initialise OpenCL et détecte les GPU disponibles." alt="" coords="5,35,336,60"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="731,39,769,64"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="231,32,319,18,433,6,558,5,621,10,683,20,719,32,717,37,682,25,621,15,558,10,433,11,320,23,232,37"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#acaad4b36c0476b761b674f28b36d565c" title=" " alt="" coords="514,35,553,60"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="336,45,500,45,500,50,336,50"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1gpu_1_1GPUManager.html#af70605c6c0bf0dd246801d1c51fb90dc" title="Récupère les informations détaillées du GPU." alt="" coords="384,85,683,125"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="252,58,393,80,393,85,251,63"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="628,82,682,69,717,59,718,64,683,74,629,87"/>
+</map>

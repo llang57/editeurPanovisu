@@ -1,0 +1,13 @@
+<map id="Graphe hiérarchique des classes" name="Graphe hiérarchique des classes">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,127,100,153"/>
+<area shape="rect" id="Node000001" href="$classediteurpanovisu_1_1DocumentationDialog_1_1TestApp.html" title="Application de test." alt="" coords="150,5,381,45"/>
+<area shape="poly" id="edge1_Node000000_Node000001" title=" " alt="" coords="73,115,106,84,147,55,174,43,176,48,149,60,109,88,77,119"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1EditeurPanovisu.html" title="Editeur de visites virtuelles panoramiques." alt="" coords="148,70,383,95"/>
+<area shape="poly" id="edge2_Node000000_Node000002" title=" " alt="" coords="101,120,147,105,199,93,200,98,149,111,102,125"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1gpu_1_1TestBicubicVsLanczos.html" title="Test comparatif Bicubique vs Lanczos3 Permet de visualiser la différence de qualité entre les deux mé..." alt="" coords="173,120,358,160"/>
+<area shape="poly" id="edge3_Node000000_Node000003" title=" " alt="" coords="114,137,172,137,172,143,114,143"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1gpu_1_1TestImageResizeInteractive.html" title="Application de test interactive pour le redimensionnement GPU Lance une fenêtre permettant de sélecti..." alt="" coords="173,184,358,224"/>
+<area shape="poly" id="edge4_Node000000_Node000004" title=" " alt="" coords="104,155,149,169,190,181,188,187,147,175,102,160"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1gpu_1_1TestReductionImage.html" title="Test comparatif des méthodes d&#39;interpolation pour RÉDUCTION d&#39;images Compare Bilinéaire,..." alt="" coords="173,248,358,288"/>
+<area shape="poly" id="edge5_Node000000_Node000005" title=" " alt="" coords="73,162,106,199,149,234,174,245,172,250,147,238,102,203,69,165"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="editeurpanovisu.TestAIClients.testOpenRouter" name="editeurpanovisu.TestAIClients.testOpenRouter">
+<area shape="rect" id="Node000001" title="Test du client OpenRouter." alt="" coords="5,63,249,103"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1OpenRouterClient.html#ace2ecd68c42b6fa90c7b720cc14015f5" title="Liste des modèles gratuits populaires sur OpenRouter." alt="" coords="297,5,505,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="223,60,291,46,293,51,224,65"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="382,70,421,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="250,80,368,80,368,85,250,85"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="382,119,421,145"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="240,100,369,124,368,129,239,105"/>
+</map>

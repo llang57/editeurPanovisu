@@ -1,0 +1,29 @@
+<map id="editeurpanovisu.gpu.ImageResizeGPU.initializeKernels" name="editeurpanovisu.gpu.ImageResizeGPU.initializeKernels">
+<area shape="rect" id="Node000001" title="Initialise les kernels OpenCL (compilation à la demande)" alt="" coords="5,163,207,203"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1gpu_1_1GPUManager.html#af6b7c94329ec7306bbc48a3524b8e8a0" title="Récupère le contexte OpenCL." alt="" coords="255,5,523,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="123,160,178,108,214,79,253,55,269,48,271,53,256,60,217,83,181,112,127,164"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1gpu_1_1GPUManager.html#a70047c6b01da4afd29934b79a0120b46" title="Récupère le device OpenCL." alt="" coords="255,69,523,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="150,160,254,119,282,110,284,115,256,124,151,165"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1gpu_1_1GPUManager.html#a65cc6674dbee14bcf2d3f11f06a26e4b" title="Récupère l&#39;instance unique du gestionnaire GPU." alt="" coords="255,133,523,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="207,170,241,166,241,171,207,175"/>
+<area shape="rect" id="Node000007" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="1591,170,1629,195"/>
+<area shape="poly" id="edge10_Node000001_Node000007" title=" " alt="" coords="207,188,429,201,693,208,1032,208,1193,205,1350,198,1577,183,1577,188,1350,203,1193,210,1032,213,693,213,429,206,207,193"/>
+<area shape="rect" id="Node000010" href="$classediteurpanovisu_1_1gpu_1_1GPUKernelLoader.html#a588fbb00f7d95388ff3f2fe88f7e2d87" title="Charge le kernel de redimensionnement bicubique." alt="" coords="275,248,503,288"/>
+<area shape="poly" id="edge11_Node000001_Node000010" title=" " alt="" coords="170,200,255,227,305,242,304,247,254,232,169,205"/>
+<area shape="rect" id="Node000012" href="$classediteurpanovisu_1_1gpu_1_1GPUKernelLoader.html#aab2e17ecd14e3e0984001381a3fb6d5a" title="Charge le kernel de redimensionnement Lanczos3." alt="" coords="275,312,503,352"/>
+<area shape="poly" id="edge14_Node000001_Node000012" title=" " alt="" coords="129,201,183,250,218,276,256,298,273,305,270,310,253,302,215,280,180,254,125,205"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1gpu_1_1GPUManager.html#a3ba0aa0d6379b3b216d07d19ee71e251" title="Constructeur privé (singleton)" alt="" coords="571,105,817,145"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="523,138,557,135,557,141,523,144"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1gpu_1_1GPUManager.html#ad758dc8906499865aeaf412236ba042c" title="Initialise OpenCL et détecte les GPU disponibles." alt="" coords="865,113,1196,138"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="818,123,852,123,852,128,818,128"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="1057,110,1143,75,1202,56,1268,40,1338,30,1409,30,1479,41,1512,53,1544,68,1566,86,1583,109,1604,156,1599,158,1579,112,1562,90,1541,73,1510,58,1477,47,1409,35,1338,36,1269,45,1204,61,1145,80,1059,115"/>
+<area shape="rect" id="Node000008" href="$leaflet_8js.html#acaad4b36c0476b761b674f28b36d565c" title=" " alt="" coords="1374,83,1413,109"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="1188,110,1360,96,1361,101,1188,115"/>
+<area shape="rect" id="Node000009" href="$classediteurpanovisu_1_1gpu_1_1GPUManager.html#af70605c6c0bf0dd246801d1c51fb90dc" title="Récupère les informations détaillées du GPU." alt="" coords="1244,133,1543,173"/>
+<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="1195,135,1230,138,1230,143,1195,141"/>
+<area shape="poly" id="edge9_Node000009_Node000007" title=" " alt="" coords="1541,171,1578,176,1577,181,1541,176"/>
+<area shape="rect" id="Node000011" href="$classediteurpanovisu_1_1gpu_1_1GPUKernelLoader.html#af75a057bee5cbaaad3ea651050f058f0" title="Charge un kernel OpenCL depuis les ressources." alt="" coords="580,248,808,288"/>
+<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="503,265,566,265,566,271,503,271"/>
+<area shape="poly" id="edge13_Node000011_Node000007" title=" " alt="" coords="808,280,958,291,1047,293,1143,292,1243,286,1345,274,1445,254,1542,227,1564,216,1584,202,1587,207,1567,221,1544,232,1446,260,1346,279,1244,291,1144,297,1047,299,957,296,808,285"/>
+<area shape="poly" id="edge15_Node000012_Node000011" title=" " alt="" coords="484,309,584,288,585,293,485,315"/>
+</map>

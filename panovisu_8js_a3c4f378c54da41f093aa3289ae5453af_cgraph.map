@@ -1,0 +1,8 @@
+<map id="panovisu" name="panovisu">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,31,87,56"/>
+<area shape="poly" id="edge3_Node000001_Node000001" title=" " alt="" coords="27,32,23,22,25,13,33,6,46,4,61,7,68,16,64,19,58,12,46,9,35,11,30,16,29,22,32,30"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="135,5,173,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="87,31,121,23,122,28,88,36"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="135,55,173,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="88,50,122,58,121,63,87,55"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="editeurpanovisu.HuggingFaceClient.extractSummaryText" name="editeurpanovisu.HuggingFaceClient.extractSummaryText">
+<area shape="rect" id="Node000001" title="Extrait le texte résumé de la réponse JSON Format: [{&quot;summary_text&quot;: &quot;...&quot;}]." alt="" coords="268,5,483,45"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1HuggingFaceClient.html#a9f0d546d5c3687b7f9c61d25bcb0c423" title="Résume un texte." alt="" coords="5,5,220,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="255,28,220,28,220,23,255,23"/>
+</map>

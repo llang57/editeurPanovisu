@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.ReadWriteImage.writePng" name="editeurpanovisu.ReadWriteImage.writePng">
+<area shape="rect" id="Node000001" title=" " alt="" coords="368,37,567,77"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1EditeurPanovisu.html#ad4c8e1684c8b8d0e96cfc28dc0d93404" title=" " alt="" coords="21,5,305,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="354,48,305,43,305,38,355,43"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1EditeurPanovisu.html#a416b14aef6006427b0ed01fdcd516014" title="Sauvegarde une image de hotspot colorée dans le répertoire temp et retourne le nom du fichier." alt="" coords="5,69,320,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="355,72,320,75,320,70,354,66"/>
+</map>

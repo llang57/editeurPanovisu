@@ -1,0 +1,8 @@
+<map id="editeurpanovisu.PrevisualiserConversionDialog.appliquerRemplissageMiroir" name="editeurpanovisu.PrevisualiserConversionDialog.appliquerRemplissageMiroir">
+<area shape="rect" id="Node000001" title="Applique un remplissage miroir." alt="" coords="5,27,292,82"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1PrevisualiserConversionDialog.html#a4b707a735deefe752b0baf54620b5d93" title="Calcule la position Y selon le positionnement vertical choisi." alt="" coords="340,5,592,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="292,39,326,36,327,41,292,44"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="640,42,679,67"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="292,55,592,55,626,54,626,59,592,60,292,60"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="593,42,627,47,626,52,592,47"/>
+</map>

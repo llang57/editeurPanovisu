@@ -1,0 +1,9 @@
+<map id="editeurpanovisu.GestionnairePlanController.afficherListePanosVignettes" name="editeurpanovisu.GestionnairePlanController.afficherListePanosVignettes">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,40,240,95"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="290,5,329,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="226,37,276,24,277,29,227,43"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="290,55,329,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="240,65,276,65,276,70,240,70"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#abf5830200d869e463ea38504a19985f6" title=" " alt="" coords="288,104,331,129"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="227,92,275,105,274,110,226,97"/>
+</map>

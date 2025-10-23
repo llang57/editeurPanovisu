@@ -1,0 +1,17 @@
+<map id="editeurpanovisu.PrevisualiserConversionDialog.appliquerRemplissageNoir" name="editeurpanovisu.PrevisualiserConversionDialog.appliquerRemplissageNoir">
+<area shape="rect" id="Node000001" title="Applique un remplissage noir." alt="" coords="1503,33,1816,73"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1PrevisualiserConversionDialog.html#ac9690af4f186bb23205a36edd3ca8764" title="Convertit l&#39;image au ratio 2:1 avec les options actuelles." alt="" coords="1175,33,1455,73"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1489,56,1455,56,1455,51,1489,51"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1PrevisualiserConversionDialog.html#acc87f748d2e1794d1dc25b3fa5a094d4" title="Génère la prévisualisation de la conversion." alt="" coords="832,33,1127,73"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="1161,56,1127,56,1127,51,1161,51"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1PrevisualiserConversionDialog.html#a87e26dc45ee76361d027dabcc51f9f7d" title="Affiche le dialogue et attend la réponse de l&#39;utilisateur." alt="" coords="5,5,220,45"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="863,34,784,24,631,16,477,14,220,22,220,16,477,9,631,11,784,19,863,29"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1PrevisualiserConversionDialog.html#ac77e13ee81877a0a7e27c5521faae521" title="Crée les boutons d&#39;action." alt="" coords="553,33,779,73"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="818,56,780,56,780,51,818,51"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1PrevisualiserConversionDialog.html#a8cd38b966e44b2164e9b297465be7351" title="Crée les contrôles de positionnement et de type de remplissage." alt="" coords="548,97,784,137"/>
+<area shape="poly" id="edge7_Node000003_Node000007" title=" " alt="" coords="868,79,765,100,764,95,867,74"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1PrevisualiserConversionDialog.html#af108a324770eecf9aa39d5bdad4cad31" title="Crée l&#39;interface du dialogue." alt="" coords="268,33,500,73"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="539,56,500,56,500,51,539,51"/>
+<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="254,43,220,39,221,34,255,37"/>
+<area shape="poly" id="edge8_Node000007_Node000006" title=" " alt="" coords="563,97,472,76,473,71,565,92"/>
+</map>

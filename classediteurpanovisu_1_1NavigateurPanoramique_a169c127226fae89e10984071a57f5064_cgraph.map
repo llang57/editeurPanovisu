@@ -1,0 +1,9 @@
+<map id="editeurpanovisu.NavigateurPanoramique.imgTransformationImage" name="editeurpanovisu.NavigateurPanoramique.imgTransformationImage">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,47,280,87"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="328,5,367,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="226,45,314,23,316,28,227,50"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#afa3c32d9f7f168b0e59ddc33ec31bb84" title=" " alt="" coords="328,55,367,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="280,65,314,65,314,70,280,70"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="328,104,367,129"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="227,85,316,106,314,112,226,90"/>
+</map>

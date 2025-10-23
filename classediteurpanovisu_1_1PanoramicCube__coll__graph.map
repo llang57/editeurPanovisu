@@ -1,0 +1,5 @@
+<map id="editeurpanovisu.PanoramicCube" name="editeurpanovisu.PanoramicCube">
+<area shape="rect" id="Node000001" title="Cube panoramique pour l&#39;affichage de panoramas équirectangulaires Utilise 6 faces de cube au lieu d&#39;u..." alt="" coords="5,79,237,104"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="91,5,152,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="124,44,124,79,119,79,119,44"/>
+</map>
