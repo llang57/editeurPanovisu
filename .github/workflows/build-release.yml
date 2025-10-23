@@ -146,110 +146,6 @@ jobs:
           path: target/installer/*.dmg
           retention-days: 30
 
-  build-linux:
-    name: 🐧 Linux Installers
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: 📥 Checkout code
-        uses: actions/checkout@v4
-      
-      - name: ☕ Setup Java 25
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '25'
-          cache: 'maven'
-      
-      - name: � Create api-keys.properties
-        run: |
-          cp api-keys.properties.template api-keys.properties
-          echo "✅ api-keys.properties créé depuis template"
-      
-      - name: �📦 Install packaging tools
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y fakeroot rpm
-      
-      - name: 🔨 Build with Maven
-        run: mvn clean package -DskipTests -Dskip.build.increment=true
-      
-      - name: 📦 Create Debian Package (.deb)
-        run: |
-          APP_VERSION="${{ github.event.inputs.version || '3.3.2' }}"
-          
-          # Trouver le nom exact du JAR
-          MAIN_JAR=$(ls target/editeurPanovisu-*-SNAPSHOT.jar | xargs basename)
-          echo "📦 JAR trouvé: $MAIN_JAR"
-          
-          jpackage \
-            --type deb \
-            --name editeurpanovisu \
-            --app-version "$APP_VERSION" \
-            --vendor "PanoVisu" \
-            --icon images/panovisu.png \
-            --input target \
-            --main-jar "$MAIN_JAR" \
-            --main-class editeurpanovisu.EditeurPanovisu \
-            --runtime-image "$JAVA_HOME" \
-            --dest target/installer \
-            --linux-package-name editeurpanovisu \
-            --linux-app-category "Graphics" \
-            --linux-shortcut \
-            --linux-menu-group "Graphics" \
-            --java-options "-Xmx2048m" \
-            --java-options "-Dfile.encoding=UTF-8" \
-            --verbose
-      
-      - name: 📦 Create RPM Package (.rpm)
-        run: |
-          APP_VERSION="${{ github.event.inputs.version || '3.3.2' }}"
-          
-          # Trouver le nom exact du JAR
-          MAIN_JAR=$(ls target/editeurPanovisu-*-SNAPSHOT.jar | xargs basename)
-          echo "📦 JAR trouvé: $MAIN_JAR"
-          
-          jpackage \
-            --type rpm \
-            --name editeurpanovisu \
-            --app-version "$APP_VERSION" \
-            --vendor "PanoVisu" \
-            --icon images/panovisu.png \
-            --input target \
-            --main-jar "$MAIN_JAR" \
-            --main-class editeurpanovisu.EditeurPanovisu \
-            --runtime-image "$JAVA_HOME" \
-            --dest target/installer \
-            --linux-package-name editeurpanovisu \
-            --linux-app-category "Graphics" \
-            --linux-shortcut \
-            --linux-menu-group "Graphics" \
-            --java-options "-Xmx2048m" \
-            --java-options "-Dfile.encoding=UTF-8" \
-            --verbose
-      
-      - name: 📊 Calculate SHA256
-        id: sha256
-        run: |
-          echo "### 📊 Checksums" >> $GITHUB_STEP_SUMMARY
-          for file in target/installer/*.{deb,rpm}; do
-            if [ -f "$file" ]; then
-              HASH=$(sha256sum "$file" | cut -d ' ' -f 1)
-              FILENAME=$(basename "$file")
-              echo "- **$FILENAME**: \`$HASH\`" >> $GITHUB_STEP_SUMMARY
-              echo "SHA256_$(echo $FILENAME | tr '.-' '_')=$HASH" >> $GITHUB_OUTPUT
-            fi
-          done
-      
-      - name: 📤 Upload Linux Installers
-        uses: actions/upload-artifact@v4
-        with:
-          name: linux-installers
-          path: |
-            target/installer/*.deb
-            target/installer/*.rpm
-          retention-days: 30
-
   build-linux-portable:
     name: 🐧 Linux Portable Archive
     runs-on: windows-latest
@@ -299,7 +195,7 @@ jobs:
 
   create-release:
     name: 🎉 Create GitHub Release
-    needs: [build-windows, build-macos, build-linux, build-linux-portable]
+    needs: [build-windows, build-macos, build-linux-portable]
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch'
     
@@ -322,13 +218,7 @@ jobs:
           name: macos-installer
           path: ./artifacts/macos
       
-      - name: 📥 Download Linux Installers
-        uses: actions/download-artifact@v4
-        with:
-          name: linux-installers
-          path: ./artifacts/linux
-      
-      - name: � Download Linux Portable Archive
+      - name: 📥 Download Linux Portable Archive
         uses: actions/download-artifact@v4
         with:
           name: linux-portable
@@ -471,10 +361,8 @@ jobs:
             |------------|---------|--------|-------|
             | 🪟 **Windows 10/11** | `EditeurPanovisu-Setup-3.3.3.exe` | ~188 MB | Installeur automatique |
             | 🍎 **macOS 11+** | `EditeurPanovisu-3.3.3.dmg` | ~200 MB | Image disque |
-            | 🐧 **Linux (Portable)** | `EditeurPanovisu-Linux-Portable-3.3.3.zip` | ~150 MB | ⭐ **Recommandé** |
-            | 🐧 **Linux (Portable)** | `EditeurPanovisu-Linux-Portable-3.3.3.tar.gz` | ~145 MB | Alternative TAR |
-            | 🐧 **Linux (Debian/Ubuntu)** | `editeurpanovisu_3.3.3-1_amd64.deb` | ~180 MB | Package système |
-            | 🐧 **Linux (RedHat/Fedora)** | `editeurpanovisu-3.3.3-1.x86_64.rpm` | ~180 MB | Package système |
+            | 🐧 **Linux** | `EditeurPanovisu-Linux-Portable-3.3.3.zip` | ~150 MB | ⭐ **Recommandé** |
+            | 🐧 **Linux** | `EditeurPanovisu-Linux-Portable-3.3.3.tar.gz` | ~145 MB | Alternative TAR |
             
             📖 **Installation Linux** : Consultez [INSTALLATION.md](https://github.com/llang57/editeurPanovisu/blob/master/doc/install/INSTALLATION.md) pour le guide complet
             
@@ -542,7 +430,6 @@ jobs:
           files: |
             artifacts/windows/*
             artifacts/macos/*
-            artifacts/linux/*
             artifacts/linux-portable/*
             checksums.txt
           draft: false
@@ -552,7 +439,7 @@ jobs:
 
   notify-summary:
     name: 📊 Build Summary
-    needs: [build-windows, build-macos, build-linux]
+    needs: [build-windows, build-macos, build-linux-portable]
     runs-on: ubuntu-latest
     
     steps:
@@ -562,6 +449,6 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "✅ **Windows** installer created" >> $GITHUB_STEP_SUMMARY
           echo "✅ **macOS** installer created" >> $GITHUB_STEP_SUMMARY
-          echo "✅ **Linux** installers created (DEB + RPM)" >> $GITHUB_STEP_SUMMARY
+          echo "✅ **Linux** portable archives created (ZIP + TAR.GZ)" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "📦 All artifacts ready for download!" >> $GITHUB_STEP_SUMMARY
