@@ -21,7 +21,7 @@ Dans **EditeurPanovisu**, Ollama vous permet de générer automatiquement des de
 Avant d'installer Ollama, vérifiez que votre ordinateur répond aux exigences minimales :
 
 ### Configuration minimale
-- **Système d'exploitation** : Windows 10/11 (64 bits)
+- **Système d'exploitation** : Windows 10/11 (64 bits), macOS 11+, ou Linux (Ubuntu 20.04+, Debian, Fedora, etc.)
 - **Mémoire RAM** : 8 Go minimum (16 Go recommandé)
 - **Espace disque** : 10 Go d'espace libre minimum
 - **Processeur** : Processeur moderne (Intel i5 ou AMD Ryzen 5 minimum)
@@ -35,9 +35,71 @@ Avant d'installer Ollama, vérifiez que votre ordinateur répond aux exigences m
 
 ---
 
-## 🚀 Installation d'Ollama (Windows)
+## 🚀 Installation d'Ollama
 
-### Étape 1 : Télécharger Ollama
+### 🐧 Installation sous Linux (Recommandé - Plus simple !)
+
+L'installation sous Linux est **très simple** - une seule commande suffit !
+
+#### Méthode automatique (toutes distributions)
+
+1. **Ouvrez un terminal** (Ctrl+Alt+T)
+2. **Copiez-collez cette commande** :
+   ```bash
+   curl -fsSL https://ollama.com/install.sh | sh
+   ```
+3. **Appuyez sur Entrée** et entrez votre mot de passe si demandé
+4. **Attendez la fin de l'installation** (quelques secondes)
+
+**C'est tout !** ✅ Ollama est maintenant installé et démarré automatiquement.
+
+#### Vérifier l'installation
+
+Dans le terminal, tapez :
+```bash
+ollama --version
+```
+
+Vous devriez voir le numéro de version (par exemple `ollama version is 0.3.12`).
+
+#### Installer un modèle d'IA
+
+Directement dans le terminal :
+```bash
+# Modèle recommandé pour débuter (petit et rapide)
+ollama pull llama3.2
+
+# OU modèle avec meilleur qualité
+ollama pull mistral
+```
+
+#### Démarrer/Arrêter Ollama sous Linux
+
+Ollama démarre automatiquement au boot. Pour le contrôler :
+
+```bash
+# Vérifier le statut
+systemctl status ollama
+
+# Arrêter Ollama
+sudo systemctl stop ollama
+
+# Démarrer Ollama
+sudo systemctl start ollama
+
+# Désactiver le démarrage automatique
+sudo systemctl disable ollama
+```
+
+> 💡 **Astuce** : Sous Linux, Ollama fonctionne comme un service système, c'est encore plus pratique qu'sous Windows !
+
+---
+
+### 🪟 Installation sous Windows
+
+### 🪟 Installation sous Windows
+
+#### Étape 1 : Télécharger Ollama
 
 1. Ouvrez votre navigateur web
 2. Allez sur le site officiel : **https://ollama.com/**
@@ -46,7 +108,7 @@ Avant d'installer Ollama, vérifiez que votre ordinateur répond aux exigences m
 
 ![Téléchargement Ollama](https://ollama.com/public/og-image.png)
 
-### Étape 2 : Installer Ollama
+#### Étape 2 : Installer Ollama
 
 1. **Localisez** le fichier `OllamaSetup.exe` dans votre dossier Téléchargements
 2. **Double-cliquez** sur le fichier pour lancer l'installation
@@ -58,7 +120,7 @@ Avant d'installer Ollama, vérifiez que votre ordinateur répond aux exigences m
 
 > ⚠️ **Important** : Une icône Ollama apparaîtra dans la barre des tâches (près de l'horloge). Cela signifie qu'Ollama est en cours d'exécution.
 
-### Étape 3 : Vérifier l'installation
+#### Étape 3 : Vérifier l'installation
 
 Pour vérifier qu'Ollama est bien installé :
 
@@ -71,6 +133,26 @@ Pour vérifier qu'Ollama est bien installé :
 4. Appuyez sur **Entrée**
 
 Si vous voyez un numéro de version (par exemple `ollama version is 0.3.12`), c'est parfait ! ✅
+
+---
+
+### 🍎 Installation sous macOS
+
+1. **Téléchargez** Ollama depuis : **https://ollama.com/download**
+2. **Ouvrez** le fichier `.dmg` téléchargé
+3. **Glissez-déposez** l'application Ollama dans le dossier Applications
+4. **Lancez** Ollama depuis le dossier Applications
+5. L'icône Ollama apparaît dans la barre de menu en haut
+
+**Vérification** dans le Terminal :
+```bash
+ollama --version
+```
+
+**Installer un modèle** :
+```bash
+ollama pull llama3.2
+```
 
 ---
 
@@ -91,11 +173,13 @@ Ollama ne contient pas de modèle d'IA par défaut. Vous devez en télécharger 
 
 ### Comment installer un modèle
 
-#### Méthode simple (recommandée)
+#### Méthode simple (toutes plateformes)
 
-1. Ouvrez le **Menu Démarrer**
-2. Tapez **"cmd"** et appuyez sur **Entrée**
-3. Dans la fenêtre qui s'ouvre, tapez l'une de ces commandes :
+**Sous Linux/macOS** - Ouvrez un **Terminal**
+
+**Sous Windows** - Ouvrez le **Menu Démarrer**, tapez **"cmd"** et appuyez sur **Entrée**
+
+Puis tapez l'une de ces commandes :
 
 **Pour Llama 3.2 (recommandé pour débuter)** :
 ```
@@ -112,9 +196,7 @@ ollama pull mistral
 ollama pull llama3.1
 ```
 
-4. Appuyez sur **Entrée**
-5. Le téléchargement commence (cela peut prendre 5 à 30 minutes selon votre connexion)
-6. Attendez que le message **"success"** s'affiche
+**Appuyez sur Entrée**. Le téléchargement commence (cela peut prendre 5 à 30 minutes selon votre connexion). Attendez que le message **"success"** s'affiche.
 
 ![Téléchargement modèle](https://i.imgur.com/example.png)
 
@@ -122,14 +204,11 @@ ollama pull llama3.1
 
 ### Vérifier les modèles installés
 
-Pour voir quels modèles sont installés :
+Pour voir quels modèles sont installés, dans un terminal (Linux/macOS) ou cmd (Windows) :
 
-1. Ouvrez **cmd** (comme expliqué ci-dessus)
-2. Tapez :
-   ```
-   ollama list
-   ```
-3. Appuyez sur **Entrée**
+```bash
+ollama list
+```
 
 Vous verrez la liste de tous vos modèles installés.
 
@@ -180,28 +259,50 @@ Après la génération, vous pouvez :
 **Solutions** :
 
 #### Solution 1 : Vérifier qu'Ollama est installé
-- Ouvrez **cmd** et tapez `ollama --version`
-- Si vous voyez "command not found", réinstallez Ollama
+
+**Linux/macOS** : Ouvrez un terminal et tapez `ollama --version`
+
+**Windows** : Ouvrez **cmd** et tapez `ollama --version`
+
+Si vous voyez "command not found", réinstallez Ollama
 
 #### Solution 2 : Démarrer Ollama
+
+**Sous Linux** :
+```bash
+sudo systemctl start ollama
+# ou
+ollama serve
+```
+
+**Sous Windows** :
 - Cherchez l'icône **Ollama** dans la barre des tâches (près de l'horloge)
 - Si elle n'est pas là, ouvrez le **Menu Démarrer** et lancez **"Ollama"**
-- L'icône devrait apparaître dans la barre des tâches
+
+**Sous macOS** :
+- Lancez Ollama depuis le dossier Applications
 
 #### Solution 3 : Vérifier le service
-1. Ouvrez **cmd**
-2. Tapez : `ollama serve`
-3. Laissez cette fenêtre ouverte et retournez dans EditeurPanovisu
+
+Ouvrez un terminal (ou cmd sous Windows) et tapez :
+```bash
+ollama serve
+```
+
+Laissez cette fenêtre ouverte et retournez dans EditeurPanovisu
 
 ### Problème : "Aucun modèle disponible"
 
 **Cause** : Vous n'avez pas téléchargé de modèle d'IA
 
 **Solution** :
-1. Ouvrez **cmd**
-2. Tapez : `ollama pull llama3.2` (ou un autre modèle)
-3. Attendez la fin du téléchargement
-4. Relancez EditeurPanovisu
+
+Ouvrez un terminal (Linux/macOS) ou cmd (Windows) et tapez :
+```bash
+ollama pull llama3.2
+```
+
+Attendez la fin du téléchargement et relancez EditeurPanovisu
 
 ### Problème : La génération est très lente
 
@@ -220,11 +321,25 @@ Après la génération, vous pouvez :
 **C'est normal !** L'IA utilise beaucoup de ressources pour fonctionner.
 
 **Pour limiter l'utilisation** :
-1. Fermez Ollama quand vous ne l'utilisez pas :
-   - Clic droit sur l'icône Ollama dans la barre des tâches
-   - Cliquez sur **"Quit"** (Quitter)
-2. Utilisez un modèle plus petit
-3. Lancez Ollama uniquement quand vous en avez besoin
+
+**Sous Linux** :
+```bash
+# Arrêter Ollama
+sudo systemctl stop ollama
+
+# Désactiver le démarrage automatique
+sudo systemctl disable ollama
+```
+
+**Sous Windows** :
+1. Clic droit sur l'icône Ollama dans la barre des tâches
+2. Cliquez sur **"Quit"** (Quitter)
+
+**Sous macOS** :
+1. Cliquez sur l'icône Ollama dans la barre de menu
+2. Sélectionnez **"Quit Ollama"**
+
+Vous pouvez aussi utiliser un modèle plus petit (llama3.2) ou lancer Ollama uniquement quand vous en avez besoin.
 
 ---
 
@@ -279,13 +394,13 @@ Certains modèles sont spécialement entraînés pour plusieurs langues :
 
 ### Supprimer un modèle
 
-Si vous voulez libérer de l'espace disque :
-```
+Si vous voulez libérer de l'espace disque, dans un terminal (ou cmd) :
+```bash
 ollama rm nom-du-modele
 ```
 
 Exemple :
-```
+```bash
 ollama rm mistral
 ```
 
@@ -316,11 +431,27 @@ Ollama utilise des modèles similaires à ChatGPT, mais :
 - Il est **toujours disponible** (pas de limite de requêtes)
 
 ### Puis-je désinstaller Ollama ?
-**Oui !** Vous pouvez désinstaller Ollama comme n'importe quel programme Windows :
+
+**Oui !** 
+
+**Sous Linux** :
+```bash
+sudo systemctl stop ollama
+sudo systemctl disable ollama
+sudo rm /usr/local/bin/ollama
+sudo rm -rf /usr/share/ollama
+sudo userdel ollama
+```
+
+**Sous Windows** :
 1. Ouvrez **Paramètres Windows**
 2. Allez dans **Applications**
 3. Cherchez **"Ollama"**
 4. Cliquez sur **"Désinstaller"**
+
+**Sous macOS** :
+1. Glissez-déposez Ollama depuis Applications vers la Corbeille
+2. Videz la Corbeille
 
 ---
 
