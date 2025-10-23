@@ -63,6 +63,26 @@
             <artifactId>javafx-swing</artifactId>
             <version>${javafx.version}</version>
         </dependency>
+        
+        <!-- JavaFX natives Linux pour archive portable -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+            <version>${javafx.version}</version>
+            <classifier>linux</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-media</artifactId>
+            <version>${javafx.version}</version>
+            <classifier>linux</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-web</artifactId>
+            <version>${javafx.version}</version>
+            <classifier>linux</classifier>
+        </dependency>
 
         <!-- Gluon Maps - DÉSACTIVÉ (crashs sur Desktop avec cache)
         <dependency>
@@ -371,7 +391,7 @@
                                 </transformer>
                             </transformers>
                             <filters>
-                                <!-- Ne filtrer QUE les dépendances externes, pas notre JAR -->
+                                <!-- Exclure les signatures des dépendances externes uniquement -->
                                 <filter>
                                     <artifact>*:*</artifact>
                                     <excludes>
@@ -379,10 +399,6 @@
                                         <exclude>META-INF/*.DSA</exclude>
                                         <exclude>META-INF/*.RSA</exclude>
                                     </excludes>
-                                </filter>
-                                <!-- Notre projet : TOUT inclure sans exception -->
-                                <filter>
-                                    <artifact>fr.panovisu:editeurPanovisu</artifact>
                                 </filter>
                             </filters>
                         </configuration>

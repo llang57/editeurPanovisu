@@ -77,6 +77,7 @@ fi
 
 echo "=== Demarrage de l'application ==="
 java -Dfile.encoding=UTF-8 \
+     --enable-native-access=ALL-UNNAMED \
      -Xms256m \
      -Xmx4096m \
      -jar editeurPanovisu-3.3.3-SNAPSHOT.jar
@@ -94,13 +95,24 @@ exit `$exit_code
 
 # Convertir les fins de lignes Windows (CRLF) en Unix (LF)
 $launchScript = $launchScript -replace "`r`n", "`n"
-$launchScript | Out-File -FilePath "$linuxDir\lancer-editeur-panovisu.sh" -Encoding UTF8 -NoNewline
+
+# Ecrire le fichier avec UTF8 SANS BOM (requis pour shebang #!/bin/bash)
+$utf8NoBom = New-Object System.Text.UTF8Encoding $false
+[System.IO.File]::WriteAllText("$linuxDir\lancer-editeur-panovisu.sh", $launchScript, $utf8NoBom)
 
 # Copier les fichiers d'installation depuis doc/install/
 Write-Host "Copie des fichiers d'installation..." -ForegroundColor Yellow
 Copy-Item -Path "doc\install\INSTALLATION.md" -Destination "$linuxDir\INSTALLATION.md" -Force
 Copy-Item -Path "doc\install\INSTALLATION.txt" -Destination "$linuxDir\INSTALLATION.txt" -Force
 Copy-Item -Path "doc\install\INSTALLATION.html" -Destination "$linuxDir\INSTALLATION.html" -Force
+
+# Copier les fichiers d'aide dans le repertoire doc/
+Write-Host "Copie des fichiers d'aide dans doc/..." -ForegroundColor Yellow
+if (-not (Test-Path "$linuxDir\doc")) {
+    New-Item -Path "$linuxDir\doc" -ItemType Directory -Force | Out-Null
+}
+Copy-Item -Path "doc\PRESENTATION.md" -Destination "$linuxDir\doc\PRESENTATION.md" -Force -ErrorAction SilentlyContinue
+Copy-Item -Path "doc\INSTALLATION_OLLAMA.md" -Destination "$linuxDir\doc\INSTALLATION_OLLAMA.md" -Force -ErrorAction SilentlyContinue
 
 # Creer l'archive ZIP
 Write-Host "Creation de l'archive ZIP..." -ForegroundColor Yellow
