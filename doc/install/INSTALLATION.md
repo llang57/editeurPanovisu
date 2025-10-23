@@ -109,6 +109,79 @@ direct rendering: Yes
 
 Si `glxgears` affiche des engrenages qui tournent, OpenGL fonctionne correctement.
 
+### 7. (Optionnel) Installation OpenCL pour accélération GPU
+
+OpenCL permet d'accélérer le traitement des images (redimensionnement, filtres). **L'application fonctionne parfaitement sans OpenCL** (mode CPU automatique).
+
+#### 7.1. Installation de clinfo (outil de diagnostic)
+
+```bash
+sudo apt install -y clinfo
+```
+
+#### 7.2. Vérifier le support OpenCL actuel
+
+```bash
+clinfo
+```
+
+**Si vous voyez `Number of platforms: 0`** → Aucun pilote OpenCL installé (normal)
+
+#### 7.3. Installer les pilotes OpenCL selon votre GPU
+
+**Pour NVIDIA (le plus courant) :**
+```bash
+# Vérifier que les pilotes NVIDIA sont installés
+nvidia-smi
+
+# Installer OpenCL NVIDIA
+sudo apt install -y nvidia-opencl-icd nvidia-opencl-dev
+
+# Vérifier
+clinfo | grep "Platform Name"
+# Devrait afficher: NVIDIA CUDA
+```
+
+**Pour AMD :**
+```bash
+sudo apt install -y mesa-opencl-icd ocl-icd-opencl-dev
+
+# Vérifier
+clinfo | grep "Platform Name"
+# Devrait afficher: Clover ou ROCm
+```
+
+**Pour Intel (GPU intégré) :**
+```bash
+sudo apt install -y intel-opencl-icd
+
+# Vérifier
+clinfo | grep "Platform Name"
+# Devrait afficher: Intel(R) OpenCL
+```
+
+#### 7.4. Vérification complète OpenCL
+
+```bash
+# Afficher toutes les informations OpenCL
+clinfo
+
+# Vérifier le nombre de plateformes
+clinfo | grep "Number of platforms"
+# Devrait afficher: Number of platforms: 1 (ou plus)
+
+# Vérifier les devices
+clinfo | grep "Number of devices"
+# Devrait afficher: Number of devices: 1 (ou plus)
+```
+
+**Performance avec OpenCL :**
+- Redimensionnement images : **1.7× plus rapide**
+- Affichage panoramas : **10× plus rapide**
+- Chargement visites : **3.4× plus rapide**
+
+**Sans OpenCL :** Traitement CPU uniquement (fonctionne correctement, juste plus lent)
+
 ---
 
 ## 📥 Installation de l'application

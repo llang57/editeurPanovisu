@@ -1,400 +1,748 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EditeurPanovisu - Installation Linux</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-            overflow: hidden;
-        }
-        
-        header {
-            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
-            color: white;
-            padding: 30px;
-            text-align: center;
-        }
-        
-        header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-        
-        header .version {
-            font-size: 0.9em;
-            opacity: 0.9;
-        }
-        
-        nav {
-            background: #f7fafc;
-            padding: 15px 30px;
-            border-bottom: 2px solid #e2e8f0;
-        }
-        
-        nav ul {
-            list-style: none;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        
-        nav a {
-            color: #4a5568;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        
-        nav a:hover {
-            color: #667eea;
-        }
-        
-        .content {
-            padding: 40px;
-        }
-        
-        section {
-            margin-bottom: 40px;
-        }
-        
-        h2 {
-            color: #2d3748;
-            font-size: 1.8em;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #667eea;
-        }
-        
-        h3 {
-            color: #4a5568;
-            font-size: 1.3em;
-            margin-top: 25px;
-            margin-bottom: 15px;
-        }
-        
-        .info-box {
-            background: #ebf8ff;
-            border-left: 4px solid #3182ce;
-            padding: 15px 20px;
-            margin: 20px 0;
-            border-radius: 4px;
-        }
-        
-        .warning-box {
-            background: #fffaf0;
-            border-left: 4px solid #dd6b20;
-            padding: 15px 20px;
-            margin: 20px 0;
-            border-radius: 4px;
-        }
-        
-        .success-box {
-            background: #f0fff4;
-            border-left: 4px solid #38a169;
-            padding: 15px 20px;
-            margin: 20px 0;
-            border-radius: 4px;
-        }
-        
-        pre {
-            background: #2d3748;
-            color: #e2e8f0;
-            padding: 20px;
-            border-radius: 6px;
-            overflow-x: auto;
-            margin: 15px 0;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.9em;
-            line-height: 1.5;
-        }
-        
-        code {
-            background: #edf2f7;
-            color: #c53030;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.9em;
-        }
-        
-        pre code {
-            background: transparent;
-            color: inherit;
-            padding: 0;
-        }
-        
-        ul, ol {
-            margin-left: 30px;
-            margin-bottom: 15px;
-        }
-        
-        li {
-            margin-bottom: 8px;
-        }
-        
-        .file-tree {
-            background: #f7fafc;
-            padding: 20px;
-            border-radius: 6px;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.9em;
-            margin: 20px 0;
-        }
-        
-        .step-number {
-            display: inline-block;
-            background: #667eea;
-            color: white;
-            width: 28px;
-            height: 28px;
-            line-height: 28px;
-            text-align: center;
-            border-radius: 50%;
-            font-weight: bold;
-            margin-right: 10px;
-        }
-        
-        footer {
-            background: #2d3748;
-            color: white;
-            padding: 20px;
-            text-align: center;
-            font-size: 0.9em;
-        }
-        
-        footer a {
-            color: #90cdf4;
-            text-decoration: none;
-        }
-        
-        footer a:hover {
-            text-decoration: underline;
-        }
-        
-        @media (max-width: 768px) {
-            .content {
-                padding: 20px;
-            }
-            
-            header h1 {
-                font-size: 1.8em;
-            }
-            
-            nav ul {
-                flex-direction: column;
-                gap: 10px;
-            }
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Installation EditeurPanovisu Linux</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🐧 EditeurPanovisu pour Linux</h1>
-            <p class="version">Guide d'installation - Version portable 3.3.3</p>
-        </header>
-        
-        <nav>
-            <ul>
-                <li><a href="#prerequis">Prérequis</a></li>
-                <li><a href="#java">Installation Java</a></li>
-                <li><a href="#app">Installation App</a></li>
-                <li><a href="#config">Configuration</a></li>
-                <li><a href="#depannage">Dépannage</a></li>
-            </ul>
-        </nav>
-        
-        <div class="content">
-            <section id="prerequis">
-                <h2>📋 Prérequis système</h2>
-                <div class="info-box">
-                    <strong>Configuration minimale requise :</strong>
-                    <ul style="margin-top: 10px;">
-                        <li><strong>Java</strong> : OpenJDK 25 ou supérieur</li>
-                        <li><strong>JavaFX</strong> : Version 19 ou supérieure</li>
-                        <li><strong>OpenGL</strong> : Version 3.0+ (pour l'affichage 3D)</li>
-                        <li><strong>Environnement</strong> : X11 ou Wayland</li>
-                        <li><strong>Mémoire</strong> : 2 GB RAM minimum, 4 GB recommandé</li>
-                    </ul>
-                </div>
-            </section>
-
-            <section id="java">
-                <h2>☕ Installation Java + JavaFX</h2>
-                
-                <h3><span class="step-number">1</span>Option 1 : Via les dépôts Ubuntu/Debian</h3>
-                <p>La méthode la plus simple pour Ubuntu, Debian et leurs dérivés :</p>
-                <pre><code>sudo apt update
-sudo apt install openjdk-25-jdk openjfx</code></pre>
-                
-                <h3><span class="step-number">2</span>Option 2 : Installation manuelle</h3>
-                <p>Pour plus de contrôle sur la version et l'emplacement :</p>
-                
-                <p><strong>1. Télécharger OpenJDK 25</strong></p>
-                <p>Rendez-vous sur <a href="https://adoptium.net/" target="_blank">https://adoptium.net/</a> et téléchargez la dernière version.</p>
-                
-                <p><strong>2. Extraire l'archive</strong></p>
-                <pre><code>tar -xzf OpenJDK25*.tar.gz -C /opt/</code></pre>
-                
-                <p><strong>3. Configurer les variables d'environnement</strong></p>
-                <p>Ajouter à <code>~/.bashrc</code> ou <code>~/.zshrc</code> :</p>
-                <pre><code>export JAVA_HOME=/opt/jdk-25
-export PATH=$JAVA_HOME/bin:$PATH</code></pre>
-                
-                <p><strong>4. Recharger la configuration</strong></p>
-                <pre><code>source ~/.bashrc</code></pre>
-                
-                <h3><span class="step-number">3</span>Option 3 : Utiliser SDKMAN</h3>
-                <p>Un gestionnaire de versions Java très pratique :</p>
-                <pre><code>curl -s "https://get.sdkman.io" | bash
-source "$HOME/.sdkman/bin/sdkman-init.sh"
-sdk install java 25-open</code></pre>
-                
-                <div class="success-box">
-                    <strong>✅ Vérification de l'installation :</strong>
-                    <pre style="margin-top: 10px;"><code>java -version</code></pre>
-                    <p style="margin-top: 10px;">Doit afficher Java 25 ou supérieur.</p>
-                </div>
-            </section>
-
-            <section id="app">
-                <h2>🚀 Installation d'EditeurPanovisu</h2>
-                
-                <h3><span class="step-number">1</span>Extraire l'archive</h3>
-                <p>Choisissez un emplacement pour l'application :</p>
-                <pre><code># Pour archive ZIP
-unzip EditeurPanovisu-Linux-Portable-*.zip
-
-# Pour archive TAR.GZ
-tar -xzf EditeurPanovisu-Linux-Portable-*.tar.gz</code></pre>
-                
-                <h3><span class="step-number">2</span>Rendre le script exécutable</h3>
-                <pre><code>cd EditeurPanovisu
-chmod +x lancer-editeur-panovisu.sh</code></pre>
-                
-                <h3><span class="step-number">3</span>Lancer l'application</h3>
-                <pre><code>./lancer-editeur-panovisu.sh</code></pre>
-                
-                <div class="info-box">
-                    <strong>💡 Astuce :</strong> Vous pouvez créer un lanceur sur votre bureau ou dans le menu des applications en pointant vers ce script.
-                </div>
-                
-                <h3>📁 Structure des fichiers</h3>
-                <div class="file-tree"><pre>EditeurPanovisu/
-├── editeurPanovisu-3.3.3-SNAPSHOT.jar  <em># Application principale</em>
-├── lancer-editeur-panovisu.sh          <em># Script de lancement</em>
-├── configPV/                            <em># Configuration utilisateur</em>
-├── theme/                               <em># Thèmes d'interface</em>
-├── panovisu/                            <em># Viewer panoramique</em>
-├── images/                              <em># Ressources images</em>
-├── css/                                 <em># Feuilles de style</em>
-├── diaporama/                           <em># Templates diaporama</em>
-├── aide/                                <em># Documentation</em>
-├── doc/                                 <em># Documentation technique</em>
-└── INSTALLATION.*                       <em># Ce guide</em></pre>
-                </div>
-            </section>
-
-            <section id="config">
-                <h2>⚙️ Configuration</h2>
-                
-                <h3>Configuration GPU (Optionnel mais recommandé)</h3>
-                <p>Pour de meilleures performances 3D, vérifiez le support OpenGL :</p>
-                <pre><code>glxinfo | grep "OpenGL version"</code></pre>
-                
-                <div class="warning-box">
-                    <strong>⚠️ Note :</strong> Si <code>glxinfo</code> n'est pas trouvé, installez-le :
-                    <pre style="margin-top: 10px;"><code>sudo apt install mesa-utils</code></pre>
-                </div>
-                
-                <h3>Pilotes graphiques</h3>
-                <p>Assurez-vous d'avoir les pilotes appropriés :</p>
-                <ul>
-                    <li><strong>Intel/AMD</strong> : Pilotes open-source généralement préinstallés</li>
-                    <li><strong>NVIDIA</strong> : Installez les pilotes propriétaires via les paramètres système</li>
-                </ul>
-                <p>Sur Ubuntu : <em>Paramètres → Logiciels et mises à jour → Pilotes additionnels</em></p>
-                
-                <h3>Configuration de l'application</h3>
-                <p>Au premier lancement, accédez à : <strong>Affichage → Préférences</strong></p>
-                <ul>
-                    <li>Langue de l'interface</li>
-                    <li>Répertoire de travail par défaut</li>
-                    <li>Clés API (LocationIQ, OpenRouter, Ollama)</li>
-                    <li>Options d'accélération GPU</li>
-                </ul>
-            </section>
-
-            <section id="depannage">
-                <h2>🔧 Dépannage</h2>
-                
-                <h3>❌ Erreur "java: command not found"</h3>
-                <p><strong>Cause :</strong> Java n'est pas installé ou pas dans le PATH</p>
-                <p><strong>Solution :</strong> Suivez les instructions d'installation Java ci-dessus</p>
-                
-                <h3>❌ Erreur "NoClassDefFoundError"</h3>
-                <p><strong>Cause :</strong> JavaFX n'est pas installé</p>
-                <p><strong>Solution :</strong></p>
-                <pre><code>sudo apt install openjfx</code></pre>
-                
-                <h3>❌ Problèmes d'affichage 3D / Panoramas noirs</h3>
-                <p><strong>Cause :</strong> Problème avec l'accélération 3D OpenGL</p>
-                <p><strong>Solutions :</strong></p>
-                <ol>
-                    <li>Vérifier le support OpenGL : <code>glxinfo | grep "OpenGL"</code></li>
-                    <li>Mettre à jour les pilotes graphiques</li>
-                    <li>En dernier recours, éditer <code>lancer-editeur-panovisu.sh</code> et ajouter :</li>
-                </ol>
-                <pre><code>export PRISM_ORDER=sw  # Force le mode logiciel</code></pre>
-                
-                <h3>❌ Fenêtre de configuration qui se bloque</h3>
-                <div class="success-box">
-                    <strong>✅ Résolu dans cette version (3.3.3+)</strong>
-                    <p style="margin-top: 10px;">Les problèmes de blocage modal sous Linux ont été corrigés.</p>
-                </div>
-                
-                <h3>❌ Performance lente au chargement des panoramas</h3>
-                <div class="success-box">
-                    <strong>✅ Optimisé dans cette version</strong>
-                    <p style="margin-top: 10px;">Le système de cache a été amélioré pour Linux. Les chargements successifs devraient être beaucoup plus rapides.</p>
-                </div>
-                
-                <h3>🔄 Mise à jour</h3>
-                <p>Pour mettre à jour vers une nouvelle version :</p>
-                <ol>
-                    <li>Sauvegarder votre répertoire <code>configPV/</code></li>
-                    <li>Extraire la nouvelle version dans un nouveau dossier</li>
-                    <li>Copier votre <code>configPV/</code> vers le nouveau dossier</li>
-                </ol>
-            </section>
-        </div>
-        
-        <footer>
-            <p><strong>EditeurPanovisu</strong> - Version 3.3.3-SNAPSHOT | Build 3596+</p>
-            <p>Support : <a href="https://github.com/llang57/editeurPanovisu" target="_blank">GitHub Issues</a></p>
-            <p>Documentation complète : Voir INSTALLATION.md dans cette archive</p>
-        </footer>
-    </div>
+<header id="title-block-header">
+<h1 class="title">Installation EditeurPanovisu Linux</h1>
+</header>
+<h1 id="installation-editeurpanovisu-sur-linux">📦 Installation
+EditeurPanovisu sur Linux</h1>
+<p>Guide complet d’installation de l’application EditeurPanovisu sur un
+système Linux vierge.</p>
+<p><strong>Version du guide :</strong> 1.0<br />
+<strong>Date :</strong> Octobre 2025<br />
+<strong>Build minimum requis :</strong> 3500</p>
+<hr />
+<h2 id="prérequis-système">📋 Prérequis système</h2>
+<ul>
+<li><strong>OS :</strong> Ubuntu 20.04+ / Debian 11+ / distributions
+similaires</li>
+<li><strong>Java :</strong> OpenJDK 25 (requis)</li>
+<li><strong>RAM :</strong> 4 GB minimum, 8 GB recommandé</li>
+<li><strong>Espace disque :</strong> 500 MB pour l’application + espace
+pour les projets</li>
+<li><strong>Environnement graphique :</strong> X11 ou Wayland avec
+support OpenGL</li>
+</ul>
+<hr />
+<h2 id="installation-des-dépendances">🔧 Installation des
+dépendances</h2>
+<h3 id="mise-à-jour-du-système">1. Mise à jour du système</h3>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt upgrade <span class="at">-y</span></span></code></pre></div>
+<h3 id="installation-de-java-openjdk-25">2. Installation de Java
+(OpenJDK 25)</h3>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Installer OpenJDK 25</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> openjdk-25-jdk</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Si OpenJDK 25 n&#39;est pas disponible dans les dépôts par défaut :</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajouter le PPA OpenJDK</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> add-apt-repository ppa:openjdk-r/ppa</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> openjdk-25-jdk</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Vérifier l&#39;installation</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="ex">java</span> <span class="at">-version</span></span></code></pre></div>
+<p>La version doit afficher Java 25.</p>
+<h3 id="installation-de-javafx-avec-support-3d">3. Installation de
+JavaFX avec support 3D</h3>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Installer tous les composants OpenJFX (critique pour le support 3D)</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> openjfx libopenjfx-java libopenjfx-jni</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Vérifier que les bibliothèques sont présentes</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> /usr/share/openjfx/lib/</span></code></pre></div>
+<p>Vous devriez voir des fichiers <code>.so</code> (bibliothèques
+natives Linux).</p>
+<h3 id="installation-du-support-opengl">4. Installation du support
+OpenGL</h3>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bibliothèques Mesa OpenGL (essentielles pour JavaFX 3D)</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> <span class="dt">\</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  libgl1-mesa-glx <span class="dt">\</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  libgl1-mesa-dri <span class="dt">\</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  libglu1-mesa <span class="dt">\</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  mesa-utils</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Bibliothèques graphiques supplémentaires</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> libglvnd0 libglvnd-dev libglfw3</span></code></pre></div>
+<h3 id="optionnel-pilotes-gpu-nvidia">5. (Optionnel) Pilotes GPU
+NVIDIA</h3>
+<p><strong>Uniquement si vous avez une carte NVIDIA :</strong></p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Détecter les pilotes disponibles</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">ubuntu-drivers</span> devices</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Installer le pilote recommandé (exemple: 535)</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> nvidia-driver-535</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Redémarrer obligatoirement après installation</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> reboot</span></code></pre></div>
+<h3 id="vérification-du-support-opengl">6. Vérification du support
+OpenGL</h3>
+<p>Après installation, vérifiez que OpenGL fonctionne :</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Afficher la version OpenGL</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">glxinfo</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;OpenGL version&quot;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Vérifier le rendu direct (doit être &quot;Yes&quot;)</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="ex">glxinfo</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;direct rendering&quot;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Test visuel avec un cube 3D animé</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="ex">glxgears</span></span></code></pre></div>
+<p><strong>Sortie attendue :</strong></p>
+<pre><code>OpenGL version string: 4.x Mesa xx.x.x
+direct rendering: Yes</code></pre>
+<p>Si <code>glxgears</code> affiche des engrenages qui tournent, OpenGL
+fonctionne correctement.</p>
+<h3 id="optionnel-installation-opencl-pour-accélération-gpu">7.
+(Optionnel) Installation OpenCL pour accélération GPU</h3>
+<p>OpenCL permet d’accélérer le traitement des images
+(redimensionnement, filtres). <strong>L’application fonctionne
+parfaitement sans OpenCL</strong> (mode CPU automatique).</p>
+<h4 id="installation-de-clinfo-outil-de-diagnostic">7.1. Installation de
+clinfo (outil de diagnostic)</h4>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> clinfo</span></code></pre></div>
+<h4 id="vérifier-le-support-opencl-actuel">7.2. Vérifier le support
+OpenCL actuel</h4>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">clinfo</span></span></code></pre></div>
+<p><strong>Si vous voyez <code>Number of platforms: 0</code></strong> →
+Aucun pilote OpenCL installé (normal)</p>
+<h4 id="installer-les-pilotes-opencl-selon-votre-gpu">7.3. Installer les
+pilotes OpenCL selon votre GPU</h4>
+<p><strong>Pour NVIDIA (le plus courant) :</strong></p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Vérifier que les pilotes NVIDIA sont installés</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">nvidia-smi</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Installer OpenCL NVIDIA</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> nvidia-opencl-icd nvidia-opencl-dev</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Vérifier</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="ex">clinfo</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;Platform Name&quot;</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Devrait afficher: NVIDIA CUDA</span></span></code></pre></div>
+<p><strong>Pour AMD :</strong></p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> mesa-opencl-icd ocl-icd-opencl-dev</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Vérifier</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="ex">clinfo</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;Platform Name&quot;</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Devrait afficher: Clover ou ROCm</span></span></code></pre></div>
+<p><strong>Pour Intel (GPU intégré) :</strong></p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> intel-opencl-icd</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Vérifier</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="ex">clinfo</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;Platform Name&quot;</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Devrait afficher: Intel(R) OpenCL</span></span></code></pre></div>
+<h4 id="vérification-complète-opencl">7.4. Vérification complète
+OpenCL</h4>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Afficher toutes les informations OpenCL</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">clinfo</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Vérifier le nombre de plateformes</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="ex">clinfo</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;Number of platforms&quot;</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Devrait afficher: Number of platforms: 1 (ou plus)</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Vérifier les devices</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="ex">clinfo</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;Number of devices&quot;</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Devrait afficher: Number of devices: 1 (ou plus)</span></span></code></pre></div>
+<p><strong>Performance avec OpenCL :</strong> - Redimensionnement images
+: <strong>1.7× plus rapide</strong> - Affichage panoramas : <strong>10×
+plus rapide</strong> - Chargement visites : <strong>3.4× plus
+rapide</strong></p>
+<p><strong>Sans OpenCL :</strong> Traitement CPU uniquement (fonctionne
+correctement, juste plus lent)</p>
+<hr />
+<h2 id="installation-de-lapplication">📥 Installation de
+l’application</h2>
+<h3 id="créer-le-répertoire-dinstallation">1. Créer le répertoire
+d’installation</h3>
+<p><strong>Option recommandée : Installation système dans
+/opt</strong></p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir <span class="at">-p</span> /opt/editeurpanovisu</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chown <span class="va">$USER</span>:<span class="va">$USER</span> /opt/editeurpanovisu</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /opt/editeurpanovisu</span></code></pre></div>
+<p><strong>Option alternative : Installation utilisateur</strong></p>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Installation dans le répertoire personnel</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~/editeurpanovisu</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/editeurpanovisu</span></code></pre></div>
+<blockquote>
+<p>💡 <strong>Note :</strong> Le script de lancement détecte
+automatiquement son répertoire, vous pouvez donc installer l’application
+n’importe où.</p>
+</blockquote>
+<h3 id="télécharger-les-fichiers">2. Télécharger les fichiers</h3>
+<p><strong>Option A : Depuis Windows via SCP</strong></p>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Depuis votre machine Windows (PowerShell)</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> target/editeurPanovisu-3.3.3-SNAPSHOT.jar utilisateur@serveur:/opt/editeurpanovisu/</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> lancer-panovisu-linux.sh utilisateur@serveur:/opt/editeurpanovisu/</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-r</span> theme utilisateur@serveur:/opt/editeurpanovisu/</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-r</span> css utilisateur@serveur:/opt/editeurpanovisu/</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-r</span> images utilisateur@serveur:/opt/editeurpanovisu/</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-r</span> configPV utilisateur@serveur:/opt/editeurpanovisu/</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-r</span> panovisu utilisateur@serveur:/opt/editeurpanovisu/</span></code></pre></div>
+<p><strong>Option B : Via clé USB</strong></p>
+<ol type="1">
+<li>Copiez tous les fichiers du projet sur une clé USB</li>
+<li>Montez la clé sur Linux et copiez les fichiers :</li>
+</ol>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> /media/usb/editeurPanovisu-3.3.3-SNAPSHOT.jar /opt/editeurpanovisu/</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> /media/usb/lancer-panovisu-linux.sh /opt/editeurpanovisu/</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="at">-r</span> /media/usb/<span class="dt">{theme</span><span class="op">,</span><span class="dt">css</span><span class="op">,</span><span class="dt">images</span><span class="op">,</span><span class="dt">configPV</span><span class="op">,</span><span class="dt">panovisu}</span> /opt/editeurpanovisu/</span></code></pre></div>
+<h3 id="créer-le-script-de-lancement">3. Créer le script de
+lancement</h3>
+<p>Si vous n’avez pas copié <code>lancer-panovisu-linux.sh</code>,
+créez-le :</p>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> /opt/editeurpanovisu/lancer-panovisu.sh</span></code></pre></div>
+<p>Collez ce contenu :</p>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Script de lancement EditeurPanovisu pour Linux avec support 3D</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Build 3500+</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Détecter automatiquement le répertoire du script</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="va">SCRIPT_DIR</span><span class="op">=</span><span class="st">&quot;</span><span class="va">$(</span> <span class="bu">cd</span> <span class="st">&quot;</span><span class="va">$(</span> <span class="fu">dirname</span> <span class="st">&quot;</span><span class="va">${BASH_SOURCE</span><span class="op">[</span><span class="dv">0</span><span class="op">]</span><span class="va">}</span><span class="st">&quot;</span> <span class="va">)</span><span class="st">&quot;</span> <span class="kw">&amp;&amp;</span> <span class="bu">pwd</span> <span class="va">)</span><span class="st">&quot;</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">&quot;</span><span class="va">$SCRIPT_DIR</span><span class="st">&quot;</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Variables d&#39;environnement pour forcer JavaFX 3D</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PRISM_FORCEGL</span><span class="op">=</span>true</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PRISM_FORCEGPU</span><span class="op">=</span>true</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PRISM_ORDER</span><span class="op">=</span>es2,sw</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Forcer OpenGL dans le système</span></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">LIBGL_ALWAYS_SOFTWARE</span><span class="op">=</span>0</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">LIBGL_ALWAYS_INDIRECT</span><span class="op">=</span>0</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;=== Lancement EditeurPanovisu ===&quot;</span></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;Répertoire: </span><span class="va">$SCRIPT_DIR</span><span class="st">&quot;</span></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;Configuration JavaFX 3D activée (ES2 Pipeline)&quot;</span></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;=== Test OpenGL ===&quot;</span></span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a><span class="ex">glxinfo</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;OpenGL version&quot;</span> <span class="kw">||</span> <span class="bu">echo</span> <span class="st">&quot;⚠️  glxinfo non disponible&quot;</span></span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Lancement de l&#39;application</span></span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a><span class="ex">java</span> <span class="dt">\</span></span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">--module-path</span> /usr/share/openjfx/lib <span class="dt">\</span></span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">--add-modules</span> javafx.controls,javafx.fxml,javafx.web,javafx.swing,javafx.media <span class="dt">\</span></span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">-Dprism.forceGPU</span><span class="op">=</span>true <span class="dt">\</span></span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">-Dprism.order</span><span class="op">=</span>es2,sw <span class="dt">\</span></span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">-jar</span> editeurPanovisu-3.3.3-SNAPSHOT.jar <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">tee</span> editeur-panovisu.log</span>
+<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;=== Log sauvegardé dans editeur-panovisu.log ===&quot;</span></span></code></pre></div>
+<p>Sauvegardez avec <code>Ctrl+O</code>, <code>Entrée</code>, puis
+quittez avec <code>Ctrl+X</code>.</p>
+<h3 id="rendre-le-script-exécutable">4. Rendre le script exécutable</h3>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x /opt/editeurpanovisu/lancer-panovisu.sh</span></code></pre></div>
+<h3 id="structure-finale-des-fichiers">5. Structure finale des
+fichiers</h3>
+<p>Votre répertoire <code>/opt/editeurpanovisu</code> doit contenir
+:</p>
+<pre><code>/opt/editeurpanovisu/
+├── editeurPanovisu-3.3.3-SNAPSHOT.jar  (fichier principal)
+├── lancer-panovisu.sh                   (script de lancement)
+├── theme/                               (thèmes visuels)
+├── css/                                 (feuilles de style)
+├── images/                              (icônes et images)
+├── configPV/                            (configurations)
+└── panovisu/                            (visualiseur panoramique)</code></pre>
+<hr />
+<h2 id="lancement-de-lapplication">🚀 Lancement de l’application</h2>
+<h3 id="première-exécution">Première exécution</h3>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /opt/editeurpanovisu</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./lancer-panovisu.sh</span></span></code></pre></div>
+<p><strong>Au premier lancement :</strong> - L’application peut prendre
+10-15 secondes à démarrer - Un fichier <code>editeur-panovisu.log</code>
+sera créé avec les logs détaillés - La configuration sera initialisée
+dans <code>~/.config/editeurpanovisu/</code></p>
+<h3 id="vérification-du-support-3d">Vérification du support 3D</h3>
+<p>Dans les logs du terminal, cherchez ces lignes :</p>
+<pre><code>Initialized prism pipeline: com.sun.prism.es2.ES2Pipeline
+Graphics Vendor: Mesa/NVIDIA/Intel
+OpenGL version: 4.x</code></pre>
+<p>✅ <strong>ES2Pipeline</strong> = Support 3D activé<br />
+❌ <strong>SwPipeline</strong> = Mode logiciel uniquement (pas de
+3D)</p>
+<h3 id="test-du-visualiseur-panoramique">Test du visualiseur
+panoramique</h3>
+<ol type="1">
+<li>Lancez l’application</li>
+<li>Ouvrez un projet existant ou créez-en un nouveau</li>
+<li>Ajoutez une image panoramique équirectangulaire</li>
+<li>Cliquez sur l’image dans la liste</li>
+</ol>
+<p><strong>Résultat attendu :</strong> - Le visualiseur 3D s’affiche
+avec navigation interactive - Vous pouvez faire pivoter la vue avec la
+souris - Les contrôles de navigation (boutons, boussole) sont
+visibles</p>
+<p><strong>Si vous voyez “Fonction non supportée” :</strong> - Le
+support 3D n’est pas activé - Consultez la section Dépannage
+ci-dessous</p>
+<hr />
+<h2 id="dépannage">🐛 Dépannage</h2>
+<h3 id="problème-fonction-non-supportée-dans-le-visualiseur">Problème :
+“Fonction non supportée” dans le visualiseur</h3>
+<p><strong>Diagnostic :</strong></p>
+<div class="sourceCode" id="cb24"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /opt/editeurpanovisu</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./diagnostic-javafx-3d.sh</span></span></code></pre></div>
+<p>Regardez la ligne <code>SCENE3D:</code> dans les résultats.</p>
+<p><strong>Solution si SCENE3D: false</strong></p>
+<ol type="1">
+<li><p><strong>Réinstaller OpenJFX complet :</strong></p>
+<div class="sourceCode" id="cb25"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt purge openjfx libopenjfx-java libopenjfx-jni</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt autoremove</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> openjfx libopenjfx-java libopenjfx-jni</span></code></pre></div></li>
+<li><p><strong>Vérifier les pilotes GPU :</strong></p>
+<div class="sourceCode" id="cb26"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pour NVIDIA</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="ex">nvidia-smi</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Pour Intel/AMD (Mesa)</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="ex">glxinfo</span> <span class="kw">|</span> <span class="fu">grep</span> renderer</span></code></pre></div></li>
+<li><p><strong>Forcer le rendu logiciel en dernier recours
+:</strong></p>
+<p>Modifiez <code>lancer-panovisu.sh</code> :</p>
+<div class="sourceCode" id="cb27"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">LIBGL_ALWAYS_SOFTWARE</span><span class="op">=</span>1</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PRISM_ORDER</span><span class="op">=</span>sw</span></code></pre></div></li>
+</ol>
+<h3 id="problème-application-ne-démarre-pas">Problème : Application ne
+démarre pas</h3>
+<p><strong>1. Vérifier Java :</strong></p>
+<div class="sourceCode" id="cb28"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">java</span> <span class="at">-version</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Doit afficher Java 25</span></span></code></pre></div>
+<p><strong>2. Vérifier le JAR :</strong></p>
+<div class="sourceCode" id="cb29"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lh</span> editeurPanovisu-3.3.3-SNAPSHOT.jar</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Doit faire ~50-80 MB</span></span></code></pre></div>
+<p><strong>3. Vérifier les permissions :</strong></p>
+<div class="sourceCode" id="cb30"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x lancer-panovisu.sh</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 644 editeurPanovisu-3.3.3-SNAPSHOT.jar</span></code></pre></div>
+<p><strong>4. Consulter les logs :</strong></p>
+<div class="sourceCode" id="cb31"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> editeur-panovisu.log <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-i</span> error</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> editeur-panovisu.log <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-i</span> exception</span></code></pre></div>
+<h3 id="problème-erreur-module-javafx.xxx-not-found">Problème : Erreur
+“module javafx.xxx not found”</h3>
+<p><strong>Solution :</strong></p>
+<div class="sourceCode" id="cb32"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Vérifier l&#39;emplacement d&#39;OpenJFX</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> /usr/share/openjfx/lib/</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Si vide ou inexistant, réinstaller</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">--reinstall</span> openjfx</span></code></pre></div>
+<h3 id="problème-images-ne-se-chargent-pas">Problème : Images ne se
+chargent pas</h3>
+<p><strong>Vérifier les répertoires de ressources :</strong></p>
+<div class="sourceCode" id="cb33"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /opt/editeurpanovisu</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-R</span> theme/ css/ images/</span></code></pre></div>
+<p>Si des dossiers manquent, recopiez-les depuis la version Windows.</p>
+<h3 id="problème-erreur-opencl">Problème : Erreur OpenCL</h3>
+<p><strong>Messages comme :</strong></p>
+<pre><code>⚠️  OpenCL non disponible sur ce système - Mode CPU activé</code></pre>
+<p><strong>C’est normal !</strong> L’application fonctionne sans OpenCL.
+OpenCL est optionnel pour l’accélération GPU des transformations
+d’images. L’application utilise automatiquement le CPU comme
+fallback.</p>
+<p>Pour activer OpenCL (optionnel) :</p>
+<div class="sourceCode" id="cb35"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pour NVIDIA</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> nvidia-opencl-icd</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Pour AMD</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> mesa-opencl-icd</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Pour Intel</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> intel-opencl-icd</span></code></pre></div>
+<hr />
+<h2 id="mise-à-jour-de-lapplication">🔄 Mise à jour de
+l’application</h2>
+<p>Pour mettre à jour vers une nouvelle version :</p>
+<div class="sourceCode" id="cb36"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Sauvegarder vos projets</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="at">-r</span> ~/.config/editeurpanovisu ~/.config/editeurpanovisu.backup</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Remplacer le JAR</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /opt/editeurpanovisu</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> editeurPanovisu-3.3.3-SNAPSHOT.jar editeurPanovisu-3.3.3-SNAPSHOT.jar.old</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Copiez le nouveau JAR ici</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Mettre à jour les ressources si nécessaire</span></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Copiez theme/, css/, images/ mis à jour</span></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Relancer l&#39;application</span></span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a><span class="ex">./lancer-panovisu.sh</span></span></code></pre></div>
+<hr />
+<h2 id="création-dun-lanceur-de-bureau">📝 Création d’un lanceur de
+bureau</h2>
+<p>Pour lancer l’application depuis le menu d’applications :</p>
+<div class="sourceCode" id="cb37"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> ~/.local/share/applications/editeurpanovisu.desktop</span></code></pre></div>
+<p>Contenu :</p>
+<div class="sourceCode" id="cb38"><pre
+class="sourceCode ini"><code class="sourceCode ini"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[Desktop Entry]</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="dt">Name</span><span class="ot">=</span><span class="st">Editeur Panovisu</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="dt">Comment</span><span class="ot">=</span><span class="st">Éditeur de visites virtuelles panoramiques</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="dt">Exec</span><span class="ot">=</span><span class="st">/opt/editeurpanovisu/lancer-panovisu.sh</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="dt">Icon</span><span class="ot">=</span><span class="st">/opt/editeurpanovisu/images/logo.png</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="dt">Terminal</span><span class="ot">=</span><span class="kw">false</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="dt">Type</span><span class="ot">=</span><span class="st">Application</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="dt">Categories</span><span class="ot">=</span><span class="st">Graphics;Photography;</span></span></code></pre></div>
+<p>Sauvegardez et rendez exécutable :</p>
+<div class="sourceCode" id="cb39"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x ~/.local/share/applications/editeurpanovisu.desktop</span></code></pre></div>
+<p>L’application apparaîtra dans votre menu Applications.</p>
+<hr />
+<h2 id="configuration-multi-utilisateurs">🔐 Configuration
+multi-utilisateurs</h2>
+<p>Pour installer l’application pour tous les utilisateurs :</p>
+<div class="sourceCode" id="cb40"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Installer dans /opt (déjà fait)</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Créer un lanceur global</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> nano /usr/share/applications/editeurpanovisu.desktop</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Même contenu que ci-dessus</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Permissions</span></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chmod 755 /opt/editeurpanovisu</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chmod 755 /opt/editeurpanovisu/lancer-panovisu.sh</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chmod 644 /opt/editeurpanovisu/editeurPanovisu-3.3.3-SNAPSHOT.jar</span></code></pre></div>
+<p>Chaque utilisateur aura sa propre configuration dans
+<code>~/.config/editeurpanovisu/</code>.</p>
+<hr />
+<h2 id="vérification-de-linstallation">📊 Vérification de
+l’installation</h2>
+<p>Script de test complet :</p>
+<div class="sourceCode" id="cb41"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;=== Test d&#39;installation EditeurPanovisu ===&quot;</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;1. Java version :&quot;</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="ex">java</span> <span class="at">-version</span></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;2. OpenJFX présent :&quot;</span></span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> /usr/share/openjfx/lib/ <span class="kw">|</span> <span class="fu">grep</span> javafx.graphics</span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;3. OpenGL fonctionnel :&quot;</span></span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a><span class="ex">glxinfo</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;OpenGL version&quot;</span></span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;4. Fichiers application :&quot;</span></span>
+<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lh</span> /opt/editeurpanovisu/editeurPanovisu-3.3.3-SNAPSHOT.jar</span>
+<span id="cb41-19"><a href="#cb41-19" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb41-20"><a href="#cb41-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-21"><a href="#cb41-21" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;5. Script de lancement :&quot;</span></span>
+<span id="cb41-22"><a href="#cb41-22" aria-hidden="true" tabindex="-1"></a><span class="bu">test</span> <span class="at">-x</span> /opt/editeurpanovisu/lancer-panovisu.sh <span class="kw">&amp;&amp;</span> <span class="bu">echo</span> <span class="st">&quot;✅ Exécutable&quot;</span> <span class="kw">||</span> <span class="bu">echo</span> <span class="st">&quot;❌ Non exécutable&quot;</span></span>
+<span id="cb41-23"><a href="#cb41-23" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb41-24"><a href="#cb41-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-25"><a href="#cb41-25" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;=== Fin du test ===&quot;</span></span></code></pre></div>
+<hr />
+<h2 id="support">📞 Support</h2>
+<h3 id="logs-utiles-pour-le-support">Logs utiles pour le support</h3>
+<p>Si vous rencontrez un problème, fournissez ces informations :</p>
+<div class="sourceCode" id="cb42"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Version du système</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="ex">lsb_release</span> <span class="at">-a</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Version Java</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="ex">java</span> <span class="at">-version</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Version OpenGL</span></span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a><span class="ex">glxinfo</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;OpenGL version&quot;</span></span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Paquets JavaFX installés</span></span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a><span class="ex">dpkg</span> <span class="at">-l</span> <span class="kw">|</span> <span class="fu">grep</span> openjfx</span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Dernières lignes du log</span></span>
+<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> <span class="at">-50</span> /opt/editeurpanovisu/editeur-panovisu.log</span></code></pre></div>
+<h3 id="fichiers-de-configuration">Fichiers de configuration</h3>
+<ul>
+<li>Configuration utilisateur :
+<code>~/.config/editeurpanovisu/</code></li>
+<li>Projets par défaut : <code>~/PanovisuProjects/</code></li>
+<li>Logs : <code>/opt/editeurpanovisu/editeur-panovisu.log</code></li>
+</ul>
+<hr />
+<h2 id="checklist-dinstallation">✅ Checklist d’installation</h2>
+<ul class="task-list">
+<li><label><input type="checkbox" />Java 25 installé
+(requis)</label></li>
+<li><label><input type="checkbox" />OpenJFX avec support 3D
+installé</label></li>
+<li><label><input type="checkbox" />Mesa OpenGL installé</label></li>
+<li><label><input type="checkbox" /><code>glxgears</code>
+fonctionne</label></li>
+<li><label><input type="checkbox" />JAR copié dans
+<code>/opt/editeurpanovisu/</code></label></li>
+<li><label><input type="checkbox" />Ressources (theme, css, images)
+copiées</label></li>
+<li><label><input type="checkbox" />Script
+<code>lancer-panovisu.sh</code> exécutable</label></li>
+<li><label><input type="checkbox" />Application se lance sans
+erreur</label></li>
+<li><label><input type="checkbox" />Visualiseur 3D fonctionne (pas de
+“fonction non supportée”)</label></li>
+<li><label><input type="checkbox" />Logs montrent “ES2Pipeline
+initialized”</label></li>
+</ul>
+<hr />
+<p><strong>Date de dernière mise à jour :</strong> 22 octobre 2025<br />
+<strong>Version du guide :</strong> 1.0<br />
+<strong>Build testé :</strong> 3500</p>
 </body>
 </html>

@@ -1,131 +1,551 @@
-===========================================
-   EditeurPanovisu - Installation Linux
-===========================================
+📦 Installation EditeurPanovisu sur Linux
 
-PRÉREQUIS
----------
-- Java 25 ou supérieur (OpenJDK recommandé)
-- JavaFX 19 ou supérieur
-- Carte graphique avec support OpenGL 3.0+
-- Environnement de bureau X11 ou Wayland
+Guide complet d’installation de l’application EditeurPanovisu sur un système
+Linux vierge.
 
-INSTALLATION JAVA + JAVAFX
----------------------------
-
-Option 1 : Installation via les dépôts Ubuntu/Debian
------------------------------------------------------
-sudo apt update
-sudo apt install openjdk-25-jdk openjfx
-
-Option 2 : Installation manuelle Java
---------------------------------------
-1. Télécharger OpenJDK 25 depuis https://adoptium.net/
-2. Extraire l'archive :
-   tar -xzf OpenJDK25*.tar.gz -C /opt/
-3. Ajouter au PATH dans ~/.bashrc :
-   export JAVA_HOME=/opt/jdk-25
-   export PATH=$JAVA_HOME/bin:$PATH
-4. Recharger : source ~/.bashrc
-
-Option 3 : Utiliser SDKMAN
----------------------------
-curl -s "https://get.sdkman.io" | bash
-source "$HOME/.sdkman/bin/sdkman-init.sh"
-sdk install java 25-open
-
-VÉRIFICATION DE L'INSTALLATION
--------------------------------
-java -version
-# Doit afficher Java 25 ou supérieur
-
-INSTALLATION D'EDITEURPANOVISU
--------------------------------
-1. Extraire cette archive où vous voulez :
-   unzip EditeurPanovisu-Linux-Portable-*.zip
-   ou
-   tar -xzf EditeurPanovisu-Linux-Portable-*.tar.gz
-
-2. Rendre le script exécutable :
-   cd EditeurPanovisu
-   chmod +x lancer-editeur-panovisu.sh
-
-3. Lancer l'application :
-   ./lancer-editeur-panovisu.sh
-
-CONFIGURATION GRAPHIQUE (GPU)
-------------------------------
-Si vous rencontrez des problèmes d'affichage 3D :
-
-1. Vérifier le support OpenGL :
-   glxinfo | grep "OpenGL version"
-   (installer mesa-utils si nécessaire)
-
-2. Pour cartes Intel/AMD/NVIDIA propriétaires :
-   - Assurez-vous que les pilotes sont installés
-   - Ubuntu : Paramètres > Logiciels supplémentaires
-
-3. En cas de problème avec JavaFX 3D :
-   Éditer lancer-editeur-panovisu.sh et essayer :
-   export PRISM_ORDER=sw  # Mode logiciel
-   
-STRUCTURE DES FICHIERS
-----------------------
-EditeurPanovisu/
-├── editeurPanovisu-3.3.3-SNAPSHOT.jar  # Application principale
-├── lancer-editeur-panovisu.sh          # Script de lancement
-├── configPV/                            # Configuration (vide au départ)
-├── theme/                               # Thèmes d'interface
-├── panovisu/                            # Viewer panoramique
-├── images/                              # Ressources images
-├── css/                                 # Feuilles de style
-├── diaporama/                           # Templates diaporama
-├── aide/                                # Documentation
-├── doc/                                 # Documentation technique
-└── INSTALLATION.*                       # Ce fichier
-
-CONFIGURATION INITIALE
-----------------------
-Au premier lancement, l'application créera automatiquement les fichiers
-de configuration dans le répertoire configPV/.
-
-Menu Affichage > Préférences :
-- Langue de l'interface
-- Répertoire de travail par défaut
-- Clés API (LocationIQ, OpenRouter, Ollama)
-- Activation GPU
-
-DÉPANNAGE
----------
-
-Erreur "java: command not found"
-→ Java n'est pas installé ou pas dans le PATH
-  Suivre les instructions d'installation ci-dessus
-
-Erreur "NoClassDefFoundError"
-→ JavaFX n'est pas correctement installé
-  sudo apt install openjfx
-
-Problèmes d'affichage 3D / panoramas
-→ Vérifier le support OpenGL
-  glxinfo | grep "OpenGL"
-→ Éditer le script et passer en mode logiciel
-
-Fenêtre se bloque (modale)
-→ Problème résolu dans cette version (3.3.3+)
-
-MISE À JOUR
------------
-1. Sauvegarder votre répertoire configPV/
-2. Extraire la nouvelle version
-3. Copier votre configPV/ dans la nouvelle version
-
-SUPPORT
--------
-Issues GitHub : https://github.com/llang57/editeurPanovisu
-Documentation complète : Voir INSTALLATION.md dans cette archive
-
-===========================================
-Version : 3.3.3-SNAPSHOT
-Build : 3596+
+Version du guide : 1.0
 Date : Octobre 2025
-===========================================
+Build minimum requis : 3500
+
+--------------------------------------------------------------------------------
+
+📋 Prérequis système
+
+- OS : Ubuntu 20.04+ / Debian 11+ / distributions similaires
+- Java : OpenJDK 25 (requis)
+- RAM : 4 GB minimum, 8 GB recommandé
+- Espace disque : 500 MB pour l’application + espace pour les projets
+- Environnement graphique : X11 ou Wayland avec support OpenGL
+
+--------------------------------------------------------------------------------
+
+🔧 Installation des dépendances
+
+1. Mise à jour du système
+
+    sudo apt update
+    sudo apt upgrade -y
+
+2. Installation de Java (OpenJDK 25)
+
+    # Installer OpenJDK 25
+    sudo apt install -y openjdk-25-jdk
+
+    # Si OpenJDK 25 n'est pas disponible dans les dépôts par défaut :
+    # Ajouter le PPA OpenJDK
+    sudo add-apt-repository ppa:openjdk-r/ppa
+    sudo apt update
+    sudo apt install -y openjdk-25-jdk
+
+    # Vérifier l'installation
+    java -version
+
+La version doit afficher Java 25.
+
+3. Installation de JavaFX avec support 3D
+
+    # Installer tous les composants OpenJFX (critique pour le support 3D)
+    sudo apt install -y openjfx libopenjfx-java libopenjfx-jni
+
+    # Vérifier que les bibliothèques sont présentes
+    ls -la /usr/share/openjfx/lib/
+
+Vous devriez voir des fichiers .so (bibliothèques natives Linux).
+
+4. Installation du support OpenGL
+
+    # Bibliothèques Mesa OpenGL (essentielles pour JavaFX 3D)
+    sudo apt install -y \
+      libgl1-mesa-glx \
+      libgl1-mesa-dri \
+      libglu1-mesa \
+      mesa-utils
+
+    # Bibliothèques graphiques supplémentaires
+    sudo apt install -y libglvnd0 libglvnd-dev libglfw3
+
+5. (Optionnel) Pilotes GPU NVIDIA
+
+Uniquement si vous avez une carte NVIDIA :
+
+    # Détecter les pilotes disponibles
+    ubuntu-drivers devices
+
+    # Installer le pilote recommandé (exemple: 535)
+    sudo apt install -y nvidia-driver-535
+
+    # Redémarrer obligatoirement après installation
+    sudo reboot
+
+6. Vérification du support OpenGL
+
+Après installation, vérifiez que OpenGL fonctionne :
+
+    # Afficher la version OpenGL
+    glxinfo | grep "OpenGL version"
+
+    # Vérifier le rendu direct (doit être "Yes")
+    glxinfo | grep "direct rendering"
+
+    # Test visuel avec un cube 3D animé
+    glxgears
+
+Sortie attendue :
+
+    OpenGL version string: 4.x Mesa xx.x.x
+    direct rendering: Yes
+
+Si glxgears affiche des engrenages qui tournent, OpenGL fonctionne correctement.
+
+7. (Optionnel) Installation OpenCL pour accélération GPU
+
+OpenCL permet d’accélérer le traitement des images (redimensionnement, filtres).
+L’application fonctionne parfaitement sans OpenCL (mode CPU automatique).
+
+7.1. Installation de clinfo (outil de diagnostic)
+
+    sudo apt install -y clinfo
+
+7.2. Vérifier le support OpenCL actuel
+
+    clinfo
+
+Si vous voyez Number of platforms: 0 → Aucun pilote OpenCL installé (normal)
+
+7.3. Installer les pilotes OpenCL selon votre GPU
+
+Pour NVIDIA (le plus courant) :
+
+    # Vérifier que les pilotes NVIDIA sont installés
+    nvidia-smi
+
+    # Installer OpenCL NVIDIA
+    sudo apt install -y nvidia-opencl-icd nvidia-opencl-dev
+
+    # Vérifier
+    clinfo | grep "Platform Name"
+    # Devrait afficher: NVIDIA CUDA
+
+Pour AMD :
+
+    sudo apt install -y mesa-opencl-icd ocl-icd-opencl-dev
+
+    # Vérifier
+    clinfo | grep "Platform Name"
+    # Devrait afficher: Clover ou ROCm
+
+Pour Intel (GPU intégré) :
+
+    sudo apt install -y intel-opencl-icd
+
+    # Vérifier
+    clinfo | grep "Platform Name"
+    # Devrait afficher: Intel(R) OpenCL
+
+7.4. Vérification complète OpenCL
+
+    # Afficher toutes les informations OpenCL
+    clinfo
+
+    # Vérifier le nombre de plateformes
+    clinfo | grep "Number of platforms"
+    # Devrait afficher: Number of platforms: 1 (ou plus)
+
+    # Vérifier les devices
+    clinfo | grep "Number of devices"
+    # Devrait afficher: Number of devices: 1 (ou plus)
+
+Performance avec OpenCL : - Redimensionnement images : 1.7× plus rapide -
+Affichage panoramas : 10× plus rapide - Chargement visites : 3.4× plus rapide
+
+Sans OpenCL : Traitement CPU uniquement (fonctionne correctement, juste plus
+lent)
+
+--------------------------------------------------------------------------------
+
+📥 Installation de l’application
+
+1. Créer le répertoire d’installation
+
+Option recommandée : Installation système dans /opt
+
+    sudo mkdir -p /opt/editeurpanovisu
+    sudo chown $USER:$USER /opt/editeurpanovisu
+    cd /opt/editeurpanovisu
+
+Option alternative : Installation utilisateur
+
+    # Installation dans le répertoire personnel
+    mkdir -p ~/editeurpanovisu
+    cd ~/editeurpanovisu
+
+  💡 Note : Le script de lancement détecte automatiquement son répertoire, vous
+  pouvez donc installer l’application n’importe où.
+
+2. Télécharger les fichiers
+
+Option A : Depuis Windows via SCP
+
+    # Depuis votre machine Windows (PowerShell)
+    scp target/editeurPanovisu-3.3.3-SNAPSHOT.jar utilisateur@serveur:/opt/editeurpanovisu/
+    scp lancer-panovisu-linux.sh utilisateur@serveur:/opt/editeurpanovisu/
+    scp -r theme utilisateur@serveur:/opt/editeurpanovisu/
+    scp -r css utilisateur@serveur:/opt/editeurpanovisu/
+    scp -r images utilisateur@serveur:/opt/editeurpanovisu/
+    scp -r configPV utilisateur@serveur:/opt/editeurpanovisu/
+    scp -r panovisu utilisateur@serveur:/opt/editeurpanovisu/
+
+Option B : Via clé USB
+
+1.  Copiez tous les fichiers du projet sur une clé USB
+2.  Montez la clé sur Linux et copiez les fichiers :
+
+    cp /media/usb/editeurPanovisu-3.3.3-SNAPSHOT.jar /opt/editeurpanovisu/
+    cp /media/usb/lancer-panovisu-linux.sh /opt/editeurpanovisu/
+    cp -r /media/usb/{theme,css,images,configPV,panovisu} /opt/editeurpanovisu/
+
+3. Créer le script de lancement
+
+Si vous n’avez pas copié lancer-panovisu-linux.sh, créez-le :
+
+    nano /opt/editeurpanovisu/lancer-panovisu.sh
+
+Collez ce contenu :
+
+    #!/bin/bash
+
+    # Script de lancement EditeurPanovisu pour Linux avec support 3D
+    # Build 3500+
+
+    # Détecter automatiquement le répertoire du script
+    SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+    cd "$SCRIPT_DIR"
+
+    # Variables d'environnement pour forcer JavaFX 3D
+    export PRISM_FORCEGL=true
+    export PRISM_FORCEGPU=true
+    export PRISM_ORDER=es2,sw
+
+    # Forcer OpenGL dans le système
+    export LIBGL_ALWAYS_SOFTWARE=0
+    export LIBGL_ALWAYS_INDIRECT=0
+
+    echo "=== Lancement EditeurPanovisu ==="
+    echo "Répertoire: $SCRIPT_DIR"
+    echo "Configuration JavaFX 3D activée (ES2 Pipeline)"
+    echo ""
+    echo "=== Test OpenGL ==="
+    glxinfo | grep "OpenGL version" || echo "⚠️  glxinfo non disponible"
+    echo ""
+
+    # Lancement de l'application
+    java \
+      --module-path /usr/share/openjfx/lib \
+      --add-modules javafx.controls,javafx.fxml,javafx.web,javafx.swing,javafx.media \
+      -Dprism.forceGPU=true \
+      -Dprism.order=es2,sw \
+      -jar editeurPanovisu-3.3.3-SNAPSHOT.jar 2>&1 | tee editeur-panovisu.log
+
+    echo ""
+    echo "=== Log sauvegardé dans editeur-panovisu.log ==="
+
+Sauvegardez avec Ctrl+O, Entrée, puis quittez avec Ctrl+X.
+
+4. Rendre le script exécutable
+
+    chmod +x /opt/editeurpanovisu/lancer-panovisu.sh
+
+5. Structure finale des fichiers
+
+Votre répertoire /opt/editeurpanovisu doit contenir :
+
+    /opt/editeurpanovisu/
+    ├── editeurPanovisu-3.3.3-SNAPSHOT.jar  (fichier principal)
+    ├── lancer-panovisu.sh                   (script de lancement)
+    ├── theme/                               (thèmes visuels)
+    ├── css/                                 (feuilles de style)
+    ├── images/                              (icônes et images)
+    ├── configPV/                            (configurations)
+    └── panovisu/                            (visualiseur panoramique)
+
+--------------------------------------------------------------------------------
+
+🚀 Lancement de l’application
+
+Première exécution
+
+    cd /opt/editeurpanovisu
+    ./lancer-panovisu.sh
+
+Au premier lancement : - L’application peut prendre 10-15 secondes à démarrer -
+Un fichier editeur-panovisu.log sera créé avec les logs détaillés - La
+configuration sera initialisée dans ~/.config/editeurpanovisu/
+
+Vérification du support 3D
+
+Dans les logs du terminal, cherchez ces lignes :
+
+    Initialized prism pipeline: com.sun.prism.es2.ES2Pipeline
+    Graphics Vendor: Mesa/NVIDIA/Intel
+    OpenGL version: 4.x
+
+✅ ES2Pipeline = Support 3D activé
+❌ SwPipeline = Mode logiciel uniquement (pas de 3D)
+
+Test du visualiseur panoramique
+
+1.  Lancez l’application
+2.  Ouvrez un projet existant ou créez-en un nouveau
+3.  Ajoutez une image panoramique équirectangulaire
+4.  Cliquez sur l’image dans la liste
+
+Résultat attendu : - Le visualiseur 3D s’affiche avec navigation interactive -
+Vous pouvez faire pivoter la vue avec la souris - Les contrôles de navigation
+(boutons, boussole) sont visibles
+
+Si vous voyez “Fonction non supportée” : - Le support 3D n’est pas activé -
+Consultez la section Dépannage ci-dessous
+
+--------------------------------------------------------------------------------
+
+🐛 Dépannage
+
+Problème : “Fonction non supportée” dans le visualiseur
+
+Diagnostic :
+
+    cd /opt/editeurpanovisu
+    ./diagnostic-javafx-3d.sh
+
+Regardez la ligne SCENE3D: dans les résultats.
+
+Solution si SCENE3D: false
+
+1.  Réinstaller OpenJFX complet :
+
+        sudo apt purge openjfx libopenjfx-java libopenjfx-jni
+        sudo apt autoremove
+        sudo apt install -y openjfx libopenjfx-java libopenjfx-jni
+
+2.  Vérifier les pilotes GPU :
+
+        # Pour NVIDIA
+        nvidia-smi
+
+        # Pour Intel/AMD (Mesa)
+        glxinfo | grep renderer
+
+3.  Forcer le rendu logiciel en dernier recours :
+
+    Modifiez lancer-panovisu.sh :
+
+        export LIBGL_ALWAYS_SOFTWARE=1
+        export PRISM_ORDER=sw
+
+Problème : Application ne démarre pas
+
+1. Vérifier Java :
+
+    java -version
+    # Doit afficher Java 25
+
+2. Vérifier le JAR :
+
+    ls -lh editeurPanovisu-3.3.3-SNAPSHOT.jar
+    # Doit faire ~50-80 MB
+
+3. Vérifier les permissions :
+
+    chmod +x lancer-panovisu.sh
+    chmod 644 editeurPanovisu-3.3.3-SNAPSHOT.jar
+
+4. Consulter les logs :
+
+    cat editeur-panovisu.log | grep -i error
+    cat editeur-panovisu.log | grep -i exception
+
+Problème : Erreur “module javafx.xxx not found”
+
+Solution :
+
+    # Vérifier l'emplacement d'OpenJFX
+    ls /usr/share/openjfx/lib/
+
+    # Si vide ou inexistant, réinstaller
+    sudo apt install --reinstall openjfx
+
+Problème : Images ne se chargent pas
+
+Vérifier les répertoires de ressources :
+
+    cd /opt/editeurpanovisu
+    ls -R theme/ css/ images/
+
+Si des dossiers manquent, recopiez-les depuis la version Windows.
+
+Problème : Erreur OpenCL
+
+Messages comme :
+
+    ⚠️  OpenCL non disponible sur ce système - Mode CPU activé
+
+C’est normal ! L’application fonctionne sans OpenCL. OpenCL est optionnel pour
+l’accélération GPU des transformations d’images. L’application utilise
+automatiquement le CPU comme fallback.
+
+Pour activer OpenCL (optionnel) :
+
+    # Pour NVIDIA
+    sudo apt install -y nvidia-opencl-icd
+
+    # Pour AMD
+    sudo apt install -y mesa-opencl-icd
+
+    # Pour Intel
+    sudo apt install -y intel-opencl-icd
+
+--------------------------------------------------------------------------------
+
+🔄 Mise à jour de l’application
+
+Pour mettre à jour vers une nouvelle version :
+
+    # 1. Sauvegarder vos projets
+    cp -r ~/.config/editeurpanovisu ~/.config/editeurpanovisu.backup
+
+    # 2. Remplacer le JAR
+    cd /opt/editeurpanovisu
+    mv editeurPanovisu-3.3.3-SNAPSHOT.jar editeurPanovisu-3.3.3-SNAPSHOT.jar.old
+    # Copiez le nouveau JAR ici
+
+    # 3. Mettre à jour les ressources si nécessaire
+    # Copiez theme/, css/, images/ mis à jour
+
+    # 4. Relancer l'application
+    ./lancer-panovisu.sh
+
+--------------------------------------------------------------------------------
+
+📝 Création d’un lanceur de bureau
+
+Pour lancer l’application depuis le menu d’applications :
+
+    nano ~/.local/share/applications/editeurpanovisu.desktop
+
+Contenu :
+
+    [Desktop Entry]
+    Name=Editeur Panovisu
+    Comment=Éditeur de visites virtuelles panoramiques
+    Exec=/opt/editeurpanovisu/lancer-panovisu.sh
+    Icon=/opt/editeurpanovisu/images/logo.png
+    Terminal=false
+    Type=Application
+    Categories=Graphics;Photography;
+
+Sauvegardez et rendez exécutable :
+
+    chmod +x ~/.local/share/applications/editeurpanovisu.desktop
+
+L’application apparaîtra dans votre menu Applications.
+
+--------------------------------------------------------------------------------
+
+🔐 Configuration multi-utilisateurs
+
+Pour installer l’application pour tous les utilisateurs :
+
+    # 1. Installer dans /opt (déjà fait)
+    # 2. Créer un lanceur global
+    sudo nano /usr/share/applications/editeurpanovisu.desktop
+
+    # Même contenu que ci-dessus
+
+    # 3. Permissions
+    sudo chmod 755 /opt/editeurpanovisu
+    sudo chmod 755 /opt/editeurpanovisu/lancer-panovisu.sh
+    sudo chmod 644 /opt/editeurpanovisu/editeurPanovisu-3.3.3-SNAPSHOT.jar
+
+Chaque utilisateur aura sa propre configuration dans ~/.config/editeurpanovisu/.
+
+--------------------------------------------------------------------------------
+
+📊 Vérification de l’installation
+
+Script de test complet :
+
+    #!/bin/bash
+    echo "=== Test d'installation EditeurPanovisu ==="
+    echo ""
+
+    echo "1. Java version :"
+    java -version
+    echo ""
+
+    echo "2. OpenJFX présent :"
+    ls /usr/share/openjfx/lib/ | grep javafx.graphics
+    echo ""
+
+    echo "3. OpenGL fonctionnel :"
+    glxinfo | grep "OpenGL version"
+    echo ""
+
+    echo "4. Fichiers application :"
+    ls -lh /opt/editeurpanovisu/editeurPanovisu-3.3.3-SNAPSHOT.jar
+    echo ""
+
+    echo "5. Script de lancement :"
+    test -x /opt/editeurpanovisu/lancer-panovisu.sh && echo "✅ Exécutable" || echo "❌ Non exécutable"
+    echo ""
+
+    echo "=== Fin du test ==="
+
+--------------------------------------------------------------------------------
+
+📞 Support
+
+Logs utiles pour le support
+
+Si vous rencontrez un problème, fournissez ces informations :
+
+    # Version du système
+    lsb_release -a
+
+    # Version Java
+    java -version
+
+    # Version OpenGL
+    glxinfo | grep "OpenGL version"
+
+    # Paquets JavaFX installés
+    dpkg -l | grep openjfx
+
+    # Dernières lignes du log
+    tail -50 /opt/editeurpanovisu/editeur-panovisu.log
+
+Fichiers de configuration
+
+- Configuration utilisateur : ~/.config/editeurpanovisu/
+- Projets par défaut : ~/PanovisuProjects/
+- Logs : /opt/editeurpanovisu/editeur-panovisu.log
+
+--------------------------------------------------------------------------------
+
+✅ Checklist d’installation
+
+- ☐ Java 25 installé (requis)
+- ☐ OpenJFX avec support 3D installé
+- ☐ Mesa OpenGL installé
+- ☐ glxgears fonctionne
+- ☐ JAR copié dans /opt/editeurpanovisu/
+- ☐ Ressources (theme, css, images) copiées
+- ☐ Script lancer-panovisu.sh exécutable
+- ☐ Application se lance sans erreur
+- ☐ Visualiseur 3D fonctionne (pas de “fonction non supportée”)
+- ☐ Logs montrent “ES2Pipeline initialized”
+
+--------------------------------------------------------------------------------
+
+Date de dernière mise à jour : 22 octobre 2025
+Version du guide : 1.0
+Build testé : 3500
