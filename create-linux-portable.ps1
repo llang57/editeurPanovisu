@@ -92,6 +92,8 @@ fi
 exit `$exit_code
 "@
 
+# Convertir les fins de lignes Windows (CRLF) en Unix (LF)
+$launchScript = $launchScript -replace "`r`n", "`n"
 $launchScript | Out-File -FilePath "$linuxDir\lancer-editeur-panovisu.sh" -Encoding UTF8 -NoNewline
 
 # Copier les fichiers d'installation depuis doc/install/
