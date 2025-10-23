@@ -213,7 +213,7 @@ cd ~/editeurpanovisu
 ```bash
 # Depuis votre machine Windows (PowerShell)
 scp target/editeurPanovisu-3.3.3-SNAPSHOT.jar utilisateur@serveur:/opt/editeurpanovisu/
-scp lancer-panovisu-linux.sh utilisateur@serveur:/opt/editeurpanovisu/
+scp lancer-editeur-panovisu.sh utilisateur@serveur:/opt/editeurpanovisu/
 scp -r theme utilisateur@serveur:/opt/editeurpanovisu/
 scp -r css utilisateur@serveur:/opt/editeurpanovisu/
 scp -r images utilisateur@serveur:/opt/editeurpanovisu/
@@ -228,16 +228,16 @@ scp -r panovisu utilisateur@serveur:/opt/editeurpanovisu/
 
 ```bash
 cp /media/usb/editeurPanovisu-3.3.3-SNAPSHOT.jar /opt/editeurpanovisu/
-cp /media/usb/lancer-panovisu-linux.sh /opt/editeurpanovisu/
+cp /media/usb/lancer-editeur-panovisu.sh /opt/editeurpanovisu/
 cp -r /media/usb/{theme,css,images,configPV,panovisu} /opt/editeurpanovisu/
 ```
 
 ### 3. Créer le script de lancement
 
-Si vous n'avez pas copié `lancer-panovisu-linux.sh`, créez-le :
+Si vous n'avez pas copié `lancer-editeur-panovisu.sh`, créez-le :
 
 ```bash
-nano /opt/editeurpanovisu/lancer-panovisu.sh
+nano /opt/editeurpanovisu/lancer-editeur-panovisu.sh
 ```
 
 Collez ce contenu :
@@ -286,7 +286,7 @@ Sauvegardez avec `Ctrl+O`, `Entrée`, puis quittez avec `Ctrl+X`.
 ### 4. Rendre le script exécutable
 
 ```bash
-chmod +x /opt/editeurpanovisu/lancer-panovisu.sh
+chmod +x /opt/editeurpanovisu/lancer-editeur-panovisu.sh
 ```
 
 ### 5. Structure finale des fichiers
@@ -295,13 +295,23 @@ Votre répertoire `/opt/editeurpanovisu` doit contenir :
 
 ```
 /opt/editeurpanovisu/
-├── editeurPanovisu-3.3.3-SNAPSHOT.jar  (fichier principal)
-├── lancer-panovisu.sh                   (script de lancement)
-├── theme/                               (thèmes visuels)
+├── editeurPanovisu-3.3.3-SNAPSHOT.jar   (application Java principale)
+├── lancer-editeur-panovisu.sh           (script de lancement bash)
+├── INSTALLATION.md                      (guide installation)
+├── INSTALLATION.txt                     (version texte)
+├── INSTALLATION.html                    (version HTML)
+├── aide/                                (fichiers d'aide HTML)
+├── configPV/                            (configurations utilisateur)
 ├── css/                                 (feuilles de style)
+├── diaporama/                           (lecteur diaporama)
+├── doc/                                 (documentation)
+│   ├── PRESENTATION.md
+│   └── INSTALLATION_OLLAMA.md
 ├── images/                              (icônes et images)
-├── configPV/                            (configurations)
-└── panovisu/                            (visualiseur panoramique)
+├── pagesHTML/                           (pages HTML intégrées)
+├── panovisu/                            (visualiseur panoramique)
+├── templates/                           (modèles de visite)
+└── theme/                               (thèmes visuels)
 ```
 
 ---
@@ -312,7 +322,7 @@ Votre répertoire `/opt/editeurpanovisu` doit contenir :
 
 ```bash
 cd /opt/editeurpanovisu
-./lancer-panovisu.sh
+./lancer-editeur-panovisu.sh
 ```
 
 **Au premier lancement :**
@@ -383,7 +393,7 @@ Regardez la ligne `SCENE3D:` dans les résultats.
 
 3. **Forcer le rendu logiciel en dernier recours :**
    
-   Modifiez `lancer-panovisu.sh` :
+   Modifiez `lancer-editeur-panovisu.sh` :
    ```bash
    export LIBGL_ALWAYS_SOFTWARE=1
    export PRISM_ORDER=sw
@@ -405,7 +415,7 @@ ls -lh editeurPanovisu-3.3.3-SNAPSHOT.jar
 
 **3. Vérifier les permissions :**
 ```bash
-chmod +x lancer-panovisu.sh
+chmod +x lancer-editeur-panovisu.sh
 chmod 644 editeurPanovisu-3.3.3-SNAPSHOT.jar
 ```
 
@@ -476,7 +486,7 @@ mv editeurPanovisu-3.3.3-SNAPSHOT.jar editeurPanovisu-3.3.3-SNAPSHOT.jar.old
 # Copiez theme/, css/, images/ mis à jour
 
 # 4. Relancer l'application
-./lancer-panovisu.sh
+./lancer-editeur-panovisu.sh
 ```
 
 ---
@@ -495,7 +505,7 @@ Contenu :
 [Desktop Entry]
 Name=Editeur Panovisu
 Comment=Éditeur de visites virtuelles panoramiques
-Exec=/opt/editeurpanovisu/lancer-panovisu.sh
+Exec=/opt/editeurpanovisu/lancer-editeur-panovisu.sh
 Icon=/opt/editeurpanovisu/images/logo.png
 Terminal=false
 Type=Application
@@ -525,7 +535,7 @@ sudo nano /usr/share/applications/editeurpanovisu.desktop
 
 # 3. Permissions
 sudo chmod 755 /opt/editeurpanovisu
-sudo chmod 755 /opt/editeurpanovisu/lancer-panovisu.sh
+sudo chmod 755 /opt/editeurpanovisu/lancer-editeur-panovisu.sh
 sudo chmod 644 /opt/editeurpanovisu/editeurPanovisu-3.3.3-SNAPSHOT.jar
 ```
 
@@ -559,7 +569,7 @@ ls -lh /opt/editeurpanovisu/editeurPanovisu-3.3.3-SNAPSHOT.jar
 echo ""
 
 echo "5. Script de lancement :"
-test -x /opt/editeurpanovisu/lancer-panovisu.sh && echo "✅ Exécutable" || echo "❌ Non exécutable"
+test -x /opt/editeurpanovisu/lancer-editeur-panovisu.sh && echo "✅ Exécutable" || echo "❌ Non exécutable"
 echo ""
 
 echo "=== Fin du test ==="
@@ -606,7 +616,7 @@ tail -50 /opt/editeurpanovisu/editeur-panovisu.log
 - [ ] `glxgears` fonctionne
 - [ ] JAR copié dans `/opt/editeurpanovisu/`
 - [ ] Ressources (theme, css, images) copiées
-- [ ] Script `lancer-panovisu.sh` exécutable
+- [ ] Script `lancer-editeur-panovisu.sh` exécutable
 - [ ] Application se lance sans erreur
 - [ ] Visualiseur 3D fonctionne (pas de "fonction non supportée")
 - [ ] Logs montrent "ES2Pipeline initialized"
