@@ -133,10 +133,17 @@ def analyze_javadoc_quality(javadoc_content: str) -> str:
     if tags_count == 0:
         return "minimal"  # Juste une description, pas de tags
     
-    if tags_count >= 3 or (has_param and has_return):
-        return "complete"  # Description + plusieurs tags importants
+    # Critères assouplis pour "complete"
+    # 1. Si méthode avec params : description + @param + @return (ou @throws)
+    # 2. Si getter/setter simple : description + @return (ou @param pour setter)
+    # 3. Si méthode complexe : description + 2 tags minimum (@return + @see par ex.)
+    if has_param or has_return:  # Au moins un tag structurel important
+        return "complete"  # Description + au moins @param ou @return
     
-    return "partial"  # Description + quelques tags
+    if tags_count >= 2:  # Autres combinaisons avec 2+ tags
+        return "complete"
+    
+    return "partial"  # Description + 1 seul tag
 
 def parse_java_file(file_path: Path) -> List[JavaClass]:
     """Parse un fichier Java et extrait les informations"""

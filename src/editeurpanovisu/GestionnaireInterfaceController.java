@@ -11854,112 +11854,145 @@ public class GestionnaireInterfaceController {
     }
 
     /**
-     * @return the bAfficheBoussole
+     * Indique si la boussole est affichée dans la visualisation.
+     * 
+     * @return true si la boussole est visible, false sinon
      */
     public boolean isbAfficheBoussole() {
         return bAfficheBoussole;
     }
 
     /**
-     * @param bAfficheBoussole the bAfficheBoussole to set
+     * Active ou désactive l'affichage de la boussole dans la visualisation.
+     * 
+     * @param bAfficheBoussole true pour afficher la boussole, false pour la masquer
      */
     public void setbAfficheBoussole(boolean bAfficheBoussole) {
         this.bAfficheBoussole = bAfficheBoussole;
     }
 
     /**
-     * @return the strImageBoussole
+     * Retourne le nom du fichier image de la boussole utilisée.
+     * 
+     * @return Le nom du fichier image de la boussole (ex: "boussole1.png")
      */
     public String getStrImageBoussole() {
         return strImageBoussole;
     }
 
     /**
-     * @param strImageBoussole the strImageBoussole to set
+     * Définit l'image de la boussole à afficher.
+     * 
+     * @param strImageBoussole Le nom du fichier image de la boussole depuis le répertoire des thèmes
      */
     public void setStrImageBoussole(String strImageBoussole) {
         this.strImageBoussole = strImageBoussole;
     }
 
     /**
-     * @return the strPositionBoussole
+     * Retourne la position de la boussole dans l'interface.
+     * 
+     * @return Position de la boussole : "HG" (haut-gauche), "HD" (haut-droite), 
+     *         "BG" (bas-gauche), "BD" (bas-droite), ou "ABS" (position absolue)
      */
     public String getStrPositionBoussole() {
         return strPositionBoussole;
     }
 
     /**
-     * @param strPositionBoussole the strPositionBoussole to set
+     * Définit la position de la boussole dans l'interface.
+     * 
+     * @param strPositionBoussole Position : "HG", "HD", "BG", "BD" ou "ABS"
      */
     public void setStrPositionBoussole(String strPositionBoussole) {
         this.strPositionBoussole = strPositionBoussole;
     }
 
     /**
-     * @return the offsetXBoussole
+     * Retourne le décalage horizontal de la boussole par rapport à sa position de référence.
+     * 
+     * @return Le décalage X en pixels
      */
     public double getOffsetXBoussole() {
         return offsetXBoussole;
     }
 
     /**
-     * @param offsetXBoussole the offsetXBoussole to set
+     * Définit le décalage horizontal de la boussole.
+     * 
+     * @param offsetXBoussole Le décalage X en pixels (peut être négatif)
      */
     public void setOffsetXBoussole(double offsetXBoussole) {
         this.offsetXBoussole = offsetXBoussole;
     }
 
     /**
-     * @return the offsetYBoussole
+     * Retourne le décalage vertical de la boussole par rapport à sa position de référence.
+     * 
+     * @return Le décalage Y en pixels
      */
     public double getOffsetYBoussole() {
         return offsetYBoussole;
     }
 
     /**
-     * @param offsetYBoussole the offsetYBoussole to set
+     * Définit le décalage vertical de la boussole.
+     * 
+     * @param offsetYBoussole Le décalage Y en pixels (peut être négatif)
      */
     public void setOffsetYBoussole(double offsetYBoussole) {
         this.offsetYBoussole = offsetYBoussole;
     }
 
     /**
-     * @return the tailleBoussole
+     * Retourne la taille de la boussole en pixels.
+     * 
+     * @return La taille de la boussole (largeur et hauteur)
      */
     public double getTailleBoussole() {
         return tailleBoussole;
     }
 
     /**
-     * @param tailleBoussole the tailleBoussole to set
+     * Définit la taille de la boussole.
+     * 
+     * @param tailleBoussole La taille en pixels (valeur positive)
      */
     public void setTailleBoussole(double tailleBoussole) {
         this.tailleBoussole = tailleBoussole;
     }
 
     /**
-     * @return the opaciteBoussole
+     * Retourne l'opacité de la boussole.
+     * 
+     * @return L'opacité (0.0 = transparente, 1.0 = opaque)
      */
     public double getOpaciteBoussole() {
         return opaciteBoussole;
     }
 
     /**
-     * @param opaciteBoussole the opaciteBoussole to set
+     * Définit l'opacité de la boussole.
+     * 
+     * @param opaciteBoussole L'opacité (0.0 à 1.0)
      */
     public void setOpaciteBoussole(double opaciteBoussole) {
         this.opaciteBoussole = opaciteBoussole;
     }
 
     /**
-     * @return the bAiguilleMobileBoussole
+     * Indique si l'aiguille de la boussole doit tourner avec la vue.
+     * 
+     * @return true si l'aiguille est mobile et suit l'orientation de la vue, false si elle reste fixe
      */
     public boolean isbAiguilleMobileBoussole() {
         return bAiguilleMobileBoussole;
     }
 
     /**
-     * @param bAiguilleMobileBoussole the bAiguilleMobileBoussole to set
+     * Active ou désactive la rotation de l'aiguille de la boussole.
+     * 
+     * @param bAiguilleMobileBoussole true pour une aiguille mobile, false pour une aiguille fixe
      */
     public void setbAiguilleMobileBoussole(boolean bAiguilleMobileBoussole) {
         this.bAiguilleMobileBoussole = bAiguilleMobileBoussole;
@@ -12288,189 +12321,244 @@ public class GestionnaireInterfaceController {
     }
 
     /**
-     * @return the bAfficheMasque
+     * Indique si le masque est affiché dans la visualisation.
+     * 
+     * @return true si le masque est visible, false sinon
      */
     public boolean isbAfficheMasque() {
         return bAfficheMasque;
     }
 
     /**
-     * @param bAfficheMasque the bAfficheMasque to set
+     * Active ou désactive l'affichage du masque.
+     * 
+     * @param bAfficheMasque true pour afficher le masque, false pour le masquer
      */
     public void setbAfficheMasque(boolean bAfficheMasque) {
         this.bAfficheMasque = bAfficheMasque;
     }
 
     /**
-     * @return the strImageMasque
+     * Retourne le nom du fichier image du masque utilisé.
+     * 
+     * @return Le nom du fichier image du masque (ex: "masque1.png")
      */
     public String getStrImageMasque() {
         return strImageMasque;
     }
 
     /**
-     * @param strImageMasque the strImageMasque to set
+     * Définit l'image du masque à afficher.
+     * 
+     * @param strImageMasque Le nom du fichier image du masque depuis le répertoire des thèmes
      */
     public void setStrImageMasque(String strImageMasque) {
         this.strImageMasque = strImageMasque;
     }
 
     /**
-     * @return the strPositionMasque
+     * Retourne la position du masque dans l'interface.
+     * 
+     * @return Position du masque : "HG" (haut-gauche), "HD" (haut-droite), 
+     *         "BG" (bas-gauche), "BD" (bas-droite), ou "ABS" (position absolue)
      */
     public String getStrPositionMasque() {
         return strPositionMasque;
     }
 
     /**
-     * @param strPositionMasque the strPositionMasque to set
+     * Définit la position du masque dans l'interface.
+     * 
+     * @param strPositionMasque Position : "HG", "HD", "BG", "BD" ou "ABS"
      */
     public void setStrPositionMasque(String strPositionMasque) {
         this.strPositionMasque = strPositionMasque;
     }
 
     /**
-     * @return the dXMasque
+     * Retourne le décalage horizontal du masque par rapport à sa position de référence.
+     * 
+     * @return Le décalage X en pixels
      */
     public double getdXMasque() {
         return dXMasque;
     }
 
     /**
-     * @param dXMasque the dXMasque to set
+     * Définit le décalage horizontal du masque.
+     * 
+     * @param dXMasque Le décalage X en pixels (peut être négatif)
      */
     public void setdXMasque(double dXMasque) {
         this.dXMasque = dXMasque;
     }
 
     /**
-     * @return the dYMasque
+     * Retourne le décalage vertical du masque par rapport à sa position de référence.
+     * 
+     * @return Le décalage Y en pixels
      */
     public double getdYMasque() {
         return dYMasque;
     }
 
     /**
-     * @param dYMasque the dYMasque to set
+     * Définit le décalage vertical du masque.
+     * 
+     * @param dYMasque Le décalage Y en pixels (peut être négatif)
      */
     public void setdYMasque(double dYMasque) {
         this.dYMasque = dYMasque;
     }
 
     /**
-     * @return the tailleMasque
+     * Retourne la taille du masque en pixels.
+     * 
+     * @return La taille du masque (largeur)
      */
     public double getTailleMasque() {
         return tailleMasque;
     }
 
     /**
-     * @param tailleMasque the tailleMasque to set
+     * Définit la taille du masque.
+     * 
+     * @param tailleMasque La taille en pixels (valeur positive)
      */
     public void setTailleMasque(double tailleMasque) {
         this.tailleMasque = tailleMasque;
     }
 
     /**
-     * @return the opaciteMasque
+     * Retourne l'opacité du masque.
+     * 
+     * @return L'opacité (0.0 = transparent, 1.0 = opaque)
      */
     public double getOpaciteMasque() {
         return opaciteMasque;
     }
 
     /**
-     * @param opaciteMasque the opaciteMasque to set
+     * Définit l'opacité du masque.
+     * 
+     * @param opaciteMasque L'opacité (0.0 à 1.0)
      */
     public void setOpaciteMasque(double opaciteMasque) {
         this.opaciteMasque = opaciteMasque;
     }
 
     /**
-     * @return the bMasqueNavigation
+     * Indique si le masque masque la barre de navigation.
+     * 
+     * @return true si la navigation est masquée par le masque, false sinon
      */
     public boolean isbMasqueNavigation() {
         return bMasqueNavigation;
     }
 
     /**
-     * @param bMasqueNavigation the bMasqueNavigation to set
+     * Active ou désactive le masquage de la barre de navigation.
+     * 
+     * @param bMasqueNavigation true pour masquer la navigation, false pour la laisser visible
      */
     public void setbMasqueNavigation(boolean bMasqueNavigation) {
         this.bMasqueNavigation = bMasqueNavigation;
     }
 
     /**
-     * @return the bMasqueBoussole
+     * Indique si le masque masque la boussole.
+     * 
+     * @return true si la boussole est masquée par le masque, false sinon
      */
     public boolean isbMasqueBoussole() {
         return bMasqueBoussole;
     }
 
     /**
-     * @param bMasqueBoussole the bMasqueBoussole to set
+     * Active ou désactive le masquage de la boussole.
+     * 
+     * @param bMasqueBoussole true pour masquer la boussole, false pour la laisser visible
      */
     public void setbMasqueBoussole(boolean bMasqueBoussole) {
         this.bMasqueBoussole = bMasqueBoussole;
     }
 
     /**
-     * @return the bMasqueTitre
+     * Indique si le masque masque le titre.
+     * 
+     * @return true si le titre est masqué par le masque, false sinon
      */
     public boolean isbMasqueTitre() {
         return bMasqueTitre;
     }
 
     /**
-     * @param bMasqueTitre the bMasqueTitre to set
+     * Active ou désactive le masquage du titre.
+     * 
+     * @param bMasqueTitre true pour masquer le titre, false pour le laisser visible
      */
     public void setbMasqueTitre(boolean bMasqueTitre) {
         this.bMasqueTitre = bMasqueTitre;
     }
 
     /**
-     * @return the bMasquePlan
+     * Indique si le masque masque le plan.
+     * 
+     * @return true si le plan est masqué par le masque, false sinon
      */
     public boolean isbMasquePlan() {
         return bMasquePlan;
     }
 
     /**
-     * @param bMasquePlan the bMasquePlan to set
+     * Active ou désactive le masquage du plan.
+     * 
+     * @param bMasquePlan true pour masquer le plan, false pour le laisser visible
      */
     public void setbMasquePlan(boolean bMasquePlan) {
         this.bMasquePlan = bMasquePlan;
     }
 
     /**
-     * @return the bMasqueReseaux
+     * Indique si le masque masque les réseaux sociaux.
+     * 
+     * @return true si les réseaux sociaux sont masqués par le masque, false sinon
      */
     public boolean isbMasqueReseaux() {
         return bMasqueReseaux;
     }
 
     /**
-     * @param bMasqueReseaux the bMasqueReseaux to set
+     * Active ou désactive le masquage des réseaux sociaux.
+     * 
+     * @param bMasqueReseaux true pour masquer les réseaux sociaux, false pour les laisser visibles
      */
     public void setbMasqueReseaux(boolean bMasqueReseaux) {
         this.bMasqueReseaux = bMasqueReseaux;
     }
 
     /**
-     * @return the bMasqueVignettes
+     * Indique si le masque masque les vignettes.
+     * 
+     * @return true si les vignettes sont masquées par le masque, false sinon
      */
     public boolean isbMasqueVignettes() {
         return bMasqueVignettes;
     }
 
     /**
-     * @param bMasqueVignettes the bMasqueVignettes to set
+     * Active ou désactive le masquage des vignettes.
+     * 
+     * @param bMasqueVignettes true pour masquer les vignettes, false pour les laisser visibles
      */
     public void setbMasqueVignettes(boolean bMasqueVignettes) {
         this.bMasqueVignettes = bMasqueVignettes;
     }
 
     /**
-     * @return the bMasqueCombo
+     * Indique si le masque masque le menu déroulant (combo).
+     * 
+     * @return true si le combo est masqué par le masque, false sinon
      */
     public boolean isbMasqueCombo() {
         return bMasqueCombo;
@@ -12512,128 +12600,163 @@ public class GestionnaireInterfaceController {
     }
 
     /**
-     * @return the bAfficheReseauxSociaux
+     * Indique si les boutons de réseaux sociaux sont affichés.
+     * 
+     * @return true si les réseaux sociaux sont visibles, false sinon
      */
     public boolean isbAfficheReseauxSociaux() {
         return bAfficheReseauxSociaux;
     }
 
     /**
-     * @param bAfficheReseauxSociaux the bAfficheReseauxSociaux to set
+     * Active ou désactive l'affichage des boutons de réseaux sociaux.
+     * 
+     * @param bAfficheReseauxSociaux true pour afficher les réseaux sociaux, false pour les masquer
      */
     public void setbAfficheReseauxSociaux(boolean bAfficheReseauxSociaux) {
         this.bAfficheReseauxSociaux = bAfficheReseauxSociaux;
     }
 
     /**
-     * @return the strImageReseauxSociauxTwitter
+     * Retourne le nom du fichier image pour le bouton Twitter/X.
+     * 
+     * @return Le nom du fichier image Twitter (ex: "twitter.png")
      */
     public String getStrImageReseauxSociauxTwitter() {
         return strImageReseauxSociauxTwitter;
     }
 
     /**
-     * @param strImageReseauxSociauxTwitter the strImageReseauxSociauxTwitter to
-     * set
+     * Définit l'image pour le bouton Twitter/X.
+     * 
+     * @param strImageReseauxSociauxTwitter Le nom du fichier image depuis le répertoire des thèmes
      */
     public void setStrImageReseauxSociauxTwitter(String strImageReseauxSociauxTwitter) {
         this.strImageReseauxSociauxTwitter = strImageReseauxSociauxTwitter;
     }
 
     /**
-     * @return the strImageReseauxSociauxMeta
+     * Retourne le nom du fichier image pour le bouton Facebook/Meta.
+     * 
+     * @return Le nom du fichier image Meta (ex: "facebook.png")
      */
     public String getStrImageReseauxSociauxMeta() {
         return strImageReseauxSociauxMeta;
     }
 
     /**
-     * @param strImageReseauxSociauxMeta the strImageReseauxSociauxMeta to
-     * set
+     * Définit l'image pour le bouton Facebook/Meta.
+     * 
+     * @param strImageReseauxSociauxMeta Le nom du fichier image depuis le répertoire des thèmes
      */
     public void setStrImageReseauxSociauxMeta(String strImageReseauxSociauxMeta) {
         this.strImageReseauxSociauxMeta = strImageReseauxSociauxMeta;
     }
 
     /**
-     * @return the strImageReseauxSociauxEmail
+     * Retourne le nom du fichier image pour le bouton Email.
+     * 
+     * @return Le nom du fichier image Email (ex: "email.png")
      */
     public String getStrImageReseauxSociauxEmail() {
         return strImageReseauxSociauxEmail;
     }
 
     /**
-     * @param strImageReseauxSociauxEmail the strImageReseauxSociauxEmail to set
+     * Définit l'image pour le bouton Email.
+     * 
+     * @param strImageReseauxSociauxEmail Le nom du fichier image depuis le répertoire des thèmes
      */
     public void setStrImageReseauxSociauxEmail(String strImageReseauxSociauxEmail) {
         this.strImageReseauxSociauxEmail = strImageReseauxSociauxEmail;
     }
 
     /**
-     * @return the strPositionReseauxSociaux
+     * Retourne la position des boutons de réseaux sociaux dans l'interface.
+     * 
+     * @return Position : "HG" (haut-gauche), "HD" (haut-droite), "BG" (bas-gauche), 
+     *         "BD" (bas-droite), ou "ABS" (position absolue)
      */
     public String getStrPositionReseauxSociaux() {
         return strPositionReseauxSociaux;
     }
 
     /**
-     * @param strPositionReseauxSociaux the strPositionReseauxSociaux to set
+     * Définit la position des boutons de réseaux sociaux.
+     * 
+     * @param strPositionReseauxSociaux Position : "HG", "HD", "BG", "BD" ou "ABS"
      */
     public void setStrPositionReseauxSociaux(String strPositionReseauxSociaux) {
         this.strPositionReseauxSociaux = strPositionReseauxSociaux;
     }
 
     /**
-     * @return the dXReseauxSociaux
+     * Retourne le décalage horizontal des réseaux sociaux par rapport à leur position de référence.
+     * 
+     * @return Le décalage X en pixels
      */
     public double getdXReseauxSociaux() {
         return dXReseauxSociaux;
     }
 
     /**
-     * @param dXReseauxSociaux the dXReseauxSociaux to set
+     * Définit le décalage horizontal des réseaux sociaux.
+     * 
+     * @param dXReseauxSociaux Le décalage X en pixels (peut être négatif)
      */
     public void setdXReseauxSociaux(double dXReseauxSociaux) {
         this.dXReseauxSociaux = dXReseauxSociaux;
     }
 
     /**
-     * @return the dYReseauxSociaux
+     * Retourne le décalage vertical des réseaux sociaux par rapport à leur position de référence.
+     * 
+     * @return Le décalage Y en pixels
      */
     public double getdYReseauxSociaux() {
         return dYReseauxSociaux;
     }
 
     /**
-     * @param dYReseauxSociaux the dYReseauxSociaux to set
+     * Définit le décalage vertical des réseaux sociaux.
+     * 
+     * @param dYReseauxSociaux Le décalage Y en pixels (peut être négatif)
      */
     public void setdYReseauxSociaux(double dYReseauxSociaux) {
         this.dYReseauxSociaux = dYReseauxSociaux;
     }
 
     /**
-     * @return the tailleReseauxSociaux
+     * Retourne la taille des boutons de réseaux sociaux.
+     * 
+     * @return La taille en pixels (largeur et hauteur)
      */
     public double getTailleReseauxSociaux() {
         return tailleReseauxSociaux;
     }
 
     /**
-     * @param tailleReseauxSociaux the tailleReseauxSociaux to set
+     * Définit la taille des boutons de réseaux sociaux.
+     * 
+     * @param tailleReseauxSociaux La taille en pixels (valeur positive)
      */
     public void setTailleReseauxSociaux(double tailleReseauxSociaux) {
         this.tailleReseauxSociaux = tailleReseauxSociaux;
     }
 
     /**
-     * @return the opaciteReseauxSociaux
+     * Retourne l'opacité des boutons de réseaux sociaux.
+     * 
+     * @return L'opacité (0.0 = transparents, 1.0 = opaques)
      */
     public double getOpaciteReseauxSociaux() {
         return opaciteReseauxSociaux;
     }
 
     /**
-     * @param opaciteReseauxSociaux the opaciteReseauxSociaux to set
+     * Définit l'opacité des boutons de réseaux sociaux.
+     * 
+     * @param opaciteReseauxSociaux L'opacité (0.0 à 1.0)
      */
     public void setOpaciteReseauxSociaux(double opaciteReseauxSociaux) {
         this.opaciteReseauxSociaux = opaciteReseauxSociaux;
@@ -12682,84 +12805,109 @@ public class GestionnaireInterfaceController {
     }
 
     /**
-     * @return the bAfficheVignettes
+     * Indique si les vignettes de navigation sont affichées.
+     * 
+     * @return true si les vignettes sont visibles, false sinon
      */
     public boolean isbAfficheVignettes() {
         return bAfficheVignettes;
     }
 
     /**
-     * @param bAfficheVignettes the bAfficheVignettes to set
+     * Active ou désactive l'affichage des vignettes de navigation.
+     * 
+     * @param bAfficheVignettes true pour afficher les vignettes, false pour les masquer
      */
     public void setbAfficheVignettes(boolean bAfficheVignettes) {
         this.bAfficheVignettes = bAfficheVignettes;
     }
 
     /**
-     * @return the strCouleurFondVignettes
+     * Retourne la couleur de fond des vignettes au format hexadécimal.
+     * 
+     * @return La couleur au format "#RRGGBB"
      */
     public String getStrCouleurFondVignettes() {
         return strCouleurFondVignettes;
     }
 
     /**
-     * @param strCouleurFondVignettes the strCouleurFondVignettes to set
+     * Définit la couleur de fond des vignettes.
+     * 
+     * @param strCouleurFondVignettes La couleur au format "#RRGGBB"
      */
     public void setStrCouleurFondVignettes(String strCouleurFondVignettes) {
         this.strCouleurFondVignettes = strCouleurFondVignettes;
     }
 
     /**
-     * @return the strCouleurTexteVignettes
+     * Retourne la couleur du texte des vignettes au format hexadécimal.
+     * 
+     * @return La couleur au format "#RRGGBB"
      */
     public String getStrCouleurTexteVignettes() {
         return strCouleurTexteVignettes;
     }
 
     /**
-     * @param strCouleurTexteVignettes the strCouleurTexteVignettes to set
+     * Définit la couleur du texte des vignettes.
+     * 
+     * @param strCouleurTexteVignettes La couleur au format "#RRGGBB"
      */
     public void setStrCouleurTexteVignettes(String strCouleurTexteVignettes) {
         this.strCouleurTexteVignettes = strCouleurTexteVignettes;
     }
 
     /**
-     * @return the strPositionVignettes
+     * Retourne la position des vignettes dans l'interface.
+     * 
+     * @return Position : "HG" (haut-gauche), "HD" (haut-droite), "BG" (bas-gauche), 
+     *         "BD" (bas-droite), ou "ABS" (position absolue)
      */
     public String getStrPositionVignettes() {
         return strPositionVignettes;
     }
 
     /**
-     * @param strPositionVignettes the strPositionVignettes to set
+     * Définit la position des vignettes.
+     * 
+     * @param strPositionVignettes Position : "HG", "HD", "BG", "BD" ou "ABS"
      */
     public void setStrPositionVignettes(String strPositionVignettes) {
         this.strPositionVignettes = strPositionVignettes;
     }
 
     /**
-     * @return the tailleImageVignettes
+     * Retourne la taille des images dans les vignettes.
+     * 
+     * @return La taille en pixels (largeur et hauteur)
      */
     public double getTailleImageVignettes() {
         return tailleImageVignettes;
     }
 
     /**
-     * @param tailleImageVignettes the tailleImageVignettes to set
+     * Définit la taille des images dans les vignettes.
+     * 
+     * @param tailleImageVignettes La taille en pixels (valeur positive)
      */
     public void setTailleImageVignettes(double tailleImageVignettes) {
         this.tailleImageVignettes = tailleImageVignettes;
     }
 
     /**
-     * @return the opaciteVignettes
+     * Retourne l'opacité des vignettes.
+     * 
+     * @return L'opacité (0.0 = transparentes, 1.0 = opaques)
      */
     public double getOpaciteVignettes() {
         return opaciteVignettes;
     }
 
     /**
-     * @param opaciteVignettes the opaciteVignettes to set
+     * Définit l'opacité des vignettes.
+     * 
+     * @param opaciteVignettes L'opacité (0.0 à 1.0)
      */
     public void setOpaciteVignettes(double opaciteVignettes) {
         this.opaciteVignettes = opaciteVignettes;
