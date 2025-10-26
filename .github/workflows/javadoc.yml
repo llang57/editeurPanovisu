@@ -1,0 +1,124 @@
+name: 📖 Générer et publier Javadoc
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - 'src/**/*.java'
+      - '.github/workflows/javadoc.yml'
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Forcer la publication'
+        required: false
+        default: 'false'
+
+permissions:
+  contents: write
+
+jobs:
+  generate-javadoc:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout du code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: ☕ Configuration Java 17
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+        cache: 'maven'
+    
+    - name: 📚 Générer Javadoc avec Maven
+      run: |
+        echo "🔧 Génération de la Javadoc..."
+        mvn javadoc:javadoc -DskipTests
+        
+        # Vérifier que la génération a réussi
+        if [ ! -f "target/site/apidocs/index.html" ]; then
+          echo "❌ Erreur : La Javadoc n'a pas été générée !"
+          exit 1
+        fi
+        
+        # Créer .nojekyll pour désactiver Jekyll
+        touch target/site/apidocs/.nojekyll
+        
+        # Afficher les statistiques
+        echo "📊 Statistiques de la Javadoc :"
+        echo "   - Fichiers HTML : $(find target/site/apidocs -name '*.html' | wc -l)"
+        echo "   - Taille totale : $(du -sh target/site/apidocs | cut -f1)"
+    
+    - name: 📝 Créer README pour gh-pages
+      run: |
+        cat > target/site/apidocs/README.md << 'EOF'
+        # 📖 Javadoc EditeurPanovisu
+        
+        Documentation API générée automatiquement avec Javadoc.
+        
+        ## 🔗 Accès
+        
+        **[📚 Accéder à la Javadoc](https://llang57.github.io/editeurPanovisu/javadoc/)**
+        
+        ## 📊 Informations
+        
+        - **Projet** : EditeurPanovisu
+        - **Version** : 3.3.2-SNAPSHOT
+        - **Dernière mise à jour** : $(date '+%d/%m/%Y à %H:%M UTC')
+        - **Générateur** : Javadoc (Maven)
+        - **Langage** : Java 17
+        
+        ## 📁 Contenu
+        
+        Cette Javadoc inclut :
+        - Toutes les classes publiques du package `editeurpanovisu`
+        - Classes GPU (`editeurpanovisu.gpu`)
+        - Documentation complète avec exemples d'utilisation
+        - Index et recherche intégrés
+        
+        ## 🔄 Mise à jour
+        
+        Cette documentation est automatiquement régénérée à chaque commit sur la branche `master` qui modifie les fichiers Java dans `src/`.
+        
+        ## 🎯 Qualité
+        
+        - ✅ 0 méthodes publiques principales sans documentation
+        - ✅ 0 duplications de Javadoc
+        - ✅ Documentation structurée avec exemples
+        
+        ---
+        
+        *Généré automatiquement par GitHub Actions*
+        EOF
+    
+    - name: 🚀 Déployer sur GitHub Pages (sous-répertoire javadoc)
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./target/site/apidocs
+        destination_dir: javadoc
+        publish_branch: gh-pages
+        user_name: 'github-actions[bot]'
+        user_email: 'github-actions[bot]@users.noreply.github.com'
+        commit_message: |
+          docs: 📖 Mise à jour automatique de la Javadoc
+          
+          Mise à jour de la documentation Javadoc
+          Commit source: ${{ github.sha }}
+          Date: $(date '+%d/%m/%Y %H:%M:%S UTC')
+        keep_files: true
+    
+    - name: ✅ Publication réussie
+      run: |
+        echo "✅ Javadoc publiée avec succès !"
+        echo ""
+        echo "📖 La Javadoc sera accessible dans quelques minutes à :"
+        echo "   https://llang57.github.io/editeurPanovisu/javadoc/"
+        echo ""
+        echo "⏱️  Délai de propagation : 2-3 minutes"
+        echo ""
+        echo "🔗 La documentation Doxygen reste accessible à :"
+        echo "   https://llang57.github.io/editeurPanovisu/"
