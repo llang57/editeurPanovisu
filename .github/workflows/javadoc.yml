@@ -14,10 +14,17 @@ on:
         default: 'false'
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
+
+# Permettre un seul déploiement concurrent
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
-  generate-javadoc:
+  build:
     runs-on: ubuntu-latest
     
     steps:
@@ -38,7 +45,7 @@ jobs:
         echo "🔧 Génération de la Javadoc..."
         mvn javadoc:javadoc -DskipTests
         
-        # Détecter le répertoire de sortie (plusieurs emplacements possibles)
+        # Détecter le répertoire de sortie
         if [ -d "target/reports/apidocs" ]; then
           JAVADOC_DIR="target/reports/apidocs"
         elif [ -d "target/site/apidocs" ]; then
@@ -56,7 +63,6 @@ jobs:
         # Vérifier que index.html existe
         if [ ! -f "$JAVADOC_DIR/index.html" ]; then
           echo "❌ Erreur : index.html manquant dans $JAVADOC_DIR"
-          ls -la "$JAVADOC_DIR" || echo "Impossible de lister le répertoire"
           exit 1
         fi
         
@@ -68,80 +74,81 @@ jobs:
         echo "   - Fichiers HTML : $(find $JAVADOC_DIR -name '*.html' | wc -l)"
         echo "   - Taille totale : $(du -sh $JAVADOC_DIR | cut -f1)"
         
-        # Sauvegarder le chemin pour les étapes suivantes
-        echo "JAVADOC_DIR=$JAVADOC_DIR" >> $GITHUB_ENV
-        
-        # Copier dans un emplacement fixe pour le déploiement
-        mkdir -p javadoc-output
-        cp -r "$JAVADOC_DIR"/* javadoc-output/
+        # Copier pour le déploiement
+        mkdir -p _site
+        cp -r "$JAVADOC_DIR"/* _site/
     
-    - name: 📝 Créer README pour gh-pages
+    - name: 📝 Créer page d'accueil
       run: |
-        cat > javadoc-output/README.md << 'EOF'
-        # 📖 Javadoc EditeurPanovisu
-        
-        Documentation API générée automatiquement avec Javadoc.
-        
-        ## 🔗 Accès
-        
-        **[📚 Accéder à la Javadoc](https://llang57.github.io/editeurPanovisu/javadoc/)**
-        
-        ## 📊 Informations
-        
-        - **Projet** : EditeurPanovisu
-        - **Version** : 3.3.2-SNAPSHOT
-        - **Dernière mise à jour** : $(date '+%d/%m/%Y à %H:%M UTC')
-        - **Générateur** : Javadoc (Maven)
-        - **Langage** : Java 25
-        
-        ## 📁 Contenu
-        
-        Cette Javadoc inclut :
-        - Toutes les classes publiques du package `editeurpanovisu`
-        - Classes GPU (`editeurpanovisu.gpu`)
-        - Documentation complète avec exemples d'utilisation
-        - Index et recherche intégrés
-        
-        ## 🔄 Mise à jour
-        
-        Cette documentation est automatiquement régénérée à chaque commit sur la branche `master` qui modifie les fichiers Java dans `src/`.
-        
-        ## 🎯 Qualité
-        
-        - ✅ 0 méthodes publiques principales sans documentation
-        - ✅ 0 duplications de Javadoc
-        - ✅ Documentation structurée avec exemples
-        
-        ---
-        
-        *Généré automatiquement par GitHub Actions*
+        cat > _site/index.html << 'EOF'
+        <!DOCTYPE html>
+        <html lang="fr">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Documentation EditeurPanovisu</title>
+          <meta http-equiv="refresh" content="0; url=./index.html">
+          <style>
+            body {
+              font-family: system-ui, -apple-system, sans-serif;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              min-height: 100vh;
+              margin: 0;
+              background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+              color: white;
+            }
+            .container {
+              text-align: center;
+              padding: 2rem;
+            }
+            h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+            p { font-size: 1.2rem; opacity: 0.9; }
+            .spinner {
+              border: 4px solid rgba(255,255,255,0.3);
+              border-top: 4px solid white;
+              border-radius: 50%;
+              width: 40px;
+              height: 40px;
+              animation: spin 1s linear infinite;
+              margin: 2rem auto;
+            }
+            @keyframes spin {
+              0% { transform: rotate(0deg); }
+              100% { transform: rotate(360deg); }
+            }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <h1>📖 Javadoc EditeurPanovisu</h1>
+            <div class="spinner"></div>
+            <p>Redirection en cours...</p>
+          </div>
+        </body>
+        </html>
         EOF
     
-    - name: 🚀 Déployer sur GitHub Pages (sous-répertoire javadoc)
-      uses: peaceiris/actions-gh-pages@v3
+    - name: � Upload artifact pour GitHub Pages
+      uses: actions/upload-pages-artifact@v3
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./javadoc-output
-        destination_dir: javadoc
-        publish_branch: gh-pages
-        user_name: 'github-actions[bot]'
-        user_email: 'github-actions[bot]@users.noreply.github.com'
-        commit_message: |
-          docs: 📖 Mise à jour automatique de la Javadoc
-          
-          Mise à jour de la documentation Javadoc
-          Commit source: ${{ github.sha }}
-          Date: $(date '+%d/%m/%Y %H:%M:%S UTC')
-        keep_files: true
+        path: '_site'
+
+  # Job de déploiement
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    
+    steps:
+    - name: 🚀 Déployer sur GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
     
     - name: ✅ Publication réussie
       run: |
         echo "✅ Javadoc publiée avec succès !"
-        echo ""
-        echo "📖 La Javadoc sera accessible dans quelques minutes à :"
-        echo "   https://llang57.github.io/editeurPanovisu/javadoc/"
-        echo ""
-        echo "⏱️  Délai de propagation : 2-3 minutes"
-        echo ""
-        echo "🔗 La documentation Doxygen reste accessible à :"
-        echo "   https://llang57.github.io/editeurPanovisu/"
+        echo "📖 Accessible à : ${{ steps.deployment.outputs.page_url }}"
