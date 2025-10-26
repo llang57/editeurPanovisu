@@ -3906,8 +3906,6 @@ public class GestionnaireInterfaceController {
      * @see #afficheTemplate()
      */
     public void setTemplate(List<String> strTemplate) {
-     */
-    public void setTemplate(List<String> strTemplate) {
         setbAfficheBoussole(false);
         setbAfficheMasque(false);
         setbAfficheVignettes(false);
@@ -11356,231 +11354,322 @@ public class GestionnaireInterfaceController {
     }
 
     /**
-     * @return the tailleBarrePersonnalisee
+     * Obtient la taille (hauteur) de la barre de navigation personnalisée en pixels.
+     * 
+     * @return la taille de la barre personnalisée (valeur typique : 32-128 pixels)
+     * @see #setTailleBarrePersonnalisee(double)
      */
     public double getTailleBarrePersonnalisee() {
         return tailleBarrePersonnalisee;
     }
 
     /**
-     * @param tailleBarrePersonnalisee the tailleBarrePersonnalisee to set
+     * Définit la taille (hauteur) de la barre de navigation personnalisée en pixels.
+     * 
+     * @param tailleBarrePersonnalisee la nouvelle taille en pixels (recommandé : 32-128)
+     * @see #getTailleBarrePersonnalisee()
      */
     public void setTailleBarrePersonnalisee(double tailleBarrePersonnalisee) {
         this.tailleBarrePersonnalisee = tailleBarrePersonnalisee;
     }
 
     /**
-     * @return the tailleIconesBarrePersonnalisee
+     * Obtient la taille des icônes affichées dans la barre personnalisée.
+     * 
+     * @return la taille des icônes en pixels (valeur typique : 24-64 pixels)
+     * @see #setTailleIconesBarrePersonnalisee(double)
      */
     public double getTailleIconesBarrePersonnalisee() {
         return tailleIconesBarrePersonnalisee;
     }
 
     /**
-     * @param tailleIconesBarrePersonnalisee the tailleIconesBarrePersonnalisee
-     * to set
+     * Définit la taille des icônes affichées dans la barre personnalisée.
+     * 
+     * @param tailleIconesBarrePersonnalisee la nouvelle taille des icônes en pixels (recommandé : 24-64)
+     * @see #getTailleIconesBarrePersonnalisee()
      */
     public void setTailleIconesBarrePersonnalisee(double tailleIconesBarrePersonnalisee) {
         this.tailleIconesBarrePersonnalisee = tailleIconesBarrePersonnalisee;
     }
 
     /**
-     * @return the opaciteBarrePersonnalisee
+     * Obtient l'opacité de la barre de navigation personnalisée.
+     * 
+     * @return l'opacité (0.0 = transparent, 1.0 = opaque)
+     * @see #setOpaciteBarrePersonnalisee(double)
      */
     public double getOpaciteBarrePersonnalisee() {
         return opaciteBarrePersonnalisee;
     }
 
     /**
-     * @param opaciteBarrePersonnalisee the opaciteBarrePersonnalisee to set
+     * Définit l'opacité de la barre de navigation personnalisée.
+     * 
+     * @param opaciteBarrePersonnalisee la nouvelle opacité (0.0 à 1.0)
+     * @see #getOpaciteBarrePersonnalisee()
      */
     public void setOpaciteBarrePersonnalisee(double opaciteBarrePersonnalisee) {
         this.opaciteBarrePersonnalisee = opaciteBarrePersonnalisee;
     }
 
     /**
-     * @return the strPositionBarrePersonnalisee
+     * Obtient la position de la barre de navigation personnalisée sur l'écran.
+     * 
+     * @return la position ("top", "bottom", "left", "right")
+     * @see #setStrPositionBarrePersonnalisee(String)
      */
     public String getStrPositionBarrePersonnalisee() {
         return strPositionBarrePersonnalisee;
     }
 
     /**
-     * @param strPositionBarrePersonnalisee the strPositionBarrePersonnalisee to
-     * set
+     * Définit la position de la barre de navigation personnalisée sur l'écran.
+     * 
+     * @param strPositionBarrePersonnalisee la nouvelle position ("top", "bottom", "left", "right")
+     * @see #getStrPositionBarrePersonnalisee()
      */
     public void setStrPositionBarrePersonnalisee(String strPositionBarrePersonnalisee) {
         this.strPositionBarrePersonnalisee = strPositionBarrePersonnalisee;
     }
 
     /**
-     * @return the strDeplacementsBarrePersonnalisee
+     * Obtient la zone de la barre personnalisée affectée aux boutons de déplacement.
+     * 
+     * @return le numéro de zone (commence à 0) ou null si non défini
+     * @see #setStrDeplacementsBarrePersonnalisee(String)
      */
     public String getStrDeplacementsBarrePersonnalisee() {
         return strDeplacementsBarrePersonnalisee;
     }
 
     /**
-     * @param strDeplacementsBarrePersonnalisee the
-     * strDeplacementsBarrePersonnalisee to set
+     * Définit la zone de la barre personnalisée affectée aux boutons de déplacement.
+     * 
+     * @param strDeplacementsBarrePersonnalisee le numéro de zone (0 à n-1)
+     * @see #getStrDeplacementsBarrePersonnalisee()
      */
     public void setStrDeplacementsBarrePersonnalisee(String strDeplacementsBarrePersonnalisee) {
         this.strDeplacementsBarrePersonnalisee = strDeplacementsBarrePersonnalisee;
     }
 
     /**
-     * @return the strZoomBarrePersonnalisee
+     * Obtient la zone de la barre personnalisée affectée aux boutons de zoom.
+     * 
+     * @return le numéro de zone (commence à 0) ou null si non défini
+     * @see #setStrZoomBarrePersonnalisee(String)
      */
     public String getStrZoomBarrePersonnalisee() {
         return strZoomBarrePersonnalisee;
     }
 
     /**
-     * @param strZoomBarrePersonnalisee the strZoomBarrePersonnalisee to set
+     * Définit la zone de la barre personnalisée affectée aux boutons de zoom.
+     * 
+     * @param strZoomBarrePersonnalisee le numéro de zone (0 à n-1)
+     * @see #getStrZoomBarrePersonnalisee()
      */
     public void setStrZoomBarrePersonnalisee(String strZoomBarrePersonnalisee) {
         this.strZoomBarrePersonnalisee = strZoomBarrePersonnalisee;
     }
 
     /**
-     * @return the strInfoBarrePersonnalisee
+     * Obtient la zone de la barre personnalisée affectée au bouton d'information.
+     * 
+     * @return le numéro de zone (commence à 0) ou null si non défini
+     * @see #setStrInfoBarrePersonnalisee(String)
      */
     public String getStrInfoBarrePersonnalisee() {
         return strInfoBarrePersonnalisee;
     }
 
     /**
-     * @param strInfoBarrePersonnalisee the strInfoBarrePersonnalisee to set
+     * Définit la zone de la barre personnalisée affectée au bouton d'information.
+     * 
+     * @param strInfoBarrePersonnalisee le numéro de zone (0 à n-1)
+     * @see #getStrInfoBarrePersonnalisee()
      */
     public void setStrInfoBarrePersonnalisee(String strInfoBarrePersonnalisee) {
         this.strInfoBarrePersonnalisee = strInfoBarrePersonnalisee;
     }
 
     /**
-     * @return the strAideBarrePersonnalisee
+     * Obtient la zone de la barre personnalisée affectée au bouton d'aide.
+     * 
+     * @return le numéro de zone (commence à 0) ou null si non défini
+     * @see #setStrAideBarrePersonnalisee(String)
      */
     public String getStrAideBarrePersonnalisee() {
         return strAideBarrePersonnalisee;
     }
 
     /**
-     * @param strAideBarrePersonnalisee the strAideBarrePersonnalisee to set
+     * Définit la zone de la barre personnalisée affectée au bouton d'aide.
+     * 
+     * @param strAideBarrePersonnalisee le numéro de zone (0 à n-1)
+     * @see #getStrAideBarrePersonnalisee()
      */
     public void setStrAideBarrePersonnalisee(String strAideBarrePersonnalisee) {
         this.strAideBarrePersonnalisee = strAideBarrePersonnalisee;
     }
 
     /**
-     * @return the strRotationBarrePersonnalisee
+     * Obtient la zone de la barre personnalisée affectée aux boutons de rotation.
+     * 
+     * @return le numéro de zone (commence à 0) ou null si non défini
+     * @see #setStrRotationBarrePersonnalisee(String)
      */
     public String getStrRotationBarrePersonnalisee() {
         return strRotationBarrePersonnalisee;
     }
 
     /**
-     * @param strRotationBarrePersonnalisee the strRotationBarrePersonnalisee to
-     * set
+     * Définit la zone de la barre personnalisée affectée aux boutons de rotation.
+     * 
+     * @param strRotationBarrePersonnalisee le numéro de zone (0 à n-1)
+     * @see #getStrRotationBarrePersonnalisee()
      */
     public void setStrRotationBarrePersonnalisee(String strRotationBarrePersonnalisee) {
         this.strRotationBarrePersonnalisee = strRotationBarrePersonnalisee;
     }
 
     /**
-     * @return the strPleinEcranBarrePersonnalisee
+     * Obtient la zone de la barre personnalisée affectée au bouton plein écran.
+     * 
+     * @return le numéro de zone (commence à 0) ou null si non défini
+     * @see #setStrPleinEcranBarrePersonnalisee(String)
      */
     public String getStrPleinEcranBarrePersonnalisee() {
         return strPleinEcranBarrePersonnalisee;
     }
 
     /**
-     * @param strPleinEcranBarrePersonnalisee the
-     * strPleinEcranBarrePersonnalisee to set
+     * Définit la zone de la barre personnalisée affectée au bouton plein écran.
+     * 
+     * @param strPleinEcranBarrePersonnalisee le numéro de zone (0 à n-1)
+     * @see #getStrPleinEcranBarrePersonnalisee()
      */
     public void setStrPleinEcranBarrePersonnalisee(String strPleinEcranBarrePersonnalisee) {
         this.strPleinEcranBarrePersonnalisee = strPleinEcranBarrePersonnalisee;
     }
 
     /**
-     * @return the strSourisBarrePersonnalisee
+     * Obtient la zone de la barre personnalisée affectée au bouton de la souris.
+     * 
+     * @return le numéro de zone (commence à 0) ou null si non défini
+     * @see #setStrSourisBarrePersonnalisee(String)
      */
     public String getStrSourisBarrePersonnalisee() {
         return strSourisBarrePersonnalisee;
     }
 
     /**
-     * @param strSourisBarrePersonnalisee the strSourisBarrePersonnalisee to set
+     * Définit la zone de la barre personnalisée affectée au bouton de la souris.
+     * 
+     * @param strSourisBarrePersonnalisee le numéro de zone (0 à n-1)
+     * @see #getStrSourisBarrePersonnalisee()
      */
     public void setStrSourisBarrePersonnalisee(String strSourisBarrePersonnalisee) {
         this.strSourisBarrePersonnalisee = strSourisBarrePersonnalisee;
     }
 
     /**
-     * @return the strVisibiliteBarrePersonnalisee
+     * Obtient la zone de la barre personnalisée affectée au bouton de visibilité.
+     * 
+     * @return le numéro de zone (commence à 0) ou null si non défini
+     * @see #setStrVisibiliteBarrePersonnalisee(String)
      */
     public String getStrVisibiliteBarrePersonnalisee() {
         return strVisibiliteBarrePersonnalisee;
     }
 
     /**
-     * @param strVisibiliteBarrePersonnalisee the
-     * strVisibiliteBarrePersonnalisee to set
+     * Définit la zone de la barre personnalisée affectée au bouton de visibilité.
+     * 
+     * @param strVisibiliteBarrePersonnalisee le numéro de zone (0 à n-1)
+     * @see #getStrVisibiliteBarrePersonnalisee()
      */
     public void setStrVisibiliteBarrePersonnalisee(String strVisibiliteBarrePersonnalisee) {
         this.strVisibiliteBarrePersonnalisee = strVisibiliteBarrePersonnalisee;
     }
 
     /**
-     * @return the strLienImageBarrePersonnalisee
+     * Obtient le chemin vers l'image PNG de la barre personnalisée.
+     * 
+     * @return le chemin relatif ou absolu du fichier image (.png)
+     * @see #setStrLienImageBarrePersonnalisee(String)
      */
     public String getStrLienImageBarrePersonnalisee() {
         return strLienImageBarrePersonnalisee;
     }
 
     /**
-     * @param strLienImageBarrePersonnalisee the strLienImageBarrePersonnalisee
-     * to set
+     * Définit le chemin vers l'image PNG de la barre personnalisée.
+     * 
+     * @param strLienImageBarrePersonnalisee le chemin du fichier image (.png)
+     * @see #getStrLienImageBarrePersonnalisee()
      */
     public void setStrLienImageBarrePersonnalisee(String strLienImageBarrePersonnalisee) {
         this.strLienImageBarrePersonnalisee = strLienImageBarrePersonnalisee;
     }
 
     /**
-     * @return the strLien1BarrePersonnalisee
+     * Obtient le chemin vers le fichier SHP (shapefile) définissant les zones de la barre.
+     * 
+     * @return le chemin relatif ou absolu du fichier shapefile (.shp)
+     * @see #setStrLien1BarrePersonnalisee(String)
      */
     public String getStrLien1BarrePersonnalisee() {
         return strLien1BarrePersonnalisee;
     }
 
     /**
-     * @param strLien1BarrePersonnalisee the strLien1BarrePersonnalisee to set
+     * Définit le chemin vers le fichier SHP (shapefile) définissant les zones de la barre.
+     * 
+     * @param strLien1BarrePersonnalisee le chemin du fichier shapefile (.shp)
+     * @see #getStrLien1BarrePersonnalisee()
      */
     public void setStrLien1BarrePersonnalisee(String strLien1BarrePersonnalisee) {
         this.strLien1BarrePersonnalisee = strLien1BarrePersonnalisee;
     }
 
     /**
-     * @return the strLien2BarrePersonnalisee
+     * Obtient le second lien associé à la barre personnalisée.
+     * Ce lien peut être utilisé pour des ressources additionnelles ou configurations.
+     * 
+     * @return le chemin ou URL du second lien
+     * @see #setStrLien2BarrePersonnalisee(String)
      */
     public String getStrLien2BarrePersonnalisee() {
         return strLien2BarrePersonnalisee;
     }
 
     /**
-     * @param strLien2BarrePersonnalisee the strLien2BarrePersonnalisee to set
+     * Définit le second lien associé à la barre personnalisée.
+     * 
+     * @param strLien2BarrePersonnalisee le chemin ou URL du second lien
+     * @see #getStrLien2BarrePersonnalisee()
      */
     public void setStrLien2BarrePersonnalisee(String strLien2BarrePersonnalisee) {
         this.strLien2BarrePersonnalisee = strLien2BarrePersonnalisee;
     }
 
     /**
-     * @return the wiBarrePersonnaliseeCouleur
+     * Obtient l'image de la barre personnalisée avec les couleurs appliquées.
+     * Cette image contient le rendu final de la barre avec toutes les modifications visuelles.
+     * 
+     * @return l'image modifiable (WritableImage) de la barre avec couleurs
+     * @see #setWiBarrePersonnaliseeCouleur(WritableImage)
      */
     public WritableImage getWiBarrePersonnaliseeCouleur() {
         return wiBarrePersonnaliseeCouleur;
     }
 
     /**
-     * @param wiBarrePersonnaliseeCouleur the wiBarrePersonnaliseeCouleur to set
+     * Définit l'image de la barre personnalisée avec les couleurs appliquées.
+     * 
+     * @param wiBarrePersonnaliseeCouleur l'image modifiable de la barre avec couleurs
+     * @see #getWiBarrePersonnaliseeCouleur()
      */
     public void setWiBarrePersonnaliseeCouleur(WritableImage wiBarrePersonnaliseeCouleur) {
         this.wiBarrePersonnaliseeCouleur = wiBarrePersonnaliseeCouleur;
@@ -11651,70 +11740,100 @@ public class GestionnaireInterfaceController {
     }
 
     /**
-     * @return the strTitrePoliceStyle
+     * Obtient le style de la police utilisée pour le titre du panoramique.
+     * 
+     * @return le style CSS de la police (ex: "normal", "italic", "bold")
+     * @see #setStrTitrePoliceStyle(String)
      */
     public String getStrTitrePoliceStyle() {
         return strTitrePoliceStyle;
     }
 
     /**
-     * @param strTitrePoliceStyle the strTitrePoliceStyle to set
+     * Définit le style de la police utilisée pour le titre du panoramique.
+     * 
+     * @param strTitrePoliceStyle le style CSS ("normal", "italic", "bold", etc.)
+     * @see #getStrTitrePoliceStyle()
      */
     public void setStrTitrePoliceStyle(String strTitrePoliceStyle) {
         this.strTitrePoliceStyle = strTitrePoliceStyle;
     }
 
     /**
-     * @return the strTitrePoliceTaille
+     * Obtient la taille de la police utilisée pour le titre du panoramique.
+     * 
+     * @return la taille de police sous forme de chaîne (ex: "24", "32")
+     * @see #setStrTitrePoliceTaille(String)
      */
     public String getStrTitrePoliceTaille() {
         return strTitrePoliceTaille;
     }
 
     /**
-     * @param strTitrePoliceTaille the strTitrePoliceTaille to set
+     * Définit la taille de la police utilisée pour le titre du panoramique.
+     * 
+     * @param strTitrePoliceTaille la taille en pixels sous forme de chaîne (ex: "24", "32")
+     * @see #getStrTitrePoliceTaille()
      */
     public void setStrTitrePoliceTaille(String strTitrePoliceTaille) {
         this.strTitrePoliceTaille = strTitrePoliceTaille;
     }
 
     /**
-     * @return the strCouleurTitre
+     * Obtient la couleur du texte du titre du panoramique.
+     * 
+     * @return la couleur au format CSS (ex: "#FFFFFF", "rgb(255,255,255)")
+     * @see #setStrCouleurTitre(String)
      */
     public String getStrCouleurTitre() {
         return strCouleurTitre;
     }
 
     /**
-     * @param strCouleurTitre the strCouleurTitre to set
+     * Définit la couleur du texte du titre du panoramique.
+     * 
+     * @param strCouleurTitre la couleur au format CSS (hex, rgb, ou nom)
+     * @see #getStrCouleurTitre()
      */
     public void setStrCouleurTitre(String strCouleurTitre) {
         this.strCouleurTitre = strCouleurTitre;
     }
 
     /**
-     * @return the strCouleurFondTitre
+     * Obtient la couleur de fond du titre du panoramique.
+     * 
+     * @return la couleur de fond au format CSS (ex: "#000000", "rgba(0,0,0,0.8)")
+     * @see #setStrCouleurFondTitre(String)
      */
     public String getStrCouleurFondTitre() {
         return strCouleurFondTitre;
     }
 
     /**
-     * @param strCouleurFondTitre the strCouleurFondTitre to set
+     * Définit la couleur de fond du titre du panoramique.
+     * 
+     * @param strCouleurFondTitre la couleur de fond au format CSS (hex, rgb, rgba, ou nom)
+     * @see #getStrCouleurFondTitre()
      */
     public void setStrCouleurFondTitre(String strCouleurFondTitre) {
         this.strCouleurFondTitre = strCouleurFondTitre;
     }
 
     /**
-     * @return the titreOpacite
+     * Obtient l'opacité du fond du titre du panoramique.
+     * 
+     * @return l'opacité du fond (0.0 = transparent, 1.0 = opaque)
+     * @see #setTitreOpacite(double)
      */
     public double getTitreOpacite() {
         return titreOpacite;
     }
 
     /**
-     * @param titreOpacite the titreOpacite to set
+     * Définit l'opacité du fond du titre du panoramique.
+     * 
+     * @param titreOpacite l'opacité (0.0 à 1.0)
+     * @see #getTitreOpacite()
      */
     public void setTitreOpacite(double titreOpacite) {
         this.titreOpacite = titreOpacite;
