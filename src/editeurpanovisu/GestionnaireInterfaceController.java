@@ -13602,6 +13602,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de offsetXBarrePersonnalisee.
+     *
      * @return the offsetXBarrePersonnalisee
      */
     public double getOffsetXBarrePersonnalisee() {
@@ -13609,6 +13611,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de offsetXBarrePersonnalisee.
+     *
      * @param offsetXBarrePersonnalisee the offsetXBarrePersonnalisee to set
      */
     public void setOffsetXBarrePersonnalisee(double offsetXBarrePersonnalisee) {
@@ -13616,6 +13620,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de offsetYBarrePersonnalisee.
+     *
      * @return the offsetYBarrePersonnalisee
      */
     public double getOffsetYBarrePersonnalisee() {
@@ -13623,6 +13629,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de offsetYBarrePersonnalisee.
+     *
      * @param offsetYBarrePersonnalisee the offsetYBarrePersonnalisee to set
      */
     public void setOffsetYBarrePersonnalisee(double offsetYBarrePersonnalisee) {
@@ -13952,6 +13960,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de bAfficheTitre.
+     *
      * @return the bAfficheTitre
      */
     public boolean isbAfficheTitre() {
@@ -13959,6 +13969,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de bAfficheTitre.
+     *
      * @param bAfficheTitre the bAfficheTitre to set
      */
     public void setbAfficheTitre(boolean bAfficheTitre) {
@@ -13966,6 +13978,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de bAfficheDescription.
+     *
      * @return the bAfficheDescription
      */
     public boolean isbAfficheDescription() {
@@ -13973,6 +13987,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de bAfficheDescription.
+     *
      * @param bAfficheDescription the bAfficheDescription to set
      */
     public void setbAfficheDescription(boolean bAfficheDescription) {
@@ -13980,6 +13996,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de cbAfficheDescription.
+     *
      * @return the cbAfficheDescription checkbox
      */
     public CheckBox getCbAfficheDescription() {
@@ -13987,6 +14005,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de poDescription.
+     *
      * @return the poDescription panel
      */
     public PaneOutil getPoDescription() {
@@ -14002,6 +14022,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de strTitrePoliceNom.
+     *
      * @return the strTitrePoliceNom
      */
     public String getStrTitrePoliceNom() {
@@ -14009,6 +14031,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de strTitrePoliceNom.
+     *
      * @param strTitrePoliceNom the strTitrePoliceNom to set
      */
     public void setStrTitrePoliceNom(String strTitrePoliceNom) {
@@ -14116,6 +14140,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de titreTaille.
+     *
      * @return the titreTaille
      */
     public double getTitreTaille() {
@@ -14123,6 +14149,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de titreTaille.
+     *
      * @param titreTaille the titreTaille to set
      */
     public void setTitreTaille(double titreTaille) {
@@ -14275,6 +14303,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de bFenetreInfoPersonnalise.
+     *
      * @return the bFenetreInfoPersonnalise
      */
     public boolean isbFenetreInfoPersonnalise() {
@@ -14282,6 +14312,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de bFenetreInfoPersonnalise.
+     *
      * @param bFenetreInfoPersonnalise the bFenetreInfoPersonnalise to set
      */
     public void setbFenetreInfoPersonnalise(boolean bFenetreInfoPersonnalise) {
@@ -14289,6 +14321,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de bFenetreAidePersonnalise.
+     *
      * @return the bFenetreAidePersonnalise
      */
     public boolean isbFenetreAidePersonnalise() {
@@ -14296,6 +14330,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de bFenetreAidePersonnalise.
+     *
      * @param bFenetreAidePersonnalise the bFenetreAidePersonnalise to set
      */
     public void setbFenetreAidePersonnalise(boolean bFenetreAidePersonnalise) {
@@ -14303,6 +14339,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de fenetreInfoTaille.
+     *
      * @return the fenetreInfoTaille
      */
     public double getFenetreInfoTaille() {
@@ -14310,6 +14348,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de fenetreInfoTaille.
+     *
      * @param fenetreInfoTaille the fenetreInfoTaille to set
      */
     public void setFenetreInfoTaille(double fenetreInfoTaille) {
@@ -14317,6 +14357,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de fenetreAideTaille.
+     *
      * @return the fenetreAideTaille
      */
     public double getFenetreAideTaille() {
@@ -14324,6 +14366,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de fenetreAideTaille.
+     *
      * @param fenetreAideTaille the fenetreAideTaille to set
      */
     public void setFenetreAideTaille(double fenetreAideTaille) {
@@ -14331,6 +14375,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de fenetreInfoPosX.
+     *
      * @return the fenetreInfoPosX
      */
     public double getFenetreInfoPosX() {
@@ -14338,6 +14384,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de fenetreInfoPosX.
+     *
      * @param fenetreInfoPosX the fenetreInfoPosX to set
      */
     public void setFenetreInfoPosX(double fenetreInfoPosX) {
@@ -14345,6 +14393,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de fenetreInfoPosY.
+     *
      * @return the fenetreInfoPosY
      */
     public double getFenetreInfoPosY() {
@@ -14352,6 +14402,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de fenetreInfoPosY.
+     *
      * @param fenetreInfoPosY the fenetreInfoPosY to set
      */
     public void setFenetreInfoPosY(double fenetreInfoPosY) {
@@ -14359,6 +14411,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de fenetreAidePosX.
+     *
      * @return the fenetreAidePosX
      */
     public double getFenetreAidePosX() {
@@ -14366,6 +14420,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de fenetreAidePosX.
+     *
      * @param fenetreAidePosX the fenetreAidePosX to set
      */
     public void setFenetreAidePosX(double fenetreAidePosX) {
@@ -14373,6 +14429,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de fenetreAidePosY.
+     *
      * @return the fenetreAidePosY
      */
     public double getFenetreAidePosY() {
@@ -14380,6 +14438,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de fenetreAidePosY.
+     *
      * @param fenetreAidePosY the fenetreAidePosY to set
      */
     public void setFenetreAidePosY(double fenetreAidePosY) {
@@ -14387,6 +14447,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de fenetreInfoposX.
+     *
      * @return the fenetreInfoposX
      */
     public double getFenetreInfoposX() {
@@ -14394,6 +14456,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de fenetreInfoposX.
+     *
      * @param fenetreInfoposX the fenetreInfoposX to set
      */
     public void setFenetreInfoposX(double fenetreInfoposX) {
@@ -14401,6 +14465,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de fenetreInfoOpacite.
+     *
      * @return the fenetreInfoOpacite
      */
     public double getFenetreInfoOpacite() {
@@ -14408,6 +14474,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de fenetreInfoOpacite.
+     *
      * @param fenetreInfoOpacite the fenetreInfoOpacite to set
      */
     public void setFenetreInfoOpacite(double fenetreInfoOpacite) {
@@ -14415,6 +14483,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de fenetreAideOpacite.
+     *
      * @return the fenetreAideOpacite
      */
     public double getFenetreAideOpacite() {
@@ -14422,6 +14492,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de fenetreAideOpacite.
+     *
      * @param fenetreAideOpacite the fenetreAideOpacite to set
      */
     public void setFenetreAideOpacite(double fenetreAideOpacite) {
@@ -14429,6 +14501,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de fenetrePoliceTaille.
+     *
      * @return the fenetrePoliceTaille
      */
     public double getFenetrePoliceTaille() {
@@ -14436,6 +14510,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de fenetrePoliceTaille.
+     *
      * @param fenetrePoliceTaille the fenetrePoliceTaille to set
      */
     public void setFenetrePoliceTaille(double fenetrePoliceTaille) {
@@ -14443,6 +14519,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de fenetreURLPosX.
+     *
      * @return the fenetreURLPosX
      */
     public double getFenetreURLPosX() {
@@ -14450,6 +14528,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de fenetreURLPosX.
+     *
      * @param fenetreURLPosX the fenetreURLPosX to set
      */
     public void setFenetreURLPosX(double fenetreURLPosX) {
@@ -14457,6 +14537,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de fenetreURLPosY.
+     *
      * @return the fenetreURLPosY
      */
     public double getFenetreURLPosY() {
@@ -14464,6 +14546,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de fenetreURLPosY.
+     *
      * @param fenetreURLPosY the fenetreURLPosY to set
      */
     public void setFenetreURLPosY(double fenetreURLPosY) {
@@ -14471,6 +14555,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de fenetreOpaciteFond.
+     *
      * @return the fenetreOpaciteFond
      */
     public double getFenetreOpaciteFond() {
@@ -14478,6 +14564,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de fenetreOpaciteFond.
+     *
      * @param fenetreOpaciteFond the fenetreOpaciteFond to set
      */
     public void setFenetreOpaciteFond(double fenetreOpaciteFond) {
@@ -14485,6 +14573,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de strFenetreInfoImage.
+     *
      * @return the strFenetreInfoImage
      */
     public String getStrFenetreInfoImage() {
@@ -14492,6 +14582,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de strFenetreInfoImage.
+     *
      * @param strFenetreInfoImage the strFenetreInfoImage to set
      */
     public void setStrFenetreInfoImage(String strFenetreInfoImage) {
@@ -14499,6 +14591,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de strFenetreAideImage.
+     *
      * @return the strFenetreAideImage
      */
     public String getStrFenetreAideImage() {
@@ -14506,6 +14600,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de strFenetreAideImage.
+     *
      * @param strFenetreAideImage the strFenetreAideImage to set
      */
     public void setStrFenetreAideImage(String strFenetreAideImage) {
@@ -14513,6 +14609,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de strFenetreURL.
+     *
      * @return the strFenetreURL
      */
     public String getStrFenetreURL() {
@@ -14520,6 +14618,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de strFenetreURL.
+     *
      * @param strFenetreURL the strFenetreURL to set
      */
     public void setStrFenetreURL(String strFenetreURL) {
@@ -14527,6 +14627,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de strFenetreTexteURL.
+     *
      * @return the strFenetreTexteURL
      */
     public String getStrFenetreTexteURL() {
@@ -14534,6 +14636,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de strFenetreTexteURL.
+     *
      * @param strFenetreTexteURL the strFenetreTexteURL to set
      */
     public void setStrFenetreTexteURL(String strFenetreTexteURL) {
@@ -14541,6 +14645,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de strFenetreURLInfobulle.
+     *
      * @return the strFenetreURLInfobulle
      */
     public String getStrFenetreURLInfobulle() {
@@ -14548,6 +14654,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de strFenetreURLInfobulle.
+     *
      * @param strFenetreURLInfobulle the strFenetreURLInfobulle to set
      */
     public void setStrFenetreURLInfobulle(String strFenetreURLInfobulle) {
@@ -14555,6 +14663,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de strFenetreURLCouleur.
+     *
      * @return the strFenetreURLCouleur
      */
     public String getStrFenetreURLCouleur() {
@@ -14562,6 +14672,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de strFenetreURLCouleur.
+     *
      * @param strFenetreURLCouleur the strFenetreURLCouleur to set
      */
     public void setStrFenetreURLCouleur(String strFenetreURLCouleur) {
@@ -14569,6 +14681,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de strFenetrePolice.
+     *
      * @return the strFenetrePolice
      */
     public String getStrFenetrePolice() {
@@ -14576,6 +14690,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de strFenetrePolice.
+     *
      * @param strFenetrePolice the strFenetrePolice to set
      */
     public void setStrFenetrePolice(String strFenetrePolice) {
@@ -14583,6 +14699,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de strFenetreCouleurFond.
+     *
      * @return the strFenetreCouleurFond
      */
     public String getStrFenetreCouleurFond() {
@@ -14590,6 +14708,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de strFenetreCouleurFond.
+     *
      * @param strFenetreCouleurFond the strFenetreCouleurFond to set
      */
     public void setStrFenetreCouleurFond(String strFenetreCouleurFond) {
@@ -14841,6 +14961,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de bMasqueCombo.
+     *
      * @param bMasqueCombo the bMasqueCombo to set
      */
     public void setbMasqueCombo(boolean bMasqueCombo) {
@@ -14848,6 +14970,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de bMasqueSuivPrec.
+     *
      * @return the bMasqueSuivPrec
      */
     public boolean isbMasqueSuivPrec() {
@@ -14855,6 +14979,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de bMasqueSuivPrec.
+     *
      * @param bMasqueSuivPrec the bMasqueSuivPrec to set
      */
     public void setbMasqueSuivPrec(boolean bMasqueSuivPrec) {
@@ -14862,6 +14988,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de bMasqueHotspots.
+     *
      * @return the bMasqueHotspots
      */
     public boolean isbMasqueHotspots() {
@@ -14869,6 +14997,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de bMasqueHotspots.
+     *
      * @param bMasqueHotspots the bMasqueHotspots to set
      */
     public void setbMasqueHotspots(boolean bMasqueHotspots) {
@@ -15039,6 +15169,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de bReseauxSociauxTwitter.
+     *
      * @return the bReseauxSociauxTwitter
      */
     public boolean isbReseauxSociauxTwitter() {
@@ -15046,6 +15178,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de bReseauxSociauxTwitter.
+     *
      * @param bReseauxSociauxTwitter the bReseauxSociauxTwitter to set
      */
     public void setbReseauxSociauxTwitter(boolean bReseauxSociauxTwitter) {
@@ -15053,6 +15187,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de bReseauxSociauxMeta.
+     *
      * @return the bReseauxSociauxMeta
      */
     public boolean isbReseauxSociauxMeta() {
@@ -15060,6 +15196,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de bReseauxSociauxMeta.
+     *
      * @param bReseauxSociauxMeta the bReseauxSociauxMeta to set
      */
     public void setbReseauxSociauxMeta(boolean bReseauxSociauxMeta) {
@@ -15067,6 +15205,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de bReseauxSociauxEmail.
+     *
      * @return the bReseauxSociauxEmail
      */
     public boolean isbReseauxSociauxEmail() {
@@ -15074,6 +15214,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de bReseauxSociauxEmail.
+     *
      * @param bReseauxSociauxEmail the bReseauxSociauxEmail to set
      */
     public void setbReseauxSociauxEmail(boolean bReseauxSociauxEmail) {
@@ -15190,6 +15332,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de bAfficheComboMenu.
+     *
      * @return the bAfficheComboMenu
      */
     public boolean isbAfficheComboMenu() {
@@ -15197,6 +15341,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de bAfficheComboMenu.
+     *
      * @param bAfficheComboMenu the bAfficheComboMenu to set
      */
     public void setbAfficheComboMenu(boolean bAfficheComboMenu) {
@@ -15204,6 +15350,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de bAfficheComboMenuImages.
+     *
      * @return the bAfficheComboMenuImages
      */
     public boolean isbAfficheComboMenuImages() {
@@ -15211,6 +15359,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de bAfficheComboMenuImages.
+     *
      * @param bAfficheComboMenuImages the bAfficheComboMenuImages to set
      */
     public void setbAfficheComboMenuImages(boolean bAfficheComboMenuImages) {
@@ -15218,6 +15368,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de strPositionXComboMenu.
+     *
      * @return the strPositionXComboMenu
      */
     public String getStrPositionXComboMenu() {
@@ -15225,6 +15377,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de strPositionXComboMenu.
+     *
      * @param strPositionXComboMenu the strPositionXComboMenu to set
      */
     public void setStrPositionXComboMenu(String strPositionXComboMenu) {
@@ -15232,6 +15386,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de strPositionYComboMenu.
+     *
      * @return the strPositionYComboMenu
      */
     public String getStrPositionYComboMenu() {
@@ -15239,6 +15395,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de strPositionYComboMenu.
+     *
      * @param strPositionYComboMenu the strPositionYComboMenu to set
      */
     public void setStrPositionYComboMenu(String strPositionYComboMenu) {
@@ -15246,6 +15404,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de offsetXComboMenu.
+     *
      * @return the offsetXComboMenu
      */
     public double getOffsetXComboMenu() {
@@ -15253,6 +15413,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de offsetXComboMenu.
+     *
      * @param offsetXComboMenu the offsetXComboMenu to set
      */
     public void setOffsetXComboMenu(double offsetXComboMenu) {
@@ -15260,6 +15422,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de offsetYComboMenu.
+     *
      * @return the offsetYComboMenu
      */
     public double getOffsetYComboMenu() {
@@ -15267,6 +15431,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de offsetYComboMenu.
+     *
      * @param offsetYComboMenu the offsetYComboMenu to set
      */
     public void setOffsetYComboMenu(double offsetYComboMenu) {
@@ -15274,6 +15440,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de bAffichePlan.
+     *
      * @return the bAffichePlan
      */
     public boolean isbAffichePlan() {
@@ -15281,6 +15449,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de bAffichePlan.
+     *
      * @param bAffichePlan the bAffichePlan to set
      */
     public void setbAffichePlan(boolean bAffichePlan) {
@@ -15288,6 +15458,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de strPositionPlan.
+     *
      * @return the strPositionPlan
      */
     public String getStrPositionPlan() {
@@ -15295,6 +15467,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de strPositionPlan.
+     *
      * @param strPositionPlan the strPositionPlan to set
      */
     public void setStrPositionPlan(String strPositionPlan) {
@@ -15302,6 +15476,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de largeurPlan.
+     *
      * @return the largeurPlan
      */
     public double getLargeurPlan() {
@@ -15309,6 +15485,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de largeurPlan.
+     *
      * @param largeurPlan the largeurPlan to set
      */
     public void setLargeurPlan(double largeurPlan) {
@@ -15316,6 +15494,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de couleurFondPlan.
+     *
      * @return the couleurFondPlan
      */
     public Color getCouleurFondPlan() {
@@ -15323,6 +15503,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de couleurFondPlan.
+     *
      * @param couleurFondPlan the couleurFondPlan to set
      */
     public void setCouleurFondPlan(Color couleurFondPlan) {
@@ -15330,6 +15512,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de strCouleurFondPlan.
+     *
      * @return the strCouleurFondPlan
      */
     public String getStrCouleurFondPlan() {
@@ -15337,6 +15521,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de strCouleurFondPlan.
+     *
      * @param strCouleurFondPlan the strCouleurFondPlan to set
      */
     public void setStrCouleurFondPlan(String strCouleurFondPlan) {
@@ -15344,6 +15530,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de opacitePlan.
+     *
      * @return the opacitePlan
      */
     public double getOpacitePlan() {
@@ -15351,6 +15539,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de opacitePlan.
+     *
      * @param opacitePlan the opacitePlan to set
      */
     public void setOpacitePlan(double opacitePlan) {
@@ -15358,6 +15548,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de couleurTextePlan.
+     *
      * @return the couleurTextePlan
      */
     public Color getCouleurTextePlan() {
@@ -15365,6 +15557,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de couleurTextePlan.
+     *
      * @param couleurTextePlan the couleurTextePlan to set
      */
     public void setCouleurTextePlan(Color couleurTextePlan) {
@@ -15372,6 +15566,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de strCouleurTextePlan.
+     *
      * @return the strCouleurTextePlan
      */
     public String getStrCouleurTextePlan() {
@@ -15379,6 +15575,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de strCouleurTextePlan.
+     *
      * @param strCouleurTextePlan the strCouleurTextePlan to set
      */
     public void setStrCouleurTextePlan(String strCouleurTextePlan) {
@@ -15386,6 +15584,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de bAfficheRadar.
+     *
      * @return the bAfficheRadar
      */
     public boolean isbAfficheRadar() {
@@ -15393,6 +15593,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de bAfficheRadar.
+     *
      * @param bAfficheRadar the bAfficheRadar to set
      */
     public void setbAfficheRadar(boolean bAfficheRadar) {
@@ -15400,6 +15602,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de couleurLigneRadar.
+     *
      * @return the couleurLigneRadar
      */
     public Color getCouleurLigneRadar() {
@@ -15407,6 +15611,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de couleurLigneRadar.
+     *
      * @param couleurLigneRadar the couleurLigneRadar to set
      */
     public void setCouleurLigneRadar(Color couleurLigneRadar) {
@@ -15414,6 +15620,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de strCouleurLigneRadar.
+     *
      * @return the strCouleurLigneRadar
      */
     public String getStrCouleurLigneRadar() {
@@ -15421,6 +15629,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de strCouleurLigneRadar.
+     *
      * @param strCouleurLigneRadar the strCouleurLigneRadar to set
      */
     public void setStrCouleurLigneRadar(String strCouleurLigneRadar) {
@@ -15428,6 +15638,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de couleurFondRadar.
+     *
      * @return the couleurFondRadar
      */
     public Color getCouleurFondRadar() {
@@ -15435,6 +15647,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de couleurFondRadar.
+     *
      * @param couleurFondRadar the couleurFondRadar to set
      */
     public void setCouleurFondRadar(Color couleurFondRadar) {
@@ -15442,6 +15656,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de strCouleurFondRadar.
+     *
      * @return the strCouleurFondRadar
      */
     public String getStrCouleurFondRadar() {
@@ -15449,6 +15665,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de strCouleurFondRadar.
+     *
      * @param strCouleurFondRadar the strCouleurFondRadar to set
      */
     public void setStrCouleurFondRadar(String strCouleurFondRadar) {
@@ -15456,6 +15674,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de tailleRadar.
+     *
      * @return the tailleRadar
      */
     public double getTailleRadar() {
@@ -15463,6 +15683,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de tailleRadar.
+     *
      * @param tailleRadar the tailleRadar to set
      */
     public void setTailleRadar(double tailleRadar) {
@@ -15470,6 +15692,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de opaciteRadar.
+     *
      * @return the opaciteRadar
      */
     public double getOpaciteRadar() {
@@ -15477,6 +15701,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de opaciteRadar.
+     *
      * @param opaciteRadar the opaciteRadar to set
      */
     public void setOpaciteRadar(double opaciteRadar) {
@@ -15484,6 +15710,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de bAfficheMenuContextuel.
+     *
      * @return the bAfficheMenuContextuel
      */
     public boolean isbAfficheMenuContextuel() {
@@ -15491,6 +15719,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de bAfficheMenuContextuel.
+     *
      * @param bAfficheMenuContextuel the bAfficheMenuContextuel to set
      */
     public void setbAfficheMenuContextuel(boolean bAfficheMenuContextuel) {
@@ -15498,6 +15728,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de bAffichePrecSuivMC.
+     *
      * @return the bAffichePrecSuivMC
      */
     public boolean isbAffichePrecSuivMC() {
@@ -15505,6 +15737,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de bAffichePrecSuivMC.
+     *
      * @param bAffichePrecSuivMC the bAffichePrecSuivMC to set
      */
     public void setbAffichePrecSuivMC(boolean bAffichePrecSuivMC) {
@@ -15512,6 +15746,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de bAffichePlanetNormalMC.
+     *
      * @return the bAffichePlanetNormalMC
      */
     public boolean isbAffichePlanetNormalMC() {
@@ -15519,6 +15755,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de bAffichePlanetNormalMC.
+     *
      * @param bAffichePlanetNormalMC the bAffichePlanetNormalMC to set
      */
     public void setbAffichePlanetNormalMC(boolean bAffichePlanetNormalMC) {
@@ -15526,6 +15764,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de bAffichePersMC1.
+     *
      * @return the bAffichePersMC1
      */
     public boolean isbAffichePersMC1() {
@@ -15533,6 +15773,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de bAffichePersMC1.
+     *
      * @param bAffichePersMC1 the bAffichePersMC1 to set
      */
     public void setbAffichePersMC1(boolean bAffichePersMC1) {
@@ -15540,6 +15782,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de strPersLib1.
+     *
      * @return the strPersLib1
      */
     public String getStrPersLib1() {
@@ -15547,6 +15791,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de strPersLib1.
+     *
      * @param strPersLib1 the strPersLib1 to set
      */
     public void setStrPersLib1(String strPersLib1) {
@@ -15554,6 +15800,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de strPersURL1.
+     *
      * @return the strPersURL1
      */
     public String getStrPersURL1() {
@@ -15561,6 +15809,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de strPersURL1.
+     *
      * @param strPersURL1 the strPersURL1 to set
      */
     public void setStrPersURL1(String strPersURL1) {
@@ -15568,6 +15818,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de bAffichePersMC2.
+     *
      * @return the bAffichePersMC2
      */
     public boolean isbAffichePersMC2() {
@@ -15575,6 +15827,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de bAffichePersMC2.
+     *
      * @param bAffichePersMC2 the bAffichePersMC2 to set
      */
     public void setbAffichePersMC2(boolean bAffichePersMC2) {
@@ -15582,6 +15836,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de strPersLib2.
+     *
      * @return the strPersLib2
      */
     public String getStrPersLib2() {
@@ -15589,6 +15845,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de strPersLib2.
+     *
      * @param strPersLib2 the strPersLib2 to set
      */
     public void setStrPersLib2(String strPersLib2) {
@@ -15596,6 +15854,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de strPersURL2.
+     *
      * @return the strPersURL2
      */
     public String getStrPersURL2() {
@@ -15603,6 +15863,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de strPersURL2.
+     *
      * @param strPersURL2 the strPersURL2 to set
      */
     public void setStrPersURL2(String strPersURL2) {
@@ -15610,6 +15872,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de bSuivantPrecedent.
+     *
      * @return the bSuivantPrecedent
      */
     public boolean isbSuivantPrecedent() {
@@ -15617,6 +15881,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de bSuivantPrecedent.
+     *
      * @param bSuivantPrecedent the bSuivantPrecedent to set
      */
     public void setbSuivantPrecedent(boolean bSuivantPrecedent) {
@@ -15624,6 +15890,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de imgBoutons.
+     *
      * @return the imgBoutons
      */
     public Image[] getImgBoutons() {
@@ -15631,6 +15899,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de imgBoutons.
+     *
      * @param imgBoutons the imgBoutons to set
      */
     public void setImgBoutons(Image[] imgBoutons) {
@@ -15638,6 +15908,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de strNomImagesBoutons.
+     *
      * @return the strNomImagesBoutons
      */
     public String[] getStrNomImagesBoutons() {
@@ -15645,6 +15917,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de strNomImagesBoutons.
+     *
      * @param strNomImagesBoutons the strNomImagesBoutons to set
      */
     public void setStrNomImagesBoutons(String[] strNomImagesBoutons) {
@@ -15652,6 +15926,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de prLisBoutons.
+     *
      * @return the prLisBoutons
      */
     public PixelReader[] getPrLisBoutons() {
@@ -15659,6 +15935,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de prLisBoutons.
+     *
      * @param prLisBoutons the prLisBoutons to set
      */
     public void setPrLisBoutons(PixelReader[] prLisBoutons) {
@@ -15666,6 +15944,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de wiNouveauxBoutons.
+     *
      * @return the wiNouveauxBoutons
      */
     public WritableImage[] getWiNouveauxBoutons() {
@@ -15673,6 +15953,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de wiNouveauxBoutons.
+     *
      * @param wiNouveauxBoutons the wiNouveauxBoutons to set
      */
     public void setWiNouveauxBoutons(WritableImage[] wiNouveauxBoutons) {
@@ -15680,6 +15962,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de pwNouveauxBoutons.
+     *
      * @return the pwNouveauxBoutons
      */
     public PixelWriter[] getPwNouveauxBoutons() {
@@ -15687,6 +15971,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de pwNouveauxBoutons.
+     *
      * @param pwNouveauxBoutons the pwNouveauxBoutons to set
      */
     public void setPwNouveauxBoutons(PixelWriter[] pwNouveauxBoutons) {
@@ -15694,6 +15980,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de iNombreImagesBouton.
+     *
      * @return the iNombreImagesBouton
      */
     public int getiNombreImagesBouton() {
@@ -15701,6 +15989,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de iNombreImagesBouton.
+     *
      * @param iNombreImagesBouton the iNombreImagesBouton to set
      */
     public void setiNombreImagesBouton(int iNombreImagesBouton) {
@@ -15708,6 +15998,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de imgMasque.
+     *
      * @return the imgMasque
      */
     public Image getImgMasque() {
@@ -15715,6 +16007,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de imgMasque.
+     *
      * @param imgMasque the imgMasque to set
      */
     public void setImgMasque(Image imgMasque) {
@@ -15722,6 +16016,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de prLisMasque.
+     *
      * @return the prLisMasque
      */
     public PixelReader getPrLisMasque() {
@@ -15729,6 +16025,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de prLisMasque.
+     *
      * @param prLisMasque the prLisMasque to set
      */
     public void setPrLisMasque(PixelReader prLisMasque) {
@@ -15736,6 +16034,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de wiNouveauxMasque.
+     *
      * @return the wiNouveauxMasque
      */
     public WritableImage getWiNouveauxMasque() {
@@ -15743,6 +16043,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de wiNouveauxMasque.
+     *
      * @param wiNouveauxMasque the wiNouveauxMasque to set
      */
     public void setWiNouveauxMasque(WritableImage wiNouveauxMasque) {
@@ -15750,6 +16052,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de pwNouveauxMasque.
+     *
      * @return the pwNouveauxMasque
      */
     public PixelWriter getPwNouveauxMasque() {
@@ -15757,6 +16061,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de pwNouveauxMasque.
+     *
      * @param pwNouveauxMasque the pwNouveauxMasque to set
      */
     public void setPwNouveauxMasque(PixelWriter pwNouveauxMasque) {
@@ -15764,6 +16070,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de imagesFond.
+     *
      * @return the imagesFond
      */
     public ImageFond[] getImagesFond() {
@@ -15771,6 +16079,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de imagesFond.
+     *
      * @param imagesFond the imagesFond to set
      */
     public void setImagesFond(ImageFond[] imagesFond) {
@@ -15778,6 +16088,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de iNombreImagesFond.
+     *
      * @return the iNombreImagesFond
      */
     public int getiNombreImagesFond() {
@@ -15785,6 +16097,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de iNombreImagesFond.
+     *
      * @param iNombreImagesFond the iNombreImagesFond to set
      */
     public void setiNombreImagesFond(int iNombreImagesFond) {
@@ -15792,6 +16106,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de strStyleHotSpots.
+     *
      * @return the strStyleHotSpots
      */
     public String getStrStyleHotSpots() {
@@ -15799,6 +16115,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de strStyleHotSpots.
+     *
      * @param strStyleHotSpots the strStyleHotSpots to set
      */
     public void setStrStyleHotSpots(String strStyleHotSpots) {
@@ -15806,6 +16124,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de strStyleHotSpotImages.
+     *
      * @return the strStyleHotSpotImages
      */
     public String getStrStyleHotSpotImages() {
@@ -15813,6 +16133,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de strStyleHotSpotImages.
+     *
      * @param strStyleHotSpotImages the strStyleHotSpotImages to set
      */
     public void setStrStyleHotSpotImages(String strStyleHotSpotImages) {
@@ -15820,6 +16142,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de zonesBarrePersonnalisee.
+     *
      * @return the zonesBarrePersonnalisee
      */
     public ZoneTelecommande[] getZonesBarrePersonnalisee() {
@@ -15827,6 +16151,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de zonesBarrePersonnalisee.
+     *
      * @param zonesBarrePersonnalisee the zonesBarrePersonnalisee to set
      */
     public void setZonesBarrePersonnalisee(ZoneTelecommande[] zonesBarrePersonnalisee) {
@@ -15834,6 +16160,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de strStyleHotSpotHTML.
+     *
      * @return the strStyleHotSpotHTML
      */
     public String getStrStyleHotSpotHTML() {
@@ -15841,6 +16169,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de strStyleHotSpotHTML.
+     *
      * @param strStyleHotSpotHTML the strStyleHotSpotHTML to set
      */
     public void setStrStyleHotSpotHTML(String strStyleHotSpotHTML) {
@@ -15848,6 +16178,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de bAfficheCarte.
+     *
      * @return the bAfficheCarte
      */
     public boolean isbAfficheCarte() {
@@ -15855,6 +16187,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de bAfficheCarte.
+     *
      * @param bAfficheCarte the bAfficheCarte to set
      */
     public void setbAfficheCarte(boolean bAfficheCarte) {
@@ -15862,6 +16196,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de strPositionCarte.
+     *
      * @return the strPositionCarte
      */
     public String getStrPositionCarte() {
@@ -15869,6 +16205,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de strPositionCarte.
+     *
      * @param strPositionCarte the strPositionCarte to set
      */
     public void setStrPositionCarte(String strPositionCarte) {
@@ -15876,6 +16214,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de largeurCarte.
+     *
      * @return the largeurCarte
      */
     public double getLargeurCarte() {
@@ -15883,6 +16223,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de largeurCarte.
+     *
      * @param largeurCarte the largeurCarte to set
      */
     public void setLargeurCarte(double largeurCarte) {
@@ -15890,6 +16232,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de couleurFondCarte.
+     *
      * @return the couleurFondCarte
      */
     public Color getCouleurFondCarte() {
@@ -15897,6 +16241,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de couleurFondCarte.
+     *
      * @param couleurFondCarte the couleurFondCarte to set
      */
     public void setCouleurFondCarte(Color couleurFondCarte) {
@@ -15904,6 +16250,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de strCouleurFondCarte.
+     *
      * @return the strCouleurFondCarte
      */
     public String getStrCouleurFondCarte() {
@@ -15911,6 +16259,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de strCouleurFondCarte.
+     *
      * @param strCouleurFondCarte the strCouleurFondCarte to set
      */
     public void setStrCouleurFondCarte(String strCouleurFondCarte) {
@@ -15918,6 +16268,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de opaciteCarte.
+     *
      * @return the opaciteCarte
      */
     public double getOpaciteCarte() {
@@ -15925,6 +16277,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de opaciteCarte.
+     *
      * @param opaciteCarte the opaciteCarte to set
      */
     public void setOpaciteCarte(double opaciteCarte) {
@@ -15932,6 +16286,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de couleurTexteCarte.
+     *
      * @return the couleurTexteCarte
      */
     public Color getCouleurTexteCarte() {
@@ -15939,6 +16295,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de couleurTexteCarte.
+     *
      * @param couleurTexteCarte the couleurTexteCarte to set
      */
     public void setCouleurTexteCarte(Color couleurTexteCarte) {
@@ -15946,6 +16304,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de strCouleurTexteCarte.
+     *
      * @return the strCouleurTexteCarte
      */
     public String getStrCouleurTexteCarte() {
@@ -15953,6 +16313,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de strCouleurTexteCarte.
+     *
      * @param strCouleurTexteCarte the strCouleurTexteCarte to set
      */
     public void setStrCouleurTexteCarte(String strCouleurTexteCarte) {
@@ -15960,6 +16322,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de bAfficheRadarCarte.
+     *
      * @return the bAfficheRadarCarte
      */
     public boolean isbAfficheRadarCarte() {
@@ -15967,6 +16331,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de bAfficheRadarCarte.
+     *
      * @param bAfficheRadarCarte the bAfficheRadarCarte to set
      */
     public void setbAfficheRadarCarte(boolean bAfficheRadarCarte) {
@@ -15974,6 +16340,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de couleurLigneRadarCarte.
+     *
      * @return the couleurLigneRadarCarte
      */
     public Color getCouleurLigneRadarCarte() {
@@ -15981,6 +16349,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de couleurLigneRadarCarte.
+     *
      * @param couleurLigneRadarCarte the couleurLigneRadarCarte to set
      */
     public void setCouleurLigneRadarCarte(Color couleurLigneRadarCarte) {
@@ -15988,6 +16358,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de strCouleurLigneRadarCarte.
+     *
      * @return the strCouleurLigneRadarCarte
      */
     public String getStrCouleurLigneRadarCarte() {
@@ -15995,6 +16367,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de strCouleurLigneRadarCarte.
+     *
      * @param strCouleurLigneRadarCarte the strCouleurLigneRadarCarte to set
      */
     public void setStrCouleurLigneRadarCarte(String strCouleurLigneRadarCarte) {
@@ -16002,6 +16376,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de couleurFondRadarCarte.
+     *
      * @return the couleurFondRadarCarte
      */
     public Color getCouleurFondRadarCarte() {
@@ -16009,6 +16385,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de couleurFondRadarCarte.
+     *
      * @param couleurFondRadarCarte the couleurFondRadarCarte to set
      */
     public void setCouleurFondRadarCarte(Color couleurFondRadarCarte) {
@@ -16016,6 +16394,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de strCouleurFondRadarCarte.
+     *
      * @return the strCouleurFondRadarCarte
      */
     public String getStrCouleurFondRadarCarte() {
@@ -16023,6 +16403,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de strCouleurFondRadarCarte.
+     *
      * @param strCouleurFondRadarCarte the strCouleurFondRadarCarte to set
      */
     public void setStrCouleurFondRadarCarte(String strCouleurFondRadarCarte) {
@@ -16030,6 +16412,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de tailleRadarCarte.
+     *
      * @return the tailleRadarCarte
      */
     public double getTailleRadarCarte() {
@@ -16037,6 +16421,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de tailleRadarCarte.
+     *
      * @param tailleRadarCarte the tailleRadarCarte to set
      */
     public void setTailleRadarCarte(double tailleRadarCarte) {
@@ -16044,6 +16430,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de opaciteRadarCarte.
+     *
      * @return the opaciteRadarCarte
      */
     public double getOpaciteRadarCarte() {
@@ -16051,6 +16439,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de opaciteRadarCarte.
+     *
      * @param opaciteRadarCarte the opaciteRadarCarte to set
      */
     public void setOpaciteRadarCarte(double opaciteRadarCarte) {
@@ -16058,6 +16448,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de hauteurCarte.
+     *
      * @return the hauteurCarte
      */
     public double getHauteurCarte() {
@@ -16065,6 +16457,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de hauteurCarte.
+     *
      * @param hauteurCarte the hauteurCarte to set
      */
     public void setHauteurCarte(double hauteurCarte) {
@@ -16072,6 +16466,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de iFacteurZoomCarte.
+     *
      * @return the iFacteurZoomCarte
      */
     public int getiFacteurZoomCarte() {
@@ -16079,6 +16475,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de iFacteurZoomCarte.
+     *
      * @param iFacteurZoomCarte the iFacteurZoomCarte to set
      */
     public void setiFacteurZoomCarte(int iFacteurZoomCarte) {
@@ -16086,6 +16484,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de coordCentreCarte.
+     *
      * @return the coordCentreCarte
      */
     public CoordonneesGeographiques getCoordCentreCarte() {
@@ -16093,6 +16493,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de coordCentreCarte.
+     *
      * @param coordCentreCarte the coordCentreCarte to set
      */
     public void setCoordCentreCarte(CoordonneesGeographiques coordCentreCarte) {
@@ -16100,6 +16502,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de slZoomCarte.
+     *
      * @return the slZoomCarte
      */
     public Slider getSlZoomCarte() {
@@ -16107,6 +16511,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de slZoomCarte.
+     *
      * @param slZoomCarte the slZoomCarte to set
      */
     public void setSlZoomCarte(Slider slZoomCarte) {
@@ -16114,6 +16520,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de strNomLayers.
+     *
      * @return the strNomLayers
      */
     public String getStrNomLayers() {
@@ -16121,6 +16529,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de strNomLayers.
+     *
      * @param strNomLayers the strNomLayers to set
      */
     public void setStrNomLayers(String strNomLayers) {
@@ -16176,6 +16586,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de bTemplate.
+     *
      * @return the bTemplate
      */
     public boolean isbTemplate() {
@@ -16183,6 +16595,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de bTemplate.
+     *
      * @param bTemplate the bTemplate to set
      */
     public void setbTemplate(boolean bTemplate) {
@@ -16190,6 +16604,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de bAfficheBoutonVisiteAuto.
+     *
      * @return the bAfficheBoutonVisiteAuto
      */
     public boolean isbAfficheBoutonVisiteAuto() {
@@ -16197,6 +16613,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de bAfficheBoutonVisiteAuto.
+     *
      * @param bAfficheBoutonVisiteAuto the bAfficheBoutonVisiteAuto to set
      */
     public void setbAfficheBoutonVisiteAuto(boolean bAfficheBoutonVisiteAuto) {
@@ -16204,6 +16622,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de strPositionXBoutonVisiteAuto.
+     *
      * @return the strPositionXBoutonVisiteAuto
      */
     public String getStrPositionXBoutonVisiteAuto() {
@@ -16219,6 +16639,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de strPositionYBoutonVisiteAuto.
+     *
      * @return the strPositionYBoutonVisiteAuto
      */
     public String getStrPositionYBoutonVisiteAuto() {
@@ -16234,6 +16656,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de offsetXBoutonVisiteAuto.
+     *
      * @return the offsetXBoutonVisiteAuto
      */
     public double getOffsetXBoutonVisiteAuto() {
@@ -16241,6 +16665,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de offsetXBoutonVisiteAuto.
+     *
      * @param offsetXBoutonVisiteAuto the offsetXBoutonVisiteAuto to set
      */
     public void setOffsetXBoutonVisiteAuto(double offsetXBoutonVisiteAuto) {
@@ -16248,6 +16674,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de offsetYBoutonVisiteAuto.
+     *
      * @return the offsetYBoutonVisiteAuto
      */
     public double getOffsetYBoutonVisiteAuto() {
@@ -16255,6 +16683,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de offsetYBoutonVisiteAuto.
+     *
      * @param offsetYBoutonVisiteAuto the offsetYBoutonVisiteAuto to set
      */
     public void setOffsetYBoutonVisiteAuto(double offsetYBoutonVisiteAuto) {
@@ -16262,6 +16692,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de cbAfficheBoutonVisiteAuto.
+     *
      * @return the cbAfficheBoutonVisiteAuto
      */
     public CheckBox getCbAfficheBoutonVisiteAuto() {
@@ -16269,6 +16701,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de cbAfficheBoutonVisiteAuto.
+     *
      * @param cbAfficheBoutonVisiteAuto the cbAfficheBoutonVisiteAuto to set
      */
     public void setCbAfficheBoutonVisiteAuto(CheckBox cbAfficheBoutonVisiteAuto) {
@@ -16276,6 +16710,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de apBtnVA.
+     *
      * @return the apBtnVA
      */
     public AnchorPane getApBtnVA() {
@@ -16283,6 +16719,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de apBtnVA.
+     *
      * @param apBtnVA the apBtnVA to set
      */
     public void setApBtnVA(AnchorPane apBtnVA) {
@@ -16290,6 +16728,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de tailleBoutonVisiteAuto.
+     *
      * @return the tailleBoutonVisiteAuto
      */
     public double getTailleBoutonVisiteAuto() {
@@ -16297,6 +16737,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de tailleBoutonVisiteAuto.
+     *
      * @param tailleBoutonVisiteAuto the tailleBoutonVisiteAuto to set
      */
     public void setTailleBoutonVisiteAuto(double tailleBoutonVisiteAuto) {
@@ -16304,6 +16746,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de strTitrePosition.
+     *
      * @return the strTitrePosition
      */
     public String getStrTitrePosition() {
@@ -16311,6 +16755,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de strTitrePosition.
+     *
      * @param strTitrePosition the strTitrePosition to set
      */
     public void setStrTitrePosition(String strTitrePosition) {
@@ -16318,6 +16764,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de titreDecalage.
+     *
      * @return the titreDecalage
      */
     public double getTitreDecalage() {
@@ -16325,6 +16773,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de titreDecalage.
+     *
      * @param titreDecalage the titreDecalage to set
      */
     public void setTitreDecalage(double titreDecalage) {
@@ -16332,6 +16782,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de bTitreVisite.
+     *
      * @return the bTitreVisite
      */
     public boolean isbTitreVisite() {
@@ -16339,6 +16791,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de bTitreVisite.
+     *
      * @param bTitreVisite the bTitreVisite to set
      */
     public void setbTitreVisite(boolean bTitreVisite) {
@@ -16346,6 +16800,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de bTitrePanoramique.
+     *
      * @return the bTitrePanoramique
      */
     public boolean isbTitrePanoramique() {
@@ -16353,6 +16809,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de bTitrePanoramique.
+     *
      * @param bTitrePanoramique the bTitrePanoramique to set
      */
     public void setbTitrePanoramique(boolean bTitrePanoramique) {
@@ -16360,6 +16818,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de bTitreAdapte.
+     *
      * @return the bTitreAdapte
      */
     public boolean isbTitreAdapte() {
@@ -16367,6 +16827,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de bTitreAdapte.
+     *
      * @param bTitreAdapte the bTitreAdapte to set
      */
     public void setbTitreAdapte(boolean bTitreAdapte) {
@@ -16374,6 +16836,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de iTailleHotspotsPanoramique.
+     *
      * @return the iTailleHotspotsPanoramique
      */
     public int getiTailleHotspotsPanoramique() {
@@ -16381,6 +16845,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de iTailleHotspotsPanoramique.
+     *
      * @param iTailleHotspotsPanoramique the iTailleHotspotsPanoramique to set
      */
     public void setiTailleHotspotsPanoramique(int iTailleHotspotsPanoramique) {
@@ -16388,6 +16854,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de iTailleHotspotsImage.
+     *
      * @return the iTailleHotspotsImage
      */
     public int getiTailleHotspotsImage() {
@@ -16395,6 +16863,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de iTailleHotspotsImage.
+     *
      * @param iTailleHotspotsImage the iTailleHotspotsImage to set
      */
     public void setiTailleHotspotsImage(int iTailleHotspotsImage) {
@@ -16402,6 +16872,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de iTailleHotspotsHTML.
+     *
      * @return the iTailleHotspotsHTML
      */
     public int getiTailleHotspotsHTML() {
@@ -16409,6 +16881,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de iTailleHotspotsHTML.
+     *
      * @param iTailleHotspotsHTML the iTailleHotspotsHTML to set
      */
     public void setiTailleHotspotsHTML(int iTailleHotspotsHTML) {
@@ -16416,6 +16890,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de bHotspotsPanoAnimesDefaut.
+     *
      * @return the bHotspotsPanoAnimesDefaut
      */
     public boolean isbHotspotsPanoAnimesDefaut() {
@@ -16423,6 +16899,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de bHotspotsPanoAnimesDefaut.
+     *
      * @param bHotspotsPanoAnimesDefaut the bHotspotsPanoAnimesDefaut to set
      */
     public void setbHotspotsPanoAnimesDefaut(boolean bHotspotsPanoAnimesDefaut) {
@@ -16430,6 +16908,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de bHotspotsPhotoAnimesDefaut.
+     *
      * @return the bHotspotsPhotoAnimesDefaut
      */
     public boolean isbHotspotsPhotoAnimesDefaut() {
@@ -16437,6 +16917,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de bHotspotsPhotoAnimesDefaut.
+     *
      * @param bHotspotsPhotoAnimesDefaut the bHotspotsPhotoAnimesDefaut to set
      */
     public void setbHotspotsPhotoAnimesDefaut(boolean bHotspotsPhotoAnimesDefaut) {
@@ -16444,6 +16926,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de bHotspotsHTMLAnimesDefaut.
+     *
      * @return the bHotspotsHTMLAnimesDefaut
      */
     public boolean isbHotspotsHTMLAnimesDefaut() {
@@ -16451,6 +16935,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de bHotspotsHTMLAnimesDefaut.
+     *
      * @param bHotspotsHTMLAnimesDefaut the bHotspotsHTMLAnimesDefaut to set
      */
     public void setbHotspotsHTMLAnimesDefaut(boolean bHotspotsHTMLAnimesDefaut) {
@@ -16500,6 +16986,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de bHotspotsPanoAgrandisDefaut.
+     *
      * @return the bHotspotsPanoAgrandisDefaut
      */
     public boolean isbHotspotsPanoAgrandisDefaut() {
@@ -16507,6 +16995,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de bHotspotsPanoAgrandisDefaut.
+     *
      * @param bHotspotsPanoAgrandisDefaut the bHotspotsPanoAgrandisDefaut to set
      */
     public void setbHotspotsPanoAgrandisDefaut(boolean bHotspotsPanoAgrandisDefaut) {
@@ -16514,6 +17004,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de bHotspotsPhotoAgrandisDefaut.
+     *
      * @return the bHotspotsPhotoAgrandisDefaut
      */
     public boolean isbHotspotsPhotoAgrandisDefaut() {
@@ -16521,6 +17013,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de bHotspotsPhotoAgrandisDefaut.
+     *
      * @param bHotspotsPhotoAgrandisDefaut the bHotspotsPhotoAgrandisDefaut to set
      */
     public void setbHotspotsPhotoAgrandisDefaut(boolean bHotspotsPhotoAgrandisDefaut) {
@@ -16528,6 +17022,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de bHotspotsHTMLAgrandisDefaut.
+     *
      * @return the bHotspotsHTMLAgrandisDefaut
      */
     public boolean isbHotspotsHTMLAgrandisDefaut() {
@@ -16535,6 +17031,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de bHotspotsHTMLAgrandisDefaut.
+     *
      * @param bHotspotsHTMLAgrandisDefaut the bHotspotsHTMLAgrandisDefaut to set
      */
     public void setbHotspotsHTMLAgrandisDefaut(boolean bHotspotsHTMLAgrandisDefaut) {
@@ -16542,6 +17040,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de couleurFondTheme.
+     *
      * @return the couleurFondTheme
      */
     public Color getCouleurFondTheme() {
@@ -16549,6 +17049,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de couleurFondTheme.
+     *
      * @param couleurFondTheme the couleurFondTheme to set
      */
     public void setCouleurFondTheme(Color couleurFondTheme) {
@@ -16577,6 +17079,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de opaciteTheme.
+     *
      * @return the opaciteTheme
      */
     public double getOpaciteTheme() {
@@ -16584,6 +17088,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de iCalqueTitre.
+     *
      * @return the iCalqueTitre
      */
     public int getiCalqueTitre() {
@@ -16591,6 +17097,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de iCalqueTitre.
+     *
      * @param iCalqueTitre the iCalqueTitre to set
      */
     public void setiCalqueTitre(int iCalqueTitre) {
@@ -16598,6 +17106,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de iCalqueBarreClassique.
+     *
      * @return the iCalqueBarreClassique
      */
     public int getiCalqueBarreClassique() {
@@ -16605,6 +17115,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de iCalqueBarreClassique.
+     *
      * @param iCalqueBarreClassique the iCalqueBarreClassique to set
      */
     public void setiCalqueBarreClassique(int iCalqueBarreClassique) {
@@ -16612,6 +17124,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de iCalqueBarrePersonnalisée.
+     *
      * @return the iCalqueBarrePersonnalisée
      */
     public int getiCalqueBarrePersonnalisee() {
@@ -16619,6 +17133,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de iCalqueBarrePersonnalisee.
+     *
      * @param iCalqueBarrePersonnalisee the iCalqueBarrePersonnalisee to set
      */
     public void setiCalqueBarrePersonnalisee(int iCalqueBarrePersonnalisee) {
@@ -16626,6 +17142,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de iCalqueMasquage.
+     *
      * @return the iCalqueMasquage
      */
     public int getiCalqueMasquage() {
@@ -16633,6 +17151,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de iCalqueMasquage.
+     *
      * @param iCalqueMasquage the iCalqueMasquage to set
      */
     public void setiCalqueMasquage(int iCalqueMasquage) {
@@ -16640,6 +17160,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de iCalqueVisiteAuto.
+     *
      * @return the iCalqueVisiteAuto
      */
     public int getiCalqueVisiteAuto() {
@@ -16647,6 +17169,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de iCalqueVisiteAuto.
+     *
      * @param iCalqueVisiteAuto the iCalqueVisiteAuto to set
      */
     public void setiCalqueVisiteAuto(int iCalqueVisiteAuto) {
@@ -16654,6 +17178,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de iCalquePartage.
+     *
      * @return the iCalquePartage
      */
     public int getiCalquePartage() {
@@ -16661,6 +17187,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de iCalquePartage.
+     *
      * @param iCalquePartage the iCalquePartage to set
      */
     public void setiCalquePartage(int iCalquePartage) {
@@ -16668,6 +17196,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de iCalquePlan.
+     *
      * @return the iCalquePlan
      */
     public int getiCalquePlan() {
@@ -16675,6 +17205,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de iCalquePlan.
+     *
      * @param iCalquePlan the iCalquePlan to set
      */
     public void setiCalquePlan(int iCalquePlan) {
@@ -16682,6 +17214,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de iCalqueCarte.
+     *
      * @return the iCalqueCarte
      */
     public int getiCalqueCarte() {
@@ -16689,6 +17223,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de iCalqueCarte.
+     *
      * @param iCalqueCarte the iCalqueCarte to set
      */
     public void setiCalqueCarte(int iCalqueCarte) {
@@ -16696,6 +17232,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de iCalqueBoussole.
+     *
      * @return the iCalqueBoussole
      */
     public int getiCalqueBoussole() {
@@ -16703,6 +17241,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de iCalqueBoussole.
+     *
      * @param iCalqueBoussole the iCalqueBoussole to set
      */
     public void setiCalqueBoussole(int iCalqueBoussole) {
@@ -16710,6 +17250,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de iCalqueVignettes.
+     *
      * @return the iCalqueVignettes
      */
     public int getiCalqueVignettes() {
@@ -16717,6 +17259,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de iCalqueVignettes.
+     *
      * @param iCalqueVignettes the iCalqueVignettes to set
      */
     public void setiCalqueVignettes(int iCalqueVignettes) {
@@ -16724,6 +17268,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de iCalqueMenuPanoramiques.
+     *
      * @return the iCalqueMenuPanoramiques
      */
     public int getiCalqueMenuPanoramiques() {
@@ -16731,6 +17277,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de iCalqueMenuPanoramiques.
+     *
      * @param iCalqueMenuPanoramiques the iCalqueMenuPanoramiques to set
      */
     public void setiCalqueMenuPanoramiques(int iCalqueMenuPanoramiques) {
@@ -16738,6 +17286,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de iCalqueSuivPrec.
+     *
      * @return the iCalqueSuivPrec
      */
     public int getiCalqueSuivPrec() {
@@ -16745,6 +17295,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de iCalqueSuivPrec.
+     *
      * @param iCalqueSuivPrec the iCalqueSuivPrec to set
      */
     public void setiCalqueSuivPrec(int iCalqueSuivPrec) {
@@ -16752,6 +17304,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de spOutils.
+     *
      * @return the spOutils
      */
     public ScrollPane getSpOutils() {
@@ -16759,6 +17313,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de spOutils.
+     *
      * @param spOutils the spOutils to set
      */
     public void setSpOutils(ScrollPane spOutils) {
@@ -16766,6 +17322,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Retourne la valeur de apVis.
+     *
      * @return the apVis
      */
     public AnchorPane getApVis() {
@@ -16773,6 +17331,8 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Définit la valeur de apVis.
+     *
      * @param apVis the apVis to set
      */
     public void setApVis(AnchorPane apVis) {
