@@ -3037,8 +3037,21 @@ public class GestionnaireInterfaceController {
     }
 
     /**
-     *
-     * @throws IOException
+     * Ouvre un dialogue pour choisir une barre personnalisée
+     * 
+     * <p>Affiche un FileChooser permettant de sélectionner un fichier SHP/PNG
+     * pour définir une barre d'outils personnalisée. Les fichiers doivent être
+     * dans le répertoire <code>theme/telecommandes</code>.</p>
+     * 
+     * <p>Les deux fichiers requis :</p>
+     * <ul>
+     *   <li>Fichier .shp : Définition des zones cliquables</li>
+     *   <li>Fichier .png : Image de la barre</li>
+     * </ul>
+     * 
+     * @throws IOException Si erreur de lecture des fichiers
+     * @see #chargeBarrePersonnalisee(String)
+     * @see #lisFichierShp(String, ZoneTelecommande[])
      */
     public void choixBarrePersonnalisee() throws IOException {
         strRepertBarrePersonnalisee = getStrRepertAppli() + "/theme/telecommandes";
@@ -3072,9 +3085,15 @@ public class GestionnaireInterfaceController {
     }
 
     /**
-     *
-     * @param strNomFichier
-     * @throws IOException
+     * Charge une barre personnalisée depuis un fichier
+     * 
+     * <p>Charge les fichiers SHP et PNG d'une barre personnalisée
+     * à partir d'un nom de fichier de base (sans extension).</p>
+     * 
+     * @param strNomFichier Nom de fichier de base (sera complété avec .shp et .png)
+     * @throws IOException Si erreur de lecture des fichiers
+     * @see #choixBarrePersonnalisee()
+     * @see #lisFichierShp(String, ZoneTelecommande[])
      */
     public void chargeBarrePersonnalisee(String strNomFichier) throws IOException {
         if (strNomFichier.length() > 4) {
@@ -3165,7 +3184,24 @@ public class GestionnaireInterfaceController {
     }
 
     /**
-     * Réaffiche les éléments dans l'ordre des plans
+     * Réordonne les éléments d'interface selon les calques
+     * 
+     * <p>Gère l'ordre d'affichage (z-order) des éléments d'interface selon
+     * la configuration des calques. Les éléments sont retirés puis rajoutés
+     * dans l'ordre des calques actifs.</p>
+     * 
+     * <p>Éléments réordonnés :</p>
+     * <ul>
+     *   <li>Titres et descriptions</li>
+     *   <li>Réseaux sociaux (Twitter, Meta, Email)</li>
+     *   <li>Masques et vignettes</li>
+     *   <li>Boussole et aiguille</li>
+     *   <li>Barres d'outils (personnalisée et classique)</li>
+     *   <li>Carte et plan</li>
+     *   <li>Bouton visite auto</li>
+     * </ul>
+     * 
+     * @see #creeInterface(int, int)
      */
     public void reOrdonneElementsCalque() {
         apVisualisation.getChildren().remove(lblTxtTitre);
@@ -3296,14 +3332,25 @@ public class GestionnaireInterfaceController {
     }
 
     /**
-     *
-     * @param strPosition
-     * @param dX
-     * @param dY
-     * @param taille
-     * @param strStyleBoutons
-     * @param strStyleHS
-     * @param espacement
+     * Affiche la barre d'outils classique avec boutons de navigation
+     * 
+     * <p>Crée et affiche une barre d'outils avec boutons standard pour :</p>
+     * <ul>
+     *   <li>Déplacements (haut, bas, gauche, droite)</li>
+     *   <li>Zoom (plus, moins)</li>
+     *   <li>Outils (info, aide, plan, carte)</li>
+     *   <li>Rotation (360°)</li>
+     *   <li>Mode souris et plein écran</li>
+     * </ul>
+     * 
+     * @param strPosition Position ("haut", "bas", "gauche", "droite")
+     * @param dX Décalage horizontal en pixels
+     * @param dY Décalage vertical en pixels
+     * @param taille Taille des icônes en pixels
+     * @param strStyleBoutons Style des boutons (chemin vers dossier d'icônes)
+     * @param strStyleHS Style des hotspots
+     * @param espacement Espacement entre les boutons en pixels
+     * @see #afficheBarrePersonnalisee()
      */
     public void afficheBarreClassique(String strPosition, double dX, double dY, double taille, String strStyleBoutons, String strStyleHS, double espacement) {
         String strRepertBoutons = "file:" + strRepertBoutonsPrincipal + File.separator + strStyleBoutons;
@@ -3597,8 +3644,14 @@ public class GestionnaireInterfaceController {
     }
 
     /**
-     *
-     * @return
+     * Retourne le template d'interface actuellement sélectionné
+     * 
+     * <p>Le template définit la configuration complète de l'interface
+     * (positions, couleurs, barres, éléments visibles, etc.).</p>
+     * 
+     * @return Nom du template sélectionné
+     * @see #setTemplate(List)
+     * @see #afficheTemplate()
      */
     public String strGetTemplate() {
         StringBuilder sb = new StringBuilder(8192);  // Pré-allocation pour performance
@@ -3833,8 +3886,26 @@ public class GestionnaireInterfaceController {
     }
 
     /**
-     *
-     * @param strTemplate
+     * Applique un template d'interface à partir d'une liste de paramètres
+     * 
+     * <p>Charge et applique une configuration complète de l'interface depuis
+     * une liste de paramètres (généralement lue depuis un fichier .properties).</p>
+     * 
+     * <p>Le template configure :</p>
+     * <ul>
+     *   <li>Titres, descriptions, couleurs</li>
+     *   <li>Barres d'outils (classique et personnalisée)</li>
+     *   <li>Masques, boussoles, vignettes</li>
+     *   <li>Carte, plan, réseaux sociaux</li>
+     *   <li>Calques et ordre d'affichage</li>
+     *   <li>Images de fond avec positions et opacités</li>
+     * </ul>
+     * 
+     * @param strTemplate Liste des paramètres du template
+     * @see #strGetTemplate()
+     * @see #afficheTemplate()
+     */
+    public void setTemplate(List<String> strTemplate) {
      */
     public void setTemplate(List<String> strTemplate) {
         setbAfficheBoussole(false);
@@ -4612,8 +4683,24 @@ public class GestionnaireInterfaceController {
     }
 
     /**
-     *
-     * @throws IOException Exception d'entrée sortie
+     * Affiche l'interface selon le template actuel
+     * 
+     * <p>Applique visuellement le template configuré en créant et positionnant
+     * tous les éléments d'interface :</p>
+     * <ul>
+     *   <li>Titres avec police, couleur, taille personnalisés</li>
+     *   <li>Infobulles avec style configuré</li>
+     *   <li>Barres d'outils (classique ou personnalisée)</li>
+     *   <li>Carte, plan, boussole, vignettes</li>
+     *   <li>Masques, réseaux sociaux, bouton visite auto</li>
+     *   <li>Images de fond avec opacités</li>
+     *   <li>Calques dans le bon ordre (z-order)</li>
+     * </ul>
+     * 
+     * @throws IOException Si erreur de chargement des ressources
+     * @see #setTemplate(List)
+     * @see #strGetTemplate()
+     * @see #reOrdonneElementsCalque()
      */
     public void afficheTemplate() throws IOException {
         apVisualisation.getChildren().clear();
@@ -5014,7 +5101,25 @@ public class GestionnaireInterfaceController {
     }
 
     /**
-     *
+     * Rafraîchit l'affichage complet de l'interface utilisateur.
+     * 
+     * Cette méthode centrale met à jour tous les éléments visuels de l'interface
+     * pour refléter l'état actuel du projet :
+     * <ul>
+     * <li>Recharge la liste des panoramiques dans le ComboBox</li>
+     * <li>Actualise la barre de navigation classique</li>
+     * <li>Met à jour la boussole, les masques et les réseaux sociaux</li>
+     * <li>Rafraîchit le plan, les vignettes et le menu contextuel</li>
+     * <li>Synchronise la carte avec les marqueurs géolocalisés</li>
+     * <li>Met à jour le bouton de visite automatique</li>
+     * </ul>
+     * 
+     * Cette méthode doit être appelée après toute modification de la structure
+     * du projet ou des paramètres d'affichage.
+     * 
+     * @see #afficheBarreClassique(String, int, int, int, String, String, double)
+     * @see #afficheCarte()
+     * @see #affichePlan()
      */
     public void rafraichit() {
 
@@ -5650,6 +5755,24 @@ public class GestionnaireInterfaceController {
         poImageFond.setbValide(getiNombreImagesFond() > 0);
     }
 
+    /**
+     * Applique le style CSS personnalisé à l'infobulle (label).
+     * 
+     * Construit et applique une chaîne de style CSS complète pour l'infobulle
+     * en fonction des propriétés configurées :
+     * <ul>
+     * <li>Couleurs : fond, bordure, texte</li>
+     * <li>Dimensions : tailles de bordure (top, right, bottom, left)</li>
+     * <li>Arrondis : rayons des coins (TL, TR, BR, BL)</li>
+     * <li>Typographie : police et taille de police</li>
+     * <li>Opacité générale</li>
+     * </ul>
+     * 
+     * Cette méthode doit être appelée après toute modification des propriétés
+     * visuelles de l'infobulle pour que les changements soient visibles.
+     * 
+     * @see #lblInfoBulle
+     */
     public void styleInfoBulle() {
         String strStyle = "-fx-margin : 10px;-fx-background-color: " + strCouleurFondInfoBulle + ";"
                 + "-fx-border-width: " + iTailleBordureTop + "px " + iTailleBordureRight + "px "
@@ -5666,9 +5789,28 @@ public class GestionnaireInterfaceController {
     }
 
     /**
-     *
-     * @param iLargeur largeur de l'interface
-     * @param iHauteur hauteur de l'interface
+     * Crée et initialise l'interface graphique principale de l'éditeur.
+     * 
+     * Cette méthode fondamentale construit toute l'interface utilisateur en :
+     * <ul>
+     * <li>Initialisant les listes de polices et les ressources de localisation</li>
+     * <li>Définissant les répertoires des thèmes (navigation, hotspots, boussoles, masques, réseaux sociaux)</li>
+     * <li>Chargeant les images et icônes (visite auto, navigation, luminosité)</li>
+     * <li>Créant les labels de titres avec leurs styles (polices, couleurs, opacité)</li>
+     * <li>Construisant la structure de panneaux (visualisation, outils, interface)</li>
+     * <li>Configurant les dimensions et la disposition des composants</li>
+     * <li>Initialisant les ScrollPanes et les conteneurs principaux</li>
+     * </ul>
+     * 
+     * Cette méthode est appelée une seule fois au démarrage de l'application
+     * pour construire l'interface de base avant le chargement d'un projet.
+     * 
+     * @param iLargeur largeur totale de l'interface en pixels
+     * @param iHauteur hauteur totale de l'interface en pixels
+     * 
+     * @see #apVisualisation
+     * @see #vbOutils
+     * @see #paneTabInterface
      */
     public void creeInterface(int iLargeur, int iHauteur) {
         List<String> strLstPolices = new ArrayList<>();
