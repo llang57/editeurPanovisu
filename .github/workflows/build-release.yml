@@ -148,7 +148,7 @@ jobs:
 
   build-linux-portable:
     name: 🐧 Linux Portable Archive
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     
     steps:
       - name: 📥 Checkout code
@@ -161,28 +161,38 @@ jobs:
           java-version: '25'
           cache: 'maven'
       
-      - name: 📝 Create api-keys.properties
+      - name: � Install Build Dependencies
         run: |
-          Copy-Item api-keys.properties.template api-keys.properties
-          Write-Host "api-keys.properties cree depuis template"
-        shell: pwsh
+          sudo apt update
+          sudo apt install -y zip intel-opencl-icd ocl-icd-opencl-dev
+          # Créer le lien symbolique pour libOpenCL.so
+          sudo ln -sf /usr/lib/x86_64-linux-gnu/libOpenCL.so.1 /usr/lib/x86_64-linux-gnu/libOpenCL.so
+          echo "✅ Dépendances Linux installées"
       
-      - name: 🔨 Build with Maven
-        run: mvn clean package -DskipTests "-Dskip.build.increment=true"
-        shell: pwsh
+      - name: �📝 Create api-keys.properties
+        run: |
+          cp api-keys.properties.template api-keys.properties
+          echo "✅ api-keys.properties créé depuis template"
+      
+      - name: 🔨 Build with Maven (portable profile)
+        run: |
+          mvn clean package -DskipTests -Pportable -q
+          echo "✅ Build portable avec profil multi-OS terminé"
       
       - name: 📦 Create Linux Portable Archive
-        run: .\create-linux-portable.ps1
-        shell: pwsh
+        run: |
+          chmod +x create-linux-portable.sh
+          ./create-linux-portable.sh
+          echo "✅ Archives Linux portables créées"
       
       - name: 📊 Calculate SHA256
         id: sha256
         run: |
-          $zipHash = (Get-FileHash target\EditeurPanovisu-Linux-Portable-*.zip -Algorithm SHA256).Hash
-          $tarHash = (Get-FileHash target\EditeurPanovisu-Linux-Portable-*.tar.gz -Algorithm SHA256).Hash
-          echo "ZIP_HASH=$zipHash" >> $env:GITHUB_OUTPUT
-          echo "TAR_HASH=$tarHash" >> $env:GITHUB_OUTPUT
-        shell: pwsh
+          ZIP_HASH=$(sha256sum target/EditeurPanovisu-Linux-Portable-*.zip | cut -d' ' -f1)
+          TAR_HASH=$(sha256sum target/EditeurPanovisu-Linux-Portable-*.tar.gz | cut -d' ' -f1)
+          echo "ZIP_HASH=$ZIP_HASH" >> $GITHUB_OUTPUT
+          echo "TAR_HASH=$TAR_HASH" >> $GITHUB_OUTPUT
+          echo "📊 Checksums calculés: ZIP=$ZIP_HASH, TAR=$TAR_HASH"
       
       - name: 📤 Upload Linux Portable Archives
         uses: actions/upload-artifact@v4
