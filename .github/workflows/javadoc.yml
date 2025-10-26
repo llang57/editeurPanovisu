@@ -38,23 +38,44 @@ jobs:
         echo "🔧 Génération de la Javadoc..."
         mvn javadoc:javadoc -DskipTests
         
-        # Vérifier que la génération a réussi
-        if [ ! -f "target/site/apidocs/index.html" ]; then
-          echo "❌ Erreur : La Javadoc n'a pas été générée !"
+        # Détecter le répertoire de sortie
+        if [ -d "target/site/apidocs" ]; then
+          JAVADOC_DIR="target/site/apidocs"
+        elif [ -d "target/apidocs" ]; then
+          JAVADOC_DIR="target/apidocs"
+        else
+          echo "❌ Erreur : Aucun répertoire Javadoc trouvé !"
+          find target -type d -name "apidocs" || echo "Aucun apidocs trouvé"
+          exit 1
+        fi
+        
+        echo "✅ Javadoc générée dans : $JAVADOC_DIR"
+        
+        # Vérifier que index.html existe
+        if [ ! -f "$JAVADOC_DIR/index.html" ]; then
+          echo "❌ Erreur : index.html manquant dans $JAVADOC_DIR"
+          ls -la "$JAVADOC_DIR" || echo "Impossible de lister le répertoire"
           exit 1
         fi
         
         # Créer .nojekyll pour désactiver Jekyll
-        touch target/site/apidocs/.nojekyll
+        touch "$JAVADOC_DIR/.nojekyll"
         
         # Afficher les statistiques
         echo "📊 Statistiques de la Javadoc :"
-        echo "   - Fichiers HTML : $(find target/site/apidocs -name '*.html' | wc -l)"
-        echo "   - Taille totale : $(du -sh target/site/apidocs | cut -f1)"
+        echo "   - Fichiers HTML : $(find $JAVADOC_DIR -name '*.html' | wc -l)"
+        echo "   - Taille totale : $(du -sh $JAVADOC_DIR | cut -f1)"
+        
+        # Sauvegarder le chemin pour les étapes suivantes
+        echo "JAVADOC_DIR=$JAVADOC_DIR" >> $GITHUB_ENV
+        
+        # Copier dans un emplacement fixe pour le déploiement
+        mkdir -p javadoc-output
+        cp -r "$JAVADOC_DIR"/* javadoc-output/
     
     - name: 📝 Créer README pour gh-pages
       run: |
-        cat > target/site/apidocs/README.md << 'EOF'
+        cat > javadoc-output/README.md << 'EOF'
         # 📖 Javadoc EditeurPanovisu
         
         Documentation API générée automatiquement avec Javadoc.
@@ -98,7 +119,7 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./target/site/apidocs
+        publish_dir: ./javadoc-output
         destination_dir: javadoc
         publish_branch: gh-pages
         user_name: 'github-actions[bot]'
