@@ -35,6 +35,13 @@ public class AideDialogController {
     private static Button btnAnnuler;
     private static Scene sceneAideDialog;
 
+    /**
+     * Affiche la fenêtre d'aide HTML
+     * 
+     * <p>Ouvre une fenêtre modale plein écran affichant le fichier d'aide
+     * au format HTML situé dans <code>aide/aide.html</code>.
+     * La fenêtre utilise un WebView pour un rendu riche avec navigation.</p>
+     */
     public static void affiche() {
         //Rectangle2D tailleEcran = Screen.getPrimary().getBounds();
         Rectangle2D tailleEcran = Screen.getPrimary().getBounds();

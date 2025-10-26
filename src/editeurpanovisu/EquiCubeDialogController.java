@@ -476,9 +476,18 @@ public class EquiCubeDialogController {
     }
 
     /**
-     *
-     * @param strTypeTransf
-     * @throws Exception Exceptions
+     * Affiche la fenêtre de transformation d'images
+     * 
+     * <p>Crée et affiche une fenêtre modale permettant de :</p>
+     * <ul>
+     *   <li>Sélectionner des images à transformer (drag & drop ou sélection)</li>
+     *   <li>Choisir le type de transformation (Equi→Cube ou Cube→Equi)</li>
+     *   <li>Configurer les options (format, netteté)</li>
+     *   <li>Lancer la transformation par lot</li>
+     * </ul>
+     * 
+     * @param strTypeTransf Type de transformation : {@link #EQUI2CUBE} ou {@link #CUBE2QUI}
+     * @throws Exception En cas d'erreur lors de la création de la fenêtre
      */
     @SuppressWarnings("unused")
     public void afficheFenetre(String strTypeTransf) throws Exception {

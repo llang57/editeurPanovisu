@@ -41,26 +41,45 @@ public class Diaporama implements Cloneable {
     }
 
     /**
-     * @return the nomDiaporama
+     * Retourne le nom du diaporama
+     * 
+     * @return Nom affiché pour identifier ce diaporama
+     * @see #setStrNomDiaporama(String)
      */
     public String getStrNomDiaporama() {
         return strNomDiaporama;
     }
 
     /**
-     * @param nomDiaporama the nomDiaporama to set
+     * Définit le nom du diaporama
+     * 
+     * @param nomDiaporama Nom à attribuer au diaporama
+     * @see #getStrNomDiaporama()
      */
     public void setStrNomDiaporama(String nomDiaporama) {
         this.strNomDiaporama = nomDiaporama;
     }
 
     /**
-     * @return the strImages
+     * Retourne le tableau complet des fichiers images du diaporama
+     * 
+     * @return Tableau des chemins vers les fichiers images
+     * @see #getStrFichiersImage(int)
+     * @see #setStrFichiersImage(String[])
      */
     public String[] getStrFichiersImage() {
         return strFichiersImage;
     }
 
+    /**
+     * Crée une copie clone de l'objet Diaporama
+     * 
+     * <p>Utilise le mécanisme de clonage Java pour créer une copie superficielle
+     * de l'instance courante.</p>
+     * 
+     * @return Copie clonée du diaporama, ou null en cas d'erreur
+     * @see Cloneable
+     */
     public Object clone() {
         Object objet = null;
         try {
@@ -72,167 +91,247 @@ public class Diaporama implements Cloneable {
     }
 
     /**
-     * @param i numero de l'image à retourner
-     * @return the strImages
+     * Retourne le fichier image à un index spécifique
+     * 
+     * @param i Index de l'image (0 à nombreImages-1)
+     * @return Chemin du fichier image à l'index donné
+     * @see #getStrFichiersImage()
+     * @see #setStrFichiersImage(String, int)
      */
     public String getStrFichiersImage(int i) {
         return strFichiersImage[i];
     }
 
     /**
-     * @param strImages the strImages to set
+     * Définit le tableau complet des fichiers images
+     * 
+     * @param strImages Tableau des chemins vers les fichiers images
+     * @see #getStrFichiersImage()
      */
     public void setStrFichiersImage(String[] strImages) {
         this.strFichiersImage = strImages;
     }
 
     /**
-     * @param strImages the strImages to set
-     * @param i numero de l'image à modifier
+     * Définit le fichier image à un index spécifique
+     * 
+     * @param strImages Chemin du fichier image
+     * @param i Index où placer l'image (0 à nombreImages-1)
+     * @see #getStrFichiersImage(int)
      */
     public void setStrFichiersImage(String strImages, int i) {
         this.strFichiersImage[i] = strImages;
     }
 
     /**
-     * @return the strLibellesImages
+     * Retourne le tableau complet des libellés des images
+     * 
+     * @return Tableau des textes descriptifs des images
+     * @see #getStrLibellesImages(int)
+     * @see #setStrLibellesImages(String[])
      */
     public String[] getStrLibellesImages() {
         return strLibellesImages;
     }
 
     /**
-     * @param i numéro du libellé
-     * @return the strLibellesImages
+     * Retourne le libellé d'une image spécifique
+     * 
+     * @param i Index de l'image (0 à nombreImages-1)
+     * @return Texte descriptif de l'image à l'index donné
+     * @see #getStrLibellesImages()
+     * @see #setStrLibellesImages(String, int)
      */
     public String getStrLibellesImages(int i) {
         return strLibellesImages[i];
     }
 
     /**
-     * @param strLibellesImages the strLibellesImages to set
+     * Définit le tableau complet des libellés
+     * 
+     * @param strLibellesImages Tableau des textes descriptifs
+     * @see #getStrLibellesImages()
      */
     public void setStrLibellesImages(String[] strLibellesImages) {
         this.strLibellesImages = strLibellesImages;
     }
 
     /**
-     * @param strLibellesImages the strLibellesImages to set
-     * @param i numéro du libellé à modifier
+     * Définit le libellé d'une image spécifique
+     * 
+     * @param strLibellesImages Texte descriptif de l'image
+     * @param i Index où placer le libellé (0 à nombreImages-1)
+     * @see #getStrLibellesImages(int)
      */
     public void setStrLibellesImages(String strLibellesImages, int i) {
         this.strLibellesImages[i] = strLibellesImages;
     }
 
     /**
-     * @return the delaiDiaporama
+     * Retourne le délai d'affichage entre les images
+     * 
+     * <p>Durée en secondes pendant laquelle chaque image est affichée
+     * avant de passer à la suivante.</p>
+     * 
+     * @return Délai en secondes (par défaut 5.0)
+     * @see #setDelaiDiaporama(double)
      */
     public double getDelaiDiaporama() {
         return delaiDiaporama;
     }
 
     /**
-     * @param delaiDiaporama the delaiDiaporama to set
+     * Définit le délai d'affichage entre les images
+     * 
+     * @param delaiDiaporama Délai en secondes (valeur positive)
+     * @see #getDelaiDiaporama()
      */
     public void setDelaiDiaporama(double delaiDiaporama) {
         this.delaiDiaporama = delaiDiaporama;
     }
 
     /**
-     * @return the strCouleurFondDiaporama
+     * Retourne la couleur de fond du diaporama
+     * 
+     * @return Couleur au format hexadécimal (ex: "#333333")
+     * @see #setStrCouleurFondDiaporama(String)
      */
     public String getStrCouleurFondDiaporama() {
         return strCouleurFondDiaporama;
     }
 
     /**
-     * @param strCouleurFondDiaporama the strCouleurFondDiaporama to set
+     * Définit la couleur de fond du diaporama
+     * 
+     * @param strCouleurFondDiaporama Couleur hexadécimale (ex: "#333333")
+     * @see #getStrCouleurFondDiaporama()
      */
     public void setStrCouleurFondDiaporama(String strCouleurFondDiaporama) {
         this.strCouleurFondDiaporama = strCouleurFondDiaporama;
     }
 
     /**
-     * @return the opaciteDiaporama
+     * Retourne l'opacité du fond du diaporama
+     * 
+     * @return Opacité entre 0.0 (transparent) et 1.0 (opaque), par défaut 0.8
+     * @see #setOpaciteDiaporama(double)
      */
     public double getOpaciteDiaporama() {
         return opaciteDiaporama;
     }
 
     /**
-     * @param opaciteDiaporama the opaciteDiaporama to set
+     * Définit l'opacité du fond du diaporama
+     * 
+     * @param opaciteDiaporama Valeur entre 0.0 (transparent) et 1.0 (opaque)
+     * @see #getOpaciteDiaporama()
      */
     public void setOpaciteDiaporama(double opaciteDiaporama) {
         this.opaciteDiaporama = opaciteDiaporama;
     }
 
     /**
-     * @return the iNombreImages
+     * Retourne le nombre d'images dans le diaporama
+     * 
+     * @return Nombre d'images (0 à 100)
+     * @see #setiNombreImages(int)
      */
     public int getiNombreImages() {
         return iNombreImages;
     }
 
     /**
-     * @param iNombreImages the iNombreImages to set
+     * Définit le nombre d'images dans le diaporama
+     * 
+     * @param iNombreImages Nombre d'images (0 à 100)
+     * @see #getiNombreImages()
      */
     public void setiNombreImages(int iNombreImages) {
         this.iNombreImages = iNombreImages;
     }
 
     /**
-     * @return the iOrdreDiaporama
+     * Retourne le tableau d'ordre de lecture du diaporama
+     * 
+     * <p>Permet de définir l'ordre d'affichage des images, différent de leur
+     * ordre d'ajout.</p>
+     * 
+     * @return Tableau des indices définissant l'ordre de lecture
+     * @see #setiOrdreDiaporama(int[])
      */
     public int[] getiOrdreDiaporama() {
         return iOrdreDiaporama;
     }
 
     /**
-     * @param iOrdreDiaporama the iOrdreDiaporama to set
+     * Définit l'ordre de lecture du diaporama
+     * 
+     * @param iOrdreDiaporama Tableau d'indices pour l'ordre d'affichage
+     * @see #getiOrdreDiaporama()
      */
     public void setiOrdreDiaporama(int[] iOrdreDiaporama) {
         this.iOrdreDiaporama = iOrdreDiaporama;
     }
 
     /**
-     * @return the strFichierDiaporama
+     * Retourne le nom du fichier de configuration du diaporama
+     * 
+     * @return Chemin du fichier de configuration
+     * @see #setStrFichierDiaporama(String)
      */
     public String getStrFichierDiaporama() {
         return strFichierDiaporama;
     }
 
     /**
-     * @param strFichierDiaporama the strFichierDiaporama to set
+     * Définit le nom du fichier de configuration
+     * 
+     * @param strFichierDiaporama Chemin du fichier de configuration
+     * @see #getStrFichierDiaporama()
      */
     public void setStrFichierDiaporama(String strFichierDiaporama) {
         this.strFichierDiaporama = strFichierDiaporama;
     }
 
     /**
-     * @return the strFichiers
+     * Retourne le tableau complet des noms de fichiers
+     * 
+     * @return Tableau des noms de fichiers du diaporama
+     * @see #getStrFichiers(int)
+     * @see #setStrFichiers(String[])
      */
     public String[] getStrFichiers() {
         return strFichiers;
     }
 
     /**
-     * @param i numéro du nom fichier
-     * @return the strFichiers
+     * Retourne le nom de fichier à un index spécifique
+     * 
+     * @param i Index du fichier (0 à nombreImages-1)
+     * @return Nom du fichier à l'index donné
+     * @see #getStrFichiers()
+     * @see #setStrFichiers(String, int)
      */
     public String getStrFichiers(int i) {
         return strFichiers[i];
     }
 
     /**
-     * @param strFichiers the strFichiers to set
+     * Définit le tableau complet des noms de fichiers
+     * 
+     * @param strFichiers Tableau des noms de fichiers
+     * @see #getStrFichiers()
      */
     public void setStrFichiers(String[] strFichiers) {
         this.strFichiers = strFichiers;
     }
 
     /**
-     * @param strFichiers the strFichiers to set
-     * @param i  numéro du nom fichier à modifier
+     * Définit le nom de fichier à un index spécifique
+     * 
+     * @param strFichiers Nom du fichier
+     * @param i Index où placer le nom (0 à nombreImages-1)
+     * @see #getStrFichiers(int)
      */
     public void setStrFichiers(String strFichiers, int i) {
         this.strFichiers[i] = strFichiers;

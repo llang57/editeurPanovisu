@@ -175,20 +175,25 @@ public class EditeurHTML {
             + "})()";
 
     /**
-     *
-     * @param i
-     * @return
+     * Convertit un entier en sa représentation hexadécimale
+     * 
+     * @param i Entier à convertir
+     * @return Chaîne hexadécimale (ex: 255 → "ff")
      */
     private static String hex(int i) {
         return Integer.toHexString(i);
     }
 
     /**
-     *
-     * @param strEntree
-     * @param bEscapeSingleQuote
-     * @param escapeForwardSlash
-     * @return
+     * Échappe une chaîne pour l'utiliser en JavaScript
+     * 
+     * <p>Convertit les caractères spéciaux en séquences d'échappement
+     * pour garantir la sécurité et la validité du code JavaScript généré.</p>
+     * 
+     * @param strEntree Chaîne à échapper
+     * @param bEscapeSingleQuote true pour échapper les apostrophes simples
+     * @param escapeForwardSlash true pour échapper les slashes (/)
+     * @return Chaîne échappée pour JavaScript, ou null si strEntree est null
      */
     private static String escapeJavaStyleString(String strEntree,
             boolean bEscapeSingleQuote, boolean escapeForwardSlash) {
@@ -1585,7 +1590,10 @@ public class EditeurHTML {
     }
 
     /**
-     * @return the bValide
+     * Indique si l'utilisateur a validé l'édition HTML
+     * 
+     * @return true si le bouton "Valider" a été cliqué
+     * @see #setbValide(boolean)
      */
     public boolean isbValide() {
 
@@ -1593,7 +1601,12 @@ public class EditeurHTML {
     }
 
     /**
-     * @param bValide the bValide to set
+     * Définit l'état de validation de l'édition
+     * 
+     * <p>Déclenche un événement PropertyChange "bValide".</p>
+     * 
+     * @param bValide true pour indiquer que l'édition est validée
+     * @see #isbValide()
      */
     public void setbValide(boolean bValide) {
         boolean ancienneValeur = this.bValide;
@@ -1603,14 +1616,22 @@ public class EditeurHTML {
     }
 
     /**
-     * @return the bAnnule
+     * Indique si l'utilisateur a annulé l'édition HTML
+     * 
+     * @return true si le bouton "Annuler" a été cliqué
+     * @see #setbAnnule(boolean)
      */
     public boolean isbAnnule() {
         return bAnnule;
     }
 
     /**
-     * @param bAnnule the bAnnule to set
+     * Définit l'état d'annulation de l'édition
+     * 
+     * <p>Déclenche un événement PropertyChange "bAnnule".</p>
+     * 
+     * @param bAnnule true pour indiquer que l'édition est annulée
+     * @see #isbAnnule()
      */
     public void setbAnnule(boolean bAnnule) {
         boolean ancienneValeur = this.bAnnule;
@@ -1620,14 +1641,20 @@ public class EditeurHTML {
     }
 
     /**
-     * @return the hsHTML
+     * Retourne le hotspot HTML en cours d'édition
+     * 
+     * @return Instance du HotspotHTML édité
+     * @see #setHsHTML(HotspotHTML)
      */
     public HotspotHTML getHsHTML() {
         return hsHTML;
     }
 
     /**
-     * @param hsHTML the hsHTML to set
+     * Définit le hotspot HTML à éditer
+     * 
+     * @param hsHTML Instance du hotspot HTML
+     * @see #getHsHTML()
      */
     public void setHsHTML(HotspotHTML hsHTML) {
         this.hsHTML = hsHTML;
@@ -1769,8 +1796,13 @@ public class EditeurHTML {
     }
     
     /**
-     * Méthode appelée depuis JavaScript pour supprimer une image
-     * @param imageId L'ID de l'image à supprimer
+     * Supprime une image depuis JavaScript (appel interactif)
+     * 
+     * <p>Cette méthode est appelée par le code JavaScript injecté dans l'éditeur HTML
+     * lorsque l'utilisateur clique sur l'ancre de suppression d'une image.
+     * Elle affiche une confirmation avant suppression.</p>
+     * 
+     * @param imageId ID de l'image à supprimer (format "img-XXX")
      */
     public void supprimerImageDepuisJS(String imageId) {
         System.out.println("Demande de suppression image depuis JS: " + imageId);

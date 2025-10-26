@@ -11,10 +11,15 @@ import java.io.FileFilter;
 public class ExtensionsFilter implements FileFilter 
 {
     private char[][] chExtensions;
-/**
- * 
- * @param strExtensions 
- */
+    
+    /**
+     * Crée un filtre de fichiers basé sur les extensions
+     * 
+     * <p>Permet de filtrer les fichiers selon leurs extensions
+     * (ex: ".jpg", ".png", ".xml"). La comparaison est insensible à la casse.</p>
+     * 
+     * @param strExtensions Tableau d'extensions à accepter (avec ou sans point)
+     */
     ExtensionsFilter(String[] strExtensions)
     {
         int length = strExtensions.length;
@@ -24,11 +29,15 @@ public class ExtensionsFilter implements FileFilter
             this.chExtensions[--length] = s.toCharArray();
         }
     }
-/**
- * 
- * @param fileCharge
- * @return boolean
- */
+    
+    /**
+     * Teste si un fichier correspond à l'une des extensions du filtre
+     * 
+     * <p>La comparaison est insensible à la casse (jpg = JPG = Jpg).</p>
+     * 
+     * @param fileCharge Fichier à tester
+     * @return true si l'extension du fichier correspond à l'une des extensions du filtre
+     */
     @Override
     public boolean accept(File fileCharge)
     {
