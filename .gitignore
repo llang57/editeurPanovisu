@@ -219,6 +219,10 @@ pip-log.txt
 target/
 dependency-reduced-pom.xml
 
+# JARs générés (trop volumineux pour GitHub)
+*.jar
+!lib/*.jar
+
 # Dossiers temporaires et de travail
 temp/
 forum/
