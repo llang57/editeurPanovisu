@@ -169,15 +169,14 @@ jobs:
           sudo ln -sf /usr/lib/x86_64-linux-gnu/libOpenCL.so.1 /usr/lib/x86_64-linux-gnu/libOpenCL.so
           echo "✅ Dépendances Linux installées"
       
-      - name: �📝 Create api-keys.properties
+      - name: 📝 Create api-keys.properties
         run: |
           cp api-keys.properties.template api-keys.properties
           echo "✅ api-keys.properties créé depuis template"
       
       - name: 🔨 Build with Maven (portable profile)
-        run: |
-          mvn clean package -DskipTests -Pportable -q
-          echo "✅ Build portable avec profil multi-OS terminé"
+        run: mvn clean package -DskipTests "-Dskip.build.increment=true" -Pportable
+        shell: pwsh
       
       - name: 📦 Create Linux Portable Archive
         run: |

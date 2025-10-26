@@ -7,7 +7,8 @@ Write-Host "=== Creation de l'archive portable Linux EditeurPanovisu ===" -Foreg
 
 # Verifier que le build a ete fait
 if (-not (Test-Path "target\app-input\editeurPanovisu-3.3.3-SNAPSHOT.jar")) {
-    Write-Host "Erreur: Le JAR n'existe pas. Executez d'abord: mvn clean package -DskipTests" -ForegroundColor Red
+    Write-Host "Erreur: Le JAR n'existe pas. Executez d'abord: mvn clean package -DskipTests -Pportable" -ForegroundColor Red
+    Write-Host "  (Le profil -Pportable est requis pour inclure les natives Linux et Windows)" -ForegroundColor Yellow
     exit 1
 }
 
