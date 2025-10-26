@@ -38,8 +38,10 @@ jobs:
         echo "🔧 Génération de la Javadoc..."
         mvn javadoc:javadoc -DskipTests
         
-        # Détecter le répertoire de sortie
-        if [ -d "target/site/apidocs" ]; then
+        # Détecter le répertoire de sortie (plusieurs emplacements possibles)
+        if [ -d "target/reports/apidocs" ]; then
+          JAVADOC_DIR="target/reports/apidocs"
+        elif [ -d "target/site/apidocs" ]; then
           JAVADOC_DIR="target/site/apidocs"
         elif [ -d "target/apidocs" ]; then
           JAVADOC_DIR="target/apidocs"
