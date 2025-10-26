@@ -505,6 +505,19 @@
                     <verbose>true</verbose>
                 </configuration>
             </plugin>
+
+            <!-- Plugin d'analyse des dépendances avec compatibilité Java 21/25 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.7.1</version>
+                <configuration>
+                    <!-- Ignorer les erreurs de bytecode incompatibles -->
+                    <ignoreMissingClasses>true</ignoreMissingClasses>
+                    <failOnWarning>false</failOnWarning>
+                    <skip>false</skip>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
@@ -630,6 +643,14 @@
                     </plugin>
                 </plugins>
             </build>
+        </profile>
+
+        <!-- Profil CI pour éviter les problèmes de compatibilité Java -->
+        <profile>
+            <id>ci-safe</id>
+            <properties>
+                <maven.dependency.analyze.skip>true</maven.dependency.analyze.skip>
+            </properties>
         </profile>
     </profiles>
 
