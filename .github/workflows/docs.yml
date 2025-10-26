@@ -98,15 +98,16 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./doc/doxygen/html
         publish_branch: gh-pages
+        keep_files: true
+        destination_dir: .
         user_name: 'github-actions[bot]'
         user_email: 'github-actions[bot]@users.noreply.github.com'
         commit_message: |
-          docs: 📚 Mise à jour automatique de la documentation
+          docs: 📚 Mise à jour automatique de la documentation Doxygen
           
-          Mise à jour de la documentation Doxygen
+          Mise à jour de la documentation Doxygen (préserve javadoc/)
           Commit source: ${{ github.sha }}
           Date: $(date '+%d/%m/%Y %H:%M:%S UTC')
-        force_orphan: true
     
     - name: ✅ Publication réussie
       run: |
