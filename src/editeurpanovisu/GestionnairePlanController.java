@@ -291,10 +291,14 @@ public class GestionnairePlanController {
     }
 
     /**
-     *
-     * @param strLstPano
-     * @param iNumPano
-     * @return
+     * Crée le panneau d'affichage des hotspots pour un plan
+     * 
+     * <p>Génère l'interface permettant de configurer les hotspots d'un plan :
+     * position, texte d'information et panorama de destination.</p>
+     * 
+     * @param strLstPano Liste des panoramas disponibles (séparés par ";")
+     * @param iNumPano Numéro du plan à configurer
+     * @return Panneau contenant les contrôles pour chaque hotspot
      */
     public Pane affichageHS(String strLstPano, int iNumPano) {
 
@@ -352,6 +356,16 @@ public class GestionnairePlanController {
                 String[] strListe = strLstPano.split(";");
                 cbDestPano.getItems().addAll(Arrays.asList(strListe));
                 cbDestPano.valueProperty().addListener(new ChangeListener<String>() {
+                    /**
+                     * Gestionnaire de changement de panorama de destination pour un hotspot
+                     * 
+                     * <p>Appelé lorsque l'utilisateur sélectionne un nouveau panorama cible
+                     * pour un hotspot dans le plan. Met à jour l'affichage des hotspots.</p>
+                     * 
+                     * @param ov Valeur observable
+                     * @param t Ancienne valeur
+                     * @param t1 Nouvelle valeur sélectionnée
+                     */
                     @Override
                     public void changed(ObservableValue ov, String t, String t1) {
                         if (bDejaCharge) {
@@ -430,7 +444,9 @@ public class GestionnairePlanController {
     }
 
     /**
-     *
+     * Ajoute un nouveau plan à la liste des plans disponibles
+     * 
+     * <p>Met à jour la ComboBox de sélection avec le nouveau plan créé.</p>
      */
     public void ajouterPlan() {
         cbChoixPlan.getItems().add(getiNombrePlans(), getPlans()[getiNombrePlans()].getStrImagePlan());
@@ -440,8 +456,12 @@ public class GestionnairePlanController {
     }
 
     /**
-     *
-     * @param numeroPlan
+     * Affiche un plan spécifique dans l'interface
+     * 
+     * <p>Charge et affiche le plan correspondant au numéro donné, avec ses
+     * hotspots et sa configuration (boussole, orientation nord).</p>
+     * 
+     * @param numeroPlan Indice du plan à afficher
      */
     public void afficherPlan(int numeroPlan) {
         setiPlanActuel(numeroPlan);
@@ -1024,6 +1044,17 @@ public class GestionnairePlanController {
         cbChoixPlan.setLayoutX(70);
         cbChoixPlan.setLayoutY(40);
         cbChoixPlan.valueProperty().addListener(new ChangeListener<String>() {
+            /**
+             * Gestionnaire de changement de plan sélectionné
+             * 
+             * <p>Appelé lorsque l'utilisateur sélectionne un plan différent
+             * dans la liste déroulante. Affiche le plan sélectionné et met
+             * à jour l'interface.</p>
+             * 
+             * @param ov Valeur observable
+             * @param t Ancien plan sélectionné
+             * @param t1 Nouveau plan sélectionné
+             */
             @Override
             public void changed(ObservableValue ov, String t, String t1) {
                 if (cbChoixPlan.getSelectionModel().getSelectedIndex() != -1) {
@@ -1116,98 +1147,146 @@ public class GestionnairePlanController {
     }
 
     /**
-     * @return the lblDragDropPlan
+     * Retourne le label d'indication de drag &amp; drop pour le plan
+     * 
+     * @return Label affiché lorsqu'aucun plan n'est chargé
+     * @see #setLblDragDropPlan(Label)
      */
     public Label getLblDragDropPlan() {
         return lblDragDropPlan;
     }
 
     /**
-     * @param lblDragDropPlan the lblDragDropPlan to set
+     * Définit le label d'indication de drag &amp; drop
+     * 
+     * @param lblDragDropPlan Label à afficher pour le drag &amp; drop
+     * @see #getLblDragDropPlan()
      */
     public void setLblDragDropPlan(Label lblDragDropPlan) {
         this.lblDragDropPlan = lblDragDropPlan;
     }
 
     /**
-     * @return the paneInterface
+     * Retourne le panneau d'interface principal
+     * 
+     * @return Panneau contenant l'interface de gestion des plans
+     * @see #setPaneInterface(Pane)
      */
     public Pane getPaneInterface() {
         return paneInterface;
     }
 
     /**
-     * @param paneInterface the paneInterface to set
+     * Définit le panneau d'interface principal
+     * 
+     * @param paneInterface Panneau à utiliser pour l'interface
+     * @see #getPaneInterface()
      */
     public void setPaneInterface(Pane paneInterface) {
         this.paneInterface = paneInterface;
     }
 
     /**
-     * @return the positionNordPlan
+     * Retourne la position angulaire du nord sur le plan
+     * 
+     * <p>Angle en degrés définissant l'orientation du plan par rapport au nord géographique.</p>
+     * 
+     * @return Position du nord en degrés (0-360°)
+     * @see #setPositionNordPlan(double)
      */
     public double getPositionNordPlan() {
         return positionNordPlan;
     }
 
     /**
-     * @param positionNordPlan the positionNordPlan to set
+     * Définit la position angulaire du nord sur le plan
+     * 
+     * <p>Permet d'orienter correctement le plan par rapport au nord géographique.</p>
+     * 
+     * @param positionNordPlan Angle du nord en degrés (0-360°)
+     * @see #getPositionNordPlan()
      */
     public void setPositionNordPlan(double positionNordPlan) {
         this.positionNordPlan = positionNordPlan;
     }
 
     /**
-     * @return the strPositionBoussolePlan
+     * Retourne la position de la boussole sur le plan
+     * 
+     * <p>Format : "position:alignement" (ex: "top:right", "bottom:left").</p>
+     * 
+     * @return Position de la boussole sous forme de chaîne
+     * @see #setStrPositionBoussolePlan(String)
      */
     public String getStrPositionBoussolePlan() {
         return strPositionBoussolePlan;
     }
 
     /**
-     * @param strPositionBoussolePlan the strPositionBoussolePlan to set
+     * Définit la position de la boussole sur le plan
+     * 
+     * @param strPositionBoussolePlan Position (ex: "top:right", "bottom:left")
+     * @see #getStrPositionBoussolePlan()
      */
     public void setStrPositionBoussolePlan(String strPositionBoussolePlan) {
         this.strPositionBoussolePlan = strPositionBoussolePlan;
     }
 
     /**
-     * @return the positXBoussolePlan
+     * Retourne la position X de la boussole sur le plan
+     * 
+     * @return Coordonnée X en pixels
+     * @see #setPositXBoussolePlan(double)
      */
     public double getPositXBoussolePlan() {
         return positXBoussolePlan;
     }
 
     /**
-     * @param positXBoussolePlan the positXBoussolePlan to set
+     * Définit la position X de la boussole
+     * 
+     * @param positXBoussolePlan Coordonnée X en pixels
+     * @see #getPositXBoussolePlan()
      */
     public void setPositXBoussolePlan(double positXBoussolePlan) {
         this.positXBoussolePlan = positXBoussolePlan;
     }
 
     /**
-     * @return the positYBoussolePlan
+     * Retourne la position Y de la boussole sur le plan
+     * 
+     * @return Coordonnée Y en pixels
+     * @see #setPositYBoussolePlan(double)
      */
     public double getPositYBoussolePlan() {
         return positYBoussolePlan;
     }
 
     /**
-     * @param positYBoussolePlan the positYBoussolePlan to set
+     * Définit la position Y de la boussole
+     * 
+     * @param positYBoussolePlan Coordonnée Y en pixels
+     * @see #getPositYBoussolePlan()
      */
     public void setPositYBoussolePlan(double positYBoussolePlan) {
         this.positYBoussolePlan = positYBoussolePlan;
     }
 
     /**
-     * @return the strPlanListeVignette
+     * Retourne le chemin de l'image vignette du plan
+     * 
+     * @return Chemin du fichier image vignette
+     * @see #setStrPlanListeVignette(String)
      */
     public String getStrPlanListeVignette() {
         return strPlanListeVignette;
     }
 
     /**
-     * @param strPlanListeVignette the strPlanListeVignette to set
+     * Définit le chemin de l'image vignette du plan
+     * 
+     * @param strPlanListeVignette Chemin du fichier image
+     * @see #getStrPlanListeVignette()
      */
     public void setStrPlanListeVignette(String strPlanListeVignette) {
         this.strPlanListeVignette = strPlanListeVignette;
