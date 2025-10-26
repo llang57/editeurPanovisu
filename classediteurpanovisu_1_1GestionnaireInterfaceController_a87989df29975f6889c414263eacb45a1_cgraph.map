@@ -1,0 +1,19 @@
+<map id="editeurpanovisu.GestionnaireInterfaceController.afficheBoutonVisiteAuto" name="editeurpanovisu.GestionnaireInterfaceController.afficheBoutonVisiteAuto">
+<area shape="rect" id="Node000001" title="Affiche le bouton de visite automatique." alt="" coords="5,281,243,336"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a5c5c41fe7501c0ab14f627b5236a6bc3" title="Retourne la valeur de offsetXBoutonVisiteAuto." alt="" coords="305,5,567,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="134,280,157,234,190,177,235,119,261,92,289,69,296,65,299,69,292,73,264,96,239,122,195,180,161,236,139,282"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a1ad2eb86d41373c9fa2f0309eeb51c10" title="Retourne la valeur de offsetYBoutonVisiteAuto." alt="" coords="305,84,567,139"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="145,279,205,213,245,178,289,148,301,142,303,147,292,152,248,182,209,217,149,283"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a73bda6579362284cddd608f75b00ac79" title="Retourne la valeur de strPositionXBoutonVisiteAuto." alt="" coords="317,163,555,217"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="174,279,229,252,290,226,311,219,312,224,292,231,231,257,177,284"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#afa12ef8b7e84c72999cccdaed3e7964a" title="Retourne la valeur de strPositionYBoutonVisiteAuto." alt="" coords="317,241,555,296"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="242,291,302,283,303,288,243,296"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a2cfb9c2807597994d00b97fde8d37b28" title="Retourne la hauteur réelle de l&#39;image de visualisation affichée." alt="" coords="310,320,562,375"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="243,321,296,327,296,333,242,326"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a9e850d024075a94fade7333821a909b5" title="Retourne la largeur réelle de l&#39;image de visualisation affichée." alt="" coords="291,399,581,439"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="178,334,232,360,292,383,323,393,322,398,290,389,230,364,176,339"/>
+<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a7d2ac451acf6c6a7367485d1ad27bb6a" title="Retourne la valeur de bAfficheBoutonVisiteAuto." alt="" coords="307,464,565,519"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="152,335,212,393,251,423,292,449,307,456,305,461,289,454,248,427,209,397,148,338"/>
+<area shape="rect" id="Node000009" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="417,543,455,568"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="140,335,162,379,196,432,239,485,264,508,292,528,319,540,348,548,403,554,402,559,347,553,317,545,289,532,261,512,235,488,191,435,158,381,135,337"/>
+</map>

@@ -1,0 +1,15 @@
+<map id="editeurpanovisu.ConversionRatio2to1DialogController.appliquerRemplissageCouleurMoyenne" name="editeurpanovisu.ConversionRatio2to1DialogController.appliquerRemplissageCouleurMoyenne">
+<area shape="rect" id="Node000001" title="Applique un remplissage par couleur moyenne des bords." alt="" coords="5,34,260,89"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#afbde9272ad5dd7d68c3ab3a325923a38" title="Calcule la couleur moyenne d&#39;une zone rectangulaire de l&#39;image." alt="" coords="308,113,553,167"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="238,86,314,107,313,112,236,91"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="601,49,640,74"/>
+<area shape="poly" id="edge7_Node000001_Node000003" title=" " alt="" coords="224,31,297,16,380,5,468,5,512,10,554,19,594,38,592,43,552,24,511,15,467,10,380,11,297,21,225,37"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#a668da95128992d4c76647981546905b3" title="Calcule la position Y en fonction de la position verticale choisie." alt="" coords="308,34,553,89"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="260,59,294,59,294,64,260,64"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="525,110,552,99,588,79,591,84,554,104,527,115"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#a008d931e56b6fc013061112f26afbffb" title=" " alt="" coords="601,113,640,138"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="554,128,587,125,588,130,554,133"/>
+<area shape="rect" id="Node000005" href="$leaflet_8js.html#a9f9b62a373d2bb4624b7ac2df8151435" title=" " alt="" coords="601,162,640,187"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="554,160,588,166,587,171,553,165"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="554,59,587,59,587,64,554,64"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="editeurpanovisu.util.SvgIconLoader.convertSvgToPng" name="editeurpanovisu.util.SvgIconLoader.convertSvgToPng">
+<area shape="rect" id="Node000001" title="Convertit un SVG en BufferedImage PNG avec Batik (version carrée)" alt="" coords="5,35,212,75"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1util_1_1SvgIconLoader.html#a8cf07e331f244b74d124210c1569d3b4" title="Convertit un SVG en BufferedImage PNG avec Batik (dimensions personnalisées)" alt="" coords="260,5,467,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="212,40,246,36,247,41,212,45"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="515,42,553,67"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="212,54,467,55,500,54,501,59,467,60,212,60"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="467,41,502,47,501,52,466,46"/>
+</map>

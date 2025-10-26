@@ -1,0 +1,235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>EditeurPanovisu:  Fichier source de src/editeurpanovisu/HotspotDiaporama.java</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">EditeurPanovisu<span id="projectnumber">&#160;3.1.0</span>
+   </div>
+   <div id="projectbrief">Éditeur de visites virtuelles 360° Panovisu</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('HotspotDiaporama_8java_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Chargement...</div>
+<div class="SRStatus" id="Searching">Recherche...</div>
+<div class="SRStatus" id="NoMatches">Aucune correspondance</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">HotspotDiaporama.java</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="HotspotDiaporama_8java.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * To change this license header, choose License Headers in Project Properties.</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> * To change this template file, choose Tools | Templates</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> * and open the template in the editor.</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">package </span>editeurpanovisu;</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="foldopen" id="foldopen00013" data-start="{" data-end="};">
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1HotspotDiaporama.html">   13</a></span><span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_class" href="classediteurpanovisu_1_1HotspotDiaporama.html">HotspotDiaporama</a> {</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1HotspotDiaporama.html#ad570102f41ef9540ca6331b9604dd7d3">   15</a></span>    <span class="keyword">private</span> <span class="keywordtype">double</span> <a class="code hl_variable" href="classediteurpanovisu_1_1HotspotDiaporama.html#a3de5f59555e32922eee35f5d0a884f33">longitude</a>, <a class="code hl_variable" href="classediteurpanovisu_1_1HotspotDiaporama.html#ad570102f41ef9540ca6331b9604dd7d3">latitude</a>;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1HotspotDiaporama.html#ac1fb94ed7c1b283d7227e535946ee9ae">   16</a></span>    <span class="keyword">private</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="classediteurpanovisu_1_1HotspotDiaporama.html#ac1fb94ed7c1b283d7227e535946ee9ae">iNumDiapo</a>=-1;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1HotspotDiaporama.html#a3566ea0592801c399f76278bef61f9a5">   17</a></span>    <span class="keyword">private</span> <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_variable" href="classediteurpanovisu_1_1HotspotDiaporama.html#a3566ea0592801c399f76278bef61f9a5">strInfo</a>=<span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1HotspotDiaporama.html#af440f352cad93f82ee70b76e2f82eebf">   18</a></span>    <span class="keyword">private</span> <span class="keywordtype">boolean</span> <a class="code hl_variable" href="classediteurpanovisu_1_1HotspotDiaporama.html#af440f352cad93f82ee70b76e2f82eebf">bAnime</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1HotspotDiaporama.html#aed074da2997d3f1384439debf72a4253">   19</a></span>    <span class="keyword">private</span> <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_variable" href="classediteurpanovisu_1_1HotspotDiaporama.html#aed074da2997d3f1384439debf72a4253">strTypeAnimation</a> = <span class="stringliteral">&quot;blink&quot;</span>; <span class="comment">// Type d&#39;animation par défaut pour les hotspots diaporama</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="foldopen" id="foldopen00028" data-start="{" data-end="}">
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1HotspotDiaporama.html#ac45b335394e61082b7bb7ff26b64a6d4">   28</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1HotspotDiaporama.html#ac45b335394e61082b7bb7ff26b64a6d4">HotSpot</a>(<a class="code hl_variable" href="OpenLayers_8js.html#a18d400f3cb88fa087a97642bc8da34ee">Number</a> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">longit</a>, <a class="code hl_variable" href="OpenLayers_8js.html#a18d400f3cb88fa087a97642bc8da34ee">Number</a> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">latit</a>) {</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        this.<a class="code hl_function" href="classediteurpanovisu_1_1HotspotDiaporama.html#a1a597a395065ed58bc0b7e1dbe67ad27">setLongitude</a>((<span class="keywordtype">double</span>) longit);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        this.<a class="code hl_function" href="classediteurpanovisu_1_1HotspotDiaporama.html#ad5b295a9feb469195e57b10ebed08e99">setLatitude</a>((<span class="keywordtype">double</span>) latit);</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    }</div>
+</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="foldopen" id="foldopen00038" data-start="{" data-end="}">
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1HotspotDiaporama.html#a37de41296c00a1330ff5cdd6b05bc478">   38</a></span>    <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code hl_function" href="classediteurpanovisu_1_1HotspotDiaporama.html#a37de41296c00a1330ff5cdd6b05bc478">getLongitude</a>() {</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1HotspotDiaporama.html#a3de5f59555e32922eee35f5d0a884f33">longitude</a>;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    }</div>
+</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="foldopen" id="foldopen00047" data-start="{" data-end="}">
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1HotspotDiaporama.html#a1a597a395065ed58bc0b7e1dbe67ad27">   47</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1HotspotDiaporama.html#a1a597a395065ed58bc0b7e1dbe67ad27">setLongitude</a>(<a class="code hl_variable" href="OpenLayers_8js.html#a18d400f3cb88fa087a97642bc8da34ee">Number</a> <a class="code hl_variable" href="classediteurpanovisu_1_1HotspotDiaporama.html#a3de5f59555e32922eee35f5d0a884f33">longitude</a>) {</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">this.longitude</a> = (<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">double</a>) <a class="code hl_variable" href="classediteurpanovisu_1_1HotspotDiaporama.html#a3de5f59555e32922eee35f5d0a884f33">longitude</a>;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    }</div>
+</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="foldopen" id="foldopen00056" data-start="{" data-end="}">
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1HotspotDiaporama.html#a864502474da48b69f3260c20f1ed91cb">   56</a></span>    <span class="keyword">public</span> <span class="keywordtype">double</span> <a class="code hl_function" href="classediteurpanovisu_1_1HotspotDiaporama.html#a864502474da48b69f3260c20f1ed91cb">getLatitude</a>() {</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1HotspotDiaporama.html#ad570102f41ef9540ca6331b9604dd7d3">latitude</a>;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    }</div>
+</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="foldopen" id="foldopen00065" data-start="{" data-end="}">
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1HotspotDiaporama.html#ad5b295a9feb469195e57b10ebed08e99">   65</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1HotspotDiaporama.html#ad5b295a9feb469195e57b10ebed08e99">setLatitude</a>(<a class="code hl_variable" href="OpenLayers_8js.html#a18d400f3cb88fa087a97642bc8da34ee">Number</a> <a class="code hl_variable" href="classediteurpanovisu_1_1HotspotDiaporama.html#ad570102f41ef9540ca6331b9604dd7d3">latitude</a>) {</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">this.latitude</a> = (<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">double</a>) <a class="code hl_variable" href="classediteurpanovisu_1_1HotspotDiaporama.html#ad570102f41ef9540ca6331b9604dd7d3">latitude</a>;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    }</div>
+</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="foldopen" id="foldopen00074" data-start="{" data-end="}">
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1HotspotDiaporama.html#a20ed5c1c36d9c20e6b9c4611b85b264d">   74</a></span>    <span class="keyword">public</span> <span class="keywordtype">int</span> <a class="code hl_function" href="classediteurpanovisu_1_1HotspotDiaporama.html#a20ed5c1c36d9c20e6b9c4611b85b264d">getiNumDiapo</a>() {</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1HotspotDiaporama.html#ac1fb94ed7c1b283d7227e535946ee9ae">iNumDiapo</a>;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    }</div>
+</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="foldopen" id="foldopen00083" data-start="{" data-end="}">
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1HotspotDiaporama.html#a904014e382b02bab9604d8256906c8bd">   83</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1HotspotDiaporama.html#a904014e382b02bab9604d8256906c8bd">setiNumDiapo</a>(<span class="keywordtype">int</span> <a class="code hl_variable" href="classediteurpanovisu_1_1HotspotDiaporama.html#ac1fb94ed7c1b283d7227e535946ee9ae">iNumDiapo</a>) {</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">this.iNumDiapo</a> = <a class="code hl_variable" href="classediteurpanovisu_1_1HotspotDiaporama.html#ac1fb94ed7c1b283d7227e535946ee9ae">iNumDiapo</a>;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    }</div>
+</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="foldopen" id="foldopen00092" data-start="{" data-end="}">
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1HotspotDiaporama.html#af32b955c9698e5df9a670ab48cd287ae">   92</a></span>    <span class="keyword">public</span> <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_function" href="classediteurpanovisu_1_1HotspotDiaporama.html#af32b955c9698e5df9a670ab48cd287ae">getStrInfo</a>() {</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1HotspotDiaporama.html#a3566ea0592801c399f76278bef61f9a5">strInfo</a>;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    }</div>
+</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="foldopen" id="foldopen00101" data-start="{" data-end="}">
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1HotspotDiaporama.html#a163e6c260d6e6c9e9ec342c3a6214520">  101</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1HotspotDiaporama.html#a163e6c260d6e6c9e9ec342c3a6214520">setStrInfo</a>(<a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_variable" href="classediteurpanovisu_1_1HotspotDiaporama.html#a3566ea0592801c399f76278bef61f9a5">strInfo</a>) {</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">this.strInfo</a> = <a class="code hl_variable" href="classediteurpanovisu_1_1HotspotDiaporama.html#a3566ea0592801c399f76278bef61f9a5">strInfo</a>;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    }</div>
+</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="foldopen" id="foldopen00110" data-start="{" data-end="}">
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1HotspotDiaporama.html#a03fc482f9b39852efadbbf28a3d3b164">  110</a></span>    <span class="keyword">public</span> <span class="keywordtype">boolean</span> <a class="code hl_function" href="classediteurpanovisu_1_1HotspotDiaporama.html#a03fc482f9b39852efadbbf28a3d3b164">isbAnime</a>() {</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1HotspotDiaporama.html#af440f352cad93f82ee70b76e2f82eebf">bAnime</a>;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    }</div>
+</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
+<div class="foldopen" id="foldopen00119" data-start="{" data-end="}">
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1HotspotDiaporama.html#a8d5812fd290adb1cb28e6db80b59ec16">  119</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1HotspotDiaporama.html#a8d5812fd290adb1cb28e6db80b59ec16">setbAnime</a>(<span class="keywordtype">boolean</span> <a class="code hl_variable" href="classediteurpanovisu_1_1HotspotDiaporama.html#af440f352cad93f82ee70b76e2f82eebf">bAnime</a>) {</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">this.bAnime</a> = <a class="code hl_variable" href="classediteurpanovisu_1_1HotspotDiaporama.html#af440f352cad93f82ee70b76e2f82eebf">bAnime</a>;</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    }</div>
+</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
+<div class="foldopen" id="foldopen00128" data-start="{" data-end="}">
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1HotspotDiaporama.html#af0d5c3eb44b994b444c6c14d1f9f0873">  128</a></span>    <span class="keyword">public</span> <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_function" href="classediteurpanovisu_1_1HotspotDiaporama.html#af0d5c3eb44b994b444c6c14d1f9f0873">getStrTypeAnimation</a>() {</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1HotspotDiaporama.html#aed074da2997d3f1384439debf72a4253">strTypeAnimation</a>;</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    }</div>
+</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
+<div class="foldopen" id="foldopen00137" data-start="{" data-end="}">
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1HotspotDiaporama.html#a3087c9119311482e7c2c9dd3df090c4b">  137</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1HotspotDiaporama.html#a3087c9119311482e7c2c9dd3df090c4b">setStrTypeAnimation</a>(<a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_variable" href="classediteurpanovisu_1_1HotspotDiaporama.html#aed074da2997d3f1384439debf72a4253">strTypeAnimation</a>) {</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">this.strTypeAnimation</a> = <a class="code hl_variable" href="classediteurpanovisu_1_1HotspotDiaporama.html#aed074da2997d3f1384439debf72a4253">strTypeAnimation</a>;</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        <span class="comment">// Synchroniser bAnime avec strTypeAnimation</span></div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">this.bAnime</a> = !(<span class="stringliteral">&quot;none&quot;</span>.equals(<a class="code hl_variable" href="classediteurpanovisu_1_1HotspotDiaporama.html#aed074da2997d3f1384439debf72a4253">strTypeAnimation</a>) || <a class="code hl_variable" href="classediteurpanovisu_1_1HotspotDiaporama.html#aed074da2997d3f1384439debf72a4253">strTypeAnimation</a> == <span class="keyword">null</span> || <a class="code hl_variable" href="classediteurpanovisu_1_1HotspotDiaporama.html#aed074da2997d3f1384439debf72a4253">strTypeAnimation</a>.isEmpty());</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    }</div>
+</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>}</div>
+</div>
+<div class="ttc" id="aOpenLayers_8js_html_a18d400f3cb88fa087a97642bc8da34ee"><div class="ttname"><a href="OpenLayers_8js.html#a18d400f3cb88fa087a97642bc8da34ee">Number</a></div><div class="ttdeci">OpenLayers Number</div><div class="ttdef"><b>Definition</b> <a href="OpenLayers_8js_source.html#l00061">OpenLayers.js:61</a></div></div>
+<div class="ttc" id="aOpenLayers_8js_html_a4ca754488880c6622cdd0e257fe5f5ea"><div class="ttname"><a href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a></div><div class="ttdeci">OpenLayers String</div><div class="ttdef"><b>Definition</b> <a href="OpenLayers_8js_source.html#l00059">OpenLayers.js:59</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1HotspotDiaporama_html"><div class="ttname"><a href="classediteurpanovisu_1_1HotspotDiaporama.html">editeurpanovisu.HotspotDiaporama</a></div><div class="ttdoc">Définition des hotspots Image.</div><div class="ttdef"><b>Definition</b> <a href="HotspotDiaporama_8java_source.html#l00013">HotspotDiaporama.java:13</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1HotspotDiaporama_html_a03fc482f9b39852efadbbf28a3d3b164"><div class="ttname"><a href="classediteurpanovisu_1_1HotspotDiaporama.html#a03fc482f9b39852efadbbf28a3d3b164">editeurpanovisu.HotspotDiaporama.isbAnime</a></div><div class="ttdeci">boolean isbAnime()</div><div class="ttdoc">Retourne la valeur de bAnime.</div><div class="ttdef"><b>Definition</b> <a href="HotspotDiaporama_8java_source.html#l00110">HotspotDiaporama.java:110</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1HotspotDiaporama_html_a163e6c260d6e6c9e9ec342c3a6214520"><div class="ttname"><a href="classediteurpanovisu_1_1HotspotDiaporama.html#a163e6c260d6e6c9e9ec342c3a6214520">editeurpanovisu.HotspotDiaporama.setStrInfo</a></div><div class="ttdeci">void setStrInfo(String strInfo)</div><div class="ttdoc">Définit la valeur de strInfo.</div><div class="ttdef"><b>Definition</b> <a href="HotspotDiaporama_8java_source.html#l00101">HotspotDiaporama.java:101</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1HotspotDiaporama_html_a1a597a395065ed58bc0b7e1dbe67ad27"><div class="ttname"><a href="classediteurpanovisu_1_1HotspotDiaporama.html#a1a597a395065ed58bc0b7e1dbe67ad27">editeurpanovisu.HotspotDiaporama.setLongitude</a></div><div class="ttdeci">void setLongitude(Number longitude)</div><div class="ttdoc">Définit la valeur de longitude.</div><div class="ttdef"><b>Definition</b> <a href="HotspotDiaporama_8java_source.html#l00047">HotspotDiaporama.java:47</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1HotspotDiaporama_html_a20ed5c1c36d9c20e6b9c4611b85b264d"><div class="ttname"><a href="classediteurpanovisu_1_1HotspotDiaporama.html#a20ed5c1c36d9c20e6b9c4611b85b264d">editeurpanovisu.HotspotDiaporama.getiNumDiapo</a></div><div class="ttdeci">int getiNumDiapo()</div><div class="ttdoc">Retourne la valeur de iNumDiapo.</div><div class="ttdef"><b>Definition</b> <a href="HotspotDiaporama_8java_source.html#l00074">HotspotDiaporama.java:74</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1HotspotDiaporama_html_a3087c9119311482e7c2c9dd3df090c4b"><div class="ttname"><a href="classediteurpanovisu_1_1HotspotDiaporama.html#a3087c9119311482e7c2c9dd3df090c4b">editeurpanovisu.HotspotDiaporama.setStrTypeAnimation</a></div><div class="ttdeci">void setStrTypeAnimation(String strTypeAnimation)</div><div class="ttdoc">Définit la valeur de strTypeAnimation.</div><div class="ttdef"><b>Definition</b> <a href="HotspotDiaporama_8java_source.html#l00137">HotspotDiaporama.java:137</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1HotspotDiaporama_html_a3566ea0592801c399f76278bef61f9a5"><div class="ttname"><a href="classediteurpanovisu_1_1HotspotDiaporama.html#a3566ea0592801c399f76278bef61f9a5">editeurpanovisu.HotspotDiaporama.strInfo</a></div><div class="ttdeci">String strInfo</div><div class="ttdef"><b>Definition</b> <a href="HotspotDiaporama_8java_source.html#l00017">HotspotDiaporama.java:17</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1HotspotDiaporama_html_a37de41296c00a1330ff5cdd6b05bc478"><div class="ttname"><a href="classediteurpanovisu_1_1HotspotDiaporama.html#a37de41296c00a1330ff5cdd6b05bc478">editeurpanovisu.HotspotDiaporama.getLongitude</a></div><div class="ttdeci">double getLongitude()</div><div class="ttdoc">Retourne la valeur de longitude.</div><div class="ttdef"><b>Definition</b> <a href="HotspotDiaporama_8java_source.html#l00038">HotspotDiaporama.java:38</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1HotspotDiaporama_html_a3de5f59555e32922eee35f5d0a884f33"><div class="ttname"><a href="classediteurpanovisu_1_1HotspotDiaporama.html#a3de5f59555e32922eee35f5d0a884f33">editeurpanovisu.HotspotDiaporama.longitude</a></div><div class="ttdeci">double longitude</div><div class="ttdef"><b>Definition</b> <a href="HotspotDiaporama_8java_source.html#l00015">HotspotDiaporama.java:15</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1HotspotDiaporama_html_a864502474da48b69f3260c20f1ed91cb"><div class="ttname"><a href="classediteurpanovisu_1_1HotspotDiaporama.html#a864502474da48b69f3260c20f1ed91cb">editeurpanovisu.HotspotDiaporama.getLatitude</a></div><div class="ttdeci">double getLatitude()</div><div class="ttdoc">Retourne la valeur de latitude.</div><div class="ttdef"><b>Definition</b> <a href="HotspotDiaporama_8java_source.html#l00056">HotspotDiaporama.java:56</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1HotspotDiaporama_html_a8d5812fd290adb1cb28e6db80b59ec16"><div class="ttname"><a href="classediteurpanovisu_1_1HotspotDiaporama.html#a8d5812fd290adb1cb28e6db80b59ec16">editeurpanovisu.HotspotDiaporama.setbAnime</a></div><div class="ttdeci">void setbAnime(boolean bAnime)</div><div class="ttdoc">Définit la valeur de bAnime.</div><div class="ttdef"><b>Definition</b> <a href="HotspotDiaporama_8java_source.html#l00119">HotspotDiaporama.java:119</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1HotspotDiaporama_html_a904014e382b02bab9604d8256906c8bd"><div class="ttname"><a href="classediteurpanovisu_1_1HotspotDiaporama.html#a904014e382b02bab9604d8256906c8bd">editeurpanovisu.HotspotDiaporama.setiNumDiapo</a></div><div class="ttdeci">void setiNumDiapo(int iNumDiapo)</div><div class="ttdoc">Définit la valeur de iNumDiapo.</div><div class="ttdef"><b>Definition</b> <a href="HotspotDiaporama_8java_source.html#l00083">HotspotDiaporama.java:83</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1HotspotDiaporama_html_ac1fb94ed7c1b283d7227e535946ee9ae"><div class="ttname"><a href="classediteurpanovisu_1_1HotspotDiaporama.html#ac1fb94ed7c1b283d7227e535946ee9ae">editeurpanovisu.HotspotDiaporama.iNumDiapo</a></div><div class="ttdeci">int iNumDiapo</div><div class="ttdef"><b>Definition</b> <a href="HotspotDiaporama_8java_source.html#l00016">HotspotDiaporama.java:16</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1HotspotDiaporama_html_ac45b335394e61082b7bb7ff26b64a6d4"><div class="ttname"><a href="classediteurpanovisu_1_1HotspotDiaporama.html#ac45b335394e61082b7bb7ff26b64a6d4">editeurpanovisu.HotspotDiaporama.HotSpot</a></div><div class="ttdeci">void HotSpot(Number longit, Number latit)</div><div class="ttdef"><b>Definition</b> <a href="HotspotDiaporama_8java_source.html#l00028">HotspotDiaporama.java:28</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1HotspotDiaporama_html_ad570102f41ef9540ca6331b9604dd7d3"><div class="ttname"><a href="classediteurpanovisu_1_1HotspotDiaporama.html#ad570102f41ef9540ca6331b9604dd7d3">editeurpanovisu.HotspotDiaporama.latitude</a></div><div class="ttdeci">double latitude</div><div class="ttdef"><b>Definition</b> <a href="HotspotDiaporama_8java_source.html#l00015">HotspotDiaporama.java:15</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1HotspotDiaporama_html_ad5b295a9feb469195e57b10ebed08e99"><div class="ttname"><a href="classediteurpanovisu_1_1HotspotDiaporama.html#ad5b295a9feb469195e57b10ebed08e99">editeurpanovisu.HotspotDiaporama.setLatitude</a></div><div class="ttdeci">void setLatitude(Number latitude)</div><div class="ttdoc">Définit la valeur de latitude.</div><div class="ttdef"><b>Definition</b> <a href="HotspotDiaporama_8java_source.html#l00065">HotspotDiaporama.java:65</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1HotspotDiaporama_html_aed074da2997d3f1384439debf72a4253"><div class="ttname"><a href="classediteurpanovisu_1_1HotspotDiaporama.html#aed074da2997d3f1384439debf72a4253">editeurpanovisu.HotspotDiaporama.strTypeAnimation</a></div><div class="ttdeci">String strTypeAnimation</div><div class="ttdef"><b>Definition</b> <a href="HotspotDiaporama_8java_source.html#l00019">HotspotDiaporama.java:19</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1HotspotDiaporama_html_af0d5c3eb44b994b444c6c14d1f9f0873"><div class="ttname"><a href="classediteurpanovisu_1_1HotspotDiaporama.html#af0d5c3eb44b994b444c6c14d1f9f0873">editeurpanovisu.HotspotDiaporama.getStrTypeAnimation</a></div><div class="ttdeci">String getStrTypeAnimation()</div><div class="ttdoc">Retourne la valeur de strTypeAnimation.</div><div class="ttdef"><b>Definition</b> <a href="HotspotDiaporama_8java_source.html#l00128">HotspotDiaporama.java:128</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1HotspotDiaporama_html_af32b955c9698e5df9a670ab48cd287ae"><div class="ttname"><a href="classediteurpanovisu_1_1HotspotDiaporama.html#af32b955c9698e5df9a670ab48cd287ae">editeurpanovisu.HotspotDiaporama.getStrInfo</a></div><div class="ttdeci">String getStrInfo()</div><div class="ttdoc">Retourne la valeur de strInfo.</div><div class="ttdef"><b>Definition</b> <a href="HotspotDiaporama_8java_source.html#l00092">HotspotDiaporama.java:92</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1HotspotDiaporama_html_af440f352cad93f82ee70b76e2f82eebf"><div class="ttname"><a href="classediteurpanovisu_1_1HotspotDiaporama.html#af440f352cad93f82ee70b76e2f82eebf">editeurpanovisu.HotspotDiaporama.bAnime</a></div><div class="ttdeci">boolean bAnime</div><div class="ttdef"><b>Definition</b> <a href="HotspotDiaporama_8java_source.html#l00018">HotspotDiaporama.java:18</a></div></div>
+<div class="ttc" id="aleaflet_8js_html_a2ecc0b03b1eaf4f1ca537029a6f89ac0"><div class="ttname"><a href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">k</a></div><div class="ttdeci">function k(t, e, i, n)</div><div class="ttdef"><b>Definition</b> <a href="leaflet_8js_source.html#l00005">leaflet.js:5</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_184160a943439c2c782fe244782aeddc.html">editeurpanovisu</a></li><li class="navelem"><a class="el" href="HotspotDiaporama_8java.html">HotspotDiaporama.java</a></li>
+    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

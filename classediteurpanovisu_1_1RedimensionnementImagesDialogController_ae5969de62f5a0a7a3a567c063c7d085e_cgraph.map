@@ -1,0 +1,45 @@
+<map id="editeurpanovisu.RedimensionnementImagesDialogController.creerZoneDragDrop" name="editeurpanovisu.RedimensionnementImagesDialogController.creerZoneDragDrop">
+<area shape="rect" id="Node000001" title="Crée la zone de drag &amp; drop pour ajouter des images." alt="" coords="5,137,312,177"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a2b9aee1b3f08a69334efd1cefa0e79f7" title="Configure les gestionnaires d&#39;événements pour le drag &amp; drop." alt="" coords="1344,165,1651,205"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="313,157,1331,179,1330,184,313,163"/>
+<area shape="rect" id="Node000005" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="2424,304,2463,329"/>
+<area shape="poly" id="edge7_Node000001_Node000005" title=" " alt="" coords="215,134,327,98,481,57,568,39,658,24,749,14,839,10,1865,10,2018,5,2083,3,2143,5,2200,15,2257,34,2315,67,2378,116,2395,135,2409,156,2429,204,2440,251,2444,290,2439,290,2434,252,2424,205,2405,159,2391,138,2374,120,2312,72,2255,39,2199,20,2142,10,2083,8,2019,10,1865,15,839,15,750,19,659,29,569,44,482,62,329,103,216,139"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1EditeurPanovisu.html#a786c8cb886a5b0d7bef0bc311876a62e" title="Charge une icône SVG avec la taille spécifiée." alt="" coords="373,107,640,147"/>
+<area shape="poly" id="edge8_Node000001_Node000006" title=" " alt="" coords="312,141,359,137,360,142,313,146"/>
+<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a3542f5788254051cb28b243c631b4547" title="Ouvre un FileChooser pour sélectionner des fichiers d&#39;images." alt="" coords="360,311,653,351"/>
+<area shape="poly" id="edge11_Node000001_Node000008" title=" " alt="" coords="201,174,455,303,453,308,198,179"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a0e623fd0e31ae9b25cab87ab4103e166" title="Ajoute des fichiers à la liste de traitement." alt="" coords="1727,219,2001,259"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="1633,202,1716,215,1715,220,1632,207"/>
+<area shape="poly" id="edge6_Node000002_Node000005" title=" " alt="" coords="1651,171,1839,162,2050,161,2152,166,2243,176,2320,191,2377,213,2398,229,2414,249,2436,290,2431,292,2410,252,2394,233,2375,218,2319,196,2242,181,2151,172,2050,167,1839,168,1651,176"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a296d1a36971c72175f03caafe9b6e3bf" title="Vérifie si un fichier est une image valide." alt="" coords="2087,267,2367,307"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="2002,255,2073,264,2072,270,2001,260"/>
+<area shape="poly" id="edge5_Node000003_Node000005" title=" " alt="" coords="1991,217,2079,210,2178,211,2279,224,2329,236,2377,253,2405,270,2426,292,2423,296,2401,274,2375,258,2328,241,2278,229,2177,217,2079,216,1992,222"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="2368,304,2410,310,2410,315,2367,309"/>
+<area shape="poly" id="edge10_Node000006_Node000005" title=" " alt="" coords="641,125,1161,125,1865,125,1945,121,2015,113,2136,98,2193,98,2250,108,2311,131,2378,171,2403,197,2422,228,2434,261,2441,290,2435,291,2429,263,2417,231,2399,200,2374,175,2309,135,2249,113,2192,103,2136,103,2015,119,1945,127,1865,130,1161,130,641,130"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1EditeurPanovisu.html#ae9640dc5eb2933e07534464d6477d96c" title="Retourne la valeur de strRepertAppli." alt="" coords="711,50,971,90"/>
+<area shape="poly" id="edge9_Node000006_Node000007" title=" " alt="" coords="623,105,710,90,711,95,624,110"/>
+<area shape="poly" id="edge12_Node000008_Node000003" title=" " alt="" coords="555,309,623,284,701,265,838,245,979,231,1120,222,1258,218,1511,218,1713,226,1713,232,1511,224,1258,223,1120,227,980,236,839,250,702,270,624,290,556,314"/>
+<area shape="poly" id="edge14_Node000008_Node000005" title=" " alt="" coords="533,350,606,406,653,437,703,465,825,527,924,572,973,588,1026,600,1088,606,1161,609,1865,609,1946,613,2017,623,2141,642,2198,644,2254,635,2312,610,2374,567,2386,552,2397,528,2415,466,2436,343,2442,343,2420,467,2402,530,2391,554,2378,571,2315,615,2255,640,2198,649,2140,648,2016,628,1945,618,1865,614,1161,614,1087,612,1025,605,971,593,922,577,823,532,700,470,650,442,603,410,530,354"/>
+<area shape="rect" id="Node000009" href="$classediteurpanovisu_1_1EditeurPanovisu.html#a4ae70e485c6f53388103b384556ad215" title="Retourne la valeur de strDernierRepertoireImages." alt="" coords="711,279,971,319"/>
+<area shape="poly" id="edge13_Node000008_Node000009" title=" " alt="" coords="654,315,697,311,697,316,654,320"/>
+<area shape="rect" id="Node000010" href="$classediteurpanovisu_1_1EditeurPanovisu.html#aab293202a1140d1151a35062614f436e" title="Sauvegarde les préférences de l&#39;application dans le fichier preferences.cfg." alt="" coords="701,343,980,383"/>
+<area shape="poly" id="edge15_Node000008_Node000010" title=" " alt="" coords="654,343,688,346,687,351,654,348"/>
+<area shape="rect" id="Node000017" href="$classediteurpanovisu_1_1EditeurPanovisu.html#a79a68ce8ed649c0402246ee4f17a3f87" title="Définit la valeur de strDernierRepertoireImages." alt="" coords="1033,479,1291,519"/>
+<area shape="poly" id="edge25_Node000008_Node000017" title=" " alt="" coords="565,349,702,393,883,438,1046,474,1045,479,881,443,701,398,563,354"/>
+<area shape="poly" id="edge24_Node000010_Node000005" title=" " alt="" coords="980,357,1586,341,2376,317,2410,315,2410,321,2376,322,1586,347,980,363"/>
+<area shape="rect" id="Node000011" href="$classediteurpanovisu_1_1gpu_1_1GPUManager.html#a65cc6674dbee14bcf2d3f11f06a26e4b" title="Récupère l&#39;instance unique du gestionnaire GPU." alt="" coords="1028,401,1296,441"/>
+<area shape="poly" id="edge16_Node000010_Node000011" title=" " alt="" coords="954,381,1037,396,1036,401,953,386"/>
+<area shape="rect" id="Node000016" href="$classediteurpanovisu_1_1gpu_1_1GPUManager.html#a911a28e45e8baa207c84e9b4c0c9a0d7" title="Vérifie si l&#39;utilisation du GPU est activée par l&#39;utilisateur." alt="" coords="1033,279,1291,319"/>
+<area shape="poly" id="edge23_Node000010_Node000016" title=" " alt="" coords="941,341,1047,319,1049,325,942,346"/>
+<area shape="rect" id="Node000012" href="$classediteurpanovisu_1_1gpu_1_1GPUManager.html#a3ba0aa0d6379b3b216d07d19ee71e251" title="Constructeur privé (singleton)" alt="" coords="1374,413,1621,453"/>
+<area shape="poly" id="edge17_Node000011_Node000012" title=" " alt="" coords="1296,423,1360,425,1360,431,1296,428"/>
+<area shape="rect" id="Node000013" href="$classediteurpanovisu_1_1gpu_1_1GPUManager.html#ad758dc8906499865aeaf412236ba042c" title="Initialise OpenCL et détecte les GPU disponibles." alt="" coords="1699,441,2029,467"/>
+<area shape="poly" id="edge18_Node000012_Node000013" title=" " alt="" coords="1621,437,1685,441,1685,446,1621,443"/>
+<area shape="poly" id="edge19_Node000013_Node000005" title=" " alt="" coords="2030,462,2129,464,2229,461,2315,451,2349,443,2375,432,2396,413,2413,390,2433,341,2438,344,2417,392,2400,417,2377,436,2351,448,2316,457,2229,467,2129,469,2029,467"/>
+<area shape="rect" id="Node000014" href="$leaflet_8js.html#acaad4b36c0476b761b674f28b36d565c" title=" " alt="" coords="2207,497,2246,523"/>
+<area shape="poly" id="edge20_Node000013_Node000014" title=" " alt="" coords="1947,464,2194,503,2193,508,1947,469"/>
+<area shape="rect" id="Node000015" href="$classediteurpanovisu_1_1gpu_1_1GPUManager.html#af70605c6c0bf0dd246801d1c51fb90dc" title="Récupère les informations détaillées du GPU." alt="" coords="2077,382,2376,422"/>
+<area shape="poly" id="edge21_Node000013_Node000015" title=" " alt="" coords="1953,439,2073,421,2074,427,1954,444"/>
+<area shape="poly" id="edge22_Node000015_Node000005" title=" " alt="" coords="2324,380,2375,361,2415,336,2418,340,2377,366,2326,385"/>
+<area shape="poly" id="edge26_Node000017_Node000005" title=" " alt="" coords="1292,509,1573,534,1912,555,2073,561,2212,560,2317,551,2352,543,2375,533,2394,514,2410,492,2422,466,2430,439,2439,386,2440,343,2446,343,2444,387,2435,441,2427,468,2415,494,2398,518,2377,538,2354,548,2317,556,2212,565,2073,566,1912,561,1573,539,1291,515"/>
+</map>

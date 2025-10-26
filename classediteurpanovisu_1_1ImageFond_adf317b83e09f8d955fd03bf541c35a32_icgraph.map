@@ -1,0 +1,66 @@
+<map id="editeurpanovisu.ImageFond.getiCalqueImage" name="editeurpanovisu.ImageFond.getiCalqueImage">
+<area shape="rect" id="Node000001" title="Retourne la valeur de iCalqueImage." alt="" coords="2909,49,3141,89"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1EditeurPanovisu.html#ad4c8e1684c8b8d0e96cfc28dc0d93404" title=" " alt="" coords="5,5,289,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="2920,49,2861,40,2734,25,2635,18,2409,15,801,15,529,18,290,23,290,18,529,12,801,9,2409,9,2636,13,2735,20,2862,35,2921,44"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a6841b5ee320549f9685bf881b97271f6" title="Réordonne les éléments d&#39;interface selon les calques." alt="" coords="2585,182,2861,237"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="2970,97,2785,184,2782,179,2968,93"/>
+<area shape="rect" id="Node000024" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#ab66509c63a85a8285a081b24049e8774" title="Retourne le template d&#39;interface actuellement sélectionné" alt="" coords="2600,49,2847,89"/>
+<area shape="poly" id="edge36_Node000001_Node000024" title=" " alt="" coords="2896,72,2847,72,2847,67,2896,67"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#af7f1e67219c75f044a231abc76bcf790" title="Affiche la barre d&#39;outils classique avec boutons de navigation." alt="" coords="2294,215,2521,270"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="2572,228,2521,233,2521,228,2571,223"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a7c5cff6934d95be9a4babb6426a5ac26" title=" " alt="" coords="1983,330,2222,385"/>
+<area shape="poly" id="edge31_Node000003_Node000005" title=" " alt="" coords="2651,244,2596,266,2538,285,2457,306,2374,322,2223,346,2222,341,2373,317,2456,300,2537,280,2594,261,2649,240"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a55c8afda208674955a13d48d02be41b8" title="Affiche l&#39;interface selon le template actuel." alt="" coords="1677,279,1928,319"/>
+<area shape="poly" id="edge32_Node000003_Node000006" title=" " alt="" coords="2683,248,2618,298,2579,322,2538,342,2455,373,2388,387,2230,400,2102,415,2045,414,1975,400,1933,385,1892,364,1828,321,1831,317,1895,359,1935,380,1977,395,2046,408,2101,409,2229,395,2387,382,2454,367,2536,338,2577,317,2615,293,2680,244"/>
+<area shape="rect" id="Node000022" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#ac7fa988dc99d8684686127a2269cd66e" title="Crée et initialise l&#39;interface graphique principale de l&#39;éditeur." alt="" coords="1986,100,2219,140"/>
+<area shape="poly" id="edge35_Node000003_Node000022" title=" " alt="" coords="2571,195,2277,155,2207,143,2208,137,2278,149,2572,189"/>
+<area shape="rect" id="Node000023" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#adfe4c44c6a7320ef314eca16dc9afcb3" title="pannel des niveaux de calque" alt="" coords="2277,100,2537,140"/>
+<area shape="poly" id="edge33_Node000003_Node000023" title=" " alt="" coords="2612,181,2479,143,2480,138,2614,176"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="2323,278,2230,313,2179,332,2177,327,2228,308,2321,273"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="2281,263,2230,269,1929,294,1928,289,2229,264,2280,258"/>
+<area shape="rect" id="Node000017" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a5bdd1505c1ad1eee506c2618c9368994" title=" " alt="" coords="1976,215,2229,255"/>
+<area shape="poly" id="edge21_Node000004_Node000017" title=" " alt="" coords="2280,242,2229,241,2230,235,2281,237"/>
+<area shape="rect" id="Node000019" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a568c34e865fb653f63b8fa7a9a9cafc8" title="Rafraîchit l&#39;affichage complet de l&#39;interface utilisateur." alt="" coords="1695,151,1910,191"/>
+<area shape="poly" id="edge30_Node000004_Node000019" title=" " alt="" coords="2283,215,2229,205,2061,187,1910,177,1910,172,2062,181,2230,200,2284,210"/>
+<area shape="poly" id="edge29_Node000004_Node000022" title=" " alt="" coords="2305,212,2276,198,2252,179,2228,161,2184,143,2186,138,2231,156,2255,175,2279,194,2307,208"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1EditeurPanovisu.html#a87b29dc258cfc67370b1f27809e91b8e" title=" " alt="" coords="1371,276,1629,316"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="1663,300,1630,300,1630,294,1664,295"/>
+<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1EditeurPanovisu.html#ab4beb1597b660a4a253befc6e76f1c54" title=" " alt="" coords="9,339,286,379"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="1374,321,1323,327,1034,347,747,358,488,363,286,363,286,358,488,357,747,353,1034,342,1322,321,1373,315"/>
+<area shape="rect" id="Node000009" href="$classediteurpanovisu_1_1EditeurPanovisu.html#a6d19b4d885ee6fcec827b91956295732" title=" " alt="" coords="1018,272,1295,312"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="1357,297,1296,296,1296,291,1357,292"/>
+<area shape="rect" id="Node000010" href="$classediteurpanovisu_1_1EditeurPanovisu.html#af0d1c32bb78acbff561c822a0d15f760" title=" " alt="" coords="663,272,943,312"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="1005,304,943,303,943,298,1005,298"/>
+<area shape="poly" id="edge10_Node000010_Node000008" title=" " alt="" coords="649,307,338,336,286,342,286,337,337,331,649,301"/>
+<area shape="poly" id="edge11_Node000010_Node000009" title=" " alt="" coords="956,280,1018,281,1018,286,956,286"/>
+<area shape="rect" id="Node000011" href="$classediteurpanovisu_1_1EditeurPanovisu.html#a9f3ea25b35d4884524508dab3dc4fd6a" title=" " alt="" coords="337,215,615,255"/>
+<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="674,272,590,257,591,252,675,267"/>
+<area shape="rect" id="Node000016" href="$classediteurpanovisu_1_1EditeurPanovisu.html#a7b2e25dc717eb52b62e23d54ec4c124a" title=" " alt="" coords="337,151,615,191"/>
+<area shape="poly" id="edge20_Node000010_Node000016" title=" " alt="" coords="752,268,687,236,614,205,574,193,576,188,616,200,690,231,755,263"/>
+<area shape="poly" id="edge14_Node000011_Node000002" title=" " alt="" coords="341,209,335,205,321,188,314,171,310,138,307,104,300,88,287,73,269,59,249,48,251,43,272,54,291,69,305,86,312,103,315,137,319,170,326,185,339,201,344,205"/>
+<area shape="poly" id="edge15_Node000011_Node000008" title=" " alt="" coords="372,262,339,278,324,290,316,303,306,316,291,329,265,341,263,336,288,324,303,313,311,300,321,287,336,274,370,257"/>
+<area shape="poly" id="edge16_Node000011_Node000009" title=" " alt="" coords="629,237,781,244,943,257,1036,269,1035,275,942,263,781,250,629,242"/>
+<area shape="rect" id="Node000012" href="$classediteurpanovisu_1_1EditeurPanovisu.html#aa7a63625ea0406427eb7ae612cd72d4e" title="Crée un fichier ZIP contenant la visite virtuelle." alt="" coords="11,275,283,315"/>
+<area shape="poly" id="edge13_Node000011_Node000012" title=" " alt="" coords="353,260,258,277,257,272,352,255"/>
+<area shape="rect" id="Node000013" href="$classediteurpanovisu_1_1EditeurPanovisu.html#a9b46b222714af12c06ec33d410400773" title=" " alt="" coords="5,147,289,187"/>
+<area shape="poly" id="edge17_Node000011_Node000013" title=" " alt="" coords="365,215,244,189,245,184,366,209"/>
+<area shape="rect" id="Node000014" href="$classediteurpanovisu_1_1EditeurPanovisu.html#ac9d449399ccd38843fa12e716f0c9611" title=" " alt="" coords="5,83,289,123"/>
+<area shape="poly" id="edge18_Node000011_Node000014" title=" " alt="" coords="346,211,336,205,319,188,311,170,303,153,288,137,266,125,269,120,291,133,308,150,316,168,323,185,339,201,348,206"/>
+<area shape="rect" id="Node000015" href="$classediteurpanovisu_1_1EditeurPanovisu.html#aef8c9b28c3e88d6e27e3f62b9a901134" title=" " alt="" coords="8,211,287,251"/>
+<area shape="poly" id="edge19_Node000011_Node000015" title=" " alt="" coords="323,235,287,235,287,230,323,230"/>
+<area shape="poly" id="edge22_Node000017_Node000006" title=" " alt="" coords="1996,260,1897,281,1896,276,1994,255"/>
+<area shape="rect" id="Node000018" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a8c634f775c31c1a4db22d5ef0659f7e4" title=" " alt="" coords="1692,215,1913,255"/>
+<area shape="poly" id="edge23_Node000017_Node000018" title=" " alt="" coords="1962,237,1914,237,1914,232,1962,232"/>
+<area shape="poly" id="edge24_Node000017_Node000019" title=" " alt="" coords="1994,214,1896,193,1897,188,1996,209"/>
+<area shape="poly" id="edge25_Node000019_Node000007" title=" " alt="" coords="1701,197,1678,205,1600,241,1535,278,1533,273,1598,237,1676,200,1699,192"/>
+<area shape="rect" id="Node000020" href="$classediteurpanovisu_1_1EditeurPanovisu.html#a53cccf6a6b2693c872947460b66ae8ee" title=" " alt="" coords="1371,151,1629,191"/>
+<area shape="poly" id="edge26_Node000019_Node000020" title=" " alt="" coords="1682,173,1629,173,1629,168,1682,168"/>
+<area shape="poly" id="edge28_Node000020_Node000014" title=" " alt="" coords="1389,151,1322,141,1035,118,750,107,492,102,290,103,290,98,492,97,750,101,1036,113,1323,136,1390,146"/>
+<area shape="rect" id="Node000021" href="$classediteurpanovisu_1_1EditeurPanovisu.html#a924d3ccff3e4f402d2309cd2eade3237" title=" " alt="" coords="991,151,1323,191"/>
+<area shape="poly" id="edge27_Node000020_Node000021" title=" " alt="" coords="1357,173,1323,173,1323,168,1357,168"/>
+<area shape="poly" id="edge34_Node000023_Node000022" title=" " alt="" coords="2264,123,2220,123,2220,117,2264,117"/>
+<area shape="rect" id="Node000025" href="$classediteurpanovisu_1_1EditeurPanovisu.html#aaee69ab54364f89b58458c744a4195c0" title=" " alt="" coords="663,151,942,191"/>
+<area shape="poly" id="edge37_Node000024_Node000025" title=" " alt="" coords="2586,70,2104,65,1499,65,1413,68,1325,75,1154,98,1001,126,882,153,881,148,999,121,1153,92,1324,69,1412,63,1499,60,2104,60,2586,64"/>
+<area shape="poly" id="edge38_Node000025_Node000011" title=" " alt="" coords="687,196,579,217,578,212,686,191"/>
+<area shape="poly" id="edge39_Node000025_Node000016" title=" " alt="" coords="649,173,615,173,615,168,649,168"/>
+</map>

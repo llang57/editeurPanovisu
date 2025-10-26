@@ -1,0 +1,5 @@
+<map id="editeurpanovisu.VisualiseurImagesPanoramiques.imgTransformationImageCPU" name="editeurpanovisu.VisualiseurImagesPanoramiques.imgTransformationImageCPU">
+<area shape="rect" id="Node000001" title="Version CPU de la transformation Mercator (fallback)" alt="" coords="384,5,673,60"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html#ae3699b6aef840268a65b12f4181f5cc0" title="Transforme et redimensionne une image panoramique rectangulaire." alt="" coords="5,13,336,53"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="370,35,336,35,336,30,370,30"/>
+</map>

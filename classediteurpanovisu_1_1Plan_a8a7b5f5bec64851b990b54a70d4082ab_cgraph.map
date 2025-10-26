@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.Plan.removeStrPanoramique" name="editeurpanovisu.Plan.removeStrPanoramique">
+<area shape="rect" id="Node000001" title="Définit la valeur de panoramiques." alt="" coords="5,23,219,63"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="267,5,305,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="219,25,252,20,253,25,219,30"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="267,55,305,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="219,55,253,60,252,66,219,61"/>
+</map>

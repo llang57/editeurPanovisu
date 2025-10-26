@@ -1,0 +1,10 @@
+<map id="editeurpanovisu.EditeurPanovisu.retireAffichageLigne" name="editeurpanovisu.EditeurPanovisu.retireAffichageLigne">
+<area shape="rect" id="Node000001" title=" " alt="" coords="692,35,967,75"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1EditeurPanovisu.html#ac9d449399ccd38843fa12e716f0c9611" title=" " alt="" coords="29,5,313,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="678,51,314,34,314,29,678,45"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1EditeurPanovisu.html#a53cccf6a6b2693c872947460b66ae8ee" title=" " alt="" coords="385,63,644,103"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="679,71,644,74,644,69,678,65"/>
+<area shape="poly" id="edge4_Node000003_Node000002" title=" " alt="" coords="380,63,291,48,292,43,381,58"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1EditeurPanovisu.html#a924d3ccff3e4f402d2309cd2eade3237" title=" " alt="" coords="5,69,337,109"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="372,88,338,89,338,83,371,83"/>
+</map>

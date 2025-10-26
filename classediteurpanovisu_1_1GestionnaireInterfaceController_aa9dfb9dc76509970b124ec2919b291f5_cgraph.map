@@ -1,0 +1,15 @@
+<map id="editeurpanovisu.GestionnaireInterfaceController.changeCouleurMasque" name="editeurpanovisu.GestionnaireInterfaceController.changeCouleurMasque">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,166,249,221"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#afc1fe32f830791ed641d875b89427aca" title="Retourne la valeur de imgMasque." alt="" coords="302,5,546,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="154,164,215,108,254,80,296,55,312,48,314,53,299,60,257,84,219,113,157,168"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a59340fa9224b7f5b7f764833ced68bf6" title="Retourne la valeur de prLisMasque." alt="" coords="299,69,549,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="186,163,296,119,323,111,325,116,298,124,188,168"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#aa71013435a49b6180d667647ba290ce0" title="Retourne la valeur de pwNouveauxMasque." alt="" coords="297,134,551,189"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="249,178,283,174,284,179,250,183"/>
+<area shape="rect" id="Node000005" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="405,213,443,238"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="250,204,391,219,391,225,249,209"/>
+<area shape="rect" id="Node000006" href="$leaflet_8js.html#a008d931e56b6fc013061112f26afbffb" title=" " alt="" coords="405,262,443,287"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="205,218,298,247,392,267,391,272,297,252,204,223"/>
+<area shape="rect" id="Node000007" href="$leaflet_8js.html#a9f9b62a373d2bb4624b7ac2df8151435" title=" " alt="" coords="405,311,443,337"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="166,219,226,259,298,296,347,310,392,318,391,323,345,316,296,301,223,264,163,223"/>
+</map>

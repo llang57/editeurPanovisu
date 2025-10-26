@@ -1,0 +1,12 @@
+<map id="editeurpanovisu.NavigateurPanoramique.setImagePanoraMiqueHauteQualite" name="editeurpanovisu.NavigateurPanoramique.setImagePanoraMiqueHauteQualite">
+<area shape="rect" id="Node000001" title="Définit l&#39;image panoramique avec une qualité haute résolution Utilise des paramètres optimisés pour l..." alt="" coords="5,23,261,78"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="599,38,637,63"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="250,20,319,10,395,4,474,5,551,16,588,30,586,35,550,21,473,10,395,9,320,15,251,26"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1NavigateurPanoramique.html#af5088888a72767f70d7253c1bbad01c9" title="Définit l&#39;image panoramique à afficher." alt="" coords="309,30,551,70"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="261,48,296,48,296,53,261,53"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1PanoramicCube.html#a8ea2acf3ee3e9946ce530a960d38bffe" title="Applique une image panoramique équirectangulaire sur le cube Utilise TransformationsPanoramique pour ..." alt="" coords="331,118,529,158"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="227,75,349,112,348,117,225,80"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="551,48,585,48,585,53,551,53"/>
+<area shape="poly" id="edge5_Node000004_Node000002" title=" " alt="" coords="473,116,550,80,585,63,587,68,552,85,476,121"/>
+<area shape="poly" id="edge6_Node000004_Node000004" title=" " alt="" coords="395,119,393,109,398,100,411,94,430,92,452,95,464,102,461,107,450,100,430,97,412,99,402,104,398,110,400,117"/>
+</map>

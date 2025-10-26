@@ -1,0 +1,25 @@
+<map id="editeurpanovisu.GestionnaireInterfaceController.afficheBoussole" name="editeurpanovisu.GestionnaireInterfaceController.afficheBoussole">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,363,256,403"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a4b91452936c46c593b35d261360382b0" title="Retourne le décalage horizontal de la boussole par rapport à sa position de référence." alt="" coords="312,5,587,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="134,362,151,301,183,218,206,173,233,130,265,90,302,55,310,50,313,54,306,59,269,93,237,133,210,176,188,220,156,303,139,363"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#acea8ea135cd5407267fc558353d2e88a" title="Retourne le décalage vertical de la boussole par rapport à sa position de référence." alt="" coords="312,69,587,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="137,361,157,312,192,245,240,177,270,146,302,119,312,113,314,118,306,124,273,150,244,180,197,248,162,314,142,364"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a9c35f152ebe023b5949ad5813c70db2d" title="Retourne l&#39;opacité de la boussole." alt="" coords="311,133,588,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="141,361,166,322,202,274,248,224,303,183,315,177,317,181,305,188,252,228,206,277,170,325,146,364"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a5a71408068b7d9d4399d9feabfafacd2" title="Retourne le nom du fichier image de la boussole utilisée." alt="" coords="336,198,563,253"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="154,360,218,311,260,285,303,262,322,254,324,258,305,266,262,289,222,316,157,365"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#af26fc5b565b6c001a751b2265d85c9c9" title="Retourne la position de la boussole dans l&#39;interface." alt="" coords="330,277,569,331"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="212,360,324,332,325,337,213,365"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#aad213d32e70a9615a44560a36da5c799" title="Retourne la position des vignettes dans l&#39;interface." alt="" coords="330,355,569,410"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="256,380,316,380,316,385,256,385"/>
+<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#abde2c903b28e1e998ad337007594034a" title="Retourne la taille de la boussole en pixels." alt="" coords="319,435,580,475"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="221,400,347,429,346,434,219,405"/>
+<area shape="rect" id="Node000009" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a2cfb9c2807597994d00b97fde8d37b28" title="Retourne la hauteur réelle de l&#39;image de visualisation affichée." alt="" coords="323,499,575,554"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="161,401,225,442,305,484,326,492,324,497,303,489,223,447,158,405"/>
+<area shape="rect" id="Node000010" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a9e850d024075a94fade7333821a909b5" title="Retourne la largeur réelle de l&#39;image de visualisation affichée." alt="" coords="304,579,595,619"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="147,401,172,437,209,481,254,526,305,563,321,571,319,576,303,568,250,530,205,484,168,440,143,404"/>
+<area shape="rect" id="Node000011" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a16a97236ba786316c2265d2cab22b0b0" title="Indique si la boussole est affichée dans la visualisation." alt="" coords="314,643,585,683"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="142,402,164,449,199,511,246,575,274,604,306,628,315,634,312,639,302,633,271,608,242,579,194,514,159,452,137,404"/>
+<area shape="rect" id="Node000012" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="430,707,469,733"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="139,402,156,461,189,541,211,583,238,624,269,661,306,692,332,706,361,715,416,719,416,725,360,720,330,711,302,697,265,665,233,627,206,585,184,543,151,462,134,404"/>
+</map>

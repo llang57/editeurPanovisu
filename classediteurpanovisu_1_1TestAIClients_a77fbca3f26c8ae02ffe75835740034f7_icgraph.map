@@ -1,0 +1,5 @@
+<map id="editeurpanovisu.TestAIClients.testOpenRouter" name="editeurpanovisu.TestAIClients.testOpenRouter">
+<area shape="rect" id="Node000001" title="Test du client OpenRouter." alt="" coords="305,5,549,45"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1TestAIClients.html#a0513dc754d9bc85fc8b50d2b9993b35a" title="Point d&#39;entrée pour tester les clients IA (Ollama, HuggingFace, OpenRouter)" alt="" coords="5,13,257,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="291,28,258,28,258,23,291,23"/>
+</map>

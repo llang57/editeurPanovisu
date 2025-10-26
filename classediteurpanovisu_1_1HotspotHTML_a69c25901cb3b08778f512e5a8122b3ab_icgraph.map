@@ -1,0 +1,11 @@
+<map id="editeurpanovisu.HotspotHTML.getiNombreImages" name="editeurpanovisu.HotspotHTML.getiNombreImages">
+<area shape="rect" id="Node000001" title="Retourne la valeur de iNombreImages." alt="" coords="673,35,921,75"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1EditeurHTML.html#af81d6205915e559653682cbc97bc81aa" title=" " alt="" coords="350,5,613,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="659,45,613,40,613,35,660,39"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1HotspotHTML.html#a7a0f04a7ae186360a245ebc94836109a" title="Génère le fichier HTML du hotspot dans le répertoire de destination." alt="" coords="337,70,625,95"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="660,70,625,73,624,67,659,64"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1EditeurHTML.html#a5fd87ae35829a5dfe94103eef0d9c502" title="Affiche l&#39;éditeur HTML dans une fenêtre modale." alt="" coords="16,13,279,38"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="336,28,279,28,279,23,336,23"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1EditeurPanovisu.html#ad4c8e1684c8b8d0e96cfc28dc0d93404" title=" " alt="" coords="5,63,289,103"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="324,85,290,85,290,80,324,80"/>
+</map>

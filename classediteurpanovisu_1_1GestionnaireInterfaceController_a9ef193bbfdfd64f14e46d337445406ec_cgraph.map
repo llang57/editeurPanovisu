@@ -1,0 +1,21 @@
+<map id="editeurpanovisu.GestionnaireInterfaceController.afficheMasque" name="editeurpanovisu.GestionnaireInterfaceController.afficheMasque">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,277,248,317"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a59752bd171608442522d73a409c7de07" title="Retourne le décalage horizontal du masque par rapport à sa position de référence." alt="" coords="323,5,559,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="134,276,155,230,189,170,236,107,264,79,295,55,310,46,312,51,297,60,267,83,240,111,194,172,160,232,138,278"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#ac7dde18379fb126e6ab4dc4b4096428b" title="Retourne le décalage vertical du masque par rapport à sa position de référence." alt="" coords="324,69,559,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="139,276,164,241,199,199,244,155,295,119,310,111,312,116,297,124,247,159,203,202,168,245,143,279"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a09112867bdd634e82759d54a9be334ae" title="Retourne l&#39;opacité du masque." alt="" coords="307,133,576,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="150,275,213,228,253,204,295,183,316,175,318,180,297,188,256,209,216,233,154,279"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#ad39e9104be7d217644b6e5a685e15951" title="Retourne la position du masque dans l&#39;interface." alt="" coords="322,198,561,253"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="214,275,307,253,309,258,216,280"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#af0f3e9e4eaab0bb8ef829ee8b309ceeb" title="Retourne la taille du masque en pixels." alt="" coords="315,277,568,317"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="248,295,301,295,301,300,248,300"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a2cfb9c2807597994d00b97fde8d37b28" title="Retourne la hauteur réelle de l&#39;image de visualisation affichée." alt="" coords="315,342,567,397"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="216,315,309,336,307,341,214,320"/>
+<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a9e850d024075a94fade7333821a909b5" title="Retourne la largeur réelle de l&#39;image de visualisation affichée." alt="" coords="296,421,587,461"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="154,315,217,361,256,385,297,406,321,415,319,420,295,410,253,390,214,365,151,320"/>
+<area shape="rect" id="Node000009" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#aa73f44c4e326aed41cd81430f5a3756d" title="Indique si le masque est affiché dans la visualisation." alt="" coords="310,485,573,525"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="143,316,168,350,203,392,247,435,297,471,311,478,308,482,295,476,244,439,199,396,164,353,139,319"/>
+<area shape="rect" id="Node000010" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="422,550,461,575"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="138,316,159,363,193,423,239,485,267,512,297,535,324,548,354,556,408,561,408,567,353,561,323,553,295,540,263,516,235,488,188,426,154,365,133,319"/>
+</map>

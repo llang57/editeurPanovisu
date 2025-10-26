@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.NavigateurOpenLayersSeul.choixZoom" name="editeurpanovisu.NavigateurOpenLayersSeul.choixZoom">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,35,209,75"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1NavigateurCarteSeul.html#a36fc01b588108b52d46ceb338587f294" title="Retourne la valeur de webEngine." alt="" coords="257,5,460,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="209,40,244,36,244,41,210,45"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="339,70,378,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="210,63,326,76,326,82,209,69"/>
+</map>

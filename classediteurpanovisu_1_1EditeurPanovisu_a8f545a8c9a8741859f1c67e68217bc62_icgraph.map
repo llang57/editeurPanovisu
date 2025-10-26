@@ -1,0 +1,15 @@
+<map id="editeurpanovisu.EditeurPanovisu.getLocale" name="editeurpanovisu.EditeurPanovisu.getLocale">
+<area shape="rect" id="Node000001" title="Retourne la valeur de locale." alt="" coords="669,133,929,173"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1ConfigDialogController.html#a228e9366c0d6a335d6bb5e6b8a09ef78" title=" " alt="" coords="372,5,587,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="754,128,692,93,620,60,583,48,585,43,622,55,695,88,757,124"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#ac7fa988dc99d8684686127a2269cd66e" title="Crée et initialise l&#39;interface graphique principale de l&#39;éditeur." alt="" coords="363,69,596,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="684,133,579,112,580,107,686,128"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1GestionnairePlanController.html#a5cee5137d1f749e8a23a38ecb3bf38cb" title=" " alt="" coords="372,133,587,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="655,156,587,156,587,151,655,151"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1EditeurPanovisu.html#ad4c8e1684c8b8d0e96cfc28dc0d93404" title=" " alt="" coords="337,197,621,237"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="686,179,580,200,579,195,684,174"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1EditeurPanovisu.html#adf3136c7d8546e073ebf626494bd9b58" title=" " alt="" coords="352,261,607,301"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="757,183,695,219,622,252,585,264,583,259,620,247,692,214,754,178"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1EditeurPanovisu.html#ac9d449399ccd38843fa12e716f0c9611" title=" " alt="" coords="5,133,289,173"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="358,156,289,156,289,151,358,151"/>
+</map>

@@ -1,0 +1,19 @@
+<map id="editeurpanovisu.HotSpot.HotSpot" name="editeurpanovisu.HotSpot.HotSpot">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,133,192,173"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1HotSpot.html#a0a178fa0a5daa966634345c657c601eb" title="Active ou désactive l&#39;animation du hotspot." alt="" coords="240,5,447,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="123,131,175,93,239,55,255,48,257,53,241,60,177,97,126,135"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1HotSpot.html#a688b1fcf82d9c6c7ab73f48c3c502bee" title="Définit la latitude du hotspot." alt="" coords="240,69,447,109"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="175,131,253,110,254,115,177,136"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1HotSpot.html#a16d81a8366d079918544013cd4561dc4" title="Définit la longitude du hotspot." alt="" coords="240,133,447,173"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="192,151,227,151,227,156,192,156"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1HotSpot.html#a7d0ef1b2737836dbc294fd6422a8e473" title="Définit le fichier XML du panorama cible." alt="" coords="240,197,447,237"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="177,171,254,191,253,196,175,176"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1HotSpot.html#ac6b0378e16ddd21654a4f967cd607b7c" title="Définit le texte d&#39;information du hotspot." alt="" coords="240,261,447,301"/>
+<area shape="poly" id="edge9_Node000001_Node000007" title=" " alt="" coords="126,171,177,209,241,247,257,254,255,259,239,252,175,214,123,176"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="495,141,533,166"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="428,43,448,55,481,90,503,127,499,129,477,93,445,59,425,48"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="415,107,448,119,484,135,481,140,446,124,413,112"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="447,151,481,151,481,156,447,156"/>
+<area shape="poly" id="edge8_Node000006_Node000003" title=" " alt="" coords="413,195,446,183,481,167,484,172,448,188,415,200"/>
+<area shape="poly" id="edge10_Node000007_Node000003" title=" " alt="" coords="425,259,445,247,477,214,499,177,503,180,481,217,448,251,428,263"/>
+</map>

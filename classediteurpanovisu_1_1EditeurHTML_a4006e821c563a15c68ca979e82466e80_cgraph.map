@@ -1,0 +1,6 @@
+<map id="editeurpanovisu.EditeurHTML.hideImageNodesMatching" name="editeurpanovisu.EditeurHTML.hideImageNodesMatching">
+<area shape="rect" id="Node000001" title="Masque les nœuds d&#39;image correspondant au pattern." alt="" coords="5,29,252,69"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="93,30,91,20,96,11,109,5,129,3,151,6,163,13,160,17,149,11,129,8,111,10,100,15,96,21,98,28"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="300,37,339,62"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="252,47,286,47,286,52,252,52"/>
+</map>

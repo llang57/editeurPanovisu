@@ -1,0 +1,17 @@
+<map id="editeurpanovisu.BigDecimalField.numberProperty" name="editeurpanovisu.BigDecimalField.numberProperty">
+<area shape="rect" id="Node000001" title="Obtient la propriété du nombre." alt="" coords="615,69,821,109"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1EditeurPanovisu.html#a86c393eee88f54c694db994ddd85b90d" title=" " alt="" coords="300,5,567,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="614,69,522,48,523,43,616,64"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1NavigateurPanoramique.html#aa0afce819c0381316c98b72268567c9b" title=" " alt="" coords="332,69,535,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="601,92,535,92,535,87,601,87"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html#af8054a76c76eed1ef022005db88148c1" title=" " alt="" coords="322,133,545,173"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="616,115,523,136,522,131,614,110"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1NavigateurPanoramique.html#aa23c7df1670b34fea1d5649a0e7f9e3b" title="Affiche le panorama avec cache des cubes pré&#45;calculés si disponible." alt="" coords="27,5,230,45"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="323,69,224,48,225,43,325,64"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1NavigateurPanoramique.html#a1bd8b170ad9911aa952b72a9dbaea2eb" title="Redimensionne le navigateur panoramique." alt="" coords="27,69,230,109"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="318,92,230,92,230,87,318,87"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html#ae11a24d852acc18c1ad74844be5f5061" title="Affiche le panoramique dans un AnchorPane." alt="" coords="8,133,249,173"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="308,156,250,156,250,151,308,151"/>
+<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html#aed1e4d51da4f14c268b1ee2a70f96738" title="Change les dimensions de la zone de visualisation." alt="" coords="5,197,252,237"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="325,179,225,200,224,195,323,174"/>
+</map>

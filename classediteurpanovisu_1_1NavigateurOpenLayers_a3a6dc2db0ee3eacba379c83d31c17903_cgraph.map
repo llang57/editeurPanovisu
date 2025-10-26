@@ -1,0 +1,20 @@
+<map id="editeurpanovisu.NavigateurOpenLayers.valideBingApiKey" name="editeurpanovisu.NavigateurOpenLayers.valideBingApiKey">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,178,223,218"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1NavigateurOpenLayers.html#ae079f34d67363ee97cb8c0cbfee71823" title=" " alt="" coords="273,113,529,153"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="202,175,298,153,300,158,203,181"/>
+<area shape="rect" id="Node000005" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="971,5,1010,31"/>
+<area shape="poly" id="edge10_Node000001_Node000005" title=" " alt="" coords="141,175,199,137,270,98,351,64,422,39,486,21,547,11,610,5,677,4,841,7,958,13,957,18,841,13,677,9,610,11,548,16,487,26,423,44,353,69,272,103,201,141,144,180"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1NavigateurCarte.html#a3086c2ad9e2edcbadcffbd0e9ce7a251" title="Retourne la valeur de webEngine." alt="" coords="889,209,1092,249"/>
+<area shape="poly" id="edge9_Node000001_Node000007" title=" " alt="" coords="223,207,390,222,579,234,710,237,841,234,875,233,876,238,841,239,710,242,579,239,390,227,223,212"/>
+<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1EditeurPanovisu.html#a35c5891ab1f55857083aa68114ddfa9c" title="Retourne la valeur de strBingAPIKey." alt="" coords="271,299,531,339"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="150,216,206,247,272,278,312,293,310,298,270,283,203,252,147,220"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1NavigateurOpenLayers.html#aee932fc8cff396e2a055d1438b1fbfc0" title="Retourne la valeur de apChoixCartographie." alt="" coords="579,55,841,95"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="509,110,588,95,589,101,510,115"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="691,120,729,145"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="529,130,677,130,677,135,529,135"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="431,110,497,73,537,55,578,41,686,20,793,11,888,10,958,13,958,18,888,16,793,17,686,25,579,46,538,60,499,78,434,115"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1NavigateurOpenLayers.html#ae29e54183a27499716f400be90147cdc" title=" " alt="" coords="585,169,835,224"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="499,150,572,165,571,171,498,155"/>
+<area shape="poly" id="edge7_Node000006_Node000005" title=" " alt="" coords="815,167,840,154,879,128,914,97,969,39,972,43,918,101,882,132,843,159,817,172"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="836,208,876,213,875,218,835,214"/>
+</map>

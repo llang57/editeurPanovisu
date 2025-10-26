@@ -1,0 +1,5 @@
+<map id="editeurpanovisu.gpu.ImageResizeGPU.cleanup" name="editeurpanovisu.gpu.ImageResizeGPU.cleanup">
+<area shape="rect" id="Node000001" title="Libère les ressources OpenCL (à appeler lors de la fermeture de l&#39;application)" alt="" coords="5,5,205,45"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="253,13,292,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="206,23,240,23,240,28,206,28"/>
+</map>

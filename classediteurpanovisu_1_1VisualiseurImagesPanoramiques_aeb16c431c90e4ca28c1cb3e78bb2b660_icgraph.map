@@ -1,0 +1,11 @@
+<map id="editeurpanovisu.VisualiseurImagesPanoramiques.getPositNord" name="editeurpanovisu.VisualiseurImagesPanoramiques.getPositNord">
+<area shape="rect" id="Node000001" title="Retourne la valeur de positNord." alt="" coords="829,37,1080,77"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html#ac38446a4ab5c61c1dfd273f9d50c69c8" title="Affiche la vue panoramique avec les paramètres actuels." alt="" coords="571,37,781,77"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="816,60,782,60,782,55,816,55"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html#af8054a76c76eed1ef022005db88148c1" title=" " alt="" coords="300,37,523,77"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="557,60,523,60,523,55,557,55"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html#ae11a24d852acc18c1ad74844be5f5061" title="Affiche le panoramique dans un AnchorPane." alt="" coords="8,5,249,45"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="286,46,249,42,250,36,287,41"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html#aed1e4d51da4f14c268b1ee2a70f96738" title="Change les dimensions de la zone de visualisation." alt="" coords="5,69,252,109"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="287,74,252,78,252,73,286,69"/>
+</map>

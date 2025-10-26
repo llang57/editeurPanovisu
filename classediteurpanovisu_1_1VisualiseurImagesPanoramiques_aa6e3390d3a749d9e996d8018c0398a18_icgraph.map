@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.VisualiseurImagesPanoramiques.getNomFichierPanoramique" name="editeurpanovisu.VisualiseurImagesPanoramiques.getNomFichierPanoramique">
+<area shape="rect" id="Node000001" title="Retourne la valeur de nomFichierPanoramique." alt="" coords="396,30,657,85"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html#ae11a24d852acc18c1ad74844be5f5061" title="Affiche le panoramique dans un AnchorPane." alt="" coords="56,5,297,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="382,47,297,39,298,34,383,42"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html#a61954137e69c88cce2266a03b071d948" title="Définit l&#39;image panoramique à afficher à partir d&#39;un chemin." alt="" coords="5,69,348,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="383,73,348,76,348,71,382,68"/>
+</map>

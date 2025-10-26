@@ -1,0 +1,5 @@
+<map id="editeurpanovisu.NavigateurOpenLayersSeul.retireRadar" name="editeurpanovisu.NavigateurOpenLayersSeul.retireRadar">
+<area shape="rect" id="Node000001" title="Retire l&#39;affichage du radar de la carte." alt="" coords="5,5,209,45"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1NavigateurCarteSeul.html#a36fc01b588108b52d46ceb338587f294" title="Retourne la valeur de webEngine." alt="" coords="257,5,460,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="209,23,244,23,244,28,209,28"/>
+</map>

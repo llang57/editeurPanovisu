@@ -1,0 +1,20 @@
+<map id="editeurpanovisu.NavigateurPanoramique.setImagePanoramique" name="editeurpanovisu.NavigateurPanoramique.setImagePanoramique">
+<area shape="rect" id="Node000001" title="Applique une image panoramique avec cubes pré&#45;calculés (optimisation) Utilise le cache si disponible,..." alt="" coords="5,117,263,157"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="649,124,688,150"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="161,114,226,73,267,53,310,38,392,16,460,4,492,3,526,8,562,20,603,39,622,53,638,71,660,110,655,112,634,74,619,57,600,43,560,25,525,14,492,9,460,9,393,22,311,43,269,58,229,78,163,119"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1PanoramicCube.html#aca770d17be8704f7bbab5dd9943f91bf" title="Applique directement les faces du cube pré&#45;calculées (optimisation) Cette méthode évite de recalculer..." alt="" coords="357,269,555,309"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="160,155,226,205,268,232,312,254,345,266,343,271,310,259,265,237,223,210,157,159"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1NavigateurPanoramique.html#af5088888a72767f70d7253c1bbad01c9" title="Définit l&#39;image panoramique à afficher." alt="" coords="335,53,577,93"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="235,114,341,93,342,98,236,119"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1NavigateurPanoramique.html#ac0c12faf96b617fb9bb0b7015c5a58a7" title="Définit le nom du fichier image panoramique." alt="" coords="311,117,601,157"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="263,134,297,134,297,140,263,140"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1PanoramicCube.html#a8ea2acf3ee3e9946ce530a960d38bffe" title="Applique une image panoramique équirectangulaire sur le cube Utilise TransformationsPanoramique pour ..." alt="" coords="357,205,555,245"/>
+<area shape="poly" id="edge9_Node000001_Node000007" title=" " alt="" coords="209,154,369,199,368,204,207,160"/>
+<area shape="poly" id="edge4_Node000003_Node000002" title=" " alt="" coords="555,276,578,267,600,255,620,234,637,210,658,162,663,164,641,213,625,238,603,259,581,272,557,281"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="649,276,688,302"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="556,286,636,286,636,292,556,292"/>
+<area shape="poly" id="edge6_Node000005_Node000002" title=" " alt="" coords="562,90,602,102,638,118,636,123,600,107,560,96"/>
+<area shape="poly" id="edge8_Node000006_Node000002" title=" " alt="" coords="601,134,636,134,636,140,601,140"/>
+<area shape="poly" id="edge10_Node000007_Node000002" title=" " alt="" coords="511,202,600,166,636,150,638,155,602,171,513,207"/>
+<area shape="poly" id="edge11_Node000007_Node000007" title=" " alt="" coords="416,205,414,195,420,186,435,180,456,178,481,181,494,188,492,193,479,186,456,184,436,186,424,190,419,196,422,204"/>
+</map>

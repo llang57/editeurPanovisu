@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.PanoramicCube.resizeToEquirectangularCPU" name="editeurpanovisu.PanoramicCube.resizeToEquirectangularCPU">
+<area shape="rect" id="Node000001" title="Fallback CPU : Redimensionnement par échantillonnage simple (nearest neighbor)." alt="" coords="515,5,756,45"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1PanoramicCube.html#ae3447e86fef1c622cc0a4ed3796b7982" title="Redimensionne une image au format équirectangulaire avec ratio 2:1." alt="" coords="252,5,467,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="501,28,467,28,467,23,501,23"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1PanoramicCube.html#a8f0eb5b8ae64eebd22d776dc7ad2463e" title="Applique une image panoramique équirectangulaire sur le cube avec qualité configurable." alt="" coords="5,5,204,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="239,28,204,28,204,23,239,23"/>
+</map>

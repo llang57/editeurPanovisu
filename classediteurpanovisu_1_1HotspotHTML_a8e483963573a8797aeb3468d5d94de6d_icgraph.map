@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.HotspotHTML.setStrURLExterieure" name="editeurpanovisu.HotspotHTML.setStrURLExterieure">
+<area shape="rect" id="Node000001" title="Définit la valeur de strURLExterieure." alt="" coords="316,27,559,67"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1EditeurHTML.html#a5fd87ae35829a5dfe94103eef0d9c502" title="Affiche l&#39;éditeur HTML dans une fenêtre modale." alt="" coords="5,5,268,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="302,37,267,33,267,28,302,31"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1HotspotHTML.html#a2a23b047b1db21234b9e26be25aea465" title=" " alt="" coords="25,55,248,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="302,63,248,68,248,62,302,57"/>
+</map>

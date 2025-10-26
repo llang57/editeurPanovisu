@@ -1,0 +1,316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>EditeurPanovisu:  Fichier source de panovisu/panovisuInit.js</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">EditeurPanovisu<span id="projectnumber">&#160;3.1.0</span>
+   </div>
+   <div id="projectbrief">Éditeur de visites virtuelles 360° Panovisu</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('panovisuInit_8js_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Chargement...</div>
+<div class="SRStatus" id="Searching">Recherche...</div>
+<div class="SRStatus" id="NoMatches">Aucune correspondance</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">panovisuInit.js</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="panovisuInit_8js.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno"><a class="line" href="panovisuInit_8js.html#aeae7be9074369b212399a97e8bae295d">    1</a></span><a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">var</a> <a class="code hl_variable" href="panovisuInit_8js.html#aeae7be9074369b212399a97e8bae295d">numeroPano</a> = 0,</div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno"><a class="line" href="panovisuInit_8js.html#a614229fff4211edebc3c193d1e7763ec">    2</a></span>        <a class="code hl_variable" href="panovisuInit_8js.html#a614229fff4211edebc3c193d1e7763ec">version</a> = <span class="stringliteral">&quot;3.0&quot;</span>,</div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno"><a class="line" href="panovisuInit_8js.html#a9abbee82203890a335674e7744b3aacd">    3</a></span>        <a class="code hl_variable" href="panovisuInit_8js.html#a9abbee82203890a335674e7744b3aacd">programmeur</a> = <span class="stringliteral">&quot;Laurent LANG&quot;</span>,</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno"><a class="line" href="panovisuInit_8js.html#a6631dfd7819f94b21bd6e0dce1647ed7">    4</a></span>        <a class="code hl_variable" href="panovisuInit_8js.html#a6631dfd7819f94b21bd6e0dce1647ed7">anneeProgramme</a> = <span class="stringliteral">&quot;2025&quot;</span>,</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno"><a class="line" href="panovisuInit_8js.html#a0a6ad45f0f252120fcaf5158defef569">    5</a></span>        <a class="code hl_variable" href="panovisuInit_8js.html#a0a6ad45f0f252120fcaf5158defef569">site</a> = <span class="stringliteral">&quot;http://lemondea360.fr&quot;</span>,</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno"><a class="line" href="panovisuInit_8js.html#a4fe61cf1531940e34fcadf8a497f1b1e">    6</a></span>        <a class="code hl_variable" href="panovisuInit_8js.html#a4fe61cf1531940e34fcadf8a497f1b1e">siteTexte</a> = <span class="stringliteral">&quot;le monde à 360°&quot;</span>;</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno"><a class="line" href="panovisuInit_8js.html#a938719dd34ef2a861d202a8bd90c33ca">    7</a></span><a class="code hl_variable" href="panovisuInit_8js.html#a938719dd34ef2a861d202a8bd90c33ca">sitePanovisu</a> = <span class="stringliteral">&quot;&quot;</span>,</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="panovisuInit_8js.html#a284c4a94bd0208bdb293f69977030da1">    8</a></span>        <a class="code hl_variable" href="panovisuInit_8js.html#a284c4a94bd0208bdb293f69977030da1">siteTextePanovisu</a> = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="panovisuInit_8js.html#abca23acbc1d398418271025c99640f01">   11</a></span><a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">window</a>.requestAnimFrame = (<span class="keyword">function</span> () {</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">window</a>.requestAnimationFrame ||</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>            <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">window</a>.webkitRequestAnimationFrame ||</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>            <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">window</a>.mozRequestAnimationFrame ||</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>            <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">window</a>.oRequestAnimationFrame ||</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>            <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">window</a>.msRequestAnimationFrame ||</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>            <span class="keyword">function</span> (<span class="comment">/* function */</span> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">callback</a>, <span class="comment">/* DOMElement */</span> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">element</a>) {</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>                <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">window</a>.setTimeout(<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">callback</a>, 1000.0 / 60.0);</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>            };</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>})();</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="foldopen" id="foldopen00022" data-start="{" data-end="};">
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="panovisuInit_8js.html#aedb09d327a8a9370a51352bfb53172ee">   22</a></span><a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">window</a>.requestTimeout = <span class="keyword">function</span> (<a class="code hl_variable" href="screenfull_8js.html#a37b9e1ceee4c6d2616fa6081784b5468">fn</a>, <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">delay</a>) {</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordflow">if</span> (!<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">window</a>.requestAnimationFrame &amp;&amp;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>            !<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">window</a>.webkitRequestAnimationFrame &amp;&amp;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>            !(<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">window</a>.mozRequestAnimationFrame &amp;&amp; <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">window</a>.mozCancelRequestAnimationFrame) &amp;&amp; <span class="comment">// Firefox 5 ships without cancel support</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>            !<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">window</a>.oRequestAnimationFrame &amp;&amp;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>            !<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">window</a>.msRequestAnimationFrame)</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">window</a>.setTimeout(<a class="code hl_variable" href="screenfull_8js.html#a37b9e1ceee4c6d2616fa6081784b5468">fn</a>, <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">delay</a>);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">var</a> start = <span class="keyword">new</span> <a class="code hl_variable" href="OpenLayers_8js.html#a24af210a23782a59799d0cc0bf50407d">Date</a>().getTime(),</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>            <a class="code hl_variable" href="jquery_8contextMenu_8js.html#aeec8c1cecfa0db128d7deb49c276aab8">handle</a> = <span class="keyword">new</span> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Object</a>();</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keyword">function</span> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">loop</a>() {</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">var</a> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">current</a> = <span class="keyword">new</span> <a class="code hl_variable" href="OpenLayers_8js.html#a24af210a23782a59799d0cc0bf50407d">Date</a>().getTime(),</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>                <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">delta</a> = <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">current</a> - start;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">delta</a> &gt;= <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">delay</a> ? <a class="code hl_variable" href="screenfull_8js.html#a37b9e1ceee4c6d2616fa6081784b5468">fn</a>.call() : <a class="code hl_variable" href="jquery_8contextMenu_8js.html#aeec8c1cecfa0db128d7deb49c276aab8">handle</a>.value = <a class="code hl_variable" href="panovisuInit_8js.html#abca23acbc1d398418271025c99640f01">requestAnimFrame</a>(<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">loop</a>);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    }</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <a class="code hl_variable" href="jquery_8contextMenu_8js.html#aeec8c1cecfa0db128d7deb49c276aab8">handle</a>.value = <a class="code hl_variable" href="panovisuInit_8js.html#abca23acbc1d398418271025c99640f01">requestAnimFrame</a>(<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">loop</a>);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="jquery_8contextMenu_8js.html#aeec8c1cecfa0db128d7deb49c276aab8">handle</a>;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>};</div>
+</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="foldopen" id="foldopen00041" data-start="{" data-end="}">
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="panovisuInit_8js.html#a8ddfdafbb2e26ef51147c4ebe65b834f">   41</a></span><span class="keyword">function</span> <a class="code hl_function" href="panovisuInit_8js.html#a8ddfdafbb2e26ef51147c4ebe65b834f">traduction</a>() {</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    this.<a class="code hl_variable" href="de__DE_8js.html#a94d9abc82546bfdbf74d646bf9e1cb3c">panoPrecedent</a> = <span class="stringliteral">&quot;panoramique précedent&quot;</span>;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    this.<a class="code hl_variable" href="de__DE_8js.html#a43d53a6c287fac6b637a2ad92d12c0b3">panoSuivant</a> = <span class="stringliteral">&quot;panoramique suivant&quot;</span>;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    this.<a class="code hl_variable" href="de__DE_8js.html#a2cf84024c3f2e40417699e73f9efdabc">petitePlanete</a> = <span class="stringliteral">&quot;Vue petite planète&quot;</span>;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    this.<a class="code hl_variable" href="de__DE_8js.html#a31fd1f309e9c8a179c092e64c2b247e5">vueNormale</a> = <span class="stringliteral">&quot;Vue Normale&quot;</span>;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    this.<a class="code hl_variable" href="de__DE_8js.html#aa8d6d135e21739e051f246b2a51e5cac">masqueElements</a> = <span class="stringliteral">&quot;Masque les éléments&quot;</span>;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    this.<a class="code hl_variable" href="de__DE_8js.html#a3aebf54dabd2d9992c301f7107f5a613">afficheElements</a> = <span class="stringliteral">&quot;Affiche les éléments&quot;</span>;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    this.<a class="code hl_variable" href="de__DE_8js.html#afe37001a9c83f0131d4937f74266564c">demarreAutoTour</a> = <span class="stringliteral">&quot;Lance la visite Automatique&quot;</span>;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    this.<a class="code hl_variable" href="de__DE_8js.html#af65120b1b4f6c98c104bcf38a9601695">arreteAutoTour</a> = <span class="stringliteral">&quot;Arrête la visite Automatique&quot;</span>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    this.<a class="code hl_variable" href="de__DE_8js.html#a51cd74c3bd7a3e3c79cc7a684058e93f">aPropos</a> = <span class="stringliteral">&quot;A Propos de panoVisu ...&quot;</span>;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    this.<a class="code hl_variable" href="de__DE_8js.html#a94a92baa2ff55a41098e2ea4bb1c7800">afficheMasque</a> = <span class="stringliteral">&quot;Affiche/masque les éléments&quot;</span>;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    this.<a class="code hl_variable" href="de__DE_8js.html#ac7e62df062c2939fadd379d56f600d69">vignettes</a> = <span class="stringliteral">&quot;Vignettes&quot;</span>;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    this.<a class="code hl_variable" href="de__DE_8js.html#a731fb934050b02626574d60839ed4594">gauche</a> = <span class="stringliteral">&quot;Déplacement à gauche&quot;</span>;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    this.<a class="code hl_variable" href="de__DE_8js.html#acd4b07600dd36e100ddf1b3347a3534e">haut</a> = <span class="stringliteral">&quot;Déplacement vers le haut&quot;</span>;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    this.<a class="code hl_variable" href="de__DE_8js.html#a50ea1cd9c4b3b703b2e51dd72dae4c0c">bas</a> = <span class="stringliteral">&quot;Déplacement vers le bas&quot;</span>;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    this.<a class="code hl_variable" href="de__DE_8js.html#aa64ccc9dd84ed34c95bf8a8c05e23bcd">droite</a> = <span class="stringliteral">&quot;Déplacement à droite&quot;</span>;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    this.<a class="code hl_variable" href="de__DE_8js.html#a0f3ac8ef55e71d4c8076312a0922a074">zoomPlus</a> = <span class="stringliteral">&quot;Zoom +&quot;</span>;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    this.<a class="code hl_variable" href="de__DE_8js.html#a2a8ef3920f499c044246e6bf8f5cfcdd">zoomMoins</a> = <span class="stringliteral">&quot;Zoom -&quot;</span>;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    this.<a class="code hl_variable" href="de__DE_8js.html#a6057aa6dcc74d0aeb8da99e50967f384">aide</a> = <span class="stringliteral">&quot;Aide&quot;</span>;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    this.<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">info</a> = <span class="stringliteral">&quot;Ecran d&#39;accueil&quot;</span>;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    this.<a class="code hl_variable" href="de__DE_8js.html#a72586f752e48e9f6bfdfc1d370840c2a">pleinEcran</a> = <span class="stringliteral">&quot;Plein écran (Marche/Arrêt)&quot;</span>;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    this.<a class="code hl_variable" href="de__DE_8js.html#a94ce59204b1301bbfa9fea74e92dd965">autorotation</a> = <span class="stringliteral">&quot;Autorotation (Marche/Arrêt)&quot;</span>;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    this.<a class="code hl_variable" href="de__DE_8js.html#a5e5ad34bf1d0b51b6ecdccbe3887d975">souris</a> = <span class="stringliteral">&quot;change le mode de déplacement de la souris&quot;</span>;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    this.<a class="code hl_variable" href="de__DE_8js.html#a4c8bb7d1b98e14aa5c10f0add8c04a06">plan</a> = <span class="stringliteral">&quot;Plan&quot;</span>;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    this.<a class="code hl_variable" href="de__DE_8js.html#a61c79eafcc892fa2298d4a30752fe05a">carte</a> = <span class="stringliteral">&quot;Carte&quot;</span>;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    this.<a class="code hl_variable" href="de__DE_8js.html#a93caab71f0c1acf48b7e83eb0cd537fe">panoVisuSite</a> = <span class="stringliteral">&quot;panoVisu le site&quot;</span>;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    this.<a class="code hl_variable" href="de__DE_8js.html#abb663c56b6fbef570abd7162081d9b08">clicFenetre</a> = <span class="stringliteral">&quot;cliquez pour fermer la fenêtre&quot;</span>;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    this.<a class="code hl_variable" href="defaut_8js.html#adde0cb24020e932ebff3ca5e77f24626">fenetreInfo</a> = <span class="stringliteral">&quot;&lt;b&gt;Panovisu version &quot;</span> +</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>            <a class="code hl_variable" href="panovisuInit_8js.html#a614229fff4211edebc3c193d1e7763ec">version</a> +</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>            <span class="stringliteral">&quot;&lt;/b&gt;&lt;br&gt;Un visualiseur de Visites Virtuelles 100% HTML5 - 100% libre&lt;br&gt;&quot;</span> +</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>            <span class="stringliteral">&quot;Utilise la bibliothèque &lt;a href=&#39;http://threejs.org/&#39; target=&#39;_blank&#39; title=&#39;voir la page de three.js&#39; style=&#39;color: #ffffff; font-weight: bold; text-decoration: none;&#39;&gt;🔗 Three.js&lt;/a&gt;&quot;</span> +</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>            <span class="stringliteral">&quot;&lt;br&gt;&lt;br&gt;&amp;copy; &quot;</span> + <a class="code hl_variable" href="panovisuInit_8js.html#a9abbee82203890a335674e7744b3aacd">programmeur</a> + <span class="stringliteral">&quot; (&quot;</span> + <a class="code hl_variable" href="panovisuInit_8js.html#a6631dfd7819f94b21bd6e0dce1647ed7">anneeProgramme</a> + <span class="stringliteral">&quot;)&lt;br&gt;&quot;</span> +</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>            <span class="stringliteral">&quot;&lt;br&gt;une création : &lt;a href=&#39;&quot;</span> + <a class="code hl_variable" href="panovisuInit_8js.html#a0a6ad45f0f252120fcaf5158defef569">site</a> + <span class="stringliteral">&quot;&#39; target=&#39;_blank&#39; style=&#39;color: #ffffff; font-weight: bold; text-decoration: none;&#39;&gt;🔗 &quot;</span> + <a class="code hl_variable" href="panovisuInit_8js.html#a4fe61cf1531940e34fcadf8a497f1b1e">siteTexte</a> + <span class="stringliteral">&quot;&lt;/a&gt;&quot;</span>;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    this.<a class="code hl_variable" href="defaut_8js.html#a0cb91b60b968c45f47f663c09b307025">fenetreAide</a> = <span class="stringliteral">&quot;&lt;span style=&#39;font-weight:bolder;font-size:1.2em;font-variant: small-caps;&#39;&gt;Aide à la Navigation&lt;/span&gt;&lt;br&gt;&lt;br&gt;&lt;div style=&#39;width:100px;height:90px;padding-left:5px;display:inline-block;&#39;&gt;&lt;img style=&#39;width:90px&#39; src=&#39;panovisu/images/aide_souris.png&#39;/&gt;&lt;/div&gt;&quot;</span> +</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>            <span class="stringliteral">&quot;&lt;div style=&#39;width : 270px;display:inline-block;vertical-align:top; text-align: justify;&#39;&gt;Pour vous déplacer dans la vue cliquez avec le bouton gauche de la souris &quot;</span> +</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>            <span class="stringliteral">&quot;sur le panoramique puis déplacez la souris en maintenant le bouton de la souris enfoncé&lt;br&gt;&lt;br&gt;Vous pouvez également utiliser le menu pour vous déplacer&lt;/div&gt;&quot;</span> +</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>            <span class="stringliteral">&quot;&lt;div&gt;&lt;br&gt;&lt;br&gt;cliquez pour fermer la fenêtre&lt;/div&gt;&quot;</span>;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>}</div>
+</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="panovisuInit_8js.html#a33b3e83990241032b2b48b13c4721ad7">   81</a></span><a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">var</a> <a class="code hl_variable" href="panovisuInit_8js.html#a33b3e83990241032b2b48b13c4721ad7">chainesTraduction</a> = <span class="keyword">new</span> <a class="code hl_variable" href="OpenLayers_8js.html#a53f9337c990d85ceea4e433abcb13a5f">Array</a>();</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="foldopen" id="foldopen00089" data-start="{" data-end="}">
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="panovisuInit_8js.html#ab82eb066895d258bc9204b3160be24db">   89</a></span><span class="keyword">function</span> <a class="code hl_variable" href="leaflet_8js.html#a1476b2a7c5d84d7330a287c190d75b44">include</a>(<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">fileName</a>) {</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <a class="code hl_variable" href="OpenLayers_8js.html#ac653c8deb5ab5d1d57fea1390a7673f2">document</a>.write(<span class="stringliteral">&quot;&lt;script type=&#39;text/javascript&#39; src=&#39;&quot;</span> + <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">fileName</a> + <span class="stringliteral">&quot;&#39;&gt;&lt;/script&gt;&quot;</span>);</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>}</div>
+</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="foldopen" id="foldopen00098" data-start="{" data-end="}">
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno"><a class="line" href="panovisuInit_8js.html#a582ea2be157062567c37d2e627c6e80e">   98</a></span><span class="keyword">function</span> <a class="code hl_function" href="panovisuInit_8js.html#a582ea2be157062567c37d2e627c6e80e">prechargeImages</a>(<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">images</a>) {</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">var</a> <a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a> = 0;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <span class="comment">// Créer l&#39;objet</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">imageObj</a> = <span class="keyword">new</span> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Image</a>();</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <span class="comment">// Démarrer le préchargement</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <span class="keywordflow">for</span> (i = 0; <a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a> &lt;= <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">images</a>.length; <a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>++)</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    {</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">imageObj</a>.src = <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">images</a>[<a class="code hl_function" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a>];</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    }</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>}</div>
+</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
+<div class="foldopen" id="foldopen00116" data-start="{" data-end="}">
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno"><a class="line" href="panovisuInit_8js.html#a9e7f0a8daa2bf2d7a5b738e9d6f69a8e">  116</a></span><span class="keyword">function</span> <a class="code hl_function" href="panovisuInit_8js.html#a9e7f0a8daa2bf2d7a5b738e9d6f69a8e">supportCanvas</a>() {</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <span class="keywordflow">return</span> !!<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">window</a>.CanvasRenderingContext2D;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>}</div>
+</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="foldopen" id="foldopen00125" data-start="{" data-end="}">
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno"><a class="line" href="panovisuInit_8js.html#afedebcce57c7ecb2fcb56ae30e779bc7">  125</a></span><span class="keyword">function</span> <a class="code hl_function" href="panovisuInit_8js.html#afedebcce57c7ecb2fcb56ae30e779bc7">supportWebgl</a>() {</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <span class="keywordflow">try</span> {</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">var</a> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">canvas</a> = <a class="code hl_variable" href="OpenLayers_8js.html#ac653c8deb5ab5d1d57fea1390a7673f2">document</a>.createElement(<span class="stringliteral">&#39;canvas&#39;</span>);</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        <span class="keywordflow">return</span> !!<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">window</a>.WebGLRenderingContext &amp;&amp; (</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>                <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">canvas</a>.getContext(<span class="stringliteral">&#39;webgl&#39;</span>) || <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">canvas</a>.getContext(<span class="stringliteral">&#39;experimental-webgl&#39;</span>));</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    } <span class="keywordflow">catch</span> (<a class="code hl_variable" href="leaflet_8js.html#ab5902775854a8b8440bcd25e0fe1c120">e</a>) {</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    }</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>}</div>
+</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
+<div class="foldopen" id="foldopen00142" data-start="{" data-end="}">
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno"><a class="line" href="panovisuInit_8js.html#ae455fc1fa752dced76c2baf5bdc1ceb8">  142</a></span><span class="keyword">function</span> <a class="code hl_function" href="panovisuInit_8js.html#ae455fc1fa752dced76c2baf5bdc1ceb8">ajoutePano</a>(<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">parametres</a>) {</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    <a class="code hl_variable" href="panovisuInit_8js.html#aeae7be9074369b212399a97e8bae295d">numeroPano</a> += 1;</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">var</a> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">pano</a> = <span class="keyword">new</span> <a class="code hl_function" href="panovisu-min_8js.html#a2aa791b67621bf89711c615675e48c65">panovisu</a>(<a class="code hl_variable" href="panovisuInit_8js.html#aeae7be9074369b212399a97e8bae295d">numeroPano</a>);</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">pano</a>.initialisePano(<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">parametres</a>);</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">pano</a>;</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>}</div>
+</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span> </div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span><span class="comment">//include(&quot;panovisu/libs/openLayers/OpenLayers.js&quot;);</span></div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span><span class="comment">//include(&quot;panovisu/libs/openLayers/OpenStreetMap.js&quot;);</span></div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span><span class="comment">//include(&quot;panovisu/libs/openLayers/gmap.js?v=3.5&amp;sensor=false&quot;);</span></div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span><a class="code hl_variable" href="leaflet_8js.html#a1476b2a7c5d84d7330a287c190d75b44">include</a>(<span class="stringliteral">&quot;panovisu/i18n/defaut.js&quot;</span>);</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span><a class="code hl_variable" href="leaflet_8js.html#a1476b2a7c5d84d7330a287c190d75b44">include</a>(<span class="stringliteral">&quot;panovisu/i18n/fr_FR.js&quot;</span>);</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span><a class="code hl_variable" href="leaflet_8js.html#a1476b2a7c5d84d7330a287c190d75b44">include</a>(<span class="stringliteral">&quot;panovisu/i18n/en_EN.js&quot;</span>);</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span><a class="code hl_variable" href="leaflet_8js.html#a1476b2a7c5d84d7330a287c190d75b44">include</a>(<span class="stringliteral">&quot;panovisu/i18n/de_DE.js&quot;</span>);</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span> </div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span><a class="code hl_variable" href="leaflet_8js.html#a1476b2a7c5d84d7330a287c190d75b44">include</a>(<span class="stringliteral">&quot;panovisu/libs/screenfull.js&quot;</span>);</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span><a class="code hl_variable" href="leaflet_8js.html#a1476b2a7c5d84d7330a287c190d75b44">include</a>(<span class="stringliteral">&quot;panovisu/libs/jquery/jquery.min.js&quot;</span>);</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span><a class="code hl_variable" href="leaflet_8js.html#a1476b2a7c5d84d7330a287c190d75b44">include</a>(<span class="stringliteral">&quot;panovisu/libs/jquery/jquery.mousewheel.min.js&quot;</span>);</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span><a class="code hl_variable" href="leaflet_8js.html#a1476b2a7c5d84d7330a287c190d75b44">include</a>(<span class="stringliteral">&quot;panovisu/libs/jqueryMobile/jquery.mobile.custom.min.js&quot;</span>);</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span><a class="code hl_variable" href="leaflet_8js.html#a1476b2a7c5d84d7330a287c190d75b44">include</a>(<span class="stringliteral">&quot;panovisu/libs/three.js/types.js&quot;</span>);  <span class="comment">//redéfnit le type float32Array() pour IE9</span></div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span><a class="code hl_variable" href="leaflet_8js.html#a1476b2a7c5d84d7330a287c190d75b44">include</a>(<span class="stringliteral">&quot;panovisu/libs/three.js/three.min.js&quot;</span>);</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span><a class="code hl_variable" href="leaflet_8js.html#a1476b2a7c5d84d7330a287c190d75b44">include</a>(<span class="stringliteral">&quot;panovisu/libs/jqueryMenu/jquery.contextMenu.js&quot;</span>);</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span><a class="code hl_variable" href="leaflet_8js.html#a1476b2a7c5d84d7330a287c190d75b44">include</a>(<span class="stringliteral">&quot;panovisu/libs/jqueryMenu/jquery.ui.position.js&quot;</span>);</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span><a class="code hl_variable" href="leaflet_8js.html#a1476b2a7c5d84d7330a287c190d75b44">include</a>(<span class="stringliteral">&quot;panovisu/libs/msdropdown/jquery.dd.min.js&quot;</span>);</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
+<div class="ttc" id="aOpenLayers_8js_html_a24af210a23782a59799d0cc0bf50407d"><div class="ttname"><a href="OpenLayers_8js.html#a24af210a23782a59799d0cc0bf50407d">Date</a></div><div class="ttdeci">OpenLayers Date</div><div class="ttdef"><b>Definition</b> <a href="OpenLayers_8js_source.html#l00328">OpenLayers.js:328</a></div></div>
+<div class="ttc" id="aOpenLayers_8js_html_a53f9337c990d85ceea4e433abcb13a5f"><div class="ttname"><a href="OpenLayers_8js.html#a53f9337c990d85ceea4e433abcb13a5f">Array</a></div><div class="ttdeci">OpenLayers Array</div><div class="ttdef"><b>Definition</b> <a href="OpenLayers_8js_source.html#l00064">OpenLayers.js:64</a></div></div>
+<div class="ttc" id="aOpenLayers_8js_html_ac653c8deb5ab5d1d57fea1390a7673f2"><div class="ttname"><a href="OpenLayers_8js.html#ac653c8deb5ab5d1d57fea1390a7673f2">document</a></div><div class="ttdeci">OpenLayers Format XML document</div><div class="ttdef"><b>Definition</b> <a href="OpenLayers_8js_source.html#l00293">OpenLayers.js:293</a></div></div>
+<div class="ttc" id="ade__DE_8js_html_a0f3ac8ef55e71d4c8076312a0922a074"><div class="ttname"><a href="de__DE_8js.html#a0f3ac8ef55e71d4c8076312a0922a074">zoomPlus</a></div><div class="ttdeci">chainesTraduction[ 'de_DE'] zoomPlus</div><div class="ttdef"><b>Definition</b> <a href="de__DE_8js_source.html#l00017">de_DE.js:17</a></div></div>
+<div class="ttc" id="ade__DE_8js_html_a2a8ef3920f499c044246e6bf8f5cfcdd"><div class="ttname"><a href="de__DE_8js.html#a2a8ef3920f499c044246e6bf8f5cfcdd">zoomMoins</a></div><div class="ttdeci">chainesTraduction[ 'de_DE'] zoomMoins</div><div class="ttdef"><b>Definition</b> <a href="de__DE_8js_source.html#l00018">de_DE.js:18</a></div></div>
+<div class="ttc" id="ade__DE_8js_html_a2cf84024c3f2e40417699e73f9efdabc"><div class="ttname"><a href="de__DE_8js.html#a2cf84024c3f2e40417699e73f9efdabc">petitePlanete</a></div><div class="ttdeci">chainesTraduction[ 'de_DE'] petitePlanete</div><div class="ttdef"><b>Definition</b> <a href="de__DE_8js_source.html#l00004">de_DE.js:4</a></div></div>
+<div class="ttc" id="ade__DE_8js_html_a31fd1f309e9c8a179c092e64c2b247e5"><div class="ttname"><a href="de__DE_8js.html#a31fd1f309e9c8a179c092e64c2b247e5">vueNormale</a></div><div class="ttdeci">chainesTraduction[ 'de_DE'] vueNormale</div><div class="ttdef"><b>Definition</b> <a href="de__DE_8js_source.html#l00009">de_DE.js:9</a></div></div>
+<div class="ttc" id="ade__DE_8js_html_a3aebf54dabd2d9992c301f7107f5a613"><div class="ttname"><a href="de__DE_8js.html#a3aebf54dabd2d9992c301f7107f5a613">afficheElements</a></div><div class="ttdeci">chainesTraduction[ 'de_DE'] afficheElements</div><div class="ttdef"><b>Definition</b> <a href="de__DE_8js_source.html#l00006">de_DE.js:6</a></div></div>
+<div class="ttc" id="ade__DE_8js_html_a43d53a6c287fac6b637a2ad92d12c0b3"><div class="ttname"><a href="de__DE_8js.html#a43d53a6c287fac6b637a2ad92d12c0b3">panoSuivant</a></div><div class="ttdeci">chainesTraduction[ 'de_DE'] panoSuivant</div><div class="ttdef"><b>Definition</b> <a href="de__DE_8js_source.html#l00003">de_DE.js:3</a></div></div>
+<div class="ttc" id="ade__DE_8js_html_a4c8bb7d1b98e14aa5c10f0add8c04a06"><div class="ttname"><a href="de__DE_8js.html#a4c8bb7d1b98e14aa5c10f0add8c04a06">plan</a></div><div class="ttdeci">chainesTraduction[ 'de_DE'] plan</div><div class="ttdef"><b>Definition</b> <a href="de__DE_8js_source.html#l00023">de_DE.js:23</a></div></div>
+<div class="ttc" id="ade__DE_8js_html_a50ea1cd9c4b3b703b2e51dd72dae4c0c"><div class="ttname"><a href="de__DE_8js.html#a50ea1cd9c4b3b703b2e51dd72dae4c0c">bas</a></div><div class="ttdeci">chainesTraduction[ 'de_DE'] bas</div><div class="ttdef"><b>Definition</b> <a href="de__DE_8js_source.html#l00015">de_DE.js:15</a></div></div>
+<div class="ttc" id="ade__DE_8js_html_a51cd74c3bd7a3e3c79cc7a684058e93f"><div class="ttname"><a href="de__DE_8js.html#a51cd74c3bd7a3e3c79cc7a684058e93f">aPropos</a></div><div class="ttdeci">chainesTraduction[ 'de_DE'] aPropos</div><div class="ttdef"><b>Definition</b> <a href="de__DE_8js_source.html#l00010">de_DE.js:10</a></div></div>
+<div class="ttc" id="ade__DE_8js_html_a5e5ad34bf1d0b51b6ecdccbe3887d975"><div class="ttname"><a href="de__DE_8js.html#a5e5ad34bf1d0b51b6ecdccbe3887d975">souris</a></div><div class="ttdeci">chainesTraduction[ 'de_DE'] souris</div><div class="ttdef"><b>Definition</b> <a href="de__DE_8js_source.html#l00022">de_DE.js:22</a></div></div>
+<div class="ttc" id="ade__DE_8js_html_a6057aa6dcc74d0aeb8da99e50967f384"><div class="ttname"><a href="de__DE_8js.html#a6057aa6dcc74d0aeb8da99e50967f384">aide</a></div><div class="ttdeci">chainesTraduction[ 'de_DE'] aide</div><div class="ttdef"><b>Definition</b> <a href="de__DE_8js_source.html#l00019">de_DE.js:19</a></div></div>
+<div class="ttc" id="ade__DE_8js_html_a61c79eafcc892fa2298d4a30752fe05a"><div class="ttname"><a href="de__DE_8js.html#a61c79eafcc892fa2298d4a30752fe05a">carte</a></div><div class="ttdeci">chainesTraduction[ 'de_DE'] carte</div><div class="ttdef"><b>Definition</b> <a href="de__DE_8js_source.html#l00024">de_DE.js:24</a></div></div>
+<div class="ttc" id="ade__DE_8js_html_a72586f752e48e9f6bfdfc1d370840c2a"><div class="ttname"><a href="de__DE_8js.html#a72586f752e48e9f6bfdfc1d370840c2a">pleinEcran</a></div><div class="ttdeci">chainesTraduction[ 'de_DE'] pleinEcran</div><div class="ttdef"><b>Definition</b> <a href="de__DE_8js_source.html#l00020">de_DE.js:20</a></div></div>
+<div class="ttc" id="ade__DE_8js_html_a731fb934050b02626574d60839ed4594"><div class="ttname"><a href="de__DE_8js.html#a731fb934050b02626574d60839ed4594">gauche</a></div><div class="ttdeci">chainesTraduction[ 'de_DE'] gauche</div><div class="ttdef"><b>Definition</b> <a href="de__DE_8js_source.html#l00013">de_DE.js:13</a></div></div>
+<div class="ttc" id="ade__DE_8js_html_a93caab71f0c1acf48b7e83eb0cd537fe"><div class="ttname"><a href="de__DE_8js.html#a93caab71f0c1acf48b7e83eb0cd537fe">panoVisuSite</a></div><div class="ttdeci">chainesTraduction[ 'de_DE'] panoVisuSite</div><div class="ttdef"><b>Definition</b> <a href="de__DE_8js_source.html#l00025">de_DE.js:25</a></div></div>
+<div class="ttc" id="ade__DE_8js_html_a94a92baa2ff55a41098e2ea4bb1c7800"><div class="ttname"><a href="de__DE_8js.html#a94a92baa2ff55a41098e2ea4bb1c7800">afficheMasque</a></div><div class="ttdeci">chainesTraduction[ 'de_DE'] afficheMasque</div><div class="ttdef"><b>Definition</b> <a href="de__DE_8js_source.html#l00011">de_DE.js:11</a></div></div>
+<div class="ttc" id="ade__DE_8js_html_a94ce59204b1301bbfa9fea74e92dd965"><div class="ttname"><a href="de__DE_8js.html#a94ce59204b1301bbfa9fea74e92dd965">autorotation</a></div><div class="ttdeci">chainesTraduction[ 'de_DE'] autorotation</div><div class="ttdef"><b>Definition</b> <a href="de__DE_8js_source.html#l00021">de_DE.js:21</a></div></div>
+<div class="ttc" id="ade__DE_8js_html_a94d9abc82546bfdbf74d646bf9e1cb3c"><div class="ttname"><a href="de__DE_8js.html#a94d9abc82546bfdbf74d646bf9e1cb3c">panoPrecedent</a></div><div class="ttdeci">chainesTraduction[ 'de_DE'] panoPrecedent</div><div class="ttdef"><b>Definition</b> <a href="de__DE_8js_source.html#l00002">de_DE.js:2</a></div></div>
+<div class="ttc" id="ade__DE_8js_html_aa64ccc9dd84ed34c95bf8a8c05e23bcd"><div class="ttname"><a href="de__DE_8js.html#aa64ccc9dd84ed34c95bf8a8c05e23bcd">droite</a></div><div class="ttdeci">chainesTraduction[ 'de_DE'] droite</div><div class="ttdef"><b>Definition</b> <a href="de__DE_8js_source.html#l00016">de_DE.js:16</a></div></div>
+<div class="ttc" id="ade__DE_8js_html_aa8d6d135e21739e051f246b2a51e5cac"><div class="ttname"><a href="de__DE_8js.html#aa8d6d135e21739e051f246b2a51e5cac">masqueElements</a></div><div class="ttdeci">chainesTraduction[ 'de_DE'] masqueElements</div><div class="ttdef"><b>Definition</b> <a href="de__DE_8js_source.html#l00005">de_DE.js:5</a></div></div>
+<div class="ttc" id="ade__DE_8js_html_abb663c56b6fbef570abd7162081d9b08"><div class="ttname"><a href="de__DE_8js.html#abb663c56b6fbef570abd7162081d9b08">clicFenetre</a></div><div class="ttdeci">chainesTraduction[ 'de_DE'] clicFenetre</div><div class="ttdef"><b>Definition</b> <a href="de__DE_8js_source.html#l00026">de_DE.js:26</a></div></div>
+<div class="ttc" id="ade__DE_8js_html_ac7e62df062c2939fadd379d56f600d69"><div class="ttname"><a href="de__DE_8js.html#ac7e62df062c2939fadd379d56f600d69">vignettes</a></div><div class="ttdeci">chainesTraduction[ 'de_DE'] vignettes</div><div class="ttdef"><b>Definition</b> <a href="de__DE_8js_source.html#l00012">de_DE.js:12</a></div></div>
+<div class="ttc" id="ade__DE_8js_html_acd4b07600dd36e100ddf1b3347a3534e"><div class="ttname"><a href="de__DE_8js.html#acd4b07600dd36e100ddf1b3347a3534e">haut</a></div><div class="ttdeci">chainesTraduction[ 'de_DE'] haut</div><div class="ttdef"><b>Definition</b> <a href="de__DE_8js_source.html#l00014">de_DE.js:14</a></div></div>
+<div class="ttc" id="ade__DE_8js_html_af65120b1b4f6c98c104bcf38a9601695"><div class="ttname"><a href="de__DE_8js.html#af65120b1b4f6c98c104bcf38a9601695">arreteAutoTour</a></div><div class="ttdeci">chainesTraduction[ 'de_DE'] arreteAutoTour</div><div class="ttdef"><b>Definition</b> <a href="de__DE_8js_source.html#l00008">de_DE.js:8</a></div></div>
+<div class="ttc" id="ade__DE_8js_html_afe37001a9c83f0131d4937f74266564c"><div class="ttname"><a href="de__DE_8js.html#afe37001a9c83f0131d4937f74266564c">demarreAutoTour</a></div><div class="ttdeci">chainesTraduction[ 'de_DE'] demarreAutoTour</div><div class="ttdef"><b>Definition</b> <a href="de__DE_8js_source.html#l00007">de_DE.js:7</a></div></div>
+<div class="ttc" id="adefaut_8js_html_a0cb91b60b968c45f47f663c09b307025"><div class="ttname"><a href="defaut_8js.html#a0cb91b60b968c45f47f663c09b307025">fenetreAide</a></div><div class="ttdeci">chainesTraduction[ 'defaut'] fenetreAide</div><div class="ttdef"><b>Definition</b> <a href="defaut_8js_source.html#l00033">defaut.js:33</a></div></div>
+<div class="ttc" id="adefaut_8js_html_adde0cb24020e932ebff3ca5e77f24626"><div class="ttname"><a href="defaut_8js.html#adde0cb24020e932ebff3ca5e77f24626">fenetreInfo</a></div><div class="ttdeci">chainesTraduction[ 'defaut'] fenetreInfo</div><div class="ttdef"><b>Definition</b> <a href="defaut_8js_source.html#l00027">defaut.js:27</a></div></div>
+<div class="ttc" id="ajquery_8contextMenu_8js_html_aeec8c1cecfa0db128d7deb49c276aab8"><div class="ttname"><a href="jquery_8contextMenu_8js.html#aeec8c1cecfa0db128d7deb49c276aab8">handle</a></div><div class="ttdeci">var handle</div><div class="ttdef"><b>Definition</b> <a href="jquery_8contextMenu_8js_source.html#l00204">jquery.contextMenu.js:204</a></div></div>
+<div class="ttc" id="aleaflet_8js_html_a1476b2a7c5d84d7330a287c190d75b44"><div class="ttname"><a href="leaflet_8js.html#a1476b2a7c5d84d7330a287c190d75b44">include</a></div><div class="ttdeci">et et include</div><div class="ttdef"><b>Definition</b> <a href="leaflet_8js_source.html#l00005">leaflet.js:5</a></div></div>
+<div class="ttc" id="aleaflet_8js_html_a2ecc0b03b1eaf4f1ca537029a6f89ac0"><div class="ttname"><a href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">k</a></div><div class="ttdeci">function k(t, e, i, n)</div><div class="ttdef"><b>Definition</b> <a href="leaflet_8js_source.html#l00005">leaflet.js:5</a></div></div>
+<div class="ttc" id="aleaflet_8js_html_a73aff07b65d7c0b09ccf6b4c4f1b7a9d"><div class="ttname"><a href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d">i</a></div><div class="ttdeci">function i(t, e)</div><div class="ttdef"><b>Definition</b> <a href="leaflet_8js_source.html#l00005">leaflet.js:5</a></div></div>
+<div class="ttc" id="aleaflet_8js_html_ab5902775854a8b8440bcd25e0fe1c120"><div class="ttname"><a href="leaflet_8js.html#ab5902775854a8b8440bcd25e0fe1c120">e</a></div><div class="ttdeci">var e</div><div class="ttdef"><b>Definition</b> <a href="leaflet_8js_source.html#l00005">leaflet.js:5</a></div></div>
+<div class="ttc" id="apanovisu-min_8js_html_a2aa791b67621bf89711c615675e48c65"><div class="ttname"><a href="panovisu-min_8js.html#a2aa791b67621bf89711c615675e48c65">panovisu</a></div><div class="ttdeci">function panovisu(t)</div><div class="ttdef"><b>Definition</b> <a href="panovisu-min_8js_source.html#l00001">panovisu-min.js:1</a></div></div>
+<div class="ttc" id="apanovisuInit_8js_html_a0a6ad45f0f252120fcaf5158defef569"><div class="ttname"><a href="panovisuInit_8js.html#a0a6ad45f0f252120fcaf5158defef569">site</a></div><div class="ttdeci">var site</div><div class="ttdef"><b>Definition</b> <a href="panovisuInit_8js_source.html#l00005">panovisuInit.js:5</a></div></div>
+<div class="ttc" id="apanovisuInit_8js_html_a284c4a94bd0208bdb293f69977030da1"><div class="ttname"><a href="panovisuInit_8js.html#a284c4a94bd0208bdb293f69977030da1">siteTextePanovisu</a></div><div class="ttdeci">siteTextePanovisu</div><div class="ttdef"><b>Definition</b> <a href="panovisuInit_8js_source.html#l00008">panovisuInit.js:8</a></div></div>
+<div class="ttc" id="apanovisuInit_8js_html_a33b3e83990241032b2b48b13c4721ad7"><div class="ttname"><a href="panovisuInit_8js.html#a33b3e83990241032b2b48b13c4721ad7">chainesTraduction</a></div><div class="ttdeci">var chainesTraduction</div><div class="ttdef"><b>Definition</b> <a href="panovisuInit_8js_source.html#l00081">panovisuInit.js:81</a></div></div>
+<div class="ttc" id="apanovisuInit_8js_html_a4fe61cf1531940e34fcadf8a497f1b1e"><div class="ttname"><a href="panovisuInit_8js.html#a4fe61cf1531940e34fcadf8a497f1b1e">siteTexte</a></div><div class="ttdeci">var siteTexte</div><div class="ttdef"><b>Definition</b> <a href="panovisuInit_8js_source.html#l00006">panovisuInit.js:6</a></div></div>
+<div class="ttc" id="apanovisuInit_8js_html_a582ea2be157062567c37d2e627c6e80e"><div class="ttname"><a href="panovisuInit_8js.html#a582ea2be157062567c37d2e627c6e80e">prechargeImages</a></div><div class="ttdeci">function prechargeImages(images)</div><div class="ttdef"><b>Definition</b> <a href="panovisuInit_8js_source.html#l00098">panovisuInit.js:98</a></div></div>
+<div class="ttc" id="apanovisuInit_8js_html_a614229fff4211edebc3c193d1e7763ec"><div class="ttname"><a href="panovisuInit_8js.html#a614229fff4211edebc3c193d1e7763ec">version</a></div><div class="ttdeci">var version</div><div class="ttdef"><b>Definition</b> <a href="panovisuInit_8js_source.html#l00002">panovisuInit.js:2</a></div></div>
+<div class="ttc" id="apanovisuInit_8js_html_a6631dfd7819f94b21bd6e0dce1647ed7"><div class="ttname"><a href="panovisuInit_8js.html#a6631dfd7819f94b21bd6e0dce1647ed7">anneeProgramme</a></div><div class="ttdeci">var anneeProgramme</div><div class="ttdef"><b>Definition</b> <a href="panovisuInit_8js_source.html#l00004">panovisuInit.js:4</a></div></div>
+<div class="ttc" id="apanovisuInit_8js_html_a8ddfdafbb2e26ef51147c4ebe65b834f"><div class="ttname"><a href="panovisuInit_8js.html#a8ddfdafbb2e26ef51147c4ebe65b834f">traduction</a></div><div class="ttdeci">function traduction()</div><div class="ttdef"><b>Definition</b> <a href="panovisuInit_8js_source.html#l00041">panovisuInit.js:41</a></div></div>
+<div class="ttc" id="apanovisuInit_8js_html_a938719dd34ef2a861d202a8bd90c33ca"><div class="ttname"><a href="panovisuInit_8js.html#a938719dd34ef2a861d202a8bd90c33ca">sitePanovisu</a></div><div class="ttdeci">sitePanovisu</div><div class="ttdef"><b>Definition</b> <a href="panovisuInit_8js_source.html#l00007">panovisuInit.js:7</a></div></div>
+<div class="ttc" id="apanovisuInit_8js_html_a9abbee82203890a335674e7744b3aacd"><div class="ttname"><a href="panovisuInit_8js.html#a9abbee82203890a335674e7744b3aacd">programmeur</a></div><div class="ttdeci">var programmeur</div><div class="ttdef"><b>Definition</b> <a href="panovisuInit_8js_source.html#l00003">panovisuInit.js:3</a></div></div>
+<div class="ttc" id="apanovisuInit_8js_html_a9e7f0a8daa2bf2d7a5b738e9d6f69a8e"><div class="ttname"><a href="panovisuInit_8js.html#a9e7f0a8daa2bf2d7a5b738e9d6f69a8e">supportCanvas</a></div><div class="ttdeci">function supportCanvas()</div><div class="ttdoc">Teste si les canvas sont supportés.</div><div class="ttdef"><b>Definition</b> <a href="panovisuInit_8js_source.html#l00116">panovisuInit.js:116</a></div></div>
+<div class="ttc" id="apanovisuInit_8js_html_abca23acbc1d398418271025c99640f01"><div class="ttname"><a href="panovisuInit_8js.html#abca23acbc1d398418271025c99640f01">requestAnimFrame</a></div><div class="ttdeci">window requestAnimFrame</div><div class="ttdef"><b>Definition</b> <a href="panovisuInit_8js_source.html#l00011">panovisuInit.js:11</a></div></div>
+<div class="ttc" id="apanovisuInit_8js_html_ae455fc1fa752dced76c2baf5bdc1ceb8"><div class="ttname"><a href="panovisuInit_8js.html#ae455fc1fa752dced76c2baf5bdc1ceb8">ajoutePano</a></div><div class="ttdeci">function ajoutePano(parametres)</div><div class="ttdoc">Crée les objets correspondants à chacun des panoramiques.</div><div class="ttdef"><b>Definition</b> <a href="panovisuInit_8js_source.html#l00142">panovisuInit.js:142</a></div></div>
+<div class="ttc" id="apanovisuInit_8js_html_aeae7be9074369b212399a97e8bae295d"><div class="ttname"><a href="panovisuInit_8js.html#aeae7be9074369b212399a97e8bae295d">numeroPano</a></div><div class="ttdeci">var numeroPano</div><div class="ttdef"><b>Definition</b> <a href="panovisuInit_8js_source.html#l00001">panovisuInit.js:1</a></div></div>
+<div class="ttc" id="apanovisuInit_8js_html_afedebcce57c7ecb2fcb56ae30e779bc7"><div class="ttname"><a href="panovisuInit_8js.html#afedebcce57c7ecb2fcb56ae30e779bc7">supportWebgl</a></div><div class="ttdeci">function supportWebgl()</div><div class="ttdoc">Teste si webGL est supporté</div><div class="ttdef"><b>Definition</b> <a href="panovisuInit_8js_source.html#l00125">panovisuInit.js:125</a></div></div>
+<div class="ttc" id="ascreenfull_8js_html_a37b9e1ceee4c6d2616fa6081784b5468"><div class="ttname"><a href="screenfull_8js.html#a37b9e1ceee4c6d2616fa6081784b5468">fn</a></div><div class="ttdeci">var fn</div><div class="ttdef"><b>Definition</b> <a href="screenfull_8js_source.html#l00007">screenfull.js:7</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_c53403758c779aa1c62c64f64cbd5714.html">panovisu</a></li><li class="navelem"><a class="el" href="panovisuInit_8js.html">panovisuInit.js</a></li>
+    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,8 @@
+<map id="editeurpanovisu.ConversionRatio2to1DialogController.creerZoneRepertoireSortie" name="editeurpanovisu.ConversionRatio2to1DialogController.creerZoneRepertoireSortie">
+<area shape="rect" id="Node000001" title="Crée la zone de sélection du répertoire de sortie." alt="" coords="5,5,232,60"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="580,20,619,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="232,23,375,19,532,22,567,25,566,31,532,27,375,24,232,28"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#ab269eee4ad26029d55c4dd4019742124" title="Ouvre un dialogue pour choisir un répertoire personnalisé." alt="" coords="280,37,532,92"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="232,43,267,46,266,52,232,48"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="532,41,566,35,567,41,533,46"/>
+</map>

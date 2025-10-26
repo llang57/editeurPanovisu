@@ -1,0 +1,15 @@
+<map id="editeurpanovisu.VisualiseurImagesPanoramiques.getFov" name="editeurpanovisu.VisualiseurImagesPanoramiques.getFov">
+<area shape="rect" id="Node000001" title="Retourne la valeur de fov." alt="" coords="860,63,1071,103"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html#ae8973d3b3335139032ad3e2991dcfeba" title=" " alt="" coords="571,5,812,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="855,62,787,48,788,43,856,57"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html#af8054a76c76eed1ef022005db88148c1" title=" " alt="" coords="300,63,523,103"/>
+<area shape="poly" id="edge7_Node000001_Node000003" title=" " alt="" coords="846,85,523,85,523,80,846,80"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html#ac38446a4ab5c61c1dfd273f9d50c69c8" title="Affiche la vue panoramique avec les paramètres actuels." alt="" coords="586,120,797,160"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="856,108,788,123,787,117,855,103"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="580,51,510,65,509,60,579,46"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html#ae11a24d852acc18c1ad74844be5f5061" title="Affiche le panoramique dans un AnchorPane." alt="" coords="8,31,249,71"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="286,71,249,67,250,62,287,66"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html#aed1e4d51da4f14c268b1ee2a70f96738" title="Change les dimensions de la zone de visualisation." alt="" coords="5,95,252,135"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="287,99,252,103,252,98,286,94"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="579,120,509,105,510,100,580,115"/>
+</map>

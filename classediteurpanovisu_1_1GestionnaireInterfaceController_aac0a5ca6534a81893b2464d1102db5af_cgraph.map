@@ -1,0 +1,58 @@
+<map id="editeurpanovisu.GestionnaireInterfaceController.afficheCarte" name="editeurpanovisu.GestionnaireInterfaceController.afficheCarte">
+<area shape="rect" id="Node000001" title="Affiche la carte interactive avec marqueurs et radar." alt="" coords="5,319,232,359"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#aa9cb849bc9f88233a910b719884840e1" title="Retourne la valeur de couleurFondCarte." alt="" coords="283,5,567,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="123,318,140,264,171,193,192,155,216,118,245,84,278,55,286,50,289,54,282,59,249,88,221,121,196,158,176,195,145,266,128,319"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a5d420a2479f7a9303d5345de12e69c86" title="Retourne la valeur de opaciteCarte." alt="" coords="299,69,552,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="127,317,148,275,181,221,224,165,250,141,279,119,289,113,292,118,281,124,254,145,228,169,185,224,152,277,131,319"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a636b4c4fc4256f294d219f8dc1c709f3" title="Retourne la valeur de strPositionCarte." alt="" coords="289,133,562,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="133,317,191,250,233,214,279,183,293,176,296,181,281,188,236,218,195,254,137,320"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a9e850d024075a94fade7333821a909b5" title="Retourne la largeur réelle de l&#39;image de visualisation affichée." alt="" coords="280,197,571,237"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="149,316,207,281,279,247,303,239,305,244,281,252,210,285,151,321"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1NavigateurCarte.html#a000d6a94765404ed38cae69ba10baa45" title="Force le recalcul de la taille de la carte Leaflet." alt="" coords="324,261,527,301"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="226,316,310,300,311,305,227,321"/>
+<area shape="rect" id="Node000007" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="957,530,996,555"/>
+<area shape="poly" id="edge10_Node000001_Node000007" title=" " alt="" coords="232,333,417,330,628,331,810,340,874,349,911,362,928,377,942,396,962,437,972,480,977,516,972,517,967,481,957,439,938,398,924,381,908,366,873,354,810,345,627,336,417,335,232,338"/>
+<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a87ecae6781606a4a83c3a66111f85fe0" title="Retourne la valeur de bAfficheCarte." alt="" coords="302,376,549,416"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="227,356,305,371,304,376,226,361"/>
+<area shape="rect" id="Node000009" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a8c140b02c476eb4fdaa978391e2916d5" title="Retourne la valeur de bAfficheTitre." alt="" coords="305,440,546,480"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="151,357,210,392,281,426,305,434,303,439,279,430,207,397,149,361"/>
+<area shape="rect" id="Node000010" href="$classediteurpanovisu_1_1NavigateurCarte.html#ac4abfa0b8cebaaa717398c9dc48f5bc0" title="Indique si la carte est prête (initialisée)" alt="" coords="663,376,865,416"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="135,358,159,389,192,427,234,463,281,490,360,517,394,525,426,528,459,526,492,519,569,490,585,478,593,463,601,448,617,432,648,417,651,421,620,437,606,451,598,466,589,481,572,494,493,524,459,531,426,533,393,530,359,523,279,494,230,467,189,430,155,393,131,361"/>
+<area shape="rect" id="Node000011" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a76e038527a4ecd01bff24d9a684b80b7" title="Méthode privée pour mettre à jour les marqueurs et le radar sur la carte Appelée soit par le callback..." alt="" coords="284,739,567,794"/>
+<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="136,357,399,727,394,730,132,360"/>
+<area shape="rect" id="Node000024" href="$classediteurpanovisu_1_1NavigateurCarte.html#a6ea71a3224068e271875dd7d166599ca" title="Définit un callback à exécuter quand la carte est chargée et prête." alt="" coords="324,1044,527,1084"/>
+<area shape="poly" id="edge31_Node000001_Node000024" title=" " alt="" coords="128,358,184,543,229,673,282,804,347,931,406,1031,402,1034,343,934,278,806,224,675,179,545,123,359"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="514,259,605,247,657,245,710,247,764,254,816,268,866,288,911,318,931,339,947,363,968,418,977,472,979,516,974,517,972,473,963,419,943,366,927,342,908,322,863,293,815,273,763,259,710,252,657,250,605,253,515,264"/>
+<area shape="poly" id="edge26_Node000011_Node000007" title=" " alt="" coords="441,738,534,587,583,514,617,477,658,457,695,444,729,436,762,435,795,439,830,447,911,476,939,494,961,517,957,521,935,498,908,481,829,452,794,444,762,440,729,442,696,449,660,462,620,481,588,517,538,590,445,741"/>
+<area shape="poly" id="edge25_Node000011_Node000010" title=" " alt="" coords="443,738,501,649,568,535,580,505,587,480,596,456,617,433,649,413,652,418,620,437,601,459,592,482,585,507,573,537,505,651,447,741"/>
+<area shape="poly" id="edge27_Node000011_Node000011" title=" " alt="" coords="366,739,367,729,377,720,397,715,425,713,460,716,479,724,477,729,458,721,425,718,398,720,380,725,371,731,372,739"/>
+<area shape="rect" id="Node000012" href="$classediteurpanovisu_1_1NavigateurCarte.html#a4795e11db281b52b275c715f101eff61" title="Affiche un radar sur la carte (champ de vision)" alt="" coords="663,491,865,531"/>
+<area shape="poly" id="edge12_Node000011_Node000012" title=" " alt="" coords="440,738,468,694,508,640,558,586,587,561,617,540,649,526,651,531,620,545,590,566,562,590,512,643,472,697,444,741"/>
+<area shape="rect" id="Node000013" href="$classediteurpanovisu_1_1NavigateurCarte.html#a61af6a23ce86ac1b7c87f01ab17da99b" title="Ajoute un marqueur sur la carte." alt="" coords="663,555,865,595"/>
+<area shape="poly" id="edge14_Node000011_Node000013" title=" " alt="" coords="450,737,521,670,567,634,617,604,648,592,650,597,620,609,570,639,524,674,454,741"/>
+<area shape="rect" id="Node000014" href="$classediteurpanovisu_1_1NavigateurCarte.html#afe45381a1752b3c6b9614e17224d8843" title="Centre la carte sur des coordonnées avec un niveau de zoom." alt="" coords="663,619,865,659"/>
+<area shape="poly" id="edge16_Node000011_Node000014" title=" " alt="" coords="472,737,540,701,618,668,649,658,650,664,620,673,542,706,475,742"/>
+<area shape="rect" id="Node000015" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#aa50148f02d5e1a1045b60ea84d00392e" title="Retourne la valeur de coordCentreCarte." alt="" coords="622,683,906,723"/>
+<area shape="poly" id="edge18_Node000011_Node000015" title=" " alt="" coords="566,737,644,723,645,728,567,743"/>
+<area shape="rect" id="Node000016" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#aa57a7a4c75ca935c65f8a935e2d01602" title="Retourne la valeur de opaciteRadarCarte." alt="" coords="619,747,909,787"/>
+<area shape="poly" id="edge19_Node000011_Node000016" title=" " alt="" coords="567,764,605,764,605,769,567,769"/>
+<area shape="rect" id="Node000017" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a9504fc44953cb77eeb0382aa80b90f59" title="Retourne la valeur de strCouleurFondRadarCarte." alt="" coords="646,811,882,866"/>
+<area shape="poly" id="edge20_Node000011_Node000017" title=" " alt="" coords="555,791,633,808,632,813,554,797"/>
+<area shape="rect" id="Node000018" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#ad7a31f393a284b67d32604898cd0732e" title="Retourne la valeur de strCouleurLigneRadarCarte." alt="" coords="646,890,882,945"/>
+<area shape="poly" id="edge21_Node000011_Node000018" title=" " alt="" coords="469,792,538,834,620,875,641,883,639,888,618,880,535,839,466,797"/>
+<area shape="rect" id="Node000019" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a39fca2c2ee4d82e13b82f23f0a08aa96" title="Retourne la valeur de tailleRadarCarte." alt="" coords="627,969,901,1009"/>
+<area shape="poly" id="edge22_Node000011_Node000019" title=" " alt="" coords="449,793,478,830,518,874,566,917,620,954,637,962,635,967,617,958,563,921,514,877,474,833,444,796"/>
+<area shape="rect" id="Node000020" href="$classediteurpanovisu_1_1NavigateurCarte.html#a3086c2ad9e2edcbadcffbd0e9ce7a251" title="Retourne la valeur de webEngine." alt="" coords="663,1033,865,1073"/>
+<area shape="poly" id="edge23_Node000011_Node000020" title=" " alt="" coords="441,793,468,842,507,904,558,967,588,995,620,1019,651,1034,648,1039,617,1024,584,999,554,971,502,907,463,845,437,795"/>
+<area shape="rect" id="Node000021" href="$leaflet_8js.html#a2ab7046ae25351b998b61260f82cabe8" title=" " alt="" coords="745,1098,783,1123"/>
+<area shape="poly" id="edge24_Node000011_Node000021" title=" " alt="" coords="442,793,476,863,523,951,574,1032,599,1063,620,1083,647,1097,676,1105,731,1110,731,1115,675,1110,645,1102,617,1088,595,1067,570,1035,519,953,472,865,437,795"/>
+<area shape="rect" id="Node000022" href="$classediteurpanovisu_1_1NavigateurCarte.html#a2a4620d2b0d62aef80e48e934b720efc" title="Récupère les coordonnées actuelles du centre de la carte." alt="" coords="663,1148,865,1188"/>
+<area shape="poly" id="edge28_Node000011_Node000022" title=" " alt="" coords="445,793,502,897,573,1031,585,1062,591,1088,600,1111,620,1134,651,1151,648,1156,617,1138,595,1114,586,1090,580,1064,568,1033,498,899,440,796"/>
+<area shape="rect" id="Node000023" href="$classediteurpanovisu_1_1NavigateurCarte.html#a2b37c60fcde717bd33c83d8f14281c4e" title="Retire tous les marqueurs de la carte." alt="" coords="663,1212,865,1252"/>
+<area shape="poly" id="edge29_Node000011_Node000023" title=" " alt="" coords="447,793,507,896,542,962,573,1031,581,1057,585,1081,587,1123,594,1161,604,1179,620,1198,651,1217,648,1222,617,1202,599,1182,589,1162,582,1123,580,1081,576,1058,568,1033,537,964,502,898,442,796"/>
+<area shape="poly" id="edge13_Node000012_Node000007" title=" " alt="" coords="866,523,944,535,944,541,865,529"/>
+<area shape="poly" id="edge15_Node000013_Node000007" title=" " alt="" coords="865,557,944,545,944,550,866,562"/>
+<area shape="poly" id="edge17_Node000014_Node000007" title=" " alt="" coords="865,621,908,604,934,586,955,564,959,568,937,590,911,609,867,626"/>
+<area shape="poly" id="edge30_Node000023_Node000007" title=" " alt="" coords="864,1224,888,1214,907,1198,922,1163,934,1097,954,911,966,711,972,569,977,570,971,711,959,911,940,1098,927,1165,911,1202,891,1219,867,1229"/>
+<area shape="poly" id="edge32_Node000024_Node000007" title=" " alt="" coords="440,1083,467,1124,507,1175,559,1224,588,1245,620,1262,702,1295,738,1307,773,1313,806,1313,839,1305,873,1289,907,1262,916,1248,925,1225,939,1152,950,1055,958,945,969,723,972,569,978,569,974,723,964,945,955,1056,944,1153,930,1226,921,1251,911,1266,876,1293,841,1310,807,1318,773,1318,737,1312,700,1300,618,1266,585,1250,555,1228,503,1178,463,1127,436,1086"/>
+</map>

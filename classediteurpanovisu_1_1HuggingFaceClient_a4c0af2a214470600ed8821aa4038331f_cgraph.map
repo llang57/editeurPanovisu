@@ -1,0 +1,6 @@
+<map id="editeurpanovisu.HuggingFaceClient.generateText" name="editeurpanovisu.HuggingFaceClient.generateText">
+<area shape="rect" id="Node000001" title="Génère du texte à partir d&#39;un prompt." alt="" coords="5,29,220,69"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="80,30,78,20,83,11,95,5,113,3,133,6,144,13,142,17,131,11,113,8,96,10,87,15,83,21,85,28"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="268,37,307,62"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="220,47,254,47,254,52,220,52"/>
+</map>

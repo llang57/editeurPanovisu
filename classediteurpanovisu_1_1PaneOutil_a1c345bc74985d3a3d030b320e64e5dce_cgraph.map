@@ -1,0 +1,15 @@
+<map id="editeurpanovisu.PaneOutil.PaneOutil" name="editeurpanovisu.PaneOutil.PaneOutil">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,175,203,215"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1PaneOutil.html#a525d3ee0577d9dce98c7070c8c6fcd2b" title=" " alt="" coords="251,127,492,153"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="202,172,294,153,296,158,203,177"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="825,70,864,95"/>
+<area shape="poly" id="edge7_Node000001_Node000004" title=" " alt="" coords="157,212,276,250,353,267,437,280,525,285,613,278,656,270,697,258,738,241,776,221,801,197,818,168,830,137,837,109,842,110,835,138,823,170,805,201,779,225,740,246,699,263,657,275,613,284,525,290,436,285,352,272,274,255,155,217"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1PaneOutil.html#ab1329e6891c20bdba55c279b44f72ff7" title=" " alt="" coords="540,5,777,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="397,125,539,62,578,47,580,52,541,66,399,130"/>
+<area shape="poly" id="edge5_Node000002_Node000004" title=" " alt="" coords="430,125,540,105,692,89,811,82,812,87,692,95,540,111,431,130"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1PaneOutil.html#ae31c93e705e43ba0cca41edcff34e335" title="Retourne la valeur de bInvariant." alt="" coords="551,120,767,160"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="492,137,537,137,537,143,492,143"/>
+<area shape="rect" id="Node000006" href="$leaflet_8js.html#abf5830200d869e463ea38504a19985f6" title=" " alt="" coords="637,185,680,210"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="436,150,624,188,623,193,435,155"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="725,43,813,70,811,75,723,48"/>
+</map>

@@ -1,0 +1,15 @@
+<map id="editeurpanovisu.EditeurPanovisu.setStrPanoListeVignette" name="editeurpanovisu.EditeurPanovisu.setStrPanoListeVignette">
+<area shape="rect" id="Node000001" title="Définit la valeur de strPanoListeVignette." alt="" coords="985,63,1244,103"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1EditeurPanovisu.html#a52a705708a1d3c8de862be8d60d1e3f7" title=" " alt="" coords="683,63,937,103"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="972,85,938,85,938,80,972,80"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1EditeurPanovisu.html#aaa7ca759d14267ee75421966b4034ac8" title=" " alt="" coords="333,13,635,38"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="687,63,634,53,561,41,562,35,635,48,688,58"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1EditeurPanovisu.html#a90f22e4d96cb983e9d610ed760d72706" title=" " alt="" coords="349,63,619,103"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="669,85,620,85,620,80,669,80"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1EditeurPanovisu.html#a515557ec3e9560b09bb206d906708291" title=" " alt="" coords="5,5,285,45"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="319,28,286,28,286,23,319,23"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1EditeurPanovisu.html#ab14a2c616d288d0cfe9b9687fb060076" title=" " alt="" coords="11,107,279,147"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="335,105,280,112,279,107,335,99"/>
+<area shape="poly" id="edge6_Node000006_Node000002" title=" " alt="" coords="293,126,457,124,634,112,714,100,715,105,635,117,458,129,293,132"/>
+<area shape="poly" id="edge7_Node000006_Node000006" title=" " alt="" coords="204,95,183,88,145,85,112,87,92,92,85,98,88,105,83,107,79,97,90,88,111,82,145,80,184,83,205,90"/>
+</map>

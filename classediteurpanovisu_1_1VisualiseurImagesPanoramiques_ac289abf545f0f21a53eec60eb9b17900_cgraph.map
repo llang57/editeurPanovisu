@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.VisualiseurImagesPanoramiques.setImagePanoramique" name="editeurpanovisu.VisualiseurImagesPanoramiques.setImagePanoramique">
+<area shape="rect" id="Node000001" title="Définit l&#39;image panoramique à afficher à partir d&#39;une Image." alt="" coords="5,13,317,53"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html#a7bcf9b8c5922a4b663161f09ead21eb3" title="Définit la valeur de nomFichierPanoramique." alt="" coords="365,5,625,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="318,30,351,30,351,35,318,35"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="673,20,712,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="625,30,659,30,659,35,625,35"/>
+</map>

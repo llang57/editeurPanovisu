@@ -1,0 +1,13 @@
+<map id="editeurpanovisu.HotspotHTML.creeHTML" name="editeurpanovisu.HotspotHTML.creeHTML">
+<area shape="rect" id="Node000001" title="Génère le fichier HTML du hotspot dans le répertoire de destination." alt="" coords="5,141,293,166"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1HotspotHTML.html#a4e4c3b500f9566cc846c09eb538b0dda" title="Retourne la valeur de imagesEditeur." alt="" coords="343,5,587,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="171,138,245,98,340,55,363,47,365,52,342,60,247,103,174,143"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1HotspotHTML.html#a69c25901cb3b08778f512e5a8122b3ab" title="Retourne la valeur de iNombreImages." alt="" coords="341,69,589,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="212,138,352,109,354,115,213,143"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1HotspotHTML.html#a16ef3abead66870725b50dd80430aa30" title="Retourne la valeur de strTexteHTML." alt="" coords="343,133,587,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="294,151,330,151,330,156,294,156"/>
+<area shape="rect" id="Node000005" href="$leaflet_8js.html#afa3c32d9f7f168b0e59ddc33ec31bb84" title=" " alt="" coords="446,198,485,223"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="221,163,433,202,432,208,220,169"/>
+<area shape="rect" id="Node000006" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="446,247,485,273"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="177,164,250,197,342,232,433,253,432,258,341,237,248,202,175,168"/>
+</map>

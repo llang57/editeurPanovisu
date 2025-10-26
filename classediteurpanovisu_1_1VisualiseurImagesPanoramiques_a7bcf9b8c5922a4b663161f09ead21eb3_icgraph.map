@@ -1,0 +1,9 @@
+<map id="editeurpanovisu.VisualiseurImagesPanoramiques.setNomFichierPanoramique" name="editeurpanovisu.VisualiseurImagesPanoramiques.setNomFichierPanoramique">
+<area shape="rect" id="Node000001" title="Définit la valeur de nomFichierPanoramique." alt="" coords="396,62,656,117"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html#ac289abf545f0f21a53eec60eb9b17900" title="Définit l&#39;image panoramique à afficher à partir d&#39;une Image." alt="" coords="21,5,333,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="382,66,286,48,287,43,383,60"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html#a61954137e69c88cce2266a03b071d948" title="Définit l&#39;image panoramique à afficher à partir d&#39;un chemin." alt="" coords="5,69,348,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="382,92,348,92,348,87,382,87"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html#a32bc46de28fbd0cfb3671aec24081b5a" title=" " alt="" coords="33,134,320,189"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="383,121,311,137,310,131,382,116"/>
+</map>

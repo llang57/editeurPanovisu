@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.Panoramique.addHotspot" name="editeurpanovisu.Panoramique.addHotspot">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,35,249,75"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1Panoramique.html#a10fc372ca29d83635a36fac8b2953108" title="Retourne la valeur de nombreHotspots." alt="" coords="297,5,539,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="249,40,283,36,284,42,250,45"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="399,70,437,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="250,64,385,77,385,82,249,69"/>
+</map>

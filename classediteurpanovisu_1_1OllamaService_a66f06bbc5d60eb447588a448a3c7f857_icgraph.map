@@ -1,0 +1,4 @@
+<map id="editeurpanovisu.OllamaService.appellerHuggingFace" name="editeurpanovisu.OllamaService.appellerHuggingFace">
+<area shape="rect" id="Node000001" title="Appelle l&#39;API Hugging Face pour générer le texte." alt="" coords="5,29,288,69"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="195,18,178,11,147,8,119,10,103,15,97,21,100,28,95,30,92,20,100,10,118,5,147,3,179,5,197,13"/>
+</map>

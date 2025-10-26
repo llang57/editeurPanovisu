@@ -1,0 +1,6 @@
+<map id="editeurpanovisu.NavigateurPanoramique.imgTransformationImage" name="editeurpanovisu.NavigateurPanoramique.imgTransformationImage">
+<area shape="rect" id="Node000001" title="Transforme une image rectangulaire en projection équirectangulaire." alt="" coords="5,29,280,69"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="104,30,102,20,108,11,122,5,143,3,166,6,179,13,177,18,165,11,143,8,123,10,112,15,107,21,110,28"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="328,37,367,62"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="280,47,314,47,314,52,280,52"/>
+</map>

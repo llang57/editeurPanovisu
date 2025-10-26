@@ -1,0 +1,9 @@
+<map id="editeurpanovisu.TransformationsPanoramiqueGPU.imageToByteBuffer" name="editeurpanovisu.TransformationsPanoramiqueGPU.imageToByteBuffer">
+<area shape="rect" id="Node000001" title="Convertit une image JavaFX en buffer RGBA pour OpenCL." alt="" coords="5,47,268,87"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="316,5,355,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="217,45,302,23,303,28,218,50"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a008d931e56b6fc013061112f26afbffb" title=" " alt="" coords="316,55,355,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="268,65,302,65,302,70,268,70"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#a9f9b62a373d2bb4624b7ac2df8151435" title=" " alt="" coords="316,104,355,129"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="218,85,303,106,302,111,217,90"/>
+</map>

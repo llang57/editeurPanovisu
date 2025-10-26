@@ -1,0 +1,44 @@
+<map id="editeurpanovisu.GestionnaireDiaporamaController.initDiaporama" name="editeurpanovisu.GestionnaireDiaporamaController.initDiaporama">
+<area shape="rect" id="Node000001" title="Initialise l&#39;interface du gestionnaire de diaporama." alt="" coords="5,497,260,537"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1GestionnaireDiaporamaController.html#a4e194804ba3846af066a18b58ba76899" title="Retourne la valeur de diaporama." alt="" coords="308,5,563,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="133,497,143,415,153,358,169,296,192,231,221,167,259,107,306,55,312,51,315,55,310,59,263,110,226,169,197,233,174,297,159,360,148,416,138,497"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1Diaporama.html#a4f194556e806da57bc913012a2fec132" title="Retourne le nombre d&#39;images dans le diaporama." alt="" coords="319,69,551,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="134,497,148,425,177,323,200,268,229,213,264,163,306,119,312,115,315,119,310,123,268,166,233,216,205,270,182,325,153,426,139,498"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1Diaporama.html#ac96ea0ae0875e1369ee2988b0020e331" title="Retourne l&#39;opacité du fond du diaporama." alt="" coords="321,133,549,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="136,497,153,435,186,350,209,305,236,260,269,219,306,183,314,178,317,182,310,187,272,222,240,263,213,307,191,352,158,437,141,498"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1Diaporama.html#a7521f47205fa5f8f91e8348067f17ed6" title="Retourne la couleur de fond du diaporama." alt="" coords="321,197,549,237"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="139,496,160,445,195,378,244,307,273,275,306,247,315,241,318,246,310,251,277,279,248,311,199,381,165,448,144,498"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1Diaporama.html#ab669aa2a825cc9f935216c6888b7fb35" title="Retourne le tableau complet des noms de fichiers." alt="" coords="321,261,549,301"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="143,495,168,456,205,406,252,355,307,311,318,305,320,310,309,316,255,358,209,409,172,459,148,498"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1Diaporama.html#a5fe343630d4edd233e959665a572d6f9" title="Retourne le tableau complet des libellés des images." alt="" coords="321,325,549,365"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="152,495,217,435,260,403,307,375,323,368,325,373,309,380,263,407,220,440,155,499"/>
+<area shape="rect" id="Node000008" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="416,390,455,415"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="165,495,230,459,307,425,356,412,402,404,403,409,358,417,309,431,232,464,168,499"/>
+<area shape="rect" id="Node000009" href="$classediteurpanovisu_1_1GestionnaireDiaporamaController.html#a69aa24b60ec648a27dc0fd70f6e716eb" title="Retourne la valeur de bDisabled." alt="" coords="317,440,554,480"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="238,495,315,480,316,485,239,500"/>
+<area shape="rect" id="Node000010" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="611,773,649,798"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="260,506,347,505,436,508,512,519,542,528,564,541,577,556,588,579,606,639,628,758,623,759,601,640,583,581,572,559,561,545,540,533,511,524,435,513,347,510,260,512"/>
+<area shape="rect" id="Node000011" href="$leaflet_8js.html#abf5830200d869e463ea38504a19985f6" title=" " alt="" coords="414,555,457,581"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="253,535,401,560,400,565,252,540"/>
+<area shape="rect" id="Node000012" href="$classediteurpanovisu_1_1Diaporama.html#a7be609880a2af991670add24d218cd72" title="Définit le délai d&#39;affichage entre les images." alt="" coords="322,605,549,645"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="177,535,239,562,309,589,339,599,337,604,307,595,237,567,175,540"/>
+<area shape="rect" id="Node000013" href="$classediteurpanovisu_1_1Diaporama.html#ac4935db8198282a699f95a8de3e60976" title="Définit le nombre d&#39;images dans le diaporama." alt="" coords="320,669,551,709"/>
+<area shape="poly" id="edge13_Node000001_Node000013" title=" " alt="" coords="155,536,220,595,263,627,309,655,325,662,323,667,307,660,260,632,217,599,152,540"/>
+<area shape="rect" id="Node000014" href="$classediteurpanovisu_1_1Diaporama.html#ae1c21fcc3a2624c22fb8ebca4bd678ac" title="Définit l&#39;opacité du fond du diaporama." alt="" coords="322,733,549,773"/>
+<area shape="poly" id="edge15_Node000001_Node000014" title=" " alt="" coords="148,536,172,576,209,625,255,676,309,719,320,725,318,730,307,724,252,680,205,629,168,579,143,539"/>
+<area shape="rect" id="Node000015" href="$classediteurpanovisu_1_1Diaporama.html#a4080ce2ce59c7875e6dee4c0974a6332" title="Définit la couleur de fond du diaporama." alt="" coords="322,797,549,837"/>
+<area shape="poly" id="edge17_Node000001_Node000015" title=" " alt="" coords="144,536,165,587,199,654,248,724,277,756,310,783,318,789,315,793,306,787,273,760,244,727,195,657,160,589,139,539"/>
+<area shape="rect" id="Node000016" href="$classediteurpanovisu_1_1Diaporama.html#ab07d44144b22518b0c3569444f5a1ab2" title="Définit le tableau complet des noms de fichiers." alt="" coords="322,861,549,901"/>
+<area shape="poly" id="edge19_Node000001_Node000016" title=" " alt="" coords="141,537,158,598,191,682,213,727,240,772,272,812,310,847,317,852,314,857,306,851,269,816,236,775,209,730,186,684,153,600,136,538"/>
+<area shape="rect" id="Node000017" href="$classediteurpanovisu_1_1Diaporama.html#a08cc1de302348877469f8c123cb57f14" title="Définit le tableau complet des fichiers images." alt="" coords="322,925,549,965"/>
+<area shape="poly" id="edge21_Node000001_Node000017" title=" " alt="" coords="139,537,153,608,182,710,205,765,233,819,268,868,310,911,315,916,312,920,306,915,264,872,229,821,200,767,177,712,148,610,134,538"/>
+<area shape="rect" id="Node000018" href="$classediteurpanovisu_1_1Diaporama.html#a92471ddae41d8fdb9a63eeb665b8f0ae" title="Définit le tableau complet des libellés." alt="" coords="322,989,549,1029"/>
+<area shape="poly" id="edge23_Node000001_Node000018" title=" " alt="" coords="138,537,148,619,159,675,174,737,197,802,226,865,263,924,310,975,315,980,312,984,306,979,259,928,221,868,192,804,169,739,153,676,143,620,133,538"/>
+<area shape="poly" id="edge12_Node000012_Node000010" title=" " alt="" coords="546,643,564,655,587,679,604,706,625,758,620,760,599,708,583,682,561,659,543,648"/>
+<area shape="poly" id="edge14_Node000013_Node000010" title=" " alt="" coords="537,707,564,719,591,738,612,760,608,764,587,743,561,724,535,712"/>
+<area shape="poly" id="edge16_Node000014_Node000010" title=" " alt="" coords="549,769,597,777,597,783,548,775"/>
+<area shape="poly" id="edge18_Node000015_Node000010" title=" " alt="" coords="548,796,597,788,597,793,549,801"/>
+<area shape="poly" id="edge20_Node000016_Node000010" title=" " alt="" coords="535,859,561,847,587,828,608,807,612,810,591,832,564,852,537,864"/>
+<area shape="poly" id="edge22_Node000017_Node000010" title=" " alt="" coords="543,923,561,911,583,889,599,862,620,810,625,812,604,865,587,892,564,915,546,927"/>
+<area shape="poly" id="edge24_Node000018_Node000010" title=" " alt="" coords="545,987,561,975,577,958,590,937,609,893,620,848,625,811,630,812,625,849,614,894,595,940,581,961,564,979,548,991"/>
+</map>

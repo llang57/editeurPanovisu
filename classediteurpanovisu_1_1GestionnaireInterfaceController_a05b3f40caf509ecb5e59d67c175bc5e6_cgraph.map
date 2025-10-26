@@ -1,0 +1,28 @@
+<map id="editeurpanovisu.GestionnaireInterfaceController.lisFichierShp" name="editeurpanovisu.GestionnaireInterfaceController.lisFichierShp">
+<area shape="rect" id="Node000001" title="Lit et parse un fichier SHP (Shapefile HTML) pour la barre personnalisée." alt="" coords="5,271,235,311"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="403,5,441,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="126,270,146,224,179,163,224,101,251,72,281,48,307,34,336,24,389,16,390,21,337,30,310,39,284,52,255,76,228,104,184,166,151,226,131,272"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="609,319,648,344"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="128,270,149,230,182,179,226,130,253,108,281,92,359,59,393,48,427,43,460,44,493,52,527,68,563,92,576,107,587,129,605,187,627,304,621,305,600,189,582,131,571,110,560,96,524,73,491,57,459,50,427,49,395,54,360,64,284,96,256,113,230,134,186,183,154,232,133,273"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#aaa0bdb6891045cb1670f0bea0f36b7fb" title="Définit la zone de la barre personnalisée affectée au bouton d&#39;aide." alt="" coords="297,107,547,161"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="141,269,202,220,241,193,281,170,296,164,298,169,284,175,243,198,205,224,145,273"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a130e1bdc0edfb913798f1448583397a3" title="Définit la zone de la barre personnalisée affectée aux boutons de déplacement." alt="" coords="283,185,561,240"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="197,269,303,241,304,246,198,274"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#afed2f40362411d3df7e6737620ac7abd" title="Définit la zone de la barre personnalisée affectée au bouton d&#39;information." alt="" coords="299,264,545,319"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="235,289,286,289,286,294,235,294"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a70d79a5e7137cbad0e20ee5bc8295ab4" title="Définit la zone de la barre personnalisée affectée au bouton plein écran." alt="" coords="313,343,531,397"/>
+<area shape="poly" id="edge9_Node000001_Node000007" title=" " alt="" coords="198,309,304,337,303,342,197,314"/>
+<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#ac2dda4cbbcfc8092668620d88995f902" title="Définit la zone de la barre personnalisée affectée aux boutons de rotation." alt="" coords="302,421,542,476"/>
+<area shape="poly" id="edge11_Node000001_Node000008" title=" " alt="" coords="145,309,206,358,244,384,284,406,301,414,298,419,281,411,241,388,202,362,142,314"/>
+<area shape="rect" id="Node000009" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#ac9f1fe98a370e602d367989910ea6860" title="Définit la zone de la barre personnalisée affectée au bouton de la souris." alt="" coords="309,500,535,555"/>
+<area shape="poly" id="edge13_Node000001_Node000009" title=" " alt="" coords="134,310,157,348,191,395,234,444,284,485,298,493,295,498,281,490,230,447,187,398,153,350,130,313"/>
+<area shape="rect" id="Node000010" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a6af37e045ae9a06acad24baeb9a7b315" title="Définit la zone de la barre personnalisée affectée aux boutons de zoom." alt="" coords="293,579,551,633"/>
+<area shape="poly" id="edge15_Node000001_Node000010" title=" " alt="" coords="130,311,148,362,180,430,225,502,253,535,284,564,292,569,289,574,281,568,249,539,221,506,175,433,143,364,125,312"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="548,159,563,171,589,202,607,238,619,274,626,305,621,306,614,275,602,240,585,205,560,175,545,164"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="542,238,563,249,593,276,615,305,611,308,589,279,560,254,539,242"/>
+<area shape="poly" id="edge8_Node000006_Node000003" title=" " alt="" coords="545,313,596,323,595,328,544,318"/>
+<area shape="poly" id="edge10_Node000007_Node000003" title=" " alt="" coords="530,347,595,335,596,340,531,352"/>
+<area shape="poly" id="edge12_Node000008_Node000003" title=" " alt="" coords="537,419,560,406,588,382,610,354,614,357,592,385,563,411,539,424"/>
+<area shape="poly" id="edge14_Node000009_Node000003" title=" " alt="" coords="534,503,560,485,584,456,602,422,614,387,621,357,626,359,619,389,607,424,589,459,563,489,536,507"/>
+<area shape="poly" id="edge16_Node000010_Node000003" title=" " alt="" coords="545,576,559,564,578,541,593,515,613,458,622,402,625,358,630,358,628,403,618,459,598,517,583,544,563,568,548,580"/>
+</map>

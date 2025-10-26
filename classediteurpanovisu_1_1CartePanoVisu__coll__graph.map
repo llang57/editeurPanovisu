@@ -1,0 +1,8 @@
+<map id="editeurpanovisu.CartePanoVisu" name="editeurpanovisu.CartePanoVisu">
+<area shape="rect" id="Node000001" title="définition de l&#39;ensemble carte + marqueurs" alt="" coords="5,211,231,236"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1CoordonneesGeographiques.html" title=" " alt="" coords="10,5,226,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="116,59,113,101,113,148,119,210,114,211,107,148,108,101,111,59"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1MarqueurGeolocalisation.html" title=" " alt="" coords="203,108,396,148"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="165,50,267,106,264,110,163,54"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="252,157,142,213,139,208,249,152"/>
+</map>

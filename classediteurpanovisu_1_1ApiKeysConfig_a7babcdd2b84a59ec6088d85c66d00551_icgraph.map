@@ -1,0 +1,29 @@
+<map id="editeurpanovisu.ApiKeysConfig.loadProperties" name="editeurpanovisu.ApiKeysConfig.loadProperties">
+<area shape="rect" id="Node000001" title="Charge le fichier de configuration des clés API." alt="" coords="864,216,1120,256"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1ApiKeysConfig.html#a918cc5fdfc57722e40aef9f055a7f6b4" title="Récupère la clé API Hugging Face." alt="" coords="567,63,816,103"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="952,210,889,168,815,126,761,105,763,100,817,122,892,164,955,206"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1ApiKeysConfig.html#a2294156977bc950d191de4ffd2364ee1" title="Récupère le modèle Hugging Face configuré" alt="" coords="269,120,518,160"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="933,213,877,192,815,175,739,161,662,152,518,143,518,138,662,146,740,156,817,169,878,187,935,208"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1ApiKeysConfig.html#a9e2b14331cf4892ef3078733c4c543ed" title="Récupère la clé API LocationIQ." alt="" coords="567,184,816,224"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="850,224,816,220,816,215,851,218"/>
+<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1ApiKeysConfig.html#af9241a594f0e5419b8d0f8b338e38ae9" title="Récupère la clé API OpenRouter." alt="" coords="567,248,816,288"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="851,254,816,257,816,252,850,248"/>
+<area shape="rect" id="Node000011" href="$classediteurpanovisu_1_1ApiKeysConfig.html#a07437012271cfa9737d8b07351e80c2a" title="Récupère le modèle OpenRouter configuré" alt="" coords="269,363,518,403"/>
+<area shape="poly" id="edge13_Node000001_Node000011" title=" " alt="" coords="931,264,817,303,502,365,501,360,815,297,929,259"/>
+<area shape="rect" id="Node000012" href="$classediteurpanovisu_1_1ApiKeysConfig.html#aaf50a75e47fc89d256e817ec6c3d44f4" title="Récupère une propriété personnalisée." alt="" coords="567,363,816,403"/>
+<area shape="poly" id="edge15_Node000001_Node000012" title=" " alt="" coords="953,266,891,307,817,346,768,365,767,360,815,342,888,302,950,262"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1ApiKeysConfig.html#a048ff9cd5ae4cb7c5738168b4234f333" title="Vérifie si une clé API Hugging Face est configurée." alt="" coords="268,5,519,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="573,63,497,48,498,43,574,57"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1HuggingFaceClient.html#a12e6bcc947b3a15c9b32ff54c3b2a7f1" title="Constructeur avec configuration automatique depuis ApiKeysConfig." alt="" coords="5,63,220,103"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="553,85,220,85,220,80,553,80"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="282,51,212,65,211,60,281,46"/>
+<area shape="poly" id="edge6_Node000005_Node000004" title=" " alt="" coords="281,120,211,105,212,100,282,115"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1ApiKeysConfig.html#a904967c4ca879709082fd0b58c115562" title="Vérifie si une clé API LocationIQ est configurée." alt="" coords="268,184,519,224"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="553,207,519,207,519,201,553,201"/>
+<area shape="rect" id="Node000009" href="$classediteurpanovisu_1_1ApiKeysConfig.html#afa2de8aa5827534e73f956a567462ea8" title="Vérifie si une clé API OpenRouter est configurée." alt="" coords="268,248,519,288"/>
+<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="553,271,519,271,519,265,553,265"/>
+<area shape="rect" id="Node000010" href="$classediteurpanovisu_1_1OpenRouterClient.html#ac1e3fb7991baac81be8ab3cd7116f2a7" title="Constructeur avec configuration automatique depuis ApiKeysConfig." alt="" coords="9,305,217,345"/>
+<area shape="poly" id="edge12_Node000008_Node000010" title=" " alt="" coords="581,293,519,303,360,317,217,325,217,320,360,312,518,297,580,288"/>
+<area shape="poly" id="edge11_Node000009_Node000010" title=" " alt="" coords="282,293,212,308,211,303,281,288"/>
+<area shape="poly" id="edge14_Node000011_Node000010" title=" " alt="" coords="281,362,211,348,212,343,282,357"/>
+</map>

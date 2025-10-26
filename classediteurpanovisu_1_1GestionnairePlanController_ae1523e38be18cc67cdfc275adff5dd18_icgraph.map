@@ -1,0 +1,9 @@
+<map id="editeurpanovisu.GestionnairePlanController.valideHsplan" name="editeurpanovisu.GestionnairePlanController.valideHsplan">
+<area shape="rect" id="Node000001" title=" " alt="" coords="575,37,789,77"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1GestionnairePlanController.html#ad4f72bd693b5b3bd93bee89bda000990" title="Crée le panneau d&#39;affichage des hotspots pour un plan." alt="" coords="312,5,527,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="561,45,527,41,527,36,562,40"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1GestionnairePlanController.html#a2e6f0187e7151e006c001659da532c6e" title=" " alt="" coords="312,69,527,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="562,75,527,79,527,74,561,69"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1GestionnairePlanController.html#a6ca25de825e710388268b0a3ced9d868" title=" " alt="" coords="5,62,264,117"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="298,92,264,92,264,87,298,87"/>
+</map>

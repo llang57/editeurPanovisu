@@ -1,0 +1,8 @@
+<map id="editeurpanovisu.NavigateurPanoramique.NavigateurPanoramique" name="editeurpanovisu.NavigateurPanoramique.NavigateurPanoramique">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,273,45"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="611,13,649,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="274,19,413,17,563,19,597,20,596,26,563,24,413,22,274,24"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1NavigateurPanoramique.html#af5088888a72767f70d7253c1bbad01c9" title="Définit l&#39;image panoramique à afficher." alt="" coords="321,33,563,73"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="274,35,308,38,308,44,273,40"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="562,33,597,27,597,33,563,38"/>
+</map>

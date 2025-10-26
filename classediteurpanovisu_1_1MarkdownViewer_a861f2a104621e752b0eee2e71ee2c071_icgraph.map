@@ -1,0 +1,30 @@
+<map id="editeurpanovisu.MarkdownViewer.remplacerEmojis" name="editeurpanovisu.MarkdownViewer.remplacerEmojis">
+<area shape="rect" id="Node000001" title="Remplace les émojis courants par des badges visuels stylisés Affiche uniquement l&#39;icône,..." alt="" coords="2317,58,2516,98"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1MarkdownViewer.html#a93aeaf0c671032f2da3d4a18d9fcf752" title="Convertit du Markdown en HTML." alt="" coords="2025,58,2269,98"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="2304,81,2270,81,2270,75,2304,75"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1MarkdownViewer.html#a10f899a1cf8b710a6116d89fe47f9b64" title="Affiche un fichier Markdown dans une WebView." alt="" coords="1500,25,1731,65"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="2011,72,1731,55,1731,49,2012,67"/>
+<area shape="rect" id="Node000012" href="$classediteurpanovisu_1_1MarkdownViewer.html#ac6ca1198098ccc428fbcc1c1ff10b495" title="Affiche du contenu Markdown dans une WebView." alt="" coords="1779,86,1977,126"/>
+<area shape="poly" id="edge12_Node000002_Node000012" title=" " alt="" coords="2012,95,1978,98,1977,93,2011,89"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1DocumentationDialog.html#a27fb5370868a2c048a5135e642d3b997" title="Charge un document Markdown." alt="" coords="1221,25,1452,65"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="1486,47,1452,47,1452,42,1486,42"/>
+<area shape="rect" id="Node000011" href="$classediteurpanovisu_1_1DocumentationDialog.html#ac1870b3fbef3d6aa08f8ddbd316e157b" title="Ouvre un dialogue pour sélectionner un fichier Markdown." alt="" coords="1221,89,1452,129"/>
+<area shape="poly" id="edge10_Node000003_Node000011" title=" " alt="" coords="1515,70,1425,91,1424,86,1514,65"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1DocumentationDialog.html#a63eba557cc6f0e6e9a203792a785b215" title="Charge le document sélectionné dans le ComboBox." alt="" coords="913,27,1173,67"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="1208,49,1174,49,1174,43,1208,43"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1DocumentationDialog.html#aa0f8323beb35114ad3307da310a5c2c1" title="Constructeur." alt="" coords="635,58,865,98"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="900,65,866,69,865,63,899,60"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1DocumentationDialog.html#ae1f4b9b024ee12bb8cef3394076ea24c" title="Méthode statique pour afficher le dialogue." alt="" coords="356,26,587,66"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="621,66,587,62,587,57,621,61"/>
+<area shape="rect" id="Node000010" href="$classediteurpanovisu_1_1DocumentationDialog.html#a489c12395d83ec72f6550ba924b65a25" title="Méthode statique pour afficher un document spécifique." alt="" coords="356,90,587,130"/>
+<area shape="poly" id="edge9_Node000006_Node000010" title=" " alt="" coords="621,95,587,99,587,94,621,90"/>
+<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1EditeurPanovisu.html#ac912b80c1f2ac97def60ff005c5c480b" title=" " alt="" coords="5,5,308,31"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="342,37,299,33,300,28,342,32"/>
+<area shape="rect" id="Node000009" href="$classediteurpanovisu_1_1DocumentationDialog_1_1TestApp.html#a4ef47a45769930ff042b0ca47f457cbb" title=" " alt="" coords="41,55,272,95"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="342,61,273,67,272,62,342,55"/>
+<area shape="poly" id="edge11_Node000011_Node000006" title=" " alt="" coords="1207,105,865,87,866,81,1208,99"/>
+<area shape="rect" id="Node000013" href="$classediteurpanovisu_1_1DocumentationDialog.html#af05cb292b0268f3867b7e5d84f016a27" title="Affiche un message d&#39;erreur dans la WebView." alt="" coords="1500,89,1731,129"/>
+<area shape="poly" id="edge13_Node000012_Node000013" title=" " alt="" coords="1765,110,1731,110,1731,105,1765,104"/>
+<area shape="poly" id="edge14_Node000013_Node000004" title=" " alt="" coords="1514,88,1424,67,1425,62,1515,83"/>
+<area shape="poly" id="edge15_Node000013_Node000011" title=" " alt="" coords="1486,111,1452,111,1452,106,1486,106"/>
+</map>

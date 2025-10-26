@@ -1,0 +1,10 @@
+<map id="editeurpanovisu.Plan.addHotspot" name="editeurpanovisu.Plan.addHotspot">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,63,192,103"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1Plan.html#a914b72ad79df4aee991e1457e42e7519" title="Retourne la valeur de nombreHotspots." alt="" coords="240,5,424,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="180,60,236,46,237,51,181,65"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="472,99,511,125"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="193,87,459,107,458,112,192,92"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1Plan.html#ac7422af07c69a90e71fbb6d8630fbc1c" title="Définit la valeur de nombreHotspots." alt="" coords="241,120,423,160"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="181,100,237,114,236,119,180,105"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="423,121,458,115,459,120,424,126"/>
+</map>

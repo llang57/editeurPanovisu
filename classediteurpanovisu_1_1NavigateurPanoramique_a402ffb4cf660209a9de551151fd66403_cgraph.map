@@ -1,0 +1,19 @@
+<map id="editeurpanovisu.NavigateurPanoramique.captureEcran" name="editeurpanovisu.NavigateurPanoramique.captureEcran">
+<area shape="rect" id="Node000001" title="Capture l&#39;écran actuel du panoramique et sauvegarde en image." alt="" coords="5,92,208,132"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="799,127,837,153"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="153,89,264,49,337,29,417,13,501,4,587,5,672,19,713,31,752,48,771,61,786,78,808,113,804,116,782,81,767,65,749,53,711,36,671,24,587,10,502,10,418,19,338,35,265,55,154,94"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1ReadWriteImage.html#a34d056113779842aefe031f13af8d8a1" title="Redimensionne une image avec accélération GPU." alt="" coords="547,63,746,103"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="208,104,533,86,534,92,209,109"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1NavigateurPanoramique.html#a44bcbef6f4760b69c4ca87d9424a29d7" title="Bascule l&#39;indicateur de changement de vignette." alt="" coords="256,120,495,160"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="208,120,242,124,242,129,208,125"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1ReadWriteImage.html#ac875b8819ddfbadc3482dab5e043f16b" title=" " alt="" coords="276,184,475,224"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="154,130,257,170,283,178,281,183,255,175,152,135"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="708,100,786,127,784,132,706,105"/>
+<area shape="poly" id="edge5_Node000004_Node000002" title=" " alt="" coords="495,137,785,137,785,143,495,143"/>
+<area shape="poly" id="edge10_Node000005_Node000002" title=" " alt="" coords="474,187,785,142,786,147,475,192"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1ReadWriteImage.html#ae93614e117cb7a4718f4ac3d5fd33c4e" title=" " alt="" coords="543,228,751,268"/>
+<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="475,218,529,226,528,232,474,223"/>
+<area shape="poly" id="edge9_Node000006_Node000002" title=" " alt="" coords="714,226,749,207,775,186,797,162,801,166,779,190,752,212,716,230"/>
+<area shape="rect" id="Node000007" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="799,235,837,261"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="751,245,785,245,785,251,751,251"/>
+</map>

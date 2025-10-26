@@ -1,0 +1,10 @@
+<map id="editeurpanovisu.NavigateurOpenLayersSeul.JavaApplication2.changeLayer" name="editeurpanovisu.NavigateurOpenLayersSeul.JavaApplication2.changeLayer">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,63,332,103"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1EditeurPanovisu.html#ae36b51d8b05bffca34e8ba29c2f71ba4" title="Retourne la valeur de gestionnaireInterface." alt="" coords="380,5,640,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="288,60,377,45,377,50,289,65"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="688,99,727,125"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="332,88,640,105,674,107,674,113,640,111,332,94"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a2c54d52e7bb54d9b779e869140055b41" title="Définit la valeur de strNomLayers." alt="" coords="381,120,639,160"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="289,100,377,115,377,120,288,105"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="639,119,674,114,675,119,640,124"/>
+</map>

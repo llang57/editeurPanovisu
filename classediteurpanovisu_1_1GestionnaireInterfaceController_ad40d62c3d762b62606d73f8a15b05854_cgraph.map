@@ -1,0 +1,31 @@
+<map id="editeurpanovisu.GestionnaireInterfaceController.afficheFenetreInfo" name="editeurpanovisu.GestionnaireInterfaceController.afficheFenetreInfo">
+<area shape="rect" id="Node000001" title="Affiche la fenêtre d&#39;information du projet." alt="" coords="5,471,271,511"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a1728eae2ff7a3e9e1bcc79df0649d7a7" title="Retourne la valeur de fenetreInfoOpacite." alt="" coords="343,5,585,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="139,471,153,396,183,288,207,229,236,171,273,117,317,71,329,61,332,66,320,75,277,121,241,174,211,231,188,289,158,397,144,472"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#ae05e346ae672d61111dbf5c857397e4e" title="Retourne la valeur de fenetreInfoPosX." alt="" coords="327,85,601,125"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="141,470,157,405,190,313,214,264,242,217,277,172,317,135,325,129,328,134,320,139,281,176,247,220,218,267,195,316,162,406,146,472"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#ae69bca560d06fa54535f29dc402b9677" title="Retourne la valeur de fenetreInfoPosY." alt="" coords="327,149,601,189"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="143,470,163,415,199,341,222,302,250,264,281,229,317,199,326,193,329,197,320,203,285,232,254,267,227,305,204,344,168,418,148,472"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a0c615f1d82590ada2b3502399fbdd99e" title="Retourne la valeur de fenetreInfoTaille." alt="" coords="343,213,585,268"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="148,469,174,429,212,377,260,323,317,277,329,270,332,275,320,282,264,327,216,380,178,432,153,472"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a4a55990259bcb3f042a76cf34f62ca80" title="Retourne la valeur de fenetrePoliceTaille." alt="" coords="336,292,592,347"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="160,469,227,414,271,383,317,357,335,349,337,354,320,362,274,388,230,418,163,473"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a5bd33fa6bb8a431b8829c7b88a813e90" title="Retourne la valeur de fenetreURLPosX." alt="" coords="327,371,601,411"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="186,469,248,444,318,421,350,412,351,417,319,426,250,449,188,474"/>
+<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a39a5ffa849ab6c02cb5eaf0a100e6ca1" title="Retourne la valeur de fenetreURLPosY." alt="" coords="327,435,601,475"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="271,474,313,469,313,475,271,479"/>
+<area shape="rect" id="Node000009" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a38e6be4e091aeb361dc33fb395ff711b" title="Retourne la valeur de strFenetreInfoImage." alt="" coords="347,500,581,555"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="271,503,333,510,333,516,271,509"/>
+<area shape="rect" id="Node000010" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a65ed7e02b11db04a2c523537509a9ba9" title="Retourne la valeur de strFenetreTexteURL." alt="" coords="347,579,581,633"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="184,509,320,563,346,572,344,577,318,569,182,514"/>
+<area shape="rect" id="Node000011" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a2e806a32149c4a7483f4ce9bcd3bc87c" title="Retourne la valeur de strFenetreURLCouleur." alt="" coords="347,657,581,712"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="159,510,226,575,271,611,320,642,335,650,333,655,317,647,268,616,222,579,155,513"/>
+<area shape="rect" id="Node000012" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a2cfb9c2807597994d00b97fde8d37b28" title="Retourne la hauteur réelle de l&#39;image de visualisation affichée." alt="" coords="338,736,590,791"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="152,510,176,554,213,612,262,671,290,698,320,721,330,727,327,732,317,726,286,702,258,674,209,615,171,557,147,513"/>
+<area shape="rect" id="Node000013" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a9e850d024075a94fade7333821a909b5" title="Retourne la largeur réelle de l&#39;image de visualisation affichée." alt="" coords="319,815,609,855"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="147,511,167,569,201,647,224,689,252,730,284,768,320,800,331,807,328,811,317,804,280,771,248,733,220,692,196,650,162,570,142,512"/>
+<area shape="rect" id="Node000014" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a03a16977c8b59d8bca8f28cdb41cb78d" title="Retourne la valeur de bFenetreInfoPersonnalise." alt="" coords="344,880,584,935"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="146,511,162,579,194,675,217,727,246,777,280,825,320,865,333,875,330,879,317,869,276,828,241,780,212,729,189,677,156,581,140,512"/>
+<area shape="rect" id="Node000015" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="445,959,483,984"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="143,511,153,593,164,650,181,711,204,775,234,838,272,895,320,944,346,959,375,968,431,971,431,977,374,973,344,964,317,948,268,899,229,840,199,777,176,713,159,651,148,594,138,512"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="editeurpanovisu.OllamaService.isOllamaAvailable" name="editeurpanovisu.OllamaService.isOllamaAvailable">
+<area shape="rect" id="Node000001" title="Vérifie si un service IA est disponible (Ollama ou Hugging Face)" alt="" coords="343,5,584,45"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1EditeurPanovisu.html#a31698230ca6021fb284e21e7a35135d0" title="Génère une description IA pour le panoramique courant." alt="" coords="5,5,295,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="329,28,295,28,295,23,329,23"/>
+</map>

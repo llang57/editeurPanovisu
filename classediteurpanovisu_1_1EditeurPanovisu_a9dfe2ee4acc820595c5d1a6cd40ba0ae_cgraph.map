@@ -1,0 +1,10 @@
+<map id="editeurpanovisu.EditeurPanovisu.choixZone" name="editeurpanovisu.EditeurPanovisu.choixZone">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,56,312,81"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="484,5,523,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="245,53,470,20,471,25,246,59"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="695,85,733,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="313,74,647,91,681,93,680,99,647,97,312,79"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1ZoneTelecommande.html#a03a62159ad9225abda2eb0bcccda7aaf" title=" " alt="" coords="360,106,647,146"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="236,79,370,101,369,106,235,84"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="646,104,681,100,682,105,647,110"/>
+</map>

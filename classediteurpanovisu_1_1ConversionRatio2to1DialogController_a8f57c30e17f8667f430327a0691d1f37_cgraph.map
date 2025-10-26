@@ -1,0 +1,8 @@
+<map id="editeurpanovisu.ConversionRatio2to1DialogController.determinerFichierSortie" name="editeurpanovisu.ConversionRatio2to1DialogController.determinerFichierSortie">
+<area shape="rect" id="Node000001" title="Détermine le fichier de sortie selon le mode de sauvegarde sélectionné." alt="" coords="5,39,272,93"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#afa8e83f36617ac54f44b6b6c23c824a7" title="Retourne le format de sortie sélectionné." alt="" coords="320,5,581,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="272,49,306,45,307,51,272,54"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="629,53,668,79"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="272,69,421,71,581,69,615,66,615,72,581,74,421,76,272,74"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="582,52,616,58,615,63,581,57"/>
+</map>

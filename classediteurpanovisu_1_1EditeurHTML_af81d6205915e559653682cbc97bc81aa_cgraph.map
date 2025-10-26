@@ -1,0 +1,29 @@
+<map id="editeurpanovisu.EditeurHTML.afficheConfigImage" name="editeurpanovisu.EditeurHTML.afficheConfigImage">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,275,268,315"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1EditeurHTML.html#a395bcf3dbc92191d50c6d60bc42c1046" title="Ajoute un listener JavaScript pour détecter les clics sur les ancres d&#39;édition d&#39;images Utilise un br..." alt="" coords="628,131,892,171"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="161,273,228,227,270,203,315,185,390,165,468,153,544,146,614,144,614,149,544,152,469,158,391,171,317,190,273,208,231,231,164,277"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="940,167,979,192"/>
+<area shape="poly" id="edge12_Node000001_Node000003" title=" " alt="" coords="183,273,245,249,315,229,419,217,598,202,926,179,926,184,598,207,420,222,317,234,246,254,184,278"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1EditeurHTML.html#a71bb6dcb22a0aaffec7ead3c835b23e1" title="Échappe une chaîne pour l&#39;utiliser en JavaScript." alt="" coords="316,49,580,89"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="155,273,222,207,267,168,315,132,385,92,388,97,317,136,270,172,226,211,159,277"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1EditeurHTML.html#a0f31da3ecff133531fa99a2e0cc92249" title="Retourne le hotspot HTML en cours d&#39;édition." alt="" coords="329,243,567,283"/>
+<area shape="poly" id="edge9_Node000001_Node000007" title=" " alt="" coords="268,279,315,274,315,280,268,285"/>
+<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1HotspotHTML.html#a4e4c3b500f9566cc846c09eb538b0dda" title="Retourne la valeur de imagesEditeur." alt="" coords="326,307,570,347"/>
+<area shape="poly" id="edge10_Node000001_Node000008" title=" " alt="" coords="268,306,313,311,312,316,268,311"/>
+<area shape="rect" id="Node000009" href="$classediteurpanovisu_1_1HotspotHTML.html#a69c25901cb3b08778f512e5a8122b3ab" title="Retourne la valeur de iNombreImages." alt="" coords="324,371,572,411"/>
+<area shape="poly" id="edge11_Node000001_Node000009" title=" " alt="" coords="190,313,317,357,347,365,345,370,315,362,188,318"/>
+<area shape="rect" id="Node000010" href="$classediteurpanovisu_1_1HotspotHTML.html#a221f55d0424591e6326727fc5cc6f8e0" title="Définit la valeur de iNombreImages." alt="" coords="637,287,883,327"/>
+<area shape="poly" id="edge13_Node000001_Node000010" title=" " alt="" coords="159,313,187,340,225,371,269,399,317,421,389,441,448,447,507,440,579,421,621,404,661,382,725,334,729,338,664,386,624,409,581,426,507,445,448,452,388,446,315,426,266,404,221,375,184,344,155,317"/>
+<area shape="rect" id="Node000011" href="$classediteurpanovisu_1_1HotspotHTML.html#a463064a03eee60a92c24e98035bc484e" title="Définit la valeur de strTexteHTML." alt="" coords="639,435,881,475"/>
+<area shape="poly" id="edge15_Node000001_Node000011" title=" " alt="" coords="154,314,181,347,218,386,264,424,317,453,357,466,399,475,485,484,569,482,644,475,644,480,569,487,485,489,399,480,356,471,315,458,261,429,215,390,177,350,150,317"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="893,167,927,172,926,178,892,173"/>
+<area shape="poly" id="edge8_Node000004_Node000003" title=" " alt="" coords="581,72,758,88,837,100,893,117,919,134,941,154,937,158,916,138,891,122,835,106,757,93,580,77"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1EditeurHTML.html#a2bc338efa2d1b9253a062e0097b2b942" title="Convertit un entier en sa représentation hexadécimale." alt="" coords="639,31,881,56"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="580,55,625,52,625,57,580,61"/>
+<area shape="rect" id="Node000006" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="940,5,979,31"/>
+<area shape="poly" id="edge7_Node000004_Node000006" title=" " alt="" coords="504,46,563,29,628,15,712,8,796,6,927,12,927,18,796,12,712,13,628,21,564,34,506,51"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="854,54,893,73,913,91,929,112,951,153,946,155,924,115,909,94,891,78,851,58"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="860,28,926,19,927,25,861,33"/>
+<area shape="poly" id="edge14_Node000010_Node000003" title=" " alt="" coords="795,285,891,225,929,198,932,203,893,230,798,289"/>
+<area shape="poly" id="edge16_Node000011_Node000003" title=" " alt="" coords="789,433,840,392,866,366,890,338,910,304,927,268,949,204,954,206,932,270,915,306,894,341,870,370,844,396,792,437"/>
+</map>

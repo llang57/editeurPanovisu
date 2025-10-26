@@ -1,0 +1,8 @@
+<map id="editeurpanovisu.OllamaService.getServiceName" name="editeurpanovisu.OllamaService.getServiceName">
+<area shape="rect" id="Node000001" title="Retourne le nom du service actuellement utilisé" alt="" coords="671,35,921,75"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1OllamaService.html#af1a118f057c3cffef9ce91c7a428304e" title="Génère une description géographique basée sur les informations disponibles IMPORTANT : Tient compte d..." alt="" coords="343,5,623,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="657,44,622,41,623,36,657,39"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1EditeurPanovisu.html#a31698230ca6021fb284e21e7a35135d0" title="Génère une description IA pour le panoramique courant." alt="" coords="5,35,295,75"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="657,60,623,60,343,60,295,60,295,54,343,55,623,55,657,54"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="329,42,295,45,295,39,329,36"/>
+</map>

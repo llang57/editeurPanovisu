@@ -1,0 +1,25 @@
+<map id="editeurpanovisu.EditeurPanovisu.setStrDernierRepertoireImages" name="editeurpanovisu.EditeurPanovisu.setStrDernierRepertoireImages">
+<area shape="rect" id="Node000001" title="Définit la valeur de strDernierRepertoireImages." alt="" coords="1308,127,1567,167"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#aa223b59907abdcaf93b77e163a54afd1" title="Ajoute des fichiers à la liste après validation." alt="" coords="993,84,1233,139"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1294,134,1233,127,1234,122,1295,129"/>
+<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a3542f5788254051cb28b243c631b4547" title="Ouvre un FileChooser pour sélectionner des fichiers d&#39;images." alt="" coords="967,163,1260,203"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="1294,166,1261,170,1260,164,1294,161"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#abdc1f6877f4c5e097d4234528fb4b5a2" title="Ouvre un dialogue pour ajouter des fichiers manuellement." alt="" coords="645,5,885,60"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="979,84,885,62,886,57,981,79"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#aa933d07671d387bef485d662567e60ee" title="Configure les gestionnaires d&#39;événements pour le drag &amp; drop." alt="" coords="636,84,895,139"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="980,114,895,114,895,109,980,109"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#af678a16d007290ec9b28b93299f29cfd" title="Crée la zone d&#39;affichage de la liste des fichiers." alt="" coords="315,5,541,60"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="632,35,542,35,542,30,632,30"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#a44e7c111f70ca443dad83445f187d3f4" title="Affiche la fenêtre de dialogue de conversion au ratio 2:1." alt="" coords="5,45,244,100"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="301,52,245,60,244,54,300,47"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#ae5f52d522deb4370f576a0670f9b530e" title="Crée la zone de drag &amp; drop pour ajouter des images." alt="" coords="315,84,541,139"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="622,114,542,114,542,109,622,109"/>
+<area shape="poly" id="edge7_Node000007_Node000005" title=" " alt="" coords="300,98,244,91,245,85,301,92"/>
+<area shape="rect" id="Node000009" href="$classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#ae5969de62f5a0a7a3a567c063c7d085e" title="Crée la zone de drag &amp; drop pour ajouter des images." alt="" coords="612,163,919,203"/>
+<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="953,186,919,186,919,181,953,181"/>
+<area shape="rect" id="Node000011" href="$classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#abee140580eb7286689c97847bce687e9" title="Crée la zone contenant la liste des fichiers à traiter." alt="" coords="627,228,903,283"/>
+<area shape="poly" id="edge11_Node000008_Node000011" title=" " alt="" coords="1003,209,898,231,897,225,1002,204"/>
+<area shape="rect" id="Node000010" href="$classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a182869c52f51180d4809f7e0f1e2fcec" title="Affiche la fenêtre de dialogue de redimensionnement d&#39;images." alt="" coords="292,199,564,239"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="599,204,565,207,564,202,598,198"/>
+<area shape="poly" id="edge12_Node000011_Node000010" title=" " alt="" coords="613,242,564,236,564,231,613,236"/>
+</map>

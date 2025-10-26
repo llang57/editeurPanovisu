@@ -1,0 +1,14 @@
+<map id="editeurpanovisu.EditeurPanovisu.olCreeAncresPourPolygone" name="editeurpanovisu.EditeurPanovisu.olCreeAncresPourPolygone">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,106,256,146"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="428,5,467,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="170,104,232,75,303,47,362,31,414,21,415,26,363,37,305,53,234,80,173,108"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="639,85,677,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="222,103,304,91,395,86,486,86,625,93,625,98,486,92,395,92,304,97,223,109"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1ZoneTelecommande.html#a5939ef148a8e93b5e504949809a156c9" title="Définit la valeur de strCoordonneesZone." alt="" coords="304,106,591,146"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="256,123,290,123,290,129,256,129"/>
+<area shape="rect" id="Node000005" href="$leaflet_8js.html#a008d931e56b6fc013061112f26afbffb" title=" " alt="" coords="428,171,467,196"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="239,143,304,155,415,175,414,180,304,161,238,149"/>
+<area shape="rect" id="Node000006" href="$leaflet_8js.html#a9f9b62a373d2bb4624b7ac2df8151435" title=" " alt="" coords="428,220,467,245"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="168,144,231,175,305,205,363,219,415,227,414,232,362,224,303,210,229,180,166,148"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="590,104,625,100,626,105,591,110"/>
+</map>

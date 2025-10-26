@@ -1,0 +1,9 @@
+<map id="editeurpanovisu.util.SvgIconLoader.loadSvgIcon" name="editeurpanovisu.util.SvgIconLoader.loadSvgIcon">
+<area shape="rect" id="Node000001" title="Charge une icône SVG et la convertit en ImageView avec dimensions personnalisées." alt="" coords="257,69,437,109"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1util_1_1SvgIconLoader.html#a613449af7000fc565e48cb0c25aafcc6" title="Charge une icône SVG avec la couleur par défaut." alt="" coords="17,5,197,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="258,68,182,48,184,43,259,63"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1util_1_1SvgIconLoader.html#a25b0a4ec1f9c84559d94725278288b57" title="Charge une icône SVG et la convertit en ImageView (version carrée)" alt="" coords="17,69,197,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="244,92,198,92,198,87,244,87"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1util_1_1SvgIconLoader.html#ad0c3d77e889a0209dc4319b05b2e0e72" title="Crée un ImageView avec couleur adaptée au thème." alt="" coords="5,133,209,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="259,116,184,136,182,131,258,110"/>
+</map>

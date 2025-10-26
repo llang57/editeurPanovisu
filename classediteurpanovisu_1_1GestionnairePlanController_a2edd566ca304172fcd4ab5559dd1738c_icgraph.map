@@ -1,0 +1,13 @@
+<map id="editeurpanovisu.GestionnairePlanController.getiPlanActuel" name="editeurpanovisu.GestionnairePlanController.getiPlanActuel">
+<area shape="rect" id="Node000001" title="Retourne la valeur de iPlanActuel." alt="" coords="837,37,1052,77"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1GestionnairePlanController.html#a2e6f0187e7151e006c001659da532c6e" title=" " alt="" coords="312,41,527,81"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="823,60,527,63,527,57,823,55"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1GestionnairePlanController.html#a6ca25de825e710388268b0a3ced9d868" title=" " alt="" coords="5,5,264,60"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="823,46,789,43,551,30,312,31,264,32,264,27,312,26,551,25,790,38,824,41"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1GestionnairePlanController.html#ae1523e38be18cc67cdfc275adff5dd18" title=" " alt="" coords="575,94,789,134"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="840,82,775,97,774,91,839,77"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="298,51,264,48,265,43,299,46"/>
+<area shape="poly" id="edge6_Node000004_Node000002" title=" " alt="" coords="569,94,518,83,519,78,570,89"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1GestionnairePlanController.html#ad4f72bd693b5b3bd93bee89bda000990" title="Crée le panneau d&#39;affichage des hotspots pour un plan." alt="" coords="312,105,527,145"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="561,122,527,123,527,118,561,116"/>
+</map>

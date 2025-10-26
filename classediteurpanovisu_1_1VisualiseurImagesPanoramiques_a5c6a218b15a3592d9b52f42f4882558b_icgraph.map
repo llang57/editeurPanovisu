@@ -1,0 +1,12 @@
+<map id="editeurpanovisu.VisualiseurImagesPanoramiques.setFov" name="editeurpanovisu.VisualiseurImagesPanoramiques.setFov">
+<area shape="rect" id="Node000001" title="Définit la valeur de fov." alt="" coords="829,37,1039,77"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html#ac38446a4ab5c61c1dfd273f9d50c69c8" title="Affiche la vue panoramique avec les paramètres actuels." alt="" coords="571,8,781,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="815,47,781,43,782,37,816,41"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html#af8054a76c76eed1ef022005db88148c1" title=" " alt="" coords="300,37,523,77"/>
+<area shape="poly" id="edge5_Node000001_Node000003" title=" " alt="" coords="816,62,781,63,571,63,523,62,523,57,571,57,781,57,816,57"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="557,44,523,48,523,42,556,39"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html#ae11a24d852acc18c1ad74844be5f5061" title="Affiche le panoramique dans un AnchorPane." alt="" coords="8,5,249,45"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="286,46,249,42,250,36,287,41"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html#aed1e4d51da4f14c268b1ee2a70f96738" title="Change les dimensions de la zone de visualisation." alt="" coords="5,69,252,109"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="287,74,252,78,252,73,286,69"/>
+</map>

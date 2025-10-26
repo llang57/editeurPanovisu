@@ -1,0 +1,9 @@
+<map id="editeurpanovisu.GestionnairePlanController.getTemplate" name="editeurpanovisu.GestionnairePlanController.getTemplate">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,63,220,103"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1HotSpot.html#ac3bcc43e17f107bde5043c73aa4e1c49" title="Retourne la longitude du hotspot dans le panorama." alt="" coords="268,5,476,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="203,60,267,46,268,51,204,65"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="353,70,391,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="220,80,339,80,339,85,220,85"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="353,119,391,145"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="219,100,340,123,339,129,218,105"/>
+</map>

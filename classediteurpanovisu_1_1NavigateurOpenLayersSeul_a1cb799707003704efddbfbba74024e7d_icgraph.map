@@ -1,0 +1,9 @@
+<map id="editeurpanovisu.NavigateurOpenLayersSeul.getApChoixCartographie" name="editeurpanovisu.NavigateurOpenLayersSeul.getApChoixCartographie">
+<area shape="rect" id="Node000001" title="Retourne la valeur de apChoixCartographie." alt="" coords="631,41,921,81"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1NavigateurOpenLayersSeul.html#a6a948b85fe184214f9e5d7b774807b6a" title=" " alt="" coords="299,5,583,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="616,47,583,43,583,38,617,42"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1NavigateurOpenLayersSeul.html#a86413462bed95fc61c68740e91499c5c" title=" " alt="" coords="317,70,564,125"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="617,81,565,87,564,81,617,76"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1NavigateurOpenLayersSeul.html#a90af8f534bb74bfb718faa9c50193d76" title=" " alt="" coords="5,5,251,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="285,28,251,28,251,23,285,23"/>
+</map>

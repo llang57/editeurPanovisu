@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.GestionnaireInterfaceController.getCouleurFondTheme" name="editeurpanovisu.GestionnaireInterfaceController.getCouleurFondTheme">
+<area shape="rect" id="Node000001" title="Retourne la valeur de couleurFondTheme." alt="" coords="337,37,632,77"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#ac7fa988dc99d8684686127a2269cd66e" title="Crée et initialise l&#39;interface graphique principale de l&#39;éditeur." alt="" coords="31,5,264,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="323,45,264,39,265,34,324,39"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1EditeurPanovisu.html#ad4c8e1684c8b8d0e96cfc28dc0d93404" title=" " alt="" coords="5,69,289,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="324,75,290,79,289,73,323,70"/>
+</map>

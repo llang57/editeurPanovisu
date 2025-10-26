@@ -1,0 +1,14 @@
+<map id="editeurpanovisu.ConversionRatio2to1DialogController.configurerDragDrop" name="editeurpanovisu.ConversionRatio2to1DialogController.configurerDragDrop">
+<area shape="rect" id="Node000001" title="Configure les gestionnaires d&#39;événements pour le drag &amp; drop." alt="" coords="5,153,264,208"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#aa223b59907abdcaf93b77e163a54afd1" title="Ajoute des fichiers à la liste après validation." alt="" coords="312,96,552,151"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="264,153,298,146,299,152,265,158"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="907,115,945,140"/>
+<area shape="poly" id="edge7_Node000001_Node000004" title=" " alt="" coords="257,205,385,225,459,231,538,234,619,232,701,224,781,209,858,185,884,169,905,149,908,153,887,174,860,190,782,214,701,230,619,238,538,240,459,237,384,230,256,211"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#a7ea8725dd3640f3eddc9a599a02205df" title="Vérifie si un fichier est une image valide." alt="" coords="602,5,857,60"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="522,93,626,61,627,66,523,98"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="552,119,859,121,893,122,892,128,859,126,552,124"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1EditeurPanovisu.html#a79a68ce8ed649c0402246ee4f17a3f87" title="Définit la valeur de strDernierRepertoireImages." alt="" coords="600,135,859,175"/>
+<area shape="poly" id="edge5_Node000002_Node000005" title=" " alt="" coords="553,134,587,137,586,143,552,139"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="817,58,860,77,900,104,897,108,857,82,815,62"/>
+<area shape="poly" id="edge6_Node000005_Node000004" title=" " alt="" coords="859,134,893,129,894,135,859,139"/>
+</map>

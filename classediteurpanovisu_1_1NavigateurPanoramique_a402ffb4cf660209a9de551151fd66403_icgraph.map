@@ -1,0 +1,9 @@
+<map id="editeurpanovisu.NavigateurPanoramique.captureEcran" name="editeurpanovisu.NavigateurPanoramique.captureEcran">
+<area shape="rect" id="Node000001" title="Capture l&#39;écran actuel du panoramique et sauvegarde en image." alt="" coords="507,37,709,77"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1NavigateurPanoramique.html#aa0afce819c0381316c98b72268567c9b" title=" " alt="" coords="256,37,459,77"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="493,60,459,60,459,55,493,55"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1NavigateurPanoramique.html#aa23c7df1670b34fea1d5649a0e7f9e3b" title="Affiche le panorama avec cache des cubes pré&#45;calculés si disponible." alt="" coords="5,5,208,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="242,45,208,41,208,36,243,40"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1NavigateurPanoramique.html#a1bd8b170ad9911aa952b72a9dbaea2eb" title="Redimensionne le navigateur panoramique." alt="" coords="5,69,208,109"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="243,75,208,79,208,74,242,69"/>
+</map>

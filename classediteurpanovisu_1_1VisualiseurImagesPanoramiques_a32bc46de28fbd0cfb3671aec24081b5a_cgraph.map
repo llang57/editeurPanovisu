@@ -1,0 +1,8 @@
+<map id="editeurpanovisu.VisualiseurImagesPanoramiques.VisualiseurImagesPanoramiques" name="editeurpanovisu.VisualiseurImagesPanoramiques.VisualiseurImagesPanoramiques">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,292,60"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="648,20,687,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="292,22,441,18,600,22,635,25,634,31,600,27,441,24,293,27"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html#a7bcf9b8c5922a4b663161f09ead21eb3" title="Définit la valeur de nomFichierPanoramique." alt="" coords="340,37,600,92"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="292,44,327,48,326,53,292,50"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="600,41,634,35,635,40,601,46"/>
+</map>

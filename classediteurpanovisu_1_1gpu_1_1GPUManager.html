@@ -1,0 +1,1516 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>EditeurPanovisu: Référence de la classe editeurpanovisu.gpu.GPUManager</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">EditeurPanovisu<span id="projectnumber">&#160;3.1.0</span>
+   </div>
+   <div id="projectbrief">Éditeur de visites virtuelles 360° Panovisu</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classediteurpanovisu_1_1gpu_1_1GPUManager.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Chargement...</div>
+<div class="SRStatus" id="Searching">Recherche...</div>
+<div class="SRStatus" id="NoMatches">Aucune correspondance</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Fonctions membres publiques</a> &#124;
+<a href="#pub-static-methods">Fonctions membres publiques statiques</a> &#124;
+<a href="#pri-methods">Fonctions membres privées</a> &#124;
+<a href="#pri-attribs">Attributs privés</a> &#124;
+<a href="#pri-static-attribs">Attributs privés statiques</a> &#124;
+<a href="classediteurpanovisu_1_1gpu_1_1GPUManager-members.html">Liste de tous les membres</a>  </div>
+  <div class="headertitle"><div class="title">Référence de la classe editeurpanovisu.gpu.GPUManager</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Gestionnaire singleton pour l'accélération GPU via OpenCL Gère la détection, l'initialisation et le cycle de vie des ressources GPU.  
+ <a href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#details">Plus de détails...</a></p>
+<div class="dynheader">
+Graphe de collaboration de editeurpanovisu.gpu.GPUManager:</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1gpu_1_1GPUManager__coll__graph.png" border="0" usemap="#aediteurpanovisu_8gpu_8GPUManager_coll__map" alt="Collaboration graph"/></div>
+<map name="aediteurpanovisu_8gpu_8GPUManager_coll__map" id="aediteurpanovisu_8gpu_8GPUManager_coll__map">
+<area shape="rect" title="Gestionnaire singleton pour l&#39;accélération GPU via OpenCL Gère la détection, l&#39;initialisation et le c..." alt="" coords="5,93,249,119"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html" title="Gestionnaire singleton pour l&#39;accélération GPU via OpenCL Gère la détection, l&#39;initialisation et le c..." alt="" coords="5,5,249,31"/>
+<area shape="poly" title=" " alt="" coords="130,45,130,93,125,93,125,45"/>
+<area shape="poly" title=" " alt="" coords="264,11,276,18,268,25,250,27,249,22,266,20,271,18,262,15"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">légende</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Fonctions membres publiques</h2></td></tr>
+<tr class="memitem:a752164a6622addc5ebd518baf4f9cab7" id="r_a752164a6622addc5ebd518baf4f9cab7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a752164a6622addc5ebd518baf4f9cab7">isGPUAvailable</a> ()</td></tr>
+<tr class="memdesc:a752164a6622addc5ebd518baf4f9cab7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vérifie si un GPU est disponible.  <br /></td></tr>
+<tr class="separator:a752164a6622addc5ebd518baf4f9cab7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a911a28e45e8baa207c84e9b4c0c9a0d7" id="r_a911a28e45e8baa207c84e9b4c0c9a0d7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a911a28e45e8baa207c84e9b4c0c9a0d7">isGPUEnabled</a> ()</td></tr>
+<tr class="memdesc:a911a28e45e8baa207c84e9b4c0c9a0d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vérifie si l'utilisation du GPU est activée par l'utilisateur.  <br /></td></tr>
+<tr class="separator:a911a28e45e8baa207c84e9b4c0c9a0d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae25bec7145c9c0fb72abc14f05140f51" id="r_ae25bec7145c9c0fb72abc14f05140f51"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#ae25bec7145c9c0fb72abc14f05140f51">setGPUEnabled</a> (<a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">boolean</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">enabled</a>)</td></tr>
+<tr class="memdesc:ae25bec7145c9c0fb72abc14f05140f51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Active ou désactive l'utilisation du GPU.  <br /></td></tr>
+<tr class="separator:ae25bec7145c9c0fb72abc14f05140f51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6b7c94329ec7306bbc48a3524b8e8a0" id="r_af6b7c94329ec7306bbc48a3524b8e8a0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">cl_context</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#af6b7c94329ec7306bbc48a3524b8e8a0">getContext</a> ()</td></tr>
+<tr class="memdesc:af6b7c94329ec7306bbc48a3524b8e8a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Récupère le contexte OpenCL.  <br /></td></tr>
+<tr class="separator:af6b7c94329ec7306bbc48a3524b8e8a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4dd384566854de3efd63a9397ad0f9e" id="r_aa4dd384566854de3efd63a9397ad0f9e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">cl_command_queue</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#aa4dd384566854de3efd63a9397ad0f9e">getCommandQueue</a> ()</td></tr>
+<tr class="memdesc:aa4dd384566854de3efd63a9397ad0f9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Récupère la file de commandes OpenCL.  <br /></td></tr>
+<tr class="separator:aa4dd384566854de3efd63a9397ad0f9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70047c6b01da4afd29934b79a0120b46" id="r_a70047c6b01da4afd29934b79a0120b46"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">cl_device_id</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a70047c6b01da4afd29934b79a0120b46">getDevice</a> ()</td></tr>
+<tr class="memdesc:a70047c6b01da4afd29934b79a0120b46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Récupère le device OpenCL.  <br /></td></tr>
+<tr class="separator:a70047c6b01da4afd29934b79a0120b46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbeb3526be42f3e1f3086f72b1b114e5" id="r_abbeb3526be42f3e1f3086f72b1b114e5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#abbeb3526be42f3e1f3086f72b1b114e5">getDeviceName</a> ()</td></tr>
+<tr class="memdesc:abbeb3526be42f3e1f3086f72b1b114e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Récupère le nom du GPU.  <br /></td></tr>
+<tr class="separator:abbeb3526be42f3e1f3086f72b1b114e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6bbfeb14e9ed6466efab31dcbf56764" id="r_ae6bbfeb14e9ed6466efab31dcbf56764"><td class="memItemLeft" align="right" valign="top"><a class="el" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#ae6bbfeb14e9ed6466efab31dcbf56764">getPlatformName</a> ()</td></tr>
+<tr class="memdesc:ae6bbfeb14e9ed6466efab31dcbf56764"><td class="mdescLeft">&#160;</td><td class="mdescRight">Récupère le nom de la plateforme.  <br /></td></tr>
+<tr class="separator:ae6bbfeb14e9ed6466efab31dcbf56764"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acec4668b6b0870b949646583af37fe44" id="r_acec4668b6b0870b949646583af37fe44"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#acec4668b6b0870b949646583af37fe44">getDeviceMemory</a> ()</td></tr>
+<tr class="memdesc:acec4668b6b0870b949646583af37fe44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Récupère la mémoire disponible sur le GPU.  <br /></td></tr>
+<tr class="separator:acec4668b6b0870b949646583af37fe44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1ab06b39d7fbce4e248268e06f4de28" id="r_ad1ab06b39d7fbce4e248268e06f4de28"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#ad1ab06b39d7fbce4e248268e06f4de28">getComputeUnits</a> ()</td></tr>
+<tr class="memdesc:ad1ab06b39d7fbce4e248268e06f4de28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Récupère le nombre d'unités de calcul.  <br /></td></tr>
+<tr class="separator:ad1ab06b39d7fbce4e248268e06f4de28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9275a8ae387b50294debd8f0ab02d3c" id="r_ab9275a8ae387b50294debd8f0ab02d3c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#ab9275a8ae387b50294debd8f0ab02d3c">getMaxWorkGroupSize</a> ()</td></tr>
+<tr class="memdesc:ab9275a8ae387b50294debd8f0ab02d3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Récupère la taille maximale d'un workgroup.  <br /></td></tr>
+<tr class="separator:ab9275a8ae387b50294debd8f0ab02d3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a792757dd89e8fbde0b8fbb4aeaab5c2f" id="r_a792757dd89e8fbde0b8fbb4aeaab5c2f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a792757dd89e8fbde0b8fbb4aeaab5c2f">getGPUInfo</a> ()</td></tr>
+<tr class="memdesc:a792757dd89e8fbde0b8fbb4aeaab5c2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Récupère des informations détaillées sur le GPU sous forme de String.  <br /></td></tr>
+<tr class="separator:a792757dd89e8fbde0b8fbb4aeaab5c2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a551b9f0582111a692cc5ff5adedded20" id="r_a551b9f0582111a692cc5ff5adedded20"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a551b9f0582111a692cc5ff5adedded20">cleanup</a> ()</td></tr>
+<tr class="memdesc:a551b9f0582111a692cc5ff5adedded20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Libère les ressources OpenCL.  <br /></td></tr>
+<tr class="separator:a551b9f0582111a692cc5ff5adedded20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Fonctions membres publiques statiques</h2></td></tr>
+<tr class="memitem:a65cc6674dbee14bcf2d3f11f06a26e4b" id="r_a65cc6674dbee14bcf2d3f11f06a26e4b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">static</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">synchronized</a> <a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html">GPUManager</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a65cc6674dbee14bcf2d3f11f06a26e4b">getInstance</a> ()</td></tr>
+<tr class="memdesc:a65cc6674dbee14bcf2d3f11f06a26e4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Récupère l'instance unique du gestionnaire GPU.  <br /></td></tr>
+<tr class="separator:a65cc6674dbee14bcf2d3f11f06a26e4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Fonctions membres privées</h2></td></tr>
+<tr class="memitem:a3ba0aa0d6379b3b216d07d19ee71e251" id="r_a3ba0aa0d6379b3b216d07d19ee71e251"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a3ba0aa0d6379b3b216d07d19ee71e251">GPUManager</a> ()</td></tr>
+<tr class="memdesc:a3ba0aa0d6379b3b216d07d19ee71e251"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructeur privé (singleton)  <br /></td></tr>
+<tr class="separator:a3ba0aa0d6379b3b216d07d19ee71e251"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad758dc8906499865aeaf412236ba042c" id="r_ad758dc8906499865aeaf412236ba042c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#ad758dc8906499865aeaf412236ba042c">initializeGPU</a> ()</td></tr>
+<tr class="memdesc:ad758dc8906499865aeaf412236ba042c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise OpenCL et détecte les GPU disponibles.  <br /></td></tr>
+<tr class="separator:ad758dc8906499865aeaf412236ba042c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af70605c6c0bf0dd246801d1c51fb90dc" id="r_af70605c6c0bf0dd246801d1c51fb90dc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#af70605c6c0bf0dd246801d1c51fb90dc">retrieveDeviceInfo</a> ()</td></tr>
+<tr class="memdesc:af70605c6c0bf0dd246801d1c51fb90dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Récupère les informations détaillées du GPU.  <br /></td></tr>
+<tr class="separator:af70605c6c0bf0dd246801d1c51fb90dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Attributs privés</h2></td></tr>
+<tr class="memitem:a69ed0a220e47cfc944032b19fc3f718f" id="r_a69ed0a220e47cfc944032b19fc3f718f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a69ed0a220e47cfc944032b19fc3f718f">gpuAvailable</a> = <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">false</a></td></tr>
+<tr class="separator:a69ed0a220e47cfc944032b19fc3f718f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f5f409dc4375b3674ed9feb1546614f" id="r_a4f5f409dc4375b3674ed9feb1546614f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a4f5f409dc4375b3674ed9feb1546614f">gpuEnabled</a> = <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">true</a></td></tr>
+<tr class="separator:a4f5f409dc4375b3674ed9feb1546614f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2011801d774b98d6b098972a6c675ac7" id="r_a2011801d774b98d6b098972a6c675ac7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">cl_context</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a2011801d774b98d6b098972a6c675ac7">context</a></td></tr>
+<tr class="separator:a2011801d774b98d6b098972a6c675ac7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4080d6691a573813641615d584e57934" id="r_a4080d6691a573813641615d584e57934"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">cl_command_queue</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a4080d6691a573813641615d584e57934">commandQueue</a></td></tr>
+<tr class="separator:a4080d6691a573813641615d584e57934"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a482bdf96e9fa42fd487ed15752af75da" id="r_a482bdf96e9fa42fd487ed15752af75da"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">cl_device_id</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a482bdf96e9fa42fd487ed15752af75da">device</a></td></tr>
+<tr class="separator:a482bdf96e9fa42fd487ed15752af75da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7004006e805d2ba158d7738eaacc8ccd" id="r_a7004006e805d2ba158d7738eaacc8ccd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">cl_platform_id</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a7004006e805d2ba158d7738eaacc8ccd">platform</a></td></tr>
+<tr class="separator:a7004006e805d2ba158d7738eaacc8ccd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a038f4d0473ae1602e66203fa8045ff99" id="r_a038f4d0473ae1602e66203fa8045ff99"><td class="memItemLeft" align="right" valign="top"><a class="el" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a038f4d0473ae1602e66203fa8045ff99">deviceName</a> = &quot;Unknown&quot;</td></tr>
+<tr class="separator:a038f4d0473ae1602e66203fa8045ff99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa164ace68c6e6987a9c283fc5713f787" id="r_aa164ace68c6e6987a9c283fc5713f787"><td class="memItemLeft" align="right" valign="top"><a class="el" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#aa164ace68c6e6987a9c283fc5713f787">platformName</a> = &quot;Unknown&quot;</td></tr>
+<tr class="separator:aa164ace68c6e6987a9c283fc5713f787"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e265020cc1b74173cd26a4cf7682de5" id="r_a4e265020cc1b74173cd26a4cf7682de5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a4e265020cc1b74173cd26a4cf7682de5">deviceMemory</a> = 0</td></tr>
+<tr class="separator:a4e265020cc1b74173cd26a4cf7682de5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ec6de78391364c467a4fb741132429b" id="r_a6ec6de78391364c467a4fb741132429b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a6ec6de78391364c467a4fb741132429b">computeUnits</a> = 0</td></tr>
+<tr class="separator:a6ec6de78391364c467a4fb741132429b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66235a95342d13bf04ba2a3b1bc74d7f" id="r_a66235a95342d13bf04ba2a3b1bc74d7f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a66235a95342d13bf04ba2a3b1bc74d7f">maxWorkGroupSize</a> = 0</td></tr>
+<tr class="separator:a66235a95342d13bf04ba2a3b1bc74d7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-static-attribs" name="pri-static-attribs"></a>
+Attributs privés statiques</h2></td></tr>
+<tr class="memitem:a783e70ea3ee9f58ff9677fe0efeb346a" id="r_a783e70ea3ee9f58ff9677fe0efeb346a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">static</a> <a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html">GPUManager</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a783e70ea3ee9f58ff9677fe0efeb346a">instance</a></td></tr>
+<tr class="separator:a783e70ea3ee9f58ff9677fe0efeb346a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Gestionnaire singleton pour l'accélération GPU via OpenCL Gère la détection, l'initialisation et le cycle de vie des ressources GPU. </p>
+<dl class="section author"><dt>Auteur</dt><dd>PanoVisu Team </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00016">16</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+</div><h2 class="groupheader">Documentation des constructeurs et destructeur</h2>
+<a id="a3ba0aa0d6379b3b216d07d19ee71e251" name="a3ba0aa0d6379b3b216d07d19ee71e251"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ba0aa0d6379b3b216d07d19ee71e251">&#9670;&#160;</a></span>GPUManager()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">editeurpanovisu.gpu.GPUManager.GPUManager </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructeur privé (singleton) </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00035">35</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00053">editeurpanovisu.gpu.GPUManager.initializeGPU()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00043">editeurpanovisu.gpu.GPUManager.getInstance()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1gpu_1_1GPUManager_a3ba0aa0d6379b3b216d07d19ee71e251_cgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1gpu_1_1GPUManager_a3ba0aa0d6379b3b216d07d19ee71e251_cgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1gpu_1_1GPUManager_a3ba0aa0d6379b3b216d07d19ee71e251_cgraph" id="aclassediteurpanovisu_1_1gpu_1_1GPUManager_a3ba0aa0d6379b3b216d07d19ee71e251_cgraph">
+<area shape="rect" title="Constructeur privé (singleton)" alt="" coords="5,27,252,67"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#ad758dc8906499865aeaf412236ba042c" title="Initialise OpenCL et détecte les GPU disponibles." alt="" coords="300,35,631,60"/>
+<area shape="poly" title=" " alt="" coords="252,45,286,45,286,50,252,50"/>
+<area shape="rect" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="1025,39,1064,64"/>
+<area shape="poly" title=" " alt="" coords="526,32,614,18,727,6,853,5,916,10,978,20,1014,32,1012,37,977,25,916,15,853,10,728,11,615,23,526,37"/>
+<area shape="rect" href="leaflet_8js.html#acaad4b36c0476b761b674f28b36d565c" title=" " alt="" coords="809,35,847,60"/>
+<area shape="poly" title=" " alt="" coords="631,45,795,45,795,50,631,50"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#af70605c6c0bf0dd246801d1c51fb90dc" title="Récupère les informations détaillées du GPU." alt="" coords="679,85,977,125"/>
+<area shape="poly" title=" " alt="" coords="547,58,688,80,687,85,546,63"/>
+<area shape="poly" title=" " alt="" coords="923,82,977,69,1011,59,1013,64,978,74,924,87"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1gpu_1_1GPUManager_a3ba0aa0d6379b3b216d07d19ee71e251_icgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1gpu_1_1GPUManager_a3ba0aa0d6379b3b216d07d19ee71e251_icgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1gpu_1_1GPUManager_a3ba0aa0d6379b3b216d07d19ee71e251_icgraph" id="aclassediteurpanovisu_1_1gpu_1_1GPUManager_a3ba0aa0d6379b3b216d07d19ee71e251_icgraph">
+<area shape="rect" title="Constructeur privé (singleton)" alt="" coords="1664,508,1911,548"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a65cc6674dbee14bcf2d3f11f06a26e4b" title="Récupère l&#39;instance unique du gestionnaire GPU." alt="" coords="1348,508,1616,548"/>
+<area shape="poly" title=" " alt="" coords="1650,531,1616,531,1616,525,1650,525"/>
+<area shape="rect" href="classediteurpanovisu_1_1ConfigDialogController.html#a228e9366c0d6a335d6bb5e6b8a09ef78" title=" " alt="" coords="719,5,934,45"/>
+<area shape="poly" title=" " alt="" coords="1473,495,1455,421,1423,325,1400,275,1372,226,1338,181,1298,142,1257,113,1212,89,1165,70,1117,56,1020,36,934,28,935,23,1021,31,1118,50,1167,65,1215,85,1260,109,1302,138,1342,178,1376,223,1405,273,1428,323,1461,420,1478,494"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a9efed67c5ab186019b0222610507a48f" title="Calcule la taille optimale du local work size pour le GPU Pour les très grandes images,..." alt="" coords="1039,465,1282,519"/>
+<area shape="poly" title=" " alt="" coords="1334,514,1282,508,1283,503,1335,509"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a8938ddd095bf1e545f06dfbc9ecfee09" title="Redimensionnement via GPU OpenCL." alt="" coords="727,557,927,597"/>
+<area shape="poly" title=" " alt="" coords="1429,556,1368,580,1301,599,1202,610,1102,611,1008,605,927,596,927,591,1008,600,1102,606,1201,605,1299,593,1367,575,1427,551"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a56af72c51956399056e1f0de5b253319" title="Redimensionne une image avec routage automatique GPU/CPU." alt="" coords="379,583,579,623"/>
+<area shape="poly" title=" " alt="" coords="1438,558,1375,590,1338,605,1301,616,1203,634,1102,644,1001,648,902,648,721,638,578,621,579,616,721,632,902,643,1001,643,1101,639,1202,628,1299,611,1337,600,1373,585,1436,553"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestImageResize.html#ab1e39892471c5658890c8a78904be64c" title=" " alt="" coords="49,417,234,457"/>
+<area shape="poly" title=" " alt="" coords="1444,502,1379,459,1340,439,1299,424,1226,406,1152,392,999,374,846,367,698,369,558,378,431,392,235,422,234,416,430,386,557,373,697,364,846,362,1000,368,1153,387,1228,401,1301,419,1342,434,1382,454,1447,497"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestBicubicVsLanczos.html#a4cef8c04b1386d551c4cfec1b3361458" title=" " alt="" coords="49,552,234,592"/>
+<area shape="poly" title=" " alt="" coords="1432,504,1370,476,1299,455,1222,442,1142,433,980,428,820,436,665,454,522,478,395,505,207,555,206,549,393,500,521,473,665,449,819,431,980,423,1142,428,1222,436,1301,449,1372,471,1434,499"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestImageResizeInteractive.html#a16412151c83ac1a5ef58bfbd75bb0a42" title=" " alt="" coords="36,636,247,676"/>
+<area shape="poly" title=" " alt="" coords="1451,560,1386,610,1345,634,1301,652,1230,672,1157,687,1007,709,857,719,711,720,572,715,446,704,246,678,247,672,446,699,572,709,711,715,857,714,1007,704,1156,682,1228,666,1299,647,1342,629,1383,606,1448,555"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestReductionImage.html#a868abe4fd92adbc966d1c9c89fb72cc3" title=" " alt="" coords="49,740,234,780"/>
+<area shape="poly" title=" " alt="" coords="1463,561,1436,598,1399,640,1353,681,1301,712,1231,740,1158,763,1083,781,1008,796,855,814,705,820,563,816,434,807,323,794,234,780,234,775,323,788,435,801,564,811,705,814,855,808,1007,790,1082,776,1157,758,1229,735,1299,707,1350,676,1395,636,1431,595,1459,558"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a70a13e24789d5c6150c606cd077b5137" title="Initialise les kernels OpenCL (compilation à la demande)" alt="" coords="1060,544,1261,584"/>
+<area shape="poly" title=" " alt="" coords="1335,547,1262,555,1261,550,1334,542"/>
+<area shape="rect" href="classediteurpanovisu_1_1EditeurPanovisu.html#a6d5fd7170b4fe9e54f3606c9ce90a56a" title=" " alt="" coords="1033,811,1288,851"/>
+<area shape="poly" title=" " alt="" coords="1470,562,1445,613,1409,676,1361,740,1332,769,1301,794,1266,813,1264,808,1299,790,1329,765,1357,736,1404,673,1440,611,1465,560"/>
+<area shape="rect" href="classediteurpanovisu_1_1EditeurPanovisu.html#aab293202a1140d1151a35062614f436e" title="Sauvegarde les préférences de l&#39;application dans le fichier preferences.cfg." alt="" coords="1021,152,1300,192"/>
+<area shape="poly" title=" " alt="" coords="1461,497,1396,391,1350,328,1298,270,1247,227,1197,194,1200,190,1250,223,1302,266,1354,325,1400,388,1466,495"/>
+<area shape="rect" href="classediteurpanovisu_1_1EditeurPanovisu.html#a2b3125ffe2e6291efacf19df6cb30a8d" title="Méthode de démarrage de l&#39;application JavaFX." alt="" coords="1026,281,1295,306"/>
+<area shape="poly" title=" " alt="" coords="1452,500,1386,431,1344,394,1299,360,1246,330,1197,309,1199,304,1249,325,1301,355,1347,390,1390,427,1456,496"/>
+<area shape="poly" title=" " alt="" coords="1041,525,906,560,905,555,1039,520"/>
+<area shape="poly" title=" " alt="" coords="713,588,579,598,579,593,712,583"/>
+<area shape="poly" title=" " alt="" coords="423,579,182,460,185,455,425,574"/>
+<area shape="poly" title=" " alt="" coords="364,595,234,583,234,578,365,590"/>
+<area shape="poly" title=" " alt="" coords="365,623,247,642,246,637,365,618"/>
+<area shape="poly" title=" " alt="" coords="423,631,187,742,185,737,421,626"/>
+<area shape="poly" title=" " alt="" coords="1046,571,927,576,927,571,1046,566"/>
+<area shape="poly" title=" " alt="" coords="1096,149,1020,108,996,86,986,76,972,66,927,48,929,43,975,62,990,72,1000,82,1023,103,1099,144"/>
+<area shape="rect" href="classediteurpanovisu_1_1EditeurPanovisu.html#aaddfebfbdd8fc4110a4a46e9d0a78b07" title="Crée un fichier ZIP contenant la visite virtuelle depuis le répertoire temporaire." alt="" coords="691,120,963,160"/>
+<area shape="poly" title=" " alt="" coords="1007,160,962,156,963,150,1008,155"/>
+<area shape="rect" href="classediteurpanovisu_1_1EditeurPanovisu.html#ad4c8e1684c8b8d0e96cfc28dc0d93404" title=" " alt="" coords="337,120,621,160"/>
+<area shape="poly" title=" " alt="" coords="1101,149,1040,127,973,111,869,101,765,102,666,111,582,123,581,117,666,105,764,97,870,95,974,105,1041,122,1103,144"/>
+<area shape="rect" href="classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a3542f5788254051cb28b243c631b4547" title="Ouvre un FileChooser pour sélectionner des fichiers d&#39;images." alt="" coords="680,299,973,339"/>
+<area shape="poly" title=" " alt="" coords="1103,200,874,301,872,296,1100,195"/>
+<area shape="rect" href="classediteurpanovisu_1_1EditeurPanovisu.html#a9b46b222714af12c06ec33d410400773" title=" " alt="" coords="685,184,969,224"/>
+<area shape="poly" title=" " alt="" coords="1008,189,969,193,969,188,1008,184"/>
+<area shape="poly" title=" " alt="" coords="677,143,621,143,621,137,677,137"/>
+<area shape="rect" href="classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#ae5969de62f5a0a7a3a567c063c7d085e" title="Crée la zone de drag &amp; drop pour ajouter des images." alt="" coords="325,219,632,259"/>
+<area shape="poly" title=" " alt="" coords="734,298,631,273,577,261,578,256,633,268,735,293"/>
+<area shape="rect" href="classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#abee140580eb7286689c97847bce687e9" title="Crée la zone contenant la liste des fichiers à traiter." alt="" coords="341,283,617,338"/>
+<area shape="poly" title=" " alt="" coords="666,318,617,317,617,311,666,312"/>
+<area shape="rect" href="classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a182869c52f51180d4809f7e0f1e2fcec" title="Affiche la fenêtre de dialogue de redimensionnement d&#39;images." alt="" coords="5,255,277,295"/>
+<area shape="poly" title=" " alt="" coords="312,259,278,263,277,258,311,254"/>
+<area shape="poly" title=" " alt="" coords="326,297,277,292,278,287,327,292"/>
+<area shape="poly" title=" " alt="" coords="1012,285,824,266,740,253,679,238,654,225,631,209,529,163,532,158,633,204,657,220,681,234,741,248,825,261,1013,280"/>
+</map>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">Documentation des fonctions membres</h2>
+<a id="a551b9f0582111a692cc5ff5adedded20" name="a551b9f0582111a692cc5ff5adedded20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a551b9f0582111a692cc5ff5adedded20">&#9670;&#160;</a></span>cleanup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">void</a> editeurpanovisu.gpu.GPUManager.cleanup </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Libère les ressources OpenCL. </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00298">298</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00022">editeurpanovisu.gpu.GPUManager.commandQueue</a>, <a class="el" href="GPUManager_8java_source.html#l00021">editeurpanovisu.gpu.GPUManager.context</a>, <a class="el" href="leaflet_8js_source.html#l00005">e</a>, et <a class="el" href="leaflet_8js_source.html#l00005">k()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1gpu_1_1GPUManager_a551b9f0582111a692cc5ff5adedded20_cgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1gpu_1_1GPUManager_a551b9f0582111a692cc5ff5adedded20_cgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1gpu_1_1GPUManager_a551b9f0582111a692cc5ff5adedded20_cgraph" id="aclassediteurpanovisu_1_1gpu_1_1GPUManager_a551b9f0582111a692cc5ff5adedded20_cgraph">
+<area shape="rect" title="Libère les ressources OpenCL." alt="" coords="5,5,304,31"/>
+<area shape="rect" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="352,5,391,31"/>
+<area shape="poly" title=" " alt="" coords="304,15,338,15,338,21,304,21"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aa4dd384566854de3efd63a9397ad0f9e" name="aa4dd384566854de3efd63a9397ad0f9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4dd384566854de3efd63a9397ad0f9e">&#9670;&#160;</a></span>getCommandQueue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">cl_command_queue</a> editeurpanovisu.gpu.GPUManager.getCommandQueue </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Récupère la file de commandes OpenCL. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>File de commandes OpenCL ou null si non disponible </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00222">222</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00022">editeurpanovisu.gpu.GPUManager.commandQueue</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="ImageResizeGPU_8java_source.html#l00112">editeurpanovisu.gpu.ImageResizeGPU.resizeGPU()</a>.</p>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1gpu_1_1GPUManager_aa4dd384566854de3efd63a9397ad0f9e_icgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1gpu_1_1GPUManager_aa4dd384566854de3efd63a9397ad0f9e_icgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1gpu_1_1GPUManager_aa4dd384566854de3efd63a9397ad0f9e_icgraph" id="aclassediteurpanovisu_1_1gpu_1_1GPUManager_aa4dd384566854de3efd63a9397ad0f9e_icgraph">
+<area shape="rect" title="Récupère la file de commandes OpenCL." alt="" coords="760,101,1028,141"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a8938ddd095bf1e545f06dfbc9ecfee09" title="Redimensionnement via GPU OpenCL." alt="" coords="512,101,712,141"/>
+<area shape="poly" title=" " alt="" coords="746,124,712,124,712,119,746,119"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a56af72c51956399056e1f0de5b253319" title="Redimensionne une image avec routage automatique GPU/CPU." alt="" coords="264,101,464,141"/>
+<area shape="poly" title=" " alt="" coords="499,124,464,124,464,119,499,119"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestImageResize.html#ab1e39892471c5658890c8a78904be64c" title=" " alt="" coords="18,5,203,45"/>
+<area shape="poly" title=" " alt="" coords="307,98,215,60,180,48,182,43,217,55,309,93"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestBicubicVsLanczos.html#a4cef8c04b1386d551c4cfec1b3361458" title=" " alt="" coords="18,69,203,109"/>
+<area shape="poly" title=" " alt="" coords="250,110,203,104,204,98,251,104"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestImageResizeInteractive.html#a16412151c83ac1a5ef58bfbd75bb0a42" title=" " alt="" coords="5,133,216,173"/>
+<area shape="poly" title=" " alt="" coords="251,138,217,143,216,137,250,133"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestReductionImage.html#a868abe4fd92adbc966d1c9c89fb72cc3" title=" " alt="" coords="18,197,203,237"/>
+<area shape="poly" title=" " alt="" coords="309,150,217,188,182,200,180,195,215,183,307,145"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ad1ab06b39d7fbce4e248268e06f4de28" name="ad1ab06b39d7fbce4e248268e06f4de28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1ab06b39d7fbce4e248268e06f4de28">&#9670;&#160;</a></span>getComputeUnits()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">int</a> editeurpanovisu.gpu.GPUManager.getComputeUnits </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Récupère le nombre d'unités de calcul. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>Nombre d'unités de calcul </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00262">262</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00029">editeurpanovisu.gpu.GPUManager.computeUnits</a>.</p>
+
+</div>
+</div>
+<a id="af6b7c94329ec7306bbc48a3524b8e8a0" name="af6b7c94329ec7306bbc48a3524b8e8a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6b7c94329ec7306bbc48a3524b8e8a0">&#9670;&#160;</a></span>getContext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">cl_context</a> editeurpanovisu.gpu.GPUManager.getContext </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Récupère le contexte OpenCL. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>Contexte OpenCL ou null si non disponible </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00214">214</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00021">editeurpanovisu.gpu.GPUManager.context</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="ImageResizeGPU_8java_source.html#l00233">editeurpanovisu.gpu.ImageResizeGPU.initializeKernels()</a>, et <a class="el" href="ImageResizeGPU_8java_source.html#l00112">editeurpanovisu.gpu.ImageResizeGPU.resizeGPU()</a>.</p>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1gpu_1_1GPUManager_af6b7c94329ec7306bbc48a3524b8e8a0_icgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1gpu_1_1GPUManager_af6b7c94329ec7306bbc48a3524b8e8a0_icgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1gpu_1_1GPUManager_af6b7c94329ec7306bbc48a3524b8e8a0_icgraph" id="aclassediteurpanovisu_1_1gpu_1_1GPUManager_af6b7c94329ec7306bbc48a3524b8e8a0_icgraph">
+<area shape="rect" title="Récupère le contexte OpenCL." alt="" coords="1009,101,1277,141"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a70a13e24789d5c6150c606cd077b5137" title="Initialise les kernels OpenCL (compilation à la demande)" alt="" coords="760,72,961,112"/>
+<area shape="poly" title=" " alt="" coords="995,109,961,105,962,100,996,103"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a8938ddd095bf1e545f06dfbc9ecfee09" title="Redimensionnement via GPU OpenCL." alt="" coords="512,101,712,141"/>
+<area shape="poly" title=" " alt="" coords="996,126,961,127,760,127,712,126,712,121,760,121,961,121,996,121"/>
+<area shape="poly" title=" " alt="" coords="747,108,713,112,712,107,746,103"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a56af72c51956399056e1f0de5b253319" title="Redimensionne une image avec routage automatique GPU/CPU." alt="" coords="264,101,464,141"/>
+<area shape="poly" title=" " alt="" coords="499,124,464,124,464,119,499,119"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestImageResize.html#ab1e39892471c5658890c8a78904be64c" title=" " alt="" coords="18,5,203,45"/>
+<area shape="poly" title=" " alt="" coords="307,98,215,60,180,48,182,43,217,55,309,93"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestBicubicVsLanczos.html#a4cef8c04b1386d551c4cfec1b3361458" title=" " alt="" coords="18,69,203,109"/>
+<area shape="poly" title=" " alt="" coords="250,110,203,104,204,98,251,104"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestImageResizeInteractive.html#a16412151c83ac1a5ef58bfbd75bb0a42" title=" " alt="" coords="5,133,216,173"/>
+<area shape="poly" title=" " alt="" coords="251,138,217,143,216,137,250,133"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestReductionImage.html#a868abe4fd92adbc966d1c9c89fb72cc3" title=" " alt="" coords="18,197,203,237"/>
+<area shape="poly" title=" " alt="" coords="309,150,217,188,182,200,180,195,215,183,307,145"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a70047c6b01da4afd29934b79a0120b46" name="a70047c6b01da4afd29934b79a0120b46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70047c6b01da4afd29934b79a0120b46">&#9670;&#160;</a></span>getDevice()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">cl_device_id</a> editeurpanovisu.gpu.GPUManager.getDevice </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Récupère le device OpenCL. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>Device OpenCL ou null si non disponible </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00230">230</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00023">editeurpanovisu.gpu.GPUManager.device</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="ImageResizeGPU_8java_source.html#l00233">editeurpanovisu.gpu.ImageResizeGPU.initializeKernels()</a>.</p>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1gpu_1_1GPUManager_a70047c6b01da4afd29934b79a0120b46_icgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1gpu_1_1GPUManager_a70047c6b01da4afd29934b79a0120b46_icgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1gpu_1_1GPUManager_a70047c6b01da4afd29934b79a0120b46_icgraph" id="aclassediteurpanovisu_1_1gpu_1_1GPUManager_a70047c6b01da4afd29934b79a0120b46_icgraph">
+<area shape="rect" title="Récupère le device OpenCL." alt="" coords="1009,101,1277,141"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a70a13e24789d5c6150c606cd077b5137" title="Initialise les kernels OpenCL (compilation à la demande)" alt="" coords="760,101,961,141"/>
+<area shape="poly" title=" " alt="" coords="996,124,962,124,962,119,996,119"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a8938ddd095bf1e545f06dfbc9ecfee09" title="Redimensionnement via GPU OpenCL." alt="" coords="512,101,712,141"/>
+<area shape="poly" title=" " alt="" coords="747,124,712,124,712,119,747,119"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a56af72c51956399056e1f0de5b253319" title="Redimensionne une image avec routage automatique GPU/CPU." alt="" coords="264,101,464,141"/>
+<area shape="poly" title=" " alt="" coords="499,124,464,124,464,119,499,119"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestImageResize.html#ab1e39892471c5658890c8a78904be64c" title=" " alt="" coords="18,5,203,45"/>
+<area shape="poly" title=" " alt="" coords="307,98,215,60,180,48,182,43,217,55,309,93"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestBicubicVsLanczos.html#a4cef8c04b1386d551c4cfec1b3361458" title=" " alt="" coords="18,69,203,109"/>
+<area shape="poly" title=" " alt="" coords="250,110,203,104,204,98,251,104"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestImageResizeInteractive.html#a16412151c83ac1a5ef58bfbd75bb0a42" title=" " alt="" coords="5,133,216,173"/>
+<area shape="poly" title=" " alt="" coords="251,138,217,143,216,137,250,133"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestReductionImage.html#a868abe4fd92adbc966d1c9c89fb72cc3" title=" " alt="" coords="18,197,203,237"/>
+<area shape="poly" title=" " alt="" coords="309,150,217,188,182,200,180,195,215,183,307,145"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="acec4668b6b0870b949646583af37fe44" name="acec4668b6b0870b949646583af37fe44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acec4668b6b0870b949646583af37fe44">&#9670;&#160;</a></span>getDeviceMemory()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">long</a> editeurpanovisu.gpu.GPUManager.getDeviceMemory </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Récupère la mémoire disponible sur le GPU. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>Mémoire en octets </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00254">254</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00028">editeurpanovisu.gpu.GPUManager.deviceMemory</a>.</p>
+
+</div>
+</div>
+<a id="abbeb3526be42f3e1f3086f72b1b114e5" name="abbeb3526be42f3e1f3086f72b1b114e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbeb3526be42f3e1f3086f72b1b114e5">&#9670;&#160;</a></span>getDeviceName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> editeurpanovisu.gpu.GPUManager.getDeviceName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Récupère le nom du GPU. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>Nom du GPU </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00238">238</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00026">editeurpanovisu.gpu.GPUManager.deviceName</a>.</p>
+
+</div>
+</div>
+<a id="a792757dd89e8fbde0b8fbb4aeaab5c2f" name="a792757dd89e8fbde0b8fbb4aeaab5c2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a792757dd89e8fbde0b8fbb4aeaab5c2f">&#9670;&#160;</a></span>getGPUInfo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> editeurpanovisu.gpu.GPUManager.getGPUInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Récupère des informations détaillées sur le GPU sous forme de String. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>Informations formatées </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00278">278</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00029">editeurpanovisu.gpu.GPUManager.computeUnits</a>, <a class="el" href="GPUManager_8java_source.html#l00028">editeurpanovisu.gpu.GPUManager.deviceMemory</a>, <a class="el" href="GPUManager_8java_source.html#l00026">editeurpanovisu.gpu.GPUManager.deviceName</a>, <a class="el" href="GPUManager_8java_source.html#l00019">editeurpanovisu.gpu.GPUManager.gpuAvailable</a>, <a class="el" href="GPUManager_8java_source.html#l00020">editeurpanovisu.gpu.GPUManager.gpuEnabled</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="GPUManager_8java_source.html#l00030">editeurpanovisu.gpu.GPUManager.maxWorkGroupSize</a>, et <a class="el" href="GPUManager_8java_source.html#l00027">editeurpanovisu.gpu.GPUManager.platformName</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="TestImageResize_8java_source.html#l00014">editeurpanovisu.gpu.TestImageResize.main()</a>, <a class="el" href="TestBicubicVsLanczos_8java_source.html#l00024">editeurpanovisu.gpu.TestBicubicVsLanczos.start()</a>, <a class="el" href="TestImageResizeInteractive_8java_source.html#l00024">editeurpanovisu.gpu.TestImageResizeInteractive.start()</a>, et <a class="el" href="TestReductionImage_8java_source.html#l00024">editeurpanovisu.gpu.TestReductionImage.start()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1gpu_1_1GPUManager_a792757dd89e8fbde0b8fbb4aeaab5c2f_cgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1gpu_1_1GPUManager_a792757dd89e8fbde0b8fbb4aeaab5c2f_cgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1gpu_1_1GPUManager_a792757dd89e8fbde0b8fbb4aeaab5c2f_cgraph" id="aclassediteurpanovisu_1_1gpu_1_1GPUManager_a792757dd89e8fbde0b8fbb4aeaab5c2f_cgraph">
+<area shape="rect" title="Récupère des informations détaillées sur le GPU sous forme de String." alt="" coords="5,5,273,45"/>
+<area shape="rect" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="321,13,360,38"/>
+<area shape="poly" title=" " alt="" coords="274,23,308,23,308,28,274,28"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1gpu_1_1GPUManager_a792757dd89e8fbde0b8fbb4aeaab5c2f_icgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1gpu_1_1GPUManager_a792757dd89e8fbde0b8fbb4aeaab5c2f_icgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1gpu_1_1GPUManager_a792757dd89e8fbde0b8fbb4aeaab5c2f_icgraph" id="aclassediteurpanovisu_1_1gpu_1_1GPUManager_a792757dd89e8fbde0b8fbb4aeaab5c2f_icgraph">
+<area shape="rect" title="Récupère des informations détaillées sur le GPU sous forme de String." alt="" coords="264,101,532,141"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestImageResize.html#ab1e39892471c5658890c8a78904be64c" title=" " alt="" coords="18,5,203,45"/>
+<area shape="poly" title=" " alt="" coords="328,99,215,60,178,48,180,43,217,55,330,94"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestBicubicVsLanczos.html#a4cef8c04b1386d551c4cfec1b3361458" title=" " alt="" coords="18,69,203,109"/>
+<area shape="poly" title=" " alt="" coords="250,108,203,102,204,97,251,102"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestImageResizeInteractive.html#a16412151c83ac1a5ef58bfbd75bb0a42" title=" " alt="" coords="5,133,216,173"/>
+<area shape="poly" title=" " alt="" coords="251,140,217,144,216,139,250,135"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestReductionImage.html#a868abe4fd92adbc966d1c9c89fb72cc3" title=" " alt="" coords="18,197,203,237"/>
+<area shape="poly" title=" " alt="" coords="330,148,217,188,180,200,178,195,215,183,328,143"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a65cc6674dbee14bcf2d3f11f06a26e4b" name="a65cc6674dbee14bcf2d3f11f06a26e4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65cc6674dbee14bcf2d3f11f06a26e4b">&#9670;&#160;</a></span>getInstance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">static</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">synchronized</a> <a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html">GPUManager</a> editeurpanovisu.gpu.GPUManager.getInstance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Récupère l'instance unique du gestionnaire GPU. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>Instance du GPUManager </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00043">43</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00035">editeurpanovisu.gpu.GPUManager.GPUManager()</a>, et <a class="el" href="GPUManager_8java_source.html#l00018">editeurpanovisu.gpu.GPUManager.instance</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="ConfigDialogController_8java_source.html#l00067">editeurpanovisu.ConfigDialogController.afficheFenetre()</a>, <a class="el" href="ImageResizeGPU_8java_source.html#l00293">editeurpanovisu.gpu.ImageResizeGPU.calculateOptimalLocalWorkSize()</a>, <a class="el" href="ImageResizeGPU_8java_source.html#l00233">editeurpanovisu.gpu.ImageResizeGPU.initializeKernels()</a>, <a class="el" href="EditeurPanovisu_8java_source.html#l14701">editeurpanovisu.EditeurPanovisu.lisPreferences()</a>, <a class="el" href="TestImageResize_8java_source.html#l00014">editeurpanovisu.gpu.TestImageResize.main()</a>, <a class="el" href="ImageResizeGPU_8java_source.html#l00050">editeurpanovisu.gpu.ImageResizeGPU.resizeAuto()</a>, <a class="el" href="ImageResizeGPU_8java_source.html#l00112">editeurpanovisu.gpu.ImageResizeGPU.resizeGPU()</a>, <a class="el" href="EditeurPanovisu_8java_source.html#l14780">editeurpanovisu.EditeurPanovisu.sauvePreferences()</a>, <a class="el" href="TestBicubicVsLanczos_8java_source.html#l00024">editeurpanovisu.gpu.TestBicubicVsLanczos.start()</a>, <a class="el" href="TestImageResizeInteractive_8java_source.html#l00024">editeurpanovisu.gpu.TestImageResizeInteractive.start()</a>, <a class="el" href="TestReductionImage_8java_source.html#l00024">editeurpanovisu.gpu.TestReductionImage.start()</a>, et <a class="el" href="EditeurPanovisu_8java_source.html#l14846">editeurpanovisu.EditeurPanovisu.start()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1gpu_1_1GPUManager_a65cc6674dbee14bcf2d3f11f06a26e4b_cgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1gpu_1_1GPUManager_a65cc6674dbee14bcf2d3f11f06a26e4b_cgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1gpu_1_1GPUManager_a65cc6674dbee14bcf2d3f11f06a26e4b_cgraph" id="aclassediteurpanovisu_1_1gpu_1_1GPUManager_a65cc6674dbee14bcf2d3f11f06a26e4b_cgraph">
+<area shape="rect" title="Récupère l&#39;instance unique du gestionnaire GPU." alt="" coords="5,27,273,67"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a3ba0aa0d6379b3b216d07d19ee71e251" title="Constructeur privé (singleton)" alt="" coords="321,27,568,67"/>
+<area shape="poly" title=" " alt="" coords="273,45,308,45,308,50,273,50"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#ad758dc8906499865aeaf412236ba042c" title="Initialise OpenCL et détecte les GPU disponibles." alt="" coords="616,35,947,60"/>
+<area shape="poly" title=" " alt="" coords="568,45,602,45,602,50,568,50"/>
+<area shape="rect" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="1341,39,1380,64"/>
+<area shape="poly" title=" " alt="" coords="842,32,930,18,1043,6,1169,5,1232,10,1294,20,1330,32,1328,37,1293,25,1232,15,1169,10,1044,11,931,23,842,37"/>
+<area shape="rect" href="leaflet_8js.html#acaad4b36c0476b761b674f28b36d565c" title=" " alt="" coords="1125,35,1163,60"/>
+<area shape="poly" title=" " alt="" coords="947,45,1111,45,1111,50,947,50"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#af70605c6c0bf0dd246801d1c51fb90dc" title="Récupère les informations détaillées du GPU." alt="" coords="995,85,1293,125"/>
+<area shape="poly" title=" " alt="" coords="863,58,1004,80,1003,85,862,63"/>
+<area shape="poly" title=" " alt="" coords="1239,82,1293,69,1327,59,1329,64,1294,74,1240,87"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1gpu_1_1GPUManager_a65cc6674dbee14bcf2d3f11f06a26e4b_icgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1gpu_1_1GPUManager_a65cc6674dbee14bcf2d3f11f06a26e4b_icgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1gpu_1_1GPUManager_a65cc6674dbee14bcf2d3f11f06a26e4b_icgraph" id="aclassediteurpanovisu_1_1gpu_1_1GPUManager_a65cc6674dbee14bcf2d3f11f06a26e4b_icgraph">
+<area shape="rect" title="Récupère l&#39;instance unique du gestionnaire GPU." alt="" coords="1348,508,1616,548"/>
+<area shape="rect" href="classediteurpanovisu_1_1ConfigDialogController.html#a228e9366c0d6a335d6bb5e6b8a09ef78" title=" " alt="" coords="719,5,934,45"/>
+<area shape="poly" title=" " alt="" coords="1473,495,1455,421,1423,325,1400,275,1372,226,1338,181,1298,142,1257,113,1212,89,1165,70,1117,56,1020,36,934,28,935,23,1021,31,1118,50,1167,65,1215,85,1260,109,1302,138,1342,178,1376,223,1405,273,1428,323,1461,420,1478,494"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a9efed67c5ab186019b0222610507a48f" title="Calcule la taille optimale du local work size pour le GPU Pour les très grandes images,..." alt="" coords="1039,465,1282,519"/>
+<area shape="poly" title=" " alt="" coords="1334,514,1282,508,1283,503,1335,509"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a8938ddd095bf1e545f06dfbc9ecfee09" title="Redimensionnement via GPU OpenCL." alt="" coords="727,557,927,597"/>
+<area shape="poly" title=" " alt="" coords="1429,556,1368,580,1301,599,1202,610,1102,611,1008,605,927,596,927,591,1008,600,1102,606,1201,605,1299,593,1367,575,1427,551"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a56af72c51956399056e1f0de5b253319" title="Redimensionne une image avec routage automatique GPU/CPU." alt="" coords="379,583,579,623"/>
+<area shape="poly" title=" " alt="" coords="1438,558,1375,590,1338,605,1301,616,1203,634,1102,644,1001,648,902,648,721,638,578,621,579,616,721,632,902,643,1001,643,1101,639,1202,628,1299,611,1337,600,1373,585,1436,553"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestImageResize.html#ab1e39892471c5658890c8a78904be64c" title=" " alt="" coords="49,417,234,457"/>
+<area shape="poly" title=" " alt="" coords="1444,502,1379,459,1340,439,1299,424,1226,406,1152,392,999,374,846,367,698,369,558,378,431,392,235,422,234,416,430,386,557,373,697,364,846,362,1000,368,1153,387,1228,401,1301,419,1342,434,1382,454,1447,497"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestBicubicVsLanczos.html#a4cef8c04b1386d551c4cfec1b3361458" title=" " alt="" coords="49,552,234,592"/>
+<area shape="poly" title=" " alt="" coords="1432,504,1370,476,1299,455,1222,442,1142,433,980,428,820,436,665,454,522,478,395,505,207,555,206,549,393,500,521,473,665,449,819,431,980,423,1142,428,1222,436,1301,449,1372,471,1434,499"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestImageResizeInteractive.html#a16412151c83ac1a5ef58bfbd75bb0a42" title=" " alt="" coords="36,636,247,676"/>
+<area shape="poly" title=" " alt="" coords="1451,560,1386,610,1345,634,1301,652,1230,672,1157,687,1007,709,857,719,711,720,572,715,446,704,246,678,247,672,446,699,572,709,711,715,857,714,1007,704,1156,682,1228,666,1299,647,1342,629,1383,606,1448,555"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestReductionImage.html#a868abe4fd92adbc966d1c9c89fb72cc3" title=" " alt="" coords="49,740,234,780"/>
+<area shape="poly" title=" " alt="" coords="1463,561,1436,598,1399,640,1353,681,1301,712,1231,740,1158,763,1083,781,1008,796,855,814,705,820,563,816,434,807,323,794,234,780,234,775,323,788,435,801,564,811,705,814,855,808,1007,790,1082,776,1157,758,1229,735,1299,707,1350,676,1395,636,1431,595,1459,558"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a70a13e24789d5c6150c606cd077b5137" title="Initialise les kernels OpenCL (compilation à la demande)" alt="" coords="1060,544,1261,584"/>
+<area shape="poly" title=" " alt="" coords="1335,547,1262,555,1261,550,1334,542"/>
+<area shape="rect" href="classediteurpanovisu_1_1EditeurPanovisu.html#a6d5fd7170b4fe9e54f3606c9ce90a56a" title=" " alt="" coords="1033,811,1288,851"/>
+<area shape="poly" title=" " alt="" coords="1470,562,1445,613,1409,676,1361,740,1332,769,1301,794,1266,813,1264,808,1299,790,1329,765,1357,736,1404,673,1440,611,1465,560"/>
+<area shape="rect" href="classediteurpanovisu_1_1EditeurPanovisu.html#aab293202a1140d1151a35062614f436e" title="Sauvegarde les préférences de l&#39;application dans le fichier preferences.cfg." alt="" coords="1021,152,1300,192"/>
+<area shape="poly" title=" " alt="" coords="1461,497,1396,391,1350,328,1298,270,1247,227,1197,194,1200,190,1250,223,1302,266,1354,325,1400,388,1466,495"/>
+<area shape="rect" href="classediteurpanovisu_1_1EditeurPanovisu.html#a2b3125ffe2e6291efacf19df6cb30a8d" title="Méthode de démarrage de l&#39;application JavaFX." alt="" coords="1026,281,1295,306"/>
+<area shape="poly" title=" " alt="" coords="1452,500,1386,431,1344,394,1299,360,1246,330,1197,309,1199,304,1249,325,1301,355,1347,390,1390,427,1456,496"/>
+<area shape="poly" title=" " alt="" coords="1041,525,906,560,905,555,1039,520"/>
+<area shape="poly" title=" " alt="" coords="713,588,579,598,579,593,712,583"/>
+<area shape="poly" title=" " alt="" coords="423,579,182,460,185,455,425,574"/>
+<area shape="poly" title=" " alt="" coords="364,595,234,583,234,578,365,590"/>
+<area shape="poly" title=" " alt="" coords="365,623,247,642,246,637,365,618"/>
+<area shape="poly" title=" " alt="" coords="423,631,187,742,185,737,421,626"/>
+<area shape="poly" title=" " alt="" coords="1046,571,927,576,927,571,1046,566"/>
+<area shape="poly" title=" " alt="" coords="1096,149,1020,108,996,86,986,76,972,66,927,48,929,43,975,62,990,72,1000,82,1023,103,1099,144"/>
+<area shape="rect" href="classediteurpanovisu_1_1EditeurPanovisu.html#aaddfebfbdd8fc4110a4a46e9d0a78b07" title="Crée un fichier ZIP contenant la visite virtuelle depuis le répertoire temporaire." alt="" coords="691,120,963,160"/>
+<area shape="poly" title=" " alt="" coords="1007,160,962,156,963,150,1008,155"/>
+<area shape="rect" href="classediteurpanovisu_1_1EditeurPanovisu.html#ad4c8e1684c8b8d0e96cfc28dc0d93404" title=" " alt="" coords="337,120,621,160"/>
+<area shape="poly" title=" " alt="" coords="1101,149,1040,127,973,111,869,101,765,102,666,111,582,123,581,117,666,105,764,97,870,95,974,105,1041,122,1103,144"/>
+<area shape="rect" href="classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a3542f5788254051cb28b243c631b4547" title="Ouvre un FileChooser pour sélectionner des fichiers d&#39;images." alt="" coords="680,299,973,339"/>
+<area shape="poly" title=" " alt="" coords="1103,200,874,301,872,296,1100,195"/>
+<area shape="rect" href="classediteurpanovisu_1_1EditeurPanovisu.html#a9b46b222714af12c06ec33d410400773" title=" " alt="" coords="685,184,969,224"/>
+<area shape="poly" title=" " alt="" coords="1008,189,969,193,969,188,1008,184"/>
+<area shape="poly" title=" " alt="" coords="677,143,621,143,621,137,677,137"/>
+<area shape="rect" href="classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#ae5969de62f5a0a7a3a567c063c7d085e" title="Crée la zone de drag &amp; drop pour ajouter des images." alt="" coords="325,219,632,259"/>
+<area shape="poly" title=" " alt="" coords="734,298,631,273,577,261,578,256,633,268,735,293"/>
+<area shape="rect" href="classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#abee140580eb7286689c97847bce687e9" title="Crée la zone contenant la liste des fichiers à traiter." alt="" coords="341,283,617,338"/>
+<area shape="poly" title=" " alt="" coords="666,318,617,317,617,311,666,312"/>
+<area shape="rect" href="classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a182869c52f51180d4809f7e0f1e2fcec" title="Affiche la fenêtre de dialogue de redimensionnement d&#39;images." alt="" coords="5,255,277,295"/>
+<area shape="poly" title=" " alt="" coords="312,259,278,263,277,258,311,254"/>
+<area shape="poly" title=" " alt="" coords="326,297,277,292,278,287,327,292"/>
+<area shape="poly" title=" " alt="" coords="1012,285,824,266,740,253,679,238,654,225,631,209,529,163,532,158,633,204,657,220,681,234,741,248,825,261,1013,280"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ab9275a8ae387b50294debd8f0ab02d3c" name="ab9275a8ae387b50294debd8f0ab02d3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9275a8ae387b50294debd8f0ab02d3c">&#9670;&#160;</a></span>getMaxWorkGroupSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">long</a> editeurpanovisu.gpu.GPUManager.getMaxWorkGroupSize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Récupère la taille maximale d'un workgroup. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>Taille max workgroup </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00270">270</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00030">editeurpanovisu.gpu.GPUManager.maxWorkGroupSize</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="ImageResizeGPU_8java_source.html#l00293">editeurpanovisu.gpu.ImageResizeGPU.calculateOptimalLocalWorkSize()</a>.</p>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1gpu_1_1GPUManager_ab9275a8ae387b50294debd8f0ab02d3c_icgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1gpu_1_1GPUManager_ab9275a8ae387b50294debd8f0ab02d3c_icgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1gpu_1_1GPUManager_ab9275a8ae387b50294debd8f0ab02d3c_icgraph" id="aclassediteurpanovisu_1_1gpu_1_1GPUManager_ab9275a8ae387b50294debd8f0ab02d3c_icgraph">
+<area shape="rect" title="Récupère la taille maximale d&#39;un workgroup." alt="" coords="1051,101,1319,141"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a9efed67c5ab186019b0222610507a48f" title="Calcule la taille optimale du local work size pour le GPU Pour les très grandes images,..." alt="" coords="760,94,1003,149"/>
+<area shape="poly" title=" " alt="" coords="1037,124,1003,124,1003,119,1037,119"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a8938ddd095bf1e545f06dfbc9ecfee09" title="Redimensionnement via GPU OpenCL." alt="" coords="512,101,712,141"/>
+<area shape="poly" title=" " alt="" coords="746,124,712,124,712,119,746,119"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a56af72c51956399056e1f0de5b253319" title="Redimensionne une image avec routage automatique GPU/CPU." alt="" coords="264,101,464,141"/>
+<area shape="poly" title=" " alt="" coords="499,124,464,124,464,119,499,119"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestImageResize.html#ab1e39892471c5658890c8a78904be64c" title=" " alt="" coords="18,5,203,45"/>
+<area shape="poly" title=" " alt="" coords="307,98,215,60,180,48,182,43,217,55,309,93"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestBicubicVsLanczos.html#a4cef8c04b1386d551c4cfec1b3361458" title=" " alt="" coords="18,69,203,109"/>
+<area shape="poly" title=" " alt="" coords="250,110,203,104,204,98,251,104"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestImageResizeInteractive.html#a16412151c83ac1a5ef58bfbd75bb0a42" title=" " alt="" coords="5,133,216,173"/>
+<area shape="poly" title=" " alt="" coords="251,138,217,143,216,137,250,133"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestReductionImage.html#a868abe4fd92adbc966d1c9c89fb72cc3" title=" " alt="" coords="18,197,203,237"/>
+<area shape="poly" title=" " alt="" coords="309,150,217,188,182,200,180,195,215,183,307,145"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ae6bbfeb14e9ed6466efab31dcbf56764" name="ae6bbfeb14e9ed6466efab31dcbf56764"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6bbfeb14e9ed6466efab31dcbf56764">&#9670;&#160;</a></span>getPlatformName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> editeurpanovisu.gpu.GPUManager.getPlatformName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Récupère le nom de la plateforme. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>Nom de la plateforme OpenCL </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00246">246</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00027">editeurpanovisu.gpu.GPUManager.platformName</a>.</p>
+
+</div>
+</div>
+<a id="ad758dc8906499865aeaf412236ba042c" name="ad758dc8906499865aeaf412236ba042c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad758dc8906499865aeaf412236ba042c">&#9670;&#160;</a></span>initializeGPU()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">void</a> editeurpanovisu.gpu.GPUManager.initializeGPU </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Initialise OpenCL et détecte les GPU disponibles. </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00053">53</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="OpenLayers_8js_source.html#l00058">Class</a>, <a class="el" href="GPUManager_8java_source.html#l00022">editeurpanovisu.gpu.GPUManager.commandQueue</a>, <a class="el" href="GPUManager_8java_source.html#l00029">editeurpanovisu.gpu.GPUManager.computeUnits</a>, <a class="el" href="GPUManager_8java_source.html#l00021">editeurpanovisu.gpu.GPUManager.context</a>, <a class="el" href="GPUManager_8java_source.html#l00023">editeurpanovisu.gpu.GPUManager.device</a>, <a class="el" href="GPUManager_8java_source.html#l00028">editeurpanovisu.gpu.GPUManager.deviceMemory</a>, <a class="el" href="GPUManager_8java_source.html#l00026">editeurpanovisu.gpu.GPUManager.deviceName</a>, <a class="el" href="leaflet_8js_source.html#l00005">e</a>, <a class="el" href="GPUManager_8java_source.html#l00019">editeurpanovisu.gpu.GPUManager.gpuAvailable</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="GPUManager_8java_source.html#l00030">editeurpanovisu.gpu.GPUManager.maxWorkGroupSize</a>, <a class="el" href="leaflet_8js_source.html#l00005">p()</a>, <a class="el" href="GPUManager_8java_source.html#l00024">editeurpanovisu.gpu.GPUManager.platform</a>, <a class="el" href="GPUManager_8java_source.html#l00027">editeurpanovisu.gpu.GPUManager.platformName</a>, <a class="el" href="GPUManager_8java_source.html#l00154">editeurpanovisu.gpu.GPUManager.retrieveDeviceInfo()</a>, et <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00035">editeurpanovisu.gpu.GPUManager.GPUManager()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1gpu_1_1GPUManager_ad758dc8906499865aeaf412236ba042c_cgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1gpu_1_1GPUManager_ad758dc8906499865aeaf412236ba042c_cgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1gpu_1_1GPUManager_ad758dc8906499865aeaf412236ba042c_cgraph" id="aclassediteurpanovisu_1_1gpu_1_1GPUManager_ad758dc8906499865aeaf412236ba042c_cgraph">
+<area shape="rect" title="Initialise OpenCL et détecte les GPU disponibles." alt="" coords="5,35,336,60"/>
+<area shape="rect" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="731,39,769,64"/>
+<area shape="poly" title=" " alt="" coords="231,32,319,18,433,6,558,5,621,10,683,20,719,32,717,37,682,25,621,15,558,10,433,11,320,23,232,37"/>
+<area shape="rect" href="leaflet_8js.html#acaad4b36c0476b761b674f28b36d565c" title=" " alt="" coords="514,35,553,60"/>
+<area shape="poly" title=" " alt="" coords="336,45,500,45,500,50,336,50"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#af70605c6c0bf0dd246801d1c51fb90dc" title="Récupère les informations détaillées du GPU." alt="" coords="384,85,683,125"/>
+<area shape="poly" title=" " alt="" coords="252,58,393,80,393,85,251,63"/>
+<area shape="poly" title=" " alt="" coords="628,82,682,69,717,59,718,64,683,74,629,87"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1gpu_1_1GPUManager_ad758dc8906499865aeaf412236ba042c_icgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1gpu_1_1GPUManager_ad758dc8906499865aeaf412236ba042c_icgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1gpu_1_1GPUManager_ad758dc8906499865aeaf412236ba042c_icgraph" id="aclassediteurpanovisu_1_1gpu_1_1GPUManager_ad758dc8906499865aeaf412236ba042c_icgraph">
+<area shape="rect" title="Initialise OpenCL et détecte les GPU disponibles." alt="" coords="1959,515,2289,541"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a3ba0aa0d6379b3b216d07d19ee71e251" title="Constructeur privé (singleton)" alt="" coords="1664,508,1911,548"/>
+<area shape="poly" title=" " alt="" coords="1945,531,1911,531,1911,525,1945,525"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a65cc6674dbee14bcf2d3f11f06a26e4b" title="Récupère l&#39;instance unique du gestionnaire GPU." alt="" coords="1348,508,1616,548"/>
+<area shape="poly" title=" " alt="" coords="1650,531,1616,531,1616,525,1650,525"/>
+<area shape="rect" href="classediteurpanovisu_1_1ConfigDialogController.html#a228e9366c0d6a335d6bb5e6b8a09ef78" title=" " alt="" coords="719,5,934,45"/>
+<area shape="poly" title=" " alt="" coords="1473,495,1455,421,1423,325,1400,275,1372,226,1338,181,1298,142,1257,113,1212,89,1165,70,1117,56,1020,36,934,28,935,23,1021,31,1118,50,1167,65,1215,85,1260,109,1302,138,1342,178,1376,223,1405,273,1428,323,1461,420,1478,494"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a9efed67c5ab186019b0222610507a48f" title="Calcule la taille optimale du local work size pour le GPU Pour les très grandes images,..." alt="" coords="1039,465,1282,519"/>
+<area shape="poly" title=" " alt="" coords="1334,514,1282,508,1283,503,1335,509"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a8938ddd095bf1e545f06dfbc9ecfee09" title="Redimensionnement via GPU OpenCL." alt="" coords="727,557,927,597"/>
+<area shape="poly" title=" " alt="" coords="1429,556,1368,580,1301,599,1202,610,1102,611,1008,605,927,596,927,591,1008,600,1102,606,1201,605,1299,593,1367,575,1427,551"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a56af72c51956399056e1f0de5b253319" title="Redimensionne une image avec routage automatique GPU/CPU." alt="" coords="379,583,579,623"/>
+<area shape="poly" title=" " alt="" coords="1438,558,1375,590,1338,605,1301,616,1203,634,1102,644,1001,648,902,648,721,638,578,621,579,616,721,632,902,643,1001,643,1101,639,1202,628,1299,611,1337,600,1373,585,1436,553"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestImageResize.html#ab1e39892471c5658890c8a78904be64c" title=" " alt="" coords="49,417,234,457"/>
+<area shape="poly" title=" " alt="" coords="1444,502,1379,459,1340,439,1299,424,1226,406,1152,392,999,374,846,367,698,369,558,378,431,392,235,422,234,416,430,386,557,373,697,364,846,362,1000,368,1153,387,1228,401,1301,419,1342,434,1382,454,1447,497"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestBicubicVsLanczos.html#a4cef8c04b1386d551c4cfec1b3361458" title=" " alt="" coords="49,552,234,592"/>
+<area shape="poly" title=" " alt="" coords="1432,504,1370,476,1299,455,1222,442,1142,433,980,428,820,436,665,454,522,478,395,505,207,555,206,549,393,500,521,473,665,449,819,431,980,423,1142,428,1222,436,1301,449,1372,471,1434,499"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestImageResizeInteractive.html#a16412151c83ac1a5ef58bfbd75bb0a42" title=" " alt="" coords="36,636,247,676"/>
+<area shape="poly" title=" " alt="" coords="1451,560,1386,610,1345,634,1301,652,1230,672,1157,687,1007,709,857,719,711,720,572,715,446,704,246,678,247,672,446,699,572,709,711,715,857,714,1007,704,1156,682,1228,666,1299,647,1342,629,1383,606,1448,555"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestReductionImage.html#a868abe4fd92adbc966d1c9c89fb72cc3" title=" " alt="" coords="49,740,234,780"/>
+<area shape="poly" title=" " alt="" coords="1463,561,1436,598,1399,640,1353,681,1301,712,1231,740,1158,763,1083,781,1008,796,855,814,705,820,563,816,434,807,323,794,234,780,234,775,323,788,435,801,564,811,705,814,855,808,1007,790,1082,776,1157,758,1229,735,1299,707,1350,676,1395,636,1431,595,1459,558"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a70a13e24789d5c6150c606cd077b5137" title="Initialise les kernels OpenCL (compilation à la demande)" alt="" coords="1060,544,1261,584"/>
+<area shape="poly" title=" " alt="" coords="1335,547,1262,555,1261,550,1334,542"/>
+<area shape="rect" href="classediteurpanovisu_1_1EditeurPanovisu.html#a6d5fd7170b4fe9e54f3606c9ce90a56a" title=" " alt="" coords="1033,811,1288,851"/>
+<area shape="poly" title=" " alt="" coords="1470,562,1445,613,1409,676,1361,740,1332,769,1301,794,1266,813,1264,808,1299,790,1329,765,1357,736,1404,673,1440,611,1465,560"/>
+<area shape="rect" href="classediteurpanovisu_1_1EditeurPanovisu.html#aab293202a1140d1151a35062614f436e" title="Sauvegarde les préférences de l&#39;application dans le fichier preferences.cfg." alt="" coords="1021,152,1300,192"/>
+<area shape="poly" title=" " alt="" coords="1461,497,1396,391,1350,328,1298,270,1247,227,1197,194,1200,190,1250,223,1302,266,1354,325,1400,388,1466,495"/>
+<area shape="rect" href="classediteurpanovisu_1_1EditeurPanovisu.html#a2b3125ffe2e6291efacf19df6cb30a8d" title="Méthode de démarrage de l&#39;application JavaFX." alt="" coords="1026,281,1295,306"/>
+<area shape="poly" title=" " alt="" coords="1452,500,1386,431,1344,394,1299,360,1246,330,1197,309,1199,304,1249,325,1301,355,1347,390,1390,427,1456,496"/>
+<area shape="poly" title=" " alt="" coords="1041,525,906,560,905,555,1039,520"/>
+<area shape="poly" title=" " alt="" coords="713,588,579,598,579,593,712,583"/>
+<area shape="poly" title=" " alt="" coords="423,579,182,460,185,455,425,574"/>
+<area shape="poly" title=" " alt="" coords="364,595,234,583,234,578,365,590"/>
+<area shape="poly" title=" " alt="" coords="365,623,247,642,246,637,365,618"/>
+<area shape="poly" title=" " alt="" coords="423,631,187,742,185,737,421,626"/>
+<area shape="poly" title=" " alt="" coords="1046,571,927,576,927,571,1046,566"/>
+<area shape="poly" title=" " alt="" coords="1096,149,1020,108,996,86,986,76,972,66,927,48,929,43,975,62,990,72,1000,82,1023,103,1099,144"/>
+<area shape="rect" href="classediteurpanovisu_1_1EditeurPanovisu.html#aaddfebfbdd8fc4110a4a46e9d0a78b07" title="Crée un fichier ZIP contenant la visite virtuelle depuis le répertoire temporaire." alt="" coords="691,120,963,160"/>
+<area shape="poly" title=" " alt="" coords="1007,160,962,156,963,150,1008,155"/>
+<area shape="rect" href="classediteurpanovisu_1_1EditeurPanovisu.html#ad4c8e1684c8b8d0e96cfc28dc0d93404" title=" " alt="" coords="337,120,621,160"/>
+<area shape="poly" title=" " alt="" coords="1101,149,1040,127,973,111,869,101,765,102,666,111,582,123,581,117,666,105,764,97,870,95,974,105,1041,122,1103,144"/>
+<area shape="rect" href="classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a3542f5788254051cb28b243c631b4547" title="Ouvre un FileChooser pour sélectionner des fichiers d&#39;images." alt="" coords="680,299,973,339"/>
+<area shape="poly" title=" " alt="" coords="1103,200,874,301,872,296,1100,195"/>
+<area shape="rect" href="classediteurpanovisu_1_1EditeurPanovisu.html#a9b46b222714af12c06ec33d410400773" title=" " alt="" coords="685,184,969,224"/>
+<area shape="poly" title=" " alt="" coords="1008,189,969,193,969,188,1008,184"/>
+<area shape="poly" title=" " alt="" coords="677,143,621,143,621,137,677,137"/>
+<area shape="rect" href="classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#ae5969de62f5a0a7a3a567c063c7d085e" title="Crée la zone de drag &amp; drop pour ajouter des images." alt="" coords="325,219,632,259"/>
+<area shape="poly" title=" " alt="" coords="734,298,631,273,577,261,578,256,633,268,735,293"/>
+<area shape="rect" href="classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#abee140580eb7286689c97847bce687e9" title="Crée la zone contenant la liste des fichiers à traiter." alt="" coords="341,283,617,338"/>
+<area shape="poly" title=" " alt="" coords="666,318,617,317,617,311,666,312"/>
+<area shape="rect" href="classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a182869c52f51180d4809f7e0f1e2fcec" title="Affiche la fenêtre de dialogue de redimensionnement d&#39;images." alt="" coords="5,255,277,295"/>
+<area shape="poly" title=" " alt="" coords="312,259,278,263,277,258,311,254"/>
+<area shape="poly" title=" " alt="" coords="326,297,277,292,278,287,327,292"/>
+<area shape="poly" title=" " alt="" coords="1012,285,824,266,740,253,679,238,654,225,631,209,529,163,532,158,633,204,657,220,681,234,741,248,825,261,1013,280"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a752164a6622addc5ebd518baf4f9cab7" name="a752164a6622addc5ebd518baf4f9cab7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a752164a6622addc5ebd518baf4f9cab7">&#9670;&#160;</a></span>isGPUAvailable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">boolean</a> editeurpanovisu.gpu.GPUManager.isGPUAvailable </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Vérifie si un GPU est disponible. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>true si un GPU OpenCL est disponible </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00187">187</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00019">editeurpanovisu.gpu.GPUManager.gpuAvailable</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="TestImageResize_8java_source.html#l00014">editeurpanovisu.gpu.TestImageResize.main()</a>, <a class="el" href="ImageResizeGPU_8java_source.html#l00112">editeurpanovisu.gpu.ImageResizeGPU.resizeGPU()</a>, <a class="el" href="TestBicubicVsLanczos_8java_source.html#l00024">editeurpanovisu.gpu.TestBicubicVsLanczos.start()</a>, <a class="el" href="TestImageResizeInteractive_8java_source.html#l00024">editeurpanovisu.gpu.TestImageResizeInteractive.start()</a>, et <a class="el" href="TestReductionImage_8java_source.html#l00024">editeurpanovisu.gpu.TestReductionImage.start()</a>.</p>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1gpu_1_1GPUManager_a752164a6622addc5ebd518baf4f9cab7_icgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1gpu_1_1GPUManager_a752164a6622addc5ebd518baf4f9cab7_icgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1gpu_1_1GPUManager_a752164a6622addc5ebd518baf4f9cab7_icgraph" id="aclassediteurpanovisu_1_1gpu_1_1GPUManager_a752164a6622addc5ebd518baf4f9cab7_icgraph">
+<area shape="rect" title="Vérifie si un GPU est disponible." alt="" coords="760,111,1019,151"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestImageResize.html#ab1e39892471c5658890c8a78904be64c" title=" " alt="" coords="18,5,203,45"/>
+<area shape="poly" title=" " alt="" coords="822,109,769,91,711,77,574,55,435,41,203,29,203,24,436,36,574,50,713,72,770,86,824,104"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a8938ddd095bf1e545f06dfbc9ecfee09" title="Redimensionnement via GPU OpenCL." alt="" coords="512,111,712,151"/>
+<area shape="poly" title=" " alt="" coords="746,133,712,133,712,128,746,128"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestBicubicVsLanczos.html#a4cef8c04b1386d551c4cfec1b3361458" title=" " alt="" coords="18,71,203,111"/>
+<area shape="poly" title=" " alt="" coords="781,111,712,101,573,92,435,88,204,90,204,84,435,82,574,86,712,96,781,106"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestImageResizeInteractive.html#a16412151c83ac1a5ef58bfbd75bb0a42" title=" " alt="" coords="5,137,216,177"/>
+<area shape="poly" title=" " alt="" coords="783,156,712,165,578,173,444,175,216,167,216,162,444,169,578,168,712,160,782,150"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestReductionImage.html#a868abe4fd92adbc966d1c9c89fb72cc3" title=" " alt="" coords="18,207,203,247"/>
+<area shape="poly" title=" " alt="" coords="811,157,712,180,574,200,435,213,204,227,203,222,435,208,574,194,712,175,810,152"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a56af72c51956399056e1f0de5b253319" title="Redimensionne une image avec routage automatique GPU/CPU." alt="" coords="264,111,464,151"/>
+<area shape="poly" title=" " alt="" coords="499,133,464,133,464,128,499,128"/>
+<area shape="poly" title=" " alt="" coords="312,107,215,61,179,48,181,43,217,56,315,102"/>
+<area shape="poly" title=" " alt="" coords="250,115,203,108,204,103,251,110"/>
+<area shape="poly" title=" " alt="" coords="251,145,217,149,216,144,250,140"/>
+<area shape="poly" title=" " alt="" coords="302,158,217,192,170,209,168,204,215,187,300,153"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a911a28e45e8baa207c84e9b4c0c9a0d7" name="a911a28e45e8baa207c84e9b4c0c9a0d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a911a28e45e8baa207c84e9b4c0c9a0d7">&#9670;&#160;</a></span>isGPUEnabled()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">boolean</a> editeurpanovisu.gpu.GPUManager.isGPUEnabled </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Vérifie si l'utilisation du GPU est activée par l'utilisateur. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>true si le GPU doit être utilisé </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00195">195</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00019">editeurpanovisu.gpu.GPUManager.gpuAvailable</a>, et <a class="el" href="GPUManager_8java_source.html#l00020">editeurpanovisu.gpu.GPUManager.gpuEnabled</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="ConfigDialogController_8java_source.html#l00067">editeurpanovisu.ConfigDialogController.afficheFenetre()</a>, <a class="el" href="ImageResizeGPU_8java_source.html#l00050">editeurpanovisu.gpu.ImageResizeGPU.resizeAuto()</a>, et <a class="el" href="EditeurPanovisu_8java_source.html#l14780">editeurpanovisu.EditeurPanovisu.sauvePreferences()</a>.</p>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1gpu_1_1GPUManager_a911a28e45e8baa207c84e9b4c0c9a0d7_icgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1gpu_1_1GPUManager_a911a28e45e8baa207c84e9b4c0c9a0d7_icgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1gpu_1_1GPUManager_a911a28e45e8baa207c84e9b4c0c9a0d7_icgraph" id="aclassediteurpanovisu_1_1gpu_1_1GPUManager_a911a28e45e8baa207c84e9b4c0c9a0d7_icgraph">
+<area shape="rect" title="Vérifie si l&#39;utilisation du GPU est activée par l&#39;utilisateur." alt="" coords="1348,261,1607,301"/>
+<area shape="rect" href="classediteurpanovisu_1_1ConfigDialogController.html#a228e9366c0d6a335d6bb5e6b8a09ef78" title=" " alt="" coords="719,261,934,301"/>
+<area shape="poly" title=" " alt="" coords="1335,284,934,284,934,279,1335,279"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a56af72c51956399056e1f0de5b253319" title="Redimensionne une image avec routage automatique GPU/CPU." alt="" coords="1061,133,1261,173"/>
+<area shape="poly" title=" " alt="" coords="1413,259,1210,176,1212,171,1415,254"/>
+<area shape="rect" href="classediteurpanovisu_1_1EditeurPanovisu.html#aab293202a1140d1151a35062614f436e" title="Sauvegarde les préférences de l&#39;application dans le fichier preferences.cfg." alt="" coords="1021,357,1300,397"/>
+<area shape="poly" title=" " alt="" coords="1398,308,1229,360,1227,355,1397,303"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestImageResize.html#ab1e39892471c5658890c8a78904be64c" title=" " alt="" coords="734,5,919,45"/>
+<area shape="poly" title=" " alt="" coords="1114,129,1048,93,972,60,919,44,920,39,974,55,1051,88,1116,124"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestBicubicVsLanczos.html#a4cef8c04b1386d551c4cfec1b3361458" title=" " alt="" coords="734,69,919,109"/>
+<area shape="poly" title=" " alt="" coords="1047,134,919,110,920,104,1048,129"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestImageResizeInteractive.html#a16412151c83ac1a5ef58bfbd75bb0a42" title=" " alt="" coords="721,133,932,173"/>
+<area shape="poly" title=" " alt="" coords="1047,156,932,156,932,151,1047,151"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestReductionImage.html#a868abe4fd92adbc966d1c9c89fb72cc3" title=" " alt="" coords="734,197,919,237"/>
+<area shape="poly" title=" " alt="" coords="1048,178,920,202,919,197,1047,172"/>
+<area shape="poly" title=" " alt="" coords="1093,355,973,316,926,304,927,299,974,311,1094,350"/>
+<area shape="rect" href="classediteurpanovisu_1_1EditeurPanovisu.html#aaddfebfbdd8fc4110a4a46e9d0a78b07" title="Crée un fichier ZIP contenant la visite virtuelle depuis le répertoire temporaire." alt="" coords="691,389,963,429"/>
+<area shape="poly" title=" " alt="" coords="1008,395,963,399,962,394,1007,389"/>
+<area shape="rect" href="classediteurpanovisu_1_1EditeurPanovisu.html#ad4c8e1684c8b8d0e96cfc28dc0d93404" title=" " alt="" coords="337,400,621,440"/>
+<area shape="poly" title=" " alt="" coords="1103,405,1041,427,974,444,879,454,782,456,690,451,608,443,608,437,690,446,782,450,878,449,973,439,1040,422,1101,400"/>
+<area shape="rect" href="classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a3542f5788254051cb28b243c631b4547" title="Ouvre un FileChooser pour sélectionner des fichiers d&#39;images." alt="" coords="680,504,973,544"/>
+<area shape="poly" title=" " alt="" coords="1121,407,1054,448,974,488,919,506,918,501,972,483,1051,444,1118,403"/>
+<area shape="rect" href="classediteurpanovisu_1_1EditeurPanovisu.html#a9b46b222714af12c06ec33d410400773" title=" " alt="" coords="685,325,969,365"/>
+<area shape="poly" title=" " alt="" coords="1008,365,969,362,969,356,1008,360"/>
+<area shape="poly" title=" " alt="" coords="677,417,621,418,621,413,677,411"/>
+<area shape="rect" href="classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#ae5969de62f5a0a7a3a567c063c7d085e" title="Crée la zone de drag &amp; drop pour ajouter des images." alt="" coords="325,565,632,605"/>
+<area shape="poly" title=" " alt="" coords="700,549,593,568,592,563,699,544"/>
+<area shape="rect" href="classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#abee140580eb7286689c97847bce687e9" title="Crée la zone contenant la liste des fichiers à traiter." alt="" coords="341,486,617,541"/>
+<area shape="poly" title=" " alt="" coords="666,522,617,520,617,515,666,516"/>
+<area shape="rect" href="classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a182869c52f51180d4809f7e0f1e2fcec" title="Affiche la fenêtre de dialogue de redimensionnement d&#39;images." alt="" coords="5,529,277,569"/>
+<area shape="poly" title=" " alt="" coords="311,570,277,566,278,561,312,565"/>
+<area shape="poly" title=" " alt="" coords="327,532,278,537,277,532,326,527"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="af70605c6c0bf0dd246801d1c51fb90dc" name="af70605c6c0bf0dd246801d1c51fb90dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af70605c6c0bf0dd246801d1c51fb90dc">&#9670;&#160;</a></span>retrieveDeviceInfo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">void</a> editeurpanovisu.gpu.GPUManager.retrieveDeviceInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Récupère les informations détaillées du GPU. </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00154">154</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00029">editeurpanovisu.gpu.GPUManager.computeUnits</a>, <a class="el" href="GPUManager_8java_source.html#l00023">editeurpanovisu.gpu.GPUManager.device</a>, <a class="el" href="GPUManager_8java_source.html#l00028">editeurpanovisu.gpu.GPUManager.deviceMemory</a>, <a class="el" href="GPUManager_8java_source.html#l00026">editeurpanovisu.gpu.GPUManager.deviceName</a>, <a class="el" href="leaflet_8js_source.html#l00005">e</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="GPUManager_8java_source.html#l00030">editeurpanovisu.gpu.GPUManager.maxWorkGroupSize</a>, et <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00053">editeurpanovisu.gpu.GPUManager.initializeGPU()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1gpu_1_1GPUManager_af70605c6c0bf0dd246801d1c51fb90dc_cgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1gpu_1_1GPUManager_af70605c6c0bf0dd246801d1c51fb90dc_cgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1gpu_1_1GPUManager_af70605c6c0bf0dd246801d1c51fb90dc_cgraph" id="aclassediteurpanovisu_1_1gpu_1_1GPUManager_af70605c6c0bf0dd246801d1c51fb90dc_cgraph">
+<area shape="rect" title="Récupère les informations détaillées du GPU." alt="" coords="5,5,304,45"/>
+<area shape="rect" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="352,13,391,38"/>
+<area shape="poly" title=" " alt="" coords="304,23,338,23,338,28,304,28"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1gpu_1_1GPUManager_af70605c6c0bf0dd246801d1c51fb90dc_icgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1gpu_1_1GPUManager_af70605c6c0bf0dd246801d1c51fb90dc_icgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1gpu_1_1GPUManager_af70605c6c0bf0dd246801d1c51fb90dc_icgraph" id="aclassediteurpanovisu_1_1gpu_1_1GPUManager_af70605c6c0bf0dd246801d1c51fb90dc_icgraph">
+<area shape="rect" title="Récupère les informations détaillées du GPU." alt="" coords="2337,508,2636,548"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#ad758dc8906499865aeaf412236ba042c" title="Initialise OpenCL et détecte les GPU disponibles." alt="" coords="1959,515,2289,541"/>
+<area shape="poly" title=" " alt="" coords="2323,531,2290,531,2290,525,2323,525"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a3ba0aa0d6379b3b216d07d19ee71e251" title="Constructeur privé (singleton)" alt="" coords="1664,508,1911,548"/>
+<area shape="poly" title=" " alt="" coords="1945,531,1911,531,1911,525,1945,525"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a65cc6674dbee14bcf2d3f11f06a26e4b" title="Récupère l&#39;instance unique du gestionnaire GPU." alt="" coords="1348,508,1616,548"/>
+<area shape="poly" title=" " alt="" coords="1650,531,1616,531,1616,525,1650,525"/>
+<area shape="rect" href="classediteurpanovisu_1_1ConfigDialogController.html#a228e9366c0d6a335d6bb5e6b8a09ef78" title=" " alt="" coords="719,5,934,45"/>
+<area shape="poly" title=" " alt="" coords="1473,495,1455,421,1423,325,1400,275,1372,226,1338,181,1298,142,1257,113,1212,89,1165,70,1117,56,1020,36,934,28,935,23,1021,31,1118,50,1167,65,1215,85,1260,109,1302,138,1342,178,1376,223,1405,273,1428,323,1461,420,1478,494"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a9efed67c5ab186019b0222610507a48f" title="Calcule la taille optimale du local work size pour le GPU Pour les très grandes images,..." alt="" coords="1039,465,1282,519"/>
+<area shape="poly" title=" " alt="" coords="1334,514,1282,508,1283,503,1335,509"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a8938ddd095bf1e545f06dfbc9ecfee09" title="Redimensionnement via GPU OpenCL." alt="" coords="727,557,927,597"/>
+<area shape="poly" title=" " alt="" coords="1429,556,1368,580,1301,599,1202,610,1102,611,1008,605,927,596,927,591,1008,600,1102,606,1201,605,1299,593,1367,575,1427,551"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a56af72c51956399056e1f0de5b253319" title="Redimensionne une image avec routage automatique GPU/CPU." alt="" coords="379,583,579,623"/>
+<area shape="poly" title=" " alt="" coords="1438,558,1375,590,1338,605,1301,616,1203,634,1102,644,1001,648,902,648,721,638,578,621,579,616,721,632,902,643,1001,643,1101,639,1202,628,1299,611,1337,600,1373,585,1436,553"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestImageResize.html#ab1e39892471c5658890c8a78904be64c" title=" " alt="" coords="49,417,234,457"/>
+<area shape="poly" title=" " alt="" coords="1444,502,1379,459,1340,439,1299,424,1226,406,1152,392,999,374,846,367,698,369,558,378,431,392,235,422,234,416,430,386,557,373,697,364,846,362,1000,368,1153,387,1228,401,1301,419,1342,434,1382,454,1447,497"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestBicubicVsLanczos.html#a4cef8c04b1386d551c4cfec1b3361458" title=" " alt="" coords="49,552,234,592"/>
+<area shape="poly" title=" " alt="" coords="1432,504,1370,476,1299,455,1222,442,1142,433,980,428,820,436,665,454,522,478,395,505,207,555,206,549,393,500,521,473,665,449,819,431,980,423,1142,428,1222,436,1301,449,1372,471,1434,499"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestImageResizeInteractive.html#a16412151c83ac1a5ef58bfbd75bb0a42" title=" " alt="" coords="36,636,247,676"/>
+<area shape="poly" title=" " alt="" coords="1451,560,1386,610,1345,634,1301,652,1230,672,1157,687,1007,709,857,719,711,720,572,715,446,704,246,678,247,672,446,699,572,709,711,715,857,714,1007,704,1156,682,1228,666,1299,647,1342,629,1383,606,1448,555"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestReductionImage.html#a868abe4fd92adbc966d1c9c89fb72cc3" title=" " alt="" coords="49,740,234,780"/>
+<area shape="poly" title=" " alt="" coords="1463,561,1436,598,1399,640,1353,681,1301,712,1231,740,1158,763,1083,781,1008,796,855,814,705,820,563,816,434,807,323,794,234,780,234,775,323,788,435,801,564,811,705,814,855,808,1007,790,1082,776,1157,758,1229,735,1299,707,1350,676,1395,636,1431,595,1459,558"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a70a13e24789d5c6150c606cd077b5137" title="Initialise les kernels OpenCL (compilation à la demande)" alt="" coords="1060,544,1261,584"/>
+<area shape="poly" title=" " alt="" coords="1335,547,1262,555,1261,550,1334,542"/>
+<area shape="rect" href="classediteurpanovisu_1_1EditeurPanovisu.html#a6d5fd7170b4fe9e54f3606c9ce90a56a" title=" " alt="" coords="1033,811,1288,851"/>
+<area shape="poly" title=" " alt="" coords="1470,562,1445,613,1409,676,1361,740,1332,769,1301,794,1266,813,1264,808,1299,790,1329,765,1357,736,1404,673,1440,611,1465,560"/>
+<area shape="rect" href="classediteurpanovisu_1_1EditeurPanovisu.html#aab293202a1140d1151a35062614f436e" title="Sauvegarde les préférences de l&#39;application dans le fichier preferences.cfg." alt="" coords="1021,152,1300,192"/>
+<area shape="poly" title=" " alt="" coords="1461,497,1396,391,1350,328,1298,270,1247,227,1197,194,1200,190,1250,223,1302,266,1354,325,1400,388,1466,495"/>
+<area shape="rect" href="classediteurpanovisu_1_1EditeurPanovisu.html#a2b3125ffe2e6291efacf19df6cb30a8d" title="Méthode de démarrage de l&#39;application JavaFX." alt="" coords="1026,281,1295,306"/>
+<area shape="poly" title=" " alt="" coords="1452,500,1386,431,1344,394,1299,360,1246,330,1197,309,1199,304,1249,325,1301,355,1347,390,1390,427,1456,496"/>
+<area shape="poly" title=" " alt="" coords="1041,525,906,560,905,555,1039,520"/>
+<area shape="poly" title=" " alt="" coords="713,588,579,598,579,593,712,583"/>
+<area shape="poly" title=" " alt="" coords="423,579,182,460,185,455,425,574"/>
+<area shape="poly" title=" " alt="" coords="364,595,234,583,234,578,365,590"/>
+<area shape="poly" title=" " alt="" coords="365,623,247,642,246,637,365,618"/>
+<area shape="poly" title=" " alt="" coords="423,631,187,742,185,737,421,626"/>
+<area shape="poly" title=" " alt="" coords="1046,571,927,576,927,571,1046,566"/>
+<area shape="poly" title=" " alt="" coords="1096,149,1020,108,996,86,986,76,972,66,927,48,929,43,975,62,990,72,1000,82,1023,103,1099,144"/>
+<area shape="rect" href="classediteurpanovisu_1_1EditeurPanovisu.html#aaddfebfbdd8fc4110a4a46e9d0a78b07" title="Crée un fichier ZIP contenant la visite virtuelle depuis le répertoire temporaire." alt="" coords="691,120,963,160"/>
+<area shape="poly" title=" " alt="" coords="1007,160,962,156,963,150,1008,155"/>
+<area shape="rect" href="classediteurpanovisu_1_1EditeurPanovisu.html#ad4c8e1684c8b8d0e96cfc28dc0d93404" title=" " alt="" coords="337,120,621,160"/>
+<area shape="poly" title=" " alt="" coords="1101,149,1040,127,973,111,869,101,765,102,666,111,582,123,581,117,666,105,764,97,870,95,974,105,1041,122,1103,144"/>
+<area shape="rect" href="classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a3542f5788254051cb28b243c631b4547" title="Ouvre un FileChooser pour sélectionner des fichiers d&#39;images." alt="" coords="680,299,973,339"/>
+<area shape="poly" title=" " alt="" coords="1103,200,874,301,872,296,1100,195"/>
+<area shape="rect" href="classediteurpanovisu_1_1EditeurPanovisu.html#a9b46b222714af12c06ec33d410400773" title=" " alt="" coords="685,184,969,224"/>
+<area shape="poly" title=" " alt="" coords="1008,189,969,193,969,188,1008,184"/>
+<area shape="poly" title=" " alt="" coords="677,143,621,143,621,137,677,137"/>
+<area shape="rect" href="classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#ae5969de62f5a0a7a3a567c063c7d085e" title="Crée la zone de drag &amp; drop pour ajouter des images." alt="" coords="325,219,632,259"/>
+<area shape="poly" title=" " alt="" coords="734,298,631,273,577,261,578,256,633,268,735,293"/>
+<area shape="rect" href="classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#abee140580eb7286689c97847bce687e9" title="Crée la zone contenant la liste des fichiers à traiter." alt="" coords="341,283,617,338"/>
+<area shape="poly" title=" " alt="" coords="666,318,617,317,617,311,666,312"/>
+<area shape="rect" href="classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a182869c52f51180d4809f7e0f1e2fcec" title="Affiche la fenêtre de dialogue de redimensionnement d&#39;images." alt="" coords="5,255,277,295"/>
+<area shape="poly" title=" " alt="" coords="312,259,278,263,277,258,311,254"/>
+<area shape="poly" title=" " alt="" coords="326,297,277,292,278,287,327,292"/>
+<area shape="poly" title=" " alt="" coords="1012,285,824,266,740,253,679,238,654,225,631,209,529,163,532,158,633,204,657,220,681,234,741,248,825,261,1013,280"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ae25bec7145c9c0fb72abc14f05140f51" name="ae25bec7145c9c0fb72abc14f05140f51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae25bec7145c9c0fb72abc14f05140f51">&#9670;&#160;</a></span>setGPUEnabled()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">void</a> editeurpanovisu.gpu.GPUManager.setGPUEnabled </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">boolean</a>&#160;</td>
+          <td class="paramname"><em>enabled</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Active ou désactive l'utilisation du GPU. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">enabled</td><td>true pour activer, false pour désactiver </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00203">203</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="leaflet_8js_source.html#l00005">k()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="ConfigDialogController_8java_source.html#l00067">editeurpanovisu.ConfigDialogController.afficheFenetre()</a>, et <a class="el" href="EditeurPanovisu_8java_source.html#l14701">editeurpanovisu.EditeurPanovisu.lisPreferences()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1gpu_1_1GPUManager_ae25bec7145c9c0fb72abc14f05140f51_cgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1gpu_1_1GPUManager_ae25bec7145c9c0fb72abc14f05140f51_cgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1gpu_1_1GPUManager_ae25bec7145c9c0fb72abc14f05140f51_cgraph" id="aclassediteurpanovisu_1_1gpu_1_1GPUManager_ae25bec7145c9c0fb72abc14f05140f51_cgraph">
+<area shape="rect" title="Active ou désactive l&#39;utilisation du GPU." alt="" coords="5,5,272,45"/>
+<area shape="rect" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="320,13,359,38"/>
+<area shape="poly" title=" " alt="" coords="272,23,306,23,306,28,272,28"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1gpu_1_1GPUManager_ae25bec7145c9c0fb72abc14f05140f51_icgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1gpu_1_1GPUManager_ae25bec7145c9c0fb72abc14f05140f51_icgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1gpu_1_1GPUManager_ae25bec7145c9c0fb72abc14f05140f51_icgraph" id="aclassediteurpanovisu_1_1gpu_1_1GPUManager_ae25bec7145c9c0fb72abc14f05140f51_icgraph">
+<area shape="rect" title="Active ou désactive l&#39;utilisation du GPU." alt="" coords="308,37,575,77"/>
+<area shape="rect" href="classediteurpanovisu_1_1ConfigDialogController.html#a228e9366c0d6a335d6bb5e6b8a09ef78" title=" " alt="" coords="25,5,240,45"/>
+<area shape="poly" title=" " alt="" coords="294,45,240,39,241,34,294,39"/>
+<area shape="rect" href="classediteurpanovisu_1_1EditeurPanovisu.html#a6d5fd7170b4fe9e54f3606c9ce90a56a" title=" " alt="" coords="5,69,260,109"/>
+<area shape="poly" title=" " alt="" coords="295,75,261,79,260,73,294,70"/>
+</map>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">Documentation des données membres</h2>
+<a id="a4080d6691a573813641615d584e57934" name="a4080d6691a573813641615d584e57934"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4080d6691a573813641615d584e57934">&#9670;&#160;</a></span>commandQueue</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">cl_command_queue</a> editeurpanovisu.gpu.GPUManager.commandQueue</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00022">22</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00298">editeurpanovisu.gpu.GPUManager.cleanup()</a>, <a class="el" href="GPUManager_8java_source.html#l00222">editeurpanovisu.gpu.GPUManager.getCommandQueue()</a>, et <a class="el" href="GPUManager_8java_source.html#l00053">editeurpanovisu.gpu.GPUManager.initializeGPU()</a>.</p>
+
+</div>
+</div>
+<a id="a6ec6de78391364c467a4fb741132429b" name="a6ec6de78391364c467a4fb741132429b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ec6de78391364c467a4fb741132429b">&#9670;&#160;</a></span>computeUnits</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">int</a> editeurpanovisu.gpu.GPUManager.computeUnits = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00029">29</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00262">editeurpanovisu.gpu.GPUManager.getComputeUnits()</a>, <a class="el" href="GPUManager_8java_source.html#l00278">editeurpanovisu.gpu.GPUManager.getGPUInfo()</a>, <a class="el" href="GPUManager_8java_source.html#l00053">editeurpanovisu.gpu.GPUManager.initializeGPU()</a>, et <a class="el" href="GPUManager_8java_source.html#l00154">editeurpanovisu.gpu.GPUManager.retrieveDeviceInfo()</a>.</p>
+
+</div>
+</div>
+<a id="a2011801d774b98d6b098972a6c675ac7" name="a2011801d774b98d6b098972a6c675ac7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2011801d774b98d6b098972a6c675ac7">&#9670;&#160;</a></span>context</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">cl_context</a> editeurpanovisu.gpu.GPUManager.context</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00021">21</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00298">editeurpanovisu.gpu.GPUManager.cleanup()</a>, <a class="el" href="GPUManager_8java_source.html#l00214">editeurpanovisu.gpu.GPUManager.getContext()</a>, et <a class="el" href="GPUManager_8java_source.html#l00053">editeurpanovisu.gpu.GPUManager.initializeGPU()</a>.</p>
+
+</div>
+</div>
+<a id="a482bdf96e9fa42fd487ed15752af75da" name="a482bdf96e9fa42fd487ed15752af75da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a482bdf96e9fa42fd487ed15752af75da">&#9670;&#160;</a></span>device</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">cl_device_id</a> editeurpanovisu.gpu.GPUManager.device</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00023">23</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00230">editeurpanovisu.gpu.GPUManager.getDevice()</a>, <a class="el" href="GPUManager_8java_source.html#l00053">editeurpanovisu.gpu.GPUManager.initializeGPU()</a>, et <a class="el" href="GPUManager_8java_source.html#l00154">editeurpanovisu.gpu.GPUManager.retrieveDeviceInfo()</a>.</p>
+
+</div>
+</div>
+<a id="a4e265020cc1b74173cd26a4cf7682de5" name="a4e265020cc1b74173cd26a4cf7682de5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e265020cc1b74173cd26a4cf7682de5">&#9670;&#160;</a></span>deviceMemory</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">long</a> editeurpanovisu.gpu.GPUManager.deviceMemory = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00028">28</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00254">editeurpanovisu.gpu.GPUManager.getDeviceMemory()</a>, <a class="el" href="GPUManager_8java_source.html#l00278">editeurpanovisu.gpu.GPUManager.getGPUInfo()</a>, <a class="el" href="GPUManager_8java_source.html#l00053">editeurpanovisu.gpu.GPUManager.initializeGPU()</a>, et <a class="el" href="GPUManager_8java_source.html#l00154">editeurpanovisu.gpu.GPUManager.retrieveDeviceInfo()</a>.</p>
+
+</div>
+</div>
+<a id="a038f4d0473ae1602e66203fa8045ff99" name="a038f4d0473ae1602e66203fa8045ff99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a038f4d0473ae1602e66203fa8045ff99">&#9670;&#160;</a></span>deviceName</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> editeurpanovisu.gpu.GPUManager.deviceName = &quot;Unknown&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00026">26</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00238">editeurpanovisu.gpu.GPUManager.getDeviceName()</a>, <a class="el" href="GPUManager_8java_source.html#l00278">editeurpanovisu.gpu.GPUManager.getGPUInfo()</a>, <a class="el" href="GPUManager_8java_source.html#l00053">editeurpanovisu.gpu.GPUManager.initializeGPU()</a>, et <a class="el" href="GPUManager_8java_source.html#l00154">editeurpanovisu.gpu.GPUManager.retrieveDeviceInfo()</a>.</p>
+
+</div>
+</div>
+<a id="a69ed0a220e47cfc944032b19fc3f718f" name="a69ed0a220e47cfc944032b19fc3f718f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69ed0a220e47cfc944032b19fc3f718f">&#9670;&#160;</a></span>gpuAvailable</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">boolean</a> editeurpanovisu.gpu.GPUManager.gpuAvailable = <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">false</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00019">19</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00278">editeurpanovisu.gpu.GPUManager.getGPUInfo()</a>, <a class="el" href="GPUManager_8java_source.html#l00053">editeurpanovisu.gpu.GPUManager.initializeGPU()</a>, <a class="el" href="GPUManager_8java_source.html#l00187">editeurpanovisu.gpu.GPUManager.isGPUAvailable()</a>, et <a class="el" href="GPUManager_8java_source.html#l00195">editeurpanovisu.gpu.GPUManager.isGPUEnabled()</a>.</p>
+
+</div>
+</div>
+<a id="a4f5f409dc4375b3674ed9feb1546614f" name="a4f5f409dc4375b3674ed9feb1546614f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f5f409dc4375b3674ed9feb1546614f">&#9670;&#160;</a></span>gpuEnabled</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">boolean</a> editeurpanovisu.gpu.GPUManager.gpuEnabled = <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">true</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00020">20</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00278">editeurpanovisu.gpu.GPUManager.getGPUInfo()</a>, et <a class="el" href="GPUManager_8java_source.html#l00195">editeurpanovisu.gpu.GPUManager.isGPUEnabled()</a>.</p>
+
+</div>
+</div>
+<a id="a783e70ea3ee9f58ff9677fe0efeb346a" name="a783e70ea3ee9f58ff9677fe0efeb346a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a783e70ea3ee9f58ff9677fe0efeb346a">&#9670;&#160;</a></span>instance</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html">GPUManager</a> editeurpanovisu.gpu.GPUManager.instance</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00018">18</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00043">editeurpanovisu.gpu.GPUManager.getInstance()</a>.</p>
+
+</div>
+</div>
+<a id="a66235a95342d13bf04ba2a3b1bc74d7f" name="a66235a95342d13bf04ba2a3b1bc74d7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66235a95342d13bf04ba2a3b1bc74d7f">&#9670;&#160;</a></span>maxWorkGroupSize</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">long</a> editeurpanovisu.gpu.GPUManager.maxWorkGroupSize = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00030">30</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00278">editeurpanovisu.gpu.GPUManager.getGPUInfo()</a>, <a class="el" href="GPUManager_8java_source.html#l00270">editeurpanovisu.gpu.GPUManager.getMaxWorkGroupSize()</a>, <a class="el" href="GPUManager_8java_source.html#l00053">editeurpanovisu.gpu.GPUManager.initializeGPU()</a>, et <a class="el" href="GPUManager_8java_source.html#l00154">editeurpanovisu.gpu.GPUManager.retrieveDeviceInfo()</a>.</p>
+
+</div>
+</div>
+<a id="a7004006e805d2ba158d7738eaacc8ccd" name="a7004006e805d2ba158d7738eaacc8ccd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7004006e805d2ba158d7738eaacc8ccd">&#9670;&#160;</a></span>platform</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">cl_platform_id</a> editeurpanovisu.gpu.GPUManager.platform</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00024">24</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00053">editeurpanovisu.gpu.GPUManager.initializeGPU()</a>.</p>
+
+</div>
+</div>
+<a id="aa164ace68c6e6987a9c283fc5713f787" name="aa164ace68c6e6987a9c283fc5713f787"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa164ace68c6e6987a9c283fc5713f787">&#9670;&#160;</a></span>platformName</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> editeurpanovisu.gpu.GPUManager.platformName = &quot;Unknown&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00027">27</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00278">editeurpanovisu.gpu.GPUManager.getGPUInfo()</a>, <a class="el" href="GPUManager_8java_source.html#l00246">editeurpanovisu.gpu.GPUManager.getPlatformName()</a>, et <a class="el" href="GPUManager_8java_source.html#l00053">editeurpanovisu.gpu.GPUManager.initializeGPU()</a>.</p>
+
+</div>
+</div>
+<hr/>La documentation de cette classe a été générée à partir du fichier suivant :<ul>
+<li>src/editeurpanovisu/gpu/<a class="el" href="GPUManager_8java_source.html">GPUManager.java</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespaceediteurpanovisu.html">editeurpanovisu</a></li><li class="navelem"><a class="el" href="namespaceediteurpanovisu_1_1gpu.html">gpu</a></li><li class="navelem"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html">GPUManager</a></li>
+    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

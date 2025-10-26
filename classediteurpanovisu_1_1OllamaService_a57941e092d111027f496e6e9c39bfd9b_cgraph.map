@@ -1,0 +1,18 @@
+<map id="editeurpanovisu.OllamaService.parserLocationIQ" name="editeurpanovisu.OllamaService.parserLocationIQ">
+<area shape="rect" id="Node000001" title="Parse la réponse JSON de LocationIQ et construit une description structurée pour que l&#39;IA comprenne p..." alt="" coords="5,184,276,224"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1OllamaService.html#a9d1bfef6a21fd06e94ebc7fe05ef063a" title="Extrait un champ d&#39;un JSON simple (sans bibliothèque)" alt="" coords="324,5,605,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="161,182,229,123,274,90,323,62,358,47,360,52,325,66,277,94,233,127,164,186"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="653,42,692,67"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="171,181,239,142,280,122,323,105,411,82,500,67,640,53,640,59,501,72,413,87,325,111,283,127,242,147,174,186"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1OllamaService.html#aae59c2bcef5290e5fd738b6a32df0deb" title="Traduit les types de loisirs OpenStreetMap en français explicite." alt="" coords="337,120,593,160"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="242,181,349,160,350,165,243,187"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1OllamaService.html#a3d34a2f19068dcc51d9feac8b9254d27" title="Traduit les types historiques OpenStreetMap en français explicite." alt="" coords="337,184,593,224"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="276,201,323,201,323,207,276,207"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1OllamaService.html#a19776a7be81e39cdd5656dc7136e9831" title="Traduit les types de loisirs OpenStreetMap en français explicite." alt="" coords="337,248,593,288"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="243,221,350,243,349,248,242,227"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1OllamaService.html#ab0951b52de12ed6761a3e5bb505a2721" title="Traduit les types naturels OpenStreetMap en français explicite." alt="" coords="337,312,593,352"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="176,222,243,260,325,298,350,306,348,311,323,302,241,265,173,227"/>
+<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1OllamaService.html#ad4f002f4d6ccc1eaac2280eec8f3b250" title="Traduit les types de tourisme OpenStreetMap en français explicite." alt="" coords="337,376,593,416"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="161,222,228,292,274,330,325,362,341,369,339,374,323,366,271,334,224,295,157,226"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="606,43,640,48,640,53,605,48"/>
+</map>

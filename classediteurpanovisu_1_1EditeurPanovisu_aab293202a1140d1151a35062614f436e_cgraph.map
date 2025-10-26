@@ -1,0 +1,19 @@
+<map id="editeurpanovisu.EditeurPanovisu.sauvePreferences" name="editeurpanovisu.EditeurPanovisu.sauvePreferences">
+<area shape="rect" id="Node000001" title="Sauvegarde les préférences de l&#39;application dans le fichier preferences.cfg." alt="" coords="5,159,284,199"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1gpu_1_1GPUManager.html#a65cc6674dbee14bcf2d3f11f06a26e4b" title="Récupère l&#39;instance unique du gestionnaire GPU." alt="" coords="332,102,600,142"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="257,156,340,142,341,147,258,162"/>
+<area shape="rect" id="Node000005" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="1668,109,1707,134"/>
+<area shape="poly" id="edge9_Node000001_Node000005" title=" " alt="" coords="284,176,770,176,1109,176,1254,180,1367,185,1421,184,1479,179,1544,168,1619,151,1655,137,1657,142,1621,156,1545,174,1480,184,1422,189,1367,190,1254,186,1109,182,770,182,284,182"/>
+<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1gpu_1_1GPUManager.html#a911a28e45e8baa207c84e9b4c0c9a0d7" title="Vérifie si l&#39;utilisation du GPU est activée par l&#39;utilisateur." alt="" coords="337,216,595,256"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="258,197,341,211,340,217,257,202"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1gpu_1_1GPUManager.html#a3ba0aa0d6379b3b216d07d19ee71e251" title="Constructeur privé (singleton)" alt="" coords="648,74,895,114"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="600,107,634,104,635,109,600,112"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1gpu_1_1GPUManager.html#ad758dc8906499865aeaf412236ba042c" title="Initialise OpenCL et détecte les GPU disponibles." alt="" coords="943,81,1273,106"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="895,91,929,91,929,96,895,96"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="1136,79,1222,46,1280,29,1345,14,1414,5,1485,4,1555,14,1621,37,1639,48,1654,63,1676,95,1672,98,1650,66,1635,52,1619,42,1554,19,1485,9,1414,10,1346,19,1281,34,1223,51,1138,84"/>
+<area shape="rect" id="Node000006" href="$leaflet_8js.html#acaad4b36c0476b761b674f28b36d565c" title=" " alt="" coords="1451,52,1490,77"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="1265,78,1438,64,1438,70,1265,84"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1gpu_1_1GPUManager.html#af70605c6c0bf0dd246801d1c51fb90dc" title="Récupère les informations détaillées du GPU." alt="" coords="1321,102,1620,142"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="1273,104,1308,107,1307,112,1272,109"/>
+<area shape="poly" id="edge7_Node000007_Node000005" title=" " alt="" coords="1620,119,1654,119,1654,124,1620,124"/>
+</map>

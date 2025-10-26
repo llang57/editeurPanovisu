@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.PrevisualiserConversionDialog.creerZonePrevisualisation" name="editeurpanovisu.PrevisualiserConversionDialog.creerZonePrevisualisation">
+<area shape="rect" id="Node000001" title="Crée la zone de prévisualisation avec l&#39;image." alt="" coords="548,5,859,45"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1PrevisualiserConversionDialog.html#af108a324770eecf9aa39d5bdad4cad31" title="Crée l&#39;interface du dialogue." alt="" coords="268,5,500,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="534,28,500,28,500,23,534,23"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1PrevisualiserConversionDialog.html#a87e26dc45ee76361d027dabcc51f9f7d" title="Affiche le dialogue et attend la réponse de l&#39;utilisateur." alt="" coords="5,5,220,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="255,28,220,28,220,23,255,23"/>
+</map>

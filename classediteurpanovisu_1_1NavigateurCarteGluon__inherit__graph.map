@@ -1,0 +1,5 @@
+<map id="editeurpanovisu.NavigateurCarteGluon" name="editeurpanovisu.NavigateurCarteGluon">
+<area shape="rect" id="Node000001" title="NavigateurCarte utilisant JMapViewer (OpenStreetMap pour Java Desktop) Remplace Gluon Maps qui crasha..." alt="" coords="5,79,208,119"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="73,5,140,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="109,44,109,79,104,79,104,44"/>
+</map>

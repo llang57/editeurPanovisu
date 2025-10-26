@@ -1,0 +1,65 @@
+<map id="editeurpanovisu.gpu.ImageResizeGPU.resizeAuto" name="editeurpanovisu.gpu.ImageResizeGPU.resizeAuto">
+<area shape="rect" id="Node000001" title="Redimensionne une image avec routage automatique GPU/CPU." alt="" coords="5,240,205,280"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1gpu_1_1GPUManager.html#a65cc6674dbee14bcf2d3f11f06a26e4b" title="Récupère l&#39;instance unique du gestionnaire GPU." alt="" coords="876,758,1144,798"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="118,279,168,379,210,449,261,526,322,603,393,675,432,708,473,737,516,763,561,784,605,799,652,809,746,815,837,810,915,798,916,803,837,815,746,821,651,814,604,804,559,789,513,768,470,742,428,712,389,679,318,606,257,529,205,452,164,382,113,282"/>
+<area shape="rect" id="Node000005" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="2212,566,2251,592"/>
+<area shape="poly" id="edge9_Node000001_Node000005" title=" " alt="" coords="123,238,177,186,213,158,252,135,369,83,418,65,465,53,565,40,693,38,1653,38,1734,33,1806,24,1933,5,1991,4,2048,16,2077,27,2106,43,2166,92,2188,127,2205,179,2217,242,2225,312,2233,451,2233,552,2228,552,2227,451,2220,313,2212,243,2200,180,2183,129,2162,95,2103,48,2074,32,2046,21,1990,10,1933,10,1807,29,1734,39,1653,43,693,43,565,46,466,58,419,71,371,88,255,140,216,163,181,190,127,242"/>
+<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1gpu_1_1GPUManager.html#a911a28e45e8baa207c84e9b4c0c9a0d7" title="Vérifie si l&#39;utilisation du GPU est activée par l&#39;utilisateur." alt="" coords="253,240,512,280"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="205,258,240,258,240,263,205,263"/>
+<area shape="rect" id="Node000009" href="$classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#afbb5bce1b5bafeb8197e5e74476daa09" title="Redimensionnement via CPU (fallback) Utilise la bibliothèque Thumbnails directement pour éviter la ré..." alt="" coords="1552,78,1752,118"/>
+<area shape="poly" id="edge10_Node000001_Node000009" title=" " alt="" coords="148,238,243,197,376,150,452,129,532,111,612,99,693,95,1011,95,1538,95,1538,100,1011,100,693,100,613,105,532,116,453,134,378,155,245,202,150,243"/>
+<area shape="rect" id="Node000010" href="$classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a8938ddd095bf1e545f06dfbc9ecfee09" title="Redimensionnement via GPU OpenCL." alt="" coords="283,436,483,476"/>
+<area shape="poly" id="edge12_Node000001_Node000010" title=" " alt="" coords="137,278,344,426,341,431,133,283"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1gpu_1_1GPUManager.html#a3ba0aa0d6379b3b216d07d19ee71e251" title="Constructeur privé (singleton)" alt="" coords="1192,754,1439,794"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="1144,773,1178,773,1179,778,1144,778"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1gpu_1_1GPUManager.html#ad758dc8906499865aeaf412236ba042c" title="Initialise OpenCL et détecte les GPU disponibles." alt="" coords="1487,758,1817,784"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="1439,770,1473,770,1473,775,1439,775"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="1683,781,1773,814,1833,830,1899,842,1968,848,2037,843,2103,827,2134,812,2162,794,2182,775,2198,753,2218,701,2227,649,2228,605,2234,606,2232,649,2223,703,2202,756,2186,779,2166,798,2136,817,2105,832,2038,849,1968,853,1898,848,1832,835,1771,819,1681,786"/>
+<area shape="rect" id="Node000006" href="$leaflet_8js.html#acaad4b36c0476b761b674f28b36d565c" title=" " alt="" coords="1995,694,2034,720"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="1722,756,1865,730,1981,710,1982,715,1866,735,1723,761"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1gpu_1_1GPUManager.html#af70605c6c0bf0dd246801d1c51fb90dc" title="Récupère les informations détaillées du GPU." alt="" coords="1865,744,2164,784"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="1817,765,1851,765,1851,770,1818,771"/>
+<area shape="poly" id="edge7_Node000007_Node000005" title=" " alt="" coords="2142,742,2162,729,2187,701,2205,668,2216,634,2223,605,2229,606,2222,636,2210,670,2191,704,2166,733,2145,746"/>
+<area shape="poly" id="edge11_Node000009_Node000005" title=" " alt="" coords="1752,88,1864,85,1986,88,2043,94,2094,103,2136,116,2166,134,2187,166,2203,212,2214,270,2223,333,2231,459,2233,552,2228,552,2226,459,2217,333,2209,270,2198,214,2182,168,2162,138,2134,121,2093,108,2043,99,1986,94,1864,91,1752,94"/>
+<area shape="poly" id="edge23_Node000010_Node000002" title=" " alt="" coords="394,475,415,524,451,588,500,653,529,682,561,706,596,725,633,741,711,763,789,776,863,781,862,786,788,781,710,768,631,746,594,730,559,710,525,686,496,656,446,591,411,526,389,478"/>
+<area shape="poly" id="edge39_Node000010_Node000005" title=" " alt="" coords="391,476,408,538,441,622,463,667,491,711,524,751,562,785,619,823,672,849,721,864,770,872,821,874,876,873,1009,870,1653,870,1734,875,1805,887,1928,914,1985,920,2041,915,2070,906,2100,893,2130,875,2162,852,2175,835,2187,809,2205,740,2218,665,2225,605,2230,605,2223,666,2211,741,2192,811,2180,838,2166,855,2133,880,2102,898,2072,911,2042,920,1985,925,1927,919,1804,892,1733,880,1653,875,1009,875,876,879,821,880,769,877,720,869,670,854,617,827,558,789,520,755,487,714,459,670,436,624,403,539,386,477"/>
+<area shape="rect" id="Node000011" href="$classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a18787250db43d608a12770317d82f13f" title="Convertit un ByteBuffer OpenCL (format RGBA) en Image JavaFX." alt="" coords="584,188,804,228"/>
+<area shape="poly" id="edge13_Node000010_Node000011" title=" " alt="" coords="395,434,421,397,459,349,505,299,559,255,605,231,608,236,561,260,509,303,463,353,425,400,399,437"/>
+<area shape="rect" id="Node000014" href="$classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a9efed67c5ab186019b0222610507a48f" title="Calcule la taille optimale du local work size pour le GPU Pour les très grandes images,..." alt="" coords="573,642,815,697"/>
+<area shape="poly" id="edge17_Node000010_Node000014" title=" " alt="" coords="414,474,562,578,641,632,638,637,558,582,411,479"/>
+<area shape="rect" id="Node000016" href="$classediteurpanovisu_1_1gpu_1_1GPUManager.html#aa4dd384566854de3efd63a9397ad0f9e" title="Récupère la file de commandes OpenCL." alt="" coords="560,350,828,390"/>
+<area shape="poly" id="edge21_Node000010_Node000016" title=" " alt="" coords="455,434,607,391,608,396,456,439"/>
+<area shape="rect" id="Node000017" href="$classediteurpanovisu_1_1gpu_1_1GPUManager.html#af6b7c94329ec7306bbc48a3524b8e8a0" title="Récupère le contexte OpenCL." alt="" coords="876,336,1144,376"/>
+<area shape="poly" id="edge22_Node000010_Node000017" title=" " alt="" coords="483,446,645,428,827,399,875,386,910,377,911,382,877,391,829,404,646,433,483,451"/>
+<area shape="rect" id="Node000018" href="$classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#af5094b97f55ac2ef762873e642caa7c8" title="Convertit une Image JavaFX en ByteBuffer pour OpenCL (format RGBA)" alt="" coords="583,270,805,310"/>
+<area shape="poly" id="edge24_Node000010_Node000018" title=" " alt="" coords="408,434,474,386,559,335,613,312,615,317,561,340,477,390,411,438"/>
+<area shape="rect" id="Node000019" href="$classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a70a13e24789d5c6150c606cd077b5137" title="Initialise les kernels OpenCL (compilation à la demande)" alt="" coords="593,464,795,504"/>
+<area shape="poly" id="edge28_Node000010_Node000019" title=" " alt="" coords="483,463,580,471,580,477,483,468"/>
+<area shape="rect" id="Node000024" href="$classediteurpanovisu_1_1gpu_1_1GPUManager.html#a752164a6622addc5ebd518baf4f9cab7" title="Vérifie si un GPU est disponible." alt="" coords="565,528,823,568"/>
+<area shape="poly" id="edge38_Node000010_Node000024" title=" " alt="" coords="440,474,561,514,592,522,591,527,559,519,438,479"/>
+<area shape="poly" id="edge14_Node000011_Node000005" title=" " alt="" coords="781,186,876,171,1020,160,1143,155,1251,158,1352,168,1452,185,1558,209,1818,278,1923,300,2007,317,2046,329,2084,348,2124,374,2166,412,2191,445,2210,483,2222,520,2229,552,2224,553,2217,521,2205,485,2187,448,2162,415,2120,378,2081,352,2044,334,2006,322,1922,305,1817,283,1557,215,1451,191,1351,174,1251,164,1143,161,1020,165,876,176,782,191"/>
+<area shape="rect" id="Node000012" href="$leaflet_8js.html#a008d931e56b6fc013061112f26afbffb" title=" " alt="" coords="991,236,1029,261"/>
+<area shape="poly" id="edge15_Node000011_Node000012" title=" " alt="" coords="804,219,978,242,977,247,804,225"/>
+<area shape="rect" id="Node000013" href="$leaflet_8js.html#a9f9b62a373d2bb4624b7ac2df8151435" title=" " alt="" coords="991,186,1029,212"/>
+<area shape="poly" id="edge16_Node000011_Node000013" title=" " alt="" coords="804,202,977,197,977,203,804,208"/>
+<area shape="poly" id="edge18_Node000014_Node000002" title=" " alt="" coords="755,695,813,720,877,743,905,751,903,757,875,748,811,725,753,699"/>
+<area shape="poly" id="edge20_Node000014_Node000005" title=" " alt="" coords="816,663,1047,657,1314,654,1653,654,1799,659,1913,665,1968,664,2025,658,2089,644,2163,622,2185,612,2204,598,2207,603,2187,616,2165,627,2090,649,2026,663,1968,670,1913,671,1799,664,1653,659,1314,659,1047,662,816,668"/>
+<area shape="rect" id="Node000015" href="$classediteurpanovisu_1_1gpu_1_1GPUManager.html#ab9275a8ae387b50294debd8f0ab02d3c" title="Récupère la taille maximale d&#39;un workgroup." alt="" coords="876,694,1144,734"/>
+<area shape="poly" id="edge19_Node000014_Node000015" title=" " alt="" coords="816,684,862,690,862,696,815,689"/>
+<area shape="poly" id="edge25_Node000018_Node000005" title=" " alt="" coords="805,290,1314,296,1653,296,1698,298,1742,305,1829,327,1913,361,1991,401,2061,444,2122,487,2207,555,2204,559,2119,491,2059,449,1988,406,1911,366,1828,333,1741,310,1697,304,1653,302,1314,302,805,295"/>
+<area shape="poly" id="edge26_Node000018_Node000012" title=" " alt="" coords="805,272,977,250,978,255,805,278"/>
+<area shape="poly" id="edge27_Node000018_Node000013" title=" " alt="" coords="748,267,875,220,977,200,978,206,877,225,750,272"/>
+<area shape="poly" id="edge31_Node000019_Node000002" title=" " alt="" coords="796,493,814,502,830,514,850,543,859,573,859,602,855,631,851,660,851,688,859,716,878,744,881,747,877,751,874,747,854,718,845,689,845,660,849,631,853,602,853,573,845,546,826,518,811,506,794,497"/>
+<area shape="poly" id="edge32_Node000019_Node000005" title=" " alt="" coords="796,498,830,514,846,531,854,548,862,564,877,578,937,605,990,620,1039,626,1086,625,1187,612,1246,606,1314,603,1653,603,1814,600,1971,593,2198,579,2198,584,1971,599,1814,605,1653,608,1314,608,1246,611,1188,617,1087,630,1039,631,989,626,935,610,875,582,857,568,849,550,841,534,826,518,794,503"/>
+<area shape="poly" id="edge29_Node000019_Node000017" title=" " alt="" coords="789,462,826,443,841,430,850,415,858,400,874,386,886,379,889,384,878,390,863,404,854,418,845,433,830,448,791,467"/>
+<area shape="rect" id="Node000020" href="$classediteurpanovisu_1_1gpu_1_1GPUManager.html#a70047c6b01da4afd29934b79a0120b46" title="Récupère le device OpenCL." alt="" coords="876,400,1144,440"/>
+<area shape="poly" id="edge30_Node000019_Node000020" title=" " alt="" coords="793,462,897,440,898,446,794,467"/>
+<area shape="rect" id="Node000021" href="$classediteurpanovisu_1_1gpu_1_1GPUKernelLoader.html#a588fbb00f7d95388ff3f2fe88f7e2d87" title="Charge le kernel de redimensionnement bicubique." alt="" coords="896,464,1124,504"/>
+<area shape="poly" id="edge33_Node000019_Node000021" title=" " alt="" coords="795,482,882,482,882,487,795,487"/>
+<area shape="rect" id="Node000023" href="$classediteurpanovisu_1_1gpu_1_1GPUKernelLoader.html#aab2e17ecd14e3e0984001381a3fb6d5a" title="Charge le kernel de redimensionnement Lanczos3." alt="" coords="896,528,1124,568"/>
+<area shape="poly" id="edge36_Node000019_Node000023" title=" " alt="" coords="794,502,898,523,897,528,793,507"/>
+<area shape="rect" id="Node000022" href="$classediteurpanovisu_1_1gpu_1_1GPUKernelLoader.html#af75a057bee5cbaaad3ea651050f058f0" title="Charge un kernel OpenCL depuis les ressources." alt="" coords="1201,528,1429,568"/>
+<area shape="poly" id="edge34_Node000021_Node000022" title=" " alt="" coords="1107,502,1207,523,1206,528,1106,507"/>
+<area shape="poly" id="edge35_Node000022_Node000005" title=" " alt="" coords="1430,549,2198,575,2198,581,1429,555"/>
+<area shape="poly" id="edge37_Node000023_Node000022" title=" " alt="" coords="1124,546,1187,546,1187,551,1124,551"/>
+</map>

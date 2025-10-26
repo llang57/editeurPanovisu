@@ -1,0 +1,43 @@
+<map id="editeurpanovisu.GestionnaireInterfaceController.apAfficheCalques" name="editeurpanovisu.GestionnaireInterfaceController.apAfficheCalques">
+<area shape="rect" id="Node000001" title="pannel des niveaux de calque" alt="" coords="5,49,265,89"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="769,5,808,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="265,52,313,47,568,28,756,17,756,22,569,34,314,53,266,57"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="769,55,808,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="266,66,755,65,755,70,266,71"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a6841b5ee320549f9685bf881b97271f6" title="Réordonne les éléments d&#39;interface selon les calques." alt="" coords="313,475,589,529"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="154,87,424,461,420,464,149,91"/>
+<area shape="poly" id="edge19_Node000004_Node000002" title=" " alt="" coords="452,474,464,388,476,331,493,269,517,206,548,144,587,88,636,40,664,24,696,15,755,12,756,17,697,20,666,29,639,44,591,91,552,147,522,208,498,271,481,332,469,389,457,475"/>
+<area shape="poly" id="edge21_Node000004_Node000003" title=" " alt="" coords="454,474,469,396,500,291,524,236,554,182,591,133,636,91,664,75,696,66,755,62,755,67,697,71,666,80,639,95,595,136,559,185,529,238,505,293,474,397,459,475"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a6bb7b57880cc7f5f512b09b4130f254a" title="Retourne la valeur de iCalqueBarreClassique." alt="" coords="663,475,915,529"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="590,499,649,499,649,505,590,505"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#af9d8e6d4af8eda132e74c762ab4f1220" title="Retourne la valeur de iCalqueBarrePersonnalisée." alt="" coords="663,553,915,608"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="570,527,658,548,657,553,569,532"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a6dedcad8739f7ad0245454822e8356df" title="Retourne la valeur de iCalqueBoussole." alt="" coords="651,633,927,673"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="489,528,556,574,596,598,638,618,660,626,658,631,636,623,594,603,553,579,486,532"/>
+<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a8193ee98626eccb9c24467d77d3ed2e0" title="Retourne la valeur de iCalqueCarte." alt="" coords="663,697,915,737"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="474,528,503,564,541,606,587,648,639,682,653,689,651,694,636,687,584,652,537,610,499,567,470,531"/>
+<area shape="rect" id="Node000009" href="$classediteurpanovisu_1_1ImageFond.html#adf317b83e09f8d955fd03bf541c35a32" title="Retourne la valeur de iCalqueImage." alt="" coords="673,761,905,801"/>
+<area shape="poly" id="edge8_Node000004_Node000009" title=" " alt="" coords="467,528,492,576,530,636,579,696,608,723,639,746,661,758,659,763,636,751,604,727,575,700,526,639,488,579,463,531"/>
+<area shape="rect" id="Node000010" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#ad47465b6dd24c98c481660b65d40cc98" title="Retourne la valeur de iCalqueMasquage." alt="" coords="647,825,931,865"/>
+<area shape="poly" id="edge9_Node000004_Node000010" title=" " alt="" coords="463,529,485,588,520,666,544,706,572,745,603,780,639,811,647,816,645,821,636,815,599,784,567,748,539,709,516,668,480,590,458,530"/>
+<area shape="rect" id="Node000011" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#ac6f8d140cba49c056639f294d77b65a9" title="Retourne la valeur de iCalqueMenuPanoramiques." alt="" coords="662,889,915,944"/>
+<area shape="poly" id="edge10_Node000004_Node000011" title=" " alt="" coords="461,529,479,599,513,693,536,742,565,791,599,836,639,875,651,883,648,888,636,879,595,839,561,794,532,745,508,695,474,601,455,530"/>
+<area shape="rect" id="Node000012" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a8082e12af30ac9730aa2cd9c9633ac8f" title="Retourne la valeur de iCalquePartage." alt="" coords="655,969,922,1009"/>
+<area shape="poly" id="edge11_Node000004_Node000012" title=" " alt="" coords="458,529,471,613,483,669,501,729,524,791,555,851,593,907,639,955,645,959,642,964,636,959,588,910,550,854,519,793,496,731,478,670,465,614,452,530"/>
+<area shape="rect" id="Node000013" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#accd110de308186b12698b08ce9eb6a5d" title="Retourne la valeur de iCalquePlan." alt="" coords="666,1033,911,1073"/>
+<area shape="poly" id="edge12_Node000004_Node000013" title=" " alt="" coords="456,529,465,624,476,687,492,757,516,828,547,898,588,963,612,992,639,1019,655,1030,652,1034,636,1023,608,996,583,966,542,901,511,830,487,758,471,688,460,624,451,530"/>
+<area shape="rect" id="Node000014" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#abc727fe73c02ad7104b8a3741c66645c" title="Retourne la valeur de iCalqueSuivPrec." alt="" coords="652,1097,925,1137"/>
+<area shape="poly" id="edge13_Node000004_Node000014" title=" " alt="" coords="455,529,460,634,469,705,484,784,507,865,539,945,583,1019,609,1052,639,1083,644,1087,641,1091,636,1087,605,1056,579,1022,535,947,502,867,479,785,464,706,455,634,450,530"/>
+<area shape="rect" id="Node000015" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a549bfb9f821044843722c049e0635abd" title="Retourne la valeur de iCalqueTitre." alt="" coords="665,105,912,145"/>
+<area shape="poly" id="edge14_Node000004_Node000015" title=" " alt="" coords="456,474,476,408,511,321,534,275,563,230,597,190,636,155,651,145,654,149,639,159,601,193,567,234,539,278,515,323,481,409,462,475"/>
+<area shape="rect" id="Node000016" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#aba4a79d6544bf312a6f3a329ad6e4233" title="Retourne la valeur de iCalqueVignettes." alt="" coords="649,169,928,209"/>
+<area shape="poly" id="edge15_Node000004_Node000016" title=" " alt="" coords="460,473,483,419,520,349,571,278,602,246,636,218,645,213,648,217,639,223,605,250,575,281,525,352,488,421,465,475"/>
+<area shape="rect" id="Node000017" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a3fdcd82d7db9396d4e89f8cce1fef7cb" title="Retourne la valeur de iCalqueVisiteAuto." alt="" coords="647,233,931,273"/>
+<area shape="poly" id="edge16_Node000004_Node000017" title=" " alt="" coords="465,473,492,430,531,378,579,326,607,303,636,282,648,276,650,281,639,287,610,307,583,330,535,382,497,433,470,476"/>
+<area shape="rect" id="Node000018" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a81fc8be3be405d5f63ce263dec29d665" title="Retourne la valeur de imagesFond." alt="" coords="665,297,912,337"/>
+<area shape="poly" id="edge17_Node000004_Node000018" title=" " alt="" coords="475,473,543,408,588,375,636,346,653,339,655,344,639,351,591,379,547,412,479,477"/>
+<area shape="rect" id="Node000019" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a7b2d1d574b7036451a7d0189bf3af83d" title="Retourne la valeur de iNombreImagesFond." alt="" coords="637,361,940,401"/>
+<area shape="poly" id="edge18_Node000004_Node000019" title=" " alt="" coords="501,472,565,441,636,411,669,402,671,407,638,417,567,446,504,477"/>
+<area shape="rect" id="Node000020" href="$leaflet_8js.html#a2ab7046ae25351b998b61260f82cabe8" title=" " alt="" coords="769,425,808,451"/>
+<area shape="poly" id="edge20_Node000004_Node000020" title=" " alt="" coords="580,472,637,461,755,440,756,446,638,466,581,477"/>
+</map>

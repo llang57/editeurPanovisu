@@ -1,0 +1,8 @@
+<map id="editeurpanovisu.RedimensionnementImagesDialogController.normaliserEnRGB" name="editeurpanovisu.RedimensionnementImagesDialogController.normaliserEnRGB">
+<area shape="rect" id="Node000001" title="Normalise un BufferedImage en RGB pour éviter l&#39;erreur &quot;Bogus input colorspace&quot;." alt="" coords="5,46,299,86"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a475e4f68a762b7b396dd16529ac9a829" title="Retourne le nom lisible du type de BufferedImage." alt="" coords="347,5,643,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="299,49,333,46,333,51,299,54"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="691,53,729,79"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="299,69,464,72,643,69,676,66,677,72,643,74,464,77,299,74"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="644,53,677,58,676,64,643,58"/>
+</map>

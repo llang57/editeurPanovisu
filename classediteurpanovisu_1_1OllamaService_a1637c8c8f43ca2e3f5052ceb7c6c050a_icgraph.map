@@ -1,0 +1,8 @@
+<map id="editeurpanovisu.OllamaService.getOpenRouterModel" name="editeurpanovisu.OllamaService.getOpenRouterModel">
+<area shape="rect" id="Node000001" title="Retourne le modèle OpenRouter actuellement configuré" alt="" coords="560,5,811,45"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1ConfigDialogController.html#a228e9366c0d6a335d6bb5e6b8a09ef78" title=" " alt="" coords="5,5,220,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="546,25,512,24,268,24,220,25,220,20,268,19,512,19,546,19"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1ConfigDialogController.html#a5762aa9e0ff14797e8293fc3c45c9761" title="Sauvegarde les modèles IA sélectionnés dans preferences.cfg." alt="" coords="268,33,512,73"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="547,41,513,44,512,39,546,36"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="254,42,220,39,221,34,255,37"/>
+</map>

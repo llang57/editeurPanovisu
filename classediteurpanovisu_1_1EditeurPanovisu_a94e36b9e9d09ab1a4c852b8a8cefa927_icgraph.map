@@ -1,0 +1,6 @@
+<map id="editeurpanovisu.EditeurPanovisu.genereVisite" name="editeurpanovisu.EditeurPanovisu.genereVisite">
+<area shape="rect" id="Node000001" title="Génère la visite virtuelle HTML complète." alt="" coords="325,29,609,69"/>
+<area shape="poly" id="edge2_Node000001_Node000001" title=" " alt="" coords="523,18,504,11,467,8,436,10,416,15,409,21,413,28,408,30,404,20,414,10,435,5,467,3,505,5,525,13"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1EditeurPanovisu.html#aa7a63625ea0406427eb7ae612cd72d4e" title="Crée un fichier ZIP contenant la visite virtuelle." alt="" coords="5,29,277,69"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="312,52,277,52,277,47,312,47"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="editeurpanovisu.GestionnairePlanController.valideHsplan" name="editeurpanovisu.GestionnairePlanController.valideHsplan">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,63,220,103"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1GestionnairePlanController.html#a2edd566ca304172fcd4ab5559dd1738c" title="Retourne la valeur de iPlanActuel." alt="" coords="268,5,483,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="204,60,269,46,270,51,206,65"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="356,70,395,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="220,80,342,80,342,85,220,85"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="356,119,395,145"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="220,100,343,123,342,129,219,105"/>
+</map>

@@ -1,0 +1,17 @@
+<map id="editeurpanovisu.EditeurPanovisu.setStrStyleCSS" name="editeurpanovisu.EditeurPanovisu.setStrStyleCSS">
+<area shape="rect" id="Node000001" title="Définit la valeur de strStyleCSS." alt="" coords="5,63,264,103"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1util_1_1SvgIconLoader.html#abfbfc1ff4bf72f51b52559dbb8e18867" title="Vide le cache des icônes (utile lors d&#39;un changement de thème)" alt="" coords="373,5,553,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="249,60,358,41,359,46,250,65"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="1087,121,1125,146"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="264,87,1073,129,1073,134,264,92"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1EditeurPanovisu.html#a43450ddf111546a6b22ad25c6ee0121e" title="Recharge toutes les icônes SVG de la barre d&#39;outils." alt="" coords="312,145,613,185"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="215,100,369,139,368,144,214,105"/>
+<area shape="poly" id="edge5_Node000004_Node000003" title=" " alt="" coords="613,155,1073,132,1073,138,614,161"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1EditeurPanovisu.html#a4e67885ed592d9bc0bfab8426d0c2ebd" title="Retourne la valeur de ivAjouterPlan." alt="" coords="665,171,925,211"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="614,174,651,177,651,182,614,180"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1EditeurPanovisu.html#a786c8cb886a5b0d7bef0bc311876a62e" title="Charge une icône SVG avec la taille spécifiée." alt="" coords="661,235,928,275"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="531,183,662,220,696,229,694,234,661,225,530,188"/>
+<area shape="poly" id="edge8_Node000006_Node000003" title=" " alt="" coords="889,232,927,220,1007,185,1073,149,1076,154,1010,189,929,225,891,237"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1EditeurPanovisu.html#ae9640dc5eb2933e07534464d6477d96c" title="Retourne la valeur de strRepertAppli." alt="" coords="976,235,1236,275"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="928,252,962,252,962,257,928,257"/>
+</map>

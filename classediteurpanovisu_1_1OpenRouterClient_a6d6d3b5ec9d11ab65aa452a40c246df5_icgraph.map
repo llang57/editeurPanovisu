@@ -1,0 +1,12 @@
+<map id="editeurpanovisu.OpenRouterClient.chat" name="editeurpanovisu.OpenRouterClient.chat">
+<area shape="rect" id="Node000001" title="Envoie un message au modèle et obtient une réponse." alt="" coords="315,101,523,141"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="467,90,450,83,419,80,391,82,375,87,368,93,371,100,366,102,363,92,372,82,390,77,419,75,451,77,469,85"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1OpenRouterClient.html#a2d325a1bbe2af91ea6cbf0262130bd03" title="Envoie un message avec un contexte système." alt="" coords="32,5,240,45"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="362,98,266,60,225,48,227,43,268,55,364,93"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1OpenRouterClient.html#abd04c3bcd52a589bcf2efcc36a23b650" title="Envoie un message de manière asynchrone." alt="" coords="32,69,240,109"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="301,111,240,104,241,98,301,105"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1OpenRouterClient.html#a8771d1fc79129ff298c76aff05edd267" title="Génère des suggestions de description pour un panorama." alt="" coords="5,133,267,173"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="302,137,267,141,266,136,301,132"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1OpenRouterClient.html#ad0e45a62c406dae1c0e9aa17e1fe335f" title="Suggère des hotspots pertinents pour un panorama." alt="" coords="32,197,240,237"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="364,149,268,188,227,200,225,195,266,183,362,145"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="editeurpanovisu.OllamaService.getModelesOllamaDisponibles" name="editeurpanovisu.OllamaService.getModelesOllamaDisponibles">
+<area shape="rect" id="Node000001" title="Récupère la liste des modèles Ollama installés localement." alt="" coords="268,5,519,45"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1ConfigDialogController.html#a228e9366c0d6a335d6bb5e6b8a09ef78" title=" " alt="" coords="5,5,220,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="254,28,220,28,220,23,254,23"/>
+</map>

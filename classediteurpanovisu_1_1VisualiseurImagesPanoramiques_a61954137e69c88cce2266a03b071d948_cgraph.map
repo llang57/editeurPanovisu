@@ -1,0 +1,14 @@
+<map id="editeurpanovisu.VisualiseurImagesPanoramiques.setNomImagePanoramique" name="editeurpanovisu.VisualiseurImagesPanoramiques.setNomImagePanoramique">
+<area shape="rect" id="Node000001" title="Définit l&#39;image panoramique à afficher à partir d&#39;un chemin." alt="" coords="5,138,348,178"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html#aa6e3390d3a749d9e996d8018c0398a18" title="Retourne la valeur de nomFichierPanoramique." alt="" coords="431,5,692,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="223,135,303,103,395,70,426,61,427,66,397,75,305,108,225,140"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html#a522b4603bd26534742ebf6d00aed9752" title="Transforme une image rectangulaire en projection équirectangulaire." alt="" coords="396,109,727,149"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="348,142,382,140,382,145,349,148"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="775,173,813,199"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="349,163,761,182,761,187,348,168"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html#a7bcf9b8c5922a4b663161f09ead21eb3" title="Définit la valeur de nomFichierPanoramique." alt="" coords="431,224,691,279"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="261,175,435,218,434,223,259,181"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="518,109,515,99,522,90,538,84,561,82,588,85,603,92,601,97,587,90,561,87,539,89,526,94,521,100,523,108"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="652,146,727,165,762,174,761,179,726,170,650,151"/>
+<area shape="poly" id="edge7_Node000005_Node000004" title=" " alt="" coords="659,221,761,192,762,197,660,226"/>
+</map>

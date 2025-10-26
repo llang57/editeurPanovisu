@@ -1,0 +1,25 @@
+<map id="editeurpanovisu.GestionnaireInterfaceController.miseAJourRadarSeul" name="editeurpanovisu.GestionnaireInterfaceController.miseAJourRadarSeul">
+<area shape="rect" id="Node000001" title="Met à jour uniquement le radar sur la carte sans toucher aux marqueurs ni au centrage." alt="" coords="5,296,284,336"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1NavigateurCarte.html#a4795e11db281b52b275c715f101eff61" title="Affiche un radar sur la carte (champ de vision)" alt="" coords="376,5,579,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="153,295,177,247,216,184,267,118,297,88,331,62,362,45,364,50,333,66,301,92,271,121,220,187,182,249,157,297"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="671,70,709,95"/>
+<area shape="poly" id="edge9_Node000001_Node000003" title=" " alt="" coords="154,295,180,253,219,200,270,147,299,124,331,106,374,88,419,77,465,70,511,66,594,68,657,75,657,80,594,73,511,72,466,75,420,82,375,93,333,110,302,129,273,151,223,203,184,256,159,297"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#aa50148f02d5e1a1045b60ea84d00392e" title="Retourne la valeur de coordCentreCarte." alt="" coords="335,120,619,160"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="164,294,234,232,280,198,331,170,349,162,351,167,333,174,283,203,237,236,167,298"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#aa57a7a4c75ca935c65f8a935e2d01602" title="Retourne la valeur de opaciteRadarCarte." alt="" coords="332,184,623,224"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="185,294,253,263,331,233,361,225,362,230,333,239,255,268,188,298"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a9504fc44953cb77eeb0382aa80b90f59" title="Retourne la valeur de strCouleurFondRadarCarte." alt="" coords="359,249,595,303"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="284,297,345,289,345,295,284,302"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#ad7a31f393a284b67d32604898cd0732e" title="Retourne la valeur de strCouleurLigneRadarCarte." alt="" coords="359,327,595,382"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="284,330,345,337,345,342,284,335"/>
+<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a39fca2c2ee4d82e13b82f23f0a08aa96" title="Retourne la valeur de tailleRadarCarte." alt="" coords="340,407,615,447"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="190,334,256,363,333,391,367,401,365,406,331,396,254,367,187,338"/>
+<area shape="rect" id="Node000009" href="$classediteurpanovisu_1_1NavigateurCarte.html#ac4abfa0b8cebaaa717398c9dc48f5bc0" title="Indique si la carte est prête (initialisée)" alt="" coords="376,471,579,511"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="168,335,238,395,284,428,333,456,364,468,362,473,331,461,281,433,234,400,165,339"/>
+<area shape="rect" id="Node000010" href="$classediteurpanovisu_1_1NavigateurCarte.html#a2a4620d2b0d62aef80e48e934b720efc" title="Récupère les coordonnées actuelles du centre de la carte." alt="" coords="376,535,579,575"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="160,335,187,375,226,425,276,477,304,500,333,520,364,534,362,539,331,525,300,505,272,481,222,429,182,378,156,338"/>
+<area shape="rect" id="Node000011" href="$classediteurpanovisu_1_1NavigateurCarte.html#a7f9d3285b582c7eb268ecd47f2a65211" title="Retire le radar de la carte." alt="" coords="376,599,579,639"/>
+<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="156,335,179,386,216,455,268,525,299,557,333,584,364,600,362,605,331,589,296,561,264,529,212,457,174,389,151,337"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="555,43,623,61,658,71,657,76,622,67,554,48"/>
+<area shape="poly" id="edge12_Node000011_Node000003" title=" " alt="" coords="578,610,601,600,621,585,642,549,658,495,670,429,678,356,685,213,686,109,692,109,691,213,683,356,675,429,663,496,647,551,625,588,604,605,580,615"/>
+</map>

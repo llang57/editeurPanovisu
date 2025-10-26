@@ -1,0 +1,231 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>EditeurPanovisu:  Fichier source de src/editeurpanovisu/ApiKeysConfig.java</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">EditeurPanovisu<span id="projectnumber">&#160;3.1.0</span>
+   </div>
+   <div id="projectbrief">Éditeur de visites virtuelles 360° Panovisu</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('ApiKeysConfig_8java_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Chargement...</div>
+<div class="SRStatus" id="Searching">Recherche...</div>
+<div class="SRStatus" id="NoMatches">Aucune correspondance</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">ApiKeysConfig.java</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="ApiKeysConfig_8java.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="keyword">package </span>editeurpanovisu;</div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keyword">import</span> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">java</a>.io.FileInputStream;</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keyword">import</span> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">java</a>.io.IOException;</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">import</span> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">java</a>.io.InputStream;</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">import</span> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">java</a>.util.Properties;</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="foldopen" id="foldopen00014" data-start="{" data-end="};">
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1ApiKeysConfig.html">   14</a></span><span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_class" href="classediteurpanovisu_1_1ApiKeysConfig.html">ApiKeysConfig</a> {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1ApiKeysConfig.html#adc471b8b017388ee17e16ec14d9b3b3b">   16</a></span>    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_variable" href="classediteurpanovisu_1_1ApiKeysConfig.html#adc471b8b017388ee17e16ec14d9b3b3b">CONFIG_FILE</a> = <span class="stringliteral">&quot;api-keys.properties&quot;</span>;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1ApiKeysConfig.html#aeac59dcd10352981f1b68e93897ee860">   17</a></span>    <span class="keyword">private</span> <span class="keyword">static</span> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Properties</a> <a class="code hl_variable" href="classediteurpanovisu_1_1ApiKeysConfig.html#aeac59dcd10352981f1b68e93897ee860">properties</a> = <span class="keyword">null</span>;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    </div>
+<div class="foldopen" id="foldopen00022" data-start="{" data-end="}">
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1ApiKeysConfig.html#a7babcdd2b84a59ec6088d85c66d00551">   22</a></span>    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1ApiKeysConfig.html#a7babcdd2b84a59ec6088d85c66d00551">loadProperties</a>() {</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="classediteurpanovisu_1_1ApiKeysConfig.html#aeac59dcd10352981f1b68e93897ee860">properties</a> == <span class="keyword">null</span>) {</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>            <a class="code hl_variable" href="classediteurpanovisu_1_1ApiKeysConfig.html#aeac59dcd10352981f1b68e93897ee860">properties</a> = <span class="keyword">new</span> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Properties</a>();</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>            </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>            <span class="comment">// Essayer de charger depuis le fichier système d&#39;abord</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>            <span class="keywordflow">try</span> (<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">FileInputStream</a> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">fis</a> = <span class="keyword">new</span> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">FileInputStream</a>(<a class="code hl_variable" href="classediteurpanovisu_1_1ApiKeysConfig.html#adc471b8b017388ee17e16ec14d9b3b3b">CONFIG_FILE</a>)) {</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>                <a class="code hl_variable" href="classediteurpanovisu_1_1ApiKeysConfig.html#aeac59dcd10352981f1b68e93897ee860">properties</a>.load(<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">fis</a>);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>                <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">System</a>.out.println(<span class="stringliteral">&quot;✅ Configuration API chargée depuis &quot;</span> + <a class="code hl_variable" href="classediteurpanovisu_1_1ApiKeysConfig.html#adc471b8b017388ee17e16ec14d9b3b3b">CONFIG_FILE</a>);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>            } <span class="keywordflow">catch</span> (<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">IOException</a> <a class="code hl_variable" href="leaflet_8js.html#ab5902775854a8b8440bcd25e0fe1c120">e</a>) {</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>                <span class="comment">// Fichier système non trouvé, essayer dans les ressources</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>                <span class="keywordflow">try</span> (<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">InputStream</a> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">is</a> = <a class="code hl_class" href="classediteurpanovisu_1_1ApiKeysConfig.html">ApiKeysConfig</a>.class.getClassLoader().getResourceAsStream(<a class="code hl_variable" href="classediteurpanovisu_1_1ApiKeysConfig.html#adc471b8b017388ee17e16ec14d9b3b3b">CONFIG_FILE</a>)) {</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>                    <span class="keywordflow">if</span> (<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">is</a> != <span class="keyword">null</span>) {</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>                        <a class="code hl_variable" href="classediteurpanovisu_1_1ApiKeysConfig.html#aeac59dcd10352981f1b68e93897ee860">properties</a>.load(<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">is</a>);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>                        <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">System</a>.out.println(<span class="stringliteral">&quot;✅ Configuration API chargée depuis les ressources&quot;</span>);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>                    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>                        <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">System</a>.err.println(<span class="stringliteral">&quot;⚠️ Fichier &quot;</span> + <a class="code hl_variable" href="classediteurpanovisu_1_1ApiKeysConfig.html#adc471b8b017388ee17e16ec14d9b3b3b">CONFIG_FILE</a> + <span class="stringliteral">&quot; non trouvé.&quot;</span>);</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>                        <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">System</a>.err.println(<span class="stringliteral">&quot;   Veuillez créer ce fichier à partir de &quot;</span> + <a class="code hl_variable" href="classediteurpanovisu_1_1ApiKeysConfig.html#adc471b8b017388ee17e16ec14d9b3b3b">CONFIG_FILE</a> + <span class="stringliteral">&quot;.template&quot;</span>);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>                    }</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>                } <span class="keywordflow">catch</span> (<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">IOException</a> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">ex</a>) {</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>                    <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">System</a>.err.println(<span class="stringliteral">&quot;❌ Erreur lors du chargement de la configuration API: &quot;</span> + <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">ex</a>.getMessage());</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>                }</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>            }</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        }</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    }</div>
+</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    </div>
+<div class="foldopen" id="foldopen00051" data-start="{" data-end="}">
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1ApiKeysConfig.html#a9e2b14331cf4892ef3078733c4c543ed">   51</a></span>    <span class="keyword">public</span> <span class="keyword">static</span> <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_function" href="classediteurpanovisu_1_1ApiKeysConfig.html#a9e2b14331cf4892ef3078733c4c543ed">getLocationIQApiKey</a>() {</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <a class="code hl_function" href="classediteurpanovisu_1_1ApiKeysConfig.html#a7babcdd2b84a59ec6088d85c66d00551">loadProperties</a>();</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1ApiKeysConfig.html#aeac59dcd10352981f1b68e93897ee860">properties</a>.getProperty(<span class="stringliteral">&quot;locationiq.api.key&quot;</span>, <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    }</div>
+</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    </div>
+<div class="foldopen" id="foldopen00060" data-start="{" data-end="}">
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1ApiKeysConfig.html#a904967c4ca879709082fd0b58c115562">   60</a></span>    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">boolean</span> <a class="code hl_function" href="classediteurpanovisu_1_1ApiKeysConfig.html#a904967c4ca879709082fd0b58c115562">hasLocationIQApiKey</a>() {</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">key</a> = <a class="code hl_function" href="classediteurpanovisu_1_1ApiKeysConfig.html#a9e2b14331cf4892ef3078733c4c543ed">getLocationIQApiKey</a>();</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">key</a> != <span class="keyword">null</span> &amp;&amp; !<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">key</a>.isEmpty() &amp;&amp; !<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">key</a>.equals(<span class="stringliteral">&quot;YOUR_API_KEY_HERE&quot;</span>);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    }</div>
+</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    </div>
+<div class="foldopen" id="foldopen00069" data-start="{" data-end="}">
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1ApiKeysConfig.html#a918cc5fdfc57722e40aef9f055a7f6b4">   69</a></span>    <span class="keyword">public</span> <span class="keyword">static</span> <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_function" href="classediteurpanovisu_1_1ApiKeysConfig.html#a918cc5fdfc57722e40aef9f055a7f6b4">getHuggingFaceApiKey</a>() {</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        <a class="code hl_function" href="classediteurpanovisu_1_1ApiKeysConfig.html#a7babcdd2b84a59ec6088d85c66d00551">loadProperties</a>();</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1ApiKeysConfig.html#aeac59dcd10352981f1b68e93897ee860">properties</a>.getProperty(<span class="stringliteral">&quot;huggingface.api.key&quot;</span>, <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    }</div>
+</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    </div>
+<div class="foldopen" id="foldopen00078" data-start="{" data-end="}">
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1ApiKeysConfig.html#a2294156977bc950d191de4ffd2364ee1">   78</a></span>    <span class="keyword">public</span> <span class="keyword">static</span> <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_function" href="classediteurpanovisu_1_1ApiKeysConfig.html#a2294156977bc950d191de4ffd2364ee1">getHuggingFaceModel</a>() {</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        <a class="code hl_function" href="classediteurpanovisu_1_1ApiKeysConfig.html#a7babcdd2b84a59ec6088d85c66d00551">loadProperties</a>();</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1ApiKeysConfig.html#aeac59dcd10352981f1b68e93897ee860">properties</a>.getProperty(<span class="stringliteral">&quot;huggingface.model&quot;</span>, <span class="stringliteral">&quot;gpt2&quot;</span>);</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    }</div>
+</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    </div>
+<div class="foldopen" id="foldopen00087" data-start="{" data-end="}">
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1ApiKeysConfig.html#a048ff9cd5ae4cb7c5738168b4234f333">   87</a></span>    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">boolean</span> <a class="code hl_function" href="classediteurpanovisu_1_1ApiKeysConfig.html#a048ff9cd5ae4cb7c5738168b4234f333">hasHuggingFaceApiKey</a>() {</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">key</a> = <a class="code hl_function" href="classediteurpanovisu_1_1ApiKeysConfig.html#a918cc5fdfc57722e40aef9f055a7f6b4">getHuggingFaceApiKey</a>();</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">key</a> != <span class="keyword">null</span> &amp;&amp; !<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">key</a>.isEmpty() &amp;&amp; !<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">key</a>.startsWith(<span class="stringliteral">&quot;YOUR_&quot;</span>);</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    }</div>
+</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    </div>
+<div class="foldopen" id="foldopen00096" data-start="{" data-end="}">
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1ApiKeysConfig.html#af9241a594f0e5419b8d0f8b338e38ae9">   96</a></span>    <span class="keyword">public</span> <span class="keyword">static</span> <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_function" href="classediteurpanovisu_1_1ApiKeysConfig.html#af9241a594f0e5419b8d0f8b338e38ae9">getOpenRouterApiKey</a>() {</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        <a class="code hl_function" href="classediteurpanovisu_1_1ApiKeysConfig.html#a7babcdd2b84a59ec6088d85c66d00551">loadProperties</a>();</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1ApiKeysConfig.html#aeac59dcd10352981f1b68e93897ee860">properties</a>.getProperty(<span class="stringliteral">&quot;openrouter.api.key&quot;</span>, <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    }</div>
+</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    </div>
+<div class="foldopen" id="foldopen00105" data-start="{" data-end="}">
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1ApiKeysConfig.html#a07437012271cfa9737d8b07351e80c2a">  105</a></span>    <span class="keyword">public</span> <span class="keyword">static</span> <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_function" href="classediteurpanovisu_1_1ApiKeysConfig.html#a07437012271cfa9737d8b07351e80c2a">getOpenRouterModel</a>() {</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        <a class="code hl_function" href="classediteurpanovisu_1_1ApiKeysConfig.html#a7babcdd2b84a59ec6088d85c66d00551">loadProperties</a>();</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1ApiKeysConfig.html#aeac59dcd10352981f1b68e93897ee860">properties</a>.getProperty(<span class="stringliteral">&quot;openrouter.model&quot;</span>, <span class="stringliteral">&quot;meta-llama/llama-3.2-3b-instruct:free&quot;</span>);</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    }</div>
+</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    </div>
+<div class="foldopen" id="foldopen00114" data-start="{" data-end="}">
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1ApiKeysConfig.html#afa2de8aa5827534e73f956a567462ea8">  114</a></span>    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">boolean</span> <a class="code hl_function" href="classediteurpanovisu_1_1ApiKeysConfig.html#afa2de8aa5827534e73f956a567462ea8">hasOpenRouterApiKey</a>() {</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">key</a> = <a class="code hl_function" href="classediteurpanovisu_1_1ApiKeysConfig.html#af9241a594f0e5419b8d0f8b338e38ae9">getOpenRouterApiKey</a>();</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">key</a> != <span class="keyword">null</span> &amp;&amp; !<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">key</a>.isEmpty() &amp;&amp; !<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">key</a>.startsWith(<span class="stringliteral">&quot;YOUR_&quot;</span>);</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    }</div>
+</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    </div>
+<div class="foldopen" id="foldopen00125" data-start="{" data-end="}">
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1ApiKeysConfig.html#aaf50a75e47fc89d256e817ec6c3d44f4">  125</a></span>    <span class="keyword">public</span> <span class="keyword">static</span> <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_function" href="classediteurpanovisu_1_1ApiKeysConfig.html#aaf50a75e47fc89d256e817ec6c3d44f4">getProperty</a>(<a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">key</a>, <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">defaultValue</a>) {</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        <a class="code hl_function" href="classediteurpanovisu_1_1ApiKeysConfig.html#a7babcdd2b84a59ec6088d85c66d00551">loadProperties</a>();</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classediteurpanovisu_1_1ApiKeysConfig.html#aeac59dcd10352981f1b68e93897ee860">properties</a>.getProperty(<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">key</a>, <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">defaultValue</a>);</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    }</div>
+</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>}</div>
+</div>
+<div class="ttc" id="aOpenLayers_8js_html_a4ca754488880c6622cdd0e257fe5f5ea"><div class="ttname"><a href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a></div><div class="ttdeci">OpenLayers String</div><div class="ttdef"><b>Definition</b> <a href="OpenLayers_8js_source.html#l00059">OpenLayers.js:59</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1ApiKeysConfig_html"><div class="ttname"><a href="classediteurpanovisu_1_1ApiKeysConfig.html">editeurpanovisu.ApiKeysConfig</a></div><div class="ttdoc">Gestionnaire de configuration pour les clés API Charge les clés depuis le fichier api-keys....</div><div class="ttdef"><b>Definition</b> <a href="ApiKeysConfig_8java_source.html#l00014">ApiKeysConfig.java:14</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1ApiKeysConfig_html_a048ff9cd5ae4cb7c5738168b4234f333"><div class="ttname"><a href="classediteurpanovisu_1_1ApiKeysConfig.html#a048ff9cd5ae4cb7c5738168b4234f333">editeurpanovisu.ApiKeysConfig.hasHuggingFaceApiKey</a></div><div class="ttdeci">static boolean hasHuggingFaceApiKey()</div><div class="ttdoc">Vérifie si une clé API Hugging Face est configurée.</div><div class="ttdef"><b>Definition</b> <a href="ApiKeysConfig_8java_source.html#l00087">ApiKeysConfig.java:87</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1ApiKeysConfig_html_a07437012271cfa9737d8b07351e80c2a"><div class="ttname"><a href="classediteurpanovisu_1_1ApiKeysConfig.html#a07437012271cfa9737d8b07351e80c2a">editeurpanovisu.ApiKeysConfig.getOpenRouterModel</a></div><div class="ttdeci">static String getOpenRouterModel()</div><div class="ttdoc">Récupère le modèle OpenRouter configuré</div><div class="ttdef"><b>Definition</b> <a href="ApiKeysConfig_8java_source.html#l00105">ApiKeysConfig.java:105</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1ApiKeysConfig_html_a2294156977bc950d191de4ffd2364ee1"><div class="ttname"><a href="classediteurpanovisu_1_1ApiKeysConfig.html#a2294156977bc950d191de4ffd2364ee1">editeurpanovisu.ApiKeysConfig.getHuggingFaceModel</a></div><div class="ttdeci">static String getHuggingFaceModel()</div><div class="ttdoc">Récupère le modèle Hugging Face configuré</div><div class="ttdef"><b>Definition</b> <a href="ApiKeysConfig_8java_source.html#l00078">ApiKeysConfig.java:78</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1ApiKeysConfig_html_a7babcdd2b84a59ec6088d85c66d00551"><div class="ttname"><a href="classediteurpanovisu_1_1ApiKeysConfig.html#a7babcdd2b84a59ec6088d85c66d00551">editeurpanovisu.ApiKeysConfig.loadProperties</a></div><div class="ttdeci">static void loadProperties()</div><div class="ttdoc">Charge le fichier de configuration des clés API.</div><div class="ttdef"><b>Definition</b> <a href="ApiKeysConfig_8java_source.html#l00022">ApiKeysConfig.java:22</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1ApiKeysConfig_html_a904967c4ca879709082fd0b58c115562"><div class="ttname"><a href="classediteurpanovisu_1_1ApiKeysConfig.html#a904967c4ca879709082fd0b58c115562">editeurpanovisu.ApiKeysConfig.hasLocationIQApiKey</a></div><div class="ttdeci">static boolean hasLocationIQApiKey()</div><div class="ttdoc">Vérifie si une clé API LocationIQ est configurée.</div><div class="ttdef"><b>Definition</b> <a href="ApiKeysConfig_8java_source.html#l00060">ApiKeysConfig.java:60</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1ApiKeysConfig_html_a918cc5fdfc57722e40aef9f055a7f6b4"><div class="ttname"><a href="classediteurpanovisu_1_1ApiKeysConfig.html#a918cc5fdfc57722e40aef9f055a7f6b4">editeurpanovisu.ApiKeysConfig.getHuggingFaceApiKey</a></div><div class="ttdeci">static String getHuggingFaceApiKey()</div><div class="ttdoc">Récupère la clé API Hugging Face.</div><div class="ttdef"><b>Definition</b> <a href="ApiKeysConfig_8java_source.html#l00069">ApiKeysConfig.java:69</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1ApiKeysConfig_html_a9e2b14331cf4892ef3078733c4c543ed"><div class="ttname"><a href="classediteurpanovisu_1_1ApiKeysConfig.html#a9e2b14331cf4892ef3078733c4c543ed">editeurpanovisu.ApiKeysConfig.getLocationIQApiKey</a></div><div class="ttdeci">static String getLocationIQApiKey()</div><div class="ttdoc">Récupère la clé API LocationIQ.</div><div class="ttdef"><b>Definition</b> <a href="ApiKeysConfig_8java_source.html#l00051">ApiKeysConfig.java:51</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1ApiKeysConfig_html_aaf50a75e47fc89d256e817ec6c3d44f4"><div class="ttname"><a href="classediteurpanovisu_1_1ApiKeysConfig.html#aaf50a75e47fc89d256e817ec6c3d44f4">editeurpanovisu.ApiKeysConfig.getProperty</a></div><div class="ttdeci">static String getProperty(String key, String defaultValue)</div><div class="ttdoc">Récupère une propriété personnalisée.</div><div class="ttdef"><b>Definition</b> <a href="ApiKeysConfig_8java_source.html#l00125">ApiKeysConfig.java:125</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1ApiKeysConfig_html_adc471b8b017388ee17e16ec14d9b3b3b"><div class="ttname"><a href="classediteurpanovisu_1_1ApiKeysConfig.html#adc471b8b017388ee17e16ec14d9b3b3b">editeurpanovisu.ApiKeysConfig.CONFIG_FILE</a></div><div class="ttdeci">static final String CONFIG_FILE</div><div class="ttdef"><b>Definition</b> <a href="ApiKeysConfig_8java_source.html#l00016">ApiKeysConfig.java:16</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1ApiKeysConfig_html_aeac59dcd10352981f1b68e93897ee860"><div class="ttname"><a href="classediteurpanovisu_1_1ApiKeysConfig.html#aeac59dcd10352981f1b68e93897ee860">editeurpanovisu.ApiKeysConfig.properties</a></div><div class="ttdeci">static Properties properties</div><div class="ttdef"><b>Definition</b> <a href="ApiKeysConfig_8java_source.html#l00017">ApiKeysConfig.java:17</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1ApiKeysConfig_html_af9241a594f0e5419b8d0f8b338e38ae9"><div class="ttname"><a href="classediteurpanovisu_1_1ApiKeysConfig.html#af9241a594f0e5419b8d0f8b338e38ae9">editeurpanovisu.ApiKeysConfig.getOpenRouterApiKey</a></div><div class="ttdeci">static String getOpenRouterApiKey()</div><div class="ttdoc">Récupère la clé API OpenRouter.</div><div class="ttdef"><b>Definition</b> <a href="ApiKeysConfig_8java_source.html#l00096">ApiKeysConfig.java:96</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1ApiKeysConfig_html_afa2de8aa5827534e73f956a567462ea8"><div class="ttname"><a href="classediteurpanovisu_1_1ApiKeysConfig.html#afa2de8aa5827534e73f956a567462ea8">editeurpanovisu.ApiKeysConfig.hasOpenRouterApiKey</a></div><div class="ttdeci">static boolean hasOpenRouterApiKey()</div><div class="ttdoc">Vérifie si une clé API OpenRouter est configurée.</div><div class="ttdef"><b>Definition</b> <a href="ApiKeysConfig_8java_source.html#l00114">ApiKeysConfig.java:114</a></div></div>
+<div class="ttc" id="aleaflet_8js_html_a2ecc0b03b1eaf4f1ca537029a6f89ac0"><div class="ttname"><a href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">k</a></div><div class="ttdeci">function k(t, e, i, n)</div><div class="ttdef"><b>Definition</b> <a href="leaflet_8js_source.html#l00005">leaflet.js:5</a></div></div>
+<div class="ttc" id="aleaflet_8js_html_ab5902775854a8b8440bcd25e0fe1c120"><div class="ttname"><a href="leaflet_8js.html#ab5902775854a8b8440bcd25e0fe1c120">e</a></div><div class="ttdeci">var e</div><div class="ttdef"><b>Definition</b> <a href="leaflet_8js_source.html#l00005">leaflet.js:5</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_184160a943439c2c782fe244782aeddc.html">editeurpanovisu</a></li><li class="navelem"><a class="el" href="ApiKeysConfig_8java.html">ApiKeysConfig.java</a></li>
+    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

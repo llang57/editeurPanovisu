@@ -1,0 +1,20 @@
+<map id="editeurpanovisu.util.SvgIconLoader.loadSvgIcon" name="editeurpanovisu.util.SvgIconLoader.loadSvgIcon">
+<area shape="rect" id="Node000001" title="Charge une icône SVG avec la couleur par défaut." alt="" coords="5,70,185,110"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="965,162,1004,187"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="159,68,302,33,395,17,497,6,604,4,713,12,766,22,819,36,870,53,919,76,938,90,954,109,976,147,971,150,950,112,935,94,916,81,868,58,817,41,765,27,712,18,604,9,498,11,396,22,304,38,160,73"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1util_1_1SvgIconLoader.html#ab0e96e5ebb4dce78ea938d9adca21ce2" title="Charge une icône SVG et la convertit en ImageView avec dimensions personnalisées." alt="" coords="233,121,413,161"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="186,108,221,115,219,121,185,113"/>
+<area shape="poly" id="edge7_Node000003_Node000002" title=" " alt="" coords="413,127,461,122,531,114,591,103,694,82,743,77,795,79,853,89,918,111,946,128,968,149,964,153,943,132,916,115,851,94,795,84,744,83,695,88,592,108,532,119,462,128,414,132"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1util_1_1SvgIconLoader.html#a8cf07e331f244b74d124210c1569d3b4" title="Convertit un SVG en BufferedImage PNG avec Batik (dimensions personnalisées)" alt="" coords="711,125,917,165"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="414,139,697,141,697,147,414,144"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1util_1_1SvgIconLoader.html#af5cfc8e00f14b39cc7972184362e819c" title="Détecte la couleur appropriée selon le thème actif (clair ou foncé) Fonctionne avec tous les thèmes :..." alt="" coords="464,178,660,218"/>
+<area shape="poly" id="edge5_Node000003_Node000005" title=" " alt="" coords="408,159,466,173,464,178,407,164"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1util_1_1SvgIconLoader.html#ab9fdb534790cb51ab1b57c506d003289" title="Fallback: charge l&#39;icône PNG si le SVG n&#39;est pas disponible." alt="" coords="461,242,663,282"/>
+<area shape="poly" id="edge8_Node000003_Node000006" title=" " alt="" coords="352,159,402,194,463,228,479,235,477,240,460,233,399,198,349,163"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="918,160,953,166,952,172,917,166"/>
+<area shape="poly" id="edge6_Node000005_Node000002" title=" " alt="" coords="660,190,952,174,952,179,660,196"/>
+<area shape="poly" id="edge9_Node000006_Node000002" title=" " alt="" coords="662,244,784,222,917,193,951,183,953,188,918,198,786,228,663,250"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1util_1_1SvgIconLoader.html#af546932dfbd067f7700bd0832d5efb64" title="Mappe les noms de fichiers SVG vers les noms PNG existants." alt="" coords="721,290,907,330"/>
+<area shape="poly" id="edge10_Node000006_Node000007" title=" " alt="" coords="663,279,708,287,707,293,662,284"/>
+<area shape="poly" id="edge11_Node000007_Node000002" title=" " alt="" coords="885,288,916,270,947,235,969,198,974,201,952,238,919,274,887,293"/>
+</map>

@@ -1,0 +1,14 @@
+<map id="editeurpanovisu.TransformationsPanoramique.cube2rect" name="editeurpanovisu.TransformationsPanoramique.cube2rect">
+<area shape="rect" id="Node000001" title="Transformation cube vers équirectangulaire (version CPU originale)" alt="" coords="5,118,241,158"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1TransformationsPanoramique.html#af0f384302a39c7d25e2e1606038d07d8" title="Version CPU de cube2rect Convertit les 6 faces d&#39;un cube en image équirectangulaire." alt="" coords="289,89,525,129"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="241,123,275,120,276,125,242,128"/>
+<area shape="rect" id="Node000005" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="573,153,612,179"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="242,142,560,161,560,167,242,148"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="573,5,612,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="448,86,560,31,562,35,450,91"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#afa3c32d9f7f168b0e59ddc33ec31bb84" title=" " alt="" coords="573,55,612,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="497,86,559,72,560,77,498,91"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="473,126,561,154,560,159,472,131"/>
+<area shape="rect" id="Node000006" href="$leaflet_8js.html#a873cae0273c5a7d9673544bbe0a6fe8b" title=" " alt="" coords="573,104,612,129"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="526,111,560,113,559,118,525,116"/>
+</map>

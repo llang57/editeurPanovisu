@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.RedimensionnementImagesDialogController.lancerTraitement" name="editeurpanovisu.RedimensionnementImagesDialogController.lancerTraitement">
+<area shape="rect" id="Node000001" title="Lance le traitement des images." alt="" coords="680,5,969,45"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a3537215c3ae75ac08746b31652a789d4" title="Crée les boutons d&#39;action (Valider, Annuler)." alt="" coords="325,5,632,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="666,28,632,28,632,23,666,23"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a182869c52f51180d4809f7e0f1e2fcec" title="Affiche la fenêtre de dialogue de redimensionnement d&#39;images." alt="" coords="5,5,277,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="312,28,278,28,278,23,312,23"/>
+</map>

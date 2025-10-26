@@ -1,0 +1,12 @@
+<map id="editeurpanovisu.CartePanoVisu.ajouteMarqueur" name="editeurpanovisu.CartePanoVisu.ajouteMarqueur">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,99,203,139"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1CartePanoVisu.html#ac6fb89f896ceeb2e13fd710808f4e78b" title="Retourne la valeur de iNombreMarqueur." alt="" coords="251,5,448,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="149,96,250,55,271,47,273,52,252,60,151,101"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1CartePanoVisu.html#ab7ce50311349fdd981130c509f6a4836" title="Retourne la valeur de marqueurs." alt="" coords="251,69,448,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="203,104,237,100,238,105,203,110"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="496,163,535,189"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="203,130,483,169,482,174,202,135"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1CartePanoVisu.html#a80582095f7604330d92b78a6328e2a9d" title="Définit la valeur de iNombreMarqueur." alt="" coords="251,184,448,224"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="163,136,279,177,277,182,161,141"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="448,185,482,179,483,184,448,190"/>
+</map>

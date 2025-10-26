@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.NavigateurPanoramique.addCamera" name="editeurpanovisu.NavigateurPanoramique.addCamera">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,35,208,75"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1NavigateurPanoramique.html#a3fcaf465d4e16c3f8a43b953ac3ef3f0" title="Retourne le champ de vision (Field of View) actuel." alt="" coords="256,5,459,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="208,40,242,36,243,41,208,45"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="338,70,377,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="208,63,325,76,324,82,208,69"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="editeurpanovisu.NavigateurPanoramique.setFov" name="editeurpanovisu.NavigateurPanoramique.setFov">
+<area shape="rect" id="Node000001" title="Définit le champ de vision (Field of View)" alt="" coords="5,69,208,109"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1NavigateurPanoramique.html#ad21961adb0b1d9ddaea56be891a99e3a" title="Retourne le champ de vision maximum autorisé" alt="" coords="256,5,459,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="185,67,265,46,266,51,186,72"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1NavigateurPanoramique.html#a54d8f24c8bff3f701e5d5871b1a723b4" title="Retourne le champ de vision minimum autorisé" alt="" coords="256,69,459,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="208,87,242,87,242,92,208,92"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="338,134,377,159"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="195,107,325,137,324,142,194,112"/>
+</map>

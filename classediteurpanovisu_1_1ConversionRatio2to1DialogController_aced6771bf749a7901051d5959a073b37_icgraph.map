@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.ConversionRatio2to1DialogController.lancerTraitement" name="editeurpanovisu.ConversionRatio2to1DialogController.lancerTraitement">
+<area shape="rect" id="Node000001" title="Lance le traitement de conversion pour tous les fichiers." alt="" coords="567,5,801,60"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#aac5a46f9a3affb943ff5e103fd098b48" title="Crée les boutons d&#39;action (Valider, Annuler)." alt="" coords="292,5,519,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="553,35,519,35,519,30,553,30"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#a44e7c111f70ca443dad83445f187d3f4" title="Affiche la fenêtre de dialogue de conversion au ratio 2:1." alt="" coords="5,5,244,60"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="278,35,244,35,244,30,278,30"/>
+</map>

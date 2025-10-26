@@ -1,0 +1,12 @@
+<map id="editeurpanovisu.EditeurPanovisu.setStrTypeFichierTransf" name="editeurpanovisu.EditeurPanovisu.setStrTypeFichierTransf">
+<area shape="rect" id="Node000001" title="Définit la valeur de strTypeFichierTransf." alt="" coords="1053,5,1312,45"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1EquiCubeDialogController.html#a05e62237b5363eba15018189320cf5db" title="Affiche la fenêtre de transformation d&#39;images." alt="" coords="5,5,229,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1039,24,1005,24,641,21,277,24,230,25,230,20,277,19,641,16,1005,19,1039,19"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1EquiCubeDialogController.html#a859d7bcbdb37f828495100df8fa4f397" title=" " alt="" coords="796,33,1005,73"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="1040,42,1006,46,1005,40,1039,37"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1EquiCubeDialogController.html#a979c808c5262cc7443c4db0528a70a5c" title="Crée la tâche de traitement de transformation d&#39;image." alt="" coords="527,33,748,73"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="782,56,748,56,748,51,782,51"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1EquiCubeDialogController.html#a29f2bdf8cb9ac2486c6d038ada9c2ce6" title=" " alt="" coords="277,33,479,73"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="513,56,479,56,479,51,513,51"/>
+<area shape="poly" id="edge5_Node000005_Node000002" title=" " alt="" coords="264,44,229,40,230,35,264,38"/>
+</map>

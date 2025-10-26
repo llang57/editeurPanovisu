@@ -1,0 +1,7 @@
+<map id="ajoutePano" name="ajoutePano">
+<area shape="rect" id="Node000001" title="Crée les objets correspondants à chacun des panoramiques." alt="" coords="5,31,100,56"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="169,5,208,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="100,32,155,21,156,27,101,37"/>
+<area shape="rect" id="Node000003" href="$panovisu-min_8js.html#a2aa791b67621bf89711c615675e48c65" title=" " alt="" coords="148,55,229,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="101,49,135,55,134,60,100,54"/>
+</map>

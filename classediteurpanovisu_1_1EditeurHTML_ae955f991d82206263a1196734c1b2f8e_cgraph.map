@@ -1,0 +1,8 @@
+<map id="editeurpanovisu.EditeurHTML.quitteEditeurHTML" name="editeurpanovisu.EditeurHTML.quitteEditeurHTML">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,261,45"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="604,13,643,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="261,19,403,17,556,19,590,20,590,26,556,24,403,22,261,24"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1EditeurHTML.html#adfc84a26d7821fd30f3cfafd42a72e63" title="Définit l&#39;état d&#39;annulation de l&#39;édition." alt="" coords="309,33,556,73"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="262,35,296,38,296,43,261,40"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="556,32,590,27,591,33,557,38"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="Graphe hiérarchique des classes" name="Graphe hiérarchique des classes">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,13,64,38"/>
+<area shape="rect" id="Node000001" href="$classediteurpanovisu_1_1DocumentationDialog.html" title="Dialogue pour afficher la documentation au format Markdown." alt="" coords="112,5,343,45"/>
+<area shape="poly" id="edge18_Node000000_Node000001" title=" " alt="" coords="77,23,112,23,112,28,77,28"/>
+</map>

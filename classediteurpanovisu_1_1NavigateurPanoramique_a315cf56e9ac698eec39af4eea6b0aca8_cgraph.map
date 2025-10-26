@@ -1,0 +1,33 @@
+<map id="editeurpanovisu.NavigateurPanoramique.affiche" name="editeurpanovisu.NavigateurPanoramique.affiche">
+<area shape="rect" id="Node000001" title="Affiche le navigateur panoramique dans l&#39;interface." alt="" coords="5,331,208,371"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1NavigateurPanoramique.html#a3fcaf465d4e16c3f8a43b953ac3ef3f0" title="Retourne le champ de vision (Field of View) actuel." alt="" coords="258,5,461,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="110,330,125,275,153,202,172,162,195,123,223,87,254,55,261,50,264,55,258,59,227,91,200,126,177,165,158,204,130,277,115,331"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1NavigateurPanoramique.html#a4cfe408fe4b8aed4fbbbf785703fa7db" title="Retourne la latitude actuelle de la vue panoramique." alt="" coords="258,69,461,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="113,329,132,286,162,229,203,170,227,143,254,119,262,114,265,118,258,123,231,147,207,174,166,232,137,288,118,332"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1NavigateurPanoramique.html#a81fa70763085e924335d6f6353de896a" title="Retourne la longitude actuelle de la vue panoramique." alt="" coords="258,133,461,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="120,329,174,262,212,223,255,190,278,177,280,181,257,194,216,227,178,265,124,332"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1NavigateurPanoramique.html#ad21961adb0b1d9ddaea56be891a99e3a" title="Retourne le champ de vision maximum autorisé" alt="" coords="511,204,713,244"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="124,328,179,278,215,253,255,234,316,217,378,208,440,206,497,208,497,213,440,211,379,214,317,222,257,238,218,257,182,282,128,332"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1NavigateurPanoramique.html#a54d8f24c8bff3f701e5d5871b1a723b4" title="Retourne le champ de vision minimum autorisé" alt="" coords="511,293,713,333"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="208,341,496,319,497,324,209,346"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1NavigateurPanoramique.html#a1ec65a09f4026d62f103575497a7d587" title="Retourne la position angulaire du nord géographique." alt="" coords="258,605,461,645"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="117,370,135,416,165,475,205,538,230,566,258,591,265,596,262,601,254,595,226,570,201,541,160,478,130,418,112,372"/>
+<area shape="rect" id="Node000008" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="340,670,379,695"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="114,370,128,427,155,505,174,546,197,586,225,623,258,655,273,665,291,672,326,679,325,684,289,677,271,670,254,659,221,627,192,589,169,548,150,507,123,429,109,371"/>
+<area shape="rect" id="Node000009" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="593,421,631,446"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="208,360,463,399,580,423,579,428,462,404,208,366"/>
+<area shape="rect" id="Node000010" href="$classediteurpanovisu_1_1NavigateurPanoramique.html#a15ada4dcb8abe6b45fd6d9580d7e63a1" title="Définit le champ de vision (Field of View)" alt="" coords="258,248,461,288"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="168,328,284,290,285,295,169,333"/>
+<area shape="rect" id="Node000011" href="$classediteurpanovisu_1_1NavigateurPanoramique.html#a850d5027fc5c33767a982d5e45c019a7" title="Définit la latitude de la vue panoramique." alt="" coords="258,413,461,453"/>
+<area shape="poly" id="edge13_Node000001_Node000011" title=" " alt="" coords="169,368,285,406,284,412,168,373"/>
+<area shape="rect" id="Node000012" href="$classediteurpanovisu_1_1NavigateurPanoramique.html#a4c5bdde216bba18d216a8c90fc08d58b" title="Définit la longitude de la vue panoramique." alt="" coords="258,477,461,517"/>
+<area shape="poly" id="edge15_Node000001_Node000012" title=" " alt="" coords="131,369,186,416,220,441,257,463,272,470,269,475,255,468,217,445,182,420,127,373"/>
+<area shape="rect" id="Node000013" href="$classediteurpanovisu_1_1BigDecimalField.html#adc2700ac44fad89e58019ce2b13206c9" title="Définit la valeur BigDecimal." alt="" coords="256,541,463,581"/>
+<area shape="poly" id="edge17_Node000001_Node000013" title=" " alt="" coords="122,370,143,404,174,446,213,490,258,527,267,533,265,538,254,532,209,494,170,450,139,407,117,372"/>
+<area shape="poly" id="edge10_Node000010_Node000005" title=" " alt="" coords="460,248,496,241,497,247,461,253"/>
+<area shape="poly" id="edge11_Node000010_Node000006" title=" " alt="" coords="461,284,497,290,496,295,460,289"/>
+<area shape="poly" id="edge12_Node000010_Node000009" title=" " alt="" coords="393,286,582,411,579,416,390,290"/>
+<area shape="poly" id="edge14_Node000011_Node000009" title=" " alt="" coords="461,431,579,431,579,436,461,436"/>
+<area shape="poly" id="edge16_Node000012_Node000009" title=" " alt="" coords="438,475,578,439,580,444,440,480"/>
+<area shape="poly" id="edge18_Node000013_Node000009" title=" " alt="" coords="432,539,462,527,528,490,582,452,585,456,531,494,464,532,434,544"/>
+</map>

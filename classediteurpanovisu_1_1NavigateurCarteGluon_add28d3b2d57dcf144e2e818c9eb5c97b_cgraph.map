@@ -1,0 +1,9 @@
+<map id="editeurpanovisu.NavigateurCarteGluon.allerCoordonnees" name="editeurpanovisu.NavigateurCarteGluon.allerCoordonnees">
+<area shape="rect" id="Node000001" title="Centre la carte sur des coordonnées géographiques avec zoom." alt="" coords="5,69,219,109"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1CoordonneesGeographiques.html#af33141f53510962ac8c8bf3973ce8ed9" title="Retourne la valeur de latitude." alt="" coords="267,5,483,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="194,67,278,46,279,51,196,72"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1CoordonneesGeographiques.html#a7f94a4bb132e0a244fccb8f29ff4688a" title="Retourne la valeur de longitude." alt="" coords="267,69,483,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="219,87,253,87,253,92,219,92"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="355,134,394,159"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="205,107,342,137,341,142,204,112"/>
+</map>

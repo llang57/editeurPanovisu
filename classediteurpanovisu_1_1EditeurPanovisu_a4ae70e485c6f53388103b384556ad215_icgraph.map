@@ -1,0 +1,18 @@
+<map id="editeurpanovisu.EditeurPanovisu.getStrDernierRepertoireImages" name="editeurpanovisu.EditeurPanovisu.getStrDernierRepertoireImages">
+<area shape="rect" id="Node000001" title="Retourne la valeur de strDernierRepertoireImages." alt="" coords="1021,49,1281,89"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#abdc1f6877f4c5e097d4234528fb4b5a2" title="Ouvre un dialogue pour ajouter des fichiers manuellement." alt="" coords="707,5,947,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1007,55,946,49,947,43,1008,50"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a3542f5788254051cb28b243c631b4547" title="Ouvre un FileChooser pour sélectionner des fichiers d&#39;images." alt="" coords="680,85,973,125"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="1008,87,974,91,973,86,1007,82"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#af678a16d007290ec9b28b93299f29cfd" title="Crée la zone d&#39;affichage de la liste des fichiers." alt="" coords="365,5,592,60"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="693,35,592,35,592,30,693,30"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#a44e7c111f70ca443dad83445f187d3f4" title="Affiche la fenêtre de dialogue de conversion au ratio 2:1." alt="" coords="22,5,261,60"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="351,35,261,35,261,30,351,30"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#ae5969de62f5a0a7a3a567c063c7d085e" title="Crée la zone de drag &amp; drop pour ajouter des images." alt="" coords="325,85,632,125"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="666,107,632,107,632,102,666,102"/>
+<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#abee140580eb7286689c97847bce687e9" title="Crée la zone contenant la liste des fichiers à traiter." alt="" coords="341,149,617,204"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="717,130,612,152,611,147,716,125"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a182869c52f51180d4809f7e0f1e2fcec" title="Affiche la fenêtre de dialogue de redimensionnement d&#39;images." alt="" coords="5,121,277,161"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="312,125,278,129,277,124,311,120"/>
+<area shape="poly" id="edge8_Node000008_Node000007" title=" " alt="" coords="326,163,277,158,278,153,327,158"/>
+</map>

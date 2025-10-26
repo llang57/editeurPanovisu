@@ -1,0 +1,15 @@
+<map id="editeurpanovisu.EditeurPanovisu.sauvegardeIconeHotspot" name="editeurpanovisu.EditeurPanovisu.sauvegardeIconeHotspot">
+<area shape="rect" id="Node000001" title="Sauvegarde une image de hotspot colorée dans le répertoire temp et retourne le nom du fichier." alt="" coords="5,63,320,103"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1EditeurPanovisu.html#a948143344d7a90ae50f3d5001a69eef6" title="Retourne la valeur de strRepertTemp." alt="" coords="368,5,628,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="280,60,366,45,367,50,281,65"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="932,121,971,146"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="320,79,585,87,735,98,884,115,919,122,918,127,884,120,735,103,584,92,320,84"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1ReadWriteImage.html#aa0cc600a6f539cd24503344bdca9f86d" title=" " alt="" coords="399,120,597,160"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="281,100,386,118,385,123,280,105"/>
+<area shape="poly" id="edge7_Node000004_Node000003" title=" " alt="" coords="598,136,918,131,918,136,598,141"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1ReadWriteImage.html#ae93614e117cb7a4718f4ac3d5fd33c4e" title=" " alt="" coords="676,171,884,211"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="598,155,663,167,662,172,597,160"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="839,168,918,141,919,147,841,173"/>
+<area shape="rect" id="Node000006" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="932,178,971,203"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="884,188,919,188,919,193,884,193"/>
+</map>

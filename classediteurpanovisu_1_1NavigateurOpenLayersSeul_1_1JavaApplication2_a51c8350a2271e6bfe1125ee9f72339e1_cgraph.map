@@ -1,0 +1,9 @@
+<map id="editeurpanovisu.NavigateurOpenLayersSeul.JavaApplication2.zoom" name="editeurpanovisu.NavigateurOpenLayersSeul.JavaApplication2.zoom">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,69,285,109"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1EditeurPanovisu.html#ae36b51d8b05bffca34e8ba29c2f71ba4" title="Retourne la valeur de gestionnaireInterface." alt="" coords="333,5,593,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="245,67,350,45,351,51,246,72"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a85686e036a1e1db13ef79905cf4d0fd4" title="Retourne la valeur de slZoomCarte." alt="" coords="337,69,590,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="285,87,323,87,323,92,285,92"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="444,134,483,159"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="257,107,431,138,430,144,256,112"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="editeurpanovisu.EditeurPanovisu.sauverBarre" name="editeurpanovisu.EditeurPanovisu.sauverBarre">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,63,288,103"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1ZoneTelecommande.html#a957b162f5d5a34f7521b0f79c77a37c8" title="Retourne la valeur de strNomZone." alt="" coords="336,5,624,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="263,60,349,45,350,50,264,65"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="461,70,499,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="288,80,447,80,447,85,288,85"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="461,119,499,145"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="283,100,447,125,446,130,282,105"/>
+</map>

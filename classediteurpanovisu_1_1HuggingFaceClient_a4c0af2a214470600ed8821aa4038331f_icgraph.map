@@ -1,0 +1,6 @@
+<map id="editeurpanovisu.HuggingFaceClient.generateText" name="editeurpanovisu.HuggingFaceClient.generateText">
+<area shape="rect" id="Node000001" title="Génère du texte à partir d&#39;un prompt." alt="" coords="268,29,483,69"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="420,18,404,11,375,8,350,10,335,15,329,21,332,28,327,30,324,20,332,10,349,5,375,3,406,6,422,13"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1HuggingFaceClient.html#a1bc40f824a65cb1221cbf1c7cae5e170" title="Génère du texte de manière asynchrone." alt="" coords="5,29,220,69"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="255,52,220,52,220,47,255,47"/>
+</map>

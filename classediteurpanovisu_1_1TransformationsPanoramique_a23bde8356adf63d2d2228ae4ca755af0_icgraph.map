@@ -1,0 +1,8 @@
+<map id="editeurpanovisu.TransformationsPanoramique.cube2equi" name="editeurpanovisu.TransformationsPanoramique.cube2equi">
+<area shape="rect" id="Node000001" title="Transformation Cube vers Équirectangulaire (version CPU, tableau)" alt="" coords="573,35,809,75"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1TransformationsPanoramiqueGPU.html#ae710cdf874af584ac78d2c61ea44bbce" title="Transformation Cube vers Équirectangulaire accélérée par GPU." alt="" coords="289,5,525,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="560,44,525,40,526,35,560,38"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1TransformationsPanoramique.html#a42f56a7d71ca555f5c7f2979eef2965c" title="Transformation Cube vers Équirectangulaire avec routage automatique GPU/CPU Cette méthode détecte aut..." alt="" coords="5,35,241,75"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="560,60,525,60,289,60,242,59,242,54,289,55,525,55,559,54"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="276,42,242,45,241,40,276,36"/>
+</map>

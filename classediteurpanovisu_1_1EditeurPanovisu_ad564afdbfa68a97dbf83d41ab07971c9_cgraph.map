@@ -1,0 +1,9 @@
+<map id="editeurpanovisu.EditeurPanovisu.transformerCouleurHotspot" name="editeurpanovisu.EditeurPanovisu.transformerCouleurHotspot">
+<area shape="rect" id="Node000001" title="Applique une transformation de couleur à une image de hotspot." alt="" coords="5,47,321,87"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="369,5,408,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="255,45,355,22,357,28,256,50"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a008d931e56b6fc013061112f26afbffb" title=" " alt="" coords="369,55,408,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="322,65,355,65,355,70,322,70"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#a9f9b62a373d2bb4624b7ac2df8151435" title=" " alt="" coords="369,104,408,129"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="256,85,357,107,355,112,255,90"/>
+</map>

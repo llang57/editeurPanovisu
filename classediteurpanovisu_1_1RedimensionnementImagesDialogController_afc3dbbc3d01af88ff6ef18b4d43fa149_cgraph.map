@@ -1,0 +1,8 @@
+<map id="editeurpanovisu.RedimensionnementImagesDialogController.validerParametres" name="editeurpanovisu.RedimensionnementImagesDialogController.validerParametres">
+<area shape="rect" id="Node000001" title="Valide les paramètres de redimensionnement." alt="" coords="5,35,304,75"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a9d72ac6b52e15bc4b545937dbc1ce71f" title="Affiche un message d&#39;erreur." alt="" coords="352,5,619,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="304,39,338,36,338,41,304,44"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="667,42,705,67"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="304,55,619,55,652,54,653,59,619,60,304,60"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="619,42,654,47,653,53,618,48"/>
+</map>

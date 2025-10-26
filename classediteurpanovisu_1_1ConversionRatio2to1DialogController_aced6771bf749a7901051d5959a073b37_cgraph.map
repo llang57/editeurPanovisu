@@ -1,0 +1,62 @@
+<map id="editeurpanovisu.ConversionRatio2to1DialogController.lancerTraitement" name="editeurpanovisu.ConversionRatio2to1DialogController.lancerTraitement">
+<area shape="rect" id="Node000001" title="Lance le traitement de conversion pour tous les fichiers." alt="" coords="5,169,240,224"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#a885ab54940da11ca1532a065ca4e3710" title="Affiche une boîte de dialogue d&#39;erreur." alt="" coords="647,70,890,125"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="198,166,287,142,377,126,468,114,633,100,634,106,468,120,377,131,289,147,200,171"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="1577,421,1616,446"/>
+<area shape="poly" id="edge7_Node000001_Node000003" title=" " alt="" coords="164,166,221,134,287,106,418,65,523,42,630,32,767,30,1107,30,1173,26,1233,19,1337,4,1385,4,1432,14,1481,36,1531,76,1548,100,1562,137,1581,231,1592,330,1597,407,1592,407,1587,331,1576,231,1557,138,1544,103,1527,79,1478,41,1431,19,1384,9,1337,9,1233,24,1174,32,1107,35,767,35,630,37,524,47,419,70,289,111,224,139,167,171"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#a62590088b512002faa82242b7e681fe9" title="Affiche une boîte de dialogue d&#39;information." alt="" coords="1285,136,1528,190"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="240,190,1271,164,1272,169,241,196"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#a5ccd468448f3de50d7231830f3066c08" title="Désactive tous les contrôles pendant le traitement." alt="" coords="294,306,557,361"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="165,221,223,257,289,291,309,299,307,304,287,296,220,262,162,226"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#a17e9303f7ea1004154cff3f7b9115dff" title="Ferme la fenêtre de dialogue." alt="" coords="306,385,545,440"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="144,222,203,297,244,337,289,371,299,377,296,381,287,376,240,341,199,300,140,226"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#af8e88820e15376004518e4965651d7f6" title="Traite (convertit au ratio 2:1) une image selon les paramètres définis." alt="" coords="288,242,563,282"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="241,219,319,236,318,241,240,224"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="890,82,1057,69,1246,65,1336,69,1417,79,1484,95,1510,107,1531,121,1547,141,1560,172,1579,253,1591,339,1596,407,1591,407,1585,339,1574,254,1555,174,1542,144,1528,125,1508,112,1482,100,1416,84,1336,74,1246,70,1057,74,890,87"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="1507,188,1531,208,1549,231,1564,256,1583,311,1594,364,1597,407,1592,407,1588,365,1578,313,1559,259,1545,234,1527,211,1504,193"/>
+<area shape="poly" id="edge38_Node000007_Node000003" title=" " alt="" coords="542,279,564,293,575,304,582,316,588,339,595,362,601,372,612,381,635,390,671,397,777,409,913,416,1064,420,1355,422,1529,424,1564,427,1563,433,1529,429,1355,427,1064,425,912,421,776,414,670,403,633,395,609,385,597,375,590,364,583,341,577,318,571,307,561,297,539,284"/>
+<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#acae1621a49553371b6d694fddac32edc" title="Convertit une image au ratio 2:1 en ajoutant du padding selon le type choisi." alt="" coords="643,552,895,606"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="546,280,564,293,579,309,588,325,594,356,598,389,603,407,613,425,637,458,665,489,721,540,718,544,661,493,633,462,608,428,598,409,593,391,589,357,582,327,575,312,561,297,543,284"/>
+<area shape="rect" id="Node000018" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#a8f57c30e17f8667f430327a0691d1f37" title="Détermine le fichier de sortie selon le mode de sauvegarde sélectionné." alt="" coords="635,201,902,256"/>
+<area shape="poly" id="edge33_Node000007_Node000018" title=" " alt="" coords="563,246,622,240,622,245,563,251"/>
+<area shape="rect" id="Node000019" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#afa8e83f36617ac54f44b6b6c23c824a7" title="Retourne le format de sortie sélectionné." alt="" coords="975,265,1236,320"/>
+<area shape="poly" id="edge37_Node000007_Node000019" title=" " alt="" coords="563,265,961,283,961,288,563,270"/>
+<area shape="rect" id="Node000020" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#a32aaf831f5731154b4d3b04ff0da9b98" title="Sauvegarde une image dans le format spécifié avec compression." alt="" coords="611,331,927,371"/>
+<area shape="poly" id="edge39_Node000007_Node000020" title=" " alt="" coords="515,279,563,292,611,310,666,325,665,330,610,315,562,297,514,284"/>
+<area shape="poly" id="edge32_Node000008_Node000003" title=" " alt="" coords="830,549,898,522,974,499,1059,481,1147,466,1317,446,1464,436,1564,432,1564,437,1464,441,1318,452,1147,472,1060,486,975,504,900,527,831,554"/>
+<area shape="rect" id="Node000009" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#aaaaf7b4c40362cd44e8af691b726139f" title="Applique un remplissage par couleur moyenne des bords." alt="" coords="978,592,1233,646"/>
+<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="895,591,965,599,964,605,895,596"/>
+<area shape="rect" id="Node000014" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#ab1520702375f0993d7bd5bd7469b1ff5" title="Applique un remplissage flou très prononcé (image source étirée et fortement floutée en arrière&#45;plan)..." alt="" coords="978,825,1233,880"/>
+<area shape="poly" id="edge18_Node000008_Node000014" title=" " alt="" coords="806,604,1062,814,1058,818,802,609"/>
+<area shape="rect" id="Node000016" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#aa5ad7ef1b8983f74a90c0ed104de11c5" title="Applique un remplissage miroir (image source reflétée sur les bords)." alt="" coords="978,513,1233,568"/>
+<area shape="poly" id="edge24_Node000008_Node000016" title=" " alt="" coords="895,562,964,554,964,559,895,567"/>
+<area shape="rect" id="Node000017" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#ad8454fcd3164a4e64f8ef0a44ff1dd22" title="Applique un remplissage noir autour de l&#39;image." alt="" coords="978,670,1233,725"/>
+<area shape="poly" id="edge27_Node000008_Node000017" title=" " alt="" coords="837,604,976,656,997,663,995,668,974,661,835,609"/>
+<area shape="poly" id="edge17_Node000009_Node000003" title=" " alt="" coords="1232,594,1421,558,1528,532,1546,517,1562,497,1583,458,1588,460,1566,500,1550,520,1531,537,1422,563,1233,599"/>
+<area shape="rect" id="Node000010" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#afbde9272ad5dd7d68c3ab3a325923a38" title="Calcule la couleur moyenne d&#39;une zone rectangulaire de l&#39;image." alt="" coords="1284,780,1529,834"/>
+<area shape="poly" id="edge11_Node000009_Node000010" title=" " alt="" coords="1211,644,1237,657,1277,682,1313,711,1374,768,1370,772,1310,715,1273,686,1235,661,1208,649"/>
+<area shape="rect" id="Node000013" href="$classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#a668da95128992d4c76647981546905b3" title="Calcule la position Y en fonction de la position verticale choisie." alt="" coords="1284,598,1529,653"/>
+<area shape="poly" id="edge15_Node000009_Node000013" title=" " alt="" coords="1233,619,1270,620,1270,625,1233,624"/>
+<area shape="poly" id="edge12_Node000010_Node000003" title=" " alt="" coords="1505,777,1527,758,1541,736,1552,703,1571,618,1584,529,1591,460,1596,460,1589,530,1576,619,1557,704,1545,738,1531,762,1508,781"/>
+<area shape="rect" id="Node000011" href="$leaflet_8js.html#a008d931e56b6fc013061112f26afbffb" title=" " alt="" coords="1577,961,1616,986"/>
+<area shape="poly" id="edge13_Node000010_Node000011" title=" " alt="" coords="1441,832,1573,950,1569,954,1437,836"/>
+<area shape="rect" id="Node000012" href="$leaflet_8js.html#a9f9b62a373d2bb4624b7ac2df8151435" title=" " alt="" coords="1577,860,1616,885"/>
+<area shape="poly" id="edge14_Node000010_Node000012" title=" " alt="" coords="1488,832,1565,859,1564,864,1486,837"/>
+<area shape="poly" id="edge16_Node000013_Node000003" title=" " alt="" coords="1501,596,1528,577,1550,549,1567,518,1587,458,1592,460,1572,520,1555,552,1531,581,1504,600"/>
+<area shape="poly" id="edge21_Node000014_Node000003" title=" " alt="" coords="1156,822,1216,793,1283,766,1321,755,1356,751,1417,751,1444,750,1472,743,1499,730,1527,706,1539,689,1550,662,1569,593,1590,459,1595,460,1574,594,1556,664,1544,691,1531,710,1502,734,1473,748,1445,755,1417,757,1356,757,1322,761,1285,771,1218,798,1159,827"/>
+<area shape="poly" id="edge22_Node000014_Node000011" title=" " alt="" coords="1123,878,1149,919,1185,967,1231,1013,1257,1032,1285,1047,1351,1072,1380,1078,1407,1080,1434,1078,1462,1072,1528,1047,1544,1037,1558,1025,1580,996,1584,1000,1562,1028,1547,1042,1531,1052,1464,1077,1435,1084,1407,1086,1379,1084,1350,1077,1283,1052,1254,1036,1227,1017,1181,970,1144,922,1119,881"/>
+<area shape="poly" id="edge23_Node000014_Node000012" title=" " alt="" coords="1215,877,1284,888,1407,898,1460,896,1529,888,1564,880,1565,885,1530,893,1461,901,1407,903,1284,893,1214,882"/>
+<area shape="poly" id="edge19_Node000014_Node000013" title=" " alt="" coords="1141,823,1357,659,1360,663,1144,827"/>
+<area shape="rect" id="Node000015" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="1387,1012,1426,1037"/>
+<area shape="poly" id="edge20_Node000014_Node000015" title=" " alt="" coords="1136,878,1201,935,1242,964,1285,990,1331,1007,1375,1017,1373,1022,1330,1012,1283,995,1239,969,1198,939,1132,882"/>
+<area shape="poly" id="edge26_Node000016_Node000003" title=" " alt="" coords="1233,533,1302,527,1377,515,1454,499,1528,475,1568,452,1571,457,1530,480,1456,504,1378,521,1302,532,1233,539"/>
+<area shape="poly" id="edge25_Node000016_Node000013" title=" " alt="" coords="1203,565,1297,592,1296,597,1202,570"/>
+<area shape="poly" id="edge29_Node000017_Node000003" title=" " alt="" coords="1233,701,1319,701,1405,696,1479,684,1507,675,1528,663,1539,650,1549,629,1567,573,1589,459,1594,460,1572,574,1554,631,1543,653,1531,668,1509,680,1480,689,1405,701,1319,706,1233,706"/>
+<area shape="poly" id="edge30_Node000017_Node000011" title=" " alt="" coords="1143,723,1190,763,1238,812,1252,832,1260,850,1269,866,1286,882,1320,904,1357,921,1435,947,1507,962,1564,969,1563,974,1507,967,1434,952,1355,926,1317,908,1282,886,1265,869,1255,852,1247,835,1234,815,1186,767,1140,727"/>
+<area shape="poly" id="edge31_Node000017_Node000012" title=" " alt="" coords="1139,723,1223,797,1285,844,1322,857,1360,866,1438,875,1509,876,1564,873,1564,878,1509,882,1438,881,1359,871,1320,862,1283,849,1220,801,1135,727"/>
+<area shape="poly" id="edge28_Node000017_Node000013" title=" " alt="" coords="1220,667,1278,653,1279,659,1221,673"/>
+<area shape="poly" id="edge36_Node000018_Node000003" title=" " alt="" coords="902,220,1067,218,1251,225,1339,233,1418,246,1483,264,1531,287,1556,313,1575,345,1587,378,1594,406,1589,408,1582,379,1570,347,1552,317,1528,292,1481,269,1417,251,1338,239,1251,230,1067,224,902,225"/>
+<area shape="poly" id="edge34_Node000018_Node000019" title=" " alt="" coords="903,251,962,262,961,267,902,256"/>
+<area shape="poly" id="edge35_Node000019_Node000003" title=" " alt="" coords="1236,277,1307,278,1383,286,1460,305,1496,319,1531,337,1550,351,1565,370,1587,407,1583,410,1561,373,1546,355,1528,341,1494,324,1458,310,1382,291,1307,283,1236,282"/>
+<area shape="poly" id="edge40_Node000020_Node000003" title=" " alt="" coords="927,346,1086,348,1259,353,1417,365,1481,375,1530,387,1552,397,1572,410,1569,414,1550,402,1528,392,1480,380,1416,371,1258,358,1085,353,927,352"/>
+</map>

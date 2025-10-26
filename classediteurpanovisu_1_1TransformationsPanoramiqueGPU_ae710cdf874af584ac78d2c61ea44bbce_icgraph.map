@@ -1,0 +1,5 @@
+<map id="editeurpanovisu.TransformationsPanoramiqueGPU.cube2equi" name="editeurpanovisu.TransformationsPanoramiqueGPU.cube2equi">
+<area shape="rect" id="Node000001" title="Transformation Cube vers Équirectangulaire accélérée par GPU." alt="" coords="289,5,525,45"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1TransformationsPanoramique.html#a42f56a7d71ca555f5c7f2979eef2965c" title="Transformation Cube vers Équirectangulaire avec routage automatique GPU/CPU Cette méthode détecte aut..." alt="" coords="5,5,241,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="275,28,242,28,242,23,275,23"/>
+</map>

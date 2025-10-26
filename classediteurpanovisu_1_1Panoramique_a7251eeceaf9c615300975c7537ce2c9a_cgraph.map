@@ -1,0 +1,10 @@
+<map id="editeurpanovisu.Panoramique.addHotspotDiapo" name="editeurpanovisu.Panoramique.addHotspotDiapo">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,63,249,103"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1Panoramique.html#ac22931e45fcc01ba55819ac2c29032a9" title="Retourne la valeur de iNombreHotspotDiapo." alt="" coords="297,5,543,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="230,60,303,45,304,51,231,65"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="591,99,629,125"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="250,87,577,107,577,113,250,93"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1Panoramique.html#a87917121c334bc06cebac5db40501a97" title="Définit la valeur de iNombreHotspotDiapo." alt="" coords="298,120,542,160"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="231,100,304,115,303,120,230,105"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="542,119,577,114,578,119,542,125"/>
+</map>

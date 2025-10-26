@@ -1,0 +1,12 @@
+<map id="editeurpanovisu.PrevisualiserConversionDialog.appliquerRemplissageNoir" name="editeurpanovisu.PrevisualiserConversionDialog.appliquerRemplissageNoir">
+<area shape="rect" id="Node000001" title="Applique un remplissage noir." alt="" coords="5,88,319,128"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1PrevisualiserConversionDialog.html#a4b707a735deefe752b0baf54620b5d93" title="Calcule la position Y selon le positionnement vertical choisi." alt="" coords="367,5,619,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="242,85,397,46,399,51,243,91"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="667,42,705,67"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="318,89,653,55,653,61,319,95"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#a008d931e56b6fc013061112f26afbffb" title=" " alt="" coords="473,121,512,146"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="319,117,460,128,459,134,318,123"/>
+<area shape="rect" id="Node000005" href="$leaflet_8js.html#a9f9b62a373d2bb4624b7ac2df8151435" title=" " alt="" coords="473,170,512,195"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="243,125,367,155,461,174,459,179,366,160,242,131"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="619,42,654,47,653,52,619,47"/>
+</map>

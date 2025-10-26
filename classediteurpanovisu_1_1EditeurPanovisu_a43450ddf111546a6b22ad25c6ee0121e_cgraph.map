@@ -1,0 +1,12 @@
+<map id="editeurpanovisu.EditeurPanovisu.rechargerIcones" name="editeurpanovisu.EditeurPanovisu.rechargerIcones">
+<area shape="rect" id="Node000001" title="Recharge toutes les icônes SVG de la barre d&#39;outils." alt="" coords="5,63,307,103"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1EditeurPanovisu.html#a4e67885ed592d9bc0bfab8426d0c2ebd" title="Retourne la valeur de ivAjouterPlan." alt="" coords="358,5,618,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="272,60,358,45,359,50,273,65"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="780,70,819,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="307,80,766,80,766,85,307,85"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1EditeurPanovisu.html#a786c8cb886a5b0d7bef0bc311876a62e" title="Charge une icône SVG avec la taille spécifiée." alt="" coords="355,120,621,160"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="273,100,359,115,358,120,272,105"/>
+<area shape="poly" id="edge5_Node000004_Node000003" title=" " alt="" coords="597,117,766,86,767,91,598,123"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1EditeurPanovisu.html#ae9640dc5eb2933e07534464d6477d96c" title="Retourne la valeur de strRepertAppli." alt="" coords="669,120,929,160"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="622,137,655,137,655,143,622,143"/>
+</map>

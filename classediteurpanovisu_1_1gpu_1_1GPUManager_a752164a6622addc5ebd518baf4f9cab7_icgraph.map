@@ -1,0 +1,19 @@
+<map id="editeurpanovisu.gpu.GPUManager.isGPUAvailable" name="editeurpanovisu.gpu.GPUManager.isGPUAvailable">
+<area shape="rect" id="Node000001" title="Vérifie si un GPU est disponible." alt="" coords="760,111,1019,151"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1gpu_1_1TestImageResize.html#ab1e39892471c5658890c8a78904be64c" title=" " alt="" coords="18,5,203,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="822,109,769,91,711,77,574,55,435,41,203,29,203,24,436,36,574,50,713,72,770,86,824,104"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a8938ddd095bf1e545f06dfbc9ecfee09" title="Redimensionnement via GPU OpenCL." alt="" coords="512,111,712,151"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="746,133,712,133,712,128,746,128"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1gpu_1_1TestBicubicVsLanczos.html#a4cef8c04b1386d551c4cfec1b3361458" title=" " alt="" coords="18,71,203,111"/>
+<area shape="poly" id="edge8_Node000001_Node000005" title=" " alt="" coords="781,111,712,101,573,92,435,88,204,90,204,84,435,82,574,86,712,96,781,106"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1gpu_1_1TestImageResizeInteractive.html#a16412151c83ac1a5ef58bfbd75bb0a42" title=" " alt="" coords="5,137,216,177"/>
+<area shape="poly" id="edge9_Node000001_Node000006" title=" " alt="" coords="783,156,712,165,578,173,444,175,216,167,216,162,444,169,578,168,712,160,782,150"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1gpu_1_1TestReductionImage.html#a868abe4fd92adbc966d1c9c89fb72cc3" title=" " alt="" coords="18,207,203,247"/>
+<area shape="poly" id="edge10_Node000001_Node000007" title=" " alt="" coords="811,157,712,180,574,200,435,213,204,227,203,222,435,208,574,194,712,175,810,152"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a56af72c51956399056e1f0de5b253319" title="Redimensionne une image avec routage automatique GPU/CPU." alt="" coords="264,111,464,151"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="499,133,464,133,464,128,499,128"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="312,107,215,61,179,48,181,43,217,56,315,102"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="250,115,203,108,204,103,251,110"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="251,145,217,149,216,144,250,140"/>
+<area shape="poly" id="edge7_Node000004_Node000007" title=" " alt="" coords="302,158,217,192,170,209,168,204,215,187,300,153"/>
+</map>

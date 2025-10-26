@@ -1,0 +1,27 @@
+<map id="editeurpanovisu.GestionnaireInterfaceController.afficheReseauxSociaux" name="editeurpanovisu.GestionnaireInterfaceController.afficheReseauxSociaux">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,435,252,489"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a50d43fc15c4a7405ff1e52b8bc435511" title="Retourne le décalage horizontal des réseaux sociaux par rapport à leur position de référence." alt="" coords="335,5,576,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="131,434,145,361,175,262,197,209,224,158,258,111,298,69,321,54,324,59,302,73,262,114,229,161,202,212,180,264,150,362,136,435"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#aaa802b77b06faad89258b26cb7674264" title="Retourne le décalage vertical des réseaux sociaux par rapport à leur position de référence." alt="" coords="335,84,575,139"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="134,434,153,374,186,297,208,256,234,216,264,180,298,148,322,133,324,138,302,152,268,183,238,219,212,258,191,299,158,376,139,435"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a1fbc2347f474945e4bcf4d4c2d3f575c" title="Retourne l&#39;opacité des boutons de réseaux sociaux." alt="" coords="318,163,593,217"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="140,433,163,388,198,332,243,275,270,249,298,226,306,222,309,226,302,231,273,253,247,278,202,335,168,390,145,436"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#ad0c4c0b75d3e5f7f35ee24e44fc87c67" title="Retourne la position des boutons de réseaux sociaux dans l&#39;interface." alt="" coords="336,241,575,296"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="150,433,213,368,254,334,299,305,322,294,324,299,301,310,257,338,216,372,154,437"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a203a717c6783631a4716691ab1a7d097" title="Retourne la taille des boutons de réseaux sociaux." alt="" coords="326,320,585,375"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="184,432,239,407,299,383,322,376,324,381,301,389,241,412,186,437"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a2cfb9c2807597994d00b97fde8d37b28" title="Retourne la hauteur réelle de l&#39;image de visualisation affichée." alt="" coords="329,399,581,453"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="252,446,315,439,315,444,252,451"/>
+<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a9e850d024075a94fade7333821a909b5" title="Retourne la largeur réelle de l&#39;image de visualisation affichée." alt="" coords="310,478,601,518"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="252,473,296,478,296,483,252,478"/>
+<area shape="rect" id="Node000009" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#adcd7dcd008ebdfbbf9bfd8fe7eab8608" title="Indique si les boutons de réseaux sociaux sont affichés." alt="" coords="322,543,589,597"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="194,487,301,527,329,536,328,541,299,533,192,492"/>
+<area shape="rect" id="Node000010" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a7b0e08cee56c94d083d6c4bc8301f4bb" title="Retourne la valeur de bReseauxSociauxEmail." alt="" coords="300,622,611,662"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="155,487,217,548,258,580,301,606,321,615,319,620,299,611,255,584,214,552,152,491"/>
+<area shape="rect" id="Node000011" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#a338d840629ad975a66ea6cf9430077fc" title="Retourne la valeur de bReseauxSociauxMeta." alt="" coords="302,686,609,726"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="146,488,170,530,205,580,249,630,301,672,313,678,310,683,299,676,245,634,201,583,166,533,141,491"/>
+<area shape="rect" id="Node000012" href="$classediteurpanovisu_1_1GestionnaireInterfaceController.html#ac834b92e0f01313ccf9b57d4f4d0d3e2" title="Retourne la valeur de bReseauxSociauxTwitter." alt="" coords="319,751,592,805"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="141,489,162,542,196,609,242,678,270,709,302,736,310,742,307,746,298,740,267,713,238,681,191,612,158,544,137,491"/>
+<area shape="rect" id="Node000013" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="436,829,475,855"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="137,489,152,557,183,646,204,693,231,738,263,780,302,814,330,830,362,839,422,842,422,848,361,844,328,835,298,819,259,783,227,741,200,696,178,648,147,558,132,490"/>
+</map>

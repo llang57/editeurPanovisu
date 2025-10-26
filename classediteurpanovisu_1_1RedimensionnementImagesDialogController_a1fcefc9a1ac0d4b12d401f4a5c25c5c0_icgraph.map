@@ -1,0 +1,12 @@
+<map id="editeurpanovisu.RedimensionnementImagesDialogController.fermerFenetre" name="editeurpanovisu.RedimensionnementImagesDialogController.fermerFenetre">
+<area shape="rect" id="Node000001" title="Ferme la fenêtre de dialogue." alt="" coords="1017,37,1289,77"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#ab60be5698e044f8e609ae7cd2c20d1cb" title="Annule et ferme la fenêtre." alt="" coords="691,5,958,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1004,45,958,41,958,36,1004,40"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a93a629dce64b4bfc868b54c629642061" title="Lance le traitement des images." alt="" coords="680,69,969,109"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="1004,75,970,78,970,73,1003,69"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a3537215c3ae75ac08746b31652a789d4" title="Crée les boutons d&#39;action (Valider, Annuler)." alt="" coords="325,37,632,77"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="678,42,632,46,632,40,677,36"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a182869c52f51180d4809f7e0f1e2fcec" title="Affiche la fenêtre de dialogue de redimensionnement d&#39;images." alt="" coords="5,37,277,77"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="312,60,278,60,278,55,312,55"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="666,77,632,74,633,69,666,72"/>
+</map>

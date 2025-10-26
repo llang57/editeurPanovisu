@@ -1,0 +1,11 @@
+<map id="editeurpanovisu.NavigateurOpenLayersSeul.allerCoordonnees" name="editeurpanovisu.NavigateurOpenLayersSeul.allerCoordonnees">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,101,251,141"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1CoordonneesGeographiques.html#af33141f53510962ac8c8bf3973ce8ed9" title="Retourne la valeur de latitude." alt="" coords="299,5,515,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="179,99,298,55,322,47,324,52,300,60,181,104"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1CoordonneesGeographiques.html#a7f94a4bb132e0a244fccb8f29ff4688a" title="Retourne la valeur de longitude." alt="" coords="299,69,515,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="250,105,285,101,286,106,251,110"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1NavigateurCarteSeul.html#a36fc01b588108b52d46ceb338587f294" title="Retourne la valeur de webEngine." alt="" coords="305,133,508,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="251,133,292,137,291,143,250,138"/>
+<area shape="rect" id="Node000005" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="387,198,426,223"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="178,139,299,183,374,202,373,207,298,188,176,144"/>
+</map>

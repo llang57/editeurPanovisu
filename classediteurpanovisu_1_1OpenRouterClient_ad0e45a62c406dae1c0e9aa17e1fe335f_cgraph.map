@@ -1,0 +1,9 @@
+<map id="editeurpanovisu.OpenRouterClient.suggestHotspots" name="editeurpanovisu.OpenRouterClient.suggestHotspots">
+<area shape="rect" id="Node000001" title="Suggère des hotspots pertinents pour un panorama." alt="" coords="5,59,213,99"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1OpenRouterClient.html#a6d6d3b5ec9d11ab65aa452a40c246df5" title="Envoie un message au modèle et obtient une réponse." alt="" coords="261,29,469,69"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="213,64,247,60,248,65,214,69"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="517,66,556,91"/>
+<area shape="poly" id="edge4_Node000001_Node000003" title=" " alt="" coords="213,78,469,79,503,78,503,83,469,84,213,84"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="333,30,331,20,336,11,348,5,365,3,386,6,397,13,394,17,384,11,365,8,349,10,340,15,336,21,338,28"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="470,65,504,71,503,76,469,70"/>
+</map>
