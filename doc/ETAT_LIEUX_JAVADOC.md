@@ -1,6 +1,6 @@
 # État des lieux de la documentation Javadoc
 
-**Date de génération :** editeurPanovisu - dim. 26 oct. 2025 15:26:37 CET
+**Date de génération :** editeurPanovisu - dim. 26 oct. 2025 15:56:03 CET
 
 ## 📊 Statistiques globales
 

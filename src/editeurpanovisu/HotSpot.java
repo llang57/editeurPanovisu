@@ -45,14 +45,22 @@ public class HotSpot {
     }
 
     /**
-     * @return the longitude
+     * Retourne la longitude du hotspot dans le panorama
+     * 
+     * <p>Position horizontale du hotspot dans l'espace sphérique panoramique.</p>
+     * 
+     * @return Longitude en degrés (-180° à +180°)
+     * @see #setLongitude(Number)
      */
     public double getLongitude() {
         return longitude;
     }
 
     /**
-     * @param longitude the longitude to set
+     * Définit la longitude du hotspot
+     * 
+     * @param longitude Position horizontale en degrés
+     * @see #getLongitude()
      */
     public void setLongitude(Number longitude) {
         this.longitude = (double) longitude;

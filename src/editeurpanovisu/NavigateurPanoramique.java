@@ -933,6 +933,16 @@ public final class NavigateurPanoramique {
         }
     }
 
+    /**
+     * Affiche le panorama dans un conteneur AnchorPane
+     * 
+     * <p>Crée et retourne un composant d'interface contenant le panorama affiché
+     * sans cache pré-calculé. Cette méthode est équivalente à appeler
+     * {@code affichePano(null)}.</p>
+     * 
+     * @return AnchorPane contenant le panorama à afficher
+     * @see #affichePano(Panoramique)
+     */
     public AnchorPane affichePano() {
         return affichePano(null);
     }
@@ -1011,6 +1021,26 @@ public final class NavigateurPanoramique {
         panoramicCube.setPanoramicImage(this.getImgPanoramique());
     }
 
+    /**
+     * Définit l'image panoramique à afficher
+     * 
+     * <p>Configure le navigateur avec une nouvelle image panoramique équirectangulaire.
+     * L'image est appliquée selon le mode de qualité actif (haute ou basse résolution).
+     * En mode haute qualité, l'image est projetée sur un cube de 3000×1500 pixels
+     * avec une résolution de 1000 pixels par face.</p>
+     * 
+     * <p><strong>Exemple d'utilisation :</strong></p>
+     * <pre>{@code
+     * Image imgPano = new Image("file:///chemin/vers/panorama.jpg");
+     * navigateur.setImagePanoramique("panorama.jpg", imgPano);
+     * }</pre>
+     * 
+     * @param strImagePanoramique Chemin du fichier image (utilisé pour référence)
+     * @param imgPanoramique Image panoramique équirectangulaire à afficher
+     * 
+     * @see #setImagePanoramique(String, Image, Panoramique)
+     * @see #setHauteQualite(boolean)
+     */
     public void setImagePanoramique(String strImagePanoramique, Image imgPanoramique) {
         System.out.println("📸 NavigateurPanoramique.setImagePanoramique() appelé");
         System.out.println("   📄 Fichier: " + strImagePanoramique);
@@ -1093,14 +1123,28 @@ public final class NavigateurPanoramique {
     }
 
     /**
-     * @return the latitude
+     * Retourne la latitude actuelle de la vue panoramique
+     * 
+     * <p>La latitude représente l'angle vertical de visualisation dans le panorama.
+     * Valeur comprise entre -90° (vers le bas) et +90° (vers le haut).</p>
+     * 
+     * @return Latitude en degrés, où 0° = horizon, +90° = zénith, -90° = nadir
+     * @see #setLatitude(double)
      */
     public double getLatitude() {
         return latitude;
     }
 
     /**
-     * @param latitude the latitude to set
+     * Définit la latitude de la vue panoramique
+     * 
+     * <p>Modifie l'angle vertical de visualisation. Les valeurs sont automatiquement
+     * limitées entre -90° et +90° lors de l'affichage. Cette modification déclenche
+     * un événement PropertyChange permettant d'observer le changement.</p>
+     * 
+     * @param latitude Nouvelle latitude en degrés (-90° à +90°)
+     * @see #getLatitude()
+     * @see #affiche()
      */
     public void setLatitude(double latitude) {
         double ancienneValeur = this.latitude;
@@ -1110,14 +1154,28 @@ public final class NavigateurPanoramique {
     }
 
     /**
-     * @return the longitude
+     * Retourne la longitude actuelle de la vue panoramique
+     * 
+     * <p>La longitude représente l'angle horizontal de visualisation dans le panorama.
+     * Valeur normalisée entre -180° et +180° lors de l'affichage.</p>
+     * 
+     * @return Longitude en degrés, où 0° = centre, valeurs négatives = gauche, positives = droite
+     * @see #setLongitude(double)
      */
     public double getLongitude() {
         return longitude;
     }
 
     /**
-     * @param longitude the longitude to set
+     * Définit la longitude de la vue panoramique
+     * 
+     * <p>Modifie l'angle horizontal de visualisation. La valeur est automatiquement
+     * normalisée entre -180° et +180° lors de l'affichage pour assurer la continuité
+     * de la rotation. Cette modification déclenche un événement PropertyChange.</p>
+     * 
+     * @param longitude Nouvelle longitude en degrés (normalisée automatiquement)
+     * @see #getLongitude()
+     * @see #affiche()
      */
     public void setLongitude(double longitude) {
         double ancienneValeur = this.longitude;
@@ -1127,14 +1185,41 @@ public final class NavigateurPanoramique {
     }
 
     /**
-     * @return the fov
+     * Retourne le champ de vision (Field of View) actuel
+     * 
+     * <p>Le FOV détermine l'angle de vision horizontal de la caméra panoramique.
+     * Plus la valeur est petite, plus le zoom est important (effet téléobjectif).
+     * Plus la valeur est grande, plus le champ est large (effet grand-angle).</p>
+     * 
+     * @return FOV en degrés, limité entre minFov et maxFov
+     * @see #setFov(double)
+     * @see #getMinFov()
+     * @see #getMaxFov()
      */
     public double getFov() {
         return fov;
     }
 
     /**
-     * @param fov the fov to set
+     * Définit le champ de vision (Field of View)
+     * 
+     * <p>Modifie le niveau de zoom de la vue panoramique en ajustant l'angle
+     * de vision de la caméra. La valeur est automatiquement limitée entre
+     * {@code minFov} et {@code maxFov} pour garantir une visualisation correcte.
+     * Un FOV petit correspond à un zoom important (vision télescopique), tandis
+     * qu'un FOV grand offre une vue panoramique large.</p>
+     * 
+     * <p><strong>Exemples typiques :</strong></p>
+     * <ul>
+     *   <li>FOV 120° : Vue très large (grand-angle)</li>
+     *   <li>FOV  90° : Vue normale</li>
+     *   <li>FOV  30° : Vue zoomée (téléobjectif)</li>
+     * </ul>
+     * 
+     * @param fov Nouveau champ de vision en degrés (sera limité à [minFov, maxFov])
+     * @see #getFov()
+     * @see #setMinFov(double)
+     * @see #setMaxFov(double)
      */
     public void setFov(double fov) {
         double ancienneValeur = this.fov;
@@ -1145,14 +1230,27 @@ public final class NavigateurPanoramique {
     }
 
     /**
-     * @return the positNord
+     * Retourne la position angulaire du nord géographique
+     * 
+     * <p>Définit l'orientation du panorama par rapport au nord géographique.
+     * Cette valeur permet d'afficher correctement les points cardinaux (N, S, E, O)
+     * dans l'interface de navigation.</p>
+     * 
+     * @return Position du nord en degrés (0-360°)
+     * @see #setPositNord(double)
      */
     public double getPositNord() {
         return positNord;
     }
 
     /**
-     * @param positNord the positNord to set
+     * Définit la position angulaire du nord géographique
+     * 
+     * <p>Configure l'orientation du panorama pour aligner les points cardinaux.
+     * Déclenche un événement PropertyChange pour mettre à jour l'affichage.</p>
+     * 
+     * @param positNord Position du nord en degrés (0-360°)
+     * @see #getPositNord()
      */
     public void setPositNord(double positNord) {
         double ancienneValeur = this.positNord;
@@ -1162,28 +1260,46 @@ public final class NavigateurPanoramique {
     }
 
     /**
-     * @return the nomFichierPanoramique
+     * Retourne le nom du fichier image panoramique
+     * 
+     * @return Chemin complet ou nom du fichier panoramique chargé
+     * @see #setNomFichierPanoramique(String)
      */
     public String getNomFichierPanoramique() {
         return nomFichierPanoramique;
     }
 
     /**
-     * @param nomFichierPanoramique the nomFichierPanoramique to set
+     * Définit le nom du fichier image panoramique
+     * 
+     * @param nomFichierPanoramique Chemin ou nom du fichier à afficher
+     * @see #getNomFichierPanoramique()
      */
     public void setNomFichierPanoramique(String nomFichierPanoramique) {
         this.nomFichierPanoramique = nomFichierPanoramique;
     }
 
     /**
-     * @return the choixLongitude
+     * Retourne la longitude choisie par l'utilisateur pour un hotspot
+     * 
+     * <p>Cette valeur stocke la longitude sélectionnée lors de la création
+     * ou modification d'un hotspot dans le panorama.</p>
+     * 
+     * @return Longitude de choix en degrés
+     * @see #setChoixLongitude(double)
      */
     public double getChoixLongitude() {
         return choixLongitude;
     }
 
     /**
-     * @param choixLongitude the choixLongitude to set
+     * Définit la longitude choisie pour un hotspot
+     * 
+     * <p>Enregistre la position horizontale sélectionnée lors de l'interaction
+     * utilisateur. Déclenche un événement PropertyChange.</p>
+     * 
+     * @param choixLongitude Longitude de choix en degrés
+     * @see #getChoixLongitude()
      */
     public void setChoixLongitude(double choixLongitude) {
         double ancienneValeur = this.choixLongitude;
@@ -1193,14 +1309,26 @@ public final class NavigateurPanoramique {
     }
 
     /**
-     * @return the choixLatitude
+     * Retourne la latitude choisie par l'utilisateur pour un hotspot
+     * 
+     * <p>Cette valeur stocke la latitude sélectionnée lors de la création
+     * ou modification d'un hotspot dans le panorama.</p>
+     * 
+     * @return Latitude de choix en degrés (-90° à +90°)
+     * @see #setChoixLatitude(double)
      */
     public double getChoixLatitude() {
         return choixLatitude;
     }
 
     /**
-     * @param choixLatitude the choixLatitude to set
+     * Définit la latitude choisie pour un hotspot
+     * 
+     * <p>Enregistre la position verticale sélectionnée lors de l'interaction
+     * utilisateur. Déclenche un événement PropertyChange.</p>
+     * 
+     * @param choixLatitude Latitude de choix en degrés (-90° à +90°)
+     * @see #getChoixLatitude()
      */
     public void setChoixLatitude(double choixLatitude) {
         double ancienneValeur = this.choixLatitude;
@@ -1210,14 +1338,26 @@ public final class NavigateurPanoramique {
     }
 
     /**
-     * @return the choixFov
+     * Retourne le FOV choisi par l'utilisateur pour un hotspot
+     * 
+     * <p>Cette valeur stocke le champ de vision sélectionné lors de la création
+     * ou modification d'un hotspot, permettant de mémoriser le niveau de zoom.</p>
+     * 
+     * @return FOV de choix en degrés
+     * @see #setChoixFov(double)
      */
     public double getChoixFov() {
         return choixFov;
     }
 
     /**
-     * @param choixFov the choixFov to set
+     * Définit le FOV choisi pour un hotspot
+     * 
+     * <p>Enregistre le champ de vision sélectionné lors de l'interaction utilisateur.
+     * Déclenche un événement PropertyChange.</p>
+     * 
+     * @param choixFov FOV de choix en degrés
+     * @see #getChoixFov()
      */
     public void setChoixFov(double choixFov) {
         double ancienneValeur = this.choixFov;
@@ -1227,28 +1367,49 @@ public final class NavigateurPanoramique {
     }
 
     /**
-     * @return the imgPanoramique
+     * Retourne l'image panoramique actuellement chargée
+     * 
+     * @return Image équirectangulaire du panorama, ou null si aucune image chargée
+     * @see #setImgPanoramique(Image)
      */
     public Image getImgPanoramique() {
         return this.imgPanoramique;
     }
 
     /**
-     * @param imgPanoramique the imgPanoramique to set
+     * Définit l'image panoramique à afficher
+     * 
+     * <p>Charge une nouvelle image équirectangulaire dans le navigateur.</p>
+     * 
+     * @param imgPanoramique Image panoramique à afficher
+     * @see #getImgPanoramique()
      */
     public void setImgPanoramique(Image imgPanoramique) {
         this.imgPanoramique = imgPanoramique;
     }
 
     /**
-     * @return the maxFov
+     * Retourne le champ de vision maximum autorisé
+     * 
+     * <p>Définit la limite supérieure du zoom (vue la plus large).
+     * Limité à 120° maximum pour éviter les déformations excessives.</p>
+     * 
+     * @return FOV maximum en degrés (≤ 120°)
+     * @see #setMaxFov(double)
+     * @see #getFov()
      */
     public double getMaxFov() {
         return maxFov;
     }
 
     /**
-     * @param maxFov the maxFov to set
+     * Définit le champ de vision maximum autorisé
+     * 
+     * <p>Configure la limite supérieure du zoom. La valeur est automatiquement
+     * plafonnée à 120° pour garantir une visualisation correcte.</p>
+     * 
+     * @param maxFov FOV maximum souhaité en degrés (sera limité à 120°)
+     * @see #getMaxFov()
      */
     public void setMaxFov(double maxFov) {
         // Accepter la valeur de l'utilisateur (limite raisonnable à 120°)
@@ -1256,14 +1417,27 @@ public final class NavigateurPanoramique {
     }
 
     /**
-     * @return the minFov
+     * Retourne le champ de vision minimum autorisé
+     * 
+     * <p>Définit la limite inférieure du zoom (vue la plus rapprochée/zoomée).
+     * Limité à 1° minimum pour éviter les problèmes de rendu.</p>
+     * 
+     * @return FOV minimum en degrés (≥ 1°)
+     * @see #setMinFov(double)
+     * @see #getFov()
      */
     public double getMinFov() {
         return minFov;
     }
 
     /**
-     * @param minFov the minFov to set
+     * Définit le champ de vision minimum autorisé
+     * 
+     * <p>Configure la limite inférieure du zoom. La valeur est automatiquement
+     * limitée à 1° minimum pour garantir une visualisation stable.</p>
+     * 
+     * @param minFov FOV minimum souhaité en degrés (sera limité à ≥ 1°)
+     * @see #getMinFov()
      */
     public void setMinFov(double minFov) {
         // Accepter la valeur de l'utilisateur (limite raisonnable à 1° minimum)
@@ -1271,14 +1445,26 @@ public final class NavigateurPanoramique {
     }
 
     /**
-     * @return the iChangeVignette
+     * Retourne l'indicateur de changement de vignette
+     * 
+     * <p>Valeur binaire (0 ou 1) qui alterne à chaque changement de vignette,
+     * permettant aux observateurs de détecter les modifications.</p>
+     * 
+     * @return Indicateur de changement (0 ou 1)
+     * @see #setiChangeVignette()
      */
     public int getiChangeVignette() {
         return iChangeVignette;
     }
 
     /**
-     *
+     * Bascule l'indicateur de changement de vignette
+     * 
+     * <p>Inverse la valeur (0→1 ou 1→0) et déclenche un événement PropertyChange
+     * "changeVignette" pour notifier les observateurs qu'une nouvelle vignette
+     * a été capturée.</p>
+     * 
+     * @see #getiChangeVignette()
      */
     public void setiChangeVignette() {
         int ancienneValeur = this.iChangeVignette;
@@ -1288,49 +1474,82 @@ public final class NavigateurPanoramique {
     }
 
     /**
-     * @return the bChoixHotSpot
+     * Indique si le mode de choix de hotspot est actif
+     * 
+     * <p>En mode choix de hotspot, les clics dans le panorama enregistrent
+     * des positions pour créer ou modifier des hotspots.</p>
+     * 
+     * @return true si le mode choix de hotspot est actif, false sinon
+     * @see #setbChoixHotSpot(boolean)
      */
     public boolean isbChoixHotSpot() {
         return bChoixHotSpot;
     }
 
     /**
-     * @param bChoixHotSpot the bChoixHotSpot to set
+     * Active ou désactive le mode de choix de hotspot
+     * 
+     * <p>Permet de basculer entre le mode navigation normal et le mode
+     * sélection de position pour les hotspots.</p>
+     * 
+     * @param bChoixHotSpot true pour activer le mode choix, false pour le désactiver
+     * @see #isbChoixHotSpot()
      */
     public void setbChoixHotSpot(boolean bChoixHotSpot) {
         this.bChoixHotSpot = bChoixHotSpot;
     }
 
     /**
-     * @return the imgVignetteHS
+     * Retourne l'image vignette associée au hotspot
+     * 
+     * <p>Vignette capturée lors de la création du hotspot, affichée comme
+     * aperçu de la direction pointée.</p>
+     * 
+     * @return Image vignette du hotspot, ou null si aucune
+     * @see #setImgVignetteHS(Image)
+     * @see #captureEcranHS()
      */
     public Image getImgVignetteHS() {
         return imgVignetteHS;
     }
 
     /**
-     * @param imgVignetteHS the imgVignetteHS to set
+     * Définit l'image vignette du hotspot
+     * 
+     * <p>Associe une image d'aperçu au hotspot en cours de création ou modification.</p>
+     * 
+     * @param imgVignetteHS Image vignette à associer
+     * @see #getImgVignetteHS()
      */
     public void setImgVignetteHS(Image imgVignetteHS) {
         this.imgVignetteHS = imgVignetteHS;
     }
 
     /**
-     * @return the btnPleinEcran
+     * Retourne le bouton de basculement plein écran
+     * 
+     * @return Bouton UI permettant de passer en mode plein écran
+     * @see #isbPleinEcran()
      */
     public Button getBtnPleinEcran() {
         return btnPleinEcran;
     }
 
     /**
-     * @return the bPleinEcran
+     * Indique si le navigateur est en mode plein écran
+     * 
+     * @return true si en plein écran, false sinon
+     * @see #setbPleinEcran(boolean)
      */
     public boolean isbPleinEcran() {
         return bPleinEcran;
     }
 
     /**
-     * @param bPleinEcran the bPleinEcran to set
+     * Active ou désactive le mode plein écran
+     * 
+     * @param bPleinEcran true pour activer le plein écran, false pour le désactiver
+     * @see #isbPleinEcran()
      */
     public void setbPleinEcran(boolean bPleinEcran) {
         this.bPleinEcran = bPleinEcran;
