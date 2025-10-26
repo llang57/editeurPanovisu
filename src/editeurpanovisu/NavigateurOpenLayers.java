@@ -582,7 +582,7 @@ public class NavigateurOpenLayers {
     }
 
     /**
-     * Classe pour la communication JavaScript <-> Java
+     * Classe pour la communication JavaScript &lt;-&gt; Java
      */
     public class JavaApplication {
 

@@ -13754,7 +13754,7 @@ public class GestionnaireInterfaceController {
     }
 
     /**
-     * @param iCalqueBarrePersonnalisée the iCalqueBarrePersonnalisée to set
+     * @param iCalqueBarrePersonnalisee the iCalqueBarrePersonnalisee to set
      */
     public void setiCalqueBarrePersonnalisee(int iCalqueBarrePersonnalisee) {
         this.iCalqueBarrePersonnalisee = iCalqueBarrePersonnalisee;

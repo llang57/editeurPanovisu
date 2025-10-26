@@ -260,7 +260,7 @@ public class ConversionRatio2to1DialogController {
      * 
      * <p>Crée et configure tous les composants de l'interface graphique :</p>
      * <ul>
-     * <li>Zone de drag & drop pour ajouter des images</li>
+     * <li>Zone de drag &amp; drop pour ajouter des images</li>
      * <li>Liste des fichiers à traiter</li>
      * <li>Options de remplissage (noir, flou, miroir)</li>
      * <li>Sélection du format de sortie</li>

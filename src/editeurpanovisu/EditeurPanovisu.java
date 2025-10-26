@@ -11083,7 +11083,7 @@ public class EditeurPanovisu extends Application {
      * 
      * Cet outil permet de :
      * <ul>
-     * <li>Charger plusieurs images via drag & drop ou FileChooser</li>
+     * <li>Charger plusieurs images via drag &amp; drop ou FileChooser</li>
      * <li>Redimensionner les images en conservant ou non le ratio</li>
      * <li>Compresser les images avec différents niveaux de qualité</li>
      * <li>Convertir entre différents formats (JPEG, PNG, WEBP)</li>
@@ -11109,7 +11109,7 @@ public class EditeurPanovisu extends Application {
      * Cet outil permet de convertir des images au format panoramique 2:1 requis
      * pour les visualisations équirectangulaires. Les fonctionnalités incluent :
      * <ul>
-     * <li>Charger plusieurs images via drag & drop ou FileChooser</li>
+     * <li>Charger plusieurs images via drag &amp; drop ou FileChooser</li>
      * <li>Analyse automatique des couleurs de bordure pour un padding intelligent</li>
      * <li>Positionnement de l'image source (centré, haut, bas)</li>
      * <li>Extension avec remplissage basé sur les couleurs de bord</li>
@@ -14583,7 +14583,7 @@ public class EditeurPanovisu extends Application {
      *   <li>Chargement de la localisation et des préférences utilisateur</li>
      *   <li>Création de la fenêtre principale et des menus</li>
      *   <li>Initialisation des barres d'outils et panneaux</li>
-     *   <li>Configuration des gestionnaires d'événements (drag & drop, raccourcis clavier)</li>
+     *   <li>Configuration des gestionnaires d'événements (drag &amp; drop, raccourcis clavier)</li>
      *   <li>Chargement du dernier projet si nécessaire</li>
      * </ul>
      * 

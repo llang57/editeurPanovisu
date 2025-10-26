@@ -63,7 +63,7 @@ import javafx.util.Callback;
  * 
  * <p>Cette classe gère une fenêtre de dialogue permettant de :</p>
  * <ul>
- * <li>Charger des images par drag & drop ou via FileChooser</li>
+ * <li>Charger des images par drag &amp; drop ou via FileChooser</li>
  * <li>Redimensionner les images avec ou sans conservation du ratio</li>
  * <li>Compresser les images avec différents niveaux de qualité</li>
  * <li>Convertir entre différents formats (JPEG, PNG, WEBP)</li>
@@ -257,7 +257,7 @@ public class RedimensionnementImagesDialogController {
      * 
      * <p>Crée et configure tous les composants de l'interface graphique :</p>
      * <ul>
-     * <li>Zone de drag & drop pour ajouter des images</li>
+     * <li>Zone de drag &amp; drop pour ajouter des images</li>
      * <li>Liste des fichiers à traiter</li>
      * <li>Options de redimensionnement (largeur, hauteur, ratio)</li>
      * <li>Sélection du format de sortie</li>
