@@ -7,31 +7,17 @@ on:
       - 'src/**/*.java'
       - '.github/workflows/javadoc.yml'
   workflow_dispatch:
-    inputs:
-      force:
-        description: 'Forcer la publication'
-        required: false
-        default: 'false'
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# Permettre un seul déploiement concurrent
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  contents: write
 
 jobs:
-  build:
+  generate-javadoc:
     runs-on: ubuntu-latest
     
     steps:
     - name: 📥 Checkout du code
       uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
     
     - name: ☕ Configuration Java 25
       uses: actions/setup-java@v4
@@ -42,63 +28,23 @@ jobs:
     
     - name: 📚 Générer Javadoc avec Maven
       run: |
-        echo "🔧 Génération de la Javadoc..."
         mvn javadoc:javadoc -DskipTests
-        
-        # Détecter le répertoire de sortie
-        if [ -d "target/reports/apidocs" ]; then
-          JAVADOC_DIR="target/reports/apidocs"
-        elif [ -d "target/site/apidocs" ]; then
-          JAVADOC_DIR="target/site/apidocs"
-        elif [ -d "target/apidocs" ]; then
-          JAVADOC_DIR="target/apidocs"
-        else
-          echo "❌ Erreur : Aucun répertoire Javadoc trouvé !"
-          find target -type d -name "apidocs" || echo "Aucun apidocs trouvé"
-          exit 1
-        fi
-        
-        echo "✅ Javadoc générée dans : $JAVADOC_DIR"
-        
-        # Vérifier que index.html existe
-        if [ ! -f "$JAVADOC_DIR/index.html" ]; then
-          echo "❌ Erreur : index.html manquant dans $JAVADOC_DIR"
-          exit 1
-        fi
-        
-        # Créer .nojekyll pour désactiver Jekyll
-        touch "$JAVADOC_DIR/.nojekyll"
-        
-        # Afficher les statistiques
-        echo "📊 Statistiques de la Javadoc :"
-        echo "   - Fichiers HTML : $(find $JAVADOC_DIR -name '*.html' | wc -l)"
-        echo "   - Taille totale : $(du -sh $JAVADOC_DIR | cut -f1)"
-        
-        # Copier pour le déploiement
-        mkdir -p _site
-        cp -r "$JAVADOC_DIR"/* _site/
-        
-        echo "✅ Javadoc prête pour le déploiement dans _site/"
+        JAVADOC_DIR="target/reports/apidocs"
+        mkdir -p javadoc-output
+        cp -r "$JAVADOC_DIR"/* javadoc-output/
+        touch javadoc-output/.nojekyll
     
-    - name: � Upload artifact pour GitHub Pages
-      uses: actions/upload-pages-artifact@v3
+    - name: 🚀 Déployer sur GitHub Pages (/javadoc/)
+      uses: peaceiris/actions-gh-pages@v3
       with:
-        path: '_site'
-
-  # Job de déploiement
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./javadoc-output
+        destination_dir: javadoc
+        publish_branch: gh-pages
+        keep_files: true
+        commit_message: 'docs: 📖 Mise à jour Javadoc'
     
-    steps:
-    - name: 🚀 Déployer sur GitHub Pages
-      id: deployment
-      uses: actions/deploy-pages@v4
-    
-    - name: ✅ Publication réussie
+    - name: ✅ Succès
       run: |
-        echo "✅ Javadoc publiée avec succès !"
-        echo "📖 Accessible à : ${{ steps.deployment.outputs.page_url }}"
+        echo "✅ Javadoc: https://llang57.github.io/editeurPanovisu/javadoc/"
+        echo "📚 Doxygen: https://llang57.github.io/editeurPanovisu/"
