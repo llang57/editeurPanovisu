@@ -1726,7 +1726,17 @@ public class GestionnaireInterfaceController {
     }
 
     /**
-     *
+     * Affiche la fenêtre d'information du projet
+     * 
+     * <p>Affiche une fenêtre modale centrée contenant :</p>
+     * <ul>
+     *   <li>Une image personnalisée ou l'image par défaut (infoDefaut.jpg)</li>
+     *   <li>Un texte URL configurable en position et style</li>
+     *   <li>Taille, opacité et position ajustables</li>
+     * </ul>
+     * 
+     * @see #afficheFenetreAide()
+     * @see #setbAfficheFenetreInfo(boolean)
      */
     public void afficheFenetreInfo() {
         if (bAfficheFenetreInfo) {
@@ -1770,7 +1780,16 @@ public class GestionnaireInterfaceController {
     }
 
     /**
-     *
+     * Affiche la fenêtre d'aide du projet
+     * 
+     * <p>Affiche une fenêtre modale centrée contenant :</p>
+     * <ul>
+     *   <li>Une image personnalisée ou l'image par défaut (aideDefaut.jpg)</li>
+     *   <li>Taille, opacité et position ajustables</li>
+     * </ul>
+     * 
+     * @see #afficheFenetreInfo()
+     * @see #setbAfficheFenetreAide(boolean)
      */
     public void afficheFenetreAide() {
         if (bAfficheFenetreAide) {
@@ -1970,7 +1989,19 @@ public class GestionnaireInterfaceController {
     }
 
     /**
-     *
+     * Affiche la carte interactive avec marqueurs et radar
+     * 
+     * <p>Crée ou met à jour l'affichage de la carte géographique avec :</p>
+     * <ul>
+     *   <li>NavigateurCarte (OpenLayers/Leaflet) avec tuiles cartographiques</li>
+     *   <li>Marqueurs de géolocalisation pour chaque panorama</li>
+     *   <li>Radar de direction avec angle et ouverture configurables</li>
+     *   <li>Zoom et centrage automatiques sur les panoramas</li>
+     * </ul>
+     * 
+     * @see NavigateurCarte
+     * @see #affichePlan()
+     * @see #setbAfficheCarte(boolean)
      */
     public void afficheCarte() {
         apVisuCarte.getChildren().clear();
@@ -2128,7 +2159,20 @@ public class GestionnaireInterfaceController {
     }
 
     /**
-     *
+     * Affiche le plan 2D avec hotspots et boussole
+     * 
+     * <p>Affiche un plan d'étage ou de site avec :</p>
+     * <ul>
+     *   <li>Image de plan personnalisée</li>
+     *   <li>Hotspots cliquables pour navigation entre panoramas</li>
+     *   <li>Boussole de direction (optionnelle)</li>
+     *   <li>Position configurable (haut/bas/gauche/droite)</li>
+     *   <li>Titre et dimensions ajustables</li>
+     * </ul>
+     * 
+     * @see #afficheCarte()
+     * @see GestionnairePlanController
+     * @see #setbAffichePlan(boolean)
      */
     public void affichePlan() {
         apVisuPlan.getChildren().clear();
@@ -2252,7 +2296,21 @@ public class GestionnaireInterfaceController {
     }
 
     /**
-     *
+     * Affiche le bouton de visite automatique
+     * 
+     * <p>Affiche un bouton permettant de démarrer/arrêter la visite automatique
+     * qui parcourt automatiquement les panoramas avec un délai configurable.</p>
+     * 
+     * <p>Caractéristiques :</p>
+     * <ul>
+     *   <li>Position configurable dans la visualisation</li>
+     *   <li>Taille ajustable</li>
+     *   <li>Icône personnalisable</li>
+     *   <li>Visible uniquement si la visite auto est démarrée</li>
+     * </ul>
+     * 
+     * @see #setbAfficheBoutonVisiteAuto(boolean)
+     * @see #setTailleBoutonVisiteAuto(double)
      */
     public void afficheBoutonVisiteAuto() {
         apVisualisation.getChildren().remove(apVisuBoutonVisiteAuto);
@@ -2660,7 +2718,24 @@ public class GestionnaireInterfaceController {
     }
 
     /**
-     *
+     * Affiche la barre d'outils personnalisée
+     * 
+     * <p>Affiche une barre d'outils créée à partir d'une image avec zones cliquables
+     * définies dans un fichier SHP (shapefile HTML). Permet une personnalisation
+     * complète de l'interface de navigation.</p>
+     * 
+     * <p>Fonctionnalités :</p>
+     * <ul>
+     *   <li>Image de barre personnalisée avec zones réactives</li>
+     *   <li>Colorisation dynamique de l'image (HSB)</li>
+     *   <li>Position et taille configurables</li>
+     *   <li>Zones cliquables définies par coordonnées</li>
+     *   <li>Actions liées à chaque zone (navigation, zoom, etc.)</li>
+     * </ul>
+     * 
+     * @see #chargeBarrePersonnalisee(String)
+     * @see #afficheBarreClassique(String, double, double, double, String, String, double)
+     * @see ZoneTelecommande
      */
     public void afficheBarrePersonnalisee() {
         apAfficheBarrePersonnalisee.getChildren().clear();
@@ -2813,12 +2888,26 @@ public class GestionnaireInterfaceController {
     }
 
     /**
-     *
-     * @param strNomFichier nom du fichier de la barre personnalisée
-     * @param zonesBarre zonnes de la barre personnalisée
-     * @return nombre de zones de la barre
-     * @throws UnsupportedEncodingException Exception d'encodage non supportée
-     * @throws IOException Exception d'entrée sortie
+     * Lit et parse un fichier SHP (Shapefile HTML) pour la barre personnalisée
+     * 
+     * <p>Charge un fichier de définition de zones cliquables au format SHP
+     * qui définit les zones interactives d'une barre d'outils personnalisée.</p>
+     * 
+     * <p>Le fichier SHP contient pour chaque zone :</p>
+     * <ul>
+     *   <li>ID de la zone (ex: "telUp", "telZoomPlus", "area-1")</li>
+     *   <li>Type de forme (rectangle, circle, polygon)</li>
+     *   <li>Coordonnées de la zone</li>
+     *   <li>Actions associées</li>
+     * </ul>
+     * 
+     * @param strNomFichier Chemin du fichier SHP à charger
+     * @param zonesBarre Tableau de zones à remplir avec les données
+     * @return Nombre de zones chargées, ou -1 en cas d'erreur
+     * @throws UnsupportedEncodingException Si l'encodage du fichier n'est pas supporté
+     * @throws IOException Si erreur de lecture du fichier
+     * @see ZoneTelecommande
+     * @see #chargeBarrePersonnalisee(String)
      */
     public int lisFichierShp(String strNomFichier, ZoneTelecommande[] zonesBarre) throws UnsupportedEncodingException, IOException {
         try {
@@ -10786,220 +10875,311 @@ public class GestionnaireInterfaceController {
     }
 
     /**
-     * @return the offsetXBarreClassique
+     * Retourne le décalage horizontal de la barre classique
+     * 
+     * @return Offset X en pixels depuis la position de référence
+     * @see #setOffsetXBarreClassique(double)
      */
     public double getOffsetXBarreClassique() {
         return offsetXBarreClassique;
     }
 
     /**
-     * @param offsetXBarreClassique the offsetXBarreClassique to set
+     * Définit le décalage horizontal de la barre classique
+     * 
+     * @param offsetXBarreClassique Offset X en pixels
+     * @see #getOffsetXBarreClassique()
      */
     public void setOffsetXBarreClassique(double offsetXBarreClassique) {
         this.offsetXBarreClassique = offsetXBarreClassique;
     }
 
     /**
-     * @return the offsetYBarreClassique
+     * Retourne le décalage vertical de la barre classique
+     * 
+     * @return Offset Y en pixels depuis la position de référence
+     * @see #setOffsetYBarreClassique(double)
      */
     public double getOffsetYBarreClassique() {
         return offsetYBarreClassique;
     }
 
     /**
-     * @param offsetYBarreClassique the offsetYBarreClassique to set
+     * Définit le décalage vertical de la barre classique
+     * 
+     * @param offsetYBarreClassique Offset Y en pixels
+     * @see #getOffsetYBarreClassique()
      */
     public void setOffsetYBarreClassique(double offsetYBarreClassique) {
         this.offsetYBarreClassique = offsetYBarreClassique;
     }
 
     /**
-     * @return the tailleBarreClassique
+     * Retourne la taille des icônes de la barre classique
+     * 
+     * @return Taille en pixels (largeur = hauteur)
+     * @see #setTailleBarreClassique(double)
      */
     public double getTailleBarreClassique() {
         return tailleBarreClassique;
     }
 
     /**
-     * @param tailleBarreClassique the tailleBarreClassique to set
+     * Définit la taille des icônes de la barre classique
+     * 
+     * @param tailleBarreClassique Taille en pixels
+     * @see #getTailleBarreClassique()
      */
     public void setTailleBarreClassique(double tailleBarreClassique) {
         this.tailleBarreClassique = tailleBarreClassique;
     }
 
     /**
-     * @return the espacementBarreClassique
+     * Retourne l'espacement entre les icônes de la barre classique
+     * 
+     * @return Espacement en pixels
+     * @see #setEspacementBarreClassique(double)
      */
     public double getEspacementBarreClassique() {
         return espacementBarreClassique;
     }
 
     /**
-     * @param espacementBarreClassique the espacementBarreClassique to set
+     * Définit l'espacement entre les icônes de la barre classique
+     * 
+     * @param espacementBarreClassique Espacement en pixels
+     * @see #getEspacementBarreClassique()
      */
     public void setEspacementBarreClassique(double espacementBarreClassique) {
         this.espacementBarreClassique = espacementBarreClassique;
     }
 
     /**
-     * @return the strStyleDefautBarreClassique
+     * Retourne le style par défaut de la barre classique
+     * 
+     * @return Nom du style par défaut
+     * @see #getStyleBarreClassique()
      */
     public String getStrStyleDefautBarreClassique() {
         return strStyleDefautBarreClassique;
     }
 
     /**
-     * @return the strPositionBarreClassique
+     * Retourne la position de la barre classique
+     * 
+     * @return Position ("haut", "bas", "gauche", "droite")
+     * @see #setStrPositionBarreClassique(String)
      */
     public String getStrPositionBarreClassique() {
         return strPositionBarreClassique;
     }
 
     /**
-     * @param strPositionBarreClassique the strPositionBarreClassique to set
+     * Définit la position de la barre classique
+     * 
+     * @param strPositionBarreClassique Position ("haut", "bas", "gauche", "droite")
+     * @see #getStrPositionBarreClassique()
      */
     public void setStrPositionBarreClassique(String strPositionBarreClassique) {
         this.strPositionBarreClassique = strPositionBarreClassique;
     }
 
     /**
-     * @return the styleBarreClassique
+     * Retourne le style actuel de la barre classique
+     * 
+     * @return Nom du style appliqué
+     * @see #setStyleBarreClassique(String)
      */
     public String getStyleBarreClassique() {
         return styleBarreClassique;
     }
 
     /**
-     * @param styleBarreClassique the styleBarreClassique to set
+     * Définit le style de la barre classique
+     * 
+     * @param styleBarreClassique Nom du style à appliquer
+     * @see #getStyleBarreClassique()
      */
     public void setStyleBarreClassique(String styleBarreClassique) {
         this.styleBarreClassique = styleBarreClassique;
     }
 
     /**
-     * @return the strDeplacementsBarreClassique
+     * Indique si les déplacements sont affichés dans la barre classique
+     * 
+     * @return "oui" ou "non"
+     * @see #setStrDeplacementsBarreClassique(String)
      */
     public String getStrDeplacementsBarreClassique() {
         return strDeplacementsBarreClassique;
     }
 
     /**
-     * @param strDeplacementsBarreClassique the strDeplacementsBarreClassique to
-     * set
+     * Définit l'affichage des boutons de déplacement
+     * 
+     * @param strDeplacementsBarreClassique "oui" pour afficher, "non" pour masquer
+     * @see #getStrDeplacementsBarreClassique()
      */
     public void setStrDeplacementsBarreClassique(String strDeplacementsBarreClassique) {
         this.strDeplacementsBarreClassique = strDeplacementsBarreClassique;
     }
 
     /**
-     * @return the strZoomBarreClassique
+     * Indique si le zoom est affiché dans la barre classique
+     * 
+     * @return "oui" ou "non"
+     * @see #setStrZoomBarreClassique(String)
      */
     public String getStrZoomBarreClassique() {
         return strZoomBarreClassique;
     }
 
     /**
-     * @param strZoomBarreClassique the strZoomBarreClassique to set
+     * Définit l'affichage des boutons de zoom
+     * 
+     * @param strZoomBarreClassique "oui" pour afficher, "non" pour masquer
+     * @see #getStrZoomBarreClassique()
      */
     public void setStrZoomBarreClassique(String strZoomBarreClassique) {
         this.strZoomBarreClassique = strZoomBarreClassique;
     }
 
     /**
-     * @return the strOutilsBarreClassique
+     * Indique si les outils sont affichés dans la barre classique
+     * 
+     * @return "oui" ou "non"
+     * @see #setStrOutilsBarreClassique(String)
      */
     public String getStrOutilsBarreClassique() {
         return strOutilsBarreClassique;
     }
 
     /**
-     * @param strOutilsBarreClassique the strOutilsBarreClassique to set
+     * Définit l'affichage des boutons d'outils (info, aide, etc.)
+     * 
+     * @param strOutilsBarreClassique "oui" pour afficher, "non" pour masquer
+     * @see #getStrOutilsBarreClassique()
      */
     public void setStrOutilsBarreClassique(String strOutilsBarreClassique) {
         this.strOutilsBarreClassique = strOutilsBarreClassique;
     }
 
     /**
-     * @return the strRotationBarreClassique
+     * Indique si la rotation est affichée dans la barre classique
+     * 
+     * @return "oui" ou "non"
+     * @see #setStrRotationBarreClassique(String)
      */
     public String getStrRotationBarreClassique() {
         return strRotationBarreClassique;
     }
 
     /**
-     * @param strRotationBarreClassique the strRotationBarreClassique to set
+     * Définit l'affichage du bouton de rotation
+     * 
+     * @param strRotationBarreClassique "oui" pour afficher, "non" pour masquer
+     * @see #getStrRotationBarreClassique()
      */
     public void setStrRotationBarreClassique(String strRotationBarreClassique) {
         this.strRotationBarreClassique = strRotationBarreClassique;
     }
 
     /**
-     * @return the strPleinEcranBarreClassique
+     * Indique si le plein écran est affiché dans la barre classique
+     * 
+     * @return "oui" ou "non"
+     * @see #setStrPleinEcranBarreClassique(String)
      */
     public String getStrPleinEcranBarreClassique() {
         return strPleinEcranBarreClassique;
     }
 
     /**
-     * @param strPleinEcranBarreClassique the strPleinEcranBarreClassique to set
+     * Définit l'affichage du bouton plein écran
+     * 
+     * @param strPleinEcranBarreClassique "oui" pour afficher, "non" pour masquer
+     * @see #getStrPleinEcranBarreClassique()
      */
     public void setStrPleinEcranBarreClassique(String strPleinEcranBarreClassique) {
         this.strPleinEcranBarreClassique = strPleinEcranBarreClassique;
     }
 
     /**
-     * @return the strSourisBarreClassique
+     * Indique si le mode souris est affiché dans la barre classique
+     * 
+     * @return "oui" ou "non"
+     * @see #setStrSourisBarreClassique(String)
      */
     public String getStrSourisBarreClassique() {
         return strSourisBarreClassique;
     }
 
     /**
-     * @param strSourisBarreClassique the strSourisBarreClassique to set
+     * Définit l'affichage du bouton de mode souris
+     * 
+     * @param strSourisBarreClassique "oui" pour afficher, "non" pour masquer
+     * @see #getStrSourisBarreClassique()
      */
     public void setStrSourisBarreClassique(String strSourisBarreClassique) {
         this.strSourisBarreClassique = strSourisBarreClassique;
     }
 
     /**
-     * @return the strVisibiliteBarreClassique
+     * Retourne le mode de visibilité de la barre classique
+     * 
+     * @return "oui" (toujours visible), "non" (masquée), ou "survol" (visible au survol)
+     * @see #setStrVisibiliteBarreClassique(String)
      */
     public String getStrVisibiliteBarreClassique() {
         return strVisibiliteBarreClassique;
     }
 
     /**
-     * @param strVisibiliteBarreClassique the strVisibiliteBarreClassique to set
+     * Définit le mode de visibilité de la barre classique
+     * 
+     * @param strVisibiliteBarreClassique "oui", "non", ou "survol"
+     * @see #getStrVisibiliteBarreClassique()
      */
     public void setStrVisibiliteBarreClassique(String strVisibiliteBarreClassique) {
         this.strVisibiliteBarreClassique = strVisibiliteBarreClassique;
     }
 
     /**
-     * @return the bCouleurOrigineBarrePersonnalisee
+     * Indique si la barre personnalisée conserve ses couleurs d'origine
+     * 
+     * @return true pour conserver les couleurs, false pour appliquer une teinte
+     * @see #setbCouleurOrigineBarrePersonnalisee(boolean)
      */
     public boolean isbCouleurOrigineBarrePersonnalisee() {
         return bCouleurOrigineBarrePersonnalisee;
     }
 
     /**
-     * @param bCouleurOrigineBarrePersonnalisee the
-     * bCouleurOrigineBarrePersonnalisee to set
+     * Définit si la barre personnalisée conserve ses couleurs d'origine
+     * 
+     * @param bCouleurOrigineBarrePersonnalisee true pour couleurs d'origine, false pour teinte
+     * @see #isbCouleurOrigineBarrePersonnalisee()
      */
     public void setbCouleurOrigineBarrePersonnalisee(boolean bCouleurOrigineBarrePersonnalisee) {
         this.bCouleurOrigineBarrePersonnalisee = bCouleurOrigineBarrePersonnalisee;
     }
 
     /**
-     * @return the iNombreZonesBarrePersonnalisee
+     * Retourne le nombre de zones cliquables de la barre personnalisée
+     * 
+     * @return Nombre de zones définies dans le fichier SHP
+     * @see #setiNombreZonesBarrePersonnalisee(int)
+     * @see #lisFichierShp(String, ZoneTelecommande[])
      */
     public int getiNombreZonesBarrePersonnalisee() {
         return iNombreZonesBarrePersonnalisee;
     }
 
     /**
-     * @param iNombreZonesBarrePersonnalisee the iNombreZonesBarrePersonnalisee
-     * to set
+     * Définit le nombre de zones cliquables de la barre personnalisée
+     * 
+     * @param iNombreZonesBarrePersonnalisee Nombre de zones
+     * @see #getiNombreZonesBarrePersonnalisee()
      */
     public void setiNombreZonesBarrePersonnalisee(int iNombreZonesBarrePersonnalisee) {
         this.iNombreZonesBarrePersonnalisee = iNombreZonesBarrePersonnalisee;
