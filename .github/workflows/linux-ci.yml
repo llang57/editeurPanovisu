@@ -139,11 +139,11 @@ jobs:
       - name: 📥 Checkout code
         uses: actions/checkout@v4
       
-      - name: ☕ Setup Java 21 (for compatibility)
+      - name: ☕ Setup Java 25
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '21'
+          java-version: '25'
           cache: 'maven'
       
       - name: 📝 Create api-keys.properties
@@ -151,10 +151,10 @@ jobs:
           cp api-keys.properties.template api-keys.properties
           echo "✅ Configuration créée"
       
-      - name: 🔨 Compile with Java 21
+      - name: 🔨 Compile with Java 25
         run: |
           mvn clean compile -q
-          echo "✅ Compilation Java 21 réussie"
+          echo "✅ Compilation Java 25 réussie"
       
       - name: 🔍 Maven Dependency Check
         run: |
