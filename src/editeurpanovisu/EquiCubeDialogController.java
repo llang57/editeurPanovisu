@@ -480,7 +480,7 @@ public class EquiCubeDialogController {
      * 
      * <p>Crée et affiche une fenêtre modale permettant de :</p>
      * <ul>
-     *   <li>Sélectionner des images à transformer (drag & drop ou sélection)</li>
+     *   <li>Sélectionner des images à transformer (drag &amp; drop ou sélection)</li>
      *   <li>Choisir le type de transformation (Equi→Cube ou Cube→Equi)</li>
      *   <li>Configurer les options (format, netteté)</li>
      *   <li>Lancer la transformation par lot</li>

@@ -554,60 +554,266 @@ public class GestionnaireInterfaceController {
      */
     private Color couleurBarreClassique = Color.hsb(180, 0.39, 0.5);
 
-    /*
-     Variables barre de navigation Personnalisée 
+    /**
+     * Indique si la couleur d'origine de la barre personnalisée est utilisée.
      */
     private boolean bCouleurOrigineBarrePersonnalisee = true;
+    
+    /**
+     * Nombre de zones interactives définies dans la barre personnalisée.
+     */
     private int iNombreZonesBarrePersonnalisee = 0;
+    
+    /**
+     * Décalage horizontal de la barre personnalisée en pixels.
+     */
     private double offsetXBarrePersonnalisee = 0;
+    
+    /**
+     * Décalage vertical de la barre personnalisée en pixels.
+     */
     private double offsetYBarrePersonnalisee = 0;
+    
+    /**
+     * Taille de la barre personnalisée en pourcentage.
+     */
     private double tailleBarrePersonnalisee = 100;
+    
+    /**
+     * Taille des icônes dans la barre personnalisée en pixels.
+     */
     private double tailleIconesBarrePersonnalisee = 40;
+    
+    /**
+     * Opacité de la barre personnalisée (0.0 = transparent, 1.0 = opaque).
+     */
     private double opaciteBarrePersonnalisee = 1.0;
+    
+    /**
+     * Position de la barre personnalisée (format "vertical:horizontal").
+     * Valeur par défaut: "bottom:right".
+     */
     private String strPositionBarrePersonnalisee = "bottom:right";
+    
+    /**
+     * Activation des boutons de déplacement dans la barre personnalisée ("oui"/"non").
+     */
     private String strDeplacementsBarrePersonnalisee = "oui";
+    
+    /**
+     * Activation des boutons de zoom dans la barre personnalisée ("oui"/"non").
+     */
     private String strZoomBarrePersonnalisee = "oui";
+    
+    /**
+     * Activation du bouton d'information dans la barre personnalisée ("oui"/"non").
+     */
     private String strInfoBarrePersonnalisee = "oui";
+    
+    /**
+     * Activation du bouton d'aide dans la barre personnalisée ("oui"/"non").
+     */
     private String strAideBarrePersonnalisee = "oui";
+    
+    /**
+     * Activation des boutons de rotation dans la barre personnalisée ("oui"/"non").
+     */
     private String strRotationBarrePersonnalisee = "oui";
+    
+    /**
+     * Activation du bouton plein écran dans la barre personnalisée ("oui"/"non").
+     */
     private String strPleinEcranBarrePersonnalisee = "oui";
+    
+    /**
+     * Activation du bouton mode souris dans la barre personnalisée ("oui"/"non").
+     */
     private String strSourisBarrePersonnalisee = "oui";
+    
+    /**
+     * Visibilité initiale de la barre personnalisée ("oui"/"non").
+     */
     private String strVisibiliteBarrePersonnalisee = "non";
+    
+    /**
+     * Chemin vers l'image de la barre de navigation personnalisée.
+     */
     private String strLienImageBarrePersonnalisee = "";
+    
+    /**
+     * Lien personnalisé 1 pour la barre personnalisée.
+     */
     private String strLien1BarrePersonnalisee = "";
+    
+    /**
+     * Lien personnalisé 2 pour la barre personnalisée.
+     */
     private String strLien2BarrePersonnalisee = "";
+    
+    /**
+     * Tableau des zones de télécommande de la barre personnalisée.
+     * Capacité maximale de 50 zones.
+     */
     private ZoneTelecommande[] zonesBarrePersonnalisee = new ZoneTelecommande[50];
+    
+    /**
+     * RadioButton pour positionner la barre personnalisée en haut à gauche.
+     */
     private RadioButton rbTopLeftBarrePersonnalisee;
+    
+    /**
+     * RadioButton pour positionner la barre personnalisée en haut au centre.
+     */
     private RadioButton rbTopCenterBarrePersonnalisee;
+    
+    /**
+     * RadioButton pour positionner la barre personnalisée en haut à droite.
+     */
     private RadioButton rbTopRightBarrePersonnalisee;
+    
+    /**
+     * RadioButton pour positionner la barre personnalisée au milieu à gauche.
+     */
     private RadioButton rbMiddleLeftBarrePersonnalisee;
+    
+    /**
+     * RadioButton pour positionner la barre personnalisée au milieu à droite.
+     */
     private RadioButton rbMiddleRightBarrePersonnalisee;
+    
+    /**
+     * RadioButton pour positionner la barre personnalisée en bas à gauche.
+     */
     private RadioButton rbBottomLeftBarrePersonnalisee;
+    
+    /**
+     * RadioButton pour positionner la barre personnalisée en bas au centre.
+     */
     private RadioButton rbBottomCenterBarrePersonnalisee;
+    
+    /**
+     * RadioButton pour positionner la barre personnalisée en bas à droite.
+     */
     private RadioButton rbBottomRightBarrePersonnalisee;
+    
+    /**
+     * RadioButton pour utiliser la couleur d'origine de la barre personnalisée.
+     */
     private RadioButton rbCouleurOrigineBarrePersonnalisee;
+    
+    /**
+     * RadioButton pour utiliser une couleur personnalisée pour la barre.
+     */
     private RadioButton rbCouleurPersBarrePersonnalisee;
+    
+    /**
+     * ImageView affichant la barre de navigation personnalisée.
+     */
     private ImageView ivBarrePersonnalisee;
+    
+    /**
+     * Image PNG de la barre personnalisée.
+     */
     private Image imgPngBarrePersonnalisee;
+    
+    /**
+     * Image modifiable de la barre personnalisée avec couleur appliquée.
+     */
     private WritableImage wiBarrePersonnaliseeCouleur;
+    
+    /**
+     * AnchorPane pour l'affichage de la barre personnalisée.
+     */
     private AnchorPane apAfficheBarrePersonnalisee;
+    
+    /**
+     * CheckBox contrôlant la visibilité de la barre personnalisée.
+     */
     private CheckBox cbBarrePersonnaliseeVisible;
+    
+    /**
+     * CheckBox contrôlant l'affichage des boutons de déplacement.
+     */
     private CheckBox cbDeplacementsBarrePersonnalisee;
+    
+    /**
+     * CheckBox contrôlant l'affichage des boutons de zoom.
+     */
     private CheckBox cbZoomBarrePersonnalisee;
+    
+    /**
+     * CheckBox contrôlant l'affichage du bouton plein écran.
+     */
     private CheckBox cbFSBarrePersonnalisee;
+    
+    /**
+     * CheckBox contrôlant l'affichage du bouton mode souris.
+     */
     private CheckBox cbSourisBarrePersonnalisee;
+    
+    /**
+     * CheckBox contrôlant l'affichage des boutons de rotation.
+     */
     private CheckBox cbRotationBarrePersonnalisee;
+    
+    /**
+     * TextField pour spécifier le chemin de l'image de la barre personnalisée.
+     */
     private TextField tfLienImageBarrePersonnalisee;
+    
+    /**
+     * TextField pour le lien personnalisé 1.
+     */
     private TextField tfLien1BarrePersonnalisee;
+    
+    /**
+     * TextField pour le lien personnalisé 2.
+     */
     private TextField tfLien2BarrePersonnalisee;
+    
+    /**
+     * Slider pour ajuster la taille de la barre personnalisée.
+     */
     private Slider sltailleBarrePersonnalisee;
+    
+    /**
+     * Slider pour ajuster la taille des icônes de la barre personnalisée.
+     */
     private Slider sltailleIconesBarrePersonnalisee;
+    
+    /**
+     * Slider pour ajuster l'opacité de la barre personnalisée.
+     */
     private Slider slOpaciteBarrePersonnalisee;
+    
+    /**
+     * Champ de saisie pour le décalage horizontal de la barre personnalisée.
+     */
     private BigDecimalField bdfOffsetXBarrePersonnalisee;
+    
+    /**
+     * Champ de saisie pour le décalage vertical de la barre personnalisée.
+     */
     private BigDecimalField bdfOffsetYBarrePersonnalisee;
+    
+    /**
+     * ColorPicker pour la couleur de la barre personnalisée.
+     */
     private ColorPicker cpCouleurBarrePersonnalisee;
+    
+    /**
+     * Couleur de la barre de navigation personnalisée.
+     */
     private Color couleurBarrePersonnalisee = Color.hsb(180, 0.39, 0.5);
+    
+    /**
+     * ToggleGroup pour les RadioButton de position de la barre personnalisée.
+     */
     final ToggleGroup grpPositionBarrePersonnalisee = new ToggleGroup();
+    
+    /**
+     * ToggleGroup pour les RadioButton de choix de couleur de la barre personnalisée.
+     */
     final ToggleGroup grpCouleurBarrePersonnalisee = new ToggleGroup();
     /**
      * Bouton pour éditer la barre de navigation personnalisée.
@@ -703,15 +909,45 @@ public class GestionnaireInterfaceController {
     private boolean bChargementEnCours = false;
 
     /**
-     * Variables boussole
+     * Indique si la boussole est affichée.
      */
     private boolean bAfficheBoussole = false;
+    
+    /**
+     * Nom du fichier image utilisé pour la boussole.
+     * Valeur par défaut: "rose3.png".
+     */
     private String strImageBoussole = "rose3.png";
+    
+    /**
+     * Position de la boussole à l'écran (format "vertical:horizontal").
+     * Valeur par défaut: "top:right".
+     */
     private String strPositionBoussole = "top:right";
+    
+    /**
+     * Décalage horizontal de la boussole en pixels.
+     */
     private double offsetXBoussole = 20;
+    
+    /**
+     * Décalage vertical de la boussole en pixels.
+     */
     private double offsetYBoussole = 20;
+    
+    /**
+     * Taille de la boussole en pixels.
+     */
     private double tailleBoussole = 100;
+    
+    /**
+     * Opacité de la boussole (0.0 = transparent, 1.0 = opaque).
+     */
     private double opaciteBoussole = 0.8;
+    
+    /**
+     * Indique si l'aiguille de la boussole est mobile (rotation selon l'angle de vue).
+     */
     private boolean bAiguilleMobileBoussole = true;
     /**
      * Répertoire des images de fond.
@@ -1025,76 +1261,331 @@ public class GestionnaireInterfaceController {
      * Label pour afficher le lien URL dans la fenêtre.
      */
     private final Label lblFenetreURL = new Label();
+    
     /**
      * Répertoire des images de masquage.
      */
     private String strRepertMasques = "";
+    
+    /**
+     * Indique si le bouton de masquage est affiché.
+     */
     private boolean bAfficheMasque = false;
+    
+    /**
+     * Nom du fichier image utilisé pour le bouton de masquage.
+     * Valeur par défaut: "MA.png".
+     */
     private String strImageMasque = "MA.png";
+    
+    /**
+     * Position du bouton de masquage (format "vertical:horizontal").
+     * Valeur par défaut: "top:right".
+     */
     private String strPositionMasque = "top:right";
+    
+    /**
+     * Décalage horizontal du bouton de masquage en pixels.
+     */
     private double dXMasque = 20;
+    
+    /**
+     * Décalage vertical du bouton de masquage en pixels.
+     */
     private double dYMasque = 20;
+    
+    /**
+     * Taille du bouton de masquage en pixels.
+     */
     private double tailleMasque = 30;
+    
+    /**
+     * Opacité du bouton de masquage (0.0 = transparent, 1.0 = opaque).
+     */
     private double opaciteMasque = 0.8;
+    
+    /**
+     * Indique si le masquage s'applique à la barre de navigation.
+     */
     private boolean bMasqueNavigation = true;
+    
+    /**
+     * Indique si le masquage s'applique à la boussole.
+     */
     private boolean bMasqueBoussole = true;
+    
+    /**
+     * Indique si le masquage s'applique au titre.
+     */
     private boolean bMasqueTitre = true;
+    
+    /**
+     * Indique si le masquage s'applique au plan.
+     */
     private boolean bMasquePlan = true;
+    
+    /**
+     * Indique si le masquage s'applique aux boutons de réseaux sociaux.
+     */
     private boolean bMasqueReseaux = true;
+    
+    /**
+     * Indique si le masquage s'applique aux vignettes.
+     */
     private boolean bMasqueVignettes = true;
+    
+    /**
+     * Indique si le masquage s'applique au menu combiné.
+     */
     private boolean bMasqueCombo = true;
+    
+    /**
+     * Indique si le masquage s'applique aux boutons suivant/précédent.
+     */
     private boolean bMasqueSuivPrec = true;
+    
+    /**
+     * Indique si le masquage s'applique aux hotspots.
+     */
     private boolean bMasqueHotspots = true;
+    
+    /**
+     * ImageView affichant l'icône de masquage.
+     */
     private ImageView ivMasque;
+    
+    /**
+     * Champ de saisie pour le décalage horizontal du masque.
+     */
     private BigDecimalField bdfOffsetXMasque;
+    
+    /**
+     * Champ de saisie pour le décalage vertical du masque.
+     */
     private BigDecimalField bdfOffsetYMasque;
+    
+    /**
+     * Slider pour ajuster la taille du bouton de masquage.
+     */
     private Slider slTailleMasque;
+    
+    /**
+     * Slider pour ajuster l'opacité du bouton de masquage.
+     */
     private Slider slOpaciteMasque;
+    
+    /**
+     * CheckBox pour activer l'affichage du bouton de masquage.
+     */
     private CheckBox cbAfficheMasque;
+    
+    /**
+     * CheckBox pour activer le masquage de la navigation.
+     */
     private CheckBox cbMasqueNavigation;
+    
+    /**
+     * CheckBox pour activer le masquage de la boussole.
+     */
     private CheckBox cbMasqueBoussole;
+    
+    /**
+     * CheckBox pour activer le masquage du titre.
+     */
     private CheckBox cbMasqueTitre;
+    
+    /**
+     * CheckBox pour activer le masquage du plan.
+     */
     private CheckBox cbMasquePlan;
+    
+    /**
+     * CheckBox pour activer le masquage des réseaux sociaux.
+     */
     private CheckBox cbMasqueReseaux;
+    
+    /**
+     * CheckBox pour activer le masquage des vignettes.
+     */
     private CheckBox cbMasqueVignettes;
+    
+    /**
+     * CheckBox pour activer le masquage du menu combiné.
+     */
     private CheckBox cbMasqueCombo;
+    
+    /**
+     * CheckBox pour activer le masquage des boutons suivant/précédent.
+     */
     private CheckBox cbMasqueSuivPrec;
+    
+    /**
+     * CheckBox pour activer le masquage des hotspots.
+     */
     private CheckBox cbMasqueHotspots;
+    
+    /**
+     * RadioButton pour positionner le masque en haut à gauche.
+     */
     private RadioButton rbMasqueTopLeft;
+    
+    /**
+     * RadioButton pour positionner le masque en haut à droite.
+     */
     private RadioButton rbMasqueTopRight;
+    
+    /**
+     * RadioButton pour positionner le masque en bas à gauche.
+     */
     private RadioButton rbMasqueBottomLeft;
+    
+    /**
+     * RadioButton pour positionner le masque en bas à droite.
+     */
     private RadioButton rbMasqueBottomRight;
 
     /**
      * Répertoire des images pour les réseaux sociaux.
      */
     private String strRepertReseauxSociaux = "";
+    
+    /**
+     * Indique si les boutons de réseaux sociaux sont affichés.
+     */
     private boolean bAfficheReseauxSociaux = false;
+    
+    /**
+     * Nom du fichier image pour le bouton Twitter/X.
+     * Valeur par défaut: "twitter.png".
+     */
     private String strImageReseauxSociauxTwitter = "twitter.png";
+    
+    /**
+     * Nom du fichier image pour le bouton Meta (Facebook).
+     * Valeur par défaut: "facebook.png".
+     */
     private String strImageReseauxSociauxMeta = "facebook.png";
+    
+    /**
+     * Nom du fichier image pour le bouton Email.
+     * Valeur par défaut: "email.png".
+     */
     private String strImageReseauxSociauxEmail = "email.png";
+    
+    /**
+     * Position des boutons de réseaux sociaux (format "vertical:horizontal").
+     * Valeur par défaut: "top:right".
+     */
     private String strPositionReseauxSociaux = "top:right";
+    
+    /**
+     * Décalage horizontal des boutons de réseaux sociaux en pixels.
+     */
     private double dXReseauxSociaux = 20;
+    
+    /**
+     * Décalage vertical des boutons de réseaux sociaux en pixels.
+     */
     private double dYReseauxSociaux = 20;
+    
+    /**
+     * Taille des boutons de réseaux sociaux en pixels.
+     */
     private double tailleReseauxSociaux = 30;
+    
+    /**
+     * Opacité des boutons de réseaux sociaux (0.0 = transparent, 1.0 = opaque).
+     */
     private double opaciteReseauxSociaux = 0.8;
+    
+    /**
+     * Indique si le bouton Twitter/X est activé.
+     */
     private boolean bReseauxSociauxTwitter = true;
+    
+    /**
+     * Indique si le bouton Meta (Facebook) est activé.
+     */
     private boolean bReseauxSociauxMeta = true;
+    
+    /**
+     * Indique si le bouton Email est activé.
+     */
     private boolean bReseauxSociauxEmail = true;
+    
+    /**
+     * ImageView affichant l'icône Twitter/X.
+     */
     private ImageView ivTwitter;
+    
+    /**
+     * ImageView affichant l'icône Meta (Facebook).
+     */
     private ImageView ivMeta;
+    
+    /**
+     * ImageView affichant l'icône Email.
+     */
     private ImageView ivEmail;
+    
+    /**
+     * Champ de saisie pour le décalage horizontal des réseaux sociaux.
+     */
     private BigDecimalField bdfOffsetXReseauxSociaux;
+    
+    /**
+     * Champ de saisie pour le décalage vertical des réseaux sociaux.
+     */
     private BigDecimalField bdfOffsetYreseauxSociaux;
+    
+    /**
+     * Slider pour ajuster la taille des boutons de réseaux sociaux.
+     */
     private Slider slTailleReseauxSociaux;
+    
+    /**
+     * Slider pour ajuster l'opacité des boutons de réseaux sociaux.
+     */
     private Slider slOpaciteReseauxSociaux;
+    
+    /**
+     * CheckBox pour activer l'affichage des réseaux sociaux.
+     */
     private CheckBox cbAfficheReseauxSociaux;
+    
+    /**
+     * CheckBox pour activer le bouton Twitter/X.
+     */
     private CheckBox cbReseauxSociauxTwitter;
+    
+    /**
+     * CheckBox pour activer le bouton Meta (Facebook).
+     */
     private CheckBox cbReseauxSociauxMeta;
+    
+    /**
+     * CheckBox pour activer le bouton Email.
+     */
     private CheckBox cbReseauxSociauxEmail;
+    
+    /**
+     * RadioButton pour positionner les réseaux sociaux en haut à gauche.
+     */
     private RadioButton rbReseauxSociauxTopLeft;
+    
+    /**
+     * RadioButton pour positionner les réseaux sociaux en haut à droite.
+     */
     private RadioButton rbReseauxSociauxTopRight;
+    
+    /**
+     * RadioButton pour positionner les réseaux sociaux en bas à gauche.
+     */
     private RadioButton rbReseauxSociauxBottomLeft;
+    
+    /**
+     * RadioButton pour positionner les réseaux sociaux en bas à droite.
+     */
     private RadioButton rbReseauxSociauxBottomRight;
     
     /**
@@ -1248,288 +1739,1180 @@ public class GestionnaireInterfaceController {
      * Champ de saisie pour le décalage vertical du menu combiné.
      */
     private BigDecimalField bdfOffsetYComboMenu;
+    
+    /**
+     * RadioButton pour positionner le menu combiné en haut à gauche.
+     */
     private RadioButton rbComboMenuTopLeft;
+    
+    /**
+     * RadioButton pour positionner le menu combiné en haut au centre.
+     */
     private RadioButton rbComboMenuTopCenter;
+    
+    /**
+     * RadioButton pour positionner le menu combiné en haut à droite.
+     */
     private RadioButton rbComboMenuTopRight;
+    
+    /**
+     * RadioButton pour positionner le menu combiné en bas à gauche.
+     */
     private RadioButton rbComboMenuBottomLeft;
+    
+    /**
+     * RadioButton pour positionner le menu combiné en bas au centre.
+     */
     private RadioButton rbComboMenuBottomCenter;
+    
+    /**
+     * RadioButton pour positionner le menu combiné en bas à droite.
+     */
     private RadioButton rbComboMenuBottomRight;
+    
+    /**
+     * ScrollPane contenant les outils de configuration.
+     */
     private ScrollPane spOutils;
+    
+    /**
+     * AnchorPane pour la visualisation.
+     */
     private AnchorPane apVis;
-    /*
-     *   variables Bouton Visite Automatique
+
+    /**
+     * AnchorPane pour le bouton de visite automatique.
      */
     private AnchorPane apBoutonVisiteAuto;
+    
+    /**
+     * AnchorPane pour la visualisation du bouton de visite automatique.
+     */
     private AnchorPane apVisuBoutonVisiteAuto;
+    
+    /**
+     * CheckBox pour activer l'affichage du bouton de visite automatique.
+     */
     private CheckBox cbAfficheBoutonVisiteAuto;
+    
+    /**
+     * Champ de saisie pour le décalage horizontal du bouton de visite auto.
+     */
     private BigDecimalField bdfOffsetXBoutonVisiteAuto;
+    
+    /**
+     * Champ de saisie pour le décalage vertical du bouton de visite auto.
+     */
     private BigDecimalField bdfOffsetYBoutonVisiteAuto;
+    
+    /**
+     * RadioButton pour positionner le bouton visite auto en haut à gauche.
+     */
     private RadioButton rbBoutonVisiteAutoTopLeft;
+    
+    /**
+     * RadioButton pour positionner le bouton visite auto en haut au centre.
+     */
     private RadioButton rbBoutonVisiteAutoTopCenter;
+    
+    /**
+     * RadioButton pour positionner le bouton visite auto en haut à droite.
+     */
     private RadioButton rbBoutonVisiteAutoTopRight;
+    
+    /**
+     * RadioButton pour positionner le bouton visite auto en bas à gauche.
+     */
     private RadioButton rbBoutonVisiteAutoBottomLeft;
+    
+    /**
+     * RadioButton pour positionner le bouton visite auto en bas au centre.
+     */
     private RadioButton rbBoutonVisiteAutoBottomCenter;
+    
+    /**
+     * RadioButton pour positionner le bouton visite auto en bas à droite.
+     */
     private RadioButton rbBoutonVisiteAutoBottomRight;
+    
+    /**
+     * Slider pour ajuster la taille du bouton de visite automatique.
+     */
     private Slider slTailleBoutonVisiteAuto;
+    
+    /**
+     * ImageView affichant l'icône du bouton de visite automatique.
+     */
     private ImageView ivBtnVisiteAuto;
+    
+    /**
+     * ToggleGroup pour les RadioButton de position du bouton visite auto.
+     */
     private ToggleGroup tgPosBoutonVisiteAuto = new ToggleGroup();
+    
+    /**
+     * AnchorPane contenant le bouton de visite automatique.
+     */
     private AnchorPane apBtnVA;
+    
+    /**
+     * Indique si le bouton de visite automatique est affiché.
+     */
     private boolean bAfficheBoutonVisiteAuto = false;
+    
+    /**
+     * Position horizontale du bouton de visite auto ("left", "right").
+     */
     private String strPositionXBoutonVisiteAuto = "right";
+    
+    /**
+     * Position verticale du bouton de visite auto ("top", "bottom").
+     */
     private String strPositionYBoutonVisiteAuto = "top";
+    
+    /**
+     * Décalage horizontal du bouton de visite auto en pixels.
+     */
     private double offsetXBoutonVisiteAuto = 10;
+    
+    /**
+     * Décalage vertical du bouton de visite auto en pixels.
+     */
     private double offsetYBoutonVisiteAuto = 10;
+    
+    /**
+     * Taille du bouton de visite automatique en pixels.
+     */
     private double tailleBoutonVisiteAuto = 32;
 
-    /*
-     Variable du plan
+    /**
+     * AnchorPane pour la configuration du plan 2D.
      */
     private AnchorPane apPlan;
+    
+    /**
+     * AnchorPane pour la visualisation du plan 2D.
+     */
     private AnchorPane apVisuPlan;
+    
+    /**
+     * Indique si le plan 2D est affiché.
+     */
     private boolean bAffichePlan = false;
+    
+    /**
+     * Position du plan à l'écran ("left", "right").
+     */
     private String strPositionPlan = "left";
+    
+    /**
+     * Largeur du plan en pixels.
+     */
     private double largeurPlan = 200;
+    
+    /**
+     * Couleur de fond du plan.
+     */
     private Color couleurFondPlan = Color.hsb(180, 0.39, 0.5);
+    
+    /**
+     * Couleur de fond du plan au format hexadécimal.
+     */
     private String strCouleurFondPlan = couleurFondPlan.toString().substring(2, 8);
+    
+    /**
+     * Opacité du plan (0.0 = transparent, 1.0 = opaque).
+     */
     private double opacitePlan = 0.8;
+    
+    /**
+     * Couleur du texte du plan.
+     */
     private Color couleurTextePlan = Color.rgb(255, 255, 255);
+    
+    /**
+     * Couleur du texte du plan au format hexadécimal.
+     */
     private String strCouleurTextePlan = couleurTextePlan.toString().substring(2, 8);
+    
+    /**
+     * Indique si le radar de position est affiché sur le plan.
+     */
     private boolean bAfficheRadar = false;
+    
+    /**
+     * Couleur de la ligne du radar.
+     */
     private Color couleurLigneRadar = Color.rgb(255, 255, 0);
+    
+    /**
+     * Couleur de la ligne du radar au format hexadécimal.
+     */
     private String strCouleurLigneRadar = couleurLigneRadar.toString().substring(2, 8);
+    
+    /**
+     * Couleur de fond du radar.
+     */
     private Color couleurFondRadar = Color.rgb(200, 0, 0);
+    
+    /**
+     * Couleur de fond du radar au format hexadécimal.
+     */
     private String strCouleurFondRadar = couleurFondRadar.toString().substring(2, 8);
+    
+    /**
+     * Taille du radar en pixels.
+     */
     private double tailleRadar = 40;
+    
+    /**
+     * Opacité du radar (0.0 = transparent, 1.0 = opaque).
+     */
     private double opaciteRadar = 0.5;
+    
+    /**
+     * Indique si le plan est replié au démarrage.
+     */
     private boolean bReplieDemarragePlan = false;
 
-    /*
-     Variables des infoBulles
+    /**
+     * Indique si l'ombre est affichée sur les infobulles.
      */
     public boolean bOmbreInfoBulle = true;
+    
+    /**
+     * Couleur de fond des infobulles au format hexadécimal.
+     */
     public String strCouleurFondInfoBulle = "#eee";
+    
+    /**
+     * Couleur du texte des infobulles au format hexadécimal.
+     */
     public String strCouleurTexteInfoBulle = "#444";
+    
+    /**
+     * Couleur de la bordure des infobulles au format hexadécimal.
+     */
     public String strCouleurBordureInfoBulle = "#0A0";
+    
+    /**
+     * Police utilisée pour les infobulles.
+     */
     public String strPoliceInfoBulle = "Verdana";
+    
+    /**
+     * Taille de la police des infobulles en points.
+     */
     public double taillePoliceInfoBulle = 16;
+    
+    /**
+     * Opacité des infobulles (0.0 = transparent, 1.0 = opaque).
+     */
     public double opaciteInfoBulle = 0.75;
+    
+    /**
+     * Épaisseurs des bordures des infobulles (top, bottom, left, right) en pixels.
+     */
     public int iTailleBordureTop = 1, iTailleBordureBottom = 1, iTailleBordureLeft = 5, iTailleBordureRight = 1;
+    
+    /**
+     * Rayons d'arrondi des coins des infobulles (TL=TopLeft, TR=TopRight, BL=BottomLeft, BR=BottomRight).
+     */
     public int iArrondiTL = 0, iArrondiTR = 5, iArrondiBL = 0, iArrondiBR = 5;
 
-    /*
-     Eléments de l'onglet InfoBulle
+    /**
+     * CheckBox pour activer l'ombre des infobulles.
      */
     private CheckBox cbOmbreInfoBulle;
+    
+    /**
+     * ColorPicker pour la couleur de fond des infobulles.
+     */
     private ColorPicker cpCouleurFondInfoBulle;
+    
+    /**
+     * ColorPicker pour la couleur du texte des infobulles.
+     */
     private ColorPicker cpCouleurTextInfoBulle;
+    
+    /**
+     * ColorPicker pour la couleur de bordure des infobulles.
+     */
     private ColorPicker cpCouleurBordureInfoBulle;
+    
+    /**
+     * ComboBox pour sélectionner la police des infobulles.
+     */
     private ComboBox cbListePoliceInfoBulle;
+    
+    /**
+     * Slider pour ajuster la taille de la police des infobulles.
+     */
     private Slider slTaillePoliceInfoBulle;
+    
+    /**
+     * Slider pour ajuster l'opacité des infobulles.
+     */
     private Slider slOpaciteInfoBulle;
+    
+    /**
+     * Champs de saisie pour les épaisseurs des bordures des infobulles.
+     */
     private BigDecimalField bdfTailleBordureTop, bdfTailleBordureBottom, bdfTailleBordureLeft, bdfTailleBordureRight;
+    
+    /**
+     * Champs de saisie pour les rayons d'arrondi des coins des infobulles.
+     */
     private BigDecimalField bdfArrondiTL, bdfArrondiTR, bdfArrondiBL, bdfArrondiBR;
+    
+    /**
+     * Label de test pour prévisualiser le style des infobulles.
+     */
     private Label lblInfoBulle = new Label("test infoBulle");
 
-    /*
-     Eléments de l'onglet plan
+    /**
+     * CheckBox pour activer l'affichage du plan.
      */
     private CheckBox cbAffichePlan;
+    
+    /**
+     * Slider pour ajuster l'opacité du plan.
+     */
     private Slider slOpacitePlan;
+    
+    /**
+     * RadioButton pour positionner le plan à gauche.
+     */
     private RadioButton rbPlanLeft;
+    
+    /**
+     * RadioButton pour positionner le plan à droite.
+     */
     private RadioButton rbPlanRight;
+    
+    /**
+     * ColorPicker pour la couleur de fond du plan.
+     */
     private ColorPicker cpCouleurFondPlan;
+    
+    /**
+     * ColorPicker pour la couleur du texte du plan.
+     */
     private ColorPicker cpCouleurTextePlan;
+    
+    /**
+     * Slider pour ajuster la largeur du plan.
+     */
     private Slider slLargeurPlan;
+    
+    /**
+     * CheckBox pour activer l'affichage du radar sur le plan.
+     */
     private CheckBox cbAfficheRadar;
+    
+    /**
+     * ColorPicker pour la couleur de fond du radar.
+     */
     private ColorPicker cpCouleurFondRadar;
+    
+    /**
+     * ColorPicker pour la couleur de la ligne du radar.
+     */
     private ColorPicker cpCouleurLigneRadar;
+    
+    /**
+     * CheckBox pour activer le repliement du plan au démarrage.
+     */
     private CheckBox cbReplieDemarragePlan;
+    
+    /**
+     * Slider pour ajuster la taille du radar.
+     */
     private Slider slTailleRadar;
+    
+    /**
+     * Slider pour ajuster l'opacité du radar.
+     */
     private Slider slOpaciteRadar;
-    /*
-     Variable de la Carte
+    
+    /**
+     * AnchorPane pour la configuration de la carte géographique.
      */
     private AnchorPane apCarte;
+    
+    /**
+     * AnchorPane pour la visualisation de la carte géographique.
+     */
     private AnchorPane apVisuCarte;
+    
+    /**
+     * Indique si la carte géographique est affichée.
+     */
     private boolean bAfficheCarte = false;
 
+    /**
+     * Position de la carte à l'écran ("left", "right").
+     */
     private String strPositionCarte = "left";
+    
+    /**
+     * Largeur de la carte en pixels.
+     */
     private double largeurCarte = 400;
+    
+    /**
+     * Hauteur de la carte en pixels.
+     */
     private double hauteurCarte = 300;
+    
+    /**
+     * Couleur de fond de la carte.
+     */
     private Color couleurFondCarte = Color.hsb(180, 0.39, 0.5);
+    
+    /**
+     * Couleur de fond de la carte au format hexadécimal.
+     */
     private String strCouleurFondCarte = couleurFondCarte.toString().substring(2, 8);
+    
+    /**
+     * Opacité de la carte (0.0 = transparent, 1.0 = opaque).
+     */
     private double opaciteCarte = 0.8;
+    
+    /**
+     * Couleur du texte de la carte.
+     */
     private Color couleurTexteCarte = Color.rgb(255, 255, 255);
+    
+    /**
+     * Couleur du texte de la carte au format hexadécimal.
+     */
     private String strCouleurTexteCarte = couleurTexteCarte.toString().substring(2, 8);
+    
+    /**
+     * Indique si le radar de position est affiché sur la carte.
+     */
     private boolean bAfficheRadarCarte = false;
+    
+    /**
+     * Couleur de la ligne du radar sur la carte.
+     */
     private Color couleurLigneRadarCarte = Color.rgb(200, 0, 0);
+    
+    /**
+     * Couleur de la ligne du radar au format hexadécimal.
+     */
     private String strCouleurLigneRadarCarte = couleurLigneRadarCarte.toString().substring(2, 8);
+    
+    /**
+     * Couleur de fond du radar sur la carte.
+     */
     private Color couleurFondRadarCarte = Color.rgb(200, 0, 0);
+    
+    /**
+     * Couleur de fond du radar au format hexadécimal.
+     */
     private String strCouleurFondRadarCarte = couleurFondRadarCarte.toString().substring(2, 8);
-    private double tailleRadarCarte = 60; // Taille en mètres (x3 par rapport à 20m)
+    
+    /**
+     * Taille du radar en mètres (x3 par rapport à 20m).
+     */
+    private double tailleRadarCarte = 60;
+    
+    /**
+     * Opacité du radar sur la carte (0.0 = transparent, 1.0 = opaque).
+     */
     private double opaciteRadarCarte = 0.4;
+    
+    /**
+     * Coordonnées géographiques du centre de la carte.
+     */
     private CoordonneesGeographiques coordCentreCarte;
+    
+    /**
+     * Facteur de zoom initial de la carte (1-20).
+     */
     private int iFacteurZoomCarte = 14;
+    
+    /**
+     * Angle du radar sur la carte en degrés.
+     */
     private double angleRadarCarte = 45.d;
+    
+    /**
+     * Ouverture angulaire du radar en degrés.
+     */
     private double ouvertureRadarCarte = 35.d;
+    
+    /**
+     * Nom du provider de tuiles cartographiques.
+     */
     private String strNomLayers = "OpenStreetMap";
+    
+    /**
+     * Indique si la carte est repliée au démarrage.
+     */
     private boolean bReplieDemarrageCarte = false;
 
-    /*
-     Eléments de l'onglet Carte
+    /**
+     * CheckBox pour activer l'affichage de la carte.
      */
     private CheckBox cbAfficheCarte;
+    
+    /**
+     * Slider pour ajuster l'opacité de la carte.
+     */
     private Slider slOpaciteCarte;
+    
+    /**
+     * RadioButton pour positionner la carte à gauche.
+     */
     private RadioButton rbCarteLeft;
+    
+    /**
+     * RadioButton pour positionner la carte à droite.
+     */
     private RadioButton rbCarteRight;
+    
+    /**
+     * ColorPicker pour la couleur de fond de la carte.
+     */
     private ColorPicker cpCouleurFondCarte;
+    
+    /**
+     * ColorPicker pour la couleur du texte de la carte.
+     */
     private ColorPicker cpCouleurTexteCarte;
+    
+    /**
+     * Slider pour ajuster la largeur de la carte.
+     */
     private Slider slLargeurCarte;
+    
+    /**
+     * Slider pour ajuster la hauteur de la carte.
+     */
     private Slider slHauteurCarte;
+    
+    /**
+     * Slider pour ajuster le niveau de zoom de la carte.
+     */
     private Slider slZoomCarte;
+    
+    /**
+     * CheckBox pour activer l'affichage du radar sur la carte.
+     */
     private CheckBox cbAfficheRadarCarte;
+    
+    /**
+     * ColorPicker pour la couleur de fond du radar de la carte.
+     */
     private ColorPicker cpCouleurFondRadarCarte;
+    
+    /**
+     * ColorPicker pour la couleur de ligne du radar de la carte.
+     */
     private ColorPicker cpCouleurLigneRadarCarte;
+    
+    /**
+     * Slider pour ajuster la taille du radar de la carte.
+     */
     private Slider slTailleRadarCarte;
+    
+    /**
+     * Slider pour ajuster l'opacité du radar de la carte.
+     */
     private Slider slOpaciteRadarCarte;
+    
+    /**
+     * Navigateur de carte OpenLayers.
+     */
     public NavigateurCarte navigateurCarteOL = null;
-    private boolean carteEnCoursDeChargement = false; // Flag pour éviter les re-configurations multiples
+    
+    /**
+     * Flag pour éviter les re-configurations multiples de la carte.
+     */
+    private boolean carteEnCoursDeChargement = false;
+    
+    /**
+     * CheckBox pour activer le repliement de la carte au démarrage.
+     */
     private CheckBox cbReplieDemarrageCarte;
 
-    /*
-     Variables Images Fond
+    /**
+     * AnchorPane pour les images de fond.
      */
     private AnchorPane apImageFond;
 
-    /*
-     Variable du MenuContextuel
+    /**
+     * AnchorPane pour la configuration du menu contextuel.
      */
     private AnchorPane apMenuContextuel;
+    
+    /**
+     * AnchorPane pour la visualisation du menu contextuel.
+     */
     private AnchorPane apVisuMenuContextuel;
+    
+    /**
+     * Indique si le menu contextuel est affiché.
+     */
     private boolean bAfficheMenuContextuel = false;
+    
+    /**
+     * Indique si les options Précédent/Suivant sont affichées dans le menu contextuel.
+     */
     private boolean bAffichePrecSuivMC = true;
+    
+    /**
+     * Indique si les options Planet/Normal sont affichées dans le menu contextuel.
+     */
     private boolean bAffichePlanetNormalMC = true;
+    
+    /**
+     * Indique si l'option personnalisée 1 est affichée dans le menu contextuel.
+     */
     private boolean bAffichePersMC1 = false;
+    
+    /**
+     * Libellé de l'option personnalisée 1 du menu contextuel.
+     */
     private String strPersLib1 = "";
+    
+    /**
+     * URL de l'option personnalisée 1 du menu contextuel.
+     */
     private String strPersURL1 = "";
+    
+    /**
+     * Indique si l'option personnalisée 2 est affichée dans le menu contextuel.
+     */
     private boolean bAffichePersMC2 = false;
+    
+    /**
+     * Libellé de l'option personnalisée 2 du menu contextuel.
+     */
     private String strPersLib2 = "";
+    
+    /**
+     * URL de l'option personnalisée 2 du menu contextuel.
+     */
     private String strPersURL2 = "";
 
-    /*
-     Eléments de l'onglet MenuContextuel
+    /**
+     * CheckBox pour activer l'affichage du menu contextuel.
      */
     private CheckBox cbAfficheMenuContextuel;
+    
+    /**
+     * CheckBox pour afficher les options Précédent/Suivant dans le menu contextuel.
+     */
     private CheckBox cbAffichePrecSuivMC;
+    
+    /**
+     * CheckBox pour afficher les options Planet/Normal dans le menu contextuel.
+     */
     private CheckBox cbAffichePlanetNormalMC;
+    
+    /**
+     * CheckBox pour activer l'option personnalisée 1 du menu contextuel.
+     */
     private CheckBox cbAffichePersMC1;
+    
+    /**
+     * CheckBox pour activer l'option personnalisée 2 du menu contextuel.
+     */
     private CheckBox cbAffichePersMC2;
+    
+    /**
+     * TextField pour le libellé de l'option personnalisée 1.
+     */
     private TextField tfPersLib1;
+    
+    /**
+     * TextField pour l'URL de l'option personnalisée 1.
+     */
     private TextField tfPersURL1;
+    
+    /**
+     * TextField pour le libellé de l'option personnalisée 2.
+     */
     private TextField tfPersLib2;
+    
+    /**
+     * TextField pour l'URL de l'option personnalisée 2.
+     */
     private TextField tfPersURL2;
 
+    /**
+     * Pane principal de l'onglet Interface.
+     */
     public Pane paneTabInterface;
+    
+    /**
+     * HBox contenant l'interface principale (outils + visualisation).
+     */
     private HBox hbInterface;
+    
+    /**
+     * AnchorPane pour la visualisation du panoramique.
+     */
     private AnchorPane apVisualisation;
+    
+    /**
+     * VBox contenant les outils de configuration.
+     */
     private VBox vbOutils;
+    
+    /**
+     * RadioButton pour sélectionner l'image claire.
+     */
     private RadioButton rbClair;
+    
+    /**
+     * RadioButton pour sélectionner l'image sombre.
+     */
     private RadioButton rbSombre;
+    
+    /**
+     * RadioButton pour sélectionner une image personnalisée.
+     */
     private RadioButton rbPerso;
+    
+    /**
+     * ComboBox pour sélectionner l'image de fond.
+     */
     private ComboBox cbImage;
+    
+    /**
+     * ImageView pour la visualisation du panoramique.
+     */
     private ImageView ivVisualisation;
+    
+    /**
+     * ToggleGroup pour les RadioButton de sélection d'image.
+     */
     final ToggleGroup tgImage = new ToggleGroup();
+    
+    /**
+     * ToggleGroup pour les RadioButton de position de la barre classique.
+     */
     final ToggleGroup tgPositionBarreClassique = new ToggleGroup();
+    
+    /**
+     * ToggleGroup pour les RadioButton de position de la boussole.
+     */
     final ToggleGroup tgPosBouss = new ToggleGroup();
+    
+    /**
+     * ToggleGroup pour les RadioButton de position du masque.
+     */
     final ToggleGroup tgPosMasque = new ToggleGroup();
+    
+    /**
+     * ToggleGroup pour les RadioButton de position des réseaux sociaux.
+     */
     final ToggleGroup tgPosReseauxSociaux = new ToggleGroup();
+    
+    /**
+     * ToggleGroup pour les RadioButton de position des vignettes.
+     */
     final ToggleGroup tgPosVignettes = new ToggleGroup();
+    
+    /**
+     * ToggleGroup pour les RadioButton de position du menu combiné.
+     */
     final ToggleGroup tgPosComboMenu = new ToggleGroup();
+    
+    /**
+     * ToggleGroup pour les RadioButton de position du plan.
+     */
     final ToggleGroup tgPosPlan = new ToggleGroup();
+    
+    /**
+     * ToggleGroup pour les RadioButton de position de la carte.
+     */
     final ToggleGroup tgPosCarte = new ToggleGroup();
+    
+    /**
+     * ToggleGroup pour les RadioButton de position du titre.
+     */
     final ToggleGroup tgPosTitre = new ToggleGroup();
+    
+    /**
+     * Image de fond claire par défaut.
+     */
     private Image imgClaire;
+    
+    /**
+     * Image de fond sombre par défaut.
+     */
     private Image imgSombre;
+    
+    /**
+     * HBox contenant la barre de boutons.
+     */
     private HBox hbbarreBoutons;
+    
+    /**
+     * HBox contenant les outils de navigation.
+     */
     private HBox hbOutils;
+    
+    /**
+     * Label pour le texte du titre (ligne 1).
+     */
     private Label lblTxtTitre;
+    
+    /**
+     * Label pour le texte du titre (ligne 2).
+     */
     private Label lblTxtTitre2;
+    
+    /**
+     * ImageView pour l'icône d'information.
+     */
     private ImageView ivInfo;
+    
+    /**
+     * ImageView pour l'icône d'aide.
+     */
     private ImageView ivAide;
+    
+    /**
+     * ImageView pour l'icône de rotation automatique.
+     */
     private ImageView ivAutoRotation;
+    
+    /**
+     * ImageView pour l'icône du mode souris (état 1).
+     */
     private ImageView ivModeSouris;
+    
+    /**
+     * ImageView pour l'icône du mode souris (état 2).
+     */
     private ImageView ivModeSouris2;
+    
+    /**
+     * ImageView pour l'icône plein écran (état 1).
+     */
     private ImageView ivPleinEcran;
+    
+    /**
+     * ImageView pour l'icône plein écran (état 2).
+     */
     private ImageView ivPleinEcran2;
+    
+    /**
+     * HBox contenant les boutons de zoom.
+     */
     private HBox hbZoom;
+    
+    /**
+     * ImageView pour l'icône de zoom plus.
+     */
     private ImageView ivZoomPlus;
+    
+    /**
+     * ImageView pour l'icône de zoom moins.
+     */
     private ImageView ivZoomMoins;
+    
+    /**
+     * HBox contenant les boutons de déplacement.
+     */
     private HBox hbDeplacements;
+    
+    /**
+     * ImageView pour l'icône de déplacement vers le haut.
+     */
     private ImageView ivHaut;
+    
+    /**
+     * ImageView pour l'icône de déplacement vers le bas.
+     */
     private ImageView ivBas;
+    
+    /**
+     * ImageView pour l'icône de déplacement vers la gauche.
+     */
     private ImageView ivGauche;
+    
+    /**
+     * ImageView pour l'icône de déplacement vers la droite.
+     */
     private ImageView ivDroite;
+    
+    /**
+     * ImageView pour l'icône de hotspot panoramique.
+     */
     private ImageView ivHotSpotPanoramique;
+    
+    /**
+     * ImageView pour l'icône de hotspot image.
+     */
     private ImageView ivHotSpotImage;
+    
+    /**
+     * ImageView pour l'icône de hotspot HTML.
+     */
     private ImageView ivHotSpotHTML;
     
-    // Vignettes pour les panels de configuration des hotspots
+    /**
+     * ImageView pour la vignette de configuration des hotspots panoramiques.
+     */
     private ImageView ivVignettePanoConfig;
+    
+    /**
+     * ImageView pour la vignette de configuration des hotspots images.
+     */
     private ImageView ivVignetteImageConfig;
+    
+    /**
+     * ImageView pour la vignette de configuration des hotspots HTML.
+     */
     private ImageView ivVignetteHTMLConfig;
     
-    // AnchorPane pour les panels de configuration des hotspots
+    /**
+     * AnchorPane pour le panel de configuration des hotspots panoramiques.
+     */
     private AnchorPane apHotSpots1;
+    
+    /**
+     * AnchorPane pour le panel de configuration des hotspots images.
+     */
     private AnchorPane apHotSpots2;
+    
+    /**
+     * AnchorPane pour le panel de configuration des hotspots HTML.
+     */
     private AnchorPane apHotSpots3;
     
-    // Conteneurs dédiés pour les vignettes (pour faciliter le remplacement)
+    /**
+     * Conteneur pour la vignette de hotspot panoramique.
+     */
     private Pane paneVignettePano;
+    
+    /**
+     * Conteneur pour la vignette de hotspot image.
+     */
     private Pane paneVignetteImage;
+    
+    /**
+     * Conteneur pour la vignette de hotspot HTML.
+     */
     private Pane paneVignetteHTML;
 
+    /**
+     * Répertoire des boutons principaux.
+     */
     private String strRepertBoutonsPrincipal = "";
+    
+    /**
+     * Répertoire des icônes de hotspots de navigation.
+     */
     private String strRepertHotSpots = "";
+    
+    /**
+     * Répertoire des icônes de hotspots photo.
+     */
     private String strRepertHotSpotsPhoto = "";
+    
+    /**
+     * Répertoire des icônes de hotspots HTML.
+     */
     private String strRepertHotSpotsHTML = "";
+    
+    /**
+     * Répertoire des images de boussoles.
+     */
     private String strRepertBoussoles = "";
+    
+    /**
+     * CheckBox pour activer les boutons Suivant/Précédent.
+     */
     private CheckBox cbSuivantPrecedent;
+    
+    /**
+     * ImageView pour l'icône du bouton Suivant.
+     */
     private ImageView imgSuivant;
+    
+    /**
+     * ImageView pour l'icône du bouton Précédent.
+     */
     private ImageView imgPrecedent;
+    
+    /**
+     * Pane de fond pour le bouton Suivant.
+     */
     private Pane paneFondSuivant;
+    
+    /**
+     * Pane de fond pour le bouton Précédent.
+     */
     private Pane paneFondPrecedent;
+    
+    /**
+     * Indique si les boutons Suivant/Précédent sont affichés.
+     */
     private boolean bSuivantPrecedent;
+    
+    /**
+     * CheckBox pour activer l'affichage du titre.
+     */
     private CheckBox cbAfficheTitre;
+    
+    /**
+     * CheckBox pour afficher le titre de la visite.
+     */
     private CheckBox cbTitreVisite;
+    
+    /**
+     * CheckBox pour afficher le titre du panoramique.
+     */
     private CheckBox cbTitrePanoramique;
+    
+    /**
+     * CheckBox pour adapter automatiquement le titre à la largeur.
+     */
     private CheckBox cbTitreAdapte;
+    
+    /**
+     * Champ de saisie pour le décalage vertical du titre.
+     */
     private BigDecimalField bdfTitreDecalage;
+    
+    /**
+     * RadioButton pour aligner le titre à gauche.
+     */
     private RadioButton rbLeftTitre;
+    
+    /**
+     * RadioButton pour centrer le titre.
+     */
     private RadioButton rbCenterTitre;
+    
+    /**
+     * RadioButton pour aligner le titre à droite.
+     */
     private RadioButton rbRightTitre;
 
+    /**
+     * ColorPicker pour la couleur de fond du titre.
+     */
     private ColorPicker cpCouleurFondTitre;
+    
+    /**
+     * ColorPicker pour la couleur du texte du titre.
+     */
     private ColorPicker cpCouleurTitre;
+    
+    /**
+     * ComboBox pour sélectionner la police du titre.
+     */
     private ComboBox cbListePolicesTitre;
+    
+    /**
+     * Slider pour ajuster la taille de la police du titre.
+     */
     private Slider slTaillePoliceTitre;
+    
+    /**
+     * Slider pour ajuster l'opacité du fond du titre.
+     */
     private Slider slOpaciteTitre;
+    
+    /**
+     * Slider pour ajuster la taille du titre en pourcentage.
+     */
     private Slider slTailleTitre;
+    
+    /**
+     * ColorPicker pour la couleur de fond du thème.
+     */
     private ColorPicker cpCouleurFondTheme;
+    
+    /**
+     * ColorPicker pour la couleur du texte du thème.
+     */
     private ColorPicker cpCouleurTexteTheme;
+    
+    /**
+     * Slider pour ajuster l'opacité du thème.
+     */
     private Slider slOpaciteTheme;
+    
+    /**
+     * ComboBox pour sélectionner la police du thème.
+     */
     private ComboBox cbPoliceTheme;
+    
+    /**
+     * ColorPicker pour la couleur des hotspots panoramiques.
+     */
     private ColorPicker cpCouleurHotspotsPanoramique;
+    
+    /**
+     * ColorPicker pour la couleur des hotspots photo.
+     */
     private ColorPicker cpCouleurHotspotsPhoto;
+    
+    /**
+     * ColorPicker pour la couleur des hotspots HTML.
+     */
     private ColorPicker cpCouleurHotspotsHTML;
+    
+    /**
+     * ColorPicker pour la couleur des masques.
+     */
     private ColorPicker cpCouleurMasques;
+    
+    /**
+     * Couleur des hotspots de navigation.
+     */
     private Color couleurHotspots = Color.hsb(180, 0.39, 0.5);
+    
+    /**
+     * Couleur des hotspots photo.
+     */
     private Color couleurHotspotsPhoto = Color.hsb(180, 0.39, 0.5);
+    
+    /**
+     * Couleur des hotspots HTML.
+     */
     private Color couleurHotspotsHTML = Color.hsb(180, 0.39, 0.5);
+    
+    /**
+     * Taille par défaut des hotspots panoramiques en pixels.
+     */
     private int iTailleHotspotsPanoramique = 25;
+    
+    /**
+     * Taille par défaut des hotspots images en pixels.
+     */
     private int iTailleHotspotsImage = 25;
+    
+    /**
+     * Taille par défaut des hotspots HTML en pixels.
+     */
     private int iTailleHotspotsHTML = 25;
+    
+    /**
+     * Slider pour ajuster la taille des hotspots panoramiques.
+     */
     private Slider slTailleHotspotsPanoramique;
+    
+    /**
+     * Slider pour ajuster la taille des hotspots images.
+     */
     private Slider slTailleHotspotsImage;
+    
+    /**
+     * Slider pour ajuster la taille des hotspots HTML.
+     */
     private Slider slTailleHotspotsHTML;
     
     /**
@@ -1550,40 +2933,166 @@ public class GestionnaireInterfaceController {
         return ivVisualisation.getBoundsInParent().getHeight();
     }
     
-    // Nouvelles options pour les hotspots
+    /**
+     * Indique si les hotspots panoramiques sont animés par défaut.
+     */
     private boolean bHotspotsPanoAnimesDefaut = false;
+    
+    /**
+     * Indique si les hotspots photo sont animés par défaut.
+     */
     private boolean bHotspotsPhotoAnimesDefaut = false;
+    
+    /**
+     * Indique si les hotspots HTML sont animés par défaut.
+     */
     private boolean bHotspotsHTMLAnimesDefaut = false;
+    
+    /**
+     * Type d'animation par défaut pour les hotspots panoramiques.
+     */
     private String strTypeAnimationPanoDefaut = "none";
+    
+    /**
+     * Type d'animation par défaut pour les hotspots photo.
+     */
     private String strTypeAnimationPhotoDefaut = "none";
+    
+    /**
+     * Type d'animation par défaut pour les hotspots HTML.
+     */
     private String strTypeAnimationHTMLDefaut = "none";
+    
+    /**
+     * Indique si les hotspots panoramiques sont agrandis au survol par défaut.
+     */
     private boolean bHotspotsPanoAgrandisDefaut = false;
+    
+    /**
+     * Indique si les hotspots photo sont agrandis au survol par défaut.
+     */
     private boolean bHotspotsPhotoAgrandisDefaut = false;
+    
+    /**
+     * Indique si les hotspots HTML sont agrandis au survol par défaut.
+     */
     private boolean bHotspotsHTMLAgrandisDefaut = false;
+    
+    /**
+     * ComboBox pour sélectionner le type d'animation des hotspots panoramiques.
+     */
     private ComboBox<String> cbTypeAnimationPanoDefaut;
+    
+    /**
+     * ComboBox pour sélectionner le type d'animation des hotspots photo.
+     */
     private ComboBox<String> cbTypeAnimationPhotoDefaut;
+    
+    /**
+     * ComboBox pour sélectionner le type d'animation des hotspots HTML.
+     */
     private ComboBox<String> cbTypeAnimationHTMLDefaut;
     
-    // Animations en cours pour pouvoir les arrêter
+    /**
+     * Animation en cours pour les hotspots panoramiques (pour pouvoir l'arrêter).
+     */
     private javafx.animation.Animation animationPanoEnCours = null;
+    
+    /**
+     * Animation en cours pour les hotspots photo (pour pouvoir l'arrêter).
+     */
     private javafx.animation.Animation animationPhotoEnCours = null;
+    
+    /**
+     * Animation en cours pour les hotspots HTML (pour pouvoir l'arrêter).
+     */
     private javafx.animation.Animation animationHTMLEnCours = null;
+    
+    /**
+     * CheckBox pour activer l'agrandissement des hotspots panoramiques au survol.
+     */
     private CheckBox cbHotspotsPanoAgrandisDefaut;
+    
+    /**
+     * CheckBox pour activer l'agrandissement des hotspots photo au survol.
+     */
     private CheckBox cbHotspotsPhotoAgrandisDefaut;
+    
+    /**
+     * CheckBox pour activer l'agrandissement des hotspots HTML au survol.
+     */
     private CheckBox cbHotspotsHTMLAgrandisDefaut;
+    
+    /**
+     * Couleur des masques.
+     */
     private Color couleurMasque = Color.hsb(180, 0.39, 0.5);
+    
+    /**
+     * Couleur de fond du thème.
+     */
     private Color couleurFondTheme = Color.hsb(180, 0.39, 0.5);
+    
+    /**
+     * Couleur du texte du thème (constante).
+     */
     final private Color couleurTexteTheme = Color.valueOf("white");
+    
+    /**
+     * Opacité du thème (constante).
+     */
     final private double opaciteTheme = 0.8;
+    
+    /**
+     * Tableau des images des boutons chargées.
+     * Capacité maximale de 50 images.
+     */
     private Image[] imgBoutons = new Image[50];
+    
+    /**
+     * Tableau des noms des fichiers d'images de boutons.
+     * Capacité maximale de 25 noms.
+     */
     private String[] strNomImagesBoutons = new String[25];
+    
+    /**
+     * Tableau des PixelReader pour lire les pixels des boutons originaux.
+     */
     private PixelReader[] prLisBoutons = new PixelReader[25];
+    
+    /**
+     * Tableau des nouvelles images de boutons modifiées.
+     */
     private WritableImage[] wiNouveauxBoutons = new WritableImage[25];
+    
+    /**
+     * Tableau des PixelWriter pour écrire les pixels des nouveaux boutons.
+     */
     private PixelWriter[] pwNouveauxBoutons = new PixelWriter[25];
+    
+    /**
+     * Nombre d'images de boutons chargées.
+     */
     private int iNombreImagesBouton = 0;
+    
+    /**
+     * Image du masque original.
+     */
     private Image imgMasque;
+    
+    /**
+     * PixelReader pour lire les pixels du masque original.
+     */
     private PixelReader prLisMasque;
+    
+    /**
+     * Nouvelle image du masque modifiée.
+     */
     private WritableImage wiNouveauxMasque;
+    
+    /**
+     * PixelWriter pour écrire les pixels du nouveau masque.
+     */
     private PixelWriter pwNouveauxMasque;
 
     /**
@@ -2505,7 +4014,6 @@ public class GestionnaireInterfaceController {
      * </ul>
      * 
      * @see #afficheFenetreAide()
-     * @see #setbAfficheFenetreInfo(boolean)
      */
     public void afficheFenetreInfo() {
         if (bAfficheFenetreInfo) {
@@ -2558,7 +4066,6 @@ public class GestionnaireInterfaceController {
      * </ul>
      * 
      * @see #afficheFenetreInfo()
-     * @see #setbAfficheFenetreAide(boolean)
      */
     public void afficheFenetreAide() {
         if (bAfficheFenetreAide) {
