@@ -59,6 +59,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Retourne la valeur de longitude.
+     *
      * @return the longitude
      */
     public double getLongitude() {
@@ -66,6 +68,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Définit la valeur de longitude.
+     *
      * @param longitude the longitude to set
      */
     public void setLongitude(Number longitude) {
@@ -73,6 +77,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Retourne la valeur de latitude.
+     *
      * @return the latitude
      */
     public double getLatitude() {
@@ -80,6 +86,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Définit la valeur de latitude.
+     *
      * @param latitude the latitude to set
      */
     public void setLatitude(Number latitude) {
@@ -87,6 +95,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Retourne la valeur de info.
+     *
      * @return the info
      */
     public String getStrInfo() {
@@ -94,6 +104,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Définit la valeur de info.
+     *
      * @param strInfo the info to set
      */
     public void setStrInfo(String strInfo) {
@@ -101,6 +113,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Retourne la valeur de anime.
+     *
      * @return the anime
      */
     public boolean isAnime() {
@@ -108,6 +122,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Définit la valeur de anime.
+     *
      * @param anime the anime to set
      */
     public void setAnime(boolean anime) {
@@ -139,6 +155,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Retourne la valeur de agranditSurvol.
+     *
      * @return the agranditSurvol
      */
     public boolean isAgranditSurvol() {
@@ -146,6 +164,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Définit la valeur de agranditSurvol.
+     *
      * @param bAgranditSurvol the agranditSurvol to set
      */
     public void setAgranditSurvol(boolean bAgranditSurvol) {
@@ -153,6 +173,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Retourne la valeur de strURLExterieure.
+     *
      * @return the strURLExterieure
      */
     public String getStrURLExterieure() {
@@ -160,6 +182,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Définit la valeur de strURLExterieure.
+     *
      * @param strURLExterieure the strURLExterieure to set
      */
     public void setStrURLExterieure(String strURLExterieure) {
@@ -167,6 +191,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Retourne la valeur de bLienExterieur.
+     *
      * @return the bLienExterieur
      */
     public boolean isbLienExterieur() {
@@ -174,6 +200,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Définit la valeur de bLienExterieur.
+     *
      * @param bLienExterieur the bLienExterieur to set
      */
     public void setbLienExterieur(boolean bLienExterieur) {
@@ -181,6 +209,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Retourne la valeur de opaciteHTML.
+     *
      * @return the opaciteHTML
      */
     public double getOpaciteHTML() {
@@ -188,6 +218,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Définit la valeur de opaciteHTML.
+     *
      * @param opaciteHTML the opaciteHTML to set
      */
     public void setOpaciteHTML(double opaciteHTML) {
@@ -195,6 +227,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Retourne la valeur de strTexteHTML.
+     *
      * @return the strTexteHTML
      */
     public String getStrTexteHTML() {
@@ -202,6 +236,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Définit la valeur de strTexteHTML.
+     *
      * @param strTexteHTML the strTexteHTML to set
      */
     public void setStrTexteHTML(String strTexteHTML) {
@@ -209,6 +245,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Retourne la valeur de largeurHTML.
+     *
      * @return the largeurHTML
      */
     public double getLargeurHTML() {
@@ -216,6 +254,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Définit la valeur de largeurHTML.
+     *
      * @param largeurHTML the largeurHTML to set
      */
     public void setLargeurHTML(double largeurHTML) {
@@ -223,6 +263,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Retourne la valeur de strPositionHTML.
+     *
      * @return the strPositionHTML
      */
     public String getStrPositionHTML() {
@@ -230,6 +272,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Définit la valeur de strPositionHTML.
+     *
      * @param strPositionHTML the strPositionHTML to set
      */
     public void setStrPositionHTML(String strPositionHTML) {
@@ -237,6 +281,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Retourne la valeur de strCouleurHTML.
+     *
      * @return the strCouleurHTML
      */
     public String getStrCouleurHTML() {
@@ -244,6 +290,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Définit la valeur de strCouleurHTML.
+     *
      * @param strCouleurHTML the strCouleurHTML to set
      */
     public void setStrCouleurHTML(String strCouleurHTML) {
@@ -251,6 +299,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Retourne la valeur de strCouleurTexteHTML.
+     *
      * @return the strCouleurTexteHTML
      */
     public String getStrCouleurTexteHTML() {
@@ -258,6 +308,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Définit la valeur de strCouleurTexteHTML.
+     *
      * @param strCouleurTexteHTML the strCouleurTexteHTML to set
      */
     public void setStrCouleurTexteHTML(String strCouleurTexteHTML) {
@@ -265,6 +317,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Retourne la valeur de strThemeHTML.
+     *
      * @return the strThemeHTML
      */
     public String getStrThemeHTML() {
@@ -272,6 +326,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Définit la valeur de strThemeHTML.
+     *
      * @param strThemeHTML the strThemeHTML to set
      */
     public void setStrThemeHTML(String strThemeHTML) {
@@ -279,6 +335,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Retourne la valeur de imagesEditeur.
+     *
      * @return the imagesEditeur
      */
     public ImageEditeurHTML[] getImagesEditeur() {
@@ -286,6 +344,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Définit la valeur de imagesEditeur.
+     *
      * @param imagesEditeur the imagesEditeur to set
      */
     public void setImagesEditeur(ImageEditeurHTML[] imagesEditeur) {
@@ -293,6 +353,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Retourne la valeur de iNombreImages.
+     *
      * @return the iNombreImages
      */
     public int getiNombreImages() {
@@ -300,6 +362,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Définit la valeur de iNombreImages.
+     *
      * @param iNombreImages the iNombreImages to set
      */
     public void setiNombreImages(int iNombreImages) {
@@ -359,6 +423,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Retourne la valeur de couleurPerso.
+     *
      * @return the couleurPerso
      */
     public String getStrCouleurPerso() {
@@ -366,6 +432,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Définit la valeur de couleurPerso.
+     *
      * @param strCouleurPerso the couleurPerso to set (format: "hue;saturation;brightness" ou vide pour couleur par défaut)
      */
     public void setStrCouleurPerso(String strCouleurPerso) {
@@ -373,6 +441,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Retourne la valeur de strFichierImage.
+     *
      * @return the strFichierImage
      */
     public String getStrFichierImage() {
@@ -380,6 +450,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Définit la valeur de strFichierImage.
+     *
      * @param strFichierImage the strFichierImage to set
      */
     public void setStrFichierImage(String strFichierImage) {
@@ -387,6 +459,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Retourne la valeur de imgIconeSource.
+     *
      * @return the imgIconeSource
      */
     public Image getImgIconeSource() {
@@ -394,6 +468,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Définit la valeur de imgIconeSource.
+     *
      * @param imgIconeSource the imgIconeSource to set
      */
     public void setImgIconeSource(Image imgIconeSource) {
@@ -401,6 +477,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Retourne la valeur de strNomIconeSource.
+     *
      * @return the strNomIconeSource - Nom du fichier d'icône source original
      */
     public String getStrNomIconeSource() {
@@ -408,6 +486,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Définit la valeur de strNomIconeSource.
+     *
      * @param strNomIconeSource the strNomIconeSource to set - Nom du fichier d'icône source original
      */
     public void setStrNomIconeSource(String strNomIconeSource) {
@@ -415,6 +495,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Retourne la valeur de iTailleHotspot.
+     *
      * @return the iTailleHotspot - Taille du hotspot en pixels
      */
     public int getTailleHotspot() {
@@ -422,6 +504,8 @@ public class HotspotHTML {
     }
 
     /**
+     * Définit la valeur de iTailleHotspot.
+     *
      * @param iTailleHotspot the iTailleHotspot to set - Taille du hotspot en pixels
      */
     public void setTailleHotspot(int iTailleHotspot) {

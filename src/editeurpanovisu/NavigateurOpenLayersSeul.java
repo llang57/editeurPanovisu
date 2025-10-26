@@ -30,6 +30,8 @@ public class NavigateurOpenLayersSeul {
     //private String bingApiKey = "";
 
     /**
+     * Retourne la valeur de marqueur.
+     *
      * @return the marqueur
      */
     public CoordonneesGeographiques getMarqueur() {
@@ -37,6 +39,8 @@ public class NavigateurOpenLayersSeul {
     }
 
     /**
+     * Définit la valeur de marqueur.
+     *
      * @param marqueur the marqueur to set
      */
     public void setMarqueur(CoordonneesGeographiques marqueur) {
@@ -265,6 +269,8 @@ public class NavigateurOpenLayersSeul {
     }
 
     /**
+     * Retourne la valeur de strCartoActive.
+     *
      * @return the strCartoActive
      */
     public String getStrCartoActive() {
@@ -272,6 +278,8 @@ public class NavigateurOpenLayersSeul {
     }
 
     /**
+     * Définit la valeur de strCartoActive.
+     *
      * @param strCartoActive the strCartoActive to set
      */
     public void setStrCartoActive(String strCartoActive) {
@@ -279,6 +287,8 @@ public class NavigateurOpenLayersSeul {
     }
 
     /**
+     * Retourne la valeur de apChoixCartographie.
+     *
      * @return the apChoixCartographie
      */
     public AnchorPane getApChoixCartographie() {
@@ -286,6 +296,8 @@ public class NavigateurOpenLayersSeul {
     }
 
     /**
+     * Définit la valeur de apChoixCartographie.
+     *
      * @param apChoixCartographie the apChoixCartographie to set
      */
     public void setApChoixCartographie(AnchorPane apChoixCartographie) {
@@ -293,6 +305,8 @@ public class NavigateurOpenLayersSeul {
     }
 
     /**
+     * Retourne la valeur de bingApiKey.
+     *
      * @return the bingApiKey
      */
     public String getBingApiKey() {
@@ -300,6 +314,8 @@ public class NavigateurOpenLayersSeul {
     }
 
     /**
+     * Définit la valeur de bingApiKey.
+     *
      * @param bingApiKey the bingApiKey to set
      */
     public void setBingApiKey(String bingApiKey) {
@@ -307,6 +323,8 @@ public class NavigateurOpenLayersSeul {
     }
 
     /**
+     * Retourne la valeur de bDebut.
+     *
      * @return the bDebut
      */
     public boolean isbDebut() {
@@ -314,6 +332,8 @@ public class NavigateurOpenLayersSeul {
     }
 
     /**
+     * Définit la valeur de bDebut.
+     *
      * @param bDebut the bDebut to set
      */
     public void setbDebut(boolean bDebut) {

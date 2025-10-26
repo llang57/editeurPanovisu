@@ -1293,6 +1293,8 @@ public class GestionnairePlanController {
     }
 
     /**
+     * Retourne la valeur de iPlanActuel.
+     *
      * @return the iPlanActuel
      */
     public int getiPlanActuel() {
@@ -1300,6 +1302,8 @@ public class GestionnairePlanController {
     }
 
     /**
+     * Définit la valeur de iPlanActuel.
+     *
      * @param iPlanActuel the iPlanActuel to set
      */
     public void setiPlanActuel(int iPlanActuel) {
@@ -1307,6 +1311,8 @@ public class GestionnairePlanController {
     }
 
     /**
+     * Retourne la valeur de strRepertImagePlan.
+     *
      * @return the strRepertImagePlan
      */
     public String getStrRepertImagePlan() {
@@ -1314,6 +1320,8 @@ public class GestionnairePlanController {
     }
 
     /**
+     * Définit la valeur de strRepertImagePlan.
+     *
      * @param strRepertImagePlan the strRepertImagePlan to set
      */
     public void setStrRepertImagePlan(String strRepertImagePlan) {
@@ -1321,6 +1329,8 @@ public class GestionnairePlanController {
     }
 
     /**
+     * Retourne la valeur de apPlan.
+     *
      * @return the apPlan
      */
     public AnchorPane getApPlan() {
@@ -1328,6 +1338,8 @@ public class GestionnairePlanController {
     }
 
     /**
+     * Définit la valeur de apPlan.
+     *
      * @param apPlan the apPlan to set
      */
     public void setApPlan(AnchorPane apPlan) {
@@ -1335,6 +1347,8 @@ public class GestionnairePlanController {
     }
 
     /**
+     * Retourne la valeur de spOutils.
+     *
      * @return the spOutils
      */
     public ScrollPane getSpOutils() {
@@ -1342,6 +1356,8 @@ public class GestionnairePlanController {
     }
 
     /**
+     * Définit la valeur de spOutils.
+     *
      * @param spOutils the spOutils to set
      */
     public void setSpOutils(ScrollPane spOutils) {

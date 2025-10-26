@@ -16,6 +16,8 @@ public class ImageEditeurHTML {
         private String strImagePath="";
 
         /**
+     * Retourne la valeur de strImage.
+     *
          * @return the strImage
          */
         public String getStrNomImage() {            
@@ -24,6 +26,8 @@ public class ImageEditeurHTML {
 
 
         /**
+     * Retourne la valeur de strImagePath.
+     *
          * @return the strImagePath
          */
         public String getStrImagePath() {
@@ -31,6 +35,8 @@ public class ImageEditeurHTML {
         }
 
         /**
+     * Définit la valeur de strImagePath.
+     *
          * @param strImagePath the strImagePath to set
          */
         public void setStrImagePath(String strImagePath) {

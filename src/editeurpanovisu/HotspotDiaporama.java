@@ -31,6 +31,8 @@ public class HotspotDiaporama {
     }
 
     /**
+     * Retourne la valeur de longitude.
+     *
      * @return the longitude
      */
     public double getLongitude() {
@@ -38,6 +40,8 @@ public class HotspotDiaporama {
     }
 
     /**
+     * Définit la valeur de longitude.
+     *
      * @param longitude the longitude to set
      */
     public void setLongitude(Number longitude) {
@@ -45,6 +49,8 @@ public class HotspotDiaporama {
     }
 
     /**
+     * Retourne la valeur de latitude.
+     *
      * @return the latitude
      */
     public double getLatitude() {
@@ -52,6 +58,8 @@ public class HotspotDiaporama {
     }
 
     /**
+     * Définit la valeur de latitude.
+     *
      * @param latitude the latitude to set
      */
     public void setLatitude(Number latitude) {
@@ -59,6 +67,8 @@ public class HotspotDiaporama {
     }
 
     /**
+     * Retourne la valeur de iNumDiapo.
+     *
      * @return the iNumDiapo
      */
     public int getiNumDiapo() {
@@ -66,6 +76,8 @@ public class HotspotDiaporama {
     }
 
     /**
+     * Définit la valeur de iNumDiapo.
+     *
      * @param iNumDiapo the iNumDiapo to set
      */
     public void setiNumDiapo(int iNumDiapo) {
@@ -73,6 +85,8 @@ public class HotspotDiaporama {
     }
 
     /**
+     * Retourne la valeur de strInfo.
+     *
      * @return the strInfo
      */
     public String getStrInfo() {
@@ -80,6 +94,8 @@ public class HotspotDiaporama {
     }
 
     /**
+     * Définit la valeur de strInfo.
+     *
      * @param strInfo the strInfo to set
      */
     public void setStrInfo(String strInfo) {
@@ -87,6 +103,8 @@ public class HotspotDiaporama {
     }
 
     /**
+     * Retourne la valeur de bAnime.
+     *
      * @return the bAnime
      */
     public boolean isbAnime() {
@@ -94,6 +112,8 @@ public class HotspotDiaporama {
     }
 
     /**
+     * Définit la valeur de bAnime.
+     *
      * @param bAnime the bAnime to set
      */
     public void setbAnime(boolean bAnime) {
@@ -101,6 +121,8 @@ public class HotspotDiaporama {
     }
 
     /**
+     * Retourne la valeur de strTypeAnimation.
+     *
      * @return the strTypeAnimation
      */
     public String getStrTypeAnimation() {
@@ -108,6 +130,8 @@ public class HotspotDiaporama {
     }
 
     /**
+     * Définit la valeur de strTypeAnimation.
+     *
      * @param strTypeAnimation the strTypeAnimation to set
      */
     public void setStrTypeAnimation(String strTypeAnimation) {

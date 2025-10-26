@@ -20,6 +20,8 @@ public class ZoneTelecommande {
     private int iNombrePoints = 0;
 
     /**
+     * Retourne la valeur de strNomZone.
+     *
      * @return the strNomZone
      */
     public String getStrIdZone() {
@@ -35,6 +37,8 @@ public class ZoneTelecommande {
     }
 
     /**
+     * Retourne la valeur de strTypeZone.
+     *
      * @return the strTypeZone
      */
     public String getStrTypeZone() {
@@ -42,6 +46,8 @@ public class ZoneTelecommande {
     }
 
     /**
+     * Définit la valeur de strTypeZone.
+     *
      * @param strTypeZone the strTypeZone to set
      */
     public void setStrTypeZone(String strTypeZone) {
@@ -49,6 +55,8 @@ public class ZoneTelecommande {
     }
 
     /**
+     * Retourne la valeur de strCoordonneesZone.
+     *
      * @return the strCoordonneesZone
      */
     public String getStrCoordonneesZone() {
@@ -56,6 +64,8 @@ public class ZoneTelecommande {
     }
 
     /**
+     * Définit la valeur de strCoordonneesZone.
+     *
      * @param strCoordonneesZone the strCoordonneesZone to set
      */
     public void setStrCoordonneesZone(String strCoordonneesZone) {
@@ -63,6 +73,8 @@ public class ZoneTelecommande {
     }
 
     /**
+     * Retourne la valeur de centre.
+     *
      * @return the centre
      */
     public Point2D getCentre() {
@@ -70,6 +82,8 @@ public class ZoneTelecommande {
     }
 
     /**
+     * Définit la valeur de centre.
+     *
      * @param centre the centre to set
      */
     public void setCentre(Point2D centre) {

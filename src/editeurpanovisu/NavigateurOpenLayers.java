@@ -48,6 +48,8 @@ public class NavigateurOpenLayers {
     //private String bingApiKey = "";
 
     /**
+     * Retourne la valeur de marqueur.
+     *
      * @return the marqueur
      */
     public CoordonneesGeographiques getMarqueur() {
@@ -55,6 +57,8 @@ public class NavigateurOpenLayers {
     }
 
     /**
+     * Définit la valeur de marqueur.
+     *
      * @param marqueur the marqueur to set
      */
     public void setMarqueur(CoordonneesGeographiques marqueur) {
@@ -533,6 +537,8 @@ public class NavigateurOpenLayers {
     }
 
     /**
+     * Retourne la valeur de strCartoActive.
+     *
      * @return the strCartoActive
      */
     public String getStrCartoActive() {
@@ -540,6 +546,8 @@ public class NavigateurOpenLayers {
     }
 
     /**
+     * Définit la valeur de strCartoActive.
+     *
      * @param strCartoActive the strCartoActive to set
      */
     public void setStrCartoActive(String strCartoActive) {
@@ -547,6 +555,8 @@ public class NavigateurOpenLayers {
     }
 
     /**
+     * Retourne la valeur de apChoixCartographie.
+     *
      * @return the apChoixCartographie
      */
     public AnchorPane getApChoixCartographie() {
@@ -554,6 +564,8 @@ public class NavigateurOpenLayers {
     }
 
     /**
+     * Définit la valeur de apChoixCartographie.
+     *
      * @param apChoixCartographie the apChoixCartographie to set
      */
     public void setApChoixCartographie(AnchorPane apChoixCartographie) {
@@ -561,6 +573,8 @@ public class NavigateurOpenLayers {
     }
 
     /**
+     * Retourne la valeur de bingApiKey.
+     *
      * @return the bingApiKey
      */
     public String getBingApiKey() {
@@ -568,6 +582,8 @@ public class NavigateurOpenLayers {
     }
 
     /**
+     * Définit la valeur de bingApiKey.
+     *
      * @param bingApiKey the bingApiKey to set
      */
     public void setBingApiKey(String bingApiKey) {

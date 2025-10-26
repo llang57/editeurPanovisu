@@ -94,6 +94,8 @@ public class PaneOutil {
     }
 
     /**
+     * Retourne la valeur de apOutil.
+     *
      * @return the apOutil
      */
     public AnchorPane getApOutil() {
@@ -101,6 +103,8 @@ public class PaneOutil {
     }
 
     /**
+     * Définit la valeur de apOutil.
+     *
      * @param apOutil the apOutil to set
      */
     public void setApOutil(AnchorPane apOutil) {
@@ -108,6 +112,8 @@ public class PaneOutil {
     }
 
     /**
+     * Retourne la valeur de apPaneOutil.
+     *
      * @return the apPaneOutil
      */
     public AnchorPane getApPaneOutil() {
@@ -115,6 +121,8 @@ public class PaneOutil {
     }
 
     /**
+     * Retourne la valeur de bValide.
+     *
      * @return the bValide
      */
     public boolean getbValide() {
@@ -122,6 +130,8 @@ public class PaneOutil {
     }
 
     /**
+     * Définit la valeur de bValide.
+     *
      * @param bValide the bValide to set
      */
     public void setbValide(boolean bValide) {
@@ -139,6 +149,8 @@ public class PaneOutil {
     }
 
     /**
+     * Retourne la valeur de bInvariant.
+     *
      * @return the bInvariant
      */
     public boolean isbInvariant() {
@@ -146,6 +158,8 @@ public class PaneOutil {
     }
 
     /**
+     * Définit la valeur de bInvariant.
+     *
      * @param bInvariant the bInvariant to set
      */
     public void setbInvariant(boolean bInvariant) {
@@ -153,6 +167,8 @@ public class PaneOutil {
     }
 
     /**
+     * Retourne la valeur de ivBtnPlusOutil.
+     *
      * @return the ivBtnPlusOutil
      */
     public ImageView getIvBtnPlusOutil() {
@@ -160,6 +176,8 @@ public class PaneOutil {
     }
 
     /**
+     * Définit la valeur de ivBtnPlusOutil.
+     *
      * @param ivBtnPlusOutil the ivBtnPlusOutil to set
      */
     public void setIvBtnPlusOutil(ImageView ivBtnPlusOutil) {

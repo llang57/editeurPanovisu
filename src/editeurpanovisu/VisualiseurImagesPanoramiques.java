@@ -594,6 +594,8 @@ public final class VisualiseurImagesPanoramiques {
     }
 
     /**
+     * Retourne la valeur de latitude.
+     *
      * @return the latitude
      */
     public double getLatitude() {
@@ -601,6 +603,8 @@ public final class VisualiseurImagesPanoramiques {
     }
 
     /**
+     * Définit la valeur de latitude.
+     *
      * @param latitude the latitude to set
      */
     public void setLatitude(double latitude) {
@@ -611,6 +615,8 @@ public final class VisualiseurImagesPanoramiques {
     }
 
     /**
+     * Retourne la valeur de longitude.
+     *
      * @return the longitude
      */
     public double getLongitude() {
@@ -618,6 +624,8 @@ public final class VisualiseurImagesPanoramiques {
     }
 
     /**
+     * Définit la valeur de longitude.
+     *
      * @param longitude the longitude to set
      */
     public void setLongitude(double longitude) {
@@ -628,6 +636,8 @@ public final class VisualiseurImagesPanoramiques {
     }
 
     /**
+     * Retourne la valeur de fov.
+     *
      * @return the fov
      */
     public double getFov() {
@@ -635,6 +645,8 @@ public final class VisualiseurImagesPanoramiques {
     }
 
     /**
+     * Définit la valeur de fov.
+     *
      * @param fov the fov to set
      */
     public void setFov(double fov) {
@@ -645,6 +657,8 @@ public final class VisualiseurImagesPanoramiques {
     }
 
     /**
+     * Retourne la valeur de positNord.
+     *
      * @return the positNord
      */
     public double getPositNord() {
@@ -652,6 +666,8 @@ public final class VisualiseurImagesPanoramiques {
     }
 
     /**
+     * Définit la valeur de positNord.
+     *
      * @param positNord the positNord to set
      */
     public void setPositNord(double positNord) {
@@ -662,6 +678,8 @@ public final class VisualiseurImagesPanoramiques {
     }
 
     /**
+     * Retourne la valeur de nomFichierPanoramique.
+     *
      * @return the nomFichierPanoramique
      */
     public String getNomFichierPanoramique() {
@@ -669,6 +687,8 @@ public final class VisualiseurImagesPanoramiques {
     }
 
     /**
+     * Définit la valeur de nomFichierPanoramique.
+     *
      * @param nomFichierPanoramique the nomFichierPanoramique to set
      */
     public void setNomFichierPanoramique(String nomFichierPanoramique) {
@@ -676,6 +696,8 @@ public final class VisualiseurImagesPanoramiques {
     }
 
     /**
+     * Retourne la valeur de choixLongitude.
+     *
      * @return the choixLongitude
      */
     public double getChoixLongitude() {
@@ -683,6 +705,8 @@ public final class VisualiseurImagesPanoramiques {
     }
 
     /**
+     * Définit la valeur de choixLongitude.
+     *
      * @param choixLongitude the choixLongitude to set
      */
     public void setChoixLongitude(double choixLongitude) {
@@ -693,6 +717,8 @@ public final class VisualiseurImagesPanoramiques {
     }
 
     /**
+     * Retourne la valeur de choixLatitude.
+     *
      * @return the choixLatitude
      */
     public double getChoixLatitude() {
@@ -700,6 +726,8 @@ public final class VisualiseurImagesPanoramiques {
     }
 
     /**
+     * Définit la valeur de choixLatitude.
+     *
      * @param choixLatitude the choixLatitude to set
      */
     public void setChoixLatitude(double choixLatitude) {
@@ -710,6 +738,8 @@ public final class VisualiseurImagesPanoramiques {
     }
 
     /**
+     * Retourne la valeur de choixFov.
+     *
      * @return the choixFov
      */
     public double getChoixFov() {
@@ -717,6 +747,8 @@ public final class VisualiseurImagesPanoramiques {
     }
 
     /**
+     * Définit la valeur de choixFov.
+     *
      * @param choixFov the choixFov to set
      */
     public void setChoixFov(double choixFov) {
@@ -727,6 +759,8 @@ public final class VisualiseurImagesPanoramiques {
     }
 
     /**
+     * Retourne la valeur de maxFov.
+     *
      * @return the maxFov
      */
     public double getMaxFov() {
@@ -734,6 +768,8 @@ public final class VisualiseurImagesPanoramiques {
     }
 
     /**
+     * Définit la valeur de maxFov.
+     *
      * @param maxFov the maxFov to set
      */
     public void setMaxFov(double maxFov) {
@@ -741,6 +777,8 @@ public final class VisualiseurImagesPanoramiques {
     }
 
     /**
+     * Retourne la valeur de minFov.
+     *
      * @return the minFov
      */
     public double getMinFov() {
@@ -748,6 +786,8 @@ public final class VisualiseurImagesPanoramiques {
     }
 
     /**
+     * Définit la valeur de minFov.
+     *
      * @param minFov the minFov to set
      */
     public void setMinFov(double minFov) {

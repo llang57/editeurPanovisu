@@ -34,6 +34,8 @@ public class NavigateurCarteSeul extends Region {
     }
 
     /**
+     * Retourne la valeur de webView.
+     *
      * @return the webView
      */
     public WebView getWebView() {
@@ -41,6 +43,8 @@ public class NavigateurCarteSeul extends Region {
     }
 
     /**
+     * Définit la valeur de webView.
+     *
      * @param webView the webView to set
      */
     public void setWebView(WebView webView) {
@@ -48,6 +52,8 @@ public class NavigateurCarteSeul extends Region {
     }
 
     /**
+     * Retourne la valeur de webEngine.
+     *
      * @return the webEngine
      */
     public WebEngine getWebEngine() {
@@ -55,6 +61,8 @@ public class NavigateurCarteSeul extends Region {
     }
 
     /**
+     * Définit la valeur de webEngine.
+     *
      * @param webEngine the webEngine to set
      */
     public void setWebEngine(WebEngine webEngine) {

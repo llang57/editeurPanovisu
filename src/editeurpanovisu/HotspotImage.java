@@ -42,6 +42,8 @@ public class HotspotImage {
     }
 
     /**
+     * Retourne la valeur de longitude.
+     *
      * @return the longitude
      */
     public double getLongitude() {
@@ -49,6 +51,8 @@ public class HotspotImage {
     }
 
     /**
+     * Définit la valeur de longitude.
+     *
      * @param longitude the longitude to set
      */
     public void setLongitude(Number longitude) {
@@ -56,6 +60,8 @@ public class HotspotImage {
     }
 
     /**
+     * Retourne la valeur de latitude.
+     *
      * @return the latitude
      */
     public double getLatitude() {
@@ -63,6 +69,8 @@ public class HotspotImage {
     }
 
     /**
+     * Définit la valeur de latitude.
+     *
      * @param latitude the latitude to set
      */
     public void setLatitude(Number latitude) {
@@ -70,6 +78,8 @@ public class HotspotImage {
     }
 
     /**
+     * Retourne la valeur de fichierImage.
+     *
      * @return the fichierImage
      */
     public String getStrFichierImage() {
@@ -77,6 +87,8 @@ public class HotspotImage {
     }
 
     /**
+     * Définit la valeur de fichierImage.
+     *
      * @param strFichierImage the fichierImage to set
      */
     public void setStrFichierImage(String strFichierImage) {
@@ -84,6 +96,8 @@ public class HotspotImage {
     }
 
     /**
+     * Retourne la valeur de fichierXML.
+     *
      * @return the fichierXML
      */
     public String getStrLienImg() {
@@ -98,6 +112,8 @@ public class HotspotImage {
     }
 
     /**
+     * Retourne la valeur de info.
+     *
      * @return the info
      */
     public String getStrInfo() {
@@ -105,6 +121,8 @@ public class HotspotImage {
     }
 
     /**
+     * Définit la valeur de info.
+     *
      * @param strInfo the info to set
      */
     public void setStrInfo(String strInfo) {
@@ -112,6 +130,8 @@ public class HotspotImage {
     }
 
     /**
+     * Retourne la valeur de anime.
+     *
      * @return the anime
      */
     public boolean isAnime() {
@@ -119,6 +139,8 @@ public class HotspotImage {
     }
 
     /**
+     * Définit la valeur de anime.
+     *
      * @param anime the anime to set
      */
     public void setAnime(boolean anime) {
@@ -132,6 +154,8 @@ public class HotspotImage {
     }
 
     /**
+     * Retourne la valeur de typeAnimation.
+     *
      * @return the typeAnimation
      */
     public String getStrTypeAnimation() {
@@ -139,6 +163,8 @@ public class HotspotImage {
     }
 
     /**
+     * Définit la valeur de typeAnimation.
+     *
      * @param strTypeAnimation the typeAnimation to set
      */
     public void setStrTypeAnimation(String strTypeAnimation) {
@@ -148,6 +174,8 @@ public class HotspotImage {
     }
 
     /**
+     * Retourne la valeur de agranditSurvol.
+     *
      * @return the agranditSurvol
      */
     public boolean isAgranditSurvol() {
@@ -155,6 +183,8 @@ public class HotspotImage {
     }
 
     /**
+     * Définit la valeur de agranditSurvol.
+     *
      * @param bAgranditSurvol the agranditSurvol to set
      */
     public void setAgranditSurvol(boolean bAgranditSurvol) {
@@ -162,6 +192,8 @@ public class HotspotImage {
     }
 
     /**
+     * Retourne la valeur de urlImage.
+     *
      * @return the urlImage
      */
     public String getStrUrlImage() {
@@ -169,6 +201,8 @@ public class HotspotImage {
     }
 
     /**
+     * Définit la valeur de urlImage.
+     *
      * @param strUrlImage the urlImage to set
      */
     public void setStrUrlImage(String strUrlImage) {
@@ -176,6 +210,8 @@ public class HotspotImage {
     }
 
     /**
+     * Retourne la valeur de strCouleurFond.
+     *
      * @return the strCouleurFond
      */
     public String getStrCouleurFond() {
@@ -183,6 +219,8 @@ public class HotspotImage {
     }
 
     /**
+     * Définit la valeur de strCouleurFond.
+     *
      * @param strCouleurFond the strCouleurFond to set
      */
     public void setStrCouleurFond(String strCouleurFond) {
@@ -190,6 +228,8 @@ public class HotspotImage {
     }
 
     /**
+     * Retourne la valeur de opacite.
+     *
      * @return the opacite
      */
     public double getOpacite() {
@@ -197,6 +237,8 @@ public class HotspotImage {
     }
 
     /**
+     * Définit la valeur de opacite.
+     *
      * @param opacite the opacite to set
      */
     public void setOpacite(double opacite) {
@@ -204,6 +246,8 @@ public class HotspotImage {
     }
 
     /**
+     * Retourne la valeur de couleurPerso.
+     *
      * @return the couleurPerso
      */
     public String getStrCouleurPerso() {
@@ -211,6 +255,8 @@ public class HotspotImage {
     }
 
     /**
+     * Définit la valeur de couleurPerso.
+     *
      * @param strCouleurPerso the couleurPerso to set (format: "hue;saturation;brightness" ou vide pour couleur par défaut)
      */
     public void setStrCouleurPerso(String strCouleurPerso) {
@@ -218,6 +264,8 @@ public class HotspotImage {
     }
 
     /**
+     * Retourne la valeur de imgIconeSource.
+     *
      * @return the imgIconeSource
      */
     public Image getImgIconeSource() {
@@ -225,6 +273,8 @@ public class HotspotImage {
     }
 
     /**
+     * Définit la valeur de imgIconeSource.
+     *
      * @param imgIconeSource the imgIconeSource to set
      */
     public void setImgIconeSource(Image imgIconeSource) {
@@ -232,6 +282,8 @@ public class HotspotImage {
     }
 
     /**
+     * Retourne la valeur de strNomIconeSource.
+     *
      * @return the strNomIconeSource - Nom du fichier d'icône source original
      */
     public String getStrNomIconeSource() {
@@ -239,6 +291,8 @@ public class HotspotImage {
     }
 
     /**
+     * Définit la valeur de strNomIconeSource.
+     *
      * @param strNomIconeSource the strNomIconeSource to set - Nom du fichier d'icône source original
      */
     public void setStrNomIconeSource(String strNomIconeSource) {
@@ -246,6 +300,8 @@ public class HotspotImage {
     }
 
     /**
+     * Retourne la valeur de iTailleHotspot.
+     *
      * @return the iTailleHotspot - Taille du hotspot en pixels
      */
     public int getTailleHotspot() {
@@ -253,6 +309,8 @@ public class HotspotImage {
     }
 
     /**
+     * Définit la valeur de iTailleHotspot.
+     *
      * @param iTailleHotspot the iTailleHotspot to set - Taille du hotspot en pixels
      */
     public void setTailleHotspot(int iTailleHotspot) {

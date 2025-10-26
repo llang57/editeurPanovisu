@@ -19,31 +19,32 @@ def process_file(filepath: str, dry_run: bool = True):
     
     modifications = 0
     
-    # Pattern 1: Setter avec seulement @param
-    # Cherche: /**\n     * @param nomVar the nomVar to set
-    # Remplace par: /**\n     * Définit la valeur de nomVar.\n     *\n     * @param nomVar the nomVar to set
+    # Pattern 1: Setter avec seulement @param (pas de texte avant)
+    # Cherche: /**\n     * @param nomVar the XXX to set
+    # Accepte les préfixes comme aNomVar, aiNomVar, etc.
+    # MAIS PAS si déjà suivi d'une description (éviter les doublons)
     
-    pattern_setter = r'(/\*\*\n\s+\* @param (\w+) the \2 to set)'
+    pattern_setter = r'(/\*\*\n)(\s+\* @param \w+ the (\w+) to set)'
     
     def replacement_setter(match):
         nonlocal modifications
         modifications += 1
-        param_name = match.group(2)
-        return f'/**\n     * Définit la valeur de {param_name}.\n     *\n     * @param {param_name} the {param_name} to set'
+        param_name = match.group(3)
+        # Reconstruire: /** + description + ligne vide + @param original
+        return f'{match.group(1)}     * Définit la valeur de {param_name}.\n     *\n{match.group(2)}'
     
     content_modified = re.sub(pattern_setter, replacement_setter, content)
     
-    # Pattern 2: Getter avec seulement @return
+    # Pattern 2: Getter avec seulement @return (pas de texte avant)
     # Cherche: /**\n     * @return the nomVar
-    # Remplace par: /**\n     * Retourne la valeur de nomVar.\n     *\n     * @return the nomVar
     
-    pattern_getter = r'(/\*\*\n\s+\* @return the (\w+))'
+    pattern_getter = r'(/\*\*\n)(\s+\* @return the (\w+))'
     
     def replacement_getter(match):
         nonlocal modifications
         modifications += 1
-        param_name = match.group(2)
-        return f'/**\n     * Retourne la valeur de {param_name}.\n     *\n     * @return the {param_name}'
+        param_name = match.group(3)
+        return f'{match.group(1)}     * Retourne la valeur de {param_name}.\n     *\n{match.group(2)}'
     
     content_modified = re.sub(pattern_getter, replacement_getter, content_modified)
     

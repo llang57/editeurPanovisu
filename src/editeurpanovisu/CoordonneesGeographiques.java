@@ -24,6 +24,8 @@ public class CoordonneesGeographiques {
     }
 
     /**
+     * Retourne la valeur de latitude.
+     *
      * @return the latitude
      */
     public double getLatitude() {
@@ -31,6 +33,8 @@ public class CoordonneesGeographiques {
     }
 
     /**
+     * Définit la valeur de latitude.
+     *
      * @param latitude the latitude to set
      */
     public void setLatitude(double latitude) {
@@ -38,6 +42,8 @@ public class CoordonneesGeographiques {
     }
 
     /**
+     * Retourne la valeur de longitude.
+     *
      * @return the longitude
      */
     public double getLongitude() {
@@ -45,6 +51,8 @@ public class CoordonneesGeographiques {
     }
 
     /**
+     * Définit la valeur de longitude.
+     *
      * @param longitude the longitude to set
      */
     public void setLongitude(double longitude) {

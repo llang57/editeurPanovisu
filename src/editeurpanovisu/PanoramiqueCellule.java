@@ -58,6 +58,8 @@ import javafx.scene.image.Image;
         }
 
     /**
+     * Retourne la valeur de iNumPano.
+     *
      * @return the iNumPano
      */
     public int getiNumPano() {
@@ -65,6 +67,8 @@ import javafx.scene.image.Image;
     }
 
     /**
+     * Définit la valeur de iNumPano.
+     *
      * @param iNumPano the iNumPano to set
      */
     public void setiNumPano(int iNumPano) {

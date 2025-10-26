@@ -39,6 +39,8 @@ import editeurpanovisu.BigDecimalField;
 public final class GestionnaireDiaporamaController {
 
     /**
+     * Retourne la valeur de diaporama.
+     *
      * @return the diaporama
      */
     public Diaporama getDiaporama() {
@@ -46,6 +48,8 @@ public final class GestionnaireDiaporamaController {
     }
 
     /**
+     * Définit la valeur de diaporama.
+     *
      * @param aDiaporama the diaporama to set
      */
     public void setDiaporama(Diaporama aDiaporama) {
@@ -439,6 +443,8 @@ public final class GestionnaireDiaporamaController {
     }
 
     /**
+     * Retourne la valeur de bDisabled.
+     *
      * @return the bDisabled
      */
     public boolean isbDisabled() {
@@ -446,6 +452,8 @@ public final class GestionnaireDiaporamaController {
     }
 
     /**
+     * Définit la valeur de bDisabled.
+     *
      * @param bDisabled the bDisabled to set
      */
     public void setbDisabled(boolean bDisabled) {

@@ -34,6 +34,8 @@ public class Plan {
     }
 
     /**
+     * Définit la valeur de hotspots.
+     *
      * @param hotspot the hotspots to set
      * @param i
      */
@@ -63,6 +65,8 @@ public class Plan {
     }
 
     /**
+     * Retourne la valeur de titrePLan.
+     *
      * @return the titrePLan
      */
     public String getTitrePlan() {
@@ -78,6 +82,8 @@ public class Plan {
     }
 
     /**
+     * Retourne la valeur de nombreHotspots.
+     *
      * @return the nombreHotspots
      */
     public int getNombreHotspots() {
@@ -85,6 +91,8 @@ public class Plan {
     }
 
     /**
+     * Définit la valeur de nombreHotspots.
+     *
      * @param iNombreHotspots the nombreHotspots to set
      */
     public void setNombreHotspots(int iNombreHotspots) {
@@ -92,6 +100,8 @@ public class Plan {
     }
 
     /**
+     * Retourne la valeur de panoramiques.
+     *
      * @return the panoramiques
      */
     public String[] getStrPanoramiques() {
@@ -99,6 +109,8 @@ public class Plan {
     }
 
     /**
+     * Définit la valeur de panoramiques.
+     *
      * @param strPanoramique the panoramiques to set
      */
     public void addStrPanoramique(String strPanoramique) {
@@ -107,6 +119,8 @@ public class Plan {
     }
 
     /**
+     * Définit la valeur de panoramiques.
+     *
      * @param strPanoramique the panoramiques to set
      */
     public void removeStrPanoramique(String strPanoramique) {
@@ -128,6 +142,8 @@ public class Plan {
     }
 
     /**
+     * Retourne la valeur de nombrePanoramiques.
+     *
      * @return the nombrePanoramiques
      */
     public int getNombrePanoramiques() {
@@ -135,6 +151,8 @@ public class Plan {
     }
 
     /**
+     * Définit la valeur de nombrePanoramiques.
+     *
      * @param iNombrePanoramiques the nombrePanoramiques to set
      */
     public void setNombrePanoramiques(int iNombrePanoramiques) {
@@ -142,6 +160,8 @@ public class Plan {
     }
 
     /**
+     * Retourne la valeur de directionNord.
+     *
      * @return the directionNord
      */
     public double getDirectionNord() {
@@ -149,6 +169,8 @@ public class Plan {
     }
 
     /**
+     * Définit la valeur de directionNord.
+     *
      * @param directionNord the directionNord to set
      */
     public void setDirectionNord(double directionNord) {
@@ -156,6 +178,8 @@ public class Plan {
     }
 
     /**
+     * Retourne la valeur de position.
+     *
      * @return the position
      */
     public String getStrPosition() {
@@ -163,6 +187,8 @@ public class Plan {
     }
 
     /**
+     * Définit la valeur de position.
+     *
      * @param strPosition the position to set
      */
     public void setStrPosition(String strPosition) {
@@ -170,6 +196,8 @@ public class Plan {
     }
 
     /**
+     * Retourne la valeur de positionX.
+     *
      * @return the positionX
      */
     public double getPositionX() {
@@ -177,6 +205,8 @@ public class Plan {
     }
 
     /**
+     * Définit la valeur de positionX.
+     *
      * @param positionX the positionX to set
      */
     public void setPositionX(double positionX) {
@@ -184,6 +214,8 @@ public class Plan {
     }
 
     /**
+     * Retourne la valeur de positionY.
+     *
      * @return the positionY
      */
     public double getPositionY() {
@@ -191,6 +223,8 @@ public class Plan {
     }
 
     /**
+     * Définit la valeur de positionY.
+     *
      * @param positionY the positionY to set
      */
     public void setPositionY(double positionY) {
@@ -198,6 +232,8 @@ public class Plan {
     }
 
     /**
+     * Retourne la valeur de imagePlan.
+     *
      * @return the imagePlan
      */
     public String getStrImagePlan() {
@@ -205,6 +241,8 @@ public class Plan {
     }
 
     /**
+     * Définit la valeur de imagePlan.
+     *
      * @param strImagePlan the imagePlan to set
      */
     public void setStrImagePlan(String strImagePlan) {
@@ -212,6 +250,8 @@ public class Plan {
     }
 
     /**
+     * Retourne la valeur de lienPlan.
+     *
      * @return the lienPlan
      */
     public String getStrLienPlan() {
@@ -219,6 +259,8 @@ public class Plan {
     }
 
     /**
+     * Définit la valeur de lienPlan.
+     *
      * @param strLienPlan the lienPlan to set
      */
     public void setStrLienPlan(String strLienPlan) {
@@ -226,6 +268,8 @@ public class Plan {
     }
 
     /**
+     * Retourne la valeur de largeurPlan.
+     *
      * @return the largeurPlan
      */
     public double getLargeurPlan() {
@@ -233,6 +277,8 @@ public class Plan {
     }
 
     /**
+     * Définit la valeur de largeurPlan.
+     *
      * @param largeurPlan the largeurPlan to set
      */
     public void setLargeurPlan(double largeurPlan) {
@@ -240,6 +286,8 @@ public class Plan {
     }
 
     /**
+     * Retourne la valeur de hauteurPlan.
+     *
      * @return the hauteurPlan
      */
     public double getHauteurPlan() {
@@ -247,6 +295,8 @@ public class Plan {
     }
 
     /**
+     * Définit la valeur de hauteurPlan.
+     *
      * @param hauteurPlan the hauteurPlan to set
      */
     public void setHauteurPlan(double hauteurPlan) {

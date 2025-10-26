@@ -28,6 +28,8 @@ public class MarqueurGeolocalisation {
     }
 
     /**
+     * Retourne la valeur de strXMLMarqueur.
+     *
      * @return the strXMLMarqueur
      */
     public String getStrXMLMarqueur() {
@@ -35,6 +37,8 @@ public class MarqueurGeolocalisation {
     }
 
     /**
+     * Définit la valeur de strXMLMarqueur.
+     *
      * @param strXMLMarqueur the strXMLMarqueur to set
      */
     public void setStrXMLMarqueur(String strXMLMarqueur) {
@@ -42,6 +46,8 @@ public class MarqueurGeolocalisation {
     }
 
     /**
+     * Retourne la valeur de strHTMLMarqueur.
+     *
      * @return the strHTMLMarqueur
      */
     public String getStrHTMLMarqueur() {
@@ -49,6 +55,8 @@ public class MarqueurGeolocalisation {
     }
 
     /**
+     * Définit la valeur de strHTMLMarqueur.
+     *
      * @param strHTMLMarqueur the strHTMLMarqueur to set
      */
     public void setStrHTMLMarqueur(String strHTMLMarqueur) {
@@ -56,6 +64,8 @@ public class MarqueurGeolocalisation {
     }
 
     /**
+     * Retourne la valeur de coordonnees.
+     *
      * @return the coordonnees
      */
     public CoordonneesGeographiques getCoordonnees() {
@@ -63,6 +73,8 @@ public class MarqueurGeolocalisation {
     }
 
     /**
+     * Définit la valeur de coordonnees.
+     *
      * @param coordonnees the coordonnees to set
      */
     public void setCoordonnees(CoordonneesGeographiques coordonnees) {

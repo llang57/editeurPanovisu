@@ -56,6 +56,8 @@ public class CartePanoVisu {
     }
 
     /**
+     * Retourne la valeur de centreCarte.
+     *
      * @return the centreCarte 
      */
     public CoordonneesGeographiques getCentreCarte() {
@@ -63,6 +65,8 @@ public class CartePanoVisu {
     }
 
     /**
+     * Définit la valeur de centreCarte.
+     *
      * @param centreCarte the centreCarte to set
      */
     public void setCentreCarte(CoordonneesGeographiques centreCarte) {
@@ -70,6 +74,8 @@ public class CartePanoVisu {
     }
 
     /**
+     * Retourne la valeur de facteurZoom.
+     *
      * @return the facteurZoom
      */
     public int getFacteurZoom() {
@@ -77,6 +83,8 @@ public class CartePanoVisu {
     }
 
     /**
+     * Définit la valeur de facteurZoom.
+     *
      * @param facteurZoom the facteurZoom to set
      */
     public void setFacteurZoom(int facteurZoom) {
@@ -84,6 +92,8 @@ public class CartePanoVisu {
     }
 
     /**
+     * Retourne la valeur de iNombreMarqueur.
+     *
      * @return the iNombreMarqueur
      */
     public int getiNombreMarqueur() {
@@ -91,6 +101,8 @@ public class CartePanoVisu {
     }
 
     /**
+     * Définit la valeur de iNombreMarqueur.
+     *
      * @param iNombreMarqueur the iNombreMarqueur to set
      */
     public void setiNombreMarqueur(int iNombreMarqueur) {
@@ -98,6 +110,8 @@ public class CartePanoVisu {
     }
 
     /**
+     * Retourne la valeur de marqueurs.
+     *
      * @return the marqueurs
      */
     public MarqueurGeolocalisation[] getMarqueurs() {
@@ -105,6 +119,8 @@ public class CartePanoVisu {
     }
 
     /**
+     * Définit la valeur de marqueurs.
+     *
      * @param marqueurs the marqueurs to set
      */
     public void setMarqueurs(MarqueurGeolocalisation[] marqueurs) {
@@ -121,6 +137,8 @@ public class CartePanoVisu {
     }
 
     /**
+     * Retourne la valeur de strTypeCarte.
+     *
      * @return the strTypeCarte
      */
     public String getStrTypeCarte() {
@@ -128,6 +146,8 @@ public class CartePanoVisu {
     }
 
     /**
+     * Définit la valeur de strTypeCarte.
+     *
      * @param strTypeCarte the strTypeCarte to set
      */
     public void setStrTypeCarte(String strTypeCarte) {

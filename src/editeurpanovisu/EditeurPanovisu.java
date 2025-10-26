@@ -186,6 +186,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de strStyleCSS.
+     *
      * @return the strStyleCSS
      */
     public static String getStrStyleCSS() {
@@ -193,6 +195,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de strStyleCSS.
+     *
      * @param aStrStyleCSS the strStyleCSS to set
      */
     public static void setStrStyleCSS(String aStrStyleCSS) {
@@ -204,6 +208,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de strCodesLanguesTraduction.
+     *
      * @return the strCodesLanguesTraduction
      */
     public static String[] getStrCodesLanguesTraduction() {
@@ -211,6 +217,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de strLanguesTraduction.
+     *
      * @return the strLanguesTraduction
      */
     public static String[] getStrLanguesTraduction() {
@@ -218,6 +226,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de strCurrentDir.
+     *
      * @return the strCurrentDir
      */
     public static String getStrCurrentDir() {
@@ -225,6 +235,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de strCurrentDir.
+     *
      * @param aStrCurrentDir the strCurrentDir to set
      */
     public static void setStrCurrentDir(String aStrCurrentDir) {
@@ -232,6 +244,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de locale.
+     *
      * @return the locale
      */
     public static Locale getLocale() {
@@ -239,6 +253,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de locale.
+     *
      * @param aLocale the locale to set
      */
     public static void setLocale(Locale aLocale) {
@@ -246,6 +262,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de iNumHTML.
+     *
      * @return the iNumHTML
      */
     public static int getiNumHTML() {
@@ -253,6 +271,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de iNumHTML.
+     *
      * @param aiNumHTML the iNumHTML to set
      */
     public static void setiNumHTML(int aiNumHTML) {
@@ -260,6 +280,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de panoramiquesProjet.
+     *
      * @return the panoramiquesProjet
      */
     public static Panoramique[] getPanoramiquesProjet() {
@@ -267,6 +289,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de panoramiquesProjet.
+     *
      * @param aPanoramiquesProjet the panoramiquesProjet to set
      */
     public static void setPanoramiquesProjet(Panoramique[] aPanoramiquesProjet) {
@@ -274,6 +298,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de plans.
+     *
      * @return the plans
      */
     public static Plan[] getPlans() {
@@ -281,6 +307,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de plans.
+     *
      * @param aPlans the plans to set
      */
     public static void setPlans(Plan[] aPlans) {
@@ -288,6 +316,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de iNombrePanoramiques.
+     *
      * @return the iNombrePanoramiques
      */
     public static int getiNombrePanoramiques() {
@@ -295,6 +325,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de iNombrePanoramiques.
+     *
      * @param aiNombrePanoramiques the iNombrePanoramiques to set
      */
     public static void setiNombrePanoramiques(int aiNombrePanoramiques) {
@@ -302,6 +334,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de iNombrePanoramiquesFichier.
+     *
      * @return the iNombrePanoramiquesFichier
      */
     public static int getiNombrePanoramiquesFichier() {
@@ -309,6 +343,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de iNombrePanoramiquesFichier.
+     *
      * @param aiNombrePanoramiquesFichier the iNombrePanoramiquesFichier to set
      */
     public static void setiNombrePanoramiquesFichier(int aiNombrePanoramiquesFichier) {
@@ -316,6 +352,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de iNombrePlans.
+     *
      * @return the iNombrePlans
      */
     public static int getiNombrePlans() {
@@ -323,6 +361,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de iNombrePlans.
+     *
      * @param aiNombrePlans the iNombrePlans to set
      */
     public static void setiNombrePlans(int aiNombrePlans) {
@@ -330,6 +370,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de iPanoActuel.
+     *
      * @return the iPanoActuel
      */
     public static int getiPanoActuel() {
@@ -337,6 +379,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de iPanoActuel.
+     *
      * @param aiPanoActuel the iPanoActuel to set
      */
     public static void setiPanoActuel(int aiPanoActuel) {
@@ -344,6 +388,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de strPanoListeVignette.
+     *
      * @return the strPanoListeVignette
      */
     public static String getStrPanoListeVignette() {
@@ -351,6 +397,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de strPanoListeVignette.
+     *
      * @param aStrPanoListeVignette the strPanoListeVignette to set
      */
     public static void setStrPanoListeVignette(String aStrPanoListeVignette) {
@@ -358,6 +406,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de tabPlan.
+     *
      * @return the tabPlan
      */
     public static Tab getTabPlan() {
@@ -365,6 +415,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de tabPlan.
+     *
      * @param aTabPlan the tabPlan to set
      */
     public static void setTabPlan(Tab aTabPlan) {
@@ -372,6 +424,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de strSystemeExploitation.
+     *
      * @return the strSystemeExploitation
      */
     public static String getStrSystemeExploitation() {
@@ -379,6 +433,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de strSystemeExploitation.
+     *
      * @param aStrSystemeExploitation the strSystemeExploitation to set
      */
     public static void setStrSystemeExploitation(String aStrSystemeExploitation) {
@@ -413,6 +469,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de strTooltipStyle.
+     *
      * @return the strTooltipStyle
      */
     public static String getStrTooltipStyle() {
@@ -420,6 +478,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de strRepertAppli.
+     *
      * @return the strRepertAppli
      */
     public static String getStrRepertAppli() {
@@ -427,6 +487,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de strRepertAppli.
+     *
      * @param aStrRepertAppli the strRepertAppli to set
      */
     public static void setStrRepertAppli(String aStrRepertAppli) {
@@ -550,6 +612,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de strRepertTemp.
+     *
      * @return the strRepertTemp
      */
     public static String getStrRepertTemp() {
@@ -557,6 +621,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de strRepertTemp.
+     *
      * @param aStrRepertTemp the strRepertTemp to set
      */
     public static void setStrRepertTemp(String aStrRepertTemp) {
@@ -564,6 +630,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de strRepertPanos.
+     *
      * @return the strRepertPanos
      */
     public static String getStrRepertPanos() {
@@ -571,6 +639,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de strRepertPanos.
+     *
      * @param aStrRepertPanos the strRepertPanos to set
      */
     public static void setStrRepertPanos(String aStrRepertPanos) {
@@ -578,6 +648,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de strRepertHSImages.
+     *
      * @return the strRepertHSImages
      */
     public static String getStrRepertHSImages() {
@@ -585,6 +657,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de strRepertHSImages.
+     *
      * @param aStrRepertHSImages the strRepertHSImages to set
      */
     public static void setStrRepertHSImages(String aStrRepertHSImages) {
@@ -592,6 +666,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de strRepertoireProjet.
+     *
      * @return the strRepertoireProjet
      */
     public static String getStrRepertoireProjet() {
@@ -599,6 +675,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de strRepertoireProjet.
+     *
      * @param aStrRepertoireProjet the strRepertoireProjet to set
      */
     public static void setStrRepertoireProjet(String aStrRepertoireProjet) {
@@ -606,6 +684,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de strDernierRepertoireVisite.
+     *
      * @return the strDernierRepertoireVisite
      */
     public static String getStrDernierRepertoireVisite() {
@@ -613,6 +693,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de strDernierRepertoireVisite.
+     *
      * @param aStrDernierRepertoireVisite the strDernierRepertoireVisite to set
      */
     public static void setStrDernierRepertoireVisite(String aStrDernierRepertoireVisite) {
@@ -620,6 +702,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de strDernierRepertoireImages.
+     *
      * @return the strDernierRepertoireImages
      */
     public static String getStrDernierRepertoireImages() {
@@ -627,6 +711,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de strDernierRepertoireImages.
+     *
      * @param aStrDernierRepertoireImages the strDernierRepertoireImages to set
      */
     public static void setStrDernierRepertoireImages(String aStrDernierRepertoireImages) {
@@ -634,6 +720,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de bDejaSauve.
+     *
      * @return the bDejaSauve
      */
     public static boolean isbDejaSauve() {
@@ -641,6 +729,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de bDejaSauve.
+     *
      * @param abDejaSauve the bDejaSauve to set
      */
     public static void setbDejaSauve(boolean abDejaSauve) {
@@ -648,6 +738,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de stPrincipal.
+     *
      * @return the stPrincipal
      */
     public static Stage getStPrincipal() {
@@ -655,6 +747,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de stPrincipal.
+     *
      * @param aStPrincipal the stPrincipal to set
      */
     public static void setStPrincipal(Stage aStPrincipal) {
@@ -662,6 +756,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de gestionnaireInterface.
+     *
      * @return the gestionnaireInterface
      */
     public static GestionnaireInterfaceController getGestionnaireInterface() {
@@ -669,6 +765,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de gestionnaireInterface.
+     *
      * @param aGestionnaireInterface the gestionnaireInterface to set
      */
     public static void setGestionnaireInterface(GestionnaireInterfaceController aGestionnaireInterface) {
@@ -676,6 +774,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de gestionnairePlan.
+     *
      * @return the gestionnairePlan
      */
     public static GestionnairePlanController getGestionnairePlan() {
@@ -683,6 +783,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de gestionnairePlan.
+     *
      * @param aGestionnairePlan the gestionnairePlan to set
      */
     public static void setGestionnairePlan(GestionnairePlanController aGestionnairePlan) {
@@ -690,6 +792,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de mniAjouterPlan.
+     *
      * @return the mniAjouterPlan
      */
     public static MenuItem getMniAjouterPlan() {
@@ -697,6 +801,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de mniAjouterPlan.
+     *
      * @param aMniAjouterPlan the mniAjouterPlan to set
      */
     public static void setMniAjouterPlan(MenuItem aMniAjouterPlan) {
@@ -704,6 +810,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de mniAffichagePlan.
+     *
      * @return the mniAffichagePlan
      */
     public static MenuItem getMniAffichagePlan() {
@@ -711,6 +819,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de mniAffichagePlan.
+     *
      * @param aMniAffichagePlan the mniAffichagePlan to set
      */
     public static void setMniAffichagePlan(MenuItem aMniAffichagePlan) {
@@ -718,6 +828,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de ivAjouterPlan.
+     *
      * @return the ivAjouterPlan
      */
     public static ImageView getIvAjouterPlan() {
@@ -725,6 +837,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de ivAjouterPlan.
+     *
      * @param aIvAjouterPlan the ivAjouterPlan to set
      */
     public static void setIvAjouterPlan(ImageView aIvAjouterPlan) {
@@ -732,6 +846,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de tabInterface.
+     *
      * @return the tabInterface
      */
     public static Tab getTabInterface() {
@@ -739,6 +855,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de tabInterface.
+     *
      * @param aTabInterface the tabInterface to set
      */
     public static void setTabInterface(Tab aTabInterface) {
@@ -746,6 +864,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de apAttends.
+     *
      * @return the apAttends
      */
     public static AnchorPane getApAttends() {
@@ -753,6 +873,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de apAttends.
+     *
      * @param apAttends1 the apAttends to set
      */
     public static void setApAttends(AnchorPane apAttends1) {
@@ -760,6 +882,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de strBingAPIKey.
+     *
      * @return the strBingAPIKey
      */
     public static String getStrBingAPIKey() {
@@ -774,6 +898,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de bAutoRotationDemarre.
+     *
      * @return the bAutoRotationDemarre
      */
     public static boolean isbAutoRotationDemarre() {
@@ -781,6 +907,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de bAutoRotationDemarre.
+     *
      * @param abAutoRotationDemarre the bAutoRotationDemarre to set
      */
     public static void setbAutoRotationDemarre(boolean abAutoRotationDemarre) {
@@ -788,6 +916,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de iAutoRotationVitesse.
+     *
      * @return the iAutoRotationVitesse
      */
     public static int getiAutoRotationVitesse() {
@@ -795,6 +925,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de iAutoRotationVitesse.
+     *
      * @param aiAutoRotationVitesse the iAutoRotationVitesse to set
      */
     public static void setiAutoRotationVitesse(int aiAutoRotationVitesse) {
@@ -802,6 +934,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de bAutoTourDemarre.
+     *
      * @return the bAutoTourDemarre
      */
     public static boolean isbAutoTourDemarre() {
@@ -809,6 +943,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de bAutoTourDemarre.
+     *
      * @param abAutoTourDemarre the bAutoTourDemarre to set
      */
     public static void setbAutoTourDemarre(boolean abAutoTourDemarre) {
@@ -816,6 +952,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de iAutoTourVitesse.
+     *
      * @return the iAutoTourVitesse
      */
     public static int getiAutoTourLimite() {
@@ -823,6 +961,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de iAutoTourVitesse.
+     *
      * @param aiAutoTourLimite the iAutoTourVitesse to set
      */
     public static void setiAutoTourLimite(int aiAutoTourLimite) {
@@ -830,6 +970,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de strAutoTourType.
+     *
      * @return the strAutoTourType
      */
     public static String getStrAutoTourType() {
@@ -837,6 +979,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de strAutoTourType.
+     *
      * @param aStrAutoTourType the strAutoTourType to set
      */
     public static void setStrAutoTourType(String aStrAutoTourType) {
@@ -844,6 +988,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de bPetitePlaneteDemarrage.
+     *
      * @return the bPetitePlaneteDemarrage
      */
     public static boolean isbPetitePlaneteDemarrage() {
@@ -851,6 +997,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de bPetitePlaneteDemarrage.
+     *
      * @param abPetitePlaneteDemarrage the bPetitePlaneteDemarrage to set
      */
     public static void setbPetitePlaneteDemarrage(boolean abPetitePlaneteDemarrage) {
@@ -858,6 +1006,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de bIntroPetitePlanete.
+     *
      * @return the bIntroPetitePlanete
      */
     public static boolean isbIntroPetitePlanete() {
@@ -865,6 +1015,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de bIntroPetitePlanete.
+     *
      * @param abIntroPetitePlanete the bIntroPetitePlanete to set
      */
     public static void setbIntroPetitePlanete(boolean abIntroPetitePlanete) {
@@ -872,6 +1024,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de poGeolocalisation.
+     *
      * @return the poGeolocalisation
      */
     public static PaneOutil getPoGeolocalisation() {
@@ -879,6 +1033,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de poGeolocalisation.
+     *
      * @param aPoGeolocalisation the poGeolocalisation to set
      */
     public static void setPoGeolocalisation(PaneOutil aPoGeolocalisation) {
@@ -886,6 +1042,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de bInternet.
+     *
      * @return the bInternet
      */
     public static boolean isbInternet() {
@@ -893,6 +1051,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de bInternet.
+     *
      * @param abInternet the bInternet to set
      */
     public static void setbInternet(boolean abInternet) {
@@ -900,6 +1060,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de iDecalageMac.
+     *
      * @return the iDecalageMac
      */
     public static int getiDecalageMac() {
@@ -907,6 +1069,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de iDecalageMac.
+     *
      * @param aiDecalageMac the iDecalageMac to set
      */
     public static void setiDecalageMac(int aiDecalageMac) {
@@ -914,6 +1078,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de vbChoixPanoramique.
+     *
      * @return the vbChoixPanoramique
      */
     public static VBox getVbChoixPanoramique() {
@@ -921,6 +1087,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de vbChoixPanoramique.
+     *
      * @param aVbChoixPanoramique the vbChoixPanoramique to set
      */
     public static void setVbChoixPanoramique(VBox aVbChoixPanoramique) {
@@ -928,6 +1096,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de apPVIS.
+     *
      * @return the apPVIS
      */
     public static AnchorPane getApPVIS() {
@@ -935,6 +1105,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de apPVIS.
+     *
      * @param aApPVIS the apPVIS to set
      */
     public static void setApPVIS(AnchorPane aApPVIS) {
@@ -942,6 +1114,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de apAR.
+     *
      * @return the apAR
      */
     public static AnchorPane getApAR() {
@@ -949,6 +1123,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de apAR.
+     *
      * @param aApAR the apAR to set
      */
     public static void setApAR(AnchorPane aApAR) {
@@ -956,6 +1132,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de apPPAN.
+     *
      * @return the apPPAN
      */
     public static AnchorPane getApPPAN() {
@@ -963,6 +1141,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de apPPAN.
+     *
      * @param aApPPAN the apPPAN to set
      */
     public static void setApPPAN(AnchorPane aApPPAN) {
@@ -970,6 +1150,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de apDESCIA.
+     *
      * @return the apDESCIA
      */
     public static AnchorPane getApDESCIA() {
@@ -977,6 +1159,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de apDESCIA.
+     *
      * @param aApDESCIA the apDESCIA to set
      */
     public static void setApDESCIA(AnchorPane aApDESCIA) {
@@ -984,6 +1168,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de apGEO.
+     *
      * @return the apGEO
      */
     public static AnchorPane getApGEO() {
@@ -991,6 +1177,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de apGEO.
+     *
      * @param aApGEO the apGEO to set
      */
     public static void setApGEO(AnchorPane aApGEO) {
@@ -998,6 +1186,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de apVISU.
+     *
      * @return the apVISU
      */
     public static AnchorPane getApVISU() {
@@ -1005,6 +1195,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de apVISU.
+     *
      * @param aApVISU the apVISU to set
      */
     public static void setApVISU(AnchorPane aApVISU) {
@@ -1012,6 +1204,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de apHS.
+     *
      * @return the apHS
      */
     public static AnchorPane getApHS() {
@@ -1019,6 +1213,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de apHS.
+     *
      * @param aApHS the apHS to set
      */
     public static void setApHS(AnchorPane aApHS) {
@@ -1026,6 +1222,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de iAutoTourDemarrage.
+     *
      * @return the iAutoTourDemarrage
      */
     public static int getiAutoTourDemarrage() {
@@ -1033,6 +1231,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de iAutoTourDemarrage.
+     *
      * @param aiAutoTourDemarrage the iAutoTourDemarrage to set
      */
     public static void setiAutoTourDemarrage(int aiAutoTourDemarrage) {
@@ -1040,6 +1240,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de scnPrincipale.
+     *
      * @return the scnPrincipale
      */
     public static Scene getScnPrincipale() {
@@ -1047,6 +1249,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de scnPrincipale.
+     *
      * @param aScnPrincipale the scnPrincipale to set
      */
     public static void setScnPrincipale(Scene aScnPrincipale) {
@@ -1054,6 +1258,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de iNumDiapo.
+     *
      * @return the iNumDiapo
      */
     public static int getiNumDiapo() {
@@ -1061,6 +1267,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de iNumDiapo.
+     *
      * @param aiNumDiapo the iNumDiapo to set
      */
     public static void setiNumDiapo(int aiNumDiapo) {
@@ -1068,6 +1276,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de iNumImages.
+     *
      * @return the iNumImages
      */
     public static int getiNumImages() {
@@ -1075,6 +1285,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de iNumImages.
+     *
      * @param aiNumImages the iNumImages to set
      */
     public static void setiNumImages(int aiNumImages) {
@@ -1082,6 +1294,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de iNumPoints.
+     *
      * @return the iNumPoints
      */
     public static int getiNumPoints() {
@@ -1089,6 +1303,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de iNumPoints.
+     *
      * @param aiNumPoints the iNumPoints to set
      */
     public static void setiNumPoints(int aiNumPoints) {
@@ -1096,6 +1312,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de iNombreDiapo.
+     *
      * @return the iNombreDiapo
      */
     public static int getiNombreDiapo() {
@@ -1103,6 +1321,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de iNombreDiapo.
+     *
      * @param aiNombreDiapo the iNombreDiapo to set
      */
     public static void setiNombreDiapo(int aiNombreDiapo) {
@@ -1110,6 +1330,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de afficheLoupe.
+     *
      * @return the afficheLoupe
      */
     public static boolean isAfficheLoupe() {
@@ -1117,6 +1339,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de afficheLoupe.
+     *
      * @param aAfficheLoupe the afficheLoupe to set
      */
     public static void setAfficheLoupe(boolean aAfficheLoupe) {
@@ -1124,6 +1348,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de iTailleLoupe.
+     *
      * @return the iTailleLoupe
      */
     public static int getiTailleLoupe() {
@@ -1131,6 +1357,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de iTailleLoupe.
+     *
      * @param aiTailleLoupe the iTailleLoupe to set
      */
     public static void setiTailleLoupe(int aiTailleLoupe) {
@@ -1144,6 +1372,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de strTypeFichierTransf.
+     *
      * @return the strTypeFichierTransf
      */
     public static String getStrTypeFichierTransf() {
@@ -1151,6 +1381,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de strTypeFichierTransf.
+     *
      * @param aStrTypeFichierTransf the strTypeFichierTransf to set
      */
     public static void setStrTypeFichierTransf(String aStrTypeFichierTransf) {
@@ -1158,6 +1390,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de largeurE2C.
+     *
      * @return the largeurE2C
      */
     public static double getLargeurE2C() {
@@ -1165,6 +1399,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de largeurE2C.
+     *
      * @param aLargeurE2C the largeurE2C to set
      */
     public static void setLargeurE2C(double aLargeurE2C) {
@@ -1172,6 +1408,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de hauteurE2C.
+     *
      * @return the hauteurE2C
      */
     public static double getHauteurE2C() {
@@ -1179,6 +1417,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de hauteurE2C.
+     *
      * @param aHauteurE2C the hauteurE2C to set
      */
     public static void setHauteurE2C(double aHauteurE2C) {
@@ -1186,6 +1426,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de bNetteteTransf.
+     *
      * @return the bNetteteTransf
      */
     public static boolean isbNetteteTransf() {
@@ -1193,6 +1435,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de bNetteteTransf.
+     *
      * @param abNetteteTransf the bNetteteTransf to set
      */
     public static void setbNetteteTransf(boolean abNetteteTransf) {
@@ -1200,6 +1444,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Retourne la valeur de niveauNetteteTransf.
+     *
      * @return the niveauNetteteTransf
      */
     public static double getNiveauNetteteTransf() {
@@ -1207,6 +1453,8 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
+     * Définit la valeur de niveauNetteteTransf.
+     *
      * @param aNiveauNetteteTransf the niveauNetteteTransf to set
      */
     public static void setNiveauNetteteTransf(double aNiveauNetteteTransf) {

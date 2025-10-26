@@ -27,6 +27,8 @@ public class ImageFond {
     private int iCalqueImage=1;
 
     /**
+     * Retourne la valeur de fichierImage.
+     *
      * @return the fichierImage
      */
     public String getStrFichierImage() {
@@ -34,6 +36,8 @@ public class ImageFond {
     }
 
     /**
+     * Définit la valeur de fichierImage.
+     *
      * @param strFichierImage the fichierImage to set
      */
     public void setStrFichierImage(String strFichierImage) {
@@ -41,6 +45,8 @@ public class ImageFond {
     }
 
     /**
+     * Retourne la valeur de imgFond.
+     *
      * @return the imgFond
      */
     public Image getImgFond() {
@@ -48,6 +54,8 @@ public class ImageFond {
     }
 
     /**
+     * Définit la valeur de imgFond.
+     *
      * @param imgFond the imgFond to set
      */
     public void setImgFond(Image imgFond) {
@@ -55,6 +63,8 @@ public class ImageFond {
     }
 
     /**
+     * Retourne la valeur de posX.
+     *
      * @return the posX
      */
     public String getStrPosX() {
@@ -62,6 +72,8 @@ public class ImageFond {
     }
 
     /**
+     * Définit la valeur de posX.
+     *
      * @param strPosX the posX to set
      */
     public void setStrPosX(String strPosX) {
@@ -69,6 +81,8 @@ public class ImageFond {
     }
 
     /**
+     * Retourne la valeur de posY.
+     *
      * @return the posY
      */
     public String getStrPosY() {
@@ -76,6 +90,8 @@ public class ImageFond {
     }
 
     /**
+     * Définit la valeur de posY.
+     *
      * @param strPosY the posY to set
      */
     public void setStrPosY(String strPosY) {
@@ -83,6 +99,8 @@ public class ImageFond {
     }
 
     /**
+     * Retourne la valeur de offsetX.
+     *
      * @return the offsetX
      */
     public double getOffsetX() {
@@ -90,6 +108,8 @@ public class ImageFond {
     }
 
     /**
+     * Définit la valeur de offsetX.
+     *
      * @param offsetX the offsetX to set
      */
     public void setOffsetX(double offsetX) {
@@ -97,6 +117,8 @@ public class ImageFond {
     }
 
     /**
+     * Retourne la valeur de offsetY.
+     *
      * @return the offsetY
      */
     public double getOffsetY() {
@@ -104,6 +126,8 @@ public class ImageFond {
     }
 
     /**
+     * Définit la valeur de offsetY.
+     *
      * @param offsetY the offsetY to set
      */
     public void setOffsetY(double offsetY) {
@@ -111,6 +135,8 @@ public class ImageFond {
     }
 
     /**
+     * Retourne la valeur de url.
+     *
      * @return the url
      */
     public String getStrUrl() {
@@ -118,6 +144,8 @@ public class ImageFond {
     }
 
     /**
+     * Définit la valeur de url.
+     *
      * @param strUrl the url to set
      */
     public void setStrUrl(String strUrl) {
@@ -125,6 +153,8 @@ public class ImageFond {
     }
 
     /**
+     * Retourne la valeur de opacite.
+     *
      * @return the opacite
      */
     public double getOpacite() {
@@ -132,6 +162,8 @@ public class ImageFond {
     }
 
     /**
+     * Définit la valeur de opacite.
+     *
      * @param opacite the opacite to set
      */
     public void setOpacite(double opacite) {
@@ -139,6 +171,8 @@ public class ImageFond {
     }
 
     /**
+     * Retourne la valeur de tailleX.
+     *
      * @return the tailleX
      */
     public int getTailleX() {
@@ -146,6 +180,8 @@ public class ImageFond {
     }
 
     /**
+     * Définit la valeur de tailleX.
+     *
      * @param tailleX the tailleX to set
      */
     public void setTailleX(int tailleX) {
@@ -153,6 +189,8 @@ public class ImageFond {
     }
 
     /**
+     * Retourne la valeur de tailleY.
+     *
      * @return the tailleY
      */
     public int getTailleY() {
@@ -160,6 +198,8 @@ public class ImageFond {
     }
 
     /**
+     * Définit la valeur de tailleY.
+     *
      * @param tailleY the tailleY to set
      */
     public void setTailleY(int tailleY) {
@@ -167,6 +207,8 @@ public class ImageFond {
     }
 
     /**
+     * Retourne la valeur de masquable.
+     *
      * @return the masquable
      */
     public boolean isMasquable() {
@@ -174,6 +216,8 @@ public class ImageFond {
     }
 
     /**
+     * Définit la valeur de masquable.
+     *
      * @param masquable the masquable to set
      */
     public void setMasquable(boolean masquable) {
@@ -181,6 +225,8 @@ public class ImageFond {
     }
 
     /**
+     * Retourne la valeur de infobulle.
+     *
      * @return the infobulle
      */
     public String getStrInfobulle() {
@@ -188,6 +234,8 @@ public class ImageFond {
     }
 
     /**
+     * Définit la valeur de infobulle.
+     *
      * @param strInfobulle the infobulle to set
      */
     public void setStrInfobulle(String strInfobulle) {
@@ -195,6 +243,8 @@ public class ImageFond {
     }
 
     /**
+     * Retourne la valeur de strType.
+     *
      * @return the strType
      */
     public String getStrType() {
@@ -202,6 +252,8 @@ public class ImageFond {
     }
 
     /**
+     * Définit la valeur de strType.
+     *
      * @param strType the strType to set
      */
     public void setStrType(String strType) {
@@ -209,6 +261,8 @@ public class ImageFond {
     }
 
     /**
+     * Retourne la valeur de iNumDiapo.
+     *
      * @return the iNumDiapo
      */
     public int getiNumDiapo() {
@@ -216,6 +270,8 @@ public class ImageFond {
     }
 
     /**
+     * Définit la valeur de iNumDiapo.
+     *
      * @param iNumDiapo the iNumDiapo to set
      */
     public void setiNumDiapo(int iNumDiapo) {
@@ -223,6 +279,8 @@ public class ImageFond {
     }
 
     /**
+     * Retourne la valeur de strCible.
+     *
      * @return the strCible
      */
     public String getStrCible() {
@@ -230,6 +288,8 @@ public class ImageFond {
     }
 
     /**
+     * Définit la valeur de strCible.
+     *
      * @param strCible the strCible to set
      */
     public void setStrCible(String strCible) {
@@ -237,6 +297,8 @@ public class ImageFond {
     }
 
     /**
+     * Retourne la valeur de iCalqueImage.
+     *
      * @return the iCalqueImage
      */
     public int getiCalqueImage() {
@@ -244,6 +306,8 @@ public class ImageFond {
     }
 
     /**
+     * Définit la valeur de iCalqueImage.
+     *
      * @param iCalqueImage the iCalqueImage to set
      */
     public void setiCalqueImage(int iCalqueImage) {

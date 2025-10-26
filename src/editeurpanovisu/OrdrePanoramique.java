@@ -228,6 +228,8 @@ public class OrdrePanoramique {
     }
 
     /**
+     * Retourne la valeur de strPanos.
+     *
      * @return the strPanos
      */
     public ObservableList<String> getStrPanos() {
@@ -235,6 +237,8 @@ public class OrdrePanoramique {
     }
 
     /**
+     * Retourne la valeur de cellulesPanoramiques.
+     *
      * @return the cellulesPanoramiques
      */
     public ObservableList<PanoramiqueCellule> getCellulesPanoramiques() {
@@ -242,6 +246,8 @@ public class OrdrePanoramique {
     }
 
     /**
+     * Retourne la valeur de apListePanoramiques.
+     *
      * @return the apListePanoramiques
      */
     public AnchorPane getApListePanoramiques() {

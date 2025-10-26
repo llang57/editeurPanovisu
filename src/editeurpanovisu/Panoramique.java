@@ -79,6 +79,8 @@ public class Panoramique {
     }
 
     /**
+     * Retourne la valeur de affichePlan.
+     *
      * @return the affichePlan
      */
     public  boolean isAffichePlan() {
@@ -86,6 +88,8 @@ public class Panoramique {
     }
 
     /**
+     * Définit la valeur de affichePlan.
+     *
      * @param bAffichePlan the affichePlan to set
      */
     public  void setAffichePlan(boolean bAffichePlan) {
@@ -93,6 +97,8 @@ public class Panoramique {
     }
 
     /**
+     * Retourne la valeur de nomFichier.
+     *
      * @return the nomFichier
      */
     public String getStrNomFichier() {
@@ -100,6 +106,8 @@ public class Panoramique {
     }
 
     /**
+     * Définit la valeur de nomFichier.
+     *
      * @param strNomFichier the nomFichier to set
      */
     public void setStrNomFichier(String strNomFichier) {
@@ -107,6 +115,8 @@ public class Panoramique {
     }
 
     /**
+     * Retourne la valeur de lookAtX.
+     *
      * @return the lookAtX
      */
     public double getRegardX() {
@@ -114,6 +124,8 @@ public class Panoramique {
     }
 
     /**
+     * Définit la valeur de lookAtX.
+     *
      * @param lookAtX the lookAtX to set
      */
     public void setRegardX(double lookAtX) {
@@ -121,6 +133,8 @@ public class Panoramique {
     }
 
     /**
+     * Retourne la valeur de lookAtY.
+     *
      * @return the lookAtY
      */
     public double getRegardY() {
@@ -128,6 +142,8 @@ public class Panoramique {
     }
 
     /**
+     * Définit la valeur de lookAtY.
+     *
      * @param lookAtY the lookAtY to set
      */
     public void setRegardY(double lookAtY) {
@@ -143,6 +159,8 @@ public class Panoramique {
     }
 
     /**
+     * Définit la valeur de hotspots.
+     *
      * @param hotspot the hotspots to set
      * @param i
      */
@@ -180,6 +198,8 @@ public class Panoramique {
     }
 
     /**
+     * Définit la valeur de hotspots.
+     *
      * @param hotspot the hotspots to set
      * @param i
      */
@@ -217,6 +237,8 @@ public class Panoramique {
     }
 
     /**
+     * Définit la valeur de hotspots.
+     *
      * @param hotspot the hotspots to set
      * @param i
      */
@@ -254,6 +276,8 @@ public class Panoramique {
     }
 
     /**
+     * Définit la valeur de hotspots.
+     *
      * @param hotspot the hotspots to set
      * @param i
      */
@@ -284,6 +308,8 @@ public class Panoramique {
 
     
     /**
+     * Retourne la valeur de imagePanoramique.
+     *
      * @return the imagePanoramique
      */
     public Image getImgPanoramique() {
@@ -291,6 +317,8 @@ public class Panoramique {
     }
 
     /**
+     * Définit la valeur de imagePanoramique.
+     *
      * @param imgPanoramique the imagePanoramique to set
      */
     public void setImgPanoramique(Image imgPanoramique) {
@@ -298,6 +326,8 @@ public class Panoramique {
     }
 
     /**
+     * Retourne la valeur de nombreHotspots.
+     *
      * @return the nombreHotspots
      */
     public int getNombreHotspots() {
@@ -305,6 +335,8 @@ public class Panoramique {
     }
 
     /**
+     * Définit la valeur de nombreHotspots.
+     *
      * @param iNombreHotspots the nombreHotspots to set
      */
     public void setNombreHotspots(int iNombreHotspots) {
@@ -312,6 +344,8 @@ public class Panoramique {
     }
 
     /**
+     * Retourne la valeur de typePanoramique.
+     *
      * @return the typePanoramique
      */
     public String getStrTypePanoramique() {
@@ -319,6 +353,8 @@ public class Panoramique {
     }
 
     /**
+     * Définit la valeur de typePanoramique.
+     *
      * @param strTypePanoramique the typePanoramique to set
      */
     public void setStrTypePanoramique(String strTypePanoramique) {
@@ -326,6 +362,8 @@ public class Panoramique {
     }
 
     /**
+     * Retourne la valeur de afficheTitre.
+     *
      * @return the afficheTitre
      */
     public boolean isAfficheTitre() {
@@ -333,6 +371,8 @@ public class Panoramique {
     }
 
     /**
+     * Définit la valeur de afficheTitre.
+     *
      * @param bAfficheTitre the afficheTitre to set
      */
     public void setAfficheTitre(boolean bAfficheTitre) {
@@ -340,6 +380,8 @@ public class Panoramique {
     }
 
     /**
+     * Retourne la valeur de affDescription.
+     *
      * @return the affDescription
      */
     public boolean isAffDescription() {
@@ -347,6 +389,8 @@ public class Panoramique {
     }
 
     /**
+     * Définit la valeur de affDescription.
+     *
      * @param bAffDescription the affDescription to set
      */
     public void setAffDescription(boolean bAffDescription) {
@@ -354,6 +398,8 @@ public class Panoramique {
     }
 
     /**
+     * Retourne la valeur de afficheInfo.
+     *
      * @return the afficheInfo
      */
     public boolean isAfficheInfo() {
@@ -361,6 +407,8 @@ public class Panoramique {
     }
 
     /**
+     * Définit la valeur de afficheInfo.
+     *
      * @param bAfficheInfo the afficheInfo to set
      */
     public void setAfficheInfo(boolean bAfficheInfo) {
@@ -368,6 +416,8 @@ public class Panoramique {
     }
 
     /**
+     * Retourne la valeur de titrePanoramique.
+     *
      * @return the titrePanoramique
      */
     public String getStrTitrePanoramique() {
@@ -375,6 +425,8 @@ public class Panoramique {
     }
 
     /**
+     * Définit la valeur de titrePanoramique.
+     *
      * @param strTitrePanoramique the titrePanoramique to set
      */
     public void setStrTitrePanoramique(String strTitrePanoramique) {
@@ -382,6 +434,8 @@ public class Panoramique {
     }
 
     /**
+     * Retourne la valeur de vignettePanoramique.
+     *
      * @return the vignettePanoramique
      */
     public Image getImgVignettePanoramique() {
@@ -389,6 +443,8 @@ public class Panoramique {
     }
 
     /**
+     * Définit la valeur de vignettePanoramique.
+     *
      * @param imgVignettePanoramique the vignettePanoramique to set
      */
     public void setImgVignettePanoramique(Image imgVignettePanoramique) {
@@ -396,6 +452,8 @@ public class Panoramique {
     }
 
     /**
+     * Retourne la valeur de zeroNord.
+     *
      * @return the zeroNord
      */
     public double getZeroNord() {
@@ -403,6 +461,8 @@ public class Panoramique {
     }
 
     /**
+     * Définit la valeur de zeroNord.
+     *
      * @param zeroNord the zeroNord to set
      */
     public void setZeroNord(double zeroNord) {
@@ -410,6 +470,8 @@ public class Panoramique {
     }
 
     /**
+     * Retourne la valeur de nombreNiveaux.
+     *
      * @return the nombreNiveaux
      */
     public double getNombreNiveaux() {
@@ -417,6 +479,8 @@ public class Panoramique {
     }
 
     /**
+     * Définit la valeur de nombreNiveaux.
+     *
      * @param nombreNiveaux the nombreNiveaux to set
      */
     public void setNombreNiveaux(double nombreNiveaux) {
@@ -424,6 +488,8 @@ public class Panoramique {
     }
 
     /**
+     * Retourne la valeur de nombreHotspotImage.
+     *
      * @return the nombreHotspotImage
      */
     public int getNombreHotspotImage() {
@@ -431,6 +497,8 @@ public class Panoramique {
     }
 
     /**
+     * Définit la valeur de nombreHotspotImage.
+     *
      * @param iNombreHotspotImage the nombreHotspotImage to set
      */
     public void setNombreHotspotImage(int iNombreHotspotImage) {
@@ -438,6 +506,8 @@ public class Panoramique {
     }
 
     /**
+     * Retourne la valeur de nombreHotspotHTML.
+     *
      * @return the nombreHotspotHTML
      */
     public int getNombreHotspotHTML() {
@@ -445,6 +515,8 @@ public class Panoramique {
     }
 
     /**
+     * Définit la valeur de nombreHotspotHTML.
+     *
      * @param iNombreHotspotHTML the nombreHotspotHTML to set
      */
     public void setNombreHotspotHTML(int iNombreHotspotHTML) {
@@ -452,6 +524,8 @@ public class Panoramique {
     }
 
     /**
+     * Retourne la valeur de numeroPlan.
+     *
      * @return the numeroPlan
      */
     public int getNumeroPlan() {
@@ -459,6 +533,8 @@ public class Panoramique {
     }
 
     /**
+     * Définit la valeur de numeroPlan.
+     *
      * @param iNumeroPlan the numeroPlan to set
      */
     public void setNumeroPlan(int iNumeroPlan) {
@@ -466,6 +542,8 @@ public class Panoramique {
     }
 
     /**
+     * Retourne la valeur de imgVisuPanoramique.
+     *
      * @return the imgVisuPanoramique
      */
     public Image getImgVisuPanoramique() {
@@ -473,6 +551,8 @@ public class Panoramique {
     }
 
     /**
+     * Définit la valeur de imgVisuPanoramique.
+     *
      * @param imgVisuPanoramique the imgVisuPanoramique to set
      */
     public void setImgVisuPanoramique(Image imgVisuPanoramique) {
@@ -480,6 +560,8 @@ public class Panoramique {
     }
 
     /**
+     * Retourne la valeur de marqueurGeolocatisation.
+     *
      * @return the marqueurGeolocatisation
      */
     public CoordonneesGeographiques getMarqueurGeolocatisation() {
@@ -487,6 +569,8 @@ public class Panoramique {
     }
 
     /**
+     * Définit la valeur de marqueurGeolocatisation.
+     *
      * @param marqueurGeolocatisation the marqueurGeolocatisation to set
      */
     public void setMarqueurGeolocatisation(CoordonneesGeographiques marqueurGeolocatisation) {
@@ -494,6 +578,8 @@ public class Panoramique {
     }
 
     /**
+     * Retourne la valeur de champVisuel.
+     *
      * @return the champVisuel
      */
     public double getChampVisuel() {
@@ -501,6 +587,8 @@ public class Panoramique {
     }
 
     /**
+     * Définit la valeur de champVisuel.
+     *
      * @param champVisuel the champVisuel to set
      */
     public void setChampVisuel(double champVisuel) {
@@ -508,6 +596,8 @@ public class Panoramique {
     }
 
     /**
+     * Retourne la valeur de imgPanoRect.
+     *
      * @return the imgPanoRect
      */
     public Image getImgPanoRect() {
@@ -515,6 +605,8 @@ public class Panoramique {
     }
 
     /**
+     * Définit la valeur de imgPanoRect.
+     *
      * @param imgPanoRect the imgPanoRect to set
      */
     public void setImgPanoRect(Image imgPanoRect) {
@@ -522,6 +614,8 @@ public class Panoramique {
     }
 
     /**
+     * Retourne la valeur de minLat.
+     *
      * @return the minLat
      */
     public double getMinLat() {
@@ -529,6 +623,8 @@ public class Panoramique {
     }
 
     /**
+     * Définit la valeur de minLat.
+     *
      * @param minLat the minLat to set
      */
     public void setMinLat(double minLat) {
@@ -536,6 +632,8 @@ public class Panoramique {
     }
 
     /**
+     * Retourne la valeur de maxLat.
+     *
      * @return the maxLat
      */
     public double getMaxLat() {
@@ -543,6 +641,8 @@ public class Panoramique {
     }
 
     /**
+     * Définit la valeur de maxLat.
+     *
      * @param maxLat the maxLat to set
      */
     public void setMaxLat(double maxLat) {
@@ -550,6 +650,8 @@ public class Panoramique {
     }
 
     /**
+     * Retourne la valeur de bMinLat.
+     *
      * @return the bMinLat
      */
     public boolean isbMinLat() {
@@ -557,6 +659,8 @@ public class Panoramique {
     }
 
     /**
+     * Définit la valeur de bMinLat.
+     *
      * @param bMinLat the bMinLat to set
      */
     public void setbMinLat(boolean bMinLat) {
@@ -564,6 +668,8 @@ public class Panoramique {
     }
 
     /**
+     * Retourne la valeur de bMaxLat.
+     *
      * @return the bMaxLat
      */
     public boolean isbMaxLat() {
@@ -571,6 +677,8 @@ public class Panoramique {
     }
 
     /**
+     * Définit la valeur de bMaxLat.
+     *
      * @param bMaxLat the bMaxLat to set
      */
     public void setbMaxLat(boolean bMaxLat) {
@@ -578,6 +686,8 @@ public class Panoramique {
     }
 
     /**
+     * Retourne la valeur de iNombreHotspotDiapo.
+     *
      * @return the iNombreHotspotDiapo
      */
     public int getiNombreHotspotDiapo() {
@@ -585,6 +695,8 @@ public class Panoramique {
     }
 
     /**
+     * Définit la valeur de iNombreHotspotDiapo.
+     *
      * @param iNombreHotspotDiapo the iNombreHotspotDiapo to set
      */
     public void setiNombreHotspotDiapo(int iNombreHotspotDiapo) {
@@ -592,6 +704,8 @@ public class Panoramique {
     }
 
     /**
+     * Retourne la valeur de imgPanoRectListe.
+     *
      * @return the imgPanoRectListe
      */
     public Image getImgPanoRectListe() {
@@ -599,6 +713,8 @@ public class Panoramique {
     }
 
     /**
+     * Définit la valeur de imgPanoRectListe.
+     *
      * @param imgPanoRectListe the imgPanoRectListe to set
      */
     public void setImgPanoRectListe(Image imgPanoRectListe) {
@@ -606,6 +722,8 @@ public class Panoramique {
     }
 
     /**
+     * Retourne la valeur de imgCubeEqui.
+     *
      * @return the imgCubeEqui
      */
     public Image getImgCubeEqui() {
@@ -613,6 +731,8 @@ public class Panoramique {
     }
 
     /**
+     * Définit la valeur de imgCubeEqui.
+     *
      * @param imgCubeEqui the imgCubeEqui to set
      */
     public void setImgCubeEqui(Image imgCubeEqui) {
@@ -620,6 +740,8 @@ public class Panoramique {
     }
 
     /**
+     * Retourne la valeur de fovMax.
+     *
      * @return the fovMax
      */
     public double getFovMax() {
@@ -627,6 +749,8 @@ public class Panoramique {
     }
 
     /**
+     * Définit la valeur de fovMax.
+     *
      * @param fovMax the fovMax to set
      */
     public void setFovMax(double fovMax) {
@@ -634,6 +758,8 @@ public class Panoramique {
     }
 
     /**
+     * Retourne la valeur de fovMin.
+     *
      * @return the fovMin
      */
     public double getFovMin() {
@@ -641,6 +767,8 @@ public class Panoramique {
     }
 
     /**
+     * Définit la valeur de fovMin.
+     *
      * @param fovMin the fovMin to set
      */
     public void setFovMin(double fovMin) {
@@ -648,6 +776,8 @@ public class Panoramique {
     }
 
     /**
+     * Retourne la valeur de cubeFacesPetiteResolution.
+     *
      * @return the cubeFacesPetiteResolution
      */
     public Image[] getCubeFacesPetiteResolution() {
@@ -655,6 +785,8 @@ public class Panoramique {
     }
 
     /**
+     * Définit la valeur de cubeFacesPetiteResolution.
+     *
      * @param cubeFacesPetiteResolution the cubeFacesPetiteResolution to set
      */
     public void setCubeFacesPetiteResolution(Image[] cubeFacesPetiteResolution) {
@@ -662,6 +794,8 @@ public class Panoramique {
     }
 
     /**
+     * Retourne la valeur de cubeFacesGrandeResolution.
+     *
      * @return the cubeFacesGrandeResolution
      */
     public Image[] getCubeFacesGrandeResolution() {
@@ -669,6 +803,8 @@ public class Panoramique {
     }
 
     /**
+     * Définit la valeur de cubeFacesGrandeResolution.
+     *
      * @param cubeFacesGrandeResolution the cubeFacesGrandeResolution to set
      */
     public void setCubeFacesGrandeResolution(Image[] cubeFacesGrandeResolution) {
@@ -676,6 +812,8 @@ public class Panoramique {
     }
 
     /**
+     * Retourne la valeur de imgHauteResolution.
+     *
      * @return the imgHauteResolution
      */
     public Image getImgHauteResolution() {
@@ -683,6 +821,8 @@ public class Panoramique {
     }
 
     /**
+     * Définit la valeur de imgHauteResolution.
+     *
      * @param imgHauteResolution the imgHauteResolution to set
      */
     public void setImgHauteResolution(Image imgHauteResolution) {
@@ -690,6 +830,8 @@ public class Panoramique {
     }
 
     /**
+     * Retourne la valeur de strDescriptionIA.
+     *
      * @return the strDescriptionIA
      */
     public String getStrDescriptionIA() {
@@ -697,6 +839,8 @@ public class Panoramique {
     }
 
     /**
+     * Définit la valeur de strDescriptionIA.
+     *
      * @param strDescriptionIA the strDescriptionIA to set
      */
     public void setStrDescriptionIA(String strDescriptionIA) {
