@@ -40,10 +40,20 @@ public class DocumentationDialog extends Stage {
             this.chemin = chemin;
         }
         
+    /**
+     * Obtient le titre du document de documentation
+     * 
+     * @return Titre du document
+     */
         public String getTitre() {
             return titre;
         }
         
+    /**
+     * Obtient le chemin vers le fichier de documentation
+     * 
+     * @return Chemin du fichier
+     */
         public String getChemin() {
             return chemin;
         }
@@ -64,6 +74,11 @@ public class DocumentationDialog extends Stage {
             return type.getTitre();
         }
         
+    /**
+     * Obtient le type de documentation (MARKDOWN, HTML, etc.)
+     * 
+     * @return Type de documentation
+     */
         public DocumentType getType() {
             return type;
         }
@@ -208,6 +223,11 @@ public class DocumentationDialog extends Stage {
             primaryStage.show();
         }
         
+    /**
+     * Point d'entrée pour tester la fenêtre de documentation
+     * 
+     * @param args Arguments de la ligne de commande (non utilisés)
+     */
         public static void main(String[] args) {
             launch(args);
         }

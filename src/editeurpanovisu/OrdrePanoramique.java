@@ -24,6 +24,11 @@ public class OrdrePanoramique {
     private final AnchorPane apListePanoramiques = new AnchorPane();
     private ListView<String> lstStrPanos;
 
+    /**
+     * Crée et initialise la liste ordonnée des panoramiques
+     * 
+     * <p>Génère l'interface permettant de réorganiser les panoramiques par glisser-déposer.</p>
+     */
     public void creeListe() {
         cellulesPanoramiques.clear();
         strPanos.clear();
@@ -51,6 +56,11 @@ public class OrdrePanoramique {
         lstStrPanos.setLayoutY(0);
     }
 
+    /**
+     * Crée et initialise la liste ordonnée des panoramiques avec ordre spécifique
+     * 
+     * @param strOrdre Ordre de tri des panoramiques
+     */
     public void creeListe(String strOrdre) {
         String[] strOrd1 = strOrdre.split(",");
         cellulesPanoramiques.clear();
@@ -80,6 +90,11 @@ public class OrdrePanoramique {
         lstStrPanos.setLayoutY(0);
     }
 
+    /**
+     * Supprime un élément de la liste des panoramiques
+     * 
+     * @param iElement Index de l'élément à supprimer
+     */
     public void supprimerElement(int iElement) {
         int iTrouve = -1;
         for (int i = 0; i < strPanos.size(); i++) {
@@ -121,6 +136,24 @@ public class OrdrePanoramique {
         }
     }
 
+    /**
+     * Rafraîchit la liste des panoramiques affichée
+     * 
+     * <p>Reconstruit complètement la liste visuelle des panoramiques en :</p>
+     * <ol>
+     *   <li>Vidant la liste actuelle des cellules</li>
+     *   <li>Créant de nouvelles cellules pour chaque panoramique</li>
+     *   <li>Associant les images miniatures et titres</li>
+     *   <li>Mettant à jour l'affichage de la ListView</li>
+     * </ol>
+     * 
+     * <p>Appelée après un réordonnancement ou une modification de la liste
+     * des panoramiques pour synchroniser l'affichage.</p>
+     * 
+     * @see PanoramiqueCellule
+     * @see #strPanos
+     * @see #cellulesPanoramiques
+     */
     public void rafraichitListe() {
         ObservableList<String> strPanos1 = strPanos;
         cellulesPanoramiques.clear();
@@ -152,6 +185,11 @@ public class OrdrePanoramique {
 
     }
 
+    /**
+     * Ajoute les nouveaux panoramiques à la liste
+     * 
+     * <p>Synchronise la liste avec les panoramiques du projet.</p>
+     */
     public void ajouteNouveauxPanos() {
         ObservableList<String> strPanos1 = FXCollections.observableArrayList();
         int iTaillePano = 0;

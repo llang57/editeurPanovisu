@@ -236,6 +236,11 @@ public class TestReductionImage extends Application {
         stage.show();
     }
     
+    /**
+     * Point d'entrée pour tester la réduction d'images avec GPU
+     * 
+     * @param args Arguments de la ligne de commande (non utilisés)
+     */
     public static void main(String[] args) {
         launch(args);
     }

@@ -306,6 +306,13 @@ public class EquiCubeDialogController {
         }
     }
 
+    /**
+     * Crée la tâche de traitement de transformation d'image
+     * 
+     * <p>Gère la conversion entre format équirectangulaire et faces cubiques.</p>
+     * 
+     * @return Tâche asynchrone de traitement
+     */
     public Task<Boolean> tskTraitement() {
         return new Task<Boolean>() {
             @Override

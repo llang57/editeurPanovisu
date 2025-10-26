@@ -306,6 +306,14 @@ public class HotspotHTML {
         this.iNombreImages = iNombreImages;
     }
 
+    /**
+     * Génère le fichier HTML du hotspot dans le répertoire de destination
+     * 
+     * <p>Crée la structure nécessaire (répertoires, fichier HTML, images)
+     * pour le hotspot HTML personnalisé.</p>
+     * 
+     * @param strPageHTML Chemin du répertoire de destination
+     */
     public void creeHTML(String strPageHTML) {
         OutputStreamWriter oswFichierHTML = null;
         try {

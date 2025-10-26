@@ -102,10 +102,43 @@ public final class VisualiseurImagesPanoramiques {
         this.setNomFichierPanoramique(nomFichierPanoramique);
     }
 
+    /**
+     * Transforme une image rectangulaire en projection équirectangulaire
+     * 
+     * @param imgRect Image rectangulaire source
+     * @return Image transformée
+     */
     public static Image imgTransformationImage(Image imgRect) {
         return imgTransformationImage(imgRect, 2);
     }
 
+    /**
+     * Transforme et redimensionne une image panoramique rectangulaire
+     * 
+     * <p>Convertit une image panoramique équirectangulaire en image réduite adaptée à l'affichage.
+     * Utilise le GPU (méthode Bicubic) si disponible, sinon bascule sur une transformation CPU 
+     * pixel par pixel (projection Mercator).</p>
+     * 
+     * <p><strong>Rapport de réduction :</strong></p>
+     * <ul>
+     *   <li>{@code iRapport = 2} : Divise la taille par 2</li>
+     *   <li>{@code iRapport = 4} : Divise la taille par 4 (plus rapide)</li>
+     * </ul>
+     * 
+     * <p><strong>Exemple d'utilisation :</strong></p>
+     * <pre>{@code
+     * Image panoramaComplet = new Image("file:panorama.jpg");
+     * // Divise par 4 la taille pour l'affichage miniature
+     * Image miniature = imgTransformationImage(panoramaComplet, 4);
+     * imageView.setImage(miniature);
+     * }</pre>
+     * 
+     * @param imgRect Image panoramique rectangulaire source
+     * @param iRapport Facteur de réduction (2 = moitié, 4 = quart, etc.)
+     * @return Image transformée et redimensionnée
+     * @see ImageResizeGPU#resizeAuto(Image, int, int, InterpolationMethod)
+     * @see InterpolationMethod#BICUBIC
+     */
     public static Image imgTransformationImage(Image imgRect, int iRapport) {
         int iLargeur = (int) imgRect.getWidth() / iRapport;
         int iHauteur = iLargeur / 2 / iRapport;
@@ -175,6 +208,24 @@ public final class VisualiseurImagesPanoramiques {
         return angleDeg * rapportDegToRad;
     }
 
+    /**
+     * Affiche la vue panoramique avec les paramètres actuels
+     * 
+     * <p>Met à jour la visualisation 3D du panorama en fonction des coordonnées
+     * actuelles (longitude, latitude) et du champ de vision (FOV). Cette méthode :</p>
+     * <ul>
+     *   <li>Normalise les angles de longitude entre -180° et +180°</li>
+     *   <li>Limite la latitude pour éviter les distorsions polaires (±80°)</li>
+     *   <li>Recalcule le champ de vision horizontal en fonction du ratio d'aspect</li>
+     *   <li>Rafraîchit l'affichage de la scène 3D</li>
+     * </ul>
+     * 
+     * <p>Appelée automatiquement lors des changements de position ou de zoom.</p>
+     * 
+     * @see #setLongitude(double)
+     * @see #setLatitude(double)
+     * @see #getFov()
+     */
     public void affiche() {
         double hfov = getFov() * hauteurImage / largeurImage;
         apNord.getChildren().clear();
@@ -277,6 +328,21 @@ public final class VisualiseurImagesPanoramiques {
         bdfFOV.setNumber(new BigDecimal(fov));
     }
 
+    /**
+     * Change les dimensions de la zone de visualisation
+     * 
+     * <p>Redimensionne le visualisateur panoramique aux nouvelles dimensions
+     * spécifiées et rafraîchit l'affichage pour adapter la vue.</p>
+     * 
+     * <p><strong>Exemple d'utilisation :</strong></p>
+     * <pre>{@code
+     * visualiseur.changeTaille(1920, 1080);
+     * }</pre>
+     * 
+     * @param largeur Nouvelle largeur en pixels
+     * @param hauteur Nouvelle hauteur en pixels
+     * @see #reaffiche()
+     */
     public void changeTaille(double largeur, double hauteur) {
         hauteurImage = hauteur;
         largeurImage = largeur;
@@ -478,6 +544,11 @@ public final class VisualiseurImagesPanoramiques {
 
     }
 
+    /**
+     * Affiche le panoramique dans un AnchorPane
+     * 
+     * @return AnchorPane contenant le panoramique affiché
+     */
     public AnchorPane affichePano() {
         apPanorama = new AnchorPane();
         apPanorama.setStyle("-fx-background-color :-fx-background");
@@ -496,6 +567,12 @@ public final class VisualiseurImagesPanoramiques {
 
     }
 
+    /**
+     * Définit l'image panoramique à afficher à partir d'un chemin
+     * 
+     * @param strImagePanoramique Chemin vers le fichier image
+     * @param iRapport Rapport de redimensionnement
+     */
     public void setNomImagePanoramique(String strImagePanoramique, int iRapport) {
         this.setNomFichierPanoramique(strImagePanoramique);
         Image imgRect = new Image("file:" + getNomFichierPanoramique());
@@ -504,6 +581,12 @@ public final class VisualiseurImagesPanoramiques {
         phmPanorama.setSpecularMap(imgTransf);
     }
 
+    /**
+     * Définit l'image panoramique à afficher à partir d'une Image
+     * 
+     * @param strImagePanoramique Nom du fichier image
+     * @param imgPanoramique Image JavaFX à afficher
+     */
     public void setImagePanoramique(String strImagePanoramique, Image imgPanoramique) {
         this.setNomFichierPanoramique(strImagePanoramique);
         phmPanorama.setDiffuseMap(imgPanoramique);

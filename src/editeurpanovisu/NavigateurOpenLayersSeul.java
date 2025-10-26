@@ -136,6 +136,11 @@ public class NavigateurOpenLayersSeul {
         return navigateurCarteSeul.getWebEngine().executeScript("getNomsLayers()").toString();
     }
 
+    /**
+     * Retire l'affichage du radar de la carte
+     * 
+     * <p>Masque l'indicateur de position sur la carte OpenLayers.</p>
+     */
     public void retireRadar() {
         navigateurCarteSeul.getWebEngine().executeScript("retireRadar()");
     }

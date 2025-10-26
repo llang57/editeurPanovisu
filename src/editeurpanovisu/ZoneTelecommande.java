@@ -76,6 +76,11 @@ public class ZoneTelecommande {
         this.centre = centre;
     }
 
+    /**
+     * Calcule le centre géométrique de la zone de télécommande
+     * 
+     * <p>Utilisé pour le positionnement des éléments interactifs.</p>
+     */
     public void calculeCentre() {
         if (!this.strCoordonneesZone.equals("") && this.strCoordonneesZone != null) {
             Point2D[] pointsZone = new Point2D[50];

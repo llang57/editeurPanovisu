@@ -130,6 +130,11 @@ public class TestImageResizeInteractive extends Application {
         stage.show();
     }
     
+    /**
+     * Point d'entrée pour tester interactivement le redimensionnement d'images GPU
+     * 
+     * @param args Arguments de la ligne de commande (non utilisés)
+     */
     public static void main(String[] args) {
         launch(args);
     }

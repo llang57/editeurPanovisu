@@ -3704,6 +3704,11 @@ public class EditeurPanovisu extends Application {
 
             @SuppressWarnings({ "unchecked", "unused" })
             @Override
+        /**
+         * Méthode appelée lorsque la tâche de chargement réussit
+         * 
+         * <p>Gère la fin du chargement d'un fichier projet.</p>
+         */
             protected void succeeded() {
                 getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
                 super.succeeded();
@@ -4729,8 +4734,22 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
-     *
-     * @param strEmplacement
+     * Supprime récursivement un répertoire et tout son contenu
+     * 
+     * <p>Cette méthode parcourt récursivement le répertoire spécifié et supprime tous les fichiers
+     * et sous-répertoires qu'il contient, puis supprime le répertoire lui-même.</p>
+     * 
+     * <p><b>Attention :</b> Cette opération est irréversible. Tous les fichiers et sous-répertoires
+     * seront définitivement supprimés.</p>
+     * 
+     * <p><b>Exemple d'utilisation :</b></p>
+     * <pre>{@code
+     * // Nettoyer le répertoire temporaire
+     * deleteDirectory(getStrRepertTemp() + "/cache");
+     * }</pre>
+     * 
+     * @param strEmplacement Chemin absolu du répertoire à supprimer
+     * @see #getStrRepertTemp()
      */
     static public void deleteDirectory(String strEmplacement) {
         File path = new File(strEmplacement);
@@ -4745,6 +4764,21 @@ public class EditeurPanovisu extends Application {
         }
     }
 
+    /**
+     * Rafraîchit la liste des panoramiques dans l'interface utilisateur
+     * 
+     * <p>Cette méthode met à jour deux éléments de l'interface :</p>
+     * <ul>
+     *   <li>Le panneau de vignettes des panoramiques ({@code apVignettesPano})</li>
+     *   <li>La ComboBox de sélection des panoramiques ({@code cbListeChoixPanoramique})</li>
+     * </ul>
+     * 
+     * <p>Appelée après l'ajout ou la suppression de panoramiques pour synchroniser
+     * l'affichage avec les données du projet.</p>
+     * 
+     * @see #getPanoramiquesProjet()
+     * @see #getiNombrePanoramiques()
+     */
     @SuppressWarnings({ "unchecked", "unused" })
     public static void rafraichitListePano() {
         apVignettesPano.getChildren().clear();
@@ -5576,6 +5610,22 @@ public class EditeurPanovisu extends Application {
             @SuppressWarnings("unchecked")
             @Override
 
+            /**
+             * Callback appelé après le chargement réussi des panoramiques
+             * 
+             * <p>Cette méthode est invoquée automatiquement lorsque la tâche asynchrone
+             * de chargement des panoramiques se termine avec succès. Elle effectue :</p>
+             * <ul>
+             *   <li>Affichage du panneau de choix des panoramiques</li>
+             *   <li>Ajout des plans au gestionnaire</li>
+             *   <li>Mise à jour des références des hotspots entre panoramiques</li>
+             * </ul>
+             * 
+             * <p><strong>Note :</strong> Cette méthode est une méthode de callback JavaFX Task
+             * et s'exécute sur le thread JavaFX Application.</p>
+             * 
+             * @see javafx.concurrent.Task#succeeded()
+             */
             protected void succeeded() {
                 super.succeeded();
 
@@ -5846,9 +5896,28 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
-     *
-     * @param strEmplacement répertoire origine
-     * @param strRepertoire répertoire cible
+     * Copie récursivement un répertoire et tout son contenu vers une destination
+     * 
+     * <p>Cette méthode copie l'intégralité d'un répertoire source vers un répertoire de destination,
+     * en préservant la structure des sous-répertoires. Si le répertoire de destination n'existe pas,
+     * il est créé automatiquement.</p>
+     * 
+     * <p>Utilisée notamment lors de la génération de visites virtuelles pour copier les ressources
+     * (JavaScript, CSS, images) depuis le répertoire d'installation vers le répertoire de sortie.</p>
+     * 
+     * <p><b>Exemple d'utilisation :</b></p>
+     * <pre>{@code
+     * // Copier les ressources JavaScript
+     * copieRepertoire(
+     *     getStrRepertAppli() + "/panovisu/script", 
+     *     strNomRepertVisite + "/script"
+     * );
+     * }</pre>
+     * 
+     * @param strEmplacement Chemin absolu du répertoire source à copier
+     * @param strRepertoire Chemin absolu du répertoire de destination
+     * @see #copieFichierRepertoire(String, String)
+     * @see #genereVisite()
      */
     static public void copieRepertoire(String strEmplacement, String strRepertoire) {
         File fileRepert2 = new File(strRepertoire);
@@ -5877,11 +5946,26 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
-     *
-     * @param strFichier
-     * @param strRepertoire
-     * @throws FileNotFoundException Exception fichier non trouvé
-     * @throws IOException Exception d'entrée sortie
+     * Copie un fichier unique vers un répertoire de destination
+     * 
+     * <p>Cette méthode copie un fichier depuis son emplacement source vers un répertoire de destination.
+     * Le nom du fichier est préservé. Utilisée en conjonction avec {@link #copieRepertoire(String, String)}
+     * pour la copie récursive de répertoires.</p>
+     * 
+     * <p><b>Exemple d'utilisation :</b></p>
+     * <pre>{@code
+     * // Copier un fichier de configuration
+     * copieFichierRepertoire(
+     *     "/chemin/source/config.xml",
+     *     "/chemin/destination/"
+     * );
+     * }</pre>
+     * 
+     * @param strFichier Chemin absolu du fichier source à copier
+     * @param strRepertoire Chemin absolu du répertoire de destination
+     * @throws FileNotFoundException Si le fichier source n'existe pas
+     * @throws IOException Si une erreur d'entrée/sortie se produit pendant la copie
+     * @see #copieRepertoire(String, String)
      */
     static public void copieFichierRepertoire(String strFichier, String strRepertoire) throws FileNotFoundException, IOException {
         File fileFrom = new File(strFichier);

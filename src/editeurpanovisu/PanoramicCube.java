@@ -186,20 +186,6 @@ public class PanoramicCube extends Group {
      * @param targetHeight Hauteur cible (devrait être targetWidth/2 pour ratio 2:1)
      * @return Image redimensionnée au ratio 2:1
      */
-    /**
-     * Redimensionne une image panoramique au format équirectangulaire.
-     * 
-     * <p>Utilise l'accélération GPU avec interpolation intelligente :</p>
-     * <ul>
-     * <li>Bicubic pour la plupart des cas (équilibre qualité/vitesse)</li>
-     * <li>Fallback CPU si GPU indisponible</li>
-     * </ul>
-     * 
-     * @param source Image source à redimensionner
-     * @param targetWidth Largeur cible
-     * @param targetHeight Hauteur cible
-     * @return Image redimensionnée
-     */
     private Image resizeToEquirectangular(Image source, int targetWidth, int targetHeight) {
         int srcWidth = (int) source.getWidth();
         int srcHeight = (int) source.getHeight();

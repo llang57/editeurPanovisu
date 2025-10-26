@@ -73,14 +73,33 @@ public class EditeurHTML {
 
     protected transient PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
 
+    /**
+     * Ajoute un écouteur de changement de propriété
+     * 
+     * @param propertyName Nom de la propriété à écouter
+     * @param listener Écouteur à ajouter
+     */
     public void addPropertyChangeListener(String propertyName, PropertyChangeListener listener) {
         changeSupport.addPropertyChangeListener(propertyName, listener);
     }
 
+    /**
+     * Retire un écouteur de changement de propriété
+     * 
+     * @param propertyName Nom de la propriété
+     * @param listener Écouteur à retirer
+     */
     public void removePropertyChangeListener(String propertyName, PropertyChangeListener listener) {
         changeSupport.removePropertyChangeListener(propertyName, listener);
     }
 
+    /**
+     * Déclenche un événement de changement de propriété
+     * 
+     * @param propertyName Nom de la propriété modifiée
+     * @param oldValue Ancienne valeur
+     * @param newValue Nouvelle valeur
+     */
     public void firePropertyChange(String propertyName, BigDecimal oldValue, BigDecimal newValue) {
         if (oldValue != null && newValue != null && oldValue.compareTo(newValue) == 0) {
             return;
@@ -390,11 +409,34 @@ public class EditeurHTML {
         return css;
     }
 
+    /**
+     * Définit le template HTML de base pour l'éditeur
+     * 
+     * <p>Retourne une chaîne de template HTML vide qui peut être personnalisée.
+     * Cette méthode sert de point d'extension pour définir des templates prédéfinis.</p>
+     * 
+     * @return Template HTML (actuellement vide)
+     */
     public String setTemplate() {
         String strTemplate = "";
         return strTemplate;
     }
 
+    /**
+     * Affiche l'éditeur HTML dans une fenêtre modale
+     * 
+     * <p>Cette méthode crée et affiche une fenêtre d'édition HTML avec un éditeur riche (HTMLEditor).
+     * La fenêtre inclut des contrôles pour :</p>
+     * <ul>
+     *   <li>L'édition du contenu HTML (texte enrichi, images, liens)</li>
+     *   <li>Le choix de la position de la fenêtre HTML dans la visite</li>
+     *   <li>La configuration des couleurs de fond et de texte</li>
+     *   <li>Le réglage de l'opacité</li>
+     * </ul>
+     * 
+     * @param largeur Largeur souhaitée de la fenêtre d'édition
+     * @param hauteur Hauteur souhaitée de la fenêtre d'édition
+     */
     @SuppressWarnings("unused")
     public void affiche(Number largeur, Number hauteur) {
         double diffHauteur = 340; // Augmenté pour tenir compte des nouvelles zones
@@ -1513,6 +1555,16 @@ public class EditeurHTML {
         });
     }
 
+    /**
+     * Masque les nœuds d'image correspondant au pattern
+     * 
+     * <p>Parcourt récursivement l'arbre des nœuds et masque les images
+     * dont le nom correspond au pattern fourni.</p>
+     * 
+     * @param node Nœud racine à parcourir
+     * @param imageNamePattern Pattern de nom d'image à rechercher
+     * @param depth Profondeur actuelle dans l'arbre
+     */
     public void hideImageNodesMatching(Node node, Pattern imageNamePattern, int depth) {
         if (node instanceof ImageView) {
             ImageView imageView = (ImageView) node;

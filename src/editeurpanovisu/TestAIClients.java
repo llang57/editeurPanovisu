@@ -8,6 +8,11 @@ package editeurpanovisu;
  */
 public class TestAIClients {
     
+    /**
+     * Point d'entrée pour tester les clients IA (Ollama, HuggingFace, OpenRouter)
+     * 
+     * @param args Arguments de la ligne de commande (non utilisés)
+     */
     public static void main(String[] args) {
         System.out.println("═══════════════════════════════════════════════");
         System.out.println("  TEST DES CLIENTS API IA - EditeurPanovisu");

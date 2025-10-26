@@ -54,6 +54,11 @@ import javafx.util.Duration;
  */
 public final class NavigateurPanoramique {
 
+    /**
+     * Capture l'écran actuel du panoramique et sauvegarde en image
+     * 
+     * <p>Génère une vignette du point de vue actuel du panoramique.</p>
+     */
     public void captureEcran() {
         WritableImage image = sscPanorama.snapshot(new SnapshotParameters(), null);
         try {
@@ -69,20 +74,82 @@ public final class NavigateurPanoramique {
 
     }
 
+    /**
+     * Capture une image de l'écran du panorama pour les hotspots
+     * 
+     * <p>Crée une capture d'écran de la zone de visualisation panoramique actuelle.
+     * Cette image est utilisée comme aperçu miniature pour les hotspots permettant
+     * de visualiser la direction pointée.</p>
+     * 
+     * <p><strong>Exemple d'utilisation :</strong></p>
+     * <pre>{@code
+     * NavigateurPanoramique nav = new NavigateurPanoramique();
+     * Image apercu = nav.captureEcranHS();
+     * hotspot.setImageApercu(apercu);
+     * }</pre>
+     * 
+     * @return Image capturée de la vue panoramique actuelle
+     * @see javafx.scene.SubScene#snapshot(javafx.scene.SnapshotParameters, javafx.scene.image.WritableImage)
+     */
     public Image captureEcranHS() {
         return sscPanorama.snapshot(new SnapshotParameters(), null);
     }
 
     protected transient PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
 
+    /**
+     * Ajoute un écouteur de changement de propriété
+     * 
+     * <p>Permet d'écouter les modifications d'une propriété spécifique du navigateur.
+     * Utilisé notamment pour surveiller les changements de longitude et latitude.</p>
+     * 
+     * <p><strong>Exemple d'utilisation :</strong></p>
+     * <pre>{@code
+     * navigateur.addPropertyChangeListener("longitude", evt -> {
+     *     System.out.println("Nouvelle longitude: " + evt.getNewValue());
+     * });
+     * }</pre>
+     * 
+     * @param propertyName Nom de la propriété à écouter ("longitude", "latitude", etc.)
+     * @param listener Écouteur qui sera notifié des changements
+     * @see java.beans.PropertyChangeSupport#addPropertyChangeListener(String, PropertyChangeListener)
+     */
     public void addPropertyChangeListener(String propertyName, PropertyChangeListener listener) {
         changeSupport.addPropertyChangeListener(propertyName, listener);
     }
 
+    /**
+     * Retire un écouteur de changement de propriété
+     * 
+     * <p>Supprime un écouteur précédemment ajouté pour une propriété spécifique.
+     * L'écouteur ne recevra plus de notifications pour cette propriété.</p>
+     * 
+     * @param propertyName Nom de la propriété
+     * @param listener Écouteur à retirer
+     * @see java.beans.PropertyChangeSupport#removePropertyChangeListener(String, PropertyChangeListener)
+     */
     public void removePropertyChangeListener(String propertyName, PropertyChangeListener listener) {
         changeSupport.removePropertyChangeListener(propertyName, listener);
     }
 
+    /**
+     * Déclenche un événement de changement de propriété
+     * 
+     * <p>Notifie tous les écouteurs enregistrés qu'une propriété a changé.
+     * Si les valeurs ancienne et nouvelle sont identiques, aucun événement n'est déclenché.</p>
+     * 
+     * <p><strong>Exemple d'utilisation interne :</strong></p>
+     * <pre>{@code
+     * BigDecimal ancienneLongitude = this.longitude;
+     * this.longitude = nouvelleLongitude;
+     * firePropertyChange("longitude", ancienneLongitude, nouvelleLongitude);
+     * }</pre>
+     * 
+     * @param propertyName Nom de la propriété modifiée
+     * @param oldValue Ancienne valeur (BigDecimal)
+     * @param newValue Nouvelle valeur (BigDecimal)
+     * @see java.beans.PropertyChangeSupport#firePropertyChange(java.beans.PropertyChangeEvent)
+     */
     public void firePropertyChange(String propertyName, BigDecimal oldValue, BigDecimal newValue) {
         if (oldValue != null && newValue != null && oldValue.compareTo(newValue) == 0) {
             return;
@@ -142,6 +209,12 @@ public final class NavigateurPanoramique {
         //this.setNomFichierPanoramique(nomFichierPanoramique);
     }
 
+    /**
+     * Transforme une image rectangulaire en projection équirectangulaire
+     * 
+     * @param imgRect Image rectangulaire source
+     * @return Image transformée en équirectangulaire
+     */
     public static Image imgTransformationImage(Image imgRect) {
         return imgTransformationImage(imgRect, 2);
     }
@@ -186,6 +259,11 @@ public final class NavigateurPanoramique {
         return angleDeg * rapportDegToRad;
     }
 
+    /**
+     * Affiche le navigateur panoramique dans l'interface
+     * 
+     * <p>Initialise et rend visible le composant de navigation 360°.</p>
+     */
     public void affiche() {
         setLongitude((getLongitude()) % 360);
         setLongitude(getLongitude() < 0 ? getLongitude() + 360 : getLongitude());
@@ -296,6 +374,12 @@ public final class NavigateurPanoramique {
         lblFovValue.setText(String.format("FOV: %.2f°", getFov()));
     }
 
+    /**
+     * Redimensionne le navigateur panoramique
+     * 
+     * @param largeur Nouvelle largeur en pixels
+     * @param hauteur Nouvelle hauteur en pixels
+     */
     public void changeTaille(double largeur, double hauteur) {
         hauteurImage = hauteur;
         largeurImage = largeur;
@@ -916,6 +1000,12 @@ public final class NavigateurPanoramique {
 
     }
 
+    /**
+     * Définit l'image panoramique à afficher
+     * 
+     * @param strImagePanoramique Chemin vers le fichier image
+     * @param iRapport Rapport de redimensionnement
+     */
     public void setNomImagePanoramique(String strImagePanoramique, int iRapport) {
         this.setNomFichierPanoramique(strImagePanoramique);
         panoramicCube.setPanoramicImage(this.getImgPanoramique());

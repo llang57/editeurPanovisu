@@ -54,14 +54,33 @@ public final class GestionnaireDiaporamaController {
 
     protected transient PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
 
+    /**
+     * Ajoute un écouteur de changement de propriété
+     * 
+     * @param propertyName Nom de la propriété à écouter
+     * @param listener Écouteur à ajouter
+     */
     public void addPropertyChangeListener(String propertyName, PropertyChangeListener listener) {
         changeSupport.addPropertyChangeListener(propertyName, listener);
     }
 
+    /**
+     * Retire un écouteur de changement de propriété
+     * 
+     * @param propertyName Nom de la propriété
+     * @param listener Écouteur à retirer
+     */
     public void removePropertyChangeListener(String propertyName, PropertyChangeListener listener) {
         changeSupport.removePropertyChangeListener(propertyName, listener);
     }
 
+    /**
+     * Déclenche un événement de changement de propriété
+     * 
+     * @param propertyName Nom de la propriété modifiée
+     * @param oldValue Ancienne valeur
+     * @param newValue Nouvelle valeur
+     */
     public void firePropertyChange(String propertyName, BigDecimal oldValue, BigDecimal newValue) {
         if (oldValue != null && newValue != null && oldValue.compareTo(newValue) == 0) {
             return;
@@ -85,6 +104,28 @@ public final class GestionnaireDiaporamaController {
     final WebView browser = new WebView();
     final WebEngine webEngine = browser.getEngine();
 
+    /**
+     * Initialise l'interface du gestionnaire de diaporama
+     * 
+     * <p>Crée et configure tous les composants visuels nécessaires pour la gestion
+     * du diaporama :</p>
+     * <ul>
+     *   <li>AnchorPane principal (900x650px)</li>
+     *   <li>Zone d'affichage des images (ImageView ou WebView selon le type)</li>
+     *   <li>Sélecteur de transitions (ComboBox)</li>
+     *   <li>Liste des images du diaporama</li>
+     *   <li>Contrôles d'édition (ajout/suppression d'images)</li>
+     * </ul>
+     * 
+     * <p><strong>Exemple d'utilisation :</strong></p>
+     * <pre>{@code
+     * GestionnaireDiaporamaController controller = new GestionnaireDiaporamaController();
+     * controller.initDiaporama();
+     * }</pre>
+     * 
+     * @see #apDiaporama
+     * @see #apDiapo1
+     */
     public void initDiaporama() {
         if (apDiaporama != null) {
             apDiaporama.getChildren().clear();
@@ -380,6 +421,18 @@ public final class GestionnaireDiaporamaController {
 
     }
 
+    /**
+     * Réinitialise le gestionnaire avec un nouveau diaporama
+     * 
+     * <p>Cette méthode remplace le diaporama actuel par une copie du diaporama fourni
+     * et réinitialise toute l'interface pour refléter les nouvelles données.</p>
+     * 
+     * <p>Utilisée notamment lors du chargement d'un projet ou lors de la modification
+     * d'un diaporama existant.</p>
+     * 
+     * @param nouveauDiapo Le diaporama à charger (sera cloné pour éviter les effets de bord)
+     * @see Diaporama#clone()
+     */
     public void reInit(Diaporama nouveauDiapo) {
         setDiaporama((Diaporama) nouveauDiapo.clone());
         initDiaporama();

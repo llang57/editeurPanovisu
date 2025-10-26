@@ -1015,11 +1015,6 @@ public class OllamaService {
     /**
      * Appelle l'API appropriée (Ollama ou Hugging Face) pour générer le texte
      */
-    /**
-     * Appelle l'IA avec fallback : OpenRouter → Ollama local → Hugging Face
-     * OpenRouter donne accès à GPT-4, Claude, Gemini pour des résultats de meilleure qualité
-     * Si forceOllama=true, saute OpenRouter et utilise directement Ollama
-     */
     private static String appellerOllama(String prompt) throws Exception {
         // PRIORITÉ 1 : OpenRouter (GPT-4, Claude, etc.) si token disponible ET pas en mode forcé Ollama
         if (!forceOllama && OPENROUTER_TOKEN != null && !OPENROUTER_TOKEN.isEmpty()) {
