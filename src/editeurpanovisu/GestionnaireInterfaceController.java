@@ -107,110 +107,451 @@ import editeurpanovisu.BigDecimalField;
  */
 public class GestionnaireInterfaceController {
 
-    // Constantes pour l'espacement des éléments dans les panels
-    private static final double PANEL_TOP_MARGIN = 15.0;  // Marge haute des premiers éléments
-    private static final double PANEL_ELEMENT_SPACING = 5.0;  // Espacement entre éléments
+    /**
+     * Marge supérieure des premiers éléments dans les panels de configuration.
+     * Utilisée pour espacer uniformément les composants de l'interface.
+     */
+    private static final double PANEL_TOP_MARGIN = 15.0;
+    
+    /**
+     * Espacement vertical entre les éléments consécutifs dans les panels.
+     * Appliqué entre chaque composant pour maintenir une disposition cohérente.
+     */
+    private static final double PANEL_ELEMENT_SPACING = 5.0;
 
+    /**
+     * Date de compilation du logiciel.
+     * Utilisée pour l'affichage des informations de version.
+     */
     public Date dtBuild;
 
     public GestionnaireInterfaceController() {
     }
-    /*
-     variables calques des entités
+    
+    /**
+     * Niveau du calque (z-order) pour l'affichage du titre du panoramique.
+     * Valeur entre 1 et 20, où 20 est au premier plan.
      */
     private int iCalqueTitre = 1;
+    
+    /**
+     * Niveau du calque pour la barre de navigation classique.
+     * Détermine l'ordre d'affichage par rapport aux autres éléments.
+     */
     private int iCalqueBarreClassique = 1;
+    
+    /**
+     * Niveau du calque pour la barre de navigation personnalisée.
+     * Permet de superposer correctement la barre custom avec les autres éléments.
+     */
     private int iCalqueBarrePersonnalisee = 1;
+    
+    /**
+     * Niveau du calque pour l'élément de masquage.
+     * Contrôle la visibilité du masque par rapport aux autres composants.
+     */
     private int iCalqueMasquage = 1;
+    
+    /**
+     * Niveau du calque pour le bouton de visite automatique.
+     * Positionne le contrôle de visite auto dans la hiérarchie visuelle.
+     */
     private int iCalqueVisiteAuto = 1;
+    
+    /**
+     * Niveau du calque pour les boutons de partage sur réseaux sociaux.
+     * Détermine l'ordre d'affichage des icônes de partage.
+     */
     private int iCalquePartage = 1;
+    
+    /**
+     * Niveau du calque pour l'affichage du plan 2D.
+     * Contrôle le positionnement du plan par rapport aux autres éléments.
+     */
     private int iCalquePlan = 1;
+    
+    /**
+     * Niveau du calque pour l'affichage de la carte géographique.
+     * Gère la superposition de la carte avec les autres composants.
+     */
     private int iCalqueCarte = 1;
+    
+    /**
+     * Niveau du calque pour l'affichage de la boussole.
+     * Positionne la boussole dans l'ordre des éléments visuels.
+     */
     private int iCalqueBoussole = 1;
+    
+    /**
+     * Niveau du calque pour l'affichage des vignettes de navigation.
+     * Contrôle l'ordre d'affichage des miniatures de panoramiques.
+     */
     private int iCalqueVignettes = 1;
+    
+    /**
+     * Niveau du calque pour le menu de sélection des panoramiques.
+     * Positionne le menu déroulant dans la hiérarchie d'affichage.
+     */
     private int iCalqueMenuPanoramiques = 1;
+    
+    /**
+     * Niveau du calque pour les boutons Suivant/Précédent.
+     * Contrôle l'ordre d'affichage des contrôles de navigation séquentielle.
+     */
     private int iCalqueSuivPrec = 1;
+    
+    /**
+     * ComboBox pour sélectionner le niveau de calque des boutons Suivant/Précédent.
+     */
     private ComboBox cbNiveauSuivPrec = new ComboBox();
+    
+    /**
+     * ComboBox pour sélectionner le niveau de calque du titre.
+     */
     private ComboBox cbNiveauTitre = new ComboBox();
+    
+    /**
+     * ComboBox pour sélectionner le niveau de calque de la barre classique.
+     */
     private ComboBox cbNiveauBarreClassique = new ComboBox();
+    
+    /**
+     * ComboBox pour sélectionner le niveau de calque de la barre personnalisée.
+     */
     private ComboBox cbNiveauBarrePersonnalisee = new ComboBox();
+    
+    /**
+     * ComboBox pour sélectionner le niveau de calque de la boussole.
+     */
     private ComboBox cbNiveauBoussole = new ComboBox();
+    
+    /**
+     * ComboBox pour sélectionner le niveau de calque du masque.
+     */
     private ComboBox cbNiveauMasque = new ComboBox();
+    
+    /**
+     * ComboBox pour sélectionner le niveau de calque des boutons de partage.
+     */
     private ComboBox cbNiveauPartage = new ComboBox();
+    
+    /**
+     * ComboBox pour sélectionner le niveau de calque des vignettes.
+     */
     private ComboBox cbNiveauVignettes = new ComboBox();
+    
+    /**
+     * ComboBox pour sélectionner le niveau de calque du menu de panoramiques.
+     */
     private ComboBox cbNiveauComboMenu = new ComboBox();
+    
+    /**
+     * ComboBox pour sélectionner le niveau de calque du plan.
+     */
     private ComboBox cbNiveauPlan = new ComboBox();
+    
+    /**
+     * ComboBox pour sélectionner le niveau de calque de la carte.
+     */
     private ComboBox cbNiveauCarte = new ComboBox();
+    
+    /**
+     * ComboBox pour sélectionner le niveau de calque du bouton de visite auto.
+     */
     private ComboBox cbNiveauVisiteAuto = new ComboBox();
 
+    /**
+     * CheckBox pour activer/désactiver la gestion des calques.
+     */
     private CheckBox cbCalques;
+    
+    /**
+     * Nombre maximum de niveaux de calques disponibles.
+     */
     final private int iNombreCalques = 20;
+    
+    /**
+     * Tableau de CheckBox pour activer/désactiver chaque niveau de calque.
+     */
     private CheckBox cbNiveauxCalque[] = new CheckBox[iNombreCalques];
+    
+    /**
+     * AnchorPane contenant l'interface de gestion des calques.
+     */
     private AnchorPane apCalque;
+    
+    /**
+     * Liste des noms des niveaux de calques disponibles.
+     */
     private List<String> listeNiveau = new ArrayList<>();
+    
+    /**
+     * Tableau des ImageView pour l'affichage des images de fond.
+     * Capacité maximale de 20 images de fond.
+     */
     private ImageView[] ivImageFond = new ImageView[20];
 
 
-    /*
-     définition des types d'image
+    /**
+     * Filtre pour les fichiers d'image supportés (PNG, JPG, BMP, GIF).
+     * Utilisé dans les dialogues de sélection de fichiers.
      */
     private final ExtensionsFilter IMAGE_FILTER
             = new ExtensionsFilter(new String[]{".png", ".jpg", ".bmp", ".gif"});
+    
+    /**
+     * Filtre pour les fichiers PNG uniquement.
+     * Utilisé pour les éléments nécessitant la transparence.
+     */
     private final ExtensionsFilter PNG_FILTER
             = new ExtensionsFilter(new String[]{".png"});
 
+    /**
+     * Tableau contenant les images de fond configurées.
+     * Capacité maximale de 50 images.
+     */
     private ImageFond[] imagesFond = new ImageFond[50];
+    
+    /**
+     * Nombre actuel d'images de fond dans le projet.
+     */
     private int iNombreImagesFond = 0;
+    
+    /**
+     * Indique si un template est en cours d'application.
+     */
     private boolean bTemplate;
+    
+    /**
+     * PaneOutil pour la gestion de l'interface des images de fond.
+     */
     private PaneOutil poImageFond;
+    
+    /**
+     * Type du hotspot sélectionné (navigation, image, HTML).
+     */
     public static String strTypeHS = "";
+    
+    /**
+     * Nom du fichier du hotspot de navigation sélectionné.
+     */
     public static String strNomfichierHS = "";
+    
+    /**
+     * Type du hotspot image sélectionné.
+     */
     public static String strTypeHSImage = "";
+    
+    /**
+     * Nom du fichier du hotspot image sélectionné.
+     */
     public static String strNomfichierHSImage = "";
+    
+    /**
+     * Type du hotspot HTML sélectionné.
+     */
     public static String strTypeHSHTML = "";
+    
+    /**
+     * Nom du fichier du hotspot HTML sélectionné.
+     */
     public static String strNomfichierHSHTML = "";
 
+    /**
+     * Style par défaut pour les hotspots de navigation.
+     */
     private String strStyleHotSpots = "hotspot.png";
+    
+    /**
+     * Style par défaut pour les hotspots d'images.
+     */
     private String strStyleHotSpotImages = "photo2.png";
+    
+    /**
+     * Style par défaut pour les hotspots HTML.
+     */
     private String strStyleHotSpotHTML = "html1.png";
+    
+    /**
+     * ResourceBundle pour la localisation de l'interface.
+     */
     private ResourceBundle rbLocalisation;
-    /*
-     Variables barre de navigation classique 
+    
+    /**
+     * Décalage horizontal de la barre de navigation classique en pixels.
      */
     private double offsetXBarreClassique = 0;
+    
+    /**
+     * Décalage vertical de la barre de navigation classique en pixels.
+     */
     private double offsetYBarreClassique = 10;
+    
+    /**
+     * Taille des boutons de la barre de navigation classique en pixels.
+     */
     private double tailleBarreClassique = 26;
+    
+    /**
+     * Espacement entre les boutons de la barre de navigation classique en pixels.
+     */
     private double espacementBarreClassique = 4;
+    
+    /**
+     * Style par défaut de la barre de navigation classique.
+     */
     private final String strStyleDefautBarreClassique = "retina";
+    
+    /**
+     * Position de la barre de navigation classique (format "vertical:horizontal").
+     * Valeur par défaut: "bottom:center".
+     */
     private String strPositionBarreClassique = "bottom:center";
+    
+    /**
+     * Style actuellement appliqué à la barre de navigation classique.
+     */
     private String styleBarreClassique = strStyleDefautBarreClassique;
+    
+    /**
+     * Activation des boutons de déplacement dans la barre classique ("oui"/"non").
+     */
     private String strDeplacementsBarreClassique = "oui";
+    
+    /**
+     * Activation des boutons de zoom dans la barre classique ("oui"/"non").
+     */
     private String strZoomBarreClassique = "oui";
+    
+    /**
+     * Activation des boutons d'outils dans la barre classique ("oui"/"non").
+     */
     private String strOutilsBarreClassique = "oui";
+    
+    /**
+     * Activation des boutons de rotation dans la barre classique ("oui"/"non").
+     */
     private String strRotationBarreClassique = "oui";
+    
+    /**
+     * Activation du bouton plein écran dans la barre classique ("oui"/"non").
+     */
     private String strPleinEcranBarreClassique = "oui";
+    
+    /**
+     * Activation du bouton mode souris dans la barre classique ("oui"/"non").
+     */
     private String strSourisBarreClassique = "oui";
+    
+    /**
+     * Visibilité initiale de la barre classique ("oui"/"non").
+     */
     private String strVisibiliteBarreClassique = "oui";
+    
+    /**
+     * ComboBox pour sélectionner le style de la barre classique.
+     */
     private ComboBox cblisteStyleBarreClassique;
+    
+    /**
+     * RadioButton pour positionner la barre classique en haut à gauche.
+     */
     private RadioButton rbTopLeftBarreClassique;
+    
+    /**
+     * RadioButton pour positionner la barre classique en haut au centre.
+     */
     private RadioButton rbTopCenterBarreClassique;
+    
+    /**
+     * RadioButton pour positionner la barre classique en haut à droite.
+     */
     private RadioButton rbTopRightBarreClassique;
+    
+    /**
+     * RadioButton pour positionner la barre classique au milieu à gauche.
+     */
     private RadioButton rbMiddleLeftBarreClassique;
+    
+    /**
+     * RadioButton pour positionner la barre classique au milieu à droite.
+     */
     private RadioButton rbMiddleRightBarreClassique;
+    
+    /**
+     * RadioButton pour positionner la barre classique en bas à gauche.
+     */
     private RadioButton rbBottomLeftBarreClassique;
+    
+    /**
+     * RadioButton pour positionner la barre classique en bas au centre.
+     */
     private RadioButton rbBottomCenterBarreClassique;
+    
+    /**
+     * RadioButton pour positionner la barre classique en bas à droite.
+     */
     private RadioButton rbBottomRightBarreClassique;
+    
+    /**
+     * CheckBox contrôlant la visibilité de la barre classique.
+     */
     private CheckBox cbBarreClassiqueVisible;
+    
+    /**
+     * CheckBox contrôlant l'affichage des boutons de déplacement.
+     */
     private CheckBox cbDeplacementsBarreClassique;
+    
+    /**
+     * CheckBox contrôlant l'affichage des boutons de zoom.
+     */
     private CheckBox cbZoomBarreClassique;
+    
+    /**
+     * CheckBox contrôlant l'affichage des boutons d'outils.
+     */
     private CheckBox cbOutilsBarreClassique;
+    
+    /**
+     * CheckBox contrôlant l'affichage du bouton plein écran.
+     */
     private CheckBox cbFSBarreClassique;
+    
+    /**
+     * CheckBox contrôlant l'affichage du bouton mode souris.
+     */
     private CheckBox cbSourisBarreClassique;
+    
+    /**
+     * CheckBox contrôlant l'affichage des boutons de rotation.
+     */
     private CheckBox cbRotationBarreClassique;
+    
+    /**
+     * Slider pour ajuster l'espacement entre les boutons de la barre classique.
+     */
     private Slider slEspacementBarreClassique;
+    
+    /**
+     * Champ de saisie pour le décalage horizontal de la barre classique en pixels.
+     */
     private BigDecimalField bdfOffsetXBarreClassique;
+    
+    /**
+     * Champ de saisie pour le décalage vertical de la barre classique en pixels.
+     */
     private BigDecimalField bdfOffsetYBarreClassique;
+    
+    /**
+     * ColorPicker pour choisir la couleur de fond de la barre classique.
+     */
     private ColorPicker cpCouleurBarreClassique;
+    
+    /**
+     * Couleur de fond de la barre de navigation classique.
+     * Valeur par défaut: HSB(180°, 39%, 50%).
+     */
     private Color couleurBarreClassique = Color.hsb(180, 0.39, 0.5);
 
     /*
@@ -268,28 +609,97 @@ public class GestionnaireInterfaceController {
     private Color couleurBarrePersonnalisee = Color.hsb(180, 0.39, 0.5);
     final ToggleGroup grpPositionBarrePersonnalisee = new ToggleGroup();
     final ToggleGroup grpCouleurBarrePersonnalisee = new ToggleGroup();
+    /**
+     * Bouton pour éditer la barre de navigation personnalisée.
+     */
     private Button btnEditerBarre;
 
+    /**
+     * Indique si le titre de la visite est affiché.
+     */
     private boolean bAfficheTitre = true;
+    
+    /**
+     * Nom de la police utilisée pour le titre.
+     * Valeur par défaut: "Verdana".
+     */
     private String strTitrePoliceNom = "Verdana";
+    
+    /**
+     * Style de la police du titre (Regular, Bold, Italic, etc.).
+     */
     private String strTitrePoliceStyle = "Regular";
+    
+    /**
+     * Taille de la police du titre en points.
+     */
     private String strTitrePoliceTaille = "12.0";
+    
+    /**
+     * Couleur du texte du titre au format hexadécimal.
+     * Valeur par défaut: "#ffffff" (blanc).
+     */
     private String strCouleurTitre = "#ffffff";
+    
+    /**
+     * Couleur de fond du titre au format hexadécimal.
+     * Valeur par défaut: "#4e8080" (bleu-vert).
+     */
     private String strCouleurFondTitre = "#4e8080";
+    
+    /**
+     * Position horizontale du titre ("left", "center", "right").
+     */
     private String strTitrePosition = "center";
+    
+    /**
+     * Décalage vertical du titre en pixels.
+     */
     private double titreDecalage = 10;
+    
+    /**
+     * Indique si le titre de la visite s'affiche.
+     */
     private boolean bTitreVisite = false;
+    
+    /**
+     * Indique si le titre du panoramique actuel s'affiche.
+     */
     private boolean bTitrePanoramique = true;
+    
+    /**
+     * Indique si le titre s'adapte automatiquement à la largeur.
+     */
     private boolean bTitreAdapte = false;
+    
+    /**
+     * Opacité du fond du titre (0.0 = transparent, 1.0 = opaque).
+     */
     private double titreOpacite = 0.8;
+    
+    /**
+     * Taille du titre en pourcentage de la largeur de l'écran.
+     */
     private double titreTaille = 100.0;
 
     /**
-     * Variable description
+     * Indique si la description est affichée.
      */
     private boolean bAfficheDescription = false;
+    
+    /**
+     * CheckBox pour activer/désactiver l'affichage de la description.
+     */
     private CheckBox cbAfficheDescription;
+    
+    /**
+     * PaneOutil pour gérer l'affichage de la description.
+     */
     private PaneOutil poDescription;
+    
+    /**
+     * Indique si un chargement est en cours (blocage des interactions).
+     */
     private boolean bChargementEnCours = false;
 
     /**
@@ -303,76 +713,320 @@ public class GestionnaireInterfaceController {
     private double tailleBoussole = 100;
     private double opaciteBoussole = 0.8;
     private boolean bAiguilleMobileBoussole = true;
+    /**
+     * Répertoire des images de fond.
+     */
     private String strRepertImagesFond = "";
+    
+    /**
+     * Répertoire de la barre de navigation personnalisée.
+     */
     private String strRepertBarrePersonnalisee = "";
+    
+    /**
+     * ImageView affichant l'image de la boussole.
+     */
     private ImageView imgBoussole;
+    
+    /**
+     * ImageView affichant l'aiguille de la boussole.
+     */
     private ImageView imgAiguille;
+    
+    /**
+     * Champ de saisie pour le décalage horizontal de la boussole en pixels.
+     */
     private BigDecimalField bdfOffsetXBoussole;
+    
+    /**
+     * Champ de saisie pour le décalage vertical de la boussole en pixels.
+     */
     private BigDecimalField bdfOffsetYBoussole;
+    
+    /**
+     * Slider pour ajuster la taille de la boussole.
+     */
     private Slider slTailleBoussole;
+    
+    /**
+     * Slider pour ajuster l'opacité de la boussole.
+     */
     private Slider slOpaciteBoussole;
+    
+    /**
+     * CheckBox pour activer l'aiguille mobile de la boussole.
+     */
     private CheckBox cbAiguilleMobile;
+    
+    /**
+     * CheckBox pour activer l'affichage de la boussole.
+     */
     private CheckBox cbAfficheBoussole;
+    
+    /**
+     * RadioButton pour positionner la boussole en haut à gauche.
+     */
     private RadioButton rbBoussTopLeft;
+    
+    /**
+     * RadioButton pour positionner la boussole en haut à droite.
+     */
     private RadioButton rbBoussTopRight;
+    
+    /**
+     * RadioButton pour positionner la boussole en bas à gauche.
+     */
     private RadioButton rbBoussBottomLeft;
+    
+    /**
+     * RadioButton pour positionner la boussole en bas à droite.
+     */
     private RadioButton rbBoussBottomRight;
 
     /**
-     * Variables Fenetre Info/Aide
+     * Indique si la fenêtre d'informations est affichée.
      */
     private boolean bAfficheFenetreInfo = false;
+    
+    /**
+     * Indique si la fenêtre d'aide est affichée.
+     */
     private boolean bAfficheFenetreAide = false;
+    
+    /**
+     * Indique si une image personnalisée est utilisée pour la fenêtre d'informations.
+     */
     private boolean bFenetreInfoPersonnalise = false;
+    
+    /**
+     * Indique si une image personnalisée est utilisée pour la fenêtre d'aide.
+     */
     private boolean bFenetreAidePersonnalise = false;
+    
+    /**
+     * Taille de la fenêtre d'informations en pourcentage.
+     */
     private double fenetreInfoTaille = 100.d;
+    
+    /**
+     * Taille de la fenêtre d'aide en pourcentage.
+     */
     private double fenetreAideTaille = 100.d;
+    
+    /**
+     * Position horizontale de la fenêtre d'informations en pixels.
+     */
     private double fenetreInfoPosX = 0.d;
+    
+    /**
+     * Position verticale de la fenêtre d'informations en pixels.
+     */
     private double fenetreInfoPosY = 0.d;
+    
+    /**
+     * Position horizontale de la fenêtre d'aide en pixels.
+     */
     private double fenetreAidePosX = 0.d;
+    
+    /**
+     * Position verticale de la fenêtre d'aide en pixels.
+     */
     private double fenetreAidePosY = 0.d;
+    
+    /**
+     * Position horizontale alternative de la fenêtre d'informations en pixels.
+     */
     private double fenetreInfoposX = 0.d;
+    
+    /**
+     * Opacité de la fenêtre d'informations (0.0 = transparent, 1.0 = opaque).
+     */
     private double fenetreInfoOpacite = 0.8;
+    
+    /**
+     * Opacité de la fenêtre d'aide (0.0 = transparent, 1.0 = opaque).
+     */
     private double fenetreAideOpacite = 0.8;
+    
+    /**
+     * Taille de la police dans les fenêtres en points.
+     */
     private double fenetrePoliceTaille = 10.d;
+    
+    /**
+     * Position horizontale de l'URL dans la fenêtre en pixels.
+     */
     private double fenetreURLPosX = 0.d;
+    
+    /**
+     * Position verticale de l'URL dans la fenêtre en pixels.
+     */
     private double fenetreURLPosY = 0.d;
+    
+    /**
+     * Opacité du fond des fenêtres (0.0 = transparent, 1.0 = opaque).
+     */
     private double fenetreOpaciteFond = 0.8;
+    
+    /**
+     * Chemin de l'image personnalisée pour la fenêtre d'informations.
+     */
     private String strFenetreInfoImage = "";
+    
+    /**
+     * Chemin de l'image personnalisée pour la fenêtre d'aide.
+     */
     private String strFenetreAideImage = "";
+    
+    /**
+     * URL affichée dans la fenêtre.
+     */
     private String strFenetreURL = "";
+    
+    /**
+     * Texte associé à l'URL dans la fenêtre.
+     */
     private String strFenetreTexteURL = "";
+    
+    /**
+     * Texte de l'infobulle pour le lien URL.
+     */
     private String strFenetreURLInfobulle = "";
+    
+    /**
+     * Couleur du lien URL au format hexadécimal.
+     * Valeur par défaut: "#FFFF00" (jaune).
+     */
     private String strFenetreURLCouleur = "#FFFF00";
+    
+    /**
+     * Police utilisée dans les fenêtres.
+     * Valeur par défaut: "Verdana".
+     */
     private String strFenetrePolice = "Verdana";
+    
+    /**
+     * Couleur de fond des fenêtres au format hexadécimal.
+     * Valeur par défaut: "#ffffff" (blanc).
+     */
     private String strFenetreCouleurFond = "#ffffff";
 
+    /**
+     * CheckBox pour activer l'image personnalisée de la fenêtre d'informations.
+     */
     private CheckBox cbFenetreInfoPersonnalise;
+    
+    /**
+     * CheckBox pour activer l'image personnalisée de la fenêtre d'aide.
+     */
     private CheckBox cbFenetreAidePersonnalise;
+    
+    /**
+     * TextField pour spécifier l'image de la fenêtre d'informations.
+     */
     private TextField tfFenetreInfoImage;
+    
+    /**
+     * TextField pour spécifier l'image de la fenêtre d'aide.
+     */
     private TextField tfFenetreAideImage;
+    
+    /**
+     * Slider pour ajuster la taille de la fenêtre d'informations.
+     */
     private Slider slFenetreInfoTaille;
+    
+    /**
+     * Slider pour ajuster la taille de la fenêtre d'aide.
+     */
     private Slider slFenetreAideTaille;
+    
+    /**
+     * Champ de saisie pour la position X de la fenêtre d'informations.
+     */
     private BigDecimalField bdfFenetreInfoPosX;
+    
+    /**
+     * Champ de saisie pour la position Y de la fenêtre d'informations.
+     */
     private BigDecimalField bdfFenetreInfoPosY;
+    
+    /**
+     * Champ de saisie pour la position X de la fenêtre d'aide.
+     */
     private BigDecimalField bdfFenetreAidePosX;
+    
+    /**
+     * Champ de saisie pour la position Y de la fenêtre d'aide.
+     */
     private BigDecimalField bdfFenetreAidePosY;
+    
+    /**
+     * Slider pour ajuster l'opacité de la fenêtre d'informations.
+     */
     private Slider slFenetreInfoOpacite;
+    
+    /**
+     * Slider pour ajuster l'opacité de la fenêtre d'aide.
+     */
     private Slider slFenetreAideOpacite;
+    
+    /**
+     * TextField pour spécifier le texte du lien URL.
+     */
     private TextField tfFenetreTexteURL;
+    
+    /**
+     * TextField pour spécifier l'URL.
+     */
     private TextField tfFenetreURL;
+    
+    /**
+     * TextField pour spécifier l'infobulle de l'URL.
+     */
     private TextField tfFenetreURLInfobulle;
+    
+    /**
+     * ComboBox pour sélectionner la police des fenêtres.
+     */
     private ComboBox tfFenetrePolice;
+    
+    /**
+     * Slider pour ajuster la taille de la police des fenêtres.
+     */
     private Slider slFenetrePoliceTaille;
+    
+    /**
+     * Champ de saisie pour la position X de l'URL.
+     */
     private BigDecimalField bdfFenetreURLPosX;
+    
+    /**
+     * Champ de saisie pour la position Y de l'URL.
+     */
     private BigDecimalField bdfFenetreURLPosY;
+    
+    /**
+     * ColorPicker pour la couleur de fond des fenêtres.
+     */
     private ColorPicker cpFenetreCouleurFond;
+    
+    /**
+     * ColorPicker pour la couleur du lien URL.
+     */
     private ColorPicker cpFenetreURLCouleur;
 
+    /**
+     * AnchorPane pour l'affichage de la fenêtre d'informations.
+     */
     private final AnchorPane apFenetreAfficheInfo = new AnchorPane();
+    
+    /**
+     * Label pour afficher le lien URL dans la fenêtre.
+     */
     private final Label lblFenetreURL = new Label();
     /**
-     *
+     * Répertoire des images de masquage.
      */
     private String strRepertMasques = "";
     private boolean bAfficheMasque = false;
@@ -412,7 +1066,7 @@ public class GestionnaireInterfaceController {
     private RadioButton rbMasqueBottomRight;
 
     /**
-     *
+     * Répertoire des images pour les réseaux sociaux.
      */
     private String strRepertReseauxSociaux = "";
     private boolean bAfficheReseauxSociaux = false;
@@ -442,42 +1096,157 @@ public class GestionnaireInterfaceController {
     private RadioButton rbReseauxSociauxTopRight;
     private RadioButton rbReseauxSociauxBottomLeft;
     private RadioButton rbReseauxSociauxBottomRight;
-    /*
-     *   variables Vignettes
+    
+    /**
+     * AnchorPane pour gérer l'affichage des vignettes.
      */
     private AnchorPane apVignettes;
+    
+    /**
+     * AnchorPane pour la visualisation des vignettes.
+     */
     private AnchorPane apVisuVignettes;
+    
+    /**
+     * Indique si les vignettes sont affichées.
+     */
     private boolean bAfficheVignettes = false;
+    
+    /**
+     * Couleur de fond des vignettes au format hexadécimal.
+     * Valeur par défaut: "#4e8080" (bleu-vert).
+     */
     private String strCouleurFondVignettes = "#4e8080";
+    
+    /**
+     * Couleur du texte des vignettes au format hexadécimal.
+     * Valeur par défaut: "#ffffff" (blanc).
+     */
     private String strCouleurTexteVignettes = "#ffffff";
+    
+    /**
+     * Position des vignettes à l'écran ("left", "right", "bottom").
+     */
     private String strPositionVignettes = "bottom";
+    
+    /**
+     * Taille des images dans les vignettes en pixels.
+     */
     private double tailleImageVignettes = 120;
+    
+    /**
+     * Opacité des vignettes (0.0 = transparent, 1.0 = opaque).
+     */
     private double opaciteVignettes = 0.8;
+    
+    /**
+     * Slider pour ajuster l'opacité des vignettes.
+     */
     private Slider slOpaciteVignettes;
+    
+    /**
+     * Slider pour ajuster la taille des vignettes.
+     */
     private Slider slTailleVignettes;
+    
+    /**
+     * CheckBox pour activer l'affichage des vignettes.
+     */
     private CheckBox cbAfficheVignettes;
+    
+    /**
+     * RadioButton pour positionner les vignettes à gauche.
+     */
     private RadioButton rbVignettesLeft;
+    
+    /**
+     * RadioButton pour positionner les vignettes à droite.
+     */
     private RadioButton rbVignettesRight;
+    
+    /**
+     * RadioButton pour positionner les vignettes en bas.
+     */
     private RadioButton rbVignettesBottom;
+    
+    /**
+     * ColorPicker pour la couleur de fond des vignettes.
+     */
     private ColorPicker cpCouleurFondVignettes;
+    
+    /**
+     * ColorPicker pour la couleur du texte des vignettes.
+     */
     private ColorPicker cpCouleurTexteVignettes;
+    
+    /**
+     * Indique si les vignettes sont repliées au démarrage.
+     */
     private boolean bReplieDemarrageVignettes = false;
+    
+    /**
+     * CheckBox pour activer le repliement au démarrage.
+     */
     private CheckBox cbReplieDemarrageVignettes;
 
-    /*
-     *   variables ComboMenu
+    /**
+     * AnchorPane pour gérer l'affichage du menu combiné.
      */
     private AnchorPane apComboMenu;
+    
+    /**
+     * AnchorPane pour la visualisation du menu combiné.
+     */
     private AnchorPane apVisuComboMenu;
+    
+    /**
+     * Indique si le menu combiné est affiché.
+     */
     private boolean bAfficheComboMenu = false;
+    
+    /**
+     * Indique si les images sont affichées dans le menu combiné.
+     */
     private boolean bAfficheComboMenuImages = true;
+    
+    /**
+     * Position horizontale du menu combiné ("left", "right").
+     */
     private String strPositionXComboMenu = "left";
+    
+    /**
+     * Position verticale du menu combiné ("top", "bottom").
+     */
     private String strPositionYComboMenu = "top";
+    
+    /**
+     * Décalage horizontal du menu combiné en pixels.
+     */
     private double offsetXComboMenu = 10;
+    
+    /**
+     * Décalage vertical du menu combiné en pixels.
+     */
     private double offsetYComboMenu = 10;
+    
+    /**
+     * CheckBox pour activer l'affichage du menu combiné.
+     */
     private CheckBox cbAfficheComboMenu;
+    
+    /**
+     * CheckBox pour activer l'affichage des images dans le menu combiné.
+     */
     private CheckBox cbAfficheComboMenuImages;
+    
+    /**
+     * Champ de saisie pour le décalage horizontal du menu combiné.
+     */
     private BigDecimalField bdfOffsetXComboMenu;
+    
+    /**
+     * Champ de saisie pour le décalage vertical du menu combiné.
+     */
     private BigDecimalField bdfOffsetYComboMenu;
     private RadioButton rbComboMenuTopLeft;
     private RadioButton rbComboMenuTopCenter;
