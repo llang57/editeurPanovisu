@@ -272,10 +272,22 @@ jobs:
           tag_name: ${{ steps.build_info.outputs.VERSION }}
           name: "EditeurPanovisu ${{ steps.build_info.outputs.VERSION }} - Build ${{ steps.build_info.outputs.BUILD_NUM }}"
           body: |
-            ## 🐧 EditeurPanovisu ${{ github.ref_name }} - Support Linux Portable Amélioré
+            ## 🐧 EditeurPanovisu ${{ github.ref_name }} - Support Linux Portable + Corrections i18n
             
             **Build** : ${{ steps.build_info.outputs.BUILD_NUM }}  
-            **Priorité** : � Archive portable Linux + 🔧 Corrections bugs Linux + � Documentation complète
+            **Priorité** : 🐧 Archive portable Linux + 🔧 Corrections ressources i18n + 📖 Documentation complète
+            
+            ### 🔧 Corrections v3.3.3 (Build 3622+)
+            
+            **Ressources i18n complétées** 🌐
+            - ✅ **Clé manquante corrigée** : `main.appliquerATous` ajoutée dans tous les fichiers de localisation
+            - 🇫🇷 Français : "Appliquer à tous"
+            - 🇬🇧 Anglais : "Apply to all"
+            - 🇩🇪 Allemand : "Auf alle anwenden"
+            - 🇪🇸 Espagnol : "Aplicar a todos"
+            - 🇵🇹 Portugais : "Aplicar a todos"
+            - ✅ **MissingResourceException** : Correction du crash au démarrage
+            - ✅ **Boutons fonctionnels** : "Appliquer à tous" maintenant opérationnel dans les éditeurs de hotspots
             
             ### 🐧 Nouveautés v3.3.3 - Distribution Linux Simplifiée
             
