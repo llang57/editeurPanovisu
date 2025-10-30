@@ -23,7 +23,7 @@
 
 ### Dans l'onglet visite
 
-1. **Charger les panoramiques** (menu Visite ⇒ Ajouter panoramiques ou **Ctrl+A** (PC) ou **Cmd+A** (Mac))
+1. **Charger les panoramiques** (menu Visite ⇒ Ajouter panoramiques ou **Ctrl+A** (PC windows ou Linux) ou **Cmd+A** (Mac))
 
    ![Menu Panoramiques](images/menuPanoramiques.jpg)
 
@@ -1205,5 +1205,4 @@ Si vous rencontrez des difficultés ou avez des questions :
 
 **EditeurPanovisu** - Créateur de visites virtuelles 360°  
 Version 2.x - © 2024 - Tous droits réservés
-
 
