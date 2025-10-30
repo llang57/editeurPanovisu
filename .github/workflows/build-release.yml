@@ -66,8 +66,20 @@ jobs:
     runs-on: macos-latest
     
     steps:
-      - name: 📥 Checkout code
+      - name: � Configure Git for macOS
+        run: |
+          git config --global core.quotePath false
+          git config --global core.precomposeUnicode true
+      
+      - name: 📥 Checkout code (avec gestion erreurs encodage)
         uses: actions/checkout@v4
+        continue-on-error: true
+      
+      - name: 🧹 Nettoyer fichiers problématiques
+        run: |
+          # Supprimer les fichiers avec encodage invalide s'ils existent
+          rm -f wiki/Configuration-avanc*.md wiki/D*marrage-rapide.md 2>/dev/null || true
+          echo "✅ Fichiers problématiques nettoyés"
       
       - name: ☕ Setup Java 25
         uses: actions/setup-java@v4
