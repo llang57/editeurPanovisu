@@ -1,0 +1,22 @@
+<map id="editeurpanovisu.config.ModelConfigManager.loadOllamaConfig" name="editeurpanovisu.config.ModelConfigManager.loadOllamaConfig">
+<area shape="rect" id="Node000001" title="Charge la configuration Ollama depuis le fichier JSON." alt="" coords="5,297,244,337"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1config_1_1ModelConfigManager.html#a3eb9305bba70c2c83dbec20806d040e0" title="Crée une configuration Ollama par défaut." alt="" coords="292,136,551,191"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="163,295,354,195,356,200,166,299"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="861,151,900,176"/>
+<area shape="poly" id="edge12_Node000001_Node000003" title=" " alt="" coords="244,324,393,332,559,333,638,329,710,321,769,308,812,289,835,269,852,242,872,189,877,191,857,245,839,272,815,294,770,313,710,326,638,334,559,338,392,337,244,329"/>
+<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1config_1_1ModelConfig.html#ac2e0f11b3aebd7d9a55013906070f233" title=" " alt="" coords="314,354,529,394"/>
+<area shape="poly" id="edge11_Node000001_Node000008" title=" " alt="" coords="229,334,304,349,303,354,228,340"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="447,134,511,79,553,53,598,33,658,14,709,3,734,3,759,8,786,18,815,33,839,55,857,82,869,111,877,137,872,138,864,113,852,85,835,58,812,38,783,23,757,13,733,9,710,9,660,19,600,38,555,58,515,84,451,138"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1config_1_1ModelConfig.html#ab10a575383cedfe329049a585ede92e7" title=" " alt="" coords="599,48,813,88"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="494,134,598,97,622,89,624,94,600,102,496,139"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1config_1_1ModelConfig.html#a8fa925e7fbc2573614bd0241a67b0010" title=" " alt="" coords="599,112,813,152"/>
+<area shape="poly" id="edge5_Node000002_Node000005" title=" " alt="" coords="551,146,584,143,585,148,551,152"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1config_1_1ModelConfig.html#ac9400c4cce0cc97c80726782d0c2039d" title=" " alt="" coords="599,176,813,216"/>
+<area shape="poly" id="edge7_Node000002_Node000006" title=" " alt="" coords="551,176,585,179,584,185,551,181"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1config_1_1ModelConfig.html#a28329e56199d24c197c68bf472c2da0d" title=" " alt="" coords="599,240,813,280"/>
+<area shape="poly" id="edge9_Node000002_Node000007" title=" " alt="" coords="496,189,600,225,624,233,622,238,598,230,494,194"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="790,85,815,97,841,117,863,139,859,143,838,121,812,102,787,90"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="814,149,848,155,847,160,813,154"/>
+<area shape="poly" id="edge8_Node000006_Node000003" title=" " alt="" coords="813,173,847,167,848,172,814,178"/>
+<area shape="poly" id="edge10_Node000007_Node000003" title=" " alt="" coords="787,237,812,225,838,206,859,185,863,188,841,210,815,230,790,242"/>
+</map>

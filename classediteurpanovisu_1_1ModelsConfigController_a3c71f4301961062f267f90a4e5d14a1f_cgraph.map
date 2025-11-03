@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.ModelsConfigController.refreshOpenRouter" name="editeurpanovisu.ModelsConfigController.refreshOpenRouter">
+<area shape="rect" id="Node000001" title="Rafraîchir la disponibilité des modèles OpenRouter." alt="" coords="5,23,224,63"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="272,5,311,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="224,25,258,20,259,25,225,30"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a1d65f9ed6dcf047a15e74bf42381d1b3" title=" " alt="" coords="272,55,311,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="225,56,259,60,258,66,224,61"/>
+</map>

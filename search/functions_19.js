@@ -9,6 +9,8 @@ var searchData=
   ['validerparametres_6',['validerParametres',['../classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#afc3dbbc3d01af88ff6ef18b4d43fa149',1,'editeurpanovisu::RedimensionnementImagesDialogController']]],
   ['ve_7',['ve',['../leaflet_8js.html#aa048a2c2cd8790052acfe729b0907fd0',1,'leaflet.js']]],
   ['verifieropenrouterdisponible_8',['verifierOpenRouterDisponible',['../classediteurpanovisu_1_1OllamaService.html#a50b80b49802b9af498341b60acd05fa0',1,'editeurpanovisu::OllamaService']]],
-  ['viderliste_9',['viderListe',['../classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a517922ac159e2ec6c321299996157ae6',1,'editeurpanovisu::RedimensionnementImagesDialogController']]],
-  ['visualiseurimagespanoramiques_10',['VisualiseurImagesPanoramiques',['../classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html#a32bc46de28fbd0cfb3671aec24081b5a',1,'editeurpanovisu::VisualiseurImagesPanoramiques']]]
+  ['verifyollamamodels_9',['verifyOllamaModels',['../classediteurpanovisu_1_1config_1_1ModelConfigManager.html#a47f3d7e6c91e113224147578fbf658c7',1,'editeurpanovisu::config::ModelConfigManager']]],
+  ['verifyopenroutermodels_10',['verifyOpenRouterModels',['../classediteurpanovisu_1_1config_1_1ModelConfigManager.html#ade55ef6889e37e05fab56e051d9c9444',1,'editeurpanovisu::config::ModelConfigManager']]],
+  ['viderliste_11',['viderListe',['../classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a517922ac159e2ec6c321299996157ae6',1,'editeurpanovisu::RedimensionnementImagesDialogController']]],
+  ['visualiseurimagespanoramiques_12',['VisualiseurImagesPanoramiques',['../classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html#a32bc46de28fbd0cfb3671aec24081b5a',1,'editeurpanovisu::VisualiseurImagesPanoramiques']]]
 ];

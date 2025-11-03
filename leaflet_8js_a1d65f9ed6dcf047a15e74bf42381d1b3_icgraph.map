@@ -1,12 +1,16 @@
 <map id="w" name="w">
-<area shape="rect" id="Node000001" title=" " alt="" coords="284,55,323,80"/>
-<area shape="rect" id="Node000002" href="$jquery_8dd_8js.html#a970847db1a57f09394e1e7e8a3a69c11" title=" " alt="" coords="164,29,203,55"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="270,63,202,49,203,43,271,58"/>
-<area shape="rect" id="Node000003" href="$types_8js.html#ac517fb9ca2f601a25315b53bcf344421" title=" " alt="" coords="131,79,236,104"/>
-<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="271,76,237,83,236,78,270,71"/>
-<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="203,18,197,11,183,8,171,10,165,14,164,20,167,28,162,30,158,21,160,11,169,5,183,3,200,6,207,14"/>
-<area shape="rect" id="Node000004" href="$types_8js.html#a23ecb3f1ef42f3c37ee659b65bafcf17" title=" " alt="" coords="5,53,83,79"/>
-<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="116,82,83,76,84,70,117,77"/>
-<area shape="rect" id="Node000005" href="$types_8js.html#a7763c96bba311efea7a7a15f584154d2" title=" " alt="" coords="5,103,83,128"/>
-<area shape="poly" id="edge5_Node000003_Node000005" title=" " alt="" coords="117,105,83,111,83,106,116,100"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="397,108,436,133"/>
+<area shape="rect" id="Node000002" href="$jquery_8dd_8js.html#a970847db1a57f09394e1e7e8a3a69c11" title=" " alt="" coords="221,29,259,55"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="392,100,372,83,348,68,301,53,259,46,260,41,302,48,350,64,375,79,396,96"/>
+<area shape="rect" id="Node000003" href="$types_8js.html#ac517fb9ca2f601a25315b53bcf344421" title=" " alt="" coords="187,79,293,104"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="383,118,293,103,293,97,384,113"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1ModelsConfigController.html#aeac9b6b2ab1e963aad35db8bf659dee9" title="Rafraîchir la disponibilité des modèles Ollama." alt="" coords="131,129,349,169"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="384,128,350,134,349,129,383,123"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1ModelsConfigController.html#a3c71f4301961062f267f90a4e5d14a1f" title="Rafraîchir la disponibilité des modèles OpenRouter." alt="" coords="131,193,349,233"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="397,145,376,165,351,183,325,195,323,190,348,178,373,161,393,141"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="268,25,270,19,267,14,257,10,240,8,219,11,210,16,211,23,222,32,219,36,206,26,206,14,218,6,240,3,258,4,270,10,276,18,273,27"/>
+<area shape="rect" id="Node000004" href="$types_8js.html#a23ecb3f1ef42f3c37ee659b65bafcf17" title=" " alt="" coords="5,55,83,80"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="173,86,83,75,84,69,174,81"/>
+<area shape="rect" id="Node000005" href="$types_8js.html#a7763c96bba311efea7a7a15f584154d2" title=" " alt="" coords="5,104,83,129"/>
+<area shape="poly" id="edge5_Node000003_Node000005" title=" " alt="" coords="174,103,84,114,83,109,173,97"/>
 </map>

@@ -1,0 +1,17 @@
+<map id="editeurpanovisu.config.ModelConfigManager.createDefaultOllamaConfig" name="editeurpanovisu.config.ModelConfigManager.createDefaultOllamaConfig">
+<area shape="rect" id="Node000001" title="Crée une configuration Ollama par défaut." alt="" coords="5,100,264,155"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="575,115,613,140"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="172,98,235,60,272,42,311,29,372,13,422,3,446,3,471,7,528,29,548,44,564,62,585,100,581,103,559,65,544,47,525,34,470,12,446,9,423,9,373,18,313,34,274,47,237,64,175,102"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1config_1_1ModelConfig.html#ab10a575383cedfe329049a585ede92e7" title=" " alt="" coords="312,44,527,84"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="256,98,316,84,317,89,257,103"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1config_1_1ModelConfig.html#a8fa925e7fbc2573614bd0241a67b0010" title=" " alt="" coords="312,108,527,148"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="264,125,298,125,298,130,264,130"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1config_1_1ModelConfig.html#ac9400c4cce0cc97c80726782d0c2039d" title=" " alt="" coords="312,172,527,212"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="257,152,317,166,316,171,256,158"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1config_1_1ModelConfig.html#a28329e56199d24c197c68bf472c2da0d" title=" " alt="" coords="312,236,527,276"/>
+<area shape="poly" id="edge8_Node000001_Node000006" title=" " alt="" coords="182,153,243,187,313,221,332,229,331,234,311,226,241,192,179,157"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="494,81,528,93,564,109,561,114,526,98,492,86"/>
+<area shape="poly" id="edge5_Node000004_Node000002" title=" " alt="" coords="527,125,561,125,561,130,527,130"/>
+<area shape="poly" id="edge7_Node000005_Node000002" title=" " alt="" coords="492,169,526,157,561,141,564,146,528,162,494,174"/>
+<area shape="poly" id="edge9_Node000006_Node000002" title=" " alt="" coords="505,233,525,221,542,206,557,188,579,152,583,154,561,191,546,210,528,226,508,238"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="editeurpanovisu.config.ModelConfigManager.createDefaultOllamaConfig" name="editeurpanovisu.config.ModelConfigManager.createDefaultOllamaConfig">
+<area shape="rect" id="Node000001" title="Crée une configuration Ollama par défaut." alt="" coords="292,5,551,60"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1config_1_1ModelConfigManager.html#a8cfc19a335475e096041167626937fe7" title="Charge la configuration Ollama depuis le fichier JSON." alt="" coords="5,13,244,53"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="279,35,244,35,244,30,279,30"/>
+</map>

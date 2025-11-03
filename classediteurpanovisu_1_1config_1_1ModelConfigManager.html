@@ -1,0 +1,833 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>EditeurPanovisu: Référence de la classe editeurpanovisu.config.ModelConfigManager</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">EditeurPanovisu<span id="projectnumber">&#160;3.1.0</span>
+   </div>
+   <div id="projectbrief">Éditeur de visites virtuelles 360° Panovisu</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classediteurpanovisu_1_1config_1_1ModelConfigManager.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Chargement...</div>
+<div class="SRStatus" id="Searching">Recherche...</div>
+<div class="SRStatus" id="NoMatches">Aucune correspondance</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Fonctions membres publiques</a> &#124;
+<a href="#pri-methods">Fonctions membres privées</a> &#124;
+<a href="#pri-attribs">Attributs privés</a> &#124;
+<a href="#pri-static-attribs">Attributs privés statiques</a> &#124;
+<a href="classediteurpanovisu_1_1config_1_1ModelConfigManager-members.html">Liste de tous les membres</a>  </div>
+  <div class="headertitle"><div class="title">Référence de la classe editeurpanovisu.config.ModelConfigManager</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Gestionnaire de configuration des modèles IA Charge, sauvegarde et vérifie la disponibilité des modèles.  
+ <a href="classediteurpanovisu_1_1config_1_1ModelConfigManager.html#details">Plus de détails...</a></p>
+<div class="dynheader">
+Graphe de collaboration de editeurpanovisu.config.ModelConfigManager:</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1config_1_1ModelConfigManager__coll__graph.png" border="0" usemap="#aediteurpanovisu_8config_8ModelConfigManager_coll__map" alt="Collaboration graph"/></div>
+<map name="aediteurpanovisu_8config_8ModelConfigManager_coll__map" id="aediteurpanovisu_8config_8ModelConfigManager_coll__map">
+<area shape="rect" title="Gestionnaire de configuration des modèles IA Charge, sauvegarde et vérifie la disponibilité des modèl..." alt="" coords="5,123,220,163"/>
+<area shape="rect" href="classediteurpanovisu_1_1config_1_1ModelConfig.html" title="Configuration des modèles IA (OpenRouter ou Ollama) Structure correspondant au fichier JSON de config..." alt="" coords="5,5,220,45"/>
+<area shape="poly" title=" " alt="" coords="115,59,115,122,110,122,110,59"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">légende</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Fonctions membres publiques</h2></td></tr>
+<tr class="memitem:adb7b6dc0fc4d3b58e1e9961e5fc717d2" id="r_adb7b6dc0fc4d3b58e1e9961e5fc717d2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classediteurpanovisu_1_1config_1_1ModelConfig.html">ModelConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1config_1_1ModelConfigManager.html#adb7b6dc0fc4d3b58e1e9961e5fc717d2">loadOpenRouterConfig</a> ()</td></tr>
+<tr class="memdesc:adb7b6dc0fc4d3b58e1e9961e5fc717d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Charge la configuration OpenRouter depuis le fichier JSON.  <br /></td></tr>
+<tr class="separator:adb7b6dc0fc4d3b58e1e9961e5fc717d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8cfc19a335475e096041167626937fe7" id="r_a8cfc19a335475e096041167626937fe7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classediteurpanovisu_1_1config_1_1ModelConfig.html">ModelConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1config_1_1ModelConfigManager.html#a8cfc19a335475e096041167626937fe7">loadOllamaConfig</a> ()</td></tr>
+<tr class="memdesc:a8cfc19a335475e096041167626937fe7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Charge la configuration Ollama depuis le fichier JSON.  <br /></td></tr>
+<tr class="separator:a8cfc19a335475e096041167626937fe7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecc363f38905dc264995ff5d31e1b32f" id="r_aecc363f38905dc264995ff5d31e1b32f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1config_1_1ModelConfigManager.html#aecc363f38905dc264995ff5d31e1b32f">saveOpenRouterConfig</a> (<a class="el" href="classediteurpanovisu_1_1config_1_1ModelConfig.html">ModelConfig</a> config)  <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">throws</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">IOException</a> </td></tr>
+<tr class="memdesc:aecc363f38905dc264995ff5d31e1b32f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sauvegarde la configuration OpenRouter.  <br /></td></tr>
+<tr class="separator:aecc363f38905dc264995ff5d31e1b32f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58ced10d75ecb26c8937b7a9e9443623" id="r_a58ced10d75ecb26c8937b7a9e9443623"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1config_1_1ModelConfigManager.html#a58ced10d75ecb26c8937b7a9e9443623">saveOllamaConfig</a> (<a class="el" href="classediteurpanovisu_1_1config_1_1ModelConfig.html">ModelConfig</a> config)  <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">throws</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">IOException</a> </td></tr>
+<tr class="memdesc:a58ced10d75ecb26c8937b7a9e9443623"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sauvegarde la configuration Ollama.  <br /></td></tr>
+<tr class="separator:a58ced10d75ecb26c8937b7a9e9443623"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade55ef6889e37e05fab56e051d9c9444" id="r_ade55ef6889e37e05fab56e051d9c9444"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1config_1_1ModelConfigManager.html#ade55ef6889e37e05fab56e051d9c9444">verifyOpenRouterModels</a> (<a class="el" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> apiKey)</td></tr>
+<tr class="memdesc:ade55ef6889e37e05fab56e051d9c9444"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vérifie la disponibilité des modèles OpenRouter via l'API.  <br /></td></tr>
+<tr class="separator:ade55ef6889e37e05fab56e051d9c9444"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47f3d7e6c91e113224147578fbf658c7" id="r_a47f3d7e6c91e113224147578fbf658c7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1config_1_1ModelConfigManager.html#a47f3d7e6c91e113224147578fbf658c7">verifyOllamaModels</a> ()</td></tr>
+<tr class="memdesc:a47f3d7e6c91e113224147578fbf658c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vérifie la disponibilité des modèles Ollama locaux.  <br /></td></tr>
+<tr class="separator:a47f3d7e6c91e113224147578fbf658c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa410897562ed81956eba844109181e33" id="r_aa410897562ed81956eba844109181e33"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1config_1_1ModelConfigManager.html#aa410897562ed81956eba844109181e33">isCacheValid</a> (<a class="el" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> provider)</td></tr>
+<tr class="memdesc:aa410897562ed81956eba844109181e33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vérifie si le cache est encore valide.  <br /></td></tr>
+<tr class="separator:aa410897562ed81956eba844109181e33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af63190de67b151d0e7368ed276d15a87" id="r_af63190de67b151d0e7368ed276d15a87"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classediteurpanovisu_1_1config_1_1ModelConfig.html">ModelConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1config_1_1ModelConfigManager.html#af63190de67b151d0e7368ed276d15a87">getOpenRouterConfig</a> ()</td></tr>
+<tr class="separator:af63190de67b151d0e7368ed276d15a87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb582474639422b18d9b370c817c829b" id="r_afb582474639422b18d9b370c817c829b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classediteurpanovisu_1_1config_1_1ModelConfig.html">ModelConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1config_1_1ModelConfigManager.html#afb582474639422b18d9b370c817c829b">getOllamaConfig</a> ()</td></tr>
+<tr class="separator:afb582474639422b18d9b370c817c829b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Fonctions membres privées</h2></td></tr>
+<tr class="memitem:a3af308e37191920e6d315da9f7a7abe2" id="r_a3af308e37191920e6d315da9f7a7abe2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classediteurpanovisu_1_1config_1_1ModelConfig.html">ModelConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1config_1_1ModelConfigManager.html#a3af308e37191920e6d315da9f7a7abe2">createDefaultOpenRouterConfig</a> ()</td></tr>
+<tr class="memdesc:a3af308e37191920e6d315da9f7a7abe2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Crée une configuration OpenRouter par défaut.  <br /></td></tr>
+<tr class="separator:a3af308e37191920e6d315da9f7a7abe2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3eb9305bba70c2c83dbec20806d040e0" id="r_a3eb9305bba70c2c83dbec20806d040e0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classediteurpanovisu_1_1config_1_1ModelConfig.html">ModelConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1config_1_1ModelConfigManager.html#a3eb9305bba70c2c83dbec20806d040e0">createDefaultOllamaConfig</a> ()</td></tr>
+<tr class="memdesc:a3eb9305bba70c2c83dbec20806d040e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Crée une configuration Ollama par défaut.  <br /></td></tr>
+<tr class="separator:a3eb9305bba70c2c83dbec20806d040e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Attributs privés</h2></td></tr>
+<tr class="memitem:a67be170304fd9c5971ec04f6b3c30bb1" id="r_a67be170304fd9c5971ec04f6b3c30bb1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classediteurpanovisu_1_1config_1_1ModelConfig.html">ModelConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1config_1_1ModelConfigManager.html#a67be170304fd9c5971ec04f6b3c30bb1">openRouterConfig</a></td></tr>
+<tr class="separator:a67be170304fd9c5971ec04f6b3c30bb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f6e9a9327029237c345669583c1738d" id="r_a5f6e9a9327029237c345669583c1738d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classediteurpanovisu_1_1config_1_1ModelConfig.html">ModelConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1config_1_1ModelConfigManager.html#a5f6e9a9327029237c345669583c1738d">ollamaConfig</a></td></tr>
+<tr class="separator:a5f6e9a9327029237c345669583c1738d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a97a45d453c9bb91286164a40931bb6" id="r_a8a97a45d453c9bb91286164a40931bb6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="OpenLayers_8js.html#aa8a59085f9fc9a3b74d2e1e2281b3b06">Map</a>&lt; <a class="el" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a>, <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Instant</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1config_1_1ModelConfigManager.html#a8a97a45d453c9bb91286164a40931bb6">verificationCache</a> = <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">new</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">HashMap</a>&lt;&gt;()</td></tr>
+<tr class="separator:a8a97a45d453c9bb91286164a40931bb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-static-attribs" name="pri-static-attribs"></a>
+Attributs privés statiques</h2></td></tr>
+<tr class="memitem:a74fd98c184ab9aa10364636ac5d62549" id="r_a74fd98c184ab9aa10364636ac5d62549"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">static</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">final</a> <a class="el" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1config_1_1ModelConfigManager.html#a74fd98c184ab9aa10364636ac5d62549">OPENROUTER_CONFIG</a> = &quot;configPV/<a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">openrouter</a>-models.json&quot;</td></tr>
+<tr class="separator:a74fd98c184ab9aa10364636ac5d62549"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4534b7bf698946bc8d702aa9397d3ab8" id="r_a4534b7bf698946bc8d702aa9397d3ab8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">static</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">final</a> <a class="el" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1config_1_1ModelConfigManager.html#a4534b7bf698946bc8d702aa9397d3ab8">OLLAMA_CONFIG</a> = &quot;configPV/<a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">ollama</a>-models.json&quot;</td></tr>
+<tr class="separator:a4534b7bf698946bc8d702aa9397d3ab8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ad095a582d7eb56640c25d639ef931d" id="r_a2ad095a582d7eb56640c25d639ef931d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">static</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">final</a> <a class="el" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1config_1_1ModelConfigManager.html#a2ad095a582d7eb56640c25d639ef931d">CACHE_FILE</a> = &quot;configPV/models-cache.json&quot;</td></tr>
+<tr class="separator:a2ad095a582d7eb56640c25d639ef931d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc69d69c21fcbaf9c585e3b15aa90100" id="r_acc69d69c21fcbaf9c585e3b15aa90100"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">static</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">final</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Gson</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1config_1_1ModelConfigManager.html#acc69d69c21fcbaf9c585e3b15aa90100">gson</a> = <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">new</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">GsonBuilder</a>().<a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">setPrettyPrinting</a>().<a class="el" href="three_8min1_8js.html#a281b6e61d0db0aedeee43e8e203553fb">create</a>()</td></tr>
+<tr class="separator:acc69d69c21fcbaf9c585e3b15aa90100"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Gestionnaire de configuration des modèles IA Charge, sauvegarde et vérifie la disponibilité des modèles. </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="ModelConfigManager_8java_source.html#l00019">19</a> du fichier <a class="el" href="ModelConfigManager_8java_source.html">ModelConfigManager.java</a>.</p>
+</div><h2 class="groupheader">Documentation des fonctions membres</h2>
+<a id="a3eb9305bba70c2c83dbec20806d040e0" name="a3eb9305bba70c2c83dbec20806d040e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3eb9305bba70c2c83dbec20806d040e0">&#9670;&#160;</a></span>createDefaultOllamaConfig()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classediteurpanovisu_1_1config_1_1ModelConfig.html">ModelConfig</a> editeurpanovisu.config.ModelConfigManager.createDefaultOllamaConfig </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Crée une configuration Ollama par défaut. </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="ModelConfigManager_8java_source.html#l00227">227</a> du fichier <a class="el" href="ModelConfigManager_8java_source.html">ModelConfigManager.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="ModelConfig_8java_source.html#l00084">editeurpanovisu.config.ModelConfig.setModels()</a>, <a class="el" href="ModelConfig_8java_source.html#l00078">editeurpanovisu.config.ModelConfig.setServerUrl()</a>, <a class="el" href="ModelConfig_8java_source.html#l00081">editeurpanovisu.config.ModelConfig.setTimeoutSeconds()</a>, et <a class="el" href="ModelConfig_8java_source.html#l00072">editeurpanovisu.config.ModelConfig.setVerifyAtStartup()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="ModelConfigManager_8java_source.html#l00050">editeurpanovisu.config.ModelConfigManager.loadOllamaConfig()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1config_1_1ModelConfigManager_a3eb9305bba70c2c83dbec20806d040e0_cgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1config_1_1ModelConfigManager_a3eb9305bba70c2c83dbec20806d040e0_cgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1config_1_1ModelConfigManager_a3eb9305bba70c2c83dbec20806d040e0_cgraph" id="aclassediteurpanovisu_1_1config_1_1ModelConfigManager_a3eb9305bba70c2c83dbec20806d040e0_cgraph">
+<area shape="rect" title="Crée une configuration Ollama par défaut." alt="" coords="5,100,264,155"/>
+<area shape="rect" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="575,115,613,140"/>
+<area shape="poly" title=" " alt="" coords="172,98,235,60,272,42,311,29,372,13,422,3,446,3,471,7,528,29,548,44,564,62,585,100,581,103,559,65,544,47,525,34,470,12,446,9,423,9,373,18,313,34,274,47,237,64,175,102"/>
+<area shape="rect" href="classediteurpanovisu_1_1config_1_1ModelConfig.html#ab10a575383cedfe329049a585ede92e7" title=" " alt="" coords="312,44,527,84"/>
+<area shape="poly" title=" " alt="" coords="256,98,316,84,317,89,257,103"/>
+<area shape="rect" href="classediteurpanovisu_1_1config_1_1ModelConfig.html#a8fa925e7fbc2573614bd0241a67b0010" title=" " alt="" coords="312,108,527,148"/>
+<area shape="poly" title=" " alt="" coords="264,125,298,125,298,130,264,130"/>
+<area shape="rect" href="classediteurpanovisu_1_1config_1_1ModelConfig.html#ac9400c4cce0cc97c80726782d0c2039d" title=" " alt="" coords="312,172,527,212"/>
+<area shape="poly" title=" " alt="" coords="257,152,317,166,316,171,256,158"/>
+<area shape="rect" href="classediteurpanovisu_1_1config_1_1ModelConfig.html#a28329e56199d24c197c68bf472c2da0d" title=" " alt="" coords="312,236,527,276"/>
+<area shape="poly" title=" " alt="" coords="182,153,243,187,313,221,332,229,331,234,311,226,241,192,179,157"/>
+<area shape="poly" title=" " alt="" coords="494,81,528,93,564,109,561,114,526,98,492,86"/>
+<area shape="poly" title=" " alt="" coords="527,125,561,125,561,130,527,130"/>
+<area shape="poly" title=" " alt="" coords="492,169,526,157,561,141,564,146,528,162,494,174"/>
+<area shape="poly" title=" " alt="" coords="505,233,525,221,542,206,557,188,579,152,583,154,561,191,546,210,528,226,508,238"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1config_1_1ModelConfigManager_a3eb9305bba70c2c83dbec20806d040e0_icgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1config_1_1ModelConfigManager_a3eb9305bba70c2c83dbec20806d040e0_icgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1config_1_1ModelConfigManager_a3eb9305bba70c2c83dbec20806d040e0_icgraph" id="aclassediteurpanovisu_1_1config_1_1ModelConfigManager_a3eb9305bba70c2c83dbec20806d040e0_icgraph">
+<area shape="rect" title="Crée une configuration Ollama par défaut." alt="" coords="292,5,551,60"/>
+<area shape="rect" href="classediteurpanovisu_1_1config_1_1ModelConfigManager.html#a8cfc19a335475e096041167626937fe7" title="Charge la configuration Ollama depuis le fichier JSON." alt="" coords="5,13,244,53"/>
+<area shape="poly" title=" " alt="" coords="279,35,244,35,244,30,279,30"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a3af308e37191920e6d315da9f7a7abe2" name="a3af308e37191920e6d315da9f7a7abe2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3af308e37191920e6d315da9f7a7abe2">&#9670;&#160;</a></span>createDefaultOpenRouterConfig()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classediteurpanovisu_1_1config_1_1ModelConfig.html">ModelConfig</a> editeurpanovisu.config.ModelConfigManager.createDefaultOpenRouterConfig </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Crée une configuration OpenRouter par défaut. </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="ModelConfigManager_8java_source.html#l00216">216</a> du fichier <a class="el" href="ModelConfigManager_8java_source.html">ModelConfigManager.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="ModelConfig_8java_source.html#l00075">editeurpanovisu.config.ModelConfig.setCacheDurationSeconds()</a>, <a class="el" href="ModelConfig_8java_source.html#l00084">editeurpanovisu.config.ModelConfig.setModels()</a>, et <a class="el" href="ModelConfig_8java_source.html#l00072">editeurpanovisu.config.ModelConfig.setVerifyAtStartup()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="ModelConfigManager_8java_source.html#l00034">editeurpanovisu.config.ModelConfigManager.loadOpenRouterConfig()</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1config_1_1ModelConfigManager_a3af308e37191920e6d315da9f7a7abe2_cgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1config_1_1ModelConfigManager_a3af308e37191920e6d315da9f7a7abe2_cgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1config_1_1ModelConfigManager_a3af308e37191920e6d315da9f7a7abe2_cgraph" id="aclassediteurpanovisu_1_1config_1_1ModelConfigManager_a3af308e37191920e6d315da9f7a7abe2_cgraph">
+<area shape="rect" title="Crée une configuration OpenRouter par défaut." alt="" coords="5,65,252,120"/>
+<area shape="rect" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="585,80,624,105"/>
+<area shape="poly" title=" " alt="" coords="186,63,240,42,299,26,367,12,421,4,474,7,538,26,567,44,589,67,585,71,563,48,536,31,473,12,421,9,368,18,301,31,242,47,188,68"/>
+<area shape="rect" href="classediteurpanovisu_1_1config_1_1ModelConfig.html#a8c69472ffbf7355567358a462e44ef8c" title=" " alt="" coords="300,41,537,81"/>
+<area shape="poly" title=" " alt="" coords="252,76,286,72,287,78,253,82"/>
+<area shape="rect" href="classediteurpanovisu_1_1config_1_1ModelConfig.html#ab10a575383cedfe329049a585ede92e7" title=" " alt="" coords="311,105,526,145"/>
+<area shape="poly" title=" " alt="" coords="253,104,298,109,297,114,252,109"/>
+<area shape="rect" href="classediteurpanovisu_1_1config_1_1ModelConfig.html#a28329e56199d24c197c68bf472c2da0d" title=" " alt="" coords="311,169,526,209"/>
+<area shape="poly" title=" " alt="" coords="199,118,301,154,327,162,326,167,299,159,198,123"/>
+<area shape="poly" title=" " alt="" coords="536,78,572,84,572,90,535,83"/>
+<area shape="poly" title=" " alt="" coords="526,103,571,95,572,101,527,109"/>
+<area shape="poly" title=" " alt="" coords="510,166,536,154,562,135,583,114,587,117,565,139,539,159,513,171"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1config_1_1ModelConfigManager_a3af308e37191920e6d315da9f7a7abe2_icgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1config_1_1ModelConfigManager_a3af308e37191920e6d315da9f7a7abe2_icgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1config_1_1ModelConfigManager_a3af308e37191920e6d315da9f7a7abe2_icgraph" id="aclassediteurpanovisu_1_1config_1_1ModelConfigManager_a3af308e37191920e6d315da9f7a7abe2_icgraph">
+<area shape="rect" title="Crée une configuration OpenRouter par défaut." alt="" coords="323,5,569,60"/>
+<area shape="rect" href="classediteurpanovisu_1_1config_1_1ModelConfigManager.html#adb7b6dc0fc4d3b58e1e9961e5fc717d2" title="Charge la configuration OpenRouter depuis le fichier JSON." alt="" coords="5,13,275,53"/>
+<area shape="poly" title=" " alt="" coords="309,35,275,35,275,30,309,30"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="afb582474639422b18d9b370c817c829b" name="afb582474639422b18d9b370c817c829b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb582474639422b18d9b370c817c829b">&#9670;&#160;</a></span>getOllamaConfig()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classediteurpanovisu_1_1config_1_1ModelConfig.html">ModelConfig</a> editeurpanovisu.config.ModelConfigManager.getOllamaConfig </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="ModelConfigManager_8java_source.html#l00253">253</a> du fichier <a class="el" href="ModelConfigManager_8java_source.html">ModelConfigManager.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="ModelConfigManager_8java_source.html#l00028">editeurpanovisu.config.ModelConfigManager.ollamaConfig</a>.</p>
+
+</div>
+</div>
+<a id="af63190de67b151d0e7368ed276d15a87" name="af63190de67b151d0e7368ed276d15a87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af63190de67b151d0e7368ed276d15a87">&#9670;&#160;</a></span>getOpenRouterConfig()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classediteurpanovisu_1_1config_1_1ModelConfig.html">ModelConfig</a> editeurpanovisu.config.ModelConfigManager.getOpenRouterConfig </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="ModelConfigManager_8java_source.html#l00249">249</a> du fichier <a class="el" href="ModelConfigManager_8java_source.html">ModelConfigManager.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="ModelConfigManager_8java_source.html#l00027">editeurpanovisu.config.ModelConfigManager.openRouterConfig</a>.</p>
+
+</div>
+</div>
+<a id="aa410897562ed81956eba844109181e33" name="aa410897562ed81956eba844109181e33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa410897562ed81956eba844109181e33">&#9670;&#160;</a></span>isCacheValid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">boolean</a> editeurpanovisu.config.ModelConfigManager.isCacheValid </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a>&#160;</td>
+          <td class="paramname"><em>provider</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Vérifie si le cache est encore valide. </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="ModelConfigManager_8java_source.html#l00239">239</a> du fichier <a class="el" href="ModelConfigManager_8java_source.html">ModelConfigManager.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="ModelConfig_8java_source.html#l00066">editeurpanovisu.config.ModelConfig.getCacheDurationSeconds()</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="ModelConfigManager_8java_source.html#l00027">editeurpanovisu.config.ModelConfigManager.openRouterConfig</a>, et <a class="el" href="ModelConfigManager_8java_source.html#l00029">editeurpanovisu.config.ModelConfigManager.verificationCache</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1config_1_1ModelConfigManager_aa410897562ed81956eba844109181e33_cgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1config_1_1ModelConfigManager_aa410897562ed81956eba844109181e33_cgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1config_1_1ModelConfigManager_aa410897562ed81956eba844109181e33_cgraph" id="aclassediteurpanovisu_1_1config_1_1ModelConfigManager_aa410897562ed81956eba844109181e33_cgraph">
+<area shape="rect" title="Vérifie si le cache est encore valide." alt="" coords="5,35,220,75"/>
+<area shape="rect" href="classediteurpanovisu_1_1config_1_1ModelConfig.html#aca8c6df378569d77e6545f4afadb9051" title=" " alt="" coords="268,5,507,45"/>
+<area shape="poly" title=" " alt="" coords="220,41,254,37,255,42,221,46"/>
+<area shape="rect" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="368,70,407,95"/>
+<area shape="poly" title=" " alt="" coords="221,63,354,77,354,82,220,68"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a8cfc19a335475e096041167626937fe7" name="a8cfc19a335475e096041167626937fe7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8cfc19a335475e096041167626937fe7">&#9670;&#160;</a></span>loadOllamaConfig()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classediteurpanovisu_1_1config_1_1ModelConfig.html">ModelConfig</a> editeurpanovisu.config.ModelConfigManager.loadOllamaConfig </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Charge la configuration Ollama depuis le fichier JSON. </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="ModelConfigManager_8java_source.html#l00050">50</a> du fichier <a class="el" href="ModelConfigManager_8java_source.html">ModelConfigManager.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="ModelConfigManager_8java_source.html#l00227">editeurpanovisu.config.ModelConfigManager.createDefaultOllamaConfig()</a>, <a class="el" href="leaflet_8js_source.html#l00005">e</a>, <a class="el" href="ModelConfig_8java_source.html#l00069">editeurpanovisu.config.ModelConfig.getModels()</a>, <a class="el" href="ModelConfigManager_8java_source.html#l00025">editeurpanovisu.config.ModelConfigManager.gson</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="ModelConfigManager_8java_source.html#l00022">editeurpanovisu.config.ModelConfigManager.OLLAMA_CONFIG</a>, <a class="el" href="ModelConfigManager_8java_source.html#l00028">editeurpanovisu.config.ModelConfigManager.ollamaConfig</a>, <a class="el" href="three_8min1_8js_source.html#l00625">Path</a>, et <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1config_1_1ModelConfigManager_a8cfc19a335475e096041167626937fe7_cgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1config_1_1ModelConfigManager_a8cfc19a335475e096041167626937fe7_cgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1config_1_1ModelConfigManager_a8cfc19a335475e096041167626937fe7_cgraph" id="aclassediteurpanovisu_1_1config_1_1ModelConfigManager_a8cfc19a335475e096041167626937fe7_cgraph">
+<area shape="rect" title="Charge la configuration Ollama depuis le fichier JSON." alt="" coords="5,297,244,337"/>
+<area shape="rect" href="classediteurpanovisu_1_1config_1_1ModelConfigManager.html#a3eb9305bba70c2c83dbec20806d040e0" title="Crée une configuration Ollama par défaut." alt="" coords="292,136,551,191"/>
+<area shape="poly" title=" " alt="" coords="163,295,354,195,356,200,166,299"/>
+<area shape="rect" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="861,151,900,176"/>
+<area shape="poly" title=" " alt="" coords="244,324,393,332,559,333,638,329,710,321,769,308,812,289,835,269,852,242,872,189,877,191,857,245,839,272,815,294,770,313,710,326,638,334,559,338,392,337,244,329"/>
+<area shape="rect" href="classediteurpanovisu_1_1config_1_1ModelConfig.html#ac2e0f11b3aebd7d9a55013906070f233" title=" " alt="" coords="314,354,529,394"/>
+<area shape="poly" title=" " alt="" coords="229,334,304,349,303,354,228,340"/>
+<area shape="poly" title=" " alt="" coords="447,134,511,79,553,53,598,33,658,14,709,3,734,3,759,8,786,18,815,33,839,55,857,82,869,111,877,137,872,138,864,113,852,85,835,58,812,38,783,23,757,13,733,9,710,9,660,19,600,38,555,58,515,84,451,138"/>
+<area shape="rect" href="classediteurpanovisu_1_1config_1_1ModelConfig.html#ab10a575383cedfe329049a585ede92e7" title=" " alt="" coords="599,48,813,88"/>
+<area shape="poly" title=" " alt="" coords="494,134,598,97,622,89,624,94,600,102,496,139"/>
+<area shape="rect" href="classediteurpanovisu_1_1config_1_1ModelConfig.html#a8fa925e7fbc2573614bd0241a67b0010" title=" " alt="" coords="599,112,813,152"/>
+<area shape="poly" title=" " alt="" coords="551,146,584,143,585,148,551,152"/>
+<area shape="rect" href="classediteurpanovisu_1_1config_1_1ModelConfig.html#ac9400c4cce0cc97c80726782d0c2039d" title=" " alt="" coords="599,176,813,216"/>
+<area shape="poly" title=" " alt="" coords="551,176,585,179,584,185,551,181"/>
+<area shape="rect" href="classediteurpanovisu_1_1config_1_1ModelConfig.html#a28329e56199d24c197c68bf472c2da0d" title=" " alt="" coords="599,240,813,280"/>
+<area shape="poly" title=" " alt="" coords="496,189,600,225,624,233,622,238,598,230,494,194"/>
+<area shape="poly" title=" " alt="" coords="790,85,815,97,841,117,863,139,859,143,838,121,812,102,787,90"/>
+<area shape="poly" title=" " alt="" coords="814,149,848,155,847,160,813,154"/>
+<area shape="poly" title=" " alt="" coords="813,173,847,167,848,172,814,178"/>
+<area shape="poly" title=" " alt="" coords="787,237,812,225,838,206,859,185,863,188,841,210,815,230,790,242"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="adb7b6dc0fc4d3b58e1e9961e5fc717d2" name="adb7b6dc0fc4d3b58e1e9961e5fc717d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb7b6dc0fc4d3b58e1e9961e5fc717d2">&#9670;&#160;</a></span>loadOpenRouterConfig()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classediteurpanovisu_1_1config_1_1ModelConfig.html">ModelConfig</a> editeurpanovisu.config.ModelConfigManager.loadOpenRouterConfig </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Charge la configuration OpenRouter depuis le fichier JSON. </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="ModelConfigManager_8java_source.html#l00034">34</a> du fichier <a class="el" href="ModelConfigManager_8java_source.html">ModelConfigManager.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="ModelConfigManager_8java_source.html#l00216">editeurpanovisu.config.ModelConfigManager.createDefaultOpenRouterConfig()</a>, <a class="el" href="leaflet_8js_source.html#l00005">e</a>, <a class="el" href="ModelConfig_8java_source.html#l00069">editeurpanovisu.config.ModelConfig.getModels()</a>, <a class="el" href="ModelConfigManager_8java_source.html#l00025">editeurpanovisu.config.ModelConfigManager.gson</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="ModelConfigManager_8java_source.html#l00021">editeurpanovisu.config.ModelConfigManager.OPENROUTER_CONFIG</a>, <a class="el" href="ModelConfigManager_8java_source.html#l00027">editeurpanovisu.config.ModelConfigManager.openRouterConfig</a>, <a class="el" href="three_8min1_8js_source.html#l00625">Path</a>, et <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1config_1_1ModelConfigManager_adb7b6dc0fc4d3b58e1e9961e5fc717d2_cgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1config_1_1ModelConfigManager_adb7b6dc0fc4d3b58e1e9961e5fc717d2_cgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1config_1_1ModelConfigManager_adb7b6dc0fc4d3b58e1e9961e5fc717d2_cgraph" id="aclassediteurpanovisu_1_1config_1_1ModelConfigManager_adb7b6dc0fc4d3b58e1e9961e5fc717d2_cgraph">
+<area shape="rect" title="Charge la configuration OpenRouter depuis le fichier JSON." alt="" coords="5,232,275,272"/>
+<area shape="rect" href="classediteurpanovisu_1_1config_1_1ModelConfigManager.html#a3af308e37191920e6d315da9f7a7abe2" title="Crée une configuration OpenRouter par défaut." alt="" coords="323,103,569,158"/>
+<area shape="poly" title=" " alt="" coords="190,229,363,160,365,165,192,234"/>
+<area shape="rect" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="903,118,941,143"/>
+<area shape="poly" title=" " alt="" coords="275,259,427,265,596,265,676,261,748,253,809,241,853,224,872,210,887,193,909,155,913,158,891,196,875,214,856,229,810,246,749,258,676,266,596,270,427,270,275,264"/>
+<area shape="rect" href="classediteurpanovisu_1_1config_1_1ModelConfig.html#ac2e0f11b3aebd7d9a55013906070f233" title=" " alt="" coords="339,289,553,329"/>
+<area shape="poly" title=" " alt="" coords="248,269,326,284,325,289,247,275"/>
+<area shape="poly" title=" " alt="" coords="482,101,543,63,579,45,617,32,684,14,739,3,766,3,793,8,823,17,856,32,876,47,892,65,913,103,909,106,887,68,872,50,853,37,821,22,792,13,765,9,740,9,685,19,618,37,581,50,545,67,485,105"/>
+<area shape="rect" href="classediteurpanovisu_1_1config_1_1ModelConfig.html#a8c69472ffbf7355567358a462e44ef8c" title=" " alt="" coords="617,47,855,87"/>
+<area shape="poly" title=" " alt="" coords="569,101,631,87,632,92,570,106"/>
+<area shape="rect" href="classediteurpanovisu_1_1config_1_1ModelConfig.html#ab10a575383cedfe329049a585ede92e7" title=" " alt="" coords="629,111,843,151"/>
+<area shape="poly" title=" " alt="" coords="570,128,615,128,615,133,570,133"/>
+<area shape="rect" href="classediteurpanovisu_1_1config_1_1ModelConfig.html#a28329e56199d24c197c68bf472c2da0d" title=" " alt="" coords="629,175,843,215"/>
+<area shape="poly" title=" " alt="" coords="570,155,632,169,631,174,569,160"/>
+<area shape="poly" title=" " alt="" coords="820,84,856,96,892,112,889,117,854,101,818,89"/>
+<area shape="poly" title=" " alt="" coords="843,128,889,128,889,133,843,133"/>
+<area shape="poly" title=" " alt="" coords="818,172,854,160,889,144,892,149,856,165,820,177"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a58ced10d75ecb26c8937b7a9e9443623" name="a58ced10d75ecb26c8937b7a9e9443623"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58ced10d75ecb26c8937b7a9e9443623">&#9670;&#160;</a></span>saveOllamaConfig()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">void</a> editeurpanovisu.config.ModelConfigManager.saveOllamaConfig </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classediteurpanovisu_1_1config_1_1ModelConfig.html">ModelConfig</a>&#160;</td>
+          <td class="paramname"><em>config</em></td><td>)</td>
+          <td> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">throws</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">IOException</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sauvegarde la configuration Ollama. </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="ModelConfigManager_8java_source.html#l00076">76</a> du fichier <a class="el" href="ModelConfigManager_8java_source.html">ModelConfigManager.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="ModelConfigManager_8java_source.html#l00025">editeurpanovisu.config.ModelConfigManager.gson</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="ModelConfigManager_8java_source.html#l00022">editeurpanovisu.config.ModelConfigManager.OLLAMA_CONFIG</a>, <a class="el" href="ModelConfigManager_8java_source.html#l00028">editeurpanovisu.config.ModelConfigManager.ollamaConfig</a>, <a class="el" href="three_8min1_8js_source.html#l00625">Path</a>, et <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1config_1_1ModelConfigManager_a58ced10d75ecb26c8937b7a9e9443623_cgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1config_1_1ModelConfigManager_a58ced10d75ecb26c8937b7a9e9443623_cgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1config_1_1ModelConfigManager_a58ced10d75ecb26c8937b7a9e9443623_cgraph" id="aclassediteurpanovisu_1_1config_1_1ModelConfigManager_a58ced10d75ecb26c8937b7a9e9443623_cgraph">
+<area shape="rect" title="Sauvegarde la configuration Ollama." alt="" coords="5,5,248,45"/>
+<area shape="rect" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="296,13,335,38"/>
+<area shape="poly" title=" " alt="" coords="248,23,282,23,282,28,248,28"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aecc363f38905dc264995ff5d31e1b32f" name="aecc363f38905dc264995ff5d31e1b32f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aecc363f38905dc264995ff5d31e1b32f">&#9670;&#160;</a></span>saveOpenRouterConfig()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">void</a> editeurpanovisu.config.ModelConfigManager.saveOpenRouterConfig </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classediteurpanovisu_1_1config_1_1ModelConfig.html">ModelConfig</a>&#160;</td>
+          <td class="paramname"><em>config</em></td><td>)</td>
+          <td> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">throws</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">IOException</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sauvegarde la configuration OpenRouter. </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="ModelConfigManager_8java_source.html#l00066">66</a> du fichier <a class="el" href="ModelConfigManager_8java_source.html">ModelConfigManager.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="ModelConfigManager_8java_source.html#l00025">editeurpanovisu.config.ModelConfigManager.gson</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="ModelConfigManager_8java_source.html#l00021">editeurpanovisu.config.ModelConfigManager.OPENROUTER_CONFIG</a>, <a class="el" href="ModelConfigManager_8java_source.html#l00027">editeurpanovisu.config.ModelConfigManager.openRouterConfig</a>, <a class="el" href="three_8min1_8js_source.html#l00625">Path</a>, et <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1config_1_1ModelConfigManager_aecc363f38905dc264995ff5d31e1b32f_cgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1config_1_1ModelConfigManager_aecc363f38905dc264995ff5d31e1b32f_cgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1config_1_1ModelConfigManager_aecc363f38905dc264995ff5d31e1b32f_cgraph" id="aclassediteurpanovisu_1_1config_1_1ModelConfigManager_aecc363f38905dc264995ff5d31e1b32f_cgraph">
+<area shape="rect" title="Sauvegarde la configuration OpenRouter." alt="" coords="5,5,277,45"/>
+<area shape="rect" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="325,13,364,38"/>
+<area shape="poly" title=" " alt="" coords="278,23,312,23,312,28,278,28"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a47f3d7e6c91e113224147578fbf658c7" name="a47f3d7e6c91e113224147578fbf658c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47f3d7e6c91e113224147578fbf658c7">&#9670;&#160;</a></span>verifyOllamaModels()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">void</a> editeurpanovisu.config.ModelConfigManager.verifyOllamaModels </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Vérifie la disponibilité des modèles Ollama locaux. </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="ModelConfigManager_8java_source.html#l00145">145</a> du fichier <a class="el" href="ModelConfigManager_8java_source.html">ModelConfigManager.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="leaflet_8js_source.html#l00005">e</a>, <a class="el" href="ModelConfig_8java_source.html#l00091">editeurpanovisu.config.ModelConfig.getEnabledModels()</a>, <a class="el" href="ModelConfig_8java_source.html#l00069">editeurpanovisu.config.ModelConfig.getModels()</a>, <a class="el" href="ModelConfig_8java_source.html#l00067">editeurpanovisu.config.ModelConfig.getServerUrl()</a>, <a class="el" href="leaflet_8js_source.html#l00005">i()</a>, <a class="el" href="ModelConfig_8java_source.html#l00065">editeurpanovisu.config.ModelConfig.isVerifyAtStartup()</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="ModelConfigManager_8java_source.html#l00028">editeurpanovisu.config.ModelConfigManager.ollamaConfig</a>, <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>, et <a class="el" href="ModelConfigManager_8java_source.html#l00029">editeurpanovisu.config.ModelConfigManager.verificationCache</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1config_1_1ModelConfigManager_a47f3d7e6c91e113224147578fbf658c7_cgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1config_1_1ModelConfigManager_a47f3d7e6c91e113224147578fbf658c7_cgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1config_1_1ModelConfigManager_a47f3d7e6c91e113224147578fbf658c7_cgraph" id="aclassediteurpanovisu_1_1config_1_1ModelConfigManager_a47f3d7e6c91e113224147578fbf658c7_cgraph">
+<area shape="rect" title="Vérifie la disponibilité des modèles Ollama locaux." alt="" coords="5,152,260,192"/>
+<area shape="rect" href="classediteurpanovisu_1_1config_1_1ModelConfig.html#afe4262572e9a926087ecfc34e4f8ee7d" title="Retourne la liste des modèles activés et disponibles, triés par priorité" alt="" coords="308,5,523,45"/>
+<area shape="poly" title=" " alt="" coords="161,150,226,107,307,62,338,48,341,53,309,66,229,111,164,154"/>
+<area shape="rect" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="659,70,697,95"/>
+<area shape="poly" title=" " alt="" coords="177,150,238,126,307,105,403,90,498,82,645,79,645,85,498,87,404,95,309,111,239,131,179,154"/>
+<area shape="rect" href="classediteurpanovisu_1_1config_1_1ModelConfig.html#ac2e0f11b3aebd7d9a55013906070f233" title=" " alt="" coords="308,120,523,160"/>
+<area shape="poly" title=" " alt="" coords="260,155,294,151,295,156,260,160"/>
+<area shape="rect" href="classediteurpanovisu_1_1config_1_1ModelConfig.html#a903bd61be72ad72991cd7bcba627df7e" title=" " alt="" coords="308,184,523,224"/>
+<area shape="poly" title=" " alt="" coords="260,184,295,188,294,193,260,189"/>
+<area shape="rect" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="396,249,435,274"/>
+<area shape="poly" title=" " alt="" coords="185,190,309,233,383,252,382,257,307,239,183,195"/>
+<area shape="rect" href="classediteurpanovisu_1_1config_1_1ModelConfig.html#aa15a307de200331bb17336f447c472c8" title=" " alt="" coords="308,299,523,339"/>
+<area shape="poly" title=" " alt="" coords="161,190,226,237,309,284,326,291,324,296,307,289,224,241,158,195"/>
+<area shape="rect" href="classediteurpanovisu_1_1config_1_1ModelConfig_1_1ModelEntry.html#ac93f66df901b8e23e25ac7be99fc2606" title=" " alt="" coords="571,5,785,45"/>
+<area shape="poly" title=" " alt="" coords="523,23,557,23,557,28,523,28"/>
+<area shape="poly" title=" " alt="" coords="508,43,646,73,645,78,507,48"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ade55ef6889e37e05fab56e051d9c9444" name="ade55ef6889e37e05fab56e051d9c9444"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade55ef6889e37e05fab56e051d9c9444">&#9670;&#160;</a></span>verifyOpenRouterModels()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">void</a> editeurpanovisu.config.ModelConfigManager.verifyOpenRouterModels </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a>&#160;</td>
+          <td class="paramname"><em>apiKey</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Vérifie la disponibilité des modèles OpenRouter via l'API. </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="ModelConfigManager_8java_source.html#l00086">86</a> du fichier <a class="el" href="ModelConfigManager_8java_source.html">ModelConfigManager.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="leaflet_8js_source.html#l00005">e</a>, <a class="el" href="ModelConfig_8java_source.html#l00091">editeurpanovisu.config.ModelConfig.getEnabledModels()</a>, <a class="el" href="ModelConfig_8java_source.html#l00069">editeurpanovisu.config.ModelConfig.getModels()</a>, <a class="el" href="leaflet_8js_source.html#l00005">i()</a>, <a class="el" href="ModelConfig_8java_source.html#l00065">editeurpanovisu.config.ModelConfig.isVerifyAtStartup()</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="ModelConfigManager_8java_source.html#l00027">editeurpanovisu.config.ModelConfigManager.openRouterConfig</a>, <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>, et <a class="el" href="ModelConfigManager_8java_source.html#l00029">editeurpanovisu.config.ModelConfigManager.verificationCache</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1config_1_1ModelConfigManager_ade55ef6889e37e05fab56e051d9c9444_cgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1config_1_1ModelConfigManager_ade55ef6889e37e05fab56e051d9c9444_cgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1config_1_1ModelConfigManager_ade55ef6889e37e05fab56e051d9c9444_cgraph" id="aclassediteurpanovisu_1_1config_1_1ModelConfigManager_ade55ef6889e37e05fab56e051d9c9444_cgraph">
+<area shape="rect" title="Vérifie la disponibilité des modèles OpenRouter via l&#39;API." alt="" coords="5,120,289,160"/>
+<area shape="rect" href="classediteurpanovisu_1_1config_1_1ModelConfig.html#afe4262572e9a926087ecfc34e4f8ee7d" title="Retourne la liste des modèles activés et disponibles, triés par priorité" alt="" coords="337,5,552,45"/>
+<area shape="poly" title=" " alt="" coords="196,117,336,62,373,48,375,53,338,66,198,122"/>
+<area shape="rect" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="688,70,727,95"/>
+<area shape="poly" title=" " alt="" coords="255,117,337,105,528,89,674,81,674,86,529,94,338,111,256,123"/>
+<area shape="rect" href="classediteurpanovisu_1_1config_1_1ModelConfig.html#ac2e0f11b3aebd7d9a55013906070f233" title=" " alt="" coords="337,120,552,160"/>
+<area shape="poly" title=" " alt="" coords="290,137,323,137,323,143,290,143"/>
+<area shape="rect" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="425,185,464,210"/>
+<area shape="poly" title=" " alt="" coords="252,157,412,189,411,194,251,163"/>
+<area shape="rect" href="classediteurpanovisu_1_1config_1_1ModelConfig.html#aa15a307de200331bb17336f447c472c8" title=" " alt="" coords="337,235,552,275"/>
+<area shape="poly" title=" " alt="" coords="192,158,260,188,338,220,360,228,359,233,336,225,258,193,189,162"/>
+<area shape="rect" href="classediteurpanovisu_1_1config_1_1ModelConfig_1_1ModelEntry.html#ac93f66df901b8e23e25ac7be99fc2606" title=" " alt="" coords="600,5,815,45"/>
+<area shape="poly" title=" " alt="" coords="552,23,586,23,586,28,552,28"/>
+<area shape="poly" title=" " alt="" coords="538,43,675,73,674,78,536,48"/>
+</map>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">Documentation des données membres</h2>
+<a id="a2ad095a582d7eb56640c25d639ef931d" name="a2ad095a582d7eb56640c25d639ef931d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ad095a582d7eb56640c25d639ef931d">&#9670;&#160;</a></span>CACHE_FILE</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">final</a> <a class="el" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> editeurpanovisu.config.ModelConfigManager.CACHE_FILE = &quot;configPV/models-cache.json&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="ModelConfigManager_8java_source.html#l00023">23</a> du fichier <a class="el" href="ModelConfigManager_8java_source.html">ModelConfigManager.java</a>.</p>
+
+</div>
+</div>
+<a id="acc69d69c21fcbaf9c585e3b15aa90100" name="acc69d69c21fcbaf9c585e3b15aa90100"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc69d69c21fcbaf9c585e3b15aa90100">&#9670;&#160;</a></span>gson</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">final</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Gson</a> editeurpanovisu.config.ModelConfigManager.gson = <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">new</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">GsonBuilder</a>().<a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">setPrettyPrinting</a>().<a class="el" href="three_8min1_8js.html#a281b6e61d0db0aedeee43e8e203553fb">create</a>()</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="ModelConfigManager_8java_source.html#l00025">25</a> du fichier <a class="el" href="ModelConfigManager_8java_source.html">ModelConfigManager.java</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="ModelConfigManager_8java_source.html#l00050">editeurpanovisu.config.ModelConfigManager.loadOllamaConfig()</a>, <a class="el" href="ModelConfigManager_8java_source.html#l00034">editeurpanovisu.config.ModelConfigManager.loadOpenRouterConfig()</a>, <a class="el" href="ModelConfigManager_8java_source.html#l00076">editeurpanovisu.config.ModelConfigManager.saveOllamaConfig()</a>, et <a class="el" href="ModelConfigManager_8java_source.html#l00066">editeurpanovisu.config.ModelConfigManager.saveOpenRouterConfig()</a>.</p>
+
+</div>
+</div>
+<a id="a4534b7bf698946bc8d702aa9397d3ab8" name="a4534b7bf698946bc8d702aa9397d3ab8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4534b7bf698946bc8d702aa9397d3ab8">&#9670;&#160;</a></span>OLLAMA_CONFIG</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">final</a> <a class="el" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> editeurpanovisu.config.ModelConfigManager.OLLAMA_CONFIG = &quot;configPV/<a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">ollama</a>-models.json&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="ModelConfigManager_8java_source.html#l00022">22</a> du fichier <a class="el" href="ModelConfigManager_8java_source.html">ModelConfigManager.java</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="ModelConfigManager_8java_source.html#l00050">editeurpanovisu.config.ModelConfigManager.loadOllamaConfig()</a>, et <a class="el" href="ModelConfigManager_8java_source.html#l00076">editeurpanovisu.config.ModelConfigManager.saveOllamaConfig()</a>.</p>
+
+</div>
+</div>
+<a id="a5f6e9a9327029237c345669583c1738d" name="a5f6e9a9327029237c345669583c1738d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f6e9a9327029237c345669583c1738d">&#9670;&#160;</a></span>ollamaConfig</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classediteurpanovisu_1_1config_1_1ModelConfig.html">ModelConfig</a> editeurpanovisu.config.ModelConfigManager.ollamaConfig</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="ModelConfigManager_8java_source.html#l00028">28</a> du fichier <a class="el" href="ModelConfigManager_8java_source.html">ModelConfigManager.java</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="ModelConfigManager_8java_source.html#l00253">editeurpanovisu.config.ModelConfigManager.getOllamaConfig()</a>, <a class="el" href="ModelConfigManager_8java_source.html#l00050">editeurpanovisu.config.ModelConfigManager.loadOllamaConfig()</a>, <a class="el" href="ModelConfigManager_8java_source.html#l00076">editeurpanovisu.config.ModelConfigManager.saveOllamaConfig()</a>, et <a class="el" href="ModelConfigManager_8java_source.html#l00145">editeurpanovisu.config.ModelConfigManager.verifyOllamaModels()</a>.</p>
+
+</div>
+</div>
+<a id="a74fd98c184ab9aa10364636ac5d62549" name="a74fd98c184ab9aa10364636ac5d62549"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74fd98c184ab9aa10364636ac5d62549">&#9670;&#160;</a></span>OPENROUTER_CONFIG</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">final</a> <a class="el" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> editeurpanovisu.config.ModelConfigManager.OPENROUTER_CONFIG = &quot;configPV/<a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">openrouter</a>-models.json&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="ModelConfigManager_8java_source.html#l00021">21</a> du fichier <a class="el" href="ModelConfigManager_8java_source.html">ModelConfigManager.java</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="ModelConfigManager_8java_source.html#l00034">editeurpanovisu.config.ModelConfigManager.loadOpenRouterConfig()</a>, et <a class="el" href="ModelConfigManager_8java_source.html#l00066">editeurpanovisu.config.ModelConfigManager.saveOpenRouterConfig()</a>.</p>
+
+</div>
+</div>
+<a id="a67be170304fd9c5971ec04f6b3c30bb1" name="a67be170304fd9c5971ec04f6b3c30bb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67be170304fd9c5971ec04f6b3c30bb1">&#9670;&#160;</a></span>openRouterConfig</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classediteurpanovisu_1_1config_1_1ModelConfig.html">ModelConfig</a> editeurpanovisu.config.ModelConfigManager.openRouterConfig</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="ModelConfigManager_8java_source.html#l00027">27</a> du fichier <a class="el" href="ModelConfigManager_8java_source.html">ModelConfigManager.java</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="ModelConfigManager_8java_source.html#l00249">editeurpanovisu.config.ModelConfigManager.getOpenRouterConfig()</a>, <a class="el" href="ModelConfigManager_8java_source.html#l00239">editeurpanovisu.config.ModelConfigManager.isCacheValid()</a>, <a class="el" href="ModelConfigManager_8java_source.html#l00034">editeurpanovisu.config.ModelConfigManager.loadOpenRouterConfig()</a>, <a class="el" href="ModelConfigManager_8java_source.html#l00066">editeurpanovisu.config.ModelConfigManager.saveOpenRouterConfig()</a>, et <a class="el" href="ModelConfigManager_8java_source.html#l00086">editeurpanovisu.config.ModelConfigManager.verifyOpenRouterModels()</a>.</p>
+
+</div>
+</div>
+<a id="a8a97a45d453c9bb91286164a40931bb6" name="a8a97a45d453c9bb91286164a40931bb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a97a45d453c9bb91286164a40931bb6">&#9670;&#160;</a></span>verificationCache</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="OpenLayers_8js.html#aa8a59085f9fc9a3b74d2e1e2281b3b06">Map</a>&lt;<a class="el" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a>, <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Instant</a>&gt; editeurpanovisu.config.ModelConfigManager.verificationCache = <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">new</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">HashMap</a>&lt;&gt;()</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="ModelConfigManager_8java_source.html#l00029">29</a> du fichier <a class="el" href="ModelConfigManager_8java_source.html">ModelConfigManager.java</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="ModelConfigManager_8java_source.html#l00239">editeurpanovisu.config.ModelConfigManager.isCacheValid()</a>, <a class="el" href="ModelConfigManager_8java_source.html#l00145">editeurpanovisu.config.ModelConfigManager.verifyOllamaModels()</a>, et <a class="el" href="ModelConfigManager_8java_source.html#l00086">editeurpanovisu.config.ModelConfigManager.verifyOpenRouterModels()</a>.</p>
+
+</div>
+</div>
+<hr/>La documentation de cette classe a été générée à partir du fichier suivant :<ul>
+<li>src/editeurpanovisu/config/<a class="el" href="ModelConfigManager_8java_source.html">ModelConfigManager.java</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespaceediteurpanovisu.html">editeurpanovisu</a></li><li class="navelem"><a class="el" href="namespaceediteurpanovisu_1_1config.html">config</a></li><li class="navelem"><a class="el" href="classediteurpanovisu_1_1config_1_1ModelConfigManager.html">ModelConfigManager</a></li>
+    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<map id="editeurpanovisu.ModelsConfigController.setupOllamaTable" name="editeurpanovisu.ModelsConfigController.setupOllamaTable">
+<area shape="rect" id="Node000001" title="Configuration de la table Ollama." alt="" coords="5,5,224,45"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="805,34,844,59"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="224,20,272,19,515,11,622,14,758,28,792,35,791,40,757,33,621,19,515,17,272,24,224,25"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1ModelsConfigController.html#a8bba4eadd19486d77d05d4018bb207fc" title="Configure le drag &amp; drop pour réordonner les lignes d&#39;une table." alt="" coords="272,33,491,73"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="224,34,259,38,258,43,224,39"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="491,49,792,44,792,50,491,54"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1ModelsConfigController.html#ae0fd12e069fa69801a458801b6ec419a" title="Met à jour les numéros de priorité après réordonnancement." alt="" coords="539,84,757,124"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="488,71,529,79,528,84,487,76"/>
+<area shape="poly" id="edge6_Node000004_Node000002" title=" " alt="" coords="709,81,792,54,793,59,711,86"/>
+<area shape="rect" id="Node000005" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="805,91,844,117"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="758,101,791,101,791,107,758,107"/>
+</map>

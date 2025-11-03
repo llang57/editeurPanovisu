@@ -12,6 +12,7 @@ var classediteurpanovisu_1_1EditeurPanovisu =
     [ "afficheNord", "classediteurpanovisu_1_1EditeurPanovisu.html#ab864e10eedd3d8aa6abdba8ad1fd1d17", null ],
     [ "affichePanoChoisit", "classediteurpanovisu_1_1EditeurPanovisu.html#abbfba9b403a76c61f1339e5be3dad32b", null ],
     [ "affichePoV", "classediteurpanovisu_1_1EditeurPanovisu.html#ab8da99461ff612be4471f67b7bab6107", null ],
+    [ "afficherDialogueModelesIA", "classediteurpanovisu_1_1EditeurPanovisu.html#a4df12e1056d68b35c71f0c88d6b7a24d", null ],
     [ "afficherDialogueTheme", "classediteurpanovisu_1_1EditeurPanovisu.html#adc41ea81b5b3c25ced8616a3eff2b23d", null ],
     [ "aideapropos", "classediteurpanovisu_1_1EditeurPanovisu.html#a0b5c334b8920e4bd99a4b47de742ae69", null ],
     [ "ajouteAffichageHotspots", "classediteurpanovisu_1_1EditeurPanovisu.html#a8e7964d830450b8c7fdc2ba968263698", null ],

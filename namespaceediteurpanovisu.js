@@ -1,5 +1,6 @@
 var namespaceediteurpanovisu =
 [
+    [ "config", "namespaceediteurpanovisu_1_1config.html", "namespaceediteurpanovisu_1_1config" ],
     [ "gpu", "namespaceediteurpanovisu_1_1gpu.html", "namespaceediteurpanovisu_1_1gpu" ],
     [ "util", "namespaceediteurpanovisu_1_1util.html", "namespaceediteurpanovisu_1_1util" ],
     [ "AideDialogController", "classediteurpanovisu_1_1AideDialogController.html", "classediteurpanovisu_1_1AideDialogController" ],
@@ -32,6 +33,7 @@ var namespaceediteurpanovisu =
     [ "MapMarkerWithHtml", "classediteurpanovisu_1_1MapMarkerWithHtml.html", "classediteurpanovisu_1_1MapMarkerWithHtml" ],
     [ "MarkdownViewer", "classediteurpanovisu_1_1MarkdownViewer.html", "classediteurpanovisu_1_1MarkdownViewer" ],
     [ "MarqueurGeolocalisation", "classediteurpanovisu_1_1MarqueurGeolocalisation.html", "classediteurpanovisu_1_1MarqueurGeolocalisation" ],
+    [ "ModelsConfigController", "classediteurpanovisu_1_1ModelsConfigController.html", "classediteurpanovisu_1_1ModelsConfigController" ],
     [ "NavigateurCarte", "classediteurpanovisu_1_1NavigateurCarte.html", "classediteurpanovisu_1_1NavigateurCarte" ],
     [ "NavigateurCarteGluon", "classediteurpanovisu_1_1NavigateurCarteGluon.html", "classediteurpanovisu_1_1NavigateurCarteGluon" ],
     [ "NavigateurCarteSeul", "classediteurpanovisu_1_1NavigateurCarteSeul.html", "classediteurpanovisu_1_1NavigateurCarteSeul" ],

@@ -1,0 +1,13 @@
+<map id="editeurpanovisu.ModelsConfigController.setupOpenRouterTable" name="editeurpanovisu.ModelsConfigController.setupOpenRouterTable">
+<area shape="rect" id="Node000001" title="Configuration de la table OpenRouter." alt="" coords="5,5,241,45"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="823,34,861,59"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="242,19,289,19,533,11,639,14,775,28,810,35,809,40,774,33,639,19,533,17,289,24,242,25"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1ModelsConfigController.html#a8bba4eadd19486d77d05d4018bb207fc" title="Configure le drag &amp; drop pour réordonner les lignes d&#39;une table." alt="" coords="289,33,508,73"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="242,35,276,38,275,43,241,40"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="508,49,809,44,809,50,508,54"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1ModelsConfigController.html#ae0fd12e069fa69801a458801b6ec419a" title="Met à jour les numéros de priorité après réordonnancement." alt="" coords="556,84,775,124"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="505,71,547,79,546,84,504,76"/>
+<area shape="poly" id="edge6_Node000004_Node000002" title=" " alt="" coords="727,81,809,54,811,59,728,86"/>
+<area shape="rect" id="Node000005" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="823,91,861,117"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="775,101,809,101,809,107,775,107"/>
+</map>

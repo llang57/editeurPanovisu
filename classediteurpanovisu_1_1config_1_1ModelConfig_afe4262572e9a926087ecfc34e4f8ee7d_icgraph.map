@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.config.ModelConfig.getEnabledModels" name="editeurpanovisu.config.ModelConfig.getEnabledModels">
+<area shape="rect" id="Node000001" title="Retourne la liste des modèles activés et disponibles, triés par priorité" alt="" coords="337,37,552,77"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1config_1_1ModelConfigManager.html#a47f3d7e6c91e113224147578fbf658c7" title="Vérifie la disponibilité des modèles Ollama locaux." alt="" coords="20,5,275,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="323,47,275,42,275,36,324,42"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1config_1_1ModelConfigManager.html#ade55ef6889e37e05fab56e051d9c9444" title="Vérifie la disponibilité des modèles OpenRouter via l&#39;API." alt="" coords="5,69,289,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="324,73,290,77,289,71,323,68"/>
+</map>

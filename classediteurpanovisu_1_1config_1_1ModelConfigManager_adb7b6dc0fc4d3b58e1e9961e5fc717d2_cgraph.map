@@ -1,0 +1,19 @@
+<map id="editeurpanovisu.config.ModelConfigManager.loadOpenRouterConfig" name="editeurpanovisu.config.ModelConfigManager.loadOpenRouterConfig">
+<area shape="rect" id="Node000001" title="Charge la configuration OpenRouter depuis le fichier JSON." alt="" coords="5,232,275,272"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1config_1_1ModelConfigManager.html#a3af308e37191920e6d315da9f7a7abe2" title="Crée une configuration OpenRouter par défaut." alt="" coords="323,103,569,158"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="190,229,363,160,365,165,192,234"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="903,118,941,143"/>
+<area shape="poly" id="edge10_Node000001_Node000003" title=" " alt="" coords="275,259,427,265,596,265,676,261,748,253,809,241,853,224,872,210,887,193,909,155,913,158,891,196,875,214,856,229,810,246,749,258,676,266,596,270,427,270,275,264"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1config_1_1ModelConfig.html#ac2e0f11b3aebd7d9a55013906070f233" title=" " alt="" coords="339,289,553,329"/>
+<area shape="poly" id="edge9_Node000001_Node000007" title=" " alt="" coords="248,269,326,284,325,289,247,275"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="482,101,543,63,579,45,617,32,684,14,739,3,766,3,793,8,823,17,856,32,876,47,892,65,913,103,909,106,887,68,872,50,853,37,821,22,792,13,765,9,740,9,685,19,618,37,581,50,545,67,485,105"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1config_1_1ModelConfig.html#a8c69472ffbf7355567358a462e44ef8c" title=" " alt="" coords="617,47,855,87"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="569,101,631,87,632,92,570,106"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1config_1_1ModelConfig.html#ab10a575383cedfe329049a585ede92e7" title=" " alt="" coords="629,111,843,151"/>
+<area shape="poly" id="edge5_Node000002_Node000005" title=" " alt="" coords="570,128,615,128,615,133,570,133"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1config_1_1ModelConfig.html#a28329e56199d24c197c68bf472c2da0d" title=" " alt="" coords="629,175,843,215"/>
+<area shape="poly" id="edge7_Node000002_Node000006" title=" " alt="" coords="570,155,632,169,631,174,569,160"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="820,84,856,96,892,112,889,117,854,101,818,89"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="843,128,889,128,889,133,843,133"/>
+<area shape="poly" id="edge8_Node000006_Node000003" title=" " alt="" coords="818,172,854,160,889,144,892,149,856,165,820,177"/>
+</map>

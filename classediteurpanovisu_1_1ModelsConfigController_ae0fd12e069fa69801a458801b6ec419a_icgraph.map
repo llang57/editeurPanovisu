@@ -1,0 +1,12 @@
+<map id="editeurpanovisu.ModelsConfigController.updatePriorities" name="editeurpanovisu.ModelsConfigController.updatePriorities">
+<area shape="rect" id="Node000001" title="Met à jour les numéros de priorité après réordonnancement." alt="" coords="823,37,1041,77"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1ModelsConfigController.html#a8bba4eadd19486d77d05d4018bb207fc" title="Configure le drag &amp; drop pour réordonner les lignes d&#39;une table." alt="" coords="556,37,775,77"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="809,60,775,60,775,55,809,55"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1ModelsConfigController.html#aec24eb2e4c4b160b20cb9be32ace6bea" title="Configuration de la table Ollama." alt="" coords="281,5,499,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="542,46,499,41,500,35,543,40"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1ModelsConfigController.html#a994f4acb00fdd16c70af6717cb8f9d56" title="Configuration de la table OpenRouter." alt="" coords="272,69,508,109"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="543,74,509,78,508,73,542,69"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1ModelsConfigController.html#a43a38fea1e6d52c6fee90bead609dc63" title="Initialisation du contrôleur." alt="" coords="5,37,224,77"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="267,42,224,47,224,42,267,37"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="258,77,224,73,225,67,259,71"/>
+</map>

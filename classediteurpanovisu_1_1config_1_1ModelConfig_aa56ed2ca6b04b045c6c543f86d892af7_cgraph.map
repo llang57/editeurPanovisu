@@ -1,0 +1,9 @@
+<map id="editeurpanovisu.config.ModelConfig.getAvailableModels" name="editeurpanovisu.config.ModelConfig.getAvailableModels">
+<area shape="rect" id="Node000001" title="Retourne la liste des modèles activés, disponibles et vérifiés, triés par priorité" alt="" coords="5,69,220,109"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1config_1_1ModelConfig_1_1ModelEntry.html#aaee1555107abd8bd26102841b49a7c00" title=" " alt="" coords="268,5,483,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="195,67,279,46,280,51,196,72"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1config_1_1ModelConfig_1_1ModelEntry.html#ac93f66df901b8e23e25ac7be99fc2606" title=" " alt="" coords="268,69,483,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="220,87,254,87,254,92,220,92"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="356,134,395,159"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="206,107,343,137,342,142,204,112"/>
+</map>

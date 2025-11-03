@@ -1,0 +1,7 @@
+<map id="Graphe hiérarchique des classes" name="Graphe hiérarchique des classes">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,56,76,81"/>
+<area shape="rect" id="Node000001" href="$classediteurpanovisu_1_1EquiCubeDialogController_1_1ListeTransformationCouleur.html" title="Colorisation de la ListView des images à transformer." alt="" coords="124,5,384,60"/>
+<area shape="poly" id="edge12_Node000000_Node000001" title=" " alt="" coords="89,58,123,52,124,57,90,63"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1ListePanoramiqueCellule.html" title=" " alt="" coords="131,85,377,125"/>
+<area shape="poly" id="edge13_Node000000_Node000002" title=" " alt="" coords="90,74,136,82,135,87,89,79"/>
+</map>

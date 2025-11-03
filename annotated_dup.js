@@ -1,6 +1,10 @@
 var annotated_dup =
 [
     [ "editeurpanovisu", "namespaceediteurpanovisu.html", [
+      [ "config", "namespaceediteurpanovisu_1_1config.html", [
+        [ "ModelConfig", "classediteurpanovisu_1_1config_1_1ModelConfig.html", "classediteurpanovisu_1_1config_1_1ModelConfig" ],
+        [ "ModelConfigManager", "classediteurpanovisu_1_1config_1_1ModelConfigManager.html", "classediteurpanovisu_1_1config_1_1ModelConfigManager" ]
+      ] ],
       [ "gpu", "namespaceediteurpanovisu_1_1gpu.html", [
         [ "GPUKernelLoader", "classediteurpanovisu_1_1gpu_1_1GPUKernelLoader.html", "classediteurpanovisu_1_1gpu_1_1GPUKernelLoader" ],
         [ "GPUManager", "classediteurpanovisu_1_1gpu_1_1GPUManager.html", "classediteurpanovisu_1_1gpu_1_1GPUManager" ],
@@ -45,6 +49,7 @@ var annotated_dup =
       [ "MapMarkerWithHtml", "classediteurpanovisu_1_1MapMarkerWithHtml.html", "classediteurpanovisu_1_1MapMarkerWithHtml" ],
       [ "MarkdownViewer", "classediteurpanovisu_1_1MarkdownViewer.html", "classediteurpanovisu_1_1MarkdownViewer" ],
       [ "MarqueurGeolocalisation", "classediteurpanovisu_1_1MarqueurGeolocalisation.html", "classediteurpanovisu_1_1MarqueurGeolocalisation" ],
+      [ "ModelsConfigController", "classediteurpanovisu_1_1ModelsConfigController.html", "classediteurpanovisu_1_1ModelsConfigController" ],
       [ "NavigateurCarte", "classediteurpanovisu_1_1NavigateurCarte.html", "classediteurpanovisu_1_1NavigateurCarte" ],
       [ "NavigateurCarteGluon", "classediteurpanovisu_1_1NavigateurCarteGluon.html", "classediteurpanovisu_1_1NavigateurCarteGluon" ],
       [ "NavigateurCarteSeul", "classediteurpanovisu_1_1NavigateurCarteSeul.html", "classediteurpanovisu_1_1NavigateurCarteSeul" ],

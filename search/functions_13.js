@@ -34,10 +34,12 @@ var searchData=
   ['previsualiseranimation_31',['previsualiserAnimation',['../classediteurpanovisu_1_1GestionnaireInterfaceController.html#a2a8314dd58e190248806f3790fd167e6',1,'editeurpanovisu::GestionnaireInterfaceController']]],
   ['previsualiserconversiondialog_32',['PrevisualiserConversionDialog',['../classediteurpanovisu_1_1PrevisualiserConversionDialog.html#a3d89924a59b9c8c1840a76b491950b3c',1,'editeurpanovisu::PrevisualiserConversionDialog']]],
   ['previsualiserselection_33',['previsualiserSelection',['../classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#ac983c41d4abce2e1fff638827ac90d0c',1,'editeurpanovisu::ConversionRatio2to1DialogController']]],
-  ['projetcharge_34',['projetCharge',['../classediteurpanovisu_1_1EditeurPanovisu.html#ab4beb1597b660a4a253befc6e76f1c54',1,'editeurpanovisu::EditeurPanovisu']]],
-  ['projetchargenom_35',['projetChargeNom',['../classediteurpanovisu_1_1EditeurPanovisu.html#a6d19b4d885ee6fcec827b91956295732',1,'editeurpanovisu::EditeurPanovisu']]],
-  ['projetsauve_36',['projetSauve',['../classediteurpanovisu_1_1EditeurPanovisu.html#a9f3ea25b35d4884524508dab3dc4fd6a',1,'editeurpanovisu::EditeurPanovisu']]],
-  ['projetsauvesous_37',['projetSauveSous',['../classediteurpanovisu_1_1EditeurPanovisu.html#a7b2e25dc717eb52b62e23d54ec4c124a',1,'editeurpanovisu::EditeurPanovisu']]],
-  ['projetsfermer_38',['projetsFermer',['../classediteurpanovisu_1_1EditeurPanovisu.html#a9b46b222714af12c06ec33d410400773',1,'editeurpanovisu::EditeurPanovisu']]],
-  ['projetsnouveau_39',['projetsNouveau',['../classediteurpanovisu_1_1EditeurPanovisu.html#ac9d449399ccd38843fa12e716f0c9611',1,'editeurpanovisu::EditeurPanovisu']]]
+  ['priceproperty_34',['priceProperty',['../classediteurpanovisu_1_1ModelsConfigController_1_1ModelEntryWrapper.html#a6cfa477e08fcc346ffae918af31d7387',1,'editeurpanovisu::ModelsConfigController::ModelEntryWrapper']]],
+  ['priorityproperty_35',['priorityProperty',['../classediteurpanovisu_1_1ModelsConfigController_1_1ModelEntryWrapper.html#a35f97f7454b24f81922bfe06bb554218',1,'editeurpanovisu::ModelsConfigController::ModelEntryWrapper']]],
+  ['projetcharge_36',['projetCharge',['../classediteurpanovisu_1_1EditeurPanovisu.html#ab4beb1597b660a4a253befc6e76f1c54',1,'editeurpanovisu::EditeurPanovisu']]],
+  ['projetchargenom_37',['projetChargeNom',['../classediteurpanovisu_1_1EditeurPanovisu.html#a6d19b4d885ee6fcec827b91956295732',1,'editeurpanovisu::EditeurPanovisu']]],
+  ['projetsauve_38',['projetSauve',['../classediteurpanovisu_1_1EditeurPanovisu.html#a9f3ea25b35d4884524508dab3dc4fd6a',1,'editeurpanovisu::EditeurPanovisu']]],
+  ['projetsauvesous_39',['projetSauveSous',['../classediteurpanovisu_1_1EditeurPanovisu.html#a7b2e25dc717eb52b62e23d54ec4c124a',1,'editeurpanovisu::EditeurPanovisu']]],
+  ['projetsfermer_40',['projetsFermer',['../classediteurpanovisu_1_1EditeurPanovisu.html#a9b46b222714af12c06ec33d410400773',1,'editeurpanovisu::EditeurPanovisu']]],
+  ['projetsnouveau_41',['projetsNouveau',['../classediteurpanovisu_1_1EditeurPanovisu.html#ac9d449399ccd38843fa12e716f0c9611',1,'editeurpanovisu::EditeurPanovisu']]]
 ];

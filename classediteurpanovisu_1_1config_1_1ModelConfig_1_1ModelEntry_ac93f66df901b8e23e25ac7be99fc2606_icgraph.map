@@ -1,0 +1,11 @@
+<map id="editeurpanovisu.config.ModelConfig.ModelEntry.isEnabled" name="editeurpanovisu.config.ModelConfig.ModelEntry.isEnabled">
+<area shape="rect" id="Node000001" title=" " alt="" coords="600,37,815,77"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1config_1_1ModelConfig.html#aa56ed2ca6b04b045c6c543f86d892af7" title="Retourne la liste des modèles activés, disponibles et vérifiés, triés par priorité" alt="" coords="337,5,552,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="586,45,552,41,553,36,587,40"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1config_1_1ModelConfig.html#afe4262572e9a926087ecfc34e4f8ee7d" title="Retourne la liste des modèles activés et disponibles, triés par priorité" alt="" coords="337,69,552,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="587,75,553,79,552,74,586,69"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1config_1_1ModelConfigManager.html#a47f3d7e6c91e113224147578fbf658c7" title="Vérifie la disponibilité des modèles Ollama locaux." alt="" coords="20,37,275,77"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="323,79,275,74,275,68,324,74"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1config_1_1ModelConfigManager.html#ade55ef6889e37e05fab56e051d9c9444" title="Vérifie la disponibilité des modèles OpenRouter via l&#39;API." alt="" coords="5,101,289,141"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="324,105,290,109,289,103,323,100"/>
+</map>

@@ -1,0 +1,11 @@
+<map id="editeurpanovisu.config.ModelConfig.setVerifyAtStartup" name="editeurpanovisu.config.ModelConfig.setVerifyAtStartup">
+<area shape="rect" id="Node000001" title=" " alt="" coords="629,53,844,93"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1config_1_1ModelConfigManager.html#a3eb9305bba70c2c83dbec20806d040e0" title="Crée une configuration Ollama par défaut." alt="" coords="323,5,581,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="615,58,581,54,582,48,616,53"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1config_1_1ModelConfigManager.html#a3af308e37191920e6d315da9f7a7abe2" title="Crée une configuration OpenRouter par défaut." alt="" coords="329,84,575,139"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="616,92,576,97,575,92,616,86"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1config_1_1ModelConfigManager.html#a8cfc19a335475e096041167626937fe7" title="Charge la configuration Ollama depuis le fichier JSON." alt="" coords="21,13,259,53"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="309,35,259,35,259,30,309,30"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1config_1_1ModelConfigManager.html#adb7b6dc0fc4d3b58e1e9961e5fc717d2" title="Charge la configuration OpenRouter depuis le fichier JSON." alt="" coords="5,91,275,131"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="315,114,275,114,275,109,315,109"/>
+</map>

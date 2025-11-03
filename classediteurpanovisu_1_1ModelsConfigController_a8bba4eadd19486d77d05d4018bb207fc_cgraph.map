@@ -1,0 +1,10 @@
+<map id="editeurpanovisu.ModelsConfigController.setupDragAndDrop" name="editeurpanovisu.ModelsConfigController.setupDragAndDrop">
+<area shape="rect" id="Node000001" title="Configure le drag &amp; drop pour réordonner les lignes d&#39;une table." alt="" coords="5,23,224,63"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="539,5,577,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="224,34,525,17,525,22,225,40"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1ModelsConfigController.html#ae0fd12e069fa69801a458801b6ec419a" title="Met à jour les numéros de priorité après réordonnancement." alt="" coords="272,51,491,91"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="224,52,259,56,258,61,224,57"/>
+<area shape="poly" id="edge4_Node000003_Node000002" title=" " alt="" coords="447,49,525,25,526,30,449,54"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="539,59,577,84"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="491,69,525,69,525,74,491,74"/>
+</map>

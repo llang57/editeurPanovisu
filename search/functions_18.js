@@ -12,8 +12,10 @@ var searchData=
   ['unpacku32_9',['unpackU32',['../types_8js.html#a5b21e62f62331e85717f5fc695922e24',1,'types.js']]],
   ['unpacku8_10',['unpackU8',['../types_8js.html#ad08efc0977ac5a9013c4585bb7eb84bb',1,'types.js']]],
   ['updatebuildnumfile_11',['updateBuildNumFile',['../classediteurpanovisu_1_1BuildNumberIncrementer.html#a5fd701d8791b9edc3e7e25cddbc1aecd',1,'editeurpanovisu::BuildNumberIncrementer']]],
-  ['updatecoordinates_12',['updateCoordinates',['../classediteurpanovisu_1_1NavigateurOpenLayers_1_1JavaApplication.html#aa10157208f75474583aa99b25a695e8e',1,'editeurpanovisu::NavigateurOpenLayers::JavaApplication']]],
-  ['updatei18nproperties_13',['updateI18nProperties',['../classediteurpanovisu_1_1BuildNumberIncrementer.html#aa61cf5f23b7161d4b3049e71eae8d58f',1,'editeurpanovisu::BuildNumberIncrementer']]],
-  ['updateitem_14',['updateitem',['../classediteurpanovisu_1_1ListePanoramiqueCellule.html#a36724a15699d2b9ed6ab57bd06b372c1',1,'editeurpanovisu.ListePanoramiqueCellule.updateItem()'],['../classediteurpanovisu_1_1EquiCubeDialogController_1_1ListeTransformationCouleur.html#a138f71d5241fe3cf0b7dad4d42394a73',1,'editeurpanovisu.EquiCubeDialogController.ListeTransformationCouleur.updateItem()']]],
-  ['updateprojectproperties_15',['updateProjectProperties',['../classediteurpanovisu_1_1BuildNumberIncrementer.html#a823f76660a76098926285b92bb70485a',1,'editeurpanovisu::BuildNumberIncrementer']]]
+  ['updateconfigfromtable_12',['updateConfigFromTable',['../classediteurpanovisu_1_1ModelsConfigController.html#a3e8a6bfe7a28442c6549f1b0301763fb',1,'editeurpanovisu::ModelsConfigController']]],
+  ['updatecoordinates_13',['updateCoordinates',['../classediteurpanovisu_1_1NavigateurOpenLayers_1_1JavaApplication.html#aa10157208f75474583aa99b25a695e8e',1,'editeurpanovisu::NavigateurOpenLayers::JavaApplication']]],
+  ['updatei18nproperties_14',['updateI18nProperties',['../classediteurpanovisu_1_1BuildNumberIncrementer.html#aa61cf5f23b7161d4b3049e71eae8d58f',1,'editeurpanovisu::BuildNumberIncrementer']]],
+  ['updateitem_15',['updateitem',['../classediteurpanovisu_1_1ListePanoramiqueCellule.html#a36724a15699d2b9ed6ab57bd06b372c1',1,'editeurpanovisu.ListePanoramiqueCellule.updateItem()'],['../classediteurpanovisu_1_1EquiCubeDialogController_1_1ListeTransformationCouleur.html#a138f71d5241fe3cf0b7dad4d42394a73',1,'editeurpanovisu.EquiCubeDialogController.ListeTransformationCouleur.updateItem()']]],
+  ['updatepriorities_16',['updatePriorities',['../classediteurpanovisu_1_1ModelsConfigController.html#ae0fd12e069fa69801a458801b6ec419a',1,'editeurpanovisu::ModelsConfigController']]],
+  ['updateprojectproperties_17',['updateProjectProperties',['../classediteurpanovisu_1_1BuildNumberIncrementer.html#a823f76660a76098926285b92bb70485a',1,'editeurpanovisu::BuildNumberIncrementer']]]
 ];

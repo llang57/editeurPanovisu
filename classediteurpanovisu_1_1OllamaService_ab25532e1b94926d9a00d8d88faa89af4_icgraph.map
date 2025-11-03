@@ -1,0 +1,5 @@
+<map id="editeurpanovisu.OllamaService.getConfigManager" name="editeurpanovisu.OllamaService.getConfigManager">
+<area shape="rect" id="Node000001" title="Récupère le gestionnaire de configuration des modèles." alt="" coords="272,5,523,45"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1ModelsConfigController.html#a43a38fea1e6d52c6fee90bead609dc63" title="Initialisation du contrôleur." alt="" coords="5,5,224,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="258,28,224,28,224,23,258,23"/>
+</map>
