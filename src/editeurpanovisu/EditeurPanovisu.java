@@ -105,6 +105,8 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -12893,6 +12895,18 @@ public class EditeurPanovisu extends Application {
             }
         });
         mnuAffichage.getItems().add(mniChangerTheme);
+        
+        // ✨ NOUVEAU : Menu pour configurer les modèles IA
+        MenuItem mniConfigurerModeles = new MenuItem("Configuration des modèles IA...");
+        mniConfigurerModeles.setAccelerator(new KeyCodeCombination(KeyCode.M, KeyCombination.SHORTCUT_DOWN));
+        mniConfigurerModeles.setOnAction(e -> {
+            try {
+                afficherDialogueModelesIA();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+        mnuAffichage.getItems().add(mniConfigurerModeles);
 
         /*
          Menu panoramiques
@@ -15079,6 +15093,26 @@ public class EditeurPanovisu extends Application {
         
         dialogStage.setScene(scene);
         dialogStage.showAndWait();
+    }
+
+    /**
+     * Affiche le dialogue de configuration des modèles IA
+     */
+    private static void afficherDialogueModelesIA() throws Exception {
+        FXMLLoader loader = new FXMLLoader(EditeurPanovisu.class.getResource("ModelsConfig.fxml"));
+        Parent root = loader.load();
+        
+        Stage stage = new Stage();
+        stage.setTitle("Configuration des modèles IA");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setResizable(false);
+        
+        Scene scene = new Scene(root);
+        // Appliquer le thème actuel au dialogue
+        ThemeManager.applyTheme(scene, ThemeManager.getCurrentTheme());
+        
+        stage.setScene(scene);
+        stage.showAndWait();
     }
 
     /**

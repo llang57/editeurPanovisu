@@ -6,7 +6,7 @@ $ErrorActionPreference = "Stop"
 Write-Host "=== Creation de l'archive portable Linux EditeurPanovisu ===" -ForegroundColor Cyan
 
 # Verifier que le build a ete fait
-if (-not (Test-Path "target\app-input\editeurPanovisu-3.3.3-SNAPSHOT.jar")) {
+if (-not (Test-Path "target\app-input\editeurPanovisu-3.4.0.jar")) {
     Write-Host "Erreur: Le JAR n'existe pas. Executez d'abord: mvn clean package -DskipTests -Pportable" -ForegroundColor Red
     Write-Host "  (Le profil -Pportable est requis pour inclure les natives Linux et Windows)" -ForegroundColor Yellow
     exit 1
@@ -81,7 +81,7 @@ java -Dfile.encoding=UTF-8 \
      --enable-native-access=ALL-UNNAMED \
      -Xms256m \
      -Xmx4096m \
-     -jar editeurPanovisu-3.3.3-SNAPSHOT.jar
+     -jar editeurPanovisu-3.4.0.jar
 
 exit_code=`$?
 
@@ -117,7 +117,7 @@ Copy-Item -Path "doc\INSTALLATION_OLLAMA.md" -Destination "$linuxDir\doc\INSTALL
 
 # Creer l'archive ZIP
 Write-Host "Creation de l'archive ZIP..." -ForegroundColor Yellow
-$version = "3.3.3"
+$version = "3.4.0"
 $zipFile = "target\EditeurPanovisu-Linux-Portable-$version.zip"
 if (Test-Path $zipFile) {
     Remove-Item $zipFile -Force

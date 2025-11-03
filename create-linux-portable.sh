@@ -8,7 +8,7 @@ set -e
 echo "=== Création de l'archive portable Linux EditeurPanovisu ==="
 
 # Vérifier que le build a été fait
-if [ ! -f "target/app-input/editeurPanovisu-3.3.3-SNAPSHOT.jar" ]; then
+if [ ! -f "target/app-input/editeurPanovisu-3.4.0.jar" ]; then
     echo "❌ Erreur: Le JAR n'existe pas. Exécutez d'abord: mvn clean package -DskipTests -Pportable"
     echo "   (Le profil -Pportable est requis pour inclure les natives Linux et Windows)"
     exit 1
@@ -83,7 +83,7 @@ java -Dfile.encoding=UTF-8 \
      --enable-native-access=ALL-UNNAMED \
      -Xms256m \
      -Xmx4096m \
-     -jar editeurPanovisu-3.3.3-SNAPSHOT.jar
+     -jar editeurPanovisu-3.4.0.jar
 
 exit_code=$?
 
@@ -117,7 +117,7 @@ fi
 
 # Créer l'archive ZIP
 echo "📦 Création de l'archive ZIP..."
-VERSION="3.3.3"
+VERSION="3.4.0"
 ZIP_FILE="target/EditeurPanovisu-Linux-Portable-$VERSION.zip"
 if [ -f "$ZIP_FILE" ]; then
     rm "$ZIP_FILE"

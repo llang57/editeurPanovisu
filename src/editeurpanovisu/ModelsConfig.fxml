@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="editeurpanovisu.ModelsConfigController"
+      spacing="10" prefWidth="900" prefHeight="700">
+    
+    <padding>
+        <Insets top="15" right="15" bottom="15" left="15"/>
+    </padding>
+    
+    <!-- Titre -->
+    <Label text="Configuration des modèles IA" styleClass="h3">
+        <font>
+            <Font name="System Bold" size="18"/>
+        </font>
+    </Label>
+    
+    <Separator/>
+    
+    <!-- TabPane pour OpenRouter et Ollama -->
+    <TabPane fx:id="tabPane" VBox.vgrow="ALWAYS">
+        
+        <!-- Onglet OpenRouter -->
+        <Tab text="☁️ OpenRouter (Cloud)" closable="false">
+            <VBox spacing="10">
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10"/>
+                </padding>
+                
+                <Label text="Modèles disponibles sur OpenRouter" styleClass="h4">
+                    <font><Font name="System Bold" size="14"/></font>
+                </Label>
+                
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <CheckBox fx:id="chkVerifyOpenRouter" text="Vérifier la disponibilité au démarrage"/>
+                    <Button fx:id="btnRefreshOpenRouter" text="🔄 Vérifier maintenant"/>
+                </HBox>
+                
+                <TableView fx:id="tableOpenRouter" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colOpenRouterEnabled" text="✓" prefWidth="40" editable="true"/>
+                        <TableColumn fx:id="colOpenRouterPriority" text="Priorité" prefWidth="70"/>
+                        <TableColumn fx:id="colOpenRouterId" text="ID Modèle" prefWidth="250"/>
+                        <TableColumn fx:id="colOpenRouterName" text="Nom" prefWidth="200"/>
+                        <TableColumn fx:id="colOpenRouterPrice" text="Prix ($/1M)" prefWidth="90"/>
+                        <TableColumn fx:id="colOpenRouterQuality" text="Qualité" prefWidth="80"/>
+                        <TableColumn fx:id="colOpenRouterAvailable" text="Disponible" prefWidth="90"/>
+                    </columns>
+                </TableView>
+                
+                <HBox spacing="10">
+                    <Button fx:id="btnAddOpenRouter" text="➕ Ajouter"/>
+                    <Button fx:id="btnRemoveOpenRouter" text="➖ Supprimer"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Label fx:id="lblOpenRouterStatus" text=""/>
+                </HBox>
+            </VBox>
+        </Tab>
+        
+        <!-- Onglet Ollama -->
+        <Tab text="🖥️ Ollama (Local)" closable="false">
+            <VBox spacing="10">
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10"/>
+                </padding>
+                
+                <Label text="Modèles installés localement" styleClass="h4">
+                    <font><Font name="System Bold" size="14"/></font>
+                </Label>
+                
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <CheckBox fx:id="chkVerifyOllama" text="Vérifier la disponibilité au démarrage"/>
+                    <Button fx:id="btnRefreshOllama" text="🔄 Vérifier maintenant"/>
+                    <Label text="URL:"/>
+                    <TextField fx:id="txtOllamaUrl" text="http://localhost:11434" prefWidth="200"/>
+                </HBox>
+                
+                <TableView fx:id="tableOllama" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colOllamaEnabled" text="✓" prefWidth="40" editable="true"/>
+                        <TableColumn fx:id="colOllamaPriority" text="Priorité" prefWidth="70"/>
+                        <TableColumn fx:id="colOllamaId" text="ID Modèle" prefWidth="250"/>
+                        <TableColumn fx:id="colOllamaName" text="Nom" prefWidth="200"/>
+                        <TableColumn fx:id="colOllamaSize" text="Taille" prefWidth="90"/>
+                        <TableColumn fx:id="colOllamaQuality" text="Qualité" prefWidth="80"/>
+                        <TableColumn fx:id="colOllamaAvailable" text="Disponible" prefWidth="90"/>
+                    </columns>
+                </TableView>
+                
+                <HBox spacing="10">
+                    <Button fx:id="btnAddOllama" text="➕ Ajouter"/>
+                    <Button fx:id="btnRemoveOllama" text="➖ Supprimer"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Label fx:id="lblOllamaStatus" text=""/>
+                </HBox>
+            </VBox>
+        </Tab>
+        
+    </TabPane>
+    
+    <Separator/>
+    
+    <!-- Boutons d'action -->
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Button fx:id="btnSave" text="💾 Enregistrer" defaultButton="true" styleClass="accent"/>
+        <Button fx:id="btnCancel" text="Annuler" cancelButton="true"/>
+    </HBox>
+    
+</VBox>

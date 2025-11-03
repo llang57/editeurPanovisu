@@ -1,5 +1,7 @@
 package editeurpanovisu;
 
+import editeurpanovisu.config.ModelConfig;
+import editeurpanovisu.config.ModelConfigManager;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
@@ -73,9 +75,13 @@ public class OllamaService {
     // Mode forcé : si true, force l'utilisation d'Ollama même si OpenRouter est disponible
     private static boolean forceOllama = false;
     
+    // Gestionnaire de configuration des modèles
+    private static ModelConfigManager configManager = new ModelConfigManager();
+    
     // Bloc static pour charger les tokens au démarrage
     static {
         chargerTokensAPI();
+        chargerEtVerifierModeles();
     }
     
     /**
@@ -137,6 +143,39 @@ public class OllamaService {
             System.out.println("[IA] Erreur lors du chargement du token: " + e.getMessage());
             HUGGINGFACE_TOKEN = "";
         }
+    }
+    
+    /**
+     * Charge les configurations de modèles et vérifie leur disponibilité
+     */
+    private static void chargerEtVerifierModeles() {
+        try {
+            // Charger les configurations depuis les fichiers JSON
+            ModelConfig openRouterConfig = configManager.loadOpenRouterConfig();
+            ModelConfig ollamaConfig = configManager.loadOllamaConfig();
+            
+            // Vérifier la disponibilité des modèles si activé dans la config
+            if (openRouterConfig != null && openRouterConfig.isVerifyAtStartup() && 
+                OPENROUTER_TOKEN != null && !OPENROUTER_TOKEN.isEmpty()) {
+                configManager.verifyOpenRouterModels(OPENROUTER_TOKEN);
+            }
+            
+            if (ollamaConfig != null && ollamaConfig.isVerifyAtStartup()) {
+                configManager.verifyOllamaModels();
+            }
+            
+        } catch (Exception e) {
+            System.err.println("[Config] ⚠️  Erreur lors de la vérification des modèles: " + e.getMessage());
+            // Continue même en cas d'erreur - utilise les valeurs par défaut
+        }
+    }
+    
+    /**
+     * Récupère le gestionnaire de configuration des modèles
+     * @return ModelConfigManager instance
+     */
+    public static ModelConfigManager getConfigManager() {
+        return configManager;
     }
     
     /**

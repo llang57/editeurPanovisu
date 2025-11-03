@@ -7,9 +7,9 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Version number (e.g., 3.3.2)'
+        description: 'Version number (e.g., 3.4.0)'
         required: true
-        default: '3.3.2'
+        default: '3.4.0'
 
 jobs:
   build-windows:
@@ -107,10 +107,10 @@ jobs:
       
       - name: 📦 Create macOS DMG
         run: |
-          APP_VERSION="${{ github.event.inputs.version || '3.3.2' }}"
+          APP_VERSION="${{ github.event.inputs.version || '3.4.0' }}"
           
           # Trouver le nom exact du JAR
-          MAIN_JAR=$(ls target/editeurPanovisu-*-SNAPSHOT.jar | xargs basename)
+          MAIN_JAR=$(ls target/editeurPanovisu-*.jar | xargs basename)
           echo "📦 JAR trouvé: $MAIN_JAR"
           
           jpackage \
@@ -284,24 +284,49 @@ jobs:
           tag_name: ${{ steps.build_info.outputs.VERSION }}
           name: "EditeurPanovisu ${{ steps.build_info.outputs.VERSION }} - Build ${{ steps.build_info.outputs.BUILD_NUM }}"
           body: |
-            ## 🐧 EditeurPanovisu ${{ github.ref_name }} - Support Linux Portable + Corrections i18n
+            ## 🤖 EditeurPanovisu ${{ github.ref_name }} - Configuration Dynamique des Modèles IA
             
             **Build** : ${{ steps.build_info.outputs.BUILD_NUM }}  
-            **Priorité** : 🐧 Archive portable Linux + 🔧 Corrections ressources i18n + 📖 Documentation complète
+            **Priorité** : 🤖 Gestion complète des modèles IA + 🎨 Interface intuitive + � Intégration documentation
             
-            ### 🔧 Corrections v3.3.3 (Build 3622+)
+            ### ✨ Nouveautés v3.4.0 (Build 3622+)
             
-            **Ressources i18n complétées** 🌐
-            - ✅ **Clé manquante corrigée** : `main.appliquerATous` ajoutée dans tous les fichiers de localisation
-            - 🇫🇷 Français : "Appliquer à tous"
-            - 🇬🇧 Anglais : "Apply to all"
-            - 🇩🇪 Allemand : "Auf alle anwenden"
-            - 🇪🇸 Espagnol : "Aplicar a todos"
-            - 🇵🇹 Portugais : "Aplicar a todos"
-            - ✅ **MissingResourceException** : Correction du crash au démarrage
-            - ✅ **Boutons fonctionnels** : "Appliquer à tous" maintenant opérationnel dans les éditeurs de hotspots
+            **Configuration JSON externe des modèles IA** 🤖
+            - ✅ **Fichiers de configuration** : `openrouter-models.json` et `ollama-models.json` éditables
+            - ✅ **Vérification API automatique** : Test de disponibilité au démarrage (9/9 OpenRouter, 5/5 Ollama)
+            - ✅ **Cache intelligent** : Durée configurable pour limiter les appels API
+            - ✅ **Gestion backend robuste** : Classes `ModelConfig` et `ModelConfigManager` avec Gson 2.11.0
             
-            ### 🐧 Nouveautés v3.3.3 - Distribution Linux Simplifiée
+            **Interface graphique complète (Ctrl+M)** 🎨
+            - ✅ **Deux onglets dédiés** : OpenRouter et Ollama avec tables synchronisées
+            - ✅ **Drag & drop intuitif** : Réorganisez les priorités en glissant les lignes
+            - ✅ **Dialogues enrichis** : 5 champs par modèle (ID, nom, description, prix/taille, qualité)
+            - ✅ **Liens documentation** : Hyperliens cliquables vers pages officielles des modèles
+            - ✅ **Ouverture navigateur** : Détection multi-plateforme (Firefox, Chrome, Chromium, etc.)
+            
+            **Fonctionnalités avancées** 🚀
+            - 🎯 **Priorités dynamiques** : Recalcul automatique après réordonnancement
+            - 🔍 **Validation en temps réel** : Vérification des IDs de modèles uniques
+            - 💾 **Sauvegarde instantanée** : Modifications persistées immédiatement en JSON
+            - 🔄 **Rechargement à chaud** : Pas de redémarrage nécessaire après modifications
+            
+            ### ⚡ Accélération GPU OpenCL 3.0
+            
+            **Support OpenCL multi-versions** 🎮
+            - ✅ **OpenCL 3.0** : Prise en charge prioritaire si disponible (GPUs récents)
+            - ✅ **Fallback OpenCL 1.2** : Compatibilité automatique avec matériel ancien
+            - ✅ **Fallback CPU** : Bascule transparente si aucun GPU compatible
+            - 🔄 **Détection automatique** : Sélection intelligente de la meilleure version disponible
+            - 📊 **Performances** : Jusqu'à 10× plus rapide pour le redimensionnement d'images
+            - 🎨 **Qualité** : Interpolation Bicubic/Lanczos3 sans crénelage
+            
+            **Compatibilité GPU étendue**
+            - NVIDIA (CUDA) : GeForce GTX/RTX, Quadro, Tesla
+            - AMD (ROCm) : Radeon RX, Radeon Pro
+            - Intel : HD Graphics, Iris, Arc
+            - Détection automatique des capacités et version OpenCL
+            
+            ### 🐧 Anciennes nouveautés v3.3.3 - Distribution Linux Simplifiée
             
             **Archive portable Linux** 📦
             - ✅ **ZIP et TAR.GZ** : Archives complètes autonomes sans dépendances système
@@ -392,15 +417,16 @@ jobs:
             
             | Plateforme | Fichier | Taille | Notes |
             |------------|---------|--------|-------|
-            | 🪟 **Windows 10/11** | `EditeurPanovisu-Setup-3.3.3.exe` | ~188 MB | Installeur automatique |
-            | 🍎 **macOS 11+** | `EditeurPanovisu-3.3.3.dmg` | ~200 MB | Image disque |
-            | 🐧 **Linux** | `EditeurPanovisu-Linux-Portable-3.3.3.zip` | ~150 MB | ⭐ **Recommandé** |
-            | 🐧 **Linux** | `EditeurPanovisu-Linux-Portable-3.3.3.tar.gz` | ~145 MB | Alternative TAR |
+            | 🪟 **Windows 10/11** | `EditeurPanovisu-Setup-3.4.0.exe` | ~188 MB | Installeur automatique |
+            | 🍎 **macOS 11+** | `EditeurPanovisu-3.4.0.dmg` | ~200 MB | Image disque |
+            | 🐧 **Linux** | `EditeurPanovisu-Linux-Portable-3.4.0.zip` | ~150 MB | ⭐ **Recommandé** |
+            | 🐧 **Linux** | `EditeurPanovisu-Linux-Portable-3.4.0.tar.gz` | ~145 MB | Alternative TAR |
             
             📖 **Installation Linux** : Consultez [INSTALLATION.md](https://github.com/llang57/editeurPanovisu/blob/master/doc/install/INSTALLATION.md) pour le guide complet
             
             ### ⚠️ Versions précédentes
             
+            **v3.3.3** : Support Linux portable + corrections i18n + cache panoramas optimisé  
             **v3.3.2** : Qualité images optimale en ligne (WebGL, compression, diagnostic)  
             **v3.3.1** : Système de thèmes enrichi (24 thèmes, icônes dynamiques colorées)  
             **v3.3.0** : Accélération GPU OpenCL, performances 3-10× améliorées  
@@ -422,29 +448,28 @@ jobs:
             ### 🔧 Installation
             
             #### Windows
-            1. Téléchargez `EditeurPanovisu-Setup-3.3.2.exe`
+            1. Téléchargez `EditeurPanovisu-Setup-3.4.0.exe`
             2. Double-cliquez pour installer
             3. Suivez l'assistant d'installation
             4. Lancez via le raccourci Bureau ou Menu Démarrer
             
             #### macOS
-            1. Téléchargez `EditeurPanovisu-3.3.2.dmg`
+            1. Téléchargez `EditeurPanovisu-3.4.0.dmg`
             2. Ouvrez le fichier `.dmg`
             3. Glissez l'icône vers le dossier Applications
             4. Lancez depuis le Launchpad
             
-            #### Linux (Debian/Ubuntu)
+            #### Linux (Archive Portable)
             ```bash
-            sudo dpkg -i editeurpanovisu_3.3.2-1_amd64.deb
-            # ou
-            sudo apt install ./editeurpanovisu_3.3.2-1_amd64.deb
-            ```
+            # Télécharger et extraire
+            unzip EditeurPanovisu-Linux-Portable-3.4.0.zip
+            cd EditeurPanovisu-Linux-Portable-3.4.0
             
-            #### Linux (RedHat/Fedora)
-            ```bash
-            sudo rpm -i editeurpanovisu-3.3.2-1.x86_64.rpm
-            # ou
-            sudo dnf install ./editeurpanovisu-3.3.2-1.x86_64.rpm
+            # Rendre le script exécutable
+            chmod +x lancer-panovisu-linux.sh
+            
+            # Lancer l'application
+            ./lancer-panovisu-linux.sh
             ```
             
             ### 🔐 Vérification d'intégrité
