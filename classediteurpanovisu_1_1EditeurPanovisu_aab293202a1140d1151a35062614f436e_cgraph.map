@@ -1,11 +1,15 @@
 <map id="editeurpanovisu.EditeurPanovisu.sauvePreferences" name="editeurpanovisu.EditeurPanovisu.sauvePreferences">
-<area shape="rect" id="Node000001" title="Sauvegarde les préférences de l&#39;application dans le fichier preferences.cfg." alt="" coords="5,159,284,199"/>
+<area shape="rect" id="Node000001" title="Sauvegarde les préférences de l&#39;application dans le fichier preferences.cfg." alt="" coords="5,216,284,256"/>
 <area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1gpu_1_1GPUManager.html#a65cc6674dbee14bcf2d3f11f06a26e4b" title="Récupère l&#39;instance unique du gestionnaire GPU." alt="" coords="332,102,600,142"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="257,156,340,142,341,147,258,162"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="190,214,331,158,377,143,379,148,333,163,192,219"/>
 <area shape="rect" id="Node000005" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="1668,109,1707,134"/>
-<area shape="poly" id="edge9_Node000001_Node000005" title=" " alt="" coords="284,176,770,176,1109,176,1254,180,1367,185,1421,184,1479,179,1544,168,1619,151,1655,137,1657,142,1621,156,1545,174,1480,184,1422,189,1367,190,1254,186,1109,182,770,182,284,182"/>
-<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1gpu_1_1GPUManager.html#a911a28e45e8baa207c84e9b4c0c9a0d7" title="Vérifie si l&#39;utilisation du GPU est activée par l&#39;utilisateur." alt="" coords="337,216,595,256"/>
-<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="258,197,341,211,340,217,257,202"/>
+<area shape="poly" id="edge11_Node000001_Node000005" title=" " alt="" coords="250,214,332,202,550,181,770,176,1109,176,1254,180,1367,185,1421,184,1479,179,1544,168,1619,151,1655,137,1657,142,1621,156,1545,174,1480,184,1422,189,1367,190,1254,186,1109,182,770,182,551,186,332,207,250,219"/>
+<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1OllamaService.html#a4d8c44f8d5c83dc0258d5d6edb5dd5d1" title="Retourne le modèle Ollama actuellement configuré" alt="" coords="341,216,591,256"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="284,234,327,234,327,239,284,239"/>
+<area shape="rect" id="Node000009" href="$classediteurpanovisu_1_1OllamaService.html#a1637c8c8f43ca2e3f5052ceb7c6c050a" title="Retourne le modèle OpenRouter actuellement configuré" alt="" coords="341,280,591,320"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="246,254,353,275,351,280,245,259"/>
+<area shape="rect" id="Node000010" href="$classediteurpanovisu_1_1gpu_1_1GPUManager.html#a911a28e45e8baa207c84e9b4c0c9a0d7" title="Vérifie si l&#39;utilisation du GPU est activée par l&#39;utilisateur." alt="" coords="337,344,595,384"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="180,254,249,292,333,330,357,338,355,343,331,335,247,297,178,259"/>
 <area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1gpu_1_1GPUManager.html#a3ba0aa0d6379b3b216d07d19ee71e251" title="Constructeur privé (singleton)" alt="" coords="648,74,895,114"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="600,107,634,104,635,109,600,112"/>
 <area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1gpu_1_1GPUManager.html#ad758dc8906499865aeaf412236ba042c" title="Initialise OpenCL et détecte les GPU disponibles." alt="" coords="943,81,1273,106"/>

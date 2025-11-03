@@ -141,9 +141,18 @@ Fonctions membres publiques</h2></td></tr>
 <tr class="memitem:ae6bbfeb14e9ed6466efab31dcbf56764" id="r_ae6bbfeb14e9ed6466efab31dcbf56764"><td class="memItemLeft" align="right" valign="top"><a class="el" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#ae6bbfeb14e9ed6466efab31dcbf56764">getPlatformName</a> ()</td></tr>
 <tr class="memdesc:ae6bbfeb14e9ed6466efab31dcbf56764"><td class="mdescLeft">&#160;</td><td class="mdescRight">Récupère le nom de la plateforme.  <br /></td></tr>
 <tr class="separator:ae6bbfeb14e9ed6466efab31dcbf56764"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1b2816260c4aa1031d0d8bc77462ad9" id="r_ab1b2816260c4aa1031d0d8bc77462ad9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#ab1b2816260c4aa1031d0d8bc77462ad9">getOpenCLVersion</a> ()</td></tr>
+<tr class="memdesc:ab1b2816260c4aa1031d0d8bc77462ad9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Récupère la version OpenCL du device.  <br /></td></tr>
+<tr class="separator:ab1b2816260c4aa1031d0d8bc77462ad9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72203897c4dfe0e31d015a6f5ebdcbab" id="r_a72203897c4dfe0e31d015a6f5ebdcbab"><td class="memItemLeft" align="right" valign="top"><a class="el" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a72203897c4dfe0e31d015a6f5ebdcbab">getBuildOptions</a> ()</td></tr>
+<tr class="memdesc:a72203897c4dfe0e31d015a6f5ebdcbab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Détermine les options de compilation OpenCL appropriées selon la version Pour Clover (OpenCL 1.1): utilise "-cl-std=CL1.2" pour compatibilité Pour rusticl et autres (OpenCL 2.0+): pas d'options spécifiques nécessaires.  <br /></td></tr>
+<tr class="separator:a72203897c4dfe0e31d015a6f5ebdcbab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acec4668b6b0870b949646583af37fe44" id="r_acec4668b6b0870b949646583af37fe44"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#acec4668b6b0870b949646583af37fe44">getDeviceMemory</a> ()</td></tr>
-<tr class="memdesc:acec4668b6b0870b949646583af37fe44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Récupère la mémoire disponible sur le GPU.  <br /></td></tr>
+<tr class="memdesc:acec4668b6b0870b949646583af37fe44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Récupère la mémoire globale disponible sur le GPU.  <br /></td></tr>
 <tr class="separator:acec4668b6b0870b949646583af37fe44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0545dc80ef79028c427345f48ffb330" id="r_ad0545dc80ef79028c427345f48ffb330"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#ad0545dc80ef79028c427345f48ffb330">getDeviceMaxAllocSize</a> ()</td></tr>
+<tr class="memdesc:ad0545dc80ef79028c427345f48ffb330"><td class="mdescLeft">&#160;</td><td class="mdescRight">Récupère la taille maximale d'allocation mémoire pour un buffer Pour GPU intégré AMD: peut être limité par le BIOS (512MB typique) Cette valeur détermine la taille max des images traitables par le GPU.  <br /></td></tr>
+<tr class="separator:ad0545dc80ef79028c427345f48ffb330"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1ab06b39d7fbce4e248268e06f4de28" id="r_ad1ab06b39d7fbce4e248268e06f4de28"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#ad1ab06b39d7fbce4e248268e06f4de28">getComputeUnits</a> ()</td></tr>
 <tr class="memdesc:ad1ab06b39d7fbce4e248268e06f4de28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Récupère le nombre d'unités de calcul.  <br /></td></tr>
 <tr class="separator:ad1ab06b39d7fbce4e248268e06f4de28"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -193,8 +202,12 @@ Attributs privés</h2></td></tr>
 <tr class="separator:a038f4d0473ae1602e66203fa8045ff99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa164ace68c6e6987a9c283fc5713f787" id="r_aa164ace68c6e6987a9c283fc5713f787"><td class="memItemLeft" align="right" valign="top"><a class="el" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#aa164ace68c6e6987a9c283fc5713f787">platformName</a> = &quot;Unknown&quot;</td></tr>
 <tr class="separator:aa164ace68c6e6987a9c283fc5713f787"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a917022f00544402f702ed4fa39aaeae2" id="r_a917022f00544402f702ed4fa39aaeae2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a917022f00544402f702ed4fa39aaeae2">openclVersion</a> = &quot;Unknown&quot;</td></tr>
+<tr class="separator:a917022f00544402f702ed4fa39aaeae2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e265020cc1b74173cd26a4cf7682de5" id="r_a4e265020cc1b74173cd26a4cf7682de5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a4e265020cc1b74173cd26a4cf7682de5">deviceMemory</a> = 0</td></tr>
 <tr class="separator:a4e265020cc1b74173cd26a4cf7682de5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3674fda79460b7d0bb1476fee967d908" id="r_a3674fda79460b7d0bb1476fee967d908"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a3674fda79460b7d0bb1476fee967d908">deviceMaxAllocSize</a> = 0</td></tr>
+<tr class="separator:a3674fda79460b7d0bb1476fee967d908"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ec6de78391364c467a4fb741132429b" id="r_a6ec6de78391364c467a4fb741132429b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a6ec6de78391364c467a4fb741132429b">computeUnits</a> = 0</td></tr>
 <tr class="separator:a6ec6de78391364c467a4fb741132429b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a66235a95342d13bf04ba2a3b1bc74d7f" id="r_a66235a95342d13bf04ba2a3b1bc74d7f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">long</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1gpu_1_1GPUManager.html#a66235a95342d13bf04ba2a3b1bc74d7f">maxWorkGroupSize</a> = 0</td></tr>
@@ -236,11 +249,11 @@ Attributs privés statiques</h2></td></tr>
 
 <p>Constructeur privé (singleton) </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00035">35</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00037">37</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
 
-<p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00053">editeurpanovisu.gpu.GPUManager.initializeGPU()</a>.</p>
+<p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00055">editeurpanovisu.gpu.GPUManager.initializeGPU()</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00043">editeurpanovisu.gpu.GPUManager.getInstance()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00045">editeurpanovisu.gpu.GPUManager.getInstance()</a>.</p>
 <div class="dynheader">
 Voici le graphe d'appel pour cette fonction :</div>
 <div class="dyncontent">
@@ -338,7 +351,7 @@ Voici le graphe des appelants de cette fonction :</div>
 
 <p>Libère les ressources OpenCL. </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00298">298</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00365">365</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
 
 <p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00022">editeurpanovisu.gpu.GPUManager.commandQueue</a>, <a class="el" href="GPUManager_8java_source.html#l00021">editeurpanovisu.gpu.GPUManager.context</a>, <a class="el" href="leaflet_8js_source.html#l00005">e</a>, et <a class="el" href="leaflet_8js_source.html#l00005">k()</a>.</p>
 <div class="dynheader">
@@ -349,6 +362,54 @@ Voici le graphe d'appel pour cette fonction :</div>
 <area shape="rect" title="Libère les ressources OpenCL." alt="" coords="5,5,304,31"/>
 <area shape="rect" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="352,5,391,31"/>
 <area shape="poly" title=" " alt="" coords="304,15,338,15,338,21,304,21"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a72203897c4dfe0e31d015a6f5ebdcbab" name="a72203897c4dfe0e31d015a6f5ebdcbab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72203897c4dfe0e31d015a6f5ebdcbab">&#9670;&#160;</a></span>getBuildOptions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> editeurpanovisu.gpu.GPUManager.getBuildOptions </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Détermine les options de compilation OpenCL appropriées selon la version Pour Clover (OpenCL 1.1): utilise "-cl-std=CL1.2" pour compatibilité Pour rusticl et autres (OpenCL 2.0+): pas d'options spécifiques nécessaires. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>Options de compilation ou null </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00298">298</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00028">editeurpanovisu.gpu.GPUManager.openclVersion</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="ImageResizeGPU_8java_source.html#l00233">editeurpanovisu.gpu.ImageResizeGPU.initializeKernels()</a>.</p>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="classediteurpanovisu_1_1gpu_1_1GPUManager_a72203897c4dfe0e31d015a6f5ebdcbab_icgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1gpu_1_1GPUManager_a72203897c4dfe0e31d015a6f5ebdcbab_icgraph" alt=""/></div>
+<map name="aclassediteurpanovisu_1_1gpu_1_1GPUManager_a72203897c4dfe0e31d015a6f5ebdcbab_icgraph" id="aclassediteurpanovisu_1_1gpu_1_1GPUManager_a72203897c4dfe0e31d015a6f5ebdcbab_icgraph">
+<area shape="rect" title="Détermine les options de compilation OpenCL appropriées selon la version Pour Clover (OpenCL 1...." alt="" coords="1009,101,1277,141"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a70a13e24789d5c6150c606cd077b5137" title="Initialise les kernels OpenCL (compilation à la demande)" alt="" coords="760,101,961,141"/>
+<area shape="poly" title=" " alt="" coords="996,124,962,124,962,119,996,119"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a8938ddd095bf1e545f06dfbc9ecfee09" title="Redimensionnement via GPU OpenCL." alt="" coords="512,101,712,141"/>
+<area shape="poly" title=" " alt="" coords="747,124,712,124,712,119,747,119"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a56af72c51956399056e1f0de5b253319" title="Redimensionne une image avec routage automatique GPU/CPU." alt="" coords="264,101,464,141"/>
+<area shape="poly" title=" " alt="" coords="499,124,464,124,464,119,499,119"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestImageResize.html#ab1e39892471c5658890c8a78904be64c" title=" " alt="" coords="18,5,203,45"/>
+<area shape="poly" title=" " alt="" coords="307,98,215,60,180,48,182,43,217,55,309,93"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestBicubicVsLanczos.html#a4cef8c04b1386d551c4cfec1b3361458" title=" " alt="" coords="18,69,203,109"/>
+<area shape="poly" title=" " alt="" coords="250,110,203,104,204,98,251,104"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestImageResizeInteractive.html#a16412151c83ac1a5ef58bfbd75bb0a42" title=" " alt="" coords="5,133,216,173"/>
+<area shape="poly" title=" " alt="" coords="251,138,217,143,216,137,250,133"/>
+<area shape="rect" href="classediteurpanovisu_1_1gpu_1_1TestReductionImage.html#a868abe4fd92adbc966d1c9c89fb72cc3" title=" " alt="" coords="18,197,203,237"/>
+<area shape="poly" title=" " alt="" coords="309,150,217,188,182,200,180,195,215,183,307,145"/>
 </map>
 </div>
 
@@ -372,7 +433,7 @@ Voici le graphe d'appel pour cette fonction :</div>
 <p>Récupère la file de commandes OpenCL. </p>
 <dl class="section return"><dt>Renvoie</dt><dd>File de commandes OpenCL ou null si non disponible </dd></dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00222">222</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00256">256</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
 
 <p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00022">editeurpanovisu.gpu.GPUManager.commandQueue</a>.</p>
 
@@ -418,9 +479,9 @@ Voici le graphe des appelants de cette fonction :</div>
 <p>Récupère le nombre d'unités de calcul. </p>
 <dl class="section return"><dt>Renvoie</dt><dd>Nombre d'unités de calcul </dd></dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00262">262</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00329">329</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
 
-<p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00029">editeurpanovisu.gpu.GPUManager.computeUnits</a>.</p>
+<p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00031">editeurpanovisu.gpu.GPUManager.computeUnits</a>.</p>
 
 </div>
 </div>
@@ -442,7 +503,7 @@ Voici le graphe des appelants de cette fonction :</div>
 <p>Récupère le contexte OpenCL. </p>
 <dl class="section return"><dt>Renvoie</dt><dd>Contexte OpenCL ou null si non disponible </dd></dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00214">214</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00248">248</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
 
 <p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00021">editeurpanovisu.gpu.GPUManager.context</a>.</p>
 
@@ -491,7 +552,7 @@ Voici le graphe des appelants de cette fonction :</div>
 <p>Récupère le device OpenCL. </p>
 <dl class="section return"><dt>Renvoie</dt><dd>Device OpenCL ou null si non disponible </dd></dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00230">230</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00264">264</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
 
 <p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00023">editeurpanovisu.gpu.GPUManager.device</a>.</p>
 
@@ -521,6 +582,30 @@ Voici le graphe des appelants de cette fonction :</div>
 
 </div>
 </div>
+<a id="ad0545dc80ef79028c427345f48ffb330" name="ad0545dc80ef79028c427345f48ffb330"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0545dc80ef79028c427345f48ffb330">&#9670;&#160;</a></span>getDeviceMaxAllocSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">long</a> editeurpanovisu.gpu.GPUManager.getDeviceMaxAllocSize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Récupère la taille maximale d'allocation mémoire pour un buffer Pour GPU intégré AMD: peut être limité par le BIOS (512MB typique) Cette valeur détermine la taille max des images traitables par le GPU. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>Taille max allocation en octets </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00321">321</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00030">editeurpanovisu.gpu.GPUManager.deviceMaxAllocSize</a>.</p>
+
+</div>
+</div>
 <a id="acec4668b6b0870b949646583af37fe44" name="acec4668b6b0870b949646583af37fe44"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acec4668b6b0870b949646583af37fe44">&#9670;&#160;</a></span>getDeviceMemory()</h2>
 
@@ -536,12 +621,12 @@ Voici le graphe des appelants de cette fonction :</div>
       </table>
 </div><div class="memdoc">
 
-<p>Récupère la mémoire disponible sur le GPU. </p>
-<dl class="section return"><dt>Renvoie</dt><dd>Mémoire en octets </dd></dl>
+<p>Récupère la mémoire globale disponible sur le GPU. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>Mémoire totale en octets </dd></dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00254">254</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00311">311</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
 
-<p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00028">editeurpanovisu.gpu.GPUManager.deviceMemory</a>.</p>
+<p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00029">editeurpanovisu.gpu.GPUManager.deviceMemory</a>.</p>
 
 </div>
 </div>
@@ -563,7 +648,7 @@ Voici le graphe des appelants de cette fonction :</div>
 <p>Récupère le nom du GPU. </p>
 <dl class="section return"><dt>Renvoie</dt><dd>Nom du GPU </dd></dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00238">238</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00272">272</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
 
 <p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00026">editeurpanovisu.gpu.GPUManager.deviceName</a>.</p>
 
@@ -587,9 +672,9 @@ Voici le graphe des appelants de cette fonction :</div>
 <p>Récupère des informations détaillées sur le GPU sous forme de String. </p>
 <dl class="section return"><dt>Renvoie</dt><dd>Informations formatées </dd></dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00278">278</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00345">345</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
 
-<p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00029">editeurpanovisu.gpu.GPUManager.computeUnits</a>, <a class="el" href="GPUManager_8java_source.html#l00028">editeurpanovisu.gpu.GPUManager.deviceMemory</a>, <a class="el" href="GPUManager_8java_source.html#l00026">editeurpanovisu.gpu.GPUManager.deviceName</a>, <a class="el" href="GPUManager_8java_source.html#l00019">editeurpanovisu.gpu.GPUManager.gpuAvailable</a>, <a class="el" href="GPUManager_8java_source.html#l00020">editeurpanovisu.gpu.GPUManager.gpuEnabled</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="GPUManager_8java_source.html#l00030">editeurpanovisu.gpu.GPUManager.maxWorkGroupSize</a>, et <a class="el" href="GPUManager_8java_source.html#l00027">editeurpanovisu.gpu.GPUManager.platformName</a>.</p>
+<p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00031">editeurpanovisu.gpu.GPUManager.computeUnits</a>, <a class="el" href="GPUManager_8java_source.html#l00029">editeurpanovisu.gpu.GPUManager.deviceMemory</a>, <a class="el" href="GPUManager_8java_source.html#l00026">editeurpanovisu.gpu.GPUManager.deviceName</a>, <a class="el" href="GPUManager_8java_source.html#l00019">editeurpanovisu.gpu.GPUManager.gpuAvailable</a>, <a class="el" href="GPUManager_8java_source.html#l00020">editeurpanovisu.gpu.GPUManager.gpuEnabled</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="GPUManager_8java_source.html#l00032">editeurpanovisu.gpu.GPUManager.maxWorkGroupSize</a>, et <a class="el" href="GPUManager_8java_source.html#l00027">editeurpanovisu.gpu.GPUManager.platformName</a>.</p>
 
 <p class="reference">Référencé par <a class="el" href="TestImageResize_8java_source.html#l00014">editeurpanovisu.gpu.TestImageResize.main()</a>, <a class="el" href="TestBicubicVsLanczos_8java_source.html#l00024">editeurpanovisu.gpu.TestBicubicVsLanczos.start()</a>, <a class="el" href="TestImageResizeInteractive_8java_source.html#l00024">editeurpanovisu.gpu.TestImageResizeInteractive.start()</a>, et <a class="el" href="TestReductionImage_8java_source.html#l00024">editeurpanovisu.gpu.TestReductionImage.start()</a>.</p>
 <div class="dynheader">
@@ -647,11 +732,11 @@ Voici le graphe des appelants de cette fonction :</div>
 <p>Récupère l'instance unique du gestionnaire GPU. </p>
 <dl class="section return"><dt>Renvoie</dt><dd>Instance du GPUManager </dd></dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00043">43</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00045">45</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
 
-<p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00035">editeurpanovisu.gpu.GPUManager.GPUManager()</a>, et <a class="el" href="GPUManager_8java_source.html#l00018">editeurpanovisu.gpu.GPUManager.instance</a>.</p>
+<p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00037">editeurpanovisu.gpu.GPUManager.GPUManager()</a>, et <a class="el" href="GPUManager_8java_source.html#l00018">editeurpanovisu.gpu.GPUManager.instance</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="ConfigDialogController_8java_source.html#l00067">editeurpanovisu.ConfigDialogController.afficheFenetre()</a>, <a class="el" href="ImageResizeGPU_8java_source.html#l00297">editeurpanovisu.gpu.ImageResizeGPU.calculateOptimalLocalWorkSize()</a>, <a class="el" href="ImageResizeGPU_8java_source.html#l00233">editeurpanovisu.gpu.ImageResizeGPU.initializeKernels()</a>, <a class="el" href="EditeurPanovisu_8java_source.html#l14701">editeurpanovisu.EditeurPanovisu.lisPreferences()</a>, <a class="el" href="TestImageResize_8java_source.html#l00014">editeurpanovisu.gpu.TestImageResize.main()</a>, <a class="el" href="ImageResizeGPU_8java_source.html#l00050">editeurpanovisu.gpu.ImageResizeGPU.resizeAuto()</a>, <a class="el" href="ImageResizeGPU_8java_source.html#l00112">editeurpanovisu.gpu.ImageResizeGPU.resizeGPU()</a>, <a class="el" href="EditeurPanovisu_8java_source.html#l14780">editeurpanovisu.EditeurPanovisu.sauvePreferences()</a>, <a class="el" href="TestBicubicVsLanczos_8java_source.html#l00024">editeurpanovisu.gpu.TestBicubicVsLanczos.start()</a>, <a class="el" href="TestImageResizeInteractive_8java_source.html#l00024">editeurpanovisu.gpu.TestImageResizeInteractive.start()</a>, <a class="el" href="TestReductionImage_8java_source.html#l00024">editeurpanovisu.gpu.TestReductionImage.start()</a>, et <a class="el" href="EditeurPanovisu_8java_source.html#l14846">editeurpanovisu.EditeurPanovisu.start()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="ConfigDialogController_8java_source.html#l00067">editeurpanovisu.ConfigDialogController.afficheFenetre()</a>, <a class="el" href="ImageResizeGPU_8java_source.html#l00299">editeurpanovisu.gpu.ImageResizeGPU.calculateOptimalLocalWorkSize()</a>, <a class="el" href="ImageResizeGPU_8java_source.html#l00233">editeurpanovisu.gpu.ImageResizeGPU.initializeKernels()</a>, <a class="el" href="EditeurPanovisu_8java_source.html#l14701">editeurpanovisu.EditeurPanovisu.lisPreferences()</a>, <a class="el" href="TestImageResize_8java_source.html#l00014">editeurpanovisu.gpu.TestImageResize.main()</a>, <a class="el" href="ImageResizeGPU_8java_source.html#l00050">editeurpanovisu.gpu.ImageResizeGPU.resizeAuto()</a>, <a class="el" href="ImageResizeGPU_8java_source.html#l00112">editeurpanovisu.gpu.ImageResizeGPU.resizeGPU()</a>, <a class="el" href="EditeurPanovisu_8java_source.html#l14780">editeurpanovisu.EditeurPanovisu.sauvePreferences()</a>, <a class="el" href="TestBicubicVsLanczos_8java_source.html#l00024">editeurpanovisu.gpu.TestBicubicVsLanczos.start()</a>, <a class="el" href="TestImageResizeInteractive_8java_source.html#l00024">editeurpanovisu.gpu.TestImageResizeInteractive.start()</a>, <a class="el" href="TestReductionImage_8java_source.html#l00024">editeurpanovisu.gpu.TestReductionImage.start()</a>, et <a class="el" href="EditeurPanovisu_8java_source.html#l14848">editeurpanovisu.EditeurPanovisu.start()</a>.</p>
 <div class="dynheader">
 Voici le graphe d'appel pour cette fonction :</div>
 <div class="dyncontent">
@@ -749,11 +834,11 @@ Voici le graphe des appelants de cette fonction :</div>
 <p>Récupère la taille maximale d'un workgroup. </p>
 <dl class="section return"><dt>Renvoie</dt><dd>Taille max workgroup </dd></dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00270">270</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00337">337</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
 
-<p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00030">editeurpanovisu.gpu.GPUManager.maxWorkGroupSize</a>.</p>
+<p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00032">editeurpanovisu.gpu.GPUManager.maxWorkGroupSize</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="ImageResizeGPU_8java_source.html#l00297">editeurpanovisu.gpu.ImageResizeGPU.calculateOptimalLocalWorkSize()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="ImageResizeGPU_8java_source.html#l00299">editeurpanovisu.gpu.ImageResizeGPU.calculateOptimalLocalWorkSize()</a>.</p>
 <div class="dynheader">
 Voici le graphe des appelants de cette fonction :</div>
 <div class="dyncontent">
@@ -779,6 +864,30 @@ Voici le graphe des appelants de cette fonction :</div>
 
 </div>
 </div>
+<a id="ab1b2816260c4aa1031d0d8bc77462ad9" name="ab1b2816260c4aa1031d0d8bc77462ad9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1b2816260c4aa1031d0d8bc77462ad9">&#9670;&#160;</a></span>getOpenCLVersion()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> editeurpanovisu.gpu.GPUManager.getOpenCLVersion </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Récupère la version OpenCL du device. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>Version OpenCL (ex: "OpenCL 1.1 Mesa 24.0.0", "OpenCL 3.0 rusticl") </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00288">288</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+
+<p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00028">editeurpanovisu.gpu.GPUManager.openclVersion</a>.</p>
+
+</div>
+</div>
 <a id="ae6bbfeb14e9ed6466efab31dcbf56764" name="ae6bbfeb14e9ed6466efab31dcbf56764"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae6bbfeb14e9ed6466efab31dcbf56764">&#9670;&#160;</a></span>getPlatformName()</h2>
 
@@ -797,7 +906,7 @@ Voici le graphe des appelants de cette fonction :</div>
 <p>Récupère le nom de la plateforme. </p>
 <dl class="section return"><dt>Renvoie</dt><dd>Nom de la plateforme OpenCL </dd></dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00246">246</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00280">280</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
 
 <p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00027">editeurpanovisu.gpu.GPUManager.platformName</a>.</p>
 
@@ -828,11 +937,11 @@ Voici le graphe des appelants de cette fonction :</div>
 
 <p>Initialise OpenCL et détecte les GPU disponibles. </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00053">53</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00055">55</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
 
-<p class="reference">Références <a class="el" href="OpenLayers_8js_source.html#l00058">Class</a>, <a class="el" href="GPUManager_8java_source.html#l00022">editeurpanovisu.gpu.GPUManager.commandQueue</a>, <a class="el" href="GPUManager_8java_source.html#l00029">editeurpanovisu.gpu.GPUManager.computeUnits</a>, <a class="el" href="GPUManager_8java_source.html#l00021">editeurpanovisu.gpu.GPUManager.context</a>, <a class="el" href="GPUManager_8java_source.html#l00023">editeurpanovisu.gpu.GPUManager.device</a>, <a class="el" href="GPUManager_8java_source.html#l00028">editeurpanovisu.gpu.GPUManager.deviceMemory</a>, <a class="el" href="GPUManager_8java_source.html#l00026">editeurpanovisu.gpu.GPUManager.deviceName</a>, <a class="el" href="leaflet_8js_source.html#l00005">e</a>, <a class="el" href="GPUManager_8java_source.html#l00019">editeurpanovisu.gpu.GPUManager.gpuAvailable</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="GPUManager_8java_source.html#l00030">editeurpanovisu.gpu.GPUManager.maxWorkGroupSize</a>, <a class="el" href="leaflet_8js_source.html#l00005">p()</a>, <a class="el" href="GPUManager_8java_source.html#l00024">editeurpanovisu.gpu.GPUManager.platform</a>, <a class="el" href="GPUManager_8java_source.html#l00027">editeurpanovisu.gpu.GPUManager.platformName</a>, <a class="el" href="GPUManager_8java_source.html#l00154">editeurpanovisu.gpu.GPUManager.retrieveDeviceInfo()</a>, et <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>.</p>
+<p class="reference">Références <a class="el" href="OpenLayers_8js_source.html#l00058">Class</a>, <a class="el" href="GPUManager_8java_source.html#l00022">editeurpanovisu.gpu.GPUManager.commandQueue</a>, <a class="el" href="GPUManager_8java_source.html#l00031">editeurpanovisu.gpu.GPUManager.computeUnits</a>, <a class="el" href="GPUManager_8java_source.html#l00021">editeurpanovisu.gpu.GPUManager.context</a>, <a class="el" href="GPUManager_8java_source.html#l00023">editeurpanovisu.gpu.GPUManager.device</a>, <a class="el" href="GPUManager_8java_source.html#l00030">editeurpanovisu.gpu.GPUManager.deviceMaxAllocSize</a>, <a class="el" href="GPUManager_8java_source.html#l00029">editeurpanovisu.gpu.GPUManager.deviceMemory</a>, <a class="el" href="GPUManager_8java_source.html#l00026">editeurpanovisu.gpu.GPUManager.deviceName</a>, <a class="el" href="leaflet_8js_source.html#l00005">e</a>, <a class="el" href="GPUManager_8java_source.html#l00019">editeurpanovisu.gpu.GPUManager.gpuAvailable</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="GPUManager_8java_source.html#l00032">editeurpanovisu.gpu.GPUManager.maxWorkGroupSize</a>, <a class="el" href="GPUManager_8java_source.html#l00028">editeurpanovisu.gpu.GPUManager.openclVersion</a>, <a class="el" href="leaflet_8js_source.html#l00005">p()</a>, <a class="el" href="GPUManager_8java_source.html#l00024">editeurpanovisu.gpu.GPUManager.platform</a>, <a class="el" href="GPUManager_8java_source.html#l00027">editeurpanovisu.gpu.GPUManager.platformName</a>, <a class="el" href="GPUManager_8java_source.html#l00177">editeurpanovisu.gpu.GPUManager.retrieveDeviceInfo()</a>, et <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00035">editeurpanovisu.gpu.GPUManager.GPUManager()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00037">editeurpanovisu.gpu.GPUManager.GPUManager()</a>.</p>
 <div class="dynheader">
 Voici le graphe d'appel pour cette fonction :</div>
 <div class="dyncontent">
@@ -930,7 +1039,7 @@ Voici le graphe des appelants de cette fonction :</div>
 <p>Vérifie si un GPU est disponible. </p>
 <dl class="section return"><dt>Renvoie</dt><dd>true si un GPU OpenCL est disponible </dd></dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00187">187</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00221">221</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
 
 <p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00019">editeurpanovisu.gpu.GPUManager.gpuAvailable</a>.</p>
 
@@ -980,7 +1089,7 @@ Voici le graphe des appelants de cette fonction :</div>
 <p>Vérifie si l'utilisation du GPU est activée par l'utilisateur. </p>
 <dl class="section return"><dt>Renvoie</dt><dd>true si le GPU doit être utilisé </dd></dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00195">195</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00229">229</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
 
 <p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00019">editeurpanovisu.gpu.GPUManager.gpuAvailable</a>, et <a class="el" href="GPUManager_8java_source.html#l00020">editeurpanovisu.gpu.GPUManager.gpuEnabled</a>.</p>
 
@@ -1052,11 +1161,11 @@ Voici le graphe des appelants de cette fonction :</div>
 
 <p>Récupère les informations détaillées du GPU. </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00154">154</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00177">177</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
 
-<p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00029">editeurpanovisu.gpu.GPUManager.computeUnits</a>, <a class="el" href="GPUManager_8java_source.html#l00023">editeurpanovisu.gpu.GPUManager.device</a>, <a class="el" href="GPUManager_8java_source.html#l00028">editeurpanovisu.gpu.GPUManager.deviceMemory</a>, <a class="el" href="GPUManager_8java_source.html#l00026">editeurpanovisu.gpu.GPUManager.deviceName</a>, <a class="el" href="leaflet_8js_source.html#l00005">e</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="GPUManager_8java_source.html#l00030">editeurpanovisu.gpu.GPUManager.maxWorkGroupSize</a>, et <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>.</p>
+<p class="reference">Références <a class="el" href="GPUManager_8java_source.html#l00031">editeurpanovisu.gpu.GPUManager.computeUnits</a>, <a class="el" href="GPUManager_8java_source.html#l00023">editeurpanovisu.gpu.GPUManager.device</a>, <a class="el" href="GPUManager_8java_source.html#l00030">editeurpanovisu.gpu.GPUManager.deviceMaxAllocSize</a>, <a class="el" href="GPUManager_8java_source.html#l00029">editeurpanovisu.gpu.GPUManager.deviceMemory</a>, <a class="el" href="GPUManager_8java_source.html#l00026">editeurpanovisu.gpu.GPUManager.deviceName</a>, <a class="el" href="leaflet_8js_source.html#l00005">e</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="GPUManager_8java_source.html#l00032">editeurpanovisu.gpu.GPUManager.maxWorkGroupSize</a>, <a class="el" href="GPUManager_8java_source.html#l00028">editeurpanovisu.gpu.GPUManager.openclVersion</a>, et <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00053">editeurpanovisu.gpu.GPUManager.initializeGPU()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00055">editeurpanovisu.gpu.GPUManager.initializeGPU()</a>.</p>
 <div class="dynheader">
 Voici le graphe d'appel pour cette fonction :</div>
 <div class="dyncontent">
@@ -1157,7 +1266,7 @@ Voici le graphe des appelants de cette fonction :</div>
   </dd>
 </dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00203">203</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00237">237</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
 
 <p class="reference">Références <a class="el" href="leaflet_8js_source.html#l00005">k()</a>.</p>
 
@@ -1210,7 +1319,7 @@ Voici le graphe des appelants de cette fonction :</div>
 
 <p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00022">22</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00298">editeurpanovisu.gpu.GPUManager.cleanup()</a>, <a class="el" href="GPUManager_8java_source.html#l00222">editeurpanovisu.gpu.GPUManager.getCommandQueue()</a>, et <a class="el" href="GPUManager_8java_source.html#l00053">editeurpanovisu.gpu.GPUManager.initializeGPU()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00365">editeurpanovisu.gpu.GPUManager.cleanup()</a>, <a class="el" href="GPUManager_8java_source.html#l00256">editeurpanovisu.gpu.GPUManager.getCommandQueue()</a>, et <a class="el" href="GPUManager_8java_source.html#l00055">editeurpanovisu.gpu.GPUManager.initializeGPU()</a>.</p>
 
 </div>
 </div>
@@ -1234,9 +1343,9 @@ Voici le graphe des appelants de cette fonction :</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00029">29</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00031">31</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00262">editeurpanovisu.gpu.GPUManager.getComputeUnits()</a>, <a class="el" href="GPUManager_8java_source.html#l00278">editeurpanovisu.gpu.GPUManager.getGPUInfo()</a>, <a class="el" href="GPUManager_8java_source.html#l00053">editeurpanovisu.gpu.GPUManager.initializeGPU()</a>, et <a class="el" href="GPUManager_8java_source.html#l00154">editeurpanovisu.gpu.GPUManager.retrieveDeviceInfo()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00329">editeurpanovisu.gpu.GPUManager.getComputeUnits()</a>, <a class="el" href="GPUManager_8java_source.html#l00345">editeurpanovisu.gpu.GPUManager.getGPUInfo()</a>, <a class="el" href="GPUManager_8java_source.html#l00055">editeurpanovisu.gpu.GPUManager.initializeGPU()</a>, et <a class="el" href="GPUManager_8java_source.html#l00177">editeurpanovisu.gpu.GPUManager.retrieveDeviceInfo()</a>.</p>
 
 </div>
 </div>
@@ -1262,7 +1371,7 @@ Voici le graphe des appelants de cette fonction :</div>
 
 <p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00021">21</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00298">editeurpanovisu.gpu.GPUManager.cleanup()</a>, <a class="el" href="GPUManager_8java_source.html#l00214">editeurpanovisu.gpu.GPUManager.getContext()</a>, et <a class="el" href="GPUManager_8java_source.html#l00053">editeurpanovisu.gpu.GPUManager.initializeGPU()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00365">editeurpanovisu.gpu.GPUManager.cleanup()</a>, <a class="el" href="GPUManager_8java_source.html#l00248">editeurpanovisu.gpu.GPUManager.getContext()</a>, et <a class="el" href="GPUManager_8java_source.html#l00055">editeurpanovisu.gpu.GPUManager.initializeGPU()</a>.</p>
 
 </div>
 </div>
@@ -1288,7 +1397,33 @@ Voici le graphe des appelants de cette fonction :</div>
 
 <p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00023">23</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00230">editeurpanovisu.gpu.GPUManager.getDevice()</a>, <a class="el" href="GPUManager_8java_source.html#l00053">editeurpanovisu.gpu.GPUManager.initializeGPU()</a>, et <a class="el" href="GPUManager_8java_source.html#l00154">editeurpanovisu.gpu.GPUManager.retrieveDeviceInfo()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00264">editeurpanovisu.gpu.GPUManager.getDevice()</a>, <a class="el" href="GPUManager_8java_source.html#l00055">editeurpanovisu.gpu.GPUManager.initializeGPU()</a>, et <a class="el" href="GPUManager_8java_source.html#l00177">editeurpanovisu.gpu.GPUManager.retrieveDeviceInfo()</a>.</p>
+
+</div>
+</div>
+<a id="a3674fda79460b7d0bb1476fee967d908" name="a3674fda79460b7d0bb1476fee967d908"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3674fda79460b7d0bb1476fee967d908">&#9670;&#160;</a></span>deviceMaxAllocSize</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">long</a> editeurpanovisu.gpu.GPUManager.deviceMaxAllocSize = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00030">30</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00321">editeurpanovisu.gpu.GPUManager.getDeviceMaxAllocSize()</a>, <a class="el" href="GPUManager_8java_source.html#l00055">editeurpanovisu.gpu.GPUManager.initializeGPU()</a>, et <a class="el" href="GPUManager_8java_source.html#l00177">editeurpanovisu.gpu.GPUManager.retrieveDeviceInfo()</a>.</p>
 
 </div>
 </div>
@@ -1312,9 +1447,9 @@ Voici le graphe des appelants de cette fonction :</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00028">28</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00029">29</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00254">editeurpanovisu.gpu.GPUManager.getDeviceMemory()</a>, <a class="el" href="GPUManager_8java_source.html#l00278">editeurpanovisu.gpu.GPUManager.getGPUInfo()</a>, <a class="el" href="GPUManager_8java_source.html#l00053">editeurpanovisu.gpu.GPUManager.initializeGPU()</a>, et <a class="el" href="GPUManager_8java_source.html#l00154">editeurpanovisu.gpu.GPUManager.retrieveDeviceInfo()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00311">editeurpanovisu.gpu.GPUManager.getDeviceMemory()</a>, <a class="el" href="GPUManager_8java_source.html#l00345">editeurpanovisu.gpu.GPUManager.getGPUInfo()</a>, <a class="el" href="GPUManager_8java_source.html#l00055">editeurpanovisu.gpu.GPUManager.initializeGPU()</a>, et <a class="el" href="GPUManager_8java_source.html#l00177">editeurpanovisu.gpu.GPUManager.retrieveDeviceInfo()</a>.</p>
 
 </div>
 </div>
@@ -1340,7 +1475,7 @@ Voici le graphe des appelants de cette fonction :</div>
 
 <p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00026">26</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00238">editeurpanovisu.gpu.GPUManager.getDeviceName()</a>, <a class="el" href="GPUManager_8java_source.html#l00278">editeurpanovisu.gpu.GPUManager.getGPUInfo()</a>, <a class="el" href="GPUManager_8java_source.html#l00053">editeurpanovisu.gpu.GPUManager.initializeGPU()</a>, et <a class="el" href="GPUManager_8java_source.html#l00154">editeurpanovisu.gpu.GPUManager.retrieveDeviceInfo()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00272">editeurpanovisu.gpu.GPUManager.getDeviceName()</a>, <a class="el" href="GPUManager_8java_source.html#l00345">editeurpanovisu.gpu.GPUManager.getGPUInfo()</a>, <a class="el" href="GPUManager_8java_source.html#l00055">editeurpanovisu.gpu.GPUManager.initializeGPU()</a>, et <a class="el" href="GPUManager_8java_source.html#l00177">editeurpanovisu.gpu.GPUManager.retrieveDeviceInfo()</a>.</p>
 
 </div>
 </div>
@@ -1366,7 +1501,7 @@ Voici le graphe des appelants de cette fonction :</div>
 
 <p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00019">19</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00278">editeurpanovisu.gpu.GPUManager.getGPUInfo()</a>, <a class="el" href="GPUManager_8java_source.html#l00053">editeurpanovisu.gpu.GPUManager.initializeGPU()</a>, <a class="el" href="GPUManager_8java_source.html#l00187">editeurpanovisu.gpu.GPUManager.isGPUAvailable()</a>, et <a class="el" href="GPUManager_8java_source.html#l00195">editeurpanovisu.gpu.GPUManager.isGPUEnabled()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00345">editeurpanovisu.gpu.GPUManager.getGPUInfo()</a>, <a class="el" href="GPUManager_8java_source.html#l00055">editeurpanovisu.gpu.GPUManager.initializeGPU()</a>, <a class="el" href="GPUManager_8java_source.html#l00221">editeurpanovisu.gpu.GPUManager.isGPUAvailable()</a>, et <a class="el" href="GPUManager_8java_source.html#l00229">editeurpanovisu.gpu.GPUManager.isGPUEnabled()</a>.</p>
 
 </div>
 </div>
@@ -1392,7 +1527,7 @@ Voici le graphe des appelants de cette fonction :</div>
 
 <p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00020">20</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00278">editeurpanovisu.gpu.GPUManager.getGPUInfo()</a>, et <a class="el" href="GPUManager_8java_source.html#l00195">editeurpanovisu.gpu.GPUManager.isGPUEnabled()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00345">editeurpanovisu.gpu.GPUManager.getGPUInfo()</a>, et <a class="el" href="GPUManager_8java_source.html#l00229">editeurpanovisu.gpu.GPUManager.isGPUEnabled()</a>.</p>
 
 </div>
 </div>
@@ -1418,7 +1553,7 @@ Voici le graphe des appelants de cette fonction :</div>
 
 <p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00018">18</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00043">editeurpanovisu.gpu.GPUManager.getInstance()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00045">editeurpanovisu.gpu.GPUManager.getInstance()</a>.</p>
 
 </div>
 </div>
@@ -1442,9 +1577,35 @@ Voici le graphe des appelants de cette fonction :</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00030">30</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00032">32</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00278">editeurpanovisu.gpu.GPUManager.getGPUInfo()</a>, <a class="el" href="GPUManager_8java_source.html#l00270">editeurpanovisu.gpu.GPUManager.getMaxWorkGroupSize()</a>, <a class="el" href="GPUManager_8java_source.html#l00053">editeurpanovisu.gpu.GPUManager.initializeGPU()</a>, et <a class="el" href="GPUManager_8java_source.html#l00154">editeurpanovisu.gpu.GPUManager.retrieveDeviceInfo()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00345">editeurpanovisu.gpu.GPUManager.getGPUInfo()</a>, <a class="el" href="GPUManager_8java_source.html#l00337">editeurpanovisu.gpu.GPUManager.getMaxWorkGroupSize()</a>, <a class="el" href="GPUManager_8java_source.html#l00055">editeurpanovisu.gpu.GPUManager.initializeGPU()</a>, et <a class="el" href="GPUManager_8java_source.html#l00177">editeurpanovisu.gpu.GPUManager.retrieveDeviceInfo()</a>.</p>
+
+</div>
+</div>
+<a id="a917022f00544402f702ed4fa39aaeae2" name="a917022f00544402f702ed4fa39aaeae2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a917022f00544402f702ed4fa39aaeae2">&#9670;&#160;</a></span>openclVersion</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> editeurpanovisu.gpu.GPUManager.openclVersion = &quot;Unknown&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00028">28</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00298">editeurpanovisu.gpu.GPUManager.getBuildOptions()</a>, <a class="el" href="GPUManager_8java_source.html#l00288">editeurpanovisu.gpu.GPUManager.getOpenCLVersion()</a>, <a class="el" href="GPUManager_8java_source.html#l00055">editeurpanovisu.gpu.GPUManager.initializeGPU()</a>, et <a class="el" href="GPUManager_8java_source.html#l00177">editeurpanovisu.gpu.GPUManager.retrieveDeviceInfo()</a>.</p>
 
 </div>
 </div>
@@ -1470,7 +1631,7 @@ Voici le graphe des appelants de cette fonction :</div>
 
 <p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00024">24</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00053">editeurpanovisu.gpu.GPUManager.initializeGPU()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00055">editeurpanovisu.gpu.GPUManager.initializeGPU()</a>.</p>
 
 </div>
 </div>
@@ -1496,7 +1657,7 @@ Voici le graphe des appelants de cette fonction :</div>
 
 <p class="definition">Définition à la ligne <a class="el" href="GPUManager_8java_source.html#l00027">27</a> du fichier <a class="el" href="GPUManager_8java_source.html">GPUManager.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00278">editeurpanovisu.gpu.GPUManager.getGPUInfo()</a>, <a class="el" href="GPUManager_8java_source.html#l00246">editeurpanovisu.gpu.GPUManager.getPlatformName()</a>, et <a class="el" href="GPUManager_8java_source.html#l00053">editeurpanovisu.gpu.GPUManager.initializeGPU()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="GPUManager_8java_source.html#l00345">editeurpanovisu.gpu.GPUManager.getGPUInfo()</a>, <a class="el" href="GPUManager_8java_source.html#l00280">editeurpanovisu.gpu.GPUManager.getPlatformName()</a>, et <a class="el" href="GPUManager_8java_source.html#l00055">editeurpanovisu.gpu.GPUManager.initializeGPU()</a>.</p>
 
 </div>
 </div>

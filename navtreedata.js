@@ -80,15 +80,15 @@ var NAVTREEINDEX =
 "classediteurpanovisu_1_1Plan.html#afbcd02823a9c30423b6457b480562136",
 "classediteurpanovisu_1_1TextUtils.html",
 "classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html#af528d42e252ca23333907e6f87b4bec7",
-"de__DE_8js.html#a31fd1f309e9c8a179c092e64c2b247e5",
-"functions_func_b.html",
-"leaflet_8js.html#a37fd688651de57c5c814e548d10b6520",
-"three_8min1_8js.html#a381d4b7d8c5c3623dfdd815988c50a39",
-"three_8min1_8js.html#abe2399f8f96f2d2f9f9e8f83b1aff15f",
-"three_8min2_8js.html#a56bddd4c5d5cc931ce46221df3aca8ec",
-"three_8min2_8js.html#ae116e0d28ff7aeccc74d440f3a0e4098",
-"three_8min3_8js.html#a72f94a6ba2d1ed845ce6688b61c05ae8",
-"three_8min3_8js.html#afe9ca6f8b6303cd70d48694c032e35f2"
+"classediteurpanovisu_1_1util_1_1SvgIconLoader.html#ad0c3d77e889a0209dc4319b05b2e0e72",
+"functions.html",
+"leaflet_8js.html#a29aaf917c5686947cb2aa1c294e909f8",
+"three_8min1_8js.html#a3316728cf3b0ea6aee9d57c2dda9a4f5",
+"three_8min1_8js.html#ab9fdbbbdae3b25619a74ee678c308520",
+"three_8min2_8js.html#a50e9d31866772acdfecbf92791ef24e5",
+"three_8min2_8js.html#ad94392fbc2465d2bac20c09ca963c812",
+"three_8min3_8js.html#a6dc0aba73dc107f586e0845df4d10dca",
+"three_8min3_8js.html#afad31d235f8b24750f7d9cbc66c0784a"
 ];
 
 var SYNCONMSG = 'cliquez pour désactiver la synchronisation du panel';

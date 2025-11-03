@@ -1,14 +1,17 @@
 <map id="editeurpanovisu.OllamaService.appellerOllama" name="editeurpanovisu.OllamaService.appellerOllama">
-<area shape="rect" id="Node000001" title="Appelle l&#39;API appropriée (Ollama ou Hugging Face) pour générer le texte." alt="" coords="5,113,288,153"/>
-<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1OllamaService.html#a1caed1d4412230dcd4e64455198fe5ce" title="Appelle l&#39;API Ollama locale pour générer le texte." alt="" coords="336,56,619,96"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="262,111,348,96,349,101,263,116"/>
-<area shape="rect" id="Node000004" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="997,95,1036,121"/>
-<area shape="poly" id="edge7_Node000001_Node000004" title=" " alt="" coords="288,127,949,108,983,107,983,112,949,113,288,133"/>
-<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1OllamaService.html#ad46cd20a1434f44192b570bbbf272f2c" title="Appelle OpenRouter API (accès unifié à GPT&#45;4, Claude, Gemini, etc.) Documentation: https://openrouter..." alt="" coords="667,171,949,211"/>
-<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="288,145,336,149,653,176,653,181,336,155,288,150"/>
-<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1OllamaService.html#a368a60df70b43652f89aaf8ffa1ec3fc" title="Extrait la réponse du JSON retourné par Ollama." alt="" coords="667,5,949,45"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="608,53,663,45,664,50,609,59"/>
-<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="619,82,984,103,983,109,619,87"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="900,43,950,62,990,85,987,89,948,66,898,48"/>
-<area shape="poly" id="edge6_Node000005_Node000004" title=" " alt="" coords="898,168,948,150,987,127,990,131,950,154,900,173"/>
+<area shape="rect" id="Node000001" title="Appelle l&#39;API appropriée (Ollama ou Hugging Face) pour générer le texte." alt="" coords="5,177,288,217"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1OllamaService.html#a1caed1d4412230dcd4e64455198fe5ce" title="Appelle l&#39;API Ollama locale pour générer le texte." alt="" coords="336,92,619,132"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="224,175,385,133,386,138,226,180"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="996,127,1035,153"/>
+<area shape="poly" id="edge9_Node000001_Node000004" title=" " alt="" coords="288,208,428,214,594,213,772,200,861,187,947,169,983,155,985,160,949,175,862,193,773,206,594,219,428,219,288,213"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1OllamaService.html#ad46cd20a1434f44192b570bbbf272f2c" title="Appelle OpenRouter API (accès unifié à GPT&#45;4, Claude, Gemini, etc.) Documentation: https://openrouter..." alt="" coords="336,235,619,275"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="263,215,349,230,348,235,262,220"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1OllamaService.html#a368a60df70b43652f89aaf8ffa1ec3fc" title="Extrait la réponse du JSON retourné par Ollama." alt="" coords="667,5,948,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="554,89,716,46,717,52,555,94"/>
+<area shape="poly" id="edge6_Node000002_Node000004" title=" " alt="" coords="619,91,695,87,778,86,864,92,949,105,985,119,983,124,947,111,864,97,778,91,695,92,619,97"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1OllamaService.html#abc0f0c35d2b4399af7b040fc1357c198" title="Récupère la liste des modèles Ollama installés localement." alt="" coords="682,120,933,160"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="619,121,668,126,668,131,619,127"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="910,43,949,62,979,87,1001,114,997,118,975,90,947,66,908,48"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="933,137,982,137,982,143,933,143"/>
+<area shape="poly" id="edge8_Node000006_Node000004" title=" " alt="" coords="619,267,697,268,782,261,867,244,908,231,947,214,976,191,998,163,1002,166,980,195,949,218,910,236,868,249,782,267,697,273,619,273"/>
 </map>
