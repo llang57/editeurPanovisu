@@ -33,28 +33,26 @@ public class OllamaService {
     // Configuration OpenRouter (API unifiée pour GPT-4, Claude, etc. - PRIORITÉ 1)
     private static final String OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
     private static String OPENROUTER_TOKEN = null;
-    // Modèles recommandés par ordre de préférence (meilleur en premier)
-    // ⚠️ GPT-5 retiré : instable (finish_reason: length aléatoire)
-    // anthropic/claude-sonnet-4.5 : Claude Sonnet 4.5 - #1 tech/programmation (sept 2024)
-    // anthropic/claude-3-opus : Claude 3 Opus - Raisonnement approfondi, très factuel
-    // anthropic/claude-3.5-sonnet:20241022 : Claude 3.5 Sonnet daté - Excellent précision
-    // mistralai/mistral-nemo : Mistral Nemo - Bon rapport qualité/prix, multilingue
-    // deepcogito/cogito-v2-preview-deepseek-671b : Cogito v2 Preview - 671B params, raisonnement extrême
-    // openai/gpt-oss-120b : GPT-OSS-120B - Open source, 117B params, très économique (0.04$/M)
-    // openai/gpt-4-turbo : GPT-4 Turbo - Très bon, connaissance encyclopédique
-    // google/gemini-pro : Gemini Pro - Bon, gratuit
+    // Modèles recommandés par ordre de préférence pour DESCRIPTIONS GÉOGRAPHIQUES
+    // Optimisés pour : précision factuelle, coût, rapidité (Nov 2025)
+    // 
+    // 🆓 GRATUIT : google/gemini-2.0-flash-exp ($0) - Excellent rapport qualité/prix
+    // 💚 ÉCONOMIQUE : google/gemini-1.5-flash ($0.08/M), openai/gpt-4o-mini ($0.38/M)
+    // 💰 PREMIUM : anthropic/claude-3.5-sonnet ($9/M), openai/gpt-4o ($6.25/M)
+    // 💎 MAXIMUM : anthropic/claude-3-opus ($45/M) - Réservé contenu critique
     private static final String[] OPENROUTER_MODELS = {
-        "anthropic/claude-sonnet-4.5",          // ⭐ Top Claude (sept 2024)
-        "anthropic/claude-3-opus",              // 🔷 Puissant génération 3
-        "anthropic/claude-3.5-sonnet:20241022", // 📅 Version datée précédente
-        "mistralai/mistral-nemo",               // 🇫🇷 Mistral AI français, multilingue
-        "deepcogito/cogito-v2-preview-deepseek-671b", // 🧠 Cogito v2 - 671B params, raisonnement avancé
-        "openai/gpt-oss-120b",                  // 💰 Open source, très économique
-        "openai/gpt-4-turbo",                   // 🌍 Excellent géographie
-        "google/gemini-pro",                    // 🆓 Gratuit, bon compromis
-        "meta-llama/llama-3.1-8b-instruct"      // 🆓 Open source, gratuit
+        "google/gemini-2.0-flash-exp",          // 🆓 GRATUIT - Rapide, excellent pour descriptions factuelles
+        "google/gemini-1.5-flash",              // � $0.08/M - Meilleur coût/qualité si gratuit expire
+        "anthropic/claude-3.5-sonnet",          // ⭐ $9/M - Top qualité, précision maximale
+        "openai/gpt-4o",                        // � $6.25/M - Excellent connaissances géographiques
+        "openai/gpt-4o-mini",                   // 💚 $0.38/M - Très bon compromis
+        "anthropic/claude-3-haiku",             // � $0.75/M - Rapide et économique
+        "google/gemini-1.5-pro",                // 💰 $3.13/M - Version pro de Gemini
+        "mistralai/mistral-nemo",               // 🇫� $0.15/M - Excellent français, multilingue
+        "anthropic/claude-3-opus",              // 💎 $45/M - Qualité absolue, contenu critique
+        "openai/gpt-4-turbo"                    // 💰 $20/M - Ancien modèle, remplacé par gpt-4o
     };
-    private static String openrouterModel = OPENROUTER_MODELS[0]; // Claude Sonnet 4.5 par défaut
+    private static String openrouterModel = OPENROUTER_MODELS[0]; // Gemini 2.0 Flash par défaut (gratuit)
     
     // Configuration Hugging Face (fallback en ligne - gratuit)
     // Liste de modèles de fallback (essayés dans l'ordre)

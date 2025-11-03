@@ -55,7 +55,14 @@ public class TransformationsPanoramiqueGPU {
                 null
             );
             
-            clBuildProgram(equi2cubeProgram, 0, null, null, null, null);
+            // Build equi2cube kernel avec gestion d'erreur détaillée
+            int buildResult = clBuildProgram(equi2cubeProgram, 0, null, null, null, null);
+            if (buildResult != CL_SUCCESS) {
+                String buildLog = getBuildLog(equi2cubeProgram, gpu);
+                System.err.println("❌ Échec de compilation du kernel equi2cube:");
+                System.err.println(buildLog);
+                throw new RuntimeException("Échec de compilation equi2cube: " + buildLog);
+            }
             equi2cubeKernel = clCreateKernel(equi2cubeProgram, "equi2cube_face", null);
             
             // Charger et compiler le kernel cube2equi
@@ -68,14 +75,64 @@ public class TransformationsPanoramiqueGPU {
                 null
             );
             
-            clBuildProgram(cube2equiProgram, 0, null, null, null, null);
+            // Build cube2equi kernel avec gestion d'erreur détaillée
+            buildResult = clBuildProgram(cube2equiProgram, 0, null, null, null, null);
+            if (buildResult != CL_SUCCESS) {
+                String buildLog = getBuildLog(cube2equiProgram, gpu);
+                System.err.println("❌ Échec de compilation du kernel cube2equi:");
+                System.err.println(buildLog);
+                throw new RuntimeException("Échec de compilation cube2equi: " + buildLog);
+            }
             cube2equiKernel = clCreateKernel(cube2equiProgram, "cube2equi", null);
             
             System.out.println("✅ Kernels GPU initialisés avec succès");
             
         } catch (Exception e) {
             System.err.println("❌ Erreur lors de l'initialisation des kernels: " + e.getMessage());
+            System.err.println("⚠️  Le GPU sera désactivé. Causes possibles:");
+            System.err.println("   • Drivers OpenCL manquants ou incorrects");
+            System.err.println("   • En-têtes OpenCL C manquants (opencl-c-headers)");
+            System.err.println("   • Version OpenCL incompatible");
+            System.err.println("💡 Conseil: Installer opencl-headers ou désactiver le GPU dans les préférences");
+            
+            // Désactiver automatiquement le GPU après échec
+            gpu.setGPUEnabled(false);
+            
             throw new RuntimeException("Échec de l'initialisation des kernels GPU", e);
+        }
+    }
+    
+    /**
+     * Récupère le log de build d'un programme OpenCL
+     * Utile pour diagnostiquer les erreurs de compilation
+     */
+    private static String getBuildLog(cl_program program, GPUManager gpu) {
+        try {
+            // Obtenir la taille du log
+            long[] logSize = new long[1];
+            clGetProgramBuildInfo(
+                program,
+                gpu.getDevice(),
+                CL_PROGRAM_BUILD_LOG,
+                0,
+                null,
+                logSize
+            );
+            
+            // Lire le log
+            byte[] logData = new byte[(int) logSize[0]];
+            clGetProgramBuildInfo(
+                program,
+                gpu.getDevice(),
+                CL_PROGRAM_BUILD_LOG,
+                logSize[0],
+                Pointer.to(logData),
+                null
+            );
+            
+            return new String(logData).trim();
+        } catch (Exception e) {
+            return "Impossible de récupérer le log de build: " + e.getMessage();
         }
     }
     

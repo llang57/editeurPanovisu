@@ -169,6 +169,8 @@ public class ConfigDialogController {
         cbOpenRouterModel.setLayoutX(45);
         cbOpenRouterModel.setLayoutY(445);
         cbOpenRouterModel.setPrefWidth(500);
+        // Configurer la police pour supporter les émojis
+        cbOpenRouterModel.setStyle("-fx-font-family: 'Segoe UI Emoji', 'Noto Color Emoji', 'Apple Color Emoji', sans-serif; -fx-font-size: 13px;");
         // Charger les modèles OpenRouter disponibles avec emoji
         for (String model : OllamaService.getModelesOpenRouterDisponibles()) {
             String displayName = ajouterEmojiModele(model);
@@ -188,6 +190,8 @@ public class ConfigDialogController {
         cbOllamaModel.setLayoutX(45);
         cbOllamaModel.setLayoutY(505);
         cbOllamaModel.setPrefWidth(500);
+        // Configurer la police pour supporter les émojis
+        cbOllamaModel.setStyle("-fx-font-family: 'Segoe UI Emoji', 'Noto Color Emoji', 'Apple Color Emoji', sans-serif; -fx-font-size: 13px;");
         // Charger les modèles Ollama installés avec emoji
         java.util.List<String> modelesOllama = OllamaService.getModelesOllamaDisponibles();
         if (modelesOllama.isEmpty()) {
@@ -458,101 +462,144 @@ public class ConfigDialogController {
     
     /**
      * Ajoute un emoji visuel devant le nom du modèle pour l'interface
-     * @param modelName Nom du modèle (ex: "openai/gpt-5")
-     * @return Nom avec emoji (ex: "⭐ GPT-5")
+     * @param modelName Nom du modèle (ex: "openai/gpt-4o")
+     * @return Nom avec emoji, prix et qualité (ex: "🌍 GPT-4o ($6.25/M) ⭐⭐⭐⭐⭐")
      */
     private static String ajouterEmojiModele(String modelName) {
         if (modelName == null || modelName.isEmpty()) {
             return modelName;
         }
         
-        // Modèles OpenRouter (GPT-5 retiré - instable)
-        if (modelName.equals("anthropic/claude-sonnet-4.5")) {
-            return "⭐ Claude Sonnet 4.5 (Anthropic)";
-        } else if (modelName.equals("anthropic/claude-3-opus")) {
-            return "🔷 Claude 3 Opus (Anthropic)";
-        } else if (modelName.equals("anthropic/claude-3.5-sonnet:20241022")) {
-            return "📅 Claude 3.5 Sonnet (oct 2024)";
+        // Modèles OpenRouter - Nov 2025 (avec prix et qualité)
+        if (modelName.equals("google/gemini-2.0-flash-exp")) {
+            return "[GRATUIT] Gemini 2.0 Flash ★★★★";
+        } else if (modelName.equals("google/gemini-1.5-flash")) {
+            return "[0.07€] Gemini 1.5 Flash ★★★★";
+        } else if (modelName.equals("anthropic/claude-3.5-sonnet")) {
+            return "[8.30€] Claude 3.5 Sonnet ★★★★★";
+        } else if (modelName.equals("openai/gpt-4o")) {
+            return "[5.75€] GPT-4o ★★★★★";
+        } else if (modelName.equals("openai/gpt-4o-mini")) {
+            return "[0.35€] GPT-4o Mini ★★★★";
+        } else if (modelName.equals("anthropic/claude-3-haiku")) {
+            return "[0.69€] Claude 3 Haiku ★★★";
+        } else if (modelName.equals("google/gemini-1.5-pro")) {
+            return "[2.88€] Gemini 1.5 Pro ★★★★★";
         } else if (modelName.equals("mistralai/mistral-nemo")) {
-            return "🇫🇷 Mistral Nemo (Mistral AI)";
-        } else if (modelName.equals("deepcogito/cogito-v2-preview-deepseek-671b")) {
-            return "🧠 Cogito v2 Preview (671B)";
-        } else if (modelName.equals("openai/gpt-oss-120b")) {
-            return "💰 GPT-OSS-120B (Open Source)";
+            return "[0.14€] Mistral Nemo ★★★★";
+        } else if (modelName.equals("anthropic/claude-3-opus")) {
+            return "[41.40€] Claude 3 Opus ★★★★★";
         } else if (modelName.equals("openai/gpt-4-turbo")) {
-            return "🌍 GPT-4 Turbo (OpenAI)";
+            return "[18.40€] GPT-4 Turbo ★★★★★";
+        }
+        // Anciens modèles (compatibilité)
+        else if (modelName.equals("anthropic/claude-sonnet-4.5")) {
+            return "[8.30€] Claude Sonnet 4.5 ★★★★★";
+        } else if (modelName.equals("anthropic/claude-3.5-sonnet:20241022")) {
+            return "[8.30€] Claude 3.5 Sonnet Oct ★★★★★";
         } else if (modelName.equals("google/gemini-pro")) {
-            return "🆓 Gemini Pro (Google)";
+            return "[GRATUIT] Gemini Pro ★★★★";
         } else if (modelName.equals("meta-llama/llama-3.1-8b-instruct")) {
-            return "🆓 Llama 3.1 8B (Meta)";
+            return "[GRATUIT] Llama 3.1 8B ★★★";
+        } else if (modelName.equals("deepcogito/cogito-v2-preview-deepseek-671b")) {
+            return "Cogito v2 (671B) ★★★★";
+        } else if (modelName.equals("openai/gpt-oss-120b")) {
+            return "[0.04€] GPT-OSS-120B ★★★";
         } 
-        // Modèles Ollama locaux
-        else if (modelName.contains("deepseek-r1")) {
-            return "🔸 DeepSeek-R1";
-        } else if (modelName.equals("mistral-nemo")) {
-            return "🔸 Mistral Nemo";
-        } else if (modelName.equals("qwen2.5")) {
-            return "🔸 Qwen 2.5";
-        } else if (modelName.equals("llama3.1")) {
-            return "🔸 Llama 3.1";
-        } else if (modelName.equals("gemma2")) {
-            return "🔸 Gemma 2";
+        // Modèles Ollama locaux (avec taille et qualité)
+        else if (modelName.contains("mistral-nemo")) {
+            return "[7GB] Mistral Nemo - Créatif & précis ★★★★★";
+        } else if (modelName.contains("deepseek-r1")) {
+            return "[5.2GB] DeepSeek-R1 - Raisonnement ★★★★";
+        } else if (modelName.contains("qwen2.5")) {
+            return "[4.7GB] Qwen 2.5 - Excellent faits ★★★★★";
+        } else if (modelName.contains("llama3.1")) {
+            return "[4.9GB] Llama 3.1 - Très fiable ★★★★★";
+        } else if (modelName.contains("gemma2")) {
+            return "[5.4GB] Gemma 2 - Google ★★★★";
+        } else if (modelName.contains("phi3")) {
+            return "[2.2GB] Phi 3 - Compact MS ★★★★";
+        } else if (modelName.contains("llama3.2")) {
+            return "[2GB] Llama 3.2 - Léger ★★★";
+        } else if (modelName.contains("mistral") && !modelName.contains("nemo")) {
+            return "[4.4GB] Mistral - Classique ★★★★";
+        } else if (modelName.contains("codellama")) {
+            return "[3.8GB] CodeLlama - Code ★★★";
         }
         
-        // Par défaut : ajouter un emoji générique
-        return "🤖 " + modelName;
+        // Par défaut : retourner le nom tel quel
+        return modelName;
     }
     
     /**
-     * Extrait le nom du modèle sans l'emoji et la description
-     * @param displayName Nom affiché avec emoji (ex: "⭐ GPT-5 (OpenAI)")
-     * @return Nom technique du modèle (ex: "openai/gpt-5")
+     * Extrait le nom du modèle sans l'emoji, prix et qualité
+     * @param displayName Nom affiché avec emoji (ex: "🌍 GPT-4o ($6.25/M) ⭐⭐⭐⭐⭐")
+     * @return Nom technique du modèle (ex: "openai/gpt-4o")
      */
     private static String extraireNomModele(String displayName) {
         if (displayName == null || displayName.isEmpty()) {
             return displayName;
         }
         
-        // Mapping inverse (GPT-5 retiré)
-        if (displayName.contains("Claude Sonnet 4.5")) {
-            return "anthropic/claude-sonnet-4.5";
+        // Mapping inverse - Nouveaux modèles (Nov 2025)
+        if (displayName.contains("Gemini 2.0 Flash")) {
+            return "google/gemini-2.0-flash-exp";
+        } else if (displayName.contains("Gemini 1.5 Flash")) {
+            return "google/gemini-1.5-flash";
+        } else if (displayName.contains("Claude 3.5 Sonnet") && !displayName.contains("Oct")) {
+            return "anthropic/claude-3.5-sonnet";
+        } else if (displayName.contains("GPT-4o Mini")) {
+            return "openai/gpt-4o-mini";
+        } else if (displayName.contains("GPT-4o") && !displayName.contains("Mini")) {
+            return "openai/gpt-4o";
+        } else if (displayName.contains("Claude 3 Haiku")) {
+            return "anthropic/claude-3-haiku";
+        } else if (displayName.contains("Gemini 1.5 Pro")) {
+            return "google/gemini-1.5-pro";
+        } else if (displayName.contains("Mistral Nemo")) {
+            return "mistralai/mistral-nemo";
         } else if (displayName.contains("Claude 3 Opus")) {
             return "anthropic/claude-3-opus";
-        } else if (displayName.contains("Claude 3.5 Sonnet") && displayName.contains("oct 2024")) {
-            return "anthropic/claude-3.5-sonnet:20241022";
-        } else if (displayName.contains("Mistral Nemo") && displayName.contains("Mistral AI")) {
-            return "mistralai/mistral-nemo";
-        } else if (displayName.contains("Cogito v2 Preview")) {
-            return "deepcogito/cogito-v2-preview-deepseek-671b";
-        } else if (displayName.contains("GPT-OSS-120B")) {
-            return "openai/gpt-oss-120b";
         } else if (displayName.contains("GPT-4 Turbo")) {
             return "openai/gpt-4-turbo";
+        }
+        // Anciens modèles (compatibilité)
+        else if (displayName.contains("Claude Sonnet 4.5")) {
+            return "anthropic/claude-sonnet-4.5";
+        } else if (displayName.contains("Claude 3.5 Sonnet Oct")) {
+            return "anthropic/claude-3.5-sonnet:20241022";
         } else if (displayName.contains("Gemini Pro")) {
             return "google/gemini-pro";
         } else if (displayName.contains("Llama 3.1 8B")) {
             return "meta-llama/llama-3.1-8b-instruct";
+        } else if (displayName.contains("Cogito v2")) {
+            return "deepcogito/cogito-v2-preview-deepseek-671b";
+        } else if (displayName.contains("GPT-OSS-120B")) {
+            return "openai/gpt-oss-120b";
         }
-        // Ollama
-        else if (displayName.contains("DeepSeek-R1")) {
-            // Extraire la version exacte (ex: deepseek-r1:70b)
-            if (displayName.contains(":")) {
-                // Si le nom complet avec version est dans displayName, le retourner
-                return displayName.replaceFirst("^[^a-z]+\\s*", "").split("\\s+")[0];
-            }
-            return "deepseek-r1:70b"; // Version par défaut
-        } else if (displayName.contains("Mistral Nemo")) {
+        // Ollama locaux
+        else if (displayName.contains("Mistral Nemo")) {
             return "mistral-nemo";
+        } else if (displayName.contains("DeepSeek-R1")) {
+            return "deepseek-r1";
         } else if (displayName.contains("Qwen 2.5")) {
             return "qwen2.5";
         } else if (displayName.contains("Llama 3.1") && !displayName.contains("8B")) {
             return "llama3.1";
+        } else if (displayName.contains("Llama 3.2")) {
+            return "llama3.2";
         } else if (displayName.contains("Gemma 2")) {
             return "gemma2";
+        } else if (displayName.contains("Phi 3")) {
+            return "phi3";
+        } else if (displayName.contains("Mistral") && displayName.contains("Classique")) {
+            return "mistral";
+        } else if (displayName.contains("CodeLlama")) {
+            return "codellama";
         }
         
-        // Si pas de correspondance, enlever juste l'emoji au début
-        return displayName.replaceFirst("^[^a-zA-Z0-9]+\\s*", "");
+        // Si pas de correspondance, enlever juste l'emoji et les infos entre parenthèses
+        return displayName.replaceFirst("^[^a-zA-Z0-9]+\\s*", "").split("\\s+\\(")[0].trim();
     }
 
 }
