@@ -2,7 +2,7 @@
 <area shape="rect" id="Node000001" title=" " alt="" coords="5,557,220,597"/>
 <area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1ConfigDialogController.html#a94e80d74ce4457c982269f304efdc2c8" title="Ajoute un emoji visuel devant le nom du modèle pour l&#39;interface." alt="" coords="297,5,517,45"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="111,557,113,466,119,402,131,331,150,257,178,183,216,115,239,84,266,55,283,43,287,47,270,59,243,87,220,118,183,185,155,258,136,332,125,403,118,467,116,557"/>
-<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1ConfigDialogController.html#a810733d6008cc79ce74243007cac9e23" title="Extrait le nom du modèle sans l&#39;emoji et la description." alt="" coords="298,69,517,109"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1ConfigDialogController.html#a810733d6008cc79ce74243007cac9e23" title="Extrait le nom du modèle sans l&#39;emoji, prix et qualité" alt="" coords="298,69,517,109"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="112,557,119,478,128,422,141,362,161,298,187,236,222,177,266,126,284,112,288,117,270,130,226,180,192,238,166,300,146,363,133,423,124,478,117,558"/>
 <area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1gpu_1_1GPUManager.html#a65cc6674dbee14bcf2d3f11f06a26e4b" title="Récupère l&#39;instance unique du gestionnaire GPU." alt="" coords="595,335,863,375"/>
 <area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="121,556,141,517,173,468,215,420,240,399,267,382,304,365,343,352,425,336,505,330,581,332,581,337,506,335,425,341,345,357,306,370,269,386,243,403,219,424,177,471,146,519,125,558"/>

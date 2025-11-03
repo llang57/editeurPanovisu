@@ -1,5 +1,7 @@
 var NAVTREEINDEX28 =
 {
+"functions_func_b.html":[2,3,1,2],
+"functions_func_c.html":[2,3,1,3],
 "functions_func_d.html":[2,3,1,4],
 "functions_func_e.html":[2,3,1,5],
 "functions_func_f.html":[2,3,1,6],
@@ -247,7 +249,5 @@ var NAVTREEINDEX28 =
 "leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0":[3,0,1,0,1,0,0,39],
 "leaflet_8js.html#a30ef8355b684eae0a13b087cfacea520":[3,0,1,0,1,0,0,73],
 "leaflet_8js.html#a3180c21cf7c557eec1dd4dffab4d9c0e":[3,0,1,0,1,0,0,10],
-"leaflet_8js.html#a35e36e7326a82c663d3823d62ed64bd8":[3,0,1,0,1,0,0,72],
-"leaflet_8js.html#a37fd688651de57c5c814e548d10b6520":[3,0,1,0,1,0,0,60],
-"leaflet_8js.html#a380ea26b1927563d18a1717e25159e0b":[3,0,1,0,1,0,0,41]
+"leaflet_8js.html#a35e36e7326a82c663d3823d62ed64bd8":[3,0,1,0,1,0,0,72]
 };

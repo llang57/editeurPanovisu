@@ -1,36 +1,39 @@
 <map id="editeurpanovisu.TransformationsPanoramiqueGPU.equi2cube" name="editeurpanovisu.TransformationsPanoramiqueGPU.equi2cube">
-<area shape="rect" id="Node000001" title="Transformation Équirectangulaire vers Cube accélérée par GPU." alt="" coords="5,120,241,160"/>
-<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1TransformationsPanoramiqueGPU.html#a388060ab2185713a0e2795327a767a55" title="Convertit un buffer RGBA OpenCL en WritableImage JavaFX." alt="" coords="289,184,552,224"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="218,157,314,178,313,184,217,163"/>
-<area shape="rect" id="Node000004" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="600,70,639,95"/>
-<area shape="poly" id="edge20_Node000001_Node000004" title=" " alt="" coords="218,117,289,105,456,89,586,81,587,87,457,94,290,111,218,123"/>
-<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1TransformationsPanoramique.html#a0cc52e5ea8c62bf993d60216992d1993" title="Transformation Équirectangulaire vers Cube (version CPU originale)" alt="" coords="303,309,539,349"/>
-<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="158,158,378,300,375,304,155,163"/>
-<area shape="rect" id="Node000013" href="$classediteurpanovisu_1_1TransformationsPanoramiqueGPU.html#a578f7c9a63ac6b50e7348a20ce155a5d" title="Convertit une image JavaFX en buffer RGBA pour OpenCL." alt="" coords="289,120,552,160"/>
-<area shape="poly" id="edge14_Node000001_Node000013" title=" " alt="" coords="242,137,276,137,276,143,242,143"/>
-<area shape="rect" id="Node000014" href="$classediteurpanovisu_1_1TransformationsPanoramiqueGPU.html#a76ead707f2a4060d42944d2783888d0c" title="Initialise les programmes et kernels OpenCL Doit être appelé une seule fois au démarrage." alt="" coords="299,5,542,45"/>
-<area shape="poly" id="edge18_Node000001_Node000014" title=" " alt="" coords="163,118,221,90,288,62,331,47,333,52,290,66,224,94,165,122"/>
-<area shape="rect" id="Node000003" href="$leaflet_8js.html#a0b6140e993237f978249c7632f6e0bd9" title=" " alt="" coords="600,218,639,243"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="553,219,587,224,586,229,552,224"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="529,181,550,170,567,156,577,141,598,105,598,105,602,108,602,108,581,144,571,159,554,174,532,186"/>
-<area shape="rect" id="Node000005" href="$leaflet_8js.html#ad6ed3998db5d3752930802ce2c9ddef7" title=" " alt="" coords="600,267,639,293"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="475,222,588,265,586,270,473,227"/>
-<area shape="rect" id="Node000006" href="$leaflet_8js.html#a008d931e56b6fc013061112f26afbffb" title=" " alt="" coords="600,119,639,145"/>
-<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="517,181,551,170,588,150,590,155,553,174,519,186"/>
-<area shape="rect" id="Node000007" href="$leaflet_8js.html#a9f9b62a373d2bb4624b7ac2df8151435" title=" " alt="" coords="600,169,639,194"/>
-<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="552,186,586,182,587,188,552,192"/>
-<area shape="poly" id="edge10_Node000008_Node000004" title=" " alt="" coords="460,307,507,276,530,257,550,234,569,202,576,173,583,142,598,106,598,105,603,108,602,108,588,144,582,174,574,204,554,238,534,260,510,281,463,312"/>
-<area shape="poly" id="edge11_Node000008_Node000005" title=" " alt="" coords="501,307,586,285,587,290,502,312"/>
-<area shape="rect" id="Node000009" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="600,465,639,490"/>
-<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="450,347,592,454,588,458,447,352"/>
-<area shape="rect" id="Node000010" href="$leaflet_8js.html#afa3c32d9f7f168b0e59ddc33ec31bb84" title=" " alt="" coords="600,317,639,342"/>
-<area shape="poly" id="edge9_Node000008_Node000010" title=" " alt="" coords="539,327,586,327,586,332,539,332"/>
-<area shape="rect" id="Node000011" href="$leaflet_8js.html#a873cae0273c5a7d9673544bbe0a6fe8b" title=" " alt="" coords="600,366,639,391"/>
-<area shape="poly" id="edge12_Node000008_Node000011" title=" " alt="" coords="502,347,587,368,586,373,501,352"/>
-<area shape="rect" id="Node000012" href="$leaflet_8js.html#a225602860fb21629c65836853697cc39" title=" " alt="" coords="600,415,639,441"/>
-<area shape="poly" id="edge13_Node000008_Node000012" title=" " alt="" coords="463,347,589,410,586,415,461,352"/>
-<area shape="poly" id="edge15_Node000013_Node000004" title=" " alt="" coords="490,117,586,89,588,94,491,123"/>
-<area shape="poly" id="edge16_Node000013_Node000006" title=" " alt="" coords="552,132,586,131,586,136,552,137"/>
-<area shape="poly" id="edge17_Node000013_Node000007" title=" " alt="" coords="518,157,587,172,586,177,517,163"/>
-<area shape="poly" id="edge19_Node000014_Node000004" title=" " alt="" coords="491,43,588,71,586,76,490,48"/>
+<area shape="rect" id="Node000001" title="Transformation Équirectangulaire vers Cube accélérée par GPU." alt="" coords="5,266,241,306"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1TransformationsPanoramiqueGPU.html#a388060ab2185713a0e2795327a767a55" title="Convertit un buffer RGBA OpenCL en WritableImage JavaFX." alt="" coords="289,516,552,556"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="140,305,201,384,243,430,291,472,321,492,352,508,350,512,318,496,288,476,240,434,197,388,136,309"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="884,220,923,246"/>
+<area shape="poly" id="edge22_Node000001_Node000004" title=" " alt="" coords="131,265,153,223,187,169,232,115,259,91,288,71,331,49,369,37,404,30,438,28,510,32,600,32,669,20,725,6,751,3,778,5,807,14,838,32,857,50,872,70,892,118,902,166,905,206,900,206,896,167,887,119,867,73,853,53,834,36,805,19,777,10,752,8,726,12,670,26,600,37,510,37,438,34,404,35,370,42,333,54,291,75,262,95,236,118,191,172,157,225,136,267"/>
+<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1TransformationsPanoramique.html#a0cc52e5ea8c62bf993d60216992d1993" title="Transformation Équirectangulaire vers Cube (version CPU originale)" alt="" coords="303,266,539,306"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="242,284,289,284,289,289,242,289"/>
+<area shape="rect" id="Node000013" href="$classediteurpanovisu_1_1TransformationsPanoramiqueGPU.html#a578f7c9a63ac6b50e7348a20ce155a5d" title="Convertit une image JavaFX en buffer RGBA pour OpenCL." alt="" coords="289,422,552,462"/>
+<area shape="poly" id="edge14_Node000001_Node000013" title=" " alt="" coords="164,304,370,413,368,418,161,309"/>
+<area shape="rect" id="Node000014" href="$classediteurpanovisu_1_1TransformationsPanoramiqueGPU.html#a76ead707f2a4060d42944d2783888d0c" title="Initialise les programmes et kernels OpenCL Doit être appelé une seule fois au démarrage." alt="" coords="299,85,542,125"/>
+<area shape="poly" id="edge18_Node000001_Node000014" title=" " alt="" coords="156,264,373,130,376,135,159,269"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a0b6140e993237f978249c7632f6e0bd9" title=" " alt="" coords="699,598,737,623"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="489,553,601,584,686,602,684,607,599,589,487,558"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="450,554,524,602,573,628,626,650,681,665,736,670,762,667,788,660,812,649,834,634,853,608,868,567,879,516,888,460,897,346,899,259,905,259,902,346,893,460,884,517,873,569,858,610,838,638,814,654,790,665,763,672,736,675,680,670,624,655,570,632,521,606,447,558"/>
+<area shape="rect" id="Node000005" href="$leaflet_8js.html#ad6ed3998db5d3752930802ce2c9ddef7" title=" " alt="" coords="699,450,737,475"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="493,513,599,485,685,466,686,471,601,490,494,518"/>
+<area shape="rect" id="Node000006" href="$leaflet_8js.html#a008d931e56b6fc013061112f26afbffb" title=" " alt="" coords="699,499,737,524"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="552,522,684,512,685,517,552,528"/>
+<area shape="rect" id="Node000007" href="$leaflet_8js.html#a9f9b62a373d2bb4624b7ac2df8151435" title=" " alt="" coords="699,548,737,574"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="552,544,685,556,684,561,552,550"/>
+<area shape="poly" id="edge10_Node000008_Node000004" title=" " alt="" coords="465,304,539,333,584,346,634,356,685,362,737,361,787,352,835,333,854,318,870,299,891,257,896,260,875,302,858,322,837,338,789,358,738,367,685,368,633,362,583,351,537,338,463,309"/>
+<area shape="poly" id="edge11_Node000008_Node000005" title=" " alt="" coords="457,304,688,442,685,447,454,309"/>
+<area shape="rect" id="Node000009" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="699,150,737,175"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="451,264,517,224,599,185,643,172,685,164,686,169,645,177,601,190,520,229,454,268"/>
+<area shape="rect" id="Node000010" href="$leaflet_8js.html#afa3c32d9f7f168b0e59ddc33ec31bb84" title=" " alt="" coords="699,199,737,224"/>
+<area shape="poly" id="edge9_Node000008_Node000010" title=" " alt="" coords="490,264,599,234,685,215,686,221,601,240,491,269"/>
+<area shape="rect" id="Node000011" href="$leaflet_8js.html#a873cae0273c5a7d9673544bbe0a6fe8b" title=" " alt="" coords="699,248,737,274"/>
+<area shape="poly" id="edge12_Node000008_Node000011" title=" " alt="" coords="539,274,685,261,685,266,539,279"/>
+<area shape="rect" id="Node000012" href="$leaflet_8js.html#a225602860fb21629c65836853697cc39" title=" " alt="" coords="699,298,737,323"/>
+<area shape="poly" id="edge13_Node000008_Node000012" title=" " alt="" coords="539,293,685,305,685,310,539,299"/>
+<area shape="poly" id="edge15_Node000013_Node000004" title=" " alt="" coords="552,430,634,421,716,408,787,390,814,380,834,368,858,344,875,315,895,258,900,260,880,317,862,347,838,372,817,385,789,395,717,413,635,426,552,435"/>
+<area shape="poly" id="edge16_Node000013_Node000006" title=" " alt="" coords="498,460,601,485,686,503,685,508,599,490,497,465"/>
+<area shape="poly" id="edge17_Node000013_Node000007" title=" " alt="" coords="470,460,553,501,577,519,601,535,645,548,686,555,685,561,643,553,599,539,574,524,551,506,468,465"/>
+<area shape="poly" id="edge21_Node000014_Node000004" title=" " alt="" coords="466,82,542,56,589,44,639,35,691,32,742,35,792,48,838,71,866,100,885,136,897,174,902,206,897,207,892,175,881,138,862,103,834,75,790,53,741,41,691,37,640,40,590,49,544,61,468,87"/>
+<area shape="rect" id="Node000015" href="$classediteurpanovisu_1_1TransformationsPanoramiqueGPU.html#adf794835acd7ef94fdf5c72bb6677175" title="Récupère le log de build d&#39;un programme OpenCL Utile pour diagnostiquer les erreurs de compilation." alt="" coords="600,85,836,125"/>
+<area shape="poly" id="edge19_Node000014_Node000015" title=" " alt="" coords="542,102,586,102,586,108,542,108"/>
+<area shape="poly" id="edge20_Node000015_Node000004" title=" " alt="" coords="814,123,838,136,855,152,871,170,893,206,888,209,866,173,852,156,834,141,811,127"/>
 </map>

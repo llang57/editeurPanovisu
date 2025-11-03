@@ -1,5 +1,8 @@
 <map id="editeurpanovisu.TransformationsPanoramiqueGPU.initializeKernels" name="editeurpanovisu.TransformationsPanoramiqueGPU.initializeKernels">
-<area shape="rect" id="Node000001" title="Initialise les programmes et kernels OpenCL Doit être appelé une seule fois au démarrage." alt="" coords="5,5,248,45"/>
-<area shape="rect" id="Node000002" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="296,13,335,38"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="248,23,282,23,282,28,248,28"/>
+<area shape="rect" id="Node000001" title="Initialise les programmes et kernels OpenCL Doit être appelé une seule fois au démarrage." alt="" coords="5,35,248,75"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1TransformationsPanoramiqueGPU.html#adf794835acd7ef94fdf5c72bb6677175" title="Récupère le log de build d&#39;un programme OpenCL Utile pour diagnostiquer les erreurs de compilation." alt="" coords="296,5,532,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="248,40,282,36,283,41,249,45"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="580,42,619,67"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="248,54,532,55,566,54,566,59,532,60,248,60"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="532,41,567,47,566,52,532,47"/>
 </map>

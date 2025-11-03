@@ -4,6 +4,7 @@ var classediteurpanovisu_1_1TransformationsPanoramiqueGPU =
     [ "cleanup", "classediteurpanovisu_1_1TransformationsPanoramiqueGPU.html#a8545bd0b67c1f6559043515900b528eb", null ],
     [ "cube2equi", "classediteurpanovisu_1_1TransformationsPanoramiqueGPU.html#ae710cdf874af584ac78d2c61ea44bbce", null ],
     [ "equi2cube", "classediteurpanovisu_1_1TransformationsPanoramiqueGPU.html#a6facf226b3dd260d666e4d2c34591315", null ],
+    [ "getBuildLog", "classediteurpanovisu_1_1TransformationsPanoramiqueGPU.html#adf794835acd7ef94fdf5c72bb6677175", null ],
     [ "imageToByteBuffer", "classediteurpanovisu_1_1TransformationsPanoramiqueGPU.html#a578f7c9a63ac6b50e7348a20ce155a5d", null ],
     [ "initializeKernels", "classediteurpanovisu_1_1TransformationsPanoramiqueGPU.html#a76ead707f2a4060d42944d2783888d0c", null ],
     [ "cube2equiKernel", "classediteurpanovisu_1_1TransformationsPanoramiqueGPU.html#a2ccb797603ab5c566b1d9daa2c6e8f61", null ],
