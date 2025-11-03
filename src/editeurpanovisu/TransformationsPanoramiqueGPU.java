@@ -55,10 +55,10 @@ public class TransformationsPanoramiqueGPU {
                 null
             );
             
-            // Build equi2cube kernel avec options pour éviter les problèmes de headers
-            // -cl-std=CL1.2 : Utilise OpenCL C 1.2 qui ne nécessite pas clc.h
-            // -Werror : Traite les warnings comme des erreurs pour un code plus robuste
-            String buildOptions = "-cl-std=CL1.2";
+                        // Build equi2cube kernel avec options adaptées à la version OpenCL
+            // Clover (OpenCL 1.1): nécessite "-cl-std=CL1.2" pour compatibilité
+            // rusticl (OpenCL 3.0): pas d'options spécifiques nécessaires
+            String buildOptions = gpu.getBuildOptions();
             int buildResult = clBuildProgram(equi2cubeProgram, 0, null, buildOptions, null, null);
             if (buildResult != CL_SUCCESS) {
                 String buildLog = getBuildLog(equi2cubeProgram, gpu);
@@ -78,7 +78,7 @@ public class TransformationsPanoramiqueGPU {
                 null
             );
             
-            // Build cube2equi kernel avec options pour éviter les problèmes de headers
+            // Build cube2equi kernel (mêmes options que equi2cube)
             buildResult = clBuildProgram(cube2equiProgram, 0, null, buildOptions, null, null);
             if (buildResult != CL_SUCCESS) {
                 String buildLog = getBuildLog(cube2equiProgram, gpu);
@@ -94,9 +94,9 @@ public class TransformationsPanoramiqueGPU {
             System.err.println("❌ Erreur lors de l'initialisation des kernels: " + e.getMessage());
             System.err.println("⚠️  Le GPU sera désactivé. Causes possibles:");
             System.err.println("   • Drivers OpenCL manquants ou incorrects");
-            System.err.println("   • En-têtes OpenCL C manquants (opencl-c-headers)");
+            System.err.println("   • Erreur de compilation du kernel");
             System.err.println("   • Version OpenCL incompatible");
-            System.err.println("💡 Conseil: Installer opencl-headers ou désactiver le GPU dans les préférences");
+            System.err.println("💡 L'application continuera en mode CPU (performances acceptables)");
             
             // Désactiver automatiquement le GPU après échec
             gpu.setGPUEnabled(false);

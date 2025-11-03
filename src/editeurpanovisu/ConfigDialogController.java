@@ -471,10 +471,10 @@ public class ConfigDialogController {
         }
         
         // Modèles OpenRouter - Nov 2025 (avec prix et qualité)
-        if (modelName.equals("google/gemini-2.0-flash-exp")) {
+        if (modelName.equals("google/gemini-2.0-flash-exp:free") || modelName.equals("google/gemini-2.0-flash-exp")) {
             return "[GRATUIT] Gemini 2.0 Flash ★★★★";
-        } else if (modelName.equals("google/gemini-1.5-flash")) {
-            return "[0.07€] Gemini 1.5 Flash ★★★★";
+        } else if (modelName.equals("google/gemini-2.5-flash")) {
+            return "[0.07€] Gemini 2.5 Flash ★★★★";
         } else if (modelName.equals("anthropic/claude-3.5-sonnet")) {
             return "[8.30€] Claude 3.5 Sonnet ★★★★★";
         } else if (modelName.equals("openai/gpt-4o")) {
@@ -483,8 +483,8 @@ public class ConfigDialogController {
             return "[0.35€] GPT-4o Mini ★★★★";
         } else if (modelName.equals("anthropic/claude-3-haiku")) {
             return "[0.69€] Claude 3 Haiku ★★★";
-        } else if (modelName.equals("google/gemini-1.5-pro")) {
-            return "[2.88€] Gemini 1.5 Pro ★★★★★";
+        } else if (modelName.equals("google/gemini-2.5-pro")) {
+            return "[2.88€] Gemini 2.5 Pro ★★★★★";
         } else if (modelName.equals("mistralai/mistral-nemo")) {
             return "[0.14€] Mistral Nemo ★★★★";
         } else if (modelName.equals("anthropic/claude-3-opus")) {
@@ -543,9 +543,9 @@ public class ConfigDialogController {
         
         // Mapping inverse - Nouveaux modèles (Nov 2025)
         if (displayName.contains("Gemini 2.0 Flash")) {
-            return "google/gemini-2.0-flash-exp";
-        } else if (displayName.contains("Gemini 1.5 Flash")) {
-            return "google/gemini-1.5-flash";
+            return "google/gemini-2.0-flash-exp:free";
+        } else if (displayName.contains("Gemini 2.5 Flash")) {
+            return "google/gemini-2.5-flash";
         } else if (displayName.contains("Claude 3.5 Sonnet") && !displayName.contains("Oct")) {
             return "anthropic/claude-3.5-sonnet";
         } else if (displayName.contains("GPT-4o Mini")) {
@@ -554,10 +554,10 @@ public class ConfigDialogController {
             return "openai/gpt-4o";
         } else if (displayName.contains("Claude 3 Haiku")) {
             return "anthropic/claude-3-haiku";
-        } else if (displayName.contains("Gemini 1.5 Pro")) {
-            return "google/gemini-1.5-pro";
-        } else if (displayName.contains("Mistral Nemo")) {
-            return "mistralai/mistral-nemo";
+        } else if (displayName.contains("Gemini 2.5 Pro")) {
+            return "google/gemini-2.5-pro";
+        } else if (displayName.contains("Mistral Nemo") && !displayName.contains("[7GB]")) {
+            return "mistralai/mistral-nemo";  // OpenRouter
         } else if (displayName.contains("Claude 3 Opus")) {
             return "anthropic/claude-3-opus";
         } else if (displayName.contains("GPT-4 Turbo")) {

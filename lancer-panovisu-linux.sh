@@ -33,6 +33,9 @@ export PRISM_ORDER=es2,sw
 export LIBGL_ALWAYS_SOFTWARE=0
 export LIBGL_ALWAYS_INDIRECT=0
 
+# Activer rusticl (OpenCL 3.0 moderne) au lieu de Clover (OpenCL 1.1 ancien)
+export RUSTICL_ENABLE=radeonsi
+
 echo "=== Configuration JavaFX 3D ==="
 echo "PRISM_VERBOSE: true"
 echo "PRISM_FORCEGL: $PRISM_FORCEGL"

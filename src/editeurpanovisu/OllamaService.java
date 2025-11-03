@@ -35,24 +35,22 @@ public class OllamaService {
     private static String OPENROUTER_TOKEN = null;
     // Modèles recommandés par ordre de préférence pour DESCRIPTIONS GÉOGRAPHIQUES
     // Optimisés pour : précision factuelle, coût, rapidité (Nov 2025)
-    // 
-    // 🆓 GRATUIT : google/gemini-2.0-flash-exp ($0) - Excellent rapport qualité/prix
-    // 💚 ÉCONOMIQUE : google/gemini-1.5-flash ($0.08/M), openai/gpt-4o-mini ($0.38/M)
-    // 💰 PREMIUM : anthropic/claude-3.5-sonnet ($9/M), openai/gpt-4o ($6.25/M)
-    // 💎 MAXIMUM : anthropic/claude-3-opus ($45/M) - Réservé contenu critique
+    // 💚 ÉCONOMIQUE / Gratuit disponible : google/gemini-2.0-flash-exp:free
+    // 💚 ÉCONOMIQUE : google/gemini-1.5-flash, openai/gpt-4o-mini
+    // 💰 PREMIUM : anthropic/claude-3.5-sonnet, openai/gpt-4o
     private static final String[] OPENROUTER_MODELS = {
-        "google/gemini-2.0-flash-exp",          // 🆓 GRATUIT - Rapide, excellent pour descriptions factuelles
-        "google/gemini-1.5-flash",              // � $0.08/M - Meilleur coût/qualité si gratuit expire
-        "anthropic/claude-3.5-sonnet",          // ⭐ $9/M - Top qualité, précision maximale
-        "openai/gpt-4o",                        // � $6.25/M - Excellent connaissances géographiques
-        "openai/gpt-4o-mini",                   // 💚 $0.38/M - Très bon compromis
-        "anthropic/claude-3-haiku",             // � $0.75/M - Rapide et économique
-        "google/gemini-1.5-pro",                // 💰 $3.13/M - Version pro de Gemini
-        "mistralai/mistral-nemo",               // 🇫� $0.15/M - Excellent français, multilingue
-        "anthropic/claude-3-opus",              // 💎 $45/M - Qualité absolue, contenu critique
-        "openai/gpt-4-turbo"                    // 💰 $20/M - Ancien modèle, remplacé par gpt-4o
+        "google/gemini-2.0-flash-exp:free",     // 🆓 GRATUIT - Gemini 2.0 Flash experimental
+        "google/gemini-2.5-flash",              // 💚 Économique - Gemini 2.5 Flash
+        "openai/gpt-4o-mini",                   // 💚 Bon compromis
+        "anthropic/claude-3.5-sonnet",          // ⭐ Qualité élevée
+        "openai/gpt-4o",                        // 💰 Premium
+        "anthropic/claude-3-haiku",             // Rapide / économique
+        "google/gemini-2.5-pro",                // 💰 Version pro - Gemini 2.5 Pro
+        "mistralai/mistral-nemo",               // Modèle Mistral cloud
+        "anthropic/claude-3-opus",              // 💎 Qualité absolue
+        "openai/gpt-4-turbo"                    // Ancien modèle
     };
-    private static String openrouterModel = OPENROUTER_MODELS[0]; // Gemini 2.0 Flash par défaut (gratuit)
+    private static String openrouterModel = OPENROUTER_MODELS[0]; // Gemini 2.0 Flash free par défaut
     
     // Configuration Hugging Face (fallback en ligne - gratuit)
     // Liste de modèles de fallback (essayés dans l'ordre)
@@ -1149,6 +1147,40 @@ public class OllamaService {
      * Appelle l'API Ollama locale pour générer le texte
      */
     private static String appellerOllamaLocal(String prompt) throws Exception {
+        // VÉRIFICATION CRITIQUE: S'assurer que le modèle existe avant l'appel
+        java.util.List<String> modelesDisponibles = getModelesOllamaDisponibles();
+        if (modelesDisponibles.isEmpty()) {
+            throw new Exception("❌ Ollama est démarré mais aucun modèle n'est installé.\n" +
+                              "Installez un modèle avec: ollama pull mistral-nemo");
+        }
+        
+        // Vérifier si le modèle configuré existe (avec ou sans tag :latest)
+        boolean modeleExiste = false;
+        String modeleComplet = ollamaModel;
+        for (String modele : modelesDisponibles) {
+            // Comparaison flexible: "mistral-nemo" correspond à "mistral-nemo:latest"
+            String modeleBase = modele.contains(":") ? modele.substring(0, modele.indexOf(":")) : modele;
+            String ollamaBase = ollamaModel.contains(":") ? ollamaModel.substring(0, ollamaModel.indexOf(":")) : ollamaModel;
+            
+            if (modele.equals(ollamaModel) || modeleBase.equals(ollamaBase)) {
+                modeleExiste = true;
+                modeleComplet = modele; // Utiliser le nom complet avec tag
+                break;
+            }
+        }
+        
+        if (!modeleExiste) {
+            System.err.println("❌ Modèle '" + ollamaModel + "' non trouvé dans Ollama!");
+            System.err.println("   Modèles disponibles: " + String.join(", ", modelesDisponibles));
+            // Utiliser le premier modèle disponible comme fallback
+            modeleComplet = modelesDisponibles.get(0);
+            System.err.println("   ➤ Fallback vers: " + modeleComplet);
+        }
+        
+        // Utiliser le nom complet du modèle (avec :latest si nécessaire)
+        ollamaModel = modeleComplet;
+        System.out.println("[IA] ✓ Modèle validé: " + ollamaModel);
+        
         URL url = new URL(OLLAMA_URL + GENERATE_ENDPOINT);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         

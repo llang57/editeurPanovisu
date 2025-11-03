@@ -25,7 +25,9 @@ public class GPUManager {
     
     private String deviceName = "Unknown";
     private String platformName = "Unknown";
+    private String openclVersion = "Unknown";
     private long deviceMemory = 0;
+    private long deviceMaxAllocSize = 0;
     private int computeUnits = 0;
     private long maxWorkGroupSize = 0;
     
@@ -82,27 +84,47 @@ public class GPUManager {
             cl_platform_id[] platforms = new cl_platform_id[numPlatforms[0]];
             clGetPlatformIDs(platforms.length, platforms, null);
             
-            // 2. Chercher un GPU
+            // 2. Chercher un GPU en privilégiant rusticl (moderne) sur Clover (ancien)
+            cl_platform_id rusticlPlatform = null;
+            cl_platform_id cloverPlatform = null;
+            String rusticlName = null;
+            String cloverName = null;
+            
             for (cl_platform_id p : platforms) {
                 // Récupérer le nom de la plateforme
                 long[] size = new long[1];
                 clGetPlatformInfo(p, CL_PLATFORM_NAME, 0, null, size);
                 byte[] buffer = new byte[(int)size[0]];
                 clGetPlatformInfo(p, CL_PLATFORM_NAME, buffer.length, Pointer.to(buffer), null);
-                String pName = new String(buffer, 0, buffer.length - 1);
+                String pName = new String(buffer, 0, buffer.length - 1).toLowerCase();
                 
-                // Chercher des GPU sur cette plateforme
+                // Identifier rusticl vs Clover
+                if (pName.contains("rusticl")) {
+                    rusticlPlatform = p;
+                    rusticlName = pName;
+                } else if (pName.contains("clover")) {
+                    cloverPlatform = p;
+                    cloverName = pName;
+                }
+            }
+            
+            // Privilégier rusticl (OpenCL 3.0) sur Clover (OpenCL 1.1)
+            cl_platform_id selectedPlatform = rusticlPlatform != null ? rusticlPlatform : cloverPlatform;
+            String selectedName = rusticlPlatform != null ? rusticlName : cloverName;
+            
+            if (selectedPlatform != null) {
+                // Chercher des GPU sur la plateforme sélectionnée
                 int[] numDevices = new int[1];
-                int result = clGetDeviceIDs(p, CL_DEVICE_TYPE_GPU, 0, null, numDevices);
+                int result = clGetDeviceIDs(selectedPlatform, CL_DEVICE_TYPE_GPU, 0, null, numDevices);
                 
                 if (result == CL_SUCCESS && numDevices[0] > 0) {
                     cl_device_id[] devices = new cl_device_id[numDevices[0]];
-                    clGetDeviceIDs(p, CL_DEVICE_TYPE_GPU, devices.length, devices, null);
+                    clGetDeviceIDs(selectedPlatform, CL_DEVICE_TYPE_GPU, devices.length, devices, null);
                     
                     // Prendre le premier GPU disponible
-                    platform = p;
+                    platform = selectedPlatform;
                     device = devices[0];
-                    platformName = pName;
+                    platformName = selectedName;
                     
                     // Récupérer les infos du GPU
                     retrieveDeviceInfo();
@@ -126,11 +148,12 @@ public class GPUManager {
                     gpuAvailable = true;
                     System.out.println("✅ GPU initialisé avec succès");
                     System.out.println("   📍 Plateforme: " + platformName);
+                    System.out.println("   🔧 Version: " + openclVersion);
                     System.out.println("   🎮 GPU: " + deviceName);
-                    System.out.println("   💾 Mémoire: " + (deviceMemory / 1024 / 1024) + " MB");
+                    System.out.println("   💾 Mémoire globale: " + (deviceMemory / 1024 / 1024) + " MB");
+                    System.out.println("   📦 Alloc max par buffer: " + (deviceMaxAllocSize / 1024 / 1024) + " MB");
                     System.out.println("   ⚡ Unités de calcul: " + computeUnits);
                     System.out.println("   👥 Taille max workgroup: " + maxWorkGroupSize);
-                    break;
                 }
             }
             
@@ -160,10 +183,15 @@ public class GPUManager {
             clGetDeviceInfo(device, CL_DEVICE_NAME, buffer.length, Pointer.to(buffer), null);
             deviceName = new String(buffer, 0, buffer.length - 1);
             
-            // Mémoire globale
+            // Mémoire globale disponible
             long[] mem = new long[1];
             clGetDeviceInfo(device, CL_DEVICE_GLOBAL_MEM_SIZE, Sizeof.cl_long, Pointer.to(mem), null);
             deviceMemory = mem[0];
+            
+            // Taille maximale d'allocation mémoire (important pour GPU intégrés)
+            long[] maxAlloc = new long[1];
+            clGetDeviceInfo(device, CL_DEVICE_MAX_MEM_ALLOC_SIZE, Sizeof.cl_long, Pointer.to(maxAlloc), null);
+            deviceMaxAllocSize = maxAlloc[0];
             
             // Unités de calcul
             int[] units = new int[1];
@@ -174,6 +202,12 @@ public class GPUManager {
             long[] workgroup = new long[1];
             clGetDeviceInfo(device, CL_DEVICE_MAX_WORK_GROUP_SIZE, Sizeof.size_t, Pointer.to(workgroup), null);
             maxWorkGroupSize = workgroup[0];
+            
+            // Version OpenCL du device
+            clGetDeviceInfo(device, CL_DEVICE_VERSION, 0, null, size);
+            buffer = new byte[(int)size[0]];
+            clGetDeviceInfo(device, CL_DEVICE_VERSION, buffer.length, Pointer.to(buffer), null);
+            openclVersion = new String(buffer, 0, buffer.length - 1);
             
         } catch (Exception e) {
             System.err.println("⚠️  Erreur lors de la récupération des infos GPU: " + e.getMessage());
@@ -248,11 +282,44 @@ public class GPUManager {
     }
     
     /**
-     * Récupère la mémoire disponible sur le GPU
-     * @return Mémoire en octets
+     * Récupère la version OpenCL du device
+     * @return Version OpenCL (ex: "OpenCL 1.1 Mesa 24.0.0", "OpenCL 3.0 rusticl")
+     */
+    public String getOpenCLVersion() {
+        return openclVersion;
+    }
+    
+    /**
+     * Détermine les options de compilation OpenCL appropriées selon la version
+     * Pour Clover (OpenCL 1.1): utilise "-cl-std=CL1.2" pour compatibilité
+     * Pour rusticl et autres (OpenCL 2.0+): pas d'options spécifiques nécessaires
+     * @return Options de compilation ou null
+     */
+    public String getBuildOptions() {
+        if (openclVersion.contains("OpenCL 1.")) {
+            // Clover ou anciennes implémentations OpenCL 1.x
+            return "-cl-std=CL1.2";
+        }
+        // rusticl (OpenCL 3.0) et autres implémentations modernes
+        return null;
+    }
+    
+    /**
+     * Récupère la mémoire globale disponible sur le GPU
+     * @return Mémoire totale en octets
      */
     public long getDeviceMemory() {
         return deviceMemory;
+    }
+    
+    /**
+     * Récupère la taille maximale d'allocation mémoire pour un buffer
+     * Pour GPU intégré AMD: peut être limité par le BIOS (512MB typique)
+     * Cette valeur détermine la taille max des images traitables par le GPU
+     * @return Taille max allocation en octets
+     */
+    public long getDeviceMaxAllocSize() {
+        return deviceMaxAllocSize;
     }
     
     /**

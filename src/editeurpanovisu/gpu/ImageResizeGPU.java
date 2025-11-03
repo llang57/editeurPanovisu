@@ -244,8 +244,10 @@ public class ImageResizeGPU {
                 null
             );
             
-            // Options de compilation pour éviter les problèmes avec clc.h
-            String buildOptions = "-cl-std=CL1.2";
+            // Options de compilation adaptées à la version OpenCL
+            // Clover (OpenCL 1.1): nécessite "-cl-std=CL1.2" pour compatibilité
+            // rusticl (OpenCL 3.0): pas d'options spécifiques nécessaires
+            String buildOptions = gpu.getBuildOptions();
             int ret = clBuildProgram(bicubicProgram, 0, null, buildOptions, null, null);
             if (ret != CL_SUCCESS) {
                 long[] logSize = new long[1];
@@ -272,8 +274,8 @@ public class ImageResizeGPU {
                 null
             );
             
-            // Options de compilation pour éviter les problèmes avec clc.h
-            String buildOptions = "-cl-std=CL1.2";
+            // Options de compilation adaptées à la version OpenCL (idem bicubique)
+            String buildOptions = gpu.getBuildOptions();
             int ret = clBuildProgram(lanczosProgram, 0, null, buildOptions, null, null);
             if (ret != CL_SUCCESS) {
                 long[] logSize = new long[1];

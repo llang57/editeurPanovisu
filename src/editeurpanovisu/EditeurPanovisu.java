@@ -14793,6 +14793,8 @@ public class EditeurPanovisu extends Application {
         strContenuFichier += "dernierRepertoireVisite=" + getStrDernierRepertoireVisite() + "\n";
         strContenuFichier += "dernierRepertoireImages=" + getStrDernierRepertoireImages() + "\n";
         strContenuFichier += "gpuEnabled=" + editeurpanovisu.gpu.GPUManager.getInstance().isGPUEnabled() + "\n";
+        strContenuFichier += "openrouterModel=" + OllamaService.getOpenRouterModel() + "\n";
+        strContenuFichier += "ollamaModel=" + OllamaService.getOllamaModel() + "\n";
         OutputStreamWriter oswFichierHisto = null;
         try {
             oswFichierHisto = new OutputStreamWriter(new FileOutputStream(fileFichPreferences), "UTF-8");
