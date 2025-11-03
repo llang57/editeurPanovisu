@@ -45,13 +45,14 @@ glxinfo | grep "OpenGL version" || echo "⚠️  glxinfo non disponible (install
 echo ""
 
 # Lancement avec options JavaFX 3D (ES2 Pipeline activé ✅)
+# Filtrage des warnings GDK bénins
 java \
   --module-path /usr/share/openjfx/lib \
   --add-modules javafx.controls,javafx.fxml,javafx.web,javafx.swing,javafx.media \
   -Dprism.forceGPU=true \
   -Dprism.order=es2,sw \
   -Dprism.verbose=true \
-  -jar editeurPanovisu-3.3.2-SNAPSHOT.jar 2>&1 | tee editeur-panovisu.log
+  -jar editeurPanovisu-3.3.2-SNAPSHOT.jar 2>&1 | grep -v "Gdk-WARNING.*XSetErrorHandler" | tee editeur-panovisu.log
 
 EXIT_CODE=$?
 

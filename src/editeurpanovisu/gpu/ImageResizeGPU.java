@@ -244,7 +244,9 @@ public class ImageResizeGPU {
                 null
             );
             
-            int ret = clBuildProgram(bicubicProgram, 0, null, null, null, null);
+            // Options de compilation pour éviter les problèmes avec clc.h
+            String buildOptions = "-cl-std=CL1.2";
+            int ret = clBuildProgram(bicubicProgram, 0, null, buildOptions, null, null);
             if (ret != CL_SUCCESS) {
                 long[] logSize = new long[1];
                 clGetProgramBuildInfo(bicubicProgram, gpu.getDevice(), 
@@ -270,7 +272,9 @@ public class ImageResizeGPU {
                 null
             );
             
-            int ret = clBuildProgram(lanczosProgram, 0, null, null, null, null);
+            // Options de compilation pour éviter les problèmes avec clc.h
+            String buildOptions = "-cl-std=CL1.2";
+            int ret = clBuildProgram(lanczosProgram, 0, null, buildOptions, null, null);
             if (ret != CL_SUCCESS) {
                 long[] logSize = new long[1];
                 clGetProgramBuildInfo(lanczosProgram, gpu.getDevice(), 

@@ -55,8 +55,11 @@ public class TransformationsPanoramiqueGPU {
                 null
             );
             
-            // Build equi2cube kernel avec gestion d'erreur détaillée
-            int buildResult = clBuildProgram(equi2cubeProgram, 0, null, null, null, null);
+            // Build equi2cube kernel avec options pour éviter les problèmes de headers
+            // -cl-std=CL1.2 : Utilise OpenCL C 1.2 qui ne nécessite pas clc.h
+            // -Werror : Traite les warnings comme des erreurs pour un code plus robuste
+            String buildOptions = "-cl-std=CL1.2";
+            int buildResult = clBuildProgram(equi2cubeProgram, 0, null, buildOptions, null, null);
             if (buildResult != CL_SUCCESS) {
                 String buildLog = getBuildLog(equi2cubeProgram, gpu);
                 System.err.println("❌ Échec de compilation du kernel equi2cube:");
@@ -75,8 +78,8 @@ public class TransformationsPanoramiqueGPU {
                 null
             );
             
-            // Build cube2equi kernel avec gestion d'erreur détaillée
-            buildResult = clBuildProgram(cube2equiProgram, 0, null, null, null, null);
+            // Build cube2equi kernel avec options pour éviter les problèmes de headers
+            buildResult = clBuildProgram(cube2equiProgram, 0, null, buildOptions, null, null);
             if (buildResult != CL_SUCCESS) {
                 String buildLog = getBuildLog(cube2equiProgram, gpu);
                 System.err.println("❌ Échec de compilation du kernel cube2equi:");
