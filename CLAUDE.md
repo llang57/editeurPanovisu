@@ -37,6 +37,19 @@ On Windows, Maven's `initialize` phase runs `increment-build.ps1`, which:
 
 Do not manually edit `build.num` or the version strings in those property files.
 
+### Release versioning
+
+When bumping the version for a release, update these 4 files — all others detect the version dynamically:
+
+| Fichier | Clé |
+|---------|-----|
+| `pom.xml` | `<version>` |
+| `src/project.properties` | `project.version` |
+| `installer.iss` | `#define MyAppVersion` |
+| `src/editeurpanovisu/i18n/PanoVisu.properties` | ligne `# Version` (cosmétique) |
+
+`build-installer.ps1` and `create-linux-portable.sh` detect the JAR name via glob — no version to update there.
+
 ## Architecture
 
 ### Entry Points
