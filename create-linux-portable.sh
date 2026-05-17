@@ -7,12 +7,16 @@ set -e
 
 echo "=== Création de l'archive portable Linux EditeurPanovisu ==="
 
-# Vérifier que le build a été fait
-if [ ! -f "target/app-input/editeurPanovisu-3.4.0.jar" ]; then
+# Détecter dynamiquement le JAR généré
+JAR_FILE=$(ls target/app-input/editeurPanovisu-*.jar 2>/dev/null | head -1)
+if [ -z "$JAR_FILE" ]; then
     echo "❌ Erreur: Le JAR n'existe pas. Exécutez d'abord: mvn clean package -DskipTests -Pportable"
     echo "   (Le profil -Pportable est requis pour inclure les natives Linux et Windows)"
     exit 1
 fi
+JAR_NAME=$(basename "$JAR_FILE")
+VERSION=$(echo "$JAR_NAME" | sed 's/editeurPanovisu-//;s/\.jar//')
+echo "📦 JAR détecté: $JAR_NAME (version $VERSION)"
 
 # Vérifier que les fichiers d'installation existent
 if [ ! -f "doc/install/INSTALLATION.md" ] || \
@@ -47,17 +51,17 @@ fi
 
 # Créer le script de lancement Linux
 echo "📝 Création du script de lancement Linux..."
-cat > "$LINUX_DIR/lancer-editeur-panovisu.sh" << 'EOF'
+cat > "$LINUX_DIR/lancer-editeur-panovisu.sh" << EOF
 #!/bin/bash
 # Script de lancement EditeurPanovisu pour Linux
 
 echo "=== Lancement EditeurPanovisu ==="
-echo "Répertoire de travail: $(pwd)"
+echo "Répertoire de travail: \$(pwd)"
 echo ""
 
 # Détecter le répertoire du script
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-cd "$SCRIPT_DIR"
+SCRIPT_DIR="\$( cd "\$( dirname "\${BASH_SOURCE[0]}" )" && pwd )"
+cd "\$SCRIPT_DIR"
 
 # Configuration JavaFX 3D
 export PRISM_VERBOSE=false
@@ -73,9 +77,9 @@ if ! command -v java &> /dev/null; then
 fi
 
 # Vérifier la version Java
-JAVA_VERSION=$(java -version 2>&1 | head -n 1 | cut -d'"' -f2 | cut -d'.' -f1)
-if [ "$JAVA_VERSION" -lt 25 ]; then
-    echo "⚠️  Attention: Java 25 ou supérieur est recommandé (version détectée: $JAVA_VERSION)"
+JAVA_VERSION=\$(java -version 2>&1 | head -n 1 | cut -d'"' -f2 | cut -d'.' -f1)
+if [ "\$JAVA_VERSION" -lt 25 ]; then
+    echo "⚠️  Attention: Java 25 ou supérieur est recommandé (version détectée: \$JAVA_VERSION)"
 fi
 
 echo "🚀 === Démarrage de l'application ==="
@@ -83,17 +87,17 @@ java -Dfile.encoding=UTF-8 \
      --enable-native-access=ALL-UNNAMED \
      -Xms256m \
      -Xmx4096m \
-     -jar editeurPanovisu-3.4.0.jar
+     -jar "$JAR_NAME"
 
-exit_code=$?
+exit_code=\$?
 
-if [ $exit_code -eq 0 ]; then
+if [ \$exit_code -eq 0 ]; then
     echo "✅ OK: EditeurPanovisu terminé normalement"
 else
-    echo "❌ Erreur: EditeurPanovisu terminé avec le code d'erreur: $exit_code"
+    echo "❌ Erreur: EditeurPanovisu terminé avec le code d'erreur: \$exit_code"
 fi
 
-exit $exit_code
+exit \$exit_code
 EOF
 
 # Rendre le script exécutable
@@ -117,7 +121,6 @@ fi
 
 # Créer l'archive ZIP
 echo "📦 Création de l'archive ZIP..."
-VERSION="3.4.0"
 ZIP_FILE="target/EditeurPanovisu-Linux-Portable-$VERSION.zip"
 if [ -f "$ZIP_FILE" ]; then
     rm "$ZIP_FILE"
