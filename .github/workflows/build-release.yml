@@ -9,7 +9,7 @@ on:
       version:
         description: 'Version number (e.g., 3.4.0)'
         required: true
-        default: '3.4.2'
+        default: '3.4.4'
 
 jobs:
   build-windows:
@@ -276,75 +276,30 @@ jobs:
           fi
           echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
           echo "✅ Version: $VERSION"
+          
+          # Lire les notes de release depuis le fichier RELEASE_NOTES_vX.Y.Z.md
+          RELEASE_FILE="RELEASE_NOTES_${VERSION}.md"
+          if [ -f "$RELEASE_FILE" ]; then
+            echo "✅ Fichier de release trouvé: $RELEASE_FILE"
+            # Encoder pour GitHub Output (multiline)
+            NOTES=$(cat "$RELEASE_FILE")
+          else
+            echo "⚠️  Fichier $RELEASE_FILE non trouvé, utilisation du message par défaut"
+            NOTES="## EditeurPanovisu ${VERSION}\n\nVoir RELEASE_NOTES_${VERSION}.md pour le détail des changements."
+          fi
+          # Écriture sécurisée du contenu multiline dans GitHub Output
+          {
+            echo 'RELEASE_NOTES<<RELEASE_EOF'
+            cat "$RELEASE_FILE" 2>/dev/null || echo "$NOTES"
+            echo 'RELEASE_EOF'
+          } >> $GITHUB_OUTPUT
       
       - name: 🎉 Create Release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ steps.build_info.outputs.VERSION }}
           name: "EditeurPanovisu ${{ steps.build_info.outputs.VERSION }} - Build ${{ steps.build_info.outputs.BUILD_NUM }}"
-          body: |
-            ## 🐛 EditeurPanovisu ${{ steps.build_info.outputs.VERSION }} — Corrections GPU et stabilité
-
-            **Build** : ${{ steps.build_info.outputs.BUILD_NUM }}
-
-            ---
-
-            ### ✨ Nouveautés v3.4.2
-
-            **Détection GPU NVIDIA/AMD sous Windows** 🎮
-            - ✅ **RTX 5070 Ti et cartes récentes** : La plateforme OpenCL NVIDIA CUDA est maintenant détectée sous Windows
-            - ✅ **Toutes marques supportées** : NVIDIA > AMD > rusticl (Mesa) > Intel — sélection automatique du meilleur GPU
-            - ✅ **Diagnostic amélioré** : Les plateformes détectées sont listées au démarrage dans la console
-
-            **Stabilité import panoramiques** 📸
-            - ✅ **Blocage à la 19e image corrigé** : Suppression du pré-calcul mémoire excessif à l'import ([issue #12](https://github.com/llang57/editeurPanovisu/issues/12))
-            - ✅ **Import sans limite pratique** : Projets avec 37+ panoramiques fonctionnent sans saturation mémoire
-            - ✅ **Calcul à la demande** : Les faces cube sont générées uniquement lors de l'affichage du panoramique
-
-            ---
-
-            ### 📦 Téléchargements
-
-            | Plateforme | Fichier | Notes |
-            |------------|---------|-------|
-            | 🪟 **Windows 10/11** | `EditeurPanovisu-Setup-3.4.2.exe` | Installeur automatique |
-            | 🍎 **macOS 11+** | `EditeurPanovisu-3.4.2.dmg` | Image disque |
-            | 🐧 **Linux** | `EditeurPanovisu-Linux-Portable-3.4.2.zip` | ⭐ Recommandé |
-            | 🐧 **Linux** | `EditeurPanovisu-Linux-Portable-3.4.2.tar.gz` | Alternative TAR |
-
-            ⚠️ **Java runtime inclus** — aucune installation Java requise.
-
-            #### Linux
-            ```bash
-            unzip EditeurPanovisu-Linux-Portable-3.4.2.zip
-            cd EditeurPanovisu-Linux-Portable-3.4.2
-            chmod +x lancer-editeur-panovisu.sh
-            ./lancer-editeur-panovisu.sh
-            ```
-
-            ### 🔐 Intégrité
-
-            Checksums SHA256 disponibles dans `checksums.txt` joint.
-
-            ---
-
-            ### 📋 Historique
-
-            **v3.4.0** : Configuration dynamique des modèles IA (OpenRouter, Ollama)
-            **v3.3.3** : Support Linux portable + accélération GPU OpenCL
-            **v3.2.0** : Personnalisation avancée des hotspots (16 animations, couleurs)
-            **v3.1.0** : Correction critique case-sensitivity pour serveurs Linux
-            **v3.0.0** : Intelligence artificielle (Ollama), descriptions automatiques
-
-            ### 📋 Configuration requise
-
-            - **OS** : Windows 10/11 · macOS 11+ · Linux (Debian 11+, Ubuntu 20.04+)
-            - **RAM** : 4 GB minimum, 8 GB recommandé
-            - **GPU** : Optionnel — OpenCL 1.2+ pour accélération (NVIDIA, AMD, Intel)
-
-            ### 🙏 Remerciements
-
-            Merci à Jorge ([@PhotoDidacte](https://github.com/PhotoDidacte)) pour le rapport détaillé de l'issue #12 !
+          body: ${{ steps.build_info.outputs.RELEASE_NOTES }}
           files: |
             artifacts/windows/*
             artifacts/macos/*
