@@ -1,6 +1,6 @@
 # 🌐 Éditeur PanoVisu
 
-[![Version](https://img.shields.io/badge/version-3.3.3-blue.svg)](https://github.com/llang57/editeurPanovisu/releases)
+[![Version](https://img.shields.io/badge/version-3.4.2-blue.svg)](https://github.com/llang57/editeurPanovisu/releases)
 [![Java](https://img.shields.io/badge/Java-25-orange.svg)](https://adoptium.net/)
 [![JavaFX](https://img.shields.io/badge/JavaFX-19-green.svg)](https://openjfx.io/)
 [![License](https://img.shields.io/badge/license-GPL--3.0-brightgreen.svg)](LICENSE)
@@ -21,6 +21,24 @@ PanoVisu combine puissance, simplicité et liberté pour offrir une solution com
 **Languages:** [🇫🇷 Français](README.md) • [🇬🇧 English](README_EN.md)
 
 </div>
+
+---
+
+## 🚀 Version 3.4.2 - Corrections GPU et stabilité
+
+**Quoi de neuf ?**
+
+### 🐛 Corrections critiques (Build 3684+)
+
+**Détection GPU NVIDIA/AMD sous Windows** 🎮
+- ✅ **RTX 5070 Ti et cartes récentes** : Correction de la détection OpenCL sur Windows
+- ✅ **Toutes marques supportées** : NVIDIA CUDA, AMD, Intel — plus seulement les plateformes Mesa/Linux
+- ✅ **Système de priorité** : NVIDIA > AMD > rusticl > Intel pour sélection automatique du meilleur GPU
+
+**Stabilité import panoramiques** 📸
+- ✅ **Plus de blocage à la 19e image** : Suppression du pré-calcul mémoire à l'import (fix issue #12)
+- ✅ **Import illimité** : Projets avec 37+ panoramiques fonctionnent sans saturation mémoire
+- ✅ **Calcul à la demande** : Les faces cube sont générées uniquement lors de l'affichage
 
 ---
 

@@ -9,7 +9,7 @@ on:
       version:
         description: 'Version number (e.g., 3.4.0)'
         required: true
-        default: '3.4.0'
+        default: '3.4.2'
 
 jobs:
   build-windows:
@@ -417,10 +417,10 @@ jobs:
             
             | Plateforme | Fichier | Taille | Notes |
             |------------|---------|--------|-------|
-            | 🪟 **Windows 10/11** | `EditeurPanovisu-Setup-3.4.0.exe` | ~188 MB | Installeur automatique |
-            | 🍎 **macOS 11+** | `EditeurPanovisu-3.4.0.dmg` | ~200 MB | Image disque |
-            | 🐧 **Linux** | `EditeurPanovisu-Linux-Portable-3.4.0.zip` | ~150 MB | ⭐ **Recommandé** |
-            | 🐧 **Linux** | `EditeurPanovisu-Linux-Portable-3.4.0.tar.gz` | ~145 MB | Alternative TAR |
+            | 🪟 **Windows 10/11** | `EditeurPanovisu-Setup-3.4.2.exe` | ~188 MB | Installeur automatique |
+            | 🍎 **macOS 11+** | `EditeurPanovisu-3.4.2.dmg` | ~200 MB | Image disque |
+            | 🐧 **Linux** | `EditeurPanovisu-Linux-Portable-3.4.2.zip` | ~150 MB | ⭐ **Recommandé** |
+            | 🐧 **Linux** | `EditeurPanovisu-Linux-Portable-3.4.2.tar.gz` | ~145 MB | Alternative TAR |
             
             📖 **Installation Linux** : Consultez [INSTALLATION.md](https://github.com/llang57/editeurPanovisu/blob/master/doc/install/INSTALLATION.md) pour le guide complet
             
@@ -448,13 +448,13 @@ jobs:
             ### 🔧 Installation
             
             #### Windows
-            1. Téléchargez `EditeurPanovisu-Setup-3.4.0.exe`
+            1. Téléchargez `EditeurPanovisu-Setup-3.4.2.exe`
             2. Double-cliquez pour installer
             3. Suivez l'assistant d'installation
             4. Lancez via le raccourci Bureau ou Menu Démarrer
             
             #### macOS
-            1. Téléchargez `EditeurPanovisu-3.4.0.dmg`
+            1. Téléchargez `EditeurPanovisu-3.4.2.dmg`
             2. Ouvrez le fichier `.dmg`
             3. Glissez l'icône vers le dossier Applications
             4. Lancez depuis le Launchpad
@@ -462,8 +462,8 @@ jobs:
             #### Linux (Archive Portable)
             ```bash
             # Télécharger et extraire
-            unzip EditeurPanovisu-Linux-Portable-3.4.0.zip
-            cd EditeurPanovisu-Linux-Portable-3.4.0
+            unzip EditeurPanovisu-Linux-Portable-3.4.2.zip
+            cd EditeurPanovisu-Linux-Portable-3.4.2
             
             # Rendre le script exécutable
             chmod +x lancer-panovisu-linux.sh
@@ -510,3 +510,4 @@ jobs:
           echo "✅ **Linux** portable archives created (ZIP + TAR.GZ)" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "📦 All artifacts ready for download!" >> $GITHUB_STEP_SUMMARY
+
