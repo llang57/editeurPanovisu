@@ -188,7 +188,6 @@ jobs:
       
       - name: 🔨 Build with Maven (portable profile)
         run: mvn clean package -DskipTests "-Dskip.build.increment=true" -Pportable
-        shell: pwsh
       
       - name: 📦 Create Linux Portable Archive
         run: |
@@ -284,207 +283,68 @@ jobs:
           tag_name: ${{ steps.build_info.outputs.VERSION }}
           name: "EditeurPanovisu ${{ steps.build_info.outputs.VERSION }} - Build ${{ steps.build_info.outputs.BUILD_NUM }}"
           body: |
-            ## 🤖 EditeurPanovisu ${{ github.ref_name }} - Configuration Dynamique des Modèles IA
-            
-            **Build** : ${{ steps.build_info.outputs.BUILD_NUM }}  
-            **Priorité** : 🤖 Gestion complète des modèles IA + 🎨 Interface intuitive + � Intégration documentation
-            
-            ### ✨ Nouveautés v3.4.0 (Build 3622+)
-            
-            **Configuration JSON externe des modèles IA** 🤖
-            - ✅ **Fichiers de configuration** : `openrouter-models.json` et `ollama-models.json` éditables
-            - ✅ **Vérification API automatique** : Test de disponibilité au démarrage (9/9 OpenRouter, 5/5 Ollama)
-            - ✅ **Cache intelligent** : Durée configurable pour limiter les appels API
-            - ✅ **Gestion backend robuste** : Classes `ModelConfig` et `ModelConfigManager` avec Gson 2.11.0
-            
-            **Interface graphique complète (Ctrl+M)** 🎨
-            - ✅ **Deux onglets dédiés** : OpenRouter et Ollama avec tables synchronisées
-            - ✅ **Drag & drop intuitif** : Réorganisez les priorités en glissant les lignes
-            - ✅ **Dialogues enrichis** : 5 champs par modèle (ID, nom, description, prix/taille, qualité)
-            - ✅ **Liens documentation** : Hyperliens cliquables vers pages officielles des modèles
-            - ✅ **Ouverture navigateur** : Détection multi-plateforme (Firefox, Chrome, Chromium, etc.)
-            
-            **Fonctionnalités avancées** 🚀
-            - 🎯 **Priorités dynamiques** : Recalcul automatique après réordonnancement
-            - 🔍 **Validation en temps réel** : Vérification des IDs de modèles uniques
-            - 💾 **Sauvegarde instantanée** : Modifications persistées immédiatement en JSON
-            - 🔄 **Rechargement à chaud** : Pas de redémarrage nécessaire après modifications
-            
-            ### ⚡ Accélération GPU OpenCL 3.0
-            
-            **Support OpenCL multi-versions** 🎮
-            - ✅ **OpenCL 3.0** : Prise en charge prioritaire si disponible (GPUs récents)
-            - ✅ **Fallback OpenCL 1.2** : Compatibilité automatique avec matériel ancien
-            - ✅ **Fallback CPU** : Bascule transparente si aucun GPU compatible
-            - 🔄 **Détection automatique** : Sélection intelligente de la meilleure version disponible
-            - 📊 **Performances** : Jusqu'à 10× plus rapide pour le redimensionnement d'images
-            - 🎨 **Qualité** : Interpolation Bicubic/Lanczos3 sans crénelage
-            
-            **Compatibilité GPU étendue**
-            - NVIDIA (CUDA) : GeForce GTX/RTX, Quadro, Tesla
-            - AMD (ROCm) : Radeon RX, Radeon Pro
-            - Intel : HD Graphics, Iris, Arc
-            - Détection automatique des capacités et version OpenCL
-            
-            ### 🐧 Anciennes nouveautés v3.3.3 - Distribution Linux Simplifiée
-            
-            **Archive portable Linux** 📦
-            - ✅ **ZIP et TAR.GZ** : Archives complètes autonomes sans dépendances système
-            - 📝 **Documentation triple** : INSTALLATION.md (Markdown), .txt (texte), .html (web stylisé)
-            - 🚀 **Script de lancement** : Détection automatique Java, vérification version, configuration JavaFX 3D
-            - 📁 **Structure propre** : Tous les fichiers Windows (.bat/.vbs) exclus
-            - � **Installation simple** : Extraire, chmod +x, lancer - aucune installation système requise
-            
-            **Corrections Linux** 🐛
-            - ✅ **Cache panoramas** : Correction utilisation cache (700ms → <50ms au chargement)
-            - ✅ **Blocage modal** : Fenêtre configuration ne bloque plus sous Linux
-            - ✅ **NullPointerException** : Protection contre crashes au rechargement projet
-            - ✅ **Build Maven** : Toutes les classes incluses dans le JAR (93/93)
-            
-            **Optimisations WebGL** 🎮
-            - Filtrage trilinéaire (LinearMipmapLinearFilter) pour netteté à toutes distances
-            - Anisotropie dynamique basée sur capacités GPU (jusqu'à 16×)
-            - Mipmaps automatiques pour rendu optimal
-            - Détection compression temps réel avec logs détaillés
-            
-            **Qualité JPEG augmentée** 📸
-            - Panoramas équi : 70% → 90% (niveaux), 95% (principal)
-            - Panoramas cubes : 70% → 88% (niveaux), 92% (principal)
-            - Sharpening optimisé (0.15-0.2) pour netteté sans artefacts
-            
-            **Outils de diagnostic inclus** 🛠️
-            - `diagnostic-webgl.html` : Test capacités GPU navigateur
-            - `test-compression.php` : Vérification compression serveur
-            - `.htaccess` pré-configuré pour éviter compression automatique
-            
-            ### 🎯 Visualiseur Panoramique 3D Haute Qualité
-            
-            **Interface modernisée avec icônes** 🎨
-            - Boutons icônes intuitifs (home, photo, boussole, œil)
-            - Adaptation automatique au thème clair/sombre
-            - Mode plein écran haute résolution (popup 1200×780)
-            
-            **Qualité d'affichage multipliée par 4** 🚀
-            - Faces de cube : 500×500 → 1000×1000 pixels
-            - Préservation parfaite des panoramas 8192×4096
-            - Performances GPU : traitement total < 500ms
-            
-            ### 🗺️ Refonte Carte et Géolocalisation
-            
-            **Migration vers Leaflet** �
-            - Remplacement de NavigateurCarteGluon (bugs crashes)
-            - Architecture lazy loading avec callbacks anti-bugs JavaFX
-            - Marqueurs draggables déplaçables à la souris
-            - Radar champ de vision configurable 0-240m (×3 vs ancien)
-            
-            **Géocodage amélioré** 📍
-            - Recherche d'adresse via Nominatim OpenStreetMap
-            - API complète : ajouteMarqueur(), afficheRadar(), allerCoordonnees()
-            - Chargement asynchrone pour interface réactive
-            
-            ### ⚡ Accélération GPU (OpenCL)
-            
-            - 🎮 **Traitement GPU** : Accélération matérielle pour toutes les opérations de traitement d'images
-            - 📊 **Performances** : 
-              - Chargement des visites : **3.4× plus rapide** (15s → 4.5s)
-              - Affichage à l'écran : **10× plus rapide** (1000ms → 100ms)
-              - Redimensionnement batch : **1.7× plus rapide**
-            - 🎨 **Qualité d'image** : Interpolation Bicubic/Lanczos3 élimine le crénelage
-            - 🔄 **Fallback automatique** : Bascule sur CPU si GPU indisponible
-            
-            **Support GPU**
-            - Compatible OpenCL 1.2+ (NVIDIA CUDA, AMD ROCm, Intel)
-            - Auto-routing intelligent GPU/CPU selon taille d'image
-            - Gestion robuste des colorspaces (CMYK, YCbCr, RGB)
-            
-            ### 🎨 Système de thèmes enrichi
-            
-            **24 thèmes disponibles**
-            - 9 thèmes AtlantaFX (Primer Light/Dark, Nord Light/Dark, Cupertino Light/Dark, Dracula, Mocha, Gruvbox)
-            - 2 thèmes MaterialFX (Light/Dark)
-            - 2 thèmes FlatLaf (Light/Dark)
-            - 2 thèmes Legacy (Clair/Foncé)
-            - 2 thèmes Acidulés (Clair/Foncé)
-            - 2 thèmes Modernes (Clair/Foncé)
-            - 8 thèmes Minimalistes (Bleu/Vert/Rouge/Mauve - Clair/Foncé)
-            
-            **Icônes dynamiques colorées** 🎨
-            - Les icônes SVG prennent automatiquement la couleur du thème
-            - Conversion PNG dynamique avec Apache Batik
-            - Visibilité optimisée thèmes sombres
-            
-            ### 📥 Téléchargements
-            
-            | Plateforme | Fichier | Taille | Notes |
-            |------------|---------|--------|-------|
-            | 🪟 **Windows 10/11** | `EditeurPanovisu-Setup-3.4.2.exe` | ~188 MB | Installeur automatique |
-            | 🍎 **macOS 11+** | `EditeurPanovisu-3.4.2.dmg` | ~200 MB | Image disque |
-            | 🐧 **Linux** | `EditeurPanovisu-Linux-Portable-3.4.2.zip` | ~150 MB | ⭐ **Recommandé** |
-            | 🐧 **Linux** | `EditeurPanovisu-Linux-Portable-3.4.2.tar.gz` | ~145 MB | Alternative TAR |
-            
-            📖 **Installation Linux** : Consultez [INSTALLATION.md](https://github.com/llang57/editeurPanovisu/blob/master/doc/install/INSTALLATION.md) pour le guide complet
-            
-            ### ⚠️ Versions précédentes
-            
-            **v3.3.3** : Support Linux portable + corrections i18n + cache panoramas optimisé  
-            **v3.3.2** : Qualité images optimale en ligne (WebGL, compression, diagnostic)  
-            **v3.3.1** : Système de thèmes enrichi (24 thèmes, icônes dynamiques colorées)  
-            **v3.3.0** : Accélération GPU OpenCL, performances 3-10× améliorées  
-            **v3.2.0** : Personnalisation avancée des hotspots (16 animations, couleurs, icônes personnalisées)  
-            **v3.1.0** : Correction critique case-sensitivity pour serveurs Linux  
-            **v3.0.0** : Intelligence artificielle (Ollama), génération de descriptions automatiques
-            
-            ### 📋 Configuration requise
-            
-            - **Windows** : Windows 10/11 64-bit
-            - **macOS** : macOS 11 Big Sur ou supérieur
-            - **Linux** : Debian 11+, Ubuntu 20.04+, Fedora 35+
-            - **RAM** : 4 GB minimum, 8 GB recommandé
-            - **GPU** : Optionnel - OpenCL 1.2+ pour accélération (NVIDIA, AMD, Intel)
-            - **Disque** : 500 MB d'espace libre
-            
-            ⚠️ **Java runtime inclus** - Aucune installation Java séparée requise !
-            
-            ### 🔧 Installation
-            
-            #### Windows
-            1. Téléchargez `EditeurPanovisu-Setup-3.4.2.exe`
-            2. Double-cliquez pour installer
-            3. Suivez l'assistant d'installation
-            4. Lancez via le raccourci Bureau ou Menu Démarrer
-            
-            #### macOS
-            1. Téléchargez `EditeurPanovisu-3.4.2.dmg`
-            2. Ouvrez le fichier `.dmg`
-            3. Glissez l'icône vers le dossier Applications
-            4. Lancez depuis le Launchpad
-            
-            #### Linux (Archive Portable)
+            ## 🐛 EditeurPanovisu ${{ steps.build_info.outputs.VERSION }} — Corrections GPU et stabilité
+
+            **Build** : ${{ steps.build_info.outputs.BUILD_NUM }}
+
+            ---
+
+            ### ✨ Nouveautés v3.4.2
+
+            **Détection GPU NVIDIA/AMD sous Windows** 🎮
+            - ✅ **RTX 5070 Ti et cartes récentes** : La plateforme OpenCL NVIDIA CUDA est maintenant détectée sous Windows
+            - ✅ **Toutes marques supportées** : NVIDIA > AMD > rusticl (Mesa) > Intel — sélection automatique du meilleur GPU
+            - ✅ **Diagnostic amélioré** : Les plateformes détectées sont listées au démarrage dans la console
+
+            **Stabilité import panoramiques** 📸
+            - ✅ **Blocage à la 19e image corrigé** : Suppression du pré-calcul mémoire excessif à l'import ([issue #12](https://github.com/llang57/editeurPanovisu/issues/12))
+            - ✅ **Import sans limite pratique** : Projets avec 37+ panoramiques fonctionnent sans saturation mémoire
+            - ✅ **Calcul à la demande** : Les faces cube sont générées uniquement lors de l'affichage du panoramique
+
+            ---
+
+            ### 📦 Téléchargements
+
+            | Plateforme | Fichier | Notes |
+            |------------|---------|-------|
+            | 🪟 **Windows 10/11** | `EditeurPanovisu-Setup-3.4.2.exe` | Installeur automatique |
+            | 🍎 **macOS 11+** | `EditeurPanovisu-3.4.2.dmg` | Image disque |
+            | 🐧 **Linux** | `EditeurPanovisu-Linux-Portable-3.4.2.zip` | ⭐ Recommandé |
+            | 🐧 **Linux** | `EditeurPanovisu-Linux-Portable-3.4.2.tar.gz` | Alternative TAR |
+
+            ⚠️ **Java runtime inclus** — aucune installation Java requise.
+
+            #### Linux
             ```bash
-            # Télécharger et extraire
             unzip EditeurPanovisu-Linux-Portable-3.4.2.zip
             cd EditeurPanovisu-Linux-Portable-3.4.2
-            
-            # Rendre le script exécutable
-            chmod +x lancer-panovisu-linux.sh
-            
-            # Lancer l'application
-            ./lancer-panovisu-linux.sh
+            chmod +x lancer-editeur-panovisu.sh
+            ./lancer-editeur-panovisu.sh
             ```
-            
-            ### 🔐 Vérification d'intégrité
-            
-            Checksums SHA256 disponibles dans le fichier `checksums.txt` joint.
-            
-            ### 📚 Documentation
-            
-            - [Guide d'installation](doc/installation/INSTALLATION_UTILISATEUR.md)
-            - [Documentation complète](doc/README.md)
-            - [Configuration API](doc/guides/CONFIGURATION_API_KEYS.md)
-            
+
+            ### 🔐 Intégrité
+
+            Checksums SHA256 disponibles dans `checksums.txt` joint.
+
+            ---
+
+            ### 📋 Historique
+
+            **v3.4.0** : Configuration dynamique des modèles IA (OpenRouter, Ollama)
+            **v3.3.3** : Support Linux portable + accélération GPU OpenCL
+            **v3.2.0** : Personnalisation avancée des hotspots (16 animations, couleurs)
+            **v3.1.0** : Correction critique case-sensitivity pour serveurs Linux
+            **v3.0.0** : Intelligence artificielle (Ollama), descriptions automatiques
+
+            ### 📋 Configuration requise
+
+            - **OS** : Windows 10/11 · macOS 11+ · Linux (Debian 11+, Ubuntu 20.04+)
+            - **RAM** : 4 GB minimum, 8 GB recommandé
+            - **GPU** : Optionnel — OpenCL 1.2+ pour accélération (NVIDIA, AMD, Intel)
+
             ### 🙏 Remerciements
-            
-            Merci à tous les contributeurs et testeurs !
+
+            Merci à Jorge ([@PhotoDidacte](https://github.com/PhotoDidacte)) pour le rapport détaillé de l'issue #12 !
           files: |
             artifacts/windows/*
             artifacts/macos/*
@@ -510,4 +370,5 @@ jobs:
           echo "✅ **Linux** portable archives created (ZIP + TAR.GZ)" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "📦 All artifacts ready for download!" >> $GITHUB_STEP_SUMMARY
+
 
