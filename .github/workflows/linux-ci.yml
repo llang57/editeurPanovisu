@@ -48,7 +48,7 @@ jobs:
       
       - name: 📦 Package Application
         run: |
-          mvn package -DskipTests -q
+          mvn package -DskipTests -Pportable -q
           echo "✅ Packaging réussi"
       
       - name: 🗜️ Create Linux Portable Archive
