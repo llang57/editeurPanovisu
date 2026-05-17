@@ -84,40 +84,55 @@ public class GPUManager {
             cl_platform_id[] platforms = new cl_platform_id[numPlatforms[0]];
             clGetPlatformIDs(platforms.length, platforms, null);
             
-            // 2. Chercher un GPU en privilégiant rusticl (moderne) sur Clover (ancien)
-            cl_platform_id rusticlPlatform = null;
-            cl_platform_id cloverPlatform = null;
-            String rusticlName = null;
-            String cloverName = null;
-            
+            // 2. Chercher un GPU sur toutes les plateformes disponibles
+            // Priorité: NVIDIA > AMD > rusticl (Mesa 3.0) > Intel > autres > Clover
+            System.out.println("   Plateformes OpenCL détectées: " + numPlatforms[0]);
+
+            cl_platform_id selectedPlatform = null;
+            String selectedName = null;
+            int bestPriority = Integer.MAX_VALUE;
+
             for (cl_platform_id p : platforms) {
-                // Récupérer le nom de la plateforme
                 long[] size = new long[1];
                 clGetPlatformInfo(p, CL_PLATFORM_NAME, 0, null, size);
                 byte[] buffer = new byte[(int)size[0]];
                 clGetPlatformInfo(p, CL_PLATFORM_NAME, buffer.length, Pointer.to(buffer), null);
-                String pName = new String(buffer, 0, buffer.length - 1).toLowerCase();
-                
-                // Identifier rusticl vs Clover
-                if (pName.contains("rusticl")) {
-                    rusticlPlatform = p;
-                    rusticlName = pName;
-                } else if (pName.contains("clover")) {
-                    cloverPlatform = p;
-                    cloverName = pName;
+                String pName = new String(buffer, 0, buffer.length - 1);
+                String pNameLower = pName.toLowerCase();
+
+                System.out.println("   Plateforme trouvée: " + pName);
+
+                // Vérifier si cette plateforme expose des GPU
+                try {
+                    int[] nd = new int[1];
+                    clGetDeviceIDs(p, CL_DEVICE_TYPE_GPU, 0, null, nd);
+                    if (nd[0] == 0) continue;
+                } catch (Exception e) {
+                    continue; // Pas de GPU sur cette plateforme
+                }
+
+                // Calculer la priorité (plus petit = meilleur)
+                int priority;
+                if (pNameLower.contains("nvidia"))                              priority = 0;
+                else if (pNameLower.contains("amd") || pNameLower.contains("advanced micro")) priority = 1;
+                else if (pNameLower.contains("rusticl"))                        priority = 2;
+                else if (pNameLower.contains("intel"))                          priority = 3;
+                else if (pNameLower.contains("clover"))                         priority = 5;
+                else                                                            priority = 4;
+
+                if (priority < bestPriority) {
+                    bestPriority = priority;
+                    selectedPlatform = p;
+                    selectedName = pName;
                 }
             }
-            
-            // Privilégier rusticl (OpenCL 3.0) sur Clover (OpenCL 1.1)
-            cl_platform_id selectedPlatform = rusticlPlatform != null ? rusticlPlatform : cloverPlatform;
-            String selectedName = rusticlPlatform != null ? rusticlName : cloverName;
-            
+
             if (selectedPlatform != null) {
                 // Chercher des GPU sur la plateforme sélectionnée
                 int[] numDevices = new int[1];
-                int result = clGetDeviceIDs(selectedPlatform, CL_DEVICE_TYPE_GPU, 0, null, numDevices);
-                
-                if (result == CL_SUCCESS && numDevices[0] > 0) {
+                clGetDeviceIDs(selectedPlatform, CL_DEVICE_TYPE_GPU, 0, null, numDevices);
+
+                if (numDevices[0] > 0) {
                     cl_device_id[] devices = new cl_device_id[numDevices[0]];
                     clGetDeviceIDs(selectedPlatform, CL_DEVICE_TYPE_GPU, devices.length, devices, null);
                     
