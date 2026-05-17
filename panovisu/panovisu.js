@@ -2756,14 +2756,14 @@ function panovisu(iNumPano) {
         if (!oldScene || !oldCamera || !newFBO || !oldFBO || !transitionScene) {
             console.warn("DEBUG renderTransition() - Objets manquants:", {
                 oldScene: !!oldScene,
-                oldCamera: !!oldCamera, 
+                oldCamera: !!oldCamera,
                 newFBO: !!newFBO,
                 oldFBO: !!oldFBO,
                 transitionScene: !!transitionScene
             });
             return;
         }
-        
+
         // Si la nouvelle scène n'est pas encore prête, afficher l'ancienne en attendant
         if (!scene || !camera) {
             renderer.setRenderTarget(null);
@@ -2771,47 +2771,47 @@ function panovisu(iNumPano) {
             renderer.render(oldScene, oldCamera);
             return;
         }
-        
+
         // Calculer la progression de la transition (0 → 1)
         var elapsed = Date.now() - transitionStartTime;
         var progress = Math.min(elapsed / transitionDuration, 1);
-        
+
         // Log seulement tous les 10% pour ne pas saturer la console
         if (progress === 0 || progress >= 1 || Math.floor(progress * 10) !== Math.floor((progress - 0.05) * 10)) {
             console.log("DEBUG renderTransition() - progress:", progress.toFixed(3), "elapsed:", elapsed, "ms");
         }
-        
+
         // Mettre à jour le mixRatio dans le shader (0 = ancienne scène, 1 = nouvelle scène)
         if (transitionMaterial && transitionMaterial.uniforms) {
             transitionMaterial.uniforms.mixRatio.value = progress;
         }
-        
+
         // Rendre l'ancienne scène dans oldFBO
         renderer.setRenderTarget(oldFBO);
         renderer.clear();
         renderer.render(oldScene, oldCamera);
-        
+
         // Rendre la nouvelle scène dans newFBO
         renderer.setRenderTarget(newFBO);
         renderer.clear();
         renderer.render(scene, camera);
-        
+
         // Lier les textures au shader
         if (transitionMaterial && transitionMaterial.uniforms) {
             transitionMaterial.uniforms.tDiffuse1.value = oldFBO.texture;
             transitionMaterial.uniforms.tDiffuse2.value = newFBO.texture;
         }
-        
+
         // Rendre la scène de transition à l'écran
         renderer.setRenderTarget(null);
         renderer.clear();
         renderer.render(transitionScene, transitionCamera);
-        
+
         // Terminer la transition quand progress atteint 1
         if (progress >= 1) {
             isTransitioning = false;
             console.log("DEBUG renderTransition() - Transition terminée !");
-            
+
             // Nettoyer l'ancienne scène
             if (oldScene) {
                 cleanupScene(oldScene);
@@ -2823,7 +2823,7 @@ function panovisu(iNumPano) {
             requestAnimationFrame(affiche);
         }
     }
-    
+
     /**
      * Démarre la transition WebGL
      */
@@ -2842,20 +2842,20 @@ function panovisu(iNumPano) {
             });
         }
     }
-    
+
     /**
      * Nettoie une scène Three.js (dispose des géométries, matériaux, textures)
      */
     function cleanupScene(sceneToClean) {
         if (!sceneToClean) return;
-        
-        sceneToClean.traverse(function(object) {
+
+        sceneToClean.traverse(function (object) {
             if (object.geometry) {
                 object.geometry.dispose();
             }
             if (object.material) {
                 if (Array.isArray(object.material)) {
-                    object.material.forEach(function(mat) {
+                    object.material.forEach(function (mat) {
                         if (mat.map) mat.map.dispose();
                         if (mat.lightMap) mat.lightMap.dispose();
                         if (mat.bumpMap) mat.bumpMap.dispose();
@@ -2913,7 +2913,7 @@ function panovisu(iNumPano) {
         if (bLittlePlanetView) {
             camera.position.copy(target).negate();
         }
-        
+
         // Rendu avec transition WebGL si en cours
         if (isTransitioning && oldScene && oldCamera && transitionScene && scene && camera) {
             renderTransition();
@@ -2922,7 +2922,7 @@ function panovisu(iNumPano) {
         } else {
             console.warn("DEBUG affiche() - AUCUN RENDU - renderer:", !!renderer, "scene:", !!scene, "camera:", !!camera, "isTransitioning:", isTransitioning);
         }
-        
+
         var bouss = longitude - zeroNord;
         if (strBoussoleAiguille === "oui") {
             $("#bousAig-" + iNumPano).css({ transform: "rotate(" + bouss + "deg)" });
@@ -3201,23 +3201,23 @@ function panovisu(iNumPano) {
         });
         $("#barre-" + iNumPano + " button img").css({ height: "26px", width: "26px", paddingBottom: "0px", marginLeft: "0px" });
         $("#barre-" + iNumPano).css({ height: "40px" });
-        
+
         // Appliquer l'opacité au conteneur boutons-
         var boutonsElement = $("#boutons-" + iNumPano);
-        boutonsElement.css({ 
+        boutonsElement.css({
             opacity: opaciteBarrePersonnalisee,
             transition: "opacity 0.3s ease"
         });
-        
+
         // Ajouter l'effet hover pour passer à opacité 1.0
         boutonsElement.off("mouseenter mouseleave"); // Retirer les anciens événements
-        boutonsElement.on("mouseenter", function() {
+        boutonsElement.on("mouseenter", function () {
             $(this).css({ opacity: 1.0 });
         });
-        boutonsElement.on("mouseleave", function() {
+        boutonsElement.on("mouseleave", function () {
             $(this).css({ opacity: opaciteBarrePersonnalisee });
         });
-        
+
         $("#button-" + iNumPano).show();
         requestTimeout(function () {
             w1 = $("#barre-" + iNumPano).width();
@@ -4187,12 +4187,12 @@ function panovisu(iNumPano) {
                                         // Fenêtre À propos personnalisée
                                         var aproposHTML = '<div style="text-align: center; padding: 30px; font-family: Arial, sans-serif;">' +
                                             '<h2 style="color: white; margin: 0 0 20px 0; font-size: 24px; font-weight: bold;">panoVisu v3</h2>' +
-                                            '<p style="color: white; margin: 0; font-size: 16px;">L. LANG (2014-2025)</p>' +
+                                            '<p style="color: white; margin: 0; font-size: 16px;">L. LANG (2014-2026)</p>' +
                                             '<p style="color: #ccc; margin: 20px 0 0 0; font-size: 14px;">Éditeur de visites virtuelles panoramiques</p>' +
                                             '</div>';
                                         $("#infoPanovisu-" + iNumPano).html(aproposHTML);
-                                        $("#infoPanovisu-" + iNumPano).css({ 
-                                            width: "450px", 
+                                        $("#infoPanovisu-" + iNumPano).css({
+                                            width: "450px",
                                             height: "200px",
                                             backgroundColor: "rgba(0, 0, 0, 0.85)",
                                             border: "2px solid white",
@@ -4250,19 +4250,19 @@ function panovisu(iNumPano) {
             loader = new THREE.TextureLoader();
 
             var nomimage = strPanoImage.split("/")[0] + "/niveau" + niveau + "/" + strPanoImage.split("/")[1];
-            
+
             // Vérifier la taille réelle du fichier téléchargé
             fetch(nomimage + ".jpg", { method: 'HEAD', cache: 'no-store' })
                 .then(response => {
                     const contentLength = response.headers.get('Content-Length');
                     const contentEncoding = response.headers.get('Content-Encoding');
                     const sizeMB = contentLength ? (contentLength / 1024 / 1024).toFixed(2) : 'inconnu';
-                    console.log("📦 Niveau", niveau, "- Fichier téléchargé:", sizeMB, "MB", 
-                               contentEncoding ? "(Encodage: " + contentEncoding + ")" : "",
-                               "URL:", nomimage + ".jpg");
+                    console.log("📦 Niveau", niveau, "- Fichier téléchargé:", sizeMB, "MB",
+                        contentEncoding ? "(Encodage: " + contentEncoding + ")" : "",
+                        "URL:", nomimage + ".jpg");
                 })
                 .catch(err => console.log("⚠️ Impossible de vérifier la taille du fichier niveau", niveau));
-            
+
             loader.load(nomimage + ".jpg", function (texture) {
                 iNbTextures++;
                 textures[iNbTextures] = texture;
@@ -4291,7 +4291,7 @@ function panovisu(iNumPano) {
                         }
                         iNbMateriaux++;
                         // MIGRATION THREE.JS R160: SRGBColorSpace gère correctement l'exposition
-                        materiaux[iNbMateriaux] = new THREE.MeshBasicMaterial({ 
+                        materiaux[iNbMateriaux] = new THREE.MeshBasicMaterial({
                             map: texture
                         });
                         iNbMeshes++;
@@ -4342,7 +4342,7 @@ function panovisu(iNumPano) {
                         }
                         iNbMateriaux++;
                         // MIGRATION THREE.JS R160: SRGBColorSpace gère correctement l'exposition
-                        materiaux[iNbMateriaux] = new THREE.MeshBasicMaterial({ 
+                        materiaux[iNbMateriaux] = new THREE.MeshBasicMaterial({
                             map: texture
                         });
                         iNbMeshes++;
@@ -4530,7 +4530,7 @@ function panovisu(iNumPano) {
                 if (!renderer) {
                     // Créer le renderer seulement s'il n'existe pas encore
                     console.log("DEBUG initPanoSphere() - Création du renderer");
-                    
+
                     if (supportWebgl()) {
                         renderer = new THREE.WebGLRenderer();
                         // MIGRATION THREE.JS R160: No Tone Mapping pour rendu brut, couleurs originales
@@ -4578,7 +4578,7 @@ function panovisu(iNumPano) {
                 }
                 iNbMateriaux++;
                 // MIGRATION THREE.JS R160: SRGBColorSpace gère correctement l'exposition
-                materiaux[iNbMateriaux] = new THREE.MeshBasicMaterial({ 
+                materiaux[iNbMateriaux] = new THREE.MeshBasicMaterial({
                     map: texture
                 });
                 iNbMeshes++;
@@ -4643,7 +4643,7 @@ function panovisu(iNumPano) {
                 if (!renderer) {
                     // Créer le renderer seulement s'il n'existe pas encore
                     console.log("DEBUG initPanoSphere() sans MultiReso - Création du renderer");
-                    
+
                     if (supportWebgl()) {
                         renderer = new THREE.WebGLRenderer({
                             preserveDrawingBuffer: true
@@ -4683,7 +4683,7 @@ function panovisu(iNumPano) {
 
                 iNbMateriaux++;
                 // MIGRATION THREE.JS R160: SRGBColorSpace gère correctement l'exposition
-                materiaux[iNbMateriaux] = new THREE.MeshBasicMaterial({ 
+                materiaux[iNbMateriaux] = new THREE.MeshBasicMaterial({
                     map: texture
                 });
                 iNbMeshes++;
@@ -4749,7 +4749,7 @@ function panovisu(iNumPano) {
         console.log("📦 Cube niveau", niveau, "- Anisotropy:", maxAniso);
         iNbMateriaux++;
         // MIGRATION THREE.JS R160: SRGBColorSpace gère correctement l'exposition
-        materiaux[iNbMateriaux] = new THREE.MeshBasicMaterial({ 
+        materiaux[iNbMateriaux] = new THREE.MeshBasicMaterial({
             map: textures[iText]
         });
         var image = new Image();
@@ -4859,7 +4859,7 @@ function panovisu(iNumPano) {
         console.log("📦 Cube - Anisotropy:", maxAniso);
         iNbMateriaux++;
         // MIGRATION THREE.JS R160: SRGBColorSpace gère correctement l'exposition
-        materiaux[iNbMateriaux] = new THREE.MeshBasicMaterial({ 
+        materiaux[iNbMateriaux] = new THREE.MeshBasicMaterial({
             map: textures[iText]
         });
 
@@ -4935,10 +4935,10 @@ function panovisu(iNumPano) {
             var context = texture_placeholder.getContext('2d');
             context.fillStyle = 'rgb( 128, 128, 128 )';
             context.fillRect(0, 0, texture_placeholder.width, texture_placeholder.height);
-            
+
             // Créer le renderer seulement s'il n'existe pas encore
             console.log("DEBUG initPanoCube() - Création du renderer");
-            
+
             if (supportWebgl()) {
                 renderer = new THREE.WebGLRenderer();
                 // MIGRATION THREE.JS R160: No Tone Mapping pour rendu brut, couleurs originales
@@ -5472,14 +5472,14 @@ function panovisu(iNumPano) {
      */
     function creeHotspot(num) {
         // Créer le div du hotspot
-        var $hotspot = $("<div>", { 
-            id: "HS-" + num + "-" + iNumPano, 
-            class: "hotSpots" 
+        var $hotspot = $("<div>", {
+            id: "HS-" + num + "-" + iNumPano,
+            class: "hotSpots"
         });
-        
+
         // Debug : afficher les propriétés du hotspot
         console.log("Hotspot " + num + " - anime: " + arrPointsInteret[num].anime + ", agranditSurvol: " + arrPointsInteret[num].agranditSurvol);
-        
+
         // Ajouter la classe CSS selon le type d'animation
         // Si anime contient un type spécifique, utiliser ce type
         // Sinon, si anime === "true", utiliser "pulse" par défaut
@@ -5491,22 +5491,22 @@ function panovisu(iNumPano) {
             console.log("Ajout de la classe hotspot-anime-" + typeAnimation + " au hotspot " + num);
             $hotspot.addClass("hotspot-anime-" + typeAnimation);
         }
-        
+
         // Ajouter la classe pour l'agrandissement au survol
         if (arrPointsInteret[num].agranditSurvol === "true") {
             console.log("Ajout de la classe hotspot-agrandit au hotspot " + num);
             $hotspot.addClass("hotspot-agrandit");
         }
-        
+
         $hotspot.appendTo("#panovisu-" + iNumPano);
-        
-        $("<img>", { 
-            id: "imgHS-" + num + "-" + iNumPano, 
-            width: arrPointsInteret[num].taille, 
-            src: arrPointsInteret[num].image, 
-            title: arrPointsInteret[num].info 
+
+        $("<img>", {
+            id: "imgHS-" + num + "-" + iNumPano,
+            width: arrPointsInteret[num].taille,
+            src: arrPointsInteret[num].image,
+            title: arrPointsInteret[num].info
         }).appendTo("#HS-" + num + "-" + iNumPano);
-        
+
         numHotspot += 1;
     }
 
@@ -6727,17 +6727,17 @@ function panovisu(iNumPano) {
                         opacity: opaciteBarrePersonnalisee,
                         transition: "opacity 0.3s ease"
                     });
-                    
+
                     // Ajouter l'effet hover pour passer à opacité 1.0
                     var telecElement = $("#telec-" + iNumPano);
                     telecElement.off("mouseenter mouseleave"); // Retirer les anciens événements
-                    telecElement.on("mouseenter", function() {
+                    telecElement.on("mouseenter", function () {
                         $(this).css({ opacity: 1.0 });
                     });
-                    telecElement.on("mouseleave", function() {
+                    telecElement.on("mouseleave", function () {
                         $(this).css({ opacity: opaciteBarrePersonnalisee });
                     });
-                    
+
                     if (strTelecommandePositionX === "center") {
                         $("#telec-" + iNumPano).css("left", (pano.width() - $("#telec-" + iNumPano).width()) / 2.0 + telecommandeDX + "px");
                     }
@@ -6793,22 +6793,22 @@ function panovisu(iNumPano) {
     function rechargePano(xmlFile) {
         bDejaCharge = true;
         clearInterval(timers);
-        
+
         // Forcer la recréation de la scène en mettant bReloaded à false
         // Cela garantit que tous les meshes seront recréés
         bReloaded = false;
-        
+
         // Fondu enchaîné WebGL : sauvegarder l'ancienne scène et créer les FBOs
         if (bDejaCharge && renderer && scene && camera) {
             console.log("DEBUG rechargePano() - Préparation transition WebGL");
             // Sauvegarder l'ancienne scène et caméra
             oldScene = scene;
             oldCamera = camera;
-            
+
             // Créer les FBOs si nécessaire
             var width = $("#container-" + iNumPano).width();
             var height = $("#container-" + iNumPano).height();
-            
+
             if (!oldFBO || oldFBO.width !== width || oldFBO.height !== height) {
                 if (oldFBO) oldFBO.dispose();
                 oldFBO = new THREE.WebGLRenderTarget(width, height, {
@@ -6820,7 +6820,7 @@ function panovisu(iNumPano) {
                     stencilBuffer: false
                 });
             }
-            
+
             if (!newFBO || newFBO.width !== width || newFBO.height !== height) {
                 if (newFBO) newFBO.dispose();
                 newFBO = new THREE.WebGLRenderTarget(width, height, {
@@ -6832,14 +6832,14 @@ function panovisu(iNumPano) {
                     stencilBuffer: false
                 });
             }
-            
+
             // Créer la scène de transition avec shader si elle n'existe pas
             if (!transitionScene) {
                 transitionScene = new THREE.Scene();
-                
+
                 // Caméra orthographique normalisée (-1 à 1) pour post-processing
                 transitionCamera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-                
+
                 transitionMaterial = new THREE.ShaderMaterial({
                     uniforms: {
                         tDiffuse1: { value: null },
@@ -6874,29 +6874,29 @@ function panovisu(iNumPano) {
                             gl_FragColor = vec4(mixed.rgb, 1.0);
                         }`
                 });
-                
+
                 // Quad de taille 2x2 centré à l'origine (couvre tout l'écran en coordonnées normalisées)
                 var quadGeometry = new THREE.PlaneGeometry(2, 2);
                 transitionQuad = new THREE.Mesh(quadGeometry, transitionMaterial);
                 transitionScene.add(transitionQuad);
-                
+
                 console.log("DEBUG - Scène de transition créée avec quad 2x2 et caméra ortho normalisée");
             }
             // Pas besoin de mettre à jour la taille, la caméra est normalisée
-            
+
             // IMPORTANT : Forcer la recréation de la scène (meshes) 
             // tout en gardant le renderer existant
             bReloaded = false;
-            
+
             // Démarrer la transition AVANT le chargement du nouveau pano
             // pour que affiche() utilise renderTransition() dès le début
             isTransitioning = true;
             transitionStartTime = Date.now();
             transitionMaterial.uniforms.mixRatio.value = 0.0;
-            
+
             console.log("DEBUG rechargePano() - Transition activée IMMÉDIATEMENT, bReloaded forcé à false");
         }
-        
+
         // Charger le nouveau panoramique
         enleveHS();
         arrHotSpot = new Array();

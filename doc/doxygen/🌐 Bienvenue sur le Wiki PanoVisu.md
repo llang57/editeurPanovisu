@@ -17,6 +17,16 @@
 
 ### Version 3.1.0 - Octobre 2025
 
+### Mise à jour critique
+
+**Important :** si vous hébergez des visites sur des serveurs Linux, veuillez lire :
+- 🇫🇷 [Annonce v3.1.0](doc/DISCUSSION_V3.1.0.md) • [FAQ](doc/FAQ_V3.1.0.md) • [Guide de migration](doc/MIGRATION_GUIDE_V3.1.0.md)
+- 🇬🇧 [Annonce v3.1.0](doc/DISCUSSION_V3.1.0_EN.md) • [FAQ](doc/FAQ_V3.1.0_EN.md) • [Migration Guide](doc/MIGRATION_GUIDE_V3.1.0_EN.md)
+
+**Quelles sont les nouveautés ?** Correction critique du problème de sensibilité à la casse sur les serveurs Linux. Toutes les visites hébergées sur Linux doivent être réexportées avec la version 3.1.0.
+
+---
+
 **Nouvelle fonctionnalité majeure : Serveur HTTP intégré**
 
 La version 3.1 introduit `LocalHTTPServer`, un serveur HTTP embarqué qui résout définitivement les problèmes CORS lors de l'ouverture des visites avec le protocole `file://`.
@@ -47,14 +57,14 @@ PanoVisu est composé de deux éléments complémentaires :
 
 ## 🌟 Pourquoi choisir PanoVisu ?
 
-| Avantage | Description |
-|----------|-------------|
-| 🆓 **100% Gratuit** | Aucun coût, aucune limitation, aucun filigrane |
-| 🔓 **Open Source** | Code source accessible et modifiable |
-| 🖥️ **Multi-plateforme** | Windows, macOS, Linux |
-| 🌐 **Sans serveur** | Visites autonomes hébergeables partout |
-| 🚀 **Moderne** | HTML5, WebGL, Three.js |
-| 🔧 **Extensible** | Personnalisable à volonté |
+| Avantage               | Description                                    |
+| ---------------------- | ---------------------------------------------- |
+| 🆓 **100% Gratuit**     | Aucun coût, aucune limitation, aucun filigrane |
+| 🔓 **Open Source**      | Code source accessible et modifiable           |
+| 🖥️ **Multi-plateforme** | Windows, macOS, Linux                          |
+| 🌐 **Sans serveur**     | Visites autonomes hébergeables partout         |
+| 🚀 **Moderne**          | HTML5, WebGL, Three.js                         |
+| 🔧 **Extensible**       | Personnalisable à volonté                      |
 
 ## 📚 Ressources
 

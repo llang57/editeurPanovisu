@@ -595,4 +595,4 @@ Un merci particulier à :
 ---
 
 **Développé avec ❤️ par Laurent LANG**  
-© 2014-2025 - Projet open source communautaire
+© 2014-2026 - Projet open source communautaire

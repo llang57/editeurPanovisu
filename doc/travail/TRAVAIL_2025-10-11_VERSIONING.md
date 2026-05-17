@@ -12,7 +12,7 @@
 
 ### 2. **Copyright mis à jour**
 - **Avant** : `Laurent LANG (2014-2015)`
-- **Après** : `Laurent LANG (2014-2025)`
+- **Après** : `Laurent LANG (2014-2026)`
 - Fichier modifié : `EditeurPanovisu.java` ligne 10300
 
 ### 3. **Build Number Auto-Incrémenté**
@@ -53,7 +53,7 @@
 
 3. **`src/project.properties`**
    - Ajout `project.version=3.0`
-   - Ajout `copyright.years=2014-2025`
+   - Ajout `copyright.years=2014-2026`
    - Build number synchronisé
 
 4. **`src/editeurpanovisu/i18n/PanoVisu.properties`**
@@ -122,7 +122,7 @@
 ```
 ┌─────────────────────────────────────┐
 │  [Logo]  panoVisu Vers. : 3.0-b1992│
-│          Laurent LANG (2014-2025)  │
+│          Laurent LANG (2014-2026)  │
 └─────────────────────────────────────┘
 ```
 

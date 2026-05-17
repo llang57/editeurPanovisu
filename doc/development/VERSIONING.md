@@ -32,7 +32,7 @@ Configuration du projet avec version et copyright.
 # PanoVisu Project Properties
 project.version=3.0
 Application.buildnumber=1992
-copyright.years=2014-2025
+copyright.years=2014-2026
 copyright.author=Laurent LANG
 ```
 
@@ -103,14 +103,14 @@ PanoVisu v3.0
 ### Label d'information (coin supérieur gauche)
 ```
 panoVisu Vers. : 3.0-b1992
-Laurent LANG (2014-2025)
+Laurent LANG (2014-2026)
 ```
 
 ### Code source (`EditeurPanovisu.java`)
 
 ```java
 // Ligne 10300 - Copyright mis à jour
-Label lblPanoVisu2 = new Label("Laurent LANG (2014-2025)");
+Label lblPanoVisu2 = new Label("Laurent LANG (2014-2026)");
 
 // Ligne 11130 - Construction de la version
 strNumVersion = pack.getImplementationVersion() + "-b" + 
@@ -230,4 +230,4 @@ Vérifier dans `pom.xml` :
 
 **Dernière mise à jour** : 11 octobre 2025  
 **Version actuelle** : 3.0-b1992  
-**Auteur** : Laurent LANG (2014-2025)
+**Auteur** : Laurent LANG (2014-2026)

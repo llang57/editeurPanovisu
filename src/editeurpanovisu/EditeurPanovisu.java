@@ -144,19 +144,27 @@ import org.apache.commons.imaging.ImagingException;
 /**
  * Editeur de visites virtuelles panoramiques
  * 
- * <p>Cette classe principale de l'application permet de créer et éditer des visites virtuelles
- * basées sur des images panoramiques 360°. Elle gère l'interface utilisateur, la création de 
- * panoramiques, l'ajout de hotspots, la géolocalisation et la génération de visites HTML.</p>
+ * <p>
+ * Cette classe principale de l'application permet de créer et éditer des
+ * visites virtuelles
+ * basées sur des images panoramiques 360°. Elle gère l'interface utilisateur,
+ * la création de
+ * panoramiques, l'ajout de hotspots, la géolocalisation et la génération de
+ * visites HTML.
+ * </p>
  * 
- * <p><b>Fonctionnalités principales :</b></p>
+ * <p>
+ * <b>Fonctionnalités principales :</b>
+ * </p>
  * <ul>
- *   <li>Création et gestion de projets de visite virtuelle</li>
- *   <li>Import et traitement d'images panoramiques (équirectangulaires et cubiques)</li>
- *   <li>Ajout de hotspots interactifs (liens, images, HTML)</li>
- *   <li>Géolocalisation des panoramiques</li>
- *   <li>Génération de visites HTML autonomes</li>
- *   <li>Support multilingue (français, anglais, allemand, portugais)</li>
- *   <li>Thèmes d'interface (clair/foncé)</li>
+ * <li>Création et gestion de projets de visite virtuelle</li>
+ * <li>Import et traitement d'images panoramiques (équirectangulaires et
+ * cubiques)</li>
+ * <li>Ajout de hotspots interactifs (liens, images, HTML)</li>
+ * <li>Géolocalisation des panoramiques</li>
+ * <li>Génération de visites HTML autonomes</li>
+ * <li>Support multilingue (français, anglais, allemand, portugais)</li>
+ * <li>Thèmes d'interface (clair/foncé)</li>
  * </ul>
  *
  * @author LANG Laurent
@@ -168,9 +176,13 @@ public class EditeurPanovisu extends Application {
     /**
      * Vérifie la disponibilité de la connexion Internet
      * 
-     * <p>Cette méthode tente de se connecter à Google pour vérifier la connexion réseau.
-     * Elle est utilisée pour activer/désactiver les fonctionnalités nécessitant Internet
-     * (géolocalisation, cartes, etc.).</p>
+     * <p>
+     * Cette méthode tente de se connecter à Google pour vérifier la connexion
+     * réseau.
+     * Elle est utilisée pour activer/désactiver les fonctionnalités nécessitant
+     * Internet
+     * (géolocalisation, cartes, etc.).
+     * </p>
      * 
      * @return true si la connexion Internet est disponible, false sinon
      */
@@ -496,21 +508,28 @@ public class EditeurPanovisu extends Application {
     public static void setStrRepertAppli(String aStrRepertAppli) {
         strRepertAppli = aStrRepertAppli;
     }
-    
+
     /**
      * Charge une icône SVG avec la taille spécifiée
      * 
-     * <p>Charge un fichier SVG depuis le répertoire des ressources et le convertit en ImageView.
-     * L'icône est redimensionnée en carré de la taille spécifiée.</p>
+     * <p>
+     * Charge un fichier SVG depuis le répertoire des ressources et le convertit en
+     * ImageView.
+     * L'icône est redimensionnée en carré de la taille spécifiée.
+     * </p>
      * 
-     * <p><b>Exemple :</b></p>
+     * <p>
+     * <b>Exemple :</b>
+     * </p>
+     * 
      * <pre>{@code
      * ImageView icone = loadSvgIcon("nouveau-projet", 32);
      * bouton.setGraphic(icone);
      * }</pre>
      * 
-     * @param iconName Nom du fichier SVG sans extension (ex: "nouveau-projet" pour "nouveau-projet.svg")
-     * @param size Taille en pixels (largeur et hauteur identiques)
+     * @param iconName Nom du fichier SVG sans extension (ex: "nouveau-projet" pour
+     *                 "nouveau-projet.svg")
+     * @param size     Taille en pixels (largeur et hauteur identiques)
      * @return ImageView contenant l'icône SVG redimensionnée
      * @see SvgIconLoader#loadSvgIcon(String, int)
      */
@@ -518,22 +537,28 @@ public class EditeurPanovisu extends Application {
         SvgIconLoader.setBaseAppPath(getStrRepertAppli());
         return SvgIconLoader.loadSvgIcon(iconName, size);
     }
-    
+
     /**
      * Charge une icône SVG avec couleur personnalisée
      * 
-     * <p>Charge un fichier SVG et applique une couleur spécifique. Utile pour adapter
-     * les icônes au thème ou créer des variantes colorées.</p>
+     * <p>
+     * Charge un fichier SVG et applique une couleur spécifique. Utile pour adapter
+     * les icônes au thème ou créer des variantes colorées.
+     * </p>
      * 
-     * <p><b>Exemple :</b></p>
+     * <p>
+     * <b>Exemple :</b>
+     * </p>
+     * 
      * <pre>{@code
      * ImageView iconeRouge = loadSvgIcon("alerte", 24, Color.RED);
      * ImageView iconeVerte = loadSvgIcon("valide", 24, Color.GREEN);
      * }</pre>
      * 
      * @param iconName Nom du fichier SVG sans extension
-     * @param size Taille en pixels (carré)
-     * @param color Couleur à appliquer à l'icône (remplace les couleurs d'origine)
+     * @param size     Taille en pixels (carré)
+     * @param color    Couleur à appliquer à l'icône (remplace les couleurs
+     *                 d'origine)
      * @return ImageView contenant l'icône SVG colorée
      * @see javafx.scene.paint.Color
      */
@@ -541,39 +566,51 @@ public class EditeurPanovisu extends Application {
         SvgIconLoader.setBaseAppPath(getStrRepertAppli());
         return SvgIconLoader.loadSvgIcon(iconName, size, color);
     }
-    
+
     /**
      * Charge une icône SVG avec dimensions rectangulaires personnalisées
      * 
-     * <p>Version avancée permettant de spécifier des dimensions rectangulaires
+     * <p>
+     * Version avancée permettant de spécifier des dimensions rectangulaires
      * (largeur et hauteur différentes). La couleur peut être null pour utiliser
-     * les couleurs par défaut du thème actif.</p>
+     * les couleurs par défaut du thème actif.
+     * </p>
      * 
-     * <p><b>Exemple :</b></p>
+     * <p>
+     * <b>Exemple :</b>
+     * </p>
+     * 
      * <pre>{@code
      * // Icône panoramique 2:1
      * ImageView vue = loadSvgIcon("vue-sphere", 128, 64, null);
      * }</pre>
      * 
      * @param iconName Nom du fichier SVG sans extension
-     * @param width Largeur en pixels
-     * @param height Hauteur en pixels
-     * @param color Couleur de l'icône (null pour couleur automatique selon le thème actif)
+     * @param width    Largeur en pixels
+     * @param height   Hauteur en pixels
+     * @param color    Couleur de l'icône (null pour couleur automatique selon le
+     *                 thème actif)
      * @return ImageView contenant l'icône SVG aux dimensions spécifiées
      */
     public static ImageView loadSvgIcon(String iconName, int width, int height, javafx.scene.paint.Color color) {
         SvgIconLoader.setBaseAppPath(getStrRepertAppli());
         return SvgIconLoader.loadSvgIcon(iconName, width, height, color);
     }
-    
+
     /**
      * Recharge toutes les icônes SVG de la barre d'outils
      * 
-     * <p>Appelée automatiquement lors du changement de thème (clair/sombre) pour mettre à jour
-     * toutes les icônes avec les couleurs appropriées au nouveau thème.</p>
+     * <p>
+     * Appelée automatiquement lors du changement de thème (clair/sombre) pour
+     * mettre à jour
+     * toutes les icônes avec les couleurs appropriées au nouveau thème.
+     * </p>
      * 
-     * <p>Cette méthode parcourt tous les ImageView de la barre d'outils et recharge leur
-     * contenu SVG avec les nouvelles couleurs.</p>
+     * <p>
+     * Cette méthode parcourt tous les ImageView de la barre d'outils et recharge
+     * leur
+     * contenu SVG avec les nouvelles couleurs.
+     * </p>
      * 
      * @see #setStrStyleCSS(String)
      */
@@ -1599,58 +1636,72 @@ public class EditeurPanovisu extends Application {
     // ====================================================================
     // CONFIGURATION ET INTERNATIONALISATION
     // ====================================================================
-    
+
     /**
      * Style CSS de l'interface utilisateur
      * 
-     * <p>Définit le thème graphique de l'application. Valeurs possibles :</p>
+     * <p>
+     * Définit le thème graphique de l'application. Valeurs possibles :
+     * </p>
      * <ul>
-     *   <li>"clair" - Thème clair (par défaut)</li>
-     *   <li>"fonce" - Thème sombre</li>
+     * <li>"clair" - Thème clair (par défaut)</li>
+     * <li>"fonce" - Thème sombre</li>
      * </ul>
      * 
      * @see #getStrStyleCSS()
      * @see #setStrStyleCSS(String)
      */
     public static String strStyleCSS = "clair";
-    
+
     /**
      * Codes des langues supportées pour la traduction
      * 
-     * <p>Liste des codes locale au format language_COUNTRY utilisés pour 
-     * l'internationalisation de l'interface.</p>
+     * <p>
+     * Liste des codes locale au format language_COUNTRY utilisés pour
+     * l'internationalisation de l'interface.
+     * </p>
      */
-    private static final String[] strCodesLanguesTraduction = {"fr_FR", "en_EN", "de_DE", "pt_BR"};
-    
+    private static final String[] strCodesLanguesTraduction = { "fr_FR", "en_EN", "de_DE", "pt_BR" };
+
     /**
      * Noms des langues affichés dans l'interface
      * 
-     * <p>Liste des noms de langues présentés à l'utilisateur dans le menu de sélection.</p>
+     * <p>
+     * Liste des noms de langues présentés à l'utilisateur dans le menu de
+     * sélection.
+     * </p>
      */
-    private static final String[] strLanguesTraduction = {"Français", "English", "Deutsch", "Português"};
-    
+    private static final String[] strLanguesTraduction = { "Français", "English", "Deutsch", "Português" };
+
     /**
      * Répertoire courant de l'application
      * 
-     * <p>Stocke le répertoire de travail actuel, utilisé pour les opérations de fichiers.</p>
+     * <p>
+     * Stocke le répertoire de travail actuel, utilisé pour les opérations de
+     * fichiers.
+     * </p>
      */
     private static String strCurrentDir = "";
-    
+
     /**
      * Locale de l'application
      * 
-     * <p>Définit la langue et la région utilisées pour l'interface utilisateur.
-     * Par défaut configuré en français (France).</p>
+     * <p>
+     * Définit la langue et la région utilisées pour l'interface utilisateur.
+     * Par défaut configuré en français (France).
+     * </p>
      * 
      * @see java.util.Locale
      */
     private static Locale locale = new Locale("fr", "FR");
-    
+
     /**
      * Bundle de ressources pour la localisation
      * 
-     * <p>Contient les chaînes de caractères traduites pour l'interface utilisateur
-     * en fonction de la locale sélectionnée.</p>
+     * <p>
+     * Contient les chaînes de caractères traduites pour l'interface utilisateur
+     * en fonction de la locale sélectionnée.
+     * </p>
      */
     private static ResourceBundle rbLocalisation;
     private static Label lblDragDrop;
@@ -1671,55 +1722,68 @@ public class EditeurPanovisu extends Application {
     // ====================================================================
     // DONNÉES DU PROJET
     // ====================================================================
-    
+
     /**
      * Compteur de fichiers HTML générés
      * 
-     * <p>Utilisé pour générer des noms de fichiers HTML uniques lors de la création
-     * de pages personnalisées (hotspots HTML, etc.).</p>
+     * <p>
+     * Utilisé pour générer des noms de fichiers HTML uniques lors de la création
+     * de pages personnalisées (hotspots HTML, etc.).
+     * </p>
      */
     private static int iNumHTML = 0;
-    
+
     /**
      * Compteur de diaporamas
      * 
-     * <p>Nombre de diaporamas créés dans le projet courant.</p>
+     * <p>
+     * Nombre de diaporamas créés dans le projet courant.
+     * </p>
      */
     private static int iNumDiapo = 0;
-    
+
     /**
      * Tableau des panoramiques du projet
      * 
-     * <p>Contient l'ensemble des panoramiques constituant la visite virtuelle.
-     * Limité à 100 panoramiques maximum par projet.</p>
+     * <p>
+     * Contient l'ensemble des panoramiques constituant la visite virtuelle.
+     * Limité à 100 panoramiques maximum par projet.
+     * </p>
      * 
      * @see Panoramique
      * @see #iNombrePanoramiques
      */
     private static Panoramique[] panoramiquesProjet = new Panoramique[100];
-    
+
     /**
      * Tableau des plans du projet
      * 
-     * <p>Contient les plans/cartes utilisés pour la navigation. Limité à 20 plans maximum.</p>
+     * <p>
+     * Contient les plans/cartes utilisés pour la navigation. Limité à 20 plans
+     * maximum.
+     * </p>
      * 
      * @see Plan
      * @see #iNombrePlans
      */
     private static Plan[] plans = new Plan[20];
-    
+
     /**
      * Nombre total de panoramiques dans le projet
      * 
-     * <p>Compteur du nombre de panoramiques effectivement utilisés dans le tableau
-     * {@link #panoramiquesProjet}.</p>
+     * <p>
+     * Compteur du nombre de panoramiques effectivement utilisés dans le tableau
+     * {@link #panoramiquesProjet}.
+     * </p>
      */
     private static int iNombrePanoramiques = 0;
-    
+
     /**
      * Nombre de fichiers panoramiques chargés
      * 
-     * <p>Compteur des fichiers d'images panoramiques importés dans le projet.</p>
+     * <p>
+     * Compteur des fichiers d'images panoramiques importés dans le projet.
+     * </p>
      */
     private static int iNombrePanoramiquesFichier = 0;
     static private ProgressBar pbarAvanceChargement;
@@ -1764,7 +1828,7 @@ public class EditeurPanovisu extends Application {
     private static AnchorPane apOpenLayers;
     private static PaneOutil apHS1;
     /*
-     Panel Creation Barre Navigation
+     * Panel Creation Barre Navigation
      */
     private static AnchorPane apCreationBarre;
     private static AnchorPane apCreationDiaporama;
@@ -1784,108 +1848,126 @@ public class EditeurPanovisu extends Application {
     @SuppressWarnings("unused")
     private static boolean bPleinEcranPanoramique = false;
     private static final String[] strTouchesBarre = {
-        "Haut/Up", "Droite/Right", "Bas/Down", "Gauche/Left",
-        "Zoom +", "Zoom -", "Info", "Aide/Help",
-        "Rotation", "mode Souris/Mouse", "Plein Ecran/Fullscreen",
-        "Lien/Link 1", "Lien/Link 2",
-        "zone 1", "zone 2", "zone 3", "zone 4", "zone 5",
-        "zone 6", "zone 7", "zone 8", "zone 9", "zone 10"
+            "Haut/Up", "Droite/Right", "Bas/Down", "Gauche/Left",
+            "Zoom +", "Zoom -", "Info", "Aide/Help",
+            "Rotation", "mode Souris/Mouse", "Plein Ecran/Fullscreen",
+            "Lien/Link 1", "Lien/Link 2",
+            "zone 1", "zone 2", "zone 3", "zone 4", "zone 5",
+            "zone 6", "zone 7", "zone 8", "zone 9", "zone 10"
     };
     private static final String[] strCodeBarre = {
-        "telUp", "telRight", "telDown", "telLeft",
-        "telZoomPlus", "telZoomMoins", "telInfo", "telAide",
-        "telRotation", "telSouris", "telFS",
-        "telLien-1", "telLien-2",
-        "area-1", "area-2", "area-3", "area-4", "area-5",
-        "area-6", "area-7", "area-8", "area-9", "area-10"
+            "telUp", "telRight", "telDown", "telLeft",
+            "telZoomPlus", "telZoomMoins", "telInfo", "telAide",
+            "telRotation", "telSouris", "telFS",
+            "telLien-1", "telLien-2",
+            "area-1", "area-2", "area-3", "area-4", "area-5",
+            "area-6", "area-7", "area-8", "area-9", "area-10"
     };
 
     // ====================================================================
     // RÉPERTOIRES ET CHEMINS
     // ====================================================================
-    
+
     /**
      * Répertoire d'installation de l'application
      * 
-     * <p>Chemin absolu vers le répertoire racine de l'application, utilisé pour
-     * localiser les ressources (images, CSS, JavaScript, etc.).</p>
+     * <p>
+     * Chemin absolu vers le répertoire racine de l'application, utilisé pour
+     * localiser les ressources (images, CSS, JavaScript, etc.).
+     * </p>
      * 
      * @see #getStrRepertAppli()
      * @see #setStrRepertAppli(String)
      */
     private static String strRepertAppli = "";
-    
+
     /**
      * Répertoire temporaire de travail
      * 
-     * <p>Utilisé pour stocker les fichiers temporaires lors du traitement des images
-     * et de la génération des visites.</p>
+     * <p>
+     * Utilisé pour stocker les fichiers temporaires lors du traitement des images
+     * et de la génération des visites.
+     * </p>
      * 
      * @see #getStrRepertTemp()
      * @see #setStrRepertTemp(String)
      */
     private static String strRepertTemp = "";
-    
+
     /**
      * Répertoire des images panoramiques
      * 
-     * <p>Stocke les images panoramiques du projet en cours.</p>
+     * <p>
+     * Stocke les images panoramiques du projet en cours.
+     * </p>
      * 
      * @see #getStrRepertPanos()
      * @see #setStrRepertPanos(String)
      */
     static private String strRepertPanos = "";
-    
+
     /**
      * Répertoire des images des hotspots
      * 
-     * <p>Contient les images personnalisées utilisées pour les hotspots (icônes, vignettes).</p>
+     * <p>
+     * Contient les images personnalisées utilisées pour les hotspots (icônes,
+     * vignettes).
+     * </p>
      * 
      * @see #getStrRepertHSImages()
      * @see #setStrRepertHSImages(String)
      */
     static private String strRepertHSImages = "";
-    
+
     /**
      * Répertoire de sauvegarde du projet courant
      * 
-     * <p>Chemin du répertoire où le projet est sauvegardé. Utilisé pour sauvegarder
-     * les fichiers .pvi (projet) et les ressources associées.</p>
+     * <p>
+     * Chemin du répertoire où le projet est sauvegardé. Utilisé pour sauvegarder
+     * les fichiers .pvi (projet) et les ressources associées.
+     * </p>
      * 
      * @see #getStrRepertoireProjet()
      * @see #setStrRepertoireProjet(String)
      */
     private static String strRepertoireProjet = "";
-    
+
     /**
      * Dernier répertoire utilisé pour la génération de visite
      * 
-     * <p>Mémorise le dernier emplacement choisi par l'utilisateur pour générer
-     * une visite HTML. Utilisé pour proposer ce répertoire par défaut lors de 
-     * la prochaine génération.</p>
+     * <p>
+     * Mémorise le dernier emplacement choisi par l'utilisateur pour générer
+     * une visite HTML. Utilisé pour proposer ce répertoire par défaut lors de
+     * la prochaine génération.
+     * </p>
      * 
      * @see #getStrDernierRepertoireVisite()
      * @see #setStrDernierRepertoireVisite(String)
      */
     private static String strDernierRepertoireVisite = "";
-    
+
     /**
      * Dernier répertoire utilisé pour le chargement d'images
      * 
-     * <p>Mémorise le dernier emplacement choisi par l'utilisateur pour charger
+     * <p>
+     * Mémorise le dernier emplacement choisi par l'utilisateur pour charger
      * des images (redimensionnement, traitement, etc.). Indépendant du répertoire
-     * de projet et du répertoire de génération de visite.</p>
+     * de projet et du répertoire de génération de visite.
+     * </p>
      * 
      * @see #getStrDernierRepertoireImages()
      * @see #setStrDernierRepertoireImages(String)
      */
     private static String strDernierRepertoireImages = "";
-    
+
     /**
      * Fichier de configuration de l'application
      * 
-     * <p>Référence vers le fichier contenant les préférences et paramètres de l'application
-     * (préférences utilisateur, historique des projets, etc.).</p>
+     * <p>
+     * Référence vers le fichier contenant les préférences et paramètres de
+     * l'application
+     * (préférences utilisateur, historique des projets, etc.).
+     * </p>
      */
     static public File fileRepertConfig;
 
@@ -1949,13 +2031,14 @@ public class EditeurPanovisu extends Application {
     private static MenuItem mniAffichageVisite;
     private static MenuItem mniAffichageInterface;
     private static MenuItem mniAffichagePlan;
-    
+
     /**
      * MenuItem pour l'outil de redimensionnement et compression d'images
-     * Permet de traiter des images par lots pour les redimensionner et les compresser
+     * Permet de traiter des images par lots pour les redimensionner et les
+     * compresser
      */
     private static MenuItem mniRedimensionnerImages;
-    
+
     /**
      * MenuItem pour l'outil de conversion des images au ratio 2:1
      * Convertit des images au format panoramique 2:1 avec padding intelligent
@@ -1971,13 +2054,14 @@ public class EditeurPanovisu extends Application {
     private static ImageView ivAjouterPlan;
     private static ImageView ivCube2Equi;
     private static ImageView ivEqui2Cube;
-    
+
     /**
-     * ImageView pour l'icône de l'outil de redimensionnement et compression d'images
+     * ImageView pour l'icône de l'outil de redimensionnement et compression
+     * d'images
      * dans la barre d'outils
      */
     private static ImageView ivRedimensionnerImages;
-    
+
     /**
      * ImageView pour l'icône de l'outil de conversion au ratio 2:1
      * dans la barre d'outils
@@ -2020,29 +2104,35 @@ public class EditeurPanovisu extends Application {
     /**
      * Génère la visite virtuelle HTML complète
      * 
-     * <p>Cette méthode est le point d'entrée principal pour la génération d'une visite virtuelle.
-     * Elle effectue les opérations suivantes :</p>
+     * <p>
+     * Cette méthode est le point d'entrée principal pour la génération d'une visite
+     * virtuelle.
+     * Elle effectue les opérations suivantes :
+     * </p>
      * <ol>
-     *   <li>Vérifie que le projet est sauvegardé</li>
-     *   <li>Crée l'arborescence des répertoires nécessaires</li>
-     *   <li>Copie les fichiers de ressources (JavaScript, CSS, images)</li>
-     *   <li>Génère le fichier XML de configuration des panoramiques</li>
-     *   <li>Génère les pages HTML pour chaque panoramique</li>
-     *   <li>Crée les fichiers de hotspots et de navigation</li>
-     *   <li>Assemble le tout dans le répertoire de destination</li>
+     * <li>Vérifie que le projet est sauvegardé</li>
+     * <li>Crée l'arborescence des répertoires nécessaires</li>
+     * <li>Copie les fichiers de ressources (JavaScript, CSS, images)</li>
+     * <li>Génère le fichier XML de configuration des panoramiques</li>
+     * <li>Génère les pages HTML pour chaque panoramique</li>
+     * <li>Crée les fichiers de hotspots et de navigation</li>
+     * <li>Assemble le tout dans le répertoire de destination</li>
      * </ol>
      * 
-     * <p>La visite générée est autonome et peut être déployée sur un serveur web
-     * ou consultée localement dans un navigateur.</p>
+     * <p>
+     * La visite générée est autonome et peut être déployée sur un serveur web
+     * ou consultée localement dans un navigateur.
+     * </p>
      * 
-     * @throws IOException Si une erreur se produit lors de la création des fichiers ou répertoires
+     * @throws IOException Si une erreur se produit lors de la création des fichiers
+     *                     ou répertoires
      * @see #projetSauve()
      * @see #isbDejaSauve()
      */
     private static void genereVisite() throws IOException {
         genereVisite(false);
     }
-    
+
     private static void genereVisite(boolean isZip) throws IOException {
         if (!bRepertSauveChoisi) {
             setStrRepertoireProjet(getStrCurrentDir());
@@ -2056,14 +2146,16 @@ public class EditeurPanovisu extends Application {
             if (!fileHTMLRepert.exists()) {
                 fileHTMLRepert.mkdirs();
             }
-            
-            // Sauvegarder les icônes colorées personnalisées avant de supprimer le répertoire images
-            // Au lieu de chercher les fichiers existants, on va régénérer les icônes colorées
+
+            // Sauvegarder les icônes colorées personnalisées avant de supprimer le
+            // répertoire images
+            // Au lieu de chercher les fichiers existants, on va régénérer les icônes
+            // colorées
             // à partir des hotspots qui ont une couleur personnalisée définie
             java.util.Map<String, WritableImage> iconesARegenerer = new java.util.HashMap<>();
-            
+
             System.out.println("🔍 DEBUG - Recherche des hotspots avec couleurs personnalisées...");
-            
+
             for (int iPano = 0; iPano < getiNombrePanoramiques(); iPano++) {
                 // Hotspots panoramiques
                 for (int iHS = 0; iHS < getPanoramiquesProjet()[iPano].getNombreHotspots(); iHS++) {
@@ -2071,25 +2163,31 @@ public class EditeurPanovisu extends Application {
                     if (hs.getStrCouleurPerso() != null && !hs.getStrCouleurPerso().isEmpty()) {
                         String nomFichier = hs.getStrFichierImage();
                         if (nomFichier != null && !nomFichier.isEmpty()) {
-                            System.out.println("✅ Hotspot pano " + iPano + "." + iHS + " a une couleur : " + nomFichier);
+                            System.out
+                                    .println("✅ Hotspot pano " + iPano + "." + iHS + " a une couleur : " + nomFichier);
                             // Parser la couleur HSB depuis la chaîne "hue;saturation;brightness"
                             String[] couleurParts = hs.getStrCouleurPerso().split(";");
                             if (couleurParts.length == 3) {
                                 double hue = Double.parseDouble(couleurParts[0]);
                                 double saturation = Double.parseDouble(couleurParts[1]);
                                 double brightness = Double.parseDouble(couleurParts[2]);
-                                
+
                                 // Utiliser l'image source stockée dans le hotspot si elle existe
                                 Image imgSource = hs.getImgIconeSource();
                                 if (imgSource == null) {
                                     // Fallback sur l'image globale si pas d'image personnalisée
-                                    imgSource = getGestionnaireInterface().getWiNouveauxBoutons()[getGestionnaireInterface().getiNombreImagesBouton() - 2];
-                                    System.out.println("⚠️ Hotspot pano " + iPano + "." + iHS + " : utilisation image globale (pas d'image personnalisée)");
+                                    imgSource = getGestionnaireInterface()
+                                            .getWiNouveauxBoutons()[getGestionnaireInterface().getiNombreImagesBouton()
+                                                    - 2];
+                                    System.out.println("⚠️ Hotspot pano " + iPano + "." + iHS
+                                            + " : utilisation image globale (pas d'image personnalisée)");
                                 } else {
-                                    System.out.println("✅ Hotspot pano " + iPano + "." + iHS + " : utilisation image personnalisée");
+                                    System.out.println("✅ Hotspot pano " + iPano + "." + iHS
+                                            + " : utilisation image personnalisée");
                                 }
-                                
-                                WritableImage imgColoree = transformerCouleurHotspot(imgSource, hue, saturation, brightness);
+
+                                WritableImage imgColoree = transformerCouleurHotspot(imgSource, hue, saturation,
+                                        brightness);
                                 if (imgColoree != null) {
                                     iconesARegenerer.put(nomFichier, imgColoree);
                                 }
@@ -2097,32 +2195,38 @@ public class EditeurPanovisu extends Application {
                         }
                     }
                 }
-                
+
                 // Hotspots images
                 for (int iHS = 0; iHS < getPanoramiquesProjet()[iPano].getNombreHotspotImage(); iHS++) {
                     HotspotImage hs = getPanoramiquesProjet()[iPano].getHotspotImage(iHS);
                     if (hs.getStrCouleurPerso() != null && !hs.getStrCouleurPerso().isEmpty()) {
                         String nomFichier = hs.getStrFichierImage();
                         if (nomFichier != null && !nomFichier.isEmpty()) {
-                            System.out.println("✅ Hotspot image " + iPano + "." + iHS + " a une couleur : " + nomFichier);
+                            System.out
+                                    .println("✅ Hotspot image " + iPano + "." + iHS + " a une couleur : " + nomFichier);
                             // Parser la couleur HSB depuis la chaîne "hue;saturation;brightness"
                             String[] couleurParts = hs.getStrCouleurPerso().split(";");
                             if (couleurParts.length == 3) {
                                 double hue = Double.parseDouble(couleurParts[0]);
                                 double saturation = Double.parseDouble(couleurParts[1]);
                                 double brightness = Double.parseDouble(couleurParts[2]);
-                                
+
                                 // Utiliser l'image source stockée dans le hotspot si elle existe
                                 Image imgSource = hs.getImgIconeSource();
                                 if (imgSource == null) {
                                     // Fallback sur l'image globale si pas d'image personnalisée
-                                    imgSource = getGestionnaireInterface().getWiNouveauxBoutons()[getGestionnaireInterface().getiNombreImagesBouton() - 1];
-                                    System.out.println("⚠️ Hotspot image " + iPano + "." + iHS + " : utilisation image globale (pas d'image personnalisée)");
+                                    imgSource = getGestionnaireInterface()
+                                            .getWiNouveauxBoutons()[getGestionnaireInterface().getiNombreImagesBouton()
+                                                    - 1];
+                                    System.out.println("⚠️ Hotspot image " + iPano + "." + iHS
+                                            + " : utilisation image globale (pas d'image personnalisée)");
                                 } else {
-                                    System.out.println("✅ Hotspot image " + iPano + "." + iHS + " : utilisation image personnalisée");
+                                    System.out.println("✅ Hotspot image " + iPano + "." + iHS
+                                            + " : utilisation image personnalisée");
                                 }
-                                
-                                WritableImage imgColoree = transformerCouleurHotspot(imgSource, hue, saturation, brightness);
+
+                                WritableImage imgColoree = transformerCouleurHotspot(imgSource, hue, saturation,
+                                        brightness);
                                 if (imgColoree != null) {
                                     iconesARegenerer.put(nomFichier, imgColoree);
                                 }
@@ -2130,32 +2234,38 @@ public class EditeurPanovisu extends Application {
                         }
                     }
                 }
-                
+
                 // Hotspots HTML
                 for (int iHS = 0; iHS < getPanoramiquesProjet()[iPano].getNombreHotspotHTML(); iHS++) {
                     HotspotHTML hs = getPanoramiquesProjet()[iPano].getHotspotHTML(iHS);
                     if (hs.getStrCouleurPerso() != null && !hs.getStrCouleurPerso().isEmpty()) {
                         String nomFichier = hs.getStrFichierImage();
                         if (nomFichier != null && !nomFichier.isEmpty()) {
-                            System.out.println("✅ Hotspot HTML " + iPano + "." + iHS + " a une couleur : " + nomFichier);
+                            System.out
+                                    .println("✅ Hotspot HTML " + iPano + "." + iHS + " a une couleur : " + nomFichier);
                             // Parser la couleur HSB depuis la chaîne "hue;saturation;brightness"
                             String[] couleurParts = hs.getStrCouleurPerso().split(";");
                             if (couleurParts.length == 3) {
                                 double hue = Double.parseDouble(couleurParts[0]);
                                 double saturation = Double.parseDouble(couleurParts[1]);
                                 double brightness = Double.parseDouble(couleurParts[2]);
-                                
+
                                 // Utiliser l'image source stockée dans le hotspot si elle existe
                                 Image imgSource = hs.getImgIconeSource();
                                 if (imgSource == null) {
                                     // Fallback sur l'image globale si pas d'image personnalisée
-                                    imgSource = getGestionnaireInterface().getWiNouveauxBoutons()[getGestionnaireInterface().getiNombreImagesBouton()];
-                                    System.out.println("⚠️ Hotspot HTML " + iPano + "." + iHS + " : utilisation image globale (pas d'image personnalisée)");
+                                    imgSource = getGestionnaireInterface()
+                                            .getWiNouveauxBoutons()[getGestionnaireInterface()
+                                                    .getiNombreImagesBouton()];
+                                    System.out.println("⚠️ Hotspot HTML " + iPano + "." + iHS
+                                            + " : utilisation image globale (pas d'image personnalisée)");
                                 } else {
-                                    System.out.println("✅ Hotspot HTML " + iPano + "." + iHS + " : utilisation image personnalisée");
+                                    System.out.println("✅ Hotspot HTML " + iPano + "." + iHS
+                                            + " : utilisation image personnalisée");
                                 }
-                                
-                                WritableImage imgColoree = transformerCouleurHotspot(imgSource, hue, saturation, brightness);
+
+                                WritableImage imgColoree = transformerCouleurHotspot(imgSource, hue, saturation,
+                                        brightness);
                                 if (imgColoree != null) {
                                     iconesARegenerer.put(nomFichier, imgColoree);
                                 }
@@ -2164,9 +2274,9 @@ public class EditeurPanovisu extends Application {
                     }
                 }
             }
-            
+
             System.out.println("🔍 DEBUG - Nombre d'icônes à régénérer : " + iconesARegenerer.size());
-            
+
             deleteDirectory(getStrRepertTemp() + "/panovisu/images");
             File fileImagesRepert = new File(getStrRepertTemp() + "/panovisu/images");
             if (!fileImagesRepert.exists()) {
@@ -2180,22 +2290,26 @@ public class EditeurPanovisu extends Application {
             if (!fileBoussoleRepert.exists()) {
                 fileBoussoleRepert.mkdirs();
             }
-            copieRepertoire(getStrRepertAppli() + File.separator + "panovisu/images/boussoles", fileBoussoleRepert.getAbsolutePath());
+            copieRepertoire(getStrRepertAppli() + File.separator + "panovisu/images/boussoles",
+                    fileBoussoleRepert.getAbsolutePath());
             File filePlanRepert = new File(getStrRepertTemp() + "/panovisu/images/plan");
             if (!filePlanRepert.exists()) {
                 filePlanRepert.mkdirs();
             }
-            copieRepertoire(getStrRepertAppli() + File.separator + "panovisu/images/plan", filePlanRepert.getAbsolutePath());
+            copieRepertoire(getStrRepertAppli() + File.separator + "panovisu/images/plan",
+                    filePlanRepert.getAbsolutePath());
             File fileReseauRepert = new File(getStrRepertTemp() + "/panovisu/images/reseaux");
             if (!fileReseauRepert.exists()) {
                 fileReseauRepert.mkdirs();
             }
-            copieRepertoire(getStrRepertAppli() + File.separator + "panovisu/images/reseaux", fileReseauRepert.getAbsolutePath());
+            copieRepertoire(getStrRepertAppli() + File.separator + "panovisu/images/reseaux",
+                    fileReseauRepert.getAbsolutePath());
             File fileInterfaceRepert = new File(getStrRepertTemp() + "/panovisu/images/interface");
             if (!fileInterfaceRepert.exists()) {
                 fileInterfaceRepert.mkdirs();
             }
-            copieRepertoire(getStrRepertAppli() + File.separator + "panovisu/images/interface", fileInterfaceRepert.getAbsolutePath());
+            copieRepertoire(getStrRepertAppli() + File.separator + "panovisu/images/interface",
+                    fileInterfaceRepert.getAbsolutePath());
             File fileMARepert = new File(getStrRepertTemp() + "/panovisu/images/MA");
             if (!fileMARepert.exists()) {
                 fileMARepert.mkdirs();
@@ -2204,9 +2318,9 @@ public class EditeurPanovisu extends Application {
             if (!fileHotspotsRepert.exists()) {
                 fileHotspotsRepert.mkdirs();
             }
-            
+
             System.out.println("🔍 DEBUG - Régénération des icônes dans : " + fileHotspotsRepert.getAbsolutePath());
-            
+
             // Régénérer les icônes colorées personnalisées
             int compteurRegenere = 0;
             for (java.util.Map.Entry<String, WritableImage> entry : iconesARegenerer.entrySet()) {
@@ -2214,7 +2328,7 @@ public class EditeurPanovisu extends Application {
                     String nomFichier = entry.getKey();
                     WritableImage img = entry.getValue();
                     String cheminComplet = fileHotspotsRepert.getAbsolutePath() + File.separator + nomFichier;
-                    
+
                     ReadWriteImage.writePng(img, cheminComplet, false, 0.f);
                     System.out.println("✅ Icône colorée régénérée : " + nomFichier);
                     compteurRegenere++;
@@ -2223,18 +2337,19 @@ public class EditeurPanovisu extends Application {
                     ex.printStackTrace();
                 }
             }
-            
+
             System.out.println("🔍 DEBUG - " + compteurRegenere + " icônes régénérées");
-            
+
             // Vérifier le contenu final du répertoire hotspots
             File[] fichiersFinal = fileHotspotsRepert.listFiles();
-            System.out.println("🔍 DEBUG - Fichiers dans hotspots après régénération : " + (fichiersFinal != null ? fichiersFinal.length : 0));
+            System.out.println("🔍 DEBUG - Fichiers dans hotspots après régénération : "
+                    + (fichiersFinal != null ? fichiersFinal.length : 0));
             if (fichiersFinal != null) {
                 for (File f : fichiersFinal) {
                     System.out.println("  - " + f.getName());
                 }
             }
-            
+
             if (getGestionnaireInterface().getStrVisibiliteBarrePersonnalisee().equals("oui")) {
                 File fileTelecommandeRepert = new File(getStrRepertTemp() + "/panovisu/images/telecommande");
                 if (!fileTelecommandeRepert.exists()) {
@@ -2269,43 +2384,62 @@ public class EditeurPanovisu extends Application {
             }
             copieFichierRepertoire(getStrRepertAppli() + "/theme" + File.separator + "chargement.gif",
                     getStrRepertTemp() + "/panovisu/images");
-            copieFichierRepertoire(getStrRepertAppli() + File.separator + "panovisu" + File.separator + "images" + File.separator + "aide_souris.png",
+            copieFichierRepertoire(
+                    getStrRepertAppli() + File.separator + "panovisu" + File.separator + "images" + File.separator
+                            + "aide_souris.png",
                     getStrRepertTemp() + "/panovisu/images");
-            copieFichierRepertoire(getStrRepertAppli() + File.separator + "panovisu" + File.separator + "images" + File.separator + "fermer.png",
+            copieFichierRepertoire(
+                    getStrRepertAppli() + File.separator + "panovisu" + File.separator + "images" + File.separator
+                            + "fermer.png",
                     getStrRepertTemp() + "/panovisu/images");
-            copieFichierRepertoire(getStrRepertAppli() + File.separator + "panovisu" + File.separator + "images" + File.separator + "precedent.png",
+            copieFichierRepertoire(
+                    getStrRepertAppli() + File.separator + "panovisu" + File.separator + "images" + File.separator
+                            + "precedent.png",
                     getStrRepertTemp() + "/panovisu/images");
-            copieFichierRepertoire(getStrRepertAppli() + File.separator + "panovisu" + File.separator + "images" + File.separator + "suivant.png",
+            copieFichierRepertoire(
+                    getStrRepertAppli() + File.separator + "panovisu" + File.separator + "images" + File.separator
+                            + "suivant.png",
                     getStrRepertTemp() + "/panovisu/images");
             for (int i = 0; i < getGestionnaireInterface().getiNombreImagesBouton() - 2; i++) {
                 ReadWriteImage.writePng(getGestionnaireInterface().getWiNouveauxBoutons()[i],
-                        fileBoutonRepert.getAbsolutePath() + File.separator + getGestionnaireInterface().getStrNomImagesBoutons()[i],
+                        fileBoutonRepert.getAbsolutePath() + File.separator
+                                + getGestionnaireInterface().getStrNomImagesBoutons()[i],
                         false, 0.f);
             }
             if (!strTypeHS.equals("gif")) {
-                ReadWriteImage.writePng(getGestionnaireInterface().getWiNouveauxBoutons()[getGestionnaireInterface().getiNombreImagesBouton() - 2],
+                ReadWriteImage.writePng(
+                        getGestionnaireInterface()
+                                .getWiNouveauxBoutons()[getGestionnaireInterface().getiNombreImagesBouton() - 2],
                         fileHotspotsRepert.getAbsolutePath() + File.separator + "hotspot.png",
                         false, 0.f);
             } else {
-                copieFichierRepertoire(getStrRepertAppli() + "/theme/hotspots" + File.separator + strNomfichierHS, fileHotspotsRepert.getAbsolutePath() + File.separator);
+                copieFichierRepertoire(getStrRepertAppli() + "/theme/hotspots" + File.separator + strNomfichierHS,
+                        fileHotspotsRepert.getAbsolutePath() + File.separator);
             }
 
             if (!strTypeHSImage.equals("gif")) {
-                ReadWriteImage.writePng(getGestionnaireInterface().getWiNouveauxBoutons()[getGestionnaireInterface().getiNombreImagesBouton() - 1],
+                ReadWriteImage.writePng(
+                        getGestionnaireInterface()
+                                .getWiNouveauxBoutons()[getGestionnaireInterface().getiNombreImagesBouton() - 1],
                         fileHotspotsRepert.getAbsolutePath() + File.separator + "hotspotImage.png",
                         false, 0.f);
             } else {
-                copieFichierRepertoire(getStrRepertAppli() + "/theme/photos" + File.separator + strNomfichierHSImage, fileHotspotsRepert.getAbsolutePath() + File.separator);
+                copieFichierRepertoire(getStrRepertAppli() + "/theme/photos" + File.separator + strNomfichierHSImage,
+                        fileHotspotsRepert.getAbsolutePath() + File.separator);
             }
             if (!strTypeHSHTML.equals("gif")) {
-                ReadWriteImage.writePng(getGestionnaireInterface().getWiNouveauxBoutons()[getGestionnaireInterface().getiNombreImagesBouton()],
+                ReadWriteImage.writePng(
+                        getGestionnaireInterface().getWiNouveauxBoutons()[getGestionnaireInterface()
+                                .getiNombreImagesBouton()],
                         fileHotspotsRepert.getAbsolutePath() + File.separator + "hotspotHTML.png",
                         false, 0.f);
             } else {
-                copieFichierRepertoire(getStrRepertAppli() + "/theme/html" + File.separator + strNomfichierHSHTML, fileHotspotsRepert.getAbsolutePath() + File.separator);
+                copieFichierRepertoire(getStrRepertAppli() + "/theme/html" + File.separator + strNomfichierHSHTML,
+                        fileHotspotsRepert.getAbsolutePath() + File.separator);
             }
 
-            // Note : Les icônes colorées personnalisées sont déjà créées dans temp/panovisu/images/hotspots
+            // Note : Les icônes colorées personnalisées sont déjà créées dans
+            // temp/panovisu/images/hotspots
             // par la méthode sauvegardeIconeHotspot() lors de la modification des hotspots
 
             ReadWriteImage.writePng(getGestionnaireInterface().getWiNouveauxMasque(),
@@ -2317,17 +2451,30 @@ public class EditeurPanovisu extends Application {
                 if (!filemarqueursOL.exists()) {
                     filemarqueursOL.mkdirs();
                 }
-                copieFichierRepertoire(getStrRepertAppli() + File.separator + "theme" + File.separator + "marqueursOL" + File.separator + "marqueur.png", getStrRepertTemp() + File.separator + "panovisu/images/marqueursOL");
-                copieFichierRepertoire(getStrRepertAppli() + File.separator + "theme" + File.separator + "marqueursOL" + File.separator + "home.png", getStrRepertTemp() + File.separator + "panovisu/images/marqueursOL");
-                copieFichierRepertoire(getStrRepertAppli() + File.separator + "theme" + File.separator + "marqueursOL" + File.separator + "marqueurActif.png", getStrRepertTemp() + File.separator + "panovisu/images/marqueursOL");
+                copieFichierRepertoire(getStrRepertAppli() + File.separator + "theme" + File.separator + "marqueursOL"
+                        + File.separator + "marqueur.png",
+                        getStrRepertTemp() + File.separator + "panovisu/images/marqueursOL");
+                copieFichierRepertoire(getStrRepertAppli() + File.separator + "theme" + File.separator + "marqueursOL"
+                        + File.separator + "home.png",
+                        getStrRepertTemp() + File.separator + "panovisu/images/marqueursOL");
+                copieFichierRepertoire(
+                        getStrRepertAppli() + File.separator + "theme" + File.separator + "marqueursOL" + File.separator
+                                + "marqueurActif.png",
+                        getStrRepertTemp() + File.separator + "panovisu/images/marqueursOL");
             }
             if (getGestionnaireInterface().isbAfficheBoutonVisiteAuto()) {
                 File filemarqueursAT = new File(getStrRepertTemp() + "/panovisu/images/visiteAutomatique");
                 if (!filemarqueursAT.exists()) {
                     filemarqueursAT.mkdirs();
                 }
-                copieFichierRepertoire(getStrRepertAppli() + File.separator + "theme" + File.separator + "visiteAutomatique" + File.separator + "playAutoTour.png", getStrRepertTemp() + File.separator + "panovisu/images/visiteAutomatique");
-                copieFichierRepertoire(getStrRepertAppli() + File.separator + "theme" + File.separator + "visiteAutomatique" + File.separator + "pauseAutoTour.png", getStrRepertTemp() + File.separator + "panovisu/images/visiteAutomatique");
+                copieFichierRepertoire(
+                        getStrRepertAppli() + File.separator + "theme" + File.separator + "visiteAutomatique"
+                                + File.separator + "playAutoTour.png",
+                        getStrRepertTemp() + File.separator + "panovisu/images/visiteAutomatique");
+                copieFichierRepertoire(
+                        getStrRepertAppli() + File.separator + "theme" + File.separator + "visiteAutomatique"
+                                + File.separator + "pauseAutoTour.png",
+                        getStrRepertTemp() + File.separator + "panovisu/images/visiteAutomatique");
             }
             File fileXMLRepert = new File(getStrRepertTemp() + File.separator + "xml");
             if (!fileXMLRepert.exists()) {
@@ -2347,7 +2494,8 @@ public class EditeurPanovisu extends Application {
             String strChargeImages = "";
             int iPanoEntree = Integer.parseInt(ordPano.getStrPanos().get(0));
             strPanoEntree = getPanoramiquesProjet()[iPanoEntree].getStrNomFichier()
-                    .substring(getPanoramiquesProjet()[iPanoEntree].getStrNomFichier().lastIndexOf(File.separator) + 1, getPanoramiquesProjet()[iPanoEntree].getStrNomFichier().length())
+                    .substring(getPanoramiquesProjet()[iPanoEntree].getStrNomFichier().lastIndexOf(File.separator) + 1,
+                            getPanoramiquesProjet()[iPanoEntree].getStrNomFichier().length())
                     .split("\\.")[0];
             for (int ii = 0; ii < ordPano.getStrPanos().size(); ii++) {
                 int i = Integer.parseInt(ordPano.getStrPanos().get(ii));
@@ -2390,7 +2538,8 @@ public class EditeurPanovisu extends Application {
                 int iRouge = (int) (coulTitre.getRed() * 255.d);
                 int iBleu = (int) (coulTitre.getBlue() * 255.d);
                 int iVert = (int) (coulTitre.getGreen() * 255.d);
-                String strCoulFondTitre = "rgba(" + iRouge + "," + iVert + "," + iBleu + "," + getGestionnaireInterface().getTitreOpacite() + ")";
+                String strCoulFondTitre = "rgba(" + iRouge + "," + iVert + "," + iBleu + ","
+                        + getGestionnaireInterface().getTitreOpacite() + ")";
 
                 strContenuFichier = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                         + "<!--\n"
@@ -2406,29 +2555,30 @@ public class EditeurPanovisu extends Application {
                         + "<scene>\n"
                         + "   <pano \n"
                         + "      image=\"" + strFichierPano + "\"\n";
-                if (getGestionnaireInterface().isbAfficheTitre() && getGestionnaireInterface().isbTitreVisite() && getGestionnaireInterface().isbTitrePanoramique()) {
+                if (getGestionnaireInterface().isbAfficheTitre() && getGestionnaireInterface().isbTitreVisite()
+                        && getGestionnaireInterface().isbTitrePanoramique()) {
                     String strTit = "";
                     TextField tfVisite = (TextField) getVbChoixPanoramique().lookup("#titreVisite");
                     if (!tfVisite.getText().equals("")) {
                         strTit = tfVisite.getText();
                     }
 
-                    strContenuFichier
-                            += "      afftitre=\"oui\"\n"
+                    strContenuFichier += "      afftitre=\"oui\"\n"
                             + "      titre=\"" + strTit + "\"\n"
                             + "      titre2=\"" + getPanoramiquesProjet()[i].getStrTitrePanoramique() + "\"\n";
-                } else if (getGestionnaireInterface().isbAfficheTitre() && getGestionnaireInterface().isbTitreVisite()) {
+                } else if (getGestionnaireInterface().isbAfficheTitre()
+                        && getGestionnaireInterface().isbTitreVisite()) {
                     String strTit = "";
                     TextField tfVisite = (TextField) getVbChoixPanoramique().lookup("#titreVisite");
                     if (!tfVisite.getText().equals("")) {
                         strTit = tfVisite.getText();
                     }
 
-                    strContenuFichier
-                            += "      afftitre=\"oui\"\n"
+                    strContenuFichier += "      afftitre=\"oui\"\n"
                             + "      titre=\"" + strTit + "\"\n";
 
-                } else if (getGestionnaireInterface().isbAfficheTitre() && getGestionnaireInterface().isbTitrePanoramique()) {
+                } else if (getGestionnaireInterface().isbAfficheTitre()
+                        && getGestionnaireInterface().isbTitrePanoramique()) {
                     @SuppressWarnings("unused")
                     String strTit = "";
                     TextField tfVisite = (TextField) getVbChoixPanoramique().lookup("#titreVisite");
@@ -2436,59 +2586,64 @@ public class EditeurPanovisu extends Application {
                         strTit = tfVisite.getText();
                     }
 
-                    strContenuFichier
-                            += "      afftitre=\"oui\"\n"
+                    strContenuFichier += "      afftitre=\"oui\"\n"
                             + "      titre2=\"" + getPanoramiquesProjet()[i].getStrTitrePanoramique() + "\"\n";
 
                 } else {
-                    strContenuFichier
-                            += "      afftitre=\"non\"\n";
+                    strContenuFichier += "      afftitre=\"non\"\n";
                 }
-                int taillePolice2 = (int) Math.round(Double.parseDouble(getGestionnaireInterface().getStrTitrePoliceTaille()) * 3.d / 4.d);
-                strContenuFichier
-                        += "      titrePosition=\"" + getGestionnaireInterface().getStrTitrePosition() + "\"\n"
-                        + "      titreDecalage=\"" + Math.round(getGestionnaireInterface().getTitreDecalage()) + "px\"\n"
+                int taillePolice2 = (int) Math
+                        .round(Double.parseDouble(getGestionnaireInterface().getStrTitrePoliceTaille()) * 3.d / 4.d);
+                strContenuFichier += "      titrePosition=\"" + getGestionnaireInterface().getStrTitrePosition()
+                        + "\"\n"
+                        + "      titreDecalage=\"" + Math.round(getGestionnaireInterface().getTitreDecalage())
+                        + "px\"\n"
                         + "      titrePolice=\"" + getGestionnaireInterface().getStrTitrePoliceNom() + "\"\n"
-                        + "      titreTaillePolice=\"" + Math.round(Double.parseDouble(getGestionnaireInterface().getStrTitrePoliceTaille())) + "px\"\n"
+                        + "      titreTaillePolice=\""
+                        + Math.round(Double.parseDouble(getGestionnaireInterface().getStrTitrePoliceTaille()))
+                        + "px\"\n"
                         + "      titreTaillePolice2=\"" + taillePolice2 + "px\"\n"
                         + "      titreCalque=\"" + getGestionnaireInterface().getiCalqueTitre() + "\"\n";
 
                 if (getGestionnaireInterface().isbTitreAdapte()) {
-                    strContenuFichier
-                            += "      titreTaille=\"adapte\"\n";
+                    strContenuFichier += "      titreTaille=\"adapte\"\n";
                 } else {
-                    strContenuFichier
-                            += "      titreTaille=\"" + Math.round(getGestionnaireInterface().getTitreTaille()) + "%\"\n";
+                    strContenuFichier += "      titreTaille=\""
+                            + Math.round(getGestionnaireInterface().getTitreTaille()) + "%\"\n";
                 }
-                strContenuFichier
-                        += "      titreFond=\"" + strCoulFondTitre + "\"\n"
+                strContenuFichier += "      titreFond=\"" + strCoulFondTitre + "\"\n"
                         + "      titreCouleur=\"" + getGestionnaireInterface().getStrCouleurTitre() + "\"\n"
                         + "      type=\"" + getPanoramiquesProjet()[i].getStrTypePanoramique() + "\"\n"
                         + "      multiReso=\"oui\"\n"
                         + "      nombreNiveaux=\"" + getPanoramiquesProjet()[i].getNombreNiveaux() + "\"\n"
                         + "      zeroNord=\"" + zN + "\"\n"
                         + "      regardX=\"" + regX + "\"\n"
-                        + "      regardY=\"" + Math.round((getPanoramiquesProjet()[i].getRegardY() * 1000) + 0.002) / 1000.0 + "\"\n"
-                        + "      minFOV=\"" + Math.round((getPanoramiquesProjet()[i].getFovMin() * 200)) / 100.0 + "\"\n"
-                        + "      maxFOV=\"" + Math.round((getPanoramiquesProjet()[i].getFovMax() * 200)) / 100.0 + "\"\n"
-                        + "      champVisuel=\"" + Math.round((getPanoramiquesProjet()[i].getChampVisuel() + 0.002) * 1000) / 1000.0 + "\"\n";
+                        + "      regardY=\""
+                        + Math.round((getPanoramiquesProjet()[i].getRegardY() * 1000) + 0.002) / 1000.0 + "\"\n"
+                        + "      minFOV=\"" + Math.round((getPanoramiquesProjet()[i].getFovMin() * 200)) / 100.0
+                        + "\"\n"
+                        + "      maxFOV=\"" + Math.round((getPanoramiquesProjet()[i].getFovMax() * 200)) / 100.0
+                        + "\"\n"
+                        + "      champVisuel=\""
+                        + Math.round((getPanoramiquesProjet()[i].getChampVisuel() + 0.002) * 1000) / 1000.0 + "\"\n";
 
                 if (getPanoramiquesProjet()[i].getMinLat() != -1000 && getPanoramiquesProjet()[i].isbMinLat()) {
-                    strContenuFichier
-                            += "      minLat=\"" + Math.round((getPanoramiquesProjet()[i].getMinLat() + 0.002) * 1000) / 1000 + "\"\n";
+                    strContenuFichier += "      minLat=\""
+                            + Math.round((getPanoramiquesProjet()[i].getMinLat() + 0.002) * 1000) / 1000 + "\"\n";
                 }
                 if (getPanoramiquesProjet()[i].getMaxLat() != 1000 && getPanoramiquesProjet()[i].isbMaxLat()) {
-                    strContenuFichier
-                            += "      maxLat=\"" + Math.round((getPanoramiquesProjet()[i].getMaxLat() + 0.002) * 1000) / 1000 + "\"\n";
+                    strContenuFichier += "      maxLat=\""
+                            + Math.round((getPanoramiquesProjet()[i].getMaxLat() + 0.002) * 1000) / 1000 + "\"\n";
                 }
-                strContenuFichier
-                        += "      autorotation=\"" + strAutorotation + "\"\n"
+                strContenuFichier += "      autorotation=\"" + strAutorotation + "\"\n"
                         + "      vitesseAR=\"" + getiAutoRotationVitesse() + "\"\n"
                         + "      autotour=\"" + strAutoTour + "\"\n"
                         + "      atBouton=\"" + strAutoTourBouton + "\"\n"
                         + "      atBoutonTaille=\"" + getGestionnaireInterface().getTailleBoutonVisiteAuto() + "\"\n"
-                        + "      atBoutonPositionX=\"" + getGestionnaireInterface().getStrPositionXBoutonVisiteAuto() + "\"\n"
-                        + "      atBoutonPositionY=\"" + getGestionnaireInterface().getStrPositionYBoutonVisiteAuto() + "\"\n"
+                        + "      atBoutonPositionX=\"" + getGestionnaireInterface().getStrPositionXBoutonVisiteAuto()
+                        + "\"\n"
+                        + "      atBoutonPositionY=\"" + getGestionnaireInterface().getStrPositionYBoutonVisiteAuto()
+                        + "\"\n"
                         + "      atBoutonOffsetX=\"" + getGestionnaireInterface().getOffsetXBoutonVisiteAuto() + "\"\n"
                         + "      atBoutonOffsetY=\"" + getGestionnaireInterface().getOffsetYBoutonVisiteAuto() + "\"\n"
                         + "      atCalque=\"" + getGestionnaireInterface().getiCalqueVisiteAuto() + "\"\n"
@@ -2496,7 +2651,7 @@ public class EditeurPanovisu extends Application {
                         + "      limiteAT=\"" + getiAutoTourLimite() + "\"\n"
                         + "      demarrageAT=\"" + getiAutoTourDemarrage() + "\"\n"
                         + "      affinfo=\"" + strAffInfo + "\"\n";
-                
+
                 // Ajout de l'affichage de la description
                 if (getGestionnaireInterface().isbAfficheDescription()) {
                     strContenuFichier += "      affDescriptionChargement=\"oui\"\n";
@@ -2511,77 +2666,96 @@ public class EditeurPanovisu extends Application {
                 } else {
                     strContenuFichier += "      affDescriptionChargement=\"non\"\n";
                 }
-                
+
                 if (getPanoramiquesProjet()[i].getStrNomFichier()
-                        .substring(getPanoramiquesProjet()[i].getStrNomFichier().lastIndexOf(File.separator) + 1, getPanoramiquesProjet()[i].getStrNomFichier().length())
+                        .substring(getPanoramiquesProjet()[i].getStrNomFichier().lastIndexOf(File.separator) + 1,
+                                getPanoramiquesProjet()[i].getStrNomFichier().length())
                         .split("\\.")[0].equals(strPanoEntree) && isbPetitePlaneteDemarrage()) {
                     strContenuFichier += "      petitePlanete=\"" + strIntroPetitePlanete + "\"\n";
                 }
                 if (getPanoramiquesProjet()[i].getStrNomFichier()
-                        .substring(getPanoramiquesProjet()[i].getStrNomFichier().lastIndexOf(File.separator) + 1, getPanoramiquesProjet()[i].getStrNomFichier().length())
+                        .substring(getPanoramiquesProjet()[i].getStrNomFichier().lastIndexOf(File.separator) + 1,
+                                getPanoramiquesProjet()[i].getStrNomFichier().length())
                         .split("\\.")[0].equals(strPanoEntree) && getGestionnaireInterface().isbReplieDemarragePlan()) {
                     strContenuFichier += "      repliePlan=\"oui\"\n";
                 }
                 if (getPanoramiquesProjet()[i].getStrNomFichier()
-                        .substring(getPanoramiquesProjet()[i].getStrNomFichier().lastIndexOf(File.separator) + 1, getPanoramiquesProjet()[i].getStrNomFichier().length())
-                        .split("\\.")[0].equals(strPanoEntree) && getGestionnaireInterface().isbReplieDemarrageCarte()) {
+                        .substring(getPanoramiquesProjet()[i].getStrNomFichier().lastIndexOf(File.separator) + 1,
+                                getPanoramiquesProjet()[i].getStrNomFichier().length())
+                        .split("\\.")[0].equals(strPanoEntree)
+                        && getGestionnaireInterface().isbReplieDemarrageCarte()) {
                     strContenuFichier += "      replieCarte=\"oui\"\n";
                 }
                 if (getPanoramiquesProjet()[i].getStrNomFichier()
-                        .substring(getPanoramiquesProjet()[i].getStrNomFichier().lastIndexOf(File.separator) + 1, getPanoramiquesProjet()[i].getStrNomFichier().length())
-                        .split("\\.")[0].equals(strPanoEntree) && getGestionnaireInterface().isbReplieDemarrageVignettes()) {
+                        .substring(getPanoramiquesProjet()[i].getStrNomFichier().lastIndexOf(File.separator) + 1,
+                                getPanoramiquesProjet()[i].getStrNomFichier().length())
+                        .split("\\.")[0].equals(strPanoEntree)
+                        && getGestionnaireInterface().isbReplieDemarrageVignettes()) {
                     strContenuFichier += "      replieVignettes=\"oui\"\n";
                 }
 
                 strContenuFichier += "   />\n";
                 if (getGestionnaireInterface().getStrVisibiliteBarreClassique().equals("oui")) {
-                    strContenuFichier
-                            += "   <!--Définition de la Barre de navigation-->\n"
+                    strContenuFichier += "   <!--Définition de la Barre de navigation-->\n"
                             + "   <boutons \n"
                             + "      styleBoutons=\"navigation\"\n"
                             + "      couleur=\"rgba(255,255,255,0)\"\n"
                             + "      bordure=\"rgba(255,255,255,0)\"\n"
-                            + "      deplacements=\"" + getGestionnaireInterface().getStrDeplacementsBarreClassique() + "\" \n"
+                            + "      deplacements=\"" + getGestionnaireInterface().getStrDeplacementsBarreClassique()
+                            + "\" \n"
                             + "      zoom=\"" + getGestionnaireInterface().getStrZoomBarreClassique() + "\" \n"
                             + "      outils=\"" + getGestionnaireInterface().getStrOutilsBarreClassique() + "\"\n"
                             + "      fs=\"" + getGestionnaireInterface().getStrPleinEcranBarreClassique() + "\" \n"
                             + "      souris=\"" + getGestionnaireInterface().getStrSourisBarreClassique() + "\" \n"
                             + "      rotation=\"" + getGestionnaireInterface().getStrRotationBarreClassique() + "\" \n"
-                            + "      positionX=\"" + getGestionnaireInterface().getStrPositionBarreClassique().split(":")[1] + "\"\n"
-                            + "      positionY=\"" + getGestionnaireInterface().getStrPositionBarreClassique().split(":")[0] + "\" \n"
+                            + "      positionX=\""
+                            + getGestionnaireInterface().getStrPositionBarreClassique().split(":")[1] + "\"\n"
+                            + "      positionY=\""
+                            + getGestionnaireInterface().getStrPositionBarreClassique().split(":")[0] + "\" \n"
                             + "      barreCCalque=\"" + getGestionnaireInterface().getiCalqueBarreClassique() + "\"\n"
                             + "      dX=\"" + getGestionnaireInterface().getOffsetXBarreClassique() + "\" \n"
                             + "      dY=\"" + getGestionnaireInterface().getOffsetYBarreClassique() + "\"\n"
-                            + "      espacement=\"" + Math.round(getGestionnaireInterface().getEspacementBarreClassique()) + "\"\n"
+                            + "      espacement=\""
+                            + Math.round(getGestionnaireInterface().getEspacementBarreClassique()) + "\"\n"
                             + "      visible=\"" + getGestionnaireInterface().getStrVisibiliteBarreClassique() + "\"\n"
                             + "   />\n";
                 }
                 if (getGestionnaireInterface().getStrVisibiliteBarrePersonnalisee().equals("oui")) {
-                    strContenuFichier
-                            += "<!--  Barre de Navigation Personnalisée -->\n\n"
+                    strContenuFichier += "<!--  Barre de Navigation Personnalisée -->\n\n"
                             + "    <telecommande\n"
-                            + "        fs=\"" + getGestionnaireInterface().getStrPleinEcranBarrePersonnalisee() + "\" \n"
-                            + "        souris=\"" + getGestionnaireInterface().getStrSourisBarrePersonnalisee() + "\" \n"
-                            + "        rotation=\"" + getGestionnaireInterface().getStrRotationBarrePersonnalisee() + "\" \n"
+                            + "        fs=\"" + getGestionnaireInterface().getStrPleinEcranBarrePersonnalisee()
+                            + "\" \n"
+                            + "        souris=\"" + getGestionnaireInterface().getStrSourisBarrePersonnalisee()
+                            + "\" \n"
+                            + "        rotation=\"" + getGestionnaireInterface().getStrRotationBarrePersonnalisee()
+                            + "\" \n"
                             + "        info=\"" + getGestionnaireInterface().getStrInfoBarrePersonnalisee() + "\"\n"
                             + "        aide=\"" + getGestionnaireInterface().getStrAideBarrePersonnalisee() + "\"\n"
-                            + "        positionX=\"" + getGestionnaireInterface().getStrPositionBarrePersonnalisee().split(":")[1] + "\"\n"
-                            + "        positionY=\"" + getGestionnaireInterface().getStrPositionBarrePersonnalisee().split(":")[0] + "\" \n"
+                            + "        positionX=\""
+                            + getGestionnaireInterface().getStrPositionBarrePersonnalisee().split(":")[1] + "\"\n"
+                            + "        positionY=\""
+                            + getGestionnaireInterface().getStrPositionBarrePersonnalisee().split(":")[0] + "\" \n"
                             + "        taille=\"" + getGestionnaireInterface().getTailleBarrePersonnalisee() + "\"\n"
-                            + "        tailleBouton=\"" + getGestionnaireInterface().getTailleIconesBarrePersonnalisee() + "\"\n"
+                            + "        tailleBouton=\"" + getGestionnaireInterface().getTailleIconesBarrePersonnalisee()
+                            + "\"\n"
                             + "        opacite=\"" + getGestionnaireInterface().getOpaciteBarrePersonnalisee() + "\"\n"
                             + "        dX=\"" + getGestionnaireInterface().getOffsetXBarrePersonnalisee() + "\" \n"
                             + "        dY=\"" + getGestionnaireInterface().getOffsetYBarrePersonnalisee() + "\"\n"
-                            + "        barrePCalque=\"" + getGestionnaireInterface().getiCalqueBarrePersonnalisee() + "\"\n"
+                            + "        barrePCalque=\"" + getGestionnaireInterface().getiCalqueBarrePersonnalisee()
+                            + "\"\n"
                             + "        lien1=\"" + getGestionnaireInterface().getStrLien1BarrePersonnalisee() + "\"\n"
                             + "        lien2=\"" + getGestionnaireInterface().getStrLien2BarrePersonnalisee() + "\"\n"
                             + "        visible=\"oui\">\n";
                     for (int ij = 0; ij < getGestionnaireInterface().getiNombreZonesBarrePersonnalisee(); ij++) {
                         strContenuFichier += "        <zoneNavPerso "
-                                + "id=\"" + getGestionnaireInterface().getZonesBarrePersonnalisee()[ij].getStrIdZone() + "\" "
+                                + "id=\"" + getGestionnaireInterface().getZonesBarrePersonnalisee()[ij].getStrIdZone()
+                                + "\" "
                                 + "alt=\"\" title=\"\" "
-                                + "shape=\"" + getGestionnaireInterface().getZonesBarrePersonnalisee()[ij].getStrTypeZone() + "\" "
-                                + "coords=\"" + getGestionnaireInterface().getZonesBarrePersonnalisee()[ij].getStrCoordonneesZone() + "\""
+                                + "shape=\""
+                                + getGestionnaireInterface().getZonesBarrePersonnalisee()[ij].getStrTypeZone() + "\" "
+                                + "coords=\""
+                                + getGestionnaireInterface().getZonesBarrePersonnalisee()[ij].getStrCoordonneesZone()
+                                + "\""
                                 + " />\n";
                     }
                     strContenuFichier += "    </telecommande>\n"
@@ -2594,8 +2768,10 @@ public class EditeurPanovisu extends Application {
                             + "        affiche=\"oui\"\n"
                             + "        image=\"" + getGestionnaireInterface().getStrImageBoussole() + "\"\n"
                             + "        taille=\"" + getGestionnaireInterface().getTailleBoussole() + "\"\n"
-                            + "        positionY=\"" + getGestionnaireInterface().getStrPositionBoussole().split(":")[0] + "\"\n"
-                            + "        positionX=\"" + getGestionnaireInterface().getStrPositionBoussole().split(":")[1] + "\"\n"
+                            + "        positionY=\"" + getGestionnaireInterface().getStrPositionBoussole().split(":")[0]
+                            + "\"\n"
+                            + "        positionX=\"" + getGestionnaireInterface().getStrPositionBoussole().split(":")[1]
+                            + "\"\n"
                             + "        opacite=\"" + getGestionnaireInterface().getOpaciteBoussole() + "\"\n"
                             + "        dX=\"" + getGestionnaireInterface().getOffsetXBoussole() + "\"\n"
                             + "        dY=\"" + getGestionnaireInterface().getOffsetYBoussole() + "\"\n"
@@ -2604,7 +2780,8 @@ public class EditeurPanovisu extends Application {
                             + "    />\n";
                 }
                 if (getGestionnaireInterface().isbFenetreInfoPersonnalise()) {
-                    String strImgInfoURL = "images/" + getGestionnaireInterface().getStrFenetreInfoImage().substring(getGestionnaireInterface().getStrFenetreInfoImage().lastIndexOf(File.separator) + 1,
+                    String strImgInfoURL = "images/" + getGestionnaireInterface().getStrFenetreInfoImage().substring(
+                            getGestionnaireInterface().getStrFenetreInfoImage().lastIndexOf(File.separator) + 1,
                             getGestionnaireInterface().getStrFenetreInfoImage().length());
                     strContenuFichier += "<!--  Fenêtre info personnalisée -->\n"
                             + "    <fenetreInfo \n"
@@ -2612,18 +2789,24 @@ public class EditeurPanovisu extends Application {
                             + "        image=\"" + strImgInfoURL + "\"\n"
                             + "        taille=\"" + getGestionnaireInterface().getFenetreInfoTaille() + "\"\n"
                             + "        opacite=\"" + getGestionnaireInterface().getFenetreInfoOpacite() + "\"\n"
-                            + "        dX=\"" + Math.round(getGestionnaireInterface().getFenetreInfoPosX() * 10) / 10 + "\"\n"
-                            + "        dY=\"" + Math.round(getGestionnaireInterface().getFenetreInfoPosY() * 10) / 10 + "\"\n"
+                            + "        dX=\"" + Math.round(getGestionnaireInterface().getFenetreInfoPosX() * 10) / 10
+                            + "\"\n"
+                            + "        dY=\"" + Math.round(getGestionnaireInterface().getFenetreInfoPosY() * 10) / 10
+                            + "\"\n"
                             + "        URL=\"" + getGestionnaireInterface().getStrFenetreURL() + "\"\n"
                             + "        texteURL=\"" + getGestionnaireInterface().getStrFenetreTexteURL() + "\"\n"
                             + "        couleurURL=\"" + getGestionnaireInterface().getStrFenetreURLCouleur() + "\"\n"
-                            + "        TailleURL=\"" + Math.round(getGestionnaireInterface().getFenetrePoliceTaille() * 10) / 10 + "\"\n"
-                            + "        URLdX=\"" + Math.round(getGestionnaireInterface().getFenetreURLPosX() * 10) / 10 + "\"\n"
-                            + "        URLdY=\"" + Math.round(getGestionnaireInterface().getFenetreURLPosY() * 10) / 10 + "\"\n"
+                            + "        TailleURL=\""
+                            + Math.round(getGestionnaireInterface().getFenetrePoliceTaille() * 10) / 10 + "\"\n"
+                            + "        URLdX=\"" + Math.round(getGestionnaireInterface().getFenetreURLPosX() * 10) / 10
+                            + "\"\n"
+                            + "        URLdY=\"" + Math.round(getGestionnaireInterface().getFenetreURLPosY() * 10) / 10
+                            + "\"\n"
                             + "    />\n";
                 }
                 if (getGestionnaireInterface().isbFenetreAidePersonnalise()) {
-                    String strImgAideURL = "images/" + getGestionnaireInterface().getStrFenetreAideImage().substring(getGestionnaireInterface().getStrFenetreAideImage().lastIndexOf(File.separator) + 1,
+                    String strImgAideURL = "images/" + getGestionnaireInterface().getStrFenetreAideImage().substring(
+                            getGestionnaireInterface().getStrFenetreAideImage().lastIndexOf(File.separator) + 1,
                             getGestionnaireInterface().getStrFenetreAideImage().length());
                     strContenuFichier += "<!--  Fenêtre Aide personnalisée -->\n"
                             + "    <fenetreAide \n"
@@ -2686,8 +2869,10 @@ public class EditeurPanovisu extends Application {
                         + "        affiche=\"" + strbAffichemasque + "\"\n"
                         + "        image=\"MA.png\"\n"
                         + "        taille=\"" + getGestionnaireInterface().getTailleMasque() + "\"\n"
-                        + "        positionY=\"" + getGestionnaireInterface().getStrPositionMasque().split(":")[0] + "\"\n"
-                        + "        positionX=\"" + getGestionnaireInterface().getStrPositionMasque().split(":")[1] + "\"\n"
+                        + "        positionY=\"" + getGestionnaireInterface().getStrPositionMasque().split(":")[0]
+                        + "\"\n"
+                        + "        positionX=\"" + getGestionnaireInterface().getStrPositionMasque().split(":")[1]
+                        + "\"\n"
                         + "        opacite=\"" + getGestionnaireInterface().getOpaciteMasque() + "\"\n"
                         + "        dX=\"" + getGestionnaireInterface().getdXMasque() + "\"\n"
                         + "        dY=\"" + getGestionnaireInterface().getdYMasque() + "\"\n"
@@ -2711,8 +2896,10 @@ public class EditeurPanovisu extends Application {
                             + "    <reseauxSociaux \n"
                             + "        affiche=\"oui\"\n"
                             + "        taille=\"" + getGestionnaireInterface().getTailleReseauxSociaux() + "\"\n"
-                            + "        positionY=\"" + getGestionnaireInterface().getStrPositionReseauxSociaux().split(":")[0] + "\"\n"
-                            + "        positionX=\"" + getGestionnaireInterface().getStrPositionReseauxSociaux().split(":")[1] + "\"\n"
+                            + "        positionY=\""
+                            + getGestionnaireInterface().getStrPositionReseauxSociaux().split(":")[0] + "\"\n"
+                            + "        positionX=\""
+                            + getGestionnaireInterface().getStrPositionReseauxSociaux().split(":")[1] + "\"\n"
                             + "        opacite=\"" + getGestionnaireInterface().getOpaciteReseauxSociaux() + "\"\n"
                             + "        dX=\"" + getGestionnaireInterface().getdXReseauxSociaux() + "\"\n"
                             + "        dY=\"" + getGestionnaireInterface().getdYReseauxSociaux() + "\"\n"
@@ -2723,17 +2910,22 @@ public class EditeurPanovisu extends Application {
                             + "    />\n";
                 }
                 if (getGestionnaireInterface().isbAfficheVignettes()) {
-                    int iRougeVig = (int) (Color.valueOf(getGestionnaireInterface().getStrCouleurFondVignettes()).getRed() * 255.d);
-                    int iBleuVig = (int) (Color.valueOf(getGestionnaireInterface().getStrCouleurFondVignettes()).getBlue() * 255.d);
-                    int iVertVig = (int) (Color.valueOf(getGestionnaireInterface().getStrCouleurFondVignettes()).getGreen() * 255.d);
-                    String strCoulVig = "rgba(" + iRougeVig + "," + iVertVig + "," + iBleuVig + "," + getGestionnaireInterface().getOpaciteVignettes() + ")";
+                    int iRougeVig = (int) (Color.valueOf(getGestionnaireInterface().getStrCouleurFondVignettes())
+                            .getRed() * 255.d);
+                    int iBleuVig = (int) (Color.valueOf(getGestionnaireInterface().getStrCouleurFondVignettes())
+                            .getBlue() * 255.d);
+                    int iVertVig = (int) (Color.valueOf(getGestionnaireInterface().getStrCouleurFondVignettes())
+                            .getGreen() * 255.d);
+                    String strCoulVig = "rgba(" + iRougeVig + "," + iVertVig + "," + iBleuVig + ","
+                            + getGestionnaireInterface().getOpaciteVignettes() + ")";
                     String strAfficheVignettes = (getGestionnaireInterface().isbAfficheVignettes()) ? "oui" : "non";
                     strContenuFichier += "<!-- Barre des vignettes -->"
                             + "    <vignettes \n"
                             + "        affiche=\"" + strAfficheVignettes + "\"\n"
                             + "        tailleImage=\"" + getGestionnaireInterface().getTailleImageVignettes() + "\"\n"
                             + "        fondCouleur=\"" + strCoulVig + "\"\n"
-                            + "        texteCouleur=\"" + getGestionnaireInterface().getStrCouleurTexteVignettes() + "\"\n"
+                            + "        texteCouleur=\"" + getGestionnaireInterface().getStrCouleurTexteVignettes()
+                            + "\"\n"
                             + "        opacite=\"1.0\"\n"
                             + "        vignettesCalque=\"" + getGestionnaireInterface().getiCalqueVignettes() + "\"\n"
                             + "        position=\"" + getGestionnaireInterface().getStrPositionVignettes() + "\"\n"
@@ -2746,15 +2938,14 @@ public class EditeurPanovisu extends Application {
                         String strXML = "panovisu" + j + ".xml";
                         ReadWriteImage.writeJpeg(getPanoramiquesProjet()[j].getImgVignettePanoramique(),
                                 getStrRepertTemp() + "/panos/" + strFichier, 1.0f, false, 0.0f);
-                        strContenuFichier
-                                += "        <imageVignette \n"
+                        strContenuFichier += "        <imageVignette \n"
                                 + "            image=\"panos/" + strFichier + "\"\n"
                                 + "            xml=\"xml/" + strXML + "\"\n"
-                                + "            infoBulle=\"" + getPanoramiquesProjet()[j].getStrTitrePanoramique() + "\"\n"
+                                + "            infoBulle=\"" + getPanoramiquesProjet()[j].getStrTitrePanoramique()
+                                + "\"\n"
                                 + "        />\n";
                     }
-                    strContenuFichier
-                            += "    </vignettes>       \n"
+                    strContenuFichier += "    </vignettes>       \n"
                             + "";
 
                 }
@@ -2768,7 +2959,8 @@ public class EditeurPanovisu extends Application {
                             + "        positionX=\"" + getGestionnaireInterface().getStrPositionXComboMenu() + "\"\n"
                             + "        positionY=\"" + getGestionnaireInterface().getStrPositionYComboMenu() + "\"\n"
                             + "        dX=\"" + getGestionnaireInterface().getOffsetXComboMenu() + "\"\n"
-                            + "        comboCalque=\"" + getGestionnaireInterface().getiCalqueMenuPanoramiques() + "\"\n"
+                            + "        comboCalque=\"" + getGestionnaireInterface().getiCalqueMenuPanoramiques()
+                            + "\"\n"
                             + "        dY=\"" + getGestionnaireInterface().getOffsetYComboMenu() + "\"\n"
                             + "    >\n";
                     for (int jj = 0; jj < ordPano.getStrPanos().size(); jj++) {
@@ -2780,24 +2972,19 @@ public class EditeurPanovisu extends Application {
                         ReadWriteImage.writeJpeg(getPanoramiquesProjet()[j].getImgVignettePanoramique(),
                                 getStrRepertTemp() + "/panos/" + strFichier, 1.0f, false, 0.0f);
 
-                        strContenuFichier
-                                += "        <imageComboMenu \n";
+                        strContenuFichier += "        <imageComboMenu \n";
                         if (getGestionnaireInterface().isbAfficheComboMenuImages()) {
-                            strContenuFichier
-                                    += "            image=\"panos/" + strFichier + "\"\n";
+                            strContenuFichier += "            image=\"panos/" + strFichier + "\"\n";
                         }
                         if (i == j) {
-                            strContenuFichier
-                                    += "            selectionne=\"selected\"\n";
+                            strContenuFichier += "            selectionne=\"selected\"\n";
                         }
-                        strContenuFichier
-                                += "            xml=\"xml/" + strXML + "\"\n"
+                        strContenuFichier += "            xml=\"xml/" + strXML + "\"\n"
                                 + "            titre=\"" + getPanoramiquesProjet()[j].getStrTitrePanoramique() + "\"\n"
                                 + "            sousTitre=\"" + strTitreVisite1 + "\"\n"
                                 + "        />\n";
                     }
-                    strContenuFichier
-                            += "    </comboMenu>       \n"
+                    strContenuFichier += "    </comboMenu>       \n"
                             + "";
 
                 }
@@ -2815,27 +3002,24 @@ public class EditeurPanovisu extends Application {
                     String strTypeAnimation = HS.getStrTypeAnimation();
                     @SuppressWarnings("unused")
                     String strAnime = (HS.isAnime()) ? "true" : "false";
-                    strContenuFichier
-                            += "      <point \n"
+                    strContenuFichier += "      <point \n"
                             + "           type=\"panoramique\"\n"
                             + "           long=\"" + longit + "\"\n"
                             + "           lat=\"" + HS.getLatitude() + "\"\n"
-                            + "           tailleHS=\"" + getGestionnaireInterface().getiTailleHotspotsPanoramique() + "px\"\n";
-                    
+                            + "           tailleHS=\"" + getGestionnaireInterface().getiTailleHotspotsPanoramique()
+                            + "px\"\n";
+
                     // Utiliser l'icône colorée personnalisée si disponible
                     if (HS.getStrFichierImage() != null && !HS.getStrFichierImage().isEmpty()) {
-                        strContenuFichier
-                                += "           image=\"panovisu/images/hotspots/" + HS.getStrFichierImage() + "\"\n";
+                        strContenuFichier += "           image=\"panovisu/images/hotspots/" + HS.getStrFichierImage()
+                                + "\"\n";
                     } else if (!strTypeHS.equals("gif")) {
-                        strContenuFichier
-                                += "           image=\"panovisu/images/hotspots/hotspot.png\"\n";
+                        strContenuFichier += "           image=\"panovisu/images/hotspots/hotspot.png\"\n";
                     } else {
                         String strNomHSGif = strNomfichierHS.substring(strNomfichierHS.lastIndexOf(File.separator) + 1);
-                        strContenuFichier
-                                += "           image=\"panovisu/images/hotspots/" + strNomHSGif + "\"\n";
+                        strContenuFichier += "           image=\"panovisu/images/hotspots/" + strNomHSGif + "\"\n";
                     }
-                    strContenuFichier
-                            += "           xml=\"xml/panovisu" + HS.getNumeroPano() + ".xml\"\n";
+                    strContenuFichier += "           xml=\"xml/panovisu" + HS.getNumeroPano() + ".xml\"\n";
                     if (HS.getRegardX() != 1000) {
                         strContenuFichier += "           regardX=\"" + HS.getRegardX() + "\"\n";
                     }
@@ -2846,7 +3030,8 @@ public class EditeurPanovisu extends Application {
                         strContenuFichier += "           champVisuel=\"" + HS.getChampVisuel() + "\"\n";
                     }
                     String strAgranditSurvol = (HS.isAgranditSurvol()) ? "true" : "false";
-                    strContenuFichier += "           info=\"" + HS.getStrInfo().replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;") + "\"\n"
+                    strContenuFichier += "           info=\""
+                            + HS.getStrInfo().replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;") + "\"\n"
                             + "           anime=\"" + strTypeAnimation + "\"\n"
                             + "           agranditSurvol=\"" + strAgranditSurvol + "\"\n"
                             + "      />\n";
@@ -2864,7 +3049,8 @@ public class EditeurPanovisu extends Application {
                     iRouge = (int) (coulTitreHTML.getRed() * 255.d);
                     iBleu = (int) (coulTitreHTML.getBlue() * 255.d);
                     iVert = (int) (coulTitreHTML.getGreen() * 255.d);
-                    String strCoulHTML = "rgba(" + iRouge + "," + iVert + "," + iBleu + "," + Math.round(HS.getOpaciteHTML() * 100.d) / 100.d + ")";
+                    String strCoulHTML = "rgba(" + iRouge + "," + iVert + "," + iBleu + ","
+                            + Math.round(HS.getOpaciteHTML() * 100.d) / 100.d + ")";
                     double longit;
                     if (getPanoramiquesProjet()[i].getStrTypePanoramique().equals(Panoramique.SPHERE)) {
                         longit = HS.getLongitude() - 180;
@@ -2876,28 +3062,26 @@ public class EditeurPanovisu extends Application {
                     String strAnime = (HS.isAnime()) ? "true" : "false";
                     String strAgranditSurvol = (HS.isAgranditSurvol()) ? "true" : "false";
 
-                    strContenuFichier
-                            += "      <point \n"
+                    strContenuFichier += "      <point \n"
                             + "           type=\"html\"\n"
                             + "           long=\"" + longit + "\"\n"
                             + "           lat=\"" + HS.getLatitude() + "\"\n"
                             + "           tailleHS=\"" + getGestionnaireInterface().getiTailleHotspotsHTML() + "px\"\n";
-                    
+
                     // Utiliser l'icône colorée personnalisée si disponible
                     if (HS.getStrFichierImage() != null && !HS.getStrFichierImage().isEmpty()) {
-                        strContenuFichier
-                                += "           image=\"panovisu/images/hotspots/" + HS.getStrFichierImage() + "\"\n";
+                        strContenuFichier += "           image=\"panovisu/images/hotspots/" + HS.getStrFichierImage()
+                                + "\"\n";
                     } else if (!strTypeHSHTML.equals("gif")) {
-                        strContenuFichier
-                                += "           image=\"panovisu/images/hotspots/hotspotHTML.png\"\n";
+                        strContenuFichier += "           image=\"panovisu/images/hotspots/hotspotHTML.png\"\n";
                     } else {
-                        String strNomHSGif = strNomfichierHSHTML.substring(strNomfichierHSHTML.lastIndexOf(File.separator) + 1);
-                        strContenuFichier
-                                += "           image=\"panovisu/images/hotspots/" + strNomHSGif + "\"\n";
+                        String strNomHSGif = strNomfichierHSHTML
+                                .substring(strNomfichierHSHTML.lastIndexOf(File.separator) + 1);
+                        strContenuFichier += "           image=\"panovisu/images/hotspots/" + strNomHSGif + "\"\n";
                     }
-                    strContenuFichier
-                            += "           url=\"" + strUrlHTML + "\"\n"
-                            + "           info=\"" + HS.getStrInfo().replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;") + "\"\n"
+                    strContenuFichier += "           url=\"" + strUrlHTML + "\"\n"
+                            + "           info=\""
+                            + HS.getStrInfo().replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;") + "\"\n"
                             + "           taille=\"" + Math.round(HS.getLargeurHTML()) + "px\"\n"
                             + "           position=\"" + HS.getStrPositionHTML() + "\"\n"
                             + "           couleur=\"" + strCoulHTML + "\"\n"
@@ -2930,24 +3114,23 @@ public class EditeurPanovisu extends Application {
                         strTypeAnimation = "blink"; // Animation par défaut
                     }
 
-                    strContenuFichier
-                            += "      <point \n"
+                    strContenuFichier += "      <point \n"
                             + "           type=\"html\"\n"
                             + "           long=\"" + longit + "\"\n"
                             + "           lat=\"" + HS.getLatitude() + "\"\n"
-                            + "           tailleHS=\"" + getGestionnaireInterface().getiTailleHotspotsImage() + "px\"\n";
+                            + "           tailleHS=\"" + getGestionnaireInterface().getiTailleHotspotsImage()
+                            + "px\"\n";
                     if (!strTypeHSImage.equals("gif")) {
-                        strContenuFichier
-                                += "           image=\"panovisu/images/hotspots/hotspotImage.png\"\n";
+                        strContenuFichier += "           image=\"panovisu/images/hotspots/hotspotImage.png\"\n";
                     } else {
-                        String strNomHSGif = strNomfichierHSImage.substring(strNomfichierHSImage.lastIndexOf(File.separator) + 1);
-                        strContenuFichier
-                                += "           image=\"panovisu/images/hotspots/" + strNomHSGif + "\"\n";
+                        String strNomHSGif = strNomfichierHSImage
+                                .substring(strNomfichierHSImage.lastIndexOf(File.separator) + 1);
+                        strContenuFichier += "           image=\"panovisu/images/hotspots/" + strNomHSGif + "\"\n";
                     }
-                    strContenuFichier
-                            += "           url=\"" + strUrlHTML + "\"\n"
+                    strContenuFichier += "           url=\"" + strUrlHTML + "\"\n"
                             + "           taille=\"90%\"\n"
-                            + "           info=\"" + HS.getStrInfo().replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;") + "\"\n"
+                            + "           info=\""
+                            + HS.getStrInfo().replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;") + "\"\n"
                             + "           couleur=\"" + strCoulHTML + "\"\n"
                             + "           anime=\"" + strTypeAnimation + "\"\n"
                             + "      />\n";
@@ -2957,7 +3140,8 @@ public class EditeurPanovisu extends Application {
                     HotspotImage HS = getPanoramiquesProjet()[i].getHotspotImage(j);
                     String strCouleurFondImage = HS.getStrCouleurFond();
                     if (strCouleurFondImage.equals("")) {
-                        strCouleurFondImage = "#" + getGestionnaireInterface().getCouleurFondTheme().toString().substring(2, 8);
+                        strCouleurFondImage = "#"
+                                + getGestionnaireInterface().getCouleurFondTheme().toString().substring(2, 8);
                     }
                     double opaciteImage = HS.getOpacite();
                     if (opaciteImage == -1) {
@@ -2980,28 +3164,27 @@ public class EditeurPanovisu extends Application {
                     @SuppressWarnings("unused")
                     String strAnime = (HS.isAnime()) ? "true" : "false";
                     String strAgranditSurvol = (HS.isAgranditSurvol()) ? "true" : "false";
-                    strContenuFichier
-                            += "      <point \n"
+                    strContenuFichier += "      <point \n"
                             + "           type=\"image\"\n"
                             + "           long=\"" + longit + "\"\n"
                             + "           lat=\"" + HS.getLatitude() + "\"\n"
-                            + "           tailleHS=\"" + getGestionnaireInterface().getiTailleHotspotsImage() + "px\"\n";
-                    
+                            + "           tailleHS=\"" + getGestionnaireInterface().getiTailleHotspotsImage()
+                            + "px\"\n";
+
                     // Utiliser l'icône colorée personnalisée si disponible
                     if (HS.getStrFichierImage() != null && !HS.getStrFichierImage().isEmpty()) {
-                        strContenuFichier
-                                += "           image=\"panovisu/images/hotspots/" + HS.getStrFichierImage() + "\"\n";
+                        strContenuFichier += "           image=\"panovisu/images/hotspots/" + HS.getStrFichierImage()
+                                + "\"\n";
                     } else if (!strTypeHSImage.equals("gif")) {
-                        strContenuFichier
-                                += "           image=\"panovisu/images/hotspots/hotspotImage.png\"\n";
+                        strContenuFichier += "           image=\"panovisu/images/hotspots/hotspotImage.png\"\n";
                     } else {
-                        String strNomHSGif = strNomfichierHSImage.substring(strNomfichierHSImage.lastIndexOf(File.separator) + 1);
-                        strContenuFichier
-                                += "           image=\"panovisu/images/hotspots/" + strNomHSGif + "\"\n";
+                        String strNomHSGif = strNomfichierHSImage
+                                .substring(strNomfichierHSImage.lastIndexOf(File.separator) + 1);
+                        strContenuFichier += "           image=\"panovisu/images/hotspots/" + strNomHSGif + "\"\n";
                     }
-                    strContenuFichier
-                            += "           img=\"images/" + HS.getStrLienImg() + "\"\n"
-                            + "           info=\"" + HS.getStrInfo().replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;") + "\"\n"
+                    strContenuFichier += "           img=\"images/" + HS.getStrLienImg() + "\"\n"
+                            + "           info=\""
+                            + HS.getStrInfo().replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;") + "\"\n"
                             + "           couleur=\"" + strCoulImage + "\"\n"
                             + "           anime=\"" + strTypeAnimation + "\"\n"
                             + "           agranditSurvol=\"" + strAgranditSurvol + "\"\n"
@@ -3019,8 +3202,7 @@ public class EditeurPanovisu extends Application {
                                 imgFond.getStrFichierImage().length());
                         String strMasquable = (imgFond.isMasquable()) ? "oui" : "non";
 
-                        strContenuFichier
-                                += "    <imageFond\n"
+                        strContenuFichier += "    <imageFond\n"
                                 + "        fichier=\"" + strImgFond + "\"\n"
                                 + "        posX=\"" + imgFond.getStrPosX() + "\" \n"
                                 + "        posY=\"" + imgFond.getStrPosY() + "\" \n"
@@ -3033,7 +3215,10 @@ public class EditeurPanovisu extends Application {
                                 + "        calque=\"" + imgFond.getiCalqueImage() + "\"\n"
                                 + "        masquable=\"" + strMasquable + "\" \n"
                                 + "        url=\"" + imgFond.getStrUrl() + "\" \n"
-                                + "        infobulle=\"" + imgFond.getStrInfobulle().replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;") + "\" \n"
+                                + "        infobulle=\""
+                                + imgFond.getStrInfobulle().replace("<", "&lt;").replace(">", "&gt;").replace("\"",
+                                        "&quot;")
+                                + "\" \n"
                                 + "    />\n"
                                 + "";
                     }
@@ -3045,9 +3230,9 @@ public class EditeurPanovisu extends Application {
                     iBleu = (int) (getGestionnaireInterface().getCouleurFondPlan().getBlue() * 255.d);
                     iVert = (int) (getGestionnaireInterface().getCouleurFondPlan().getGreen() * 255.d);
                     String strAfficheRadar = (getGestionnaireInterface().isbAfficheRadar()) ? "oui" : "non";
-                    String strCoulFond = "rgba(" + iRouge + "," + iVert + "," + iBleu + "," + getGestionnaireInterface().getOpacitePlan() + ")";
-                    strContenuFichier
-                            += "    <plan\n"
+                    String strCoulFond = "rgba(" + iRouge + "," + iVert + "," + iBleu + ","
+                            + getGestionnaireInterface().getOpacitePlan() + ")";
+                    strContenuFichier += "    <plan\n"
                             + "        affiche=\"oui\" \n"
                             + "        image=\"images/" + planPano.getStrImagePlan() + "\"\n"
                             + "        largeur=\"" + getGestionnaireInterface().getLargeurPlan() + "\"\n"
@@ -3060,35 +3245,39 @@ public class EditeurPanovisu extends Application {
                             + "        boussoleX=\"" + planPano.getPositionX() + "\"\n"
                             + "        boussoleY=\"" + planPano.getPositionX() + "\"\n"
                             + "        radarAffiche=\"" + strAfficheRadar + "\"\n"
-                            + "        radarTaille=\"" + Math.round(getGestionnaireInterface().getTailleRadar()) + "\"\n"
-                            + "        radarCouleurFond=\"#" + getGestionnaireInterface().getStrCouleurFondRadar() + "\"\n"
-                            + "        radarCouleurLigne=\"#" + getGestionnaireInterface().getStrCouleurLigneRadar() + "\"\n"
-                            + "        radarOpacite=\"" + Math.round(getGestionnaireInterface().getOpaciteRadar() * 100.d) / 100.d + "\"\n"
+                            + "        radarTaille=\"" + Math.round(getGestionnaireInterface().getTailleRadar())
+                            + "\"\n"
+                            + "        radarCouleurFond=\"#" + getGestionnaireInterface().getStrCouleurFondRadar()
+                            + "\"\n"
+                            + "        radarCouleurLigne=\"#" + getGestionnaireInterface().getStrCouleurLigneRadar()
+                            + "\"\n"
+                            + "        radarOpacite=\""
+                            + Math.round(getGestionnaireInterface().getOpaciteRadar() * 100.d) / 100.d + "\"\n"
                             + "    >\n";
                     for (int iPoint = 0; iPoint < planPano.getNombreHotspots(); iPoint++) {
-                        double posX = planPano.getHotspot(iPoint).getLongitude() * getGestionnaireInterface().getLargeurPlan();
+                        double posX = planPano.getHotspot(iPoint).getLongitude()
+                                * getGestionnaireInterface().getLargeurPlan();
                         double posY = planPano.getHotspot(iPoint).getLatitude()
-                                * planPano.getHauteurPlan() * getGestionnaireInterface().getLargeurPlan() / planPano.getLargeurPlan();
+                                * planPano.getHauteurPlan() * getGestionnaireInterface().getLargeurPlan()
+                                / planPano.getLargeurPlan();
                         if (planPano.getHotspot(iPoint).getNumeroPano() == i) {
-                            strContenuFichier
-                                    += "        <pointPlan\n"
+                            strContenuFichier += "        <pointPlan\n"
                                     + "            positX=\"" + posX + "\"\n"
                                     + "            positY=\"" + posY + "\"\n"
                                     + "            xml=\"actif\"\n"
                                     + "            />  \n";
 
                         } else {
-                            strContenuFichier
-                                    += "        <pointPlan\n"
+                            strContenuFichier += "        <pointPlan\n"
                                     + "            positX=\"" + posX + "\"\n"
                                     + "            positY=\"" + posY + "\"\n"
-                                    + "            xml=\"xml/panovisu" + planPano.getHotspot(iPoint).getNumeroPano() + ".xml\"\n"
+                                    + "            xml=\"xml/panovisu" + planPano.getHotspot(iPoint).getNumeroPano()
+                                    + ".xml\"\n"
                                     + "            texte=\"" + planPano.getHotspot(iPoint).getStrInfo() + "\"\n"
                                     + "            />  \n";
                         }
                     }
-                    strContenuFichier
-                            += "    </plan>\n";
+                    strContenuFichier += "    </plan>\n";
                 }
 
                 if (getGestionnaireInterface().isbAfficheCarte()) {
@@ -3096,15 +3285,15 @@ public class EditeurPanovisu extends Application {
                     iBleu = (int) (getGestionnaireInterface().getCouleurFondCarte().getBlue() * 255.d);
                     iVert = (int) (getGestionnaireInterface().getCouleurFondCarte().getGreen() * 255.d);
                     String strAfficheRadarCarte = (getGestionnaireInterface().isbAfficheRadarCarte()) ? "oui" : "non";
-                    String strCoulFond = "rgba(" + iRouge + "," + iVert + "," + iBleu + "," + getGestionnaireInterface().getOpaciteCarte() + ")";
+                    String strCoulFond = "rgba(" + iRouge + "," + iVert + "," + iBleu + ","
+                            + getGestionnaireInterface().getOpaciteCarte() + ")";
                     CoordonneesGeographiques coords;
                     if (getGestionnaireInterface().getCoordCentreCarte() != null) {
                         coords = getGestionnaireInterface().getCoordCentreCarte();
                     } else {
                         coords = getGestionnaireInterface().navigateurCarteOL.recupereCoordonnees();
                     }
-                    strContenuFichier
-                            += "    <carte\n"
+                    strContenuFichier += "    <carte\n"
                             + "        affiche=\"oui\" \n"
                             + "        largeur=\"" + getGestionnaireInterface().getLargeurCarte() + "\"\n"
                             + "        hauteur=\"" + getGestionnaireInterface().getHauteurCarte() + "\"\n"
@@ -3118,10 +3307,14 @@ public class EditeurPanovisu extends Application {
                             + "        couleurFond=\"" + strCoulFond + "\"\n"
                             + "        couleurTexte=\"#" + getGestionnaireInterface().getStrCouleurTexteCarte() + "\"\n"
                             + "        radarCarteAffiche=\"" + strAfficheRadarCarte + "\"\n"
-                            + "        radarCarteTaille=\"" + Math.round(getGestionnaireInterface().getTailleRadarCarte()) + "\"\n"
-                            + "        radarCarteCouleurFond=\"#" + getGestionnaireInterface().getStrCouleurFondRadarCarte() + "\"\n"
-                            + "        radarCarteCouleurLigne=\"#" + getGestionnaireInterface().getStrCouleurLigneRadarCarte() + "\"\n"
-                            + "        radarCarteOpacite=\"" + Math.round(getGestionnaireInterface().getOpaciteRadarCarte() * 100.d) / 100.d + "\"\n"
+                            + "        radarCarteTaille=\""
+                            + Math.round(getGestionnaireInterface().getTailleRadarCarte()) + "\"\n"
+                            + "        radarCarteCouleurFond=\"#"
+                            + getGestionnaireInterface().getStrCouleurFondRadarCarte() + "\"\n"
+                            + "        radarCarteCouleurLigne=\"#"
+                            + getGestionnaireInterface().getStrCouleurLigneRadarCarte() + "\"\n"
+                            + "        radarCarteOpacite=\""
+                            + Math.round(getGestionnaireInterface().getOpaciteRadarCarte() * 100.d) / 100.d + "\"\n"
                             + "    >\n";
                     for (int iPoint2 = 0; iPoint2 < getiNombrePanoramiques(); iPoint2++) {
                         if (getPanoramiquesProjet()[iPoint2].getMarqueurGeolocatisation() != null) {
@@ -3131,15 +3324,15 @@ public class EditeurPanovisu extends Application {
                             String strFichierPano2 = getPanoramiquesProjet()[iPoint2]
                                     .getStrNomFichier().substring(getPanoramiquesProjet()[iPoint2].getStrNomFichier()
                                             .lastIndexOf(File.separator) + 1, getPanoramiquesProjet()[iPoint2]
-                                            .getStrNomFichier().length()).split("\\.")[0];
+                                                    .getStrNomFichier().length())
+                                    .split("\\.")[0];
                             String strHTML = "<span style='font-family : Verdana,Arial,sans-serif;font-weight:bold;font-size : 12px;'>"
                                     + getPanoramiquesProjet()[iPoint2].getStrTitrePanoramique()
                                     + "</span>";
                             strHTML = strHTML.replace("<", "&lt;").replace(">", "&gt;");
                             String strFichierXML = "panovisu" + iPoint2;
                             if (iPoint2 == i) {
-                                strContenuFichier
-                                        += "        <pointCarte\n"
+                                strContenuFichier += "        <pointCarte\n"
                                         + "            positX=\"" + posX + "\"\n"
                                         + "            positY=\"" + posY + "\"\n"
                                         + "            xml=\"actif\"\n"
@@ -3148,8 +3341,7 @@ public class EditeurPanovisu extends Application {
                                         + "            />  \n";
 
                             } else {
-                                strContenuFichier
-                                        += "        <pointCarte\n"
+                                strContenuFichier += "        <pointCarte\n"
                                         + "            positX=\"" + posX + "\"\n"
                                         + "            positY=\"" + posY + "\"\n"
                                         + "            xml=\"xml/" + strFichierXML + ".xml\"\n"
@@ -3160,8 +3352,7 @@ public class EditeurPanovisu extends Application {
 
                         }
                     }
-                    strContenuFichier
-                            += "    </carte>\n";
+                    strContenuFichier += "    </carte>\n";
                 }
 
                 strContenuFichier += "</scene>\n";
@@ -3183,7 +3374,9 @@ public class EditeurPanovisu extends Application {
                 strTitreVis = tfVisite.getText();
             }
             String strNomPano1 = getPanoramiquesProjet()[0].getStrNomFichier();
-            String strFPano1 = "panos/" + strNomPano1.substring(strNomPano1.lastIndexOf(File.separator) + 1, strNomPano1.lastIndexOf(".")) + "Vignette.jpg";
+            String strFPano1 = "panos/"
+                    + strNomPano1.substring(strNomPano1.lastIndexOf(File.separator) + 1, strNomPano1.lastIndexOf("."))
+                    + "Vignette.jpg";
 
             String strFichierHTML = "<!DOCTYPE html>\n"
                     + "<html lang=\"fr\">\n"
@@ -3197,12 +3390,15 @@ public class EditeurPanovisu extends Application {
                     + "        <meta name=\"url\" property=\"og:url\" content=\"\" />\n"
                     + "        <meta property=\"og:title\"  name=\"twitter:title\" content=\"" + strTitreVis + "\" />\n"
                     + "        <meta itemprop=\"description\" property=\"og:description\" name=\"twitter:description\" content=\"Une page créée avec panoVisu Editeur : 100% Libre 100% HTML5\" />\n"
-                    + "        <meta name=\"img\" property=\"og:image\" itemprop=\"image primaryImageOfPage\" content=\"./" + strFPano1 + "\" />\n"
+                    + "        <meta name=\"img\" property=\"og:image\" itemprop=\"image primaryImageOfPage\" content=\"./"
+                    + strFPano1 + "\" />\n"
                     + "        <script type=\"text/javascript\" src=\"panovisu/libs/openLayers/OpenLayers.js\"></script>\n"
                     + "        <script type=\"text/javascript\" src=\"panovisu/libs/openLayers/OpenStreetMap.js\"></script>\n"
                     // Google Maps API obsolète v3.5 - désactivé (warnings + version retirée)
-                    // + "        <script src=\"http://maps.google.com/maps/api/js?v=3.5&sensor=false\" style=\"\"></script>\n"
-                    // + "        <script src=\"http://maps.gstatic.com/maps-api-v3/api/js/20/13/intl/fr_ALL/main.js\"></script>\n"
+                    // + " <script src=\"http://maps.google.com/maps/api/js?v=3.5&sensor=false\"
+                    // style=\"\"></script>\n"
+                    // + " <script
+                    // src=\"http://maps.gstatic.com/maps-api-v3/api/js/20/13/intl/fr_ALL/main.js\"></script>\n"
                     + "        <style>\n"
                     + "            .olControlLayerSwitcher\n"
                     + "            {\n"
@@ -3237,20 +3433,29 @@ public class EditeurPanovisu extends Application {
                     + "\n"
                     + "            #infoBulle {\n"
                     + "                background: " + getGestionnaireInterface().strCouleurFondInfoBulle + ";\n"
-                    + "                border-top: " + getGestionnaireInterface().iTailleBordureTop + "px solid " + getGestionnaireInterface().strCouleurBordureInfoBulle + ";\n"
-                    + "                border-bottom: " + getGestionnaireInterface().iTailleBordureBottom + "px solid " + getGestionnaireInterface().strCouleurBordureInfoBulle + ";\n"
-                    + "                border-left: " + getGestionnaireInterface().iTailleBordureLeft + "px solid " + getGestionnaireInterface().strCouleurBordureInfoBulle + ";\n"
-                    + "                border-right: " + getGestionnaireInterface().iTailleBordureRight + "px solid " + getGestionnaireInterface().strCouleurBordureInfoBulle + ";\n"
+                    + "                border-top: " + getGestionnaireInterface().iTailleBordureTop + "px solid "
+                    + getGestionnaireInterface().strCouleurBordureInfoBulle + ";\n"
+                    + "                border-bottom: " + getGestionnaireInterface().iTailleBordureBottom + "px solid "
+                    + getGestionnaireInterface().strCouleurBordureInfoBulle + ";\n"
+                    + "                border-left: " + getGestionnaireInterface().iTailleBordureLeft + "px solid "
+                    + getGestionnaireInterface().strCouleurBordureInfoBulle + ";\n"
+                    + "                border-right: " + getGestionnaireInterface().iTailleBordureRight + "px solid "
+                    + getGestionnaireInterface().strCouleurBordureInfoBulle + ";\n"
                     + "                padding: 3px 10px;\n"
-                    + "                opacity: " + Math.round(getGestionnaireInterface().opaciteInfoBulle * 10) / 10.0 + ";\n"
+                    + "                opacity: " + Math.round(getGestionnaireInterface().opaciteInfoBulle * 10) / 10.0
+                    + ";\n"
                     + "                color : " + getGestionnaireInterface().strCouleurTexteInfoBulle + ";\n"
-                    + "                font-family: " + getGestionnaireInterface().strPoliceInfoBulle + ",Arial,sans-serif!important;  \n"
-                    + "                border-radius: " + getGestionnaireInterface().iArrondiTL + "px  " + getGestionnaireInterface().iArrondiTR
-                    + "px " + getGestionnaireInterface().iArrondiBR + "px " + getGestionnaireInterface().iArrondiBL + "px;  \n";
+                    + "                font-family: " + getGestionnaireInterface().strPoliceInfoBulle
+                    + ",Arial,sans-serif!important;  \n"
+                    + "                border-radius: " + getGestionnaireInterface().iArrondiTL + "px  "
+                    + getGestionnaireInterface().iArrondiTR
+                    + "px " + getGestionnaireInterface().iArrondiBR + "px " + getGestionnaireInterface().iArrondiBL
+                    + "px;  \n";
             if (getGestionnaireInterface().bOmbreInfoBulle) {
                 strFichierHTML += "                box-shadow: 5px 5px 10px #444;\n";
             }
-            strFichierHTML += "                font-size : " + getGestionnaireInterface().taillePoliceInfoBulle + "px;           \n"
+            strFichierHTML += "                font-size : " + getGestionnaireInterface().taillePoliceInfoBulle
+                    + "px;           \n"
                     + "                z-index : 10000000;\n"
                     + "            } \n"
                     + "\n"
@@ -3270,7 +3475,8 @@ public class EditeurPanovisu extends Application {
                     + "        <script>\n"
                     + "\n"
                     + "            $(function() {\n"
-                    + "                $('meta[name=img]').attr('content', document.location.href+\"" + strFPano1 + "\");\n"
+                    + "                $('meta[name=img]').attr('content', document.location.href+\"" + strFPano1
+                    + "\");\n"
                     + "                $('meta[name=url]').attr('content', document.location.href);\n"
                     + "                $(window).resize(function(){\n"
                     + "                    $(\"article\").height($(window).height()-17);\n"
@@ -3295,7 +3501,8 @@ public class EditeurPanovisu extends Application {
                     + "                });\n"
                     + "                $(\".reseauSocial-fb\").on(\"click\", function() {\n"
                     + "                    url=\"http://www.facebook.com/sharer.php?s=100&p[url]=\" + encodeURIComponent(document.location.href)\n"
-                    + "                            + \"&p[images][0]=\" + encodeURIComponent(document.location.href + \"" + strFPano1 + "\")\n"
+                    + "                            + \"&p[images][0]=\" + encodeURIComponent(document.location.href + \""
+                    + strFPano1 + "\")\n"
                     + "                            + \"&p[title]=\" + encodeURIComponent(\"" + strTitreVis + "\")\n"
                     + "                            + \"&p[summary]=\" + encodeURIComponent(\"Une page créée avec panoVisu Editeur : 100% Libre 100% HTML5\");\n"
                     + "                    window.open(url);\n"
@@ -3320,8 +3527,9 @@ public class EditeurPanovisu extends Application {
             try (BufferedWriter bwFichierHTML = new BufferedWriter(oswFichierHTML)) {
                 bwFichierHTML.write(strFichierHTML);
             }
-            
-            // Créer le fichier .htaccess à la racine de la visite pour éviter la compression des images
+
+            // Créer le fichier .htaccess à la racine de la visite pour éviter la
+            // compression des images
             String strHtaccess = "# Configuration pour éviter la compression automatique des images\n"
                     + "# Nécessaire pour préserver la qualité des panoramas haute résolution\n\n"
                     + "# Désactiver mod_pagespeed complètement\n"
@@ -3361,15 +3569,15 @@ public class EditeurPanovisu extends Application {
                     + "    AddType image/gif .gif\n"
                     + "    AddType image/webp .webp\n"
                     + "</IfModule>\n";
-            
+
             File fileHtaccess = new File(getStrRepertTemp() + File.separator + ".htaccess");
             fileHtaccess.setWritable(true);
             try (OutputStreamWriter oswHtaccess = new OutputStreamWriter(new FileOutputStream(fileHtaccess), "UTF-8");
-                 BufferedWriter bwHtaccess = new BufferedWriter(oswHtaccess)) {
+                    BufferedWriter bwHtaccess = new BufferedWriter(oswHtaccess)) {
                 bwHtaccess.write(strHtaccess);
             }
             System.out.println("✅ Fichier .htaccess créé à la racine de la visite");
-            
+
             if (isZip) {
                 // Mode ZIP : sauvegarder automatiquement puis créer le ZIP
                 creerZipDepuisTemp();
@@ -3377,7 +3585,8 @@ public class EditeurPanovisu extends Application {
                 // Mode normal : demander le répertoire de sauvegarde
                 DirectoryChooser dcRepertChoix = new DirectoryChooser();
                 dcRepertChoix.setTitle("Choix du repertoire de sauvegarde de la visite");
-                // Utiliser le dernier répertoire de visite s'il existe, sinon le répertoire du projet
+                // Utiliser le dernier répertoire de visite s'il existe, sinon le répertoire du
+                // projet
                 File fileRepert;
                 if (!getStrDernierRepertoireVisite().isEmpty() && new File(getStrDernierRepertoireVisite()).exists()) {
                     fileRepert = new File(getStrDernierRepertoireVisite());
@@ -3396,7 +3605,7 @@ public class EditeurPanovisu extends Application {
                         Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     copieRepertoire(getStrRepertTemp(), strNomRepertVisite);
-                    
+
                     // Démarrer le serveur HTTP local pour éviter les problèmes CORS
                     editeurpanovisu.util.LocalHTTPServer server = editeurpanovisu.util.LocalHTTPServer.getInstance();
                     try {
@@ -3404,20 +3613,21 @@ public class EditeurPanovisu extends Application {
                         if (server.isRunning()) {
                             server.stop();
                         }
-                        
+
                         server.setRootDirectory(strNomRepertVisite);
                         server.start();
-                        
+
                         String serverUrl = server.getUrl();
-                        
+
                         Alert alert = new Alert(AlertType.INFORMATION);
                         alert.setHeaderText(null);
                         alert.setTitle(rbLocalisation.getString("main.dialog.generationVisite"));
-                        alert.setContentText(rbLocalisation.getString("main.dialog.generationVisiteMessage") + strNomRepertVisite + "\n\n"
+                        alert.setContentText(rbLocalisation.getString("main.dialog.generationVisiteMessage")
+                                + strNomRepertVisite + "\n\n"
                                 + "🌐 La visite sera accessible sur : " + serverUrl + "\n"
                                 + "⚠️ Ne fermez pas l'application pour conserver l'accès à la visite.");
                         alert.showAndWait();
-                        
+
                         Application app = new Application() {
                             @Override
                             public void start(Stage stage) {
@@ -3425,19 +3635,20 @@ public class EditeurPanovisu extends Application {
                         };
                         // Ouvrir le navigateur avec le serveur HTTP local
                         app.getHostServices().showDocument(serverUrl);
-                        
+
                     } catch (IOException ex) {
                         System.err.println("❌ Erreur lors du démarrage du serveur HTTP : " + ex.getMessage());
                         // Fallback : ouvrir en mode file:// (avec avertissement)
                         Alert alertFallback = new Alert(AlertType.WARNING);
                         alertFallback.setHeaderText(null);
                         alertFallback.setTitle(rbLocalisation.getString("main.dialog.generationVisite"));
-                        alertFallback.setContentText(rbLocalisation.getString("main.dialog.generationVisiteMessage") + strNomRepertVisite + "\n\n"
+                        alertFallback.setContentText(rbLocalisation.getString("main.dialog.generationVisiteMessage")
+                                + strNomRepertVisite + "\n\n"
                                 + "⚠️ Le serveur HTTP n'a pas pu démarrer.\n"
                                 + "La visite s'ouvrira en mode local (file://) ce qui peut causer des problèmes de sécurité.\n"
                                 + "Pour une expérience optimale, copiez le dossier sur un serveur web.");
                         alertFallback.showAndWait();
-                        
+
                         Application app = new Application() {
                             @Override
                             public void start(Stage stage) {
@@ -3458,17 +3669,17 @@ public class EditeurPanovisu extends Application {
         }
     }
 
-    
-    
     /**
-     * Crée un fichier ZIP contenant la visite virtuelle depuis le répertoire temporaire
+     * Crée un fichier ZIP contenant la visite virtuelle depuis le répertoire
+     * temporaire
+     * 
      * @throws IOException si une erreur se produit lors de la création du ZIP
      */
     private static void creerZipDepuisTemp() throws IOException {
         // Demander à l'utilisateur où sauvegarder le ZIP
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Sauvegarder l'archive ZIP de la visite");
-        
+
         // Utiliser le nom du fichier PVU comme nom par défaut pour le ZIP
         String nomProjet = "visite"; // Nom par défaut
         try {
@@ -3481,10 +3692,11 @@ public class EditeurPanovisu extends Application {
         } catch (Exception e) {
             // En cas d'erreur, garder le nom par défaut
         }
-        
+
         fileChooser.setInitialFileName(nomProjet + ".zip");
-        
-        // Utiliser le dernier répertoire de visite s'il existe, sinon le répertoire du projet
+
+        // Utiliser le dernier répertoire de visite s'il existe, sinon le répertoire du
+        // projet
         File fileRepert;
         if (!getStrDernierRepertoireVisite().isEmpty() && new File(getStrDernierRepertoireVisite()).exists()) {
             fileRepert = new File(getStrDernierRepertoireVisite());
@@ -3492,11 +3704,11 @@ public class EditeurPanovisu extends Application {
             fileRepert = new File(EditeurPanovisu.getStrRepertoireProjet());
         }
         fileChooser.setInitialDirectory(fileRepert);
-        
+
         // Ajouter des filtres d'extension
         FileChooser.ExtensionFilter zipFilter = new FileChooser.ExtensionFilter("Archives ZIP (*.zip)", "*.zip");
         fileChooser.getExtensionFilters().add(zipFilter);
-        
+
         File zipFile = fileChooser.showSaveDialog(null);
         if (zipFile != null) {
             // Sauvegarder le répertoire pour la prochaine fois
@@ -3506,10 +3718,10 @@ public class EditeurPanovisu extends Application {
             } catch (IOException ex) {
                 Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
             // Créer le fichier ZIP depuis le répertoire temporaire
             creerZipFromDirectory(new File(getStrRepertTemp()), zipFile);
-            
+
             // Afficher un message de succès
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle(rbLocalisation.getString("main.dialog.generationVisite"));
@@ -3518,9 +3730,10 @@ public class EditeurPanovisu extends Application {
             alert.showAndWait();
         }
     }
-    
+
     /**
      * Crée un fichier ZIP contenant la visite virtuelle
+     * 
      * @throws IOException si une erreur se produit lors de la création du ZIP
      */
     private static void creerZipVisite() throws IOException {
@@ -3559,56 +3772,59 @@ public class EditeurPanovisu extends Application {
         if (!fileImagesRepert.exists()) {
             fileImagesRepert.mkdirs();
         }
-        
+
         // Copier les ressources essentielles
         copieRepertoire(getStrRepertAppli() + File.separator + "panovisu", getStrRepertTemp() + "/panovisu");
         copieRepertoire(getStrRepertAppli() + File.separator + "css", getStrRepertTemp() + "/css");
-        
+
         // Créer un index.html de base
         String htmlContent = "<!DOCTYPE html>\\n<html>\\n<head>\\n<title>Visite Virtuelle</title>\\n</head>\\n<body>\\n<h1>Archive ZIP de la visite créée</h1>\\n<p>Extrayez ce fichier et ouvrez index.html dans un navigateur web.</p>\\n</body>\\n</html>";
         File indexFile = new File(getStrRepertTemp() + "/index.html");
         try (FileOutputStream fos = new FileOutputStream(indexFile);
-             OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
-             BufferedWriter bw = new BufferedWriter(osw)) {
+                OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
+                BufferedWriter bw = new BufferedWriter(osw)) {
             bw.write(htmlContent);
         }
     }
 
     /**
      * Crée un fichier ZIP à partir d'un répertoire
+     * 
      * @param sourceDir Le répertoire source à compresser
-     * @param zipFile Le fichier ZIP de destination
+     * @param zipFile   Le fichier ZIP de destination
      * @throws IOException si une erreur se produit lors de la création
      */
     private static void creerZipFromDirectory(File sourceDir, File zipFile) throws IOException {
         try (FileOutputStream fos = new FileOutputStream(zipFile);
-             ZipOutputStream zos = new ZipOutputStream(fos)) {
-            
+                ZipOutputStream zos = new ZipOutputStream(fos)) {
+
             addDirectoryToZip(sourceDir, sourceDir, zos);
         }
     }
 
     /**
      * Ajoute récursivement un répertoire au ZIP
-     * @param rootDir Le répertoire racine (pour les chemins relatifs)
+     * 
+     * @param rootDir   Le répertoire racine (pour les chemins relatifs)
      * @param sourceDir Le répertoire à ajouter
-     * @param zos Le ZipOutputStream
+     * @param zos       Le ZipOutputStream
      * @throws IOException si une erreur se produit
      */
     private static void addDirectoryToZip(File rootDir, File sourceDir, ZipOutputStream zos) throws IOException {
         File[] files = sourceDir.listFiles();
-        if (files == null) return;
-        
+        if (files == null)
+            return;
+
         for (File file : files) {
             if (file.isDirectory()) {
                 addDirectoryToZip(rootDir, file, zos);
             } else {
                 // Calculer le chemin relatif
                 String relativePath = rootDir.toURI().relativize(file.toURI()).getPath();
-                
+
                 ZipEntry zipEntry = new ZipEntry(relativePath);
                 zos.putNextEntry(zipEntry);
-                
+
                 try (FileInputStream fis = new FileInputStream(file)) {
                     byte[] buffer = new byte[1024];
                     int length;
@@ -3622,16 +3838,18 @@ public class EditeurPanovisu extends Application {
     }
 
     /**
-     * @param strFichierImage fichier image à  charger
-     * @param strRepertoire répertoire de sauvegarde
-     * @param iNumPanoXML numéro pour la génération des fichiers
-     * "panovisu"+iNumPanoXML+".jpg"
+     * @param strFichierImage         fichier image à  charger
+     * @param strRepertoire           répertoire de sauvegarde
+     * @param iNumPanoXML             numéro pour la génération des fichiers
+     *                                "panovisu"+iNumPanoXML+".jpg"
      * @param strNomFichierSauvegarde nom du fichier de sauvegarde
-     * @param iNumero numéro d'ordre du pano dans la liste à  charger
-     * @param iTotal nombre de panos à  charger
+     * @param iNumero                 numéro d'ordre du pano dans la liste à 
+     *                                charger
+     * @param iTotal                  nombre de panos à  charger
      * @return nombre de niveaux
      */
-    private static int iCreeNiveauxImageEqui(String strFichierImage, String strNomFichierSauvegarde, String strRepertoire, int iNumPanoXML, int iNumero, int iTotal) {
+    private static int iCreeNiveauxImageEqui(String strFichierImage, String strNomFichierSauvegarde,
+            String strRepertoire, int iNumPanoXML, int iNumero, int iTotal) {
         Platform.runLater(() -> {
             lblNiveaux.setText("Création niveau principal");
         });
@@ -3656,7 +3874,9 @@ public class EditeurPanovisu extends Application {
                 imgPano = new Image("file:" + strFichierImage, 8192, 4096, true, true);
             }
         }
-        String strNomPano = strNomFichierSauvegarde.substring(strNomFichierSauvegarde.lastIndexOf(File.separator) + 1, strNomFichierSauvegarde.length()).split("\\.")[0] + ".jpg";
+        String strNomPano = strNomFichierSauvegarde
+                .substring(strNomFichierSauvegarde.lastIndexOf(File.separator) + 1, strNomFichierSauvegarde.length())
+                .split("\\.")[0] + ".jpg";
         String strFicImage = strRepertoire + File.separator + "panovisu" + iNumPanoXML + ".jpg";
         try {
             ReadWriteImage.writeJpeg(imgPano, strFicImage, 0.95f, true, 0.25f);
@@ -3676,7 +3896,9 @@ public class EditeurPanovisu extends Application {
                 int iNombreNiv2 = iNombreNiveaux;
                 Platform.runLater(() -> {
                     lblNiveaux.setText("Création niveau " + ii + "/" + (iNbNiv - 1));
-                    pbarAvanceChargement.setProgress(((double) (iNumero - 1) + 1.d / 3.d + 1.d / 3.d * ((double) ii) / iNombreNiv2) / (double) iTotal);
+                    pbarAvanceChargement
+                            .setProgress(((double) (iNumero - 1) + 1.d / 3.d + 1.d / 3.d * ((double) ii) / iNombreNiv2)
+                                    / (double) iTotal);
                 });
                 try {
                     double tailleNiveau = tailleImage * Math.pow(2.d, i) / Math.pow(2.d, iNombreNiveaux);
@@ -3690,15 +3912,18 @@ public class EditeurPanovisu extends Application {
                                     .getName()).log(Level.SEVERE, null, ex);
                         }
                     } else {
-                        imgPano = new Image("file:" + strFichierImage, Math.round(tailleNiveau * 2.d) / 2.d, Math.round(tailleNiveau / 2.d), true, true);
+                        imgPano = new Image("file:" + strFichierImage, Math.round(tailleNiveau * 2.d) / 2.d,
+                                Math.round(tailleNiveau / 2.d), true, true);
                     }
                     String strRepNiveau = strRepertoire + File.separator + "niveau" + i;
                     File fileRepert = new File(strRepNiveau);
                     if (!fileRepert.exists()) {
                         fileRepert.mkdirs();
                     }
-                    strNomPano = strNomFichierSauvegarde.substring(strNomFichierSauvegarde.lastIndexOf(File.separator) + 1, strNomFichierSauvegarde.length());
-                    strNomPano = strNomPano.substring(strNomPano.lastIndexOf(File.separator) + 1, strNomPano.length()).split("\\.")[0] + ".jpg";
+                    strNomPano = strNomFichierSauvegarde.substring(
+                            strNomFichierSauvegarde.lastIndexOf(File.separator) + 1, strNomFichierSauvegarde.length());
+                    strNomPano = strNomPano.substring(strNomPano.lastIndexOf(File.separator) + 1, strNomPano.length())
+                            .split("\\.")[0] + ".jpg";
                     strFicImage = strRepNiveau + File.separator + "panovisu" + iNumPanoXML + ".jpg";
                     if (i < iNombreNiveaux - 1) {
                         ReadWriteImage.writeJpeg(imgPano, strFicImage, 0.90f, true, 0.2f);
@@ -3718,12 +3943,13 @@ public class EditeurPanovisu extends Application {
     /**
      *
      * @param strFichierImage fichier image à  charger
-     * @param strRepertoire répertoire de sauvegarde
-     * @param iNumPanoXML numéro pour la génération des fichiers
-     * @param strFace face calculée
+     * @param strRepertoire   répertoire de sauvegarde
+     * @param iNumPanoXML     numéro pour la génération des fichiers
+     * @param strFace         face calculée
      * @return
      */
-    private static int iCreeNiveauxImageCube(String strFichierImage, String strRepertoire, int iNumPanoXML, String strFace) {
+    private static int iCreeNiveauxImageCube(String strFichierImage, String strRepertoire, int iNumPanoXML,
+            String strFace) {
         Platform.runLater(() -> {
             lblNiveaux.setText("Création face : " + strFace + " niveau principal");
         });
@@ -3769,7 +3995,8 @@ public class EditeurPanovisu extends Application {
             }
         }
         @SuppressWarnings("unused")
-        String strNomPano = strFichierImage.substring(strFichierImage.lastIndexOf(File.separator) + 1, strFichierImage.length());
+        String strNomPano = strFichierImage.substring(strFichierImage.lastIndexOf(File.separator) + 1,
+                strFichierImage.length());
         String strFicImage = strRepertoire + File.separator + "panovisu" + iNumPanoXML + strSuffixe + ".jpg";
         try {
             ReadWriteImage.writeJpeg(imgPano, strFicImage, 0.92f, true, 0.3f);
@@ -3809,7 +4036,8 @@ public class EditeurPanovisu extends Application {
                     if (!fileRepert.exists()) {
                         fileRepert.mkdirs();
                     }
-                    strNomPano = strFichierImage.substring(strFichierImage.lastIndexOf(File.separator) + 1, strFichierImage.length());
+                    strNomPano = strFichierImage.substring(strFichierImage.lastIndexOf(File.separator) + 1,
+                            strFichierImage.length());
                     strFicImage = strRepNiveau + File.separator + "panovisu" + iNumPanoXML + strSuffixe + ".jpg";
                     ReadWriteImage.writeJpeg(imgPano, strFicImage, 0.88f, true, 0.15f);
 
@@ -3828,7 +4056,8 @@ public class EditeurPanovisu extends Application {
      */
     private static void panoramiquesAjouter() throws InterruptedException {
         FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter extFilterImage = new FileChooser.ExtensionFilter("Fichiers Image (JPG,BMP,TIFF)", "*.jpg", "*.bmp", "*.tif");
+        FileChooser.ExtensionFilter extFilterImage = new FileChooser.ExtensionFilter("Fichiers Image (JPG,BMP,TIFF)",
+                "*.jpg", "*.bmp", "*.tif");
         FileChooser.ExtensionFilter extFilterJpeg = new FileChooser.ExtensionFilter("Fichiers JPEG (*.jpg)", "*.jpg");
         FileChooser.ExtensionFilter extFilterBmp = new FileChooser.ExtensionFilter("Fichiers BMP (*.bmp)", "*.bmp");
         FileChooser.ExtensionFilter extFilterTiff = new FileChooser.ExtensionFilter("Fichiers TIFF (*.tif)", "*.tif");
@@ -3868,7 +4097,7 @@ public class EditeurPanovisu extends Application {
     /**
      *
      * @param listFichiers liste des fichiers à  charger
-     * @param iNb nombre de fichiers à  charger
+     * @param iNb          nombre de fichiers à  charger
      * @return Task
      */
     @SuppressWarnings("rawtypes")
@@ -3882,7 +4111,8 @@ public class EditeurPanovisu extends Application {
                 for (int jj = 0; jj < iNb; jj++) {
                     File fileFichier = listFichiers[jj];
                     String strNomfich = fileFichier.getAbsolutePath();
-                    String strExtension = strNomfich.substring(strNomfich.lastIndexOf(".") + 1, strNomfich.length()).toLowerCase();
+                    String strExtension = strNomfich.substring(strNomfich.lastIndexOf(".") + 1, strNomfich.length())
+                            .toLowerCase();
                     if (strExtension.equals("jpg") || strExtension.equals("bmp") || strExtension.equals("tif")) {
                         Image imgPano = null;
                         if (strExtension.equals("tif")) {
@@ -3904,12 +4134,15 @@ public class EditeurPanovisu extends Application {
                                 i++;
                             }
                             if (imgPano.getWidth() == imgPano.getHeight()) {
-                                String strNom = fileFichier.getAbsolutePath().substring(0, fileFichier.getAbsolutePath().length() - 6);
+                                String strNom = fileFichier.getAbsolutePath().substring(0,
+                                        fileFichier.getAbsolutePath().length() - 6);
                                 boolean bTrouveFichier = false;
                                 for (int j = 0; j < i; j++) {
                                     String strNom1 = "";
-                                    if (fileLstFich1[j].getAbsolutePath().length() == fileFichier.getAbsolutePath().length()) {
-                                        strNom1 = fileLstFich1[j].getAbsolutePath().substring(0, fileFichier.getAbsolutePath().length() - 6);
+                                    if (fileLstFich1[j].getAbsolutePath().length() == fileFichier.getAbsolutePath()
+                                            .length()) {
+                                        strNom1 = fileLstFich1[j].getAbsolutePath().substring(0,
+                                                fileFichier.getAbsolutePath().length() - 6);
                                     }
                                     if (strNom.equals(strNom1)) {
                                         bTrouveFichier = true;
@@ -3954,11 +4187,13 @@ public class EditeurPanovisu extends Application {
 
             @SuppressWarnings({ "unchecked", "unused" })
             @Override
-        /**
-         * Méthode appelée lorsque la tâche de chargement réussit
-         * 
-         * <p>Gère la fin du chargement d'un fichier projet.</p>
-         */
+            /**
+             * Méthode appelée lorsque la tâche de chargement réussit
+             * 
+             * <p>
+             * Gère la fin du chargement d'un fichier projet.
+             * </p>
+             */
             protected void succeeded() {
                 getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
                 super.succeeded();
@@ -3966,10 +4201,13 @@ public class EditeurPanovisu extends Application {
                 apVignettesPano.getChildren().clear();
                 for (int i = 0; i < getiNombrePanoramiques(); i++) {
                     String strFichierPano = getPanoramiquesProjet()[i].getStrNomFichier();
-                    String strNomPano = strFichierPano.substring(strFichierPano.lastIndexOf(File.separator) + 1, strFichierPano.length());
+                    String strNomPano = strFichierPano.substring(strFichierPano.lastIndexOf(File.separator) + 1,
+                            strFichierPano.length());
                     cbListeChoixPanoramique.getItems().add(strNomPano);
                     @SuppressWarnings("unused")
-                    String strExtension = getPanoramiquesProjet()[i].getStrNomFichier().substring(getPanoramiquesProjet()[i].getStrNomFichier().length() - 3, getPanoramiquesProjet()[i].getStrNomFichier().length());
+                    String strExtension = getPanoramiquesProjet()[i].getStrNomFichier().substring(
+                            getPanoramiquesProjet()[i].getStrNomFichier().length() - 3,
+                            getPanoramiquesProjet()[i].getStrNomFichier().length());
                     ImageView ivVignettePano = new ImageView(getPanoramiquesProjet()[i].getImgVignettePanoramique());
                     ivVignettePano.setPreserveRatio(true);
                     ivVignettePano.setFitWidth(iLargeurVignettes);
@@ -3984,15 +4222,15 @@ public class EditeurPanovisu extends Application {
                         ivVignettePano.setLayoutX(3);
                         ivVignettePano.setStyle(
                                 "-fx-border-color : #fff;"
-                                + "-fx-border-width : 2px;"
-                                + "-fx-border-style :solid;");
+                                        + "-fx-border-width : 2px;"
+                                        + "-fx-border-style :solid;");
                     });
                     ivVignettePano.setOnMouseDragExited((e) -> {
                         ivVignettePano.setLayoutX(5);
                         ivVignettePano.setStyle(
                                 "-fx-border-color : rgba(0,0,0,0);"
-                                + "-fx-border-width : 0px;"
-                                + "-fx-border-style :none;");
+                                        + "-fx-border-width : 0px;"
+                                        + "-fx-border-style :none;");
                     });
 
                     apVignettesPano.getChildren().add(ivVignettePano);
@@ -4009,7 +4247,9 @@ public class EditeurPanovisu extends Application {
                 setiNumPoints(0);
                 ajouteAffichageLignes();
                 cbListeChoixPanoramique.setValue(cbListeChoixPanoramique.getItems().get(getiPanoActuel()));
-                affichePoV(getPanoramiquesProjet()[getiPanoActuel()].getRegardX(), getPanoramiquesProjet()[getiPanoActuel()].getRegardY(), getPanoramiquesProjet()[getiPanoActuel()].getChampVisuel());
+                affichePoV(getPanoramiquesProjet()[getiPanoActuel()].getRegardX(),
+                        getPanoramiquesProjet()[getiPanoActuel()].getRegardY(),
+                        getPanoramiquesProjet()[getiPanoActuel()].getChampVisuel());
                 afficheNord(getPanoramiquesProjet()[getiPanoActuel()].getZeroNord());
                 installeEvenements();
                 ivVisiteGenere.setOpacity(1.0);
@@ -4106,24 +4346,29 @@ public class EditeurPanovisu extends Application {
     /**
      * Réinitialise complètement toutes les données du projet
      * 
-     * <p>Cette méthode nettoie tous les tableaux et variables d'état pour éviter
-     * les interférences entre deux visites chargées successivement.</p>
+     * <p>
+     * Cette méthode nettoie tous les tableaux et variables d'état pour éviter
+     * les interférences entre deux visites chargées successivement.
+     * </p>
      * 
-     * <p>Réinitialise :</p>
+     * <p>
+     * Réinitialise :
+     * </p>
      * <ul>
-     *   <li>Tous les panoramiques et leurs hotspots</li>
-     *   <li>Tous les diaporamas</li>
-     *   <li>Tous les plans</li>
-     *   <li>Tous les compteurs (points, images, HTML, diaporamas)</li>
-     *   <li>Le cache des descriptions IA (Ollama)</li>
-     *   <li>L'interface utilisateur (ComboBox, ImageView, panneaux hotspots)</li>
+     * <li>Tous les panoramiques et leurs hotspots</li>
+     * <li>Tous les diaporamas</li>
+     * <li>Tous les plans</li>
+     * <li>Tous les compteurs (points, images, HTML, diaporamas)</li>
+     * <li>Le cache des descriptions IA (Ollama)</li>
+     * <li>L'interface utilisateur (ComboBox, ImageView, panneaux hotspots)</li>
      * </ul>
      */
     private static void reinitialiserProjet() {
         System.out.println("🔄 Réinitialisation complète du projet...");
-        
+
         // 🗑️ NETTOYER L'INTERFACE GRAPHIQUE DES HOTSPOTS
-        // Supprimer les affichages dynamiques des hotspots avant de nettoyer les données
+        // Supprimer les affichages dynamiques des hotspots avant de nettoyer les
+        // données
         try {
             if (vbVisuHotspots != null) {
                 retireAffichageHotSpots();
@@ -4132,7 +4377,7 @@ public class EditeurPanovisu extends Application {
         } catch (Exception e) {
             System.err.println("  ⚠️ Erreur retireAffichageHotSpots: " + e.getMessage());
         }
-        
+
         try {
             if (panePanoramique != null) {
                 retireAffichagePointsHotSpots();
@@ -4141,7 +4386,7 @@ public class EditeurPanovisu extends Application {
         } catch (Exception e) {
             System.err.println("  ⚠️ Erreur retireAffichagePointsHotSpots: " + e.getMessage());
         }
-        
+
         // Nettoyer les vignettes de panoramiques
         try {
             if (apVignettesPano != null) {
@@ -4151,10 +4396,10 @@ public class EditeurPanovisu extends Application {
         } catch (Exception e) {
             System.err.println("  ⚠️ Erreur nettoyage vignettes: " + e.getMessage());
         }
-        
+
         // Réinitialiser le flag dejaCharge
         dejaCharge = false;
-        
+
         // Réinitialiser tous les compteurs
         setiNombrePanoramiques(0);
         setiNombrePanoramiquesFichier(0);
@@ -4165,7 +4410,7 @@ public class EditeurPanovisu extends Application {
         iNombreDiapo = 0;
         iNombrePlans = 0;
         iPanoActuel = 0;
-        
+
         // Nettoyer complètement le tableau des panoramiques
         // (ne pas juste réinitialiser le compteur, vider les références)
         for (int i = 0; i < panoramiquesProjet.length; i++) {
@@ -4175,19 +4420,19 @@ public class EditeurPanovisu extends Application {
             }
         }
         panoramiquesProjet = new Panoramique[100];
-        
+
         // Nettoyer complètement le tableau des diaporamas
         for (int i = 0; i < diaporamas.length; i++) {
             diaporamas[i] = null;
         }
         diaporamas = new Diaporama[100];
-        
+
         // Nettoyer complètement le tableau des plans
         for (int i = 0; i < plans.length; i++) {
             plans[i] = null;
         }
         plans = new Plan[20];
-        
+
         // Nettoyer l'interface utilisateur
         if (ivImagePanoramique != null) {
             ivImagePanoramique.setImage(null);
@@ -4195,25 +4440,25 @@ public class EditeurPanovisu extends Application {
         if (cbListeChoixPanoramique != null) {
             cbListeChoixPanoramique.getItems().clear();
         }
-        
+
         // Réinitialiser les variables de projet
         strPanoEntree = "";
         strPanoListeVignette = "";
         strTitreVisite = "";
-        
+
         // Réinitialiser le cache des descriptions IA
         try {
             editeurpanovisu.OllamaService.reinitialiserCacheDescriptions();
         } catch (Exception e) {
             System.err.println("⚠️ Erreur lors de la réinitialisation du cache IA: " + e.getMessage());
         }
-        
+
         System.out.println("✅ Projet réinitialisé - Mémoire nettoyée");
     }
 
     /**
      *
-     * @throws IOException Exception d'entrée sortie
+     * @throws IOException          Exception d'entrée sortie
      * @throws InterruptedException Exception interruption
      */
     private static void projetCharge() throws IOException, InterruptedException {
@@ -4253,17 +4498,20 @@ public class EditeurPanovisu extends Application {
             tpEnvironnement.setDisable(true);
             setbDejaSauve(true);
             FileChooser fcRepertChoix = new FileChooser();
-            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("fichier panoVisu (*.pvu)", "*.pvu");
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("fichier panoVisu (*.pvu)",
+                    "*.pvu");
             fcRepertChoix.getExtensionFilters().add(extFilter);
             File fileRepert = new File(getStrRepertoireProjet() + File.separator);
             fcRepertChoix.setInitialDirectory(fileRepert);
             fileProjet = null;
             fileProjet = fcRepertChoix.showOpenDialog(getStPrincipal());
             if (fileProjet != null) {
-                // 🔄 RÉINITIALISATION COMPLÈTE : Nettoyer toutes les données du projet précédent
+                // 🔄 RÉINITIALISATION COMPLÈTE : Nettoyer toutes les données du projet
+                // précédent
                 reinitialiserProjet();
-                
-                getStPrincipal().setTitle("Panovisu v" + strNumVersion.split("-")[0] + " : " + fileProjet.getAbsolutePath());
+
+                getStPrincipal()
+                        .setTitle("Panovisu v" + strNumVersion.split("-")[0] + " : " + fileProjet.getAbsolutePath());
                 lblDragDrop.setVisible(false);
                 setStrRepertoireProjet(fileProjet.getParent());
                 ajouteFichierHisto(fileProjet.getAbsolutePath());
@@ -4290,7 +4538,7 @@ public class EditeurPanovisu extends Application {
                 mniSauveSousProjet.setDisable(false);
                 mniVisiteGenere.setDisable(false);
                 mniCreerZipVisite.setDisable(false);
-                
+
                 // Les réinitialisations sont maintenant faites dans reinitialiserProjet()
                 try {
                     String strTexte;
@@ -4319,7 +4567,8 @@ public class EditeurPanovisu extends Application {
                 }
 
             } else {
-                // L'utilisateur a annulé le FileChooser - fermer la modale et réactiver l'interface
+                // L'utilisateur a annulé le FileChooser - fermer la modale et réactiver
+                // l'interface
                 getApAttends().setVisible(false);
                 mbarPrincipal.setDisable(false);
                 bbarPrincipal.setDisable(false);
@@ -4332,7 +4581,7 @@ public class EditeurPanovisu extends Application {
     /**
      *
      * @param nomFich nom du fichier à  ajouter dans l'historique des fichiers
-     * ouverts
+     *                ouverts
      */
     private static void ajouteFichierHisto(String nomFich) {
         if (nombreHistoFichiers > 10) {
@@ -4393,7 +4642,7 @@ public class EditeurPanovisu extends Application {
     /**
      *
      * @param strNomFich nom du fichier à  charger
-     * @throws IOException Exception d'entrée sortie
+     * @throws IOException          Exception d'entrée sortie
      * @throws InterruptedException Exception interruption
      */
     private static void projetChargeNom(String strNomFich) throws IOException, InterruptedException {
@@ -4432,13 +4681,15 @@ public class EditeurPanovisu extends Application {
                 tpEnvironnement.setDisable(true);
                 lblDragDrop.setVisible(false);
                 setbDejaSauve(true);
-                
-                // 🔄 RÉINITIALISATION COMPLÈTE : Nettoyer toutes les données du projet précédent
+
+                // 🔄 RÉINITIALISATION COMPLÈTE : Nettoyer toutes les données du projet
+                // précédent
                 reinitialiserProjet();
-                
+
                 fileProjet = fileProjet1;
                 ajouteFichierHisto(fileProjet.getAbsolutePath());
-                getStPrincipal().setTitle("Panovisu  v" + strNumVersion.split("-")[0] + " : " + fileProjet.getAbsolutePath());
+                getStPrincipal()
+                        .setTitle("Panovisu  v" + strNumVersion.split("-")[0] + " : " + fileProjet.getAbsolutePath());
                 setStrRepertoireProjet(fileProjet.getParent());
                 bRepertSauveChoisi = true;
                 deleteDirectory(getStrRepertTemp());
@@ -4463,7 +4714,7 @@ public class EditeurPanovisu extends Application {
                 mniSauveSousProjet.setDisable(false);
                 mniVisiteGenere.setDisable(false);
                 mniCreerZipVisite.setDisable(false);
-                
+
                 // Les réinitialisations sont maintenant faites dans reinitialiserProjet()
                 try {
                     String strTexte;
@@ -4554,12 +4805,14 @@ public class EditeurPanovisu extends Application {
                     + ";affichePlan:" + getPanoramiquesProjet()[i].isAffichePlan()
                     + ";numeroPlan:" + getPanoramiquesProjet()[i].getNumeroPlan();
             if (getPanoramiquesProjet()[i].getMarqueurGeolocatisation() != null) {
-                strContenuFichier += ";longitudeGeo:" + getPanoramiquesProjet()[i].getMarqueurGeolocatisation().getLongitude()
+                strContenuFichier += ";longitudeGeo:"
+                        + getPanoramiquesProjet()[i].getMarqueurGeolocatisation().getLongitude()
                         + ";latitudeGeo:" + getPanoramiquesProjet()[i].getMarqueurGeolocatisation().getLatitude();
             }
             // Description IA
             String descIA = getPanoramiquesProjet()[i].getStrDescriptionIA();
-            System.out.println("[DEBUG] Pano " + i + " - Description IA: '" + descIA + "' (longueur: " + descIA.length() + ", vide: " + descIA.isEmpty() + ")");
+            System.out.println("[DEBUG] Pano " + i + " - Description IA: '" + descIA + "' (longueur: " + descIA.length()
+                    + ", vide: " + descIA.isEmpty() + ")");
             if (!descIA.isEmpty()) {
                 String descEscapee = descIA.replace(";", "&pv").replace(":", "&dp").replace("\n", "&nl");
                 System.out.println("[DEBUG] Pano " + i + " - Description IA échappée: '" + descEscapee + "'");
@@ -4579,7 +4832,8 @@ public class EditeurPanovisu extends Application {
                         + ";info:" + HS.getStrInfo().replace(";", "&pv").replace(":", "&dp")
                         + ";typeAnimation:" + HS.getStrTypeAnimation()
                         + ";agranditSurvol:" + HS.isAgranditSurvol()
-                        + ";couleurPerso:" + (HS.getStrCouleurPerso() != null ? HS.getStrCouleurPerso().replace(";", "&pv") : "")
+                        + ";couleurPerso:"
+                        + (HS.getStrCouleurPerso() != null ? HS.getStrCouleurPerso().replace(";", "&pv") : "")
                         + ";nomIconeSource:" + (HS.getStrNomIconeSource() != null ? HS.getStrNomIconeSource() : "");
                 if (HS.getRegardX() != 1000) {
                     strContenuFichier += ";regardX:" + HS.getRegardX();
@@ -4605,7 +4859,8 @@ public class EditeurPanovisu extends Application {
                         + ";info:" + HS.getStrInfo().replace(";", "&pv").replace(":", "&dp")
                         + ";typeAnimation:" + HS.getStrTypeAnimation()
                         + ";agranditSurvol:" + HS.isAgranditSurvol()
-                        + ";couleurPerso:" + (HS.getStrCouleurPerso() != null ? HS.getStrCouleurPerso().replace(";", "&pv") : "")
+                        + ";couleurPerso:"
+                        + (HS.getStrCouleurPerso() != null ? HS.getStrCouleurPerso().replace(";", "&pv") : "")
                         + ";nomIconeSource:" + (HS.getStrNomIconeSource() != null ? HS.getStrNomIconeSource() : "")
                         + "]\n";
             }
@@ -4633,7 +4888,8 @@ public class EditeurPanovisu extends Application {
                         + ";couleur:" + HS.getStrCouleurHTML()
                         + ";opacite:" + HS.getOpaciteHTML()
                         + ";largeur:" + HS.getLargeurHTML()
-                        + ";couleurPerso:" + (HS.getStrCouleurPerso() != null ? HS.getStrCouleurPerso().replace(";", "&pv") : "")
+                        + ";couleurPerso:"
+                        + (HS.getStrCouleurPerso() != null ? HS.getStrCouleurPerso().replace(";", "&pv") : "")
                         + ";nomIconeSource:" + (HS.getStrNomIconeSource() != null ? HS.getStrNomIconeSource() : "")
                         + "]\n";
             }
@@ -4662,15 +4918,14 @@ public class EditeurPanovisu extends Application {
             for (int j = 0; j < getPanoramiquesProjet()[i].getNombreHotspotHTML(); j++) {
                 if (!panoramiquesProjet[i].getHotspotHTML(j).isbLienExterieur()) {
                     HotspotHTML HS = getPanoramiquesProjet()[i].getHotspotHTML(j);
-                    strContenuFichier
-                            += "[pageHTML=>"
+                    strContenuFichier += "[pageHTML=>"
                             + "numPano:" + i + "\n"
                             + "numHSHTML:" + j + "\n"
-                            + "texteHTML:" + HS.getStrTexteHTML().replace("\n", "&nl").replace(":", "&dp").replace(";", "&pv") + "\n"
+                            + "texteHTML:"
+                            + HS.getStrTexteHTML().replace("\n", "&nl").replace(":", "&dp").replace(";", "&pv") + "\n"
                             + "numImages:" + HS.getiNombreImages() + "\n";
                     for (int k = 0; k < HS.getiNombreImages(); k++) {
-                        strContenuFichier
-                                += "imagePath:" + HS.getImagesEditeur()[k].getStrImagePath() + "\n";
+                        strContenuFichier += "imagePath:" + HS.getImagesEditeur()[k].getStrImagePath() + "\n";
 
                     }
                     strContenuFichier += "]\n";
@@ -4694,7 +4949,8 @@ public class EditeurPanovisu extends Application {
      * @throws IOException Exception d'entrée sortie
      */
     private static void sauveHistoFichiers() throws IOException {
-        File fileFichConfig = new File(EditeurPanovisu.fileRepertConfig.getAbsolutePath() + File.separator + "derniersprojets.cfg");
+        File fileFichConfig = new File(
+                EditeurPanovisu.fileRepertConfig.getAbsolutePath() + File.separator + "derniersprojets.cfg");
         if (!fileFichConfig.exists()) {
             fileFichConfig.createNewFile();
         }
@@ -4739,7 +4995,8 @@ public class EditeurPanovisu extends Application {
         }
         if (fileProjet == null) {
             FileChooser fcRepertChoix = new FileChooser();
-            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("fichier panoVisu (*.pvu)", "*.pvu");
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("fichier panoVisu (*.pvu)",
+                    "*.pvu");
             fcRepertChoix.getExtensionFilters().add(extFilter);
             File repert = new File(getStrRepertoireProjet() + File.separator);
             fcRepertChoix.setInitialDirectory(repert);
@@ -4824,7 +5081,7 @@ public class EditeurPanovisu extends Application {
         }
         if ((reponse == buttonTypeOui) || (reponse == buttonTypeNon) || (reponse == null)) {
             sauveHistoFichiers();
-            
+
             // Arrêter le serveur HTTP pour libérer le port
             try {
                 editeurpanovisu.util.LocalHTTPServer.getInstance().stop();
@@ -4832,7 +5089,7 @@ public class EditeurPanovisu extends Application {
             } catch (Exception ex) {
                 System.err.println("⚠️ Erreur lors de l'arrêt du serveur HTTP : " + ex.getMessage());
             }
-            
+
             deleteDirectory(getStrRepertTemp());
             File fileTemp = new File(getStrRepertTemp());
             fileTemp.delete();
@@ -4868,9 +5125,10 @@ public class EditeurPanovisu extends Application {
             }
         }
         if ((reponse == buttonTypeOui) || (reponse == buttonTypeNon) || (reponse == null)) {
-            // 🔄 RÉINITIALISATION COMPLÈTE : Nettoyer toutes les données du projet précédent
+            // 🔄 RÉINITIALISATION COMPLÈTE : Nettoyer toutes les données du projet
+            // précédent
             reinitialiserProjet();
-            
+
             apVignettesPano.getChildren().clear();
             strPanoEntree = "";
             deleteDirectory(getStrRepertTemp());
@@ -4889,17 +5147,20 @@ public class EditeurPanovisu extends Application {
             mniSauveSousProjet.setDisable(false);
             mniVisiteGenere.setDisable(false);
             mniCreerZipVisite.setDisable(false);
-            
+
             fileProjet = null;
             getVbChoixPanoramique().setVisible(false);
-            // setPanoramiquesProjet, setiNombrePanoramiques, setiNumPoints, etc. déjà faits dans reinitialiserProjet()
+            // setPanoramiquesProjet, setiNombrePanoramiques, setiNumPoints, etc. déjà faits
+            // dans reinitialiserProjet()
             retireAffichageLigne();
             dejaCharge = false;
             retireAffichageHotSpots();
             retireAffichagePointsHotSpots();
             getGestionnaireInterface().setiNombreImagesFond(0);
             getGestionnairePlan().setiPlanActuel(-1);
-            // ivImagePanoramique.setImage(null) et cbListeChoixPanoramique.getItems().clear() déjà faits dans reinitialiserProjet()
+            // ivImagePanoramique.setImage(null) et
+            // cbListeChoixPanoramique.getItems().clear() déjà faits dans
+            // reinitialiserProjet()
             lblDragDrop.setVisible(true);
             Node nodAncienNord = (Node) panePanoramique.lookup("#Nord");
             if (nodAncienNord != null) {
@@ -4986,13 +5247,22 @@ public class EditeurPanovisu extends Application {
     /**
      * Supprime récursivement un répertoire et tout son contenu
      * 
-     * <p>Cette méthode parcourt récursivement le répertoire spécifié et supprime tous les fichiers
-     * et sous-répertoires qu'il contient, puis supprime le répertoire lui-même.</p>
+     * <p>
+     * Cette méthode parcourt récursivement le répertoire spécifié et supprime tous
+     * les fichiers
+     * et sous-répertoires qu'il contient, puis supprime le répertoire lui-même.
+     * </p>
      * 
-     * <p><b>Attention :</b> Cette opération est irréversible. Tous les fichiers et sous-répertoires
-     * seront définitivement supprimés.</p>
+     * <p>
+     * <b>Attention :</b> Cette opération est irréversible. Tous les fichiers et
+     * sous-répertoires
+     * seront définitivement supprimés.
+     * </p>
      * 
-     * <p><b>Exemple d'utilisation :</b></p>
+     * <p>
+     * <b>Exemple d'utilisation :</b>
+     * </p>
+     * 
      * <pre>{@code
      * // Nettoyer le répertoire temporaire
      * deleteDirectory(getStrRepertTemp() + "/cache");
@@ -5017,14 +5287,19 @@ public class EditeurPanovisu extends Application {
     /**
      * Rafraîchit la liste des panoramiques dans l'interface utilisateur
      * 
-     * <p>Cette méthode met à jour deux éléments de l'interface :</p>
+     * <p>
+     * Cette méthode met à jour deux éléments de l'interface :
+     * </p>
      * <ul>
-     *   <li>Le panneau de vignettes des panoramiques ({@code apVignettesPano})</li>
-     *   <li>La ComboBox de sélection des panoramiques ({@code cbListeChoixPanoramique})</li>
+     * <li>Le panneau de vignettes des panoramiques ({@code apVignettesPano})</li>
+     * <li>La ComboBox de sélection des panoramiques
+     * ({@code cbListeChoixPanoramique})</li>
      * </ul>
      * 
-     * <p>Appelée après l'ajout ou la suppression de panoramiques pour synchroniser
-     * l'affichage avec les données du projet.</p>
+     * <p>
+     * Appelée après l'ajout ou la suppression de panoramiques pour synchroniser
+     * l'affichage avec les données du projet.
+     * </p>
      * 
      * @see #getPanoramiquesProjet()
      * @see #getiNombrePanoramiques()
@@ -5035,7 +5310,8 @@ public class EditeurPanovisu extends Application {
         cbListeChoixPanoramique.getItems().clear();
         for (int i = 0; i < getiNombrePanoramiques(); i++) {
             String strFichierPano = getPanoramiquesProjet()[i].getStrNomFichier();
-            String strNomPano = strFichierPano.substring(strFichierPano.lastIndexOf(File.separator) + 1, strFichierPano.length());
+            String strNomPano = strFichierPano.substring(strFichierPano.lastIndexOf(File.separator) + 1,
+                    strFichierPano.length());
             cbListeChoixPanoramique.getItems().add(strNomPano);
         }
         for (int ii = 0; ii < ordPano.getStrPanos().size(); ii++) {
@@ -5054,15 +5330,15 @@ public class EditeurPanovisu extends Application {
                 ivVignettePano.setLayoutX(3);
                 ivVignettePano.setStyle(
                         "-fx-border-color : #fff;"
-                        + "-fx-border-width : 2px;"
-                        + "-fx-border-style :solid;");
+                                + "-fx-border-width : 2px;"
+                                + "-fx-border-style :solid;");
             });
             ivVignettePano.setOnMouseDragExited((e) -> {
                 ivVignettePano.setLayoutX(5);
                 ivVignettePano.setStyle(
                         "-fx-border-color : rgba(0,0,0,0);"
-                        + "-fx-border-width : 0px;"
-                        + "-fx-border-style :none;");
+                                + "-fx-border-width : 0px;"
+                                + "-fx-border-style :none;");
             });
             apVignettesPano.getChildren().add(ivVignettePano);
         }
@@ -5074,17 +5350,17 @@ public class EditeurPanovisu extends Application {
             }
             ii++;
         }
-        
+
         if (iPano >= 0) {
             rectVignettePano.setLayoutY((iLargeurVignettes / 2 + 10) * iPano + 10);
             rectVignettePano.setVisible(true);
             apVignettesPano.getChildren().add(rectVignettePano);
         }
-        
+
         // Vérifier que la liste n'est pas vide et que l'index est valide
-        if (!cbListeChoixPanoramique.getItems().isEmpty() && 
-            getiPanoActuel() >= 0 && 
-            getiPanoActuel() < cbListeChoixPanoramique.getItems().size()) {
+        if (!cbListeChoixPanoramique.getItems().isEmpty() &&
+                getiPanoActuel() >= 0 &&
+                getiPanoActuel() < cbListeChoixPanoramique.getItems().size()) {
             cbListeChoixPanoramique.setValue(cbListeChoixPanoramique.getItems().get(getiPanoActuel()));
         }
     }
@@ -5097,8 +5373,8 @@ public class EditeurPanovisu extends Application {
         return strChaine;
     }
 
-    static String[] strEncode = {"&lbrack", "&rbrack", "&pv", "&sp"};
-    static String[] strDecode = {"[", "]", ";", " "};
+    static String[] strEncode = { "&lbrack", "&rbrack", "&pv", "&sp" };
+    static String[] strDecode = { "[", "]", ";", " " };
 
     private static String strEncodeFichier(String strFichier) {
         for (int i = 0; i < strEncode.length; i++) {
@@ -5158,13 +5434,16 @@ public class EditeurPanovisu extends Application {
                                     String nmFich = strDecodeFichier(strValeur[1]);
                                     File fileImgPano = new File(nmFich);
                                     if (!fileImgPano.exists()) {
-                                        fileImgPano = new File(getStrRepertAppli() + File.separator + "images" + File.separator + "pasImage.jpg");
+                                        fileImgPano = new File(getStrRepertAppli() + File.separator + "images"
+                                                + File.separator + "pasImage.jpg");
                                     }
                                     int iNumPano = getiNombrePanoramiques() + 1;
                                     Platform.runLater(() -> {
-                                        lblCharge.setText("pano " + iNumPano + "/" + getiNombrePanoramiquesFichier() + " : " + nmFich);
+                                        lblCharge.setText("pano " + iNumPano + "/" + getiNombrePanoramiquesFichier()
+                                                + " : " + nmFich);
                                         lblNiveaux.setText("");
-                                        pbarAvanceChargement.setProgress((double) (iNumPano - 1) / (double) getiNombrePanoramiquesFichier());
+                                        pbarAvanceChargement.setProgress(
+                                                (double) (iNumPano - 1) / (double) getiNombrePanoramiquesFichier());
                                     });
                                     File fileImageRepert = new File(getStrRepertTemp() + File.separator + "panos");
 
@@ -5173,7 +5452,8 @@ public class EditeurPanovisu extends Application {
                                     }
                                     setStrRepertPanos(fileImageRepert.getAbsolutePath());
                                     String strFichierPano = fileImgPano.getPath();
-                                    String strExtension = strFichierPano.substring(strFichierPano.length() - 3, strFichierPano.length());
+                                    String strExtension = strFichierPano.substring(strFichierPano.length() - 3,
+                                            strFichierPano.length());
                                     Image imgPano = null;
                                     if ("tif".equals(strExtension)) {
                                         try {
@@ -5188,10 +5468,12 @@ public class EditeurPanovisu extends Application {
                                     }
                                     if (imgPano != null) {
                                         if (imgPano.getWidth() == imgPano.getHeight()) {
-                                            ajoutePanoramiqueProjet(nmFich, Panoramique.CUBE, iNumPano, getiNombrePanoramiquesFichier());
+                                            ajoutePanoramiqueProjet(nmFich, Panoramique.CUBE, iNumPano,
+                                                    getiNombrePanoramiquesFichier());
 
                                         } else {
-                                            ajoutePanoramiqueProjet(nmFich, Panoramique.SPHERE, iNumPano, getiNombrePanoramiquesFichier());
+                                            ajoutePanoramiqueProjet(nmFich, Panoramique.SPHERE, iNumPano,
+                                                    getiNombrePanoramiquesFichier());
                                         }
                                     }
                                     break;
@@ -5207,13 +5489,16 @@ public class EditeurPanovisu extends Application {
                                     getPanoramiquesProjet()[getiPanoActuel()].setStrTypePanoramique(strValeur[1]);
                                     break;
                                 case "afficheInfo":
-                                    getPanoramiquesProjet()[getiPanoActuel()].setAfficheInfo(strValeur[1].equals("true"));
+                                    getPanoramiquesProjet()[getiPanoActuel()]
+                                            .setAfficheInfo(strValeur[1].equals("true"));
                                     break;
                                 case "afficheTitre":
-                                    getPanoramiquesProjet()[getiPanoActuel()].setAfficheTitre(strValeur[1].equals("true"));
+                                    getPanoramiquesProjet()[getiPanoActuel()]
+                                            .setAfficheTitre(strValeur[1].equals("true"));
                                     break;
                                 case "affDescription":
-                                    getPanoramiquesProjet()[getiPanoActuel()].setAffDescription(strValeur[1].equals("true"));
+                                    getPanoramiquesProjet()[getiPanoActuel()]
+                                            .setAffDescription(strValeur[1].equals("true"));
                                     break;
                                 case "nb":
                                     iNbHS = Integer.parseInt(strValeur[1]);
@@ -5228,16 +5513,20 @@ public class EditeurPanovisu extends Application {
                                     iNbHSDiapo = Integer.parseInt(strValeur[1]);
                                     break;
                                 case "regardX":
-                                    getPanoramiquesProjet()[getiPanoActuel()].setRegardX(Double.parseDouble(strValeur[1]));
+                                    getPanoramiquesProjet()[getiPanoActuel()]
+                                            .setRegardX(Double.parseDouble(strValeur[1]));
                                     break;
                                 case "regardY":
-                                    getPanoramiquesProjet()[getiPanoActuel()].setRegardY(Double.parseDouble(strValeur[1]));
+                                    getPanoramiquesProjet()[getiPanoActuel()]
+                                            .setRegardY(Double.parseDouble(strValeur[1]));
                                     break;
                                 case "minLat":
-                                    getPanoramiquesProjet()[getiPanoActuel()].setMinLat(Double.parseDouble(strValeur[1]));
+                                    getPanoramiquesProjet()[getiPanoActuel()]
+                                            .setMinLat(Double.parseDouble(strValeur[1]));
                                     break;
                                 case "maxLat":
-                                    getPanoramiquesProjet()[getiPanoActuel()].setMaxLat(Double.parseDouble(strValeur[1]));
+                                    getPanoramiquesProjet()[getiPanoActuel()]
+                                            .setMaxLat(Double.parseDouble(strValeur[1]));
                                     break;
                                 case "bMinLat":
                                     getPanoramiquesProjet()[getiPanoActuel()].setbMinLat(strValeur[1].equals("true"));
@@ -5246,35 +5535,45 @@ public class EditeurPanovisu extends Application {
                                     getPanoramiquesProjet()[getiPanoActuel()].setbMaxLat(strValeur[1].equals("true"));
                                     break;
                                 case "fov":
-                                    getPanoramiquesProjet()[getiPanoActuel()].setChampVisuel(Double.parseDouble(strValeur[1]) / 2.0);
+                                    getPanoramiquesProjet()[getiPanoActuel()]
+                                            .setChampVisuel(Double.parseDouble(strValeur[1]) / 2.0);
                                     break;
                                 case "minfov":
-                                    getPanoramiquesProjet()[getiPanoActuel()].setFovMin(Double.parseDouble(strValeur[1]) / 2.0);
+                                    getPanoramiquesProjet()[getiPanoActuel()]
+                                            .setFovMin(Double.parseDouble(strValeur[1]) / 2.0);
                                     break;
                                 case "maxfov":
-                                    getPanoramiquesProjet()[getiPanoActuel()].setFovMax(Double.parseDouble(strValeur[1]) / 2.0);
+                                    getPanoramiquesProjet()[getiPanoActuel()]
+                                            .setFovMax(Double.parseDouble(strValeur[1]) / 2.0);
                                     break;
                                 case "zeroNord":
-                                    getPanoramiquesProjet()[getiPanoActuel()].setZeroNord(Double.parseDouble(strValeur[1]));
+                                    getPanoramiquesProjet()[getiPanoActuel()]
+                                            .setZeroNord(Double.parseDouble(strValeur[1]));
                                     break;
                                 case "numeroPlan":
-                                    getPanoramiquesProjet()[getiPanoActuel()].setNumeroPlan(Integer.parseInt(strValeur[1].replace(" ", "")));
+                                    getPanoramiquesProjet()[getiPanoActuel()]
+                                            .setNumeroPlan(Integer.parseInt(strValeur[1].replace(" ", "")));
                                     break;
                                 case "longitudeGeo":
-                                    getPanoramiquesProjet()[getiPanoActuel()].setMarqueurGeolocatisation(new CoordonneesGeographiques());
-                                    getPanoramiquesProjet()[getiPanoActuel()].getMarqueurGeolocatisation().setLongitude(Double.parseDouble(strValeur[1]));
+                                    getPanoramiquesProjet()[getiPanoActuel()]
+                                            .setMarqueurGeolocatisation(new CoordonneesGeographiques());
+                                    getPanoramiquesProjet()[getiPanoActuel()].getMarqueurGeolocatisation()
+                                            .setLongitude(Double.parseDouble(strValeur[1]));
                                     break;
                                 case "latitudeGeo":
-                                    getPanoramiquesProjet()[getiPanoActuel()].getMarqueurGeolocatisation().setLatitude(Double.parseDouble(strValeur[1]));
+                                    getPanoramiquesProjet()[getiPanoActuel()].getMarqueurGeolocatisation()
+                                            .setLatitude(Double.parseDouble(strValeur[1]));
                                     break;
 
                                 case "descriptionIA":
-                                    String strDescIA = strValeur[1].replace("&pv", ";").replace("&dp", ":").replace("&nl", "\n");
+                                    String strDescIA = strValeur[1].replace("&pv", ";").replace("&dp", ":")
+                                            .replace("&nl", "\n");
                                     getPanoramiquesProjet()[getiPanoActuel()].setStrDescriptionIA(strDescIA);
                                     break;
 
                                 case "affichePlan":
-                                    getPanoramiquesProjet()[getiPanoActuel()].setAffichePlan(strValeur[1].equals("true"));
+                                    getPanoramiquesProjet()[getiPanoActuel()]
+                                            .setAffichePlan(strValeur[1].equals("true"));
                                     break;
                                 default:
                                     break;
@@ -5292,7 +5591,7 @@ public class EditeurPanovisu extends Application {
                                 strElementsLigne[i] = strElementsLigne[i].replace("]", "");
                                 String[] strValeur = strElementsLigne[i].split(":", 2);
                                 if (strValeur.length == 1) {
-                                    strValeur = new String[]{strValeur[0], ""};
+                                    strValeur = new String[] { strValeur[0], "" };
                                 }
 
                                 switch (strValeur[0]) {
@@ -5322,7 +5621,8 @@ public class EditeurPanovisu extends Application {
                                         if ("null".equals(strValeur[1])) {
                                             HS.setStrInfo(null);
                                         } else {
-                                            HS.setStrInfo(strValeur[1].replace("&pv", ";").replace("&dp", ":").replace("&ds", "#"));
+                                            HS.setStrInfo(strValeur[1].replace("&pv", ";").replace("&dp", ":")
+                                                    .replace("&ds", "#"));
                                         }
                                         break;
                                     case "xml":
@@ -5354,14 +5654,17 @@ public class EditeurPanovisu extends Application {
                                 }
                             }
                             getPanoramiquesProjet()[getiPanoActuel()].addHotspot(HS);
-                            
+
                             // Reconstruire l'icône si couleur personnalisée OU icône source personnalisée
                             if ((HS.getStrCouleurPerso() != null && !HS.getStrCouleurPerso().isEmpty()) ||
-                                (HS.getStrNomIconeSource() != null && !HS.getStrNomIconeSource().isEmpty())) {
-                                String nomIconeAUtiliser = (HS.getStrNomIconeSource() != null && !HS.getStrNomIconeSource().isEmpty()) 
-                                    ? HS.getStrNomIconeSource() 
-                                    : strNomfichierHS;
-                                reconstruireIconeHotspot(HS, getiPanoActuel(), getPanoramiquesProjet()[getiPanoActuel()].getNombreHotspots() - 1, "hs", nomIconeAUtiliser);
+                                    (HS.getStrNomIconeSource() != null && !HS.getStrNomIconeSource().isEmpty())) {
+                                String nomIconeAUtiliser = (HS.getStrNomIconeSource() != null
+                                        && !HS.getStrNomIconeSource().isEmpty())
+                                                ? HS.getStrNomIconeSource()
+                                                : strNomfichierHS;
+                                reconstruireIconeHotspot(HS, getiPanoActuel(),
+                                        getPanoramiquesProjet()[getiPanoActuel()].getNombreHotspots() - 1, "hs",
+                                        nomIconeAUtiliser);
                             }
                         }
 
@@ -5377,7 +5680,7 @@ public class EditeurPanovisu extends Application {
                                 strElementsLigne[i] = strElementsLigne[i].replace("]", "");
                                 String[] strValeur = strElementsLigne[i].split(":", 2);
                                 if (strValeur.length == 1) {
-                                    strValeur = new String[]{strValeur[0], ""};
+                                    strValeur = new String[] { strValeur[0], "" };
                                 }
 
                                 switch (strValeur[0]) {
@@ -5412,7 +5715,8 @@ public class EditeurPanovisu extends Application {
                                         if ("null".equals(strValeur[1])) {
                                             HS.setStrInfo(null);
                                         } else {
-                                            HS.setStrInfo(strValeur[1].replace("&pv", ";").replace("&dp", ":").replace("&ds", "#"));
+                                            HS.setStrInfo(strValeur[1].replace("&pv", ";").replace("&dp", ":")
+                                                    .replace("&ds", "#"));
                                         }
                                         break;
                                     case "img":
@@ -5439,16 +5743,17 @@ public class EditeurPanovisu extends Application {
                                             if (imgPano.exists()) {
                                                 copieFichierRepertoire(imgPano.getPath(), getStrRepertPanos());
                                             } else {
-                                                String strExtension = imgPano.getPath().substring(imgPano.getPath().lastIndexOf(".") + 1);
-                                                String nomFichier
-                                                        = getStrRepertAppli()
+                                                String strExtension = imgPano.getPath()
+                                                        .substring(imgPano.getPath().lastIndexOf(".") + 1);
+                                                String nomFichier = getStrRepertAppli()
                                                         + File.separator
                                                         + "images"
                                                         + File.separator
                                                         + "imagePasTrouvee."
                                                         + strExtension;
                                                 copieFichierRepertoire(nomFichier, getStrRepertPanos());
-                                                String strFich = imgPano.getPath().substring(imgPano.getPath().lastIndexOf(File.separator));
+                                                String strFich = imgPano.getPath()
+                                                        .substring(imgPano.getPath().lastIndexOf(File.separator));
                                                 File fFichier = new File(getStrRepertTemp()
                                                         + File.separator
                                                         + "images"
@@ -5457,11 +5762,10 @@ public class EditeurPanovisu extends Application {
                                                         + strExtension);
                                                 File fNouvFichier = new File(
                                                         getStrRepertTemp()
-                                                        + File.separator
-                                                        + "images"
-                                                        + File.separator
-                                                        + strFich
-                                                );
+                                                                + File.separator
+                                                                + "images"
+                                                                + File.separator
+                                                                + strFich);
                                                 fFichier.renameTo(fNouvFichier);
                                             }
                                         } catch (IOException ex) {
@@ -5489,14 +5793,17 @@ public class EditeurPanovisu extends Application {
                                 }
                             }
                             getPanoramiquesProjet()[getiPanoActuel()].addHotspotImage(HS);
-                            
+
                             // Reconstruire l'icône si couleur personnalisée OU icône source personnalisée
                             if ((HS.getStrCouleurPerso() != null && !HS.getStrCouleurPerso().isEmpty()) ||
-                                (HS.getStrNomIconeSource() != null && !HS.getStrNomIconeSource().isEmpty())) {
-                                String nomIconeAUtiliser = (HS.getStrNomIconeSource() != null && !HS.getStrNomIconeSource().isEmpty()) 
-                                    ? HS.getStrNomIconeSource() 
-                                    : strNomfichierHSImage;
-                                reconstruireIconeHotspot(HS, getiPanoActuel(), getPanoramiquesProjet()[getiPanoActuel()].getNombreHotspotImage() - 1, "hsImage", nomIconeAUtiliser);
+                                    (HS.getStrNomIconeSource() != null && !HS.getStrNomIconeSource().isEmpty())) {
+                                String nomIconeAUtiliser = (HS.getStrNomIconeSource() != null
+                                        && !HS.getStrNomIconeSource().isEmpty())
+                                                ? HS.getStrNomIconeSource()
+                                                : strNomfichierHSImage;
+                                reconstruireIconeHotspot(HS, getiPanoActuel(),
+                                        getPanoramiquesProjet()[getiPanoActuel()].getNombreHotspotImage() - 1,
+                                        "hsImage", nomIconeAUtiliser);
                             }
                         }
                         for (int jj = 0; jj < iNbHSDiapo; jj++) {
@@ -5521,7 +5828,8 @@ public class EditeurPanovisu extends Application {
                                         if ("null".equals(strValeur[1])) {
                                             HS.setStrInfo(null);
                                         } else {
-                                            HS.setStrInfo(strValeur[1].replace("&pv", ";").replace("&dp", ":").replace("&ds", "#"));
+                                            HS.setStrInfo(strValeur[1].replace("&pv", ";").replace("&dp", ":")
+                                                    .replace("&ds", "#"));
                                         }
                                         break;
                                     case "numDiapo":
@@ -5547,7 +5855,7 @@ public class EditeurPanovisu extends Application {
                                 strElementsLigne[i] = strElementsLigne[i].replace("]", "");
                                 String[] strValeur = strElementsLigne[i].split(":", 2);
                                 if (strValeur.length == 1) {
-                                    strValeur = new String[]{strValeur[0], ""};
+                                    strValeur = new String[] { strValeur[0], "" };
                                 }
 
                                 switch (strValeur[0]) {
@@ -5568,7 +5876,8 @@ public class EditeurPanovisu extends Application {
                                         if ("null".equals(strValeur[1])) {
                                             HS.setStrInfo(null);
                                         } else {
-                                            HS.setStrInfo(strValeur[1].replace("&pv", ";").replace("&dp", ":").replace("&ds", "#"));
+                                            HS.setStrInfo(strValeur[1].replace("&pv", ";").replace("&dp", ":")
+                                                    .replace("&ds", "#"));
                                         }
                                         break;
                                     case "typeAnimation":
@@ -5603,14 +5912,17 @@ public class EditeurPanovisu extends Application {
                                 }
                             }
                             getPanoramiquesProjet()[getiPanoActuel()].addHotspotHTML(HS);
-                            
+
                             // Reconstruire l'icône si couleur personnalisée OU icône source personnalisée
                             if ((HS.getStrCouleurPerso() != null && !HS.getStrCouleurPerso().isEmpty()) ||
-                                (HS.getStrNomIconeSource() != null && !HS.getStrNomIconeSource().isEmpty())) {
-                                String nomIconeAUtiliser = (HS.getStrNomIconeSource() != null && !HS.getStrNomIconeSource().isEmpty()) 
-                                    ? HS.getStrNomIconeSource() 
-                                    : strNomfichierHSHTML;
-                                reconstruireIconeHotspot(HS, getiPanoActuel(), getPanoramiquesProjet()[getiPanoActuel()].getNombreHotspotHTML() - 1, "hsHTML", nomIconeAUtiliser);
+                                    (HS.getStrNomIconeSource() != null && !HS.getStrNomIconeSource().isEmpty())) {
+                                String nomIconeAUtiliser = (HS.getStrNomIconeSource() != null
+                                        && !HS.getStrNomIconeSource().isEmpty())
+                                                ? HS.getStrNomIconeSource()
+                                                : strNomfichierHSHTML;
+                                reconstruireIconeHotspot(HS, getiPanoActuel(),
+                                        getPanoramiquesProjet()[getiPanoActuel()].getNombreHotspotHTML() - 1, "hsHTML",
+                                        nomIconeAUtiliser);
                             }
                         }
 
@@ -5644,7 +5956,8 @@ public class EditeurPanovisu extends Application {
                                     diaporamas[getiNombreDiapo()].setDelaiDiaporama(Double.parseDouble(strValeur[1]));
                                     break;
                                 case "coul":
-                                    diaporamas[getiNombreDiapo()].setStrCouleurFondDiaporama(suprimeEspaceFin(strValeur[1].replace("\n", "")));
+                                    diaporamas[getiNombreDiapo()].setStrCouleurFondDiaporama(
+                                            suprimeEspaceFin(strValeur[1].replace("\n", "")));
                                     break;
                                 default:
                                     break;
@@ -5671,7 +5984,8 @@ public class EditeurPanovisu extends Application {
                                         diaporamas[getiNombreDiapo()].setStrFichiers(strValeur[1], jj);
                                         break;
                                     case "libelles":
-                                        diaporamas[getiNombreDiapo()].setStrLibellesImages(suprimeEspaceFin(strValeur[1].replace("\n", "")).replace("\n", ""), jj);
+                                        diaporamas[getiNombreDiapo()].setStrLibellesImages(
+                                                suprimeEspaceFin(strValeur[1].replace("\n", "")).replace("\n", ""), jj);
                                         break;
                                 }
                             }
@@ -5694,7 +6008,8 @@ public class EditeurPanovisu extends Application {
                                         fileRepertoirePlan.mkdirs();
                                     }
                                     try {
-                                        copieFichierRepertoire(getPlans()[getiNombrePlans()].getStrLienPlan(), fileRepertoirePlan.getAbsolutePath());
+                                        copieFichierRepertoire(getPlans()[getiNombrePlans()].getStrLienPlan(),
+                                                fileRepertoirePlan.getAbsolutePath());
 
                                     } catch (IOException ex) {
                                         Logger.getLogger(EditeurPanovisu.class
@@ -5771,7 +6086,8 @@ public class EditeurPanovisu extends Application {
                                         }
                                         break;
                                     case "numeroPano":
-                                        HS.setNumeroPano(Integer.parseInt(strValeur[1].replace("\n", "").replace(" ", "")));
+                                        HS.setNumeroPano(
+                                                Integer.parseInt(strValeur[1].replace("\n", "").replace(" ", "")));
                                         break;
                                     case "anime":
                                         HS.setAnime(strValeur[1].equals("true"));
@@ -5828,7 +6144,8 @@ public class EditeurPanovisu extends Application {
                         int inImage = 0;
                         for (String strLigneCommande : strLignesCommande) {
                             String strCommande = strLigneCommande.split(":", 2)[0];
-                            String strVal = strLigneCommande.split(":", 2)[1].replace("&nl", "\n").replace("&pv", ";").replace("&dp", ":");
+                            String strVal = strLigneCommande.split(":", 2)[1].replace("&nl", "\n").replace("&pv", ";")
+                                    .replace("&dp", ":");
                             switch (strCommande) {
                                 case "numPano":
                                     inPano = Integer.parseInt(strVal);
@@ -5842,7 +6159,8 @@ public class EditeurPanovisu extends Application {
                                 case "imagePath":
                                     ImageEditeurHTML imageEdit = new ImageEditeurHTML();
                                     imageEdit.setStrImagePath(strVal);
-                                    panoramiquesProjet[inPano].getHotspotHTML(inHSHTML).getImagesEditeur()[inImage] = imageEdit;
+                                    panoramiquesProjet[inPano].getHotspotHTML(inHSHTML)
+                                            .getImagesEditeur()[inImage] = imageEdit;
                                     inImage++;
                                     getPanoramiquesProjet()[inPano].getHotspotHTML(inHSHTML).setiNombreImages(inImage);
                                     break;
@@ -5863,16 +6181,20 @@ public class EditeurPanovisu extends Application {
             /**
              * Callback appelé après le chargement réussi des panoramiques
              * 
-             * <p>Cette méthode est invoquée automatiquement lorsque la tâche asynchrone
-             * de chargement des panoramiques se termine avec succès. Elle effectue :</p>
+             * <p>
+             * Cette méthode est invoquée automatiquement lorsque la tâche asynchrone
+             * de chargement des panoramiques se termine avec succès. Elle effectue :
+             * </p>
              * <ul>
-             *   <li>Affichage du panneau de choix des panoramiques</li>
-             *   <li>Ajout des plans au gestionnaire</li>
-             *   <li>Mise à jour des références des hotspots entre panoramiques</li>
+             * <li>Affichage du panneau de choix des panoramiques</li>
+             * <li>Ajout des plans au gestionnaire</li>
+             * <li>Mise à jour des références des hotspots entre panoramiques</li>
              * </ul>
              * 
-             * <p><strong>Note :</strong> Cette méthode est une méthode de callback JavaFX Task
-             * et s'exécute sur le thread JavaFX Application.</p>
+             * <p>
+             * <strong>Note :</strong> Cette méthode est une méthode de callback JavaFX Task
+             * et s'exécute sur le thread JavaFX Application.
+             * </p>
              * 
              * @see javafx.concurrent.Task#succeeded()
              */
@@ -5892,16 +6214,21 @@ public class EditeurPanovisu extends Application {
                 for (int i = 0; i < getiNombrePanoramiques(); i++) {
                     for (int j = 0; j < getPanoramiquesProjet()[i].getNombreHotspots(); j++) {
                         if (getPanoramiquesProjet()[i].getHotspot(j).getNumeroPano() != -1) {
-                            String strFichPano = getPanoramiquesProjet()[getPanoramiquesProjet()[i].getHotspot(j).getNumeroPano()].getStrNomFichier();
-                            strFichPano = strFichPano.substring(strFichPano.lastIndexOf(File.separator) + 1, strFichPano.length()).split("\\.")[0] + ".xml";
+                            String strFichPano = getPanoramiquesProjet()[getPanoramiquesProjet()[i].getHotspot(j)
+                                    .getNumeroPano()].getStrNomFichier();
+                            strFichPano = strFichPano
+                                    .substring(strFichPano.lastIndexOf(File.separator) + 1, strFichPano.length())
+                                    .split("\\.")[0] + ".xml";
                             getPanoramiquesProjet()[i].getHotspot(j).setStrFichierXML(
-                                    strFichPano
-                            );
+                                    strFichPano);
                         } else {
-                            String strNomFichier = getPanoramiquesProjet()[i].getHotspot(j).getStrFichierXML().split("\\.")[0];
+                            String strNomFichier = getPanoramiquesProjet()[i].getHotspot(j).getStrFichierXML()
+                                    .split("\\.")[0];
                             for (int k = 0; k < getiNombrePanoramiques(); k++) {
                                 String strFichPano = getPanoramiquesProjet()[k].getStrNomFichier();
-                                strFichPano = strFichPano.substring(strFichPano.lastIndexOf(File.separator) + 1, strFichPano.length()).split("\\.")[0];
+                                strFichPano = strFichPano
+                                        .substring(strFichPano.lastIndexOf(File.separator) + 1, strFichPano.length())
+                                        .split("\\.")[0];
                                 if (strFichPano.equals(strNomFichier)) {
                                     getPanoramiquesProjet()[i].getHotspot(j).setNumeroPano(k);
                                 }
@@ -5927,8 +6254,7 @@ public class EditeurPanovisu extends Application {
                 }
                 if (apListePanoTriable != null) {
                     apParametresVisite.getChildren().remove(
-                            apListePanoTriable
-                    );
+                            apListePanoTriable);
                 }
                 if (strOrdrePanos.equals((""))) {
                     ordPano.creeListe();
@@ -5941,14 +6267,13 @@ public class EditeurPanovisu extends Application {
                 apListePanoTriable.setVisible(true);
                 apParametresVisite.setPrefHeight(120 + apListePanoTriable.getPrefHeight() + 20);
                 apParametresVisite.getChildren().add(
-                        apListePanoTriable
-                );
+                        apListePanoTriable);
                 if (apParametresVisite.isVisible()) {
                     apParametresVisite.setMinHeight(120 + apListePanoTriable.getPrefHeight() + 20);
                     apParametresVisite.setMaxHeight(120 + apListePanoTriable.getPrefHeight() + 20);
                 }
                 getGestionnaireInterface().rafraichit();
-                
+
                 // Vérifier que la liste n'est pas vide avant d'accéder aux éléments
                 if (!ordPano.getStrPanos().isEmpty()) {
                     setiPanoActuel(Integer.parseInt(ordPano.getStrPanos().get(0)));
@@ -5956,7 +6281,7 @@ public class EditeurPanovisu extends Application {
                     affichePanoChoisit(getiPanoActuel());
                     bPanoCharge = true;
                     getVbChoixPanoramique().setVisible(true);
-                    
+
                     if (!cbListeChoixPanoramique.getItems().isEmpty()) {
                         cbListeChoixPanoramique.setValue(cbListeChoixPanoramique.getItems().get(0));
                     }
@@ -5965,7 +6290,7 @@ public class EditeurPanovisu extends Application {
                     System.out.println("⚠️ Aucun panoramique disponible dans la liste");
                     bPanoCharge = false;
                 }
-                
+
                 TextField tfVisite = (TextField) getVbChoixPanoramique().lookup("#titreVisite");
                 if (tfVisite != null) {
                     tfVisite.setText(strTitreVisite);
@@ -5975,10 +6300,10 @@ public class EditeurPanovisu extends Application {
                 bbarPrincipal.setDisable(false);
                 hbBarreBouton.setDisable(false);
                 tpEnvironnement.setDisable(false);
-                
+
                 // Mettre à jour les couleurs des panneaux de hotspots selon le thème actuel
                 getGestionnaireInterface().mettreAJourCouleursHotspots();
-                
+
                 cbIntroPetitePlanete.setSelected(isbIntroPetitePlanete());
                 cbAutoRotationDemarrage.setSelected(isbAutoRotationDemarre());
                 bdfAutoRotationVitesse.setNumber(new BigDecimal(getiAutoRotationVitesse()));
@@ -6015,7 +6340,8 @@ public class EditeurPanovisu extends Application {
     }
 
     private static void creeVignettesHS() {
-        NavigateurPanoramique navigPano1 = new NavigateurPanoramique(getPanoramiquesProjet()[0].getImgVisuPanoramique(), 0, 0, 300, 150, false);
+        NavigateurPanoramique navigPano1 = new NavigateurPanoramique(getPanoramiquesProjet()[0].getImgVisuPanoramique(),
+                0, 0, 300, 150, false);
         AnchorPane apVisuPanoHS = new AnchorPane(navigPano1.affichePano());
         for (int i = 0; i < iNombrePanoramiques; i++) {
             for (int j = 0; j < getPanoramiquesProjet()[i].getNombreHotspots(); j++) {
@@ -6023,7 +6349,9 @@ public class EditeurPanovisu extends Application {
                 if (!getPanoramiquesProjet()[i].getHotspot(j).getStrFichierXML().equals("")) {
                     for (int ii1 = 0; ii1 < getiNombrePanoramiques(); ii1++) {
                         String strFichPano = getPanoramiquesProjet()[ii1].getStrNomFichier();
-                        String strNomXMLFile = strFichPano.substring(strFichPano.lastIndexOf(File.separator) + 1, strFichPano.length()).split("\\.")[0] + ".xml";
+                        String strNomXMLFile = strFichPano
+                                .substring(strFichPano.lastIndexOf(File.separator) + 1, strFichPano.length())
+                                .split("\\.")[0] + ".xml";
                         if (strNomXMLFile.equals(getPanoramiquesProjet()[i].getHotspot(j).getStrFichierXML())) {
                             iNumPanoChoisitHS = ii1;
 
@@ -6148,24 +6476,34 @@ public class EditeurPanovisu extends Application {
     /**
      * Copie récursivement un répertoire et tout son contenu vers une destination
      * 
-     * <p>Cette méthode copie l'intégralité d'un répertoire source vers un répertoire de destination,
-     * en préservant la structure des sous-répertoires. Si le répertoire de destination n'existe pas,
-     * il est créé automatiquement.</p>
+     * <p>
+     * Cette méthode copie l'intégralité d'un répertoire source vers un répertoire
+     * de destination,
+     * en préservant la structure des sous-répertoires. Si le répertoire de
+     * destination n'existe pas,
+     * il est créé automatiquement.
+     * </p>
      * 
-     * <p>Utilisée notamment lors de la génération de visites virtuelles pour copier les ressources
-     * (JavaScript, CSS, images) depuis le répertoire d'installation vers le répertoire de sortie.</p>
+     * <p>
+     * Utilisée notamment lors de la génération de visites virtuelles pour copier
+     * les ressources
+     * (JavaScript, CSS, images) depuis le répertoire d'installation vers le
+     * répertoire de sortie.
+     * </p>
      * 
-     * <p><b>Exemple d'utilisation :</b></p>
+     * <p>
+     * <b>Exemple d'utilisation :</b>
+     * </p>
+     * 
      * <pre>{@code
      * // Copier les ressources JavaScript
      * copieRepertoire(
-     *     getStrRepertAppli() + "/panovisu/script", 
-     *     strNomRepertVisite + "/script"
-     * );
+     *         getStrRepertAppli() + "/panovisu/script",
+     *         strNomRepertVisite + "/script");
      * }</pre>
      * 
      * @param strEmplacement Chemin absolu du répertoire source à copier
-     * @param strRepertoire Chemin absolu du répertoire de destination
+     * @param strRepertoire  Chemin absolu du répertoire de destination
      * @see #copieFichierRepertoire(String, String)
      * @see #genereVisite()
      */
@@ -6180,7 +6518,8 @@ public class EditeurPanovisu extends Application {
             for (File fileFichier : fileFichiers) {
                 try {
                     if (fileFichier.isDirectory()) {
-                        String strRep1 = fileFichier.getAbsolutePath().substring(fileFichier.getAbsolutePath().lastIndexOf(File.separator) + 1);
+                        String strRep1 = fileFichier.getAbsolutePath()
+                                .substring(fileFichier.getAbsolutePath().lastIndexOf(File.separator) + 1);
                         strRep1 = strRepertoire + File.separator + strRep1;
                         copieRepertoire(fileFichier.getAbsolutePath(), strRep1);
                     } else {
@@ -6198,32 +6537,41 @@ public class EditeurPanovisu extends Application {
     /**
      * Copie un fichier unique vers un répertoire de destination
      * 
-     * <p>Cette méthode copie un fichier depuis son emplacement source vers un répertoire de destination.
-     * Le nom du fichier est préservé. Utilisée en conjonction avec {@link #copieRepertoire(String, String)}
-     * pour la copie récursive de répertoires.</p>
+     * <p>
+     * Cette méthode copie un fichier depuis son emplacement source vers un
+     * répertoire de destination.
+     * Le nom du fichier est préservé. Utilisée en conjonction avec
+     * {@link #copieRepertoire(String, String)}
+     * pour la copie récursive de répertoires.
+     * </p>
      * 
-     * <p><b>Exemple d'utilisation :</b></p>
+     * <p>
+     * <b>Exemple d'utilisation :</b>
+     * </p>
+     * 
      * <pre>{@code
      * // Copier un fichier de configuration
      * copieFichierRepertoire(
-     *     "/chemin/source/config.xml",
-     *     "/chemin/destination/"
-     * );
+     *         "/chemin/source/config.xml",
+     *         "/chemin/destination/");
      * }</pre>
      * 
-     * @param strFichier Chemin absolu du fichier source à copier
+     * @param strFichier    Chemin absolu du fichier source à copier
      * @param strRepertoire Chemin absolu du répertoire de destination
      * @throws FileNotFoundException Si le fichier source n'existe pas
-     * @throws IOException Si une erreur d'entrée/sortie se produit pendant la copie
+     * @throws IOException           Si une erreur d'entrée/sortie se produit
+     *                               pendant la copie
      * @see #copieRepertoire(String, String)
      */
-    static public void copieFichierRepertoire(String strFichier, String strRepertoire) throws FileNotFoundException, IOException {
+    static public void copieFichierRepertoire(String strFichier, String strRepertoire)
+            throws FileNotFoundException, IOException {
         File fileFrom = new File(strFichier);
         if (!fileFrom.exists()) {
             System.err.println("⚠️ Fichier source introuvable, copie ignorée : " + strFichier);
             return; // Ne pas lever d'exception, simplement ignorer
         }
-        File fileTo = new File(strRepertoire + File.separator + strFichier.substring(strFichier.lastIndexOf(File.separator) + 1));
+        File fileTo = new File(
+                strRepertoire + File.separator + strFichier.substring(strFichier.lastIndexOf(File.separator) + 1));
         Files.copy(fileFrom.toPath(), fileTo.toPath(), StandardCopyOption.REPLACE_EXISTING);
     }
 
@@ -6238,7 +6586,8 @@ public class EditeurPanovisu extends Application {
 
     /**
      * Rafraîchit l'affichage des hotspots dans le panneau de visite
-     * Utilisé notamment après l'application des options par défaut à tous les hotspots
+     * Utilisé notamment après l'application des options par défaut à tous les
+     * hotspots
      */
     public static void rafraichitAffichageHotSpots() {
         if (getiNombrePanoramiques() > 0) {
@@ -6285,7 +6634,8 @@ public class EditeurPanovisu extends Application {
         } else {
             for (int i = 0; i < getiNombrePanoramiques(); i++) {
                 String strFichierPano = getPanoramiquesProjet()[i].getStrNomFichier();
-                String strNomPano = strFichierPano.substring(strFichierPano.lastIndexOf(File.separator) + 1, strFichierPano.length());
+                String strNomPano = strFichierPano.substring(strFichierPano.lastIndexOf(File.separator) + 1,
+                        strFichierPano.length());
                 String[] strNPano = strNomPano.split("\\.");
                 strListe += strNPano[0];
                 if (i < getiNombrePanoramiques() - 1) {
@@ -6303,59 +6653,66 @@ public class EditeurPanovisu extends Application {
      */
     @SuppressWarnings("unused")
     private static AnchorPane apAfficherListePanosVignettes(int iNumHS) {
-        final NavigateurPanoramique[] navigateurPano2Array = new NavigateurPanoramique[1]; // Tableau pour permettre modification dans lambda
+        final NavigateurPanoramique[] navigateurPano2Array = new NavigateurPanoramique[1]; // Tableau pour permettre
+                                                                                           // modification dans lambda
         final AnchorPane[] apVisuPanoHSArray = new AnchorPane[1]; // Tableau pour permettre modification dans lambda
         iNumeroPanoChoisitHS = -1;
-        
+
         // Déterminer si c'est une création (nouveau HS) ou une édition (HS existant)
-        final boolean bEstCreation = getPanoramiquesProjet()[getiPanoActuel()].getHotspot(iNumHS).getStrFichierXML().equals("");
-        
+        final boolean bEstCreation = getPanoramiquesProjet()[getiPanoActuel()].getHotspot(iNumHS).getStrFichierXML()
+                .equals("");
+
         // Initialiser le navigateur avec le panorama sélectionné ou le panorama actuel
         if (!bEstCreation) {
             for (int ii1 = 0; ii1 < getiNombrePanoramiques(); ii1++) {
                 String strFichPano = getPanoramiquesProjet()[ii1].getStrNomFichier();
-                String strNomXMLFile = strFichPano.substring(strFichPano.lastIndexOf(File.separator) + 1, strFichPano.length()).split("\\.")[0] + ".xml";
-                if (strNomXMLFile.equals(getPanoramiquesProjet()[getiPanoActuel()].getHotspot(iNumHS).getStrFichierXML())) {
+                String strNomXMLFile = strFichPano
+                        .substring(strFichPano.lastIndexOf(File.separator) + 1, strFichPano.length()).split("\\.")[0]
+                        + ".xml";
+                if (strNomXMLFile
+                        .equals(getPanoramiquesProjet()[getiPanoActuel()].getHotspot(iNumHS).getStrFichierXML())) {
                     iNumeroPanoChoisitHS = ii1;
                     strNomPanoChoisitHS = getPanoramiquesProjet()[ii1].getStrNomFichier();
                 }
             }
             navigateurPano2Array[0] = new NavigateurPanoramique(
                     getPanoramiquesProjet()[iNumeroPanoChoisitHS].getImgVisuPanoramique(), 0, 0, 700, 438, true);
-            
+
             // Passer l'objet Panoramique pour utiliser le cache pré-calculé
             navigateurPano2Array[0].setImagePanoramique(
-                getPanoramiquesProjet()[iNumeroPanoChoisitHS].getStrNomFichier(),
-                getPanoramiquesProjet()[iNumeroPanoChoisitHS].getImgVisuPanoramique(),
-                getPanoramiquesProjet()[iNumeroPanoChoisitHS]
-            );
-            
+                    getPanoramiquesProjet()[iNumeroPanoChoisitHS].getStrNomFichier(),
+                    getPanoramiquesProjet()[iNumeroPanoChoisitHS].getImgVisuPanoramique(),
+                    getPanoramiquesProjet()[iNumeroPanoChoisitHS]);
+
             if (getPanoramiquesProjet()[getiPanoActuel()].getHotspot(iNumHS).getRegardX() != -1000) {
-                navigateurPano2Array[0].setChoixLongitude(getPanoramiquesProjet()[getiPanoActuel()].getHotspot(iNumHS).getRegardX());
+                navigateurPano2Array[0]
+                        .setChoixLongitude(getPanoramiquesProjet()[getiPanoActuel()].getHotspot(iNumHS).getRegardX());
             } else {
                 navigateurPano2Array[0].setChoixLongitude(0);
             }
             navigateurPano2Array[0].setLongitude(navigateurPano2Array[0].getChoixLongitude());
             if (getPanoramiquesProjet()[getiPanoActuel()].getHotspot(iNumHS).getRegardY() != -1000) {
-                navigateurPano2Array[0].setChoixLatitude(getPanoramiquesProjet()[getiPanoActuel()].getHotspot(iNumHS).getRegardY());
+                navigateurPano2Array[0]
+                        .setChoixLatitude(getPanoramiquesProjet()[getiPanoActuel()].getHotspot(iNumHS).getRegardY());
             } else {
                 navigateurPano2Array[0].setChoixLatitude(0);
             }
             navigateurPano2Array[0].setLatitude(navigateurPano2Array[0].getChoixLatitude());
             if (getPanoramiquesProjet()[getiPanoActuel()].getHotspot(iNumHS).getChampVisuel() != 0) {
-                navigateurPano2Array[0].setChoixFov(getPanoramiquesProjet()[getiPanoActuel()].getHotspot(iNumHS).getChampVisuel());
+                navigateurPano2Array[0]
+                        .setChoixFov(getPanoramiquesProjet()[getiPanoActuel()].getHotspot(iNumHS).getChampVisuel());
             } else {
                 navigateurPano2Array[0].setChoixFov(50);
             }
             navigateurPano2Array[0].setFov(navigateurPano2Array[0].getChoixFov());
             apVisuPanoHSArray[0] = navigateurPano2Array[0].affichePano(getPanoramiquesProjet()[iNumeroPanoChoisitHS]);
-            
+
             // Masquer le bouton plein écran dans la popup
             if (navigateurPano2Array[0].getBtnPleinEcran() != null) {
                 navigateurPano2Array[0].getBtnPleinEcran().setVisible(false);
                 navigateurPano2Array[0].getBtnPleinEcran().setManaged(false);
             }
-            
+
             apVisuPanoHSArray[0].setDisable(false);
 
         } else {
@@ -6364,108 +6721,112 @@ public class EditeurPanovisu extends Application {
             apVisuPanoHSArray[0] = new AnchorPane();
             apVisuPanoHSArray[0].setPrefSize(700, 438);
             apVisuPanoHSArray[0].setStyle("-fx-background-color: #f0f0f0; " +
-                                 "-fx-border-color: #ccc; " +
-                                 "-fx-border-width: 1; " +
-                                 "-fx-background-radius: 5; " +
-                                 "-fx-border-radius: 5;");
-            
+                    "-fx-border-color: #ccc; " +
+                    "-fx-border-width: 1; " +
+                    "-fx-background-radius: 5; " +
+                    "-fx-border-radius: 5;");
+
             Label lblMessage = new Label("Veuillez choisir un panorama");
             lblMessage.setStyle("-fx-font-size: 18px; " +
-                               "-fx-text-fill: #999; " +
-                               "-fx-font-weight: bold;");
+                    "-fx-text-fill: #999; " +
+                    "-fx-font-weight: bold;");
             lblMessage.setLayoutX(200);
             lblMessage.setLayoutY(210);
             apVisuPanoHSArray[0].getChildren().add(lblMessage);
-            
+
             apVisuPanoHSArray[0].setDisable(true);
         }
-        
+
         // Conteneur principal avec design moderne
         AnchorPane aplistePano = new AnchorPane();
         aplistePano.setOpacity(1);
-        
+
         // Fond avec coins arrondis et ombre
         Pane paneFond = new Pane();
         paneFond.setOnMouseClicked((mouseEvent) -> {
             mouseEvent.consume();
         });
         paneFond.setStyle("-fx-background-color: linear-gradient(to bottom, #e8e8e8, #d0d0d0); " +
-                         "-fx-background-radius: 10; " +
-                         "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 5);");
+                "-fx-background-radius: 10; " +
+                "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 5);");
         paneFond.setPrefWidth(800);
-        paneFond.setPrefHeight(778); // Hauteur ajustée: titre(40) + scroll(200) + visu(438) + label(20) + boutons(80)
+        paneFond.setPrefHeight(778); // Hauteur ajustée: titre(40) + scroll(200) + visu(438) + label(20) +
+                                     // boutons(80)
         paneFond.setMinWidth(800);
         paneFond.setMinHeight(778);
         aplistePano.getChildren().add(paneFond);
-        
+
         // Titre
         Label lblTitre = new Label("Sélectionnez le panorama de destination");
         lblTitre.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;");
         lblTitre.setLayoutX(20);
         lblTitre.setLayoutY(15);
         paneFond.getChildren().add(lblTitre);
-        
-        // Label pour afficher le nom du panorama sélectionné (déclaré ici pour être accessible partout)
+
+        // Label pour afficher le nom du panorama sélectionné (déclaré ici pour être
+        // accessible partout)
         final Label lblPanoSelectionne = new Label("");
         lblPanoSelectionne.setStyle("-fx-font-size: 12px; -fx-text-fill: #666;");
         lblPanoSelectionne.setLayoutX(50);
         lblPanoSelectionne.setLayoutY(703);
         lblPanoSelectionne.setPrefWidth(760);
         paneFond.getChildren().add(lblPanoSelectionne);
-        
+
         // Pane pour contenir les vignettes dans un FlowPane
         FlowPane flowVignettes = new FlowPane();
         flowVignettes.setHgap(10);
         flowVignettes.setVgap(10);
         flowVignettes.setPadding(new Insets(10));
         flowVignettes.setPrefWrapLength(760); // Plus large pour 5 colonnes
-        
-        // ScrollPane pour les vignettes (hauteur adaptative: 150px = ~2 lignes suffisantes)
+
+        // ScrollPane pour les vignettes (hauteur adaptative: 150px = ~2 lignes
+        // suffisantes)
         ScrollPane scrollVignettes = new ScrollPane(flowVignettes);
         scrollVignettes.setLayoutX(20);
         scrollVignettes.setLayoutY(50);
         scrollVignettes.setPrefWidth(760);
         scrollVignettes.setPrefHeight(150); // Réduit de 260 à 150px
         scrollVignettes.setStyle("-fx-background: #f5f5f5; " +
-                                "-fx-background-color: #f5f5f5; " +
-                                "-fx-border-color: #ccc; " +
-                                "-fx-border-width: 1; " +
-                                "-fx-border-radius: 5;");
+                "-fx-background-color: #f5f5f5; " +
+                "-fx-border-color: #ccc; " +
+                "-fx-border-width: 1; " +
+                "-fx-border-radius: 5;");
         scrollVignettes.setFitToWidth(true);
         scrollVignettes.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollVignettes.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         paneFond.getChildren().add(scrollVignettes);
-        
+
         // Déclarer le bouton Valider pour pouvoir l'utiliser dans les handlers
         final Button btnValide = new Button("✓ Valider");
         btnValide.setPrefWidth(120);
         btnValide.setPrefHeight(35);
         btnValide.setDisable(iNumeroPanoChoisitHS == -1); // Désactivé si aucune sélection
-        
+
         // Créer les vignettes avec bordure de sélection (exclure le panorama actuel)
         StackPane[] vignettesContainer = new StackPane[getiNombrePanoramiques()];
         ImageView[] ivPano = new ImageView[getiNombrePanoramiques()];
-        
+
         for (int i = 0; i < getiNombrePanoramiques(); i++) {
             // Exclure le panorama actuel (on ne peut pas créer de HS vers soi-même)
             if (i == getiPanoActuel()) {
                 continue;
             }
-            
+
             int iNumeroPano1 = i;
             String strNomPano = getPanoramiquesProjet()[i].getStrNomFichier();
-            String strNomCourt = strNomPano.substring(strNomPano.lastIndexOf(File.separator) + 1, strNomPano.lastIndexOf("."));
-            
+            String strNomCourt = strNomPano.substring(strNomPano.lastIndexOf(File.separator) + 1,
+                    strNomPano.lastIndexOf("."));
+
             // Container avec bordure pour chaque vignette
             vignettesContainer[i] = new StackPane();
             vignettesContainer[i].setPrefSize(150, 85);
             vignettesContainer[i].setStyle("-fx-background-color: white; " +
-                                          "-fx-border-color: transparent; " +
-                                          "-fx-border-width: 3; " +
-                                          "-fx-border-radius: 5; " +
-                                          "-fx-background-radius: 5; " +
-                                          "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2);");
-            
+                    "-fx-border-color: transparent; " +
+                    "-fx-border-width: 3; " +
+                    "-fx-border-radius: 5; " +
+                    "-fx-background-radius: 5; " +
+                    "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2);");
+
             ivPano[i] = new ImageView(getPanoramiquesProjet()[i].getImgVignettePanoramique());
             ivPano[i].setFitWidth(144);
             ivPano[i].setFitHeight(79);
@@ -6473,61 +6834,62 @@ public class EditeurPanovisu extends Application {
             ivPano[i].setSmooth(true);
             ivPano[i].setCursor(Cursor.HAND);
             ivPano[i].setStyle("-fx-effect: null;");
-            
+
             vignettesContainer[i].getChildren().add(ivPano[i]);
-            
+
             Tooltip tltpPano = new Tooltip(strNomCourt);
             tltpPano.setStyle(getStrTooltipStyle());
             Tooltip.install(vignettesContainer[i], tltpPano);
-            
+
             // Marquer la vignette sélectionnée initialement
             if (i == iNumeroPanoChoisitHS) {
                 vignettesContainer[i].setStyle("-fx-background-color: white; " +
-                                              "-fx-border-color: #4CAF50; " +
-                                              "-fx-border-width: 3; " +
-                                              "-fx-border-radius: 5; " +
-                                              "-fx-background-radius: 5; " +
-                                              "-fx-effect: dropshadow(gaussian, #4CAF50, 8, 0.6, 0, 0);");
+                        "-fx-border-color: #4CAF50; " +
+                        "-fx-border-width: 3; " +
+                        "-fx-border-radius: 5; " +
+                        "-fx-background-radius: 5; " +
+                        "-fx-effect: dropshadow(gaussian, #4CAF50, 8, 0.6, 0, 0);");
                 lblPanoSelectionne.setText("📍 " + strNomCourt);
-                lblPanoSelectionne.setStyle("-fx-font-size: 13px; -fx-text-fill: #4CAF50; -fx-font-weight: bold; -fx-padding: 5 10;");
+                lblPanoSelectionne.setStyle(
+                        "-fx-font-size: 13px; -fx-text-fill: #4CAF50; -fx-font-weight: bold; -fx-padding: 5 10;");
             }
-            
+
             vignettesContainer[i].setOnMouseClicked((mouseEvent) -> {
                 iNumeroPanoChoisitHS = iNumeroPano1;
                 strNomPanoChoisitHS = getPanoramiquesProjet()[iNumeroPanoChoisitHS].getStrNomFichier();
-                String nomCourt = strNomPanoChoisitHS.substring(strNomPanoChoisitHS.lastIndexOf(File.separator) + 1, strNomPanoChoisitHS.lastIndexOf("."));
-                
+                String nomCourt = strNomPanoChoisitHS.substring(strNomPanoChoisitHS.lastIndexOf(File.separator) + 1,
+                        strNomPanoChoisitHS.lastIndexOf("."));
+
                 // Mettre à jour le visualiseur avec le cache pré-calculé
                 Panoramique panoSelectionne = getPanoramiquesProjet()[iNumeroPanoChoisitHS];
-                
+
                 // Si c'est une création, on doit créer le navigateur et remplacer le message
                 if (bEstCreation && navigateurPano2Array[0] == null) {
                     // Retirer le message
                     paneFond.getChildren().remove(apVisuPanoHSArray[0]);
-                    
+
                     // Créer le navigateur et le stocker dans le tableau
                     navigateurPano2Array[0] = new NavigateurPanoramique(
-                        panoSelectionne.getImgVisuPanoramique(), 0, 0, 700, 438, true);
-                    
+                            panoSelectionne.getImgVisuPanoramique(), 0, 0, 700, 438, true);
+
                     // Passer l'objet Panoramique pour utiliser le cache pré-calculé
                     navigateurPano2Array[0].setImagePanoramique(
-                        panoSelectionne.getStrNomFichier(),
-                        panoSelectionne.getImgVisuPanoramique(),
-                        panoSelectionne
-                    );
-                    
+                            panoSelectionne.getStrNomFichier(),
+                            panoSelectionne.getImgVisuPanoramique(),
+                            panoSelectionne);
+
                     navigateurPano2Array[0].setLongitude(panoSelectionne.getRegardX() - 180);
                     navigateurPano2Array[0].setLatitude(panoSelectionne.getRegardY());
                     navigateurPano2Array[0].setFov(panoSelectionne.getChampVisuel());
-                    
+
                     apVisuPanoHSArray[0] = navigateurPano2Array[0].affichePano(panoSelectionne);
-                    
+
                     // Masquer le bouton plein écran
                     if (navigateurPano2Array[0].getBtnPleinEcran() != null) {
                         navigateurPano2Array[0].getBtnPleinEcran().setVisible(false);
                         navigateurPano2Array[0].getBtnPleinEcran().setManaged(false);
                     }
-                    
+
                     apVisuPanoHSArray[0].setLayoutX(50);
                     apVisuPanoHSArray[0].setLayoutY(215);
                     apVisuPanoHSArray[0].setDisable(false);
@@ -6535,72 +6897,73 @@ public class EditeurPanovisu extends Application {
                 } else if (navigateurPano2Array[0] != null) {
                     // Mode édition : mettre à jour le navigateur existant
                     navigateurPano2Array[0].setImagePanoramique(
-                        panoSelectionne.getStrNomFichier(), 
-                        panoSelectionne.getImgVisuPanoramique(), 
-                        panoSelectionne
-                    );
+                            panoSelectionne.getStrNomFichier(),
+                            panoSelectionne.getImgVisuPanoramique(),
+                            panoSelectionne);
                     navigateurPano2Array[0].setLongitude(panoSelectionne.getRegardX() - 180);
                     navigateurPano2Array[0].setLatitude(panoSelectionne.getRegardY());
                     navigateurPano2Array[0].setFov(panoSelectionne.getChampVisuel());
                     navigateurPano2Array[0].affiche();
                     apVisuPanoHSArray[0].setDisable(false);
                 }
-                
+
                 // Mettre à jour les bordures de toutes les vignettes
                 for (int j = 0; j < getiNombrePanoramiques(); j++) {
-                    if (vignettesContainer[j] == null) continue; // Ignorer le panorama actuel
-                    
+                    if (vignettesContainer[j] == null)
+                        continue; // Ignorer le panorama actuel
+
                     if (j == iNumeroPano1) {
                         vignettesContainer[j].setStyle("-fx-background-color: white; " +
-                                                      "-fx-border-color: #4CAF50; " +
-                                                      "-fx-border-width: 3; " +
-                                                      "-fx-border-radius: 5; " +
-                                                      "-fx-background-radius: 5; " +
-                                                      "-fx-effect: dropshadow(gaussian, #4CAF50, 8, 0.6, 0, 0);");
+                                "-fx-border-color: #4CAF50; " +
+                                "-fx-border-width: 3; " +
+                                "-fx-border-radius: 5; " +
+                                "-fx-background-radius: 5; " +
+                                "-fx-effect: dropshadow(gaussian, #4CAF50, 8, 0.6, 0, 0);");
                     } else {
                         vignettesContainer[j].setStyle("-fx-background-color: white; " +
-                                                      "-fx-border-color: transparent; " +
-                                                      "-fx-border-width: 3; " +
-                                                      "-fx-border-radius: 5; " +
-                                                      "-fx-background-radius: 5; " +
-                                                      "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2);");
+                                "-fx-border-color: transparent; " +
+                                "-fx-border-width: 3; " +
+                                "-fx-border-radius: 5; " +
+                                "-fx-background-radius: 5; " +
+                                "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2);");
                     }
                 }
-                
+
                 // Mettre à jour le label
                 lblPanoSelectionne.setText("📍 " + nomCourt);
-                lblPanoSelectionne.setStyle("-fx-font-size: 13px; -fx-text-fill: #4CAF50; -fx-font-weight: bold; -fx-padding: 5 10;");
-                
+                lblPanoSelectionne.setStyle(
+                        "-fx-font-size: 13px; -fx-text-fill: #4CAF50; -fx-font-weight: bold; -fx-padding: 5 10;");
+
                 // Activer le bouton Valider
                 btnValide.setDisable(false);
             });
-            
+
             // Effet hover
             vignettesContainer[i].setOnMouseEntered((e) -> {
                 if (iNumeroPano1 != iNumeroPanoChoisitHS) {
                     vignettesContainer[iNumeroPano1].setStyle("-fx-background-color: white; " +
-                                                             "-fx-border-color: #2196F3; " +
-                                                             "-fx-border-width: 3; " +
-                                                             "-fx-border-radius: 5; " +
-                                                             "-fx-background-radius: 5; " +
-                                                             "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 7, 0, 0, 3);");
+                            "-fx-border-color: #2196F3; " +
+                            "-fx-border-width: 3; " +
+                            "-fx-border-radius: 5; " +
+                            "-fx-background-radius: 5; " +
+                            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 7, 0, 0, 3);");
                 }
             });
-            
+
             vignettesContainer[i].setOnMouseExited((e) -> {
                 if (iNumeroPano1 != iNumeroPanoChoisitHS) {
                     vignettesContainer[iNumeroPano1].setStyle("-fx-background-color: white; " +
-                                                             "-fx-border-color: transparent; " +
-                                                             "-fx-border-width: 3; " +
-                                                             "-fx-border-radius: 5; " +
-                                                             "-fx-background-radius: 5; " +
-                                                             "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2);");
+                            "-fx-border-color: transparent; " +
+                            "-fx-border-width: 3; " +
+                            "-fx-border-radius: 5; " +
+                            "-fx-background-radius: 5; " +
+                            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2);");
                 }
             });
-            
+
             flowVignettes.getChildren().add(vignettesContainer[i]);
         }
-        
+
         // Visualiseur 3D élargi (700x320), repositionné pour ne pas dépasser
         // Retirer apVisuPanoHS de son parent s'il en a déjà un
         if (apVisuPanoHSArray[0].getParent() != null) {
@@ -6609,28 +6972,28 @@ public class EditeurPanovisu extends Application {
         apVisuPanoHSArray[0].setLayoutX(50); // Centré: (800 - 700) / 2 = 50
         apVisuPanoHSArray[0].setLayoutY(215); // Juste après le ScrollPane
         paneFond.getChildren().add(apVisuPanoHSArray[0]);
-        
+
         // Positionner et styler le bouton Valider (déjà déclaré plus haut)
         btnValide.setLayoutX(550);
         btnValide.setLayoutY(733); // Après label: 703 + 30 = 733
         btnValide.setStyle("-fx-background-color: #4CAF50; " +
-                          "-fx-text-fill: white; " +
-                          "-fx-font-size: 14px; " +
-                          "-fx-font-weight: bold; " +
-                          "-fx-background-radius: 5; " +
-                          "-fx-cursor: hand;");
+                "-fx-text-fill: white; " +
+                "-fx-font-size: 14px; " +
+                "-fx-font-weight: bold; " +
+                "-fx-background-radius: 5; " +
+                "-fx-cursor: hand;");
         btnValide.setOnMouseEntered(e -> btnValide.setStyle("-fx-background-color: #45a049; " +
-                                                            "-fx-text-fill: white; " +
-                                                            "-fx-font-size: 14px; " +
-                                                            "-fx-font-weight: bold; " +
-                                                            "-fx-background-radius: 5; " +
-                                                            "-fx-cursor: hand;"));
+                "-fx-text-fill: white; " +
+                "-fx-font-size: 14px; " +
+                "-fx-font-weight: bold; " +
+                "-fx-background-radius: 5; " +
+                "-fx-cursor: hand;"));
         btnValide.setOnMouseExited(e -> btnValide.setStyle("-fx-background-color: #4CAF50; " +
-                                                           "-fx-text-fill: white; " +
-                                                           "-fx-font-size: 14px; " +
-                                                           "-fx-font-weight: bold; " +
-                                                           "-fx-background-radius: 5; " +
-                                                           "-fx-cursor: hand;"));
+                "-fx-text-fill: white; " +
+                "-fx-font-size: 14px; " +
+                "-fx-font-weight: bold; " +
+                "-fx-background-radius: 5; " +
+                "-fx-cursor: hand;"));
         paneFond.getChildren().add(btnValide);
         btnValide.setOnMouseClicked((mouseEvent) -> {
             if (iNumeroPanoChoisitHS != -1) {
@@ -6638,8 +7001,7 @@ public class EditeurPanovisu extends Application {
                 panePanoramique.setOnMouseClicked(
                         (me1) -> {
                             gereSourisPanoramique(me1);
-                        }
-                );
+                        });
                 setStrPanoListeVignette(strNomPanoChoisitHS);
                 if (getPanoramiquesProjet()[iNumeroPanoChoisitHS].getStrTitrePanoramique() != null) {
                     String strTexteHS = getPanoramiquesProjet()[iNumeroPanoChoisitHS].getStrTitrePanoramique();
@@ -6656,7 +7018,8 @@ public class EditeurPanovisu extends Application {
                 getPanoramiquesProjet()[getiPanoActuel()].getHotspot(iNumHS).setRegardX(longitude - 180);
                 getPanoramiquesProjet()[getiPanoActuel()].getHotspot(iNumHS).setRegardY(latitude);
                 getPanoramiquesProjet()[getiPanoActuel()].getHotspot(iNumHS).setChampVisuel(fov);
-                getPanoramiquesProjet()[getiPanoActuel()].getHotspot(iNumHS).setImgVueHs(navigateurPano2Array[0].getImgVignetteHS());
+                getPanoramiquesProjet()[getiPanoActuel()].getHotspot(iNumHS)
+                        .setImgVueHs(navigateurPano2Array[0].getImgVignetteHS());
                 @SuppressWarnings("rawtypes")
                 ComboBox cbPanos = (ComboBox) vbOutils.lookup("#cbpano" + iNumHS);
                 cbPanos.getSelectionModel().select(iNumeroPanoChoisitHS);
@@ -6664,7 +7027,7 @@ public class EditeurPanovisu extends Application {
             }
             mouseEvent.consume();
         });
-        
+
         // Bouton Annuler
         Button btnAnnuler = new Button("✗ Annuler");
         btnAnnuler.setPrefWidth(120);
@@ -6672,23 +7035,23 @@ public class EditeurPanovisu extends Application {
         btnAnnuler.setLayoutX(660); // Décalé à gauche (était 680)
         btnAnnuler.setLayoutY(733); // Aligné avec btnValide
         btnAnnuler.setStyle("-fx-background-color: #f44336; " +
-                           "-fx-text-fill: white; " +
-                           "-fx-font-size: 14px; " +
-                           "-fx-font-weight: bold; " +
-                           "-fx-background-radius: 5; " +
-                           "-fx-cursor: hand;");
+                "-fx-text-fill: white; " +
+                "-fx-font-size: 14px; " +
+                "-fx-font-weight: bold; " +
+                "-fx-background-radius: 5; " +
+                "-fx-cursor: hand;");
         btnAnnuler.setOnMouseEntered(e -> btnAnnuler.setStyle("-fx-background-color: #da190b; " +
-                                                              "-fx-text-fill: white; " +
-                                                              "-fx-font-size: 14px; " +
-                                                              "-fx-font-weight: bold; " +
-                                                              "-fx-background-radius: 5; " +
-                                                              "-fx-cursor: hand;"));
+                "-fx-text-fill: white; " +
+                "-fx-font-size: 14px; " +
+                "-fx-font-weight: bold; " +
+                "-fx-background-radius: 5; " +
+                "-fx-cursor: hand;"));
         btnAnnuler.setOnMouseExited(e -> btnAnnuler.setStyle("-fx-background-color: #f44336; " +
-                                                             "-fx-text-fill: white; " +
-                                                             "-fx-font-size: 14px; " +
-                                                             "-fx-font-weight: bold; " +
-                                                             "-fx-background-radius: 5; " +
-                                                             "-fx-cursor: hand;"));
+                "-fx-text-fill: white; " +
+                "-fx-font-size: 14px; " +
+                "-fx-font-weight: bold; " +
+                "-fx-background-radius: 5; " +
+                "-fx-cursor: hand;"));
         btnAnnuler.setOnMouseClicked((mouseEvent) -> {
             if (bEstCreation) {
                 // Si c'est une création, supprimer le hotspot et le point
@@ -6696,7 +7059,7 @@ public class EditeurPanovisu extends Application {
                 if (nodePoint != null) {
                     panePanoramique.getChildren().remove(nodePoint);
                 }
-                
+
                 // Réindexer les IDs des circles suivants
                 for (int io = iNumHS + 1; io < getiNumPoints(); io++) {
                     nodePoint = (Node) panePanoramique.lookup("#point" + Integer.toString(io));
@@ -6704,7 +7067,7 @@ public class EditeurPanovisu extends Application {
                         nodePoint.setId("point" + Integer.toString(io - 1));
                     }
                 }
-                
+
                 // Supprimer le hotspot en cours de création
                 retireAffichageHotSpots();
                 getPanoramiquesProjet()[getiPanoActuel()].removeHotspot(iNumHS);
@@ -6716,28 +7079,28 @@ public class EditeurPanovisu extends Application {
             mouseEvent.consume();
         });
         paneFond.getChildren().add(btnAnnuler);
-        
+
         // Bouton de fermeture (X)
         Button btnClose = new Button("×");
         btnClose.setPrefSize(30, 30);
         btnClose.setLayoutX(765);
         btnClose.setLayoutY(5);
         btnClose.setStyle("-fx-background-color: transparent; " +
-                         "-fx-text-fill: #999; " +
-                         "-fx-font-size: 24px; " +
-                         "-fx-font-weight: bold; " +
-                         "-fx-cursor: hand;");
+                "-fx-text-fill: #999; " +
+                "-fx-font-size: 24px; " +
+                "-fx-font-weight: bold; " +
+                "-fx-cursor: hand;");
         btnClose.setOnMouseEntered(e -> btnClose.setStyle("-fx-background-color: #f44336; " +
-                                                          "-fx-text-fill: white; " +
-                                                          "-fx-font-size: 24px; " +
-                                                          "-fx-font-weight: bold; " +
-                                                          "-fx-background-radius: 15; " +
-                                                          "-fx-cursor: hand;"));
+                "-fx-text-fill: white; " +
+                "-fx-font-size: 24px; " +
+                "-fx-font-weight: bold; " +
+                "-fx-background-radius: 15; " +
+                "-fx-cursor: hand;"));
         btnClose.setOnMouseExited(e -> btnClose.setStyle("-fx-background-color: transparent; " +
-                                                         "-fx-text-fill: #999; " +
-                                                         "-fx-font-size: 24px; " +
-                                                         "-fx-font-weight: bold; " +
-                                                         "-fx-cursor: hand;"));
+                "-fx-text-fill: #999; " +
+                "-fx-font-size: 24px; " +
+                "-fx-font-weight: bold; " +
+                "-fx-cursor: hand;"));
         btnClose.setOnMouseClicked((mouseEvent) -> {
             if (bEstCreation) {
                 // Si c'est une création, supprimer le hotspot et le point
@@ -6745,7 +7108,7 @@ public class EditeurPanovisu extends Application {
                 if (nodePoint != null) {
                     panePanoramique.getChildren().remove(nodePoint);
                 }
-                
+
                 // Réindexer les IDs des circles suivants
                 for (int io = iNumHS + 1; io < getiNumPoints(); io++) {
                     nodePoint = (Node) panePanoramique.lookup("#point" + Integer.toString(io));
@@ -6753,7 +7116,7 @@ public class EditeurPanovisu extends Application {
                         nodePoint.setId("point" + Integer.toString(io - 1));
                     }
                 }
-                
+
                 // Supprimer le hotspot en cours de création
                 retireAffichageHotSpots();
                 getPanoramiquesProjet()[getiPanoActuel()].removeHotspot(iNumHS);
@@ -6770,10 +7133,10 @@ public class EditeurPanovisu extends Application {
         aplistePano.setPrefHeight(778); // Ajusté à la hauteur du paneFond
         aplistePano.setMinWidth(800);
         aplistePano.setMinHeight(778);
-        
+
         setbDejaSauve(false);
         getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
-        
+
         return aplistePano;
     }
 
@@ -6792,8 +7155,7 @@ public class EditeurPanovisu extends Application {
             if (cbPanos != null) {
                 getPanoramiquesProjet()[getiPanoActuel()].getHotspot(i).setStrFichierXML(cbPanos.getValue() + ".xml");
                 getPanoramiquesProjet()[getiPanoActuel()].getHotspot(i).setNumeroPano(
-                        cbPanos.getSelectionModel().getSelectedIndex()
-                );
+                        cbPanos.getSelectionModel().getSelectedIndex());
             }
             @SuppressWarnings("unchecked")
             ComboBox<String> cbTypeAnimation = (ComboBox<String>) vbOutils.lookup("#anime" + i);
@@ -6819,7 +7181,8 @@ public class EditeurPanovisu extends Application {
             @SuppressWarnings("unchecked")
             ComboBox<String> cbTypeAnimation = (ComboBox<String>) vbOutils.lookup("#animeImage" + i);
             if (cbTypeAnimation != null && cbTypeAnimation.getValue() != null) {
-                getPanoramiquesProjet()[getiPanoActuel()].getHotspotImage(i).setStrTypeAnimation(cbTypeAnimation.getValue());
+                getPanoramiquesProjet()[getiPanoActuel()].getHotspotImage(i)
+                        .setStrTypeAnimation(cbTypeAnimation.getValue());
             }
             CheckBox cbAgrandit = (CheckBox) vbOutils.lookup("#agranditSurvolImage" + i);
             if (cbAgrandit != null) {
@@ -6840,7 +7203,8 @@ public class EditeurPanovisu extends Application {
             @SuppressWarnings("unchecked")
             ComboBox<String> cbTypeAnimation = (ComboBox<String>) vbOutils.lookup("#animeHTML" + i);
             if (cbTypeAnimation != null && cbTypeAnimation.getValue() != null) {
-                getPanoramiquesProjet()[getiPanoActuel()].getHotspotHTML(i).setStrTypeAnimation(cbTypeAnimation.getValue());
+                getPanoramiquesProjet()[getiPanoActuel()].getHotspotHTML(i)
+                        .setStrTypeAnimation(cbTypeAnimation.getValue());
             }
             CheckBox cbAgrandit = (CheckBox) vbOutils.lookup("#agranditSurvolHTML" + i);
             if (cbAgrandit != null) {
@@ -6868,31 +7232,34 @@ public class EditeurPanovisu extends Application {
 
     /**
      * Applique une transformation de couleur à une image de hotspot
-     * @param imageSource L'image source
+     * 
+     * @param imageSource   L'image source
      * @param couleurFinale La teinte cible (hue)
-     * @param sat La saturation cible
-     * @param bright La luminosité cible
+     * @param sat           La saturation cible
+     * @param bright        La luminosité cible
      * @return Une nouvelle image avec la couleur transformée
      */
-    private static WritableImage transformerCouleurHotspot(Image imageSource, double couleurFinale, double sat, double bright) {
+    private static WritableImage transformerCouleurHotspot(Image imageSource, double couleurFinale, double sat,
+            double bright) {
         if (imageSource == null) {
             System.err.println("⚠️ transformerCouleurHotspot: imageSource est null");
             return null;
         }
-        
+
         int width = (int) imageSource.getWidth();
         int height = (int) imageSource.getHeight();
-        
+
         // Vérifier que les dimensions sont valides
         if (width <= 0 || height <= 0) {
-            System.err.println("⚠️ transformerCouleurHotspot: dimensions invalides (width=" + width + ", height=" + height + ")");
+            System.err.println(
+                    "⚠️ transformerCouleurHotspot: dimensions invalides (width=" + width + ", height=" + height + ")");
             return null;
         }
-        
+
         WritableImage imageTransformee = new WritableImage(width, height);
         PixelReader pr = imageSource.getPixelReader();
         PixelWriter pw = imageTransformee.getPixelWriter();
-        
+
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 Color color = pr.getColor(x, y);
@@ -6900,7 +7267,7 @@ public class EditeurPanovisu extends Application {
                 double saturation = color.getSaturation();
                 double opacity = color.getOpacity();
                 Color couleur;
-                
+
                 if ((sat < 0.02) && (saturation > 0.05)) {
                     double bright1;
                     if (brightness > 0.1 && brightness < 0.9) {
@@ -6925,15 +7292,17 @@ public class EditeurPanovisu extends Application {
                 pw.setColor(x, y, couleur);
             }
         }
-        
+
         return imageTransformee;
     }
 
     /**
-     * Sauvegarde une image de hotspot dans le répertoire temp et retourne le nom du fichier
-     * @param image L'image à sauvegarder
+     * Sauvegarde une image de hotspot dans le répertoire temp et retourne le nom du
+     * fichier
+     * 
+     * @param image   L'image à sauvegarder
      * @param prefixe Le préfixe du nom de fichier ("hs", "hsImage", "hsHTML")
-     * @param index L'index du hotspot
+     * @param index   L'index du hotspot
      * @param numPano Le numéro du panoramique
      * @return Le nom du fichier sauvegardé, ou null en cas d'erreur
      */
@@ -6942,7 +7311,7 @@ public class EditeurPanovisu extends Application {
         if (image == null) {
             return null;
         }
-        
+
         // Convertir Image en WritableImage si nécessaire
         WritableImage writableImage;
         if (image instanceof WritableImage) {
@@ -6959,37 +7328,40 @@ public class EditeurPanovisu extends Application {
                 }
             }
         }
-        
+
         return sauvegardeIconeHotspot(writableImage, prefixe, index, numPano);
     }
 
     /**
-     * Sauvegarde une image de hotspot colorée dans le répertoire temp et retourne le nom du fichier
+     * Sauvegarde une image de hotspot colorée dans le répertoire temp et retourne
+     * le nom du fichier
+     * 
      * @param imageColoree L'image colorée à sauvegarder
-     * @param prefixe Le préfixe du nom de fichier ("hs", "hsImage", "hsHTML")
-     * @param index L'index du hotspot
-     * @param numPano Le numéro du panoramique
+     * @param prefixe      Le préfixe du nom de fichier ("hs", "hsImage", "hsHTML")
+     * @param index        L'index du hotspot
+     * @param numPano      Le numéro du panoramique
      * @return Le nom du fichier sauvegardé, ou null en cas d'erreur
      */
     private static String sauvegardeIconeHotspot(WritableImage imageColoree, String prefixe, int index, int numPano) {
         if (imageColoree == null) {
             return null;
         }
-        
+
         try {
             // Créer le répertoire temp/panovisu/images/hotspots s'il n'existe pas
-            File repertoireHotspots = new File(getStrRepertTemp() + File.separator + "panovisu" + File.separator + "images" + File.separator + "hotspots");
+            File repertoireHotspots = new File(getStrRepertTemp() + File.separator + "panovisu" + File.separator
+                    + "images" + File.separator + "hotspots");
             if (!repertoireHotspots.exists()) {
                 repertoireHotspots.mkdirs();
             }
-            
+
             // Générer un nom de fichier unique
             String nomFichier = prefixe + "_pano" + numPano + "_" + index + "_" + System.currentTimeMillis() + ".png";
             String cheminComplet = repertoireHotspots.getAbsolutePath() + File.separator + nomFichier;
-            
+
             // Sauvegarder l'image
             ReadWriteImage.writePng(imageColoree, cheminComplet, false, 0.f);
-            
+
             return nomFichier;
         } catch (IOException ex) {
             Logger.getLogger(EditeurPanovisu.class.getName()).log(Level.SEVERE, null, ex);
@@ -6999,18 +7371,23 @@ public class EditeurPanovisu extends Application {
 
     /**
      * Reconstruit une icône de hotspot colorée lors du chargement d'un projet
-     * @param hotspot Le hotspot (peut être HotSpot, HotspotImage ou HotspotHTML)
-     * @param numPano Le numéro du panoramique
-     * @param index L'index du hotspot
-     * @param prefixe Le préfixe du nom de fichier ("hs", "hsImage", "hsHTML")
+     * 
+     * @param hotspot               Le hotspot (peut être HotSpot, HotspotImage ou
+     *                              HotspotHTML)
+     * @param numPano               Le numéro du panoramique
+     * @param index                 L'index du hotspot
+     * @param prefixe               Le préfixe du nom de fichier ("hs", "hsImage",
+     *                              "hsHTML")
      * @param nomFichierIconeDefaut Le nom du fichier d'icône par défaut
      */
-    private static void reconstruireIconeHotspot(Object hotspot, int numPano, int index, String prefixe, String nomFichierIconeDefaut) {
+    private static void reconstruireIconeHotspot(Object hotspot, int numPano, int index, String prefixe,
+            String nomFichierIconeDefaut) {
         try {
             String couleurPerso = null;
             String nomIconeSource = null;
-            
-            // Récupérer la couleur personnalisée et le nom d'icône source selon le type de hotspot
+
+            // Récupérer la couleur personnalisée et le nom d'icône source selon le type de
+            // hotspot
             if (hotspot instanceof HotSpot) {
                 couleurPerso = ((HotSpot) hotspot).getStrCouleurPerso();
                 nomIconeSource = ((HotSpot) hotspot).getStrNomIconeSource();
@@ -7021,27 +7398,29 @@ public class EditeurPanovisu extends Application {
                 couleurPerso = ((HotspotHTML) hotspot).getStrCouleurPerso();
                 nomIconeSource = ((HotspotHTML) hotspot).getStrNomIconeSource();
             }
-            
+
             // DEBUG
             System.out.println("🔍 DEBUG reconstruireIconeHotspot:");
             System.out.println("  - prefixe: " + prefixe);
             System.out.println("  - nomFichierIconeDefaut: " + nomFichierIconeDefaut);
             System.out.println("  - nomIconeSource: " + nomIconeSource);
             System.out.println("  - couleurPerso: " + couleurPerso);
-            
+
             // Déterminer quelle icône utiliser
-            String nomFichierIcone = (nomIconeSource != null && !nomIconeSource.isEmpty()) ? nomIconeSource : nomFichierIconeDefaut;
+            String nomFichierIcone = (nomIconeSource != null && !nomIconeSource.isEmpty()) ? nomIconeSource
+                    : nomFichierIconeDefaut;
             System.out.println("  - nomFichierIcone utilisé: " + nomFichierIcone);
-            
+
             // Charger l'icône source
-            File fileIcone = new File(getStrRepertAppli() + File.separator + "theme" + File.separator + "hotspots" + File.separator + nomFichierIcone);
+            File fileIcone = new File(getStrRepertAppli() + File.separator + "theme" + File.separator + "hotspots"
+                    + File.separator + nomFichierIcone);
             if (!fileIcone.exists()) {
                 System.err.println("⚠️ Fichier icône introuvable: " + fileIcone.getAbsolutePath());
                 return;
             }
-            
+
             Image imgOriginal = new Image("file:" + fileIcone.getAbsolutePath());
-            
+
             // Stocker l'image source dans l'objet hotspot
             if (hotspot instanceof HotSpot) {
                 ((HotSpot) hotspot).setImgIconeSource(imgOriginal);
@@ -7050,10 +7429,10 @@ public class EditeurPanovisu extends Application {
             } else if (hotspot instanceof HotspotHTML) {
                 ((HotspotHTML) hotspot).setImgIconeSource(imgOriginal);
             }
-            
+
             // Déterminer les valeurs HSB à utiliser
             double hue, saturation, brightness;
-            
+
             if (couleurPerso != null && !couleurPerso.isEmpty()) {
                 // Cas 2 et 3: Utiliser la couleur personnalisée
                 String[] couleurParts = couleurPerso.split(";");
@@ -7076,18 +7455,18 @@ public class EditeurPanovisu extends Application {
                 } else {
                     return;
                 }
-                
+
                 hue = couleurGenerique.getHue();
                 saturation = couleurGenerique.getSaturation();
                 brightness = couleurGenerique.getBrightness();
             }
-            
+
             // Appliquer la transformation de couleur sur l'icône
             WritableImage imgColoree = transformerCouleurHotspot(imgOriginal, hue, saturation, brightness);
-            
+
             // Sauvegarder l'icône transformée
             String nomFichier = sauvegardeIconeHotspot(imgColoree, prefixe, index, numPano);
-            
+
             // Stocker le nom du fichier dans le hotspot
             if (nomFichier != null) {
                 if (hotspot instanceof HotSpot) {
@@ -7126,25 +7505,27 @@ public class EditeurPanovisu extends Application {
             double deplacement = 0;
             vbPanneauHS.setLayoutX(deplacement);
             Pane paneHsPanoramique = new Pane(vbPanneauHS);
-            // Hauteur de base (sans personnalisation dépliée) - augmentée de 270 à 390, puis 400
+            // Hauteur de base (sans personnalisation dépliée) - augmentée de 270 à 390,
+            // puis 400
             double hauteurInitiale = 400;
             paneHsPanoramique.setPrefHeight(hauteurInitiale);
             paneHsPanoramique.setMinHeight(hauteurInitiale);
             paneHsPanoramique.setMaxHeight(hauteurInitiale);
 
             int iNum1 = io;
-            Timeline timBouge = new Timeline(new KeyFrame(Duration.millis(500), (@SuppressWarnings("unused") ActionEvent event) -> {
-                Circle c1 = (Circle) panePanoramique.lookup("#point" + iNum1);
-                if (c1 != null) {
-                    if (c1.getFill() == Color.RED) {
-                        c1.setFill(Color.YELLOW);
-                        c1.setStroke(Color.RED);
-                    } else {
-                        c1.setFill(Color.RED);
-                        c1.setStroke(Color.YELLOW);
-                    }
-                }
-            }));
+            Timeline timBouge = new Timeline(
+                    new KeyFrame(Duration.millis(500), (@SuppressWarnings("unused") ActionEvent event) -> {
+                        Circle c1 = (Circle) panePanoramique.lookup("#point" + iNum1);
+                        if (c1 != null) {
+                            if (c1.getFill() == Color.RED) {
+                                c1.setFill(Color.YELLOW);
+                                c1.setStroke(Color.RED);
+                            } else {
+                                c1.setFill(Color.RED);
+                                c1.setStroke(Color.YELLOW);
+                            }
+                        }
+                    }));
             timBouge.setCycleCount(Timeline.INDEFINITE);
             timBouge.pause();
             paneHsPanoramique.setOnMouseEntered((e) -> {
@@ -7218,12 +7599,13 @@ public class EditeurPanovisu extends Application {
             ivApercuIconeHS.setFitHeight(48);
             ivApercuIconeHS.setPreserveRatio(true);
             ivApercuIconeHS.setTranslateX(260);
-            
+
             // Charger l'image actuelle du hotspot avec la couleur appliquée
             String fichierImageApercuHS = getPanoramiquesProjet()[iNumPano].getHotspot(io).getStrFichierImage();
             if (fichierImageApercuHS != null && !fichierImageApercuHS.isEmpty()) {
                 try {
-                    File fileIconeHS = new File(getStrRepertTemp() + File.separator + "images" + File.separator + fichierImageApercuHS);
+                    File fileIconeHS = new File(
+                            getStrRepertTemp() + File.separator + "images" + File.separator + fichierImageApercuHS);
                     if (fileIconeHS.exists()) {
                         ivApercuIconeHS.setImage(new Image("file:" + fileIconeHS.getAbsolutePath()));
                     }
@@ -7231,24 +7613,27 @@ public class EditeurPanovisu extends Application {
                     // Ignorer et utiliser l'icône par défaut
                 }
             }
-            
-            // Si pas d'image personnalisée, utiliser l'icône source ou l'icône par défaut avec la couleur
+
+            // Si pas d'image personnalisée, utiliser l'icône source ou l'icône par défaut
+            // avec la couleur
             if (ivApercuIconeHS.getImage() == null) {
                 try {
                     // Déterminer quelle icône source utiliser
                     String nomIconeSource = getPanoramiquesProjet()[iNumPano].getHotspot(io).getStrNomIconeSource();
-                    String nomIconeAUtiliser = (nomIconeSource != null && !nomIconeSource.isEmpty()) ? nomIconeSource : strNomfichierHS;
-                    
+                    String nomIconeAUtiliser = (nomIconeSource != null && !nomIconeSource.isEmpty()) ? nomIconeSource
+                            : strNomfichierHS;
+
                     // DEBUG
                     System.out.println("🎨 DEBUG aperçu HS #" + io + ":");
                     System.out.println("  - nomIconeSource: " + nomIconeSource);
                     System.out.println("  - strNomfichierHS: " + strNomfichierHS);
                     System.out.println("  - nomIconeAUtiliser: " + nomIconeAUtiliser);
-                    
-                    File fileIconeDefaut = new File(getStrRepertAppli() + File.separator + "theme" + File.separator + "hotspots" + File.separator + nomIconeAUtiliser);
+
+                    File fileIconeDefaut = new File(getStrRepertAppli() + File.separator + "theme" + File.separator
+                            + "hotspots" + File.separator + nomIconeAUtiliser);
                     if (fileIconeDefaut.exists() && !strTypeHS.equals("gif")) {
                         Image imgDefaut = new Image("file:" + fileIconeDefaut.getAbsolutePath());
-                        
+
                         // Appliquer la couleur du hotspot
                         String couleurPersoHS = getPanoramiquesProjet()[iNumPano].getHotspot(io).getStrCouleurPerso();
                         Color couleurHS;
@@ -7269,13 +7654,12 @@ public class EditeurPanovisu extends Application {
                         } else {
                             couleurHS = Color.YELLOW;
                         }
-                        
+
                         WritableImage imgColoree = transformerCouleurHotspot(
-                            imgDefaut,
-                            couleurHS.getHue(),
-                            couleurHS.getSaturation(),
-                            couleurHS.getBrightness()
-                        );
+                                imgDefaut,
+                                couleurHS.getHue(),
+                                couleurHS.getSaturation(),
+                                couleurHS.getBrightness());
                         ivApercuIconeHS.setImage(imgColoree);
                     } else if (fileIconeDefaut.exists()) {
                         // Pour les GIF, afficher sans transformation
@@ -7285,32 +7669,35 @@ public class EditeurPanovisu extends Application {
                     // Ignorer
                 }
             }
-            
+
             Label lblTexteHS = new Label(rbLocalisation.getString("main.texteHotspot"));
             lblTexteHS.setTranslateX(10);
             TextField tfTexteHS = new TextField();
             if (getPanoramiquesProjet()[iNumPano].getHotspot(io).getStrInfo() != null) {
                 tfTexteHS.setText(getPanoramiquesProjet()[iNumPano].getHotspot(io).getStrInfo());
             }
-            tfTexteHS.textProperty().addListener((@SuppressWarnings("unused") final ObservableValue<? extends String> observable, @SuppressWarnings("unused") final String oldValue, @SuppressWarnings("unused") final String newValue) -> {
-                valideHS();
-            });
+            tfTexteHS.textProperty()
+                    .addListener((@SuppressWarnings("unused") final ObservableValue<? extends String> observable,
+                            @SuppressWarnings("unused") final String oldValue,
+                            @SuppressWarnings("unused") final String newValue) -> {
+                        valideHS();
+                    });
 
             tfTexteHS.setId("txtHS" + io);
             tfTexteHS.setPrefSize(200, 25);
             tfTexteHS.setMaxSize(200, 20);
             tfTexteHS.setTranslateX(60);
-            
+
             vbPanneauHS.getChildren().addAll(ivApercuIconeHS, lblTexteHS, tfTexteHS);
-            
+
             // === SECTION PERSONNALISATION PLIABLE ===
             // Créer le VBox pour contenir tous les éléments de personnalisation
             final VBox vbPersonnalisation = new VBox(5);
             vbPersonnalisation.setTranslateX(5);
             vbPersonnalisation.setId("vbPerso" + io);
-            vbPersonnalisation.setVisible(false);  // Masqué par défaut
-            vbPersonnalisation.setManaged(false);  // Ne prend pas de place quand masqué
-            
+            vbPersonnalisation.setVisible(false); // Masqué par défaut
+            vbPersonnalisation.setManaged(false); // Ne prend pas de place quand masqué
+
             // Bouton pour plier/déplier la section avec le label
             HBox hboxTitrePerso = new HBox(5);
             hboxTitrePerso.setTranslateX(5);
@@ -7321,35 +7708,36 @@ public class EditeurPanovisu extends Application {
             Label lblTitrePerso = new Label(rbLocalisation.getString("main.personnalisation"));
             lblTitrePerso.setStyle("-fx-font-weight: bold;");
             hboxTitrePerso.getChildren().addAll(lblBtnPerso, lblTitrePerso);
-            
+
             // Hauteurs des panes (base + personnalisation)
-            final double hauteurBase = 400;  // Hauteur de base sans personnalisation (augmenté de 270 à 390, puis 400)
-            final double hauteurPersonnalisation = 310;  // Hauteur supplémentaire pour personnalisation
-            
+            final double hauteurBase = 400; // Hauteur de base sans personnalisation (augmenté de 270 à 390, puis 400)
+            final double hauteurPersonnalisation = 310; // Hauteur supplémentaire pour personnalisation
+
             // Référence finale pour utilisation dans la lambda
             final Pane paneFinal = paneHsPanoramique;
-            
+
             // Action pour plier/déplier
-            javafx.event.EventHandler<javafx.scene.input.MouseEvent> togglePerso = (javafx.scene.input.MouseEvent evt) -> {
+            javafx.event.EventHandler<javafx.scene.input.MouseEvent> togglePerso = (
+                    javafx.scene.input.MouseEvent evt) -> {
                 // IMPORTANT: Consommer l'événement pour éviter la double détection
                 evt.consume();
-                
+
                 javafx.application.Platform.runLater(() -> {
                     boolean estVisible = vbPersonnalisation.isVisible();
-                    
+
                     // Toggle la visibilité
                     vbPersonnalisation.setVisible(!estVisible);
                     vbPersonnalisation.setManaged(!estVisible);
-                    
+
                     // Changer le texte du bouton
                     lblBtnPerso.setText(estVisible ? "+" : "-");
-                    
+
                     // Adapter la hauteur du pane
                     double nouvelleHauteur = estVisible ? hauteurBase : (hauteurBase + hauteurPersonnalisation);
                     paneFinal.setPrefHeight(nouvelleHauteur);
                     paneFinal.setMinHeight(nouvelleHauteur);
                     paneFinal.setMaxHeight(nouvelleHauteur);
-                    
+
                     // Forcer le recalcul du layout sur tous les parents
                     vbPanneauHS.requestLayout();
                     paneFinal.requestLayout();
@@ -7358,37 +7746,38 @@ public class EditeurPanovisu extends Application {
                     }
                 });
             };
-            
+
             // N'attacher le handler QUE sur le HBox pour éviter la double détection
             hboxTitrePerso.setOnMouseClicked(togglePerso);
-            
+
             // Separator
             Separator sepPerso = new Separator(Orientation.HORIZONTAL);
             sepPerso.setPrefWidth(300);
             sepPerso.setTranslateX(5);
-            
+
             // Label pour choisir l'image de l'icône
             Label lblImageIcone = new Label(rbLocalisation.getString("main.imageIcone"));
             lblImageIcone.setTranslateX(5);
-            
+
             // Button et ImageView pour l'image de l'icône
             Button btnChoisirIcone = new Button(rbLocalisation.getString("main.choisirImageIcone"));
             btnChoisirIcone.setId("btnIcone" + io);
             btnChoisirIcone.setTranslateX(5);
             btnChoisirIcone.setPrefWidth(200);
-            
+
             ImageView ivIconeActuelle = new ImageView();
             ivIconeActuelle.setId("ivIcone" + io);
             ivIconeActuelle.setFitWidth(32);
             ivIconeActuelle.setFitHeight(32);
             ivIconeActuelle.setPreserveRatio(true);
             ivIconeActuelle.setTranslateX(210);
-            
+
             // Charger l'image actuelle du hotspot si elle existe
             String fichierImageHS = getPanoramiquesProjet()[iNumPano].getHotspot(io).getStrFichierImage();
             if (fichierImageHS != null && !fichierImageHS.isEmpty()) {
                 try {
-                    File fileIconeHS = new File(getStrRepertTemp() + File.separator + "images" + File.separator + fichierImageHS);
+                    File fileIconeHS = new File(
+                            getStrRepertTemp() + File.separator + "images" + File.separator + fichierImageHS);
                     if (fileIconeHS.exists()) {
                         ivIconeActuelle.setImage(new Image("file:" + fileIconeHS.getAbsolutePath()));
                     }
@@ -7398,7 +7787,8 @@ public class EditeurPanovisu extends Application {
             } else {
                 // Afficher l'icône par défaut
                 try {
-                    File fileIconeDefaut = new File(getStrRepertAppli() + File.separator + "theme" + File.separator + "hotspots" + File.separator + strNomfichierHS);
+                    File fileIconeDefaut = new File(getStrRepertAppli() + File.separator + "theme" + File.separator
+                            + "hotspots" + File.separator + strNomfichierHS);
                     if (fileIconeDefaut.exists()) {
                         ivIconeActuelle.setImage(new Image("file:" + fileIconeDefaut.getAbsolutePath()));
                     }
@@ -7406,11 +7796,11 @@ public class EditeurPanovisu extends Application {
                     // Ignorer
                 }
             }
-            
+
             HBox hboxImageIcone = new HBox(5);
             hboxImageIcone.setTranslateX(5);
             hboxImageIcone.getChildren().addAll(btnChoisirIcone, ivIconeActuelle);
-            
+
             // ComboBox pour le type d'animation (déplacé ici pour être avant le bouton)
             Label lblTypeAnimation = new Label(rbLocalisation.getString("main.typeAnimation"));
             lblTypeAnimation.setTranslateX(10);
@@ -7419,29 +7809,28 @@ public class EditeurPanovisu extends Application {
             cbTypeAnimation.setTranslateX(10);
             cbTypeAnimation.setPrefWidth(200);
             cbTypeAnimation.getItems().addAll(
-                "none",
-                "pulse",
-                "rotation", 
-                "desaturation",
-                "bounce",
-                "swing",
-                "glow",
-                "heartbeat",
-                "shake",
-                "flip",
-                "wobble",
-                "tada",
-                "flash",
-                "rubber",
-                "jello",
-                "neon",
-                "float"
-            );
+                    "none",
+                    "pulse",
+                    "rotation",
+                    "desaturation",
+                    "bounce",
+                    "swing",
+                    "glow",
+                    "heartbeat",
+                    "shake",
+                    "flip",
+                    "wobble",
+                    "tada",
+                    "flash",
+                    "rubber",
+                    "jello",
+                    "neon",
+                    "float");
             cbTypeAnimation.setValue(getPanoramiquesProjet()[iNumPano].getHotspot(io).getStrTypeAnimation());
             cbTypeAnimation.valueProperty().addListener((obs, oldVal, newVal) -> {
                 valideHS();
             });
-            
+
             // CheckBox pour Agrandissement au survol
             CheckBox cbAgrandit = new CheckBox(rbLocalisation.getString("main.agrandissementSurvol"));
             cbAgrandit.setId("agranditSurvol" + io);
@@ -7450,19 +7839,19 @@ public class EditeurPanovisu extends Application {
             cbAgrandit.selectedProperty().addListener((obs, oldVal, newVal) -> {
                 valideHS();
             });
-            
+
             // Label et ColorPicker pour couleur personnalisée (déplacé ici)
             Label lblCouleurPerso = new Label(rbLocalisation.getString("main.couleurPersonnalisee"));
             lblCouleurPerso.setPrefHeight(29);
             lblCouleurPerso.setMaxHeight(29);
             lblCouleurPerso.setPrefWidth(200);
             lblCouleurPerso.setTranslateX(10);
-            
+
             ColorPicker cpCouleurPerso = new ColorPicker();
             cpCouleurPerso.setId("couleurPerso" + io);
             cpCouleurPerso.setTranslateX(10);
             cpCouleurPerso.setPrefWidth(160);
-            
+
             // ImageView pour l'aperçu du hotspot avec la couleur
             ImageView ivApercuCouleur = new ImageView();
             ivApercuCouleur.setId("apercuCouleur" + io);
@@ -7470,19 +7859,19 @@ public class EditeurPanovisu extends Application {
             ivApercuCouleur.setFitHeight(32);
             ivApercuCouleur.setPreserveRatio(true);
             ivApercuCouleur.setTranslateX(180);
-            
+
             // Charger l'image du hotspot panoramique
             String strNomHotspot = strNomfichierHS;
             String strTypeHotspot = strTypeHS;
-            
+
             // IMPORTANT: Charger l'image source spécifique à ce hotspot
             String fichierImagePerso = getPanoramiquesProjet()[iNumPano].getHotspot(io).getStrFichierImage();
             Image imgHotspotOriginal = null;
-            
+
             System.out.println("=== DEBUG Hotspot #" + io + " ===");
             System.out.println("Fichier image personnalisée: " + fichierImagePerso);
             System.out.println("Icône par défaut: " + strNomHotspot);
-            
+
             // Vérifier d'abord si le hotspot a déjà une image source stockée
             Image imgSourceStockee = getPanoramiquesProjet()[iNumPano].getHotspot(io).getImgIconeSource();
             if (imgSourceStockee != null) {
@@ -7492,17 +7881,21 @@ public class EditeurPanovisu extends Application {
             // Sinon, essayer de charger l'image personnalisée
             else if (fichierImagePerso != null && !fichierImagePerso.isEmpty()) {
                 try {
-                    File filePerso = new File(getStrRepertTemp() + File.separator + "images" + File.separator + fichierImagePerso);
+                    File filePerso = new File(
+                            getStrRepertTemp() + File.separator + "images" + File.separator + fichierImagePerso);
                     if (filePerso.exists()) {
                         Image imgTemp = new Image("file:" + filePerso.getAbsolutePath());
                         // Vérifier que l'image est valide
                         if (!imgTemp.isError() && imgTemp.getWidth() > 0 && imgTemp.getHeight() > 0) {
                             imgHotspotOriginal = imgTemp;
-                            System.out.println("Image personnalisée chargée: " + filePerso.getAbsolutePath() + " (" + imgTemp.getWidth() + "x" + imgTemp.getHeight() + ")");
+                            System.out.println("Image personnalisée chargée: " + filePerso.getAbsolutePath() + " ("
+                                    + imgTemp.getWidth() + "x" + imgTemp.getHeight() + ")");
                             // Stocker l'image source dans le hotspot pour utilisation future
                             getPanoramiquesProjet()[iNumPano].getHotspot(io).setImgIconeSource(imgHotspotOriginal);
                         } else {
-                            System.err.println("⚠️ Image personnalisée invalide: " + filePerso.getAbsolutePath() + " (error=" + imgTemp.isError() + ", w=" + imgTemp.getWidth() + ", h=" + imgTemp.getHeight() + ")");
+                            System.err.println("⚠️ Image personnalisée invalide: " + filePerso.getAbsolutePath()
+                                    + " (error=" + imgTemp.isError() + ", w=" + imgTemp.getWidth() + ", h="
+                                    + imgTemp.getHeight() + ")");
                         }
                     } else {
                         System.out.println("Fichier personnalisé introuvable: " + filePerso.getAbsolutePath());
@@ -7511,31 +7904,36 @@ public class EditeurPanovisu extends Application {
                     System.err.println("Erreur chargement image personnalisée: " + e.getMessage());
                 }
             }
-            
+
             // Si toujours pas d'image, charger l'image par défaut
             if (imgHotspotOriginal == null && strTypeHotspot != null && !strTypeHotspot.equals("gif")) {
                 try {
-                    File fileHotspot = new File(getStrRepertAppli() + File.separator + "theme" + File.separator + "hotspots" + File.separator + strNomHotspot);
+                    File fileHotspot = new File(getStrRepertAppli() + File.separator + "theme" + File.separator
+                            + "hotspots" + File.separator + strNomHotspot);
                     if (fileHotspot.exists()) {
                         Image imgTemp = new Image("file:" + fileHotspot.getAbsolutePath());
                         // Vérifier que l'image est valide
                         if (!imgTemp.isError() && imgTemp.getWidth() > 0 && imgTemp.getHeight() > 0) {
                             imgHotspotOriginal = imgTemp;
-                            System.out.println("Image par défaut chargée: " + fileHotspot.getAbsolutePath() + " (" + imgTemp.getWidth() + "x" + imgTemp.getHeight() + ")");
+                            System.out.println("Image par défaut chargée: " + fileHotspot.getAbsolutePath() + " ("
+                                    + imgTemp.getWidth() + "x" + imgTemp.getHeight() + ")");
                             // Stocker l'image source dans le hotspot
                             getPanoramiquesProjet()[iNumPano].getHotspot(io).setImgIconeSource(imgHotspotOriginal);
                         } else {
-                            System.err.println("⚠️ Image par défaut invalide: " + fileHotspot.getAbsolutePath() + " (error=" + imgTemp.isError() + ", w=" + imgTemp.getWidth() + ", h=" + imgTemp.getHeight() + ")");
+                            System.err.println("⚠️ Image par défaut invalide: " + fileHotspot.getAbsolutePath()
+                                    + " (error=" + imgTemp.isError() + ", w=" + imgTemp.getWidth() + ", h="
+                                    + imgTemp.getHeight() + ")");
                         }
                     } else {
-                        System.err.println("⚠️ Fichier hotspot par défaut introuvable: " + fileHotspot.getAbsolutePath());
+                        System.err
+                                .println("⚠️ Fichier hotspot par défaut introuvable: " + fileHotspot.getAbsolutePath());
                     }
                 } catch (Exception e) {
                     System.err.println("Erreur chargement image par défaut: " + e.getMessage());
                     e.printStackTrace();
                 }
             }
-            
+
             // Initialiser la couleur depuis le hotspot
             String couleurPerso = getPanoramiquesProjet()[iNumPano].getHotspot(io).getStrCouleurPerso();
             Color couleurInitiale;
@@ -7557,15 +7955,14 @@ public class EditeurPanovisu extends Application {
                 couleurInitiale = Color.YELLOW; // Couleur par défaut
             }
             cpCouleurPerso.setValue(couleurInitiale);
-            
+
             // Appliquer la couleur initiale à l'aperçu
             if (imgHotspotOriginal != null) {
                 WritableImage imgApercuColoree = transformerCouleurHotspot(
-                    imgHotspotOriginal,
-                    couleurInitiale.getHue(),
-                    couleurInitiale.getSaturation(),
-                    couleurInitiale.getBrightness()
-                );
+                        imgHotspotOriginal,
+                        couleurInitiale.getHue(),
+                        couleurInitiale.getSaturation(),
+                        couleurInitiale.getBrightness());
                 if (imgApercuColoree != null) {
                     ivApercuCouleur.setImage(imgApercuColoree);
                 } else {
@@ -7574,146 +7971,154 @@ public class EditeurPanovisu extends Application {
             } else {
                 System.err.println("⚠️ Image hotspot original null pour hotspot #" + io);
             }
-            
+
             // Mettre à jour l'aperçu quand la couleur change
             final int iNumHS = io;
             cpCouleurPerso.valueProperty().addListener((obs, oldVal, newVal) -> {
                 System.out.println("\n=== Changement couleur Hotspot #" + iNumHS + " ===");
                 System.out.println("Ancienne couleur: " + oldVal);
                 System.out.println("Nouvelle couleur: " + newVal);
-                
+
                 // DEBUG: Afficher le fichier actuellement enregistré dans le hotspot
                 String fichierActuel = getPanoramiquesProjet()[iNumPano].getHotspot(iNumHS).getStrFichierImage();
                 System.out.println("Fichier image dans hotspot AVANT changement: '" + fichierActuel + "'");
-                
-                // IMPORTANT: Récupérer l'image source depuis le hotspot (pas depuis la variable locale!)
+
+                // IMPORTANT: Récupérer l'image source depuis le hotspot (pas depuis la variable
+                // locale!)
                 Image imgSourceDuHotspot = getPanoramiquesProjet()[iNumPano].getHotspot(iNumHS).getImgIconeSource();
-                
+
                 // DEBUG: Afficher quelle image est utilisée pour la transformation
-                System.out.println("Image source pour transformation: " + (imgSourceDuHotspot != null ? "Image du hotspot" : "NULL"));
+                System.out.println("Image source pour transformation: "
+                        + (imgSourceDuHotspot != null ? "Image du hotspot" : "NULL"));
                 if (imgSourceDuHotspot != null) {
-                    System.out.println("  Dimensions: " + imgSourceDuHotspot.getWidth() + "x" + imgSourceDuHotspot.getHeight());
+                    System.out.println(
+                            "  Dimensions: " + imgSourceDuHotspot.getWidth() + "x" + imgSourceDuHotspot.getHeight());
                 }
-                
+
                 if (imgSourceDuHotspot != null && newVal != null) {
                     WritableImage imgApercuColoree = transformerCouleurHotspot(
-                        imgSourceDuHotspot,
-                        newVal.getHue(),
-                        newVal.getSaturation(),
-                        newVal.getBrightness()
-                    );
+                            imgSourceDuHotspot,
+                            newVal.getHue(),
+                            newVal.getSaturation(),
+                            newVal.getBrightness());
                     ivApercuCouleur.setImage(imgApercuColoree);
-                    
+
                     // Mettre à jour aussi l'aperçu toujours visible en haut de la case
                     ImageView ivApercuHS = (ImageView) vbPanneauHS.lookup("#ivApercuHS" + iNumHS);
                     if (ivApercuHS != null) {
                         ivApercuHS.setImage(imgApercuColoree);
                     }
-                    
+
                     // Sauvegarder l'icône colorée et stocker le nom du fichier
                     String nomFichier = sauvegardeIconeHotspot(imgApercuColoree, "hs", iNumHS, iNumPano);
                     System.out.println("Fichier sauvegardé: " + nomFichier);
-                    
+
                     if (nomFichier != null) {
                         getPanoramiquesProjet()[iNumPano].getHotspot(iNumHS).setStrFichierImage(nomFichier);
                         System.out.println("Nom fichier stocké dans hotspot #" + iNumHS);
-                        
+
                         // DEBUG: Vérifier immédiatement
                         String verification = getPanoramiquesProjet()[iNumPano].getHotspot(iNumHS).getStrFichierImage();
-                        System.out.println("Vérification immédiate - Fichier dans hotspot APRES: '" + verification + "'");
+                        System.out
+                                .println("Vérification immédiate - Fichier dans hotspot APRES: '" + verification + "'");
                     } else {
                         System.err.println("ERREUR: Nom de fichier NULL!");
                     }
                 } else {
-                    System.err.println("ERREUR: Image ou couleur NULL - imgSourceDuHotspot=" + imgSourceDuHotspot + ", newVal=" + newVal);
+                    System.err.println("ERREUR: Image ou couleur NULL - imgSourceDuHotspot=" + imgSourceDuHotspot
+                            + ", newVal=" + newVal);
                 }
                 valideHS();
             });
-            
-            // Action du bouton pour choisir une nouvelle icône (maintenant après les ColorPicker)
+
+            // Action du bouton pour choisir une nouvelle icône (maintenant après les
+            // ColorPicker)
             final int iNumHotspot = io;
             btnChoisirIcone.setOnAction((@SuppressWarnings("unused") ActionEvent e) -> {
                 FileChooser fileChooser = new FileChooser();
                 fileChooser.setTitle(rbLocalisation.getString("main.choisirImageIcone"));
-                
+
                 // Définir le répertoire initial : theme/hotspots pour les HS panoramiques
-                File repertoireInitial = new File(getStrRepertAppli() + File.separator + "theme" + File.separator + "hotspots");
+                File repertoireInitial = new File(
+                        getStrRepertAppli() + File.separator + "theme" + File.separator + "hotspots");
                 if (repertoireInitial.exists() && repertoireInitial.isDirectory()) {
                     fileChooser.setInitialDirectory(repertoireInitial);
                 }
-                
+
                 // Limiter aux fichiers PNG uniquement
                 fileChooser.getExtensionFilters().add(
-                    new FileChooser.ExtensionFilter("PNG", "*.png")
-                );
-                
+                        new FileChooser.ExtensionFilter("PNG", "*.png"));
+
                 File fileChoisi = fileChooser.showOpenDialog(null);
                 if (fileChoisi != null) {
                     System.out.println("\n=== Sélection nouvelle icône Hotspot #" + iNumHotspot + " ===");
                     System.out.println("Fichier choisi: " + fileChoisi.getAbsolutePath());
-                    
+
                     // DEBUG: Afficher l'état AVANT le changement
-                    String fichierAvant = getPanoramiquesProjet()[iNumPano].getHotspot(iNumHotspot).getStrFichierImage();
+                    String fichierAvant = getPanoramiquesProjet()[iNumPano].getHotspot(iNumHotspot)
+                            .getStrFichierImage();
                     System.out.println("strFichierImage AVANT chargement: '" + fichierAvant + "'");
-                    
+
                     try {
                         // Vérifier que le fichier source existe
                         if (!fileChoisi.exists()) {
                             System.err.println("⚠️ Fichier source introuvable : " + fileChoisi.getAbsolutePath());
                             return;
                         }
-                        
+
                         // Charger l'image
                         Image imgChoisie = new Image("file:" + fileChoisi.getAbsolutePath());
                         System.out.println("Image chargée: " + imgChoisie.getWidth() + "x" + imgChoisie.getHeight());
-                        
+
                         // IMPORTANT: Stocker l'image source dans le hotspot
                         getPanoramiquesProjet()[iNumPano].getHotspot(iNumHotspot).setImgIconeSource(imgChoisie);
                         System.out.println("Image source stockée dans le hotspot #" + iNumHotspot);
-                        
+
                         // Stocker le nom du fichier source original (sans chemin complet)
                         String nomFichierSource = fileChoisi.getName();
-                        getPanoramiquesProjet()[iNumPano].getHotspot(iNumHotspot).setStrNomIconeSource(nomFichierSource);
+                        getPanoramiquesProjet()[iNumPano].getHotspot(iNumHotspot)
+                                .setStrNomIconeSource(nomFichierSource);
                         System.out.println("Nom fichier source stocké: " + nomFichierSource);
-                        
+
                         // Obtenir la couleur actuelle du ColorPicker
                         Color couleurActuelle = cpCouleurPerso.getValue();
                         System.out.println("Couleur actuelle: " + couleurActuelle);
-                        
+
                         // Appliquer la couleur à l'image
                         WritableImage imgColoree = transformerCouleurHotspot(
-                            imgChoisie,
-                            couleurActuelle.getHue(),
-                            couleurActuelle.getSaturation(),
-                            couleurActuelle.getBrightness()
-                        );
-                        
+                                imgChoisie,
+                                couleurActuelle.getHue(),
+                                couleurActuelle.getSaturation(),
+                                couleurActuelle.getBrightness());
+
                         // Sauvegarder l'image colorée
                         String nomFichier = sauvegardeIconeHotspot(imgColoree, "hs", iNumHotspot, iNumPano);
                         System.out.println("Fichier sauvegardé: " + nomFichier);
-                        
+
                         if (nomFichier != null) {
                             // Mettre à jour l'ImageView avec l'image colorée
                             ivIconeActuelle.setImage(imgColoree);
-                            
+
                             // Mettre à jour l'aperçu de couleur aussi
                             ivApercuCouleur.setImage(imgColoree);
-                            
+
                             // Mettre à jour aussi l'aperçu toujours visible en haut de la case
                             ImageView ivApercuHS = (ImageView) vbPanneauHS.lookup("#ivApercuHS" + iNumHotspot);
                             if (ivApercuHS != null) {
                                 ivApercuHS.setImage(imgColoree);
                             }
-                            
+
                             // Sauvegarder le nom du fichier dans le hotspot
                             getPanoramiquesProjet()[iNumPano].getHotspot(iNumHotspot).setStrFichierImage(nomFichier);
                             System.out.println("Nom fichier stocké dans hotspot #" + iNumHotspot);
-                            
+
                             // DEBUG: Vérifier immédiatement APRES
-                            String fichierApres = getPanoramiquesProjet()[iNumPano].getHotspot(iNumHotspot).getStrFichierImage();
+                            String fichierApres = getPanoramiquesProjet()[iNumPano].getHotspot(iNumHotspot)
+                                    .getStrFichierImage();
                             System.out.println("strFichierImage APRES chargement: '" + fichierApres + "'");
-                            System.out.println("Comparaison: AVANT='" + fichierAvant + "' vs APRES='" + fichierApres + "'");
-                            
+                            System.out.println(
+                                    "Comparaison: AVANT='" + fichierAvant + "' vs APRES='" + fichierApres + "'");
+
                             valideHS();
                             setbDejaSauve(false);
                             getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
@@ -7726,24 +8131,23 @@ public class EditeurPanovisu extends Application {
                     }
                 }
             });
-            
+
             // Créer un HBox pour aligner le ColorPicker et l'aperçu
             HBox hboxCouleur = new HBox(10);
             hboxCouleur.setTranslateX(10);
             hboxCouleur.getChildren().addAll(cpCouleurPerso, ivApercuCouleur);
-            
+
             // Ajouter tous les éléments de personnalisation dans le VBox pliable
             vbPersonnalisation.getChildren().addAll(
-                sepPerso,
-                lblImageIcone,
-                hboxImageIcone,
-                lblTypeAnimation,
-                cbTypeAnimation,
-                cbAgrandit,
-                lblCouleurPerso,
-                hboxCouleur
-            );
-            
+                    sepPerso,
+                    lblImageIcone,
+                    hboxImageIcone,
+                    lblTypeAnimation,
+                    cbTypeAnimation,
+                    cbAgrandit,
+                    lblCouleurPerso,
+                    hboxCouleur);
+
             // Ajouter les éléments au panneau principal
             vbPanneauHS.getChildren().addAll(hboxTitrePerso, vbPersonnalisation, lblSep1);
             vbHotspots.getChildren().addAll(paneHsPanoramique, lblSep);
@@ -7758,18 +8162,19 @@ public class EditeurPanovisu extends Application {
             VBox vbPanneauHsImage = new VBox();
             Pane paneHsImage = new Pane(vbPanneauHsImage);
             int iNum = io;
-            Timeline timBouge = new Timeline(new KeyFrame(Duration.millis(500), (@SuppressWarnings("unused") ActionEvent event) -> {
-                Circle c1 = (Circle) panePanoramique.lookup("#img" + iNum);
-                if (c1 != null) {
-                    if (c1.getFill() == Color.BLUE) {
-                        c1.setFill(Color.YELLOW);
-                        c1.setStroke(Color.BLUE);
-                    } else {
-                        c1.setFill(Color.BLUE);
-                        c1.setStroke(Color.YELLOW);
-                    }
-                }
-            }));
+            Timeline timBouge = new Timeline(
+                    new KeyFrame(Duration.millis(500), (@SuppressWarnings("unused") ActionEvent event) -> {
+                        Circle c1 = (Circle) panePanoramique.lookup("#img" + iNum);
+                        if (c1 != null) {
+                            if (c1.getFill() == Color.BLUE) {
+                                c1.setFill(Color.YELLOW);
+                                c1.setStroke(Color.BLUE);
+                            } else {
+                                c1.setFill(Color.BLUE);
+                                c1.setStroke(Color.YELLOW);
+                            }
+                        }
+                    }));
             timBouge.setCycleCount(Timeline.INDEFINITE);
             timBouge.pause();
             paneHsImage.setOnMouseEntered((e) -> {
@@ -7799,7 +8204,8 @@ public class EditeurPanovisu extends Application {
             lblLien.setTranslateX(10);
 
             String strF1XML = getPanoramiquesProjet()[iNumPano].getHotspotImage(io).getStrLienImg();
-            Image imgChoisie = new Image("file:" + getStrRepertTemp() + File.separator + "images" + File.separator + strF1XML);
+            Image imgChoisie = new Image(
+                    "file:" + getStrRepertTemp() + File.separator + "images" + File.separator + strF1XML);
             ImageView ivChoisie = new ImageView(imgChoisie);
             ivChoisie.setTranslateX(100);
             ivChoisie.setFitWidth(100);
@@ -7813,15 +8219,18 @@ public class EditeurPanovisu extends Application {
             if (getPanoramiquesProjet()[iNumPano].getHotspotImage(io).getStrInfo() != null) {
                 tfTexteHS.setText(getPanoramiquesProjet()[iNumPano].getHotspotImage(io).getStrInfo());
             }
-            tfTexteHS.textProperty().addListener((@SuppressWarnings("unused") final ObservableValue<? extends String> observable, @SuppressWarnings("unused") final String oldValue, @SuppressWarnings("unused") final String newValue) -> {
-                valideHS();
-            });
+            tfTexteHS.textProperty()
+                    .addListener((@SuppressWarnings("unused") final ObservableValue<? extends String> observable,
+                            @SuppressWarnings("unused") final String oldValue,
+                            @SuppressWarnings("unused") final String newValue) -> {
+                        valideHS();
+                    });
 
             tfTexteHS.setId("txtHSImage" + io);
             tfTexteHS.setPrefSize(200, 25);
             tfTexteHS.setMaxSize(200, 20);
             tfTexteHS.setTranslateX(60);
-            
+
             // ComboBox pour le type d'animation
             Label lblTypeAnimationImage = new Label(rbLocalisation.getString("main.typeAnimation"));
             lblTypeAnimationImage.setTranslateX(10);
@@ -7830,29 +8239,28 @@ public class EditeurPanovisu extends Application {
             cbTypeAnimationImage.setTranslateX(10);
             cbTypeAnimationImage.setPrefWidth(200);
             cbTypeAnimationImage.getItems().addAll(
-                "none",
-                "pulse",
-                "rotation", 
-                "desaturation",
-                "bounce",
-                "swing",
-                "glow",
-                "heartbeat",
-                "shake",
-                "flip",
-                "wobble",
-                "tada",
-                "flash",
-                "rubber",
-                "jello",
-                "neon",
-                "float"
-            );
+                    "none",
+                    "pulse",
+                    "rotation",
+                    "desaturation",
+                    "bounce",
+                    "swing",
+                    "glow",
+                    "heartbeat",
+                    "shake",
+                    "flip",
+                    "wobble",
+                    "tada",
+                    "flash",
+                    "rubber",
+                    "jello",
+                    "neon",
+                    "float");
             cbTypeAnimationImage.setValue(getPanoramiquesProjet()[iNumPano].getHotspotImage(io).getStrTypeAnimation());
             cbTypeAnimationImage.valueProperty().addListener((obs, oldVal, newVal) -> {
                 valideHS();
             });
-            
+
             // CheckBox pour Agrandissement au survol
             CheckBox cbAgranditImage = new CheckBox(rbLocalisation.getString("main.agrandissementSurvol"));
             cbAgranditImage.setId("agranditSurvolImage" + io);
@@ -7861,19 +8269,19 @@ public class EditeurPanovisu extends Application {
             cbAgranditImage.selectedProperty().addListener((obs, oldVal, newVal) -> {
                 valideHS();
             });
-            
+
             // Label et ColorPicker pour couleur personnalisée hotspot
             Label lblCouleurPersoImage = new Label(rbLocalisation.getString("main.couleurPersonnalisee"));
             lblCouleurPersoImage.setPrefHeight(29);
             lblCouleurPersoImage.setMaxHeight(29);
             lblCouleurPersoImage.setPrefWidth(200);
             lblCouleurPersoImage.setTranslateX(10);
-            
+
             ColorPicker cpCouleurPersoImage = new ColorPicker();
             cpCouleurPersoImage.setId("couleurPersoImage" + io);
             cpCouleurPersoImage.setTranslateX(10);
             cpCouleurPersoImage.setPrefWidth(160);
-            
+
             // ImageView pour l'aperçu du hotspot image avec la couleur
             ImageView ivApercuCouleurImage = new ImageView();
             ivApercuCouleurImage.setId("apercuCouleurImage" + io);
@@ -7881,22 +8289,25 @@ public class EditeurPanovisu extends Application {
             ivApercuCouleurImage.setFitHeight(32);
             ivApercuCouleurImage.setPreserveRatio(true);
             ivApercuCouleurImage.setTranslateX(180);
-            
+
             // Charger l'image du hotspot image - utiliser l'icône source si disponible
             String nomIconeSourceImage = getPanoramiquesProjet()[iNumPano].getHotspotImage(io).getStrNomIconeSource();
-            String strNomHotspotImage = (nomIconeSourceImage != null && !nomIconeSourceImage.isEmpty()) ? nomIconeSourceImage : strNomfichierHSImage;
-            
+            String strNomHotspotImage = (nomIconeSourceImage != null && !nomIconeSourceImage.isEmpty())
+                    ? nomIconeSourceImage
+                    : strNomfichierHSImage;
+
             // DEBUG
             System.out.println("🎨 DEBUG aperçu HotspotImage #" + io + ":");
             System.out.println("  - nomIconeSourceImage: " + nomIconeSourceImage);
             System.out.println("  - strNomfichierHSImage: " + strNomfichierHSImage);
             System.out.println("  - strNomHotspotImage utilisé: " + strNomHotspotImage);
-            
+
             String strTypeHotspotImage = strTypeHSImage;
             Image imgHotspotImageOriginal = null;
             if (strTypeHotspotImage != null && !strTypeHotspotImage.equals("gif")) {
                 try {
-                    File fileHotspotImage = new File(getStrRepertAppli() + File.separator + "theme" + File.separator + "hotspots" + File.separator + strNomHotspotImage);
+                    File fileHotspotImage = new File(getStrRepertAppli() + File.separator + "theme" + File.separator
+                            + "hotspots" + File.separator + strNomHotspotImage);
                     if (fileHotspotImage.exists()) {
                         imgHotspotImageOriginal = new Image("file:" + fileHotspotImage.getAbsolutePath());
                     }
@@ -7904,11 +8315,11 @@ public class EditeurPanovisu extends Application {
                     // Ignorer les erreurs de chargement
                 }
             }
-            
+
             // Stocker l'image dans l'objet hotspot pour utilisation ultérieure
             getPanoramiquesProjet()[iNumPano].getHotspotImage(io).setImgIconeSource(imgHotspotImageOriginal);
             System.out.println("Image source stockée dans objet HotspotImage #" + io);
-            
+
             // Initialiser la couleur depuis le hotspot
             String couleurPersoImage = getPanoramiquesProjet()[iNumPano].getHotspotImage(io).getStrCouleurPerso();
             Color couleurInitialeImage;
@@ -7930,31 +8341,29 @@ public class EditeurPanovisu extends Application {
                 couleurInitialeImage = Color.RED; // Couleur par défaut pour images
             }
             cpCouleurPersoImage.setValue(couleurInitialeImage);
-            
+
             // Appliquer la couleur initiale à l'aperçu
             if (imgHotspotImageOriginal != null) {
                 WritableImage imgApercuColoreeImage = transformerCouleurHotspot(
-                    imgHotspotImageOriginal,
-                    couleurInitialeImage.getHue(),
-                    couleurInitialeImage.getSaturation(),
-                    couleurInitialeImage.getBrightness()
-                );
+                        imgHotspotImageOriginal,
+                        couleurInitialeImage.getHue(),
+                        couleurInitialeImage.getSaturation(),
+                        couleurInitialeImage.getBrightness());
                 ivApercuCouleurImage.setImage(imgApercuColoreeImage);
             }
-            
+
             // Mettre à jour l'aperçu quand la couleur change
             Image imgHotspotImageFinal = imgHotspotImageOriginal;
             final int iNumHSImage = io;
             cpCouleurPersoImage.valueProperty().addListener((obs, oldVal, newVal) -> {
                 if (imgHotspotImageFinal != null && newVal != null) {
                     WritableImage imgApercuColoreeImage = transformerCouleurHotspot(
-                        imgHotspotImageFinal,
-                        newVal.getHue(),
-                        newVal.getSaturation(),
-                        newVal.getBrightness()
-                    );
+                            imgHotspotImageFinal,
+                            newVal.getHue(),
+                            newVal.getSaturation(),
+                            newVal.getBrightness());
                     ivApercuCouleurImage.setImage(imgApercuColoreeImage);
-                    
+
                     // Sauvegarder l'icône colorée et stocker le nom du fichier
                     String nomFichier = sauvegardeIconeHotspot(imgApercuColoreeImage, "hsImage", iNumHSImage, iNumPano);
                     if (nomFichier != null) {
@@ -7963,25 +8372,27 @@ public class EditeurPanovisu extends Application {
                 }
                 valideHS();
             });
-            
+
             // Créer un HBox pour aligner le ColorPicker et l'aperçu
             HBox hboxCouleurImage = new HBox(10);
             hboxCouleurImage.setTranslateX(10);
             hboxCouleurImage.getChildren().addAll(cpCouleurPersoImage, ivApercuCouleurImage);
-            
-            vbPanneauHsImage.getChildren().addAll(lblTexteHS, tfTexteHS, lblTypeAnimationImage, cbTypeAnimationImage, cbAgranditImage, lblCouleurPersoImage, hboxCouleurImage, lblSep1);
+
+            vbPanneauHsImage.getChildren().addAll(lblTexteHS, tfTexteHS, lblTypeAnimationImage, cbTypeAnimationImage,
+                    cbAgranditImage, lblCouleurPersoImage, hboxCouleurImage, lblSep1);
             Label lblCoulFond = new Label(rbLocalisation.getString("diapo.couleurFond"));
             lblCoulFond.setTranslateX(10);
             Label lblOpacite = new Label(rbLocalisation.getString("diapo.opacite"));
             lblOpacite.setTranslateX(10);
             if (getPanoramiquesProjet()[iNumPano].getHotspotImage(io).getStrCouleurFond().equals("")) {
                 getPanoramiquesProjet()[iNumPano].getHotspotImage(io).setStrCouleurFond(
-                        "#" + getGestionnaireInterface().getCouleurFondTheme().toString().substring(2, 8)
-                );
+                        "#" + getGestionnaireInterface().getCouleurFondTheme().toString().substring(2, 8));
             }
-            ColorPicker cpCouleurFond = new ColorPicker(Color.valueOf(getPanoramiquesProjet()[iNumPano].getHotspotImage(io).getStrCouleurFond()));
+            ColorPicker cpCouleurFond = new ColorPicker(
+                    Color.valueOf(getPanoramiquesProjet()[iNumPano].getHotspotImage(io).getStrCouleurFond()));
             if (getPanoramiquesProjet()[iNumPano].getHotspotImage(io).getOpacite() == -1) {
-                getPanoramiquesProjet()[iNumPano].getHotspotImage(io).setOpacite(getGestionnaireInterface().getOpaciteTheme());
+                getPanoramiquesProjet()[iNumPano].getHotspotImage(io)
+                        .setOpacite(getGestionnaireInterface().getOpaciteTheme());
             }
             cpCouleurFond.setTranslateX(100);
             int i = io;
@@ -7990,7 +8401,8 @@ public class EditeurPanovisu extends Application {
                     setbDejaSauve(false);
                     getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
                 }
-                getPanoramiquesProjet()[iNumPano].getHotspotImage(i).setStrCouleurFond("#" + cpCouleurFond.getValue().toString().substring(2, 8));
+                getPanoramiquesProjet()[iNumPano].getHotspotImage(i)
+                        .setStrCouleurFond("#" + cpCouleurFond.getValue().toString().substring(2, 8));
             });
             Slider slOpacite = new Slider(0, 1, getPanoramiquesProjet()[iNumPano].getHotspotImage(io).getOpacite());
             slOpacite.valueProperty().addListener((ov, av, nv) -> {
@@ -8020,19 +8432,20 @@ public class EditeurPanovisu extends Application {
             int iNum = io;
             VBox vbPanneauHS = new VBox();
             Pane paneHsHtml = new Pane(vbPanneauHS);
-            Timeline timBouge = new Timeline(new KeyFrame(Duration.millis(500), (@SuppressWarnings("unused") ActionEvent event) -> {
-                Circle c1 = (Circle) panePanoramique.lookup("#html" + iNum);
-                if (c1 != null) {
+            Timeline timBouge = new Timeline(
+                    new KeyFrame(Duration.millis(500), (@SuppressWarnings("unused") ActionEvent event) -> {
+                        Circle c1 = (Circle) panePanoramique.lookup("#html" + iNum);
+                        if (c1 != null) {
 
-                    if (c1.getFill() == Color.DARKGREEN) {
-                        c1.setFill(Color.YELLOWGREEN);
-                        c1.setStroke(Color.DARKGREEN);
-                    } else {
-                        c1.setFill(Color.DARKGREEN);
-                        c1.setStroke(Color.YELLOWGREEN);
-                    }
-                }
-            }));
+                            if (c1.getFill() == Color.DARKGREEN) {
+                                c1.setFill(Color.YELLOWGREEN);
+                                c1.setStroke(Color.DARKGREEN);
+                            } else {
+                                c1.setFill(Color.DARKGREEN);
+                                c1.setStroke(Color.YELLOWGREEN);
+                            }
+                        }
+                    }));
             timBouge.setCycleCount(Timeline.INDEFINITE);
             timBouge.pause();
             paneHsHtml.setOnMouseEntered((e) -> {
@@ -8061,15 +8474,18 @@ public class EditeurPanovisu extends Application {
             if (getPanoramiquesProjet()[iNumPano].getHotspotHTML(io).getStrInfo() != null) {
                 tfTexteHS.setText(getPanoramiquesProjet()[iNumPano].getHotspotHTML(io).getStrInfo());
             }
-            tfTexteHS.textProperty().addListener((@SuppressWarnings("unused") final ObservableValue<? extends String> observable, @SuppressWarnings("unused") final String oldValue, @SuppressWarnings("unused") final String newValue) -> {
-                valideHS();
-            });
+            tfTexteHS.textProperty()
+                    .addListener((@SuppressWarnings("unused") final ObservableValue<? extends String> observable,
+                            @SuppressWarnings("unused") final String oldValue,
+                            @SuppressWarnings("unused") final String newValue) -> {
+                        valideHS();
+                    });
 
             tfTexteHS.setId("txtHSHTML" + io);
             tfTexteHS.setPrefSize(200, 25);
             tfTexteHS.setMaxSize(200, 20);
             tfTexteHS.setTranslateX(60);
-            
+
             // ComboBox pour le type d'animation
             Label lblTypeAnimationHTML = new Label(rbLocalisation.getString("main.typeAnimation"));
             lblTypeAnimationHTML.setTranslateX(10);
@@ -8078,29 +8494,28 @@ public class EditeurPanovisu extends Application {
             cbTypeAnimationHTML.setTranslateX(10);
             cbTypeAnimationHTML.setPrefWidth(200);
             cbTypeAnimationHTML.getItems().addAll(
-                "none",
-                "pulse",
-                "rotation", 
-                "desaturation",
-                "bounce",
-                "swing",
-                "glow",
-                "heartbeat",
-                "shake",
-                "flip",
-                "wobble",
-                "tada",
-                "flash",
-                "rubber",
-                "jello",
-                "neon",
-                "float"
-            );
+                    "none",
+                    "pulse",
+                    "rotation",
+                    "desaturation",
+                    "bounce",
+                    "swing",
+                    "glow",
+                    "heartbeat",
+                    "shake",
+                    "flip",
+                    "wobble",
+                    "tada",
+                    "flash",
+                    "rubber",
+                    "jello",
+                    "neon",
+                    "float");
             cbTypeAnimationHTML.setValue(getPanoramiquesProjet()[iNumPano].getHotspotHTML(io).getStrTypeAnimation());
             cbTypeAnimationHTML.valueProperty().addListener((obs, oldVal, newVal) -> {
                 valideHS();
             });
-            
+
             // CheckBox pour Agrandissement au survol
             CheckBox cbAgranditHTML = new CheckBox(rbLocalisation.getString("main.agrandissementSurvol"));
             cbAgranditHTML.setId("agranditSurvolHTML" + io);
@@ -8109,19 +8524,19 @@ public class EditeurPanovisu extends Application {
             cbAgranditHTML.selectedProperty().addListener((obs, oldVal, newVal) -> {
                 valideHS();
             });
-            
+
             // Label et ColorPicker pour couleur personnalisée hotspot HTML
             Label lblCouleurPersoHTML = new Label(rbLocalisation.getString("main.couleurPersonnalisee"));
             lblCouleurPersoHTML.setPrefHeight(29);
             lblCouleurPersoHTML.setMaxHeight(29);
             lblCouleurPersoHTML.setPrefWidth(200);
             lblCouleurPersoHTML.setTranslateX(10);
-            
+
             ColorPicker cpCouleurPersoHTML = new ColorPicker();
             cpCouleurPersoHTML.setId("couleurPersoHTML" + io);
             cpCouleurPersoHTML.setTranslateX(10);
             cpCouleurPersoHTML.setPrefWidth(160);
-            
+
             // ImageView pour l'aperçu du hotspot HTML avec la couleur
             ImageView ivApercuCouleurHTML = new ImageView();
             ivApercuCouleurHTML.setId("apercuCouleurHTML" + io);
@@ -8129,22 +8544,25 @@ public class EditeurPanovisu extends Application {
             ivApercuCouleurHTML.setFitHeight(32);
             ivApercuCouleurHTML.setPreserveRatio(true);
             ivApercuCouleurHTML.setTranslateX(180);
-            
+
             // Charger l'image du hotspot HTML - utiliser l'icône source si disponible
             String nomIconeSourceHTML = getPanoramiquesProjet()[iNumPano].getHotspotHTML(io).getStrNomIconeSource();
-            String strNomHotspotHTML = (nomIconeSourceHTML != null && !nomIconeSourceHTML.isEmpty()) ? nomIconeSourceHTML : strNomfichierHSHTML;
-            
+            String strNomHotspotHTML = (nomIconeSourceHTML != null && !nomIconeSourceHTML.isEmpty())
+                    ? nomIconeSourceHTML
+                    : strNomfichierHSHTML;
+
             // DEBUG
             System.out.println("🎨 DEBUG aperçu HotspotHTML #" + io + ":");
             System.out.println("  - nomIconeSourceHTML: " + nomIconeSourceHTML);
             System.out.println("  - strNomfichierHSHTML: " + strNomfichierHSHTML);
             System.out.println("  - strNomHotspotHTML utilisé: " + strNomHotspotHTML);
-            
+
             String strTypeHotspotHTML = strTypeHSHTML;
             Image imgHotspotHTMLOriginal = null;
             if (strTypeHotspotHTML != null && !strTypeHotspotHTML.equals("gif")) {
                 try {
-                    File fileHotspotHTML = new File(getStrRepertAppli() + File.separator + "theme" + File.separator + "hotspots" + File.separator + strNomHotspotHTML);
+                    File fileHotspotHTML = new File(getStrRepertAppli() + File.separator + "theme" + File.separator
+                            + "hotspots" + File.separator + strNomHotspotHTML);
                     if (fileHotspotHTML.exists()) {
                         imgHotspotHTMLOriginal = new Image("file:" + fileHotspotHTML.getAbsolutePath());
                     }
@@ -8152,11 +8570,11 @@ public class EditeurPanovisu extends Application {
                     // Ignorer les erreurs de chargement
                 }
             }
-            
+
             // Stocker l'image dans l'objet hotspot pour utilisation ultérieure
             getPanoramiquesProjet()[iNumPano].getHotspotHTML(io).setImgIconeSource(imgHotspotHTMLOriginal);
             System.out.println("Image source stockée dans objet HotspotHTML #" + io);
-            
+
             // Initialiser la couleur depuis le hotspot
             String couleurPersoHTML = getPanoramiquesProjet()[iNumPano].getHotspotHTML(io).getStrCouleurPerso();
             Color couleurInitialeHTML;
@@ -8178,31 +8596,29 @@ public class EditeurPanovisu extends Application {
                 couleurInitialeHTML = Color.GREEN; // Couleur par défaut pour HTML
             }
             cpCouleurPersoHTML.setValue(couleurInitialeHTML);
-            
+
             // Appliquer la couleur initiale à l'aperçu
             if (imgHotspotHTMLOriginal != null) {
                 WritableImage imgApercuColoreeHTML = transformerCouleurHotspot(
-                    imgHotspotHTMLOriginal,
-                    couleurInitialeHTML.getHue(),
-                    couleurInitialeHTML.getSaturation(),
-                    couleurInitialeHTML.getBrightness()
-                );
+                        imgHotspotHTMLOriginal,
+                        couleurInitialeHTML.getHue(),
+                        couleurInitialeHTML.getSaturation(),
+                        couleurInitialeHTML.getBrightness());
                 ivApercuCouleurHTML.setImage(imgApercuColoreeHTML);
             }
-            
+
             // Mettre à jour l'aperçu quand la couleur change
             Image imgHotspotHTMLFinal = imgHotspotHTMLOriginal;
             final int iNumHSHTML = io;
             cpCouleurPersoHTML.valueProperty().addListener((obs, oldVal, newVal) -> {
                 if (imgHotspotHTMLFinal != null && newVal != null) {
                     WritableImage imgApercuColoreeHTML = transformerCouleurHotspot(
-                        imgHotspotHTMLFinal,
-                        newVal.getHue(),
-                        newVal.getSaturation(),
-                        newVal.getBrightness()
-                    );
+                            imgHotspotHTMLFinal,
+                            newVal.getHue(),
+                            newVal.getSaturation(),
+                            newVal.getBrightness());
                     ivApercuCouleurHTML.setImage(imgApercuColoreeHTML);
-                    
+
                     // Sauvegarder l'icône colorée et stocker le nom du fichier
                     String nomFichier = sauvegardeIconeHotspot(imgApercuColoreeHTML, "hsHTML", iNumHSHTML, iNumPano);
                     if (nomFichier != null) {
@@ -8211,13 +8627,14 @@ public class EditeurPanovisu extends Application {
                 }
                 valideHS();
             });
-            
+
             // Créer un HBox pour aligner le ColorPicker et l'aperçu
             HBox hboxCouleurHTML = new HBox(10);
             hboxCouleurHTML.setTranslateX(10);
             hboxCouleurHTML.getChildren().addAll(cpCouleurPersoHTML, ivApercuCouleurHTML);
-            
-            vbPanneauHS.getChildren().addAll(lblPoint, sepHS, lblTexteHS, tfTexteHS, lblTypeAnimationHTML, cbTypeAnimationHTML, cbAgranditHTML, lblCouleurPersoHTML, hboxCouleurHTML);
+
+            vbPanneauHS.getChildren().addAll(lblPoint, sepHS, lblTexteHS, tfTexteHS, lblTypeAnimationHTML,
+                    cbTypeAnimationHTML, cbAgranditHTML, lblCouleurPersoHTML, hboxCouleurHTML);
             Button btnEditeHSHTML = new Button(rbLocalisation.getString("main.editeHTML"));
             btnEditeHSHTML.setPrefWidth(80);
             btnEditeHSHTML.setTranslateX(paneHsHtml.getPrefWidth() - btnEditeHSHTML.getPrefWidth() - 10);
@@ -8256,19 +8673,20 @@ public class EditeurPanovisu extends Application {
             int iNum = io;
             VBox vbPanneauHS = new VBox();
             Pane paneHsDiapo = new Pane(vbPanneauHS);
-            Timeline timBouge = new Timeline(new KeyFrame(Duration.millis(500), (@SuppressWarnings("unused") ActionEvent event) -> {
-                Circle c1 = (Circle) panePanoramique.lookup("#dia" + iNum);
-                if (c1 != null) {
+            Timeline timBouge = new Timeline(
+                    new KeyFrame(Duration.millis(500), (@SuppressWarnings("unused") ActionEvent event) -> {
+                        Circle c1 = (Circle) panePanoramique.lookup("#dia" + iNum);
+                        if (c1 != null) {
 
-                    if (c1.getFill() == Color.TURQUOISE) {
-                        c1.setFill(Color.ORANGE);
-                        c1.setStroke(Color.TURQUOISE);
-                    } else {
-                        c1.setFill(Color.TURQUOISE);
-                        c1.setStroke(Color.ORANGE);
-                    }
-                }
-            }));
+                            if (c1.getFill() == Color.TURQUOISE) {
+                                c1.setFill(Color.ORANGE);
+                                c1.setStroke(Color.TURQUOISE);
+                            } else {
+                                c1.setFill(Color.TURQUOISE);
+                                c1.setStroke(Color.ORANGE);
+                            }
+                        }
+                    }));
             timBouge.setCycleCount(Timeline.INDEFINITE);
             timBouge.pause();
             paneHsDiapo.setOnMouseEntered((e) -> {
@@ -8297,9 +8715,11 @@ public class EditeurPanovisu extends Application {
             if (getPanoramiquesProjet()[iNumPano].getHotspotDiapo(io).getStrInfo() != null) {
                 tfTexteHS.setText(getPanoramiquesProjet()[iNumPano].getHotspotDiapo(io).getStrInfo());
             }
-            tfTexteHS.textProperty().addListener((@SuppressWarnings("unused") final ObservableValue<? extends String> observable, final String oldValue, @SuppressWarnings("unused") final String newValue) -> {
-                valideHS();
-            });
+            tfTexteHS.textProperty()
+                    .addListener((@SuppressWarnings("unused") final ObservableValue<? extends String> observable,
+                            final String oldValue, @SuppressWarnings("unused") final String newValue) -> {
+                        valideHS();
+                    });
 
             tfTexteHS.setId("txtDIA" + io);
             tfTexteHS.setPrefSize(200, 25);
@@ -8310,14 +8730,15 @@ public class EditeurPanovisu extends Application {
             for (int i = 0; i < getiNombreDiapo(); i++) {
                 cbListeDiapo.getItems().add(diaporamas[i].getStrNomDiaporama());
             }
-            cbListeDiapo.getSelectionModel().select(getPanoramiquesProjet()[iNumPano].getHotspotDiapo(io).getiNumDiapo());
+            cbListeDiapo.getSelectionModel()
+                    .select(getPanoramiquesProjet()[iNumPano].getHotspotDiapo(io).getiNumDiapo());
             int iii = io;
             cbListeDiapo.getSelectionModel().selectedIndexProperty().addListener((ov, av, nv) -> {
                 getPanoramiquesProjet()[iNumPano].getHotspotDiapo(iii).setiNumDiapo((int) nv);
             });
             cbListeDiapo.setTranslateX(60);
             vbPanneauHS.getChildren().addAll(cbListeDiapo);
-//Ajouter Liste Diaporamas
+            // Ajouter Liste Diaporamas
             vbHotspots.getChildren().addAll(paneHsDiapo, lblSep);
             paneHsDiapo.setPrefHeight(120);
             paneHsDiapo.setMinHeight(120);
@@ -8328,7 +8749,7 @@ public class EditeurPanovisu extends Application {
         iNbHS += io;
         dejaCharge = true;
         paneHotSpots.setId("labels");
-        
+
         // Le ScrollPane gérera automatiquement la hauteur
 
         return paneHotSpots;
@@ -8385,19 +8806,19 @@ public class EditeurPanovisu extends Application {
         circPoint3.setStroke(Color.YELLOW);
         circPoint3.setCursor(Cursor.DEFAULT);
         Polygon polygonCroix = new Polygon();
-        polygonCroix.getPoints().addAll(new Double[]{
-            15.0, 2.0,
-            2.0, 2.0,
-            2.0, 15.0,
-            -2.0, 15.0,
-            -2.0, 2.0,
-            -15.0, 2.0,
-            -15.0, -2.0,
-            -2.0, -2.0,
-            -2.0, -15.0,
-            2.0, -15.0,
-            2.0, -2.0,
-            15.0, -2.0
+        polygonCroix.getPoints().addAll(new Double[] {
+                15.0, 2.0,
+                2.0, 2.0,
+                2.0, 15.0,
+                -2.0, 15.0,
+                -2.0, 2.0,
+                -15.0, 2.0,
+                -15.0, -2.0,
+                -2.0, -2.0,
+                -2.0, -15.0,
+                2.0, -15.0,
+                2.0, -2.0,
+                15.0, -2.0
         });
         polygonCroix.setStrokeLineJoin(StrokeLineJoin.MITER);
         polygonCroix.setFill(Color.BLUEVIOLET);
@@ -8423,7 +8844,8 @@ public class EditeurPanovisu extends Application {
         lblPoV.setLayoutY(15);
         lblNord.setLayoutX(520);
         lblNord.setLayoutY(55);
-        apLegende.getChildren().addAll(lblHS, circPoint, lblHSImage, circPoint2, lblHSHTML, circPoint3, lblPoV, polygonCroix, lblNord, lineNord);
+        apLegende.getChildren().addAll(lblHS, circPoint, lblHSImage, circPoint2, lblHSHTML, circPoint3, lblPoV,
+                polygonCroix, lblNord, lineNord);
         apLegende.setId("legende");
         apLegende.setVisible(true);
         if (largeurMax - 50 < 1004) {
@@ -8696,7 +9118,8 @@ public class EditeurPanovisu extends Application {
                         fileRepert = new File(getStrRepertHSImages());
                     }
                     FileChooser fileChooser = new FileChooser();
-                    FileChooser.ExtensionFilter extFilterImages = new FileChooser.ExtensionFilter("Fichiers Images (jpg, bmp, png)", "*.jpg", "*.bmp", "*.png");
+                    FileChooser.ExtensionFilter extFilterImages = new FileChooser.ExtensionFilter(
+                            "Fichiers Images (jpg, bmp, png)", "*.jpg", "*.bmp", "*.png");
 
                     fileChooser.setInitialDirectory(fileRepert);
                     fileChooser.getExtensionFilters().addAll(extFilterImages);
@@ -8713,7 +9136,8 @@ public class EditeurPanovisu extends Application {
                             fileRepertImage.mkdirs();
                         }
                         try {
-                            copieFichierRepertoire(fileFichierImage.getAbsolutePath(), fileRepertImage.getAbsolutePath());
+                            copieFichierRepertoire(fileFichierImage.getAbsolutePath(),
+                                    fileRepertImage.getAbsolutePath());
 
                         } catch (IOException ex) {
                             Logger.getLogger(EditeurPanovisu.class
@@ -8850,12 +9274,15 @@ public class EditeurPanovisu extends Application {
                     for (int ii = 0; ii < getiNombreDiapo(); ii++) {
                         choixDiapo1.add(diaporamas[ii].getStrNomDiaporama());
                     }
-                    ChoiceDialog<String> dialog1 = new ChoiceDialog<>(diaporamas[getPanoramiquesProjet()[getiPanoActuel()].getHotspotDiapo(iNum).getiNumDiapo()].getStrNomDiaporama(), choixDiapo1);
+                    ChoiceDialog<String> dialog1 = new ChoiceDialog<>(
+                            diaporamas[getPanoramiquesProjet()[getiPanoActuel()].getHotspotDiapo(iNum).getiNumDiapo()]
+                                    .getStrNomDiaporama(),
+                            choixDiapo1);
                     dialog1.setTitle(rbLocalisation.getString("main.choixDiapo"));
                     dialog1.setHeaderText(null);
                     dialog1.setContentText(rbLocalisation.getString("main.diapos"));
 
-// Traditional way to get the response value.
+                    // Traditional way to get the response value.
                     Optional<String> result1 = dialog1.showAndWait();
                     if (result1.isPresent()) {
                         boolean bTrouve = false;
@@ -9184,8 +9611,8 @@ public class EditeurPanovisu extends Application {
      * Affiche la croix représentant le point de vue
      *
      * @param longitude longitude
-     * @param latitude latitude
-     * @param fov Champ de vision
+     * @param latitude  latitude
+     * @param fov       Champ de vision
      */
     private static void affichePoV(double longitude, double latitude, double fov) {
         double largeur = ivImagePanoramique.getFitWidth();
@@ -9196,19 +9623,19 @@ public class EditeurPanovisu extends Application {
             panePanoramique.getChildren().remove(nodeAncienPoV);
         }
         Polygon plgPoV = new Polygon();
-        plgPoV.getPoints().addAll(new Double[]{
-            20.0, 2.0,
-            2.0, 2.0,
-            2.0, 20.0,
-            -2.0, 20.0,
-            -2.0, 2.0,
-            -20.0, 2.0,
-            -20.0, -2.0,
-            -2.0, -2.0,
-            -2.0, -20.0,
-            2.0, -20.0,
-            2.0, -2.0,
-            20.0, -2.0
+        plgPoV.getPoints().addAll(new Double[] {
+                20.0, 2.0,
+                2.0, 2.0,
+                2.0, 20.0,
+                -2.0, 20.0,
+                -2.0, 2.0,
+                -20.0, 2.0,
+                -20.0, -2.0,
+                -2.0, -2.0,
+                -2.0, -20.0,
+                2.0, -20.0,
+                2.0, -2.0,
+                20.0, -2.0
         });
         plgPoV.setStrokeLineJoin(StrokeLineJoin.MITER);
         plgPoV.setFill(Color.BLUEVIOLET);
@@ -9324,7 +9751,8 @@ public class EditeurPanovisu extends Application {
                 setiNumPoints(getiNumPoints() + 1);
                 if (getiNombrePanoramiques() > 1) {
 
-                    AnchorPane apListePanoVig = apAfficherListePanosVignettes(getPanoramiquesProjet()[getiPanoActuel()].getNombreHotspots() - 1);
+                    AnchorPane apListePanoVig = apAfficherListePanosVignettes(
+                            getPanoramiquesProjet()[getiPanoActuel()].getNombreHotspots() - 1);
                     double positX = (panePanoramique.getPrefWidth() - apListePanoVig.getPrefWidth()) / 2.d;
                     double positY = (panePanoramique.getPrefHeight() - apListePanoVig.getPrefHeight()) / 2.d;
                     apListePanoVig.setLayoutX(positX);
@@ -9436,7 +9864,8 @@ public class EditeurPanovisu extends Application {
                             if (getiNombrePanoramiques() > 1) {
                                 AnchorPane apListePanoVig = apAfficherListePanosVignettes(iNumeroPoint);
                                 double positX = (panePanoramique.getPrefWidth() - apListePanoVig.getPrefWidth()) / 2.d;
-                                double positY = (panePanoramique.getPrefHeight() - apListePanoVig.getPrefHeight()) / 2.d;
+                                double positY = (panePanoramique.getPrefHeight() - apListePanoVig.getPrefHeight())
+                                        / 2.d;
                                 apListePanoVig.setLayoutX(positX);
                                 apListePanoVig.setLayoutY(positY);
                                 apPanneauPrincipal.getChildren().add(apListePanoVig);
@@ -9487,7 +9916,8 @@ public class EditeurPanovisu extends Application {
                 fileRepert = new File(getStrRepertHSImages());
             }
             FileChooser fileChooser = new FileChooser();
-            FileChooser.ExtensionFilter extFilterImages = new FileChooser.ExtensionFilter("Fichiers Images (jpg, bmp, png)", "*.jpg", "*.bmp", "*.png");
+            FileChooser.ExtensionFilter extFilterImages = new FileChooser.ExtensionFilter(
+                    "Fichiers Images (jpg, bmp, png)", "*.jpg", "*.bmp", "*.png");
 
             fileChooser.setInitialDirectory(fileRepert);
             fileChooser.getExtensionFilters().addAll(extFilterImages);
@@ -9631,7 +10061,8 @@ public class EditeurPanovisu extends Application {
                             fileRepert1 = new File(getStrRepertHSImages());
                         }
                         FileChooser fileChooser1 = new FileChooser();
-                        FileChooser.ExtensionFilter extFilterImages1 = new FileChooser.ExtensionFilter("Fichiers Images (jpg, bmp, png)", "*.jpg", "*.bmp", "*.png");
+                        FileChooser.ExtensionFilter extFilterImages1 = new FileChooser.ExtensionFilter(
+                                "Fichiers Images (jpg, bmp, png)", "*.jpg", "*.bmp", "*.png");
 
                         fileChooser1.setInitialDirectory(fileRepert1);
                         fileChooser1.getExtensionFilters().addAll(extFilterImages1);
@@ -9648,7 +10079,8 @@ public class EditeurPanovisu extends Application {
                                 fileRepertImage.mkdirs();
                             }
                             try {
-                                copieFichierRepertoire(fileFichierImage1.getAbsolutePath(), fileRepertImage.getAbsolutePath());
+                                copieFichierRepertoire(fileFichierImage1.getAbsolutePath(),
+                                        fileRepertImage.getAbsolutePath());
 
                             } catch (IOException ex) {
                                 Logger.getLogger(EditeurPanovisu.class
@@ -10020,7 +10452,10 @@ public class EditeurPanovisu extends Application {
                         for (int i = 0; i < getiNombreDiapo(); i++) {
                             choixDiapo1.add(diaporamas[i].getStrNomDiaporama());
                         }
-                        ChoiceDialog<String> dialog1 = new ChoiceDialog<>(diaporamas[getPanoramiquesProjet()[getiPanoActuel()].getHotspotDiapo(iNum).getiNumDiapo()].getStrNomDiaporama(), choixDiapo1);
+                        ChoiceDialog<String> dialog1 = new ChoiceDialog<>(
+                                diaporamas[getPanoramiquesProjet()[getiPanoActuel()].getHotspotDiapo(iNum)
+                                        .getiNumDiapo()].getStrNomDiaporama(),
+                                choixDiapo1);
                         dialog1.setTitle(rbLocalisation.getString("main.choixDiapo"));
                         dialog1.setHeaderText(null);
                         dialog1.setContentText(rbLocalisation.getString("main.diapos"));
@@ -10076,12 +10511,12 @@ public class EditeurPanovisu extends Application {
                     panePanoramique.setCursor(Cursor.DEFAULT);
                     panePanoramique.setOnMouseClicked(
                             (me) -> {
-                            }
-                    );
-                    Circle c1 = new Circle(mouseEvent.getSceneX(), mouseEvent.getSceneY() - panePanoramique.getLayoutY() - 130 - getiDecalageMac(), 3);
+                            });
+                    Circle c1 = new Circle(mouseEvent.getSceneX(),
+                            mouseEvent.getSceneY() - panePanoramique.getLayoutY() - 130 - getiDecalageMac(), 3);
                     panePanoramique.getChildren().add(c1);
                     ListView<String> lvMenuChoixTypeHotspot = new ListView<>();
-                    
+
                     // Ajout des items
                     if (getiNombrePanoramiques() > 1) {
                         lvMenuChoixTypeHotspot.getItems().add("Panoramique");
@@ -10092,51 +10527,55 @@ public class EditeurPanovisu extends Application {
                     }
                     lvMenuChoixTypeHotspot.getItems().add("HTML");
                     lvMenuChoixTypeHotspot.getItems().add("Annuler");
-                    
+
                     // Taille adaptative basée sur le nombre d'items et la hauteur des cellules
                     int nbItems = lvMenuChoixTypeHotspot.getItems().size();
                     double cellHeight = 36; // Hauteur d'une cellule avec les nouveaux CSS (augmentée)
                     double padding = 10; // Padding vertical (augmenté)
                     double calculatedHeight = (nbItems * cellHeight) + padding;
-                    
+
                     lvMenuChoixTypeHotspot.setPrefHeight(calculatedHeight);
                     lvMenuChoixTypeHotspot.setMaxHeight(calculatedHeight);
                     lvMenuChoixTypeHotspot.setMinWidth(150); // Largeur minimale augmentée pour le contenu
                     lvMenuChoixTypeHotspot.setPrefWidth(150);
                     lvMenuChoixTypeHotspot.setCursor(Cursor.DEFAULT);
                     lvMenuChoixTypeHotspot.setLayoutX(mouseEvent.getSceneX());
-                    lvMenuChoixTypeHotspot.setLayoutY(mouseEvent.getSceneY() - panePanoramique.getLayoutY() - 104 - getiDecalageMac());
+                    lvMenuChoixTypeHotspot.setLayoutY(
+                            mouseEvent.getSceneY() - panePanoramique.getLayoutY() - 104 - getiDecalageMac());
                     panePanoramique.getChildren().add(lvMenuChoixTypeHotspot);
-                    lvMenuChoixTypeHotspot.getSelectionModel().selectedItemProperty().addListener((ov, ancValeur, nouvValeur) -> {
-                        panePanoramique.getChildren().remove(lvMenuChoixTypeHotspot);
-                        panePanoramique.getChildren().remove(c1);
+                    lvMenuChoixTypeHotspot.getSelectionModel().selectedItemProperty()
+                            .addListener((ov, ancValeur, nouvValeur) -> {
+                                panePanoramique.getChildren().remove(lvMenuChoixTypeHotspot);
+                                panePanoramique.getChildren().remove(c1);
 
-                        switch (nouvValeur) {
-                            case "Panoramique":
-                                panoMouseClic(mouseEvent.getSceneX() - ivImagePanoramique.getLayoutX(), mouseEvent.getY());
-                                break;
-                            case "Image":
-                                panoAjouteImage(mouseEvent.getSceneX() - ivImagePanoramique.getLayoutX(), mouseEvent.getY());
-                                break;
-                            case "HTML":
-                                panoAjouteHTML(mouseEvent.getSceneX() - ivImagePanoramique.getLayoutX(), mouseEvent.getY());
-                                break;
-                            case "Diaporama":
-                                panoAjouteDiaporama(mouseEvent.getSceneX() - ivImagePanoramique.getLayoutX(), mouseEvent.getY());
-                                break;
-                            case "Annuler":
-                                break;
+                                switch (nouvValeur) {
+                                    case "Panoramique":
+                                        panoMouseClic(mouseEvent.getSceneX() - ivImagePanoramique.getLayoutX(),
+                                                mouseEvent.getY());
+                                        break;
+                                    case "Image":
+                                        panoAjouteImage(mouseEvent.getSceneX() - ivImagePanoramique.getLayoutX(),
+                                                mouseEvent.getY());
+                                        break;
+                                    case "HTML":
+                                        panoAjouteHTML(mouseEvent.getSceneX() - ivImagePanoramique.getLayoutX(),
+                                                mouseEvent.getY());
+                                        break;
+                                    case "Diaporama":
+                                        panoAjouteDiaporama(mouseEvent.getSceneX() - ivImagePanoramique.getLayoutX(),
+                                                mouseEvent.getY());
+                                        break;
+                                    case "Annuler":
+                                        break;
 
-                        }
-                        panePanoramique.setCursor(Cursor.CROSSHAIR);
-                        panePanoramique.setOnMouseClicked(
-                                (me) -> {
-                                    gereSourisPanoramique(me);
                                 }
-                        );
+                                panePanoramique.setCursor(Cursor.CROSSHAIR);
+                                panePanoramique.setOnMouseClicked(
+                                        (me) -> {
+                                            gereSourisPanoramique(me);
+                                        });
 
-                    }
-                    );
+                            });
 
                 } else {
                     bDragDrop = false;
@@ -10152,7 +10591,8 @@ public class EditeurPanovisu extends Application {
             apLoupe.setLayoutX(ivImagePanoramique.getFitWidth() - getiTailleLoupe() + 5);
             strPositLoupe = "droite";
         }
-        if (x > ivImagePanoramique.getFitWidth() - getiTailleLoupe() - 35 && y < getiTailleLoupe() + 50 && strPositLoupe.equals("droite")) {
+        if (x > ivImagePanoramique.getFitWidth() - getiTailleLoupe() - 35 && y < getiTailleLoupe() + 50
+                && strPositLoupe.equals("droite")) {
             apLoupe.setLayoutX(35);
             strPositLoupe = "gauche";
         }
@@ -10171,45 +10611,53 @@ public class EditeurPanovisu extends Application {
         /**
          *
          */
-        getScnPrincipale().widthProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) -> {
-            if ((double) newSceneWidth < 1280) {
-            }
-            double largeur = (double) newSceneWidth - largeurOutils - 20;
-            apPanovisu.setLayoutX((double) newSceneWidth - largeurOutils);
-            spVuePanoramique.setPrefWidth(largeur);
-            spVuePanoramique.setBackground(new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY)));
-            gestionnaireInterface.getApVis().setPrefWidth((double) newSceneWidth - largeurOutils - 20);
-            if ((double) newSceneWidth - largeurOutils - 20 < gestionnaireInterface.getApVis().getMaxWidth()) {
-                gestionnaireInterface.getApVis().setMinWidth((double) newSceneWidth - largeurOutils - 20);
-            }
-            if ((double) newSceneWidth - largeurOutils - 20 < gestionnairePlan.getApPlan().getMaxWidth()) {
-                gestionnairePlan.getApPlan().setMinWidth((double) newSceneWidth - largeurOutils - 20);
-            }
-            gestionnairePlan.getApPlan().setPrefWidth((double) newSceneWidth - largeurOutils - 20);
+        getScnPrincipale().widthProperty().addListener(
+                (ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) -> {
+                    if ((double) newSceneWidth < 1280) {
+                    }
+                    double largeur = (double) newSceneWidth - largeurOutils - 20;
+                    apPanovisu.setLayoutX((double) newSceneWidth - largeurOutils);
+                    spVuePanoramique.setPrefWidth(largeur);
+                    spVuePanoramique.setBackground(
+                            new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+                    gestionnaireInterface.getApVis().setPrefWidth((double) newSceneWidth - largeurOutils - 20);
+                    if ((double) newSceneWidth - largeurOutils - 20 < gestionnaireInterface.getApVis().getMaxWidth()) {
+                        gestionnaireInterface.getApVis().setMinWidth((double) newSceneWidth - largeurOutils - 20);
+                    }
+                    if ((double) newSceneWidth - largeurOutils - 20 < gestionnairePlan.getApPlan().getMaxWidth()) {
+                        gestionnairePlan.getApPlan().setMinWidth((double) newSceneWidth - largeurOutils - 20);
+                    }
+                    gestionnairePlan.getApPlan().setPrefWidth((double) newSceneWidth - largeurOutils - 20);
 
-        });
+                });
         /**
          *
          */
-        getScnPrincipale().heightProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldSceneHeight, Number newSceneHeight) -> {
-            spVuePanoramique.setPrefHeight((double) newSceneHeight - 130.0d - getiDecalageMac());
-            spPanneauOutils.setPrefHeight((double) newSceneHeight - 130.0d - getiDecalageMac());
+        getScnPrincipale().heightProperty().addListener(
+                (ObservableValue<? extends Number> observableValue, Number oldSceneHeight, Number newSceneHeight) -> {
+                    spVuePanoramique.setPrefHeight((double) newSceneHeight - 130.0d - getiDecalageMac());
+                    spPanneauOutils.setPrefHeight((double) newSceneHeight - 130.0d - getiDecalageMac());
 
-            spVuePanoramique.setBackground(new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY)));
-            if ((double) newSceneHeight - 130.0d - getiDecalageMac() < gestionnaireInterface.getSpOutils().getMaxHeight()) {
-                gestionnaireInterface.getSpOutils().setMinHeight((double) newSceneHeight - 130.0d - getiDecalageMac());
-            }
+                    spVuePanoramique.setBackground(
+                            new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+                    if ((double) newSceneHeight - 130.0d - getiDecalageMac() < gestionnaireInterface.getSpOutils()
+                            .getMaxHeight()) {
+                        gestionnaireInterface.getSpOutils()
+                                .setMinHeight((double) newSceneHeight - 130.0d - getiDecalageMac());
+                    }
 
-            gestionnaireInterface.getSpOutils().setPrefHeight((double) newSceneHeight - 130.0d - getiDecalageMac());
-            gestionnairePlan.getSpOutils().setPrefHeight((double) newSceneHeight - 130 - getiDecalageMac());
+                    gestionnaireInterface.getSpOutils()
+                            .setPrefHeight((double) newSceneHeight - 130.0d - getiDecalageMac());
+                    gestionnairePlan.getSpOutils().setPrefHeight((double) newSceneHeight - 130 - getiDecalageMac());
 
-            if ((double) newSceneHeight - 130 - getiDecalageMac() < gestionnairePlan.getSpOutils().getMaxHeight()) {
-                gestionnairePlan.getSpOutils().setMinHeight((double) newSceneHeight - 130 - getiDecalageMac());
-            }
-        });
+                    if ((double) newSceneHeight - 130 - getiDecalageMac() < gestionnairePlan.getSpOutils()
+                            .getMaxHeight()) {
+                        gestionnairePlan.getSpOutils().setMinHeight((double) newSceneHeight - 130 - getiDecalageMac());
+                    }
+                });
 
         getScnPrincipale().setOnKeyPressed((clavierEvt) -> {
-            //System.out.println("Code clavier : " + clavierEvt.getCode());
+            // System.out.println("Code clavier : " + clavierEvt.getCode());
             if (clavierEvt.isControlDown()) {
                 if (clavierEvt.getText().toLowerCase().equals("l")) {
                     clavierEvt.consume();
@@ -10245,8 +10693,7 @@ public class EditeurPanovisu extends Application {
         panePanoramique.setOnMouseClicked(
                 (mouseEvent) -> {
                     gereSourisPanoramique(mouseEvent);
-                }
-        );
+                });
         /**
          *
          */
@@ -10282,8 +10729,7 @@ public class EditeurPanovisu extends Application {
                         lblLat.setText(strLat);
                         afficheLoupe(mouseX, mouseY);
                     }
-                }
-        );
+                });
         cbListeChoixPanoramique.valueProperty()
                 .addListener((ov, ancienneValeur, nouvelleValeur) -> {
                     if (nouvelleValeur != null) {
@@ -10327,7 +10773,8 @@ public class EditeurPanovisu extends Application {
         }
         for (int i = -90; i < 90; i += 10) {
             iY = (int) (hauteur / 2.0f + hauteur / 180.0f * (float) i);
-            lineCoordonnees = new Line(ivImagePanoramique.getLayoutX(), iY, largeur + ivImagePanoramique.getLayoutX(), iY);
+            lineCoordonnees = new Line(ivImagePanoramique.getLayoutX(), iY, largeur + ivImagePanoramique.getLayoutX(),
+                    iY);
             lineCoordonnees.setId("ligne" + iNl);
             iNl++;
             if (i == 0) {
@@ -10445,7 +10892,8 @@ public class EditeurPanovisu extends Application {
         apLoupe.setPrefSize(getiTailleLoupe() + 20, getiTailleLoupe() + 20);
         apLoupe.setMinSize(getiTailleLoupe() + 20, getiTailleLoupe() + 20);
         apLoupe.setMaxSize(getiTailleLoupe() + 20, getiTailleLoupe() + 20);
-        //apLoupe.setStyle("-fx-border-width : 2px;-fx-background-color : blue;-fx-border-color :darkblue;");
+        // apLoupe.setStyle("-fx-border-width : 2px;-fx-background-color :
+        // blue;-fx-border-color :darkblue;");
         creeLoupe();
         panePanoramique.setOnMouseEntered((me) -> {
             if (isAfficheLoupe()) {
@@ -10466,18 +10914,20 @@ public class EditeurPanovisu extends Application {
             }
             int iLargeur = (int) tailleEcran.getWidth() - 20;
             apVisuPanoramique.getChildren().clear();
-            
+
             // Images pour le bouton plein écran adaptées au thème
             boolean estThemeSombre = ThemeManager.getCurrentTheme().isDark();
             String suffixeIcone = estThemeSombre ? "_bl.png" : ".png";
-            Image imgExpand = new Image("file:" + getStrRepertAppli() + "/images/expand" + suffixeIcone, 30, 30, false, true);
-            Image imgShrink = new Image("file:" + getStrRepertAppli() + "/images/shrink" + suffixeIcone, 30, 30, false, true);
-            
-            navigateurPanoramique
-                    = new NavigateurPanoramique(getPanoramiquesProjet()[iNumPanochoisi].getImgVisuPanoramique(), 10.d, 10.d, 340, 170);
+            Image imgExpand = new Image("file:" + getStrRepertAppli() + "/images/expand" + suffixeIcone, 30, 30, false,
+                    true);
+            Image imgShrink = new Image("file:" + getStrRepertAppli() + "/images/shrink" + suffixeIcone, 30, 30, false,
+                    true);
+
+            navigateurPanoramique = new NavigateurPanoramique(
+                    getPanoramiquesProjet()[iNumPanochoisi].getImgVisuPanoramique(), 10.d, 10.d, 340, 170);
             // Utiliser le cache pour le petit visualiseur
             apVisuPano = navigateurPanoramique.affichePano(getPanoramiquesProjet()[iNumPanochoisi]);
-            
+
             // Configuration du bouton plein écran via PropertyChangeListener
             Button btnPleinEcran = navigateurPanoramique.getBtnPleinEcran();
             final ImageView ivBtnPleinEcranFinal;
@@ -10487,101 +10937,106 @@ public class EditeurPanovisu extends Application {
             } else {
                 ivBtnPleinEcranFinal = null;
             }
-            
+
             navigateurPanoramique.addPropertyChangeListener("pleinEcran", (e) -> {
                 boolean pleinEcran = (boolean) e.getNewValue();
                 if (pleinEcran) {
                     // Ouvrir une fenêtre popup de taille intermédiaire (solution médiane)
                     bPleinEcranPanoramique = true;
-                    
+
                     // Trouver l'index du panorama actuellement affiché dans le petit visualiseur
                     String nomFichierVisu = navigateurPanoramique.getNomFichierPanoramique();
                     int indexPanoVisu = -1;
                     for (int i = 0; i < getPanoramiquesProjet().length; i++) {
-                        if (getPanoramiquesProjet()[i] != null && 
-                            getPanoramiquesProjet()[i].getStrNomFichier() != null &&
-                            getPanoramiquesProjet()[i].getStrNomFichier().equals(nomFichierVisu)) {
+                        if (getPanoramiquesProjet()[i] != null &&
+                                getPanoramiquesProjet()[i].getStrNomFichier() != null &&
+                                getPanoramiquesProjet()[i].getStrNomFichier().equals(nomFichierVisu)) {
                             indexPanoVisu = i;
                             break;
                         }
                     }
-                    
+
                     // Si on n'a pas trouvé, utiliser getiPanoActuel() par défaut
                     if (indexPanoVisu == -1) {
                         indexPanoVisu = getiPanoActuel();
                     }
-                    
+
                     System.out.println("🔍 DEBUG: Passage en plein écran");
                     System.out.println("   Fichier petit visu: " + nomFichierVisu);
                     System.out.println("   Index trouvé: " + indexPanoVisu);
                     System.out.println("   getiPanoActuel() = " + getiPanoActuel());
-                    
+
                     // Créer une nouvelle fenêtre popup
                     Stage stageVisuPano = new Stage();
-                    stageVisuPano.setTitle("Visualisation Panoramique - " + getPanoramiquesProjet()[indexPanoVisu].getStrNomFichier());
+                    stageVisuPano.setTitle(
+                            "Visualisation Panoramique - " + getPanoramiquesProjet()[indexPanoVisu].getStrNomFichier());
                     stageVisuPano.initModality(Modality.APPLICATION_MODAL);
                     stageVisuPano.initOwner(stPrincipal);
-                    
+
                     // Taille intermédiaire : 1200x780 (bonne qualité sans pixellisation excessive)
                     int largeurPopup = 1200;
                     int hauteurPopup = 780;
-                    
+
                     // Utiliser l'image haute résolution pré-chargée si disponible
                     Image imgHauteRes = getPanoramiquesProjet()[indexPanoVisu].getImgHauteResolution();
-                    
+
                     if (imgHauteRes != null) {
                         System.out.println("📸 Utilisation de l'image haute résolution pré-chargée");
-                        System.out.println("   ⚡ Cache: " + (int)imgHauteRes.getWidth() + "×" + (int)imgHauteRes.getHeight());
+                        System.out.println(
+                                "   ⚡ Cache: " + (int) imgHauteRes.getWidth() + "×" + (int) imgHauteRes.getHeight());
                     } else {
                         // Fallback : charger à la volée si le cache n'existe pas
                         System.out.println("📸 Cache HR non disponible, chargement à la volée...");
                         String fichierPano = getPanoramiquesProjet()[indexPanoVisu].getStrNomFichier();
                         File filePano = new File(fichierPano);
-                        
+
                         if (filePano.exists()) {
                             Image imgOrigine = new Image("file:" + fichierPano);
                             imgHauteRes = imgTransformationImage(imgOrigine, 1);
                         }
                     }
-                    
-                    // Utiliser l'image haute résolution si disponible, sinon utiliser l'image normale
-                    Image imgAUtiliser = (imgHauteRes != null) ? imgHauteRes : getPanoramiquesProjet()[indexPanoVisu].getImgVisuPanoramique();
-                    
+
+                    // Utiliser l'image haute résolution si disponible, sinon utiliser l'image
+                    // normale
+                    Image imgAUtiliser = (imgHauteRes != null) ? imgHauteRes
+                            : getPanoramiquesProjet()[indexPanoVisu].getImgVisuPanoramique();
+
                     // Créer un nouveau navigateur avec positionnement correct
                     // positX=10, positY=10 pour laisser de l'espace pour les labels et boutons
-                    // hauteur réduite de 100px pour les contrôles (labels en haut + boutons en bas + marge)
+                    // hauteur réduite de 100px pour les contrôles (labels en haut + boutons en bas
+                    // + marge)
                     NavigateurPanoramique navigPopup = new NavigateurPanoramique(
-                        imgAUtiliser, 
-                        10.0,  // positX
-                        10.0,  // positY
-                        largeurPopup - 20,  // largeur avec marges
-                        hauteurPopup - 100  // hauteur moins espace pour contrôles
+                            imgAUtiliser,
+                            10.0, // positX
+                            10.0, // positY
+                            largeurPopup - 20, // largeur avec marges
+                            hauteurPopup - 100 // hauteur moins espace pour contrôles
                     );
-                    
+
                     // Activer le mode haute qualité AVANT affichePano()
                     System.out.println("🎨 Activation du mode haute qualité...");
                     System.out.println("   Équirectangulaire: 3000x1500");
                     System.out.println("   Faces du cube: 1000x1000");
                     navigPopup.setHauteQualite(true);
-                    
+
                     // Copier l'état de visualisation actuel
                     navigPopup.setLongitude(navigateurPanoramique.getLongitude());
                     navigPopup.setLatitude(navigateurPanoramique.getLatitude());
                     navigPopup.setFov(navigateurPanoramique.getFov());
-                    
+
                     // Afficher le panorama avec cache des cubes pré-calculés
                     AnchorPane apPopup = navigPopup.affichePano(getPanoramiquesProjet()[indexPanoVisu]);
-                    
+
                     // Masquer le bouton plein écran APRÈS affichePano() (inutile dans la popup)
                     if (navigPopup.getBtnPleinEcran() != null) {
                         navigPopup.getBtnPleinEcran().setVisible(false);
                         navigPopup.getBtnPleinEcran().setManaged(false);
                     }
-                    
+
                     Scene scenePopup = new Scene(apPopup, largeurPopup, hauteurPopup);
                     stageVisuPano.setScene(scenePopup);
                     stageVisuPano.centerOnScreen();
-                    
+
                     // Quand on ferme la popup, remettre le bouton à l'état normal
                     stageVisuPano.setOnHidden(event -> {
                         if (ivBtnPleinEcranFinal != null) {
@@ -10591,12 +11046,12 @@ public class EditeurPanovisu extends Application {
                         navigateurPanoramique.setbPleinEcran(false);
                         bPleinEcranPanoramique = false;
                     });
-                    
+
                     stageVisuPano.show();
                     if (ivBtnPleinEcranFinal != null) {
                         ivBtnPleinEcranFinal.setImage(imgShrink);
                     }
-                    
+
                 } else {
                     // Remettre l'icône à l'état normal (la fermeture est gérée par la popup)
                     if (ivBtnPleinEcranFinal != null) {
@@ -10605,7 +11060,7 @@ public class EditeurPanovisu extends Application {
                     bPleinEcranPanoramique = false;
                 }
             });
-            
+
             navigateurPanoramique.addPropertyChangeListener("positNord", (e) -> {
                 double longitude = Math.round(Double.parseDouble(e.getNewValue().toString()) * 10) / 10.d - 180;
                 longitude = longitude % 360;
@@ -10663,10 +11118,9 @@ public class EditeurPanovisu extends Application {
         } else {
             // Utiliser la version optimisée avec cache des cubes pré-calculés
             navigateurPanoramique.setImagePanoramique(
-                getPanoramiquesProjet()[iNumPanochoisi].getStrNomFichier(), 
-                getPanoramiquesProjet()[iNumPanochoisi].getImgVisuPanoramique(),
-                getPanoramiquesProjet()[iNumPanochoisi]
-            );
+                    getPanoramiquesProjet()[iNumPanochoisi].getStrNomFichier(),
+                    getPanoramiquesProjet()[iNumPanochoisi].getImgVisuPanoramique(),
+                    getPanoramiquesProjet()[iNumPanochoisi]);
             navigateurPanoramique.setPositNord(getPanoramiquesProjet()[iNumPanochoisi].getZeroNord() - 180);
             navigateurPanoramique.setLongitude(getPanoramiquesProjet()[iNumPanochoisi].getRegardX() - 180);
             navigateurPanoramique.setLatitude(getPanoramiquesProjet()[iNumPanochoisi].getRegardY());
@@ -10674,8 +11128,10 @@ public class EditeurPanovisu extends Application {
             navigateurPanoramique.affiche();
         }
         if (getPanoramiquesProjet()[iNumPanochoisi].getMarqueurGeolocatisation() != null) {
-            tfLatitude.setText(CoordonneesGeographiques.toDMS(getPanoramiquesProjet()[iNumPanochoisi].getMarqueurGeolocatisation().getLatitude()));
-            tfLongitude.setText(CoordonneesGeographiques.toDMS(getPanoramiquesProjet()[iNumPanochoisi].getMarqueurGeolocatisation().getLongitude()));
+            tfLatitude.setText(CoordonneesGeographiques
+                    .toDMS(getPanoramiquesProjet()[iNumPanochoisi].getMarqueurGeolocatisation().getLatitude()));
+            tfLongitude.setText(CoordonneesGeographiques
+                    .toDMS(getPanoramiquesProjet()[iNumPanochoisi].getMarqueurGeolocatisation().getLongitude()));
             getPoGeolocalisation().setbValide(true);
         } else {
             if (isbInternet()) {
@@ -10691,7 +11147,9 @@ public class EditeurPanovisu extends Application {
         ajouteAffichagePointsHotspotsDiapo();
 
         ajouteAffichageHotspots();
-        affichePoV(getPanoramiquesProjet()[iNumPanochoisi].getRegardX(), getPanoramiquesProjet()[iNumPanochoisi].getRegardY(), getPanoramiquesProjet()[iNumPanochoisi].getChampVisuel());
+        affichePoV(getPanoramiquesProjet()[iNumPanochoisi].getRegardX(),
+                getPanoramiquesProjet()[iNumPanochoisi].getRegardY(),
+                getPanoramiquesProjet()[iNumPanochoisi].getChampVisuel());
         afficheNord(getPanoramiquesProjet()[iNumPanochoisi].getZeroNord());
         ajouteAffichageLignes();
         afficheInfoPano();
@@ -10750,7 +11208,7 @@ public class EditeurPanovisu extends Application {
         } else {
             tfTitrePano.setText("");
         }
-        
+
         // Charge la description IA
         TextArea taDescriptionIA = (TextArea) getScnPrincipale().lookup("#txtDescriptionIA");
         if (taDescriptionIA != null) {
@@ -10760,22 +11218,23 @@ public class EditeurPanovisu extends Application {
                 taDescriptionIA.setText("");
             }
         }
-        
-        // Met à jour la checkbox "Afficher la description au chargement" et la validation du panel
+
+        // Met à jour la checkbox "Afficher la description au chargement" et la
+        // validation du panel
         if (getGestionnaireInterface().getCbAfficheDescription() != null) {
             // Active le mode chargement pour éviter le déclenchement du listener
             getGestionnaireInterface().setbChargementEnCours(true);
-            
+
             boolean bAffDesc = getPanoramiquesProjet()[getiPanoActuel()].isAffDescription();
-            
+
             getGestionnaireInterface().getCbAfficheDescription().setSelected(bAffDesc);
             getGestionnaireInterface().setbAfficheDescription(bAffDesc);
-            
+
             // Met à jour la validation du panel pour qu'il devienne vert
             if (getGestionnaireInterface().getPoDescription() != null) {
                 getGestionnaireInterface().getPoDescription().setbValide(bAffDesc);
             }
-            
+
             // Désactive le mode chargement
             getGestionnaireInterface().setbChargementEnCours(false);
         }
@@ -10783,6 +11242,7 @@ public class EditeurPanovisu extends Application {
 
     /**
      * Génère une description IA pour le panoramique courant
+     * 
      * @param taDescriptionIA TextArea où afficher la description générée
      */
     private static void genererDescriptionIA(TextArea taDescriptionIA) {
@@ -10795,30 +11255,30 @@ public class EditeurPanovisu extends Application {
             alert.showAndWait();
             return;
         }
-        
+
         // Récupérer les informations disponibles
         String titreVisite = null;
         TextField tfVisite = (TextField) getVbChoixPanoramique().lookup("#titreVisite");
         if (tfVisite != null && !tfVisite.getText().isEmpty()) {
             titreVisite = tfVisite.getText();
         }
-        
+
         String titrePanoramique = getPanoramiquesProjet()[getiPanoActuel()].getStrTitrePanoramique();
         String latitude = null;
         String longitude = null;
-        
+
         // Récupérer les coordonnées GPS si disponibles
         CoordonneesGeographiques coords = getPanoramiquesProjet()[getiPanoActuel()].getMarqueurGeolocatisation();
         if (coords != null) {
             latitude = String.valueOf(coords.getLatitude());
             longitude = String.valueOf(coords.getLongitude());
         }
-        
+
         // Vérifier qu'au moins une donnée est disponible
         boolean hasTitreVisite = titreVisite != null && !titreVisite.trim().isEmpty();
         boolean hasTitrePano = titrePanoramique != null && !titrePanoramique.trim().isEmpty();
         boolean hasCoords = latitude != null && longitude != null;
-        
+
         if (!hasTitreVisite && !hasTitrePano && !hasCoords) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle(rbLocalisation.getString("main.descriptionIADonneesManquantes"));
@@ -10827,45 +11287,47 @@ public class EditeurPanovisu extends Application {
             alert.showAndWait();
             return;
         }
-        
+
         // Afficher un indicateur de chargement avec le service utilisé
         String textePrecedent = taDescriptionIA.getText();
         String serviceInfo = OllamaService.getServiceName();
         taDescriptionIA.setText(rbLocalisation.getString("main.descriptionIAGeneration") + "\nService: " + serviceInfo);
         taDescriptionIA.setDisable(true);
-        
+
         // Appeler l'API IA de manière asynchrone
         OllamaService.genererDescription(titreVisite, titrePanoramique, latitude, longitude, getLocale())
-            .thenAccept(description -> {
-                // Mettre à jour l'UI dans le thread JavaFX
-                Platform.runLater(() -> {
-                    taDescriptionIA.setText(description);
-                    taDescriptionIA.setDisable(false);
-                    
-                    // Sauvegarder automatiquement
-                    System.out.println("[DEBUG] Sauvegarde description IA pour pano " + getiPanoActuel());
-                    System.out.println("[DEBUG] Description générée (longueur: " + description.length() + "): '" + description.substring(0, Math.min(100, description.length())) + "...'");
-                    getPanoramiquesProjet()[getiPanoActuel()].setStrDescriptionIA(description);
-                    String verif = getPanoramiquesProjet()[getiPanoActuel()].getStrDescriptionIA();
-                    System.out.println("[DEBUG] Vérification après set (longueur: " + verif.length() + "): '" + verif.substring(0, Math.min(100, verif.length())) + "...'");
-                    setbDejaSauve(false);
-                    getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+                .thenAccept(description -> {
+                    // Mettre à jour l'UI dans le thread JavaFX
+                    Platform.runLater(() -> {
+                        taDescriptionIA.setText(description);
+                        taDescriptionIA.setDisable(false);
+
+                        // Sauvegarder automatiquement
+                        System.out.println("[DEBUG] Sauvegarde description IA pour pano " + getiPanoActuel());
+                        System.out.println("[DEBUG] Description générée (longueur: " + description.length() + "): '"
+                                + description.substring(0, Math.min(100, description.length())) + "...'");
+                        getPanoramiquesProjet()[getiPanoActuel()].setStrDescriptionIA(description);
+                        String verif = getPanoramiquesProjet()[getiPanoActuel()].getStrDescriptionIA();
+                        System.out.println("[DEBUG] Vérification après set (longueur: " + verif.length() + "): '"
+                                + verif.substring(0, Math.min(100, verif.length())) + "...'");
+                        setbDejaSauve(false);
+                        getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+                    });
+                })
+                .exceptionally(ex -> {
+                    // Gérer les erreurs
+                    Platform.runLater(() -> {
+                        taDescriptionIA.setText(textePrecedent);
+                        taDescriptionIA.setDisable(false);
+
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle(rbLocalisation.getString("main.descriptionIAErreur"));
+                        alert.setHeaderText(rbLocalisation.getString("main.descriptionIAErreur"));
+                        alert.setContentText(ex.getMessage());
+                        alert.showAndWait();
+                    });
+                    return null;
                 });
-            })
-            .exceptionally(ex -> {
-                // Gérer les erreurs
-                Platform.runLater(() -> {
-                    taDescriptionIA.setText(textePrecedent);
-                    taDescriptionIA.setDisable(false);
-                    
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle(rbLocalisation.getString("main.descriptionIAErreur"));
-                    alert.setHeaderText(rbLocalisation.getString("main.descriptionIAErreur"));
-                    alert.setContentText(ex.getMessage());
-                    alert.showAndWait();
-                });
-                return null;
-            });
     }
 
     /**
@@ -10903,7 +11365,8 @@ public class EditeurPanovisu extends Application {
      * @throws InterruptedException Exception interruption
      */
     @SuppressWarnings("empty-statement")
-    private static void ajoutePanoramiqueProjet(String strFichierPano, String typePano, int iNumero, int iTotal) throws InterruptedException {
+    private static void ajoutePanoramiqueProjet(String strFichierPano, String typePano, int iNumero, int iTotal)
+            throws InterruptedException {
         bPanoCharge = true;
         bEstCharge = true;
         Panoramique panoCree = new Panoramique();
@@ -10928,7 +11391,8 @@ public class EditeurPanovisu extends Application {
                         .getName()).log(Level.SEVERE, null, ex);
             }
             panoCree.setStrNomFichier(strFichierPano);
-            int iNombreNiveaux = iCreeNiveauxImageEqui(jpegFile.getAbsolutePath(), strFichierPano, getStrRepertPanos(), getiNombrePanoramiques(), iNumero, iTotal);
+            int iNombreNiveaux = iCreeNiveauxImageEqui(jpegFile.getAbsolutePath(), strFichierPano, getStrRepertPanos(),
+                    getiNombrePanoramiques(), iNumero, iTotal);
             Platform.runLater(() -> {
                 lblNiveaux.setText("Création visualisation panoramique");
                 pbarAvanceChargement.setProgress((double) (iNumero - 1) / (double) iTotal + 0.666 / iTotal);
@@ -10938,13 +11402,15 @@ public class EditeurPanovisu extends Application {
             Image imgPano3 = null;
             Image imgPano4 = null;
             Image imgPano5 = null;
-            String strExtension = jpegFile.getAbsolutePath().substring(jpegFile.getAbsolutePath().length() - 3, jpegFile.getAbsolutePath().length());
+            String strExtension = jpegFile.getAbsolutePath().substring(jpegFile.getAbsolutePath().length() - 3,
+                    jpegFile.getAbsolutePath().length());
             if ("tif".equals(strExtension)) {
                 try {
                     imgPanoRetaille2 = ReadWriteImage.readTiff(jpegFile.getAbsolutePath());
                     imgPanoRetaille2 = ReadWriteImage.resizeImage(imgPanoRetaille2, 1200, 600);
 
-                    String nomVignette = jpegFile.getAbsolutePath().substring(0, jpegFile.getAbsolutePath().lastIndexOf(".")) + "Vignette.jpg";
+                    String nomVignette = jpegFile.getAbsolutePath().substring(0,
+                            jpegFile.getAbsolutePath().lastIndexOf(".")) + "Vignette.jpg";
                     File ficVig = new File(nomVignette);
                     if (ficVig.exists()) {
                         imgPano3 = new Image("file:" + nomVignette, 300, 150, true, true, true);
@@ -10957,7 +11423,8 @@ public class EditeurPanovisu extends Application {
                         imgPano5 = ReadWriteImage.resizeImage(imgPano3, 70, 35);
                         imgPano4 = imgPano3;
                     }
-                    panoCree.setImgVisuPanoramique(imgTransformationImage(ReadWriteImage.readTiff(jpegFile.getAbsolutePath()), 2));
+                    panoCree.setImgVisuPanoramique(
+                            imgTransformationImage(ReadWriteImage.readTiff(jpegFile.getAbsolutePath()), 2));
 
                 } catch (IOException ex) {
                     Logger.getLogger(EditeurPanovisu.class
@@ -10969,17 +11436,20 @@ public class EditeurPanovisu extends Application {
                 imgPano4 = new Image("file:" + jpegFile.getAbsolutePath(), 300, 150, true, true, true);
                 imgPano3 = imgPano4;
 
-                String nomVignette = jpegFile.getAbsolutePath().substring(0, jpegFile.getAbsolutePath().lastIndexOf(".")) + "Vignette.jpg";
+                String nomVignette = jpegFile.getAbsolutePath().substring(0,
+                        jpegFile.getAbsolutePath().lastIndexOf(".")) + "Vignette.jpg";
                 File ficVig = new File(nomVignette);
                 if (ficVig.exists()) {
                     imgPano3 = new Image("file:" + nomVignette, 300, 150, true, true, true);
                 }
-                panoCree.setImgVisuPanoramique(imgTransformationImage(new Image("file:" + jpegFile.getAbsolutePath()), 2));
+                panoCree.setImgVisuPanoramique(
+                        imgTransformationImage(new Image("file:" + jpegFile.getAbsolutePath()), 2));
             }
-            
-            // Le cache des faces cube est calculé à la demande (lazy) dans NavigateurPanoramique
+
+            // Le cache des faces cube est calculé à la demande (lazy) dans
+            // NavigateurPanoramique
             // pour éviter la saturation mémoire lors de l'import de nombreux panoramiques.
-            
+
             panoCree.setImgPanoramique(imgPanoRetaille2);
             panoCree.setNombreNiveaux(iNombreNiveaux);
             panoCree.setImgVignettePanoramique(imgPano3);
@@ -11028,11 +11498,15 @@ public class EditeurPanovisu extends Application {
                             .getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            Image imgEquiRectangulaire = TransformationsPanoramique.cube2rect(imgFront, imgLeft, imgRight, imgBehind, imgTop, imgBottom, 1200);
-            Image imgEquiRectangulaire2 = TransformationsPanoramique.cube2rect(imgFront, imgLeft, imgRight, imgBehind, imgTop, imgBottom, 8000);
+            Image imgEquiRectangulaire = TransformationsPanoramique.cube2rect(imgFront, imgLeft, imgRight, imgBehind,
+                    imgTop, imgBottom, 1200);
+            Image imgEquiRectangulaire2 = TransformationsPanoramique.cube2rect(imgFront, imgLeft, imgRight, imgBehind,
+                    imgTop, imgBottom, 8000);
             panoCree.setImgCubeEqui(imgEquiRectangulaire2);
-            Image imgVignetteEquiRectangulaire = TransformationsPanoramique.cube2rect(imgFront, imgLeft, imgRight, imgBehind, imgTop, imgBottom, 300);
-            Image imgPano5 = TransformationsPanoramique.cube2rect(imgFront, imgLeft, imgRight, imgBehind, imgTop, imgBottom, 70);
+            Image imgVignetteEquiRectangulaire = TransformationsPanoramique.cube2rect(imgFront, imgLeft, imgRight,
+                    imgBehind, imgTop, imgBottom, 300);
+            Image imgPano5 = TransformationsPanoramique.cube2rect(imgFront, imgLeft, imgRight, imgBehind, imgTop,
+                    imgBottom, 70);
             panoCree.setImgPanoramique(imgEquiRectangulaire);
             Platform.runLater(() -> {
                 lblNiveaux.setText("Création visualisation panoramique");
@@ -11040,31 +11514,37 @@ public class EditeurPanovisu extends Application {
             });
 
             panoCree.setImgVisuPanoramique(imgTransformationImage(imgEquiRectangulaire2, 1));
-            int iNombreNiveaux = iCreeNiveauxImageCube(strNom + "_u." + strExtension, getStrRepertPanos(), getiNombrePanoramiques(), "dessus");
+            int iNombreNiveaux = iCreeNiveauxImageCube(strNom + "_u." + strExtension, getStrRepertPanos(),
+                    getiNombrePanoramiques(), "dessus");
             Platform.runLater(() -> {
                 pbarAvanceChargement.setProgress(((double) (iNumero - 1) + 4.d / 9.d) / (double) iTotal);
             });
 
-            iCreeNiveauxImageCube(strNom + "_d." + strExtension, getStrRepertPanos(), getiNombrePanoramiques(), "dessous");
+            iCreeNiveauxImageCube(strNom + "_d." + strExtension, getStrRepertPanos(), getiNombrePanoramiques(),
+                    "dessous");
             Platform.runLater(() -> {
                 pbarAvanceChargement.setProgress(((double) (iNumero - 1) + 5.d / 9.d) / (double) iTotal);
             });
-            iCreeNiveauxImageCube(strNom + "_l." + strExtension, getStrRepertPanos(), getiNombrePanoramiques(), "gauche");
+            iCreeNiveauxImageCube(strNom + "_l." + strExtension, getStrRepertPanos(), getiNombrePanoramiques(),
+                    "gauche");
             Platform.runLater(() -> {
                 pbarAvanceChargement.setProgress(((double) (iNumero - 1) + 2.d / 3.d) / (double) iTotal);
             });
 
-            iCreeNiveauxImageCube(strNom + "_r." + strExtension, getStrRepertPanos(), getiNombrePanoramiques(), "droite");
+            iCreeNiveauxImageCube(strNom + "_r." + strExtension, getStrRepertPanos(), getiNombrePanoramiques(),
+                    "droite");
             Platform.runLater(() -> {
                 pbarAvanceChargement.setProgress(((double) (iNumero - 1) + 7.d / 9.d) / (double) iTotal);
             });
 
-            iCreeNiveauxImageCube(strNom + "_f." + strExtension, getStrRepertPanos(), getiNombrePanoramiques(), "devant");
+            iCreeNiveauxImageCube(strNom + "_f." + strExtension, getStrRepertPanos(), getiNombrePanoramiques(),
+                    "devant");
             Platform.runLater(() -> {
                 pbarAvanceChargement.setProgress(((double) (iNumero - 1) + 8.d / 9.d) / (double) iTotal);
             });
 
-            iCreeNiveauxImageCube(strNom + "_b." + strExtension, getStrRepertPanos(), getiNombrePanoramiques(), "derriere");
+            iCreeNiveauxImageCube(strNom + "_b." + strExtension, getStrRepertPanos(), getiNombrePanoramiques(),
+                    "derriere");
             Platform.runLater(() -> {
                 pbarAvanceChargement.setProgress(((double) (iNumero)) / (double) iTotal);
             });
@@ -11130,17 +11610,20 @@ public class EditeurPanovisu extends Application {
             }
             getPanoramiquesProjet()[getiPanoActuel()].setStrNomFichier(strFichierPano);
             int iNum = getiPanoActuel();
-            int iNombreNiveaux = iCreeNiveauxImageEqui(imageFile.getAbsolutePath(), strFichierPano, getStrRepertPanos(), iNum, 0, 0);
+            int iNombreNiveaux = iCreeNiveauxImageEqui(imageFile.getAbsolutePath(), strFichierPano, getStrRepertPanos(),
+                    iNum, 0, 0);
             Image imgPano3 = null;
             Image imgPano4 = null;
             Image imgPano5 = null;
-            String strExtension = imageFile.getAbsolutePath().substring(imageFile.getAbsolutePath().length() - 3, imageFile.getAbsolutePath().length());
+            String strExtension = imageFile.getAbsolutePath().substring(imageFile.getAbsolutePath().length() - 3,
+                    imageFile.getAbsolutePath().length());
             if ("tif".equals(strExtension)) {
                 try {
                     imgPanoRetaille2 = ReadWriteImage.readTiff(imageFile.getAbsolutePath());
                     imgPanoRetaille2 = ReadWriteImage.resizeImage(imgPanoRetaille2, 1200, 600);
 
-                    String nomVignette = imageFile.getAbsolutePath().substring(0, imageFile.getAbsolutePath().lastIndexOf(".")) + "Vignette.jpg";
+                    String nomVignette = imageFile.getAbsolutePath().substring(0,
+                            imageFile.getAbsolutePath().lastIndexOf(".")) + "Vignette.jpg";
                     File ficVig = new File(nomVignette);
                     if (ficVig.exists()) {
                         imgPano3 = new Image("file:" + nomVignette, 300, 150, true, true, true);
@@ -11153,7 +11636,8 @@ public class EditeurPanovisu extends Application {
                         imgPano4 = imgPano3;
                         imgPano5 = ReadWriteImage.resizeImage(imgPano3, 70, 35);
                     }
-                    getPanoramiquesProjet()[getiPanoActuel()].setImgVisuPanoramique(imgTransformationImage(ReadWriteImage.readTiff(imageFile.getAbsolutePath()), 2));
+                    getPanoramiquesProjet()[getiPanoActuel()].setImgVisuPanoramique(
+                            imgTransformationImage(ReadWriteImage.readTiff(imageFile.getAbsolutePath()), 2));
 
                 } catch (IOException ex) {
                     Logger.getLogger(EditeurPanovisu.class
@@ -11162,7 +11646,8 @@ public class EditeurPanovisu extends Application {
             } else {
                 imgPanoRetaille2 = new Image("file:" + imageFile.getAbsolutePath(), 1200, 600, true, true, true);
                 imgPano5 = new Image("file:" + imageFile.getAbsolutePath(), 70, 35, true, true, true);
-                String nomVignette = imageFile.getAbsolutePath().substring(0, imageFile.getAbsolutePath().lastIndexOf(".")) + "Vignette.jpg";
+                String nomVignette = imageFile.getAbsolutePath().substring(0,
+                        imageFile.getAbsolutePath().lastIndexOf(".")) + "Vignette.jpg";
                 File ficVig = new File(nomVignette);
                 if (ficVig.exists()) {
                     imgPano3 = new Image("file:" + nomVignette, 300, 150, true, true, true);
@@ -11171,7 +11656,8 @@ public class EditeurPanovisu extends Application {
                     imgPano3 = new Image("file:" + imageFile.getAbsolutePath(), 300, 150, true, true, true);
                     imgPano4 = imgPano3;
                 }
-                getPanoramiquesProjet()[getiPanoActuel()].setImgVisuPanoramique(imgTransformationImage(new Image("file:" + imageFile.getAbsolutePath()), 2));
+                getPanoramiquesProjet()[getiPanoActuel()].setImgVisuPanoramique(
+                        imgTransformationImage(new Image("file:" + imageFile.getAbsolutePath()), 2));
             }
             getPanoramiquesProjet()[getiPanoActuel()].setImgPanoramique(imgPanoRetaille2);
             getPanoramiquesProjet()[getiPanoActuel()].setNombreNiveaux(iNombreNiveaux);
@@ -11182,12 +11668,12 @@ public class EditeurPanovisu extends Application {
             // 🚀 PRÉ-CALCUL pour optimiser l'affichage des visualiseurs
             System.out.println("🚀 Pré-calcul pour le panorama " + getiPanoActuel());
             Image imgPanoSource = new Image("file:" + imageFile.getAbsolutePath());
-            
+
             // Image haute résolution pour le mode plein écran (iRapport=1)
             System.out.println("   📸 Pré-chargement image haute résolution...");
             Image imgHauteRes = imgTransformationImage(imgPanoSource, 1);
             getPanoramiquesProjet()[getiPanoActuel()].setImgHauteResolution(imgHauteRes);
-            
+
             // Cube petite résolution (500×500) pour le petit visualiseur
             try {
                 Image[] cubesPetits = TransformationsPanoramique.equi2cubeAuto(imgPanoSource, 500);
@@ -11196,7 +11682,7 @@ public class EditeurPanovisu extends Application {
             } catch (InterruptedException ex) {
                 System.err.println("   ⚠️ Échec pré-calcul cube 500×500");
             }
-            
+
             // Cube grande résolution (1000×1000) pour le grand visualiseur
             try {
                 Image[] cubesGrands = TransformationsPanoramique.equi2cubeAuto(imgPanoSource, 1000);
@@ -11248,15 +11734,21 @@ public class EditeurPanovisu extends Application {
                             .getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            Image imgEquiRectangulaire = TransformationsPanoramique.cube2rect(imgFront, imgLeft, imgRight, imgBehind, imgTop, imgBottom, 1200);
-            Image imgEquiRectangulaire2 = TransformationsPanoramique.cube2rect(imgFront, imgLeft, imgRight, imgBehind, imgTop, imgBottom, 4096);
-            Image imgVignetteEquiRectangulaire = TransformationsPanoramique.cube2rect(imgFront, imgLeft, imgRight, imgBehind, imgTop, imgBottom, 300);
-            Image imgPano5 = TransformationsPanoramique.cube2rect(imgFront, imgLeft, imgRight, imgBehind, imgTop, imgBottom, 70);
+            Image imgEquiRectangulaire = TransformationsPanoramique.cube2rect(imgFront, imgLeft, imgRight, imgBehind,
+                    imgTop, imgBottom, 1200);
+            Image imgEquiRectangulaire2 = TransformationsPanoramique.cube2rect(imgFront, imgLeft, imgRight, imgBehind,
+                    imgTop, imgBottom, 4096);
+            Image imgVignetteEquiRectangulaire = TransformationsPanoramique.cube2rect(imgFront, imgLeft, imgRight,
+                    imgBehind, imgTop, imgBottom, 300);
+            Image imgPano5 = TransformationsPanoramique.cube2rect(imgFront, imgLeft, imgRight, imgBehind, imgTop,
+                    imgBottom, 70);
             getPanoramiquesProjet()[getiPanoActuel()].setImgPanoramique(imgEquiRectangulaire);
 
-            getPanoramiquesProjet()[getiPanoActuel()].setImgVisuPanoramique(imgTransformationImage(imgEquiRectangulaire2, 1));
+            getPanoramiquesProjet()[getiPanoActuel()]
+                    .setImgVisuPanoramique(imgTransformationImage(imgEquiRectangulaire2, 1));
             int iNum = getiPanoActuel();
-            int iNombreNiveaux = iCreeNiveauxImageCube(strNom + "_u." + strExtension, getStrRepertPanos(), iNum, "dessus");
+            int iNombreNiveaux = iCreeNiveauxImageCube(strNom + "_u." + strExtension, getStrRepertPanos(), iNum,
+                    "dessus");
             iCreeNiveauxImageCube(strNom + "_d." + strExtension, getStrRepertPanos(), iNum, "dessous");
             iCreeNiveauxImageCube(strNom + "_l." + strExtension, getStrRepertPanos(), iNum, "gauche");
             iCreeNiveauxImageCube(strNom + "_r." + strExtension, getStrRepertPanos(), iNum, "droite");
@@ -11343,7 +11835,8 @@ public class EditeurPanovisu extends Application {
      * pour les visualisations équirectangulaires. Les fonctionnalités incluent :
      * <ul>
      * <li>Charger plusieurs images via drag &amp; drop ou FileChooser</li>
-     * <li>Analyse automatique des couleurs de bordure pour un padding intelligent</li>
+     * <li>Analyse automatique des couleurs de bordure pour un padding
+     * intelligent</li>
      * <li>Positionnement de l'image source (centré, haut, bas)</li>
      * <li>Extension avec remplissage basé sur les couleurs de bord</li>
      * <li>Prévisualisation avant traitement</li>
@@ -11370,7 +11863,8 @@ public class EditeurPanovisu extends Application {
     private static void modeleSauver() throws IOException {
         File fileTemplate;
         FileChooser fcRepertChoix = new FileChooser();
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("fichier Modèle panoVisu (*.tpl)", "*.tpl");
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("fichier Modèle panoVisu (*.tpl)",
+                "*.tpl");
         fcRepertChoix.getExtensionFilters().add(extFilter);
         File fileRepert = new File(getStrRepertAppli() + File.separator + "templates");
         if (!fileRepert.exists()) {
@@ -11440,7 +11934,7 @@ public class EditeurPanovisu extends Application {
     /**
      *
      * @param iNumZone numéro de la zone
-     * @param points liste de points du polygone
+     * @param points   liste de points du polygone
      * @return ancres du polygone
      */
     private static ObservableList<AncreForme> olCreeAncresPourPolygone(int iNumZone,
@@ -11478,7 +11972,7 @@ public class EditeurPanovisu extends Application {
     /**
      *
      * @param iNumZone numéro de la zone
-     * @param cercle cercle concerné
+     * @param cercle   cercle concerné
      * @return ancres cercles
      */
     private static ObservableList<AncreForme> olCreeAncresPourCercle(int iNumZone,
@@ -11494,33 +11988,41 @@ public class EditeurPanovisu extends Application {
         olAnchors.add(ancRayon);
         xProperty1.addListener((ObservableValue<? extends Number> ov, Number oldX, Number x) -> {
             double dX = (double) x - cercle.getCenterX();
-            double rayon = Math.sqrt(Math.pow(cercle.getCenterX() - xProperty2.get(), 2.d) + Math.pow(cercle.getCenterY() - yProperty2.get(), 2.d));
+            double rayon = Math.sqrt(Math.pow(cercle.getCenterX() - xProperty2.get(), 2.d)
+                    + Math.pow(cercle.getCenterY() - yProperty2.get(), 2.d));
             cercle.setCenterX((double) x);
             ancRayon.setCenterX(ancRayon.getCenterX() + dX);
-            String chaine = Math.round(cercle.getCenterX() * 10) / 10 + "," + Math.round(cercle.getCenterY() * 10) / 10 + "," + Math.round(rayon * 10) / 10;
+            String chaine = Math.round(cercle.getCenterX() * 10) / 10 + "," + Math.round(cercle.getCenterY() * 10) / 10
+                    + "," + Math.round(rayon * 10) / 10;
             zones[iNumZone].setStrCoordonneesZone(chaine);
 
         });
 
         yProperty1.addListener((ObservableValue<? extends Number> ov, Number oldY, Number y) -> {
             double dY = -cercle.getCenterY() + (double) y;
-            double rayon = Math.sqrt(Math.pow(cercle.getCenterX() - xProperty2.get(), 2.d) + Math.pow(cercle.getCenterY() - yProperty2.get(), 2.d));
+            double rayon = Math.sqrt(Math.pow(cercle.getCenterX() - xProperty2.get(), 2.d)
+                    + Math.pow(cercle.getCenterY() - yProperty2.get(), 2.d));
             cercle.setCenterY((double) y);
             ancRayon.setCenterY(ancRayon.getCenterY() + dY);
-            String chaine = Math.round(cercle.getCenterX() * 10) / 10 + "," + Math.round(cercle.getCenterY() * 10) / 10 + "," + Math.round(rayon * 10) / 10;
+            String chaine = Math.round(cercle.getCenterX() * 10) / 10 + "," + Math.round(cercle.getCenterY() * 10) / 10
+                    + "," + Math.round(rayon * 10) / 10;
             zones[iNumZone].setStrCoordonneesZone(chaine);
         });
         xProperty2.addListener((ObservableValue<? extends Number> ov, Number oldX, Number x) -> {
-            double rayon = Math.sqrt(Math.pow(cercle.getCenterX() - (double) x, 2.d) + Math.pow(cercle.getCenterY() - yProperty2.get(), 2.d));
+            double rayon = Math.sqrt(Math.pow(cercle.getCenterX() - (double) x, 2.d)
+                    + Math.pow(cercle.getCenterY() - yProperty2.get(), 2.d));
             cercle.setRadius(rayon);
-            String chaine = Math.round(cercle.getCenterX() * 10) / 10 + "," + Math.round(cercle.getCenterY() * 10) / 10 + "," + Math.round(rayon * 10) / 10;
+            String chaine = Math.round(cercle.getCenterX() * 10) / 10 + "," + Math.round(cercle.getCenterY() * 10) / 10
+                    + "," + Math.round(rayon * 10) / 10;
             zones[iNumZone].setStrCoordonneesZone(chaine);
         });
 
         yProperty2.addListener((ObservableValue<? extends Number> ov, Number oldY, Number y) -> {
-            double rayon = Math.sqrt(Math.pow(cercle.getCenterX() - xProperty2.get(), 2.d) + Math.pow(cercle.getCenterY() - (double) y, 2.d));
+            double rayon = Math.sqrt(Math.pow(cercle.getCenterX() - xProperty2.get(), 2.d)
+                    + Math.pow(cercle.getCenterY() - (double) y, 2.d));
             cercle.setRadius(rayon);
-            String chaine = Math.round(cercle.getCenterX() * 10) / 10 + "," + Math.round(cercle.getCenterY() * 10) / 10 + "," + Math.round(rayon * 10) / 10;
+            String chaine = Math.round(cercle.getCenterX() * 10) / 10 + "," + Math.round(cercle.getCenterY() * 10) / 10
+                    + "," + Math.round(rayon * 10) / 10;
             zones[iNumZone].setStrCoordonneesZone(chaine);
         });
 
@@ -11530,7 +12032,7 @@ public class EditeurPanovisu extends Application {
     /**
      *
      * @param iNumZone numero de la zone
-     * @param rect rectangle concerné
+     * @param rect     rectangle concerné
      * @return ancres rectangle
      */
     private static ObservableList<AncreForme> olCreeAncresPourRectangle(int iNumZone,
@@ -11594,7 +12096,8 @@ public class EditeurPanovisu extends Application {
      * @param strIdZone
      * @param mouseEvent
      */
-    private static void choixZone(int iLargeur, int iHauteur, boolean bMasqueZones, String strIdZone, MouseEvent mouseEvent) {
+    private static void choixZone(int iLargeur, int iHauteur, boolean bMasqueZones, String strIdZone,
+            MouseEvent mouseEvent) {
         final int iNumeroZone = Integer.parseInt(strIdZone.split("-")[1]);
         if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
             if (mouseEvent.getClickCount() == 2) {
@@ -11606,9 +12109,9 @@ public class EditeurPanovisu extends Application {
             } else {
                 afficheBarrePersonnalisee(iLargeur, iHauteur, bMasqueZones);
                 apZoneBarrePersonnalisee.getChildren().clear();
-                
+
                 ZoneTelecommande zone = zones[iNumeroZone];
-                
+
                 // ComboBox moderne pour le choix de touche
                 ComboBox cbTouchesBarre = new ComboBox();
                 cbTouchesBarre.getItems().clear();
@@ -11618,7 +12121,7 @@ public class EditeurPanovisu extends Application {
                 cbTouchesBarre.setLayoutX(20);
                 cbTouchesBarre.setLayoutY(30); // Décalé de 30px vers le bas
                 cbTouchesBarre.setPrefWidth(295);
-                
+
                 // Trouver l'index de l'action de la zone et sélectionner dans la ComboBox
                 int index = -1;
                 for (int ij = 0; ij < strCodeBarre.length; ij++) {
@@ -11629,8 +12132,9 @@ public class EditeurPanovisu extends Application {
                 if (index != -1) {
                     cbTouchesBarre.getSelectionModel().select(index);
                 }
-                
-                // Utiliser une CellFactory pour forcer le style des items (fond blanc, texte noir)
+
+                // Utiliser une CellFactory pour forcer le style des items (fond blanc, texte
+                // noir)
                 cbTouchesBarre.setCellFactory(param -> new javafx.scene.control.ListCell<String>() {
                     @Override
                     protected void updateItem(String item, boolean empty) {
@@ -11641,12 +12145,11 @@ public class EditeurPanovisu extends Application {
                         } else {
                             setText(item);
                             setStyle(
-                                ""
-                            );
+                                    "");
                         }
                     }
                 });
-                
+
                 // Style pour le bouton de la ComboBox (affichage de la valeur sélectionnée)
                 cbTouchesBarre.setButtonCell(new javafx.scene.control.ListCell<String>() {
                     @Override
@@ -11660,12 +12163,12 @@ public class EditeurPanovisu extends Application {
                         }
                     }
                 });
-                
+
                 // Label titre pour la section
                 Label lblTitreZone = new Label("Zone sélectionnée");
                 lblTitreZone.setLayoutX(20);
                 lblTitreZone.setLayoutY(5);
-                
+
                 // Ajouter les éléments au panel
                 apZoneBarrePersonnalisee.getChildren().addAll(lblTitreZone, cbTouchesBarre);
 
@@ -11680,23 +12183,23 @@ public class EditeurPanovisu extends Application {
                 Label lblTypeLabel = new Label("Type :");
                 lblTypeLabel.setLayoutX(20);
                 lblTypeLabel.setLayoutY(70);
-                
+
                 Label lblTypeBarre = new Label(zone.getStrTypeZone());
                 lblTypeBarre.setLayoutX(70);
                 lblTypeBarre.setLayoutY(70);
-                
+
                 // Label Coordonnées avec style moderne
                 Label lblCoordsLabel = new Label("Coordonnées :");
                 lblCoordsLabel.setLayoutX(20);
                 lblCoordsLabel.setLayoutY(95);
-                
+
                 Label lblCoordsBarre = new Label(zone.getStrCoordonneesZone());
                 lblCoordsBarre.setLayoutX(20);
                 lblCoordsBarre.setLayoutY(115);
                 lblCoordsBarre.setPrefWidth(295);
                 lblCoordsBarre.setMaxWidth(295);
                 lblCoordsBarre.setWrapText(true);
-                
+
                 apZoneBarrePersonnalisee.getChildren()
                         .addAll(lblTypeLabel, lblTypeBarre, lblCoordsLabel, lblCoordsBarre);
                 switch (zone.getStrTypeZone()) {
@@ -11704,7 +12207,8 @@ public class EditeurPanovisu extends Application {
                         Polygon poly = (Polygon) apImgBarrePersonnalisee.lookup("#" + strIdZone);
                         poly.setFill(Color.rgb(255, 0, 0, 0.5));
                         poly.setStroke(Color.YELLOW);
-                        apImgBarrePersonnalisee.getChildren().addAll(olCreeAncresPourPolygone(iNumeroZone, poly.getPoints()));
+                        apImgBarrePersonnalisee.getChildren()
+                                .addAll(olCreeAncresPourPolygone(iNumeroZone, poly.getPoints()));
                         break;
                     case "rect":
                         Rectangle rect = (Rectangle) apImgBarrePersonnalisee.lookup("#" + strIdZone);
@@ -11814,23 +12318,25 @@ public class EditeurPanovisu extends Application {
         bRecommenceZone = false;
         apZoneBarrePersonnalisee.getChildren().clear();
         apZoneBarrePersonnalisee.getStyleClass().add("dialog-content-pane");
-        
+
         // Boutons modernes avec effets hover
-        Button btnAnnuler = new Button(rbLocalisation.getString("main.annuler"), new ImageView(new Image("file:" + getStrRepertAppli() + "/images/annule.png")));
-        Button btnValider = new Button(rbLocalisation.getString("main.valider"), new ImageView(new Image("file:" + getStrRepertAppli() + "/images/valide.png")));
-        
+        Button btnAnnuler = new Button(rbLocalisation.getString("main.annuler"),
+                new ImageView(new Image("file:" + getStrRepertAppli() + "/images/annule.png")));
+        Button btnValider = new Button(rbLocalisation.getString("main.valider"),
+                new ImageView(new Image("file:" + getStrRepertAppli() + "/images/valide.png")));
+
         btnValider.setLayoutX(175);
         btnValider.setLayoutY(235);
         btnValider.setPrefWidth(140);
         btnValider.setPrefHeight(35);
-        
+
         btnAnnuler.setLayoutX(20);
         btnAnnuler.setLayoutY(235);
         btnAnnuler.setPrefWidth(140);
         btnAnnuler.setPrefHeight(35);
-        
+
         ToggleGroup tgTypeZone = new ToggleGroup();
-        
+
         // Label de section moderne
         Label lblTypeZone = new Label(rbLocalisation.getString("main.typeZone"));
         lblTypeZone.setLayoutX(20);
@@ -11842,25 +12348,25 @@ public class EditeurPanovisu extends Application {
         rbCercleZone.setLayoutY(40);
         rbCercleZone.setUserData("circle");
         rbCercleZone.setToggleGroup(tgTypeZone);
-        
+
         RadioButton rbRectZone = new RadioButton(rbLocalisation.getString("main.rectangle"));
         rbRectZone.setLayoutX(20);
         rbRectZone.setLayoutY(70);
         rbRectZone.setUserData("rect");
         rbRectZone.setToggleGroup(tgTypeZone);
-        
+
         RadioButton rbPolyZone = new RadioButton(rbLocalisation.getString("main.polygone"));
         rbPolyZone.setLayoutX(20);
         rbPolyZone.setLayoutY(100);
         rbPolyZone.setUserData("poly");
         rbPolyZone.setToggleGroup(tgTypeZone);
         rbPolyZone.setSelected(true);
-        
+
         // Label pour la ComboBox
         Label lblTouche = new Label("Touche :");
         lblTouche.setLayoutX(20);
         lblTouche.setLayoutY(140);
-        
+
         // ComboBox moderne
         ComboBox cbTouchesBarre = new ComboBox();
         cbTouchesBarre.getItems().clear();
@@ -11883,8 +12389,7 @@ public class EditeurPanovisu extends Application {
                 rbCercleZone, rbRectZone, rbPolyZone,
                 lblTouche,
                 cbTouchesBarre,
-                btnAnnuler, btnValider
-        );
+                btnAnnuler, btnValider);
         apCreeZone.setOnMouseClicked((t) -> {
             rbCercleZone.setDisable(true);
             rbRectZone.setDisable(true);
@@ -11907,8 +12412,7 @@ public class EditeurPanovisu extends Application {
                         rect.setFill(Color.rgb(255, 0, 0, 0.5));
                         rect.setStroke(Color.YELLOW);
                         apCreeZone.getChildren().add(rect);
-                        String chaine
-                                = Math.round(x1Zone * 10) / 10 + "," + Math.round(y1Zone * 10) / 10 + ","
+                        String chaine = Math.round(x1Zone * 10) / 10 + "," + Math.round(y1Zone * 10) / 10 + ","
                                 + Math.round(t.getX() * 10) / 10 + "," + Math.round(t.getY() * 10) / 10;
                         zone.setStrCoordonneesZone(chaine);
                         iNombrePointsZone = 0;
@@ -11931,8 +12435,7 @@ public class EditeurPanovisu extends Application {
                         cercle.setFill(Color.rgb(255, 0, 0, 0.5));
                         cercle.setStroke(Color.YELLOW);
                         apCreeZone.getChildren().add(cercle);
-                        String chaine
-                                = Math.round(x1Zone * 10) / 10 + "," + Math.round(y1Zone * 10) / 10 + ","
+                        String chaine = Math.round(x1Zone * 10) / 10 + "," + Math.round(y1Zone * 10) / 10 + ","
                                 + Math.round(rayon * 10) / 10;
                         zone.setStrCoordonneesZone(chaine);
                         iNombrePointsZone = 0;
@@ -11980,7 +12483,8 @@ public class EditeurPanovisu extends Application {
                             if (i != 0) {
                                 chaine += ",";
                             }
-                            chaine += Math.round(pointsPolyZone[i * 2] * 10) / 10 + "," + Math.round(pointsPolyZone[i * 2 + 1] * 10) / 10;
+                            chaine += Math.round(pointsPolyZone[i * 2] * 10) / 10 + ","
+                                    + Math.round(pointsPolyZone[i * 2 + 1] * 10) / 10;
                         }
                         zone.setStrCoordonneesZone(chaine);
                         bRecommenceZone = true;
@@ -12041,7 +12545,8 @@ public class EditeurPanovisu extends Application {
                     if (i != 0) {
                         strChaine += ",";
                     }
-                    strChaine += Math.round(pointsPolyZone[i * 2] * 10) / 10 + "," + Math.round(pointsPolyZone[i * 2 + 1] * 10) / 10;
+                    strChaine += Math.round(pointsPolyZone[i * 2] * 10) / 10 + ","
+                            + Math.round(pointsPolyZone[i * 2 + 1] * 10) / 10;
                 }
                 zone.setStrCoordonneesZone(strChaine);
 
@@ -12064,12 +12569,13 @@ public class EditeurPanovisu extends Application {
             }
         });
 
-        tgTypeZone.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) -> {
-            if (tgTypeZone.getSelectedToggle() != null) {
-                strTypeZone = tgTypeZone.getSelectedToggle().getUserData().toString();
-                zone.setStrTypeZone(strTypeZone);
-            }
-        });
+        tgTypeZone.selectedToggleProperty()
+                .addListener((ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) -> {
+                    if (tgTypeZone.getSelectedToggle() != null) {
+                        strTypeZone = tgTypeZone.getSelectedToggle().getUserData().toString();
+                        zone.setStrTypeZone(strTypeZone);
+                    }
+                });
 
     }
 
@@ -12077,7 +12583,7 @@ public class EditeurPanovisu extends Application {
      *
      * @param fichShp
      * @throws FileNotFoundException Exception fichier non trouvé
-     * @throws IOException Exception d'entrée sortie
+     * @throws IOException           Exception d'entrée sortie
      */
     @SuppressWarnings("null")
     private static void sauverBarre(String fichShp) throws FileNotFoundException, IOException {
@@ -12133,28 +12639,30 @@ public class EditeurPanovisu extends Application {
         }
         for (int i = 0; i < diapo.getiNombreImages(); i++) {
             copieFichierRepertoire(diapo.getStrFichiersImage(i), strImageDiapoRepert);
-            
+
             // Vérifier que le fichier source existe avant de créer l'image
             File fichierSource = new File(diapo.getStrFichiersImage(i));
             if (!fichierSource.exists()) {
                 System.err.println("⚠️ Fichier image introuvable, vignette ignorée : " + diapo.getStrFichiersImage(i));
                 continue;
             }
-            
+
             Image img = new Image("file:" + diapo.getStrFichiersImage(i), 400, 300, true, true);
-            
+
             // Vérifier que l'image a été correctement chargée
             if (img.isError() || img.getWidth() == 0 || img.getHeight() == 0) {
-                System.err.println("⚠️ Erreur de chargement de l'image, vignette ignorée : " + diapo.getStrFichiersImage(i));
+                System.err.println(
+                        "⚠️ Erreur de chargement de l'image, vignette ignorée : " + diapo.getStrFichiersImage(i));
                 continue;
             }
-            
-            ReadWriteImage.writeJpeg(img, fileVignetteDiapoRepert + File.separator + diapo.getStrFichiers(i), 0.75f, false, 0);
+
+            ReadWriteImage.writeJpeg(img, fileVignetteDiapoRepert + File.separator + diapo.getStrFichiers(i), 0.75f,
+                    false, 0);
 
         }
         String strDiapoNom = "diapo" + iNumero + ".html";
         int intervalle = (int) (diapo.getDelaiDiaporama() * 1000);
-        
+
         // Générer le contenu HTML moderne
         String strContenuHTML = "<!DOCTYPE html>\n"
                 + "<html lang=\"fr\">\n"
@@ -12168,7 +12676,8 @@ public class EditeurPanovisu extends Application {
                 + "        #slideshow-container { position: relative; width: 100vw; height: 100vh; background: #000; }\n"
                 + "        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1.2s cubic-bezier(0.4, 0.0, 0.2, 1); z-index: 1; }\n"
                 + "        .slide.active { opacity: 1; z-index: 2; }\n"
-                + "        .slide img { width: 100%; height: 100%; object-fit: contain; background: " + diapo.getStrCouleurFondDiaporama() + "; }\n"
+                + "        .slide img { width: 100%; height: 100%; object-fit: contain; background: "
+                + diapo.getStrCouleurFondDiaporama() + "; }\n"
                 + "        #controls-bar { position: fixed; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 50%, transparent 100%); padding: 30px 40px 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px; z-index: 100; opacity: 0; transform: translateY(100%); transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1); }\n"
                 + "        #controls-bar.visible { opacity: 1; transform: translateY(0); }\n"
                 + "        .control-button { background: rgba(255, 255, 255, 0.1); border: 2px solid rgba(255, 255, 255, 0.3); border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease; backdrop-filter: blur(10px); }\n"
@@ -12238,7 +12747,7 @@ public class EditeurPanovisu extends Application {
                 + "    <script>\n"
                 + "        const slideshowConfig = {\n"
                 + "            slides: [\n";
-        
+
         // Ajouter les images du diaporama
         for (int i = 0; i < diapo.getiNombreImages(); i++) {
             String titre = diapo.getStrLibellesImages(i)
@@ -12255,7 +12764,7 @@ public class EditeurPanovisu extends Application {
                 strContenuHTML += "\n";
             }
         }
-        
+
         strContenuHTML += "            ],\n"
                 + "            interval: " + intervalle + ",\n"
                 + "            autoplay: true,\n"
@@ -12340,14 +12849,13 @@ public class EditeurPanovisu extends Application {
         apCreationDiaporama.getChildren().addAll(
                 lblNomDiapo, cbListeDiapo,
                 btnEffaceDiapo, btnNouveauDiapo,
-                gestDiapo.apDiaporama
-        );
+                gestDiapo.apDiaporama);
 
         apCreationDiaporama.setPrefWidth(iLargeur);
-        //apCreationDiaporama.setMinWidth(iLargeur);
+        // apCreationDiaporama.setMinWidth(iLargeur);
         apCreationDiaporama.setMaxWidth(iLargeur);
         apCreationDiaporama.setPrefHeight(iHauteur);
-        //apCreationDiaporama.setMinHeight(iHauteur);
+        // apCreationDiaporama.setMinHeight(iHauteur);
         apCreationDiaporama.setMaxHeight(iHauteur);
         apCreationDiaporama.setLayoutX((iLargeurEcran - iLargeur) / 2);
         apCreationDiaporama.setLayoutY((iHauteurEcran - iHauteur) / 2);
@@ -12536,8 +13044,7 @@ public class EditeurPanovisu extends Application {
 
                 }
             }
-        }
-        );
+        });
 
     }
 
@@ -12548,15 +13055,18 @@ public class EditeurPanovisu extends Application {
     public static void creerEditerBarre(String strNomFichierBarre) {
         apCreationBarre.getChildren().clear();
         apCreationBarre.getStyleClass().add("dialog-content-pane");
-        
+
         // Style moderne avec fond gris clair et padding
 
         AnchorPane apOutilsBarre = new AnchorPane();
         apOutilsBarre.getStyleClass().add("dialog-content-pane");
-        Button btnAnnulerBarre = new Button(rbLocalisation.getString("main.quitter"), new ImageView(new Image("file:" + getStrRepertAppli() + "/images/annule.png")));
-        final Button btnSauverBarre = new Button(rbLocalisation.getString("main.sauver"), new ImageView(new Image("file:" + getStrRepertAppli() + "/images/sauveProjet.png", 24, 24, true, true, true)));
+        Button btnAnnulerBarre = new Button(rbLocalisation.getString("main.quitter"),
+                new ImageView(new Image("file:" + getStrRepertAppli() + "/images/annule.png")));
+        final Button btnSauverBarre = new Button(rbLocalisation.getString("main.sauver"), new ImageView(
+                new Image("file:" + getStrRepertAppli() + "/images/sauveProjet.png", 24, 24, true, true, true)));
         Rectangle2D tailleEcran = Screen.getPrimary().getBounds();
-        btnAjouteZone = new Button(rbLocalisation.getString("main.ajouteZone"), new ImageView(new Image("file:" + getStrRepertAppli() + "/images/btn+.png", 24, 24, true, true, true)));
+        btnAjouteZone = new Button(rbLocalisation.getString("main.ajouteZone"),
+                new ImageView(new Image("file:" + getStrRepertAppli() + "/images/btn+.png", 24, 24, true, true, true)));
         apImgBarrePersonnalisee = new AnchorPane();
         apImgBarrePersonnalisee.getChildren().clear();
         apZoneBarrePersonnalisee = new AnchorPane();
@@ -12583,7 +13093,7 @@ public class EditeurPanovisu extends Application {
         apCreationBarre.setLayoutX((iLargeurEcran - iLargeur) / 2);
         apCreationBarre.setLayoutY((iHauteurEcran - iHauteur) / 2);
         apCreationBarre.setVisible(true);
-        
+
         // Titre moderne
         Label lblBarrePersonnalisee = new Label(rbLocalisation.getString("main.creeBarrePersonnalisee"));
         lblBarrePersonnalisee.setMinWidth(iLargeur - 40);
@@ -12591,7 +13101,7 @@ public class EditeurPanovisu extends Application {
         lblBarrePersonnalisee.setLayoutX(20);
         lblBarrePersonnalisee.setLayoutY(10);
         apCreationBarre.getChildren().add(lblBarrePersonnalisee);
-        
+
         // Panel d'outils à droite avec style moderne
         apOutilsBarre.setPrefWidth(350);
         apOutilsBarre.setMinWidth(350);
@@ -12602,56 +13112,55 @@ public class EditeurPanovisu extends Application {
         apOutilsBarre.setLayoutX(iLargeur - 370);
         apOutilsBarre.setLayoutY(70);
         apOutilsBarre.setPadding(new Insets(15, 15, 20, 15)); // Padding: top, right, bottom, left
-        
+
         // Titre de section "Outils"
         Label lblTitreOutils = new Label("Outils");
         lblTitreOutils.setLayoutX(20);
         lblTitreOutils.setLayoutY(15);
-        
+
         // Label et champ de chargement d'image
         Label lblChargeImage = new Label(rbLocalisation.getString("main.chargeImage"));
         lblChargeImage.setLayoutX(20);
         lblChargeImage.setLayoutY(50);
-        
+
         TextField tfChargeImage = new TextField("");
         tfChargeImage.setDisable(true);
         tfChargeImage.setPrefWidth(240);
         tfChargeImage.setLayoutX(20);
         tfChargeImage.setLayoutY(75);
         tfChargeImage.getStyleClass().add("text-field");
-        
+
         Button btnChargeImage = new Button("📁");
         btnChargeImage.setLayoutX(270);
         btnChargeImage.setLayoutY(75);
         btnChargeImage.setPrefWidth(50);
         btnChargeImage.getStyleClass().add("button-icon");
 
-        
         // CheckBox pour masquer les zones
         final CheckBox cbMasqueZones = new CheckBox(rbLocalisation.getString("main.masqueZones"));
         cbMasqueZones.setDisable(true);
         cbMasqueZones.setLayoutX(20);
         cbMasqueZones.setLayoutY(115);
-        
+
         // Bouton Ajouter Zone
         btnAjouteZone.setLayoutX(20);
         btnAjouteZone.setLayoutY(145);
         btnAjouteZone.setPrefWidth(300);
         btnAjouteZone.setPrefHeight(35);
         btnAjouteZone.setDisable(true);
-        
+
         // Style des boutons Annuler et Sauver
         btnAnnulerBarre.setPrefWidth(150);
         btnAnnulerBarre.setPrefHeight(40);
         btnAnnulerBarre.setLayoutX(20);
         btnAnnulerBarre.setLayoutY((iHauteur - 100) - 60); // Position depuis le bas du panel
-        
+
         btnSauverBarre.setPrefWidth(150);
         btnSauverBarre.setPrefHeight(40);
         btnSauverBarre.setLayoutX(180);
         btnSauverBarre.setLayoutY((iHauteur - 100) - 60); // Position depuis le bas du panel
         btnSauverBarre.setDisable(true);
-        
+
         apOutilsBarre.getChildren().addAll(
                 lblTitreOutils,
                 lblChargeImage,
@@ -12659,8 +13168,7 @@ public class EditeurPanovisu extends Application {
                 cbMasqueZones,
                 btnAjouteZone,
                 apZoneBarrePersonnalisee,
-                btnAnnulerBarre, btnSauverBarre
-        );
+                btnAnnulerBarre, btnSauverBarre);
 
         apCreationBarre.getChildren().addAll(apImgBarrePersonnalisee, apOutilsBarre);
         if (!strNomFichierBarre.equals("")) {
@@ -12708,7 +13216,8 @@ public class EditeurPanovisu extends Application {
             File fileRepert;
             fileRepert = new File(strRepertBarrePersonnalisee);
             FileChooser fileChooser = new FileChooser();
-            FileChooser.ExtensionFilter efShpFilter = new FileChooser.ExtensionFilter("Fichiers barre personnalisée (SHP)", "*.shp", "*.png");
+            FileChooser.ExtensionFilter efShpFilter = new FileChooser.ExtensionFilter(
+                    "Fichiers barre personnalisée (SHP)", "*.shp", "*.png");
 
             fileChooser.setInitialDirectory(fileRepert);
             fileChooser.getExtensionFilters().addAll(efShpFilter);
@@ -12749,9 +13258,10 @@ public class EditeurPanovisu extends Application {
                         .getName()).log(Level.SEVERE, null, ex);
             }
         });
-        cbMasqueZones.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
-            afficheBarrePersonnalisee(iLargeur, iHauteur, new_val);
-        });
+        cbMasqueZones.selectedProperty()
+                .addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) -> {
+                    afficheBarrePersonnalisee(iLargeur, iHauteur, new_val);
+                });
 
     }
 
@@ -12782,8 +13292,8 @@ public class EditeurPanovisu extends Application {
         if (isMac()) {
             mbarPrincipal.setUseSystemMenuBar(true);
         }
-        /* 
-         Menu projets
+        /*
+         * Menu projets
          */
         Menu mnuProjet = new Menu(rbLocalisation.getString("projets"));
 
@@ -12801,7 +13311,8 @@ public class EditeurPanovisu extends Application {
         mnuProjet.getItems().add(mniSauveProjet);
         mniSauveSousProjet = new MenuItem(rbLocalisation.getString("sauverProjetSous"));
         mniSauveSousProjet.setDisable(true);
-        mniSauveSousProjet.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.SHORTCUT_DOWN, KeyCodeCombination.SHIFT_DOWN));
+        mniSauveSousProjet.setAccelerator(
+                new KeyCodeCombination(KeyCode.S, KeyCombination.SHORTCUT_DOWN, KeyCodeCombination.SHIFT_DOWN));
         mnuProjet.getItems().add(mniSauveSousProjet);
         mnuDerniersProjets = new Menu(rbLocalisation.getString("derniersProjets"));
         mnuProjet.getItems().add(mnuDerniersProjets);
@@ -12842,7 +13353,7 @@ public class EditeurPanovisu extends Application {
         mniFermerProjet.setAccelerator(new KeyCodeCombination(KeyCode.A, KeyCombination.SHORTCUT_DOWN));
         mnuProjet.getItems().add(mniFermerProjet);
         /*
-         Menu affichage
+         * Menu affichage
          */
         Menu mnuAffichage = new Menu(rbLocalisation.getString("affichage"));
         mbarPrincipal.getMenus().add(mnuAffichage);
@@ -12857,8 +13368,7 @@ public class EditeurPanovisu extends Application {
         getMniAffichagePlan().setDisable(true);
         mnuAffichage.getItems().add(getMniAffichagePlan());
         mniOutilsLoupe = new MenuItem(
-                rbLocalisation.getString("main.loupe")
-        );
+                rbLocalisation.getString("main.loupe"));
         mniOutilsLoupe.setAccelerator(new KeyCodeCombination(KeyCode.L, KeyCombination.SHORTCUT_DOWN));
         mnuAffichage.getItems().add(mniOutilsLoupe);
 
@@ -12866,7 +13376,7 @@ public class EditeurPanovisu extends Application {
         mnuAffichage.getItems().add(sep3);
         mniConfigTransformation = new MenuItem(rbLocalisation.getString("affichageConfiguration"));
         mnuAffichage.getItems().add(mniConfigTransformation);
-        
+
         // ✨ NOUVEAU : Menu pour changer de thème
         MenuItem mniChangerTheme = new MenuItem("Changer le thème...");
         mniChangerTheme.setAccelerator(new KeyCodeCombination(KeyCode.T, KeyCombination.SHORTCUT_DOWN));
@@ -12878,7 +13388,7 @@ public class EditeurPanovisu extends Application {
             }
         });
         mnuAffichage.getItems().add(mniChangerTheme);
-        
+
         // ✨ NOUVEAU : Menu pour configurer les modèles IA
         MenuItem mniConfigurerModeles = new MenuItem("Configuration des modèles IA...");
         mniConfigurerModeles.setAccelerator(new KeyCodeCombination(KeyCode.M, KeyCombination.SHORTCUT_DOWN));
@@ -12892,7 +13402,7 @@ public class EditeurPanovisu extends Application {
         mnuAffichage.getItems().add(mniConfigurerModeles);
 
         /*
-         Menu panoramiques
+         * Menu panoramiques
          */
         mnuPanoramique = new Menu(rbLocalisation.getString("panoramiques"));
         mnuPanoramique.setDisable(true);
@@ -12910,13 +13420,13 @@ public class EditeurPanovisu extends Application {
         mniVisiteGenere.setDisable(true);
         mniVisiteGenere.setAccelerator(new KeyCodeCombination(KeyCode.V, KeyCombination.SHORTCUT_DOWN));
         mnuPanoramique.getItems().add(mniVisiteGenere);
-        
+
         mniCreerZipVisite = new MenuItem(rbLocalisation.getString("creerZipVisite"));
         mniCreerZipVisite.setDisable(true);
         mniCreerZipVisite.setAccelerator(new KeyCodeCombination(KeyCode.Z, KeyCombination.SHORTCUT_DOWN));
         mnuPanoramique.getItems().add(mniCreerZipVisite);
         /*
-         Menu Modèles 
+         * Menu Modèles
          */
         mnuModeles = new Menu(rbLocalisation.getString("menuModele"));
         mbarPrincipal.getMenus().add(mnuModeles);
@@ -12928,7 +13438,7 @@ public class EditeurPanovisu extends Application {
         mnuModeles.getItems().add(mniSauverModele);
 
         /*
-         Menu transformations 
+         * Menu transformations
          */
         mnuTransformation = new Menu(rbLocalisation.getString("outils"));
         mbarPrincipal.getMenus().add(mnuTransformation);
@@ -12944,20 +13454,20 @@ public class EditeurPanovisu extends Application {
         mniOutilsDiaporama = new MenuItem(rbLocalisation.getString("outilsDiaporama"));
         mniOutilsDiaporama.setAccelerator(new KeyCodeCombination(KeyCode.D, KeyCombination.SHORTCUT_DOWN));
         mnuTransformation.getItems().add(mniOutilsDiaporama);
-        
+
         // Ajout d'un séparateur pour les outils d'images
         SeparatorMenuItem sep7 = new SeparatorMenuItem();
         mnuTransformation.getItems().add(sep7);
-        
+
         // Nouveaux outils de traitement d'images
         mniRedimensionnerImages = new MenuItem(rbLocalisation.getString("outilsRedimensionnement"));
         mnuTransformation.getItems().add(mniRedimensionnerImages);
-        
+
         mniConvertirRatio2to1 = new MenuItem(rbLocalisation.getString("outilsRatio2to1"));
         mnuTransformation.getItems().add(mniConvertirRatio2to1);
 
         /*
-         Menu Aide
+         * Menu Aide
          */
         Menu mnuAide = new Menu(rbLocalisation.getString("aide"));
         mbarPrincipal.getMenus().add(mnuAide);
@@ -12969,11 +13479,11 @@ public class EditeurPanovisu extends Application {
         mnuAide.getItems().add(sep4);
         mniAPropos = new MenuItem(rbLocalisation.getString("aideAPropos"));
         mnuAide.getItems().add(mniAPropos);
-//
-//        }
-//
+        //
+        // }
+        //
         /*
-         barre de boutons 
+         * barre de boutons
          */
         hbBarreBouton = new HBox();
         hbBarreBouton.getStyleClass().add("menuBarreOutils1");
@@ -12987,7 +13497,7 @@ public class EditeurPanovisu extends Application {
         clip.heightProperty().bind(hbBarreBouton.heightProperty());
         hbBarreBouton.setClip(clip);
         /*
-         Bouton nouveau Projet
+         * Bouton nouveau Projet
          */
         ScrollPane spBtnNouvprojet = new ScrollPane();
         spBtnNouvprojet.getStyleClass().add("menuBarreOutils");
@@ -13005,7 +13515,7 @@ public class EditeurPanovisu extends Application {
         spBtnNouvprojet.setTooltip(tltpNouveauProjet);
         hbBarreBouton.getChildren().add(spBtnNouvprojet);
         /*
-         Bouton ouvrir Projet
+         * Bouton ouvrir Projet
          */
         ScrollPane spBtnOuvrirProjet = new ScrollPane();
         spBtnOuvrirProjet.getStyleClass().add("menuBarreOutils");
@@ -13024,7 +13534,7 @@ public class EditeurPanovisu extends Application {
         hbBarreBouton.getChildren().add(spBtnOuvrirProjet);
 
         /*
-         Bouton sauve Projet
+         * Bouton sauve Projet
          */
         ScrollPane spBtnSauveProjet = new ScrollPane();
         spBtnSauveProjet.getStyleClass().add("menuBarreOutils");
@@ -13047,7 +13557,7 @@ public class EditeurPanovisu extends Application {
         ivSauveProjet.setDisable(true);
         ivSauveProjet.setOpacity(0.3);
         /*
-         Bouton Ajoute Panoramique
+         * Bouton Ajoute Panoramique
          */
         ScrollPane spBtnAjoutePano = new ScrollPane();
         spBtnAjoutePano.getStyleClass().add("menuBarreOutils");
@@ -13068,7 +13578,7 @@ public class EditeurPanovisu extends Application {
         ivAjouterPano.setOpacity(0.3);
 
         /*
-         Bouton Ajoute Panoramique
+         * Bouton Ajoute Panoramique
          */
         ScrollPane spBtnAjoutePlan = new ScrollPane();
         spBtnAjoutePlan.getStyleClass().add("menuBarreOutils");
@@ -13089,7 +13599,7 @@ public class EditeurPanovisu extends Application {
         getIvAjouterPlan().setOpacity(0.3);
 
         /*
-         Bouton Génère
+         * Bouton Génère
          */
         ScrollPane spBtnGenereVisite = new ScrollPane();
         spBtnGenereVisite.getStyleClass().add("menuBarreOutils");
@@ -13110,7 +13620,7 @@ public class EditeurPanovisu extends Application {
         ivVisiteGenere.setOpacity(0.3);
 
         /*
-         Bouton Génère ZIP
+         * Bouton Génère ZIP
          */
         ScrollPane spBtnGenereZip = new ScrollPane();
         spBtnGenereZip.getStyleClass().add("menuBarreOutils");
@@ -13134,9 +13644,9 @@ public class EditeurPanovisu extends Application {
         Separator sepImages1 = new Separator(Orientation.VERTICAL);
         sepImages1.prefHeight(200);
         hbBarreBouton.getChildren().add(sepImages1);
-        
+
         /*
-         Bouton Redimensionner/Compresser les images
+         * Bouton Redimensionner/Compresser les images
          */
         ScrollPane spBtnRedimensionner = new ScrollPane();
         spBtnRedimensionner.getStyleClass().add("menuBarreOutils");
@@ -13159,7 +13669,7 @@ public class EditeurPanovisu extends Application {
         hbBarreBouton.getChildren().add(spBtnRedimensionner);
 
         /*
-         Bouton Convertir au ratio 2:1
+         * Bouton Convertir au ratio 2:1
          */
         ScrollPane spBtnRatio2to1 = new ScrollPane();
         spBtnRatio2to1.getStyleClass().add("menuBarreOutils");
@@ -13180,9 +13690,9 @@ public class EditeurPanovisu extends Application {
         tltpRatio2to1.setStyle(getStrTooltipStyle());
         spBtnRatio2to1.setTooltip(tltpRatio2to1);
         hbBarreBouton.getChildren().add(spBtnRatio2to1);
-        
+
         /*
-         Bouton equi -> faces de  Cube
+         * Bouton equi -> faces de Cube
          */
         ScrollPane spBtnEqui2Cube = new ScrollPane();
         spBtnEqui2Cube.getStyleClass().add("menuBarreOutils");
@@ -13205,7 +13715,7 @@ public class EditeurPanovisu extends Application {
         hbBarreBouton.getChildren().add(spBtnEqui2Cube);
 
         /*
-         Bouton faces de cube -> equi
+         * Bouton faces de cube -> equi
          */
         ScrollPane spBtnCube2Equi = new ScrollPane();
         spBtnCube2Equi.getStyleClass().add("menuBarreOutils");
@@ -13277,7 +13787,7 @@ public class EditeurPanovisu extends Application {
                         .getName()).log(Level.SEVERE, null, ex);
             }
         });
-        
+
         mniCreerZipVisite.setOnAction((e) -> {
             try {
                 creerZipVisite();
@@ -13287,7 +13797,7 @@ public class EditeurPanovisu extends Application {
                         .getName()).log(Level.SEVERE, null, ex);
             }
         });
-        
+
         mniFermerProjet.setOnAction((e) -> {
             try {
                 projetsFermer();
@@ -13351,12 +13861,12 @@ public class EditeurPanovisu extends Application {
         mniOutilsDiaporama.setOnAction((e) -> {
             creerEditerDiaporama("");
         });
-        
+
         // Gestionnaires d'événements pour les nouveaux outils d'images
         mniRedimensionnerImages.setOnAction((e) -> {
             ouvrirOutilRedimensionnementImages();
         });
-        
+
         mniConvertirRatio2to1.setOnAction((e) -> {
             ouvrirOutilConversionRatio2to1();
         });
@@ -13456,15 +13966,15 @@ public class EditeurPanovisu extends Application {
                         .getName()).log(Level.SEVERE, null, ex);
             }
         });
-        
+
         spBtnRedimensionner.setOnMouseClicked((t) -> {
             ouvrirOutilRedimensionnementImages();
         });
-        
+
         spBtnRatio2to1.setOnMouseClicked((t) -> {
             ouvrirOutilConversionRatio2to1();
         });
-        
+
         spBtnEqui2Cube.setOnMouseClicked((t) -> {
             transformationEqui2Cube();
         });
@@ -13494,13 +14004,12 @@ public class EditeurPanovisu extends Application {
                 if (getPanoramiquesProjet()[getiPanoActuel()].getStrTypePanoramique().equals(Panoramique.SPHERE)) {
                     fImage = new File(
                             getStrRepertTemp()
-                            + File.separator
-                            + "panos"
-                            + File.separator
-                            + "niveau" + i
-                            + File.separator
-                            + "panovisu" + getiPanoActuel() + ".jpg"
-                    );
+                                    + File.separator
+                                    + "panos"
+                                    + File.separator
+                                    + "niveau" + i
+                                    + File.separator
+                                    + "panovisu" + getiPanoActuel() + ".jpg");
                     fImage.delete();
                 } else {
                     String strNom = getStrRepertTemp()
@@ -13527,11 +14036,10 @@ public class EditeurPanovisu extends Application {
             if (getPanoramiquesProjet()[getiPanoActuel()].getStrTypePanoramique().equals(Panoramique.SPHERE)) {
                 fImage = new File(
                         getStrRepertTemp()
-                        + File.separator
-                        + "panos"
-                        + File.separator
-                        + "panovisu" + getiPanoActuel() + ".jpg"
-                );
+                                + File.separator
+                                + "panos"
+                                + File.separator
+                                + "panovisu" + getiPanoActuel() + ".jpg");
                 fImage.delete();
             } else {
                 String strNom = getStrRepertTemp()
@@ -13560,22 +14068,20 @@ public class EditeurPanovisu extends Application {
                     if (getPanoramiquesProjet()[getiPanoActuel()].getStrTypePanoramique().equals(Panoramique.SPHERE)) {
                         fImage = new File(
                                 getStrRepertTemp()
-                                + File.separator
-                                + "panos"
-                                + File.separator
-                                + "niveau" + j
-                                + File.separator
-                                + "panovisu" + (i + 1) + ".jpg"
-                        );
+                                        + File.separator
+                                        + "panos"
+                                        + File.separator
+                                        + "niveau" + j
+                                        + File.separator
+                                        + "panovisu" + (i + 1) + ".jpg");
                         fileRemplace = new File(
                                 getStrRepertTemp()
-                                + File.separator
-                                + "panos"
-                                + File.separator
-                                + "niveau" + j
-                                + File.separator
-                                + "panovisu" + i + ".jpg"
-                        );
+                                        + File.separator
+                                        + "panos"
+                                        + File.separator
+                                        + "niveau" + j
+                                        + File.separator
+                                        + "panovisu" + i + ".jpg");
                         fImage.renameTo(fileRemplace);
                     } else {
                         String strNom = getStrRepertTemp()
@@ -13616,18 +14122,16 @@ public class EditeurPanovisu extends Application {
                 if (getPanoramiquesProjet()[getiPanoActuel()].getStrTypePanoramique().equals(Panoramique.SPHERE)) {
                     fImage = new File(
                             getStrRepertTemp()
-                            + File.separator
-                            + "panos"
-                            + File.separator
-                            + "panovisu" + (i + 1) + ".jpg"
-                    );
+                                    + File.separator
+                                    + "panos"
+                                    + File.separator
+                                    + "panovisu" + (i + 1) + ".jpg");
                     fileRemplace = new File(
                             getStrRepertTemp()
-                            + File.separator
-                            + "panos"
-                            + File.separator
-                            + "panovisu" + i + ".jpg"
-                    );
+                                    + File.separator
+                                    + "panos"
+                                    + File.separator
+                                    + "panovisu" + i + ".jpg");
                     fImage.renameTo(fileRemplace);
                 } else {
                     String strNom = getStrRepertTemp()
@@ -13672,7 +14176,8 @@ public class EditeurPanovisu extends Application {
             for (int i = 0; i < getiNombrePanoramiques() - 1; i++) {
                 for (int j = 0; j < getPanoramiquesProjet()[i].getNombreHotspots(); j++) {
                     if (getPanoramiquesProjet()[i].getHotspot(j).getNumeroPano() > iPanCourant) {
-                        getPanoramiquesProjet()[i].getHotspot(j).setNumeroPano(getPanoramiquesProjet()[i].getHotspot(j).getNumeroPano() - 1);
+                        getPanoramiquesProjet()[i].getHotspot(j)
+                                .setNumeroPano(getPanoramiquesProjet()[i].getHotspot(j).getNumeroPano() - 1);
                     }
                 }
             }
@@ -13729,7 +14234,7 @@ public class EditeurPanovisu extends Application {
         vbRacine = new VBox();
         AnchorPane panePrincipale = new AnchorPane(vbRacine);
         setScnPrincipale(new Scene(panePrincipale, iLargeur, iHauteur, Color.rgb(221, 221, 221)));
-        
+
         // ✨ NOUVEAU : Appliquer le thème moderne AtlantaFX
         if (!fileRepertConfig.exists()) {
             fileRepertConfig.mkdirs();
@@ -13744,7 +14249,7 @@ public class EditeurPanovisu extends Application {
         }
 
         creeMenu(vbRacine);
-        
+
         tpEnvironnement = new TabPane();
         tpEnvironnement.setMinHeight(iHauteur - 60);
         tpEnvironnement.setMaxHeight(iHauteur - 60);
@@ -13772,13 +14277,14 @@ public class EditeurPanovisu extends Application {
 
         tpEnvironnement.getTabs().addAll(tabVisite, getTabInterface(), getTabPlan());
         tpEnvironnement.setSide(Side.TOP);
-        tpEnvironnement.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends Tab> ov, Tab t, Tab t1) -> {
-            if (getGestionnaireInterface().navigateurCarteOL == null && isbInternet()) {
-                getGestionnaireInterface().navigateurCarteOL = new NavigateurCarte();
-                // NavigateurCarte se charge automatiquement
-            }
-            getGestionnaireInterface().rafraichit();
-        });
+        tpEnvironnement.getSelectionModel().selectedItemProperty()
+                .addListener((ObservableValue<? extends Tab> ov, Tab t, Tab t1) -> {
+                    if (getGestionnaireInterface().navigateurCarteOL == null && isbInternet()) {
+                        getGestionnaireInterface().navigateurCarteOL = new NavigateurCarte();
+                        // NavigateurCarte se charge automatiquement
+                    }
+                    getGestionnaireInterface().rafraichit();
+                });
         tabInterface.disableProperty().addListener((ov, av, nv) -> {
             if (!nv && getGestionnaireInterface().navigateurCarteOL == null && isbInternet()) {
                 getGestionnaireInterface().navigateurCarteOL = new NavigateurCarte();
@@ -13796,8 +14302,10 @@ public class EditeurPanovisu extends Application {
         getTabPlan().setClosable(false);
         getTabPlan().setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
         getTabPlan().setDisable(true);
-        // L'onglet "Modèle d'interface" permet de créer des modèles indépendamment d'un projet
-        // Il est toujours actif, même sans Internet (carte remplacée par image fallback)
+        // L'onglet "Modèle d'interface" permet de créer des modèles indépendamment d'un
+        // projet
+        // Il est toujours actif, même sans Internet (carte remplacée par image
+        // fallback)
         // Le bouton de géolocalisation est désactivé si pas d'Internet
         tabVisite.setContent(hbEnvironnement);
         double largeur;
@@ -13829,14 +14337,16 @@ public class EditeurPanovisu extends Application {
         }
         apPanovisu.setStyle("-fx-background-color : derive(-fx-base,20%);");
 
-        ImageView ivPanoVisu = new ImageView(new Image("file:" + getStrRepertAppli() + File.separator + "images/panovisu.png", 48, 48, true, true));
+        ImageView ivPanoVisu = new ImageView(
+                new Image("file:" + getStrRepertAppli() + File.separator + "images/panovisu.png", 48, 48, true, true));
         ivPanoVisu.setLayoutX(40);
         ivPanoVisu.setLayoutY(1);
         Label lblPanoVisu = new Label("panoVisu Vers. : " + strNumVersion);
-        lblPanoVisu.setStyle("-fx-font-weight : bold;-fx-font-family : Verdana,Arial,sans-serif;-fx-font-size : 1.2em;");
+        lblPanoVisu
+                .setStyle("-fx-font-weight : bold;-fx-font-family : Verdana,Arial,sans-serif;-fx-font-size : 1.2em;");
         lblPanoVisu.setLayoutX(108);
         lblPanoVisu.setLayoutY(5);
-        Label lblPanoVisu2 = new Label("Laurent LANG (2014-2025)");
+        Label lblPanoVisu2 = new Label("Laurent LANG (2014-2026)");
         lblPanoVisu2.setLayoutX(108);
         lblPanoVisu2.setLayoutY(35);
         lblPanoVisu2.setStyle("-fx-font-family : Verdana,Arial,sans-serif;-fx-font-size : 0.8em;");
@@ -13851,7 +14361,7 @@ public class EditeurPanovisu extends Application {
         apWebview.setTranslateX(25);
         apWebview.setTranslateY(5);
         /*
-         Paramètres de la visite
+         * Paramètres de la visite
          */
         apParametresVisite = new AnchorPane();
         apParametresVisite.setLayoutY(40);
@@ -13883,15 +14393,16 @@ public class EditeurPanovisu extends Application {
         apParametresVisite.getChildren().addAll(
                 lblTitreVisite, tfTitreVisite,
                 cbIntroPetitePlanete,
-                lblChoixPanoramiqueEntree
-        );
-        PaneOutil poParametresVisite = new PaneOutil(rbLocalisation.getString("main.parametresVisite"), apParametresVisite, largeurOutil);
+                lblChoixPanoramiqueEntree);
+        PaneOutil poParametresVisite = new PaneOutil(rbLocalisation.getString("main.parametresVisite"),
+                apParametresVisite, largeurOutil);
         setApPVIS(new AnchorPane(poParametresVisite.getApPaneOutil()));
         poParametresVisite.setbValide(isbIntroPetitePlanete());
         AnchorPane apAutoRotation = new AnchorPane();
         apAutoRotation.setPrefHeight(270);
         apAutoRotation.setLayoutY(40);
-        PaneOutil poAutoRotation = new PaneOutil(rbLocalisation.getString("main.autoTourRotation"), apAutoRotation, largeurOutil);
+        PaneOutil poAutoRotation = new PaneOutil(rbLocalisation.getString("main.autoTourRotation"), apAutoRotation,
+                largeurOutil);
         setApAR(new AnchorPane(poAutoRotation.getApPaneOutil()));
         poAutoRotation.setbValide(isbAutoRotationDemarre() || isbAutoTourDemarre());
 
@@ -14008,14 +14519,15 @@ public class EditeurPanovisu extends Application {
                 cbAutoTourDemarrage,
                 lblDemarrageAutoTour, bdfAutoTourDemarrage,
                 lblVitesseAutoTour,
-                cbAutoTourType, lblN, bdfAutoTourLimite
-        );
+                cbAutoTourType, lblN, bdfAutoTourLimite);
 
         AnchorPane apParametresPano = new AnchorPane();
         apParametresPano.setPrefHeight(340);
         apParametresPano.setLayoutY(40);
-        ImageView ivSupprPanoramique = new ImageView(new Image("file:" + getStrRepertAppli() + File.separator + "images/suppr.png", 48, 48, true, true));
-        ImageView ivModifPanoramique = new ImageView(new Image("file:" + getStrRepertAppli() + File.separator + "images/modifie.png", 48, 48, true, true));
+        ImageView ivSupprPanoramique = new ImageView(
+                new Image("file:" + getStrRepertAppli() + File.separator + "images/suppr.png", 48, 48, true, true));
+        ImageView ivModifPanoramique = new ImageView(
+                new Image("file:" + getStrRepertAppli() + File.separator + "images/modifie.png", 48, 48, true, true));
         Button btnSupprimePano = new Button(rbLocalisation.getString("main.supprimePanoCourant"), ivSupprPanoramique);
         btnSupprimePano.setLayoutX(190);
         btnSupprimePano.setLayoutY(70);
@@ -14037,10 +14549,13 @@ public class EditeurPanovisu extends Application {
             String strRepertPano = getPanoramiquesProjet()[getiPanoActuel()].getStrNomFichier().substring(
                     0, getPanoramiquesProjet()[getiPanoActuel()].getStrNomFichier().lastIndexOf(File.separator));
             FileChooser fileChooser = new FileChooser();
-            FileChooser.ExtensionFilter extFilterImage = new FileChooser.ExtensionFilter("Fichiers Image (JPG,BMP,TIFF)", "*.jpg", "*.bmp", "*.tif");
-            FileChooser.ExtensionFilter extFilterJpeg = new FileChooser.ExtensionFilter("Fichiers JPEG (*.jpg)", "*.jpg");
+            FileChooser.ExtensionFilter extFilterImage = new FileChooser.ExtensionFilter(
+                    "Fichiers Image (JPG,BMP,TIFF)", "*.jpg", "*.bmp", "*.tif");
+            FileChooser.ExtensionFilter extFilterJpeg = new FileChooser.ExtensionFilter("Fichiers JPEG (*.jpg)",
+                    "*.jpg");
             FileChooser.ExtensionFilter extFilterBmp = new FileChooser.ExtensionFilter("Fichiers BMP (*.bmp)", "*.bmp");
-            FileChooser.ExtensionFilter extFilterTiff = new FileChooser.ExtensionFilter("Fichiers TIFF (*.tif)", "*.tif");
+            FileChooser.ExtensionFilter extFilterTiff = new FileChooser.ExtensionFilter("Fichiers TIFF (*.tif)",
+                    "*.tif");
             File fileRepert = new File(strRepertPano + File.separator);
             fileChooser.setInitialDirectory(fileRepert);
             fileChooser.getExtensionFilters().addAll(extFilterJpeg, extFilterTiff, extFilterBmp, extFilterImage);
@@ -14081,8 +14596,7 @@ public class EditeurPanovisu extends Application {
                     affichePanoChoisit(getiPanoActuel());
                     if (apListePanoTriable != null) {
                         apParametresVisite.getChildren().remove(
-                                apListePanoTriable
-                        );
+                                apListePanoTriable);
                     }
                     ordPano.rafraichitListe();
                     ordPano.ajouteNouveauxPanos();
@@ -14119,9 +14633,10 @@ public class EditeurPanovisu extends Application {
         tfTitrePano.setLayoutX(60);
         tfTitrePano.setLayoutY(40);
 
-        tfTitrePano.textProperty().addListener((final ObservableValue<? extends String> observable, final String oldValue, final String newValue) -> {
-            clickBtnValidePano();
-        });
+        tfTitrePano.textProperty().addListener(
+                (final ObservableValue<? extends String> observable, final String oldValue, final String newValue) -> {
+                    clickBtnValidePano();
+                });
 
         slMinLat = new Slider(-90, -45, -90);
         slMinLat.setDisable(true);
@@ -14176,9 +14691,9 @@ public class EditeurPanovisu extends Application {
             navigateurPanoramique.setMinFov(val1);
             if (navigateurPanoramique.getFov() < val1) {
                 navigateurPanoramique.setFov(val1);
-                
+
             }
-            if (navigateurPanoramique.getChoixFov()<val1){
+            if (navigateurPanoramique.getChoixFov() < val1) {
                 navigateurPanoramique.setChoixFov(val1);
             }
         });
@@ -14195,7 +14710,7 @@ public class EditeurPanovisu extends Application {
             if (navigateurPanoramique.getFov() > val1) {
                 navigateurPanoramique.setFov(val1);
             }
-            if (navigateurPanoramique.getChoixFov()>val1){
+            if (navigateurPanoramique.getChoixFov() > val1) {
                 navigateurPanoramique.setChoixFov(val1);
             }
         });
@@ -14278,22 +14793,23 @@ public class EditeurPanovisu extends Application {
                 slMinLat, cbMinLat,
                 slMinFov, lblMinFov,
                 slMaxFov, lblMaxFov,
-                btnBlocage
-        );
+                btnBlocage);
 
-        setApPPAN(new AnchorPane(new PaneOutil(true, rbLocalisation.getString("main.parametresPano"), apParametresPano, largeurOutil).getApPaneOutil()));
+        setApPPAN(new AnchorPane(
+                new PaneOutil(true, rbLocalisation.getString("main.parametresPano"), apParametresPano, largeurOutil)
+                        .getApPaneOutil()));
 
         // Panneau Description IA
         AnchorPane apDescriptionIA = new AnchorPane();
         apDescriptionIA.setPrefHeight(250);
         apDescriptionIA.setLayoutY(40);
-        
+
         Label lblDescriptionIA = new Label(rbLocalisation.getString("main.descriptionIA"));
         lblDescriptionIA.setStyle("-fx-font-size : 1em;");
         lblDescriptionIA.setPadding(new Insets(5, 5, 5, 0));
         lblDescriptionIA.setLayoutX(10);
         lblDescriptionIA.setLayoutY(10);
-        
+
         TextArea taDescriptionIA = new TextArea();
         taDescriptionIA.setId("txtDescriptionIA");
         taDescriptionIA.setPrefSize(330, 150);
@@ -14301,24 +14817,27 @@ public class EditeurPanovisu extends Application {
         taDescriptionIA.setLayoutY(40);
         taDescriptionIA.setWrapText(true);
         taDescriptionIA.setPromptText(rbLocalisation.getString("main.descriptionIAPlaceholder"));
-        
+
         // Listener pour sauvegarder la description quand elle est modifiée
         taDescriptionIA.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (getPanoramiquesProjet() != null && getiPanoActuel() >= 0 && getiPanoActuel() < getiNombrePanoramiques()) {
+            if (getPanoramiquesProjet() != null && getiPanoActuel() >= 0
+                    && getiPanoActuel() < getiNombrePanoramiques()) {
                 getPanoramiquesProjet()[getiPanoActuel()].setStrDescriptionIA(newValue);
                 setbDejaSauve(false);
                 getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
             }
         });
-        
-        // Avertissement sur la vérification des informations IA (agrandi pour meilleure visibilité)
+
+        // Avertissement sur la vérification des informations IA (agrandi pour meilleure
+        // visibilité)
         Label lblAvertissementIA = new Label(rbLocalisation.getString("main.descriptionIAAvertissement"));
         lblAvertissementIA.setLayoutX(10);
         lblAvertissementIA.setLayoutY(195);
         lblAvertissementIA.setPrefWidth(330);
         lblAvertissementIA.setWrapText(true);
-        lblAvertissementIA.setStyle("-fx-font-size: 12px; -fx-text-fill: #FF8C00; -fx-font-style: italic; -fx-font-weight: bold;");
-        
+        lblAvertissementIA.setStyle(
+                "-fx-font-size: 12px; -fx-text-fill: #FF8C00; -fx-font-style: italic; -fx-font-weight: bold;");
+
         Button btnGenererIA = new Button(rbLocalisation.getString("main.genererDescriptionIA"));
         btnGenererIA.setLayoutX(10);
         btnGenererIA.setLayoutY(220);
@@ -14326,22 +14845,22 @@ public class EditeurPanovisu extends Application {
         btnGenererIA.setOnAction((e) -> {
             genererDescriptionIA(taDescriptionIA);
         });
-        
+
         // ToggleSwitch pour basculer entre OpenRouter (online) et Ollama (offline)
         Label lblModeIA = new Label("Mode IA:");
         lblModeIA.setLayoutX(180);
         lblModeIA.setLayoutY(220);
         lblModeIA.setStyle("-fx-font-size: 11px;");
-        
+
         ToggleButton toggleModeIA = new ToggleButton();
         toggleModeIA.setLayoutX(240);
         toggleModeIA.setLayoutY(218);
         toggleModeIA.setPrefSize(90, 30);
-        
+
         // État initial basé sur la disponibilité OpenRouter
         boolean openRouterDispo = OllamaService.verifierOpenRouterDisponible();
         toggleModeIA.setSelected(!openRouterDispo); // Si OpenRouter dispo, on commence en mode online (not selected)
-        
+
         // Mettre à jour le texte du bouton
         if (toggleModeIA.isSelected()) {
             toggleModeIA.setText("🔸 Offline");
@@ -14352,7 +14871,7 @@ public class EditeurPanovisu extends Application {
             toggleModeIA.setStyle("-fx-background-color: #2ECC71; -fx-text-fill: white;");
             OllamaService.setForceOllama(false);
         }
-        
+
         // Listener pour changer de mode
         toggleModeIA.selectedProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal) {
@@ -14369,10 +14888,13 @@ public class EditeurPanovisu extends Application {
                 System.out.println("[IA] 🌐 Mode basculé: OpenRouter (online)");
             }
         });
-        
-        apDescriptionIA.getChildren().addAll(lblDescriptionIA, taDescriptionIA, lblAvertissementIA, btnGenererIA, lblModeIA, toggleModeIA);
-        
-        setApDESCIA(new AnchorPane(new PaneOutil(true, rbLocalisation.getString("main.descriptionIA"), apDescriptionIA, largeurOutil).getApPaneOutil()));
+
+        apDescriptionIA.getChildren().addAll(lblDescriptionIA, taDescriptionIA, lblAvertissementIA, btnGenererIA,
+                lblModeIA, toggleModeIA);
+
+        setApDESCIA(new AnchorPane(
+                new PaneOutil(true, rbLocalisation.getString("main.descriptionIA"), apDescriptionIA, largeurOutil)
+                        .getApPaneOutil()));
 
         setApGEO(new AnchorPane());
         apOpenLayers = new AnchorPane();
@@ -14392,20 +14914,20 @@ public class EditeurPanovisu extends Application {
             btnGeolocalise.setLayoutX(10);
             btnGeolocalise.setLayoutY(25);
             btnGeolocalise.setPrefWidth(120);
-            
+
             // Désactiver le bouton géolocalisation si pas d'Internet
             if (!isbInternet()) {
                 btnGeolocalise.setDisable(true);
                 btnGeolocalise.setTooltip(new Tooltip("Géolocalisation indisponible sans connexion Internet"));
             }
-            
+
             btnGeolocalise.setOnAction((e) -> {
                 // ⚠️ LAZY LOADING: Initialiser NavigateurCarte au premier clic
                 navigateurOpenLayers.ensureNavigateurCarteInitialized();
-                
+
                 // Afficher la fenêtre immédiatement
                 apOpenLayers.setVisible(true);
-                
+
                 // Attendre que la carte soit chargée (bDebut = true) avant de positionner
                 new Thread(() -> {
                     int maxAttempts = 50; // Max 5 secondes (50 x 100ms)
@@ -14418,7 +14940,7 @@ public class EditeurPanovisu extends Application {
                             break;
                         }
                     }
-                    
+
                     // Une fois la carte chargée, positionner le marqueur sur le thread JavaFX
                     if (navigateurOpenLayers.isbDebut()) {
                         Platform.runLater(() -> {
@@ -14428,17 +14950,22 @@ public class EditeurPanovisu extends Application {
                             } else {
                                 navigateurOpenLayers.valideBingApiKey(navigateurOpenLayers.getBingApiKey());
                             }
-                            
+
                             if (panoramiquesProjet[getiPanoActuel()].getMarqueurGeolocatisation() != null) {
-                                CoordonneesGeographiques coords = panoramiquesProjet[getiPanoActuel()].getMarqueurGeolocatisation();
-                                System.out.println("📍 Positionnement sur coordonnées: " + coords.getLatitude() + ", " + coords.getLongitude());
+                                CoordonneesGeographiques coords = panoramiquesProjet[getiPanoActuel()]
+                                        .getMarqueurGeolocatisation();
+                                System.out.println("📍 Positionnement sur coordonnées: " + coords.getLatitude() + ", "
+                                        + coords.getLongitude());
                                 navigateurOpenLayers.allerCoordonnees(coords, 17);
                                 navigateurOpenLayers.setMarqueur(coords);
-                                
+
                                 String strFichierPano = getPanoramiquesProjet()[getiPanoActuel()]
-                                        .getStrNomFichier().substring(getPanoramiquesProjet()[getiPanoActuel()].getStrNomFichier()
-                                                .lastIndexOf(File.separator) + 1, getPanoramiquesProjet()[getiPanoActuel()]
-                                                .getStrNomFichier().length()).split("\\.")[0];
+                                        .getStrNomFichier()
+                                        .substring(getPanoramiquesProjet()[getiPanoActuel()].getStrNomFichier()
+                                                .lastIndexOf(File.separator) + 1,
+                                                getPanoramiquesProjet()[getiPanoActuel()]
+                                                        .getStrNomFichier().length())
+                                        .split("\\.")[0];
                                 String strHTML = "<span style='font-family : Verdana,Arial,sans-serif;font-weight:bold;font-size : 12px;'>"
                                         + getPanoramiquesProjet()[getiPanoActuel()].getStrTitrePanoramique()
                                         + "</span><br/>"
@@ -14460,23 +14987,23 @@ public class EditeurPanovisu extends Application {
             lblLatitude.setLayoutY(10);
             lblLatitude.setPrefWidth(60);
             lblLatitude.setStyle("-fx-font-weight: bold;");
-            
+
             Label lblLongitude = new Label("Longitude:");
             lblLongitude.setLayoutX(140);
             lblLongitude.setLayoutY(40);
             lblLongitude.setPrefWidth(70);
             lblLongitude.setStyle("-fx-font-weight: bold;");
-            
+
             tfLatitude.setLayoutX(210);
             tfLatitude.setLayoutY(10);
             tfLatitude.setPrefWidth(150);
             tfLatitude.setPromptText("Latitude (ex: 48°51'29.6\"N)");
-            
+
             tfLongitude.setLayoutX(210);
             tfLongitude.setLayoutY(40);
             tfLongitude.setPrefWidth(150);
             tfLongitude.setPromptText("Longitude (ex: 2°17'30.5\"E)");
-            
+
             apOpenLayers.setLayoutX(200);
             apOpenLayers.setLayoutY(150);
             apOpenLayers.setVisible(false);
@@ -14485,7 +15012,8 @@ public class EditeurPanovisu extends Application {
             apGeolocalise.getChildren().addAll(btnGeolocalise, lblLatitude, tfLatitude, lblLongitude, tfLongitude);
             apGeolocalise.setLayoutX(10);
             apGeolocalise.setLayoutY(40);
-            setPoGeolocalisation(new PaneOutil(rbLocalisation.getString("main.geolocalisation"), apGeolocalise, largeurOutil));
+            setPoGeolocalisation(
+                    new PaneOutil(rbLocalisation.getString("main.geolocalisation"), apGeolocalise, largeurOutil));
             setApGEO(new AnchorPane(getPoGeolocalisation().getApPaneOutil()));
 
             apOpenLayers.setLayoutX((iLargeur - apOpenLayers.getPrefWidth()) / 2);
@@ -14502,10 +15030,12 @@ public class EditeurPanovisu extends Application {
         apVisuPanoramique.setPrefWidth(340);
         apVisuPanoramique.setPrefHeight(295);
 
-        setApVISU(new AnchorPane(new PaneOutil(true, rbLocalisation.getString("main.visualisation"), apVisuPanoramique, largeurOutil).getApPaneOutil()));
+        setApVISU(new AnchorPane(
+                new PaneOutil(true, rbLocalisation.getString("main.visualisation"), apVisuPanoramique, largeurOutil)
+                        .getApPaneOutil()));
 
         vbVisuHotspots = new VBox();
-        
+
         // Pas de ScrollPane interne - utilise le ScrollPane parent (spPanneauOutils)
         // pour éviter le double système d'ascenseur
         apVisuHS = new AnchorPane(vbVisuHotspots);
@@ -14514,12 +15044,13 @@ public class EditeurPanovisu extends Application {
 
         setApHS(new AnchorPane(apHS1.getApPaneOutil()));
 
-        getVbChoixPanoramique().getChildren().addAll(getApPVIS(), getApAR(), getApPPAN(), getApDESCIA(), getApGEO(), getApVISU(), getApHS());
+        getVbChoixPanoramique().getChildren().addAll(getApPVIS(), getApAR(), getApPPAN(), getApDESCIA(), getApGEO(),
+                getApVISU(), getApHS());
         getVbChoixPanoramique().setSpacing(-5);
         vbOutils.getChildren().addAll(getVbChoixPanoramique());
         getVbChoixPanoramique().setVisible(false);
         /*
-         Création du panneau d'info du panoramique
+         * Création du panneau d'info du panoramique
          */
 
         spVuePanoramique = new ScrollPane();
@@ -14575,7 +15106,7 @@ public class EditeurPanovisu extends Application {
         apListeImagesPanoramiques.setPrefHeight(iHauteur - 140);
         apListeImagesPanoramiques.setLayoutX(-iLargeurVignettes - 30);
         apListeImagesPanoramiques.setLayoutY(0);
-        //apListeImagesPanoramiques.setStyle("-fx-background-color:-fx-base;");
+        // apListeImagesPanoramiques.setStyle("-fx-background-color:-fx-base;");
         apListeImagesPanoramiques.setOnMouseEntered((e) -> {
             apListeImagesPanoramiques.setLayoutX(0);
         });
@@ -14775,7 +15306,8 @@ public class EditeurPanovisu extends Application {
      * @throws IOException En cas d'erreur d'écriture du fichier
      */
     public static void sauvePreferences() throws IOException {
-        File fileFichPreferences = new File(EditeurPanovisu.fileRepertConfig.getAbsolutePath() + File.separator + "preferences.cfg");
+        File fileFichPreferences = new File(
+                EditeurPanovisu.fileRepertConfig.getAbsolutePath() + File.separator + "preferences.cfg");
         if (!fileFichPreferences.exists()) {
             fileFichPreferences.createNewFile();
         }
@@ -14821,21 +15353,27 @@ public class EditeurPanovisu extends Application {
     /**
      * Méthode de démarrage de l'application JavaFX
      * 
-     * <p>Cette méthode est appelée automatiquement au lancement de l'application.
-     * Elle initialise tous les composants de l'interface utilisateur :</p>
+     * <p>
+     * Cette méthode est appelée automatiquement au lancement de l'application.
+     * Elle initialise tous les composants de l'interface utilisateur :
+     * </p>
      * 
      * <ul>
-     *   <li>Détection du système d'exploitation et adaptation de l'interface</li>
-     *   <li>Vérification de la connexion Internet</li>
-     *   <li>Chargement de la localisation et des préférences utilisateur</li>
-     *   <li>Création de la fenêtre principale et des menus</li>
-     *   <li>Initialisation des barres d'outils et panneaux</li>
-     *   <li>Configuration des gestionnaires d'événements (drag &amp; drop, raccourcis clavier)</li>
-     *   <li>Chargement du dernier projet si nécessaire</li>
+     * <li>Détection du système d'exploitation et adaptation de l'interface</li>
+     * <li>Vérification de la connexion Internet</li>
+     * <li>Chargement de la localisation et des préférences utilisateur</li>
+     * <li>Création de la fenêtre principale et des menus</li>
+     * <li>Initialisation des barres d'outils et panneaux</li>
+     * <li>Configuration des gestionnaires d'événements (drag &amp; drop, raccourcis
+     * clavier)</li>
+     * <li>Chargement du dernier projet si nécessaire</li>
      * </ul>
      * 
-     * <p>La fenêtre principale est créée en mode maximisé avec une interface adaptative
-     * qui s'ajuste à la résolution de l'écran.</p>
+     * <p>
+     * La fenêtre principale est créée en mode maximisé avec une interface
+     * adaptative
+     * qui s'ajuste à la résolution de l'écran.
+     * </p>
      * 
      * @param stPrimaryStage La scène principale JavaFX fournie par le framework
      * @throws Exception Si une erreur se produit lors de l'initialisation
@@ -14850,7 +15388,7 @@ public class EditeurPanovisu extends Application {
         } catch (Exception e) {
             System.err.println("⚠️ Erreur lors de la réinitialisation du serveur HTTP : " + e.getMessage());
         }
-        
+
         // Initialiser le GPU au démarrage pour afficher les informations
         try {
             editeurpanovisu.gpu.GPUManager gpuManager = editeurpanovisu.gpu.GPUManager.getInstance();
@@ -14860,7 +15398,7 @@ public class EditeurPanovisu extends Application {
         } catch (Exception e) {
             System.out.println("[GPU] ⚠️  Erreur lors de l'initialisation GPU : " + e.getMessage());
         }
-        
+
         if (isLinux()) {
             stPrimaryStage.setFullScreen(true);
         }
@@ -14887,7 +15425,8 @@ public class EditeurPanovisu extends Application {
         lisPreferences();
         setStPrincipal(stPrimaryStage);
         stPrimaryStage.setResizable(false);
-        // getStPrincipal().setResizable(true); // Désactivé : empêche les problèmes de redimensionnement
+        // getStPrincipal().setResizable(true); // Désactivé : empêche les problèmes de
+        // redimensionnement
         getStPrincipal().setAlwaysOnTop(false);
         getStPrincipal().setTitle("PanoVisu v" + strNumVersion.split("-")[0]);
         stPrimaryStage.setMaximized(true);
@@ -14971,7 +15510,7 @@ public class EditeurPanovisu extends Application {
             }
         });
     }
-    
+
     /**
      * Affiche le dialogue de sélection de thème
      */
@@ -14980,26 +15519,26 @@ public class EditeurPanovisu extends Application {
         dialogStage.initModality(Modality.APPLICATION_MODAL);
         dialogStage.setTitle("Choisir un thème");
         dialogStage.setResizable(false);
-        
+
         VBox root = new VBox(10);
         root.setPadding(new Insets(15));
         root.setAlignment(Pos.TOP_CENTER);
-        
+
         Label lblTitle = new Label("Sélectionnez un thème pour l'application");
         lblTitle.setStyle("-fx-font-size: 15px; -fx-font-weight: bold;");
-        
+
         // Container avec ScrollPane pour gérer le débordement
         VBox vboxThemes = new VBox(8);
         vboxThemes.setPadding(new Insets(5));
-        
+
         // Section thèmes clairs
         Label lblLight = new Label("🌞 Thèmes Clairs");
         lblLight.setStyle("-fx-font-size: 13px; -fx-font-weight: bold;");
         VBox vboxLight = new VBox(5);
         ToggleGroup groupThemes = new ToggleGroup();
-        
+
         ThemeManager.Theme currentTheme = ThemeManager.loadSavedTheme();
-        
+
         for (ThemeManager.Theme theme : ThemeManager.getLightThemes()) {
             RadioButton rb = new RadioButton(theme.getDisplayName());
             rb.setToggleGroup(groupThemes);
@@ -15009,12 +15548,12 @@ public class EditeurPanovisu extends Application {
             }
             vboxLight.getChildren().add(rb);
         }
-        
+
         // Section thèmes sombres
         Label lblDark = new Label("🌙 Thèmes Sombres");
         lblDark.setStyle("-fx-font-size: 13px; -fx-font-weight: bold;");
         VBox vboxDark = new VBox(5);
-        
+
         for (ThemeManager.Theme theme : ThemeManager.getDarkThemes()) {
             RadioButton rb = new RadioButton(theme.getDisplayName());
             rb.setToggleGroup(groupThemes);
@@ -15024,26 +15563,25 @@ public class EditeurPanovisu extends Application {
             }
             vboxDark.getChildren().add(rb);
         }
-        
+
         vboxThemes.getChildren().addAll(
-            lblLight,
-            vboxLight,
-            new Separator(),
-            lblDark,
-            vboxDark
-        );
-        
+                lblLight,
+                vboxLight,
+                new Separator(),
+                lblDark,
+                vboxDark);
+
         // ScrollPane pour gérer le contenu si la liste est trop longue
         ScrollPane scrollPane = new ScrollPane(vboxThemes);
         scrollPane.setFitToWidth(true);
         scrollPane.setPrefHeight(450);
         scrollPane.setStyle("-fx-background-color: transparent;");
-        
+
         // Boutons
         HBox hboxButtons = new HBox(10);
         hboxButtons.setAlignment(Pos.CENTER);
         hboxButtons.setPadding(new Insets(10, 0, 0, 0));
-        
+
         Button btnAppliquer = new Button("Appliquer");
         btnAppliquer.setOnAction(e -> {
             RadioButton selected = (RadioButton) groupThemes.getSelectedToggle();
@@ -15051,29 +15589,28 @@ public class EditeurPanovisu extends Application {
                 ThemeManager.Theme selectedTheme = (ThemeManager.Theme) selected.getUserData();
                 ThemeManager.applyTheme(getScnPrincipale(), selectedTheme);
                 System.out.println("✅ Thème changé: " + selectedTheme.getDisplayName());
-                
+
                 // Mettre à jour les couleurs des panneaux de hotspots
                 getGestionnaireInterface().mettreAJourCouleursHotspots();
             }
             dialogStage.close();
         });
-        
+
         Button btnAnnuler = new Button("Annuler");
         btnAnnuler.setOnAction(e -> dialogStage.close());
-        
+
         hboxButtons.getChildren().addAll(btnAppliquer, btnAnnuler);
-        
+
         root.getChildren().addAll(
-            lblTitle,
-            new Separator(),
-            scrollPane,
-            hboxButtons
-        );
-        
+                lblTitle,
+                new Separator(),
+                scrollPane,
+                hboxButtons);
+
         Scene scene = new Scene(root, 400, 580); // Réduit à 580px avec ScrollPane
         // Appliquer le thème actuel au dialogue
         ThemeManager.applyTheme(scene, currentTheme);
-        
+
         dialogStage.setScene(scene);
         dialogStage.showAndWait();
     }
@@ -15084,16 +15621,16 @@ public class EditeurPanovisu extends Application {
     private static void afficherDialogueModelesIA() throws Exception {
         FXMLLoader loader = new FXMLLoader(EditeurPanovisu.class.getResource("ModelsConfig.fxml"));
         Parent root = loader.load();
-        
+
         Stage stage = new Stage();
         stage.setTitle("Configuration des modèles IA");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setResizable(false);
-        
+
         Scene scene = new Scene(root);
         // Appliquer le thème actuel au dialogue
         ThemeManager.applyTheme(scene, ThemeManager.getCurrentTheme());
-        
+
         stage.setScene(scene);
         stage.showAndWait();
     }
@@ -15101,16 +15638,24 @@ public class EditeurPanovisu extends Application {
     /**
      * Point d'entrée principal de l'application
      * 
-     * <p>Cette méthode est appelée au démarrage du programme. Elle effectue les initialisations
-     * de base avant de lancer l'interface JavaFX :</p>
+     * <p>
+     * Cette méthode est appelée au démarrage du programme. Elle effectue les
+     * initialisations
+     * de base avant de lancer l'interface JavaFX :
+     * </p>
      * 
      * <ul>
-     *   <li>Configure l'encodage des fichiers en UTF-8 pour supporter les caractères internationaux</li>
-     *   <li>Détecte le système d'exploitation (Windows, Mac, Linux) pour adapter le comportement</li>
-     *   <li>Lance l'application JavaFX via la méthode {@link #start(Stage)}</li>
+     * <li>Configure l'encodage des fichiers en UTF-8 pour supporter les caractères
+     * internationaux</li>
+     * <li>Détecte le système d'exploitation (Windows, Mac, Linux) pour adapter le
+     * comportement</li>
+     * <li>Lance l'application JavaFX via la méthode {@link #start(Stage)}</li>
      * </ul>
      * 
-     * <p><b>Exemple d'utilisation :</b></p>
+     * <p>
+     * <b>Exemple d'utilisation :</b>
+     * </p>
+     * 
      * <pre>{@code
      * java -jar EditeurPanovisu.jar
      * }</pre>

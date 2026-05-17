@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2025 Laurent LANG
+ * Copyright (c) 2014-2026 Laurent LANG
  * Éditeur PanoVisu - Version 3.0
  * 
  * TileRetriever personnalisé pour Esri World Imagery
@@ -12,23 +12,24 @@ import java.util.logging.Logger;
 
 /**
  * TileRetriever pour les tuiles Esri World Imagery (satellite)
- * URL: https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}
+ * URL:
+ * https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}
  * 
  * Note: Gluon Maps charge les tuiles via Image(url) directement
  * 
  * @author LANG Laurent
  */
 public class EsriTileRetriever {
-    
+
     private static final Logger LOGGER = Logger.getLogger(EsriTileRetriever.class.getName());
     private static final String ESRI_TILE_URL = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/";
-    
+
     /**
      * Construit l'URL d'une tuile Esri
      * 
      * @param zoom Niveau de zoom
-     * @param x Coordonnée X de la tuile
-     * @param y Coordonnée Y de la tuile
+     * @param x    Coordonnée X de la tuile
+     * @param y    Coordonnée Y de la tuile
      * @return URL de la tuile
      */
     public static String getTileUrl(int zoom, long x, long y) {
@@ -40,22 +41,23 @@ public class EsriTileRetriever {
      * Charge une tuile Esri
      * 
      * @param zoom Niveau de zoom
-     * @param x Coordonnée X de la tuile
-     * @param y Coordonnée Y de la tuile
+     * @param x    Coordonnée X de la tuile
+     * @param y    Coordonnée Y de la tuile
      * @return Image de la tuile
      */
     public static Image loadTile(int zoom, long x, long y) {
         try {
             String urlString = getTileUrl(zoom, x, y);
             Image image = new Image(urlString, true); // true = background loading
-            
+
             if (image.isError()) {
                 LOGGER.log(Level.WARNING, "Erreur lors du chargement de la tuile Esri: " + urlString);
             }
-            
+
             return image;
         } catch (Exception e) {
-            LOGGER.log(Level.WARNING, "Impossible de charger la tuile Esri [" + zoom + ", " + x + ", " + y + "]: " + e.getMessage());
+            LOGGER.log(Level.WARNING,
+                    "Impossible de charger la tuile Esri [" + zoom + ", " + x + ", " + y + "]: " + e.getMessage());
             return null;
         }
     }
