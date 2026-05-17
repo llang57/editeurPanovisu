@@ -10977,25 +10977,8 @@ public class EditeurPanovisu extends Application {
                 panoCree.setImgVisuPanoramique(imgTransformationImage(new Image("file:" + jpegFile.getAbsolutePath()), 2));
             }
             
-            // 🚀 PRÉ-CALCUL pour optimiser l'affichage des visualiseurs
-            System.out.println("🚀 Pré-calcul pour le nouveau panorama " + getiNombrePanoramiques());
-            Image imgPanoSource = new Image("file:" + jpegFile.getAbsolutePath());
-            
-            // Image haute résolution pour le mode plein écran (iRapport=1)
-            System.out.println("   📸 Pré-chargement image haute résolution...");
-            Image imgHauteRes = imgTransformationImage(imgPanoSource, 1);
-            panoCree.setImgHauteResolution(imgHauteRes);
-            
-            // Cube petite résolution (500×500) pour le petit visualiseur
-            System.out.println("   📦 Calcul des faces 500×500...");
-            Image[] cubesPetits = TransformationsPanoramique.equi2cubeAuto(imgPanoSource, 500);
-            panoCree.setCubeFacesPetiteResolution(cubesPetits);
-            
-            // Cube grande résolution (1000×1000) pour le visualiseur plein écran
-            System.out.println("   📦 Calcul des faces 1000×1000...");
-            Image[] cubesGrands = TransformationsPanoramique.equi2cubeAuto(imgPanoSource, 1000);
-            panoCree.setCubeFacesGrandeResolution(cubesGrands);
-            System.out.println("   ✅ Pré-calcul terminé");
+            // Le cache des faces cube est calculé à la demande (lazy) dans NavigateurPanoramique
+            // pour éviter la saturation mémoire lors de l'import de nombreux panoramiques.
             
             panoCree.setImgPanoramique(imgPanoRetaille2);
             panoCree.setNombreNiveaux(iNombreNiveaux);
