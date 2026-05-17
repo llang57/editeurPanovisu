@@ -27,6 +27,19 @@ Write-Host "`n[2/4] Creation de l'image d'application..." -ForegroundColor Yello
 $appImageDir = "target\dist-msi"
 Remove-Item -Path $appImageDir -Recurse -Force -ErrorAction SilentlyContinue
 
+# Détecter dynamiquement la version depuis le JAR généré
+$jarFile = Get-ChildItem "target\app-input\editeurPanovisu-*.jar" | Select-Object -First 1
+if (-not $jarFile) {
+    $jarFile = Get-ChildItem "target\editeurPanovisu-*.jar" | Select-Object -First 1
+}
+if (-not $jarFile) {
+    Write-Host "ERREUR: JAR introuvable dans target\app-input\ ou target\" -ForegroundColor Red
+    exit 1
+}
+$jarName = $jarFile.Name
+$appVersion = ($jarName -replace 'editeurPanovisu-', '' -replace '\.jar', '')
+Write-Host "  Version detectee: $appVersion (JAR: $jarName)" -ForegroundColor Gray
+
 $javaHome = $env:JAVA_HOME
 if (-not $javaHome) {
     $javaExe = (Get-Command java -ErrorAction SilentlyContinue).Source
@@ -45,10 +58,10 @@ Write-Host "  Java: $javaHome" -ForegroundColor Gray
 & jpackage `
   --type app-image `
   --name EditeurPanovisu `
-  --app-version 3.4.0 `
+  --app-version $appVersion `
   --vendor "PanoVisu - Laurent LANG" `
   --input target\app-input `
-  --main-jar editeurPanovisu-3.4.0.jar `
+  --main-jar $jarName `
   --main-class editeurpanovisu.Launcher `
   --runtime-image "$javaHome" `
   --icon images\panovisu.ico `
@@ -81,7 +94,7 @@ if (Test-Path $exeFile) {
 $batchContent = @'
 @echo off
 cd /d "%~dp0app"
-start "" "%~dp0runtime\bin\javaw.exe" -Dfile.encoding=UTF-8 --enable-preview --enable-native-access=ALL-UNNAMED -Xms512m -Xmx2048m -jar "editeurPanovisu-3.4.0.jar"
+start "" "%~dp0runtime\bin\javaw.exe" -Dfile.encoding=UTF-8 --enable-preview --enable-native-access=ALL-UNNAMED -Xms512m -Xmx2048m -jar "$jarName"
 '@
 $batchContent | Out-File -FilePath "$appDir\Lancer_EditeurPanovisu.bat" -Encoding ASCII
 Write-Host "  [OK] Batch cree" -ForegroundColor Green
