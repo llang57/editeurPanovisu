@@ -413,6 +413,11 @@ public class OllamaService {
      * @return Tableau des modèles OpenRouter disponibles
      */
     public static String[] getModelesOpenRouterDisponibles() {
+        if (configManager.getOpenRouterConfig() != null && configManager.getOpenRouterConfig().getModels() != null) {
+            return configManager.getOpenRouterConfig().getEnabledModels().stream()
+                .map(editeurpanovisu.config.ModelConfig.ModelEntry::getId)
+                .toArray(String[]::new);
+        }
         return OPENROUTER_MODELS;
     }
     
@@ -938,13 +943,12 @@ public class OllamaService {
                 }
                 
                 prompt.append("\nINSTRUCTIONS :\n")
-                      .append("1. Génère une description factuelle de 5 phrases en français\n")
-                      .append("2. CONCENTRE-TOI sur le SUJET PRINCIPAL indiqué ci-dessus\n")
-                      .append("3. Si c'est un point de vue/belvédère (viewpoint), décris CE QU'ON VOIT depuis ce point\n")
-                      .append("4. Le village/commune est le CONTEXTE GÉOGRAPHIQUE, pas le sujet principal\n")
-                      .append("5. Utilise UNIQUEMENT les informations fournies ci-dessus\n")
-                      .append("6. ⚠️ INTERDIT ABSOLU : N'INVENTE JAMAIS de noms propres (châteaux, tours, monuments, etc.)\n")
-                      .append("   Si un NOM est fourni ci-dessus, utilise-le. Sinon, utilise des termes génériques (\"le château\", \"les fortifications\", etc.)\n");
+                      .append("Tu es un guide touristique expert, factuel et rigoureux. Ta tâche est de décrire ce lieu avec une précision chirurgicale.\n")
+                      .append("1. Génère une description immersive et factuelle de 4 à 5 phrases maximum en français.\n")
+                      .append("2. CONCENTRE-TOI sur le SUJET PRINCIPAL. Décris l'architecture, le paysage ou l'atmosphère qui s'y rapportent.\n")
+                      .append("3. Si c'est un point de vue, décris logiquement le panorama visible depuis ce lieu.\n")
+                      .append("4. Le village/commune n'est que le contexte géographique.\n")
+                      .append("5. Ne commence JAMAIS ta réponse par des formules de politesse ('Voici la description'). Donne uniquement le texte final.\n");
             } else {
                 prompt.append("EXACT GEOGRAPHICAL LOCATION:\n")
                       .append(lieuReel)
@@ -980,13 +984,12 @@ public class OllamaService {
                 }
                 
                 prompt.append("\nINSTRUCTIONS:\n")
-                      .append("1. Generate a factual description of 5 sentences in ").append(langue).append("\n")
-                      .append("2. FOCUS on the MAIN SUBJECT indicated above\n")
-                      .append("3. If it's a viewpoint, describe WHAT YOU SEE from this point\n")
-                      .append("4. The village/town is the GEOGRAPHICAL CONTEXT, not the main subject\n")
-                      .append("5. Use ONLY the information provided above\n")
-                      .append("6. ⚠️ ABSOLUTE PROHIBITION: NEVER INVENT proper names (castles, towers, monuments, etc.)\n")
-                      .append("   If a NAME is provided above, use it. Otherwise, use generic terms (\"the castle\", \"the fortifications\", etc.)\n");
+                      .append("You are an expert, factual, and rigorous tour guide. Your task is to describe this place with surgical precision.\n")
+                      .append("1. Generate an immersive and factual description of 4 to 5 sentences maximum in ").append(langue).append(".\n")
+                      .append("2. FOCUS on the MAIN SUBJECT. Describe the architecture, landscape, or atmosphere related to it.\n")
+                      .append("3. If it is a viewpoint, logically describe the panorama visible from this place.\n")
+                      .append("4. The village/town is only the geographical context.\n")
+                      .append("5. NEVER start your response with conversational filler ('Here is the description'). Output ONLY the final text.\n");
             }
             
         } else {
@@ -1016,23 +1019,19 @@ public class OllamaService {
         
         // Consignes finales - ULTRA STRICTES (5 phrases factuelles)
         if (langue.equals("français")) {
-            prompt.append("\n\n🚫 RÈGLES STRICTES - INTERDICTIONS ABSOLUES :\n");
-            prompt.append("1) N'INVENTE JAMAIS de noms propres (châteaux, tours, bâtiments, personnes, etc.)\n");
-            prompt.append("2) N'INVENTE JAMAIS de chiffres, nombres, quantités, dates ou mesures\n");
-            prompt.append("3) Si un nom ou nombre N'EST PAS fourni ci-dessus, utilise des termes GÉNÉRIQUES\n");
-            prompt.append("4) Exemple INTERDIT : \"Tour Cabriole\" ou \"12 châteaux\" si non fournis\n");
-            prompt.append("5) Exemple CORRECT : \"les châteaux\" ou \"plusieurs fortifications\"\n");
-            prompt.append("6) Si tu ne connais pas un fait avec certitude, NE LE MENTIONNE PAS\n");
-            prompt.append("7) Génère exactement 5 phrases factuelles. Pas de formule de politesse.");
+            prompt.append("\n\n🚫 RÈGLES ANTI-HALLUCINATION ABSOLUES :\n");
+            prompt.append("1) N'INVENTE AUCUN nom propre, bâtiment, personne ou événement historique non avéré.\n");
+            prompt.append("2) N'INVENTE AUCUNE date, chiffre ou mesure.\n");
+            prompt.append("3) En l'absence de détails historiques précis, utilise une description visuelle et sensorielle GÉNÉRIQUE (ex: \"le relief escarpé\", \"les fortifications de pierre\").\n");
+            prompt.append("4) Si tu ne possèdes pas une connaissance historique absolue sur ce lieu exact, décris uniquement l'aspect géographique déduit des informations.\n");
+            prompt.append("5) Ta réponse doit contenir exactement le texte de la description, sans aucune méta-phrase (pas de \"Voici...\", pas de \"...\").\n");
         } else {
-            prompt.append("\n\n🚫 STRICT RULES - ABSOLUTE PROHIBITIONS:\n");
-            prompt.append("1) NEVER INVENT proper names (castles, towers, buildings, people, etc.)\n");
-            prompt.append("2) NEVER INVENT numbers, quantities, dates or measurements\n");
-            prompt.append("3) If a name or number is NOT provided above, use GENERIC terms\n");
-            prompt.append("4) FORBIDDEN example: \"Cabriole Tower\" or \"12 castles\" if not provided\n");
-            prompt.append("5) CORRECT example: \"the castles\" or \"several fortifications\"\n");
-            prompt.append("6) If you don't know a fact with certainty, DON'T MENTION IT\n");
-            prompt.append("7) Generate exactly 5 factual sentences. No greetings.");
+            prompt.append("\n\n🚫 ABSOLUTE ANTI-HALLUCINATION RULES:\n");
+            prompt.append("1) NEVER INVENT proper names, buildings, people, or unverified historical events.\n");
+            prompt.append("2) NEVER INVENT dates, numbers, or measurements.\n");
+            prompt.append("3) Without precise historical details, use GENERIC visual and sensory descriptions (e.g., \"the rugged terrain\", \"the stone fortifications\").\n");
+            prompt.append("4) If you do not possess absolute historical knowledge about this exact place, describe ONLY the geographical aspects deduced from the information.\n");
+            prompt.append("5) Your response must contain exactly the description text, with no conversational or meta phrases (no \"Here is...\", no \"...\").\n");
         }
         
         String finalPrompt = prompt.toString();

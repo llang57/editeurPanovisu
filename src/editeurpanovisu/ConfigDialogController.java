@@ -470,6 +470,24 @@ public class ConfigDialogController {
             return modelName;
         }
         
+        editeurpanovisu.config.ModelConfigManager cm = OllamaService.getConfigManager();
+        if (cm != null && cm.getOpenRouterConfig() != null && cm.getOpenRouterConfig().getModels() != null) {
+            for (editeurpanovisu.config.ModelConfig.ModelEntry entry : cm.getOpenRouterConfig().getModels()) {
+                if (entry.getId().equals(modelName)) {
+                    String stars = "★".repeat(Math.max(0, entry.getQuality()));
+                    return String.format(java.util.Locale.US, "[%.2f€] %s %s", entry.getPrice(), entry.getDisplayName(), stars);
+                }
+            }
+        }
+        if (cm != null && cm.getOllamaConfig() != null && cm.getOllamaConfig().getModels() != null) {
+            for (editeurpanovisu.config.ModelConfig.ModelEntry entry : cm.getOllamaConfig().getModels()) {
+                if (entry.getId().equals(modelName)) {
+                    String stars = "★".repeat(Math.max(0, entry.getQuality()));
+                    return String.format("[%s] %s %s", entry.getSize(), entry.getDisplayName(), stars);
+                }
+            }
+        }
+        
         // Modèles OpenRouter - Nov 2025 (avec prix et qualité)
         if (modelName.equals("google/gemini-2.0-flash-exp:free") || modelName.equals("google/gemini-2.0-flash-exp")) {
             return "[GRATUIT] Gemini 2.0 Flash ★★★★";
@@ -539,6 +557,22 @@ public class ConfigDialogController {
     private static String extraireNomModele(String displayName) {
         if (displayName == null || displayName.isEmpty()) {
             return displayName;
+        }
+        
+        editeurpanovisu.config.ModelConfigManager cm = OllamaService.getConfigManager();
+        if (cm != null && cm.getOpenRouterConfig() != null && cm.getOpenRouterConfig().getModels() != null) {
+            for (editeurpanovisu.config.ModelConfig.ModelEntry entry : cm.getOpenRouterConfig().getModels()) {
+                if (displayName.contains(entry.getDisplayName())) {
+                    return entry.getId();
+                }
+            }
+        }
+        if (cm != null && cm.getOllamaConfig() != null && cm.getOllamaConfig().getModels() != null) {
+            for (editeurpanovisu.config.ModelConfig.ModelEntry entry : cm.getOllamaConfig().getModels()) {
+                if (displayName.contains(entry.getDisplayName())) {
+                    return entry.getId();
+                }
+            }
         }
         
         // Mapping inverse - Nouveaux modèles (Nov 2025)
