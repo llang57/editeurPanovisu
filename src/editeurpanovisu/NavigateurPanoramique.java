@@ -976,17 +976,30 @@ public final class NavigateurPanoramique {
             if (cubeFaces != null) {
                 panoramicCube.setCubeFaces(cubeFaces);
             } else {
-                // Fallback : recalcul si pas de cache
+                // Fallback : utiliser l'image équirectangulaire du Panoramique (PAS imgVisuPanoramique qui est Mercator)
+                Image imgEqui;
+                if (hauteQualite && panoramique != null && panoramique.getStrNomFichier() != null
+                        && !panoramique.getStrNomFichier().isEmpty()) {
+                    // Mode plein écran : charger l'image originale pleine résolution
+                    System.out.println("   🎨 Chargement image originale pleine résolution pour plein écran...");
+                    imgEqui = new javafx.scene.image.Image("file:" + panoramique.getStrNomFichier());
+                    System.out.println("   💾 Source : " + (int)imgEqui.getWidth() + "×" + (int)imgEqui.getHeight());
+                } else if (panoramique != null && panoramique.getImgPanoramique() != null) {
+                    imgEqui = panoramique.getImgPanoramique();   // équirectangulaire 1200×600
+                } else {
+                    imgEqui = this.getImgPanoramique();          // fallback ultime
+                }
+
                 if (panoramique == null) {
                     System.out.println("   ⚠️ Pas d'objet Panoramique fourni, recalcul des faces");
                 } else {
-                    System.out.println("   ⚠️ Pas de cache, recalcul des faces");
+                    System.out.println("   ⚠️ Pas de cache, recalcul depuis l'équirectangulaire");
                 }
-                
+
                 if (hauteQualite) {
-                    panoramicCube.setPanoramicImage(this.getImgPanoramique(), 3000, 1500, 1000);
+                    panoramicCube.setPanoramicImage(imgEqui, 4000, 2000, 2000);
                 } else {
-                    panoramicCube.setPanoramicImage(this.getImgPanoramique());
+                    panoramicCube.setPanoramicImage(imgEqui);
                 }
             }
             long endApply = System.currentTimeMillis();
@@ -1087,12 +1100,22 @@ public final class NavigateurPanoramique {
         if (cubeFaces != null) {
             panoramicCube.setCubeFaces(cubeFaces);
         } else {
-            // Fallback : recalcul si pas de cache
-            System.out.println("   ⚠️ Pas de cache, recalcul des faces");
-            if (hauteQualite) {
-                panoramicCube.setPanoramicImage(imgPanoramique, 3000, 1500, 1000);
+            // Fallback : utiliser l'équirectangulaire (PAS imgPanoramique qui est Mercator)
+            Image imgEqui;
+            if (hauteQualite && strImagePanoramique != null && !strImagePanoramique.isEmpty()) {
+                // Mode plein écran : charger l'image originale pleine résolution
+                System.out.println("   🎨 Chargement image originale pleine résolution pour plein écran...");
+                imgEqui = new javafx.scene.image.Image("file:" + strImagePanoramique);
+            } else if (panoramique.getImgPanoramique() != null) {
+                imgEqui = panoramique.getImgPanoramique();   // équirectangulaire 1200×600
             } else {
-                panoramicCube.setPanoramicImage(imgPanoramique);
+                imgEqui = imgPanoramique;                    // fallback ultime
+            }
+            System.out.println("   ⚠️ Pas de cache, recalcul depuis l'équirectangulaire");
+            if (hauteQualite) {
+                panoramicCube.setPanoramicImage(imgEqui, 4000, 2000, 2000);
+            } else {
+                panoramicCube.setPanoramicImage(imgEqui);
             }
         }
     }

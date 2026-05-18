@@ -11683,13 +11683,13 @@ public class EditeurPanovisu extends Application {
                 System.err.println("   ⚠️ Échec pré-calcul cube 500×500");
             }
 
-            // Cube grande résolution (1000×1000) pour le grand visualiseur
+            // Cube grande résolution (2000×2000) pour le grand visualiseur plein écran
             try {
-                Image[] cubesGrands = TransformationsPanoramique.equi2cubeAuto(imgPanoSource, 1000);
+                Image[] cubesGrands = TransformationsPanoramique.equi2cubeAuto(imgPanoSource, 2000);
                 getPanoramiquesProjet()[getiPanoActuel()].setCubeFacesGrandeResolution(cubesGrands);
-                System.out.println("   ✅ Cube 1000×1000 pré-calculé et stocké");
+                System.out.println("   ✅ Cube 2000×2000 pré-calculé et stocké");
             } catch (InterruptedException ex) {
-                System.err.println("   ⚠️ Échec pré-calcul cube 1000×1000");
+                System.err.println("   ⚠️ Échec pré-calcul cube 2000×2000");
             }
 
             getPanoramiquesProjet()[getiPanoActuel()].setStrTypePanoramique(Panoramique.SPHERE);
