@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.ConfigDialogController.extraireNomModele" name="editeurpanovisu.ConfigDialogController.extraireNomModele">
+<area shape="rect" id="Node000001" title="Extrait le nom du modèle sans l&#39;emoji, prix et qualité" alt="" coords="5,35,224,75"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1OllamaService.html#ab25532e1b94926d9a00d8d88faa89af4" title="Récupère le gestionnaire de configuration des modèles." alt="" coords="272,5,523,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="224,41,258,37,259,42,225,46"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="378,70,417,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="225,63,365,77,364,82,224,68"/>
+</map>

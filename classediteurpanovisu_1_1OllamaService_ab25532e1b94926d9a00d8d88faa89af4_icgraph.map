@@ -1,5 +1,12 @@
 <map id="editeurpanovisu.OllamaService.getConfigManager" name="editeurpanovisu.OllamaService.getConfigManager">
-<area shape="rect" id="Node000001" title="Récupère le gestionnaire de configuration des modèles." alt="" coords="272,5,523,45"/>
-<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1ModelsConfigController.html#a43a38fea1e6d52c6fee90bead609dc63" title="Initialisation du contrôleur." alt="" coords="5,5,224,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="258,28,224,28,224,23,258,23"/>
+<area shape="rect" id="Node000001" title="Récupère le gestionnaire de configuration des modèles." alt="" coords="536,69,787,109"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1ConfigDialogController.html#a94e80d74ce4457c982269f304efdc2c8" title="Ajoute un emoji visuel devant le nom du modèle pour l&#39;interface." alt="" coords="268,5,488,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="558,69,466,48,468,43,559,64"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1ConfigDialogController.html#a810733d6008cc79ce74243007cac9e23" title="Extrait le nom du modèle sans l&#39;emoji, prix et qualité" alt="" coords="269,69,487,109"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="522,92,488,92,488,87,522,87"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1ModelsConfigController.html#a43a38fea1e6d52c6fee90bead609dc63" title="Initialisation du contrôleur." alt="" coords="269,133,487,173"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="559,115,468,136,466,131,558,110"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1ConfigDialogController.html#a228e9366c0d6a335d6bb5e6b8a09ef78" title=" " alt="" coords="5,37,220,77"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="255,43,220,47,220,42,254,38"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="255,77,220,73,221,68,255,72"/>
 </map>

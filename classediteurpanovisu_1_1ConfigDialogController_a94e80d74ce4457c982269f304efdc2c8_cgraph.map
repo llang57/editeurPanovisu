@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.ConfigDialogController.ajouterEmojiModele" name="editeurpanovisu.ConfigDialogController.ajouterEmojiModele">
+<area shape="rect" id="Node000001" title="Ajoute un emoji visuel devant le nom du modèle pour l&#39;interface." alt="" coords="5,35,225,75"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1OllamaService.html#ab25532e1b94926d9a00d8d88faa89af4" title="Récupère le gestionnaire de configuration des modèles." alt="" coords="273,5,524,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="225,41,259,37,260,42,226,46"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="379,70,418,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="226,63,366,77,365,82,225,68"/>
+</map>
