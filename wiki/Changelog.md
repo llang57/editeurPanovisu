@@ -405,23 +405,24 @@ Consultez le [Guide de contribution](Documentation-technique.md#contribution) po
 
 ## Roadmap (Prévisions)
 
-### Version 3.2.0 (Q2 2025)
-- [ ] Support du format WebP
-- [ ] Amélioration de l'éditeur WYSIWYG
-- [ ] Système de plugins
-- [ ] Internationalisation (anglais, espagnol)
+Les prochaines étapes majeures de développement pour PanoVisu sont planifiées ainsi :
 
-### Version 3.3.0 (Q3 2025)
-- [ ] Export vers A-Frame
-- [ ] Support de la réalité virtuelle (VR)
-- [ ] Amélioration des performances mobile
-- [ ] Templates de visites pré-configurés
+### Version 3.5.0 (Q3 2026)
+- [ ] **Support du format d'image WebP** : Pour des panoramiques ultra-légers à qualité constante.
+- [ ] **Génération d'images complémentaires par IA** : Intégration de modèles de génération d'images (Stable Diffusion / Flux via OpenRouter) pour enrichir visuellement les visites.
+- [ ] **Amélioration de l'éditeur WYSIWYG** : Édition encore plus visuelle des fenêtres d'information et infobulles.
+- [ ] **Système de plugins** : Possibilité pour les développeurs tiers d'étendre les fonctionnalités d'export.
 
-### Version 4.0.0 (2026)
-- [ ] Éditeur web complet
-- [ ] Collaboration en temps réel
-- [ ] Cloud storage optionnel
-- [ ] Application mobile (Android/iOS)
+### Version 3.6.0 (Q4 2026)
+- [ ] **Réalité Virtuelle (VR) native** : Support complet des casques VR (Meta Quest, Apple Vision Pro) via WebXR.
+- [ ] **Export vers A-Frame** : Intégration optionnelle d'A-Frame pour des scènes 3D immersives avancées.
+- [ ] **Optimisation automatique des textures** : Compression à la volée des images équirectangulaires lors de l'export pour le mobile.
+
+### Version 4.0.0 (2027)
+- [ ] **Éditeur Web complet** : Version Saas/Web d'EditeurPanovisu utilisable directement depuis le navigateur.
+- [ ] **Collaboration en temps réel** : Édition partagée à plusieurs de vos projets de visites virtuelles.
+- [ ] **Stockage Cloud Optionnel** : Hébergement sécurisé en un clic des visites générées sur une infrastructure Cloud.
+- [ ] **Application mobile compagnon (Android/iOS)** : Pour capturer, assembler et publier une visite directement depuis son smartphone.
 
 ---
 
