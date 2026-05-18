@@ -184,6 +184,11 @@
             <artifactId>commonmark-ext-gfm-strikethrough</artifactId>
             <version>0.22.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.commonmark</groupId>
+            <artifactId>commonmark-ext-heading-anchor</artifactId>
+            <version>0.22.0</version>
+        </dependency>
 
         <!-- AtlantaFX - Thèmes modernes JavaFX -->
         <dependency>

@@ -5,6 +5,7 @@ import javafx.scene.web.WebView;
 import org.commonmark.Extension;
 import org.commonmark.ext.gfm.strikethrough.StrikethroughExtension;
 import org.commonmark.ext.gfm.tables.TablesExtension;
+import org.commonmark.ext.heading.anchor.HeadingAnchorExtension;
 import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.HtmlRenderer;
 
@@ -35,10 +36,11 @@ public class MarkdownViewer {
             fontesChargees = true;
         }
         
-        // Extensions pour les tables et le texte barré
+        // Extensions pour les tables, le texte barré et les ancres de titres
         List<Extension> extensions = Arrays.asList(
             TablesExtension.create(),
-            StrikethroughExtension.create()
+            StrikethroughExtension.create(),
+            HeadingAnchorExtension.create()
         );
         
         this.parser = Parser.builder()
