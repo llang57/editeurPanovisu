@@ -1,4 +1,4 @@
-# 🤖 Installation d'Ollama pour les Descriptions IA
+# Installation d'Ollama pour les Descriptions IA
 
 ## Qu'est-ce qu'Ollama ?
 
@@ -6,17 +6,17 @@
 
 Dans **EditeurPanovisu**, Ollama vous permet de générer automatiquement des descriptions pour vos panoramiques en utilisant l'IA de manière **privée** et **gratuite**.
 
-### ✅ Avantages d'Ollama
+### Avantages d'Ollama
 
-- 🔒 **Confidentialité totale** : Vos données restent sur votre ordinateur
-- 💰 **100% gratuit** : Pas d'abonnement, pas de limite d'utilisation
-- 🚀 **Rapide** : L'IA fonctionne directement sur votre PC
-- 🌐 **Hors ligne** : Fonctionne sans connexion internet
-- 🎯 **Qualité** : Modèles d'IA performants et précis
+- **Confidentialité totale** : Vos données restent sur votre ordinateur
+- **100% gratuit** : Pas d'abonnement, pas de limite d'utilisation
+- **Rapide** : L'IA fonctionne directement sur votre PC
+- **Hors ligne** : Fonctionne sans connexion internet
+- **Qualité** : Modèles d'IA performants et précis
 
 ---
 
-## 📋 Prérequis
+## Prérequis
 
 Avant d'installer Ollama, vérifiez que votre ordinateur répond aux exigences minimales :
 
@@ -31,13 +31,13 @@ Avant d'installer Ollama, vérifiez que votre ordinateur répond aux exigences m
 - **Espace disque** : 20 Go ou plus (pour plusieurs modèles)
 - **Carte graphique** : NVIDIA RTX (optionnel, accélère les calculs)
 
-> ℹ️ **Note** : Ollama fonctionne sur CPU, mais une carte graphique NVIDIA améliore considérablement les performances.
+> **Note** : Ollama fonctionne sur CPU, mais une carte graphique NVIDIA améliore considérablement les performances.
 
 ---
 
-## 🚀 Installation d'Ollama
+## Installation d'Ollama
 
-### 🐧 [Linux] Installation sous Linux (Recommandé - Plus simple !)
+### [Linux] Installation sous Linux (Recommandé - Plus simple !)
 
 L'installation sous Linux est **très simple** - une seule commande suffit !
 
@@ -51,7 +51,7 @@ L'installation sous Linux est **très simple** - une seule commande suffit !
 3. **Appuyez sur Entrée** et entrez votre mot de passe si demandé
 4. **Attendez la fin de l'installation** (quelques secondes)
 
-**C'est tout !** ✅ Ollama est maintenant installé et démarré automatiquement.
+**C'est tout !** Ollama est maintenant installé et démarré automatiquement.
 
 #### Vérifier l'installation
 
@@ -91,11 +91,11 @@ sudo systemctl start ollama
 sudo systemctl disable ollama
 ```
 
-> 💡 **Astuce** : Sous Linux, Ollama fonctionne comme un service système, c'est encore plus pratique qu'sous Windows !
+> **Astuce** : Sous Linux, Ollama fonctionne comme un service système, c'est encore plus pratique qu'sous Windows !
 
 ---
 
-### 🪟 [Windows] Installation sous Windows
+### [Windows] Installation sous Windows
 
 #### Étape 1 : Télécharger Ollama
 
@@ -116,7 +116,7 @@ sudo systemctl disable ollama
    - Attendez la fin de l'installation (quelques secondes)
    - Cliquez sur **"Finish"** (Terminer)
 
-> ⚠️ **Important** : Une icône Ollama apparaîtra dans la barre des tâches (près de l'horloge). Cela signifie qu'Ollama est en cours d'exécution.
+> ⚠ **Important** : Une icône Ollama apparaîtra dans la barre des tâches (près de l'horloge). Cela signifie qu'Ollama est en cours d'exécution.
 
 #### Étape 3 : Vérifier l'installation
 
@@ -134,7 +134,7 @@ Si vous voyez un numéro de version (par exemple `ollama version is 0.3.12`), c'
 
 ---
 
-### 🍎 [macOS] Installation sous macOS
+### [macOS] Installation sous macOS
 
 1. **Téléchargez** Ollama depuis : **https://ollama.com/download**
 2. **Ouvrez** le fichier `.dmg` téléchargé
@@ -154,7 +154,7 @@ ollama pull qwen3.5
 
 ---
 
-## 📦 Installation d'un Modèle d'IA
+## Installation d'un Modèle d'IA
 
 Ollama ne contient pas de modèle d'IA par défaut. Vous devez en télécharger un.
 
@@ -162,12 +162,12 @@ Ollama ne contient pas de modèle d'IA par défaut. Vous devez en télécharger 
 
 | Modèle | Taille | RAM nécessaire | Qualité | Vitesse |
 |--------|--------|----------------|---------|---------|
-| **qwen3.5** | 4 GB | 8 GB | ⭐⭐⭐⭐ | 🚀🚀 |
-| **mistral-nemo** | 7 GB | 16 GB | ⭐⭐⭐⭐ | 🚀🚀 |
-| **phi4** | 8 GB | 16 GB | ⭐⭐⭐⭐⭐ | 🚀 |
-| **deepseek-r1:14b** | 8 GB | 16 GB | ⭐⭐⭐⭐⭐ | 🚀 |
+| **qwen3.5** | 4 GB | 8 GB | ★★★★ | 🚀|
+| **mistral-nemo** | 7 GB | 16 GB | ★★★★ | 🚀|
+| **phi4** | 8 GB | 16 GB | ★★★★★ | |
+| **deepseek-r1:14b** | 8 GB | 16 GB | ★★★★★ | |
 
-> 💡 **Recommandation** : Pour débuter, installez **qwen3.5** (excellent en géographie) ou **phi4** (très performant).
+> **Recommandation** : Pour débuter, installez **qwen3.5** (excellent en géographie) ou **phi4** (très performant).
 
 ### Comment installer un modèle
 
@@ -198,7 +198,7 @@ ollama pull deepseek-r1:14b
 
 ![Téléchargement modèle](https://i.imgur.com/example.png)
 
-> ⏱️ **Patience** : Le téléchargement peut être long la première fois (plusieurs gigaoctets). Une fois téléchargé, le modèle est disponible immédiatement.
+> **Patience** : Le téléchargement peut être long la première fois (plusieurs gigaoctets). Une fois téléchargé, le modèle est disponible immédiatement.
 
 ### Vérifier les modèles installés
 
@@ -212,7 +212,7 @@ Vous verrez la liste de tous vos modèles installés.
 
 ---
 
-## 🎯 Utilisation dans EditeurPanovisu
+## Utilisation dans EditeurPanovisu
 
 Une fois Ollama et un modèle installés, vous pouvez utiliser l'IA dans EditeurPanovisu :
 
@@ -223,8 +223,8 @@ Une fois Ollama et un modèle installés, vous pouvez utiliser l'IA dans Editeur
 3. **Sélectionnez un panoramique** dans la liste
 4. Dans le panneau **"Paramètres du panoramique"**, descendez jusqu'à la section **"Description IA"**
 5. Cliquez sur le bouton **"Générer description IA"**
-6. Attendez quelques secondes ⏳
-7. La description apparaît automatiquement ! ✨
+6. Attendez quelques secondes 
+7. La description apparaît automatiquement ! 
 
 ### Que fait l'IA ?
 
@@ -245,7 +245,7 @@ Après la génération, vous pouvez :
 
 ---
 
-## 🔧 Dépannage
+## Dépannage
 
 ### Problème : "Ollama non disponible"
 
@@ -341,7 +341,7 @@ Vous pouvez aussi utiliser un modèle plus petit (qwen3.5) ou lancer Ollama uniq
 
 ---
 
-## 🌐 Mode de secours : Hugging Face
+## Mode de secours : Hugging Face
 
 Si vous ne pouvez pas installer Ollama, EditeurPanovisu peut utiliser **Hugging Face**, un service en ligne gratuit.
 
@@ -368,7 +368,7 @@ Si vous ne pouvez pas installer Ollama, EditeurPanovisu peut utiliser **Hugging 
    huggingface.api.key=hf_VOTRE_CLE_ICI
    ```
 
-> ℹ️ **Note** : EditeurPanovisu essaie automatiquement Ollama en premier, puis Hugging Face si Ollama n'est pas disponible.
+> **Note** : EditeurPanovisu essaie automatiquement Ollama en premier, puis Hugging Face si Ollama n'est pas disponible.
 
 ---
 
@@ -404,7 +404,7 @@ ollama rm mistral
 
 ---
 
-## ❓ Questions Fréquentes (FAQ)
+## Questions Fréquentes (FAQ)
 
 ### Ollama est-il vraiment gratuit ?
 **Oui !** Ollama est 100% gratuit et open source. Pas de frais cachés, pas d'abonnement.
@@ -453,28 +453,28 @@ sudo userdel ollama
 
 ---
 
-## 🆘 Support et Aide
+## Support et Aide
 
 ### Besoin d'aide ?
 
-- 📧 **Email** : support@panovisu.com
-- 🌐 **Site web** : https://www.lemondea360.fr
-- 💬 **Forum** : Posez vos questions sur le forum de la communauté
+- **Email** : support@panovisu.com
+- **Site web** : https://www.lemondea360.fr
+- **Forum** : Posez vos questions sur le forum de la communauté
 
 ### Documentation Ollama officielle
 
-- 📖 **Documentation** : https://github.com/ollama/ollama/blob/main/README.md
+- **Documentation** : https://github.com/ollama/ollama/blob/main/README.md
 - 🎥 **Tutoriels vidéo** : Recherchez "Ollama tutorial" sur YouTube
 
 ---
 
-## ✨ Conclusion
+##  Conclusion
 
 Félicitations ! Vous savez maintenant comment installer et utiliser Ollama avec EditeurPanovisu.
 
 L'intelligence artificielle est désormais à portée de main pour enrichir vos visites virtuelles avec des descriptions automatiques de qualité.
 
-**Bon travail avec EditeurPanovisu ! 🎉**
+**Bon travail avec EditeurPanovisu ! **
 
 ---
 
