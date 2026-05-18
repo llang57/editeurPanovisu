@@ -17,7 +17,14 @@
 * **Comportement de repli (Fallback) :** En cas d'absence de données historiques certifiées, le système impose à l'IA d'utiliser des descriptions visuelles, sensorielles et géographiques génériques plutôt que d'inventer des faits.
 * **Formatage propre :** Génération stricte du contenu factuel ciblé, sans formules de politesse ni fioritures conversationnelles ("Voici la description...", etc.).
 
-## Environnement & Dépendances
+## Correctifs, Ergonomie & Rendu de l'Aide
+* **Correction majeure des liens d'ancrage (F1) :** Résolution complète du dysfonctionnement de la table des matières dans le visualiseur d'aide. Le chargement s'effectue désormais via un fichier HTML local temporaire propre, permettant la navigation par ancres relatives (`#`) au sein du composant JavaFX WebView (WebKit).
+* **Slugification française sur mesure :** Intégration d'un fournisseur d'attributs HTML (`CustomAttributeProvider`) qui génère des ID de titres parfaitement compatibles avec le français (conservation des lettres accentuées via regex Unicode `\p{L}`, élimination des apostrophes droites/courbes, et correspondance de l'ancre courte `#premiers-pas`).
+* **Bouton Retour en haut flottant (`back-to-top`) :** Ajout d'un bouton circulaire interactif en bas à droite de l'aide, apparaissant dynamiquement après `200px` de défilement et proposant une remontée fluide ("smooth scroll") animée.
+* **Affichage universel de la documentation (Correction Mojibake) :** Nettoyage et suppression globale des caractères emojis 4 octets complexes dans l'aide et la présentation (qui provoquaient l'affichage de caractères brisés `` dans le composant WebView en l'absence de polices adéquates sous Windows) au profit de balises de texte explicites (`[Linux]`, `[Windows]`, `[macOS]`) et de symboles 2 octets universellement tolérés (`★`, `✓`, `⚠`).
+
+## Environnement, Dépendances & Correctifs de Build
+* **Correctif de l'installeur Windows :** Résolution d'un bug d'interpolation de chaînes de caractères dans le script PowerShell `build-installer.ps1`, qui empêchait la détection et l'accès correct au fichier JAR principal sous Windows.
 * **Script de développement :** Ajout du script `install-java-maven.ps1` facilitant le déploiement rapide de l'environnement complet Java 25 et Maven 3.9.16 pour la compilation du projet.
 * **Mise à jour des propriétés :** Montée de version à 3.4.8 dans `pom.xml`, `project.properties`, `installer.iss` et les fichiers d'internationalisation.
 
