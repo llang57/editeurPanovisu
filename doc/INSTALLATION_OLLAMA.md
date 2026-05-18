@@ -1,4 +1,4 @@
-﻿# 🤖 Installation d'Ollama pour les Descriptions IA
+# 🤖 Installation d'Ollama pour les Descriptions IA
 
 ## Qu'est-ce qu'Ollama ?
 
@@ -37,7 +37,7 @@ Avant d'installer Ollama, vérifiez que votre ordinateur répond aux exigences m
 
 ## 🚀 Installation d'Ollama
 
-### 🐧 Installation sous Linux (Recommandé - Plus simple !)
+### 🐧 [Linux] Installation sous Linux (Recommandé - Plus simple !)
 
 L'installation sous Linux est **très simple** - une seule commande suffit !
 
@@ -95,9 +95,7 @@ sudo systemctl disable ollama
 
 ---
 
-### 🪟 Installation sous Windows
-
-### 🪟 Installation sous Windows
+### 🪟 [Windows] Installation sous Windows
 
 #### Étape 1 : Télécharger Ollama
 
@@ -136,7 +134,7 @@ Si vous voyez un numéro de version (par exemple `ollama version is 0.3.12`), c'
 
 ---
 
-### 🍎 Installation sous macOS
+### 🍎 [macOS] Installation sous macOS
 
 1. **Téléchargez** Ollama depuis : **https://ollama.com/download**
 2. **Ouvrez** le fichier `.dmg` téléchargé
@@ -481,5 +479,5 @@ L'intelligence artificielle est désormais à portée de main pour enrichir vos 
 ---
 
 **Version** : 1.0  
-**Date** : 13 octobre 2025  
+**Date** : 18 mai 2026  
 **Auteur** : EditeurPanovisu - Laurent LANG
