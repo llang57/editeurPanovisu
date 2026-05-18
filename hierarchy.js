@@ -9,6 +9,9 @@ var hierarchy =
       [ "editeurpanovisu.gpu.TestImageResizeInteractive", "classediteurpanovisu_1_1gpu_1_1TestImageResizeInteractive.html", null ],
       [ "editeurpanovisu.gpu.TestReductionImage", "classediteurpanovisu_1_1gpu_1_1TestReductionImage.html", null ]
     ] ],
+    [ "AttributeProvider", null, [
+      [ "editeurpanovisu.MarkdownViewer.CustomAttributeProvider", "classediteurpanovisu_1_1MarkdownViewer_1_1CustomAttributeProvider.html", null ]
+    ] ],
     [ "BufferedImageFactory", null, [
       [ "editeurpanovisu.ReadWriteImage.ManagedImageBufferedImageFactory", "classediteurpanovisu_1_1ReadWriteImage_1_1ManagedImageBufferedImageFactory.html", null ]
     ] ],
