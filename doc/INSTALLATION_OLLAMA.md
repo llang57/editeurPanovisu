@@ -1,4 +1,4 @@
-# 🤖 Installation d'Ollama pour les Descriptions IA
+﻿# 🤖 Installation d'Ollama pour les Descriptions IA
 
 ## Qu'est-ce qu'Ollama ?
 
@@ -67,10 +67,10 @@ Vous devriez voir le numéro de version (par exemple `ollama version is 0.3.12`)
 Directement dans le terminal :
 ```bash
 # Modèle recommandé pour débuter (petit et rapide)
-ollama pull llama3.2
+ollama pull qwen3.5
 
 # OU modèle avec meilleur qualité
-ollama pull mistral
+ollama pull phi4
 ```
 
 #### Démarrer/Arrêter Ollama sous Linux
@@ -151,7 +151,7 @@ ollama --version
 
 **Installer un modèle** :
 ```bash
-ollama pull llama3.2
+ollama pull qwen3.5
 ```
 
 ---
@@ -164,12 +164,12 @@ Ollama ne contient pas de modèle d'IA par défaut. Vous devez en télécharger 
 
 | Modèle | Taille | RAM nécessaire | Qualité | Vitesse |
 |--------|--------|----------------|---------|---------|
-| **llama3.2** | 2 GB | 8 GB | ⭐⭐⭐ | 🚀🚀🚀 |
-| **mistral** | 4 GB | 8 GB | ⭐⭐⭐⭐ | 🚀🚀 |
-| **llama3.1** | 5 GB | 12 GB | ⭐⭐⭐⭐⭐ | 🚀 |
-| **gemma2** | 5 GB | 12 GB | ⭐⭐⭐⭐⭐ | 🚀 |
+| **qwen3.5** | 4 GB | 8 GB | ⭐⭐⭐⭐ | 🚀🚀 |
+| **mistral-nemo** | 7 GB | 16 GB | ⭐⭐⭐⭐ | 🚀🚀 |
+| **phi4** | 8 GB | 16 GB | ⭐⭐⭐⭐⭐ | 🚀 |
+| **deepseek-r1:14b** | 8 GB | 16 GB | ⭐⭐⭐⭐⭐ | 🚀 |
 
-> 💡 **Recommandation** : Pour débuter, installez **llama3.2** (petit et rapide) ou **mistral** (bon compromis qualité/vitesse).
+> 💡 **Recommandation** : Pour débuter, installez **qwen3.5** (excellent en géographie) ou **phi4** (très performant).
 
 ### Comment installer un modèle
 
@@ -181,19 +181,19 @@ Ollama ne contient pas de modèle d'IA par défaut. Vous devez en télécharger 
 
 Puis tapez l'une de ces commandes :
 
-**Pour Llama 3.2 (recommandé pour débuter)** :
+**Pour Qwen 3.5 (recommandé pour débuter)** :
 ```
-ollama pull llama3.2
-```
-
-**Pour Mistral (bon compromis)** :
-```
-ollama pull mistral
+ollama pull qwen3.5
 ```
 
-**Pour Llama 3.1 (qualité maximale)** :
+**Pour Phi-4 (bon compromis)** :
 ```
-ollama pull llama3.1
+ollama pull phi4
+```
+
+**Pour DeepSeek R1 (qualité maximale / raisonnement)** :
+```
+ollama pull deepseek-r1:14b
 ```
 
 **Appuyez sur Entrée**. Le téléchargement commence (cela peut prendre 5 à 30 minutes selon votre connexion). Attendez que le message **"success"** s'affiche.
@@ -299,7 +299,7 @@ Laissez cette fenêtre ouverte et retournez dans EditeurPanovisu
 
 Ouvrez un terminal (Linux/macOS) ou cmd (Windows) et tapez :
 ```bash
-ollama pull llama3.2
+ollama pull qwen3.5
 ```
 
 Attendez la fin du téléchargement et relancez EditeurPanovisu
@@ -313,7 +313,7 @@ Attendez la fin du téléchargement et relancez EditeurPanovisu
 
 **Solutions** :
 - Fermez les autres applications
-- Utilisez un modèle plus petit (llama3.2 au lieu de llama3.1)
+- Utilisez un modèle plus petit (qwen3.5 au lieu de deepseek-r1:14b)
 - Augmentez la RAM de votre PC si possible
 
 ### Problème : Ollama utilise beaucoup de ressources
@@ -339,7 +339,7 @@ sudo systemctl disable ollama
 1. Cliquez sur l'icône Ollama dans la barre de menu
 2. Sélectionnez **"Quit Ollama"**
 
-Vous pouvez aussi utiliser un modèle plus petit (llama3.2) ou lancer Ollama uniquement quand vous en avez besoin.
+Vous pouvez aussi utiliser un modèle plus petit (qwen3.5) ou lancer Ollama uniquement quand vous en avez besoin.
 
 ---
 
