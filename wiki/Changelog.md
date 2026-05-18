@@ -187,6 +187,54 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/lang/fr/).
 
 ---
 
+## [1.3.0] - 2015-09-14
+
+### 🔧 Améliorations
+- **Éditeur HTML** : Correction de dysfonctionnements dans l'éditeur de texte riche.
+- **Éditeur de plan** : Résolution de bogues lors du positionnement et de l'édition des plans interactifs.
+
+---
+
+## [1.2.8] - 2015-05-18
+
+### 🔧 Améliorations
+- **Multirésolution** : Optimisation importante et corrections sur le découpage des faces de cube en multirésolution.
+- **Stabilité** : Corrections de plusieurs bogues mineurs signalés lors de l'utilisation.
+
+---
+
+## [1.2.6] - 2015-04-29
+
+### 🎉 Nouveautés
+- **Internationalisation** : Ajout du support complet pour la langue portugaise.
+- **Compatibilité macOS** : Intégration de correctifs spécifiques pour assurer le bon fonctionnement sur Mac OS X.
+
+### 🔧 Améliorations
+- **Multirésolution** : Intégration de la découpe des faces de cube dans la bibliothèque `panovisu.js`.
+
+---
+
+## [1.2.4] - 2015-03-09
+
+### 🎉 Nouveautés
+- **Réseau** : Ajout d'un test automatique de la connexion Internet au démarrage.
+
+### 🔧 Améliorations
+- **Corrections** : Résolution de divers bogues d'affichage et de réactivité.
+
+---
+
+## [1.2.0] - 2014-12-05
+
+### 🎉 Nouveautés
+- **Hotspots HTML** : Intégration d'un éditeur HTML complet dans l'application pour enrichir le contenu des points d'intérêt.
+- **Cartographie interactive** : Prise en charge des cartes OpenStreetMap, Google Maps et Bing Maps avec géolocalisation directe des panoramiques.
+- **Navigateur panoramique** : Ajout d'un panneau latéral interactif sous forme de liste de scènes triable.
+- **Barres de navigation** : Implémentation des premières barres de navigation personnalisables.
+- **Ergonomie** : Ajout d'écrans de chargement dynamiques, d'écrans d'aide et d'info configurables.
+
+---
+
 ## [Dépot Initial] - 2014-05-19
 
 ### 🎉 Lancement du projet PanoVisu
