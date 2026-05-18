@@ -4,46 +4,52 @@
 
 ## 🚀 Accès rapide
 
-- � **[Télécharger PanoVisu](https://github.com/llang57/editeurPanovisu/releases)** - Installateurs prêts à l'emploi (Windows, macOS, Linux)
-- �📥 **[Installation](Installation)** - Guide d'installation et compilation depuis les sources
-- 🎯 **[Démarrage rapide](Démarrage-rapide)** - Créez votre première visite en 10 minutes
-- 📖 **[Guide utilisateur](Guide-utilisateur)** - Documentation complète des fonctionnalités
-- ⚙️ **[Configuration avancée](Configuration-avancée)** - Clés API, paramètres XML, optimisation
-- 💻 **[Documentation technique](Documentation-technique)** - Architecture et développement
-- ❓ **[FAQ](FAQ)** - Questions fréquentes et solutions
-- 📋 **[Changelog](Changelog)** - Historique des versions
+- ➤ **[Télécharger PanoVisu](https://github.com/llang57/editeurPanovisu/releases)** - Installateurs prêts à l'emploi ([Windows], [macOS], [Linux])
+- ➤ **[Installation](Installation)** - Guide d'installation et compilation depuis les sources
+- ➤ **[Démarrage rapide](Démarrage-rapide)** - Créez votre première visite en 10 minutes
+- ➤ **[Guide utilisateur](Guide-utilisateur)** - Documentation complète des fonctionnalités
+- ➤ **[Configuration avancée](Configuration-avancée)** - Clés API, paramètres XML, optimisation
+- ➤ **[Documentation technique](Documentation-technique)** - Architecture et développement
+- ➤ **[FAQ](FAQ)** - Questions fréquentes et solutions
+- ➤ **[Changelog](Changelog)** - Historique des versions
 
 ## 📢 Dernières nouvelles
 
-### Version 3.1.0 - Octobre 2025
+### Version 3.4.8 - Mai 2026
 
-**Nouvelle fonctionnalité majeure : Serveur HTTP intégré**
+**Mise à jour majeure : Révolution IA (Ollama & OpenRouter), Rendu 3D Avancé et Thèmes Modernes**
 
-La version 3.1 introduit `LocalHTTPServer`, un serveur HTTP embarqué qui résout définitivement les problèmes CORS lors de l'ouverture des visites avec le protocole `file://`.
+La version 3.4.8 d'EditeurPanovisu apporte innovations et améliorations majeures pour simplifier l'édition de vos visites virtuelles 360° grâce à l'Intelligence Artificielle et augmenter la fidélité de rendu :
 
-**Améliorations :**
-- ✅ Lancement automatique du serveur HTTP lors de l'ouverture d'une visite
-- ✅ Détection automatique des ports disponibles (8080-8090)
-- ✅ Support complet des types MIME pour tous les assets
-- ✅ Fallback automatique vers `file://` si le serveur ne peut démarrer
+**Améliorations majeures :**
+- 🧠 **IA Cloud & Locale intégrée** : Assistant d'écriture intelligent pour la description des panoramas via OpenRouter (Claude 3.5, Gemini 3.1, GPT-5) et Ollama (Local : Qwen 3.5, Phi-4, DeepSeek R1).
+- ⚙️ **Modèles IA Dynamiques** : Chargement et coûts des modèles gérés dynamiquement à partir de fichiers JSON configurables (`openrouter-models.json` et `ollama-models.json`).
+- 🛡️ **Prompt Système Strict Anti-Hallucination** : Implémentation d'un ensemble de directives rigoureuses pour des textes générés neutres, exacts et sans aucune formulation artificielle.
+- 📐 **Rendu Panoramic Cube 3D** : Remplacement des rendus classiques par un maillage triangulaire complet à 6 faces pour un rendu sans aucune déformation.
+- 💻 **Accélération Matérielle (OpenCL)** : Activation du support GPU sous Windows (cartes NVIDIA/AMD récentes) pour des performances de rendu instantanées.
+- 🎨 **Interface Moderne AtlantaFX** : Intégration de thèmes modernes Clair et Sombre, personnalisables et respectueux de la fatigue oculaire.
+- 📖 **Aide Utilisateur Améliorée (F1)** : Lecteur d'aide interne fluide doté de liens d'ancrage fonctionnels et d'un bouton flottant de retour en haut.
 
-[📖 Lire les notes de version complètes](Changelog#version-310---octobre-2025)
+[📖 Lire les notes de version v3.4.8](RELEASE_NOTES_v3.4.8.md)
 
 ## 🎯 Qu'est-ce que PanoVisu ?
 
 PanoVisu est composé de deux éléments complémentaires :
 
-### 1. 🖼️ Le Visualiseur HTML5/WebGL
-- Technologie moderne et légère
+### 1. Le Visualiseur HTML5/WebGL
+- Technologie moderne, légère et performante
+- Rendu 3D Panoramic Cube ultra-réaliste
 - Compatible avec tous les navigateurs récents
 - Affichage fluide des panoramiques 360°
-- Support du tactile pour mobile/tablettes
+- Support du tactile pour mobiles et tablettes
 
-### 2. 🎨 L'Éditeur Java/JavaFX
-- Interface intuitive drag & drop
-- Prévisualisation en temps réel
-- Export en un clic
-- Gestion complète des projets
+### 2. L'Éditeur Java/JavaFX
+- Interface intuitive moderne avec thèmes AtlantaFX (Clair/Sombre)
+- Assistant d'écriture intelligent assisté par IA (Ollama & OpenRouter)
+- Accélération matérielle OpenCL (GPU) pour un traitement d'image rapide
+- Prévisualisation 3D en temps réel
+- Export en un clic de la visite autonome
+- Gestion complète des projets et métadonnées
 
 ## 🌟 Pourquoi choisir PanoVisu ?
 
