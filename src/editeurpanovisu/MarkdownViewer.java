@@ -2,12 +2,11 @@ package editeurpanovisu;
 
 import javafx.scene.text.Font;
 import javafx.scene.web.WebView;
-import org.commonmark.Extension;
-import org.commonmark.ext.gfm.strikethrough.StrikethroughExtension;
-import org.commonmark.ext.gfm.tables.TablesExtension;
-import org.commonmark.ext.heading.anchor.HeadingAnchorExtension;
+import org.commonmark.node.*;
+import org.commonmark.renderer.html.*;
 import org.commonmark.parser.Parser;
-import org.commonmark.renderer.html.HtmlRenderer;
+import java.util.Map;
+import java.util.HashMap;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -36,11 +35,10 @@ public class MarkdownViewer {
             fontesChargees = true;
         }
         
-        // Extensions pour les tables, le texte barré et les ancres de titres
-        List<Extension> extensions = Arrays.asList(
-            TablesExtension.create(),
-            StrikethroughExtension.create(),
-            HeadingAnchorExtension.create()
+        // Extensions pour les tables et le texte barré
+        List<org.commonmark.Extension> extensions = Arrays.asList(
+            org.commonmark.ext.gfm.tables.TablesExtension.create(),
+            org.commonmark.ext.gfm.strikethrough.StrikethroughExtension.create()
         );
         
         this.parser = Parser.builder()
@@ -49,6 +47,12 @@ public class MarkdownViewer {
         
         this.renderer = HtmlRenderer.builder()
                 .extensions(extensions)
+                .attributeProviderFactory(new AttributeProviderFactory() {
+                    @Override
+                    public AttributeProvider create(AttributeProviderContext context) {
+                        return new CustomAttributeProvider();
+                    }
+                })
                 .build();
     }
     
@@ -118,15 +122,22 @@ public class MarkdownViewer {
         // Convertir en HTML
         String html = convertirMarkdownEnHtml(markdown);
         
-        // Obtenir l'URL de base pour les chemins relatifs
-        Path dossierParent = fichier.getParent();
-        String baseUrl = dossierParent.toUri().toString();
+        // Envelopper le HTML (sans base URL)
+        String htmlComplet = envelopperDansHtml(html);
         
-        // Envelopper avec l'URL de base
-        String htmlComplet = envelopperDansHtml(html, baseUrl);
+        // Créer un fichier HTML temporaire masqué dans le même dossier pour préserver les chemins relatifs des images
+        String fileName = fichier.getFileName().toString();
+        String dotFileName = "." + fileName.substring(0, fileName.lastIndexOf('.')) + "_temp.html";
+        Path tempHtmlFile = fichier.resolveSibling(dotFileName);
         
-        // Charger le contenu
-        webView.getEngine().loadContent(htmlComplet, "text/html");
+        // Écrire le contenu HTML
+        Files.writeString(tempHtmlFile, htmlComplet, StandardCharsets.UTF_8);
+        
+        // Enregistrer la suppression automatique à la fermeture
+        tempHtmlFile.toFile().deleteOnExit();
+        
+        // Charger via URL locale pour que la navigation par ancre (#) fonctionne parfaitement
+        webView.getEngine().load(tempHtmlFile.toUri().toString());
     }
     
     /**
@@ -635,4 +646,58 @@ public class MarkdownViewer {
         System.out.println(html);
     }
     
+    /**
+     * Fournisseur d'attributs personnalisé pour générer des ID de titres
+     * parfaitement compatibles avec les liens d'ancrage français du fichier aide.md
+     */
+    private static class CustomAttributeProvider implements AttributeProvider {
+        private final Map<String, Integer> slugCounts = new HashMap<>();
+
+        @Override
+        public void setAttributes(Node node, String tagName, Map<String, String> attributes) {
+            if (node instanceof Heading) {
+                Heading heading = (Heading) node;
+                String text = getHeadingText(heading);
+                String id = slugify(text);
+                
+                // Gérer les doublons de slugs (ex: plusieurs titres identiques)
+                int count = slugCounts.getOrDefault(id, 0);
+                if (count > 0) {
+                    slugCounts.put(id, count + 1);
+                    id = id + "-" + count;
+                } else {
+                    slugCounts.put(id, 1);
+                }
+                
+                attributes.put("id", id);
+            }
+        }
+
+        private String getHeadingText(Heading heading) {
+            StringBuilder sb = new StringBuilder();
+            Node child = heading.getFirstChild();
+            while (child != null) {
+                if (child instanceof Text) {
+                    sb.append(((Text) child).getLiteral());
+                }
+                child = child.getNext();
+            }
+            return sb.toString();
+        }
+
+        private String slugify(String text) {
+            String slug = text.toLowerCase()
+                    .replace("'", "")
+                    .replace("’", "")
+                    .replaceAll("[^\\p{L}\\p{N}-]", "-")
+                    .replaceAll("-+", "-")
+                    .replaceAll("^-|-$", "");
+            
+            // Correction spécifique pour la table des matières d'aide.md
+            if (slug.startsWith("premiers-pas-ou-comment")) {
+                return "premiers-pas";
+            }
+            return slug;
+        }
+    }
 }
