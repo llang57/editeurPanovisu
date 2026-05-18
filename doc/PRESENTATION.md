@@ -1,50 +1,58 @@
 # EditeurPanovisu - Éditeur de Visites Virtuelles
 
-## 📋 Présentation
+## Présentation
 
 **EditeurPanovisu** est un éditeur de visites virtuelles panoramiques 360° permettant de créer des visites interactives complètes sans nécessiter de compétences en programmation.
 
-![Version](https://img.shields.io/badge/version-3.0.0-blue)
+![Version](https://img.shields.io/badge/version-3.4.8-blue)
 ![Java](https://img.shields.io/badge/Java-25-orange)
 ![JavaFX](https://img.shields.io/badge/JavaFX-19.0.2.1-green)
 ![License](https://img.shields.io/badge/license-Libre-brightgreen)
 
 ---
 
-## 🎯 Caractéristiques Principales
+## Caractéristiques Principales
 
 ### Création de Visites Virtuelles
-- ✅ Support des panoramiques équirectangulaires et cubiques
-- ✅ Liaisons interactives entre panoramiques (hotspots)
-- ✅ Point de vue d'entrée configurable pour chaque panoramique
-- ✅ Orientation de la boussole (direction du nord)
-- ✅ Navigation intuitive entre les scènes
+- ✔ Support des panoramiques équirectangulaires et cubiques
+- ✔ Liaisons interactives entre panoramiques (hotspots)
+- ✔ Point de vue d'entrée configurable pour chaque panoramique
+- ✔ Orientation de la boussole (direction du nord)
+- ✔ Navigation intuitive entre les scènes
 
 ### Interface Utilisateur
-- ✅ Éditeur WYSIWYG ("What You See Is What You Get")
-- ✅ Personnalisation complète de l'interface (couleurs, polices, positions)
-- ✅ Modèles d'interface sauvegardables et réutilisables
-- ✅ Aperçu en temps réel des modifications
-- ✅ Interface multilingue (Français, Anglais, Allemand)
+- ✔ Éditeur WYSIWYG ("What You See Is What You Get")
+- ✔ Personnalisation complète de l'interface (couleurs, polices, positions)
+- ✔ Modèles d'interface sauvegardables et réutilisables
+- ✔ Aperçu en temps réel des modifications
+- ✔ Interface multilingue (Français, Anglais, Allemand)
 
 ### Cartographie Intégrée
-- ✅ Intégration OpenStreetMap
-- ✅ Cartes ESRI ArcGIS (World Street Map, World Imagery, World Topo)
-- ✅ Positionnement GPS des panoramiques
-- ✅ Plan interactif de la visite
-- ✅ Géolocalisation avec JMapViewer
+- ✔ Intégration OpenStreetMap
+- ✔ Cartes ESRI ArcGIS (World Street Map, World Imagery, World Topo)
+- ✔ Positionnement GPS des panoramiques
+- ✔ Plan interactif de la visite
+- ✔ Géolocalisation avec JMapViewer
+
+### [IA] Intelligence Artificielle & Génération de Descriptions (Nouveauté v3.4.x)
+- ✔ Génération automatique de descriptions de haute qualité pour chaque panoramique
+- ✔ Utilisation de modèles d'IA locaux avec **Ollama** (Qwen 3.5, Phi-4, DeepSeek R1, Mistral Nemo)
+- ✔ Utilisation de modèles d'IA distants avec **OpenRouter** (Gemini 3.1, Claude 4.6, GPT-5.5)
+- ✔ Système de secours (fallback) gratuit et performant avec **Hugging Face**
+- ✔ Règles "zéro-hallucination" strictes intégrées au prompt système (fondées sur le titre et la géolocalisation)
+- ✔ Panneau de configuration et d'activation dynamique des modèles (`Ctrl+M`) fondé sur des fichiers JSON
 
 ### Éléments Interactifs
-- ✅ Hotspots personnalisables (forme, couleur, texte)
-- ✅ Liens vers d'autres panoramiques
-- ✅ Liens vers des images externes
-- ✅ Boussole interactive
-- ✅ Vignettes de navigation
-- ✅ Partage sur réseaux sociaux (Facebook, Twitter, LinkedIn, Pinterest)
+- ✔ Hotspots personnalisables (forme, couleur, texte)
+- ✔ Liens vers d'autres panoramiques
+- ✔ Liens vers des images externes
+- ✔ Boussole interactive
+- ✔ Vignettes de navigation
+- ✔ Partage sur réseaux sociaux (Facebook, Twitter, LinkedIn, Pinterest)
 
 ---
 
-## 🛠️ Technologies Utilisées
+## Technologies Utilisées
 
 ### Environnement de Développement
 - **Java** : OpenJDK 25 (Temurin-25+36-LTS)
@@ -67,7 +75,7 @@
 
 ---
 
-## 📦 Architecture Technique
+## Architecture Technique
 
 ### Structure du Projet
 ```
@@ -93,21 +101,22 @@ editeurPanovisu/
 ### Formats de Fichiers
 - **Projet** : `.pvu` (XML)
 - **Panoramiques** : `.jpg`, `.png` (équirectangulaires ou faces de cube)
-- **Configuration** : `.cfg` (fichiers de configuration utilisateur)
-- **Modèles** : `.tpl` (templates d'interface)
+- **Configuration** : `.cfg` (fichiers de configuration utilisateur) et `api-keys.properties` (clés API privées)
+- **Modèles IA** : `ollama-models.json` et `openrouter-models.json` (modèles IA dynamiques et configurables)
+- **Modèles d'interface** : `.tpl` (templates d'interface)
 - **Export** : HTML5 + JavaScript (visite complète autonome)
 
 ---
 
-## 🚀 Génération des Visites
+## Génération des Visites
 
 ### Format de Sortie
 Les visites générées sont des applications **HTML5 100% autonomes** :
-- ✅ Aucun serveur requis (fonctionne en local ou sur serveur web)
-- ✅ Compatible tous navigateurs modernes
-- ✅ Responsive (adapté mobile et desktop)
-- ✅ Technologie WebGL pour le rendu 3D
-- ✅ Fallback CSS3D si WebGL indisponible
+- ✔ Aucun serveur requis (fonctionne en local ou sur serveur web)
+- ✔ Compatible tous navigateurs modernes
+- ✔ Responsive (adapté mobile et desktop)
+- ✔ Technologie WebGL pour le rendu 3D
+- ✔ Fallback CSS3D si WebGL indisponible
 
 ### Structure d'une Visite Générée
 ```
@@ -125,7 +134,7 @@ visite/
 
 ---
 
-## 🔧 Fonctionnalités Avancées
+## Fonctionnalités Avancées
 
 ### Outils de Transformation
 - **Cube → Équirectangulaire** : Conversion 6 faces vers panorama 360°
@@ -149,23 +158,27 @@ visite/
 
 ---
 
-## 📊 État Actuel du Développement
+## État Actuel du Développement
 
-### ✅ Fonctionnalités Complètes
+### ✔ Fonctionnalités Complètes
 - Migration Java 25 terminée
 - Suppression dépendances Google Maps/Bing
-- Intégration OpenStreetMap/ESRI
+- Intégration OpenStreetMap/ESRI (migration vers Nominatim en cours)
 - Lecteur Markdown intégré (F1)
-- Documentation utilisateur complète
-- Support emoji dans la documentation (badges textuels)
-- Build automatisé avec numérotation
+- Documentation utilisateur complète avec badges textuels
+- Intégration complète de l'IA (Ollama local, OpenRouter cloud, Hugging Face secours)
+- Prompt système anti-hallucination ultra-robuste pour la génération de descriptions
+- Panneau de gestion et d'ordonnancement dynamique des modèles d'IA (Ctrl+M)
+- Rendu 3D de panoramique cube avec maillage triangulaire complet sans distorsions
+- Détection et support officiel de l'accélération GPU OpenCL sous Windows
+- Intégration du thème moderne AtlantaFX (Primer Light/Dark)
+- Scripts de build et d'installation d'environnement automatisés (install-java-maven.ps1)
 
 ### 🔄 En Cours
-- Optimisation du geocoding (passage à Nominatim OpenStreetMap)
-- Amélioration de l'interface utilisateur
-- Documentation technique enrichie
+- Finalisation de la documentation technique enrichie
+- Optimisations mineures de l'interface utilisateur
 
-### 🎯 Prochaines Étapes
+###  Prochaines Étapes
 - Migration OpenLayers vers version récente
 - Support des panoramiques HDR
 - Export en format Web moderne (Progressive Web App)
@@ -174,7 +187,7 @@ visite/
 
 ---
 
-## 💻 Configuration Système Requise
+## Configuration Système Requise
 
 ### Pour Développer
 - **OS** : Windows 10/11, Linux, macOS
@@ -190,7 +203,7 @@ visite/
 
 ---
 
-## 📖 Ressources
+## Ressources
 
 ### Documentation
 - **Guide Utilisateur** : `aide/aide.md` (accessible via F1)
@@ -204,10 +217,27 @@ visite/
 
 ---
 
-## 🏗️ Historique des Versions
+## Historique des Versions
 
-### Version 3.0.0 (Octobre 2025) - Version Actuelle
-- 🚀 **Migration Java 25** : Passage à OpenJDK 25 (Temurin-25+36-LTS)
+### Version 3.4.8 (Mai 2026) - Version Actuelle
+- [IA] **Intelligence Artificielle Dynamique** :
+  - Intégration dynamique des modèles Ollama (Qwen 3.5, Phi-4, DeepSeek R1, Mistral Nemo)
+  - Intégration dynamique des modèles OpenRouter (Gemini 3.1 Flash/Pro, Claude 4.6, GPT-5.5)
+  - Support de secours avec Hugging Face
+  - Panel complet de configuration `Ctrl+M` fondé sur des fichiers JSON
+  - Refonte complète du prompt système anti-hallucination pour des descriptions 100% fiables et factuelles
+- [UI] **Améliorations de l'Interface & Aide** :
+  - Intégration du thème moderne AtlantaFX (`Primer Light`, `Primer Dark`)
+  - Chargement et gestion robuste des polices (ex: Wingdings) dans la WebView de l'aide
+  - Nettoyage des en-têtes et des caractères complexes pour une compatibilité d'affichage Windows maximale
+- [3D] **Modernisation 3D & Performances** :
+  - Rendu 3D Panoramique Cube avec maillage triangulaire complet (PanoramicCube.java) pour supprimer toutes distortions haut/bas
+  - Support de la haute qualité plein écran à 2000px par face
+  - Détection automatique et accélération GPU OpenCL sous Windows
+  - Script d'installation automatisée de l'environnement de développement complet (`install-java-maven.ps1`)
+
+### Version 3.0.0 (Octobre 2025)
+-  **Migration Java 25** : Passage à OpenJDK 25 (Temurin-25+36-LTS)
 - 🗺️ **Remplacement Google Maps/Bing** : Migration vers OpenStreetMap/ESRI
   - Suppression des dépendances propriétaires
   - Intégration JMapViewer 2.18
@@ -217,15 +247,15 @@ visite/
   - Conversion aide HTML vers Markdown
   - Badges textuels pour compatibilité Windows
 - 🌍 **Support multilingue amélioré** : Français, Anglais, Allemand
-- 🔧 **Nettoyage et modernisation** :
+-  **Nettoyage et modernisation** :
   - Suppression Google+ (fermé en 2019)
   - Suppression des clés API propriétaires
   - Refactorisation du code
-- 📦 **Build automatisé** :
+-  **Build automatisé** :
   - Inno Setup 6.5.4 pour installateur Windows
   - Numérotation automatique des builds
   - Scripts PowerShell de build
-- 📖 **Documentation complète** :
+-  **Documentation complète** :
   - Guide utilisateur avec captures d'écran
   - Document de présentation technique
   - Accès rapide via F1
@@ -242,7 +272,7 @@ visite/
 
 ---
 
-## 👥 Contribution
+## Contribution
 
 Le projet est hébergé sur **GitHub** et est actuellement en développement actif. Les contributions sont les bienvenues !
 
@@ -259,12 +289,12 @@ Le projet est hébergé sur **GitHub** et est actuellement en développement act
    - Captures d'écran si pertinent
    - Version de l'application et OS utilisé
 
-#### 💡 Proposer une Fonctionnalité
+#### ★ Proposer une Fonctionnalité
 1. Ouvrez une issue avec le tag `enhancement`
 2. Décrivez la fonctionnalité souhaitée et son utilité
 3. Discutez de la faisabilité avec la communauté
 
-#### 🔧 Soumettre du Code
+####  Soumettre du Code
 1. **Fork** le projet
 2. Créez une branche pour votre fonctionnalité : `git checkout -b feature/ma-fonctionnalite`
 3. Commitez vos changements : `git commit -m "feat: ajout de ma fonctionnalité"`
@@ -287,7 +317,7 @@ Nous utilisons les préfixes suivants pour les messages de commit :
 - `test:` Ajout ou modification de tests
 - `chore:` Maintenance (build, dépendances, etc.)
 
-### 🤝 Code de Conduite
+### Code de Conduite
 - Soyez respectueux et constructif
 - Acceptez les critiques constructives
 - Concentrez-vous sur ce qui est le mieux pour le projet
@@ -295,7 +325,7 @@ Nous utilisons les préfixes suivants pour les messages de commit :
 
 ---
 
-## 📝 Notes Techniques
+## Notes Techniques
 
 ### Particularités JavaFX WebView
 - Moteur WebKit intégré (version liée à JavaFX 19.0.2.1)
@@ -314,6 +344,6 @@ Nous utilisons les préfixes suivants pour les messages de commit :
 
 ---
 
-**Dernière mise à jour** : 12 octobre 2025  
-**Version du document** : 1.0  
+**Dernière mise à jour** : 18 mai 2026  
+**Version du document** : 3.4.8  
 **Auteur** : Laurent Lang
