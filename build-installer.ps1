@@ -91,11 +91,11 @@ if (Test-Path $exeFile) {
 }
 
 # Créer le batch
-$batchContent = @'
+$batchContent = @"
 @echo off
 cd /d "%~dp0app"
 start "" "%~dp0runtime\bin\javaw.exe" -Dfile.encoding=UTF-8 --enable-preview --enable-native-access=ALL-UNNAMED -Xms512m -Xmx2048m -jar "$jarName"
-'@
+"@
 $batchContent | Out-File -FilePath "$appDir\Lancer_EditeurPanovisu.bat" -Encoding ASCII
 Write-Host "  [OK] Batch cree" -ForegroundColor Green
 
