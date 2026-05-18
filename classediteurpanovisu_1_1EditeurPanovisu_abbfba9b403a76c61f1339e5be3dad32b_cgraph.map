@@ -87,7 +87,7 @@
 <area shape="poly" id="edge48_Node000029_Node000030" title=" " alt="" coords="612,592,629,606,653,642,662,678,660,713,654,749,648,784,646,819,654,854,677,889,689,900,686,904,673,892,649,856,641,820,642,784,649,748,655,713,656,678,648,644,625,610,608,597"/>
 <area shape="rect" id="Node000031" href="$classediteurpanovisu_1_1NavigateurPanoramique.html#ac0c12faf96b617fb9bb0b7015c5a58a7" title="Définit le nom du fichier image panoramique." alt="" coords="675,973,965,1013"/>
 <area shape="poly" id="edge50_Node000029_Node000031" title=" " alt="" coords="612,592,629,606,646,628,658,651,664,673,667,696,663,741,653,785,643,829,640,873,642,895,649,916,660,938,677,960,680,963,676,966,673,963,655,941,644,918,637,896,634,873,638,829,648,784,658,740,662,696,659,674,653,653,641,631,625,610,609,596"/>
-<area shape="rect" id="Node000032" href="$classediteurpanovisu_1_1PanoramicCube.html#a8ea2acf3ee3e9946ce530a960d38bffe" title="Applique une image panoramique équirectangulaire sur le cube Utilise TransformationsPanoramique pour ..." alt="" coords="721,795,919,835"/>
+<area shape="rect" id="Node000032" href="$classediteurpanovisu_1_1PanoramicCube.html#a8ea2acf3ee3e9946ce530a960d38bffe" title="Applique une image panoramique équirectangulaire sur le cube." alt="" coords="721,795,919,835"/>
 <area shape="poly" id="edge52_Node000029_Node000032" title=" " alt="" coords="612,594,628,606,644,624,651,642,655,678,658,714,664,732,677,750,701,771,730,787,728,792,698,775,673,754,659,735,652,715,650,679,646,643,639,627,625,610,609,598"/>
 <area shape="poly" id="edge49_Node000030_Node000003" title=" " alt="" coords="941,940,1082,955,1081,960,941,945"/>
 <area shape="poly" id="edge51_Node000031_Node000003" title=" " alt="" coords="965,975,1082,962,1082,967,966,980"/>

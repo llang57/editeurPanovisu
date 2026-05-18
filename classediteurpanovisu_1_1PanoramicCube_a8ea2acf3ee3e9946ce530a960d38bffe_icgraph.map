@@ -1,5 +1,5 @@
 <map id="editeurpanovisu.PanoramicCube.setPanoramicImage" name="editeurpanovisu.PanoramicCube.setPanoramicImage">
-<area shape="rect" id="Node000001" title="Applique une image panoramique équirectangulaire sur le cube Utilise TransformationsPanoramique pour ..." alt="" coords="2755,797,2953,837"/>
+<area shape="rect" id="Node000001" title="Applique une image panoramique équirectangulaire sur le cube." alt="" coords="2755,797,2953,837"/>
 <area shape="poly" id="edge60_Node000001_Node000001" title=" " alt="" coords="2904,786,2886,779,2854,776,2826,778,2809,783,2802,789,2805,796,2800,798,2797,788,2806,778,2825,773,2854,771,2888,773,2906,781"/>
 <area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1NavigateurPanoramique.html#aa23c7df1670b34fea1d5649a0e7f9e3b" title="Affiche le panorama avec cache des cubes pré&#45;calculés si disponible." alt="" coords="2461,669,2664,709"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="2816,791,2765,756,2706,724,2663,709,2665,704,2708,719,2768,751,2819,787"/>

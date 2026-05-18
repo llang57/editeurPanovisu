@@ -138,7 +138,7 @@ var searchData=
   ['resizegpu_135',['resizeGPU',['../classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a8938ddd095bf1e545f06dfbc9ecfee09',1,'editeurpanovisu::gpu::ImageResizeGPU']]],
   ['resizeimage_136',['resizeImage',['../classediteurpanovisu_1_1ReadWriteImage.html#a34d056113779842aefe031f13af8d8a1',1,'editeurpanovisu::ReadWriteImage']]],
   ['resizetoequirectangular_137',['resizeToEquirectangular',['../classediteurpanovisu_1_1PanoramicCube.html#ae3447e86fef1c622cc0a4ed3796b7982',1,'editeurpanovisu::PanoramicCube']]],
-  ['resizetoequirectangularcpu_138',['resizeToEquirectangularCPU',['../classediteurpanovisu_1_1PanoramicCube.html#af58356dd3fa1b70dbaf8be5520b92127',1,'editeurpanovisu::PanoramicCube']]],
+  ['resizetoequirectangularcpu_138',['resizeToEquirectangularCPU',['../classediteurpanovisu_1_1PanoramicCube.html#a11fd8cf9aeb82d1ee411cb11a6d21709',1,'editeurpanovisu::PanoramicCube']]],
   ['response_139',['Response',['../OpenLayers_8js.html#a478b22d30683e61ad515f41e6f0ff604',1,'OpenLayers.js']]],
   ['retireaffichagehotspots_140',['retireaffichagehotspots',['../classediteurpanovisu_1_1EditeurPanovisu.html#ae123a4f0de3b9f7f4000f64afc82837a',1,'editeurpanovisu.EditeurPanovisu.retireAffichageHotSpots()'],['../classediteurpanovisu_1_1GestionnairePlanController.html#ae85c33829adf0dab112e4120e0dd2df2',1,'editeurpanovisu.GestionnairePlanController.retireAffichageHotSpots()']]],
   ['retireaffichageligne_141',['retireAffichageLigne',['../classediteurpanovisu_1_1EditeurPanovisu.html#a5823b22a797e37119a45fbe4c29b9077',1,'editeurpanovisu::EditeurPanovisu']]],

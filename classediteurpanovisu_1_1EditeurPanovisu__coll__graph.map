@@ -44,7 +44,7 @@
 <area shape="poly" id="edge34_Node000025_Node000015" title=" " alt="" coords="610,327,642,343,671,363,683,380,687,387,695,394,718,404,739,409,779,407,819,406,841,412,864,425,874,434,879,444,889,467,942,529,991,579,988,583,938,533,884,469,874,447,870,437,861,429,839,417,819,412,779,412,738,414,716,409,692,398,683,391,679,383,667,367,639,348,608,332"/>
 <area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="1106,153,1161,156,1220,166,1276,186,1302,202,1325,221,1344,245,1361,278,1391,363,1414,467,1433,580,1456,793,1465,925,1459,926,1450,793,1427,580,1409,468,1385,365,1356,280,1339,248,1321,225,1298,206,1274,191,1218,171,1160,161,1106,159"/>
 <area shape="poly" id="edge17_Node000001_Node000017" title=" " alt="" coords="1127,973,1347,949,1348,954,1128,978"/>
-<area shape="rect" id="Node000018" href="$classediteurpanovisu_1_1PanoramicCube.html" title="Cube panoramique pour l&#39;affichage de panoramas équirectangulaires Utilise 6 faces de cube au lieu d&#39;u..." alt="" coords="422,942,654,967"/>
+<area shape="rect" id="Node000018" href="$classediteurpanovisu_1_1PanoramicCube.html" title="Cube panoramique pour l&#39;affichage de panoramas équirectangulaires." alt="" coords="422,942,654,967"/>
 <area shape="poly" id="edge19_Node000017_Node000018" title=" " alt="" coords="668,961,911,978,911,984,668,966"/>
 <area shape="rect" id="Node000019" title=" " alt="" coords="102,942,163,967"/>
 <area shape="poly" id="edge20_Node000018_Node000019" title=" " alt="" coords="177,952,422,952,422,957,177,957"/>

@@ -103,13 +103,14 @@ var searchData=
   ['appliquerremplissagemiroir_100',['appliquerremplissagemiroir',['../classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#aa5ad7ef1b8983f74a90c0ed104de11c5',1,'editeurpanovisu.ConversionRatio2to1DialogController.appliquerRemplissageMiroir()'],['../classediteurpanovisu_1_1PrevisualiserConversionDialog.html#a44f0ed001dbe6802062be7f77ce261ce',1,'editeurpanovisu.PrevisualiserConversionDialog.appliquerRemplissageMiroir(Graphics2D g2d, BufferedImage imageSource, int largeurFinale, int hauteurFinale)']]],
   ['appliquerremplissagenoir_101',['appliquerremplissagenoir',['../classediteurpanovisu_1_1PrevisualiserConversionDialog.html#a7d54a24e42a82f45407f0817b4484556',1,'editeurpanovisu.PrevisualiserConversionDialog.appliquerRemplissageNoir()'],['../classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#ad8454fcd3164a4e64f8ef0a44ff1dd22',1,'editeurpanovisu.ConversionRatio2to1DialogController.appliquerRemplissageNoir()']]],
   ['applyatlantafxtheme_102',['applyAtlantaFXTheme',['../classediteurpanovisu_1_1ThemeManager.html#a14f6bcaa7772dbe0a9895a52a392625f',1,'editeurpanovisu::ThemeManager']]],
-  ['applycustomtheme_103',['applyCustomTheme',['../classediteurpanovisu_1_1ThemeManager.html#a44ee3b09a7f6b1960fdcbef28902dc35',1,'editeurpanovisu::ThemeManager']]],
-  ['applyflatlaftheme_104',['applyFlatLafTheme',['../classediteurpanovisu_1_1ThemeManager.html#ac773b6d34662ca4f15efee8230dd4fed',1,'editeurpanovisu::ThemeManager']]],
-  ['applymaterialfxtheme_105',['applyMaterialFXTheme',['../classediteurpanovisu_1_1ThemeManager.html#a9d8b4213c67946a529741ac1e9362c55',1,'editeurpanovisu::ThemeManager']]],
-  ['applysavedtheme_106',['applySavedTheme',['../classediteurpanovisu_1_1ThemeManager.html#ac8ec0b05c7bc5e54d1aa6ef582381212',1,'editeurpanovisu::ThemeManager']]],
-  ['applytheme_107',['applyTheme',['../classediteurpanovisu_1_1ThemeManager.html#a5e8923bdccce312cd3cad810c607135f',1,'editeurpanovisu::ThemeManager']]],
-  ['as_5fsigned_108',['as_signed',['../types_8js.html#a8f3d75793a14a1c16b3fc24d7cb3d7db',1,'types.js']]],
-  ['as_5funsigned_109',['as_unsigned',['../types_8js.html#a0bbb434cb774346fa6963f46cd8fa376',1,'types.js']]],
-  ['at_110',['at',['../leaflet_8js.html#acfdefe228f6ff20e7e165b25bebb92d9',1,'leaflet.js']]],
-  ['availableproperty_111',['availableProperty',['../classediteurpanovisu_1_1ModelsConfigController_1_1ModelEntryWrapper.html#a687955d332171c6d538d57a1b9a4636b',1,'editeurpanovisu::ModelsConfigController::ModelEntryWrapper']]]
+  ['applycubefaces_103',['applyCubeFaces',['../classediteurpanovisu_1_1PanoramicCube.html#a3f54931a909fd4877e9714ff99155801',1,'editeurpanovisu::PanoramicCube']]],
+  ['applycustomtheme_104',['applyCustomTheme',['../classediteurpanovisu_1_1ThemeManager.html#a44ee3b09a7f6b1960fdcbef28902dc35',1,'editeurpanovisu::ThemeManager']]],
+  ['applyflatlaftheme_105',['applyFlatLafTheme',['../classediteurpanovisu_1_1ThemeManager.html#ac773b6d34662ca4f15efee8230dd4fed',1,'editeurpanovisu::ThemeManager']]],
+  ['applymaterialfxtheme_106',['applyMaterialFXTheme',['../classediteurpanovisu_1_1ThemeManager.html#a9d8b4213c67946a529741ac1e9362c55',1,'editeurpanovisu::ThemeManager']]],
+  ['applysavedtheme_107',['applySavedTheme',['../classediteurpanovisu_1_1ThemeManager.html#ac8ec0b05c7bc5e54d1aa6ef582381212',1,'editeurpanovisu::ThemeManager']]],
+  ['applytheme_108',['applyTheme',['../classediteurpanovisu_1_1ThemeManager.html#a5e8923bdccce312cd3cad810c607135f',1,'editeurpanovisu::ThemeManager']]],
+  ['as_5fsigned_109',['as_signed',['../types_8js.html#a8f3d75793a14a1c16b3fc24d7cb3d7db',1,'types.js']]],
+  ['as_5funsigned_110',['as_unsigned',['../types_8js.html#a0bbb434cb774346fa6963f46cd8fa376',1,'types.js']]],
+  ['at_111',['at',['../leaflet_8js.html#acfdefe228f6ff20e7e165b25bebb92d9',1,'leaflet.js']]],
+  ['availableproperty_112',['availableProperty',['../classediteurpanovisu_1_1ModelsConfigController_1_1ModelEntryWrapper.html#a687955d332171c6d538d57a1b9a4636b',1,'editeurpanovisu::ModelsConfigController::ModelEntryWrapper']]]
 ];
