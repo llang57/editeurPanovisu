@@ -592,10 +592,56 @@ public class MarkdownViewer {
                     .badge-trophy { background: #ffd600; color: #333; }   /* Or - Trophée */
                     .badge-bookmark { background: #1976d2; color: #fff; } /* Bleu - Signet */
                     .badge-controls { background: #424242; color: #fff; } /* Gris foncé - Contrôles */
+                    
+                    /* Bouton Retour en haut flottant */
+                    #back-to-top {
+                        position: fixed;
+                        bottom: 30px;
+                        right: 30px;
+                        width: 46px;
+                        height: 46px;
+                        line-height: 42px;
+                        background-color: rgba(3, 102, 214, 0.85);
+                        color: #ffffff;
+                        text-align: center;
+                        border-radius: 50%;
+                        font-size: 1.4em;
+                        cursor: pointer;
+                        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+                        transition: background-color 0.2s, transform 0.2s, opacity 0.2s;
+                        z-index: 9999;
+                        display: none;
+                        border: none;
+                        outline: none;
+                    }
+                    
+                    #back-to-top:hover {
+                        background-color: rgba(3, 102, 214, 1);
+                        transform: scale(1.1);
+                    }
+                    
+                    #back-to-top:active {
+                        transform: scale(0.95);
+                    }
                 </style>
             </head>
             <body>
             """ + bodyHtml + """
+                <!-- Bouton de retour en haut -->
+                <button id="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});" title="Remonter en haut">
+                    &#9650;
+                </button>
+                
+                <script>
+                    var backToTopBtn = document.getElementById('back-to-top');
+                    window.onscroll = function() {
+                        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                            backToTopBtn.style.display = 'block';
+                        } else {
+                            backToTopBtn.style.display = 'none';
+                        }
+                    };
+                </script>
             </body>
             </html>
             """;
