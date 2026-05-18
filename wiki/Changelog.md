@@ -39,7 +39,7 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/lang/fr/).
 
 ---
 
-## [3.4.6] - 2026-04-12
+## [3.4.6] - 2026-05-18
 
 ### 🎉 Nouveautés
 
@@ -50,7 +50,7 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/lang/fr/).
 
 ---
 
-## [3.4.4] - 2026-03-08
+## [3.4.4] - 2026-05-18
 
 ### 🎉 Nouveautés
 
@@ -61,7 +61,7 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/lang/fr/).
 
 ---
 
-## [3.4.2] - 2026-02-14
+## [3.4.2] - 2026-05-17
 
 ### 🔧 Améliorations
 
@@ -71,7 +71,7 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/lang/fr/).
 
 ---
 
-## [3.4.0] - 2026-01-20
+## [3.4.0] - 2025-11-03
 
 ### 🎉 Nouveautés
 
@@ -81,7 +81,7 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/lang/fr/).
 
 ---
 
-## [3.2.0] - 2025-11-15
+## [3.2.0] - 2025-10-17
 
 ### 🔧 Améliorations
 
@@ -92,7 +92,7 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/lang/fr/).
 
 ---
 
-## [3.1.0] - 2025-01-15
+## [3.1.0] - 2025-10-15
 
 ### 🎉 Nouveautés
 
@@ -143,7 +143,7 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/lang/fr/).
 
 ---
 
-## [3.0.0] - 2024-11-20
+## [3.0.0] - 2025-10-14
 
 ### 🎉 Nouveautés majeures
 
