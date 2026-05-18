@@ -15,6 +15,83 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/lang/fr/).
 
 ---
 
+## [3.4.8] - 2026-05-18
+
+### 🎉 Nouveautés
+
+#### Assistant d'écriture IA (Cloud & Local)
+- **Intégration d'Ollama & OpenRouter** : Rédaction automatique de descriptions de panoramiques par l'IA.
+- **Modèles IA Dynamiques** : Configuration des modèles, coûts et tailles entièrement déportée dans des fichiers JSON modifiables (`ollama-models.json` et `openrouter-models.json`).
+- **Prompt Système Anti-Hallucination** : Implémentation d'instructions strictes interdisant l'invention de faits pour garantir la sobriété et l'exactitude des textes.
+- **Thèmes premium AtlantaFX** : Ajout de Thèmes Modernes Clair et Sombre sophistiqués pour l'éditeur JavaFX.
+
+### 🔧 Améliorations
+
+#### Visualiseur d'aide robuste (F1)
+- **Chargement local sécurisé** : Écriture dynamique d'un fichier HTML temporaire pour permettre la navigation fonctionnelle par ancres relatives (`#`) au sein du composant WebView de l'aide.
+- **Slugification française customisée** : Fournisseur d'attributs HTML sur mesure gérant l'accentuation Unicode, la suppression propre des apostrophes et la redirection des ancres courtes.
+- **Bouton de retour en haut de page** : Bouton flottant réactif et dynamique avec remontée fluide ("smooth scroll") animée au scroll de l'aide.
+- **Mojibake cleanups** : Remplacement universel de tous les caractères emojis 4 octets complexes dans l'aide par des entités Unicode 2 octets sécurisées et des balises explicites (`[Linux]`, `★`, `✓`, `⚠`).
+
+### 🐛 Corrections
+
+- **Correctif de l'installeur Windows** : Résolution du bug d'interpolation dans le lanceur PowerShell `build-installer.ps1` empêchant le chargement du fichier JAR de release.
+
+---
+
+## [3.4.6] - 2026-04-12
+
+### 🎉 Nouveautés
+
+#### Visualiseur Panoramique Cube 3D amélioré
+- **Maillage Triangulaire complet** : Remplacement du composant Box par un rendu géométrique en 6 faces triangulaires corrigé (haut/bas, inversion miroir).
+- **Textures Plein Écran** : Définition de la résolution de prévisualisation à 2000px/face de cube pour une immersion sans pixelisation.
+- **Support des projections** : Rendu des scènes équirectangulaires standard sans aucune courbure résiduelle.
+
+---
+
+## [3.4.4] - 2026-03-08
+
+### 🎉 Nouveautés
+
+#### Moteur 3D Panoramic Cube
+- **PanoramicCube.java** : Introduction initiale du module de découpage et de projection en boîte 3D à 6 faces.
+- **Stabilité de Build** : Correction du crash de classpath Maven lors de l'exécution et de la cohabitation des modules JavaFX.
+- **CI/CD automatisé** : Intégration de la détection dynamique de version dans les workflows d'assemblage Linux et Windows.
+
+---
+
+## [3.4.2] - 2026-02-14
+
+### 🔧 Améliorations
+
+#### Accélération Matérielle GPU
+- **Détection automatique OpenCL** : Support de l'accélération matérielle multi-GPU sous Windows pour cartes graphiques modernes (NVIDIA/AMD).
+- **Optimisation mémoire** : Correction des fuites mémoire et fuites de handles lors du chargement simultané de plus de 50 panoramiques (issue #12).
+
+---
+
+## [3.4.0] - 2026-01-20
+
+### 🎉 Nouveautés
+
+#### Gestion d'Interface IA
+- **Panneau de Configuration IA** : Ajout d'une fenêtre de paramètres complète (`Ctrl+M`) pour activer, désactiver et ordonner les modèles d'écriture.
+- **Fichiers de préférences** : Intégration des fichiers de clés API locales et de configuration de prompts.
+
+---
+
+## [3.2.0] - 2025-11-15
+
+### 🔧 Améliorations
+
+#### Performance & Stabilité
+- **JavaFX WebEngine** : Optimisations du rendu CSS pour le visualiseur.
+- **Optimisation Maven** : Réduction du temps de build et mise à jour vers Maven 3.9.16.
+- **Internationalisation** : Traduction espagnole et anglaise étendue dans les properties de PanoVisu.
+
+---
+
 ## [3.1.0] - 2025-01-15
 
 ### 🎉 Nouveautés
