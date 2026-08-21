@@ -1,5 +1,8 @@
 <map id="editeurpanovisu.OrdrePanoramique.dimensionneListe" name="editeurpanovisu.OrdrePanoramique.dimensionneListe">
-<area shape="rect" id="Node000001" title="Dimensionne la liste et son conteneur en fonction du nombre réel d&#39;éléments affichés." alt="" coords="5,5,345,45"/>
-<area shape="rect" id="Node000002" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="393,13,432,38"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="345,23,379,23,379,28,345,28"/>
+<area shape="rect" id="Node000001" title="Dimensionne la liste et son conteneur en fonction du nombre réel d&#39;éléments affichés." alt="" coords="5,35,345,75"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1OrdrePanoramique.html#a1487475cbf516f0b3c50a2398d19dcf1" title="Calcule la hauteur du cadre de la liste pour un nombre d&#39;éléments donné." alt="" coords="393,5,700,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="345,39,380,36,380,41,346,44"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="748,42,787,67"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="346,55,700,55,734,54,734,59,700,60,346,60"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="697,43,735,48,734,53,697,48"/>
 </map>
