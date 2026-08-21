@@ -31,16 +31,33 @@ public class OrdrePanoramique {
      * l'ancienne hypothèse et laissait une bande blanche en bas de liste, masquant les derniers
      * panoramiques (issue #16).</p>
      */
-    private static final double HAUTEUR_LIGNE = 46;
+    static final double HAUTEUR_LIGNE = 46;
 
     /** Nombre maximal de lignes affichées avant que la liste ne défile. */
-    private static final int MAX_LIGNES_VISIBLES = 10;
+    static final int MAX_LIGNES_VISIBLES = 10;
 
     /** Largeur de la liste, en pixels. */
     private static final double LARGEUR_LISTE = 300;
 
     /** Marge basse conservée sous la dernière ligne, en pixels. */
-    private static final double MARGE_BASSE = 5;
+    static final double MARGE_BASSE = 5;
+
+    /**
+     * Calcule la hauteur du cadre de la liste pour un nombre d'éléments donné.
+     *
+     * <p>Extraite de {@link #dimensionneListe} pour être vérifiable sans interface
+     * graphique. L'invariant à préserver est que cette hauteur corresponde à un nombre
+     * entier de lignes de {@link #HAUTEUR_LIGNE} pixels, majorée d'une marge : c'est sa
+     * violation qui a produit l'issue #16.</p>
+     *
+     * @param nbElements Nombre d'éléments réellement présents dans la liste
+     * @return La hauteur en pixels, plafonnée à {@link #MAX_LIGNES_VISIBLES} lignes
+     */
+    static double hauteurListe(int nbElements) {
+        return Math.min(
+                HAUTEUR_LIGNE * nbElements + MARGE_BASSE,
+                HAUTEUR_LIGNE * MAX_LIGNES_VISIBLES + MARGE_BASSE);
+    }
 
     private static ObservableList<String> strPanos = FXCollections.observableArrayList();
     public static final ObservableList<PanoramiqueCellule> cellulesPanoramiques = FXCollections.observableArrayList();
@@ -59,9 +76,7 @@ public class OrdrePanoramique {
      */
     private void dimensionneListe(ListView<String> liste, int nbElements) {
         liste.setFixedCellSize(HAUTEUR_LIGNE);
-        double dHauteur = Math.min(
-                HAUTEUR_LIGNE * nbElements + MARGE_BASSE,
-                HAUTEUR_LIGNE * MAX_LIGNES_VISIBLES + MARGE_BASSE);
+        double dHauteur = hauteurListe(nbElements);
         liste.setMinSize(LARGEUR_LISTE, dHauteur);
         liste.setPrefSize(LARGEUR_LISTE, dHauteur);
         liste.setMaxSize(LARGEUR_LISTE, dHauteur);

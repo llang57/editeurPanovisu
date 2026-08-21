@@ -242,6 +242,12 @@
 
     <build>
         <sourceDirectory>src</sourceDirectory>
+        <!-- Doit être déclaré explicitement : sans cela Maven cherche les tests dans
+             src/test/java tout en compilant ce même répertoire comme source principale
+             (sourceDirectory vaut src), ce qui embarquait les classes de test dans le
+             JAR livré. La compilation principale exclut donc test/** (voir
+             maven-compiler-plugin, exécution default-compile). -->
+        <testSourceDirectory>src/test/java</testSourceDirectory>
         <resources>
             <resource>
                 <directory>aide</directory>
@@ -319,6 +325,18 @@
                         <arg>--enable-preview</arg>
                     </compilerArgs>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>default-compile</id>
+                        <configuration>
+                            <!-- src/test/** est du code de test : il ne doit pas être
+                                 compilé comme source principale ni finir dans le JAR -->
+                            <excludes>
+                                <exclude>test/**</exclude>
+                            </excludes>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
 
             <!-- JavaFX Plugin -->

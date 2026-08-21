@@ -11,6 +11,9 @@ mvn clean compile
 # Run the application
 mvn javafx:run
 
+# Run the test suite
+mvn test
+
 # Build fat JAR (shade) + prepare target/app-input for packaging
 mvn clean package
 
@@ -66,7 +69,8 @@ reads the GitHub release body from `RELEASE_NOTES_vX.Y.Z.md`, so create that fil
 
 This is **not** a standard Maven layout. `pom.xml` sets `<sourceDirectory>src</sourceDirectory>`:
 
-- Java sources live in `src/editeurpanovisu/**` (flat — there is no `src/main/java`)
+- Java sources live in `src/editeurpanovisu/**` (flat — there is no `src/main/java`); tests live in
+  `src/test/java`, which the main compile excludes — see [Tests](#tests)
 - Runtime resources are copied in from eight *root-level* directories declared as `<resources>`:
   `aide/`, `configPV/`, `css/`, `diaporama/`, `images/`, `pagesHTML/`, `templates/`, `theme/`, plus
   `doc/**/*.md` and the non-Java files under `src/`
@@ -174,18 +178,36 @@ per theme; it reaches `ThemeManager` **by reflection** to avoid a package cycle.
 
 ## Tests
 
-**There is currently no automated test suite.** `mvn test` runs zero tests, and the JUnit Jupiter
-dependencies are declared but unused:
+JUnit Jupiter 5 tests live in **`src/test/java`**, declared explicitly as `<testSourceDirectory>`.
+`--enable-preview` reaches them via `maven-surefire-plugin`.
 
-- `testSourceDirectory` is never set, so Maven looks in `src/test/java`, which is empty
-- `src/test/SvgIconLoaderTest.java` and `src/test/TestThemeDetection.java` are `package test;`
-  **JavaFX `Application` subclasses** — interactive visual demos. Because `<sourceDirectory>` is `src`,
-  they compile as *main* sources into `target/classes/test/`
-- `src/editeurpanovisu/gpu/Test*.java` and `TestAIClients.java` are likewise manual GUI harnesses
+```bash
+mvn test                                   # run the suite
+mvn test -Dtest=OrdrePanoramiqueDimensionTest   # one class
+```
 
-Run them as applications (e.g. `java -cp target/classes --enable-preview test.SvgIconLoaderTest`), not
-via Surefire. If you add real tests, put them under `src/test/java` **and** declare an explicit
-`<testSourceDirectory>`, otherwise they get compiled into the shipped JAR.
+**The layout needs two cooperating settings.** `<sourceDirectory>` is `src`, so everything under
+`src/` — including `src/test/java` — would otherwise compile as *main* source, duplicating the test
+classes into the shipped JAR. The `default-compile` execution therefore excludes `test/**`. Change
+one without the other and tests either fail to compile or get shipped.
+
+Current tests, both covering the issue #16 regression (list height must equal a whole number of
+*imposed* rows):
+
+| Test | Needs a display? |
+|------|------------------|
+| `editeurpanovisu.OrdrePanoramiqueDimensionTest` | no — pure arithmetic, runs in CI |
+| `editeurpanovisu.OrdrePanoramiqueRenduTest` | yes — starts the JavaFX toolkit; **skips itself** via `assumeTrue` when headless, rather than failing |
+
+That skip matters: `linux-ci.yml` runs `mvn test` on a headless runner and treats failure as fatal, so
+any UI-dependent test must degrade to skipped there.
+
+**Manual GUI harnesses, not tests** — no `@Test`, so Surefire ignores them:
+
+- `src/test/java/test/SvgIconLoaderTest.java`, `TestThemeDetection.java` — `Application` subclasses;
+  run with `java -cp target/test-classes:target/classes --enable-preview test.SvgIconLoaderTest`
+- `src/editeurpanovisu/gpu/Test*.java` and `TestAIClients.java` — still in the **main** tree, so they
+  are compiled into the production JAR. Moving them to `src/test/java` would fix that.
 
 ## CI (`.github/workflows/`)
 
