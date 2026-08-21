@@ -93,22 +93,13 @@ jobs:
           cp api-keys.properties.template api-keys.properties
           echo "✅ api-keys.properties créé depuis template"
       
-      - name: �️ Convert icon to .icns
-        run: |
-          # Créer l'icône macOS si elle n'existe pas
-          if [ ! -f "images/panovisu.icns" ]; then
-            echo "⚠️  Icône .icns manquante, création d'un placeholder"
-            # On utilise l'icône PNG comme fallback
-            cp images/panovisu.png images/panovisu.icns || true
-          fi
-      
       - name: 🔨 Build with Maven
         run: mvn clean package -DskipTests -Dskip.build.increment=true
       
       - name: 📦 Create macOS DMG
         run: |
           # Trouver le nom exact du JAR
-          MAIN_JAR=$(ls target/editeurPanovisu-*.jar | xargs basename)
+          MAIN_JAR=$(ls target/app-input/editeurPanovisu-*.jar | xargs basename)
           echo "📦 JAR trouvé: $MAIN_JAR"
           
           # Version déduite du nom du JAR (source unique de vérité : pom.xml),
@@ -126,37 +117,39 @@ jobs:
           APP_VERSION="${APP_VERSION%-SNAPSHOT}"
           echo "🏷️  Version appliquée au DMG : $APP_VERSION"
           
+          # --input doit viser target/app-input : ce repertoire, prepare par
+          # maven-antrun-plugin pendant la phase package, contient le JAR shaded ET les
+          # ressources ouvertes a l execution par chemin relatif (panovisu/, css/,
+          # images/, aide/, configPV/, pagesHTML/, templates/, theme/, diaporama/).
+          #
+          # -Duser.dir=$APPDIR : l application ouvre ses ressources par chemin relatif
+          # (new File("css/...")). Un bundle .app lance depuis le Finder a pour repertoire
+          # courant / et non le sien ; sans cette option elle demarre puis echoue dans
+          # creeEnvironnement. Sous Windows, Lancer_EditeurPanovisu.bat fait le cd.
+          #
+          # --main-class doit viser Launcher et non EditeurPanovisu : cette derniere
+          # etend javafx.application.Application, et une telle classe ne peut pas servir
+          # de point d entree depuis un JAR shaded charge par le classpath. Windows et le
+          # manifeste du JAR utilisent deja Launcher (issue #17).
           jpackage \
             --type dmg \
             --name EditeurPanovisu \
             --app-version "$APP_VERSION" \
             --vendor "PanoVisu" \
-            --input target \
+            --input target/app-input \
             --main-jar "$MAIN_JAR" \
-            --main-class editeurpanovisu.EditeurPanovisu \
+            --main-class editeurpanovisu.Launcher \
             --runtime-image "$JAVA_HOME" \
             --dest target/installer \
             --mac-package-name EditeurPanovisu \
             --mac-package-identifier fr.panovisu.editeur \
-            --java-options "-Xmx2048m" \
             --java-options "-Dfile.encoding=UTF-8" \
-            --verbose || {
-              echo "❌ Erreur jpackage, essai sans icône..."
-              jpackage \
-                --type dmg \
-                --name EditeurPanovisu \
-                --app-version "$APP_VERSION" \
-                --vendor "PanoVisu" \
-                --input target \
-                --main-jar "$MAIN_JAR" \
-                --main-class editeurpanovisu.EditeurPanovisu \
-                --runtime-image "$JAVA_HOME" \
-                --dest target/installer \
-                --mac-package-name EditeurPanovisu \
-                --mac-package-identifier fr.panovisu.editeur \
-                --java-options "-Xmx2048m" \
-                --java-options "-Dfile.encoding=UTF-8"
-            }
+            --java-options '-Duser.dir=$APPDIR' \
+            --java-options "--enable-preview" \
+            --java-options "--enable-native-access=ALL-UNNAMED" \
+            --java-options "-Xms512m" \
+            --java-options "-Xmx2048m" \
+            --verbose
       
       - name: 📊 Calculate SHA256
         id: sha256
