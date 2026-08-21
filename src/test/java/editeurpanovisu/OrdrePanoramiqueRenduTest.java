@@ -29,24 +29,35 @@ import static org.junit.jupiter.api.Assumptions.assumeTrue;
 @DisplayName("OrdrePanoramique — cohérence entre hauteur calculée et hauteur imposée")
 class OrdrePanoramiqueRenduTest {
 
+    private static boolean toolkitPret;
+
+    /**
+     * Démarre le toolkit JavaFX sans jamais échouer.
+     *
+     * <p>L'abandon est décidé dans la méthode de test et non ici : une assomption placée
+     * dans un {@code @BeforeAll} avorte le conteneur entier, et Surefire ne comptabilise
+     * alors ni test exécuté ni test ignoré. Le test disparaîtrait silencieusement du
+     * rapport.</p>
+     */
     @BeforeAll
     static void demarreJavaFX() {
-        boolean pret;
         try {
             CountDownLatch demarre = new CountDownLatch(1);
             Platform.startup(demarre::countDown);
-            pret = demarre.await(15, TimeUnit.SECONDS);
+            toolkitPret = demarre.await(15, TimeUnit.SECONDS);
         } catch (IllegalStateException dejaDemarre) {
-            pret = true;
+            toolkitPret = true;
         } catch (Throwable indisponible) {
-            pret = false;
+            toolkitPret = false;
         }
-        assumeTrue(pret, "toolkit JavaFX indisponible (environnement sans affichage) — test ignoré");
     }
 
     @Test
     @DisplayName("régression #16 : la liste impose la hauteur de ligne servant au calcul")
     void listeImposeLaHauteurDeLigneUtiliseeParLeCalcul() throws Exception {
+        assumeTrue(toolkitPret,
+                "toolkit JavaFX indisponible (environnement sans affichage) — test ignoré");
+
         final int nbPanoramiques = 14;   // le cas rapporté dans l'issue
 
         FutureTask<double[]> mesure = new FutureTask<>(() -> {
