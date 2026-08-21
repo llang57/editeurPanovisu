@@ -19,10 +19,56 @@ import javafx.scene.layout.AnchorPane;
  */
 public class OrdrePanoramique {
 
+    /**
+     * Hauteur d'une ligne de la liste, en pixels.
+     *
+     * <p>Cette valeur est <b>imposée</b> à la ListView via {@code setFixedCellSize()} et sert
+     * en même temps au calcul de la hauteur du conteneur. Les deux ne peuvent donc plus diverger.</p>
+     *
+     * <p>Historiquement la hauteur était supposée valoir 46 px sans être imposée. Les thèmes
+     * introduits en v3.x (AtlantaFX, MaterialFX, FlatLaf) réduisent le padding de {@code .list-cell}
+     * et ramènent la ligne à ~39 px : le VirtualFlow figeait alors son nombre de cellules sur
+     * l'ancienne hypothèse et laissait une bande blanche en bas de liste, masquant les derniers
+     * panoramiques (issue #16).</p>
+     */
+    private static final double HAUTEUR_LIGNE = 46;
+
+    /** Nombre maximal de lignes affichées avant que la liste ne défile. */
+    private static final int MAX_LIGNES_VISIBLES = 10;
+
+    /** Largeur de la liste, en pixels. */
+    private static final double LARGEUR_LISTE = 300;
+
+    /** Marge basse conservée sous la dernière ligne, en pixels. */
+    private static final double MARGE_BASSE = 5;
+
     private static ObservableList<String> strPanos = FXCollections.observableArrayList();
     public static final ObservableList<PanoramiqueCellule> cellulesPanoramiques = FXCollections.observableArrayList();
     private final AnchorPane apListePanoramiques = new AnchorPane();
     private ListView<String> lstStrPanos;
+
+    /**
+     * Dimensionne la liste et son conteneur en fonction du nombre réel d'éléments affichés.
+     *
+     * <p>Impose la hauteur de ligne ({@link #HAUTEUR_LIGNE}) pour que le calcul de hauteur
+     * corresponde exactement au rendu, quel que soit le thème actif. Au-delà de
+     * {@link #MAX_LIGNES_VISIBLES} lignes, la liste défile.</p>
+     *
+     * @param liste      La ListView à dimensionner
+     * @param nbElements Nombre d'éléments réellement présents dans la liste
+     */
+    private void dimensionneListe(ListView<String> liste, int nbElements) {
+        liste.setFixedCellSize(HAUTEUR_LIGNE);
+        double dHauteur = Math.min(
+                HAUTEUR_LIGNE * nbElements + MARGE_BASSE,
+                HAUTEUR_LIGNE * MAX_LIGNES_VISIBLES + MARGE_BASSE);
+        liste.setMinSize(LARGEUR_LISTE, dHauteur);
+        liste.setPrefSize(LARGEUR_LISTE, dHauteur);
+        liste.setMaxSize(LARGEUR_LISTE, dHauteur);
+        apListePanoramiques.setMinSize(LARGEUR_LISTE, dHauteur);
+        apListePanoramiques.setPrefSize(LARGEUR_LISTE, dHauteur);
+        apListePanoramiques.setMaxSize(LARGEUR_LISTE, dHauteur);
+    }
 
     /**
      * Crée et initialise la liste ordonnée des panoramiques
@@ -43,14 +89,7 @@ public class OrdrePanoramique {
         }
         lstStrPanos = new ListView<>(strPanos);
         lstStrPanos.setCellFactory(param -> new ListePanoramiqueCellule());
-        int iTaille = 46 * (getiNombrePanoramiques()) + 5;
-        iTaille = (iTaille > 465) ? 465 : iTaille;
-        lstStrPanos.setMaxSize(300, iTaille);
-        lstStrPanos.setMinSize(300, iTaille);
-        lstStrPanos.setPrefSize(300, iTaille);
-        apListePanoramiques.setMaxSize(300, iTaille);
-        apListePanoramiques.setMinSize(300, iTaille);
-        apListePanoramiques.setPrefSize(300, iTaille);
+        dimensionneListe(lstStrPanos, strPanos.size());
         apListePanoramiques.getChildren().add(lstStrPanos);
         lstStrPanos.setLayoutX(0);
         lstStrPanos.setLayoutY(0);
@@ -58,7 +97,7 @@ public class OrdrePanoramique {
 
     /**
      * Crée et initialise la liste ordonnée des panoramiques avec ordre spécifique
-     * 
+     *
      * @param strOrdre Ordre de tri des panoramiques
      */
     public void creeListe(String strOrdre) {
@@ -77,14 +116,10 @@ public class OrdrePanoramique {
         }
         lstStrPanos = new ListView<>(strPanos);
         lstStrPanos.setCellFactory(param -> new ListePanoramiqueCellule());
-        int iTaille = 46 * (getiNombrePanoramiques()) + 5;
-        iTaille = (iTaille > 465) ? 465 : iTaille;
-        lstStrPanos.setMaxSize(300, iTaille);
-        lstStrPanos.setMinSize(300, iTaille);
-        lstStrPanos.setPrefSize(300, iTaille);
-        apListePanoramiques.setMaxSize(300, iTaille);
-        apListePanoramiques.setMinSize(300, iTaille);
-        apListePanoramiques.setPrefSize(300, iTaille);
+        // dimensionner sur le nombre d'éléments réellement listés, pas sur le nombre de
+        // panoramiques du projet : un .pvu dont l'ordre est incomplet donnerait sinon un
+        // cadre trop haut, partiellement vide (issue #16)
+        dimensionneListe(lstStrPanos, strPanos.size());
         apListePanoramiques.getChildren().add(lstStrPanos);
         lstStrPanos.setLayoutX(0);
         lstStrPanos.setLayoutY(0);
@@ -124,14 +159,7 @@ public class OrdrePanoramique {
             }
             lstStrPanos = new ListView<>(strPanos);
             lstStrPanos.setCellFactory(param -> new ListePanoramiqueCellule());
-            int iTaille = 46 * (strPanos.size()) + 5;
-            iTaille = (iTaille > 465) ? 465 : iTaille;
-            lstStrPanos.setMaxSize(300, iTaille);
-            lstStrPanos.setMinSize(300, iTaille);
-            lstStrPanos.setPrefSize(300, iTaille);
-            apListePanoramiques.setMaxSize(300, iTaille);
-            apListePanoramiques.setMinSize(300, iTaille);
-            apListePanoramiques.setPrefSize(300, iTaille);
+            dimensionneListe(lstStrPanos, strPanos.size());
             apListePanoramiques.getChildren().add(lstStrPanos);
         }
     }
@@ -173,14 +201,7 @@ public class OrdrePanoramique {
         }
         lstStrPanos = new ListView<>(strPanos);
         lstStrPanos.setCellFactory(param -> new ListePanoramiqueCellule());
-        int iTaille = 46 * (strPanos.size()) + 5;
-        iTaille = (iTaille > 465) ? 465 : iTaille;
-        lstStrPanos.setMaxSize(300, iTaille);
-        lstStrPanos.setMinSize(300, iTaille);
-        lstStrPanos.setPrefSize(300, iTaille);
-        apListePanoramiques.setMaxSize(300, iTaille);
-        apListePanoramiques.setMinSize(300, iTaille);
-        apListePanoramiques.setPrefSize(300, iTaille);
+        dimensionneListe(lstStrPanos, strPanos.size());
         apListePanoramiques.getChildren().add(lstStrPanos);
 
     }
@@ -213,18 +234,16 @@ public class OrdrePanoramique {
             strPanos.add(Integer.toString(i));
             cellulesPanoramiques.add(cellPano);
         }
-        ListView lstStrPanos1 = new ListView<>(strPanos);
-        lstStrPanos1.setCellFactory(param -> new ListePanoramiqueCellule());
-        int iTaille = 46 * (getiNombrePanoramiques()) + 5;
-        iTaille = (iTaille > 465) ? 465 : iTaille;
-        lstStrPanos1.setMaxSize(300, iTaille);
-        lstStrPanos1.setMinSize(300, iTaille);
-        lstStrPanos1.setPrefSize(300, iTaille);
+        // affecter le champ et non une variable locale : sinon lstStrPanos continue de
+        // référencer une ListView orpheline, et le rafraichitListe() suivant n'enlève pas
+        // la liste réellement affichée — elles s'empilent alors dans l'AnchorPane
+        lstStrPanos = new ListView<>(strPanos);
+        lstStrPanos.setCellFactory(param -> new ListePanoramiqueCellule());
+        dimensionneListe(lstStrPanos, strPanos.size());
         apListePanoramiques.getChildren().clear();
-        apListePanoramiques.setMaxSize(300, iTaille);
-        apListePanoramiques.setMinSize(300, iTaille);
-        apListePanoramiques.setPrefSize(300, iTaille);
-        apListePanoramiques.getChildren().add(lstStrPanos1);
+        apListePanoramiques.getChildren().add(lstStrPanos);
+        lstStrPanos.setLayoutX(0);
+        lstStrPanos.setLayoutY(0);
     }
 
     /**
