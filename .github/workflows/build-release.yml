@@ -107,11 +107,24 @@ jobs:
       
       - name: 📦 Create macOS DMG
         run: |
-          APP_VERSION="${{ github.event.inputs.version || '3.4.0' }}"
-          
           # Trouver le nom exact du JAR
           MAIN_JAR=$(ls target/editeurPanovisu-*.jar | xargs basename)
           echo "📦 JAR trouvé: $MAIN_JAR"
+          
+          # Version déduite du nom du JAR (source unique de vérité : pom.xml),
+          # comme le font déjà build-installer.ps1 et create-linux-portable.sh.
+          # Replis successifs : entrée manuelle du workflow, puis nom du tag.
+          APP_VERSION="${MAIN_JAR#editeurPanovisu-}"
+          APP_VERSION="${APP_VERSION%.jar}"
+          if [ -z "$APP_VERSION" ]; then
+            APP_VERSION="${{ github.event.inputs.version }}"
+          fi
+          if [ -z "$APP_VERSION" ]; then
+            APP_VERSION="${GITHUB_REF_NAME#v}"
+          fi
+          # jpackage refuse un suffixe non numérique dans --app-version
+          APP_VERSION="${APP_VERSION%-SNAPSHOT}"
+          echo "🏷️  Version appliquée au DMG : $APP_VERSION"
           
           jpackage \
             --type dmg \
