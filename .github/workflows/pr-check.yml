@@ -27,12 +27,12 @@ jobs:
       
       - name: 🔨 Quick Compile Check
         run: |
-          mvn clean compile -q
+          mvn clean compile -q -Dskip.build.increment=true
           echo "✅ Compilation OK"
       
       - name: 🧪 Quick Test
         run: |
-          mvn test -q || echo "⚠️  Tests échoués (non bloquant pour PR)"
+          mvn test -Dskip.build.increment=true || echo "⚠️  Tests échoués (non bloquant pour PR)"
       
       - name: 📊 PR Summary
         run: |

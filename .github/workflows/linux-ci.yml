@@ -38,17 +38,17 @@ jobs:
       
       - name: 🔨 Build with Maven
         run: |
-          mvn clean compile -q
+          mvn clean compile -q -Dskip.build.increment=true
           echo "✅ Compilation réussie"
       
       - name: 🧪 Run Tests
         run: |
-          mvn test -q
+          mvn test -Dskip.build.increment=true
           echo "✅ Tests passés"
       
       - name: 📦 Package Application
         run: |
-          mvn package -DskipTests -Pportable -q
+          mvn package -DskipTests -Pportable -q -Dskip.build.increment=true
           echo "✅ Packaging réussi"
       
       - name: 🗜️ Create Linux Portable Archive
@@ -153,7 +153,7 @@ jobs:
       
       - name: 🔨 Compile with Java 25
         run: |
-          mvn clean compile -q
+          mvn clean compile -q -Dskip.build.increment=true
           echo "✅ Compilation Java 25 réussie"
       
       - name: 🔍 Maven Dependency Check
