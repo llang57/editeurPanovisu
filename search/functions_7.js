@@ -9,8 +9,9 @@ var searchData=
   ['desactivercontroles_6',['desactiverControles',['../classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#a5ccd468448f3de50d7231830f3066c08',1,'editeurpanovisu::ConversionRatio2to1DialogController']]],
   ['detectermodeleollama_7',['detecterModeleOllama',['../classediteurpanovisu_1_1OllamaService.html#a3c02edbb2bc9e72804627518163b544a',1,'editeurpanovisu::OllamaService']]],
   ['determinerfichiersortie_8',['determinerfichiersortie',['../classediteurpanovisu_1_1ConversionRatio2to1DialogController.html#a8f57c30e17f8667f430327a0691d1f37',1,'editeurpanovisu.ConversionRatio2to1DialogController.determinerFichierSortie()'],['../classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a00a3fa2440f3e8be278c85fa64837687',1,'editeurpanovisu.RedimensionnementImagesDialogController.determinerFichierSortie()']]],
-  ['documentationdialog_9',['DocumentationDialog',['../classediteurpanovisu_1_1DocumentationDialog.html#aa0f8323beb35114ad3307da310a5c2c1',1,'editeurpanovisu::DocumentationDialog']]],
-  ['documentitem_10',['DocumentItem',['../classediteurpanovisu_1_1DocumentationDialog_1_1DocumentItem.html#a39312a1d322cb2e37fbb0f3653ef8049',1,'editeurpanovisu::DocumentationDialog::DocumentItem']]],
-  ['documenttype_11',['DocumentType',['../enumediteurpanovisu_1_1DocumentationDialog_1_1DocumentType.html#a4a3b9e368e6db05051b82ad2bdaa8ccc',1,'editeurpanovisu::DocumentationDialog::DocumentType']]],
-  ['dt_12',['dt',['../leaflet_8js.html#a6533a1e578dfb59fe9b27b82982de85a',1,'leaflet.js']]]
+  ['dimensionneliste_9',['dimensionneListe',['../classediteurpanovisu_1_1OrdrePanoramique.html#a3ed01433bae7e607750ac14597b37f7c',1,'editeurpanovisu::OrdrePanoramique']]],
+  ['documentationdialog_10',['DocumentationDialog',['../classediteurpanovisu_1_1DocumentationDialog.html#aa0f8323beb35114ad3307da310a5c2c1',1,'editeurpanovisu::DocumentationDialog']]],
+  ['documentitem_11',['DocumentItem',['../classediteurpanovisu_1_1DocumentationDialog_1_1DocumentItem.html#a39312a1d322cb2e37fbb0f3653ef8049',1,'editeurpanovisu::DocumentationDialog::DocumentItem']]],
+  ['documenttype_12',['DocumentType',['../enumediteurpanovisu_1_1DocumentationDialog_1_1DocumentType.html#a4a3b9e368e6db05051b82ad2bdaa8ccc',1,'editeurpanovisu::DocumentationDialog::DocumentType']]],
+  ['dt_13',['dt',['../leaflet_8js.html#a6533a1e578dfb59fe9b27b82982de85a',1,'leaflet.js']]]
 ];

@@ -1,7 +1,10 @@
 <map id="editeurpanovisu.OrdrePanoramique.creeListe" name="editeurpanovisu.OrdrePanoramique.creeListe">
-<area shape="rect" id="Node000001" title="Crée et initialise la liste ordonnée des panoramiques." alt="" coords="5,23,289,63"/>
-<area shape="rect" id="Node000002" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="337,5,376,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="289,23,324,19,324,25,290,29"/>
-<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="337,55,376,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="290,57,324,61,324,66,289,62"/>
+<area shape="rect" id="Node000001" title="Crée et initialise la liste ordonnée des panoramiques." alt="" coords="5,63,289,103"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1OrdrePanoramique.html#a3ed01433bae7e607750ac14597b37f7c" title="Dimensionne la liste et son conteneur en fonction du nombre réel d&#39;éléments affichés." alt="" coords="337,5,677,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="273,60,367,45,368,50,274,65"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="725,42,764,67"/>
+<area shape="poly" id="edge4_Node000001_Node000003" title=" " alt="" coords="289,73,712,53,712,59,290,79"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="488,121,527,146"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="290,100,475,126,474,131,289,105"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="669,43,712,48,712,53,669,48"/>
 </map>
