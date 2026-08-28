@@ -7,7 +7,7 @@
 
     <groupId>fr.panovisu</groupId>
     <artifactId>editeurPanovisu</artifactId>
-    <version>3.4.12</version>
+    <version>3.4.14</version>
     <packaging>jar</packaging>
 
     <name>editeurPanovisu</name>
