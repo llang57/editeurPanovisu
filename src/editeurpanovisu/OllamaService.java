@@ -713,17 +713,26 @@ public class OllamaService {
             description.append("VILLE: ").append(city);
         }
         
-        // 4. Département/Comté (si différent de la localité)
-        if (county != null && !county.isEmpty() && !county.equals(localite)) {
-            if (description.length() > 0) description.append(" | ");
-            description.append("DÉPARTEMENT: ").append(county);
-        }
-        
-        // 5. Région (préférer state à region si disponible)
+        // 4 et 5. Échelons administratifs, présentés SANS les qualifier.
+        //
+        // Les fournisseurs de géocodage ne rangent pas les mêmes réalités dans les mêmes
+        // champs : pour Lastours, LocationIQ renvoie county="Conques-sur-Orbiel" (une
+        // commune) et state="Aude" (un département). Les étiqueter DÉPARTEMENT et RÉGION
+        // transmettait donc au modèle deux catégories fausses — on ne peut pas exiger la
+        // précision d'un modèle que l'on désinforme. Les valeurs sont désormais données
+        // du plus précis au plus général, sans leur attribuer d'échelon.
         String regionName = (state != null && !state.isEmpty()) ? state : region;
+        java.util.List<String> echelons = new java.util.ArrayList<>();
+        if (county != null && !county.isEmpty() && !county.equals(localite)) {
+            echelons.add(county);
+        }
         if (regionName != null && !regionName.isEmpty() && !regionName.equals(county)) {
+            echelons.add(regionName);
+        }
+        if (!echelons.isEmpty()) {
             if (description.length() > 0) description.append(" | ");
-            description.append("RÉGION: ").append(regionName);
+            description.append("ÉCHELONS ADMINISTRATIFS (du plus précis au plus général): ")
+                       .append(String.join(", ", echelons));
         }
         
         // 6. Pays
@@ -1077,7 +1086,9 @@ public class OllamaService {
             prompt.append("5) Tu ne disposes QUE des informations ci-dessus. Tout ce qui n'en découle pas doit être OMIS : il vaut mieux une description plus courte qu'un détail inventé.\n");
             prompt.append("6) En l'absence de connaissance certaine sur ce lieu exact, reste au niveau du contexte géographique fourni (situation, commune, département, pays) sans ajouter de détail matériel.\n");
             prompt.append("7) N'exprime aucun doute par écrit : ne produis ni \"peut-être\", ni \"sans doute\", ni \"il se pourrait\". Si tu n'es pas certain, n'écris simplement pas l'information.\n");
-            prompt.append("8) Ta réponse doit contenir exactement le texte de la description, sans aucune méta-phrase (pas de \"Voici...\").\n");
+            prompt.append("8) Ne QUALIFIE PAS les noms de lieux fournis : n'écris pas \"la région de X\" ni \"le département de Y\" si l'échelon ne t'est pas donné. Reprends ces noms tels quels.\n");
+            prompt.append("9) Ne COMMENTE PAS ces consignes ni ce que tu renonces à décrire. N'écris jamais de phrase du type \"sans détailler les éléments visuels\". Omettre se fait en silence.\n");
+            prompt.append("10) Ta réponse doit contenir exactement le texte de la description, sans aucune méta-phrase (pas de \"Voici...\").\n");
         } else {
             prompt.append("\n\n🚫 ABSOLUTE ANTI-HALLUCINATION RULES:\n");
             prompt.append("1) NEVER INVENT a proper name: no building, monument, person, or historical event.\n");
@@ -1087,7 +1098,9 @@ public class OllamaService {
             prompt.append("5) You have ONLY the information above. Anything not derived from it must be OMITTED: a shorter description is better than an invented detail.\n");
             prompt.append("6) Without certain knowledge of this exact place, stay at the level of the geographical context provided (location, town, region, country) and add no material detail.\n");
             prompt.append("7) Do not express doubt in writing: no \"perhaps\", \"probably\", or \"it may be\". If you are unsure, simply omit the information.\n");
-            prompt.append("8) Your response must contain exactly the description text, with no meta phrases (no \"Here is...\").\n");
+            prompt.append("8) Do NOT QUALIFY the place names provided: never write \"the region of X\" or \"the county of Y\" when the tier is not given to you. Quote these names as they are.\n");
+            prompt.append("9) Do NOT COMMENT on these rules or on what you refrain from describing. Never write a sentence such as \"without detailing the visual elements\". Omission is silent.\n");
+            prompt.append("10) Your response must contain exactly the description text, with no meta phrases (no \"Here is...\").\n");
         }
         
         String finalPrompt = prompt.toString();
