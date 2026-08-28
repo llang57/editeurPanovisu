@@ -50,6 +50,24 @@ public final class VerificationDescription {
             "\\b(peut-[êe]tre|sans doute|probablement|il se pourrait|semble-t-il|vraisemblablement)\\b",
             Pattern.CASE_INSENSITIVE);
 
+    /**
+     * Mot commençant par une majuscule, avec ce qui le précède immédiatement.
+     *
+     * <p>Sert à repérer les noms propres : le groupe 1 capture le caractère précédent, ce qui
+     * permet d'écarter les débuts de phrase, où la majuscule n'indique rien.</p>
+     */
+    private static final Pattern NOM_PROPRE = Pattern.compile(
+            "([^.!?:\\n]\\s+)([A-ZÀÂÄÉÈÊËÎÏÔÖÙÛÜÇ][\\p{L}'-]{2,})");
+
+    /**
+     * Mots à majuscule qui ne sont pas des noms propres vérifiables.
+     *
+     * <p>Évite de signaler des tournures courantes plutôt que des lieux ou monuments.</p>
+     */
+    private static final java.util.Set<String> MOTS_COURANTS = java.util.Set.of(
+            "les", "des", "aux", "cette", "ces", "leur", "leurs", "elle", "elles",
+            "cependant", "toutefois", "ainsi", "depuis", "aujourd'hui");
+
     private VerificationDescription() {
     }
 
@@ -89,7 +107,36 @@ public final class VerificationDescription {
         cherche(signalements, description, reference, DISTINCTIONS, "distinction ou classement");
         cherche(signalements, description, reference, NOTORIETE, "superlatif de notoriété");
         cherche(signalements, description, reference, DOUTE, "formulation dubitative");
+        chercheNomsPropres(signalements, description, reference);
         return signalements;
+    }
+
+    /**
+     * Signale les noms propres absents du contexte fourni au modèle.
+     *
+     * <p>C'est la catégorie la plus utile et la plus difficile : lors d'un essai réel, un modèle
+     * a situé les châteaux de Lastours « dans les gorges de la rivière Orb » alors que la rivière
+     * qui les longe est l'Orbiel. Aucune règle de prompt n'avait empêché cette confusion, et
+     * seules les catégories chiffrées la laissaient passer.</p>
+     *
+     * <p>La détection est délibérément large : un nom propre légitime mais non fourni sera
+     * signalé lui aussi. Le signalement invite à relire, il n'affirme pas une erreur.</p>
+     *
+     * @param signalements Liste alimentée par la méthode
+     * @param description  Texte analysé
+     * @param reference    Contexte en minuscules
+     */
+    private static void chercheNomsPropres(List<Signalement> signalements, String description,
+                                           String reference) {
+        Matcher m = NOM_PROPRE.matcher(description);
+        while (m.find()) {
+            String mot = m.group(2);
+            String minuscule = mot.toLowerCase();
+            if (MOTS_COURANTS.contains(minuscule) || reference.contains(minuscule)) {
+                continue;
+            }
+            signalements.add(new Signalement("nom propre absent du contexte fourni", mot));
+        }
     }
 
     /**

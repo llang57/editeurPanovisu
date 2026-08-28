@@ -45,6 +45,22 @@ public class OllamaService {
 
     /** Nombre de candidats retenus à chaque étape ; 40 par défaut chez Ollama. */
     private static final int TOP_K = 20;
+
+    /**
+     * Longueur de contexte imposée à Ollama, en jetons.
+     *
+     * <p>Sans cette valeur, Ollama applique le contexte maximal du modèle — souvent 128 000
+     * jetons — et tente d'allouer le cache correspondant. Sur une machine courante la
+     * génération échoue alors en HTTP 500, y compris pour un petit modèle : un phi3 de
+     * 2,2 Go réclamait 37 Gio de cache. Le cas est d'autant plus fréquent que la variable
+     * d'environnement OLLAMA_NUM_PARALLEL multiplie cette allocation.</p>
+     *
+     * <p>8192 jetons couvrent largement le prompt, descriptions précédentes comprises.</p>
+     */
+    private static final int NUM_CTX = 8192;
+
+    /** Longueur maximale de la réponse : une description fait 4 à 5 phrases. */
+    private static final int NUM_PREDICT = 400;
     private static final String GENERATE_ENDPOINT = "/api/generate";
     private static final String TAGS_ENDPOINT = "/api/tags";
     private static String ollamaModel = "mistral"; // Sera détecté automatiquement
@@ -1299,6 +1315,8 @@ public class OllamaService {
         options.addProperty("temperature", TEMPERATURE);
         options.addProperty("top_p", TOP_P);
         options.addProperty("top_k", TOP_K);
+        options.addProperty("num_ctx", NUM_CTX);
+        options.addProperty("num_predict", NUM_PREDICT);
         JsonObject corpsRequete = new JsonObject();
         corpsRequete.addProperty("model", ollamaModel);
         corpsRequete.addProperty("prompt", prompt);

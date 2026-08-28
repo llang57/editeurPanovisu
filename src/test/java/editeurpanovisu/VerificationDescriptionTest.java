@@ -83,6 +83,29 @@ class VerificationDescriptionTest {
                 "la date vient de l'utilisateur, pas du modèle");
     }
 
+    /**
+     * Cas réellement observé : le modèle a situé les châteaux de Lastours « dans les gorges
+     * de la rivière Orb », alors que la rivière qui les longe est l'Orbiel. Aucune règle du
+     * prompt ne l'avait empêché.
+     */
+    @Test
+    @DisplayName("régression : un nom propre inventé est signalé (cas Lastours/Orb)")
+    void nomPropreInventeSignale() {
+        String contexte = "Chateaux de Lastours Le belvedere";
+        var r = VerificationDescription.verifie(
+                "Le belvédère offre une vue sur les châteaux de Lastours, "
+                + "situés dans les gorges de la rivière Orb.", contexte);
+        assertTrue(contient(r, "Orb"), "le nom de rivière inventé doit être signalé");
+    }
+
+    @Test
+    @DisplayName("un nom propre présent dans le contexte n'est pas signalé")
+    void nomPropreDuContexteNonSignale() {
+        var r = VerificationDescription.verifie(
+                "Le site de Lastours domine la vallée.", "Chateaux de Lastours");
+        assertFalse(contient(r, "Lastours"), "ce nom vient de l'utilisateur");
+    }
+
     @Test
     @DisplayName("les entrées nulles ou vides sont tolérées")
     void entreesVides() {
