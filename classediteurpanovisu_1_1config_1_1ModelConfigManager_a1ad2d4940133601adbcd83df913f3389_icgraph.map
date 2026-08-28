@@ -1,0 +1,7 @@
+<map id="editeurpanovisu.config.ModelConfigManager.chargeCatalogue" name="editeurpanovisu.config.ModelConfigManager.chargeCatalogue">
+<area shape="rect" id="Node000001" title="Charge un catalogue de modèles, en trois temps." alt="" coords="323,37,556,77"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1config_1_1ModelConfigManager.html#a8cfc19a335475e096041167626937fe7" title="Charge la configuration Ollama depuis le fichier JSON." alt="" coords="21,5,259,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="308,46,259,41,260,35,309,41"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1config_1_1ModelConfigManager.html#adb7b6dc0fc4d3b58e1e9961e5fc717d2" title="Charge la configuration OpenRouter depuis le fichier JSON." alt="" coords="5,69,275,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="309,74,275,78,275,72,309,69"/>
+</map>

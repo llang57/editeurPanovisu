@@ -1,0 +1,14 @@
+<map id="editeurpanovisu.config.ModelConfigManager.chargeCatalogue" name="editeurpanovisu.config.ModelConfigManager.chargeCatalogue">
+<area shape="rect" id="Node000001" title="Charge un catalogue de modèles, en trois temps." alt="" coords="5,92,239,132"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1config_1_1ModelConfigManager.html#af6c1f9639c60d047a06c22e28cbc58ab" title="Recopie le catalogue embarqué dans configPV/ pour le rendre modifiable." alt="" coords="305,5,544,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="190,89,286,61,338,46,340,52,287,67,192,95"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="699,70,737,95"/>
+<area shape="poly" id="edge7_Node000001_Node000003" title=" " alt="" coords="239,104,684,82,685,87,239,109"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1config_1_1ModelConfigManager.html#a8675845cd9374dfe61ec98658429fb61" title="Lit un catalogue depuis les ressources du JAR." alt="" coords="287,120,563,160"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="239,120,273,123,273,129,239,125"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1config_1_1ModelConfig.html#ac2e0f11b3aebd7d9a55013906070f233" title=" " alt="" coords="611,148,825,188"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="166,130,223,152,287,169,367,179,448,183,597,178,597,184,448,188,366,185,286,175,221,157,164,135"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="528,43,685,74,684,79,527,48"/>
+<area shape="poly" id="edge5_Node000004_Node000003" title=" " alt="" coords="527,117,684,86,685,92,528,123"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="563,151,597,154,597,159,563,156"/>
+</map>

@@ -1,5 +1,8 @@
 var classediteurpanovisu_1_1config_1_1ModelConfigManager =
 [
+    [ "amorceCatalogue", "classediteurpanovisu_1_1config_1_1ModelConfigManager.html#af6c1f9639c60d047a06c22e28cbc58ab", null ],
+    [ "chargeCatalogue", "classediteurpanovisu_1_1config_1_1ModelConfigManager.html#a1ad2d4940133601adbcd83df913f3389", null ],
+    [ "chargeDepuisClasspath", "classediteurpanovisu_1_1config_1_1ModelConfigManager.html#a8675845cd9374dfe61ec98658429fb61", null ],
     [ "createDefaultOllamaConfig", "classediteurpanovisu_1_1config_1_1ModelConfigManager.html#a3eb9305bba70c2c83dbec20806d040e0", null ],
     [ "createDefaultOpenRouterConfig", "classediteurpanovisu_1_1config_1_1ModelConfigManager.html#a3af308e37191920e6d315da9f7a7abe2", null ],
     [ "getOllamaConfig", "classediteurpanovisu_1_1config_1_1ModelConfigManager.html#afb582474639422b18d9b370c817c829b", null ],
