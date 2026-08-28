@@ -57,6 +57,7 @@ var dir_184160a943439c2c782fe244782aeddc =
     [ "ThemeManager.java", "ThemeManager_8java.html", "ThemeManager_8java" ],
     [ "TransformationsPanoramique.java", "TransformationsPanoramique_8java.html", "TransformationsPanoramique_8java" ],
     [ "TransformationsPanoramiqueGPU.java", "TransformationsPanoramiqueGPU_8java.html", "TransformationsPanoramiqueGPU_8java" ],
+    [ "VerificationDescription.java", "VerificationDescription_8java.html", "VerificationDescription_8java" ],
     [ "VisualiseurImagesPanoramiques.java", "VisualiseurImagesPanoramiques_8java.html", "VisualiseurImagesPanoramiques_8java" ],
     [ "ZoneTelecommande.java", "ZoneTelecommande_8java.html", "ZoneTelecommande_8java" ]
 ];

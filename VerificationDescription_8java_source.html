@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>EditeurPanovisu:  Fichier source de src/editeurpanovisu/VerificationDescription.java</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">EditeurPanovisu<span id="projectnumber">&#160;3.1.0</span>
+   </div>
+   <div id="projectbrief">Éditeur de visites virtuelles 360° Panovisu</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('VerificationDescription_8java_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Chargement...</div>
+<div class="SRStatus" id="Searching">Recherche...</div>
+<div class="SRStatus" id="NoMatches">Aucune correspondance</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">VerificationDescription.java</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="VerificationDescription_8java.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="keyword">package </span>editeurpanovisu;</div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keyword">import</span> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">java</a>.util.ArrayList;</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keyword">import</span> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">java</a>.util.List;</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">import</span> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">java</a>.util.regex.Matcher;</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">import</span> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">java</a>.util.regex.Pattern;</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="foldopen" id="foldopen00022" data-start="{" data-end="};">
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1VerificationDescription.html">   22</a></span><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">class </span><a class="code hl_class" href="classediteurpanovisu_1_1VerificationDescription.html">VerificationDescription</a> {</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1VerificationDescription.html#a560c047645719f5792ed5a416286dd0b">   25</a></span>    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Pattern</a> <a class="code hl_variable" href="classediteurpanovisu_1_1VerificationDescription.html#a560c047645719f5792ed5a416286dd0b">DATES</a> = <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Pattern</a>.compile(</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>            <span class="stringliteral">&quot;\\b(1[0-9]{3}|20[0-9]{2})\\b|\\b[IVXLCM]+(?:e|ème|ᵉ)\\s+si[èe]cle\\b&quot;</span>,</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>            <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Pattern</a>.CASE_INSENSITIVE);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1VerificationDescription.html#a2fe27327be8c083bff8ca3f04dde6c88">   30</a></span>    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Pattern</a> <a class="code hl_variable" href="classediteurpanovisu_1_1VerificationDescription.html#a2fe27327be8c083bff8ca3f04dde6c88">MESURES</a> = <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Pattern</a>.compile(</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>            <span class="stringliteral">&quot;\\b\\d+([.,]\\d+)?\\s*(m|km|cm|mm|m²|km²|ha|hectares?|m[eè]tres?|kilom[èe]tres?|&quot;</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>            + <span class="stringliteral">&quot;pieds?|[ée]tages?|habitants?|visiteurs?)\\b&quot;</span>,</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>            <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Pattern</a>.CASE_INSENSITIVE);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1VerificationDescription.html#adc1dfd98b55da859eeb123daef16d9a9">   36</a></span>    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Pattern</a> <a class="code hl_variable" href="classediteurpanovisu_1_1VerificationDescription.html#adc1dfd98b55da859eeb123daef16d9a9">DISTINCTIONS</a> = <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Pattern</a>.compile(</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>            <span class="stringliteral">&quot;\\b(unesco|patrimoine mondial|monument historique|class[ée]e?s?\\s+(au|aux|monument)|&quot;</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>            + <span class="stringliteral">&quot;inscrit[e]?s?\\s+au|label\\b|plus beaux? villages?|grand site)\\b&quot;</span>,</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>            <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Pattern</a>.CASE_INSENSITIVE);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1VerificationDescription.html#a16ec742e6a264f572fe50f3ab79c6efb">   42</a></span>    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Pattern</a> <a class="code hl_variable" href="classediteurpanovisu_1_1VerificationDescription.html#a16ec742e6a264f572fe50f3ab79c6efb">NOTORIETE</a> = <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Pattern</a>.compile(</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>            <span class="stringliteral">&quot;\\b(c[ée]l[èe]bre|renomm[ée]e?|r[ée]put[ée]e?|incontournable|embl[ée]matique|&quot;</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>            + <span class="stringliteral">&quot;prestigieux|prestigieuse|mondialement|le plus beau|la plus belle|les plus beaux|&quot;</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>            + <span class="stringliteral">&quot;tr[èe]s pris[ée]|haut lieu)\\b&quot;</span>,</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>            <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Pattern</a>.CASE_INSENSITIVE);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1VerificationDescription.html#a5f1378a2c0b97c99f8e7a4915ae46a0b">   49</a></span>    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Pattern</a> <a class="code hl_variable" href="classediteurpanovisu_1_1VerificationDescription.html#a5f1378a2c0b97c99f8e7a4915ae46a0b">DOUTE</a> = <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Pattern</a>.compile(</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>            <span class="stringliteral">&quot;\\b(peut-[êe]tre|sans doute|probablement|il se pourrait|semble-t-il|vraisemblablement)\\b&quot;</span>,</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Pattern</a>.CASE_INSENSITIVE);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="foldopen" id="foldopen00053" data-start="{" data-end="}">
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1VerificationDescription.html#adadc052b92bd6f9d15d5a4297ad450cf">   53</a></span>    <span class="keyword">private</span> <a class="code hl_function" href="classediteurpanovisu_1_1VerificationDescription.html#adadc052b92bd6f9d15d5a4297ad450cf">VerificationDescription</a>() {</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    }</div>
+</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="foldopen" id="foldopen00062" data-start="{" data-end="}">
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1VerificationDescription.html#a75819d7c96e76ce6650043d848d91c4d">   62</a></span>    <span class="keyword">public</span> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">record</a> <a class="code hl_function" href="classediteurpanovisu_1_1VerificationDescription.html#a75819d7c96e76ce6650043d848d91c4d">Signalement</a>(<a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">categorie</a>, <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">extrait</a>) {</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        @<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Override</a></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="keyword">public</span> <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> toString() {</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>            <span class="keywordflow">return</span> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">categorie</a> + <span class="stringliteral">&quot; : « &quot;</span> + <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">extrait</a> + <span class="stringliteral">&quot; »&quot;</span>;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        }</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    }</div>
+</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="foldopen" id="foldopen00080" data-start="{" data-end="}">
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1VerificationDescription.html#a68560d700189175129ff2823deef1bd9">   80</a></span>    <span class="keyword">public</span> <span class="keyword">static</span> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">List&lt;Signalement&gt;</a> <a class="code hl_function" href="classediteurpanovisu_1_1VerificationDescription.html#a68560d700189175129ff2823deef1bd9">verifie</a>(<a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> description, <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">contexte</a>) {</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">List&lt;Signalement&gt;</a> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">signalements</a> = <span class="keyword">new</span> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">ArrayList&lt;&gt;</a>();</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        <span class="keywordflow">if</span> (description == <span class="keyword">null</span> || description.isBlank()) {</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>            <span class="keywordflow">return</span> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">signalements</a>;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        }</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">reference</a> = <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">contexte</a> == <span class="keyword">null</span> ? <span class="stringliteral">&quot;&quot;</span> : <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">contexte</a>.toLowerCase();</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        <a class="code hl_function" href="classediteurpanovisu_1_1VerificationDescription.html#a9df326f11d795a6196572329f02d3eb6">cherche</a>(<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">signalements</a>, description, <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">reference</a>, <a class="code hl_variable" href="classediteurpanovisu_1_1VerificationDescription.html#a560c047645719f5792ed5a416286dd0b">DATES</a>, <span class="stringliteral">&quot;date ou siècle non vérifiable&quot;</span>);</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        <a class="code hl_function" href="classediteurpanovisu_1_1VerificationDescription.html#a9df326f11d795a6196572329f02d3eb6">cherche</a>(<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">signalements</a>, description, <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">reference</a>, <a class="code hl_variable" href="classediteurpanovisu_1_1VerificationDescription.html#a2fe27327be8c083bff8ca3f04dde6c88">MESURES</a>, <span class="stringliteral">&quot;mesure chiffrée&quot;</span>);</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        <a class="code hl_function" href="classediteurpanovisu_1_1VerificationDescription.html#a9df326f11d795a6196572329f02d3eb6">cherche</a>(<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">signalements</a>, description, <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">reference</a>, <a class="code hl_variable" href="classediteurpanovisu_1_1VerificationDescription.html#adc1dfd98b55da859eeb123daef16d9a9">DISTINCTIONS</a>, <span class="stringliteral">&quot;distinction ou classement&quot;</span>);</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        <a class="code hl_function" href="classediteurpanovisu_1_1VerificationDescription.html#a9df326f11d795a6196572329f02d3eb6">cherche</a>(<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">signalements</a>, description, <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">reference</a>, <a class="code hl_variable" href="classediteurpanovisu_1_1VerificationDescription.html#a16ec742e6a264f572fe50f3ab79c6efb">NOTORIETE</a>, <span class="stringliteral">&quot;superlatif de notoriété&quot;</span>);</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        <a class="code hl_function" href="classediteurpanovisu_1_1VerificationDescription.html#a9df326f11d795a6196572329f02d3eb6">cherche</a>(<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">signalements</a>, description, <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">reference</a>, <a class="code hl_variable" href="classediteurpanovisu_1_1VerificationDescription.html#a5f1378a2c0b97c99f8e7a4915ae46a0b">DOUTE</a>, <span class="stringliteral">&quot;formulation dubitative&quot;</span>);</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">signalements</a>;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    }</div>
+</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="foldopen" id="foldopen00104" data-start="{" data-end="}">
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1VerificationDescription.html#a9df326f11d795a6196572329f02d3eb6">  104</a></span>    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classediteurpanovisu_1_1VerificationDescription.html#a9df326f11d795a6196572329f02d3eb6">cherche</a>(<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">List&lt;Signalement&gt;</a> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">signalements</a>, <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> description,</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>                                <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">reference</a>, <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Pattern</a> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">motif</a>, <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">categorie</a>) {</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">Matcher</a> <a class="code hl_function" href="leaflet_8js.html#a1cabf6ae48cc55b616700aecc4371993">m</a> = <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">motif</a>.matcher(description);</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        <span class="keywordflow">while</span> (<a class="code hl_function" href="leaflet_8js.html#a1cabf6ae48cc55b616700aecc4371993">m</a>.find()) {</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>            <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">extrait</a> = <a class="code hl_function" href="leaflet_8js.html#a1cabf6ae48cc55b616700aecc4371993">m</a>.group().trim();</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>            <span class="keywordflow">if</span> (!<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">reference</a>.contains(<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">extrait</a>.toLowerCase())) {</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">signalements</a>.add(<span class="keyword">new</span> <a class="code hl_function" href="classediteurpanovisu_1_1VerificationDescription.html#a75819d7c96e76ce6650043d848d91c4d">Signalement</a>(<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">categorie</a>, <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">extrait</a>));</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>            }</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        }</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    }</div>
+</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="foldopen" id="foldopen00122" data-start="{" data-end="}">
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno"><a class="line" href="classediteurpanovisu_1_1VerificationDescription.html#affb1ef60c1dc9734e72201b1e9b112ad">  122</a></span>    <span class="keyword">public</span> <span class="keyword">static</span> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">List&lt;Signalement&gt;</a> <a class="code hl_function" href="classediteurpanovisu_1_1VerificationDescription.html#affb1ef60c1dc9734e72201b1e9b112ad">verifieEtTrace</a>(<a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> description, <a class="code hl_variable" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">contexte</a>) {</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">List&lt;Signalement&gt;</a> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">signalements</a> = <a class="code hl_function" href="classediteurpanovisu_1_1VerificationDescription.html#a68560d700189175129ff2823deef1bd9">verifie</a>(description, <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">contexte</a>);</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        <span class="keywordflow">if</span> (<a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">signalements</a>.isEmpty()) {</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>            <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">System</a>.out.println(<span class="stringliteral">&quot;[IA] Vérification : aucun énoncé à relire.&quot;</span>);</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>            <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">System</a>.out.println(<span class="stringliteral">&quot;[IA] ⚠ Vérification : &quot;</span> + <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">signalements</a>.size()</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>                    + <span class="stringliteral">&quot; énoncé(s) à relire avant publication —&quot;</span>);</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>            <span class="keywordflow">for</span> (<a class="code hl_function" href="classediteurpanovisu_1_1VerificationDescription.html#a75819d7c96e76ce6650043d848d91c4d">Signalement</a> <a class="code hl_function" href="leaflet_8js.html#af1ca895898688e63b5f816c8255fb77d">s</a> : <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">signalements</a>) {</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>                <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">System</a>.out.println(<span class="stringliteral">&quot;[IA]     • &quot;</span> + <a class="code hl_function" href="leaflet_8js.html#af1ca895898688e63b5f816c8255fb77d">s</a>);</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>            }</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>        }</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">signalements</a>;</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    }</div>
+</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>}</div>
+</div>
+<div class="ttc" id="aOpenLayers_8js_html_a4ca754488880c6622cdd0e257fe5f5ea"><div class="ttname"><a href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a></div><div class="ttdeci">OpenLayers String</div><div class="ttdef"><b>Definition</b> <a href="OpenLayers_8js_source.html#l00059">OpenLayers.js:59</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1VerificationDescription_html"><div class="ttname"><a href="classediteurpanovisu_1_1VerificationDescription.html">editeurpanovisu.VerificationDescription</a></div><div class="ttdoc">Repère dans une description générée les affirmations qu'aucun modèle ne peut garantir.</div><div class="ttdef"><b>Definition</b> <a href="VerificationDescription_8java_source.html#l00022">VerificationDescription.java:22</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1VerificationDescription_html_a16ec742e6a264f572fe50f3ab79c6efb"><div class="ttname"><a href="classediteurpanovisu_1_1VerificationDescription.html#a16ec742e6a264f572fe50f3ab79c6efb">editeurpanovisu.VerificationDescription.NOTORIETE</a></div><div class="ttdeci">static final Pattern NOTORIETE</div><div class="ttdoc">Superlatifs et qualificatifs de notoriété, interdits par les consignes.</div><div class="ttdef"><b>Definition</b> <a href="VerificationDescription_8java_source.html#l00042">VerificationDescription.java:42</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1VerificationDescription_html_a2fe27327be8c083bff8ca3f04dde6c88"><div class="ttname"><a href="classediteurpanovisu_1_1VerificationDescription.html#a2fe27327be8c083bff8ca3f04dde6c88">editeurpanovisu.VerificationDescription.MESURES</a></div><div class="ttdeci">static final Pattern MESURES</div><div class="ttdoc">Mesures chiffrées : « 320 m », « 12 hectares », « 45 km ».</div><div class="ttdef"><b>Definition</b> <a href="VerificationDescription_8java_source.html#l00030">VerificationDescription.java:30</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1VerificationDescription_html_a560c047645719f5792ed5a416286dd0b"><div class="ttname"><a href="classediteurpanovisu_1_1VerificationDescription.html#a560c047645719f5792ed5a416286dd0b">editeurpanovisu.VerificationDescription.DATES</a></div><div class="ttdeci">static final Pattern DATES</div><div class="ttdoc">Millésimes et siècles : « en 1789 », « au XIIe siècle ».</div><div class="ttdef"><b>Definition</b> <a href="VerificationDescription_8java_source.html#l00025">VerificationDescription.java:25</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1VerificationDescription_html_a5f1378a2c0b97c99f8e7a4915ae46a0b"><div class="ttname"><a href="classediteurpanovisu_1_1VerificationDescription.html#a5f1378a2c0b97c99f8e7a4915ae46a0b">editeurpanovisu.VerificationDescription.DOUTE</a></div><div class="ttdeci">static final Pattern DOUTE</div><div class="ttdoc">Marques de doute : la consigne demande d'omettre plutôt que de nuancer.</div><div class="ttdef"><b>Definition</b> <a href="VerificationDescription_8java_source.html#l00049">VerificationDescription.java:49</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1VerificationDescription_html_a68560d700189175129ff2823deef1bd9"><div class="ttname"><a href="classediteurpanovisu_1_1VerificationDescription.html#a68560d700189175129ff2823deef1bd9">editeurpanovisu.VerificationDescription.verifie</a></div><div class="ttdeci">static List&lt; Signalement &gt; verifie(String description, String contexte)</div><div class="ttdoc">Analyse une description générée et renvoie les énoncés à relire.</div><div class="ttdef"><b>Definition</b> <a href="VerificationDescription_8java_source.html#l00080">VerificationDescription.java:80</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1VerificationDescription_html_a75819d7c96e76ce6650043d848d91c4d"><div class="ttname"><a href="classediteurpanovisu_1_1VerificationDescription.html#a75819d7c96e76ce6650043d848d91c4d">editeurpanovisu.VerificationDescription.Signalement</a></div><div class="ttdeci">record Signalement(String categorie, String extrait)</div><div class="ttdoc">Un énoncé signalé dans une description.</div><div class="ttdef"><b>Definition</b> <a href="VerificationDescription_8java_source.html#l00062">VerificationDescription.java:62</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1VerificationDescription_html_a9df326f11d795a6196572329f02d3eb6"><div class="ttname"><a href="classediteurpanovisu_1_1VerificationDescription.html#a9df326f11d795a6196572329f02d3eb6">editeurpanovisu.VerificationDescription.cherche</a></div><div class="ttdeci">static void cherche(List&lt; Signalement &gt; signalements, String description, String reference, Pattern motif, String categorie)</div><div class="ttdoc">Applique un motif et retient les correspondances absentes du contexte.</div><div class="ttdef"><b>Definition</b> <a href="VerificationDescription_8java_source.html#l00104">VerificationDescription.java:104</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1VerificationDescription_html_adadc052b92bd6f9d15d5a4297ad450cf"><div class="ttname"><a href="classediteurpanovisu_1_1VerificationDescription.html#adadc052b92bd6f9d15d5a4297ad450cf">editeurpanovisu.VerificationDescription.VerificationDescription</a></div><div class="ttdeci">VerificationDescription()</div><div class="ttdef"><b>Definition</b> <a href="VerificationDescription_8java_source.html#l00053">VerificationDescription.java:53</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1VerificationDescription_html_adc1dfd98b55da859eeb123daef16d9a9"><div class="ttname"><a href="classediteurpanovisu_1_1VerificationDescription.html#adc1dfd98b55da859eeb123daef16d9a9">editeurpanovisu.VerificationDescription.DISTINCTIONS</a></div><div class="ttdeci">static final Pattern DISTINCTIONS</div><div class="ttdoc">Distinctions et protections, qu'un modèle attribue volontiers à tort.</div><div class="ttdef"><b>Definition</b> <a href="VerificationDescription_8java_source.html#l00036">VerificationDescription.java:36</a></div></div>
+<div class="ttc" id="aclassediteurpanovisu_1_1VerificationDescription_html_affb1ef60c1dc9734e72201b1e9b112ad"><div class="ttname"><a href="classediteurpanovisu_1_1VerificationDescription.html#affb1ef60c1dc9734e72201b1e9b112ad">editeurpanovisu.VerificationDescription.verifieEtTrace</a></div><div class="ttdeci">static List&lt; Signalement &gt; verifieEtTrace(String description, String contexte)</div><div class="ttdoc">Écrit les signalements sur la sortie standard, pour la trace de génération.</div><div class="ttdef"><b>Definition</b> <a href="VerificationDescription_8java_source.html#l00122">VerificationDescription.java:122</a></div></div>
+<div class="ttc" id="aleaflet_8js_html_a1cabf6ae48cc55b616700aecc4371993"><div class="ttname"><a href="leaflet_8js.html#a1cabf6ae48cc55b616700aecc4371993">m</a></div><div class="ttdeci">function m(t, e, i)</div><div class="ttdef"><b>Definition</b> <a href="leaflet_8js_source.html#l00005">leaflet.js:5</a></div></div>
+<div class="ttc" id="aleaflet_8js_html_a2ecc0b03b1eaf4f1ca537029a6f89ac0"><div class="ttname"><a href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">k</a></div><div class="ttdeci">function k(t, e, i, n)</div><div class="ttdef"><b>Definition</b> <a href="leaflet_8js_source.html#l00005">leaflet.js:5</a></div></div>
+<div class="ttc" id="aleaflet_8js_html_af1ca895898688e63b5f816c8255fb77d"><div class="ttname"><a href="leaflet_8js.html#af1ca895898688e63b5f816c8255fb77d">s</a></div><div class="ttdeci">function s(t, e)</div><div class="ttdef"><b>Definition</b> <a href="leaflet_8js_source.html#l00005">leaflet.js:5</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_184160a943439c2c782fe244782aeddc.html">editeurpanovisu</a></li><li class="navelem"><a class="el" href="VerificationDescription_8java.html">VerificationDescription.java</a></li>
+    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -73,6 +73,7 @@ var annotated_dup =
       [ "ThemeManager", "classediteurpanovisu_1_1ThemeManager.html", "classediteurpanovisu_1_1ThemeManager" ],
       [ "TransformationsPanoramique", "classediteurpanovisu_1_1TransformationsPanoramique.html", "classediteurpanovisu_1_1TransformationsPanoramique" ],
       [ "TransformationsPanoramiqueGPU", "classediteurpanovisu_1_1TransformationsPanoramiqueGPU.html", "classediteurpanovisu_1_1TransformationsPanoramiqueGPU" ],
+      [ "VerificationDescription", "classediteurpanovisu_1_1VerificationDescription.html", "classediteurpanovisu_1_1VerificationDescription" ],
       [ "VisualiseurImagesPanoramiques", "classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html", "classediteurpanovisu_1_1VisualiseurImagesPanoramiques" ],
       [ "ZoneTelecommande", "classediteurpanovisu_1_1ZoneTelecommande.html", "classediteurpanovisu_1_1ZoneTelecommande" ]
     ] ]

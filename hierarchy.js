@@ -107,6 +107,7 @@ var hierarchy =
     [ "editeurpanovisu.ThemeManager.ThemeProvider", "enumediteurpanovisu_1_1ThemeManager_1_1ThemeProvider.html", null ],
     [ "editeurpanovisu.TransformationsPanoramique", "classediteurpanovisu_1_1TransformationsPanoramique.html", null ],
     [ "editeurpanovisu.TransformationsPanoramiqueGPU", "classediteurpanovisu_1_1TransformationsPanoramiqueGPU.html", null ],
+    [ "editeurpanovisu.VerificationDescription", "classediteurpanovisu_1_1VerificationDescription.html", null ],
     [ "editeurpanovisu.VisualiseurImagesPanoramiques", "classediteurpanovisu_1_1VisualiseurImagesPanoramiques.html", null ],
     [ "editeurpanovisu.ZoneTelecommande", "classediteurpanovisu_1_1ZoneTelecommande.html", null ]
 ];

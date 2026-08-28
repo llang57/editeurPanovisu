@@ -1,0 +1,19 @@
+<map id="editeurpanovisu.VerificationDescription.verifieEtTrace" name="editeurpanovisu.VerificationDescription.verifieEtTrace">
+<area shape="rect" id="Node000001" title="Écrit les signalements sur la sortie standard, pour la trace de génération." alt="" coords="5,54,209,94"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="1013,36,1052,61"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="152,51,201,32,257,18,382,7,572,3,782,8,880,15,966,26,1001,34,1000,40,965,31,879,21,782,14,572,8,383,12,258,23,203,37,153,56"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#af1ca895898688e63b5f816c8255fb77d" title=" " alt="" coords="340,32,379,57"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="209,59,326,45,327,51,210,64"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1VerificationDescription.html#a75819d7c96e76ce6650043d848d91c4d" title="Un énoncé signalé dans une description." alt="" coords="761,162,965,202"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="150,92,201,113,258,131,388,155,519,170,643,178,748,180,748,186,643,183,519,175,387,160,257,136,199,118,148,96"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1VerificationDescription.html#a68560d700189175129ff2823deef1bd9" title="Analyse une description générée et renvoie les énoncés à relire." alt="" coords="257,82,461,122"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="210,82,244,86,243,91,209,88"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="944,159,964,148,981,131,996,112,1018,73,1023,75,1001,115,985,135,967,152,947,164"/>
+<area shape="poly" id="edge10_Node000005_Node000002" title=" " alt="" coords="444,79,509,67,652,52,793,45,1000,45,1000,50,793,50,652,57,510,72,445,84"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1VerificationDescription.html#a9df326f11d795a6196572329f02d3eb6" title="Applique un motif et retient les correspondances absentes du contexte." alt="" coords="509,82,713,122"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="461,99,496,99,496,104,461,104"/>
+<area shape="poly" id="edge7_Node000006_Node000002" title=" " alt="" coords="713,86,999,50,1000,55,714,91"/>
+<area shape="poly" id="edge9_Node000006_Node000004" title=" " alt="" coords="675,119,762,147,787,155,785,160,761,152,674,124"/>
+<area shape="rect" id="Node000007" href="$leaflet_8js.html#a1cabf6ae48cc55b616700aecc4371993" title=" " alt="" coords="844,112,883,137"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="714,108,831,119,830,124,713,113"/>
+</map>

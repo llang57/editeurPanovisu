@@ -50,6 +50,9 @@ var classediteurpanovisu_1_1OllamaService =
     [ "OPENROUTER_URL", "classediteurpanovisu_1_1OllamaService.html#a27fa36e8078f6553fa9cac28472a2c04", null ],
     [ "openrouterModel", "classediteurpanovisu_1_1OllamaService.html#a6605ea3bb5757b79f55177c781c108cd", null ],
     [ "TAGS_ENDPOINT", "classediteurpanovisu_1_1OllamaService.html#aabea0822bc8d2acf2d7471f5aa0074bc", null ],
+    [ "TEMPERATURE", "classediteurpanovisu_1_1OllamaService.html#add00e852a7045780cd1a77a14d695e1d", null ],
     [ "TIMEOUT_MS", "classediteurpanovisu_1_1OllamaService.html#a8f7c4bbacd1a8bffd3871b91d371cb8e", null ],
+    [ "TOP_K", "classediteurpanovisu_1_1OllamaService.html#acc129b0bc722255827461d782e928b31", null ],
+    [ "TOP_P", "classediteurpanovisu_1_1OllamaService.html#a255a3aad6840b0ee2d77a1bc8e508ff0", null ],
     [ "useHuggingFace", "classediteurpanovisu_1_1OllamaService.html#a7bece4a4ec3ae1fd12e69d980261037c", null ]
 ];
