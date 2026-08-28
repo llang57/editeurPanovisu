@@ -413,7 +413,12 @@ public class OllamaService {
      * @return Tableau des modèles OpenRouter disponibles
      */
     public static String[] getModelesOpenRouterDisponibles() {
-        if (configManager.getOpenRouterConfig() != null && configManager.getOpenRouterConfig().getModels() != null) {
+        // tester aussi la vacuité : une configuration de repli porte une liste vide mais non
+        // nulle, ce qui rendait la constante OPENROUTER_MODELS inatteignable précisément
+        // dans le cas qu'elle devait couvrir — l'utilisateur se retrouvait sans aucun modèle
+        if (configManager.getOpenRouterConfig() != null
+                && configManager.getOpenRouterConfig().getModels() != null
+                && !configManager.getOpenRouterConfig().getModels().isEmpty()) {
             return configManager.getOpenRouterConfig().getEnabledModels().stream()
                 .map(editeurpanovisu.config.ModelConfig.ModelEntry::getId)
                 .toArray(String[]::new);

@@ -488,65 +488,13 @@ public class ConfigDialogController {
             }
         }
         
-        // Modèles OpenRouter - Nov 2025 (avec prix et qualité)
-        if (modelName.equals("google/gemini-2.0-flash-exp:free") || modelName.equals("google/gemini-2.0-flash-exp")) {
-            return "[GRATUIT] Gemini 2.0 Flash ★★★★";
-        } else if (modelName.equals("google/gemini-2.5-flash")) {
-            return "[0.07€] Gemini 2.5 Flash ★★★★";
-        } else if (modelName.equals("anthropic/claude-3.5-sonnet")) {
-            return "[8.30€] Claude 3.5 Sonnet ★★★★★";
-        } else if (modelName.equals("openai/gpt-4o")) {
-            return "[5.75€] GPT-4o ★★★★★";
-        } else if (modelName.equals("openai/gpt-4o-mini")) {
-            return "[0.35€] GPT-4o Mini ★★★★";
-        } else if (modelName.equals("anthropic/claude-3-haiku")) {
-            return "[0.69€] Claude 3 Haiku ★★★";
-        } else if (modelName.equals("google/gemini-2.5-pro")) {
-            return "[2.88€] Gemini 2.5 Pro ★★★★★";
-        } else if (modelName.equals("mistralai/mistral-nemo")) {
-            return "[0.14€] Mistral Nemo ★★★★";
-        } else if (modelName.equals("anthropic/claude-3-opus")) {
-            return "[41.40€] Claude 3 Opus ★★★★★";
-        } else if (modelName.equals("openai/gpt-4-turbo")) {
-            return "[18.40€] GPT-4 Turbo ★★★★★";
-        }
-        // Anciens modèles (compatibilité)
-        else if (modelName.equals("anthropic/claude-sonnet-4.5")) {
-            return "[8.30€] Claude Sonnet 4.5 ★★★★★";
-        } else if (modelName.equals("anthropic/claude-3.5-sonnet:20241022")) {
-            return "[8.30€] Claude 3.5 Sonnet Oct ★★★★★";
-        } else if (modelName.equals("google/gemini-pro")) {
-            return "[GRATUIT] Gemini Pro ★★★★";
-        } else if (modelName.equals("meta-llama/llama-3.1-8b-instruct")) {
-            return "[GRATUIT] Llama 3.1 8B ★★★";
-        } else if (modelName.equals("deepcogito/cogito-v2-preview-deepseek-671b")) {
-            return "Cogito v2 (671B) ★★★★";
-        } else if (modelName.equals("openai/gpt-oss-120b")) {
-            return "[0.04€] GPT-OSS-120B ★★★";
-        } 
-        // Modèles Ollama locaux (avec taille et qualité)
-        else if (modelName.contains("mistral-nemo")) {
-            return "[7GB] Mistral Nemo - Créatif & précis ★★★★★";
-        } else if (modelName.contains("deepseek-r1")) {
-            return "[5.2GB] DeepSeek-R1 - Raisonnement ★★★★";
-        } else if (modelName.contains("qwen2.5")) {
-            return "[4.7GB] Qwen 2.5 - Excellent faits ★★★★★";
-        } else if (modelName.contains("llama3.1")) {
-            return "[4.9GB] Llama 3.1 - Très fiable ★★★★★";
-        } else if (modelName.contains("gemma2")) {
-            return "[5.4GB] Gemma 2 - Google ★★★★";
-        } else if (modelName.contains("phi3")) {
-            return "[2.2GB] Phi 3 - Compact MS ★★★★";
-        } else if (modelName.contains("llama3.2")) {
-            return "[2GB] Llama 3.2 - Léger ★★★";
-        } else if (modelName.contains("mistral") && !modelName.contains("nemo")) {
-            return "[4.4GB] Mistral - Classique ★★★★";
-        } else if (modelName.contains("codellama")) {
-            return "[3.8GB] CodeLlama - Code ★★★";
-        }
-        
-        // Par défaut : retourner le nom tel quel
-        return modelName;
+        // Modèle absent du catalogue : ne rien inventer. Prix, taille et qualité étaient
+        // auparavant codés en dur ici, constituant une seconde source de vérité qui a dérivé
+        // du catalogue (identifiants disparus du fournisseur, prix faux d'un facteur 4).
+        // Le catalogue configPV/*-models.json fait désormais foi.
+        int separateur = modelName.lastIndexOf('/');
+        String libelle = separateur >= 0 ? modelName.substring(separateur + 1) : modelName;
+        return libelle + " (hors catalogue)";
     }
     
     /**

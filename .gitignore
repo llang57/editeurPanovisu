@@ -228,7 +228,11 @@ temp/
 forum/
 
 # Configuration utilisateur (contient potentiellement des clés API)
-configPV/
+configPV/*
+# ... sauf les catalogues de modèles IA : ils sont livrés avec l'application,
+# embarqués dans le JAR et recopiés dans configPV/ au premier lancement.
+!configPV/ollama-models.json
+!configPV/openrouter-models.json
 
 # Fichiers de configuration avec clés API (ne pas versionner)
 api-keys.properties

@@ -11,6 +11,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.time.Instant;
 import java.util.*;
+import java.util.function.Supplier;
 
 /**
  * Gestionnaire de configuration des modèles IA
@@ -32,31 +33,106 @@ public class ModelConfigManager {
      * Charge la configuration OpenRouter depuis le fichier JSON
      */
     public ModelConfig loadOpenRouterConfig() {
-        try {
-            String json = Files.readString(Path.of(OPENROUTER_CONFIG), StandardCharsets.UTF_8);
-            openRouterConfig = gson.fromJson(json, ModelConfig.class);
-            System.out.println("[Config] ✓ Configuration OpenRouter chargée: " + 
-                             openRouterConfig.getModels().size() + " modèles");
-            return openRouterConfig;
-        } catch (IOException e) {
-            System.err.println("[Config] ✗ Erreur chargement OpenRouter config: " + e.getMessage());
-            return createDefaultOpenRouterConfig();
-        }
+        openRouterConfig = chargeCatalogue(OPENROUTER_CONFIG, "OpenRouter", this::createDefaultOpenRouterConfig);
+        return openRouterConfig;
     }
-    
+
     /**
      * Charge la configuration Ollama depuis le fichier JSON
      */
     public ModelConfig loadOllamaConfig() {
+        ollamaConfig = chargeCatalogue(OLLAMA_CONFIG, "Ollama", this::createDefaultOllamaConfig);
+        return ollamaConfig;
+    }
+
+    /**
+     * Charge un catalogue de modèles, en trois temps.
+     *
+     * <p>D'abord le fichier de {@code configPV/}, que l'utilisateur peut modifier. S'il est
+     * absent ou vide, le catalogue <b>embarqué dans le JAR</b> prend le relais, puis est
+     * recopié dans {@code configPV/} pour rester modifiable.</p>
+     *
+     * <p>Ce repli est indispensable : le répertoire {@code configPV} est exclu de
+     * l'installeur (il peut contenir des clés) et n'existe donc pas au premier lancement.
+     * Sans lui, la liste de modèles était vide chez tout utilisateur installé.</p>
+     *
+     * @param chemin  Chemin relatif du catalogue, aussi utilisé comme nom de ressource
+     * @param libelle Nom du fournisseur, pour les messages
+     * @param repli   Configuration minimale si même la ressource embarquée manque
+     * @return Une configuration jamais nulle
+     */
+    private ModelConfig chargeCatalogue(String chemin, String libelle, Supplier<ModelConfig> repli) {
         try {
-            String json = Files.readString(Path.of(OLLAMA_CONFIG), StandardCharsets.UTF_8);
-            ollamaConfig = gson.fromJson(json, ModelConfig.class);
-            System.out.println("[Config] ✓ Configuration Ollama chargée: " + 
-                             ollamaConfig.getModels().size() + " modèles");
-            return ollamaConfig;
+            String json = Files.readString(Path.of(chemin), StandardCharsets.UTF_8);
+            ModelConfig config = gson.fromJson(json, ModelConfig.class);
+            if (config != null && config.getModels() != null && !config.getModels().isEmpty()) {
+                System.out.println("[Config] ✓ Catalogue " + libelle + " chargé depuis " + chemin
+                                 + " : " + config.getModels().size() + " modèles");
+                return config;
+            }
+            System.err.println("[Config] ⚠ Catalogue " + libelle + " présent mais vide : "
+                             + "utilisation du catalogue embarqué");
+        } catch (IOException absent) {
+            System.out.println("[Config] " + chemin + " absent : lecture du catalogue embarqué");
+        }
+
+        ModelConfig embarque = chargeDepuisClasspath(chemin, libelle);
+        if (embarque != null) {
+            amorceCatalogue(chemin, embarque);
+            return embarque;
+        }
+        System.err.println("[Config] ✗ Aucun catalogue " + libelle + " disponible");
+        return repli.get();
+    }
+
+    /**
+     * Lit un catalogue depuis les ressources du JAR.
+     *
+     * @param chemin  Chemin relatif, transformé en nom de ressource absolu
+     * @param libelle Nom du fournisseur, pour les messages
+     * @return La configuration lue, ou {@code null} si la ressource est absente ou illisible
+     */
+    private ModelConfig chargeDepuisClasspath(String chemin, String libelle) {
+        try (InputStream is = ModelConfigManager.class.getResourceAsStream("/" + chemin)) {
+            if (is == null) {
+                return null;
+            }
+            String json = new String(is.readAllBytes(), StandardCharsets.UTF_8);
+            ModelConfig config = gson.fromJson(json, ModelConfig.class);
+            if (config == null || config.getModels() == null || config.getModels().isEmpty()) {
+                return null;
+            }
+            System.out.println("[Config] ✓ Catalogue " + libelle + " embarqué chargé : "
+                             + config.getModels().size() + " modèles");
+            return config;
         } catch (IOException e) {
-            System.err.println("[Config] ✗ Erreur chargement Ollama config: " + e.getMessage());
-            return createDefaultOllamaConfig();
+            System.err.println("[Config] ✗ Lecture du catalogue embarqué " + libelle
+                             + " impossible : " + e.getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * Recopie le catalogue embarqué dans {@code configPV/} pour le rendre modifiable.
+     *
+     * <p>Sans effet si le fichier existe déjà. Un échec n'est pas bloquant : l'application
+     * fonctionne avec le catalogue embarqué, seule la personnalisation est perdue.</p>
+     *
+     * @param chemin Chemin relatif du fichier à créer
+     * @param config Configuration à écrire
+     */
+    private void amorceCatalogue(String chemin, ModelConfig config) {
+        try {
+            Path cible = Path.of(chemin);
+            if (Files.notExists(cible)) {
+                if (cible.getParent() != null) {
+                    Files.createDirectories(cible.getParent());
+                }
+                Files.writeString(cible, gson.toJson(config), StandardCharsets.UTF_8);
+                System.out.println("[Config] ✓ " + chemin + " créé depuis le catalogue embarqué");
+            }
+        } catch (IOException e) {
+            System.err.println("[Config] ⚠ Impossible de créer " + chemin + " : " + e.getMessage());
         }
     }
     

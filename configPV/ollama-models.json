@@ -1,0 +1,98 @@
+{
+  "verifyAtStartup": true,
+  "cacheDurationSeconds": 3600,
+  "serverUrl": "http://localhost:11434",
+  "timeoutSeconds": 30,
+  "models": [
+    {
+      "id": "gemma4:26b",
+      "displayName": "Gemma 4 (26B)",
+      "description": "Qualite superieure, multilingue et redaction soignee",
+      "price": 0.0,
+      "size": "18.0GB",
+      "quality": 5,
+      "priority": 1,
+      "enabled": true
+    },
+    {
+      "id": "qwen2.5:32b",
+      "displayName": "Qwen 2.5 (32B)",
+      "description": "Qualite superieure, meilleur raisonnement",
+      "price": 0.0,
+      "size": "19.9GB",
+      "quality": 5,
+      "priority": 2,
+      "enabled": true
+    },
+    {
+      "id": "gemma4:latest",
+      "displayName": "Gemma 4",
+      "description": "Excellent compromis qualite/taille",
+      "price": 0.0,
+      "size": "9.6GB",
+      "quality": 5,
+      "priority": 3,
+      "enabled": true
+    },
+    {
+      "id": "qwen2.5:14b",
+      "displayName": "Qwen 2.5 (14B)",
+      "description": "Excellence multilingue, descriptions detaillees",
+      "price": 0.0,
+      "size": "9.0GB",
+      "quality": 5,
+      "priority": 4,
+      "enabled": true
+    },
+    {
+      "id": "mistral-nemo:latest",
+      "displayName": "Mistral Nemo",
+      "description": "Precis pour les descriptions geographiques",
+      "price": 0.0,
+      "size": "7.1GB",
+      "quality": 4,
+      "priority": 5,
+      "enabled": true
+    },
+    {
+      "id": "gemma2:latest",
+      "displayName": "Gemma 2",
+      "description": "Modele Google performant",
+      "price": 0.0,
+      "size": "5.4GB",
+      "quality": 4,
+      "priority": 6,
+      "enabled": true
+    },
+    {
+      "id": "llama3.1:latest",
+      "displayName": "Llama 3.1",
+      "description": "Meta AI, fiable",
+      "price": 0.0,
+      "size": "4.9GB",
+      "quality": 4,
+      "priority": 7,
+      "enabled": true
+    },
+    {
+      "id": "qwen2.5:latest",
+      "displayName": "Qwen 2.5",
+      "description": "Multilingue performant",
+      "price": 0.0,
+      "size": "4.7GB",
+      "quality": 4,
+      "priority": 8,
+      "enabled": true
+    },
+    {
+      "id": "phi3:latest",
+      "displayName": "Phi-3",
+      "description": "Compact et efficace",
+      "price": 0.0,
+      "size": "2.2GB",
+      "quality": 3,
+      "priority": 9,
+      "enabled": true
+    }
+  ]
+}

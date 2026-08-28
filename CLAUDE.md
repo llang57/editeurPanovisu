@@ -160,9 +160,25 @@ The result is then either copied to a chosen directory or zipped.
 ### AI Integration
 
 `OllamaService.java` (~72 KB, static API, talks to `http://localhost:11434`) generates panorama
-descriptions, with `HuggingFaceClient` / `OpenRouterClient` as remote fallbacks. `config/ModelConfig` +
-`ModelConfigManager` persist model choices as JSON in `configPV/ollama-models.json` and
-`configPV/openrouter-models.json`.
+descriptions, with `HuggingFaceClient` / `OpenRouterClient` as remote fallbacks.
+
+**The model catalogues are the single source of truth** — `configPV/ollama-models.json` and
+`configPV/openrouter-models.json` carry every id, price, size and quality rating. Do not reintroduce
+hardcoded model lists in the UI: `ConfigDialogController` used to hold a parallel `if/else` chain that
+silently drifted (ids removed by the provider, prices off by 4×).
+
+`ModelConfigManager` loads a catalogue in three steps: the file in `configPV/` (user-editable), else
+the **copy embedded in the JAR** at `/configPV/*.json`, which it then writes back into `configPV/` to
+stay editable. That fallback is required — `installer.iss` excludes `configPV` (it may hold API keys),
+so the directory does not exist on a fresh install. `.gitignore` ignores `configPV/*` but explicitly
+re-includes the two catalogues, so they ship in the JAR.
+
+When refreshing models, verify ids and prices against the live catalogue rather than from memory:
+
+```bash
+curl -s https://openrouter.ai/api/v1/models   # 380+ entries, ids + pricing per million tokens
+curl -s http://localhost:11434/api/tags       # models actually installed locally
+```
 
 ### Theming
 
