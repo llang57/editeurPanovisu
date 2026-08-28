@@ -1,13 +1,18 @@
 <map id="editeurpanovisu.VerificationDescription.verifie" name="editeurpanovisu.VerificationDescription.verifie">
-<area shape="rect" id="Node000001" title="Analyse une description générée et renvoie les énoncés à relire." alt="" coords="5,119,209,159"/>
-<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1VerificationDescription.html#a9df326f11d795a6196572329f02d3eb6" title="Applique un motif et retient les correspondances absentes du contexte." alt="" coords="257,61,461,101"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="195,116,257,102,258,107,196,121"/>
-<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="761,97,800,122"/>
-<area shape="poly" id="edge6_Node000001_Node000003" title=" " alt="" coords="210,150,315,160,442,165,578,159,646,151,713,139,748,125,750,130,714,144,647,156,579,164,442,170,315,165,209,156"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="399,59,462,33,542,10,586,4,630,3,673,10,715,24,732,36,747,50,769,82,765,85,743,54,729,40,712,29,672,15,629,9,586,10,543,16,463,38,401,63"/>
-<area shape="rect" id="Node000004" href="$leaflet_8js.html#a1cabf6ae48cc55b616700aecc4371993" title=" " alt="" coords="592,39,631,65"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="461,67,578,53,579,58,462,72"/>
-<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1VerificationDescription.html#a75819d7c96e76ce6650043d848d91c4d" title="Un énoncé signalé dans une description." alt="" coords="509,89,713,129"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="462,90,496,94,495,99,461,95"/>
-<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="713,107,748,107,748,112,713,112"/>
+<area shape="rect" id="Node000001" title="Analyse une description générée et renvoie les énoncés à relire." alt="" coords="5,64,209,104"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1VerificationDescription.html#a9df326f11d795a6196572329f02d3eb6" title="Applique un motif et retient les correspondances absentes du contexte." alt="" coords="275,128,479,168"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="193,101,279,122,278,127,192,107"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="796,82,835,107"/>
+<area shape="poly" id="edge10_Node000001_Node000003" title=" " alt="" coords="189,61,257,49,396,26,506,7,559,3,615,6,677,17,749,39,774,52,795,70,792,74,771,57,747,44,676,22,615,11,559,8,507,12,397,31,258,55,190,67"/>
+<area shape="rect" id="Node000006" href="$classediteurpanovisu_1_1VerificationDescription.html#a1c7be522e06315f6b6208e42d0c61f62" title="Signale les noms propres absents du contexte fourni au modèle." alt="" coords="257,64,496,104"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="209,81,244,81,244,87,209,87"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="429,165,495,186,577,200,620,203,664,201,707,193,747,178,764,166,779,151,800,118,805,121,783,154,767,170,749,182,708,198,665,206,620,208,576,206,494,191,428,171"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#a1cabf6ae48cc55b616700aecc4371993" title=" " alt="" coords="627,78,665,103"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="471,125,612,95,614,100,472,131"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1VerificationDescription.html#a75819d7c96e76ce6650043d848d91c4d" title="Un énoncé signalé dans une description." alt="" coords="544,128,748,168"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="479,145,530,145,530,151,479,151"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="710,125,747,113,782,102,783,107,749,118,712,130"/>
+<area shape="poly" id="edge7_Node000006_Node000003" title=" " alt="" coords="494,61,617,53,684,55,749,64,784,76,782,81,747,69,683,60,617,58,495,67"/>
+<area shape="poly" id="edge8_Node000006_Node000004" title=" " alt="" coords="496,84,613,87,613,92,496,90"/>
+<area shape="poly" id="edge9_Node000006_Node000005" title=" " alt="" coords="462,101,549,122,547,127,461,107"/>
 </map>

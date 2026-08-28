@@ -1,0 +1,10 @@
+<map id="editeurpanovisu.VerificationDescription.chercheNomsPropres" name="editeurpanovisu.VerificationDescription.chercheNomsPropres">
+<area shape="rect" id="Node000001" title="Signale les noms propres absents du contexte fourni au modèle." alt="" coords="5,22,244,62"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="544,33,583,58"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="216,19,279,10,349,4,424,4,497,14,532,26,530,31,495,19,423,9,350,9,279,15,217,24"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a1cabf6ae48cc55b616700aecc4371993" title=" " alt="" coords="375,29,413,54"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="244,39,361,39,361,44,244,44"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1VerificationDescription.html#a75819d7c96e76ce6650043d848d91c4d" title="Un énoncé signalé dans une description." alt="" coords="292,79,496,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="220,59,286,73,285,79,219,64"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="457,76,530,53,532,58,459,81"/>
+</map>

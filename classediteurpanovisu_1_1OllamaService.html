@@ -223,6 +223,12 @@ Attributs privés statiques</h2></td></tr>
 <tr class="memitem:acc129b0bc722255827461d782e928b31" id="r_acc129b0bc722255827461d782e928b31"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">static</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">final</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1OllamaService.html#acc129b0bc722255827461d782e928b31">TOP_K</a> = 20</td></tr>
 <tr class="memdesc:acc129b0bc722255827461d782e928b31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nombre de candidats retenus à chaque étape ; 40 par défaut chez Ollama.  <br /></td></tr>
 <tr class="separator:acc129b0bc722255827461d782e928b31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cc771f8afaca0d97f8498d9e00f0f8f" id="r_a6cc771f8afaca0d97f8498d9e00f0f8f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">static</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">final</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1OllamaService.html#a6cc771f8afaca0d97f8498d9e00f0f8f">NUM_CTX</a> = 8192</td></tr>
+<tr class="memdesc:a6cc771f8afaca0d97f8498d9e00f0f8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Longueur de contexte imposée à Ollama, en jetons.  <br /></td></tr>
+<tr class="separator:a6cc771f8afaca0d97f8498d9e00f0f8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebb77bc3ea466d87bac11f8748f51c74" id="r_aebb77bc3ea466d87bac11f8748f51c74"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">static</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">final</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1OllamaService.html#aebb77bc3ea466d87bac11f8748f51c74">NUM_PREDICT</a> = 400</td></tr>
+<tr class="memdesc:aebb77bc3ea466d87bac11f8748f51c74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Longueur maximale de la réponse : une description fait 4 à 5 phrases.  <br /></td></tr>
+<tr class="separator:aebb77bc3ea466d87bac11f8748f51c74"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3466dc420db65971b3191b424d3649d7" id="r_a3466dc420db65971b3191b424d3649d7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">static</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">final</a> <a class="el" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1OllamaService.html#a3466dc420db65971b3191b424d3649d7">GENERATE_ENDPOINT</a> = &quot;/api/<a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">generate&quot;</a></td></tr>
 <tr class="separator:a3466dc420db65971b3191b424d3649d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aabea0822bc8d2acf2d7471f5aa0074bc" id="r_aabea0822bc8d2acf2d7471f5aa0074bc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">static</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">final</a> <a class="el" href="OpenLayers_8js.html#a4ca754488880c6622cdd0e257fe5f5ea">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classediteurpanovisu_1_1OllamaService.html#aabea0822bc8d2acf2d7471f5aa0074bc">TAGS_ENDPOINT</a> = &quot;/api/<a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">tags&quot;</a></td></tr>
@@ -313,11 +319,11 @@ Attributs privés statiques</h2></td></tr>
 
 <p>Appelle l'API Hugging Face pour générer le texte. </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l01345">1345</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l01363">1363</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Références <a class="el" href="OllamaService_8java_source.html#l01345">editeurpanovisu.OllamaService.appellerHuggingFace()</a>, <a class="el" href="OllamaService_8java_source.html#l00088">editeurpanovisu.OllamaService.currentModelIndex</a>, <a class="el" href="OllamaService_8java_source.html#l01467">editeurpanovisu.OllamaService.extraireReponseHuggingFace()</a>, <a class="el" href="OllamaService_8java_source.html#l00080">editeurpanovisu.OllamaService.HUGGINGFACE_MODELS</a>, <a class="el" href="OllamaService_8java_source.html#l00091">editeurpanovisu.OllamaService.HUGGINGFACE_TOKEN</a>, <a class="el" href="OllamaService_8java_source.html#l00087">editeurpanovisu.OllamaService.HUGGINGFACE_URL</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="three_8min1_8js_source.html#l00135">Math</a>, <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>, et <a class="el" href="OllamaService_8java_source.html#l00093">editeurpanovisu.OllamaService.TIMEOUT_MS</a>.</p>
+<p class="reference">Références <a class="el" href="OllamaService_8java_source.html#l01363">editeurpanovisu.OllamaService.appellerHuggingFace()</a>, <a class="el" href="OllamaService_8java_source.html#l00104">editeurpanovisu.OllamaService.currentModelIndex</a>, <a class="el" href="OllamaService_8java_source.html#l01485">editeurpanovisu.OllamaService.extraireReponseHuggingFace()</a>, <a class="el" href="OllamaService_8java_source.html#l00096">editeurpanovisu.OllamaService.HUGGINGFACE_MODELS</a>, <a class="el" href="OllamaService_8java_source.html#l00107">editeurpanovisu.OllamaService.HUGGINGFACE_TOKEN</a>, <a class="el" href="OllamaService_8java_source.html#l00103">editeurpanovisu.OllamaService.HUGGINGFACE_URL</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="three_8min1_8js_source.html#l00135">Math</a>, <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>, et <a class="el" href="OllamaService_8java_source.html#l00109">editeurpanovisu.OllamaService.TIMEOUT_MS</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01345">editeurpanovisu.OllamaService.appellerHuggingFace()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01363">editeurpanovisu.OllamaService.appellerHuggingFace()</a>.</p>
 <div class="dynheader">
 Voici le graphe d'appel pour cette fonction :</div>
 <div class="dyncontent">
@@ -370,11 +376,11 @@ Voici le graphe des appelants de cette fonction :</div>
 
 <p>Appelle l'API appropriée (Ollama ou Hugging Face) pour générer le texte. </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l01092">1092</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l01108">1108</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Références <a class="el" href="OllamaService_8java_source.html#l01236">editeurpanovisu.OllamaService.appellerOllamaLocal()</a>, <a class="el" href="OllamaService_8java_source.html#l01148">editeurpanovisu.OllamaService.appellerOpenRouter()</a>, <a class="el" href="leaflet_8js_source.html#l00005">e</a>, <a class="el" href="OllamaService_8java_source.html#l00097">editeurpanovisu.OllamaService.forceOllama</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="OllamaService_8java_source.html#l00058">editeurpanovisu.OllamaService.OPENROUTER_TOKEN</a>, <a class="el" href="OllamaService_8java_source.html#l00076">editeurpanovisu.OllamaService.openrouterModel</a>, <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>, et <a class="el" href="OllamaService_8java_source.html#l00094">editeurpanovisu.OllamaService.useHuggingFace</a>.</p>
+<p class="reference">Références <a class="el" href="OllamaService_8java_source.html#l01252">editeurpanovisu.OllamaService.appellerOllamaLocal()</a>, <a class="el" href="OllamaService_8java_source.html#l01164">editeurpanovisu.OllamaService.appellerOpenRouter()</a>, <a class="el" href="leaflet_8js_source.html#l00005">e</a>, <a class="el" href="OllamaService_8java_source.html#l00113">editeurpanovisu.OllamaService.forceOllama</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="OllamaService_8java_source.html#l00074">editeurpanovisu.OllamaService.OPENROUTER_TOKEN</a>, <a class="el" href="OllamaService_8java_source.html#l00092">editeurpanovisu.OllamaService.openrouterModel</a>, <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>, et <a class="el" href="OllamaService_8java_source.html#l00110">editeurpanovisu.OllamaService.useHuggingFace</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l00852">editeurpanovisu.OllamaService.genererDescription()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l00868">editeurpanovisu.OllamaService.genererDescription()</a>.</p>
 <div class="dynheader">
 Voici le graphe d'appel pour cette fonction :</div>
 <div class="dyncontent">
@@ -438,11 +444,11 @@ Voici le graphe des appelants de cette fonction :</div>
 
 <p>Appelle l'API Ollama locale pour générer le texte. </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l01236">1236</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l01252">1252</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Références <a class="el" href="OllamaService_8java_source.html#l01440">editeurpanovisu.OllamaService.extraireReponse()</a>, <a class="el" href="OllamaService_8java_source.html#l00048">editeurpanovisu.OllamaService.GENERATE_ENDPOINT</a>, <a class="el" href="OllamaService_8java_source.html#l00387">editeurpanovisu.OllamaService.getModelesOllamaDisponibles()</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="OllamaService_8java_source.html#l00028">editeurpanovisu.OllamaService.OLLAMA_URL</a>, <a class="el" href="OllamaService_8java_source.html#l00050">editeurpanovisu.OllamaService.ollamaModel</a>, <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>, <a class="el" href="OllamaService_8java_source.html#l00041">editeurpanovisu.OllamaService.TEMPERATURE</a>, <a class="el" href="OllamaService_8java_source.html#l00093">editeurpanovisu.OllamaService.TIMEOUT_MS</a>, <a class="el" href="OllamaService_8java_source.html#l00047">editeurpanovisu.OllamaService.TOP_K</a>, et <a class="el" href="OllamaService_8java_source.html#l00044">editeurpanovisu.OllamaService.TOP_P</a>.</p>
+<p class="reference">Références <a class="el" href="OllamaService_8java_source.html#l01458">editeurpanovisu.OllamaService.extraireReponse()</a>, <a class="el" href="OllamaService_8java_source.html#l00064">editeurpanovisu.OllamaService.GENERATE_ENDPOINT</a>, <a class="el" href="OllamaService_8java_source.html#l00403">editeurpanovisu.OllamaService.getModelesOllamaDisponibles()</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="OllamaService_8java_source.html#l00060">editeurpanovisu.OllamaService.NUM_CTX</a>, <a class="el" href="OllamaService_8java_source.html#l00063">editeurpanovisu.OllamaService.NUM_PREDICT</a>, <a class="el" href="OllamaService_8java_source.html#l00028">editeurpanovisu.OllamaService.OLLAMA_URL</a>, <a class="el" href="OllamaService_8java_source.html#l00066">editeurpanovisu.OllamaService.ollamaModel</a>, <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>, <a class="el" href="OllamaService_8java_source.html#l00041">editeurpanovisu.OllamaService.TEMPERATURE</a>, <a class="el" href="OllamaService_8java_source.html#l00109">editeurpanovisu.OllamaService.TIMEOUT_MS</a>, <a class="el" href="OllamaService_8java_source.html#l00047">editeurpanovisu.OllamaService.TOP_K</a>, et <a class="el" href="OllamaService_8java_source.html#l00044">editeurpanovisu.OllamaService.TOP_P</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01092">editeurpanovisu.OllamaService.appellerOllama()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01108">editeurpanovisu.OllamaService.appellerOllama()</a>.</p>
 <div class="dynheader">
 Voici le graphe d'appel pour cette fonction :</div>
 <div class="dyncontent">
@@ -502,11 +508,11 @@ Voici le graphe des appelants de cette fonction :</div>
 
 <p>Appelle OpenRouter API (accès unifié à GPT-4, Claude, Gemini, etc.) Documentation: <a href="https://openrouter.ai/docs">https://openrouter.ai/docs</a>. </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l01148">1148</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l01164">1164</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Références <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="three_8min1_8js_source.html#l00135">Math</a>, <a class="el" href="OllamaService_8java_source.html#l00058">editeurpanovisu.OllamaService.OPENROUTER_TOKEN</a>, <a class="el" href="OllamaService_8java_source.html#l00057">editeurpanovisu.OllamaService.OPENROUTER_URL</a>, <a class="el" href="OllamaService_8java_source.html#l00076">editeurpanovisu.OllamaService.openrouterModel</a>, <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>, <a class="el" href="OllamaService_8java_source.html#l00041">editeurpanovisu.OllamaService.TEMPERATURE</a>, <a class="el" href="OllamaService_8java_source.html#l00093">editeurpanovisu.OllamaService.TIMEOUT_MS</a>, et <a class="el" href="OllamaService_8java_source.html#l00044">editeurpanovisu.OllamaService.TOP_P</a>.</p>
+<p class="reference">Références <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="three_8min1_8js_source.html#l00135">Math</a>, <a class="el" href="OllamaService_8java_source.html#l00074">editeurpanovisu.OllamaService.OPENROUTER_TOKEN</a>, <a class="el" href="OllamaService_8java_source.html#l00073">editeurpanovisu.OllamaService.OPENROUTER_URL</a>, <a class="el" href="OllamaService_8java_source.html#l00092">editeurpanovisu.OllamaService.openrouterModel</a>, <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>, <a class="el" href="OllamaService_8java_source.html#l00041">editeurpanovisu.OllamaService.TEMPERATURE</a>, <a class="el" href="OllamaService_8java_source.html#l00109">editeurpanovisu.OllamaService.TIMEOUT_MS</a>, et <a class="el" href="OllamaService_8java_source.html#l00044">editeurpanovisu.OllamaService.TOP_P</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01092">editeurpanovisu.OllamaService.appellerOllama()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01108">editeurpanovisu.OllamaService.appellerOllama()</a>.</p>
 <div class="dynheader">
 Voici le graphe d'appel pour cette fonction :</div>
 <div class="dyncontent">
@@ -559,9 +565,9 @@ Voici le graphe des appelants de cette fonction :</div>
 
 <p>Charge les configurations de modèles et vérifie leur disponibilité </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00172">172</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00188">188</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Références <a class="el" href="OllamaService_8java_source.html#l00100">editeurpanovisu.OllamaService.configManager</a>, <a class="el" href="leaflet_8js_source.html#l00005">e</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, et <a class="el" href="OllamaService_8java_source.html#l00058">editeurpanovisu.OllamaService.OPENROUTER_TOKEN</a>.</p>
+<p class="reference">Références <a class="el" href="OllamaService_8java_source.html#l00116">editeurpanovisu.OllamaService.configManager</a>, <a class="el" href="leaflet_8js_source.html#l00005">e</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, et <a class="el" href="OllamaService_8java_source.html#l00074">editeurpanovisu.OllamaService.OPENROUTER_TOKEN</a>.</p>
 <div class="dynheader">
 Voici le graphe d'appel pour cette fonction :</div>
 <div class="dyncontent">
@@ -600,9 +606,9 @@ Voici le graphe d'appel pour cette fonction :</div>
 
 <p>Charge les tokens API depuis le fichier api-keys.properties. </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00111">111</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00127">127</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Références <a class="el" href="leaflet_8js_source.html#l00005">e</a>, <a class="el" href="OllamaService_8java_source.html#l00091">editeurpanovisu.OllamaService.HUGGINGFACE_TOKEN</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="OllamaService_8java_source.html#l00054">editeurpanovisu.OllamaService.LOCATIONIQ_TOKEN</a>, <a class="el" href="OllamaService_8java_source.html#l00058">editeurpanovisu.OllamaService.OPENROUTER_TOKEN</a>, <a class="el" href="OllamaService_8java_source.html#l00076">editeurpanovisu.OllamaService.openrouterModel</a>, et <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>.</p>
+<p class="reference">Références <a class="el" href="leaflet_8js_source.html#l00005">e</a>, <a class="el" href="OllamaService_8java_source.html#l00107">editeurpanovisu.OllamaService.HUGGINGFACE_TOKEN</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="OllamaService_8java_source.html#l00070">editeurpanovisu.OllamaService.LOCATIONIQ_TOKEN</a>, <a class="el" href="OllamaService_8java_source.html#l00074">editeurpanovisu.OllamaService.OPENROUTER_TOKEN</a>, <a class="el" href="OllamaService_8java_source.html#l00092">editeurpanovisu.OllamaService.openrouterModel</a>, et <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>.</p>
 <div class="dynheader">
 Voici le graphe d'appel pour cette fonction :</div>
 <div class="dyncontent">
@@ -682,11 +688,11 @@ Voici le graphe d'appel pour cette fonction :</div>
 
 <p>Construit le prompt pour Ollama selon les données disponibles et la langue Utilise le géocodage inverse pour obtenir le lieu réel depuis les coordonnées GPS NOUVEAU : Intègre les descriptions précédentes pour éviter les redondances. </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00913">913</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00929">929</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
 <p class="reference">Références <a class="el" href="leaflet_8js_source.html#l00005">i()</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, et <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l00852">editeurpanovisu.OllamaService.genererDescription()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l00868">editeurpanovisu.OllamaService.genererDescription()</a>.</p>
 <div class="dynheader">
 Voici le graphe d'appel pour cette fonction :</div>
 <div class="dyncontent">
@@ -740,11 +746,11 @@ Voici le graphe des appelants de cette fonction :</div>
 
 <p>Détecte automatiquement le meilleur modèle Ollama installé Priorise les modèles les plus fiables pour éviter les hallucinations. </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00303">303</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00319">319</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Références <a class="el" href="leaflet_8js_source.html#l00005">e</a>, <a class="el" href="leaflet_8js_source.html#l00005">i()</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="OllamaService_8java_source.html#l00050">editeurpanovisu.OllamaService.ollamaModel</a>, et <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>.</p>
+<p class="reference">Références <a class="el" href="leaflet_8js_source.html#l00005">e</a>, <a class="el" href="leaflet_8js_source.html#l00005">i()</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="OllamaService_8java_source.html#l00066">editeurpanovisu.OllamaService.ollamaModel</a>, et <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l00214">editeurpanovisu.OllamaService.isOllamaAvailable()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l00230">editeurpanovisu.OllamaService.isOllamaAvailable()</a>.</p>
 <div class="dynheader">
 Voici le graphe d'appel pour cette fonction :</div>
 <div class="dyncontent">
@@ -808,11 +814,11 @@ Voici le graphe des appelants de cette fonction :</div>
 
 <p>Extrait un champ d'un JSON simple (sans bibliothèque) </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00817">817</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00833">833</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
 <p class="reference">Références <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, et <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l00609">editeurpanovisu.OllamaService.parserLocationIQ()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l00625">editeurpanovisu.OllamaService.parserLocationIQ()</a>.</p>
 <div class="dynheader">
 Voici le graphe d'appel pour cette fonction :</div>
 <div class="dyncontent">
@@ -864,11 +870,11 @@ Voici le graphe des appelants de cette fonction :</div>
 
 <p>Extrait la réponse du JSON retourné par Ollama. </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l01440">1440</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l01458">1458</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
 <p class="reference">Références <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, et <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01236">editeurpanovisu.OllamaService.appellerOllamaLocal()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01252">editeurpanovisu.OllamaService.appellerOllamaLocal()</a>.</p>
 <div class="dynheader">
 Voici le graphe d'appel pour cette fonction :</div>
 <div class="dyncontent">
@@ -924,11 +930,11 @@ Voici le graphe des appelants de cette fonction :</div>
 
 <p>Extrait la réponse du JSON retourné par Hugging Face. </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l01467">1467</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l01485">1485</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
 <p class="reference">Références <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, et <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01345">editeurpanovisu.OllamaService.appellerHuggingFace()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01363">editeurpanovisu.OllamaService.appellerHuggingFace()</a>.</p>
 <div class="dynheader">
 Voici le graphe d'appel pour cette fonction :</div>
 <div class="dyncontent">
@@ -1018,9 +1024,9 @@ Voici le graphe des appelants de cette fonction :</div>
 </dl>
 <dl class="section return"><dt>Renvoie</dt><dd>CompletableFuture avec la description générée </dd></dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00852">852</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00868">868</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Références <a class="el" href="OllamaService_8java_source.html#l01092">editeurpanovisu.OllamaService.appellerOllama()</a>, <a class="el" href="OllamaService_8java_source.html#l00913">editeurpanovisu.OllamaService.construirePrompt()</a>, <a class="el" href="OllamaService_8java_source.html#l00832">editeurpanovisu.OllamaService.descriptionsCache</a>, <a class="el" href="leaflet_8js_source.html#l00005">e</a>, <a class="el" href="OllamaService_8java_source.html#l00509">editeurpanovisu.OllamaService.getServiceName()</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>, et <a class="el" href="VerificationDescription_8java_source.html#l00122">editeurpanovisu.VerificationDescription.verifieEtTrace()</a>.</p>
+<p class="reference">Références <a class="el" href="OllamaService_8java_source.html#l01108">editeurpanovisu.OllamaService.appellerOllama()</a>, <a class="el" href="OllamaService_8java_source.html#l00929">editeurpanovisu.OllamaService.construirePrompt()</a>, <a class="el" href="OllamaService_8java_source.html#l00848">editeurpanovisu.OllamaService.descriptionsCache</a>, <a class="el" href="leaflet_8js_source.html#l00005">e</a>, <a class="el" href="OllamaService_8java_source.html#l00525">editeurpanovisu.OllamaService.getServiceName()</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>, et <a class="el" href="VerificationDescription_8java_source.html#l00169">editeurpanovisu.VerificationDescription.verifieEtTrace()</a>.</p>
 
 <p class="reference">Référencé par <a class="el" href="EditeurPanovisu_8java_source.html#l11248">editeurpanovisu.EditeurPanovisu.genererDescriptionIA()</a>.</p>
 <div class="dynheader">
@@ -1028,49 +1034,54 @@ Voici le graphe d'appel pour cette fonction :</div>
 <div class="dyncontent">
 <div class="center"><img src="classediteurpanovisu_1_1OllamaService_af1a118f057c3cffef9ce91c7a428304e_cgraph.png" border="0" usemap="#aclassediteurpanovisu_1_1OllamaService_af1a118f057c3cffef9ce91c7a428304e_cgraph" alt=""/></div>
 <map name="aclassediteurpanovisu_1_1OllamaService_af1a118f057c3cffef9ce91c7a428304e_cgraph" id="aclassediteurpanovisu_1_1OllamaService_af1a118f057c3cffef9ce91c7a428304e_cgraph">
-<area shape="rect" title="Génère une description géographique basée sur les informations disponibles IMPORTANT : Tient compte d..." alt="" coords="5,347,285,387"/>
-<area shape="rect" href="classediteurpanovisu_1_1OllamaService.html#a95326db045c9dc203b3283e491ac844a" title="Appelle l&#39;API appropriée (Ollama ou Hugging Face) pour générer le texte." alt="" coords="676,173,959,213"/>
-<area shape="poly" title=" " alt="" coords="180,344,249,308,332,275,416,251,502,232,662,206,663,212,503,238,417,257,334,280,251,313,182,349"/>
-<area shape="rect" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="1667,329,1705,354"/>
-<area shape="poly" title=" " alt="" coords="286,364,816,364,1149,364,1297,361,1442,355,1653,341,1653,346,1442,360,1297,367,1149,369,816,369,286,369"/>
-<area shape="rect" href="classediteurpanovisu_1_1OllamaService.html#a21849cc172a155f57c0ea097a4f3b6e9" title="Construit le prompt pour Ollama selon les données disponibles et la langue Utilise le géocodage inver..." alt="" coords="333,289,628,329"/>
-<area shape="poly" title=" " alt="" coords="263,344,349,329,350,334,263,349"/>
-<area shape="rect" href="classediteurpanovisu_1_1OllamaService.html#a5a3b422fe4f3c35957c5768ef48e6e29" title="Retourne le nom du service actuellement utilisé" alt="" coords="355,404,606,444"/>
-<area shape="poly" title=" " alt="" coords="263,384,350,399,349,404,263,389"/>
-<area shape="rect" href="classediteurpanovisu_1_1VerificationDescription.html#affb1ef60c1dc9734e72201b1e9b112ad" title="Écrit les signalements sur la sortie standard, pour la trace de génération." alt="" coords="379,512,583,552"/>
-<area shape="poly" title=" " alt="" coords="189,384,428,503,425,508,186,389"/>
-<area shape="rect" href="classediteurpanovisu_1_1OllamaService.html#a1caed1d4412230dcd4e64455198fe5ce" title="Appelle l&#39;API Ollama locale pour générer le texte." alt="" coords="1007,145,1289,185"/>
-<area shape="poly" title=" " alt="" coords="958,179,993,176,993,181,959,184"/>
-<area shape="poly" title=" " alt="" coords="959,201,1128,216,1319,237,1494,264,1565,279,1620,295,1660,318,1658,322,1618,300,1564,284,1493,269,1318,243,1128,222,959,206"/>
-<area shape="rect" href="classediteurpanovisu_1_1OllamaService.html#ad46cd20a1434f44192b570bbbf272f2c" title="Appelle OpenRouter API (accès unifié à GPT&#45;4, Claude, Gemini, etc.) Documentation: https://openrouter..." alt="" coords="1007,49,1289,89"/>
-<area shape="poly" title=" " alt="" coords="871,171,1080,92,1082,97,873,176"/>
-<area shape="rect" href="classediteurpanovisu_1_1OllamaService.html#a368a60df70b43652f89aaf8ffa1ec3fc" title="Extrait la réponse du JSON retourné par Ollama." alt="" coords="1337,73,1619,113"/>
-<area shape="poly" title=" " alt="" coords="1240,143,1371,114,1372,119,1241,148"/>
-<area shape="poly" title=" " alt="" coords="1289,149,1384,144,1479,145,1563,153,1596,162,1620,174,1636,188,1650,204,1669,242,1680,281,1685,315,1680,316,1675,283,1664,244,1645,207,1633,191,1617,178,1594,167,1562,159,1479,150,1384,150,1290,155"/>
-<area shape="rect" href="classediteurpanovisu_1_1OllamaService.html#abc0f0c35d2b4399af7b040fc1357c198" title="Récupère la liste des modèles Ollama installés localement." alt="" coords="1353,188,1603,228"/>
-<area shape="poly" title=" " alt="" coords="1290,181,1339,187,1338,193,1289,186"/>
-<area shape="poly" title=" " alt="" coords="1593,111,1620,130,1638,151,1653,174,1672,224,1683,274,1687,314,1681,315,1677,275,1667,226,1648,176,1634,154,1617,134,1590,115"/>
-<area shape="poly" title=" " alt="" coords="1584,226,1620,244,1638,260,1653,278,1676,315,1671,317,1649,281,1634,264,1617,249,1582,230"/>
-<area shape="poly" title=" " alt="" coords="1201,47,1289,21,1342,11,1400,4,1458,4,1516,11,1571,29,1620,59,1635,77,1647,104,1666,176,1678,253,1685,315,1680,315,1673,253,1661,177,1642,106,1630,80,1617,63,1569,34,1515,17,1458,9,1400,9,1343,16,1290,26,1202,52"/>
-<area shape="poly" title=" " alt="" coords="628,311,1653,338,1653,343,628,316"/>
-<area shape="rect" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="798,253,837,278"/>
-<area shape="poly" title=" " alt="" coords="628,287,784,267,785,272,628,293"/>
-<area shape="poly" title=" " alt="" coords="606,426,846,430,1139,429,1284,424,1418,415,1532,402,1618,383,1639,373,1659,360,1662,365,1642,378,1620,388,1533,407,1418,421,1284,430,1139,434,846,436,606,431"/>
-<area shape="poly" title=" " alt="" coords="520,550,597,589,708,638,845,688,920,711,999,731,1079,747,1161,757,1243,761,1324,757,1403,745,1478,723,1550,690,1617,645,1631,626,1644,597,1663,519,1674,435,1680,367,1686,368,1680,435,1668,520,1649,599,1636,629,1620,649,1553,694,1480,728,1404,750,1324,763,1243,766,1160,762,1078,752,997,736,919,716,843,693,706,643,595,593,517,554"/>
-<area shape="rect" href="leaflet_8js.html#af1ca895898688e63b5f816c8255fb77d" title=" " alt="" coords="798,577,837,602"/>
-<area shape="poly" title=" " alt="" coords="584,547,785,581,784,587,583,552"/>
-<area shape="rect" href="classediteurpanovisu_1_1VerificationDescription.html#a75819d7c96e76ce6650043d848d91c4d" title="Un énoncé signalé dans une description." alt="" coords="1376,455,1580,495"/>
-<area shape="poly" title=" " alt="" coords="582,510,676,497,864,483,1052,475,1362,471,1362,476,1052,480,864,488,676,503,583,515"/>
-<area shape="rect" href="classediteurpanovisu_1_1VerificationDescription.html#a68560d700189175129ff2823deef1bd9" title="Analyse une description générée et renvoie les énoncés à relire." alt="" coords="715,512,919,552"/>
-<area shape="poly" title=" " alt="" coords="583,529,702,529,702,535,583,535"/>
-<area shape="poly" title=" " alt="" coords="1579,453,1617,434,1634,419,1649,401,1671,365,1676,368,1653,404,1638,423,1620,438,1581,458"/>
-<area shape="poly" title=" " alt="" coords="920,547,1007,561,1145,589,1323,624,1414,636,1497,639,1567,631,1594,622,1617,609,1630,593,1641,568,1660,500,1672,427,1680,367,1685,368,1678,428,1665,501,1646,569,1634,595,1620,613,1597,627,1568,636,1497,644,1413,641,1323,629,1144,595,1006,567,919,552"/>
-<area shape="rect" href="classediteurpanovisu_1_1VerificationDescription.html#a9df326f11d795a6196572329f02d3eb6" title="Applique un motif et retient les correspondances absentes du contexte." alt="" coords="1046,512,1250,552"/>
-<area shape="poly" title=" " alt="" coords="920,529,1033,529,1033,535,920,535"/>
-<area shape="poly" title=" " alt="" coords="1197,550,1284,578,1337,591,1394,600,1453,603,1511,597,1567,582,1617,554,1637,535,1652,513,1672,462,1681,410,1683,368,1688,368,1686,411,1677,464,1657,516,1641,539,1620,558,1569,587,1512,603,1453,608,1394,605,1336,596,1282,583,1195,555"/>
-<area shape="poly" title=" " alt="" coords="1250,512,1362,492,1363,497,1251,517"/>
-<area shape="rect" href="leaflet_8js.html#a1cabf6ae48cc55b616700aecc4371993" title=" " alt="" coords="1459,519,1497,545"/>
-<area shape="poly" title=" " alt="" coords="1250,529,1445,529,1445,535,1250,535"/>
+<area shape="rect" title="Génère une description géographique basée sur les informations disponibles IMPORTANT : Tient compte d..." alt="" coords="5,306,285,346"/>
+<area shape="rect" href="classediteurpanovisu_1_1OllamaService.html#a95326db045c9dc203b3283e491ac844a" title="Appelle l&#39;API appropriée (Ollama ou Hugging Face) pour générer le texte." alt="" coords="676,222,959,262"/>
+<area shape="poly" title=" " alt="" coords="256,304,333,292,662,254,662,259,334,297,257,309"/>
+<area shape="rect" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="1667,355,1705,380"/>
+<area shape="poly" title=" " alt="" coords="171,304,269,234,341,190,423,145,515,102,612,67,713,43,765,37,816,34,1149,34,1223,31,1289,22,1403,5,1456,4,1509,13,1563,37,1621,79,1635,98,1647,126,1666,200,1678,278,1685,341,1680,342,1673,279,1660,201,1642,128,1630,101,1617,83,1560,42,1508,19,1456,9,1404,10,1289,27,1223,36,1149,40,816,40,765,42,714,49,614,72,517,107,426,149,343,194,272,239,174,308"/>
+<area shape="rect" href="classediteurpanovisu_1_1OllamaService.html#a21849cc172a155f57c0ea097a4f3b6e9" title="Construit le prompt pour Ollama selon les données disponibles et la langue Utilise le géocodage inver..." alt="" coords="333,306,628,346"/>
+<area shape="poly" title=" " alt="" coords="285,324,319,324,319,329,285,329"/>
+<area shape="rect" href="classediteurpanovisu_1_1OllamaService.html#a5a3b422fe4f3c35957c5768ef48e6e29" title="Retourne le nom du service actuellement utilisé" alt="" coords="355,389,606,429"/>
+<area shape="poly" title=" " alt="" coords="228,344,386,383,385,388,227,349"/>
+<area shape="rect" href="classediteurpanovisu_1_1VerificationDescription.html#affb1ef60c1dc9734e72201b1e9b112ad" title="Écrit les signalements sur la sortie standard, pour la trace de génération." alt="" coords="379,500,583,540"/>
+<area shape="poly" title=" " alt="" coords="179,344,335,439,430,491,427,496,332,443,177,349"/>
+<area shape="rect" href="classediteurpanovisu_1_1OllamaService.html#a1caed1d4412230dcd4e64455198fe5ce" title="Appelle l&#39;API Ollama locale pour générer le texte." alt="" coords="1007,204,1289,244"/>
+<area shape="poly" title=" " alt="" coords="959,232,993,230,993,235,959,237"/>
+<area shape="poly" title=" " alt="" coords="876,220,1045,167,1152,137,1265,111,1376,91,1477,82,1521,82,1561,87,1594,96,1620,111,1634,127,1645,151,1664,215,1677,284,1684,341,1679,341,1671,285,1659,216,1640,153,1629,130,1617,115,1592,101,1560,92,1521,88,1477,87,1376,96,1266,116,1153,142,1046,172,878,225"/>
+<area shape="rect" href="classediteurpanovisu_1_1OllamaService.html#ad46cd20a1434f44192b570bbbf272f2c" title="Appelle OpenRouter API (accès unifié à GPT&#45;4, Claude, Gemini, etc.) Documentation: https://openrouter..." alt="" coords="1007,278,1289,318"/>
+<area shape="poly" title=" " alt="" coords="937,260,1017,274,1016,279,936,265"/>
+<area shape="rect" href="classediteurpanovisu_1_1OllamaService.html#a368a60df70b43652f89aaf8ffa1ec3fc" title="Extrait la réponse du JSON retourné par Ollama." alt="" coords="1337,240,1619,280"/>
+<area shape="poly" title=" " alt="" coords="1290,237,1324,240,1324,246,1289,242"/>
+<area shape="poly" title=" " alt="" coords="1289,206,1383,200,1479,199,1562,207,1595,214,1620,226,1646,250,1664,280,1676,312,1683,341,1678,342,1671,314,1660,283,1642,253,1617,230,1593,219,1561,212,1479,205,1383,206,1290,212"/>
+<area shape="rect" href="classediteurpanovisu_1_1OllamaService.html#abc0f0c35d2b4399af7b040fc1357c198" title="Récupère la liste des modèles Ollama installés localement." alt="" coords="1353,125,1603,165"/>
+<area shape="poly" title=" " alt="" coords="1232,201,1379,166,1380,171,1233,206"/>
+<area shape="poly" title=" " alt="" coords="1579,277,1620,296,1648,318,1670,343,1666,346,1644,322,1617,301,1577,282"/>
+<area shape="poly" title=" " alt="" coords="1593,163,1620,182,1650,219,1669,263,1680,305,1685,341,1680,342,1675,307,1664,264,1645,222,1617,186,1590,168"/>
+<area shape="poly" title=" " alt="" coords="1290,305,1448,320,1619,347,1654,355,1653,360,1618,352,1448,326,1289,310"/>
+<area shape="poly" title=" " alt="" coords="628,329,959,340,1652,364,1652,369,959,345,628,334"/>
+<area shape="rect" href="leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="798,355,837,380"/>
+<area shape="poly" title=" " alt="" coords="628,342,785,361,784,367,628,347"/>
+<area shape="poly" title=" " alt="" coords="606,404,1053,391,1619,369,1652,367,1653,373,1619,374,1053,396,606,409"/>
+<area shape="poly" title=" " alt="" coords="583,508,1117,455,1407,420,1527,403,1618,387,1653,377,1654,382,1619,392,1528,408,1408,426,1117,460,583,513"/>
+<area shape="rect" href="leaflet_8js.html#af1ca895898688e63b5f816c8255fb77d" title=" " alt="" coords="798,558,837,583"/>
+<area shape="poly" title=" " alt="" coords="584,532,785,563,784,568,583,538"/>
+<area shape="rect" href="classediteurpanovisu_1_1VerificationDescription.html#a75819d7c96e76ce6650043d848d91c4d" title="Un énoncé signalé dans une description." alt="" coords="1376,557,1580,597"/>
+<area shape="poly" title=" " alt="" coords="583,516,899,519,1094,527,1290,542,1363,552,1362,558,1289,548,1094,533,899,525,583,521"/>
+<area shape="rect" href="classediteurpanovisu_1_1VerificationDescription.html#a68560d700189175129ff2823deef1bd9" title="Analyse une description générée et renvoie les énoncés à relire." alt="" coords="715,614,919,654"/>
+<area shape="poly" title=" " alt="" coords="532,537,677,592,729,608,727,613,675,597,530,542"/>
+<area shape="poly" title=" " alt="" coords="1579,559,1599,549,1617,537,1643,504,1662,465,1673,427,1679,394,1684,395,1678,428,1667,467,1648,506,1621,540,1602,554,1581,564"/>
+<area shape="poly" title=" " alt="" coords="857,652,915,681,995,716,1091,751,1197,780,1253,790,1308,796,1364,798,1419,795,1472,786,1524,770,1572,746,1617,715,1633,693,1647,659,1666,568,1677,470,1681,394,1686,395,1682,471,1671,569,1652,661,1638,696,1621,719,1575,751,1525,775,1474,791,1420,800,1364,803,1308,801,1252,795,1196,785,1090,756,993,721,913,686,854,657"/>
+<area shape="rect" href="classediteurpanovisu_1_1VerificationDescription.html#a9df326f11d795a6196572329f02d3eb6" title="Applique un motif et retient les correspondances absentes du contexte." alt="" coords="1046,621,1250,661"/>
+<area shape="poly" title=" " alt="" coords="920,634,1033,636,1033,641,920,639"/>
+<area shape="rect" href="classediteurpanovisu_1_1VerificationDescription.html#a1c7be522e06315f6b6208e42d0c61f62" title="Signale les noms propres absents du contexte fourni au modèle." alt="" coords="1029,557,1267,597"/>
+<area shape="poly" title=" " alt="" coords="919,614,1018,597,1019,602,920,619"/>
+<area shape="poly" title=" " alt="" coords="1198,659,1285,687,1339,700,1396,708,1455,710,1513,704,1568,687,1617,658,1631,640,1643,613,1662,539,1674,459,1680,394,1685,395,1679,459,1667,540,1648,614,1635,643,1620,662,1570,692,1514,709,1455,716,1396,714,1338,705,1284,693,1196,664"/>
+<area shape="poly" title=" " alt="" coords="1250,619,1362,597,1363,602,1251,624"/>
+<area shape="rect" href="leaflet_8js.html#a1cabf6ae48cc55b616700aecc4371993" title=" " alt="" coords="1459,622,1497,647"/>
+<area shape="poly" title=" " alt="" coords="1250,636,1445,632,1445,638,1250,642"/>
+<area shape="poly" title=" " alt="" coords="1267,555,1488,515,1576,497,1617,485,1638,466,1654,441,1675,393,1680,395,1659,444,1642,469,1620,490,1577,502,1489,520,1268,560"/>
+<area shape="poly" title=" " alt="" coords="1268,574,1362,574,1362,580,1268,580"/>
+<area shape="poly" title=" " alt="" coords="1264,595,1446,626,1445,632,1263,600"/>
 </map>
 </div>
 <div class="dynheader">
@@ -1130,9 +1141,9 @@ Voici le graphe des appelants de cette fonction :</div>
 </dl>
 <dl class="section return"><dt>Renvoie</dt><dd>Adresse complète formatée, ou null si échec </dd></dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00535">535</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00551">551</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Références <a class="el" href="leaflet_8js_source.html#l00005">e</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="OllamaService_8java_source.html#l00054">editeurpanovisu.OllamaService.LOCATIONIQ_TOKEN</a>, <a class="el" href="OllamaService_8java_source.html#l00053">editeurpanovisu.OllamaService.LOCATIONIQ_URL</a>, <a class="el" href="OllamaService_8java_source.html#l00609">editeurpanovisu.OllamaService.parserLocationIQ()</a>, et <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>.</p>
+<p class="reference">Références <a class="el" href="leaflet_8js_source.html#l00005">e</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="OllamaService_8java_source.html#l00070">editeurpanovisu.OllamaService.LOCATIONIQ_TOKEN</a>, <a class="el" href="OllamaService_8java_source.html#l00069">editeurpanovisu.OllamaService.LOCATIONIQ_URL</a>, <a class="el" href="OllamaService_8java_source.html#l00625">editeurpanovisu.OllamaService.parserLocationIQ()</a>, et <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>.</p>
 <div class="dynheader">
 Voici le graphe d'appel pour cette fonction :</div>
 <div class="dyncontent">
@@ -1188,9 +1199,9 @@ Voici le graphe d'appel pour cette fonction :</div>
 <p>Récupère le gestionnaire de configuration des modèles. </p>
 <dl class="section return"><dt>Renvoie</dt><dd>ModelConfigManager instance </dd></dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00198">198</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00214">214</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Références <a class="el" href="OllamaService_8java_source.html#l00100">editeurpanovisu.OllamaService.configManager</a>.</p>
+<p class="reference">Références <a class="el" href="OllamaService_8java_source.html#l00116">editeurpanovisu.OllamaService.configManager</a>.</p>
 
 <p class="reference">Référencé par <a class="el" href="ConfigDialogController_8java_source.html#l00468">editeurpanovisu.ConfigDialogController.ajouterEmojiModele()</a>, <a class="el" href="ConfigDialogController_8java_source.html#l00505">editeurpanovisu.ConfigDialogController.extraireNomModele()</a>, et <a class="el" href="ModelsConfigController_8java_source.html#l00075">editeurpanovisu.ModelsConfigController.initialize()</a>.</p>
 <div class="dynheader">
@@ -1239,11 +1250,11 @@ Voici le graphe des appelants de cette fonction :</div>
 <p>Récupère la liste des modèles Ollama installés localement. </p>
 <dl class="section return"><dt>Renvoie</dt><dd>Liste des noms de modèles, ou liste vide si erreur </dd></dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00387">387</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00403">403</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Références <a class="el" href="leaflet_8js_source.html#l00005">e</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="OllamaService_8java_source.html#l00028">editeurpanovisu.OllamaService.OLLAMA_URL</a>, <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>, et <a class="el" href="OllamaService_8java_source.html#l00093">editeurpanovisu.OllamaService.TIMEOUT_MS</a>.</p>
+<p class="reference">Références <a class="el" href="leaflet_8js_source.html#l00005">e</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="OllamaService_8java_source.html#l00028">editeurpanovisu.OllamaService.OLLAMA_URL</a>, <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>, et <a class="el" href="OllamaService_8java_source.html#l00109">editeurpanovisu.OllamaService.TIMEOUT_MS</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="ConfigDialogController_8java_source.html#l00067">editeurpanovisu.ConfigDialogController.afficheFenetre()</a>, et <a class="el" href="OllamaService_8java_source.html#l01236">editeurpanovisu.OllamaService.appellerOllamaLocal()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="ConfigDialogController_8java_source.html#l00067">editeurpanovisu.ConfigDialogController.afficheFenetre()</a>, et <a class="el" href="OllamaService_8java_source.html#l01252">editeurpanovisu.OllamaService.appellerOllamaLocal()</a>.</p>
 <div class="dynheader">
 Voici le graphe d'appel pour cette fonction :</div>
 <div class="dyncontent">
@@ -1301,9 +1312,9 @@ Voici le graphe des appelants de cette fonction :</div>
 <p>Retourne les modèles OpenRouter recommandés pour la génération de descriptions. </p>
 <dl class="section return"><dt>Renvoie</dt><dd>Tableau des modèles OpenRouter disponibles </dd></dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00436">436</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00452">452</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Références <a class="el" href="OllamaService_8java_source.html#l00100">editeurpanovisu.OllamaService.configManager</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="OllamaService_8java_source.html#l00064">editeurpanovisu.OllamaService.OPENROUTER_MODELS</a>, et <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>.</p>
+<p class="reference">Références <a class="el" href="OllamaService_8java_source.html#l00116">editeurpanovisu.OllamaService.configManager</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="OllamaService_8java_source.html#l00080">editeurpanovisu.OllamaService.OPENROUTER_MODELS</a>, et <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>.</p>
 
 <p class="reference">Référencé par <a class="el" href="ConfigDialogController_8java_source.html#l00067">editeurpanovisu.ConfigDialogController.afficheFenetre()</a>.</p>
 <div class="dynheader">
@@ -1355,9 +1366,9 @@ Voici le graphe des appelants de cette fonction :</div>
 <p>Retourne le modèle Ollama actuellement configuré </p>
 <dl class="section return"><dt>Renvoie</dt><dd>Nom du modèle Ollama </dd></dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00476">476</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00492">492</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Références <a class="el" href="OllamaService_8java_source.html#l00050">editeurpanovisu.OllamaService.ollamaModel</a>.</p>
+<p class="reference">Références <a class="el" href="OllamaService_8java_source.html#l00066">editeurpanovisu.OllamaService.ollamaModel</a>.</p>
 
 <p class="reference">Référencé par <a class="el" href="ConfigDialogController_8java_source.html#l00067">editeurpanovisu.ConfigDialogController.afficheFenetre()</a>, <a class="el" href="EditeurPanovisu_8java_source.html#l15308">editeurpanovisu.EditeurPanovisu.sauvePreferences()</a>, et <a class="el" href="ConfigDialogController_8java_source.html#l00420">editeurpanovisu.ConfigDialogController.saveModelsPreferences()</a>.</p>
 <div class="dynheader">
@@ -1421,9 +1432,9 @@ Voici le graphe des appelants de cette fonction :</div>
 <p>Retourne le modèle OpenRouter actuellement configuré </p>
 <dl class="section return"><dt>Renvoie</dt><dd>Nom du modèle OpenRouter </dd></dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00484">484</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00500">500</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Références <a class="el" href="OllamaService_8java_source.html#l00076">editeurpanovisu.OllamaService.openrouterModel</a>.</p>
+<p class="reference">Références <a class="el" href="OllamaService_8java_source.html#l00092">editeurpanovisu.OllamaService.openrouterModel</a>.</p>
 
 <p class="reference">Référencé par <a class="el" href="ConfigDialogController_8java_source.html#l00067">editeurpanovisu.ConfigDialogController.afficheFenetre()</a>, <a class="el" href="EditeurPanovisu_8java_source.html#l15308">editeurpanovisu.EditeurPanovisu.sauvePreferences()</a>, et <a class="el" href="ConfigDialogController_8java_source.html#l00420">editeurpanovisu.ConfigDialogController.saveModelsPreferences()</a>.</p>
 <div class="dynheader">
@@ -1487,11 +1498,11 @@ Voici le graphe des appelants de cette fonction :</div>
 <p>Retourne le nom du service actuellement utilisé </p>
 <dl class="section return"><dt>Renvoie</dt><dd>"OpenRouter (XXX)" ou "Ollama (local)" ou "Hugging Face (en ligne)" </dd></dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00509">509</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00525">525</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Références <a class="el" href="OllamaService_8java_source.html#l00097">editeurpanovisu.OllamaService.forceOllama</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="OllamaService_8java_source.html#l00050">editeurpanovisu.OllamaService.ollamaModel</a>, <a class="el" href="OllamaService_8java_source.html#l00058">editeurpanovisu.OllamaService.OPENROUTER_TOKEN</a>, <a class="el" href="OllamaService_8java_source.html#l00076">editeurpanovisu.OllamaService.openrouterModel</a>, <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>, et <a class="el" href="OllamaService_8java_source.html#l00094">editeurpanovisu.OllamaService.useHuggingFace</a>.</p>
+<p class="reference">Références <a class="el" href="OllamaService_8java_source.html#l00113">editeurpanovisu.OllamaService.forceOllama</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="OllamaService_8java_source.html#l00066">editeurpanovisu.OllamaService.ollamaModel</a>, <a class="el" href="OllamaService_8java_source.html#l00074">editeurpanovisu.OllamaService.OPENROUTER_TOKEN</a>, <a class="el" href="OllamaService_8java_source.html#l00092">editeurpanovisu.OllamaService.openrouterModel</a>, <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>, et <a class="el" href="OllamaService_8java_source.html#l00110">editeurpanovisu.OllamaService.useHuggingFace</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l00852">editeurpanovisu.OllamaService.genererDescription()</a>, et <a class="el" href="EditeurPanovisu_8java_source.html#l11248">editeurpanovisu.EditeurPanovisu.genererDescriptionIA()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l00868">editeurpanovisu.OllamaService.genererDescription()</a>, et <a class="el" href="EditeurPanovisu_8java_source.html#l11248">editeurpanovisu.EditeurPanovisu.genererDescriptionIA()</a>.</p>
 <div class="dynheader">
 Voici le graphe d'appel pour cette fonction :</div>
 <div class="dyncontent">
@@ -1544,9 +1555,9 @@ Voici le graphe des appelants de cette fonction :</div>
 <p>Vérifie si le mode Ollama forcé est actif. </p>
 <dl class="section return"><dt>Renvoie</dt><dd>true si Ollama est forcé </dd></dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00501">501</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00517">517</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Références <a class="el" href="OllamaService_8java_source.html#l00097">editeurpanovisu.OllamaService.forceOllama</a>.</p>
+<p class="reference">Références <a class="el" href="OllamaService_8java_source.html#l00113">editeurpanovisu.OllamaService.forceOllama</a>.</p>
 
 </div>
 </div>
@@ -1576,9 +1587,9 @@ Voici le graphe des appelants de cette fonction :</div>
 <p>Vérifie si un service IA est disponible (Ollama ou Hugging Face) </p>
 <dl class="section return"><dt>Renvoie</dt><dd>true si au moins un service est disponible </dd></dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00214">214</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00230">230</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Références <a class="el" href="OllamaService_8java_source.html#l00303">editeurpanovisu.OllamaService.detecterModeleOllama()</a>, <a class="el" href="leaflet_8js_source.html#l00005">e</a>, <a class="el" href="OllamaService_8java_source.html#l00091">editeurpanovisu.OllamaService.HUGGINGFACE_TOKEN</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="OllamaService_8java_source.html#l00028">editeurpanovisu.OllamaService.OLLAMA_URL</a>, <a class="el" href="OllamaService_8java_source.html#l00050">editeurpanovisu.OllamaService.ollamaModel</a>, <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>, <a class="el" href="OllamaService_8java_source.html#l00093">editeurpanovisu.OllamaService.TIMEOUT_MS</a>, et <a class="el" href="OllamaService_8java_source.html#l00094">editeurpanovisu.OllamaService.useHuggingFace</a>.</p>
+<p class="reference">Références <a class="el" href="OllamaService_8java_source.html#l00319">editeurpanovisu.OllamaService.detecterModeleOllama()</a>, <a class="el" href="leaflet_8js_source.html#l00005">e</a>, <a class="el" href="OllamaService_8java_source.html#l00107">editeurpanovisu.OllamaService.HUGGINGFACE_TOKEN</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="OllamaService_8java_source.html#l00028">editeurpanovisu.OllamaService.OLLAMA_URL</a>, <a class="el" href="OllamaService_8java_source.html#l00066">editeurpanovisu.OllamaService.ollamaModel</a>, <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>, <a class="el" href="OllamaService_8java_source.html#l00109">editeurpanovisu.OllamaService.TIMEOUT_MS</a>, et <a class="el" href="OllamaService_8java_source.html#l00110">editeurpanovisu.OllamaService.useHuggingFace</a>.</p>
 
 <p class="reference">Référencé par <a class="el" href="EditeurPanovisu_8java_source.html#l11248">editeurpanovisu.EditeurPanovisu.genererDescriptionIA()</a>.</p>
 <div class="dynheader">
@@ -1643,11 +1654,11 @@ Voici le graphe des appelants de cette fonction :</div>
 <li>building: cathedral, church, chapel, temple, mosque, synagogue </li>
 </ul>
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00609">609</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00625">625</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Références <a class="el" href="OllamaService_8java_source.html#l00817">editeurpanovisu.OllamaService.extraireChamp()</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>, <a class="el" href="OllamaService_8java_source.html#l00801">editeurpanovisu.OllamaService.tradTypeEau()</a>, <a class="el" href="OllamaService_8java_source.html#l00752">editeurpanovisu.OllamaService.tradTypeHistorique()</a>, <a class="el" href="OllamaService_8java_source.html#l00788">editeurpanovisu.OllamaService.tradTypeLoisir()</a>, <a class="el" href="OllamaService_8java_source.html#l00771">editeurpanovisu.OllamaService.tradTypeNaturel()</a>, et <a class="el" href="OllamaService_8java_source.html#l00735">editeurpanovisu.OllamaService.tradTypeTourisme()</a>.</p>
+<p class="reference">Références <a class="el" href="OllamaService_8java_source.html#l00833">editeurpanovisu.OllamaService.extraireChamp()</a>, <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, <a class="el" href="OpenLayers_8js_source.html#l00059">String</a>, <a class="el" href="OllamaService_8java_source.html#l00817">editeurpanovisu.OllamaService.tradTypeEau()</a>, <a class="el" href="OllamaService_8java_source.html#l00768">editeurpanovisu.OllamaService.tradTypeHistorique()</a>, <a class="el" href="OllamaService_8java_source.html#l00804">editeurpanovisu.OllamaService.tradTypeLoisir()</a>, <a class="el" href="OllamaService_8java_source.html#l00787">editeurpanovisu.OllamaService.tradTypeNaturel()</a>, et <a class="el" href="OllamaService_8java_source.html#l00751">editeurpanovisu.OllamaService.tradTypeTourisme()</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l00535">editeurpanovisu.OllamaService.geocodeReverse()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l00551">editeurpanovisu.OllamaService.geocodeReverse()</a>.</p>
 <div class="dynheader">
 Voici le graphe d'appel pour cette fonction :</div>
 <div class="dyncontent">
@@ -1709,9 +1720,9 @@ Voici le graphe des appelants de cette fonction :</div>
 
 <p>Réinitialise le cache des descriptions (à appeler au changement de visite) </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00837">837</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00853">853</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Références <a class="el" href="OllamaService_8java_source.html#l00832">editeurpanovisu.OllamaService.descriptionsCache</a>, et <a class="el" href="leaflet_8js_source.html#l00005">k()</a>.</p>
+<p class="reference">Références <a class="el" href="OllamaService_8java_source.html#l00848">editeurpanovisu.OllamaService.descriptionsCache</a>, et <a class="el" href="leaflet_8js_source.html#l00005">k()</a>.</p>
 
 <p class="reference">Référencé par <a class="el" href="EditeurPanovisu_8java_source.html#l04366">editeurpanovisu.EditeurPanovisu.reinitialiserProjet()</a>.</p>
 <div class="dynheader">
@@ -1794,9 +1805,9 @@ Voici le graphe des appelants de cette fonction :</div>
   </dd>
 </dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00492">492</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00508">508</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Références <a class="el" href="OllamaService_8java_source.html#l00097">editeurpanovisu.OllamaService.forceOllama</a>, et <a class="el" href="leaflet_8js_source.html#l00005">k()</a>.</p>
+<p class="reference">Références <a class="el" href="OllamaService_8java_source.html#l00113">editeurpanovisu.OllamaService.forceOllama</a>, et <a class="el" href="leaflet_8js_source.html#l00005">k()</a>.</p>
 
 <p class="reference">Référencé par <a class="el" href="EditeurPanovisu_8java_source.html#l14223">editeurpanovisu.EditeurPanovisu.creeEnvironnement()</a>.</p>
 <div class="dynheader">
@@ -1854,9 +1865,9 @@ Voici le graphe des appelants de cette fonction :</div>
   </dd>
 </dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00454">454</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00470">470</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Références <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, et <a class="el" href="OllamaService_8java_source.html#l00050">editeurpanovisu.OllamaService.ollamaModel</a>.</p>
+<p class="reference">Références <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, et <a class="el" href="OllamaService_8java_source.html#l00066">editeurpanovisu.OllamaService.ollamaModel</a>.</p>
 
 <p class="reference">Référencé par <a class="el" href="ConfigDialogController_8java_source.html#l00067">editeurpanovisu.ConfigDialogController.afficheFenetre()</a>, et <a class="el" href="EditeurPanovisu_8java_source.html#l15229">editeurpanovisu.EditeurPanovisu.lisPreferences()</a>.</p>
 <div class="dynheader">
@@ -1916,9 +1927,9 @@ Voici le graphe des appelants de cette fonction :</div>
   </dd>
 </dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00465">465</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00481">481</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Références <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, et <a class="el" href="OllamaService_8java_source.html#l00076">editeurpanovisu.OllamaService.openrouterModel</a>.</p>
+<p class="reference">Références <a class="el" href="leaflet_8js_source.html#l00005">k()</a>, et <a class="el" href="OllamaService_8java_source.html#l00092">editeurpanovisu.OllamaService.openrouterModel</a>.</p>
 
 <p class="reference">Référencé par <a class="el" href="ConfigDialogController_8java_source.html#l00067">editeurpanovisu.ConfigDialogController.afficheFenetre()</a>, et <a class="el" href="EditeurPanovisu_8java_source.html#l15229">editeurpanovisu.EditeurPanovisu.lisPreferences()</a>.</p>
 <div class="dynheader">
@@ -1972,9 +1983,9 @@ Voici le graphe des appelants de cette fonction :</div>
 
 <p>Traduit les types de loisirs OpenStreetMap en français explicite. </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00801">801</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00817">817</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l00609">editeurpanovisu.OllamaService.parserLocationIQ()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l00625">editeurpanovisu.OllamaService.parserLocationIQ()</a>.</p>
 <div class="dynheader">
 Voici le graphe des appelants de cette fonction :</div>
 <div class="dyncontent">
@@ -2016,9 +2027,9 @@ Voici le graphe des appelants de cette fonction :</div>
 
 <p>Traduit les types historiques OpenStreetMap en français explicite. </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00752">752</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00768">768</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l00609">editeurpanovisu.OllamaService.parserLocationIQ()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l00625">editeurpanovisu.OllamaService.parserLocationIQ()</a>.</p>
 <div class="dynheader">
 Voici le graphe des appelants de cette fonction :</div>
 <div class="dyncontent">
@@ -2060,9 +2071,9 @@ Voici le graphe des appelants de cette fonction :</div>
 
 <p>Traduit les types de loisirs OpenStreetMap en français explicite. </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00788">788</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00804">804</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l00609">editeurpanovisu.OllamaService.parserLocationIQ()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l00625">editeurpanovisu.OllamaService.parserLocationIQ()</a>.</p>
 <div class="dynheader">
 Voici le graphe des appelants de cette fonction :</div>
 <div class="dyncontent">
@@ -2104,9 +2115,9 @@ Voici le graphe des appelants de cette fonction :</div>
 
 <p>Traduit les types naturels OpenStreetMap en français explicite. </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00771">771</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00787">787</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l00609">editeurpanovisu.OllamaService.parserLocationIQ()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l00625">editeurpanovisu.OllamaService.parserLocationIQ()</a>.</p>
 <div class="dynheader">
 Voici le graphe des appelants de cette fonction :</div>
 <div class="dyncontent">
@@ -2148,9 +2159,9 @@ Voici le graphe des appelants de cette fonction :</div>
 
 <p>Traduit les types de tourisme OpenStreetMap en français explicite. </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00735">735</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00751">751</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l00609">editeurpanovisu.OllamaService.parserLocationIQ()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l00625">editeurpanovisu.OllamaService.parserLocationIQ()</a>.</p>
 <div class="dynheader">
 Voici le graphe des appelants de cette fonction :</div>
 <div class="dyncontent">
@@ -2192,9 +2203,9 @@ Voici le graphe des appelants de cette fonction :</div>
 <p>Vérifie si OpenRouter est disponible (token configuré) </p>
 <dl class="section return"><dt>Renvoie</dt><dd>true si OpenRouter est disponible </dd></dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00206">206</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00222">222</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Références <a class="el" href="OllamaService_8java_source.html#l00058">editeurpanovisu.OllamaService.OPENROUTER_TOKEN</a>.</p>
+<p class="reference">Références <a class="el" href="OllamaService_8java_source.html#l00074">editeurpanovisu.OllamaService.OPENROUTER_TOKEN</a>.</p>
 
 <p class="reference">Référencé par <a class="el" href="EditeurPanovisu_8java_source.html#l14223">editeurpanovisu.EditeurPanovisu.creeEnvironnement()</a>.</p>
 <div class="dynheader">
@@ -2231,9 +2242,9 @@ Voici le graphe des appelants de cette fonction :</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00100">100</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00116">116</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l00172">editeurpanovisu.OllamaService.chargerEtVerifierModeles()</a>, <a class="el" href="OllamaService_8java_source.html#l00198">editeurpanovisu.OllamaService.getConfigManager()</a>, et <a class="el" href="OllamaService_8java_source.html#l00436">editeurpanovisu.OllamaService.getModelesOpenRouterDisponibles()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l00188">editeurpanovisu.OllamaService.chargerEtVerifierModeles()</a>, <a class="el" href="OllamaService_8java_source.html#l00214">editeurpanovisu.OllamaService.getConfigManager()</a>, et <a class="el" href="OllamaService_8java_source.html#l00452">editeurpanovisu.OllamaService.getModelesOpenRouterDisponibles()</a>.</p>
 
 </div>
 </div>
@@ -2257,9 +2268,9 @@ Voici le graphe des appelants de cette fonction :</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00088">88</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00104">104</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01345">editeurpanovisu.OllamaService.appellerHuggingFace()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01363">editeurpanovisu.OllamaService.appellerHuggingFace()</a>.</p>
 
 </div>
 </div>
@@ -2283,9 +2294,9 @@ Voici le graphe des appelants de cette fonction :</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00832">832</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00848">848</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l00852">editeurpanovisu.OllamaService.genererDescription()</a>, et <a class="el" href="OllamaService_8java_source.html#l00837">editeurpanovisu.OllamaService.reinitialiserCacheDescriptions()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l00868">editeurpanovisu.OllamaService.genererDescription()</a>, et <a class="el" href="OllamaService_8java_source.html#l00853">editeurpanovisu.OllamaService.reinitialiserCacheDescriptions()</a>.</p>
 
 </div>
 </div>
@@ -2309,9 +2320,9 @@ Voici le graphe des appelants de cette fonction :</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00097">97</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00113">113</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01092">editeurpanovisu.OllamaService.appellerOllama()</a>, <a class="el" href="OllamaService_8java_source.html#l00509">editeurpanovisu.OllamaService.getServiceName()</a>, <a class="el" href="OllamaService_8java_source.html#l00501">editeurpanovisu.OllamaService.isForceOllama()</a>, et <a class="el" href="OllamaService_8java_source.html#l00492">editeurpanovisu.OllamaService.setForceOllama()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01108">editeurpanovisu.OllamaService.appellerOllama()</a>, <a class="el" href="OllamaService_8java_source.html#l00525">editeurpanovisu.OllamaService.getServiceName()</a>, <a class="el" href="OllamaService_8java_source.html#l00517">editeurpanovisu.OllamaService.isForceOllama()</a>, et <a class="el" href="OllamaService_8java_source.html#l00508">editeurpanovisu.OllamaService.setForceOllama()</a>.</p>
 
 </div>
 </div>
@@ -2335,9 +2346,9 @@ Voici le graphe des appelants de cette fonction :</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00048">48</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00064">64</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01236">editeurpanovisu.OllamaService.appellerOllamaLocal()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01252">editeurpanovisu.OllamaService.appellerOllamaLocal()</a>.</p>
 
 </div>
 </div>
@@ -2367,9 +2378,9 @@ Voici le graphe des appelants de cette fonction :</div>
 <div class="line">        <span class="stringliteral">&quot;gpt2&quot;</span>                                 </div>
 <div class="line">    }</div>
 </div><!-- fragment -->
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00080">80</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00096">96</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01345">editeurpanovisu.OllamaService.appellerHuggingFace()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01363">editeurpanovisu.OllamaService.appellerHuggingFace()</a>.</p>
 
 </div>
 </div>
@@ -2393,9 +2404,9 @@ Voici le graphe des appelants de cette fonction :</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00091">91</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00107">107</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01345">editeurpanovisu.OllamaService.appellerHuggingFace()</a>, <a class="el" href="OllamaService_8java_source.html#l00111">editeurpanovisu.OllamaService.chargerTokensAPI()</a>, et <a class="el" href="OllamaService_8java_source.html#l00214">editeurpanovisu.OllamaService.isOllamaAvailable()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01363">editeurpanovisu.OllamaService.appellerHuggingFace()</a>, <a class="el" href="OllamaService_8java_source.html#l00127">editeurpanovisu.OllamaService.chargerTokensAPI()</a>, et <a class="el" href="OllamaService_8java_source.html#l00230">editeurpanovisu.OllamaService.isOllamaAvailable()</a>.</p>
 
 </div>
 </div>
@@ -2419,9 +2430,9 @@ Voici le graphe des appelants de cette fonction :</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00087">87</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00103">103</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01345">editeurpanovisu.OllamaService.appellerHuggingFace()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01363">editeurpanovisu.OllamaService.appellerHuggingFace()</a>.</p>
 
 </div>
 </div>
@@ -2445,9 +2456,9 @@ Voici le graphe des appelants de cette fonction :</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00054">54</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00070">70</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l00111">editeurpanovisu.OllamaService.chargerTokensAPI()</a>, et <a class="el" href="OllamaService_8java_source.html#l00535">editeurpanovisu.OllamaService.geocodeReverse()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l00127">editeurpanovisu.OllamaService.chargerTokensAPI()</a>, et <a class="el" href="OllamaService_8java_source.html#l00551">editeurpanovisu.OllamaService.geocodeReverse()</a>.</p>
 
 </div>
 </div>
@@ -2471,9 +2482,67 @@ Voici le graphe des appelants de cette fonction :</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00053">53</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00069">69</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l00535">editeurpanovisu.OllamaService.geocodeReverse()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l00551">editeurpanovisu.OllamaService.geocodeReverse()</a>.</p>
+
+</div>
+</div>
+<a id="a6cc771f8afaca0d97f8498d9e00f0f8f" name="a6cc771f8afaca0d97f8498d9e00f0f8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6cc771f8afaca0d97f8498d9e00f0f8f">&#9670;&#160;</a></span>NUM_CTX</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">final</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">int</a> editeurpanovisu.OllamaService.NUM_CTX = 8192</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Longueur de contexte imposée à Ollama, en jetons. </p>
+<p>Sans cette valeur, Ollama applique le contexte maximal du modèle — souvent 128 000 jetons — et tente d'allouer le cache correspondant. Sur une machine courante la génération échoue alors en HTTP 500, y compris pour un petit modèle : un phi3 de 2,2 Go réclamait 37 Gio de cache. Le cas est d'autant plus fréquent que la variable d'environnement OLLAMA_NUM_PARALLEL multiplie cette allocation.</p>
+<p>8192 jetons couvrent largement le prompt, descriptions précédentes comprises.</p>
+
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00060">60</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01252">editeurpanovisu.OllamaService.appellerOllamaLocal()</a>.</p>
+
+</div>
+</div>
+<a id="aebb77bc3ea466d87bac11f8748f51c74" name="aebb77bc3ea466d87bac11f8748f51c74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebb77bc3ea466d87bac11f8748f51c74">&#9670;&#160;</a></span>NUM_PREDICT</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">final</a> <a class="el" href="leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0">int</a> editeurpanovisu.OllamaService.NUM_PREDICT = 400</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Longueur maximale de la réponse : une description fait 4 à 5 phrases. </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00063">63</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01252">editeurpanovisu.OllamaService.appellerOllamaLocal()</a>.</p>
 
 </div>
 </div>
@@ -2499,7 +2568,7 @@ Voici le graphe des appelants de cette fonction :</div>
 
 <p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00028">28</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01236">editeurpanovisu.OllamaService.appellerOllamaLocal()</a>, <a class="el" href="OllamaService_8java_source.html#l00387">editeurpanovisu.OllamaService.getModelesOllamaDisponibles()</a>, et <a class="el" href="OllamaService_8java_source.html#l00214">editeurpanovisu.OllamaService.isOllamaAvailable()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01252">editeurpanovisu.OllamaService.appellerOllamaLocal()</a>, <a class="el" href="OllamaService_8java_source.html#l00403">editeurpanovisu.OllamaService.getModelesOllamaDisponibles()</a>, et <a class="el" href="OllamaService_8java_source.html#l00230">editeurpanovisu.OllamaService.isOllamaAvailable()</a>.</p>
 
 </div>
 </div>
@@ -2523,9 +2592,9 @@ Voici le graphe des appelants de cette fonction :</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00050">50</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00066">66</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01236">editeurpanovisu.OllamaService.appellerOllamaLocal()</a>, <a class="el" href="OllamaService_8java_source.html#l00303">editeurpanovisu.OllamaService.detecterModeleOllama()</a>, <a class="el" href="OllamaService_8java_source.html#l00476">editeurpanovisu.OllamaService.getOllamaModel()</a>, <a class="el" href="OllamaService_8java_source.html#l00509">editeurpanovisu.OllamaService.getServiceName()</a>, <a class="el" href="OllamaService_8java_source.html#l00214">editeurpanovisu.OllamaService.isOllamaAvailable()</a>, et <a class="el" href="OllamaService_8java_source.html#l00454">editeurpanovisu.OllamaService.setOllamaModel()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01252">editeurpanovisu.OllamaService.appellerOllamaLocal()</a>, <a class="el" href="OllamaService_8java_source.html#l00319">editeurpanovisu.OllamaService.detecterModeleOllama()</a>, <a class="el" href="OllamaService_8java_source.html#l00492">editeurpanovisu.OllamaService.getOllamaModel()</a>, <a class="el" href="OllamaService_8java_source.html#l00525">editeurpanovisu.OllamaService.getServiceName()</a>, <a class="el" href="OllamaService_8java_source.html#l00230">editeurpanovisu.OllamaService.isOllamaAvailable()</a>, et <a class="el" href="OllamaService_8java_source.html#l00470">editeurpanovisu.OllamaService.setOllamaModel()</a>.</p>
 
 </div>
 </div>
@@ -2561,9 +2630,9 @@ Voici le graphe des appelants de cette fonction :</div>
 <div class="line">        <span class="stringliteral">&quot;openai/gpt-4-turbo&quot;</span>                    </div>
 <div class="line">    }</div>
 </div><!-- fragment -->
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00064">64</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00080">80</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l00436">editeurpanovisu.OllamaService.getModelesOpenRouterDisponibles()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l00452">editeurpanovisu.OllamaService.getModelesOpenRouterDisponibles()</a>.</p>
 
 </div>
 </div>
@@ -2587,9 +2656,9 @@ Voici le graphe des appelants de cette fonction :</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00058">58</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00074">74</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01092">editeurpanovisu.OllamaService.appellerOllama()</a>, <a class="el" href="OllamaService_8java_source.html#l01148">editeurpanovisu.OllamaService.appellerOpenRouter()</a>, <a class="el" href="OllamaService_8java_source.html#l00172">editeurpanovisu.OllamaService.chargerEtVerifierModeles()</a>, <a class="el" href="OllamaService_8java_source.html#l00111">editeurpanovisu.OllamaService.chargerTokensAPI()</a>, <a class="el" href="OllamaService_8java_source.html#l00509">editeurpanovisu.OllamaService.getServiceName()</a>, et <a class="el" href="OllamaService_8java_source.html#l00206">editeurpanovisu.OllamaService.verifierOpenRouterDisponible()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01108">editeurpanovisu.OllamaService.appellerOllama()</a>, <a class="el" href="OllamaService_8java_source.html#l01164">editeurpanovisu.OllamaService.appellerOpenRouter()</a>, <a class="el" href="OllamaService_8java_source.html#l00188">editeurpanovisu.OllamaService.chargerEtVerifierModeles()</a>, <a class="el" href="OllamaService_8java_source.html#l00127">editeurpanovisu.OllamaService.chargerTokensAPI()</a>, <a class="el" href="OllamaService_8java_source.html#l00525">editeurpanovisu.OllamaService.getServiceName()</a>, et <a class="el" href="OllamaService_8java_source.html#l00222">editeurpanovisu.OllamaService.verifierOpenRouterDisponible()</a>.</p>
 
 </div>
 </div>
@@ -2613,9 +2682,9 @@ Voici le graphe des appelants de cette fonction :</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00057">57</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00073">73</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01148">editeurpanovisu.OllamaService.appellerOpenRouter()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01164">editeurpanovisu.OllamaService.appellerOpenRouter()</a>.</p>
 
 </div>
 </div>
@@ -2639,9 +2708,9 @@ Voici le graphe des appelants de cette fonction :</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00076">76</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00092">92</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01092">editeurpanovisu.OllamaService.appellerOllama()</a>, <a class="el" href="OllamaService_8java_source.html#l01148">editeurpanovisu.OllamaService.appellerOpenRouter()</a>, <a class="el" href="OllamaService_8java_source.html#l00111">editeurpanovisu.OllamaService.chargerTokensAPI()</a>, <a class="el" href="OllamaService_8java_source.html#l00484">editeurpanovisu.OllamaService.getOpenRouterModel()</a>, <a class="el" href="OllamaService_8java_source.html#l00509">editeurpanovisu.OllamaService.getServiceName()</a>, et <a class="el" href="OllamaService_8java_source.html#l00465">editeurpanovisu.OllamaService.setOpenRouterModel()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01108">editeurpanovisu.OllamaService.appellerOllama()</a>, <a class="el" href="OllamaService_8java_source.html#l01164">editeurpanovisu.OllamaService.appellerOpenRouter()</a>, <a class="el" href="OllamaService_8java_source.html#l00127">editeurpanovisu.OllamaService.chargerTokensAPI()</a>, <a class="el" href="OllamaService_8java_source.html#l00500">editeurpanovisu.OllamaService.getOpenRouterModel()</a>, <a class="el" href="OllamaService_8java_source.html#l00525">editeurpanovisu.OllamaService.getServiceName()</a>, et <a class="el" href="OllamaService_8java_source.html#l00481">editeurpanovisu.OllamaService.setOpenRouterModel()</a>.</p>
 
 </div>
 </div>
@@ -2665,7 +2734,7 @@ Voici le graphe des appelants de cette fonction :</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00049">49</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00065">65</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
 </div>
 </div>
@@ -2695,7 +2764,7 @@ Voici le graphe des appelants de cette fonction :</div>
 
 <p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00041">41</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01236">editeurpanovisu.OllamaService.appellerOllamaLocal()</a>, et <a class="el" href="OllamaService_8java_source.html#l01148">editeurpanovisu.OllamaService.appellerOpenRouter()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01252">editeurpanovisu.OllamaService.appellerOllamaLocal()</a>, et <a class="el" href="OllamaService_8java_source.html#l01164">editeurpanovisu.OllamaService.appellerOpenRouter()</a>.</p>
 
 </div>
 </div>
@@ -2719,9 +2788,9 @@ Voici le graphe des appelants de cette fonction :</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00093">93</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00109">109</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01345">editeurpanovisu.OllamaService.appellerHuggingFace()</a>, <a class="el" href="OllamaService_8java_source.html#l01236">editeurpanovisu.OllamaService.appellerOllamaLocal()</a>, <a class="el" href="OllamaService_8java_source.html#l01148">editeurpanovisu.OllamaService.appellerOpenRouter()</a>, <a class="el" href="OllamaService_8java_source.html#l00387">editeurpanovisu.OllamaService.getModelesOllamaDisponibles()</a>, et <a class="el" href="OllamaService_8java_source.html#l00214">editeurpanovisu.OllamaService.isOllamaAvailable()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01363">editeurpanovisu.OllamaService.appellerHuggingFace()</a>, <a class="el" href="OllamaService_8java_source.html#l01252">editeurpanovisu.OllamaService.appellerOllamaLocal()</a>, <a class="el" href="OllamaService_8java_source.html#l01164">editeurpanovisu.OllamaService.appellerOpenRouter()</a>, <a class="el" href="OllamaService_8java_source.html#l00403">editeurpanovisu.OllamaService.getModelesOllamaDisponibles()</a>, et <a class="el" href="OllamaService_8java_source.html#l00230">editeurpanovisu.OllamaService.isOllamaAvailable()</a>.</p>
 
 </div>
 </div>
@@ -2749,7 +2818,7 @@ Voici le graphe des appelants de cette fonction :</div>
 
 <p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00047">47</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01236">editeurpanovisu.OllamaService.appellerOllamaLocal()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01252">editeurpanovisu.OllamaService.appellerOllamaLocal()</a>.</p>
 
 </div>
 </div>
@@ -2777,7 +2846,7 @@ Voici le graphe des appelants de cette fonction :</div>
 
 <p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00044">44</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01236">editeurpanovisu.OllamaService.appellerOllamaLocal()</a>, et <a class="el" href="OllamaService_8java_source.html#l01148">editeurpanovisu.OllamaService.appellerOpenRouter()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01252">editeurpanovisu.OllamaService.appellerOllamaLocal()</a>, et <a class="el" href="OllamaService_8java_source.html#l01164">editeurpanovisu.OllamaService.appellerOpenRouter()</a>.</p>
 
 </div>
 </div>
@@ -2801,9 +2870,9 @@ Voici le graphe des appelants de cette fonction :</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00094">94</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="OllamaService_8java_source.html#l00110">110</a> du fichier <a class="el" href="OllamaService_8java_source.html">OllamaService.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01092">editeurpanovisu.OllamaService.appellerOllama()</a>, <a class="el" href="OllamaService_8java_source.html#l00509">editeurpanovisu.OllamaService.getServiceName()</a>, et <a class="el" href="OllamaService_8java_source.html#l00214">editeurpanovisu.OllamaService.isOllamaAvailable()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="OllamaService_8java_source.html#l01108">editeurpanovisu.OllamaService.appellerOllama()</a>, <a class="el" href="OllamaService_8java_source.html#l00525">editeurpanovisu.OllamaService.getServiceName()</a>, et <a class="el" href="OllamaService_8java_source.html#l00230">editeurpanovisu.OllamaService.isOllamaAvailable()</a>.</p>
 
 </div>
 </div>

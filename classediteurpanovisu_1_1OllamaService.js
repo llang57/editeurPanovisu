@@ -43,6 +43,8 @@ var classediteurpanovisu_1_1OllamaService =
     [ "HUGGINGFACE_URL", "classediteurpanovisu_1_1OllamaService.html#a4354110083237e9033304385d44f5e4e", null ],
     [ "LOCATIONIQ_TOKEN", "classediteurpanovisu_1_1OllamaService.html#a21fed58afd08ecc092dc7914593882b8", null ],
     [ "LOCATIONIQ_URL", "classediteurpanovisu_1_1OllamaService.html#ae6a9d68091022a96d2551b21a3911aae", null ],
+    [ "NUM_CTX", "classediteurpanovisu_1_1OllamaService.html#a6cc771f8afaca0d97f8498d9e00f0f8f", null ],
+    [ "NUM_PREDICT", "classediteurpanovisu_1_1OllamaService.html#aebb77bc3ea466d87bac11f8748f51c74", null ],
     [ "OLLAMA_URL", "classediteurpanovisu_1_1OllamaService.html#a4b21f8d16a3e6af39a533e06dd73ae58", null ],
     [ "ollamaModel", "classediteurpanovisu_1_1OllamaService.html#afcbd79f816c5c7ce61e4398fb99a2b3e", null ],
     [ "OPENROUTER_MODELS", "classediteurpanovisu_1_1OllamaService.html#a2055b3e2801fc7ca49e5a1a6804b85e6", null ],
