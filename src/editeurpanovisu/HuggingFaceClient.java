@@ -51,7 +51,8 @@ public class HuggingFaceClient {
      * @throws Exception Si une erreur survient lors de l'appel API
      */
     public String generateText(String prompt) throws Exception {
-        return generateText(prompt, 100, 0.7);
+        // 0,1 et non 0,7 : ces descriptions doivent etre factuelles, pas creatives
+        return generateText(prompt, 100, 0.1);
     }
     
     /**

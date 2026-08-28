@@ -1,5 +1,7 @@
 package editeurpanovisu;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import editeurpanovisu.config.ModelConfig;
 import editeurpanovisu.config.ModelConfigManager;
 import java.io.BufferedReader;
@@ -24,6 +26,25 @@ public class OllamaService {
     
     // Configuration Ollama (local - préféré)
     private static final String OLLAMA_URL = "http://localhost:11434";
+
+    /**
+     * Température d'échantillonnage des générations.
+     *
+     * <p>Volontairement très basse. Ollama applique 0,8 par défaut — un réglage
+     * d'écriture créative — lorsque le bloc {@code options} est absent de la requête,
+     * ce qui était le cas : les consignes anti-hallucination du prompt étaient
+     * contredites par l'échantillonnage lui-même.</p>
+     *
+     * <p>Abaisser ce paramètre réduit fortement l'invention, sans jamais la supprimer :
+     * un modèle de langage reste génératif. La vérification humaine reste nécessaire.</p>
+     */
+    private static final double TEMPERATURE = 0.1;
+
+    /** Noyau d'échantillonnage restreint, pour la même raison que {@link #TEMPERATURE}. */
+    private static final double TOP_P = 0.5;
+
+    /** Nombre de candidats retenus à chaque étape ; 40 par défaut chez Ollama. */
+    private static final int TOP_K = 20;
     private static final String GENERATE_ENDPOINT = "/api/generate";
     private static final String TAGS_ENDPOINT = "/api/tags";
     private static String ollamaModel = "mistral"; // Sera détecté automatiquement
@@ -858,6 +879,14 @@ public class OllamaService {
                 System.out.println("[IA] Prompt construit (" + prompt.length() + " caractères)");
                 
                 String description = appellerOllama(prompt);
+
+                // Le prompt et la temperature basse raréfient l invention sans la supprimer.
+                // On relit donc systématiquement la sortie pour signaler les énoncés qu aucun
+                // modèle ne peut garantir : dates, mesures, classements, superlatifs.
+                String contexteFourni = (titreVisite == null ? "" : titreVisite) + " "
+                        + (titrePanoramique == null ? "" : titrePanoramique) + " "
+                        + (lieuReel == null ? "" : lieuReel);
+                VerificationDescription.verifieEtTrace(description, contexteFourni);
                 
                 // Après génération réussie, stocker dans le cache
                 if (description != null && !description.trim().isEmpty()) {
@@ -949,9 +978,9 @@ public class OllamaService {
                 
                 prompt.append("\nINSTRUCTIONS :\n")
                       .append("Tu es un guide touristique expert, factuel et rigoureux. Ta tâche est de décrire ce lieu avec une précision chirurgicale.\n")
-                      .append("1. Génère une description immersive et factuelle de 4 à 5 phrases maximum en français.\n")
-                      .append("2. CONCENTRE-TOI sur le SUJET PRINCIPAL. Décris l'architecture, le paysage ou l'atmosphère qui s'y rapportent.\n")
-                      .append("3. Si c'est un point de vue, décris logiquement le panorama visible depuis ce lieu.\n")
+                      .append("1. Génère une description factuelle et sobre de 4 à 5 phrases maximum en français.\n")
+                      .append("2. CONCENTRE-TOI sur le SUJET PRINCIPAL, en te limitant STRICTEMENT aux informations fournies ci-dessus.\n")
+                      .append("3. Tu n'as PAS vu l'image. Ne décris donc AUCUN détail visuel que les données ne permettent pas de déduire : ni bâtiment, ni relief, ni végétation, ni couleur, ni météo, ni ce qui serait visible à l'horizon.\n")
                       .append("4. Le village/commune n'est que le contexte géographique.\n")
                       .append("5. Ne commence JAMAIS ta réponse par des formules de politesse ('Voici la description'). Donne uniquement le texte final.\n");
             } else {
@@ -990,9 +1019,9 @@ public class OllamaService {
                 
                 prompt.append("\nINSTRUCTIONS:\n")
                       .append("You are an expert, factual, and rigorous tour guide. Your task is to describe this place with surgical precision.\n")
-                      .append("1. Generate an immersive and factual description of 4 to 5 sentences maximum in ").append(langue).append(".\n")
-                      .append("2. FOCUS on the MAIN SUBJECT. Describe the architecture, landscape, or atmosphere related to it.\n")
-                      .append("3. If it is a viewpoint, logically describe the panorama visible from this place.\n")
+                      .append("1. Generate a factual, restrained description of 4 to 5 sentences maximum in ").append(langue).append(".\n")
+                      .append("2. FOCUS on the MAIN SUBJECT, restricting yourself STRICTLY to the information provided above.\n")
+                      .append("3. You have NOT seen the image. Therefore describe NO visual detail the data does not support: no building, terrain, vegetation, colour, weather, or anything supposedly visible on the horizon.\n")
                       .append("4. The village/town is only the geographical context.\n")
                       .append("5. NEVER start your response with conversational filler ('Here is the description'). Output ONLY the final text.\n");
             }
@@ -1025,18 +1054,24 @@ public class OllamaService {
         // Consignes finales - ULTRA STRICTES (5 phrases factuelles)
         if (langue.equals("français")) {
             prompt.append("\n\n🚫 RÈGLES ANTI-HALLUCINATION ABSOLUES :\n");
-            prompt.append("1) N'INVENTE AUCUN nom propre, bâtiment, personne ou événement historique non avéré.\n");
-            prompt.append("2) N'INVENTE AUCUNE date, chiffre ou mesure.\n");
-            prompt.append("3) En l'absence de détails historiques précis, utilise une description visuelle et sensorielle GÉNÉRIQUE (ex: \"le relief escarpé\", \"les fortifications de pierre\").\n");
-            prompt.append("4) Si tu ne possèdes pas une connaissance historique absolue sur ce lieu exact, décris uniquement l'aspect géographique déduit des informations.\n");
-            prompt.append("5) Ta réponse doit contenir exactement le texte de la description, sans aucune méta-phrase (pas de \"Voici...\", pas de \"...\").\n");
+            prompt.append("1) N'INVENTE AUCUN nom propre : ni bâtiment, ni monument, ni personne, ni événement historique.\n");
+            prompt.append("2) N'INVENTE AUCUN nombre : ni date, ni siècle, ni hauteur, ni superficie, ni distance, ni fréquentation.\n");
+            prompt.append("3) N'ATTRIBUE AUCUNE distinction : ni classement au patrimoine, ni label, ni protection, ni récompense.\n");
+            prompt.append("4) N'EMPLOIE AUCUN superlatif ni qualificatif de notoriété (célèbre, renommé, incontournable, le plus beau, prisé).\n");
+            prompt.append("5) Tu ne disposes QUE des informations ci-dessus. Tout ce qui n'en découle pas doit être OMIS : il vaut mieux une description plus courte qu'un détail inventé.\n");
+            prompt.append("6) En l'absence de connaissance certaine sur ce lieu exact, reste au niveau du contexte géographique fourni (situation, commune, département, pays) sans ajouter de détail matériel.\n");
+            prompt.append("7) N'exprime aucun doute par écrit : ne produis ni \"peut-être\", ni \"sans doute\", ni \"il se pourrait\". Si tu n'es pas certain, n'écris simplement pas l'information.\n");
+            prompt.append("8) Ta réponse doit contenir exactement le texte de la description, sans aucune méta-phrase (pas de \"Voici...\").\n");
         } else {
             prompt.append("\n\n🚫 ABSOLUTE ANTI-HALLUCINATION RULES:\n");
-            prompt.append("1) NEVER INVENT proper names, buildings, people, or unverified historical events.\n");
-            prompt.append("2) NEVER INVENT dates, numbers, or measurements.\n");
-            prompt.append("3) Without precise historical details, use GENERIC visual and sensory descriptions (e.g., \"the rugged terrain\", \"the stone fortifications\").\n");
-            prompt.append("4) If you do not possess absolute historical knowledge about this exact place, describe ONLY the geographical aspects deduced from the information.\n");
-            prompt.append("5) Your response must contain exactly the description text, with no conversational or meta phrases (no \"Here is...\", no \"...\").\n");
+            prompt.append("1) NEVER INVENT a proper name: no building, monument, person, or historical event.\n");
+            prompt.append("2) NEVER INVENT a number: no date, century, height, area, distance, or visitor figure.\n");
+            prompt.append("3) NEVER ATTRIBUTE a distinction: no heritage listing, label, protected status, or award.\n");
+            prompt.append("4) NEVER USE superlatives or fame adjectives (famous, renowned, must-see, the most beautiful, popular).\n");
+            prompt.append("5) You have ONLY the information above. Anything not derived from it must be OMITTED: a shorter description is better than an invented detail.\n");
+            prompt.append("6) Without certain knowledge of this exact place, stay at the level of the geographical context provided (location, town, region, country) and add no material detail.\n");
+            prompt.append("7) Do not express doubt in writing: no \"perhaps\", \"probably\", or \"it may be\". If you are unsure, simply omit the information.\n");
+            prompt.append("8) Your response must contain exactly the description text, with no meta phrases (no \"Here is...\").\n");
         }
         
         String finalPrompt = prompt.toString();
@@ -1126,11 +1161,20 @@ public class OllamaService {
         
         // Construire le JSON de requête (format OpenAI compatible)
         // max_tokens augmenté à 1500 pour éviter les coupures (finish_reason: length)
-        String jsonRequest = String.format(
-            "{\"model\":\"%s\",\"messages\":[{\"role\":\"user\",\"content\":\"%s\"}],\"max_tokens\":1500,\"temperature\":0.3}",
-            openrouterModel,
-            prompt.replace("\"", "\\\"").replace("\n", "\\n").replace("\r", "")
-        );
+        // Même construction par Gson que pour Ollama, et même température basse : la
+        // valeur précédente (0,3) restait propice à la broderie sur des lieux peu connus.
+        JsonObject message = new JsonObject();
+        message.addProperty("role", "user");
+        message.addProperty("content", prompt);
+        JsonArray messages = new JsonArray();
+        messages.add(message);
+        JsonObject corpsRequete = new JsonObject();
+        corpsRequete.addProperty("model", openrouterModel);
+        corpsRequete.add("messages", messages);
+        corpsRequete.addProperty("max_tokens", 1500);
+        corpsRequete.addProperty("temperature", TEMPERATURE);
+        corpsRequete.addProperty("top_p", TOP_P);
+        String jsonRequest = corpsRequete.toString();
         
         // Envoyer la requête
         try (OutputStream os = conn.getOutputStream()) {
@@ -1200,15 +1244,28 @@ public class OllamaService {
         // Vérifier si le modèle configuré existe (avec ou sans tag :latest)
         boolean modeleExiste = false;
         String modeleComplet = ollamaModel;
+        // 1) correspondance EXACTE, tag compris. Indispensable : ne comparer que le nom de
+        // base faisait resoudre "qwen2.5:14b" en "qwen2.5:32b" si ce dernier venait en
+        // premier — le modele demande etait alors remplace par une variante bien plus
+        // lourde, qui echouait faute de memoire (HTTP 500).
         for (String modele : modelesDisponibles) {
-            // Comparaison flexible: "mistral-nemo" correspond à "mistral-nemo:latest"
-            String modeleBase = modele.contains(":") ? modele.substring(0, modele.indexOf(":")) : modele;
-            String ollamaBase = ollamaModel.contains(":") ? ollamaModel.substring(0, ollamaModel.indexOf(":")) : ollamaModel;
-            
-            if (modele.equals(ollamaModel) || modeleBase.equals(ollamaBase)) {
+            if (modele.equals(ollamaModel)) {
                 modeleExiste = true;
-                modeleComplet = modele; // Utiliser le nom complet avec tag
+                modeleComplet = modele;
                 break;
+            }
+        }
+        // 2) a defaut seulement, correspondance sur le nom de base, pour accepter
+        // "mistral-nemo" quand "mistral-nemo:latest" est installe
+        if (!modeleExiste) {
+            String ollamaBase = ollamaModel.contains(":") ? ollamaModel.substring(0, ollamaModel.indexOf(":")) : ollamaModel;
+            for (String modele : modelesDisponibles) {
+                String modeleBase = modele.contains(":") ? modele.substring(0, modele.indexOf(":")) : modele;
+                if (modeleBase.equals(ollamaBase)) {
+                    modeleExiste = true;
+                    modeleComplet = modele;
+                    break;
+                }
             }
         }
         
@@ -1235,11 +1292,19 @@ public class OllamaService {
         
         // Construire le JSON de requête avec le modèle détecté
         System.out.println("[IA] Utilisation du modèle Ollama: " + ollamaModel);
-        String jsonRequest = String.format(
-            "{\"model\":\"%s\",\"prompt\":\"%s\",\"stream\":false}",
-            ollamaModel,
-            prompt.replace("\"", "\\\"").replace("\n", "\\n")
-        );
+        // JSON construit par Gson : l'échappement manuel précédent ne traitait pas
+        // l'antislash, si bien qu'un titre de panoramique en contenant un produisait une
+        // requête invalide, voire altérait les consignes envoyées au modèle.
+        JsonObject options = new JsonObject();
+        options.addProperty("temperature", TEMPERATURE);
+        options.addProperty("top_p", TOP_P);
+        options.addProperty("top_k", TOP_K);
+        JsonObject corpsRequete = new JsonObject();
+        corpsRequete.addProperty("model", ollamaModel);
+        corpsRequete.addProperty("prompt", prompt);
+        corpsRequete.addProperty("stream", false);
+        corpsRequete.add("options", options);
+        String jsonRequest = corpsRequete.toString();
         
         // Envoyer la requête
         try (OutputStream os = conn.getOutputStream()) {
@@ -1307,7 +1372,7 @@ public class OllamaService {
         
         // Paramètres optimisés pour génération de descriptions courtes
         jsonRequest = String.format(
-            "{\"inputs\":\"%s\",\"parameters\":{\"max_new_tokens\":200,\"temperature\":0.7,\"do_sample\":true}}",
+            "{\"inputs\":\"%s\",\"parameters\":{\"max_new_tokens\":200,\"temperature\":0.1,\"do_sample\":false}}",
             prompt.replace("\"", "\\\"").replace("\n", "\\n")
         );
         
