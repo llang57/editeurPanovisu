@@ -1,6 +1,6 @@
 # 🌐 Éditeur PanoVisu
 
-[![Version](https://img.shields.io/badge/version-3.4.2-blue.svg)](https://github.com/llang57/editeurPanovisu/releases)
+[![Version](https://img.shields.io/badge/version-3.4.14-blue.svg)](https://github.com/llang57/editeurPanovisu/releases)
 [![Java](https://img.shields.io/badge/Java-25-orange.svg)](https://adoptium.net/)
 [![JavaFX](https://img.shields.io/badge/JavaFX-19-green.svg)](https://openjfx.io/)
 [![License](https://img.shields.io/badge/license-GPL--3.0-brightgreen.svg)](LICENSE)
@@ -21,6 +21,35 @@ PanoVisu combine puissance, simplicité et liberté pour offrir une solution com
 **Languages:** [🇫🇷 Français](README.md) • [🇬🇧 English](README_EN.md)
 
 </div>
+
+---
+
+## 🚀 Version 3.4.14 - Fiabilité de la génération par IA
+
+### 🤖 Descriptions générées : catalogues livrés et précision renforcée
+
+- ✅ **Catalogues de modèles enfin embarqués** : ils étaient absents de toute installation, laissant la liste de modèles vide. Ils sont désormais inclus dans l'application et recopiés au premier lancement.
+- ✅ **Modèles à jour** : 4 des 11 modèles OpenRouter proposés n'existaient plus chez le fournisseur, dont les deux utilisés par défaut. Catalogue reconstruit, tarifs corrigés.
+- ✅ **Génération locale réparée** : la requête ne fixait aucune longueur de contexte, ce qui faisait échouer la génération sur une machine ordinaire, même avec un petit modèle.
+- ✅ **Lutte contre l'invention de faits** : température ramenée de 0,8 à 0,1, suppression d'une consigne qui invitait le modèle à inventer, règles portées de 5 à 10.
+- ✅ **Vérification automatique** : dates, mesures, distinctions, superlatifs et noms propres absents des informations fournies sont signalés pour relecture.
+
+> ⚠️ **Aucune consigne ne rend l'hallucination impossible.** Le dispositif la raréfie et la signale ; une relecture reste nécessaire avant publication. Renseigner une clé LocationIQ améliore la précision plus sûrement que n'importe quelle consigne.
+
+### 🧪 Qualité du projet
+
+- ✅ Suite de tests JUnit (15 tests) là où `mvn test` n'en exécutait aucun
+- ✅ Les classes de test ne sont plus embarquées dans l'application livrée
+
+---
+
+## 🚀 Versions 3.4.4 à 3.4.12
+
+- **3.4.12** - Paquet macOS réparé : l'application ne démarrait pas ([#17](https://github.com/llang57/editeurPanovisu/issues/17))
+- **3.4.10** - Liste de tri des panoramiques tronquée au-delà de dix panoramiques ([#16](https://github.com/llang57/editeurPanovisu/issues/16))
+- **3.4.8** - Modèles IA 2026 ; aide intégrée (F1) : ancres de navigation et bouton « retour en haut »
+- **3.4.6** - Rendu du cube panoramique corrigé, qualité plein écran portée à 2000 px
+- **3.4.4** - Rendu panoramique par cube (`PanoramicCube`)
 
 ---
 
@@ -179,7 +208,7 @@ PanoVisu combine puissance, simplicité et liberté pour offrir une solution com
   - Changement d'image en pause = reste en pause (action volontaire requise)
   - Seul le bouton Play/Pause modifie explicitement l'état de lecture
 
-### 🎨 Système de thèmes enrichi (24 thèmes disponibles)
+### 🎨 Système de thèmes enrichi (27 thèmes disponibles)
 - **🎯 Nouveaux thèmes minimalistes** : 8 thèmes flat design professionnels
   - **4 palettes de couleurs** : Bleu 🔷🔹, Vert 🟢🟩, Rouge 🔴🟥, Mauve 💜🟪
   - **2 variantes par palette** : Clair et Foncé pour chaque couleur
@@ -193,7 +222,7 @@ PanoVisu combine puissance, simplicité et liberté pour offrir une solution com
   - Contrôles de formulaire éclaircis (checkboxes, radio buttons, sliders, spinners, progressbars)
   - Bordures plus contrastées et épaissies pour meilleure identification
   - Texte des menus toujours blanc (normal, hover, dropdown ouvert)
-- **📦 Collection complète de 24 thèmes** :
+- **📦 Collection complète de 27 thèmes** :
   - 9 thèmes AtlantaFX (Primer, Nord, Cupertino, Dracula)
   - 2 thèmes MaterialFX (Light, Dark)
   - 2 thèmes FlatLaf (Light/IntelliJ, Dark/Darcula)
@@ -420,13 +449,19 @@ Découvrez des exemples réalisés avec PanoVisu : [lemondea360.fr/panovisu](htt
 - **JavaFX 19** - Interface graphique moderne
 - **Maven 3.9** - Gestion des dépendances
 - **Apache Commons** - Utilitaires
-- **JAXB** - Serialisation XML
+- **Gson** - Configuration JSON des modèles IA
+- **Format `.pvu`** - Format texte propre au projet (ni XML, ni JAXB)
 
 ### Cartes et géolocalisation
 - **OpenStreetMap** (par défaut, gratuit)
 - **Google Maps API** (optionnel, nécessite une clé)
 - **Bing Maps API** (optionnel, nécessite une clé)
 - **Gluon Maps** - Alternative mobile
+
+### 🤖 Génération de descriptions
+- **Ollama** (local, gratuit) - Modèles exécutés sur votre machine, aucune donnée envoyée
+- **OpenRouter** (en ligne, optionnel) - Accès unifié à Claude, Gemini, GPT et autres
+- **LocationIQ** (optionnel, gratuit jusqu'à 5 000 requêtes/jour) - Géocodage inverse ; améliore nettement la précision des descriptions générées
 
 ## 🔑 Configuration des clés API
 
@@ -485,7 +520,7 @@ mvn clean package
 # Lancement de l'éditeur
 mvn javafx:run
 
-# Exécution des tests
+# Exécution de la suite de tests JUnit
 mvn test
 
 # Nettoyage du projet
@@ -496,7 +531,7 @@ mvn clean
 
 Le projet utilise un **système d'auto-incrémentation** du numéro de build :
 
-- **Format** : `3.0-b[numéro]` (ex: `3.0-b2039`)
+- **Format** : `3.4.14` accompagné d'un numéro de build auto-incrémenté (ex. build 3748)
 - **Incrémentation automatique** à chaque compilation Maven
 - **Script PowerShell** : `increment-build.ps1`
 - **Documentation complète** : [VERSIONING.md](VERSIONING.md)

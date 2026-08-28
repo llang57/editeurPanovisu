@@ -1,6 +1,6 @@
 # 🌐 PanoVisu Editor
 
-[![Version](https://img.shields.io/badge/version-3.3.3-blue.svg)](https://github.com/llang57/editeurPanovisu/releases)
+[![Version](https://img.shields.io/badge/version-3.4.14-blue.svg)](https://github.com/llang57/editeurPanovisu/releases)
 [![Java](https://img.shields.io/badge/Java-25-orange.svg)](https://adoptium.net/)
 [![JavaFX](https://img.shields.io/badge/JavaFX-19-green.svg)](https://openjfx.io/)
 [![License](https://img.shields.io/badge/license-GPL--3.0-brightgreen.svg)](LICENSE)
@@ -21,6 +21,36 @@ PanoVisu combines power, simplicity, and freedom to offer a complete and free so
 **Languages:** [🇫🇷 Français](README.md) • [🇬🇧 English](README_EN.md)
 
 </div>
+
+---
+
+## 🚀 Version 3.4.14 - Reliable AI Description Generation
+
+### 🤖 Model catalogues shipped, accuracy tightened
+
+- ✅ **Model catalogues are now bundled**: they were missing from every installation, leaving the model list empty. They ship inside the application and are copied out on first launch.
+- ✅ **Models refreshed**: 4 of the 11 OpenRouter models offered no longer existed at the provider, including the two used by default. Catalogue rebuilt, prices corrected.
+- ✅ **Local generation fixed**: the request set no context length, which made generation fail on an ordinary machine even with a small model.
+- ✅ **Guarding against invented facts**: temperature lowered from 0.8 to 0.1, removal of an instruction that invited the model to invent, rules raised from 5 to 10.
+- ✅ **Automatic review**: dates, measurements, heritage listings, superlatives and proper nouns absent from the supplied context are flagged for proofreading.
+
+> ⚠️ **No prompt can make hallucination impossible.** This makes it rarer and visible; human proofreading is still required. Setting a LocationIQ key improves accuracy far more reliably than any wording.
+
+### 🧪 Project quality
+
+- ✅ A real JUnit suite (15 tests) where `mvn test` used to run none
+- ✅ Test classes are no longer bundled into the shipped application
+
+---
+
+## 🚀 Versions 3.4.2 to 3.4.12
+
+- **3.4.12** - macOS package fixed: the application would not start ([#17](https://github.com/llang57/editeurPanovisu/issues/17))
+- **3.4.10** - Panorama sort list truncated beyond ten panoramas ([#16](https://github.com/llang57/editeurPanovisu/issues/16))
+- **3.4.8** - 2026 AI models; in-app help (F1): working anchors and a back-to-top button
+- **3.4.6** - Panoramic cube rendering fixed, fullscreen quality raised to 2000 px
+- **3.4.4** - Cube-based panoramic rendering (`PanoramicCube`)
+- **3.4.2** - GPU detection on Windows extended to NVIDIA, AMD and Intel
 
 ---
 
@@ -161,7 +191,7 @@ PanoVisu combines power, simplicity, and freedom to offer a complete and free so
   - Image change while paused = stays paused (voluntary action required)
   - Only the Play/Pause button explicitly changes playback state
 
-### 🎨 Enhanced Theme System (24 themes available)
+### 🎨 Enhanced Theme System (27 themes available)
 - **🎯 New minimalist themes**: 8 professional flat design themes
   - **4 color palettes**: Blue 🔷🔹, Green 🟢🟩, Red 🔴🟥, Purple 💜🟪
   - **2 variants per palette**: Light and Dark for each color
@@ -175,7 +205,7 @@ PanoVisu combines power, simplicity, and freedom to offer a complete and free so
   - Lightened form controls (checkboxes, radio buttons, sliders, spinners, progressbars)
   - More contrasted and thickened borders for better identification
   - Menu text always white (normal, hover, dropdown open)
-- **📦 Complete collection of 24 themes**:
+- **📦 Complete collection of 27 themes**:
   - 9 AtlantaFX themes (Primer, Nord, Cupertino, Dracula)
   - 2 MaterialFX themes (Light, Dark)
   - 2 FlatLaf themes (Light/IntelliJ, Dark/Darcula)
@@ -352,17 +382,25 @@ sudo rpm -i editeurpanovisu-3.1.0.x86_64.rpm
 
 ### Viewer (HTML5/WebGL)
 - **Three.js** - 3D rendering engine
-- **Pannellum** - Panoramic display library
 - **jQuery** - DOM manipulation
 - **OpenLayers** - Interactive maps
-- **RequireJS** - Module management
+- **Hammer.js** - Touch gestures
+- **screenfull.js** - Fullscreen handling
 
 ### Editor (Java/JavaFX)
 - **Java 25** (OpenJDK)
 - **JavaFX 19** - Modern graphical interface
-- **ControlsFX** - Enhanced UI components
+- **AtlantaFX / MaterialFX / FlatLaf** - Theme providers (27 themes)
+- **Apache Batik** - Runtime SVG rendering
+- **JOCL** - OpenCL bindings for GPU acceleration
 - **Apache Commons** - Utilities
-- **JSON-java** - Configuration management
+- **Gson** - AI model configuration
+- **`.pvu` format** - Project-specific text format (no XML, no JAXB)
+
+### AI Description Generation
+- **Ollama** (local, free) - Models run on your own machine, no data leaves it
+- **OpenRouter** (online, optional) - Unified access to Claude, Gemini, GPT and others
+- **LocationIQ** (optional, free up to 5,000 requests/day) - Reverse geocoding; markedly improves the accuracy of generated descriptions
 
 ### Build and Packaging
 - **Maven 3.9+** - Dependency management
@@ -421,6 +459,8 @@ java -jar target/editeurPanovisu-3.1.0-SNAPSHOT.jar
 The installer will be generated in `target/installer/`
 
 ### Run Tests
+
+The project ships a JUnit suite (15 tests).
 
 ```bash
 mvn test
