@@ -24,237 +24,6 @@ PanoVisu combines power, simplicity, and freedom to offer a complete and free so
 
 ---
 
-## 🚀 Version 3.4.14 - Reliable AI Description Generation
-
-### 🤖 Model catalogues shipped, accuracy tightened
-
-- ✅ **Model catalogues are now bundled**: they were missing from every installation, leaving the model list empty. They ship inside the application and are copied out on first launch.
-- ✅ **Models refreshed**: 4 of the 11 OpenRouter models offered no longer existed at the provider, including the two used by default. Catalogue rebuilt, prices corrected.
-- ✅ **Local generation fixed**: the request set no context length, which made generation fail on an ordinary machine even with a small model.
-- ✅ **Guarding against invented facts**: temperature lowered from 0.8 to 0.1, removal of an instruction that invited the model to invent, rules raised from 5 to 10.
-- ✅ **Automatic review**: dates, measurements, heritage listings, superlatives and proper nouns absent from the supplied context are flagged for proofreading.
-
-> ⚠️ **No prompt can make hallucination impossible.** This makes it rarer and visible; human proofreading is still required. Setting a LocationIQ key improves accuracy far more reliably than any wording.
-
-### 🧪 Project quality
-
-- ✅ A real JUnit suite (15 tests) where `mvn test` used to run none
-- ✅ Test classes are no longer bundled into the shipped application
-
----
-
-## 🚀 Versions 3.4.2 to 3.4.12
-
-- **3.4.12** - macOS package fixed: the application would not start ([#17](https://github.com/llang57/editeurPanovisu/issues/17))
-- **3.4.10** - Panorama sort list truncated beyond ten panoramas ([#16](https://github.com/llang57/editeurPanovisu/issues/16))
-- **3.4.8** - 2026 AI models; in-app help (F1): working anchors and a back-to-top button
-- **3.4.6** - Panoramic cube rendering fixed, fullscreen quality raised to 2000 px
-- **3.4.4** - Cube-based panoramic rendering (`PanoramicCube`)
-- **3.4.2** - GPU detection on Windows extended to NVIDIA, AMD and Intel
-
----
-
-## 🚀 Version 3.3.3 - Simplified Linux Portable Support
-
-**What's new?**
-
-### 🐧 Portable Linux Distribution (Build 3597+ - Oct 23, 2025)
-
-**Standalone portable archive** 📦
-- **ZIP and TAR.GZ**: Complete archives without system dependencies
-- **Ultra-simple installation**: Extract, `chmod +x`, run
-- **Triple format documentation**:
-  - `INSTALLATION.md`: Complete Markdown guide with all details
-  - `INSTALLATION.txt`: Text version for terminals (80 columns)
-  - `INSTALLATION.html`: Styled web version with modern CSS
-- **Intelligent bash script**:
-  - Automatic Java detection and version check (recommends Java 25+)
-  - Optimal JavaFX 3D configuration (PRISM_FORCEGL, PRISM_ORDER)
-  - Clear error messages with solutions
-- **Clean structure**: Windows files (.bat/.vbs) automatically excluded
-- **Installation guide**: See [doc/install/INSTALLATION.md](doc/install/INSTALLATION.md)
-
-**Critical Linux fixes** 🐛
-- ✅ **Panorama cache**: Cache usage fixed (700ms → <50ms)
-- ✅ **Modal blocking**: Configuration window no longer freezes (Platform.runLater + show())
-- ✅ **NullPointerException**: Protection against crashes on reload (unloaded images)
-- ✅ **Maven build**: All classes included in JAR (93/93 classes)
-
-### 🎯 Enhanced 3D Panoramic Viewer (Build 3417 - Oct 20, 2025)
-- **📱 Modernized interface with icons**:
-  - Replaced text buttons with **intuitive PNG icons** (home, photo, compass, eye)
-  - **Automatic theme adaptation**: white icons for dark themes, black for light themes
-  - **Informative tooltips**: contextual help on hover for each button
-  - Buttons with **hover effect**: opacity 0.6 → 1.0 for visual feedback
-  - **Optimized positioning**: labels at top, 3D viewer in center, 5 buttons at bottom
-- **🖼️ High-resolution fullscreen mode**:
-  - **Dedicated popup window** (1200×780) instead of system fullscreen
-  - **Doubled resolution**: loads original image without reduction (iRapport=1 instead of 2)
-  - **4× superior cube quality**: **1000×1000 pixel** faces (instead of 500×500)
-  - Intermediate equirectangular image of **3000×1500** (instead of 1500×750)
-  - **Perfect preservation**: 8192×4096 image → 8192×4096 rendering (vs 4096×1024 in normal mode)
-  - **Configurable high-quality mode**: activatable flag for high-resolution displays
-- **🎨 Enhanced error handling**:
-  - File existence verification before loading
-  - **Detailed logs**: image dimensions, file paths, GPU performance
-  - **Optimal spacing**: height calculated with 100px margin to avoid cut-off buttons
-- **⚡ GPU Performance**:
-  - **Bicubic resizing**: 8192×4096 → 3000×1500 in ~350ms
-  - **Equi→Cube conversion**: 6 faces generation 1000×1000 in ~125ms
-  - Total processing < 500ms for maximum quality
-
-### 🗺️ Maps and Geolocation Refactoring (Builds 3376-3416)
-- **🌐 Migration to Leaflet**:
-  - Replaced NavigateurCarteGluon with **NavigateurCarte** (pure Leaflet)
-  - **Lazy loading** architecture with `onMapReady` callback to avoid JavaFX bugs
-  - HTML loading via `load()` preserving relative resource paths
-  - Dynamic injection of LocationIQ API key after initialization
-- **📍 Complete management API**:
-  - **Draggable markers**: mouse-draggable with automatic update
-  - **Radar (field of view)**: configurable size 0-240m (×3 vs old 0-80m)
-  - **Nominatim geocoding**: address search with OpenStreetMap results
-  - **Methods**: `ajouteMarqueur()`, `retireMarqueurs()`, `allerCoordonnees()`, `afficheRadar()`
-- **🔧 Critical fixes**:
-  - Fixed longitude/latitude inversion in `CoordonneesGeographiques` constructor
-  - Distinction between `recupereCoordonnees(0)` (marker) and `recupereCoordonnees()` (center)
-  - Asynchronous callback `setOnMapReady()` to avoid "texture is null" (JavaFX 19 bug)
-  - `miseAJourRadarSeul()` method to optimize partial updates
-
-### 🎨 Interface and Visualization (Builds 3376-3416)
-- **📐 Viewport size adaptation**:
-  - Intelligent calculation of container/image ratio for correct extraction
-  - Replaced hardcoded dimensions with `getVisualisationWidth()`/`getVisualisationHeight()`
-  - Viewport adjusted dynamically according to actual dimensions
-- **📱 Modernized social networks**:
-  - Replaced Google+/Facebook with **Meta** (unified platform)
-  - Removed obsolete references to Google+
-  - Streamlined interface with 3 options: Twitter, Meta, Email
-- **🎛️ Enhanced custom bar**:
-  - **Configurable opacity**: slider 0-1 with hover effect (opacity → 1.0 on hover)
-  - Remote control and navigation bar with adjustable transparency
-  - Improved visibility while preserving immersion
-
-### 🛡️ Fixes and Stability (Builds 3376-3416)
-- **🖼️ Invalid image protection**:
-  - `BufferedImage` verification before JPEG writing (slideshow)
-  - Skip corrupted images instead of crashing the application
-  - Warning message in console with filename
-- **🎯 UI positioning**:
-  - Fixed interface element offsets (labels, buttons, controls)
-  - Consistent spacing via `PANEL_TOP_MARGIN` and `PANEL_ELEMENT_SPACING`
-  - 3-zone architecture for geolocation: Header / Map / Control panel
-- **⏱️ Asynchronous management**:
-  - Lazy loading map (on first geolocation click)
-  - `carteEnCoursDeChargement` flag to avoid multiple re-configurations
-  - WebEngine state listeners for Java/JavaScript synchronization
-
-### ⚡ GPU Acceleration (OpenCL)
-- **🎮 GPU Processing**: Hardware acceleration for all image processing operations
-  - **Panoramic transformations**: Equirectangular ↔ Cube conversion **3.3× faster**
-  - **Image resizing**: High-quality Bicubic and Lanczos3 algorithms on GPU
-  - **Tour display**: Panoramic rendering **10× faster**
-  - **Level of Detail (LOD)**: Accelerated progressive level generation
-  - **Automatic fallback**: Switches to CPU if GPU unavailable
-- **📊 Performance gains**:
-  - Panoramic tour loading: **3.4× faster** (15s → 4.5s)
-  - Batch resizing: **1.7× faster**
-  - Screen display: **10× faster** (1000ms → 100ms)
-  - Visual quality: Bicubic/Lanczos3 eliminates aliasing
-- **🎨 Improved image quality**:
-  - Bicubic interpolation replaces Nearest Neighbor
-  - Lanczos3 interpolation for ×2+ enlargements
-  - Reduced aliasing and better anti-aliasing
-
-### 🎨 Modernized Interface and Slideshow Viewer
-- **🖥️ Modernized editor interface**: Complete redesign of creation/editing windows
-  - **Slideshow creation interface**: Clean design with automatic theme management
-  - **Integrated HTML editor**: Modern JavaFX WYSIWYG for rich content (HTML hotspots)
-  - **Custom navigation bar creation**: Intuitive interface with drag & drop and real-time preview
-  - **Theme-Aware Design**: All windows automatically adapt to theme (light/dark)
-  - **Ergonomic fixes**: Optimal resizing, properly positioned buttons
-  - **Visual consistency**: Removed hardcoded colors, using theme variables
-- **📽️ Modern HTML5 slideshow viewer**: Complete replacement of obsolete Supersized viewer (jQuery 2012)
-  - **Material Design**: Elegant interface with glassmorphism and fluid animations
-  - **Visual progress bar**: Real-time tracking with fill animation
-  - **Intuitive navigation**: Buttons, directional arrows, keyboard, clickable thumbnails
-  - **Position indicators**: Dots with hover effect and counter (X/Total)
-  - **Complete controls**: Play/Pause, Previous/Next, Fullscreen, Thumbnails
-  - **Thumbnail mode**: Gallery with hover and direct selection
-  - **Auto-hide**: Controls disappear after 3s of inactivity (reappear on hover)
-  - **Responsive**: Automatic adaptation mobile/tablet/desktop
-  - **Lightweight and performant**: ~20 KB vs ~150 KB (old), pure HTML5/CSS3/JavaScript code
-- **🎭 Slideshow hotspot animations**: 
-  - Consistency with photo hotspots: "blink", "pulse", "rotation" animations, etc.
-  - Configuration from editor with preview
-- **⏸️ Intelligent pause behavior**:
-  - Pause/play state respected during manual navigation
-  - Image change while paused = stays paused (voluntary action required)
-  - Only the Play/Pause button explicitly changes playback state
-
-### 🎨 Enhanced Theme System (27 themes available)
-- **🎯 New minimalist themes**: 8 professional flat design themes
-  - **4 color palettes**: Blue 🔷🔹, Green 🟢🟩, Red 🔴🟥, Purple 💜🟪
-  - **2 variants per palette**: Light and Dark for each color
-  - **Sober flat design**: Clean interface without excessive effects, focus on readability
-  - **Harmonious accent colors**: Visual consistency throughout the application
-- **🎨 Dynamic colored icons**: SVG icons automatically take the theme color
-  - Glyph/Ikonli icons colored via CSS
-  - SVG icons with intelligent replacement of `currentColor` and `fill="white"`
-  - Dynamic conversion to PNG with Apache Batik
-- **🌓 Optimized visibility for dark themes**:
-  - Lightened form controls (checkboxes, radio buttons, sliders, spinners, progressbars)
-  - More contrasted and thickened borders for better identification
-  - Menu text always white (normal, hover, dropdown open)
-- **📦 Complete collection of 27 themes**:
-  - 9 AtlantaFX themes (Primer, Nord, Cupertino, Dracula)
-  - 2 MaterialFX themes (Light, Dark)
-  - 2 FlatLaf themes (Light/IntelliJ, Dark/Darcula)
-  - 2 legacy custom themes (Light, Dark)
-  - 2 acidic themes (Light 🌸, Dark 🌌)
-  - 2 modern themes (Light 🌿, Dark 🌃)
-  - 8 minimalist themes (Blue/Green/Red/Purple × Light/Dark)
-- **🔄 Universal application**: FXML welcome window integrated into the theme system
-
-### 🔧 Technical Architecture
-- OpenCL 1.2+ support (NVIDIA CUDA, AMD ROCm, Intel compatible)
-- Intelligent GPU/CPU auto-routing based on image size
-- Robust colorspace management (CMYK, YCbCr, RGB)
-- Comprehensive technical documentation (1200+ lines)
-
----
-
-## 🔧 Version 3.2.0 - Advanced Customization and Smooth Transitions
-
-**What's new?**
-
-### ✨ New Features
-- **🎨 Individual Hotspot Customization**: 
-  - **16 different animations**: bounce, pulse, flash, shake, swing, tada, wobble, jello, heartbeat, rubberBand, rotate, flip, zoomIn, zoomOut, fadeIn, slideIn
-  - **Custom colors**: Choose a unique color for each hotspot with the HSB color picker
-  - **Custom icons**: Replace the default icon of each hotspot with an image of your choice, with automatic color transformation
-  - **Hover magnification**: Configurable zoom effect for each hotspot
-  - **Complete persistence**: Custom icons and colors are saved in PVU projects
-  - Complete configuration from the graphical interface with real-time preview
-- **🌊 WebGL Crossfade**: Smooth and elegant transitions between panoramas with crossfade effect (2 seconds) using WebGL and shaders for a professional visual experience
-- **📦 ZIP Export**: Export your tours directly as ZIP archives for simplified sharing
-- **🖼️ Image Resizing**: New tool for resizing and compressing panoramic images
-- **📐 2:1 Ratio Conversion**: Improved icon positioning in the user interface
-
-### 🔧 Technical Improvements
-- **Robust architecture**: Image dimension validation and enhanced error handling
-- **Improved parsing**: Safe handling of empty fields in PVU files
-- **Optimized UI**: Hotspot panels widened (+30px) for better ergonomics
-
-### ⚠️ Important - Migration from v3.0.0
-
-If you host tours on Linux servers, note that **v3.1.0** fixed a critical case-sensitivity issue. Tours created with v3.0.0 and hosted on Linux must be re-exported with v3.1.0 or higher.
-
-### 📢 GitHub Discussions
-- 🇬🇧 [📢 v3.2.0 Announcement](https://github.com/llang57/editeurPanovisu/discussions) • [❓ FAQ](https://github.com/llang57/editeurPanovisu/discussions/9) • [🚀 Guide](https://github.com/llang57/editeurPanovisu/discussions/11)
-- 🇫🇷 [📢 Annonce v3.2.0](https://github.com/llang57/editeurPanovisu/discussions) • [❓ FAQ](https://github.com/llang57/editeurPanovisu/discussions/8) • [🚀 Guide](https://github.com/llang57/editeurPanovisu/discussions/10)
-
----
-
 ## 📑 Table of Contents
 
 - [What is PanoVisu?](#what-is-panovisu)
@@ -266,6 +35,7 @@ If you host tours on Linux servers, note that **v3.1.0** fixed a critical case-s
 - [Compilation and Development](#-compilation-and-development)
 - [Documentation](#-documentation)
 - [Browser Compatibility](#-browser-compatibility)
+- [What is New](#-what-is-new)
 - [Contributing](#-contributing)
 - [Support and Contact](#-support-and-contact)
 - [License](#-license)
@@ -329,6 +99,28 @@ If you host tours on Linux servers, note that **v3.1.0** fixed a critical case-s
 - **Custom navigation bars**: Visual creation with clickable zones
 - **Theme adaptation**: All windows follow chosen theme (light/dark)
 - One-click export to HTML/XML
+
+### ⚡ GPU Acceleration (OpenCL)
+- **Hardware image processing**: equirectangular ↔ cube conversion, resizing and level-of-detail generation
+- **Measured gains**: tours load 3.4× faster (15 s → 4.5 s), display 10× faster, batch resizing 1.7× faster
+- **Higher quality**: Bicubic and Lanczos3 interpolation replacing nearest neighbour, without aliasing
+- **Automatic CPU fallback** when no OpenCL-capable GPU is available (NVIDIA, AMD, Intel)
+
+### 🗺️ Maps and Geolocation
+- **Built-in Leaflet map** to place each panorama
+- **Draggable markers**, with coordinates updated as you move them
+- **Field-of-view radar**, adjustable from 0 to 240 m
+- **Address search** via OpenStreetMap, and LocationIQ reverse geocoding to enrich descriptions
+
+### 🤖 AI Description Generation
+- **Ollama** locally, free and with no data leaving your machine, or **OpenRouter** online (Claude, Gemini, GPT)
+- **Editable model catalogue**, from free to premium, with indicative pricing
+- **Descriptions automatically reviewed**: dates, measurements, heritage listings, superlatives and unsupplied proper nouns are flagged
+
+### 🎨 Interface Themes
+- **27 themes**: 9 AtlantaFX (Primer, Nord, Cupertino, Dracula), 2 MaterialFX, 2 FlatLaf, 2 custom, 2 vivid, 2 modern and 8 minimalist (blue, green, red, purple, each light and dark)
+- **Adaptive icons**: SVG icons automatically take the colour of the active theme
+- **Dark theme legibility**: lightened form controls and contrasted borders
 
 ## 📦 Installation
 
@@ -493,6 +285,20 @@ mvn test
 - ✅ **Samsung Internet** 14+
 
 **Requirements:** HTML5, WebGL, JavaScript enabled
+
+## 🆕 What is New
+
+**Current version: 3.4.14** — reliability of AI description generation.
+
+- Model catalogues finally ship with the application: they were missing from every installation, leaving the model list empty.
+- Models and prices refreshed; local generation, previously impossible on an ordinary machine, now works.
+- Descriptions are more restrained and automatically reviewed: dates, measurements, heritage listings, superlatives and unsupplied proper nouns are flagged.
+
+> ⚠️ No prompt can make hallucination impossible. This makes it rarer and visible; proofreading is still required. Setting a LocationIQ key improves accuracy far more reliably than any wording.
+
+📖 **Full history**: [Changelog](https://github.com/llang57/editeurPanovisu/wiki/Changelog) · [Release notes](https://github.com/llang57/editeurPanovisu/releases)
+
+---
 
 ## 🤝 Contributing
 

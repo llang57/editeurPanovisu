@@ -15,6 +15,53 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/lang/fr/).
 
 ---
 
+## [3.4.14] - 2026-08-28
+
+### 🎉 Nouveautés
+
+#### Vérification automatique des descriptions générées
+- **Relecture systématique** : dates, mesures chiffrées, distinctions patrimoniales, superlatifs de notoriété, formulations dubitatives et noms propres absents des informations fournies sont signalés dans le journal.
+- **Limite assumée** : aucune consigne ne rend l'hallucination impossible. Le dispositif la raréfie et la rend visible ; une relecture humaine reste nécessaire avant publication.
+
+#### Suite de tests
+- **15 tests JUnit** là où `mvn test` n'en exécutait aucun, dont la régression des issues #16 et le cas d'hallucination observé.
+- **Tests sortis du livrable** : les classes de test étaient compilées dans l'application distribuée.
+
+### 🔧 Améliorations
+
+- **Catalogues de modèles à jour** : 4 des 11 modèles OpenRouter proposés n'existaient plus chez le fournisseur, dont les deux utilisés par défaut. Catalogue reconstruit à partir du catalogue interrogé en direct, tarifs corrigés.
+- **Anti-hallucination renforcé** : température ramenée de 0,8 à 0,1 sur les trois services, règles portées de 5 à 10, suppression d'une consigne qui demandait au modèle de décrire une image qu'il ne voit pas.
+- **Journal d'intégration continue** : le résultat des tests, jusque-là masqué par le mode silencieux, est de nouveau visible.
+
+### 🐛 Corrections
+
+- **Catalogues de modèles absents de toute installation** : non versionnés, exclus de l'installeur et jamais recréés au premier lancement, ils laissaient l'utilisateur sans aucun modèle. Ils sont désormais embarqués dans l'application et recopiés dans `configPV/`.
+- **Génération locale impossible** : la requête ne fixait aucune longueur de contexte ; Ollama allouait le contexte maximal du modèle et la génération échouait sur une machine ordinaire, même avec un petit modèle.
+- **Mauvais modèle chargé** : la comparaison ne portant que sur le nom avant les deux-points, demander `qwen2.5:14b` pouvait lancer `qwen2.5:32b`.
+- **Échelons administratifs erronés** : les champs du géocodeur étaient étiquetés département et région à tort, transmettant au modèle des catégories fausses.
+- **Échappement JSON** : un titre de panoramique contenant certains caractères produisait une requête invalide.
+
+---
+
+## [3.4.12] - 2026-08-21
+
+### 🐛 Corrections
+
+- **Paquet macOS non démarrable** ([#17](https://github.com/llang57/editeurPanovisu/issues/17)) : le paquet désignait comme point d'entrée une classe étendant `javafx.application.Application`, ce qui est impossible depuis un JAR *shaded*. La classe `Launcher`, utilisée par Windows et Linux, est désormais employée.
+- **Ressources introuvables sous macOS** : une application lancée depuis le Finder ne démarre pas dans son propre dossier ; le répertoire de travail est maintenant imposé.
+- **Version du paquet macOS** : le nom du `.dmg` retombait sur une valeur codée en dur (3.4.0) à chaque construction déclenchée par un tag.
+
+---
+
+## [3.4.10] - 2026-08-21
+
+### 🐛 Corrections
+
+- **Liste de tri des panoramiques tronquée** ([#16](https://github.com/llang57/editeurPanovisu/issues/16)) : au-delà de dix panoramiques, une bande blanche occupait le bas du cadre et les derniers panoramiques restaient inaccessibles. La hauteur de ligne était supposée valoir 46 px sans être imposée ; les thèmes de la v3.x la ramènent à environ 39 px.
+- **Empilement de listes** : après suppression d'un panoramique, deux listes se superposaient dans le même conteneur.
+
+---
+
 ## [3.4.8] - 2026-05-18
 
 ### 🎉 Nouveautés
@@ -78,6 +125,25 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/lang/fr/).
 #### Gestion d'Interface IA
 - **Panneau de Configuration IA** : Ajout d'une fenêtre de paramètres complète (`Ctrl+M`) pour activer, désactiver et ordonner les modèles d'écriture.
 - **Fichiers de préférences** : Intégration des fichiers de clés API locales et de configuration de prompts.
+
+---
+
+## [3.3.3] - 2025-10-23
+
+### 🎉 Nouveautés
+
+#### Distribution Linux portable
+- **Archives autonomes** au format ZIP et TAR.GZ, sans dépendance système : extraire, `chmod +x`, lancer.
+- **Documentation en trois formats** : `INSTALLATION.md`, `INSTALLATION.txt` (80 colonnes) et `INSTALLATION.html`.
+- **Script de lancement** détectant Java et sa version, et configurant JavaFX 3D (`PRISM_FORCEGL`, `PRISM_ORDER`).
+- **Archive épurée** : les fichiers Windows (`.bat`, `.vbs`) en sont exclus.
+
+### 🐛 Corrections
+
+- **Cache des panoramiques** : utilisation effective du cache (700 ms → moins de 50 ms).
+- **Blocage modal** : la fenêtre de configuration ne se bloque plus.
+- **NullPointerException** au rechargement lorsque les images ne sont pas encore chargées.
+- **Build Maven** : toutes les classes sont désormais incluses dans le JAR.
 
 ---
 

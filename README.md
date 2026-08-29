@@ -24,254 +24,6 @@ PanoVisu combine puissance, simplicité et liberté pour offrir une solution com
 
 ---
 
-## 🚀 Version 3.4.14 - Fiabilité de la génération par IA
-
-### 🤖 Descriptions générées : catalogues livrés et précision renforcée
-
-- ✅ **Catalogues de modèles enfin embarqués** : ils étaient absents de toute installation, laissant la liste de modèles vide. Ils sont désormais inclus dans l'application et recopiés au premier lancement.
-- ✅ **Modèles à jour** : 4 des 11 modèles OpenRouter proposés n'existaient plus chez le fournisseur, dont les deux utilisés par défaut. Catalogue reconstruit, tarifs corrigés.
-- ✅ **Génération locale réparée** : la requête ne fixait aucune longueur de contexte, ce qui faisait échouer la génération sur une machine ordinaire, même avec un petit modèle.
-- ✅ **Lutte contre l'invention de faits** : température ramenée de 0,8 à 0,1, suppression d'une consigne qui invitait le modèle à inventer, règles portées de 5 à 10.
-- ✅ **Vérification automatique** : dates, mesures, distinctions, superlatifs et noms propres absents des informations fournies sont signalés pour relecture.
-
-> ⚠️ **Aucune consigne ne rend l'hallucination impossible.** Le dispositif la raréfie et la signale ; une relecture reste nécessaire avant publication. Renseigner une clé LocationIQ améliore la précision plus sûrement que n'importe quelle consigne.
-
-### 🧪 Qualité du projet
-
-- ✅ Suite de tests JUnit (15 tests) là où `mvn test` n'en exécutait aucun
-- ✅ Les classes de test ne sont plus embarquées dans l'application livrée
-
----
-
-## 🚀 Versions 3.4.4 à 3.4.12
-
-- **3.4.12** - Paquet macOS réparé : l'application ne démarrait pas ([#17](https://github.com/llang57/editeurPanovisu/issues/17))
-- **3.4.10** - Liste de tri des panoramiques tronquée au-delà de dix panoramiques ([#16](https://github.com/llang57/editeurPanovisu/issues/16))
-- **3.4.8** - Modèles IA 2026 ; aide intégrée (F1) : ancres de navigation et bouton « retour en haut »
-- **3.4.6** - Rendu du cube panoramique corrigé, qualité plein écran portée à 2000 px
-- **3.4.4** - Rendu panoramique par cube (`PanoramicCube`)
-
----
-
-## 🚀 Version 3.4.2 - Corrections GPU et stabilité
-
-**Quoi de neuf ?**
-
-### 🐛 Corrections critiques (Build 3684+)
-
-**Détection GPU NVIDIA/AMD sous Windows** 🎮
-- ✅ **RTX 5070 Ti et cartes récentes** : Correction de la détection OpenCL sur Windows
-- ✅ **Toutes marques supportées** : NVIDIA CUDA, AMD, Intel — plus seulement les plateformes Mesa/Linux
-- ✅ **Système de priorité** : NVIDIA > AMD > rusticl > Intel pour sélection automatique du meilleur GPU
-
-**Stabilité import panoramiques** 📸
-- ✅ **Plus de blocage à la 19e image** : Suppression du pré-calcul mémoire à l'import (fix issue #12)
-- ✅ **Import illimité** : Projets avec 37+ panoramiques fonctionnent sans saturation mémoire
-- ✅ **Calcul à la demande** : Les faces cube sont générées uniquement lors de l'affichage
-
----
-
-## 🚀 Version 3.3.3 - Support Linux Portable Simplifié
-
-**Quoi de neuf ?**
-
-### 🐧 Distribution Linux Portable (Build 3597+ - 23 oct. 2025)
-
-**Archive portable autonome** 📦
-- **ZIP et TAR.GZ** : Archives complètes sans dépendances système
-- **Installation ultra-simple** : Extraire, `chmod +x`, lancer
-- **Documentation triple format** :
-  - `INSTALLATION.md` : Guide Markdown complet avec tous les détails
-  - `INSTALLATION.txt` : Version texte pour terminaux (80 colonnes)
-  - `INSTALLATION.html` : Version web stylisée avec CSS moderne
-- **Script bash intelligent** :
-  - Détection automatique Java et version (recommande Java 25+)
-  - Configuration JavaFX 3D optimale (PRISM_FORCEGL, PRISM_ORDER)
-  - Messages d'erreur clairs avec solutions
-- **Structure propre** : Fichiers Windows (.bat/.vbs) automatiquement exclus
-- **Guide installation** : Voir [doc/install/INSTALLATION.md](doc/install/INSTALLATION.md)
-
-**Corrections critiques Linux** 🐛
-- ✅ **Cache panoramas** : Correction utilisation cache (700ms → <50ms)
-- ✅ **Blocage modal** : Fenêtre configuration ne se bloque plus (Platform.runLater + show())
-- ✅ **NullPointerException** : Protection contre crashes au rechargement (images non chargées)
-- ✅ **Build Maven** : Toutes les classes incluses dans le JAR (93/93 classes)
-
-### 🎯 Visualiseur Panoramique 3D Amélioré (Build 3417 - 20 oct. 2025)
-- **📱 Interface modernisée avec icônes** :
-  - Remplacement des boutons texte par des **icônes PNG intuitives** (home, photo, boussole, œil)
-  - **Adaptation automatique au thème** : icônes blanches pour thèmes sombres, noires pour thèmes clairs
-  - **Tooltips informatifs** : aide contextuelle au survol de chaque bouton
-  - Boutons avec **effet de survol** : opacité 0.6 → 1.0 pour retour visuel
-  - **Positionnement optimisé** : labels en haut, visualiseur 3D au centre, 5 boutons en bas
-- **🖼️ Mode plein écran haute résolution** :
-  - **Fenêtre popup dédiée** (1200×780) au lieu du plein écran système
-  - **Résolution doublée** : charge l'image originale sans réduction (iRapport=1 au lieu de 2)
-  - **Qualité cube 4× supérieure** : faces de **1000×1000 pixels** (au lieu de 500×500)
-  - Image équirectangulaire intermédiaire de **3000×1500** (au lieu de 1500×750)
-  - **Préservation parfaite** : image 8192×4096 → rendu 8192×4096 (vs 4096×1024 en mode normal)
-  - **Mode haute qualité configurable** : flag activable pour affichages haute résolution
-- **🎨 Gestion des erreurs améliorée** :
-  - Vérification de l'existence des fichiers avant chargement
-  - **Logs détaillés** : dimensions d'image, chemins de fichiers, performances GPU
-  - **Espacement optimal** : hauteur calculée avec marge de 100px pour éviter les boutons coupés
-- **⚡ Performances GPU** :
-  - **Redimensionnement bicubique** : 8192×4096 → 3000×1500 en ~350ms
-  - **Conversion Equi→Cube** : génération 6 faces 1000×1000 en ~125ms
-  - Traitement total < 500ms pour qualité maximale
-
-### 🗺️ Refonte Carte et Géolocalisation (Builds 3376-3416)
-- **🌐 Migration vers Leaflet** :
-  - Remplacement de NavigateurCarteGluon par **NavigateurCarte** (Leaflet pur)
-  - Architecture **lazy loading** avec callback `onMapReady` pour éviter bugs JavaFX
-  - Chargement HTML via `load()` préservant les chemins relatifs des ressources
-  - Injection dynamique de la clé API LocationIQ après initialisation
-- **📍 API complète de gestion** :
-  - **Marqueurs draggables** : déplaçables à la souris avec mise à jour automatique
-  - **Radar (champ de vision)** : taille configurable 0-240m (×3 vs ancien 0-80m)
-  - **Géocodage Nominatim** : recherche d'adresse avec résultats OpenStreetMap
-  - **Méthodes** : `ajouteMarqueur()`, `retireMarqueurs()`, `allerCoordonnees()`, `afficheRadar()`
-- **🔧 Corrections critiques** :
-  - Inversion longitude/latitude corrigée dans constructeur `CoordonneesGeographiques`
-  - Distinction entre `recupereCoordonnees(0)` (marqueur) et `recupereCoordonnees()` (centre)
-  - Callback asynchrone `setOnMapReady()` pour éviter "texture is null" (bug JavaFX 19)
-  - Méthode `miseAJourRadarSeul()` pour optimiser les mises à jour partielles
-
-### 🎨 Interface et Visualisation (Builds 3376-3416)
-- **📐 Adaptation taille viewport** :
-  - Calcul intelligent du ratio container/image pour extraction correcte
-  - Remplacement des dimensions hardcodées par `getVisualisationWidth()`/`getVisualisationHeight()`
-  - Viewport ajusté dynamiquement selon dimensions réelles
-- **📱 Réseaux sociaux modernisés** :
-  - Remplacement Google+/Facebook par **Meta** (plateforme unifiée)
-  - Suppression références obsolètes à Google+
-  - Interface épurée avec 3 options : Twitter, Meta, Email
-- **🎛️ Barre personnalisée enrichie** :
-  - **Opacité configurable** : slider 0-1 avec effet hover (opacité → 1.0 au survol)
-  - Télécommande et barre de navigation avec transparence réglable
-  - Amélioration visibilité tout en préservant l'immersion
-
-### 🛡️ Corrections et Stabilité (Builds 3376-3416)
-- **🖼️ Protection images invalides** :
-  - Vérification `BufferedImage` avant écriture JPEG (diaporama)
-  - Skip des images corrompues au lieu de crasher l'application
-  - Message d'avertissement dans la console avec nom du fichier
-- **🎯 Positionnement UI** :
-  - Correction décalages éléments interface (labels, boutons, contrôles)
-  - Espacement constant via `PANEL_TOP_MARGIN` et `PANEL_ELEMENT_SPACING`
-  - Architecture en 3 zones pour géolocalisation : Header / Carte / Panneau contrôles
-- **⏱️ Gestion asynchrone** :
-  - Chargement carte en lazy loading (au premier clic géolocalisation)
-  - Flag `carteEnCoursDeChargement` pour éviter re-configurations multiples
-  - Listeners d'état WebEngine pour synchronisation Java/JavaScript
-
-### ⚡ Accélération GPU (OpenCL)
-- **🎮 Traitement GPU** : Accélération matérielle pour toutes les opérations de traitement d'images
-  - **Transformations panoramiques** : Conversion Équirectangulaire ↔ Cube **3.3× plus rapide**
-  - **Redimensionnement d'images** : Algorithmes Bicubic et Lanczos3 haute qualité sur GPU
-  - **Affichage des visites** : Rendu panoramique **10× plus rapide**
-  - **Niveaux de détail (LOD)** : Génération des niveaux progressifs accélérée
-  - **Fallback automatique** : Bascule sur CPU si GPU indisponible
-- **📊 Gains de performance** :
-  - Chargement des visites panoramiques : **3.4× plus rapide** (15s → 4.5s)
-  - Redimensionnement batch : **1.7× plus rapide**
-  - Affichage à l'écran : **10× plus rapide** (1000ms → 100ms)
-  - Qualité visuelle : Bicubic/Lanczos3 élimine le crénelage
-- **🎨 Qualité d'image améliorée** :
-  - Interpolation Bicubic remplace Nearest Neighbor
-  - Interpolation Lanczos3 pour agrandissements ×2+
-  - Réduction d'aliasing et meilleur anti-crénelage
-
-### 🎨 Interface Modernisée et Visualiseur Diaporama
-- **�️ Éditeur d'interface modernisé** : Refonte complète des fenêtres de création/édition
-  - **Interface création diaporama** : Design épuré avec gestion thématique automatique
-  - **Éditeur HTML intégré** : WYSIWYG JavaFX moderne pour contenus riches (hotspots HTML)
-  - **Création de barres personnalisées** : Interface intuitive avec drag & drop et prévisualisation temps réel
-  - **Theme-Aware Design** : Toutes les fenêtres s'adaptent automatiquement au thème (clair/sombre)
-  - **Corrections ergonomiques** : Redimensionnement optimal, boutons correctement positionnés
-  - **Cohérence visuelle** : Suppression des couleurs hardcodées, utilisation des variables de thème
-- **�📽️ Visualiseur diaporama HTML5 moderne** : Remplacement complet du visualiseur obsolète Supersized (jQuery 2012)
-  - **Design Material Design** : Interface élégante avec glassmorphism et animations fluides
-  - **Barre de progression visuelle** : Suivi temps réel avec animation de remplissage
-  - **Navigation intuitive** : Boutons, flèches directionnelles, clavier, miniatures cliquables
-  - **Indicateurs de position** : Dots avec effet de survol et compteur (X/Total)
-  - **Contrôles complets** : Play/Pause, Précédent/Suivant, Plein écran, Miniatures
-  - **Mode miniatures** : Galerie avec survol et sélection directe
-  - **Masquage auto** : Contrôles disparaissent après 3s d'inactivité (réapparaissent au survol)
-  - **Responsive** : Adaptation automatique mobile/tablette/desktop
-  - **Léger et performant** : ~20 KB vs ~150 KB (ancien), code HTML5/CSS3/JavaScript pur
-- **🎭 Animations hotspots diaporama** : 
-  - Cohérence avec hotspots photo : animations "blink", "pulse", "rotation", etc.
-  - Configuration depuis l'éditeur avec prévisualisation
-- **⏸️ Comportement pause intelligent** :
-  - État pause/lecture respecté lors de la navigation manuelle
-  - Changement d'image en pause = reste en pause (action volontaire requise)
-  - Seul le bouton Play/Pause modifie explicitement l'état de lecture
-
-### 🎨 Système de thèmes enrichi (27 thèmes disponibles)
-- **🎯 Nouveaux thèmes minimalistes** : 8 thèmes flat design professionnels
-  - **4 palettes de couleurs** : Bleu 🔷🔹, Vert 🟢🟩, Rouge 🔴🟥, Mauve 💜🟪
-  - **2 variantes par palette** : Clair et Foncé pour chaque couleur
-  - **Design flat sobre** : Interface épurée sans effets excessifs, focus sur la lisibilité
-  - **Couleurs d'accent harmonieuses** : Cohérence visuelle dans toute l'application
-- **🎨 Icônes colorées dynamiques** : Les icônes SVG prennent automatiquement la couleur du thème
-  - Icônes Glyph/Ikonli colorées via CSS
-  - Icônes SVG avec remplacement intelligent de `currentColor` et `fill="white"`
-  - Conversion dynamique en PNG avec Apache Batik
-- **🌓 Visibilité optimisée thèmes sombres** :
-  - Contrôles de formulaire éclaircis (checkboxes, radio buttons, sliders, spinners, progressbars)
-  - Bordures plus contrastées et épaissies pour meilleure identification
-  - Texte des menus toujours blanc (normal, hover, dropdown ouvert)
-- **📦 Collection complète de 27 thèmes** :
-  - 9 thèmes AtlantaFX (Primer, Nord, Cupertino, Dracula)
-  - 2 thèmes MaterialFX (Light, Dark)
-  - 2 thèmes FlatLaf (Light/IntelliJ, Dark/Darcula)
-  - 2 thèmes legacy personnalisés (Clair, Foncé)
-  - 2 thèmes acidulés (Clair 🌸, Foncé 🌌)
-  - 2 thèmes modernes (Clair 🌿, Foncé 🌃)
-  - 8 thèmes minimalistes (Bleu/Vert/Rouge/Mauve × Clair/Foncé)
-- **🔄 Application universelle** : Fenêtre d'accueil FXML intégrée au système de thèmes
-
-### 🔧 Architecture technique
-- Support OpenCL 1.2+ (NVIDIA CUDA, AMD ROCm, Intel compatible)
-- Auto-routing intelligent GPU/CPU selon taille d'image
-- Gestion robuste des colorspaces (CMYK, YCbCr, RGB)
-- Documentation technique complète (1200+ lignes)
-
----
-
-## 🔧 Version 3.2.0 - Personnalisation avancée et transitions fluides
-
-**Quoi de neuf ?**
-
-### ✨ Nouvelles fonctionnalités
-- **🎨 Personnalisation individuelle des hotspots** : 
-  - **16 animations différentes** : bounce, pulse, flash, shake, swing, tada, wobble, jello, heartbeat, rubberBand, rotate, flip, zoomIn, zoomOut, fadeIn, slideIn
-  - **Couleurs personnalisées** : Choisissez une couleur unique pour chaque hotspot avec le sélecteur de couleur HSB
-  - **Icônes personnalisées** : Remplacez l'icône par défaut de chaque hotspot par une image de votre choix, avec transformation de couleur automatique
-  - **Agrandissement au survol** : Effet de zoom configurable pour chaque hotspot
-  - **Persistance complète** : Les icônes et couleurs personnalisées sont sauvegardées dans les projets PVU
-  - Configuration complète depuis l'interface graphique avec prévisualisation en temps réel
-- **🌊 Fondu enchaîné WebGL** : Transitions fluides et élégantes entre panoramiques avec effet de fondu enchaîné (2 secondes) utilisant WebGL et shaders pour une expérience visuelle professionnelle
-- **📦 Export ZIP** : Exportez vos visites directement en archive ZIP pour un partage simplifié
-- **🖼️ Redimensionnement d'images** : Nouvel outil de redimensionnement et compression des images panoramiques
-- **📐 Conversion ratio 2:1** : Améliorations du positionnement des icônes dans l'interface
-
-### 🔧 Améliorations techniques
-- **Architecture robuste** : Validation des dimensions d'images et gestion d'erreurs renforcée
-- **Parsing amélioré** : Gestion sûre des champs vides dans les fichiers PVU
-- **UI optimisée** : Panneaux de hotspots élargis (+30px) pour une meilleure ergonomie
-
-### ⚠️ Important - Migration depuis v3.0.0
-
-Si vous hébergez des visites sur des serveurs Linux, notez que la **v3.1.0** a corrigé un problème critique de case-sensitivity. Les visites créées avec v3.0.0 et hébergées sur Linux doivent être ré-exportées avec v3.1.0 ou supérieure.
-
-### 📢 Discussions GitHub
-- 🇫🇷 [📢 Annonce v3.2.0](https://github.com/llang57/editeurPanovisu/discussions) • [❓ FAQ](https://github.com/llang57/editeurPanovisu/discussions/8) • [🚀 Guide migration](https://github.com/llang57/editeurPanovisu/discussions/10)
-- 🇬🇧 [📢 v3.2.0 Announcement](https://github.com/llang57/editeurPanovisu/discussions) • [❓ FAQ](https://github.com/llang57/editeurPanovisu/discussions/9) • [🚀 Guide](https://github.com/llang57/editeurPanovisu/discussions/11)
-
----
-
 ## 📑 Table des matières
 
 - [Qu'est-ce que PanoVisu ?](#quest-ce-que-panovisu-)
@@ -283,6 +35,7 @@ Si vous hébergez des visites sur des serveurs Linux, notez que la **v3.1.0** a 
 - [Compilation et développement](#-compilation-et-développement)
 - [Documentation](#-documentation)
 - [Compatibilité navigateurs](#-compatibilité-navigateurs)
+- [Quoi de neuf](#-quoi-de-neuf)
 - [Contribution](#-contribution)
 - [Support et contact](#-support-et-contact)
 - [Licence](#-licence)
@@ -346,6 +99,28 @@ Si vous hébergez des visites sur des serveurs Linux, notez que la **v3.1.0** a 
 - **Barres de navigation personnalisées** : Création visuelle avec zones cliquables
 - **Adaptation thématique** : Toutes les fenêtres suivent le thème choisi (clair/sombre)
 - Export en un clic vers HTML/XML
+
+### ⚡ Accélération GPU (OpenCL)
+- **Traitement matériel** des images : conversion équirectangulaire ↔ cube, redimensionnement et génération des niveaux de détail
+- **Gains mesurés** : chargement des visites 3,4× plus rapide (15 s → 4,5 s), affichage 10× plus rapide, redimensionnement par lot 1,7× plus rapide
+- **Qualité supérieure** : interpolations Bicubic et Lanczos3 en remplacement du plus proche voisin, sans crénelage
+- **Repli automatique sur le processeur** si aucun GPU compatible OpenCL n'est disponible (NVIDIA, AMD, Intel)
+
+### 🗺️ Cartographie et géolocalisation
+- **Carte Leaflet** intégrée pour situer chaque panoramique
+- **Marqueurs déplaçables** à la souris, avec mise à jour immédiate des coordonnées
+- **Radar de champ de vision** réglable de 0 à 240 m
+- **Recherche d'adresse** via OpenStreetMap, et géocodage inverse LocationIQ pour enrichir les descriptions
+
+### 🤖 Génération de descriptions par IA
+- **Ollama** en local, gratuit et sans envoi de données, ou **OpenRouter** en ligne (Claude, Gemini, GPT)
+- **Catalogue de modèles modifiable**, du gratuit au premium, avec tarifs indicatifs
+- **Descriptions relues automatiquement** : dates, mesures, distinctions, superlatifs et noms propres non fournis sont signalés
+
+### 🎨 Thèmes de l'interface
+- **27 thèmes** : 9 AtlantaFX (Primer, Nord, Cupertino, Dracula), 2 MaterialFX, 2 FlatLaf, 2 personnalisés, 2 acidulés, 2 modernes et 8 minimalistes (bleu, vert, rouge, mauve, en clair et foncé)
+- **Icônes adaptatives** : les icônes SVG prennent automatiquement la couleur du thème actif
+- **Lisibilité en thème sombre** : contrôles de formulaire éclaircis et bordures contrastées
 
 ## 📥 Installation
 
@@ -576,6 +351,20 @@ Le visualiseur PanoVisu fonctionne sur **tous les navigateurs modernes** support
 | Windows | 10/11 64-bit | Java 25 | ✅ Testé |
 | macOS | 10.15+ | Java 25 | ✅ Compatible |
 | Linux | Toute distribution récente | Java 25 | ✅ Compatible |
+
+## 🆕 Quoi de neuf
+
+**Version actuelle : 3.4.14** — fiabilité de la génération de descriptions par IA.
+
+- Les catalogues de modèles sont enfin livrés avec l'application : ils manquaient à toute installation, laissant la liste de modèles vide.
+- Modèles et tarifs remis à jour ; la génération locale, jusque-là impossible sur une machine ordinaire, fonctionne.
+- Descriptions plus sobres et relues automatiquement : dates, mesures, distinctions, superlatifs et noms propres non fournis sont signalés.
+
+> ⚠️ Aucune consigne ne rend l'hallucination impossible. Le dispositif la raréfie et la signale ; une relecture reste nécessaire. Renseigner une clé LocationIQ améliore la précision plus sûrement que n'importe quelle consigne.
+
+📖 **Historique complet** : [Changelog](https://github.com/llang57/editeurPanovisu/wiki/Changelog) · [Notes de version](https://github.com/llang57/editeurPanovisu/releases)
+
+---
 
 ## 🤝 Contribution
 
