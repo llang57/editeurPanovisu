@@ -68,6 +68,26 @@ public final class VerificationDescription {
             "les", "des", "aux", "cette", "ces", "leur", "leurs", "elle", "elles",
             "cependant", "toutefois", "ainsi", "depuis", "aujourd'hui");
 
+    /**
+     * Retire les accents et passe en minuscules, pour comparer un texte au contexte.
+     *
+     * <p>Les titres saisis par l'utilisateur sont souvent sans accents (« Cathedrale »)
+     * alors que le modèle écrit correctement (« Cathédrale »). Sans cette normalisation,
+     * un nom propre pourtant fourni était signalé à tort, et un détecteur bruyant finit
+     * par être ignoré.</p>
+     *
+     * @param texte Texte à normaliser ; {@code null} devient une chaîne vide
+     * @return Le texte sans accents, en minuscules
+     */
+    private static String normalise(String texte) {
+        if (texte == null) {
+            return "";
+        }
+        return java.text.Normalizer.normalize(texte, java.text.Normalizer.Form.NFD)
+                .replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
+                .toLowerCase();
+    }
+
     private VerificationDescription() {
     }
 
@@ -100,7 +120,7 @@ public final class VerificationDescription {
         if (description == null || description.isBlank()) {
             return signalements;
         }
-        String reference = contexte == null ? "" : contexte.toLowerCase();
+        String reference = normalise(contexte);
 
         cherche(signalements, description, reference, DATES, "date ou siècle non vérifiable");
         cherche(signalements, description, reference, MESURES, "mesure chiffrée");
@@ -131,7 +151,7 @@ public final class VerificationDescription {
         Matcher m = NOM_PROPRE.matcher(description);
         while (m.find()) {
             String mot = m.group(2);
-            String minuscule = mot.toLowerCase();
+            String minuscule = normalise(mot);
             if (MOTS_COURANTS.contains(minuscule) || reference.contains(minuscule)) {
                 continue;
             }
@@ -153,7 +173,7 @@ public final class VerificationDescription {
         Matcher m = motif.matcher(description);
         while (m.find()) {
             String extrait = m.group().trim();
-            if (!reference.contains(extrait.toLowerCase())) {
+            if (!reference.contains(normalise(extrait))) {
                 signalements.add(new Signalement(categorie, extrait));
             }
         }

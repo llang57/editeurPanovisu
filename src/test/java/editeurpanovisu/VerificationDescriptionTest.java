@@ -106,6 +106,21 @@ class VerificationDescriptionTest {
         assertFalse(contient(r, "Lastours"), "ce nom vient de l'utilisateur");
     }
 
+    /**
+     * Cas observé sur la cathédrale d'Amiens : le titre saisi est « Cathedrale » sans
+     * accent, le modèle écrit « Cathédrale ». Sans normalisation, ce nom pourtant fourni
+     * était signalé à tort — et un détecteur bruyant finit par être ignoré.
+     */
+    @Test
+    @DisplayName("l'accentuation ne cree pas de faux positif")
+    void accentuationNormalisee() {
+        var r = VerificationDescription.verifie(
+                "Le parvis de la Cathédrale Notre-Dame se situe à Amiens.",
+                "Cathedrale Notre-Dame d Amiens Le parvis");
+        assertFalse(contient(r, "Cathédrale"), "le titre fourni, non accentué, doit suffire");
+        assertFalse(contient(r, "Amiens"), "Amiens figure dans le contexte");
+    }
+
     @Test
     @DisplayName("les entrées nulles ou vides sont tolérées")
     void entreesVides() {

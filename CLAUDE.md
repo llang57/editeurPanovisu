@@ -177,6 +177,8 @@ re-includes the two catalogues, so they ship in the JAR.
 
 The `quality` field is a judgement, not a measurement — there is no benchmark behind it.
 
+**The Ollama catalogue order comes from observation, not from model recency.** Two real generations per model (Lastours, sparse data; Amiens, complete data) gave: `qwen2.5:14b` the most consistent, `gemma4` sober, `mistral-nemo` concise but embellishing known places, `qwen3.5` commenting on the instructions in both runs, `phi4` inventing freely — it produced "vallée de l'Aude" (the valley is the Orbiel) and the banned superlative "emblématique". **The newest model was among the worst**; do not reorder on generation numbers. Sample: two cases per model — better than judgement, still thin.
+
 **Local Ollama models follow the prompt only loosely.** Measured on qwen3.5 (9.7B) and qwen2.5:14b: both still slip meta-sentences into the output ("this description is limited to the data provided"), despite an explicit rule forbidding it, reformulated twice. Three prompt iterations moved the failure around rather than removing it — do not spend a fourth. A 7-10B model simply does not hold a ten-rule prompt. Cloud models handle it far better, which is another reason the catalogue leads with them; Ollama remains the free, private fallback.
 
 **Reasoning models need `"think": false`.** Ollama puts the chain of thought in a separate `thinking` field and it consumes the whole `num_predict` budget: qwen3.5 returned an *empty* description (`done_reason: length`, 400 tokens spent, `response` empty). The flag is harmless on non-reasoning models (verified on qwen2.5 and mistral-nemo) and is now sent unconditionally.
