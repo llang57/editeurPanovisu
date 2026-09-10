@@ -9,6 +9,7 @@ var searchData=
   ['ne_6',['ne',['../leaflet_8js.html#a635c5c315b09f2635fce0ef4460ca2d8',1,'ne(t, i):&#160;leaflet.js'],['../leaflet_8js.html#acc623ca80087ed7d72e7a456d45947e6',1,'Ne(t):&#160;leaflet.js']]],
   ['netisavailable_7',['netIsAvailable',['../classediteurpanovisu_1_1EditeurPanovisu.html#ae6740a47eaf7fead7a42c905570ce0e7',1,'editeurpanovisu::EditeurPanovisu']]],
   ['ni_8',['ni',['../leaflet_8js.html#a1675a44b59a3d0c6beab4b82470de5dc',1,'leaflet.js']]],
-  ['normaliserenrgb_9',['normaliserEnRGB',['../classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a6bda189e213cef5787b129e80098b066',1,'editeurpanovisu::RedimensionnementImagesDialogController']]],
-  ['numberproperty_10',['numberProperty',['../classediteurpanovisu_1_1BigDecimalField.html#a2ddb75ec2e1d79bb0a984366df7f3f43',1,'editeurpanovisu::BigDecimalField']]]
+  ['normalise_9',['normalise',['../classediteurpanovisu_1_1VerificationDescription.html#ae6ac57023133266f7c46306c5cb5b25e',1,'editeurpanovisu::VerificationDescription']]],
+  ['normaliserenrgb_10',['normaliserEnRGB',['../classediteurpanovisu_1_1RedimensionnementImagesDialogController.html#a6bda189e213cef5787b129e80098b066',1,'editeurpanovisu::RedimensionnementImagesDialogController']]],
+  ['numberproperty_11',['numberProperty',['../classediteurpanovisu_1_1BigDecimalField.html#a2ddb75ec2e1d79bb0a984366df7f3f43',1,'editeurpanovisu::BigDecimalField']]]
 ];

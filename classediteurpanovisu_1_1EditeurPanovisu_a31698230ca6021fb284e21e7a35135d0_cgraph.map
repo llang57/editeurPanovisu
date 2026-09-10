@@ -1,61 +1,66 @@
 <map id="editeurpanovisu.EditeurPanovisu.genererDescriptionIA" name="editeurpanovisu.EditeurPanovisu.genererDescriptionIA">
-<area shape="rect" id="Node000001" title="Génère une description IA pour le panoramique courant." alt="" coords="5,122,295,162"/>
-<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1OllamaService.html#af1a118f057c3cffef9ce91c7a428304e" title="Génère une description géographique basée sur les informations disponibles IMPORTANT : Tient compte d..." alt="" coords="343,200,623,240"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="236,159,385,194,384,200,235,164"/>
-<area shape="rect" id="Node000006" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="1973,436,2012,461"/>
-<area shape="poly" id="edge39_Node000001_Node000006" title=" " alt="" coords="226,119,336,93,477,66,635,45,715,39,795,36,1443,36,1519,32,1586,23,1705,5,1760,4,1814,14,1869,39,1927,84,1945,109,1959,146,1978,242,1989,343,1993,422,1988,422,1983,344,1973,243,1953,147,1940,111,1923,87,1867,44,1812,19,1760,9,1706,10,1587,28,1519,38,1443,42,795,42,716,44,636,50,478,72,337,99,228,124"/>
-<area shape="rect" id="Node000011" href="$classediteurpanovisu_1_1OllamaService.html#a5a3b422fe4f3c35957c5768ef48e6e29" title="Retourne le nom du service actuellement utilisé" alt="" coords="671,76,921,116"/>
-<area shape="poly" id="edge33_Node000001_Node000011" title=" " alt="" coords="295,129,657,103,657,109,295,134"/>
-<area shape="rect" id="Node000019" href="$classediteurpanovisu_1_1OllamaService.html#a5a02f105166a354700bea7dd4ccfbe9c" title="Vérifie si un service IA est disponible (Ollama ou Hugging Face)" alt="" coords="1321,791,1562,831"/>
-<area shape="poly" id="edge34_Node000001_Node000019" title=" " alt="" coords="165,160,227,262,277,335,338,415,409,497,489,577,577,649,623,681,672,708,751,744,834,771,919,791,1005,805,1089,813,1168,818,1307,818,1307,823,1168,823,1088,819,1004,810,918,796,832,776,749,749,669,713,621,685,574,653,485,581,405,501,334,418,273,338,223,265,160,163"/>
-<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1OllamaService.html#a95326db045c9dc203b3283e491ac844a" title="Appelle l&#39;API appropriée (Ollama ou Hugging Face) pour générer le texte." alt="" coords="969,232,1252,272"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="623,225,956,242,956,247,623,230"/>
-<area shape="poly" id="edge17_Node000002_Node000006" title=" " alt="" coords="623,204,957,177,1365,153,1560,147,1728,150,1855,162,1899,172,1927,186,1940,203,1952,228,1971,293,1983,364,1991,422,1986,422,1978,365,1965,294,1947,230,1936,206,1924,190,1897,177,1855,167,1728,155,1560,153,1365,158,957,182,623,210"/>
-<area shape="rect" id="Node000009" href="$classediteurpanovisu_1_1OllamaService.html#a21849cc172a155f57c0ea097a4f3b6e9" title="Construit le prompt pour Ollama selon les données disponibles et la langue Utilise le géocodage inver..." alt="" coords="1631,828,1925,868"/>
-<area shape="poly" id="edge12_Node000002_Node000009" title=" " alt="" coords="493,240,514,300,551,383,604,474,636,516,672,554,729,602,783,640,836,670,887,693,938,710,988,721,1091,732,1313,738,1440,749,1510,760,1583,776,1653,797,1717,821,1715,826,1651,802,1582,781,1509,765,1440,754,1313,744,1090,738,987,726,936,715,885,698,833,675,780,645,726,606,669,558,632,520,599,477,546,386,509,302,488,241"/>
-<area shape="poly" id="edge15_Node000002_Node000011" title=" " alt="" coords="525,198,670,132,711,118,712,123,672,137,527,203"/>
-<area shape="rect" id="Node000012" href="$classediteurpanovisu_1_1VerificationDescription.html#affb1ef60c1dc9734e72201b1e9b112ad" title="Écrit les signalements sur la sortie standard, pour la trace de génération." alt="" coords="694,504,898,544"/>
-<area shape="poly" id="edge18_Node000002_Node000012" title=" " alt="" coords="507,239,766,492,762,496,503,243"/>
-<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1OllamaService.html#a1caed1d4412230dcd4e64455198fe5ce" title="Appelle l&#39;API Ollama locale pour générer le texte." alt="" coords="1300,320,1583,360"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="1188,270,1352,314,1351,319,1186,275"/>
-<area shape="poly" id="edge11_Node000003_Node000006" title=" " alt="" coords="1252,244,1442,239,1651,239,1829,246,1891,255,1927,267,1944,283,1958,301,1978,343,1988,385,1993,421,1988,422,1983,386,1973,345,1954,304,1940,286,1924,272,1889,260,1828,252,1651,244,1442,245,1252,249"/>
-<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1OllamaService.html#ad46cd20a1434f44192b570bbbf272f2c" title="Appelle OpenRouter API (accès unifié à GPT&#45;4, Claude, Gemini, etc.) Documentation: https://openrouter..." alt="" coords="1300,180,1583,220"/>
-<area shape="poly" id="edge9_Node000003_Node000008" title=" " alt="" coords="1238,230,1300,220,1301,225,1239,235"/>
-<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1OllamaService.html#a368a60df70b43652f89aaf8ffa1ec3fc" title="Extrait la réponse du JSON retourné par Ollama." alt="" coords="1637,282,1919,322"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="1583,321,1623,317,1624,322,1583,327"/>
-<area shape="poly" id="edge8_Node000004_Node000006" title=" " alt="" coords="1501,358,1563,377,1631,395,1724,413,1817,427,1960,443,1959,448,1816,432,1723,418,1630,400,1562,382,1499,363"/>
-<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1OllamaService.html#abc0f0c35d2b4399af7b040fc1357c198" title="Récupère la liste des modèles Ollama installés localement." alt="" coords="1653,346,1903,386"/>
-<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="1583,348,1639,352,1639,358,1583,353"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="1906,319,1927,331,1948,351,1964,375,1986,421,1981,424,1960,378,1944,355,1924,336,1904,324"/>
-<area shape="poly" id="edge7_Node000007_Node000006" title=" " alt="" coords="1875,383,1926,402,1966,425,1963,430,1924,407,1873,388"/>
-<area shape="poly" id="edge10_Node000008_Node000006" title=" " alt="" coords="1583,188,1681,185,1781,188,1868,200,1902,210,1927,223,1948,244,1964,268,1984,323,1993,377,1995,422,1990,422,1988,378,1979,324,1959,271,1944,247,1924,228,1900,215,1867,205,1781,193,1681,190,1583,193"/>
-<area shape="poly" id="edge14_Node000009_Node000006" title=" " alt="" coords="1900,826,1923,808,1939,783,1951,746,1971,651,1982,551,1987,474,1993,474,1987,551,1976,652,1957,748,1943,785,1927,811,1903,830"/>
-<area shape="rect" id="Node000010" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="1973,868,2012,893"/>
-<area shape="poly" id="edge13_Node000009_Node000010" title=" " alt="" coords="1913,866,1960,873,1959,878,1912,871"/>
-<area shape="poly" id="edge16_Node000011_Node000006" title=" " alt="" coords="922,88,1185,80,1499,77,1648,80,1776,88,1872,102,1906,111,1927,122,1943,144,1957,176,1976,261,1987,351,1993,422,1987,422,1982,352,1971,262,1952,178,1939,146,1924,126,1904,116,1871,107,1775,93,1648,86,1499,82,1185,85,922,93"/>
-<area shape="poly" id="edge19_Node000012_Node000006" title=" " alt="" coords="898,506,969,498,1270,474,1563,459,1959,446,1960,451,1563,464,1271,480,970,503,898,511"/>
-<area shape="rect" id="Node000013" href="$leaflet_8js.html#af1ca895898688e63b5f816c8255fb77d" title=" " alt="" coords="1091,512,1130,537"/>
-<area shape="poly" id="edge20_Node000012_Node000013" title=" " alt="" coords="898,522,1077,522,1077,527,898,527"/>
-<area shape="rect" id="Node000014" href="$classediteurpanovisu_1_1VerificationDescription.html#a75819d7c96e76ce6650043d848d91c4d" title="Un énoncé signalé dans une description." alt="" coords="1676,714,1880,754"/>
-<area shape="poly" id="edge21_Node000012_Node000014" title=" " alt="" coords="830,542,894,577,970,611,1061,639,1156,663,1345,697,1520,717,1662,727,1662,733,1520,723,1344,702,1155,668,1060,644,968,616,891,582,828,547"/>
-<area shape="rect" id="Node000015" href="$classediteurpanovisu_1_1VerificationDescription.html#a68560d700189175129ff2823deef1bd9" title="Analyse une description générée et renvoie les énoncés à relire." alt="" coords="1009,562,1213,602"/>
-<area shape="poly" id="edge23_Node000012_Node000015" title=" " alt="" coords="899,540,995,558,994,563,898,545"/>
-<area shape="poly" id="edge22_Node000014_Node000006" title=" " alt="" coords="1879,719,1903,708,1923,693,1943,669,1959,641,1979,580,1988,522,1990,475,1995,475,1993,522,1984,582,1964,643,1948,672,1927,697,1906,713,1881,724"/>
-<area shape="poly" id="edge32_Node000015_Node000006" title=" " alt="" coords="1212,560,1300,547,1395,538,1477,536,1618,539,1685,539,1755,533,1834,517,1924,490,1965,467,1967,472,1926,495,1835,522,1756,538,1685,544,1618,545,1477,541,1396,543,1300,552,1213,566"/>
-<area shape="rect" id="Node000016" href="$classediteurpanovisu_1_1VerificationDescription.html#a9df326f11d795a6196572329f02d3eb6" title="Applique un motif et retient les correspondances absentes du contexte." alt="" coords="1339,626,1543,666"/>
-<area shape="poly" id="edge24_Node000015_Node000016" title=" " alt="" coords="1214,599,1326,621,1325,626,1213,604"/>
-<area shape="rect" id="Node000018" href="$classediteurpanovisu_1_1VerificationDescription.html#a1c7be522e06315f6b6208e42d0c61f62" title="Signale les noms propres absents du contexte fourni au modèle." alt="" coords="1322,562,1561,602"/>
-<area shape="poly" id="edge28_Node000015_Node000018" title=" " alt="" coords="1213,579,1308,579,1308,584,1213,584"/>
-<area shape="poly" id="edge25_Node000016_Node000006" title=" " alt="" coords="1544,658,1647,669,1759,675,1811,674,1858,670,1896,662,1924,649,1942,632,1957,611,1977,564,1986,515,1989,475,1994,475,1992,516,1982,565,1962,614,1946,635,1927,653,1898,667,1859,675,1811,679,1759,680,1647,674,1543,663"/>
-<area shape="poly" id="edge27_Node000016_Node000014" title=" " alt="" coords="1520,663,1688,707,1686,713,1518,668"/>
-<area shape="rect" id="Node000017" href="$leaflet_8js.html#a1cabf6ae48cc55b616700aecc4371993" title=" " alt="" coords="1759,613,1797,638"/>
-<area shape="poly" id="edge26_Node000016_Node000017" title=" " alt="" coords="1544,637,1745,625,1745,630,1544,642"/>
-<area shape="poly" id="edge29_Node000018_Node000006" title=" " alt="" coords="1561,581,1661,579,1767,573,1860,561,1897,552,1924,541,1942,527,1957,509,1979,472,1983,475,1962,512,1946,531,1927,545,1898,557,1861,566,1767,579,1661,585,1561,586"/>
-<area shape="poly" id="edge31_Node000018_Node000014" title=" " alt="" coords="1553,599,1584,611,1609,629,1632,649,1727,704,1724,709,1629,653,1606,633,1581,616,1551,604"/>
-<area shape="poly" id="edge30_Node000018_Node000017" title=" " alt="" coords="1561,594,1745,619,1745,624,1561,600"/>
-<area shape="poly" id="edge38_Node000019_Node000006" title=" " alt="" coords="1562,813,1664,812,1771,806,1864,791,1899,779,1924,764,1938,743,1951,713,1969,631,1981,543,1987,474,1992,475,1986,544,1975,632,1956,714,1943,746,1927,767,1901,783,1865,796,1772,811,1665,818,1562,818"/>
-<area shape="rect" id="Node000020" href="$classediteurpanovisu_1_1OllamaService.html#a3c02edbb2bc9e72804627518163b544a" title="Détecte automatiquement le meilleur modèle Ollama installé Priorise les modèles les plus fiables pour..." alt="" coords="1636,892,1920,932"/>
-<area shape="poly" id="edge35_Node000019_Node000020" title=" " alt="" coords="1492,828,1558,853,1631,878,1664,886,1663,892,1630,883,1556,858,1491,833"/>
-<area shape="poly" id="edge37_Node000020_Node000006" title=" " alt="" coords="1910,890,1923,878,1942,848,1956,803,1967,748,1976,687,1985,565,1988,475,1994,475,1991,566,1981,687,1973,749,1961,805,1946,850,1927,882,1913,894"/>
-<area shape="poly" id="edge36_Node000020_Node000010" title=" " alt="" coords="1912,889,1959,882,1960,888,1913,895"/>
+<area shape="rect" id="Node000001" title="Génère une description IA pour le panoramique courant." alt="" coords="5,202,295,242"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1OllamaService.html#af1a118f057c3cffef9ce91c7a428304e" title="Génère une description géographique basée sur les informations disponibles IMPORTANT : Tient compte d..." alt="" coords="343,363,623,403"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="194,240,429,355,427,360,191,244"/>
+<area shape="rect" id="Node000006" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="1973,513,2012,539"/>
+<area shape="poly" id="edge43_Node000001_Node000006" title=" " alt="" coords="189,199,259,166,342,134,466,92,564,62,665,44,795,38,1443,38,1519,34,1587,24,1706,5,1761,4,1815,14,1870,39,1927,84,1948,115,1964,162,1975,219,1984,282,1992,407,1994,500,1989,500,1987,407,1978,282,1970,220,1958,163,1943,118,1923,88,1867,44,1813,19,1760,9,1706,10,1587,30,1519,39,1443,43,795,43,665,49,565,67,468,97,344,139,261,171,191,204"/>
+<area shape="rect" id="Node000011" href="$classediteurpanovisu_1_1OllamaService.html#a5a3b422fe4f3c35957c5768ef48e6e29" title="Retourne le nom du service actuellement utilisé" alt="" coords="671,78,921,118"/>
+<area shape="poly" id="edge37_Node000001_Node000011" title=" " alt="" coords="255,199,677,118,678,123,256,205"/>
+<area shape="rect" id="Node000020" href="$classediteurpanovisu_1_1OllamaService.html#a5a02f105166a354700bea7dd4ccfbe9c" title="Vérifie si un service IA est disponible (Ollama ou Hugging Face)" alt="" coords="1321,901,1562,941"/>
+<area shape="poly" id="edge38_Node000001_Node000020" title=" " alt="" coords="171,240,245,318,344,413,500,551,572,605,672,664,752,703,817,726,970,771,1181,839,1360,894,1359,899,1179,845,969,777,815,731,750,708,669,668,569,609,496,555,341,417,241,322,168,244"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1OllamaService.html#a95326db045c9dc203b3283e491ac844a" title="Appelle l&#39;API appropriée (Ollama ou Hugging Face) pour générer le texte." alt="" coords="969,589,1252,629"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="534,401,672,454,1037,582,1035,587,670,459,532,406"/>
+<area shape="poly" id="edge17_Node000002_Node000006" title=" " alt="" coords="569,361,969,269,1183,216,1319,184,1463,156,1605,136,1673,130,1736,129,1794,133,1846,142,1891,158,1927,180,1944,203,1958,238,1978,328,1989,425,1993,499,1988,500,1983,425,1972,329,1953,239,1940,206,1924,184,1889,162,1845,147,1794,138,1736,135,1673,136,1606,141,1464,161,1321,189,1184,221,970,274,570,366"/>
+<area shape="rect" id="Node000009" href="$classediteurpanovisu_1_1OllamaService.html#a21849cc172a155f57c0ea097a4f3b6e9" title="Construit le prompt pour Ollama selon les données disponibles et la langue Utilise le géocodage inver..." alt="" coords="1631,843,1925,883"/>
+<area shape="poly" id="edge12_Node000002_Node000009" title=" " alt="" coords="503,402,573,473,620,513,672,548,792,609,918,663,1048,708,1177,747,1301,779,1419,805,1618,840,1617,845,1418,810,1300,784,1175,752,1046,713,916,667,790,614,669,552,617,517,569,477,500,406"/>
+<area shape="poly" id="edge15_Node000002_Node000011" title=" " alt="" coords="497,361,669,135,692,121,695,126,672,139,501,365"/>
+<area shape="rect" id="Node000012" href="$classediteurpanovisu_1_1VerificationDescription.html#affb1ef60c1dc9734e72201b1e9b112ad" title="Écrit les signalements sur la sortie standard, pour la trace de génération." alt="" coords="694,405,898,445"/>
+<area shape="poly" id="edge18_Node000002_Node000012" title=" " alt="" coords="623,399,681,407,680,412,623,404"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1OllamaService.html#a1caed1d4412230dcd4e64455198fe5ce" title="Appelle l&#39;API Ollama locale pour générer le texte." alt="" coords="1300,697,1583,737"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="1174,626,1367,690,1365,695,1172,631"/>
+<area shape="poly" id="edge11_Node000003_Node000006" title=" " alt="" coords="1252,598,1616,574,1795,559,1925,542,1960,534,1961,539,1926,547,1795,564,1616,580,1252,604"/>
+<area shape="rect" id="Node000008" href="$classediteurpanovisu_1_1OllamaService.html#ad46cd20a1434f44192b570bbbf272f2c" title="Appelle OpenRouter API (accès unifié à GPT&#45;4, Claude, Gemini, etc.) Documentation: https://openrouter..." alt="" coords="1300,614,1583,654"/>
+<area shape="poly" id="edge9_Node000003_Node000008" title=" " alt="" coords="1252,617,1287,619,1286,625,1252,622"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1OllamaService.html#a368a60df70b43652f89aaf8ffa1ec3fc" title="Extrait la réponse du JSON retourné par Ollama." alt="" coords="1637,779,1919,819"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="1515,734,1631,765,1669,774,1668,779,1630,770,1513,739"/>
+<area shape="poly" id="edge8_Node000004_Node000006" title=" " alt="" coords="1583,702,1793,680,1878,666,1924,652,1946,630,1963,604,1983,551,1988,553,1968,606,1950,634,1927,656,1879,671,1794,685,1583,708"/>
+<area shape="rect" id="Node000007" href="$classediteurpanovisu_1_1OllamaService.html#abc0f0c35d2b4399af7b040fc1357c198" title="Récupère la liste des modèles Ollama installés localement." alt="" coords="1653,715,1903,755"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="1583,722,1639,725,1639,730,1583,727"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="1908,777,1923,765,1944,742,1959,715,1979,656,1988,598,1990,552,1995,552,1993,599,1984,657,1964,717,1948,745,1927,769,1912,781"/>
+<area shape="poly" id="edge7_Node000007_Node000006" title=" " alt="" coords="1895,713,1924,695,1950,662,1968,623,1980,585,1986,552,1991,553,1985,586,1973,625,1955,665,1927,699,1898,717"/>
+<area shape="poly" id="edge10_Node000008_Node000006" title=" " alt="" coords="1583,646,1664,647,1751,640,1840,623,1883,610,1924,593,1952,573,1974,548,1978,552,1956,577,1927,598,1885,615,1842,628,1752,645,1664,652,1583,651"/>
+<area shape="poly" id="edge14_Node000009_Node000006" title=" " alt="" coords="1909,841,1923,829,1937,809,1949,780,1967,702,1980,618,1987,552,1992,553,1985,619,1972,703,1954,781,1941,812,1927,833,1913,845"/>
+<area shape="rect" id="Node000010" href="$leaflet_8js.html#a73aff07b65d7c0b09ccf6b4c4f1b7a9d" title=" " alt="" coords="1973,908,2012,933"/>
+<area shape="poly" id="edge13_Node000009_Node000010" title=" " alt="" coords="1854,881,1960,910,1959,915,1853,886"/>
+<area shape="poly" id="edge16_Node000011_Node000006" title=" " alt="" coords="921,90,1185,81,1500,78,1648,81,1776,89,1873,103,1906,112,1927,124,1947,152,1962,193,1973,244,1982,300,1991,413,1994,499,1988,499,1986,414,1976,301,1968,245,1957,194,1942,154,1924,128,1904,117,1872,108,1776,95,1648,87,1500,83,1185,86,921,95"/>
+<area shape="poly" id="edge19_Node000012_Node000006" title=" " alt="" coords="841,442,970,498,1062,512,1185,521,1481,529,1769,528,1960,524,1960,530,1769,533,1481,534,1185,526,1061,517,969,503,839,447"/>
+<area shape="rect" id="Node000013" href="$leaflet_8js.html#af1ca895898688e63b5f816c8255fb77d" title=" " alt="" coords="1091,463,1130,488"/>
+<area shape="poly" id="edge20_Node000012_Node000013" title=" " alt="" coords="899,438,1078,468,1077,473,898,444"/>
+<area shape="rect" id="Node000014" href="$classediteurpanovisu_1_1VerificationDescription.html#a75819d7c96e76ce6650043d848d91c4d" title="Un énoncé signalé dans une description." alt="" coords="1676,398,1880,438"/>
+<area shape="poly" id="edge21_Node000012_Node000014" title=" " alt="" coords="898,421,1662,416,1662,421,898,427"/>
+<area shape="rect" id="Node000015" href="$classediteurpanovisu_1_1VerificationDescription.html#a68560d700189175129ff2823deef1bd9" title="Analyse une description générée et renvoie les énoncés à relire." alt="" coords="1009,283,1213,323"/>
+<area shape="poly" id="edge23_Node000012_Node000015" title=" " alt="" coords="848,402,1044,326,1046,331,850,407"/>
+<area shape="poly" id="edge22_Node000014_Node000006" title=" " alt="" coords="1881,434,1927,454,1955,476,1977,501,1973,504,1951,480,1924,459,1879,439"/>
+<area shape="poly" id="edge35_Node000015_Node000006" title=" " alt="" coords="1163,281,1227,259,1299,241,1440,214,1623,187,1716,180,1801,181,1874,193,1903,204,1927,219,1943,239,1956,269,1975,347,1986,432,1992,499,1987,500,1981,433,1969,348,1951,270,1938,241,1924,223,1901,209,1872,198,1801,186,1716,185,1624,192,1441,219,1301,246,1229,264,1164,286"/>
+<area shape="rect" id="Node000016" href="$classediteurpanovisu_1_1VerificationDescription.html#a9df326f11d795a6196572329f02d3eb6" title="Applique un motif et retient les correspondances absentes du contexte." alt="" coords="1339,283,1543,323"/>
+<area shape="poly" id="edge24_Node000015_Node000016" title=" " alt="" coords="1213,301,1326,301,1326,306,1213,306"/>
+<area shape="rect" id="Node000018" href="$classediteurpanovisu_1_1VerificationDescription.html#ae6ac57023133266f7c46306c5cb5b25e" title="Retire les accents et passe en minuscules, pour comparer un texte au contexte." alt="" coords="1676,233,1880,273"/>
+<area shape="poly" id="edge36_Node000015_Node000018" title=" " alt="" coords="1213,281,1300,269,1491,255,1663,250,1663,256,1491,260,1300,274,1214,286"/>
+<area shape="rect" id="Node000019" href="$classediteurpanovisu_1_1VerificationDescription.html#a1c7be522e06315f6b6208e42d0c61f62" title="Signale les noms propres absents du contexte fourni au modèle." alt="" coords="1322,347,1561,387"/>
+<area shape="poly" id="edge30_Node000015_Node000019" title=" " alt="" coords="1214,320,1324,342,1323,347,1213,326"/>
+<area shape="poly" id="edge25_Node000016_Node000006" title=" " alt="" coords="1544,295,1647,293,1759,296,1859,309,1898,320,1927,334,1945,351,1959,371,1979,416,1989,461,1993,499,1988,500,1984,462,1974,418,1955,374,1941,355,1924,339,1896,325,1858,314,1759,301,1647,298,1544,300"/>
+<area shape="poly" id="edge29_Node000016_Node000014" title=" " alt="" coords="1545,316,1584,333,1600,346,1609,359,1618,372,1632,384,1664,398,1662,403,1629,388,1614,376,1604,362,1596,349,1581,338,1543,321"/>
+<area shape="rect" id="Node000017" href="$leaflet_8js.html#a1cabf6ae48cc55b616700aecc4371993" title=" " alt="" coords="1759,348,1797,373"/>
+<area shape="poly" id="edge26_Node000016_Node000017" title=" " alt="" coords="1544,318,1746,353,1745,358,1543,323"/>
+<area shape="poly" id="edge27_Node000016_Node000018" title=" " alt="" coords="1543,285,1662,267,1663,273,1544,291"/>
+<area shape="poly" id="edge28_Node000018_Node000006" title=" " alt="" coords="1881,262,1906,273,1927,289,1947,313,1962,340,1983,398,1992,454,1995,499,1989,500,1987,455,1977,399,1958,342,1943,316,1923,293,1903,278,1879,267"/>
+<area shape="poly" id="edge31_Node000019_Node000006" title=" " alt="" coords="1482,385,1551,417,1631,447,1713,469,1777,479,1843,488,1926,505,1961,514,1959,519,1925,510,1842,494,1777,485,1712,474,1630,453,1549,422,1480,390"/>
+<area shape="poly" id="edge34_Node000019_Node000014" title=" " alt="" coords="1561,383,1663,398,1662,403,1560,388"/>
+<area shape="poly" id="edge32_Node000019_Node000017" title=" " alt="" coords="1561,362,1745,359,1745,364,1561,368"/>
+<area shape="poly" id="edge33_Node000019_Node000018" title=" " alt="" coords="1540,345,1582,333,1656,305,1722,276,1724,281,1658,310,1583,338,1542,350"/>
+<area shape="poly" id="edge42_Node000020_Node000006" title=" " alt="" coords="1562,928,1664,932,1771,930,1864,919,1899,908,1924,893,1940,869,1954,833,1974,735,1984,632,1988,552,1993,553,1989,632,1979,736,1959,834,1945,872,1927,897,1901,913,1865,924,1771,936,1664,938,1562,933"/>
+<area shape="rect" id="Node000021" href="$classediteurpanovisu_1_1OllamaService.html#a3c02edbb2bc9e72804627518163b544a" title="Détecte automatiquement le meilleur modèle Ollama installé Priorise les modèles les plus fiables pour..." alt="" coords="1636,958,1920,998"/>
+<area shape="poly" id="edge39_Node000020_Node000021" title=" " alt="" coords="1560,938,1647,953,1646,958,1559,943"/>
+<area shape="poly" id="edge41_Node000021_Node000006" title=" " alt="" coords="1900,956,1923,938,1941,908,1955,866,1974,755,1984,639,1988,552,1993,553,1990,640,1979,755,1960,867,1945,911,1927,941,1903,960"/>
+<area shape="poly" id="edge40_Node000021_Node000010" title=" " alt="" coords="1855,955,1925,937,1959,927,1961,932,1926,942,1857,961"/>
 </map>

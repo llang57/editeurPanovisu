@@ -3,6 +3,7 @@ var classediteurpanovisu_1_1VerificationDescription =
     [ "VerificationDescription", "classediteurpanovisu_1_1VerificationDescription.html#adadc052b92bd6f9d15d5a4297ad450cf", null ],
     [ "cherche", "classediteurpanovisu_1_1VerificationDescription.html#a9df326f11d795a6196572329f02d3eb6", null ],
     [ "chercheNomsPropres", "classediteurpanovisu_1_1VerificationDescription.html#a1c7be522e06315f6b6208e42d0c61f62", null ],
+    [ "normalise", "classediteurpanovisu_1_1VerificationDescription.html#ae6ac57023133266f7c46306c5cb5b25e", null ],
     [ "Signalement", "classediteurpanovisu_1_1VerificationDescription.html#a75819d7c96e76ce6650043d848d91c4d", null ],
     [ "verifie", "classediteurpanovisu_1_1VerificationDescription.html#a68560d700189175129ff2823deef1bd9", null ],
     [ "verifieEtTrace", "classediteurpanovisu_1_1VerificationDescription.html#affb1ef60c1dc9734e72201b1e9b112ad", null ],

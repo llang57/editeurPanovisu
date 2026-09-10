@@ -1,5 +1,7 @@
 var NAVTREEINDEX31 =
 {
+"namespaceediteurpanovisu_1_1config.html":[1,0,0,0],
+"namespaceediteurpanovisu_1_1gpu.html":[1,0,0,1],
 "namespaceediteurpanovisu_1_1util.html":[1,0,0,2],
 "namespaces.html":[1,0],
 "pages.html":[],
@@ -247,7 +249,5 @@ var NAVTREEINDEX31 =
 "three_8min1_8js.html#a770d37373ae21653ea3ace8098197509":[3,0,0,1,4,1,205],
 "three_8min1_8js.html#a775c3b1bb7e596387418fb8ff7d37eac":[3,0,0,1,4,1,154],
 "three_8min1_8js.html#a789d229a661118e5898cd6a0f829d680":[3,0,0,1,4,1,11],
-"three_8min1_8js.html#a79b80b443cd6fce868e8271b7b2f345d":[3,0,0,1,4,1,264],
-"three_8min1_8js.html#a79fb44e9345b15e0fb738f2a23a843cd":[3,0,0,1,4,1,243],
-"three_8min1_8js.html#a7b0640e43485927bbb8267d6f433b4b7":[3,0,0,1,4,1,330]
+"three_8min1_8js.html#a79b80b443cd6fce868e8271b7b2f345d":[3,0,0,1,4,1,264]
 };

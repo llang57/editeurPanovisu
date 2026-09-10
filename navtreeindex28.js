@@ -1,5 +1,7 @@
 var NAVTREEINDEX28 =
 {
+"classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a56af72c51956399056e1f0de5b253319":[1,0,0,1,2,5],
+"classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a6af74b24f2bf41fd27ab2f16bf7e320f":[2,0,0,1,2,9],
 "classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a6af74b24f2bf41fd27ab2f16bf7e320f":[1,0,0,1,2,9],
 "classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a70a13e24789d5c6150c606cd077b5137":[2,0,0,1,2,4],
 "classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#a70a13e24789d5c6150c606cd077b5137":[1,0,0,1,2,4],
@@ -247,7 +249,5 @@ var NAVTREEINDEX28 =
 "enumediteurpanovisu_1_1DocumentationDialog_1_1DocumentType.html#ac116204700685fb385b7d0fa7176f6a0":[2,0,0,12,1,2],
 "enumediteurpanovisu_1_1DocumentationDialog_1_1DocumentType.html#ac116204700685fb385b7d0fa7176f6a0":[1,0,0,12,1,2],
 "enumediteurpanovisu_1_1DocumentationDialog_1_1DocumentType.html#ada59a4821df1b4dea731ab2d3e58762a":[2,0,0,12,1,3],
-"enumediteurpanovisu_1_1DocumentationDialog_1_1DocumentType.html#ada59a4821df1b4dea731ab2d3e58762a":[1,0,0,12,1,3],
-"enumediteurpanovisu_1_1ThemeManager_1_1Theme.html":[1,0,0,54,0],
-"enumediteurpanovisu_1_1ThemeManager_1_1Theme.html":[2,0,0,54,0]
+"enumediteurpanovisu_1_1DocumentationDialog_1_1DocumentType.html#ada59a4821df1b4dea731ab2d3e58762a":[1,0,0,12,1,3]
 };

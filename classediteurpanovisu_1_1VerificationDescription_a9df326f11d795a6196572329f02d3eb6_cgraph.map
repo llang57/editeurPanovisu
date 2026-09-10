@@ -1,10 +1,13 @@
 <map id="editeurpanovisu.VerificationDescription.cherche" name="editeurpanovisu.VerificationDescription.cherche">
-<area shape="rect" id="Node000001" title="Applique un motif et retient les correspondances absentes du contexte." alt="" coords="5,21,209,61"/>
-<area shape="rect" id="Node000002" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="509,32,548,58"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="198,18,257,9,323,4,393,4,462,13,498,26,496,31,461,18,393,9,324,9,257,15,198,24"/>
-<area shape="rect" id="Node000003" href="$leaflet_8js.html#a1cabf6ae48cc55b616700aecc4371993" title=" " alt="" coords="340,28,379,54"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="209,38,326,38,326,44,209,44"/>
-<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1VerificationDescription.html#a75819d7c96e76ce6650043d848d91c4d" title="Un énoncé signalé dans une description." alt="" coords="257,78,461,118"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="196,58,258,73,257,78,195,64"/>
-<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="422,76,495,52,497,57,424,81"/>
+<area shape="rect" id="Node000001" title="Applique un motif et retient les correspondances absentes du contexte." alt="" coords="5,61,209,101"/>
+<area shape="rect" id="Node000002" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="509,97,548,122"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="147,59,210,33,290,10,334,4,378,3,421,10,463,24,480,36,495,50,517,82,513,85,491,54,477,40,460,29,420,15,377,9,334,10,291,16,211,38,149,63"/>
+<area shape="rect" id="Node000003" href="$leaflet_8js.html#a1cabf6ae48cc55b616700aecc4371993" title=" " alt="" coords="340,39,379,65"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="209,67,326,53,327,58,210,72"/>
+<area shape="rect" id="Node000004" href="$classediteurpanovisu_1_1VerificationDescription.html#ae6ac57023133266f7c46306c5cb5b25e" title="Retire les accents et passe en minuscules, pour comparer un texte au contexte." alt="" coords="257,89,461,129"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="210,90,244,94,243,99,209,95"/>
+<area shape="rect" id="Node000005" href="$classediteurpanovisu_1_1VerificationDescription.html#a75819d7c96e76ce6650043d848d91c4d" title="Un énoncé signalé dans une description." alt="" coords="257,153,461,193"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="157,99,258,139,280,146,279,151,256,144,155,104"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="461,107,496,107,496,112,461,112"/>
+<area shape="poly" id="edge6_Node000005_Node000002" title=" " alt="" coords="427,151,460,139,496,123,498,127,462,144,429,156"/>
 </map>

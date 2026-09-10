@@ -1,5 +1,7 @@
 var NAVTREEINDEX30 =
 {
+"globals_vars_u.html":[3,1,2,22],
+"globals_vars_v.html":[3,1,2,23],
 "globals_vars_w.html":[3,1,2,24],
 "globals_vars_x.html":[3,1,2,25],
 "globals_vars_y.html":[3,1,2,26],
@@ -247,7 +249,5 @@ var NAVTREEINDEX30 =
 "leaflet_8js.html#afdb7386b3539eb2014f8182619a1977a":[3,0,1,0,2,0,0,79],
 "leaflet_8js.html#afe738c769b2eb44f9c21f9429560ea10":[3,0,1,0,2,0,0,63],
 "leaflet_8js_source.html":[3,0,1,0,2,0,0],
-"namespaceediteurpanovisu.html":[1,0,0],
-"namespaceediteurpanovisu_1_1config.html":[1,0,0,0],
-"namespaceediteurpanovisu_1_1gpu.html":[1,0,0,1]
+"namespaceediteurpanovisu.html":[1,0,0]
 };
