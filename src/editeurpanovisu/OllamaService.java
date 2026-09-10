@@ -1087,7 +1087,7 @@ public class OllamaService {
             prompt.append("6) En l'absence de connaissance certaine sur ce lieu exact, reste au niveau du contexte géographique fourni (situation, commune, département, pays) sans ajouter de détail matériel.\n");
             prompt.append("7) N'exprime aucun doute par écrit : ne produis ni \"peut-être\", ni \"sans doute\", ni \"il se pourrait\". Si tu n'es pas certain, n'écris simplement pas l'information.\n");
             prompt.append("8) Ne QUALIFIE PAS les noms de lieux fournis : n'écris pas \"la région de X\" ni \"le département de Y\" si l'échelon ne t'est pas donné. Reprends ces noms tels quels.\n");
-            prompt.append("9) Ne COMMENTE PAS ces consignes ni ce que tu renonces à décrire. N'écris jamais de phrase du type \"sans détailler les éléments visuels\". Omettre se fait en silence.\n");
+            prompt.append("9) CHAQUE phrase doit décrire le lieu lui-même. Une phrase qui parle de la description, des données fournies ou de ce que tu n'as pas mentionné est INTERDITE : supprime-la au lieu de l'écrire.\n");
             prompt.append("10) Ta réponse doit contenir exactement le texte de la description, sans aucune méta-phrase (pas de \"Voici...\").\n");
         } else {
             prompt.append("\n\n🚫 ABSOLUTE ANTI-HALLUCINATION RULES:\n");
@@ -1099,7 +1099,7 @@ public class OllamaService {
             prompt.append("6) Without certain knowledge of this exact place, stay at the level of the geographical context provided (location, town, region, country) and add no material detail.\n");
             prompt.append("7) Do not express doubt in writing: no \"perhaps\", \"probably\", or \"it may be\". If you are unsure, simply omit the information.\n");
             prompt.append("8) Do NOT QUALIFY the place names provided: never write \"the region of X\" or \"the county of Y\" when the tier is not given to you. Quote these names as they are.\n");
-            prompt.append("9) Do NOT COMMENT on these rules or on what you refrain from describing. Never write a sentence such as \"without detailing the visual elements\". Omission is silent.\n");
+            prompt.append("9) EVERY sentence must describe the place itself. A sentence about the description, about the data provided, or about what you did not mention is FORBIDDEN: delete it rather than write it.\n");
             prompt.append("10) Your response must contain exactly the description text, with no meta phrases (no \"Here is...\").\n");
         }
         
@@ -1334,6 +1334,13 @@ public class OllamaService {
         corpsRequete.addProperty("model", ollamaModel);
         corpsRequete.addProperty("prompt", prompt);
         corpsRequete.addProperty("stream", false);
+        // Desactiver la reflexion interne des modeles a raisonnement (Qwen 3.x et suivants).
+        // Ollama place alors la chaine de pensee dans un champ 'thinking' distinct, et les
+        // jetons de NUM_PREDICT y passent integralement : qwen3.5 renvoyait une description
+        // VIDE (done_reason 'length', 400 jetons consommes, response vide). Une description
+        // de quatre phrases factuelles ne tire aucun benefice de ce raisonnement.
+        // Sans effet sur les modeles classiques, verifie sur qwen2.5 et mistral-nemo.
+        corpsRequete.addProperty("think", false);
         corpsRequete.add("options", options);
         String jsonRequest = corpsRequete.toString();
         

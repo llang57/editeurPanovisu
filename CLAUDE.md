@@ -177,6 +177,10 @@ re-includes the two catalogues, so they ship in the JAR.
 
 The `quality` field is a judgement, not a measurement — there is no benchmark behind it.
 
+**Local Ollama models follow the prompt only loosely.** Measured on qwen3.5 (9.7B) and qwen2.5:14b: both still slip meta-sentences into the output ("this description is limited to the data provided"), despite an explicit rule forbidding it, reformulated twice. Three prompt iterations moved the failure around rather than removing it — do not spend a fourth. A 7-10B model simply does not hold a ten-rule prompt. Cloud models handle it far better, which is another reason the catalogue leads with them; Ollama remains the free, private fallback.
+
+**Reasoning models need `"think": false`.** Ollama puts the chain of thought in a separate `thinking` field and it consumes the whole `num_predict` budget: qwen3.5 returned an *empty* description (`done_reason: length`, 400 tokens spent, `response` empty). The flag is harmless on non-reasoning models (verified on qwen2.5 and mistral-nemo) and is now sent unconditionally.
+
 When refreshing models, verify ids and prices against the live catalogue rather than from memory:
 
 ```bash
