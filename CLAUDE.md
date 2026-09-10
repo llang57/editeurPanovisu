@@ -173,6 +173,10 @@ stay editable. That fallback is required — `installer.iss` excludes `configPV`
 so the directory does not exist on a fresh install. `.gitignore` ignores `configPV/*` but explicitly
 re-includes the two catalogues, so they ship in the JAR.
 
+**Order the catalogue by quality, not by price.** A description costs between 0 and 1.5 centimes (~1500 prompt tokens, ~300 completion); a 14-panorama tour costs at most 21 centimes with the best model available. The catalogue was once ordered by ascending price, which made the *weakest* model the default in order to save a fraction of a centime — on the one feature whose whole difficulty is factual accuracy. Note that `claude-sonnet-5` ($2/M) is cheaper than `claude-sonnet-4.5` ($3/M): moving up a generation lowers the bill.
+
+The `quality` field is a judgement, not a measurement — there is no benchmark behind it.
+
 When refreshing models, verify ids and prices against the live catalogue rather than from memory:
 
 ```bash
