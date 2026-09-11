@@ -4,10 +4,7 @@ var hierarchy =
     [ "editeurpanovisu.ApiKeysConfig", "classediteurpanovisu_1_1ApiKeysConfig.html", null ],
     [ "Application", null, [
       [ "editeurpanovisu.DocumentationDialog.TestApp", "classediteurpanovisu_1_1DocumentationDialog_1_1TestApp.html", null ],
-      [ "editeurpanovisu.EditeurPanovisu", "classediteurpanovisu_1_1EditeurPanovisu.html", null ],
-      [ "editeurpanovisu.gpu.TestBicubicVsLanczos", "classediteurpanovisu_1_1gpu_1_1TestBicubicVsLanczos.html", null ],
-      [ "editeurpanovisu.gpu.TestImageResizeInteractive", "classediteurpanovisu_1_1gpu_1_1TestImageResizeInteractive.html", null ],
-      [ "editeurpanovisu.gpu.TestReductionImage", "classediteurpanovisu_1_1gpu_1_1TestReductionImage.html", null ]
+      [ "editeurpanovisu.EditeurPanovisu", "classediteurpanovisu_1_1EditeurPanovisu.html", null ]
     ] ],
     [ "AttributeProvider", null, [
       [ "editeurpanovisu.MarkdownViewer.CustomAttributeProvider", "classediteurpanovisu_1_1MarkdownViewer_1_1CustomAttributeProvider.html", null ]
@@ -96,8 +93,6 @@ var hierarchy =
       [ "editeurpanovisu.DocumentationDialog", "classediteurpanovisu_1_1DocumentationDialog.html", null ]
     ] ],
     [ "editeurpanovisu.util.SvgIconLoader", "classediteurpanovisu_1_1util_1_1SvgIconLoader.html", null ],
-    [ "editeurpanovisu.TestAIClients", "classediteurpanovisu_1_1TestAIClients.html", null ],
-    [ "editeurpanovisu.gpu.TestImageResize", "classediteurpanovisu_1_1gpu_1_1TestImageResize.html", null ],
     [ "TextField", null, [
       [ "editeurpanovisu.BigDecimalField", "classediteurpanovisu_1_1BigDecimalField.html", null ]
     ] ],

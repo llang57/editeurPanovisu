@@ -52,7 +52,6 @@ var namespaceediteurpanovisu =
     [ "PrevisualiserConversionDialog", "classediteurpanovisu_1_1PrevisualiserConversionDialog.html", "classediteurpanovisu_1_1PrevisualiserConversionDialog" ],
     [ "ReadWriteImage", "classediteurpanovisu_1_1ReadWriteImage.html", "classediteurpanovisu_1_1ReadWriteImage" ],
     [ "RedimensionnementImagesDialogController", "classediteurpanovisu_1_1RedimensionnementImagesDialogController.html", "classediteurpanovisu_1_1RedimensionnementImagesDialogController" ],
-    [ "TestAIClients", "classediteurpanovisu_1_1TestAIClients.html", "classediteurpanovisu_1_1TestAIClients" ],
     [ "TextUtils", "classediteurpanovisu_1_1TextUtils.html", "classediteurpanovisu_1_1TextUtils" ],
     [ "ThemeManager", "classediteurpanovisu_1_1ThemeManager.html", "classediteurpanovisu_1_1ThemeManager" ],
     [ "TransformationsPanoramique", "classediteurpanovisu_1_1TransformationsPanoramique.html", "classediteurpanovisu_1_1TransformationsPanoramique" ],

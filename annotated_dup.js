@@ -9,11 +9,7 @@ var annotated_dup =
         [ "GPUKernelLoader", "classediteurpanovisu_1_1gpu_1_1GPUKernelLoader.html", "classediteurpanovisu_1_1gpu_1_1GPUKernelLoader" ],
         [ "GPUManager", "classediteurpanovisu_1_1gpu_1_1GPUManager.html", "classediteurpanovisu_1_1gpu_1_1GPUManager" ],
         [ "ImageResizeGPU", "classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html", "classediteurpanovisu_1_1gpu_1_1ImageResizeGPU" ],
-        [ "InterpolationMethod", "enumediteurpanovisu_1_1gpu_1_1InterpolationMethod.html", "enumediteurpanovisu_1_1gpu_1_1InterpolationMethod" ],
-        [ "TestBicubicVsLanczos", "classediteurpanovisu_1_1gpu_1_1TestBicubicVsLanczos.html", "classediteurpanovisu_1_1gpu_1_1TestBicubicVsLanczos" ],
-        [ "TestImageResize", "classediteurpanovisu_1_1gpu_1_1TestImageResize.html", "classediteurpanovisu_1_1gpu_1_1TestImageResize" ],
-        [ "TestImageResizeInteractive", "classediteurpanovisu_1_1gpu_1_1TestImageResizeInteractive.html", "classediteurpanovisu_1_1gpu_1_1TestImageResizeInteractive" ],
-        [ "TestReductionImage", "classediteurpanovisu_1_1gpu_1_1TestReductionImage.html", "classediteurpanovisu_1_1gpu_1_1TestReductionImage" ]
+        [ "InterpolationMethod", "enumediteurpanovisu_1_1gpu_1_1InterpolationMethod.html", "enumediteurpanovisu_1_1gpu_1_1InterpolationMethod" ]
       ] ],
       [ "util", "namespaceediteurpanovisu_1_1util.html", [
         [ "LocalHTTPServer", "classediteurpanovisu_1_1util_1_1LocalHTTPServer.html", "classediteurpanovisu_1_1util_1_1LocalHTTPServer" ],
@@ -68,7 +64,6 @@ var annotated_dup =
       [ "PrevisualiserConversionDialog", "classediteurpanovisu_1_1PrevisualiserConversionDialog.html", "classediteurpanovisu_1_1PrevisualiserConversionDialog" ],
       [ "ReadWriteImage", "classediteurpanovisu_1_1ReadWriteImage.html", "classediteurpanovisu_1_1ReadWriteImage" ],
       [ "RedimensionnementImagesDialogController", "classediteurpanovisu_1_1RedimensionnementImagesDialogController.html", "classediteurpanovisu_1_1RedimensionnementImagesDialogController" ],
-      [ "TestAIClients", "classediteurpanovisu_1_1TestAIClients.html", "classediteurpanovisu_1_1TestAIClients" ],
       [ "TextUtils", "classediteurpanovisu_1_1TextUtils.html", "classediteurpanovisu_1_1TextUtils" ],
       [ "ThemeManager", "classediteurpanovisu_1_1ThemeManager.html", "classediteurpanovisu_1_1ThemeManager" ],
       [ "TransformationsPanoramique", "classediteurpanovisu_1_1TransformationsPanoramique.html", "classediteurpanovisu_1_1TransformationsPanoramique" ],

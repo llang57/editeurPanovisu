@@ -52,7 +52,6 @@ var dir_184160a943439c2c782fe244782aeddc =
     [ "PrevisualiserConversionDialog.java", "PrevisualiserConversionDialog_8java.html", "PrevisualiserConversionDialog_8java" ],
     [ "ReadWriteImage.java", "ReadWriteImage_8java.html", "ReadWriteImage_8java" ],
     [ "RedimensionnementImagesDialogController.java", "RedimensionnementImagesDialogController_8java.html", "RedimensionnementImagesDialogController_8java" ],
-    [ "TestAIClients.java", "TestAIClients_8java.html", "TestAIClients_8java" ],
     [ "TextUtils.java", "TextUtils_8java.html", "TextUtils_8java" ],
     [ "ThemeManager.java", "ThemeManager_8java.html", "ThemeManager_8java" ],
     [ "TransformationsPanoramique.java", "TransformationsPanoramique_8java.html", "TransformationsPanoramique_8java" ],
