@@ -177,7 +177,9 @@ re-includes the two catalogues, so they ship in the JAR.
 
 The `quality` field is a judgement, not a measurement — there is no benchmark behind it.
 
-**The Ollama catalogue order comes from observation, not from model recency.** Two real generations per model (Lastours, sparse data; Amiens, complete data) gave: `qwen2.5:14b` the most consistent, `gemma4` sober, `mistral-nemo` concise but embellishing known places, `qwen3.5` commenting on the instructions in both runs, `phi4` inventing freely — it produced "vallée de l'Aude" (the valley is the Orbiel) and the banned superlative "emblématique". **The newest model was among the worst**; do not reorder on generation numbers. Sample: two cases per model — better than judgement, still thin.
+**The Ollama catalogue order comes from a 25-generation benchmark** (5 places x 5 models), counting explicit rule violations. Result: `gemma4`, `qwen3.5` and `mistral-nemo` are **tied within noise** (4 violations each); `qwen2.5:14b` follows (5, mostly meta-sentences); `phi4` is clearly worst (7, including the banned superlative "emblématique" and an invented "Cap"). Most flags are *true but unsupplied* administrative tiers ("Finistère", "Auvergne-Rhône-Alpes") — the detector working as intended, not models lying.
+
+**Do not rank on two samples.** An earlier two-case comparison put `qwen2.5:14b` first and `qwen3.5` near-last; the 25-generation run reversed both. Neither generation number nor a couple of runs predicts instruction adherence.
 
 **Local Ollama models follow the prompt only loosely.** Measured on qwen3.5 (9.7B) and qwen2.5:14b: both still slip meta-sentences into the output ("this description is limited to the data provided"), despite an explicit rule forbidding it, reformulated twice. Three prompt iterations moved the failure around rather than removing it — do not spend a fourth. A 7-10B model simply does not hold a ten-rule prompt. Cloud models handle it far better, which is another reason the catalogue leads with them; Ollama remains the free, private fallback.
 
