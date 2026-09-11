@@ -27,6 +27,9 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y intel-opencl-icd ocl-icd-opencl-dev clinfo
+          # xvfb fournit un affichage virtuel : sans lui, le toolkit JavaFX ne demarre
+          # pas et le test de rendu s ignore, laissant la CI muette sur cette partie.
+          sudo apt install -y xvfb libgtk-3-0
           # Créer le lien symbolique pour libOpenCL.so
           sudo ln -sf /usr/lib/x86_64-linux-gnu/libOpenCL.so.1 /usr/lib/x86_64-linux-gnu/libOpenCL.so
           echo "✅ OpenCL configuré"
@@ -43,7 +46,9 @@ jobs:
       
       - name: 🧪 Run Tests
         run: |
-          mvn test -Dskip.build.increment=true
+          # xvfb-run -a : le test de rendu JavaFX s execute reellement au lieu
+          # de s ignorer. Le voir passer vaut mieux que de le voir absent.
+          xvfb-run -a mvn test -Dskip.build.increment=true
           echo "✅ Tests passés"
       
       - name: 📦 Package Application

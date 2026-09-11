@@ -225,17 +225,18 @@ Current tests, both covering the issue #16 regression (list height must equal a 
 | Test | Needs a display? |
 |------|------------------|
 | `editeurpanovisu.OrdrePanoramiqueDimensionTest` | no — pure arithmetic, runs in CI |
-| `editeurpanovisu.OrdrePanoramiqueRenduTest` | yes — starts the JavaFX toolkit; **skips itself** via `assumeTrue` when headless, rather than failing |
+| `editeurpanovisu.OrdrePanoramiqueRenduTest` | yes — starts the JavaFX toolkit. `linux-ci.yml` runs the suite under `xvfb-run -a`, so it **executes** in CI; it still degrades to skipped (via `assumeTrue`) on any environment without a display, rather than failing |
 
-That skip matters: `linux-ci.yml` runs `mvn test` on a headless runner and treats failure as fatal, so
-any UI-dependent test must degrade to skipped there.
+Keep that fallback: `linux-ci.yml` treats a test failure as fatal, so a UI-dependent test must
+degrade to skipped — never fail — if the virtual display is ever unavailable.
 
 **Manual GUI harnesses, not tests** — no `@Test`, so Surefire ignores them:
 
 - `src/test/java/test/SvgIconLoaderTest.java`, `TestThemeDetection.java` — `Application` subclasses;
   run with `java -cp target/test-classes:target/classes --enable-preview test.SvgIconLoaderTest`
-- `src/editeurpanovisu/gpu/Test*.java` and `TestAIClients.java` — still in the **main** tree, so they
-  are compiled into the production JAR. Moving them to `src/test/java` would fix that.
+- `editeurpanovisu.gpu.Test*` and `editeurpanovisu.TestAIClients` — moved to `src/test/java` so
+  they no longer ship in the production JAR. They match Surefire's `Test*.java` pattern but carry no
+  `@Test`, so the JUnit 5 provider simply ignores them.
 
 ## CI (`.github/workflows/`)
 
