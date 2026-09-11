@@ -33,6 +33,14 @@ Name: "french"; MessagesFile: "compiler:Languages\French.isl"
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
+[InstallDelete]
+; Purger les JAR des versions precedentes AVANT de copier les nouveaux fichiers.
+; Le nom du JAR portant le numero de version, ignoreversion ecrase les fichiers de meme
+; nom mais laisse les anciens en place : une installation ayant suivi plusieurs versions
+; accumulait un JAR de 94 Mo par version (3.4.0, 3.4.12 et 3.4.16 constates ensemble).
+; Sans risque, le JAR courant etant recopie juste apres par la section [Files].
+Type: files; Name: "{app}\app\editeurPanovisu-*.jar"
+
 [Files]
 ; Copier TOUS les fichiers de l'image d'application SAUF configPV (contient des clés API)
 Source: "target\dist-msi\EditeurPanovisu\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Excludes: "configPV"
