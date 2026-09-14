@@ -476,6 +476,33 @@ public class EquiCubeDialogController {
     }
 
     /**
+     * Applique la taille enregistrée à la fenêtre, sans jamais brider l'agrandissement.
+     *
+     * <p>Le code précédent posait {@code setMaxWidth/setMaxHeight} à partir des
+     * préférences, alors que des écouteurs y enregistrent la taille courante. La taille
+     * maximale valait donc la taille courante : {@code setResizable(true)} restait sans
+     * effet, et rétrécir la fenêtre abaissait le plafond d'autant. La fenêtre ne pouvait
+     * que rétrécir, définitivement, jusqu'à masquer le bouton de lancement.</p>
+     *
+     * <p>Les préférences servent désormais de taille <b>initiale</b>. Le minimum est déduit
+     * de la taille préférée calculée par JavaFX, et non d'une constante : la rangée de
+     * boutons reste atteignable quel que soit le thème. Une valeur enregistrée plus petite
+     * que ce minimum est ignorée, ce qui débloque les utilisateurs déjà pris au piège.</p>
+     */
+    private void appliqueTaillePreferee() {
+        // marge pour les bordures et la barre de titre de la fenetre
+        double dLargeurMini = apTransformations.prefWidth(-1) + 20;
+        double dHauteurMini = apTransformations.prefHeight(-1) + 40;
+        stTransformations.setMinWidth(dLargeurMini);
+        stTransformations.setMinHeight(dHauteurMini);
+
+        double dLargeur = Math.max(EditeurPanovisu.getLargeurE2C(), dLargeurMini);
+        double dHauteur = Math.max(EditeurPanovisu.getHauteurE2C(), dHauteurMini);
+        stTransformations.setWidth(dLargeur);
+        stTransformations.setHeight(dHauteur);
+    }
+
+    /**
      * Affiche la fenêtre de transformation d'images
      * 
      * <p>Crée et affiche une fenêtre modale permettant de :</p>
@@ -681,8 +708,17 @@ public class EquiCubeDialogController {
         hbBoutons.getChildren().addAll(btnAnnuler, btnValider);
         vbFenetre.getChildren().addAll(hbChoix, hbBoutons);
         
+        // Taille souhaitee, sans plafond : setMaxSize(650, 420) empechait le contenu de
+        // s'etendre, si bien que la rangee de boutons — dernier element de vbFenetre, donc
+        // le premier evince — sortait du cadre et le bouton « Lancer le traitement »
+        // devenait inatteignable. Les themes de la v3.x modifient la hauteur des controles :
+        // aucune valeur en pixels codee en dur ne peut rester juste.
         apTransformations.setPrefSize(650, 420);
-        apTransformations.setMaxSize(650, 420);
+        // le contenu occupe toute la fenetre, quelle que soit la taille choisie par l'utilisateur
+        AnchorPane.setTopAnchor(vbFenetre, 0.0);
+        AnchorPane.setBottomAnchor(vbFenetre, 0.0);
+        AnchorPane.setLeftAnchor(vbFenetre, 0.0);
+        AnchorPane.setRightAnchor(vbFenetre, 0.0);
         apTransformations.getChildren().add(vbFenetre);
         
         Scene scnTransformations = new Scene(apTransformations);
@@ -739,8 +775,7 @@ public class EquiCubeDialogController {
             EditeurPanovisu.setHauteurE2C(newVal.doubleValue());
         });
         
-        stTransformations.setMaxWidth(EditeurPanovisu.getLargeurE2C());
-        stTransformations.setMaxHeight(EditeurPanovisu.getHauteurE2C());
+        appliqueTaillePreferee();
         apTransformations.setOnDragDropped((event) -> {
             Dragboard dbFichiersTransformation = event.getDragboard();
             boolean bSucces = false;
