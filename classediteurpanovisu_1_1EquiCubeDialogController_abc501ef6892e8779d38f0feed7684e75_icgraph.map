@@ -1,0 +1,5 @@
+<map id="editeurpanovisu.EquiCubeDialogController.appliqueTaillePreferee" name="editeurpanovisu.EquiCubeDialogController.appliqueTaillePreferee">
+<area shape="rect" id="Node000001" title="Applique la taille enregistrée à la fenêtre, sans jamais brider l&#39;agrandissement." alt="" coords="277,5,499,60"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1EquiCubeDialogController.html#a05e62237b5363eba15018189320cf5db" title="Affiche la fenêtre de transformation d&#39;images." alt="" coords="5,13,229,53"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="264,35,229,35,229,30,264,30"/>
+</map>

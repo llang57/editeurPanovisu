@@ -1,0 +1,9 @@
+<map id="editeurpanovisu.EquiCubeDialogController.appliqueTaillePreferee" name="editeurpanovisu.EquiCubeDialogController.appliqueTaillePreferee">
+<area shape="rect" id="Node000001" title="Applique la taille enregistrée à la fenêtre, sans jamais brider l&#39;agrandissement." alt="" coords="5,62,227,117"/>
+<area shape="rect" id="Node000002" href="$classediteurpanovisu_1_1EditeurPanovisu.html#a322f7545d2bee2d1175f7fadbef3330b" title="Retourne la valeur de hauteurE2C." alt="" coords="275,5,535,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="226,62,300,46,301,51,227,67"/>
+<area shape="rect" id="Node000003" href="$classediteurpanovisu_1_1EditeurPanovisu.html#aa143b376a90756568e2c1e7a13da3721" title="Retourne la valeur de largeurE2C." alt="" coords="275,69,535,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="227,87,261,87,261,92,227,92"/>
+<area shape="rect" id="Node000004" href="$leaflet_8js.html#a2ecc0b03b1eaf4f1ca537029a6f89ac0" title=" " alt="" coords="385,134,424,159"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="227,109,275,119,372,138,371,143,274,124,226,114"/>
+</map>

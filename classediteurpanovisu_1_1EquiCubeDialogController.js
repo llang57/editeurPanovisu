@@ -3,6 +3,7 @@ var classediteurpanovisu_1_1EquiCubeDialogController =
     [ "ListeTransformationCouleur", "classediteurpanovisu_1_1EquiCubeDialogController_1_1ListeTransformationCouleur.html", "classediteurpanovisu_1_1EquiCubeDialogController_1_1ListeTransformationCouleur" ],
     [ "afficheFenetre", "classediteurpanovisu_1_1EquiCubeDialogController.html#a05e62237b5363eba15018189320cf5db", null ],
     [ "annulerE2C", "classediteurpanovisu_1_1EquiCubeDialogController.html#ad0537fecdf310227f0b5bddb057c4e24", null ],
+    [ "appliqueTaillePreferee", "classediteurpanovisu_1_1EquiCubeDialogController.html#abc501ef6892e8779d38f0feed7684e75", null ],
     [ "choixFichiers", "classediteurpanovisu_1_1EquiCubeDialogController.html#af7ef7e2f3a7d569a605a5184bef65807", null ],
     [ "traiteFichier", "classediteurpanovisu_1_1EquiCubeDialogController.html#a859d7bcbdb37f828495100df8fa4f397", null ],
     [ "tskTraitement", "classediteurpanovisu_1_1EquiCubeDialogController.html#a979c808c5262cc7443c4db0528a70a5c", null ],

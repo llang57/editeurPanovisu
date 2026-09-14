@@ -1,5 +1,7 @@
 var NAVTREEINDEX28 =
 {
+"classediteurpanovisu_1_1gpu_1_1ImageResizeGPU.html#afbb5bce1b5bafeb8197e5e74476daa09":[1,0,0,1,2,6],
+"classediteurpanovisu_1_1util_1_1LocalHTTPServer.html":[2,0,0,2,0],
 "classediteurpanovisu_1_1util_1_1LocalHTTPServer.html":[1,0,0,2,0],
 "classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a174eb2f08516d7ce77b8e4f30f7eedf1":[2,0,0,2,0,1],
 "classediteurpanovisu_1_1util_1_1LocalHTTPServer.html#a174eb2f08516d7ce77b8e4f30f7eedf1":[1,0,0,2,0,1],
@@ -247,7 +249,5 @@ var NAVTREEINDEX28 =
 "enumediteurpanovisu_1_1ThemeManager_1_1Theme.html#a8bc066045aab9b99bd7928c278469a90":[1,0,0,53,0,20],
 "enumediteurpanovisu_1_1ThemeManager_1_1Theme.html#a8bc066045aab9b99bd7928c278469a90":[2,0,0,53,0,20],
 "enumediteurpanovisu_1_1ThemeManager_1_1Theme.html#a9bbc2a5c6141cb03edef01f48cd9042f":[2,0,0,53,0,36],
-"enumediteurpanovisu_1_1ThemeManager_1_1Theme.html#a9bbc2a5c6141cb03edef01f48cd9042f":[1,0,0,53,0,36],
-"enumediteurpanovisu_1_1ThemeManager_1_1Theme.html#aa9e16581c763b3063d834ac4140545b2":[2,0,0,53,0,15],
-"enumediteurpanovisu_1_1ThemeManager_1_1Theme.html#aa9e16581c763b3063d834ac4140545b2":[1,0,0,53,0,15]
+"enumediteurpanovisu_1_1ThemeManager_1_1Theme.html#a9bbc2a5c6141cb03edef01f48cd9042f":[1,0,0,53,0,36]
 };
