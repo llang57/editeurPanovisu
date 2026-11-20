@@ -2,10 +2,13 @@ package editeurpanovisu;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import javafx.application.Platform;
+import javafx.scene.control.ComboBox;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -75,5 +78,14 @@ class ModeSourisModeleInterfaceTest {
         gi.setModeSourisDemarrage(ModeSourisDemarrage.STREETVIEW);
         gi.setTemplate(List.of("souris=oui"));
         assertEquals(ModeSourisDemarrage.CLASSIQUE, gi.getModeSourisDemarrage());
+    }
+
+    @Test
+    @DisplayName("le sélecteur porte un nom accessible localisé (lecteurs d'écran)")
+    void selecteurNomAccessible() {
+        ResourceBundle rb = ResourceBundle.getBundle("editeurpanovisu.i18n.PanoVisu", Locale.FRENCH);
+        ComboBox<ModeSourisDemarrage> cb = GestionnaireInterfaceController.creeComboModeSouris(rb, ModeSourisDemarrage.STREETVIEW);
+        assertEquals("Mode souris au démarrage", cb.getAccessibleText());
+        assertEquals(ModeSourisDemarrage.STREETVIEW, cb.getValue());
     }
 }

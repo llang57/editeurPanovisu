@@ -5862,11 +5862,13 @@ public class GestionnaireInterfaceController {
 
     /**
      * Crée un sélecteur du mode souris au démarrage, libellés localisés,
-     * initialisé sur la valeur du modèle.
+     * initialisé sur la valeur donnée.
      *
+     * @param rb bundle de localisation des libellés
+     * @param valeurInitiale mode sélectionné à la création
      * @return le sélecteur
      */
-    private ComboBox<ModeSourisDemarrage> creeComboModeSouris() {
+    static ComboBox<ModeSourisDemarrage> creeComboModeSouris(ResourceBundle rb, ModeSourisDemarrage valeurInitiale) {
         ComboBox<ModeSourisDemarrage> cbMode = new ComboBox<>(
                 FXCollections.observableArrayList(ModeSourisDemarrage.values()));
         cbMode.setConverter(new javafx.util.StringConverter<ModeSourisDemarrage>() {
@@ -5875,7 +5877,7 @@ public class GestionnaireInterfaceController {
                 if (mode == null) {
                     return "";
                 }
-                return rbLocalisation.getString(mode == ModeSourisDemarrage.STREETVIEW
+                return rb.getString(mode == ModeSourisDemarrage.STREETVIEW
                         ? "interface.modeSourisStreetView"
                         : "interface.modeSourisClassique");
             }
@@ -5885,7 +5887,9 @@ public class GestionnaireInterfaceController {
                 return null; // sélecteur non éditable
             }
         });
-        cbMode.setValue(getModeSourisDemarrage());
+        cbMode.setValue(valeurInitiale);
+        // Nom annoncé par les lecteurs d'écran : la valeur seule ("Classique") n'identifie pas le réglage.
+        cbMode.setAccessibleText(rb.getString("interface.modeSourisDemarrage"));
         return cbMode;
     }
 
@@ -9690,7 +9694,8 @@ public class GestionnaireInterfaceController {
         Label lblModeSourisBarreClassique = new Label(rbLocalisation.getString("interface.modeSourisDemarrage"));
         lblModeSourisBarreClassique.setLayoutX(10);
         lblModeSourisBarreClassique.setLayoutY(424);
-        cbModeSourisBarreClassique = creeComboModeSouris();
+        cbModeSourisBarreClassique = creeComboModeSouris(rbLocalisation, getModeSourisDemarrage());
+        lblModeSourisBarreClassique.setLabelFor(cbModeSourisBarreClassique);
         cbModeSourisBarreClassique.setLayoutX(170);
         cbModeSourisBarreClassique.setLayoutY(420);
 
@@ -9930,7 +9935,8 @@ public class GestionnaireInterfaceController {
         Label lblModeSourisBarrePersonnalisee = new Label(rbLocalisation.getString("interface.modeSourisDemarrage"));
         lblModeSourisBarrePersonnalisee.setLayoutX(20);
         lblModeSourisBarrePersonnalisee.setLayoutY(729);
-        cbModeSourisBarrePersonnalisee = creeComboModeSouris();
+        cbModeSourisBarrePersonnalisee = creeComboModeSouris(rbLocalisation, getModeSourisDemarrage());
+        lblModeSourisBarrePersonnalisee.setLabelFor(cbModeSourisBarrePersonnalisee);
         cbModeSourisBarrePersonnalisee.setLayoutX(180);
         cbModeSourisBarrePersonnalisee.setLayoutY(725);
         // Un seul réglage, affiché dans les deux panneaux de barre.
