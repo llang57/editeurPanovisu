@@ -5861,11 +5861,6 @@ public class GestionnaireInterfaceController {
     }
 
     /**
-     *
-     * @param strRepertoire
-     * @return
-     */
-    /**
      * Crée un sélecteur du mode souris au démarrage, libellés localisés,
      * initialisé sur la valeur du modèle.
      *
@@ -5894,6 +5889,11 @@ public class GestionnaireInterfaceController {
         return cbMode;
     }
 
+    /**
+     *
+     * @param strRepertoire
+     * @return
+     */
     private ArrayList<String> strListerStyle(String strRepertoire) {
         ArrayList<String> strListe = new ArrayList<>();
         File[] fileRepertoires = new File(strRepertoire).listFiles();
