@@ -288,6 +288,7 @@ function panovisu(iNumPano) {
         iNbPointCarte,
         bVignettesRentre,
         iMode = 1,
+        bModeSourisInitialise = false,
         longitude = 0,
         latitude = 0,
         minLat = -1000,
@@ -1319,7 +1320,16 @@ function panovisu(iNumPano) {
     }
 
     /**
-     * 
+     * Icône du bouton mode souris correspondant au mode actif
+     * (même correspondance que changeModeSouris).
+     * @returns {String}
+     */
+    function iconeModeSouris() {
+        return (iMode === 0) ? "souris2.png" : "souris.png";
+    }
+
+    /**
+     *
      * @returns {undefined}
      */
     function changeModeSouris() {
@@ -5437,7 +5447,7 @@ function panovisu(iNumPano) {
             $("#pleinEcran-" + iNumPano).html("");
             $("<img>", { src: "panovisu/images/" + strStyleBoutons + "/fs.png", alt: "" }).appendTo("#pleinEcran-" + iNumPano);
             $("#souris-" + iNumPano).html("");
-            $("<img>", { src: "panovisu/images/" + strStyleBoutons + "/souris.png", alt: "" }).appendTo("#souris-" + iNumPano);
+            $("<img>", { src: "panovisu/images/" + strStyleBoutons + "/" + iconeModeSouris(), alt: "" }).appendTo("#souris-" + iNumPano);
             $("#auto-" + iNumPano).html("");
             $("<img>", { src: "panovisu/images/" + strStyleBoutons + "/rotation.png", alt: "" }).appendTo("#auto-" + iNumPano);
             $("#binfo-" + iNumPano).html("");
@@ -5783,6 +5793,20 @@ function panovisu(iNumPano) {
                  * Définition du panoramique Ã  afficher 
                  */
                 var XMLPano = $(d).find('pano');
+                /**
+                 * Mode souris au démarrage (attribut modeSouris) : appliqué une seule fois,
+                 * au premier chargement, pour ne pas écraser le choix du visiteur à chaque
+                 * changement de scène. Un écran tactile reste en mode "saisie" (iMode = 0).
+                 */
+                if (!bModeSourisInitialise) {
+                    bModeSourisInitialise = true;
+                    if (!estTactile()) {
+                        iMode = (XMLPano.attr('modeSouris') === "streetview") ? 0 : 1;
+                        if (iMode === 0) {
+                            $("#container-" + iNumPano).css("cursor", "grab");
+                        }
+                    }
+                }
                 strPanoImage = XMLPano.attr('image') || strPanoImage;
                 strPanoTitre = XMLPano.attr('titre') || strPanoTitre;
                 strPanoTitre2 = XMLPano.attr('titre2') || strPanoTitre2;
@@ -6634,7 +6658,7 @@ function panovisu(iNumPano) {
                                 style: "left : " + xm1 + "px;top : " + ym1 + "px;"
                             }).appendTo("#telec-" + iNumPano);
                             $("<img>", {
-                                src: "panovisu/images/telecommande/souris.png",
+                                src: "panovisu/images/telecommande/" + iconeModeSouris(),
                                 border: "0",
                                 width: tailleBtnTelec,
                                 alt: "",
