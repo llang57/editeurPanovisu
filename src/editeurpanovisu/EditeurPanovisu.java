@@ -2554,7 +2554,8 @@ public class EditeurPanovisu extends Application {
                         + "\n"
                         + "<scene>\n"
                         + "   <pano \n"
-                        + "      image=\"" + strFichierPano + "\"\n";
+                        + "      image=\"" + strFichierPano + "\"\n"
+                        + "      modeSouris=\"" + getGestionnaireInterface().getModeSourisDemarrage().getValeur() + "\"\n";
                 if (getGestionnaireInterface().isbAfficheTitre() && getGestionnaireInterface().isbTitreVisite()
                         && getGestionnaireInterface().isbTitrePanoramique()) {
                     String strTit = "";

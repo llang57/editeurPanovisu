@@ -442,7 +442,20 @@ public class GestionnaireInterfaceController {
      * Activation du bouton mode souris dans la barre classique ("oui"/"non").
      */
     private String strSourisBarreClassique = "oui";
-    
+
+    /**
+     * Mode de déplacement souris actif au chargement de la visite (discussion #20).
+     * Réglage unique, partagé par les deux barres de navigation.
+     */
+    private ModeSourisDemarrage modeSourisDemarrage = ModeSourisDemarrage.CLASSIQUE;
+
+    /**
+     * Sélecteurs du mode souris au démarrage, un dans chaque panneau de barre,
+     * liés entre eux (une seule valeur).
+     */
+    private ComboBox<ModeSourisDemarrage> cbModeSourisBarreClassique;
+    private ComboBox<ModeSourisDemarrage> cbModeSourisBarrePersonnalisee;
+
     /**
      * Visibilité initiale de la barre classique ("oui"/"non").
      */
@@ -5848,6 +5861,39 @@ public class GestionnaireInterfaceController {
     }
 
     /**
+     * Crée un sélecteur du mode souris au démarrage, libellés localisés,
+     * initialisé sur la valeur donnée.
+     *
+     * @param rb bundle de localisation des libellés
+     * @param valeurInitiale mode sélectionné à la création
+     * @return le sélecteur
+     */
+    static ComboBox<ModeSourisDemarrage> creeComboModeSouris(ResourceBundle rb, ModeSourisDemarrage valeurInitiale) {
+        ComboBox<ModeSourisDemarrage> cbMode = new ComboBox<>(
+                FXCollections.observableArrayList(ModeSourisDemarrage.values()));
+        cbMode.setConverter(new javafx.util.StringConverter<ModeSourisDemarrage>() {
+            @Override
+            public String toString(ModeSourisDemarrage mode) {
+                if (mode == null) {
+                    return "";
+                }
+                return rb.getString(mode == ModeSourisDemarrage.STREETVIEW
+                        ? "interface.modeSourisStreetView"
+                        : "interface.modeSourisClassique");
+            }
+
+            @Override
+            public ModeSourisDemarrage fromString(String strTexte) {
+                return null; // sélecteur non éditable
+            }
+        });
+        cbMode.setValue(valeurInitiale);
+        // Nom annoncé par les lecteurs d'écran : la valeur seule ("Classique") n'identifie pas le réglage.
+        cbMode.setAccessibleText(rb.getString("interface.modeSourisDemarrage"));
+        return cbMode;
+    }
+
+    /**
      *
      * @param strRepertoire
      * @return
@@ -5964,6 +6010,7 @@ public class GestionnaireInterfaceController {
                 .append("rotation=").append(getStrRotationBarreClassique()).append("\n")
                 .append("FS=").append(getStrPleinEcranBarreClassique()).append("\n")
                 .append("souris=").append(getStrSourisBarreClassique()).append("\n")
+                .append("modeSourisDemarrage=").append(getModeSourisDemarrage().getValeur()).append("\n")
                 .append("espacementBoutons=").append(getEspacementBarreClassique()).append("\n")
                 .append("bCouleurOrigineBarrePersonnalisee=").append(isbCouleurOrigineBarrePersonnalisee()).append("\n")
                 .append("nombreZonesBarrePersonnalisee=").append(getiNombreZonesBarrePersonnalisee()).append("\n")
@@ -6182,6 +6229,7 @@ public class GestionnaireInterfaceController {
      * @see #afficheTemplate()
      */
     public void setTemplate(List<String> strTemplate) {
+        setModeSourisDemarrage(ModeSourisDemarrage.CLASSIQUE);
         setbAfficheBoussole(false);
         setbAfficheMasque(false);
         setbAfficheVignettes(false);
@@ -6384,6 +6432,9 @@ public class GestionnaireInterfaceController {
                         break;
                     case "souris":
                         setStrSourisBarreClassique(strValeur);
+                        break;
+                    case "modeSourisDemarrage":
+                        setModeSourisDemarrage(ModeSourisDemarrage.depuisValeur(strValeur));
                         break;
                     case "espacementBoutons":
                         setEspacementBarreClassique(Double.parseDouble(strValeur));
@@ -7106,6 +7157,9 @@ public class GestionnaireInterfaceController {
             cbSourisBarreClassique.setSelected(true);
         } else {
             cbSourisBarreClassique.setSelected(false);
+        }
+        if (cbModeSourisBarreClassique != null) {
+            cbModeSourisBarreClassique.setValue(getModeSourisDemarrage());
         }
         if (getStrVisibiliteBarrePersonnalisee().equals("oui")) {
             chargeBarrePersonnalisee(getStrLienImageBarrePersonnalisee());
@@ -9472,7 +9526,7 @@ public class GestionnaireInterfaceController {
         PaneOutil poClass = new PaneOutil(rbLocalisation.getString("interface.barreBoutons"), apBarreClassique, largeur);
         AnchorPane apCLASS = new AnchorPane(poClass.getApPaneOutil());
         apBarreClassique.setLayoutY(40);
-        apBarreClassique.setPrefHeight(420);
+        apBarreClassique.setPrefHeight(455);
         apBarreClassique.setMinWidth(vbOutils.getPrefWidth() - 20);
 
         cbBarreClassiqueVisible = new CheckBox(rbLocalisation.getString("interface.barreVisible"));
@@ -9635,10 +9689,22 @@ public class GestionnaireInterfaceController {
                 cbFSBarreClassique, cbRotationBarreClassique, cbSourisBarreClassique);
         cbNiveauBarreClassique.disableProperty().bind(cbBarreClassiqueVisible.selectedProperty().not());
 
+        // Mode souris au démarrage : hors de apBarreClass, qui est grisé quand la barre est masquée.
+        // Sans barre, le visiteur ne peut plus changer de mode : le réglage compte d'autant plus.
+        Label lblModeSourisBarreClassique = new Label(rbLocalisation.getString("interface.modeSourisDemarrage"));
+        lblModeSourisBarreClassique.setLayoutX(10);
+        lblModeSourisBarreClassique.setLayoutY(424);
+        cbModeSourisBarreClassique = creeComboModeSouris(rbLocalisation, getModeSourisDemarrage());
+        lblModeSourisBarreClassique.setLabelFor(cbModeSourisBarreClassique);
+        cbModeSourisBarreClassique.setLayoutX(170);
+        cbModeSourisBarreClassique.setLayoutY(420);
+
         apBarreClassique.getChildren().addAll(
                 apBarreClass,
                 cbBarreClassiqueVisible,
-                cbNiveauBarreClassique
+                cbNiveauBarreClassique,
+                lblModeSourisBarreClassique,
+                cbModeSourisBarreClassique
         );
 
 
@@ -9651,7 +9717,7 @@ public class GestionnaireInterfaceController {
         PaneOutil poPers = new PaneOutil(rbLocalisation.getString("interface.barreBoutonsPersonalisee"), apBarrePersonnalisee, largeur);
         AnchorPane apPERS = new AnchorPane(poPers.getApPaneOutil());
         apBarrePersonnalisee.setLayoutY(40);
-        apBarrePersonnalisee.setPrefHeight(680);
+        apBarrePersonnalisee.setPrefHeight(760);
         apBarrePersonnalisee.setMinWidth(vbOutils.getPrefWidth() - 20);
         cbBarrePersonnaliseeVisible = new CheckBox(rbLocalisation.getString("interface.barrePersonnaliseeVisible"));
         cbBarrePersonnaliseeVisible.setLayoutX(20);
@@ -9866,8 +9932,19 @@ public class GestionnaireInterfaceController {
                 lblLien2BarrePersonnalisee, tfLien2BarrePersonnalisee
         );
         cbNiveauBarrePersonnalisee.disableProperty().bind(cbBarrePersonnaliseeVisible.selectedProperty().not());
+        Label lblModeSourisBarrePersonnalisee = new Label(rbLocalisation.getString("interface.modeSourisDemarrage"));
+        lblModeSourisBarrePersonnalisee.setLayoutX(20);
+        lblModeSourisBarrePersonnalisee.setLayoutY(729);
+        cbModeSourisBarrePersonnalisee = creeComboModeSouris(rbLocalisation, getModeSourisDemarrage());
+        lblModeSourisBarrePersonnalisee.setLabelFor(cbModeSourisBarrePersonnalisee);
+        cbModeSourisBarrePersonnalisee.setLayoutX(180);
+        cbModeSourisBarrePersonnalisee.setLayoutY(725);
+        // Un seul réglage, affiché dans les deux panneaux de barre.
+        cbModeSourisBarrePersonnalisee.valueProperty().bindBidirectional(cbModeSourisBarreClassique.valueProperty());
+
         apBarrePersonnalisee.getChildren().addAll(
-                apBarrePers, cbBarrePersonnaliseeVisible, cbNiveauBarrePersonnalisee
+                apBarrePers, cbBarrePersonnaliseeVisible, cbNiveauBarrePersonnalisee,
+                lblModeSourisBarrePersonnalisee, cbModeSourisBarrePersonnalisee
         );
 
         /*
@@ -12166,6 +12243,18 @@ public class GestionnaireInterfaceController {
             }
             afficheBarrePersonnalisee();
         });
+        cbModeSourisBarreClassique.valueProperty().addListener((ov, old_val, new_val) -> {
+            // Le panneau personnalisé est lié : un seul écouteur suffit. Pas de marque « modifié »
+            // quand la valeur ne fait que refléter le modèle (ouverture d'un projet).
+            if (new_val == null || new_val == getModeSourisDemarrage()) {
+                return;
+            }
+            if (getiNombrePanoramiques() != 0) {
+                setbDejaSauve(false);
+                getStPrincipal().setTitle(getStPrincipal().getTitle().replace(" *", "") + " *");
+            }
+            setModeSourisDemarrage(new_val);
+        });
         cbSourisBarrePersonnalisee.selectedProperty().addListener((ov, old_val, new_val) -> {
             if (getiNombrePanoramiques() != 0) {
                 setbDejaSauve(false);
@@ -13528,6 +13617,20 @@ public class GestionnaireInterfaceController {
      */
     public String getStrSourisBarreClassique() {
         return strSourisBarreClassique;
+    }
+
+    /**
+     * @return le mode souris actif au chargement de la visite exportée
+     */
+    public ModeSourisDemarrage getModeSourisDemarrage() {
+        return modeSourisDemarrage;
+    }
+
+    /**
+     * @param modeSourisDemarrage mode souris au chargement ; {@code null} vaut Classique
+     */
+    public void setModeSourisDemarrage(ModeSourisDemarrage modeSourisDemarrage) {
+        this.modeSourisDemarrage = modeSourisDemarrage != null ? modeSourisDemarrage : ModeSourisDemarrage.CLASSIQUE;
     }
 
     /**
