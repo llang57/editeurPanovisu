@@ -604,7 +604,16 @@ Barre prédéfinie avec boutons standards stylisés.
 - ☑️ **Barre d'outils** : Outils supplémentaires :
   - 🔄 **Bouton Autorotation** : Lance la rotation automatique du panoramique
   - 🖵 **Bouton Plein Écran** : Passe en mode plein écran (F11)
-  - 🖱️ **Bouton Mode Souris** : Change le mode d'interaction (drag/clic)
+  - 🖱️ **Bouton Mode Souris** : Permet au visiteur de passer d'un mode de déplacement à l'autre (Classique ↔ StreetView)
+
+**Mode souris au démarrage** :
+
+- 🖱️ **Mode souris au démarrage** : Mode de déplacement actif à l'ouverture de la visite
+  - **Classique** : maintenir le clic et déplacer la souris fait tourner le panoramique ; plus la souris s'éloigne du point de départ, plus la rotation est rapide, et elle continue tant que le bouton reste enfoncé
+  - **StreetView** : maintenir le clic et déplacer la souris « attrape » l'image, qui suit exactement le geste et s'arrête avec lui (comme dans Google Street View)
+  - Le visiteur peut changer de mode avec le **Bouton Mode Souris** ; son choix est conservé d'un panoramique à l'autre
+  - Ce réglage reste modifiable même si la barre est masquée : sans barre, c'est le seul mode dont dispose le visiteur
+  - Sur écran tactile (smartphone, tablette), la visite démarre toujours en mode StreetView, le plus naturel au doigt
 
 💡 **Astuce** : Désactivez les barres inutiles pour une interface épurée (ex: désactiver zoom sur mobile où le pinch fonctionne).
 
@@ -633,6 +642,10 @@ Barre totalement customisable avec images personnalisées.
 - 🔗 **Lien 1** : Première image personnalisée avec action associée
 - 🔗 **Lien 2** : Deuxième image personnalisée avec action
 - 🛠️ **Éditer** : Bouton pour configurer les actions (URL, JavaScript, etc.)
+
+**Mode souris au démarrage** :
+
+- 🖱️ **Mode souris au démarrage** : Même réglage que dans la Barre de Navigation Classique (Classique ou StreetView) ; le modifier dans un panneau le modifie dans l'autre
 
 💡 **Cas d'usage** : Créez des boutons corporate avec votre logo, des liens vers réseaux sociaux, ou des actions spécifiques (télécharger brochure, contacter, etc.)
 
