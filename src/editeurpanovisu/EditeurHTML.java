@@ -1129,17 +1129,7 @@ public class EditeurHTML {
         btnValide.setOnAction((evenement) -> {
             // Récupérer le HTML et nettoyer les ancres d'édition et les attributs data-image-id
             String htmlContent = heEditeurHTML.getHtmlText();
-            // Supprimer tous les boutons d'ancre d'édition
-            htmlContent = htmlContent.replaceAll("<button[^>]*class=['\"]image-anchor['\"][^>]*>.*?</button>", "");
-            // Supprimer les anciens spans d'ancre (au cas où)
-            htmlContent = htmlContent.replaceAll("<span[^>]*class=['\"]image-anchor['\"][^>]*>.*?</span>", "");
-            // Supprimer les conteneurs div non-editables (au cas où)
-            htmlContent = htmlContent.replaceAll("<div[^>]*contenteditable=['\"]false['\"][^>]*>", "");
-            htmlContent = htmlContent.replaceAll("</div>", "");
-            // Supprimer les attributs data-image-id des images
-            htmlContent = htmlContent.replaceAll("\\s*data-image-id=['\"][^'\"]*['\"]", "");
-            // Nettoyage standard
-            htmlContent = htmlContent.replace("[", "&lbrace;").replace("]", "&rbrace;").replace("contenteditable=\"true\"", "");
+            htmlContent = FragmentImageHTML.nettoieHTML(htmlContent);
             
             getHsHTML().setStrTexteHTML(htmlContent);
             getHsHTML().setStrThemeHTML(strThemePageHTML);

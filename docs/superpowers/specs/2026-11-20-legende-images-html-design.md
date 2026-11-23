@@ -40,7 +40,7 @@ Pouvoir afficher sous une image insérée dans un hotspot HTML (page interne) un
   Le flottement gauche/droite passe de l'`<img>` au conteneur ; le centrage garde l'enveloppe
   `</p><p style='text-align : center;'>…</p><p>` existante.
 - Le texte de la légende est échappé HTML (`&`, `<`, `>`, `"`, `'`) et rogné. Les `:` `;` `[` `]` sont déjà
-  traités par le chemin existant (`&dp`/`&pv` dans le `.pvu`, `&lbrace;`/`&rbrace;` à la validation).
+  traités par le chemin existant (`&dp`/`&pv` dans le `.pvu`, `&#91;`/`&#93;` à la validation — le codage précédent, `&lbrace;`/`&rbrace;`, transformait en fait les crochets en accolades ; corrigé dans cette branche).
 - **Suppression (⚓)** : si l'image est dans un `.pv-image-legendee`, tout le conteneur est retiré (légende
   comprise) ; sinon comportement actuel. Fonctionne aussi après rechargement, où l'`<img>` reçoit un nouvel
   identifiant mais garde son conteneur.

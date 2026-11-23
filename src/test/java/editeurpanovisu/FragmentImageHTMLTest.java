@@ -125,4 +125,22 @@ class FragmentImageHTMLTest {
                 "  <b>\"Tom\" & l'été>  ");
         assertTrue(fragment.contains(STYLE_LEGENDE + "&lt;b&gt;&quot;Tom&quot; &amp; l&#39;été&gt;</span>"), fragment);
     }
+
+    @Test
+    @DisplayName("validation : les crochets restent des crochets (pas d'accolades) et disparaissent du texte brut")
+    void nettoyageCrochets() {
+        String nettoye = FragmentImageHTML.nettoieHTML("<p>© Jorge : test; [1]</p>");
+        assertEquals("<p>© Jorge : test; &#91;1&#93;</p>", nettoye);
+    }
+
+    @Test
+    @DisplayName("validation : ancre et data-image-id retirés, conteneur de légende conservé")
+    void nettoyageAncres() {
+        String nettoye = FragmentImageHTML.nettoieHTML(
+                FragmentImageHTML.construire(ID, CHEMIN, LARGEUR, PositionImage.GAUCHE, "Légende"));
+        assertFalse(nettoye.contains("image-anchor"), nettoye);
+        assertFalse(nettoye.contains("data-image-id"), nettoye);
+        assertTrue(nettoye.startsWith("<span class='pv-image-legendee'"), nettoye);
+        assertTrue(nettoye.contains("Légende</span></span>"), nettoye);
+    }
 }

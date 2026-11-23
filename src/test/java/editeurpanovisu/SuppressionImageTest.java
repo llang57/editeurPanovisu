@@ -124,4 +124,17 @@ class SuppressionImageTest {
         assertFalse(corps.contains("<img"), corps);
         assertTrue(corps.contains("<p>ab</p>"), corps);
     }
+
+    @Test
+    @DisplayName("image sans légende insérée dans une légende : la voisine et sa légende restent")
+    void imageImbriqueeNeRemontePas() throws Exception {
+        String html = "<p><span class='pv-image-legendee' style='display:inline-block;'>"
+                + "<img data-image-id='img_4' src='a'/>"
+                + "<span class='pv-legende' style='display:block;'>© Jorge "
+                + "<img data-image-id='img_5' src='b'/></span></span></p>";
+        String corps = apresSuppression(html, "img_5");
+        assertFalse(corps.contains("img_5"), corps);
+        assertTrue(corps.contains("img_4"), corps);
+        assertTrue(corps.contains("Jorge"), corps);
+    }
 }

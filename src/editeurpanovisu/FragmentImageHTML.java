@@ -131,6 +131,25 @@ public final class FragmentImageHTML {
     }
 
     /**
+     * Nettoie le HTML de l'éditeur avant enregistrement : retire les ancres ⚓, les anciennes
+     * enveloppes {@code <div contenteditable=false>} et les {@code data-image-id}, puis encode
+     * les crochets, qui délimitent les blocs du fichier {@code .pvu}.
+     *
+     * @param html HTML lu dans l'éditeur
+     * @return HTML à enregistrer dans le hotspot
+     */
+    public static String nettoieHTML(String html) {
+        String strHtml = html;
+        strHtml = strHtml.replaceAll("<button[^>]*class=['\"]image-anchor['\"][^>]*>.*?</button>", "");
+        strHtml = strHtml.replaceAll("<span[^>]*class=['\"]image-anchor['\"][^>]*>.*?</span>", "");
+        strHtml = strHtml.replaceAll("<div[^>]*contenteditable=['\"]false['\"][^>]*>", "");
+        strHtml = strHtml.replaceAll("</div>", "");
+        strHtml = strHtml.replaceAll("\\s*data-image-id=['\"][^'\"]*['\"]", "");
+        // &#91;/&#93; = crochets ([ ]) ; &lbrace;/&rbrace; étaient des accolades ({ }).
+        return strHtml.replace("[", "&#91;").replace("]", "&#93;").replace("contenteditable=\"true\"", "");
+    }
+
+    /**
      * Script exécuté dans l'éditeur quand on clique sur l'ancre ⚓ : retire l'ancre, puis le
      * conteneur image + légende s'il existe, sinon l'image seule.
      *
@@ -143,8 +162,10 @@ public final class FragmentImageHTML {
                 + "var anchor = document.querySelector('.image-anchor[data-image-id=\"" + imageId + "\"]');"
                 + "if (anchor) { anchor.remove(); }"
                 + "if (img) {"
-                + " var conteneur = img.closest('." + CLASSE_CONTENEUR + "');"
-                + " (conteneur || img).remove();"
+                // Parent direct seulement : une image insérée dans une légende ne doit pas
+                // emporter l'image voisine et sa légende.
+                + " var parent = img.parentElement;"
+                + " (parent && parent.classList.contains('" + CLASSE_CONTENEUR + "') ? parent : img).remove();"
                 + "}"
                 + "})();";
     }
