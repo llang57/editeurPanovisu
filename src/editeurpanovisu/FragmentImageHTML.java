@@ -94,6 +94,62 @@ public final class FragmentImageHTML {
     }
 
     /**
+     * Réinjecte une ancre ⚓ devant chaque image d'un HTML enregistré (ancres et
+     * {@code data-image-id} sont retirés à la validation).
+     *
+     * <p>L'ancre et l'image sont insérées telles quelles, sans enveloppe {@code <div>} :
+     * le parseur HTML fermerait le {@code <p>} et le conteneur de légende ouverts,
+     * détachant l'image de sa légende et coupant le paragraphe.</p>
+     *
+     * @param html HTML enregistré du hotspot
+     * @return le HTML avec une ancre devant chaque image qui n'en a pas
+     */
+    public static String ajouteAncres(String html) {
+        if (html == null || html.isEmpty()) {
+            return html;
+        }
+        java.util.regex.Matcher m = java.util.regex.Pattern.compile(
+                "<img\\s+([^>]*?)\\s*/?>",
+                java.util.regex.Pattern.CASE_INSENSITIVE | java.util.regex.Pattern.DOTALL).matcher(html);
+        StringBuilder sb = new StringBuilder();
+        int iPos = 0;
+        int iCompteur = 0;
+        while (m.find()) {
+            sb.append(html, iPos, m.start());
+            String strAttributs = m.group(1);
+            if (strAttributs.contains("data-image-id")) {
+                sb.append(m.group());
+            } else {
+                String strId = "img_" + System.currentTimeMillis() + "_" + (int) (Math.random() * 1000) + "_" + iCompteur++;
+                sb.append(ancre(strId)).append("<img ").append(strAttributs)
+                        .append(" data-image-id=\"").append(strId).append("\">");
+            }
+            iPos = m.end();
+        }
+        sb.append(html.substring(iPos));
+        return sb.toString();
+    }
+
+    /**
+     * Script exécuté dans l'éditeur quand on clique sur l'ancre ⚓ : retire l'ancre, puis le
+     * conteneur image + légende s'il existe, sinon l'image seule.
+     *
+     * @param imageId identifiant de l'image (attribut {@code data-image-id})
+     * @return le code JavaScript
+     */
+    public static String scriptSuppression(String imageId) {
+        return "(function(){"
+                + "var img = document.querySelector('img[data-image-id=\"" + imageId + "\"]');"
+                + "var anchor = document.querySelector('.image-anchor[data-image-id=\"" + imageId + "\"]');"
+                + "if (anchor) { anchor.remove(); }"
+                + "if (img) {"
+                + " var conteneur = img.closest('." + CLASSE_CONTENEUR + "');"
+                + " (conteneur || img).remove();"
+                + "}"
+                + "})();";
+    }
+
+    /**
      * Échappe un texte pour l'insérer comme contenu HTML (y compris entre apostrophes).
      *
      * @param texte texte brut

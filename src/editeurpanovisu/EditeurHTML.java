@@ -1415,6 +1415,18 @@ public class EditeurHTML {
         lblValeurLargeur.setPrefWidth(70);
         lblValeurLargeur.setStyle("-fx-font-family: monospace; -fx-text-fill: #1a1a1a;");
         hboxTaille.getChildren().addAll(lblLargeurImage, slLargeurImage, lblValeurLargeur);
+
+        // === SECTION 3b: Légende (facultative, affichée sous l'image — #18) ===
+        HBox hboxLegende = new HBox(10);
+        hboxLegende.setAlignment(Pos.CENTER_LEFT);
+        Label lblLegendeImage = new Label(rbLocalisation.getString("editeurHTML.legendeImage"));
+        lblLegendeImage.setPrefWidth(120);
+        lblLegendeImage.setStyle("-fx-font-weight: bold; -fx-text-fill: #1a1a1a;");
+        TextField tfLegendeImage = new TextField();
+        tfLegendeImage.setPromptText(rbLocalisation.getString("editeurHTML.legendeImageAide"));
+        HBox.setHgrow(tfLegendeImage, Priority.ALWAYS);
+        lblLegendeImage.setLabelFor(tfLegendeImage);
+        hboxLegende.getChildren().addAll(lblLegendeImage, tfLegendeImage);
         
         // === SECTION 4: Prévisualisation ===
         ImageView ivImageInserer = new ImageView();
@@ -1457,6 +1469,7 @@ public class EditeurHTML {
             hboxFichier,
             hboxPosition,
             hboxTaille,
+            hboxLegende,
             spImageInserer,
             hboxBoutons
         );
@@ -1505,42 +1518,12 @@ public class EditeurHTML {
             // Générer un ID unique pour l'image
             String imageId = "img_" + System.currentTimeMillis() + "_" + (int)(Math.random() * 1000);
             
-            // Créer l'ancre d'édition (bouton circulaire avec juste l'icône)
-            String ancreEdition = "<button class='image-anchor' data-image-id='" + imageId + "' "
-                    + "type='button' "
-                    + "style='display:inline-block; position:relative; "
-                    + "margin:2px 5px; cursor:pointer; border:none; outline:none; "
-                    + "background:#4CAF50; color:white; padding:8px 12px; "
-                    + "border-radius:50%; font-size:18px; font-weight:bold; "
-                    + "box-shadow: 0 2px 6px rgba(0,0,0,0.4); "
-                    + "user-select:none; -webkit-user-select:none;' "
-                    + "title='Cliquer pour supprimer cette image'>"
-                    + "⚓"
-                    + "</button>";
-            
-            String strAjouteImage = "";
-            String imgTag = "";
-            
-            if (tgbPositionCentre.isSelected()) {
-                imgTag = "<img data-image-id='" + imageId + "' width='" + (int) slLargeurImage.getValue()
-                        + "' src='file:////" + strNomFichierImage + "'/>";
-                strAjouteImage = "</p><p style='text-align : center;'>" + ancreEdition + imgTag + "</p><p>";
-            }
-            else if (tgbPositionGauche.isSelected()) {
-                imgTag = "<img data-image-id='" + imageId + "' style='position=absolute;left: 0px;float:left;padding : 10px;padding-left : 0px;' width='" + (int) slLargeurImage.getValue()
-                        + "' src='file:////" + strNomFichierImage + "'/>";
-                strAjouteImage = ancreEdition + imgTag + "<br/>";
-            }
-            else if (tgbPositionDroite.isSelected()) {
-                imgTag = "<img data-image-id='" + imageId + "' width='" + (int) slLargeurImage.getValue() + "' style='position=absolute;right: 0px;float:right;padding : 10px;padding-right : 0px;'"
-                        + " src='file:////" + strNomFichierImage + "'/>";
-                strAjouteImage = ancreEdition + imgTag + "<br/>";
-            }
-            else if (tgbPositionTexte.isSelected()) {
-                imgTag = "<img data-image-id='" + imageId + "' width='" + (int) slLargeurImage.getValue() + "' style='padding : 10px;padding-left : 0px;'"
-                        + " src='file:////" + strNomFichierImage + "'/>";
-                strAjouteImage = ancreEdition + imgTag;
-            }
+            PositionImage position = tgbPositionCentre.isSelected() ? PositionImage.CENTRE
+                    : tgbPositionGauche.isSelected() ? PositionImage.GAUCHE
+                    : tgbPositionDroite.isSelected() ? PositionImage.DROITE
+                    : PositionImage.TEXTE;
+            String strAjouteImage = FragmentImageHTML.construire(imageId, strNomFichierImage,
+                    (int) slLargeurImage.getValue(), position, tfLegendeImage.getText());
             
             engEditeurHTML.executeScript(jsCodeInsertHtml.replace("####html####", escapeJavaStyleString(strAjouteImage, true, true)));
             getHsHTML().setStrTexteHTML(heEditeurHTML.getHtmlText());
@@ -1728,73 +1711,10 @@ public class EditeurHTML {
      * @return Le HTML avec les ancres ajoutées
      */
     private String ajouterAncresAuxImages(String htmlContent) {
-        if (htmlContent == null || htmlContent.isEmpty()) {
-            return htmlContent;
-        }
-        
-        StringBuilder result = new StringBuilder();
-        int pos = 0;
-        int compteurImages = 0;
-        
-        // Pattern pour trouver les balises img (avec ou sans />)
-        java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(
-            "<img\\s+([^>]*?)\\s*/?>", 
-            java.util.regex.Pattern.CASE_INSENSITIVE | java.util.regex.Pattern.DOTALL
-        );
-        java.util.regex.Matcher matcher = pattern.matcher(htmlContent);
-        
-        while (matcher.find()) {
-            // Ajouter le contenu avant l'image
-            result.append(htmlContent.substring(pos, matcher.start()));
-            
-            String imgTag = matcher.group();
-            String imgAttributes = matcher.group(1);
-            
-            // Vérifier si l'image a déjà un data-image-id
-            if (!imgAttributes.contains("data-image-id")) {
-                // Générer un ID unique
-                long timestamp = System.currentTimeMillis();
-                int random = (int)(Math.random() * 1000);
-                String imageId = "img_" + timestamp + "_" + random + "_" + compteurImages;
-                compteurImages++;
-                
-                // Reconstruire la balise img avec l'ID
-                String newImgTag = "<img " + imgAttributes + " data-image-id=\"" + imageId + "\">";
-                
-                // Créer l'ancre d'édition (juste l'icône avec tooltip)
-                String ancre = "<button class='image-anchor' data-image-id='" + imageId + "' "
-                    + "type='button' "
-                    + "style='display:inline-block; position:relative; "
-                    + "margin:2px 5px; cursor:pointer; border:none; outline:none; "
-                    + "background:#4CAF50; color:white; padding:8px 12px; "
-                    + "border-radius:50%; font-size:18px; font-weight:bold; "
-                    + "box-shadow: 0 2px 6px rgba(0,0,0,0.4); "
-                    + "user-select:none; -webkit-user-select:none;' "
-                    + "title='Cliquer pour supprimer cette image'>"
-                    + "⚓"
-                    + "</button>";
-                
-                // Envelopper l'ancre et l'image dans un div non-editable
-                String conteneur = "<div contenteditable='false' style='display:inline-block; margin:5px;'>" 
-                    + ancre + newImgTag + "</div>";
-                
-                // Ajouter le conteneur
-                result.append(conteneur);
-            } else {
-                // L'image a déjà un ID, la garder telle quelle
-                result.append(imgTag);
-            }
-            
-            pos = matcher.end();
-        }
-        
-        // Ajouter le reste du contenu
-        result.append(htmlContent.substring(pos));
-        
-        System.out.println("Ancres ajoutées à " + compteurImages + " images dans le HTML");
-        return result.toString();
+        // Sans enveloppe <div> : elle sortait l'image de son paragraphe et de sa légende (#18).
+        return FragmentImageHTML.ajouteAncres(htmlContent);
     }
-    
+
     /**
      * Supprime une image depuis JavaScript (appel interactif)
      * 
@@ -1814,12 +1734,8 @@ public class EditeurHTML {
             
             alert.showAndWait().ifPresent(response -> {
                 if (response == ButtonType.OK) {
-                    String jsScript = 
-                        "var img = document.querySelector('img[data-image-id=\"" + imageId + "\"]');" +
-                        "var anchor = document.querySelector('.image-anchor[data-image-id=\"" + imageId + "\"]');" +
-                        "if (anchor) { anchor.remove(); }" +
-                        "if (img) { img.remove(); }" +
-                        "console.log('Image supprimee: " + imageId + "');";
+                    // Retire aussi la légende quand l'image en a une (#18).
+                    String jsScript = FragmentImageHTML.scriptSuppression(imageId);
                     try {
                         engEditeurHTML.executeScript(jsScript);
                         System.out.println("Image supprimee: " + imageId);
