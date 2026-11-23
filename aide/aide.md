@@ -479,6 +479,7 @@ Affiche une fenêtre HTML personnalisée (texte enrichi, lien externe, vidéo em
   - Texte formaté (gras, italique, couleurs)
   - Liens hypertextes
   - Images embarquées
+    - 🏷️ **Légende** (facultative) : texte affiché sous l'image (titre, « © auteur »). Elle suit la position de l'image (gauche, centre, droite, dans le texte), se corrige directement dans l'éditeur, et l'ancre ⚓ supprime l'image avec sa légende
   - Vidéos YouTube/Vimeo
 - 📐 **Taille de fenêtre** : Largeur et hauteur de la popup (px)
 - 📍 **Position** : Placement de la fenêtre (haut, bas, gauche, droite)
